@@ -40,7 +40,6 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
-open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.transport-along-identifications
 ```
@@ -250,15 +249,14 @@ module _
       ( is-retraction-map-inv-equiv g)) ∙h
     ( id-map-coproduct A B)
 
-  abstract
-    is-equiv-map-coproduct :
-      {f : A → A'} {g : B → B'} →
-      is-equiv f → is-equiv g → is-equiv (map-coproduct f g)
-    is-equiv-map-coproduct {f} {g} H K =
-      is-equiv-is-invertible
-        ( map-coproduct (map-inv-is-equiv H) (map-inv-is-equiv K))
-        ( is-section-map-inv-equiv-coproduct (f , H) (g , K))
-        ( is-retraction-map-inv-equiv-coproduct (f , H) (g , K))
+  is-equiv-map-coproduct :
+    {f : A → A'} {g : B → B'} →
+    is-equiv f → is-equiv g → is-equiv (map-coproduct f g)
+  is-equiv-map-coproduct {f} {g} H K =
+    is-equiv-is-invertible
+      ( map-coproduct (map-inv-is-equiv H) (map-inv-is-equiv K))
+      ( is-section-map-inv-equiv-coproduct (f , H) (g , K))
+      ( is-retraction-map-inv-equiv-coproduct (f , H) (g , K))
 
   equiv-coproduct : A ≃ A' → B ≃ B' → (A + B) ≃ (A' + B')
   equiv-coproduct e e' =
