@@ -292,8 +292,9 @@ is-π-finite-is-finite k {A} H =
     ( is-π-finite-Prop k A)
     ( is-π-finite-count k)
 
-π-finite-𝔽 : {l : Level} (k : ℕ) → 𝔽 l → π-Finite-Type l k
-π-finite-𝔽 k A = (type-𝔽 A , is-π-finite-is-finite k (is-finite-type-𝔽 A))
+π-finite-Finite-Type : {l : Level} (k : ℕ) → Finite-Type l → π-Finite-Type l k
+π-finite-Finite-Type k A =
+  ( type-Finite-Type A , is-π-finite-is-finite k (is-finite-type-Finite-Type A))
 ```
 
 ### π-finite sets are finite
@@ -345,14 +346,14 @@ is-π-finite-Π k hA hB =
       ( is-untruncated-π-finite-is-π-finite k ∘ hB))
 
 finite-Π-π-Finite-Type :
-  {l1 l2 : Level} (k : ℕ) (A : 𝔽 l1)
-  (B : type-𝔽 A → π-Finite-Type l2 k) →
+  {l1 l2 : Level} (k : ℕ) (A : Finite-Type l1)
+  (B : type-Finite-Type A → π-Finite-Type l2 k) →
   π-Finite-Type (l1 ⊔ l2) k
 pr1 (finite-Π-π-Finite-Type k A B) =
-  (x : type-𝔽 A) → (type-π-Finite-Type k (B x))
+  (x : type-Finite-Type A) → (type-π-Finite-Type k (B x))
 pr2 (finite-Π-π-Finite-Type k A B) =
   is-π-finite-Π k
-    ( is-finite-type-𝔽 A)
+    ( is-finite-type-Finite-Type A)
       ( λ x → is-π-finite-type-π-Finite-Type k (B x))
 ```
 
