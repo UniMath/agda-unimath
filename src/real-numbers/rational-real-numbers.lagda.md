@@ -57,14 +57,12 @@ the [image](foundation.images.md) of this embedding
 ### Strict inequality on rationals gives Dedekind cuts
 
 ```agda
-is-dedekind-cut-le-ℚ :
+is-dedekind-lower-upper-real-ℚ :
   (x : ℚ) →
-  is-dedekind-cut
-    (cut-lower-real-ℚ x)
-    (cut-upper-real-ℚ x)
-is-dedekind-cut-le-ℚ x =
-  is-lower-dedekind-cut-lower-ℝ (lower-real-ℚ x) ,
-  is-upper-dedekind-cut-upper-ℝ (upper-real-ℚ x) ,
+  is-dedekind-lower-upper-ℝ
+    (lower-real-ℚ x)
+    (upper-real-ℚ x)
+is-dedekind-lower-upper-real-ℚ x =
   (λ q (H , K) → asymmetric-le-ℚ q x H K) ,
   located-le-ℚ x
 ```
@@ -73,11 +71,7 @@ is-dedekind-cut-le-ℚ x =
 
 ```agda
 real-ℚ : ℚ → ℝ lzero
-real-ℚ x =
-  real-dedekind-cut
-    ( λ (q : ℚ) → le-ℚ-Prop q x)
-    ( λ (r : ℚ) → le-ℚ-Prop x r)
-    ( is-dedekind-cut-le-ℚ x)
+real-ℚ x = lower-real-ℚ x , upper-real-ℚ x , is-dedekind-lower-upper-real-ℚ x
 ```
 
 ### The property of being a rational real number

@@ -83,22 +83,22 @@ module _
   where
 
   abstract
-    is-located-is-arithmetically-located-pair-of-cuts-ℚ :
-      arithmetically-located-upper-real x y →
-      is-located-cut (cut-lower-ℝ x) (cut-upper-ℝ y)
-    is-located-is-arithmetically-located-pair-of-cuts-ℚ
+    is-located-is-arithmetically-located-lower-upper-ℝ :
+      arithmetically-located-lower-upper-ℝ x y →
+      is-located-lower-upper-ℝ x y
+    is-located-is-arithmetically-located-lower-upper-ℝ
       arithmetically-located p q p<q =
       elim-exists
-        ( cut-lower-ℝ L p ∨ cut-upper-ℝ U q)
+        ( cut-lower-ℝ x p ∨ cut-upper-ℝ y q)
         ( λ (p' , q') (q'<p'+q-p , p'∈L , q'∈U) →
           rec-coproduct
             ( λ p<p' →
               inl-disjunction
-                ( le-cut-lower-ℝ L p p' p<p' p'∈L))
+                ( le-cut-lower-ℝ x p p' p<p' p'∈L))
             ( λ p'≤p →
               inr-disjunction
                 (le-cut-upper-ℝ
-                  ( U)
+                  ( y)
                   ( q')
                   ( q)
                   ( concatenate-le-leq-ℚ
