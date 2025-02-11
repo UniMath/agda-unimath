@@ -410,10 +410,13 @@ module _
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : Type-With-Finite-Cardinality l n) (f : Aut (type-Type-With-Finite-Cardinality n X))
+  {l : Level} (n : ℕ)
+  (X : Type-With-Finite-Cardinality l n)
+  (f : Aut (type-Type-With-Finite-Cardinality n X))
   where
 
-  same-orbits-permutation : equivalence-relation l (type-Type-With-Finite-Cardinality n X)
+  same-orbits-permutation :
+    equivalence-relation l (type-Type-With-Finite-Cardinality n X)
   (pr1 same-orbits-permutation) a b =
     trunc-Prop (Σ ℕ (λ k → Id (iterate k (map-equiv f) a) b))
   pr1 (pr2 same-orbits-permutation) _ = unit-trunc-Prop (0 , refl)
@@ -445,7 +448,11 @@ module _
       (h : Fin n ≃ type-Type-With-Finite-Cardinality n X) →
       Σ ℕ (λ l → (is-nonzero-ℕ l) × Id (iterate l (map-equiv f) a) a)
     has-finite-orbits-permutation-a h =
-      has-finite-orbits-permutation (type-Type-With-Finite-Cardinality n X) (pair n h) f a
+      has-finite-orbits-permutation
+        ( type-Type-With-Finite-Cardinality n X)
+        ( pair n h)
+        ( f)
+        ( a)
     lemma :
       (h : Fin n ≃ type-Type-With-Finite-Cardinality n X) (k : ℕ) →
       Σ ( ℕ)
@@ -500,7 +507,8 @@ module _
                   ( λ m p → p)))))
       where
       is-decidable-iterate-is-decidable-bounded :
-        ( h : Fin n ≃ type-Type-With-Finite-Cardinality n X) (a b : type-Type-With-Finite-Cardinality n X) →
+        ( h : Fin n ≃ type-Type-With-Finite-Cardinality n X)
+        (a b : type-Type-With-Finite-Cardinality n X) →
         is-decidable
           ( Σ ℕ (λ m → (m ≤-ℕ n) × (Id (iterate m (map-equiv f) a) b))) →
         is-decidable (Σ ℕ (λ m → Id (iterate m (map-equiv f) a) b))
@@ -2345,7 +2353,7 @@ module _
               ( composition-transposition-a-b g)))
       cases-opposite-sign-composition-transposition (inl P) =
         inv
-          ( is-involution-aut-Fin-two-ℕ
+          ( is-involution-aut-Fin-2
             ( equiv-succ-Fin 2)
             ( sign-permutation-orbit
               ( number-of-elements-count eX)
@@ -2403,7 +2411,7 @@ module _
             ( pr1 (pr2 two-elements-t))
             ( pr1 (pr2 (pr2 two-elements-t)))
             ( permutation-list-transpositions li)) ∙
-        ( is-involution-aut-Fin-two-ℕ
+        ( is-involution-aut-Fin-2
           ( equiv-succ-Fin 2)
           ( sign-permutation-orbit
             ( number-of-elements-count eX)

@@ -143,7 +143,7 @@ module _
 
   element-standard-unordered-pair : Fin 2 → A
   element-standard-unordered-pair =
-    map-inv-ev-zero-one-Fin-two-ℕ (λ _ → A) (x , y)
+    map-inv-ev-zero-one-Fin-2 (λ _ → A) (x , y)
 
   standard-unordered-pair : unordered-pair A
   pr1 standard-unordered-pair = Fin-Type-With-Finite-Cardinality 2
@@ -158,9 +158,9 @@ module _
     other-element-unordered-pair standard-unordered-pair u ＝
     other-element-standard-unordered-pair u
   compute-other-element-standard-unordered-pair (inl (inr x)) =
-    ap element-standard-unordered-pair (compute-swap-Fin-two-ℕ (inl (inr x)))
+    ap element-standard-unordered-pair (compute-swap-Fin-2 (inl (inr x)))
   compute-other-element-standard-unordered-pair (inr x) =
-    ap element-standard-unordered-pair (compute-swap-Fin-two-ℕ (inr x))
+    ap element-standard-unordered-pair (compute-swap-Fin-2 (inr x))
 ```
 
 ## Properties
@@ -182,7 +182,8 @@ module _
           ( map-equiv e))
 
   refl-Eq-unordered-pair : (p : unordered-pair A) → Eq-unordered-pair p p
-  pr1 (refl-Eq-unordered-pair (pair X p)) = id-equiv-Type-With-Finite-Cardinality {k = 2} X
+  pr1 (refl-Eq-unordered-pair (pair X p)) =
+    id-equiv-Type-With-Finite-Cardinality {k = 2} X
   pr2 (refl-Eq-unordered-pair (pair X p)) = refl-htpy
 
   Eq-eq-unordered-pair :
@@ -385,7 +386,9 @@ module _
     dependent-universal-property-pointed-unordered-pairs =
       is-equiv-comp
         ( λ f x y →
-          f (Fin-Type-With-Finite-Cardinality 2) (element-standard-unordered-pair x y) (zero-Fin 1))
+          f ( Fin-Type-With-Finite-Cardinality 2)
+            ( element-standard-unordered-pair x y)
+            ( zero-Fin 1))
         ( ev-pair)
         ( is-equiv-ev-pair)
         ( is-equiv-comp
@@ -407,11 +410,13 @@ module _
               ( ev-pair)
               ( precomp-Π
                 ( λ xy → element-standard-unordered-pair (pr1 xy) (pr2 xy))
-                ( λ g → B (Fin-Type-With-Finite-Cardinality 2 , g) (zero-Fin 1)))
+                ( λ g →
+                  B (Fin-Type-With-Finite-Cardinality 2 , g) (zero-Fin 1)))
               ( is-equiv-precomp-Π-is-equiv
-                ( is-equiv-map-inv-dependent-universal-proeprty-Fin-two-ℕ
+                ( is-equiv-map-inv-dependent-universal-proeprty-Fin-2
                   ( λ _ → A))
-                ( λ g → B (Fin-Type-With-Finite-Cardinality 2 , g) (zero-Fin 1)))
+                ( λ g →
+                  B (Fin-Type-With-Finite-Cardinality 2 , g) (zero-Fin 1)))
               ( is-equiv-ev-pair))))
 
   equiv-dependent-universal-property-pointed-unordered-pairs :
@@ -465,7 +470,8 @@ preserves-refl-htpy-unordered-pair f p =
 equiv-unordered-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (A ≃ B) → (unordered-pair A ≃ unordered-pair B)
-equiv-unordered-pair e = equiv-tot (λ X → equiv-postcomp (type-Type-With-Finite-Cardinality 2 X) e)
+equiv-unordered-pair e =
+  equiv-tot (λ X → equiv-postcomp (type-Type-With-Finite-Cardinality 2 X) e)
 
 map-equiv-unordered-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →

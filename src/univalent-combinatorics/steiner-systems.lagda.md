@@ -40,7 +40,8 @@ Steiner-System t k n =
           ( Σ ( decidable-subtype lzero (type-Type-With-Finite-Cardinality n X))
               ( λ P → has-cardinality k (type-decidable-subtype P))))
         ( λ P →
-          ( Q : decidable-subtype lzero (type-Type-With-Finite-Cardinality n X)) →
+          ( Q :
+            decidable-subtype lzero (type-Type-With-Finite-Cardinality n X)) →
           has-cardinality t (type-decidable-subtype Q) →
           is-contr
             ( Σ ( type-decidable-subtype P)

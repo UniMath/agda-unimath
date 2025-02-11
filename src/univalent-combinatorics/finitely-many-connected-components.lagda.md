@@ -197,7 +197,8 @@ is-finite-has-finitely-many-connected-components H =
 
 ```agda
 has-finitely-many-connected-components-Type-With-Finite-Cardinality :
-  {l : Level} (n : ℕ) → has-finitely-many-connected-components (Type-With-Finite-Cardinality l n)
+  {l : Level} (n : ℕ) →
+  has-finitely-many-connected-components (Type-With-Finite-Cardinality l n)
 has-finitely-many-connected-components-Type-With-Finite-Cardinality n =
   has-finitely-many-connected-components-is-0-connected
     ( is-0-connected-Type-With-Finite-Cardinality n)

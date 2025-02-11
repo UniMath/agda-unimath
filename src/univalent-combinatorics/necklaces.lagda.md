@@ -71,7 +71,9 @@ module _
 necklace-pattern : (l : Level) → ℕ → ℕ → UU (lsuc l)
 necklace-pattern l m n =
   Σ ( Cyclic-Type l m)
-    ( λ X → Σ (Type-With-Finite-Cardinality lzero n) (λ C → type-Cyclic-Type m X → type-Type-With-Finite-Cardinality n C))
+    ( λ X →
+      Σ ( Type-With-Finite-Cardinality lzero n)
+        ( λ C → type-Cyclic-Type m X → type-Type-With-Finite-Cardinality n C))
 ```
 
 ## Properties

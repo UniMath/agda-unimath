@@ -69,6 +69,8 @@ dirichlet-series-species-Inhabited-Finite-Type {l1} T S =
           type-Finite-Type
             ( T
               ( type-Type-With-Finite-Cardinality (succ-ℕ n) F ,
-                is-finite-and-inhabited-type-Type-With-Finite-Cardinality-succ-ℕ n F)) ×
+                is-finite-and-inhabited-type-Type-With-Finite-Cardinality-succ-ℕ
+                  n
+                  F)) ×
           S → cycle-prime-decomposition-ℕ (succ-ℕ n) _))
 ```

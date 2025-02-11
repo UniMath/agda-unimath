@@ -303,18 +303,21 @@ module _
   where
 
   is-finite-2-Element-Decidable-Subtype :
-    is-finite (2-Element-Decidable-Subtype l2 (type-Type-With-Finite-Cardinality n X))
+    is-finite
+      ( 2-Element-Decidable-Subtype l2 (type-Type-With-Finite-Cardinality n X))
   is-finite-2-Element-Decidable-Subtype =
     is-finite-type-decidable-subtype
       (λ P →
         pair
           ( has-cardinality 2
-            ( Σ (type-Type-With-Finite-Cardinality n X) (type-Decidable-Prop ∘ P)))
+            ( Σ ( type-Type-With-Finite-Cardinality n X)
+                ( type-Decidable-Prop ∘ P)))
           ( pair
             ( is-prop-type-trunc-Prop)
             ( is-decidable-equiv
               ( equiv-has-cardinality-id-number-of-elements-is-finite
-                ( Σ (type-Type-With-Finite-Cardinality n X) (type-Decidable-Prop ∘ P))
+                ( Σ ( type-Type-With-Finite-Cardinality n X)
+                    ( type-Decidable-Prop ∘ P))
                 ( is-finite-type-decidable-subtype P
                   ( is-finite-type-Type-With-Finite-Cardinality n X))
                 ( 2))
@@ -327,7 +330,7 @@ module _
         ( is-finite-type-Type-With-Finite-Cardinality n X)
         ( λ x →
           is-finite-equiv
-            ( inv-equiv equiv-bool-Decidable-Prop ∘e equiv-bool-Fin-two-ℕ)
+            ( inv-equiv equiv-bool-Decidable-Prop ∘e equiv-bool-Fin-2)
             ( is-finite-Fin 2)))
 ```
 

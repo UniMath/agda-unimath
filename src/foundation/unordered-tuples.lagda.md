@@ -50,21 +50,27 @@ of elements of a type `A` consists of an
 ```agda
 unordered-tuple :
   {l : Level} (n : ℕ) (A : UU l) → UU (lsuc lzero ⊔ l)
-unordered-tuple n A = Σ (Type-With-Finite-Cardinality lzero n) (λ X → type-Type-With-Finite-Cardinality n X → A)
+unordered-tuple n A =
+  Σ ( Type-With-Finite-Cardinality lzero n)
+    ( λ X → type-Type-With-Finite-Cardinality n X → A)
 
 module _
   {l : Level} (n : ℕ) {A : UU l} (t : unordered-tuple n A)
   where
 
-  type-unordered-tuple-Type-With-Finite-Cardinality : Type-With-Finite-Cardinality lzero n
+  type-unordered-tuple-Type-With-Finite-Cardinality :
+    Type-With-Finite-Cardinality lzero n
   type-unordered-tuple-Type-With-Finite-Cardinality = pr1 t
 
   type-unordered-tuple : UU lzero
-  type-unordered-tuple = type-Type-With-Finite-Cardinality n type-unordered-tuple-Type-With-Finite-Cardinality
+  type-unordered-tuple =
+    type-Type-With-Finite-Cardinality n
+      type-unordered-tuple-Type-With-Finite-Cardinality
 
   has-cardinality-type-unordered-tuple : has-cardinality n type-unordered-tuple
   has-cardinality-type-unordered-tuple =
-    has-cardinality-type-Type-With-Finite-Cardinality n type-unordered-tuple-Type-With-Finite-Cardinality
+    has-cardinality-type-Type-With-Finite-Cardinality n
+      type-unordered-tuple-Type-With-Finite-Cardinality
 
   is-set-type-unordered-tuple : is-set type-unordered-tuple
   is-set-type-unordered-tuple =
@@ -88,14 +94,16 @@ module _
   (i : type-unordered-tuple (succ-ℕ n) t)
   where
 
-  type-complement-point-unordered-tuple-Type-With-Finite-Cardinality : Type-With-Finite-Cardinality lzero n
+  type-complement-point-unordered-tuple-Type-With-Finite-Cardinality :
+    Type-With-Finite-Cardinality lzero n
   type-complement-point-unordered-tuple-Type-With-Finite-Cardinality =
     complement-element-Type-With-Finite-Cardinality n
       ( pair (type-unordered-tuple-Type-With-Finite-Cardinality (succ-ℕ n) t) i)
 
   type-complement-point-unordered-tuple : UU lzero
   type-complement-point-unordered-tuple =
-    type-Type-With-Finite-Cardinality n type-complement-point-unordered-tuple-Type-With-Finite-Cardinality
+    type-Type-With-Finite-Cardinality n
+      type-complement-point-unordered-tuple-Type-With-Finite-Cardinality
 
   inclusion-complement-point-unordered-tuple :
     type-complement-point-unordered-tuple → type-unordered-tuple (succ-ℕ n) t
@@ -151,7 +159,9 @@ module _
     (x : unordered-tuple n A) → is-torsorial (Eq-unordered-tuple x)
   is-torsorial-Eq-unordered-tuple x =
     is-torsorial-Eq-structure
-      ( is-torsorial-equiv-Type-With-Finite-Cardinality {k = n} (type-unordered-tuple-Type-With-Finite-Cardinality n x))
+      ( is-torsorial-equiv-Type-With-Finite-Cardinality
+        { k = n}
+        ( type-unordered-tuple-Type-With-Finite-Cardinality n x))
       ( pair (type-unordered-tuple-Type-With-Finite-Cardinality n x) id-equiv)
       ( is-torsorial-htpy (element-unordered-tuple n x))
 
@@ -207,7 +217,8 @@ is-1-type-unordered-tuple = is-trunc-succ-succ-succ-unordered-tuple neg-two-𝕋
 map-unordered-tuple :
   {l1 l2 : Level} (n : ℕ) {A : UU l1} {B : UU l2} (f : A → B) →
   unordered-tuple n A → unordered-tuple n B
-pr1 (map-unordered-tuple n f t) = type-unordered-tuple-Type-With-Finite-Cardinality n t
+pr1 (map-unordered-tuple n f t) =
+  type-unordered-tuple-Type-With-Finite-Cardinality n t
 pr2 (map-unordered-tuple n f t) = f ∘ element-unordered-tuple n t
 
 preserves-comp-map-unordered-tuple :
@@ -243,7 +254,8 @@ preserves-refl-htpy-unordered-tuple n f p =
 equiv-unordered-tuple :
   {l1 l2 : Level} (n : ℕ) {A : UU l1} {B : UU l2} →
   (A ≃ B) → (unordered-tuple n A ≃ unordered-tuple n B)
-equiv-unordered-tuple n e = equiv-tot (λ X → equiv-postcomp (type-Type-With-Finite-Cardinality n X) e)
+equiv-unordered-tuple n e =
+  equiv-tot (λ X → equiv-postcomp (type-Type-With-Finite-Cardinality n X) e)
 
 map-equiv-unordered-tuple :
   {l1 l2 : Level} (n : ℕ) {A : UU l1} {B : UU l2} →

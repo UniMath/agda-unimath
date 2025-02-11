@@ -24,7 +24,10 @@ open import univalent-combinatorics.finite-types
 
 ```agda
 cube : ℕ → UU (lsuc lzero)
-cube k = Σ (Type-With-Finite-Cardinality lzero k) (λ X → type-Type-With-Finite-Cardinality k X → Type-With-Finite-Cardinality lzero 2)
+cube k =
+  Σ ( Type-With-Finite-Cardinality lzero k)
+    ( λ X → type-Type-With-Finite-Cardinality k X →
+      Type-With-Finite-Cardinality lzero 2)
 
 module _
   (k : ℕ) (X : cube k)
@@ -34,7 +37,8 @@ module _
   dim-cube-Type-With-Finite-Cardinality = pr1 X
 
   dim-cube : UU lzero
-  dim-cube = type-Type-With-Finite-Cardinality k dim-cube-Type-With-Finite-Cardinality
+  dim-cube =
+    type-Type-With-Finite-Cardinality k dim-cube-Type-With-Finite-Cardinality
 
   has-cardinality-dim-cube : has-cardinality k dim-cube
   has-cardinality-dim-cube = pr2 dim-cube-Type-With-Finite-Cardinality
@@ -72,21 +76,30 @@ module _
 ### The standard cube
 
 ```agda
-dim-standard-cube-Type-With-Finite-Cardinality : (k : ℕ) → Type-With-Finite-Cardinality lzero k
-dim-standard-cube-Type-With-Finite-Cardinality k = Fin-Type-With-Finite-Cardinality k
+dim-standard-cube-Type-With-Finite-Cardinality :
+  (k : ℕ) → Type-With-Finite-Cardinality lzero k
+dim-standard-cube-Type-With-Finite-Cardinality k =
+  Fin-Type-With-Finite-Cardinality k
 
 dim-standard-cube : ℕ → UU lzero
-dim-standard-cube k = type-Type-With-Finite-Cardinality k (dim-standard-cube-Type-With-Finite-Cardinality k)
+dim-standard-cube k =
+  type-Type-With-Finite-Cardinality k
+    ( dim-standard-cube-Type-With-Finite-Cardinality k)
 
-axis-standard-cube-Type-With-Finite-Cardinality : (k : ℕ) → dim-standard-cube k → Type-With-Finite-Cardinality lzero 2
-axis-standard-cube-Type-With-Finite-Cardinality k d = Fin-Type-With-Finite-Cardinality 2
+axis-standard-cube-Type-With-Finite-Cardinality :
+  (k : ℕ) → dim-standard-cube k → Type-With-Finite-Cardinality lzero 2
+axis-standard-cube-Type-With-Finite-Cardinality k d =
+  Fin-Type-With-Finite-Cardinality 2
 
 axis-standard-cube : (k : ℕ) → dim-standard-cube k → UU lzero
-axis-standard-cube k d = type-Type-With-Finite-Cardinality 2 (axis-standard-cube-Type-With-Finite-Cardinality k d)
+axis-standard-cube k d =
+  type-Type-With-Finite-Cardinality 2
+    ( axis-standard-cube-Type-With-Finite-Cardinality k d)
 
 standard-cube : (k : ℕ) → cube k
 standard-cube k =
-  pair (dim-standard-cube-Type-With-Finite-Cardinality k) (axis-standard-cube-Type-With-Finite-Cardinality k)
+  ( dim-standard-cube-Type-With-Finite-Cardinality k) ,
+  ( axis-standard-cube-Type-With-Finite-Cardinality k)
 
 {-
 mere-equiv-standard-cube :
@@ -106,7 +119,8 @@ face-cube :
   (k : ℕ) (X : cube (succ-ℕ k)) (d : dim-cube (succ-ℕ k) X)
   (a : axis-cube (succ-ℕ k) X d) → cube k
 pr1 (face-cube k X d a) =
-  complement-element-Type-With-Finite-Cardinality k (pair (dim-cube-Type-With-Finite-Cardinality (succ-ℕ k) X) d)
+  complement-element-Type-With-Finite-Cardinality k
+    ( pair (dim-cube-Type-With-Finite-Cardinality (succ-ℕ k) X) d)
 pr2 (face-cube k X d a) d' =
   axis-cube-UU-2 (succ-ℕ k) X
     ( inclusion-complement-element-Type-With-Finite-Cardinality k

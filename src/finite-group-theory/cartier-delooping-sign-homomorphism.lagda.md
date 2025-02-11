@@ -128,7 +128,10 @@ module _
         (n +ℕ 2 , (compute-raise l (Fin (n +ℕ 2)))) (star))
 
   cartier-delooping-sign :
-    (n : ℕ) → hom-Concrete-Group (Type-With-Finite-Cardinality-Group l n) (Type-With-Finite-Cardinality-Group (lsuc l) 2)
+    (n : ℕ) →
+    hom-Concrete-Group
+      ( Type-With-Finite-Cardinality-Group l n)
+      ( Type-With-Finite-Cardinality-Group (lsuc l) 2)
   cartier-delooping-sign =
     quotient-delooping-sign
       ( orientation-Complete-Undirected-Graph)
@@ -146,28 +149,29 @@ module _
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
         ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
-        ( group-Concrete-Group (Type-With-Finite-Cardinality-Group (lsuc l) 2))
+        ( Type-With-Finite-Cardinality-Group' (lsuc l) 2)
         ( comp-hom-Group
           ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
-          ( group-Concrete-Group (Type-With-Finite-Cardinality-Group l (n +ℕ 2)))
-          ( group-Concrete-Group (Type-With-Finite-Cardinality-Group (lsuc l) 2))
+          ( Type-With-Finite-Cardinality-Group' l (n +ℕ 2))
+          ( Type-With-Finite-Cardinality-Group' (lsuc l) 2)
           ( hom-group-hom-Concrete-Group
             ( Type-With-Finite-Cardinality-Group l (n +ℕ 2))
             ( Type-With-Finite-Cardinality-Group (lsuc l) 2)
             ( cartier-delooping-sign (n +ℕ 2)))
           ( hom-inv-iso-Group
-            ( group-Concrete-Group (Type-With-Finite-Cardinality-Group l (n +ℕ 2)))
+            ( Type-With-Finite-Cardinality-Group' l (n +ℕ 2))
             ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
-            ( iso-loop-group-fin-Type-With-Finite-Cardinality-Group l (n +ℕ 2))))
+            ( iso-loop-group-fin-Type-With-Finite-Cardinality-Group l
+              ( n +ℕ 2))))
         ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l (n +ℕ 2))))
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
         ( symmetric-Group (Fin-Set (n +ℕ 2)))
-        ( group-Concrete-Group (Type-With-Finite-Cardinality-Group (lsuc l) 2))
+        ( Type-With-Finite-Cardinality-Group' (lsuc l) 2)
         ( comp-hom-Group
           ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
-          ( group-Concrete-Group (Type-With-Finite-Cardinality-Group (lsuc l) 2))
+          ( Type-With-Finite-Cardinality-Group' (lsuc l) 2)
           ( symmetric-abstract-type-with-finite-cardinality-group-quotient-hom
             ( orientation-Complete-Undirected-Graph)
             ( even-difference-orientation-Complete-Undirected-Graph)

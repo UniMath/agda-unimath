@@ -129,7 +129,7 @@ module _
       ( left-distributive-Σ-coproduct (type-Set X) (Id x) (Id y))) ∘e
     ( equiv-coproduct
       ( equiv-is-contr
-        ( is-contr-Fin-one-ℕ)
+        ( is-contr-Fin-1)
         ( is-torsorial-Id x))
       ( equiv-is-contr
         ( is-contr-unit)
@@ -231,13 +231,13 @@ module _
   {l : Level} {A : UU l}
   where
 
-  is-injective-map-Fin-two-ℕ :
+  is-injective-map-Fin-2 :
     (f : Fin 2 → A) → f zero-Fin ≠ f one-Fin → is-injective f
-  is-injective-map-Fin-two-ℕ f H {inl (inr star)} {inl (inr star)} p = refl
-  is-injective-map-Fin-two-ℕ f H {inl (inr star)} {inr star} p = ex-falso (H p)
-  is-injective-map-Fin-two-ℕ f H {inr star} {inl (inr star)} p =
+  is-injective-map-Fin-2 f H {inl (inr star)} {inl (inr star)} p = refl
+  is-injective-map-Fin-2 f H {inl (inr star)} {inr star} p = ex-falso (H p)
+  is-injective-map-Fin-2 f H {inr star} {inl (inr star)} p =
     ex-falso (H (inv p))
-  is-injective-map-Fin-two-ℕ f H {inr star} {inr star} p = refl
+  is-injective-map-Fin-2 f H {inr star} {inr star} p = refl
 
   is-injective-element-unordered-pair :
     (p : unordered-pair A) →

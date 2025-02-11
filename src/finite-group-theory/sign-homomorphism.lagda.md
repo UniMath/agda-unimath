@@ -60,24 +60,27 @@ module _
   {l : Level} (n : ℕ) (X : Type-With-Finite-Cardinality l n)
   where
 
-  sign-homomorphism-Fin-two : Aut (type-Type-With-Finite-Cardinality n X) → Fin 2
-  sign-homomorphism-Fin-two f =
+  sign-homomorphism-Fin-2 :
+    Aut (type-Type-With-Finite-Cardinality n X) → Fin 2
+  sign-homomorphism-Fin-2 f =
     pr1 (center (is-contr-parity-transposition-permutation n X f))
 
-  preserves-add-sign-homomorphism-Fin-two :
-    (f g : (type-Type-With-Finite-Cardinality n X) ≃ (type-Type-With-Finite-Cardinality n X)) →
+  preserves-add-sign-homomorphism-Fin-2 :
+    (f g :
+      type-Type-With-Finite-Cardinality n X ≃
+      type-Type-With-Finite-Cardinality n X) →
     Id
-      ( sign-homomorphism-Fin-two (f ∘e g))
-      ( add-Fin 2 (sign-homomorphism-Fin-two f) (sign-homomorphism-Fin-two g))
-  preserves-add-sign-homomorphism-Fin-two f g =
+      ( sign-homomorphism-Fin-2 (f ∘e g))
+      ( add-Fin 2 (sign-homomorphism-Fin-2 f) (sign-homomorphism-Fin-2 g))
+  preserves-add-sign-homomorphism-Fin-2 f g =
     apply-universal-property-trunc-Prop
       ( has-cardinality-type-Type-With-Finite-Cardinality n X)
       ( Id-Prop
         ( Fin-Set 2)
-        ( sign-homomorphism-Fin-two (f ∘e g))
+        ( sign-homomorphism-Fin-2 (f ∘e g))
         ( add-Fin 2
-          ( sign-homomorphism-Fin-two f)
-          ( sign-homomorphism-Fin-two g)))
+          ( sign-homomorphism-Fin-2 f)
+          ( sign-homomorphism-Fin-2 g)))
       ( λ h →
         ( ap
           ( pr1)
@@ -120,7 +123,7 @@ module _
                 ( eq-is-contr
                   ( is-contr-parity-transposition-permutation n X f))) ∙
               ( ap
-                ( λ P → add-Fin 2 (sign-homomorphism-Fin-two f) (pr1 P))
+                ( λ P → add-Fin 2 (sign-homomorphism-Fin-2 f) (pr1 P))
                 { x =
                   pair
                     ( mod-two-ℕ (length-list (list-trans g h)))
@@ -140,22 +143,29 @@ module _
                   ( is-contr-parity-transposition-permutation n X g)))))))
     where
     list-trans :
-      ( f' : (type-Type-With-Finite-Cardinality n X) ≃ (type-Type-With-Finite-Cardinality n X))
+      ( f' :
+        type-Type-With-Finite-Cardinality n X ≃
+        type-Type-With-Finite-Cardinality n X)
       ( h : Fin n ≃ type-Type-With-Finite-Cardinality n X) →
       list
         ( Σ ( type-Type-With-Finite-Cardinality n X → Decidable-Prop l)
             ( λ P →
               has-cardinality 2
-                ( Σ (type-Type-With-Finite-Cardinality n X) (type-Decidable-Prop ∘ P))))
+                ( Σ ( type-Type-With-Finite-Cardinality n X)
+                    ( type-Decidable-Prop ∘ P))))
     list-trans f' h =
-      list-transpositions-permutation-count (type-Type-With-Finite-Cardinality n X) (pair n h) f'
+      list-transpositions-permutation-count
+        ( type-Type-With-Finite-Cardinality n X)
+        ( pair n h)
+        ( f')
     list-comp-f-g :
       ( h : Fin n ≃ type-Type-With-Finite-Cardinality n X) →
       list
         ( Σ ( (type-Type-With-Finite-Cardinality n X) → Decidable-Prop l)
             ( λ P →
               has-cardinality 2
-                ( Σ (type-Type-With-Finite-Cardinality n X) (type-Decidable-Prop ∘ P))))
+                ( Σ ( type-Type-With-Finite-Cardinality n X)
+                    ( type-Decidable-Prop ∘ P))))
     list-comp-f-g h = concat-list (list-trans f h) (list-trans g h)
     eq-list-comp-f-g :
       ( h : Fin n ≃ type-Type-With-Finite-Cardinality n X) →
@@ -186,12 +196,13 @@ module _
                 ( list-trans f h)
                 ( list-trans g h))
 
-  eq-sign-homomorphism-Fin-two-transposition :
-    ( Y : 2-Element-Decidable-Subtype l (type-Type-With-Finite-Cardinality n X)) →
+  eq-sign-homomorphism-Fin-2-transposition :
+    ( Y :
+      2-Element-Decidable-Subtype l (type-Type-With-Finite-Cardinality n X)) →
     Id
-      ( sign-homomorphism-Fin-two (transposition Y))
+      ( sign-homomorphism-Fin-2 (transposition Y))
       ( inr star)
-  eq-sign-homomorphism-Fin-two-transposition Y =
+  eq-sign-homomorphism-Fin-2-transposition Y =
     ap pr1
       { x =
         center
@@ -207,22 +218,27 @@ module _
         ( is-contr-parity-transposition-permutation n X (transposition Y)))
 
 module _
-  {l l' : Level} (n : ℕ) (X : Type-With-Finite-Cardinality l n) (Y : Type-With-Finite-Cardinality l' n)
+  {l l' : Level} (n : ℕ)
+  (X : Type-With-Finite-Cardinality l n) (Y : Type-With-Finite-Cardinality l' n)
   where
 
-  preserves-conjugation-sign-homomorphism-Fin-two :
-    (f : (type-Type-With-Finite-Cardinality n X) ≃ (type-Type-With-Finite-Cardinality n X)) →
-    (g : (type-Type-With-Finite-Cardinality n X) ≃ (type-Type-With-Finite-Cardinality n Y)) →
+  preserves-conjugation-sign-homomorphism-Fin-2 :
+    ( f :
+      type-Type-With-Finite-Cardinality n X ≃
+      type-Type-With-Finite-Cardinality n X) →
+    ( g :
+      type-Type-With-Finite-Cardinality n X ≃
+      type-Type-With-Finite-Cardinality n Y) →
     Id
-      ( sign-homomorphism-Fin-two n Y (g ∘e (f ∘e inv-equiv g)))
-      ( sign-homomorphism-Fin-two n X f)
-  preserves-conjugation-sign-homomorphism-Fin-two f g =
+      ( sign-homomorphism-Fin-2 n Y (g ∘e (f ∘e inv-equiv g)))
+      ( sign-homomorphism-Fin-2 n X f)
+  preserves-conjugation-sign-homomorphism-Fin-2 f g =
     apply-universal-property-trunc-Prop
       ( has-cardinality-type-Type-With-Finite-Cardinality n X)
       ( Id-Prop
         ( Fin-Set 2)
-        ( sign-homomorphism-Fin-two n Y (g ∘e (f ∘e inv-equiv g)))
-        ( sign-homomorphism-Fin-two n X f))
+        ( sign-homomorphism-Fin-2 n Y (g ∘e (f ∘e inv-equiv g)))
+        ( sign-homomorphism-Fin-2 n X f))
       ( λ h →
         ( ap
           ( pr1)
@@ -356,19 +372,20 @@ module _
   {l : Level} (n : ℕ) (X : Type-With-Finite-Cardinality l n)
   where
 
-  map-sign-homomorphism : Aut (type-Type-With-Finite-Cardinality n X) → Aut (Fin 2)
+  map-sign-homomorphism :
+    Aut (type-Type-With-Finite-Cardinality n X) → Aut (Fin 2)
   map-sign-homomorphism f =
-    aut-point-Fin-two-ℕ (sign-homomorphism-Fin-two n X f)
+    aut-point-Fin-2 (sign-homomorphism-Fin-2 n X f)
 
   preserves-comp-map-sign-homomorphism :
     preserves-mul _∘e_ _∘e_ map-sign-homomorphism
   preserves-comp-map-sign-homomorphism {f} {g} =
     ( ap
-      ( aut-point-Fin-two-ℕ)
-      ( preserves-add-sign-homomorphism-Fin-two n X f g)) ∙
-    ( preserves-add-aut-point-Fin-two-ℕ
-      ( sign-homomorphism-Fin-two n X f)
-      ( sign-homomorphism-Fin-two n X g))
+      ( aut-point-Fin-2)
+      ( preserves-add-sign-homomorphism-Fin-2 n X f g)) ∙
+    ( preserves-add-aut-point-Fin-2
+      ( sign-homomorphism-Fin-2 n X f)
+      ( sign-homomorphism-Fin-2 n X g))
 
   sign-homomorphism :
     hom-Group
@@ -378,7 +395,8 @@ module _
   pr2 sign-homomorphism = preserves-comp-map-sign-homomorphism
 
   eq-sign-homomorphism-transposition :
-    ( Y : 2-Element-Decidable-Subtype l (type-Type-With-Finite-Cardinality n X)) →
+    ( Y :
+      2-Element-Decidable-Subtype l (type-Type-With-Finite-Cardinality n X)) →
     Id
       ( map-hom-Group
         ( symmetric-Group (set-Type-With-Finite-Cardinality n X))
@@ -387,5 +405,5 @@ module _
         ( transposition Y))
       ( equiv-succ-Fin 2)
   eq-sign-homomorphism-transposition Y =
-    ap aut-point-Fin-two-ℕ (eq-sign-homomorphism-Fin-two-transposition n X Y)
+    ap aut-point-Fin-2 (eq-sign-homomorphism-Fin-2-transposition n X Y)
 ```

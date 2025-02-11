@@ -395,11 +395,11 @@ is the 58th theorem on [Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
 binomial-type-Fin :
   (n m : ℕ) → binomial-type (Fin n) (Fin m) ≃ Fin (binomial-coefficient-ℕ n m)
 binomial-type-Fin zero-ℕ zero-ℕ =
-  equiv-is-contr binomial-type-over-empty is-contr-Fin-one-ℕ
+  equiv-is-contr binomial-type-over-empty is-contr-Fin-1
 binomial-type-Fin zero-ℕ (succ-ℕ m) =
   equiv-is-empty (binomial-type-empty-under (unit-trunc-Prop (inr star))) id
 binomial-type-Fin (succ-ℕ n) zero-ℕ =
-  equiv-is-contr binomial-type-over-empty is-contr-Fin-one-ℕ
+  equiv-is-contr binomial-type-over-empty is-contr-Fin-1
 binomial-type-Fin (succ-ℕ n) (succ-ℕ m) =
   ( ( inv-equiv
       ( inv-compute-coproduct-Fin
@@ -426,10 +426,13 @@ has-cardinality-binomial-type {A = A} {B} n m H K =
               ( binomial-type-Fin n m ∘e equiv-binomial-type e f))))
 
 binomial-type-Type-With-Finite-Cardinality :
-  {l1 l2 : Level} (n m : ℕ) → Type-With-Finite-Cardinality l1 n → Type-With-Finite-Cardinality l2 m →
+  {l1 l2 : Level} (n m : ℕ) →
+  Type-With-Finite-Cardinality l1 n → Type-With-Finite-Cardinality l2 m →
   Type-With-Finite-Cardinality (lsuc l1 ⊔ lsuc l2) (binomial-coefficient-ℕ n m)
 pr1 (binomial-type-Type-With-Finite-Cardinality n m A B) =
-  binomial-type (type-Type-With-Finite-Cardinality n A) (type-Type-With-Finite-Cardinality m B)
+  binomial-type
+    ( type-Type-With-Finite-Cardinality n A)
+    ( type-Type-With-Finite-Cardinality m B)
 pr2 (binomial-type-Type-With-Finite-Cardinality n m A B) =
   has-cardinality-binomial-type n m
     ( has-cardinality-type-Type-With-Finite-Cardinality n A)

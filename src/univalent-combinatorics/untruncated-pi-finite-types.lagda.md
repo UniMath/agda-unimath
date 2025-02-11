@@ -305,7 +305,8 @@ pr2 (π-finite-type-Finite-Type k A) =
 
 ```agda
 is-untruncated-π-finite-Type-With-Finite-Cardinality :
-  {l : Level} (k n : ℕ) → is-untruncated-π-finite k (Type-With-Finite-Cardinality l n)
+  {l : Level} (k n : ℕ) →
+  is-untruncated-π-finite k (Type-With-Finite-Cardinality l n)
 is-untruncated-π-finite-Type-With-Finite-Cardinality zero-ℕ n =
   has-finitely-many-connected-components-Type-With-Finite-Cardinality n
 pr1 (is-untruncated-π-finite-Type-With-Finite-Cardinality (succ-ℕ k) n) =
