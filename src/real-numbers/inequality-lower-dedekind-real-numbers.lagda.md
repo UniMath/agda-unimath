@@ -14,7 +14,9 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.existential-quantification
 open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.powersets
 open import foundation.propositions
 open import foundation.subtypes
@@ -72,6 +74,22 @@ antisymmetric-leq-Large-Poset lower-ℝ-Large-Poset x y x≤y y≤x =
     ( x)
     ( y)
     ( antisymmetric-leq-subtype (cut-lower-ℝ x) (cut-lower-ℝ y) x≤y y≤x)
+```
+
+### If a rational is in a lower Dedekind cut, its projections is less than or equal to the corresponding lower real
+
+```agda
+module _
+  {l : Level}
+  (x : lower-ℝ l)
+  (q : ℚ)
+  where
+
+  leq-is-in-cut-lower-real-ℚ : is-in-cut-lower-ℝ x q → leq-lower-ℝ (lower-real-ℚ q) x
+  leq-is-in-cut-lower-real-ℚ q∈L p p<q =
+    backward-implication
+      ( is-rounded-cut-lower-ℝ x p)
+      ( intro-exists q (p<q , q∈L))
 ```
 
 ### The canonical map from the rational numbers to the lower reals preserves inequality

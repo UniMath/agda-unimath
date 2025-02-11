@@ -14,6 +14,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.existential-quantification
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositions
@@ -73,6 +74,23 @@ antisymmetric-leq-Large-Poset upper-ℝ-Large-Poset x y x≤y y≤x =
     ( y)
     ( antisymmetric-leq-subtype (cut-upper-ℝ x) (cut-upper-ℝ y) y≤x x≤y)
 ```
+
+### If a rational is in an upper Dedekind cut, the corresponding upper real is less than or equal to the rational's projection
+
+```agda
+module _
+  {l : Level}
+  (x : upper-ℝ l)
+  (q : ℚ)
+  where
+
+  leq-is-in-cut-upper-real-ℚ : is-in-cut-upper-ℝ x q → leq-upper-ℝ x (upper-real-ℚ q)
+  leq-is-in-cut-upper-real-ℚ q∈L p x<p =
+    backward-implication
+      ( is-rounded-cut-upper-ℝ x p)
+      ( intro-exists q (x<p , q∈L))
+```
+
 
 ### The canonical map from the rational numbers to the upper reals preserves inequality
 
