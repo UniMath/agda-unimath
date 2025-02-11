@@ -132,7 +132,7 @@ module _
             ( is-section-pair-eq-Σ
               ( raise-Fin-Type-With-Finite-Cardinality l n)
               ( raise-Fin-Type-With-Finite-Cardinality l n)
-              ( p)))
+              ( p))))
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup
           ( semigroup-Group (Type-With-Finite-Cardinality-Group' l n))
