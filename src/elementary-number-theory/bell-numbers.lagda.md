@@ -41,8 +41,8 @@ bell-number-ℕ =
     ( λ n B →
       bounded-sum-ℕ
         ( succ-ℕ n)
-        ( λ k k<n+1 →
-          binomial-coefficient-ℕ n k *ℕ B k (leq-le-succ-ℕ k n k<n+1)))
+        ( λ k H →
+          binomial-coefficient-ℕ n k *ℕ B k (leq-le-succ-ℕ k n H)))
 ```
 
 ## References
