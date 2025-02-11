@@ -8,10 +8,11 @@ module foundation.fiber-inclusions where
 
 ```agda
 open import foundation.0-maps
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.faithful-maps
 open import foundation.fibers-of-maps
+open import foundation.standard-pullbacks
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
@@ -38,8 +39,8 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-Given a family `B` of types over `A` and an element `a : A`, then the fiber
-inclusion of `B` at a is a map `B a → Σ A B`.
+Given a family `B` of types over `A` and an element `a : A`, then **the fiber
+inclusion** of `B` at `a` is a map `B a → Σ A B`.
 
 ## Definition
 
@@ -146,7 +147,7 @@ module _
 
   cone-fiber-fam : cone (pr1 {B = B}) (point a) (B a)
   pr1 cone-fiber-fam = fiber-inclusion B a
-  pr1 (pr2 cone-fiber-fam) = terminal-map
+  pr1 (pr2 cone-fiber-fam) = terminal-map (B a)
   pr2 (pr2 cone-fiber-fam) = refl-htpy
 
   abstract

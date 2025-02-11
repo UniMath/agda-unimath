@@ -23,6 +23,7 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.transport-along-identifications
+open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -78,6 +79,10 @@ module _
   is-in-subtype-inclusion-subtype :
     (x : type-subtype) → is-in-subtype (inclusion-subtype x)
   is-in-subtype-inclusion-subtype = pr2
+
+  eq-is-in-subtype :
+    {x : A} {p q : is-in-subtype x} → p ＝ q
+  eq-is-in-subtype {x} = eq-is-prop (is-prop-is-in-subtype x)
 
   is-closed-under-eq-subtype :
     {x y : A} → is-in-subtype x → (x ＝ y) → is-in-subtype y
@@ -150,6 +155,26 @@ module _
   eq-type-subtype {a} {b} = map-inv-equiv (extensionality-type-subtype' a b)
 ```
 
+### If `B` is a subtype of `A`, then the projection map `Σ A B → A` is a propositional map
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
+  where
+
+  abstract
+    is-prop-map-inclusion-subtype : is-prop-map (inclusion-subtype B)
+    is-prop-map-inclusion-subtype =
+      ( λ x →
+        is-prop-equiv
+          ( equiv-fiber-pr1 (is-in-subtype B) x)
+          ( is-prop-is-in-subtype B x))
+
+  prop-map-subtype : prop-map (type-subtype B) A
+  pr1 prop-map-subtype = inclusion-subtype B
+  pr2 prop-map-subtype = is-prop-map-inclusion-subtype
+```
+
 ### If `B` is a subtype of `A`, then the projection map `Σ A B → A` is an embedding
 
 ```agda
@@ -161,10 +186,7 @@ module _
     is-emb-inclusion-subtype : is-emb (inclusion-subtype B)
     is-emb-inclusion-subtype =
       is-emb-is-prop-map
-        ( λ x →
-          is-prop-equiv
-            ( equiv-fiber-pr1 (is-in-subtype B) x)
-            ( is-prop-is-in-subtype B x))
+        ( is-prop-map-inclusion-subtype B)
 
   emb-subtype : type-subtype B ↪ A
   pr1 emb-subtype = inclusion-subtype B
@@ -177,25 +199,58 @@ module _
   pr2 (equiv-ap-inclusion-subtype {s} {t}) = is-emb-inclusion-subtype s t
 ```
 
+### Restriction of a `k`-truncated map to a `k`-truncated map into a subtype
+
+```agda
+module _
+  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} (B : subtype l2 A) {X : UU l3}
+  where
+
+  abstract
+    is-trunc-map-into-subtype :
+      {f : X → A} → is-trunc-map k f →
+      (p : (x : X) → is-in-subtype B (f x)) →
+      is-trunc-map k {B = type-subtype B} (λ x → (f x , p x))
+    is-trunc-map-into-subtype H p (a , b) =
+      is-trunc-equiv k _
+        ( equiv-tot (λ x → extensionality-type-subtype' B _ _))
+        ( H a)
+
+  trunc-map-into-subtype :
+    (f : trunc-map k X A) → ((x : X) → is-in-subtype B (map-trunc-map f x)) →
+    trunc-map k X (type-subtype B)
+  pr1 (trunc-map-into-subtype f p) x = (map-trunc-map f x , p x)
+  pr2 (trunc-map-into-subtype f p) =
+    is-trunc-map-into-subtype
+      ( is-trunc-map-map-trunc-map f)
+      ( p)
+```
+
 ### Restriction of an embedding to an embedding into a subtype
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
+  {l1 l2 l3 : Level} {A : UU l1} (B : subtype l2 A) {X : UU l3} (f : X ↪ A)
+  (p : (x : X) → is-in-subtype B (map-emb f x))
   where
 
-  emb-into-subtype :
-    {l3 : Level} {X : UU l3} (f : X ↪ A) →
-    ((x : X) → is-in-subtype B (map-emb f x)) →
-    X ↪ type-subtype B
-  pr1 (emb-into-subtype f p) x = (map-emb f x , p x)
-  pr2 (emb-into-subtype f p) =
-    is-emb-is-prop-map
-      ( λ (a , b) →
-        is-prop-equiv
-          ( equiv-tot
-            ( λ x → extensionality-type-subtype' B (map-emb f x , p x) (a , b)))
-          ( is-prop-map-is-emb (is-emb-map-emb f) a))
+  map-emb-into-subtype : X → type-subtype B
+  pr1 (map-emb-into-subtype x) = map-emb f x
+  pr2 (map-emb-into-subtype x) = p x
+
+  abstract
+    is-emb-map-emb-into-subtype : is-emb map-emb-into-subtype
+    is-emb-map-emb-into-subtype =
+      is-emb-is-prop-map
+        ( is-trunc-map-into-subtype
+          ( neg-one-𝕋)
+          ( B)
+          ( is-prop-map-is-emb (is-emb-map-emb f))
+          ( p))
+
+  emb-into-subtype : X ↪ type-subtype B
+  pr1 emb-into-subtype = map-emb-into-subtype
+  pr2 emb-into-subtype = is-emb-map-emb-into-subtype
 ```
 
 ### If the projection map of a type family is an embedding, then the type family is a subtype
@@ -260,8 +315,12 @@ equiv-type-subtype :
   ( Σ A P) ≃ (Σ A Q)
 pr1 (equiv-type-subtype is-subtype-P is-subtype-Q f g) = tot f
 pr2 (equiv-type-subtype is-subtype-P is-subtype-Q f g) =
-  is-equiv-tot-is-fiberwise-equiv {f = f}
-    ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q x) (g x))
+  is-equiv-tot-is-fiberwise-equiv
+    ( λ x →
+      is-equiv-has-converse-is-prop
+        ( is-subtype-P x)
+        ( is-subtype-Q x)
+        ( g x))
 ```
 
 ### Equivalences of subtypes
@@ -286,8 +345,12 @@ abstract
     (f : A → B) (g : (x : A) → P x → Q (f x)) →
     is-equiv f → ((x : A) → (Q (f x)) → P x) → is-equiv (map-Σ Q f g)
   is-equiv-subtype-is-equiv {Q = Q} is-subtype-P is-subtype-Q f g is-equiv-f h =
-    is-equiv-map-Σ Q f g is-equiv-f
-      ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q (f x)) (h x))
+    is-equiv-map-Σ Q is-equiv-f
+      ( λ x →
+        is-equiv-has-converse-is-prop
+          ( is-subtype-P x)
+          ( is-subtype-Q (f x))
+          ( h x))
 
 abstract
   is-equiv-subtype-is-equiv' :
@@ -296,11 +359,14 @@ abstract
     (is-subtype-P : is-subtype P) (is-subtype-Q : is-subtype Q)
     (f : A → B) (g : (x : A) → P x → Q (f x)) →
     (is-equiv-f : is-equiv f) →
-    ((y : B) → (Q y) → P (map-inv-is-equiv is-equiv-f y)) →
+    ((y : B) → Q y → P (map-inv-is-equiv is-equiv-f y)) →
     is-equiv (map-Σ Q f g)
   is-equiv-subtype-is-equiv' {P = P} {Q}
     is-subtype-P is-subtype-Q f g is-equiv-f h =
-    is-equiv-map-Σ Q f g is-equiv-f
-      ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q (f x))
-        ( (tr P (is-retraction-map-inv-is-equiv is-equiv-f x)) ∘ (h (f x))))
+    is-equiv-map-Σ Q is-equiv-f
+      ( λ x →
+        is-equiv-has-converse-is-prop
+          ( is-subtype-P x)
+          ( is-subtype-Q (f x))
+          ( (tr P (is-retraction-map-inv-is-equiv is-equiv-f x)) ∘ (h (f x))))
 ```

@@ -60,7 +60,7 @@ eq-succ-classical-Fin k x .x refl = refl
 
 eq-Eq-classical-Fin :
   (k : ℕ) (x y : classical-Fin k) → Eq-classical-Fin k x y → Id x y
-eq-Eq-classical-Fin (succ-ℕ k) (pair zero-ℕ star) (pair zero-ℕ star) e = refl
+eq-Eq-classical-Fin (succ-ℕ k) (pair zero-ℕ _) (pair zero-ℕ _) e = refl
 eq-Eq-classical-Fin (succ-ℕ k) (pair (succ-ℕ x) p) (pair (succ-ℕ y) q) e =
   eq-succ-classical-Fin k
     ( pair x p)

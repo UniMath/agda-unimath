@@ -25,6 +25,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.repetitions-sequences
+open import foundation.sets
 open import foundation.universe-levels
 
 open import univalent-combinatorics.cartesian-product-types
@@ -131,7 +132,7 @@ has-ordered-repetition-fibonacci-pair-Fin :
   (k : ℕ) → ordered-repetition-of-values-ℕ (fibonacci-pair-Fin k)
 has-ordered-repetition-fibonacci-pair-Fin k =
   ordered-repetition-of-values-nat-to-count
-    ( count-prod (count-Fin (succ-ℕ k)) (count-Fin (succ-ℕ k)))
+    ( count-product (count-Fin (succ-ℕ k)) (count-Fin (succ-ℕ k)))
     ( fibonacci-pair-Fin k)
 
 is-ordered-repetition-fibonacci-pair-Fin : ℕ → ℕ → UU lzero
@@ -142,7 +143,7 @@ minimal-ordered-repetition-fibonacci-pair-Fin :
   (k : ℕ) → minimal-element-ℕ (is-ordered-repetition-fibonacci-pair-Fin k)
 minimal-ordered-repetition-fibonacci-pair-Fin k =
   minimal-element-repetition-of-values-sequence-count
-    ( count-prod (count-Fin (succ-ℕ k)) (count-Fin (succ-ℕ k)))
+    ( count-product (count-Fin (succ-ℕ k)) (count-Fin (succ-ℕ k)))
     ( fibonacci-pair-Fin k)
 ```
 

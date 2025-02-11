@@ -15,17 +15,20 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.postcomposition-functions
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import linear-algebra.vectors
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-Any map `f : A → B` determines a map `vec n A → vec n B` for every `n`.
+Any map `f : A → B` determines a map `vec A n → vec B n` for every `n`.
 
 ## Definition
 
@@ -73,7 +76,7 @@ module _
   htpy-functional-vec :
     (n : ℕ) {f g : A → B} → (f ~ g) →
     map-functional-vec n f ~ map-functional-vec n g
-  htpy-functional-vec n H v = eq-htpy (H ·r v)
+  htpy-functional-vec n = htpy-postcomp (Fin n)
 ```
 
 ### Binary functoriality of the type of functional vectors

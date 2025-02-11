@@ -7,6 +7,7 @@ module elementary-number-theory.monoid-of-natural-numbers-with-maximum where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.initial-segments-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.natural-numbers

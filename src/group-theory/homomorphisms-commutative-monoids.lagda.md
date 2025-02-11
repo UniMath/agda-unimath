@@ -7,11 +7,10 @@ module group-theory.homomorphisms-commutative-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
@@ -151,12 +150,10 @@ module _
   (f : hom-Commutative-Monoid M N)
   where
 
-  is-contr-total-htpy-hom-Commutative-Monoid :
-    is-contr
-      ( Σ ( hom-Commutative-Monoid M N)
-          ( htpy-hom-Commutative-Monoid M N f))
-  is-contr-total-htpy-hom-Commutative-Monoid =
-    is-contr-total-htpy-hom-Monoid
+  is-torsorial-htpy-hom-Commutative-Monoid :
+    is-torsorial (htpy-hom-Commutative-Monoid M N f)
+  is-torsorial-htpy-hom-Commutative-Monoid =
+    is-torsorial-htpy-hom-Monoid
       ( monoid-Commutative-Monoid M)
       ( monoid-Commutative-Monoid N)
       ( f)
@@ -213,12 +210,12 @@ module _
     (h : hom-Commutative-Monoid M N)
     (g : hom-Commutative-Monoid L M)
     (f : hom-Commutative-Monoid K L) →
-    ( comp-hom-Commutative-Monoid K L N
+    comp-hom-Commutative-Monoid K L N
       ( comp-hom-Commutative-Monoid L M N h g)
-      ( f)) ＝
-    ( comp-hom-Commutative-Monoid K M N
+      ( f) ＝
+    comp-hom-Commutative-Monoid K M N
       ( h)
-      ( comp-hom-Commutative-Monoid K L M g f))
+      ( comp-hom-Commutative-Monoid K L M g f)
   associative-comp-hom-Commutative-Monoid =
     associative-comp-hom-Monoid
       ( monoid-Commutative-Monoid K)

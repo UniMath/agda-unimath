@@ -20,11 +20,11 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
-open import foundation.negation
 open import foundation.pairs-of-distinct-elements
 open import foundation.repetitions-of-values
 open import foundation.repetitions-sequences
 open import foundation.sequences
+open import foundation.sets
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting

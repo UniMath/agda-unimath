@@ -8,11 +8,11 @@ module foundation.equivalence-extensionality where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-systems
 open import foundation.subtype-identity-principle
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
@@ -20,12 +20,13 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sections
+open import foundation-core.torsorial-type-families
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -54,7 +55,7 @@ module _
     pr1 (is-equiv-Prop f) = is-equiv f
     pr2 (is-equiv-Prop f) H =
       is-prop-is-contr
-        ( is-contr-prod
+        ( is-contr-product
           ( is-contr-equiv'
             ( (b : B) → fiber f b)
             ( distributive-Π-Σ)
@@ -70,9 +71,9 @@ module _
         ( H)
 
   abstract
-    is-contr-total-htpy-equiv :
-      (e : A ≃ B) → is-contr (Σ (A ≃ B) (htpy-equiv e))
-    is-contr-total-htpy-equiv e =
+    is-torsorial-htpy-equiv :
+      (e : A ≃ B) → is-torsorial (htpy-equiv e)
+    is-torsorial-htpy-equiv e =
       fundamental-theorem-id'
         ( map-equiv ∘ extensionality-equiv e)
         ( is-equiv-map-equiv ∘ extensionality-equiv e)
@@ -108,7 +109,7 @@ module _
     induction-principle-htpy-equiv e =
       is-identity-system-is-torsorial e
         ( refl-htpy-equiv e)
-        ( is-contr-total-htpy-equiv e)
+        ( is-torsorial-htpy-equiv e)
 
   ind-htpy-equiv :
     {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →

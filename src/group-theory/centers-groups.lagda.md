@@ -33,13 +33,17 @@ module _
   where
 
   subtype-center-Group : type-Group G → Prop l
-  subtype-center-Group = is-central-element-group-Prop G
+  subtype-center-Group = is-central-element-prop-Group G
 
   subgroup-center-Group : Subgroup l G
-  pr1 subgroup-center-Group = subtype-center-Group
-  pr1 (pr2 subgroup-center-Group) = is-central-element-unit-Group G
-  pr1 (pr2 (pr2 subgroup-center-Group)) = is-central-element-mul-Group G
-  pr2 (pr2 (pr2 subgroup-center-Group)) = is-central-element-inv-Group G
+  pr1 subgroup-center-Group =
+    subtype-center-Group
+  pr1 (pr2 subgroup-center-Group) =
+    is-central-element-unit-Group G
+  pr1 (pr2 (pr2 subgroup-center-Group)) =
+    is-central-element-mul-Group G
+  pr2 (pr2 (pr2 subgroup-center-Group)) =
+    is-central-element-inv-Group G
 
   group-center-Group : Group l
   group-center-Group = group-Subgroup G subgroup-center-Group
@@ -71,13 +75,13 @@ module _
     is-in-subgroup-inclusion-Subgroup G subgroup-center-Group x
 
   preserves-mul-inclusion-center-Group :
-    (x y : type-center-Group) →
+    {x y : type-center-Group} →
     inclusion-center-Group (mul-center-Group x y) ＝
     mul-Group G
       ( inclusion-center-Group x)
       ( inclusion-center-Group y)
-  preserves-mul-inclusion-center-Group =
-    preserves-mul-inclusion-Subgroup G subgroup-center-Group
+  preserves-mul-inclusion-center-Group {x} {y} =
+    preserves-mul-inclusion-Subgroup G subgroup-center-Group {x} {y}
 
   hom-inclusion-center-Group :
     hom-Group group-center-Group G

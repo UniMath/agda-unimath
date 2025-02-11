@@ -7,18 +7,25 @@ module foundation-core.functoriality-dependent-pair-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
+open import foundation-core.dependent-identifications
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.transport-along-identifications
+open import foundation-core.retractions
+open import foundation-core.retracts-of-types
+open import foundation-core.sections
 ```
 
 </details>
@@ -79,7 +86,7 @@ module _
 
   triangle-map-Σ :
     (f : A → B) (g : (x : A) → C x → D (f x)) →
-    (map-Σ f g) ~ (map-Σ-map-base f D ∘ tot g)
+    map-Σ f g ~ map-Σ-map-base f D ∘ tot g
   triangle-map-Σ f g t = refl
 ```
 
@@ -107,7 +114,7 @@ module _
 tot-htpy :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   {f g : (x : A) → B x → C x} → (H : (x : A) → f x ~ g x) → tot f ~ tot g
-tot-htpy H (pair x y) = eq-pair-Σ refl (H x y)
+tot-htpy H (pair x y) = eq-pair-eq-fiber (H x y)
 ```
 
 ### The map `tot` preserves identity maps
@@ -233,6 +240,26 @@ module _
     is-equiv-tot-is-fiberwise-equiv (λ x → is-equiv-map-equiv (e x))
 ```
 
+### The action of `tot` on retracts
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  retraction-tot :
+    {f : (x : A) → B x → C x} →
+    ((x : A) → retraction (f x)) → retraction (tot f)
+  pr1 (retraction-tot {f} r) (x , z) =
+    ( x , map-retraction (f x) (r x) z)
+  pr2 (retraction-tot {f} r) (x , z) =
+    eq-pair-eq-fiber (is-retraction-map-retraction (f x) (r x) z)
+
+  retract-tot : ((x : A) → (B x) retract-of (C x)) → (Σ A B) retract-of (Σ A C)
+  pr1 (retract-tot r) = tot (λ x → inclusion-retract (r x))
+  pr2 (retract-tot r) = retraction-tot (λ x → retraction-retract (r x))
+```
+
 ### The fibers of `map-Σ-map-base`
 
 ```agda
@@ -275,11 +302,83 @@ module _
         ( is-section-fiber-fiber-map-Σ-map-base t)
         ( is-retraction-fiber-fiber-map-Σ-map-base t)
 
-  equiv-fiber-map-Σ-map-base-fiber :
+  compute-fiber-map-Σ-map-base :
     (t : Σ B C) → fiber f (pr1 t) ≃ fiber (map-Σ-map-base f C) t
-  pr1 (equiv-fiber-map-Σ-map-base-fiber t) = fiber-map-Σ-map-base-fiber t
-  pr2 (equiv-fiber-map-Σ-map-base-fiber t) =
+  pr1 (compute-fiber-map-Σ-map-base t) = fiber-map-Σ-map-base-fiber t
+  pr2 (compute-fiber-map-Σ-map-base t) =
     is-equiv-fiber-map-Σ-map-base-fiber t
+```
+
+### The fibers of `map-Σ`
+
+We compute the fibers of `map-Σ` first in terms of `fiber'` and then in terms of
+`fiber`.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} (D : B → UU l4)
+  (f : A → B) (g : (x : A) → C x → D (f x)) (t : Σ B D)
+  where
+
+  fiber-map-Σ' : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  fiber-map-Σ' =
+    Σ (fiber' f (pr1 t)) (λ s → fiber' (g (pr1 s)) (tr D (pr2 s) (pr2 t)))
+
+  map-fiber-map-Σ' : fiber' (map-Σ D f g) t → fiber-map-Σ'
+  map-fiber-map-Σ' ((a , c) , refl) = (a , refl) , (c , refl)
+
+  map-inv-fiber-map-Σ' : fiber-map-Σ' → fiber' (map-Σ D f g) t
+  map-inv-fiber-map-Σ' ((a , p) , (c , q)) = ((a , c) , eq-pair-Σ p q)
+
+  abstract
+    is-section-map-inv-fiber-map-Σ' :
+      is-section map-fiber-map-Σ' map-inv-fiber-map-Σ'
+    is-section-map-inv-fiber-map-Σ' ((a , refl) , (c , refl)) = refl
+
+  abstract
+    is-retraction-map-inv-fiber-map-Σ' :
+      is-retraction map-fiber-map-Σ' map-inv-fiber-map-Σ'
+    is-retraction-map-inv-fiber-map-Σ' ((a , c) , refl) = refl
+
+  is-equiv-map-fiber-map-Σ' : is-equiv map-fiber-map-Σ'
+  is-equiv-map-fiber-map-Σ' =
+    is-equiv-is-invertible
+      map-inv-fiber-map-Σ'
+      is-section-map-inv-fiber-map-Σ'
+      is-retraction-map-inv-fiber-map-Σ'
+
+  compute-fiber-map-Σ' : fiber' (map-Σ D f g) t ≃ fiber-map-Σ'
+  compute-fiber-map-Σ' = (map-fiber-map-Σ' , is-equiv-map-fiber-map-Σ')
+
+  fiber-map-Σ : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  fiber-map-Σ =
+    Σ (fiber f (pr1 t)) (λ s → fiber (g (pr1 s)) (inv-tr D (pr2 s) (pr2 t)))
+
+  map-fiber-map-Σ : fiber (map-Σ D f g) t → fiber-map-Σ
+  map-fiber-map-Σ ((a , c) , refl) = (a , refl) , (c , refl)
+
+  map-inv-fiber-map-Σ : fiber-map-Σ → fiber (map-Σ D f g) t
+  map-inv-fiber-map-Σ ((a , refl) , c , refl) = ((a , c) , refl)
+
+  abstract
+    is-section-map-inv-fiber-map-Σ :
+      is-section map-fiber-map-Σ map-inv-fiber-map-Σ
+    is-section-map-inv-fiber-map-Σ ((a , refl) , (c , refl)) = refl
+
+  abstract
+    is-retraction-map-inv-fiber-map-Σ :
+      is-retraction map-fiber-map-Σ map-inv-fiber-map-Σ
+    is-retraction-map-inv-fiber-map-Σ ((a , c) , refl) = refl
+
+  is-equiv-map-fiber-map-Σ : is-equiv map-fiber-map-Σ
+  is-equiv-map-fiber-map-Σ =
+    is-equiv-is-invertible
+      map-inv-fiber-map-Σ
+      is-section-map-inv-fiber-map-Σ
+      is-retraction-map-inv-fiber-map-Σ
+
+  compute-fiber-map-Σ : fiber (map-Σ D f g) t ≃ fiber-map-Σ
+  compute-fiber-map-Σ = (map-fiber-map-Σ , is-equiv-map-fiber-map-Σ)
 ```
 
 ### If `f : A → B` is a contractible map, then so is `map-Σ-map-base f C`
@@ -295,7 +394,7 @@ module _
     is-contr-map-map-Σ-map-base is-contr-f (pair y z) =
       is-contr-equiv'
         ( fiber f y)
-        ( equiv-fiber-map-Σ-map-base-fiber f C (pair y z))
+        ( compute-fiber-map-Σ-map-base f C (pair y z))
         ( is-contr-f y)
 ```
 
@@ -314,7 +413,7 @@ module _
 
 equiv-Σ-equiv-base :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : B → UU l3) (e : A ≃ B) →
-  Σ A (C ∘ (map-equiv e)) ≃ Σ B C
+  Σ A (C ∘ map-equiv e) ≃ Σ B C
 pr1 (equiv-Σ-equiv-base C (pair f is-equiv-f)) = map-Σ-map-base f C
 pr2 (equiv-Σ-equiv-base C (pair f is-equiv-f)) =
   is-equiv-map-Σ-map-base f C is-equiv-f
@@ -330,10 +429,10 @@ module _
 
   abstract
     is-equiv-map-Σ :
-      (f : A → B) (g : (x : A) → C x → D (f x)) →
+      {f : A → B} {g : (x : A) → C x → D (f x)} →
       is-equiv f → is-fiberwise-equiv g → is-equiv (map-Σ D f g)
-    is-equiv-map-Σ f g is-equiv-f is-fiberwise-equiv-g =
-      is-equiv-comp-htpy
+    is-equiv-map-Σ {f} {g} is-equiv-f is-fiberwise-equiv-g =
+      is-equiv-left-map-triangle
         ( map-Σ D f g)
         ( map-Σ-map-base f D)
         ( tot g)
@@ -346,8 +445,6 @@ module _
   pr1 (equiv-Σ e g) = map-Σ D (map-equiv e) (λ x → map-equiv (g x))
   pr2 (equiv-Σ e g) =
     is-equiv-map-Σ
-      ( map-equiv e)
-      ( λ x → map-equiv (g x))
       ( is-equiv-map-equiv e)
       ( λ x → is-equiv-map-equiv (g x))
 
@@ -357,7 +454,7 @@ module _
       is-equiv f → is-equiv (map-Σ D f g) → is-fiberwise-equiv g
     is-fiberwise-equiv-is-equiv-map-Σ f g H K =
       is-fiberwise-equiv-is-equiv-tot
-        ( is-equiv-right-factor-htpy
+        ( is-equiv-top-map-triangle
           ( map-Σ D f g)
           ( map-Σ-map-base f D)
           ( tot g)
@@ -375,16 +472,16 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h)
   where
 
   fiber-triangle :
-    (x : X) → (fiber f x) → (fiber g x)
+    (x : X) → fiber f x → fiber g x
   pr1 (fiber-triangle .(f a) (pair a refl)) = h a
   pr2 (fiber-triangle .(f a) (pair a refl)) = inv (H a)
 
   square-tot-fiber-triangle :
-    ( h ∘ (map-equiv-total-fiber f)) ~
+    ( h ∘ map-equiv-total-fiber f) ~
     ( map-equiv-total-fiber g ∘ tot fiber-triangle)
   square-tot-fiber-triangle (pair .(f a) (pair a refl)) = refl
 ```
@@ -399,7 +496,7 @@ module _
 
   abstract
     is-fiberwise-equiv-is-equiv-triangle :
-      (E : is-equiv h) → is-fiberwise-equiv (fiber-triangle f g h H)
+      is-equiv h → is-fiberwise-equiv (fiber-triangle f g h H)
     is-fiberwise-equiv-is-equiv-triangle E =
       is-fiberwise-equiv-is-equiv-tot
         ( is-equiv-top-is-equiv-bottom-square
@@ -434,8 +531,57 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  compute-map-Σ-id : map-Σ B id (λ x → id) ~ id
+  compute-map-Σ-id : map-Σ B id (λ _ → id) ~ id
   compute-map-Σ-id = refl-htpy
+```
+
+### `map-Σ` preserves composition of maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3}
+  {A' : A → UU l4} {B' : B → UU l5} {C' : C → UU l6}
+  {f : A → B} {f' : (x : A) → A' x → B' (f x)}
+  {g : B → C} {g' : (y : B) → B' y → C' (g y)}
+  where
+
+  preserves-comp-map-Σ :
+    map-Σ C' (g ∘ f) (λ x x' → g' (f x) (f' x x')) ~
+    map-Σ C' g g' ∘ map-Σ B' f f'
+  preserves-comp-map-Σ = refl-htpy
+```
+
+### Computing the action on identifications of `tot`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {X : A → UU l2} {Y : A → UU l3}
+  (g : (a : A) → X a → Y a) {a a' : A} {x : X a} {x' : X a'}
+  where
+
+  compute-ap-tot :
+    pair-eq-Σ ∘ ap (tot g) {a , x} {a' , x'} ~
+    tot (λ p q → inv (preserves-tr g p x) ∙ ap (g a') q) ∘ pair-eq-Σ
+  compute-ap-tot refl = refl
+```
+
+### Computing the action on identifications of the functorial action of Σ
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : A → UU l3} (Y : B → UU l4)
+  (f : A → B) (g : (a : A) → X a → Y (f a)) {a a' : A} {x : X a} {x' : X a'}
+  where
+
+  compute-ap-map-Σ :
+    pair-eq-Σ ∘ ap (map-Σ Y f g) ~
+    map-Σ
+      ( λ p → dependent-identification Y p (g a x) (g a' x'))
+      ( ap f {a} {a'})
+      ( λ p q → tr-ap f g p x ∙ ap (g a') q) ∘
+    pair-eq-Σ
+  compute-ap-map-Σ refl = refl
 ```
 
 ## See also
@@ -446,7 +592,6 @@ module _
   [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.md).
 - The universal property of dependent pair types is treated in
   [`foundation.universal-property-dependent-pair-types`](foundation.universal-property-dependent-pair-types.md).
-
 - Functorial properties of cartesian product types are recorded in
   [`foundation.functoriality-cartesian-product-types`](foundation.functoriality-cartesian-product-types.md).
 - Functorial properties of dependent product types are recorded in

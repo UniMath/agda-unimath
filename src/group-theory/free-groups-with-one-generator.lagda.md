@@ -13,12 +13,12 @@ open import elementary-number-theory.integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -81,14 +81,14 @@ module _
 
   hom-element-Group : hom-Group ℤ-Group G
   pr1 hom-element-Group = map-hom-element-Group
-  pr2 hom-element-Group = preserves-mul-map-hom-element-Group
+  pr2 hom-element-Group {x} {y} = preserves-mul-map-hom-element-Group x y
 
   htpy-hom-element-Group :
     (h : hom-Group ℤ-Group G) → map-hom-Group ℤ-Group G h one-ℤ ＝ g →
     htpy-hom-Group ℤ-Group G hom-element-Group h
   htpy-hom-element-Group h p =
     htpy-map-ℤ-Pointed-Type-With-Aut
-      ( pair (pointed-type-Group G) (equiv-mul-Group G g))
+      ( pointed-type-Group G , equiv-mul-Group G g)
       ( pair
         ( map-hom-Group ℤ-Group G h)
         ( pair
@@ -97,18 +97,16 @@ module _
             ( ap
               ( map-hom-Group ℤ-Group G h)
               ( is-left-add-one-succ-ℤ x)) ∙
-            ( ( preserves-mul-hom-Group ℤ-Group G h one-ℤ x) ∙
-              ( ap ( mul-Group' G (map-hom-Group ℤ-Group G h x)) p)))))
+            ( preserves-mul-hom-Group ℤ-Group G h) ∙
+            ( ap ( mul-Group' G (map-hom-Group ℤ-Group G h x)) p))))
 
-  is-contr-total-hom-element-Group :
-    is-contr
-      ( Σ ( hom-Group ℤ-Group G)
-          ( λ h → map-hom-Group ℤ-Group G h one-ℤ ＝ g))
-  pr1 (pr1 is-contr-total-hom-element-Group) =
+  is-torsorial-hom-element-Group :
+    is-torsorial (λ h → map-hom-Group ℤ-Group G h one-ℤ ＝ g)
+  pr1 (pr1 is-torsorial-hom-element-Group) =
     hom-element-Group
-  pr2 (pr1 is-contr-total-hom-element-Group) =
+  pr2 (pr1 is-torsorial-hom-element-Group) =
     right-unit-law-mul-Group G g
-  pr2 is-contr-total-hom-element-Group (pair h p) =
+  pr2 is-torsorial-hom-element-Group (h , p) =
     eq-type-subtype
       ( λ f → Id-Prop (set-Group G) (map-hom-Group ℤ-Group G f one-ℤ) g)
       ( eq-htpy-hom-Group ℤ-Group G
@@ -118,5 +116,5 @@ abstract
   is-free-group-with-one-generator-ℤ :
     is-free-group-with-one-generator ℤ-Group one-ℤ
   is-free-group-with-one-generator-ℤ G =
-    is-equiv-is-contr-map (is-contr-total-hom-element-Group G)
+    is-equiv-is-contr-map (is-torsorial-hom-element-Group G)
 ```

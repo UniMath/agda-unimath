@@ -24,8 +24,11 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
+open import foundation.maps-in-subuniverses
+open import foundation.mere-equality
 open import foundation.propositional-truncations
-open import foundation.separated-types
+open import foundation.separated-types-subuniverses
+open import foundation.structured-equality-duality
 open import foundation.subuniverses
 open import foundation.surjective-maps
 open import foundation.truncated-maps
@@ -38,7 +41,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The **Regensburg extension** of the
+The
+{{#concept "Regensburg extension" Disambiguation="of the fundamental theorem of identity types" Agda=extended-fundamental-theorem-id}}
+of the
 [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md)
 asserts that for any [subuniverse](foundation.subuniverses.md) `P`, and any
 [pointed](structured-types.pointed-types.md)
@@ -50,7 +55,7 @@ asserts that for any [subuniverse](foundation.subuniverses.md) `P`, and any
    i.e., a family of maps with [fibers](foundation-core.fibers-of-maps.md) in
    `P`.
 2. The [total space](foundation.dependent-pair-types.md) `Σ A B` is
-   [`P`-separated](foundation.separated-types.md), i.e., its
+   [`P`-separated](foundation.separated-types-subuniverses.md), i.e., its
    [identity types](foundation-core.identity-types.md) are in `P`.
 
 In other words, the extended fundamental theorem of
@@ -75,53 +80,96 @@ this condition is equivalent to the condition that `Σ A B` is `P`-separated.
 
 This theorem was stated and proven for the first time during the
 [Interactions of Proof Assistants and Mathematics](https://itp-school-2023.github.io)
-summer school in Regensburg, 2023, as part of Egbert Rijke's tutorial on
-formalization in agda-unimath.
+summer school in Regensburg, 2023, as part of
+[Egbert Rijke](https://egbertrijke.github.io)'s tutorial on formalization in
+agda-unimath.
 
 ## Theorem
 
+### The extended fundamental theorem of identity types
+
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3)
+  {l1 l2 l3 : Level} (𝒫 : subuniverse (l1 ⊔ l2) l3)
   {A : UU l1} (a : A) {B : A → UU l2}
   where
 
   abstract
     forward-implication-extended-fundamental-theorem-id :
       is-0-connected A →
-      ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map P (f x)) →
-      is-separated P (Σ A B)
-    forward-implication-extended-fundamental-theorem-id H K (x , y) (x' , y') =
-      apply-universal-property-trunc-Prop
-        ( mere-eq-is-0-connected H a x)
-        ( P _)
-        ( λ where
-          refl →
-            is-in-subuniverse-equiv P
-              ( compute-fiber-map-out-of-identity-type
-                ( ind-Id a (λ u v → B u) y)
-                ( x')
-                ( y'))
-              ( K (ind-Id a (λ u v → B u) y) x' y'))
+      ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map 𝒫 (f x)) →
+      is-separated 𝒫 (Σ A B)
+    forward-implication-extended-fundamental-theorem-id H K =
+      forward-implication-subuniverse-equality-duality 𝒫
+        ( λ x f y b →
+          apply-universal-property-trunc-Prop
+            ( mere-eq-is-0-connected H a x)
+            ( 𝒫 (fiber (f y) b))
+            ( λ where refl → K f y b))
 
   abstract
     backward-implication-extended-fundamental-theorem-id :
-      is-separated P (Σ A B) →
-      (f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map P (f x)
-    backward-implication-extended-fundamental-theorem-id K f x y =
-      is-in-subuniverse-equiv' P
-        ( compute-fiber-map-out-of-identity-type f x y)
-        ( K (a , f a refl) (x , y))
+      is-separated 𝒫 (Σ A B) →
+      (f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map 𝒫 (f x)
+    backward-implication-extended-fundamental-theorem-id K =
+      backward-implication-subuniverse-equality-duality 𝒫 K a
 
-  abstract
-    extended-fundamental-theorem-id :
-      is-0-connected A →
-      ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map P (f x)) ↔
-      is-separated P (Σ A B)
-    pr1 (extended-fundamental-theorem-id H) =
-      forward-implication-extended-fundamental-theorem-id H
-    pr2 (extended-fundamental-theorem-id H) =
-      backward-implication-extended-fundamental-theorem-id
+  extended-fundamental-theorem-id :
+    is-0-connected A →
+    ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map 𝒫 (f x)) ↔
+    is-separated 𝒫 (Σ A B)
+  extended-fundamental-theorem-id H =
+    ( forward-implication-extended-fundamental-theorem-id H ,
+    backward-implication-extended-fundamental-theorem-id)
+```
+
+### The unbased extended fundamental theorem of identity types
+
+We give a similar characterization for a binary family of types `B : A → A → 𝒰`
+over a not necessarily pointed or inhabited type `A` whose elements are all
+merely equal. In other words, `A` is any π₀-trivial type. The characterization
+asserts that the following are equivalent:
+
+1. For every `x : A`, every family of maps out of the identity types
+   `f : (y : A) → (x ＝ y) → B x y`, is a family of `𝒫`-maps.
+2. For every `x : A` the type `Σ A (B x)` is `𝒫`-separated.
+
+This unbased extension of the fundamental theorem was not stated or proved at
+the Regensburg summer school, but was later contributed by
+[Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke) in January 2025.
+
+```agda
+module _
+  {l1 l2 l3 : Level} (𝒫 : subuniverse (l1 ⊔ l2) l3)
+  {A : UU l1} {B : A → A → UU l2}
+  where
+
+  forward-implication-extended-fundamental-theorem-unbased-id :
+    ( (x y : A) → mere-eq x y) →
+    ( (x : A) (f : (y : A) → (x ＝ y) → B x y)
+      (y : A) → is-in-subuniverse-map 𝒫 (f y)) →
+    ( (x : A) → is-separated 𝒫 (Σ A (B x)))
+  forward-implication-extended-fundamental-theorem-unbased-id H K x =
+    forward-implication-extended-fundamental-theorem-id 𝒫
+      ( x)
+      ( is-0-connected-mere-eq x (H x))
+      ( K x)
+
+  backward-implication-extended-fundamental-theorem-unbased-id :
+    ( (x : A) → is-separated 𝒫 (Σ A (B x))) →
+    ( (x : A) (f : (y : A) → (x ＝ y) → B x y)
+      (y : A) → is-in-subuniverse-map 𝒫 (f y))
+  backward-implication-extended-fundamental-theorem-unbased-id K x =
+    backward-implication-extended-fundamental-theorem-id 𝒫 x (K x)
+
+  extended-fundamental-theorem-unbased-id :
+    ( (x y : A) → mere-eq x y) →
+    ( (x : A) (f : (y : A) → (x ＝ y) → B x y)
+      (y : A) → is-in-subuniverse-map 𝒫 (f y)) ↔
+    ( (x : A) → is-separated 𝒫 (Σ A (B x)))
+  extended-fundamental-theorem-unbased-id H =
+    ( forward-implication-extended-fundamental-theorem-unbased-id H ,
+      backward-implication-extended-fundamental-theorem-unbased-id)
 ```
 
 ## Corollaries
@@ -170,13 +218,14 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (k : 𝕋)
-  {A : UU l1} (a : A) {B : A → UU l2} (H : is-0-connected A)
+  {A : UU l1} (a : A) {B : A → UU l2}
   where
 
   forward-implication-extended-fundamental-theorem-id-connected :
+    is-0-connected A →
     ( (f : (x : A) → (a ＝ x) → B x) → (x : A) → is-connected-map k (f x)) →
     is-inhabited (B a) → is-connected (succ-𝕋 k) (Σ A B)
-  forward-implication-extended-fundamental-theorem-id-connected K L =
+  forward-implication-extended-fundamental-theorem-id-connected H K L =
     is-connected-succ-is-connected-eq
       ( map-trunc-Prop (fiber-inclusion B a) L)
       ( forward-implication-extended-fundamental-theorem-id
@@ -199,7 +248,7 @@ module _
     ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-connected-map k (f x)) ↔
     is-connected (succ-𝕋 k) (Σ A B)
   pr1 (extended-fundamental-theorem-id-connected H K) L =
-    forward-implication-extended-fundamental-theorem-id-connected L K
+    forward-implication-extended-fundamental-theorem-id-connected H L K
   pr2 (extended-fundamental-theorem-id-connected H K) =
     backward-implication-extended-fundamental-theorem-id-connected
 ```
@@ -215,11 +264,10 @@ module _
     is-0-connected A →
     ((f : (x : A) → (a ＝ x) → B x) → (x : A) → is-trunc-map k (f x)) →
     is-trunc (succ-𝕋 k) (Σ A B)
-  forward-implication-extended-fundamental-theorem-id-truncated H =
+  forward-implication-extended-fundamental-theorem-id-truncated =
     forward-implication-extended-fundamental-theorem-id
       ( is-trunc-Prop k)
       ( a)
-      ( H)
 
   backward-implication-extended-fundamental-theorem-id-truncated :
     is-trunc (succ-𝕋 k) (Σ A B) →
@@ -255,8 +303,9 @@ files:
 
 ## References
 
-- Two special cases of the extended fundamental theorem of identity types are
-  stated in the Introduction to Homotopy Type Theory textbook by Egbert Rijke:
-  The case where `P` is the subuniverse of `k`-truncated types is stated as
-  Theorem 19.6.2; and the case where `P` is the subuniverse of inhabited types
-  is stated as Exercise 19.14.
+Two special cases of the extended fundamental theorem of identity types are
+stated in {{#cite Rij22}}: The case where `P` is the subuniverse of
+`k`-truncated types is stated as Theorem 19.6.2; and the case where `P` is the
+subuniverse of inhabited types is stated as Exercise 19.14.
+
+{{#bibliography}}

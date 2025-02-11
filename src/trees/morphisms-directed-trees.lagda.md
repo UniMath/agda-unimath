@@ -17,6 +17,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
@@ -31,8 +32,8 @@ open import trees.directed-trees
 
 ## Idea
 
-A **morphism of directed trees** from `S` to `T` is simply a morphism between
-their underlying directed graphs.
+A **morphism of directed trees** from `S` to `T` is a morphism between their
+underlying directed graphs.
 
 ## Definitions
 
@@ -227,10 +228,10 @@ module _
   (f : hom-Directed-Tree S T)
   where
 
-  is-contr-total-htpy-hom-Directed-Tree :
-    is-contr (Σ (hom-Directed-Tree S T) (htpy-hom-Directed-Tree S T f))
-  is-contr-total-htpy-hom-Directed-Tree =
-    is-contr-total-htpy-hom-Directed-Graph
+  is-torsorial-htpy-hom-Directed-Tree :
+    is-torsorial (htpy-hom-Directed-Tree S T f)
+  is-torsorial-htpy-hom-Directed-Tree =
+    is-torsorial-htpy-hom-Directed-Graph
       ( graph-Directed-Tree S)
       ( graph-Directed-Tree T)
       ( f)
@@ -281,7 +282,7 @@ module _
     is-root-Directed-Tree T (node-hom-Directed-Tree S T f x) →
     is-root-Directed-Tree S x
   is-root-is-root-node-hom-Directed-Tree x H =
-    map-right-unit-law-coprod-is-empty
+    map-right-unit-law-coproduct-is-empty
       ( is-root-Directed-Tree S x)
       ( Σ (node-Directed-Tree S) (edge-Directed-Tree S x))
       ( λ (y , e) →

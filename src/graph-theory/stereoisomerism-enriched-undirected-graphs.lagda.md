@@ -55,5 +55,5 @@ module _
 
 ## External links
 
-- [Stereoisomerism](https://www.wikidata.org/wiki/Q47455153) on Wikidata
+- [Stereoisomerism](https://www.wikidata.org/entity/Q47455153) on Wikidata
 - [Stereoisomerism](https://en.wikipedia.org/wiki/Stereoisomerism) at Wikipedia

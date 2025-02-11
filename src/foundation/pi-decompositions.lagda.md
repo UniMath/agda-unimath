@@ -15,16 +15,17 @@ open import foundation.equivalences
 open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.structure-identity-principle
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.whiskering-homotopies
+open import foundation-core.torsorial-type-families
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -306,34 +307,19 @@ module _
     id-map-equiv-Π (λ x → cotype-Π-Decomposition X x) ·r
     map-matching-correspondence-Π-Decomposition X
 
-  is-contr-total-equiv-Π-Decomposition :
-    is-contr
-      ( Σ ( Π-Decomposition l2 l3 A) (equiv-Π-Decomposition X))
-  is-contr-total-equiv-Π-Decomposition =
-    is-contr-total-Eq-structure
-      ( λ U Vf e →
-        Σ ( (x : indexing-type-Π-Decomposition X) →
-            cotype-Π-Decomposition X x ≃
-            (pr1 Vf (map-equiv e x)))
-          ( λ f →
-            ( ( map-equiv
-                ( equiv-Π (λ u → pr1 Vf u) e f)) ∘
-              ( map-matching-correspondence-Π-Decomposition X)) ~
-            ( map-equiv (pr2 Vf))))
-      ( is-contr-total-equiv (indexing-type-Π-Decomposition X))
+  is-torsorial-equiv-Π-Decomposition :
+    is-torsorial (equiv-Π-Decomposition X)
+  is-torsorial-equiv-Π-Decomposition =
+    is-torsorial-Eq-structure
+      ( is-torsorial-equiv (indexing-type-Π-Decomposition X))
       ( pair (indexing-type-Π-Decomposition X) id-equiv)
-      ( is-contr-total-Eq-structure
-        ( λ V g f →
-          ( ( map-equiv
-              ( equiv-Π (λ y → V y) id-equiv f)) ∘
-            ( map-matching-correspondence-Π-Decomposition X)) ~
-          ( map-equiv g))
-        ( is-contr-total-equiv-fam
+      ( is-torsorial-Eq-structure
+        ( is-torsorial-equiv-fam
           ( cotype-Π-Decomposition X))
         ( pair
           ( cotype-Π-Decomposition X)
           ( id-equiv-fam (cotype-Π-Decomposition X)))
-        ( is-contr-total-htpy-equiv
+        ( is-torsorial-htpy-equiv
           ( ( equiv-Π
               ( cotype-Π-Decomposition X)
               ( id-equiv)
@@ -350,7 +336,7 @@ module _
     is-equiv (equiv-eq-Π-Decomposition Y)
   is-equiv-equiv-eq-Π-Decomposition =
     fundamental-theorem-id
-      is-contr-total-equiv-Π-Decomposition
+      is-torsorial-equiv-Π-Decomposition
       equiv-eq-Π-Decomposition
 
   extensionality-Π-Decomposition :
@@ -448,38 +434,23 @@ module _
     X = fst-fibered-Π-Decomposition D
     Y = snd-fibered-Π-Decomposition D
 
-  is-contr-total-equiv-fibered-Π-Decomposition :
-    is-contr
-      ( Σ ( fibered-Π-Decomposition l2 l3 l4 l5 A)
-          ( equiv-fibered-Π-Decomposition D))
-  is-contr-total-equiv-fibered-Π-Decomposition =
-    is-contr-total-Eq-structure
-      ( λ X' Y' e →
-        equiv-snd-fibered-Π-Decomposition D (X' , Y') e)
-      ( is-contr-total-equiv-Π-Decomposition X)
+  is-torsorial-equiv-fibered-Π-Decomposition :
+    is-torsorial (equiv-fibered-Π-Decomposition D)
+  is-torsorial-equiv-fibered-Π-Decomposition =
+    is-torsorial-Eq-structure
+      ( is-torsorial-equiv-Π-Decomposition X)
       ( X , id-equiv-Π-Decomposition X)
-      ( is-contr-total-Eq-structure
-        ( λ U Vs e →
-          ( Σ ( ( u : indexing-type-Π-Decomposition Y) →
-                cotype-Π-Decomposition Y u ≃ pr1 Vs (map-equiv e u))
-              ( λ f →
-                ( ( ( map-equiv-Π (λ u → pr1 Vs u) e f) ∘
-                    ( map-matching-correspondence-Π-Decomposition Y)) ~
-                  ( map-equiv (pr2 Vs))))))
-        ( is-contr-total-equiv (indexing-type-Π-Decomposition Y))
+      ( is-torsorial-Eq-structure
+        ( is-torsorial-equiv (indexing-type-Π-Decomposition Y))
         ( pair (indexing-type-Π-Decomposition Y) id-equiv)
-        ( is-contr-total-Eq-structure
-          ( λ V f g →
-            ( ( map-equiv-Π (λ u → V u) id-equiv g) ∘
-              ( map-matching-correspondence-Π-Decomposition Y)) ~
-              ( pr1 f))
-          ( is-contr-total-equiv-fam
+        ( is-torsorial-Eq-structure
+          ( is-torsorial-equiv-fam
             ( cotype-Π-Decomposition Y))
           ( pair
             ( cotype-Π-Decomposition Y)
             ( id-equiv-fam
               ( cotype-Π-Decomposition Y)))
-            ( is-contr-total-htpy-equiv
+            ( is-torsorial-htpy-equiv
               ( ( equiv-Π
                   ( cotype-Π-Decomposition Y)
                   ( id-equiv)
@@ -507,7 +478,7 @@ module _
     is-equiv (equiv-eq-fibered-Π-Decomposition D')
   is-equiv-equiv-eq-fibered-Π-Decomposition =
     fundamental-theorem-id
-      is-contr-total-equiv-fibered-Π-Decomposition
+      is-torsorial-equiv-fibered-Π-Decomposition
       equiv-eq-fibered-Π-Decomposition
 
   extensionality-fibered-Π-Decomposition :
@@ -587,23 +558,17 @@ module _
     X = fst-displayed-Π-Decomposition disp-D
     f-Y = snd-displayed-Π-Decomposition disp-D
 
-  is-contr-total-equiv-displayed-Π-Decomposition :
-    is-contr
-      ( Σ ( displayed-Π-Decomposition l2 l3 l4 l5 A)
-          ( equiv-displayed-Π-Decomposition disp-D))
-  is-contr-total-equiv-displayed-Π-Decomposition =
-    is-contr-total-Eq-structure
-      ( λ X' f-Y' e → equiv-snd-displayed-Π-Decomposition
-        ( disp-D)
-        ( pair X' f-Y')
-        ( e))
-      ( is-contr-total-equiv-Π-Decomposition X)
+  is-torsorial-equiv-displayed-Π-Decomposition :
+    is-torsorial (equiv-displayed-Π-Decomposition disp-D)
+  is-torsorial-equiv-displayed-Π-Decomposition =
+    is-torsorial-Eq-structure
+      ( is-torsorial-equiv-Π-Decomposition X)
       ( pair X (id-equiv-Π-Decomposition X))
       ( is-contr-equiv
         ( Π-total-fam (λ x → _))
         ( inv-distributive-Π-Σ)
         ( is-contr-Π
-          ( λ x → is-contr-total-equiv-Π-Decomposition (f-Y x))))
+          ( λ x → is-torsorial-equiv-Π-Decomposition (f-Y x))))
 
   id-equiv-displayed-Π-Decomposition :
     equiv-displayed-Π-Decomposition disp-D disp-D
@@ -627,7 +592,7 @@ module _
     is-equiv (equiv-eq-displayed-Π-Decomposition disp-D')
   is-equiv-equiv-eq-displayed-Π-Decomposition =
     fundamental-theorem-id
-      is-contr-total-equiv-displayed-Π-Decomposition
+      is-torsorial-equiv-displayed-Π-Decomposition
       equiv-eq-displayed-Π-Decomposition
 
   extensionality-displayed-Π-Decomposition :

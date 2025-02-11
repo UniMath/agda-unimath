@@ -227,8 +227,6 @@ module _
       ( product-subset-Commutative-Ring A S T)
       ( is-closed-under-addition-ideal-subset-Commutative-Ring A
         ( product-subset-Commutative-Ring A S T)
-        ( _)
-        ( _)
         ( is-closed-under-eq-ideal-subset-Commutative-Ring' A
           ( product-subset-Commutative-Ring A S T)
           ( is-closed-under-right-multiplication-ideal-Commutative-Ring A
@@ -276,8 +274,6 @@ module _
       ( product-subset-Commutative-Ring A S T)
       ( is-closed-under-addition-ideal-subset-Commutative-Ring A
         ( product-subset-Commutative-Ring A S T)
-        ( _)
-        ( _)
         ( is-closed-under-eq-ideal-subset-Commutative-Ring' A
           ( product-subset-Commutative-Ring A S T)
           ( is-closed-under-right-multiplication-ideal-Commutative-Ring A
@@ -329,14 +325,8 @@ module _
       ( product-subset-Commutative-Ring A S T)
       ( is-closed-under-addition-ideal-subset-Commutative-Ring A
         ( product-subset-Commutative-Ring A S T)
-        ( add-Commutative-Ring A _ _)
-        ( add-Commutative-Ring A _ _)
         ( is-closed-under-addition-ideal-subset-Commutative-Ring A
           ( product-subset-Commutative-Ring A S T)
-          ( mul-Commutative-Ring A _ _)
-          ( mul-Commutative-Ring A
-            ( mul-Commutative-Ring A _ _)
-            ( ev-formal-combination-subset-Commutative-Ring A T l))
           ( is-closed-under-eq-ideal-subset-Commutative-Ring' A
             ( product-subset-Commutative-Ring A S T)
             ( is-closed-under-right-multiplication-ideal-Commutative-Ring A
@@ -361,8 +351,6 @@ module _
             Hs l))
         ( is-closed-under-addition-ideal-subset-Commutative-Ring A
           ( product-subset-Commutative-Ring A S T)
-          ( _)
-          ( _)
           ( right-backward-inclusion-preserves-product-ideal-subset-Commutative-Ring
             Ht k)
           ( backward-inclusion-preserves-product-ideal-subset-Commutative-Ring'

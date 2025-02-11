@@ -11,7 +11,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.intersections-subtypes
 open import foundation.logical-equivalences
@@ -105,9 +104,9 @@ module _
 
   is-closed-under-multiplication-normal-core-Subgroup :
     is-closed-under-multiplication-subset-Group G subset-normal-core-Subgroup
-  pr1 (is-closed-under-multiplication-normal-core-Subgroup x y u v z) =
+  pr1 (is-closed-under-multiplication-normal-core-Subgroup u v z) =
     mul-Subgroup G H (pr1 (u z)) (pr1 (v z))
-  pr2 (is-closed-under-multiplication-normal-core-Subgroup x y u v z) =
+  pr2 (is-closed-under-multiplication-normal-core-Subgroup u v z) =
     ( distributive-conjugation-mul-Group G z
       ( inclusion-Subgroup G H (pr1 (u z)))
       ( inclusion-Subgroup G H (pr1 (v z)))) ∙
@@ -115,9 +114,9 @@ module _
 
   is-closed-under-inverses-normal-core-Subgroup :
     is-closed-under-inverses-subset-Group G subset-normal-core-Subgroup
-  pr1 (is-closed-under-inverses-normal-core-Subgroup x u z) =
+  pr1 (is-closed-under-inverses-normal-core-Subgroup u z) =
     inv-Subgroup G H (pr1 (u z))
-  pr2 (is-closed-under-inverses-normal-core-Subgroup x u z) =
+  pr2 (is-closed-under-inverses-normal-core-Subgroup u z) =
     ( conjugation-inv-Group G z (inclusion-Subgroup G H (pr1 (u z)))) ∙
     ( ap (inv-Group G) (pr2 (u z)))
 
@@ -213,7 +212,7 @@ module _
         ( is-contained-in-subgroup-normal-core-Subgroup G H))
 
   normal-core-subgroup-hom-Large-Poset :
-    hom-set-Large-Poset
+    hom-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( Subgroup-Large-Poset G)
       ( Normal-Subgroup-Large-Poset G)
@@ -224,7 +223,7 @@ module _
 
   normal-core-subgroup-Galois-Connection :
     galois-connection-Large-Poset
-      ( id)
+      ( λ l → l)
       ( λ l2 → l1 ⊔ l2)
       ( Normal-Subgroup-Large-Poset G)
       ( Subgroup-Large-Poset G)

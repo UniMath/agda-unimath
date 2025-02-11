@@ -11,27 +11,29 @@ open import foundation-core.functoriality-dependent-function-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
+open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.commuting-squares-of-maps
-open import foundation-core.constant-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
+open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositional-maps
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -101,15 +103,8 @@ module _
             ( f (map-inv-equiv e (map-equiv e a')))
             ( h (map-inv-equiv e (map-equiv e a')))))
       ( coherence-map-inv-equiv e a')) ∙
-    ( ( tr-ap
-        ( map-equiv e)
-        ( λ _ → id)
-        ( is-retraction-map-inv-equiv e a')
-        ( map-equiv
-          ( f (map-inv-equiv e (map-equiv e a')))
-          ( h (map-inv-equiv e (map-equiv e a'))))) ∙
-      ( α ( map-inv-equiv e (map-equiv e a'))
-          ( is-retraction-map-inv-equiv e a')))
+    ( substitution-law-tr B (map-equiv e) (is-retraction-map-inv-equiv e a')) ∙
+    ( α (map-inv-equiv e (map-equiv e a')) (is-retraction-map-inv-equiv e a'))
     where
     α :
       (x : A') (p : x ＝ a') →
@@ -126,59 +121,44 @@ id-map-equiv-Π B h = eq-htpy (compute-map-equiv-Π B id-equiv (λ _ → id-equi
 
 ```agda
 module _
-  { l1 l2 l3 : Level} {A : UU l1}
+  {l1 l2 l3 : Level} {A : UU l1}
   where
 
-  equiv-htpy-Π-precomp-htpy :
-    { B : UU l2} {C : B → UU l3} →
-    ( f g : (b : B) → C b) (e : A ≃ B) →
-    ( (f ∘ map-equiv e) ~ (g ∘ map-equiv e)) ≃
-    ( f ~ g)
-  equiv-htpy-Π-precomp-htpy f g e =
-    equiv-Π
-      ( eq-value f g)
-      ( e)
-      ( λ a → id-equiv)
-
-  equiv-htpy-Π-postcomp-htpy :
-    { B : A → UU l2} { C : UU l3} →
-    ( e : (a : A) → B a ≃ C) (f g : (a : A) → B a) →
-    ( f ~ g) ≃
-    ( (a : A) → ( map-equiv (e a) (f a) ＝ map-equiv (e a) (g a)))
-  equiv-htpy-Π-postcomp-htpy e f g =
+  equiv-htpy-map-Π-fam-equiv :
+    { B : A → UU l2} {C : A → UU l3} →
+    ( e : fam-equiv B C) (f g : (a : A) → B a) →
+    ( f ~ g) ≃ (map-Π (map-fam-equiv e) f ~ map-Π (map-fam-equiv e) g)
+  equiv-htpy-map-Π-fam-equiv e f g =
     equiv-Π-equiv-family
       ( λ a → equiv-ap (e a) (f a) (g a))
 ```
 
-### Truncated families of maps induce truncated maps on dependent function types
+### Families of truncated maps induce truncated maps on dependent function types
 
 ```agda
-abstract
-  is-trunc-map-map-Π :
-    (k : 𝕋) {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-    (f : (i : I) → A i → B i) →
-    ((i : I) → is-trunc-map k (f i)) → is-trunc-map k (map-Π f)
-  is-trunc-map-map-Π k {I = I} f H h =
-    is-trunc-equiv' k
-      ( (i : I) → fiber (f i) (h i))
-      ( compute-fiber-map-Π f h)
-      ( is-trunc-Π k (λ i → H i (h i)))
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  where
 
-abstract
-  is-emb-map-Π :
-    {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-    {f : (i : I) → A i → B i} →
-    ((i : I) → is-emb (f i)) → is-emb (map-Π f)
-  is-emb-map-Π {f = f} H =
-    is-emb-is-prop-map
-      ( is-trunc-map-map-Π neg-one-𝕋 f
-        ( λ i → is-prop-map-is-emb (H i)))
+  abstract
+    is-trunc-map-map-Π :
+      (k : 𝕋) (f : (i : I) → A i → B i) →
+      ((i : I) → is-trunc-map k (f i)) → is-trunc-map k (map-Π f)
+    is-trunc-map-map-Π k f H h =
+      is-trunc-equiv' k
+        ( (i : I) → fiber (f i) (h i))
+        ( compute-fiber-map-Π f h)
+        ( is-trunc-Π k (λ i → H i (h i)))
 
-emb-Π :
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3} →
-  ((i : I) → A i ↪ B i) → ((i : I) → A i) ↪ ((i : I) → B i)
-pr1 (emb-Π f) = map-Π (λ i → map-emb (f i))
-pr2 (emb-Π f) = is-emb-map-Π (λ i → is-emb-map-emb (f i))
+  abstract
+    is-emb-map-Π :
+      {f : (i : I) → A i → B i} → ((i : I) → is-emb (f i)) → is-emb (map-Π f)
+    is-emb-map-Π {f} H =
+      is-emb-is-prop-map
+        ( is-trunc-map-map-Π neg-one-𝕋 f (λ i → is-prop-map-is-emb (H i)))
+
+  emb-Π : ((i : I) → A i ↪ B i) → ((i : I) → A i) ↪ ((i : I) → B i)
+  emb-Π f = (map-Π (map-emb ∘ f) , is-emb-map-Π (is-emb-map-emb ∘ f))
 ```
 
 ### A family of truncated maps over any map induces a truncated map on dependent function types
@@ -201,15 +181,15 @@ is-trunc-map-is-trunc-map-map-Π' :
   (i : I) → is-trunc-map k (f i)
 is-trunc-map-is-trunc-map-map-Π' k {A = A} {B} f H i b =
   is-trunc-equiv' k
-    ( fiber (map-Π (λ (x : unit) → f i)) (const unit (B i) b))
+    ( fiber (map-Π (λ _ → f i)) (point b))
     ( equiv-Σ
       ( λ a → f i a ＝ b)
       ( equiv-universal-property-unit (A i))
       ( λ h → equiv-ap
         ( equiv-universal-property-unit (B i))
-        ( map-Π (λ x → f i) h)
-        ( const unit (B i) b)))
-    ( H (λ x → i) (const unit (B i) b))
+        ( map-Π (λ _ → f i) h)
+        ( point b)))
+    ( H (λ _ → i) (point b))
 
 is-emb-map-Π-is-emb' :
   {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3} →
@@ -298,36 +278,19 @@ pr1 (automorphism-Π e f) = map-automorphism-Π e f
 pr2 (automorphism-Π e f) = is-equiv-map-automorphism-Π e f
 ```
 
-### Precomposing functions `Π B C` by `f : A → B` is `k+1`-truncated if and only if precomposing homotopies is `k`-truncated
+### Families of retracts induce retracts of dependent function types
 
 ```agda
-coherence-square-ap-precomp-Π :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {C : B → UU l3}
-  (g h : (b : B) → C b) →
-  coherence-square-maps
-    ( ap (precomp-Π f C) {g} {h})
-    ( htpy-eq)
-    ( htpy-eq)
-    ( precomp-Π f (eq-value g h))
-coherence-square-ap-precomp-Π f g .g refl = refl
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  where
 
-is-trunc-map-succ-precomp-Π :
-  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
-  {C : B → UU l3} →
-  ((g h : (b : B) → C b) → is-trunc-map k (precomp-Π f (eq-value g h))) →
-  is-trunc-map (succ-𝕋 k) (precomp-Π f C)
-is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
-  is-trunc-map-is-trunc-map-ap k (precomp-Π f C)
-    ( λ g h →
-      is-trunc-map-top-is-trunc-map-bottom-is-equiv k
-        ( ap (precomp-Π f C))
-        ( htpy-eq)
-        ( htpy-eq)
-        ( precomp-Π f (eq-value g h))
-        ( coherence-square-ap-precomp-Π f g h)
-        ( funext g h)
-        ( funext (g ∘ f) (h ∘ f))
-        ( H g h))
+  retract-Π-retract-family :
+    (r : (i : I) → A i retract-of B i) →
+    ((i : I) → A i) retract-of ((i : I) → B i)
+  retract-Π-retract-family r =
+    ( map-Π (inclusion-retract ∘ r) ,
+      retraction-map-Π-fiberwise-retraction (retraction-retract ∘ r))
 ```
 
 ## See also
@@ -336,7 +299,6 @@ is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
   [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.md).
 - Equality proofs in dependent function types are characterized in
   [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.md).
-
 - Functorial properties of function types are recorded in
   [`foundation.functoriality-function-types`](foundation.functoriality-function-types.md).
 - Functorial properties of dependent pair types are recorded in

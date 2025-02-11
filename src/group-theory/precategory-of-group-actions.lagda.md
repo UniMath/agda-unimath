@@ -10,7 +10,6 @@ module group-theory.precategory-of-group-actions where
 open import category-theory.large-precategories
 open import category-theory.precategories
 
-open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.group-actions
@@ -20,60 +19,45 @@ open import group-theory.homomorphisms-group-actions
 
 </details>
 
+## Idea
+
+The [large precategory](category-theory.large-precategories.md) of
+[group actions](group-theory.group-actions.md) consists of group actions and
+[morphisms of group actions](group-theory.homomorphisms-group-actions.md)
+between them.
+
 ## Definitions
 
-### The large precategory of G-sets
+### The large precategory of `G`-sets
 
 ```agda
 module _
   {l1 : Level} (G : Group l1)
   where
 
-  Abstract-Group-Action-Large-Precategory :
+  action-Group-Large-Precategory :
     Large-Precategory (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
-  obj-Large-Precategory
-    Abstract-Group-Action-Large-Precategory =
-    Abstract-Group-Action G
-  hom-set-Large-Precategory
-    Abstract-Group-Action-Large-Precategory =
-    hom-set-Abstract-Group-Action G
-  comp-hom-Large-Precategory
-    Abstract-Group-Action-Large-Precategory {X = X} {Y} {Z} =
-    comp-hom-Abstract-Group-Action G X Y Z
-  id-hom-Large-Precategory
-    Abstract-Group-Action-Large-Precategory {X = X} =
-    id-hom-Abstract-Group-Action G X
-  associative-comp-hom-Large-Precategory
-    Abstract-Group-Action-Large-Precategory {X = X} {Y} {Z} {W} =
-    associative-comp-hom-Abstract-Group-Action G X Y Z W
-  left-unit-law-comp-hom-Large-Precategory
-    Abstract-Group-Action-Large-Precategory {X = X} {Y} =
-    left-unit-law-comp-hom-Abstract-Group-Action G X Y
-  right-unit-law-comp-hom-Large-Precategory
-    Abstract-Group-Action-Large-Precategory {X = X} {Y} =
-    right-unit-law-comp-hom-Abstract-Group-Action G X Y
+  action-Group-Large-Precategory =
+    make-Large-Precategory
+      ( action-Group G)
+      ( hom-set-action-Group G)
+      ( λ {l1} {l2} {l3} {X} {Y} {Z} → comp-hom-action-Group G X Y Z)
+      ( λ {l1} {X} → id-hom-action-Group G X)
+      ( λ {l1} {l2} {l3} {l4} {X} {Y} {Z} {W} →
+        associative-comp-hom-action-Group G X Y Z W)
+      ( λ {l1} {l2} {X} {Y} → left-unit-law-comp-hom-action-Group G X Y)
+      ( λ {l1} {l2} {X} {Y} → right-unit-law-comp-hom-action-Group G X Y)
 ```
 
-### The small precategory of G-sets
+### The small precategory of `G`-sets
 
 ```agda
 module _
   {l1 : Level} (G : Group l1)
   where
 
-  Abstract-Group-Action-Precategory :
+  action-Group-Precategory :
     (l2 : Level) → Precategory (l1 ⊔ lsuc l2) (l1 ⊔ l2)
-  pr1 (Abstract-Group-Action-Precategory l2) = Abstract-Group-Action G l2
-  pr1 (pr2 (Abstract-Group-Action-Precategory l2)) =
-    hom-set-Abstract-Group-Action G
-  pr1 (pr1 (pr2 (pr2 (Abstract-Group-Action-Precategory l2)))) {X} {Y} {Z} =
-    comp-hom-Abstract-Group-Action G X Y Z
-  pr2 (pr1 (pr2 (pr2 (Abstract-Group-Action-Precategory l2)))) {X} {Y} {Z} {W} =
-    associative-comp-hom-Abstract-Group-Action G X Y Z W
-  pr1 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precategory l2)))) =
-    id-hom-Abstract-Group-Action G
-  pr1 (pr2 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precategory l2))))) {X} {Y} =
-    left-unit-law-comp-hom-Abstract-Group-Action G X Y
-  pr2 (pr2 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precategory l2))))) {X} {Y} =
-    right-unit-law-comp-hom-Abstract-Group-Action G X Y
+  action-Group-Precategory =
+    precategory-Large-Precategory (action-Group-Large-Precategory G)
 ```

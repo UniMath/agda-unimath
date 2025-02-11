@@ -15,7 +15,7 @@ open import foundation.universe-levels
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types
+open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams
 open import synthetic-homotopy-theory.pushouts
 ```
 
@@ -23,8 +23,9 @@ open import synthetic-homotopy-theory.pushouts
 
 ## Idea
 
-Given a span of pointed maps, then the pushout is in fact a pushout diagram in
-the category of pointed types.
+Given a span of [pointed maps](structured-types.pointed-maps.md), then the
+[pushout](synthetic-homotopy-theory.pushouts.md) is in fact a pushout diagram in
+the (wild) category of [pointed types](structured-types.pointed-types.md).
 
 ## Definition
 
@@ -91,26 +92,65 @@ module _
     {l4 : Level}
     (f : S →∗ A) (g : S →∗ B) →
     {X : Pointed-Type l4} →
-    type-cocone-Pointed-Type f g X →
+    cocone-Pointed-Type f g X →
     type-Pointed-Type (pushout-Pointed-Type f g) → type-Pointed-Type X
   map-cogap-Pointed-Type f g c =
     cogap
       ( map-pointed-map f)
       ( map-pointed-map g)
-      ( cocone-type-cocone-Pointed-Type f g c)
+      ( cocone-cocone-Pointed-Type f g c)
 
   cogap-Pointed-Type :
     {l4 : Level}
     (f : S →∗ A) (g : S →∗ B) →
     {X : Pointed-Type l4} →
-    type-cocone-Pointed-Type f g X → pushout-Pointed-Type f g →∗ X
+    cocone-Pointed-Type f g X → pushout-Pointed-Type f g →∗ X
   pr1 (cogap-Pointed-Type f g c) = map-cogap-Pointed-Type f g c
   pr2 (cogap-Pointed-Type f g {X} c) =
     ( compute-inl-cogap
       ( map-pointed-map f)
       ( map-pointed-map g)
-      ( cocone-type-cocone-Pointed-Type f g c)
+      ( cocone-cocone-Pointed-Type f g c)
       ( point-Pointed-Type A)) ∙
     ( preserves-point-pointed-map
       ( horizontal-pointed-map-cocone-Pointed-Type f g c))
+```
+
+### Computation with the cogap map for pointed types
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level}
+  {S : Pointed-Type l1} {A : Pointed-Type l2} {B : Pointed-Type l3}
+  ( f : S →∗ A) (g : S →∗ B)
+  { X : Pointed-Type l4} (c : cocone-Pointed-Type f g X)
+  where
+
+  compute-inl-cogap-Pointed-Type :
+    ( x : type-Pointed-Type A) →
+    ( map-cogap-Pointed-Type
+      ( f)
+      ( g)
+      ( c)
+      ( map-pointed-map (inl-pushout-Pointed-Type f g) x)) ＝
+    ( horizontal-map-cocone-Pointed-Type f g c x)
+  compute-inl-cogap-Pointed-Type =
+    compute-inl-cogap
+      ( map-pointed-map f)
+      ( map-pointed-map g)
+      ( cocone-cocone-Pointed-Type f g c)
+
+  compute-inr-cogap-Pointed-Type :
+    ( y : type-Pointed-Type B) →
+    ( map-cogap-Pointed-Type
+      ( f)
+      ( g)
+      ( c)
+      ( map-pointed-map (inr-pushout-Pointed-Type f g) y)) ＝
+    ( vertical-map-cocone-Pointed-Type f g c y)
+  compute-inr-cogap-Pointed-Type =
+    compute-inr-cogap
+      ( map-pointed-map f)
+      ( map-pointed-map g)
+      ( cocone-cocone-Pointed-Type f g c)
 ```

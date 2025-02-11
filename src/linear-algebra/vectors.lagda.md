@@ -14,6 +14,7 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -26,6 +27,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-higher-homotopies-composition
 
 open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -49,7 +51,7 @@ infixr 10 _∷_
 
 data vec {l : Level} (A : UU l) : ℕ → UU l where
   empty-vec : vec A zero-ℕ
-  _∷_ : ∀ {n} → A → vec A n → vec A (succ-ℕ n)
+  _∷_ : {n : ℕ} → A → vec A n → vec A (succ-ℕ n)
 
 module _
   {l : Level} {A : UU l}
@@ -178,7 +180,7 @@ module _
     (p : u ＝ v) → eq-Eq-vec n u v (Eq-eq-vec n u v p) ＝ p
   is-retraction-eq-Eq-vec zero-ℕ empty-vec empty-vec refl = refl
   is-retraction-eq-Eq-vec (succ-ℕ n) (x ∷ xs) .(x ∷ xs) refl =
-    ap (ap (x ∷_)) (is-retraction-eq-Eq-vec n xs xs refl)
+    left-whisker-comp² (x ∷_) (is-retraction-eq-Eq-vec n xs xs) refl
 
   square-Eq-eq-vec :
     (n : ℕ) (x : A) (u v : vec A n) (p : Id u v) →
@@ -192,7 +194,7 @@ module _
   is-section-eq-Eq-vec zero-ℕ empty-vec empty-vec (map-raise star) = refl
   is-section-eq-Eq-vec (succ-ℕ n) (x ∷ xs) (.x ∷ ys) (refl , ps) =
     ( square-Eq-eq-vec n x xs ys (eq-Eq-vec n xs ys ps)) ∙
-    ( ap (pair refl) (is-section-eq-Eq-vec n xs ys ps))
+    ( eq-pair-eq-fiber (is-section-eq-Eq-vec n xs ys ps))
 
   is-equiv-Eq-eq-vec :
     (n : ℕ) → (u v : vec A n) → is-equiv (Eq-eq-vec n u v)
@@ -300,7 +302,7 @@ module _
   is-trunc-Eq-vec k zero-ℕ A-trunc empty-vec empty-vec =
     is-trunc-is-contr k is-contr-raise-unit
   is-trunc-Eq-vec k (succ-ℕ n) A-trunc (x ∷ xs) (y ∷ ys) =
-    is-trunc-prod k (A-trunc x y) (is-trunc-Eq-vec k n A-trunc xs ys)
+    is-trunc-product k (A-trunc x y) (is-trunc-Eq-vec k n A-trunc xs ys)
 
   center-is-contr-vec :
     {n : ℕ} → is-contr A → vec A n

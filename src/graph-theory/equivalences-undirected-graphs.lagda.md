@@ -20,6 +20,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
@@ -57,30 +58,30 @@ module _
         edge-Undirected-Graph G p ≃
         edge-Undirected-Graph H (map-equiv-unordered-pair f p))
 
-  equiv-vertex-equiv-Undirected-Graph :
+  vertex-equiv-equiv-Undirected-Graph :
     equiv-Undirected-Graph →
     vertex-Undirected-Graph G ≃ vertex-Undirected-Graph H
-  equiv-vertex-equiv-Undirected-Graph f = pr1 f
+  vertex-equiv-equiv-Undirected-Graph f = pr1 f
 
   vertex-equiv-Undirected-Graph :
     equiv-Undirected-Graph →
     vertex-Undirected-Graph G → vertex-Undirected-Graph H
   vertex-equiv-Undirected-Graph f =
-    map-equiv (equiv-vertex-equiv-Undirected-Graph f)
+    map-equiv (vertex-equiv-equiv-Undirected-Graph f)
 
   equiv-unordered-pair-vertices-equiv-Undirected-Graph :
     equiv-Undirected-Graph →
     unordered-pair-vertices-Undirected-Graph G ≃
     unordered-pair-vertices-Undirected-Graph H
   equiv-unordered-pair-vertices-equiv-Undirected-Graph f =
-    equiv-unordered-pair (equiv-vertex-equiv-Undirected-Graph f)
+    equiv-unordered-pair (vertex-equiv-equiv-Undirected-Graph f)
 
   unordered-pair-vertices-equiv-Undirected-Graph :
     equiv-Undirected-Graph →
     unordered-pair-vertices-Undirected-Graph G →
     unordered-pair-vertices-Undirected-Graph H
   unordered-pair-vertices-equiv-Undirected-Graph f =
-    map-equiv-unordered-pair (equiv-vertex-equiv-Undirected-Graph f)
+    map-equiv-unordered-pair (vertex-equiv-equiv-Undirected-Graph f)
 
   standard-unordered-pair-vertices-equiv-Undirected-Graph :
     (e : equiv-Undirected-Graph) (x y : vertex-Undirected-Graph G) →
@@ -91,15 +92,15 @@ module _
       ( vertex-equiv-Undirected-Graph e x)
       ( vertex-equiv-Undirected-Graph e y)
   standard-unordered-pair-vertices-equiv-Undirected-Graph e =
-    equiv-standard-unordered-pair (equiv-vertex-equiv-Undirected-Graph e)
+    equiv-standard-unordered-pair (vertex-equiv-equiv-Undirected-Graph e)
 
-  equiv-edge-equiv-Undirected-Graph :
+  edge-equiv-equiv-Undirected-Graph :
     (f : equiv-Undirected-Graph)
     (p : unordered-pair-vertices-Undirected-Graph G) →
     edge-Undirected-Graph G p ≃
     edge-Undirected-Graph H
       ( unordered-pair-vertices-equiv-Undirected-Graph f p)
-  equiv-edge-equiv-Undirected-Graph f = pr2 f
+  edge-equiv-equiv-Undirected-Graph f = pr2 f
 
   edge-equiv-Undirected-Graph :
     (f : equiv-Undirected-Graph)
@@ -108,20 +109,20 @@ module _
     edge-Undirected-Graph H
       ( unordered-pair-vertices-equiv-Undirected-Graph f p)
   edge-equiv-Undirected-Graph f p =
-    map-equiv (equiv-edge-equiv-Undirected-Graph f p)
+    map-equiv (edge-equiv-equiv-Undirected-Graph f p)
 
-  equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph :
+  edge-equiv-standard-unordered-pair-vertices-equiv-Undirected-Graph :
     (e : equiv-Undirected-Graph) (x y : vertex-Undirected-Graph G) →
     edge-Undirected-Graph G (standard-unordered-pair x y) ≃
     edge-Undirected-Graph H
       ( standard-unordered-pair
         ( vertex-equiv-Undirected-Graph e x)
         ( vertex-equiv-Undirected-Graph e y))
-  equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph e x y =
+  edge-equiv-standard-unordered-pair-vertices-equiv-Undirected-Graph e x y =
     ( equiv-tr
       ( edge-Undirected-Graph H)
       ( standard-unordered-pair-vertices-equiv-Undirected-Graph e x y)) ∘e
-    ( equiv-edge-equiv-Undirected-Graph e (standard-unordered-pair x y))
+    ( edge-equiv-equiv-Undirected-Graph e (standard-unordered-pair x y))
 
   edge-standard-unordered-pair-vertices-equiv-Undirected-Graph :
     (e : equiv-Undirected-Graph) (x y : vertex-Undirected-Graph G) →
@@ -132,7 +133,7 @@ module _
         ( vertex-equiv-Undirected-Graph e y))
   edge-standard-unordered-pair-vertices-equiv-Undirected-Graph e x y =
     map-equiv
-      ( equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph
+      ( edge-equiv-standard-unordered-pair-vertices-equiv-Undirected-Graph
           e x y)
 
   hom-equiv-Undirected-Graph :
@@ -190,22 +191,13 @@ module _
     htpy-equiv-Undirected-Graph f g
   htpy-eq-equiv-Undirected-Graph f .f refl = refl-htpy-equiv-Undirected-Graph f
 
-  is-contr-total-htpy-equiv-Undirected-Graph :
+  is-torsorial-htpy-equiv-Undirected-Graph :
     (f : equiv-Undirected-Graph G H) →
-    is-contr (Σ (equiv-Undirected-Graph G H) (htpy-equiv-Undirected-Graph f))
-  is-contr-total-htpy-equiv-Undirected-Graph f =
-    is-contr-total-Eq-structure
-      ( λ gV gE α →
-        ( p : unordered-pair-vertices-Undirected-Graph G) →
-          ( e : edge-Undirected-Graph G p) →
-          Id
-            ( tr
-              ( edge-Undirected-Graph H)
-              ( htpy-unordered-pair α p)
-              ( edge-equiv-Undirected-Graph G H f p e))
-            ( map-equiv (gE p) e))
-      ( is-contr-total-htpy-equiv (equiv-vertex-equiv-Undirected-Graph G H f))
-      ( pair (equiv-vertex-equiv-Undirected-Graph G H f) refl-htpy)
+    is-torsorial (htpy-equiv-Undirected-Graph f)
+  is-torsorial-htpy-equiv-Undirected-Graph f =
+    is-torsorial-Eq-structure
+      ( is-torsorial-htpy-equiv (vertex-equiv-equiv-Undirected-Graph G H f))
+      ( pair (vertex-equiv-equiv-Undirected-Graph G H f) refl-htpy)
       ( is-contr-equiv'
         ( Σ ( (p : unordered-pair-vertices-Undirected-Graph G) →
               edge-Undirected-Graph G p ≃
@@ -224,21 +216,17 @@ module _
                     equiv-concat
                       ( pr2 (refl-htpy-equiv-Undirected-Graph f) p e)
                       ( map-equiv (gE p) e)))))
-        ( is-contr-total-Eq-Π
-          ( λ p e →
-            htpy-equiv
-              ( equiv-edge-equiv-Undirected-Graph G H f p)
-              ( e))
+        ( is-torsorial-Eq-Π
           ( λ p →
-            is-contr-total-htpy-equiv
-              ( equiv-edge-equiv-Undirected-Graph G H f p))))
+            is-torsorial-htpy-equiv
+              ( edge-equiv-equiv-Undirected-Graph G H f p))))
 
   is-equiv-htpy-eq-equiv-Undirected-Graph :
     (f g : equiv-Undirected-Graph G H) →
     is-equiv (htpy-eq-equiv-Undirected-Graph f g)
   is-equiv-htpy-eq-equiv-Undirected-Graph f =
     fundamental-theorem-id
-      ( is-contr-total-htpy-equiv-Undirected-Graph f)
+      ( is-torsorial-htpy-equiv-Undirected-Graph f)
       ( htpy-eq-equiv-Undirected-Graph f)
 
   extensionality-equiv-Undirected-Graph :
@@ -267,24 +255,20 @@ module _
     (H : Undirected-Graph l1 l2) → Id G H → equiv-Undirected-Graph G H
   equiv-eq-Undirected-Graph .G refl = id-equiv-Undirected-Graph G
 
-  is-contr-total-equiv-Undirected-Graph :
-    is-contr (Σ (Undirected-Graph l1 l2) (equiv-Undirected-Graph G))
-  is-contr-total-equiv-Undirected-Graph =
-    is-contr-total-Eq-structure
-      ( λ VH VE e →
-        ( p : unordered-pair-vertices-Undirected-Graph G) →
-        edge-Undirected-Graph G p ≃ VE (map-equiv-unordered-pair e p))
-      ( is-contr-total-equiv (vertex-Undirected-Graph G))
+  is-torsorial-equiv-Undirected-Graph :
+    is-torsorial (equiv-Undirected-Graph G)
+  is-torsorial-equiv-Undirected-Graph =
+    is-torsorial-Eq-structure
+      ( is-torsorial-equiv (vertex-Undirected-Graph G))
       ( pair (vertex-Undirected-Graph G) id-equiv)
-      ( is-contr-total-Eq-Π
-        ( λ p X → (edge-Undirected-Graph G p) ≃ X)
-        ( λ p → is-contr-total-equiv (edge-Undirected-Graph G p)))
+      ( is-torsorial-Eq-Π
+        ( λ p → is-torsorial-equiv (edge-Undirected-Graph G p)))
 
   is-equiv-equiv-eq-Undirected-Graph :
     (H : Undirected-Graph l1 l2) → is-equiv (equiv-eq-Undirected-Graph H)
   is-equiv-equiv-eq-Undirected-Graph =
     fundamental-theorem-id
-      ( is-contr-total-equiv-Undirected-Graph)
+      ( is-torsorial-equiv-Undirected-Graph)
       ( equiv-eq-Undirected-Graph)
 
   extensionality-Undirected-Graph :
@@ -300,9 +284,9 @@ module _
 
 ## External links
 
-- [Graph isomoprhism](https://www.wikidata.org/wiki/Q303100) at Wikidata
+- [Graph isomoprhism](https://www.wikidata.org/entity/Q303100) at Wikidata
 - [Graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism) at
   Wikipedia
 - [Graph isomorphism](https://mathworld.wolfram.com/GraphIsomorphism.html) at
-  Wolfram Mathworld
-- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at nlab
+  Wolfram MathWorld
+- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at $n$Lab

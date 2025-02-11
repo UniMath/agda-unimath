@@ -14,9 +14,9 @@ open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 
 open import univalent-combinatorics.2-element-types
 ```
@@ -86,22 +86,19 @@ module _
     (B : unordered-pair-types l) → A ＝ B → equiv-unordered-pair-types A B
   equiv-eq-unordered-pair-types .A refl = id-equiv-unordered-pair-types
 
-  is-contr-total-equiv-unordered-pair-types :
-    is-contr (Σ (unordered-pair-types l) (equiv-unordered-pair-types A))
-  is-contr-total-equiv-unordered-pair-types =
-    is-contr-total-Eq-structure
-      ( λ I B e →
-        (i : type-unordered-pair A) →
-        element-unordered-pair A i ≃ B (map-equiv e i))
-      ( is-contr-total-equiv-2-Element-Type (2-element-type-unordered-pair A))
+  is-torsorial-equiv-unordered-pair-types :
+    is-torsorial (equiv-unordered-pair-types A)
+  is-torsorial-equiv-unordered-pair-types =
+    is-torsorial-Eq-structure
+      ( is-torsorial-equiv-2-Element-Type (2-element-type-unordered-pair A))
       ( pair (2-element-type-unordered-pair A) id-equiv)
-      ( is-contr-total-equiv-fam (element-unordered-pair A))
+      ( is-torsorial-equiv-fam (element-unordered-pair A))
 
   is-equiv-equiv-eq-unordered-pair-types :
     (B : unordered-pair-types l) → is-equiv (equiv-eq-unordered-pair-types B)
   is-equiv-equiv-eq-unordered-pair-types =
     fundamental-theorem-id
-      is-contr-total-equiv-unordered-pair-types
+      is-torsorial-equiv-unordered-pair-types
       equiv-eq-unordered-pair-types
 
   extensionality-unordered-pair-types :

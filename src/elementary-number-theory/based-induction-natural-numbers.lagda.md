@@ -53,7 +53,7 @@ compute-base-based-ind-ℕ :
   {l : Level} (k : ℕ) (P : ℕ → UU l) (p0 : P k) →
   (pS : (n : ℕ) → k ≤-ℕ n → P n → P (succ-ℕ n)) → (H : k ≤-ℕ k) →
   based-ind-ℕ k P p0 pS k H ＝ p0
-compute-base-based-ind-ℕ zero-ℕ P p0 pS star = refl
+compute-base-based-ind-ℕ zero-ℕ P p0 pS _ = refl
 compute-base-based-ind-ℕ (succ-ℕ k) P p0 pS =
   compute-base-based-ind-ℕ k (P ∘ succ-ℕ) p0 (pS ∘ succ-ℕ)
 
@@ -63,8 +63,8 @@ compute-succ-based-ind-ℕ :
   (n : ℕ) (N : k ≤-ℕ n) (N' : k ≤-ℕ succ-ℕ n) →
   based-ind-ℕ k P p0 pS (succ-ℕ n) N' ＝
   pS n N (based-ind-ℕ k P p0 pS n N)
-compute-succ-based-ind-ℕ zero-ℕ P p0 pS zero-ℕ star star = refl
-compute-succ-based-ind-ℕ zero-ℕ P p0 pS (succ-ℕ n) star star = refl
+compute-succ-based-ind-ℕ zero-ℕ P p0 pS zero-ℕ _ _ = refl
+compute-succ-based-ind-ℕ zero-ℕ P p0 pS (succ-ℕ n) _ _ = refl
 compute-succ-based-ind-ℕ (succ-ℕ k) P p0 pS (succ-ℕ n) =
   compute-succ-based-ind-ℕ k (P ∘ succ-ℕ) p0 (pS ∘ succ-ℕ) n
 ```

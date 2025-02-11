@@ -34,16 +34,16 @@ This module defines a macro, `solve-Precategory!` that solves any equation
 between morphisms of a precategory, as long as it's derivable from the axioms of
 precategories.
 
-To do this, we introduce the type `Precategory-Expr`, which is a syntactic
+To do this, we introduce the type `Precategory-Expression`, which is a syntactic
 representation of a morphism. Then, noting that every morphism is represented by
-an expression (through `in-Precategory-Expr`), it will be sufficient to prove an
-equality of expresions to prove an equality of morphisms. However, if two
-morphisms are equal, then their normalized expressions are equal by reflexivity,
-so that the problem is reduced to finding which `Precategory-Expr` represents a
-given morphism.
+an expression (through `in-Precategory-Expression`), it will be sufficient to
+prove an equality of expresions to prove an equality of morphisms. However, if
+two morphisms are equal, then their normalized expressions are equal by
+reflexivity, so that the problem is reduced to finding which
+`Precategory-Expression` represents a given morphism.
 
-This last problem, as well as the application of the `solve-Precategory-Expr`
-lemma, is what the macro automates.
+This last problem, as well as the application of the
+`solve-Precategory-Expression` lemma, is what the macro automates.
 
 ## Definition
 
@@ -56,109 +56,95 @@ module _
   where
 
   data
-    Precategory-Expr :
+    Precategory-Expression :
       obj-Precategory C → obj-Precategory C → UU (l1 ⊔ l2)
     where
-    id-hom-Precategory-Expr :
-      {x : obj-Precategory C} → Precategory-Expr x x
-    hom-Precategory-Expr :
+    id-hom-Precategory-Expression :
+      {x : obj-Precategory C} → Precategory-Expression x x
+    hom-Precategory-Expression :
       {x y : obj-Precategory C} →
-      hom-Precategory C x y → Precategory-Expr x y
-    comp-hom-Precategory-Expr :
+      hom-Precategory C x y → Precategory-Expression x y
+    comp-hom-Precategory-Expression :
       {x y z : obj-Precategory C} →
-      Precategory-Expr y z → Precategory-Expr x y → Precategory-Expr x z
+      Precategory-Expression y z →
+      Precategory-Expression x y →
+      Precategory-Expression x z
 ```
 
 ### The syntactic representation of a morphism
 
 ```agda
-  in-Precategory-Expr :
+  in-Precategory-Expression :
     {x y : obj-Precategory C} →
-    Precategory-Expr x y →
+    Precategory-Expression x y →
     hom-Precategory C x y
-  in-Precategory-Expr id-hom-Precategory-Expr = id-hom-Precategory C
-  in-Precategory-Expr (hom-Precategory-Expr f) = f
-  in-Precategory-Expr (comp-hom-Precategory-Expr f g) =
-    comp-hom-Precategory C (in-Precategory-Expr f) (in-Precategory-Expr g)
+  in-Precategory-Expression id-hom-Precategory-Expression = id-hom-Precategory C
+  in-Precategory-Expression (hom-Precategory-Expression f) = f
+  in-Precategory-Expression (comp-hom-Precategory-Expression f g) =
+    comp-hom-Precategory C
+      ( in-Precategory-Expression f)
+      ( in-Precategory-Expression g)
 ```
 
 ### The normalization of the syntactic representation of a morphism
 
 ```agda
-  eval-Precategory-Expr :
+  eval-Precategory-Expression :
     {x y z : obj-Precategory C} →
-    Precategory-Expr y z →
+    Precategory-Expression y z →
     hom-Precategory C x y →
     hom-Precategory C x z
-  eval-Precategory-Expr id-hom-Precategory-Expr f = f
-  eval-Precategory-Expr (hom-Precategory-Expr f) g =
+  eval-Precategory-Expression id-hom-Precategory-Expression f = f
+  eval-Precategory-Expression (hom-Precategory-Expression f) g =
     comp-hom-Precategory C f g
-  eval-Precategory-Expr (comp-hom-Precategory-Expr f g) h =
-    eval-Precategory-Expr f (eval-Precategory-Expr g h)
+  eval-Precategory-Expression (comp-hom-Precategory-Expression f g) h =
+    eval-Precategory-Expression f (eval-Precategory-Expression g h)
 
-  is-sound-eval-Precategory-Expr :
+  is-sound-eval-Precategory-Expression :
     {x y z : obj-Precategory C}
-    (e : Precategory-Expr y z)
+    (e : Precategory-Expression y z)
     (f : hom-Precategory C x y) →
-    ( eval-Precategory-Expr e f) ＝
-    ( comp-hom-Precategory C (in-Precategory-Expr e) f)
-  is-sound-eval-Precategory-Expr id-hom-Precategory-Expr f =
+    ( eval-Precategory-Expression e f) ＝
+    ( comp-hom-Precategory C (in-Precategory-Expression e) f)
+  is-sound-eval-Precategory-Expression id-hom-Precategory-Expression f =
     inv (left-unit-law-comp-hom-Precategory C f)
-  is-sound-eval-Precategory-Expr (hom-Precategory-Expr f) g = refl
-  is-sound-eval-Precategory-Expr (comp-hom-Precategory-Expr f g) h =
-    equational-reasoning
-    eval-Precategory-Expr f (eval-Precategory-Expr g h)
-      ＝ comp-hom-Precategory C
-          ( in-Precategory-Expr f)
-          ( eval-Precategory-Expr g h)
-        by is-sound-eval-Precategory-Expr f (eval-Precategory-Expr g h)
-      ＝ comp-hom-Precategory C
-          ( in-Precategory-Expr f)
-          ( comp-hom-Precategory C (in-Precategory-Expr g) h)
-        by ap
-          ( comp-hom-Precategory C (in-Precategory-Expr f))
-          ( is-sound-eval-Precategory-Expr g h)
-      ＝ comp-hom-Precategory C
-          ( comp-hom-Precategory C
-            ( in-Precategory-Expr f)
-            ( in-Precategory-Expr g))
-          h
-        by
-          inv
-            ( associative-comp-hom-Precategory
-              C (in-Precategory-Expr f) (in-Precategory-Expr g) h)
+  is-sound-eval-Precategory-Expression (hom-Precategory-Expression f) g = refl
+  is-sound-eval-Precategory-Expression (comp-hom-Precategory-Expression f g) h =
+    ( is-sound-eval-Precategory-Expression
+      ( f)
+      ( eval-Precategory-Expression g h)) ∙
+    ( ap
+      ( comp-hom-Precategory C (in-Precategory-Expression f))
+      ( is-sound-eval-Precategory-Expression g h)) ∙
+    ( inv
+      ( associative-comp-hom-Precategory
+        C (in-Precategory-Expression f) (in-Precategory-Expression g) h))
 
-  normalize-Precategory-Expr :
+  normalize-Precategory-Expression :
     {x y : obj-Precategory C} →
-    Precategory-Expr x y →
+    Precategory-Expression x y →
     hom-Precategory C x y
-  normalize-Precategory-Expr e = eval-Precategory-Expr e (id-hom-Precategory C)
+  normalize-Precategory-Expression e =
+    eval-Precategory-Expression e (id-hom-Precategory C)
 
-  is-sound-normalize-Precategory-Expr :
+  is-sound-normalize-Precategory-Expression :
     {x y : obj-Precategory C} →
-    (e : Precategory-Expr x y) →
-    normalize-Precategory-Expr e ＝ in-Precategory-Expr e
-  is-sound-normalize-Precategory-Expr e = equational-reasoning
-    eval-Precategory-Expr e (id-hom-Precategory C)
-      ＝ comp-hom-Precategory C (in-Precategory-Expr e) (id-hom-Precategory C)
-        by is-sound-eval-Precategory-Expr e (id-hom-Precategory C)
-      ＝ in-Precategory-Expr e
-        by right-unit-law-comp-hom-Precategory C (in-Precategory-Expr e)
+    (e : Precategory-Expression x y) →
+    normalize-Precategory-Expression e ＝ in-Precategory-Expression e
+  is-sound-normalize-Precategory-Expression e =
+    ( is-sound-eval-Precategory-Expression e (id-hom-Precategory C)) ∙
+    ( right-unit-law-comp-hom-Precategory C (in-Precategory-Expression e))
 
   abstract
-    solve-Precategory-Expr :
+    solve-Precategory-Expression :
       {x y : obj-Precategory C} →
-      (f g : Precategory-Expr x y) →
-      normalize-Precategory-Expr f ＝ normalize-Precategory-Expr g →
-      in-Precategory-Expr f ＝ in-Precategory-Expr g
-    solve-Precategory-Expr f g p = equational-reasoning
-      in-Precategory-Expr f
-      ＝ normalize-Precategory-Expr f
-        by inv (is-sound-normalize-Precategory-Expr f)
-      ＝ normalize-Precategory-Expr g
-        by p
-      ＝ in-Precategory-Expr g
-        by is-sound-normalize-Precategory-Expr g
+      (f g : Precategory-Expression x y) →
+      normalize-Precategory-Expression f ＝ normalize-Precategory-Expression g →
+      in-Precategory-Expression f ＝ in-Precategory-Expression g
+    solve-Precategory-Expression f g p =
+      ( inv (is-sound-normalize-Precategory-Expression f)) ∙
+      ( p) ∙
+      ( is-sound-normalize-Precategory-Expression g)
 ```
 
 ## The macro definition
@@ -174,73 +160,76 @@ private
   infixr 10 _++_
 
   pattern apply-pr1 xs =
-    def (quote pr1)
-      ( hidden-Arg unknown ∷
-        hidden-Arg unknown ∷
-        hidden-Arg unknown ∷
-        hidden-Arg unknown ∷
+    definition-Term-Agda (quote pr1)
+      ( hidden-Argument-Agda unknown-Term-Agda ∷
+        hidden-Argument-Agda unknown-Term-Agda ∷
+        hidden-Argument-Agda unknown-Term-Agda ∷
+        hidden-Argument-Agda unknown-Term-Agda ∷
         xs)
 
   pattern apply-pr2 xs =
-    def (quote pr2)
-      ( hidden-Arg unknown ∷
-        hidden-Arg unknown ∷
-        hidden-Arg unknown ∷
-        hidden-Arg unknown ∷
+    definition-Term-Agda (quote pr2)
+      ( hidden-Argument-Agda unknown-Term-Agda ∷
+        hidden-Argument-Agda unknown-Term-Agda ∷
+        hidden-Argument-Agda unknown-Term-Agda ∷
+        hidden-Argument-Agda unknown-Term-Agda ∷
         xs)
 ```
 
-### Building a term of `Precategory-Expr C x y` from a term of type `hom-Precategory C x y`
+### Building a term of `Precategory-Expression C x y` from a term of type `hom-Precategory C x y`
 
 ```agda
-build-Precategory-Expr : Term → Term
-build-Precategory-Expr
+build-Precategory-Expression : Term-Agda → Term-Agda
+build-Precategory-Expression
   ( apply-pr1
-    ( visible-Arg
+    ( visible-Argument-Agda
       ( apply-pr2
-        ( visible-Arg
+        ( visible-Argument-Agda
           ( apply-pr2
-            ( visible-Arg
-              ( apply-pr2 (visible-Arg C ∷ nil)) ∷
+            ( visible-Argument-Agda
+              ( apply-pr2 (visible-Argument-Agda C ∷ nil)) ∷
               ( nil))) ∷
             ( nil))) ∷
-          ( visible-Arg x) ∷
+          ( visible-Argument-Agda x) ∷
           nil)) =
-  con (quote id-hom-Precategory-Expr) nil
-build-Precategory-Expr
+  constructor-Term-Agda (quote id-hom-Precategory-Expression) nil
+build-Precategory-Expression
   ( apply-pr1
-    ( visible-Arg
+    ( visible-Argument-Agda
       ( apply-pr1
-        ( visible-Arg
+        ( visible-Argument-Agda
           ( apply-pr2
-            ( visible-Arg
+            ( visible-Argument-Agda
               ( apply-pr2
-                (visible-Arg C ∷ nil)) ∷ nil))
+                (visible-Argument-Agda C ∷ nil)) ∷ nil))
             ∷ nil)) ∷
-      hidden-Arg x ∷ hidden-Arg y ∷ hidden-Arg z ∷
-      visible-Arg g ∷ visible-Arg f ∷ nil)) =
-  con
-    ( quote comp-hom-Precategory-Expr)
-    ( visible-Arg (build-Precategory-Expr g) ∷
-      visible-Arg (build-Precategory-Expr f) ∷
+      hidden-Argument-Agda x ∷ hidden-Argument-Agda y ∷ hidden-Argument-Agda z ∷
+      visible-Argument-Agda g ∷ visible-Argument-Agda f ∷ nil)) =
+  constructor-Term-Agda
+    ( quote comp-hom-Precategory-Expression)
+    ( visible-Argument-Agda (build-Precategory-Expression g) ∷
+      visible-Argument-Agda (build-Precategory-Expression f) ∷
       nil)
-build-Precategory-Expr f =
-  con (quote hom-Precategory-Expr) (visible-Arg f ∷ nil)
+build-Precategory-Expression f =
+  constructor-Term-Agda
+    ( quote hom-Precategory-Expression)
+    ( visible-Argument-Agda f ∷ nil)
 ```
 
-### The application of the `solve-Precategory-Expr` lemma
+### The application of the `solve-Precategory-Expression` lemma
 
 ```agda
-apply-solve-Precategory-Expr : Term → Term → Term → Term
-apply-solve-Precategory-Expr cat lhs rhs =
-  def
-    ( quote solve-Precategory-Expr)
-    ( replicate-hidden-Arg 2 ++
-      visible-Arg cat ∷
-      replicate-hidden-Arg 2 ++
-      visible-Arg lhs ∷
-      visible-Arg rhs ∷
-      visible-Arg (con (quote refl) nil) ∷
+apply-solve-Precategory-Expression :
+  Term-Agda → Term-Agda → Term-Agda → Term-Agda
+apply-solve-Precategory-Expression cat lhs rhs =
+  definition-Term-Agda
+    ( quote solve-Precategory-Expression)
+    ( replicate-hidden-Argument-Agda 2 ++
+      visible-Argument-Agda cat ∷
+      replicate-hidden-Argument-Agda 2 ++
+      visible-Argument-Agda lhs ∷
+      visible-Argument-Agda rhs ∷
+      visible-Argument-Agda (constructor-Term-Agda (quote refl) nil) ∷
       nil)
 ```
 
@@ -248,13 +237,15 @@ apply-solve-Precategory-Expr cat lhs rhs =
 
 ```agda
 macro
-  solve-Precategory! : Term → Term → TC unit
+  solve-Precategory! : Term-Agda → Term-Agda → type-Type-Checker unit
   solve-Precategory! cat hole = do
-    goal ← inferType hole >>= reduce
-    (lhs , rhs) ← boundary-TCM goal
-    built-lhs ← normalise lhs >>= (returnTC ∘ build-Precategory-Expr)
-    built-rhs ← normalise rhs >>= (returnTC ∘ build-Precategory-Expr)
-    unify hole (apply-solve-Precategory-Expr cat built-lhs built-rhs)
+    goal ← infer-type hole >>= reduce
+    (lhs , rhs) ← boundary-Type-Checker goal
+    built-lhs ←
+      normalize lhs >>= (return-Type-Checker ∘ build-Precategory-Expression)
+    built-rhs ←
+      normalize rhs >>= (return-Type-Checker ∘ build-Precategory-Expression)
+    unify hole (apply-solve-Precategory-Expression cat built-lhs built-rhs)
 ```
 
 ## Examples

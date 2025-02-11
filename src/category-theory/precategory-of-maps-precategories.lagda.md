@@ -7,6 +7,7 @@ module category-theory.precategory-of-maps-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.maps-precategories
 open import category-theory.natural-isomorphisms-maps-precategories
@@ -19,7 +20,9 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -56,25 +59,43 @@ module _
     (h : natural-transformation-map-Precategory C D H I)
     (g : natural-transformation-map-Precategory C D G H)
     (f : natural-transformation-map-Precategory C D F G) →
-    ( comp-natural-transformation-map-Precategory C D F G I
+    comp-natural-transformation-map-Precategory C D F G I
       ( comp-natural-transformation-map-Precategory C D G H I h g)
-      ( f)) ＝
-    ( comp-natural-transformation-map-Precategory C D F H I
+      ( f) ＝
+    comp-natural-transformation-map-Precategory C D F H I
       ( h)
-      ( comp-natural-transformation-map-Precategory C D F G H g f))
+      ( comp-natural-transformation-map-Precategory C D F G H g f)
   associative-comp-hom-map-precategory-Precategory {F} {G} {H} {I} h g f =
     associative-comp-natural-transformation-map-Precategory
       C D F G H I f g h
 
-  associative-composition-structure-map-precategory-Precategory :
-    associative-composition-structure-Set
+  involutive-eq-associative-comp-hom-map-precategory-Precategory :
+    {F G H I : map-Precategory C D}
+    (h : natural-transformation-map-Precategory C D H I)
+    (g : natural-transformation-map-Precategory C D G H)
+    (f : natural-transformation-map-Precategory C D F G) →
+    comp-natural-transformation-map-Precategory C D F G I
+      ( comp-natural-transformation-map-Precategory C D G H I h g)
+      ( f) ＝ⁱ
+    comp-natural-transformation-map-Precategory C D F H I
+      ( h)
+      ( comp-natural-transformation-map-Precategory C D F G H g f)
+  involutive-eq-associative-comp-hom-map-precategory-Precategory
+    { F} {G} {H} {I} h g f =
+    involutive-eq-associative-comp-natural-transformation-map-Precategory
+      C D F G H I f g h
+
+  associative-composition-operation-map-precategory-Precategory :
+    associative-composition-operation-binary-family-Set
       ( natural-transformation-map-set-Precategory C D)
-  pr1 associative-composition-structure-map-precategory-Precategory
+  pr1 associative-composition-operation-map-precategory-Precategory
     {F} {G} {H} =
     comp-hom-map-precategory-Precategory {F} {G} {H}
-  pr2 associative-composition-structure-map-precategory-Precategory
-    {F} {G} {H} {I} =
-    associative-comp-hom-map-precategory-Precategory {F} {G} {H} {I}
+  pr2
+    associative-composition-operation-map-precategory-Precategory
+      {F} {G} {H} {I} h g f =
+    involutive-eq-associative-comp-hom-map-precategory-Precategory
+      { F} {G} {H} {I} h g f
 
   id-hom-map-precategory-Precategory :
     (F : map-Precategory C D) → natural-transformation-map-Precategory C D F F
@@ -99,18 +120,18 @@ module _
   right-unit-law-comp-hom-map-precategory-Precategory {F} {G} =
     right-unit-law-comp-natural-transformation-map-Precategory C D F G
 
-  is-unital-composition-structure-map-precategory-Precategory :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-map-precategory-Precategory :
+    is-unital-composition-operation-binary-family-Set
       ( natural-transformation-map-set-Precategory C D)
-      ( associative-composition-structure-map-precategory-Precategory)
-  pr1 is-unital-composition-structure-map-precategory-Precategory =
+      ( comp-hom-map-precategory-Precategory)
+  pr1 is-unital-composition-operation-map-precategory-Precategory =
     id-hom-map-precategory-Precategory
   pr1
-    ( pr2 is-unital-composition-structure-map-precategory-Precategory)
+    ( pr2 is-unital-composition-operation-map-precategory-Precategory)
     { F} {G} =
     left-unit-law-comp-hom-map-precategory-Precategory {F} {G}
   pr2
-    ( pr2 is-unital-composition-structure-map-precategory-Precategory)
+    ( pr2 is-unital-composition-operation-map-precategory-Precategory)
     { F} {G} =
     right-unit-law-comp-hom-map-precategory-Precategory {F} {G}
 
@@ -120,9 +141,9 @@ module _
   pr1 (pr2 map-precategory-Precategory) =
     natural-transformation-map-set-Precategory C D
   pr1 (pr2 (pr2 map-precategory-Precategory)) =
-    associative-composition-structure-map-precategory-Precategory
+    associative-composition-operation-map-precategory-Precategory
   pr2 (pr2 (pr2 map-precategory-Precategory)) =
-    is-unital-composition-structure-map-precategory-Precategory
+    is-unital-composition-operation-map-precategory-Precategory
 ```
 
 ## Properties
@@ -179,7 +200,7 @@ module _
     (f : natural-transformation-map-Precategory C D F G) →
     is-equiv (is-iso-map-is-natural-isomorphism-map-Precategory f)
   is-equiv-is-iso-map-is-natural-isomorphism-map-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-natural-isomorphism-map-Precategory C D F G f)
       ( is-prop-is-iso-Precategory
         ( map-precategory-Precategory C D) {F} {G} f)
@@ -189,7 +210,7 @@ module _
     (f : natural-transformation-map-Precategory C D F G) →
     is-equiv (is-natural-isomorphism-map-is-iso-map-Precategory f)
   is-equiv-is-natural-isomorphism-map-is-iso-map-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-iso-Precategory
         ( map-precategory-Precategory C D) {F} {G} f)
       ( is-prop-is-natural-isomorphism-map-Precategory C D F G f)

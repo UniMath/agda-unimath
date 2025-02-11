@@ -49,9 +49,9 @@ module _
 
 ## External links
 
-- [Connected graph](https://ncatlab.org/nlab/show/connected+graph) at nlab
-- [Connected graph](https://www.wikidata.org/wiki/Q230655) on Wikidata
+- [Connected graph](https://ncatlab.org/nlab/show/connected+graph) at $n$Lab
+- [Connected graph](https://www.wikidata.org/entity/Q230655) on Wikidata
 - [Connectivity (graph theory)](<https://en.wikipedia.org/wiki/Connectivity_(graph_theory)>)
   on Wikipedia
 - [Connected graph](https://mathworld.wolfram.com/ConnectedGraph.html) at
-  Wolfram Mathworld
+  Wolfram MathWorld

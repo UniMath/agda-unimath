@@ -10,15 +10,18 @@ module foundation.impredicative-encodings where
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.homotopies
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
-open import foundation-core.empty-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
@@ -28,277 +31,278 @@ open import foundation-core.sets
 
 ## Idea
 
-By quantifying over all propositions in a universe, we can define all the
-logical operations. The idea is to use the fact that any proposition `P` is
-equivalent to the proposition `(Q : Prop l) → (P ⇒ Q) ⇒ Q`, which can be thought
-of as the least proposition `Q` containing `P`.
+By universally quantifying over all
+[propositions](foundation-core.propositions.md) in a universe, we can define all
+the logical operations. The idea is to use the fact that any proposition `P` is
+[equivalent](foundation.logical-equivalences.md) to the proposition
+`(Q : Prop l) → (P ⇒ Q) ⇒ Q`, which can be thought of as the least proposition
+`Q` containing `P`.
 
 ### The impredicative encoding of the propositional truncation
 
 ```agda
-impredicative-trunc-Prop :
-  {l : Level} → UU l → Prop (lsuc l)
-impredicative-trunc-Prop {l} A =
-  Π-Prop
-    ( Prop l)
-    ( λ Q → function-Prop (A → type-Prop Q) Q)
+module _
+  {l : Level} (A : UU l)
+  where
 
-type-impredicative-trunc-Prop :
-  {l : Level} → UU l → UU (lsuc l)
-type-impredicative-trunc-Prop {l} A =
-  type-Prop (impredicative-trunc-Prop A)
+  impredicative-trunc-Prop : Prop (lsuc l)
+  impredicative-trunc-Prop =
+    ∀' (Prop l) (λ Q → function-Prop (A → type-Prop Q) Q)
 
-map-impredicative-trunc-Prop :
-  {l : Level} (A : UU l) →
-  type-trunc-Prop A → type-impredicative-trunc-Prop A
-map-impredicative-trunc-Prop {l} A =
-  map-universal-property-trunc-Prop
-    ( impredicative-trunc-Prop A)
-    ( λ x Q f → f x)
+  type-impredicative-trunc-Prop : UU (lsuc l)
+  type-impredicative-trunc-Prop =
+    type-Prop impredicative-trunc-Prop
 
-inv-map-impredicative-trunc-Prop :
-  {l : Level} (A : UU l) →
-  type-impredicative-trunc-Prop A → type-trunc-Prop A
-inv-map-impredicative-trunc-Prop A H =
-  H (trunc-Prop A) unit-trunc-Prop
+  map-impredicative-trunc-Prop :
+    type-trunc-Prop A → type-impredicative-trunc-Prop
+  map-impredicative-trunc-Prop =
+    map-universal-property-trunc-Prop
+      ( impredicative-trunc-Prop)
+      ( λ x Q f → f x)
 
-equiv-impredicative-trunc-Prop :
-  {l : Level} (A : UU l) →
-  type-trunc-Prop A ≃ type-impredicative-trunc-Prop A
-equiv-impredicative-trunc-Prop A =
-  equiv-iff
-    ( trunc-Prop A)
-    ( impredicative-trunc-Prop A)
-    ( map-impredicative-trunc-Prop A)
-    ( inv-map-impredicative-trunc-Prop A)
+  map-inv-impredicative-trunc-Prop :
+    type-impredicative-trunc-Prop → type-trunc-Prop A
+  map-inv-impredicative-trunc-Prop H =
+    H (trunc-Prop A) unit-trunc-Prop
+
+  equiv-impredicative-trunc-Prop :
+    type-trunc-Prop A ≃ type-impredicative-trunc-Prop
+  equiv-impredicative-trunc-Prop =
+    equiv-iff
+      ( trunc-Prop A)
+      ( impredicative-trunc-Prop)
+      ( map-impredicative-trunc-Prop)
+      ( map-inv-impredicative-trunc-Prop)
 ```
 
 ### The impredicative encoding of conjunction
 
 ```agda
-impredicative-conj-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (lsuc (l1 ⊔ l2))
-impredicative-conj-Prop {l1} {l2} P1 P2 =
-  Π-Prop
-    ( Prop (l1 ⊔ l2))
-    ( λ Q → function-Prop (type-Prop P1 → (type-Prop P2 → type-Prop Q)) Q)
+module _
+  {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2)
+  where
 
-type-impredicative-conj-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → UU (lsuc (l1 ⊔ l2))
-type-impredicative-conj-Prop P1 P2 =
-  type-Prop (impredicative-conj-Prop P1 P2)
+  impredicative-conjunction-Prop : Prop (lsuc (l1 ⊔ l2))
+  impredicative-conjunction-Prop =
+    ∀' (Prop (l1 ⊔ l2)) (λ Q → (P1 ⇒ P2 ⇒ Q) ⇒ Q)
 
-map-impredicative-conj-Prop :
-  {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
-  type-conj-Prop P1 P2 → type-impredicative-conj-Prop P1 P2
-map-impredicative-conj-Prop {l1} {l2} P1 P2 (pair p1 p2) Q f =
-  f p1 p2
+  type-impredicative-conjunction-Prop : UU (lsuc (l1 ⊔ l2))
+  type-impredicative-conjunction-Prop =
+    type-Prop impredicative-conjunction-Prop
 
-inv-map-impredicative-conj-Prop :
-  {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
-  type-impredicative-conj-Prop P1 P2 → type-conj-Prop P1 P2
-inv-map-impredicative-conj-Prop P1 P2 H =
-  H (conj-Prop P1 P2) (λ p1 p2 → pair p1 p2)
+  map-product-impredicative-conjunction-Prop :
+    type-conjunction-Prop P1 P2 → type-impredicative-conjunction-Prop
+  map-product-impredicative-conjunction-Prop (p1 , p2) Q f = f p1 p2
 
-equiv-impredicative-conj-Prop :
-  {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
-  type-conj-Prop P1 P2 ≃ type-impredicative-conj-Prop P1 P2
-equiv-impredicative-conj-Prop P1 P2 =
-  equiv-iff
-    ( conj-Prop P1 P2)
-    ( impredicative-conj-Prop P1 P2)
-    ( map-impredicative-conj-Prop P1 P2)
-    ( inv-map-impredicative-conj-Prop P1 P2)
+  map-inv-product-impredicative-conjunction-Prop :
+    type-impredicative-conjunction-Prop → type-conjunction-Prop P1 P2
+  map-inv-product-impredicative-conjunction-Prop H = H (P1 ∧ P2) pair
+
+  equiv-product-impredicative-conjunction-Prop :
+    type-conjunction-Prop P1 P2 ≃ type-impredicative-conjunction-Prop
+  equiv-product-impredicative-conjunction-Prop =
+    equiv-iff
+      ( P1 ∧ P2)
+      ( impredicative-conjunction-Prop)
+      ( map-product-impredicative-conjunction-Prop)
+      ( map-inv-product-impredicative-conjunction-Prop)
 ```
 
 ### The impredicative encoding of disjunction
 
 ```agda
-impredicative-disj-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (lsuc (l1 ⊔ l2))
-impredicative-disj-Prop {l1} {l2} P1 P2 =
-  Π-Prop
-    ( Prop (l1 ⊔ l2))
-    ( λ Q →
-      function-Prop
-        ( type-implication-Prop P1 Q)
-        ( function-Prop (type-implication-Prop P2 Q) Q))
+module _
+  {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2)
+  where
 
-type-impredicative-disj-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → UU (lsuc (l1 ⊔ l2))
-type-impredicative-disj-Prop P1 P2 =
-  type-Prop (impredicative-disj-Prop P1 P2)
+  impredicative-disjunction-Prop : Prop (lsuc (l1 ⊔ l2))
+  impredicative-disjunction-Prop =
+    ∀' (Prop (l1 ⊔ l2)) (λ Q → (P1 ⇒ Q) ⇒ (P2 ⇒ Q) ⇒ Q)
 
-map-impredicative-disj-Prop :
-  {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
-  type-disj-Prop P1 P2 → type-impredicative-disj-Prop P1 P2
-map-impredicative-disj-Prop {l1} {l2} P1 P2 =
-  map-universal-property-trunc-Prop
-    ( impredicative-disj-Prop P1 P2)
-    ( ind-coprod
-      ( λ x → type-impredicative-disj-Prop P1 P2)
-      ( λ x Q f1 f2 → f1 x)
-      ( λ y Q f1 f2 → f2 y))
+  type-impredicative-disjunction-Prop : UU (lsuc (l1 ⊔ l2))
+  type-impredicative-disjunction-Prop =
+    type-Prop impredicative-disjunction-Prop
 
-inv-map-impredicative-disj-Prop :
-  {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
-  type-impredicative-disj-Prop P1 P2 → type-disj-Prop P1 P2
-inv-map-impredicative-disj-Prop P1 P2 H =
-  H (disj-Prop P1 P2) (inl-disj-Prop P1 P2) (inr-disj-Prop P1 P2)
+  map-impredicative-disjunction-Prop :
+    type-disjunction-Prop P1 P2 → type-impredicative-disjunction-Prop
+  map-impredicative-disjunction-Prop =
+    map-universal-property-trunc-Prop
+      ( impredicative-disjunction-Prop)
+      ( rec-coproduct (λ x Q f1 f2 → f1 x) (λ y Q f1 f2 → f2 y))
 
-equiv-impredicative-disj-Prop :
-  {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
-  type-disj-Prop P1 P2 ≃ type-impredicative-disj-Prop P1 P2
-equiv-impredicative-disj-Prop P1 P2 =
-  equiv-iff
-    ( disj-Prop P1 P2)
-    ( impredicative-disj-Prop P1 P2)
-    ( map-impredicative-disj-Prop P1 P2)
-    ( inv-map-impredicative-disj-Prop P1 P2)
+  map-inv-impredicative-disjunction-Prop :
+    type-impredicative-disjunction-Prop → type-disjunction-Prop P1 P2
+  map-inv-impredicative-disjunction-Prop H =
+    H (P1 ∨ P2) (inl-disjunction) (inr-disjunction)
+
+  equiv-impredicative-disjunction-Prop :
+    type-disjunction-Prop P1 P2 ≃ type-impredicative-disjunction-Prop
+  equiv-impredicative-disjunction-Prop =
+    equiv-iff
+      ( P1 ∨ P2)
+      ( impredicative-disjunction-Prop)
+      ( map-impredicative-disjunction-Prop)
+      ( map-inv-impredicative-disjunction-Prop)
+```
+
+### The impredicative encoding of the empty type
+
+```agda
+impredicative-empty-Prop : Prop (lsuc lzero)
+impredicative-empty-Prop = ∀' (Prop lzero) (λ P → P)
+
+type-impredicative-empty-Prop : UU (lsuc lzero)
+type-impredicative-empty-Prop = type-Prop impredicative-empty-Prop
+
+is-empty-impredicative-empty-Prop :
+  is-empty type-impredicative-empty-Prop
+is-empty-impredicative-empty-Prop e = e empty-Prop
+
+equiv-impredicative-empty-Prop :
+  empty ≃ type-impredicative-empty-Prop
+equiv-impredicative-empty-Prop =
+  equiv-is-empty id is-empty-impredicative-empty-Prop
 ```
 
 ### The impredicative encoding of negation
 
 ```agda
-impredicative-neg-Prop :
-  {l : Level} → UU l → Prop (lsuc l)
-impredicative-neg-Prop {l} A =
-  Π-Prop (Prop l) (λ Q → function-Prop A Q)
+module _
+  {l : Level} (A : UU l)
+  where
 
-type-impredicative-neg-Prop :
-  {l : Level} → UU l → UU (lsuc l)
-type-impredicative-neg-Prop A =
-  type-Prop (impredicative-neg-Prop A)
+  impredicative-neg-Prop : Prop (lsuc l)
+  impredicative-neg-Prop =
+    Π-Prop (Prop l) (λ Q → function-Prop A Q)
 
-map-impredicative-neg-Prop :
-  {l : Level} (A : UU l) →
-  ¬ A → type-impredicative-neg-Prop A
-map-impredicative-neg-Prop A f Q a = ex-falso (f a)
+  type-impredicative-neg-Prop : UU (lsuc l)
+  type-impredicative-neg-Prop = type-Prop impredicative-neg-Prop
 
-inv-map-impredicative-neg-Prop :
-  {l : Level} (A : UU l) →
-  type-impredicative-neg-Prop A → ¬ A
-inv-map-impredicative-neg-Prop A H a = H (neg-Prop' A) a a
+  map-impredicative-neg-Prop : ¬ A → type-impredicative-neg-Prop
+  map-impredicative-neg-Prop f Q a = ex-falso (f a)
 
-equiv-impredicative-neg-Prop :
-  {l : Level} (A : UU l) →
-  ¬ A ≃ type-impredicative-neg-Prop A
-equiv-impredicative-neg-Prop A =
-  equiv-iff
-    ( neg-Prop' A)
-    ( impredicative-neg-Prop A)
-    ( map-impredicative-neg-Prop A)
-    ( inv-map-impredicative-neg-Prop A)
+  map-inv-impredicative-neg-Prop : type-impredicative-neg-Prop → ¬ A
+  map-inv-impredicative-neg-Prop H a = H (neg-type-Prop A) a a
+
+  equiv-impredicative-neg-Prop : ¬ A ≃ type-impredicative-neg-Prop
+  equiv-impredicative-neg-Prop =
+    equiv-iff
+      ( neg-type-Prop A)
+      ( impredicative-neg-Prop)
+      ( map-impredicative-neg-Prop)
+      ( map-inv-impredicative-neg-Prop)
 ```
 
 ### The impredicative encoding of existential quantification
 
 ```agda
-impredicative-exists-Prop :
-  {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) → Prop (lsuc (l1 ⊔ l2))
-impredicative-exists-Prop {l1} {l2} {A} P =
-  Π-Prop
-    ( Prop (l1 ⊔ l2))
-    ( λ Q → function-Prop ((x : A) → type-Prop (P x) → type-Prop Q) Q)
+module _
+  {l1 l2 : Level} {A : UU l1} (P : A → Prop l2)
+  where
 
-type-impredicative-exists-Prop :
-  {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) → UU (lsuc (l1 ⊔ l2))
-type-impredicative-exists-Prop P =
-  type-Prop (impredicative-exists-Prop P)
+  impredicative-exists-Prop : Prop (lsuc (l1 ⊔ l2))
+  impredicative-exists-Prop =
+    ∀' (Prop (l1 ⊔ l2)) (λ Q → (∀' A (λ x → P x ⇒ Q)) ⇒ Q)
 
-map-impredicative-exists-Prop :
-  {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) →
-  exists A P → type-impredicative-exists-Prop P
-map-impredicative-exists-Prop {l1} {l2} {A} P =
-  map-universal-property-trunc-Prop
-    ( impredicative-exists-Prop P)
-    ( ind-Σ (λ x y Q h → h x y))
+  type-impredicative-exists-Prop : UU (lsuc (l1 ⊔ l2))
+  type-impredicative-exists-Prop =
+    type-Prop impredicative-exists-Prop
 
-inv-map-impredicative-exists-Prop :
-  {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) →
-  type-impredicative-exists-Prop P → exists A P
-inv-map-impredicative-exists-Prop {A = A} P H =
-  H ( exists-Prop A P)
-    ( λ x y → unit-trunc-Prop (pair x y))
+  map-impredicative-exists-Prop :
+    exists A P → type-impredicative-exists-Prop
+  map-impredicative-exists-Prop =
+    map-universal-property-trunc-Prop
+      ( impredicative-exists-Prop)
+      ( ind-Σ (λ x y Q h → h x y))
 
-equiv-impredicative-exists-Prop :
-  {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) →
-  exists A P ≃ type-impredicative-exists-Prop P
-equiv-impredicative-exists-Prop {A = A} P =
-  equiv-iff
-    ( exists-Prop A P)
-    ( impredicative-exists-Prop P)
-    ( map-impredicative-exists-Prop P)
-    ( inv-map-impredicative-exists-Prop P)
+  map-inv-impredicative-exists-Prop :
+    type-impredicative-exists-Prop → exists A P
+  map-inv-impredicative-exists-Prop H =
+    H (∃ A P) (λ x y → unit-trunc-Prop (x , y))
+
+  equiv-impredicative-exists-Prop :
+    exists A P ≃ type-impredicative-exists-Prop
+  equiv-impredicative-exists-Prop =
+    equiv-iff
+      ( ∃ A P)
+      ( impredicative-exists-Prop)
+      ( map-impredicative-exists-Prop)
+      ( map-inv-impredicative-exists-Prop)
 ```
 
 ### The impredicative encoding of the based identity type of a set
 
 ```agda
-impredicative-based-id-Prop :
-  {l : Level} (A : Set l) (a x : type-Set A) → Prop (lsuc l)
-impredicative-based-id-Prop {l} A a x =
-  Π-Prop (type-Set A → Prop l) (λ Q → hom-Prop (Q a) (Q x))
+module _
+  {l : Level} (A : Set l) (a x : type-Set A)
+  where
 
-type-impredicative-based-id-Prop :
-  {l : Level} (A : Set l) (a x : type-Set A) → UU (lsuc l)
-type-impredicative-based-id-Prop A a x =
-  type-Prop (impredicative-based-id-Prop A a x)
+  impredicative-based-id-Prop : Prop (lsuc l)
+  impredicative-based-id-Prop = ∀' (type-Set A → Prop l) (λ Q → Q a ⇒ Q x)
 
-map-impredicative-based-id-Prop :
-  {l : Level} (A : Set l) (a x : type-Set A) →
-  a ＝ x → type-impredicative-based-id-Prop A a x
-map-impredicative-based-id-Prop A a .a refl Q p = p
+  type-impredicative-based-id-Prop : UU (lsuc l)
+  type-impredicative-based-id-Prop = type-Prop impredicative-based-id-Prop
 
-inv-map-impredicative-based-id-Prop :
-  {l : Level} (A : Set l) (a x : type-Set A) →
-  type-impredicative-based-id-Prop A a x → a ＝ x
-inv-map-impredicative-based-id-Prop A a x H =
-  H (λ x → pair (a ＝ x) (is-set-type-Set A a x)) refl
+  map-impredicative-based-id-Prop :
+    a ＝ x → type-impredicative-based-id-Prop
+  map-impredicative-based-id-Prop refl Q p = p
 
-equiv-impredicative-based-id-Prop :
-  {l : Level} (A : Set l) (a x : type-Set A) →
-  (a ＝ x) ≃ type-impredicative-based-id-Prop A a x
-equiv-impredicative-based-id-Prop A a x =
-  equiv-iff
-    ( pair (a ＝ x) (is-set-type-Set A a x))
-    ( impredicative-based-id-Prop A a x)
-    ( map-impredicative-based-id-Prop A a x)
-    ( inv-map-impredicative-based-id-Prop A a x)
+  map-inv-impredicative-based-id-Prop :
+    type-impredicative-based-id-Prop → a ＝ x
+  map-inv-impredicative-based-id-Prop H = H (Id-Prop A a) refl
+
+  equiv-impredicative-based-id-Prop :
+    (a ＝ x) ≃ type-impredicative-based-id-Prop
+  equiv-impredicative-based-id-Prop =
+    equiv-iff
+      ( Id-Prop A a x)
+      ( impredicative-based-id-Prop)
+      ( map-impredicative-based-id-Prop)
+      ( map-inv-impredicative-based-id-Prop)
 ```
 
 ### The impredicative encoding of Martin-Löf's identity type of a set
 
 ```agda
-impredicative-id-Prop :
-  {l : Level} (A : Set l) (x y : type-Set A) → Prop (lsuc l)
-impredicative-id-Prop {l} A x y =
-  Π-Prop (type-Set A → type-Set A → Prop l)
-    (λ Q → function-Prop ((a : type-Set A) → type-Prop (Q a a)) (Q x y))
+module _
+  {l : Level} (A : Set l) (x y : type-Set A)
+  where
 
-type-impredicative-id-Prop :
-  {l : Level} (A : Set l) (x y : type-Set A) → UU (lsuc l)
-type-impredicative-id-Prop A x y =
-  type-Prop (impredicative-id-Prop A x y)
+  impredicative-id-Prop : Prop (lsuc l)
+  impredicative-id-Prop =
+    ∀'
+      ( type-Set A → type-Set A → Prop l)
+      ( λ Q → (∀' (type-Set A) (λ a → Q a a)) ⇒ Q x y)
 
-map-impredicative-id-Prop :
-  {l : Level} (A : Set l) (x y : type-Set A) →
-  x ＝ y → type-impredicative-id-Prop A x y
-map-impredicative-id-Prop A x .x refl Q r = r x
+  type-impredicative-id-Prop : UU (lsuc l)
+  type-impredicative-id-Prop = type-Prop impredicative-id-Prop
 
-inv-map-impredicative-id-Prop :
-  {l : Level} (A : Set l) (x y : type-Set A) →
-  type-impredicative-id-Prop A x y → x ＝ y
-inv-map-impredicative-id-Prop A x y H =
-  H (λ a b → pair (a ＝ b) (is-set-type-Set A a b)) (λ a → refl)
+  map-impredicative-id-Prop :
+    x ＝ y → type-impredicative-id-Prop
+  map-impredicative-id-Prop refl Q r = r x
 
-equiv-impredicative-id-Prop :
-  {l : Level} (A : Set l) (x y : type-Set A) →
-  (x ＝ y) ≃ type-impredicative-id-Prop A x y
-equiv-impredicative-id-Prop A x y =
-  equiv-iff
-    ( pair (x ＝ y) (is-set-type-Set A x y))
-    ( impredicative-id-Prop A x y)
-    ( map-impredicative-id-Prop A x y)
-    ( inv-map-impredicative-id-Prop A x y)
+  map-inv-impredicative-id-Prop :
+    type-impredicative-id-Prop → x ＝ y
+  map-inv-impredicative-id-Prop H = H (Id-Prop A) (refl-htpy)
+
+  equiv-impredicative-id-Prop :
+    (x ＝ y) ≃ type-impredicative-id-Prop
+  equiv-impredicative-id-Prop =
+    equiv-iff
+      ( Id-Prop A x y)
+      ( impredicative-id-Prop)
+      ( map-impredicative-id-Prop)
+      ( map-inv-impredicative-id-Prop)
 ```
+
+## Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}
+
+## External links
+
+- [Constructing coproduct types and boolean types from universes](https://mathoverflow.net/questions/457904/constructing-coproduct-types-and-boolean-types-from-universes)
+  at mathoverflow

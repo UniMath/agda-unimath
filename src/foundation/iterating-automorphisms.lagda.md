@@ -15,12 +15,12 @@ open import foundation.automorphisms
 open import foundation.equivalence-extensionality
 open import foundation.iterating-functions
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -93,7 +93,7 @@ module _
   iterate-automorphism-ℤ (inl zero-ℕ) e = inv-equiv e
   iterate-automorphism-ℤ (inl (succ-ℕ x)) e =
     inv-equiv e ∘e (iterate-automorphism-ℤ (inl x) e)
-  iterate-automorphism-ℤ (inr (inl star)) e = id-equiv
+  iterate-automorphism-ℤ (inr (inl _)) e = id-equiv
   iterate-automorphism-ℤ (inr (inr zero-ℕ)) e = e
   iterate-automorphism-ℤ (inr (inr (succ-ℕ x))) e =
     e ∘e (iterate-automorphism-ℤ (inr (inr x)) e)
@@ -134,7 +134,7 @@ module _
   iterate-automorphism-ℤ' (inl zero-ℕ) e = inv-equiv e
   iterate-automorphism-ℤ' (inl (succ-ℕ x)) e =
     iterate-automorphism-ℤ' (inl x) e ∘e inv-equiv e
-  iterate-automorphism-ℤ' (inr (inl star)) e = id-equiv
+  iterate-automorphism-ℤ' (inr (inl _)) e = id-equiv
   iterate-automorphism-ℤ' (inr (inr zero-ℕ)) e = e
   iterate-automorphism-ℤ' (inr (inr (succ-ℕ x))) e =
     iterate-automorphism-ℤ' (inr (inr x)) e ∘e e
@@ -203,7 +203,7 @@ module _
     inv-htpy (map-inv-equiv e ·l is-retraction-map-inv-equiv e)
   iterate-automorphism-succ-ℤ (inl (succ-ℕ (succ-ℕ x))) e =
     map-inv-equiv e ·l iterate-automorphism-succ-ℤ (inl (succ-ℕ x)) e
-  iterate-automorphism-succ-ℤ (inr (inl star)) e = refl-htpy
+  iterate-automorphism-succ-ℤ (inr (inl _)) e = refl-htpy
   iterate-automorphism-succ-ℤ (inr (inr zero-ℕ)) e = refl-htpy
   iterate-automorphism-succ-ℤ (inr (inr (succ-ℕ x))) e =
     map-equiv e ·l iterate-automorphism-succ-ℤ (inr (inr x)) e
@@ -218,7 +218,7 @@ module _
   iterate-automorphism-succ-ℤ' (inl (succ-ℕ x)) e =
     ( inv-htpy (is-section-map-inv-equiv e)) ·r
     ( map-iterate-automorphism-ℤ (inl x) e)
-  iterate-automorphism-succ-ℤ' (inr (inl star)) e = refl-htpy
+  iterate-automorphism-succ-ℤ' (inr (inl _)) e = refl-htpy
   iterate-automorphism-succ-ℤ' (inr (inr x)) e = refl-htpy
 
   iterate-automorphism-pred-ℤ :
@@ -229,7 +229,7 @@ module _
   iterate-automorphism-pred-ℤ (inl zero-ℕ) e = refl-htpy
   iterate-automorphism-pred-ℤ (inl (succ-ℕ x)) e =
     map-inv-equiv e ·l iterate-automorphism-pred-ℤ (inl x) e
-  iterate-automorphism-pred-ℤ (inr (inl star)) e = refl-htpy
+  iterate-automorphism-pred-ℤ (inr (inl _)) e = refl-htpy
   iterate-automorphism-pred-ℤ (inr (inr zero-ℕ)) e =
     inv-htpy (is-section-map-inv-equiv e)
   iterate-automorphism-pred-ℤ (inr (inr (succ-ℕ zero-ℕ))) e =
@@ -244,7 +244,7 @@ module _
       ( inv-equiv e ∘e iterate-automorphism-ℤ k e)
   iterate-automorphism-pred-ℤ' (inl zero-ℕ) e = refl-htpy
   iterate-automorphism-pred-ℤ' (inl (succ-ℕ x)) e = refl-htpy
-  iterate-automorphism-pred-ℤ' (inr (inl star)) e = refl-htpy
+  iterate-automorphism-pred-ℤ' (inr (inl _)) e = refl-htpy
   iterate-automorphism-pred-ℤ' (inr (inr zero-ℕ)) e =
     inv-htpy (is-retraction-map-inv-equiv e)
   iterate-automorphism-pred-ℤ' (inr (inr (succ-ℕ x))) e =
@@ -258,7 +258,7 @@ module _
   reassociate-iterate-automorphism-ℤ (inl (succ-ℕ x)) e =
     ( iterate-automorphism-pred-ℤ (inl x) e) ∙h
     ( reassociate-iterate-automorphism-ℤ (inl x) e ·r map-inv-equiv e)
-  reassociate-iterate-automorphism-ℤ (inr (inl star)) e = refl-htpy
+  reassociate-iterate-automorphism-ℤ (inr (inl _)) e = refl-htpy
   reassociate-iterate-automorphism-ℤ (inr (inr zero-ℕ)) e = refl-htpy
   reassociate-iterate-automorphism-ℤ (inr (inr (succ-ℕ x))) e =
     ( iterate-automorphism-succ-ℤ (inr (inr x)) e) ∙h
@@ -281,7 +281,7 @@ module _
   iterate-automorphism-add-ℤ (inl (succ-ℕ k)) l e =
     ( iterate-automorphism-pred-ℤ' ((inl k) +ℤ l) e) ∙h
     ( map-inv-equiv e ·l iterate-automorphism-add-ℤ (inl k) l e)
-  iterate-automorphism-add-ℤ (inr (inl star)) l e = refl-htpy
+  iterate-automorphism-add-ℤ (inr (inl _)) l e = refl-htpy
   iterate-automorphism-add-ℤ (inr (inr zero-ℕ)) l e =
     iterate-automorphism-succ-ℤ' l e
   iterate-automorphism-add-ℤ (inr (inr (succ-ℕ x))) l e =

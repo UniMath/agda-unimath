@@ -36,222 +36,255 @@ ring structure on the product of R1 and R2.
 
 ```agda
 module _
-  {l1 l2 : Level} (R1 : Commutative-Ring-𝔽 l1) (R2 : Commutative-Ring-𝔽 l2)
+  {l1 l2 : Level}
+  (R1 : Finite-Commutative-Ring l1) (R2 : Finite-Commutative-Ring l2)
   where
 
-  set-prod-Commutative-Ring-𝔽 : Set (l1 ⊔ l2)
-  set-prod-Commutative-Ring-𝔽 =
-    set-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+  set-product-Finite-Commutative-Ring : Set (l1 ⊔ l2)
+  set-product-Finite-Commutative-Ring =
+    set-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  type-prod-Commutative-Ring-𝔽 : UU (l1 ⊔ l2)
-  type-prod-Commutative-Ring-𝔽 =
-    type-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+  type-product-Finite-Commutative-Ring : UU (l1 ⊔ l2)
+  type-product-Finite-Commutative-Ring =
+    type-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  is-set-type-prod-Commutative-Ring-𝔽 : is-set type-prod-Commutative-Ring-𝔽
-  is-set-type-prod-Commutative-Ring-𝔽 =
-    is-set-type-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+  is-set-type-product-Finite-Commutative-Ring :
+    is-set type-product-Finite-Commutative-Ring
+  is-set-type-product-Finite-Commutative-Ring =
+    is-set-type-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  is-finite-type-prod-Commutative-Ring-𝔽 :
-    is-finite type-prod-Commutative-Ring-𝔽
-  is-finite-type-prod-Commutative-Ring-𝔽 =
-    is-finite-type-prod-Ring-𝔽
-      ( finite-ring-Commutative-Ring-𝔽 R1)
-      ( finite-ring-Commutative-Ring-𝔽 R2)
+  is-finite-type-product-Finite-Commutative-Ring :
+    is-finite type-product-Finite-Commutative-Ring
+  is-finite-type-product-Finite-Commutative-Ring =
+    is-finite-type-product-Finite-Ring
+      ( finite-ring-Finite-Commutative-Ring R1)
+      ( finite-ring-Finite-Commutative-Ring R2)
 
-  finite-type-prod-Commutative-Ring-𝔽 : 𝔽 (l1 ⊔ l2)
-  pr1 finite-type-prod-Commutative-Ring-𝔽 = type-prod-Commutative-Ring-𝔽
-  pr2 finite-type-prod-Commutative-Ring-𝔽 =
-    is-finite-type-prod-Commutative-Ring-𝔽
+  finite-type-product-Finite-Commutative-Ring : Finite-Type (l1 ⊔ l2)
+  pr1 finite-type-product-Finite-Commutative-Ring =
+    type-product-Finite-Commutative-Ring
+  pr2 finite-type-product-Finite-Commutative-Ring =
+    is-finite-type-product-Finite-Commutative-Ring
 
-  add-prod-Commutative-Ring-𝔽 :
-    type-prod-Commutative-Ring-𝔽 →
-    type-prod-Commutative-Ring-𝔽 →
-    type-prod-Commutative-Ring-𝔽
-  add-prod-Commutative-Ring-𝔽 =
-    add-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+  add-product-Finite-Commutative-Ring :
+    type-product-Finite-Commutative-Ring →
+    type-product-Finite-Commutative-Ring →
+    type-product-Finite-Commutative-Ring
+  add-product-Finite-Commutative-Ring =
+    add-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  zero-prod-Commutative-Ring-𝔽 : type-prod-Commutative-Ring-𝔽
-  zero-prod-Commutative-Ring-𝔽 =
-    zero-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+  zero-product-Finite-Commutative-Ring : type-product-Finite-Commutative-Ring
+  zero-product-Finite-Commutative-Ring =
+    zero-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  neg-prod-Commutative-Ring-𝔽 :
-    type-prod-Commutative-Ring-𝔽 → type-prod-Commutative-Ring-𝔽
-  neg-prod-Commutative-Ring-𝔽 =
-    neg-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+  neg-product-Finite-Commutative-Ring :
+    type-product-Finite-Commutative-Ring → type-product-Finite-Commutative-Ring
+  neg-product-Finite-Commutative-Ring =
+    neg-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  left-unit-law-add-prod-Commutative-Ring-𝔽 :
-    (x : type-prod-Commutative-Ring-𝔽) →
-    Id (add-prod-Commutative-Ring-𝔽 zero-prod-Commutative-Ring-𝔽 x) x
-  left-unit-law-add-prod-Commutative-Ring-𝔽 =
-    left-unit-law-add-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
-
-  right-unit-law-add-prod-Commutative-Ring-𝔽 :
-    (x : type-prod-Commutative-Ring-𝔽) →
-    Id (add-prod-Commutative-Ring-𝔽 x zero-prod-Commutative-Ring-𝔽) x
-  right-unit-law-add-prod-Commutative-Ring-𝔽 =
-    right-unit-law-add-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
-
-  left-inverse-law-add-prod-Commutative-Ring-𝔽 :
-    (x : type-prod-Commutative-Ring-𝔽) →
+  left-unit-law-add-product-Finite-Commutative-Ring :
+    (x : type-product-Finite-Commutative-Ring) →
     Id
-      ( add-prod-Commutative-Ring-𝔽 (neg-prod-Commutative-Ring-𝔽 x) x)
-      zero-prod-Commutative-Ring-𝔽
-  left-inverse-law-add-prod-Commutative-Ring-𝔽 =
-    left-inverse-law-add-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+      ( add-product-Finite-Commutative-Ring
+        ( zero-product-Finite-Commutative-Ring)
+        ( x))
+      ( x)
+  left-unit-law-add-product-Finite-Commutative-Ring =
+    left-unit-law-add-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  right-inverse-law-add-prod-Commutative-Ring-𝔽 :
-    (x : type-prod-Commutative-Ring-𝔽) →
+  right-unit-law-add-product-Finite-Commutative-Ring :
+    (x : type-product-Finite-Commutative-Ring) →
     Id
-      ( add-prod-Commutative-Ring-𝔽 x (neg-prod-Commutative-Ring-𝔽 x))
-      ( zero-prod-Commutative-Ring-𝔽)
-  right-inverse-law-add-prod-Commutative-Ring-𝔽 =
-    right-inverse-law-add-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+      ( add-product-Finite-Commutative-Ring
+        ( x)
+        ( zero-product-Finite-Commutative-Ring))
+      ( x)
+  right-unit-law-add-product-Finite-Commutative-Ring =
+    right-unit-law-add-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  associative-add-prod-Commutative-Ring-𝔽 :
-    (x y z : type-prod-Commutative-Ring-𝔽) →
+  left-inverse-law-add-product-Finite-Commutative-Ring :
+    (x : type-product-Finite-Commutative-Ring) →
     Id
-      ( add-prod-Commutative-Ring-𝔽 (add-prod-Commutative-Ring-𝔽 x y) z)
-      ( add-prod-Commutative-Ring-𝔽 x (add-prod-Commutative-Ring-𝔽 y z))
-  associative-add-prod-Commutative-Ring-𝔽 =
-    associative-add-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+      ( add-product-Finite-Commutative-Ring
+        ( neg-product-Finite-Commutative-Ring x)
+        ( x))
+      zero-product-Finite-Commutative-Ring
+  left-inverse-law-add-product-Finite-Commutative-Ring =
+    left-inverse-law-add-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  commutative-add-prod-Commutative-Ring-𝔽 :
-    (x y : type-prod-Commutative-Ring-𝔽) →
-    Id (add-prod-Commutative-Ring-𝔽 x y) (add-prod-Commutative-Ring-𝔽 y x)
-  commutative-add-prod-Commutative-Ring-𝔽 =
-    commutative-add-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
-
-  mul-prod-Commutative-Ring-𝔽 :
-    type-prod-Commutative-Ring-𝔽 →
-    type-prod-Commutative-Ring-𝔽 →
-    type-prod-Commutative-Ring-𝔽
-  mul-prod-Commutative-Ring-𝔽 =
-    mul-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
-
-  one-prod-Commutative-Ring-𝔽 : type-prod-Commutative-Ring-𝔽
-  one-prod-Commutative-Ring-𝔽 =
-    one-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
-
-  associative-mul-prod-Commutative-Ring-𝔽 :
-    (x y z : type-prod-Commutative-Ring-𝔽) →
+  right-inverse-law-add-product-Finite-Commutative-Ring :
+    (x : type-product-Finite-Commutative-Ring) →
     Id
-      ( mul-prod-Commutative-Ring-𝔽 (mul-prod-Commutative-Ring-𝔽 x y) z)
-      ( mul-prod-Commutative-Ring-𝔽 x (mul-prod-Commutative-Ring-𝔽 y z))
-  associative-mul-prod-Commutative-Ring-𝔽 =
-    associative-mul-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+      ( add-product-Finite-Commutative-Ring
+        ( x)
+        ( neg-product-Finite-Commutative-Ring x))
+      ( zero-product-Finite-Commutative-Ring)
+  right-inverse-law-add-product-Finite-Commutative-Ring =
+    right-inverse-law-add-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  left-unit-law-mul-prod-Commutative-Ring-𝔽 :
-    (x : type-prod-Commutative-Ring-𝔽) →
-    Id (mul-prod-Commutative-Ring-𝔽 one-prod-Commutative-Ring-𝔽 x) x
-  left-unit-law-mul-prod-Commutative-Ring-𝔽 =
-    left-unit-law-mul-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
-
-  right-unit-law-mul-prod-Commutative-Ring-𝔽 :
-    (x : type-prod-Commutative-Ring-𝔽) →
-    Id (mul-prod-Commutative-Ring-𝔽 x one-prod-Commutative-Ring-𝔽) x
-  right-unit-law-mul-prod-Commutative-Ring-𝔽 =
-    right-unit-law-mul-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
-
-  left-distributive-mul-add-prod-Commutative-Ring-𝔽 :
-    (x y z : type-prod-Commutative-Ring-𝔽) →
+  associative-add-product-Finite-Commutative-Ring :
+    (x y z : type-product-Finite-Commutative-Ring) →
     Id
-      ( mul-prod-Commutative-Ring-𝔽 x (add-prod-Commutative-Ring-𝔽 y z))
-      ( add-prod-Commutative-Ring-𝔽
-        ( mul-prod-Commutative-Ring-𝔽 x y)
-        ( mul-prod-Commutative-Ring-𝔽 x z))
-  left-distributive-mul-add-prod-Commutative-Ring-𝔽 =
-    left-distributive-mul-add-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+      ( add-product-Finite-Commutative-Ring
+        ( add-product-Finite-Commutative-Ring x y)
+        ( z))
+      ( add-product-Finite-Commutative-Ring
+        ( x)
+        ( add-product-Finite-Commutative-Ring y z))
+  associative-add-product-Finite-Commutative-Ring =
+    associative-add-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  right-distributive-mul-add-prod-Commutative-Ring-𝔽 :
-    (x y z : type-prod-Commutative-Ring-𝔽) →
+  commutative-add-product-Finite-Commutative-Ring :
+    (x y : type-product-Finite-Commutative-Ring) →
     Id
-      ( mul-prod-Commutative-Ring-𝔽 (add-prod-Commutative-Ring-𝔽 x y) z)
-      ( add-prod-Commutative-Ring-𝔽
-        ( mul-prod-Commutative-Ring-𝔽 x z)
-        ( mul-prod-Commutative-Ring-𝔽 y z))
-  right-distributive-mul-add-prod-Commutative-Ring-𝔽 =
-    right-distributive-mul-add-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+      ( add-product-Finite-Commutative-Ring x y)
+      ( add-product-Finite-Commutative-Ring y x)
+  commutative-add-product-Finite-Commutative-Ring =
+    commutative-add-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  semigroup-prod-Commutative-Ring-𝔽 : Semigroup (l1 ⊔ l2)
-  semigroup-prod-Commutative-Ring-𝔽 =
-    semigroup-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+  mul-product-Finite-Commutative-Ring :
+    type-product-Finite-Commutative-Ring →
+    type-product-Finite-Commutative-Ring →
+    type-product-Finite-Commutative-Ring
+  mul-product-Finite-Commutative-Ring =
+    mul-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  group-prod-Commutative-Ring-𝔽 : Group (l1 ⊔ l2)
-  group-prod-Commutative-Ring-𝔽 =
-    group-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+  one-product-Finite-Commutative-Ring : type-product-Finite-Commutative-Ring
+  one-product-Finite-Commutative-Ring =
+    one-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  ab-prod-Commutative-Ring-𝔽 : Ab (l1 ⊔ l2)
-  ab-prod-Commutative-Ring-𝔽 =
-    ab-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+  associative-mul-product-Finite-Commutative-Ring :
+    (x y z : type-product-Finite-Commutative-Ring) →
+    Id
+      ( mul-product-Finite-Commutative-Ring
+        ( mul-product-Finite-Commutative-Ring x y)
+        ( z))
+      ( mul-product-Finite-Commutative-Ring
+        ( x)
+        ( mul-product-Finite-Commutative-Ring y z))
+  associative-mul-product-Finite-Commutative-Ring =
+    associative-mul-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  ring-prod-Commutative-Ring-𝔽 : Commutative-Ring (l1 ⊔ l2)
-  ring-prod-Commutative-Ring-𝔽 =
-    prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+  left-unit-law-mul-product-Finite-Commutative-Ring :
+    (x : type-product-Finite-Commutative-Ring) →
+    mul-product-Finite-Commutative-Ring one-product-Finite-Commutative-Ring x ＝
+    x
+  left-unit-law-mul-product-Finite-Commutative-Ring =
+    left-unit-law-mul-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  commutative-mul-prod-Commutative-Ring-𝔽 :
-    (x y : type-prod-Commutative-Ring-𝔽) →
-    mul-prod-Commutative-Ring-𝔽 x y ＝ mul-prod-Commutative-Ring-𝔽 y x
-  commutative-mul-prod-Commutative-Ring-𝔽 =
-    commutative-mul-prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+  right-unit-law-mul-product-Finite-Commutative-Ring :
+    (x : type-product-Finite-Commutative-Ring) →
+    mul-product-Finite-Commutative-Ring x one-product-Finite-Commutative-Ring ＝
+    x
+  right-unit-law-mul-product-Finite-Commutative-Ring =
+    right-unit-law-mul-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  commutative-ring-prod-Commutative-Ring-𝔽 : Commutative-Ring (l1 ⊔ l2)
-  commutative-ring-prod-Commutative-Ring-𝔽 =
-    prod-Commutative-Ring
-      ( commutative-ring-Commutative-Ring-𝔽 R1)
-      ( commutative-ring-Commutative-Ring-𝔽 R2)
+  left-distributive-mul-add-product-Finite-Commutative-Ring :
+    (x y z : type-product-Finite-Commutative-Ring) →
+    Id
+      ( mul-product-Finite-Commutative-Ring
+        ( x)
+        ( add-product-Finite-Commutative-Ring y z))
+      ( add-product-Finite-Commutative-Ring
+        ( mul-product-Finite-Commutative-Ring x y)
+        ( mul-product-Finite-Commutative-Ring x z))
+  left-distributive-mul-add-product-Finite-Commutative-Ring =
+    left-distributive-mul-add-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
 
-  prod-Commutative-Ring-𝔽 : Commutative-Ring-𝔽 (l1 ⊔ l2)
-  pr1 prod-Commutative-Ring-𝔽 =
-    prod-Ring-𝔽
-      ( finite-ring-Commutative-Ring-𝔽 R1)
-      ( finite-ring-Commutative-Ring-𝔽 R2)
-  pr2 prod-Commutative-Ring-𝔽 = commutative-mul-prod-Commutative-Ring-𝔽
+  right-distributive-mul-add-product-Finite-Commutative-Ring :
+    (x y z : type-product-Finite-Commutative-Ring) →
+    Id
+      ( mul-product-Finite-Commutative-Ring
+        ( add-product-Finite-Commutative-Ring x y)
+        ( z))
+      ( add-product-Finite-Commutative-Ring
+        ( mul-product-Finite-Commutative-Ring x z)
+        ( mul-product-Finite-Commutative-Ring y z))
+  right-distributive-mul-add-product-Finite-Commutative-Ring =
+    right-distributive-mul-add-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
+
+  semigroup-product-Finite-Commutative-Ring : Semigroup (l1 ⊔ l2)
+  semigroup-product-Finite-Commutative-Ring =
+    semigroup-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
+
+  group-product-Finite-Commutative-Ring : Group (l1 ⊔ l2)
+  group-product-Finite-Commutative-Ring =
+    group-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
+
+  ab-product-Finite-Commutative-Ring : Ab (l1 ⊔ l2)
+  ab-product-Finite-Commutative-Ring =
+    ab-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
+
+  ring-product-Finite-Commutative-Ring : Commutative-Ring (l1 ⊔ l2)
+  ring-product-Finite-Commutative-Ring =
+    product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
+
+  commutative-mul-product-Finite-Commutative-Ring :
+    (x y : type-product-Finite-Commutative-Ring) →
+    mul-product-Finite-Commutative-Ring x y ＝
+    mul-product-Finite-Commutative-Ring y x
+  commutative-mul-product-Finite-Commutative-Ring =
+    commutative-mul-product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
+
+  commutative-ring-product-Finite-Commutative-Ring : Commutative-Ring (l1 ⊔ l2)
+  commutative-ring-product-Finite-Commutative-Ring =
+    product-Commutative-Ring
+      ( commutative-ring-Finite-Commutative-Ring R1)
+      ( commutative-ring-Finite-Commutative-Ring R2)
+
+  product-Finite-Commutative-Ring : Finite-Commutative-Ring (l1 ⊔ l2)
+  pr1 product-Finite-Commutative-Ring =
+    product-Finite-Ring
+      ( finite-ring-Finite-Commutative-Ring R1)
+      ( finite-ring-Finite-Commutative-Ring R2)
+  pr2 product-Finite-Commutative-Ring =
+    commutative-mul-product-Finite-Commutative-Ring
 ```

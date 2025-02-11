@@ -9,6 +9,7 @@ module order-theory.large-subposets where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.large-binary-relations
+open import foundation.logical-equivalences
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -34,6 +35,25 @@ this is automatic by antisymmetry.
 
 ## Definition
 
+### The predicate of being closed under similarity
+
+```agda
+module _
+  {α γ : Level → Level} {β : Level → Level → Level}
+  (P : Large-Poset α β) (S : Large-Subpreorder γ (large-preorder-Large-Poset P))
+  where
+
+  is-closed-under-sim-Large-Subpreorder : UUω
+  is-closed-under-sim-Large-Subpreorder =
+    {l1 l2 : Level}
+    (x : type-Large-Poset P l1) (y : type-Large-Poset P l2) →
+    leq-Large-Poset P x y → leq-Large-Poset P y x →
+    is-in-Large-Subpreorder (large-preorder-Large-Poset P) S x →
+    is-in-Large-Subpreorder (large-preorder-Large-Poset P) S y
+```
+
+### Large subposets
+
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level} (γ : Level → Level)
@@ -47,17 +67,7 @@ module _
       large-subpreorder-Large-Subposet :
         Large-Subpreorder γ (large-preorder-Large-Poset P)
       is-closed-under-sim-Large-Subposet :
-        {l1 l2 : Level}
-        (x : type-Large-Poset P l1) (y : type-Large-Poset P l2) →
-        leq-Large-Poset P x y → leq-Large-Poset P y x →
-        is-in-Large-Subpreorder
-          ( large-preorder-Large-Poset P)
-          ( large-subpreorder-Large-Subposet)
-          ( x) →
-        is-in-Large-Subpreorder
-          ( large-preorder-Large-Poset P)
-          ( large-subpreorder-Large-Subposet)
-          ( y)
+        is-closed-under-sim-Large-Subpreorder P large-subpreorder-Large-Subposet
 
   open Large-Subposet public
 
@@ -87,14 +97,14 @@ module _
       ( large-subpreorder-Large-Subposet S)
 
   leq-prop-Large-Subposet :
-    Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Subposet
+    Large-Relation-Prop β type-Large-Subposet
   leq-prop-Large-Subposet =
     leq-prop-Large-Subpreorder
       ( large-preorder-Large-Poset P)
       ( large-subpreorder-Large-Subposet S)
 
   leq-Large-Subposet :
-    Large-Relation (λ l → α l ⊔ γ l) β type-Large-Subposet
+    Large-Relation β type-Large-Subposet
   leq-Large-Subposet =
     leq-Large-Subpreorder
       ( large-preorder-Large-Poset P)
@@ -135,4 +145,18 @@ module _
   antisymmetric-leq-Large-Poset
     large-poset-Large-Subposet =
     antisymmetric-leq-Large-Subposet
+```
+
+### The predicate of having the same elements
+
+```agda
+module _
+  {α γS γT : Level → Level} {β : Level → Level → Level}
+  (P : Large-Poset α β) (S : Large-Subposet γS P) (T : Large-Subposet γT P)
+  where
+
+  has-same-elements-Large-Subposet : UUω
+  has-same-elements-Large-Subposet =
+    {l : Level} (x : type-Large-Poset P l) →
+    is-in-Large-Subposet P S x ↔ is-in-Large-Subposet P T x
 ```

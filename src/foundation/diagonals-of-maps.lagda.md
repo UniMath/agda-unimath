@@ -10,6 +10,7 @@ module foundation.diagonals-of-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-fibers-of-maps
+open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
@@ -20,7 +21,8 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
-open import foundation-core.pullbacks
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -33,10 +35,8 @@ open import foundation-core.truncation-levels
 ```agda
 diagonal-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  A → canonical-pullback f f
-pr1 (diagonal-map f x) = x
-pr1 (pr2 (diagonal-map f x)) = x
-pr2 (pr2 (diagonal-map f x)) = refl
+  A → standard-pullback f f
+diagonal-map f x = (x , x , refl)
 ```
 
 ## Properties
@@ -44,46 +44,37 @@ pr2 (pr2 (diagonal-map f x)) = refl
 ### The fiber of the diagonal of a map
 
 ```agda
-fiber-ap-fiber-diagonal-map :
+module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (t : canonical-pullback f f) →
-  (fiber (diagonal-map f) t) → (fiber (ap f) (pr2 (pr2 t)))
-pr1 (fiber-ap-fiber-diagonal-map f .(diagonal-map f z) (z , refl)) = refl
-pr2 (fiber-ap-fiber-diagonal-map f .(diagonal-map f z) (z , refl)) = refl
+  (t : standard-pullback f f)
+  where
 
-fiber-diagonal-map-fiber-ap :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (t : canonical-pullback f f) →
-  (fiber (ap f) (pr2 (pr2 t))) → (fiber (diagonal-map f) t)
-pr1 (fiber-diagonal-map-fiber-ap f (x , .x , .(ap f refl)) (refl , refl)) = x
-pr2 (fiber-diagonal-map-fiber-ap f (x , .x , .(ap f refl)) (refl , refl)) = refl
+  fiber-ap-fiber-diagonal-map :
+    fiber (diagonal-map f) t → fiber (ap f) (pr2 (pr2 t))
+  fiber-ap-fiber-diagonal-map (z , refl) = (refl , refl)
 
-abstract
-  is-section-fiber-diagonal-map-fiber-ap :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-    (t : canonical-pullback f f) →
-    ((fiber-ap-fiber-diagonal-map f t) ∘ (fiber-diagonal-map-fiber-ap f t)) ~ id
-  is-section-fiber-diagonal-map-fiber-ap f (x , .x , .refl) (refl , refl) =
-    refl
+  fiber-diagonal-map-fiber-ap :
+    fiber (ap f) (pr2 (pr2 t)) → fiber (diagonal-map f) t
+  fiber-diagonal-map-fiber-ap (refl , refl) = (pr1 t , refl)
 
-abstract
-  is-retraction-fiber-diagonal-map-fiber-ap :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-    (t : canonical-pullback f f) →
-    ((fiber-diagonal-map-fiber-ap f t) ∘ (fiber-ap-fiber-diagonal-map f t)) ~ id
-  is-retraction-fiber-diagonal-map-fiber-ap f .(x , x , refl) (x , refl) =
-    refl
+  abstract
+    is-section-fiber-diagonal-map-fiber-ap :
+      is-section fiber-ap-fiber-diagonal-map fiber-diagonal-map-fiber-ap
+    is-section-fiber-diagonal-map-fiber-ap (refl , refl) = refl
 
-abstract
-  is-equiv-fiber-ap-fiber-diagonal-map :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-    (t : canonical-pullback f f) →
-    is-equiv (fiber-ap-fiber-diagonal-map f t)
-  is-equiv-fiber-ap-fiber-diagonal-map f t =
-    is-equiv-is-invertible
-      ( fiber-diagonal-map-fiber-ap f t)
-      ( is-section-fiber-diagonal-map-fiber-ap f t)
-      ( is-retraction-fiber-diagonal-map-fiber-ap f t)
+  abstract
+    is-retraction-fiber-diagonal-map-fiber-ap :
+      is-retraction fiber-ap-fiber-diagonal-map fiber-diagonal-map-fiber-ap
+    is-retraction-fiber-diagonal-map-fiber-ap (x , refl) = refl
+
+  abstract
+    is-equiv-fiber-ap-fiber-diagonal-map :
+      is-equiv fiber-ap-fiber-diagonal-map
+    is-equiv-fiber-ap-fiber-diagonal-map =
+      is-equiv-is-invertible
+        ( fiber-diagonal-map-fiber-ap)
+        ( is-section-fiber-diagonal-map-fiber-ap)
+        ( is-retraction-fiber-diagonal-map-fiber-ap)
 ```
 
 ### A map is `k+1`-truncated if and only if its diagonal is `k`-truncated

@@ -13,25 +13,18 @@ open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
 open import structured-types.equivalences-types-equipped-with-automorphisms
-open import structured-types.morphisms-types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-automorphisms
 
 open import synthetic-homotopy-theory.free-loops
@@ -143,7 +136,7 @@ be described as a diagram
   X -----> A base
   |         |
  e|         | tr A loop
-  v         v
+  ∨         ∨
   X -----> A base
       α
 ```
@@ -273,11 +266,11 @@ equiv-eq-descent-data-circle :
 equiv-eq-descent-data-circle =
   equiv-eq-Type-With-Automorphism
 
-is-contr-total-equiv-descent-data-circle :
+is-torsorial-equiv-descent-data-circle :
   { l1 : Level} (P : descent-data-circle l1) →
-  is-contr (Σ (descent-data-circle l1) (equiv-descent-data-circle P))
-is-contr-total-equiv-descent-data-circle =
-  is-contr-total-equiv-Type-With-Automorphism
+  is-torsorial (equiv-descent-data-circle P)
+is-torsorial-equiv-descent-data-circle =
+  is-torsorial-equiv-Type-With-Automorphism
 
 is-equiv-equiv-eq-descent-data-circle :
   { l1 : Level} (P Q : descent-data-circle l1) →
@@ -337,13 +330,13 @@ module _
     eq-equiv-descent-data-circle
       ( descent-data-family-circle l A)
       ( comparison-descent-data-circle l2 (ev-free-loop l (UU l2) A))
-      ( id-equiv , (htpy-eq (inv (compute-equiv-eq-ap (loop-free-loop l)))))
+      ( id-equiv , (htpy-eq (inv (compute-map-eq-ap (loop-free-loop l)))))
 
   is-equiv-descent-data-family-circle-universal-property-circle :
-    ( up-circle : universal-property-circle (lsuc l2) l) →
+    ( up-circle : universal-property-circle l) →
     is-equiv (descent-data-family-circle l)
   is-equiv-descent-data-family-circle-universal-property-circle up-circle =
-    is-equiv-comp-htpy
+    is-equiv-left-map-triangle
       ( descent-data-family-circle l)
       ( comparison-descent-data-circle l2)
       ( ev-free-loop l (UU l2))
@@ -359,7 +352,7 @@ unique-family-property-circle l2 {S} l =
 
 module _
   { l1 l2 : Level} {S : UU l1} (l : free-loop S)
-  ( up-circle : universal-property-circle (lsuc l2) l)
+  ( up-circle : universal-property-circle l)
   where
 
   unique-family-property-universal-property-circle :

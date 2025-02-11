@@ -7,9 +7,9 @@ module category-theory.commuting-squares-of-morphisms-in-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.commuting-squares-of-morphisms-in-set-magmoids
 open import category-theory.precategories
 
-open import foundation.identity-types
 open import foundation.universe-levels
 ```
 
@@ -23,13 +23,17 @@ A square of morphisms
   x ------> y
   |         |
   |         |
-  V         V
+  ∨         ∨
   z ------> w
 ```
 
 in a [precategory](category-theory.precategories.md) `C` is said to **commute**
 if there is an [identification](foundation-core.identity-types.md) between both
-composites.
+composites:
+
+```text
+  bottom ∘ left ＝ right ∘ top.
+```
 
 ## Definitions
 
@@ -41,6 +45,6 @@ coherence-square-hom-Precategory :
   (right : hom-Precategory C y w)
   (bottom : hom-Precategory C z w) →
   UU l2
-coherence-square-hom-Precategory C top left right bottom =
-  (comp-hom-Precategory C bottom left) ＝ (comp-hom-Precategory C right top)
+coherence-square-hom-Precategory C =
+  coherence-square-hom-Set-Magmoid (set-magmoid-Precategory C)
 ```

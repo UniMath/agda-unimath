@@ -7,13 +7,13 @@ module group-theory.equivalences-concrete-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
@@ -57,11 +57,11 @@ module _
   {l : Level} (G : Concrete-Group l)
   where
 
-  is-contr-total-equiv-Concrete-Group :
-    is-contr (Σ (Concrete-Group l) (equiv-Concrete-Group G))
-  is-contr-total-equiv-Concrete-Group =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-equiv-∞-Group (∞-group-Concrete-Group G))
+  is-torsorial-equiv-Concrete-Group :
+    is-torsorial (equiv-Concrete-Group G)
+  is-torsorial-equiv-Concrete-Group =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-equiv-∞-Group (∞-group-Concrete-Group G))
       ( λ H → is-prop-is-set (type-∞-Group H))
       ( ∞-group-Concrete-Group G)
       ( id-equiv-∞-Group (∞-group-Concrete-Group G))
@@ -75,7 +75,7 @@ module _
     (H : Concrete-Group l) → is-equiv (equiv-eq-Concrete-Group H)
   is-equiv-equiv-eq-Concrete-Group =
     fundamental-theorem-id
-      is-contr-total-equiv-Concrete-Group
+      is-torsorial-equiv-Concrete-Group
       equiv-eq-Concrete-Group
 
   extensionality-Concrete-Group :

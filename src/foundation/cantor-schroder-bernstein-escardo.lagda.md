@@ -10,6 +10,7 @@ module foundation.cantor-schroder-bernstein-escardo where
 open import foundation.action-on-identifications-functions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.injective-maps
 open import foundation.law-of-excluded-middle
 open import foundation.perfect-images
 open import foundation.split-surjective-maps
@@ -21,8 +22,8 @@ open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
 open import foundation-core.negation
+open import foundation-core.sets
 ```
 
 </details>
@@ -30,11 +31,16 @@ open import foundation-core.negation
 ## Idea
 
 The classical Cantor–Schröder–Bernstein theorem asserts that from any pair of
-injective maps `f : A → B` and `g : B → A` we can construct a bijection between
-`A` and `B`. In a recent generalization, Escardó proved that a
-Cantor–Schröder–Bernstein theorem also holds for ∞-groupoids. His generalization
-asserts that given two types that embed into each other, then the types are
-equivalent.
+[injective maps](foundation-core.injective-maps.md) `f : A → B` and `g : B → A`
+we can construct a bijection between `A` and `B`. In a recent generalization,
+Escardó proved that a Cantor–Schröder–Bernstein theorem also holds for
+∞-groupoids. His generalization asserts that given two types that
+[embed](foundation-core.embeddings.md) into each other, then the types are
+[equivalent](foundation-core.equivalences.md). {{#cite Esc21}}
+
+The Cantor–Schröder–Bernstein theorem is the 25th theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ## Statement
 
@@ -171,10 +177,25 @@ module _
     is-equiv-map-Cantor-Schröder-Bernstein-Escardó f g
 ```
 
+## Corollaries
+
+### The Cantor–Schröder–Bernstein theorem
+
+```agda
+Cantor-Schröder-Bernstein :
+  {l1 l2 : Level} (lem : LEM (l1 ⊔ l2))
+  (A : Set l1) (B : Set l2) →
+  injection (type-Set A) (type-Set B) →
+  injection (type-Set B) (type-Set A) →
+  (type-Set A) ≃ (type-Set B)
+Cantor-Schröder-Bernstein lem A B f g =
+  Cantor-Schröder-Bernstein-Escardó lem (emb-injection B f) (emb-injection A g)
+```
+
 ## References
 
-- Martín H. Escardó, _The Cantor–Schröder–Bernstein Theorem for ∞-groupoids_,
-  Journal of Homotopy and Related Structures, Volume 16, Issue 3, 2021
-  ([arXiv:2002.07079](https://arxiv.org/abs/2002.07079),[DOI:10.1007](https://doi.org/10.1007/s40062-021-00284-6))
-  - <https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.md>
-  - <https://github.com/martinescardo/TypeTopology>
+- Escardó's formalizations regarding this theorem can be found at
+  <https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.index.html>.
+  {{#cite TypeTopology}}
+
+{{#bibliography}}

@@ -432,7 +432,7 @@ module _
     node-combinator-Directed-Tree T
   map-compute-node-combinator-Directed-Tree (inl (i , x)) =
     node-inclusion-combinator-Directed-Tree i x
-  map-compute-node-combinator-Directed-Tree (inr star) =
+  map-compute-node-combinator-Directed-Tree (inr _) =
     root-combinator-Directed-Tree
 
   map-inv-compute-node-combinator-Directed-Tree :
@@ -459,7 +459,7 @@ module _
       map-compute-node-combinator-Directed-Tree) ~ id
   is-retraction-map-inv-compute-node-combinator-Directed-Tree (inl (i , x)) =
     refl
-  is-retraction-map-inv-compute-node-combinator-Directed-Tree (inr star) = refl
+  is-retraction-map-inv-compute-node-combinator-Directed-Tree (inr _) = refl
 
   is-equiv-map-compute-node-combinator-Directed-Tree :
     is-equiv map-compute-node-combinator-Directed-Tree
@@ -508,8 +508,7 @@ module _
     ex-falso (H refl)
   is-section-map-inv-compute-proper-node-combinator-Directed-Tree
     ( node-inclusion-combinator-Directed-Tree i x , H) =
-    eq-pair-Σ
-      ( refl)
+    eq-pair-eq-fiber
       ( eq-is-prop
         ( is-prop-is-proper-node-Directed-Tree
           ( combinator-Directed-Tree T)
@@ -746,21 +745,21 @@ module _
       ( cases-map-inv-node-combinator-fiber-base-Directed-Tree x)
       ( eq-is-contr ( unique-walk-to-base-Directed-Tree T x))
 
-  is-equiv-node-combinator-fiber-base-Directed-Tree :
+  is-node-equiv-combinator-fiber-base-Directed-Tree :
     is-equiv node-combinator-fiber-base-Directed-Tree
-  is-equiv-node-combinator-fiber-base-Directed-Tree =
+  is-node-equiv-combinator-fiber-base-Directed-Tree =
     is-equiv-is-invertible
       map-inv-node-combinator-fiber-base-Directed-Tree
       is-section-map-inv-node-combinator-fiber-base-Directed-Tree
       is-retraction-map-inv-node-combinator-fiber-base-Directed-Tree
 
-  equiv-node-combinator-fiber-base-Directed-Tree :
+  node-equiv-combinator-fiber-base-Directed-Tree :
     node-combinator-Directed-Tree (fiber-base-Directed-Tree T) ≃
     node-Directed-Tree T
-  pr1 equiv-node-combinator-fiber-base-Directed-Tree =
+  pr1 node-equiv-combinator-fiber-base-Directed-Tree =
     node-combinator-fiber-base-Directed-Tree
-  pr2 equiv-node-combinator-fiber-base-Directed-Tree =
-    is-equiv-node-combinator-fiber-base-Directed-Tree
+  pr2 node-equiv-combinator-fiber-base-Directed-Tree =
+    is-node-equiv-combinator-fiber-base-Directed-Tree
 
   edge-combinator-fiber-base-Directed-Tree :
     (x y : node-combinator-Directed-Tree (fiber-base-Directed-Tree T)) →
@@ -792,7 +791,7 @@ module _
       ( combinator-Directed-Tree (fiber-base-Directed-Tree T))
       ( T)
       ( hom-combinator-fiber-base-Directed-Tree)
-      ( is-equiv-node-combinator-fiber-base-Directed-Tree)
+      ( is-node-equiv-combinator-fiber-base-Directed-Tree)
 
   combinator-fiber-base-Directed-Tree :
     equiv-Directed-Tree

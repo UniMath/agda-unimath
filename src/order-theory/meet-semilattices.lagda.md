@@ -53,9 +53,9 @@ module _
   {l : Level} (X : Semigroup l)
   where
 
-  is-meet-semilattice-Semigroup-Prop : Prop l
-  is-meet-semilattice-Semigroup-Prop =
-    prod-Prop
+  is-meet-semilattice-prop-Semigroup : Prop l
+  is-meet-semilattice-prop-Semigroup =
+    product-Prop
       ( Π-Prop
         ( type-Semigroup X)
         ( λ x →
@@ -76,19 +76,19 @@ module _
 
   is-meet-semilattice-Semigroup : UU l
   is-meet-semilattice-Semigroup =
-    type-Prop is-meet-semilattice-Semigroup-Prop
+    type-Prop is-meet-semilattice-prop-Semigroup
 
   is-prop-is-meet-semilattice-Semigroup :
     is-prop is-meet-semilattice-Semigroup
   is-prop-is-meet-semilattice-Semigroup =
-    is-prop-type-Prop is-meet-semilattice-Semigroup-Prop
+    is-prop-type-Prop is-meet-semilattice-prop-Semigroup
 ```
 
 ### The algebraic definition of meet-semilattices
 
 ```agda
 Meet-Semilattice : (l : Level) → UU (lsuc l)
-Meet-Semilattice l = type-subtype is-meet-semilattice-Semigroup-Prop
+Meet-Semilattice l = type-subtype is-meet-semilattice-prop-Semigroup
 
 module _
   {l : Level} (X : Meet-Semilattice l)
@@ -317,7 +317,7 @@ module _
   leq-Order-Theoretic-Meet-Semilattice-Prop :
     (x y : type-Order-Theoretic-Meet-Semilattice) → Prop l2
   leq-Order-Theoretic-Meet-Semilattice-Prop =
-    leq-Poset-Prop poset-Order-Theoretic-Meet-Semilattice
+    leq-prop-Poset poset-Order-Theoretic-Meet-Semilattice
 
   leq-Order-Theoretic-Meet-Semilattice :
     (x y : type-Order-Theoretic-Meet-Semilattice) → UU l2
@@ -636,7 +636,7 @@ module _
   compute-meet-order-theoretic-meet-semilattice-Meet-Semilattice x y = refl
 
   compute-order-theoretic-meet-semilattice-Meet-Semilattice :
-    type-iso-Semigroup
+    iso-Semigroup
       ( semigroup-Meet-Semilattice A)
       ( semigroup-Meet-Semilattice
         ( meet-semilattice-Order-Theoretic-Meet-Semilattice

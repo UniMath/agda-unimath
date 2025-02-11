@@ -58,7 +58,7 @@ module _
 
   is-power-of-element-prop-Monoid : (x y : type-Monoid M) → Prop l
   is-power-of-element-prop-Monoid x y =
-    ∃-Prop ℕ (λ n → power-Monoid M n x ＝ y)
+    exists-structure-Prop ℕ (λ n → power-Monoid M n x ＝ y)
 
   is-power-of-element-Monoid : (x y : type-Monoid M) → UU l
   is-power-of-element-Monoid x y =
@@ -136,14 +136,14 @@ module _
         ( power-Monoid M m x))
   distributive-power-add-Monoid m (succ-ℕ n) {x} =
     ( power-succ-Monoid M (m +ℕ n) x) ∙
-    ( ( ap (mul-Monoid' M x) (distributive-power-add-Monoid m n)) ∙
-      ( ( associative-mul-Monoid M
-          ( power-Monoid M m x)
-          ( power-Monoid M n x)
-          ( x)) ∙
-        ( ap
-          ( mul-Monoid M (power-Monoid M m x))
-          ( inv (power-succ-Monoid M n x)))))
+    ( ap (mul-Monoid' M x) (distributive-power-add-Monoid m n)) ∙
+    ( associative-mul-Monoid M
+      ( power-Monoid M m x)
+      ( power-Monoid M n x)
+      ( x)) ∙
+    ( ap
+      ( mul-Monoid M (power-Monoid M m x))
+      ( inv (power-succ-Monoid M n x)))
 ```
 
 ### If `x` commutes with `y` then so do their powers
@@ -163,11 +163,10 @@ module _
   commute-powers-Monoid' (succ-ℕ zero-ℕ) {x} {y} H = H
   commute-powers-Monoid' (succ-ℕ (succ-ℕ n)) {x} {y} H =
     ( associative-mul-Monoid M (power-Monoid M (succ-ℕ n) x) x y) ∙
-    ( ( ap (mul-Monoid M (power-Monoid M (succ-ℕ n) x)) H) ∙
-      ( ( inv
-          ( associative-mul-Monoid M (power-Monoid M (succ-ℕ n) x) y x)) ∙
-        ( ( ap (mul-Monoid' M x) (commute-powers-Monoid' (succ-ℕ n) H)) ∙
-          ( associative-mul-Monoid M y (power-Monoid M (succ-ℕ n) x) x))))
+    ( ap (mul-Monoid M (power-Monoid M (succ-ℕ n) x)) H) ∙
+    ( inv (associative-mul-Monoid M (power-Monoid M (succ-ℕ n) x) y x)) ∙
+    ( ap (mul-Monoid' M x) (commute-powers-Monoid' (succ-ℕ n) H)) ∙
+    ( associative-mul-Monoid M y (power-Monoid M (succ-ℕ n) x) x)
 
   commute-powers-Monoid :
     (m n : ℕ) {x y : type-Monoid M} →
@@ -186,63 +185,57 @@ module _
     ( right-unit-law-mul-Monoid M (power-Monoid M (succ-ℕ m) _)) ∙
     ( inv (left-unit-law-mul-Monoid M (power-Monoid M (succ-ℕ m) _)))
   commute-powers-Monoid (succ-ℕ m) (succ-ℕ n) {x} {y} H =
-    ( ap-mul-Monoid M
-      ( power-succ-Monoid M m x)
-      ( power-succ-Monoid M n y)) ∙
-    ( ( associative-mul-Monoid M
+    ( ap-mul-Monoid M (power-succ-Monoid M m x) (power-succ-Monoid M n y)) ∙
+    ( associative-mul-Monoid M
+      ( power-Monoid M m x)
+      ( x)
+      ( mul-Monoid M (power-Monoid M n y) y)) ∙
+    ( ap
+      ( mul-Monoid M (power-Monoid M m x))
+      ( ( inv (associative-mul-Monoid M x (power-Monoid M n y) y)) ∙
+        ( ap
+          ( mul-Monoid' M y)
+          ( inv (commute-powers-Monoid' n (inv H)))) ∙
+        ( associative-mul-Monoid M (power-Monoid M n y) x y) ∙
+        ( ap (mul-Monoid M (power-Monoid M n y)) H) ∙
+        ( inv (associative-mul-Monoid M (power-Monoid M n y) y x)))) ∙
+    ( inv
+      ( associative-mul-Monoid M
         ( power-Monoid M m x)
-        ( x)
-        ( mul-Monoid M (power-Monoid M n y) y)) ∙
-      ( ( ap
-          ( mul-Monoid M (power-Monoid M m x))
-          ( ( inv (associative-mul-Monoid M x (power-Monoid M n y) y)) ∙
-            ( ( ap
-                ( mul-Monoid' M y)
-                ( inv (commute-powers-Monoid' n (inv H)))) ∙
-              ( ( associative-mul-Monoid M (power-Monoid M n y) x y) ∙
-                ( ( ap (mul-Monoid M (power-Monoid M n y)) H) ∙
-                  ( inv
-                    ( associative-mul-Monoid M
-                      ( power-Monoid M n y)
-                      ( y)
-                      ( x)))))))) ∙
-        ( ( inv
-            ( associative-mul-Monoid M
-              ( power-Monoid M m x)
-              ( mul-Monoid M (power-Monoid M n y) y)
-              ( x))) ∙
-          ( ( ap
-              ( mul-Monoid' M x)
-              ( ( inv
-                  ( associative-mul-Monoid M
-                    ( power-Monoid M m x)
-                    ( power-Monoid M n y)
-                    ( y))) ∙
-                ( ( ap
-                    ( mul-Monoid' M y)
-                    ( commute-powers-Monoid m n H)) ∙
-                  ( ( associative-mul-Monoid M
-                      ( power-Monoid M n y)
-                      ( power-Monoid M m x)
-                      ( y)) ∙
-                    ( ( ap
-                        ( mul-Monoid M (power-Monoid M n y))
-                        ( commute-powers-Monoid' m H)) ∙
-                      ( ( inv
-                          ( associative-mul-Monoid M
-                            ( power-Monoid M n y)
-                            ( y)
-                            ( power-Monoid M m x))) ∙
-                        ( ap
-                          ( mul-Monoid' M (power-Monoid M m x))
-                          ( inv (power-succ-Monoid M n y))))))))) ∙
-            ( ( associative-mul-Monoid M
-                ( power-Monoid M (succ-ℕ n) y)
-                ( power-Monoid M m x)
-                ( x)) ∙
-              ( ap
-                ( mul-Monoid M (power-Monoid M (succ-ℕ n) y))
-                ( inv (power-succ-Monoid M m x))))))))
+        ( mul-Monoid M (power-Monoid M n y) y)
+        ( x))) ∙
+    ( ap
+      ( mul-Monoid' M x)
+      ( ( inv
+          ( associative-mul-Monoid M
+            ( power-Monoid M m x)
+            ( power-Monoid M n y)
+            ( y))) ∙
+        ( ap
+          ( mul-Monoid' M y)
+          ( commute-powers-Monoid m n H)) ∙
+        ( associative-mul-Monoid M
+          ( power-Monoid M n y)
+          ( power-Monoid M m x)
+          ( y)) ∙
+        ( ap
+          ( mul-Monoid M (power-Monoid M n y))
+          ( commute-powers-Monoid' m H)) ∙
+        ( inv
+          ( associative-mul-Monoid M
+            ( power-Monoid M n y)
+            ( y)
+            ( power-Monoid M m x))) ∙
+        ( ap
+          ( mul-Monoid' M (power-Monoid M m x))
+          ( inv (power-succ-Monoid M n y))))) ∙
+      ( associative-mul-Monoid M
+        ( power-Monoid M (succ-ℕ n) y)
+        ( power-Monoid M m x)
+        ( x)) ∙
+      ( ap
+        ( mul-Monoid M (power-Monoid M (succ-ℕ n) y))
+        ( inv (power-succ-Monoid M m x)))
 ```
 
 ### If `x` commutes with `y`, then powers distribute over the product of `x` and `y`
@@ -261,35 +254,35 @@ module _
     inv (left-unit-law-mul-Monoid M (unit-Monoid M))
   distributive-power-mul-Monoid (succ-ℕ n) {x} {y} H =
     ( power-succ-Monoid M n (mul-Monoid M x y)) ∙
-    ( ( ap
-        ( mul-Monoid' M (mul-Monoid M x y))
-        ( distributive-power-mul-Monoid n H)) ∙
-      ( ( inv
+    ( ap
+      ( mul-Monoid' M (mul-Monoid M x y))
+      ( distributive-power-mul-Monoid n H)) ∙
+    ( inv
+      ( associative-mul-Monoid M
+        ( mul-Monoid M (power-Monoid M n x) (power-Monoid M n y))
+        ( x)
+        ( y))) ∙
+    ( ap
+      ( mul-Monoid' M y)
+      ( ( associative-mul-Monoid M
+          ( power-Monoid M n x)
+          ( power-Monoid M n y)
+          ( x)) ∙
+        ( ap
+          ( mul-Monoid M (power-Monoid M n x))
+          ( commute-powers-Monoid' M n (inv H))) ∙
+        ( inv
           ( associative-mul-Monoid M
-            ( mul-Monoid M (power-Monoid M n x) (power-Monoid M n y))
+            ( power-Monoid M n x)
             ( x)
-            ( y))) ∙
-        ( ( ap
-            ( mul-Monoid' M y)
-            ( ( associative-mul-Monoid M
-                ( power-Monoid M n x)
-                ( power-Monoid M n y)
-                ( x)) ∙
-              ( ( ap
-                  ( mul-Monoid M (power-Monoid M n x))
-                  ( commute-powers-Monoid' M n (inv H))) ∙
-                ( inv
-                  ( associative-mul-Monoid M
-                    ( power-Monoid M n x)
-                    ( x)
-                    ( power-Monoid M n y)))))) ∙
-          ( ( associative-mul-Monoid M
-              ( mul-Monoid M (power-Monoid M n x) x)
-              ( power-Monoid M n y)
-              ( y)) ∙
-            ( ap-mul-Monoid M
-              ( inv (power-succ-Monoid M n x))
-              ( inv (power-succ-Monoid M n y)))))))
+            ( power-Monoid M n y))))) ∙
+    ( associative-mul-Monoid M
+      ( mul-Monoid M (power-Monoid M n x) x)
+      ( power-Monoid M n y)
+      ( y)) ∙
+    ( ap-mul-Monoid M
+      ( inv (power-succ-Monoid M n x))
+      ( inv (power-succ-Monoid M n y)))
 ```
 
 ### Powers by products of natural numbers are iterated powers
@@ -308,10 +301,10 @@ module _
   power-mul-Monoid (succ-ℕ zero-ℕ) n {x} =
     ap (λ t → power-Monoid M t x) (left-unit-law-add-ℕ n)
   power-mul-Monoid (succ-ℕ (succ-ℕ m)) n {x} =
-    ( ( distributive-power-add-Monoid M (succ-ℕ m *ℕ n) n) ∙
-      ( ap
-        ( mul-Monoid' M (power-Monoid M n x))
-        ( power-mul-Monoid (succ-ℕ m) n))) ∙
+    ( distributive-power-add-Monoid M (succ-ℕ m *ℕ n) n) ∙
+    ( ap
+      ( mul-Monoid' M (power-Monoid M n x))
+      ( power-mul-Monoid (succ-ℕ m) n)) ∙
     ( inv
       ( distributive-power-mul-Monoid M n
         ( commute-powers-Monoid' M (succ-ℕ m) refl)))
@@ -331,6 +324,6 @@ module _
   preserves-powers-hom-Monoid zero-ℕ x = preserves-unit-hom-Monoid M N f
   preserves-powers-hom-Monoid (succ-ℕ zero-ℕ) x = refl
   preserves-powers-hom-Monoid (succ-ℕ (succ-ℕ n)) x =
-    ( preserves-mul-hom-Monoid M N f _ _) ∙
+    ( preserves-mul-hom-Monoid M N f) ∙
     ( ap (mul-Monoid' N _) (preserves-powers-hom-Monoid (succ-ℕ n) x))
 ```

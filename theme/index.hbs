@@ -12,6 +12,26 @@
     <base href="{{ base_url }}">
     {{/if}}
 
+    <!-- Open Graph meta tags -->
+    <meta property="og:image" content="https://unimath.github.io/agda-unimath/website/images/agda-unimath-logo.svg" />
+    <meta property="og:site_name" content="agda-unimath" />
+
+    <!-- Structured data markup -->
+    <script type="application/ld+json">
+    {
+      "@context" : "https://schema.org",
+      "@type" : "WebSite",
+      "name" : "agda-unimath",
+      "url" : "https://unimath.github.io/agda-unimath/",
+      "logo": "https://unimath.github.io/agda-unimath/website/images/agda-unimath-logo.svg",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://unimath.github.io/agda-unimath/?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+
 
     <!-- Custom HTML head -->
     {{> head}}
@@ -20,13 +40,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ffffff" />
 
-    {{#if favicon_svg}}
-    <link rel="icon" href="{{ path_to_root }}favicon.svg">
-    {{/if}}
-    <link rel="image_src" href="{{ path_to_root }}agda-unimath-logo.svg">
-    {{#if favicon_png}}
-    <link rel="shortcut icon" href="{{ path_to_root }}favicon.png">
-    {{/if}}
+    <link rel="icon" href="{{ path_to_root }}website/images/favicon.svg">
+    <link rel="shortcut icon" href="{{ path_to_root }}website/images/favicon.png">
+    <link rel="icon" href="{{ path_to_root }}website/images/favicon-dark.png" media="(prefers-color-scheme:dark)">
+
+    <link rel="image_src" href="{{ path_to_root }}website/images/agda-unimath-logo.svg">
     <link rel="stylesheet" href="{{ path_to_root }}css/variables.css">
     <link rel="stylesheet" href="{{ path_to_root }}css/general.css">
     <link rel="stylesheet" href="{{ path_to_root }}css/chrome.css">
@@ -201,6 +219,7 @@
                         {{{ content }}}
                     </main>
 
+                    {{#if false}}
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         {{#previous}}
@@ -219,9 +238,11 @@
 
                         <div style="clear: both"></div>
                     </nav>
+                    {{/if}}
                 </div>
             </div>
 
+            {{#if false}}
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 {{#previous}}
                 <a rel="prev" href="{{ path_to_root }}{{link}}" class="nav-chapters previous" title="Previous chapter"
@@ -237,7 +258,7 @@
                 </a>
                 {{/next}}
             </nav>
-
+            {{/if}}
         </div>
 
         {{#if live_reload_endpoint}}
@@ -334,6 +355,13 @@
         {{/if}}
 
     </div>
+
+    <script>
+        window.goatcounter = {
+            path: location.pathname || '/'
+        };
+    </script>
+    <script data-goatcounter="https://agda-unimath.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 
 </html>

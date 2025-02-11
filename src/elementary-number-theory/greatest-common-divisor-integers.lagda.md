@@ -14,6 +14,9 @@ open import elementary-number-theory.equality-integers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -33,7 +36,7 @@ open import foundation.universe-levels
 
 ## Definition
 
-### The predicate `is-gcd-ℤ`
+### The predicate of being a greatest common divisor
 
 ```agda
 is-common-divisor-ℤ : ℤ → ℤ → ℤ → UU lzero
@@ -56,6 +59,22 @@ gcd-ℤ x y = int-ℕ (nat-gcd-ℤ x y)
 
 ## Properties
 
+### The greatest common divisor is invariant under negatives
+
+```agda
+module _
+  (x y : ℤ)
+  where
+
+  preserves-gcd-left-neg-ℤ : gcd-ℤ (neg-ℤ x) y ＝ gcd-ℤ x y
+  preserves-gcd-left-neg-ℤ =
+    ap (int-ℕ ∘ (λ z → gcd-ℕ z (abs-ℤ y))) (abs-neg-ℤ x)
+
+  preserves-gcd-right-neg-ℤ : gcd-ℤ x (neg-ℤ y) ＝ gcd-ℤ x y
+  preserves-gcd-right-neg-ℤ =
+    ap (int-ℕ ∘ (gcd-ℕ (abs-ℤ x))) (abs-neg-ℤ y)
+```
+
 ### A natural number `d` is a common divisor of two natural numbers `x` and `y` if and only if `int-ℕ d` is a common divisor of `int-ℕ x` and `ind-ℕ y`
 
 ```agda
@@ -63,13 +82,13 @@ is-common-divisor-int-is-common-divisor-ℕ :
   {x y d : ℕ} →
   is-common-divisor-ℕ x y d → is-common-divisor-ℤ (int-ℕ x) (int-ℕ y) (int-ℕ d)
 is-common-divisor-int-is-common-divisor-ℕ =
-  map-prod div-int-div-ℕ div-int-div-ℕ
+  map-product div-int-div-ℕ div-int-div-ℕ
 
 is-common-divisor-is-common-divisor-int-ℕ :
   {x y d : ℕ} →
   is-common-divisor-ℤ (int-ℕ x) (int-ℕ y) (int-ℕ d) → is-common-divisor-ℕ x y d
 is-common-divisor-is-common-divisor-int-ℕ {x} {y} {d} =
-  map-prod div-div-int-ℕ div-div-int-ℕ
+  map-product div-div-int-ℕ div-div-int-ℕ
 ```
 
 ### If `ux ＝ x'` and `vy ＝ y'` for two units `u` and `v`, then `d` is a common divisor of `x` and `y` if and only if `d` is a common divisor of `x'` and `y'`
@@ -79,7 +98,7 @@ is-common-divisor-sim-unit-ℤ :
   {x x' y y' d d' : ℤ} → sim-unit-ℤ x x' → sim-unit-ℤ y y' → sim-unit-ℤ d d' →
   is-common-divisor-ℤ x y d → is-common-divisor-ℤ x' y' d'
 is-common-divisor-sim-unit-ℤ H K L =
-  map-prod (div-sim-unit-ℤ L H) (div-sim-unit-ℤ L K)
+  map-product (div-sim-unit-ℤ L H) (div-sim-unit-ℤ L K)
 ```
 
 ### If `ux ＝ x'` and `vy ＝ y'` for two units `u` and `v`, then `d` is a greatest common divisor of `x` and `y` if and only if `c` is a greatest common divisor of `x'` and `y'`
@@ -108,13 +127,13 @@ is-common-divisor-int-abs-is-common-divisor-ℤ :
   {x y d : ℤ} →
   is-common-divisor-ℤ x y d → is-common-divisor-ℤ x y (int-abs-ℤ d)
 is-common-divisor-int-abs-is-common-divisor-ℤ =
-  map-prod div-int-abs-div-ℤ div-int-abs-div-ℤ
+  map-product div-int-abs-div-ℤ div-int-abs-div-ℤ
 
 is-common-divisor-is-common-divisor-int-abs-ℤ :
   {x y d : ℤ} →
   is-common-divisor-ℤ x y (int-abs-ℤ d) → is-common-divisor-ℤ x y d
 is-common-divisor-is-common-divisor-int-abs-ℤ =
-  map-prod div-div-int-abs-ℤ div-div-int-abs-ℤ
+  map-product div-div-int-abs-ℤ div-div-int-abs-ℤ
 
 is-common-divisor-is-gcd-ℤ :
   (a b d : ℤ) → is-gcd-ℤ a b d → is-common-divisor-ℤ a b d
@@ -234,7 +253,7 @@ div-gcd-is-common-divisor-ℤ x y k H =
 is-positive-gcd-is-positive-left-ℤ :
   (x y : ℤ) → is-positive-ℤ x → is-positive-ℤ (gcd-ℤ x y)
 is-positive-gcd-is-positive-left-ℤ x y H =
-  is-positive-int-ℕ
+  is-positive-int-is-nonzero-ℕ
     ( gcd-ℕ (abs-ℤ x) (abs-ℤ y))
     ( is-nonzero-gcd-ℕ
       ( abs-ℤ x)
@@ -247,7 +266,7 @@ is-positive-gcd-is-positive-left-ℤ x y H =
 is-positive-gcd-is-positive-right-ℤ :
   (x y : ℤ) → is-positive-ℤ y → is-positive-ℤ (gcd-ℤ x y)
 is-positive-gcd-is-positive-right-ℤ x y H =
-  is-positive-int-ℕ
+  is-positive-int-is-nonzero-ℕ
     ( gcd-ℕ (abs-ℤ x) (abs-ℤ y))
     ( is-nonzero-gcd-ℕ
       ( abs-ℤ x)

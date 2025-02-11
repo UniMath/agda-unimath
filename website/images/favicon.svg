@@ -1,0 +1,12 @@
+<svg viewBox="0 0 1700 1700" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    svg g { stroke: black; }
+    @media (prefers-color-scheme: dark) {
+      svg g { stroke: white; }
+    }
+  </style>
+  <g id="logo" transform="translate(250,370)" fill="none">
+    <path d="M1050,50 L700,400" id="wing" stroke-width="144" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M400,0 L0,400 L200,400 L200,600 C200,820 380,1000 600,1000 C820,1000 1000,820 1000,600 L1000,400 L1200,200" id="body" stroke-width="144" stroke-linecap="round" stroke-linejoin="round"></path>
+  </g>
+</svg>

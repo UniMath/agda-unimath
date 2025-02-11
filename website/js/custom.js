@@ -5,6 +5,7 @@ if (link) {
   const fileList = [
     'ART.md',
     'CITE-THIS-LIBRARY.md',
+    'CITING-SOURCES.md',
     'CODINGSTYLE.md',
     'CONTRIBUTING.md',
     'CONTRIBUTORS.md',
@@ -19,7 +20,8 @@ if (link) {
     'README.md',
     'STATEMENT-OF-INCLUSION.md',
     'SUMMARY.md',
-    'USERS.md',
+    'PROJECTS.md',
+    'VISUALIZATION.md',
     'index.md',
   ];
   if (!fileList.includes(filename)) {

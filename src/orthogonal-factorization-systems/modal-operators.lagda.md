@@ -51,15 +51,17 @@ module _
   is-modal : (X : UU l1) → UU (l1 ⊔ l2)
   is-modal X = is-equiv (unit-○ {X})
 
+  is-modal-family : {l3 : Level} {X : UU l3} (P : X → UU l1) → UU (l1 ⊔ l2 ⊔ l3)
+  is-modal-family {X = X} P = (x : X) → is-modal (P x)
+
   modal-type : UU (lsuc l1 ⊔ l2)
   modal-type = Σ (UU l1) (is-modal)
 
-  is-property-is-modal : (X : UU l1) → is-prop (is-modal X)
-  is-property-is-modal X = is-property-is-equiv (unit-○ {X})
-
   is-modal-Prop : (X : UU l1) → Prop (l1 ⊔ l2)
-  pr1 (is-modal-Prop X) = is-modal X
-  pr2 (is-modal-Prop X) = is-property-is-modal X
+  is-modal-Prop X = is-equiv-Prop (unit-○ {X})
+
+  is-property-is-modal : (X : UU l1) → is-prop (is-modal X)
+  is-property-is-modal X = is-prop-type-Prop (is-modal-Prop X)
 
   is-subuniverse-is-modal : is-subuniverse is-modal
   is-subuniverse-is-modal = is-property-is-modal
@@ -144,7 +146,4 @@ module _
 
 ## References
 
-- Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type
-  theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020
-  ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526),
-  [doi:10.23638](https://doi.org/10.23638/LMCS-16%281%3A2%292020))
+{{#bibliography}} {{#reference RSS20}}

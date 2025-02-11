@@ -20,6 +20,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
@@ -157,7 +158,7 @@ inv-equiv-Type-With-Endomorphism :
 pr1 (inv-equiv-Type-With-Endomorphism X Y e) =
   inv-equiv (equiv-equiv-Type-With-Endomorphism X Y e)
 pr2 (inv-equiv-Type-With-Endomorphism X Y e) =
-  coherence-square-inv-horizontal
+  horizontal-inv-equiv-coherence-square-maps
     ( equiv-equiv-Type-With-Endomorphism X Y e)
     ( endomorphism-Type-With-Endomorphism X)
     ( endomorphism-Type-With-Endomorphism Y)
@@ -194,12 +195,10 @@ module _
   htpy-eq-equiv-Type-With-Endomorphism e .e refl =
     refl-htpy-equiv-Type-With-Endomorphism e
 
-  is-contr-total-htpy-equiv-Type-With-Endomorphism :
+  is-torsorial-htpy-equiv-Type-With-Endomorphism :
     (e : equiv-Type-With-Endomorphism X Y) →
-    is-contr
-      ( Σ ( equiv-Type-With-Endomorphism X Y)
-          ( htpy-equiv-Type-With-Endomorphism e))
-  is-contr-total-htpy-equiv-Type-With-Endomorphism e =
+    is-torsorial (htpy-equiv-Type-With-Endomorphism e)
+  is-torsorial-htpy-equiv-Type-With-Endomorphism e =
     is-contr-equiv
       ( Σ ( Σ ( hom-Type-With-Endomorphism X Y)
               ( λ f → is-equiv (map-hom-Type-With-Endomorphism X Y f)))
@@ -214,8 +213,8 @@ module _
             ( pr1 f))
         ( equiv-right-swap-Σ)
         ( λ f → id-equiv))
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-htpy-hom-Type-With-Endomorphism X Y
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-htpy-hom-Type-With-Endomorphism X Y
           ( hom-equiv-Type-With-Endomorphism X Y e))
         ( λ f → is-property-is-equiv (pr1 f))
         ( hom-equiv-Type-With-Endomorphism X Y e)
@@ -228,7 +227,7 @@ module _
     is-equiv (htpy-eq-equiv-Type-With-Endomorphism e f)
   is-equiv-htpy-eq-equiv-Type-With-Endomorphism e =
     fundamental-theorem-id
-      ( is-contr-total-htpy-equiv-Type-With-Endomorphism e)
+      ( is-torsorial-htpy-equiv-Type-With-Endomorphism e)
       ( htpy-eq-equiv-Type-With-Endomorphism e)
 
   extensionality-equiv-Type-With-Endomorphism :
@@ -305,22 +304,20 @@ module _
   equiv-eq-Type-With-Endomorphism .X refl =
     id-equiv-Type-With-Endomorphism X
 
-  is-contr-total-equiv-Type-With-Endomorphism :
-    is-contr (Σ (Type-With-Endomorphism l1) (equiv-Type-With-Endomorphism X))
-  is-contr-total-equiv-Type-With-Endomorphism =
-    is-contr-total-Eq-structure
-      ( λ Y f e →
-        map-equiv e ∘ endomorphism-Type-With-Endomorphism X ~ f ∘ map-equiv e)
-      ( is-contr-total-equiv (type-Type-With-Endomorphism X))
+  is-torsorial-equiv-Type-With-Endomorphism :
+    is-torsorial (equiv-Type-With-Endomorphism X)
+  is-torsorial-equiv-Type-With-Endomorphism =
+    is-torsorial-Eq-structure
+      ( is-torsorial-equiv (type-Type-With-Endomorphism X))
       ( type-Type-With-Endomorphism X , id-equiv)
-      ( is-contr-total-htpy (endomorphism-Type-With-Endomorphism X))
+      ( is-torsorial-htpy (endomorphism-Type-With-Endomorphism X))
 
   is-equiv-equiv-eq-Type-With-Endomorphism :
     ( Y : Type-With-Endomorphism l1) →
     is-equiv (equiv-eq-Type-With-Endomorphism Y)
   is-equiv-equiv-eq-Type-With-Endomorphism =
     fundamental-theorem-id
-      is-contr-total-equiv-Type-With-Endomorphism
+      is-torsorial-equiv-Type-With-Endomorphism
       equiv-eq-Type-With-Endomorphism
 
   extensionality-Type-With-Endomorphism :

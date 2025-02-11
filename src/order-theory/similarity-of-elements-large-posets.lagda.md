@@ -7,7 +7,6 @@ module order-theory.similarity-of-elements-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
@@ -15,6 +14,7 @@ open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import order-theory.large-posets
@@ -29,6 +29,9 @@ Two elements `x` and `y` of a [large poset](order-theory.large-posets.md) `P`
 are said to be **similar** if both `x ≤ y` and `y ≤ x` hold. Note that the
 similarity relation is defined across universe levels, and that only similar
 elements of the same universe level are equal.
+
+In informal writing we will use the notation `x ≈ y` to assert that `x` and `y`
+are similar elements in a poset `P`.
 
 ## Definition
 
@@ -124,10 +127,10 @@ module _
     is-prop-all-elements-equal
       ( all-elements-equal-total-sim-Large-Poset x)
 
-  is-contr-total-sim-Large-Poset :
+  is-torsorial-sim-Large-Poset :
     {l1 : Level} (x : type-Large-Poset P l1) →
-    is-contr (Σ (type-Large-Poset P l1) (sim-Large-Poset P x))
-  is-contr-total-sim-Large-Poset x =
+    is-torsorial (sim-Large-Poset P x)
+  is-torsorial-sim-Large-Poset x =
     is-proof-irrelevant-is-prop
       ( is-prop-total-sim-Large-Poset x)
       ( x , refl-sim-Large-Poset P x)
@@ -141,22 +144,22 @@ module _
   where
 
   sim-eq-Large-Poset :
-    {l1 : Level} (x y : type-Large-Poset P l1) →
+    {l1 : Level} {x y : type-Large-Poset P l1} →
     x ＝ y → sim-Large-Poset P x y
-  sim-eq-Large-Poset x .x refl = refl-sim-Large-Poset P x
+  sim-eq-Large-Poset refl = refl-sim-Large-Poset P _
 
   is-equiv-sim-eq-Large-Poset :
     {l1 : Level} (x y : type-Large-Poset P l1) →
-    is-equiv (sim-eq-Large-Poset x y)
+    is-equiv (sim-eq-Large-Poset {l1} {x} {y})
   is-equiv-sim-eq-Large-Poset x =
     fundamental-theorem-id
-      ( is-contr-total-sim-Large-Poset P x)
-      ( sim-eq-Large-Poset x)
+      ( is-torsorial-sim-Large-Poset P x)
+      ( λ y → sim-eq-Large-Poset {_} {x} {y})
 
   extensionality-Large-Poset :
     {l1 : Level} (x y : type-Large-Poset P l1) →
     (x ＝ y) ≃ sim-Large-Poset P x y
-  pr1 (extensionality-Large-Poset x y) = sim-eq-Large-Poset x y
+  pr1 (extensionality-Large-Poset x y) = sim-eq-Large-Poset
   pr2 (extensionality-Large-Poset x y) = is-equiv-sim-eq-Large-Poset x y
 
   eq-sim-Large-Poset :

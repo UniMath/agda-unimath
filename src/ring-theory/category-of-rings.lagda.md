@@ -21,7 +21,7 @@ open import ring-theory.precategory-of-rings
 ## Idea
 
 The [large category](category-theory.large-categories.md) `Ring-Category` of
-[rings](ring-theory.rings.md) is the large category consistsing of rings and
+[rings](ring-theory.rings.md) is the large category consisting of rings and
 [ring homomorphisms](ring-theory.homomorphisms-rings.md).
 
 ## Definitions
@@ -34,7 +34,7 @@ is-large-category-Ring-Large-Category :
 is-large-category-Ring-Large-Category =
   is-equiv-iso-eq-Ring
 
-Ring-Large-Category : Large-Category lsuc _⊔_
+Ring-Large-Category : Large-Category lsuc (_⊔_)
 large-precategory-Large-Category Ring-Large-Category =
   Ring-Large-Precategory
 is-large-category-Large-Category Ring-Large-Category =

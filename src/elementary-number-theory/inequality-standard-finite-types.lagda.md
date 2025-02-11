@@ -104,9 +104,7 @@ reflects-leq-nat-Fin (succ-ℕ k) {inl x} {inr star} H = star
 reflects-leq-nat-Fin (succ-ℕ k) {inr star} {inr star} H = star
 ```
 
-## Properties
-
-### The preordering on the standard finite types
+### The partial order on the standard finite types
 
 ```agda
 Fin-Preorder : ℕ → Preorder lzero lzero
@@ -119,6 +117,8 @@ Fin-Poset : ℕ → Poset lzero lzero
 pr1 (Fin-Poset k) = Fin-Preorder k
 pr2 (Fin-Poset k) = antisymmetric-leq-Fin k
 ```
+
+## Properties
 
 ### Ordering on the standard finite types is decidable
 
@@ -133,4 +133,13 @@ leq-Fin-Decidable-Prop : (k : ℕ) → Fin k → Fin k → Decidable-Prop lzero
 pr1 (leq-Fin-Decidable-Prop k x y) = leq-Fin k x y
 pr1 (pr2 (leq-Fin-Decidable-Prop k x y)) = is-prop-leq-Fin k x y
 pr2 (pr2 (leq-Fin-Decidable-Prop k x y)) = is-decidable-leq-Fin k x y
+```
+
+### Ordering on the standard finite types is linear
+
+```agda
+linear-leq-Fin : (k : ℕ) (x y : Fin k) → leq-Fin k x y + leq-Fin k y x
+linear-leq-Fin (succ-ℕ k) (inl x) (inl y) = linear-leq-Fin k x y
+linear-leq-Fin (succ-ℕ k) (inl x) (inr y) = inl star
+linear-leq-Fin (succ-ℕ k) (inr x) y = inr star
 ```

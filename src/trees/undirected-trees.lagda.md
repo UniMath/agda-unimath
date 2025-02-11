@@ -1,4 +1,4 @@
-# Undirected rees
+# Undirected trees
 
 ```agda
 module trees.undirected-trees where
@@ -365,47 +365,47 @@ has-decidable-equality-node-Undirected-Tree T x y =
 
 ### Any trail in a tree is a path
 
-```agda
--- module _
---   {l1 l2 : Level} (T : Tree l1 l2)
---   where
+```text
+module _
+  {l1 l2 : Level} (T : Tree l1 l2)
+  where
 
---   is-path-is-trail-walk-Undirected-Tree :
---     {x y : node-Undirected-Tree T} (w : walk-Undirected-Tree T x y) →
---     is-trail-walk-Undirected-Tree T w → is-path-walk-Undirected-Tree T w
---   is-path-is-trail-walk-Undirected-Tree {x} {y} w H {pair u KU} {pair v K} p with
---     is-vertex-on-first-or-second-segment-walk-Undirected-Graph
---       (undirected-graph-Undirected-Tree T) w (pair u KU) (pair v K)
---   ... | inl L = {!!}
---     where
---     w1' : walk-Undirected-Tree T x u
---     w1' =
---       first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w (pair u KU)
---     w1 : walk-Undirected-Tree T x v
---     w1 =
---       first-segment-walk-Undirected-Graph
---         ( undirected-graph-Undirected-Tree T)
---         ( w1')
---         ( pair v L)
---     w' : walk-Undirected-Tree T v u
---     w' = {!!}
---   ... | inr L = {!!}
---     where
---     w1 : walk-Undirected-Tree T x u
---     w1 =
---       first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w (pair u KU)
+  is-path-is-trail-walk-Undirected-Tree :
+    {x y : node-Undirected-Tree T} (w : walk-Undirected-Tree T x y) →
+    is-trail-walk-Undirected-Tree T w → is-path-walk-Undirected-Tree T w
+  is-path-is-trail-walk-Undirected-Tree {x} {y} w H {pair u KU} {pair v K} p with
+    is-vertex-on-first-or-second-segment-walk-Undirected-Graph
+      (undirected-graph-Undirected-Tree T) w (pair u KU) (pair v K)
+  ... | inl L = {!!}
+    where
+    w1' : walk-Undirected-Tree T x u
+    w1' =
+      first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w (pair u KU)
+    w1 : walk-Undirected-Tree T x v
+    w1 =
+      first-segment-walk-Undirected-Graph
+        ( undirected-graph-Undirected-Tree T)
+        ( w1')
+        ( pair v L)
+    w' : walk-Undirected-Tree T v u
+    w' = {!!}
+  ... | inr L = {!!}
+    where
+    w1 : walk-Undirected-Tree T x u
+    w1 =
+      first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w (pair u KU)
 
--- {-
---     where
---     w1 : walk-Undirected-Tree T x (node-node-on-walk-Undirected-Tree T w u)
---     w1 =
---       first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w u
---     w2' : walk-Undirected-Tree T (node-node-on-walk-Undirected-Tree T w u) y
---     w2' =
---       second-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w u
---     w2 : walk-Undirected-Tree T (node-node-on-walk-Undirected-Tree T w u) (node-node-on-walk-Undirected-Tree T w v)
---     w2 = {!first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w2' !}
---   -}
+{-
+    where
+    w1 : walk-Undirected-Tree T x (node-node-on-walk-Undirected-Tree T w u)
+    w1 =
+      first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w u
+    w2' : walk-Undirected-Tree T (node-node-on-walk-Undirected-Tree T w u) y
+    w2' =
+      second-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w u
+    w2 : walk-Undirected-Tree T (node-node-on-walk-Undirected-Tree T w u) (node-node-on-walk-Undirected-Tree T w v)
+    w2 = {!first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w2' !}
+  -}
 ```
 
 ## See also

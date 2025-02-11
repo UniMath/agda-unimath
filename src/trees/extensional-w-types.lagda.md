@@ -23,6 +23,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.slice
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalent-type-families
@@ -91,13 +92,10 @@ module _
   refl-Eq-Eq-ext-𝕎 : (x y : 𝕎 A B) (u : Eq-ext-𝕎 x y) → Eq-Eq-ext-𝕎 x y u u
   refl-Eq-Eq-ext-𝕎 x y u z = refl-htpy
 
-  is-contr-total-Eq-Eq-ext-𝕎 :
-    (x y : 𝕎 A B) (u : Eq-ext-𝕎 x y) →
-    is-contr (Σ (Eq-ext-𝕎 x y) (Eq-Eq-ext-𝕎 x y u))
-  is-contr-total-Eq-Eq-ext-𝕎 x y u =
-    is-contr-total-Eq-Π
-      ( λ z e → map-equiv (u z) ~ map-equiv e)
-      ( λ z → is-contr-total-htpy-equiv (u z))
+  is-torsorial-Eq-Eq-ext-𝕎 :
+    (x y : 𝕎 A B) (u : Eq-ext-𝕎 x y) → is-torsorial (Eq-Eq-ext-𝕎 x y u)
+  is-torsorial-Eq-Eq-ext-𝕎 x y u =
+    is-torsorial-Eq-Π (λ z → is-torsorial-htpy-equiv (u z))
 
   Eq-Eq-ext-eq-𝕎 :
     (x y : 𝕎 A B) (u v : Eq-ext-𝕎 x y) → u ＝ v → Eq-Eq-ext-𝕎 x y u v
@@ -107,7 +105,7 @@ module _
     (x y : 𝕎 A B) (u v : Eq-ext-𝕎 x y) → is-equiv (Eq-Eq-ext-eq-𝕎 x y u v)
   is-equiv-Eq-Eq-ext-eq-𝕎 x y u =
     fundamental-theorem-id
-      ( is-contr-total-Eq-Eq-ext-𝕎 x y u)
+      ( is-torsorial-Eq-Eq-ext-𝕎 x y u)
       ( Eq-Eq-ext-eq-𝕎 x y u)
 
   eq-Eq-Eq-ext-𝕎 :
@@ -121,7 +119,7 @@ module _
     ( ( equiv-tot
             ( λ x →
               ( ( right-unit-law-Σ-is-contr
-                  ( λ e → is-contr-total-htpy (f ∘ map-inv-equiv e))) ∘e
+                  ( λ e → is-torsorial-htpy (f ∘ map-inv-equiv e))) ∘e
                 ( equiv-tot
                   ( λ e →
                     equiv-tot
@@ -157,9 +155,9 @@ module _
           ( pr2 (map-equiv inv-equiv-structure-𝕎-Alg z)))
     H (tree-𝕎 b g) = id-equiv
 
-  is-contr-total-Eq-ext-is-univalent-𝕎 :
-    is-univalent B → (x : 𝕎 A B) → is-contr (Σ (𝕎 A B) (Eq-ext-𝕎 x))
-  is-contr-total-Eq-ext-is-univalent-𝕎 H (tree-𝕎 a f) =
+  is-torsorial-Eq-ext-is-univalent-𝕎 :
+    is-univalent B → (x : 𝕎 A B) → is-torsorial (Eq-ext-𝕎 x)
+  is-torsorial-Eq-ext-is-univalent-𝕎 H (tree-𝕎 a f) =
     is-contr-equiv
       ( Σ A (λ x → B a ≃ B x))
       ( equiv-total-Eq-ext-𝕎 (tree-𝕎 a f))
@@ -169,7 +167,7 @@ module _
     is-univalent B → is-extensional-𝕎 A B
   is-extensional-is-univalent-𝕎 H x =
     fundamental-theorem-id
-      ( is-contr-total-Eq-ext-is-univalent-𝕎 H x)
+      ( is-torsorial-Eq-ext-is-univalent-𝕎 H x)
       ( λ y → extensional-Eq-eq-𝕎 {y = y})
 
   is-univalent-is-extensional-𝕎 :

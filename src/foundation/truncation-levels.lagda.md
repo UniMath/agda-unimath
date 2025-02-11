@@ -36,6 +36,14 @@ truncation-level-ℕ : ℕ → 𝕋
 truncation-level-ℕ = succ-𝕋 ∘ truncation-level-minus-one-ℕ
 ```
 
+### Inclusion of the truncation levels into the natural numbers
+
+```agda
+nat-succ-succ-𝕋 : 𝕋 → ℕ
+nat-succ-succ-𝕋 neg-two-𝕋 = zero-ℕ
+nat-succ-succ-𝕋 (succ-𝕋 k) = succ-ℕ (nat-succ-succ-𝕋 k)
+```
+
 ### Addition of truncation levels
 
 ```agda
@@ -50,6 +58,27 @@ add-𝕋 (succ-𝕋 (succ-𝕋 k)) (succ-𝕋 l) = succ-𝕋 (add-𝕋 (succ-�
 
 infixl 35 _+𝕋_
 _+𝕋_ = add-𝕋
+```
+
+```agda
+succ-succ-add-𝕋 : 𝕋 → 𝕋 → 𝕋
+succ-succ-add-𝕋 x neg-two-𝕋 = x
+succ-succ-add-𝕋 x (succ-𝕋 y) = succ-𝕋 (succ-succ-add-𝕋 x y)
+```
+
+### Iterated successor functions on truncation levels
+
+Although we can define an addition operation on truncation levels, when it comes
+to doing induction on them, it is more natural to speak in terms of an iterated
+successor:
+
+```agda
+iterated-succ-𝕋 : ℕ → 𝕋 → 𝕋
+iterated-succ-𝕋 zero-ℕ x = x
+iterated-succ-𝕋 (succ-ℕ n) x = iterated-succ-𝕋 n (succ-𝕋 x)
+
+iterated-succ-𝕋' : 𝕋 → ℕ → 𝕋
+iterated-succ-𝕋' x n = iterated-succ-𝕋 n x
 ```
 
 ## Properties

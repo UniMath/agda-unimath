@@ -21,6 +21,8 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.monoids
+open import group-theory.opposite-groups
+open import group-theory.opposite-semigroups
 open import group-theory.semigroups
 
 open import higher-group-theory.higher-groups
@@ -36,7 +38,9 @@ A **concrete group** is a [pointed](structured-types.pointed-types.md)
 [connected](foundation.0-connected-types.md)
 [1-type](foundation-core.1-types.md).
 
-## Definition
+## Definitions
+
+### Concrete groups
 
 ```agda
 Concrete-Group : (l : Level) → UU (lsuc l)
@@ -103,58 +107,65 @@ module _
               ( λ where refl → is-set-type-Concrete-Group))
 
   classifying-1-type-Concrete-Group : Truncated-Type l one-𝕋
-  pr1 classifying-1-type-Concrete-Group =
-    classifying-type-Concrete-Group
+  pr1 classifying-1-type-Concrete-Group = classifying-type-Concrete-Group
   pr2 classifying-1-type-Concrete-Group =
     is-1-type-classifying-type-Concrete-Group
 
   Id-BG-Set :
     (X Y : classifying-type-Concrete-Group) → Set l
   Id-BG-Set X Y = Id-Set classifying-1-type-Concrete-Group X Y
+```
 
-  unit-Concrete-Group : type-Concrete-Group
-  unit-Concrete-Group = unit-∞-Group ∞-group-Concrete-Group
+### The abstract group associated to a concrete group
 
-  mul-Concrete-Group : (x y : type-Concrete-Group) → type-Concrete-Group
-  mul-Concrete-Group = mul-∞-Group ∞-group-Concrete-Group
+```agda
+module _
+  {l : Level} (G : Concrete-Group l)
+  where
 
-  mul-Concrete-Group' : (x y : type-Concrete-Group) → type-Concrete-Group
+  unit-Concrete-Group : type-Concrete-Group G
+  unit-Concrete-Group = unit-∞-Group (∞-group-Concrete-Group G)
+
+  mul-Concrete-Group : (x y : type-Concrete-Group G) → type-Concrete-Group G
+  mul-Concrete-Group = mul-∞-Group (∞-group-Concrete-Group G)
+
+  mul-Concrete-Group' : (x y : type-Concrete-Group G) → type-Concrete-Group G
   mul-Concrete-Group' x y = mul-Concrete-Group y x
 
   associative-mul-Concrete-Group :
-    (x y z : type-Concrete-Group) →
+    (x y z : type-Concrete-Group G) →
     ( mul-Concrete-Group (mul-Concrete-Group x y) z) ＝
     ( mul-Concrete-Group x (mul-Concrete-Group y z))
   associative-mul-Concrete-Group =
-    associative-mul-∞-Group ∞-group-Concrete-Group
+    associative-mul-∞-Group (∞-group-Concrete-Group G)
 
   left-unit-law-mul-Concrete-Group :
-    (x : type-Concrete-Group) → mul-Concrete-Group unit-Concrete-Group x ＝ x
+    (x : type-Concrete-Group G) → mul-Concrete-Group unit-Concrete-Group x ＝ x
   left-unit-law-mul-Concrete-Group =
-    left-unit-law-mul-∞-Group ∞-group-Concrete-Group
+    left-unit-law-mul-∞-Group (∞-group-Concrete-Group G)
 
   right-unit-law-mul-Concrete-Group :
-    (y : type-Concrete-Group) → mul-Concrete-Group y unit-Concrete-Group ＝ y
+    (y : type-Concrete-Group G) → mul-Concrete-Group y unit-Concrete-Group ＝ y
   right-unit-law-mul-Concrete-Group =
-    right-unit-law-mul-∞-Group ∞-group-Concrete-Group
+    right-unit-law-mul-∞-Group (∞-group-Concrete-Group G)
 
   coherence-unit-laws-mul-Concrete-Group :
     left-unit-law-mul-Concrete-Group unit-Concrete-Group ＝
     right-unit-law-mul-Concrete-Group unit-Concrete-Group
   coherence-unit-laws-mul-Concrete-Group =
-    coherence-unit-laws-mul-∞-Group ∞-group-Concrete-Group
+    coherence-unit-laws-mul-∞-Group (∞-group-Concrete-Group G)
 
-  inv-Concrete-Group : type-Concrete-Group → type-Concrete-Group
-  inv-Concrete-Group = inv-∞-Group ∞-group-Concrete-Group
+  inv-Concrete-Group : type-Concrete-Group G → type-Concrete-Group G
+  inv-Concrete-Group = inv-∞-Group (∞-group-Concrete-Group G)
 
   left-inverse-law-mul-Concrete-Group :
-    (x : type-Concrete-Group) →
+    (x : type-Concrete-Group G) →
     mul-Concrete-Group (inv-Concrete-Group x) x ＝ unit-Concrete-Group
   left-inverse-law-mul-Concrete-Group =
-    left-inverse-law-mul-∞-Group ∞-group-Concrete-Group
+    left-inverse-law-mul-∞-Group (∞-group-Concrete-Group G)
 
   right-inverse-law-mul-Concrete-Group :
-    (x : type-Concrete-Group) →
+    (x : type-Concrete-Group G) →
     mul-Concrete-Group x (inv-Concrete-Group x) ＝ unit-Concrete-Group
   right-inverse-law-mul-Concrete-Group =
     right-inverse-law-mul-∞-Group ∞-group-Concrete-Group
@@ -188,19 +199,33 @@ module _
   pr1 abstract-group-Concrete-Group = semigroup-Concrete-Group
   pr2 abstract-group-Concrete-Group = is-group-Concrete-Group
 
-  op-abstract-group-Concrete-Group : Group l
-  pr1 (pr1 op-abstract-group-Concrete-Group) = set-Concrete-Group
-  pr1 (pr2 (pr1 op-abstract-group-Concrete-Group)) = mul-Concrete-Group'
-  pr2 (pr2 (pr1 op-abstract-group-Concrete-Group)) x y z =
-    inv (associative-mul-Concrete-Group z y x)
-  pr1 (pr1 (pr2 op-abstract-group-Concrete-Group)) = unit-Concrete-Group
-  pr1 (pr2 (pr1 (pr2 op-abstract-group-Concrete-Group))) =
-    right-unit-law-mul-Concrete-Group
-  pr2 (pr2 (pr1 (pr2 op-abstract-group-Concrete-Group))) =
-    left-unit-law-mul-Concrete-Group
-  pr1 (pr2 (pr2 op-abstract-group-Concrete-Group)) = inv-Concrete-Group
-  pr1 (pr2 (pr2 (pr2 op-abstract-group-Concrete-Group))) =
-    right-inverse-law-mul-Concrete-Group
-  pr2 (pr2 (pr2 (pr2 op-abstract-group-Concrete-Group))) =
-    left-inverse-law-mul-Concrete-Group
+  is-group-Concrete-Group : is-group-Semigroup semigroup-Concrete-Group
+  pr1 is-group-Concrete-Group = is-unital-semigroup-Concrete-Group
+  pr2 is-group-Concrete-Group = is-group-Concrete-Group'
+
+  group-Concrete-Group : Group l
+  pr1 group-Concrete-Group = semigroup-Concrete-Group
+  pr2 group-Concrete-Group = is-group-Concrete-Group
+```
+
+### The opposite abstract group associated to a concrete group
+
+```agda
+module _
+  {l : Level} (G : Concrete-Group l)
+  where
+
+  op-semigroup-Concrete-Group : Semigroup l
+  op-semigroup-Concrete-Group = op-Semigroup (semigroup-Concrete-Group G)
+
+  is-unital-op-semigroup-Concrete-Group :
+    is-unital-Semigroup op-semigroup-Concrete-Group
+  is-unital-op-semigroup-Concrete-Group =
+    is-unital-op-Group (group-Concrete-Group G)
+
+  is-group-op-Concrete-Group : is-group-Semigroup op-semigroup-Concrete-Group
+  is-group-op-Concrete-Group = is-group-op-Group (group-Concrete-Group G)
+
+  op-group-Concrete-Group : Group l
+  op-group-Concrete-Group = op-Group (group-Concrete-Group G)
 ```

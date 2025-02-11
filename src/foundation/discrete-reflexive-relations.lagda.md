@@ -7,9 +7,11 @@ module foundation.discrete-reflexive-relations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.reflexive-relations
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
@@ -20,31 +22,59 @@ open import foundation-core.propositions
 
 ## Idea
 
-A reflexive relation `R` on a type `A` is said to be discrete if for every
-`x : A` the type `Σ A (R x)` is contractible. The (standard) discrete reflexive
-relation on a type is its identity type.
+A [reflexive relation](foundation.binary-relations.md) `R` on `A` is said to be
+{{#concept "discrete" Disambiguation="reflexive relations valued in types" Agda=is-discrete-Reflexive-Relation}}
+if, for every element `x : A`, the type family `R x` is
+[torsorial](foundation-core.torsorial-type-families.md). In other words, the
+[dependent sum](foundation.dependent-pair-types.md) `Σ (y : A), (R x y)` is
+[contractible](foundation-core.contractible-types.md) for every `x`.
+
+The {{#concept "standard discrete reflexive relation"}} on a type `X` is the
+relation defined by [identifications](foundation-core.identity-types.md),
+
+```text
+  R x y := (x ＝ y).
+```
 
 ## Definitions
 
-### Discrete reflexive relations
+### The predicate on reflexive relations of being discrete
 
 ```agda
-is-discrete-Reflexive-Relation-Prop :
-  {l1 l2 : Level} {A : UU l1} (R : Reflexive-Relation l2 A) → Prop (l1 ⊔ l2)
-is-discrete-Reflexive-Relation-Prop {A = A} R =
-  Π-Prop A (λ x → is-contr-Prop (Σ A (rel-Reflexive-Relation R x)))
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Reflexive-Relation l2 A)
+  where
 
-is-discrete-Reflexive-Relation :
-  {l1 l2 : Level} {A : UU l1} (R : Reflexive-Relation l2 A) → UU (l1 ⊔ l2)
-is-discrete-Reflexive-Relation R =
-  type-Prop (is-discrete-Reflexive-Relation-Prop R)
+  is-discrete-prop-Reflexive-Relation : Prop (l1 ⊔ l2)
+  is-discrete-prop-Reflexive-Relation =
+    Π-Prop A (λ a → is-torsorial-Prop (rel-Reflexive-Relation R a))
+
+  is-discrete-Reflexive-Relation : UU (l1 ⊔ l2)
+  is-discrete-Reflexive-Relation =
+    type-Prop is-discrete-prop-Reflexive-Relation
+
+  is-prop-is-discrete-Reflexive-Relation :
+    is-prop is-discrete-Reflexive-Relation
+  is-prop-is-discrete-Reflexive-Relation =
+    is-prop-type-Prop is-discrete-prop-Reflexive-Relation
 ```
 
-### The standard discrete reflexive relation
+## Properties
+
+### The identity relation is discrete
 
 ```agda
-Δ-Reflexive-Relation :
-  {l1 : Level} (A : UU l1) → Reflexive-Relation l1 A
-pr1 (Δ-Reflexive-Relation A) = Id
-pr2 (Δ-Reflexive-Relation A) x = refl
+module _
+  {l : Level} (A : UU l)
+  where
+
+  is-discrete-Id-Reflexive-Relation :
+    is-discrete-Reflexive-Relation (Id-Reflexive-Relation A)
+  is-discrete-Id-Reflexive-Relation = is-torsorial-Id
 ```
+
+## See also
+
+- [Discrete binary relations](foundation.discrete-binary-relations.md)
+- [Discrete directed graphs](graph-theory.discrete-directed-graphs.md)
+- [Discrete reflexive graphs](graph-theory.discrete-reflexive-graphs.md)

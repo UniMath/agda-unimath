@@ -22,7 +22,6 @@ open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negated-equality
-open import foundation.negation
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -126,17 +125,17 @@ module _
           ( v)
           ( compute-permute-vec-id-equiv n v))
 
-  compute-equiv-coprod-permutation-id-equiv-permute-vec :
+  compute-equiv-coproduct-permutation-id-equiv-permute-vec :
     (n : ℕ)
     (v : vec A n)
     (x : A)
     (t : Permutation n) →
-    permute-vec (succ-ℕ n) (x ∷ v) (equiv-coprod t id-equiv) ＝
+    permute-vec (succ-ℕ n) (x ∷ v) (equiv-coproduct t id-equiv) ＝
     (x ∷ permute-vec n v t)
-  compute-equiv-coprod-permutation-id-equiv-permute-vec n v x t =
+  compute-equiv-coproduct-permutation-id-equiv-permute-vec n v x t =
     eq-Eq-vec
       ( succ-ℕ n)
-      ( permute-vec (succ-ℕ n) (x ∷ v) (equiv-coprod t id-equiv))
+      ( permute-vec (succ-ℕ n) (x ∷ v) (equiv-coproduct t id-equiv))
       ( x ∷ permute-vec n v t)
       ( refl ,
         ( Eq-eq-vec
@@ -223,7 +222,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   (b : B)
   (μ : A → (B → B))
-  (C : commutative-fold-vec μ)
+  (C : commutative-fold-vec μ)
   where
 
   invariant-swap-two-last-elements-transposition-fold-vec :
@@ -257,7 +256,7 @@ module _
     inv
       ( ap
         ( fold-vec b μ)
-        ( compute-equiv-coprod-permutation-id-equiv-permute-vec
+        ( compute-equiv-coproduct-permutation-id-equiv-permute-vec
           ( succ-ℕ n)
           ( v)
           ( x)

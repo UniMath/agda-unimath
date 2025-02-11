@@ -9,16 +9,17 @@ module foundation.functoriality-propositional-truncation where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -116,7 +117,7 @@ abstract
     (A ≃ B) → (type-trunc-Prop A ≃ type-trunc-Prop B)
   pr1 (equiv-trunc-Prop e) = map-equiv-trunc-Prop e
   pr2 (equiv-trunc-Prop e) =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-type-trunc-Prop)
       ( is-prop-type-trunc-Prop)
       ( map-inv-equiv-trunc-Prop e)

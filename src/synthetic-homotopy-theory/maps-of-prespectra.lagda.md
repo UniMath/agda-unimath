@@ -1,27 +1,28 @@
 # Maps of prespectra
 
 ```agda
+{-# OPTIONS --guardedness #-}
+
 module synthetic-homotopy-theory.maps-of-prespectra where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.commuting-squares-of-maps
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.transport-along-identifications
+open import foundation.homotopies
 open import foundation.universe-levels
 
 open import structured-types.commuting-squares-of-pointed-maps
+open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
-open import structured-types.pointed-types
+open import structured-types.whiskering-pointed-homotopies-composition
+open import structured-types.wild-category-of-pointed-types
 
 open import synthetic-homotopy-theory.functoriality-loop-spaces
-open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.prespectra
 ```
 
@@ -29,7 +30,8 @@ open import synthetic-homotopy-theory.prespectra
 
 ## Idea
 
-A **map of prespectra** `f : A → B` is a
+A {{#concept "map" Disambiguation="of prespectra" Agda=map-Prespectrum}} of
+[prespectra](synthetic-homotopy-theory.prespectra.md) `f : A → B` is a
 [sequence](foundation.dependent-sequences.md) of
 [pointed maps](structured-types.pointed-maps.md)
 
@@ -45,22 +47,26 @@ such that the squares
   |            |
   |            |
   |            |
-  v            v
+  ∨            ∨
   ΩAₙ₊₁ -----> ΩBₙ₊₁
         Ωfₙ₊₁
 ```
 
-commute in the category of [pointed types](structured-types.pointed-types.md).
+commute in the
+[category of pointed types](structured-types.wild-category-of-pointed-types.md).
 
-## Definition
+## Definitions
+
+### Maps of prespectra
 
 ```agda
 coherence-map-Prespectrum :
-  {l1 l2 : Level} (n : ℕ) (A : Prespectrum l1) (B : Prespectrum l2) →
+  {l1 l2 : Level} (A : Prespectrum l1) (B : Prespectrum l2) →
   ( (n : ℕ) →
     pointed-type-Prespectrum A n →∗ pointed-type-Prespectrum B n) →
   UU (l1 ⊔ l2)
-coherence-map-Prespectrum n A B f =
+coherence-map-Prespectrum A B f =
+  (n : ℕ) →
   coherence-square-pointed-maps
     ( f n)
     ( pointed-adjoint-structure-map-Prespectrum A n)
@@ -73,10 +79,50 @@ map-Prespectrum :
 map-Prespectrum A B =
   Σ ( (n : ℕ) →
       pointed-type-Prespectrum A n →∗ pointed-type-Prespectrum B n)
-    ( λ f → (n : ℕ) → coherence-map-Prespectrum n A B f)
+    ( λ f → coherence-map-Prespectrum A B f)
+```
+
+## Properties
+
+### The identity map on a prespectrum
+
+```agda
+module _
+  {l : Level} (A : Prespectrum l)
+  where
+
+  map-id-map-Prespectrum :
+    (n : ℕ) → pointed-type-Prespectrum A n →∗ pointed-type-Prespectrum A n
+  map-id-map-Prespectrum _ = id-pointed-map
+
+  coherence-id-map-id-map-Prespectrum :
+    coherence-map-Prespectrum A A map-id-map-Prespectrum
+  coherence-id-map-id-map-Prespectrum n =
+    pointed-homotopy-reasoning
+    ( pointed-map-Ω id-pointed-map ∘∗
+      pointed-adjoint-structure-map-Prespectrum A n)
+    ~∗ id-pointed-map ∘∗ pointed-adjoint-structure-map-Prespectrum A n
+      by
+        right-whisker-comp-pointed-htpy
+          ( pointed-map-Ω id-pointed-map)
+          ( id-pointed-map)
+          ( preserves-id-pointed-map-Ω)
+          ( pointed-adjoint-structure-map-Prespectrum A n)
+    ~∗ pointed-adjoint-structure-map-Prespectrum A n
+      by
+        left-unit-law-comp-pointed-map
+          ( pointed-adjoint-structure-map-Prespectrum A n)
+    ~∗ pointed-adjoint-structure-map-Prespectrum A n ∘∗ id-pointed-map
+      by
+        inv-pointed-htpy
+          ( right-unit-law-comp-pointed-map
+            ( pointed-adjoint-structure-map-Prespectrum A n))
+
+  id-map-Prespectrum : map-Prespectrum A A
+  id-map-Prespectrum =
+    map-id-map-Prespectrum , coherence-id-map-id-map-Prespectrum
 ```
 
 ## References
 
-- J. P. May, _A Concise Course in Algebraic Topology_, 1999
-  ([pdf](https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf))
+{{#bibliography}} {{#reference May99}}

@@ -7,14 +7,8 @@ module structured-types.cyclic-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.integers
-
 open import foundation.automorphisms
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.identity-types
 open import foundation.iterating-automorphisms
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -65,7 +59,7 @@ module _
 
   is-cyclic-prop-Set-With-Automorphism : Prop l
   is-cyclic-prop-Set-With-Automorphism =
-    prod-Prop
+    product-Prop
       ( trunc-Prop (type-Set-With-Automorphism X))
       ( Π-Prop
         ( type-Set-With-Automorphism X)

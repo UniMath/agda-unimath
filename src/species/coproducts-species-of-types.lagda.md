@@ -38,8 +38,8 @@ coproduct-species-types F G X = F X + G X
 
 ## Universal properties
 
-Proof of (hom-species-types (species-types-coprod F G) H) ≃ ((hom-species-types
-F H) × (hom-species-types G H)).
+Proof of (hom-species-types (species-types-coproduct F G) H) ≃
+((hom-species-types F H) × (hom-species-types G H)).
 
 ```agda
 equiv-universal-property-coproduct-species-types :
@@ -51,5 +51,5 @@ equiv-universal-property-coproduct-species-types :
   ((hom-species-types F H) × (hom-species-types G H))
 equiv-universal-property-coproduct-species-types F G H =
   ( distributive-Π-Σ) ∘e
-  ( equiv-Π-equiv-family (λ X → equiv-universal-property-coprod (H X)))
+  ( equiv-Π-equiv-family (λ X → equiv-universal-property-coproduct (H X)))
 ```

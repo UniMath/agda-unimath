@@ -7,7 +7,6 @@ module graph-theory.equivalences-enriched-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalence-extensionality
@@ -18,6 +17,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -92,11 +92,11 @@ module _
       ( undirected-graph-Enriched-Undirected-Graph A B H)
   equiv-undirected-graph-equiv-Enriched-Undirected-Graph = pr1 e
 
-  equiv-vertex-equiv-Enriched-Undirected-Graph :
+  vertex-equiv-equiv-Enriched-Undirected-Graph :
     vertex-Enriched-Undirected-Graph A B G ≃
     vertex-Enriched-Undirected-Graph A B H
-  equiv-vertex-equiv-Enriched-Undirected-Graph =
-    equiv-vertex-equiv-Undirected-Graph
+  vertex-equiv-equiv-Enriched-Undirected-Graph =
+    vertex-equiv-equiv-Undirected-Graph
       ( undirected-graph-Enriched-Undirected-Graph A B G)
       ( undirected-graph-Enriched-Undirected-Graph A B H)
       ( equiv-undirected-graph-equiv-Enriched-Undirected-Graph)
@@ -128,13 +128,13 @@ module _
       ( undirected-graph-Enriched-Undirected-Graph A B H)
       ( equiv-undirected-graph-equiv-Enriched-Undirected-Graph)
 
-  equiv-edge-equiv-Enriched-Undirected-Graph :
+  edge-equiv-equiv-Enriched-Undirected-Graph :
     ( p : unordered-pair-vertices-Enriched-Undirected-Graph A B G) →
     edge-Enriched-Undirected-Graph A B G p ≃
     edge-Enriched-Undirected-Graph A B H
       ( unordered-pair-vertices-equiv-Enriched-Undirected-Graph p)
-  equiv-edge-equiv-Enriched-Undirected-Graph =
-    equiv-edge-equiv-Undirected-Graph
+  edge-equiv-equiv-Enriched-Undirected-Graph =
+    edge-equiv-equiv-Undirected-Graph
       ( undirected-graph-Enriched-Undirected-Graph A B G)
       ( undirected-graph-Enriched-Undirected-Graph A B H)
       ( equiv-undirected-graph-equiv-Enriched-Undirected-Graph)
@@ -188,79 +188,25 @@ module _
   (G : Enriched-Undirected-Graph l3 l4 A B)
   where
 
-  is-contr-total-equiv-Enriched-Undirected-Graph :
-    is-contr
-      ( Σ ( Enriched-Undirected-Graph l3 l4 A B)
-          ( equiv-Enriched-Undirected-Graph A B G))
-  is-contr-total-equiv-Enriched-Undirected-Graph =
-    is-contr-total-Eq-structure
-      ( λ H fn e →
-        Σ ( ( shape-vertex-Enriched-Undirected-Graph A B G) ~
-            ( ( shape-vertex-Enriched-Undirected-Graph A B (H , fn)) ∘
-              ( vertex-equiv-Undirected-Graph
-                ( undirected-graph-Enriched-Undirected-Graph A B G)
-                ( undirected-graph-Enriched-Undirected-Graph A B (H , fn)) e)))
-          ( λ α →
-            ( x : vertex-Enriched-Undirected-Graph A B G) →
-            htpy-equiv
-              ( ( equiv-neighbor-equiv-Undirected-Graph
-                  ( undirected-graph-Enriched-Undirected-Graph A B G)
-                  ( undirected-graph-Enriched-Undirected-Graph A B (H , fn))
-                  ( e)
-                  ( x)) ∘e
-                ( equiv-neighbor-Enriched-Undirected-Graph A B G x))
-              ( ( equiv-neighbor-Enriched-Undirected-Graph A B (H , fn)
-                  ( vertex-equiv-Undirected-Graph
-                    ( undirected-graph-Enriched-Undirected-Graph A B G)
-                    ( undirected-graph-Enriched-Undirected-Graph A B (H , fn))
-                    ( e)
-                    ( x))) ∘e
-                ( equiv-tr B (α x)))))
-      ( is-contr-total-equiv-Undirected-Graph
+  is-torsorial-equiv-Enriched-Undirected-Graph :
+    is-torsorial (equiv-Enriched-Undirected-Graph A B G)
+  is-torsorial-equiv-Enriched-Undirected-Graph =
+    is-torsorial-Eq-structure
+      ( is-torsorial-equiv-Undirected-Graph
         ( undirected-graph-Enriched-Undirected-Graph A B G))
       ( pair
         ( undirected-graph-Enriched-Undirected-Graph A B G)
         ( id-equiv-Undirected-Graph
           ( undirected-graph-Enriched-Undirected-Graph A B G)))
-      ( is-contr-total-Eq-structure
-        ( λ f α K →
-          ( x : vertex-Enriched-Undirected-Graph A B G) →
-          htpy-equiv
-            ( ( equiv-neighbor-equiv-Undirected-Graph
-                ( undirected-graph-Enriched-Undirected-Graph A B G)
-                ( undirected-graph-Enriched-Undirected-Graph A B
-                  ( undirected-graph-Enriched-Undirected-Graph A B G , f , α))
-                ( id-equiv-Undirected-Graph
-                  ( undirected-graph-Enriched-Undirected-Graph A B G))
-                ( x)) ∘e
-              ( equiv-neighbor-Enriched-Undirected-Graph A B G x))
-            ( equiv-neighbor-Enriched-Undirected-Graph A B
-              ( undirected-graph-Enriched-Undirected-Graph A B G , f , α)
-              ( vertex-equiv-Undirected-Graph
-                ( undirected-graph-Enriched-Undirected-Graph A B G)
-                ( undirected-graph-Enriched-Undirected-Graph A B
-                  ( undirected-graph-Enriched-Undirected-Graph A B G , f , α))
-                  ( id-equiv-Undirected-Graph
-                    ( undirected-graph-Enriched-Undirected-Graph A B G))
-                ( x)) ∘e
-              ( equiv-tr B (K x))))
-        ( is-contr-total-htpy
+      ( is-torsorial-Eq-structure
+        ( is-torsorial-htpy
           ( shape-vertex-Enriched-Undirected-Graph A B G))
         ( pair
           ( shape-vertex-Enriched-Undirected-Graph A B G)
           ( refl-htpy))
-        ( is-contr-total-Eq-Π
+        ( is-torsorial-Eq-Π
           ( λ x →
-            htpy-equiv
-              ( ( equiv-neighbor-equiv-Undirected-Graph
-                  ( undirected-graph-Enriched-Undirected-Graph A B G)
-                  ( undirected-graph-Enriched-Undirected-Graph A B G)
-                    ( id-equiv-Undirected-Graph
-                      ( undirected-graph-Enriched-Undirected-Graph A B G))
-                    ( x)) ∘e
-                ( equiv-neighbor-Enriched-Undirected-Graph A B G x)))
-          ( λ x →
-            is-contr-total-htpy-equiv
+            is-torsorial-htpy-equiv
               ( equiv-neighbor-equiv-Undirected-Graph
                   ( undirected-graph-Enriched-Undirected-Graph A B G)
                   ( undirected-graph-Enriched-Undirected-Graph A B G)
@@ -280,7 +226,7 @@ module _
     is-equiv (equiv-eq-Enriched-Undirected-Graph H)
   is-equiv-equiv-eq-Enriched-Undirected-Graph =
     fundamental-theorem-id
-      ( is-contr-total-equiv-Enriched-Undirected-Graph)
+      ( is-torsorial-equiv-Enriched-Undirected-Graph)
       ( equiv-eq-Enriched-Undirected-Graph)
 
   extensionality-Enriched-Undirected-Graph :
@@ -300,9 +246,9 @@ module _
 
 ## External links
 
-- [Graph isomoprhism](https://www.wikidata.org/wiki/Q303100) at Wikidata
+- [Graph isomoprhism](https://www.wikidata.org/entity/Q303100) at Wikidata
 - [Graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism) at
   Wikipedia
 - [Graph isomorphism](https://mathworld.wolfram.com/GraphIsomorphism.html) at
-  Wolfram Mathworld
-- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at nlab
+  Wolfram MathWorld
+- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at $n$Lab

@@ -15,8 +15,8 @@ open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
@@ -25,8 +25,9 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.retractions
-open import foundation-core.whiskering-homotopies
+open import foundation-core.retracts-of-types
+open import foundation-core.torsorial-type-families
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -95,15 +96,15 @@ module _
 ### If the right factor of a composite has a section, then the type of sections of the left factor is a retract of the type of sections of the composite
 
 ```agda
-is-retraction-section-comp-htpy :
+is-retraction-section-left-map-triangle :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B)
   (H : f ~ (g ∘ h)) (s : section h) →
-  (section-left-factor-htpy f g h H ∘ section-comp-htpy f g h H s) ~ id
-is-retraction-section-comp-htpy f g h H (k , K) (l , L) =
+  section-right-map-triangle f g h H ∘ section-left-map-triangle f g h H s ~ id
+is-retraction-section-left-map-triangle f g h H (k , K) (l , L) =
   eq-htpy-section
-    ( ( section-left-factor-htpy f g h H ∘
-        section-comp-htpy f g h H (k , K))
+    ( ( section-right-map-triangle f g h H ∘
+        section-left-map-triangle f g h H (k , K))
       ( l , L))
     ( l , L)
     ( K ·r l)
@@ -111,23 +112,19 @@ is-retraction-section-comp-htpy f g h H (k , K) (l , L) =
         ( inv-htpy (H ·r (k ∘ l)))
         ( H ·r (k ∘ l))
         ( (g ·l (K ·r l)) ∙h L)) ∙h
-      ( ap-concat-htpy'
-        ( (inv-htpy (H ·r (k ∘ l))) ∙h (H ·r (k ∘ l)))
-        ( refl-htpy)
-        ( (g ·l (K ·r l)) ∙h L)
-        ( left-inv-htpy (H ·r (k ∘ l)))))
+      ( ap-concat-htpy' ((g ·l (K ·r l)) ∙h L) (left-inv-htpy (H ·r (k ∘ l)))))
 
 section-left-factor-retract-of-section-composition :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
   section h → (section g) retract-of (section f)
 pr1 (section-left-factor-retract-of-section-composition f g h H s) =
-  section-comp-htpy f g h H s
+  section-left-map-triangle f g h H s
 pr1 (pr2 (section-left-factor-retract-of-section-composition f g h H s)) =
-  section-left-factor-htpy f g h H
+  section-right-map-triangle f g h H
 
 pr2 (pr2 (section-left-factor-retract-of-section-composition f g h H s)) =
-  is-retraction-section-comp-htpy f g h H s
+  is-retraction-section-left-map-triangle f g h H s
 ```
 
 ### The equivalence of sections of the projection map and sections of the type family
@@ -143,7 +140,7 @@ module _
       ( is-contr-equiv
         ( Π-total-fam (λ x y → y ＝ x))
         ( inv-distributive-Π-Σ)
-        ( is-contr-Π is-contr-total-path'))
+        ( is-contr-Π is-torsorial-Id'))
       ( id , refl-htpy)) ∘e
     ( equiv-right-swap-Σ) ∘e
     ( equiv-Σ-equiv-base ( λ s → pr1 s ~ id) ( distributive-Π-Σ))
@@ -159,7 +156,7 @@ module _
   is-equiv-map-section-family :
     ((x : A) → is-contr (B x)) → is-equiv (map-section-family b)
   is-equiv-map-section-family C =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( id)
       ( pr1)
       ( map-section-family b)
@@ -176,7 +173,7 @@ module _
     is-equiv (map-section-family b) → ((x : A) → is-contr (B x))
   is-contr-fam-is-equiv-map-section-family H =
     is-contr-is-equiv-pr1
-      ( is-equiv-left-factor-htpy id pr1
+      ( is-equiv-right-map-triangle id pr1
         ( map-section-family b)
         ( htpy-map-section-family b)
         ( is-equiv-id)
@@ -190,22 +187,4 @@ is-injective-map-section-family :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
   is-injective (map-section-family b)
 is-injective-map-section-family b = ap pr1
-```
-
-### Transposing identifications along sections
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  where
-
-  transpose-eq-section :
-    (g : B → A) (H : (f ∘ g) ~ id) {x : A} {y : B} →
-    x ＝ g y → f x ＝ y
-  transpose-eq-section g H refl = H _
-
-  transpose-eq-section' :
-    (g : B → A) (H : (f ∘ g) ~ id) {x : B} {y : A} →
-    g x ＝ y → x ＝ f y
-  transpose-eq-section' g H refl = inv (H _)
 ```

@@ -7,6 +7,7 @@ module elementary-number-theory.strong-induction-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -204,7 +205,7 @@ eq-compute-succ-strong-ind-ℕ :
       cases-succ-strong-ind-ℕ P pS k z m₁ (cases-leq-succ-ℕ z₁))
     n m p) ＝
   ( strong-ind-ℕ P p0 pS m)
-eq-compute-succ-strong-ind-ℕ P p0 pS zero-ℕ zero-ℕ star = refl
+eq-compute-succ-strong-ind-ℕ P p0 pS zero-ℕ zero-ℕ _ = refl
 eq-compute-succ-strong-ind-ℕ P p0 pS (succ-ℕ n) m p =
   cases-eq-compute-succ-strong-ind-ℕ P p0 pS n
     ( eq-compute-succ-strong-ind-ℕ P p0 pS n) m p
@@ -236,6 +237,25 @@ total-strong-ind-ℕ :
 pr1 (total-strong-ind-ℕ P p0 pS) = strong-ind-ℕ P p0 pS
 pr1 (pr2 (total-strong-ind-ℕ P p0 pS)) = compute-zero-strong-ind-ℕ P p0 pS
 pr2 (pr2 (total-strong-ind-ℕ P p0 pS)) = compute-succ-strong-ind-ℕ P p0 pS
+```
+
+### Strong recursion
+
+```agda
+module _
+  {l : Level} {A : UU l} (a0 : A) (aS : (k : ℕ) → (□-≤-ℕ (λ _ → A) k) → A)
+  where
+
+  strong-rec-ℕ : ℕ → A
+  strong-rec-ℕ = strong-ind-ℕ (λ _ → A) a0 aS
+
+  compute-zero-strong-rec-ℕ : strong-rec-ℕ 0 ＝ a0
+  compute-zero-strong-rec-ℕ = compute-zero-strong-ind-ℕ (λ _ → A) a0 aS
+
+  compute-succ-strong-rec-ℕ :
+    (n : ℕ) → strong-rec-ℕ (succ-ℕ n) ＝ aS n (λ m _ → strong-rec-ℕ m)
+  compute-succ-strong-rec-ℕ =
+    compute-succ-strong-ind-ℕ (λ _ → A) a0 aS
 ```
 
 ## See also

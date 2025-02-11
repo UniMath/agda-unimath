@@ -12,6 +12,9 @@ open import elementary-number-theory.difference-integers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -54,14 +57,14 @@ dist-int-ℕ (succ-ℕ x) (succ-ℕ y) =
 dist-abs-ℤ :
   (x y : ℤ) → (H : is-nonnegative-ℤ x) → (K : is-nonnegative-ℤ y) →
   dist-ℕ (abs-ℤ x) (abs-ℤ y) ＝ dist-ℤ x y
-dist-abs-ℤ (inr (inl star)) y H K =
+dist-abs-ℤ (inr (inl _)) y H K =
   equational-reasoning
     dist-ℕ 0 (abs-ℤ y)
     ＝ abs-ℤ y
       by left-unit-law-dist-ℕ (abs-ℤ y)
     ＝ dist-ℤ (zero-ℤ) y
       by inv (left-zero-law-dist-ℤ y)
-dist-abs-ℤ (inr (inr x)) (inr (inl star)) H K =
+dist-abs-ℤ (inr (inr x)) (inr (inl _)) H K =
   equational-reasoning
     dist-ℕ (abs-ℤ (inr (inr x))) 0
     ＝ succ-ℕ x

@@ -17,6 +17,10 @@ open import foundation.universe-levels
 
 open import foundation-core.subtypes
 
+open import logic.de-morgan-propositions
+open import logic.de-morgan-subtypes
+open import logic.double-negation-stable-subtypes
+
 open import order-theory.least-upper-bounds-large-posets
 ```
 
@@ -24,8 +28,8 @@ open import order-theory.least-upper-bounds-large-posets
 
 ## Idea
 
-The union of two subtypes `A` and `B` is the subtype that contains the elements
-that are in `A` or in `B`.
+The **union** of two [subtypes](foundation-core.subtypes.md) `A` and `B` is the
+subtype that contains the elements that are in `A` or in `B`.
 
 ## Definition
 
@@ -37,7 +41,7 @@ module _
   where
 
   union-subtype : subtype l1 X → subtype l2 X → subtype (l1 ⊔ l2) X
-  union-subtype P Q x = disj-Prop (P x) (Q x)
+  union-subtype P Q x = (P x) ∨ (Q x)
 ```
 
 ### Unions of decidable subtypes
@@ -46,7 +50,16 @@ module _
   union-decidable-subtype :
     decidable-subtype l1 X → decidable-subtype l2 X →
     decidable-subtype (l1 ⊔ l2) X
-  union-decidable-subtype P Q x = disj-Decidable-Prop (P x) (Q x)
+  union-decidable-subtype P Q x = disjunction-Decidable-Prop (P x) (Q x)
+```
+
+### Unions of De Morgan subtypes
+
+```agda
+  union-de-morgan-subtype :
+    de-morgan-subtype l1 X → de-morgan-subtype l2 X →
+    de-morgan-subtype (l1 ⊔ l2) X
+  union-de-morgan-subtype P Q x = disjunction-De-Morgan-Prop (P x) (Q x)
 ```
 
 ### Unions of families of subtypes

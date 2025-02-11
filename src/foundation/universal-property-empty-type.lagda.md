@@ -9,13 +9,13 @@ module foundation.universal-property-empty-type where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-function-types
 ```
 
 </details>
@@ -25,6 +25,15 @@ open import foundation-core.functoriality-function-types
 There is a unique map from the empty type into any type. Similarly, for any type
 family over an empty type, there is a unique dependent function taking values in
 this family.
+
+## Definitions
+
+### The initial map into a type
+
+```agda
+initial-map : {l : Level} (A : UU l) → empty → A
+initial-map A = ex-falso
+```
 
 ## Properties
 
@@ -43,8 +52,8 @@ module _
   universal-property-dependent-universal-property-empty :
     ({l : Level} → dependent-universal-property-empty l) →
     ({l : Level} → universal-property-empty l)
-  universal-property-dependent-universal-property-empty dup-empty {l} X =
-    dup-empty {l} (λ a → X)
+  universal-property-dependent-universal-property-empty dup-empty X =
+    dup-empty (λ _ → X)
 
   is-empty-universal-property-empty :
     ({l : Level} → universal-property-empty l) → is-empty A
@@ -72,22 +81,24 @@ abstract
   universal-property-empty' :
     {l : Level} (X : UU l) → is-contr (empty → X)
   universal-property-empty' X =
-    dependent-universal-property-empty' (λ t → X)
+    dependent-universal-property-empty' (λ _ → X)
 
 abstract
   uniqueness-empty :
-    {l : Level} (Y : UU l) → ((l' : Level) (X : UU l') →
-    is-contr (Y → X)) → is-equiv (ind-empty {P = λ t → Y})
+    {l : Level} (Y : UU l) →
+    ({l' : Level} (X : UU l') → is-contr (Y → X)) →
+    is-equiv (ind-empty {P = λ _ → Y})
   uniqueness-empty Y H =
     is-equiv-is-equiv-precomp ind-empty
-      ( λ l X → is-equiv-is-contr
-        ( λ g → g ∘ ind-empty)
-        ( H _ X)
-        ( universal-property-empty' X))
+      ( λ X →
+        is-equiv-is-contr
+          ( λ g → g ∘ ind-empty)
+          ( H X)
+          ( universal-property-empty' X))
 
 abstract
   universal-property-empty-is-equiv-ind-empty :
-    {l : Level} (X : UU l) → is-equiv (ind-empty {P = λ t → X}) →
+    {l : Level} (X : UU l) → is-equiv (ind-empty {P = λ _ → X}) →
     ((l' : Level) (Y : UU l') → is-contr (X → Y))
   universal-property-empty-is-equiv-ind-empty X is-equiv-ind-empty l' Y =
     is-contr-is-equiv

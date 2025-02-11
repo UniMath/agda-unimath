@@ -9,12 +9,14 @@ module lists.lists where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -24,6 +26,7 @@ open import foundation.maybe
 open import foundation.negation
 open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
@@ -184,13 +187,13 @@ is-section-eq-Eq-list nil (cons x l') e = ex-falso (is-empty-raise-empty e)
 is-section-eq-Eq-list (cons x l) nil e = ex-falso (is-empty-raise-empty e)
 is-section-eq-Eq-list (cons x l) (cons .x l') (pair refl e) =
   ( square-eq-Eq-list (eq-Eq-list l l' e)) ∙
-  ( ap (pair refl) (is-section-eq-Eq-list l l' e))
+  ( eq-pair-eq-fiber (is-section-eq-Eq-list l l' e))
 
 eq-Eq-refl-Eq-list :
   {l1 : Level} {A : UU l1} (l : list A) →
   Id (eq-Eq-list l l (refl-Eq-list l)) refl
 eq-Eq-refl-Eq-list nil = refl
-eq-Eq-refl-Eq-list (cons x l) = ap (ap (cons x)) (eq-Eq-refl-Eq-list l)
+eq-Eq-refl-Eq-list (cons x l) = ap² (cons x) (eq-Eq-refl-Eq-list l)
 
 is-retraction-eq-Eq-list :
   {l1 : Level} {A : UU l1} (l l' : list A) (p : Id l l') →
@@ -212,14 +215,14 @@ equiv-Eq-list :
 equiv-Eq-list l l' =
   pair (Eq-eq-list l l') (is-equiv-Eq-eq-list l l')
 
-is-contr-total-Eq-list :
+is-torsorial-Eq-list :
   {l1 : Level} {A : UU l1} (l : list A) →
-  is-contr (Σ (list A) (Eq-list l))
-is-contr-total-Eq-list {A = A} l =
+  is-torsorial (Eq-list l)
+is-torsorial-Eq-list {A = A} l =
   is-contr-equiv'
     ( Σ (list A) (Id l))
     ( equiv-tot (equiv-Eq-list l))
-    ( is-contr-total-path l)
+    ( is-torsorial-Id l)
 
 is-trunc-Eq-list :
   (k : 𝕋) {l : Level} {A : UU l} → is-trunc (succ-𝕋 (succ-𝕋 k)) A →
@@ -231,7 +234,7 @@ is-trunc-Eq-list k H nil (cons x l') =
 is-trunc-Eq-list k H (cons x l) nil =
   is-trunc-is-empty k is-empty-raise-empty
 is-trunc-Eq-list k H (cons x l) (cons y l') =
-  is-trunc-prod (succ-𝕋 k) (H x y) (is-trunc-Eq-list k H l l')
+  is-trunc-product (succ-𝕋 k) (H x y) (is-trunc-Eq-list k H l l')
 
 is-trunc-list :
   (k : 𝕋) {l : Level} {A : UU l} → is-trunc (succ-𝕋 (succ-𝕋 k)) A →
@@ -362,29 +365,29 @@ map-algebra-list :
 map-algebra-list A (inl (a , x)) = cons a x
 map-algebra-list A (inr star) = nil
 
-inv-map-algebra-list :
+map-inv-algebra-list :
   {l1 : Level} (A : UU l1) →
   list A → Maybe (A × list A)
-inv-map-algebra-list A nil = inr star
-inv-map-algebra-list A (cons a x) = inl (pair a x)
+map-inv-algebra-list A nil = inr star
+map-inv-algebra-list A (cons a x) = inl (pair a x)
 
-is-section-inv-map-algebra-list :
+is-section-map-inv-algebra-list :
   {l1 : Level} (A : UU l1) →
-  (map-algebra-list A ∘ inv-map-algebra-list A) ~ id
-is-section-inv-map-algebra-list A nil = refl
-is-section-inv-map-algebra-list A (cons a x) = refl
+  (map-algebra-list A ∘ map-inv-algebra-list A) ~ id
+is-section-map-inv-algebra-list A nil = refl
+is-section-map-inv-algebra-list A (cons a x) = refl
 
-is-retraction-inv-map-algebra-list :
+is-retraction-map-inv-algebra-list :
   {l1 : Level} (A : UU l1) →
-  (inv-map-algebra-list A ∘ map-algebra-list A) ~ id
-is-retraction-inv-map-algebra-list A (inl (a , x)) = refl
-is-retraction-inv-map-algebra-list A (inr star) = refl
+  (map-inv-algebra-list A ∘ map-algebra-list A) ~ id
+is-retraction-map-inv-algebra-list A (inl (a , x)) = refl
+is-retraction-map-inv-algebra-list A (inr star) = refl
 
 is-equiv-map-algebra-list :
   {l1 : Level} (A : UU l1) → is-equiv (map-algebra-list A)
 is-equiv-map-algebra-list A =
   is-equiv-is-invertible
-    ( inv-map-algebra-list A)
-    ( is-section-inv-map-algebra-list A)
-    ( is-retraction-inv-map-algebra-list A)
+    ( map-inv-algebra-list A)
+    ( is-section-map-inv-algebra-list A)
+    ( is-retraction-map-inv-algebra-list A)
 ```

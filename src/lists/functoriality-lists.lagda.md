@@ -7,6 +7,7 @@ module lists.functoriality-lists where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
@@ -60,7 +61,7 @@ length-map-list f (cons x l) =
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   (f : A → B)
   where
 

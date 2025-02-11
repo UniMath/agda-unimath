@@ -50,7 +50,7 @@ module _
   is-emb-hom-undirected-graph-Prop :
     hom-Undirected-Graph G H → Prop (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-emb-hom-undirected-graph-Prop f =
-    prod-Prop
+    product-Prop
       ( is-emb-Prop (vertex-hom-Undirected-Graph G H f))
       ( Π-Prop
         ( unordered-pair-vertices-Undirected-Graph G)
@@ -130,6 +130,6 @@ module _
 
 ## External links
 
-- [Graph homomorphism](https://www.wikidata.org/wiki/Q3385162) on Wikidata
+- [Graph homomorphism](https://www.wikidata.org/entity/Q3385162) on Wikidata
 - [Graph homomorphism](https://en.wikipedia.org/wiki/Graph_homomorphism) on
   Wikipedia

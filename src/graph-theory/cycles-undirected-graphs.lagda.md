@@ -21,8 +21,10 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A **cycle** in an [undirected graph](graph-theory.undirected-graphs.md) `G`
-consists of a [`k`-gon](graph-theory.polygons.md) `H` equipped with an
+A
+{{#concept "cycle" Agda=cycle-Undirected-Graph Disambiguation="undirected graph" WD="cycle" WDID=Q245595}}
+in an [undirected graph](graph-theory.undirected-graphs.md) `G` consists of a
+[`k`-gon](graph-theory.polygons.md) `H` equipped with an
 [embedding of graphs](graph-theory.embeddings-undirected-graphs.md) from `H`
 into `G`.
 
@@ -40,8 +42,8 @@ module _
 
 ## External links
 
-- [Cycle](https://www.wikidata.org/wiki/Q245595) on Wikidata
+- [Cycle](https://www.wikidata.org/entity/Q245595) on Wikidata
 - [Cycle (graph theory)](<https://en.wikipedia.org/wiki/Cycle_(graph_theory)>)
   at Wikipedia
 - [Graph cycle](https://mathworld.wolfram.com/GraphCycle.html) at Wolfram
-  Mathworld
+  MathWorld

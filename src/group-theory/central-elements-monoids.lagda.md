@@ -29,9 +29,9 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  is-central-element-monoid-Prop : type-Monoid M → Prop l
-  is-central-element-monoid-Prop =
-    is-central-element-semigroup-Prop (semigroup-Monoid M)
+  is-central-element-prop-Monoid : type-Monoid M → Prop l
+  is-central-element-prop-Monoid =
+    is-central-element-prop-Semigroup (semigroup-Monoid M)
 
   is-central-element-Monoid : type-Monoid M → UU l
   is-central-element-Monoid =

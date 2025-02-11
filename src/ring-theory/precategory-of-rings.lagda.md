@@ -28,31 +28,19 @@ and [ring homomorphisms](ring-theory.homomorphisms-rings.md).
 ### The large precategory of rings
 
 ```agda
-Ring-Large-Precategory : Large-Precategory lsuc _⊔_
-obj-Large-Precategory
-  Ring-Large-Precategory =
-  Ring
-hom-set-Large-Precategory
-  Ring-Large-Precategory =
-  hom-set-Ring
-comp-hom-Large-Precategory
-  Ring-Large-Precategory {X = R} {S} {T} =
-  comp-hom-Ring R S T
-id-hom-Large-Precategory
-  Ring-Large-Precategory {X = R} =
-  id-hom-Ring R
-associative-comp-hom-Large-Precategory
-  Ring-Large-Precategory {X = R} {S} {T} {U} =
-  associative-comp-hom-Ring R S T U
-left-unit-law-comp-hom-Large-Precategory
-  Ring-Large-Precategory {X = R} {S} =
-  left-unit-law-comp-hom-Ring R S
-right-unit-law-comp-hom-Large-Precategory
-  Ring-Large-Precategory {X = R} {S} =
-  right-unit-law-comp-hom-Ring R S
+Ring-Large-Precategory : Large-Precategory (lsuc) (_⊔_)
+Ring-Large-Precategory =
+  make-Large-Precategory
+    ( Ring)
+    ( hom-set-Ring)
+    ( λ {l1} {l2} {l3} {R} {S} {T} → comp-hom-Ring R S T)
+    ( λ {l} {R} → id-hom-Ring R)
+    ( λ {l1} {l2} {l3} {l4} {R} {S} {T} {U} → associative-comp-hom-Ring R S T U)
+    ( λ {l1} {l2} {R} {S} → left-unit-law-comp-hom-Ring R S)
+    ( λ {l1} {l2} {R} {S} → right-unit-law-comp-hom-Ring R S)
 ```
 
-### The precategory or rings of universe level `l`
+### The precategory of rings at a universe level
 
 ```agda
 Ring-Precategory : (l : Level) → Precategory (lsuc l) l

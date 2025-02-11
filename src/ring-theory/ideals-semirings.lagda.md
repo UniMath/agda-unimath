@@ -46,7 +46,7 @@ module _
   is-additive-submonoid-Semiring :
     {l2 : Level} → subset-Semiring l2 R → UU (l1 ⊔ l2)
   is-additive-submonoid-Semiring =
-    is-submonoid-Monoid (additive-monoid-Semiring R)
+    is-submonoid-subset-Monoid (additive-monoid-Semiring R)
 ```
 
 ### Left ideals
@@ -63,7 +63,7 @@ module _
     is-closed-under-left-multiplication-subset-Semiring R P
 
 left-ideal-Semiring :
-  (l : Level) {l1 : Level} (R : Semiring l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (R : Semiring l1) → UU (lsuc l ⊔ l1)
 left-ideal-Semiring l R =
   Σ (subset-Semiring l R) (is-left-ideal-subset-Semiring R)
 
@@ -148,7 +148,7 @@ module _
     is-closed-under-right-multiplication-subset-Semiring R P
 
 right-ideal-Semiring :
-  (l : Level) {l1 : Level} (R : Semiring l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (R : Semiring l1) → UU (lsuc l ⊔ l1)
 right-ideal-Semiring l R =
   Σ (subset-Semiring l R) (is-right-ideal-subset-Semiring R)
 
@@ -231,7 +231,7 @@ is-ideal-subset-Semiring R P =
     is-closed-under-right-multiplication-subset-Semiring R P)
 
 ideal-Semiring :
-  (l : Level) {l1 : Level} (R : Semiring l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (R : Semiring l1) → UU (lsuc l ⊔ l1)
 ideal-Semiring l R =
   Σ (subset-Semiring l R) (is-ideal-subset-Semiring R)
 

@@ -49,7 +49,7 @@ contains-zero-nilradical-Commutative-Ring :
   {l : Level} (A : Commutative-Ring l) →
   contains-zero-subset-Commutative-Ring A
     ( subset-nilradical-Commutative-Ring A)
-contains-zero-nilradical-Commutative-Ring A = intro-∃ 1 refl
+contains-zero-nilradical-Commutative-Ring A = intro-exists 1 refl
 ```
 
 ### The nilradical is closed under addition
@@ -59,7 +59,7 @@ is-closed-under-addition-nilradical-Commutative-Ring :
   {l : Level} (A : Commutative-Ring l) →
   is-closed-under-addition-subset-Commutative-Ring A
     ( subset-nilradical-Commutative-Ring A)
-is-closed-under-addition-nilradical-Commutative-Ring A x y =
+is-closed-under-addition-nilradical-Commutative-Ring A {x} {y} =
   is-nilpotent-add-Ring
     ( ring-Commutative-Ring A)
     ( x)

@@ -32,47 +32,47 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2)
   where
 
-  semigroup-prod-Monoid : Semigroup (l1 ⊔ l2)
-  semigroup-prod-Monoid =
-    prod-Semigroup (semigroup-Monoid M) (semigroup-Monoid N)
+  semigroup-product-Monoid : Semigroup (l1 ⊔ l2)
+  semigroup-product-Monoid =
+    product-Semigroup (semigroup-Monoid M) (semigroup-Monoid N)
 
-  set-prod-Monoid : Set (l1 ⊔ l2)
-  set-prod-Monoid = set-Semigroup semigroup-prod-Monoid
+  set-product-Monoid : Set (l1 ⊔ l2)
+  set-product-Monoid = set-Semigroup semigroup-product-Monoid
 
-  type-prod-Monoid : UU (l1 ⊔ l2)
-  type-prod-Monoid = type-Semigroup semigroup-prod-Monoid
+  type-product-Monoid : UU (l1 ⊔ l2)
+  type-product-Monoid = type-Semigroup semigroup-product-Monoid
 
-  is-set-type-prod-Monoid : is-set type-prod-Monoid
-  is-set-type-prod-Monoid = is-set-type-Semigroup semigroup-prod-Monoid
+  is-set-type-product-Monoid : is-set type-product-Monoid
+  is-set-type-product-Monoid = is-set-type-Semigroup semigroup-product-Monoid
 
-  mul-prod-Monoid : (x y : type-prod-Monoid) → type-prod-Monoid
-  mul-prod-Monoid = mul-Semigroup semigroup-prod-Monoid
+  mul-product-Monoid : (x y : type-product-Monoid) → type-product-Monoid
+  mul-product-Monoid = mul-Semigroup semigroup-product-Monoid
 
-  associative-mul-prod-Monoid :
-    (x y z : type-prod-Monoid) →
+  associative-mul-product-Monoid :
+    (x y z : type-product-Monoid) →
     Id
-      ( mul-prod-Monoid (mul-prod-Monoid x y) z)
-      ( mul-prod-Monoid x (mul-prod-Monoid y z))
-  associative-mul-prod-Monoid =
-    associative-mul-Semigroup semigroup-prod-Monoid
+      ( mul-product-Monoid (mul-product-Monoid x y) z)
+      ( mul-product-Monoid x (mul-product-Monoid y z))
+  associative-mul-product-Monoid =
+    associative-mul-Semigroup semigroup-product-Monoid
 
-  unit-prod-Monoid : type-prod-Monoid
-  pr1 unit-prod-Monoid = unit-Monoid M
-  pr2 unit-prod-Monoid = unit-Monoid N
+  unit-product-Monoid : type-product-Monoid
+  pr1 unit-product-Monoid = unit-Monoid M
+  pr2 unit-product-Monoid = unit-Monoid N
 
-  left-unit-law-mul-prod-Monoid :
-    (x : type-prod-Monoid) → Id (mul-prod-Monoid unit-prod-Monoid x) x
-  left-unit-law-mul-prod-Monoid (pair x y) =
+  left-unit-law-mul-product-Monoid :
+    (x : type-product-Monoid) → Id (mul-product-Monoid unit-product-Monoid x) x
+  left-unit-law-mul-product-Monoid (pair x y) =
     eq-pair (left-unit-law-mul-Monoid M x) (left-unit-law-mul-Monoid N y)
 
-  right-unit-law-mul-prod-Monoid :
-    (x : type-prod-Monoid) → Id (mul-prod-Monoid x unit-prod-Monoid) x
-  right-unit-law-mul-prod-Monoid (pair x y) =
+  right-unit-law-mul-product-Monoid :
+    (x : type-product-Monoid) → Id (mul-product-Monoid x unit-product-Monoid) x
+  right-unit-law-mul-product-Monoid (pair x y) =
     eq-pair (right-unit-law-mul-Monoid M x) (right-unit-law-mul-Monoid N y)
 
-  prod-Monoid : Monoid (l1 ⊔ l2)
-  pr1 prod-Monoid = semigroup-prod-Monoid
-  pr1 (pr2 prod-Monoid) = unit-prod-Monoid
-  pr1 (pr2 (pr2 prod-Monoid)) = left-unit-law-mul-prod-Monoid
-  pr2 (pr2 (pr2 prod-Monoid)) = right-unit-law-mul-prod-Monoid
+  product-Monoid : Monoid (l1 ⊔ l2)
+  pr1 product-Monoid = semigroup-product-Monoid
+  pr1 (pr2 product-Monoid) = unit-product-Monoid
+  pr1 (pr2 (pr2 product-Monoid)) = left-unit-law-mul-product-Monoid
+  pr2 (pr2 (pr2 product-Monoid)) = right-unit-law-mul-product-Monoid
 ```

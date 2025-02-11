@@ -58,6 +58,7 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
+open import foundation.whiskering-identifications-concatenation
 
 open import group-theory.concrete-groups
 open import group-theory.generating-sets-groups
@@ -84,7 +85,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Ideas
 
 The delooping of a group homomorphism `f : G → H` is a pointed map
-`Bf : BG → BH` equiped with an homotopy witnessing that the following square
+`Bf : BG → BH` equipped with a homotopy witnessing that the following square
 commutes :
 
 ```text
@@ -93,7 +94,7 @@ commutes :
   |           |
  ≅|           |≅
   |           |
-  v           v
+  ∨           ∨
   BG ------> BH
        ΩBf
 ```
@@ -110,10 +111,10 @@ delooping of the sign homomorphism.
 module _
   { l1 l2 l3 : Level}
   ( D : (n : ℕ) (X : UU-Fin l1 n) → UU l2)
-  ( R : (n : ℕ) (X : UU-Fin l1 n) → Equivalence-Relation l3 (D n X))
+  ( R : (n : ℕ) (X : UU-Fin l1 n) → equivalence-relation l3 (D n X))
   ( is-decidable-R :
     (n : ℕ) → leq-ℕ 2 n → (X : UU-Fin l1 n)
-    (a b : D n X) → is-decidable (sim-Equivalence-Relation (R n X) a b))
+    (a b : D n X) → is-decidable (sim-equivalence-relation (R n X) a b))
   ( equiv-D/R-fin-2-equiv :
     (n : ℕ) (X : UU-Fin l1 n) →
     leq-ℕ 2 n → Fin n ≃ type-UU-Fin n X →
@@ -125,7 +126,7 @@ module _
         unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))
   ( not-R-transposition-fin-succ-succ : (n : ℕ) →
     ( Y : 2-Element-Decidable-Subtype l1 (raise-Fin l1 (n +ℕ 2))) →
-    ¬ ( sim-Equivalence-Relation
+    ¬ ( sim-equivalence-relation
       ( R
         ( n +ℕ 2)
         ( raise-Fin l1 (n +ℕ 2) ,
@@ -153,8 +154,6 @@ module _
       raise (l2 ⊔ lsuc l3) (Fin 2)
     eq-counting-equivalence-class-R n =
       eq-equiv
-        ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
-        ( raise l4 (Fin 2))
         ( compute-raise-Fin l4 2 ∘e
           inv-equiv
             ( equiv-D/R-fin-2-equiv
@@ -183,8 +182,8 @@ module _
         ( X X' : UU-Fin l1 n)
         ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
         ( a a' : D n X) →
-        ( sim-Equivalence-Relation (R n X) a a' ↔
-          sim-Equivalence-Relation
+        ( sim-equivalence-relation (R n X) a a' ↔
+          sim-equivalence-relation
             ( R n X')
             ( map-equiv (invertible-action-D-equiv n X X' e) a)
             ( map-equiv (invertible-action-D-equiv n X X' e) a'))
@@ -194,14 +193,14 @@ module _
           ( X)
           ( λ Y f →
             ( a a' : D n X) →
-            ( sim-Equivalence-Relation (R n X) a a' ↔
-              sim-Equivalence-Relation
+            ( sim-equivalence-relation (R n X) a a' ↔
+              sim-equivalence-relation
                 ( R n Y)
                 ( map-equiv (invertible-action-D-equiv n X Y f) a)
                 ( map-equiv (invertible-action-D-equiv n X Y f) a')))
           ( λ a a' →
             ( binary-tr
-              ( sim-Equivalence-Relation (R n X))
+              ( sim-equivalence-relation (R n X))
                 ( inv
                   ( htpy-eq-equiv
                     ( preserves-id-equiv-invertible-action-D-equiv n X)
@@ -211,7 +210,7 @@ module _
                     ( preserves-id-equiv-invertible-action-D-equiv n X)
                     ( a')))) ,
             ( binary-tr
-              ( sim-Equivalence-Relation (R n X))
+              ( sim-equivalence-relation (R n X))
                 ( htpy-eq-equiv
                   ( preserves-id-equiv-invertible-action-D-equiv n X)
                   ( a))
@@ -264,7 +263,7 @@ module _
 
     quotient-reflecting-map-quotient-Fin :
       (n : ℕ) →
-      reflecting-map-Equivalence-Relation
+      reflecting-map-equivalence-relation
         ( R n (raise-UU-Fin-Fin n))
         ( type-Set (quotient-set-Fin n))
     quotient-reflecting-map-quotient-Fin n =
@@ -331,7 +330,7 @@ module _
       ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
       ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
   pr1 (quotient-delooping-sign-loop n) = map-quotient-delooping-sign-loop-Fin n
-  pr2 (quotient-delooping-sign-loop n) p q =
+  pr2 (quotient-delooping-sign-loop n) {p} {q} =
     ( ap
       ( ap (equivalence-class ∘ R (n +ℕ 2)))
       ( ap
@@ -385,7 +384,7 @@ module _
               ( w))
             ( class (R (n +ℕ 2) (X , eX)) (x)))
         ( ap
-          ( λ w → ap (equivalence-class ∘ R (n +ℕ 2)) (eq-pair-Σ refl w))
+          ( λ w → ap (equivalence-class ∘ R (n +ℕ 2)) (eq-pair-eq-fiber w))
           { x = eq-is-prop is-prop-type-trunc-Prop}
           ( eq-is-prop
             ( is-trunc-Id
@@ -431,7 +430,7 @@ module _
               coherence-square-maps
                 ( map-quotient-loop-Fin n p)
                 ( quotient-map-quotient-Fin (n +ℕ 2))
-                ( map-reflecting-map-Equivalence-Relation
+                ( map-reflecting-map-equivalence-relation
                   ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2)))
                   ( quotient-reflecting-map-quotient-Fin (n +ℕ 2)))
                 ( map-equiv h')))
@@ -485,7 +484,7 @@ module _
     ( n : ℕ) →
     ( h : type-Group (symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))) →
     ( is-decidable
-      ( sim-Equivalence-Relation
+      ( sim-equivalence-relation
         ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2)))
         ( quotient-aut-succ-succ-Fin n h)
         ( map-equiv
@@ -543,7 +542,7 @@ module _
       { y = inr (not-R-transposition-fin-succ-succ n Y)}
       ( eq-is-prop
         ( is-prop-is-decidable
-          ( is-prop-sim-Equivalence-Relation
+          ( is-prop-sim-equivalence-relation
             ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2)))
             ( quotient-aut-succ-succ-Fin n (transposition Y))
             ( map-equiv
@@ -571,7 +570,7 @@ module _
     ( n : ℕ)
     ( p : type-Group (loop-group-Set (raise-Fin-Set l1 (n +ℕ 2))))
     ( D : is-decidable
-      ( sim-Equivalence-Relation
+      ( sim-equivalence-relation
         ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2)))
         ( this-third-thing n p)
         ( map-quotient-loop-Fin n p (this-third-thing n p)))) →
@@ -599,7 +598,7 @@ module _
       ( quotient-map-quotient-Fin (n +ℕ 2)
         ( map-quotient-loop-Fin n p (this-third-thing n p)))
   cases-eq-map-quotient-aut-Fin n p (inl D) k k' q r =
-    reflects-map-reflecting-map-Equivalence-Relation
+    reflects-map-reflecting-map-equivalence-relation
       ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2)))
       ( quotient-reflecting-map-quotient-Fin (n +ℕ 2))
       ( D)
@@ -616,7 +615,7 @@ module _
               ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2))))
             ( this-third-thing n p)
             ( map-quotient-loop-Fin n p (this-third-thing n p)))
-          ( is-injective-map-equiv (inv-equiv (that-thing n)) (q ∙ inv r))))
+          ( is-injective-equiv (inv-equiv (that-thing n)) (q ∙ inv r))))
   cases-eq-map-quotient-aut-Fin n p (inr ND) (inl (inr star)) (inr star) q r =
     ( ap
       ( map-equiv (that-thing n))
@@ -652,7 +651,7 @@ module _
               ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2))))
             ( this-third-thing n p)
             ( map-quotient-loop-Fin n p (this-third-thing n p)))
-          ( is-injective-map-equiv (inv-equiv (that-thing n)) (q ∙ inv r))))
+          ( is-injective-equiv (inv-equiv (that-thing n)) (q ∙ inv r))))
 
   eq-map-quotient-aut-Fin :
     (n : ℕ) (p : type-Group (loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))) →
@@ -887,11 +886,7 @@ module _
               ( ap
                 ( equivalence-class ∘ R (n +ℕ 2))
                 ( eq-pair-Σ
-                  ( inv
-                    ( eq-equiv
-                      ( raise l1 (Fin (n +ℕ 2)))
-                      ( raise l1 (Fin (n +ℕ 2)))
-                      ( f)))
+                  ( inv (eq-equiv f))
                   ( eq-is-prop is-prop-type-trunc-Prop))) ∙
               ( ap
                 ( map-hom-Group
@@ -900,18 +895,10 @@ module _
                   ( hom-inv-symmetric-group-loop-group-Set
                     ( quotient-set-Fin (n +ℕ 2))))
                 ( eq-quotient-delooping-sign-loop-equiv-is-set-quotient n
-                  ( inv
-                    ( eq-equiv
-                      ( raise l1 (Fin (n +ℕ 2)))
-                      ( raise l1 (Fin (n +ℕ 2)))
-                      ( f))) ∙
+                  ( inv (eq-equiv f)) ∙
                   ( inv
                     ( eq-map-quotient-aut-loop-equiv-is-set-quotient n
-                      ( inv
-                        ( eq-equiv
-                          ( raise l1 (Fin (n +ℕ 2)))
-                          ( raise l1 (Fin (n +ℕ 2)))
-                          ( f)))))) ∙
+                      ( inv (eq-equiv f))))) ∙
                 ( ap
                   ( λ g →
                     map-hom-Group
@@ -923,10 +910,7 @@ module _
                   ( commutative-inv-map-hom-symmetric-group-loop-group-Set
                     ( raise l1 (Fin (n +ℕ 2)))
                     ( raise l1 (Fin (n +ℕ 2)))
-                    ( eq-equiv
-                      ( raise l1 (Fin (n +ℕ 2)))
-                      ( raise l1 (Fin (n +ℕ 2)))
-                      ( f))
+                    ( eq-equiv f)
                     ( pr2 (raise-Fin-Set l1 (n +ℕ 2)))
                     ( pr2 (raise-Fin-Set l1 (n +ℕ 2))) ∙
                     ( ap inv-equiv
@@ -935,15 +919,10 @@ module _
                           ( raise-Fin-Set l1 (n +ℕ 2))
                           ( raise-Fin-Set l1 (n +ℕ 2)))
                         ( ap
-                          ( eq-equiv
-                            ( raise l1 (Fin (n +ℕ 2)))
-                            ( raise l1 (Fin (n +ℕ 2))))
+                          ( eq-equiv)
                           ( inv (inv-inv-equiv f)) ∙
                           ( inv
-                            ( commutativity-inv-eq-equiv
-                              ( raise l1 (Fin (n +ℕ 2)))
-                              ( raise l1 (Fin (n +ℕ 2)))
-                              ( inv-equiv f)))) ∙
+                            ( commutativity-inv-eq-equiv (inv-equiv f)))) ∙
                         ( htpy-eq-hom-Group
                           ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
                           ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
@@ -1085,16 +1064,16 @@ module _
       ( comp-hom-Group
         ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+        ( group-Concrete-Group (UU-Fin-Group l4 2))
         ( hom-iso-Group
           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-          ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+          ( group-Concrete-Group (UU-Fin-Group l4 2))
           ( comp-iso-Group
             ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
             ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
-            ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+            ( group-Concrete-Group (UU-Fin-Group l4 2))
             ( inv-iso-Group
-              ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+              ( group-Concrete-Group (UU-Fin-Group l4 2))
               ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
               ( iso-loop-group-fin-UU-Fin-Group l4 2))
             ( iso-loop-group-equiv-Set
@@ -1104,17 +1083,17 @@ module _
         ( quotient-delooping-sign-loop n))
       ( comp-hom-Group
         ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+        ( group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
+        ( group-Concrete-Group (UU-Fin-Group l4 2))
         ( hom-group-hom-Concrete-Group
           ( UU-Fin-Group l1 (n +ℕ 2))
           ( UU-Fin-Group l4 2)
           ( quotient-delooping-sign (n +ℕ 2)))
         ( hom-iso-Group
           ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-          ( abstract-group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
+          ( group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
           ( inv-iso-Group
-            ( abstract-group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
+            ( group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
             ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
             ( iso-loop-group-fin-UU-Fin-Group l1 (n +ℕ 2)))))
   eq-quotient-delooping-loop-UU-Fin-Group n =
@@ -1126,9 +1105,6 @@ module _
             ( ap inv
               ( inv
                 ( compute-eq-equiv-comp-equiv
-                  ( raise l4 (Fin 2))
-                  ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
-                  ( raise l4 (Fin 2))
                   ( equiv-eq
                     ( inv
                       ( ap
@@ -1137,13 +1113,9 @@ module _
                     ( inv-equiv
                       ( compute-raise-Fin l4 2 ∘e inv-equiv (that-thing n))))
                   ( compute-raise-Fin l4 2 ∘e inv-equiv (that-thing n))) ∙
-                ( ap
-                  ( _∙ eq-counting-equivalence-class-R n)
+                ( right-whisker-concat
                   ( inv
                     ( compute-eq-equiv-comp-equiv
-                      ( raise l4 (Fin 2))
-                      ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
-                      ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
                       ( inv-equiv
                         ( compute-raise-Fin l4 2 ∘e inv-equiv (that-thing n)))
                       ( equiv-eq
@@ -1152,26 +1124,18 @@ module _
                             ( equivalence-class ∘ R (n +ℕ 2))
                             ( eq-pair-Σ p
                               ( eq-is-prop is-prop-type-trunc-Prop)))))) ∙
-                    ( ap
-                      ( _∙
-                        ( eq-equiv
-                          ( equivalence-class
-                            ( R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
-                          ( equivalence-class
-                            ( R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
-                          ( equiv-eq
-                            ( inv
-                              ( ap
-                                ( equivalence-class ∘ R (n +ℕ 2))
-                                ( eq-pair-Σ p
-                                  ( eq-is-prop is-prop-type-trunc-Prop)))))))
+                    ( right-whisker-concat
                       ( inv
                         ( commutativity-inv-eq-equiv
-                          ( equivalence-class
-                            ( R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
-                          ( raise l4 (Fin 2))
                           ( compute-raise-Fin l4 2 ∘e
-                            inv-equiv (that-thing n)))) ∙
+                            inv-equiv (that-thing n))))
+                      ( eq-equiv
+                        ( equiv-eq
+                          ( inv
+                            ( ap
+                              ( equivalence-class ∘ R (n +ℕ 2))
+                              ( eq-pair-Σ p
+                                ( eq-is-prop is-prop-type-trunc-Prop)))))) ∙
                       ( ap
                         ( λ e →
                           inv (eq-counting-equivalence-class-R n) ∙
@@ -1181,7 +1145,8 @@ module _
                                   ( equivalence-class ∘ R (n +ℕ 2))
                                   ( eq-pair-Σ p
                                     ( eq-is-prop is-prop-type-trunc-Prop))))))
-                        ( left-inverse-law-equiv equiv-univalence)))))) ∙
+                        ( left-inverse-law-equiv equiv-univalence))))
+                  ( eq-counting-equivalence-class-R n))) ∙
               ( distributive-inv-concat
                 ( inv (eq-counting-equivalence-class-R n) ∙
                   ( inv
@@ -1189,26 +1154,26 @@ module _
                       ( equivalence-class ∘ R (n +ℕ 2))
                       ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))))
                 ( eq-counting-equivalence-class-R n) ∙
-                ( ap
-                  ( inv (eq-counting-equivalence-class-R n) ∙_)
+                ( left-whisker-concat
+                  ( inv (eq-counting-equivalence-class-R n))
                   ( distributive-inv-concat
                     ( inv (eq-counting-equivalence-class-R n))
                     ( inv
                       ( ap
                         ( equivalence-class ∘ R (n +ℕ 2))
                         ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))) ∙
-                    ( ap
-                      ( _∙ inv (inv (eq-counting-equivalence-class-R n)))
+                    ( right-whisker-concat
                       ( inv-inv
                         ( ap
                           ( equivalence-class ∘ R (n +ℕ 2))
                           ( eq-pair-Σ p
-                            ( eq-is-prop is-prop-type-trunc-Prop)))) ∙
-                      ( ap
+                            ( eq-is-prop is-prop-type-trunc-Prop))))
+                      ( inv (inv (eq-counting-equivalence-class-R n))) ∙
+                      ( left-whisker-concat
                         ( ap
                           ( equivalence-class ∘ R (n +ℕ 2))
                           ( eq-pair-Σ p
-                            ( eq-is-prop is-prop-type-trunc-Prop)) ∙_)
+                            ( eq-is-prop is-prop-type-trunc-Prop)))
                         ( inv-inv (eq-counting-equivalence-class-R n)))))))) ∙
             ( ( ap
               ( eq-pair-Σ
@@ -1226,10 +1191,10 @@ module _
                   ( eq-counting-equivalence-class-R n))
                 ( eq-is-prop is-prop-type-trunc-Prop)
                 ( _) ∙
-                ( ap
+                ( left-whisker-concat
                   ( eq-pair-Σ
                     ( inv (eq-counting-equivalence-class-R n))
-                    ( eq-is-prop is-prop-type-trunc-Prop) ∙_)
+                    ( eq-is-prop is-prop-type-trunc-Prop))
                   ( interchange-concat-eq-pair-Σ
                     ( ap
                       ( equivalence-class ∘ R (n +ℕ 2))
@@ -1237,16 +1202,7 @@ module _
                     ( eq-counting-equivalence-class-R n)
                     ( eq-is-prop is-prop-type-trunc-Prop)
                     ( eq-is-prop is-prop-type-trunc-Prop) ∙
-                    ( ap
-                      ( _∙
-                        ( eq-pair-Σ
-                          ( eq-equiv
-                            ( equivalence-class
-                              ( R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
-                            ( raise l4 (Fin 2))
-                            ( compute-raise-Fin l4 2 ∘e
-                              inv-equiv (that-thing n)))
-                          ( eq-is-prop is-prop-type-trunc-Prop)))
+                    ( right-whisker-concat
                       ( ap
                         ( λ w → eq-pair-Σ (pr1 w) (pr2 w))
                         { y =
@@ -1272,22 +1228,26 @@ module _
                           ( ap
                             ( map-quotient-delooping-sign (n +ℕ 2))
                             ( eq-pair-Σ p
-                              ( eq-is-prop is-prop-type-trunc-Prop))))))))) ∙
-              ( ap
-                ( _∙
-                    ( ap
-                      ( map-quotient-delooping-sign (n +ℕ 2))
-                      ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)) ∙
+                              ( eq-is-prop is-prop-type-trunc-Prop))))
                       ( eq-pair-Σ
-                        ( eq-counting-equivalence-class-R n)
-                        ( eq-is-prop is-prop-type-trunc-Prop))))
+                        ( eq-equiv
+                          ( compute-raise-Fin l4 2 ∘e
+                            inv-equiv (that-thing n)))
+                        ( eq-is-prop is-prop-type-trunc-Prop))))))) ∙
+              ( right-whisker-concat
                 ( ap
                   ( eq-pair-Σ (inv (eq-counting-equivalence-class-R n)))
                   ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _))) ∙
                   ( inv
                     ( distributive-inv-eq-pair-Σ
                       ( eq-counting-equivalence-class-R n)
-                      ( eq-is-prop is-prop-type-trunc-Prop)))) ∙
+                      ( eq-is-prop is-prop-type-trunc-Prop))))
+                ( ( ap
+                    ( map-quotient-delooping-sign (n +ℕ 2))
+                    ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
+                  ( eq-pair-Σ
+                    ( eq-counting-equivalence-class-R n)
+                    ( eq-is-prop is-prop-type-trunc-Prop))) ∙
                 ( inv
                   ( eq-tr-type-Ω
                     ( eq-pair-Σ
@@ -1298,21 +1258,21 @@ module _
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup
           ( semigroup-Group (loop-group-Set (raise-Fin-Set l1 (n +ℕ 2))))
-          ( semigroup-Group (abstract-group-Concrete-Group (UU-Fin-Group l4 2)))
+          ( semigroup-Group (group-Concrete-Group (UU-Fin-Group l4 2)))
           ( pr1
             ( comp-hom-Group
               ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-              ( abstract-group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
-              ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+              ( group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
+              ( group-Concrete-Group (UU-Fin-Group l4 2))
               ( hom-group-hom-Concrete-Group
                 ( UU-Fin-Group l1 (n +ℕ 2))
                 ( UU-Fin-Group l4 2)
                 ( quotient-delooping-sign (n +ℕ 2)))
               ( hom-iso-Group
                 ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-                ( abstract-group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
+                ( group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
                 ( inv-iso-Group
-                  ( abstract-group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
+                  ( group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
                   ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
                   ( iso-loop-group-fin-UU-Fin-Group l1 (n +ℕ 2))))))))
 
@@ -1320,25 +1280,25 @@ module _
     (n : ℕ) →
     hom-Group
       ( symmetric-Group (Fin-Set 2))
-      ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+      ( group-Concrete-Group (UU-Fin-Group l4 2))
   symmetric-abstract-UU-fin-group-quotient-hom n =
     comp-hom-Group
       ( symmetric-Group (Fin-Set 2))
       ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
-      ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+      ( group-Concrete-Group (UU-Fin-Group l4 2))
       ( comp-hom-Group
         ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+        ( group-Concrete-Group (UU-Fin-Group l4 2))
         ( hom-iso-Group
           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-          ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+          ( group-Concrete-Group (UU-Fin-Group l4 2))
           ( comp-iso-Group
             ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
             ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
-            ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+            ( group-Concrete-Group (UU-Fin-Group l4 2))
             ( inv-iso-Group
-              ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+              ( group-Concrete-Group (UU-Fin-Group l4 2))
               ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
               ( iso-loop-group-fin-UU-Fin-Group l4 2))
             ( iso-loop-group-equiv-Set
@@ -1357,28 +1317,28 @@ module _
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
         ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+        ( group-Concrete-Group (UU-Fin-Group l4 2))
         ( comp-hom-Group
           ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-          ( abstract-group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
-          ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+          ( group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
+          ( group-Concrete-Group (UU-Fin-Group l4 2))
           ( hom-group-hom-Concrete-Group
             ( UU-Fin-Group l1 (n +ℕ 2))
             ( UU-Fin-Group l4 2)
             ( quotient-delooping-sign (n +ℕ 2)))
           ( hom-inv-iso-Group
-            ( abstract-group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
+            ( group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
             ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
             ( iso-loop-group-fin-UU-Fin-Group l1 (n +ℕ 2))))
         ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l1 (n +ℕ 2))))
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
         ( symmetric-Group (Fin-Set (n +ℕ 2)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+        ( group-Concrete-Group (UU-Fin-Group l4 2))
         ( comp-hom-Group
           ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
-          ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+          ( group-Concrete-Group (UU-Fin-Group l4 2))
           ( symmetric-abstract-UU-fin-group-quotient-hom n)
           ( sign-homomorphism
             ( n +ℕ 2)
@@ -1393,7 +1353,7 @@ module _
         comp-hom-Group
           ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
           ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-          ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+          ( group-Concrete-Group (UU-Fin-Group l4 2))
           ( f)
           ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l1 (n +ℕ 2))))
       ( inv (eq-quotient-delooping-loop-UU-Fin-Group n))) ∙
@@ -1401,16 +1361,16 @@ module _
       ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
       ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
       ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-      ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+      ( group-Concrete-Group (UU-Fin-Group l4 2))
       ( hom-iso-Group
         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+        ( group-Concrete-Group (UU-Fin-Group l4 2))
         ( comp-iso-Group
           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
           ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
-          ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+          ( group-Concrete-Group (UU-Fin-Group l4 2))
           ( inv-iso-Group
-            ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+            ( group-Concrete-Group (UU-Fin-Group l4 2))
             ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
             ( iso-loop-group-fin-UU-Fin-Group l4 2))
           ( iso-loop-group-equiv-Set
@@ -1423,16 +1383,16 @@ module _
         ( comp-hom-Group
             ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
             ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-            ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+            ( group-Concrete-Group (UU-Fin-Group l4 2))
             ( hom-iso-Group
               ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-              ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+              ( group-Concrete-Group (UU-Fin-Group l4 2))
               ( comp-iso-Group
                 ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
                 ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
-                ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+                ( group-Concrete-Group (UU-Fin-Group l4 2))
                 ( inv-iso-Group
-                  ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+                  ( group-Concrete-Group (UU-Fin-Group l4 2))
                   ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
                   ( iso-loop-group-fin-UU-Fin-Group l4 2))
                 ( iso-loop-group-equiv-Set
@@ -1440,39 +1400,38 @@ module _
                   ( raise-Set l4 (Fin-Set 2))
                   ( compute-raise-Fin l4 2 ∘e inv-equiv (that-thing n))))))
         ( eq-quotient-delooping-sign-loop-sign-homomorphism n) ∙
-        ( eq-pair-Σ
-          ( refl)
+        ( eq-pair-eq-fiber
           ( eq-is-prop
             ( is-prop-preserves-mul-Semigroup
               ( semigroup-Group (symmetric-Group (raise-Fin-Set l1 (n +ℕ 2))))
               ( semigroup-Group
-                ( abstract-group-Concrete-Group (UU-Fin-Group l4 2)))
+                ( group-Concrete-Group (UU-Fin-Group l4 2)))
               ( pr1
                 ( comp-hom-Group
                   ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
                   ( symmetric-Group (Fin-Set (n +ℕ 2)))
-                  ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+                  ( group-Concrete-Group (UU-Fin-Group l4 2))
                   ( comp-hom-Group
                     ( symmetric-Group (Fin-Set (n +ℕ 2)))
                     ( symmetric-Group (Fin-Set 2))
-                    ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+                    ( group-Concrete-Group (UU-Fin-Group l4 2))
                     ( comp-hom-Group
                       ( symmetric-Group (Fin-Set 2))
                       ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
-                      ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+                      ( group-Concrete-Group (UU-Fin-Group l4 2))
                       ( comp-hom-Group
                         ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
                         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-                        ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+                        ( group-Concrete-Group (UU-Fin-Group l4 2))
                         ( hom-iso-Group
                           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-                          ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+                          ( group-Concrete-Group (UU-Fin-Group l4 2))
                           ( comp-iso-Group
                             ( loop-group-Set ( quotient-set-Fin (n +ℕ 2)))
                             ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
-                            ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
+                            ( group-Concrete-Group (UU-Fin-Group l4 2))
                             ( inv-iso-Group
-                              ( abstract-group-Concrete-Group
+                              ( group-Concrete-Group
                                 ( UU-Fin-Group l4 2))
                               ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
                               ( iso-loop-group-fin-UU-Fin-Group l4 2))
@@ -1530,32 +1489,31 @@ module _
     equiv-Q-equivalence-class :
       (n : ℕ) (X : UU-Fin l1 n) →
       type-UU-Fin 2 (Q n X) ≃
-      equivalence-class (Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
+      equivalence-class (Id-equivalence-relation (set-UU-Fin 2 (Q n X)))
     equiv-Q-equivalence-class n X =
       equiv-uniqueness-set-quotient
-        ( Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
+        ( Id-equivalence-relation (set-UU-Fin 2 (Q n X)))
         ( set-UU-Fin 2 (Q n X))
-        ( id-reflecting-map-Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
-        ( is-set-quotient-id-Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
+        ( id-reflecting-map-Id-equivalence-relation (set-UU-Fin 2 (Q n X)))
+        ( is-set-quotient-id-Id-equivalence-relation (set-UU-Fin 2 (Q n X)))
         ( equivalence-class-Set
-          ( Id-Equivalence-Relation (set-UU-Fin 2 (Q n X))))
+          ( Id-equivalence-relation (set-UU-Fin 2 (Q n X))))
         ( quotient-reflecting-map-equivalence-class
-          ( Id-Equivalence-Relation (set-UU-Fin 2 (Q n X))))
+          ( Id-equivalence-relation (set-UU-Fin 2 (Q n X))))
         ( is-set-quotient-equivalence-class
-          ( Id-Equivalence-Relation (set-UU-Fin 2 (Q n X))))
+          ( Id-equivalence-relation (set-UU-Fin 2 (Q n X))))
 
     equiv-fin-2-equivalence-class :
       (n : ℕ) (X : UU-Fin l1 n) → leq-ℕ 2 n →
       Fin n ≃ type-UU-Fin n X →
-      Fin 2 ≃ equivalence-class (Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
+      Fin 2 ≃ equivalence-class (Id-equivalence-relation (set-UU-Fin 2 (Q n X)))
     equiv-fin-2-equivalence-class n X H h =
       tr
         ( λ Y →
           Fin 2 ≃
-          equivalence-class (Id-Equivalence-Relation (set-UU-Fin 2 (Q n Y))))
+          equivalence-class (Id-equivalence-relation (set-UU-Fin 2 (Q n Y))))
         ( eq-pair-Σ
-          ( eq-equiv (raise l1 (Fin n)) (type-UU-Fin n X)
-            ( h ∘e inv-equiv (compute-raise-Fin l1 n)))
+          ( eq-equiv (h ∘e inv-equiv (compute-raise-Fin l1 n)))
           ( eq-is-prop is-prop-type-trunc-Prop))
         ( equiv-Q-equivalence-class n
           ( raise l1 (Fin n) ,
@@ -1566,7 +1524,7 @@ module _
   delooping-sign =
     quotient-delooping-sign
       ( λ n X → type-UU-Fin 2 (Q n X))
-      ( λ n X → Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
+      ( λ n X → Id-equivalence-relation (set-UU-Fin 2 (Q n X)))
       ( λ n _ X → has-decidable-equality-has-cardinality 2 (pr2 (Q n X)))
       ( equiv-fin-2-equivalence-class)
       ( λ n _ → map-equiv (equiv-Q-fin-fin-2 (n +ℕ 2) star) (zero-Fin 1))
@@ -1580,31 +1538,31 @@ module _
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
         ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l2) 2))
+        ( group-Concrete-Group (UU-Fin-Group (lsuc l2) 2))
         ( comp-hom-Group
           ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-          ( abstract-group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
-          ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l2) 2))
+          ( group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
+          ( group-Concrete-Group (UU-Fin-Group (lsuc l2) 2))
           ( hom-group-hom-Concrete-Group
             ( UU-Fin-Group l1 (n +ℕ 2))
             ( UU-Fin-Group (lsuc l2) 2)
             ( delooping-sign (n +ℕ 2)))
           ( hom-inv-iso-Group
-            ( abstract-group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
+            ( group-Concrete-Group (UU-Fin-Group l1 (n +ℕ 2)))
             ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
             ( iso-loop-group-fin-UU-Fin-Group l1 (n +ℕ 2))))
         ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l1 (n +ℕ 2))))
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
         ( symmetric-Group (Fin-Set (n +ℕ 2)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l2) 2))
+        ( group-Concrete-Group (UU-Fin-Group (lsuc l2) 2))
         ( comp-hom-Group
           ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
-          ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l2) 2))
+          ( group-Concrete-Group (UU-Fin-Group (lsuc l2) 2))
           ( symmetric-abstract-UU-fin-group-quotient-hom
             ( λ n X → type-UU-Fin 2 (Q n X))
-            ( λ n X → Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
+            ( λ n X → Id-equivalence-relation (set-UU-Fin 2 (Q n X)))
             ( λ n _ X → has-decidable-equality-has-cardinality 2 (pr2 (Q n X)))
             ( equiv-fin-2-equivalence-class)
             ( λ n _ → pr1 (equiv-Q-fin-fin-2 (n +ℕ 2) star) (zero-Fin 1))
@@ -1622,7 +1580,7 @@ module _
   eq-delooping-sign-homomorphism =
     eq-quotient-delooping-sign-homomorphism
       ( λ n X → type-UU-Fin 2 (Q n X))
-      ( λ n X → Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
+      ( λ n X → Id-equivalence-relation (set-UU-Fin 2 (Q n X)))
       ( λ n _ X → has-decidable-equality-has-cardinality 2 (pr2 (Q n X)))
       ( equiv-fin-2-equivalence-class)
       ( λ n _ → pr1 (equiv-Q-fin-fin-2 (n +ℕ 2) star) (zero-Fin 1))
@@ -1640,5 +1598,4 @@ module _
 
 ## References
 
-- Mangel É. and Rijke E.
-  ["Delooping the sign homomorphism in univalent mathematics"](https://arxiv.org/abs/2301.10011).
+{{#bibliography}} {{#reference MR23}}

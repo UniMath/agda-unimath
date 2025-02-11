@@ -8,13 +8,23 @@ module orthogonal-factorization-systems.orthogonal-factorization-systems where
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import orthogonal-factorization-systems.factorization-operations-function-classes
+open import orthogonal-factorization-systems.factorizations-of-maps
+open import orthogonal-factorization-systems.factorizations-of-maps-function-classes
 open import orthogonal-factorization-systems.function-classes
+open import orthogonal-factorization-systems.lifting-structures-on-squares
 open import orthogonal-factorization-systems.wide-function-classes
 ```
 
@@ -33,26 +43,45 @@ right map `r` is in `R`.
 
 ## Definition
 
-### Orthogonal factorization systems
+### The predicate of being an orthogonal factorization system
 
 ```agda
-is-orthogonal-factorization-system :
+module _
   {l lL lR : Level}
   (L : function-class l l lL)
-  (R : function-class l l lR) →
-  UU (lsuc l ⊔ lL ⊔ lR)
-is-orthogonal-factorization-system {l} L R =
-  ( is-wide-function-class L) ×
-  ( ( is-wide-function-class R) ×
-    ( (A B : UU l) → unique-factorization-operation-function-class L R A B))
+  (R : function-class l l lR)
+  where
 
+  is-orthogonal-factorization-system : UU (lsuc l ⊔ lL ⊔ lR)
+  is-orthogonal-factorization-system =
+    ( is-wide-function-class L) ×
+    ( ( is-wide-function-class R) ×
+      ( unique-factorization-operation-function-class L R))
+
+  is-prop-is-orthogonal-factorization-system :
+    is-prop is-orthogonal-factorization-system
+  is-prop-is-orthogonal-factorization-system =
+    is-prop-product
+      ( is-prop-is-wide-function-class L)
+      ( is-prop-product
+        ( is-prop-is-wide-function-class R)
+        ( is-prop-unique-factorization-operation-function-class L R))
+
+  is-orthogonal-factorization-system-Prop : Prop (lsuc l ⊔ lL ⊔ lR)
+  pr1 is-orthogonal-factorization-system-Prop =
+    is-orthogonal-factorization-system
+  pr2 is-orthogonal-factorization-system-Prop =
+    is-prop-is-orthogonal-factorization-system
+```
+
+### The type of orthogonal factorization systems
+
+```agda
 orthogonal-factorization-system :
   (l lL lR : Level) → UU (lsuc l ⊔ lsuc lL ⊔ lsuc lR)
 orthogonal-factorization-system l lL lR =
   Σ ( function-class l l lL)
-    ( λ L →
-      Σ ( function-class l l lR)
-        ( is-orthogonal-factorization-system L))
+    ( λ L → Σ (function-class l l lR) (is-orthogonal-factorization-system L))
 ```
 
 ### Components of an orthogonal factorization system
@@ -73,16 +102,40 @@ module _
     is-wide-function-class R
   is-wide-right-class-is-orthogonal-factorization-system = pr1 (pr2 is-OFS)
 
+  has-equivalences-left-class-is-orthogonal-factorization-system :
+    has-equivalences-function-class L
+  has-equivalences-left-class-is-orthogonal-factorization-system =
+    has-equivalences-is-wide-function-class L
+      ( is-wide-left-class-is-orthogonal-factorization-system)
+
+  has-equivalences-right-class-is-orthogonal-factorization-system :
+    has-equivalences-function-class R
+  has-equivalences-right-class-is-orthogonal-factorization-system =
+    has-equivalences-is-wide-function-class R
+      ( is-wide-right-class-is-orthogonal-factorization-system)
+
+  is-closed-under-composition-left-class-is-orthogonal-factorization-system :
+    is-closed-under-composition-function-class L
+  is-closed-under-composition-left-class-is-orthogonal-factorization-system =
+    is-closed-under-composition-is-wide-function-class L
+      ( is-wide-left-class-is-orthogonal-factorization-system)
+
+  is-closed-under-composition-right-class-is-orthogonal-factorization-system :
+    is-closed-under-composition-function-class R
+  is-closed-under-composition-right-class-is-orthogonal-factorization-system =
+    is-closed-under-composition-is-wide-function-class R
+      ( is-wide-right-class-is-orthogonal-factorization-system)
+
   unique-factorization-operation-is-orthogonal-factorization-system :
-    (A B : UU l) → unique-factorization-operation-function-class L R A B
+    unique-factorization-operation-function-class L R
   unique-factorization-operation-is-orthogonal-factorization-system =
     pr2 (pr2 is-OFS)
 
   factorization-operation-is-orthogonal-factorization-system :
-    (A B : UU l) → factorization-operation-function-class L R A B
-  factorization-operation-is-orthogonal-factorization-system A B f =
+    factorization-operation-function-class L R
+  factorization-operation-is-orthogonal-factorization-system f =
     center
-      ( unique-factorization-operation-is-orthogonal-factorization-system A B f)
+      ( unique-factorization-operation-is-orthogonal-factorization-system f)
 
 module _
   {l lL lR : Level}
@@ -118,13 +171,44 @@ module _
       ( right-class-orthogonal-factorization-system)
       ( is-orthogonal-factorization-system-orthogonal-factorization-system)
 
+  has-equivalences-left-class-orthogonal-factorization-system :
+    has-equivalences-function-class left-class-orthogonal-factorization-system
+  has-equivalences-left-class-orthogonal-factorization-system =
+    has-equivalences-left-class-is-orthogonal-factorization-system
+      ( left-class-orthogonal-factorization-system)
+      ( right-class-orthogonal-factorization-system)
+      ( is-orthogonal-factorization-system-orthogonal-factorization-system)
+
+  has-equivalences-right-class-orthogonal-factorization-system :
+    has-equivalences-function-class right-class-orthogonal-factorization-system
+  has-equivalences-right-class-orthogonal-factorization-system =
+    has-equivalences-right-class-is-orthogonal-factorization-system
+      ( left-class-orthogonal-factorization-system)
+      ( right-class-orthogonal-factorization-system)
+      ( is-orthogonal-factorization-system-orthogonal-factorization-system)
+
+  is-closed-under-composition-left-class-orthogonal-factorization-system :
+    is-closed-under-composition-function-class
+      left-class-orthogonal-factorization-system
+  is-closed-under-composition-left-class-orthogonal-factorization-system =
+    is-closed-under-composition-left-class-is-orthogonal-factorization-system
+      ( left-class-orthogonal-factorization-system)
+      ( right-class-orthogonal-factorization-system)
+      ( is-orthogonal-factorization-system-orthogonal-factorization-system)
+
+  is-closed-under-composition-right-class-orthogonal-factorization-system :
+    is-closed-under-composition-function-class
+      right-class-orthogonal-factorization-system
+  is-closed-under-composition-right-class-orthogonal-factorization-system =
+    is-closed-under-composition-right-class-is-orthogonal-factorization-system
+      ( left-class-orthogonal-factorization-system)
+      ( right-class-orthogonal-factorization-system)
+      ( is-orthogonal-factorization-system-orthogonal-factorization-system)
+
   unique-factorization-operation-orthogonal-factorization-system :
-    (A B : UU l) →
     unique-factorization-operation-function-class
       ( left-class-orthogonal-factorization-system)
       ( right-class-orthogonal-factorization-system)
-      ( A)
-      ( B)
   unique-factorization-operation-orthogonal-factorization-system =
     unique-factorization-operation-is-orthogonal-factorization-system
       ( left-class-orthogonal-factorization-system)
@@ -132,12 +216,9 @@ module _
       ( is-orthogonal-factorization-system-orthogonal-factorization-system)
 
   factorization-operation-orthogonal-factorization-system :
-    (A B : UU l) →
     factorization-operation-function-class
       ( left-class-orthogonal-factorization-system)
       ( right-class-orthogonal-factorization-system)
-      ( A)
-      ( B)
   factorization-operation-orthogonal-factorization-system =
     factorization-operation-is-orthogonal-factorization-system
       ( left-class-orthogonal-factorization-system)
@@ -146,33 +227,6 @@ module _
 ```
 
 ## Properties
-
-### Being an orthogonal factorization system is a property
-
-```agda
-module _
-  {l lL lR : Level}
-  (L : function-class l l lL)
-  (R : function-class l l lR)
-  where
-
-  is-prop-is-orthogonal-factorization-system :
-    is-prop (is-orthogonal-factorization-system L R)
-  is-prop-is-orthogonal-factorization-system =
-    is-prop-prod
-      ( is-prop-is-wide-function-class L)
-      ( is-prop-prod
-        ( is-prop-is-wide-function-class R)
-        ( is-prop-Π
-            λ A → is-prop-Π
-              λ B → is-prop-unique-factorization-operation-function-class L R))
-
-  is-orthogonal-factorization-system-Prop : Prop (lsuc l ⊔ lL ⊔ lR)
-  pr1 is-orthogonal-factorization-system-Prop =
-    is-orthogonal-factorization-system L R
-  pr2 is-orthogonal-factorization-system-Prop =
-    is-prop-is-orthogonal-factorization-system
-```
 
 ### An orthogonal factorization system is uniquely determined by its right class
 
@@ -186,7 +240,11 @@ This remains to be shown.
 
 ## References
 
-- Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type
-  theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020
-  ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526),
-  [doi:10.23638](https://doi.org/10.23638/LMCS-16%281%3A2%292020))
+{{#bibliography}} {{#reference RSS20}}
+
+## External links
+
+- [Orthogonal factorisation systems](https://1lab.dev/Cat.Morphism.Factorisation.html#orthogonal-factorisation-systems)
+  at 1lab
+- [orthogonal factorization system in an (infinity,1)-category](https://ncatlab.org/nlab/show/orthogonal+factorization+system+in+an+%28infinity%2C1%29-category)
+  at $n$Lab

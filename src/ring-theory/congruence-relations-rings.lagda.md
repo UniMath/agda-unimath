@@ -8,12 +8,12 @@ module ring-theory.congruence-relations-rings where
 
 ```agda
 open import foundation.binary-relations
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-abelian-groups
@@ -41,10 +41,10 @@ module _
     {l2 : Level} → congruence-Ab l2 (ab-Ring R) → UU (l1 ⊔ l2)
   is-congruence-Ring = is-congruence-Semiring (semiring-Ring R)
 
-  is-congruence-eq-rel-Ring :
-    {l2 : Level} (S : Equivalence-Relation l2 (type-Ring R)) → UU (l1 ⊔ l2)
-  is-congruence-eq-rel-Ring S =
-    is-congruence-eq-rel-Semiring (semiring-Ring R) S
+  is-congruence-equivalence-relation-Ring :
+    {l2 : Level} (S : equivalence-relation l2 (type-Ring R)) → UU (l1 ⊔ l2)
+  is-congruence-equivalence-relation-Ring S =
+    is-congruence-equivalence-relation-Semiring (semiring-Ring R) S
 
 congruence-Ring :
   {l1 : Level} (l2 : Level) (R : Ring l1) → UU (l1 ⊔ lsuc l2)
@@ -58,9 +58,9 @@ module _
   congruence-ab-congruence-Ring =
     congruence-additive-monoid-congruence-Semiring (semiring-Ring R) S
 
-  eq-rel-congruence-Ring : Equivalence-Relation l2 (type-Ring R)
-  eq-rel-congruence-Ring =
-    eq-rel-congruence-Semiring (semiring-Ring R) S
+  equivalence-relation-congruence-Ring : equivalence-relation l2 (type-Ring R)
+  equivalence-relation-congruence-Ring =
+    equivalence-relation-congruence-Semiring (semiring-Ring R) S
 
   prop-congruence-Ring : Relation-Prop l2 (type-Ring R)
   prop-congruence-Ring = prop-congruence-Semiring (semiring-Ring R) S
@@ -109,7 +109,7 @@ module _
     transitive-congruence-Semiring (semiring-Ring R) S
 
   add-congruence-Ring :
-    is-congruence-Ab (ab-Ring R) eq-rel-congruence-Ring
+    is-congruence-Ab (ab-Ring R) equivalence-relation-congruence-Ring
   add-congruence-Ring = add-congruence-Semiring (semiring-Ring R) S
 
   left-add-congruence-Ring :
@@ -185,7 +185,7 @@ module _
   mul-congruence-Ring :
     is-congruence-Monoid
       ( multiplicative-monoid-Ring R)
-      ( eq-rel-congruence-Ring)
+      ( equivalence-relation-congruence-Ring)
   mul-congruence-Ring = pr2 S
 
   left-mul-congruence-Ring :
@@ -204,7 +204,7 @@ module _
 
 construct-congruence-Ring :
   {l1 l2 : Level} (R : Ring l1) →
-  (S : Equivalence-Relation l2 (type-Ring R)) →
+  (S : equivalence-relation l2 (type-Ring R)) →
   is-congruence-Ab (ab-Ring R) S →
   is-congruence-Monoid (multiplicative-monoid-Ring R) S →
   congruence-Ring l2 R
@@ -230,13 +230,11 @@ refl-relate-same-elements-congruence-Ring :
 refl-relate-same-elements-congruence-Ring R =
   refl-relate-same-elements-congruence-Semiring (semiring-Ring R)
 
-is-contr-total-relate-same-elements-congruence-Ring :
+is-torsorial-relate-same-elements-congruence-Ring :
   {l1 l2 : Level} (R : Ring l1) (S : congruence-Ring l2 R) →
-  is-contr
-    ( Σ ( congruence-Ring l2 R)
-        ( relate-same-elements-congruence-Ring R S))
-is-contr-total-relate-same-elements-congruence-Ring R =
-  is-contr-total-relate-same-elements-congruence-Semiring
+  is-torsorial (relate-same-elements-congruence-Ring R S)
+is-torsorial-relate-same-elements-congruence-Ring R =
+  is-torsorial-relate-same-elements-congruence-Semiring
     ( semiring-Ring R)
 
 relate-same-elements-eq-congruence-Ring :

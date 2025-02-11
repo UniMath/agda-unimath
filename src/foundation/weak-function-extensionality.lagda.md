@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
@@ -19,10 +20,10 @@ open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -32,26 +33,42 @@ open import foundation-core.propositions
 **Weak function extensionality** is the principle that any dependent product of
 [contractible types](foundation-core.contractible-types.md) is contractible.
 This principle is [equivalent](foundation-core.equivalences.md) to
-[the function extensionality axiom](foundation-core.function-extensionality.md).
+[the function extensionality axiom](foundation.function-extensionality.md).
 
 ## Definition
 
 ### Weak function extensionality
 
 ```agda
-weak-function-extensionality :
+instance-weak-function-extensionality :
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2) → UU (l1 ⊔ l2)
-weak-function-extensionality A B =
+instance-weak-function-extensionality A B =
   ((x : A) → is-contr (B x)) → is-contr ((x : A) → B x)
+
+weak-function-extensionality-Level : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+weak-function-extensionality-Level l1 l2 =
+  (A : UU l1) (B : A → UU l2) → instance-weak-function-extensionality A B
+
+weak-function-extensionality : UUω
+weak-function-extensionality =
+  {l1 l2 : Level} → weak-function-extensionality-Level l1 l2
 ```
 
 ### Weaker function extensionality
 
 ```agda
-weaker-function-extensionality :
+instance-weaker-function-extensionality :
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2) → UU (l1 ⊔ l2)
-weaker-function-extensionality A B =
+instance-weaker-function-extensionality A B =
   ((x : A) → is-prop (B x)) → is-prop ((x : A) → B x)
+
+weaker-function-extensionality-Level : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+weaker-function-extensionality-Level l1 l2 =
+  (A : UU l1) (B : A → UU l2) → instance-weaker-function-extensionality A B
+
+weaker-function-extensionality : UUω
+weaker-function-extensionality =
+  {l1 l2 : Level} → weaker-function-extensionality-Level l1 l2
 ```
 
 ## Properties
@@ -61,32 +78,31 @@ weaker-function-extensionality A B =
 ```agda
 abstract
   weak-funext-funext :
-    { l1 l2 : Level} →
-    ( (A : UU l1) (B : A → UU l2) (f : (x : A) → B x) →
-      function-extensionality f) →
-    ( (A : UU l1) (B : A → UU l2) → weak-function-extensionality A B)
+    {l1 l2 : Level} →
+    function-extensionality-Level l1 l2 →
+    weak-function-extensionality-Level l1 l2
   pr1 (weak-funext-funext funext A B is-contr-B) x =
     center (is-contr-B x)
   pr2 (weak-funext-funext funext A B is-contr-B) f =
     map-inv-is-equiv
-      ( funext A B (λ x → center (is-contr-B x)) f)
+      ( funext (λ x → center (is-contr-B x)) f)
       ( λ x → contraction (is-contr-B x) (f x))
 
 abstract
   funext-weak-funext :
-    { l1 l2 : Level} →
-    ( (A : UU l1) (B : A → UU l2) → weak-function-extensionality A B) →
-    ( A : UU l1) (B : A → UU l2) (f : (x : A) → B x) → function-extensionality f
-  funext-weak-funext weak-funext A B f =
+    {l1 l2 : Level} →
+    weak-function-extensionality-Level l1 l2 →
+    function-extensionality-Level l1 l2
+  funext-weak-funext weak-funext {A = A} {B} f =
     fundamental-theorem-id
       ( is-contr-retract-of
         ( (x : A) → Σ (B x) (λ b → f x ＝ b))
         ( ( λ t x → (pr1 t x , pr2 t x)) ,
           ( λ t → (pr1 ∘ t , pr2 ∘ t)) ,
-          ( λ t → eq-pair-Σ refl refl))
+          ( λ t → eq-pair-eq-fiber refl))
         ( weak-funext A
           ( λ x → Σ (B x) (λ b → f x ＝ b))
-          ( λ x → is-contr-total-path (f x))))
+          ( λ x → is-torsorial-Id (f x))))
       ( λ g → htpy-eq {g = g})
 ```
 
@@ -142,7 +158,8 @@ module _
 ```agda
 weak-funext-weaker-funext :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  weaker-function-extensionality A B → weak-function-extensionality A B
+  instance-weaker-function-extensionality A B →
+  instance-weak-function-extensionality A B
 weak-funext-weaker-funext H C =
   is-proof-irrelevant-is-prop
     ( H (λ x → is-prop-is-contr (C x)))

@@ -45,5 +45,5 @@ preserves-product-species-types {l1} S = (X Y : UU l1) → S (X × Y) ≃ (S X �
 tr-species-types :
   {l1 l2 : Level} (F : species-types l1 l2) (X Y : UU l1) →
   X ≃ Y → F X → F Y
-tr-species-types F X Y e = tr F (eq-equiv X Y e)
+tr-species-types F X Y e = tr F (eq-equiv e)
 ```

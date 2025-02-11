@@ -7,11 +7,9 @@ module group-theory.transitive-concrete-group-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
 open import foundation.1-types
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -22,13 +20,11 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.surjective-maps
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.equivalences-concrete-group-actions
-open import group-theory.orbits-concrete-group-actions
 
 open import higher-group-theory.transitive-higher-group-actions
 ```
@@ -70,8 +66,8 @@ module _
   {l1 l2 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G)
   where
 
-  is-transitive-action-Concrete-Group-Prop : Prop (l1 ⊔ l2)
-  is-transitive-action-Concrete-Group-Prop =
+  is-transitive-prop-action-Concrete-Group : Prop (l1 ⊔ l2)
+  is-transitive-prop-action-Concrete-Group =
     is-transitive-prop-action-∞-Group
       ( ∞-group-Concrete-Group G)
       ( type-Set ∘ X)
@@ -123,7 +119,7 @@ module _
 transitive-action-Concrete-Group :
   {l1 : Level} (l2 : Level) (G : Concrete-Group l1) → UU (l1 ⊔ lsuc l2)
 transitive-action-Concrete-Group l2 G =
-  type-subtype (is-transitive-action-Concrete-Group-Prop {l2 = l2} G)
+  type-subtype (is-transitive-prop-action-Concrete-Group {l2 = l2} G)
 
 module _
   {l1 l2 : Level} (G : Concrete-Group l1)
@@ -250,7 +246,7 @@ module _
       ( action-transitive-action-Concrete-Group G X)
       ( action-transitive-action-Concrete-Group G Y)) ∘e
     ( extensionality-type-subtype'
-      ( is-transitive-action-Concrete-Group-Prop G)
+      ( is-transitive-prop-action-Concrete-Group G)
       ( X)
       ( Y))
 ```
@@ -273,23 +269,24 @@ module _
       ( e)
       ( f)
 
-  htpy-equiv-transitive-action-Concrete-Group-Prop : Prop (l2 ⊔ l3)
-  htpy-equiv-transitive-action-Concrete-Group-Prop =
-    htpy-equiv-action-Concrete-Group-Prop G
+  htpy-prop-equiv-transitive-action-Concrete-Group : Prop (l2 ⊔ l3)
+  htpy-prop-equiv-transitive-action-Concrete-Group =
+    htpy-prop-equiv-action-Concrete-Group G
       ( action-transitive-action-Concrete-Group G X)
       ( action-transitive-action-Concrete-Group G Y)
       ( e)
       ( f)
 
   htpy-exists-equiv-transitive-action-Concrete-Group :
-    ∃ ( type-transitive-action-Concrete-Group G X)
+    exists-structure
+      ( type-transitive-action-Concrete-Group G X)
       ( λ x →
         map-equiv-transitive-action-Concrete-Group G X Y e x ＝
         map-equiv-transitive-action-Concrete-Group G X Y f x) →
     htpy-equiv-transitive-action-Concrete-Group
   htpy-exists-equiv-transitive-action-Concrete-Group H =
     apply-universal-property-trunc-Prop H
-      ( htpy-equiv-transitive-action-Concrete-Group-Prop)
+      ( htpy-prop-equiv-transitive-action-Concrete-Group)
       ( λ (x , p) y →
         apply-universal-property-trunc-Prop
           ( pr2
@@ -324,7 +321,7 @@ module _
     is-1-type (transitive-action-Concrete-Group l2 G)
   is-1-type-transitive-action-Concrete-Group =
     is-1-type-type-subtype
-      ( is-transitive-action-Concrete-Group-Prop G)
+      ( is-transitive-prop-action-Concrete-Group G)
       ( is-1-type-action-Concrete-Group G)
 
   transitive-action-1-type-Concrete-Group : 1-Type (l1 ⊔ lsuc l2)

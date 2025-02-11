@@ -14,6 +14,7 @@ open import foundation.equality-dependent-function-types
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -27,11 +28,13 @@ open import foundation-core.subtypes
 
 ## Idea
 
-A functional dependent correspondence is a dependent binary correspondence
-`C : Π (a : A) → B a → 𝒰` from a type `A` to a type family `B` over `A` such
-that for every `a : A` the type `Σ (b : B a), C a b` is contractible. The type
-of dependent functions from `A` to `B` is equivalent to the type of functional
-dependent correspondences.
+A
+{{#concept "functional (dependent) correspondence" Agda=is-functional-correspondence}}
+is a dependent binary correspondence `C : Π (a : A) → B a → 𝒰` from a type `A`
+to a type family `B` over `A` such that for every `a : A` the type family
+`C a : B a → Type` is [torsorial](foundation-core.torsorial-type-families.md).
+The type of dependent functions from `A` to `B` is equivalent to the type of
+functional dependent correspondences.
 
 ## Definition
 
@@ -40,7 +43,7 @@ is-functional-correspondence-Prop :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (a : A) → B a → UU l3) →
   Prop (l1 ⊔ l2 ⊔ l3)
 is-functional-correspondence-Prop {A = A} {B} C =
-  Π-Prop A (λ x → is-contr-Prop (Σ (B x) (C x)))
+  Π-Prop A (λ x → is-torsorial-Prop (C x))
 
 is-functional-correspondence :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (a : A) → B a → UU l3) →
@@ -100,19 +103,13 @@ module _
     equiv-functional-correspondence C C
   id-equiv-functional-correspondence x y = id-equiv
 
-  is-contr-total-equiv-functional-correspondence :
-    is-contr
-      ( Σ ( functional-correspondence l3 A B)
-          ( equiv-functional-correspondence C))
-  is-contr-total-equiv-functional-correspondence =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-Eq-Π
-        ( λ x D →
-          (y : B x) →
-          correspondence-functional-correspondence C x y ≃
-          D y)
+  is-torsorial-equiv-functional-correspondence :
+    is-torsorial (equiv-functional-correspondence C)
+  is-torsorial-equiv-functional-correspondence =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-Eq-Π
         ( λ x →
-          is-contr-total-equiv-fam
+          is-torsorial-equiv-fam
             ( correspondence-functional-correspondence
               C x)))
       ( is-prop-is-functional-correspondence)
@@ -131,7 +128,7 @@ module _
     is-equiv (equiv-eq-functional-correspondence D)
   is-equiv-equiv-eq-functional-correspondence =
     fundamental-theorem-id
-      is-contr-total-equiv-functional-correspondence
+      is-torsorial-equiv-functional-correspondence
       equiv-eq-functional-correspondence
 
   extensionality-functional-correspondence :
@@ -160,7 +157,7 @@ module _
     ((x : A) → B x) → functional-correspondence l2 A B
   pr1 (functional-correspondence-function f) x y = f x ＝ y
   pr2 (functional-correspondence-function f) x =
-    is-contr-total-path (f x)
+    is-torsorial-Id (f x)
 
   function-functional-correspondence :
     {l3 : Level} → functional-correspondence l3 A B → ((x : A) → B x)

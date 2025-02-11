@@ -11,8 +11,8 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.types-local-at-maps
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 
@@ -42,7 +42,7 @@ unit-id-modality = id
 ```agda
 is-uniquely-eliminating-modality-id-modality :
   {l : Level} → is-uniquely-eliminating-modality (unit-id-modality {l})
-is-uniquely-eliminating-modality-id-modality {l} _ P =
+is-uniquely-eliminating-modality-id-modality {l} P =
   is-local-dependent-type-is-equiv
     ( unit-id-modality)
     ( is-equiv-id)

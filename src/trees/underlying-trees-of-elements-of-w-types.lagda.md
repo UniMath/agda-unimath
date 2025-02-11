@@ -18,8 +18,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.isolated-elements
 open import foundation.negated-equality
-open import foundation.negation
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -292,11 +292,11 @@ module _
     Eq-node-element-𝕎 w x x
   refl-Eq-node-element-𝕎 = refl-Eq-node-element-coalgebra (𝕎-Coalg A B)
 
-  is-contr-total-Eq-node-element-𝕎 :
+  is-torsorial-Eq-node-element-𝕎 :
     (w : 𝕎 A B) (x : node-element-𝕎 w) →
-    is-contr (Σ (node-element-𝕎 w) (Eq-node-element-𝕎 w x))
-  is-contr-total-Eq-node-element-𝕎 =
-    is-contr-total-Eq-node-element-coalgebra (𝕎-Coalg A B)
+    is-torsorial (Eq-node-element-𝕎 w x)
+  is-torsorial-Eq-node-element-𝕎 =
+    is-torsorial-Eq-node-element-coalgebra (𝕎-Coalg A B)
 
   Eq-eq-node-element-𝕎 :
     (w : 𝕎 A B) {x y : node-element-𝕎 w} →
@@ -359,17 +359,17 @@ module _
       ( 𝕎-Coalg A B)
       ( w)
 
-  is-equiv-node-compute-directed-tree-element-𝕎 :
+  is-node-equiv-compute-directed-tree-element-𝕎 :
     is-equiv node-compute-directed-tree-element-𝕎
-  is-equiv-node-compute-directed-tree-element-𝕎 =
-    is-equiv-node-compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
+  is-node-equiv-compute-directed-tree-element-𝕎 =
+    is-node-equiv-compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
 
-  equiv-node-compute-directed-tree-element-𝕎 :
+  node-equiv-compute-directed-tree-element-𝕎 :
     node-element-𝕎 w ≃
     node-combinator-Directed-Tree
       ( λ b → directed-tree-element-𝕎 (component-𝕎 w b))
-  equiv-node-compute-directed-tree-element-𝕎 =
-    equiv-node-compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
+  node-equiv-compute-directed-tree-element-𝕎 =
+    node-equiv-compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
 
   edge-compute-directed-tree-element-𝕎 :
     (x y : node-element-𝕎 w) →
@@ -414,21 +414,21 @@ module _
       ( 𝕎-Coalg A B)
       ( w)
 
-  is-equiv-edge-compute-directed-tree-element-𝕎 :
+  is-edge-equiv-compute-directed-tree-element-𝕎 :
     (x y : node-element-𝕎 w) →
     is-equiv (edge-compute-directed-tree-element-𝕎 x y)
-  is-equiv-edge-compute-directed-tree-element-𝕎 =
-    is-equiv-edge-compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
+  is-edge-equiv-compute-directed-tree-element-𝕎 =
+    is-edge-equiv-compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
 
-  equiv-edge-compute-directed-tree-element-𝕎 :
+  edge-equiv-compute-directed-tree-element-𝕎 :
     (x y : node-element-𝕎 w) →
     edge-element-𝕎 w x y ≃
     edge-combinator-Directed-Tree
       ( λ b → directed-tree-element-𝕎 (component-𝕎 w b))
       ( node-compute-directed-tree-element-𝕎 x)
       ( node-compute-directed-tree-element-𝕎 y)
-  equiv-edge-compute-directed-tree-element-𝕎 =
-    equiv-edge-compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
+  edge-equiv-compute-directed-tree-element-𝕎 =
+    edge-equiv-compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
 
   compute-directed-tree-element-𝕎 :
     equiv-Directed-Tree

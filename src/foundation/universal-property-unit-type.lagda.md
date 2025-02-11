@@ -7,16 +7,18 @@ module foundation.universal-property-unit-type where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.unit-type
+open import foundation.universal-property-contractible-types
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.function-types
-open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
+open import foundation-core.precomposition-functions
 ```
 
 </details>
@@ -63,6 +65,11 @@ equiv-universal-property-unit :
 pr1 (equiv-universal-property-unit Y) = ev-star' Y
 pr2 (equiv-universal-property-unit Y) = universal-property-unit Y
 
+inv-equiv-universal-property-unit :
+  {l : Level} (Y : UU l) → Y ≃ (unit → Y)
+inv-equiv-universal-property-unit Y =
+  inv-equiv (equiv-universal-property-unit Y)
+
 abstract
   is-equiv-point-is-contr :
     {l1 : Level} {X : UU l1} (x : X) →
@@ -73,16 +80,17 @@ abstract
 abstract
   is-equiv-point-universal-property-unit :
     {l1 : Level} (X : UU l1) (x : X) →
-    ((l2 : Level) (Y : UU l2) → is-equiv (λ (f : X → Y) → f x)) →
+    ({l2 : Level} (Y : UU l2) → is-equiv (λ (f : X → Y) → f x)) →
     is-equiv (point x)
   is-equiv-point-universal-property-unit X x H =
     is-equiv-is-equiv-precomp
       ( point x)
-      ( λ l Y → is-equiv-right-factor
-        ( ev-star' Y)
-        ( precomp (point x) Y)
-        ( universal-property-unit Y)
-        ( H _ Y))
+      ( λ Y →
+        is-equiv-right-factor
+          ( ev-star' Y)
+          ( precomp (point x) Y)
+          ( universal-property-unit Y)
+          ( H Y))
 
 abstract
   universal-property-unit-is-equiv-point :
@@ -106,11 +114,11 @@ abstract
       ( is-equiv-point-is-contr x is-contr-X)
 
 abstract
-  is-equiv-diagonal-is-equiv-point :
+  is-equiv-diagonal-exponential-is-equiv-point :
     {l1 : Level} {X : UU l1} (x : X) →
     is-equiv (point x) →
-    ({l2 : Level} (Y : UU l2) → is-equiv (λ y → const X Y y))
-  is-equiv-diagonal-is-equiv-point {X = X} x is-equiv-point Y =
+    ({l2 : Level} (Y : UU l2) → is-equiv (diagonal-exponential Y X))
+  is-equiv-diagonal-exponential-is-equiv-point x is-equiv-point Y =
     is-equiv-is-section
       ( universal-property-unit-is-equiv-point x is-equiv-point Y)
       ( refl-htpy)

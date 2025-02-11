@@ -14,6 +14,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -30,11 +31,20 @@ open import trees.directed-trees
 ## Idea
 
 Consider a vertex `x` in a [directed graph](graph-theory.directed-graphs.md)
-`G`. The **fiber** of `G` at `x` is a [directed tree](trees.directed-trees.md)
-of which the type of nodes consists of vertices `y` equipped with a
+`G`. The
+{{#concept "fiber" Disambiguation="directed graph" Agda=fiber-Directed-Graph}}
+of `G` at `x` is a [directed tree](trees.directed-trees.md) of which the type of
+nodes consists of vertices `y` equipped with a
 [walk](graph-theory.walks-directed-graphs.md) `w` from `y` to `x`, and the type
 of edges from `(y , w)` to `(z , v)` consist of an edge `e : y → z` such that
 `w ＝ cons e v`.
+
+**Note:** The fiber of a directed graph should not be confused with the
+[fiber of a morphism of directed graphs](graph-theory.fibers-morphisms-directed-graphs.md),
+which is the
+[dependent directed graph](graph-theory.dependent-directed-graphs.md) consisting
+of the [fibers](foundation-core.fibers-of-maps.md) of the actions on vertices
+and edges.
 
 ## Definitions
 
@@ -200,7 +210,7 @@ module _
     direct-predecessor-Directed-Graph G
       ( node-inclusion-fiber-Directed-Graph G x y)
   compute-direct-predecessor-fiber-Directed-Graph y =
-    ( right-unit-law-Σ-is-contr (λ (u , e) → is-contr-total-path' _)) ∘e
+    ( right-unit-law-Σ-is-contr (λ (u , e) → is-torsorial-Id' _)) ∘e
     ( interchange-Σ-Σ _)
 
   map-compute-direct-predecessor-fiber-Directed-Graph :

@@ -15,7 +15,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
-open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
@@ -52,8 +52,8 @@ module _
   {l1 l2 : Level} (M : Commutative-Monoid l1) (N : Commutative-Submonoid l2 M)
   where
 
-  is-normal-commutative-submonoid-Prop : Prop (l1 ⊔ l2)
-  is-normal-commutative-submonoid-Prop =
+  is-normal-prop-Commutative-Submonoid : Prop (l1 ⊔ l2)
+  is-normal-prop-Commutative-Submonoid =
     Π-Prop
       ( type-Commutative-Monoid M)
       ( λ x →
@@ -69,12 +69,12 @@ module _
 
   is-normal-Commutative-Submonoid : UU (l1 ⊔ l2)
   is-normal-Commutative-Submonoid =
-    type-Prop is-normal-commutative-submonoid-Prop
+    type-Prop is-normal-prop-Commutative-Submonoid
 
   is-prop-is-normal-Commutative-Submonoid :
     is-prop is-normal-Commutative-Submonoid
   is-prop-is-normal-Commutative-Submonoid =
-    is-prop-type-Prop is-normal-commutative-submonoid-Prop
+    is-prop-type-Prop is-normal-prop-Commutative-Submonoid
 
 Normal-Commutative-Submonoid :
   {l1 : Level} (l2 : Level) → Commutative-Monoid l1 → UU (l1 ⊔ lsuc l2)
@@ -98,7 +98,7 @@ module _
     subset-Commutative-Submonoid M submonoid-Normal-Commutative-Submonoid
 
   is-submonoid-Normal-Commutative-Submonoid :
-    is-submonoid-Commutative-Monoid M subset-Normal-Commutative-Submonoid
+    is-submonoid-subset-Commutative-Monoid M subset-Normal-Commutative-Submonoid
   is-submonoid-Normal-Commutative-Submonoid =
     is-submonoid-Commutative-Submonoid M submonoid-Normal-Commutative-Submonoid
 
@@ -253,7 +253,7 @@ module _
     (N ＝ K) ≃ has-same-elements-Normal-Commutative-Submonoid K
   extensionality-Normal-Commutative-Submonoid =
     extensionality-type-subtype
-      ( is-normal-commutative-submonoid-Prop M)
+      ( is-normal-prop-Commutative-Submonoid M)
       ( is-normal-Normal-Commutative-Submonoid M N)
       ( λ x → (id , id))
       ( extensionality-Commutative-Submonoid M
@@ -306,20 +306,20 @@ module _
   transitive-congruence-Normal-Commutative-Submonoid _ _ _ H K u =
     (H u) ∘iff (K u)
 
-  eq-rel-congruence-Normal-Commutative-Submonoid :
-    Equivalence-Relation (l1 ⊔ l2) (type-Commutative-Monoid M)
-  pr1 eq-rel-congruence-Normal-Commutative-Submonoid =
+  equivalence-relation-congruence-Normal-Commutative-Submonoid :
+    equivalence-relation (l1 ⊔ l2) (type-Commutative-Monoid M)
+  pr1 equivalence-relation-congruence-Normal-Commutative-Submonoid =
     rel-congruence-Normal-Commutative-Submonoid
-  pr1 (pr2 eq-rel-congruence-Normal-Commutative-Submonoid) =
+  pr1 (pr2 equivalence-relation-congruence-Normal-Commutative-Submonoid) =
     refl-congruence-Normal-Commutative-Submonoid
-  pr1 (pr2 (pr2 eq-rel-congruence-Normal-Commutative-Submonoid)) =
+  pr1 (pr2 (pr2 equivalence-relation-congruence-Normal-Commutative-Submonoid)) =
     symmetric-congruence-Normal-Commutative-Submonoid
-  pr2 (pr2 (pr2 eq-rel-congruence-Normal-Commutative-Submonoid)) =
+  pr2 (pr2 (pr2 equivalence-relation-congruence-Normal-Commutative-Submonoid)) =
     transitive-congruence-Normal-Commutative-Submonoid
 
   is-congruence-congruence-Normal-Commutative-Submonoid :
     is-congruence-Commutative-Monoid M
-      eq-rel-congruence-Normal-Commutative-Submonoid
+      equivalence-relation-congruence-Normal-Commutative-Submonoid
   pr1
     ( is-congruence-congruence-Normal-Commutative-Submonoid
       {x} {x'} {y} {y'} H K u)
@@ -354,7 +354,7 @@ module _
   congruence-Normal-Commutative-Submonoid :
     congruence-Commutative-Monoid (l1 ⊔ l2) M
   pr1 congruence-Normal-Commutative-Submonoid =
-    eq-rel-congruence-Normal-Commutative-Submonoid
+    equivalence-relation-congruence-Normal-Commutative-Submonoid
   pr2 congruence-Normal-Commutative-Submonoid =
     is-congruence-congruence-Normal-Commutative-Submonoid
 ```
@@ -614,7 +614,8 @@ is-retraction-saturated-congruence-Normal-Commutative-Submonoid :
     ( normal-submonoid-saturated-congruence-Commutative-Monoid M R)) ＝
   ( R)
 is-retraction-saturated-congruence-Normal-Commutative-Submonoid l2 M R =
-  eq-relate-same-elements-saturated-congruence-Commutative-Monoid M
+  eq-relate-same-elements-saturated-congruence-Commutative-Monoid
+    ( M)
     ( saturated-congruence-Normal-Commutative-Submonoid M
       ( normal-submonoid-saturated-congruence-Commutative-Monoid M R))
     ( R)

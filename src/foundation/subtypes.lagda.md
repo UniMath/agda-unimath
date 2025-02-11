@@ -10,21 +10,24 @@ open import foundation-core.subtypes public
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
-open import foundation-core.embeddings
+open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -83,12 +86,10 @@ module _
   pr1 (refl-has-same-elements-subtype x) = id
   pr2 (refl-has-same-elements-subtype x) = id
 
-  is-contr-total-has-same-elements-subtype :
-    is-contr (Σ (subtype l2 A) has-same-elements-subtype)
-  is-contr-total-has-same-elements-subtype =
-    is-contr-total-Eq-Π
-      ( λ x Q → P x ⇔ Q)
-      ( λ x → is-contr-total-iff (P x))
+  is-torsorial-has-same-elements-subtype :
+    is-torsorial has-same-elements-subtype
+  is-torsorial-has-same-elements-subtype =
+    is-torsorial-Eq-Π (λ x → is-torsorial-iff (P x))
 
   has-same-elements-eq-subtype :
     (Q : subtype l2 A) → (P ＝ Q) → has-same-elements-subtype Q
@@ -99,7 +100,7 @@ module _
     (Q : subtype l2 A) → is-equiv (has-same-elements-eq-subtype Q)
   is-equiv-has-same-elements-eq-subtype =
     fundamental-theorem-id
-      is-contr-total-has-same-elements-subtype
+      is-torsorial-has-same-elements-subtype
       has-same-elements-eq-subtype
 
   extensionality-subtype :
@@ -124,7 +125,7 @@ module _
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → P ⊆ Q → Q ⊆ P →
     (x : A) → is-in-subtype P x ≃ is-in-subtype Q x
   equiv-antisymmetric-leq-subtype P Q H K x =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-prop-is-in-subtype P x)
       ( is-prop-is-in-subtype Q x)
       ( H x)
@@ -150,3 +151,50 @@ subtype-Set : {l1 : Level} (l2 : Level) → UU l1 → Set (l1 ⊔ lsuc l2)
 pr1 (subtype-Set l2 A) = subtype l2 A
 pr2 (subtype-Set l2 A) = is-set-subtype
 ```
+
+### Characterisation of embeddings into subtypes
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (B : subtype l2 A) {X : UU l3}
+  where
+
+  inv-emb-into-subtype :
+    (g : X ↪ type-subtype B) →
+    Σ (X ↪ A) (λ f → (x : X) → is-in-subtype B (map-emb f x))
+  pr1 (pr1 (inv-emb-into-subtype g)) =
+    inclusion-subtype B ∘ map-emb g
+  pr2 (pr1 (inv-emb-into-subtype g)) =
+    is-emb-comp _ _ (is-emb-inclusion-subtype B) (is-emb-map-emb g)
+  pr2 (inv-emb-into-subtype g) x =
+    pr2 (map-emb g x)
+
+  is-section-map-inv-emb-into-subtype :
+    is-section (ind-Σ (emb-into-subtype B)) (inv-emb-into-subtype)
+  is-section-map-inv-emb-into-subtype g =
+    eq-type-subtype is-emb-Prop refl
+
+  is-retraction-map-inv-emb-into-subtype :
+    is-retraction (ind-Σ (emb-into-subtype B)) (inv-emb-into-subtype)
+  is-retraction-map-inv-emb-into-subtype (f , b) =
+    eq-type-subtype
+      ( λ f → Π-Prop X (λ x → B (map-emb f x)))
+      ( eq-type-subtype is-emb-Prop refl)
+
+  equiv-emb-into-subtype :
+    Σ ( X ↪ A)
+      ( λ f → (x : X) → is-in-subtype B (map-emb f x)) ≃ (X ↪ type-subtype B)
+  pr1 equiv-emb-into-subtype = ind-Σ (emb-into-subtype B)
+  pr2 equiv-emb-into-subtype =
+    is-equiv-is-invertible
+      inv-emb-into-subtype
+      is-section-map-inv-emb-into-subtype
+      is-retraction-map-inv-emb-into-subtype
+```
+
+## See also
+
+- [Images of subtypes](foundation.images-subtypes.md)
+- [Large locale of subtypes](foundation.large-locale-of-subtypes.md)
+- [Powersets](foundation.powersets.md)
+- [Pullbacks of subtypes](foundation.pullbacks-subtypes.md)

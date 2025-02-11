@@ -23,7 +23,7 @@ open import foundation.universe-levels
 The [large category](category-theory.large-categories.md)
 `Commutative-Ring-Category` of
 [commutative rings](commutative-algebra.commutative-rings.md) is the large
-category consistsing of commutative rings and
+category consisting of commutative rings and
 [ring homomorphisms](commutative-algebra.homomorphisms-commutative-rings.md).
 
 ## Definitions
@@ -36,7 +36,7 @@ is-large-category-Commutative-Ring-Large-Category :
 is-large-category-Commutative-Ring-Large-Category =
   is-equiv-iso-eq-Commutative-Ring
 
-Commutative-Ring-Large-Category : Large-Category lsuc _⊔_
+Commutative-Ring-Large-Category : Large-Category lsuc (_⊔_)
 large-precategory-Large-Category Commutative-Ring-Large-Category =
   Commutative-Ring-Large-Precategory
 is-large-category-Large-Category Commutative-Ring-Large-Category =

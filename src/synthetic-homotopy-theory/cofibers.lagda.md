@@ -38,11 +38,11 @@ module _
   where
 
   cofiber : (A → B) → UU (l1 ⊔ l2)
-  cofiber f = pushout f (const A unit star)
+  cofiber f = pushout f (terminal-map A)
 
   cocone-cofiber :
-    (f : A → B) → cocone f (const A unit star) (cofiber f)
-  cocone-cofiber f = cocone-pushout f (const A unit star)
+    (f : A → B) → cocone f (terminal-map A) (cofiber f)
+  cocone-cofiber f = cocone-pushout f (terminal-map A)
 
   inl-cofiber : (f : A → B) → B → cofiber f
   inl-cofiber f = pr1 (cocone-cofiber f)
@@ -58,9 +58,9 @@ module _
   pr2 (cofiber-Pointed-Type f) = point-cofiber f
 
   universal-property-cofiber :
-    (f : A → B) {l : Level} →
-    universal-property-pushout l f (const A unit star) (cocone-cofiber f)
-  universal-property-cofiber f = up-pushout f (const A unit star)
+    (f : A → B) →
+    universal-property-pushout f (terminal-map A) (cocone-cofiber f)
+  universal-property-cofiber f = up-pushout f (terminal-map A)
 ```
 
 ## Properties
@@ -83,7 +83,7 @@ is-contr-cofiber-is-equiv {A = A} f is-equiv-f =
     ( pr1 (pr2 (cocone-cofiber f)))
     ( is-equiv-universal-property-pushout
       ( f)
-      ( const A unit star)
+      ( terminal-map A)
       ( cocone-cofiber f)
       ( is-equiv-f)
       ( universal-property-cofiber f))
@@ -97,9 +97,9 @@ is-equiv-inl-cofiber-point :
   {l : Level} {B : UU l} (b : B) → is-equiv (inl-cofiber (point b))
 is-equiv-inl-cofiber-point {B = B} b =
   is-equiv-universal-property-pushout'
-    ( const unit B b)
-    ( const unit unit star)
-    ( cocone-pushout (const unit B b) (const unit unit star))
-    ( is-equiv-is-contr (const unit unit star) is-contr-unit is-contr-unit)
-    ( up-pushout (const unit B b) (const unit unit star))
+    ( point b)
+    ( terminal-map unit)
+    ( cocone-pushout (point b) (terminal-map unit))
+    ( is-equiv-is-contr (terminal-map unit) is-contr-unit is-contr-unit)
+    ( up-pushout (point b) (terminal-map unit))
 ```

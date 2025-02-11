@@ -14,25 +14,21 @@ open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.precategory-of-commutative-rings
 
 open import foundation.dependent-pair-types
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.category-of-abelian-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-monoids
 open import group-theory.monoids
-open import group-theory.precategory-of-abelian-groups
 open import group-theory.semigroups
 open import group-theory.submonoids
 
 open import ring-theory.groups-of-units-rings
-open import ring-theory.homomorphisms-rings
-open import ring-theory.invertible-elements-rings
-open import ring-theory.rings
 ```
 
 </details>
@@ -155,14 +151,14 @@ module _
       ( commutative-mul-Commutative-Ring A (pr1 x) (pr1 y))
 
   is-group-group-of-units-Commutative-Ring' :
-    is-group'
+    is-group-is-unital-Semigroup
       ( semigroup-group-of-units-Commutative-Ring)
       ( is-unital-group-of-units-Commutative-Ring)
   is-group-group-of-units-Commutative-Ring' =
     is-group-group-of-units-Ring' (ring-Commutative-Ring A)
 
   is-group-group-of-units-Commutative-Ring :
-    is-group semigroup-group-of-units-Commutative-Ring
+    is-group-Semigroup semigroup-group-of-units-Commutative-Ring
   is-group-group-of-units-Commutative-Ring =
     is-group-group-of-units-Ring (ring-Commutative-Ring A)
 
@@ -182,15 +178,17 @@ module _
     inclusion-group-of-units-Ring (ring-Commutative-Ring A)
 
   preserves-mul-inclusion-group-of-units-Commutative-Ring :
-    (x y : type-group-of-units-Commutative-Ring) →
+    {x y : type-group-of-units-Commutative-Ring} →
     inclusion-group-of-units-Commutative-Ring
       ( mul-group-of-units-Commutative-Ring x y) ＝
     mul-Commutative-Ring A
       ( inclusion-group-of-units-Commutative-Ring x)
       ( inclusion-group-of-units-Commutative-Ring y)
-  preserves-mul-inclusion-group-of-units-Commutative-Ring =
+  preserves-mul-inclusion-group-of-units-Commutative-Ring {x} {y} =
     preserves-mul-inclusion-group-of-units-Ring
       ( ring-Commutative-Ring A)
+      { x}
+      { y}
 
   hom-inclusion-group-of-units-Commutative-Ring :
     hom-Monoid monoid-group-of-units-Commutative-Ring
@@ -221,7 +219,7 @@ module _
       ( f)
 
   preserves-mul-hom-group-of-units-hom-Commutative-Ring :
-    (x y : type-group-of-units-Commutative-Ring A) →
+    {x y : type-group-of-units-Commutative-Ring A} →
     map-group-of-units-hom-Commutative-Ring
       ( mul-group-of-units-Commutative-Ring A x y) ＝
     mul-group-of-units-Commutative-Ring B
@@ -254,7 +252,7 @@ module _
       ( f)
 
   preserves-inv-hom-group-of-units-hom-Commutative-Ring :
-    (x : type-group-of-units-Commutative-Ring A) →
+    {x : type-group-of-units-Commutative-Ring A} →
     map-group-of-units-hom-Commutative-Ring
       ( inv-group-of-units-Commutative-Ring A x) ＝
     inv-group-of-units-Commutative-Ring B
@@ -307,10 +305,9 @@ module _
 
 ```agda
 group-of-units-commutative-ring-functor-Large-Precategory :
-  functor-Large-Precategory
+  functor-Large-Precategory (λ l → l)
     ( Commutative-Ring-Large-Precategory)
     ( Ab-Large-Precategory)
-    ( id)
 obj-functor-Large-Precategory
   group-of-units-commutative-ring-functor-Large-Precategory =
   abelian-group-of-units-Commutative-Ring

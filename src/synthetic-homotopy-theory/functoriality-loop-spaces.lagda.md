@@ -12,11 +12,14 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.faithful-maps
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
 open import structured-types.faithful-pointed-maps
 open import structured-types.pointed-equivalences
+open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
@@ -28,9 +31,9 @@ open import synthetic-homotopy-theory.loop-spaces
 ## Idea
 
 Any [pointed map](structured-types.pointed-maps.md) `f : A →∗ B` induces a
-pointed map `pointed-map-Ω f : Ω A →∗ Ω B`. Furthermore, this operation respects
-the groupoidal operations on
-[loop spaces](synthetic-homotopy-theory.loop-spaces.md).
+pointed map `pointed-map-Ω f : Ω A →∗ Ω B`` on
+[loop spaces](synthetic-homotopy-theory.loop-spaces.md). Furthermore, this
+operation respects the groupoidal operations on loop spaces.
 
 ## Definition
 
@@ -53,8 +56,8 @@ module _
   pr2 pointed-map-Ω = preserves-refl-map-Ω
 
   preserves-mul-map-Ω :
-    (x y : type-Ω A) → map-Ω (mul-Ω A x y) ＝ mul-Ω B (map-Ω x) (map-Ω y)
-  preserves-mul-map-Ω x y =
+    {x y : type-Ω A} → map-Ω (mul-Ω A x y) ＝ mul-Ω B (map-Ω x) (map-Ω y)
+  preserves-mul-map-Ω {x} {y} =
     ( ap
       ( tr-type-Ω (preserves-point-pointed-map f))
       ( ap-concat (map-pointed-map f) x y)) ∙
@@ -124,6 +127,21 @@ module _
   pr2 pointed-equiv-pointed-map-Ω-is-emb = preserves-refl-map-Ω f
 ```
 
+### The operator `pointed-map-Ω` preserves identities
+
+```agda
+module _
+  {l1 : Level} {A : Pointed-Type l1}
+  where
+
+  preserves-id-map-Ω : map-Ω (id-pointed-map {A = A}) ~ id
+  preserves-id-map-Ω = ap-id
+
+  preserves-id-pointed-map-Ω :
+    pointed-map-Ω (id-pointed-map {A = A}) ~∗ id-pointed-map
+  preserves-id-pointed-map-Ω = preserves-id-map-Ω , refl
+```
+
 ### The operator `pointed-map-Ω` preserves equivalences
 
 ```agda
@@ -137,7 +155,7 @@ module _
   equiv-map-Ω-pointed-equiv =
     equiv-map-Ω-is-emb
       ( pointed-map-pointed-equiv e)
-      ( is-emb-is-equiv (is-equiv-map-equiv-pointed-equiv e))
+      ( is-emb-is-equiv (is-equiv-map-pointed-equiv e))
 ```
 
 ### `pointed-map-Ω` preserves pointed equivalences

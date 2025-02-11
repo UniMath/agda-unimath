@@ -34,168 +34,213 @@ open import reflection.terms
 
 ## Idea
 
-The type-checking monad `TC` allows us to interact directly with Agda's type
-checking mechanism. Additionally to primitives (see below), Agda includes the
-the keyword `unquote` to manually unquote an element from `TC unit`.
+The type-checking monad `type-Type-Checker` allows us to interact directly with
+Agda's type checking mechanism. Additionally to primitives (see below), Agda
+includes the the keyword `unquote` to manually unquote an element from
+`type-Type-Checker unit`.
 
-## Definition
+## Definitions
 
 ```agda
-data ErrorPart : UU lzero where
-  strErr : String → ErrorPart
-  termErr : Term → ErrorPart
-  pattErr : Pattern → ErrorPart
-  nameErr : Name → ErrorPart
+data Error-Part : UU lzero where
+  string-Error-Part : String → Error-Part
+  term-Error-Part : Term-Agda → Error-Part
+  pattern-Error-Part : Pattern-Agda → Error-Part
+  name-Error-Part : Name-Agda → Error-Part
 
 postulate
   -- The type checking monad
-  TC : ∀ {a} → UU a → UU a
-  returnTC : ∀ {a} {A : UU a} → A → TC A
-  bindTC : ∀ {a b} {A : UU a} {B : UU b} → TC A → (A → TC B) → TC B
+  type-Type-Checker :
+    {l : Level} → UU l → UU l
+  return-Type-Checker :
+    {l : Level} {A : UU l} → A → type-Type-Checker A
+  bind-Type-Checker :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    type-Type-Checker A → (A → type-Type-Checker B) → type-Type-Checker B
   -- Tries the unify the first term with the second
-  unify : Term → Term → TC unit
+  unify :
+    Term-Agda → Term-Agda → type-Type-Checker unit
   -- Gives an error
-  typeError : ∀ {a} {A : UU a} → list ErrorPart → TC A
+  type-error :
+    {l : Level} {A : UU l} → list Error-Part → type-Type-Checker A
   -- Infers the type of a goal
-  inferType : Term → TC Term
-  checkType : Term → Term → TC Term
-  normalise : Term → TC Term
-  reduce : Term → TC Term
+  infer-type :
+    Term-Agda → type-Type-Checker Term-Agda
+  check-type :
+    Term-Agda → Term-Agda → type-Type-Checker Term-Agda
+  normalize :
+    Term-Agda → type-Type-Checker Term-Agda
+  reduce :
+    Term-Agda → type-Type-Checker Term-Agda
   -- Tries the first computation, if it fails tries the second
-  catchTC : ∀ {a} {A : UU a} → TC A → TC A → TC A
-  quoteTC : ∀ {a} {A : UU a} → A → TC Term
-  unquoteTC : ∀ {a} {A : UU a} → Term → TC A
-  quoteωTC : ∀ {A : UUω} → A → TC Term
-  getContext : TC Telescope
-  extendContext : ∀ {a} {A : UU a} → String → Arg Term → TC A → TC A
-  inContext : ∀ {a} {A : UU a} → Telescope → TC A → TC A
-  freshName : String → TC Name
-  declareDef : Arg Name → Term → TC unit
-  declarePostulate : Arg Name → Term → TC unit
-  defineFun : Name → list Clause → TC unit
-  getType : Name → TC Term
-  getDefinition : Name → TC Definition
-  blockOnMeta : ∀ {a} {A : UU a} → Meta → TC A
-  commitTC : TC unit
-  isMacro : Name → TC bool
+  catch-Type-Checker :
+    {l : Level} {A : UU l} →
+    type-Type-Checker A → type-Type-Checker A → type-Type-Checker A
+  quote-Type-Checker :
+    {l : Level} {A : UU l} → A → type-Type-Checker Term-Agda
+  unquote-Type-Checker :
+    {l : Level} {A : UU l} → Term-Agda → type-Type-Checker A
+  quoteω-Type-Checker :
+    {A : UUω} → A → type-Type-Checker Term-Agda
+  get-context :
+    type-Type-Checker Telescope-Agda
+  extend-context :
+    {l : Level} {A : UU l} →
+    String → Argument-Agda Term-Agda → type-Type-Checker A → type-Type-Checker A
+  in-context :
+    {l : Level} {A : UU l} →
+    Telescope-Agda → type-Type-Checker A → type-Type-Checker A
+  fresh-name :
+    String → type-Type-Checker Name-Agda
+  declare-definition :
+    Argument-Agda Name-Agda → Term-Agda → type-Type-Checker unit
+  declare-postulate :
+    Argument-Agda Name-Agda → Term-Agda → type-Type-Checker unit
+  define-function :
+    Name-Agda → list Clause-Agda → type-Type-Checker unit
+  get-type :
+    Name-Agda → type-Type-Checker Term-Agda
+  get-definition :
+    Name-Agda → type-Type-Checker Definition-Agda
+  block-Type-Checker :
+    {l : Level} {A : UU l} → Blocker-Agda → type-Type-Checker A
+  commit-Type-Checker :
+    type-Type-Checker unit
+  is-macro :
+    Name-Agda → type-Type-Checker bool
 
-  formatErrorParts : list ErrorPart → TC String
+  format-error :
+    list Error-Part → type-Type-Checker String
 
-  -- Prints the third argument if the corresponding verbosity level is turned
+  -- Prints the third argument if the corresponding verbosity Level is turned
   -- on (with the -v flag to Agda).
-  debugPrint : String → ℕ → list ErrorPart → TC unit
+  debug-print :
+    String → ℕ → list Error-Part → type-Type-Checker unit
 
-  -- If 'true', makes the following primitives also normalise
-  -- their results: inferType, checkType, quoteTC, getType, and getContext
-  withNormalisation : ∀ {a} {A : UU a} → bool → TC A → TC A
-  askNormalisation : TC bool
+  -- If 'true', makes the following primitives also normalize
+  -- their results: infer-type, check-type, quote-Type-Checker, get-type, and get-context
+  with-normalization :
+    {l : Level} {A : UU l} → bool → type-Type-Checker A → type-Type-Checker A
+  ask-normalization : type-Type-Checker bool
 
   -- If 'true', makes the following primitives to reconstruct hidden arguments:
-  -- getDefinition, normalise, reduce, inferType, checkType and getContext
-  withReconstructed : ∀ {a} {A : UU a} → bool → TC A → TC A
-  askReconstructed : TC bool
+  -- get-definition, normalize, reduce, infer-type, check-type and get-context
+  with-reconstructed :
+    {l : Level} {A : UU l} → bool → type-Type-Checker A → type-Type-Checker A
+  ask-reconstructed : type-Type-Checker bool
 
   -- Whether implicit arguments at the end should be turned into metavariables
-  withExpandLast : ∀ {a} {A : UU a} → bool → TC A → TC A
-  askExpandLast : TC bool
+  with-expand-last :
+    {l : Level} {A : UU l} → bool → type-Type-Checker A → type-Type-Checker A
+  ask-expand-last : type-Type-Checker bool
 
-  -- White/blacklist specific definitions for reduction while executing the TC computation
+  -- White/blacklist specific definitions for reduction while executing the type-Type-Checker computation
   -- 'true' for whitelist, 'false' for blacklist
-  withReduceDefs : ∀ {a} {A : UU a} → (Σ bool λ _ → list Name) → TC A → TC A
-  askReduceDefs : TC (Σ bool λ _ → list Name)
+  with-reduce-definitions :
+    {l : Level} {A : UU l} →
+    bool × list Name-Agda → type-Type-Checker A → type-Type-Checker A
+  ask-reduce-definitions :
+    type-Type-Checker (bool × list Name-Agda)
 
   -- Fail if the given computation gives rise to new, unsolved
   -- "blocking" constraints.
-  noConstraints : ∀ {a} {A : UU a} → TC A → TC A
+  no-constraints :
+    {l : Level} {A : UU l} → type-Type-Checker A → type-Type-Checker A
 
-  -- Run the given TC action and return the first component. Resets to
-  -- the old TC state if the second component is 'false', or keep the
-  -- new TC state if it is 'true'.
-  runSpeculative : ∀ {a} {A : UU a} → TC (Σ A λ _ → bool) → TC A
+  -- Run the given type-Type-Checker action and return the first component. Resets to
+  -- the old type-Type-Checker state if the second component is 'false', or keep the
+  -- new type-Type-Checker state if it is 'true'.
+  run-speculative :
+    {l : Level} {A : UU l} → type-Type-Checker (A × bool) → type-Type-Checker A
 
-  -- Get a list of all possible instance candidates for the given meta
-  -- variable (it does not have to be an instance meta).
-  getInstances : Meta → TC (list Term)
+  -- Get a list of all possible instance candidates for the given metavariable
+  -- variable (it does not have to be an instance metavariable).
+  get-instances :
+    Metavariable-Agda → type-Type-Checker (list Term-Agda)
 
-  declareData : Name → ℕ → Term → TC unit
-  defineData : Name → list (Σ Name (λ _ → Term)) → TC unit
+  declare-data :
+    Name-Agda → ℕ → Term-Agda → type-Type-Checker unit
+  define-data :
+    Name-Agda →
+    list (Name-Agda × Quantity-Argument-Agda × Term-Agda) →
+    type-Type-Checker unit
 ```
 
-<details><summary>Bindings</summary>
+## Bindings
 
 ```agda
-{-# BUILTIN AGDAERRORPART ErrorPart #-}
-{-# BUILTIN AGDAERRORPARTSTRING strErr #-}
-{-# BUILTIN AGDAERRORPARTTERM termErr #-}
-{-# BUILTIN AGDAERRORPARTPATT pattErr #-}
-{-# BUILTIN AGDAERRORPARTNAME nameErr #-}
+{-# BUILTIN AGDAERRORPART Error-Part #-}
+{-# BUILTIN AGDAERRORPARTSTRING string-Error-Part #-}
+{-# BUILTIN AGDAERRORPARTTERM term-Error-Part #-}
+{-# BUILTIN AGDAERRORPARTPATT pattern-Error-Part #-}
+{-# BUILTIN AGDAERRORPARTNAME name-Error-Part #-}
 
-{-# BUILTIN AGDATCM TC #-}
-{-# BUILTIN AGDATCMRETURN returnTC #-}
-{-# BUILTIN AGDATCMBIND bindTC #-}
+{-# BUILTIN AGDATCM type-Type-Checker #-}
+{-# BUILTIN AGDATCMRETURN return-Type-Checker #-}
+{-# BUILTIN AGDATCMBIND bind-Type-Checker #-}
 {-# BUILTIN AGDATCMUNIFY unify #-}
-{-# BUILTIN AGDATCMTYPEERROR typeError #-}
-{-# BUILTIN AGDATCMINFERTYPE inferType #-}
-{-# BUILTIN AGDATCMCHECKTYPE checkType #-}
-{-# BUILTIN AGDATCMNORMALISE normalise #-}
+{-# BUILTIN AGDATCMTYPEERROR type-error #-}
+{-# BUILTIN AGDATCMINFERTYPE infer-type #-}
+{-# BUILTIN AGDATCMCHECKTYPE check-type #-}
+{-# BUILTIN AGDATCMNORMALISE normalize #-}
 {-# BUILTIN AGDATCMREDUCE reduce #-}
-{-# BUILTIN AGDATCMCATCHERROR catchTC #-}
-{-# BUILTIN AGDATCMQUOTETERM quoteTC #-}
-{-# BUILTIN AGDATCMUNQUOTETERM unquoteTC #-}
-{-# BUILTIN AGDATCMQUOTEOMEGATERM quoteωTC #-}
-{-# BUILTIN AGDATCMGETCONTEXT getContext #-}
-{-# BUILTIN AGDATCMEXTENDCONTEXT extendContext #-}
-{-# BUILTIN AGDATCMINCONTEXT inContext #-}
-{-# BUILTIN AGDATCMFRESHNAME freshName #-}
-{-# BUILTIN AGDATCMDECLAREDEF declareDef #-}
-{-# BUILTIN AGDATCMDECLAREPOSTULATE declarePostulate #-}
-{-# BUILTIN AGDATCMDEFINEFUN defineFun #-}
-{-# BUILTIN AGDATCMGETTYPE getType #-}
-{-# BUILTIN AGDATCMGETDEFINITION getDefinition #-}
-{-# BUILTIN AGDATCMBLOCKONMETA blockOnMeta #-}
-{-# BUILTIN AGDATCMCOMMIT commitTC #-}
-{-# BUILTIN AGDATCMISMACRO isMacro #-}
-{-# BUILTIN AGDATCMWITHNORMALISATION withNormalisation #-}
-{-# BUILTIN AGDATCMFORMATERRORPARTS formatErrorParts #-}
-{-# BUILTIN AGDATCMDEBUGPRINT debugPrint #-}
--- {-# BUILTIN AGDATCMWITHRECONSTRUCTED withReconstructed #-}
--- {-# BUILTIN AGDATCMWITHEXPANDLAST withExpandLast #-}
--- {-# BUILTIN AGDATCMWITHREDUCEDEFS withReduceDefs #-}
--- {-# BUILTIN AGDATCMASKNORMALISATION askNormalisation #-}
--- {-# BUILTIN AGDATCMASKRECONSTRUCTED askReconstructed #-}
--- {-# BUILTIN AGDATCMASKEXPANDLAST askExpandLast #-}
--- {-# BUILTIN AGDATCMASKREDUCEDEFS askReduceDefs #-}
-{-# BUILTIN AGDATCMNOCONSTRAINTS noConstraints #-}
-{-# BUILTIN AGDATCMRUNSPECULATIVE runSpeculative #-}
-{-# BUILTIN AGDATCMGETINSTANCES getInstances #-}
-{-# BUILTIN AGDATCMDECLAREDATA declareData #-}
-{-# BUILTIN AGDATCMDEFINEDATA defineData #-}
+{-# BUILTIN AGDATCMCATCHERROR catch-Type-Checker #-}
+{-# BUILTIN AGDATCMQUOTETERM quote-Type-Checker #-}
+{-# BUILTIN AGDATCMUNQUOTETERM unquote-Type-Checker #-}
+{-# BUILTIN AGDATCMQUOTEOMEGATERM quoteω-Type-Checker #-}
+{-# BUILTIN AGDATCMGETCONTEXT get-context #-}
+{-# BUILTIN AGDATCMEXTENDCONTEXT extend-context #-}
+{-# BUILTIN AGDATCMINCONTEXT in-context #-}
+{-# BUILTIN AGDATCMFRESHNAME fresh-name #-}
+{-# BUILTIN AGDATCMDECLAREDEF declare-definition #-}
+{-# BUILTIN AGDATCMDECLAREPOSTULATE declare-postulate #-}
+{-# BUILTIN AGDATCMDEFINEFUN define-function #-}
+{-# BUILTIN AGDATCMGETTYPE get-type #-}
+{-# BUILTIN AGDATCMGETDEFINITION get-definition #-}
+{-# BUILTIN AGDATCMBLOCK block-Type-Checker #-}
+{-# BUILTIN AGDATCMCOMMIT commit-Type-Checker #-}
+{-# BUILTIN AGDATCMISMACRO is-macro #-}
+{-# BUILTIN AGDATCMWITHNORMALISATION with-normalization #-}
+{-# BUILTIN AGDATCMFORMATERRORPARTS format-error #-}
+{-# BUILTIN AGDATCMDEBUGPRINT debug-print #-}
+{-# BUILTIN AGDATCMWITHRECONSTRUCTED with-reconstructed #-}
+{-# BUILTIN AGDATCMWITHEXPANDLAST with-expand-last #-}
+{-# BUILTIN AGDATCMWITHREDUCEDEFS with-reduce-definitions #-}
+{-# BUILTIN AGDATCMASKNORMALISATION ask-normalization #-}
+{-# BUILTIN AGDATCMASKRECONSTRUCTED ask-reconstructed #-}
+{-# BUILTIN AGDATCMASKEXPANDLAST ask-expand-last #-}
+{-# BUILTIN AGDATCMASKREDUCEDEFS ask-reduce-definitions #-}
+{-# BUILTIN AGDATCMNOCONSTRAINTS no-constraints #-}
+{-# BUILTIN AGDATCMRUNSPECULATIVE run-speculative #-}
+{-# BUILTIN AGDATCMGETINSTANCES get-instances #-}
+{-# BUILTIN AGDATCMDECLAREDATA declare-data #-}
+{-# BUILTIN AGDATCMDEFINEDATA define-data #-}
 ```
-
-</details>
 
 ## Monad syntax
 
 ```agda
 infixl 15 _<|>_
-_<|>_ : {l : Level} {A : UU l} → TC A → TC A → TC A
-_<|>_ = catchTC
+_<|>_ :
+  {l : Level} {A : UU l} →
+  type-Type-Checker A → type-Type-Checker A → type-Type-Checker A
+_<|>_ = catch-Type-Checker
 
 infixl 10 _>>=_ _>>_ _<&>_
 _>>=_ :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  TC A → (A → TC B) → TC B
-_>>=_ = bindTC
+  type-Type-Checker A → (A → type-Type-Checker B) → type-Type-Checker B
+_>>=_ = bind-Type-Checker
 
 _>>_ :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  TC A → TC B → TC B
-xs >> ys = bindTC xs (λ _ → ys)
+  type-Type-Checker A → type-Type-Checker B → type-Type-Checker B
+xs >> ys = bind-Type-Checker xs (λ _ → ys)
 
 _<&>_ :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  TC A → (A → B) → TC B
-xs <&> f = bindTC xs (λ x → returnTC (f x))
+  type-Type-Checker A → (A → B) → type-Type-Checker B
+xs <&> f = bind-Type-Checker xs (λ x → return-Type-Checker (f x))
 ```
 
 ## Examples
@@ -210,10 +255,10 @@ adapted from alhassy's
 
 ```agda
 private
-  numTCM : Term → TC unit
-  numTCM h = unify (quoteTerm 314) h
+  num-Type-Checker : Term-Agda → type-Type-Checker unit
+  num-Type-Checker h = unify (quoteTerm 314) h
 
-  _ : unquote numTCM ＝ 314
+  _ : unquote num-Type-Checker ＝ 314
   _ = refl
 ```
 
@@ -221,10 +266,10 @@ private
 
 ```agda
   macro
-    numTCM' : Term → TC unit
-    numTCM' h = unify (quoteTerm 1) h
+    num-Type-Checker' : Term-Agda → type-Type-Checker unit
+    num-Type-Checker' h = unify (quoteTerm 1) h
 
-  _ : numTCM' ＝ 1
+  _ : num-Type-Checker' ＝ 1
   _ = refl
 ```
 
@@ -232,9 +277,9 @@ private
 
 ```agda
   macro
-    swap-add : Term → Term → TC unit
-    swap-add (def (quote add-ℕ) (cons a (cons b nil))) hole =
-      unify hole (def (quote add-ℕ) (cons b (cons a nil)))
+    swap-add : Term-Agda → Term-Agda → type-Type-Checker unit
+    swap-add (definition-Term-Agda (quote add-ℕ) (cons a (cons b nil))) hole =
+      unify hole (definition-Term-Agda (quote add-ℕ) (cons b (cons a nil)))
     {-# CATCHALL #-}
     swap-add v hole = unify hole v
 
@@ -255,22 +300,35 @@ example was addapted from
     infixr 10 _∷_
     pattern _∷_ x xs = cons x xs
 
-  ＝-type-info : Term → TC (Arg Term × (Arg Term × (Term × Term)))
+  ＝-type-info :
+    Term-Agda →
+    type-Type-Checker
+      ( Argument-Agda Term-Agda ×
+        ( Argument-Agda Term-Agda ×
+          ( Term-Agda × Term-Agda)))
   ＝-type-info
-    ( def (quote _＝_) (𝓁 ∷ 𝒯 ∷ (arg _ l) ∷ (arg _ r) ∷ nil)) =
-    returnTC (𝓁 , 𝒯 , l , r)
-  ＝-type-info _ = typeError (unit-list (strErr "Term is not a ＝-type."))
+    ( definition-Term-Agda
+      ( quote _＝_)
+      ( 𝓁 ∷ 𝒯 ∷ (cons-Argument-Agda _ l) ∷ (cons-Argument-Agda _ r) ∷ nil)) =
+    return-Type-Checker (𝓁 , 𝒯 , l , r)
+  ＝-type-info _ =
+    type-error (unit-list (string-Error-Part "Term-Agda is not a ＝-type."))
 
   macro
-    try-path! : Term → Term → TC unit
+    try-path! : Term-Agda → Term-Agda → type-Type-Checker unit
     try-path! p goal =
       ( unify goal p) <|>
       ( do
-        p-type ← inferType p
+        p-type ← infer-type p
         𝓁 , 𝒯 , l , r ← ＝-type-info p-type
         unify goal
-          ( def (quote inv)
-            ( 𝓁 ∷ 𝒯 ∷ hidden-Arg l ∷ hidden-Arg r ∷ visible-Arg p ∷ nil)))
+          ( definition-Term-Agda (quote inv)
+            ( 𝓁 ∷
+              𝒯 ∷
+              hidden-Argument-Agda l ∷
+              hidden-Argument-Agda r ∷
+              visible-Argument-Agda p ∷
+              nil)))
 
   module _ (a b : ℕ) (p : a ＝ b) where
     ex3 : Id a b
@@ -280,19 +338,19 @@ example was addapted from
     ex4 = try-path! p
 ```
 
-### Getting the lhs and rhs of a goal
+### Getting the left-hand side and right-hand side of a goal
 
 ```agda
-boundary-TCM : Term → TC (Term × Term)
-boundary-TCM
-  ( def
+boundary-Type-Checker : Term-Agda → type-Type-Checker (Term-Agda × Term-Agda)
+boundary-Type-Checker
+  ( definition-Term-Agda
     ( quote Id)
-    ( 𝓁 ∷ 𝒯 ∷ arg _ l ∷ arg _ r ∷ nil)) =
-  returnTC (l , r)
-boundary-TCM t =
-  typeError
-    ( strErr "The term\n " ∷
-      termErr t ∷
-      strErr "\nis not a ＝-type." ∷
+    ( 𝓁 ∷ 𝒯 ∷ cons-Argument-Agda _ l ∷ cons-Argument-Agda _ r ∷ nil)) =
+  return-Type-Checker (l , r)
+boundary-Type-Checker t =
+  type-error
+    ( string-Error-Part "The term\n " ∷
+      term-Error-Part t ∷
+      string-Error-Part "\nis not a ＝-type." ∷
       nil)
 ```

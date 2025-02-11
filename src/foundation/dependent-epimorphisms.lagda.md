@@ -7,18 +7,19 @@ module foundation.dependent-epimorphisms where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.function-types
+open import foundation.epimorphisms
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
+open import foundation-core.precomposition-dependent-functions
 ```
 
 </details>
 
 ## Idea
 
-A **dependent epimorphism** is a map `f : A → B` such that the precomposition
-function
+A **dependent epimorphism** is a map `f : A → B` such that the
+[precomposition function](foundation.precomposition-dependent-functions.md)
 
 ```text
   - ∘ f : ((b : B) → C b) → ((a : A) → C (f a))
@@ -46,6 +47,24 @@ module _
   is-dependent-epimorphism f =
     {l : Level} (C : B → UU l) → is-emb (precomp-Π f C)
 ```
+
+## Properties
+
+### Every dependent epimorphism is an epimorphism
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-epimorphism-is-dependent-epimorphism :
+    is-dependent-epimorphism f → is-epimorphism f
+  is-epimorphism-is-dependent-epimorphism e X = e (λ _ → X)
+```
+
+The converse of the above, that every epimorphism is a dependent epimorphism,
+can be found in the file on
+[acyclic maps](synthetic-homotopy-theory.acyclic-maps.md).
 
 ## See also
 

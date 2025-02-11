@@ -50,7 +50,7 @@ transported ring structure.
 ```agda
 module _
   {l1 l2 : Level} (A : Commutative-Ring l1) (B : Ab l2)
-  (f : type-iso-Ab (ab-Commutative-Ring A) B)
+  (f : iso-Ab (ab-Commutative-Ring A) B)
   where
 
   ring-transport-commutative-ring-structure-iso-Ab : Ring l2

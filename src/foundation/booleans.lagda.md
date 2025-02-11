@@ -7,7 +7,11 @@ module foundation.booleans where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.decidable-equality
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.discrete-types
+open import foundation.involutions
 open import foundation.negated-equality
 open import foundation.raising-universe-levels
 open import foundation.unit-type
@@ -23,6 +27,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
+open import foundation-core.sections
 open import foundation-core.sets
 
 open import univalent-combinatorics.finite-types
@@ -49,6 +54,40 @@ data bool : UU lzero where
 {-# BUILTIN BOOL bool #-}
 {-# BUILTIN TRUE true #-}
 {-# BUILTIN FALSE false #-}
+```
+
+### The induction principle of the booleans
+
+```agda
+module _
+  {l : Level} (P : bool → UU l)
+  where
+
+  ind-bool : P true → P false → (b : bool) → P b
+  ind-bool pt pf true = pt
+  ind-bool pt pf false = pf
+```
+
+### The recursion principle of the booleans
+
+```agda
+module _
+  {l : Level} {P : UU l}
+  where
+
+  rec-bool : P → P → bool → P
+  rec-bool = ind-bool (λ _ → P)
+```
+
+### The `if_then_else` function
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  if_then_else_ : bool → A → A → A
+  if b then x else y = rec-bool x y b
 ```
 
 ### Raising universe levels of the booleans
@@ -100,9 +139,11 @@ eq-Eq-bool :
 eq-Eq-bool {true} {true} star = refl
 eq-Eq-bool {false} {false} star = refl
 
-neq-false-true-bool :
-  false ≠ true
+neq-false-true-bool : false ≠ true
 neq-false-true-bool ()
+
+neq-true-false-bool : true ≠ false
+neq-true-false-bool ()
 ```
 
 ## Structure
@@ -155,8 +196,58 @@ abstract
       ( λ x y → eq-Eq-bool)
 
 bool-Set : Set lzero
-pr1 bool-Set = bool
-pr2 bool-Set = is-set-bool
+bool-Set = bool , is-set-bool
+```
+
+### The booleans have decidable equality
+
+```agda
+has-decidable-equality-bool : has-decidable-equality bool
+has-decidable-equality-bool true true = inl refl
+has-decidable-equality-bool true false = inr neq-true-false-bool
+has-decidable-equality-bool false true = inr neq-false-true-bool
+has-decidable-equality-bool false false = inl refl
+
+bool-Discrete-Type : Discrete-Type lzero
+bool-Discrete-Type = bool , has-decidable-equality-bool
+```
+
+### The "is true" predicate on booleans
+
+```agda
+is-true : bool → UU lzero
+is-true = _＝ true
+
+is-prop-is-true : (b : bool) → is-prop (is-true b)
+is-prop-is-true b = is-set-bool b true
+
+is-true-Prop : bool → Prop lzero
+is-true-Prop b = is-true b , is-prop-is-true b
+```
+
+### The "is false" predicate on booleans
+
+```agda
+is-false : bool → UU lzero
+is-false = _＝ false
+
+is-prop-is-false : (b : bool) → is-prop (is-false b)
+is-prop-is-false b = is-set-bool b false
+
+is-false-Prop : bool → Prop lzero
+is-false-Prop b = is-false b , is-prop-is-false b
+```
+
+### A boolean cannot be both true and false
+
+```agda
+not-is-false-is-true : (x : bool) → is-true x → ¬ (is-false x)
+not-is-false-is-true true t ()
+not-is-false-is-true false () f
+
+not-is-true-is-false : (x : bool) → is-false x → ¬ (is-true x)
+not-is-true-is-false true () f
+not-is-true-is-false false t ()
 ```
 
 ### The type of booleans is equivalent to `Fin 2`
@@ -171,12 +262,12 @@ Fin-two-ℕ-bool true = inl (inr star)
 Fin-two-ℕ-bool false = inr star
 
 abstract
-  is-retraction-Fin-two-ℕ-bool : (Fin-two-ℕ-bool ∘ bool-Fin-two-ℕ) ~ id
+  is-retraction-Fin-two-ℕ-bool : Fin-two-ℕ-bool ∘ bool-Fin-two-ℕ ~ id
   is-retraction-Fin-two-ℕ-bool (inl (inr star)) = refl
   is-retraction-Fin-two-ℕ-bool (inr star) = refl
 
 abstract
-  is-section-Fin-two-ℕ-bool : (bool-Fin-two-ℕ ∘ Fin-two-ℕ-bool) ~ id
+  is-section-Fin-two-ℕ-bool : bool-Fin-two-ℕ ∘ Fin-two-ℕ-bool ~ id
   is-section-Fin-two-ℕ-bool true = refl
   is-section-Fin-two-ℕ-bool false = refl
 
@@ -195,9 +286,16 @@ pr2 equiv-bool-Fin-two-ℕ =
 is-finite-bool : is-finite bool
 is-finite-bool = is-finite-equiv equiv-bool-Fin-two-ℕ (is-finite-Fin 2)
 
-bool-𝔽 : 𝔽 lzero
-pr1 bool-𝔽 = bool
-pr2 bool-𝔽 = is-finite-bool
+number-of-elements-bool : number-of-elements-is-finite is-finite-bool ＝ 2
+number-of-elements-bool =
+  inv
+    ( compute-number-of-elements-is-finite
+      ( 2 , equiv-bool-Fin-two-ℕ)
+      ( is-finite-bool))
+
+bool-Finite-Type : Finite-Type lzero
+pr1 bool-Finite-Type = bool
+pr2 bool-Finite-Type = is-finite-bool
 ```
 
 ### Boolean negation has no fixed points
@@ -206,14 +304,17 @@ pr2 bool-𝔽 = is-finite-bool
 neq-neg-bool : (b : bool) → b ≠ neg-bool b
 neq-neg-bool true ()
 neq-neg-bool false ()
+
+neq-neg-bool' : (b : bool) → neg-bool b ≠ b
+neq-neg-bool' b = neq-neg-bool b ∘ inv
 ```
 
 ### Boolean negation is an involution
 
 ```agda
-neg-neg-bool : (neg-bool ∘ neg-bool) ~ id
-neg-neg-bool true = refl
-neg-neg-bool false = refl
+is-involution-neg-bool : is-involution neg-bool
+is-involution-neg-bool true = refl
+is-involution-neg-bool false = refl
 ```
 
 ### Boolean negation is an equivalence
@@ -221,36 +322,23 @@ neg-neg-bool false = refl
 ```agda
 abstract
   is-equiv-neg-bool : is-equiv neg-bool
-  pr1 (pr1 is-equiv-neg-bool) = neg-bool
-  pr2 (pr1 is-equiv-neg-bool) = neg-neg-bool
-  pr1 (pr2 is-equiv-neg-bool) = neg-bool
-  pr2 (pr2 is-equiv-neg-bool) = neg-neg-bool
+  is-equiv-neg-bool = is-equiv-is-involution is-involution-neg-bool
 
 equiv-neg-bool : bool ≃ bool
 pr1 equiv-neg-bool = neg-bool
 pr2 equiv-neg-bool = is-equiv-neg-bool
 ```
 
-### The constant function `const bool bool b` is not an equivalence
+### The constant function `const bool b` is not an equivalence
 
 ```agda
 abstract
-  not-equiv-const :
-    (b : bool) → ¬ (is-equiv (const bool bool b))
-  not-equiv-const true (pair (pair g G) (pair h H)) =
-    neq-false-true-bool (inv (G false))
-  not-equiv-const false (pair (pair g G) (pair h H)) =
-    neq-false-true-bool (G true)
-```
-
-### The constant function `const bool bool b` is injective
-
-```agda
-abstract
-  is-injective-const-true : is-injective (const unit bool true)
-  is-injective-const-true {star} {star} p = refl
+  no-section-const-bool : (b : bool) → ¬ (section (const bool b))
+  no-section-const-bool true (g , G) = neq-true-false-bool (G false)
+  no-section-const-bool false (g , G) = neq-false-true-bool (G true)
 
 abstract
-  is-injective-const-false : is-injective (const unit bool false)
-  is-injective-const-false {star} {star} p = refl
+  is-not-equiv-const-bool :
+    (b : bool) → ¬ (is-equiv (const bool b))
+  is-not-equiv-const-bool b e = no-section-const-bool b (section-is-equiv e)
 ```

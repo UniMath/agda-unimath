@@ -8,18 +8,19 @@ module elementary-number-theory.based-strong-induction-natural-numbers where
 
 ```agda
 open import elementary-number-theory.based-induction-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.universal-property-contractible-types
 open import foundation.universe-levels
 ```
 

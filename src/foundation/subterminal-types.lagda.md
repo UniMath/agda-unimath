@@ -23,8 +23,10 @@ open import foundation-core.propositions
 
 ## Idea
 
-A type is said to be subterminal if it embeds into the unit type. A type is
-subterminal if and only if it is a proposition.
+A type is said to be {{#concept "subterminal" Agda=is-subterminal}} if it
+[embeds](foundation-core.embeddings.md) into the
+[unit type](foundation.unit-type.md). A type is subterminal if and only if it is
+a [proposition](foundation-core.propositions.md).
 
 ## Definition
 
@@ -34,7 +36,7 @@ module _
   where
 
   is-subterminal : UU l
-  is-subterminal = is-emb (terminal-map {A = A})
+  is-subterminal = is-emb (terminal-map A)
 ```
 
 ## Properties
@@ -68,9 +70,9 @@ module _
     is-prop-is-subterminal H x y =
       is-contr-is-equiv
         ( star ＝ star)
-        ( ap terminal-map)
+        ( ap (terminal-map A))
         ( H x y)
-        ( is-prop-is-contr is-contr-unit star star)
+        ( is-prop-unit star star)
 
   abstract
     eq-is-subterminal : is-subterminal A → all-elements-equal A
@@ -82,3 +84,10 @@ module _
     is-proof-irrelevant-is-subterminal H =
       is-proof-irrelevant-all-elements-equal (eq-is-subterminal H)
 ```
+
+## Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}

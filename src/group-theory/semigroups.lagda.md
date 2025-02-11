@@ -19,15 +19,16 @@ open import foundation.universe-levels
 
 ## Idea
 
-**Semigroups** are [sets](foundation-core.sets.md) equipped with an associative
-binary operation.
+{{#concept "Semigroups" WDID=Q207348 WD="semigroup" Agda=Semigroup}} are
+[sets](foundation-core.sets.md) [equipped](foundation.structure.md) with an
+associative binary operation.
 
-## Definition
+## Definitions
 
 ```agda
 has-associative-mul : {l : Level} (X : UU l) → UU l
 has-associative-mul X =
-  Σ (X → X → X) (λ μ → (x y z : X) → Id (μ (μ x y) z) (μ x (μ y z)))
+  Σ (X → X → X) (λ μ → (x y z : X) → μ (μ x y) z ＝ μ x (μ y z))
 
 has-associative-mul-Set :
   {l : Level} (X : Set l) → UU l
@@ -78,8 +79,8 @@ module _
     mul-Semigroup y (mul-Semigroup x z)
   left-swap-mul-Semigroup H =
     ( inv (associative-mul-Semigroup _ _ _)) ∙
-    ( ( ap (mul-Semigroup' _) H) ∙
-      ( associative-mul-Semigroup _ _ _))
+    ( ap (mul-Semigroup' _) H) ∙
+    ( associative-mul-Semigroup _ _ _)
 
   right-swap-mul-Semigroup :
     {x y z : type-Semigroup} → mul-Semigroup y z ＝ mul-Semigroup z y →
@@ -87,8 +88,8 @@ module _
     mul-Semigroup (mul-Semigroup x z) y
   right-swap-mul-Semigroup H =
     ( associative-mul-Semigroup _ _ _) ∙
-    ( ( ap (mul-Semigroup _) H) ∙
-      ( inv (associative-mul-Semigroup _ _ _)))
+    ( ap (mul-Semigroup _) H) ∙
+    ( inv (associative-mul-Semigroup _ _ _))
 
   interchange-mul-mul-Semigroup :
     {x y z w : type-Semigroup} → mul-Semigroup y z ＝ mul-Semigroup z y →
@@ -96,11 +97,11 @@ module _
     mul-Semigroup (mul-Semigroup x z) (mul-Semigroup y w)
   interchange-mul-mul-Semigroup H =
     ( associative-mul-Semigroup _ _ _) ∙
-    ( ( ap (mul-Semigroup _) (left-swap-mul-Semigroup H)) ∙
-      ( inv (associative-mul-Semigroup _ _ _)))
+    ( ap (mul-Semigroup _) (left-swap-mul-Semigroup H)) ∙
+    ( inv (associative-mul-Semigroup _ _ _))
 ```
 
-### Equip a type with the structure of a semigroup
+### The structure of a semigroup
 
 ```agda
 structure-semigroup :
@@ -108,8 +109,8 @@ structure-semigroup :
 structure-semigroup X =
   Σ (is-set X) (λ p → has-associative-mul-Set (X , p))
 
-compute-structure-semigroup :
+semigroup-structure-semigroup :
   {l1 : Level} → (X : UU l1) → structure-semigroup X → Semigroup l1
-pr1 (compute-structure-semigroup X (s , g)) = X , s
-pr2 (compute-structure-semigroup X (s , g)) = g
+pr1 (semigroup-structure-semigroup X (s , g)) = X , s
+pr2 (semigroup-structure-semigroup X (s , g)) = g
 ```

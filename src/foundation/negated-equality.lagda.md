@@ -10,11 +10,11 @@ module foundation.negated-equality where
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.negation
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.function-extensionality
 open import foundation-core.identity-types
 open import foundation-core.propositions
 ```
@@ -102,8 +102,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  nonequal-prod-pr2 : (u v : A × B) → pr2 u ≠ pr2 v → u ≠ v
-  nonequal-prod-pr2 u v = map-neg (ap pr2)
+  nonequal-product-pr2 : (u v : A × B) → pr2 u ≠ pr2 v → u ≠ v
+  nonequal-product-pr2 u v = map-neg (ap pr2)
 ```
 
 ### If there is a reflexive relation that does not relate `a` and `b`, then they are nonequal

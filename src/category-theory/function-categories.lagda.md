@@ -8,6 +8,7 @@ module category-theory.function-categories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.dependent-products-of-categories
 open import category-theory.isomorphisms-in-categories
 open import category-theory.precategories
@@ -15,6 +16,7 @@ open import category-theory.precategories
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -67,15 +69,26 @@ module _
     (h : hom-function-Category z w)
     (g : hom-function-Category y z)
     (f : hom-function-Category x y) →
-    ( comp-hom-function-Category (comp-hom-function-Category h g) f) ＝
-    ( comp-hom-function-Category h (comp-hom-function-Category g f))
+    comp-hom-function-Category (comp-hom-function-Category h g) f ＝
+    comp-hom-function-Category h (comp-hom-function-Category g f)
   associative-comp-hom-function-Category =
     associative-comp-hom-Category function-Category
 
-  associative-composition-structure-function-Category :
-    associative-composition-structure-Set hom-set-function-Category
-  associative-composition-structure-function-Category =
-    associative-composition-structure-Category function-Category
+  involutive-eq-associative-comp-hom-function-Category :
+    {x y z w : obj-function-Category}
+    (h : hom-function-Category z w)
+    (g : hom-function-Category y z)
+    (f : hom-function-Category x y) →
+    comp-hom-function-Category (comp-hom-function-Category h g) f ＝ⁱ
+    comp-hom-function-Category h (comp-hom-function-Category g f)
+  involutive-eq-associative-comp-hom-function-Category =
+    involutive-eq-associative-comp-hom-Category function-Category
+
+  associative-composition-operation-function-Category :
+    associative-composition-operation-binary-family-Set
+      hom-set-function-Category
+  associative-composition-operation-function-Category =
+    associative-composition-operation-Category function-Category
 
   id-hom-function-Category :
     {x : obj-function-Category} → hom-function-Category x x
@@ -95,11 +108,11 @@ module _
     right-unit-law-comp-hom-Category function-Category
 
   is-unital-function-Category :
-    is-unital-composition-structure-Set
+    is-unital-composition-operation-binary-family-Set
       hom-set-function-Category
-      associative-composition-structure-function-Category
+      comp-hom-function-Category
   is-unital-function-Category =
-    is-unital-composition-structure-Category function-Category
+    is-unital-composition-operation-Category function-Category
 
   extensionality-obj-function-Category :
     (x y : obj-Category function-Category) →

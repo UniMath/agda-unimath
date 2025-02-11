@@ -50,7 +50,7 @@ module _
           ( λ b →
             function-Prop
               ( is-in-ideal-Commutative-Ring R I (mul-Commutative-Ring R a b))
-              ( disj-Prop
+              ( disjunction-Prop
                 ( subset-ideal-Commutative-Ring R I a)
                 ( subset-ideal-Commutative-Ring R I b))))
 
@@ -164,11 +164,10 @@ is-radical-prime-ideal-Commutative-Ring R P x zero-ℕ p =
     ( p)
     ( x)
 is-radical-prime-ideal-Commutative-Ring R P x (succ-ℕ n) p =
-  elim-disj-Prop
-    ( subset-prime-ideal-Commutative-Ring R P (power-Commutative-Ring R n x))
+  elim-disjunction
     ( subset-prime-ideal-Commutative-Ring R P x)
-    ( subset-prime-ideal-Commutative-Ring R P x)
-    ( is-radical-prime-ideal-Commutative-Ring R P x n , id)
+    ( is-radical-prime-ideal-Commutative-Ring R P x n)
+    ( id)
     ( is-prime-ideal-ideal-prime-ideal-Commutative-Ring R P
       ( power-Commutative-Ring R n x)
       ( x)

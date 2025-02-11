@@ -85,12 +85,7 @@ module _
       ( right-unit-law-Σ-is-contr is-discrete ∘e
         matching-correspondence-Relaxed-Σ-Decomposition D))
   pr1 (pr2 equiv-discrete-is-discrete-Relaxed-Σ-Decomposition) x =
-    ( map-equiv (compute-raise-unit l4) ∘ terminal-map ,
-      is-equiv-comp
-        ( map-equiv (compute-raise-unit l4))
-        ( terminal-map)
-        ( is-equiv-terminal-map-is-contr (is-discrete x))
-        ( is-equiv-map-equiv ( compute-raise-unit l4)))
+    equiv-raise-unit-is-contr (is-discrete x)
   pr2 (pr2 equiv-discrete-is-discrete-Relaxed-Σ-Decomposition) a =
     eq-pair-Σ
       ( ap ( λ f → map-equiv f a)

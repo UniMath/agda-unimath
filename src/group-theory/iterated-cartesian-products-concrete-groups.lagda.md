@@ -224,44 +224,44 @@ module _
   right-inverse-law-mul-iterated-product-Concrete-Group =
     right-inverse-law-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 
-  abstract-group-iterated-product-Concrete-Group : Group l
-  pr1 (pr1 abstract-group-iterated-product-Concrete-Group) =
+  group-iterated-product-Concrete-Group : Group l
+  pr1 (pr1 group-iterated-product-Concrete-Group) =
     set-iterated-product-Concrete-Group
-  pr1 (pr2 (pr1 abstract-group-iterated-product-Concrete-Group)) =
+  pr1 (pr2 (pr1 group-iterated-product-Concrete-Group)) =
     mul-iterated-product-Concrete-Group
-  pr2 (pr2 (pr1 abstract-group-iterated-product-Concrete-Group)) =
+  pr2 (pr2 (pr1 group-iterated-product-Concrete-Group)) =
     associative-mul-iterated-product-Concrete-Group
-  pr1 (pr1 (pr2 abstract-group-iterated-product-Concrete-Group)) =
+  pr1 (pr1 (pr2 group-iterated-product-Concrete-Group)) =
     unit-iterated-product-Concrete-Group
-  pr1 (pr2 (pr1 (pr2 abstract-group-iterated-product-Concrete-Group))) =
+  pr1 (pr2 (pr1 (pr2 group-iterated-product-Concrete-Group))) =
     left-unit-law-mul-iterated-product-Concrete-Group
-  pr2 (pr2 (pr1 (pr2 abstract-group-iterated-product-Concrete-Group))) =
+  pr2 (pr2 (pr1 (pr2 group-iterated-product-Concrete-Group))) =
     right-unit-law-mul-iterated-product-Concrete-Group
-  pr1 (pr2 (pr2 abstract-group-iterated-product-Concrete-Group)) =
+  pr1 (pr2 (pr2 group-iterated-product-Concrete-Group)) =
     inv-iterated-product-Concrete-Group
-  pr1 (pr2 (pr2 (pr2 abstract-group-iterated-product-Concrete-Group))) =
+  pr1 (pr2 (pr2 (pr2 group-iterated-product-Concrete-Group))) =
     left-inverse-law-mul-iterated-product-Concrete-Group
-  pr2 (pr2 (pr2 (pr2 abstract-group-iterated-product-Concrete-Group))) =
+  pr2 (pr2 (pr2 (pr2 group-iterated-product-Concrete-Group))) =
     right-inverse-law-mul-iterated-product-Concrete-Group
 
-  op-abstract-group-iterated-product-Concrete-Group : Group l
-  pr1 (pr1 op-abstract-group-iterated-product-Concrete-Group) =
+  op-group-iterated-product-Concrete-Group : Group l
+  pr1 (pr1 op-group-iterated-product-Concrete-Group) =
     set-iterated-product-Concrete-Group
-  pr1 (pr2 (pr1 op-abstract-group-iterated-product-Concrete-Group)) =
+  pr1 (pr2 (pr1 op-group-iterated-product-Concrete-Group)) =
     mul-iterated-product-Concrete-Group'
-  pr2 (pr2 (pr1 op-abstract-group-iterated-product-Concrete-Group)) x y z =
+  pr2 (pr2 (pr1 op-group-iterated-product-Concrete-Group)) x y z =
     inv (associative-mul-iterated-product-Concrete-Group z y x)
-  pr1 (pr1 (pr2 op-abstract-group-iterated-product-Concrete-Group)) =
+  pr1 (pr1 (pr2 op-group-iterated-product-Concrete-Group)) =
     unit-iterated-product-Concrete-Group
-  pr1 (pr2 (pr1 (pr2 op-abstract-group-iterated-product-Concrete-Group))) =
+  pr1 (pr2 (pr1 (pr2 op-group-iterated-product-Concrete-Group))) =
     right-unit-law-mul-iterated-product-Concrete-Group
-  pr2 (pr2 (pr1 (pr2 op-abstract-group-iterated-product-Concrete-Group))) =
+  pr2 (pr2 (pr1 (pr2 op-group-iterated-product-Concrete-Group))) =
     left-unit-law-mul-iterated-product-Concrete-Group
-  pr1 (pr2 (pr2 op-abstract-group-iterated-product-Concrete-Group)) =
+  pr1 (pr2 (pr2 op-group-iterated-product-Concrete-Group)) =
     inv-iterated-product-Concrete-Group
-  pr1 (pr2 (pr2 (pr2 op-abstract-group-iterated-product-Concrete-Group))) =
+  pr1 (pr2 (pr2 (pr2 op-group-iterated-product-Concrete-Group))) =
     right-inverse-law-mul-iterated-product-Concrete-Group
-  pr2 (pr2 (pr2 (pr2 op-abstract-group-iterated-product-Concrete-Group))) =
+  pr2 (pr2 (pr2 (pr2 op-group-iterated-product-Concrete-Group))) =
     left-inverse-law-mul-iterated-product-Concrete-Group
 ```
 
@@ -278,7 +278,7 @@ equiv-type-Concrete-group-iterated-product-Concrete-Group zero-ℕ G =
         ( is-set-is-contr is-contr-raise-unit raise-star raise-star) refl)
     is-contr-raise-unit
 equiv-type-Concrete-group-iterated-product-Concrete-Group (succ-ℕ n) G =
-  equiv-prod
+  equiv-product
     ( id-equiv)
     ( equiv-type-Concrete-group-iterated-product-Concrete-Group n (G ∘ inl)) ∘e
   equiv-type-Concrete-Group-product-Concrete-Group

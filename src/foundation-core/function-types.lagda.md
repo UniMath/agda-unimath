@@ -24,6 +24,9 @@ Functions are primitive in Agda. Here we construct some basic functions
 id : {l : Level} {A : UU l} → A → A
 id a = a
 
+id' : {l : Level} (A : UU l) → A → A
+id' A = id
+
 idω : {A : UUω} → A → A
 idω a = a
 ```
@@ -51,29 +54,9 @@ ev-point' :
 ev-point' a f = f a
 ```
 
-### Precomposition functions
-
-```agda
-precomp-Π :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3) →
-  ((b : B) → C b) → ((a : A) → C (f a))
-precomp-Π f C h a = h (f a)
-
-precomp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU l3) →
-  (B → C) → (A → C)
-precomp f C = precomp-Π f (λ b → C)
-```
-
 ### Postcomposition functions
 
 ```agda
-postcomp :
-  {l1 l2 l3 : Level}
-  {X : UU l1} {Y : UU l2} (A : UU l3) →
-  (X → Y) → (A → X) → (A → Y)
-postcomp A f h = f ∘ h
-
 map-Π :
   {l1 l2 l3 : Level}
   {I : UU l1} {A : I → UU l2} {B : I → UU l3}
@@ -90,4 +73,21 @@ map-Π' :
   ((j : J) → A (α j)) →
   ((j : J) → B (α j))
 map-Π' α f = map-Π (f ∘ α)
+
+map-implicit-Π :
+  {l1 l2 l3 : Level}
+  {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  (f : (i : I) → A i → B i) →
+  ({i : I} → A i) →
+  ({i : I} → B i)
+map-implicit-Π f h {i} = map-Π f (λ i → h {i}) i
 ```
+
+## See also
+
+- [Postcomposition](foundation.postcomposition-functions.md)
+- [Precomposition](foundation.precomposition-functions.md)
+
+### Table of files about function types, composition, and equivalences
+
+{{#include tables/composition.md}}

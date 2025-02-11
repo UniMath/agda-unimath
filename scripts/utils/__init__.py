@@ -32,13 +32,18 @@ def get_files_recursive(startpath):
 
 
 def get_subdirectories_recursive(startpath):
-    for root, dirs, files in os.walk(startpath):
-        for d in dirs:
-            try:
-                os.listdir(os.path.join(startpath, d))
-            except FileNotFoundError:
-                continue
-            yield d
+    # Get list of Git-tracked files
+    git_tracked_files = get_git_tracked_files()
+    rootlen = len(str(startpath)) + 1
+    # Filter out directories
+    subdirectories = set()
+    for path in git_tracked_files:
+        if startpath in path.parents:
+            relative_path = str(path.parent)[rootlen:]
+            if relative_path:
+                subdirectories.add(relative_path)
+
+    return map(str, subdirectories)
 
 
 def find_index(s: str, t: str) -> List[int]:
@@ -206,3 +211,34 @@ def is_agda_opening_or_closing_tag(line):
     """
     tag_match = agda_block_tag_regex.match(line)
     return bool(tag_match), tag_match and bool(tag_match.group(1))
+
+
+def get_git_tracked_files():
+    # Get list of Git-tracked files
+    git_output = subprocess.check_output(['git', 'ls-files'], text=True)
+    git_tracked_files = map(pathlib.Path, git_output.strip().split('\n'))
+    return git_tracked_files
+
+def get_git_last_modified(file_path):
+    try:
+        # Get the last commit date for the file
+        output = subprocess.check_output(
+            ['git', 'log', '-1', '--format=%at', file_path],
+            stderr=subprocess.DEVNULL
+        )
+        output_str = output.strip()
+        if output_str:
+            return int(output_str)
+        else:
+            # Output is empty, file may be untracked
+            return os.path.getmtime(file_path)
+    except subprocess.CalledProcessError:
+        # If the git command fails, fall back to filesystem modification time
+        return os.path.getmtime(file_path)
+
+def is_file_modified(file_path):
+    try:
+        subprocess.check_output(['git', 'diff', '--quiet', file_path], stderr=subprocess.DEVNULL)
+        return False
+    except subprocess.CalledProcessError:
+        return True

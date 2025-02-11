@@ -11,7 +11,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.powersets
@@ -206,7 +205,7 @@ module _
 
   is-closed-under-addition-ideal-subset-Ring :
     is-closed-under-addition-subset-Ring R subset-ideal-subset-Ring
-  is-closed-under-addition-ideal-subset-Ring x y H K =
+  is-closed-under-addition-ideal-subset-Ring {x} {y} H K =
     apply-universal-property-trunc-Prop H
       ( subset-ideal-subset-Ring (add-Ring R x y))
       ( λ H' →
@@ -259,7 +258,7 @@ module _
 
   is-closed-under-negatives-ideal-subset-Ring :
     is-closed-under-negatives-subset-Ring R subset-ideal-subset-Ring
-  is-closed-under-negatives-ideal-subset-Ring x H =
+  is-closed-under-negatives-ideal-subset-Ring {x} H =
     tr
       ( is-in-ideal-subset-Ring)
       ( mul-neg-one-Ring R x)
@@ -299,8 +298,6 @@ module _
   contains-formal-combinations-ideal-subset-Ring I H
     ( cons (r , (s , K) , t) c) =
     is-closed-under-addition-ideal-Ring R I
-      ( mul-Ring R (mul-Ring R r s) t)
-      ( ev-formal-combination-subset-Ring c)
       ( is-closed-under-right-multiplication-ideal-Ring R I
         ( mul-Ring R r s)
         ( t)
@@ -353,7 +350,7 @@ module _
         ( H))
 
   ideal-subset-hom-large-poset-Ring :
-    hom-set-Large-Poset
+    hom-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( powerset-Large-Poset (type-Ring A))
       ( ideal-Ring-Large-Poset A)
@@ -385,7 +382,7 @@ module _
 
   ideal-subset-galois-connection-Ring :
     galois-connection-Large-Poset
-      ( _⊔_ l1) id
+      ( _⊔_ l1) (λ l → l)
       ( powerset-Large-Poset (type-Ring A))
       ( ideal-Ring-Large-Poset A)
   lower-adjoint-galois-connection-Large-Poset
@@ -552,7 +549,7 @@ module _
   cases-forward-inclusion-idempotent-ideal-subset-Ring nil =
     contains-zero-ideal-Ring R I
   cases-forward-inclusion-idempotent-ideal-subset-Ring (cons (x , u , y) l) =
-    is-closed-under-addition-ideal-Ring R I _ _
+    is-closed-under-addition-ideal-Ring R I
       ( is-closed-under-right-multiplication-ideal-Ring R I _ _
         ( is-closed-under-left-multiplication-ideal-Ring R I _ _ (pr2 u)))
       ( cases-forward-inclusion-idempotent-ideal-subset-Ring l)

@@ -10,189 +10,225 @@ open import foundation-core.functoriality-dependent-pair-types public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospans
+open import foundation.dependent-homotopies
 open import foundation.dependent-pair-types
-open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.morphisms-arrows
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-triangles-of-maps
+open import foundation-core.contractible-maps
 open import foundation-core.dependent-identifications
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.pullbacks
+open import foundation-core.injective-maps
+open import foundation-core.propositional-maps
+open import foundation-core.transport-along-identifications
+open import foundation-core.truncated-maps
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
 ```
 
 </details>
 
 ## Properties
 
-### A family of squares over a pullback squares is a family of pullback squares if and only if the induced square of total spaces is a pullback square
+### The map `htpy-map-Σ` preserves homotopies
+
+Given a [homotopy](foundation.homotopies.md) `H : f ~ f'` and a family of
+[dependent homotopies](foundation.dependent-homotopies.md) `K a : g a ~ g' a`
+over `H`, expressed as
+[commuting triangles](foundation.commuting-triangles-of-maps.md)
+
+```text
+        g a
+   C a -----> D (f a)
+      \      /
+  g' a \    / tr D (H a)
+        ∨  ∨
+      D (f' a)         ,
+```
+
+we get a homotopy `htpy-map-Σ H K : map-Σ f g ~ map-Σ f' g'`.
+
+This assignment itself preserves homotopies: given `H` and `K` as above,
+`H' : f ~ f'` with `K' a : g a ~ g' a` over `H'`, we would like to express
+coherences between the pairs `H, H'` and `K, K'` which would ensure
+`htpy-map-Σ H K ~ htpy-map-Σ H' K'`. Because `H` and `H'` have the same type, we
+may require a homotopy `α : H ~ H'`, but `K` and `K'` are families of dependent
+homotopies over different homotopies, so their coherence is provided as a family
+of
+[commuting triangles of identifications](foundation.commuting-triangles-of-identifications.md)
+
+```text
+                      ap (λ p → tr D p (g a c)) (α a)
+  tr D (H a) (g a c) --------------------------------- tr D (H' a) (g a c)
+                     \                               /
+                        \                         /
+                           \                   /
+                      K a c   \             /   K' a c
+                                 \       /
+                                    \ /
+                                  g' a c        .
+```
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
-  {X : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
-  (PX : X → UU l5) {PA : A → UU l6} {PB : B → UU l7} {PC : C → UU l8}
-  {f : A → X} {g : B → X}
-  (f' : (a : A) → PA a → PX (f a)) (g' : (b : B) → PB b → PX (g b))
-  (c : cone f g C) (c' : cone-family PX f' g' c PC)
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} (D : B → UU l4)
+  {f f' : A → B} {H H' : f ~ f'}
+  {g : (a : A) → C a → D (f a)}
+  {g' : (a : A) → C a → D (f' a)}
+  {K : (a : A) → dependent-homotopy (λ _ → D) (λ _ → H a) (g a) (g' a)}
+  {K' : (a : A) → dependent-homotopy (λ _ → D) (λ _ → H' a) (g a) (g' a)}
   where
 
-  tot-cone-cone-family :
-    cone (map-Σ PX f f') (map-Σ PX g g') (Σ C PC)
-  pr1 tot-cone-cone-family =
-    map-Σ _ (vertical-map-cone f g c) (λ x → pr1 (c' x))
-  pr1 (pr2 tot-cone-cone-family) =
-    map-Σ _ (horizontal-map-cone f g c) (λ x → (pr1 (pr2 (c' x))))
-  pr2 (pr2 tot-cone-cone-family) =
-    htpy-map-Σ PX
-      ( coherence-square-cone f g c)
-      ( λ z →
-        ( f' (vertical-map-cone f g c z)) ∘
-        ( vertical-map-cone
-          ( ( tr PX (coherence-square-cone f g c z)) ∘
-            ( f' (vertical-map-cone f g c z)))
-          ( g' (horizontal-map-cone f g c z))
-          ( c' z)))
-      ( λ z →
-        coherence-square-cone
-          ( ( tr PX (coherence-square-cone f g c z)) ∘
-            ( f' (vertical-map-cone f g c z)))
-          ( g' (horizontal-map-cone f g c z))
-          ( c' z))
+  abstract
+    htpy-htpy-map-Σ :
+      (α : H ~ H') →
+      (β :
+        (a : A) (c : C a) →
+        K a c ＝ ap (λ p → tr D p (g a c)) (α a) ∙ K' a c) →
+      htpy-map-Σ D H g K ~ htpy-map-Σ D H' g K'
+    htpy-htpy-map-Σ α β (a , c) =
+      ap
+        ( eq-pair-Σ')
+        ( eq-pair-Σ
+          ( α a)
+          ( map-compute-dependent-identification-eq-value-function
+            ( λ p → tr D p (g a c))
+            ( λ _ → g' a c)
+            ( α a)
+            ( K a c)
+            ( K' a c)
+            ( inv
+              ( ( ap
+                  ( K a c ∙_)
+                  ( ap-const (g' a c) (α a))) ∙
+                ( right-unit) ∙
+                ( β a c)))))
+```
 
-  map-canonical-pullback-tot-cone-cone-fam-right-factor :
-    Σ ( canonical-pullback f g)
-      ( λ t → canonical-pullback ((tr PX (π₃ t)) ∘ (f' (π₁ t))) (g' (π₂ t))) →
-    Σ ( Σ A PA)
-      ( λ aa' → Σ (Σ B (λ b → Id (f (pr1 aa')) (g b)))
-        ( λ bα → Σ (PB (pr1 bα))
-          ( λ b' → Id
-            ( tr PX (pr2 bα) (f' (pr1 aa') (pr2 aa')))
-            ( g' (pr1 bα) b'))))
-  map-canonical-pullback-tot-cone-cone-fam-right-factor =
-    map-interchange-Σ-Σ
-      ( λ a bα a' → Σ (PB (pr1 bα))
-        ( λ b' → Id (tr PX (pr2 bα) (f' a a')) (g' (pr1 bα) b')))
+As a corollary of the above statement, we can provide a condition which
+guarantees that `htpy-map-Σ` is homotopic to the trivial homotopy.
 
-  map-canonical-pullback-tot-cone-cone-fam-left-factor :
-    (aa' : Σ A PA) →
-    Σ (Σ B (λ b → Id (f (pr1 aa')) (g b)))
-      ( λ bα → Σ (PB (pr1 bα))
-        ( λ b' → Id
-          ( tr PX (pr2 bα) (f' (pr1 aa') (pr2 aa')))
-          ( g' (pr1 bα) b'))) →
-    Σ ( Σ B PB)
-      ( λ bb' → Σ (Id (f (pr1 aa')) (g (pr1 bb')))
-        ( λ α → Id (tr PX α (f' (pr1 aa') (pr2 aa'))) (g' (pr1 bb') (pr2 bb'))))
-  map-canonical-pullback-tot-cone-cone-fam-left-factor aa' =
-    ( map-interchange-Σ-Σ
-      ( λ b α b' → Id (tr PX α (f' (pr1 aa') (pr2 aa'))) (g' b b')))
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} (D : B → UU l4)
+  {f : A → B} {H : f ~ f}
+  {g : (a : A) → C a → D (f a)}
+  {K : (a : A) → tr D (H a) ∘ g a ~ g a}
+  where
 
-  map-canonical-pullback-tot-cone-cone-family :
-    Σ ( canonical-pullback f g)
-      ( λ t → canonical-pullback ((tr PX (π₃ t)) ∘ (f' (π₁ t))) (g' (π₂ t))) →
-    canonical-pullback (map-Σ PX f f') (map-Σ PX g g')
-  map-canonical-pullback-tot-cone-cone-family =
-    ( tot (λ aa' →
-      ( tot (λ bb' → eq-pair-Σ')) ∘
-      ( map-canonical-pullback-tot-cone-cone-fam-left-factor aa'))) ∘
-    ( map-canonical-pullback-tot-cone-cone-fam-right-factor)
+  abstract
+    htpy-htpy-map-Σ-refl-htpy :
+      (α : H ~ refl-htpy) →
+      (β : (a : A) (c : C a) → K a c ＝ ap (λ p → tr D p (g a c)) (α a)) →
+      htpy-map-Σ D H g K ~ refl-htpy
+    htpy-htpy-map-Σ-refl-htpy α β =
+      htpy-htpy-map-Σ D α (λ a c → β a c ∙ inv right-unit)
+```
 
-  is-equiv-map-canonical-pullback-tot-cone-cone-family :
-    is-equiv map-canonical-pullback-tot-cone-cone-family
-  is-equiv-map-canonical-pullback-tot-cone-cone-family =
-    is-equiv-comp
-      ( tot (λ aa' →
-        ( tot (λ bb' → eq-pair-Σ')) ∘
-        ( map-canonical-pullback-tot-cone-cone-fam-left-factor aa')))
-      ( map-canonical-pullback-tot-cone-cone-fam-right-factor)
-      ( is-equiv-map-interchange-Σ-Σ
-        ( λ a bα a' → Σ (PB (pr1 bα))
-          ( λ b' → Id (tr PX (pr2 bα) (f' a a')) (g' (pr1 bα) b'))))
-      ( is-equiv-tot-is-fiberwise-equiv (λ aa' → is-equiv-comp
-        ( tot (λ bb' → eq-pair-Σ'))
-        ( map-canonical-pullback-tot-cone-cone-fam-left-factor aa')
-        ( is-equiv-map-interchange-Σ-Σ _)
-        ( is-equiv-tot-is-fiberwise-equiv (λ bb' → is-equiv-eq-pair-Σ
-          ( pair (f (pr1 aa')) (f' (pr1 aa') (pr2 aa')))
-          ( pair (g (pr1 bb')) (g' (pr1 bb') (pr2 bb')))))))
+### The map on total spaces induced by a family of truncated maps is truncated
 
-  triangle-canonical-pullback-tot-cone-cone-family :
-    ( gap (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family) ~
-    ( ( map-canonical-pullback-tot-cone-cone-family) ∘
-      ( map-Σ _
-        ( gap f g c)
-        ( λ x → gap
-          ( (tr PX (pr2 (pr2 c) x)) ∘ (f' (pr1 c x)))
-          ( g' (pr1 (pr2 c) x))
-          ( c' x))))
-  triangle-canonical-pullback-tot-cone-cone-family x =
-    refl
+```agda
+module _
+  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f : (x : A) → B x → C x}
+  where
 
-  is-pullback-family-is-pullback-tot :
-    is-pullback f g c →
-    is-pullback
-      (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family →
-    (x : C) →
-    is-pullback
-      ( (tr PX (pr2 (pr2 c) x)) ∘ (f' (pr1 c x)))
-      ( g' (pr1 (pr2 c) x))
-      ( c' x)
-  is-pullback-family-is-pullback-tot is-pb-c is-pb-tot =
-    is-fiberwise-equiv-is-equiv-map-Σ _
-      ( gap f g c)
-      ( λ x → gap
-        ( (tr PX (pr2 (pr2 c) x)) ∘ (f' (pr1 c x)))
-        ( g' (pr1 (pr2 c) x))
-        ( c' x))
-      ( is-pb-c)
-      ( is-equiv-right-factor-htpy
-        ( gap (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family)
-        ( map-canonical-pullback-tot-cone-cone-family)
-        ( map-Σ _
-          ( gap f g c)
-          ( λ x → gap
-            ( (tr PX (pr2 (pr2 c) x)) ∘ (f' (pr1 c x)))
-            ( g' (pr1 (pr2 c) x))
-            ( c' x)))
-        ( triangle-canonical-pullback-tot-cone-cone-family)
-        ( is-equiv-map-canonical-pullback-tot-cone-cone-family)
-        ( is-pb-tot))
+  abstract
+    is-trunc-map-tot : ((x : A) → is-trunc-map k (f x)) → is-trunc-map k (tot f)
+    is-trunc-map-tot H y =
+      is-trunc-equiv k
+        ( fiber (f (pr1 y)) (pr2 y))
+        ( compute-fiber-tot f y)
+        ( H (pr1 y) (pr2 y))
 
-  is-pullback-tot-is-pullback-family :
-    is-pullback f g c →
-    ( (x : C) →
-      is-pullback
-        ( (tr PX (pr2 (pr2 c) x)) ∘ (f' (pr1 c x)))
-        ( g' (pr1 (pr2 c) x))
-        ( c' x)) →
-    is-pullback
-      (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family
-  is-pullback-tot-is-pullback-family is-pb-c is-pb-c' =
-    is-equiv-comp-htpy
-      ( gap (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family)
-      ( map-canonical-pullback-tot-cone-cone-family)
-      ( map-Σ _
-        ( gap f g c)
-        ( λ x → gap
-          ( (tr PX (pr2 (pr2 c) x)) ∘ (f' (pr1 c x)))
-          ( g' (pr1 (pr2 c) x))
-          ( c' x)))
-      ( triangle-canonical-pullback-tot-cone-cone-family)
-      ( is-equiv-map-Σ _
-        ( gap f g c)
-        ( λ x → gap
-          ( (tr PX (pr2 (pr2 c) x)) ∘ (f' (pr1 c x)))
-          ( g' (pr1 (pr2 c) x))
-          ( c' x))
-          ( is-pb-c)
-          ( is-pb-c'))
-      ( is-equiv-map-canonical-pullback-tot-cone-cone-family)
+  abstract
+    is-trunc-map-is-trunc-map-tot :
+      is-trunc-map k (tot f) → ((x : A) → is-trunc-map k (f x))
+    is-trunc-map-is-trunc-map-tot is-trunc-tot-f x z =
+      is-trunc-equiv k
+        ( fiber (tot f) (x , z))
+        ( inv-compute-fiber-tot f (x , z))
+        ( is-trunc-tot-f (x , z))
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f : (x : A) → B x → C x}
+  where
+
+  abstract
+    is-contr-map-tot :
+      ((x : A) → is-contr-map (f x)) → is-contr-map (tot f)
+    is-contr-map-tot =
+      is-trunc-map-tot neg-two-𝕋
+
+  abstract
+    is-prop-map-tot : ((x : A) → is-prop-map (f x)) → is-prop-map (tot f)
+    is-prop-map-tot = is-trunc-map-tot neg-one-𝕋
+```
+
+### The functoriality of dependent pair types preserves truncatedness
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-trunc-map-map-Σ-map-base :
+      (k : 𝕋) {f : A → B} (C : B → UU l3) →
+      is-trunc-map k f → is-trunc-map k (map-Σ-map-base f C)
+    is-trunc-map-map-Σ-map-base k {f} C H y =
+      is-trunc-equiv' k
+        ( fiber f (pr1 y))
+        ( compute-fiber-map-Σ-map-base f C y)
+        ( H (pr1 y))
+
+  abstract
+    is-prop-map-map-Σ-map-base :
+      {f : A → B} (C : B → UU l3) →
+      is-prop-map f → is-prop-map (map-Σ-map-base f C)
+    is-prop-map-map-Σ-map-base C = is-trunc-map-map-Σ-map-base neg-one-𝕋 C
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
+  where
+
+  abstract
+    is-trunc-map-map-Σ :
+      (k : 𝕋) (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)} →
+      is-trunc-map k f → ((x : A) → is-trunc-map k (g x)) →
+      is-trunc-map k (map-Σ D f g)
+    is-trunc-map-map-Σ k D {f} {g} H K =
+      is-trunc-map-left-map-triangle k
+        ( map-Σ D f g)
+        ( map-Σ-map-base f D)
+        ( tot g)
+        ( triangle-map-Σ D f g)
+        ( is-trunc-map-map-Σ-map-base k D H)
+        ( is-trunc-map-tot k K)
+
+  module _
+    (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)}
+    where
+
+    abstract
+      is-contr-map-map-Σ :
+        is-contr-map f → ((x : A) → is-contr-map (g x)) →
+        is-contr-map (map-Σ D f g)
+      is-contr-map-map-Σ = is-trunc-map-map-Σ neg-two-𝕋 D
+
+    abstract
+      is-prop-map-map-Σ :
+        is-prop-map f → ((x : A) → is-prop-map (g x)) →
+        is-prop-map (map-Σ D f g)
+      is-prop-map-map-Σ = is-trunc-map-map-Σ neg-one-𝕋 D
 ```
 
 ### Commuting squares of maps on total spaces
@@ -243,7 +279,7 @@ module _
   coherence-square-maps-tot :
     ((a : A) → coherence-square-maps (top a) (left a) (right a) (bottom a)) →
     coherence-square-maps (tot top) (tot left) (tot right) (tot bottom)
-  coherence-square-maps-tot H (a , p) = eq-pair-Σ refl (H a p)
+  coherence-square-maps-tot H (a , p) = eq-pair-eq-fiber (H a p)
 ```
 
 #### `map-Σ-map-base` preserves commuting squares of maps
@@ -265,6 +301,51 @@ module _
   coherence-square-maps-map-Σ-map-base H (a , p) = eq-pair-Σ (H a) refl
 ```
 
+### Commuting triangles of maps on total spaces
+
+#### Functoriality of `Σ` preserves commuting triangles of maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {P : A → UU l2}
+  {B : UU l3} {Q : B → UU l4}
+  {C : UU l5} (R : C → UU l6)
+  {left' : A → C} {right' : B → C} {top' : A → B}
+  (left : (a : A) → P a → R (left' a))
+  (right : (b : B) → Q b → R (right' b))
+  (top : (a : A) → P a → Q (top' a))
+  where
+
+  coherence-triangle-maps-Σ :
+    {H' : coherence-triangle-maps left' right' top'} →
+    ( (a : A) (p : P a) →
+      dependent-identification R (H' a) (left _ p) (right _ (top _ p))) →
+    coherence-triangle-maps
+      ( map-Σ R left' left)
+      ( map-Σ R right' right)
+      ( map-Σ Q top' top)
+  coherence-triangle-maps-Σ {H'} H (a , p) = eq-pair-Σ (H' a) (H a p)
+```
+
+#### `map-Σ-map-base` preserves commuting triangles of maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} (S : X → UU l4)
+  (left : A → X) (right : B → X) (top : A → B)
+  where
+
+  coherence-triangle-maps-map-Σ-map-base :
+    (H : coherence-triangle-maps left right top) →
+    coherence-triangle-maps
+      ( map-Σ-map-base left S)
+      ( map-Σ-map-base right S)
+      ( map-Σ (S ∘ right) top (λ a → tr S (H a)))
+  coherence-triangle-maps-map-Σ-map-base H (a , _) = eq-pair-Σ (H a) refl
+```
+
 ### The action of `map-Σ-map-base` on identifications of the form `eq-pair-Σ` is given by the action on the base
 
 ```agda
@@ -280,6 +361,58 @@ module _
   compute-ap-map-Σ-map-base-eq-pair-Σ refl refl = refl
 ```
 
+### The action of `ind-Σ` on identifications in fibers of dependent pair types is given by the action of the fibers of the function with the first argument fixed
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : A → UU l2} {C : UU l3}
+  (f : (a : A) (b : B a) → C)
+  where
+
+  compute-ap-ind-Σ-eq-pair-eq-fiber :
+    {a : A} {b b' : B a} (p : b ＝ b') →
+    ap (ind-Σ f) (eq-pair-eq-fiber p) ＝ ap (f a) p
+  compute-ap-ind-Σ-eq-pair-eq-fiber refl = refl
+```
+
+### Computing the inverse of `equiv-tot`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  compute-inv-equiv-tot :
+    (e : (x : A) → B x ≃ C x) →
+    map-inv-equiv (equiv-tot e) ~
+    map-equiv (equiv-tot (λ x → inv-equiv (e x)))
+  compute-inv-equiv-tot e (a , c) =
+    is-injective-equiv
+      ( equiv-tot e)
+      ( ( is-section-map-inv-equiv (equiv-tot e) (a , c)) ∙
+        ( eq-pair-eq-fiber (inv (is-section-map-inv-equiv (e a) c))))
+```
+
+### Dependent sums of morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {I : UU l5} {A : I → UU l1} {B : I → UU l2} {X : I → UU l3} {Y : I → UU l4}
+  (f : (i : I) → A i → B i) (g : (i : I) → X i → Y i)
+  (α : (i : I) → hom-arrow (f i) (g i))
+  where
+
+  tot-hom-arrow : hom-arrow (tot f) (tot g)
+  pr1 tot-hom-arrow =
+    tot (λ i → map-domain-hom-arrow (f i) (g i) (α i))
+  pr1 (pr2 tot-hom-arrow) =
+    tot (λ i → map-codomain-hom-arrow (f i) (g i) (α i))
+  pr2 (pr2 tot-hom-arrow) =
+    tot-htpy (λ i → coh-hom-arrow (f i) (g i) (α i))
+```
+
 ## See also
 
 - Arithmetical laws involving dependent pair types are recorded in
@@ -288,7 +421,6 @@ module _
   [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.md).
 - The universal property of dependent pair types is treated in
   [`foundation.universal-property-dependent-pair-types`](foundation.universal-property-dependent-pair-types.md).
-
 - Functorial properties of cartesian product types are recorded in
   [`foundation.functoriality-cartesian-product-types`](foundation.functoriality-cartesian-product-types.md).
 - Functorial properties of dependent product types are recorded in

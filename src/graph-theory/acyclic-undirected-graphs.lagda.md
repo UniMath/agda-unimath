@@ -18,8 +18,9 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-An **acyclic undirected graph** is an
-[undirected graph](graph-theory.undirected-graphs.md) of which the
+An
+{{#concept "acyclic undirected graph" WDID=Q3115453 WD="acyclic graph" Agda=is-acyclic-Undirected-Graph}}
+is an [undirected graph](graph-theory.undirected-graphs.md) of which the
 [geometric realization](graph-theory.geometric-realizations-undirected-graphs.md)
 is [contractible](foundation-core.contractible-types.md).
 
@@ -63,9 +64,8 @@ is-acyclic-Undirected-Graph l G =
 
 ## External links
 
-- [Trees](https://ncatlab.org/nlab/show/tree) at nlab
-- [Acyclic graph](https://www.wikidata.org/wiki/Q3115453) at Wikidata
+- [Trees](https://ncatlab.org/nlab/show/tree) at $n$Lab
 - [Forests](<https://en.wikipedia.org/wiki/Tree_(graph_theory)#Forest>) at
   Wikipedia
 - [Acyclic graphs](https://mathworld.wolfram.com/AcyclicGraph.html) at Wolfram
-  Mathworld.
+  MathWorld.

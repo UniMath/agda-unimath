@@ -118,14 +118,14 @@ module _
 
   integer-multiple-in-pos-Ab :
     (n : ℕ) (a : type-Ab A) →
-    integer-multiple-Ab A (in-pos n) a ＝
+    integer-multiple-Ab A (in-pos-ℤ n) a ＝
     multiple-Ab A (succ-ℕ n) a
   integer-multiple-in-pos-Ab =
     integer-power-in-pos-Group (group-Ab A)
 
   integer-multiple-in-neg-Ab :
     (n : ℕ) (a : type-Ab A) →
-    integer-multiple-Ab A (in-neg n) a ＝
+    integer-multiple-Ab A (in-neg-ℤ n) a ＝
     neg-Ab A (multiple-Ab A (succ-ℕ n) a)
   integer-multiple-in-neg-Ab =
     integer-power-in-neg-Group (group-Ab A)
@@ -286,8 +286,10 @@ module _
   where
 
   hom-integer-multiple-Ab : hom-Ab A A
-  pr1 hom-integer-multiple-Ab = integer-multiple-Ab A k
-  pr2 hom-integer-multiple-Ab = left-distributive-integer-multiple-add-Ab A k
+  pr1 hom-integer-multiple-Ab =
+    integer-multiple-Ab A k
+  pr2 hom-integer-multiple-Ab {x} {y} =
+    left-distributive-integer-multiple-add-Ab A k x y
 ```
 
 ### Multiples by products of integers are iterated integer multiples

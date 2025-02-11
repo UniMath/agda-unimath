@@ -24,10 +24,7 @@ open import foundation.existential-quantification
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.surjective-maps
-open import foundation.unit-type
 open import foundation.universe-levels
-
-open import foundation-core.function-types
 
 open import group-theory.cyclic-groups
 open import group-theory.generating-elements-groups
@@ -35,8 +32,6 @@ open import group-theory.generating-elements-groups
 open import ring-theory.cyclic-rings
 open import ring-theory.integer-multiples-of-elements-rings
 open import ring-theory.rings
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -147,7 +142,7 @@ compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl (succ-ℕ x)) =
     ( pred-ℤ-Mod (succ-ℕ n))
     ( compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl x))) ∙
   ( inv (preserves-predecessor-mod-ℤ (succ-ℕ n) (inl x)))
-compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inl star)) = refl
+compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inl _)) = refl
 compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr zero-ℕ)) =
   ( integer-multiple-one-Ring
     ( ℤ-Mod-Ring (succ-ℕ n))
@@ -184,7 +179,7 @@ is-generating-element-one-ℤ-Mod n =
 is-cyclic-ℤ-Mod-Group :
   ( n : ℕ) → is-cyclic-Group (ℤ-Mod-Group n)
 is-cyclic-ℤ-Mod-Group n =
-  intro-∃
+  intro-exists
     ( one-ℤ-Mod n)
     ( is-generating-element-one-ℤ-Mod n)
 

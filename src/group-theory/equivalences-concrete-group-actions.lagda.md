@@ -8,7 +8,6 @@ module group-theory.equivalences-concrete-group-actions where
 
 ```agda
 open import foundation.1-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equality-dependent-function-types
@@ -17,6 +16,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.concrete-group-actions
@@ -41,7 +41,7 @@ module _
   equiv-action-Concrete-Group :
     {l3 : Level} (Y : action-Concrete-Group l3 G) → UU (l1 ⊔ l2 ⊔ l3)
   equiv-action-Concrete-Group Y =
-    (u : classifying-type-Concrete-Group G) → type-equiv-Set (X u) (Y u)
+    (u : classifying-type-Concrete-Group G) → equiv-Set (X u) (Y u)
 
   id-equiv-action-Concrete-Group : equiv-action-Concrete-Group X
   id-equiv-action-Concrete-Group u = id-equiv
@@ -50,7 +50,7 @@ module _
     (Y : action-Concrete-Group l2 G) → (X ＝ Y) ≃ equiv-action-Concrete-Group Y
   extensionality-action-Concrete-Group =
     extensionality-Π X
-      ( λ u → type-equiv-Set (X u))
+      ( λ u → equiv-Set (X u))
       ( λ u → extensionality-Set (X u))
 
   equiv-eq-action-Concrete-Group :
@@ -63,12 +63,10 @@ module _
   eq-equiv-action-Concrete-Group Y =
     map-inv-equiv (extensionality-action-Concrete-Group Y)
 
-  is-contr-total-equiv-action-Concrete-Group :
-    is-contr (Σ (action-Concrete-Group l2 G) equiv-action-Concrete-Group)
-  is-contr-total-equiv-action-Concrete-Group =
-    is-contr-total-Eq-Π
-      ( λ u → type-equiv-Set (X u))
-      ( λ u → is-contr-total-equiv-Set (X u))
+  is-torsorial-equiv-action-Concrete-Group :
+    is-torsorial equiv-action-Concrete-Group
+  is-torsorial-equiv-action-Concrete-Group =
+    is-torsorial-Eq-Π (λ u → is-torsorial-equiv-Set (X u))
 
 module _
   {l1 l2 l3 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G)
@@ -144,11 +142,11 @@ module _
       ( hom-equiv-action-Concrete-Group G X Y e)
       ( hom-equiv-action-Concrete-Group G X Y f)
 
-  htpy-equiv-action-Concrete-Group-Prop :
+  htpy-prop-equiv-action-Concrete-Group :
     (e f : equiv-action-Concrete-Group G X Y) → Prop (l2 ⊔ l3)
-  pr1 (htpy-equiv-action-Concrete-Group-Prop e f) =
+  pr1 (htpy-prop-equiv-action-Concrete-Group e f) =
     htpy-equiv-action-Concrete-Group G X Y e f
-  pr2 (htpy-equiv-action-Concrete-Group-Prop e f) =
+  pr2 (htpy-prop-equiv-action-Concrete-Group e f) =
     is-prop-htpy-equiv-action-Concrete-Group e f
 
   is-set-equiv-action-Concrete-Group :

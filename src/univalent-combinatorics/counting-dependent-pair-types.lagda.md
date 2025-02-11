@@ -26,6 +26,7 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.sections
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -51,8 +52,8 @@ Consider a type family `B` over `A`, and consider the following statements
 3. The elements of `Σ A B` can be counted.
 
 If 1 holds, then 2 holds if and only if 3 holds. Furthermore if 2 and 3 hold,
-then 1 holds if and only if the elements of `Σ A (¬ ∘ B)` can be counted, i.e.,
-if the elements in the complement of `B` can be counted.
+then 1 holds if and only if the elements of `Σ (x : A), ¬ (B x)` can be counted,
+i.e., if the elements in the complement of `B` can be counted.
 
 ## Proofs
 
@@ -70,12 +71,12 @@ count-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e f =
   count-equiv
     ( ( equiv-Σ-equiv-base B e) ∘e
       ( ( inv-equiv
-          ( right-distributive-Σ-coprod (Fin k) unit (B ∘ map-equiv e))) ∘e
-        ( equiv-coprod
+          ( right-distributive-Σ-coproduct (Fin k) unit (B ∘ map-equiv e))) ∘e
+        ( equiv-coproduct
           ( id-equiv)
           ( inv-equiv
             ( left-unit-law-Σ (B ∘ (map-equiv e ∘ inr)))))))
-    ( count-coprod
+    ( count-coproduct
       ( count-Σ' k id-equiv (λ x → f (map-equiv e (inl x))))
       ( f (map-equiv e (inr star))))
 
@@ -104,7 +105,7 @@ abstract
       ( sum-Fin-ℕ k (λ x → number-of-elements-count (f (map-equiv e x))))
   number-of-elements-count-Σ' zero-ℕ e f = refl
   number-of-elements-count-Σ' (succ-ℕ k) e f =
-    ( number-of-elements-count-coprod
+    ( number-of-elements-count-coproduct
       ( count-Σ' k id-equiv (λ x → f (map-equiv e (inl x))))
       ( f (map-equiv e (inr star)))) ∙
     ( ap
@@ -149,7 +150,7 @@ count-fiber-map-section-family :
 count-fiber-map-section-family {l1} {l2} {A} {B} b e f (pair y z) =
   count-equiv'
     ( ( ( left-unit-law-Σ-is-contr
-            ( is-contr-total-path' y)
+            ( is-torsorial-Id' y)
             ( pair y refl)) ∘e
         ( inv-associative-Σ A
           ( λ x → Id x y)
@@ -167,12 +168,12 @@ count-base-count-Σ b e f =
 ```
 
 More generally, if `Σ A B` and each `B x` can be counted, then `A` can be
-counted if and only if the type `Σ A (¬ ∘ B)` can be counted. However, to avoid
-having to invoke function extensionality, we show that if `Σ A B` and each `B x`
-can be counted, then `A` can be counted if and only if
+counted if and only if the type `Σ (x : A), ¬ (B x)` can be counted. However, to
+avoid having to invoke function extensionality, we show that if `Σ A B` and each
+`B x` can be counted, then `A` can be counted if and only if
 
 ```text
-   count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (f x)))),
+  count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (f x)))),
 ```
 
 where `f : (x : A) → count (B x)`. Thus, we have a precise characterization of
@@ -199,11 +200,11 @@ count-base-count-Σ' {l1} {l2} {A} {B} e f g =
   count-base-count-Σ
     ( section-count-base-count-Σ' e f g)
     ( count-equiv'
-      ( left-distributive-Σ-coprod A B
+      ( left-distributive-Σ-coproduct A B
         ( λ x → is-zero-ℕ (number-of-elements-count (f x))))
-      ( count-coprod e g))
+      ( count-coproduct e g))
     ( λ x →
-      count-coprod
+      count-coproduct
         ( f x)
         ( count-eq has-decidable-equality-ℕ
           ( number-of-elements-count (f x))

@@ -11,7 +11,6 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.poset-of-ideals-commutative-rings
 open import commutative-algebra.radical-ideals-commutative-rings
 
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -180,7 +179,8 @@ module _
   preserves-order-ideal-radical-ideal-Commutative-Ring I J H = H
 
   ideal-radical-ideal-hom-large-poset-Commutative-Ring :
-    hom-set-Large-Poset id
+    hom-Large-Poset
+      ( λ l → l)
       ( radical-ideal-Commutative-Ring-Large-Poset A)
       ( ideal-Commutative-Ring-Large-Poset A)
   map-hom-Large-Preorder

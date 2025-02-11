@@ -16,10 +16,13 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
 open import foundation.homotopies
+open import foundation.homotopy-algebra
 open import foundation.identity-types
+open import foundation.postcomposition-functions
 open import foundation.transport-along-identifications
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.descent-circle
 open import synthetic-homotopy-theory.free-loops
@@ -96,18 +99,18 @@ module _
       ( type-family-with-descent-data-circle B))
   pr2 eq-descent-data-circle-function-type h =
     ( eq-htpy
-      ( htpy-comp-horizontal
+      ( horizontal-concat-htpy
+        ( coherence-square-family-with-descent-data-circle B)
         ( h ·l
           inv-htpy
-            ( coherence-square-inv-all
+            ( coherence-square-maps-inv-equiv
               ( equiv-family-with-descent-data-circle A)
               ( aut-family-with-descent-data-circle A)
               ( equiv-tr
                 ( family-family-with-descent-data-circle A)
                 ( loop-free-loop l))
               ( equiv-family-with-descent-data-circle A)
-              ( coherence-square-family-with-descent-data-circle A)))
-        ( coherence-square-family-with-descent-data-circle B))) ∙
+              ( coherence-square-family-with-descent-data-circle A))))) ∙
     ( inv
       ( ( tr-function-type
           ( family-family-with-descent-data-circle A)
@@ -159,7 +162,7 @@ module _
         ( equiv-funext))
 
   equiv-descent-data-family-circle-function-type-hom :
-    dependent-universal-property-circle (l2 ⊔ l3) l →
+    dependent-universal-property-circle l →
     ( (x : S) → family-descent-data-circle-function-type l A B x) ≃
     hom-descent-data-circle
       ( descent-data-family-with-descent-data-circle A)

@@ -11,6 +11,7 @@ open import foundation-core.identity-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
+open import foundation.commuting-pentagons-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
@@ -44,17 +45,17 @@ identifications in arbitrary types.
 ### The Mac Lane pentagon for identity types
 
 ```agda
-Mac-Lane-pentagon :
+mac-lane-pentagon :
   {l : Level} {A : UU l} {a b c d e : A}
   (p : a ＝ b) (q : b ＝ c) (r : c ＝ d) (s : d ＝ e) →
-  let α₁ = (ap (λ t → t ∙ s) (assoc p q r))
+  let α₁ = (ap (_∙ s) (assoc p q r))
       α₂ = (assoc p (q ∙ r) s)
-      α₃ = (ap (λ t → p ∙ t) (assoc q r s))
+      α₃ = (ap (p ∙_) (assoc q r s))
       α₄ = (assoc (p ∙ q) r s)
       α₅ = (assoc p q (r ∙ s))
   in
-  ((α₁ ∙ α₂) ∙ α₃) ＝ (α₄ ∙ α₅)
-Mac-Lane-pentagon refl refl refl refl = refl
+    coherence-pentagon-identifications α₁ α₄ α₂ α₅ α₃
+mac-lane-pentagon refl refl refl refl = refl
 ```
 
 ### The groupoidal operations on identity types are equivalences
@@ -72,30 +73,33 @@ module _
   pr1 (equiv-inv x y) = inv
   pr2 (equiv-inv x y) = is-equiv-inv x y
 
-  inv-concat : {x y : A} (p : x ＝ y) (z : A) → x ＝ z → y ＝ z
-  inv-concat p = concat (inv p)
-
-  is-retraction-inv-concat :
-    {x y : A} (p : x ＝ y) (z : A) → (inv-concat p z ∘ concat p z) ~ id
-  is-retraction-inv-concat refl z q = refl
-
-  is-section-inv-concat :
-    {x y : A} (p : x ＝ y) (z : A) → (concat p z ∘ inv-concat p z) ~ id
-  is-section-inv-concat refl z refl = refl
-
   abstract
     is-equiv-concat :
       {x y : A} (p : x ＝ y) (z : A) → is-equiv (concat p z)
     is-equiv-concat p z =
       is-equiv-is-invertible
         ( inv-concat p z)
-        ( is-section-inv-concat p z)
-        ( is-retraction-inv-concat p z)
+        ( is-section-inv-concat p)
+        ( is-retraction-inv-concat p)
+
+  abstract
+    is-equiv-inv-concat :
+      {x y : A} (p : x ＝ y) (z : A) → is-equiv (inv-concat p z)
+    is-equiv-inv-concat p z =
+      is-equiv-is-invertible
+        ( concat p z)
+        ( is-retraction-inv-concat p)
+        ( is-section-inv-concat p)
 
   equiv-concat :
     {x y : A} (p : x ＝ y) (z : A) → (y ＝ z) ≃ (x ＝ z)
   pr1 (equiv-concat p z) = concat p z
   pr2 (equiv-concat p z) = is-equiv-concat p z
+
+  equiv-inv-concat :
+    {x y : A} (p : x ＝ y) (z : A) → (x ＝ z) ≃ (y ＝ z)
+  pr1 (equiv-inv-concat p z) = inv-concat p z
+  pr2 (equiv-inv-concat p z) = is-equiv-inv-concat p z
 
   map-equiv-concat-equiv :
     {x x' : A} → ((y : A) → (x ＝ y) ≃ (x' ＝ y)) → (x' ＝ x)
@@ -125,30 +129,33 @@ module _
   pr1 equiv-concat-equiv = map-equiv-concat-equiv
   pr2 equiv-concat-equiv = is-equiv-map-equiv-concat-equiv
 
-  inv-concat' : (x : A) {y z : A} → y ＝ z → x ＝ z → x ＝ y
-  inv-concat' x q = concat' x (inv q)
-
-  is-retraction-inv-concat' :
-    (x : A) {y z : A} (q : y ＝ z) → (inv-concat' x q ∘ concat' x q) ~ id
-  is-retraction-inv-concat' x refl refl = refl
-
-  is-section-inv-concat' :
-    (x : A) {y z : A} (q : y ＝ z) → (concat' x q ∘ inv-concat' x q) ~ id
-  is-section-inv-concat' x refl refl = refl
-
   abstract
     is-equiv-concat' :
       (x : A) {y z : A} (q : y ＝ z) → is-equiv (concat' x q)
     is-equiv-concat' x q =
       is-equiv-is-invertible
         ( inv-concat' x q)
-        ( is-section-inv-concat' x q)
-        ( is-retraction-inv-concat' x q)
+        ( is-section-inv-concat' q)
+        ( is-retraction-inv-concat' q)
+
+  abstract
+    is-equiv-inv-concat' :
+      (x : A) {y z : A} (q : y ＝ z) → is-equiv (inv-concat' x q)
+    is-equiv-inv-concat' x q =
+      is-equiv-is-invertible
+        ( concat' x q)
+        ( is-retraction-inv-concat' q)
+        ( is-section-inv-concat' q)
 
   equiv-concat' :
     (x : A) {y z : A} (q : y ＝ z) → (x ＝ y) ≃ (x ＝ z)
   pr1 (equiv-concat' x q) = concat' x q
   pr2 (equiv-concat' x q) = is-equiv-concat' x q
+
+  equiv-inv-concat' :
+    (x : A) {y z : A} (q : y ＝ z) → (x ＝ z) ≃ (x ＝ y)
+  pr1 (equiv-inv-concat' x q) = inv-concat' x q
+  pr2 (equiv-inv-concat' x q) = is-equiv-inv-concat' x q
 
 is-binary-equiv-concat :
   {l : Level} {A : UU l} {x y z : A} →
@@ -212,7 +219,39 @@ module _
         ( ( ap (concat' _ s) (right-inv right-unit))))
 ```
 
-## Transposing inverses is an equivalence
+### Applying the right unit law on one side of a higher identification is an equivalence
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
+
+  equiv-right-unit : (p : x ＝ y) (q : x ＝ y) → (p ＝ q) ≃ (p ∙ refl ＝ q)
+  equiv-right-unit p = equiv-concat right-unit
+
+  equiv-right-unit' : (p : x ＝ y) (q : x ＝ y) → (p ＝ q ∙ refl) ≃ (p ＝ q)
+  equiv-right-unit' p q = equiv-concat' p right-unit
+```
+
+### Reassociating one side of a higher identification is an equivalence
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z u : A}
+  where
+
+  equiv-concat-assoc :
+    (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) (s : x ＝ u) →
+    ((p ∙ q) ∙ r ＝ s) ≃ (p ∙ (q ∙ r) ＝ s)
+  equiv-concat-assoc p q r = equiv-concat (inv (assoc p q r))
+
+  equiv-concat-assoc' :
+    (s : x ＝ u) (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) →
+    (s ＝ (p ∙ q) ∙ r) ≃ (s ＝ p ∙ (q ∙ r))
+  equiv-concat-assoc' s p q r = equiv-concat' s (assoc p q r)
+```
+
+### Transposing inverses is an equivalence
 
 ```agda
 module _
@@ -232,6 +271,18 @@ module _
   pr2 (equiv-left-transpose-eq-concat p q r) =
     is-equiv-left-transpose-eq-concat p q r
 
+  equiv-left-transpose-eq-concat' :
+    (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
+    (p ＝ q ∙ r) ≃ (inv q ∙ p ＝ r)
+  equiv-left-transpose-eq-concat' p q r =
+    equiv-inv _ _ ∘e equiv-left-transpose-eq-concat q r p ∘e equiv-inv _ _
+
+  left-transpose-eq-concat' :
+    (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
+    p ＝ q ∙ r → inv q ∙ p ＝ r
+  left-transpose-eq-concat' p q r =
+    map-equiv (equiv-left-transpose-eq-concat' p q r)
+
   abstract
     is-equiv-right-transpose-eq-concat :
       (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) →
@@ -245,29 +296,43 @@ module _
 
   equiv-right-transpose-eq-concat :
     (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) →
-    ((p ∙ q) ＝ r) ≃ (p ＝ (r ∙ (inv q)))
+    (p ∙ q ＝ r) ≃ (p ＝ r ∙ inv q)
   pr1 (equiv-right-transpose-eq-concat p q r) = right-transpose-eq-concat p q r
   pr2 (equiv-right-transpose-eq-concat p q r) =
     is-equiv-right-transpose-eq-concat p q r
+
+  equiv-right-transpose-eq-concat' :
+    (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
+    (p ＝ q ∙ r) ≃ (p ∙ inv r ＝ q)
+  equiv-right-transpose-eq-concat' p q r =
+    equiv-inv q (p ∙ inv r) ∘e
+    equiv-right-transpose-eq-concat q r p ∘e
+    equiv-inv p (q ∙ r)
+
+  right-transpose-eq-concat' :
+    (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
+    p ＝ q ∙ r → p ∙ inv r ＝ q
+  right-transpose-eq-concat' p q r =
+    map-equiv (equiv-right-transpose-eq-concat' p q r)
 ```
 
 ### Computation of fibers of families of maps out of the identity type
 
-We show that `fiber (f x) y ≃ ((* , f * refl) ＝ (x , y))` for every `x : A` and
-`y : B x`.
+Given a map `f : (x : A) → (* ＝ x) → B x`, we show that
+`fiber (f x) y ≃ ((* , f * refl) ＝ (x , y))` for every `x : A` and `y : B x`.
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {a : A} {B : A → UU l2}
-  (f : (x : A) → (a ＝ x) → B x) (x : A) (y : B x)
+  (f : (x : A) → (a ＝ x) → B x) (x : A) (x' : B x)
   where
 
   map-compute-fiber-map-out-of-identity-type :
-    fiber (f x) y → ((a , f a refl) ＝ (x , y))
+    fiber (f x) x' → ((a , f a refl) ＝ (x , x'))
   map-compute-fiber-map-out-of-identity-type (refl , refl) = refl
 
   map-inv-compute-fiber-map-out-of-identity-type :
-    ((a , f a refl) ＝ (x , y)) → fiber (f x) y
+    ((a , f a refl) ＝ (x , x')) → fiber (f x) x'
   map-inv-compute-fiber-map-out-of-identity-type refl =
     refl , refl
 
@@ -290,10 +355,42 @@ module _
       is-section-map-inv-compute-fiber-map-out-of-identity-type
       is-retraction-map-inv-compute-fiber-map-out-of-identity-type
 
+  is-equiv-map-inv-compute-fiber-map-out-of-identity-type :
+    is-equiv map-inv-compute-fiber-map-out-of-identity-type
+  is-equiv-map-inv-compute-fiber-map-out-of-identity-type =
+    is-equiv-is-invertible
+      map-compute-fiber-map-out-of-identity-type
+      is-retraction-map-inv-compute-fiber-map-out-of-identity-type
+      is-section-map-inv-compute-fiber-map-out-of-identity-type
+
   compute-fiber-map-out-of-identity-type :
-    fiber (f x) y ≃ ((a , f a refl) ＝ (x , y))
-  pr1 compute-fiber-map-out-of-identity-type =
-    map-compute-fiber-map-out-of-identity-type
-  pr2 compute-fiber-map-out-of-identity-type =
-    is-equiv-map-compute-fiber-map-out-of-identity-type
+    fiber (f x) x' ≃ ((a , f a refl) ＝ (x , x'))
+  compute-fiber-map-out-of-identity-type =
+    ( map-compute-fiber-map-out-of-identity-type ,
+      is-equiv-map-compute-fiber-map-out-of-identity-type)
+
+  inv-compute-fiber-map-out-of-identity-type :
+    ((a , f a refl) ＝ (x , x')) ≃ fiber (f x) x'
+  inv-compute-fiber-map-out-of-identity-type =
+    ( map-inv-compute-fiber-map-out-of-identity-type ,
+      is-equiv-map-inv-compute-fiber-map-out-of-identity-type)
+```
+
+### Computation of fibers of families of unbased maps out of the identity type
+
+Given a map `f : (x y : A) → (x ＝ y) → B x y`, we show that
+`fiber (f x y) b ≃ ((x , f x x refl) ＝ (y , b))` for every `x y : A` and
+`b : B x y`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → A → UU l2}
+  (f : (x y : A) → x ＝ y → B x y)
+  where
+
+  compute-fiber-unbased-map-out-of-identity-type :
+    (x y : A) (b : B x y) →
+    fiber (f x y) b ≃ ((x , f x x refl) ＝ (y , b))
+  compute-fiber-unbased-map-out-of-identity-type x =
+    compute-fiber-map-out-of-identity-type (f x)
 ```

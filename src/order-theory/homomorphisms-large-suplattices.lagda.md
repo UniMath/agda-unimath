@@ -7,7 +7,6 @@ module order-theory.homomorphisms-large-suplattices where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -35,7 +34,8 @@ module _
   where
 
   preserves-sup-hom-Large-Poset :
-    hom-set-Large-Poset id
+    hom-Large-Poset
+      ( λ l → l)
       ( large-poset-Large-Suplattice K)
       ( large-poset-Large-Suplattice L) →
     UUω
@@ -55,20 +55,21 @@ module _
           ( x i))
 
   record
-    hom-set-Large-Suplattice : UUω
+    hom-Large-Suplattice : UUω
     where
     field
       hom-large-poset-hom-Large-Suplattice :
-        hom-set-Large-Poset id
+        hom-Large-Poset
+          ( λ l → l)
           ( large-poset-Large-Suplattice K)
           ( large-poset-Large-Suplattice L)
       preserves-sup-hom-Large-Suplattice :
         preserves-sup-hom-Large-Poset hom-large-poset-hom-Large-Suplattice
 
-  open hom-set-Large-Suplattice public
+  open hom-Large-Suplattice public
 
   module _
-    (f : hom-set-Large-Suplattice)
+    (f : hom-Large-Suplattice)
     where
 
     map-hom-Large-Suplattice :
@@ -80,14 +81,14 @@ module _
         ( large-poset-Large-Suplattice L)
         ( hom-large-poset-hom-Large-Suplattice f)
 
-    preserves-order-map-hom-Large-Suplattice :
+    preserves-order-hom-Large-Suplattice :
       {l1 l2 : Level}
       (x : type-Large-Suplattice K l1) (y : type-Large-Suplattice K l2) →
       leq-Large-Suplattice K x y →
       leq-Large-Suplattice L
         ( map-hom-Large-Suplattice x)
         ( map-hom-Large-Suplattice y)
-    preserves-order-map-hom-Large-Suplattice =
+    preserves-order-hom-Large-Suplattice =
       preserves-order-hom-Large-Poset
         ( large-poset-Large-Suplattice K)
         ( large-poset-Large-Suplattice L)

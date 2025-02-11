@@ -16,6 +16,7 @@ open import category-theory.precategories
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -58,10 +59,10 @@ module _
   type-Large-Poset : (l : Level) → UU (α l)
   type-Large-Poset = type-Large-Preorder (large-preorder-Large-Poset X)
 
-  leq-prop-Large-Poset : Large-Relation-Prop α β (type-Large-Poset)
+  leq-prop-Large-Poset : Large-Relation-Prop β (type-Large-Poset)
   leq-prop-Large-Poset = leq-prop-Large-Preorder (large-preorder-Large-Poset X)
 
-  leq-Large-Poset : Large-Relation α β (type-Large-Poset)
+  leq-Large-Poset : Large-Relation β (type-Large-Poset)
   leq-Large-Poset = leq-Large-Preorder (large-preorder-Large-Poset X)
 
   is-prop-leq-Large-Poset :
@@ -86,13 +87,13 @@ module _
     transitive-leq-Large-Preorder (large-preorder-Large-Poset X)
 ```
 
-### The predicate on a large category of being a large poset
+### The predicate on large categories of being a large poset
 
 A [large category](category-theory.large-categories.md) is said to be a **large
 poset** if `hom X Y` is a proposition for every two objects `X` and `Y`.
 
-**Lemma**. _Any large category of which the hom-sets are propositions is a large
-poset._
+**Lemma**. _Any large category of which the hom-[sets](foundation-core.sets.md)
+are [propositions](foundation-core.propositions.md) is a large poset._
 
 **Proof:** The condition that `C` is a large poset immediately gives us a
 [large precategory](category-theory.large-precategories.md). The interesting
@@ -131,8 +132,6 @@ module _
     is-antisymmetric-is-large-poset-Large-Category H
 ```
 
-## Properties
-
 ### Small posets from large posets
 
 ```agda
@@ -154,6 +153,8 @@ module _
   is-set-type-Large-Poset {l} = is-set-type-Poset (poset-Large-Poset l)
 ```
 
+## Properties
+
 ### Large posets are large categories
 
 ```agda
@@ -172,9 +173,9 @@ module _
   is-large-category-Large-Poset :
     is-large-category-Large-Precategory large-precategory-Large-Poset
   is-large-category-Large-Poset {l} x y =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-set-type-Large-Poset P x y)
-      ( is-prop-iso-Precategory
+      ( is-prop-iso-is-prop-hom-Precategory
         ( precategory-Large-Poset l)
         ( is-prop-leq-Large-Poset P x y))
       ( λ f →

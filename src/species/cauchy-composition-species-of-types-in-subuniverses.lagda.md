@@ -16,6 +16,7 @@ open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.global-subuniverses
 open import foundation.homotopies
 open import foundation.propositions
 open import foundation.relaxed-sigma-decompositions
@@ -58,7 +59,7 @@ coefficients of the composite of the Cauchy series of `S` and `T`.
 module _
   {l1 l2 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   where
 
   type-cauchy-composition-species-subuniverse :
@@ -83,13 +84,13 @@ module _
     ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
     ( T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
     ( X : type-subuniverse P) →
-    is-in-global-subuniverse id Q
+    is-in-global-subuniverse Q
       ( type-cauchy-composition-species-subuniverse S T X)
 
 module _
   {l1 l2 l3 l4 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
   (C2 : is-closed-under-Σ-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
@@ -112,7 +113,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
   (C2 : is-closed-under-Σ-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
@@ -137,9 +138,9 @@ module _
   preserves-cauchy-composition-Σ-extension-species-subuniverse X =
     ( ( equiv-tot
         ( λ D →
-          ( ( equiv-prod id-equiv (inv-equiv distributive-Π-Σ)) ∘e
-          ( ( inv-equiv right-distributive-prod-Σ) ∘e
-          ( ( equiv-tot (λ _ → inv-equiv (left-distributive-prod-Σ)))))) ∘e
+          ( ( equiv-product id-equiv (inv-equiv distributive-Π-Σ)) ∘e
+          ( ( inv-equiv right-distributive-product-Σ) ∘e
+          ( ( equiv-tot (λ _ → inv-equiv (left-distributive-product-Σ)))))) ∘e
           ( ( associative-Σ _ _ _)))) ∘e
       ( ( associative-Σ
           ( Relaxed-Σ-Decomposition l1 l1 X)
@@ -157,19 +158,16 @@ module _
                     ( tr
                       ( is-in-subuniverse P)
                       ( eq-equiv
-                        ( Σ (indexing-type-Relaxed-Σ-Decomposition (pr1 D))
-                          (cotype-Relaxed-Σ-Decomposition (pr1 D)))
-                        ( X)
                         ( inv-equiv
                           ( matching-correspondence-Relaxed-Σ-Decomposition
-                              ( pr1 D))))
+                            ( pr1 D))))
                       ( C2
                           ( indexing-type-Relaxed-Σ-Decomposition (pr1 D) ,
                               pr1 (pr2 D))
                           ( λ x →
                             ( cotype-Relaxed-Σ-Decomposition (pr1 D) x ,
                                 pr2 (pr2 D) x)))))) ∘e
-              ( commutative-prod ∘e
+              ( commutative-product ∘e
               ( equiv-tot
                 ( λ p →
                   equiv-total-is-in-subuniverse-Σ-Decomposition
@@ -185,7 +183,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
   ( C3 : is-in-subuniverse P (raise-unit l1))
   ( C4 :
     is-closed-under-is-contr-subuniverses P
@@ -249,7 +247,7 @@ module _
 module _
   { l1 l2 l3 : Level}
   ( P : subuniverse l1 l2)
-  ( Q : global-subuniverse id)
+  ( Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
   ( C2 : is-closed-under-Σ-subuniverse P)
   ( C3 : is-in-subuniverse P (raise-unit l1))
@@ -283,7 +281,7 @@ module _
           ( inclusion-subuniverse P X)) ∘e
         ( ( equiv-tot
             ( λ D →
-              equiv-prod
+              equiv-product
                 ( equiv-Σ-extension-cauchy-composition-unit-subuniverse
                   ( P)
                   ( Q)
@@ -334,7 +332,7 @@ module _
         ( inclusion-subuniverse P X)) ∘e
       ( ( equiv-tot
           ( λ D →
-            equiv-prod
+            equiv-product
               ( id-equiv)
               ( equiv-Π-equiv-family
                 ( λ x →
@@ -350,7 +348,7 @@ module _
             ( C1)
             ( C2)
             ( S)
-            ( cauchy-composition-unit-species-subuniverse P Q C4)
+            ( cauchy-composition-unit-species-subuniverse P Q C4)
             ( inclusion-subuniverse P X)) ∘e
           ( ( equiv-Σ-extension-species-subuniverse
               ( P)
@@ -366,7 +364,7 @@ module _
 module _
   { l1 l2 l3 l4 l5 : Level}
   ( P : subuniverse l1 l2)
-  ( Q : global-subuniverse id)
+  ( Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
   ( C2 : is-closed-under-Σ-subuniverse P)
   ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
@@ -403,7 +401,7 @@ module _
           ( inclusion-subuniverse P X))) ∘e
       ( ( equiv-tot
           ( λ D →
-            equiv-prod
+            equiv-product
               ( inv-equiv
                 ( preserves-cauchy-composition-Σ-extension-species-subuniverse
                   ( P)
@@ -427,13 +425,13 @@ module _
             ( inclusion-subuniverse P X)) ∘e
           ( equiv-tot
             ( λ D →
-              equiv-prod
+              equiv-product
                 ( id-equiv)
                 ( equiv-Π
                   ( λ y →
                     cauchy-composition-species-types
                       ( Σ-extension-species-subuniverse
-                        ( P)
+                        ( P)
                         ( subuniverse-global-subuniverse Q l4)
                         ( T))
                       ( Σ-extension-species-subuniverse

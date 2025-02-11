@@ -38,15 +38,15 @@ For any two types `X` and `Y`, we have `(X ≃ Y) ↔ (Maybe X ≃ Maybe Y)`.
 
 ## Definition
 
-### The action of the Maybe modality on equivalences
+### The action of the maybe monad on equivalences
 
 ```agda
 equiv-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) → Maybe X ≃ Maybe Y
-equiv-Maybe e = equiv-coprod e id-equiv
+equiv-Maybe e = equiv-coproduct e id-equiv
 ```
 
-### Equivalences of Maybe-structures on a type
+### Equivalences of maybe structures on a type
 
 ```agda
 equiv-maybe-structure :
@@ -84,7 +84,7 @@ abstract
     is-exception-Maybe (map-equiv e (inl x)) →
     is-not-exception-Maybe (map-equiv e exception-Maybe)
   is-not-exception-map-equiv-exception-Maybe e =
-    is-not-exception-injective-map-exception-Maybe (is-injective-map-equiv e)
+    is-not-exception-injective-map-exception-Maybe (is-injective-equiv e)
 
 abstract
   is-not-exception-emb-exception-Maybe :
@@ -224,12 +224,12 @@ map-equiv-equiv-Maybe' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y)
   (x : X) (u : Maybe Y) (p : map-equiv e (inl x) ＝ u) → Y
 map-equiv-equiv-Maybe' e =
-  restrict-injective-map-Maybe' (is-injective-map-equiv e)
+  restrict-injective-map-Maybe' (is-injective-equiv e)
 
 map-equiv-equiv-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) → X → Y
 map-equiv-equiv-Maybe e =
-  restrict-injective-map-Maybe (is-injective-map-equiv e)
+  restrict-injective-map-Maybe (is-injective-equiv e)
 
 compute-map-equiv-equiv-is-exception-Maybe' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) (x : X) →
@@ -237,7 +237,7 @@ compute-map-equiv-equiv-is-exception-Maybe' :
   is-exception-Maybe (map-equiv e (inl x)) →
   inl (map-equiv-equiv-Maybe' e x u p) ＝ map-equiv e exception-Maybe
 compute-map-equiv-equiv-is-exception-Maybe' e =
-  compute-restrict-injective-map-is-exception-Maybe' (is-injective-map-equiv e)
+  compute-restrict-injective-map-is-exception-Maybe' (is-injective-equiv e)
 
 compute-map-equiv-equiv-is-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) (x : X) →
@@ -380,6 +380,11 @@ equiv-equiv-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (Maybe X ≃ Maybe Y) → (X ≃ Y)
 pr1 (equiv-equiv-Maybe e) = map-equiv-equiv-Maybe e
 pr2 (equiv-equiv-Maybe e) = is-equiv-map-equiv-equiv-Maybe e
+
+compute-equiv-equiv-Maybe-id-equiv :
+  {l1 : Level} {X : UU l1} →
+  equiv-equiv-Maybe id-equiv ＝ id-equiv {A = X}
+compute-equiv-equiv-Maybe-id-equiv = eq-htpy-equiv refl-htpy
 ```
 
 ### For any set `X`, the type of automorphisms on `X` is equivalent to the type of automorphisms on `Maybe X` that fix the exception
@@ -393,22 +398,22 @@ module _
     (type-Set X ≃ type-Set X) ≃
     ( Σ ( Maybe (type-Set X) ≃ Maybe (type-Set X))
         ( λ e → map-equiv e (inr star) ＝ inr star))
-  pr1 (pr1 extend-equiv-Maybe f) = equiv-coprod f id-equiv
+  pr1 (pr1 extend-equiv-Maybe f) = equiv-coproduct f id-equiv
   pr2 (pr1 extend-equiv-Maybe f) = refl
   pr2 extend-equiv-Maybe =
     is-equiv-is-invertible
-      ( λ f → pr1 (retraction-equiv-coprod (pr1 f) id-equiv (p f)))
+      ( λ f → pr1 (retraction-equiv-coproduct (pr1 f) id-equiv (p f)))
       ( λ f →
         ( eq-pair-Σ
           ( inv
             ( eq-htpy-equiv
-              ( pr2 (retraction-equiv-coprod (pr1 f) id-equiv (p f)))))
+              ( pr2 (retraction-equiv-coproduct (pr1 f) id-equiv (p f)))))
           ( eq-is-prop
             ( pr2
               ( Id-Prop
                 ( pair
                   ( Maybe (type-Set X))
-                  ( is-set-coprod (is-set-type-Set X) is-set-unit))
+                  ( is-set-coproduct (is-set-type-Set X) is-set-unit))
                 ( map-equiv (pr1 f) (inr star))
                 ( inr star))))))
       ( λ f → eq-equiv-eq-map-equiv refl)
@@ -443,5 +448,5 @@ module _
       ( ( pr1 (map-equiv extend-equiv-Maybe f)) ∘e
         ( pr1 (map-equiv extend-equiv-Maybe g)))
   comp-extend-equiv-Maybe f g =
-    preserves-comp-map-coprod (map-equiv g) (map-equiv f) id id
+    preserves-comp-map-coproduct (map-equiv g) (map-equiv f) id id
 ```

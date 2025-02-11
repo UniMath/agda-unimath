@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.interchange-law
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.unital-binary-operations
@@ -24,18 +25,37 @@ open import group-theory.semigroups
 
 ## Idea
 
-A commutative monoid is a monoid `M` in which `xy = yx` holds for all `x y : M`.
+A
+{{#concept "commutative monoid" WDID=Q19934355 WD="commutative monoid" Agda=Commutative-Monoid}}
+is a [monoid](group-theory.monoids.md) `M` in which `xy = yx` holds for all
+`x y : M`.
 
-## Definition
+## Definitions
+
+### The predicate on monoids of being commutative
+
+```agda
+module _
+  {l : Level} (M : Monoid l)
+  where
+
+  is-commutative-Monoid : UU l
+  is-commutative-Monoid =
+    (x y : type-Monoid M) → mul-Monoid M x y ＝ mul-Monoid M y x
+
+  is-prop-is-commutative-Monoid : is-prop is-commutative-Monoid
+  is-prop-is-commutative-Monoid =
+    is-prop-iterated-Π 2
+      ( λ x y → is-set-type-Monoid M (mul-Monoid M x y) (mul-Monoid M y x))
+
+  is-commutative-prop-Monoid : Prop l
+  is-commutative-prop-Monoid =
+    ( is-commutative-Monoid , is-prop-is-commutative-Monoid)
+```
 
 ### Commutative monoids
 
 ```agda
-is-commutative-Monoid :
-  {l : Level} (M : Monoid l) → UU l
-is-commutative-Monoid M =
-  (x y : type-Monoid M) → Id (mul-Monoid M x y) (mul-Monoid M y x)
-
 Commutative-Monoid : (l : Level) → UU (lsuc l)
 Commutative-Monoid l = Σ (Monoid l) is-commutative-Monoid
 
@@ -115,10 +135,10 @@ module _
     mul-Commutative-Monoid (mul-Commutative-Monoid x z) y
   right-swap-mul-Commutative-Monoid x y z =
     ( associative-mul-Commutative-Monoid x y z) ∙
-    ( ( ap
-        ( mul-Commutative-Monoid x)
-        ( commutative-mul-Commutative-Monoid y z)) ∙
-      ( inv (associative-mul-Commutative-Monoid x z y)))
+    ( ap
+      ( mul-Commutative-Monoid x)
+      ( commutative-mul-Commutative-Monoid y z)) ∙
+    ( inv (associative-mul-Commutative-Monoid x z y))
 
   left-swap-mul-Commutative-Monoid :
     (x y z : type-Commutative-Monoid) →
@@ -126,10 +146,10 @@ module _
     mul-Commutative-Monoid y (mul-Commutative-Monoid x z)
   left-swap-mul-Commutative-Monoid x y z =
     ( inv (associative-mul-Commutative-Monoid x y z)) ∙
-    ( ( ap
-        ( mul-Commutative-Monoid' z)
-        ( commutative-mul-Commutative-Monoid x y)) ∙
-      ( associative-mul-Commutative-Monoid y x z))
+    ( ap
+      ( mul-Commutative-Monoid' z)
+      ( commutative-mul-Commutative-Monoid x y)) ∙
+    ( associative-mul-Commutative-Monoid y x z)
 ```
 
 ### The unit element of a commutative monoid
@@ -161,7 +181,7 @@ module _
   is-unit-Commutative-Monoid : type-Commutative-Monoid M → UU l
   is-unit-Commutative-Monoid x = Id x unit-Commutative-Monoid
 
-  is-unit-monoid-Prop : type-Commutative-Monoid M → Prop l
-  is-unit-monoid-Prop x =
+  is-unit-prop-Commutative-Monoid : type-Commutative-Monoid M → Prop l
+  is-unit-prop-Commutative-Monoid x =
     Id-Prop (set-Commutative-Monoid M) x unit-Commutative-Monoid
 ```

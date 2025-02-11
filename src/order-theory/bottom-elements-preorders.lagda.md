@@ -30,7 +30,7 @@ module _
 
   is-bottom-element-Preorder-Prop : type-Preorder X → Prop (l1 ⊔ l2)
   is-bottom-element-Preorder-Prop x =
-    Π-Prop (type-Preorder X) (leq-Preorder-Prop X x)
+    Π-Prop (type-Preorder X) (leq-prop-Preorder X x)
 
   is-bottom-element-Preorder : type-Preorder X → UU (l1 ⊔ l2)
   is-bottom-element-Preorder x = type-Prop (is-bottom-element-Preorder-Prop x)

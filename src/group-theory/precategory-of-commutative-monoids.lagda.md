@@ -7,12 +7,14 @@ module group-theory.precategory-of-commutative-monoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.full-large-subprecategories
 open import category-theory.large-precategories
+open import category-theory.precategories
 
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
-open import group-theory.homomorphisms-commutative-monoids
+open import group-theory.precategory-of-monoids
 ```
 
 </details>
@@ -24,29 +26,28 @@ homomorphisms of monoids.
 
 ## Definitions
 
+### The precategory of commutative monoids as a full subprecategory of monoids
+
+```agda
+Commutative-Monoid-Full-Large-Subprecategory :
+  Full-Large-Subprecategory (λ l → l) Monoid-Large-Precategory
+Commutative-Monoid-Full-Large-Subprecategory = is-commutative-prop-Monoid
+```
+
 ### The large precategory of commutative monoids
 
 ```agda
-Commutative-Monoid-Large-Precategory : Large-Precategory lsuc _⊔_
-obj-Large-Precategory
-  Commutative-Monoid-Large-Precategory =
-  Commutative-Monoid
-hom-set-Large-Precategory
-  Commutative-Monoid-Large-Precategory =
-  hom-set-Commutative-Monoid
-comp-hom-Large-Precategory
-  Commutative-Monoid-Large-Precategory {X = K} {L} {M} =
-  comp-hom-Commutative-Monoid K L M
-id-hom-Large-Precategory
-  Commutative-Monoid-Large-Precategory {X = M} =
-  id-hom-Commutative-Monoid M
-associative-comp-hom-Large-Precategory
-  Commutative-Monoid-Large-Precategory {X = K} {L} {M} {N} =
-  associative-comp-hom-Commutative-Monoid K L M N
-left-unit-law-comp-hom-Large-Precategory
-  Commutative-Monoid-Large-Precategory {X = M} {N} =
-  left-unit-law-comp-hom-Commutative-Monoid M N
-right-unit-law-comp-hom-Large-Precategory
-  Commutative-Monoid-Large-Precategory {X = M} {N} =
-  right-unit-law-comp-hom-Commutative-Monoid M N
+Commutative-Monoid-Large-Precategory : Large-Precategory lsuc (_⊔_)
+Commutative-Monoid-Large-Precategory =
+  large-precategory-Full-Large-Subprecategory
+    ( Monoid-Large-Precategory)
+    ( Commutative-Monoid-Full-Large-Subprecategory)
+```
+
+### The precategory of small commutative monoids
+
+```agda
+Commutative-Monoid-Precategory : (l : Level) → Precategory (lsuc l) l
+Commutative-Monoid-Precategory =
+  precategory-Large-Precategory Commutative-Monoid-Large-Precategory
 ```

@@ -2,7 +2,7 @@
 
 This document outlines our choices of conventions for setting precedence levels
 and associativity of
-[mixfix operators in Agda](https://agda.readthedocs.io/en/v2.6.3.20230805/language/mixfix-operators.html),
+[mixfix operators in Agda](https://agda.readthedocs.io/en/latest/language/mixfix-operators.html),
 and provides guidelines for this.
 
 ## Mixfix operators in Agda
@@ -16,9 +16,9 @@ and mixfix operators in Agda is to make the code more readable by using commonly
 accepted notation for widely used operators.
 
 Mixfix operators can each be assigned a
-[precedence level](https://agda.readthedocs.io/en/v2.6.3.20230805/language/mixfix-operators.html#precedence).
+[precedence level](https://agda.readthedocs.io/en/latest/language/mixfix-operators.html#precedence).
 This can in principle be any signed fractional value, although we prefer them to
-be non-negative integral values. The higher this value is, the higher precedence
+be nonnegative integral values. The higher this value is, the higher precedence
 the operator has, meaning it is evaluated before operators with lower
 precedence. By default in Agda, an operator is assigned a precedence level of
 `20`.
@@ -30,14 +30,15 @@ is assigned the precedence level `40`, and
 is assigned the precedence level `35`. Therefore, the expression `x +ℕ y *ℕ z`
 is parsed as `x +ℕ (y *ℕ z)`.
 
-In addition to a precedence level, every mixfix operator can be defined to be
+In addition to a precedence level, every infix operator can be defined to be
 either left or right
-[associative](https://agda.readthedocs.io/en/v2.6.3.20230805/language/mixfix-operators.html#associativity).
-It can be beneficial to define associativity of operators, to avoid excessively
-parenthesized expressions. The parenthization should, however, never be omitted
-when this can make the code more ambiguous or harder to read.
+[associative](https://agda.readthedocs.io/en/latest/language/mixfix-operators.html#associativity)
+using the keywords `infixl` and `infixr`. It can be beneficial to define
+associativity of operators to avoid excessively parenthesized expressions. The
+parenthization should, however, never be omitted when this can make the code
+more ambiguous or harder to read.
 
-For instance, since the pairing operator
+For instance, since the
 [pairing operator `_,_`](foundation.dependent-pair-types.md) is defined to
 associate to the right, the expression `a , b , c` is parsed as `a , (b , c)`.
 By default, an operator does not associate to either side.
@@ -46,17 +47,17 @@ By default, an operator does not associate to either side.
 
 We divide the different operators into broad classes, each assigned a range of
 possible precedence levels. In broad terms, we discern between _parametric_ and
-_non-parametric_ operators. The general rule is that non-parametric operator has
+_nonparametric_ operators. The general rule is that nonparametric operator has
 higher precedence than parametric operators. Parametric operators are operators
 that take a universe level as one of their arguments. We consider an operator to
 be parametric even if it only takes a universe level as an implicit argument.
 Examples are the
-[cartesian product type former`_×_`](foundation-core.cartesian-product-types.md)
-, the [identity type former `_＝_`](foundation-core.identity-types.md) and the
+[cartesian product type former`_×_`](foundation-core.cartesian-product-types.md),
+the [identity type former `_＝_`](foundation-core.identity-types.md), and the
 [pairing operator `_,_`](foundation.dependent-pair-types.md). Examples of
-non-parametric operators are
-[difference of integers `_-ℤ_`](elementary-number-theory.difference-integers.md)
-[strict inequality on natural numbers `_<-ℕ_`](elementary-number-theory.strict-inequality-natural-numbers.md)
+nonparametric operators are
+[difference of integers `_-ℤ_`](elementary-number-theory.difference-integers.md),
+[strict inequality on natural numbers `_<-ℕ_`](elementary-number-theory.strict-inequality-natural-numbers.md),
 and
 [multiplication of Eisenstein integers `_*ℤ[ω]_`](commutative-algebra.eisenstein-integers.md).
 
@@ -105,31 +106,30 @@ level of `3`, below any of the above defined classes.
 Reasoning syntaxes, like
 [`equational-reasoning`](foundation-core.identity-types.md), is defined using
 Agda's mixfix operators, and should have lower precedence than all other
-operators (notably except for `_→_`). The precedence value range `0-1` is
-reserved for these.
+operators (notably except for the built-in `_→_`). The precedence value range
+`0-1` is reserved for these.
 
 ### Subtractive operators
 
 We consider the class of subtractive operators as a subclass of additive
 operators. These include operators like
-[difference of integers `_-ℤ_`](elementary-number-theory.difference-integers.md)
-and . Subtractive operators will usually have higher precedence than normal
-additive operators, so that expressions like `a - b + c` are parsed as
-`(a - b) + c`.
+[difference of integers `_-ℤ_`](elementary-number-theory.difference-integers.md).
+Subtractive operators will usually have higher precedence than additive
+operators, so that expressions like `a - b + c` are parsed as `(a - b) + c`.
 
 ## Assigning associativities
 
 Below, we outline a list of general rules when assigning associativities.
 
-- **Definitionally associative operators**, e.g.
+- **Strictly associative operators**, e.g.
   [function composition `_∘_`](foundation-core.function-types.md), can be
   assigned _any associativity_.
 
-- **Non-parametric arithmetic operators** are often naturally computed from left
+- **Nonparametric arithmetic operators** are often naturally computed from left
   to right. For instance, the expression `1 - 2 - 3` is computed as
   `(1 - 2) - 3 = -1 - 3 = -4`, hence should be _left associative_. This applies
-  to addition, subtraction, multiplication and division. Note that for
-  non-parametric exponentiation, we compute from right to left. I.e. `2 ^ 3 ^ 4`
+  to addition, subtraction, multiplication, and division. Note that for
+  nonparametric exponentiation, we compute from right to left. I.e. `2 ^ 3 ^ 4`
   should compute as `2 ^ (3 ^ 4)`. Hence it will usually be _right associative_.
 
 - **Arithmetic type formers** such as
@@ -137,7 +137,7 @@ Below, we outline a list of general rules when assigning associativities.
   [cartesian product type formation `_×_`](foundation-core.cartesian-product-types.md),
   are natural to parse from left to right in terms of their
   introduction/elimination rules. Therefore, they are commonly associated to the
-  _right_. This means that for instance to map into the left hand argument of
+  _right_. This means that for instance to map into the left-hand argument of
   `A + B + C`, one uses a single `inl`.
 
 - **Weakly associative operators**, meaning operators that are associative up to
@@ -149,11 +149,11 @@ Below, we outline a list of general rules when assigning associativities.
   [identification concatenation `_∙_`](foundation-core.identity-types.md) and
   [homotopy concatenation `_∙h_`](foundation-core.homotopies.md) to be _left
   associative_. Please note that parenthization should still only be omitted
-  when the association is completely irrelevant, even if your expression is left
+  when the association is of no importance, even if your expression is left
   associated regardless. For instance, one should never write
 
   ```agda
-  assoc : p ∙ (q ∙ r) ＝ p ∙ q ∙ r
+  assoc : p ∙ q ∙ r ＝ p ∙ (q ∙ r)
   ```
 
 - **Unique well-typed associativity**. When an operator only has one well-typed
@@ -163,20 +163,22 @@ Below, we outline a list of general rules when assigning associativities.
 
 ## Full table of assigned precedences
 
-| Precedence level | Operators                                                                                                                                                                                                                                  |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 50               | Unary non-parametric operators. This class is currently empty                                                                                                                                                                              |
-| 45               | Exponentiative arithmetic operators                                                                                                                                                                                                        |
-| 40               | Multiplicative arithmetic operators                                                                                                                                                                                                        |
-| 36               | Subtractive arithmetic operators                                                                                                                                                                                                           |
-| 35               | Additive arithmetic operators                                                                                                                                                                                                              |
-| 30               | Relational arithmetic operators, `_≤-ℕ_` and `_<-ℕ_`                                                                                                                                                                                       |
-| 25               | Parametric unary operators. This class is currently empty                                                                                                                                                                                  |
-| 20               | Parametric exponentiative operators. This class is currently empty                                                                                                                                                                         |
-| 15               | Parametric multiplicative operators like `_×_`,`_×∗_`, `_∧_`, `_∧∗_`, function composition operators like `_∘_`,`_∘∗_`, `_∘e_`, and `_∘iff_`, identification concatenation and whiskering operators like `_∙_`, `_∙h_`, `_·l_`, and `_·r_` |
-| 10               | Parametric additive operators like `_+_`, `_∨_`, `_∨∗_`, list concatenation, monadic bind operators for the type checking monad                                                                                                            |
-| 6                | Parametric relational operators like `_＝_`, `_~_`, `_≃_`, and `_↔_`, elementhood relations, subtype relations                                                                                                                             |
-| 5                | Directed function type-like formation operators, e.g. `_→∗_` and `_↪_`                                                                                                                                                                     |
-| 3                | The pairing operators `_,_` and `_,ω_`                                                                                                                                                                                                     |
-| 0-1              | Reasoning syntaxes                                                                                                                                                                                                                         |
-| -∞               | Function type formation `_→_`                                                                                                                                                                                                              |
+| Precedence level | Operators                                                                                                                                                                                          |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 50               | Unary nonparametric operators. This class is currently empty                                                                                                                                       |
+| 45               | Exponentiative arithmetic operators                                                                                                                                                                |
+| 40               | Multiplicative arithmetic operators                                                                                                                                                                |
+| 36               | Subtractive arithmetic operators                                                                                                                                                                   |
+| 35               | Additive arithmetic operators                                                                                                                                                                      |
+| 30               | Relational arithmetic operators like`_≤-ℕ_` and `_<-ℕ_`                                                                                                                                            |
+| 25               | Parametric unary operators like `¬_` and `¬¬_`                                                                                                                                                     |
+| 20               | Parametric exponentiative operators. This class is currently empty                                                                                                                                 |
+| 17               | Left homotopy whiskering `_·l_`                                                                                                                                                                    |
+| 16               | Right homotopy whiskering `_·r_`                                                                                                                                                                   |
+| 15               | Parametric multiplicative operators like `_×_`,`_×∗_`, `_∧_`, `_∧∗_`, `_*_`, function composition operators like `_∘_`,`_∘∗_`, `_∘e_`, and `_∘iff_`, concatenation operators like `_∙_` and `_∙h_` |
+| 10               | Parametric additive operators like `_+_`, `_∨_`, `_∨∗_`, list concatenation, monadic bind operators for the type checking monad                                                                    |
+| 6                | Parametric relational operators like `_＝_`, `_~_`, `_≃_`, `_⇔_`, and `_↔_`, elementhood relations, subtype relations                                                                              |
+| 5                | Directed function type-like formation operators, e.g. `_⇒_`, `_↪_`, `_→∗_`, `_↠_`, `_↪ᵈ_`, and `_⊆_`                                                                                               |
+| 3                | The pairing operators `_,_` and `_,ω_`                                                                                                                                                             |
+| 0-1              | Reasoning syntaxes                                                                                                                                                                                 |
+| -∞               | Function type formation `_→_`                                                                                                                                                                      |

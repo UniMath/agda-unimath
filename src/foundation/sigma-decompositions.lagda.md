@@ -18,8 +18,8 @@ open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.structure-identity-principle
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -28,6 +28,8 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -110,7 +112,7 @@ module _
     (is-inhabited (indexing-type-Σ-Decomposition)) → (is-inhabited A)
   is-inhabited-base-is-inhabited-indexing-type-Σ-Decomposition p =
     map-is-inhabited
-      (map-inv-equiv matching-correspondence-Σ-Decomposition)
+      ( map-inv-equiv matching-correspondence-Σ-Decomposition)
       ( is-inhabited-Σ p is-inhabited-cotype-Σ-Decomposition)
 ```
 
@@ -401,33 +403,19 @@ module _
   pr1 (pr2 id-equiv-Σ-Decomposition) x = id-equiv
   pr2 (pr2 id-equiv-Σ-Decomposition) = refl-htpy
 
-  is-contr-total-equiv-Σ-Decomposition :
-    is-contr (Σ (Σ-Decomposition l2 l3 A) (equiv-Σ-Decomposition X))
-  is-contr-total-equiv-Σ-Decomposition =
-    is-contr-total-Eq-structure
-      ( λ U Vf e →
-        Σ ( (x : indexing-type-Σ-Decomposition X) →
-            cotype-Σ-Decomposition X x ≃
-            type-Inhabited-Type (pr1 Vf (map-equiv e x)))
-          ( λ f →
-            ( ( map-equiv
-                ( equiv-Σ (λ u → type-Inhabited-Type (pr1 Vf u)) e f)) ∘
-              ( map-matching-correspondence-Σ-Decomposition X)) ~
-            ( map-equiv (pr2 Vf))))
-      ( is-contr-total-equiv (indexing-type-Σ-Decomposition X))
+  is-torsorial-equiv-Σ-Decomposition :
+    is-torsorial (equiv-Σ-Decomposition X)
+  is-torsorial-equiv-Σ-Decomposition =
+    is-torsorial-Eq-structure
+      ( is-torsorial-equiv (indexing-type-Σ-Decomposition X))
       ( pair (indexing-type-Σ-Decomposition X) id-equiv)
-      ( is-contr-total-Eq-structure
-        ( λ V g f →
-          ( ( map-equiv
-              ( equiv-Σ (λ y → type-Inhabited-Type (V y)) id-equiv f)) ∘
-            ( map-matching-correspondence-Σ-Decomposition X)) ~
-          ( map-equiv g))
-        ( is-contr-total-equiv-Fam-Inhabited-Types
+      ( is-torsorial-Eq-structure
+        ( is-torsorial-equiv-Fam-Inhabited-Types
           ( inhabited-cotype-Σ-Decomposition X))
         ( pair
           ( inhabited-cotype-Σ-Decomposition X)
           ( id-equiv-Fam-Inhabited-Types (inhabited-cotype-Σ-Decomposition X)))
-        ( is-contr-total-htpy-equiv
+        ( is-torsorial-htpy-equiv
           ( matching-correspondence-Σ-Decomposition X)))
 
   equiv-eq-Σ-Decomposition :
@@ -438,7 +426,7 @@ module _
     (Y : Σ-Decomposition l2 l3 A) → is-equiv (equiv-eq-Σ-Decomposition Y)
   is-equiv-equiv-eq-Σ-Decomposition =
     fundamental-theorem-id
-      is-contr-total-equiv-Σ-Decomposition
+      is-torsorial-equiv-Σ-Decomposition
       equiv-eq-Σ-Decomposition
 
   extensionality-Σ-Decomposition :
@@ -502,36 +490,20 @@ module _
   pr1 (pr2 id-equiv-Set-Indexed-Σ-Decomposition) x = id-equiv
   pr2 (pr2 id-equiv-Set-Indexed-Σ-Decomposition) = refl-htpy
 
-  is-contr-total-equiv-Set-Indexed-Σ-Decomposition :
-    is-contr
-      ( Σ ( Set-Indexed-Σ-Decomposition l2 l3 A)
-          ( equiv-Set-Indexed-Σ-Decomposition X))
-  is-contr-total-equiv-Set-Indexed-Σ-Decomposition =
-    is-contr-total-Eq-structure
-      ( λ U Vf e →
-        Σ ( (x : indexing-type-Set-Indexed-Σ-Decomposition X) →
-            cotype-Set-Indexed-Σ-Decomposition X x ≃
-            type-Inhabited-Type (pr1 Vf (map-equiv e x)))
-          ( λ f →
-            ( ( map-equiv
-                ( equiv-Σ (λ u → type-Inhabited-Type (pr1 Vf u)) e f)) ∘
-              ( map-matching-correspondence-Set-Indexed-Σ-Decomposition X)) ~
-            ( map-equiv (pr2 Vf))))
-      ( is-contr-total-equiv-Set (indexing-set-Set-Indexed-Σ-Decomposition X))
+  is-torsorial-equiv-Set-Indexed-Σ-Decomposition :
+    is-torsorial (equiv-Set-Indexed-Σ-Decomposition X)
+  is-torsorial-equiv-Set-Indexed-Σ-Decomposition =
+    is-torsorial-Eq-structure
+      ( is-torsorial-equiv-Set (indexing-set-Set-Indexed-Σ-Decomposition X))
       ( pair (indexing-set-Set-Indexed-Σ-Decomposition X) id-equiv)
-      ( is-contr-total-Eq-structure
-        ( λ V g f →
-          ( ( map-equiv
-              ( equiv-Σ (λ y → type-Inhabited-Type (V y)) id-equiv f)) ∘
-            ( map-matching-correspondence-Set-Indexed-Σ-Decomposition X)) ~
-          ( map-equiv g))
-        ( is-contr-total-equiv-Fam-Inhabited-Types
+      ( is-torsorial-Eq-structure
+        ( is-torsorial-equiv-Fam-Inhabited-Types
           ( inhabited-cotype-Set-Indexed-Σ-Decomposition X))
         ( pair
           ( inhabited-cotype-Set-Indexed-Σ-Decomposition X)
           ( id-equiv-Fam-Inhabited-Types
             ( inhabited-cotype-Set-Indexed-Σ-Decomposition X)))
-        ( is-contr-total-htpy-equiv
+        ( is-torsorial-htpy-equiv
           ( matching-correspondence-Set-Indexed-Σ-Decomposition X)))
 
   equiv-eq-Set-Indexed-Σ-Decomposition :
@@ -545,7 +517,7 @@ module _
     is-equiv (equiv-eq-Set-Indexed-Σ-Decomposition Y)
   is-equiv-equiv-eq-Set-Indexed-Σ-Decomposition =
     fundamental-theorem-id
-      is-contr-total-equiv-Set-Indexed-Σ-Decomposition
+      is-torsorial-equiv-Set-Indexed-Σ-Decomposition
       equiv-eq-Set-Indexed-Σ-Decomposition
 
   extensionality-Set-Indexed-Σ-Decomposition :
@@ -620,39 +592,23 @@ module _
     X = fst-fibered-Σ-Decomposition D
     Y = snd-fibered-Σ-Decomposition D
 
-  is-contr-total-equiv-fibered-Σ-Decomposition :
-    is-contr
-      ( Σ ( fibered-Σ-Decomposition l2 l3 l4 l5 A)
-          ( equiv-fibered-Σ-Decomposition D))
-  is-contr-total-equiv-fibered-Σ-Decomposition =
-    is-contr-total-Eq-structure
-      ( λ X' Y' e →
-        equiv-snd-fibered-Σ-Decomposition D (X' , Y') e)
-      ( is-contr-total-equiv-Σ-Decomposition X)
+  is-torsorial-equiv-fibered-Σ-Decomposition :
+    is-torsorial (equiv-fibered-Σ-Decomposition D)
+  is-torsorial-equiv-fibered-Σ-Decomposition =
+    is-torsorial-Eq-structure
+      ( is-torsorial-equiv-Σ-Decomposition X)
       ( X , id-equiv-Σ-Decomposition X)
-      ( is-contr-total-Eq-structure
-        ( λ U Vs e →
-          ( Σ ( ( u : indexing-type-Σ-Decomposition Y) →
-                cotype-Σ-Decomposition Y u ≃
-                type-Inhabited-Type (pr1 Vs (map-equiv e u)))
-              ( λ f →
-                ( ( ( map-equiv-Σ (λ u → type-Inhabited-Type (pr1 Vs u)) e f) ∘
-                    ( map-matching-correspondence-Σ-Decomposition Y)) ~
-                  ( map-equiv (pr2 Vs))))))
-        ( is-contr-total-equiv (indexing-type-Σ-Decomposition Y))
+      ( is-torsorial-Eq-structure
+        ( is-torsorial-equiv (indexing-type-Σ-Decomposition Y))
         ( pair (indexing-type-Σ-Decomposition Y) id-equiv)
-        ( is-contr-total-Eq-structure
-          ( λ V f g →
-            ( ( map-equiv-Σ (λ u → type-Inhabited-Type (V u)) id-equiv g) ∘
-              ( map-matching-correspondence-Σ-Decomposition Y)) ~
-              ( pr1 f))
-          ( is-contr-total-equiv-Fam-Inhabited-Types
+        ( is-torsorial-Eq-structure
+          ( is-torsorial-equiv-Fam-Inhabited-Types
             ( inhabited-cotype-Σ-Decomposition Y))
           ( pair
             ( inhabited-cotype-Σ-Decomposition Y)
             ( id-equiv-Fam-Inhabited-Types
               ( inhabited-cotype-Σ-Decomposition Y)))
-            ( is-contr-total-htpy-equiv
+            ( is-torsorial-htpy-equiv
               ( matching-correspondence-Σ-Decomposition Y))))
 
   id-equiv-fibered-Σ-Decomposition :
@@ -673,7 +629,7 @@ module _
     is-equiv (equiv-eq-fibered-Σ-Decomposition D')
   is-equiv-equiv-eq-fibered-Σ-Decomposition =
     fundamental-theorem-id
-      is-contr-total-equiv-fibered-Σ-Decomposition
+      is-torsorial-equiv-fibered-Σ-Decomposition
       equiv-eq-fibered-Σ-Decomposition
 
   extensionality-fibered-Σ-Decomposition :
@@ -753,22 +709,16 @@ module _
     X = fst-displayed-Σ-Decomposition disp-D
     f-Y = snd-displayed-Σ-Decomposition disp-D
 
-  is-contr-total-equiv-displayed-Σ-Decomposition :
-    is-contr
-      ( Σ ( displayed-Σ-Decomposition l2 l3 l4 l5 A)
-          ( equiv-displayed-Σ-Decomposition disp-D))
-  is-contr-total-equiv-displayed-Σ-Decomposition =
-    is-contr-total-Eq-structure
-      ( λ X' f-Y' e → equiv-snd-displayed-Σ-Decomposition
-        ( disp-D)
-        ( pair X' f-Y')
-        ( e))
-      ( is-contr-total-equiv-Σ-Decomposition X)
+  is-torsorial-equiv-displayed-Σ-Decomposition :
+    is-torsorial (equiv-displayed-Σ-Decomposition disp-D)
+  is-torsorial-equiv-displayed-Σ-Decomposition =
+    is-torsorial-Eq-structure
+      ( is-torsorial-equiv-Σ-Decomposition X)
       ( pair X (id-equiv-Σ-Decomposition X))
       ( is-contr-equiv
         ( Π-total-fam (λ x → _))
         ( inv-distributive-Π-Σ)
-        ( is-contr-Π (λ x → is-contr-total-equiv-Σ-Decomposition (f-Y x))))
+        ( is-contr-Π (λ x → is-torsorial-equiv-Σ-Decomposition (f-Y x))))
 
   id-equiv-displayed-Σ-Decomposition :
     equiv-displayed-Σ-Decomposition disp-D disp-D
@@ -788,7 +738,7 @@ module _
     is-equiv (equiv-eq-displayed-Σ-Decomposition disp-D')
   is-equiv-equiv-eq-displayed-Σ-Decomposition =
     fundamental-theorem-id
-      is-contr-total-equiv-displayed-Σ-Decomposition
+      is-torsorial-equiv-displayed-Σ-Decomposition
       equiv-eq-displayed-Σ-Decomposition
 
   extensionality-displayed-Σ-Decomposition :
@@ -978,7 +928,7 @@ module _
     htpy-matching-correspondence x =
       ( ap
         ( λ f → map-equiv (equiv-tot (inv-equiv ∘ t)) f)
-        ( inv-map-eq-transpose-equiv
+        ( map-inv-eq-transpose-equiv
           ( associative-Σ M P Y)
           ( inv
             ( map-eq-transpose-equiv

@@ -58,7 +58,7 @@ Given a monoid, we can define its associated concrete monoid. The type of
 objects is the [classifying type](group-theory.concrete-groups.md) of the
 [core](group-theory.cores-monoids.md) of the monoid. Moreover, we must take care
 in how we define the family of homomorphisms. They cannot simply be the constant
-family, as [transporting](foundation.transport-along-identifications.md) along
+family, as [transporting along](foundation.transport-along-identifications.md)
 an [invertible element](group-theory.invertible-elements-monoids.md) should
 correspond to multiplying by the element in the family.
 

@@ -11,7 +11,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
@@ -21,6 +20,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-abelian-groups
@@ -56,14 +56,14 @@ is-prop-is-ideal-subset-Ring :
   {l1 l2 : Level} (R : Ring l1) (P : subset-Ring l2 R) →
   is-prop (is-ideal-subset-Ring R P)
 is-prop-is-ideal-subset-Ring R P =
-  is-prop-prod
+  is-prop-product
     ( is-prop-is-additive-subgroup-subset-Ring R P)
-    ( is-prop-prod
+    ( is-prop-product
       ( is-prop-is-closed-under-left-multiplication-subset-Ring R P)
       ( is-prop-is-closed-under-right-multiplication-subset-Ring R P))
 
 ideal-Ring :
-  (l : Level) {l1 : Level} (R : Ring l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (R : Ring l1) → UU (lsuc l ⊔ l1)
 ideal-Ring l R =
   Σ (subset-Ring l R) (is-ideal-subset-Ring R)
 
@@ -181,11 +181,11 @@ module _
   refl-has-same-elements-ideal-Ring =
     refl-has-same-elements-subtype (subset-ideal-Ring R I)
 
-  is-contr-total-has-same-elements-ideal-Ring :
-    is-contr (Σ (ideal-Ring l2 R) (has-same-elements-ideal-Ring R I))
-  is-contr-total-has-same-elements-ideal-Ring =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-has-same-elements-subtype (subset-ideal-Ring R I))
+  is-torsorial-has-same-elements-ideal-Ring :
+    is-torsorial (has-same-elements-ideal-Ring R I)
+  is-torsorial-has-same-elements-ideal-Ring =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-has-same-elements-subtype (subset-ideal-Ring R I))
       ( is-prop-is-ideal-subset-Ring R)
       ( subset-ideal-Ring R I)
       ( refl-has-same-elements-ideal-Ring)
@@ -199,7 +199,7 @@ module _
     (J : ideal-Ring l2 R) → is-equiv (has-same-elements-eq-ideal-Ring J)
   is-equiv-has-same-elements-eq-ideal-Ring =
     fundamental-theorem-id
-      is-contr-total-has-same-elements-ideal-Ring
+      is-torsorial-has-same-elements-ideal-Ring
       has-same-elements-eq-ideal-Ring
 
   extensionality-ideal-Ring :
@@ -245,10 +245,10 @@ module _
 #### The left equivalence relation obtained from an ideal
 
 ```agda
-  left-eq-rel-congruence-ideal-Ring :
-    Equivalence-Relation l2 (type-Ring R)
-  left-eq-rel-congruence-ideal-Ring =
-    left-eq-rel-congruence-Subgroup-Ab
+  left-equivalence-relation-congruence-ideal-Ring :
+    equivalence-relation l2 (type-Ring R)
+  left-equivalence-relation-congruence-ideal-Ring =
+    left-equivalence-relation-congruence-Subgroup-Ab
       ( ab-Ring R)
       ( subgroup-ideal-Ring R I)
 
@@ -306,16 +306,17 @@ module _
       ( ab-Ring R)
       ( subgroup-ideal-Ring R I)
 
-  eq-rel-congruence-ideal-Ring : Equivalence-Relation l2 (type-Ring R)
-  eq-rel-congruence-ideal-Ring =
-    eq-rel-congruence-Subgroup-Ab
+  equivalence-relation-congruence-ideal-Ring :
+    equivalence-relation l2 (type-Ring R)
+  equivalence-relation-congruence-ideal-Ring =
+    equivalence-relation-congruence-Subgroup-Ab
       ( ab-Ring R)
       ( subgroup-ideal-Ring R I)
 
   relate-same-elements-left-sim-congruence-ideal-Ring :
-    relate-same-elements-Equivalence-Relation
-      ( eq-rel-congruence-ideal-Ring)
-      ( left-eq-rel-congruence-ideal-Ring)
+    relate-same-elements-equivalence-relation
+      ( equivalence-relation-congruence-ideal-Ring)
+      ( left-equivalence-relation-congruence-ideal-Ring)
   relate-same-elements-left-sim-congruence-ideal-Ring =
     relate-same-elements-left-sim-congruence-Subgroup-Ab
       ( ab-Ring R)
@@ -324,7 +325,7 @@ module _
   add-congruence-ideal-Ring :
     ( is-congruence-Ab
       ( ab-Ring R)
-      ( eq-rel-congruence-ideal-Ring))
+      ( equivalence-relation-congruence-ideal-Ring))
   add-congruence-ideal-Ring =
     ( add-congruence-Subgroup-Ab
       ( ab-Ring R)
@@ -339,8 +340,6 @@ module _
   is-congruence-monoid-mul-congruence-ideal-Ring {x} {y} {u} {v} e f =
     ( is-closed-under-eq-ideal-Ring R I
       ( is-closed-under-addition-ideal-Ring R I
-        ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
-        ( mul-Ring R y (add-Ring R (neg-Ring R u) v))
         ( is-closed-under-right-multiplication-ideal-Ring R I
           ( add-Ring R (neg-Ring R x) y)
           ( u)
@@ -398,13 +397,13 @@ module _
   mul-congruence-ideal-Ring :
     ( is-congruence-Monoid
       ( multiplicative-monoid-Ring R)
-      ( eq-rel-congruence-ideal-Ring))
+      ( equivalence-relation-congruence-ideal-Ring))
   mul-congruence-ideal-Ring =
     is-congruence-monoid-mul-congruence-ideal-Ring
 
   congruence-ideal-Ring : congruence-Ring l2 R
   congruence-ideal-Ring = construct-congruence-Ring R
-    ( eq-rel-congruence-ideal-Ring)
+    ( equivalence-relation-congruence-ideal-Ring)
     ( add-congruence-ideal-Ring)
     ( mul-congruence-ideal-Ring)
 ```
@@ -429,14 +428,14 @@ module _
 
   is-closed-under-addition-subset-congruence-Ring :
     is-closed-under-addition-subset-Ring R subset-congruence-Ring
-  is-closed-under-addition-subset-congruence-Ring x y H K =
+  is-closed-under-addition-subset-congruence-Ring H K =
     concatenate-eq-sim-congruence-Ring R S
       ( inv (left-unit-law-add-Ring R (zero-Ring R)))
       ( add-congruence-Ring R S H K)
 
   is-closed-under-negatives-subset-congruence-Ring :
     is-closed-under-negatives-subset-Ring R subset-congruence-Ring
-  is-closed-under-negatives-subset-congruence-Ring x H =
+  is-closed-under-negatives-subset-congruence-Ring H =
       concatenate-eq-sim-congruence-Ring R S
         ( inv (neg-zero-Ring R))
         ( neg-congruence-Ring R S H)

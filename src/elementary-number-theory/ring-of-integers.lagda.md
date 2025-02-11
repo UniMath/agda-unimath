@@ -14,12 +14,12 @@ open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.free-groups-with-one-generator
@@ -29,6 +29,7 @@ open import ring-theory.homomorphisms-rings
 open import ring-theory.initial-rings
 open import ring-theory.integer-multiples-of-elements-rings
 open import ring-theory.rings
+open import ring-theory.trivial-rings
 ```
 
 </details>
@@ -53,6 +54,13 @@ pr2 ℤ-Commutative-Ring = commutative-mul-ℤ
 
 ## Properties
 
+### The ring of integers is nontrivial
+
+```agda
+is-nontrivial-ℤ-Ring : is-nontrivial-Ring ℤ-Ring
+is-nontrivial-ℤ-Ring H = is-nonzero-one-ℤ (inv H)
+```
+
 ### The integer multiples in `ℤ-Ring` coincide with multiplication in `ℤ`
 
 ```agda
@@ -60,7 +68,7 @@ is-mul-integer-multiple-ℤ-Ring :
   (k l : ℤ) → integer-multiple-Ring ℤ-Ring k l ＝ mul-ℤ k l
 is-mul-integer-multiple-ℤ-Ring (inl zero-ℕ) l =
   ( integer-multiple-neg-one-Ring ℤ-Ring l) ∙
-  ( is-left-mul-neg-one-neg-ℤ l)
+  ( inv (left-neg-unit-law-mul-ℤ l))
 is-mul-integer-multiple-ℤ-Ring (inl (succ-ℕ k)) l =
   ( integer-multiple-pred-Ring ℤ-Ring (inl k) l) ∙
   ( ap
@@ -68,7 +76,7 @@ is-mul-integer-multiple-ℤ-Ring (inl (succ-ℕ k)) l =
     ( is-mul-integer-multiple-ℤ-Ring (inl k) l)) ∙
   ( commutative-add-ℤ (mul-ℤ (inl k) l) (neg-ℤ l)) ∙
   ( inv (left-predecessor-law-mul-ℤ (inl k) l))
-is-mul-integer-multiple-ℤ-Ring (inr (inl star)) l =
+is-mul-integer-multiple-ℤ-Ring (inr (inl _)) l =
   ( integer-multiple-zero-Ring ℤ-Ring l) ∙
   ( inv (left-zero-law-mul-ℤ l))
 is-mul-integer-multiple-ℤ-Ring (inr (inr zero-ℕ)) l =
@@ -107,8 +115,13 @@ module _
     (k l : ℤ) →
     map-initial-hom-Ring (add-ℤ k l) ＝
     add-Ring R (map-initial-hom-Ring k) (map-initial-hom-Ring l)
-  preserves-add-initial-hom-Ring =
-    preserves-mul-hom-Group ℤ-Group (group-Ring R) hom-group-initial-hom-Ring
+  preserves-add-initial-hom-Ring k l =
+    preserves-mul-hom-Group
+      ( ℤ-Group)
+      ( group-Ring R)
+      ( hom-group-initial-hom-Ring)
+      { k}
+      { l}
 
   preserves-one-initial-hom-Ring : map-initial-hom-Ring one-ℤ ＝ one-Ring R
   preserves-one-initial-hom-Ring = integer-multiple-one-Ring R (one-Ring R)
@@ -125,7 +138,7 @@ module _
 
   initial-hom-Ring : hom-Ring ℤ-Ring R
   pr1 initial-hom-Ring = hom-group-initial-hom-Ring
-  pr1 (pr2 initial-hom-Ring) = preserves-mul-initial-hom-Ring
+  pr1 (pr2 initial-hom-Ring) {x} {y} = preserves-mul-initial-hom-Ring x y
   pr2 (pr2 initial-hom-Ring) = preserves-one-initial-hom-Ring
 ```
 
@@ -168,7 +181,7 @@ integer-multiple-one-ℤ-Ring :
 integer-multiple-one-ℤ-Ring (inl zero-ℕ) = refl
 integer-multiple-one-ℤ-Ring (inl (succ-ℕ n)) =
   ap pred-ℤ (integer-multiple-one-ℤ-Ring (inl n))
-integer-multiple-one-ℤ-Ring (inr (inl star)) = refl
+integer-multiple-one-ℤ-Ring (inr (inl _)) = refl
 integer-multiple-one-ℤ-Ring (inr (inr zero-ℕ)) = refl
 integer-multiple-one-ℤ-Ring (inr (inr (succ-ℕ n))) =
   ap succ-ℤ (integer-multiple-one-ℤ-Ring (inr (inr n)))

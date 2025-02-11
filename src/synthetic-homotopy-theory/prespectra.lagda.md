@@ -10,7 +10,6 @@ module synthetic-homotopy-theory.prespectra where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -115,5 +114,4 @@ module _
 
 ## References
 
-- J. P. May, _A Concise Course in Algebraic Topology_, 1999
-  ([pdf](https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf))
+{{#bibliography}} {{#reference May99}}

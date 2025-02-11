@@ -20,6 +20,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.unordered-pairs
@@ -135,21 +136,12 @@ module _
   htpy-eq-hom-Undirected-Graph f .f refl = refl-htpy-hom-Undirected-Graph f
 
   abstract
-    is-contr-total-htpy-hom-Undirected-Graph :
+    is-torsorial-htpy-hom-Undirected-Graph :
       (f : hom-Undirected-Graph G H) →
-      is-contr (Σ (hom-Undirected-Graph G H) (htpy-hom-Undirected-Graph f))
-    is-contr-total-htpy-hom-Undirected-Graph f =
-      is-contr-total-Eq-structure
-        ( λ gV gE α →
-          ( p : unordered-pair-vertices-Undirected-Graph G) →
-          ( e : edge-Undirected-Graph G p) →
-          Id
-            ( tr
-              ( edge-Undirected-Graph H)
-              ( htpy-unordered-pair α p)
-              ( edge-hom-Undirected-Graph G H f p e))
-            ( gE p e))
-        ( is-contr-total-htpy (vertex-hom-Undirected-Graph G H f))
+      is-torsorial (htpy-hom-Undirected-Graph f)
+    is-torsorial-htpy-hom-Undirected-Graph f =
+      is-torsorial-Eq-structure
+        ( is-torsorial-htpy (vertex-hom-Undirected-Graph G H f))
         ( pair (vertex-hom-Undirected-Graph G H f) refl-htpy)
         ( is-contr-equiv'
           ( Σ ( (p : unordered-pair-vertices-Undirected-Graph G) →
@@ -169,18 +161,15 @@ module _
                       equiv-concat
                         ( pr2 (refl-htpy-hom-Undirected-Graph f) p e)
                         ( gE p e)))))
-          ( is-contr-total-Eq-Π
-            ( λ p gE →
-              ( e : edge-Undirected-Graph G p) →
-              Id (edge-hom-Undirected-Graph G H f p e) (gE e))
-            ( λ p → is-contr-total-htpy (edge-hom-Undirected-Graph G H f p))))
+          ( is-torsorial-Eq-Π
+            ( λ p → is-torsorial-htpy (edge-hom-Undirected-Graph G H f p))))
 
   is-equiv-htpy-eq-hom-Undirected-Graph :
     (f g : hom-Undirected-Graph G H) →
     is-equiv (htpy-eq-hom-Undirected-Graph f g)
   is-equiv-htpy-eq-hom-Undirected-Graph f =
     fundamental-theorem-id
-      ( is-contr-total-htpy-hom-Undirected-Graph f)
+      ( is-torsorial-htpy-hom-Undirected-Graph f)
       ( htpy-eq-hom-Undirected-Graph f)
 
   extensionality-hom-Undirected-Graph :
@@ -198,6 +187,6 @@ module _
 
 ## External links
 
-- [Graph homomorphism](https://www.wikidata.org/wiki/Q3385162) on Wikidata
+- [Graph homomorphism](https://www.wikidata.org/entity/Q3385162) on Wikidata
 - [Graph homomorphism](https://en.wikipedia.org/wiki/Graph_homomorphism) at
   Wikipedia

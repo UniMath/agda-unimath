@@ -12,7 +12,6 @@ open import foundation.equivalences
 open import foundation.structure
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-duality
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -20,6 +19,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -63,6 +63,6 @@ equiv-fixed-Slice-structure {l} P X A =
           ( equiv-postcomp-equiv (equiv-total-fiber (pr1 (pr2 s))) X))) ∘e
     ( ( equiv-right-swap-Σ) ∘e
       ( ( inv-left-unit-law-Σ-is-contr
-          ( is-contr-total-equiv X)
+          ( is-torsorial-equiv X)
           ( X , id-equiv)))))
 ```

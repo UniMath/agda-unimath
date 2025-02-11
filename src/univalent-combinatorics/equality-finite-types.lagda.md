@@ -63,16 +63,22 @@ has-decidable-equality-has-cardinality {l1} {X} k H =
 ```agda
 abstract
   is-finite-eq :
-    {l1 : Level} {X : UU l1} →
+    {l : Level} {X : UU l} →
     has-decidable-equality X → {x y : X} → is-finite (Id x y)
   is-finite-eq d {x} {y} = is-finite-count (count-eq d x y)
 
-is-finite-eq-𝔽 :
-  {l : Level} → (X : 𝔽 l) {x y : type-𝔽 X} → is-finite (x ＝ y)
-is-finite-eq-𝔽 X =
-  is-finite-eq (has-decidable-equality-is-finite (is-finite-type-𝔽 X))
+is-finite-eq-is-finite :
+    {l : Level} {X : UU l} → is-finite X → {x y : X} → is-finite (x ＝ y)
+is-finite-eq-is-finite H = is-finite-eq (has-decidable-equality-is-finite H)
 
-Id-𝔽 : {l : Level} → (X : 𝔽 l) (x y : type-𝔽 X) → 𝔽 l
-pr1 (Id-𝔽 X x y) = Id x y
-pr2 (Id-𝔽 X x y) = is-finite-eq-𝔽 X
+is-finite-eq-Finite-Type :
+  {l : Level} → (X : Finite-Type l)
+  {x y : type-Finite-Type X} → is-finite (x ＝ y)
+is-finite-eq-Finite-Type X =
+  is-finite-eq-is-finite (is-finite-type-Finite-Type X)
+
+Id-Finite-Type :
+  {l : Level} → (X : Finite-Type l) (x y : type-Finite-Type X) → Finite-Type l
+pr1 (Id-Finite-Type X x y) = Id x y
+pr2 (Id-Finite-Type X x y) = is-finite-eq-Finite-Type X
 ```

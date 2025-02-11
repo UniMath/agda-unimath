@@ -7,7 +7,6 @@ module higher-group-theory.free-higher-group-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
 open import foundation.propositional-maps

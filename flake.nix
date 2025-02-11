@@ -2,23 +2,34 @@
   description = "agda-unimath";
 
   inputs = {
-    # Unstable is needed for Agda 2.6.3, latest stable 22.11 only has 2.6.2.2
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # Stable 24.11 has Agda 2.7.0.1
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     flake-utils.url = "github:numtide/flake-utils";
+    # We aim to support Python 3.8 as long as Ubuntu 20.24 has LTS,
+    # since it ships with that version. Python 3.8 itself is already
+    # EOL, so it was dropped from nixpkgs 24.05
+    nixpkgs-python.url = "github:NixOS/nixpkgs/nixos-23.11";
+    # Nixpkgs with tested versions of mdbook crates;
+    # may be removed once we backport new mdbook assets to our
+    # modified versions
+    nixpkgs-mdbook.url = "github:NixOS/nixpkgs?rev=7fdd1421774a52277fb56d64b26aaf7765e1b3fa";
     mdbook-catppuccin = {
       url = "github:catppuccin/mdBook/v1.2.0";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-mdbook";
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, mdbook-catppuccin }:
+  outputs = { self, nixpkgs, nixpkgs-mdbook, nixpkgs-python, flake-utils, mdbook-catppuccin }:
     flake-utils.lib.eachDefaultSystem
       (system:
         let
           pkgs = nixpkgs.legacyPackages."${system}";
-          python = pkgs.python38.withPackages (p: with p; [
+          pkgs-mdbook = nixpkgs-mdbook.legacyPackages."${system}";
+          pkgs-python = nixpkgs-python.legacyPackages."${system}";
+          python = pkgs-python.python38.withPackages (p: with p; [
             # Keep in sync with scripts/requirements.txt
             # pre-commit <- not installed as a Python package but as a binary below
+            pybtex
             requests
             tomli
           ]);
@@ -33,7 +44,7 @@
             # We can reference the directory since we're using flakes,
             # which copies the version-tracked files into the nix store
             # before evaluation, # so we don't run into the issue with
-            # non-reproducible source paths as outlined here:
+            # nonreproducible source paths as outlined here:
             # https://nix.dev/recipes/best-practices#reproducible-source-paths
             src = ./.;
 
@@ -67,17 +78,17 @@
             packages = [
               # maintanance scripts
               python
-              # working on the website
-              pkgs.mdbook
-              pkgs.mdbook-katex
-              pkgs.mdbook-pagetoc
-              pkgs.mdbook-linkcheck
-              mdbook-catppuccin.packages."${system}".default
               # pre-commit checks
               pkgs.pre-commit
-            ];
+              pkgs.nodejs
+            ] ++ (with pkgs-mdbook; [
+              # working on the website
+              mdbook
+              mdbook-katex
+              mdbook-pagetoc
+              mdbook-linkcheck
+              mdbook-catppuccin.packages."${system}".default
+            ]);
           };
-
-          devShell = self.devShells."${system}".default;
         });
 }

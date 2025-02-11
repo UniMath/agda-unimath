@@ -8,13 +8,13 @@ module foundation-core.propositions where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -25,16 +25,24 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-A type is considered to be a proposition if its identity types are contractible.
-This condition is equivalent to the condition that it has up to identification
-at most one element.
+A type is a {{#concept "proposition" Agda=is-prop}} if its
+[identity types](foundation-core.identity-types.md) are
+[contractible](foundation-core.contractible-types.md). This condition is
+[equivalent](foundation-core.equivalences.md) to the condition that it has up to
+identification at most one element.
 
-## Definition
+## Definitions
+
+### The predicate of being a proposition
 
 ```agda
 is-prop : {l : Level} (A : UU l) → UU l
 is-prop A = (x y : A) → is-contr (x ＝ y)
+```
 
+### The type of propositions
+
+```agda
 Prop :
   (l : Level) → UU (lsuc l)
 Prop l = Σ (UU l) is-prop
@@ -56,20 +64,18 @@ module _
 We prove here only that any contractible type is a proposition. The fact that
 the empty type and the unit type are propositions can be found in
 
-```text
-foundation.empty-types
-foundation.unit-type
-```
+- [`foundation.empty-types`](foundation.empty-types.md), and
+- [`foundation.unit-type`](foundation.unit-type.md).
 
 ## Properties
 
-### To show that a type is a proposition, we may assume it is inhabited
+### To show that a type is a proposition we may assume it has an element
 
 ```agda
 abstract
-  is-prop-is-inhabited :
+  is-prop-has-element :
     {l1 : Level} {X : UU l1} → (X → is-prop X) → is-prop X
-  is-prop-is-inhabited f x y = f x x y
+  is-prop-has-element f x y = f x x y
 ```
 
 ### Equivalent characterizations of propositions
@@ -120,29 +126,16 @@ module _
   abstract
     eq-is-proof-irrelevant : is-proof-irrelevant A → all-elements-equal A
     eq-is-proof-irrelevant = eq-is-prop' ∘ is-prop-is-proof-irrelevant
-```
 
-### A map between propositions is an equivalence if there is a map in the reverse direction
+abstract
+  eq-type-Prop : {l : Level} (P : Prop l) → {x y : type-Prop P} → x ＝ y
+  eq-type-Prop P = eq-is-prop (is-prop-type-Prop P)
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  abstract
-    is-equiv-is-prop :
-      is-prop A → is-prop B → {f : A → B} → (B → A) → is-equiv f
-    is-equiv-is-prop is-prop-A is-prop-B {f} g =
-      is-equiv-is-invertible
-        ( g)
-        ( λ y → eq-is-prop is-prop-B)
-        ( λ x → eq-is-prop is-prop-A)
-
-  abstract
-    equiv-prop : is-prop A → is-prop B → (A → B) → (B → A) → A ≃ B
-    pr1 (equiv-prop is-prop-A is-prop-B f g) = f
-    pr2 (equiv-prop is-prop-A is-prop-B f g) =
-      is-equiv-is-prop is-prop-A is-prop-B g
+abstract
+  is-proof-irrelevant-type-Prop :
+    {l : Level} (P : Prop l) → is-proof-irrelevant (type-Prop P)
+  is-proof-irrelevant-type-Prop P =
+    is-proof-irrelevant-is-prop (is-prop-type-Prop P)
 ```
 
 ### Propositions are closed under equivalences
@@ -192,8 +185,7 @@ abstract
         ( λ p → K (pr1 y) (tr _ p (pr2 x)) (pr2 y)))
 
 Σ-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : type-Prop P → Prop l2) →
-  Prop (l1 ⊔ l2)
+  {l1 l2 : Level} (P : Prop l1) (Q : type-Prop P → Prop l2) → Prop (l1 ⊔ l2)
 pr1 (Σ-Prop P Q) = Σ (type-Prop P) (λ p → type-Prop (Q p))
 pr2 (Σ-Prop P Q) =
   is-prop-Σ
@@ -201,18 +193,47 @@ pr2 (Σ-Prop P Q) =
     ( λ p → is-prop-type-Prop (Q p))
 ```
 
+### If `Σ A B` is a proposition and there is a section `(x : A) → B x` then `A` is a proposition
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (s : (x : A) → B x)
+  where
+
+  is-proof-irrelevant-base-is-proof-irrelevant-Σ' :
+    is-proof-irrelevant (Σ A B) → is-proof-irrelevant A
+  is-proof-irrelevant-base-is-proof-irrelevant-Σ' H a =
+    is-contr-base-is-contr-Σ' A B s (H (a , s a))
+
+  is-prop-base-is-prop-Σ' : is-prop (Σ A B) → is-prop A
+  is-prop-base-is-prop-Σ' H =
+    is-prop-is-proof-irrelevant
+      ( is-proof-irrelevant-base-is-proof-irrelevant-Σ'
+          ( is-proof-irrelevant-is-prop H))
+```
+
 ### Propositions are closed under cartesian product types
 
 ```agda
 abstract
-  is-prop-prod :
+  is-prop-product :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-prop A → is-prop B → is-prop (A × B)
-  is-prop-prod H K = is-prop-Σ H (λ x → K)
+  is-prop-product H K = is-prop-Σ H (λ x → K)
 
-prod-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-pr1 (prod-Prop P Q) = type-Prop P × type-Prop Q
-pr2 (prod-Prop P Q) = is-prop-prod (is-prop-type-Prop P) (is-prop-type-Prop Q)
+module _
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
+  where
+
+  type-product-Prop : UU (l1 ⊔ l2)
+  type-product-Prop = type-Prop P × type-Prop Q
+
+  is-prop-product-Prop : is-prop type-product-Prop
+  is-prop-product-Prop =
+    is-prop-product (is-prop-type-Prop P) (is-prop-type-Prop Q)
+
+  product-Prop : Prop (l1 ⊔ l2)
+  product-Prop = (type-product-Prop , is-prop-product-Prop)
 ```
 
 ### Products of families of propositions are propositions
@@ -226,271 +247,48 @@ abstract
     is-prop-is-proof-irrelevant
       ( λ f → is-contr-Π (λ x → is-proof-irrelevant-is-prop (H x) (f x)))
 
-type-Π-Prop :
-  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → UU (l1 ⊔ l2)
-type-Π-Prop A P = (x : A) → type-Prop (P x)
+module _
+  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
+  where
 
-is-prop-type-Π-Prop :
-  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → is-prop (type-Π-Prop A P)
-is-prop-type-Π-Prop A P = is-prop-Π (λ x → is-prop-type-Prop (P x))
+  type-Π-Prop : UU (l1 ⊔ l2)
+  type-Π-Prop = (x : A) → type-Prop (P x)
 
-Π-Prop :
-  {l1 l2 : Level} (A : UU l1) →
-  (A → Prop l2) → Prop (l1 ⊔ l2)
-pr1 (Π-Prop A P) = type-Π-Prop A P
-pr2 (Π-Prop A P) = is-prop-type-Π-Prop A P
+  is-prop-Π-Prop : is-prop type-Π-Prop
+  is-prop-Π-Prop = is-prop-Π (λ x → is-prop-type-Prop (P x))
+
+  Π-Prop : Prop (l1 ⊔ l2)
+  pr1 Π-Prop = type-Π-Prop
+  pr2 Π-Prop = is-prop-Π-Prop
 ```
 
-We repeat the above for implicit Π-types.
+We now repeat the above for implicit Π-types.
 
 ```agda
 abstract
-  is-prop-Π' :
+  is-prop-implicit-Π :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
     ((x : A) → is-prop (B x)) → is-prop ({x : A} → B x)
-  is-prop-Π' {l1} {l2} {A} {B} H =
+  is-prop-implicit-Π H =
     is-prop-equiv
       ( ( λ f x → f {x}) ,
-        ( is-equiv-is-invertible
-          ( λ g {x} → g x)
-          ( refl-htpy)
-          ( refl-htpy)))
+        ( is-equiv-is-invertible (λ g {x} → g x) (refl-htpy) (refl-htpy)))
       ( is-prop-Π H)
 
-type-Π-Prop' :
-  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → UU (l1 ⊔ l2)
-type-Π-Prop' A P = {x : A} → type-Prop (P x)
+module _
+  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
+  where
 
-is-prop-type-Π-Prop' :
-  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → is-prop (type-Π-Prop' A P)
-is-prop-type-Π-Prop' A P = is-prop-Π' (λ x → is-prop-type-Prop (P x))
+  type-implicit-Π-Prop : UU (l1 ⊔ l2)
+  type-implicit-Π-Prop = {x : A} → type-Prop (P x)
 
-Π-Prop' : {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → Prop (l1 ⊔ l2)
-pr1 (Π-Prop' A P) = type-Π-Prop' A P
-pr2 (Π-Prop' A P) = is-prop-Π' (λ x → is-prop-type-Prop (P x))
-```
+  is-prop-implicit-Π-Prop : is-prop type-implicit-Π-Prop
+  is-prop-implicit-Π-Prop =
+    is-prop-implicit-Π (λ x → is-prop-type-Prop (P x))
 
-For convenience, we also record repeated applications of the above.
-
-#### Higher order products of families of propositions are propositions
-
-```agda
-is-prop-Π² :
-  {l1 l2 l3 : Level}
-  {A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) (x2 : A2 x1) → UU l3} →
-  ((x1 : A1) (x2 : A2 x1) → is-prop (A3 x1 x2)) →
-  is-prop ((x1 : A1) (x2 : A2 x1) → A3 x1 x2)
-is-prop-Π² H = is-prop-Π (is-prop-Π ∘ H)
-
-is-prop-Π³ :
-  {l1 l2 l3 l4 : Level}
-  {A1 : UU l1}
-  {A2 : A1 → UU l2}
-  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
-  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4} →
-  ((x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → is-prop (A4 x1 x2 x3)) →
-  is-prop ((x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → A4 x1 x2 x3)
-is-prop-Π³ H = is-prop-Π (is-prop-Π² ∘ H)
-
-is-prop-Π⁴ :
-  {l1 l2 l3 l4 l5 : Level}
-  {A1 : UU l1}
-  {A2 : A1 → UU l2}
-  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
-  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4}
-  {A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5} →
-  ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) →
-    is-prop (A5 x1 x2 x3 x4)) →
-  is-prop
-    ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) →
-      A5 x1 x2 x3 x4)
-is-prop-Π⁴ H = is-prop-Π (is-prop-Π³ ∘ H)
-
-is-prop-Π⁵ :
-  {l1 l2 l3 l4 l5 l6 : Level}
-  {A1 : UU l1}
-  {A2 : A1 → UU l2}
-  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
-  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4}
-  {A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5} →
-  {A6 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) →
-    UU l6} →
-  ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) →
-    is-prop (A6 x1 x2 x3 x4 x5)) →
-  is-prop
-    ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-      (x5 : A5 x1 x2 x3 x4) →
-      A6 x1 x2 x3 x4 x5)
-is-prop-Π⁵ H = is-prop-Π (is-prop-Π⁴ ∘ H)
-
-is-prop-Π⁶ :
-  {l1 l2 l3 l4 l5 l6 l7 : Level}
-  {A1 : UU l1}
-  {A2 : A1 → UU l2}
-  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
-  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4}
-  {A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5} →
-  {A6 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) → UU l6} →
-  {A7 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7} →
-  ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) →
-    is-prop (A7 x1 x2 x3 x4 x5 x6)) →
-  is-prop
-    ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) →
-      A7 x1 x2 x3 x4 x5 x6)
-is-prop-Π⁶ H = is-prop-Π (is-prop-Π⁵ ∘ H)
-
-is-prop-Π⁷ :
-  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
-  {A1 : UU l1}
-  {A2 : A1 → UU l2}
-  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
-  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4}
-  {A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5} →
-  {A6 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) → UU l6} →
-  {A7 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7} →
-  {A8 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-    (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8} →
-  ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-    (x7 : A7 x1 x2 x3 x4 x5 x6) →
-    is-prop (A8 x1 x2 x3 x4 x5 x6 x7)) →
-  is-prop
-    ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-      (x7 : A7 x1 x2 x3 x4 x5 x6) →
-      A8 x1 x2 x3 x4 x5 x6 x7)
-is-prop-Π⁷ H = is-prop-Π (is-prop-Π⁶ ∘ H)
-
-is-prop-Π⁸ :
-  {l1 l2 l3 l4 l5 l6 l7 l8 l9 : Level}
-  {A1 : UU l1}
-  {A2 : A1 → UU l2}
-  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
-  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4}
-  {A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
-  {A6 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) → UU l6} →
-  {A7 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
-  {A8 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-    (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
-  {A9 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) → UU l9} →
-  ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) →
-    is-prop (A9 x1 x2 x3 x4 x5 x6 x7 x8)) →
-  is-prop
-    ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) →
-      A9 x1 x2 x3 x4 x5 x6 x7 x8)
-is-prop-Π⁸ H = is-prop-Π (is-prop-Π⁷ ∘ H)
-
-is-prop-Π⁹ :
-  {l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 : Level}
-  {A1 : UU l1}
-  {A2 : A1 → UU l2}
-  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
-  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4}
-  {A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
-  {A6 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) → UU l6} →
-  {A7 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
-  {A8 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-    (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
-  {A9 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) → UU l9} →
-  {A10 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
-    (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) → UU l10} →
-  ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
-    (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) →
-    is-prop (A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)) →
-  is-prop
-    ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
-      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) →
-      A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
-is-prop-Π⁹ H = is-prop-Π (is-prop-Π⁸ ∘ H)
-
-is-prop-Π¹⁰ :
-  {l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 : Level}
-  {A1 : UU l1}
-  {A2 : A1 → UU l2}
-  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
-  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4}
-  {A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
-  {A6 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) → UU l6} →
-  {A7 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
-  {A8 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-    (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
-  {A9 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) → UU l9} →
-  {A10 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
-    (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) → UU l10}
-  {A11 :
-    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
-    (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
-    UU l11} →
-  ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
-    (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
-    is-prop (A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)) →
-  is-prop
-    ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
-      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
-      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
-      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
-      A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
-is-prop-Π¹⁰ H = is-prop-Π (is-prop-Π⁹ ∘ H)
+  implicit-Π-Prop : Prop (l1 ⊔ l2)
+  pr1 implicit-Π-Prop = type-implicit-Π-Prop
+  pr2 implicit-Π-Prop = is-prop-implicit-Π-Prop
 ```
 
 ### The type of functions into a proposition is a proposition
@@ -506,38 +304,33 @@ type-function-Prop :
   {l1 l2 : Level} → UU l1 → Prop l2 → UU (l1 ⊔ l2)
 type-function-Prop A P = A → type-Prop P
 
-is-prop-type-function-Prop :
-  {l1 l2 : Level} (A : UU l1) (P : Prop l2) →
+is-prop-function-Prop :
+  {l1 l2 : Level} {A : UU l1} (P : Prop l2) →
   is-prop (type-function-Prop A P)
-is-prop-type-function-Prop A P =
+is-prop-function-Prop P =
   is-prop-function-type (is-prop-type-Prop P)
 
 function-Prop :
   {l1 l2 : Level} → UU l1 → Prop l2 → Prop (l1 ⊔ l2)
 pr1 (function-Prop A P) = type-function-Prop A P
-pr2 (function-Prop A P) = is-prop-type-function-Prop A P
+pr2 (function-Prop A P) = is-prop-function-Prop P
 
 type-hom-Prop :
-  { l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
-type-hom-Prop P Q = type-function-Prop (type-Prop P) Q
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
+type-hom-Prop P = type-function-Prop (type-Prop P)
 
-is-prop-type-hom-Prop :
+is-prop-hom-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
   is-prop (type-hom-Prop P Q)
-is-prop-type-hom-Prop P Q = is-prop-type-function-Prop (type-Prop P) Q
+is-prop-hom-Prop P = is-prop-function-Prop
 
 hom-Prop :
-  { l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-pr1 (hom-Prop P Q) = type-hom-Prop P Q
-pr2 (hom-Prop P Q) = is-prop-type-hom-Prop P Q
-
-implication-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-implication-Prop P Q = hom-Prop P Q
+pr1 (hom-Prop P Q) = type-hom-Prop P Q
+pr2 (hom-Prop P Q) = is-prop-hom-Prop P Q
 
-type-implication-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
-type-implication-Prop P Q = type-hom-Prop P Q
+infixr 5 _⇒_
+_⇒_ = hom-Prop
 ```
 
 ### The type of equivalences between two propositions is a proposition
@@ -552,7 +345,7 @@ module _
     is-prop-Σ
       ( is-prop-function-type K)
       ( λ f →
-        is-prop-prod
+        is-prop-product
           ( is-prop-Σ
             ( is-prop-function-type H)
             ( λ g → is-prop-is-contr (is-contr-Π (λ y → K (f (g y)) y))))
@@ -605,3 +398,61 @@ is-prop-Prop : {l : Level} (A : UU l) → Prop l
 pr1 (is-prop-Prop A) = is-prop A
 pr2 (is-prop-Prop A) = is-prop-is-prop A
 ```
+
+## See also
+
+### Operations on propositions
+
+There is a wide range of operations on propositions due to the rich structure of
+intuitionistic logic. Below we give a structured overview of a notable selection
+of such operations and their notation in the library.
+
+The list is split into two sections, the first consists of operations that
+generalize to arbitrary types and even sufficiently nice
+[subuniverses](foundation.subuniverses.md), such as
+$n$-[types](foundation-core.truncated-types.md).
+
+| Name                                                        | Operator on types | Operator on propositions/subtypes |
+| ----------------------------------------------------------- | ----------------- | --------------------------------- |
+| [Dependent sum](foundation.dependent-pair-types.md)         | `Σ`               | `Σ-Prop`                          |
+| [Dependent product](foundation.dependent-function-types.md) | `Π`               | `Π-Prop`                          |
+| [Functions](foundation-core.function-types.md)              | `→`               | `⇒`                               |
+| [Logical equivalence](foundation.logical-equivalences.md)   | `↔`               | `⇔`                               |
+| [Product](foundation-core.cartesian-product-types.md)       | `×`               | `product-Prop`                    |
+| [Join](synthetic-homotopy-theory.joins-of-types.md)         | `*`               | `join-Prop`                       |
+| [Exclusive sum](foundation.exclusive-sum.md)                | `exclusive-sum`   | `exclusive-sum-Prop`              |
+| [Coproduct](foundation-core.coproduct-types.md)             | `+`               | _N/A_                             |
+
+Note that for many operations in the second section, there is an equivalent
+operation on propositions in the first.
+
+| Name                                                                         | Operator on types           | Operator on propositions/subtypes        |
+| ---------------------------------------------------------------------------- | --------------------------- | ---------------------------------------- |
+| [Initial object](foundation-core.empty-types.md)                             | `empty`                     | `empty-Prop`                             |
+| [Terminal object](foundation.unit-type.md)                                   | `unit`                      | `unit-Prop`                              |
+| [Existential quantification](foundation.existential-quantification.md)       | `exists-structure`          | `∃`                                      |
+| [Unique existential quantification](foundation.uniqueness-quantification.md) | `uniquely-exists-structure` | `∃!`                                     |
+| [Universal quantification](foundation.universal-quantification.md)           |                             | `∀'` (equivalent to `Π-Prop`)            |
+| [Conjunction](foundation.conjunction.md)                                     |                             | `∧` (equivalent to `product-Prop`)       |
+| [Disjunction](foundation.disjunction.md)                                     | `disjunction-type`          | `∨` (equivalent to `join-Prop`)          |
+| [Exclusive disjunction](foundation.exclusive-disjunction.md)                 | `xor-type`                  | `⊻` (equivalent to `exclusive-sum-Prop`) |
+| [Negation](foundation.negation.md)                                           | `¬`                         | `¬'`                                     |
+| [Double negation](foundation.double-negation.md)                             | `¬¬`                        | `¬¬'`                                    |
+
+We can also organize these operations by indexed and binary variants, giving us
+the following table:
+
+| Name                   | Binary | Indexed |
+| ---------------------- | ------ | ------- |
+| Product                | `×`    | `Π`     |
+| Conjunction            | `∧`    | `∀'`    |
+| Constructive existence | `+`    | `Σ`     |
+| Existence              | `∨`    | `∃`     |
+| Unique existence       | `⊻`    | `∃!`    |
+
+### Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}

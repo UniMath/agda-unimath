@@ -17,9 +17,11 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.maybe
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.sets
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -32,10 +34,9 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.injective-maps
 open import foundation-core.propositions
-open import foundation-core.sets
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 ```
 
@@ -91,12 +92,12 @@ module _
   is-decidable-point-is-isolated :
     is-isolated a → is-decidable-map (point a)
   is-decidable-point-is-isolated d x =
-    is-decidable-equiv (fiber-const a x) (d x)
+    is-decidable-equiv (compute-fiber-point a x) (d x)
 
   is-isolated-is-decidable-point :
     is-decidable-map (point a) → is-isolated a
   is-isolated-is-decidable-point d x =
-    is-decidable-equiv' (fiber-const a x) (d x)
+    is-decidable-equiv' (compute-fiber-point a x) (d x)
 
   cases-Eq-isolated-element :
     is-isolated a → (x : A) → is-decidable (a ＝ x) → UU lzero
@@ -161,11 +162,11 @@ module _
         ( Eq-isolated-element-Prop d)
         ( cases-contraction-total-Eq-isolated-element d x (d x) e)
 
-    is-contr-total-Eq-isolated-element :
-      (d : is-isolated a) → is-contr (Σ A (Eq-isolated-element d))
-    pr1 (is-contr-total-Eq-isolated-element d) =
+    is-torsorial-Eq-isolated-element :
+      (d : is-isolated a) → is-torsorial (Eq-isolated-element d)
+    pr1 (is-torsorial-Eq-isolated-element d) =
       center-total-Eq-isolated-element d
-    pr2 (is-contr-total-Eq-isolated-element d) =
+    pr2 (is-torsorial-Eq-isolated-element d) =
       contraction-total-Eq-isolated-element d
 
   abstract
@@ -173,7 +174,7 @@ module _
       (d : is-isolated a) (x : A) → is-equiv (Eq-eq-isolated-element d {x})
     is-equiv-Eq-eq-isolated-element d =
       fundamental-theorem-id
-        ( is-contr-total-Eq-isolated-element d)
+        ( is-torsorial-Eq-isolated-element d)
         ( λ x → Eq-eq-isolated-element d {x})
 
   abstract
@@ -200,7 +201,7 @@ module _
       fundamental-theorem-id
         ( is-contr-equiv
           ( a ＝ a)
-          ( left-unit-law-prod)
+          ( left-unit-law-product)
           ( is-proof-irrelevant-is-prop
             ( is-prop-eq-isolated-element d a)
             ( refl)))
@@ -213,7 +214,7 @@ module _
 is-prop-is-isolated :
   {l1 : Level} {A : UU l1} (a : A) → is-prop (is-isolated a)
 is-prop-is-isolated a =
-  is-prop-is-inhabited
+  is-prop-has-element
     ( λ H → is-prop-Π (is-prop-is-decidable ∘ is-prop-eq-isolated-element a H))
 
 is-isolated-Prop :
@@ -252,11 +253,11 @@ module _
   is-emb-point-isolated-element =
     is-emb-comp
       ( inclusion-isolated-element A)
-      ( const unit (isolated-element A) a)
+      ( point a)
       ( is-emb-inclusion-isolated-element A)
       ( is-emb-is-injective
         ( is-set-isolated-element A)
-        ( λ {star} {star} p → refl))
+        ( λ p → refl))
 
   emb-point-isolated-element : unit ↪ A
   pr1 emb-point-isolated-element = point-isolated-element
@@ -265,7 +266,7 @@ module _
   is-decidable-point-isolated-element :
     is-decidable-map point-isolated-element
   is-decidable-point-isolated-element x =
-    is-decidable-prod is-decidable-unit (is-isolated-isolated-element a x)
+    is-decidable-product is-decidable-unit (is-isolated-isolated-element a x)
 
   is-decidable-emb-point-isolated-element :
     is-decidable-emb point-isolated-element

@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -24,12 +25,16 @@ open import foundation.functoriality-function-types
 open import foundation.functoriality-set-truncation
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.postcomposition-functions
+open import foundation.precomposition-dependent-functions
+open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.set-truncations
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-empty-type
+open import foundation.universal-property-equivalences
 open import foundation.universal-property-maybe
 open import foundation.universe-levels
 
@@ -77,12 +82,12 @@ abstract
           ( is-equiv-comp
             ( precomp ev-Maybe (type-Set B))
             ( precomp
-              ( map-prod (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)
+              ( map-product (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)
               ( type-Set B))
             ( is-equiv-right-factor
               ( ev-pair)
               ( precomp
-                ( map-prod (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)
+                ( map-product (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)
                 ( type-Set B))
               ( is-equiv-ev-pair)
               ( is-equiv-map-equiv
@@ -93,10 +98,6 @@ abstract
                       ( is-set-truncation-is-equiv
                         ( Π-Set (Fin-Set k) (λ x → trunc-Set (A (inl x))))
                         ( map-Π (λ x → unit-trunc-Set))
-                        { map-equiv
-                          ( pr1
-                            ( center
-                              ( distributive-trunc-Π-Fin-Set k (A ∘ inl))))}
                         ( pr2
                           ( center (distributive-trunc-Π-Fin-Set k (A ∘ inl))))
                         ( is-equiv-map-equiv
@@ -106,9 +107,7 @@ abstract
                         ( Π-Set' (A (inr star)) (λ a → B)))) ∘e
                     ( equiv-postcomp
                       ( (x : Fin k) → type-trunc-Set (A (inl x)))
-                      ( equiv-universal-property-trunc-Set
-                        ( A (inr star))
-                        ( B)))) ∘e
+                      ( equiv-universal-property-trunc-Set B))) ∘e
                   ( equiv-ev-pair))))
             ( is-equiv-precomp-is-equiv
               ( ev-Maybe)

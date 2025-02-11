@@ -10,6 +10,7 @@ module synthetic-homotopy-theory.sections-descent-circle where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
+open import foundation.commuting-triangles-of-identifications
 open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -205,13 +206,13 @@ module _
           ( ( inv (assoc (ap _ (inv is-section-inv-α)) _ _)) ∙
             ( horizontal-concat-Id²
               ( inv
-                ( ap-concat-eq
+                ( map-coherence-triangle-identifications
                   ( tr
                     ( family-family-with-descent-data-circle A)
                     ( loop-free-loop l))
-                  ( inv is-section-inv-α)
-                  ( is-section-inv-α)
                   ( refl)
+                  ( is-section-inv-α)
+                  ( inv is-section-inv-α)
                   ( inv (left-inv is-section-inv-α))))
               ( refl)))))
     where
@@ -232,10 +233,10 @@ module _
     is-equiv-map-equiv equiv-fixpoint-descent-data-circle-free-dependent-loop
 
   is-equiv-ev-fixpoint-descent-data-circle :
-    ( dependent-universal-property-circle l2 l) →
+    dependent-universal-property-circle l →
     is-equiv ev-fixpoint-descent-data-circle
   is-equiv-ev-fixpoint-descent-data-circle dup-circle =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( ev-free-loop-Π l (family-family-with-descent-data-circle A))
       ( comparison-fixpoint-descent-data-circle)
       ( ev-fixpoint-descent-data-circle)
@@ -244,7 +245,7 @@ module _
       ( dup-circle (family-family-with-descent-data-circle A))
 
   equiv-ev-fixpoint-descent-data-circle :
-    ( dependent-universal-property-circle l2 l) →
+    dependent-universal-property-circle l →
     ( (x : S) → (family-family-with-descent-data-circle A) x) ≃
     ( fixpoint-descent-data-circle
       ( descent-data-family-with-descent-data-circle A))

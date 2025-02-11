@@ -13,6 +13,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.multiplicative-monoid-of-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
@@ -84,15 +85,16 @@ module _
   {l : Level} {X : UU l}
   where
 
-  iterate-succ-ℕ :
+  reassociate-iterate-succ-ℕ :
     (k : ℕ) (f : X → X) (x : X) → iterate (succ-ℕ k) f x ＝ iterate k f (f x)
-  iterate-succ-ℕ zero-ℕ f x = refl
-  iterate-succ-ℕ (succ-ℕ k) f x = ap f (iterate-succ-ℕ k f x)
+  reassociate-iterate-succ-ℕ zero-ℕ f x = refl
+  reassociate-iterate-succ-ℕ (succ-ℕ k) f x =
+    ap f (reassociate-iterate-succ-ℕ k f x)
 
   reassociate-iterate : (k : ℕ) (f : X → X) → iterate k f ~ iterate' k f
   reassociate-iterate zero-ℕ f x = refl
   reassociate-iterate (succ-ℕ k) f x =
-    iterate-succ-ℕ k f x ∙ reassociate-iterate k f (f x)
+    reassociate-iterate-succ-ℕ k f x ∙ reassociate-iterate k f (f x)
 ```
 
 ### For any map `f : X → X`, iterating `f` defines a monoid action of ℕ on `X`
@@ -107,7 +109,8 @@ module _
     iterate (k +ℕ l) f x ＝ iterate k f (iterate l f x)
   iterate-add-ℕ k zero-ℕ f x = refl
   iterate-add-ℕ k (succ-ℕ l) f x =
-    ap f (iterate-add-ℕ k l f x) ∙ iterate-succ-ℕ k f (iterate l f x)
+    ap f (iterate-add-ℕ k l f x) ∙
+    reassociate-iterate-succ-ℕ k f (iterate l f x)
 
   left-unit-law-iterate-add-ℕ :
     (l : ℕ) (f : X → X) (x : X) →
@@ -115,7 +118,7 @@ module _
   left-unit-law-iterate-add-ℕ zero-ℕ f x = refl
   left-unit-law-iterate-add-ℕ (succ-ℕ l) f x =
     ( right-unit) ∙
-    ( ( ap (ap f) (left-unit-law-iterate-add-ℕ l f x)) ∙
+    ( ( ap² f (left-unit-law-iterate-add-ℕ l f x)) ∙
       ( ( inv (ap-comp f (λ t → iterate t f x) (left-unit-law-add-ℕ l))) ∙
         ( ap-comp (λ t → iterate t f x) succ-ℕ (left-unit-law-add-ℕ l))))
 
@@ -139,7 +142,7 @@ module _
   iterate-mul-ℕ (succ-ℕ k) l f x =
     ( iterate-add-ℕ (k *ℕ l) l f x) ∙
     ( ( iterate-mul-ℕ k l f (iterate l f x)) ∙
-      ( inv (iterate-succ-ℕ k (iterate l f) x)))
+      ( inv (reassociate-iterate-succ-ℕ k (iterate l f) x)))
 
   iterate-exp-ℕ :
     (k l : ℕ) (f : X → X) (x : X) →
@@ -148,18 +151,18 @@ module _
   iterate-exp-ℕ (succ-ℕ k) l f x =
     ( iterate-mul-ℕ (exp-ℕ l k) l f x) ∙
     ( ( iterate-exp-ℕ k l (iterate l f) x) ∙
-      ( inv (htpy-eq (iterate-succ-ℕ k (iterate l) f) x)))
+      ( inv (htpy-eq (reassociate-iterate-succ-ℕ k (iterate l) f) x)))
 
 module _
   {l : Level} (X : Set l)
   where
 
-  iterative-Monoid-Action : Monoid-Action l ℕ*-Monoid
-  pr1 iterative-Monoid-Action = endo-Set X
-  pr1 (pr1 (pr2 iterative-Monoid-Action)) k f = iterate k f
-  pr2 (pr1 (pr2 iterative-Monoid-Action)) k l =
+  iterative-action-Monoid : action-Monoid l ℕ*-Monoid
+  pr1 iterative-action-Monoid = endo-Set X
+  pr1 (pr1 (pr2 iterative-action-Monoid)) k f = iterate k f
+  pr2 (pr1 (pr2 iterative-action-Monoid)) {k} {l} =
     eq-htpy (λ f → eq-htpy (λ x → iterate-mul-ℕ k l f x))
-  pr2 (pr2 iterative-Monoid-Action) = refl
+  pr2 (pr2 iterative-action-Monoid) = refl
 ```
 
 ## External links

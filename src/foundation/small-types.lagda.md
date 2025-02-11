@@ -26,7 +26,7 @@ open import foundation-core.homotopies
 
 ## Properties
 
-### If `f` is a surjective map from a small type into a locally small type, then `Replacement` implies that the codomain is small
+### If `f` is a surjective map from a small type into a locally small type, then replacement implies that the codomain is small
 
 ```agda
 is-small-is-surjective :
@@ -37,7 +37,11 @@ is-small-is-surjective {f = f} H K L =
   is-small-equiv'
     ( im f)
     ( equiv-equiv-slice-uniqueness-im f id-emb
-      ( pair f refl-htpy)
-      ( is-image-is-surjective f id-emb (pair f refl-htpy) H))
+      ( f , refl-htpy)
+      ( is-image-is-surjective f id-emb (f , refl-htpy) H))
     ( replacement f K L)
 ```
+
+## See also
+
+- [Small maps](foundation.small-maps.md)

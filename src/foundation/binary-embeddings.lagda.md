@@ -60,7 +60,7 @@ is-binary-emb-is-binary-equiv :
 is-binary-emb-is-binary-equiv {f = f} H {x} {x'} {y} {y'} =
   pair
     ( λ q →
-      is-equiv-comp-htpy
+      is-equiv-left-map-triangle
         ( λ p → ap-binary f p q)
         ( concat' (f x y) (ap (fix-left f x') q))
         ( λ p → ap (fix-right f y) p)
@@ -68,7 +68,7 @@ is-binary-emb-is-binary-equiv {f = f} H {x} {x'} {y} {y'} =
         ( is-emb-fix-right-is-binary-equiv f H x x')
         ( is-equiv-concat' (f x y) (ap (fix-left f x') q)))
     ( λ p →
-      is-equiv-comp-htpy
+      is-equiv-left-map-triangle
         ( λ q → ap-binary f p q)
         ( concat (ap (fix-right f y) p) (f x' y'))
         ( λ q → ap (fix-left f x') q)

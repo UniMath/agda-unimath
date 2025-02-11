@@ -52,8 +52,8 @@ module _
           ( type-Poset Q)
           ( λ y →
             iff-Prop
-              ( leq-Poset-Prop Q (map-hom-Poset P Q f x) y)
-              ( leq-Poset-Prop P x (map-hom-Poset Q P g y))))
+              ( leq-prop-Poset Q (map-hom-Poset P Q f x) y)
+              ( leq-prop-Poset P x (map-hom-Poset Q P g y))))
 
   is-lower-adjoint-Galois-Connection :
     hom-Poset P Q → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -84,7 +84,7 @@ module _
     preserves-order-upper-adjoint-Galois-Connection :
       preserves-order-Poset Q P map-upper-adjoint-Galois-Connection
     preserves-order-upper-adjoint-Galois-Connection =
-      preserves-order-map-hom-Poset Q P upper-adjoint-Galois-Connection
+      preserves-order-hom-Poset Q P upper-adjoint-Galois-Connection
 
     is-upper-adjoint-upper-adjoint-Galois-Connection :
       is-upper-adjoint-Galois-Connection upper-adjoint-Galois-Connection
@@ -102,7 +102,7 @@ module _
     preserves-order-lower-adjoint-Galois-Connection :
       preserves-order-Poset P Q map-lower-adjoint-Galois-Connection
     preserves-order-lower-adjoint-Galois-Connection =
-      preserves-order-map-hom-Poset P Q lower-adjoint-Galois-Connection
+      preserves-order-hom-Poset P Q lower-adjoint-Galois-Connection
 
     adjoint-relation-Galois-Connection :
       (x : type-Poset P) (y : type-Poset Q) →
@@ -390,7 +390,7 @@ module _
     (G H : Galois-Connection P Q) →
     is-equiv (htpy-upper-adjoint-htpy-lower-adjoint-Galois-Connection G H)
   is-equiv-htpy-upper-adjoint-htpy-lower-adjoint-Galois-Connection G H =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-htpy-lower-adjoint-Galois-Connection G H)
       ( is-prop-htpy-upper-adjoint-Galois-Connection P Q G H)
       ( htpy-lower-adjoint-htpy-upper-adjoint-Galois-Connection G H)
@@ -399,7 +399,7 @@ module _
     (G H : Galois-Connection P Q) →
     is-equiv (htpy-lower-adjoint-htpy-upper-adjoint-Galois-Connection G H)
   is-equiv-htpy-lower-adjoint-htpy-upper-adjoint-Galois-Connection G H =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-htpy-upper-adjoint-Galois-Connection P Q G H)
       ( is-prop-htpy-lower-adjoint-Galois-Connection G H)
       ( htpy-upper-adjoint-htpy-lower-adjoint-Galois-Connection G H)
@@ -545,5 +545,4 @@ module _
 
 ## References
 
-- Erné, Koslowski, Melton, Strecker. _A primer on Galois connections_. Annals
-  New York Academy of Sciences 704 (1993)
+{{#bibliography}} {{#reference EKMS93}}

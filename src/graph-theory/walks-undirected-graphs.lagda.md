@@ -22,6 +22,7 @@ open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -168,7 +169,7 @@ module _
     is-contr
       ( vertex-on-walk-Undirected-Graph G (refl-walk-Undirected-Graph {x = x}))
   is-contr-vertex-on-walk-refl-walk-Undirected-Graph =
-    is-contr-total-path x
+    is-torsorial-Id x
 ```
 
 ### The type of vertices on a walk is equivalent to `Fin (n + 1)` where `n` is the length of the walk
@@ -188,12 +189,12 @@ module _
       ( is-contr-Fin-one-ℕ)
   compute-vertex-on-walk-Undirected-Graph
     ( cons-walk-Undirected-Graph p e {y} w) =
-    ( equiv-coprod
+    ( equiv-coproduct
       ( compute-vertex-on-walk-Undirected-Graph w)
       ( equiv-is-contr
-        ( is-contr-total-path (other-element-unordered-pair p y))
+        ( is-torsorial-Id (other-element-unordered-pair p y))
         ( is-contr-unit))) ∘e
-    ( left-distributive-Σ-coprod
+    ( left-distributive-Σ-coproduct
       ( vertex-Undirected-Graph G)
       ( is-vertex-on-walk-Undirected-Graph G w)
       ( λ z → other-element-unordered-pair p y ＝ z))
@@ -227,12 +228,12 @@ module _
       ( is-empty-edge-on-walk-refl-walk-Undirected-Graph G x)
       ( id)
   compute-edge-on-walk-Undirected-Graph (cons-walk-Undirected-Graph p e w) =
-    ( equiv-coprod
+    ( equiv-coproduct
       ( compute-edge-on-walk-Undirected-Graph w)
       ( equiv-is-contr
-        ( is-contr-total-path (pair p e))
+        ( is-torsorial-Id (pair p e))
         ( is-contr-unit))) ∘e
-    ( left-distributive-Σ-coprod
+    ( left-distributive-Σ-coproduct
       ( total-edge-Undirected-Graph G)
       ( is-edge-on-walk-Undirected-Graph' G w)
       ( λ z → pair p e ＝ z))
@@ -362,7 +363,7 @@ module _
     inl refl
   is-vertex-on-first-or-second-segment-walk-Undirected-Graph
     ( cons-walk-Undirected-Graph p e w) (u , inl H) (v , inl K) =
-    map-coprod id
+    map-coproduct id
       ( is-vertex-on-walk-cons-walk-Undirected-Graph G p e
         ( second-segment-walk-Undirected-Graph G w (u , H)))
       ( is-vertex-on-first-or-second-segment-walk-Undirected-Graph w
@@ -476,15 +477,15 @@ module _
   pr1 refl-constant-walk-Undirected-Graph = refl-walk-Undirected-Graph
   pr2 refl-constant-walk-Undirected-Graph = refl
 
-  is-contr-total-constant-walk-Undirected-Graph :
-    is-contr (Σ (vertex-Undirected-Graph G) constant-walk-Undirected-Graph)
-  pr1 (pr1 is-contr-total-constant-walk-Undirected-Graph) = x
-  pr2 (pr1 is-contr-total-constant-walk-Undirected-Graph) =
+  is-torsorial-constant-walk-Undirected-Graph :
+    is-torsorial constant-walk-Undirected-Graph
+  pr1 (pr1 is-torsorial-constant-walk-Undirected-Graph) = x
+  pr2 (pr1 is-torsorial-constant-walk-Undirected-Graph) =
     refl-constant-walk-Undirected-Graph
-  pr2 is-contr-total-constant-walk-Undirected-Graph
+  pr2 is-torsorial-constant-walk-Undirected-Graph
     (v , refl-walk-Undirected-Graph , refl) =
     refl
-  pr2 is-contr-total-constant-walk-Undirected-Graph
+  pr2 is-torsorial-constant-walk-Undirected-Graph
     (.(other-element-unordered-pair p _) ,
       cons-walk-Undirected-Graph p e w , ())
 
@@ -497,7 +498,7 @@ module _
     is-equiv (constant-walk-eq-Undirected-Graph y)
   is-equiv-constant-walk-eq-Undirected-Graph =
     fundamental-theorem-id
-      ( is-contr-total-constant-walk-Undirected-Graph)
+      ( is-torsorial-constant-walk-Undirected-Graph)
       ( constant-walk-eq-Undirected-Graph)
 
   equiv-constant-walk-eq-Undirected-Graph :
@@ -516,7 +517,7 @@ module _
 
 ## External links
 
-- [Path](https://www.wikidata.org/wiki/Q917421) on Wikidata
+- [Path](https://www.wikidata.org/entity/Q917421) on Wikidata
 - [Path (graph theory)](<https://en.wikipedia.org/wiki/Path_(graph_theory)>) at
   Wikipedia
-- [Walk](https://mathworld.wolfram.com/Walk.html) at Wolfram Mathworld
+- [Walk](https://mathworld.wolfram.com/Walk.html) at Wolfram MathWorld

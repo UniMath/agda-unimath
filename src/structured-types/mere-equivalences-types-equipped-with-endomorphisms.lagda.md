@@ -7,7 +7,6 @@ module structured-types.mere-equivalences-types-equipped-with-endomorphisms wher
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -16,6 +15,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import structured-types.equivalences-types-equipped-with-endomorphisms
@@ -126,14 +126,13 @@ module _
   equiv-eq-Component-Type-With-Endomorphism T .T refl =
     id-equiv-Component-Type-With-Endomorphism T
 
-  is-contr-total-equiv-Component-Type-With-Endomorphism :
-    is-contr
-      ( Σ ( Component-Type-With-Endomorphism X)
-          ( equiv-Component-Type-With-Endomorphism
-              ( canonical-Component-Type-With-Endomorphism X)))
-  is-contr-total-equiv-Component-Type-With-Endomorphism =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-equiv-Type-With-Endomorphism X)
+  is-torsorial-equiv-Component-Type-With-Endomorphism :
+    is-torsorial
+      ( equiv-Component-Type-With-Endomorphism
+        ( canonical-Component-Type-With-Endomorphism X))
+  is-torsorial-equiv-Component-Type-With-Endomorphism =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-equiv-Type-With-Endomorphism X)
       ( λ Y → is-prop-type-trunc-Prop)
       ( X)
       ( id-equiv-Type-With-Endomorphism X)
@@ -147,7 +146,7 @@ module _
         ( T))
   is-equiv-equiv-eq-Component-Type-With-Endomorphism =
     fundamental-theorem-id
-      ( is-contr-total-equiv-Component-Type-With-Endomorphism)
+      ( is-torsorial-equiv-Component-Type-With-Endomorphism)
       ( equiv-eq-Component-Type-With-Endomorphism
         ( canonical-Component-Type-With-Endomorphism X))
 ```

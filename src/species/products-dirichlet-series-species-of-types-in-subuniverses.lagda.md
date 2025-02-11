@@ -11,11 +11,11 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
+open import foundation.global-subuniverses
 open import foundation.homotopies
+open import foundation.postcomposition-functions
 open import foundation.subuniverses
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-cartesian-product-types
@@ -38,7 +38,7 @@ The product of two Dirichlet series is the pointwise product.
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (C1 : is-closed-under-products-subuniverse P)
   (H : species-subuniverse-domain l5 P)
   (C2 : preserves-product-species-subuniverse-domain P C1 H)
@@ -76,7 +76,7 @@ module _
 module _
   {l1 l2 l3 l4 l5 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (C1 : is-closed-under-products-subuniverse P)
   (H : species-subuniverse-domain l5 P)
   (C2 : preserves-product-species-subuniverse-domain P C1 H)
@@ -156,12 +156,11 @@ module _
         ( λ A →
           equiv-tot
             ( λ B →
-              ( equiv-prod
+              ( equiv-product
                 ( id-equiv)
-                ( universal-property-product ∘e
-                  equiv-postcomp X (C2 A B))) ∘e
+                ( equiv-up-product ∘e equiv-postcomp X (C2 A B))) ∘e
               left-unit-law-Σ-is-contr
-                ( is-contr-total-equiv-subuniverse'
+                ( is-torsorial-equiv-subuniverse'
                   ( P)
                   ( inclusion-subuniverse P A ×
                     inclusion-subuniverse P B ,

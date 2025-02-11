@@ -20,39 +20,29 @@ open import ring-theory.semirings
 
 ## Idea
 
-The **precategory of semirings** consists of semirings and homomorphisms of
-semirings.
+The {{#concet "precategory of semirings" Agda=Semiring-Large-Precategory}}
+consists of [semirings](ring-theory.semirings.md) and
+[homomorphisms of semirings](ring-theory.homomorphisms-semirings.md).
 
 ## Definitions
 
 ### The large precategory of semirings
 
 ```agda
-Semiring-Large-Precategory : Large-Precategory lsuc _⊔_
-obj-Large-Precategory
-  Semiring-Large-Precategory =
-  Semiring
-hom-set-Large-Precategory
-  Semiring-Large-Precategory =
-  hom-set-Semiring
-comp-hom-Large-Precategory
-  Semiring-Large-Precategory {X = R} {S} {T} =
-  comp-hom-Semiring R S T
-id-hom-Large-Precategory
-  Semiring-Large-Precategory {X = R} =
-  id-hom-Semiring R
-associative-comp-hom-Large-Precategory
-  Semiring-Large-Precategory {X = R} {S} {T} {U} =
-  associative-comp-hom-Semiring R S T U
-left-unit-law-comp-hom-Large-Precategory
-  Semiring-Large-Precategory {X = R} {S} =
-  left-unit-law-comp-hom-Semiring R S
-right-unit-law-comp-hom-Large-Precategory
-  Semiring-Large-Precategory {X = R} {S} =
-  right-unit-law-comp-hom-Semiring R S
+Semiring-Large-Precategory : Large-Precategory lsuc (_⊔_)
+Semiring-Large-Precategory =
+  make-Large-Precategory
+    ( Semiring)
+    ( hom-set-Semiring)
+    ( λ {l1} {l2} {l3} {R} {S} {T} → comp-hom-Semiring R S T)
+    ( λ {l} {R} → id-hom-Semiring R)
+    ( λ {l1} {l2} {l3} {l4} {R} {S} {T} {U} →
+      associative-comp-hom-Semiring R S T U)
+    ( λ {l1} {l2} {R} {S} → left-unit-law-comp-hom-Semiring R S)
+    ( λ {l1} {l2} {R} {S} → right-unit-law-comp-hom-Semiring R S)
 ```
 
-### The precategory of semirings of universe level `l`
+### The precategory of small semirings
 
 ```agda
 Semiring-Precategory : (l : Level) → Precategory (lsuc l) l

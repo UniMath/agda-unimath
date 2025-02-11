@@ -8,14 +8,15 @@ module foundation.locally-small-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.inhabited-subtypes
 open import foundation.subuniverses
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -31,17 +32,42 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A type is said to be locally small if its identity types are small.
+A type is said to be
+{{#concept "locally small" Disambiguation="type" Agda=is-locally-small}} with
+respect to a [universe](foundation.universe-levels.md) `UU l` if its
+[identity types](foundation-core.identity-types.md) are
+[small](foundation-core.small-types.md) with respect to that universe.
 
 ## Definition
+
+### Locally small types
 
 ```agda
 is-locally-small :
   (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
 is-locally-small l A = (x y : A) → is-small l (x ＝ y)
+
+module _
+  {l l1 : Level} {A : UU l1} (H : is-locally-small l A) (x y : A)
+  where
+
+  type-is-locally-small : UU l
+  type-is-locally-small = pr1 (H x y)
+
+  equiv-is-locally-small : (x ＝ y) ≃ type-is-locally-small
+  equiv-is-locally-small = pr2 (H x y)
+
+  inv-equiv-is-locally-small : type-is-locally-small ≃ (x ＝ y)
+  inv-equiv-is-locally-small = inv-equiv equiv-is-locally-small
+
+  map-equiv-is-locally-small : (x ＝ y) → type-is-locally-small
+  map-equiv-is-locally-small = map-equiv equiv-is-locally-small
+
+  map-inv-equiv-is-locally-small : type-is-locally-small → (x ＝ y)
+  map-inv-equiv-is-locally-small = map-inv-equiv equiv-is-locally-small
 ```
 
-### The type of locally small types
+### The subuniverse of `UU l1`-locally small types in `UU l2`
 
 ```agda
 Locally-Small-Type : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
@@ -57,6 +83,17 @@ module _
   is-locally-small-type-Locally-Small-Type :
     is-locally-small l1 type-Locally-Small-Type
   is-locally-small-type-Locally-Small-Type = pr2 A
+
+  small-identity-type-Locally-Small-Type :
+    (x y : type-Locally-Small-Type) → UU l1
+  small-identity-type-Locally-Small-Type =
+    type-is-locally-small is-locally-small-type-Locally-Small-Type
+
+  equiv-is-locally-small-type-Locally-Small-Type :
+    (x y : type-Locally-Small-Type) →
+    (x ＝ y) ≃ small-identity-type-Locally-Small-Type x y
+  equiv-is-locally-small-type-Locally-Small-Type =
+    equiv-is-locally-small is-locally-small-type-Locally-Small-Type
 ```
 
 ## Properties
@@ -80,6 +117,28 @@ pr2 (is-locally-small-Prop l A) = is-prop-is-locally-small l A
 ```agda
 is-locally-small' : {l : Level} {A : UU l} → is-locally-small l A
 is-locally-small' x y = is-small'
+```
+
+### Locally small types are closed under embeddings
+
+```agda
+is-locally-small-emb :
+  {l1 l2 l : Level} {A : UU l1} {B : UU l2} →
+  A ↪ B → is-locally-small l B → is-locally-small l A
+is-locally-small-emb f H x y =
+  is-small-equiv
+    ( map-emb f x ＝ map-emb f y)
+    ( equiv-ap-emb f)
+    ( H (map-emb f x) (map-emb f y))
+```
+
+### Locally small types are closed under equivalences
+
+```agda
+is-locally-small-equiv :
+  {l1 l2 l : Level} {A : UU l1} {B : UU l2} →
+  A ≃ B → is-locally-small l B → is-locally-small l A
+is-locally-small-equiv e = is-locally-small-emb (emb-equiv e)
 ```
 
 ### Any small type is locally small
@@ -243,10 +302,7 @@ is-locally-small-inhabited-subtype H =
 
 ## References
 
-- Egbert Rijke, Theorem 4.6 in _The join construction_, 2017
-  ([arXiv:1701.07538](https://arxiv.org/abs/1701.07538),
-  [DOI:10.48550](https://doi.org/10.48550/arXiv.1701.07538))
-- Marc Bezem, Ulrik Buchholtz, Pierre Cagne, Bjørn Ian Dundas, and Daniel R.
-  Grayson, Section 2.19 of _Symmetry_
-  ([draft](https://unimath.github.io/SymmetryBook/book.pdf),
-  [GitHub](https://github.com/UniMath/SymmetryBook))
+- Theorem 4.6 in {{#cite Rij17}}.
+- Section 2.19 in {{#cite SymmetryBook}}.
+
+{{#bibliography}}

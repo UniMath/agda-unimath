@@ -17,6 +17,7 @@ open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.type-arithmetic-dependent-pair-types
@@ -37,10 +38,10 @@ open import univalent-combinatorics.standard-finite-types
 ## Definition
 
 ```agda
-Surjection-𝔽 :
-  {l1 : Level} (l2 : Level) → 𝔽 l1 → UU (l1 ⊔ lsuc l2)
-Surjection-𝔽 l2 A =
-  Σ (𝔽 l2) (λ B → (type-𝔽 A) ↠ (type-𝔽 B))
+Surjection-Finite-Type :
+  {l1 : Level} (l2 : Level) → Finite-Type l1 → UU (l1 ⊔ lsuc l2)
+Surjection-Finite-Type l2 A =
+  Σ (Finite-Type l2) (λ B → (type-Finite-Type A) ↠ (type-Finite-Type B))
 ```
 
 ## Properties
@@ -93,7 +94,7 @@ module _
   is-finite-if-∃-surjection-has-decidable-equality fin-X =
     apply-universal-property-trunc-Prop
       ( fin-X)
-      ( prod-Prop (has-decidable-equality-Prop X) (trunc-Prop _))
+      ( product-Prop (has-decidable-equality-Prop X) (trunc-Prop _))
       ( λ count-X →
         ( has-decidable-equality-count count-X ,
           unit-trunc-Prop
@@ -119,9 +120,9 @@ module _
     is-finite X ≃
     ( has-decidable-equality X × type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
   is-finite-iff-∃-surjection-has-decidable-equality =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-prop-is-finite X)
-      ( is-prop-prod is-prop-has-decidable-equality is-prop-type-trunc-Prop)
+      ( is-prop-product is-prop-has-decidable-equality is-prop-type-trunc-Prop)
       ( λ fin-X → is-finite-if-∃-surjection-has-decidable-equality fin-X)
       ( λ dec-X-surj →
         ∃-surjection-has-decidable-equality-if-is-finite dec-X-surj)

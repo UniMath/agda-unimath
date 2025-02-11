@@ -85,18 +85,12 @@ inverts-element-comp-hom-Ring R S T x g f H =
   pair
     ( map-hom-Ring S T g (inv-inverts-element-hom-Ring R S x f H))
     ( pair
-      ( ( inv
-          ( preserves-mul-hom-Ring S T g
-            ( map-hom-Ring R S f x)
-            ( inv-inverts-element-hom-Ring R S x f H))) ∙
+      ( ( inv (preserves-mul-hom-Ring S T g)) ∙
         ( ( ap
             ( map-hom-Ring S T g)
             ( is-right-inverse-inv-inverts-element-hom-Ring R S x f H)) ∙
           ( preserves-one-hom-Ring S T g)))
-      ( ( inv
-          ( preserves-mul-hom-Ring S T g
-            ( inv-inverts-element-hom-Ring R S x f H)
-            ( map-hom-Ring R S f x))) ∙
+      ( ( inv (preserves-mul-hom-Ring S T g)) ∙
         ( ( ap
             ( map-hom-Ring S T g)
             ( is-left-inverse-inv-inverts-element-hom-Ring R S x f H)) ∙

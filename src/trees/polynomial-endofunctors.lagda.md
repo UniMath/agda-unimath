@@ -19,7 +19,9 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
+
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -64,17 +66,14 @@ module _
     Eq-type-polynomial-endofunctor x x
   refl-Eq-type-polynomial-endofunctor (pair x α) = pair refl refl-htpy
 
-  is-contr-total-Eq-type-polynomial-endofunctor :
+  is-torsorial-Eq-type-polynomial-endofunctor :
     (x : type-polynomial-endofunctor A B X) →
-    is-contr
-      ( Σ ( type-polynomial-endofunctor A B X)
-          ( Eq-type-polynomial-endofunctor x))
-  is-contr-total-Eq-type-polynomial-endofunctor (pair x α) =
-    is-contr-total-Eq-structure
-      ( ( λ (y : A) (β : B y → X) (p : x ＝ y) → α ~ (β ∘ tr B p)))
-      ( is-contr-total-path x)
+    is-torsorial (Eq-type-polynomial-endofunctor x)
+  is-torsorial-Eq-type-polynomial-endofunctor (pair x α) =
+    is-torsorial-Eq-structure
+      ( is-torsorial-Id x)
       ( pair x refl)
-      ( is-contr-total-htpy α)
+      ( is-torsorial-htpy α)
 
   Eq-type-polynomial-endofunctor-eq :
     (x y : type-polynomial-endofunctor A B X) →
@@ -87,7 +86,7 @@ module _
     is-equiv (Eq-type-polynomial-endofunctor-eq x y)
   is-equiv-Eq-type-polynomial-endofunctor-eq x =
     fundamental-theorem-id
-      ( is-contr-total-Eq-type-polynomial-endofunctor x)
+      ( is-torsorial-Eq-type-polynomial-endofunctor x)
       ( Eq-type-polynomial-endofunctor-eq x)
 
   eq-Eq-type-polynomial-endofunctor :

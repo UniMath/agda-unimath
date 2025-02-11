@@ -8,9 +8,10 @@ module synthetic-homotopy-theory.pullback-property-pushouts where
 
 ```agda
 open import foundation.commuting-squares-of-maps
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.precomposition-functions
 open import foundation.pullbacks
 open import foundation.universe-levels
 
@@ -30,15 +31,17 @@ pushout of `S` if and only if the square
 
 ```text
   Y^X -----> Y^B
+   | ⌟        |
    |          |
-   |          |
-   V          V
+   ∨          ∨
   Y^A -----> Y^S
 ```
 
-is a pullback square for every type `Y`. Below, we first define the cone of this
-commuting square, and then we introduce the type pullback-property-pushout,
-which states that the above square is a pullback.
+is a [pullback](foundation.pullbacks.md) square for every type `Y`. Below, we
+first define the [cone](foundation.cones-over-cospan-diagrams.md) of this
+[commuting square](foundation.commuting-squares-of-maps.md), and then we
+introduce the type `pullback-property-pushout`, which states that the above
+square is a [pullback](foundation-core.universal-property-pullbacks.md).
 
 ## Definition
 
@@ -63,11 +66,11 @@ pr2 (pr2 (cone-pullback-property-pushout f g c Y)) =
     ( Y)
 
 pullback-property-pushout :
-  {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-pullback-property-pushout l f g c =
-  (Y : UU l) →
+  UUω
+pullback-property-pushout f g c =
+  {l : Level} (Y : UU l) →
   is-pullback
     ( precomp f Y)
     ( precomp g Y)

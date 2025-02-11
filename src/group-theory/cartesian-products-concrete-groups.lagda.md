@@ -56,7 +56,7 @@ module _
       ( equiv-type-∞-Group-product-∞-Group
           ( ∞-group-Concrete-Group G)
           ( ∞-group-Concrete-Group R))
-      ( is-set-prod
+      ( is-set-product
           ( is-set-type-Concrete-Group G)
           ( is-set-type-Concrete-Group R))
 
@@ -188,44 +188,44 @@ module _
   right-inverse-law-mul-product-Concrete-Group =
     right-inverse-law-mul-∞-Group ∞-group-product-Concrete-Group
 
-  abstract-group-product-Concrete-Group : Group (l1 ⊔ l2)
-  pr1 (pr1 abstract-group-product-Concrete-Group) =
+  group-product-Concrete-Group : Group (l1 ⊔ l2)
+  pr1 (pr1 group-product-Concrete-Group) =
     set-product-Concrete-Group
-  pr1 (pr2 (pr1 abstract-group-product-Concrete-Group)) =
+  pr1 (pr2 (pr1 group-product-Concrete-Group)) =
     mul-product-Concrete-Group
-  pr2 (pr2 (pr1 abstract-group-product-Concrete-Group)) =
+  pr2 (pr2 (pr1 group-product-Concrete-Group)) =
     associative-mul-product-Concrete-Group
-  pr1 (pr1 (pr2 abstract-group-product-Concrete-Group)) =
+  pr1 (pr1 (pr2 group-product-Concrete-Group)) =
     unit-product-Concrete-Group
-  pr1 (pr2 (pr1 (pr2 abstract-group-product-Concrete-Group))) =
+  pr1 (pr2 (pr1 (pr2 group-product-Concrete-Group))) =
     left-unit-law-mul-product-Concrete-Group
-  pr2 (pr2 (pr1 (pr2 abstract-group-product-Concrete-Group))) =
+  pr2 (pr2 (pr1 (pr2 group-product-Concrete-Group))) =
     right-unit-law-mul-product-Concrete-Group
-  pr1 (pr2 (pr2 abstract-group-product-Concrete-Group)) =
+  pr1 (pr2 (pr2 group-product-Concrete-Group)) =
     inv-product-Concrete-Group
-  pr1 (pr2 (pr2 (pr2 abstract-group-product-Concrete-Group))) =
+  pr1 (pr2 (pr2 (pr2 group-product-Concrete-Group))) =
     left-inverse-law-mul-product-Concrete-Group
-  pr2 (pr2 (pr2 (pr2 abstract-group-product-Concrete-Group))) =
+  pr2 (pr2 (pr2 (pr2 group-product-Concrete-Group))) =
     right-inverse-law-mul-product-Concrete-Group
 
-  op-abstract-group-product-Concrete-Group : Group (l1 ⊔ l2)
-  pr1 (pr1 op-abstract-group-product-Concrete-Group) =
+  op-group-product-Concrete-Group : Group (l1 ⊔ l2)
+  pr1 (pr1 op-group-product-Concrete-Group) =
     set-product-Concrete-Group
-  pr1 (pr2 (pr1 op-abstract-group-product-Concrete-Group)) =
+  pr1 (pr2 (pr1 op-group-product-Concrete-Group)) =
     mul-product-Concrete-Group'
-  pr2 (pr2 (pr1 op-abstract-group-product-Concrete-Group)) x y z =
+  pr2 (pr2 (pr1 op-group-product-Concrete-Group)) x y z =
     inv (associative-mul-product-Concrete-Group z y x)
-  pr1 (pr1 (pr2 op-abstract-group-product-Concrete-Group)) =
+  pr1 (pr1 (pr2 op-group-product-Concrete-Group)) =
     unit-product-Concrete-Group
-  pr1 (pr2 (pr1 (pr2 op-abstract-group-product-Concrete-Group))) =
+  pr1 (pr2 (pr1 (pr2 op-group-product-Concrete-Group))) =
     right-unit-law-mul-product-Concrete-Group
-  pr2 (pr2 (pr1 (pr2 op-abstract-group-product-Concrete-Group))) =
+  pr2 (pr2 (pr1 (pr2 op-group-product-Concrete-Group))) =
     left-unit-law-mul-product-Concrete-Group
-  pr1 (pr2 (pr2 op-abstract-group-product-Concrete-Group)) =
+  pr1 (pr2 (pr2 op-group-product-Concrete-Group)) =
     inv-product-Concrete-Group
-  pr1 (pr2 (pr2 (pr2 op-abstract-group-product-Concrete-Group))) =
+  pr1 (pr2 (pr2 (pr2 op-group-product-Concrete-Group))) =
     right-inverse-law-mul-product-Concrete-Group
-  pr2 (pr2 (pr2 (pr2 op-abstract-group-product-Concrete-Group))) =
+  pr2 (pr2 (pr2 (pr2 op-group-product-Concrete-Group))) =
     left-inverse-law-mul-product-Concrete-Group
 ```
 

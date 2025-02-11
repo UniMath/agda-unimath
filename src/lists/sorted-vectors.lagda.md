@@ -49,7 +49,7 @@ module _
   is-sorted-vec-Prop {0} v = raise-unit-Prop l2
   is-sorted-vec-Prop {1} v = raise-unit-Prop l2
   is-sorted-vec-Prop {succ-ℕ (succ-ℕ n)} (x ∷ y ∷ v) =
-    prod-Prop
+    product-Prop
       ( leq-Decidable-Total-Order-Prop X x y)
       ( is-sorted-vec-Prop (y ∷ v))
 
@@ -66,7 +66,7 @@ module _
     vec (type-Decidable-Total-Order X) n → Prop l2
   is-least-element-vec-Prop {0} x v = raise-unit-Prop l2
   is-least-element-vec-Prop {succ-ℕ n} x (y ∷ v) =
-    prod-Prop
+    product-Prop
       ( leq-Decidable-Total-Order-Prop X x y)
       ( is-least-element-vec-Prop x v)
 
@@ -100,7 +100,7 @@ module _
 ```agda
   is-least-element-vec-is-leq-head-sorted-vec :
     {n : ℕ}
-    (x : type-Decidable-Total-Order X)
+    (x : type-Decidable-Total-Order X)
     (v : vec (type-Decidable-Total-Order X) (succ-ℕ n)) →
     is-sorted-vec v → leq-Decidable-Total-Order X x (head-vec v) →
     is-least-element-vec x v
@@ -109,16 +109,16 @@ module _
   is-least-element-vec-is-leq-head-sorted-vec {succ-ℕ n} x (y ∷ v) s p =
     p ,
     ( is-least-element-vec-is-leq-head-sorted-vec
+      ( x)
+      ( v)
+      ( is-sorted-tail-is-sorted-vec (y ∷ v) s)
+      ( transitive-leq-Decidable-Total-Order
+        ( X)
         ( x)
-        ( v)
-        ( is-sorted-tail-is-sorted-vec (y ∷ v) s)
-        ( transitive-leq-Decidable-Total-Order
-            ( X)
-            ( x)
-            ( y)
-            ( head-vec v)
-            ( is-leq-head-head-tail-is-sorted-vec (y ∷ v) s)
-            ( p)))
+        ( y)
+        ( head-vec v)
+        ( is-leq-head-head-tail-is-sorted-vec (y ∷ v) s)
+        ( p)))
 ```
 
 ### An equivalent definition of being sorted
@@ -129,7 +129,7 @@ module _
   is-sorted-least-element-vec-Prop {0} v = raise-unit-Prop l2
   is-sorted-least-element-vec-Prop {1} v = raise-unit-Prop l2
   is-sorted-least-element-vec-Prop {succ-ℕ (succ-ℕ n)} (x ∷ v) =
-    prod-Prop
+    product-Prop
       ( is-least-element-vec-Prop x v)
       ( is-sorted-least-element-vec-Prop v)
 
@@ -187,7 +187,7 @@ module _
     (fv : functional-vec (type-Decidable-Total-Order X) n) →
     Prop l2
   is-least-element-functional-vec-Prop n x fv =
-    Π-Prop (Fin n) λ k → leq-Decidable-Total-Order-Prop X x (fv k)
+    Π-Prop (Fin n) (λ k → leq-Decidable-Total-Order-Prop X x (fv k))
 
   is-least-element-functional-vec :
     (n : ℕ)
@@ -217,10 +217,10 @@ module _
   is-least-element-vec-is-least-element-functional-vec (succ-ℕ n) x fv p =
     (p (inr star)) ,
     ( is-least-element-vec-is-least-element-functional-vec
-        ( n)
-        ( x)
-        ( tail-functional-vec n fv)
-        ( p ∘ inl))
+      ( n)
+      ( x)
+      ( tail-functional-vec n fv)
+      ( p ∘ inl))
 
   is-least-element-functional-vec-is-least-element-vec :
     (n : ℕ)
@@ -256,9 +256,9 @@ module _
       ( x)
       ( functional-vec-vec n v ∘ map-equiv a)
       ( is-least-element-permute-functional-vec
-          ( n)
-          ( x)
-          ( functional-vec-vec n v)
-          ( a)
-          ( is-least-element-functional-vec-is-least-element-vec n x v p))
+        ( n)
+        ( x)
+        ( functional-vec-vec n v)
+        ( a)
+        ( is-least-element-functional-vec-is-least-element-vec n x v p))
 ```

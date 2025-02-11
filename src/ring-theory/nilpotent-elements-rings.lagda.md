@@ -75,11 +75,11 @@ is-nilpotent-add-Ring R = is-nilpotent-add-Semiring (semiring-Ring R)
 is-nilpotent-element-neg-Ring :
   {l : Level} (R : Ring l) →
   is-closed-under-negatives-subset-Ring R (is-nilpotent-element-ring-Prop R)
-is-nilpotent-element-neg-Ring R x H =
+is-nilpotent-element-neg-Ring R {x} H =
   apply-universal-property-trunc-Prop H
     ( is-nilpotent-element-ring-Prop R (neg-Ring R x))
     ( λ (n , p) →
-      intro-∃ n
+      intro-exists n
         ( ( power-neg-Ring R n x) ∙
           ( ( ap (mul-Ring R (power-Ring R n (neg-one-Ring R))) p) ∙
             ( right-zero-law-mul-Ring R (power-Ring R n (neg-one-Ring R))))))

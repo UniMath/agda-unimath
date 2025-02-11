@@ -7,7 +7,7 @@ module foundation.descent-dependent-pair-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.universe-levels
@@ -41,8 +41,8 @@ module _
 
   triangle-descent-Σ :
     (i : I) (a : A i) →
-    ( map-fiber-cone (f i) h (c i) a) ~
-    ( ( map-fiber-cone (ind-Σ f) h cone-descent-Σ (pair i a)) ∘
+    ( map-fiber-vertical-map-cone (f i) h (c i) a) ~
+    ( ( map-fiber-vertical-map-cone (ind-Σ f) h cone-descent-Σ (pair i a)) ∘
       ( map-inv-compute-fiber-tot (λ i → (pr1 (c i))) (pair i a)))
   triangle-descent-Σ i .(pr1 (c i) a') (pair a' refl) = refl
 
@@ -51,17 +51,18 @@ module _
       ((i : I) → is-pullback (f i) h (c i)) →
       is-pullback (ind-Σ f) h cone-descent-Σ
     descent-Σ is-pb-c =
-      is-pullback-is-fiberwise-equiv-map-fiber-cone
+      is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
         ( ind-Σ f)
         ( h)
         ( cone-descent-Σ)
         ( ind-Σ
-          ( λ i a → is-equiv-left-factor-htpy
-            ( map-fiber-cone (f i) h (c i) a)
-            ( map-fiber-cone (ind-Σ f) h cone-descent-Σ (pair i a))
+          ( λ i a →
+            is-equiv-right-map-triangle
+            ( map-fiber-vertical-map-cone (f i) h (c i) a)
+            ( map-fiber-vertical-map-cone (ind-Σ f) h cone-descent-Σ (pair i a))
             ( map-inv-compute-fiber-tot (λ i → pr1 (c i)) (pair i a))
             ( triangle-descent-Σ i a)
-            ( is-fiberwise-equiv-map-fiber-cone-is-pullback
+            ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
               (f i) h (c i) (is-pb-c i) a)
             ( is-equiv-map-inv-compute-fiber-tot (λ i → pr1 (c i)) (pair i a))))
 
@@ -70,14 +71,15 @@ module _
       is-pullback (ind-Σ f) h cone-descent-Σ →
       ((i : I) → is-pullback (f i) h (c i))
     descent-Σ' is-pb-dsq i =
-      is-pullback-is-fiberwise-equiv-map-fiber-cone (f i) h (c i)
-        ( λ a → is-equiv-comp-htpy
-          ( map-fiber-cone (f i) h (c i) a)
-          ( map-fiber-cone (ind-Σ f) h cone-descent-Σ (pair i a))
+      is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone (f i) h (c i)
+        ( λ a →
+          is-equiv-left-map-triangle
+          ( map-fiber-vertical-map-cone (f i) h (c i) a)
+          ( map-fiber-vertical-map-cone (ind-Σ f) h cone-descent-Σ (pair i a))
           ( map-inv-compute-fiber-tot (λ i → pr1 (c i)) (pair i a))
           ( triangle-descent-Σ i a)
           ( is-equiv-map-inv-compute-fiber-tot (λ i → pr1 (c i)) (pair i a))
-          ( is-fiberwise-equiv-map-fiber-cone-is-pullback
+          ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
             ( ind-Σ f)
             ( h)
             ( cone-descent-Σ)

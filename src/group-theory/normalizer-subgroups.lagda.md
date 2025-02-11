@@ -8,6 +8,8 @@ module group-theory.normalizer-subgroups where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
@@ -16,6 +18,7 @@ open import foundation.universe-levels
 
 open import group-theory.conjugation
 open import group-theory.groups
+open import group-theory.homomorphisms-groups
 open import group-theory.subgroups
 open import group-theory.subsets-groups
 ```
@@ -54,7 +57,8 @@ module _
   is-normalizer-Subgroup : UUω
   is-normalizer-Subgroup =
     {l : Level} (K : Subgroup l G) →
-    ( {x y : type-Group G} → is-in-Subgroup G K x →
+    ( {x y : type-Group G} →
+      is-in-Subgroup G K x →
       is-in-Subgroup G H y →
       is-in-Subgroup G H (conjugation-Group G x y)) ↔
     leq-Subgroup G K N
@@ -69,13 +73,12 @@ module _
 
   subset-normalizer-Subgroup : subset-Group (l1 ⊔ l2) G
   subset-normalizer-Subgroup x =
-    Π-Prop'
+    implicit-Π-Prop
       ( type-Group G)
       ( λ y →
         iff-Prop
           ( subset-Subgroup G H y)
-          ( subset-Subgroup G H
-            ( conjugation-Group G x y)))
+          ( subset-Subgroup G H (conjugation-Group G x y)))
 
   is-in-normalizer-Subgroup : type-Group G → UU (l1 ⊔ l2)
   is-in-normalizer-Subgroup =
@@ -102,11 +105,11 @@ module _
 
   is-closed-under-multiplication-normalizer-Subgroup :
     is-closed-under-multiplication-subset-Group G subset-normalizer-Subgroup
-  pr1 (is-closed-under-multiplication-normalizer-Subgroup x y u v) w =
+  pr1 (is-closed-under-multiplication-normalizer-Subgroup {x} {y} u v) w =
     is-closed-under-eq-Subgroup' G H
       ( forward-implication u (forward-implication v w))
       ( compute-conjugation-mul-Group G x y _)
-  pr2 (is-closed-under-multiplication-normalizer-Subgroup x y u v) w =
+  pr2 (is-closed-under-multiplication-normalizer-Subgroup {x} {y} u v) w =
     backward-implication v
       ( backward-implication u
         ( is-closed-under-eq-Subgroup G H w
@@ -114,11 +117,11 @@ module _
 
   is-closed-under-inverses-normalizer-Subgroup :
     is-closed-under-inverses-subset-Group G subset-normalizer-Subgroup
-  pr1 (is-closed-under-inverses-normalizer-Subgroup x u {y}) h =
+  pr1 (is-closed-under-inverses-normalizer-Subgroup {x} u {y}) h =
     backward-implication u
       ( is-closed-under-eq-Subgroup' G H h
         ( is-section-conjugation-inv-Group G x y))
-  pr2 (is-closed-under-inverses-normalizer-Subgroup x u {y}) h =
+  pr2 (is-closed-under-inverses-normalizer-Subgroup {x} u {y}) h =
     is-closed-under-eq-Subgroup G H
       ( forward-implication u h)
       ( is-section-conjugation-inv-Group G x y)
@@ -143,7 +146,7 @@ module _
     u k h
   pr2 (forward-implication-is-normalizer-normalizer-Subgroup K u x k {y}) h =
     is-closed-under-eq-Subgroup G H
-      ( u (is-closed-under-inverses-Subgroup G K x k) h)
+      ( u (is-closed-under-inverses-Subgroup G K {x} k) h)
       ( is-retraction-conjugation-inv-Group G x y)
 
   backward-implication-is-normalizer-normalizer-Subgroup :
@@ -162,8 +165,45 @@ module _
     backward-implication-is-normalizer-normalizer-Subgroup K
 ```
 
+### The inclusion of `H` into its normalizer `Nᴳ(H)`
+
+```agda
+module _
+  {l1 l2 l3 : Level} (G : Group l1) (H : Subgroup l2 G) (N : Subgroup l3 G)
+  (is-normalizer-G-H-N : is-normalizer-Subgroup G H N)
+  where
+
+  is-in-normalizer-is-in-type-Subgroup :
+    (x : type-Group G) → is-in-Subgroup G H x → is-in-Subgroup G N x
+  is-in-normalizer-is-in-type-Subgroup =
+    forward-implication
+      ( is-normalizer-G-H-N H)
+      ( λ x' y' →
+        is-closed-under-multiplication-Subgroup G H
+          ( is-closed-under-multiplication-Subgroup G H x' y')
+          ( is-closed-under-inverses-Subgroup G H x'))
+
+  inclusion-is-normalizer-Subgroup : type-Subgroup G H → type-Subgroup G N
+  inclusion-is-normalizer-Subgroup = tot is-in-normalizer-is-in-type-Subgroup
+
+  hom-inclusion-is-normalizer-Subgroup :
+    hom-Group (group-Subgroup G H) (group-Subgroup G N)
+  pr1 hom-inclusion-is-normalizer-Subgroup =
+    inclusion-is-normalizer-Subgroup
+  pr2 hom-inclusion-is-normalizer-Subgroup =
+    eq-type-subtype (subset-Subgroup G N) refl
+```
+
 ## See also
 
 - [Centralizer subgroups](group-theory.centralizer-subgroups.md)
 - [Normal closures of subgroups](group-theory.normal-closures-subgroups.md)
 - [Normal cores of subgroups](group-theory.normal-cores-subgroups.md)
+
+## External links
+
+- [normalizer](https://ncatlab.org/nlab/show/normalizer) at $n$Lab
+- [Centralizer and normalizer](https://en.wikipedia.org/wiki/Centralizer_and_normalizer)
+  at Wikipedia
+- [Normalizer of a subgroup](https://groupprops.subwiki.org/wiki/Normalizer_of_a_subgroup)
+  at Groupprops

@@ -21,6 +21,7 @@ open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.sets
 open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
@@ -165,7 +166,7 @@ zero-based-ℕ k = constant-based-ℕ (succ-ℕ k) (zero-Fin k)
 succ-based-ℕ : (k : ℕ) → based-ℕ k → based-ℕ k
 succ-based-ℕ (succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inl x)) =
   constant-based-ℕ (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl x))
-succ-based-ℕ (succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inr star)) =
+succ-based-ℕ (succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inr _)) =
   unary-op-based-ℕ
     (succ-ℕ k) (zero-Fin k) (constant-based-ℕ (succ-ℕ k) (zero-Fin k))
 succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inl x) n) =
@@ -189,7 +190,7 @@ convert-based-succ-based-ℕ :
 convert-based-succ-based-ℕ (succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inl x)) =
   nat-succ-Fin k x
 convert-based-succ-based-ℕ
-  ( succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inr star)) =
+  ( succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inr _)) =
   ( ap
     ( λ t → ((succ-ℕ k) *ℕ (succ-ℕ t)) +ℕ t)
     ( is-zero-nat-zero-Fin {k})) ∙
@@ -199,7 +200,7 @@ convert-based-succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inl
     ( ((succ-ℕ k) *ℕ (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))) +ℕ_)
     ( nat-succ-Fin k x)
 convert-based-succ-based-ℕ
-  (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inr star) n) =
+  (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inr _) n) =
   ( ap
     ( ( ( succ-ℕ k) *ℕ
         ( succ-ℕ (convert-based-ℕ (succ-ℕ k) (succ-based-ℕ (succ-ℕ k) n))))

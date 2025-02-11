@@ -39,6 +39,10 @@ we have
   (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.
 ```
 
+The binomial theorem is the 44th theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
+
 ## Definitions
 
 ### Binomial sums
@@ -185,3 +189,7 @@ is-linear-combination-power-add-Commutative-Semiring A n m x y =
     ( y)
     ( commutative-mul-Commutative-Semiring A x y)
 ```
+
+## References
+
+{{#bibliography}}

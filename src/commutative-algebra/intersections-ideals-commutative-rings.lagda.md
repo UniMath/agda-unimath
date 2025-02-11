@@ -81,25 +81,25 @@ module _
     is-closed-under-addition-subset-Commutative-Ring R
       ( subset-intersection-ideal-Commutative-Ring)
   pr1
-    ( is-closed-under-addition-intersection-ideal-Commutative-Ring x y
+    ( is-closed-under-addition-intersection-ideal-Commutative-Ring
       ( H1 , H2)
       ( K1 , K2)) =
-    is-closed-under-addition-ideal-Commutative-Ring R I x y H1 K1
+    is-closed-under-addition-ideal-Commutative-Ring R I H1 K1
   pr2
-    ( is-closed-under-addition-intersection-ideal-Commutative-Ring x y
+    ( is-closed-under-addition-intersection-ideal-Commutative-Ring
       ( H1 , H2)
       ( K1 , K2)) =
-    is-closed-under-addition-ideal-Commutative-Ring R J x y H2 K2
+    is-closed-under-addition-ideal-Commutative-Ring R J H2 K2
 
   is-closed-under-negatives-intersection-ideal-Commutative-Ring :
     is-closed-under-negatives-subset-Commutative-Ring R
       ( subset-intersection-ideal-Commutative-Ring)
   pr1
-    ( is-closed-under-negatives-intersection-ideal-Commutative-Ring x
+    ( is-closed-under-negatives-intersection-ideal-Commutative-Ring
       ( H1 , H2)) =
     is-closed-under-negatives-ideal-Commutative-Ring R I H1
   pr2
-    ( is-closed-under-negatives-intersection-ideal-Commutative-Ring x
+    ( is-closed-under-negatives-intersection-ideal-Commutative-Ring
       ( H1 , H2)) =
     is-closed-under-negatives-ideal-Commutative-Ring R J H2
 

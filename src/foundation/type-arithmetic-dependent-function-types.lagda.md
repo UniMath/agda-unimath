@@ -36,7 +36,7 @@ module _
     ( left-unit-law-Π ( λ _ → B a)) ∘e
     ( equiv-Π
       ( λ _ → B a)
-      ( terminal-map , is-equiv-terminal-map-is-contr C)
+      ( equiv-unit-is-contr C)
       ( λ a → equiv-eq (ap B ( eq-is-contr C))))
 ```
 
@@ -68,7 +68,6 @@ module _
   [`foundation.functoriality-dependent-function-types`](foundation.functoriality-dependent-function-types.md).
 - Equality proofs in dependent function types are characterized in
   [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.md).
-
 - Arithmetical laws involving cartesian product types are recorded in
   [`foundation.type-arithmetic-cartesian-product-types`](foundation.type-arithmetic-cartesian-product-types.md).
 - Arithmetical laws involving dependent pair types are recorded in
@@ -79,7 +78,6 @@ module _
   [`foundation.type-arithmetic-unit-type`](foundation.type-arithmetic-unit-type.md).
 - Arithmetical laws involving the empty type are recorded in
   [`foundation.type-arithmetic-empty-type`](foundation.type-arithmetic-empty-type.md).
-
 - In
   [`foundation.universal-property-empty-type`](foundation.universal-property-empty-type.md)
   we show that `empty` is the initial type, which can be considered a _left zero

@@ -9,10 +9,8 @@ module elementary-number-theory.equality-integers where
 ```agda
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.integers
-open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
@@ -26,6 +24,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.set-truncations
+open import foundation.torsorial-type-families
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -70,9 +69,9 @@ eq-Eq-ℤ (inr (inr x)) (inr (inr y)) e = ap (inr ∘ inr) (eq-Eq-ℕ x y e)
 ```agda
 has-decidable-equality-ℤ : has-decidable-equality ℤ
 has-decidable-equality-ℤ =
-  has-decidable-equality-coprod
+  has-decidable-equality-coproduct
     has-decidable-equality-ℕ
-    ( has-decidable-equality-coprod
+    ( has-decidable-equality-coproduct
       has-decidable-equality-unit
       has-decidable-equality-ℕ)
 
@@ -124,21 +123,21 @@ contraction-total-Eq-ℤ (inl x) (pair (inl y) e) =
     ( ap inl (eq-Eq-ℕ x y e))
     ( eq-is-prop (is-prop-Eq-ℕ x y))
 contraction-total-Eq-ℤ (inr (inl star)) (pair (inr (inl star)) e) =
-  eq-pair-Σ refl (eq-is-prop is-prop-unit)
+  eq-pair-eq-fiber (eq-is-prop is-prop-unit)
 contraction-total-Eq-ℤ (inr (inr x)) (pair (inr (inr y)) e) =
   eq-pair-Σ
     ( ap (inr ∘ inr) (eq-Eq-ℕ x y e))
     ( eq-is-prop (is-prop-Eq-ℕ x y))
 
-is-contr-total-Eq-ℤ :
-  (x : ℤ) → is-contr (Σ ℤ (Eq-ℤ x))
-is-contr-total-Eq-ℤ x =
+is-torsorial-Eq-ℤ :
+  (x : ℤ) → is-torsorial (Eq-ℤ x)
+is-torsorial-Eq-ℤ x =
   pair (pair x (refl-Eq-ℤ x)) (contraction-total-Eq-ℤ x)
 
 is-equiv-Eq-ℤ-eq :
   (x y : ℤ) → is-equiv (Eq-ℤ-eq {x} {y})
 is-equiv-Eq-ℤ-eq x =
   fundamental-theorem-id
-    ( is-contr-total-Eq-ℤ x)
+    ( is-torsorial-Eq-ℤ x)
     ( λ y → Eq-ℤ-eq {x} {y})
 ```

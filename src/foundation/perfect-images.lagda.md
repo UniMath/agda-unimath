@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.iterated-dependent-product-types
 open import foundation.iterating-functions
 open import foundation.law-of-excluded-middle
 open import foundation.negated-equality
@@ -36,13 +37,17 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-Consider two maps `f : A → B` and `g : B → A`. For `(g ◦ f ) ^ n (a₀) = a`,
-consider also the following chain
+Consider two maps `f : A → B` and `g : B → A`. For `(g ◦ f)ⁿ(a₀) ＝ a`, consider
+also the following chain
 
-`a₀ --> f (a₀) --> g (f (a₀)) --> f (g (f (a₀))) --> ... --> (g ◦ f ) ^ n (a₀) = a`
+```text
+      f          g            f               g       g
+  a₀ --> f (a₀) --> g(f(a₀)) --> f(g(f(a₀))) --> ... --> (g ◦ f)ⁿ(a₀) ＝ a
+```
 
-We say `a₀` is an origin for `a`, and `a` is `perfect image` for `g` if any
-origin of `a` is in the image of `g`.
+We say `a₀` is an {{#concept "origin"}} for `a`, and `a` is a
+{{#concept "perfect image" Agda=is-perfect-image}} for `g` if any origin of `a`
+is in the [image](foundation.images.md) of `g`.
 
 ## Definition
 
@@ -58,9 +63,12 @@ module _
 
 ## Properties
 
-If `g` is an embedding, then `is-perfect-image a` is a proposition. In this
-case, if we assume law of exluded middle, we can show `is-perfect-image a` is a
-decidable type for any `a : A`.
+If `g` is an [embedding](foundation-core.embeddings.md), then
+`is-perfect-image a` is a [proposition](foundation-core.propositions.md). In
+this case, if we assume the
+[law of exluded middle](foundation.law-of-excluded-middle.md), we can show
+`is-perfect-image a` is a [decidable type](foundation.decidable-types.md) for
+any `a : A`.
 
 ```agda
 module _
@@ -71,8 +79,7 @@ module _
   is-prop-is-perfect-image-is-emb :
     (a : A) → is-prop (is-perfect-image f g a)
   is-prop-is-perfect-image-is-emb a =
-    is-prop-Π (λ a₀ → (is-prop-Π λ n →
-      is-prop-Π (λ p → (is-prop-map-is-emb is-emb-g a₀))))
+    is-prop-iterated-Π 3 (λ a₀ n p → is-prop-map-is-emb is-emb-g a₀)
 
   is-perfect-image-Prop : A → Prop (l1 ⊔ l2)
   pr1 (is-perfect-image-Prop a) = is-perfect-image f g a
@@ -85,7 +92,7 @@ module _
 ```
 
 If `a` is a perfect image for `g`, then `a` has a preimage under `g`. Just take
-n=zero in the definition.
+`n = zero` in the definition.
 
 ```agda
 module _
@@ -99,8 +106,9 @@ module _
 ```
 
 One can define a map from `A` to `B` restricting the domain to the perfect
-images of `g`. This gives a kind of section of g. When g is also an embedding,
-the map gives a kind of retraction of g.
+images of `g`. This gives a kind of [section](foundation-core.sections.md) of g.
+When g is also an embedding, the map gives a kind of
+[retraction](foundation-core.retractions.md) of g.
 
 ```agda
 module _
@@ -134,7 +142,7 @@ module _
       (is-section-inverse-of-perfect-image (g b) ρ)
 ```
 
-If `g (f (a))` is a perfect image for `g`, so is `a`.
+If `g(f(a))` is a perfect image for `g`, so is `a`.
 
 ```agda
 module _
@@ -185,8 +193,8 @@ module _
     Σ A (λ a₀ → (Σ ℕ (λ n → ((iterate n (g ∘ f)) a₀ ＝ a) × ¬ (fiber g a₀))))
 ```
 
-If we assume law of excluded middle and `g` is embedding, we can prove that if
-`is-not-perfect-image a` does not hold, we have `is-perfect-image a`.
+If we assume the law of excluded middle and `g` is an embedding, we can prove
+that if `is-not-perfect-image a` does not hold, we have `is-perfect-image a`.
 
 ```agda
 module _
@@ -195,15 +203,13 @@ module _
   (lem : LEM (l1 ⊔ l2))
   where
 
-  not-not-perfect-is-perfect :
-    (a : A) →
-    ¬ (is-not-perfect-image a) →
-    (is-perfect-image f g a)
-  not-not-perfect-is-perfect a nρ a₀ n p =
-    ind-coprod _
-      (id)
-      (λ a₁ → ex-falso (nρ (pair a₀ (pair n (pair p a₁)))))
-      (lem (pair (fiber g a₀) (is-prop-map-is-emb is-emb-g a₀)))
+  is-perfect-not-not-is-perfect-image :
+    (a : A) → ¬ (is-not-perfect-image a) → is-perfect-image f g a
+  is-perfect-not-not-is-perfect-image a nρ a₀ n p =
+    rec-coproduct
+      ( id)
+      ( λ a₁ → ex-falso (nρ (a₀ , n , p , a₁)))
+      ( lem (fiber g a₀ , is-prop-map-is-emb is-emb-g a₀))
 ```
 
 The following property states that if `g (b)` is not a perfect image, then `b`
@@ -225,21 +231,21 @@ module _
   not-perfect-image-has-not-perfect-fiber b nρ = v
       where
       i : ¬¬ (is-not-perfect-image {f = f} (g b))
-      i = λ nμ → nρ (not-not-perfect-is-perfect is-emb-g lem (g b) nμ)
+      i = λ nμ → nρ (is-perfect-not-not-is-perfect-image is-emb-g lem (g b) nμ)
 
       ii :
         is-not-perfect-image (g b) →
         Σ (fiber f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
-      ii (pair x₀ (pair zero-ℕ u)) =
-        ex-falso (pr2 u (pair b (inv (pr1 u))))
-      ii (pair x₀ (pair (succ-ℕ n) u)) =
-        pair a w
+      ii (x₀ , 0 , u) =
+        ex-falso (pr2 u (b , inv (pr1 u)))
+      ii (x₀ , succ-ℕ n , u) =
+        a , w
         where
-        q : f ((iterate n (g ∘ f)) x₀) ＝ b
+        q : f (iterate n (g ∘ f) x₀) ＝ b
         q = is-injective-is-emb is-emb-g (pr1 u)
 
         a : fiber f b
-        a = pair ((iterate n (g ∘ f)) x₀) q
+        a = iterate n (g ∘ f) x₀ , q
 
         w : ¬ (is-perfect-image f g ((iterate n (g ∘ f)) x₀))
         w = λ s → pr2 u (s x₀ n refl)
@@ -254,5 +260,5 @@ module _
           (λ s → is-prop-neg {A = is-perfect-image f g (pr1 s)})
 
       v : Σ (fiber f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
-      v = double-negation-elim-is-decidable (lem (pair _ iv)) iii
+      v = double-negation-elim-is-decidable (lem (_ , iv)) iii
 ```

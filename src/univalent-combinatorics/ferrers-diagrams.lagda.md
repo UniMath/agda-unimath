@@ -8,7 +8,6 @@ module univalent-combinatorics.ferrers-diagrams where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
@@ -19,6 +18,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -78,59 +78,74 @@ module _
 ### Finite Ferrers diagrams of finite types
 
 ```agda
-ferrers-diagram-𝔽 :
-  {l1 : Level} (l2 l3 : Level) (A : 𝔽 l1) → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
-ferrers-diagram-𝔽 {l} l2 l3 A =
-  Σ ( 𝔽 l2)
+ferrers-diagram-Finite-Type :
+  {l1 : Level} (l2 l3 : Level) (A : Finite-Type l1) →
+  UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+ferrers-diagram-Finite-Type {l} l2 l3 A =
+  Σ ( Finite-Type l2)
     ( λ X →
-      Σ ( type-𝔽 X → 𝔽 l3)
+      Σ ( type-Finite-Type X → Finite-Type l3)
         ( λ Y →
-          ((x : type-𝔽 X) → type-trunc-Prop (type-𝔽 (Y x))) ×
-          mere-equiv (type-𝔽 A) (Σ (type-𝔽 X) (λ x → type-𝔽 (Y x)))))
+          ( (x : type-Finite-Type X) →
+            type-trunc-Prop (type-Finite-Type (Y x))) ×
+          mere-equiv
+            ( type-Finite-Type A)
+            ( Σ (type-Finite-Type X) (λ x → type-Finite-Type (Y x)))))
 
 module _
-  {l1 l2 l3 : Level} (A : 𝔽 l1) (D : ferrers-diagram-𝔽 l2 l3 A)
+  {l1 l2 l3 : Level} (A : Finite-Type l1)
+  (D : ferrers-diagram-Finite-Type l2 l3 A)
   where
 
-  row-ferrers-diagram-𝔽 : 𝔽 l2
-  row-ferrers-diagram-𝔽 = pr1 D
+  row-ferrers-diagram-Finite-Type : Finite-Type l2
+  row-ferrers-diagram-Finite-Type = pr1 D
 
-  type-row-ferrers-diagram-𝔽 : UU l2
-  type-row-ferrers-diagram-𝔽 = type-𝔽 row-ferrers-diagram-𝔽
+  type-row-ferrers-diagram-Finite-Type : UU l2
+  type-row-ferrers-diagram-Finite-Type =
+    type-Finite-Type row-ferrers-diagram-Finite-Type
 
-  is-finite-type-row-ferrers-diagram-𝔽 : is-finite type-row-ferrers-diagram-𝔽
-  is-finite-type-row-ferrers-diagram-𝔽 =
-    is-finite-type-𝔽 row-ferrers-diagram-𝔽
+  is-finite-type-row-ferrers-diagram-Finite-Type :
+    is-finite type-row-ferrers-diagram-Finite-Type
+  is-finite-type-row-ferrers-diagram-Finite-Type =
+    is-finite-type-Finite-Type row-ferrers-diagram-Finite-Type
 
-  dot-ferrers-diagram-𝔽 : type-row-ferrers-diagram-𝔽 → 𝔽 l3
-  dot-ferrers-diagram-𝔽 = pr1 (pr2 D)
+  dot-ferrers-diagram-Finite-Type :
+    type-row-ferrers-diagram-Finite-Type → Finite-Type l3
+  dot-ferrers-diagram-Finite-Type = pr1 (pr2 D)
 
-  type-dot-ferrers-diagram-𝔽 : type-row-ferrers-diagram-𝔽 → UU l3
-  type-dot-ferrers-diagram-𝔽 x = type-𝔽 (dot-ferrers-diagram-𝔽 x)
+  type-dot-ferrers-diagram-Finite-Type :
+    type-row-ferrers-diagram-Finite-Type → UU l3
+  type-dot-ferrers-diagram-Finite-Type x =
+    type-Finite-Type (dot-ferrers-diagram-Finite-Type x)
 
-  is-finite-type-dot-ferrers-diagram-𝔽 :
-    (x : type-row-ferrers-diagram-𝔽) → is-finite (type-dot-ferrers-diagram-𝔽 x)
-  is-finite-type-dot-ferrers-diagram-𝔽 x =
-    is-finite-type-𝔽 (dot-ferrers-diagram-𝔽 x)
+  is-finite-type-dot-ferrers-diagram-Finite-Type :
+    (x : type-row-ferrers-diagram-Finite-Type) →
+    is-finite (type-dot-ferrers-diagram-Finite-Type x)
+  is-finite-type-dot-ferrers-diagram-Finite-Type x =
+    is-finite-type-Finite-Type (dot-ferrers-diagram-Finite-Type x)
 
-  is-inhabited-dot-ferrers-diagram-𝔽 :
-    (x : type-row-ferrers-diagram-𝔽) →
-    type-trunc-Prop (type-dot-ferrers-diagram-𝔽 x)
-  is-inhabited-dot-ferrers-diagram-𝔽 = pr1 (pr2 (pr2 D))
+  is-inhabited-dot-ferrers-diagram-Finite-Type :
+    (x : type-row-ferrers-diagram-Finite-Type) →
+    type-trunc-Prop (type-dot-ferrers-diagram-Finite-Type x)
+  is-inhabited-dot-ferrers-diagram-Finite-Type = pr1 (pr2 (pr2 D))
 
-  mere-equiv-ferrers-diagram-𝔽 :
+  mere-equiv-ferrers-diagram-Finite-Type :
     mere-equiv
-      ( type-𝔽 A)
-      ( Σ (type-row-ferrers-diagram-𝔽) (type-dot-ferrers-diagram-𝔽))
-  mere-equiv-ferrers-diagram-𝔽 = pr2 (pr2 (pr2 D))
+      ( type-Finite-Type A)
+      ( Σ ( type-row-ferrers-diagram-Finite-Type)
+          ( type-dot-ferrers-diagram-Finite-Type))
+  mere-equiv-ferrers-diagram-Finite-Type = pr2 (pr2 (pr2 D))
 
-  ferrers-diagram-ferrers-diagram-𝔽 : ferrers-diagram l2 l3 (type-𝔽 A)
-  pr1 ferrers-diagram-ferrers-diagram-𝔽 = type-row-ferrers-diagram-𝔽
-  pr1 (pr2 ferrers-diagram-ferrers-diagram-𝔽) = type-dot-ferrers-diagram-𝔽
-  pr1 (pr2 (pr2 ferrers-diagram-ferrers-diagram-𝔽)) =
-    is-inhabited-dot-ferrers-diagram-𝔽
-  pr2 (pr2 (pr2 ferrers-diagram-ferrers-diagram-𝔽)) =
-    mere-equiv-ferrers-diagram-𝔽
+  ferrers-diagram-ferrers-diagram-Finite-Type :
+    ferrers-diagram l2 l3 (type-Finite-Type A)
+  pr1 ferrers-diagram-ferrers-diagram-Finite-Type =
+    type-row-ferrers-diagram-Finite-Type
+  pr1 (pr2 ferrers-diagram-ferrers-diagram-Finite-Type) =
+    type-dot-ferrers-diagram-Finite-Type
+  pr1 (pr2 (pr2 ferrers-diagram-ferrers-diagram-Finite-Type)) =
+    is-inhabited-dot-ferrers-diagram-Finite-Type
+  pr2 (pr2 (pr2 ferrers-diagram-ferrers-diagram-Finite-Type)) =
+    mere-equiv-ferrers-diagram-Finite-Type
 ```
 
 ### Equivalences of Ferrers diagrams
@@ -156,19 +171,16 @@ module _
     (E : ferrers-diagram l2 l3 A) → Id D E → equiv-ferrers-diagram E
   equiv-eq-ferrers-diagram .D refl = id-equiv-ferrers-diagram
 
-  is-contr-total-equiv-ferrers-diagram :
-    is-contr (Σ (ferrers-diagram l2 l3 A) (equiv-ferrers-diagram))
-  is-contr-total-equiv-ferrers-diagram =
-    is-contr-total-Eq-structure
-      ( λ X Y e →
-        (x : row-ferrers-diagram D) →
-        dot-ferrers-diagram D x ≃ pr1 Y (map-equiv e x))
-      ( is-contr-total-equiv (row-ferrers-diagram D))
+  is-torsorial-equiv-ferrers-diagram :
+    is-torsorial equiv-ferrers-diagram
+  is-torsorial-equiv-ferrers-diagram =
+    is-torsorial-Eq-structure
+      ( is-torsorial-equiv (row-ferrers-diagram D))
       ( pair (row-ferrers-diagram D) id-equiv)
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-equiv-fam (dot-ferrers-diagram D))
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-equiv-fam (dot-ferrers-diagram D))
         ( λ Y →
-          is-prop-prod
+          is-prop-product
             ( is-prop-Π (λ x → is-prop-type-trunc-Prop))
             ( is-prop-mere-equiv A (Σ (row-ferrers-diagram D) Y)))
         ( dot-ferrers-diagram D)
@@ -181,7 +193,7 @@ module _
     (E : ferrers-diagram l2 l3 A) → is-equiv (equiv-eq-ferrers-diagram E)
   is-equiv-equiv-eq-ferrers-diagram =
     fundamental-theorem-id
-      is-contr-total-equiv-ferrers-diagram
+      is-torsorial-equiv-ferrers-diagram
       equiv-eq-ferrers-diagram
 
   eq-equiv-ferrers-diagram :
@@ -194,69 +206,71 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : 𝔽 l1) (D : ferrers-diagram-𝔽 l2 l3 A)
+  {l1 l2 l3 : Level} (A : Finite-Type l1)
+  (D : ferrers-diagram-Finite-Type l2 l3 A)
   where
 
-  equiv-ferrers-diagram-𝔽 :
-    {l4 l5 : Level} → ferrers-diagram-𝔽 l4 l5 A → UU (l2 ⊔ l3 ⊔ l4 ⊔ l5)
-  equiv-ferrers-diagram-𝔽 E =
+  equiv-ferrers-diagram-Finite-Type :
+    {l4 l5 : Level} → ferrers-diagram-Finite-Type l4 l5 A →
+    UU (l2 ⊔ l3 ⊔ l4 ⊔ l5)
+  equiv-ferrers-diagram-Finite-Type E =
     equiv-ferrers-diagram
-      ( ferrers-diagram-ferrers-diagram-𝔽 A D)
-      ( ferrers-diagram-ferrers-diagram-𝔽 A E)
+      ( ferrers-diagram-ferrers-diagram-Finite-Type A D)
+      ( ferrers-diagram-ferrers-diagram-Finite-Type A E)
 
-  id-equiv-ferrers-diagram-𝔽 : equiv-ferrers-diagram-𝔽 D
-  id-equiv-ferrers-diagram-𝔽 =
-    id-equiv-ferrers-diagram (ferrers-diagram-ferrers-diagram-𝔽 A D)
+  id-equiv-ferrers-diagram-Finite-Type : equiv-ferrers-diagram-Finite-Type D
+  id-equiv-ferrers-diagram-Finite-Type =
+    id-equiv-ferrers-diagram (ferrers-diagram-ferrers-diagram-Finite-Type A D)
 
-  equiv-eq-ferrers-diagram-𝔽 :
-    (E : ferrers-diagram-𝔽 l2 l3 A) → Id D E → equiv-ferrers-diagram-𝔽 E
-  equiv-eq-ferrers-diagram-𝔽 .D refl = id-equiv-ferrers-diagram-𝔽
+  equiv-eq-ferrers-diagram-Finite-Type :
+    (E : ferrers-diagram-Finite-Type l2 l3 A) →
+    Id D E → equiv-ferrers-diagram-Finite-Type E
+  equiv-eq-ferrers-diagram-Finite-Type .D refl =
+    id-equiv-ferrers-diagram-Finite-Type
 
-  is-contr-total-equiv-ferrers-diagram-𝔽 :
-    is-contr (Σ (ferrers-diagram-𝔽 l2 l3 A) (equiv-ferrers-diagram-𝔽))
-  is-contr-total-equiv-ferrers-diagram-𝔽 =
-    is-contr-total-Eq-structure
-      ( λ X Y e →
-        (x : type-row-ferrers-diagram-𝔽 A D) →
-        type-dot-ferrers-diagram-𝔽 A D x ≃ type-𝔽 (pr1 Y (map-equiv e x)))
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-equiv (type-row-ferrers-diagram-𝔽 A D))
+  is-torsorial-equiv-ferrers-diagram-Finite-Type :
+    is-torsorial equiv-ferrers-diagram-Finite-Type
+  is-torsorial-equiv-ferrers-diagram-Finite-Type =
+    is-torsorial-Eq-structure
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-equiv (type-row-ferrers-diagram-Finite-Type A D))
         ( is-prop-is-finite)
-        ( type-row-ferrers-diagram-𝔽 A D)
+        ( type-row-ferrers-diagram-Finite-Type A D)
         ( id-equiv)
-        ( is-finite-type-row-ferrers-diagram-𝔽 A D))
-      ( pair (row-ferrers-diagram-𝔽 A D) id-equiv)
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-Eq-Π
-          ( λ x Y → type-dot-ferrers-diagram-𝔽 A D x ≃ type-𝔽 Y)
+        ( is-finite-type-row-ferrers-diagram-Finite-Type A D))
+      ( pair (row-ferrers-diagram-Finite-Type A D) id-equiv)
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-Eq-Π
           ( λ x →
-            is-contr-total-Eq-subtype
-              ( is-contr-total-equiv (type-dot-ferrers-diagram-𝔽 A D x))
+            is-torsorial-Eq-subtype
+              ( is-torsorial-equiv (type-dot-ferrers-diagram-Finite-Type A D x))
               ( is-prop-is-finite)
-              ( type-dot-ferrers-diagram-𝔽 A D x)
+              ( type-dot-ferrers-diagram-Finite-Type A D x)
               ( id-equiv)
-              ( is-finite-type-dot-ferrers-diagram-𝔽 A D x)))
+              ( is-finite-type-dot-ferrers-diagram-Finite-Type A D x)))
         ( λ x →
-          is-prop-prod
+          is-prop-product
             ( is-prop-Π (λ x → is-prop-type-trunc-Prop))
-            ( is-prop-mere-equiv (type-𝔽 A) _))
-        ( dot-ferrers-diagram-𝔽 A D)
+            ( is-prop-mere-equiv (type-Finite-Type A) _))
+        ( dot-ferrers-diagram-Finite-Type A D)
         ( λ x → id-equiv)
         ( pair
-          ( is-inhabited-dot-ferrers-diagram-𝔽 A D)
-          ( mere-equiv-ferrers-diagram-𝔽 A D)))
+          ( is-inhabited-dot-ferrers-diagram-Finite-Type A D)
+          ( mere-equiv-ferrers-diagram-Finite-Type A D)))
 
-  is-equiv-equiv-eq-ferrers-diagram-𝔽 :
-    (E : ferrers-diagram-𝔽 l2 l3 A) → is-equiv (equiv-eq-ferrers-diagram-𝔽 E)
-  is-equiv-equiv-eq-ferrers-diagram-𝔽 =
+  is-equiv-equiv-eq-ferrers-diagram-Finite-Type :
+    (E : ferrers-diagram-Finite-Type l2 l3 A) →
+    is-equiv (equiv-eq-ferrers-diagram-Finite-Type E)
+  is-equiv-equiv-eq-ferrers-diagram-Finite-Type =
     fundamental-theorem-id
-      is-contr-total-equiv-ferrers-diagram-𝔽
-      equiv-eq-ferrers-diagram-𝔽
+      is-torsorial-equiv-ferrers-diagram-Finite-Type
+      equiv-eq-ferrers-diagram-Finite-Type
 
-  eq-equiv-ferrers-diagram-𝔽 :
-    (E : ferrers-diagram-𝔽 l2 l3 A) → equiv-ferrers-diagram-𝔽 E → Id D E
-  eq-equiv-ferrers-diagram-𝔽 E =
-    map-inv-is-equiv (is-equiv-equiv-eq-ferrers-diagram-𝔽 E)
+  eq-equiv-ferrers-diagram-Finite-Type :
+    (E : ferrers-diagram-Finite-Type l2 l3 A) →
+    equiv-ferrers-diagram-Finite-Type E → Id D E
+  eq-equiv-ferrers-diagram-Finite-Type E =
+    map-inv-is-equiv (is-equiv-equiv-eq-ferrers-diagram-Finite-Type E)
 ```
 
 ## Properties

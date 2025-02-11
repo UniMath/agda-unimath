@@ -9,7 +9,6 @@ module ring-theory.congruence-relations-semirings where
 ```agda
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
@@ -17,6 +16,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-monoids
@@ -45,7 +45,7 @@ module _
   is-congruence-Semiring S =
     is-congruence-Monoid
       ( multiplicative-monoid-Semiring R)
-      ( eq-rel-congruence-Monoid (additive-monoid-Semiring R) S)
+      ( equivalence-relation-congruence-Monoid (additive-monoid-Semiring R) S)
 
   is-prop-is-congruence-Semiring :
     {l2 : Level} (S : congruence-Monoid l2 (additive-monoid-Semiring R)) →
@@ -53,11 +53,11 @@ module _
   is-prop-is-congruence-Semiring S =
     is-prop-is-congruence-Monoid
       ( multiplicative-monoid-Semiring R)
-      ( eq-rel-congruence-Monoid (additive-monoid-Semiring R) S)
+      ( equivalence-relation-congruence-Monoid (additive-monoid-Semiring R) S)
 
-  is-congruence-eq-rel-Semiring :
-    {l2 : Level} (S : Equivalence-Relation l2 (type-Semiring R)) → UU (l1 ⊔ l2)
-  is-congruence-eq-rel-Semiring S =
+  is-congruence-equivalence-relation-Semiring :
+    {l2 : Level} (S : equivalence-relation l2 (type-Semiring R)) → UU (l1 ⊔ l2)
+  is-congruence-equivalence-relation-Semiring S =
     ( is-congruence-Monoid (additive-monoid-Semiring R) S) ×
     ( is-congruence-Monoid (multiplicative-monoid-Semiring R) S)
 
@@ -75,9 +75,10 @@ module _
     congruence-Monoid l2 (additive-monoid-Semiring R)
   congruence-additive-monoid-congruence-Semiring = pr1 S
 
-  eq-rel-congruence-Semiring : Equivalence-Relation l2 (type-Semiring R)
-  eq-rel-congruence-Semiring =
-    eq-rel-congruence-Monoid
+  equivalence-relation-congruence-Semiring :
+    equivalence-relation l2 (type-Semiring R)
+  equivalence-relation-congruence-Semiring =
+    equivalence-relation-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 
@@ -132,7 +133,7 @@ module _
   add-congruence-Semiring :
     is-congruence-Monoid
       ( additive-monoid-Semiring R)
-      ( eq-rel-congruence-Semiring)
+      ( equivalence-relation-congruence-Semiring)
   add-congruence-Semiring =
     mul-congruence-Monoid
       ( additive-monoid-Semiring R)
@@ -141,12 +142,12 @@ module _
   mul-congruence-Semiring :
     is-congruence-Monoid
       ( multiplicative-monoid-Semiring R)
-      ( eq-rel-congruence-Semiring)
+      ( equivalence-relation-congruence-Semiring)
   mul-congruence-Semiring = pr2 S
 
 construct-congruence-Semiring :
   {l1 l2 : Level} (R : Semiring l1) →
-  (S : Equivalence-Relation l2 (type-Semiring R)) →
+  (S : equivalence-relation l2 (type-Semiring R)) →
   is-congruence-Monoid (additive-monoid-Semiring R) S →
   is-congruence-Monoid (multiplicative-monoid-Semiring R) S →
   congruence-Semiring l2 R
@@ -164,25 +165,23 @@ relate-same-elements-congruence-Semiring :
   {l1 l2 l3 : Level} (R : Semiring l1) →
   congruence-Semiring l2 R → congruence-Semiring l3 R → UU (l1 ⊔ l2 ⊔ l3)
 relate-same-elements-congruence-Semiring R S T =
-  relate-same-elements-Equivalence-Relation
-    ( eq-rel-congruence-Semiring R S)
-    ( eq-rel-congruence-Semiring R T)
+  relate-same-elements-equivalence-relation
+    ( equivalence-relation-congruence-Semiring R S)
+    ( equivalence-relation-congruence-Semiring R T)
 
 refl-relate-same-elements-congruence-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (S : congruence-Semiring l2 R) →
   relate-same-elements-congruence-Semiring R S S
 refl-relate-same-elements-congruence-Semiring R S =
-  refl-relate-same-elements-Equivalence-Relation
-    ( eq-rel-congruence-Semiring R S)
+  refl-relate-same-elements-equivalence-relation
+    ( equivalence-relation-congruence-Semiring R S)
 
-is-contr-total-relate-same-elements-congruence-Semiring :
+is-torsorial-relate-same-elements-congruence-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (S : congruence-Semiring l2 R) →
-  is-contr
-    ( Σ ( congruence-Semiring l2 R)
-        ( relate-same-elements-congruence-Semiring R S))
-is-contr-total-relate-same-elements-congruence-Semiring R S =
-  is-contr-total-Eq-subtype
-    ( is-contr-total-relate-same-elements-congruence-Monoid
+  is-torsorial (relate-same-elements-congruence-Semiring R S)
+is-torsorial-relate-same-elements-congruence-Semiring R S =
+  is-torsorial-Eq-subtype
+    ( is-torsorial-relate-same-elements-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring R S))
     ( is-prop-is-congruence-Semiring R)
@@ -201,7 +200,7 @@ is-equiv-relate-same-elements-eq-congruence-Semiring :
   is-equiv (relate-same-elements-eq-congruence-Semiring R S T)
 is-equiv-relate-same-elements-eq-congruence-Semiring R S =
     fundamental-theorem-id
-      ( is-contr-total-relate-same-elements-congruence-Semiring R S)
+      ( is-torsorial-relate-same-elements-congruence-Semiring R S)
       ( relate-same-elements-eq-congruence-Semiring R S)
 
 extensionality-congruence-Semiring :

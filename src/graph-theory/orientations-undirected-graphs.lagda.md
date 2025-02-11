@@ -44,8 +44,8 @@ module _
 
 ## External links
 
-- [Orientation](https://www.wikidata.org/wiki/Q7102401) on Wikidata
+- [Orientation](https://www.wikidata.org/entity/Q7102401) on Wikidata
 - [Orientation (graph theory)](<https://en.wikipedia.org/wiki/Orientation_(graph_theory)>)
   at Wikipedia
 - [Graph orientation](https://mathworld.wolfram.com/GraphOrientation.html) at
-  Wolfram Mathworld
+  Wolfram MathWorld

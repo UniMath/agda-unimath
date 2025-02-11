@@ -24,6 +24,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.raising-universe-levels
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -400,15 +401,13 @@ module _
   {l1 l2 : Level} (G : Directed-Graph l1 l2) (x : vertex-Directed-Graph G)
   where
 
-  is-contr-total-walk-of-length-zero-Directed-Graph :
-    is-contr
-      ( Σ ( vertex-Directed-Graph G)
-          ( λ y → walk-of-length-Directed-Graph G 0 x y))
-  is-contr-total-walk-of-length-zero-Directed-Graph =
+  is-torsorial-walk-of-length-zero-Directed-Graph :
+    is-torsorial (λ y → walk-of-length-Directed-Graph G 0 x y)
+  is-torsorial-walk-of-length-zero-Directed-Graph =
     is-contr-equiv'
       ( Σ (vertex-Directed-Graph G) (λ y → y ＝ x))
       ( equiv-tot (λ y → compute-raise l2 (y ＝ x)))
-      ( is-contr-total-path' x)
+      ( is-torsorial-Id' x)
 ```
 
 ### `cons-walk e w ≠ refl-walk`
@@ -569,7 +568,7 @@ module _
           ( vertex-hom-Directed-Graph G H f _)))
       ( vertex-hom-Directed-Graph G H f)
       ( λ z →
-        map-prod
+        map-product
           ( edge-hom-Directed-Graph G H f)
           ( walk-of-length-hom-Directed-Graph n))
 
@@ -603,17 +602,17 @@ equiv-walk-of-length-equiv-Directed-Graph :
     ( vertex-equiv-Directed-Graph G H f y)
 equiv-walk-of-length-equiv-Directed-Graph G H f zero-ℕ =
   equiv-raise _ _
-    ( equiv-ap (equiv-vertex-equiv-Directed-Graph G H f) _ _)
+    ( equiv-ap (vertex-equiv-equiv-Directed-Graph G H f) _ _)
 equiv-walk-of-length-equiv-Directed-Graph G H f (succ-ℕ n) =
   equiv-Σ
     ( λ z →
       ( edge-Directed-Graph H (vertex-equiv-Directed-Graph G H f _) z) ×
       ( walk-of-length-Directed-Graph H n z
         ( vertex-equiv-Directed-Graph G H f _)))
-    ( equiv-vertex-equiv-Directed-Graph G H f)
+    ( vertex-equiv-equiv-Directed-Graph G H f)
     ( λ z →
-      equiv-prod
-        ( equiv-edge-equiv-Directed-Graph G H f _ _)
+      equiv-product
+        ( edge-equiv-equiv-Directed-Graph G H f _ _)
         ( equiv-walk-of-length-equiv-Directed-Graph G H f n))
 ```
 
@@ -651,7 +650,7 @@ module _
   square-compute-total-walk-of-length-equiv-Directed-Graph
     x y (succ-ℕ n , z , f , w) =
     ap
-      ( cons-walk-Directed-Graph (edge-equiv-Directed-Graph G H e x z f))
+      ( cons-walk-Directed-Graph (edge-equiv-Directed-Graph G H e f))
       ( square-compute-total-walk-of-length-equiv-Directed-Graph z y (n , w))
 
   is-equiv-walk-equiv-Directed-Graph :
@@ -783,7 +782,7 @@ module _
 
 ## External links
 
-- [Path](https://www.wikidata.org/wiki/Q917421) on Wikidata
+- [Path](https://www.wikidata.org/entity/Q917421) on Wikidata
 - [Path (graph theory)](<https://en.wikipedia.org/wiki/Path_(graph_theory)>) at
   Wikipedia
-- [Walk](https://mathworld.wolfram.com/Walk.html) at Wolfram Mathworld
+- [Walk](https://mathworld.wolfram.com/Walk.html) at Wolfram MathWorld

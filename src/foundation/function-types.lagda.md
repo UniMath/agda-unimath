@@ -11,6 +11,7 @@ open import foundation-core.function-types public
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-pentagons-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopy-induction
@@ -28,7 +29,55 @@ open import foundation-core.transport-along-identifications
 
 ## Properties
 
+### Associativity of function composition
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (h : C → D) (g : B → C) (f : A → B)
+  where
+
+  associative-comp : (h ∘ g) ∘ f ＝ h ∘ (g ∘ f)
+  associative-comp = refl
+```
+
+### The Mac Lane pentagon for function composition
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} {E : UU l5}
+  {f : A → B} {g : B → C} {h : C → D} {i : D → E}
+  where
+
+  mac-lane-pentagon-comp :
+    let α₁ = (ap (_∘ f) (associative-comp i h g))
+        α₂ = (associative-comp i (h ∘ g) f)
+        α₃ = (ap (i ∘_) (associative-comp h g f))
+        α₄ = (associative-comp (i ∘ h) g f)
+        α₅ = (associative-comp i h (g ∘ f))
+    in
+      coherence-pentagon-identifications α₁ α₄ α₂ α₅ α₃
+  mac-lane-pentagon-comp = refl
+```
+
 ### Transport in a family of function types
+
+Consider two type families `B` and `C` over `A`, an identification `p : x ＝ y`
+in `A` and two functions
+
+```text
+  f : B x → C x
+  g : B y → C y.
+```
+
+Then the type of dependent identifications from `f` to `g` over `p` can be
+computed as
+
+```text
+  ((b : B x) → tr C p (f b) ＝ g (tr B p b))
+  ≃ dependent-identification (x ↦ B x → C x) f g.
+```
 
 ```agda
 module _
@@ -43,16 +92,57 @@ module _
   compute-dependent-identification-function-type :
     (p : x ＝ y) (f : B x → C x) (g : B y → C y) →
     ((b : B x) → tr C p (f b) ＝ g (tr B p b)) ≃
-    (tr (λ a → B a → C a) p f ＝ g)
+    dependent-identification (λ a → B a → C a) p f g
   compute-dependent-identification-function-type refl f g =
     inv-equiv equiv-funext
 
   map-compute-dependent-identification-function-type :
     (p : x ＝ y) (f : B x → C x) (g : B y → C y) →
     ((b : B x) → tr C p (f b) ＝ g (tr B p b)) →
-    (tr (λ a → B a → C a) p f ＝ g)
+    dependent-identification (λ a → B a → C a) p f g
   map-compute-dependent-identification-function-type p f g =
     map-equiv (compute-dependent-identification-function-type p f g)
+```
+
+### Transport in a family of function types with fixed codomain
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {x y : A} (B : A → UU l2) (C : UU l3)
+  where
+
+  tr-function-type-fixed-codomain :
+    (p : x ＝ y) (f : B x → C) →
+    tr (λ a → B a → C) p f ＝ f ∘ tr B (inv p)
+  tr-function-type-fixed-codomain refl f = refl
+
+  compute-dependent-identification-function-type-fixed-codomain :
+    (p : x ＝ y) (f : B x → C) (g : B y → C) →
+    ((b : B x) → f b ＝ g (tr B p b)) ≃
+    dependent-identification (λ a → B a → C) p f g
+  compute-dependent-identification-function-type-fixed-codomain refl f g =
+    inv-equiv equiv-funext
+
+  map-compute-dependent-identification-function-type-fixed-codomain :
+    (p : x ＝ y) (f : B x → C) (g : B y → C) →
+    ((b : B x) → f b ＝ g (tr B p b)) →
+    dependent-identification (λ a → B a → C) p f g
+  map-compute-dependent-identification-function-type-fixed-codomain p f g =
+    map-equiv
+      ( compute-dependent-identification-function-type-fixed-codomain p f g)
+```
+
+### Transport in a family of function types with fixed domain
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {x y : A} (B : UU l2) (C : A → UU l3)
+  where
+
+  tr-function-type-fixed-domain :
+    (p : x ＝ y) (f : B → C x) →
+    tr (λ a → B → C a) p f ＝ tr C p ∘ f
+  tr-function-type-fixed-domain refl f = refl
 ```
 
 ### Relation between `compute-dependent-identification-function-type` and `preserves-tr`
@@ -144,6 +234,12 @@ module _
                 ( H s)
                 ( k s)
                 ( l s)))
-            ( λ k l s → inv-equiv (equiv-funext)))) ∙
+            ( λ k l s → inv-equiv equiv-funext))) ∙
         ( eq-htpy-refl-htpy (h (i s))))
 ```
+
+## See also
+
+### Table of files about function types, composition, and equivalences
+
+{{#include tables/composition.md}}

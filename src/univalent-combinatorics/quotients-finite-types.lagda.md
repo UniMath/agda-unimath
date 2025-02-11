@@ -27,21 +27,25 @@ finite type. In this file we set up some infrastructure for such quotients.
 
 ```agda
 module _
-  {l1 l2 : Level} (X : 𝔽 l1) (R : Decidable-Equivalence-Relation-𝔽 l2 X)
+  {l1 l2 : Level} (X : Finite-Type l1)
+  (R : type-Decidable-Equivalence-Relation-Finite-Type l2 X)
   where
 
-  equivalence-class-Decidable-Equivalence-Relation-𝔽 : UU (l1 ⊔ lsuc l2)
-  equivalence-class-Decidable-Equivalence-Relation-𝔽 =
-    im (decidable-relation-Decidable-Equivalence-Relation-𝔽 X R)
+  equivalence-class-Decidable-Equivalence-Relation-Finite-Type :
+    UU (l1 ⊔ lsuc l2)
+  equivalence-class-Decidable-Equivalence-Relation-Finite-Type =
+    im (decidable-relation-Decidable-Equivalence-Relation-Finite-Type X R)
 
-  is-finite-equivalence-class-Decidable-Equivalence-Relation-𝔽' :
-    is-finite equivalence-class-Decidable-Equivalence-Relation-𝔽
-  is-finite-equivalence-class-Decidable-Equivalence-Relation-𝔽' =
+  is-finite-equivalence-class-Decidable-Equivalence-Relation-Finite-Type' :
+    is-finite equivalence-class-Decidable-Equivalence-Relation-Finite-Type
+  is-finite-equivalence-class-Decidable-Equivalence-Relation-Finite-Type' =
     is-finite-im
-      ( is-finite-type-𝔽 X)
-      ( has-decidable-equality-Subset-𝔽 X)
+      ( is-finite-type-Finite-Type X)
+      ( has-decidable-equality-Subset-Finite-Type X)
 
-  quotient-𝔽 : 𝔽 (l1 ⊔ lsuc l2)
-  pr1 quotient-𝔽 = equivalence-class-Decidable-Equivalence-Relation-𝔽
-  pr2 quotient-𝔽 = is-finite-equivalence-class-Decidable-Equivalence-Relation-𝔽'
+  quotient-Finite-Type : Finite-Type (l1 ⊔ lsuc l2)
+  pr1 quotient-Finite-Type =
+    equivalence-class-Decidable-Equivalence-Relation-Finite-Type
+  pr2 quotient-Finite-Type =
+    is-finite-equivalence-class-Decidable-Equivalence-Relation-Finite-Type'
 ```

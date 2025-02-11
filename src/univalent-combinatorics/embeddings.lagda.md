@@ -1,4 +1,4 @@
-# Injective maps
+# Embeddings
 
 ```agda
 module univalent-combinatorics.embeddings where
@@ -19,6 +19,7 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -36,6 +37,8 @@ Embeddings in the presence of finite types enjoy further properties.
 
 ## Properties
 
+### Between finite types being an embedding is decidable
+
 ```agda
 is-decidable-is-emb-is-finite :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
@@ -47,7 +50,7 @@ is-decidable-is-emb-is-finite f HA HB =
     ( is-decidable-is-injective-is-finite f HA HB)
 ```
 
-### If `A` can be count, then `trunc-Prop A ↪ᵈ A`
+### If `A` can be counted, then `trunc-Prop A ↪ᵈ A`
 
 ```agda
 decidable-emb-trunc-Prop-count :

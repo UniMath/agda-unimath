@@ -26,7 +26,8 @@ open import structured-types.wild-monoids
 
 ## Idea
 
-**Monoids** are [unital](foundation.unital-binary-operations.md)
+{{#concept "Monoids" WDID=Q208237 WD="monoid" Agda=Monoid}} are
+[unital](foundation.unital-binary-operations.md)
 [semigroups](group-theory.semigroups.md).
 
 ## Definition
@@ -81,6 +82,12 @@ module _
   unit-Monoid : type-Monoid
   unit-Monoid = pr1 has-unit-Monoid
 
+  is-unit-Monoid-Prop : type-Monoid → Prop l
+  is-unit-Monoid-Prop x = Id-Prop set-Monoid x unit-Monoid
+
+  is-unit-Monoid : type-Monoid → UU l
+  is-unit-Monoid x = x ＝ unit-Monoid
+
   left-unit-law-mul-Monoid : (x : type-Monoid) → mul-Monoid unit-Monoid x ＝ x
   left-unit-law-mul-Monoid = pr1 (pr2 has-unit-Monoid)
 
@@ -123,7 +130,7 @@ abstract
     ( e' , left-unit-e' , right-unit-e') =
     eq-type-subtype
       ( λ e →
-        prod-Prop
+        product-Prop
           ( Π-Prop (type-Set X) (λ y → Id-Prop X (μ e y) y))
           ( Π-Prop (type-Set X) (λ x → Id-Prop X (μ x e) x)))
       ( (inv (left-unit-e' e)) ∙ (right-unit-e e'))
@@ -134,9 +141,9 @@ abstract
   is-prop-is-unital-Semigroup G =
     is-prop-all-elements-equal (all-elements-equal-is-unital-Semigroup G)
 
-is-unital-Semigroup-Prop : {l : Level} (G : Semigroup l) → Prop l
-pr1 (is-unital-Semigroup-Prop G) = is-unital-Semigroup G
-pr2 (is-unital-Semigroup-Prop G) = is-prop-is-unital-Semigroup G
+is-unital-prop-Semigroup : {l : Level} (G : Semigroup l) → Prop l
+pr1 (is-unital-prop-Semigroup G) = is-unital-Semigroup G
+pr2 (is-unital-prop-Semigroup G) = is-prop-is-unital-Semigroup G
 ```
 
 ### Monoids are H-spaces

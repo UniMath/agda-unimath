@@ -9,7 +9,7 @@ module species.unit-cauchy-composition-species-of-types-in-subuniverses where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.function-types
+open import foundation.global-subuniverses
 open import foundation.subuniverses
 open import foundation.universe-levels
 
@@ -33,7 +33,7 @@ Cauchy composition of species of types in a subuniverse by
 module _
   {l1 l2 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (C4 :
     is-closed-under-is-contr-subuniverses P
       ( subuniverse-global-subuniverse Q l1))

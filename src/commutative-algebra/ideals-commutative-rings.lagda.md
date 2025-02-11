@@ -13,11 +13,11 @@ open import commutative-algebra.subsets-commutative-rings
 
 open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import ring-theory.ideals-rings
@@ -139,7 +139,7 @@ module _
     is-in-ideal-Commutative-Ring x →
     is-in-ideal-Commutative-Ring (neg-Commutative-Ring R x)
   is-closed-under-negatives-ideal-Commutative-Ring =
-    pr2 (pr2 is-additive-subgroup-ideal-Commutative-Ring) _
+    pr2 (pr2 is-additive-subgroup-ideal-Commutative-Ring)
 
   is-closed-under-left-multiplication-ideal-Commutative-Ring :
     is-closed-under-left-multiplication-subset-Commutative-Ring R
@@ -237,12 +237,10 @@ module _
   refl-has-same-elements-ideal-Commutative-Ring =
     refl-has-same-elements-ideal-Ring (ring-Commutative-Ring R) I
 
-  is-contr-total-has-same-elements-ideal-Commutative-Ring :
-    is-contr
-      ( Σ ( ideal-Commutative-Ring l2 R)
-          ( has-same-elements-ideal-Commutative-Ring R I))
-  is-contr-total-has-same-elements-ideal-Commutative-Ring =
-    is-contr-total-has-same-elements-ideal-Ring (ring-Commutative-Ring R) I
+  is-torsorial-has-same-elements-ideal-Commutative-Ring :
+    is-torsorial (has-same-elements-ideal-Commutative-Ring R I)
+  is-torsorial-has-same-elements-ideal-Commutative-Ring =
+    is-torsorial-has-same-elements-ideal-Ring (ring-Commutative-Ring R) I
 
   has-same-elements-eq-ideal-Commutative-Ring :
     (J : ideal-Commutative-Ring l2 R) →

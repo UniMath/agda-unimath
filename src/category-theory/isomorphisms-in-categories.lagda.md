@@ -12,11 +12,14 @@ open import category-theory.isomorphisms-in-precategories
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -136,7 +139,7 @@ module _
   id-iso-Category = id-iso-Precategory (precategory-Category C)
 ```
 
-### Equalities give rise to isomorphisms
+### Equalities induce isomorphisms
 
 An equality between objects `x y : A` gives rise to an isomorphism between them.
 This is because, by the J-rule, it is enough to construct an isomorphism given
@@ -209,7 +212,7 @@ module _
 ### The type of isomorphisms form a set
 
 The type of isomorphisms between objects `x y : A` is a
-[subtype](foundation-core.subtypes.md) of the [foundation-core.sets.md)
+[subtype](foundation-core.subtypes.md) of the [set](foundation-core.sets.md)
 `hom x y` since being an isomorphism is a proposition.
 
 ```agda
@@ -474,6 +477,45 @@ module _
   is-iso-is-equiv-precomp-hom-Category : is-iso-Category C f
   is-iso-is-equiv-precomp-hom-Category =
     is-iso-is-equiv-precomp-hom-Precategory (precategory-Category C) H
+
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  {f : hom-Category C x y}
+  (is-iso-f : is-iso-Category C f)
+  (z : obj-Category C)
+  where
+
+  map-inv-precomp-hom-is-iso-Category : hom-Category C x z → hom-Category C y z
+  map-inv-precomp-hom-is-iso-Category =
+    precomp-hom-Category C (hom-inv-is-iso-Category C is-iso-f) z
+
+  is-equiv-precomp-hom-is-iso-Category : is-equiv (precomp-hom-Category C f z)
+  is-equiv-precomp-hom-is-iso-Category =
+    is-equiv-precomp-hom-is-iso-Precategory (precategory-Category C) is-iso-f z
+
+  equiv-precomp-hom-is-iso-Category : hom-Category C y z ≃ hom-Category C x z
+  equiv-precomp-hom-is-iso-Category =
+    equiv-precomp-hom-is-iso-Precategory (precategory-Category C) is-iso-f z
+
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  (f : iso-Category C x y)
+  (z : obj-Category C)
+  where
+
+  is-equiv-precomp-hom-iso-Category :
+    is-equiv (precomp-hom-Category C (hom-iso-Category C f) z)
+  is-equiv-precomp-hom-iso-Category =
+    is-equiv-precomp-hom-is-iso-Category C (is-iso-iso-Category C f) z
+
+  equiv-precomp-hom-iso-Category :
+    hom-Category C y z ≃ hom-Category C x z
+  equiv-precomp-hom-iso-Category =
+    equiv-precomp-hom-is-iso-Category C (is-iso-iso-Category C f) z
 ```
 
 ### A morphism `f` is an isomorphism if and only if postcomposition by `f` is an equivalence
@@ -528,8 +570,8 @@ module _
       ( precategory-Category C) H
 
   is-retraction-hom-inv-is-iso-is-equiv-postcomp-hom-Category :
-    ( comp-hom-Category C
-      ( hom-inv-is-iso-is-equiv-postcomp-hom-Category))
+    comp-hom-Category C
+      ( hom-inv-is-iso-is-equiv-postcomp-hom-Category)
       ( f) ＝
     ( id-hom-Category C)
   is-retraction-hom-inv-is-iso-is-equiv-postcomp-hom-Category =
@@ -540,6 +582,44 @@ module _
   is-iso-is-equiv-postcomp-hom-Category =
     is-iso-is-equiv-postcomp-hom-Precategory
       ( precategory-Category C) H
+
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  {f : hom-Category C x y}
+  (is-iso-f : is-iso-Category C f)
+  (z : obj-Category C)
+  where
+
+  map-inv-postcomp-hom-is-iso-Category : hom-Category C z y → hom-Category C z x
+  map-inv-postcomp-hom-is-iso-Category =
+    postcomp-hom-Category C (hom-inv-is-iso-Category C is-iso-f) z
+
+  is-equiv-postcomp-hom-is-iso-Category : is-equiv (postcomp-hom-Category C f z)
+  is-equiv-postcomp-hom-is-iso-Category =
+    is-equiv-postcomp-hom-is-iso-Precategory (precategory-Category C) is-iso-f z
+
+  equiv-postcomp-hom-is-iso-Category : hom-Category C z x ≃ hom-Category C z y
+  equiv-postcomp-hom-is-iso-Category =
+    equiv-postcomp-hom-is-iso-Precategory (precategory-Category C) is-iso-f z
+
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  (f : iso-Category C x y)
+  (z : obj-Category C)
+  where
+
+  is-equiv-postcomp-hom-iso-Category :
+    is-equiv (postcomp-hom-Category C (hom-iso-Category C f) z)
+  is-equiv-postcomp-hom-iso-Category =
+    is-equiv-postcomp-hom-is-iso-Category C (is-iso-iso-Category C f) z
+
+  equiv-postcomp-hom-iso-Category : hom-Category C z x ≃ hom-Category C z y
+  equiv-postcomp-hom-iso-Category =
+    equiv-postcomp-hom-is-iso-Category C (is-iso-iso-Category C f) z
 ```
 
 ### When `hom x y` is a proposition, the type of isomorphisms from `x` to `y` is a proposition
@@ -554,16 +634,18 @@ module _
   {x y : obj-Category C}
   where
 
-  is-prop-iso-Category :
+  is-prop-iso-is-prop-hom-Category :
     is-prop (hom-Category C x y) → is-prop (iso-Category C x y)
-  is-prop-iso-Category = is-prop-iso-Precategory (precategory-Category C)
+  is-prop-iso-is-prop-hom-Category =
+    is-prop-iso-is-prop-hom-Precategory (precategory-Category C)
 
-  iso-prop-Category :
+  iso-prop-is-prop-hom-Category :
     is-prop (hom-Category C x y) → Prop l2
-  iso-prop-Category = iso-prop-Precategory (precategory-Category C)
+  iso-prop-is-prop-hom-Category =
+    iso-prop-is-prop-hom-Precategory (precategory-Category C)
 ```
 
-### When `hom x y` and `hom y x` are propositions, it suffices to provide a homomorphism in each direction to construct an isomorphism
+### When `hom x y` and `hom y x` are propositions, it suffices to provide a morphism in each direction to construct an isomorphism
 
 ```agda
 module _
@@ -648,6 +730,28 @@ module _
     eq-iso-Category (iso-eq-Category C x y p) ＝ p
   is-retraction-eq-iso-Category {x} {y} =
     is-retraction-map-inv-equiv (extensionality-obj-Category x y)
+
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  (X : obj-Category C)
+  where
+
+  is-torsorial-iso-Category :
+    is-torsorial (iso-Category C X)
+  is-torsorial-iso-Category =
+    is-contr-equiv'
+      ( Σ (obj-Category C) (X ＝_))
+      ( equiv-tot (extensionality-obj-Category C X))
+      ( is-torsorial-Id X)
+
+  is-torsorial-iso-Category' :
+    is-torsorial (λ Y → iso-Category C Y X)
+  is-torsorial-iso-Category' =
+    is-contr-equiv'
+      ( Σ (obj-Category C) (_＝ X))
+      ( equiv-tot (λ Y → extensionality-obj-Category C Y X))
+      ( is-torsorial-Id' X)
 ```
 
 ### Functoriality of `eq-iso`

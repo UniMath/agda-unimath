@@ -41,7 +41,7 @@ predicate on the type of elements of `G`.
 
 ```agda
 decidable-subset-Group :
-  (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (G : Group l1) → UU (lsuc l ⊔ l1)
 decidable-subset-Group l G = decidable-subtype l (type-Group G)
 
 is-set-decidable-subset-Group :
@@ -121,7 +121,7 @@ module _
     is-prop-is-subgroup-subset-Group G (subset-decidable-subset-Group G P)
 
 Decidable-Subgroup :
-  (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (G : Group l1) → UU (lsuc l ⊔ l1)
 Decidable-Subgroup l G =
   type-subtype (is-subgroup-prop-decidable-subset-Group {l2 = l} G)
 
@@ -300,8 +300,8 @@ module _
       ( group-Decidable-Subgroup G H)
       ( G)
       ( map-inclusion-Decidable-Subgroup G H)
-  preserves-mul-inclusion-Decidable-Subgroup =
-    preserves-mul-inclusion-Subgroup G (subgroup-Decidable-Subgroup G H)
+  preserves-mul-inclusion-Decidable-Subgroup {x} {y} =
+    preserves-mul-inclusion-Subgroup G (subgroup-Decidable-Subgroup G H) {x} {y}
 
   preserves-unit-inclusion-Decidable-Subgroup :
     preserves-unit-Group
@@ -316,9 +316,10 @@ module _
       ( group-Decidable-Subgroup G H)
       ( G)
       ( map-inclusion-Decidable-Subgroup G H)
-  preserves-inverses-inclusion-Decidable-Subgroup =
+  preserves-inverses-inclusion-Decidable-Subgroup {x} =
     preserves-inverses-inclusion-Subgroup G
       ( subgroup-Decidable-Subgroup G H)
+      { x}
 
   hom-inclusion-Decidable-Subgroup :
     hom-Group (group-Decidable-Subgroup G H) G
@@ -372,10 +373,10 @@ module _
   is-prop-right-sim-Decidable-Subgroup =
     is-prop-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  prop-right-eq-rel-Decidable-Subgroup :
+  prop-right-equivalence-relation-Decidable-Subgroup :
     (x y : type-Group G) → Prop l2
-  prop-right-eq-rel-Decidable-Subgroup =
-    prop-right-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
+  prop-right-equivalence-relation-Decidable-Subgroup =
+    prop-right-equivalence-relation-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   refl-right-sim-Decidable-Subgroup :
     is-reflexive right-sim-Decidable-Subgroup
@@ -392,9 +393,10 @@ module _
   transitive-right-sim-Decidable-Subgroup =
     transitive-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  right-eq-rel-Decidable-Subgroup : Equivalence-Relation l2 (type-Group G)
-  right-eq-rel-Decidable-Subgroup =
-    right-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
+  right-equivalence-relation-Decidable-Subgroup :
+    equivalence-relation l2 (type-Group G)
+  right-equivalence-relation-Decidable-Subgroup =
+    right-equivalence-relation-Subgroup G (subgroup-Decidable-Subgroup G H)
 ```
 
 #### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `ux = y`
@@ -413,9 +415,10 @@ module _
   is-prop-left-sim-Decidable-Subgroup =
     is-prop-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  prop-left-eq-rel-Decidable-Subgroup : (x y : type-Group G) → Prop l2
-  prop-left-eq-rel-Decidable-Subgroup =
-    prop-left-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
+  prop-left-equivalence-relation-Decidable-Subgroup :
+    (x y : type-Group G) → Prop l2
+  prop-left-equivalence-relation-Decidable-Subgroup =
+    prop-left-equivalence-relation-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   refl-left-sim-Decidable-Subgroup :
     is-reflexive left-sim-Decidable-Subgroup
@@ -432,7 +435,8 @@ module _
   transitive-left-sim-Decidable-Subgroup =
     transitive-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  left-eq-rel-Decidable-Subgroup : Equivalence-Relation l2 (type-Group G)
-  left-eq-rel-Decidable-Subgroup =
-    left-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
+  left-equivalence-relation-Decidable-Subgroup :
+    equivalence-relation l2 (type-Group G)
+  left-equivalence-relation-Decidable-Subgroup =
+    left-equivalence-relation-Subgroup G (subgroup-Decidable-Subgroup G H)
 ```

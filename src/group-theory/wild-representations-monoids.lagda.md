@@ -64,12 +64,12 @@ module _
       ( hom-action-wild-representation-type-Monoid)
 
   preserves-mul-action-wild-representation-type-Monoid :
-    ( x y : type-Monoid M) →
+    { x y : type-Monoid M} →
     ( action-wild-representation-type-Monoid (mul-Monoid M x y)) ＝
     ( ( action-wild-representation-type-Monoid x) ∘
       ( action-wild-representation-type-Monoid y))
   preserves-mul-action-wild-representation-type-Monoid =
-    preserves-mul-map-hom-Wild-Monoid
+    preserves-mul-hom-Wild-Monoid
       ( wild-monoid-Monoid M)
       ( endo-Wild-Monoid type-wild-representation-type-Monoid)
       ( hom-action-wild-representation-type-Monoid)

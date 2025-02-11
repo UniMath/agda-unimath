@@ -12,8 +12,10 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.injective-maps
 open import foundation.negation
 open import foundation.sections
+open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -24,10 +26,8 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
 open import foundation-core.propositions
-open import foundation-core.retractions
-open import foundation-core.sets
+open import foundation-core.retracts-of-types
 open import foundation-core.transport-along-identifications
 ```
 
@@ -35,8 +35,10 @@ open import foundation-core.transport-along-identifications
 
 ## Definition
 
-A type `A` is said to have decidable equality if `Id x y` is a decidable type
-for every `x y : A`.
+A type `A` is said to have
+{{#concept "decidable equality" Disambiguation="type" Agda=has-decidable-equality}}
+if `x ＝ y` is a [decidable type](foundation.decidable-types.md) for every
+`x y : A`.
 
 ```agda
 has-decidable-equality : {l : Level} (A : UU l) → UU l
@@ -64,8 +66,7 @@ has-decidable-equality-empty ()
 ### The unit type has decidable equality
 
 ```agda
-has-decidable-equality-unit :
-  has-decidable-equality unit
+has-decidable-equality-unit : has-decidable-equality unit
 has-decidable-equality-unit star star = inl refl
 ```
 
@@ -74,23 +75,23 @@ has-decidable-equality-unit star star = inl refl
 ### A product of types with decidable equality has decidable equality
 
 ```agda
-has-decidable-equality-prod' :
+has-decidable-equality-product' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (f : B → has-decidable-equality A) (g : A → has-decidable-equality B) →
   has-decidable-equality (A × B)
-has-decidable-equality-prod' f g (pair x y) (pair x' y') with
+has-decidable-equality-product' f g (pair x y) (pair x' y') with
   f y x x' | g x y y'
 ... | inl refl | inl refl = inl refl
 ... | inl refl | inr nq = inr (λ r → nq (ap pr2 r))
 ... | inr np | inl refl = inr (λ r → np (ap pr1 r))
 ... | inr np | inr nq = inr (λ r → np (ap pr1 r))
 
-has-decidable-equality-prod :
+has-decidable-equality-product :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   has-decidable-equality A → has-decidable-equality B →
   has-decidable-equality (A × B)
-has-decidable-equality-prod d e =
-  has-decidable-equality-prod' (λ y → d) (λ x → e)
+has-decidable-equality-product d e =
+  has-decidable-equality-product' (λ y → d) (λ x → e)
 ```
 
 ### Decidability of equality of the factors of a cartesian product
@@ -111,7 +112,7 @@ has-decidable-equality-right-factor :
   has-decidable-equality (A × B) → A → has-decidable-equality B
 has-decidable-equality-right-factor d a x y with d (pair a x) (pair a y)
 ... | inl p = inl (ap pr2 p)
-... | inr np = inr (λ q → np (ap (pair a) q))
+... | inr np = inr (λ q → np (eq-pair-eq-fiber q))
 ```
 
 ### Types with decidable equality are closed under retracts
@@ -145,6 +146,9 @@ abstract
 ```
 
 ### Hedberg's theorem
+
+**Hedberg's theorem** asserts that types with decidable equality are
+[sets](foundation-core.sets.md).
 
 ```agda
 module _
@@ -220,13 +224,13 @@ abstract
   is-prop-has-decidable-equality :
     {l1 : Level} {X : UU l1} → is-prop (has-decidable-equality X)
   is-prop-has-decidable-equality {l1} {X} =
-    is-prop-is-inhabited
+    is-prop-has-element
       ( λ d →
         is-prop-Π
         ( λ x →
           is-prop-Π
           ( λ y →
-            is-prop-coprod
+            is-prop-coproduct
             ( intro-double-negation)
             ( is-set-has-decidable-equality d x y)
             ( is-prop-neg))))
@@ -274,7 +278,7 @@ abstract
             ( is-set-has-decidable-equality dA (pr1 t) x)))
 ```
 
-### If B is a family of types with decidable equality, the total space has decidable equality, and B has a section, then the base type has decidable equality
+### If `B` is a family of types with decidable equality, the total space has decidable equality, and `B` has a section, then the base type has decidable equality
 
 ```agda
 abstract
@@ -301,16 +305,16 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  has-decidable-equality-coprod :
+  has-decidable-equality-coproduct :
     has-decidable-equality A → has-decidable-equality B →
     has-decidable-equality (A + B)
-  has-decidable-equality-coprod d e (inl x) (inl y) =
+  has-decidable-equality-coproduct d e (inl x) (inl y) =
     is-decidable-iff (ap inl) is-injective-inl (d x y)
-  has-decidable-equality-coprod d e (inl x) (inr y) =
+  has-decidable-equality-coproduct d e (inl x) (inr y) =
     inr neq-inl-inr
-  has-decidable-equality-coprod d e (inr x) (inl y) =
+  has-decidable-equality-coproduct d e (inr x) (inl y) =
     inr neq-inr-inl
-  has-decidable-equality-coprod d e (inr x) (inr y) =
+  has-decidable-equality-coproduct d e (inr x) (inr y) =
     is-decidable-iff (ap inr) is-injective-inr (e x y)
 
   has-decidable-equality-left-summand :
@@ -323,3 +327,8 @@ module _
   has-decidable-equality-right-summand d x y =
     is-decidable-iff is-injective-inr (ap inr) (d (inr x) (inr y))
 ```
+
+## External links
+
+- [decidable equality](https://ncatlab.org/nlab/show/decidable+equality) at
+  $n$Lab

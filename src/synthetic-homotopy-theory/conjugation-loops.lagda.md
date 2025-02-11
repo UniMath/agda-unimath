@@ -80,14 +80,16 @@ module _
     {x y : A} (p : x ＝ y) → map-conjugation-Ω p ~ map-conjugation-Ω' p
   htpy-compute-conjugation-Ω refl ω = right-unit
 
-  preserves-point-compute-conjugation-Ω :
+  coherence-point-compute-conjugation-Ω :
     {x y : A} (p : x ＝ y) →
-    ( htpy-compute-conjugation-Ω p refl) ＝
-    ( preserves-point-conjugation-Ω p ∙ inv (preserves-point-conjugation-Ω' p))
-  preserves-point-compute-conjugation-Ω refl = refl
+    coherence-point-unpointed-htpy-pointed-Π
+      ( conjugation-Ω p)
+      ( conjugation-Ω' p)
+      ( htpy-compute-conjugation-Ω p)
+  coherence-point-compute-conjugation-Ω refl = refl
 
   compute-conjugation-Ω :
     {x y : A} (p : x ＝ y) → conjugation-Ω p ~∗ conjugation-Ω' p
   pr1 (compute-conjugation-Ω p) = htpy-compute-conjugation-Ω p
-  pr2 (compute-conjugation-Ω p) = preserves-point-compute-conjugation-Ω p
+  pr2 (compute-conjugation-Ω p) = coherence-point-compute-conjugation-Ω p
 ```

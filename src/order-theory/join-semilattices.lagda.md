@@ -53,9 +53,9 @@ module _
   {l : Level} (X : Semigroup l)
   where
 
-  is-join-semilattice-Semigroup-Prop : Prop l
-  is-join-semilattice-Semigroup-Prop =
-    prod-Prop
+  is-join-semilattice-prop-Semigroup : Prop l
+  is-join-semilattice-prop-Semigroup =
+    product-Prop
       ( Π-Prop
         ( type-Semigroup X)
         ( λ x →
@@ -76,19 +76,19 @@ module _
 
   is-join-semilattice-Semigroup : UU l
   is-join-semilattice-Semigroup =
-    type-Prop is-join-semilattice-Semigroup-Prop
+    type-Prop is-join-semilattice-prop-Semigroup
 
   is-prop-is-join-semilattice-Semigroup :
     is-prop is-join-semilattice-Semigroup
   is-prop-is-join-semilattice-Semigroup =
-    is-prop-type-Prop is-join-semilattice-Semigroup-Prop
+    is-prop-type-Prop is-join-semilattice-prop-Semigroup
 ```
 
 ### The algebraic definition of join-semilattices
 
 ```agda
 Join-Semilattice : (l : Level) → UU (lsuc l)
-Join-Semilattice l = type-subtype is-join-semilattice-Semigroup-Prop
+Join-Semilattice l = type-subtype is-join-semilattice-prop-Semigroup
 
 module _
   {l : Level} (X : Join-Semilattice l)
@@ -252,7 +252,7 @@ module _
       ( λ x →
         Π-Prop
           ( type-Poset P)
-          ( has-least-binary-upper-bound-Poset-Prop P x))
+          ( has-least-binary-upper-bound-prop-Poset P x))
 
   is-join-semilattice-Poset : UU (l1 ⊔ l2)
   is-join-semilattice-Poset = type-Prop is-join-semilattice-Poset-Prop
@@ -308,7 +308,7 @@ module _
   leq-Order-Theoretic-Join-Semilattice-Prop :
     (x y : type-Order-Theoretic-Join-Semilattice) → Prop l2
   leq-Order-Theoretic-Join-Semilattice-Prop =
-    leq-Poset-Prop poset-Order-Theoretic-Join-Semilattice
+    leq-prop-Poset poset-Order-Theoretic-Join-Semilattice
 
   leq-Order-Theoretic-Join-Semilattice :
     (x y : type-Order-Theoretic-Join-Semilattice) → UU l2

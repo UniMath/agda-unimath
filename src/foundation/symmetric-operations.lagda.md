@@ -9,25 +9,25 @@ module foundation.symmetric-operations where
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.subtypes
 open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import foundation-core.coproduct-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.finite-types
@@ -126,7 +126,7 @@ module _
       ( λ e → f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1))))
       ( λ e e' →
         is-weakly-constant-on-equivalences-is-commutative f H X p e e'
-          ( map-equiv-coprod
+          ( map-equiv-coproduct
             ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ (pair X K) e e'))
             ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ
               ( pair X K)
@@ -143,12 +143,11 @@ module _
     symmetric-operation-is-commutative f H (standard-unordered-pair x y) ＝
     f x y
   compute-symmetric-operation-is-commutative f H x y =
-
     htpy-universal-property-set-quotient-trunc-Prop B
       ( λ e → f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1))))
       ( λ e e' →
         is-weakly-constant-on-equivalences-is-commutative f H (Fin 2) p e e'
-          ( map-equiv-coprod
+          ( map-equiv-coproduct
             ( inv-equiv
               ( equiv-ev-zero-htpy-equiv-Fin-two-ℕ (Fin-UU-Fin' 2) e e'))
             ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ
@@ -211,13 +210,11 @@ module _
               ( Id-Prop B (f p) (g p))
               ( λ where (x , y , refl) → H x y)))
 
-  is-contr-total-htpy-symmetric-operation-Set :
-    is-contr
-      ( Σ ( symmetric-operation A (type-Set B))
-          ( htpy-symmetric-operation-Set))
-  pr1 is-contr-total-htpy-symmetric-operation-Set =
+  is-torsorial-htpy-symmetric-operation-Set :
+    is-torsorial (htpy-symmetric-operation-Set)
+  pr1 is-torsorial-htpy-symmetric-operation-Set =
     center-total-htpy-symmetric-operation-Set
-  pr2 is-contr-total-htpy-symmetric-operation-Set =
+  pr2 is-torsorial-htpy-symmetric-operation-Set =
     contraction-total-htpy-symmetric-operation-Set
 
   htpy-eq-symmetric-operation-Set :
@@ -230,7 +227,7 @@ module _
     is-equiv (htpy-eq-symmetric-operation-Set g)
   is-equiv-htpy-eq-symmetric-operation-Set =
     fundamental-theorem-id
-      is-contr-total-htpy-symmetric-operation-Set
+      is-torsorial-htpy-symmetric-operation-Set
       htpy-eq-symmetric-operation-Set
 
   extensionality-symmetric-operation-Set :

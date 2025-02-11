@@ -7,14 +7,20 @@ module category-theory.precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.nonunital-precategories
+open import category-theory.set-magmoids
+
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
+open import foundation.strictly-involutive-identity-types
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
 
@@ -22,54 +28,112 @@ open import foundation.universe-levels
 
 ## Idea
 
-A precategory in Homotopy Type Theory consists of:
+A {{#concept "precategory" Agda=Precategory}} `𝒞` in Homotopy Type Theory is the
+structure of an associative and unital
+[composition operation](category-theory.composition-operations-on-binary-families-of-sets.md)
+on a binary familiy of sets.
 
-- a type `A` of objects,
-- for each pair of objects `x y : A`, a set of morphisms `hom x y : Set`,
-  together with a composition operation `_∘_ : hom y z → hom x y → hom x z` such
-  that:
-- `(h ∘ g) ∘ f = h ∘ (g ∘ f)` for any morphisms `h : hom z w`, `g : hom y z` and
-  `f : hom x y`,
-- for each object `x : A` there is a morphism `id_x : hom x x` such that
-  `id_x ∘ f = f` and `g ∘ id_x = g` for any morphisms `f : hom x y` and
-  `g : hom z x`.
+This means a precategory consists of:
 
-The reason this is called a *pre*category and not a category in Homotopy Type
-Theory is that we want to reserve that name for precategories where the
-identities between the objects are exactly the isomorphisms.
+- **Objects.** A type `Ob 𝒞` of _objects_.
+- **Morphisms.** For each pair of objects `x y : Ob 𝒞`, a
+  [set](foundation-core.sets.md) of _morphisms_ `hom 𝒞 x y : Set`.
+- **Composition.** For every triple of objects `x y z : Ob 𝒞` there is a
+  _composition operation_ on morphisms
+  ```text
+    _∘_ : hom 𝒞 y z → hom 𝒞 x y → hom 𝒞 x z.
+  ```
+- **Associativity.** For every triple of composable morphisms, we have
+  ```text
+    (h ∘ g) ∘ f ＝ h ∘ (g ∘ f).
+  ```
+- **Identity morphisms.** For every object `x : Ob 𝒞`, there is a distinguished
+  _identity_ morphism `id_x : hom 𝒞 x x`.
+- **Unitality.** The identity morphisms are two-sided units for the composition
+  operation, meaning that for every `f : hom 𝒞 x y` we have
+  ```text
+    id_y ∘ f ＝ f   and   f ∘ id_x ＝ f.
+  ```
 
-## Definition
+**Note.** The reason this is called a *pre*category and not a _category_ in
+Homotopy Type Theory is that we reserve that name for precategories where the
+[identity types](foundation-core.identity-types.md) of the type of objects are
+characterized by the
+[isomorphism sets](category-theory.isomorphisms-in-precategories.md).
+
+## Definitions
+
+### The predicate on composition operations on binary families of sets of being a precategory
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (hom : A → A → Set l2)
+  {l1 l2 : Level} {A : UU l1}
+  (hom-set : A → A → Set l2)
+  (comp-hom : composition-operation-binary-family-Set hom-set)
   where
 
-  associative-composition-structure-Set : UU (l1 ⊔ l2)
-  associative-composition-structure-Set =
-    Σ ( {x y z : A} →
-        type-Set (hom y z) → type-Set (hom x y) → type-Set (hom x z))
-      ( λ μ →
-        {x y z w : A} (h : type-Set (hom z w)) (g : type-Set (hom y z))
-        (f : type-Set (hom x y)) → μ (μ h g) f ＝ μ h (μ g f))
+  is-precategory-prop-composition-operation-binary-family-Set : Prop (l1 ⊔ l2)
+  is-precategory-prop-composition-operation-binary-family-Set =
+    product-Prop
+      ( is-unital-prop-composition-operation-binary-family-Set hom-set comp-hom)
+      ( is-associative-prop-composition-operation-binary-family-Set
+        ( hom-set)
+        ( comp-hom))
 
-  is-unital-composition-structure-Set :
-    associative-composition-structure-Set → UU (l1 ⊔ l2)
-  is-unital-composition-structure-Set μ =
-    Σ ( (x : A) → type-Set (hom x x))
-      ( λ e →
-        ( {x y : A} (f : type-Set (hom x y)) → pr1 μ (e y) f ＝ f) ×
-        ( {x y : A} (f : type-Set (hom x y)) → pr1 μ f (e x) ＝ f))
+  is-precategory-composition-operation-binary-family-Set : UU (l1 ⊔ l2)
+  is-precategory-composition-operation-binary-family-Set =
+    type-Prop is-precategory-prop-composition-operation-binary-family-Set
 
+  is-prop-is-precategory-composition-operation-binary-family-Set :
+    is-prop is-precategory-composition-operation-binary-family-Set
+  is-prop-is-precategory-composition-operation-binary-family-Set =
+    is-prop-type-Prop
+      is-precategory-prop-composition-operation-binary-family-Set
+```
+
+### The type of precategories
+
+```agda
 Precategory :
   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Precategory l1 l2 =
   Σ ( UU l1)
     ( λ A →
       Σ ( A → A → Set l2)
-        ( λ hom →
-          Σ ( associative-composition-structure-Set hom)
-            ( is-unital-composition-structure-Set hom)))
+        ( λ hom-set →
+          Σ ( associative-composition-operation-binary-family-Set hom-set)
+            ( λ (comp-hom , assoc-comp) →
+              is-unital-composition-operation-binary-family-Set
+                ( hom-set)
+                ( comp-hom))))
+
+make-Precategory :
+  { l1 l2 : Level}
+  ( obj : UU l1)
+  ( hom-set : obj → obj → Set l2)
+  ( _∘_ : composition-operation-binary-family-Set hom-set)
+  ( id : (x : obj) → type-Set (hom-set x x))
+  ( assoc-comp-hom :
+    { x y z w : obj} →
+    ( h : type-Set (hom-set z w))
+    ( g : type-Set (hom-set y z))
+    ( f : type-Set (hom-set x y)) →
+    ( (h ∘ g) ∘ f ＝ h ∘ (g ∘ f)))
+  ( left-unit-comp-hom :
+    { x y : obj} (f : type-Set (hom-set x y)) → id y ∘ f ＝ f)
+  ( right-unit-comp-hom :
+    { x y : obj} (f : type-Set (hom-set x y)) → f ∘ id x ＝ f) →
+  Precategory l1 l2
+make-Precategory
+  obj hom-set _∘_ id assoc-comp-hom left-unit-comp-hom right-unit-comp-hom =
+  ( ( obj) ,
+    ( hom-set) ,
+    ( _∘_ , (λ h g f → involutive-eq-eq (assoc-comp-hom h g f))) ,
+    ( id) ,
+    ( left-unit-comp-hom) ,
+    ( right-unit-comp-hom))
+
+{-# INLINE make-Precategory #-}
 
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
@@ -88,16 +152,19 @@ module _
     (x y : obj-Precategory) → is-set (hom-Precategory x y)
   is-set-hom-Precategory x y = is-set-type-Set (hom-set-Precategory x y)
 
-  associative-composition-structure-Precategory :
-    associative-composition-structure-Set hom-set-Precategory
-  associative-composition-structure-Precategory = pr1 (pr2 (pr2 C))
+  associative-composition-operation-Precategory :
+    associative-composition-operation-binary-family-Set hom-set-Precategory
+  associative-composition-operation-Precategory = pr1 (pr2 (pr2 C))
 
   comp-hom-Precategory :
     {x y z : obj-Precategory} →
     hom-Precategory y z →
     hom-Precategory x y →
     hom-Precategory x z
-  comp-hom-Precategory = pr1 associative-composition-structure-Precategory
+  comp-hom-Precategory =
+    comp-hom-associative-composition-operation-binary-family-Set
+      ( hom-set-Precategory)
+      ( associative-composition-operation-Precategory)
 
   comp-hom-Precategory' :
     {x y z : obj-Precategory} →
@@ -105,6 +172,18 @@ module _
     hom-Precategory y z →
     hom-Precategory x z
   comp-hom-Precategory' f g = comp-hom-Precategory g f
+
+  involutive-eq-associative-comp-hom-Precategory :
+    {x y z w : obj-Precategory}
+    (h : hom-Precategory z w)
+    (g : hom-Precategory y z)
+    (f : hom-Precategory x y) →
+    ( comp-hom-Precategory (comp-hom-Precategory h g) f) ＝ⁱ
+    ( comp-hom-Precategory h (comp-hom-Precategory g f))
+  involutive-eq-associative-comp-hom-Precategory =
+    involutive-eq-associative-composition-operation-binary-family-Set
+      ( hom-set-Precategory)
+      ( associative-composition-operation-Precategory)
 
   associative-comp-hom-Precategory :
     {x y z w : obj-Precategory}
@@ -114,28 +193,56 @@ module _
     ( comp-hom-Precategory (comp-hom-Precategory h g) f) ＝
     ( comp-hom-Precategory h (comp-hom-Precategory g f))
   associative-comp-hom-Precategory =
-    pr2 associative-composition-structure-Precategory
+    witness-associative-composition-operation-binary-family-Set
+      ( hom-set-Precategory)
+      ( associative-composition-operation-Precategory)
 
-  is-unital-composition-structure-Precategory :
-    is-unital-composition-structure-Set
-      hom-set-Precategory
-      associative-composition-structure-Precategory
-  is-unital-composition-structure-Precategory = pr2 (pr2 (pr2 C))
+  is-unital-composition-operation-Precategory :
+    is-unital-composition-operation-binary-family-Set
+      ( hom-set-Precategory)
+      ( comp-hom-Precategory)
+  is-unital-composition-operation-Precategory = pr2 (pr2 (pr2 C))
 
   id-hom-Precategory : {x : obj-Precategory} → hom-Precategory x x
-  id-hom-Precategory {x} = pr1 is-unital-composition-structure-Precategory x
+  id-hom-Precategory {x} = pr1 is-unital-composition-operation-Precategory x
 
   left-unit-law-comp-hom-Precategory :
     {x y : obj-Precategory} (f : hom-Precategory x y) →
     comp-hom-Precategory id-hom-Precategory f ＝ f
   left-unit-law-comp-hom-Precategory =
-    pr1 (pr2 is-unital-composition-structure-Precategory)
+    pr1 (pr2 is-unital-composition-operation-Precategory)
 
   right-unit-law-comp-hom-Precategory :
     {x y : obj-Precategory} (f : hom-Precategory x y) →
     comp-hom-Precategory f id-hom-Precategory ＝ f
   right-unit-law-comp-hom-Precategory =
-    pr2 (pr2 is-unital-composition-structure-Precategory)
+    pr2 (pr2 is-unital-composition-operation-Precategory)
+```
+
+### The underlying nonunital precategory of a precategory
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  nonunital-precategory-Precategory : Nonunital-Precategory l1 l2
+  pr1 nonunital-precategory-Precategory = obj-Precategory C
+  pr1 (pr2 nonunital-precategory-Precategory) = hom-set-Precategory C
+  pr2 (pr2 nonunital-precategory-Precategory) =
+    associative-composition-operation-Precategory C
+```
+
+### The underlying set-magmoid of a precategory
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  set-magmoid-Precategory : Set-Magmoid l1 l2
+  set-magmoid-Precategory =
+    set-magmoid-Nonunital-Precategory (nonunital-precategory-Precategory C)
 ```
 
 ### The total hom-type of a precategory
@@ -144,41 +251,20 @@ module _
 total-hom-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) → UU (l1 ⊔ l2)
 total-hom-Precategory C =
-  Σ (obj-Precategory C) (λ x → Σ (obj-Precategory C) (hom-Precategory C x))
+  total-hom-Nonunital-Precategory (nonunital-precategory-Precategory C)
 
 obj-total-hom-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) →
   total-hom-Precategory C → obj-Precategory C × obj-Precategory C
-pr1 (obj-total-hom-Precategory C (x , y , f)) = x
-pr2 (obj-total-hom-Precategory C (x , y , f)) = y
+obj-total-hom-Precategory C =
+  obj-total-hom-Nonunital-Precategory (nonunital-precategory-Precategory C)
 ```
 
-### Precomposition by a morphism
-
-```agda
-precomp-hom-Precategory :
-  {l1 l2 : Level} (C : Precategory l1 l2) {x y : obj-Precategory C}
-  (f : hom-Precategory C x y) (z : obj-Precategory C) →
-  hom-Precategory C y z → hom-Precategory C x z
-precomp-hom-Precategory C f z g = comp-hom-Precategory C g f
-```
-
-### Postcomposition by a morphism
-
-```agda
-postcomp-hom-Precategory :
-  {l1 l2 : Level} (C : Precategory l1 l2) {x y : obj-Precategory C}
-  (f : hom-Precategory C x y) (z : obj-Precategory C) →
-  hom-Precategory C z x → hom-Precategory C z y
-postcomp-hom-Precategory C f z = comp-hom-Precategory C f
-```
-
-### Equalities give rise to homomorphisms
+### Equalities induce morphisms
 
 ```agda
 module _
-  {l1 l2 : Level}
-  (C : Precategory l1 l2)
+  {l1 l2 : Level} (C : Precategory l1 l2)
   where
 
   hom-eq-Precategory :
@@ -190,58 +276,121 @@ module _
   hom-inv-eq-Precategory x y = hom-eq-Precategory y x ∘ inv
 ```
 
-## Properties
-
-### The property of having identity morphisms is a proposition
-
-Suppose `e e' : (x : A) → hom x x` are both right and left units with regard to
-composition. It is enough to show that `e = e'` since the right and left unit
-laws are propositions (because all hom-types are sets). By function
-extensionality, it is enough to show that `e x = e' x` for all `x : A`. But by
-the unit laws we have the following chain of equalities:
-`e x = (e' x) ∘ (e x) = e' x.`
+### Pre- and postcomposition by a morphism
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (hom : A → A → Set l2)
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  {x y : obj-Precategory C}
+  (f : hom-Precategory C x y)
+  (z : obj-Precategory C)
   where
 
-  abstract
-    all-elements-equal-is-unital-composition-structure-Set :
-      ( μ : associative-composition-structure-Set hom) →
-      all-elements-equal (is-unital-composition-structure-Set hom μ)
-    all-elements-equal-is-unital-composition-structure-Set
-      ( pair μ associative-μ)
-      ( pair e (pair left-unit-law-e right-unit-law-e))
-      ( pair e' (pair left-unit-law-e' right-unit-law-e')) =
-      eq-type-subtype
-        ( λ x →
-          prod-Prop
-            ( Π-Prop' A
-              ( λ a →
-                Π-Prop' A
-                  ( λ b →
-                    Π-Prop
-                      ( type-Set (hom a b))
-                      ( λ f' →
-                        Id-Prop (hom a b) (μ (x b) f') f'))))
-            ( Π-Prop' A
-              ( λ a →
-                Π-Prop' A
-                  ( λ b →
-                    Π-Prop
-                      ( type-Set (hom a b))
-                      ( λ f' →
-                        Id-Prop (hom a b) (μ f' (x a)) f')))))
-        ( eq-htpy
-          ( λ x →
-            ( inv (left-unit-law-e' (e x))) ∙
-            ( right-unit-law-e (e' x))))
+  precomp-hom-Precategory : hom-Precategory C y z → hom-Precategory C x z
+  precomp-hom-Precategory g = comp-hom-Precategory C g f
 
-    is-prop-is-unital-composition-structure-Set :
-      ( μ : associative-composition-structure-Set hom) →
-      is-prop (is-unital-composition-structure-Set hom μ)
-    is-prop-is-unital-composition-structure-Set μ =
-      is-prop-all-elements-equal
-        ( all-elements-equal-is-unital-composition-structure-Set μ)
+  postcomp-hom-Precategory : hom-Precategory C z x → hom-Precategory C z y
+  postcomp-hom-Precategory = comp-hom-Precategory C f
 ```
+
+## Properties
+
+### If the objects of a precategory are `k`-truncated for nonnegative `k`, the total hom-type is `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} (C : Precategory l1 l2)
+  where
+
+  is-trunc-total-hom-is-trunc-obj-Precategory :
+    is-trunc (succ-𝕋 (succ-𝕋 k)) (obj-Precategory C) →
+    is-trunc (succ-𝕋 (succ-𝕋 k)) (total-hom-Precategory C)
+  is-trunc-total-hom-is-trunc-obj-Precategory =
+    is-trunc-total-hom-is-trunc-obj-Nonunital-Precategory
+      ( nonunital-precategory-Precategory C)
+
+  total-hom-truncated-type-is-trunc-obj-Precategory :
+    is-trunc (succ-𝕋 (succ-𝕋 k)) (obj-Precategory C) →
+    Truncated-Type (l1 ⊔ l2) (succ-𝕋 (succ-𝕋 k))
+  total-hom-truncated-type-is-trunc-obj-Precategory =
+    total-hom-truncated-type-is-trunc-obj-Nonunital-Precategory
+      ( nonunital-precategory-Precategory C)
+```
+
+### Coherence between the left and right unit law of a precategory
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  coh-unit-laws-comp-hom-Precategory :
+    {x : obj-Precategory C} →
+    left-unit-law-comp-hom-Precategory C (id-hom-Precategory C {x = x}) ＝
+    right-unit-law-comp-hom-Precategory C (id-hom-Precategory C {x = x})
+  coh-unit-laws-comp-hom-Precategory {x} =
+    eq-is-prop
+      ( is-set-hom-Precategory C x x
+        ( comp-hom-Precategory C (id-hom-Precategory C) (id-hom-Precategory C))
+        ( id-hom-Precategory C))
+```
+
+### Coherence between the associativity law and the unit laws of a precategory
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  coh-associative-left-unit-law-comp-hom-Precategory :
+    {x y z : obj-Precategory C}
+    {f : hom-Precategory C x y} {g : hom-Precategory C y z} →
+    ( associative-comp-hom-Precategory C (id-hom-Precategory C) g f) ∙
+    ( left-unit-law-comp-hom-Precategory C (comp-hom-Precategory C g f)) ＝
+    ( ap
+      ( comp-hom-Precategory' C f)
+      ( left-unit-law-comp-hom-Precategory C g))
+  coh-associative-left-unit-law-comp-hom-Precategory {x} {y} {z} {f} {g} =
+      eq-is-prop
+      ( is-set-hom-Precategory C x z
+        ( comp-hom-Precategory C
+          ( comp-hom-Precategory C (id-hom-Precategory C) g)
+          ( f))
+        ( comp-hom-Precategory C g f))
+
+  coh-associative-left-unit-law-comp-hom-Precategory'' :
+    {x y : obj-Precategory C} {f : hom-Precategory C x y} →
+    ( associative-comp-hom-Precategory C
+      ( id-hom-Precategory C)
+      ( id-hom-Precategory C)
+      ( f)) ∙
+    left-unit-law-comp-hom-Precategory C
+      ( comp-hom-Precategory C (id-hom-Precategory C) f) ∙
+    left-unit-law-comp-hom-Precategory C f ＝
+    ( ap
+      ( comp-hom-Precategory' C f)
+      ( left-unit-law-comp-hom-Precategory C (id-hom-Precategory C))) ∙
+    ( left-unit-law-comp-hom-Precategory C f)
+  coh-associative-left-unit-law-comp-hom-Precategory'' {x} {y} {f} =
+    eq-is-prop
+      ( is-set-hom-Precategory C x y
+        ( comp-hom-Precategory C
+          ( comp-hom-Precategory C
+            ( id-hom-Precategory C)
+            ( id-hom-Precategory C))
+          ( f))
+        ( f))
+```
+
+## See also
+
+- [Categories](category-theory.categories.md) are univalent precategories.
+- [Functors between precategories](category-theory.functors-precategories.md)
+  are [structure](foundation.structure.md)-preserving maps of precategories.
+- [Large precategories](category-theory.large-precategories.md) are
+  precategories whose collections of objects and morphisms form large types.
+
+## External links
+
+- [Precategories](https://1lab.dev/Cat.Base.html) at 1lab
+- [precategory](https://ncatlab.org/nlab/show/precategory) at $n$Lab

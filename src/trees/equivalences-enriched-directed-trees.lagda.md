@@ -20,6 +20,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -135,10 +136,10 @@ module _
       ( directed-tree-Enriched-Directed-Tree A B T)
   equiv-directed-tree-equiv-Enriched-Directed-Tree = pr1 e
 
-  equiv-node-equiv-Enriched-Directed-Tree :
+  node-equiv-equiv-Enriched-Directed-Trhee :
     node-Enriched-Directed-Tree A B S ≃ node-Enriched-Directed-Tree A B T
-  equiv-node-equiv-Enriched-Directed-Tree =
-    equiv-node-equiv-Directed-Tree
+  node-equiv-equiv-Enriched-Directed-Trhee =
+    node-equiv-equiv-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B S)
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( equiv-directed-tree-equiv-Enriched-Directed-Tree)
@@ -151,20 +152,20 @@ module _
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( equiv-directed-tree-equiv-Enriched-Directed-Tree)
 
-  equiv-edge-equiv-Enriched-Directed-Tree :
+  edge-equiv-equiv-Enriched-Directed-Trhee :
     (x y : node-Enriched-Directed-Tree A B S) →
     edge-Enriched-Directed-Tree A B S x y ≃
     edge-Enriched-Directed-Tree A B T
       ( node-equiv-Enriched-Directed-Tree x)
       ( node-equiv-Enriched-Directed-Tree y)
-  equiv-edge-equiv-Enriched-Directed-Tree =
-    equiv-edge-equiv-Directed-Tree
+  edge-equiv-equiv-Enriched-Directed-Trhee =
+    edge-equiv-equiv-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B S)
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( equiv-directed-tree-equiv-Enriched-Directed-Tree)
 
   edge-equiv-Enriched-Directed-Tree :
-    (x y : node-Enriched-Directed-Tree A B S) →
+    {x y : node-Enriched-Directed-Tree A B S} →
     edge-Enriched-Directed-Tree A B S x y →
     edge-Enriched-Directed-Tree A B T
       ( node-equiv-Enriched-Directed-Tree x)
@@ -294,11 +295,11 @@ module _
       ( equiv-directed-tree-equiv-Enriched-Directed-Tree A B S T g)
       ( equiv-directed-tree-equiv-Enriched-Directed-Tree A B R S f)
 
-  equiv-node-comp-equiv-Enriched-Directed-Tree :
+  node-equiv-comp-equiv-Enriched-Directed-Tree :
     node-Enriched-Directed-Tree A B R ≃
     node-Enriched-Directed-Tree A B T
-  equiv-node-comp-equiv-Enriched-Directed-Tree =
-    equiv-node-equiv-Directed-Tree
+  node-equiv-comp-equiv-Enriched-Directed-Tree =
+    node-equiv-equiv-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B R)
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( equiv-directed-tree-comp-equiv-Enriched-Directed-Tree)
@@ -312,20 +313,20 @@ module _
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( equiv-directed-tree-comp-equiv-Enriched-Directed-Tree)
 
-  equiv-edge-comp-equiv-Enriched-Directed-Tree :
+  edge-equiv-comp-equiv-Enriched-Directed-Tree :
     (x y : node-Enriched-Directed-Tree A B R) →
     edge-Enriched-Directed-Tree A B R x y ≃
     edge-Enriched-Directed-Tree A B T
       ( node-comp-equiv-Enriched-Directed-Tree x)
       ( node-comp-equiv-Enriched-Directed-Tree y)
-  equiv-edge-comp-equiv-Enriched-Directed-Tree =
-    equiv-edge-equiv-Directed-Tree
+  edge-equiv-comp-equiv-Enriched-Directed-Tree =
+    edge-equiv-equiv-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B R)
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( equiv-directed-tree-comp-equiv-Enriched-Directed-Tree)
 
   edge-comp-equiv-Enriched-Directed-Tree :
-    (x y : node-Enriched-Directed-Tree A B R) →
+    {x y : node-Enriched-Directed-Tree A B R} →
     edge-Enriched-Directed-Tree A B R x y →
     edge-Enriched-Directed-Tree A B T
       ( node-comp-equiv-Enriched-Directed-Tree x)
@@ -499,15 +500,13 @@ module _
   eq-equiv-Enriched-Directed-Tree S =
     map-inv-equiv (extensionality-Enriched-Directed-Tree S)
 
-  is-contr-total-equiv-Enriched-Directed-Tree :
-    is-contr
-      ( Σ ( Enriched-Directed-Tree l3 l4 A B)
-          ( equiv-Enriched-Directed-Tree A B T))
-  is-contr-total-equiv-Enriched-Directed-Tree =
+  is-torsorial-equiv-Enriched-Directed-Tree :
+    is-torsorial (equiv-Enriched-Directed-Tree A B T)
+  is-torsorial-equiv-Enriched-Directed-Tree =
     is-contr-equiv'
       ( Σ (Enriched-Directed-Tree l3 l4 A B) (λ S → T ＝ S))
       ( equiv-tot extensionality-Enriched-Directed-Tree)
-      ( is-contr-total-path T)
+      ( is-torsorial-Id T)
 ```
 
 ### A morphism of enriched directed trees is an equivalence if it is an equivalence on the nodes

@@ -41,19 +41,19 @@ module _
 
   relation-holds-all-vec :
     { l4 : Level} →
-    ( R : Equivalence-Relation l4 (type-Algebra Sg Th Alg)) →
+    ( R : equivalence-relation l4 (type-Algebra Sg Th Alg)) →
     { n : ℕ} →
     ( v : vec (type-Algebra Sg Th Alg) n) →
     ( v' : vec (type-Algebra Sg Th Alg) n) →
     UU l4
   relation-holds-all-vec {l4} R {.zero-ℕ} empty-vec empty-vec = raise-unit l4
   relation-holds-all-vec {l4} R {.(succ-ℕ _)} (x ∷ v) (x' ∷ v') =
-    ( type-Prop (prop-Equivalence-Relation R x x')) ×
+    ( type-Prop (prop-equivalence-relation R x x')) ×
     ( relation-holds-all-vec R v v')
 
   preserves-operations :
     { l4 : Level} →
-    ( R : Equivalence-Relation l4 (type-Algebra Sg Th Alg)) →
+    ( R : equivalence-relation l4 (type-Algebra Sg Th Alg)) →
     UU (l1 ⊔ l3 ⊔ l4)
   preserves-operations R =
     ( op : operation-signature Sg) →
@@ -63,7 +63,7 @@ module _
       ( arity-operation-signature Sg op)) →
         ( relation-holds-all-vec R v v' →
           ( type-Prop
-            ( prop-Equivalence-Relation R
+            ( prop-equivalence-relation R
               ( is-model-set-Algebra Sg Th Alg op v)
               ( is-model-set-Algebra Sg Th Alg op v'))))
 
@@ -71,17 +71,17 @@ module _
     ( l4 : Level) →
     UU (l1 ⊔ l3 ⊔ lsuc l4)
   congruence-Algebra l4 =
-    Σ ( Equivalence-Relation l4 (type-Algebra Sg Th Alg))
+    Σ ( equivalence-relation l4 (type-Algebra Sg Th Alg))
       ( preserves-operations)
 
-  eq-rel-congruence-Algebra :
+  equivalence-relation-congruence-Algebra :
     { l4 : Level} →
-    congruence-Algebra l4 → ( Equivalence-Relation l4 (type-Algebra Sg Th Alg))
-  eq-rel-congruence-Algebra = pr1
+    congruence-Algebra l4 → ( equivalence-relation l4 (type-Algebra Sg Th Alg))
+  equivalence-relation-congruence-Algebra = pr1
 
   preserves-operations-congruence-Algebra :
     { l4 : Level} →
     ( R : congruence-Algebra l4) →
-    ( preserves-operations (eq-rel-congruence-Algebra R))
+    ( preserves-operations (equivalence-relation-congruence-Algebra R))
   preserves-operations-congruence-Algebra = pr2
 ```

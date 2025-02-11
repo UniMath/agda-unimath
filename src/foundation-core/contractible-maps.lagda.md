@@ -18,6 +18,8 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -48,36 +50,43 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : is-contr-map f)
   where
 
-  map-inv-is-contr-map : is-contr-map f → B → A
-  map-inv-is-contr-map H y = pr1 (center (H y))
+  map-inv-is-contr-map : B → A
+  map-inv-is-contr-map y = pr1 (center (H y))
 
   is-section-map-inv-is-contr-map :
-    (H : is-contr-map f) → (f ∘ (map-inv-is-contr-map H)) ~ id
-  is-section-map-inv-is-contr-map H y = pr2 (center (H y))
+    is-section f map-inv-is-contr-map
+  is-section-map-inv-is-contr-map y = pr2 (center (H y))
 
   is-retraction-map-inv-is-contr-map :
-    (H : is-contr-map f) → ((map-inv-is-contr-map H) ∘ f) ~ id
-  is-retraction-map-inv-is-contr-map H x =
+    is-retraction f map-inv-is-contr-map
+  is-retraction-map-inv-is-contr-map x =
     ap
-      ( pr1 {B = λ z → (f z) ＝ (f x)})
+      ( pr1 {B = λ z → (f z ＝ f x)})
       ( ( inv
           ( contraction
             ( H (f x))
-            ( pair
-              ( map-inv-is-contr-map H (f x))
-              ( is-section-map-inv-is-contr-map H (f x))))) ∙
-        ( contraction (H (f x)) (pair x refl)))
+            ( ( map-inv-is-contr-map (f x)) ,
+              ( is-section-map-inv-is-contr-map (f x))))) ∙
+        ( contraction (H (f x)) (x , refl)))
+
+  section-is-contr-map : section f
+  section-is-contr-map =
+    ( map-inv-is-contr-map , is-section-map-inv-is-contr-map)
+
+  retraction-is-contr-map : retraction f
+  retraction-is-contr-map =
+    ( map-inv-is-contr-map , is-retraction-map-inv-is-contr-map)
 
   abstract
-    is-equiv-is-contr-map : is-contr-map f → is-equiv f
-    is-equiv-is-contr-map H =
+    is-equiv-is-contr-map : is-equiv f
+    is-equiv-is-contr-map =
       is-equiv-is-invertible
-        ( map-inv-is-contr-map H)
-        ( is-section-map-inv-is-contr-map H)
-        ( is-retraction-map-inv-is-contr-map H)
+        ( map-inv-is-contr-map)
+        ( is-section-map-inv-is-contr-map)
+        ( is-retraction-map-inv-is-contr-map)
 ```
 
 ### Any coherently invertible map is a contractible map
@@ -93,14 +102,14 @@ module _
     pr1 (center-fiber-is-coherently-invertible H y) =
       map-inv-is-coherently-invertible H y
     pr2 (center-fiber-is-coherently-invertible H y) =
-      is-retraction-is-coherently-invertible H y
+      is-section-map-inv-is-coherently-invertible H y
 
     contraction-fiber-is-coherently-invertible :
       (H : is-coherently-invertible f) → (y : B) → (t : fiber f y) →
       (center-fiber-is-coherently-invertible H y) ＝ t
-    contraction-fiber-is-coherently-invertible H y (pair x refl) =
+    contraction-fiber-is-coherently-invertible H y (x , refl) =
       eq-Eq-fiber f y
-        ( is-section-is-coherently-invertible H x)
+        ( is-retraction-map-inv-is-coherently-invertible H x)
         ( ( right-unit) ∙
           ( inv ( coh-is-coherently-invertible H x)))
 
@@ -129,8 +138,8 @@ module _
 
 - For the notion of biinvertible maps see
   [`foundation.equivalences`](foundation.equivalences.md).
-- For the notions of inverses and coherently invertible maps, also known as
-  half-adjoint equivalences, see
+- For the notion of coherently invertible maps, also known as half-adjoint
+  equivalences, see
   [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.md).
 - For the notion of path-split maps see
   [`foundation.path-split-maps`](foundation.path-split-maps.md).

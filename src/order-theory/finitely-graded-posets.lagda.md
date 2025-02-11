@@ -403,7 +403,7 @@ module _
 
     is-top-element-Finitely-Graded-Poset-Prop : Prop (l1 ⊔ l2)
     is-top-element-Finitely-Graded-Poset-Prop =
-      is-top-element-Poset-Prop
+      is-top-element-prop-Poset
         ( poset-Finitely-Graded-Poset X)
         ( element-face-Finitely-Graded-Poset X x)
 
@@ -450,7 +450,7 @@ module _
 
   has-bottom-and-top-element-Finitely-Graded-Poset-Prop : Prop (l1 ⊔ l2)
   has-bottom-and-top-element-Finitely-Graded-Poset-Prop =
-    prod-Prop
+    product-Prop
       has-bottom-element-Finitely-Graded-Poset-Prop
       has-top-element-Finitely-Graded-Poset-Prop
 
@@ -536,7 +536,7 @@ module _
   emb-type-Finitely-Graded-Subposet :
     type-Finitely-Graded-Subposet ↪ type-Finitely-Graded-Poset X
   emb-type-Finitely-Graded-Subposet =
-    tot-emb emb-face-Finitely-Graded-Subposet
+    emb-tot emb-face-Finitely-Graded-Subposet
 
   map-emb-type-Finitely-Graded-Subposet :
     type-Finitely-Graded-Subposet → type-Finitely-Graded-Poset X

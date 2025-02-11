@@ -7,13 +7,13 @@ module foundation.descent-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
+open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalences
 open import foundation.functoriality-fibers-of-maps
 open import foundation.universe-levels
 
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.pullbacks
 ```
 
@@ -29,7 +29,7 @@ property. It asserts that in a commuting diagram of the form
  A -----> B -----> C
  |        |        |
 f|       g|        |h
- V        V        V
+ ∨        ∨        ∨
  X -----> Y -----> Z,
      i        j
 ```
@@ -53,24 +53,31 @@ module _
     is-pullback j h c
   descent-is-equiv i j h c d
     is-equiv-i is-equiv-k is-pb-rectangle =
-    is-pullback-is-fiberwise-equiv-map-fiber-cone j h c
+    is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone j h c
       ( map-inv-is-equiv-precomp-Π-is-equiv
         ( is-equiv-i)
-        ( λ y → is-equiv (map-fiber-cone j h c y))
-        ( λ x → is-equiv-left-factor-htpy
-          ( map-fiber-cone (j ∘ i) h
+        ( λ y → is-equiv (map-fiber-vertical-map-cone j h c y))
+        ( λ x →
+          is-equiv-right-map-triangle
+          ( map-fiber-vertical-map-cone (j ∘ i) h
             ( pasting-horizontal-cone i j h c d) x)
-          ( map-fiber-cone j h c (i x))
-          ( map-fiber-cone i (vertical-map-cone j h c) d x)
-          ( map-fiber-pasting-horizontal-cone i j h c d x)
-          ( is-fiberwise-equiv-map-fiber-cone-is-pullback (j ∘ i) h
+          ( map-fiber-vertical-map-cone j h c (i x))
+          ( map-fiber-vertical-map-cone i (vertical-map-cone j h c) d x)
+          ( preserves-pasting-horizontal-map-fiber-vertical-map-cone
+            ( i)
+            ( j)
+            ( h)
+            ( c)
+            ( d)
+            ( x))
+          ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback (j ∘ i) h
             ( pasting-horizontal-cone i j h c d)
             ( is-pb-rectangle)
             ( x))
-          ( is-fiberwise-equiv-map-fiber-cone-is-pullback i
+          ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback i
             ( vertical-map-cone j h c)
             ( d)
-            ( is-pullback-is-equiv' i
+            ( is-pullback-is-equiv-horizontal-maps i
               ( vertical-map-cone j h c)
               ( d)
               ( is-equiv-i)

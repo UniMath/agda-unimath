@@ -7,6 +7,7 @@ module lists.permutation-lists where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
@@ -172,7 +173,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   (b : B)
   (μ : A → (B → B))
-  (C : commutative-fold-vec μ)
+  (C : commutative-fold-vec μ)
   where
 
   invariant-fold-vec-tr :

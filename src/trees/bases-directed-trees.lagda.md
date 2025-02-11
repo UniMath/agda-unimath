@@ -14,6 +14,7 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -282,7 +283,7 @@ module _
       ( is-root-Directed-Tree T x +
         Σ ( base-Directed-Tree T)
           ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
-      ( left-unit-law-coprod-is-empty
+      ( left-unit-law-coproduct-is-empty
         ( is-root-Directed-Tree T x)
         ( Σ ( base-Directed-Tree T)
           ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
@@ -372,5 +373,5 @@ module _
   eq-compute-proper-node-Directed-Tree {x} H b w =
     ap
       ( map-equiv equiv-left-swap-Σ)
-      ( ap (pair x) (eq-is-prop (is-prop-walk-to-base-Directed-Tree T x)))
+      ( eq-pair-eq-fiber (eq-is-prop (is-prop-walk-to-base-Directed-Tree T x)))
 ```

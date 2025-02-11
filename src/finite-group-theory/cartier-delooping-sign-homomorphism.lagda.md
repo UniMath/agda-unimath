@@ -60,7 +60,7 @@ module _
 
   not-even-difference-action-equiv-family-on-subuniverse :
     (n : ℕ) (Y : 2-Element-Decidable-Subtype l (raise-Fin l (n +ℕ 2))) →
-    ¬ ( sim-Equivalence-Relation
+    ¬ ( sim-equivalence-relation
       ( even-difference-orientation-Complete-Undirected-Graph
         ( n +ℕ 2)
         ( raise-Fin l (n +ℕ 2) ,
@@ -85,7 +85,7 @@ module _
       ( λ f →
         ( Y : 2-Element-Decidable-Subtype l
           ( raise-Fin l (n +ℕ 2))) →
-            ¬ ( sim-Equivalence-Relation
+            ¬ ( sim-equivalence-relation
               ( even-difference-orientation-Complete-Undirected-Graph
                 ( n +ℕ 2)
                 ( raise-Fin l (n +ℕ 2) ,
@@ -146,28 +146,28 @@ module _
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
         ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
+        ( group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
         ( comp-hom-Group
           ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
-          ( abstract-group-Concrete-Group (UU-Fin-Group l (n +ℕ 2)))
-          ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
+          ( group-Concrete-Group (UU-Fin-Group l (n +ℕ 2)))
+          ( group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
           ( hom-group-hom-Concrete-Group
             ( UU-Fin-Group l (n +ℕ 2))
             ( UU-Fin-Group (lsuc l) 2)
             ( cartier-delooping-sign (n +ℕ 2)))
           ( hom-inv-iso-Group
-            ( abstract-group-Concrete-Group (UU-Fin-Group l (n +ℕ 2)))
+            ( group-Concrete-Group (UU-Fin-Group l (n +ℕ 2)))
             ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
             ( iso-loop-group-fin-UU-Fin-Group l (n +ℕ 2))))
         ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l (n +ℕ 2))))
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
         ( symmetric-Group (Fin-Set (n +ℕ 2)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
+        ( group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
         ( comp-hom-Group
           ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
-          ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
+          ( group-Concrete-Group (UU-Fin-Group (lsuc l) 2))
           ( symmetric-abstract-UU-fin-group-quotient-hom
             ( orientation-Complete-Undirected-Graph)
             ( even-difference-orientation-Complete-Undirected-Graph)
@@ -202,5 +202,4 @@ module _
 
 ## References
 
-- Mangel É. and Rijke E.
-  ["Delooping the sign homomorphism in univalent mathematics"](https://arxiv.org/abs/2301.10011).
+{{#bibliography}} {{#reference MR23}}

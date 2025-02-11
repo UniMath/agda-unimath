@@ -63,7 +63,7 @@ module _
 
 - [Eulerian circuit](https://d3gt.com/unit.html?eulerian-circuit) on D3 Graph
   theory
-- [Eulerian cycle](https://www.wikidata.org/wiki/Q11691793) on Wikidata
+- [Eulerian cycle](https://www.wikidata.org/entity/Q11691793) on Wikidata
 - [Eulerian path](https://en.wikipedia.org/wiki/Eulerian_path) on Wikipedia
 - [Eulerian cycle](https://mathworld.wolfram.com/EulerianCycle.html) on Wolfram
   mathworld

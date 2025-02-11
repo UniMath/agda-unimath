@@ -28,6 +28,9 @@ open import structured-types.pointed-types
 A pointed map from a pointed type `A` to a pointed type `B` is a base point
 preserving function from `A` to `B`.
 
+The type `A →∗ B` of pointed maps from `A` to `B` is itself pointed by the
+[constant pointed map](structured-types.constant-pointed-maps.md).
+
 ## Definitions
 
 ### Pointed maps
@@ -50,16 +53,6 @@ and pointed type constructions in general, is the
 the [asterisk](https://codepoints.net/U+002A) `*`.
 
 ```agda
-  constant-pointed-map : (A : Pointed-Type l1) (B : Pointed-Type l2) → A →∗ B
-  pr1 (constant-pointed-map A B) =
-    const (type-Pointed-Type A) (type-Pointed-Type B) (point-Pointed-Type B)
-  pr2 (constant-pointed-map A B) = refl
-
-  pointed-map-Pointed-Type :
-    Pointed-Type l1 → Pointed-Type l2 → Pointed-Type (l1 ⊔ l2)
-  pr1 (pointed-map-Pointed-Type A B) = pointed-map A B
-  pr2 (pointed-map-Pointed-Type A B) = constant-pointed-map A B
-
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
   where
@@ -128,18 +121,10 @@ module _
   pr1 (comp-pointed-map g f) = map-comp-pointed-map g f
   pr2 (comp-pointed-map g f) = preserves-point-comp-pointed-map g f
 
-precomp-pointed-map :
-  {l1 l2 l3 : Level}
-  {A : Pointed-Type l1} {B : Pointed-Type l2} (C : Pointed-Type l3) →
-  A →∗ B → B →∗ C → A →∗ C
-precomp-pointed-map C f g = comp-pointed-map g f
+  infixr 15 _∘∗_
 
-infixr 15 _∘∗_
-_∘∗_ :
-  {l1 l2 l3 : Level}
-  {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3} →
-  B →∗ C → A →∗ B → A →∗ C
-_∘∗_ {A = A} {B} {C} = comp-pointed-map
+  _∘∗_ : B →∗ C → A →∗ B → A →∗ C
+  _∘∗_ = comp-pointed-map
 ```
 
 ### The identity pointed map
@@ -153,3 +138,8 @@ module _
   pr1 id-pointed-map = id
   pr2 id-pointed-map = refl
 ```
+
+## See also
+
+- [Constant pointed maps](structured-types.constant-pointed-maps.md)
+- [Precomposition of pointed maps](structured-types.precomposition-pointed-maps.md)

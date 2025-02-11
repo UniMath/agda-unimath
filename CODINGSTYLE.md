@@ -1,6 +1,6 @@
-# The `agda-unimath` library style guide
+# The agda-unimath library style guide
 
-The `agda-unimath` library is an ever-expanding encyclopedia of formalized
+The agda-unimath library is an ever-expanding encyclopedia of formalized
 mathematics from a univalent point of view. The library's corresponding website
 serves as an extensive platform, presenting our work in a structured,
 encyclopedia-like format.
@@ -13,16 +13,16 @@ thereby weaving each contribution into a bigger tapestry.
 Conceptual clarity and readability are the core values of our formalization
 project. This style guide aims to help contributors write code that is both
 functional and understandable, as well as easily maintainable. Please reach out
-to us if you have any questions or remarks about the `agda-unimath` style, or
-need any help getting started with your formalization project. Our code, and
-also this guide, are open to refinement to best support our community and the
+to us if you have any questions or remarks about the agda-unimath style, or need
+any help getting started with your formalization project. Our code, and also
+this guide, are open to refinement to best support our community and the
 project's goals.
 
 ## Code structuring conventions
 
-The `agda-unimath` library is a comprehensive collection of formalized
-mathematics spanning a broad range of subjects. All fields of mathematics are
-inherently interlinked, which we leverage in our formalization process.
+The agda-unimath library is a comprehensive collection of formalized mathematics
+spanning a broad range of subjects. All fields of mathematics are inherently
+interlinked, which we leverage in our formalization process.
 
 One critical aspect of maintaining such a large codebase lies in efficient and
 strategic code structuring, and continued refactoring, into small, reusable
@@ -62,17 +62,17 @@ Here are the benefits of this approach:
 In essence, our code structuring conventions are guided by the goal of ensuring
 that our code remains as conceptually clear and as understandable as possible.
 Finally, a maintainable codebase is a welcoming codebase. By ensuring that the
-`agda-unimath` code is easy to understand and navigate, new contributors can
-more readily participate in the project. This is crucial for the growth and
-dynamism of the `agda-unimath` community. It allows a diverse group of
-developers, each with their unique skills and perspectives, to contribute to the
-project's ongoing success.
+agda-unimath code is easy to understand and navigate, new contributors can more
+readily participate in the project. This is crucial for the growth and dynamism
+of the agda-unimath community. It allows a diverse group of developers, each
+with their unique skills and perspectives, to contribute to the project's
+ongoing success.
 
 So, in particular, refactoring isn't just about "cleaning up" the code; it's a
 strategic endeavour to ensure the longevity, vitality, and success of the
-`agda-unimath` project.
+agda-unimath project.
 
-## Guidelines for definitions in the `agda-unimath` library
+## Guidelines for definitions in the agda-unimath library
 
 - **Universe polymorphism**: We make use of universe polymorphism to make our
   definitions maximally applicable. Each assumed type or type family is assigned
@@ -173,10 +173,10 @@ strategic endeavour to ensure the longevity, vitality, and success of the
 
 ## Code comments
 
-Given that the files in `agda-unimath` are literate Agda markdown files,
-designed to be displayed in a user-friendly format on the `agda-unimath`
-website, we have the opportunity to comment on our code using markdown outside
-of the code blocks.
+Given that the files in agda-unimath are literate Agda markdown files, designed
+to be displayed in a user-friendly format on the agda-unimath website, we have
+the opportunity to comment on our code using markdown outside of the code
+blocks.
 
 Each code block typically starts with a section header that provides a succinct
 explanation of the code's purpose or functionality. This header can be followed
@@ -216,8 +216,8 @@ module _
 
 The use of descriptive section headers, coupled with comprehensive markdown
 explanations, allows readers to gain a conceptual understanding of the code's
-purpose, and contributes towards making `agda-unimath` an informative resource
-of formalized mathematics from a univalent point of view.
+purpose, and contributes towards making agda-unimath an informative resource of
+formalized mathematics from a univalent point of view.
 
 Note that in the process of writing comments for code, the question may come up
 whether an anonymous module can extend across multiple code blocks and their
@@ -232,12 +232,12 @@ across too many code blocks.
 Note that for consistency across the library, our convention is to use US
 English in comments and other explanatory or introductory texts.
 
-## Modules in the `agda-unimath` library
+## Modules in the agda-unimath library
 
 Modules play an important role in structuring Agda code. They allow us to group
 related functions and definitions, increasing the readability and
 maintainability of our codebase. Here are our guidelines for using modules in
-the `agda-unimath` library:
+the agda-unimath library:
 
 - In Agda, every file should start by opening a module with the same name as the
   file. Generally, this should be the only named module in the file. Any
@@ -284,7 +284,7 @@ the `agda-unimath` library:
   need to sort them by hand.
 
 - The library doesn't use
-  [variables](https://agda.readthedocs.io/en/v2.6.3/language/generalization-of-declared-variables.html)
+  [variables](https://agda.readthedocs.io/en/latest/language/generalization-of-declared-variables.html)
   at the moment. All variables are declared either as parameters of an anonymous
   module or in the type specification of a construction.
 
@@ -346,11 +346,11 @@ Here is a list of our naming conventions:
   [full width equals sign](https://codepoints.net/U+ff1d) for the identity type,
   as the standard equals sign is a reserved symbol in Agda.
 
-## <a name="formatting"></a>Formatting: Indentation, line breaks, and parentheses
+## Formatting: indentation, line breaks, and parentheses { #formatting }
 
 Code formatting is like punctuation in a novel - it helps readers make sense of
-the story. Here's how we handle indentation and line breaks in the
-`agda-unimath` library:
+the story. Here's how we handle indentation and line breaks in the agda-unimath
+library:
 
 - In Agda, each definition is structured like a tree, where each operation can
   be seen as a branching point. We use indentation levels and parentheses to
@@ -399,7 +399,7 @@ the story. Here's how we handle indentation and line breaks in the
   tree structure of the definition, and aligns well with our convention to have
   two-space indentation level increases.
 
-- In order to improve the readability on the `agda-unimath` website, we use a
+- In order to improve the readability on the agda-unimath website, we use a
   standard line length of 80 characters. There are only a few exceptions that
   enable us to have names that are more than 80 characters long:
 
@@ -448,6 +448,16 @@ the story. Here's how we handle indentation and line breaks in the
 
 ## Coding practices we tend to avoid
 
+- Agda permits us to make quick definitions without specifying their types, but
+  we avoid making such untyped definitions. While the type of the entry might be
+  clear to you when you are writing the code, it puts a burden on the reader if
+  you omit them. It is also hugely beneficial if you can see the specification
+  of a certain entry by jumping to its definition. Furthermore, omitting
+  specifications of entries might make maintainance a bit more difficult,
+  because some name changes might still result in valid definitions, but with an
+  unintended specifications. Catching such mistakes becomes a bit harder when
+  you leave your entries untyped.
+
 - Using Unicode characters in names is entirely permissible, but we recommend
   restraint to maintain readability. Just a few well-placed symbols can often
   express a lot.
@@ -471,7 +481,7 @@ the story. Here's how we handle indentation and line breaks in the
   reusable definitions leads to more readable, maintainable, and also
   refactorable code. It can even help Agda's verification process run smoother.
 
-- Record types aren't frequently used in the `agda-unimath` library. This is
+- Record types aren't frequently used in the agda-unimath library. This is
   mostly because they make it more complex to characterize their identity type.
   However, when the identity type isn't as critical, feel free to use record
   types as they can be convenient.
@@ -488,10 +498,10 @@ the story. Here's how we handle indentation and line breaks in the
 - Lastly, we recommend not naming constructions after infix notation of
   operations included in them. Preferring primary prefix notation over infix
   notation can help keep our code consistent. For example, it's preferred to use
-  `commutative-prod` instead of `commutative-×` for denoting the commutativity
-  of cartesian products.
+  `commutative-product` instead of `commutative-×` for denoting the
+  commutativity of cartesian products.
 
 These guidelines are here to make everyone's coding experience more enjoyable
-and productive. As always, your contributions to the `agda-unimath` library are
+and productive. As always, your contributions to the agda-unimath library are
 valued, and these suggestions are here to help ensure that your code is clear,
 beautiful, reusable, and maintainable. Happy coding!

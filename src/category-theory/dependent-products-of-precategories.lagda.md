@@ -7,6 +7,7 @@ module category-theory.dependent-products-of-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
@@ -14,8 +15,10 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -53,6 +56,18 @@ module _
     hom-Π-Precategory x z
   comp-hom-Π-Precategory f g i = comp-hom-Precategory (C i) (f i) (g i)
 
+  involutive-eq-associative-comp-hom-Π-Precategory :
+    {x y z w : obj-Π-Precategory}
+    (h : hom-Π-Precategory z w)
+    (g : hom-Π-Precategory y z)
+    (f : hom-Π-Precategory x y) →
+    ( comp-hom-Π-Precategory (comp-hom-Π-Precategory h g) f) ＝ⁱ
+    ( comp-hom-Π-Precategory h (comp-hom-Π-Precategory g f))
+  involutive-eq-associative-comp-hom-Π-Precategory h g f =
+    involutive-eq-involutive-htpy
+      ( λ i →
+        involutive-eq-associative-comp-hom-Precategory (C i) (h i) (g i) (f i))
+
   associative-comp-hom-Π-Precategory :
     {x y z w : obj-Π-Precategory}
     (h : hom-Π-Precategory z w)
@@ -61,13 +76,13 @@ module _
     ( comp-hom-Π-Precategory (comp-hom-Π-Precategory h g) f) ＝
     ( comp-hom-Π-Precategory h (comp-hom-Π-Precategory g f))
   associative-comp-hom-Π-Precategory h g f =
-    eq-htpy (λ i → associative-comp-hom-Precategory (C i) (h i) (g i) (f i))
+    eq-involutive-eq (involutive-eq-associative-comp-hom-Π-Precategory h g f)
 
-  associative-composition-structure-Π-Precategory :
-    associative-composition-structure-Set hom-set-Π-Precategory
-  pr1 associative-composition-structure-Π-Precategory = comp-hom-Π-Precategory
-  pr2 associative-composition-structure-Π-Precategory =
-    associative-comp-hom-Π-Precategory
+  associative-composition-operation-Π-Precategory :
+    associative-composition-operation-binary-family-Set hom-set-Π-Precategory
+  pr1 associative-composition-operation-Π-Precategory = comp-hom-Π-Precategory
+  pr2 associative-composition-operation-Π-Precategory =
+    involutive-eq-associative-comp-hom-Π-Precategory
 
   id-hom-Π-Precategory : {x : obj-Π-Precategory} → hom-Π-Precategory x x
   id-hom-Π-Precategory i = id-hom-Precategory (C i)
@@ -86,9 +101,9 @@ module _
     eq-htpy (λ i → right-unit-law-comp-hom-Precategory (C i) (f i))
 
   is-unital-Π-Precategory :
-    is-unital-composition-structure-Set
+    is-unital-composition-operation-binary-family-Set
       hom-set-Π-Precategory
-      associative-composition-structure-Π-Precategory
+      comp-hom-Π-Precategory
   pr1 is-unital-Π-Precategory x = id-hom-Π-Precategory
   pr1 (pr2 is-unital-Π-Precategory) = left-unit-law-comp-hom-Π-Precategory
   pr2 (pr2 is-unital-Π-Precategory) = right-unit-law-comp-hom-Π-Precategory
@@ -97,7 +112,7 @@ module _
   pr1 Π-Precategory = obj-Π-Precategory
   pr1 (pr2 Π-Precategory) = hom-set-Π-Precategory
   pr1 (pr2 (pr2 Π-Precategory)) =
-    associative-composition-structure-Π-Precategory
+    associative-composition-operation-Π-Precategory
   pr2 (pr2 (pr2 Π-Precategory)) = is-unital-Π-Precategory
 ```
 
@@ -169,7 +184,7 @@ module _
     (f : hom-Π-Precategory I C x y) →
     is-equiv (is-fiberwise-iso-is-iso-Π-Precategory f)
   is-equiv-is-fiberwise-iso-is-iso-Π-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-iso-Precategory (Π-Precategory I C) f)
       ( is-prop-Π (λ i → is-prop-is-iso-Precategory (C i) (f i)))
       ( is-iso-is-fiberwise-iso-Π-Precategory f)
@@ -187,7 +202,7 @@ module _
     (f : hom-Π-Precategory I C x y) →
     is-equiv (is-iso-is-fiberwise-iso-Π-Precategory f)
   is-equiv-is-iso-is-fiberwise-iso-Π-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-Π (λ i → is-prop-is-iso-Precategory (C i) (f i)))
       ( is-prop-is-iso-Precategory (Π-Precategory I C) f)
       ( is-fiberwise-iso-is-iso-Π-Precategory f)

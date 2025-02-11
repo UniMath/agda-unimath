@@ -111,11 +111,12 @@ module _
   where
 
   map-equiv-left-summand : Σ (X + Y) is-left → X
-  map-equiv-left-summand (pair (inl x) star) = x
-  map-equiv-left-summand (pair (inr x) ())
+  map-equiv-left-summand (inl x , star) = x
+  map-equiv-left-summand (inr x , ())
 
   map-inv-equiv-left-summand : X → Σ (X + Y) is-left
-  map-inv-equiv-left-summand x = pair (inl x) star
+  pr1 (map-inv-equiv-left-summand x) = inl x
+  pr2 (map-inv-equiv-left-summand x) = star
 
   is-section-map-inv-equiv-left-summand :
     (map-equiv-left-summand ∘ map-inv-equiv-left-summand) ~ id
@@ -123,8 +124,8 @@ module _
 
   is-retraction-map-inv-equiv-left-summand :
     (map-inv-equiv-left-summand ∘ map-equiv-left-summand) ~ id
-  is-retraction-map-inv-equiv-left-summand (pair (inl x) star) = refl
-  is-retraction-map-inv-equiv-left-summand (pair (inr x) ())
+  is-retraction-map-inv-equiv-left-summand (inl x , star) = refl
+  is-retraction-map-inv-equiv-left-summand (inr x , ())
 
   equiv-left-summand : (Σ (X + Y) is-left) ≃ X
   pr1 equiv-left-summand = map-equiv-left-summand
@@ -143,22 +144,23 @@ module _
   where
 
   map-equiv-right-summand : Σ (X + Y) is-right → Y
-  map-equiv-right-summand (pair (inl x) ())
-  map-equiv-right-summand (pair (inr x) star) = x
+  map-equiv-right-summand (inl x , ())
+  map-equiv-right-summand (inr x , star) = x
 
   map-inv-equiv-right-summand : Y → Σ (X + Y) is-right
-  map-inv-equiv-right-summand y = pair (inr y) star
+  pr1 (map-inv-equiv-right-summand y) = inr y
+  pr2 (map-inv-equiv-right-summand y) = star
 
   is-section-map-inv-equiv-right-summand :
-    (map-equiv-right-summand ∘ map-inv-equiv-right-summand) ~ id
+    map-equiv-right-summand ∘ map-inv-equiv-right-summand ~ id
   is-section-map-inv-equiv-right-summand y = refl
 
   is-retraction-map-inv-equiv-right-summand :
-    (map-inv-equiv-right-summand ∘ map-equiv-right-summand) ~ id
-  is-retraction-map-inv-equiv-right-summand (pair (inl x) ())
-  is-retraction-map-inv-equiv-right-summand (pair (inr x) star) = refl
+    map-inv-equiv-right-summand ∘ map-equiv-right-summand ~ id
+  is-retraction-map-inv-equiv-right-summand (inl x , ())
+  is-retraction-map-inv-equiv-right-summand (inr x , star) = refl
 
-  equiv-right-summand : (Σ (X + Y) is-right) ≃ Y
+  equiv-right-summand : Σ (X + Y) is-right ≃ Y
   pr1 equiv-right-summand = map-equiv-right-summand
   pr2 equiv-right-summand =
     is-equiv-is-invertible
@@ -174,11 +176,17 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
+  noncontractibility-coproduct-is-contr' :
+    is-contr A → is-contr B → noncontractibility' (A + B) 1
+  noncontractibility-coproduct-is-contr' HA HB =
+    inl (center HA) , inr (center HB) , neq-inl-inr
+
   abstract
-    is-not-contractible-coprod-is-contr :
+    is-not-contractible-coproduct-is-contr :
       is-contr A → is-contr B → is-not-contractible (A + B)
-    is-not-contractible-coprod-is-contr HA HB HAB =
-      neq-inl-inr {x = center HA} {y = center HB} (eq-is-contr HAB)
+    is-not-contractible-coproduct-is-contr HA HB =
+      is-not-contractible-noncontractibility
+        ( 1 , noncontractibility-coproduct-is-contr' HA HB)
 ```
 
 ### Coproducts of mutually exclusive propositions are propositions
@@ -189,30 +197,31 @@ module _
   where
 
   abstract
-    all-elements-equal-coprod :
+    all-elements-equal-coproduct :
       (P → ¬ Q) → all-elements-equal P → all-elements-equal Q →
       all-elements-equal (P + Q)
-    all-elements-equal-coprod f is-prop-P is-prop-Q (inl p) (inl p') =
+    all-elements-equal-coproduct f is-prop-P is-prop-Q (inl p) (inl p') =
       ap inl (is-prop-P p p')
-    all-elements-equal-coprod f is-prop-P is-prop-Q (inl p) (inr q') =
+    all-elements-equal-coproduct f is-prop-P is-prop-Q (inl p) (inr q') =
       ex-falso (f p q')
-    all-elements-equal-coprod f is-prop-P is-prop-Q (inr q) (inl p') =
+    all-elements-equal-coproduct f is-prop-P is-prop-Q (inr q) (inl p') =
       ex-falso (f p' q)
-    all-elements-equal-coprod f is-prop-P is-prop-Q (inr q) (inr q') =
+    all-elements-equal-coproduct f is-prop-P is-prop-Q (inr q) (inr q') =
       ap inr (is-prop-Q q q')
 
   abstract
-    is-prop-coprod : (P → ¬ Q) → is-prop P → is-prop Q → is-prop (P + Q)
-    is-prop-coprod f is-prop-P is-prop-Q =
+    is-prop-coproduct : (P → ¬ Q) → is-prop P → is-prop Q → is-prop (P + Q)
+    is-prop-coproduct f is-prop-P is-prop-Q =
       is-prop-all-elements-equal
-        ( all-elements-equal-coprod f
+        ( all-elements-equal-coproduct f
           ( eq-is-prop' is-prop-P)
           ( eq-is-prop' is-prop-Q))
 
-coprod-Prop :
+coproduct-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
   (type-Prop P → ¬ (type-Prop Q)) → Prop (l1 ⊔ l2)
-pr1 (coprod-Prop P Q H) = type-Prop P + type-Prop Q
-pr2 (coprod-Prop P Q H) =
-  is-prop-coprod H (is-prop-type-Prop P) (is-prop-type-Prop Q)
+pr1 (coproduct-Prop P Q H) =
+  type-Prop P + type-Prop Q
+pr2 (coproduct-Prop P Q H) =
+  is-prop-coproduct H (is-prop-type-Prop P) (is-prop-type-Prop Q)
 ```

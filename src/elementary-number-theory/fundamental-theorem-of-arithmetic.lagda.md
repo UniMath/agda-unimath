@@ -53,31 +53,41 @@ open import lists.sorted-lists
 
 ## Idea
 
-The **fundamental theorem of arithmetic** asserts that every nonzero natural
-number can be written as a product of primes, and this product is unique up to
-the order of the factors.
+The
+{{#concept "fundamental theorem of arithmetic" WD="fundamental theorem of arithmetic" WDID=Q670235 Agda=fundamental-theorem-arithmetic-list-ℕ}}
+asserts that every
+[nonzero](elementary-number-theory.nonzero-natural-numbers.md)
+[natural number](elementary-number-theory.natural-numbers.md) can be written as
+a [product](elementary-number-theory.products-of-natural-numbers.md) of
+[primes](elementary-number-theory.prime-numbers.md), and this product is
+[unique](foundation-core.contractible-types.md) up to the order of the factors.
 
 The uniqueness of the prime factorization of a natural number can be expressed
 in several ways:
 
-- We can find a unique list of primes `p₁ ≤ p₂ ≤ ⋯ ≤ pᵢ` of which the product is
-  equal to `n`
-- The type of finite sets `X` equipped with functions `p : X → Σ ℕ is-prime-ℕ`
-  and `m : X → positive-ℕ` such that the product of `pₓᵐ⁽ˣ⁾` is equal to `n` is
-  contractible.
+- We can find a unique [list](lists.lists.md) of primes `p₁ ≤ p₂ ≤ ⋯ ≤ pᵢ` of
+  which the product is equal to `n`
+- The type of [finite sets](univalent-combinatorics.finite-types.md) `X`
+  [equipped](foundation.structure.md) with functions `p : X → Σ ℕ is-prime-ℕ`
+  and `m : X → positive-ℕ` such that the product of `pₓᵐ⁽ˣ⁾` is
+  [equal](foundation-core.identity-types.md) to `n` is contractible.
 
-Note that the univalence axiom is neccessary to prove the second uniqueness
-property of prime factorizations.
+Note that the [univalence axiom](foundation-core.univalence.md) is neccessary to
+prove the second uniqueness property of prime factorizations.
+
+The fundamental theorem of arithmetic is the 80th theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ## Definitions
 
 ### Prime decomposition of a natural number with lists
 
-A list of natural numbers is a prime decomposition of a natural number `n` if :
+A list of natural numbers is a prime decomposition of a natural number `n` if:
 
-- The list is sorted
+- The list is sorted.
 - Every element of the list is prime.
-- The product of the element of the list is equal to `n`
+- The product of the element of the list is equal to `n`.
 
 ```agda
 is-prime-list-ℕ :
@@ -135,9 +145,9 @@ module _
   is-prop-is-prime-decomposition-list-ℕ :
     is-prop (is-prime-decomposition-list-ℕ)
   is-prop-is-prime-decomposition-list-ℕ =
-    is-prop-prod
+    is-prop-product
       ( is-prop-is-sorted-list ℕ-Decidable-Total-Order l)
-      ( is-prop-prod
+      ( is-prop-product
         ( is-prop-is-prime-list-ℕ l)
         ( is-prop-is-decomposition-list-ℕ))
 
@@ -168,7 +178,7 @@ pr2 (is-nontrivial-divisor-ℕ-Prop n x) = is-prop-is-nontrivial-divisor-ℕ n x
 is-decidable-is-nontrivial-divisor-ℕ :
   (n x : ℕ) → is-decidable (is-nontrivial-divisor-ℕ n x)
 is-decidable-is-nontrivial-divisor-ℕ n x =
-  is-decidable-prod (is-decidable-le-ℕ 1 x) (is-decidable-div-ℕ x n)
+  is-decidable-product (is-decidable-le-ℕ 1 x) (is-decidable-div-ℕ x n)
 
 is-nontrivial-divisor-diagonal-ℕ :
   (n : ℕ) → le-ℕ 1 n → is-nontrivial-divisor-ℕ n n
@@ -176,7 +186,7 @@ pr1 (is-nontrivial-divisor-diagonal-ℕ n H) = H
 pr2 (is-nontrivial-divisor-diagonal-ℕ n H) = refl-div-ℕ n
 ```
 
-If `l` is a prime decomposition of `n`, then `l` is a list of non-trivial
+If `l` is a prime decomposition of `n`, then `l` is a list of nontrivial
 divisors of `n`.
 
 ```agda
@@ -287,6 +297,12 @@ least-nontrivial-divisor-ℕ n H =
 nat-least-nontrivial-divisor-ℕ : (n : ℕ) → le-ℕ 1 n → ℕ
 nat-least-nontrivial-divisor-ℕ n H = pr1 (least-nontrivial-divisor-ℕ n H)
 
+nat-least-nontrivial-divisor-ℕ' : ℕ → ℕ
+nat-least-nontrivial-divisor-ℕ' zero-ℕ = 0
+nat-least-nontrivial-divisor-ℕ' (succ-ℕ zero-ℕ) = 1
+nat-least-nontrivial-divisor-ℕ' (succ-ℕ (succ-ℕ n)) =
+  nat-least-nontrivial-divisor-ℕ (succ-ℕ (succ-ℕ n)) star
+
 le-one-least-nontrivial-divisor-ℕ :
   (n : ℕ) (H : le-ℕ 1 n) → le-ℕ 1 (nat-least-nontrivial-divisor-ℕ n H)
 le-one-least-nontrivial-divisor-ℕ n H =
@@ -324,7 +340,7 @@ abstract
 is-prime-least-nontrivial-divisor-ℕ :
   (n : ℕ) (H : le-ℕ 1 n) → is-prime-ℕ (nat-least-nontrivial-divisor-ℕ n H)
 pr1 (is-prime-least-nontrivial-divisor-ℕ n H x) (K , L) =
-  map-right-unit-law-coprod-is-empty
+  map-right-unit-law-coproduct-is-empty
     ( is-one-ℕ x)
     ( le-ℕ 1 x)
     ( λ p →
@@ -600,33 +616,33 @@ is-least-element-head-list-fundamental-theorem-arithmetic-succ-ℕ :
     ( ℕ-Decidable-Total-Order)
     ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
     ( list-fundamental-theorem-arithmetic-ℕ
-      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
       ( leq-one-quotient-div-ℕ
         ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( succ-ℕ x)
-        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( preserves-leq-succ-ℕ 1 x H)))
 is-least-element-head-list-fundamental-theorem-arithmetic-succ-ℕ x H =
   is-least-element-list-least-prime-divisor-ℕ
     ( x)
     ( H)
     ( list-fundamental-theorem-arithmetic-ℕ
-      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
       ( leq-one-quotient-div-ℕ
         ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( succ-ℕ x)
-        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( preserves-leq-succ-ℕ 1 x H)))
     ( is-list-of-nontrivial-divisors-fundamental-theorem-arithmetic-ℕ
-      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
       ( leq-one-quotient-div-ℕ
         ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( succ-ℕ x)
-        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( preserves-leq-succ-ℕ 1 x H)))
 
 is-sorted-least-element-list-fundamental-theorem-arithmetic-ℕ :
-  (x : ℕ) → (H : leq-ℕ 1 x) →
+  (x : ℕ) → (H : leq-ℕ 1 x) →
   is-sorted-least-element-list
     ( ℕ-Decidable-Total-Order)
     ( list-fundamental-theorem-arithmetic-ℕ x H)
@@ -701,11 +717,11 @@ pr1 (prime-decomposition-fundamental-theorem-arithmetic-list-ℕ x H) =
 pr2 (prime-decomposition-fundamental-theorem-arithmetic-list-ℕ x H) =
   is-prime-decomposition-list-fundamental-theorem-arithmetic-ℕ x H
 
-le-one-is-non-empty-prime-decomposition-list-ℕ :
+le-one-is-nonempty-prime-decomposition-list-ℕ :
   (x : ℕ) (H : leq-ℕ 1 x) (y : ℕ) (l : list ℕ) →
   is-prime-decomposition-list-ℕ x (cons y l) →
   le-ℕ 1 x
-le-one-is-non-empty-prime-decomposition-list-ℕ x H y l D =
+le-one-is-nonempty-prime-decomposition-list-ℕ x H y l D =
   concatenate-le-leq-ℕ
     {x = 1}
     {y = y}
@@ -748,8 +764,7 @@ is-in-prime-decomposition-is-nontrivial-prime-divisor-ℕ x H nil D y d p =
           ( 1)
           ( inv (is-decomposition-list-is-prime-decomposition-list-ℕ x nil D))))
 is-in-prime-decomposition-is-nontrivial-prime-divisor-ℕ x H (cons z l) D y d p =
-  ind-coprod
-    ( λ _ → y ∈-list (cons z l))
+  rec-coproduct
     ( λ e → tr (λ w → w ∈-list (cons z l)) (inv e) (is-head z l))
     ( λ e →
       is-in-tail
@@ -862,7 +877,7 @@ eq-prime-decomposition-list-ℕ x H (cons y l) nil I J =
     ( contradiction-le-ℕ
       ( 1)
       ( x)
-      ( le-one-is-non-empty-prime-decomposition-list-ℕ x H y l I)
+      ( le-one-is-nonempty-prime-decomposition-list-ℕ x H y l I)
       ( leq-eq-ℕ
         ( x)
         ( 1)
@@ -872,7 +887,7 @@ eq-prime-decomposition-list-ℕ x H nil (cons y l) I J =
     ( contradiction-le-ℕ
       ( 1)
       ( x)
-      ( le-one-is-non-empty-prime-decomposition-list-ℕ x H y l J)
+      ( le-one-is-nonempty-prime-decomposition-list-ℕ x H y l J)
       ( leq-eq-ℕ
         ( x)
         ( 1)
@@ -947,7 +962,7 @@ pr2 (fundamental-theorem-arithmetic-list-ℕ x H) d =
 ```agda
 is-prime-list-concat-list-ℕ :
   (p q : list ℕ) → is-prime-list-ℕ p → is-prime-list-ℕ q →
-  is-prime-list-ℕ (concat-list p q)
+  is-prime-list-ℕ (concat-list p q)
 is-prime-list-concat-list-ℕ nil q Pp Pq = Pq
 is-prime-list-concat-list-ℕ (cons x p) q Pp Pq =
   pr1 Pp , is-prime-list-concat-list-ℕ p q (pr2 Pp) Pq
@@ -1076,3 +1091,12 @@ pr1 (prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq) =
 pr2 (prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq) =
   is-prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq
 ```
+
+## External links
+
+- [Fundamental theorem of arithmetic](https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic)
+  at Wikipedia
+
+## References
+
+{{#bibliography}}

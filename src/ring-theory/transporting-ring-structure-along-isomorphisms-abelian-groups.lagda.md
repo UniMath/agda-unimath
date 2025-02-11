@@ -46,7 +46,7 @@ transported ring structure.
 ```agda
 module _
   {l1 l2 : Level} (R : Ring l1) (A : Ab l2)
-  (f : type-iso-Ab (ab-Ring R) A)
+  (f : iso-Ab (ab-Ring R) A)
   where
 
   one-transport-ring-structure-iso-Ab : type-Ab A
@@ -103,9 +103,9 @@ module _
     x y z =
     ( ap
       ( map-f)
-      ( ( ap (mul-Ring R _) (preserves-add-inv-iso-Ab (ab-Ring R) A f y z)) ∙
+      ( ( ap (mul-Ring R _) (preserves-add-inv-iso-Ab (ab-Ring R) A f)) ∙
         ( left-distributive-mul-add-Ring R _ _ _))) ∙
-    ( preserves-add-iso-Ab (ab-Ring R) A f _ _)
+    ( preserves-add-iso-Ab (ab-Ring R) A f)
 
   right-distributive-mul-add-transport-ring-structure-iso-Ab :
     (x y z : type-Ab A) → mul (add-Ab A x y) z ＝ add-Ab A (mul x z) (mul y z)
@@ -113,9 +113,9 @@ module _
     x y z =
     ( ap
       ( map-f)
-      ( ( ap (mul-Ring' R _) (preserves-add-inv-iso-Ab (ab-Ring R) A f x y)) ∙
+      ( ( ap (mul-Ring' R _) (preserves-add-inv-iso-Ab (ab-Ring R) A f)) ∙
         ( right-distributive-mul-add-Ring R _ _ _))) ∙
-    ( preserves-add-iso-Ab (ab-Ring R) A f _ _)
+    ( preserves-add-iso-Ab (ab-Ring R) A f)
 
   has-associative-mul-transport-ring-structure-iso-Ab :
     has-associative-mul-Set (set-Ab A)
@@ -148,7 +148,7 @@ module _
       ( R)
       ( transport-ring-structure-iso-Ab)
       ( hom-iso-Ab (ab-Ring R) A f)
-  preserves-mul-transport-ring-structure-iso-Ab x y =
+  preserves-mul-transport-ring-structure-iso-Ab {x} {y} =
     ap map-f
       ( ap-mul-Ring R
         ( inv (is-retraction-map-inv-iso-Ab (ab-Ring R) A f x))

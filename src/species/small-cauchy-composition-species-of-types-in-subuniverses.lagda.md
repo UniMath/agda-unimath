@@ -115,9 +115,9 @@ module _
   equiv-small-cauchy-composition-Σ-extension-species-subuniverse S T X =
     ( ( equiv-tot
         ( λ D →
-          ( ( equiv-prod id-equiv (inv-equiv distributive-Π-Σ)) ∘e
-          ( ( inv-equiv right-distributive-prod-Σ) ∘e
-          ( ( equiv-tot (λ _ → inv-equiv (left-distributive-prod-Σ)))))) ∘e
+          ( ( equiv-product id-equiv (inv-equiv distributive-Π-Σ)) ∘e
+          ( ( inv-equiv right-distributive-product-Σ) ∘e
+          ( ( equiv-tot (λ _ → inv-equiv (left-distributive-product-Σ)))))) ∘e
           ( ( associative-Σ _ _ _)))) ∘e
       ( ( associative-Σ
           ( Relaxed-Σ-Decomposition l1 l1 X)
@@ -135,9 +135,6 @@ module _
                     ( tr
                       ( is-in-subuniverse P)
                       ( eq-equiv
-                        ( Σ (indexing-type-Relaxed-Σ-Decomposition (pr1 D))
-                          (cotype-Relaxed-Σ-Decomposition (pr1 D)))
-                        ( X)
                         ( inv-equiv
                           ( matching-correspondence-Relaxed-Σ-Decomposition
                             (pr1 D))))
@@ -147,7 +144,7 @@ module _
                         ( λ x →
                           ( cotype-Relaxed-Σ-Decomposition (pr1 D) x ,
                             pr2 (pr2 D) x)))))) ∘e
-              ( commutative-prod ∘e
+              ( commutative-product ∘e
               ( equiv-tot
                 ( λ p →
                   equiv-total-is-in-subuniverse-Σ-Decomposition
@@ -196,14 +193,9 @@ module _
     pr2 (equiv-Σ-extension-small-cauchy-composition-unit-subuniverse X) =
       is-equiv-is-invertible
         ( λ S →
-          ( tr
+          ( inv-tr
               ( is-in-subuniverse P)
-              ( eq-equiv
-                  ( raise-unit l1)
-                  ( X)
-                  ( ( inv-equiv
-                        ( terminal-map , is-equiv-terminal-map-is-contr S)) ∘e
-                    inv-equiv (compute-raise-unit l1)))
+              ( eq-equiv (equiv-raise-unit-is-contr S))
               ( C4) ,
             map-equiv-is-small (C5 X) S))
         ( λ x → eq-is-prop is-property-is-contr)
@@ -231,7 +223,7 @@ module _
             ( inclusion-subuniverse P X)) ∘e
           ( ( equiv-tot
               ( λ D →
-                equiv-prod
+                equiv-product
                   ( equiv-Σ-extension-small-cauchy-composition-unit-subuniverse
                     ( indexing-type-Relaxed-Σ-Decomposition D))
                   ( id-equiv))) ∘e
@@ -275,7 +267,7 @@ module _
             ( inclusion-subuniverse P X)) ∘e
           ( ( equiv-tot
               ( λ D →
-                equiv-prod
+                equiv-product
                   ( id-equiv)
                   ( equiv-Π
                     ( _)
@@ -341,7 +333,7 @@ module _
             ( inclusion-subuniverse P X))) ∘e
         ( ( equiv-tot
             ( λ D →
-              equiv-prod
+              equiv-product
                 ( inv-equiv
                   ( equiv-small-cauchy-composition-Σ-extension-species-subuniverse
                     ( S)
@@ -355,7 +347,7 @@ module _
               ( inclusion-subuniverse P X)) ∘e
             ( ( equiv-tot
                 ( λ D →
-                  equiv-prod
+                  equiv-product
                     ( id-equiv)
                     ( equiv-Π
                       ( λ y →

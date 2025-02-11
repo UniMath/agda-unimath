@@ -8,6 +8,7 @@ module category-theory.maps-precategories where
 
 ```agda
 open import category-theory.commuting-squares-of-morphisms-in-precategories
+open import category-theory.maps-set-magmoids
 open import category-theory.precategories
 
 open import foundation.binary-transport
@@ -22,6 +23,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -35,7 +37,7 @@ precategory `D` consists of:
 - a map `F₀ : C → D` on objects,
 - a map `F₁ : hom x y → hom (F₀ x) (F₀ y)` on morphisms
 
-## Definition
+## Definitions
 
 ### Maps between precategories
 
@@ -48,15 +50,16 @@ module _
 
   map-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   map-Precategory =
-    Σ ( obj-Precategory C → obj-Precategory D)
-      ( λ F₀ →
-        {x y : obj-Precategory C} →
-        hom-Precategory C x y →
-        hom-Precategory D (F₀ x) (F₀ y))
+    map-Set-Magmoid
+      ( set-magmoid-Precategory C)
+      ( set-magmoid-Precategory D)
 
   obj-map-Precategory :
     (F : map-Precategory) → obj-Precategory C → obj-Precategory D
-  obj-map-Precategory = pr1
+  obj-map-Precategory =
+    obj-map-Set-Magmoid
+      ( set-magmoid-Precategory C)
+      ( set-magmoid-Precategory D)
 
   hom-map-Precategory :
     (F : map-Precategory)
@@ -65,7 +68,10 @@ module _
     hom-Precategory D
       ( obj-map-Precategory F x)
       ( obj-map-Precategory F y)
-  hom-map-Precategory = pr2
+  hom-map-Precategory =
+    hom-map-Set-Magmoid
+      ( set-magmoid-Precategory C)
+      ( set-magmoid-Precategory D)
 ```
 
 ## Properties
@@ -125,7 +131,7 @@ module _
 
   coherence-htpy-map-Precategory :
     (f g : map-Precategory C D) →
-    (obj-map-Precategory C D f ~ obj-map-Precategory C D g) →
+    obj-map-Precategory C D f ~ obj-map-Precategory C D g →
     UU (l1 ⊔ l2 ⊔ l4)
   coherence-htpy-map-Precategory f g H =
     {x y : obj-Precategory C}
@@ -158,19 +164,18 @@ module _
       ( hom-map-Precategory C D f a)
 
   htpy-eq-map-Precategory :
-    (f g : map-Precategory C D) → (f ＝ g) → htpy-map-Precategory f g
+    (f g : map-Precategory C D) → f ＝ g → htpy-map-Precategory f g
   htpy-eq-map-Precategory f .f refl = refl-htpy-map-Precategory f
 
-  is-contr-total-htpy-map-Precategory :
-    (f : map-Precategory C D) →
-    is-contr (Σ (map-Precategory C D) (htpy-map-Precategory f))
-  is-contr-total-htpy-map-Precategory f =
-    is-contr-total-Eq-structure _
-      ( is-contr-total-htpy (obj-map-Precategory C D f))
+  is-torsorial-htpy-map-Precategory :
+    (f : map-Precategory C D) → is-torsorial (htpy-map-Precategory f)
+  is-torsorial-htpy-map-Precategory f =
+    is-torsorial-Eq-structure
+      ( is-torsorial-htpy (obj-map-Precategory C D f))
       ( obj-map-Precategory C D f , refl-htpy)
-      ( is-contr-total-Eq-implicit-Π _
+      ( is-torsorial-Eq-implicit-Π
         ( λ x →
-          is-contr-total-Eq-implicit-Π _
+          is-torsorial-Eq-implicit-Π
             ( λ y →
               is-contr-equiv
                 ( Σ
@@ -185,23 +190,22 @@ module _
                       ( inv-htpy (right-unit-law-comp-hom-Precategory D ∘ g₁))
                       ( left-unit-law-comp-hom-Precategory D ∘
                         hom-map-Precategory C D f)))
-                ( is-contr-total-htpy' (hom-map-Precategory C D f)))))
+                ( is-torsorial-htpy' (hom-map-Precategory C D f)))))
 
   is-equiv-htpy-eq-map-Precategory :
     (f g : map-Precategory C D) → is-equiv (htpy-eq-map-Precategory f g)
   is-equiv-htpy-eq-map-Precategory f =
     fundamental-theorem-id
-      ( is-contr-total-htpy-map-Precategory f)
+      ( is-torsorial-htpy-map-Precategory f)
       ( htpy-eq-map-Precategory f)
 
   equiv-htpy-eq-map-Precategory :
     (f g : map-Precategory C D) → (f ＝ g) ≃ htpy-map-Precategory f g
   pr1 (equiv-htpy-eq-map-Precategory f g) = htpy-eq-map-Precategory f g
-  pr2 (equiv-htpy-eq-map-Precategory f g) =
-    is-equiv-htpy-eq-map-Precategory f g
+  pr2 (equiv-htpy-eq-map-Precategory f g) = is-equiv-htpy-eq-map-Precategory f g
 
   eq-htpy-map-Precategory :
-    (f g : map-Precategory C D) → htpy-map-Precategory f g → (f ＝ g)
+    (f g : map-Precategory C D) → htpy-map-Precategory f g → f ＝ g
   eq-htpy-map-Precategory f g =
     map-inv-equiv (equiv-htpy-eq-map-Precategory f g)
 ```

@@ -1,6 +1,6 @@
 # Ring theory
 
-## Files in the ring theory folder
+## Modules in the ring theory namespace
 
 ```agda
 module ring-theory where

@@ -18,8 +18,9 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import trees.coalgebras-polynomial-endofunctors
 open import trees.polynomial-endofunctors
@@ -38,7 +39,7 @@ witnessing that the square
       X -------------> Y
       |                |
       |                |
-      V                V
+      ∨                ∨
   P A B X ---------> P A B Y
            P A B f
 ```
@@ -132,27 +133,11 @@ module _
   htpy-eq-hom-coalgebra-polynomial-endofunctor .f refl =
     refl-htpy-hom-coalgebra-polynomial-endofunctor
 
-  is-contr-total-htpy-hom-coalgebra-polynomial-endofunctor :
-    is-contr
-      ( Σ ( hom-coalgebra-polynomial-endofunctor X Y)
-          ( htpy-hom-coalgebra-polynomial-endofunctor))
-  is-contr-total-htpy-hom-coalgebra-polynomial-endofunctor =
-    is-contr-total-Eq-structure
-      ( λ ( g :
-            type-coalgebra-polynomial-endofunctor X →
-            type-coalgebra-polynomial-endofunctor Y)
-          ( G :
-            coherence-square-maps g
-              ( structure-coalgebra-polynomial-endofunctor X)
-              ( structure-coalgebra-polynomial-endofunctor Y)
-              ( map-polynomial-endofunctor A B g))
-          ( H : map-hom-coalgebra-polynomial-endofunctor X Y f ~ g) →
-          ( ( structure-hom-coalgebra-polynomial-endofunctor X Y f) ∙h
-            ( structure-coalgebra-polynomial-endofunctor Y ·l H)) ~
-          ( ( ( htpy-polynomial-endofunctor A B H) ·r
-              ( structure-coalgebra-polynomial-endofunctor X)) ∙h
-            ( G)))
-      ( is-contr-total-htpy (map-hom-coalgebra-polynomial-endofunctor X Y f))
+  is-torsorial-htpy-hom-coalgebra-polynomial-endofunctor :
+    is-torsorial htpy-hom-coalgebra-polynomial-endofunctor
+  is-torsorial-htpy-hom-coalgebra-polynomial-endofunctor =
+    is-torsorial-Eq-structure
+      ( is-torsorial-htpy (map-hom-coalgebra-polynomial-endofunctor X Y f))
       ( map-hom-coalgebra-polynomial-endofunctor X Y f , refl-htpy)
       ( is-contr-equiv'
         ( Σ ( coherence-square-maps
@@ -181,7 +166,7 @@ module _
                     ( coh-refl-htpy-polynomial-endofunctor A B
                       ( map-hom-coalgebra-polynomial-endofunctor X Y f)
                       ( structure-coalgebra-polynomial-endofunctor X x))))))
-        ( is-contr-total-htpy
+        ( is-torsorial-htpy
           ( ( structure-hom-coalgebra-polynomial-endofunctor X Y f) ∙h
             ( refl-htpy))))
 
@@ -190,7 +175,7 @@ module _
     is-equiv (htpy-eq-hom-coalgebra-polynomial-endofunctor g)
   is-equiv-htpy-eq-hom-coalgebra-polynomial-endofunctor =
     fundamental-theorem-id
-      ( is-contr-total-htpy-hom-coalgebra-polynomial-endofunctor)
+      ( is-torsorial-htpy-hom-coalgebra-polynomial-endofunctor)
       ( htpy-eq-hom-coalgebra-polynomial-endofunctor)
 
   extensionality-hom-coalgebra-polynomial-endofunctor :

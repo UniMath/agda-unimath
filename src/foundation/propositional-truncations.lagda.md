@@ -10,6 +10,7 @@ module foundation.propositional-truncations where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.truncations
 open import foundation.universal-property-propositional-truncation
@@ -20,8 +21,10 @@ open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.precomposition-dependent-functions
+open import foundation-core.precomposition-functions
+open import foundation-core.sections
 open import foundation-core.sets
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types
@@ -56,7 +59,15 @@ all-elements-equal-type-trunc-Prop {l} {A} =
 
 trunc-Prop : {l : Level} → UU l → Prop l
 trunc-Prop = trunc neg-one-𝕋
+
+║_║₋₁ : {l : Level} → UU l → UU l
+║_║₋₁ = type-trunc-Prop
 ```
+
+**Notation.** The [box drawings double vertical](https://codepoints.net/U+2551)
+symbol `║` in the propositional truncation notation `║_║₋₁` can be inserted with
+`agda-input` using the escape sequence `\--=` and selecting the second item in
+the list.
 
 ## Properties
 
@@ -78,7 +89,7 @@ abstract
         ( H x x u v))
 ```
 
-### The induction principle of propositional truncations
+### The induction principle for propositional truncations
 
 ```agda
 ind-trunc-Prop' :
@@ -94,23 +105,42 @@ ind-trunc-Prop' P f H =
     ( f)
 ```
 
-### Simplified form of the induction principle for propositional truncations
+### The propositional induction principle for propositional truncations
 
 ```agda
-abstract
-  ind-trunc-Prop :
-    {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → Prop l) →
-    ((x : A) → type-Prop (P (unit-trunc-Prop x))) →
-    (( y : type-trunc-Prop A) → type-Prop (P y))
-  ind-trunc-Prop P f =
-    ind-trunc-Prop' (type-Prop ∘ P) f
-      ( λ x y u v → eq-is-prop (is-prop-type-Prop (P y)))
+module _
+  {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → Prop l)
+  where
 
-  compute-ind-trunc-Prop :
-    {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → Prop l) →
-    ((precomp-Π unit-trunc-Prop (type-Prop ∘ P)) ∘ ind-trunc-Prop P) ~ id
-  compute-ind-trunc-Prop P h =
-    eq-is-prop (is-prop-Π (λ x → is-prop-type-Prop (P (unit-trunc-Prop x))))
+  abstract
+    ind-trunc-Prop :
+      ((x : A) → type-Prop (P (unit-trunc-Prop x))) →
+      (( y : type-trunc-Prop A) → type-Prop (P y))
+    ind-trunc-Prop f =
+      ind-trunc-Prop' (type-Prop ∘ P) f
+        ( λ x y u v → eq-is-prop (is-prop-type-Prop (P y)))
+
+    compute-ind-trunc-Prop :
+        is-section (precomp-Π unit-trunc-Prop (type-Prop ∘ P)) (ind-trunc-Prop)
+    compute-ind-trunc-Prop h =
+      eq-is-prop (is-prop-Π (λ x → is-prop-type-Prop (P (unit-trunc-Prop x))))
+```
+
+### The propositional recursion principle for propositional truncations
+
+```agda
+module _
+  {l l1 : Level} {A : UU l1} (P : Prop l)
+  where
+
+  abstract
+    rec-trunc-Prop :
+      (A → type-Prop P) → (type-trunc-Prop A → type-Prop P)
+    rec-trunc-Prop = ind-trunc-Prop (λ _ → P)
+
+    compute-rec-trunc-Prop :
+      is-section (precomp unit-trunc-Prop (type-Prop P)) (rec-trunc-Prop)
+    compute-rec-trunc-Prop = compute-ind-trunc-Prop (λ _ → P)
 ```
 
 ### The defined propositional truncations are propositional truncations
@@ -118,13 +148,13 @@ abstract
 ```agda
 abstract
   is-propositional-truncation-trunc-Prop :
-    {l1 l2 : Level} (A : UU l1) →
-    is-propositional-truncation l2 (trunc-Prop A) unit-trunc-Prop
+    {l : Level} (A : UU l) →
+    is-propositional-truncation (trunc-Prop A) unit-trunc-Prop
   is-propositional-truncation-trunc-Prop A =
     is-propositional-truncation-extension-property
       ( trunc-Prop A)
       ( unit-trunc-Prop)
-      ( λ {l} Q → ind-trunc-Prop (λ x → Q))
+      ( λ Q → ind-trunc-Prop (λ x → Q))
 ```
 
 ### The defined propositional truncations satisfy the universal property of propositional truncations
@@ -132,12 +162,12 @@ abstract
 ```agda
 abstract
   universal-property-trunc-Prop :
-    {l1 l2 : Level} (A : UU l1) →
-    universal-property-propositional-truncation l2
+    {l : Level} (A : UU l) →
+    universal-property-propositional-truncation
       ( trunc-Prop A)
       ( unit-trunc-Prop)
   universal-property-trunc-Prop A =
-    universal-property-is-propositional-truncation _
+    universal-property-is-propositional-truncation
       ( trunc-Prop A)
       ( unit-trunc-Prop)
       ( is-propositional-truncation-trunc-Prop A)
@@ -223,7 +253,7 @@ module _
   abstract
     is-equiv-map-idempotent-trunc-Prop : is-equiv map-idempotent-trunc-Prop
     is-equiv-map-idempotent-trunc-Prop =
-      is-equiv-is-prop
+      is-equiv-has-converse-is-prop
         ( is-prop-type-trunc-Prop)
         ( is-prop-type-trunc-Prop)
         ( unit-trunc-Prop)
@@ -237,7 +267,7 @@ module _
     is-equiv-map-inv-idempotent-trunc-Prop :
       is-equiv (unit-trunc-Prop {A = type-trunc-Prop A})
     is-equiv-map-inv-idempotent-trunc-Prop =
-      is-equiv-is-prop
+      is-equiv-has-converse-is-prop
         ( is-prop-type-trunc-Prop)
         ( is-prop-type-trunc-Prop)
         ( map-idempotent-trunc-Prop)
@@ -253,8 +283,8 @@ module _
 ```agda
 abstract
   dependent-universal-property-trunc-Prop :
-    {l1 : Level} {A : UU l1} {l : Level} →
-      dependent-universal-property-propositional-truncation l
+    {l : Level} {A : UU l} →
+      dependent-universal-property-propositional-truncation
       ( trunc-Prop A)
       ( unit-trunc-Prop)
   dependent-universal-property-trunc-Prop {A = A} =
@@ -285,21 +315,21 @@ module _
 ### Propositional truncations distribute over cartesian products
 
 ```agda
-equiv-prod-trunc-Prop :
+equiv-product-trunc-Prop :
   {l1 l2 : Level} (A : UU l1) (A' : UU l2) →
   type-equiv-Prop
     ( trunc-Prop (A × A'))
-    ( prod-Prop (trunc-Prop A) (trunc-Prop A'))
-equiv-prod-trunc-Prop A A' =
+    ( product-Prop (trunc-Prop A) (trunc-Prop A'))
+equiv-product-trunc-Prop A A' =
   pr1
     ( center
       ( is-uniquely-unique-propositional-truncation
         ( trunc-Prop (A × A'))
-        ( prod-Prop (trunc-Prop A) (trunc-Prop A'))
+        ( product-Prop (trunc-Prop A) (trunc-Prop A'))
         ( unit-trunc-Prop)
-        ( map-prod unit-trunc-Prop unit-trunc-Prop)
+        ( map-product unit-trunc-Prop unit-trunc-Prop)
         ( is-propositional-truncation-trunc-Prop (A × A'))
-        ( is-propositional-truncation-prod
+        ( is-propositional-truncation-product
           ( trunc-Prop A)
           ( unit-trunc-Prop)
           ( trunc-Prop A')
@@ -307,20 +337,20 @@ equiv-prod-trunc-Prop A A' =
           ( is-propositional-truncation-trunc-Prop A)
           ( is-propositional-truncation-trunc-Prop A'))))
 
-map-distributive-trunc-prod-Prop :
+map-distributive-trunc-product-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   type-trunc-Prop (A × B) → type-trunc-Prop A × type-trunc-Prop B
-map-distributive-trunc-prod-Prop {l1} {l2} {A} {B} =
+map-distributive-trunc-product-Prop {l1} {l2} {A} {B} =
   map-universal-property-trunc-Prop
     ( pair
       ( type-trunc-Prop A × type-trunc-Prop B)
-      ( is-prop-prod is-prop-type-trunc-Prop is-prop-type-trunc-Prop))
-    ( map-prod unit-trunc-Prop unit-trunc-Prop)
+      ( is-prop-product is-prop-type-trunc-Prop is-prop-type-trunc-Prop))
+    ( map-product unit-trunc-Prop unit-trunc-Prop)
 
-map-inv-distributive-trunc-prod-Prop :
+map-inv-distributive-trunc-product-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   type-trunc-Prop A × type-trunc-Prop B → type-trunc-Prop (A × B)
-map-inv-distributive-trunc-prod-Prop {l1} {l2} {A} {B} t =
+map-inv-distributive-trunc-product-Prop {l1} {l2} {A} {B} t =
   map-universal-property-trunc-Prop
     ( trunc-Prop (A × B))
     ( λ x →
@@ -331,37 +361,39 @@ map-inv-distributive-trunc-prod-Prop {l1} {l2} {A} {B} t =
     ( pr1 t)
 
 abstract
-  is-equiv-map-distributive-trunc-prod-Prop :
+  is-equiv-map-distributive-trunc-product-Prop :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-    is-equiv (map-distributive-trunc-prod-Prop {A = A} {B = B})
-  is-equiv-map-distributive-trunc-prod-Prop {l1} {l2} {A} {B} =
-    is-equiv-is-prop
+    is-equiv (map-distributive-trunc-product-Prop {A = A} {B = B})
+  is-equiv-map-distributive-trunc-product-Prop =
+    is-equiv-has-converse-is-prop
       ( is-prop-type-trunc-Prop)
-      ( is-prop-prod is-prop-type-trunc-Prop is-prop-type-trunc-Prop)
-      ( map-inv-distributive-trunc-prod-Prop)
+      ( is-prop-product is-prop-type-trunc-Prop is-prop-type-trunc-Prop)
+      ( map-inv-distributive-trunc-product-Prop)
 
-distributive-trunc-prod-Prop :
+distributive-trunc-product-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   type-trunc-Prop (A × B) ≃ (type-trunc-Prop A × type-trunc-Prop B)
-pr1 distributive-trunc-prod-Prop = map-distributive-trunc-prod-Prop
-pr2 distributive-trunc-prod-Prop = is-equiv-map-distributive-trunc-prod-Prop
+pr1 distributive-trunc-product-Prop = map-distributive-trunc-product-Prop
+pr2 distributive-trunc-product-Prop =
+  is-equiv-map-distributive-trunc-product-Prop
 
 abstract
-  is-equiv-map-inv-distributive-trunc-prod-Prop :
+  is-equiv-map-inv-distributive-trunc-product-Prop :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-    is-equiv (map-inv-distributive-trunc-prod-Prop {A = A} {B = B})
-  is-equiv-map-inv-distributive-trunc-prod-Prop {l1} {l2} {A} {B} =
-    is-equiv-is-prop
-      ( is-prop-prod is-prop-type-trunc-Prop is-prop-type-trunc-Prop)
+    is-equiv (map-inv-distributive-trunc-product-Prop {A = A} {B = B})
+  is-equiv-map-inv-distributive-trunc-product-Prop =
+    is-equiv-has-converse-is-prop
+      ( is-prop-product is-prop-type-trunc-Prop is-prop-type-trunc-Prop)
       ( is-prop-type-trunc-Prop)
-      ( map-distributive-trunc-prod-Prop)
+      ( map-distributive-trunc-product-Prop)
 
-inv-distributive-trunc-prod-Prop :
+inv-distributive-trunc-product-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   ( type-trunc-Prop A × type-trunc-Prop B) ≃ type-trunc-Prop (A × B)
-pr1 inv-distributive-trunc-prod-Prop = map-inv-distributive-trunc-prod-Prop
-pr2 inv-distributive-trunc-prod-Prop =
-  is-equiv-map-inv-distributive-trunc-prod-Prop
+pr1 inv-distributive-trunc-product-Prop =
+  map-inv-distributive-trunc-product-Prop
+pr2 inv-distributive-trunc-product-Prop =
+  is-equiv-map-inv-distributive-trunc-product-Prop
 ```
 
 ### Propositional truncations of coproducts of types with themselves
@@ -369,45 +401,58 @@ pr2 inv-distributive-trunc-prod-Prop =
 ```agda
 module _
   {l : Level} {A : UU l} where
-  map-trunc-Prop-diagonal-coprod : type-trunc-Prop (A + A) → type-trunc-Prop A
-  map-trunc-Prop-diagonal-coprod =
+  map-trunc-Prop-diagonal-coproduct :
+    type-trunc-Prop (A + A) → type-trunc-Prop A
+  map-trunc-Prop-diagonal-coproduct =
     map-universal-property-trunc-Prop
       ( trunc-Prop A)
-      ( unit-trunc ∘
-        ind-coprod (λ _ → A) id id)
+      ( unit-trunc ∘ rec-coproduct id id)
 
-  map-inv-trunc-Prop-diagonal-coprod :
+  map-inv-trunc-Prop-diagonal-coproduct :
     type-trunc-Prop A → type-trunc-Prop (A + A)
-  map-inv-trunc-Prop-diagonal-coprod =
+  map-inv-trunc-Prop-diagonal-coproduct =
     map-universal-property-trunc-Prop
       ( trunc-Prop (A + A))
       ( unit-trunc ∘ (inl ∘ id))
 
   abstract
-    is-equiv-map-trunc-Prop-diagonal-coprod :
-      is-equiv map-trunc-Prop-diagonal-coprod
-    is-equiv-map-trunc-Prop-diagonal-coprod =
-      is-equiv-is-prop
+    is-equiv-map-trunc-Prop-diagonal-coproduct :
+      is-equiv map-trunc-Prop-diagonal-coproduct
+    is-equiv-map-trunc-Prop-diagonal-coproduct =
+      is-equiv-has-converse-is-prop
         is-prop-type-trunc-Prop
         is-prop-type-trunc-Prop
-        map-inv-trunc-Prop-diagonal-coprod
+        map-inv-trunc-Prop-diagonal-coproduct
 
-    is-equiv-map-inv-trunc-Prop-diagonal-coprod :
-      is-equiv map-inv-trunc-Prop-diagonal-coprod
-    is-equiv-map-inv-trunc-Prop-diagonal-coprod =
-      is-equiv-is-prop
+    is-equiv-map-inv-trunc-Prop-diagonal-coproduct :
+      is-equiv map-inv-trunc-Prop-diagonal-coproduct
+    is-equiv-map-inv-trunc-Prop-diagonal-coproduct =
+      is-equiv-has-converse-is-prop
         is-prop-type-trunc-Prop
         is-prop-type-trunc-Prop
-        map-trunc-Prop-diagonal-coprod
+        map-trunc-Prop-diagonal-coproduct
 
-  equiv-trunc-Prop-diagonal-coprod :
-    (type-trunc-Prop (A + A)) ≃ type-trunc-Prop A
-  pr1 equiv-trunc-Prop-diagonal-coprod = map-trunc-Prop-diagonal-coprod
-  pr2 equiv-trunc-Prop-diagonal-coprod = is-equiv-map-trunc-Prop-diagonal-coprod
+  equiv-trunc-Prop-diagonal-coproduct :
+    type-trunc-Prop (A + A) ≃ type-trunc-Prop A
+  pr1 equiv-trunc-Prop-diagonal-coproduct = map-trunc-Prop-diagonal-coproduct
+  pr2 equiv-trunc-Prop-diagonal-coproduct =
+    is-equiv-map-trunc-Prop-diagonal-coproduct
 
-  inv-equiv-trunc-Prop-diagonal-coprod :
-    (type-trunc-Prop A) ≃ type-trunc-Prop (A + A)
-  pr1 inv-equiv-trunc-Prop-diagonal-coprod = map-inv-trunc-Prop-diagonal-coprod
-  pr2 inv-equiv-trunc-Prop-diagonal-coprod =
-    is-equiv-map-inv-trunc-Prop-diagonal-coprod
+  inv-equiv-trunc-Prop-diagonal-coproduct :
+    type-trunc-Prop A ≃ type-trunc-Prop (A + A)
+  pr1 inv-equiv-trunc-Prop-diagonal-coproduct =
+    map-inv-trunc-Prop-diagonal-coproduct
+  pr2 inv-equiv-trunc-Prop-diagonal-coproduct =
+    is-equiv-map-inv-trunc-Prop-diagonal-coproduct
 ```
+
+## Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}
+
+## External links
+
+- [bracket type](https://ncatlab.org/nlab/show/bracket+type) at $n$Lab

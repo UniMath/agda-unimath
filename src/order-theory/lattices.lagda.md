@@ -36,7 +36,7 @@ called [distributive lattices](order-theory.distributive-lattices.md).
 is-lattice-Poset-Prop :
   {l1 l2 : Level} (P : Poset l1 l2) → Prop (l1 ⊔ l2)
 is-lattice-Poset-Prop P =
-  prod-Prop
+  product-Prop
     ( is-meet-semilattice-Poset-Prop P)
     ( is-join-semilattice-Poset-Prop P)
 
@@ -61,7 +61,7 @@ module _
   type-Lattice = type-Poset poset-Lattice
 
   leq-lattice-Prop : (x y : type-Lattice) → Prop l2
-  leq-lattice-Prop = leq-Poset-Prop poset-Lattice
+  leq-lattice-Prop = leq-prop-Poset poset-Lattice
 
   leq-Lattice : (x y : type-Lattice) → UU l2
   leq-Lattice = leq-Poset poset-Lattice

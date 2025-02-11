@@ -9,10 +9,10 @@ module foundation.trivial-sigma-decompositions where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.sigma-decompositions
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
@@ -20,6 +20,7 @@ open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -100,20 +101,14 @@ module _
         ( A)
         ( is-inhabited-base-type-is-trivial-Σ-Decomposition))
   pr1 equiv-trivial-is-trivial-Σ-Decomposition =
-    ( map-equiv (compute-raise-unit l4) ∘ terminal-map ,
-      is-equiv-comp
-        ( map-equiv (compute-raise-unit l4))
-        ( terminal-map)
-        ( is-equiv-terminal-map-is-contr is-trivial)
-        ( is-equiv-map-equiv ( compute-raise-unit l4)))
+    equiv-raise-unit-is-contr is-trivial
   pr1 (pr2 equiv-trivial-is-trivial-Σ-Decomposition) =
     ( λ x →
       ( ( inv-equiv (matching-correspondence-Σ-Decomposition D)) ∘e
         ( inv-left-unit-law-Σ-is-contr is-trivial x)))
   pr2 (pr2 equiv-trivial-is-trivial-Σ-Decomposition) a =
-    eq-pair-Σ
-      ( refl)
-      ( inv-map-eq-transpose-equiv
+    eq-pair-eq-fiber
+      ( map-inv-eq-transpose-equiv
         ( inv-equiv (matching-correspondence-Σ-Decomposition D))
         ( refl))
 

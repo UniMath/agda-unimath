@@ -7,13 +7,15 @@ module foundation-core.1-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.truncated-types
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.identity-types
+open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
 
@@ -52,9 +54,36 @@ pr2 (Id-Set X x y) = is-1-type-type-1-Type X x y
 ### Any set is a 1-type
 
 ```agda
+abstract
+  is-1-type-is-set :
+    {l : Level} {A : UU l} → is-set A → is-1-type A
+  is-1-type-is-set = is-trunc-succ-is-trunc zero-𝕋
+
 1-type-Set :
   {l : Level} → Set l → 1-Type l
-1-type-Set A = truncated-type-succ-Truncated-Type zero-𝕋 A
+1-type-Set = truncated-type-succ-Truncated-Type zero-𝕋
+```
+
+### Any proposition is a 1-type
+
+```agda
+abstract
+  is-1-type-is-prop :
+    {l : Level} {P : UU l} → is-prop P → is-1-type P
+  is-1-type-is-prop = is-trunc-iterated-succ-is-trunc neg-one-𝕋 2
+
+1-type-Prop :
+  {l : Level} → Prop l → 1-Type l
+1-type-Prop P = truncated-type-iterated-succ-Truncated-Type neg-one-𝕋 2 P
+```
+
+### Any contractible type is a 1-type
+
+```agda
+abstract
+  is-1-type-is-contr :
+    {l : Level} {A : UU l} → is-contr A → is-1-type A
+  is-1-type-is-contr = is-trunc-is-contr one-𝕋
 ```
 
 ### The 1-types are closed under equivalences

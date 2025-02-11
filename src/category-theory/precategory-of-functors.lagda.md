@@ -7,6 +7,7 @@ module category-theory.precategory-of-functors where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.natural-isomorphisms-functors-precategories
@@ -19,7 +20,9 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -56,25 +59,43 @@ module _
     (h : natural-transformation-Precategory C D H I)
     (g : natural-transformation-Precategory C D G H)
     (f : natural-transformation-Precategory C D F G) →
-    ( comp-natural-transformation-Precategory C D F G I
+    comp-natural-transformation-Precategory C D F G I
       ( comp-natural-transformation-Precategory C D G H I h g)
-      ( f)) ＝
-    ( comp-natural-transformation-Precategory C D F H I
+      ( f) ＝
+    comp-natural-transformation-Precategory C D F H I
       ( h)
-      ( comp-natural-transformation-Precategory C D F G H g f))
+      ( comp-natural-transformation-Precategory C D F G H g f)
   associative-comp-hom-functor-precategory-Precategory {F} {G} {H} {I} h g f =
     associative-comp-natural-transformation-Precategory
       C D F G H I f g h
 
-  associative-composition-structure-functor-precategory-Precategory :
-    associative-composition-structure-Set
+  involutive-eq-associative-comp-hom-functor-precategory-Precategory :
+    {F G H I : functor-Precategory C D}
+    (h : natural-transformation-Precategory C D H I)
+    (g : natural-transformation-Precategory C D G H)
+    (f : natural-transformation-Precategory C D F G) →
+    comp-natural-transformation-Precategory C D F G I
+      ( comp-natural-transformation-Precategory C D G H I h g)
+      ( f) ＝ⁱ
+    comp-natural-transformation-Precategory C D F H I
+      ( h)
+      ( comp-natural-transformation-Precategory C D F G H g f)
+  involutive-eq-associative-comp-hom-functor-precategory-Precategory
+    { F} {G} {H} {I} h g f =
+    involutive-eq-associative-comp-natural-transformation-Precategory
+      C D F G H I f g h
+
+  associative-composition-operation-functor-precategory-Precategory :
+    associative-composition-operation-binary-family-Set
       ( natural-transformation-set-Precategory C D)
-  pr1 associative-composition-structure-functor-precategory-Precategory
+  pr1 associative-composition-operation-functor-precategory-Precategory
     {F} {G} {H} =
     comp-hom-functor-precategory-Precategory {F} {G} {H}
-  pr2 associative-composition-structure-functor-precategory-Precategory
-    {F} {G} {H} {I} =
-    associative-comp-hom-functor-precategory-Precategory {F} {G} {H} {I}
+  pr2
+    associative-composition-operation-functor-precategory-Precategory
+      { F} {G} {H} {I} h g f =
+    involutive-eq-associative-comp-hom-functor-precategory-Precategory
+      { F} {G} {H} {I} h g f
 
   id-hom-functor-precategory-Precategory :
     (F : functor-Precategory C D) → natural-transformation-Precategory C D F F
@@ -99,18 +120,18 @@ module _
   right-unit-law-comp-hom-functor-precategory-Precategory {F} {G} =
     right-unit-law-comp-natural-transformation-Precategory C D F G
 
-  is-unital-composition-structure-functor-precategory-Precategory :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-functor-precategory-Precategory :
+    is-unital-composition-operation-binary-family-Set
       ( natural-transformation-set-Precategory C D)
-      ( associative-composition-structure-functor-precategory-Precategory)
-  pr1 is-unital-composition-structure-functor-precategory-Precategory =
+      ( λ {F} {G} {H} → comp-hom-functor-precategory-Precategory {F} {G} {H})
+  pr1 is-unital-composition-operation-functor-precategory-Precategory =
     id-hom-functor-precategory-Precategory
   pr1
-    ( pr2 is-unital-composition-structure-functor-precategory-Precategory)
+    ( pr2 is-unital-composition-operation-functor-precategory-Precategory)
     { F} {G} =
     left-unit-law-comp-hom-functor-precategory-Precategory {F} {G}
   pr2
-    ( pr2 is-unital-composition-structure-functor-precategory-Precategory)
+    ( pr2 is-unital-composition-operation-functor-precategory-Precategory)
     { F} {G} =
     right-unit-law-comp-hom-functor-precategory-Precategory {F} {G}
 
@@ -120,9 +141,9 @@ module _
   pr1 (pr2 functor-precategory-Precategory) =
     natural-transformation-set-Precategory C D
   pr1 (pr2 (pr2 functor-precategory-Precategory)) =
-    associative-composition-structure-functor-precategory-Precategory
+    associative-composition-operation-functor-precategory-Precategory
   pr2 (pr2 (pr2 functor-precategory-Precategory)) =
-    is-unital-composition-structure-functor-precategory-Precategory
+    is-unital-composition-operation-functor-precategory-Precategory
 ```
 
 ## Properties
@@ -179,7 +200,7 @@ module _
     (f : natural-transformation-Precategory C D F G) →
     is-equiv (is-iso-functor-is-natural-isomorphism-Precategory f)
   is-equiv-is-iso-functor-is-natural-isomorphism-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-natural-isomorphism-Precategory C D F G f)
       ( is-prop-is-iso-Precategory
         ( functor-precategory-Precategory C D) {F} {G} f)
@@ -189,7 +210,7 @@ module _
     (f : natural-transformation-Precategory C D F G) →
     is-equiv (is-natural-isomorphism-is-iso-functor-Precategory f)
   is-equiv-is-natural-isomorphism-is-iso-functor-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-iso-Precategory
         ( functor-precategory-Precategory C D) {F} {G} f)
       ( is-prop-is-natural-isomorphism-Precategory C D F G f)
@@ -269,4 +290,23 @@ module _
     eq-iso-eq-hom-Precategory
       ( functor-precategory-Precategory C D)
       { F} {G} _ _ refl
+```
+
+### The evaluation functor
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  where
+
+  ev-functor-Precategory :
+    (c : obj-Precategory C) →
+    functor-Precategory (functor-precategory-Precategory C D) D
+  pr1 (ev-functor-Precategory c) F = obj-functor-Precategory C D F c
+  pr1 (pr2 (ev-functor-Precategory c)) {F} {G} φ =
+    hom-family-natural-transformation-Precategory C D F G φ c
+  pr1 (pr2 (pr2 (ev-functor-Precategory c))) φ Ψ = refl
+  pr2 (pr2 (pr2 (ev-functor-Precategory c))) F = refl
 ```

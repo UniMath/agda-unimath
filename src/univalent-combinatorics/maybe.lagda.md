@@ -1,4 +1,4 @@
-# The maybe modality on finite types
+# The maybe monad on finite types
 
 ```agda
 module univalent-combinatorics.maybe where
@@ -22,5 +22,5 @@ open import univalent-combinatorics.finite-types
 ```agda
 add-free-point-UU-Fin :
   {l1 : Level} (k : ℕ) → UU-Fin l1 k → UU-Fin l1 (succ-ℕ k)
-add-free-point-UU-Fin k X = coprod-UU-Fin k 1 X unit-UU-Fin
+add-free-point-UU-Fin k X = coproduct-UU-Fin k 1 X unit-UU-Fin
 ```

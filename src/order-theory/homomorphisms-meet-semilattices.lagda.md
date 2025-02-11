@@ -42,7 +42,7 @@ module _
   preserves-meet-Prop :
     (type-Meet-Semilattice A → type-Meet-Semilattice B) → Prop (l1 ⊔ l2)
   preserves-meet-Prop =
-    preserves-mul-semigroup-Prop
+    preserves-mul-prop-Semigroup
       ( semigroup-Meet-Semilattice A)
       ( semigroup-Meet-Semilattice B)
 
@@ -91,7 +91,7 @@ module _
         ( poset-Meet-Semilattice B)
         ( map-hom-Meet-Semilattice)
     preserves-order-hom-Meet-Semilattice x y H =
-      ( inv (preserves-meet-hom-Meet-Semilattice x y)) ∙
+      ( inv preserves-meet-hom-Meet-Semilattice) ∙
       ( ap map-hom-Meet-Semilattice H)
 
     hom-poset-hom-Meet-Semilattice :

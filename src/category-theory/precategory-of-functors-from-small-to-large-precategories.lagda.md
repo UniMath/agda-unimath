@@ -13,6 +13,7 @@ open import category-theory.natural-transformations-functors-from-small-to-large
 open import category-theory.precategories
 
 open import foundation.identity-types
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -39,6 +40,14 @@ module _
   (D : Large-Precategory α β)
   where
 
+  hom-functor-large-precategory-Small-Large-Precategory :
+    {γF γG : Level}
+    (F : functor-Small-Large-Precategory C D γF)
+    (G : functor-Small-Large-Precategory C D γG) →
+    UU (l1 ⊔ l2 ⊔ β γF γG)
+  hom-functor-large-precategory-Small-Large-Precategory =
+    natural-transformation-Small-Large-Precategory C D
+
   comp-hom-functor-large-precategory-Small-Large-Precategory :
     {γF γG γH : Level}
     {F : functor-Small-Large-Precategory C D γF}
@@ -59,15 +68,35 @@ module _
     (h : natural-transformation-Small-Large-Precategory C D H I)
     (g : natural-transformation-Small-Large-Precategory C D G H)
     (f : natural-transformation-Small-Large-Precategory C D F G) →
-    ( comp-natural-transformation-Small-Large-Precategory C D F G I
+    comp-natural-transformation-Small-Large-Precategory C D F G I
       ( comp-natural-transformation-Small-Large-Precategory C D G H I h g)
-      ( f)) ＝
-    ( comp-natural-transformation-Small-Large-Precategory C D F H I
+      ( f) ＝
+    comp-natural-transformation-Small-Large-Precategory C D F H I
       ( h)
-      ( comp-natural-transformation-Small-Large-Precategory C D F G H g f))
+      ( comp-natural-transformation-Small-Large-Precategory C D F G H g f)
   associative-comp-hom-functor-large-precategory-Small-Large-Precategory
     {F = F} {G} {H} {I} h g f =
     associative-comp-natural-transformation-Small-Large-Precategory
+      C D F G H I f g h
+
+  involutive-eq-associative-comp-hom-functor-large-precategory-Small-Large-Precategory :
+    {γF γG γH γI : Level}
+    {F : functor-Small-Large-Precategory C D γF}
+    {G : functor-Small-Large-Precategory C D γG}
+    {H : functor-Small-Large-Precategory C D γH}
+    {I : functor-Small-Large-Precategory C D γI}
+    (h : natural-transformation-Small-Large-Precategory C D H I)
+    (g : natural-transformation-Small-Large-Precategory C D G H)
+    (f : natural-transformation-Small-Large-Precategory C D F G) →
+    comp-natural-transformation-Small-Large-Precategory C D F G I
+      ( comp-natural-transformation-Small-Large-Precategory C D G H I h g)
+      ( f) ＝ⁱ
+    comp-natural-transformation-Small-Large-Precategory C D F H I
+      ( h)
+      ( comp-natural-transformation-Small-Large-Precategory C D F G H g f)
+  involutive-eq-associative-comp-hom-functor-large-precategory-Small-Large-Precategory
+    {F = F} {G} {H} {I} h g f =
+    involutive-eq-associative-comp-natural-transformation-Small-Large-Precategory
       C D F G H I f g h
 
   id-hom-functor-large-precategory-Small-Large-Precategory :
@@ -112,9 +141,9 @@ module _
   id-hom-Large-Precategory
     functor-large-precategory-Small-Large-Precategory {X = F} =
     id-hom-functor-large-precategory-Small-Large-Precategory {F = F}
-  associative-comp-hom-Large-Precategory
+  involutive-eq-associative-comp-hom-Large-Precategory
     functor-large-precategory-Small-Large-Precategory {X = F} {G} {H} {I} =
-    associative-comp-hom-functor-large-precategory-Small-Large-Precategory
+    involutive-eq-associative-comp-hom-functor-large-precategory-Small-Large-Precategory
       { F = F} {G} {H} {I}
   left-unit-law-comp-hom-Large-Precategory
     functor-large-precategory-Small-Large-Precategory {X = F} {G} =

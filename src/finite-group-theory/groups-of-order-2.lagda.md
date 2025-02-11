@@ -14,7 +14,6 @@ open import elementary-number-theory.standard-cyclic-groups
 open import finite-group-theory.finite-groups
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
@@ -23,6 +22,7 @@ open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -102,7 +102,7 @@ iso-Group-of-Order-2 :
   {l1 l2 : Level} (G : Group-of-Order-2 l1) (H : Group-of-Order-2 l2) →
   UU (l1 ⊔ l2)
 iso-Group-of-Order-2 G H =
-  type-iso-Group (group-Group-of-Order-2 G) (group-Group-of-Order-2 H)
+  iso-Group (group-Group-of-Order-2 G) (group-Group-of-Order-2 H)
 
 module _
   {l : Level} (G : Group-of-Order-2 l)
@@ -116,11 +116,11 @@ module _
       ( group-Group-of-Order-2 H)
       ( ap pr1 p)
 
-  is-contr-total-iso-Group-of-Order-2 :
-    is-contr (Σ (Group-of-Order-2 l) (iso-Group-of-Order-2 G))
-  is-contr-total-iso-Group-of-Order-2 =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-iso-Group (group-Group-of-Order-2 G))
+  is-torsorial-iso-Group-of-Order-2 :
+    is-torsorial (iso-Group-of-Order-2 G)
+  is-torsorial-iso-Group-of-Order-2 =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-iso-Group (group-Group-of-Order-2 G))
       ( λ H → is-prop-type-trunc-Prop)
       ( group-Group-of-Order-2 G)
       ( id-iso-Group (group-Group-of-Order-2 G))
@@ -130,7 +130,7 @@ module _
     (H : Group-of-Order-2 l) → is-equiv (iso-eq-Group-of-Order-2 H)
   is-equiv-iso-eq-Group-of-Order-2 =
     fundamental-theorem-id
-      ( is-contr-total-iso-Group-of-Order-2)
+      ( is-torsorial-iso-Group-of-Order-2)
       ( iso-eq-Group-of-Order-2)
 
   eq-iso-Group-of-Order-2 :
@@ -163,20 +163,20 @@ module _
     map-equiv equiv-Group-of-Order-2
 ```
 
-```agda
---   specified-hom-Group-of-Order-2 :
---     hom-Group (group-Group-of-Order-2 G) (group-Group-of-Order-2 H)
---   specified-hom-Group-of-Order-2 = {!!}
+```text
+  specified-hom-Group-of-Order-2 :
+    hom-Group (group-Group-of-Order-2 G) (group-Group-of-Order-2 H)
+  specified-hom-Group-of-Order-2 = {!!}
 ```
 
 ### The type of groups of order 2 is contractible
 
-```agda
--- is-contr-Group-of-Order-2 : (l : Level) → is-contr (Group-of-Order-2 l)
--- pr1 (is-contr-Group-of-Order-2 l) = symmetric-Group-of-Order-2 l
--- pr2 (is-contr-Group-of-Order-2 l) G =
---   eq-iso-Group-of-Order-2
---     ( symmetric-Group-of-Order-2 l)
---     ( G)
---     {!!}
+```text
+is-contr-Group-of-Order-2 : (l : Level) → is-contr (Group-of-Order-2 l)
+pr1 (is-contr-Group-of-Order-2 l) = symmetric-Group-of-Order-2 l
+pr2 (is-contr-Group-of-Order-2 l) G =
+  eq-iso-Group-of-Order-2
+    ( symmetric-Group-of-Order-2 l)
+    ( G)
+    {!!}
 ```

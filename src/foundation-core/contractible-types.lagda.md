@@ -11,13 +11,15 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.implicit-function-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.retractions
+open import foundation-core.retracts-of-types
 open import foundation-core.transport-along-identifications
 ```
 
@@ -60,31 +62,6 @@ abstract
   coh-contraction (pair c C) = left-inv (C c)
 ```
 
-## Examples
-
-### The total space of the identity type based at a point is contractible
-
-We prove two cases of this fact: the first keeping the left-hand side fixed, and
-the second keeping the right-hand side fixed.
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  abstract
-    is-contr-total-path : (a : A) → is-contr (Σ A (λ x → a ＝ x))
-    pr1 (pr1 (is-contr-total-path a)) = a
-    pr2 (pr1 (is-contr-total-path a)) = refl
-    pr2 (is-contr-total-path a) (pair .a refl) = refl
-
-  abstract
-    is-contr-total-path' : (a : A) → is-contr (Σ A (λ x → x ＝ a))
-    pr1 (pr1 (is-contr-total-path' a)) = a
-    pr2 (pr1 (is-contr-total-path' a)) = refl
-    pr2 (is-contr-total-path' a) (pair .a refl) = refl
-```
-
 ## Properties
 
 ### Retracts of contractible types are contractible
@@ -96,9 +73,9 @@ module _
 
   abstract
     is-contr-retract-of : A retract-of B → is-contr B → is-contr A
-    pr1 (is-contr-retract-of (pair i (pair r is-retraction)) H) = r (center H)
-    pr2 (is-contr-retract-of (pair i (pair r is-retraction)) H) x =
-      ap r (contraction H (i x)) ∙ (is-retraction x)
+    pr1 (is-contr-retract-of (pair i (pair r is-retraction-r)) H) = r (center H)
+    pr2 (is-contr-retract-of (pair i (pair r is-retraction-r)) H) x =
+      ap r (contraction H (i x)) ∙ (is-retraction-r x)
 ```
 
 ### Contractible types are closed under equivalences
@@ -111,14 +88,12 @@ module _
   abstract
     is-contr-is-equiv :
       (f : A → B) → is-equiv f → is-contr B → is-contr A
-    pr1 (is-contr-is-equiv f H (pair b K)) = map-inv-is-equiv H b
-    pr2 (is-contr-is-equiv f H (pair b K)) x =
-      ( ap (map-inv-is-equiv H) (K (f x))) ∙
-      ( is-retraction-map-inv-is-equiv H x)
+    is-contr-is-equiv f is-equiv-f =
+      is-contr-retract-of B (f , retraction-is-equiv is-equiv-f)
 
   abstract
-    is-contr-equiv : (e : A ≃ B) → is-contr B → is-contr A
-    is-contr-equiv (pair e is-equiv-e) is-contr-B =
+    is-contr-equiv : A ≃ B → is-contr B → is-contr A
+    is-contr-equiv (e , is-equiv-e) is-contr-B =
       is-contr-is-equiv e is-equiv-e is-contr-B
 
 module _
@@ -171,13 +146,13 @@ module _
   where
 
   abstract
-    is-contr-left-factor-prod : is-contr (A × B) → is-contr A
-    is-contr-left-factor-prod is-contr-AB =
+    is-contr-left-factor-product : is-contr (A × B) → is-contr A
+    is-contr-left-factor-product is-contr-AB =
       is-contr-retract-of
         ( A × B)
         ( pair
           ( λ x → pair x (pr2 (center is-contr-AB)))
-          ( pair pr1 (λ x → refl)))
+          ( pair pr1 refl-htpy))
         ( is-contr-AB)
 
 module _
@@ -185,13 +160,13 @@ module _
   where
 
   abstract
-    is-contr-right-factor-prod : is-contr (A × B) → is-contr B
-    is-contr-right-factor-prod is-contr-AB =
+    is-contr-right-factor-product : is-contr (A × B) → is-contr B
+    is-contr-right-factor-product is-contr-AB =
       is-contr-retract-of
         ( A × B)
         ( pair
           ( pair (pr1 (center is-contr-AB)))
-          ( pair pr2 (λ x → refl)))
+          ( pair pr2 refl-htpy))
         ( is-contr-AB)
 
 module _
@@ -199,10 +174,11 @@ module _
   where
 
   abstract
-    is-contr-prod : is-contr A → is-contr B → is-contr (A × B)
-    pr1 (pr1 (is-contr-prod (pair a C) (pair b D))) = a
-    pr2 (pr1 (is-contr-prod (pair a C) (pair b D))) = b
-    pr2 (is-contr-prod (pair a C) (pair b D)) (pair x y) = eq-pair (C x) (D y)
+    is-contr-product : is-contr A → is-contr B → is-contr (A × B)
+    pr1 (pr1 (is-contr-product (pair a C) (pair b D))) = a
+    pr2 (pr1 (is-contr-product (pair a C) (pair b D))) = b
+    pr2 (is-contr-product (pair a C) (pair b D)) (pair x y) =
+      eq-pair (C x) (D y)
 ```
 
 ### Contractibility of Σ-types
@@ -254,6 +230,24 @@ normalize the extracted information (in this case the first projection of the
 proof of contractibility), but it will normalize the entire proof of
 contractibility first, and then apply the projection.
 
+### Contractibility of the base of a contractible dependent sum
+
+Given a type `A` and a type family over it `B`, then if the dependent sum
+`Σ A B` is contractible and there is a section `(x : A) → B x`, then `A` is
+contractible.
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
+  where
+
+  abstract
+    is-contr-base-is-contr-Σ' :
+      ((x : A) → B x) → is-contr (Σ A B) → is-contr A
+    is-contr-base-is-contr-Σ' s =
+      is-contr-retract-of (Σ A B) ((λ a → a , s a) , pr1 , refl-htpy)
+```
+
 ### Contractible types are propositions
 
 ```agda
@@ -272,9 +266,14 @@ abstract
     ((x : A) → is-contr (B x)) → is-contr ((x : A) → B x)
   pr1 (is-contr-Π {A = A} {B = B} H) x = center (H x)
   pr2 (is-contr-Π {A = A} {B = B} H) f =
-    map-inv-is-equiv
-      ( funext (λ x → center (H x)) f)
-      ( λ x → contraction (H x) (f x))
+    eq-htpy (λ x → contraction (H x) (f x))
+
+abstract
+  is-contr-implicit-Π :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → is-contr (B x)) → is-contr ({x : A} → B x)
+  is-contr-implicit-Π H =
+    is-contr-equiv _ equiv-explicit-implicit-Π (is-contr-Π H)
 ```
 
 ### The type of functions into a contractible type is contractible
@@ -283,7 +282,7 @@ abstract
 is-contr-function-type :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-contr B → is-contr (A → B)
-is-contr-function-type is-contr-B = is-contr-Π λ _ → is-contr-B
+is-contr-function-type is-contr-B = is-contr-Π (λ _ → is-contr-B)
 ```
 
 ### The type of equivalences between contractible types is contractible
@@ -299,7 +298,7 @@ module _
     is-contr-Σ
       ( is-contr-function-type (pair b β))
       ( λ x → b)
-      ( is-contr-prod
+      ( is-contr-product
         ( is-contr-Σ
           ( is-contr-function-type (pair a α))
           ( λ y → a)

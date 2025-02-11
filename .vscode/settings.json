@@ -27,17 +27,13 @@
   "files.exclude": {
     "MAlonzo/": true,
     "**/MAlonzo/": true,
-    "_build/": true,
-    "**/_build/": true,
-    "agdaFiles": true,
-    "src/temp/": true
+    "agdaFiles": true
   },
 
   // Snippet setup
   "editor.inlineSuggest.enabled": true,
   "editor.acceptSuggestionOnEnter": "off",
   "editor.snippetSuggestions": "top",
-  "editor.wordBasedSuggestions": false,
   "javascript.suggest.names": false,
 
   // Autoformatting
@@ -95,6 +91,11 @@
     "editor.autoClosingBrackets": "never"
   },
 
+  "[makefile]": {
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": true
+  },
+
   "[markdown]": {
     "editor.rulers": [80],
     "editor.quickSuggestions": {
@@ -105,6 +106,9 @@
 
   "[python]": {
     "editor.tabSize": 4,
-    "editor.defaultFormatter": "ms-python.python"
+    "editor.defaultFormatter": null,
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false,
+    "editor.formatOnPaste": false
   }
 }

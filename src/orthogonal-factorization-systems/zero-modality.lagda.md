@@ -10,8 +10,8 @@ module orthogonal-factorization-systems.zero-modality where
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.types-local-at-maps
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 
@@ -43,7 +43,7 @@ unit-zero-modality _ = raise-star
 is-uniquely-eliminating-modality-zero-modality :
   {l1 l2 : Level} →
   is-uniquely-eliminating-modality (unit-zero-modality {l1} {l2})
-is-uniquely-eliminating-modality-zero-modality {l2 = l2} A P =
+is-uniquely-eliminating-modality-zero-modality {l2 = l2} P =
   is-local-is-contr
     ( unit-zero-modality)
     ( raise-unit l2)

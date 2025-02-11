@@ -7,34 +7,43 @@ module foundation.decidable-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.hilberts-epsilon-operators
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
+open import foundation.retracts-of-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
 open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
 
 ## Idea
 
-A type is said to be decidable if we can either construct an element, or we can
-prove that it is empty. In other words, we interpret decidability via the
-Curry-Howard interpretation of logic into type theory. A related concept is that
-a type is either inhabited or empty, where inhabitedness of a type is expressed
-using the propositional truncation.
+A type is said to be
+{{#concept "decidable" Disambiguation="type" Agda=is-decidable}} if we can
+either construct an element, or we can prove that it is
+[empty](foundation-core.empty-types.md). In other words, we interpret
+decidability via the
+[Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
+of logic into type theory. A related concept is that a type is either
+[inhabited](foundation.inhabited-types.md) or empty, where inhabitedness of a
+type is expressed using the
+[propositional truncation](foundation.propositional-truncations.md).
 
 ## Definition
 
@@ -58,13 +67,15 @@ is-inhabited-or-empty A = type-trunc-Prop A + is-empty A
 
 ### Merely decidable types
 
-A type `A` is said to be merely decidable if it comes equipped with an element
-of `type-trunc-Prop (is-decidable A)`.
+A type `A` is said to be
+{{#concept "merely decidable" Agda=is-merely-decidable}} if it comes equipped
+with an element of `║ is-decidable A ║₋₁`, or equivalently, the
+[disjunction](foundation.disjunction.md) `A ∨ ¬ A` holds.
 
 ```agda
-is-merely-Decidable-Prop :
+is-merely-decidable-Prop :
   {l : Level} → UU l → Prop l
-is-merely-Decidable-Prop A = trunc-Prop (is-decidable A)
+is-merely-decidable-Prop A = trunc-Prop (is-decidable A)
 
 is-merely-decidable : {l : Level} → UU l → UU l
 is-merely-decidable A = type-trunc-Prop (is-decidable A)
@@ -87,32 +98,32 @@ is-decidable-empty = inr id
 ### Coproducts of decidable types are decidable
 
 ```agda
-is-decidable-coprod :
+is-decidable-coproduct :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → is-decidable B → is-decidable (A + B)
-is-decidable-coprod (inl a) y = inl (inl a)
-is-decidable-coprod (inr na) (inl b) = inl (inr b)
-is-decidable-coprod (inr na) (inr nb) = inr (ind-coprod (λ x → empty) na nb)
+is-decidable-coproduct (inl a) y = inl (inl a)
+is-decidable-coproduct (inr na) (inl b) = inl (inr b)
+is-decidable-coproduct (inr na) (inr nb) = inr (rec-coproduct na nb)
 ```
 
 ### Cartesian products of decidable types are decidable
 
 ```agda
-is-decidable-prod :
+is-decidable-product :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → is-decidable B → is-decidable (A × B)
-is-decidable-prod (inl a) (inl b) = inl (pair a b)
-is-decidable-prod (inl a) (inr g) = inr (g ∘ pr2)
-is-decidable-prod (inr f) (inl b) = inr (f ∘ pr1)
-is-decidable-prod (inr f) (inr g) = inr (f ∘ pr1)
+is-decidable-product (inl a) (inl b) = inl (pair a b)
+is-decidable-product (inl a) (inr g) = inr (g ∘ pr2)
+is-decidable-product (inr f) (inl b) = inr (f ∘ pr1)
+is-decidable-product (inr f) (inr g) = inr (f ∘ pr1)
 
-is-decidable-prod' :
+is-decidable-product' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → (A → is-decidable B) → is-decidable (A × B)
-is-decidable-prod' (inl a) d with d a
+is-decidable-product' (inl a) d with d a
 ... | inl b = inl (pair a b)
 ... | inr nb = inr (nb ∘ pr2)
-is-decidable-prod' (inr na) d = inr (na ∘ pr1)
+is-decidable-product' (inr na) d = inr (na ∘ pr1)
 
 is-decidable-left-factor :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
@@ -135,8 +146,7 @@ is-decidable-function-type :
   is-decidable A → is-decidable B → is-decidable (A → B)
 is-decidable-function-type (inl a) (inl b) = inl (λ x → b)
 is-decidable-function-type (inl a) (inr g) = inr (λ h → g (h a))
-is-decidable-function-type (inr f) (inl b) = inl (ex-falso ∘ f)
-is-decidable-function-type (inr f) (inr g) = inl (ex-falso ∘ f)
+is-decidable-function-type (inr f) _ = inl (ex-falso ∘ f)
 
 is-decidable-function-type' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
@@ -155,7 +165,7 @@ is-decidable-neg :
 is-decidable-neg d = is-decidable-function-type d is-decidable-empty
 ```
 
-### Decidable types are closed under coinhabited types; retracts, and equivalences
+### Decidable types are closed under coinhabited types
 
 ```agda
 module _
@@ -165,30 +175,93 @@ module _
   is-decidable-iff :
     (A → B) → (B → A) → is-decidable A → is-decidable B
   is-decidable-iff f g (inl a) = inl (f a)
-  is-decidable-iff f g (inr na) = inr (λ b → na (g b))
+  is-decidable-iff f g (inr na) = inr (na ∘ g)
 
+  is-decidable-iff' :
+    A ↔ B → is-decidable A → is-decidable B
+  is-decidable-iff' (f , g) = is-decidable-iff f g
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  iff-is-decidable : A ↔ B → is-decidable A ↔ is-decidable B
+  iff-is-decidable e = is-decidable-iff' e , is-decidable-iff' (inv-iff e)
+```
+
+### Decidable types are closed under retracts
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   is-decidable-retract-of :
     A retract-of B → is-decidable B → is-decidable A
-  is-decidable-retract-of (pair i (pair r H)) (inl b) = inl (r b)
-  is-decidable-retract-of (pair i (pair r H)) (inr f) = inr (f ∘ i)
+  is-decidable-retract-of R = is-decidable-iff' (iff-retract' R)
+
+  is-decidable-retract-of' :
+    A retract-of B → is-decidable A → is-decidable B
+  is-decidable-retract-of' R = is-decidable-iff' (inv-iff (iff-retract' R))
+```
+
+### Decidable types are closed under equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
   is-decidable-is-equiv :
     {f : A → B} → is-equiv f → is-decidable B → is-decidable A
-  is-decidable-is-equiv {f} (pair (pair g G) (pair h H)) =
-    is-decidable-retract-of (pair f (pair h H))
+  is-decidable-is-equiv {f} H =
+    is-decidable-retract-of (retract-equiv (f , H))
 
   is-decidable-equiv :
-    (e : A ≃ B) → is-decidable B → is-decidable A
+    A ≃ B → is-decidable B → is-decidable A
   is-decidable-equiv e = is-decidable-iff (map-inv-equiv e) (map-equiv e)
 
-is-decidable-equiv' :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
-  is-decidable A → is-decidable B
-is-decidable-equiv' e = is-decidable-equiv (inv-equiv e)
+  is-decidable-equiv' :
+    A ≃ B → is-decidable A → is-decidable B
+  is-decidable-equiv' e = is-decidable-iff (map-equiv e) (map-inv-equiv e)
+```
+
+### Equivalent types have equivalent decidability predicates
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  where
+
+  map-equiv-is-decidable : is-decidable A → is-decidable B
+  map-equiv-is-decidable = is-decidable-equiv' e
+
+  map-inv-equiv-is-decidable : is-decidable B → is-decidable A
+  map-inv-equiv-is-decidable = is-decidable-equiv e
+
+  is-section-map-inv-equiv-is-decidable :
+    is-section map-equiv-is-decidable map-inv-equiv-is-decidable
+  is-section-map-inv-equiv-is-decidable (inl x) =
+    ap inl (is-section-map-inv-equiv e x)
+  is-section-map-inv-equiv-is-decidable (inr x) =
+    ap inr eq-neg
+
+  is-retraction-map-inv-equiv-is-decidable :
+    is-retraction map-equiv-is-decidable map-inv-equiv-is-decidable
+  is-retraction-map-inv-equiv-is-decidable (inl x) =
+    ap inl (is-retraction-map-inv-equiv e x)
+  is-retraction-map-inv-equiv-is-decidable (inr x) =
+    ap inr eq-neg
+
+  is-equiv-map-equiv-is-decidable : is-equiv map-equiv-is-decidable
+  is-equiv-map-equiv-is-decidable =
+    is-equiv-is-invertible
+      map-inv-equiv-is-decidable
+      is-section-map-inv-equiv-is-decidable
+      is-retraction-map-inv-equiv-is-decidable
+
+  equiv-is-decidable : is-decidable A ≃ is-decidable B
+  equiv-is-decidable = map-equiv-is-decidable , is-equiv-map-equiv-is-decidable
 ```
 
 ### Decidability implies double negation elimination
@@ -200,14 +273,8 @@ double-negation-elim-is-decidable (inl x) p = x
 double-negation-elim-is-decidable (inr x) p = ex-falso (p x)
 ```
 
-### The double negation of `is-decidable` is always provable
-
-```agda
-double-negation-is-decidable : {l : Level} {P : UU l} → ¬¬ (is-decidable P)
-double-negation-is-decidable {P = P} f =
-  map-neg (inr {A = P} {B = ¬ P}) f
-    ( map-neg (inl {A = P} {B = ¬ P}) f)
-```
+See also
+[double negation stable propositions](foundation.double-negation-stable-propositions.md).
 
 ### Decidable types have ε-operators
 
@@ -233,17 +300,17 @@ idempotent-is-decidable P (inr np) = inr (λ p → np (inl p))
 
 ```agda
 abstract
-  is-prop-is-inhabited-or-empty :
+  is-property-is-inhabited-or-empty :
     {l1 : Level} (A : UU l1) → is-prop (is-inhabited-or-empty A)
-  is-prop-is-inhabited-or-empty A =
-    is-prop-coprod
+  is-property-is-inhabited-or-empty A =
+    is-prop-coproduct
       ( λ t → apply-universal-property-trunc-Prop t empty-Prop)
       ( is-prop-type-trunc-Prop)
       ( is-prop-neg)
 
 is-inhabited-or-empty-Prop : {l1 : Level} → UU l1 → Prop l1
 pr1 (is-inhabited-or-empty-Prop A) = is-inhabited-or-empty A
-pr2 (is-inhabited-or-empty-Prop A) = is-prop-is-inhabited-or-empty A
+pr2 (is-inhabited-or-empty-Prop A) = is-property-is-inhabited-or-empty A
 ```
 
 ### Any inhabited type is a fixed point for `is-decidable`
@@ -252,10 +319,10 @@ pr2 (is-inhabited-or-empty-Prop A) = is-prop-is-inhabited-or-empty A
 is-fixed-point-is-decidable-is-inhabited :
   {l : Level} {X : UU l} → type-trunc-Prop X → is-decidable X ≃ X
 is-fixed-point-is-decidable-is-inhabited {l} {X} t =
-  right-unit-law-coprod-is-empty X (¬ X) (is-nonempty-is-inhabited t)
+  right-unit-law-coproduct-is-empty X (¬ X) (is-nonempty-is-inhabited t)
 ```
 
-### Raising types converves decidability
+### Raising universe level conserves decidability
 
 ```agda
 module _
@@ -263,6 +330,55 @@ module _
   where
 
   is-decidable-raise : is-decidable A → is-decidable (raise l A)
-  is-decidable-raise (inl p) = inl (map-raise p)
-  is-decidable-raise (inr np) = inr (λ p' → np (map-inv-raise p'))
+  is-decidable-raise = is-decidable-equiv' (compute-raise l A)
 ```
+
+### Decidable types are inhabited or empty
+
+```agda
+is-inhabited-or-empty-is-decidable :
+  {l : Level} {A : UU l} → is-decidable A → is-inhabited-or-empty A
+is-inhabited-or-empty-is-decidable (inl x) = inl (unit-trunc-Prop x)
+is-inhabited-or-empty-is-decidable (inr y) = inr y
+```
+
+### Decidable types are merely decidable
+
+```agda
+is-merely-decidable-is-decidable :
+  {l : Level} {A : UU l} → is-decidable A → is-merely-decidable A
+is-merely-decidable-is-decidable = unit-trunc-Prop
+```
+
+### Types are inhabited or empty if and only if they are merely decidable
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-inhabited-or-empty-is-merely-decidable :
+    is-merely-decidable A → is-inhabited-or-empty A
+  is-inhabited-or-empty-is-merely-decidable =
+    rec-trunc-Prop
+      ( is-inhabited-or-empty-Prop A)
+      ( is-inhabited-or-empty-is-decidable)
+
+  is-merely-decidable-is-inhabited-or-empty :
+    is-inhabited-or-empty A → is-merely-decidable A
+  is-merely-decidable-is-inhabited-or-empty (inl |x|) =
+    rec-trunc-Prop (is-merely-decidable-Prop A) (unit-trunc-Prop ∘ inl) |x|
+  is-merely-decidable-is-inhabited-or-empty (inr y) =
+    unit-trunc-Prop (inr y)
+
+  iff-is-inhabited-or-empty-is-merely-decidable :
+    is-merely-decidable A ↔ is-inhabited-or-empty A
+  iff-is-inhabited-or-empty-is-merely-decidable =
+    ( is-inhabited-or-empty-is-merely-decidable ,
+      is-merely-decidable-is-inhabited-or-empty)
+```
+
+## See also
+
+- That decidablity is irrefutable is shown in
+  [`foundation.irrefutable-propositions`](foundation.irrefutable-propositions.md).

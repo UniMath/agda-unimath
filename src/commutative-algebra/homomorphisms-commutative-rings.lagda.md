@@ -11,12 +11,11 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.homomorphisms-commutative-semirings
 open import commutative-algebra.invertible-elements-commutative-rings
 
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups
@@ -336,11 +335,10 @@ module _
       ( ring-Commutative-Ring B)
       ( f)
 
-  is-contr-total-htpy-hom-Commutative-Ring :
-    is-contr
-      ( Σ (hom-Commutative-Ring A B) (htpy-hom-Commutative-Ring A B f))
-  is-contr-total-htpy-hom-Commutative-Ring =
-    is-contr-total-htpy-hom-Ring
+  is-torsorial-htpy-hom-Commutative-Ring :
+    is-torsorial (htpy-hom-Commutative-Ring A B f)
+  is-torsorial-htpy-hom-Commutative-Ring =
+    is-torsorial-htpy-hom-Ring
       ( ring-Commutative-Ring A)
       ( ring-Commutative-Ring B)
       ( f)
@@ -388,12 +386,8 @@ module _
   where
 
   associative-comp-hom-Commutative-Ring :
-    ( comp-hom-Commutative-Ring A B D
-      ( comp-hom-Commutative-Ring B C D h g)
-      ( f)) ＝
-    ( comp-hom-Commutative-Ring A C D
-      ( h)
-      ( comp-hom-Commutative-Ring A B C g f))
+    comp-hom-Commutative-Ring A B D (comp-hom-Commutative-Ring B C D h g) f ＝
+    comp-hom-Commutative-Ring A C D h (comp-hom-Commutative-Ring A B C g f)
   associative-comp-hom-Commutative-Ring =
     associative-comp-hom-Ring
       ( ring-Commutative-Ring A)

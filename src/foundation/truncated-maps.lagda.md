@@ -9,7 +9,7 @@ open import foundation-core.truncated-maps public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.universe-levels
@@ -49,23 +49,25 @@ module _
   where
 
   abstract
-    is-trunc-is-pullback :
-      is-pullback f g c → is-trunc-map k g → is-trunc-map k (pr1 c)
-    is-trunc-is-pullback pb is-trunc-g a =
+    is-trunc-vertical-map-is-pullback :
+      is-pullback f g c →
+      is-trunc-map k g → is-trunc-map k (vertical-map-cone f g c)
+    is-trunc-vertical-map-is-pullback pb is-trunc-g a =
       is-trunc-is-equiv k
         ( fiber g (f a))
-        ( map-fiber-cone f g c a)
-        ( is-fiberwise-equiv-map-fiber-cone-is-pullback f g c pb a)
+        ( map-fiber-vertical-map-cone f g c a)
+        ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback f g c pb a)
         ( is-trunc-g (f a))
 
 abstract
-  is-trunc-is-pullback' :
+  is-trunc-horizontal-map-is-pullback :
     {l1 l2 l3 l4 : Level} (k : 𝕋)
     {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
     (f : A → X) (g : B → X) (c : cone f g C) →
-    is-pullback f g c → is-trunc-map k f → is-trunc-map k (pr1 (pr2 c))
-  is-trunc-is-pullback' k f g (pair p (pair q H)) pb is-trunc-f =
-    is-trunc-is-pullback k g f
+    is-pullback f g c →
+    is-trunc-map k f → is-trunc-map k (horizontal-map-cone f g c)
+  is-trunc-horizontal-map-is-pullback k f g (pair p (pair q H)) pb is-trunc-f =
+    is-trunc-vertical-map-is-pullback k g f
       ( swap-cone f g (triple p q H))
       ( is-pullback-swap-cone f g (triple p q H) pb)
       is-trunc-f

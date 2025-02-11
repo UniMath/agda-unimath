@@ -57,7 +57,7 @@ module _
   equiv-classifying-type-symmetric-Concrete-Group :
     (X Y : classifying-type-symmetric-Concrete-Group A) → UU l
   equiv-classifying-type-symmetric-Concrete-Group X Y =
-    type-equiv-Set (pr1 X) (pr1 Y)
+    equiv-Set (pr1 X) (pr1 Y)
 
   type-symmetric-Concrete-Group : UU l
   type-symmetric-Concrete-Group =

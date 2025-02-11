@@ -18,7 +18,6 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
-open import structured-types.cyclic-types
 open import structured-types.types-equipped-with-endomorphisms
 
 open import univalent-combinatorics.cyclic-finite-types

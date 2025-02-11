@@ -13,6 +13,8 @@ open import foundation.booleans
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import lists.lists
+
 open import primitives.strings
 ```
 
@@ -20,18 +22,35 @@ open import primitives.strings
 
 ## Idea
 
-The `Meta` type represents metavariables in Agda.
+The `Metavariable-Agda` type represents metavariables in Agda.
 
 ## Definition
 
 ```agda
-postulate Meta : UU lzero
-{-# BUILTIN AGDAMETA Meta #-}
+postulate
+  Metavariable-Agda : UU lzero
+
+{-# BUILTIN AGDAMETA Metavariable-Agda #-}
 
 primitive
-  primMetaEquality : Meta → Meta → bool
-  primMetaLess : Meta → Meta → bool
-  primShowMeta : Meta → String
-  primMetaToNat : Meta → ℕ
-  primMetaToNatInjective : ∀ a b → primMetaToNat a ＝ primMetaToNat b → a ＝ b
+  primMetaEquality :
+    Metavariable-Agda → Metavariable-Agda → bool
+  primMetaLess :
+    Metavariable-Agda → Metavariable-Agda → bool
+  primShowMeta :
+    Metavariable-Agda → String
+  primMetaToNat :
+    Metavariable-Agda → ℕ
+  primMetaToNatInjective :
+    (a b : Metavariable-Agda) → primMetaToNat a ＝ primMetaToNat b → a ＝ b
+
+data Blocker-Agda : UU lzero where
+  any-Blocker-Agda : list Blocker-Agda → Blocker-Agda
+  all-Blocker-Agda : list Blocker-Agda → Blocker-Agda
+  metavariable-Blocker-Agda : Metavariable-Agda → Blocker-Agda
+
+{-# BUILTIN AGDABLOCKER Blocker-Agda #-}
+{-# BUILTIN AGDABLOCKERANY any-Blocker-Agda #-}
+{-# BUILTIN AGDABLOCKERALL all-Blocker-Agda #-}
+{-# BUILTIN AGDABLOCKERMETA metavariable-Blocker-Agda #-}
 ```

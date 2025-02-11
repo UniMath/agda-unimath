@@ -1,4 +1,4 @@
-# Order preserving maps on posets
+# Order preserving maps between posets
 
 ```agda
 module order-theory.order-preserving-maps-posets where
@@ -7,14 +7,14 @@ module order-theory.order-preserving-maps-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import order-theory.order-preserving-maps-preorders
@@ -37,10 +37,10 @@ module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  preserves-order-Poset-Prop :
+  preserves-order-prop-Poset :
     (type-Poset P → type-Poset Q) → Prop (l1 ⊔ l2 ⊔ l4)
-  preserves-order-Poset-Prop =
-    preserves-order-Preorder-Prop (preorder-Poset P) (preorder-Poset Q)
+  preserves-order-prop-Poset =
+    preserves-order-prop-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   preserves-order-Poset :
     (type-Poset P → type-Poset Q) → UU (l1 ⊔ l2 ⊔ l4)
@@ -56,7 +56,7 @@ module _
   hom-set-Poset =
     set-subset
       ( function-Set (type-Poset P) (set-Poset Q))
-      ( preserves-order-Poset-Prop)
+      ( preserves-order-prop-Poset)
 
   hom-Poset : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-Poset = type-Set hom-set-Poset
@@ -64,10 +64,10 @@ module _
   map-hom-Poset : hom-Poset → type-Poset P → type-Poset Q
   map-hom-Poset = map-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
-  preserves-order-map-hom-Poset :
+  preserves-order-hom-Poset :
     (f : hom-Poset) → preserves-order-Poset (map-hom-Poset f)
-  preserves-order-map-hom-Poset =
-    preserves-order-map-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+  preserves-order-hom-Poset =
+    preserves-order-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 ```
 
 ### Homotopies of order preserving maps
@@ -88,11 +88,10 @@ module _
     (f g : hom-Poset P Q) → Id f g → htpy-hom-Poset f g
   htpy-eq-hom-Poset = htpy-eq-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
-  is-contr-total-htpy-hom-Poset :
-    (f : hom-Poset P Q) →
-    is-contr (Σ (hom-Poset P Q) (htpy-hom-Poset f))
-  is-contr-total-htpy-hom-Poset =
-    is-contr-total-htpy-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+  is-torsorial-htpy-hom-Poset :
+    (f : hom-Poset P Q) → is-torsorial (htpy-hom-Poset f)
+  is-torsorial-htpy-hom-Poset =
+    is-torsorial-htpy-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   is-equiv-htpy-eq-hom-Poset :
     (f g : hom-Poset P Q) → is-equiv (htpy-eq-hom-Poset f g)
@@ -190,11 +189,21 @@ module _
 
   associative-comp-hom-Poset :
     (h : hom-Poset R S) (g : hom-Poset Q R) (f : hom-Poset P Q) →
-    Id
-      ( comp-hom-Poset P Q S (comp-hom-Poset Q R S h g) f)
-      ( comp-hom-Poset P R S h (comp-hom-Poset P Q R g f))
+    comp-hom-Poset P Q S (comp-hom-Poset Q R S h g) f ＝
+    comp-hom-Poset P R S h (comp-hom-Poset P Q R g f)
   associative-comp-hom-Poset =
     associative-comp-hom-Preorder
+      ( preorder-Poset P)
+      ( preorder-Poset Q)
+      ( preorder-Poset R)
+      ( preorder-Poset S)
+
+  involutive-eq-associative-comp-hom-Poset :
+    (h : hom-Poset R S) (g : hom-Poset Q R) (f : hom-Poset P Q) →
+    comp-hom-Poset P Q S (comp-hom-Poset Q R S h g) f ＝ⁱ
+    comp-hom-Poset P R S h (comp-hom-Poset P Q R g f)
+  involutive-eq-associative-comp-hom-Poset =
+    involutive-eq-associative-comp-hom-Preorder
       ( preorder-Poset P)
       ( preorder-Poset Q)
       ( preorder-Poset R)

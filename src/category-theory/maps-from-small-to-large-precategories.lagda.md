@@ -11,10 +11,9 @@ open import category-theory.large-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
 
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -79,13 +78,11 @@ module _
   htpy-eq-map-Small-Large-Precategory =
     htpy-eq-map-Precategory C (precategory-Large-Precategory D γ)
 
-  is-contr-total-htpy-map-Small-Large-Precategory :
+  is-torsorial-htpy-map-Small-Large-Precategory :
     (f : map-Small-Large-Precategory C D γ) →
-    is-contr
-      ( Σ ( map-Small-Large-Precategory C D γ)
-          ( htpy-map-Small-Large-Precategory f))
-  is-contr-total-htpy-map-Small-Large-Precategory =
-    is-contr-total-htpy-map-Precategory C (precategory-Large-Precategory D γ)
+    is-torsorial (htpy-map-Small-Large-Precategory f)
+  is-torsorial-htpy-map-Small-Large-Precategory =
+    is-torsorial-htpy-map-Precategory C (precategory-Large-Precategory D γ)
 
   is-equiv-htpy-eq-map-Small-Large-Precategory :
     (f g : map-Small-Large-Precategory C D γ) →

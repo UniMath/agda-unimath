@@ -23,10 +23,23 @@ open import foundation-core.propositions
 
 ## Idea
 
-A map is said to be propositional if its fibers are propositions. This condition
-is equivalent to being an embedding.
+A map is said to be **propositional** if its
+[fibers](foundation-core.fibers-of-maps.md) are
+[propositions](foundation-core.propositions.md). This condition is the same as
+the condition of being a
+[`-1`-truncated map](foundation-core.truncated-maps.md), and it is
+[equivalent](foundation-core.equivalences.md) to being an
+[embedding](foundation-core.embeddings.md).
 
-## Definition
+**Note:** Of the three equivalent conditions mentioned above, propositional
+maps, `-1`-truncated maps, and embeddings, the central notion of in the
+agda-unimath library is that of embedding. This means that most infrastructure
+is available for embeddings, and that it is easy to convert from any of the
+other two notions to the notion of embedding.
+
+## Definitions
+
+### The predicate of being a propositional map
 
 ```agda
 module _
@@ -35,6 +48,27 @@ module _
 
   is-prop-map : (A → B) → UU (l1 ⊔ l2)
   is-prop-map f = (b : B) → is-prop (fiber f b)
+```
+
+### The type of propositional maps
+
+```agda
+module _
+  {l1 l2 : Level}
+  where
+
+  prop-map : (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+  prop-map A B = Σ (A → B) is-prop-map
+
+  module _
+    {A : UU l1} {B : UU l2} (f : prop-map A B)
+    where
+
+    map-prop-map : A → B
+    map-prop-map = pr1 f
+
+    is-prop-map-prop-map : is-prop-map map-prop-map
+    is-prop-map-prop-map = pr2 f
 ```
 
 ## Properties
@@ -71,6 +105,14 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
+
+  emb-prop-map : prop-map A B → A ↪ B
+  pr1 (emb-prop-map (f , p)) = f
+  pr2 (emb-prop-map (f , p)) = is-emb-is-prop-map p
+
+  prop-map-emb : A ↪ B → prop-map A B
+  pr1 (prop-map-emb (f , p)) = f
+  pr2 (prop-map-emb (f , p)) = is-prop-map-is-emb p
 
   is-prop-map-emb : (f : A ↪ B) → is-prop-map (map-emb f)
   is-prop-map-emb f = is-prop-map-is-emb (is-emb-map-emb f)

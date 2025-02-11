@@ -19,82 +19,104 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
+open import group-theory.subgroups
 open import group-theory.symmetric-groups
+open import group-theory.trivial-group-homomorphisms
 ```
 
 </details>
 
 ## Idea
 
-A action of a group `G` on a set `X` is a group homomorphism from `G` into
-`symmetric-Group X`.
+An **action** of a [group](group-theory.groups.md) `G` on a
+[set](foundation-core.sets.md) `X`, also called a **`G`-action**, is a
+[group homomorphism](group-theory.homomorphisms-groups.md) from `G` into
+`symmetric-Group X`. A set equipped with a `G`-action is called a **`G`-set**.
 
-## Definition
+## Definitions
+
+### The type of `G`-sets
 
 ```agda
 module _
   {l1 : Level} (G : Group l1)
   where
 
-  Abstract-Group-Action : (l : Level) → UU (l1 ⊔ lsuc l)
-  Abstract-Group-Action l =
+  action-Group : (l : Level) → UU (l1 ⊔ lsuc l)
+  action-Group l =
     Σ (Set l) (λ X → hom-Group G (symmetric-Group X))
 
 module _
-  {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
+  {l1 l2 : Level} (G : Group l1) (X : action-Group G l2)
   where
 
-  set-Abstract-Group-Action : Set l2
-  set-Abstract-Group-Action = pr1 X
+  set-action-Group : Set l2
+  set-action-Group = pr1 X
 
-  type-Abstract-Group-Action : UU l2
-  type-Abstract-Group-Action = type-Set set-Abstract-Group-Action
+  type-action-Group : UU l2
+  type-action-Group = type-Set set-action-Group
 
-  is-set-type-Abstract-Group-Action : is-set type-Abstract-Group-Action
-  is-set-type-Abstract-Group-Action = is-set-type-Set set-Abstract-Group-Action
+  is-set-type-action-Group : is-set type-action-Group
+  is-set-type-action-Group = is-set-type-Set set-action-Group
 
-  equiv-mul-Abstract-Group-Action :
-    type-Group G → type-Abstract-Group-Action ≃ type-Abstract-Group-Action
-  equiv-mul-Abstract-Group-Action =
-    map-hom-Group G (symmetric-Group set-Abstract-Group-Action) (pr2 X)
+  equiv-mul-action-Group : type-Group G → type-action-Group ≃ type-action-Group
+  equiv-mul-action-Group =
+    map-hom-Group G (symmetric-Group set-action-Group) (pr2 X)
 
-  mul-Abstract-Group-Action :
-    type-Group G → type-Abstract-Group-Action → type-Abstract-Group-Action
-  mul-Abstract-Group-Action g =
-    map-equiv (equiv-mul-Abstract-Group-Action g)
+  mul-action-Group : type-Group G → type-action-Group → type-action-Group
+  mul-action-Group g = map-equiv (equiv-mul-action-Group g)
 
-  mul-Abstract-Group-Action' :
-    type-Abstract-Group-Action → type-Group G → type-Abstract-Group-Action
-  mul-Abstract-Group-Action' x g = mul-Abstract-Group-Action g x
+  mul-action-Group' : type-action-Group → type-Group G → type-action-Group
+  mul-action-Group' x g = mul-action-Group g x
 
-  preserves-unit-mul-Abstract-Group-Action :
-    (mul-Abstract-Group-Action (unit-Group G)) ~ id
-  preserves-unit-mul-Abstract-Group-Action =
+  preserves-unit-mul-action-Group : mul-action-Group (unit-Group G) ~ id
+  preserves-unit-mul-action-Group =
     htpy-eq
       ( ap pr1
         ( preserves-unit-hom-Group G
-          ( symmetric-Group set-Abstract-Group-Action)
+          ( symmetric-Group set-action-Group)
           ( pr2 X)))
 
-  preserves-mul-Abstract-Group-Action :
-    (g : type-Group G) (h : type-Group G) (x : type-Abstract-Group-Action) →
-    Id
-      ( mul-Abstract-Group-Action (mul-Group G g h) x)
-      ( mul-Abstract-Group-Action g (mul-Abstract-Group-Action h x))
-  preserves-mul-Abstract-Group-Action g h =
+  preserves-mul-action-Group :
+    (g : type-Group G) (h : type-Group G) (x : type-action-Group) →
+    mul-action-Group (mul-Group G g h) x ＝
+    mul-action-Group g (mul-action-Group h x)
+  preserves-mul-action-Group g h =
     htpy-eq
       ( ap pr1
-        ( preserves-mul-hom-Group G
-          ( symmetric-Group set-Abstract-Group-Action) (pr2 X) g h))
+        ( preserves-mul-hom-Group G (symmetric-Group set-action-Group) (pr2 X)))
 
-  transpose-eq-mul-Abstract-Group-Action :
-    (g : type-Group G) (x y : type-Abstract-Group-Action) →
-    Id (mul-Abstract-Group-Action g x) y →
-    Id x (mul-Abstract-Group-Action (inv-Group G g) y)
-  transpose-eq-mul-Abstract-Group-Action g x
-    .(mul-Abstract-Group-Action g x) refl =
+  transpose-eq-mul-action-Group :
+    (g : type-Group G) (x y : type-action-Group) →
+    mul-action-Group g x ＝ y → x ＝ mul-action-Group (inv-Group G g) y
+  transpose-eq-mul-action-Group g x ._ refl =
     ( inv
-      ( ( ap (mul-Abstract-Group-Action' x) (left-inverse-law-mul-Group G g)) ∙
-        ( preserves-unit-mul-Abstract-Group-Action x))) ∙
-    ( preserves-mul-Abstract-Group-Action (inv-Group G g) g x)
+      ( ( ap (mul-action-Group' x) (left-inverse-law-mul-Group G g)) ∙
+        ( preserves-unit-mul-action-Group x))) ∙
+    ( preserves-mul-action-Group (inv-Group G g) g x)
 ```
+
+## Examples
+
+### Trivial `G`-sets
+
+Every set gives rise to a `G`-set by having every point fixed under the action
+of `G`.
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (X : Set l2)
+  where
+
+  trivial-action-Group : action-Group G l2
+  pr1 trivial-action-Group = X
+  pr2 trivial-action-Group = trivial-hom-Group G (symmetric-Group X)
+```
+
+## External links
+
+- [Group action](https://en.wikipedia.org/wiki/Group_action) at Wikipedia
+- [Actions of a group](https://ncatlab.org/nlab/show/action#ActionsOfAGroup) at
+  $n$Lab
+- [Group Action](https://mathworld.wolfram.com/GroupAction.html) at Wolfram
+  MathWorld

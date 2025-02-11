@@ -43,7 +43,7 @@ module _
   is-sorted-list-Prop nil = raise-unit-Prop l2
   is-sorted-list-Prop (cons x nil) = raise-unit-Prop l2
   is-sorted-list-Prop (cons x (cons y l)) =
-    prod-Prop
+    product-Prop
       ( leq-Decidable-Total-Order-Prop X x y)
       ( is-sorted-list-Prop (cons y l))
 
@@ -63,7 +63,7 @@ module _
     list (type-Decidable-Total-Order X) → Prop l2
   is-least-element-list-Prop x nil = raise-unit-Prop l2
   is-least-element-list-Prop x (cons y l) =
-    prod-Prop
+    product-Prop
       ( leq-Decidable-Total-Order-Prop X x y)
       ( is-least-element-list-Prop x l)
 
@@ -123,7 +123,7 @@ module _
     list (type-Decidable-Total-Order X) → Prop l2
   is-sorted-least-element-list-Prop nil = raise-unit-Prop l2
   is-sorted-least-element-list-Prop (cons x l) =
-    prod-Prop
+    product-Prop
       ( is-least-element-list-Prop x l)
       ( is-sorted-least-element-list-Prop l)
 

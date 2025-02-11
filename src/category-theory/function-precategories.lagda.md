@@ -7,6 +7,7 @@ module category-theory.function-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.dependent-products-of-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
@@ -14,6 +15,7 @@ open import category-theory.precategories
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -59,15 +61,26 @@ module _
     (h : hom-function-Precategory z w)
     (g : hom-function-Precategory y z)
     (f : hom-function-Precategory x y) →
-    ( comp-hom-function-Precategory (comp-hom-function-Precategory h g) f) ＝
-    ( comp-hom-function-Precategory h (comp-hom-function-Precategory g f))
+    comp-hom-function-Precategory (comp-hom-function-Precategory h g) f ＝
+    comp-hom-function-Precategory h (comp-hom-function-Precategory g f)
   associative-comp-hom-function-Precategory =
     associative-comp-hom-Precategory function-Precategory
 
-  associative-composition-structure-function-Precategory :
-    associative-composition-structure-Set hom-set-function-Precategory
-  associative-composition-structure-function-Precategory =
-    associative-composition-structure-Precategory function-Precategory
+  involutive-eq-associative-comp-hom-function-Precategory :
+    {x y z w : obj-function-Precategory}
+    (h : hom-function-Precategory z w)
+    (g : hom-function-Precategory y z)
+    (f : hom-function-Precategory x y) →
+    comp-hom-function-Precategory (comp-hom-function-Precategory h g) f ＝ⁱ
+    comp-hom-function-Precategory h (comp-hom-function-Precategory g f)
+  involutive-eq-associative-comp-hom-function-Precategory =
+    involutive-eq-associative-comp-hom-Precategory function-Precategory
+
+  associative-composition-operation-function-Precategory :
+    associative-composition-operation-binary-family-Set
+      hom-set-function-Precategory
+  associative-composition-operation-function-Precategory =
+    associative-composition-operation-Precategory function-Precategory
 
   id-hom-function-Precategory :
     {x : obj-function-Precategory} → hom-function-Precategory x x
@@ -87,11 +100,11 @@ module _
     right-unit-law-comp-hom-Precategory function-Precategory
 
   is-unital-function-Precategory :
-    is-unital-composition-structure-Set
+    is-unital-composition-operation-binary-family-Set
       hom-set-function-Precategory
-      associative-composition-structure-function-Precategory
+      comp-hom-function-Precategory
   is-unital-function-Precategory =
-    is-unital-composition-structure-Precategory function-Precategory
+    is-unital-composition-operation-Precategory function-Precategory
 ```
 
 ### Isomorphisms in the function precategory are fiberwise isomorphisms

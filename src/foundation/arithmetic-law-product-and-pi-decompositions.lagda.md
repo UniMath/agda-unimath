@@ -100,8 +100,7 @@ module _
   equiv-binary-product-Decomposition-Π-Decomposition :
     Σ ( Π-Decomposition l l X)
       ( λ d →
-        binary-coproduct-Decomposition l l
-          ( indexing-type-Π-Decomposition d)) ≃
+        binary-coproduct-Decomposition l l (indexing-type-Π-Decomposition d)) ≃
     Σ ( binary-product-Decomposition l l X)
       ( λ d →
         Π-Decomposition l l
@@ -122,26 +121,27 @@ module _
                                 equiv-tot
                                   ( λ B' →
                                     equiv-postcomp-equiv
-                                      ( equiv-prod
+                                      ( equiv-product
                                         ( inv-equiv (pr2 A'))
                                         ( inv-equiv (pr2 B')))
                                       ( X))) ∘e
                             ( ( inv-left-unit-law-Σ-is-contr
-                                  ( is-contr-total-equiv' (Π A YA))
+                                  ( is-torsorial-equiv' (Π A YA))
                                   ( Π A YA , id-equiv)) ∘e
                               ( inv-left-unit-law-Σ-is-contr
-                                  ( is-contr-total-equiv' (Π B YB))
+                                  ( is-torsorial-equiv' (Π B YB))
                                   ( Π B YB , id-equiv)))))) ∘e
                     ( ( equiv-Σ-equiv-base
                         ( λ z → X ≃ (Π A (pr1 z) × Π B (pr2 z)))
-                        ( equiv-universal-property-coprod (UU l))) ∘e
+                        ( equiv-universal-property-coproduct (UU l))) ∘e
                       ( ( equiv-tot
                             ( λ Y →
                               equiv-postcomp-equiv
-                                ( equiv-dependent-universal-property-coprod Y)
+                                ( equiv-dependent-universal-property-coproduct
+                                  ( Y))
                                 ( X))) ∘e
                           ( left-unit-law-Σ-is-contr
-                              ( is-contr-total-equiv' (A + B))
+                              ( is-torsorial-equiv' (A + B))
                               ((A + B) , id-equiv))))))))) ∘e
       ( reassociate)))
 
@@ -192,10 +192,10 @@ module _
         ( matching-correspondence-binary-coproduct-Decomposition (pr2 D))
         ( inv
             ( contraction
-                ( is-contr-total-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
+                ( is-torsorial-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
                 ( (pr1 (pr2 D) + pr1 (pr2 (pr2 D))) , id-equiv)) ∙
           contraction
-            ( is-contr-total-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
+            ( is-torsorial-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
                 ( pr1 (pr1 D) , pr2 (pr2 (pr2 D))))
         ( inl a)
 
@@ -216,10 +216,10 @@ module _
           ( matching-correspondence-binary-coproduct-Decomposition (pr2 D))
           ( inv
               ( contraction
-                  ( is-contr-total-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
+                  ( is-torsorial-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
                   ( (pr1 (pr2 D) + pr1 (pr2 (pr2 D))) , id-equiv)) ∙
             contraction
-              ( is-contr-total-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
+              ( is-torsorial-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
                   ( pr1 (pr1 D) , pr2 (pr2 (pr2 D))))
           ( inr b)
 ```

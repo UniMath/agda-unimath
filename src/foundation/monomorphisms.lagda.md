@@ -10,11 +10,15 @@ module foundation.monomorphisms where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.function-extensionality
 open import foundation.functoriality-function-types
+open import foundation.postcomposition-functions
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
@@ -88,4 +92,41 @@ module _
     is-emb-is-prop-map
       ( is-trunc-map-is-trunc-map-postcomp neg-one-𝕋 f
         ( λ X → is-prop-map-is-emb (is-mono-f X)))
+```
+
+We construct an explicit equivalence for postcomposition for homotopies between
+functions (rather than equality) when the map is an embedding.
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : UU l2} (f : A ↪ B)
+  {X : UU l3} (g h : X → A)
+  where
+
+  map-inv-equiv-htpy-postcomp-is-emb :
+    (pr1 f ∘ g) ~ (pr1 f ∘ h) → g ~ h
+  map-inv-equiv-htpy-postcomp-is-emb H x =
+    map-inv-is-equiv (pr2 f (g x) (h x)) (H x)
+
+  is-section-map-inv-equiv-htpy-postcomp-is-emb :
+    (pr1 f ·l_) ∘ map-inv-equiv-htpy-postcomp-is-emb ~ id
+  is-section-map-inv-equiv-htpy-postcomp-is-emb H =
+    eq-htpy (λ x →
+      is-section-map-inv-is-equiv (pr2 f (g x) (h x)) (H x))
+
+  is-retraction-map-inv-equiv-htpy-postcomp-is-emb :
+    map-inv-equiv-htpy-postcomp-is-emb ∘ (pr1 f ·l_) ~ id
+  is-retraction-map-inv-equiv-htpy-postcomp-is-emb H =
+    eq-htpy (λ x →
+      is-retraction-map-inv-is-equiv (pr2 f (g x) (h x)) (H x))
+
+  equiv-htpy-postcomp-is-emb :
+    (g ~ h) ≃ ((pr1 f ∘ g) ~ (pr1 f ∘ h))
+  pr1 equiv-htpy-postcomp-is-emb = pr1 f ·l_
+  pr2 equiv-htpy-postcomp-is-emb =
+    is-equiv-is-invertible
+      map-inv-equiv-htpy-postcomp-is-emb
+      is-section-map-inv-equiv-htpy-postcomp-is-emb
+      is-retraction-map-inv-equiv-htpy-postcomp-is-emb
 ```

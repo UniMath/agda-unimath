@@ -9,11 +9,10 @@ module commutative-algebra.homomorphisms-commutative-semirings where
 ```agda
 open import commutative-algebra.commutative-semirings
 
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-commutative-monoids
@@ -77,7 +76,7 @@ module _
         ( f)
 
     preserves-addition-hom-Commutative-Semiring :
-      (x y : type-Commutative-Semiring A) →
+      {x y : type-Commutative-Semiring A} →
       map-hom-Commutative-Semiring (add-Commutative-Semiring A x y) ＝
       add-Commutative-Semiring B
         ( map-hom-Commutative-Semiring x)
@@ -98,7 +97,7 @@ module _
         ( f)
 
     preserves-mul-hom-Commutative-Semiring :
-      (x y : type-Commutative-Semiring A) →
+      {x y : type-Commutative-Semiring A} →
       map-hom-Commutative-Semiring (mul-Commutative-Semiring A x y) ＝
       mul-Commutative-Semiring B
         ( map-hom-Commutative-Semiring x)
@@ -156,7 +155,7 @@ module _
       ( semiring-Commutative-Semiring A)
 
   preserves-mul-id-hom-Commutative-Semiring :
-    (x y : type-Commutative-Semiring A) →
+    {x y : type-Commutative-Semiring A} →
     mul-Commutative-Semiring A x y ＝ mul-Commutative-Semiring A x y
   preserves-mul-id-hom-Commutative-Semiring =
     preserves-mul-id-hom-Semiring (semiring-Commutative-Semiring A)
@@ -218,7 +217,7 @@ module _
       ( f)
 
   preserves-mul-comp-hom-Commutative-Semiring :
-    (x y : type-Commutative-Semiring A) →
+    {x y : type-Commutative-Semiring A} →
     map-comp-hom-Commutative-Semiring (mul-Commutative-Semiring A x y) ＝
     mul-Commutative-Semiring C
       ( map-comp-hom-Commutative-Semiring x)
@@ -287,12 +286,10 @@ module _
   (f : hom-Commutative-Semiring A B)
   where
 
-  is-contr-total-htpy-hom-Commutative-Semiring :
-    is-contr
-      ( Σ ( hom-Commutative-Semiring A B)
-          ( htpy-hom-Commutative-Semiring A B f))
-  is-contr-total-htpy-hom-Commutative-Semiring =
-    is-contr-total-htpy-hom-Semiring
+  is-torsorial-htpy-hom-Commutative-Semiring :
+    is-torsorial (htpy-hom-Commutative-Semiring A B f)
+  is-torsorial-htpy-hom-Commutative-Semiring =
+    is-torsorial-htpy-hom-Semiring
       ( semiring-Commutative-Semiring A)
       ( semiring-Commutative-Semiring B)
       ( f)

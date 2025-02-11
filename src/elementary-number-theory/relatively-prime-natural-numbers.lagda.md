@@ -8,28 +8,20 @@ module elementary-number-theory.relatively-prime-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
-open import elementary-number-theory.integers
-open import elementary-number-theory.modular-arithmetic
-open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
-open import elementary-number-theory.standard-cyclic-rings
 
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.negated-equality
-open import foundation.negation
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-
-open import ring-theory.invertible-elements-rings
 ```
 
 </details>

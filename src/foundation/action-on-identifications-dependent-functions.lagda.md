@@ -42,3 +42,9 @@ apd :
   (p : x ＝ y) → dependent-identification B p (f x) (f y)
 apd f refl = refl
 ```
+
+## See also
+
+- [Action of functions on identifications](foundation.action-on-identifications-functions.md)
+- [Action of functions on higher identifications](foundation.action-on-higher-identifications-functions.md).
+- [Action of binary functions on identifications](foundation.action-on-identifications-binary-functions.md).

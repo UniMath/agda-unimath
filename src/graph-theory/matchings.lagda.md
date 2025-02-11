@@ -65,7 +65,7 @@ module _
 
 ## External links
 
-- [Matching](https://www.wikidata.org/wiki/Q1065144) on Wikidata
+- [Matching](https://www.wikidata.org/entity/Q1065144) on Wikidata
 - [Matching (graph theory)](<https://en.wikipedia.org/wiki/Matching_(graph_theory)>)
   at Wikipedia
-- [Matching](https://mathworld.wolfram.com/Matching.html) at Wolfram Mathworld
+- [Matching](https://mathworld.wolfram.com/Matching.html) at Wolfram MathWorld

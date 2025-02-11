@@ -21,6 +21,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -55,10 +56,10 @@ module _
       ( obj-map-Precategory C D F x)
       ( obj-map-Precategory C D G x)
 
-  coherence-square-hom-family-map-Precategory :
+  naturality-hom-family-map-Precategory :
     hom-family-map-Precategory →
     {x y : obj-Precategory C} (f : hom-Precategory C x y) → UU l4
-  coherence-square-hom-family-map-Precategory γ {x} {y} f =
+  naturality-hom-family-map-Precategory γ {x} {y} f =
     coherence-square-hom-Precategory D
       ( hom-map-Precategory C D F f)
       ( γ x)
@@ -69,7 +70,7 @@ module _
     hom-family-map-Precategory → UU (l1 ⊔ l2 ⊔ l4)
   is-natural-transformation-map-Precategory γ =
     {x y : obj-Precategory C} (f : hom-Precategory C x y) →
-    coherence-square-hom-family-map-Precategory γ f
+    naturality-hom-family-map-Precategory γ f
 
   natural-transformation-map-Precategory : UU (l1 ⊔ l2 ⊔ l4)
   natural-transformation-map-Precategory =
@@ -80,11 +81,11 @@ module _
     natural-transformation-map-Precategory → hom-family-map-Precategory
   hom-family-natural-transformation-map-Precategory = pr1
 
-  coherence-square-natural-transformation-map-Precategory :
+  naturality-natural-transformation-map-Precategory :
     (γ : natural-transformation-map-Precategory) →
     is-natural-transformation-map-Precategory
       ( hom-family-natural-transformation-map-Precategory γ)
-  coherence-square-natural-transformation-map-Precategory = pr2
+  naturality-natural-transformation-map-Precategory = pr2
 ```
 
 ## Composition and identity of natural transformations
@@ -124,7 +125,7 @@ module _
     ( ap
       ( comp-hom-Precategory' D
         ( hom-family-natural-transformation-map-Precategory C D F G α X))
-      ( coherence-square-natural-transformation-map-Precategory C D G H β f)) ∙
+      ( naturality-natural-transformation-map-Precategory C D G H β f)) ∙
     ( associative-comp-hom-Precategory D
       ( hom-family-natural-transformation-map-Precategory C D G H β Y)
       ( hom-map-Precategory C D G f)
@@ -132,12 +133,36 @@ module _
     ( ap
       ( comp-hom-Precategory D
         ( hom-family-natural-transformation-map-Precategory C D G H β Y))
-      ( coherence-square-natural-transformation-map-Precategory C D F G α f)) ∙
+      ( naturality-natural-transformation-map-Precategory C D F G α f)) ∙
     ( inv
       ( associative-comp-hom-Precategory D
         ( hom-family-natural-transformation-map-Precategory C D G H β Y)
         ( hom-family-natural-transformation-map-Precategory C D F G α Y)
         ( hom-map-Precategory C D F f)))
+```
+
+## Equality of functors induces a natural transformation
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  where
+
+  natural-transformation-map-eq-Precategory :
+    (F G : map-Precategory C D) →
+    F ＝ G →
+    natural-transformation-map-Precategory C D F G
+  natural-transformation-map-eq-Precategory F G refl =
+    id-natural-transformation-map-Precategory C D F
+
+  natural-transformation-map-eq-inv-Precategory :
+    (F G : map-Precategory C D) →
+    F ＝ G →
+    natural-transformation-map-Precategory C D G F
+  natural-transformation-map-eq-inv-Precategory F G =
+    natural-transformation-map-eq-Precategory G F ∘ inv
 ```
 
 ## Properties
@@ -159,9 +184,9 @@ module _
     ( γ : hom-family-map-Precategory C D F G) →
     is-prop (is-natural-transformation-map-Precategory C D F G γ)
   is-prop-is-natural-transformation-map-Precategory γ =
-    is-prop-Π'
+    is-prop-implicit-Π
       ( λ x →
-        is-prop-Π'
+        is-prop-implicit-Π
           ( λ y →
             is-prop-Π
               ( λ f →
@@ -293,4 +318,18 @@ module _
         ( hom-family-natural-transformation-map-Precategory C D H I γ x)
         ( hom-family-natural-transformation-map-Precategory C D G H β x)
         ( hom-family-natural-transformation-map-Precategory C D F G α x))
+
+  involutive-eq-associative-comp-natural-transformation-map-Precategory :
+    (F G H I : map-Precategory C D)
+    (α : natural-transformation-map-Precategory C D F G)
+    (β : natural-transformation-map-Precategory C D G H)
+    (γ : natural-transformation-map-Precategory C D H I) →
+    comp-natural-transformation-map-Precategory C D F G I
+      ( comp-natural-transformation-map-Precategory C D G H I γ β) α ＝ⁱ
+    comp-natural-transformation-map-Precategory C D F H I γ
+      ( comp-natural-transformation-map-Precategory C D F G H β α)
+  involutive-eq-associative-comp-natural-transformation-map-Precategory
+    F G H I α β γ =
+    involutive-eq-eq
+      ( associative-comp-natural-transformation-map-Precategory F G H I α β γ)
 ```

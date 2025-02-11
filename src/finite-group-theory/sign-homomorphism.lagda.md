@@ -362,7 +362,7 @@ module _
 
   preserves-comp-map-sign-homomorphism :
     preserves-mul _∘e_ _∘e_ map-sign-homomorphism
-  preserves-comp-map-sign-homomorphism f g =
+  preserves-comp-map-sign-homomorphism {f} {g} =
     ( ap
       ( aut-point-Fin-two-ℕ)
       ( preserves-add-sign-homomorphism-Fin-two n X f g)) ∙

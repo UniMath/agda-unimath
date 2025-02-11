@@ -145,14 +145,14 @@ module _
   all-elements-equal-is-invertible-element-Monoid x (y , p , q) (y' , p' , q') =
     eq-type-subtype
       ( λ z →
-        prod-Prop
+        product-Prop
           ( Id-Prop (set-Monoid M) (mul-Monoid M x z) (unit-Monoid M))
           ( Id-Prop (set-Monoid M) (mul-Monoid M z x) (unit-Monoid M)))
       ( ( inv (left-unit-law-mul-Monoid M y)) ∙
-        ( ( inv (ap (λ z → mul-Monoid M z y) q')) ∙
-          ( ( associative-mul-Monoid M y' x y) ∙
-            ( ( ap (mul-Monoid M y') p) ∙
-              ( right-unit-law-mul-Monoid M y')))))
+        ( inv (ap (λ z → mul-Monoid M z y) q')) ∙
+        ( associative-mul-Monoid M y' x y) ∙
+        ( ap (mul-Monoid M y') p) ∙
+        ( right-unit-law-mul-Monoid M y'))
 
   is-prop-is-invertible-element-Monoid :
     (x : type-Monoid M) → is-prop (is-invertible-element-Monoid M x)
@@ -160,10 +160,10 @@ module _
     is-prop-all-elements-equal
       ( all-elements-equal-is-invertible-element-Monoid x)
 
-  is-invertible-element-monoid-Prop : type-Monoid M → Prop l
-  pr1 (is-invertible-element-monoid-Prop x) =
+  is-invertible-element-prop-Monoid : type-Monoid M → Prop l
+  pr1 (is-invertible-element-prop-Monoid x) =
     is-invertible-element-Monoid M x
-  pr2 (is-invertible-element-monoid-Prop x) =
+  pr2 (is-invertible-element-prop-Monoid x) =
     is-prop-is-invertible-element-Monoid x
 ```
 

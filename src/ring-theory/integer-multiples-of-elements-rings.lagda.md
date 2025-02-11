@@ -122,14 +122,14 @@ module _
 
   integer-multiple-in-pos-Ring :
     (n : ℕ) (a : type-Ring R) →
-    integer-multiple-Ring R (in-pos n) a ＝
+    integer-multiple-Ring R (in-pos-ℤ n) a ＝
     multiple-Ring R (succ-ℕ n) a
   integer-multiple-in-pos-Ring =
     integer-multiple-in-pos-Ab (ab-Ring R)
 
   integer-multiple-in-neg-Ring :
     (n : ℕ) (a : type-Ring R) →
-    integer-multiple-Ring R (in-neg n) a ＝
+    integer-multiple-Ring R (in-neg-ℤ n) a ＝
     neg-Ring R (multiple-Ring R (succ-ℕ n) a)
   integer-multiple-in-neg-Ring =
     integer-multiple-in-neg-Ab (ab-Ring R)
@@ -300,7 +300,7 @@ module _
           ( λ u → right-subtraction-Ring R u _)
           ( left-integer-multiple-law-mul-Ring (inl k) _ _)) ∙
         ( inv (integer-multiple-pred-Ring R (inl k) _))))
-  left-integer-multiple-law-mul-Ring (inr (inl star)) x y =
+  left-integer-multiple-law-mul-Ring (inr (inl _)) x y =
     ( ap (mul-Ring' R y) (integer-multiple-zero-Ring R x)) ∙
     ( left-zero-law-mul-Ring R y)
   left-integer-multiple-law-mul-Ring (inr (inr zero-ℕ)) x y =
@@ -329,7 +329,7 @@ module _
           ( add-Ring' R _)
           ( right-integer-multiple-law-mul-Ring (inl k) x y)) ∙
         ( inv (integer-multiple-pred-Ring R (inl k) _))))
-  right-integer-multiple-law-mul-Ring (inr (inl star)) x y =
+  right-integer-multiple-law-mul-Ring (inr (inl _)) x y =
     ( ap (mul-Ring R x) (integer-multiple-zero-Ring R y)) ∙
     ( right-zero-law-mul-Ring R x)
   right-integer-multiple-law-mul-Ring (inr (inr zero-ℕ)) x y =
@@ -366,7 +366,7 @@ module _
       ( commute-right-subtraction-Ring R
         ( commute-integer-multiple-Ring (inl k) H)
         ( H))
-  commute-integer-multiple-Ring (inr (inl star)) {x} H =
+  commute-integer-multiple-Ring (inr (inl _)) {x} H =
     tr
       ( commute-Ring R _)
       ( inv (integer-multiple-zero-Ring R x))
@@ -400,7 +400,7 @@ module _
         ( commute-right-subtraction-Ring R
           ( commute-integer-multiples-Ring l (inl k) (inv H))
           ( inv (commute-integer-multiple-Ring l H))))
-  commute-integer-multiples-Ring (inr (inl star)) l {x} H =
+  commute-integer-multiples-Ring (inr (inl _)) l {x} H =
     tr
       ( commute-Ring' R _)
       ( inv (integer-multiple-zero-Ring R x))

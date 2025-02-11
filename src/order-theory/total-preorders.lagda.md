@@ -36,7 +36,7 @@ module _
 
   incident-Preorder-Prop : (x y : type-Preorder X) → Prop l2
   incident-Preorder-Prop x y =
-    disj-Prop (leq-Preorder-Prop X x y) (leq-Preorder-Prop X y x)
+    (leq-prop-Preorder X x y) ∨ (leq-prop-Preorder X y x)
 
   incident-Preorder : (x y : type-Preorder X) → UU l2
   incident-Preorder x y = type-Prop (incident-Preorder-Prop x y)
@@ -78,7 +78,7 @@ module _
   type-Total-Preorder = type-Preorder preorder-Total-Preorder
 
   leq-Total-Preorder-Prop : (x y : type-Total-Preorder) → Prop l2
-  leq-Total-Preorder-Prop = leq-Preorder-Prop preorder-Total-Preorder
+  leq-Total-Preorder-Prop = leq-prop-Preorder preorder-Total-Preorder
 
   leq-Total-Preorder : (x y : type-Total-Preorder) → UU l2
   leq-Total-Preorder = leq-Preorder preorder-Total-Preorder

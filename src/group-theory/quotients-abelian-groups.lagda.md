@@ -27,6 +27,7 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups
+open import group-theory.nullifying-group-homomorphisms
 open import group-theory.quotient-groups
 open import group-theory.semigroups
 open import group-theory.subgroups-abelian-groups
@@ -84,12 +85,12 @@ module _
       ( group-Ab B)
       ( normal-subgroup-Subgroup-Ab A H)
 
-  nullifies-nullifying-hom-Ab :
+  nullifies-subgroup-nullifying-hom-Ab :
     (H : Subgroup-Ab l3 A) (f : nullifying-hom-Ab H) →
     nullifies-normal-subgroup-hom-Ab
       ( hom-nullifying-hom-Ab H f) H
-  nullifies-nullifying-hom-Ab H =
-    nullifies-nullifying-hom-Group
+  nullifies-subgroup-nullifying-hom-Ab H =
+    nullifies-normal-subgroup-nullifying-hom-Group
       ( group-Ab A)
       ( group-Ab B)
       ( normal-subgroup-Subgroup-Ab A H)
@@ -129,31 +130,31 @@ module _
 
   set-quotient-Ab : Set (l1 ⊔ l2)
   set-quotient-Ab =
-    quotient-Set (eq-rel-congruence-Subgroup-Ab A H)
+    quotient-Set (equivalence-relation-congruence-Subgroup-Ab A H)
 
   type-quotient-Ab : UU (l1 ⊔ l2)
   type-quotient-Ab =
-    set-quotient (eq-rel-congruence-Subgroup-Ab A H)
+    set-quotient (equivalence-relation-congruence-Subgroup-Ab A H)
 
   is-set-type-quotient-Ab : is-set type-quotient-Ab
   is-set-type-quotient-Ab =
-    is-set-set-quotient (eq-rel-congruence-Subgroup-Ab A H)
+    is-set-set-quotient (equivalence-relation-congruence-Subgroup-Ab A H)
 
   map-quotient-hom-Ab : type-Ab A → type-quotient-Ab
   map-quotient-hom-Ab =
-    quotient-map (eq-rel-congruence-Subgroup-Ab A H)
+    quotient-map (equivalence-relation-congruence-Subgroup-Ab A H)
 
   is-surjective-map-quotient-hom-Ab :
     is-surjective map-quotient-hom-Ab
   is-surjective-map-quotient-hom-Ab =
-    is-surjective-quotient-map (eq-rel-congruence-Subgroup-Ab A H)
+    is-surjective-quotient-map (equivalence-relation-congruence-Subgroup-Ab A H)
 
   is-effective-map-quotient-hom-Ab :
     is-effective
-      ( eq-rel-congruence-Subgroup-Ab A H)
+      ( equivalence-relation-congruence-Subgroup-Ab A H)
       ( map-quotient-hom-Ab)
   is-effective-map-quotient-hom-Ab =
-    is-effective-quotient-map (eq-rel-congruence-Subgroup-Ab A H)
+    is-effective-quotient-map (equivalence-relation-congruence-Subgroup-Ab A H)
 
   apply-effectiveness-map-quotient-hom-Ab :
     {x y : type-Ab A} →
@@ -161,7 +162,7 @@ module _
     sim-congruence-Subgroup-Ab A H x y
   apply-effectiveness-map-quotient-hom-Ab =
     apply-effectiveness-quotient-map
-      ( eq-rel-congruence-Subgroup-Ab A H)
+      ( equivalence-relation-congruence-Subgroup-Ab A H)
 
   apply-effectiveness-map-quotient-hom-Ab' :
     {x y : type-Ab A} →
@@ -169,25 +170,24 @@ module _
     map-quotient-hom-Ab x ＝ map-quotient-hom-Ab y
   apply-effectiveness-map-quotient-hom-Ab' =
     apply-effectiveness-quotient-map'
-      ( eq-rel-congruence-Subgroup-Ab A H)
+      ( equivalence-relation-congruence-Subgroup-Ab A H)
 
   reflecting-map-quotient-hom-Ab :
-    reflecting-map-Equivalence-Relation
-      ( eq-rel-congruence-Subgroup-Ab A H)
+    reflecting-map-equivalence-relation
+      ( equivalence-relation-congruence-Subgroup-Ab A H)
       ( type-quotient-Ab)
   reflecting-map-quotient-hom-Ab =
     reflecting-map-quotient-map
-      ( eq-rel-congruence-Subgroup-Ab A H)
+      ( equivalence-relation-congruence-Subgroup-Ab A H)
 
   is-set-quotient-set-quotient-Ab :
-    {l : Level} →
-    is-set-quotient l
-      ( eq-rel-congruence-Subgroup-Ab A H)
+    is-set-quotient
+      ( equivalence-relation-congruence-Subgroup-Ab A H)
       ( set-quotient-Ab)
       ( reflecting-map-quotient-hom-Ab)
   is-set-quotient-set-quotient-Ab =
     is-set-quotient-set-quotient
-      ( eq-rel-congruence-Subgroup-Ab A H)
+      ( equivalence-relation-congruence-Subgroup-Ab A H)
 ```
 
 #### The group structure on the quotient group
@@ -197,10 +197,10 @@ module _
   zero-quotient-Ab = map-quotient-hom-Ab (zero-Ab A)
 
   binary-hom-add-quotient-Ab :
-    binary-hom-Equivalence-Relation
-      ( eq-rel-congruence-Subgroup-Ab A H)
-      ( eq-rel-congruence-Subgroup-Ab A H)
-      ( eq-rel-congruence-Subgroup-Ab A H)
+    binary-hom-equivalence-relation
+      ( equivalence-relation-congruence-Subgroup-Ab A H)
+      ( equivalence-relation-congruence-Subgroup-Ab A H)
+      ( equivalence-relation-congruence-Subgroup-Ab A H)
   binary-hom-add-quotient-Ab =
     binary-hom-mul-quotient-Group
       ( group-Ab A)
@@ -228,9 +228,9 @@ module _
       ( normal-subgroup-Subgroup-Ab A H)
 
   hom-neg-quotient-Ab :
-    hom-Equivalence-Relation
-      ( eq-rel-congruence-Subgroup-Ab A H)
-      ( eq-rel-congruence-Subgroup-Ab A H)
+    hom-equivalence-relation
+      ( equivalence-relation-congruence-Subgroup-Ab A H)
+      ( equivalence-relation-congruence-Subgroup-Ab A H)
   hom-neg-quotient-Ab =
     hom-inv-quotient-Group
       ( group-Ab A)
@@ -293,7 +293,7 @@ module _
     add-quotient-Ab x y ＝ add-quotient-Ab y x
   commutative-add-quotient-Ab =
     double-induction-set-quotient'
-      ( eq-rel-congruence-Subgroup-Ab A H)
+      ( equivalence-relation-congruence-Subgroup-Ab A H)
       ( λ x y →
         Id-Prop
           ( set-quotient-Ab)
@@ -301,8 +301,8 @@ module _
           ( add-quotient-Ab y x))
       ( λ x y →
         ( compute-add-quotient-Ab x y) ∙
-        ( ( ap map-quotient-hom-Ab (commutative-add-Ab A x y)) ∙
-          ( inv (compute-add-quotient-Ab y x))))
+        ( ap map-quotient-hom-Ab (commutative-add-Ab A x y)) ∙
+        ( inv (compute-add-quotient-Ab y x)))
 
   semigroup-quotient-Ab : Semigroup (l1 ⊔ l2)
   semigroup-quotient-Ab =

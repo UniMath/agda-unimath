@@ -35,7 +35,6 @@ module _
 
   leq-prop-Π-Large-Preorder :
     Large-Relation-Prop
-      ( λ l1 → α l1 ⊔ l)
       ( λ l1 l2 → β l1 l2 ⊔ l)
       ( type-Π-Large-Preorder)
   leq-prop-Π-Large-Preorder x y =
@@ -43,7 +42,6 @@ module _
 
   leq-Π-Large-Preorder :
     Large-Relation
-      ( λ l1 → α l1 ⊔ l)
       ( λ l1 l2 → β l1 l2 ⊔ l)
       ( type-Π-Large-Preorder)
   leq-Π-Large-Preorder x y =

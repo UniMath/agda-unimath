@@ -11,13 +11,16 @@ open import category-theory.functors-precategories
 open import category-theory.natural-transformations-maps-precategories
 open import category-theory.precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -69,12 +72,12 @@ module _
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G)
 
-  coherence-square-natural-transformation-Precategory :
+  naturality-natural-transformation-Precategory :
     (γ : natural-transformation-Precategory) →
     is-natural-transformation-Precategory
       ( hom-family-natural-transformation-Precategory γ)
-  coherence-square-natural-transformation-Precategory =
-    coherence-square-natural-transformation-map-Precategory C D
+  naturality-natural-transformation-Precategory =
+    naturality-natural-transformation-map-Precategory C D
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G)
 ```
@@ -104,6 +107,30 @@ module _
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G)
       ( map-functor-Precategory C D H)
+```
+
+## Equality of functors induces a natural transformation
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  where
+
+  natural-transformation-eq-Precategory :
+    (F G : functor-Precategory C D) →
+    F ＝ G →
+    natural-transformation-Precategory C D F G
+  natural-transformation-eq-Precategory F G refl =
+    id-natural-transformation-Precategory C D F
+
+  natural-transformation-eq-inv-Precategory :
+    (F G : functor-Precategory C D) →
+    F ＝ G →
+    natural-transformation-Precategory C D G F
+  natural-transformation-eq-inv-Precategory F G =
+    natural-transformation-eq-Precategory G F ∘ inv
 ```
 
 ## Properties
@@ -239,4 +266,120 @@ module _
       ( map-functor-Precategory C D G)
       ( map-functor-Precategory C D H)
       ( map-functor-Precategory C D I)
+
+  involutive-eq-associative-comp-natural-transformation-Precategory :
+    (F G H I : functor-Precategory C D)
+    (α : natural-transformation-Precategory C D F G)
+    (β : natural-transformation-Precategory C D G H)
+    (γ : natural-transformation-Precategory C D H I) →
+    comp-natural-transformation-Precategory C D F G I
+      ( comp-natural-transformation-Precategory C D G H I γ β) α ＝ⁱ
+    comp-natural-transformation-Precategory C D F H I γ
+      ( comp-natural-transformation-Precategory C D F G H β α)
+  involutive-eq-associative-comp-natural-transformation-Precategory F G H I =
+    involutive-eq-associative-comp-natural-transformation-map-Precategory C D
+      ( map-functor-Precategory C D F)
+      ( map-functor-Precategory C D G)
+      ( map-functor-Precategory C D H)
+      ( map-functor-Precategory C D I)
+```
+
+## Whiskering
+
+If `α : F ⇒ G` is a natural transformations between functors `F, G : C → D`, and
+`H : D → E` is another functor, we can form the natural transformation
+`H • α : H ∘ F ⇒ H ∘ G`. Its component at `x` is `(H • α)(x) = H(α(x))`.
+
+On the other hand, if we have a functor `K : B → C`, we can form a natural
+transformation `α • K : F ∘ K ⇒ G ∘ K`. Its component at `x` is
+`(α • K)(x) = α(K(x))`.
+
+Here, `•` denotes _whiskering_. Note that there are two kinds of whiskering,
+depending on whether the first or the second parameter expects a natural
+transformation.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (E : Precategory l5 l6)
+  where
+
+  left-whisker-natural-transformation-Precategory :
+    (F G : functor-Precategory C D)
+    (H : functor-Precategory D E)
+    (α : natural-transformation-Precategory C D F G) →
+    natural-transformation-Precategory
+      ( C)
+      ( E)
+      ( comp-functor-Precategory C D E H F)
+      ( comp-functor-Precategory C D E H G)
+  left-whisker-natural-transformation-Precategory F G H α =
+    ( λ x → (pr1 (pr2 H)) ((pr1 α) x)) ,
+    ( λ {x} {y} → λ f →
+      inv
+        ( preserves-comp-functor-Precategory
+          ( D)
+          ( E)
+          ( H)
+          ( (pr1 (pr2 G)) f)
+          ( (pr1 α) x)) ∙
+      ( ap (pr1 (pr2 H)) ((pr2 α) f)) ∙
+      ( preserves-comp-functor-Precategory
+        ( D)
+        ( E)
+        ( H)
+        ( (pr1 α) y)
+        ( (pr1 (pr2 F)) f)))
+
+  right-whisker-natural-transformation-Precategory :
+    (F G : functor-Precategory C D)
+    (α : natural-transformation-Precategory C D F G)
+    (K : functor-Precategory E C) →
+    natural-transformation-Precategory
+      ( E)
+      ( D)
+      ( comp-functor-Precategory E C D F K)
+      ( comp-functor-Precategory E C D G K)
+  right-whisker-natural-transformation-Precategory F G α K =
+    (λ x → (pr1 α) ((pr1 K) x)) , (λ f → (pr2 α) ((pr1 (pr2 K)) f))
+```
+
+## Horizontal composition
+
+Horizontal composition (here denoted by `*`) is generalized
+[whiskering](category-theory.natural-transformations-functors-precategories.md#whiskering)
+(here denoted by `•`), and also defined by it. Given natural transformations
+`α : F ⇒ G`, `F, G : C → D`, and `β : H ⇒ I`, `H, I : D → E`, we can form a
+natural transformation `β * α : H ∘ F ⇒ I ∘ G`.
+
+More precisely, `β * α = (β • G) ∘ (H • α)`, that is, we compose two natural
+transformations obtained by whiskering.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (E : Precategory l5 l6)
+  where
+
+  horizontal-comp-natural-transformation-Precategory :
+    (F G : functor-Precategory C D)
+    (H I : functor-Precategory D E)
+    (β : natural-transformation-Precategory D E H I)
+    (α : natural-transformation-Precategory C D F G) →
+    natural-transformation-Precategory
+      ( C)
+      ( E)
+      ( comp-functor-Precategory C D E H F)
+      ( comp-functor-Precategory C D E I G)
+  horizontal-comp-natural-transformation-Precategory F G H I β α =
+    comp-natural-transformation-Precategory C E
+      ( comp-functor-Precategory C D E H F)
+      ( comp-functor-Precategory C D E H G)
+      ( comp-functor-Precategory C D E I G)
+      ( right-whisker-natural-transformation-Precategory D E C H I β G)
+      ( left-whisker-natural-transformation-Precategory C D E F G H α)
 ```

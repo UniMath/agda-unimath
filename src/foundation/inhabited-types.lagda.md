@@ -7,8 +7,11 @@ module foundation.inhabited-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
+open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.propositional-truncations
@@ -16,10 +19,11 @@ open import foundation.subtype-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -45,7 +49,7 @@ is-inhabited-Prop X = trunc-Prop X
 is-inhabited : {l : Level} → UU l → UU l
 is-inhabited X = type-Prop (is-inhabited-Prop X)
 
-is-property-is-inhabited : {l : Level} → (X : UU l) → is-prop (is-inhabited X)
+is-property-is-inhabited : {l : Level} (X : UU l) → is-prop (is-inhabited X)
 is-property-is-inhabited X = is-prop-type-Prop (is-inhabited-Prop X)
 
 Inhabited-Type : (l : Level) → UU (lsuc l)
@@ -98,11 +102,11 @@ module _
   {l : Level} (X : Inhabited-Type l)
   where
 
-  is-contr-total-equiv-Inhabited-Type :
-    is-contr (Σ (Inhabited-Type l) (equiv-Inhabited-Type X))
-  is-contr-total-equiv-Inhabited-Type =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-equiv (type-Inhabited-Type X))
+  is-torsorial-equiv-Inhabited-Type :
+    is-torsorial (equiv-Inhabited-Type X)
+  is-torsorial-equiv-Inhabited-Type =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-equiv (type-Inhabited-Type X))
       ( λ X → is-prop-type-trunc-Prop)
       ( type-Inhabited-Type X)
       ( id-equiv)
@@ -116,7 +120,7 @@ module _
     (Y : Inhabited-Type l) → is-equiv (equiv-eq-Inhabited-Type Y)
   is-equiv-equiv-eq-Inhabited-Type =
     fundamental-theorem-id
-      is-contr-total-equiv-Inhabited-Type
+      is-torsorial-equiv-Inhabited-Type
       equiv-eq-Inhabited-Type
 
   extensionality-Inhabited-Type :
@@ -146,12 +150,10 @@ module _
   id-equiv-Fam-Inhabited-Types : equiv-Fam-Inhabited-Types Y Y
   id-equiv-Fam-Inhabited-Types = id-equiv-fam (type-Fam-Inhabited-Types Y)
 
-  is-contr-total-equiv-Fam-Inhabited-Types :
-    is-contr (Σ (Fam-Inhabited-Types l2 X) (equiv-Fam-Inhabited-Types Y))
-  is-contr-total-equiv-Fam-Inhabited-Types =
-    is-contr-total-Eq-Π
-      ( λ x → equiv-Inhabited-Type (Y x))
-      ( λ x → is-contr-total-equiv-Inhabited-Type (Y x))
+  is-torsorial-equiv-Fam-Inhabited-Types :
+    is-torsorial (equiv-Fam-Inhabited-Types Y)
+  is-torsorial-equiv-Fam-Inhabited-Types =
+    is-torsorial-Eq-Π (λ x → is-torsorial-equiv-Inhabited-Type (Y x))
 
   equiv-eq-Fam-Inhabited-Types :
     (Z : Fam-Inhabited-Types l2 X) → (Y ＝ Z) → equiv-Fam-Inhabited-Types Y Z
@@ -161,7 +163,7 @@ module _
     (Z : Fam-Inhabited-Types l2 X) → is-equiv (equiv-eq-Fam-Inhabited-Types Z)
   is-equiv-equiv-eq-Fam-Inhabited-Types =
     fundamental-theorem-id
-      is-contr-total-equiv-Fam-Inhabited-Types
+      is-torsorial-equiv-Fam-Inhabited-Types
       equiv-eq-Fam-Inhabited-Types
 ```
 
@@ -196,7 +198,7 @@ pr2 (Σ-Inhabited-Type X Y) =
 ```agda
 map-is-inhabited :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  (f : (A → B)) → is-inhabited A → is-inhabited B
+  (f : A → B) → is-inhabited A → is-inhabited B
 map-is-inhabited f = map-trunc-Prop f
 ```
 
@@ -209,11 +211,43 @@ is-inhabited-is-contr p =
   unit-trunc-Prop (center p)
 ```
 
+### Inhabited propositions are contractible
+
+```agda
+is-contr-is-inhabited-is-prop :
+  {l1 : Level} {A : UU l1} → is-prop A → is-inhabited A → is-contr A
+is-contr-is-inhabited-is-prop {A = A} p h =
+  apply-universal-property-trunc-Prop
+    ( h)
+    ( is-contr-Prop A)
+    ( λ a → a , eq-is-prop' p a)
+```
+
+### Contractibility of the base of a dependent sum
+
+Given a type `A` and a type family over it `B`, then if the dependent sum
+`Σ A B` is contractible, it follows that if there merely exists a section
+`(x : A) → B x`, then `A` is contractible.
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
+  where
+
+  abstract
+    is-contr-base-is-contr-Σ :
+      is-inhabited ((x : A) → B x) → is-contr (Σ A B) → is-contr A
+    is-contr-base-is-contr-Σ s is-contr-ΣAB =
+      rec-trunc-Prop
+        ( is-contr-Prop A)
+        ( λ s → is-contr-base-is-contr-Σ' A B s is-contr-ΣAB)
+        ( s)
+```
+
 ## See also
 
 - The notion of _nonempty types_ is treated in
   [`foundation.empty-types`](foundation.empty-types.md). In particular, every
   inhabited type is nonempty.
-
 - For the notion of _pointed types_, see
   [`structured-types.pointed-types`](structured-types.pointed-types.md).

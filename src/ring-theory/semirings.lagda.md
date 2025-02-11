@@ -30,11 +30,13 @@ open import group-theory.semigroups
 
 ## Idea
 
-The concept of semiring vastly generalizes the arithmetical structure on the
-natural numbers. A semiring consists of a set equipped with addition and
-multiplication, where the addition operation gives the ring the structure of a
-commutative monoid, and the multiplication is associative, unital, and
-distributive over addition.
+The concept of a _semiring_ vastly generalizes the arithmetical structure on the
+[natural numbers](elementary-number-theory.natural-numbers.md). A
+{{#concept "semiring" Agda=Semiring}} consists of a
+[set](foundation-core.sets.md) equipped with addition and multiplication, where
+the addition operation gives the semiring the structure of a
+[commutative monoid](group-theory.commutative-monoids.md), and the
+multiplication is associative, unital, and distributive over addition.
 
 ## Definitions
 

@@ -23,26 +23,18 @@ Semigroups and semigroup homomorphisms form a precategory.
 
 ## Definition
 
-### The precategory of semigroups
+### The large precategory of semigroups
 
 ```agda
-instance
-  Semigroup-Large-Precategory : Large-Precategory lsuc (_⊔_)
-  obj-Large-Precategory Semigroup-Large-Precategory = Semigroup
-  hom-set-Large-Precategory Semigroup-Large-Precategory = hom-set-Semigroup
-  comp-hom-Large-Precategory Semigroup-Large-Precategory
-    {X = G} {H} {K} =
-    comp-hom-Semigroup G H K
-  id-hom-Large-Precategory Semigroup-Large-Precategory
-    {X = G} =
-    id-hom-Semigroup G
-  associative-comp-hom-Large-Precategory Semigroup-Large-Precategory
-    {X = G} {H} {K} {L} =
-    associative-comp-hom-Semigroup G H K L
-  left-unit-law-comp-hom-Large-Precategory Semigroup-Large-Precategory
-    {X = G} {H} =
-    left-unit-law-comp-hom-Semigroup G H
-  right-unit-law-comp-hom-Large-Precategory Semigroup-Large-Precategory
-    {X = G} {H} =
-    right-unit-law-comp-hom-Semigroup G H
+Semigroup-Large-Precategory : Large-Precategory lsuc (_⊔_)
+Semigroup-Large-Precategory =
+  make-Large-Precategory
+    ( Semigroup)
+    ( hom-set-Semigroup)
+    ( λ {l1} {l2} {l3} {G} {H} {K} → comp-hom-Semigroup G H K)
+    ( λ {l} {G} → id-hom-Semigroup G)
+    ( λ {l1} {l2} {l3} {l4} {G} {H} {K} {L} →
+      associative-comp-hom-Semigroup G H K L)
+    ( λ {l1} {l2} {G} {H} → left-unit-law-comp-hom-Semigroup G H)
+    ( λ {l1} {l2} {G} {H} → right-unit-law-comp-hom-Semigroup G H)
 ```

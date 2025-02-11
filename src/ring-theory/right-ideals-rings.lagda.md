@@ -8,7 +8,6 @@ module ring-theory.right-ideals-rings where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
@@ -16,6 +15,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import ring-theory.rings
@@ -47,12 +47,12 @@ module _
   is-prop-is-right-ideal-subset-Ring :
     {l2 : Level} (S : subset-Ring l2 R) → is-prop (is-right-ideal-subset-Ring S)
   is-prop-is-right-ideal-subset-Ring S =
-    is-prop-prod
+    is-prop-product
       ( is-prop-is-additive-subgroup-subset-Ring R S)
       ( is-prop-is-closed-under-right-multiplication-subset-Ring R S)
 
 right-ideal-Ring :
-  (l : Level) {l1 : Level} (R : Ring l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (R : Ring l1) → UU (lsuc l ⊔ l1)
 right-ideal-Ring l R = Σ (subset-Ring l R) (is-right-ideal-subset-Ring R)
 
 module _
@@ -153,12 +153,11 @@ module _
   refl-has-same-elements-right-ideal-Ring =
     refl-has-same-elements-subtype (subset-right-ideal-Ring R I)
 
-  is-contr-total-has-same-elements-right-ideal-Ring :
-    is-contr
-      ( Σ (right-ideal-Ring l2 R) (has-same-elements-right-ideal-Ring R I))
-  is-contr-total-has-same-elements-right-ideal-Ring =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-has-same-elements-subtype (subset-right-ideal-Ring R I))
+  is-torsorial-has-same-elements-right-ideal-Ring :
+    is-torsorial (has-same-elements-right-ideal-Ring R I)
+  is-torsorial-has-same-elements-right-ideal-Ring =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-has-same-elements-subtype (subset-right-ideal-Ring R I))
       ( is-prop-is-right-ideal-subset-Ring R)
       ( subset-right-ideal-Ring R I)
       ( refl-has-same-elements-right-ideal-Ring)
@@ -175,7 +174,7 @@ module _
     is-equiv (has-same-elements-eq-right-ideal-Ring J)
   is-equiv-has-same-elements-eq-right-ideal-Ring =
     fundamental-theorem-id
-      is-contr-total-has-same-elements-right-ideal-Ring
+      is-torsorial-has-same-elements-right-ideal-Ring
       has-same-elements-eq-right-ideal-Ring
 
   extensionality-right-ideal-Ring :

@@ -57,18 +57,3 @@ join-PBT-𝕎 x y = tree-𝕎 true α
   α true = x
   α false = y
 ```
-
-## Properties
-
-### The types `Planar-Bin-Tree` and `PBT-𝕎` are equivalent
-
-```agda
-{-
-Planar-Bin-Tree-PBT-𝕎 : PBT-𝕎 → Planar-Bin-Tree
-Planar-Bin-Tree-PBT-𝕎 (tree-𝕎 true α) =
-  join-PBT
-    ( Planar-Bin-Tree-PBT-𝕎 (α true))
-    ( Planar-Bin-Tree-PBT-𝕎 (α false))
-Planar-Bin-Tree-PBT-𝕎 (tree-𝕎 false α) = {!!}
--}
-```

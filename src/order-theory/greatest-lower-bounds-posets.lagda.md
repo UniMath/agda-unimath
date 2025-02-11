@@ -56,7 +56,7 @@ module _
       ( λ y →
         iff-Prop
           ( is-binary-lower-bound-Poset-Prop P a b y)
-          ( leq-Poset-Prop P y x))
+          ( leq-prop-Poset P y x))
 
   is-greatest-binary-lower-bound-Poset : type-Poset P → UU (l1 ⊔ l2)
   is-greatest-binary-lower-bound-Poset x =
@@ -76,8 +76,8 @@ module _
     {x y : type-Poset P} →
     is-greatest-binary-lower-bound-Poset P a b x →
     is-binary-lower-bound-Poset P a b y → leq-Poset P y x
-  forward-implication-is-greatest-binary-lower-bound-Poset H =
-    forward-implication (H _)
+  forward-implication-is-greatest-binary-lower-bound-Poset {x} {y} H =
+    forward-implication (H y)
 
   backward-implication-is-greatest-binary-lower-bound-Poset :
     {x y : type-Poset P} →
@@ -100,9 +100,9 @@ module _
     {x : type-Poset P} →
     is-greatest-binary-lower-bound-Poset P a b x →
     is-binary-lower-bound-Poset P a b x
-  is-binary-lower-bound-is-greatest-binary-lower-bound-Poset H =
+  is-binary-lower-bound-is-greatest-binary-lower-bound-Poset {x} H =
     backward-implication-is-greatest-binary-lower-bound-Poset H
-      ( refl-leq-Poset P _)
+      ( refl-leq-Poset P x)
 
   leq-left-is-greatest-binary-lower-bound-Poset :
     {x : type-Poset P} →
@@ -180,26 +180,26 @@ module _
   {l1 l2 l3 : Level} (P : Poset l1 l2) {I : UU l3} (a : I → type-Poset P)
   where
 
-  is-greatest-lower-bound-family-of-elements-Poset-Prop :
+  is-greatest-lower-bound-family-of-elements-prop-Poset :
     type-Poset P → Prop (l1 ⊔ l2 ⊔ l3)
-  is-greatest-lower-bound-family-of-elements-Poset-Prop x =
+  is-greatest-lower-bound-family-of-elements-prop-Poset x =
     Π-Prop
       ( type-Poset P)
       ( λ y →
         iff-Prop
-          ( Π-Prop I (λ i → leq-Poset-Prop P y (a i)))
-          ( leq-Poset-Prop P y x))
+          ( Π-Prop I (λ i → leq-prop-Poset P y (a i)))
+          ( leq-prop-Poset P y x))
 
   is-greatest-lower-bound-family-of-elements-Poset :
     type-Poset P → UU (l1 ⊔ l2 ⊔ l3)
   is-greatest-lower-bound-family-of-elements-Poset z =
-    type-Prop (is-greatest-lower-bound-family-of-elements-Poset-Prop z)
+    type-Prop (is-greatest-lower-bound-family-of-elements-prop-Poset z)
 
   is-prop-is-greatest-lower-bound-family-of-elements-Poset :
     (z : type-Poset P) →
     is-prop (is-greatest-lower-bound-family-of-elements-Poset z)
   is-prop-is-greatest-lower-bound-family-of-elements-Poset z =
-    is-prop-type-Prop (is-greatest-lower-bound-family-of-elements-Poset-Prop z)
+    is-prop-type-Prop (is-greatest-lower-bound-family-of-elements-prop-Poset z)
 
 module _
   {l1 l2 l3 : Level} (P : Poset l1 l2) {I : UU l3} {a : I → type-Poset P}
@@ -209,23 +209,25 @@ module _
     {x y : type-Poset P} →
     is-greatest-lower-bound-family-of-elements-Poset P a x →
     ((i : I) → leq-Poset P y (a i)) → leq-Poset P y x
-  forward-implication-is-greatest-lower-bound-family-of-elements-Poset H =
-    forward-implication (H _)
+  forward-implication-is-greatest-lower-bound-family-of-elements-Poset
+    { x} {y} H =
+    forward-implication (H y)
 
   backward-implication-is-greatest-lower-bound-family-of-elements-Poset :
     {x y : type-Poset P} →
     is-greatest-lower-bound-family-of-elements-Poset P a x →
     leq-Poset P y x → (i : I) → leq-Poset P y (a i)
-  backward-implication-is-greatest-lower-bound-family-of-elements-Poset H =
-    backward-implication (H _)
+  backward-implication-is-greatest-lower-bound-family-of-elements-Poset
+    {x} {y} H =
+    backward-implication (H y)
 
   is-lower-bound-is-greatest-lower-bound-family-of-elements-Poset :
     {x : type-Poset P} →
     is-greatest-lower-bound-family-of-elements-Poset P a x →
     is-lower-bound-family-of-elements-Poset P a x
-  is-lower-bound-is-greatest-lower-bound-family-of-elements-Poset H =
+  is-lower-bound-is-greatest-lower-bound-family-of-elements-Poset {x} H =
     backward-implication-is-greatest-lower-bound-family-of-elements-Poset H
-      ( refl-leq-Poset P _)
+      ( refl-leq-Poset P x)
 ```
 
 ### The proposition that a family of elements has a greatest lower bound
@@ -244,7 +246,7 @@ module _
   all-elements-equal-has-greatest-lower-bound-family-of-elements-Poset
     ( x , H) (y , K) =
     eq-type-subtype
-      ( is-greatest-lower-bound-family-of-elements-Poset-Prop P a)
+      ( is-greatest-lower-bound-family-of-elements-prop-Poset P a)
       ( antisymmetric-leq-Poset P x y
         ( forward-implication-is-greatest-lower-bound-family-of-elements-Poset
           ( P)
@@ -265,10 +267,10 @@ module _
     is-prop-all-elements-equal
       all-elements-equal-has-greatest-lower-bound-family-of-elements-Poset
 
-  has-greatest-lower-bound-family-of-elements-Poset-Prop : Prop (l1 ⊔ l2 ⊔ l3)
-  pr1 has-greatest-lower-bound-family-of-elements-Poset-Prop =
+  has-greatest-lower-bound-family-of-elements-prop-Poset : Prop (l1 ⊔ l2 ⊔ l3)
+  pr1 has-greatest-lower-bound-family-of-elements-prop-Poset =
     has-greatest-lower-bound-family-of-elements-Poset
-  pr2 has-greatest-lower-bound-family-of-elements-Poset-Prop =
+  pr2 has-greatest-lower-bound-family-of-elements-prop-Poset =
     is-prop-has-greatest-lower-bound-family-of-elements-Poset
 
 module _
@@ -280,12 +282,12 @@ module _
     is-greatest-lower-bound-family-of-elements-Poset P a x →
     is-greatest-lower-bound-family-of-elements-Poset P a y →
     x ＝ y
-  eq-is-greatest-lower-bound-family-of-elements-Poset H K =
+  eq-is-greatest-lower-bound-family-of-elements-Poset {x} {y} H K =
     ap
       ( pr1)
       ( all-elements-equal-has-greatest-lower-bound-family-of-elements-Poset
         ( P)
         ( a)
-        ( _ , H)
-        ( _ , K))
+        ( x , H)
+        ( y , K))
 ```

@@ -18,6 +18,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -249,13 +250,11 @@ module _
   eq-htpy-rooted-hom-Directed-Tree g =
     map-inv-equiv (extensionality-rooted-hom-Directed-Tree g)
 
-  is-contr-total-htpy-rooted-hom-Directed-Tree :
-    is-contr
-      ( Σ ( rooted-hom-Directed-Tree S T)
-          ( htpy-rooted-hom-Directed-Tree S T f))
-  is-contr-total-htpy-rooted-hom-Directed-Tree =
+  is-torsorial-htpy-rooted-hom-Directed-Tree :
+    is-torsorial (htpy-rooted-hom-Directed-Tree S T f)
+  is-torsorial-htpy-rooted-hom-Directed-Tree =
     is-contr-equiv'
       ( Σ (rooted-hom-Directed-Tree S T) (λ g → f ＝ g))
       ( equiv-tot extensionality-rooted-hom-Directed-Tree)
-      ( is-contr-total-path f)
+      ( is-torsorial-Id f)
 ```

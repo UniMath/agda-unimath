@@ -36,8 +36,8 @@ open import order-theory.order-preserving-maps-large-posets
 ## Idea
 
 A **closure operator** on a [large locale](order-theory.large-locales.md) `L` is
-simply a [closure operator](order-theory.closure-operators-large-posets.md) on
-the underlying [large poset](order-theory.large-posets.md) of `L`.
+a [closure operator](order-theory.closure-operators-large-posets.md) on the
+underlying [large poset](order-theory.large-posets.md) of `L`.
 
 We show that if the closed elements are closed under meets, then the closed
 elements form a large locale. Note that the condition that the closed elements
@@ -63,7 +63,8 @@ module _
     where
 
     hom-large-poset-closure-operator-Large-Locale :
-      hom-set-Large-Poset id
+      hom-Large-Poset
+        ( λ l → l)
         ( large-poset-Large-Locale L)
         ( large-poset-Large-Locale L)
     hom-large-poset-closure-operator-Large-Locale =
@@ -191,14 +192,14 @@ module _
       ( large-subposet-closure-operator-Large-Locale)
 
   leq-prop-closed-element-closure-operator-Large-Locale :
-    Large-Relation-Prop α β closed-element-closure-operator-Large-Locale
+    Large-Relation-Prop β closed-element-closure-operator-Large-Locale
   leq-prop-closed-element-closure-operator-Large-Locale =
     leq-prop-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-closure-operator-Large-Locale)
 
   leq-closed-element-closure-operator-Large-Locale :
-    Large-Relation α β closed-element-closure-operator-Large-Locale
+    Large-Relation β closed-element-closure-operator-Large-Locale
   leq-closed-element-closure-operator-Large-Locale =
     leq-Large-Subposet
       ( large-poset-Large-Locale L)

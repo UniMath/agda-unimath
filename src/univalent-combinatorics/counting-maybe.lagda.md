@@ -28,7 +28,7 @@ The elements of a type `X` can be counted if and only if the elements of
 
 ```agda
 count-Maybe : {l : Level} {X : UU l} → count X → count (Maybe X)
-count-Maybe {l} {X} e = count-coprod e count-unit
+count-Maybe {l} {X} e = count-coproduct e count-unit
 
 abstract
   is-nonzero-number-of-elements-count-Maybe :

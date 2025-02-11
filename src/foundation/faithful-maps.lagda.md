@@ -166,12 +166,12 @@ module _
           ( is-0-map-is-faithful is-faithful-h))
 
   abstract
-    is-faithful-comp-htpy :
+    is-faithful-left-map-triangle :
       (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
       is-faithful g → is-faithful h → is-faithful f
-    is-faithful-comp-htpy f g h H is-faithful-g is-faithful-h =
+    is-faithful-left-map-triangle f g h H is-faithful-g is-faithful-h =
       is-faithful-is-0-map
-        ( is-0-map-comp-htpy f g h H
+        ( is-0-map-left-map-triangle f g h H
           ( is-0-map-is-faithful is-faithful-g)
           ( is-0-map-is-faithful is-faithful-h))
 ```
@@ -192,12 +192,12 @@ module _
         ( is-0-map-is-faithful is-faithful-g)
         ( is-0-map-is-faithful is-faithful-gh))
 
-  is-faithful-right-factor-htpy :
+  is-faithful-top-map-triangle :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     is-faithful g → is-faithful f → is-faithful h
-  is-faithful-right-factor-htpy f g h H is-faithful-g is-faithful-f =
+  is-faithful-top-map-triangle f g h H is-faithful-g is-faithful-f =
     is-faithful-is-0-map
-      ( is-0-map-right-factor-htpy f g h H
+      ( is-0-map-top-map-triangle f g h H
         ( is-0-map-is-faithful is-faithful-g)
         ( is-0-map-is-faithful is-faithful-f))
 ```

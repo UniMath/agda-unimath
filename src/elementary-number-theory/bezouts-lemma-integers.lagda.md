@@ -21,7 +21,11 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.multiplication-positive-and-negative-integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -33,6 +37,11 @@ open import foundation.unit-type
 ```
 
 </details>
+
+Bézout's Lemma is the 60th theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}. It was
+originally added to agda-unimath by [Bryan Lu](https://blu-bird.github.io).
 
 ## Lemma
 
@@ -187,21 +196,22 @@ bezouts-lemma-refactor-hypotheses x y H K =
           ( mul-ℤ
             ( int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P))
             ( y))
-        x-prod-nonneg y-prod-nonneg
+        x-product-nonneg y-product-nonneg
   where
   P : is-nonzero-ℕ ((abs-ℤ x) +ℕ (abs-ℤ y))
   P = (refactor-pos-cond x y H K)
-  x-prod-nonneg :
+  x-product-nonneg :
     is-nonnegative-ℤ
       ( int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P) *ℤ x)
-  x-prod-nonneg = is-nonnegative-mul-ℤ
-    (is-nonnegative-int-ℕ
-      ( minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P))
-    (is-nonnegative-is-positive-ℤ H)
-  y-prod-nonneg :
+  x-product-nonneg =
+    is-nonnegative-mul-ℤ
+      ( is-nonnegative-int-ℕ
+        ( minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P))
+      ( is-nonnegative-is-positive-ℤ H)
+  y-product-nonneg :
     is-nonnegative-ℤ
       ( int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P) *ℤ y)
-  y-prod-nonneg =
+  y-product-nonneg =
     is-nonnegative-mul-ℤ
       ( is-nonnegative-int-ℕ
         ( minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P))
@@ -212,7 +222,7 @@ bezouts-lemma-pos-ints :
   Σ ℤ (λ s → Σ ℤ (λ t → (s *ℤ x) +ℤ (t *ℤ y) ＝ gcd-ℤ x y))
 bezouts-lemma-pos-ints x y H K =
   sx-ty-nonneg-case-split
-    ( decide-is-nonnegative-ℤ {(s *ℤ x) -ℤ (t *ℤ y)})
+    ( decide-is-nonnegative-is-nonnegative-neg-ℤ {(s *ℤ x) -ℤ (t *ℤ y)})
   where
   s : ℤ
   s = int-ℕ (minimal-positive-distance-x-coeff
@@ -312,7 +322,7 @@ bezouts-lemma-ℤ (inl x) (inr (inl star)) = pair neg-one-ℤ (pair one-ℤ eqn)
         by
           ap
             ( _+ℤ (one-ℤ *ℤ (inr (inl star))))
-            ( inv (is-left-mul-neg-one-neg-ℤ (inl x)))
+            ( left-neg-unit-law-mul-ℤ (inl x))
       ＝ (inr (inr x)) +ℤ zero-ℤ
         by ap ((inr (inr x)) +ℤ_) (right-zero-law-mul-ℤ one-ℤ)
       ＝ int-ℕ (abs-ℤ (inl x))
@@ -358,7 +368,7 @@ bezouts-lemma-ℤ (inr (inl star)) (inl y) = pair one-ℤ (pair neg-one-ℤ eqn)
         by
           ap
             ( (one-ℤ *ℤ (inr (inl star))) +ℤ_)
-            ( inv (is-left-mul-neg-one-neg-ℤ (inl y)))
+            ( left-neg-unit-law-mul-ℤ (inl y))
       ＝ zero-ℤ +ℤ (inr (inr y))
         by ap (_+ℤ (inr (inr y))) (right-zero-law-mul-ℤ one-ℤ)
       ＝ int-ℕ (abs-ℤ (inl y))
@@ -527,3 +537,7 @@ div-right-factor-coprime-ℕ x y z H K =
         ( tr (div-ℤ (int-ℕ x)) (inv (mul-int-ℕ y z)) (div-int-div-ℕ H))
       ( eq-gcd-gcd-int-ℕ x y ∙ ap int-ℕ K))
 ```
+
+## References
+
+{{#bibliography}}

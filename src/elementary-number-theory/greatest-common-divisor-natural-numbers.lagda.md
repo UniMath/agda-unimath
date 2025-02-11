@@ -42,6 +42,10 @@ The greatest common divisor of two natural numbers `x` and `y` is a number
 `gcd x y` such that any natural number `d : ℕ` is a common divisor of `x` and
 `y` if and only if it is a divisor of `gcd x y`.
 
+The algorithm defining the greatest common divisor is the 69th theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
+
 ## Definition
 
 ### Common divisors
@@ -84,7 +88,7 @@ pr2 (refl-is-common-divisor-ℕ x) = refl-div-ℕ x
 is-decidable-is-common-divisor-ℕ :
   (a b : ℕ) → is-decidable-fam (is-common-divisor-ℕ a b)
 is-decidable-is-common-divisor-ℕ a b x =
-  is-decidable-prod
+  is-decidable-product
     ( is-decidable-div-ℕ x a)
     ( is-decidable-div-ℕ x b)
 ```
@@ -137,7 +141,7 @@ is-decidable-is-multiple-of-gcd-ℕ a b n =
   is-decidable-function-type'
     ( is-decidable-neg (is-decidable-is-zero-ℕ (a +ℕ b)))
     ( λ np →
-      is-decidable-prod
+      is-decidable-product
         ( is-decidable-neg (is-decidable-is-zero-ℕ n))
         ( is-decidable-bounded-Π-ℕ
           ( is-common-divisor-ℕ a b)
@@ -358,7 +362,7 @@ preserves-is-common-divisor-mul-ℕ :
   (k a b d : ℕ) → is-common-divisor-ℕ a b d →
   is-common-divisor-ℕ (k *ℕ a) (k *ℕ b) (k *ℕ d)
 preserves-is-common-divisor-mul-ℕ k a b d =
-  map-prod
+  map-product
     ( preserves-div-mul-ℕ k d a)
     ( preserves-div-mul-ℕ k d b)
 
@@ -367,7 +371,7 @@ reflects-is-common-divisor-mul-ℕ :
   is-common-divisor-ℕ (k *ℕ a) (k *ℕ b) (k *ℕ d) →
   is-common-divisor-ℕ a b d
 reflects-is-common-divisor-mul-ℕ k a b d H =
-  map-prod
+  map-product
     ( reflects-div-mul-ℕ k d a H)
     ( reflects-div-mul-ℕ k d b H)
 ```
@@ -477,3 +481,7 @@ is-gcd-quotient-div-gcd-ℕ {a} {b} {d} nz H x =
         ( simplify-div-quotient-div-ℕ nz
           ( div-gcd-is-common-divisor-ℕ a b d H))
 ```
+
+## References
+
+{{#bibliography}}

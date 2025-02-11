@@ -22,7 +22,6 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -83,8 +82,7 @@ module _
 
   subset-radical-of-ideal-Commutative-Ring : type-Commutative-Ring A → Prop l2
   subset-radical-of-ideal-Commutative-Ring f =
-    ∃-Prop ℕ
-      ( λ n → is-in-ideal-Commutative-Ring A I (power-Commutative-Ring A n f))
+    ∃ ℕ (λ n → subset-ideal-Commutative-Ring A I (power-Commutative-Ring A n f))
 
   is-in-radical-of-ideal-Commutative-Ring : type-Commutative-Ring A → UU l2
   is-in-radical-of-ideal-Commutative-Ring =
@@ -94,7 +92,7 @@ module _
     (f : type-Commutative-Ring A) →
     is-in-ideal-Commutative-Ring A I f →
     is-in-radical-of-ideal-Commutative-Ring f
-  contains-ideal-radical-of-ideal-Commutative-Ring f H = intro-∃ 1 H
+  contains-ideal-radical-of-ideal-Commutative-Ring f H = intro-exists 1 H
 
   contains-zero-radical-of-ideal-Commutative-Ring :
     is-in-radical-of-ideal-Commutative-Ring (zero-Commutative-Ring A)
@@ -106,7 +104,7 @@ module _
   is-closed-under-addition-radical-of-ideal-Commutative-Ring :
     is-closed-under-addition-subset-Commutative-Ring A
       ( subset-radical-of-ideal-Commutative-Ring)
-  is-closed-under-addition-radical-of-ideal-Commutative-Ring x y H K =
+  is-closed-under-addition-radical-of-ideal-Commutative-Ring {x} {y} H K =
     apply-universal-property-trunc-Prop H
       ( subset-radical-of-ideal-Commutative-Ring (add-Commutative-Ring A x y))
       ( λ (n , p) →
@@ -114,10 +112,10 @@ module _
           ( subset-radical-of-ideal-Commutative-Ring
             ( add-Commutative-Ring A x y))
           ( λ (m , q) →
-            intro-∃
+            intro-exists
               ( n +ℕ m)
               ( is-closed-under-eq-ideal-Commutative-Ring' A I
-                ( is-closed-under-addition-ideal-Commutative-Ring A I _ _
+                ( is-closed-under-addition-ideal-Commutative-Ring A I
                   ( is-closed-under-right-multiplication-ideal-Commutative-Ring
                     ( A)
                     ( I)
@@ -135,11 +133,11 @@ module _
   is-closed-under-negatives-radical-of-ideal-Commutative-Ring :
     is-closed-under-negatives-subset-Commutative-Ring A
       ( subset-radical-of-ideal-Commutative-Ring)
-  is-closed-under-negatives-radical-of-ideal-Commutative-Ring x H =
+  is-closed-under-negatives-radical-of-ideal-Commutative-Ring {x} H =
     apply-universal-property-trunc-Prop H
       ( subset-radical-of-ideal-Commutative-Ring (neg-Commutative-Ring A x))
       ( λ (n , p) →
-        intro-∃ n
+        intro-exists n
           ( is-closed-under-eq-ideal-Commutative-Ring' A I
             ( is-closed-under-left-multiplication-ideal-Commutative-Ring A I _
               ( power-Commutative-Ring A n x)
@@ -153,7 +151,7 @@ module _
     apply-universal-property-trunc-Prop H
       ( subset-radical-of-ideal-Commutative-Ring (mul-Commutative-Ring A x y))
       ( λ (n , p) →
-        intro-∃ n
+        intro-exists n
           ( is-closed-under-eq-ideal-Commutative-Ring' A I
             ( is-closed-under-right-multiplication-ideal-Commutative-Ring A I
               ( power-Commutative-Ring A n x)
@@ -168,7 +166,7 @@ module _
     apply-universal-property-trunc-Prop H
       ( subset-radical-of-ideal-Commutative-Ring (mul-Commutative-Ring A x y))
       ( λ (n , p) →
-        intro-∃ n
+        intro-exists n
           ( is-closed-under-eq-ideal-Commutative-Ring' A I
             ( is-closed-under-left-multiplication-ideal-Commutative-Ring A I
               ( power-Commutative-Ring A n x)
@@ -191,7 +189,7 @@ module _
     apply-universal-property-trunc-Prop H
       ( subset-radical-of-ideal-Commutative-Ring x)
       ( λ (m , K) →
-        intro-∃
+        intro-exists
           ( mul-ℕ n m)
           ( is-closed-under-eq-ideal-Commutative-Ring' A I K
             ( power-mul-Commutative-Ring A n m)))
@@ -238,7 +236,8 @@ module _
         ( H))
 
   radical-of-ideal-hom-large-poset-Commutative-Ring :
-    hom-set-Large-Poset id
+    hom-Large-Poset
+      ( λ l → l)
       ( ideal-Commutative-Ring-Large-Poset A)
       ( radical-ideal-Commutative-Ring-Large-Poset A)
   map-hom-Large-Preorder
@@ -276,7 +275,7 @@ module _
     is-radical-of-ideal-radical-of-ideal-Commutative-Ring A I J
 
   radical-of-ideal-galois-connection-Commutative-Ring :
-    galois-connection-Large-Poset id id
+    galois-connection-Large-Poset (λ l → l) (λ l → l)
       ( ideal-Commutative-Ring-Large-Poset A)
       ( radical-ideal-Commutative-Ring-Large-Poset A)
   lower-adjoint-galois-connection-Large-Poset

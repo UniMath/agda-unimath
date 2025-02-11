@@ -34,6 +34,7 @@ open import group-theory.semigroups
 open import lists.concatenation-lists
 open import lists.lists
 
+open import structured-types.h-spaces
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
@@ -59,9 +60,9 @@ an inverse operation `x ↦ x⁻¹` satisfying the group laws
 ### The condition that a semigroup is a group
 
 ```agda
-is-group' :
+is-group-is-unital-Semigroup :
   {l : Level} (G : Semigroup l) → is-unital-Semigroup G → UU l
-is-group' G is-unital-Semigroup-G =
+is-group-is-unital-Semigroup G is-unital-Semigroup-G =
   Σ ( type-Semigroup G → type-Semigroup G)
     ( λ i →
       ( (x : type-Semigroup G) →
@@ -69,10 +70,10 @@ is-group' G is-unital-Semigroup-G =
       ( (x : type-Semigroup G) →
         Id (mul-Semigroup G x (i x)) (pr1 is-unital-Semigroup-G)))
 
-is-group :
+is-group-Semigroup :
   {l : Level} (G : Semigroup l) → UU l
-is-group G =
-  Σ (is-unital-Semigroup G) (is-group' G)
+is-group-Semigroup G =
+  Σ (is-unital-Semigroup G) (is-group-is-unital-Semigroup G)
 ```
 
 ### The type of groups
@@ -80,7 +81,7 @@ is-group G =
 ```agda
 Group :
   (l : Level) → UU (lsuc l)
-Group l = Σ (Semigroup l) is-group
+Group l = Σ (Semigroup l) is-group-Semigroup
 
 module _
   {l : Level} (G : Group l)
@@ -117,7 +118,7 @@ module _
     Id (mul-Group (mul-Group x y) z) (mul-Group x (mul-Group y z))
   associative-mul-Group = pr2 has-associative-mul-Group
 
-  is-group-Group : is-group semigroup-Group
+  is-group-Group : is-group-Semigroup semigroup-Group
   is-group-Group = pr2 G
 
   is-unital-Group : is-unital-Semigroup semigroup-Group
@@ -131,14 +132,24 @@ module _
   unit-Group = pr1 is-unital-Group
 
   is-unit-Group : type-Group → UU l
-  is-unit-Group x = Id x unit-Group
+  is-unit-Group x = x ＝ unit-Group
+
+  is-unit-Group' : type-Group → UU l
+  is-unit-Group' x = unit-Group ＝ x
 
   is-prop-is-unit-Group : (x : type-Group) → is-prop (is-unit-Group x)
   is-prop-is-unit-Group x = is-set-type-Group x unit-Group
 
-  is-unit-group-Prop : type-Group → Prop l
-  pr1 (is-unit-group-Prop x) = is-unit-Group x
-  pr2 (is-unit-group-Prop x) = is-prop-is-unit-Group x
+  is-prop-is-unit-Group' : (x : type-Group) → is-prop (is-unit-Group' x)
+  is-prop-is-unit-Group' x = is-set-type-Group unit-Group x
+
+  is-unit-prop-Group : type-Group → Prop l
+  pr1 (is-unit-prop-Group x) = is-unit-Group x
+  pr2 (is-unit-prop-Group x) = is-prop-is-unit-Group x
+
+  is-unit-prop-Group' : type-Group → Prop l
+  pr1 (is-unit-prop-Group' x) = is-unit-Group' x
+  pr2 (is-unit-prop-Group' x) = is-prop-is-unit-Group' x
 
   left-unit-law-mul-Group :
     (x : type-Group) → Id (mul-Group unit-Group x) x
@@ -148,11 +159,24 @@ module _
     (x : type-Group) → Id (mul-Group x unit-Group) x
   right-unit-law-mul-Group = pr2 (pr2 is-unital-Group)
 
+  coherence-unit-laws-mul-Group :
+    left-unit-law-mul-Group unit-Group ＝ right-unit-law-mul-Group unit-Group
+  coherence-unit-laws-mul-Group =
+    eq-is-prop (is-set-type-Group _ _)
+
   pointed-type-Group : Pointed-Type l
   pr1 pointed-type-Group = type-Group
   pr2 pointed-type-Group = unit-Group
 
-  has-inverses-Group : is-group' semigroup-Group is-unital-Group
+  h-space-Group : H-Space l
+  pr1 h-space-Group = pointed-type-Group
+  pr1 (pr2 h-space-Group) = mul-Group
+  pr1 (pr2 (pr2 h-space-Group)) = left-unit-law-mul-Group
+  pr1 (pr2 (pr2 (pr2 h-space-Group))) = right-unit-law-mul-Group
+  pr2 (pr2 (pr2 (pr2 h-space-Group))) = coherence-unit-laws-mul-Group
+
+  has-inverses-Group :
+    is-group-is-unital-Semigroup semigroup-Group is-unital-Group
   has-inverses-Group = pr2 is-group-Group
 
   inv-Group : type-Group → type-Group
@@ -176,7 +200,7 @@ module _
     Id (inv-Group unit-Group) unit-Group
   inv-unit-Group =
     ( inv (left-unit-law-mul-Group (inv-Group unit-Group))) ∙
-      ( right-inverse-law-mul-Group unit-Group)
+    ( right-inverse-law-mul-Group unit-Group)
 
   left-swap-mul-Group :
     {x y z : type-Group} → mul-Group x y ＝ mul-Group y x →
@@ -198,6 +222,21 @@ module _
     mul-Group (mul-Group x z) (mul-Group y w)
   interchange-mul-mul-Group =
     interchange-mul-mul-Semigroup semigroup-Group
+```
+
+### The structure of a group
+
+```agda
+structure-group :
+  {l1 : Level} → UU l1 → UU l1
+structure-group X =
+  Σ ( structure-semigroup X)
+    ( λ p → is-group-Semigroup (semigroup-structure-semigroup X p))
+
+group-structure-group :
+  {l1 : Level} → (X : UU l1) → structure-group X → Group l1
+pr1 (group-structure-group X (p , q)) = semigroup-structure-semigroup X p
+pr2 (group-structure-group X (p , q)) = q
 ```
 
 ## Properties
@@ -378,10 +417,10 @@ module _
 
 ```agda
   distributive-inv-mul-Group :
-    (x y : type-Group G) →
+    {x y : type-Group G} →
     inv-Group G (mul-Group G x y) ＝
     mul-Group G (inv-Group G y) (inv-Group G x)
-  distributive-inv-mul-Group x y =
+  distributive-inv-mul-Group {x} {y} =
     transpose-eq-mul-Group
       ( ( transpose-eq-mul-Group
           ( ( associative-mul-Group G (inv-Group G (mul-Group G x y)) x y) ∙
@@ -392,7 +431,7 @@ module _
     (x y : type-Group G) → mul-Group G x y ＝ mul-Group G y x →
     inv-Group G (mul-Group G x y) ＝ mul-Group G (inv-Group G x) (inv-Group G y)
   distributive-inv-mul-Group' x y H =
-    ( distributive-inv-mul-Group x y) ∙
+    ( distributive-inv-mul-Group) ∙
     ( inv (double-transpose-eq-mul-Group (double-transpose-eq-mul-Group H)))
 ```
 
@@ -456,6 +495,38 @@ module _
   is-unit-right-div-eq-Group refl = right-inverse-law-mul-Group G _
 ```
 
+### If `xy = 1`, `y ＝ x⁻¹`
+
+```agda
+  unique-right-inv-Group :
+    (x y : type-Group G) →
+    is-unit-Group G (mul-Group G x y) →
+    y ＝ inv-Group G x
+  unique-right-inv-Group x y xy=1 =
+    equational-reasoning
+      y
+      ＝ left-div-Group x (unit-Group G)
+        by transpose-eq-mul-Group' xy=1
+      ＝ inv-Group G x
+        by right-unit-law-mul-Group G (inv-Group G x)
+```
+
+### If `xy = 1`, `x ＝ y⁻¹`
+
+```agda
+  unique-left-inv-Group :
+    (x y : type-Group G) →
+    is-unit-Group G (mul-Group G x y) →
+    x ＝ inv-Group G y
+  unique-left-inv-Group x y xy=1 =
+    equational-reasoning
+      x
+      ＝ right-div-Group (unit-Group G) y
+        by transpose-eq-mul-Group xy=1
+      ＝ inv-Group G y
+        by left-unit-law-mul-Group G (inv-Group G y)
+```
+
 ### The inverse of `x⁻¹y` is `y⁻¹x`
 
 ```agda
@@ -466,7 +537,7 @@ module _
     equational-reasoning
       inv-Group G (left-div-Group x y)
       ＝ left-div-Group y (inv-Group G (inv-Group G x))
-        by distributive-inv-mul-Group (inv-Group G x) y
+        by distributive-inv-mul-Group
       ＝ left-div-Group y x
         by ap (left-div-Group y) (inv-inv-Group x)
 ```
@@ -481,7 +552,7 @@ module _
     equational-reasoning
       inv-Group G (right-div-Group x y)
       ＝ right-div-Group (inv-Group G (inv-Group G y)) x
-        by distributive-inv-mul-Group x (inv-Group G y)
+        by distributive-inv-mul-Group
       ＝ right-div-Group y x
         by ap (mul-Group' G (inv-Group G x)) (inv-inv-Group y)
 ```
@@ -521,21 +592,22 @@ module _
 
 ```agda
 abstract
-  all-elements-equal-is-group :
+  all-elements-equal-is-group-Semigroup :
     {l : Level} (G : Semigroup l) (e : is-unital-Semigroup G) →
-    all-elements-equal (is-group' G e)
-  all-elements-equal-is-group
+    all-elements-equal (is-group-is-unital-Semigroup G e)
+  all-elements-equal-is-group-Semigroup
     ( pair G (pair μ associative-G))
     ( pair e (pair left-unit-G right-unit-G))
     ( pair i (pair left-inv-i right-inv-i))
     ( pair i' (pair left-inv-i' right-inv-i')) =
     eq-type-subtype
       ( λ i →
-        prod-Prop
+        product-Prop
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ (i x) x) e))
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ x (i x)) e)))
       ( eq-htpy
-        ( λ x → equational-reasoning
+        ( λ x →
+          equational-reasoning
           i x
           ＝ μ e (i x)
             by inv (left-unit-G (i x))
@@ -549,17 +621,17 @@ abstract
             by right-unit-G (i' x)))
 
 abstract
-  is-prop-is-group :
-    {l : Level} (G : Semigroup l) → is-prop (is-group G)
-  is-prop-is-group G =
+  is-prop-is-group-Semigroup :
+    {l : Level} (G : Semigroup l) → is-prop (is-group-Semigroup G)
+  is-prop-is-group-Semigroup G =
     is-prop-Σ
       ( is-prop-is-unital-Semigroup G)
       ( λ e →
-        is-prop-all-elements-equal (all-elements-equal-is-group G e))
+        is-prop-all-elements-equal (all-elements-equal-is-group-Semigroup G e))
 
-is-group-Prop : {l : Level} (G : Semigroup l) → Prop l
-pr1 (is-group-Prop G) = is-group G
-pr2 (is-group-Prop G) = is-prop-is-group G
+is-group-prop-Semigroup : {l : Level} (G : Semigroup l) → Prop l
+pr1 (is-group-prop-Semigroup G) = is-group-Semigroup G
+pr2 (is-group-prop-Semigroup G) = is-prop-is-group-Semigroup G
 ```
 
 ### Any idempotent element in a group is the unit
@@ -607,18 +679,4 @@ module _
   pointed-type-with-aut-Group : Pointed-Type-With-Aut l
   pr1 pointed-type-with-aut-Group = pointed-type-Group G
   pr2 pointed-type-with-aut-Group = equiv-mul-Group G g
-```
-
-### Equip a type with a structure of group
-
-```agda
-structure-group :
-  {l1 : Level} → UU l1 → UU l1
-structure-group X =
-  Σ (structure-semigroup X) (λ p → is-group (compute-structure-semigroup X p))
-
-compute-structure-group :
-  {l1 : Level} → (X : UU l1) → structure-group X → Group l1
-pr1 (compute-structure-group X (p , q)) = compute-structure-semigroup X p
-pr2 (compute-structure-group X (p , q)) = q
 ```

@@ -54,7 +54,7 @@ south : (t : unit) → P (g t)
 together with a family of dependent identifications
 
 ```text
-merid : (x : X) → dependent-identification P (h x) ((north ∘ (const X unit star)) x) (south ∘ (const X unit star) x)
+merid : (x : X) → dependent-identification P (h x) ((north ∘ (terminal-map X)) x) (south ∘ (terminal-map X) x)
 ```
 
 Using the [universal property of `unit`](foundation.unit-type.md) and the
@@ -91,8 +91,8 @@ module _
   dependent-suspension-cocone : UU (l1 ⊔ l3)
   dependent-suspension-cocone =
     dependent-cocone
-      ( const X unit star)
-      ( const X unit star)
+      ( terminal-map X)
+      ( terminal-map X)
       ( c)
       ( B)
 ```
@@ -153,7 +153,7 @@ module _
 
   dependent-cocone-dependent-suspension-structure :
     dependent-suspension-structure B c →
-    dependent-suspension-cocone B (cocone-suspension-structure X Y c)
+    dependent-suspension-cocone B (suspension-cocone-suspension-structure c)
   pr1 (dependent-cocone-dependent-suspension-structure d) t =
     north-dependent-suspension-structure d
   pr1 (pr2 (dependent-cocone-dependent-suspension-structure d)) t =
@@ -164,7 +164,7 @@ module _
   equiv-dependent-suspension-structure-suspension-cocone :
     ( dependent-suspension-cocone
       ( B)
-      ( cocone-suspension-structure X Y c)) ≃
+      ( suspension-cocone-suspension-structure c)) ≃
     ( dependent-suspension-structure B c)
   equiv-dependent-suspension-structure-suspension-cocone =
     ( equiv-Σ
@@ -192,7 +192,7 @@ module _
                 ( north-suspension-c))
               ( s)))
           ( equiv-dependent-universal-property-unit
-            ( const unit (UU l3) (B (south-suspension-structure c))))
+            ( point (B (south-suspension-structure c))))
           ( λ south-suspension-c → id-equiv))))
 
   htpy-map-inv-equiv-dependent-suspension-structure-suspension-cocone-cocone-dependent-cocone-dependent-suspension-structure :
@@ -200,7 +200,7 @@ module _
     dependent-cocone-dependent-suspension-structure
   htpy-map-inv-equiv-dependent-suspension-structure-suspension-cocone-cocone-dependent-cocone-dependent-suspension-structure
     ( d) =
-      is-injective-map-equiv
+      is-injective-equiv
         ( equiv-dependent-suspension-structure-suspension-cocone)
         ( is-section-map-inv-equiv
           ( equiv-dependent-suspension-structure-suspension-cocone)
@@ -226,12 +226,12 @@ module _
           ( λ S-htpy →
             (x : X) →
             coherence-square-identifications
-              ( meridian-dependent-suspension-structure d x)
-              ( S-htpy)
               ( ap
                 ( tr B (meridian-suspension-structure c x))
                 ( N-htpy))
-              ( meridian-dependent-suspension-structure d' x)))
+              ( meridian-dependent-suspension-structure d x)
+              ( meridian-dependent-suspension-structure d' x)
+              ( S-htpy)))
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
@@ -256,12 +256,12 @@ module _
       htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1) →
     ( x : X) →
     coherence-square-identifications
-      ( meridian-dependent-suspension-structure d-susp-str0 x)
-      ( south-htpy-dependent-suspension-structure d-susp-str)
       ( ap
         ( tr B (meridian-suspension-structure susp-str x))
         ( north-htpy-dependent-suspension-structure d-susp-str))
+      ( meridian-dependent-suspension-structure d-susp-str0 x)
       ( meridian-dependent-suspension-structure d-susp-str1 x)
+      ( south-htpy-dependent-suspension-structure d-susp-str)
   meridian-htpy-dependent-suspension-structure = pr2 ∘ pr2
 
 module _
@@ -281,10 +281,10 @@ module _
           ( λ S-htpy →
             (x : X) →
             coherence-square-identifications
-              ( meridian-dependent-suspension-structure d x)
-              ( S-htpy)
               ( ap (tr B (meridian-suspension-structure c x)) N-htpy)
-              ( m x)))
+              ( meridian-dependent-suspension-structure d x)
+              ( m x)
+              ( S-htpy)))
       ( refl)
       ( refl , λ x → right-unit)
       ( λ N → id-equiv)

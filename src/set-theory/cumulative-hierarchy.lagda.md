@@ -37,9 +37,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-The cumulative hierarchy is a model of set theory. Instead of introducing it as
-a HIT, as in the HoTT Book Section 10.4, we introduce its induction principle,
-following Reference 2 below.
+The {{#concept "cumulative hierarchy" WD="cumulative hierarchy" WDID=Q18349448}}
+is a model of [set theory](set-theory.md). Instead of introducing it as a HIT,
+as in Section 10.4 of {{#cite UF13}}, we introduce its induction principle
+following {{#cite dJKFX23}}.
 
 ## Definitions
 
@@ -51,15 +52,14 @@ has-smaller-image :
   {A : UU l1} {B : UU l2} {C : UU l3} →
   (A → C) → (B → C) → UU (l1 ⊔ l2 ⊔ l3)
 has-smaller-image {l1} {l2} {l3} {A} {B} {C} f g =
-  (a : A) → ∃ B (λ b → g b ＝ f a)
+  (a : A) → exists-structure B (λ b → g b ＝ f a)
 
 has-same-image :
   { l1 l2 l3 : Level} →
   {A : UU l1} {B : UU l2} {C : UU l3} →
   (A → C) → (B → C) → UU (l1 ⊔ l2 ⊔ l3)
 has-same-image {l1} {l2} {l3} {A} {B} {C} f g =
-  has-smaller-image f g ×
-    has-smaller-image g f
+  has-smaller-image f g × has-smaller-image g f
 ```
 
 ### Pseudo cumulative hierarchy
@@ -124,9 +124,9 @@ module _
       ( e : has-same-image f g)
       ( IH₁ : (a : A) → P (f a))
       ( IH₂ : (b : B) → P (g b)) →
-      ( ( a : A) → ∃ B (λ b → Σ (f a ＝ g b)
+      ( ( a : A) → exists-structure B (λ b → Σ (f a ＝ g b)
         ( λ p → tr P p (IH₁ a) ＝ IH₂ b))) →
-      ( ( b : B) → ∃ A (λ a →
+      ( ( b : B) → exists-structure A (λ a →
         Σ (g b ＝ f a) (λ p → tr P p (IH₂ b) ＝ IH₁ a))) →
       tr P (set-ext-pseudo-cumulative-hierarchy V f g e) (ρ f IH₁) ＝ ρ g IH₂) →
     (x : type-pseudo-cumulative-hierarchy V) → P x
@@ -145,9 +145,9 @@ module _
       ( e : has-same-image f g)
       ( IH₁ : (a : A) → P (f a))
       ( IH₂ : (b : B) → P (g b)) →
-      ( (a : A) → ∃ B (λ b → Σ (f a ＝ g b)
+      ( (a : A) → exists-structure B (λ b → Σ (f a ＝ g b)
         ( λ p → tr P p (IH₁ a) ＝ IH₂ b))) →
-      ( (b : B) → ∃ A (λ a → Σ (g b ＝ f a)
+      ( (b : B) → exists-structure A (λ a → Σ (g b ＝ f a)
         (λ p → tr P p (IH₂ b) ＝ IH₁ a))) →
       tr P (set-ext-pseudo-cumulative-hierarchy V f g e) (ρ f IH₁) ＝ ρ g IH₂) →
     { A : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
@@ -192,7 +192,7 @@ module _
 ```agda
   underlying-function-cumulative-hierarchy :
     (v : type-pseudo-cumulative-hierarchy V) →
-    ∃ ( UU l1)
+    exists-structure ( UU l1)
       ( λ A →
         Σ ( A → type-pseudo-cumulative-hierarchy V)
           ( λ f → set-pseudo-cumulative-hierarchy V f ＝ v))
@@ -251,8 +251,8 @@ module _
       ( e : has-same-image f g)
       ( IH₁ : A → X)
       ( IH₂ : B → X) →
-      ( (a : A) → ∃ B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
-      ( (b : B) → ∃ A (λ a → (g b ＝ f a) × (IH₂ b ＝ IH₁ a))) →
+      ( (a : A) → exists-structure B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
+      ( (b : B) → exists-structure A (λ a → (g b ＝ f a) × (IH₂ b ＝ IH₁ a))) →
       ρ f IH₁ ＝ ρ g IH₂) →
     type-pseudo-cumulative-hierarchy V → X
   recursion-principle-cumulative-hierarchy {l2} X σ ρ τ =
@@ -262,9 +262,9 @@ module _
       { A B : UU l1} (f : A → pr1 V) (g : B → pr1 V)
       ( e : has-same-image f g)
       ( IH₁ : (a : A) → X) (IH₂ : (b : B) → X) →
-      ( (a : A) → ∃ B (λ b → Σ (f a ＝ g b)
+      ( (a : A) → exists-structure B (λ b → Σ (f a ＝ g b)
         (λ p → tr (λ _ → X) p (IH₁ a) ＝ IH₂ b))) →
-      ( (b : B) → ∃ A (λ a → Σ (g b ＝ f a)
+      ( (b : B) → exists-structure A (λ a → Σ (g b ＝ f a)
         (λ p → tr (λ _ → X) p (IH₂ b) ＝ IH₁ a))) →
       tr (λ _ → X) (pr2 (pr2 (pr2 V)) f g e) (ρ f IH₁) ＝ ρ g IH₂
     τ' {A} {B} f g e IH₁ IH₂ hIH₁ hIH₂ =
@@ -279,13 +279,17 @@ module _
         set-pseudo-cumulative-hierarchy V f
           ＝ set-pseudo-cumulative-hierarchy V g
       path-f-g = set-ext-pseudo-cumulative-hierarchy V f g e
-      hIH₁' : (a : A) → ∃ B (λ b → Σ (f a ＝ g b) (λ _ → IH₁ a ＝ IH₂ b))
+      hIH₁' :
+        (a : A) →
+        exists-structure B (λ b → Σ (f a ＝ g b) (λ _ → IH₁ a ＝ IH₂ b))
       hIH₁' a =
         map-trunc-Prop
           ( λ (b , p , q) →
             ( b , p , (inv (tr-constant-type-family p _) ∙ q)))
           ( hIH₁ a)
-      hIH₂' : (b : B) → ∃ A (λ a → Σ (g b ＝ f a) (λ _ → IH₂ b ＝ IH₁ a))
+      hIH₂' :
+        (b : B) →
+        exists-structure A (λ a → Σ (g b ＝ f a) (λ _ → IH₂ b ＝ IH₁ a))
       hIH₂' b =
         map-trunc-Prop
           ( λ (a , p , q) →
@@ -301,8 +305,8 @@ module _
       ( e : has-same-image f g)
       ( IH₁ : A → X)
       ( IH₂ : B → X) →
-      ( ( a : A) → ∃ B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
-      ( ( b : B) → ∃ A (λ a → (g b ＝ f a) × (IH₂ b ＝ IH₁ a))) →
+      ( ( a : A) → exists-structure B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
+      ( ( b : B) → exists-structure A (λ a → (g b ＝ f a) × (IH₂ b ＝ IH₁ a))) →
       ρ f IH₁ ＝ ρ g IH₂) →
     {A : UU l1} → (f : A → type-pseudo-cumulative-hierarchy V) → (IH : A → X) →
     recursion-principle-cumulative-hierarchy X σ ρ τ
@@ -315,9 +319,9 @@ module _
       { A B : UU l1} (f : A → pr1 V) (g : B → pr1 V)
       ( e : has-same-image f g)
       ( IH₁ : (a : A) → X) (IH₂ : (b : B) → X) →
-      ( ( a : A) → ∃ B (λ b → Σ (f a ＝ g b)
+      ( ( a : A) → exists-structure B (λ b → Σ (f a ＝ g b)
         ( λ p → tr (λ _ → X) p (IH₁ a) ＝ IH₂ b))) →
-      ( ( b : B) → ∃ A (λ a → Σ (g b ＝ f a)
+      ( ( b : B) → exists-structure A (λ a → Σ (g b ＝ f a)
         ( λ p → tr (λ _ → X) p (IH₂ b) ＝ IH₁ a))) →
       tr (λ _ → X) (pr2 (pr2 (pr2 V)) f g e) (ρ f IH₁) ＝ ρ g IH₂
     τ' {A} {B} f g e IH₁ IH₂ hIH₁ hIH₂ =
@@ -332,13 +336,17 @@ module _
         set-pseudo-cumulative-hierarchy V f
           ＝ set-pseudo-cumulative-hierarchy V g
       path-f-g = set-ext-pseudo-cumulative-hierarchy V f g e
-      hIH₁' : (a : A) → ∃ B (λ b → Σ (f a ＝ g b) (λ _ → IH₁ a ＝ IH₂ b))
+      hIH₁' :
+        (a : A) →
+        exists-structure B (λ b → Σ (f a ＝ g b) (λ _ → IH₁ a ＝ IH₂ b))
       hIH₁' a =
         map-trunc-Prop
           ( λ (b , p , q) →
             ( b , p , (inv (tr-constant-type-family p _) ∙ q)))
           ( hIH₁ a)
-      hIH₂' : (b : B) → ∃ A (λ a → Σ (g b ＝ f a) (λ _ → IH₂ b ＝ IH₁ a))
+      hIH₂' :
+        (b : B) →
+        exists-structure A (λ a → Σ (g b ＝ f a) (λ _ → IH₂ b ＝ IH₁ a))
       hIH₂' b =
         map-trunc-Prop
           ( λ (a , p , q) →
@@ -359,7 +367,7 @@ A simplification of the recursion principle, when the codomain is `Prop l2`.
       ( e : has-smaller-image f g)
       ( IH₁ : A → Prop l2)
       ( IH₂ : B → Prop l2) →
-      ( (a : A) → ∃ B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
+      ( (a : A) → exists-structure B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
       type-Prop (ρ f IH₁) → type-Prop (ρ g IH₂)) →
     type-pseudo-cumulative-hierarchy V → Prop l2
   prop-recursion-principle-cumulative-hierarchy {l2} ρ τ =
@@ -371,8 +379,8 @@ A simplification of the recursion principle, when the codomain is `Prop l2`.
       ( g : B → type-pseudo-cumulative-hierarchy V) →
       ( e : has-same-image f g)
       ( IH₁ : A → Prop l2) (IH₂ : B → Prop l2) →
-      ( (a : A) → ∃ B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
-      ( (b : B) → ∃ A (λ a → (g b ＝ f a) × (IH₂ b ＝ IH₁ a))) →
+      ( (a : A) → exists-structure B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
+      ( (b : B) → exists-structure A (λ a → (g b ＝ f a) × (IH₂ b ＝ IH₁ a))) →
       ρ f IH₁ ＝ ρ g IH₂
     τ' f g (e₁ , e₂) IH₁ IH₂ hIH₁ hIH₂ =
       eq-iff (τ f g e₁ IH₁ IH₂ hIH₁) (τ g f e₂ IH₂ IH₁ hIH₂)
@@ -388,7 +396,7 @@ A simplification of the recursion principle, when the codomain is `Prop l2`.
       ( e : has-smaller-image f g)
       ( IH₁ : A → Prop l2)
       ( IH₂ : B → Prop l2) →
-      ( (a : A) → ∃ B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
+      ( (a : A) → exists-structure B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
       type-Prop (ρ f IH₁) → type-Prop (ρ g IH₂)) →
     { A : UU l1} → (f : A → type-pseudo-cumulative-hierarchy V) →
     ( IH : A → Prop l2) →
@@ -403,8 +411,8 @@ A simplification of the recursion principle, when the codomain is `Prop l2`.
       ( g : B → type-pseudo-cumulative-hierarchy V) →
       ( e : has-same-image f g)
       ( IH₁ : A → Prop l2) (IH₂ : B → Prop l2) →
-      ( (a : A) → ∃ B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
-      ( (b : B) → ∃ A (λ a → (g b ＝ f a) × (IH₂ b ＝ IH₁ a))) →
+      ( (a : A) → exists-structure B (λ b → (f a ＝ g b) × (IH₁ a ＝ IH₂ b))) →
+      ( (b : B) → exists-structure A (λ a → (g b ＝ f a) × (IH₂ b ＝ IH₁ a))) →
       ρ f IH₁ ＝ ρ g IH₂
     τ' f g (e₁ , e₂) IH₁ IH₂ hIH₁ hIH₂ =
       eq-iff (τ f g e₁ IH₁ IH₂ hIH₁) (τ g f e₂ IH₂ IH₁ hIH₂)
@@ -452,16 +460,18 @@ needed.
     Prop (lsuc l1)
   ∈-cumulative-hierarchy-Prop x =
     simple-prop-recursion-principle-cumulative-hierarchy
-      (λ {A} f → (∃ A (λ a → f a ＝ x)) , is-prop-∃ _ _) e
+      ( λ {A} f → exists-structure-Prop A (λ a → f a ＝ x))
+      ( e)
     where
     e :
       {A B : UU l1} (f : A → type-pseudo-cumulative-hierarchy V)
       ( g : B → type-pseudo-cumulative-hierarchy V) →
       ( e : has-smaller-image f g) →
-      ( ∃ A (λ a → f a ＝ x) → ∃ B (λ b → g b ＝ x))
+      ( exists-structure A (λ a → f a ＝ x) →
+        exists-structure B (λ b → g b ＝ x))
     e {A} {B} f g s =
       map-universal-property-trunc-Prop
-        ( ∃-Prop B (λ b → g b ＝ x))
+        ( exists-structure-Prop B (λ b → g b ＝ x))
         ( λ ( a , p) →
           map-trunc-Prop (λ (b , q) → (b , q ∙ p)) (s a))
 
@@ -476,7 +486,7 @@ needed.
     ( x : type-pseudo-cumulative-hierarchy V) {A : UU l1}
     ( f : A → type-pseudo-cumulative-hierarchy V) →
     ( ∈-cumulative-hierarchy x (set-pseudo-cumulative-hierarchy V f)) ＝
-      ∃ A (λ a → f a ＝ x)
+      exists-structure A (λ a → f a ＝ x)
   id-∈-cumulative-hierarchy x f =
     ap pr1 (compute-simple-prop-recursion-principle-cumulative-hierarchy _ _ f)
 
@@ -485,7 +495,7 @@ needed.
     { A : UU l1}
     { f : A → type-pseudo-cumulative-hierarchy V} →
     ( ∈-cumulative-hierarchy x (set-pseudo-cumulative-hierarchy V f)) →
-    ∃ A (λ a → f a ＝ x)
+    exists-structure A (λ a → f a ＝ x)
   ∈-cumulative-hierarchy-mere-preimage {x} {A} {f} =
     tr id (id-∈-cumulative-hierarchy x f)
 
@@ -493,7 +503,7 @@ needed.
     { x : type-pseudo-cumulative-hierarchy V} →
     { A : UU l1}
     { f : A → type-pseudo-cumulative-hierarchy V} →
-    ∃ A (λ a → f a ＝ x) →
+    exists-structure A (λ a → f a ＝ x) →
     ( ∈-cumulative-hierarchy x (set-pseudo-cumulative-hierarchy V f))
   mere-preimage-∈-cumulative-hierarchy {x} {A} {f} =
     tr id (inv (id-∈-cumulative-hierarchy x f))
@@ -549,7 +559,8 @@ needed.
       ( set-pseudo-cumulative-hierarchy V g)
   has-smaller-image-⊆-cumulative-hierarchy {A} {B} f g s x m =
     mere-preimage-∈-cumulative-hierarchy
-      ( map-universal-property-trunc-Prop (∃-Prop B (λ b → g b ＝ x))
+      ( map-universal-property-trunc-Prop
+        ( exists-structure-Prop B (λ b → g b ＝ x))
         ( λ (a , p) →
           map-trunc-Prop (λ (b , q) → (b , q ∙ p)) (s a))
         ( ∈-cumulative-hierarchy-mere-preimage m))
@@ -723,15 +734,17 @@ needed.
       ( x : type-pseudo-cumulative-hierarchy V) →
       ( r : type-pseudo-cumulative-hierarchy V →
         type-pseudo-cumulative-hierarchy V) →
-      ∃ ( type-pseudo-cumulative-hierarchy V)
+      exists-structure
+        ( type-pseudo-cumulative-hierarchy V)
         ( λ v →
           ( y : type-pseudo-cumulative-hierarchy V) →
           ∈-cumulative-hierarchy y v ↔
-          ∃ ( type-pseudo-cumulative-hierarchy V)
+          exists-structure
+            ( type-pseudo-cumulative-hierarchy V)
             ( λ z → (∈-cumulative-hierarchy z x) × (y ＝ r z)))
     replacement-cumulative-hierarchy x r =
       map-universal-property-trunc-Prop
-        ( ∃-Prop (type-pseudo-cumulative-hierarchy V) _)
+        ( exists-structure-Prop (type-pseudo-cumulative-hierarchy V) _)
         ( λ where
           ( A , f , refl) →
             unit-trunc-Prop
@@ -750,7 +763,7 @@ needed.
                     ( λ H →
                       mere-preimage-∈-cumulative-hierarchy
                         ( map-universal-property-trunc-Prop
-                          ( ∃-Prop A _)
+                          ( exists-structure-Prop A _)
                           ( λ where
                             ( z , K , refl) →
                               map-trunc-Prop
@@ -762,10 +775,11 @@ needed.
 
 ## References
 
-1. Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
-   of Mathematics_ (2013) ([website](https://homotopytypetheory.org/book/),
-   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729),
-   [DOI:10.48550](https://doi.org/10.48550/arXiv.1308.0729))
-2. Tom de Jong, in collaboration with Nicolai Kraus, Fredrik Nordvall Forsberg
-   and Chuangjie Xu.
-   <https://www.cs.bham.ac.uk/~mhe/agda/UF.CumulativeHierarchy.html>
+{{#bibliography}} {{#reference UF13}} {{#reference dJKFX23}}
+
+## External links
+
+- [cumulative hierarchy](https://ncatlab.org/nlab/show/cumulative+hierarchy) at
+  $n$Lab
+- [Cumulative hierarchy](https://en.wikipedia.org/wiki/Cumulative_hierarchy) at
+  Wikipedia

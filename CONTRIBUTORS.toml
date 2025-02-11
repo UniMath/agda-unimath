@@ -12,10 +12,10 @@ displayName = "Egbert Rijke"
 maintainer = true
 extra = " (Lead developer)"
 usernames = [ "Egbert Rijke" ]
-homepage = "https://users.fmf.uni-lj.si/rijke/"
+homepage = "https://egbertrijke.github.io"
 github = "EgbertRijke"
 bio = '''
-Egbert Rijke is a postdoctoral researcher at the University of Ljubljana. His
+Egbert Rijke is a postdoctoral researcher at Johns Hopkins University. His
 research is on homotopy type theory and general mathematics from a univalent
 point of view.
 '''
@@ -28,15 +28,15 @@ homepage = "https://www.ntnu.edu/employees/fredrik.bakke"
 github = "fredrik-bakke"
 bio = '''
 Fredrik is a PhD student at the Norwegian University of Science and Technology
-in Trondheim. His research is on homotopy theory and higher category theory.
+in Trondheim. His research is on homotopy type theory and higher category theory.
 '''
 
 [[contributors]]
-displayName = "Elisabeth Bonnevier"
+displayName = "Elisabeth Stenholm"
 maintainer = true
-usernames = [ "Elisabeth Bonnevier" ]
-homepage = "https://elisabeth.bonnevier.one"
-github = "elisabethbonnevier"
+usernames = [ "Elisabeth Stenholm", "Elisabeth Bonnevier" ]
+homepage = "https://elisabeth.stenholm.one"
+github = "elisabethstenholm"
 bio = '''
 Elisabeth is a PhD student at the University of Bergen. Her research is on
 homotopy type theory.
@@ -55,6 +55,18 @@ graph theory from a univalent point of view.
 '''
 
 [[contributors]]
+displayName = "Vojtěch Štěpančík"
+maintainer = true
+usernames = [ "Vojtěch Štěpančík", "VojtechStep" ]
+homepage = "https://vojtechstep.eu/"
+github = "VojtechStep"
+bio = '''
+Vojtěch is a master\'s student at Charles University in Prague. His background
+is in software engineering, and he\'s working on formalizing synthetic
+homotopy theoretic topics for his thesis.
+'''
+
+[[contributors]]
 displayName = "Eléonore Mangel"
 usernames = [ "Eléonore Mangel", "EleonoreMangel", "Léo Mangel", "LeoMangel" ]
 github = "EleonoreMangel"
@@ -63,27 +75,24 @@ github = "EleonoreMangel"
 displayName = "Bryan Lu"
 usernames = [ "Bryan Lu" ]
 github = "blu-bird"
+homepage = "https://blu-bird.github.io"
 
 [[contributors]]
 displayName = "Raymond Baker"
 usernames = [ "Raymond Baker" ]
 github = "morphismz"
+homepage = "https://morphismz.github.io"
 
 [[contributors]]
 displayName = "Elif Uskuplu"
 usernames = [ "ElifUskuplu" ]
 github = "ElifUskuplu"
+homepage = "https://elifuskuplu.github.io"
 
 [[contributors]]
 displayName = "Victor Blanchi"
 usernames = [ "VictorBlanchi" ]
 github = "VictorBlanchi"
-
-[[contributors]]
-displayName = "Vojtěch Štěpančík"
-usernames = [ "Vojtěch Štěpančík", "VojtechStep" ]
-homepage = "https://vojtechstep.eu/"
-github = "VojtechStep"
 
 [[contributors]]
 displayName = "Fernando Chu"
@@ -143,6 +152,7 @@ usernames = [ "Julian KG" ]
 displayName = "favonia"
 usernames = [ "favonia" ]
 github = "favonia"
+homepage = "https://favonia.org"
 
 [[contributors]]
 displayName = "fernabnor"
@@ -211,6 +221,7 @@ github = "louismntnu"
 displayName = "Andrej Bauer"
 usernames = [ "Andrej Bauer" ]
 github = "andrejbauer"
+homepage = "https://www.andrej.com"
 
 [[contributors]]
 displayName = "Matej Petković"
@@ -226,3 +237,23 @@ github = "GregorPercic"
 displayName = "Alec Barreto"
 usernames = [ "Alec Barreto" ]
 github = "wrest64"
+
+[[contributors]]
+displayName = "Ulrik Buchholtz"
+usernames = [ "Ulrik Buchholtz" ]
+github = "UlrikBuchholtz"
+
+[[contributors]]
+displayName = "Garrett Figueroa"
+usernames = [ "Garrett Figueroa", "djspacewhale" ]
+github = "djspacewhale"
+
+[[contributors]]
+displayName = "Job Petrovčič"
+usernames = [ "Job Petrovčič", "JobPetrovcic" ]
+github = "JobPetrovcic"
+
+[[contributors]]
+displayName = "Louis Wasserman"
+usernames = [ "Louis Wasserman" ]
+github = "lowasser"

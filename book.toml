@@ -26,7 +26,7 @@ assets_version = "1.2.0" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
 
 [preprocessor.git-metadata]
 command = "python3 ./scripts/preprocessor_git_metadata.py"
-# Disable by default - it takes a non-trivial amount of time
+# Disable by default - it takes a nontrivial amount of time
 # Can be overriden by running
 # `export MDBOOK_PREPROCESSOR__GIT_METADATA__ENABLE=true` in your shell
 enable = false
@@ -39,11 +39,27 @@ suppress_processing = [
   "MAINTAINERS.md",
   "CONTRIBUTORS.md",
   "STATEMENT-OF-INCLUSION",
-  "USERS.md",
+  "PROJECTS.md",
   "GRANT-ACKNOWLEDGEMENTS.md",
   "SUMMARY.md",
-  "ART.md"
+  "ART.md",
+  "VISUALIZATION.md"
 ]
+
+[preprocessor.concepts]
+command = "python3 ./scripts/preprocessor_concepts.py"
+output-file = "docs/concept_index.json"
+mathswitch-template = "https://mathswitch.xyz/concept/Wd/{wikidata_id}"
+wikidata-template = "https://www.wikidata.org/entity/{wikidata_id}"
+
+[preprocessor.citations]
+command = "python3 ./scripts/preprocessor_citations.py"
+bibtex-file = "references.bib"
+citation-style = "alpha"
+citation-label-style = "custom_alpha"
+error-on-unmatched-keys = true
+error-on-empty-bibliography = true
+before = [ "git-metadata" ]
 
 [output.linkcheck]
 follow-web-links = false
@@ -51,11 +67,14 @@ follow-web-links = false
 [output.html]
 default-theme = "light"
 preferred-dark-theme = "Ayu"
+# The following option is renamed to smart-punctuation in mdbook 0.4.38
+curly-quotes = true
 copy-fonts = true
 additional-css = [
   "website/css/Agda.css",
   "website/css/Agda-highlight.css",
   "website/css/agda-logo.css",
+  "website/css/bibliography.css",
   "theme/catppuccin.css",
   "theme/catppuccin-admonish.css",
   "theme/pagetoc.css",

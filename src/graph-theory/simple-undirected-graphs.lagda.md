@@ -37,7 +37,7 @@ module _
 
   is-simple-Undirected-Graph-Prop : Prop (lsuc lzero ⊔ l1 ⊔ l2)
   is-simple-Undirected-Graph-Prop =
-    prod-Prop
+    product-Prop
       ( Π-Prop
         ( unordered-pair-vertices-Undirected-Graph G)
         ( λ p →
@@ -67,9 +67,9 @@ Simple-Undirected-Graph l1 l2 =
 
 ## External links
 
-- [Graph](https://ncatlab.org/nlab/show/graph) at nlab
+- [Graph](https://ncatlab.org/nlab/show/graph) at $n$Lab
 - [Graph (discrete mathematics)](<https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)>)
   at Wikipedia
-- [Simple graph](https://www.wikidata.org/wiki/Q15838309) on Wikidata
+- [Simple graph](https://www.wikidata.org/entity/Q15838309) on Wikidata
 - [Simple graph](https://mathworld.wolfram.com/SimpleGraph.html) at Wolfram
-  Mathworld
+  MathWorld

@@ -32,9 +32,9 @@ module _
   {l : Level} (G : Group l)
   where
 
-  is-central-element-group-Prop : type-Group G → Prop l
-  is-central-element-group-Prop =
-    is-central-element-monoid-Prop (monoid-Group G)
+  is-central-element-prop-Group : type-Group G → Prop l
+  is-central-element-prop-Group =
+    is-central-element-prop-Monoid (monoid-Group G)
 
   is-central-element-Group : type-Group G → UU l
   is-central-element-Group = is-central-element-Monoid (monoid-Group G)
@@ -67,11 +67,11 @@ module _
   where
 
   is-central-element-mul-Group :
-    (x y : type-Group G) →
+    {x y : type-Group G} →
     is-central-element-Group G x → is-central-element-Group G y →
     is-central-element-Group G (mul-Group G x y)
-  is-central-element-mul-Group =
-    is-central-element-mul-Monoid (monoid-Group G)
+  is-central-element-mul-Group {x} {y} =
+    is-central-element-mul-Monoid (monoid-Group G) x y
 ```
 
 ### The inverse of a central element is central
@@ -82,12 +82,12 @@ module _
   where
 
   is-central-element-inv-Group :
-    (x : type-Group G) → is-central-element-Group G x →
+    {x : type-Group G} → is-central-element-Group G x →
     is-central-element-Group G (inv-Group G x)
-  is-central-element-inv-Group x H y =
+  is-central-element-inv-Group {x} H y =
     ( inv (inv-left-div-Group G y x)) ∙
-    ( ( ap (inv-Group G) (inv (H (inv-Group G y)))) ∙
-      ( inv-right-div-Group G x y))
+    ( ap (inv-Group G) (inv (H (inv-Group G y)))) ∙
+    ( inv-right-div-Group G x y)
 ```
 
 ### The central elements are closed under conjugation
@@ -109,7 +109,7 @@ module _
     is-central-element-Group G (conjugation-Group G y x)
   is-central-element-conjugation-Group x y H =
     is-closed-under-eq-subtype'
-      ( is-central-element-group-Prop G)
+      ( is-central-element-prop-Group G)
       ( H)
       ( is-fixed-point-conjugation-is-central-element-Group x y H)
 ```

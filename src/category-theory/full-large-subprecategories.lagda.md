@@ -7,15 +7,18 @@ module category-theory.full-large-subprecategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.functors-large-precategories
 open import category-theory.isomorphisms-in-large-categories
 open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -32,8 +35,8 @@ family of [subtypes](foundation.subtypes.md) of the types
 
 Alternatively, we say that a
 [large subcategory](category-theory.large-subcategories.md) **is full** if for
-every two objects `X` and `Y` in the subcategory, the subtype of homomorphisms
-from `X` to `Y` in the subcategory is [full](foundation.full-subtypes.md).
+every two objects `X` and `Y` in the subcategory, the subtype of morphisms from
+`X` to `Y` in the subcategory is [full](foundation.full-subtypes.md).
 
 Note that full large subprecategories are not assumed to be closed under
 isomorphisms.
@@ -125,6 +128,24 @@ module _
   associative-comp-hom-Full-Large-Subprecategory X Y Z W =
     associative-comp-hom-Large-Precategory C
 
+  involutive-eq-associative-comp-hom-Full-Large-Subprecategory :
+    {l1 l2 l3 l4 : Level}
+    (X : obj-Full-Large-Subprecategory l1)
+    (Y : obj-Full-Large-Subprecategory l2)
+    (Z : obj-Full-Large-Subprecategory l3)
+    (W : obj-Full-Large-Subprecategory l4)
+    (h : hom-Full-Large-Subprecategory Z W)
+    (g : hom-Full-Large-Subprecategory Y Z)
+    (f : hom-Full-Large-Subprecategory X Y) →
+    comp-hom-Full-Large-Subprecategory X Y W
+      ( comp-hom-Full-Large-Subprecategory Y Z W h g)
+      ( f) ＝ⁱ
+    comp-hom-Full-Large-Subprecategory X Z W
+      ( h)
+      ( comp-hom-Full-Large-Subprecategory X Y Z g f)
+  involutive-eq-associative-comp-hom-Full-Large-Subprecategory X Y Z W =
+    involutive-eq-associative-comp-hom-Large-Precategory C
+
   left-unit-law-comp-hom-Full-Large-Subprecategory :
     {l1 l2 : Level}
     (X : obj-Full-Large-Subprecategory l1)
@@ -164,10 +185,10 @@ module _
   id-hom-Large-Precategory
     large-precategory-Full-Large-Subprecategory {l1} {X} =
     id-hom-Full-Large-Subprecategory X
-  associative-comp-hom-Large-Precategory
+  involutive-eq-associative-comp-hom-Large-Precategory
     large-precategory-Full-Large-Subprecategory
     {l1} {l2} {l3} {l4} {X} {Y} {Z} {W} =
-    associative-comp-hom-Full-Large-Subprecategory X Y Z W
+    involutive-eq-associative-comp-hom-Full-Large-Subprecategory X Y Z W
   left-unit-law-comp-hom-Large-Precategory
     large-precategory-Full-Large-Subprecategory {l1} {l2} {X} {Y} =
     left-unit-law-comp-hom-Full-Large-Subprecategory X Y
@@ -190,6 +211,34 @@ module _
     iso-eq-Large-Precategory large-precategory-Full-Large-Subprecategory
 ```
 
+### The forgetful functor from a full large subprecategory to the ambient large precategory
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level → Level}
+  (C : Large-Precategory α β)
+  (P : Full-Large-Subprecategory γ C)
+  where
+
+  forgetful-functor-Full-Large-Subprecategory :
+    functor-Large-Precategory
+      ( λ l → l)
+      ( large-precategory-Full-Large-Subprecategory C P)
+      ( C)
+  obj-functor-Large-Precategory
+    forgetful-functor-Full-Large-Subprecategory =
+    inclusion-subtype P
+  hom-functor-Large-Precategory
+    forgetful-functor-Full-Large-Subprecategory =
+    id
+  preserves-comp-functor-Large-Precategory
+    forgetful-functor-Full-Large-Subprecategory g f =
+    refl
+  preserves-id-functor-Large-Precategory
+    forgetful-functor-Full-Large-Subprecategory =
+    refl
+```
+
 ## Properties
 
 ### A full large subprecategory of a large category is a large category
@@ -197,25 +246,24 @@ module _
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level} {γ : Level → Level}
-  (C : Large-Category α β)
-  (P : Full-Large-Subprecategory γ (large-precategory-Large-Category C))
+  (C : Large-Precategory α β)
+  (P : Full-Large-Subprecategory γ C)
   where
 
-  is-large-category-large-precategory-Full-Large-Subcategory :
+  is-large-category-large-precategory-is-large-category-Full-Large-Subprecategory :
+    is-large-category-Large-Precategory C →
     is-large-category-Large-Precategory
-      ( large-precategory-Full-Large-Subprecategory
-        ( large-precategory-Large-Category C)
-        ( P))
-  is-large-category-large-precategory-Full-Large-Subcategory X =
+      ( large-precategory-Full-Large-Subprecategory C P)
+  is-large-category-large-precategory-is-large-category-Full-Large-Subprecategory
+    is-large-category-C X =
     fundamental-theorem-id
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-iso-Large-Category C (inclusion-subtype P X))
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-iso-Large-Category
+          ( make-Large-Category C is-large-category-C)
+          ( inclusion-subtype P X))
         ( is-prop-is-in-subtype P)
         ( inclusion-subtype P X)
-        ( id-iso-Large-Category C)
+        ( id-iso-Large-Precategory C)
         ( is-in-subtype-inclusion-subtype P X))
-      ( iso-eq-Full-Large-Subprecategory
-        ( large-precategory-Large-Category C)
-        ( P)
-        ( X))
+      ( iso-eq-Full-Large-Subprecategory C P X)
 ```

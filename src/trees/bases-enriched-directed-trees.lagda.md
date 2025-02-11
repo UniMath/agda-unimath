@@ -147,7 +147,7 @@ module _
         Σ ( direct-predecessor-Enriched-Directed-Tree A B T
             ( root-Enriched-Directed-Tree A B T))
           ( walk-Enriched-Directed-Tree A B T x ∘ pr1))
-      ( equiv-coprod
+      ( equiv-coproduct
         ( id-equiv)
         ( equiv-Σ
           ( walk-Enriched-Directed-Tree A B T x ∘ pr1)
@@ -188,7 +188,7 @@ module _
         Σ ( base-Enriched-Directed-Tree A B T)
           ( walk-Enriched-Directed-Tree A B T x ∘
             node-base-Enriched-Directed-Tree A B T))
-      ( left-unit-law-coprod-is-empty
+      ( left-unit-law-coproduct-is-empty
         ( is-root-Enriched-Directed-Tree A B T x)
         ( Σ ( base-Enriched-Directed-Tree A B T)
             ( walk-Enriched-Directed-Tree A B T x ∘

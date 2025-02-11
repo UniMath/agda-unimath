@@ -30,6 +30,7 @@ open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -186,12 +187,12 @@ module _
     (Y : Cyclic-Type l k) → Id X Y → equiv-Cyclic-Type k X Y
   equiv-eq-Cyclic-Type .X refl = id-equiv-Cyclic-Type
 
-is-contr-total-equiv-Cyclic-Type :
+is-torsorial-equiv-Cyclic-Type :
   {l1 : Level} (k : ℕ) (X : Cyclic-Type l1 k) →
-  is-contr (Σ (Cyclic-Type l1 k) (equiv-Cyclic-Type k X))
-is-contr-total-equiv-Cyclic-Type k X =
-  is-contr-total-Eq-subtype
-    ( is-contr-total-equiv-Type-With-Endomorphism (endo-Cyclic-Type k X))
+  is-torsorial (equiv-Cyclic-Type k X)
+is-torsorial-equiv-Cyclic-Type k X =
+  is-torsorial-Eq-subtype
+    ( is-torsorial-equiv-Type-With-Endomorphism (endo-Cyclic-Type k X))
     ( λ Y → is-prop-type-trunc-Prop)
     ( endo-Cyclic-Type k X)
     ( id-equiv-Type-With-Endomorphism (endo-Cyclic-Type k X))
@@ -205,7 +206,7 @@ module _
     (Y : Cyclic-Type l k) → is-equiv (equiv-eq-Cyclic-Type k X Y)
   is-equiv-equiv-eq-Cyclic-Type =
     fundamental-theorem-id
-      ( is-contr-total-equiv-Cyclic-Type k X)
+      ( is-torsorial-equiv-Cyclic-Type k X)
       ( equiv-eq-Cyclic-Type k X)
 
   extensionality-Cyclic-Type :
@@ -237,10 +238,9 @@ module _
     (e f : equiv-Cyclic-Type k X Y) → Id e f → htpy-equiv-Cyclic-Type e f
   htpy-eq-equiv-Cyclic-Type e .e refl = refl-htpy-equiv-Cyclic-Type e
 
-  is-contr-total-htpy-equiv-Cyclic-Type :
-    (e : equiv-Cyclic-Type k X Y) →
-    is-contr (Σ (equiv-Cyclic-Type k X Y) (htpy-equiv-Cyclic-Type e))
-  is-contr-total-htpy-equiv-Cyclic-Type e =
+  is-torsorial-htpy-equiv-Cyclic-Type :
+    (e : equiv-Cyclic-Type k X Y) → is-torsorial (htpy-equiv-Cyclic-Type e)
+  is-torsorial-htpy-equiv-Cyclic-Type e =
     is-contr-equiv'
       ( Σ ( equiv-Type-With-Endomorphism
             ( endo-Cyclic-Type k X)
@@ -264,7 +264,7 @@ module _
                     ( coherence-square-equiv-Cyclic-Type k X Y f x))
                   ( ( coherence-square-equiv-Cyclic-Type k X Y e x) ∙
                     ( ap (endomorphism-Cyclic-Type k Y) (H x)))))))
-      ( is-contr-total-htpy-equiv-Type-With-Endomorphism
+      ( is-torsorial-htpy-equiv-Type-With-Endomorphism
         ( endo-Cyclic-Type k X)
         ( endo-Cyclic-Type k Y)
         ( e))
@@ -273,7 +273,7 @@ module _
     (e f : equiv-Cyclic-Type k X Y) → is-equiv (htpy-eq-equiv-Cyclic-Type e f)
   is-equiv-htpy-eq-equiv-Cyclic-Type e =
     fundamental-theorem-id
-      ( is-contr-total-htpy-equiv-Cyclic-Type e)
+      ( is-torsorial-htpy-equiv-Cyclic-Type e)
       ( htpy-eq-equiv-Cyclic-Type e)
 
   extensionality-equiv-Cyclic-Type :
@@ -445,7 +445,7 @@ compute-map-preserves-succ-map-ℤ-Mod' k f H (inl (succ-ℕ x)) =
       ( ( inv
           ( preserves-pred-preserves-succ-map-ℤ-Mod k f H (mod-ℤ k (inl x)))) ∙
         ( ap f (inv (preserves-predecessor-mod-ℤ k (inl x)))))))
-compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inl star)) =
+compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inl _)) =
   ( ap (add-ℤ-Mod' k (f (zero-ℤ-Mod k))) (mod-zero-ℤ k)) ∙
   ( ( left-unit-law-add-ℤ-Mod k (f (zero-ℤ-Mod k))) ∙
     ( ap f (inv (mod-zero-ℤ k))))
@@ -561,13 +561,13 @@ preserves-comp-Eq-equiv-Cyclic-Type k e f =
       ( zero-ℤ-Mod k)))
 
 preserves-concat-equiv-compute-Ω-Cyclic-Type :
-  (k : ℕ) (p q : type-Ω (Cyclic-Type-Pointed-Type k)) →
+  (k : ℕ) {p q : type-Ω (Cyclic-Type-Pointed-Type k)} →
   Id
     ( map-equiv (equiv-compute-Ω-Cyclic-Type k) (p ∙ q))
     ( add-ℤ-Mod k
       ( map-equiv (equiv-compute-Ω-Cyclic-Type k) p)
       ( map-equiv (equiv-compute-Ω-Cyclic-Type k) q))
-preserves-concat-equiv-compute-Ω-Cyclic-Type k p q =
+preserves-concat-equiv-compute-Ω-Cyclic-Type k {p} {q} =
   ( ap
     ( Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k))
     ( preserves-concat-equiv-eq-Cyclic-Type k
@@ -604,11 +604,11 @@ pr2 (concrete-group-Cyclic-Type k) = is-set-type-Ω-Cyclic-Type k
 equiv-Ω-Cyclic-Type-Group :
   (k : ℕ) → equiv-Group (Ω-Cyclic-Type-Group k) (ℤ-Mod-Group k)
 pr1 (equiv-Ω-Cyclic-Type-Group k) = equiv-compute-Ω-Cyclic-Type k
-pr2 (equiv-Ω-Cyclic-Type-Group k) =
-  preserves-concat-equiv-compute-Ω-Cyclic-Type k
+pr2 (equiv-Ω-Cyclic-Type-Group k) {x} {y} =
+  preserves-concat-equiv-compute-Ω-Cyclic-Type k {x} {y}
 
 iso-Ω-Cyclic-Type-Group :
-  (k : ℕ) → type-iso-Group (Ω-Cyclic-Type-Group k) (ℤ-Mod-Group k)
+  (k : ℕ) → iso-Group (Ω-Cyclic-Type-Group k) (ℤ-Mod-Group k)
 iso-Ω-Cyclic-Type-Group k =
   iso-equiv-Group
     ( Ω-Cyclic-Type-Group k)

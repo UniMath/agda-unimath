@@ -10,6 +10,7 @@ module group-theory.category-of-semigroups where
 open import category-theory.categories
 open import category-theory.large-categories
 
+open import foundation.1-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
@@ -36,17 +37,15 @@ category.
 is-large-category-Semigroup :
   is-large-category-Large-Precategory Semigroup-Large-Precategory
 is-large-category-Semigroup G =
-  fundamental-theorem-id
-    ( is-contr-total-iso-Semigroup G)
-    ( iso-eq-Semigroup G)
+  fundamental-theorem-id (is-torsorial-iso-Semigroup G) (iso-eq-Semigroup G)
 
 extensionality-Semigroup :
-  {l : Level} (G H : Semigroup l) → Id G H ≃ type-iso-Semigroup G H
+  {l : Level} (G H : Semigroup l) → Id G H ≃ iso-Semigroup G H
 pr1 (extensionality-Semigroup G H) = iso-eq-Semigroup G H
 pr2 (extensionality-Semigroup G H) = is-large-category-Semigroup G H
 
 eq-iso-Semigroup :
-  {l : Level} (G H : Semigroup l) → type-iso-Semigroup G H → Id G H
+  {l : Level} (G H : Semigroup l) → iso-Semigroup G H → Id G H
 eq-iso-Semigroup G H = map-inv-is-equiv (is-large-category-Semigroup G H)
 
 Semigroup-Large-Category : Large-Category lsuc (_⊔_)
@@ -61,4 +60,13 @@ is-large-category-Large-Category Semigroup-Large-Category =
 ```agda
 Semigroup-Category : (l : Level) → Category (lsuc l) l
 Semigroup-Category = category-Large-Category Semigroup-Large-Category
+```
+
+## Corollaries
+
+### The type of semigroups is a 1-type
+
+```agda
+is-1-type-Semigroup : {l : Level} → is-1-type (Semigroup l)
+is-1-type-Semigroup {l} = is-1-type-obj-Category (Semigroup-Category l)
 ```

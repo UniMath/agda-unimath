@@ -36,7 +36,7 @@ module _
   where
 
   set-dihedral-group-Ab : Set l
-  set-dihedral-group-Ab = coprod-Set (set-Ab A) (set-Ab A)
+  set-dihedral-group-Ab = coproduct-Set (set-Ab A) (set-Ab A)
 
   type-dihedral-group-Ab : UU l
   type-dihedral-group-Ab = type-Set set-dihedral-group-Ab

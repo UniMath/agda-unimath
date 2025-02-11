@@ -16,14 +16,19 @@ open import foundation-core.empty-types
 
 ## Idea
 
-The Curry-Howard interpretation of negation in type theory is the interpretation
-of the proposition `P ⇒ ⊥` using propositions as types. Thus, the negation of a
-type `A` is the type `A → empty`.
+The
+[Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
+of _negation_ in type theory is the interpretation of the proposition `P ⇒ ⊥`
+using propositions as types. Thus, the
+{{#concept "negation" Disambiguation="of a type" WDID=Q190558 WD="logical negation" Agda=¬_}}
+of a type `A` is the type `A → empty`.
 
 ## Definition
 
 ```agda
-¬ : {l : Level} → UU l → UU l
+infix 25 ¬_
+
+¬_ : {l : Level} → UU l → UU l
 ¬ A = A → empty
 
 map-neg :
@@ -31,3 +36,8 @@ map-neg :
   (P → Q) → (¬ Q → ¬ P)
 map-neg f nq p = nq (f p)
 ```
+
+## External links
+
+- [negation](https://ncatlab.org/nlab/show/negation) at $n$Lab
+- [Negation](https://en.wikipedia.org/wiki/Negation) at Wikipedia

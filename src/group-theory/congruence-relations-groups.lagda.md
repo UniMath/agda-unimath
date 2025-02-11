@@ -10,12 +10,12 @@ module group-theory.congruence-relations-groups where
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.binary-transport
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-semigroups
@@ -36,32 +36,34 @@ that for every `x1 x2 y1 y2 : G` such that `x1 ≡ x2` and `y1 ≡ y2` we have
 ```agda
 is-congruence-Group :
   {l1 l2 : Level} (G : Group l1) →
-  Equivalence-Relation l2 (type-Group G) → UU (l1 ⊔ l2)
+  equivalence-relation l2 (type-Group G) → UU (l1 ⊔ l2)
 is-congruence-Group G R =
   is-congruence-Semigroup (semigroup-Group G) R
 
 congruence-Group :
   {l : Level} (l2 : Level) (G : Group l) → UU (l ⊔ lsuc l2)
 congruence-Group l2 G =
-  Σ (Equivalence-Relation l2 (type-Group G)) (is-congruence-Group G)
+  Σ (equivalence-relation l2 (type-Group G)) (is-congruence-Group G)
 
 module _
   {l1 l2 : Level} (G : Group l1) (R : congruence-Group l2 G)
   where
 
-  eq-rel-congruence-Group : Equivalence-Relation l2 (type-Group G)
-  eq-rel-congruence-Group = pr1 R
+  equivalence-relation-congruence-Group : equivalence-relation l2 (type-Group G)
+  equivalence-relation-congruence-Group = pr1 R
 
   prop-congruence-Group : Relation-Prop l2 (type-Group G)
-  prop-congruence-Group = prop-Equivalence-Relation eq-rel-congruence-Group
+  prop-congruence-Group =
+    prop-equivalence-relation equivalence-relation-congruence-Group
 
   sim-congruence-Group : (x y : type-Group G) → UU l2
-  sim-congruence-Group = sim-Equivalence-Relation eq-rel-congruence-Group
+  sim-congruence-Group =
+    sim-equivalence-relation equivalence-relation-congruence-Group
 
   is-prop-sim-congruence-Group :
     (x y : type-Group G) → is-prop (sim-congruence-Group x y)
   is-prop-sim-congruence-Group =
-    is-prop-sim-Equivalence-Relation eq-rel-congruence-Group
+    is-prop-sim-equivalence-relation equivalence-relation-congruence-Group
 
   concatenate-eq-sim-congruence-Group :
     {x1 x2 y : type-Group G} →
@@ -80,25 +82,26 @@ module _
   concatenate-eq-sim-eq-congruence-Group refl H refl = H
 
   refl-congruence-Group : is-reflexive sim-congruence-Group
-  refl-congruence-Group = refl-Equivalence-Relation eq-rel-congruence-Group
+  refl-congruence-Group =
+    refl-equivalence-relation equivalence-relation-congruence-Group
 
   symmetric-congruence-Group : is-symmetric sim-congruence-Group
   symmetric-congruence-Group =
-    symmetric-Equivalence-Relation eq-rel-congruence-Group
+    symmetric-equivalence-relation equivalence-relation-congruence-Group
 
   equiv-symmetric-congruence-Group :
     (x y : type-Group G) →
     sim-congruence-Group x y ≃ sim-congruence-Group y x
   equiv-symmetric-congruence-Group x y =
-    equiv-symmetric-Equivalence-Relation eq-rel-congruence-Group
+    equiv-symmetric-equivalence-relation equivalence-relation-congruence-Group
 
   transitive-congruence-Group :
     is-transitive sim-congruence-Group
   transitive-congruence-Group =
-    transitive-Equivalence-Relation eq-rel-congruence-Group
+    transitive-equivalence-relation equivalence-relation-congruence-Group
 
   mul-congruence-Group :
-    is-congruence-Group G eq-rel-congruence-Group
+    is-congruence-Group G equivalence-relation-congruence-Group
   mul-congruence-Group = pr2 R
 
   left-mul-congruence-Group :
@@ -155,8 +158,8 @@ module _
     concatenate-eq-sim-eq-congruence-Group
       ( inv
         ( ( associative-mul-Group G x (inv-Group G y) y) ∙
-          ( ( ap (mul-Group G x) (left-inverse-law-mul-Group G y)) ∙
-            ( right-unit-law-mul-Group G x))))
+          ( ap (mul-Group G x) (left-inverse-law-mul-Group G y)) ∙
+          ( right-unit-law-mul-Group G x)))
       ( right-mul-congruence-Group H y)
       ( left-unit-law-mul-Group G y)
 
@@ -199,10 +202,10 @@ module _
             ( inv-Group G x)
             ( y)
             ( inv-Group G y)) ∙
-          ( ( ap
-              ( mul-Group G (inv-Group G x))
-              ( right-inverse-law-mul-Group G y)) ∙
-            ( right-unit-law-mul-Group G (inv-Group G x)))))
+          ( ap
+            ( mul-Group G (inv-Group G x))
+            ( right-inverse-law-mul-Group G y)) ∙
+          ( right-unit-law-mul-Group G (inv-Group G x))))
       ( symmetric-congruence-Group _ _
         ( right-mul-congruence-Group
           ( left-mul-congruence-Group (inv-Group G x) H)
@@ -230,13 +233,11 @@ refl-relate-same-elements-congruence-Group :
 refl-relate-same-elements-congruence-Group G =
   refl-relate-same-elements-congruence-Semigroup (semigroup-Group G)
 
-is-contr-total-relate-same-elements-congruence-Group :
+is-torsorial-relate-same-elements-congruence-Group :
   {l1 l2 : Level} (G : Group l1) (R : congruence-Group l2 G) →
-  is-contr
-    ( Σ ( congruence-Group l2 G)
-        ( relate-same-elements-congruence-Group G R))
-is-contr-total-relate-same-elements-congruence-Group G =
-  is-contr-total-relate-same-elements-congruence-Semigroup
+  is-torsorial (relate-same-elements-congruence-Group G R)
+is-torsorial-relate-same-elements-congruence-Group G =
+  is-torsorial-relate-same-elements-congruence-Semigroup
     ( semigroup-Group G)
 
 relate-same-elements-eq-congruence-Group :

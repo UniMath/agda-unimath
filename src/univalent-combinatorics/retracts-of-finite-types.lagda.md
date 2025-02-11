@@ -17,6 +17,7 @@ open import foundation.fibers-of-maps
 open import foundation.functoriality-propositional-truncation
 open import foundation.injective-maps
 open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
@@ -91,7 +92,7 @@ count-retract (pair i R) e =
 
 abstract
   is-finite-retract :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} → A retract-of B →
-    is-finite B → is-finite A
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    A retract-of B → is-finite B → is-finite A
   is-finite-retract R = map-trunc-Prop (count-retract R)
 ```

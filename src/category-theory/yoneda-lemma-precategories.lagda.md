@@ -7,8 +7,9 @@ module category-theory.yoneda-lemma-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
-open import category-theory.natural-transformations-functors-precategories
+open import category-theory.copresheaf-categories
+open import category-theory.functors-from-small-to-large-precategories
+open import category-theory.natural-transformations-functors-from-small-to-large-precategories
 open import category-theory.precategories
 open import category-theory.representable-functors-precategories
 
@@ -17,10 +18,9 @@ open import foundation.category-of-sets
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.retractions
-open import foundation.sections
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -31,87 +31,157 @@ open import foundation.universe-levels
 
 Given a [precategory](category-theory.precategories.md) `C`, an object `c`, and
 a [functor](category-theory.functors-precategories.md) `F` from `C` to the
-[precategory of sets](foundation.category-of-sets.md), there is an
-[equivalence](foundation-core.equivalences.md) between the
+[category of sets](foundation.category-of-sets.md)
+
+```text
+  F : C → Set,
+```
+
+there is an [equivalence](foundation-core.equivalences.md) between the
 [set of natural transformations](category-theory.natural-transformations-functors-precategories.md)
 from the functor
 [represented](category-theory.representable-functors-precategories.md) by `c` to
 `F` and the [set](foundation-core.sets.md) `F c`.
+
+```text
+  Nat(Hom(c , -) , F) ≃ F c
+```
 
 More precisely, the **Yoneda lemma** asserts that the map from the type of
 natural transformations to the type `F c` defined by evaluating the component of
 the natural transformation at the object `c` at the identity arrow on `c` is an
 equivalence.
 
-## Definition
+## Theorem
+
+### The Yoneda lemma into the large category of sets
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Precategory l1 l2) (c : obj-Precategory C)
-  (F : functor-Precategory C (Set-Precategory l2))
+  {l1 l2 l3 : Level} (C : Precategory l1 l2) (c : obj-Precategory C)
+  (F : copresheaf-Precategory C l3)
   where
 
-  yoneda-evid-Precategory :
-    natural-transformation-Precategory
+  map-yoneda-Precategory :
+    hom-copresheaf-Precategory C (representable-functor-Precategory C c) F →
+    element-copresheaf-Precategory C F c
+  map-yoneda-Precategory σ =
+    hom-natural-transformation-Small-Large-Precategory
       ( C)
-      ( Set-Precategory l2)
-      ( representable-functor-Precategory C c)
-      ( F) →
-    type-Set (obj-functor-Precategory C (Set-Precategory l2) F c)
-  yoneda-evid-Precategory α =
-    hom-family-natural-transformation-Precategory
-      ( C)
-      ( Set-Precategory l2)
+      ( Set-Large-Precategory)
       ( representable-functor-Precategory C c)
       ( F)
-      ( α)
+      ( σ)
       ( c)
       ( id-hom-Precategory C)
+```
 
-  yoneda-extension-Precategory :
-    type-Set (obj-functor-Precategory C (Set-Precategory l2) F c) →
-    natural-transformation-Precategory
-      C (Set-Precategory l2) (representable-functor-Precategory C c) F
-  pr1 (yoneda-extension-Precategory u) x f =
-    hom-functor-Precategory C (Set-Precategory l2) F f u
-  pr2 (yoneda-extension-Precategory u) g =
+The inverse to the Yoneda map:
+
+```agda
+  hom-family-extension-yoneda-Precategory :
+    (u : element-copresheaf-Precategory C F c) →
+    hom-family-functor-Small-Large-Precategory
+      C Set-Large-Precategory (representable-functor-Precategory C c) F
+  hom-family-extension-yoneda-Precategory u x f =
+    hom-functor-Small-Large-Precategory C Set-Large-Precategory F f u
+
+  naturality-extension-yoneda-Precategory :
+    (u : element-copresheaf-Precategory C F c) →
+    is-natural-transformation-Small-Large-Precategory
+      C Set-Large-Precategory (representable-functor-Precategory C c) F
+      ( hom-family-extension-yoneda-Precategory u)
+  naturality-extension-yoneda-Precategory u g =
     eq-htpy
       ( λ f →
         htpy-eq
           ( inv
-            ( preserves-comp-functor-Precategory C (Set-Precategory l2) F g f))
+            ( preserves-comp-functor-Small-Large-Precategory
+                C Set-Large-Precategory F g f))
           ( u))
 
-  section-yoneda-evid-Precategory :
-    section yoneda-evid-Precategory
-  pr1 section-yoneda-evid-Precategory = yoneda-extension-Precategory
-  pr2 section-yoneda-evid-Precategory =
-    htpy-eq (preserves-id-functor-Precategory C (Set-Precategory l2) F c)
+  extension-yoneda-Precategory :
+    element-copresheaf-Precategory C F c →
+    hom-copresheaf-Precategory C (representable-functor-Precategory C c) F
+  pr1 (extension-yoneda-Precategory u) =
+    hom-family-extension-yoneda-Precategory u
+  pr2 (extension-yoneda-Precategory u) =
+    naturality-extension-yoneda-Precategory u
+```
 
-  retraction-yoneda-evid-Precategory :
-    retraction yoneda-evid-Precategory
-  pr1 retraction-yoneda-evid-Precategory = yoneda-extension-Precategory
-  pr2 retraction-yoneda-evid-Precategory α =
+The inverse is an inverse:
+
+```agda
+  is-section-extension-yoneda-Precategory :
+    ( map-yoneda-Precategory ∘
+      extension-yoneda-Precategory) ~
+    id
+  is-section-extension-yoneda-Precategory =
+    htpy-eq
+      ( preserves-id-functor-Small-Large-Precategory
+          C Set-Large-Precategory F c)
+
+  is-retraction-extension-yoneda-Precategory :
+    ( extension-yoneda-Precategory ∘
+      map-yoneda-Precategory) ~
+    id
+  is-retraction-extension-yoneda-Precategory σ =
     eq-type-subtype
-      ( is-natural-transformation-prop-Precategory
-        ( C) (Set-Precategory l2) (representable-functor-Precategory C c) F)
+      ( is-natural-transformation-prop-Small-Large-Precategory
+        ( C) Set-Large-Precategory (representable-functor-Precategory C c) F)
       ( eq-htpy
         ( λ x →
           eq-htpy
             ( λ f →
               ( htpy-eq
-                ( (pr2 α) f)
-                ( (id-hom-Precategory C))) ∙
-              ( ap (pr1 α x) (right-unit-law-comp-hom-Precategory C f)))))
+                ( pr2 σ f)
+                ( id-hom-Precategory C)) ∙
+              ( ap (pr1 σ x) (right-unit-law-comp-hom-Precategory C f)))))
 
-  yoneda-lemma-Precategory : is-equiv yoneda-evid-Precategory
-  pr1 yoneda-lemma-Precategory = section-yoneda-evid-Precategory
-  pr2 yoneda-lemma-Precategory = retraction-yoneda-evid-Precategory
+  lemma-yoneda-Precategory : is-equiv map-yoneda-Precategory
+  lemma-yoneda-Precategory =
+    is-equiv-is-invertible
+      ( extension-yoneda-Precategory)
+      ( is-section-extension-yoneda-Precategory)
+      ( is-retraction-extension-yoneda-Precategory)
 
-  equiv-yoneda-lemma-Precategory :
-    ( natural-transformation-Precategory C (Set-Precategory l2)
-      ( representable-functor-Precategory C c) (F)) ≃
-    ( type-Set (obj-functor-Precategory C (Set-Precategory l2) F c))
-  pr1 equiv-yoneda-lemma-Precategory = yoneda-evid-Precategory
-  pr2 equiv-yoneda-lemma-Precategory = yoneda-lemma-Precategory
+  equiv-lemma-yoneda-Precategory :
+    hom-copresheaf-Precategory C (representable-functor-Precategory C c) F ≃
+    element-copresheaf-Precategory C F c
+  pr1 equiv-lemma-yoneda-Precategory = map-yoneda-Precategory
+  pr2 equiv-lemma-yoneda-Precategory = lemma-yoneda-Precategory
 ```
+
+## Corollaries
+
+### The Yoneda lemma for representable functors
+
+An important special-case of the Yoneda lemma is when `F` is itself a
+representable functor `F = Hom(-, d)`.
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2) (c d : obj-Precategory C)
+  where
+
+  equiv-lemma-yoneda-representable-Precategory :
+    hom-copresheaf-Precategory C
+      ( representable-functor-Precategory C c)
+      ( representable-functor-Precategory C d) ≃
+    hom-Precategory C d c
+  equiv-lemma-yoneda-representable-Precategory =
+    equiv-lemma-yoneda-Precategory C c (representable-functor-Precategory C d)
+```
+
+## See also
+
+- [Presheaf categories](category-theory.presheaf-categories.md)
+
+## External links
+
+- [The Yoneda embedding](https://1lab.dev/Cat.Functor.Hom.html#the-yoneda-embedding)
+  at 1lab
+- [Yoneda lemma](https://ncatlab.org/nlab/show/Yoneda+lemma) at $n$Lab
+- [The Yoneda lemma](https://www.math3ma.com/blog/the-yoneda-lemma) at Math3ma
+- [Yoneda lemma](https://en.wikipedia.org/wiki/Yoneda_lemma) at Wikipedia
+- [Yoneda lemma](https://www.wikidata.org/wiki/Q320577) at Wikidata

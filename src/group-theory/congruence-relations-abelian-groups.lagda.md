@@ -8,12 +8,11 @@ module group-theory.congruence-relations-abelian-groups where
 
 ```agda
 open import foundation.binary-relations
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -32,7 +31,7 @@ underlying group of `A`.
 ```agda
 is-congruence-Ab :
   {l1 l2 : Level} (A : Ab l1) →
-  Equivalence-Relation l2 (type-Ab A) →
+  equivalence-relation l2 (type-Ab A) →
   UU (l1 ⊔ l2)
 is-congruence-Ab A = is-congruence-Group (group-Ab A)
 
@@ -43,8 +42,9 @@ module _
   {l1 l2 : Level} (A : Ab l1) (R : congruence-Ab l2 A)
   where
 
-  eq-rel-congruence-Ab : Equivalence-Relation l2 (type-Ab A)
-  eq-rel-congruence-Ab = eq-rel-congruence-Group (group-Ab A) R
+  equivalence-relation-congruence-Ab : equivalence-relation l2 (type-Ab A)
+  equivalence-relation-congruence-Ab =
+    equivalence-relation-congruence-Group (group-Ab A) R
 
   prop-congruence-Ab : Relation-Prop l2 (type-Ab A)
   prop-congruence-Ab = prop-congruence-Group (group-Ab A) R
@@ -92,7 +92,7 @@ module _
     is-transitive sim-congruence-Ab
   transitive-congruence-Ab = transitive-congruence-Group (group-Ab A) R
 
-  add-congruence-Ab : is-congruence-Ab A eq-rel-congruence-Ab
+  add-congruence-Ab : is-congruence-Ab A equivalence-relation-congruence-Ab
   add-congruence-Ab = mul-congruence-Group (group-Ab A) R
 
   left-add-congruence-Ab :
@@ -177,13 +177,11 @@ refl-relate-same-elements-congruence-Ab :
 refl-relate-same-elements-congruence-Ab A =
   refl-relate-same-elements-congruence-Group (group-Ab A)
 
-is-contr-total-relate-same-elements-congruence-Ab :
+is-torsorial-relate-same-elements-congruence-Ab :
   {l1 l2 : Level} (A : Ab l1) (R : congruence-Ab l2 A) →
-  is-contr
-    ( Σ ( congruence-Ab l2 A)
-        ( relate-same-elements-congruence-Ab A R))
-is-contr-total-relate-same-elements-congruence-Ab A =
-  is-contr-total-relate-same-elements-congruence-Group (group-Ab A)
+  is-torsorial (relate-same-elements-congruence-Ab A R)
+is-torsorial-relate-same-elements-congruence-Ab A =
+  is-torsorial-relate-same-elements-congruence-Group (group-Ab A)
 
 relate-same-elements-eq-congruence-Ab :
   {l1 l2 : Level} (A : Ab l1) (R S : congruence-Ab l2 A) →

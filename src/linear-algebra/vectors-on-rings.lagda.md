@@ -265,7 +265,7 @@ module _
   pr1 (pr2 (is-unital-vec-Ring n)) = left-unit-law-add-vec-Ring R
   pr2 (pr2 (is-unital-vec-Ring n)) = right-unit-law-add-vec-Ring R
 
-  is-group-vec-Ring : (n : ℕ) → is-group (vec-Ring-Semigroup R n)
+  is-group-vec-Ring : (n : ℕ) → is-group-Semigroup (vec-Ring-Semigroup R n)
   pr1 (is-group-vec-Ring n) = is-unital-vec-Ring n
   pr1 (pr2 (is-group-vec-Ring n)) = neg-vec-Ring
   pr1 (pr2 (pr2 (is-group-vec-Ring n))) = left-inverse-law-add-vec-Ring

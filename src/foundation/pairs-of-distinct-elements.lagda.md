@@ -21,6 +21,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -78,16 +79,15 @@ module _
   Eq-eq-pair-of-distinct-elements p .p refl =
     refl-Eq-pair-of-distinct-elements p
 
-  is-contr-total-Eq-pair-of-distinct-elements :
+  is-torsorial-Eq-pair-of-distinct-elements :
     (p : pair-of-distinct-elements A) →
-    is-contr (Σ (pair-of-distinct-elements A) (Eq-pair-of-distinct-elements p))
-  is-contr-total-Eq-pair-of-distinct-elements p =
-    is-contr-total-Eq-structure
-      ( λ x ynp α → second-pair-of-distinct-elements p ＝ pr1 ynp)
-      ( is-contr-total-path (first-pair-of-distinct-elements p))
+    is-torsorial (Eq-pair-of-distinct-elements p)
+  is-torsorial-Eq-pair-of-distinct-elements p =
+    is-torsorial-Eq-structure
+      ( is-torsorial-Id (first-pair-of-distinct-elements p))
       ( pair (first-pair-of-distinct-elements p) refl)
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-path (second-pair-of-distinct-elements p))
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-Id (second-pair-of-distinct-elements p))
         ( λ x → is-prop-neg)
         ( second-pair-of-distinct-elements p)
         ( refl)
@@ -98,7 +98,7 @@ module _
     is-equiv (Eq-eq-pair-of-distinct-elements p q)
   is-equiv-Eq-eq-pair-of-distinct-elements p =
     fundamental-theorem-id
-      ( is-contr-total-Eq-pair-of-distinct-elements p)
+      ( is-torsorial-Eq-pair-of-distinct-elements p)
       ( Eq-eq-pair-of-distinct-elements p)
 
   eq-Eq-pair-of-distinct-elements :

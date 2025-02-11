@@ -29,12 +29,11 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
-open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import lists.functoriality-lists
 open import lists.lists
@@ -214,7 +213,7 @@ abstract
         ( neq-inr-inl)
         ( λ r →
           neq-inr-inl
-            ( is-injective-map-equiv f (p ∙ (r ∙ inv q))))
+            ( is-injective-equiv f (p ∙ (r ∙ inv q))))
     lemma :
       Id
         ( map-equiv
@@ -405,7 +404,7 @@ abstract
     (succ-ℕ n) f (inr star) p (inl y) (inr star) q =
     ex-falso
       ( neq-inr-inl
-        ( is-injective-map-equiv f (p ∙ inv q)))
+        ( is-injective-equiv f (p ∙ inv q)))
   retraction-permutation-list-transpositions-Fin'
     (succ-ℕ n) f (inr star) p (inr star) z q =
     ap

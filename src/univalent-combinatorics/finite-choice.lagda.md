@@ -13,12 +13,12 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps
 open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.hilberts-epsilon-operators
@@ -52,8 +52,8 @@ abstract
   finite-choice-Fin {l1} zero-ℕ {Y} H = unit-trunc-Prop ind-empty
   finite-choice-Fin {l1} (succ-ℕ k) {Y} H =
     map-inv-equiv-trunc-Prop
-      ( equiv-dependent-universal-property-coprod Y)
-      ( map-inv-distributive-trunc-prod-Prop
+      ( equiv-dependent-universal-property-coproduct Y)
+      ( map-inv-distributive-trunc-product-Prop
         ( pair
           ( finite-choice-Fin k (λ x → H (inl x)))
           ( map-inv-equiv-trunc-Prop

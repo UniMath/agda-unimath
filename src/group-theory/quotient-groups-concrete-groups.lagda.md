@@ -93,7 +93,7 @@ module _
   extensionality-classifying-type-quotient-Concrete-Group u =
     extensionality-type-subtype
       ( λ (X : transitive-action-Concrete-Group l2 G) →
-        mere-equiv-action-Concrete-Group-Prop G
+        mere-equiv-prop-action-Concrete-Group G
           ( action-normal-subgroup-Concrete-Group G N)
           ( action-transitive-action-Concrete-Group G X))
       ( pr2 u)
@@ -115,11 +115,11 @@ module _
             unit-trunc-Prop
               ( eq-type-subtype
                 ( λ X →
-                  mere-equiv-action-Concrete-Group-Prop G
+                  mere-equiv-prop-action-Concrete-Group G
                     ( action-normal-subgroup-Concrete-Group G N)
                     ( action-transitive-action-Concrete-Group G X))
                 ( eq-type-subtype
-                  ( is-transitive-action-Concrete-Group-Prop G)
+                  ( is-transitive-prop-action-Concrete-Group G)
                   ( eq-equiv-action-Concrete-Group G
                     ( action-normal-subgroup-Concrete-Group G N)
                     ( pr1 u)
@@ -130,7 +130,7 @@ module _
   is-1-type-classifying-type-quotient-Concrete-Group =
     is-1-type-type-subtype
       ( λ X →
-        mere-equiv-action-Concrete-Group-Prop G
+        mere-equiv-prop-action-Concrete-Group G
           ( action-normal-subgroup-Concrete-Group G N)
           ( action-transitive-action-Concrete-Group G X))
       ( is-1-type-transitive-action-Concrete-Group G)

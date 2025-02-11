@@ -7,15 +7,18 @@ module group-theory.homomorphisms-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import category-theory.large-categories
+
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.category-of-abelian-groups
 open import group-theory.homomorphisms-commutative-monoids
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
@@ -30,6 +33,8 @@ underlying groups.
 
 ## Definition
 
+### The predicate that a map between abelian groups preserves addition
+
 ```agda
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
@@ -37,31 +42,55 @@ module _
 
   preserves-add-Ab : (type-Ab A → type-Ab B) → UU (l1 ⊔ l2)
   preserves-add-Ab = preserves-mul-Semigroup (semigroup-Ab A) (semigroup-Ab B)
+```
+
+### The predicate that a map between abelian groups preserves zero
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
+  where
+
+  preserves-zero-Ab : (type-Ab A → type-Ab B) → UU l2
+  preserves-zero-Ab = preserves-unit-Group (group-Ab A) (group-Ab B)
+```
+
+### The predicate that a map between abelian groups preserves negatives
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
+  where
+
+  preserves-negatives-Ab : (type-Ab A → type-Ab B) → UU (l1 ⊔ l2)
+  preserves-negatives-Ab =
+    preserves-inverses-Group (group-Ab A) (group-Ab B)
+```
+
+### Homomorphisms of abelian groups
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
+  where
 
   hom-set-Ab : Set (l1 ⊔ l2)
-  hom-set-Ab = hom-set-Group (group-Ab A) (group-Ab B)
+  hom-set-Ab = hom-set-Large-Category Ab-Large-Category A B
 
   hom-Ab : UU (l1 ⊔ l2)
-  hom-Ab = hom-Group (group-Ab A) (group-Ab B)
+  hom-Ab = hom-Large-Category Ab-Large-Category A B
 
   map-hom-Ab : hom-Ab → type-Ab A → type-Ab B
   map-hom-Ab = map-hom-Group (group-Ab A) (group-Ab B)
 
-  preserves-add-hom-Ab : (f : hom-Ab) → preserves-add-Ab (map-hom-Ab f)
+  preserves-add-hom-Ab : (f : hom-Ab) → preserves-add-Ab A B (map-hom-Ab f)
   preserves-add-hom-Ab f = preserves-mul-hom-Group (group-Ab A) (group-Ab B) f
 
-  preserves-zero-Ab : (type-Ab A → type-Ab B) → UU l2
-  preserves-zero-Ab = preserves-unit-Group (group-Ab A) (group-Ab B)
-
-  preserves-zero-hom-Ab : (f : hom-Ab) → preserves-zero-Ab (map-hom-Ab f)
+  preserves-zero-hom-Ab : (f : hom-Ab) → preserves-zero-Ab A B (map-hom-Ab f)
   preserves-zero-hom-Ab f = preserves-unit-hom-Group (group-Ab A) (group-Ab B) f
 
-  preserves-negatives-Ab : (type-Ab A → type-Ab B) → UU (l1 ⊔ l2)
-  preserves-negatives-Ab f =
-    (x : type-Ab A) → Id (f (neg-Ab A x)) (neg-Ab B (f x))
-
   preserves-negatives-hom-Ab :
-    (f : hom-Ab) → preserves-negatives-Ab (map-hom-Ab f)
+    (f : hom-Ab) → preserves-negatives-Ab A B (map-hom-Ab f)
   preserves-negatives-hom-Ab f =
     preserves-inv-hom-Group (group-Ab A) (group-Ab B) f
 
@@ -96,10 +125,10 @@ module _
   htpy-eq-hom-Ab f g = htpy-eq-hom-Group (group-Ab A) (group-Ab B) f g
 
   abstract
-    is-contr-total-htpy-hom-Ab :
-      (f : hom-Ab A B) → is-contr (Σ (hom-Ab A B) (htpy-hom-Ab f))
-    is-contr-total-htpy-hom-Ab f =
-      is-contr-total-htpy-hom-Group (group-Ab A) (group-Ab B) f
+    is-torsorial-htpy-hom-Ab :
+      (f : hom-Ab A B) → is-torsorial (htpy-hom-Ab f)
+    is-torsorial-htpy-hom-Ab f =
+      is-torsorial-htpy-hom-Group (group-Ab A) (group-Ab B) f
 
   abstract
     is-equiv-htpy-eq-hom-Ab :
@@ -138,11 +167,11 @@ comp-hom-Ab A B C =
 
 ```agda
 associative-comp-hom-Ab :
-  { l1 l2 l3 l4 : Level} (A : Ab l1) (B : Ab l2) (C : Ab l3) (D : Ab l4) →
-  ( h : hom-Ab C D) (g : hom-Ab B C) (f : hom-Ab A B) →
-  Id
-    ( comp-hom-Ab A B D (comp-hom-Ab B C D h g) f)
-    ( comp-hom-Ab A C D h (comp-hom-Ab A B C g f))
+  {l1 l2 l3 l4 : Level}
+  (A : Ab l1) (B : Ab l2) (C : Ab l3) (D : Ab l4)
+  (h : hom-Ab C D) (g : hom-Ab B C) (f : hom-Ab A B) →
+  comp-hom-Ab A B D (comp-hom-Ab B C D h g) f ＝
+  comp-hom-Ab A C D h (comp-hom-Ab A B C g f)
 associative-comp-hom-Ab A B C D =
   associative-comp-hom-Semigroup
     ( semigroup-Ab A)

@@ -16,7 +16,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
-open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
@@ -57,8 +57,8 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (N : Submonoid l2 M)
   where
 
-  is-normal-submonoid-Prop : Prop (l1 ⊔ l2)
-  is-normal-submonoid-Prop =
+  is-normal-prop-Submonoid : Prop (l1 ⊔ l2)
+  is-normal-prop-Submonoid =
     Π-Prop
       ( type-Monoid M)
       ( λ x →
@@ -75,10 +75,10 @@ module _
                     ( subset-Submonoid M N (mul-Monoid M x y))))))
 
   is-normal-Submonoid : UU (l1 ⊔ l2)
-  is-normal-Submonoid = type-Prop is-normal-submonoid-Prop
+  is-normal-Submonoid = type-Prop is-normal-prop-Submonoid
 
   is-prop-is-normal-Submonoid : is-prop is-normal-Submonoid
-  is-prop-is-normal-Submonoid = is-prop-type-Prop is-normal-submonoid-Prop
+  is-prop-is-normal-Submonoid = is-prop-type-Prop is-normal-prop-Submonoid
 
 Normal-Submonoid :
   {l1 : Level} (l2 : Level) → Monoid l1 → UU (l1 ⊔ lsuc l2)
@@ -98,7 +98,8 @@ module _
   subset-Normal-Submonoid =
     subset-Submonoid M submonoid-Normal-Submonoid
 
-  is-submonoid-Normal-Submonoid : is-submonoid-Monoid M subset-Normal-Submonoid
+  is-submonoid-Normal-Submonoid :
+    is-submonoid-subset-Monoid M subset-Normal-Submonoid
   is-submonoid-Normal-Submonoid =
     is-submonoid-Submonoid M submonoid-Normal-Submonoid
 
@@ -213,7 +214,7 @@ module _
     (N ＝ K) ≃ has-same-elements-Normal-Submonoid K
   extensionality-Normal-Submonoid =
     extensionality-type-subtype
-      ( is-normal-submonoid-Prop M)
+      ( is-normal-prop-Submonoid M)
       ( is-normal-Normal-Submonoid M N)
       ( λ x → (id , id))
       ( extensionality-Submonoid M (submonoid-Normal-Submonoid M N))
@@ -264,18 +265,19 @@ module _
     is-transitive sim-congruence-Normal-Submonoid
   transitive-congruence-Normal-Submonoid _ _ _ H K u v = (H u v) ∘iff (K u v)
 
-  eq-rel-congruence-Normal-Submonoid :
-    Equivalence-Relation (l1 ⊔ l2) (type-Monoid M)
-  pr1 eq-rel-congruence-Normal-Submonoid = rel-congruence-Normal-Submonoid
-  pr1 (pr2 eq-rel-congruence-Normal-Submonoid) =
+  equivalence-relation-congruence-Normal-Submonoid :
+    equivalence-relation (l1 ⊔ l2) (type-Monoid M)
+  pr1 equivalence-relation-congruence-Normal-Submonoid =
+    rel-congruence-Normal-Submonoid
+  pr1 (pr2 equivalence-relation-congruence-Normal-Submonoid) =
     refl-congruence-Normal-Submonoid
-  pr1 (pr2 (pr2 eq-rel-congruence-Normal-Submonoid)) =
+  pr1 (pr2 (pr2 equivalence-relation-congruence-Normal-Submonoid)) =
     symmetric-congruence-Normal-Submonoid
-  pr2 (pr2 (pr2 eq-rel-congruence-Normal-Submonoid)) =
+  pr2 (pr2 (pr2 equivalence-relation-congruence-Normal-Submonoid)) =
     transitive-congruence-Normal-Submonoid
 
   is-congruence-congruence-Normal-Submonoid :
-    is-congruence-Monoid M eq-rel-congruence-Normal-Submonoid
+    is-congruence-Monoid M equivalence-relation-congruence-Normal-Submonoid
   pr1 (is-congruence-congruence-Normal-Submonoid {x} {x'} {y} {y'} H K u v) L =
     is-closed-under-eq-Normal-Submonoid M N
       ( forward-implication
@@ -302,7 +304,8 @@ module _
         ( ap (mul-Monoid' M v) (associative-mul-Monoid M u x y)))
 
   congruence-Normal-Submonoid : congruence-Monoid (l1 ⊔ l2) M
-  pr1 congruence-Normal-Submonoid = eq-rel-congruence-Normal-Submonoid
+  pr1 congruence-Normal-Submonoid =
+    equivalence-relation-congruence-Normal-Submonoid
   pr2 congruence-Normal-Submonoid = is-congruence-congruence-Normal-Submonoid
 ```
 
@@ -573,5 +576,4 @@ pr2 (equiv-normal-submonoid-saturated-congruence-Monoid l2 M) =
 
 ## References
 
-- S. Margolis and J.-É. Pin, Inverse semigroups and extensions of groups by
-  semilattices, J. of Algebra 110 (1987), 277-297.
+{{#bibliography}} {{#reference MP87}}

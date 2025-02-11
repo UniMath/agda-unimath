@@ -20,6 +20,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
@@ -65,18 +66,18 @@ module _
     type-Pointed-Type-With-Aut → type-Pointed-Type-With-Aut
   map-aut-Pointed-Type-With-Aut = map-equiv aut-Pointed-Type-With-Aut
 
-  inv-map-aut-Pointed-Type-With-Aut :
+  map-inv-aut-Pointed-Type-With-Aut :
     type-Pointed-Type-With-Aut → type-Pointed-Type-With-Aut
-  inv-map-aut-Pointed-Type-With-Aut = map-inv-equiv aut-Pointed-Type-With-Aut
+  map-inv-aut-Pointed-Type-With-Aut = map-inv-equiv aut-Pointed-Type-With-Aut
 
-  is-section-inv-map-aut-Pointed-Type-With-Aut :
-    (map-aut-Pointed-Type-With-Aut ∘ inv-map-aut-Pointed-Type-With-Aut) ~ id
-  is-section-inv-map-aut-Pointed-Type-With-Aut =
+  is-section-map-inv-aut-Pointed-Type-With-Aut :
+    (map-aut-Pointed-Type-With-Aut ∘ map-inv-aut-Pointed-Type-With-Aut) ~ id
+  is-section-map-inv-aut-Pointed-Type-With-Aut =
     is-section-map-inv-equiv aut-Pointed-Type-With-Aut
 
-  is-retraction-inv-map-aut-Pointed-Type-With-Aut :
-    (inv-map-aut-Pointed-Type-With-Aut ∘ map-aut-Pointed-Type-With-Aut) ~ id
-  is-retraction-inv-map-aut-Pointed-Type-With-Aut =
+  is-retraction-map-inv-aut-Pointed-Type-With-Aut :
+    (map-inv-aut-Pointed-Type-With-Aut ∘ map-aut-Pointed-Type-With-Aut) ~ id
+  is-retraction-map-inv-aut-Pointed-Type-With-Aut =
     is-retraction-map-inv-equiv aut-Pointed-Type-With-Aut
 ```
 
@@ -149,50 +150,16 @@ htpy-hom-Pointed-Type-With-Aut-eq :
 htpy-hom-Pointed-Type-With-Aut-eq X Y h1 .h1 refl =
   refl-htpy-hom-Pointed-Type-With-Aut X Y h1
 
-is-contr-total-htpy-hom-Pointed-Type-With-Aut :
+is-torsorial-htpy-hom-Pointed-Type-With-Aut :
   {l1 l2 : Level} (X : Pointed-Type-With-Aut l1)
   (Y : Pointed-Type-With-Aut l2) (h1 : hom-Pointed-Type-With-Aut X Y) →
-  is-contr
-    ( Σ ( hom-Pointed-Type-With-Aut X Y)
-        ( htpy-hom-Pointed-Type-With-Aut X Y h1))
-is-contr-total-htpy-hom-Pointed-Type-With-Aut X Y h1 =
-  is-contr-total-Eq-structure
-    ( λ ( map-h2 : type-Pointed-Type-With-Aut X → type-Pointed-Type-With-Aut Y)
-        ( str-h2 :
-          ( ( map-h2 (point-Pointed-Type-With-Aut X)) ＝
-            ( point-Pointed-Type-With-Aut Y)) ×
-          ( ( x : type-Pointed-Type-With-Aut X) →
-            ( map-h2 (map-aut-Pointed-Type-With-Aut X x)) ＝
-            ( map-aut-Pointed-Type-With-Aut Y (map-h2 x))))
-        ( H : map-hom-Pointed-Type-With-Aut X Y h1 ~ map-h2) →
-        ( ( preserves-point-map-hom-Pointed-Type-With-Aut X Y h1) ＝
-          ( ( H (point-Pointed-Type-With-Aut X)) ∙
-            ( pr1 str-h2))) ×
-        ( ( x : type-Pointed-Type-With-Aut X) →
-          ( ( ( preserves-aut-map-hom-Pointed-Type-With-Aut X Y h1 x) ∙
-              ( ap (map-aut-Pointed-Type-With-Aut Y) (H x))) ＝
-            ( ( H (map-aut-Pointed-Type-With-Aut X x)) ∙
-              ( pr2 str-h2 x)))))
-    ( is-contr-total-htpy (map-hom-Pointed-Type-With-Aut X Y h1))
+  is-torsorial (htpy-hom-Pointed-Type-With-Aut X Y h1)
+is-torsorial-htpy-hom-Pointed-Type-With-Aut X Y h1 =
+  is-torsorial-Eq-structure
+    ( is-torsorial-htpy (map-hom-Pointed-Type-With-Aut X Y h1))
     ( pair (map-hom-Pointed-Type-With-Aut X Y h1) refl-htpy)
-    ( is-contr-total-Eq-structure
-      ( λ ( point-h2 :
-            ( map-hom-Pointed-Type-With-Aut X Y h1
-              ( point-Pointed-Type-With-Aut X)) ＝
-            ( point-Pointed-Type-With-Aut Y))
-          ( aut-h2 :
-            ( x : type-Pointed-Type-With-Aut X) →
-            ( map-hom-Pointed-Type-With-Aut X Y h1
-              ( map-aut-Pointed-Type-With-Aut X x)) ＝
-            ( map-aut-Pointed-Type-With-Aut Y
-              ( map-hom-Pointed-Type-With-Aut X Y h1 x)))
-          ( α :
-            preserves-point-map-hom-Pointed-Type-With-Aut X Y h1 ＝ point-h2) →
-          ( ( x : type-Pointed-Type-With-Aut X) →
-            ( ( preserves-aut-map-hom-Pointed-Type-With-Aut X Y h1 x) ∙
-              ( refl)) ＝
-            ( aut-h2 x)))
-      ( is-contr-total-path
+    ( is-torsorial-Eq-structure
+      ( is-torsorial-Id
         ( preserves-point-map-hom-Pointed-Type-With-Aut X Y h1))
       ( pair (preserves-point-map-hom-Pointed-Type-With-Aut X Y h1) refl)
       ( is-contr-equiv'
@@ -205,7 +172,7 @@ is-contr-total-htpy-hom-Pointed-Type-With-Aut X Y h1 =
               ( x : type-Pointed-Type-With-Aut X) →
               preserves-aut-map-hom-Pointed-Type-With-Aut X Y h1 x ＝ aut-h2 x))
         ( equiv-tot (equiv-concat-htpy right-unit-htpy))
-        ( is-contr-total-htpy
+        ( is-torsorial-htpy
           ( preserves-aut-map-hom-Pointed-Type-With-Aut X Y h1))))
 
 is-equiv-htpy-hom-Pointed-Type-With-Aut :
@@ -214,7 +181,7 @@ is-equiv-htpy-hom-Pointed-Type-With-Aut :
   is-equiv (htpy-hom-Pointed-Type-With-Aut-eq X Y h1 h2)
 is-equiv-htpy-hom-Pointed-Type-With-Aut X Y h1 =
   fundamental-theorem-id
-    ( is-contr-total-htpy-hom-Pointed-Type-With-Aut X Y h1)
+    ( is-torsorial-htpy-hom-Pointed-Type-With-Aut X Y h1)
     ( htpy-hom-Pointed-Type-With-Aut-eq X Y h1)
 
 eq-htpy-hom-Pointed-Type-With-Aut :

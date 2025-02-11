@@ -31,6 +31,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
@@ -46,11 +47,41 @@ We prove arithmetical laws involving the natural numbers
 
 ## Laws
 
+### The natural numbers is a fixpoint to the functor `X ↦ 1 + X`
+
+```agda
+map-equiv-ℕ : ℕ → unit + ℕ
+map-equiv-ℕ zero-ℕ = inl star
+map-equiv-ℕ (succ-ℕ n) = inr n
+
+map-inv-equiv-ℕ : unit + ℕ → ℕ
+map-inv-equiv-ℕ (inl x) = zero-ℕ
+map-inv-equiv-ℕ (inr n) = succ-ℕ n
+
+is-retraction-map-inv-equiv-ℕ :
+  ( map-inv-equiv-ℕ ∘ map-equiv-ℕ) ~ id
+is-retraction-map-inv-equiv-ℕ zero-ℕ = refl
+is-retraction-map-inv-equiv-ℕ (succ-ℕ n) = refl
+
+is-section-map-inv-equiv-ℕ :
+  ( map-equiv-ℕ ∘ map-inv-equiv-ℕ) ~ id
+is-section-map-inv-equiv-ℕ (inl star) = refl
+is-section-map-inv-equiv-ℕ (inr n) = refl
+
+equiv-ℕ : ℕ ≃ (unit + ℕ)
+pr1 equiv-ℕ = map-equiv-ℕ
+pr2 equiv-ℕ =
+  is-equiv-is-invertible
+    map-inv-equiv-ℕ
+    is-section-map-inv-equiv-ℕ
+    is-retraction-map-inv-equiv-ℕ
+```
+
 ### The coproduct `ℕ + ℕ` is equivalent to `ℕ`
 
 ```agda
 succ-ℕ+ℕ : ℕ + ℕ → ℕ + ℕ
-succ-ℕ+ℕ = map-coprod succ-ℕ succ-ℕ
+succ-ℕ+ℕ = map-coproduct succ-ℕ succ-ℕ
 
 map-ℕ+ℕ-to-ℕ : ℕ + ℕ → ℕ
 map-ℕ+ℕ-to-ℕ (inl x) = 2 *ℕ x
@@ -131,7 +162,7 @@ equiv-iterated-coproduct-ℕ :
 equiv-iterated-coproduct-ℕ zero-ℕ = id-equiv
 equiv-iterated-coproduct-ℕ (succ-ℕ n) =
   ( ℕ+ℕ≃ℕ) ∘e
-    ( equiv-coprod id-equiv (equiv-iterated-coproduct-ℕ n))
+    ( equiv-coproduct id-equiv (equiv-iterated-coproduct-ℕ n))
 ```
 
 ### The product `ℕ × ℕ` is equivalent to `ℕ`
@@ -155,39 +186,39 @@ equiv-iterated-product-ℕ :
 equiv-iterated-product-ℕ zero-ℕ = id-equiv
 equiv-iterated-product-ℕ (succ-ℕ n) =
   ( ℕ×ℕ≃ℕ) ∘e
-    ( equiv-prod id-equiv (equiv-iterated-product-ℕ n))
+    ( equiv-product id-equiv (equiv-iterated-product-ℕ n))
 ```
 
 ### The coproduct `(Fin n) + ℕ` is equivalent to `N` for any standard finite `Fin n`
 
 ```agda
-equiv-coprod-Fin-ℕ : (n : ℕ) → ((Fin n) + ℕ) ≃ ℕ
-equiv-coprod-Fin-ℕ zero-ℕ = left-unit-law-coprod ℕ
-equiv-coprod-Fin-ℕ (succ-ℕ n) =
-  ( equiv-coprod-Fin-ℕ n) ∘e
-    ( equiv-coprod id-equiv (inv-equiv equiv-ℕ) ∘e
-      ( associative-coprod))
+equiv-coproduct-Fin-ℕ : (n : ℕ) → ((Fin n) + ℕ) ≃ ℕ
+equiv-coproduct-Fin-ℕ zero-ℕ = left-unit-law-coproduct ℕ
+equiv-coproduct-Fin-ℕ (succ-ℕ n) =
+  ( equiv-coproduct-Fin-ℕ n) ∘e
+    ( equiv-coproduct id-equiv (inv-equiv equiv-ℕ) ∘e
+      ( associative-coproduct))
 ```
 
 ### The product `(Fin n) × ℕ` is equivalent to `N` for any standard finite `Fin n` where n is nonzero
 
 ```agda
-equiv-prod-Fin-ℕ : (n : ℕ) → ((Fin (succ-ℕ n)) × ℕ) ≃ ℕ
-equiv-prod-Fin-ℕ zero-ℕ =
-  ( left-unit-law-coprod ℕ) ∘e
-    ( ( equiv-coprod (left-absorption-prod ℕ) left-unit-law-prod) ∘e
-      ( right-distributive-prod-coprod empty unit ℕ))
-equiv-prod-Fin-ℕ (succ-ℕ n) =
+equiv-product-Fin-ℕ : (n : ℕ) → ((Fin (succ-ℕ n)) × ℕ) ≃ ℕ
+equiv-product-Fin-ℕ zero-ℕ =
+  ( left-unit-law-coproduct ℕ) ∘e
+    ( ( equiv-coproduct (left-absorption-product ℕ) left-unit-law-product) ∘e
+      ( right-distributive-product-coproduct empty unit ℕ))
+equiv-product-Fin-ℕ (succ-ℕ n) =
   ( ℕ+ℕ≃ℕ) ∘e
-    ( ( equiv-coprod (equiv-prod-Fin-ℕ n) left-unit-law-prod) ∘e
-      ( right-distributive-prod-coprod (Fin (succ-ℕ n)) unit ℕ))
+    ( ( equiv-coproduct (equiv-product-Fin-ℕ n) left-unit-law-product) ∘e
+      ( right-distributive-product-coproduct (Fin (succ-ℕ n)) unit ℕ))
 ```
 
 ### The integers `ℤ` is equivalent to `ℕ`
 
 ```agda
 ℤ≃ℕ : ℤ ≃ ℕ
-ℤ≃ℕ = (ℕ+ℕ≃ℕ) ∘e (equiv-coprod id-equiv (inv-equiv equiv-ℕ))
+ℤ≃ℕ = (ℕ+ℕ≃ℕ) ∘e (equiv-coproduct id-equiv (inv-equiv equiv-ℕ))
 
 map-ℕ-to-ℤ : ℕ → ℤ
 map-ℕ-to-ℤ = map-inv-is-equiv (pr2 ℤ≃ℕ)

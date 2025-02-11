@@ -8,6 +8,7 @@ module elementary-number-theory.multiplication-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
@@ -18,9 +19,23 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.negated-equality
+open import foundation.sets
 ```
 
 </details>
+
+## Idea
+
+The {{#concept "multiplication" Disambiguation="natural numbers" Agda=mul-ℕ}}
+operation on the [natural numbers](elementary-number-theory.natural-numbers.md)
+is defined by [iteratively](foundation.iterating-functions.md) applying
+[addition](elementary-number-theory.addition-natural-numbers.md) of a number to
+itself. More preciesly the number `m * n` is defined by adding the number `n` to
+itself `m` times:
+
+```text
+  m * n = n + ⋯ + n    (n added to itself m times).
+```
 
 ## Definition
 
@@ -33,6 +48,8 @@ mul-ℕ (succ-ℕ m) n = (mul-ℕ m n) +ℕ n
 
 infixl 40 _*ℕ_
 _*ℕ_ = mul-ℕ
+
+{-# BUILTIN NATTIMES _*ℕ_ #-}
 
 mul-ℕ' : ℕ → ℕ → ℕ
 mul-ℕ' x y = mul-ℕ y x
@@ -238,3 +255,8 @@ neq-mul-ℕ m n p =
       ( ( right-successor-law-mul-ℕ (succ-ℕ m) (succ-ℕ n)) ∙
         ( ap ((succ-ℕ m) +ℕ_) (left-successor-law-mul-ℕ m (succ-ℕ n)))))
 ```
+
+## See also
+
+- [Squares of natural numbers](elementary-number-theory.squares-natural-numbers.md)
+- [Cubes of natural numbers](elementary-number-theory.cubes-natural-numbers.md)

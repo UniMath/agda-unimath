@@ -11,8 +11,11 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.functoriality-truncation
 open import foundation.images
+open import foundation.injective-maps
 open import foundation.propositional-truncations
+open import foundation.retracts-of-types
 open import foundation.set-truncations
+open import foundation.sets
 open import foundation.slice
 open import foundation.surjective-maps
 open import foundation.uniqueness-image
@@ -20,6 +23,7 @@ open import foundation.uniqueness-set-truncations
 open import foundation.universal-property-image
 open import foundation.universal-property-set-truncation
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
@@ -29,21 +33,22 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
 open import foundation-core.propositions
-open import foundation-core.sets
 open import foundation-core.truncation-levels
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
 
 ## Idea
 
-The universal property of the set truncation implies that the set truncation
-acts functorially on maps between types.
+The
+[universal property of the set truncation](foundation.universal-property-set-truncation.md)
+implies that the [set truncation](foundation.set-truncations.md) acts
+functorially on maps between types.
 
-## Definition
+## Definitions
+
+### The functorial action of set-truncations on maps
 
 ```agda
 module _
@@ -57,19 +62,33 @@ module _
             ( λ h → (h ∘ unit-trunc-Set) ~ (unit-trunc-Set ∘ f)))
     unique-map-trunc-Set = unique-map-trunc zero-𝕋 f
 
-  map-trunc-Set :
-    type-trunc-Set A → type-trunc-Set B
+  map-trunc-Set : type-trunc-Set A → type-trunc-Set B
   map-trunc-Set = map-trunc zero-𝕋 f
 
   naturality-unit-trunc-Set :
-    (map-trunc-Set ∘ unit-trunc-Set) ~ (unit-trunc-Set ∘ f)
+    map-trunc-Set ∘ unit-trunc-Set ~ unit-trunc-Set ∘ f
   naturality-unit-trunc-Set = naturality-unit-trunc zero-𝕋 f
 
   htpy-uniqueness-map-trunc-Set :
     (h : type-trunc-Set A → type-trunc-Set B) →
-    (H : (h ∘ unit-trunc-Set) ~ (unit-trunc-Set ∘ f)) →
+    (H : h ∘ unit-trunc-Set ~ unit-trunc-Set ∘ f) →
     map-trunc-Set ~ h
   htpy-uniqueness-map-trunc-Set = htpy-uniqueness-map-trunc zero-𝕋 f
+```
+
+### Functorial action of set-truncation on binary maps
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C)
+  where
+
+  binary-map-trunc-Set :
+    type-trunc-Set A → type-trunc-Set B → type-trunc-Set C
+  binary-map-trunc-Set x y =
+    map-trunc-Set
+      ( λ (x' , y') → f x' y')
+      ( map-inv-equiv-distributive-trunc-product-Set A B (x , y))
 ```
 
 ## Properties
@@ -77,8 +96,7 @@ module _
 ### The functorial action of set truncations preserves identity maps
 
 ```agda
-id-map-trunc-Set :
-  {l1 : Level} {A : UU l1} → map-trunc-Set (id {A = A}) ~ id
+id-map-trunc-Set : {l1 : Level} {A : UU l1} → map-trunc-Set (id {A = A}) ~ id
 id-map-trunc-Set = id-map-trunc zero-𝕋
 ```
 
@@ -146,6 +164,15 @@ module _
       is-equiv-htpy-equiv
         ( equiv-trunc-Σ-Set A B)
         ( htpy-map-equiv-trunc-Σ-Set)
+```
+
+### The set truncation functor preserves retracts
+
+```agda
+retract-trunc-Set :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (A retract-of B) → (type-trunc-Set A) retract-of (type-trunc-Set B)
+retract-trunc-Set = retract-of-trunc-retract-of
 ```
 
 ### The set truncation functor preserves injective maps
@@ -389,8 +416,7 @@ module _
 
   abstract
     is-set-truncation-im-map-trunc-Set :
-      {l : Level} →
-      is-set-truncation l
+      is-set-truncation
         ( im-Set (trunc-Set B) (map-trunc-Set f))
         ( unit-im-map-trunc-Set)
     is-set-truncation-im-map-trunc-Set =

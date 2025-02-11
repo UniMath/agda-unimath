@@ -14,10 +14,10 @@ open import category-theory.large-precategories
 
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -94,10 +94,24 @@ module _
     (h : hom-Π-Large-Category z w)
     (g : hom-Π-Large-Category y z)
     (f : hom-Π-Large-Category x y) →
-    ( comp-hom-Π-Large-Category (comp-hom-Π-Large-Category h g) f) ＝
-    ( comp-hom-Π-Large-Category h (comp-hom-Π-Large-Category g f))
+    comp-hom-Π-Large-Category (comp-hom-Π-Large-Category h g) f ＝
+    comp-hom-Π-Large-Category h (comp-hom-Π-Large-Category g f)
   associative-comp-hom-Π-Large-Category =
     associative-comp-hom-Large-Category Π-Large-Category
+
+  involutive-eq-associative-comp-hom-Π-Large-Category :
+    {l2 l3 l4 l5 : Level}
+    {x : obj-Π-Large-Category l2}
+    {y : obj-Π-Large-Category l3}
+    {z : obj-Π-Large-Category l4}
+    {w : obj-Π-Large-Category l5} →
+    (h : hom-Π-Large-Category z w)
+    (g : hom-Π-Large-Category y z)
+    (f : hom-Π-Large-Category x y) →
+    comp-hom-Π-Large-Category (comp-hom-Π-Large-Category h g) f ＝ⁱ
+    comp-hom-Π-Large-Category h (comp-hom-Π-Large-Category g f)
+  involutive-eq-associative-comp-hom-Π-Large-Category =
+    involutive-eq-associative-comp-hom-Large-Category Π-Large-Category
 
   id-hom-Π-Large-Category :
     {l2 : Level} {x : obj-Π-Large-Category l2} →

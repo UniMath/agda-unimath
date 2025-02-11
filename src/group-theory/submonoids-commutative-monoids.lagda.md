@@ -35,17 +35,17 @@ unit of `M` and is closed under multiplication.
 ### Submonoids of commutative monoids
 
 ```agda
-is-submonoid-commutative-monoid-Prop :
+is-submonoid-prop-subset-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1)
   (P : subset-Commutative-Monoid l2 M) → Prop (l1 ⊔ l2)
-is-submonoid-commutative-monoid-Prop M =
-  is-submonoid-monoid-Prop (monoid-Commutative-Monoid M)
+is-submonoid-prop-subset-Commutative-Monoid M =
+  is-submonoid-prop-subset-Monoid (monoid-Commutative-Monoid M)
 
-is-submonoid-Commutative-Monoid :
+is-submonoid-subset-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1)
   (P : subset-Commutative-Monoid l2 M) → UU (l1 ⊔ l2)
-is-submonoid-Commutative-Monoid M =
-  is-submonoid-Monoid (monoid-Commutative-Monoid M)
+is-submonoid-subset-Commutative-Monoid M =
+  is-submonoid-subset-Monoid (monoid-Commutative-Monoid M)
 
 Commutative-Submonoid :
   {l1 : Level} (l2 : Level) (M : Commutative-Monoid l1) → UU (l1 ⊔ lsuc l2)
@@ -61,7 +61,7 @@ module _
     subset-Submonoid (monoid-Commutative-Monoid M) P
 
   is-submonoid-Commutative-Submonoid :
-    is-submonoid-Commutative-Monoid M subset-Commutative-Submonoid
+    is-submonoid-subset-Commutative-Monoid M subset-Commutative-Submonoid
   is-submonoid-Commutative-Submonoid =
     is-submonoid-Submonoid (monoid-Commutative-Monoid M) P
 
@@ -189,8 +189,8 @@ module _
     mul-Commutative-Monoid M
       ( inclusion-Commutative-Submonoid x)
       ( inclusion-Commutative-Submonoid y)
-  preserves-mul-inclusion-Commutative-Submonoid =
-    preserves-mul-inclusion-Submonoid (monoid-Commutative-Monoid M) P
+  preserves-mul-inclusion-Commutative-Submonoid x y =
+    preserves-mul-inclusion-Submonoid (monoid-Commutative-Monoid M) P {x} {y}
 
   hom-inclusion-Commutative-Submonoid :
     hom-Commutative-Monoid commutative-monoid-Commutative-Submonoid M

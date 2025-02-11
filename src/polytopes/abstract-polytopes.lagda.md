@@ -7,11 +7,13 @@ module polytopes.abstract-polytopes where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory
+open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.natural-numbers
 
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -24,7 +26,8 @@ open import foundation.universe-levels
 open import order-theory.finitely-graded-posets
 open import order-theory.posets
 
-open import univalent-combinatorics
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -408,7 +411,7 @@ module _
       ( element-face-Prepolytope z)
   is-on-path-face-prepolytope-Prop
     ( cons-path-faces-Finitely-Graded-Poset {z = w} a p) z =
-    disj-Prop
+    disjunction-Prop
       ( is-on-path-face-prepolytope-Prop p z)
       ( Id-Prop
         ( set-Prepolytope)

@@ -75,7 +75,7 @@ module _
 
   generating-subset-normal-closure-Subgroup : subset-Group (l1 ⊔ l2) G
   generating-subset-normal-closure-Subgroup x =
-    ∃-Prop
+    exists-structure-Prop
       ( type-Group G)
       ( λ y → fiber (conjugation-Group G y ∘ inclusion-Subgroup G H) x)
 
@@ -149,7 +149,6 @@ module _
     is-subgroup-generated-by-subset-Group G
       generating-subset-normal-closure-Subgroup
       subgroup-normal-closure-Subgroup
-      contains-generating-subset-normal-closure-Subgroup
   is-subgroup-generated-by-generating-subset-normal-closure-Subgroup =
     is-subgroup-generated-by-subset-subgroup-subset-Group G
       generating-subset-normal-closure-Subgroup
@@ -204,8 +203,9 @@ module _
     leq-Subgroup G H (subgroup-Normal-Subgroup G N) →
     leq-Normal-Subgroup G normal-closure-Subgroup N
   backward-implication-is-normal-closure-normal-closure-Subgroup N u =
-    is-subgroup-generated-by-generating-subset-normal-closure-Subgroup
-      ( subgroup-Normal-Subgroup G N)
+    backward-implication
+      ( is-subgroup-generated-by-generating-subset-normal-closure-Subgroup
+        ( subgroup-Normal-Subgroup G N))
       ( contains-generating-subset-normal-closure-Normal-Subgroup N u)
 
   is-normal-closure-normal-closure-Subgroup :
@@ -240,7 +240,7 @@ module _
         ( u))
 
   normal-closure-subgroup-hom-Large-Poset :
-    hom-set-Large-Poset
+    hom-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( Subgroup-Large-Poset G)
       ( Normal-Subgroup-Large-Poset G)
@@ -252,7 +252,7 @@ module _
   normal-closure-Galois-Connection :
     galois-connection-Large-Poset
       ( λ l2 → l1 ⊔ l2)
-      ( id)
+      ( λ l → l)
       ( Subgroup-Large-Poset G)
       ( Normal-Subgroup-Large-Poset G)
   normal-closure-Galois-Connection =

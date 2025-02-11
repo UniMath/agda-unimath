@@ -74,12 +74,12 @@ module _
       ( F)
       ( G)
 
-  coherence-square-natural-transformation-Category :
+  naturality-natural-transformation-Category :
     (γ : natural-transformation-Category) →
     is-natural-transformation-Category
       ( hom-family-natural-transformation-Category γ)
-  coherence-square-natural-transformation-Category =
-    coherence-square-natural-transformation-Precategory
+  naturality-natural-transformation-Category =
+    naturality-natural-transformation-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)

@@ -20,7 +20,6 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.propositional-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -84,11 +83,18 @@ is-trunc-map-is-contr-map (succ-𝕋 k) H =
 ### Any equivalence is `k`-truncated
 
 ```agda
-is-trunc-map-is-equiv :
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
-  is-equiv f → is-trunc-map k f
-is-trunc-map-is-equiv k H =
-  is-trunc-map-is-contr-map k (is-contr-map-is-equiv H)
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  where
+
+  is-trunc-map-is-equiv :
+    {f : A → B} → is-equiv f → is-trunc-map k f
+  is-trunc-map-is-equiv H =
+    is-trunc-map-is-contr-map k (is-contr-map-is-equiv H)
+
+  is-trunc-map-equiv :
+    (e : A ≃ B) → is-trunc-map k (map-equiv e)
+  is-trunc-map-equiv e = is-trunc-map-is-equiv (is-equiv-map-equiv e)
 ```
 
 ### A map is `k+1`-truncated if and only if its action on identifications is `k`-truncated
@@ -116,6 +122,24 @@ module _
         ( eq-fiber-fiber-ap f x y p)
         ( is-equiv-eq-fiber-fiber-ap f x y p)
         ( is-trunc-map-f (f y) (pair x p) (pair y refl))
+```
+
+### The domain of any `k`-truncated map into a `k+1`-truncated type is `k+1`-truncated
+
+```agda
+is-trunc-is-trunc-map-into-is-trunc :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
+  is-trunc (succ-𝕋 k) B → is-trunc-map k f →
+  is-trunc (succ-𝕋 k) A
+is-trunc-is-trunc-map-into-is-trunc neg-two-𝕋 f is-trunc-B is-trunc-map-f =
+  is-trunc-is-equiv _ _ f (is-equiv-is-contr-map is-trunc-map-f) is-trunc-B
+is-trunc-is-trunc-map-into-is-trunc
+  (succ-𝕋 k) f is-trunc-B is-trunc-map-f a a' =
+  is-trunc-is-trunc-map-into-is-trunc
+    ( k)
+    ( ap f)
+    ( is-trunc-B (f a) (f a'))
+    ( is-trunc-map-ap-is-trunc-map k f is-trunc-map-f a a')
 ```
 
 ### A family of types is a family of `k`-truncated types if and only of the projection map is `k`-truncated
@@ -186,16 +210,6 @@ abstract
       ( fiber-triangle f g id H b)
       ( is-fiberwise-equiv-is-equiv-triangle f g id H is-equiv-id b)
       ( is-trunc-g b)
-
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
-  where
-
-  is-contr-map-htpy : is-contr-map g → is-contr-map f
-  is-contr-map-htpy = is-trunc-map-htpy neg-two-𝕋 H
-
-  is-prop-map-htpy : is-prop-map g → is-prop-map f
-  is-prop-map-htpy = is-trunc-map-htpy neg-one-𝕋 H
 ```
 
 ### Truncated maps are closed under composition
@@ -215,49 +229,37 @@ abstract
           ( is-trunc-g x)
           ( λ t → is-trunc-h (pr1 t)))
 
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (g : B → X) (h : A → B)
-  where
-
-  is-contr-map-comp : is-contr-map g → is-contr-map h → is-contr-map (g ∘ h)
-  is-contr-map-comp = is-trunc-map-comp neg-two-𝕋 g h
-
-  is-prop-map-comp : is-prop-map g → is-prop-map h → is-prop-map (g ∘ h)
-  is-prop-map-comp = is-trunc-map-comp neg-one-𝕋 g h
-
-abstract
-  is-trunc-map-comp-htpy :
-    {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
-    {X : UU l3} (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
-    is-trunc-map k g → is-trunc-map k h → is-trunc-map k f
-  is-trunc-map-comp-htpy k f g h H is-trunc-g is-trunc-h =
-    is-trunc-map-htpy k H
-      ( is-trunc-map-comp k g h is-trunc-g is-trunc-h)
-
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
-  where
-
-  is-contr-map-comp-htpy :
-    is-contr-map g → is-contr-map h → is-contr-map f
-  is-contr-map-comp-htpy = is-trunc-map-comp-htpy neg-two-𝕋 f g h H
-
-  is-prop-map-comp-htpy :
-    is-prop-map g → is-prop-map h → is-prop-map f
-  is-prop-map-comp-htpy = is-trunc-map-comp-htpy neg-one-𝕋 f g h H
+comp-trunc-map :
+  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  {X : UU l3} (g : trunc-map k B X) (h : trunc-map k A B) →
+  trunc-map k A X
+pr1 (comp-trunc-map k g h) = pr1 g ∘ pr1 h
+pr2 (comp-trunc-map k g h) =
+  is-trunc-map-comp k (pr1 g) (pr1 h) (pr2 g) (pr2 h)
 ```
 
-### If a composite is truncated, then its right factor is truncated
+### In a commuting triangle `f ~ g ∘ h`, if `g` and `h` are truncated maps, then `f` is a truncated map
 
 ```agda
 abstract
-  is-trunc-map-right-factor-htpy :
+  is-trunc-map-left-map-triangle :
+    {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+    {X : UU l3} (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+    is-trunc-map k g → is-trunc-map k h → is-trunc-map k f
+  is-trunc-map-left-map-triangle k f g h H is-trunc-g is-trunc-h =
+    is-trunc-map-htpy k H
+      ( is-trunc-map-comp k g h is-trunc-g is-trunc-h)
+```
+
+### In a commuting triangle `f ~ g ∘ h`, if `f` and `g` are truncated maps, then `h` is a truncated map
+
+```agda
+abstract
+  is-trunc-map-top-map-triangle :
     {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {X : UU l3}
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     is-trunc-map k g → is-trunc-map k f → is-trunc-map k h
-  is-trunc-map-right-factor-htpy k {A} f g h H is-trunc-g is-trunc-f b =
+  is-trunc-map-top-map-triangle k {A} f g h H is-trunc-g is-trunc-f b =
     is-trunc-fam-is-trunc-Σ k
       ( is-trunc-g (g b))
       ( is-trunc-is-equiv' k
@@ -266,43 +268,17 @@ abstract
         ( is-equiv-map-compute-fiber-comp g h (g b))
         ( is-trunc-map-htpy k (inv-htpy H) is-trunc-f (g b)))
       ( pair b refl)
+```
 
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
-  where
+### If a composite `g ∘ h` and its left factor `g` are truncated maps, then its right factor `h` is a truncated map
 
-  is-contr-map-right-factor-htpy :
-    is-contr-map g → is-contr-map f → is-contr-map h
-  is-contr-map-right-factor-htpy =
-    is-trunc-map-right-factor-htpy neg-two-𝕋 f g h H
-
-  is-prop-map-right-factor-htpy :
-    is-prop-map g → is-prop-map f → is-prop-map h
-  is-prop-map-right-factor-htpy =
-    is-trunc-map-right-factor-htpy neg-one-𝕋 f g h H
-
+```agda
 is-trunc-map-right-factor :
   {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {X : UU l3}
   (g : B → X) (h : A → B) →
   is-trunc-map k g → is-trunc-map k (g ∘ h) → is-trunc-map k h
 is-trunc-map-right-factor k {A} g h =
-  is-trunc-map-right-factor-htpy k (g ∘ h) g h refl-htpy
-
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (g : B → X) (h : A → B)
-  where
-
-  is-contr-map-right-factor :
-    is-contr-map g → is-contr-map (g ∘ h) → is-contr-map h
-  is-contr-map-right-factor =
-    is-trunc-map-right-factor neg-two-𝕋 g h
-
-  is-prop-map-right-factor :
-    is-prop-map g → is-prop-map (g ∘ h) → is-prop-map h
-  is-prop-map-right-factor =
-    is-trunc-map-right-factor neg-one-𝕋 g h
+  is-trunc-map-top-map-triangle k (g ∘ h) g h refl-htpy
 ```
 
 ### In a commuting square with the left and right maps equivalences, the top map is truncated if and only if the bottom map is truncated
@@ -317,102 +293,8 @@ module _
   is-trunc-map-top-is-trunc-map-bottom-is-equiv :
     is-equiv g → is-equiv h → is-trunc-map k i → is-trunc-map k f
   is-trunc-map-top-is-trunc-map-bottom-is-equiv K L M =
-    is-trunc-map-right-factor-htpy k (i ∘ g) h f H
+    is-trunc-map-top-map-triangle k (i ∘ g) h f H
       ( is-trunc-map-is-equiv k L)
       ( is-trunc-map-comp k i g M
         ( is-trunc-map-is-equiv k K))
-```
-
-### The map on total spaces induced by a family of truncated maps is truncated
-
-```agda
-module _
-  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  {f : (x : A) → B x → C x}
-  where
-
-  abstract
-    is-trunc-map-tot : ((x : A) → is-trunc-map k (f x)) → is-trunc-map k (tot f)
-    is-trunc-map-tot H y =
-      is-trunc-equiv k
-        ( fiber (f (pr1 y)) (pr2 y))
-        ( compute-fiber-tot f y)
-        ( H (pr1 y) (pr2 y))
-
-  abstract
-    is-trunc-map-is-trunc-map-tot :
-      is-trunc-map k (tot f) → ((x : A) → is-trunc-map k (f x))
-    is-trunc-map-is-trunc-map-tot is-trunc-tot-f x z =
-      is-trunc-equiv k
-        ( fiber (tot f) (pair x z))
-        ( inv-compute-fiber-tot f (pair x z))
-        ( is-trunc-tot-f (pair x z))
-
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  {f : (x : A) → B x → C x}
-  where
-
-  abstract
-    is-contr-map-tot :
-      ((x : A) → is-contr-map (f x)) → is-contr-map (tot f)
-    is-contr-map-tot =
-      is-trunc-map-tot neg-two-𝕋
-
-  abstract
-    is-prop-map-tot : ((x : A) → is-prop-map (f x)) → is-prop-map (tot f)
-    is-prop-map-tot = is-trunc-map-tot neg-one-𝕋
-```
-
-### The functoriality of dependent pair types preserves truncatedness
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-trunc-map-map-Σ-map-base :
-    (k : 𝕋) {f : A → B} (C : B → UU l3) →
-    is-trunc-map k f → is-trunc-map k (map-Σ-map-base f C)
-  is-trunc-map-map-Σ-map-base k {f} C H y =
-    is-trunc-equiv' k
-      ( fiber f (pr1 y))
-      ( equiv-fiber-map-Σ-map-base-fiber f C y)
-      ( H (pr1 y))
-
-  abstract
-    is-prop-map-map-Σ-map-base :
-      {f : A → B} (C : B → UU l3) →
-      is-prop-map f → is-prop-map (map-Σ-map-base f C)
-    is-prop-map-map-Σ-map-base C = is-trunc-map-map-Σ-map-base neg-one-𝕋 C
-
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
-  where
-
-  is-trunc-map-map-Σ :
-    (k : 𝕋) (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)} →
-    is-trunc-map k f → ((x : A) → is-trunc-map k (g x)) →
-    is-trunc-map k (map-Σ D f g)
-  is-trunc-map-map-Σ k D {f} {g} H K =
-    is-trunc-map-comp-htpy k
-      ( map-Σ D f g)
-      ( map-Σ-map-base f D)
-      ( tot g)
-      ( triangle-map-Σ D f g)
-      ( is-trunc-map-map-Σ-map-base k D H)
-      ( is-trunc-map-tot k K)
-
-  module _
-    (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)}
-    where
-
-    is-contr-map-map-Σ :
-      is-contr-map f → ((x : A) → is-contr-map (g x)) →
-      is-contr-map (map-Σ D f g)
-    is-contr-map-map-Σ = is-trunc-map-map-Σ neg-two-𝕋 D
-
-    is-prop-map-map-Σ :
-      is-prop-map f → ((x : A) → is-prop-map (g x)) → is-prop-map (map-Σ D f g)
-    is-prop-map-map-Σ = is-trunc-map-map-Σ neg-one-𝕋 D
 ```

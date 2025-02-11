@@ -423,6 +423,7 @@ package-lock.json
 docs/
 html/
 book/
+temp/
 src/temp/
 src/everything.lagda.md
 SUMMARY.md

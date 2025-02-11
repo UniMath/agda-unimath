@@ -7,10 +7,12 @@ module univalent-combinatorics.standard-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -19,6 +21,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
+open import foundation.equivalence-injective-type-families
 open import foundation.equivalences
 open import foundation.equivalences-maybe
 open import foundation.function-types
@@ -28,8 +31,11 @@ open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
+open import foundation.preunivalent-type-families
 open import foundation.raising-universe-levels
+open import foundation.retractions
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -52,7 +58,7 @@ segment of `ℕ`.
 ```agda
 Fin-Set : ℕ → Set lzero
 Fin-Set zero-ℕ = empty-Set
-Fin-Set (succ-ℕ n) = coprod-Set (Fin-Set n) unit-Set
+Fin-Set (succ-ℕ n) = coproduct-Set (Fin-Set n) unit-Set
 
 Fin : ℕ → UU lzero
 Fin n = type-Set (Fin-Set n)
@@ -66,7 +72,7 @@ inl-Fin k = inl
 
 emb-inl-Fin : (k : ℕ) → Fin k ↪ Fin (succ-ℕ k)
 pr1 (emb-inl-Fin k) = inl-Fin k
-pr2 (emb-inl-Fin k) = is-emb-inl (Fin k) unit
+pr2 (emb-inl-Fin k) = is-emb-inl
 
 neg-one-Fin : (k : ℕ) → Fin (succ-ℕ k)
 neg-one-Fin k = inr star
@@ -84,7 +90,7 @@ is-inl-Fin k x = Σ (Fin k) (λ y → inl y ＝ x)
 is-neg-one-is-not-inl-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) →
   ¬ (is-inl-Fin k x) → is-neg-one-Fin (succ-ℕ k) x
-is-neg-one-is-not-inl-Fin k (inl x) H = ex-falso (H (pair x refl))
+is-neg-one-is-not-inl-Fin k (inl x) H = ex-falso (H (x , refl))
 is-neg-one-is-not-inl-Fin k (inr star) H = refl
 
 inr-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
@@ -127,36 +133,36 @@ raise-Fin-Set l k = raise-Set l (Fin-Set k)
 ```agda
 is-decidable-is-inl-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → is-decidable (is-inl-Fin k x)
-is-decidable-is-inl-Fin k (inl x) = inl (pair x refl)
+is-decidable-is-inl-Fin k (inl x) = inl (x , refl)
 is-decidable-is-inl-Fin k (inr star) = inr α
   where
   α : is-inl-Fin k (inr star) → empty
-  α (pair y ())
+  α (y , ())
 ```
 
-### Fin 1 is contractible
+### `Fin 1` is contractible
 
 ```agda
 map-equiv-Fin-one-ℕ : Fin 1 → unit
-map-equiv-Fin-one-ℕ (inr star) = star
+map-equiv-Fin-one-ℕ (inr x) = x
 
-inv-map-equiv-Fin-one-ℕ : unit → Fin 1
-inv-map-equiv-Fin-one-ℕ star = inr star
+map-inv-equiv-Fin-one-ℕ : unit → Fin 1
+map-inv-equiv-Fin-one-ℕ x = inr x
 
-is-section-inv-map-equiv-Fin-one-ℕ :
-  ( map-equiv-Fin-one-ℕ ∘ inv-map-equiv-Fin-one-ℕ) ~ id
-is-section-inv-map-equiv-Fin-one-ℕ star = refl
+is-section-map-inv-equiv-Fin-one-ℕ :
+  ( map-equiv-Fin-one-ℕ ∘ map-inv-equiv-Fin-one-ℕ) ~ id
+is-section-map-inv-equiv-Fin-one-ℕ _ = refl
 
-is-retraction-inv-map-equiv-Fin-one-ℕ :
-  ( inv-map-equiv-Fin-one-ℕ ∘ map-equiv-Fin-one-ℕ) ~ id
-is-retraction-inv-map-equiv-Fin-one-ℕ (inr star) = refl
+is-retraction-map-inv-equiv-Fin-one-ℕ :
+  ( map-inv-equiv-Fin-one-ℕ ∘ map-equiv-Fin-one-ℕ) ~ id
+is-retraction-map-inv-equiv-Fin-one-ℕ (inr _) = refl
 
 is-equiv-map-equiv-Fin-one-ℕ : is-equiv map-equiv-Fin-one-ℕ
 is-equiv-map-equiv-Fin-one-ℕ =
   is-equiv-is-invertible
-    inv-map-equiv-Fin-one-ℕ
-    is-section-inv-map-equiv-Fin-one-ℕ
-    is-retraction-inv-map-equiv-Fin-one-ℕ
+    map-inv-equiv-Fin-one-ℕ
+    is-section-map-inv-equiv-Fin-one-ℕ
+    is-retraction-map-inv-equiv-Fin-one-ℕ
 
 equiv-Fin-one-ℕ : Fin 1 ≃ unit
 pr1 equiv-Fin-one-ℕ = map-equiv-Fin-one-ℕ
@@ -173,7 +179,48 @@ is-not-contractible-Fin (succ-ℕ (succ-ℕ k)) f C =
   neq-inl-inr (eq-is-contr' C (neg-two-Fin (succ-ℕ k)) (neg-one-Fin (succ-ℕ k)))
 ```
 
-### The inclusion of Fin k into ℕ
+### The zero elements in the standard finite types
+
+```agda
+zero-Fin : (k : ℕ) → Fin (succ-ℕ k)
+zero-Fin zero-ℕ = inr star
+zero-Fin (succ-ℕ k) = inl (zero-Fin k)
+
+is-zero-Fin : (k : ℕ) → Fin k → UU lzero
+is-zero-Fin (succ-ℕ k) x = x ＝ zero-Fin k
+
+is-zero-Fin' : (k : ℕ) → Fin k → UU lzero
+is-zero-Fin' (succ-ℕ k) x = zero-Fin k ＝ x
+
+is-nonzero-Fin : (k : ℕ) → Fin k → UU lzero
+is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
+```
+
+### The successor function on the standard finite types
+
+```agda
+skip-zero-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
+skip-zero-Fin (succ-ℕ k) (inl x) = inl (skip-zero-Fin k x)
+skip-zero-Fin (succ-ℕ k) (inr star) = inr star
+
+succ-Fin : (k : ℕ) → Fin k → Fin k
+succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
+succ-Fin (succ-ℕ k) (inr star) = (zero-Fin k)
+
+Fin-Type-With-Endomorphism : ℕ → Type-With-Endomorphism lzero
+pr1 (Fin-Type-With-Endomorphism k) = Fin k
+pr2 (Fin-Type-With-Endomorphism k) = succ-Fin k
+```
+
+### The bounded successor function on the standard finite types
+
+```agda
+bounded-succ-Fin : (k : ℕ) → Fin k → Fin k
+bounded-succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
+bounded-succ-Fin (succ-ℕ k) (inr star) = inr star
+```
+
+### The inclusion of `Fin k` into `ℕ`
 
 ```agda
 nat-Fin : (k : ℕ) → Fin k → ℕ
@@ -223,39 +270,6 @@ is-emb-nat-Fin k = is-emb-is-injective is-set-ℕ (is-injective-nat-Fin k)
 emb-nat-Fin : (k : ℕ) → Fin k ↪ ℕ
 pr1 (emb-nat-Fin k) = nat-Fin k
 pr2 (emb-nat-Fin k) = is-emb-nat-Fin k
-```
-
-### The zero elements in the standard finite types
-
-```agda
-zero-Fin : (k : ℕ) → Fin (succ-ℕ k)
-zero-Fin zero-ℕ = inr star
-zero-Fin (succ-ℕ k) = inl (zero-Fin k)
-
-is-zero-Fin : (k : ℕ) → Fin k → UU lzero
-is-zero-Fin (succ-ℕ k) x = x ＝ zero-Fin k
-
-is-zero-Fin' : (k : ℕ) → Fin k → UU lzero
-is-zero-Fin' (succ-ℕ k) x = zero-Fin k ＝ x
-
-is-nonzero-Fin : (k : ℕ) → Fin k → UU lzero
-is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
-```
-
-### The successor function on the standard finite types
-
-```agda
-skip-zero-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
-skip-zero-Fin (succ-ℕ k) (inl x) = inl (skip-zero-Fin k x)
-skip-zero-Fin (succ-ℕ k) (inr star) = inr star
-
-succ-Fin : (k : ℕ) → Fin k → Fin k
-succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
-succ-Fin (succ-ℕ k) (inr star) = (zero-Fin k)
-
-Fin-Type-With-Endomorphism : ℕ → Type-With-Endomorphism lzero
-pr1 (Fin-Type-With-Endomorphism k) = Fin k
-pr2 (Fin-Type-With-Endomorphism k) = succ-Fin k
 ```
 
 ```agda
@@ -425,16 +439,55 @@ leq-nat-succ-Fin (succ-ℕ k) (inr star) =
     ( leq-zero-ℕ (succ-ℕ (nat-Fin (succ-ℕ k) (inr star))))
 ```
 
-### Fin is injective
+### `Fin` is injective
 
 ```agda
+is-equivalence-injective-Fin : is-equivalence-injective Fin
+is-equivalence-injective-Fin {zero-ℕ} {zero-ℕ} e =
+  refl
+is-equivalence-injective-Fin {zero-ℕ} {succ-ℕ l} e =
+  ex-falso (map-inv-equiv e (zero-Fin l))
+is-equivalence-injective-Fin {succ-ℕ k} {zero-ℕ} e =
+  ex-falso (map-equiv e (zero-Fin k))
+is-equivalence-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
+  ap succ-ℕ (is-equivalence-injective-Fin (equiv-equiv-Maybe e))
+
 abstract
-  is-injective-Fin : {k l : ℕ} → (Fin k ≃ Fin l) → k ＝ l
-  is-injective-Fin {zero-ℕ} {zero-ℕ} e = refl
-  is-injective-Fin {zero-ℕ} {succ-ℕ l} e =
-    ex-falso (map-inv-equiv e (zero-Fin l))
-  is-injective-Fin {succ-ℕ k} {zero-ℕ} e =
-    ex-falso (map-equiv e (zero-Fin k))
-  is-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
-    ap succ-ℕ (is-injective-Fin (equiv-equiv-Maybe e))
+  is-injective-Fin : is-injective Fin
+  is-injective-Fin =
+    is-injective-is-equivalence-injective is-equivalence-injective-Fin
+
+compute-is-equivalence-injective-Fin-id-equiv :
+  {n : ℕ} → is-equivalence-injective-Fin {n} {n} id-equiv ＝ refl
+compute-is-equivalence-injective-Fin-id-equiv {zero-ℕ} = refl
+compute-is-equivalence-injective-Fin-id-equiv {succ-ℕ n} =
+  ap² succ-ℕ
+    ( ( ap is-equivalence-injective-Fin compute-equiv-equiv-Maybe-id-equiv) ∙
+      ( compute-is-equivalence-injective-Fin-id-equiv {n}))
+```
+
+### `Fin` is a preunivalent type family
+
+The proof does not rely on the (pre-)univalence axiom.
+
+```agda
+is-section-on-diagonal-is-equivalence-injective-Fin :
+  {n : ℕ} →
+  equiv-tr Fin (is-equivalence-injective-Fin {n} {n} id-equiv) ＝ id-equiv
+is-section-on-diagonal-is-equivalence-injective-Fin =
+  ap (equiv-tr Fin) compute-is-equivalence-injective-Fin-id-equiv
+
+is-retraction-is-equivalence-injective-Fin :
+  {n m : ℕ} →
+  is-retraction (equiv-tr Fin) (is-equivalence-injective-Fin {n} {m})
+is-retraction-is-equivalence-injective-Fin refl =
+  compute-is-equivalence-injective-Fin-id-equiv
+
+retraction-equiv-tr-Fin : (n m : ℕ) → retraction (equiv-tr Fin {n} {m})
+pr1 (retraction-equiv-tr-Fin n m) = is-equivalence-injective-Fin
+pr2 (retraction-equiv-tr-Fin n m) = is-retraction-is-equivalence-injective-Fin
+
+is-preunivalent-Fin : is-preunivalent Fin
+is-preunivalent-Fin =
+  is-preunivalent-retraction-equiv-tr-Set Fin-Set retraction-equiv-tr-Fin
 ```

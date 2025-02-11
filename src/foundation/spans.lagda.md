@@ -8,135 +8,80 @@ module foundation.spans where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
-open import foundation.structure-identity-principle
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.commuting-triangles-of-maps
-open import foundation-core.contractible-types
-open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.homotopies
-open import foundation-core.identity-types
 ```
 
 </details>
 
 ## Idea
 
-A **span** is a pair of functions with a common domain.
+A {{#concept "binary span" Agda=span}} from `A` to `B` consists of a
+{{#concept "spanning type" Disambiguation="binary span" Agda=spanning-type-span}}
+`S` and a [pair](foundation.dependent-pair-types.md) of functions `f : S → A`
+and `g : S → B`. The types `A` and `B` in the specification of a binary span are
+also referred to as the {{#concept "domain" Disambiguation="binary span"}} and
+{{#concept "codomain" Disambiguation="binary span"}} of the span, respectively.
 
-## Definition
+In [`foundation.binary-type-duality`](foundation.binary-type-duality.md) we show
+that [binary relations](foundation.binary-relations.md) are equivalently
+described as spans of types.
 
-### Spans
+We disambiguate between spans and [span diagrams](foundation.span-diagrams.md).
+We consider spans from `A` to `B` to be _morphisms_ from `A` to `B` in the
+category of types and spans between them, whereas we consider span diagrams to
+be _objects_ in the category of diagrams of types of the form
+`* <---- * ----> *`. Conceptually there is a subtle, but important distinction
+between spans and span diagrams. As mentioned previously, a span from `A` to `B`
+is equivalently described as a binary relation from `A` to `B`. On the other
+hand, span diagrams are more suitable for functorial operations that take
+"spans" as input, but for which the functorial action takes a natural
+transformation, i.e., a morphism of span diagrams, as input. Examples of this
+kind include [pushouts](synthetic-homotopy-theory.pushouts.md).
+
+## Definitions
+
+### (Binary) spans
 
 ```agda
 span :
-  {l1 l2 : Level} (l : Level) (A : UU l1) (B : UU l2) →
-  UU (l1 ⊔ l2 ⊔ lsuc l)
-span l A B =
-  Σ (UU l) (λ X → (X → A) × (X → B))
+  {l1 l2 : Level} (l : Level) (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2 ⊔ lsuc l)
+span l A B = Σ (UU l) (λ X → (X → A) × (X → B))
 
 module _
-  {l1 l2 : Level} {l : Level} {A : UU l1} {B : UU l2} (c : span l A B)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  (c : span l3 A B)
   where
 
-  domain-span : UU l
-  domain-span = pr1 c
+  spanning-type-span : UU l3
+  spanning-type-span = pr1 c
 
-  left-map-span : domain-span → A
+  left-map-span : spanning-type-span → A
   left-map-span = pr1 (pr2 c)
 
-  right-map-span : domain-span → B
+  right-map-span : spanning-type-span → B
   right-map-span = pr2 (pr2 c)
 ```
 
-### Homomorphisms between spans with fixed codomains
-
-One notion of homomorphism of spans `c` and `d` with common codomains is a map
-between their domains so that the triangles on either side commute:
-
-```text
-  A ===== A
-  ^       ^
-  |       |
-  C ----> D
-  |       |
-  v       v
-  B ===== B
-```
+### Identity spans
 
 ```agda
 module _
-  {l1 l2 : Level} {l : Level} {A : UU l1} {B : UU l2}
+  {l1 : Level} {X : UU l1}
   where
 
-  coherence-hom-domain-span :
-    (c d : span l A B) → (domain-span c → domain-span d) → UU (l1 ⊔ l2 ⊔ l)
-  coherence-hom-domain-span c d h =
-    ( coherence-triangle-maps (left-map-span c) (left-map-span d) h) ×
-    ( coherence-triangle-maps (right-map-span c) (right-map-span d) h)
-
-  hom-domain-span : (c d : span l A B) → UU (l1 ⊔ l2 ⊔ l)
-  hom-domain-span c d =
-    Σ (domain-span c → domain-span d) (coherence-hom-domain-span c d)
+  id-span : span l1 X X
+  pr1 id-span = X
+  pr1 (pr2 id-span) = id
+  pr2 (pr2 id-span) = id
 ```
-
-### Characterizing equality of spans
-
-```agda
-module _
-  {l1 l2 : Level} (l : Level) (A : UU l1) (B : UU l2)
-  where
-
-  htpy-span : (c d : span l A B) → UU (l1 ⊔ l2 ⊔ l)
-  htpy-span c d =
-    Σ ( domain-span c ≃ domain-span d)
-      ( λ e → coherence-hom-domain-span c d (map-equiv e))
-
-  refl-htpy-span : (c : span l A B) → htpy-span c c
-  pr1 (refl-htpy-span c) = id-equiv
-  pr1 (pr2 (refl-htpy-span c)) = refl-htpy
-  pr2 (pr2 (refl-htpy-span c)) = refl-htpy
-
-  htpy-eq-span : (c d : span l A B) → c ＝ d → htpy-span c d
-  htpy-eq-span c .c refl = refl-htpy-span c
-
-  is-contr-total-htpy-span :
-    (c : span l A B) → is-contr (Σ (span l A B) (htpy-span c))
-  is-contr-total-htpy-span c =
-    is-contr-total-Eq-structure
-      ( λ X d e → coherence-hom-domain-span c (X , d) (map-equiv e))
-      ( is-contr-total-equiv (pr1 c))
-      ( domain-span c , id-equiv)
-      ( is-contr-total-Eq-structure
-        ( λ _ f a → coherence-triangle-maps (right-map-span c) f id)
-        ( is-contr-total-htpy (left-map-span c))
-        ( left-map-span c , refl-htpy)
-        (is-contr-total-htpy (right-map-span c)))
-
-  is-equiv-htpy-eq-span :
-    (c d : span l A B) → is-equiv (htpy-eq-span c d)
-  is-equiv-htpy-eq-span c =
-    fundamental-theorem-id (is-contr-total-htpy-span c) (htpy-eq-span c)
-
-  extensionality-span :
-    (c d : span l A B) → (c ＝ d) ≃ (htpy-span c d)
-  pr1 (extensionality-span c d) = htpy-eq-span c d
-  pr2 (extensionality-span c d) = is-equiv-htpy-eq-span c d
-
-  eq-htpy-span : (c d : span l A B) → htpy-span c d → c ＝ d
-  eq-htpy-span c d = map-inv-equiv (extensionality-span c d)
-```
-
-### Spans are equivalent to binary relations
-
-This remains to be shown.
-[#767](https://github.com/UniMath/agda-unimath/issues/767)
 
 ## See also
 
-- The formal dual of spans is [cospans](foundation.cospans.md).
+- [Binary type duality](foundation.binary-type-duality.md)
+- [Cospans](foundation.cospans.md)
+- [Span diagrams](foundation.span-diagrams.md)
+- [Spans of families of types](foundation.spans-families-of-types.md)
+- [Spans of pointed types](structured-types.pointed-spans.md)

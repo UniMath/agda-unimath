@@ -33,18 +33,18 @@ module _
   (f : hom-Concrete-Group G H)
   where
 
-  is-mono-hom-Concrete-Group-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-mono-hom-Concrete-Group-Prop =
+  is-mono-prop-hom-Concrete-Group : Prop (l1 ⊔ l2 ⊔ lsuc l3)
+  is-mono-prop-hom-Concrete-Group =
     Π-Prop
       ( Concrete-Group l3)
       ( λ F → is-emb-Prop (comp-hom-Concrete-Group F G H f))
 
   is-mono-hom-Concrete-Group : UU (l1 ⊔ l2 ⊔ lsuc l3)
-  is-mono-hom-Concrete-Group = type-Prop is-mono-hom-Concrete-Group-Prop
+  is-mono-hom-Concrete-Group = type-Prop is-mono-prop-hom-Concrete-Group
 
   is-prop-is-mono-hom-Concrete-Group : is-prop is-mono-hom-Concrete-Group
   is-prop-is-mono-hom-Concrete-Group =
-    is-prop-type-Prop is-mono-hom-Concrete-Group-Prop
+    is-prop-type-Prop is-mono-prop-hom-Concrete-Group
 
 module _
   {l1 : Level} (l2 : Level) (G : Concrete-Group l1)

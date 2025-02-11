@@ -8,7 +8,6 @@ module group-theory.homomorphisms-monoids where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
@@ -18,6 +17,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups
@@ -43,9 +43,9 @@ module _
   {l1 l2 : Level} (M1 : Monoid l1) (M2 : Monoid l2)
   where
 
-  preserves-unit-hom-semigroup-Prop :
+  preserves-unit-prop-hom-Semigroup :
     hom-Semigroup (semigroup-Monoid M1) (semigroup-Monoid M2) → Prop l2
-  preserves-unit-hom-semigroup-Prop f =
+  preserves-unit-prop-hom-Semigroup f =
     Id-Prop
       ( set-Monoid M2)
       ( map-hom-Semigroup
@@ -58,19 +58,26 @@ module _
   preserves-unit-hom-Semigroup :
     hom-Semigroup (semigroup-Monoid M1) (semigroup-Monoid M2) → UU l2
   preserves-unit-hom-Semigroup f =
-    type-Prop (preserves-unit-hom-semigroup-Prop f)
+    type-Prop (preserves-unit-prop-hom-Semigroup f)
 
   is-prop-preserves-unit-hom-Semigroup :
     (f : hom-Semigroup (semigroup-Monoid M1) (semigroup-Monoid M2)) →
     is-prop (preserves-unit-hom-Semigroup f)
   is-prop-preserves-unit-hom-Semigroup f =
-    is-prop-type-Prop (preserves-unit-hom-semigroup-Prop f)
+    is-prop-type-Prop (preserves-unit-prop-hom-Semigroup f)
+
+  preserves-unit-hom-prop-Semigroup :
+    hom-Semigroup (semigroup-Monoid M1) (semigroup-Monoid M2) →
+    Prop l2
+  preserves-unit-hom-prop-Semigroup f =
+    ( preserves-unit-hom-Semigroup f ,
+      is-prop-preserves-unit-hom-Semigroup f)
 
   hom-set-Monoid : Set (l1 ⊔ l2)
   hom-set-Monoid =
     set-subset
       ( hom-set-Semigroup (semigroup-Monoid M1) (semigroup-Monoid M2))
-      ( preserves-unit-hom-semigroup-Prop)
+      ( preserves-unit-prop-hom-Semigroup)
 
   hom-Monoid : UU (l1 ⊔ l2)
   hom-Monoid = type-Set hom-set-Monoid
@@ -185,11 +192,11 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : hom-Monoid M N)
   where
 
-  is-contr-total-htpy-hom-Monoid :
-    is-contr (Σ (hom-Monoid M N) (htpy-hom-Monoid M N f))
-  is-contr-total-htpy-hom-Monoid =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-htpy-hom-Semigroup
+  is-torsorial-htpy-hom-Monoid :
+    is-torsorial (htpy-hom-Monoid M N f)
+  is-torsorial-htpy-hom-Monoid =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy-hom-Semigroup
         ( semigroup-Monoid M)
         ( semigroup-Monoid N)
         ( hom-semigroup-hom-Monoid M N f))
@@ -205,7 +212,7 @@ module _
   is-equiv-htpy-eq-hom-Monoid :
     (g : hom-Monoid M N) → is-equiv (htpy-eq-hom-Monoid g)
   is-equiv-htpy-eq-hom-Monoid =
-    fundamental-theorem-id is-contr-total-htpy-hom-Monoid htpy-eq-hom-Monoid
+    fundamental-theorem-id is-torsorial-htpy-hom-Monoid htpy-eq-hom-Monoid
 
   extensionality-hom-Monoid :
     (g : hom-Monoid M N) → (f ＝ g) ≃ htpy-hom-Monoid M N f g
@@ -226,9 +233,7 @@ module _
   where
 
   associative-comp-hom-Monoid :
-    (h : hom-Monoid M N)
-    (g : hom-Monoid L M)
-    (f : hom-Monoid K L) →
+    (h : hom-Monoid M N) (g : hom-Monoid L M) (f : hom-Monoid K L) →
     comp-hom-Monoid K L N (comp-hom-Monoid L M N h g) f ＝
     comp-hom-Monoid K M N h (comp-hom-Monoid K L M g f)
   associative-comp-hom-Monoid h g f =
@@ -279,11 +284,11 @@ module _
   pr1 (preserves-invertible-elements-hom-Monoid (y , p , q)) =
     map-hom-Monoid M N f y
   pr1 (pr2 (preserves-invertible-elements-hom-Monoid (y , p , q))) =
-    ( inv (preserves-mul-hom-Monoid M N f _ y)) ∙
+    ( inv (preserves-mul-hom-Monoid M N f)) ∙
     ( ap (map-hom-Monoid M N f) p) ∙
     ( preserves-unit-hom-Monoid M N f)
   pr2 (pr2 (preserves-invertible-elements-hom-Monoid (y , p , q))) =
-    ( inv (preserves-mul-hom-Monoid M N f y _)) ∙
+    ( inv (preserves-mul-hom-Monoid M N f)) ∙
     ( ap (map-hom-Monoid M N f) q) ∙
     ( preserves-unit-hom-Monoid M N f)
 ```

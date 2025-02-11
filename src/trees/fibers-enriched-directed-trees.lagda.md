@@ -11,6 +11,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -99,7 +100,7 @@ module _
     ( interchange-Σ-Σ (λ u e v → v ＝ cons-walk-Directed-Graph e w)) ∘e
     ( ( inv-right-unit-law-Σ-is-contr
         ( λ i →
-          is-contr-total-path' (cons-walk-Directed-Graph (pr2 i) w))) ∘e
+          is-torsorial-Id' (cons-walk-Directed-Graph (pr2 i) w))) ∘e
       ( enrichment-Enriched-Directed-Tree A B T y))
 
   fiber-Enriched-Directed-Tree : Enriched-Directed-Tree (l3 ⊔ l4) (l3 ⊔ l4) A B
@@ -157,7 +158,7 @@ module _
     map-enrichment-fiber-Enriched-Directed-Tree y b
   eq-map-enrichment-fiber-Enriched-Directed-Tree y b w p =
     eq-interchange-Σ-Σ-is-contr _
-      ( is-contr-total-path'
+      ( is-torsorial-Id'
         ( cons-walk-Directed-Graph
           ( edge-enrichment-Enriched-Directed-Tree A B T
             ( node-inclusion-fiber-Enriched-Directed-Tree y)

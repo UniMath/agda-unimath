@@ -25,6 +25,7 @@ open import foundation.propositions
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -63,12 +64,15 @@ abstract
           ( is-finite-Prop (Σ A B))
           ( is-finite-count ∘ (count-Σ e)))
 
-Σ-𝔽 : {l1 l2 : Level} (A : 𝔽 l1) (B : type-𝔽 A → 𝔽 l2) → 𝔽 (l1 ⊔ l2)
-pr1 (Σ-𝔽 A B) = Σ (type-𝔽 A) (λ a → type-𝔽 (B a))
-pr2 (Σ-𝔽 A B) =
+Σ-Finite-Type :
+  {l1 l2 : Level}
+  (A : Finite-Type l1) (B : type-Finite-Type A → Finite-Type l2) →
+  Finite-Type (l1 ⊔ l2)
+pr1 (Σ-Finite-Type A B) = Σ (type-Finite-Type A) (λ a → type-Finite-Type (B a))
+pr2 (Σ-Finite-Type A B) =
   is-finite-Σ
-    ( is-finite-type-𝔽 A)
-    ( λ a → is-finite-type-𝔽 (B a))
+    ( is-finite-type-Finite-Type A)
+    ( λ a → is-finite-type-Finite-Type (B a))
 ```
 
 ### If `A` and `Σ A B` are finite, then eacy `B a` is finite
@@ -106,7 +110,7 @@ abstract
                       ( λ (x : A) → Id x (pr1 t))
                       ( λ s → Id (tr B (pr2 s) (b (pr1 s))) (pr2 t))) ∘e
                     ( inv-left-unit-law-Σ-is-contr
-                      ( is-contr-total-path' (pr1 t))
+                      ( is-torsorial-Id' (pr1 t))
                       ( pair (pr1 t) refl))))))
             ( count-Σ e
               ( λ t →
@@ -154,13 +158,13 @@ abstract
       ( ( right-unit-law-Σ-is-contr
           ( λ x →
             is-proof-irrelevant-is-prop
-              ( is-prop-is-inhabited-or-empty (B x))
+              ( is-property-is-inhabited-or-empty (B x))
               ( is-inhabited-or-empty-is-finite (g x)))) ∘e
         ( inv-equiv
-          ( left-distributive-Σ-coprod A
+          ( left-distributive-Σ-coproduct A
             ( λ x → type-trunc-Prop (B x))
             ( λ x → is-empty (B x)))))
-      ( is-finite-coprod
+      ( is-finite-coproduct
         ( is-finite-base-is-finite-Σ-merely-inhabited
           ( is-set-type-subtype (λ x → trunc-Prop _) K)
           ( λ t → pr2 t)

@@ -8,27 +8,27 @@ module ring-theory.category-of-cyclic-rings where
 
 ```agda
 open import category-theory.categories
-open import category-theory.isomorphisms-in-large-precategories
+open import category-theory.full-large-subprecategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import order-theory.large-posets
 
+open import ring-theory.category-of-rings
 open import ring-theory.cyclic-rings
 open import ring-theory.homomorphisms-cyclic-rings
-open import ring-theory.isomorphisms-rings
+open import ring-theory.precategory-of-rings
 ```
 
 </details>
 
 ## Idea
 
-The **large category of cyclic rings** is the
-[large category](category-theory.large-categories.md) consisting of
+The
+{{#concept "large category of cyclic rings" Agda=Cyclic-Ring-Large-Category}} is
+the [large category](category-theory.large-categories.md) consisting of
 [cyclic rings](ring-theory.cyclic-rings.md) and
 [ring homomorphisms](ring-theory.homomorphisms-cyclic-rings.md).
 
@@ -40,31 +40,22 @@ rings is constructed in the file
 
 ## Definition
 
+### The precategory of cyclic rings as a full subprecategory of the precategory of rings
+
+```agda
+Cyclic-Ring-Full-Large-Subprecategory :
+  Full-Large-Subprecategory (λ l → l) Ring-Large-Precategory
+Cyclic-Ring-Full-Large-Subprecategory = is-cyclic-prop-Ring
+```
+
 ### The large precategory of cyclic rings
 
 ```agda
-Cyclic-Ring-Large-Precategory : Large-Precategory lsuc _⊔_
-obj-Large-Precategory
-  Cyclic-Ring-Large-Precategory =
-  Cyclic-Ring
-hom-set-Large-Precategory
-  Cyclic-Ring-Large-Precategory =
-  hom-set-Cyclic-Ring
-comp-hom-Large-Precategory
-  Cyclic-Ring-Large-Precategory {X = R} {Y = S} {Z = T} =
-  comp-hom-Cyclic-Ring R S T
-id-hom-Large-Precategory
-  Cyclic-Ring-Large-Precategory {X = R} =
-  id-hom-Cyclic-Ring R
-associative-comp-hom-Large-Precategory
-  Cyclic-Ring-Large-Precategory {X = R} {Y = S} {Z = T} {W = U} =
-  associative-comp-hom-Cyclic-Ring R S T U
-left-unit-law-comp-hom-Large-Precategory
-  Cyclic-Ring-Large-Precategory {X = R} {Y = S} =
-  left-unit-law-comp-hom-Cyclic-Ring R S
-right-unit-law-comp-hom-Large-Precategory
-  Cyclic-Ring-Large-Precategory {X = R} {Y = S} =
-  right-unit-law-comp-hom-Cyclic-Ring R S
+Cyclic-Ring-Large-Precategory : Large-Precategory lsuc (_⊔_)
+Cyclic-Ring-Large-Precategory =
+  large-precategory-Full-Large-Subprecategory
+    ( Ring-Large-Precategory)
+    ( Cyclic-Ring-Full-Large-Subprecategory)
 ```
 
 ### The large category of cyclic rings
@@ -73,17 +64,13 @@ right-unit-law-comp-hom-Large-Precategory
 abstract
   is-large-category-Cyclic-Ring-Large-Category :
     is-large-category-Large-Precategory Cyclic-Ring-Large-Precategory
-  is-large-category-Cyclic-Ring-Large-Category R =
-    fundamental-theorem-id
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-iso-Ring (ring-Cyclic-Ring R))
-        ( is-prop-is-cyclic-Ring)
-        ( ring-Cyclic-Ring R)
-        ( id-iso-Ring (ring-Cyclic-Ring R))
-        ( is-cyclic-Cyclic-Ring R))
-      ( iso-eq-Large-Precategory Cyclic-Ring-Large-Precategory R)
+  is-large-category-Cyclic-Ring-Large-Category =
+    is-large-category-large-precategory-is-large-category-Full-Large-Subprecategory
+      ( Ring-Large-Precategory)
+      ( Cyclic-Ring-Full-Large-Subprecategory)
+      ( is-large-category-Ring-Large-Category)
 
-Cyclic-Ring-Large-Category : Large-Category lsuc _⊔_
+Cyclic-Ring-Large-Category : Large-Category lsuc (_⊔_)
 large-precategory-Large-Category
   Cyclic-Ring-Large-Category =
   Cyclic-Ring-Large-Precategory

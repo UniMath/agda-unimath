@@ -13,8 +13,12 @@ open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-positive-and-negative-integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.nonzero-integers
+open import elementary-number-theory.positive-and-negative-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
@@ -38,8 +42,9 @@ open import foundation.universe-levels
 ## Idea
 
 An integer `m` is said to **divide** an integer `n` if there exists an integer
-`k` equipped with an identification `km ＝ n`. Using the Curry-Howard
-interpretation of logic into type theory, we express divisibility as follows:
+`k` equipped with an identification `km ＝ n`. Using the
+[Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
+of logic into type theory, we express divisibility as follows:
 
 ```text
   div-ℤ m n := Σ (k : ℤ), k *ℤ m ＝ n.
@@ -657,23 +662,14 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inr p =
 ```agda
 eq-sim-unit-is-nonnegative-ℤ :
   {a b : ℤ} → is-nonnegative-ℤ a → is-nonnegative-ℤ b → sim-unit-ℤ a b → a ＝ b
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K
-  with is-plus-or-minus-sim-unit-ℤ K
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inl pos = pos
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg
-  with is-decidable-is-zero-ℤ a
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inl z =
-  equational-reasoning
-    a
-    ＝ zero-ℤ
-      by z
-    ＝ neg-ℤ a
-      by inv (ap neg-ℤ z)
-    ＝ b
-      by neg
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz =
-  ex-falso
-    ( nz
-      ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
-          a H (tr is-nonnegative-ℤ (inv neg) H')))
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K =
+  rec-coproduct
+    ( id)
+    ( λ K' →
+      eq-is-zero-ℤ
+        ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ H
+          ( is-nonnegative-eq-ℤ (inv K') H'))
+        ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ H'
+          ( is-nonnegative-eq-ℤ (inv (neg-neg-ℤ a) ∙ ap neg-ℤ K') H)))
+    ( is-plus-or-minus-sim-unit-ℤ K)
 ```

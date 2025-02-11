@@ -18,14 +18,16 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.postcomposition-functions
 open import foundation.propositional-truncations
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import trees.algebras-polynomial-endofunctors
 open import trees.coalgebras-polynomial-endofunctors
@@ -156,8 +158,8 @@ module _
       { y = λ y → pair (β y) (e y)}
       ( eq-htpy (λ y → contraction-total-Eq-𝕎 (α y) (pair (β y) (e y))))
 
-  is-contr-total-Eq-𝕎 : (w : 𝕎 A B) → is-contr (Σ (𝕎 A B) (Eq-𝕎 w))
-  is-contr-total-Eq-𝕎 w =
+  is-torsorial-Eq-𝕎 : (w : 𝕎 A B) → is-torsorial (Eq-𝕎 w)
+  is-torsorial-Eq-𝕎 w =
     pair (center-total-Eq-𝕎 w) (contraction-total-Eq-𝕎 w)
 
   Eq-𝕎-eq : (v w : 𝕎 A B) → v ＝ w → Eq-𝕎 v w
@@ -166,7 +168,7 @@ module _
   is-equiv-Eq-𝕎-eq : (v w : 𝕎 A B) → is-equiv (Eq-𝕎-eq v w)
   is-equiv-Eq-𝕎-eq v =
     fundamental-theorem-id
-      ( is-contr-total-Eq-𝕎 v)
+      ( is-torsorial-Eq-𝕎 v)
       ( Eq-𝕎-eq v)
 
   eq-Eq-𝕎 : (v w : 𝕎 A B) → Eq-𝕎 v w → v ＝ w
@@ -293,7 +295,7 @@ compute-structure-htpy-hom-𝕎-Alg :
     ( htpy-polynomial-endofunctor A B H (pair x α))) ＝
   ( ap
     ( λ t → structure-algebra-polynomial-endofunctor X (pair x t))
-    ( eq-htpy (H ·r α)))
+    ( htpy-postcomp (B x) H α))
 compute-structure-htpy-hom-𝕎-Alg {A = A} {B} X x α =
   ind-htpy
     ( map-hom-𝕎-Alg X)
@@ -303,7 +305,7 @@ compute-structure-htpy-hom-𝕎-Alg {A = A} {B} X x α =
         ( htpy-polynomial-endofunctor A B H (pair x α))) ＝
       ( ap
         ( λ t → structure-algebra-polynomial-endofunctor X (pair x t))
-        ( eq-htpy (H ·r α))))
+        ( htpy-postcomp (B x) H α)))
     ( ap
       ( ap (pr2 X))
       ( coh-refl-htpy-polynomial-endofunctor A B

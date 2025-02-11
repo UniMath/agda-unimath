@@ -189,8 +189,8 @@ split-sum-Commutative-Ring :
   (n m : ℕ) (f : functional-vec-Commutative-Ring A (n +ℕ m)) →
   sum-Commutative-Ring A (n +ℕ m) f ＝
   add-Commutative-Ring A
-    ( sum-Commutative-Ring A n (f ∘ inl-coprod-Fin n m))
-    ( sum-Commutative-Ring A m (f ∘ inr-coprod-Fin n m))
+    ( sum-Commutative-Ring A n (f ∘ inl-coproduct-Fin n m))
+    ( sum-Commutative-Ring A m (f ∘ inr-coproduct-Fin n m))
 split-sum-Commutative-Ring A n zero-ℕ f =
   inv (right-unit-law-add-Commutative-Ring A (sum-Commutative-Ring A n f))
 split-sum-Commutative-Ring A n (succ-ℕ m) f =

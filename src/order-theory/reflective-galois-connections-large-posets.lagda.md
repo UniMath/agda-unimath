@@ -71,7 +71,7 @@ module _
     where
 
     lower-adjoint-reflective-galois-connection-Large-Poset :
-      hom-set-Large-Poset γ P Q
+      hom-Large-Poset γ P Q
     lower-adjoint-reflective-galois-connection-Large-Poset =
       lower-adjoint-galois-connection-Large-Poset
         ( galois-connection-reflective-galois-connection-Large-Poset G)

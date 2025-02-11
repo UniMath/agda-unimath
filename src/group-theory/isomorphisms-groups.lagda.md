@@ -18,6 +18,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.category-of-semigroups
@@ -122,57 +123,57 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2)
   where
 
-  type-iso-Group : UU (l1 ⊔ l2)
-  type-iso-Group = type-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
+  iso-Group : UU (l1 ⊔ l2)
+  iso-Group = iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  hom-iso-Group : type-iso-Group → hom-Group G H
+  hom-iso-Group : iso-Group → hom-Group G H
   hom-iso-Group = hom-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  map-iso-Group : type-iso-Group → type-Group G → type-Group H
+  map-iso-Group : iso-Group → type-Group G → type-Group H
   map-iso-Group = map-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
   preserves-mul-iso-Group :
-    (f : type-iso-Group) (x y : type-Group G) →
+    (f : iso-Group) {x y : type-Group G} →
     map-iso-Group f (mul-Group G x y) ＝
     mul-Group H (map-iso-Group f x) (map-iso-Group f y)
   preserves-mul-iso-Group =
     preserves-mul-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
   is-iso-iso-Group :
-    (f : type-iso-Group) → is-iso-Group G H (hom-iso-Group f)
+    (f : iso-Group) → is-iso-Group G H (hom-iso-Group f)
   is-iso-iso-Group =
     is-iso-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  hom-inv-iso-Group : type-iso-Group → hom-Group H G
+  hom-inv-iso-Group : iso-Group → hom-Group H G
   hom-inv-iso-Group =
     hom-inv-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  map-inv-iso-Group : type-iso-Group → type-Group H → type-Group G
+  map-inv-iso-Group : iso-Group → type-Group H → type-Group G
   map-inv-iso-Group =
     map-inv-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
   preserves-mul-inv-iso-Group :
-    (f : type-iso-Group) (x y : type-Group H) →
+    (f : iso-Group) {x y : type-Group H} →
     map-inv-iso-Group f (mul-Group H x y) ＝
     mul-Group G (map-inv-iso-Group f x) (map-inv-iso-Group f y)
   preserves-mul-inv-iso-Group =
     preserves-mul-inv-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
   is-section-hom-inv-iso-Group :
-    (f : type-iso-Group) →
+    (f : iso-Group) →
     comp-hom-Group H G H (hom-iso-Group f) (hom-inv-iso-Group f) ＝
     id-hom-Group H
   is-section-hom-inv-iso-Group =
     is-section-hom-inv-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
   is-section-map-inv-iso-Group :
-    (f : type-iso-Group) →
+    (f : iso-Group) →
     ( map-iso-Group f ∘ map-inv-iso-Group f) ~ id
   is-section-map-inv-iso-Group =
     is-section-map-inv-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
   is-retraction-hom-inv-iso-Group :
-    (f : type-iso-Group) →
+    (f : iso-Group) →
     comp-hom-Group G H G (hom-inv-iso-Group f) (hom-iso-Group f) ＝
     id-hom-Group G
   is-retraction-hom-inv-iso-Group =
@@ -181,7 +182,7 @@ module _
       ( semigroup-Group H)
 
   is-retraction-map-inv-iso-Group :
-    (f : type-iso-Group) →
+    (f : iso-Group) →
     ( map-inv-iso-Group f ∘ map-iso-Group f) ~ id
   is-retraction-map-inv-iso-Group =
     is-retraction-map-inv-iso-Semigroup
@@ -198,11 +199,11 @@ module _
   is-equiv-is-iso-Group =
     is-equiv-is-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  equiv-iso-equiv-Group : equiv-Group G H ≃ type-iso-Group
+  equiv-iso-equiv-Group : equiv-Group G H ≃ iso-Group
   equiv-iso-equiv-Group =
     equiv-iso-equiv-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  iso-equiv-Group : equiv-Group G H → type-iso-Group
+  iso-equiv-Group : equiv-Group G H → iso-Group
   iso-equiv-Group = map-equiv equiv-iso-equiv-Group
 ```
 
@@ -213,7 +214,7 @@ module _
   {l : Level} (G : Group l)
   where
 
-  id-iso-Group : type-iso-Group G G
+  id-iso-Group : iso-Group G G
   id-iso-Group = id-iso-Large-Precategory Group-Large-Precategory {X = G}
 ```
 
@@ -226,24 +227,22 @@ module _
   {l : Level} (G : Group l)
   where
 
-  iso-eq-Group : (H : Group l) → Id G H → type-iso-Group G H
+  iso-eq-Group : (H : Group l) → Id G H → iso-Group G H
   iso-eq-Group = iso-eq-Large-Precategory Group-Large-Precategory G
 
   abstract
-    extensionality-Group' : (H : Group l) → Id G H ≃ type-iso-Group G H
+    extensionality-Group' : (H : Group l) → Id G H ≃ iso-Group G H
     extensionality-Group' H =
-      ( extensionality-Semigroup
-        ( semigroup-Group G)
-        ( semigroup-Group H)) ∘e
-      ( equiv-ap-inclusion-subtype is-group-Prop {s = G} {t = H})
+      ( extensionality-Semigroup (semigroup-Group G) (semigroup-Group H)) ∘e
+      ( equiv-ap-inclusion-subtype is-group-prop-Semigroup {s = G} {t = H})
 
   abstract
-    is-contr-total-iso-Group : is-contr (Σ (Group l) (type-iso-Group G))
-    is-contr-total-iso-Group =
+    is-torsorial-iso-Group : is-torsorial (λ (H : Group l) → iso-Group G H)
+    is-torsorial-iso-Group =
       is-contr-equiv'
         ( Σ (Group l) (Id G))
         ( equiv-tot extensionality-Group')
-        ( is-contr-total-path G)
+        ( is-torsorial-Id G)
 ```
 
 ### Group isomorphisms are stable by composition
@@ -253,8 +252,7 @@ module _
   {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (K : Group l3)
   where
 
-  comp-iso-Group :
-    type-iso-Group H K → type-iso-Group G H → type-iso-Group G K
+  comp-iso-Group : iso-Group H K → iso-Group G H → iso-Group G K
   comp-iso-Group =
     comp-iso-Large-Precategory Group-Large-Precategory {X = G} {Y = H} {Z = K}
 ```
@@ -266,7 +264,7 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2)
   where
 
-  inv-iso-Group : type-iso-Group G H → type-iso-Group H G
+  inv-iso-Group : iso-Group G H → iso-Group H G
   inv-iso-Group =
     inv-iso-Large-Precategory Group-Large-Precategory {X = G} {Y = H}
 ```

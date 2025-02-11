@@ -7,6 +7,7 @@ module set-theory.countable-sets where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.type-arithmetic-natural-numbers
@@ -19,6 +20,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
+open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -29,6 +31,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
+open import foundation.retracts-of-types
 open import foundation.sets
 open import foundation.shifting-sequences
 open import foundation.surjective-maps
@@ -46,13 +49,15 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A set `X` is said to be countable if there is a surjective map `f : ℕ → X + 1`.
-Equivalently, a set `X` is countable if there is a surjective map
-`f : type-decidable-subset P → X` for some decidable subset `P` of `X`.
+A [set](foundation-core.sets.md) `X` is said to be
+{{#concept "countable" Disambiguation="set" Agda=is-countable WD="countable set" WDID=Q66707394}}
+if there is a [surjective map](foundation.surjective-maps.md) `f : ℕ → X + 1`.
+Equivalently, a set `X` is countable if there is a surjective map `f : P → X`
+for some [decidable subset](foundation.decidable-subtypes.md) `P` of `X`.
 
 ## Definition
 
-### First definition of countable types
+### First definition of countable sets
 
 ```agda
 module _
@@ -70,7 +75,8 @@ module _
   is-surjective-map-enumeration E = pr2 E
 
   is-countable-Prop : Prop l
-  is-countable-Prop = ∃-Prop (ℕ → Maybe (type-Set X)) is-surjective
+  is-countable-Prop =
+    ∃ (ℕ → Maybe (type-Set X)) (is-surjective-Prop)
 
   is-countable : UU l
   is-countable = type-Prop (is-countable-Prop)
@@ -79,7 +85,7 @@ module _
   is-prop-is-countable = is-prop-type-Prop is-countable-Prop
 ```
 
-### Second definition of countable types
+### Second definition of countable sets
 
 ```agda
 module _
@@ -93,7 +99,7 @@ module _
 
   is-countable-Prop' : Prop (lsuc l ⊔ l)
   is-countable-Prop' =
-    ∃-Prop
+    exists-structure-Prop
       ( decidable-subtype l ℕ)
       ( λ P → type-decidable-subtype P ↠ type-Set X)
 
@@ -104,7 +110,7 @@ module _
   is-prop-is-countable' = is-prop-type-Prop is-countable-Prop'
 ```
 
-### Third definition of countable types
+### Third definition of countable sets
 
 If a set `X` is inhabited, then it is countable if and only if there is a
 surjective map `f : ℕ → X`. Let us call the latter as "directly countable".
@@ -112,7 +118,7 @@ surjective map `f : ℕ → X`. Let us call the latter as "directly countable".
 ```agda
 is-directly-countable-Prop : {l : Level} → Set l → Prop l
 is-directly-countable-Prop X =
-  ∃-Prop (ℕ → type-Set X) is-surjective
+  ∃ (ℕ → type-Set X) (is-surjective-Prop)
 
 is-directly-countable : {l : Level} → Set l → UU l
 is-directly-countable X = type-Prop (is-directly-countable-Prop X)
@@ -287,53 +293,93 @@ module _
         ( unit-trunc-Prop (enumeration-decidable-subprojection-ℕ D)))
 ```
 
-## Useful Lemmas
-
-There is a surjection from `(Maybe A + Maybe B)` to `Maybe (A + B)`.
+### If a countable set surjects onto a set, then the set is countable
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} (A : Set l1) (B : Set l2)
   where
 
-  map-maybe-coprod : (Maybe A + Maybe B) → Maybe (A + B)
-  map-maybe-coprod (inl (inl x)) = inl (inl x)
-  map-maybe-coprod (inl (inr star)) = inr star
-  map-maybe-coprod (inr (inl x)) = inl (inr x)
-  map-maybe-coprod (inr (inr star)) = inr star
+  is-directly-countable-is-directly-countably-indexed' :
+    {f : type-Set A → type-Set B} → is-surjective f →
+    is-directly-countable A → is-directly-countable B
+  is-directly-countable-is-directly-countably-indexed' {f} F =
+    elim-exists
+      ( is-directly-countable-Prop B)
+      ( λ g G → intro-exists (f ∘ g) (is-surjective-comp F G))
 
-  is-surjective-map-maybe-coprod : is-surjective map-maybe-coprod
-  is-surjective-map-maybe-coprod (inl (inl x)) =
-    unit-trunc-Prop ((inl (inl x)) , refl)
-  is-surjective-map-maybe-coprod (inl (inr x)) =
-    unit-trunc-Prop ((inr (inl x)) , refl)
-  is-surjective-map-maybe-coprod (inr star) =
-    unit-trunc-Prop ((inl (inr star)) , refl)
+  is-directly-countable-is-directly-countably-indexed :
+    (type-Set A ↠ type-Set B) →
+    is-directly-countable A →
+    is-directly-countable B
+  is-directly-countable-is-directly-countably-indexed (f , F) =
+    is-directly-countable-is-directly-countably-indexed' F
+
+  is-countable-is-countably-indexed' :
+    {f : type-Set A → type-Set B} →
+    is-surjective f →
+    is-countable A →
+    is-countable B
+  is-countable-is-countably-indexed' {f} F =
+    elim-exists
+      ( is-countable-Prop B)
+      ( λ g G →
+        intro-exists
+          ( map-Maybe f ∘ g)
+          ( is-surjective-comp (is-surjective-map-is-surjective-Maybe F) G))
+
+  is-countable-is-countably-indexed :
+    (type-Set A ↠ type-Set B) →
+    is-countable A →
+    is-countable B
+  is-countable-is-countably-indexed (f , F) =
+    is-countable-is-countably-indexed' F
 ```
 
-There is a surjection from `(Maybe A × Maybe B)` to `Maybe (A × B)`.
+### Retracts of countable sets are countable
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} (A : Set l1) (B : Set l2)
+  (R : (type-Set B) retract-of (type-Set A))
   where
 
-  map-maybe-prod : (Maybe A × Maybe B) → Maybe (A × B)
-  map-maybe-prod (inl a , inl b) = inl (a , b)
-  map-maybe-prod (inl a , inr star) = inr star
-  map-maybe-prod (inr star , inl b) = inr star
-  map-maybe-prod (inr star , inr star) = inr star
+  is-directly-countable-retract-of :
+    is-directly-countable A → is-directly-countable B
+  is-directly-countable-retract-of =
+    is-directly-countable-is-directly-countably-indexed' A B
+      { map-retraction-retract R}
+      ( is-surjective-has-section
+        ( inclusion-retract R , is-retraction-map-retraction-retract R))
 
-  is-surjective-map-maybe-prod : is-surjective map-maybe-prod
-  is-surjective-map-maybe-prod (inl (a , b)) =
-    unit-trunc-Prop ((inl a , inl b) , refl)
-  is-surjective-map-maybe-prod (inr star) =
-    unit-trunc-Prop ((inr star , inr star) , refl)
+  is-countable-retract-of :
+    is-countable A → is-countable B
+  is-countable-retract-of =
+    is-countable-is-countably-indexed' A B
+      { map-retraction-retract R}
+      ( is-surjective-has-section
+        ( inclusion-retract R , is-retraction-map-retraction-retract R))
 ```
 
-## Examples
+### Countable sets are closed under equivalences
 
-The set of natural numbers ℕ is itself countable.
+```agda
+module _
+  {l1 l2 : Level} (A : Set l1) (B : Set l2) (e : type-Set B ≃ type-Set A)
+  where
+
+  is-directly-countable-equiv :
+    is-directly-countable A → is-directly-countable B
+  is-directly-countable-equiv =
+    is-directly-countable-retract-of A B (retract-equiv e)
+
+  is-countable-equiv :
+    is-countable A → is-countable B
+  is-countable-equiv =
+    is-countable-retract-of A B (retract-equiv e)
+```
+
+### The set of natural numbers ℕ is itself countable
 
 ```agda
 abstract
@@ -348,7 +394,7 @@ abstract
           ( inr star) → unit-trunc-Prop (zero-ℕ , refl)))
 ```
 
-The empty set is countable.
+### The empty set is countable
 
 ```agda
 is-countable-empty : is-countable empty-Set
@@ -358,7 +404,7 @@ is-countable-empty =
     ( unit-trunc-Prop ((λ _ → empty-Decidable-Prop) , (λ ()) , (λ ())))
 ```
 
-The unit set is countable.
+### The unit set is countable
 
 ```agda
 abstract
@@ -373,79 +419,89 @@ abstract
           ( inr star) → unit-trunc-Prop (1 , refl)))
 ```
 
-If `X` and `Y` are countable sets, then so is their coproduct `X + Y`.
+### If `X` and `Y` are countable sets, then so is their coproduct `X + Y`
 
 ```agda
 module _
   {l1 l2 : Level} (X : Set l1) (Y : Set l2)
   where
 
-  is-countable-coprod :
-    is-countable X → is-countable Y → is-countable (coprod-Set X Y)
-  is-countable-coprod H H' =
+  is-countable-coproduct :
+    is-countable X → is-countable Y → is-countable (coproduct-Set X Y)
+  is-countable-coproduct H H' =
     apply-twice-universal-property-trunc-Prop H' H
-      ( is-countable-Prop (coprod-Set X Y))
+      ( is-countable-Prop (coproduct-Set X Y))
       ( λ h' h →
         ( unit-trunc-Prop
           ( pair
-            ( map-maybe-coprod ∘
-              ( map-coprod (pr1 h) (pr1 h') ∘ map-ℕ-to-ℕ+ℕ))
+            ( map-maybe-coproduct ∘
+              ( map-coproduct (pr1 h) (pr1 h') ∘ map-ℕ-to-ℕ+ℕ))
             ( is-surjective-comp
-              ( is-surjective-map-maybe-coprod)
+              ( is-surjective-map-maybe-coproduct)
               ( is-surjective-comp
-                ( is-surjective-map-coprod (pr2 h) (pr2 h'))
+                ( is-surjective-map-coproduct (pr2 h) (pr2 h'))
                 ( is-surjective-is-equiv (is-equiv-map-ℕ-to-ℕ+ℕ)))))))
 ```
 
-If `X` and `Y` are countable sets, then so is their coproduct `X × Y`.
+### If `X` and `Y` are countable sets, then so is their coproduct `X × Y`
 
 ```agda
 module _
   {l1 l2 : Level} (X : Set l1) (Y : Set l2)
   where
 
-  is-countable-prod :
-    is-countable X → is-countable Y → is-countable (prod-Set X Y)
-  is-countable-prod H H' =
+  is-countable-product :
+    is-countable X → is-countable Y → is-countable (product-Set X Y)
+  is-countable-product H H' =
     apply-twice-universal-property-trunc-Prop H' H
-      ( is-countable-Prop (prod-Set X Y))
+      ( is-countable-Prop (product-Set X Y))
       ( λ h' h →
         ( unit-trunc-Prop
           ( pair
-            ( map-maybe-prod ∘
-              ( map-prod (pr1 h) (pr1 h') ∘ map-ℕ-to-ℕ×ℕ))
+            ( map-maybe-product ∘
+              ( map-product (pr1 h) (pr1 h') ∘ map-ℕ-to-ℕ×ℕ))
             ( is-surjective-comp
-              ( is-surjective-map-maybe-prod)
+              ( is-surjective-map-maybe-product)
               ( is-surjective-comp
-                ( is-surjective-map-prod (pr2 h) (pr2 h'))
+                ( is-surjective-map-product (pr2 h) (pr2 h'))
                 ( is-surjective-is-equiv (is-equiv-map-ℕ-to-ℕ×ℕ)))))))
 ```
 
 In particular, the sets ℕ + ℕ, ℕ × ℕ, and ℤ are countable.
 
 ```agda
-is-countable-ℕ+ℕ : is-countable (coprod-Set ℕ-Set ℕ-Set)
+is-countable-ℕ+ℕ : is-countable (coproduct-Set ℕ-Set ℕ-Set)
 is-countable-ℕ+ℕ =
-  is-countable-coprod ℕ-Set ℕ-Set is-countable-ℕ is-countable-ℕ
+  is-countable-coproduct ℕ-Set ℕ-Set is-countable-ℕ is-countable-ℕ
 
-is-countable-ℕ×ℕ : is-countable (prod-Set ℕ-Set ℕ-Set)
+is-countable-ℕ×ℕ : is-countable (product-Set ℕ-Set ℕ-Set)
 is-countable-ℕ×ℕ =
-  is-countable-prod ℕ-Set ℕ-Set is-countable-ℕ is-countable-ℕ
+  is-countable-product ℕ-Set ℕ-Set is-countable-ℕ is-countable-ℕ
 
 is-countable-ℤ : is-countable (ℤ-Set)
 is-countable-ℤ =
-  is-countable-coprod (ℕ-Set) (coprod-Set unit-Set ℕ-Set)
+  is-countable-coproduct (ℕ-Set) (coproduct-Set unit-Set ℕ-Set)
     ( is-countable-ℕ)
-    ( is-countable-coprod (unit-Set) (ℕ-Set)
+    ( is-countable-coproduct (unit-Set) (ℕ-Set)
       ( is-countable-unit) (is-countable-ℕ))
 ```
 
-All standart finite sets are countable.
+### All standard finite sets are countable
 
 ```agda
 is-countable-Fin-Set : (n : ℕ) → is-countable (Fin-Set n)
 is-countable-Fin-Set zero-ℕ = is-countable-empty
 is-countable-Fin-Set (succ-ℕ n) =
-  is-countable-coprod (Fin-Set n) (unit-Set)
+  is-countable-coproduct (Fin-Set n) (unit-Set)
     ( is-countable-Fin-Set n) (is-countable-unit)
 ```
+
+## See also
+
+- [Infinite sets](set-theory.infinite-sets.md)
+- [Uncountable sets](set-theory.uncountable-sets.md)
+
+## External links
+
+- [countable set](https://ncatlab.org/nlab/show/countable+set) at $n$Lab
+- [Countable set](https://en.wikipedia.org/wiki/Countable_set) at Wikipedia

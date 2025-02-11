@@ -13,6 +13,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -86,7 +87,7 @@ module _
     suspension (type-Ω X) → type-Pointed-Type X
   map-counit-suspension-loop-adjunction =
     map-inv-is-equiv
-      ( up-suspension (type-Ω X) (type-Pointed-Type X))
+      ( up-suspension (type-Pointed-Type X))
       ( point-Pointed-Type X , point-Pointed-Type X , id)
 
   pointed-map-counit-suspension-loop-adjunction :
@@ -94,9 +95,7 @@ module _
   pr1 pointed-map-counit-suspension-loop-adjunction =
     map-counit-suspension-loop-adjunction
   pr2 pointed-map-counit-suspension-loop-adjunction =
-    up-suspension-north-suspension
-      ( type-Ω X)
-      ( type-Pointed-Type X)
+    compute-north-cogap-suspension
       ( point-Pointed-Type X , point-Pointed-Type X , id)
 ```
 
@@ -119,17 +118,13 @@ module _
   inv-transpose-suspension-loop-adjunction :
     (X →∗ Ω Y) → (suspension-Pointed-Type X →∗ Y)
   pr1 (inv-transpose-suspension-loop-adjunction f∗) =
-    map-inv-up-suspension
-      ( type-Pointed-Type X)
-      ( type-Pointed-Type Y)
+    cogap-suspension
       ( suspension-structure-map-into-Ω
         ( type-Pointed-Type X)
         ( Y)
         ( map-pointed-map f∗))
   pr2 (inv-transpose-suspension-loop-adjunction f∗) =
-    up-suspension-north-suspension
-      ( type-Pointed-Type X)
-      ( type-Pointed-Type Y)
+    compute-north-cogap-suspension
       ( suspension-structure-map-into-Ω
         ( type-Pointed-Type X)
         ( Y)
@@ -149,7 +144,7 @@ module _
     (suspension-Pointed-Type X →∗ Y) ≃ (X →∗ Ω Y)
   equiv-transpose-suspension-loop-adjunction =
     ( left-unit-law-Σ-is-contr
-      ( is-contr-total-path (point-Pointed-Type Y))
+      ( is-torsorial-Id (point-Pointed-Type Y))
       ( point-Pointed-Type Y , refl)) ∘e
     ( inv-associative-Σ
       ( type-Pointed-Type Y)
@@ -165,14 +160,14 @@ module _
         Σ ( point-Pointed-Type Y ＝ pr1 z)
           ( λ x → pr2 z (point-Pointed-Type X) ＝ x))) ∘e
     ( inv-right-unit-law-Σ-is-contr
-      ( λ z → is-contr-total-path (pr2 z (point-Pointed-Type X)))) ∘e
+      ( λ z → is-torsorial-Id (pr2 z (point-Pointed-Type X)))) ∘e
     ( left-unit-law-Σ-is-contr
-      ( is-contr-total-path' (point-Pointed-Type Y))
+      ( is-torsorial-Id' (point-Pointed-Type Y))
       ( point-Pointed-Type Y , refl)) ∘e
     ( equiv-right-swap-Σ) ∘e
     ( equiv-Σ-equiv-base
       ( λ c → pr1 c ＝ point-Pointed-Type Y)
-      ( equiv-up-suspension (type-Pointed-Type X) (type-Pointed-Type Y)))
+      ( equiv-up-suspension))
 ```
 
 #### The equivalence in the suspension-loop space adjunction is pointed

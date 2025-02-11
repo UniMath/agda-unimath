@@ -14,6 +14,7 @@ open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.global-subuniverses
 open import foundation.homotopies
 open import foundation.pi-decompositions
 open import foundation.pi-decompositions-subuniverse
@@ -53,7 +54,7 @@ the Dirichlet exponential is also a species of types in subuniverse from `P` to
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
   where
 
   type-dirichlet-exponential-species-subuniverse :
@@ -72,7 +73,7 @@ module _
 
 ```agda
 is-closed-under-dirichlet-exponential-species-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id) →
+  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l)) →
   UUω
 is-closed-under-dirichlet-exponential-species-subuniverse {l1} {l2} P Q =
   {l3 : Level}
@@ -87,7 +88,7 @@ is-closed-under-dirichlet-exponential-species-subuniverse {l1} {l2} P Q =
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
   where
 
@@ -105,7 +106,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
   ( C2 :
     ( U : UU l1) →
@@ -194,13 +195,9 @@ module _
                       ( pV)
                       ( tr
                         ( is-in-subuniverse P)
-                        ( eq-equiv
-                          ( pr1 X)
-                          ( Π ( indexing-type-Π-Decomposition d)
-                              ( cotype-Π-Decomposition d))
-                          ( matching-correspondence-Π-Decomposition d))
+                        ( eq-equiv (matching-correspondence-Π-Decomposition d))
                         ( pr2 X))))) ∘e
-              ( ( commutative-prod) ∘e
+              ( ( commutative-product) ∘e
                 ( inv-equiv
                   ( equiv-add-redundant-prop
                     ( is-prop-type-Prop (P (inclusion-subuniverse P X)))
@@ -212,7 +209,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
+  (Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
   ( C2 : is-closed-under-coproduct-species-subuniverse P Q)
   ( C3 : is-closed-under-dirichlet-product-species-subuniverse P Q)
@@ -263,7 +261,7 @@ module _
             ( inclusion-subuniverse P X))) ∘e
         ( ( equiv-tot
             ( λ d →
-              equiv-prod
+              equiv-product
                 (( inv-equiv
                   ( equiv-dirichlet-exponential-Σ-extension-species-subuniverse
                     ( P)
@@ -336,10 +334,6 @@ module _
         ( right-summand-binary-product-Decomposition d)
         ( tr
           ( is-in-subuniverse P)
-          ( eq-equiv
-            ( inclusion-subuniverse P X)
-            ( left-summand-binary-product-Decomposition d ×
-              right-summand-binary-product-Decomposition d)
-            ( matching-correspondence-binary-product-Decomposition d))
+          ( eq-equiv (matching-correspondence-binary-product-Decomposition d))
           ( pr2 X))
 ```

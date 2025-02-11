@@ -149,5 +149,5 @@ module _
 abstract
   mere-eq-mere-equiv :
     {l : Level} {A B : UU l} → mere-equiv A B → mere-eq A B
-  mere-eq-mere-equiv {l} {A} {B} = map-trunc-Prop (eq-equiv A B)
+  mere-eq-mere-equiv = map-trunc-Prop eq-equiv
 ```

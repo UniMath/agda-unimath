@@ -34,15 +34,15 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  is-decidable-leq-Poset-Prop : Prop (l1 ⊔ l2)
-  is-decidable-leq-Poset-Prop =
-    is-decidable-leq-Preorder-Prop (preorder-Poset X)
+  is-decidable-leq-prop-Poset : Prop (l1 ⊔ l2)
+  is-decidable-leq-prop-Poset =
+    is-decidable-leq-prop-Preorder (preorder-Poset X)
 
   is-decidable-leq-Poset : UU (l1 ⊔ l2)
-  is-decidable-leq-Poset = type-Prop is-decidable-leq-Poset-Prop
+  is-decidable-leq-Poset = type-Prop is-decidable-leq-prop-Poset
 
   is-prop-is-decidable-leq-Poset : is-prop is-decidable-leq-Poset
-  is-prop-is-decidable-leq-Poset = is-prop-type-Prop is-decidable-leq-Poset-Prop
+  is-prop-is-decidable-leq-Poset = is-prop-type-Prop is-decidable-leq-prop-Poset
 
 Decidable-Poset : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Decidable-Poset l1 l2 = Σ (Poset l1 l2) is-decidable-leq-Poset
@@ -65,7 +65,7 @@ module _
   type-Decidable-Poset = type-Poset poset-Decidable-Poset
 
   leq-Decidable-Poset-Prop : (x y : type-Decidable-Poset) → Prop l2
-  leq-Decidable-Poset-Prop = leq-Poset-Prop poset-Decidable-Poset
+  leq-Decidable-Poset-Prop = leq-prop-Poset poset-Decidable-Poset
 
   leq-Decidable-Poset : (x y : type-Decidable-Poset) → UU l2
   leq-Decidable-Poset = leq-Poset poset-Decidable-Poset

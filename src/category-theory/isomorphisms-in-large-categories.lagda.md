@@ -19,6 +19,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -149,7 +150,7 @@ module _
     id-iso-Large-Precategory (large-precategory-Large-Category C)
 ```
 
-### Equalities give rise to isomorphisms
+### Equalities induce isomorphisms
 
 An equality between objects `X Y : A` gives rise to an isomorphism between them.
 This is because, by the J-rule, it is enough to construct an isomorphism given
@@ -176,7 +177,8 @@ module _
   compute-iso-eq-Large-Category :
     iso-eq-Category (category-Large-Category C l1) X Y ~
     iso-eq-Large-Category
-  compute-iso-eq-Large-Category refl = refl
+  compute-iso-eq-Large-Category =
+    compute-iso-eq-Large-Precategory (large-precategory-Large-Category C) X Y
 
   extensionality-obj-Large-Category :
     (X ＝ Y) ≃ iso-Large-Category C X Y
@@ -191,13 +193,21 @@ module _
   (X : obj-Large-Category C l1)
   where
 
-  is-contr-total-iso-Large-Category :
-    is-contr (Σ (obj-Large-Category C l1) (iso-Large-Category C X))
-  is-contr-total-iso-Large-Category =
+  is-torsorial-iso-Large-Category :
+    is-torsorial (iso-Large-Category C X)
+  is-torsorial-iso-Large-Category =
     is-contr-equiv'
-      ( Σ (obj-Large-Category C l1) (λ Y → X ＝ Y))
+      ( Σ (obj-Large-Category C l1) (X ＝_))
       ( equiv-tot (extensionality-obj-Large-Category C X))
-      ( is-contr-total-path X)
+      ( is-torsorial-Id X)
+
+  is-torsorial-iso-Large-Category' :
+    is-torsorial (λ Y → iso-Large-Category C Y X)
+  is-torsorial-iso-Large-Category' =
+    is-contr-equiv'
+      ( Σ (obj-Large-Category C l1) (_＝ X))
+      ( equiv-tot (λ Y → extensionality-obj-Large-Category C Y X))
+      ( is-torsorial-Id' X)
 ```
 
 ## Properties
@@ -565,6 +575,60 @@ module _
     is-iso-is-equiv-precomp-hom-Large-Precategory
       ( large-precategory-Large-Category C)
       ( H)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Category α β) {l1 l2 l3 : Level}
+  {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
+  {f : hom-Large-Category C X Y}
+  (is-iso-f : is-iso-Large-Category C f)
+  (Z : obj-Large-Category C l3)
+  where
+
+  map-inv-precomp-hom-is-iso-Large-Category :
+    hom-Large-Category C X Z → hom-Large-Category C Y Z
+  map-inv-precomp-hom-is-iso-Large-Category =
+    precomp-hom-Large-Category C
+      ( hom-inv-is-iso-Large-Category C f is-iso-f)
+      ( Z)
+
+  is-equiv-precomp-hom-is-iso-Large-Category :
+    is-equiv (precomp-hom-Large-Category C f Z)
+  is-equiv-precomp-hom-is-iso-Large-Category =
+    is-equiv-precomp-hom-is-iso-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( is-iso-f)
+      ( Z)
+
+  equiv-precomp-hom-is-iso-Large-Category :
+    hom-Large-Category C Y Z ≃ hom-Large-Category C X Z
+  equiv-precomp-hom-is-iso-Large-Category =
+    equiv-precomp-hom-is-iso-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( is-iso-f)
+      ( Z)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Category α β) {l1 l2 l3 : Level}
+  {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
+  (f : iso-Large-Category C X Y)
+  (Z : obj-Large-Category C l3)
+  where
+
+  is-equiv-precomp-hom-iso-Large-Category :
+    is-equiv (precomp-hom-Large-Category C (hom-iso-Large-Category C f) Z)
+  is-equiv-precomp-hom-iso-Large-Category =
+    is-equiv-precomp-hom-is-iso-Large-Category C
+      ( is-iso-iso-Large-Category C f)
+      ( Z)
+
+  equiv-precomp-hom-iso-Large-Category :
+    hom-Large-Category C Y Z ≃ hom-Large-Category C X Z
+  equiv-precomp-hom-iso-Large-Category =
+    equiv-precomp-hom-is-iso-Large-Category C
+      ( is-iso-iso-Large-Category C f)
+      ( Z)
 ```
 
 ### A morphism `f` is an isomorphism if and only if postcomposition by `f` is an equivalence
@@ -640,4 +704,59 @@ module _
     is-iso-is-equiv-postcomp-hom-Large-Precategory
       ( large-precategory-Large-Category C)
       ( H)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Category α β) {l1 l2 l3 : Level}
+  {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
+  {f : hom-Large-Category C X Y}
+  (is-iso-f : is-iso-Large-Category C f)
+  (Z : obj-Large-Category C l3)
+  where
+
+  map-inv-postcomp-hom-is-iso-Large-Category :
+    hom-Large-Category C Z Y → hom-Large-Category C Z X
+  map-inv-postcomp-hom-is-iso-Large-Category =
+    postcomp-hom-Large-Category C
+      ( Z)
+      ( hom-inv-is-iso-Large-Category C f is-iso-f)
+
+  is-equiv-postcomp-hom-is-iso-Large-Category :
+    is-equiv (postcomp-hom-Large-Category C Z f)
+  is-equiv-postcomp-hom-is-iso-Large-Category =
+    is-equiv-postcomp-hom-is-iso-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( is-iso-f)
+      ( Z)
+
+  equiv-postcomp-hom-is-iso-Large-Category :
+    hom-Large-Category C Z X ≃ hom-Large-Category C Z Y
+  equiv-postcomp-hom-is-iso-Large-Category =
+    equiv-postcomp-hom-is-iso-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( is-iso-f)
+      ( Z)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Category α β) {l1 l2 l3 : Level}
+  {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
+  (f : iso-Large-Category C X Y)
+  (Z : obj-Large-Category C l3)
+  where
+
+  is-equiv-postcomp-hom-iso-Large-Category :
+    is-equiv
+      ( postcomp-hom-Large-Category C Z (hom-iso-Large-Category C f))
+  is-equiv-postcomp-hom-iso-Large-Category =
+    is-equiv-postcomp-hom-is-iso-Large-Category C
+      ( is-iso-iso-Large-Category C f)
+      ( Z)
+
+  equiv-postcomp-hom-iso-Large-Category :
+    hom-Large-Category C Z X ≃ hom-Large-Category C Z Y
+  equiv-postcomp-hom-iso-Large-Category =
+    equiv-postcomp-hom-is-iso-Large-Category C
+      ( is-iso-iso-Large-Category C f)
+      ( Z)
 ```

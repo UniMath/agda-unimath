@@ -8,12 +8,11 @@ module group-theory.congruence-relations-commutative-monoids where
 
 ```agda
 open import foundation.binary-relations
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
@@ -30,21 +29,21 @@ the underlying monoid of `M`.
 ## Definition
 
 ```agda
-is-congruence-commutative-monoid-Prop :
+is-congruence-prop-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1) →
-  Equivalence-Relation l2 (type-Commutative-Monoid M) → Prop (l1 ⊔ l2)
-is-congruence-commutative-monoid-Prop M =
-  is-congruence-monoid-Prop (monoid-Commutative-Monoid M)
+  equivalence-relation l2 (type-Commutative-Monoid M) → Prop (l1 ⊔ l2)
+is-congruence-prop-Commutative-Monoid M =
+  is-congruence-prop-Monoid (monoid-Commutative-Monoid M)
 
 is-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1) →
-  Equivalence-Relation l2 (type-Commutative-Monoid M) → UU (l1 ⊔ l2)
+  equivalence-relation l2 (type-Commutative-Monoid M) → UU (l1 ⊔ l2)
 is-congruence-Commutative-Monoid M =
   is-congruence-Monoid (monoid-Commutative-Monoid M)
 
 is-prop-is-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1)
-  (R : Equivalence-Relation l2 (type-Commutative-Monoid M)) →
+  (R : equivalence-relation l2 (type-Commutative-Monoid M)) →
   is-prop (is-congruence-Commutative-Monoid M R)
 is-prop-is-congruence-Commutative-Monoid M =
   is-prop-is-congruence-Monoid (monoid-Commutative-Monoid M)
@@ -59,10 +58,10 @@ module _
   (R : congruence-Commutative-Monoid l2 M)
   where
 
-  eq-rel-congruence-Commutative-Monoid :
-    Equivalence-Relation l2 (type-Commutative-Monoid M)
-  eq-rel-congruence-Commutative-Monoid =
-    eq-rel-congruence-Monoid (monoid-Commutative-Monoid M) R
+  equivalence-relation-congruence-Commutative-Monoid :
+    equivalence-relation l2 (type-Commutative-Monoid M)
+  equivalence-relation-congruence-Commutative-Monoid =
+    equivalence-relation-congruence-Monoid (monoid-Commutative-Monoid M) R
 
   prop-congruence-Commutative-Monoid :
     Relation-Prop l2 (type-Commutative-Monoid M)
@@ -123,7 +122,8 @@ module _
     transitive-congruence-Monoid (monoid-Commutative-Monoid M) R
 
   mul-congruence-Commutative-Monoid :
-    is-congruence-Commutative-Monoid M eq-rel-congruence-Commutative-Monoid
+    is-congruence-Commutative-Monoid M
+      equivalence-relation-congruence-Commutative-Monoid
   mul-congruence-Commutative-Monoid =
     mul-congruence-Monoid (monoid-Commutative-Monoid M) R
 ```
@@ -147,14 +147,12 @@ refl-relate-same-elements-congruence-Commutative-Monoid :
 refl-relate-same-elements-congruence-Commutative-Monoid M =
   refl-relate-same-elements-congruence-Monoid (monoid-Commutative-Monoid M)
 
-is-contr-total-relate-same-elements-congruence-Commutative-Monoid :
+is-torsorial-relate-same-elements-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1)
   (R : congruence-Commutative-Monoid l2 M) →
-  is-contr
-    ( Σ ( congruence-Commutative-Monoid l2 M)
-        ( relate-same-elements-congruence-Commutative-Monoid M R))
-is-contr-total-relate-same-elements-congruence-Commutative-Monoid M =
-  is-contr-total-relate-same-elements-congruence-Monoid
+  is-torsorial (relate-same-elements-congruence-Commutative-Monoid M R)
+is-torsorial-relate-same-elements-congruence-Commutative-Monoid M =
+  is-torsorial-relate-same-elements-congruence-Monoid
     ( monoid-Commutative-Monoid M)
 
 relate-same-elements-eq-congruence-Commutative-Monoid :
@@ -184,5 +182,6 @@ eq-relate-same-elements-congruence-Commutative-Monoid :
   (R S : congruence-Commutative-Monoid l2 M) →
   relate-same-elements-congruence-Commutative-Monoid M R S → R ＝ S
 eq-relate-same-elements-congruence-Commutative-Monoid M =
-  eq-relate-same-elements-congruence-Monoid (monoid-Commutative-Monoid M)
+  eq-relate-same-elements-congruence-Monoid
+    ( monoid-Commutative-Monoid M)
 ```

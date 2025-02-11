@@ -8,6 +8,7 @@ module elementary-number-theory.factorials where
 
 ```agda
 open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -19,6 +20,12 @@ open import foundation.identity-types
 ```
 
 </details>
+
+## Idea
+
+The {{#concept "factorial" WD="factorial" WDID=Q120976 Agda=factorial-ℕ}} `n!`
+of a number `n`, counts the number of ways to linearly order `n` distinct
+objects.
 
 ## Definition
 
@@ -65,3 +72,8 @@ leq-factorial-ℕ (succ-ℕ n) =
     ( succ-ℕ n)
     ( is-nonzero-factorial-ℕ n)
 ```
+
+## External links
+
+- [Factorial](https://en.wikipedia.org/wiki/Factorial) at Wikipedia
+- [A000142](https://oeis.org/A000142) in the OEIS

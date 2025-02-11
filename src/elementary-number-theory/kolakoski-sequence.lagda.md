@@ -20,7 +20,8 @@ open import foundation.dependent-pair-types
 
 ## Idea
 
-The Kolakoski sequence
+The
+{{#concept "Kolakoski sequence" WD="Kolakoski sequence" WDID=Q6427013 Agda=kolakoski}}
 
 ```text
 1,2,2,1,1,2,1,2,2,1,2,2,1,1,...
@@ -66,3 +67,7 @@ kolakoski n with pr1 (kolakoski-helper n)
 ... | true = 2
 ... | false = 1
 ```
+
+## External links
+
+- [A000002](https://oeis.org/A000002) in the OEIS

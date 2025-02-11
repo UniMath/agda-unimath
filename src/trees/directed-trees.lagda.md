@@ -26,6 +26,7 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -40,7 +41,7 @@ open import graph-theory.walks-directed-graphs
 
 ## Idea
 
-A **directed tree** is a directed graph `G` equipped with a rood `r : G` such
+A **directed tree** is a directed graph `G` equipped with a root `r : G` such
 that for every vertex `x : G` the type of walks from `x` to `r` is contractible.
 
 ## Definition
@@ -177,7 +178,8 @@ module _
   where
 
   is-proper-node-Directed-Tree-Prop : node-Directed-Tree T → Prop l1
-  is-proper-node-Directed-Tree-Prop x = neg-Prop' (is-root-Directed-Tree T x)
+  is-proper-node-Directed-Tree-Prop x =
+    neg-type-Prop (is-root-Directed-Tree T x)
 
   is-proper-node-Directed-Tree : node-Directed-Tree T → UU l1
   is-proper-node-Directed-Tree x =
@@ -380,24 +382,27 @@ module _
     unique-direct-successor-Directed-Graph →
     is-empty (Σ (vertex-Directed-Graph G) (edge-Directed-Graph G r))
   no-direct-successor-root-unique-direct-successor-Directed-Graph H =
-    is-empty-right-summand-is-contr-coprod (H r) refl
+    is-empty-right-summand-is-contr-coproduct (H r) refl
 
   is-isolated-root-unique-direct-successor-Directed-Graph :
     unique-direct-successor-Directed-Graph → is-isolated r
   is-isolated-root-unique-direct-successor-Directed-Graph H x =
-    map-coprod id (is-empty-left-summand-is-contr-coprod (H x)) (center (H x))
+    map-coproduct
+      ( id)
+      ( is-empty-left-summand-is-contr-coproduct (H x))
+      ( center (H x))
 
-  is-contr-walk-from-root-unique-direct-successor-Directed-Graph :
+  is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph :
     unique-direct-successor-Directed-Graph →
-    is-contr (Σ (vertex-Directed-Graph G) (λ y → walk-Directed-Graph G r y))
-  pr1 (is-contr-walk-from-root-unique-direct-successor-Directed-Graph H) =
+    is-torsorial (walk-Directed-Graph G r)
+  pr1 (is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph H) =
     ( r , refl-walk-Directed-Graph)
   pr2
-    ( is-contr-walk-from-root-unique-direct-successor-Directed-Graph H)
+    ( is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph H)
     ( y , refl-walk-Directed-Graph) =
     refl
   pr2
-    ( is-contr-walk-from-root-unique-direct-successor-Directed-Graph H)
+    ( is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph H)
     ( y , cons-walk-Directed-Graph e w) =
     ex-falso
       ( no-direct-successor-root-unique-direct-successor-Directed-Graph H
@@ -415,7 +420,7 @@ module _
       ( (r ＝ x) + Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x)) →
     Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x) → r ≠ x
   is-not-root-has-unique-direct-successor-Directed-Graph x H (y , e) =
-    is-empty-left-summand-is-contr-coprod H (y , e)
+    is-empty-left-summand-is-contr-coproduct H (y , e)
 
   is-proof-irrelevant-direct-successor-has-unique-direct-successor-Directed-Graph :
     (x : vertex-Directed-Graph G) →
@@ -446,7 +451,8 @@ module _
     ( pr2
       ( pair-eq-Σ
         ( eq-is-contr
-          ( is-contr-walk-from-root-unique-direct-successor-Directed-Graph H)
+          ( is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph
+            H)
           { (r , refl-walk-Directed-Graph)}
           { (r , w)})))
   is-proof-irrelevant-walk-unique-direct-successor-Directed-Graph H x
@@ -460,7 +466,7 @@ module _
         ≃ Σ ( vertex-Directed-Graph G)
             ( λ y → edge-Directed-Graph G x y × walk-Directed-Graph G y r)
           by
-          left-unit-law-coprod-is-empty
+          left-unit-law-coproduct-is-empty
             ( r ＝ x)
             ( Σ ( vertex-Directed-Graph G)
                 ( λ y →
@@ -587,7 +593,7 @@ module _
     is-contr-equiv'
       ( ( is-root-Directed-Tree T x) +
         ( Σ (node-Directed-Tree T) (edge-Directed-Tree T x)))
-      ( left-unit-law-coprod-is-empty
+      ( left-unit-law-coproduct-is-empty
         ( is-root-Directed-Tree T x)
         ( Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
         ( f))

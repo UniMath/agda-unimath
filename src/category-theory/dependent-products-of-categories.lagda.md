@@ -8,6 +8,7 @@ module category-theory.dependent-products-of-categories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.dependent-products-of-precategories
 open import category-theory.isomorphisms-in-categories
 open import category-theory.precategories
@@ -19,6 +20,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -74,20 +76,30 @@ module _
     hom-Π-Category x z
   comp-hom-Π-Category = comp-hom-Category Π-Category
 
+  involutive-eq-associative-comp-hom-Π-Category :
+    {x y z w : obj-Π-Category}
+    (h : hom-Π-Category z w)
+    (g : hom-Π-Category y z)
+    (f : hom-Π-Category x y) →
+    comp-hom-Π-Category (comp-hom-Π-Category h g) f ＝ⁱ
+    comp-hom-Π-Category h (comp-hom-Π-Category g f)
+  involutive-eq-associative-comp-hom-Π-Category =
+    involutive-eq-associative-comp-hom-Category Π-Category
+
   associative-comp-hom-Π-Category :
     {x y z w : obj-Π-Category}
     (h : hom-Π-Category z w)
     (g : hom-Π-Category y z)
     (f : hom-Π-Category x y) →
-    ( comp-hom-Π-Category (comp-hom-Π-Category h g) f) ＝
-    ( comp-hom-Π-Category h (comp-hom-Π-Category g f))
+    comp-hom-Π-Category (comp-hom-Π-Category h g) f ＝
+    comp-hom-Π-Category h (comp-hom-Π-Category g f)
   associative-comp-hom-Π-Category =
     associative-comp-hom-Category Π-Category
 
-  associative-composition-structure-Π-Category :
-    associative-composition-structure-Set hom-set-Π-Category
-  associative-composition-structure-Π-Category =
-    associative-composition-structure-Category Π-Category
+  associative-composition-operation-Π-Category :
+    associative-composition-operation-binary-family-Set hom-set-Π-Category
+  associative-composition-operation-Π-Category =
+    associative-composition-operation-Category Π-Category
 
   id-hom-Π-Category :
     {x : obj-Π-Category} → hom-Π-Category x x
@@ -107,10 +119,10 @@ module _
     right-unit-law-comp-hom-Category Π-Category
 
   is-unital-Π-Category :
-    is-unital-composition-structure-Set
+    is-unital-composition-operation-binary-family-Set
       hom-set-Π-Category
-      associative-composition-structure-Π-Category
-  is-unital-Π-Category = is-unital-composition-structure-Category Π-Category
+      comp-hom-Π-Category
+  is-unital-Π-Category = is-unital-composition-operation-Category Π-Category
 
   extensionality-obj-Π-Category :
     (x y : obj-Category Π-Category) → (x ＝ y) ≃ iso-Category Π-Category x y

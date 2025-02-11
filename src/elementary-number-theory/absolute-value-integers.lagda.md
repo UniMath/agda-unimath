@@ -14,6 +14,8 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -26,8 +28,8 @@ open import foundation.unit-type
 
 ## Idea
 
-The absolute value of an integer is the natural number with the same distance
-from `0`.
+The {{#concept "absolute value" Disambiguation="of an integer" Agda=abs-ℤ}} of
+an integer is the natural number with the same distance from `0`.
 
 ## Definition
 

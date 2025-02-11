@@ -10,8 +10,7 @@ module foundation.symmetric-difference where
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.exclusive-disjunction
-open import foundation.identity-types hiding (inv)
+open import foundation.exclusive-sum
 open import foundation.intersections-subtypes
 open import foundation.universe-levels
 
@@ -19,6 +18,7 @@ open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.transport-along-identifications
@@ -28,8 +28,9 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-The symmetric difference of two subtypes `A` and `B` is the subtypes that
-contains the elements that are either in `A` or in `B` but not in both.
+The **symmetric difference** of two [subtypes](foundation-core.subtypes.md) `A`
+and `B` is the subtype that contains the elements that are either in `A` or in
+`B` but not in both.
 
 ## Definition
 
@@ -40,17 +41,21 @@ module _
 
   symmetric-difference-subtype :
     subtype l1 X → subtype l2 X → subtype (l1 ⊔ l2) X
-  symmetric-difference-subtype P Q x = xor-Prop (P x) (Q x)
+  symmetric-difference-subtype P Q x =
+    exclusive-sum-Prop (P x) (Q x)
 
   symmetric-difference-decidable-subtype :
     decidable-subtype l1 X → decidable-subtype l2 X →
     decidable-subtype (l1 ⊔ l2) X
-  symmetric-difference-decidable-subtype P Q x = xor-Decidable-Prop (P x) (Q x)
+  symmetric-difference-decidable-subtype P Q x =
+    exclusive-sum-Decidable-Prop (P x) (Q x)
 ```
 
 ## Properties
 
 ### The coproduct of two decidable subtypes is equivalent to their symmetric difference plus two times their intersection
+
+This is closely related to the _inclusion-exclusion principle_.
 
 ```agda
 module _
@@ -163,3 +168,7 @@ module _
     s (inr (pair x q)) =
       right-cases-s x q (is-decidable-Decidable-Prop (P x))
 ```
+
+## See also
+
+- [Complements of subtypes](foundation.complements-subtypes.md)

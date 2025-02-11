@@ -1,6 +1,6 @@
 # Linear algebra
 
-## Files in the linear algebra folder
+## Modules in the linear algebra namespace
 
 ```agda
 module linear-algebra where

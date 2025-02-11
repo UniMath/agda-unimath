@@ -8,7 +8,7 @@
   --mono-font: Menlo, Source Code Pro, Consolas, Monaco, Lucida Console,
     Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New,
     monospace;
-  --code-font-size: 0.875em;
+  --code-font-size: 1.3rem;
   --pagetoc-fontsize: 0.85em;
 }
 

@@ -2,6 +2,8 @@
 
 ```agda
 module foundation.torsorial-type-families where
+
+open import foundation-core.torsorial-type-families public
 ```
 
 <details><summary>Imports</summary>
@@ -11,13 +13,13 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.logical-equivalences
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -31,7 +33,7 @@ A type family `E` over `B` is said to be **torsorial** if its
 it follows that a type family `E` is torsorial if and only if it is in the
 [image](foundation.images.md) of `Id : B → (B → 𝒰)`.
 
-## Definition
+## Definitions
 
 ### The predicate of being a torsorial type family over `B`
 
@@ -39,10 +41,6 @@ it follows that a type family `E` is torsorial if and only if it is in the
 is-torsorial-Prop :
   {l1 l2 : Level} {B : UU l1} → (B → UU l2) → Prop (l1 ⊔ l2)
 is-torsorial-Prop E = is-contr-Prop (Σ _ E)
-
-is-torsorial :
-  {l1 l2 : Level} {B : UU l1} → (B → UU l2) → UU (l1 ⊔ l2)
-is-torsorial E = type-Prop (is-torsorial-Prop E)
 
 is-prop-is-torsorial :
   {l1 l2 : Level} {B : UU l1} (E : B → UU l2) → is-prop (is-torsorial E)
@@ -70,7 +68,7 @@ module _
 
 ## Properties
 
-#### `fib Id B ≃ is-contr (Σ A B)` for any type family `B` over `A`
+### `fiber Id B ≃ is-torsorial B` for any type family `B` over `A`
 
 In other words, a type family `B` over `A` is in the
 [image](foundation.images.md) of `Id : A → (A → 𝒰)` if and only if `B` is
@@ -86,29 +84,34 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  is-torsorial-fib-Id :
+  is-torsorial-fiber-Id :
     {a : A} → ((x : A) → (a ＝ x) ≃ B x) → is-torsorial B
-  is-torsorial-fib-Id H =
+  is-torsorial-fiber-Id H =
     fundamental-theorem-id'
       ( λ x → map-equiv (H x))
       ( λ x → is-equiv-map-equiv (H x))
 
-  fib-Id-is-torsorial :
+  fiber-Id-is-torsorial :
     is-torsorial B → Σ A (λ a → (x : A) → (a ＝ x) ≃ B x)
-  pr1 (fib-Id-is-torsorial ((a , b) , H)) = a
-  pr2 (fib-Id-is-torsorial ((a , b) , H)) =
+  pr1 (fiber-Id-is-torsorial ((a , b) , H)) = a
+  pr2 (fiber-Id-is-torsorial ((a , b) , H)) =
     map-inv-distributive-Π-Σ (f , fundamental-theorem-id ((a , b) , H) f)
     where
     f : (x : A) → (a ＝ x) → B x
     f x refl = b
 
-  compute-fib-Id :
-    (Σ A (λ a → (x : A) → (a ＝ x) ≃ B x)) ≃ is-contr (Σ A B)
-  compute-fib-Id =
+  compute-fiber-Id :
+    (Σ A (λ a → (x : A) → (a ＝ x) ≃ B x)) ≃ is-torsorial B
+  compute-fiber-Id =
     equiv-iff
       ( Σ A (λ a → (x : A) → (a ＝ x) ≃ B x) ,
         is-prop-total-family-of-equivalences-Id)
       ( is-contr-Prop (Σ A B))
-      ( λ u → is-torsorial-fib-Id (pr2 u))
-      ( fib-Id-is-torsorial)
+      ( λ u → is-torsorial-fiber-Id (pr2 u))
+      ( fiber-Id-is-torsorial)
 ```
+
+### See also
+
+- [Discrete reflexive relations](foundation.discrete-reflexive-relations.md) are
+  binary torsorial type families.

@@ -126,7 +126,7 @@ module _
   where
 
   equiv-section-descent-data-circle-equiv-equiv-descent-data-circle :
-    dependent-universal-property-circle (l2 ⊔ l3) l →
+    dependent-universal-property-circle l →
     ( ( t : S) →
       ( family-family-with-descent-data-circle A t) ≃
       ( family-family-with-descent-data-circle B t)) ≃

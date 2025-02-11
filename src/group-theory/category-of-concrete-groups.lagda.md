@@ -16,8 +16,8 @@ module group-theory.category-of-concrete-groups where
 
 ### The category of concrete groups
 
-```agda
--- is-category-Concrete-Group-Large-Precategory :
---   is-large-category-Large-Precategory Concrete-Group-Large-Precategory
---   is-category-Concrete-Group-Large-Precategory = {!!}
+```text
+is-category-Concrete-Group-Large-Precategory :
+  is-large-category-Large-Precategory Concrete-Group-Large-Precategory
+  is-category-Concrete-Group-Large-Precategory = {!!}
 ```

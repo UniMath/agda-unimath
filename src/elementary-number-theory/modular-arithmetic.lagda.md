@@ -19,6 +19,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -38,8 +39,6 @@ open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import foundation-core.homotopies
 
 open import structured-types.types-equipped-with-endomorphisms
 
@@ -102,7 +101,7 @@ has-decidable-equality-ℤ-Mod zero-ℕ = has-decidable-equality-ℤ
 has-decidable-equality-ℤ-Mod (succ-ℕ k) = has-decidable-equality-Fin (succ-ℕ k)
 ```
 
-### The integers modulo k are a discrete type
+### The integers modulo `k` are a discrete type
 
 ```agda
 ℤ-Mod-Discrete-Type : (k : ℕ) → Discrete-Type lzero
@@ -110,7 +109,7 @@ has-decidable-equality-ℤ-Mod (succ-ℕ k) = has-decidable-equality-Fin (succ-�
 ℤ-Mod-Discrete-Type (succ-ℕ k) = Fin-Discrete-Type (succ-ℕ k)
 ```
 
-### The integers modulo k form a set
+### The integers modulo `k` form a set
 
 ```agda
 abstract
@@ -131,12 +130,12 @@ abstract
   is-finite-ℤ-Mod {zero-ℕ} H = ex-falso (H refl)
   is-finite-ℤ-Mod {succ-ℕ k} H = is-finite-Fin (succ-ℕ k)
 
-ℤ-Mod-𝔽 : (k : ℕ) → is-nonzero-ℕ k → 𝔽 lzero
-pr1 (ℤ-Mod-𝔽 k H) = ℤ-Mod k
-pr2 (ℤ-Mod-𝔽 k H) = is-finite-ℤ-Mod H
+ℤ-Mod-Finite-Type : (k : ℕ) → is-nonzero-ℕ k → Finite-Type lzero
+pr1 (ℤ-Mod-Finite-Type k H) = ℤ-Mod k
+pr2 (ℤ-Mod-Finite-Type k H) = is-finite-ℤ-Mod H
 ```
 
-## The inclusion of the integers modulo k into ℤ
+## The inclusion of the integers modulo `k` into ℤ
 
 ```agda
 int-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ
@@ -156,15 +155,15 @@ int-ℤ-Mod-bounded :
   (k : ℕ) → (x : ℤ-Mod (succ-ℕ k)) →
   leq-ℤ (int-ℤ-Mod (succ-ℕ k) x) (int-ℕ (succ-ℕ k))
 int-ℤ-Mod-bounded zero-ℕ (inr x) = star
-int-ℤ-Mod-bounded (succ-ℕ k) (inl x) = is-nonnegative-succ-ℤ
-  ((inr (inr k)) +ℤ
-  (neg-ℤ (int-ℕ (nat-Fin (succ-ℕ k) x)))) (int-ℤ-Mod-bounded k x)
-int-ℤ-Mod-bounded (succ-ℕ k) (inr x) = is-nonnegative-succ-ℤ
-  ((inr (inr k)) +ℤ (inl k))
-  (is-nonnegative-eq-ℤ (inv (left-inverse-law-add-ℤ (inl k))) star)
+int-ℤ-Mod-bounded (succ-ℕ k) (inl x) =
+  is-nonnegative-succ-is-nonnegative-ℤ
+    ( int-ℤ-Mod-bounded k x)
+int-ℤ-Mod-bounded (succ-ℕ k) (inr x) =
+  is-nonnegative-succ-is-nonnegative-ℤ
+    ( is-nonnegative-eq-ℤ (inv (left-inverse-law-add-ℤ (inl k))) star)
 ```
 
-## The successor and predecessor functions on the integers modulo k
+## The successor and predecessor functions on the integers modulo `k`
 
 ```agda
 succ-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k
@@ -242,7 +241,7 @@ pr1 (equiv-add-ℤ-Mod' k x) = add-ℤ-Mod' k x
 pr2 (equiv-add-ℤ-Mod' k x) = is-equiv-add-ℤ-Mod' k x
 
 is-injective-add-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → is-injective (add-ℤ-Mod k x)
-is-injective-add-ℤ-Mod zero-ℕ = is-injective-add-ℤ
+is-injective-add-ℤ-Mod zero-ℕ = is-injective-left-add-ℤ
 is-injective-add-ℤ-Mod (succ-ℕ k) = is-injective-add-Fin (succ-ℕ k)
 
 is-injective-add-ℤ-Mod' : (k : ℕ) (x : ℤ-Mod k) → is-injective (add-ℤ-Mod' k x)
@@ -267,7 +266,7 @@ pr1 (equiv-neg-ℤ-Mod k) = neg-ℤ-Mod k
 pr2 (equiv-neg-ℤ-Mod k) = is-equiv-neg-ℤ-Mod k
 ```
 
-## Laws of addition modulo k
+## Laws of addition modulo `k`
 
 ```agda
 associative-add-ℤ-Mod :
@@ -349,7 +348,7 @@ is-left-add-neg-one-pred-ℤ-Mod' zero-ℕ = is-right-add-neg-one-pred-ℤ
 is-left-add-neg-one-pred-ℤ-Mod' (succ-ℕ k) = is-add-neg-one-pred-Fin' k
 ```
 
-## Multiplication modulo k
+## Multiplication modulo `k`
 
 ```agda
 mul-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → ℤ-Mod k
@@ -365,7 +364,7 @@ ap-mul-ℤ-Mod :
 ap-mul-ℤ-Mod k p q = ap-binary (mul-ℤ-Mod k) p q
 ```
 
-## Laws of multiplication modulo k
+## Laws of multiplication modulo `k`
 
 ```agda
 associative-mul-ℤ-Mod :
@@ -407,16 +406,16 @@ right-distributive-mul-add-ℤ-Mod (succ-ℕ k) =
 
 is-left-mul-neg-one-neg-ℤ-Mod :
   (k : ℕ) (x : ℤ-Mod k) → neg-ℤ-Mod k x ＝ mul-ℤ-Mod k (neg-one-ℤ-Mod k) x
-is-left-mul-neg-one-neg-ℤ-Mod zero-ℕ = is-left-mul-neg-one-neg-ℤ
+is-left-mul-neg-one-neg-ℤ-Mod zero-ℕ = inv ∘ left-neg-unit-law-mul-ℤ
 is-left-mul-neg-one-neg-ℤ-Mod (succ-ℕ k) = is-mul-neg-one-neg-Fin k
 
 is-left-mul-neg-one-neg-ℤ-Mod' :
   (k : ℕ) (x : ℤ-Mod k) → neg-ℤ-Mod k x ＝ mul-ℤ-Mod k x (neg-one-ℤ-Mod k)
-is-left-mul-neg-one-neg-ℤ-Mod' zero-ℕ = is-right-mul-neg-one-neg-ℤ
+is-left-mul-neg-one-neg-ℤ-Mod' zero-ℕ = inv ∘ right-neg-unit-law-mul-ℤ
 is-left-mul-neg-one-neg-ℤ-Mod' (succ-ℕ k) = is-mul-neg-one-neg-Fin' k
 ```
 
-## Congruence classes of integers modulo k
+## Congruence classes of integers modulo `k`
 
 ```agda
 mod-ℕ : (k : ℕ) → ℕ → ℤ-Mod k

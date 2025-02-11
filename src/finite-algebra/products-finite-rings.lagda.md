@@ -36,123 +36,166 @@ R1 and R2.
 
 ```agda
 module _
-  {l1 l2 : Level} (R1 : Ring-𝔽 l1) (R2 : Ring-𝔽 l2)
+  {l1 l2 : Level} (R1 : Finite-Ring l1) (R2 : Finite-Ring l2)
   where
 
-  set-prod-Ring-𝔽 : Set (l1 ⊔ l2)
-  set-prod-Ring-𝔽 = set-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+  set-product-Finite-Ring : Set (l1 ⊔ l2)
+  set-product-Finite-Ring =
+    set-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
-  type-prod-Ring-𝔽 : UU (l1 ⊔ l2)
-  type-prod-Ring-𝔽 = type-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+  type-product-Finite-Ring : UU (l1 ⊔ l2)
+  type-product-Finite-Ring =
+    type-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
-  is-set-type-prod-Ring-𝔽 : is-set type-prod-Ring-𝔽
-  is-set-type-prod-Ring-𝔽 =
-    is-set-type-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+  is-set-type-product-Finite-Ring : is-set type-product-Finite-Ring
+  is-set-type-product-Finite-Ring =
+    is-set-type-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
-  is-finite-type-prod-Ring-𝔽 : is-finite type-prod-Ring-𝔽
-  is-finite-type-prod-Ring-𝔽 =
-    is-finite-prod (is-finite-type-Ring-𝔽 R1) (is-finite-type-Ring-𝔽 R2)
+  is-finite-type-product-Finite-Ring : is-finite type-product-Finite-Ring
+  is-finite-type-product-Finite-Ring =
+    is-finite-product
+      ( is-finite-type-Finite-Ring R1)
+      ( is-finite-type-Finite-Ring R2)
 
-  finite-type-prod-Ring-𝔽 : 𝔽 (l1 ⊔ l2)
-  pr1 finite-type-prod-Ring-𝔽 = type-prod-Ring-𝔽
-  pr2 finite-type-prod-Ring-𝔽 = is-finite-type-prod-Ring-𝔽
+  finite-type-product-Finite-Ring : Finite-Type (l1 ⊔ l2)
+  pr1 finite-type-product-Finite-Ring = type-product-Finite-Ring
+  pr2 finite-type-product-Finite-Ring = is-finite-type-product-Finite-Ring
 
-  add-prod-Ring-𝔽 : type-prod-Ring-𝔽 → type-prod-Ring-𝔽 → type-prod-Ring-𝔽
-  add-prod-Ring-𝔽 = add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+  add-product-Finite-Ring :
+    type-product-Finite-Ring →
+    type-product-Finite-Ring →
+    type-product-Finite-Ring
+  add-product-Finite-Ring =
+    add-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
-  zero-prod-Ring-𝔽 : type-prod-Ring-𝔽
-  zero-prod-Ring-𝔽 = zero-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+  zero-product-Finite-Ring : type-product-Finite-Ring
+  zero-product-Finite-Ring =
+    zero-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
-  neg-prod-Ring-𝔽 : type-prod-Ring-𝔽 → type-prod-Ring-𝔽
-  neg-prod-Ring-𝔽 = neg-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+  neg-product-Finite-Ring : type-product-Finite-Ring → type-product-Finite-Ring
+  neg-product-Finite-Ring =
+    neg-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
-  left-unit-law-add-prod-Ring-𝔽 :
-    (x : type-prod-Ring-𝔽) → Id (add-prod-Ring-𝔽 zero-prod-Ring-𝔽 x) x
-  left-unit-law-add-prod-Ring-𝔽 =
-    left-unit-law-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+  left-unit-law-add-product-Finite-Ring :
+    (x : type-product-Finite-Ring) →
+    Id (add-product-Finite-Ring zero-product-Finite-Ring x) x
+  left-unit-law-add-product-Finite-Ring =
+    left-unit-law-add-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
-  right-unit-law-add-prod-Ring-𝔽 :
-    (x : type-prod-Ring-𝔽) → Id (add-prod-Ring-𝔽 x zero-prod-Ring-𝔽) x
-  right-unit-law-add-prod-Ring-𝔽 =
-    right-unit-law-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+  right-unit-law-add-product-Finite-Ring :
+    (x : type-product-Finite-Ring) →
+    Id (add-product-Finite-Ring x zero-product-Finite-Ring) x
+  right-unit-law-add-product-Finite-Ring =
+    right-unit-law-add-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
-  left-inverse-law-add-prod-Ring-𝔽 :
-    (x : type-prod-Ring-𝔽) →
-    Id (add-prod-Ring-𝔽 (neg-prod-Ring-𝔽 x) x) zero-prod-Ring-𝔽
-  left-inverse-law-add-prod-Ring-𝔽 =
-    left-inverse-law-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
-
-  right-inverse-law-add-prod-Ring-𝔽 :
-    (x : type-prod-Ring-𝔽) →
-    Id (add-prod-Ring-𝔽 x (neg-prod-Ring-𝔽 x)) zero-prod-Ring-𝔽
-  right-inverse-law-add-prod-Ring-𝔽 =
-    right-inverse-law-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
-
-  associative-add-prod-Ring-𝔽 :
-    (x y z : type-prod-Ring-𝔽) →
+  left-inverse-law-add-product-Finite-Ring :
+    (x : type-product-Finite-Ring) →
     Id
-      ( add-prod-Ring-𝔽 (add-prod-Ring-𝔽 x y) z)
-      ( add-prod-Ring-𝔽 x (add-prod-Ring-𝔽 y z))
-  associative-add-prod-Ring-𝔽 =
-    associative-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+      ( add-product-Finite-Ring (neg-product-Finite-Ring x) x)
+      ( zero-product-Finite-Ring)
+  left-inverse-law-add-product-Finite-Ring =
+    left-inverse-law-add-product-Ring
+      ( ring-Finite-Ring R1)
+      ( ring-Finite-Ring R2)
 
-  commutative-add-prod-Ring-𝔽 :
-    (x y : type-prod-Ring-𝔽) → Id (add-prod-Ring-𝔽 x y) (add-prod-Ring-𝔽 y x)
-  commutative-add-prod-Ring-𝔽 =
-    commutative-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
-
-  mul-prod-Ring-𝔽 : type-prod-Ring-𝔽 → type-prod-Ring-𝔽 → type-prod-Ring-𝔽
-  mul-prod-Ring-𝔽 = mul-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
-
-  one-prod-Ring-𝔽 : type-prod-Ring-𝔽
-  one-prod-Ring-𝔽 = one-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
-
-  associative-mul-prod-Ring-𝔽 :
-    (x y z : type-prod-Ring-𝔽) →
+  right-inverse-law-add-product-Finite-Ring :
+    (x : type-product-Finite-Ring) →
     Id
-      ( mul-prod-Ring-𝔽 (mul-prod-Ring-𝔽 x y) z)
-      ( mul-prod-Ring-𝔽 x (mul-prod-Ring-𝔽 y z))
-  associative-mul-prod-Ring-𝔽 =
-    associative-mul-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+      ( add-product-Finite-Ring x (neg-product-Finite-Ring x))
+      ( zero-product-Finite-Ring)
+  right-inverse-law-add-product-Finite-Ring =
+    right-inverse-law-add-product-Ring
+      ( ring-Finite-Ring R1)
+      ( ring-Finite-Ring R2)
 
-  left-unit-law-mul-prod-Ring-𝔽 :
-    (x : type-prod-Ring-𝔽) → Id (mul-prod-Ring-𝔽 one-prod-Ring-𝔽 x) x
-  left-unit-law-mul-prod-Ring-𝔽 =
-    left-unit-law-mul-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
-
-  right-unit-law-mul-prod-Ring-𝔽 :
-    (x : type-prod-Ring-𝔽) → Id (mul-prod-Ring-𝔽 x one-prod-Ring-𝔽) x
-  right-unit-law-mul-prod-Ring-𝔽 =
-    right-unit-law-mul-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
-
-  left-distributive-mul-add-prod-Ring-𝔽 :
-    (x y z : type-prod-Ring-𝔽) →
+  associative-add-product-Finite-Ring :
+    (x y z : type-product-Finite-Ring) →
     Id
-      ( mul-prod-Ring-𝔽 x (add-prod-Ring-𝔽 y z))
-      ( add-prod-Ring-𝔽 (mul-prod-Ring-𝔽 x y) (mul-prod-Ring-𝔽 x z))
-  left-distributive-mul-add-prod-Ring-𝔽 =
-    left-distributive-mul-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+      ( add-product-Finite-Ring (add-product-Finite-Ring x y) z)
+      ( add-product-Finite-Ring x (add-product-Finite-Ring y z))
+  associative-add-product-Finite-Ring =
+    associative-add-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
-  right-distributive-mul-add-prod-Ring-𝔽 :
-    (x y z : type-prod-Ring-𝔽) →
+  commutative-add-product-Finite-Ring :
+    (x y : type-product-Finite-Ring) →
+    Id (add-product-Finite-Ring x y) (add-product-Finite-Ring y x)
+  commutative-add-product-Finite-Ring =
+    commutative-add-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+
+  mul-product-Finite-Ring :
+    type-product-Finite-Ring →
+    type-product-Finite-Ring →
+    type-product-Finite-Ring
+  mul-product-Finite-Ring =
+    mul-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+
+  one-product-Finite-Ring : type-product-Finite-Ring
+  one-product-Finite-Ring =
+    one-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+
+  associative-mul-product-Finite-Ring :
+    (x y z : type-product-Finite-Ring) →
     Id
-      ( mul-prod-Ring-𝔽 (add-prod-Ring-𝔽 x y) z)
-      ( add-prod-Ring-𝔽 (mul-prod-Ring-𝔽 x z) (mul-prod-Ring-𝔽 y z))
-  right-distributive-mul-add-prod-Ring-𝔽 =
-    right-distributive-mul-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+      ( mul-product-Finite-Ring (mul-product-Finite-Ring x y) z)
+      ( mul-product-Finite-Ring x (mul-product-Finite-Ring y z))
+  associative-mul-product-Finite-Ring =
+    associative-mul-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
-  semigroup-prod-Ring-𝔽 : Semigroup (l1 ⊔ l2)
-  semigroup-prod-Ring-𝔽 = semigroup-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+  left-unit-law-mul-product-Finite-Ring :
+    (x : type-product-Finite-Ring) →
+    Id (mul-product-Finite-Ring one-product-Finite-Ring x) x
+  left-unit-law-mul-product-Finite-Ring =
+    left-unit-law-mul-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
-  group-prod-Ring-𝔽 : Group (l1 ⊔ l2)
-  group-prod-Ring-𝔽 = group-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+  right-unit-law-mul-product-Finite-Ring :
+    (x : type-product-Finite-Ring) →
+    Id (mul-product-Finite-Ring x one-product-Finite-Ring) x
+  right-unit-law-mul-product-Finite-Ring =
+    right-unit-law-mul-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
-  ab-prod-Ring-𝔽 : Ab (l1 ⊔ l2)
-  ab-prod-Ring-𝔽 = ab-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+  left-distributive-mul-add-product-Finite-Ring :
+    (x y z : type-product-Finite-Ring) →
+    Id
+      ( mul-product-Finite-Ring x (add-product-Finite-Ring y z))
+      ( add-product-Finite-Ring
+        ( mul-product-Finite-Ring x y)
+        ( mul-product-Finite-Ring x z))
+  left-distributive-mul-add-product-Finite-Ring =
+    left-distributive-mul-add-product-Ring
+      ( ring-Finite-Ring R1)
+      ( ring-Finite-Ring R2)
 
-  ring-prod-Ring-𝔽 : Ring (l1 ⊔ l2)
-  ring-prod-Ring-𝔽 = prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+  right-distributive-mul-add-product-Finite-Ring :
+    (x y z : type-product-Finite-Ring) →
+    Id
+      ( mul-product-Finite-Ring (add-product-Finite-Ring x y) z)
+      ( add-product-Finite-Ring
+        ( mul-product-Finite-Ring x z)
+        ( mul-product-Finite-Ring y z))
+  right-distributive-mul-add-product-Finite-Ring =
+    right-distributive-mul-add-product-Ring
+      ( ring-Finite-Ring R1)
+      ( ring-Finite-Ring R2)
 
-  prod-Ring-𝔽 : Ring-𝔽 (l1 ⊔ l2)
-  prod-Ring-𝔽 = compute-ring-𝔽 ring-prod-Ring-𝔽 is-finite-type-prod-Ring-𝔽
+  semigroup-product-Finite-Ring : Semigroup (l1 ⊔ l2)
+  semigroup-product-Finite-Ring =
+    semigroup-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+
+  group-product-Finite-Ring : Group (l1 ⊔ l2)
+  group-product-Finite-Ring =
+    group-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+
+  ab-product-Finite-Ring : Ab (l1 ⊔ l2)
+  ab-product-Finite-Ring =
+    ab-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+
+  ring-product-Finite-Ring : Ring (l1 ⊔ l2)
+  ring-product-Finite-Ring =
+    product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+
+  product-Finite-Ring : Finite-Ring (l1 ⊔ l2)
+  product-Finite-Ring =
+    finite-ring-is-finite-Ring
+      ring-product-Finite-Ring
+      is-finite-type-product-Finite-Ring
 ```

@@ -9,18 +9,26 @@ module foundation.decidable-subtypes where
 ```agda
 open import foundation.1-types
 open import foundation.coproduct-types
+open import foundation.decidable-embeddings
+open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.logical-equivalences
+open import foundation.propositional-maps
 open import foundation.sets
+open import foundation.structured-type-duality
 open import foundation.subtypes
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
@@ -28,14 +36,18 @@ open import foundation-core.propositions
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
+
+open import logic.double-negation-stable-subtypes
 ```
 
 </details>
 
 ## Idea
 
-A decidable subtype of a type consists of a family of decidable propositions
-over it.
+A
+{{#concept "decidable subtype" Disambiguation="of a type" Agda=is-decidable-subtype Agda=decidable-subtype}}
+of a type consists of a family of
+[decidable propositions](foundation-core.decidable-propositions.md) over it.
 
 ## Definitions
 
@@ -100,6 +112,13 @@ module _
   is-emb-inclusion-decidable-subtype =
     is-emb-inclusion-subtype (subtype-decidable-subtype P)
 
+  is-decidable-map-inclusion-decidable-subtype :
+    is-decidable-map inclusion-decidable-subtype
+  is-decidable-map-inclusion-decidable-subtype x =
+    is-decidable-equiv
+      ( equiv-fiber-pr1 (type-Decidable-Prop ∘ P) x)
+      ( is-decidable-Decidable-Prop (P x))
+
   is-injective-inclusion-decidable-subtype :
     is-injective inclusion-decidable-subtype
   is-injective-inclusion-decidable-subtype =
@@ -107,6 +126,43 @@ module _
 
   emb-decidable-subtype : type-decidable-subtype ↪ A
   emb-decidable-subtype = emb-subtype (subtype-decidable-subtype P)
+
+  is-decidable-emb-inclusion-decidable-subtype :
+    is-decidable-emb inclusion-decidable-subtype
+  is-decidable-emb-inclusion-decidable-subtype =
+    ( is-emb-inclusion-decidable-subtype ,
+      is-decidable-map-inclusion-decidable-subtype)
+
+  decidable-emb-decidable-subtype : type-decidable-subtype ↪ᵈ A
+  decidable-emb-decidable-subtype =
+    ( inclusion-decidable-subtype ,
+      is-decidable-emb-inclusion-decidable-subtype)
+```
+
+### The decidable subtype associated to a decidable embedding
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ↪ᵈ Y)
+  where
+
+  decidable-subtype-decidable-emb : decidable-subtype (l1 ⊔ l2) Y
+  pr1 (decidable-subtype-decidable-emb y) =
+    fiber (map-decidable-emb f) y
+  pr2 (decidable-subtype-decidable-emb y) =
+    is-decidable-prop-map-is-decidable-emb
+      ( is-decidable-emb-map-decidable-emb f)
+      ( y)
+
+  compute-type-decidable-type-decidable-emb :
+    type-decidable-subtype decidable-subtype-decidable-emb ≃ X
+  compute-type-decidable-type-decidable-emb =
+    equiv-total-fiber (map-decidable-emb f)
+
+  inv-compute-type-decidable-type-decidable-emb :
+    X ≃ type-decidable-subtype decidable-subtype-decidable-emb
+  inv-compute-type-decidable-type-decidable-emb =
+    inv-equiv-total-fiber (map-decidable-emb f)
 ```
 
 ## Examples
@@ -157,12 +213,12 @@ module _
   iff-universes-decidable-subtype :
     (l l' : Level) (S : decidable-subtype l X) →
     ( (x : X) →
-      prop-Decidable-Prop (S x) ⇔
-      prop-Decidable-Prop
+      type-Decidable-Prop (S x) ↔
+      type-Decidable-Prop
         ( map-equiv (equiv-universes-decidable-subtype l l') S x))
   iff-universes-decidable-subtype l l' S x =
     tr
-      ( λ P → prop-Decidable-Prop (S x) ⇔ prop-Decidable-Prop P)
+      ( λ P → type-Decidable-Prop (S x) ↔ type-Decidable-Prop P)
       ( inv
         ( compute-map-equiv-Π
           ( λ _ → Decidable-Prop l')
@@ -171,6 +227,16 @@ module _
           ( S)
           ( x)))
       ( iff-universes-Decidable-Prop l l' (S x))
+```
+
+### Decidable subtypes are double negation stable
+
+```agda
+is-double-negation-stable-decicable-subtype :
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A) →
+  is-double-negation-stable-subtype (subtype-decidable-subtype P)
+is-double-negation-stable-decicable-subtype P x =
+  double-negation-elim-is-decidable (is-decidable-decidable-subtype P x)
 ```
 
 ### A decidable subtype of a `k+1`-truncated type is `k+1`-truncated
@@ -223,7 +289,7 @@ set-decidable-subset A P = set-subset A (subtype-decidable-subtype P)
 ```agda
 is-set-decidable-subtype :
   {l1 l2 : Level} {X : UU l1} → is-set (decidable-subtype l2 X)
-is-set-decidable-subtype {l1} {l2} {X} =
+is-set-decidable-subtype =
   is-set-function-type is-set-Decidable-Prop
 ```
 
@@ -246,7 +312,7 @@ module _
     (P ＝ Q) ≃ has-same-elements-decidable-subtype Q
   extensionality-decidable-subtype =
     extensionality-Π P
-      ( λ x Q → prop-Decidable-Prop (P x) ⇔ prop-Decidable-Prop Q)
+      ( λ x Q → (type-Decidable-Prop (P x)) ↔ (type-Decidable-Prop Q))
       ( λ x Q → extensionality-Decidable-Prop (P x) Q)
 
   has-same-elements-eq-decidable-subtype :
@@ -264,4 +330,20 @@ module _
   refl-extensionality-decidable-subtype :
     map-equiv (extensionality-decidable-subtype P) refl ＝ (λ x → pair id id)
   refl-extensionality-decidable-subtype = refl
+```
+
+### The type of decidable subtypes of `A` is equivalent to the type of all decidable embeddings into a type `A`
+
+```agda
+equiv-Fiber-Decidable-Prop :
+  (l : Level) {l1 : Level} (A : UU l1) →
+  Σ (UU (l1 ⊔ l)) (λ X → X ↪ᵈ A) ≃ (decidable-subtype (l1 ⊔ l) A)
+equiv-Fiber-Decidable-Prop l A =
+  ( equiv-Fiber-structure l is-decidable-prop A) ∘e
+  ( equiv-tot
+    ( λ X →
+      equiv-tot
+        ( λ f →
+          ( inv-distributive-Π-Σ) ∘e
+          ( equiv-product-left (equiv-is-prop-map-is-emb f)))))
 ```

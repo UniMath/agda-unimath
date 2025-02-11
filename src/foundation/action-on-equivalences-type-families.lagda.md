@@ -12,6 +12,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.equivalence-induction
 open import foundation.univalence
 open import foundation.universe-levels
+open import foundation.whiskering-higher-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
@@ -44,16 +45,16 @@ determined by the identification `B id-equiv ＝ id-equiv`, and fits in a
         (X ＝ Y) --------> (B X ＝ B Y)
            |                    |
   equiv-eq |                    | equiv-eq
-           V                    V
+           ∨                    ∨
         (X ≃ Y) ---------> (B X ≃ B Y).
                      B
 ```
 
-Note that in general -- in particular in our general constructions below -- we
-need the univalence axiom to construct the action on equivalences of a family of
-types. However, for many specific type families that are defined in terms of the
-basic type constructors, we can construct the action on equivalences directly
-without invoking the univalence axiom.
+**Note:** In general -- in particular in our general constructions below -- we
+need the [univalence axiom](foundation.univalence.md) to construct the action on
+equivalences of a family of types. However, for many specific type families that
+are defined in terms of the basic type constructors, we can construct the action
+on equivalences directly without invoking the univalence axiom.
 
 ## Definitions
 
@@ -97,7 +98,7 @@ We claim that the square
         (X ＝ Y) --------> (B X ＝ B Y)
            |                    |
   equiv-eq |                    | equiv-eq
-           V                    V
+           ∨                    ∨
         (X ≃ Y) ---------> (B X ≃ B Y).
                      B
 ```
@@ -121,8 +122,8 @@ coherence-square-action-equiv-family B X .X refl =
 ```agda
 compute-action-equiv-family-id :
   {l : Level} {X Y : UU l} (e : X ≃ Y) → (action-equiv-family id e) ＝ e
-compute-action-equiv-family-id {l} {X} {Y} e =
-  (ap equiv-eq (ap-id (eq-equiv X Y e))) ∙ (is-section-eq-equiv e)
+compute-action-equiv-family-id e =
+  ap equiv-eq (ap-id (eq-equiv e)) ∙ is-section-eq-equiv e
 ```
 
 ### The action on equivalences of a constant map is constant
@@ -130,7 +131,7 @@ compute-action-equiv-family-id {l} {X} {Y} e =
 ```agda
 compute-action-equiv-family-const :
   {l1 l2 : Level} (B : UU l2) {X Y : UU l1}
-  (e : X ≃ Y) → (action-equiv-family (const (UU l1) (UU l2) B) e) ＝ id-equiv
+  (e : X ≃ Y) → (action-equiv-family (const (UU l1) B) e) ＝ id-equiv
 compute-action-equiv-family-const B {X} {Y} e =
   ap equiv-eq (compute-action-equiv-function-const B e)
 ```
@@ -141,19 +142,21 @@ compute-action-equiv-family-const B {X} {Y} e =
 distributive-action-equiv-function-comp :
   {l1 l2 l3 : Level} {C : UU l3} (g : UU l2 → C) (f : UU l1 → UU l2)
   {X Y : UU l1} →
-  action-equiv-function (g ∘ f) ~
+  action-equiv-function (g ∘ f) {X} {Y} ~
   action-equiv-function g ∘ action-equiv-family f
-distributive-action-equiv-function-comp g f {X} {Y} e =
-  ( ap-comp g f (eq-equiv X Y e)) ∙
-  ( ap (ap g) (inv (is-retraction-eq-equiv (action-equiv-function f e))))
+distributive-action-equiv-function-comp g f e =
+  ( ap-comp g f (eq-equiv e)) ∙
+  ( left-whisker-comp² g
+    ( inv-htpy is-retraction-eq-equiv)
+    ( action-equiv-function f e))
 
 distributive-action-equiv-family-comp :
   {l1 l2 l3 : Level} (g : UU l2 → UU l3) (f : UU l1 → UU l2)
   {X Y : UU l1} →
-  action-equiv-family (g ∘ f) ~
+  action-equiv-family (g ∘ f) {X} {Y} ~
   action-equiv-family g ∘ action-equiv-family f
-distributive-action-equiv-family-comp g f {X} {Y} e =
-  ap equiv-eq (distributive-action-equiv-function-comp g f {X} {Y} e)
+distributive-action-equiv-family-comp g f e =
+  ap equiv-eq (distributive-action-equiv-function-comp g f e)
 ```
 
 ### The action on equivalences of any map preserves composition of equivalences
@@ -179,7 +182,7 @@ compute-action-equiv-family-inv-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1}
   (e : X ≃ Y) →
   action-equiv-family f (inv-equiv e) ＝ inv-equiv (action-equiv-family f e)
-compute-action-equiv-family-inv-equiv f {X} {Y} e =
+compute-action-equiv-family-inv-equiv f e =
   ( ap equiv-eq (compute-action-equiv-function-inv-equiv f e)) ∙
-  ( inv (commutativity-inv-equiv-eq (f X) (f Y) (action-equiv-function f e)))
+  ( inv (commutativity-inv-equiv-eq (action-equiv-function f e)))
 ```
