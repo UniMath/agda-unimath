@@ -783,15 +783,9 @@ is-prime-list-permute-list-ℕ :
 is-prime-list-permute-list-ℕ p t P =
   is-prime-list-is-prime-is-in-list-ℕ
     ( permute-list p t)
-    ( λ x I → is-prime-is-in-list-is-prime-list-ℕ
-      ( p)
-      ( P)
-      ( x)
-      ( is-in-list-is-in-permute-list
-        ( p)
-        ( t)
-        ( x)
-        ( I)))
+    ( λ x I →
+      is-prime-is-in-list-is-prime-list-ℕ p P x
+        ( is-in-list-is-in-permute-list p t x I))
 
 is-decomposition-list-permute-list-ℕ :
   (n : ℕ) (p : list ℕ) (t : permutation (length-list p)) →
