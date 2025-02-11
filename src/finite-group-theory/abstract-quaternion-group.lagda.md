@@ -932,8 +932,8 @@ Q8-Finite-Type = pair Q8 is-finite-Q8
 has-cardinality-eight-Q8 : has-cardinality 8 Q8
 has-cardinality-eight-Q8 = unit-trunc-Prop equiv-count-Q8
 
-Q8-UU-Fin-8 : UU-Fin lzero 8
-Q8-UU-Fin-8 = pair Q8 has-cardinality-eight-Q8
+Q8-Type-With-Finite-Cardinality : Type-With-Finite-Cardinality lzero 8
+Q8-Type-With-Finite-Cardinality = pair Q8 has-cardinality-eight-Q8
 
 has-finite-cardinality-Q8 : has-finite-cardinality Q8
 has-finite-cardinality-Q8 = pair 8 has-cardinality-eight-Q8

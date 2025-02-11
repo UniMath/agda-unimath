@@ -60,7 +60,7 @@ hydrocarbon l1 l2 =
             Σ ( vertex-Finite-Undirected-Graph G)
               ( λ c' →
                 edge-Finite-Undirected-Graph G (standard-unordered-pair c c')) ↪
-                type-UU-Fin 4 (pr1 (C c))) ×
+                type-Type-With-Finite-Cardinality 4 (pr1 (C c))) ×
           ( ( (c : vertex-Finite-Undirected-Graph G) →
               ¬ ( edge-Finite-Undirected-Graph G
                   ( standard-unordered-pair c c))) ×

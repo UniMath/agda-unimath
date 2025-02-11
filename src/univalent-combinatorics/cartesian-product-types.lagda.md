@@ -162,11 +162,11 @@ abstract
   is-finite-right-factor f x =
     map-trunc-Prop (λ e → count-right-factor e x) f
 
-product-UU-Fin :
-  {l1 l2 : Level} (k l : ℕ) → UU-Fin l1 k → UU-Fin l2 l →
-  UU-Fin (l1 ⊔ l2) (k *ℕ l)
-pr1 (product-UU-Fin k l (pair X H) (pair Y K)) = X × Y
-pr2 (product-UU-Fin k l (pair X H) (pair Y K)) =
+product-Type-With-Finite-Cardinality :
+  {l1 l2 : Level} (k l : ℕ) → Type-With-Finite-Cardinality l1 k → Type-With-Finite-Cardinality l2 l →
+  Type-With-Finite-Cardinality (l1 ⊔ l2) (k *ℕ l)
+pr1 (product-Type-With-Finite-Cardinality k l (pair X H) (pair Y K)) = X × Y
+pr2 (product-Type-With-Finite-Cardinality k l (pair X H) (pair Y K)) =
   apply-universal-property-trunc-Prop H
     ( mere-equiv-Prop (Fin (k *ℕ l)) (X × Y))
     ( λ e1 →

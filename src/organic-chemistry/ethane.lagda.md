@@ -192,7 +192,7 @@ module _
     is-emb-bonding-ethane : (c : vertex-ethane) → is-emb (bonding-ethane c)
     is-emb-bonding-ethane c =
       is-emb-is-injective
-        ( is-set-type-UU-Fin 4 (pr1 t))
+        ( is-set-type-Type-With-Finite-Cardinality 4 (pr1 t))
         ( is-injective-is-contr (λ e → v) (is-torsorial-standard-edge-ethane c))
 
   emb-bonding-ethane :
@@ -257,7 +257,7 @@ module _
             ( zero-Fin 1)
             ( element-standard-unordered-pair (zero-Fin 1) (one-Fin 1) x))
         ( compute-swap-2-Element-Type
-          ( Fin-UU-Fin' 2)
+          ( Fin-Type-With-Finite-Cardinality 2)
           ( zero-Fin 1)
           ( one-Fin 1)
           ( neq-inl-inr))
@@ -276,7 +276,7 @@ module _
             ( one-Fin 1)
             ( element-standard-unordered-pair (one-Fin 1) (zero-Fin 1) x))
         ( compute-swap-2-Element-Type
-          ( Fin-UU-Fin' 2)
+          ( Fin-Type-With-Finite-Cardinality 2)
           ( zero-Fin 1)
           ( one-Fin 1)
           ( neq-inl-inr))

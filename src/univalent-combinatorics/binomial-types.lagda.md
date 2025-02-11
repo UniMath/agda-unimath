@@ -215,7 +215,7 @@ abstract
       ( raise-empty l ↪ᵈ X)
       ( left-unit-law-Σ-is-contr
         ( is-contr-component-UU-Level-empty l)
-        ( Fin-UU-Fin l zero-ℕ))
+        ( raise-Fin-Type-With-Finite-Cardinality l zero-ℕ))
       ( is-contr-equiv
         ( empty ↪ᵈ X)
         ( equiv-precomp-decidable-emb-equiv (compute-raise-empty l) X)
@@ -425,15 +425,15 @@ has-cardinality-binomial-type {A = A} {B} n m H K =
             ( inv-equiv
               ( binomial-type-Fin n m ∘e equiv-binomial-type e f))))
 
-binomial-type-UU-Fin :
-  {l1 l2 : Level} (n m : ℕ) → UU-Fin l1 n → UU-Fin l2 m →
-  UU-Fin (lsuc l1 ⊔ lsuc l2) (binomial-coefficient-ℕ n m)
-pr1 (binomial-type-UU-Fin n m A B) =
-  binomial-type (type-UU-Fin n A) (type-UU-Fin m B)
-pr2 (binomial-type-UU-Fin n m A B) =
+binomial-type-Type-With-Finite-Cardinality :
+  {l1 l2 : Level} (n m : ℕ) → Type-With-Finite-Cardinality l1 n → Type-With-Finite-Cardinality l2 m →
+  Type-With-Finite-Cardinality (lsuc l1 ⊔ lsuc l2) (binomial-coefficient-ℕ n m)
+pr1 (binomial-type-Type-With-Finite-Cardinality n m A B) =
+  binomial-type (type-Type-With-Finite-Cardinality n A) (type-Type-With-Finite-Cardinality m B)
+pr2 (binomial-type-Type-With-Finite-Cardinality n m A B) =
   has-cardinality-binomial-type n m
-    ( has-cardinality-type-UU-Fin n A)
-    ( has-cardinality-type-UU-Fin m B)
+    ( has-cardinality-type-Type-With-Finite-Cardinality n A)
+    ( has-cardinality-type-Type-With-Finite-Cardinality m B)
 
 has-finite-cardinality-binomial-type :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →

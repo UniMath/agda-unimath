@@ -299,32 +299,32 @@ module _
     compute-swap-2-Element-Type (2-element-type-2-Element-Decidable-Subtype P)
 
 module _
-  {l1 l2 : Level} (n : ℕ) (X : UU-Fin l1 n)
+  {l1 l2 : Level} (n : ℕ) (X : Type-With-Finite-Cardinality l1 n)
   where
 
   is-finite-2-Element-Decidable-Subtype :
-    is-finite (2-Element-Decidable-Subtype l2 (type-UU-Fin n X))
+    is-finite (2-Element-Decidable-Subtype l2 (type-Type-With-Finite-Cardinality n X))
   is-finite-2-Element-Decidable-Subtype =
     is-finite-type-decidable-subtype
       (λ P →
         pair
           ( has-cardinality 2
-            ( Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P)))
+            ( Σ (type-Type-With-Finite-Cardinality n X) (type-Decidable-Prop ∘ P)))
           ( pair
             ( is-prop-type-trunc-Prop)
             ( is-decidable-equiv
               ( equiv-has-cardinality-id-number-of-elements-is-finite
-                ( Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P))
+                ( Σ (type-Type-With-Finite-Cardinality n X) (type-Decidable-Prop ∘ P))
                 ( is-finite-type-decidable-subtype P
-                  ( is-finite-type-UU-Fin n X))
+                  ( is-finite-type-Type-With-Finite-Cardinality n X))
                 ( 2))
               ( has-decidable-equality-ℕ
                 ( number-of-elements-is-finite
                   ( is-finite-type-decidable-subtype P
-                    ( is-finite-type-UU-Fin n X)))
+                    ( is-finite-type-Type-With-Finite-Cardinality n X)))
                 ( 2)))))
       ( is-finite-Π
-        ( is-finite-type-UU-Fin n X)
+        ( is-finite-type-Type-With-Finite-Cardinality n X)
         ( λ x →
           is-finite-equiv
             ( inv-equiv equiv-bool-Decidable-Prop ∘e equiv-bool-Fin-two-ℕ)

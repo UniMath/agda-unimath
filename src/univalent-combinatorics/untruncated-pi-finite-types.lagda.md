@@ -304,15 +304,15 @@ pr2 (π-finite-type-Finite-Type k A) =
 ### The type of all `n`-element types in `UU l` is untruncated π-finite
 
 ```agda
-is-untruncated-π-finite-UU-Fin :
-  {l : Level} (k n : ℕ) → is-untruncated-π-finite k (UU-Fin l n)
-is-untruncated-π-finite-UU-Fin zero-ℕ n =
-  has-finitely-many-connected-components-UU-Fin n
-pr1 (is-untruncated-π-finite-UU-Fin (succ-ℕ k) n) =
-  is-untruncated-π-finite-UU-Fin zero-ℕ n
-pr2 (is-untruncated-π-finite-UU-Fin (succ-ℕ k) n) x y =
+is-untruncated-π-finite-Type-With-Finite-Cardinality :
+  {l : Level} (k n : ℕ) → is-untruncated-π-finite k (Type-With-Finite-Cardinality l n)
+is-untruncated-π-finite-Type-With-Finite-Cardinality zero-ℕ n =
+  has-finitely-many-connected-components-Type-With-Finite-Cardinality n
+pr1 (is-untruncated-π-finite-Type-With-Finite-Cardinality (succ-ℕ k) n) =
+  is-untruncated-π-finite-Type-With-Finite-Cardinality zero-ℕ n
+pr2 (is-untruncated-π-finite-Type-With-Finite-Cardinality (succ-ℕ k) n) x y =
   is-untruncated-π-finite-equiv k
-    ( equiv-equiv-eq-UU-Fin n x y)
+    ( equiv-equiv-eq-Type-With-Finite-Cardinality n x y)
     ( is-untruncated-π-finite-is-finite k
       ( is-finite-type-equiv
         ( is-finite-has-finite-cardinality (n , pr2 x))

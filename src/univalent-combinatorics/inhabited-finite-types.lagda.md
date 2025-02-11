@@ -163,14 +163,14 @@ eq-equiv-Inhabited-Finite-Type X Y e =
       ( e))
 ```
 
-### Every type in `UU-Fin (succ-ℕ n)` is an inhabited finite type
+### Every type in `Type-With-Finite-Cardinality (succ-ℕ n)` is an inhabited finite type
 
 ```agda
-is-finite-and-inhabited-type-UU-Fin-succ-ℕ :
-  {l : Level} → (n : ℕ) → (F : UU-Fin l (succ-ℕ n)) →
-  is-finite-and-inhabited (type-UU-Fin (succ-ℕ n) F)
-pr1 (is-finite-and-inhabited-type-UU-Fin-succ-ℕ n F) =
-  is-finite-type-UU-Fin (succ-ℕ n) F
-pr2 (is-finite-and-inhabited-type-UU-Fin-succ-ℕ n F) =
-  is-inhabited-type-UU-Fin-succ-ℕ n F
+is-finite-and-inhabited-type-Type-With-Finite-Cardinality-succ-ℕ :
+  {l : Level} → (n : ℕ) → (F : Type-With-Finite-Cardinality l (succ-ℕ n)) →
+  is-finite-and-inhabited (type-Type-With-Finite-Cardinality (succ-ℕ n) F)
+pr1 (is-finite-and-inhabited-type-Type-With-Finite-Cardinality-succ-ℕ n F) =
+  is-finite-type-Type-With-Finite-Cardinality (succ-ℕ n) F
+pr2 (is-finite-and-inhabited-type-Type-With-Finite-Cardinality-succ-ℕ n F) =
+  is-inhabited-type-Type-With-Finite-Cardinality-succ-ℕ n F
 ```

@@ -196,11 +196,11 @@ is-finite-has-finitely-many-connected-components H =
 ### The type of all `n`-element types in `UU l` has finitely many connected components
 
 ```agda
-has-finitely-many-connected-components-UU-Fin :
-  {l : Level} (n : ℕ) → has-finitely-many-connected-components (UU-Fin l n)
-has-finitely-many-connected-components-UU-Fin n =
+has-finitely-many-connected-components-Type-With-Finite-Cardinality :
+  {l : Level} (n : ℕ) → has-finitely-many-connected-components (Type-With-Finite-Cardinality l n)
+has-finitely-many-connected-components-Type-With-Finite-Cardinality n =
   has-finitely-many-connected-components-is-0-connected
-    ( is-0-connected-UU-Fin n)
+    ( is-0-connected-Type-With-Finite-Cardinality n)
 ```
 
 ### Finite products of types with finitely many connected components

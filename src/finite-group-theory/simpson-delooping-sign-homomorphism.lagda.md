@@ -76,16 +76,16 @@ suggestion by Alex Simpson.
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : UU-Fin l n)
+  {l : Level} (n : ℕ) (X : Type-With-Finite-Cardinality l n)
   where
 
   sign-comp-equivalence-relation :
-    equivalence-relation lzero (Fin n ≃ type-UU-Fin n X)
+    equivalence-relation lzero (Fin n ≃ type-Type-With-Finite-Cardinality n X)
   pr1 sign-comp-equivalence-relation f g =
     Id-Prop
       ( Fin-Set 2)
       ( zero-Fin 1)
-      ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv f ∘e g))
+      ( sign-homomorphism-Fin-two n (Fin-Type-With-Finite-Cardinality n) (inv-equiv f ∘e g))
   pr1 (pr2 sign-comp-equivalence-relation) f =
     ap pr1
       { x =
@@ -94,10 +94,10 @@ module _
       { y =
         center
           ( is-contr-parity-transposition-permutation n
-            (Fin-UU-Fin' n) (inv-equiv f ∘e f))}
+            (Fin-Type-With-Finite-Cardinality n) (inv-equiv f ∘e f))}
       ( eq-is-contr
         ( is-contr-parity-transposition-permutation n
-          (Fin-UU-Fin' n) (inv-equiv f ∘e f)))
+          (Fin-Type-With-Finite-Cardinality n) (inv-equiv f ∘e f)))
   pr1 (pr2 (pr2 sign-comp-equivalence-relation)) f g P =
     ap pr1
       { x =
@@ -107,31 +107,31 @@ module _
       { y =
         center
           ( is-contr-parity-transposition-permutation n
-            ( Fin-UU-Fin' n)
+            ( Fin-Type-With-Finite-Cardinality n)
             ( inv-equiv (inv-equiv f ∘e g) ∘e (inv-equiv f ∘e g)))}
       ( eq-is-contr
-        ( is-contr-parity-transposition-permutation n (Fin-UU-Fin' n)
+        ( is-contr-parity-transposition-permutation n (Fin-Type-With-Finite-Cardinality n)
           ( inv-equiv (inv-equiv f ∘e g) ∘e (inv-equiv f ∘e g)))) ∙
       ( preserves-add-sign-homomorphism-Fin-two n
-        ( Fin-UU-Fin' n)
+        ( Fin-Type-With-Finite-Cardinality n)
         ( inv-equiv (inv-equiv f ∘e g))
         ( inv-equiv f ∘e g) ∙
         ( ap
           ( add-Fin 2
             ( sign-homomorphism-Fin-two n
-              (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g))))
+              (Fin-Type-With-Finite-Cardinality n) (inv-equiv (inv-equiv f ∘e g))))
           ( inv P) ∙
           ( ap
             ( mod-two-ℕ ∘
               ( nat-Fin 2
                 ( sign-homomorphism-Fin-two n
-                  (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g)))) +ℕ_)
+                  (Fin-Type-With-Finite-Cardinality n) (inv-equiv (inv-equiv f ∘e g)))) +ℕ_)
             ( is-zero-nat-zero-Fin {k = 1}) ∙
             ( is-section-nat-Fin 1
               ( sign-homomorphism-Fin-two n
-                (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g))) ∙
+                (Fin-Type-With-Finite-Cardinality n) (inv-equiv (inv-equiv f ∘e g))) ∙
               ( ap
-                ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
+                ( sign-homomorphism-Fin-two n (Fin-Type-With-Finite-Cardinality n))
                 ( distributive-inv-comp-equiv g (inv-equiv f) ∙
                   ap (inv-equiv g ∘e_) (inv-inv-equiv f)))))))
   pr2 (pr2 (pr2 sign-comp-equivalence-relation)) f g h Q P =
@@ -143,13 +143,13 @@ module _
           ( _+ℕ
             ( nat-Fin 2
               ( sign-homomorphism-Fin-two n
-                (Fin-UU-Fin' n) (inv-equiv g ∘e h))))
+                (Fin-Type-With-Finite-Cardinality n) (inv-equiv g ∘e h))))
           ( inv (is-zero-nat-zero-Fin {k = 1}) ∙ ap (nat-Fin 2) P)))) ∙
     ( inv
       ( preserves-add-sign-homomorphism-Fin-two n
-        (Fin-UU-Fin' n) (inv-equiv f ∘e g) (inv-equiv g ∘e h)) ∙
+        (Fin-Type-With-Finite-Cardinality n) (inv-equiv f ∘e g) (inv-equiv g ∘e h)) ∙
       ( ap
-        ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
+        ( sign-homomorphism-Fin-two n (Fin-Type-With-Finite-Cardinality n))
         ( associative-comp-equiv (inv-equiv g ∘e h) g (inv-equiv f) ∙
           ( ap
             ( inv-equiv f ∘e_)
@@ -158,13 +158,13 @@ module _
                 left-unit-law-equiv h))))))
 
   is-decidable-sign-comp-equivalence-relation :
-    (f g : Fin n ≃ type-UU-Fin n X) →
+    (f g : Fin n ≃ type-Type-With-Finite-Cardinality n X) →
     is-decidable (sim-equivalence-relation sign-comp-equivalence-relation f g)
   is-decidable-sign-comp-equivalence-relation f g =
     has-decidable-equality-is-finite
       ( is-finite-Fin 2)
       ( zero-Fin 1)
-      ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv f ∘e g))
+      ( sign-homomorphism-Fin-two n (Fin-Type-With-Finite-Cardinality n) (inv-equiv f ∘e g))
 
   quotient-sign-comp : UU (lsuc lzero ⊔ l)
   quotient-sign-comp = equivalence-class sign-comp-equivalence-relation
@@ -195,13 +195,13 @@ module _
         ( inr star)
         ( sign-homomorphism-Fin-two
           ( number-of-elements-count eX)
-          ( Fin-UU-Fin' (number-of-elements-count eX))
+          ( Fin-Type-With-Finite-Cardinality (number-of-elements-count eX))
           ( inv-equiv (equiv-count eX) ∘e (equiv-count eX ∘e transposition-eX)))
     lemma =
       ( inv
         ( eq-sign-homomorphism-Fin-two-transposition
           ( number-of-elements-count eX)
-          ( Fin-UU-Fin' (number-of-elements-count eX))
+          ( Fin-Type-With-Finite-Cardinality (number-of-elements-count eX))
           ( standard-2-Element-Decidable-Subtype
             ( has-decidable-equality-Fin (number-of-elements-count eX))
             ( pr2
@@ -211,7 +211,7 @@ module _
         ( ap
           ( sign-homomorphism-Fin-two
             ( number-of-elements-count eX)
-            ( Fin-UU-Fin' (number-of-elements-count eX)))
+            ( Fin-Type-With-Finite-Cardinality (number-of-elements-count eX)))
           ( inv (left-unit-law-equiv transposition-eX) ∙
             ( ap
               ( _∘e transposition-eX)
@@ -235,7 +235,7 @@ module _
         ( ap
           ( sign-homomorphism-Fin-two
             ( number-of-elements-count eX)
-            ( Fin-UU-Fin' (number-of-elements-count eX)))
+            ( Fin-Type-With-Finite-Cardinality (number-of-elements-count eX)))
           ( ap
             ( inv-equiv (transposition Y ∘e equiv-count eX) ∘e_)
             ( inv
@@ -264,7 +264,7 @@ module _
           ( preserves-conjugation-sign-homomorphism-Fin-two
             ( number-of-elements-count eX)
             ( X , unit-trunc-Prop (equiv-count eX))
-            ( Fin-UU-Fin' (number-of-elements-count eX))
+            ( Fin-Type-With-Finite-Cardinality (number-of-elements-count eX))
             ( transposition Y)
             ( inv-equiv (equiv-count eX)) ∙
             ( eq-sign-homomorphism-Fin-two-transposition
@@ -317,7 +317,7 @@ module _
                 ( zero-Fin 1)
                 ( sign-homomorphism-Fin-two
                   ( number-of-elements-count eX)
-                  ( Fin-UU-Fin' (number-of-elements-count eX))
+                  ( Fin-Type-With-Finite-Cardinality (number-of-elements-count eX))
                   ( inv-equiv a ∘e b)))
             ( T)
             ( equiv-count eX)))
@@ -332,7 +332,7 @@ module _
                 ( zero-Fin 1)
                 ( sign-homomorphism-Fin-two
                   ( number-of-elements-count eX)
-                  ( Fin-UU-Fin' (number-of-elements-count eX))
+                  ( Fin-Type-With-Finite-Cardinality (number-of-elements-count eX))
                   ( inv-equiv a ∘e b)))
             ( T)
             ( equiv-count eX)))
@@ -347,7 +347,7 @@ module _
                 ( zero-Fin 1)
                 ( sign-homomorphism-Fin-two
                   ( number-of-elements-count eX)
-                  ( Fin-UU-Fin' (number-of-elements-count eX))
+                  ( Fin-Type-With-Finite-Cardinality (number-of-elements-count eX))
                   ( inv-equiv a ∘e b)))
             ( pr1 equiv-Fin-2-quotient-sign-comp-count k)
             ( equiv-count eX)))
@@ -375,7 +375,7 @@ module _
         ( k)
         ( sign-homomorphism-Fin-two
           ( number-of-elements-count eX)
-          ( Fin-UU-Fin' (number-of-elements-count eX))
+          ( Fin-Type-With-Finite-Cardinality (number-of-elements-count eX))
           ( inv-equiv f ∘e equiv-count eX)) →
       is-in-equivalence-class
         ( sign-comp-equivalence-relation
@@ -412,14 +412,14 @@ module _
             ( inv
               ( preserves-add-sign-homomorphism-Fin-two
                 ( number-of-elements-count eX)
-                ( Fin-UU-Fin' (number-of-elements-count eX))
+                ( Fin-Type-With-Finite-Cardinality (number-of-elements-count eX))
                 ( inv-equiv f ∘e equiv-count eX)
                 ( inv-equiv (equiv-count eX) ∘e
                   ( equiv-count eX ∘e transposition-eX))) ∙
               ( ap
                 ( sign-homomorphism-Fin-two
                   ( number-of-elements-count eX)
-                  ( Fin-UU-Fin' (number-of-elements-count eX)))
+                  ( Fin-Type-With-Finite-Cardinality (number-of-elements-count eX)))
                 ( associative-comp-equiv
                   ( inv-equiv (equiv-count eX) ∘e
                     ( equiv-count eX ∘e transposition-eX))
@@ -497,7 +497,7 @@ module _
                   ( p)))
               ( sign-homomorphism-Fin-two
                 ( number-of-elements-count eX)
-                ( Fin-UU-Fin' (number-of-elements-count eX))
+                ( Fin-Type-With-Finite-Cardinality (number-of-elements-count eX))
                 ( inv-equiv t ∘e equiv-count eX))
               ( refl)))
     section-Fin-2-quotient-sign-comp-count :
@@ -531,7 +531,7 @@ module _
                 ( ap
                   ( sign-homomorphism-Fin-two
                     ( number-of-elements-count eX)
-                    ( Fin-UU-Fin' (number-of-elements-count eX)))
+                    ( Fin-Type-With-Finite-Cardinality (number-of-elements-count eX)))
                   ( ap
                     ( _∘e equiv-count eX)
                     ( distributive-inv-comp-equiv
@@ -568,14 +568,14 @@ module _
     section-Fin-2-quotient-sign-comp-count (inr star) (inr ND) = refl
 
 module _
-  {l : Level} (n : ℕ) (X : UU-Fin l n) (ineq : leq-ℕ 2 n)
+  {l : Level} (n : ℕ) (X : Type-With-Finite-Cardinality l n) (ineq : leq-ℕ 2 n)
   where
 
   equiv-fin-2-quotient-sign-comp-equiv-Fin :
-    (Fin n ≃ type-UU-Fin n X) → (Fin 2 ≃ quotient-sign-comp n X)
+    (Fin n ≃ type-Type-With-Finite-Cardinality n X) → (Fin 2 ≃ quotient-sign-comp n X)
   equiv-fin-2-quotient-sign-comp-equiv-Fin h =
     tr
-      ( λ e → Fin 2 ≃ quotient-sign-comp n (type-UU-Fin n X , e))
+      ( λ e → Fin 2 ≃ quotient-sign-comp n (type-Type-With-Finite-Cardinality n X , e))
       ( all-elements-equal-type-trunc-Prop
         ( unit-trunc-Prop (equiv-count (n , h))) (pr2 X))
       ( equiv-Fin-2-quotient-sign-comp-count (n , h) ineq)
@@ -587,15 +587,15 @@ module _
   where
 
   map-simpson-comp-equiv :
-    (X X' : UU-Fin l n) →
-    (type-UU-Fin n X ≃ type-UU-Fin n X') →
-    (Fin n ≃ type-UU-Fin n X) → (Fin n ≃ type-UU-Fin n X')
+    (X X' : Type-With-Finite-Cardinality l n) →
+    (type-Type-With-Finite-Cardinality n X ≃ type-Type-With-Finite-Cardinality n X') →
+    (Fin n ≃ type-Type-With-Finite-Cardinality n X) → (Fin n ≃ type-Type-With-Finite-Cardinality n X')
   map-simpson-comp-equiv X X' e f = e ∘e f
 
   simpson-comp-equiv :
-    (X X' : UU-Fin l n) →
-    (type-UU-Fin n X ≃ type-UU-Fin n X') →
-    (Fin n ≃ type-UU-Fin n X) ≃ (Fin n ≃ type-UU-Fin n X')
+    (X X' : Type-With-Finite-Cardinality l n) →
+    (type-Type-With-Finite-Cardinality n X ≃ type-Type-With-Finite-Cardinality n X') →
+    (Fin n ≃ type-Type-With-Finite-Cardinality n X) ≃ (Fin n ≃ type-Type-With-Finite-Cardinality n X')
   pr1 (simpson-comp-equiv X X' e) = map-simpson-comp-equiv X X' e
   pr2 (simpson-comp-equiv X X' e) =
     is-equiv-is-invertible
@@ -609,14 +609,14 @@ module _
 
   abstract
     preserves-id-equiv-simpson-comp-equiv :
-      (X : UU-Fin l n) → Id (simpson-comp-equiv X X id-equiv) id-equiv
+      (X : Type-With-Finite-Cardinality l n) → Id (simpson-comp-equiv X X id-equiv) id-equiv
     preserves-id-equiv-simpson-comp-equiv X =
       eq-htpy-equiv left-unit-law-equiv
 
     preserves-comp-simpson-comp-equiv :
-      ( X Y Z : UU-Fin l n)
-      ( e : type-UU-Fin n X ≃ type-UU-Fin n Y) →
-      ( f : type-UU-Fin n Y ≃ type-UU-Fin n Z) →
+      ( X Y Z : Type-With-Finite-Cardinality l n)
+      ( e : type-Type-With-Finite-Cardinality n X ≃ type-Type-With-Finite-Cardinality n Y) →
+      ( f : type-Type-With-Finite-Cardinality n Y ≃ type-Type-With-Finite-Cardinality n Z) →
       Id
         ( simpson-comp-equiv X Z (f ∘e e))
         ( simpson-comp-equiv Y Z f ∘e simpson-comp-equiv X Y e)
@@ -626,17 +626,17 @@ module _
 
   private
     lemma-sign-comp :
-      ( X X' : UU-Fin l n)
-      ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
-      ( f f' : Fin n ≃ type-UU-Fin n X) →
+      ( X X' : Type-With-Finite-Cardinality l n)
+      ( e : type-Type-With-Finite-Cardinality n X ≃ type-Type-With-Finite-Cardinality n X') →
+      ( f f' : Fin n ≃ type-Type-With-Finite-Cardinality n X) →
       Id
-        ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv f ∘e f'))
-        ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n)
+        ( sign-homomorphism-Fin-two n (Fin-Type-With-Finite-Cardinality n) (inv-equiv f ∘e f'))
+        ( sign-homomorphism-Fin-two n (Fin-Type-With-Finite-Cardinality n)
           ( inv-equiv ( map-simpson-comp-equiv X X' e f) ∘e
             map-simpson-comp-equiv X X' e f'))
     lemma-sign-comp X X' e f f' =
       ap
-        ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
+        ( sign-homomorphism-Fin-two n (Fin-Type-With-Finite-Cardinality n))
         ( ap
           ( inv-equiv f ∘e_)
           ( inv (left-unit-law-equiv f') ∙
@@ -649,9 +649,9 @@ module _
               ( inv (distributive-inv-comp-equiv f e)))))
 
   preserves-sign-comp-simpson-comp-equiv :
-    ( X X' : UU-Fin l n)
-    ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
-    ( f f' : Fin n ≃ type-UU-Fin n X) →
+    ( X X' : Type-With-Finite-Cardinality l n)
+    ( e : type-Type-With-Finite-Cardinality n X ≃ type-Type-With-Finite-Cardinality n X') →
+    ( f f' : Fin n ≃ type-Type-With-Finite-Cardinality n X) →
     ( sim-equivalence-relation (sign-comp-equivalence-relation n X) f f' ↔
       sim-equivalence-relation
         ( sign-comp-equivalence-relation n X')
@@ -719,26 +719,26 @@ module _
         { y =
           ( action-equiv-family-over-subuniverse
             ( mere-equiv-Prop (Fin (n +ℕ 2)))
-            ( λ X → Fin (n +ℕ 2) ≃ type-UU-Fin (n +ℕ 2) X) ,
+            ( λ X → Fin (n +ℕ 2) ≃ type-Type-With-Finite-Cardinality (n +ℕ 2) X) ,
             ( compute-id-equiv-action-equiv-family-over-subuniverse
               ( mere-equiv-Prop (Fin (n +ℕ 2)))
-              ( λ X → Fin (n +ℕ 2) ≃ type-UU-Fin (n +ℕ 2) X)))}
+              ( λ X → Fin (n +ℕ 2) ≃ type-Type-With-Finite-Cardinality (n +ℕ 2) X)))}
         ( eq-is-contr
           ( is-contr-equiv' _
             ( distributive-Π-Σ)
             ( is-contr-Π
               ( unique-action-equiv-family-over-subuniverse
                   ( mere-equiv-Prop (Fin (n +ℕ 2)))
-                  ( λ Y → Fin (n +ℕ 2) ≃ type-UU-Fin (n +ℕ 2) Y))))))
+                  ( λ Y → Fin (n +ℕ 2) ≃ type-Type-With-Finite-Cardinality (n +ℕ 2) Y))))))
       ( not-sign-comp-transposition-count
         (n +ℕ 2 , (compute-raise l (Fin (n +ℕ 2)))) (star))
 
   simpson-delooping-sign :
     (n : ℕ) →
-    hom-Concrete-Group (UU-Fin-Group l n) (UU-Fin-Group (lsuc lzero ⊔ l) 2)
+    hom-Concrete-Group (Type-With-Finite-Cardinality-Group l n) (Type-With-Finite-Cardinality-Group (lsuc lzero ⊔ l) 2)
   simpson-delooping-sign =
     quotient-delooping-sign
-      ( λ n X → Fin n ≃ type-UU-Fin n X)
+      ( λ n X → Fin n ≃ type-Type-With-Finite-Cardinality n X)
       ( sign-comp-equivalence-relation)
       ( λ n _ → is-decidable-sign-comp-equivalence-relation n)
       ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
@@ -751,30 +751,30 @@ module _
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
         ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
-        ( group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
+        ( group-Concrete-Group (Type-With-Finite-Cardinality-Group (lsuc lzero ⊔ l) 2))
         ( comp-hom-Group
           ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
-          ( group-Concrete-Group (UU-Fin-Group l (n +ℕ 2)))
-          ( group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
+          ( group-Concrete-Group (Type-With-Finite-Cardinality-Group l (n +ℕ 2)))
+          ( group-Concrete-Group (Type-With-Finite-Cardinality-Group (lsuc lzero ⊔ l) 2))
           ( hom-group-hom-Concrete-Group
-            ( UU-Fin-Group l (n +ℕ 2))
-            ( UU-Fin-Group (lsuc lzero ⊔ l) 2)
+            ( Type-With-Finite-Cardinality-Group l (n +ℕ 2))
+            ( Type-With-Finite-Cardinality-Group (lsuc lzero ⊔ l) 2)
             ( simpson-delooping-sign (n +ℕ 2)))
           ( hom-inv-iso-Group
-            ( group-Concrete-Group (UU-Fin-Group l (n +ℕ 2)))
+            ( group-Concrete-Group (Type-With-Finite-Cardinality-Group l (n +ℕ 2)))
             ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
-            ( iso-loop-group-fin-UU-Fin-Group l (n +ℕ 2))))
+            ( iso-loop-group-fin-Type-With-Finite-Cardinality-Group l (n +ℕ 2))))
         ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l (n +ℕ 2))))
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
         ( symmetric-Group (Fin-Set (n +ℕ 2)))
-        ( group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
+        ( group-Concrete-Group (Type-With-Finite-Cardinality-Group (lsuc lzero ⊔ l) 2))
         ( comp-hom-Group
           ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
-          ( group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
-          ( symmetric-abstract-UU-fin-group-quotient-hom
-            ( λ n X → Fin n ≃ type-UU-Fin n X)
+          ( group-Concrete-Group (Type-With-Finite-Cardinality-Group (lsuc lzero ⊔ l) 2))
+          ( symmetric-abstract-type-with-finite-cardinality-group-quotient-hom
+            ( λ n X → Fin n ≃ type-Type-With-Finite-Cardinality n X)
             ( sign-comp-equivalence-relation)
             ( λ n H → is-decidable-sign-comp-equivalence-relation n)
             ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
@@ -790,7 +790,7 @@ module _
           ( compute-raise l (Fin (n +ℕ 2)))))
   eq-simpson-delooping-sign-homomorphism =
     eq-quotient-delooping-sign-homomorphism
-      ( λ n X → Fin n ≃ type-UU-Fin n X)
+      ( λ n X → Fin n ≃ type-Type-With-Finite-Cardinality n X)
       ( sign-comp-equivalence-relation)
       ( λ n _ → is-decidable-sign-comp-equivalence-relation n)
       ( equiv-fin-2-quotient-sign-comp-equiv-Fin)

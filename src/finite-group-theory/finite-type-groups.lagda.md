@@ -39,12 +39,12 @@ open import univalent-combinatorics.standard-finite-types
 ### Definition
 
 ```agda
-UU-Fin-Group : (l : Level) (n : ℕ) → Concrete-Group (lsuc l)
-pr1 (pr1 (pr1 (UU-Fin-Group l n))) = UU-Fin l n
-pr2 (pr1 (pr1 (UU-Fin-Group l n))) = Fin-UU-Fin l n
-pr2 (pr1 (UU-Fin-Group l n)) = is-0-connected-UU-Fin n
-pr2 (UU-Fin-Group l n) =
-  is-1-type-UU-Fin n (Fin-UU-Fin l n) (Fin-UU-Fin l n)
+Type-With-Finite-Cardinality-Group : (l : Level) (n : ℕ) → Concrete-Group (lsuc l)
+pr1 (pr1 (pr1 (Type-With-Finite-Cardinality-Group l n))) = Type-With-Finite-Cardinality l n
+pr2 (pr1 (pr1 (Type-With-Finite-Cardinality-Group l n))) = raise-Fin-Type-With-Finite-Cardinality l n
+pr2 (pr1 (Type-With-Finite-Cardinality-Group l n)) = is-0-connected-Type-With-Finite-Cardinality n
+pr2 (Type-With-Finite-Cardinality-Group l n) =
+  is-1-type-Type-With-Finite-Cardinality n (raise-Fin-Type-With-Finite-Cardinality l n) (raise-Fin-Type-With-Finite-Cardinality l n)
 ```
 
 ### Properties
@@ -54,21 +54,21 @@ module _
   (l : Level) (n : ℕ)
   where
 
-  hom-loop-group-fin-UU-Fin-Group :
+  hom-loop-group-fin-Type-With-Finite-Cardinality-Group :
     hom-Group
-      ( group-Concrete-Group (UU-Fin-Group l n))
+      ( group-Concrete-Group (Type-With-Finite-Cardinality-Group l n))
       ( loop-group-Set (raise-Set l (Fin-Set n)))
-  pr1 hom-loop-group-fin-UU-Fin-Group p = pr1 (pair-eq-Σ p)
-  pr2 hom-loop-group-fin-UU-Fin-Group {p} {q} =
+  pr1 hom-loop-group-fin-Type-With-Finite-Cardinality-Group p = pr1 (pair-eq-Σ p)
+  pr2 hom-loop-group-fin-Type-With-Finite-Cardinality-Group {p} {q} =
     pr1-interchange-concat-pair-eq-Σ p q
 
-  hom-inv-loop-group-fin-UU-Fin-Group :
+  hom-inv-loop-group-fin-Type-With-Finite-Cardinality-Group :
     hom-Group
       ( loop-group-Set (raise-Set l (Fin-Set n)))
-      ( group-Concrete-Group (UU-Fin-Group l n))
-  pr1 hom-inv-loop-group-fin-UU-Fin-Group p =
+      ( group-Concrete-Group (Type-With-Finite-Cardinality-Group l n))
+  pr1 hom-inv-loop-group-fin-Type-With-Finite-Cardinality-Group p =
     eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)
-  pr2 hom-inv-loop-group-fin-UU-Fin-Group {p} {q} =
+  pr2 hom-inv-loop-group-fin-Type-With-Finite-Cardinality-Group {p} {q} =
     ( ap
       ( λ r → eq-pair-Σ (p ∙ q) r)
       ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
@@ -78,23 +78,23 @@ module _
         ( eq-is-prop is-prop-type-trunc-Prop)
         ( eq-is-prop is-prop-type-trunc-Prop))
 
-  is-section-hom-inv-loop-group-fin-UU-Fin-Group :
+  is-section-hom-inv-loop-group-fin-Type-With-Finite-Cardinality-Group :
     Id
       ( comp-hom-Group
         ( loop-group-Set (raise-Set l (Fin-Set n)))
-        ( group-Concrete-Group (UU-Fin-Group l n))
+        ( group-Concrete-Group (Type-With-Finite-Cardinality-Group l n))
         ( loop-group-Set (raise-Set l (Fin-Set n)))
-        ( hom-loop-group-fin-UU-Fin-Group)
-        ( hom-inv-loop-group-fin-UU-Fin-Group))
+        ( hom-loop-group-fin-Type-With-Finite-Cardinality-Group)
+        ( hom-inv-loop-group-fin-Type-With-Finite-Cardinality-Group))
       ( id-hom-Group (loop-group-Set (raise-Set l (Fin-Set n))))
-  is-section-hom-inv-loop-group-fin-UU-Fin-Group =
+  is-section-hom-inv-loop-group-fin-Type-With-Finite-Cardinality-Group =
     eq-pair-Σ
       ( eq-htpy
         ( λ p →
           ap pr1
             ( is-retraction-pair-eq-Σ
-              ( Fin-UU-Fin l n)
-              ( Fin-UU-Fin l n)
+              ( raise-Fin-Type-With-Finite-Cardinality l n)
+              ( raise-Fin-Type-With-Finite-Cardinality l n)
               ( pair p (eq-is-prop is-prop-type-trunc-Prop)))))
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup
@@ -102,39 +102,39 @@ module _
           ( semigroup-Group (loop-group-Set (raise-Set l (Fin-Set n))))
           ( id)))
 
-  is-retraction-hom-inv-loop-group-fin-UU-Fin-Group :
+  is-retraction-hom-inv-loop-group-fin-Type-With-Finite-Cardinality-Group :
     Id
       ( comp-hom-Group
-        ( group-Concrete-Group (UU-Fin-Group l n))
+        ( group-Concrete-Group (Type-With-Finite-Cardinality-Group l n))
         ( loop-group-Set (raise-Set l (Fin-Set n)))
-        ( group-Concrete-Group (UU-Fin-Group l n))
-        ( hom-inv-loop-group-fin-UU-Fin-Group)
-        ( hom-loop-group-fin-UU-Fin-Group))
-      ( id-hom-Group (group-Concrete-Group (UU-Fin-Group l n)))
-  is-retraction-hom-inv-loop-group-fin-UU-Fin-Group =
+        ( group-Concrete-Group (Type-With-Finite-Cardinality-Group l n))
+        ( hom-inv-loop-group-fin-Type-With-Finite-Cardinality-Group)
+        ( hom-loop-group-fin-Type-With-Finite-Cardinality-Group))
+      ( id-hom-Group (group-Concrete-Group (Type-With-Finite-Cardinality-Group l n)))
+  is-retraction-hom-inv-loop-group-fin-Type-With-Finite-Cardinality-Group =
     eq-pair-Σ
       ( eq-htpy
         ( λ p →
           ( ap
             ( λ r → eq-pair-Σ (pr1 (pair-eq-Σ p)) r)
             ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
-            ( is-section-pair-eq-Σ (Fin-UU-Fin l n) (Fin-UU-Fin l n) p)))
+            ( is-section-pair-eq-Σ (raise-Fin-Type-With-Finite-Cardinality l n) (raise-Fin-Type-With-Finite-Cardinality l n) p)))
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup
-          ( semigroup-Group (group-Concrete-Group (UU-Fin-Group l n)))
-          ( semigroup-Group (group-Concrete-Group (UU-Fin-Group l n)))
+          ( semigroup-Group (group-Concrete-Group (Type-With-Finite-Cardinality-Group l n)))
+          ( semigroup-Group (group-Concrete-Group (Type-With-Finite-Cardinality-Group l n)))
           ( id)))
 
-  iso-loop-group-fin-UU-Fin-Group :
+  iso-loop-group-fin-Type-With-Finite-Cardinality-Group :
     iso-Group
-      ( group-Concrete-Group (UU-Fin-Group l n))
+      ( group-Concrete-Group (Type-With-Finite-Cardinality-Group l n))
       ( loop-group-Set (raise-Set l (Fin-Set n)))
-  pr1 iso-loop-group-fin-UU-Fin-Group =
-    hom-loop-group-fin-UU-Fin-Group
-  pr1 (pr2 iso-loop-group-fin-UU-Fin-Group) =
-    hom-inv-loop-group-fin-UU-Fin-Group
-  pr1 (pr2 (pr2 iso-loop-group-fin-UU-Fin-Group)) =
-    is-section-hom-inv-loop-group-fin-UU-Fin-Group
-  pr2 (pr2 (pr2 iso-loop-group-fin-UU-Fin-Group)) =
-    is-retraction-hom-inv-loop-group-fin-UU-Fin-Group
+  pr1 iso-loop-group-fin-Type-With-Finite-Cardinality-Group =
+    hom-loop-group-fin-Type-With-Finite-Cardinality-Group
+  pr1 (pr2 iso-loop-group-fin-Type-With-Finite-Cardinality-Group) =
+    hom-inv-loop-group-fin-Type-With-Finite-Cardinality-Group
+  pr1 (pr2 (pr2 iso-loop-group-fin-Type-With-Finite-Cardinality-Group)) =
+    is-section-hom-inv-loop-group-fin-Type-With-Finite-Cardinality-Group
+  pr2 (pr2 (pr2 iso-loop-group-fin-Type-With-Finite-Cardinality-Group)) =
+    is-retraction-hom-inv-loop-group-fin-Type-With-Finite-Cardinality-Group
 ```

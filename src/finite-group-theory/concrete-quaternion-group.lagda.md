@@ -37,10 +37,10 @@ equiv-face-cube :
       ( map-axis-equiv-cube (succ-ℕ k) X Y e d a))
 equiv-face-cube k X Y e d a =
   pair
-    ( equiv-complement-element-UU-Fin k
-      ( pair (dim-cube-UU-Fin (succ-ℕ k) X) d)
+    ( equiv-complement-element-Type-With-Finite-Cardinality k
+      ( pair (dim-cube-Type-With-Finite-Cardinality (succ-ℕ k) X) d)
       ( pair
-        ( dim-cube-UU-Fin (succ-ℕ k) Y)
+        ( dim-cube-Type-With-Finite-Cardinality (succ-ℕ k) Y)
         ( map-dim-equiv-cube (succ-ℕ k) X Y e d))
       ( dim-equiv-cube (succ-ℕ k) X Y e)
       ( refl))
@@ -68,8 +68,8 @@ equiv-face-cube k X Y e d a =
             ( refl)
             ( d')))) ∘e
       ( axis-equiv-cube (succ-ℕ k) X Y e
-        ( inclusion-complement-element-UU-Fin k
-          ( pair (dim-cube-UU-Fin (succ-ℕ k) X) d) d')))
+        ( inclusion-complement-element-Type-With-Finite-Cardinality k
+          ( pair (dim-cube-Type-With-Finite-Cardinality (succ-ℕ k) X) d) d')))
 
 cube-with-labeled-faces :
   (k : ℕ) → UU (lsuc lzero)
