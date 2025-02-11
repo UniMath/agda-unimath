@@ -402,7 +402,7 @@ binomial-type-Fin (succ-ℕ n) zero-ℕ =
   equiv-is-contr binomial-type-over-empty is-contr-Fin-one-ℕ
 binomial-type-Fin (succ-ℕ n) (succ-ℕ m) =
   ( ( inv-equiv
-      ( Fin-add-ℕ
+      ( inv-compute-coproduct-Fin
         ( binomial-coefficient-ℕ n m)
         ( binomial-coefficient-ℕ n (succ-ℕ m)))) ∘e
     ( equiv-coproduct
