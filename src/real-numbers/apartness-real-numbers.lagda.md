@@ -10,6 +10,8 @@ module real-numbers.apartness-real-numbers where
 open import foundation.apartness-relations
 open import foundation.disjunction
 open import foundation.empty-types
+open import foundation.large-apartness-relations
+open import foundation.large-binary-relations
 open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
@@ -61,13 +63,10 @@ symmetric-apart-ℝ x y =
 ### Apartness is cotransitive
 
 ```agda
-module _
-  {l1 l2 l3 : Level}
-  (x : ℝ l1)
-  (y : ℝ l2)
-  (z : ℝ l3)
-  where
-
-  cotransitive-apart-ℝ : is-cotransitive apart-ℝ-Prop
-
+cotransitive-apart-ℝ : is-cotransitive-Large-Relation-Prop ℝ apart-ℝ-Prop
+cotransitive-apart-ℝ x y z =
+  elim-disjunction
+    ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop y z)
+    ( λ x<y → {!   !})
+    {!   !}
 ```
