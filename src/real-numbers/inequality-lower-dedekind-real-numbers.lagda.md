@@ -85,7 +85,8 @@ module _
   (q : ℚ)
   where
 
-  leq-is-in-cut-lower-real-ℚ : is-in-cut-lower-ℝ x q → leq-lower-ℝ (lower-real-ℚ q) x
+  leq-is-in-cut-lower-real-ℚ :
+    is-in-cut-lower-ℝ x q → leq-lower-ℝ (lower-real-ℚ q) x
   leq-is-in-cut-lower-real-ℚ q∈L p p<q =
     backward-implication
       ( is-rounded-cut-lower-ℝ x p)

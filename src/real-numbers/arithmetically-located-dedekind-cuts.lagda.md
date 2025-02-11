@@ -106,7 +106,10 @@ module _
                     ( p' +ℚ (q -ℚ p))
                     ( q)
                     ( q'<p'+q-p)
-                    {! binary-tr leq-ℚ ? ? (preserves-le-left-add-ℚ q (p' -ℚ p) zero-ℚ ?)  !})
+                  ( tr
+                    ( leq-ℚ (p' +ℚ (q -ℚ p)))
+                    ( is-identity-right-conjugation-Ab abelian-group-add-ℚ p q)
+                    ( preserves-leq-left-add-ℚ (q -ℚ p) p' p p'≤p)))
                   ( q'∈U)))
             ( decide-le-leq-ℚ p p'))
         ( arithmetically-located (positive-diff-le-ℚ p q p<q))

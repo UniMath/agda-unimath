@@ -84,13 +84,13 @@ module _
   (q : ℚ)
   where
 
-  leq-is-in-cut-upper-real-ℚ : is-in-cut-upper-ℝ x q → leq-upper-ℝ x (upper-real-ℚ q)
+  leq-is-in-cut-upper-real-ℚ :
+    is-in-cut-upper-ℝ x q → leq-upper-ℝ x (upper-real-ℚ q)
   leq-is-in-cut-upper-real-ℚ q∈L p x<p =
     backward-implication
       ( is-rounded-cut-upper-ℝ x p)
       ( intro-exists q (x<p , q∈L))
 ```
-
 
 ### The canonical map from the rational numbers to the upper reals preserves inequality
 
