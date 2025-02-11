@@ -29,10 +29,9 @@ open import synthetic-homotopy-theory.iterated-loop-spaces
 
 ## Idea
 
-The
-{{#concept "(abstract) homotopy groups" Disambiguation="of a pointed type" Agda=?}}
+The {{#concept "(abstract) homotopy groups" Disambiguation="of a pointed type"}}
 of a [pointed type](structured-types.pointed-types.md) `A` are a
-[sequence](foundation.sequences.md) `i ↦ πᵢ A` of [sets](foundation.sets.md)
+[sequence](foundation.sequences.md) `i ↦ πᵢA` of [sets](foundation.sets.md)
 where
 
 - `π₀ A` is the set of
@@ -46,8 +45,8 @@ For `i ≥ 2`, the `i`-th homotopy group `πᵢ A` of `A` is
 [Eckmann-Hilton argument](synthetic-homotopy-theory.eckmann-hilton-argument.md).
 
 Alternatively, we can define the
-{{#concept "concrete homotopy groups" Disambiguation="of a pointed type"}} of a
-pointed type `A` to be the sequence `ℕ → Concrete-Group`, given by
+{{#concept "concrete homotopy groups" Disambiguation="of a pointed type" Agda=concrete-homotopy-group}}
+of a pointed type `A` to be the sequence `ℕ → Concrete-Group`, given by
 
 ```text
   i ↦ concrete-group-Pointed-Type (iterated-loop-space i A)
