@@ -140,10 +140,13 @@ abstract
           ( is-finite-Prop (X × Y))
           ( is-finite-count ∘ (count-product e)))
 
-product-𝔽 : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → 𝔽 (l1 ⊔ l2)
-pr1 (product-𝔽 X Y) = (type-𝔽 X) × (type-𝔽 Y)
-pr2 (product-𝔽 X Y) =
-  is-finite-product (is-finite-type-𝔽 X) (is-finite-type-𝔽 Y)
+product-Finite-Type :
+  {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → Finite-Type (l1 ⊔ l2)
+pr1 (product-Finite-Type X Y) = (type-Finite-Type X) × (type-Finite-Type Y)
+pr2 (product-Finite-Type X Y) =
+  is-finite-product
+    ( is-finite-type-Finite-Type X)
+    ( is-finite-type-Finite-Type Y)
 
 abstract
   is-finite-left-factor :

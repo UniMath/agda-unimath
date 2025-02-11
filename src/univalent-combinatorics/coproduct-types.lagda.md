@@ -37,7 +37,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 Coproducts of finite types are finite, giving a coproduct operation on the type
-𝔽 of finite types.
+`Finite-Type` of finite types.
 
 ## Properties
 
@@ -191,10 +191,13 @@ abstract
           ( is-finite-Prop (X + Y))
           ( is-finite-count ∘ (count-coproduct e)))
 
-coproduct-𝔽 : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → 𝔽 (l1 ⊔ l2)
-pr1 (coproduct-𝔽 X Y) = (type-𝔽 X) + (type-𝔽 Y)
-pr2 (coproduct-𝔽 X Y) =
-  is-finite-coproduct (is-finite-type-𝔽 X) (is-finite-type-𝔽 Y)
+coproduct-Finite-Type :
+  {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → Finite-Type (l1 ⊔ l2)
+pr1 (coproduct-Finite-Type X Y) = (type-Finite-Type X) + (type-Finite-Type Y)
+pr2 (coproduct-Finite-Type X Y) =
+  is-finite-coproduct
+    ( is-finite-type-Finite-Type X)
+    ( is-finite-type-Finite-Type Y)
 
 abstract
   is-finite-left-summand :
