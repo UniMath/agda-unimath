@@ -30,7 +30,7 @@ open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import order-theory.strictly-ordered-types
+open import order-theory.strict-preorders
 ```
 
 </details>
@@ -202,14 +202,14 @@ decide-le-neq-ℕ (succ-ℕ m) (succ-ℕ n) H =
   decide-le-neq-ℕ m n (λ p → H (ap succ-ℕ p))
 ```
 
-### The strictly ordered type of natural numbers
+### The strict preorder of natural numbers
 
 ```agda
-ℕ-Strictly-Ordered-Type : Strictly-Ordered-Type lzero lzero
-pr1 ℕ-Strictly-Ordered-Type = ℕ
-pr1 (pr2 ℕ-Strictly-Ordered-Type) = le-ℕ-Prop
-pr1 (pr2 (pr2 ℕ-Strictly-Ordered-Type)) = irreflexive-le-ℕ
-pr2 (pr2 (pr2 ℕ-Strictly-Ordered-Type)) = transitive-le-ℕ
+ℕ-Strict-Preorder : Strict-Preorder lzero lzero
+pr1 ℕ-Strict-Preorder = ℕ
+pr1 (pr2 ℕ-Strict-Preorder) = le-ℕ-Prop
+pr1 (pr2 (pr2 ℕ-Strict-Preorder)) = irreflexive-le-ℕ
+pr2 (pr2 (pr2 ℕ-Strict-Preorder)) = transitive-le-ℕ
 ```
 
 ### `n < m` if and only if there exists a nonzero natural number `l` such that `l + n = m`
