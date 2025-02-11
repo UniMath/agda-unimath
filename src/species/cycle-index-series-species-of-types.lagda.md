@@ -37,13 +37,13 @@ total-type-family-of-cyclic-types X C =
 
 {-
 permutation-family-of-cyclic-types :
-  {l1 l2 : Level} (X : 𝔽 l1) (C : type-𝔽 X → Σ ℕ (Cyclic-Type l2)) →
+  {l1 l2 : Level} (X : Finite-Type l1) (C : type-Finite-Type X → Σ ℕ (Cyclic-Type l2)) →
   Aut (total-type-family-of-cyclic-types X C)
 permutation-family-of-cyclic-types X C = {!!}
 
 cycle-index-series-species-types :
-  {l1 l2 : Level} (F : species-types l1 l2) (X : 𝔽 l1) →
-  (type-𝔽 X → Σ ℕ (Cyclic-Type {!!} ∘ succ-ℕ)) →
+  {l1 l2 : Level} (F : species-types l1 l2) (X : Finite-Type l1) →
+  (type-Finite-Type X → Σ ℕ (Cyclic-Type {!!} ∘ succ-ℕ)) →
   UU {!!}
 cycle-index-series-species-types F X C =
   Σ {!F (total-type-family-of-cyclic-types X C)!} {!!}
