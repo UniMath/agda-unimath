@@ -799,7 +799,7 @@ is-prime-decomposition-list-sort-concatenation-ℕ :
   is-prime-decomposition-list-ℕ x p →
   is-prime-decomposition-list-ℕ y q →
   is-prime-decomposition-list-ℕ
-    (x *ℕ y)
+    ( x *ℕ y)
     ( insertion-sort-list
       ( ℕ-Decidable-Total-Order)
       ( concat-list p q))

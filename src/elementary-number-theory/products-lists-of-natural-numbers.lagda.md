@@ -71,7 +71,8 @@ permutation-invariant-mul-list-ℕ =
 compute-mul-concat-list-ℕ :
   (p q : list ℕ) →
   mul-list-ℕ (concat-list p q) ＝ mul-list-ℕ p *ℕ mul-list-ℕ q
-compute-mul-concat-list-ℕ nil q = inv (left-unit-law-add-ℕ (mul-list-ℕ q))
+compute-mul-concat-list-ℕ nil q =
+  inv (left-unit-law-add-ℕ (mul-list-ℕ q))
 compute-mul-concat-list-ℕ (cons x p) q =
   ap (mul-ℕ x) (compute-mul-concat-list-ℕ p q) ∙
   inv (associative-mul-ℕ x (mul-list-ℕ p) (mul-list-ℕ q))

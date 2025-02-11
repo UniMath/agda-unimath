@@ -24,6 +24,7 @@ open import elementary-number-theory.archimedean-property-rational-numbers publi
 open import elementary-number-theory.arithmetic-functions public
 open import elementary-number-theory.based-induction-natural-numbers public
 open import elementary-number-theory.based-strong-induction-natural-numbers public
+open import elementary-number-theory.bell-numbers public
 open import elementary-number-theory.bezouts-lemma-integers public
 open import elementary-number-theory.bezouts-lemma-natural-numbers public
 open import elementary-number-theory.binomial-coefficients public
