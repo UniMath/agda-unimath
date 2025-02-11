@@ -10,6 +10,7 @@ module real-numbers.apartness-real-numbers where
 open import foundation.apartness-relations
 open import foundation.disjunction
 open import foundation.empty-types
+open import foundation.function-types
 open import foundation.large-apartness-relations
 open import foundation.large-binary-relations
 open import foundation.negation
@@ -64,9 +65,34 @@ symmetric-apart-ℝ x y =
 
 ```agda
 cotransitive-apart-ℝ : is-cotransitive-Large-Relation-Prop ℝ apart-ℝ-Prop
-cotransitive-apart-ℝ x y z =
+cotransitive-apart-ℝ x y z x#y =
   elim-disjunction
-    ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop y z)
-    ( λ x<y → {!   !})
-    {!   !}
+    ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop z y)
+    ( λ x<y →
+      elim-disjunction
+        ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop z y)
+        ( inl-disjunction ∘ inl-disjunction)
+        ( inr-disjunction ∘ inl-disjunction)
+        ( cotransitive-le-ℝ-Prop x y z x<y))
+    ( λ y<x →
+      elim-disjunction
+        ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop z y)
+        ( inr-disjunction ∘ inr-disjunction)
+        ( inl-disjunction ∘ inr-disjunction)
+        ( cotransitive-le-ℝ-Prop y x z y<x))
+    x#y
+```
+
+### Apartness on the reals is a large apartness relation
+
+```agda
+large-apartness-relation-apart-ℝ-Prop : Large-Apartness-Relation _⊔_ ℝ
+Large-Apartness-Relation.large-rel-Large-Apartness-Relation
+  large-apartness-relation-apart-ℝ-Prop = apart-ℝ-Prop
+Large-Apartness-Relation.antirefl-Large-Apartness-Relation
+  large-apartness-relation-apart-ℝ-Prop = antireflexive-apart-ℝ
+Large-Apartness-Relation.symmetric-Large-Apartness-Relation
+  large-apartness-relation-apart-ℝ-Prop = symmetric-apart-ℝ
+Large-Apartness-Relation.cotransitive-Large-Apartness-Relation
+  large-apartness-relation-apart-ℝ-Prop = cotransitive-apart-ℝ
 ```

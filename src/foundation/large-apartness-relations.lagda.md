@@ -34,23 +34,6 @@ This is analogous to the notion of small
 ## Definitions
 
 ```agda
-module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (A : (l : Level) → UU (α l))
-  (R : Large-Relation-Prop β A)
-  where
-
-  is-antireflexive-Large-Relation-Prop : UUω
-  is-antireflexive-Large-Relation-Prop =
-    {l : Level} → (a : A l) → ¬ (type-Prop (R a a))
-
-  is-cotransitive-Large-Relation-Prop : UUω
-  is-cotransitive-Large-Relation-Prop =
-    {l1 l2 l3 : Level} →
-    (a : A l1) (b : A l2) (c : A l3) →
-    type-Prop (R a b) →
-    type-Prop (R a c ∨ R b c)
-
 record Large-Apartness-Relation
   {α : Level → Level} (β : Level → Level → Level)
   (A : (l : Level) → UU (α l)) : UUω
