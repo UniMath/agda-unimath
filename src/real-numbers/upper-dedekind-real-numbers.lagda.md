@@ -15,8 +15,10 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.powersets
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -31,9 +33,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-An upper
-{{#concept "Dedekind cut" Agda=is-dedekind-cut WD="dedekind cut" WDID=Q851333}}
-consists of a [subtype](foundation-core.subtypes.md) `U` of
+An {{#concept "upper Dedekind cut" Agda=is-upper-dedekind-cut}} consists of a
+[subtype](foundation-core.subtypes.md) `U` of
 [the rational numbers](elementary-number-theory.rational-numbers.md) `ℚ`,
 satisfying the following two conditions:
 
@@ -42,8 +43,8 @@ satisfying the following two conditions:
    [if and only if](foundation.logical-equivalences.md) there
    [exists](foundation.existential-quantification.md) `p < q` such that `p ∈ U`.
 
-The type of all upper Dedekind real numbers is the type of all upper Dedekind
-cuts.
+The {{#concept "upper Dedekind real numbers" Agda=upper-ℝ}} is the type of all
+upper Dedekind cuts.
 
 ## Definition
 
@@ -113,8 +114,9 @@ module _
   {l : Level} (x : upper-ℝ l) (p q : ℚ)
   where
 
-  le-cut-upper-ℝ : le-ℚ p q → is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x q
-  le-cut-upper-ℝ p<q p<x =
+  is-in-cut-le-ℚ-upper-ℝ :
+    le-ℚ p q → is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x q
+  is-in-cut-le-ℚ-upper-ℝ p<q p<x =
     backward-implication
       ( is-rounded-cut-upper-ℝ x q)
       ( intro-exists p (p<q , p<x))
@@ -127,9 +129,10 @@ module _
   {l : Level} (x : upper-ℝ l) (p q : ℚ)
   where
 
-  leq-cut-upper-ℝ : leq-ℚ p q → is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x q
-  leq-cut-upper-ℝ p≤q x<p with decide-le-leq-ℚ p q
-  ... | inl p<q = le-cut-upper-ℝ x p q p<q x<p
+  is-in-cut-leq-ℚ-upper-ℝ :
+    leq-ℚ p q → is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x q
+  is-in-cut-leq-ℚ-upper-ℝ p≤q x<p with decide-le-leq-ℚ p q
+  ... | inl p<q = is-in-cut-le-ℚ-upper-ℝ x p q p<q x<p
   ... | inr q≤p = tr (is-in-cut-upper-ℝ x) (antisymmetric-leq-ℚ p q p≤q q≤p) x<p
 ```
 
@@ -142,6 +145,11 @@ module _
 
   eq-eq-cut-upper-ℝ : cut-upper-ℝ x ＝ cut-upper-ℝ y → x ＝ y
   eq-eq-cut-upper-ℝ = eq-type-subtype is-upper-dedekind-cut-Prop
+
+  eq-sim-cut-upper-ℝ : sim-subtype (cut-upper-ℝ x) (cut-upper-ℝ y) → x ＝ y
+  eq-sim-cut-upper-ℝ =
+    eq-eq-cut-upper-ℝ ∘
+    antisymmetric-sim-subtype (cut-upper-ℝ x) (cut-upper-ℝ y)
 ```
 
 ## See also
