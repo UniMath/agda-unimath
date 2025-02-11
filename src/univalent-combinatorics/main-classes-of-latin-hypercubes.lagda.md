@@ -159,7 +159,7 @@ is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order k n m =
               ( λ i →
                 is-finite-Π
                   ( is-finite-Π
-                    ( is-finite-has-cardinality n
+                    ( is-finite-has-cardinality-ℕ n
                       ( has-cardinality-type-complement-element-Type-With-Finite-Cardinality
                         ( n)
                         ( type-unordered-tuple-Type-With-Finite-Cardinality

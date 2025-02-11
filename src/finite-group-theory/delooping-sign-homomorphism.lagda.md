@@ -1575,7 +1575,7 @@ module _
       ( λ n X → type-Type-With-Finite-Cardinality 2 (Q n X))
       ( λ n X →
         Id-equivalence-relation (set-Type-With-Finite-Cardinality 2 (Q n X)))
-      ( λ n _ X → has-decidable-equality-has-cardinality 2 (pr2 (Q n X)))
+      ( λ n _ X → has-decidable-equality-has-cardinality-ℕ 2 (pr2 (Q n X)))
       ( equiv-fin-2-equivalence-class)
       ( λ n _ → map-equiv (equiv-Q-fin-fin-2 (n +ℕ 2) star) (zero-Fin 1))
       ( λ n Y →
@@ -1617,7 +1617,8 @@ module _
             ( λ n X →
               Id-equivalence-relation
                 ( set-Type-With-Finite-Cardinality 2 (Q n X)))
-            ( λ n _ X → has-decidable-equality-has-cardinality 2 (pr2 (Q n X)))
+            ( λ n _ X →
+              has-decidable-equality-has-cardinality-ℕ 2 (pr2 (Q n X)))
             ( equiv-fin-2-equivalence-class)
             ( λ n _ → pr1 (equiv-Q-fin-fin-2 (n +ℕ 2) star) (zero-Fin 1))
             ( λ n Y →
@@ -1636,7 +1637,7 @@ module _
       ( λ n X → type-Type-With-Finite-Cardinality 2 (Q n X))
       ( λ n X →
         Id-equivalence-relation (set-Type-With-Finite-Cardinality 2 (Q n X)))
-      ( λ n _ X → has-decidable-equality-has-cardinality 2 (pr2 (Q n X)))
+      ( λ n _ X → has-decidable-equality-has-cardinality-ℕ 2 (pr2 (Q n X)))
       ( equiv-fin-2-equivalence-class)
       ( λ n _ → pr1 (equiv-Q-fin-fin-2 (n +ℕ 2) star) (zero-Fin 1))
       ( λ n Y →

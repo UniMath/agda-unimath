@@ -67,19 +67,20 @@ module _
     type-Type-With-Finite-Cardinality n
       type-unordered-tuple-Type-With-Finite-Cardinality
 
-  has-cardinality-type-unordered-tuple : has-cardinality n type-unordered-tuple
+  has-cardinality-type-unordered-tuple :
+    has-cardinality-ℕ n type-unordered-tuple
   has-cardinality-type-unordered-tuple =
     has-cardinality-type-Type-With-Finite-Cardinality n
       type-unordered-tuple-Type-With-Finite-Cardinality
 
   is-set-type-unordered-tuple : is-set type-unordered-tuple
   is-set-type-unordered-tuple =
-    is-set-has-cardinality n has-cardinality-type-unordered-tuple
+    is-set-has-cardinality-ℕ n has-cardinality-type-unordered-tuple
 
   has-decidable-equality-type-unordered-tuple :
     has-decidable-equality type-unordered-tuple
   has-decidable-equality-type-unordered-tuple =
-    has-decidable-equality-has-cardinality n
+    has-decidable-equality-has-cardinality-ℕ n
       has-cardinality-type-unordered-tuple
 
   element-unordered-tuple : type-unordered-tuple → A

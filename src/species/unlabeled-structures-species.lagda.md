@@ -57,7 +57,7 @@ module _
       type-of-cardinality-unlabeled-structure-species-types
 
   has-cardinality-type-unlabeled-structure-species-types :
-    has-cardinality k type-unlabeled-structure-species-types
+    has-cardinality-ℕ k type-unlabeled-structure-species-types
   has-cardinality-type-unlabeled-structure-species-types =
     has-cardinality-type-Type-With-Finite-Cardinality
       k

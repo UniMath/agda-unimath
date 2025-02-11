@@ -70,7 +70,7 @@ module _
       ( Σ
         ( X → Decidable-Prop l2)
         ( λ P →
-          has-cardinality 2 (Σ X (type-Decidable-Prop ∘ P))))
+          has-cardinality-ℕ 2 (Σ X (type-Decidable-Prop ∘ P))))
   list-transpositions-permutation-count =
     map-list
       ( transposition-conjugation-equiv
@@ -193,7 +193,7 @@ module _
                 ( Σ
                   ( type-Type-With-Finite-Cardinality n X → Decidable-Prop l)
                   ( λ P →
-                    has-cardinality 2
+                    has-cardinality-ℕ 2
                       ( Σ ( type-Type-With-Finite-Cardinality n X)
                           ( type-Decidable-Prop ∘ P)))))
               ( λ li →
@@ -306,7 +306,7 @@ module _
             ( Σ
               ( type-Type-With-Finite-Cardinality n X → Decidable-Prop l)
               ( λ P →
-                has-cardinality 2
+                has-cardinality-ℕ 2
                   ( Σ ( type-Type-With-Finite-Cardinality n X)
                       ( type-Decidable-Prop ∘ P))))
         list-transposition-f h =

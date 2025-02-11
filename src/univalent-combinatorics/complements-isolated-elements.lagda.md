@@ -41,7 +41,7 @@ isolated-element-Type-With-Finite-Cardinality :
   isolated-element (type-Type-With-Finite-Cardinality (succ-ℕ k) X)
 pr1 (isolated-element-Type-With-Finite-Cardinality k X x) = x
 pr2 (isolated-element-Type-With-Finite-Cardinality k X x) =
-  has-decidable-equality-has-cardinality
+  has-decidable-equality-has-cardinality-ℕ
     ( succ-ℕ k)
     ( has-cardinality-type-Type-With-Finite-Cardinality (succ-ℕ k) X)
     ( x)
@@ -71,11 +71,11 @@ has-cardinality-type-complement-element-Type-With-Finite-Cardinality :
   (X :
     Σ ( Type-With-Finite-Cardinality l1 (succ-ℕ k))
       ( type-Type-With-Finite-Cardinality (succ-ℕ k))) →
-  has-cardinality k (type-complement-element-Type-With-Finite-Cardinality k X)
+  has-cardinality-ℕ k (type-complement-element-Type-With-Finite-Cardinality k X)
 has-cardinality-type-complement-element-Type-With-Finite-Cardinality
   k (pair (pair X H) x) =
   apply-universal-property-trunc-Prop H
-    ( has-cardinality-Prop k
+    ( has-cardinality-ℕ-Prop k
       ( type-complement-element-Type-With-Finite-Cardinality k
         ( pair (pair X H) x)))
     ( λ e →
@@ -123,8 +123,8 @@ equiv-complement-element-Type-With-Finite-Cardinality :
 equiv-complement-element-Type-With-Finite-Cardinality
   k S T e p =
   equiv-complement-isolated-element e
-    ( pair x (λ x' → has-decidable-equality-has-cardinality (succ-ℕ k) H x x'))
-    ( pair y (λ y' → has-decidable-equality-has-cardinality (succ-ℕ k) K y y'))
+    ( x , (λ x' → has-decidable-equality-has-cardinality-ℕ (succ-ℕ k) H x x'))
+    ( y , (λ y' → has-decidable-equality-has-cardinality-ℕ (succ-ℕ k) K y y'))
     ( p)
   where
   H = pr2 (pr1 S)

@@ -78,7 +78,7 @@ mere-equiv-number-of-connected-components H =
 ```agda
 has-cardinality-connected-components-Prop : {l : Level} (k : ℕ) → UU l → Prop l
 has-cardinality-connected-components-Prop k A =
-  has-cardinality-Prop k (type-trunc-Set A)
+  has-cardinality-ℕ-Prop k (type-trunc-Set A)
 
 has-cardinality-connected-components : {l : Level} (k : ℕ) → UU l → UU l
 has-cardinality-connected-components k A =

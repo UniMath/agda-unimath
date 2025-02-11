@@ -150,7 +150,7 @@ module _
       list
         ( Σ ( type-Type-With-Finite-Cardinality n X → Decidable-Prop l)
             ( λ P →
-              has-cardinality 2
+              has-cardinality-ℕ 2
                 ( Σ ( type-Type-With-Finite-Cardinality n X)
                     ( type-Decidable-Prop ∘ P))))
     list-trans f' h =
@@ -163,7 +163,7 @@ module _
       list
         ( Σ ( (type-Type-With-Finite-Cardinality n X) → Decidable-Prop l)
             ( λ P →
-              has-cardinality 2
+              has-cardinality-ℕ 2
                 ( Σ ( type-Type-With-Finite-Cardinality n X)
                     ( type-Decidable-Prop ∘ P))))
     list-comp-f-g h = concat-list (list-trans f h) (list-trans g h)
@@ -337,7 +337,7 @@ module _
       list
         ( Σ ( type-Type-With-Finite-Cardinality n X → Decidable-Prop l)
             ( λ P →
-              has-cardinality 2
+              has-cardinality-ℕ 2
                 ( Σ
                   ( type-Type-With-Finite-Cardinality n X)
                   ( type-Decidable-Prop ∘ P))))
@@ -351,7 +351,7 @@ module _
       list
         ( Σ ( (type-Type-With-Finite-Cardinality n Y) → Decidable-Prop l)
             ( λ P →
-              has-cardinality 2
+              has-cardinality-ℕ 2
                 ( Σ
                   ( type-Type-With-Finite-Cardinality n Y)
                   ( type-Decidable-Prop ∘ P))))

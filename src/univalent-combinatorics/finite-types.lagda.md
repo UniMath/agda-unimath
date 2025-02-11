@@ -100,20 +100,20 @@ is-finite-type-Finite-Type = pr2
 ### Types with finite cardinality `k`
 
 ```agda
-has-cardinality-Prop :
+has-cardinality-ℕ-Prop :
   {l : Level} → ℕ → UU l → Prop l
-has-cardinality-Prop k = mere-equiv-Prop (Fin k)
+has-cardinality-ℕ-Prop k = mere-equiv-Prop (Fin k)
 
-has-cardinality :
+has-cardinality-ℕ :
   {l : Level} → ℕ → UU l → UU l
-has-cardinality k = mere-equiv (Fin k)
+has-cardinality-ℕ k = mere-equiv (Fin k)
 ```
 
 ### The type of all types of cardinality `k` of a given universe level
 
 ```agda
 Type-With-Finite-Cardinality : (l : Level) → ℕ → UU (lsuc l)
-Type-With-Finite-Cardinality l k = Σ (UU l) (mere-equiv (Fin k))
+Type-With-Finite-Cardinality l k = Σ (UU l) (has-cardinality-ℕ k)
 
 type-Type-With-Finite-Cardinality :
   {l : Level} (k : ℕ) → Type-With-Finite-Cardinality l k → UU l
@@ -131,7 +131,7 @@ abstract
 ```agda
 has-finite-cardinality :
   {l : Level} → UU l → UU l
-has-finite-cardinality X = Σ ℕ (λ k → has-cardinality k X)
+has-finite-cardinality X = Σ ℕ (λ k → has-cardinality-ℕ k X)
 
 number-of-elements-has-finite-cardinality :
   {l : Level} {X : UU l} → has-finite-cardinality X → ℕ
@@ -263,7 +263,7 @@ abstract
 
 abstract
   has-cardinality-is-contr :
-    {l1 : Level} {X : UU l1} → is-contr X → has-cardinality 1 X
+    {l1 : Level} {X : UU l1} → is-contr X → has-cardinality-ℕ 1 X
   has-cardinality-is-contr H =
     unit-trunc-Prop (equiv-is-contr is-contr-Fin-1 H)
 ```
@@ -280,7 +280,7 @@ pr1 (Fin-Finite-Type k) = Fin k
 pr2 (Fin-Finite-Type k) = is-finite-Fin k
 
 has-cardinality-raise-Fin :
-  {l : Level} (k : ℕ) → has-cardinality k (raise-Fin l k)
+  {l : Level} (k : ℕ) → has-cardinality-ℕ k (raise-Fin l k)
 has-cardinality-raise-Fin {l} k = unit-trunc-Prop (compute-raise-Fin l k)
 
 raise-Fin-Type-With-Finite-Cardinality :
@@ -358,8 +358,8 @@ module _
         ( is-finite-count ∘ pair k)
 
   abstract
-    is-finite-has-cardinality : (k : ℕ) → has-cardinality k X → is-finite X
-    is-finite-has-cardinality k H =
+    is-finite-has-cardinality-ℕ : (k : ℕ) → has-cardinality-ℕ k X → is-finite X
+    is-finite-has-cardinality-ℕ k H =
       is-finite-has-finite-cardinality (pair k H)
 
   has-finite-cardinality-count : count X → has-finite-cardinality X
@@ -403,7 +403,7 @@ module _
         ( f)
 
   has-cardinality-is-finite :
-    (H : is-finite X) → has-cardinality (number-of-elements-is-finite H) X
+    (H : is-finite X) → has-cardinality-ℕ (number-of-elements-is-finite H) X
   has-cardinality-is-finite H =
     pr2 (has-finite-cardinality-is-finite H)
 
@@ -417,7 +417,7 @@ number-of-elements-Finite-Type X =
 ```agda
 eq-cardinality :
   {l1 : Level} {k l : ℕ} {A : UU l1} →
-  has-cardinality k A → has-cardinality l A → Id k l
+  has-cardinality-ℕ k A → has-cardinality-ℕ l A → Id k l
 eq-cardinality H K =
   apply-universal-property-trunc-Prop H
     ( Id-Prop ℕ-Set _ _)
@@ -468,15 +468,15 @@ pr2 (set-Finite-Type X) = is-set-is-finite (is-finite-type-Finite-Type X)
 ### Any type of cardinality `k` is a set
 
 ```agda
-is-set-has-cardinality :
-  {l1 : Level} {X : UU l1} (k : ℕ) → has-cardinality k X → is-set X
-is-set-has-cardinality k H = is-set-mere-equiv' H (is-set-Fin k)
+is-set-has-cardinality-ℕ :
+  {l1 : Level} {X : UU l1} (k : ℕ) → has-cardinality-ℕ k X → is-set X
+is-set-has-cardinality-ℕ k H = is-set-mere-equiv' H (is-set-Fin k)
 
 is-set-type-Type-With-Finite-Cardinality :
   {l : Level} (k : ℕ) (X : Type-With-Finite-Cardinality l k) →
   is-set (type-Type-With-Finite-Cardinality k X)
 is-set-type-Type-With-Finite-Cardinality k X =
-  is-set-has-cardinality k
+  is-set-has-cardinality-ℕ k
     ( has-cardinality-type-Type-With-Finite-Cardinality k X)
 
 set-Type-With-Finite-Cardinality :
@@ -754,7 +754,7 @@ abstract
 ```agda
   equiv-has-cardinality-id-number-of-elements-is-finite :
     {l : Level} (X : UU l) ( H : is-finite X) (n : ℕ) →
-    ( has-cardinality n X ≃ Id (number-of-elements-is-finite H) n)
+    ( has-cardinality-ℕ n X ≃ Id (number-of-elements-is-finite H) n)
   pr1 (equiv-has-cardinality-id-number-of-elements-is-finite X H n) Q =
     ap
       ( number-of-elements-has-finite-cardinality)
@@ -767,7 +767,7 @@ abstract
       ( is-set-ℕ (number-of-elements-is-finite H) n)
       ( λ p →
         tr
-          ( λ m → has-cardinality m X)
+          ( λ m → has-cardinality-ℕ m X)
           ( p)
           ( pr2 (has-finite-cardinality-is-finite H)))
 ```

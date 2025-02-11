@@ -309,7 +309,7 @@ module _
     is-finite-type-decidable-subtype
       (λ P →
         pair
-          ( has-cardinality 2
+          ( has-cardinality-ℕ 2
             ( Σ ( type-Type-With-Finite-Cardinality n X)
                 ( type-Decidable-Prop ∘ P)))
           ( pair

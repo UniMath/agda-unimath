@@ -52,7 +52,7 @@ equiv-face-cube k X Y e d a =
             ( dim-equiv-cube (succ-ℕ k) X Y e)
             ( pair d
               ( λ z →
-                has-decidable-equality-has-cardinality
+                has-decidable-equality-has-cardinality-ℕ
                   ( succ-ℕ k)
                   ( has-cardinality-dim-cube (succ-ℕ k) X)
                   ( d)
@@ -60,7 +60,7 @@ equiv-face-cube k X Y e d a =
             ( pair
               ( map-dim-equiv-cube (succ-ℕ k) X Y e d)
               ( λ z →
-                has-decidable-equality-has-cardinality
+                has-decidable-equality-has-cardinality-ℕ
                   ( succ-ℕ k)
                   ( has-cardinality-dim-cube (succ-ℕ k) Y)
                   ( map-dim-equiv-cube (succ-ℕ k) X Y e d)

@@ -70,7 +70,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ```agda
 has-two-elements-Prop : {l : Level} → UU l → Prop l
-has-two-elements-Prop X = has-cardinality-Prop 2 X
+has-two-elements-Prop X = has-cardinality-ℕ-Prop 2 X
 
 has-two-elements : {l : Level} → UU l → UU l
 has-two-elements X = type-Prop (has-two-elements-Prop X)
@@ -95,7 +95,7 @@ has-two-elements-type-2-Element-Type = pr2
 is-finite-type-2-Element-Type :
   {l : Level} (X : 2-Element-Type l) → is-finite (type-2-Element-Type X)
 is-finite-type-2-Element-Type X =
-  is-finite-has-cardinality 2 (has-two-elements-type-2-Element-Type X)
+  is-finite-has-cardinality-ℕ 2 (has-two-elements-type-2-Element-Type X)
 
 finite-type-2-Element-Type : {l : Level} → 2-Element-Type l → Finite-Type l
 pr1 (finite-type-2-Element-Type X) = type-2-Element-Type X
@@ -151,12 +151,12 @@ is-inhabited-2-Element-Type X =
 ```agda
 is-set-has-two-elements :
   {l : Level} {X : UU l} → has-two-elements X → is-set X
-is-set-has-two-elements H = is-set-has-cardinality 2 H
+is-set-has-two-elements H = is-set-has-cardinality-ℕ 2 H
 
 is-set-type-2-Element-Type :
   {l : Level} (X : 2-Element-Type l) → is-set (type-2-Element-Type X)
 is-set-type-2-Element-Type X =
-  is-set-has-cardinality 2 (has-two-elements-type-2-Element-Type X)
+  is-set-has-cardinality-ℕ 2 (has-two-elements-type-2-Element-Type X)
 
 set-2-Element-Type :
   {l : Level} → 2-Element-Type l → Set l
@@ -366,7 +366,7 @@ abstract
           ( equiv-ev-zero-equiv-Fin-2 X) ∘e
           ( equiv-precomp-equiv (compute-raise-Fin l 2) (pr1 X))))
       ( is-torsorial-equiv-subuniverse
-        ( has-cardinality-Prop 2)
+        ( has-cardinality-ℕ-Prop 2)
         ( standard-2-Element-Type l))
 ```
 

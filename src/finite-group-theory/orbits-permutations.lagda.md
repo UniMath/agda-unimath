@@ -2387,7 +2387,7 @@ module _
         list
           ( Σ ( X → Decidable-Prop l)
               ( λ P →
-                has-cardinality 2 (Σ X (type-Decidable-Prop ∘ P))))) →
+                has-cardinality-ℕ 2 (Σ X (type-Decidable-Prop ∘ P))))) →
       Id
         ( iterate
           ( length-list li)

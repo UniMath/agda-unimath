@@ -40,7 +40,7 @@ module _
   dim-cube =
     type-Type-With-Finite-Cardinality k dim-cube-Type-With-Finite-Cardinality
 
-  has-cardinality-dim-cube : has-cardinality k dim-cube
+  has-cardinality-dim-cube : has-cardinality-ℕ k dim-cube
   has-cardinality-dim-cube = pr2 dim-cube-Type-With-Finite-Cardinality
 
   has-finite-cardinality-dim-cube : has-finite-cardinality dim-cube
@@ -57,7 +57,7 @@ module _
   axis-cube : dim-cube → UU lzero
   axis-cube d = type-Type-With-Finite-Cardinality 2 (axis-cube-UU-2 d)
 
-  has-cardinality-axis-cube : (d : dim-cube) → has-cardinality 2 (axis-cube d)
+  has-cardinality-axis-cube : (d : dim-cube) → has-cardinality-ℕ 2 (axis-cube d)
   has-cardinality-axis-cube d = pr2 (axis-cube-UU-2 d)
 
   has-finite-cardinality-axis-cube :
@@ -67,7 +67,7 @@ module _
 
   is-finite-axis-cube : (d : dim-cube) → is-finite (axis-cube d)
   is-finite-axis-cube d =
-    is-finite-has-cardinality 2 (has-cardinality-axis-cube d)
+    is-finite-has-cardinality-ℕ 2 (has-cardinality-axis-cube d)
 
   vertex-cube : UU lzero
   vertex-cube = (d : dim-cube) → axis-cube d
