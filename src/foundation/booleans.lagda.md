@@ -293,9 +293,9 @@ number-of-elements-bool =
       ( 2 , equiv-bool-Fin-two-ℕ)
       ( is-finite-bool))
 
-bool-𝔽 : 𝔽 lzero
-pr1 bool-𝔽 = bool
-pr2 bool-𝔽 = is-finite-bool
+bool-Finite-Type : Finite-Type lzero
+pr1 bool-Finite-Type = bool
+pr2 bool-Finite-Type = is-finite-bool
 ```
 
 ### Boolean negation has no fixed points

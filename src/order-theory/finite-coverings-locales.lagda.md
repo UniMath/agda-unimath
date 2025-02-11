@@ -36,9 +36,9 @@ module _
 
   finite-covering-Locale : UU (l1 ⊔ lsuc l2)
   finite-covering-Locale =
-    Σ ( 𝔽 l2)
+    Σ ( Finite-Type l2)
       ( λ I →
-        Σ ( type-𝔽 I → type-Locale L)
+        Σ ( type-Finite-Type I → type-Locale L)
           ( is-covering-Locale L u))
 
 module _
@@ -47,7 +47,7 @@ module _
   where
 
   indexing-type-finite-covering-Locale : UU l2
-  indexing-type-finite-covering-Locale = type-𝔽 (pr1 v)
+  indexing-type-finite-covering-Locale = type-Finite-Type (pr1 v)
 
   covering-family-finite-covering-Locale :
     indexing-type-finite-covering-Locale → type-Locale L
@@ -65,5 +65,5 @@ module _
 
   is-finite-covering-covering-Locale :
     is-finite-covering-Locale L u covering-finite-covering-Locale
-  is-finite-covering-covering-Locale = is-finite-type-𝔽 (pr1 v)
+  is-finite-covering-covering-Locale = is-finite-type-Finite-Type (pr1 v)
 ```
