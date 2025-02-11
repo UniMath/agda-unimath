@@ -7,16 +7,22 @@ module real-numbers.upper-dedekind-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.conjunction
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universal-quantification
 open import foundation.universe-levels
 ```
@@ -89,7 +95,18 @@ module _
 
 ## Properties
 
-### Upper Dedekind cuts are closed under the standard ordering on the rationals
+### The upper Dedekind reals form a set
+
+```agda
+abstract
+  is-set-upper-ℝ : (l : Level) → is-set (upper-ℝ l)
+  is-set-upper-ℝ l =
+    is-set-Σ
+      ( is-set-function-type (is-trunc-Truncated-Type neg-one-𝕋))
+      ( λ q → is-set-is-prop (is-prop-type-Prop (is-upper-dedekind-cut-Prop q)))
+```
+
+### Upper Dedekind cuts are closed under strict inequality on the rationals
 
 ```agda
 module _
@@ -101,6 +118,19 @@ module _
     backward-implication
       ( is-rounded-cut-upper-ℝ x q)
       ( intro-exists p (p<q , p<x))
+```
+
+### Upper Dedekind cuts are closed under inequality on the rationals
+
+```agda
+module _
+  {l : Level} (x : upper-ℝ l) (p q : ℚ)
+  where
+
+  leq-cut-upper-ℝ : leq-ℚ p q → is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x q
+  leq-cut-upper-ℝ p≤q x<p with decide-le-leq-ℚ p q
+  ... | inl p<q = le-cut-upper-ℝ x p q p<q x<p
+  ... | inr q≤p = tr (is-in-cut-upper-ℝ x) (antisymmetric-leq-ℚ p q p≤q q≤p) x<p
 ```
 
 ### Two upper real numbers with the same cut are equal

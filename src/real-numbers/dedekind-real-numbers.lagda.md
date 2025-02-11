@@ -11,6 +11,7 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.complements-subtypes
@@ -48,88 +49,81 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Idea
 
-A
-{{#concept "Dedekind cut" Agda=is-dedekind-cut WD="dedekind cut" WDID=Q851333}}
-consists of a [pair](foundation.dependent-pair-types.md) `(L , U)` of a
-[lower Dedekind cut](real-numbers.lower-dedekind-real-numbers) and an
-[upper Dedekind cut](real-numbers.upper-dedekind-real-numbers) that also satisfy
+A Dedekind real number
+consists of a [pair](foundation.dependent-pair-types.md) `(lx , uy)` of a
+[lower Dedekind real](real-numbers.lower-dedekind-real-numbers) and an
+[upper Dedekind real](real-numbers.upper-dedekind-real-numbers) that also satisfy
 the following conditions:
 
-1. _Disjointness_. `L` and `U` are disjoint subsets of `ℚ`.
-2. _Locatedness_. If `q < r` then `q ∈ L` or `r ∈ U`.
+1. _Disjointness_. The cuts of `lx` and `uy` are disjoint subsets of `ℚ`.
+2. _Locatedness_. If `q < r` then `q` is in the cut of `lx` or `r` is in the cut
+    of `uy`.
 
-The type of {{#concept "Dedekind real numbers" Agda=ℝ}} is the type of all
-Dedekind cuts. The Dedekind real numbers will be taken as the standard
+The Dedekind real numbers will be taken as the standard
 definition of the real numbers in the agda-unimath library.
 
 ## Definition
 
-### Dedekind cuts
+### Dedekind real numbers
 
 ```agda
 module _
-  {l1 l2 : Level} (L : subtype l1 ℚ) (U : subtype l2 ℚ)
+  {l1 l2 : Level} (lx : lower-ℝ l1) (uy : upper-ℝ l2)
   where
 
-  is-disjoint-cut-Prop : Prop (l1 ⊔ l2)
-  is-disjoint-cut-Prop = ∀' ℚ (λ q → ¬' (L q ∧ U q))
+  is-disjoint-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
+  is-disjoint-prop-lower-upper-ℝ =
+    ∀' ℚ (λ q → ¬' (cut-lower-ℝ lx q ∧ cut-upper-ℝ uy q))
 
-  is-disjoint-cut : UU (l1 ⊔ l2)
-  is-disjoint-cut = type-Prop is-disjoint-cut-Prop
+  is-disjoint-lower-upper-ℝ : UU (l1 ⊔ l2)
+  is-disjoint-lower-upper-ℝ = type-Prop is-disjoint-prop-lower-upper-ℝ
 
-  is-located-cut-Prop : Prop (l1 ⊔ l2)
-  is-located-cut-Prop = ∀' ℚ (λ q → ∀' ℚ (λ r → le-ℚ-Prop q r ⇒ (L q ∨ U r)))
+  is-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
+  is-located-prop-lower-upper-ℝ = ∀'
+    ( ℚ)
+    ( λ q → ∀' ℚ (λ r → le-ℚ-Prop q r ⇒ (cut-lower-ℝ lx q ∨ cut-upper-ℝ uy r)))
 
-  is-located-cut : UU (l1 ⊔ l2)
-  is-located-cut = type-Prop is-located-cut-Prop
+  is-located-lower-upper-ℝ : UU (l1 ⊔ l2)
+  is-located-lower-upper-ℝ = type-Prop is-located-prop-lower-upper-ℝ
 
-  is-dedekind-cut-Prop : Prop (l1 ⊔ l2)
-  is-dedekind-cut-Prop =
-    is-lower-dedekind-cut-Prop L ∧
-    is-upper-dedekind-cut-Prop U ∧
-    is-disjoint-cut-Prop ∧
-    is-located-cut-Prop
+  is-dedekind-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
+  is-dedekind-prop-lower-upper-ℝ =
+    is-disjoint-prop-lower-upper-ℝ ∧ is-located-prop-lower-upper-ℝ
 
-  is-dedekind-cut : UU (l1 ⊔ l2)
-  is-dedekind-cut = type-Prop is-dedekind-cut-Prop
-
-  is-prop-is-dedekind-cut : is-prop is-dedekind-cut
-  is-prop-is-dedekind-cut = is-prop-type-Prop is-dedekind-cut-Prop
+  is-dedekind-lower-upper-ℝ : UU (l1 ⊔ l2)
+  is-dedekind-lower-upper-ℝ = type-Prop is-dedekind-prop-lower-upper-ℝ
 ```
 
 ### The Dedekind real numbers
 
 ```agda
 ℝ : (l : Level) → UU (lsuc l)
-ℝ l = Σ (subtype l ℚ) (λ L → Σ (subtype l ℚ) (is-dedekind-cut L))
-
-real-dedekind-cut : {l : Level} (L U : subtype l ℚ) → is-dedekind-cut L U → ℝ l
-real-dedekind-cut L U H = L , U , H
+ℝ l = Σ (lower-ℝ l) (λ lx → Σ (upper-ℝ l) (is-dedekind-lower-upper-ℝ lx))
 
 real-lower-upper-ℝ :
   {l : Level} →
-  (L : lower-ℝ l) (U : upper-ℝ l) →
-  is-disjoint-cut (cut-lower-ℝ L) (cut-upper-ℝ U) →
-  is-located-cut (cut-lower-ℝ L) (cut-upper-ℝ U) →
+  (lx : lower-ℝ l) (uy : upper-ℝ l) →
+  is-disjoint-lower-upper-ℝ lx uy →
+  is-located-lower-upper-ℝ lx uy →
   ℝ l
-real-lower-upper-ℝ (L , lower-dedekind-L) (U , lower-dedekind-U) H K =
-  L , U , lower-dedekind-L , lower-dedekind-U , H , K
+real-lower-upper-ℝ lx uy H K =
+  lx , uy , H , K
 
 module _
   {l : Level} (x : ℝ l)
   where
 
-  lower-cut-ℝ : subtype l ℚ
-  lower-cut-ℝ = pr1 x
-
-  upper-cut-ℝ : subtype l ℚ
-  upper-cut-ℝ = pr1 (pr2 x)
-
   lower-real-ℝ : lower-ℝ l
-  lower-real-ℝ = lower-cut-ℝ , pr1 (pr2 (pr2 x))
+  lower-real-ℝ = pr1 x
 
   upper-real-ℝ : upper-ℝ l
-  upper-real-ℝ = upper-cut-ℝ , pr1 (pr2 (pr2 (pr2 x)))
+  upper-real-ℝ = pr1 (pr2 x)
+
+  lower-cut-ℝ : subtype l ℚ
+  lower-cut-ℝ = cut-lower-ℝ lower-real-ℝ
+
+  upper-cut-ℝ : subtype l ℚ
+  upper-cut-ℝ = cut-upper-ℝ upper-real-ℝ
 
   is-in-lower-cut-ℝ : ℚ → UU l
   is-in-lower-cut-ℝ = is-in-subtype lower-cut-ℝ
@@ -137,8 +131,8 @@ module _
   is-in-upper-cut-ℝ : ℚ → UU l
   is-in-upper-cut-ℝ = is-in-subtype upper-cut-ℝ
 
-  is-dedekind-cut-cut-ℝ : is-dedekind-cut lower-cut-ℝ upper-cut-ℝ
-  is-dedekind-cut-cut-ℝ = pr2 (pr2 x)
+  is-dedekind-ℝ : is-dedekind-lower-upper-ℝ lower-real-ℝ upper-real-ℝ
+  is-dedekind-ℝ = pr2 (pr2 x)
 
   is-inhabited-lower-cut-ℝ : exists ℚ lower-cut-ℝ
   is-inhabited-lower-cut-ℝ = is-inhabited-cut-lower-ℝ lower-real-ℝ
@@ -159,12 +153,12 @@ module _
   is-rounded-upper-cut-ℝ = is-rounded-cut-upper-ℝ upper-real-ℝ
 
   is-disjoint-cut-ℝ : (q : ℚ) → ¬ (is-in-lower-cut-ℝ q × is-in-upper-cut-ℝ q)
-  is-disjoint-cut-ℝ = pr1 (pr2 (pr2 (pr2 (pr2 x))))
+  is-disjoint-cut-ℝ = pr1 (pr2 (pr2 x))
 
   is-located-lower-upper-cut-ℝ :
     (q r : ℚ) → le-ℚ q r →
     type-disjunction-Prop (lower-cut-ℝ q) (upper-cut-ℝ r)
-  is-located-lower-upper-cut-ℝ = pr2 (pr2 (pr2 (pr2 (pr2 x))))
+  is-located-lower-upper-cut-ℝ = pr2 (pr2 (pr2 x))
 
   cut-ℝ : subtype l ℚ
   cut-ℝ q =
@@ -182,18 +176,19 @@ module _
 ### The Dedekind real numbers form a set
 
 ```agda
+
 abstract
   is-set-ℝ : (l : Level) → is-set (ℝ l)
   is-set-ℝ l =
     is-set-Σ
-      ( is-set-function-type (is-trunc-Truncated-Type neg-one-𝕋))
+      ( is-set-lower-ℝ l)
       ( λ x →
         is-set-Σ
-          ( is-set-function-type (is-trunc-Truncated-Type neg-one-𝕋))
+          ( is-set-upper-ℝ l)
           ( λ y →
             ( is-set-is-prop
               ( is-prop-type-Prop
-                ( is-dedekind-cut-Prop x y)))))
+                ( is-dedekind-prop-lower-upper-ℝ x y)))))
 
 ℝ-Set : (l : Level) → Set (lsuc l)
 ℝ-Set l = ℝ l , is-set-ℝ l
@@ -212,53 +207,25 @@ module _
     le-ℚ p q →
     is-in-lower-cut-ℝ x q →
     is-in-lower-cut-ℝ x p
-  le-lower-cut-ℝ H H' =
-    ind-trunc-Prop
-      ( λ s → lower-cut-ℝ x p)
-      ( rec-coproduct
-          ( id)
-          ( λ I → ex-falso (is-disjoint-cut-ℝ x q (H' , I))))
-      ( is-located-lower-upper-cut-ℝ x p q H)
+  le-lower-cut-ℝ = le-cut-lower-ℝ (lower-real-ℝ x) p q
 
   leq-lower-cut-ℝ :
     leq-ℚ p q →
     is-in-lower-cut-ℝ x q →
     is-in-lower-cut-ℝ x p
-  leq-lower-cut-ℝ H H' =
-    rec-coproduct
-      ( λ s → le-lower-cut-ℝ s H')
-      ( λ I →
-        tr
-          ( is-in-lower-cut-ℝ x)
-          ( antisymmetric-leq-ℚ q p I H)
-          ( H'))
-      ( decide-le-leq-ℚ p q)
+  leq-lower-cut-ℝ = leq-cut-lower-ℝ (lower-real-ℝ x) p q
 
   le-upper-cut-ℝ :
     le-ℚ p q →
     is-in-upper-cut-ℝ x p →
     is-in-upper-cut-ℝ x q
-  le-upper-cut-ℝ H H' =
-    ind-trunc-Prop
-      ( λ s → upper-cut-ℝ x q)
-      ( rec-coproduct
-        ( λ I → ex-falso (is-disjoint-cut-ℝ x p ( I , H')))
-        ( id))
-      ( is-located-lower-upper-cut-ℝ x p q H)
+  le-upper-cut-ℝ = le-cut-upper-ℝ (upper-real-ℝ x) p q
 
   leq-upper-cut-ℝ :
     leq-ℚ p q →
     is-in-upper-cut-ℝ x p →
     is-in-upper-cut-ℝ x q
-  leq-upper-cut-ℝ H H' =
-    rec-coproduct
-      ( λ s → le-upper-cut-ℝ s H')
-      ( λ I →
-        tr
-          ( is-in-upper-cut-ℝ x)
-          ( antisymmetric-leq-ℚ p q H I)
-          ( H'))
-      ( decide-le-leq-ℚ p q)
+  leq-upper-cut-ℝ = leq-cut-upper-ℝ (upper-real-ℝ x) p q
 ```
 
 ### Elements of the lower cut are lower bounds of the upper cut
@@ -448,10 +415,85 @@ module _
           ( H)))
 ```
 
-### The map from a real number to its lower cut is an embedding
+### The map from a real number to its lower real is an embedding
 
 ```agda
 module _
+  {l : Level}
+  (lx : lower-ℝ l)
+  where
+
+  has-upper-real-Prop : Prop (lsuc l)
+  pr1 has-upper-real-Prop = Σ (upper-ℝ l) (is-dedekind-lower-upper-ℝ lx)
+  pr2 has-upper-real-Prop =
+    ( is-prop-all-elements-equal)
+    ( λ uy uy' →
+      eq-type-subtype
+        ( is-dedekind-prop-lower-upper-ℝ lx)
+        ( eq-eq-cut-upper-ℝ
+          ( pr1 uy)
+          ( pr1 uy')
+          ( eq-upper-cut-eq-lower-cut-ℝ (lx , uy) (lx , uy') refl)))
+
+is-emb-lower-real : {l : Level} → is-emb (lower-real-ℝ {l})
+is-emb-lower-real = is-emb-inclusion-subtype has-upper-real-Prop
+```
+
+### The map from a real number to its upper real is an embedding
+
+```agda
+module _
+  {l : Level}
+  (uy : upper-ℝ l)
+  where
+
+  has-lower-real-Prop : Prop (lsuc l)
+  pr1 has-lower-real-Prop =
+    Σ (lower-ℝ l) (λ lx → is-dedekind-lower-upper-ℝ lx uy)
+  pr2 has-lower-real-Prop =
+    ( is-prop-all-elements-equal)
+    ( λ lx lx' →
+      eq-type-subtype
+        ( λ l → is-dedekind-prop-lower-upper-ℝ l uy)
+        ( eq-eq-cut-lower-ℝ
+          ( pr1 lx)
+          ( pr1 lx')
+          ( eq-lower-cut-eq-upper-cut-ℝ
+            ( pr1 lx , uy , pr2 lx)
+            ( pr1 lx' , uy , pr2 lx')
+            ( refl))))
+
+is-emb-upper-real : {l : Level} → is-emb (upper-real-ℝ {l})
+pr1 (pr1 (is-emb-upper-real (lx , ux , Hx) (ly , uy , Hy))) ux=uy =
+  ap
+    ( λ (uz , lz , Hz) → (lz , uz , Hz))
+    ( pr1
+      ( pr1
+        ( is-emb-inclusion-subtype
+          ( has-lower-real-Prop)
+          ( ux , lx , Hx)
+          ( uy , ly , Hy)))
+      ( ux=uy))
+pr2 (pr1 (is-emb-upper-real (lx , ux , Hx) (ly , uy , Hy))) ux=uy =
+  {! (pr2 (pr1 (is-emb-inclusion-subtype has-lower-real-Prop (ux , lx , Hx) (uy , ly , Hy))) ux=uy) !}
+pr1 (pr2 (is-emb-upper-real (lx , ux , Hx) (ly , uy , Hy))) ux=uy =
+  ap
+    ( λ (uz , lz , Hz) → (lz , uz , Hz))
+    ( pr1
+      (pr2
+        (is-emb-inclusion-subtype
+          ( has-lower-real-Prop)
+          ( ux , lx , Hx)
+          ( uy , ly , Hy)))
+      ux=uy)
+pr2 (pr2 (is-emb-upper-real (lx , ux , Hx) (ly , uy , Hy))) x=y =
+  {! pr2 (pr2 (is-emb-inclusion-subtype has-lower-real-Prop (ux , lx , Hx) (uy , ly , Hy))) (ap (λ (lz , uz , Hz) → (uz , lz , Hz)) x=y) !}
+```
+
+### The map from a real number to its lower cut is an embedding
+
+```agda
+{- module _
   {l : Level} (L : subtype l ℚ)
   where
 
@@ -469,13 +511,13 @@ module _
               ( refl))))
 
 is-emb-lower-cut : {l : Level} → is-emb (lower-cut-ℝ {l})
-is-emb-lower-cut = is-emb-inclusion-subtype has-upper-cut-Prop
+is-emb-lower-cut = is-emb-inclusion-subtype has-upper-cut-Prop -}
 ```
 
 ### Two real numbers with the same lower/upper cut are equal
 
 ```agda
-module _
+{- module _
   {l : Level} (x y : ℝ l)
   where
 
@@ -483,7 +525,7 @@ module _
   eq-eq-lower-cut-ℝ = eq-type-subtype has-upper-cut-Prop
 
   eq-eq-upper-cut-ℝ : upper-cut-ℝ x ＝ upper-cut-ℝ y → x ＝ y
-  eq-eq-upper-cut-ℝ = eq-eq-lower-cut-ℝ ∘ (eq-lower-cut-eq-upper-cut-ℝ x y)
+  eq-eq-upper-cut-ℝ = eq-eq-lower-cut-ℝ ∘ (eq-lower-cut-eq-upper-cut-ℝ x y) -}
 ```
 
 ## References

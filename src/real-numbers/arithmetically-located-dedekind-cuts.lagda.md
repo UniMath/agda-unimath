@@ -60,8 +60,8 @@ module _
   {l : Level} (L : lower-ℝ l) (U : upper-ℝ l)
   where
 
-  is-arithmetically-located-pair-of-cuts-ℚ : UU l
-  is-arithmetically-located-pair-of-cuts-ℚ =
+  arithmetically-located-lower-upper-ℝ : UU l
+  arithmetically-located-lower-upper-ℝ =
     (ε⁺ : ℚ⁺) →
     exists
       ( ℚ × ℚ)
@@ -79,13 +79,13 @@ rational numbers, it is also located.
 
 ```agda
 module _
-  {l : Level} (L : lower-ℝ l) (U : upper-ℝ l)
+  {l : Level} (x : lower-ℝ l) (y : upper-ℝ l)
   where
 
   abstract
     is-located-is-arithmetically-located-pair-of-cuts-ℚ :
-      is-arithmetically-located-pair-of-cuts-ℚ L U →
-      is-located-cut (cut-lower-ℝ L) (cut-upper-ℝ U)
+      arithmetically-located-upper-real x y →
+      is-located-cut (cut-lower-ℝ x) (cut-upper-ℝ y)
     is-located-is-arithmetically-located-pair-of-cuts-ℚ
       arithmetically-located p q p<q =
       elim-exists
