@@ -65,7 +65,7 @@ module _
 
   permutation-insertion-sort-list :
     (l : list (type-Decidable-Total-Order X)) →
-    Permutation (length-list l)
+    permutation (length-list l)
   permutation-insertion-sort-list =
     permutation-list-is-sort-list
       X

@@ -17,7 +17,7 @@ open import elementary-number-theory.lists-of-prime-numbers
 open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.minimal-structured-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.multiplication-lists-of-natural-numbers
+open import elementary-number-theory.products-lists-of-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.multiplicative-decompositions-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -778,7 +778,7 @@ is-prime-list-is-prime-is-in-list-ℕ (cons x p) P =
     ( is-prime-is-in-list-tail-ℕ p x P)
 
 is-prime-list-permute-list-ℕ :
-  (p : list ℕ) (t : Permutation (length-list p)) → is-prime-list-ℕ p →
+  (p : list ℕ) (t : permutation (length-list p)) → is-prime-list-ℕ p →
   is-prime-list-ℕ (permute-list p t)
 is-prime-list-permute-list-ℕ p t P =
   is-prime-list-is-prime-is-in-list-ℕ
@@ -794,11 +794,11 @@ is-prime-list-permute-list-ℕ p t P =
         ( I)))
 
 is-decomposition-list-permute-list-ℕ :
-  (n : ℕ) (p : list ℕ) (t : Permutation (length-list p)) →
+  (n : ℕ) (p : list ℕ) (t : permutation (length-list p)) →
   is-multiplicative-decomposition-list-ℕ n p →
   is-multiplicative-decomposition-list-ℕ n (permute-list p t)
 is-decomposition-list-permute-list-ℕ n p t D =
-  {!!} -- inv (invariant-permutation-mul-list-ℕ p t) ∙ D
+  {!!} -- inv (permutation-invariant-mul-list-ℕ p t) ∙ D
 
 is-prime-decomposition-list-sort-concatenation-ℕ :
   (x y : ℕ) (H : 1 ≤-ℕ x) (I : 1 ≤-ℕ y) (p q : list ℕ) →

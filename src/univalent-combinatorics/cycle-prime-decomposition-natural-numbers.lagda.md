@@ -136,7 +136,7 @@ equiv-product-cycle-prime-decomposition-ℕ n m H I =
                 ( list-fundamental-theorem-arithmetic-ℕ n H)
                 ( list-fundamental-theorem-arithmetic-ℕ m I)))
             ( tr
-              ( Permutation)
+              ( permutation)
               ( inv
                 ( length-map-list
                   ( Cyclic-Type lzero)

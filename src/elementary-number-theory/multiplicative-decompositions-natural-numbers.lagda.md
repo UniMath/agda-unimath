@@ -11,7 +11,7 @@ module
 ```agda
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.multiplication-lists-of-natural-numbers
+open import elementary-number-theory.products-lists-of-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nontrivial-divisors-natural-numbers
@@ -40,9 +40,8 @@ of a [natural number](elementary-number-theory.natural-numbers.md) `n` is a
 [list](lists.lists.md) `l` of natural numbers
 [strictly greater than](elementary-number-theory.strict-inequality-natural-numbers.md)
 `1`, such that the
-[product](elementary-number-theory.multiplication-lists-of-natural-numbers.md)
-of the numbers in this list is [equal to](foundation-core.identity-types.md)
-`n`.
+[product](elementary-number-theory.products-lists-of-natural-numbers.md) of the
+numbers in this list is [equal to](foundation-core.identity-types.md) `n`.
 
 ## Definitions
 
@@ -184,7 +183,7 @@ pr1 (is-multiplicative-decomposition-concat-list-ℕ n m l k H K) =
     ( le-one-list-is-multiplicative-decomposition-list-ℕ n l H)
     ( le-one-list-is-multiplicative-decomposition-list-ℕ m k K)
 pr2 (is-multiplicative-decomposition-concat-list-ℕ n m l k H K) =
-  eq-mul-list-concat-list-ℕ l k ∙
+  compute-mul-concat-list-ℕ l k ∙
   ap-mul-ℕ
     ( eq-is-multiplicative-decomposition-list-ℕ n l H)
     ( eq-is-multiplicative-decomposition-list-ℕ m k K)

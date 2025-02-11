@@ -22,7 +22,7 @@ open import foundation.fibers-of-maps
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import order-theory.inflationary-maps-strictly-ordered-types
+open import order-theory.strictly-inflationary-maps-strict-preorders
 
 open import univalent-combinatorics.dependent-pair-types
 ```
@@ -50,7 +50,7 @@ there is a maximal natural number $k$ such that $f(k) \leq b$.
 ```agda
 is-strictly-inflationary-map-ℕ : (ℕ → ℕ) → UU lzero
 is-strictly-inflationary-map-ℕ =
-  is-inflationary-map-Strictly-Ordered-Type ℕ-Strictly-Ordered-Type
+  is-strictly-inflationary-map-Strict-Preorder ℕ-Strict-Preorder
 ```
 
 ### Strictly inflationary maps on the natural numbers
@@ -58,18 +58,19 @@ is-strictly-inflationary-map-ℕ =
 ```agda
 strictly-inflationary-map-ℕ : UU lzero
 strictly-inflationary-map-ℕ =
-  inflationary-map-Strictly-Ordered-Type ℕ-Strictly-Ordered-Type
+  strictly-inflationary-map-Strict-Preorder ℕ-Strict-Preorder
 
 map-strictly-inflationary-map-ℕ :
   strictly-inflationary-map-ℕ → ℕ → ℕ
 map-strictly-inflationary-map-ℕ =
-  map-inflationary-map-Strictly-Ordered-Type ℕ-Strictly-Ordered-Type
+  map-strictly-inflationary-map-Strict-Preorder ℕ-Strict-Preorder
 
 is-strictly-inflationary-strictly-inflationary-map-ℕ :
   (f : strictly-inflationary-map-ℕ) →
   is-strictly-inflationary-map-ℕ (map-strictly-inflationary-map-ℕ f)
 is-strictly-inflationary-strictly-inflationary-map-ℕ =
-  is-inflationary-inflationary-map-Strictly-Ordered-Type ℕ-Strictly-Ordered-Type
+  is-strictly-inflationary-strictly-inflationary-map-Strict-Preorder
+    ℕ-Strict-Preorder
 
 fiber-strictly-inflationary-map-ℕ :
   (f : strictly-inflationary-map-ℕ) → ℕ → UU lzero

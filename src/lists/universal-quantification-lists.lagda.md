@@ -35,22 +35,34 @@ open import finite-group-theory.permutations-standard-finite-types
 
 ## Idea
 
-Consider a predicate `P` on a type `X`, and consider a [list](lists.lists.md) `l` of elements of `X`. The {{#concept "universal quantification" Disambiguation="elements of a list" Agda=for-all-list}} of `P` over the elements of `l` is the type of choices of elements `P x` for each element `x ∈ l`. More specifically, the universal quantification `∀ l P` of `P` over `l` is defined inductively by
+Consider a predicate `P` on a type `X`, and consider a [list](lists.lists.md)
+`l` of elements of `X`. The
+{{#concept "universal quantification" Disambiguation="elements of a list" Agda=for-all-list}}
+of `P` over the elements of `l` is the type of choices of elements `P x` for
+each element `x ∈ l`. More specifically, the universal quantification `∀ l P` of
+`P` over `l` is defined inductively by
 
 ```text
   ∀ nil P := unit
   ∀ (cons x l) P := (P x) × (∀ l P)
 ```
 
-Alternatively, the universal quantification over the elements of a list can be defined directly by
+Alternatively, the universal quantification over the elements of a list can be
+defined directly by
 
 ```text
   ∀ l P := (x : X) → x ∈ l → P x.
 ```
 
-These definitions are [equivalent](foundation-core.equivalences.md). However, note that the inductive definition of the universal quantification has the same universe level as `P`, while the direct definition is of universe level `l1 ⊔ l2`, where `l1` is the universe level of `X` and `l2` is the universe level of `P`.
+These definitions are [equivalent](foundation-core.equivalences.md). However,
+note that the inductive definition of the universal quantification has the same
+universe level as `P`, while the direct definition is of universe level
+`l1 ⊔ l2`, where `l1` is the universe level of `X` and `l2` is the universe
+level of `P`.
 
-Note that the universal quantification over the elements of a list `l` is equivalent to the type of [dependent lists](lists.dependent-lists.md) of elements of `P` over `l`.
+Note that the universal quantification over the elements of a list `l` is
+equivalent to the type of [dependent lists](lists.dependent-lists.md) of
+elements of `P` over `l`.
 
 ## Definitions
 
@@ -157,7 +169,7 @@ module _
   module _
     (x : X) (l : list X) (P : X → UU l2)
     where
-    
+
     map-compute-for-all-elements-cons-list :
       P x × for-all-elements-list l P → for-all-elements-list (cons x l) P
     map-compute-for-all-elements-cons-list (a , b) =
@@ -255,7 +267,7 @@ pr2 (for-all-concat-list (cons x l) k P H K) =
 ```text
 for-all-permute-list :
   {l1 l2 : Level} {X : UU l1}  (l : list X) (P : X → UU l2)
-  (e : Permutation (length-list l)) →
+  (e : permutation (length-list l)) →
   for-all-list l P → for-all-list (permute-list l e) P
 for-all-permute-list l P e H = {!!}
 ```

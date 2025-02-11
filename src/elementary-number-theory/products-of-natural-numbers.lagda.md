@@ -31,16 +31,14 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The product of a list of natural numbers is defined by iterated multiplication.
+The
+{{#concept "product" Disambiguation="standard finite family of natural numbers"}}
+of a [standard finite](univalent-combinatorics.standard-finite-types.md) family
+of [natural numbers](elementary-number-theory.natural-numbers.md) is defined by
+iterated
+[multiplication](elementary-number-theory.multiplication-natural-numbers.md).
 
 ## Definitions
-
-### Products of lists of natural numbers
-
-```agda
-product-list-ℕ : list ℕ → ℕ
-product-list-ℕ = fold-list 1 mul-ℕ
-```
 
 ### Products of families of natural numbers indexed by standard finite types
 
@@ -117,3 +115,7 @@ pr1 (div-factor-Π-ℕ k f i) =
 pr2 (div-factor-Π-ℕ k f i) =
   eq-quotient-div-factor-Π-ℕ k f i
 ```
+
+## See also
+
+- [Products of lists of natural numbers](elementary-number-theory.products-lists-of-natural-numbers.md)

@@ -345,9 +345,9 @@ preserves-order-exponent-exp-ℕ m H (succ-ℕ n) (succ-ℕ k) K =
 ```agda
 preserves-strict-order-exponent-exp-ℕ :
   (m : ℕ) → 1 <-ℕ m →
-  preserves-strict-order-map-Strictly-Ordered-Type
-    ( ℕ-Strictly-Ordered-Type)
-    ( ℕ-Strictly-Ordered-Type)
+  preserves-strict-order-map-Strict-Preorder
+    ( ℕ-Strict-Preorder)
+    ( ℕ-Strict-Preorder)
     ( m ^ℕ_)
 preserves-strict-order-exponent-exp-ℕ m H zero-ℕ (succ-ℕ k) K =
   le-one-exp-ℕ m (succ-ℕ k) H (is-nonzero-succ-ℕ k)
