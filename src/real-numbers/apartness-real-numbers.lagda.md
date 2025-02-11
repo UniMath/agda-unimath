@@ -25,8 +25,8 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-Two real numbers are [apart](foundation.apartness-relations.md) if one
-is strictly less than the other.
+Two real numbers are [apart](foundation.large-apartness-relations.md) if one is
+strictly less than the other.
 
 ```agda
 module _
