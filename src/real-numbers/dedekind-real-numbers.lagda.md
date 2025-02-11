@@ -21,6 +21,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.embeddings
 open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -397,6 +398,14 @@ module _
           ( upper-cut-ℝ y)
           ( H)))
 
+  eq-lower-real-eq-upper-real-ℝ :
+    upper-real-ℝ x ＝ upper-real-ℝ y → lower-real-ℝ x ＝ lower-real-ℝ y
+  eq-lower-real-eq-upper-real-ℝ ux=uy =
+    eq-eq-cut-lower-ℝ
+      ( lower-real-ℝ x)
+      ( lower-real-ℝ y)
+      ( eq-lower-cut-eq-upper-cut-ℝ (ap cut-upper-ℝ ux=uy))
+
   eq-upper-cut-eq-lower-cut-ℝ :
     lower-cut-ℝ x ＝ lower-cut-ℝ y → upper-cut-ℝ x ＝ upper-cut-ℝ y
   eq-upper-cut-eq-lower-cut-ℝ H =
@@ -413,6 +422,14 @@ module _
           ( lower-cut-ℝ x)
           ( lower-cut-ℝ y)
           ( H)))
+
+  eq-upper-real-eq-lower-real-ℝ :
+    lower-real-ℝ x ＝ lower-real-ℝ y → upper-real-ℝ x ＝ upper-real-ℝ y
+  eq-upper-real-eq-lower-real-ℝ lx=ly =
+    eq-eq-cut-upper-ℝ
+      ( upper-real-ℝ x)
+      ( upper-real-ℝ y)
+      ( eq-upper-cut-eq-lower-cut-ℝ (ap cut-lower-ℝ lx=ly))
 ```
 
 ### The map from a real number to its lower real is an embedding
@@ -439,93 +456,26 @@ is-emb-lower-real : {l : Level} → is-emb (lower-real-ℝ {l})
 is-emb-lower-real = is-emb-inclusion-subtype has-upper-real-Prop
 ```
 
-### The map from a real number to its upper real is an embedding
+### Two real numbers with the same lower/upper real are equal
 
 ```agda
 module _
-  {l : Level}
-  (uy : upper-ℝ l)
-  where
-
-  has-lower-real-Prop : Prop (lsuc l)
-  pr1 has-lower-real-Prop =
-    Σ (lower-ℝ l) (λ lx → is-dedekind-lower-upper-ℝ lx uy)
-  pr2 has-lower-real-Prop =
-    ( is-prop-all-elements-equal)
-    ( λ lx lx' →
-      eq-type-subtype
-        ( λ l → is-dedekind-prop-lower-upper-ℝ l uy)
-        ( eq-eq-cut-lower-ℝ
-          ( pr1 lx)
-          ( pr1 lx')
-          ( eq-lower-cut-eq-upper-cut-ℝ
-            ( pr1 lx , uy , pr2 lx)
-            ( pr1 lx' , uy , pr2 lx')
-            ( refl))))
-
-is-emb-upper-real : {l : Level} → is-emb (upper-real-ℝ {l})
-pr1 (pr1 (is-emb-upper-real (lx , ux , Hx) (ly , uy , Hy))) ux=uy =
-  ap
-    ( λ (uz , lz , Hz) → (lz , uz , Hz))
-    ( pr1
-      ( pr1
-        ( is-emb-inclusion-subtype
-          ( has-lower-real-Prop)
-          ( ux , lx , Hx)
-          ( uy , ly , Hy)))
-      ( ux=uy))
-pr2 (pr1 (is-emb-upper-real (lx , ux , Hx) (ly , uy , Hy))) ux=uy =
-  {! (pr2 (pr1 (is-emb-inclusion-subtype has-lower-real-Prop (ux , lx , Hx) (uy , ly , Hy))) ux=uy) !}
-pr1 (pr2 (is-emb-upper-real (lx , ux , Hx) (ly , uy , Hy))) ux=uy =
-  ap
-    ( λ (uz , lz , Hz) → (lz , uz , Hz))
-    ( pr1
-      (pr2
-        (is-emb-inclusion-subtype
-          ( has-lower-real-Prop)
-          ( ux , lx , Hx)
-          ( uy , ly , Hy)))
-      ux=uy)
-pr2 (pr2 (is-emb-upper-real (lx , ux , Hx) (ly , uy , Hy))) x=y =
-  {! pr2 (pr2 (is-emb-inclusion-subtype has-lower-real-Prop (ux , lx , Hx) (uy , ly , Hy))) (ap (λ (lz , uz , Hz) → (uz , lz , Hz)) x=y) !}
-```
-
-### The map from a real number to its lower cut is an embedding
-
-```agda
-{- module _
-  {l : Level} (L : subtype l ℚ)
-  where
-
-  has-upper-cut-Prop : Prop (lsuc l)
-  has-upper-cut-Prop =
-    pair
-      ( Σ (subtype l ℚ) (is-dedekind-cut L))
-      ( is-prop-all-elements-equal
-        ( λ U U' →
-          eq-type-subtype
-            ( is-dedekind-cut-Prop L)
-            ( eq-upper-cut-eq-lower-cut-ℝ
-              ( pair L U)
-              ( pair L U')
-              ( refl))))
-
-is-emb-lower-cut : {l : Level} → is-emb (lower-cut-ℝ {l})
-is-emb-lower-cut = is-emb-inclusion-subtype has-upper-cut-Prop -}
-```
-
-### Two real numbers with the same lower/upper cut are equal
-
-```agda
-{- module _
   {l : Level} (x y : ℝ l)
   where
 
+  eq-eq-lower-real-ℝ : lower-real-ℝ x ＝ lower-real-ℝ y → x ＝ y
+  eq-eq-lower-real-ℝ = eq-type-subtype has-upper-real-Prop
+
+  eq-eq-upper-real-ℝ : upper-real-ℝ x ＝ upper-real-ℝ y → x ＝ y
+  eq-eq-upper-real-ℝ = eq-eq-lower-real-ℝ ∘ (eq-lower-real-eq-upper-real-ℝ x y)
+
   eq-eq-lower-cut-ℝ : lower-cut-ℝ x ＝ lower-cut-ℝ y → x ＝ y
-  eq-eq-lower-cut-ℝ = eq-type-subtype has-upper-cut-Prop
+  eq-eq-lower-cut-ℝ lcx=lcy =
+    eq-eq-lower-real-ℝ
+      ( eq-eq-cut-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y) lcx=lcy)
 
   eq-eq-upper-cut-ℝ : upper-cut-ℝ x ＝ upper-cut-ℝ y → x ＝ y
-  eq-eq-upper-cut-ℝ = eq-eq-lower-cut-ℝ ∘ (eq-lower-cut-eq-upper-cut-ℝ x y) -}
+  eq-eq-upper-cut-ℝ = eq-eq-lower-cut-ℝ ∘ (eq-lower-cut-eq-upper-cut-ℝ x y)
 ```
 
 ## References
