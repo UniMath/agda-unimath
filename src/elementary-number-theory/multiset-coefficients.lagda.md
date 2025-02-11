@@ -21,7 +21,7 @@ words, it counts the number of
 [connected componets](foundation.connected-components.md) of the type
 
 ```text
-  Σ (A : Fin n → 𝔽), ║ Fin k ≃ Σ (i : Fin n), A i ║.
+  Σ (A : Fin n → Finite-Type), ║ Fin k ≃ Σ (i : Fin n), A i ║.
 ```
 
 The first few numbers are
