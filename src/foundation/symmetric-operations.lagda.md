@@ -150,15 +150,15 @@ module _
           ( map-equiv-coproduct
             ( inv-equiv
               ( equiv-ev-zero-htpy-equiv-Fin-2
-                ( Fin-Type-With-Finite-Cardinality 2)
+                ( Fin-Type-With-Cardinality-ℕ 2)
                 ( e)
                 ( e')))
             ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-2
-              ( Fin-Type-With-Finite-Cardinality 2)
+              ( Fin-Type-With-Cardinality-ℕ 2)
               ( e)
               ( e' ∘e equiv-succ-Fin 2)))
             ( decide-value-equiv-Fin-2
-              ( Fin-Type-With-Finite-Cardinality 2)
+              ( Fin-Type-With-Cardinality-ℕ 2)
               ( e')
               ( map-equiv e (zero-Fin 1)))))
       ( id-equiv)

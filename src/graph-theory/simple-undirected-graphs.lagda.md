@@ -64,7 +64,7 @@ Simple-Undirected-Graph l1 l2 =
         ( λ E →
           (x : V) →
           ¬ ( type-Prop
-              ( E (pair (Fin-Type-With-Finite-Cardinality 2) (λ y → x))))))
+              ( E (pair (Fin-Type-With-Cardinality-ℕ 2) (λ y → x))))))
 ```
 
 ## External links

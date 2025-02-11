@@ -83,7 +83,7 @@ is-prop-has-two-elements {l} {X} = is-prop-type-Prop (has-two-elements-Prop X)
 
 ```agda
 2-Element-Type : (l : Level) → UU (lsuc l)
-2-Element-Type l = Type-With-Finite-Cardinality l 2
+2-Element-Type l = Type-With-Cardinality-ℕ l 2
 
 type-2-Element-Type : {l : Level} → 2-Element-Type l → UU l
 type-2-Element-Type = pr1
@@ -102,7 +102,7 @@ pr1 (finite-type-2-Element-Type X) = type-2-Element-Type X
 pr2 (finite-type-2-Element-Type X) = is-finite-type-2-Element-Type X
 
 standard-2-Element-Type : (l : Level) → 2-Element-Type l
-standard-2-Element-Type l = raise-Fin-Type-With-Finite-Cardinality l 2
+standard-2-Element-Type l = raise-Fin-Type-With-Cardinality-ℕ l 2
 
 type-standard-2-Element-Type : (l : Level) → UU l
 type-standard-2-Element-Type l = type-2-Element-Type (standard-2-Element-Type l)
@@ -169,7 +169,7 @@ pr2 (set-2-Element-Type X) = is-set-type-2-Element-Type X
 ```agda
 equiv-2-Element-Type :
   {l1 l2 : Level} → 2-Element-Type l1 → 2-Element-Type l2 → UU (l1 ⊔ l2)
-equiv-2-Element-Type X Y = equiv-Type-With-Finite-Cardinality 2 X Y
+equiv-2-Element-Type X Y = equiv-Type-With-Cardinality-ℕ 2 X Y
 
 id-equiv-2-Element-Type :
   {l1 : Level} (X : 2-Element-Type l1) → equiv-2-Element-Type X X
@@ -626,16 +626,16 @@ module _
   compute-map-equiv-point-2-Element-Type' x = refl
 
 compute-swap-Fin-2 :
-  map-swap-2-Element-Type (Fin-Type-With-Finite-Cardinality 2) ~ succ-Fin 2
+  map-swap-2-Element-Type (Fin-Type-With-Cardinality-ℕ 2) ~ succ-Fin 2
 compute-swap-Fin-2 (inl (inr star)) =
   compute-swap-2-Element-Type
-    ( Fin-Type-With-Finite-Cardinality 2)
+    ( Fin-Type-With-Cardinality-ℕ 2)
     ( zero-Fin 1)
     ( one-Fin 1)
     ( neq-inl-inr)
 compute-swap-Fin-2 (inr star) =
   compute-swap-2-Element-Type
-    ( Fin-Type-With-Finite-Cardinality 2)
+    ( Fin-Type-With-Cardinality-ℕ 2)
     ( one-Fin 1)
     ( zero-Fin 1)
     ( neq-inr-inl)

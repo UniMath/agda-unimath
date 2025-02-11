@@ -70,17 +70,17 @@ is-torsorial-equiv-cube :
   (k : ℕ) (X : cube k) → is-torsorial (equiv-cube k X)
 is-torsorial-equiv-cube k X =
   is-torsorial-Eq-structure
-    ( is-torsorial-equiv-Type-With-Finite-Cardinality
+    ( is-torsorial-equiv-Type-With-Cardinality-ℕ
       { k = k}
-      ( dim-cube-Type-With-Finite-Cardinality k X))
+      ( dim-cube-Type-With-Cardinality-ℕ k X))
     ( pair
-      ( dim-cube-Type-With-Finite-Cardinality k X)
-      ( id-equiv-Type-With-Finite-Cardinality
+      ( dim-cube-Type-With-Cardinality-ℕ k X)
+      ( id-equiv-Type-With-Cardinality-ℕ
         { k = k}
-        ( dim-cube-Type-With-Finite-Cardinality k X)))
+        ( dim-cube-Type-With-Cardinality-ℕ k X)))
     ( is-torsorial-Eq-Π
       ( λ i →
-        is-torsorial-equiv-Type-With-Finite-Cardinality
+        is-torsorial-equiv-Type-With-Cardinality-ℕ
           { k = 2}
           ( axis-cube-UU-2 k X i)))
 

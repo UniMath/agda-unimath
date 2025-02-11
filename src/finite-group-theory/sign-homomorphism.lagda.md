@@ -57,24 +57,22 @@ that the sign map is a group homomorphism.
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : Type-With-Finite-Cardinality l n)
+  {l : Level} (n : ℕ) (X : Type-With-Cardinality-ℕ l n)
   where
 
-  sign-homomorphism-Fin-2 :
-    Aut (type-Type-With-Finite-Cardinality n X) → Fin 2
+  sign-homomorphism-Fin-2 : Aut (type-Type-With-Cardinality-ℕ n X) → Fin 2
   sign-homomorphism-Fin-2 f =
     pr1 (center (is-contr-parity-transposition-permutation n X f))
 
   preserves-add-sign-homomorphism-Fin-2 :
     (f g :
-      type-Type-With-Finite-Cardinality n X ≃
-      type-Type-With-Finite-Cardinality n X) →
+      type-Type-With-Cardinality-ℕ n X ≃ type-Type-With-Cardinality-ℕ n X) →
     Id
       ( sign-homomorphism-Fin-2 (f ∘e g))
       ( add-Fin 2 (sign-homomorphism-Fin-2 f) (sign-homomorphism-Fin-2 g))
   preserves-add-sign-homomorphism-Fin-2 f g =
     apply-universal-property-trunc-Prop
-      ( has-cardinality-type-Type-With-Finite-Cardinality n X)
+      ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
       ( Id-Prop
         ( Fin-Set 2)
         ( sign-homomorphism-Fin-2 (f ∘e g))
@@ -116,7 +114,7 @@ module _
                           ( inv
                             ( eq-htpy-equiv
                               ( retraction-permutation-list-transpositions-count
-                                ( type-Type-With-Finite-Cardinality n X)
+                                ( type-Type-With-Cardinality-ℕ n X)
                                 ( pair n h)
                                 ( f)))))))}
                 { y = center (is-contr-parity-transposition-permutation n X f)}
@@ -135,7 +133,7 @@ module _
                           ( inv
                             ( eq-htpy-equiv
                               ( retraction-permutation-list-transpositions-count
-                                ( type-Type-With-Finite-Cardinality n X)
+                                ( type-Type-With-Cardinality-ℕ n X)
                                 ( pair n h)
                                 ( g)))))))}
                 { y = center (is-contr-parity-transposition-permutation n X g)}
@@ -144,31 +142,30 @@ module _
     where
     list-trans :
       ( f' :
-        type-Type-With-Finite-Cardinality n X ≃
-        type-Type-With-Finite-Cardinality n X)
-      ( h : Fin n ≃ type-Type-With-Finite-Cardinality n X) →
+        type-Type-With-Cardinality-ℕ n X ≃ type-Type-With-Cardinality-ℕ n X)
+      ( h : Fin n ≃ type-Type-With-Cardinality-ℕ n X) →
       list
-        ( Σ ( type-Type-With-Finite-Cardinality n X → Decidable-Prop l)
+        ( Σ ( type-Type-With-Cardinality-ℕ n X → Decidable-Prop l)
             ( λ P →
               has-cardinality-ℕ 2
-                ( Σ ( type-Type-With-Finite-Cardinality n X)
+                ( Σ ( type-Type-With-Cardinality-ℕ n X)
                     ( type-Decidable-Prop ∘ P))))
     list-trans f' h =
       list-transpositions-permutation-count
-        ( type-Type-With-Finite-Cardinality n X)
+        ( type-Type-With-Cardinality-ℕ n X)
         ( pair n h)
         ( f')
     list-comp-f-g :
-      ( h : Fin n ≃ type-Type-With-Finite-Cardinality n X) →
+      ( h : Fin n ≃ type-Type-With-Cardinality-ℕ n X) →
       list
-        ( Σ ( (type-Type-With-Finite-Cardinality n X) → Decidable-Prop l)
+        ( Σ ( (type-Type-With-Cardinality-ℕ n X) → Decidable-Prop l)
             ( λ P →
               has-cardinality-ℕ 2
-                ( Σ ( type-Type-With-Finite-Cardinality n X)
+                ( Σ ( type-Type-With-Cardinality-ℕ n X)
                     ( type-Decidable-Prop ∘ P))))
     list-comp-f-g h = concat-list (list-trans f h) (list-trans g h)
     eq-list-comp-f-g :
-      ( h : Fin n ≃ type-Type-With-Finite-Cardinality n X) →
+      ( h : Fin n ≃ type-Type-With-Cardinality-ℕ n X) →
       Id
         ( f ∘e g)
         ( permutation-list-transpositions
@@ -178,7 +175,7 @@ module _
         ( λ x →
           ( inv
             ( retraction-permutation-list-transpositions-count
-              ( type-Type-With-Finite-Cardinality n X)
+              ( type-Type-With-Cardinality-ℕ n X)
               ( pair n h)
               ( f)
               ( map-equiv g x))) ∙
@@ -188,7 +185,7 @@ module _
                 ( list-trans f h)))
             ( inv
               ( retraction-permutation-list-transpositions-count
-                ( type-Type-With-Finite-Cardinality n X)
+                ( type-Type-With-Cardinality-ℕ n X)
                 ( pair n h)
                 ( g)
                 ( x))))) ∙
@@ -198,7 +195,7 @@ module _
 
   eq-sign-homomorphism-Fin-2-transposition :
     ( Y :
-      2-Element-Decidable-Subtype l (type-Type-With-Finite-Cardinality n X)) →
+      2-Element-Decidable-Subtype l (type-Type-With-Cardinality-ℕ n X)) →
     Id
       ( sign-homomorphism-Fin-2 (transposition Y))
       ( inr star)
@@ -219,22 +216,18 @@ module _
 
 module _
   {l l' : Level} (n : ℕ)
-  (X : Type-With-Finite-Cardinality l n) (Y : Type-With-Finite-Cardinality l' n)
+  (X : Type-With-Cardinality-ℕ l n) (Y : Type-With-Cardinality-ℕ l' n)
   where
 
   preserves-conjugation-sign-homomorphism-Fin-2 :
-    ( f :
-      type-Type-With-Finite-Cardinality n X ≃
-      type-Type-With-Finite-Cardinality n X) →
-    ( g :
-      type-Type-With-Finite-Cardinality n X ≃
-      type-Type-With-Finite-Cardinality n Y) →
+    ( f : type-Type-With-Cardinality-ℕ n X ≃ type-Type-With-Cardinality-ℕ n X) →
+    ( g : type-Type-With-Cardinality-ℕ n X ≃ type-Type-With-Cardinality-ℕ n Y) →
     Id
       ( sign-homomorphism-Fin-2 n Y (g ∘e (f ∘e inv-equiv g)))
       ( sign-homomorphism-Fin-2 n X f)
   preserves-conjugation-sign-homomorphism-Fin-2 f g =
     apply-universal-property-trunc-Prop
-      ( has-cardinality-type-Type-With-Finite-Cardinality n X)
+      ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
       ( Id-Prop
         ( Fin-Set 2)
         ( sign-homomorphism-Fin-2 n Y (g ∘e (f ∘e inv-equiv g)))
@@ -260,7 +253,7 @@ module _
                       ( map-list
                         ( map-equiv
                           ( equiv-universes-2-Element-Decidable-Subtype
-                            ( type-Type-With-Finite-Cardinality n Y)
+                            ( type-Type-With-Cardinality-ℕ n Y)
                             ( l)
                             ( l')))
                         ( list-conjugation h))))
@@ -269,7 +262,7 @@ module _
                       ( map-list
                         ( map-equiv
                           ( equiv-universes-2-Element-Decidable-Subtype
-                            ( type-Type-With-Finite-Cardinality n Y)
+                            ( type-Type-With-Cardinality-ℕ n Y)
                             ( l)
                             ( l')))
                         ( list-conjugation h))
@@ -278,8 +271,8 @@ module _
                         ( ( inv
                           ( ( eq-htpy-equiv
                             ( correct-transposition-conjugation-equiv-list
-                              ( type-Type-With-Finite-Cardinality n X)
-                              ( type-Type-With-Finite-Cardinality n Y)
+                              ( type-Type-With-Cardinality-ℕ n X)
+                              ( type-Type-With-Cardinality-ℕ n Y)
                               ( g)
                               ( list-trans h))) ∙
                             ( ap
@@ -289,11 +282,11 @@ module _
                                   permutation-list-transpositions
                                     ( list-trans h)}
                                 ( retraction-permutation-list-transpositions-count
-                                  ( type-Type-With-Finite-Cardinality n X)
+                                  ( type-Type-With-Cardinality-ℕ n X)
                                   ( pair n h)
                                   ( f)))))) ∙
                           ( eq-equiv-universes-transposition-list
-                            ( type-Type-With-Finite-Cardinality n Y)
+                            ( type-Type-With-Cardinality-ℕ n Y)
                             ( l)
                             ( l')
                             ( list-conjugation h))))))})) ∙
@@ -302,14 +295,14 @@ module _
             ( ( length-map-list
               ( map-equiv
                 ( equiv-universes-2-Element-Decidable-Subtype
-                  ( type-Type-With-Finite-Cardinality n Y)
+                  ( type-Type-With-Cardinality-ℕ n Y)
                   ( l)
                   ( l')))
               ( list-conjugation h)) ∙
               ( length-map-list
               ( transposition-conjugation-equiv
-                ( type-Type-With-Finite-Cardinality n X)
-                ( type-Type-With-Finite-Cardinality n Y)
+                ( type-Type-With-Cardinality-ℕ n X)
+                ( type-Type-With-Cardinality-ℕ n Y)
                 ( g))
               ( list-trans h)))) ∙
             ( ap
@@ -325,7 +318,7 @@ module _
                         ( inv
                           ( eq-htpy-equiv
                             ( retraction-permutation-list-transpositions-count
-                              ( type-Type-With-Finite-Cardinality n X)
+                              ( type-Type-With-Cardinality-ℕ n X)
                               ( pair n h)
                               ( f)))))))}
               { y = center (is-contr-parity-transposition-permutation n X f)}
@@ -333,34 +326,34 @@ module _
                 ( is-contr-parity-transposition-permutation n X f)))))
     where
     list-trans :
-      ( h : Fin n ≃ type-Type-With-Finite-Cardinality n X) →
+      ( h : Fin n ≃ type-Type-With-Cardinality-ℕ n X) →
       list
-        ( Σ ( type-Type-With-Finite-Cardinality n X → Decidable-Prop l)
+        ( Σ ( type-Type-With-Cardinality-ℕ n X → Decidable-Prop l)
             ( λ P →
               has-cardinality-ℕ 2
                 ( Σ
-                  ( type-Type-With-Finite-Cardinality n X)
+                  ( type-Type-With-Cardinality-ℕ n X)
                   ( type-Decidable-Prop ∘ P))))
     list-trans h =
       list-transpositions-permutation-count
-        ( type-Type-With-Finite-Cardinality n X)
+        ( type-Type-With-Cardinality-ℕ n X)
         ( pair n h)
         ( f)
     list-conjugation :
-      ( h : Fin n ≃ type-Type-With-Finite-Cardinality n X) →
+      ( h : Fin n ≃ type-Type-With-Cardinality-ℕ n X) →
       list
-        ( Σ ( (type-Type-With-Finite-Cardinality n Y) → Decidable-Prop l)
+        ( Σ ( (type-Type-With-Cardinality-ℕ n Y) → Decidable-Prop l)
             ( λ P →
               has-cardinality-ℕ 2
                 ( Σ
-                  ( type-Type-With-Finite-Cardinality n Y)
+                  ( type-Type-With-Cardinality-ℕ n Y)
                   ( type-Decidable-Prop ∘ P))))
     list-conjugation h =
       map-list
         ( transposition-conjugation-equiv
           { l4 = l}
-          ( type-Type-With-Finite-Cardinality n X)
-          ( type-Type-With-Finite-Cardinality n Y)
+          ( type-Type-With-Cardinality-ℕ n X)
+          ( type-Type-With-Cardinality-ℕ n Y)
           ( g))
         ( list-trans h)
 ```
@@ -369,11 +362,11 @@ module _
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : Type-With-Finite-Cardinality l n)
+  {l : Level} (n : ℕ) (X : Type-With-Cardinality-ℕ l n)
   where
 
   map-sign-homomorphism :
-    Aut (type-Type-With-Finite-Cardinality n X) → Aut (Fin 2)
+    Aut (type-Type-With-Cardinality-ℕ n X) → Aut (Fin 2)
   map-sign-homomorphism f =
     aut-point-Fin-2 (sign-homomorphism-Fin-2 n X f)
 
@@ -389,17 +382,17 @@ module _
 
   sign-homomorphism :
     hom-Group
-      ( symmetric-Group (set-Type-With-Finite-Cardinality n X))
+      ( symmetric-Group (set-Type-With-Cardinality-ℕ n X))
       ( symmetric-Group (Fin-Set 2))
   pr1 sign-homomorphism = map-sign-homomorphism
   pr2 sign-homomorphism = preserves-comp-map-sign-homomorphism
 
   eq-sign-homomorphism-transposition :
     ( Y :
-      2-Element-Decidable-Subtype l (type-Type-With-Finite-Cardinality n X)) →
+      2-Element-Decidable-Subtype l (type-Type-With-Cardinality-ℕ n X)) →
     Id
       ( map-hom-Group
-        ( symmetric-Group (set-Type-With-Finite-Cardinality n X))
+        ( symmetric-Group (set-Type-With-Cardinality-ℕ n X))
         ( symmetric-Group (Fin-Set 2))
         ( sign-homomorphism)
         ( transposition Y))

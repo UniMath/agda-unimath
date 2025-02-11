@@ -317,15 +317,15 @@ unbounded-π-finite-type-Finite-Type A =
 ### The type of all `n`-element types in `UU l` is unbounded π-finite
 
 ```agda
-is-unbounded-π-finite-Type-With-Finite-Cardinality :
-  {l : Level} (n : ℕ) → is-unbounded-π-finite (Type-With-Finite-Cardinality l n)
-is-unbounded-π-finite-Type-With-Finite-Cardinality n =
+is-unbounded-π-finite-Type-With-Cardinality-ℕ :
+  {l : Level} (n : ℕ) → is-unbounded-π-finite (Type-With-Cardinality-ℕ l n)
+is-unbounded-π-finite-Type-With-Cardinality-ℕ n =
   λ where
   .has-finitely-many-connected-components-is-unbounded-π-finite →
-    has-finitely-many-connected-components-Type-With-Finite-Cardinality n
+    has-finitely-many-connected-components-Type-With-Cardinality-ℕ n
   .is-unbounded-π-finite-Id-is-unbounded-π-finite x y →
     is-unbounded-π-finite-equiv
-      ( equiv-equiv-eq-Type-With-Finite-Cardinality n x y)
+      ( equiv-equiv-eq-Type-With-Cardinality-ℕ n x y)
       ( is-unbounded-π-finite-is-finite
         ( is-finite-type-equiv
           ( is-finite-has-finite-cardinality (n , pr2 x))

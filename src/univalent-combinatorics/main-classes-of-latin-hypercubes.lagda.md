@@ -63,12 +63,12 @@ Main-Class-Latin-Hypercube l1 l2 n =
 ```agda
 Main-Class-Latin-Hypercube-of-Order : (n m : ℕ) → UU (lsuc lzero)
 Main-Class-Latin-Hypercube-of-Order n m =
-  Σ ( unordered-tuple (succ-ℕ n) (Type-With-Finite-Cardinality lzero m))
+  Σ ( unordered-tuple (succ-ℕ n) (Type-With-Cardinality-ℕ lzero m))
     ( λ A →
       Σ ( product-unordered-tuple-types (succ-ℕ n)
           ( map-unordered-tuple
             ( succ-ℕ n)
-            ( type-Type-With-Finite-Cardinality m) A) →
+            ( type-Type-With-Cardinality-ℕ m) A) →
           Decidable-Prop lzero)
         ( λ R →
           (i : type-unordered-tuple (succ-ℕ n) A)
@@ -77,17 +77,17 @@ Main-Class-Latin-Hypercube-of-Order n m =
               ( unordered-tuple-complement-point-type-unordered-tuple n
                 ( map-unordered-tuple
                   ( succ-ℕ n)
-                  ( type-Type-With-Finite-Cardinality m) A)
+                  ( type-Type-With-Cardinality-ℕ m) A)
                 ( i))) →
           is-contr
-            ( Σ ( type-Type-With-Finite-Cardinality m
+            ( Σ ( type-Type-With-Cardinality-ℕ m
                   ( element-unordered-tuple (succ-ℕ n) A i))
                 ( λ a →
                   type-Decidable-Prop
                     ( R ( map-equiv-pr-product-unordered-tuple-types n
                           ( map-unordered-tuple
                             ( succ-ℕ n)
-                            ( type-Type-With-Finite-Cardinality m) A)
+                            ( type-Type-With-Cardinality-ℕ m) A)
                           ( i)
                           ( f)
                           ( a)))))))
@@ -104,7 +104,7 @@ is-1-type-Main-Class-Latin-Hypercube-of-Order n m =
   is-1-type-Σ
     ( is-1-type-unordered-tuple
       ( succ-ℕ n)
-      ( is-1-type-Type-With-Finite-Cardinality m))
+      ( is-1-type-Type-With-Cardinality-ℕ m))
     ( λ A →
       is-1-type-Σ
         ( is-1-type-function-type (is-1-type-is-set is-set-Decidable-Prop))
@@ -124,50 +124,50 @@ is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order k n m =
   is-untruncated-π-finite-Σ k
     ( is-untruncated-π-finite-Σ
       ( succ-ℕ k)
-      ( is-untruncated-π-finite-Type-With-Finite-Cardinality
+      ( is-untruncated-π-finite-Type-With-Cardinality-ℕ
         ( succ-ℕ (succ-ℕ k))
         ( succ-ℕ n))
       ( λ X →
         is-untruncated-π-finite-Π
           ( succ-ℕ k)
-          ( is-finite-type-Type-With-Finite-Cardinality (succ-ℕ n) X)
+          ( is-finite-type-Type-With-Cardinality-ℕ (succ-ℕ n) X)
           ( λ i →
-            is-untruncated-π-finite-Type-With-Finite-Cardinality (succ-ℕ k) m)))
+            is-untruncated-π-finite-Type-With-Cardinality-ℕ (succ-ℕ k) m)))
     ( λ A →
       is-untruncated-π-finite-Σ k
         ( is-untruncated-π-finite-is-finite
           ( succ-ℕ k)
           ( is-finite-Π
             ( is-finite-Π
-              ( is-finite-type-Type-With-Finite-Cardinality
+              ( is-finite-type-Type-With-Cardinality-ℕ
                 ( succ-ℕ n)
-                ( type-unordered-tuple-Type-With-Finite-Cardinality
+                ( type-unordered-tuple-Type-With-Cardinality-ℕ
                   ( succ-ℕ n)
                   ( A)))
               ( λ i →
-                is-finite-type-Type-With-Finite-Cardinality m
+                is-finite-type-Type-With-Cardinality-ℕ m
                   ( element-unordered-tuple (succ-ℕ n) A i)))
             ( λ f → is-finite-Decidable-Prop)))
         ( λ R →
           is-untruncated-π-finite-is-finite k
             ( is-finite-Π
-              ( is-finite-type-Type-With-Finite-Cardinality
+              ( is-finite-type-Type-With-Cardinality-ℕ
                 ( succ-ℕ n)
-                ( type-unordered-tuple-Type-With-Finite-Cardinality
+                ( type-unordered-tuple-Type-With-Cardinality-ℕ
                   ( succ-ℕ n)
                   ( A)))
               ( λ i →
                 is-finite-Π
                   ( is-finite-Π
                     ( is-finite-has-cardinality-ℕ n
-                      ( has-cardinality-type-complement-element-Type-With-Finite-Cardinality
+                      ( has-cardinality-type-complement-element-Type-With-Cardinality-ℕ
                         ( n)
-                        ( type-unordered-tuple-Type-With-Finite-Cardinality
+                        ( type-unordered-tuple-Type-With-Cardinality-ℕ
                             ( succ-ℕ n)
                             ( A) ,
                           i)))
                     ( λ j →
-                      is-finite-type-Type-With-Finite-Cardinality m
+                      is-finite-type-Type-With-Cardinality-ℕ m
                         ( element-unordered-tuple (succ-ℕ n) A (pr1 j))))
                   ( λ f →
                     is-finite-is-decidable-Prop
@@ -178,12 +178,12 @@ is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order k n m =
                             R ( map-equiv-pr-product-unordered-tuple-types n
                                 ( map-unordered-tuple
                                   ( succ-ℕ n)
-                                  ( type-Type-With-Finite-Cardinality m)
+                                  ( type-Type-With-Cardinality-ℕ m)
                                   ( A))
                                 ( i)
                                 ( f)
                                 ( x)))
-                          ( is-finite-type-Type-With-Finite-Cardinality m
+                          ( is-finite-type-Type-With-Cardinality-ℕ m
                             ( element-unordered-tuple (succ-ℕ n) A i)))))))))
 ```
 

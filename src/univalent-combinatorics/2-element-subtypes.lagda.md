@@ -247,7 +247,7 @@ module _
   is-injective-element-unordered-pair (pair X f) H {x} {y} p =
     apply-universal-property-trunc-Prop
       ( has-two-elements-type-unordered-pair (pair X f))
-      ( Id-Prop (set-Type-With-Finite-Cardinality X) x y)
+      ( Id-Prop (set-Type-With-Cardinality-ℕ X) x y)
       ( λ h → {!!})
     where
     first-element : (Fin 2 ≃ (type-2-Element-Type X)) →

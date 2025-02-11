@@ -30,11 +30,11 @@ The alternating group on a finite set `X` is the group of even permutations of
 
 ```agda
 module _
-  {l} (n : ℕ) (X : Type-With-Finite-Cardinality l n)
+  {l} (n : ℕ) (X : Type-With-Cardinality-ℕ l n)
   where
   alternating-Group : Group l
   alternating-Group = group-kernel-hom-Group
-    ( symmetric-Group (set-Type-With-Finite-Cardinality n X))
+    ( symmetric-Group (set-Type-With-Cardinality-ℕ n X))
     ( symmetric-Group (Fin-Set 2))
     ( sign-homomorphism n X)
 ```

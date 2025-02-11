@@ -39,8 +39,8 @@ follow from the [univalence axiom](foundation.univalence.md) that the
 unlabeled-structure-species-types :
   {l1 l2 : Level} (F : species-types l1 l2) → ℕ → UU (lsuc l1 ⊔ l2)
 unlabeled-structure-species-types {l1} {l2} F n =
-  Σ ( Type-With-Finite-Cardinality l1 n)
-    ( λ X → F (type-Type-With-Finite-Cardinality n X))
+  Σ ( Type-With-Cardinality-ℕ l1 n)
+    ( λ X → F (type-Type-With-Cardinality-ℕ n X))
 
 module _
   {l1 l2 : Level} (F : species-types l1 l2) {k : ℕ}
@@ -48,24 +48,24 @@ module _
   where
 
   type-of-cardinality-unlabeled-structure-species-types :
-    Type-With-Finite-Cardinality l1 k
+    Type-With-Cardinality-ℕ l1 k
   type-of-cardinality-unlabeled-structure-species-types = pr1 X
 
   type-unlabeled-structure-species-types : UU l1
   type-unlabeled-structure-species-types =
-    type-Type-With-Finite-Cardinality k
+    type-Type-With-Cardinality-ℕ k
       type-of-cardinality-unlabeled-structure-species-types
 
   has-cardinality-type-unlabeled-structure-species-types :
     has-cardinality-ℕ k type-unlabeled-structure-species-types
   has-cardinality-type-unlabeled-structure-species-types =
-    has-cardinality-type-Type-With-Finite-Cardinality
+    has-cardinality-type-Type-With-Cardinality-ℕ
       k
       type-of-cardinality-unlabeled-structure-species-types
 
   finite-type-unlabeled-structure-species-types : Finite-Type l1
   finite-type-unlabeled-structure-species-types =
-    finite-type-Type-With-Finite-Cardinality k
+    finite-type-Type-With-Cardinality-ℕ k
       type-of-cardinality-unlabeled-structure-species-types
 
   structure-unlabeled-structure-species-types :

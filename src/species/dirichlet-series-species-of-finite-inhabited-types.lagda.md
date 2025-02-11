@@ -48,7 +48,7 @@ of this formula then becomes
 
 ```text
 Σ ( n : ℕ ∖ {0}),
-  ( Σ (F : Type-With-Finite-Cardinality n) , T (F) × (S → cycle-prime-decomposition-ℕ (n))
+  ( Σ (F : Type-With-Cardinality-ℕ n) , T (F) × (S → cycle-prime-decomposition-ℕ (n))
 ```
 
 We have picked the concrete group `cycle-prime-decomposition-ℕ (n)` because it
@@ -64,12 +64,12 @@ dirichlet-series-species-Inhabited-Finite-Type :
 dirichlet-series-species-Inhabited-Finite-Type {l1} T S =
   Σ ( ℕ)
     ( λ n →
-      Σ ( Type-With-Finite-Cardinality l1 (succ-ℕ n))
+      Σ ( Type-With-Cardinality-ℕ l1 (succ-ℕ n))
         ( λ F →
           type-Finite-Type
             ( T
-              ( type-Type-With-Finite-Cardinality (succ-ℕ n) F ,
-                is-finite-and-inhabited-type-Type-With-Finite-Cardinality-succ-ℕ
+              ( type-Type-With-Cardinality-ℕ (succ-ℕ n) F ,
+                is-finite-and-inhabited-type-Type-With-Cardinality-ℕ-succ-ℕ
                   n
                   F)) ×
           S → cycle-prime-decomposition-ℕ (succ-ℕ n) _))

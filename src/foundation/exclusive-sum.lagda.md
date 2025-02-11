@@ -133,7 +133,7 @@ all-elements-equal-type-symmetric-exclusive-sum-Prop :
 all-elements-equal-type-symmetric-exclusive-sum-Prop (X , P) x y =
   cases-is-prop-type-symmetric-exclusive-sum-Prop
     ( has-decidable-equality-is-finite
-      ( is-finite-type-Type-With-Finite-Cardinality 2 X)
+      ( is-finite-type-Type-With-Cardinality-ℕ 2 X)
       ( pr1 x)
       ( pr1 y))
   where

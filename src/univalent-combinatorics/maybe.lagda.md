@@ -20,10 +20,10 @@ open import univalent-combinatorics.finite-types
 </details>
 
 ```agda
-add-free-point-Type-With-Finite-Cardinality :
+add-free-point-Type-With-Cardinality-ℕ :
   {l1 : Level} (k : ℕ) →
-  Type-With-Finite-Cardinality l1 k →
-  Type-With-Finite-Cardinality l1 (succ-ℕ k)
-add-free-point-Type-With-Finite-Cardinality k X =
-  coproduct-Type-With-Finite-Cardinality k 1 X unit-Type-With-Finite-Cardinality
+  Type-With-Cardinality-ℕ l1 k →
+  Type-With-Cardinality-ℕ l1 (succ-ℕ k)
+add-free-point-Type-With-Cardinality-ℕ k X =
+  coproduct-Type-With-Cardinality-ℕ k 1 X unit-Type-With-Cardinality-ℕ
 ```
