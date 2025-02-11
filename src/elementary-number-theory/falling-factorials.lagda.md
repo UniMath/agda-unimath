@@ -15,7 +15,9 @@ open import elementary-number-theory.natural-numbers
 
 ## Idea
 
-The falling factorial (n)\_m is the number n(n-1)⋯(n-m+1)
+The
+{{#concept "falling factorial" WD="falling and rising factorial" WDID=Q2339261 Agda=falling-factorial-ℕ}}
+`(n)ₘ` is the number `n(n-1)⋯(n-m+1)`.
 
 ## Definition
 

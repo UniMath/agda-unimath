@@ -20,8 +20,8 @@ open import group-theory.groups
 
 ## Idea
 
-The dihedral group `D_k` is defined by the dihedral group construction applied
-to the cyclic group `ℤ-Mod k`.
+The dihedral group `Dₖ` is defined by the dihedral group construction applied to
+the cyclic group `ℤ-Mod k`.
 
 ## Definition
 

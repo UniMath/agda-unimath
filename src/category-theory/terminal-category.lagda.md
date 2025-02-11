@@ -14,9 +14,10 @@ open import category-theory.functors-precategories
 open import category-theory.gaunt-categories
 open import category-theory.isomorphisms-in-categories
 open import category-theory.isomorphisms-in-precategories
+open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
-open import category-theory.preunivalent-categories
 open import category-theory.strict-categories
+open import category-theory.strongly-preunivalent-categories
 
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
@@ -124,14 +125,15 @@ pr2 terminal-Category = is-category-terminal-Category
 ### The terminal preunivalent category
 
 ```agda
-is-preunivalent-terminal-Category :
-  is-preunivalent-Precategory terminal-Precategory
-is-preunivalent-terminal-Category =
-  is-preunivalent-category-Category terminal-Category
+is-strongly-preunivalent-terminal-Category :
+  is-strongly-preunivalent-Precategory terminal-Precategory
+is-strongly-preunivalent-terminal-Category =
+  is-strongly-preunivalent-category-Category terminal-Category
 
-terminal-Preunivalent-Category : Preunivalent-Category lzero lzero
-terminal-Preunivalent-Category =
-  preunivalent-category-Category terminal-Category
+terminal-Strongly-Preunivalent-Category :
+  Strongly-Preunivalent-Category lzero lzero
+terminal-Strongly-Preunivalent-Category =
+  strongly-preunivalent-category-Category terminal-Category
 ```
 
 ### The terminal strict category
@@ -240,6 +242,42 @@ module _
     terminal-functor-Precategory
   pr2 is-contr-functor-terminal-Precategory =
     uniqueness-terminal-functor-Precategory
+```
+
+### A morphism in a precategory is equivalent to a natural transformation from the terminal precategory
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  is-equiv-natural-transformation-constant-functor-Precategory :
+    (a b : obj-Precategory C) →
+    is-equiv
+      ( natural-transformation-constant-functor-Precategory
+        terminal-Precategory C {a} {b})
+  is-equiv-natural-transformation-constant-functor-Precategory a b =
+    is-equiv-is-invertible
+      ( λ τ →
+        hom-family-natural-transformation-Precategory terminal-Precategory C
+        ( point-Precategory C a) (point-Precategory C b) τ star)
+      ( λ τ →
+        eq-htpy-hom-family-natural-transformation-Precategory
+          terminal-Precategory C
+          ( point-Precategory C a) (point-Precategory C b) _ _
+          ( λ _ → refl))
+      ( λ f → refl)
+
+  equiv-natural-transformation-constant-functor-Precategory :
+    (a b : obj-Precategory C) →
+    hom-Precategory C a b ≃
+    natural-transformation-Precategory terminal-Precategory C
+      (point-Precategory C a) (point-Precategory C b)
+  pr1 (equiv-natural-transformation-constant-functor-Precategory a b) =
+    natural-transformation-constant-functor-Precategory
+      terminal-Precategory C {a} {b}
+  pr2 (equiv-natural-transformation-constant-functor-Precategory a b) =
+    is-equiv-natural-transformation-constant-functor-Precategory a b
 ```
 
 ## See also

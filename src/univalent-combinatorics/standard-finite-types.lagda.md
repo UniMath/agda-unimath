@@ -34,7 +34,6 @@ open import foundation.noncontractible-types
 open import foundation.preunivalent-type-families
 open import foundation.raising-universe-levels
 open import foundation.retractions
-open import foundation.sections
 open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.unit-type
@@ -73,7 +72,7 @@ inl-Fin k = inl
 
 emb-inl-Fin : (k : ℕ) → Fin k ↪ Fin (succ-ℕ k)
 pr1 (emb-inl-Fin k) = inl-Fin k
-pr2 (emb-inl-Fin k) = is-emb-inl (Fin k) unit
+pr2 (emb-inl-Fin k) = is-emb-inl
 
 neg-one-Fin : (k : ℕ) → Fin (succ-ℕ k)
 neg-one-Fin k = inr star
@@ -180,6 +179,47 @@ is-not-contractible-Fin (succ-ℕ (succ-ℕ k)) f C =
   neq-inl-inr (eq-is-contr' C (neg-two-Fin (succ-ℕ k)) (neg-one-Fin (succ-ℕ k)))
 ```
 
+### The zero elements in the standard finite types
+
+```agda
+zero-Fin : (k : ℕ) → Fin (succ-ℕ k)
+zero-Fin zero-ℕ = inr star
+zero-Fin (succ-ℕ k) = inl (zero-Fin k)
+
+is-zero-Fin : (k : ℕ) → Fin k → UU lzero
+is-zero-Fin (succ-ℕ k) x = x ＝ zero-Fin k
+
+is-zero-Fin' : (k : ℕ) → Fin k → UU lzero
+is-zero-Fin' (succ-ℕ k) x = zero-Fin k ＝ x
+
+is-nonzero-Fin : (k : ℕ) → Fin k → UU lzero
+is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
+```
+
+### The successor function on the standard finite types
+
+```agda
+skip-zero-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
+skip-zero-Fin (succ-ℕ k) (inl x) = inl (skip-zero-Fin k x)
+skip-zero-Fin (succ-ℕ k) (inr star) = inr star
+
+succ-Fin : (k : ℕ) → Fin k → Fin k
+succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
+succ-Fin (succ-ℕ k) (inr star) = (zero-Fin k)
+
+Fin-Type-With-Endomorphism : ℕ → Type-With-Endomorphism lzero
+pr1 (Fin-Type-With-Endomorphism k) = Fin k
+pr2 (Fin-Type-With-Endomorphism k) = succ-Fin k
+```
+
+### The bounded successor function on the standard finite types
+
+```agda
+bounded-succ-Fin : (k : ℕ) → Fin k → Fin k
+bounded-succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
+bounded-succ-Fin (succ-ℕ k) (inr star) = inr star
+```
+
 ### The inclusion of `Fin k` into `ℕ`
 
 ```agda
@@ -230,39 +270,6 @@ is-emb-nat-Fin k = is-emb-is-injective is-set-ℕ (is-injective-nat-Fin k)
 emb-nat-Fin : (k : ℕ) → Fin k ↪ ℕ
 pr1 (emb-nat-Fin k) = nat-Fin k
 pr2 (emb-nat-Fin k) = is-emb-nat-Fin k
-```
-
-### The zero elements in the standard finite types
-
-```agda
-zero-Fin : (k : ℕ) → Fin (succ-ℕ k)
-zero-Fin zero-ℕ = inr star
-zero-Fin (succ-ℕ k) = inl (zero-Fin k)
-
-is-zero-Fin : (k : ℕ) → Fin k → UU lzero
-is-zero-Fin (succ-ℕ k) x = x ＝ zero-Fin k
-
-is-zero-Fin' : (k : ℕ) → Fin k → UU lzero
-is-zero-Fin' (succ-ℕ k) x = zero-Fin k ＝ x
-
-is-nonzero-Fin : (k : ℕ) → Fin k → UU lzero
-is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
-```
-
-### The successor function on the standard finite types
-
-```agda
-skip-zero-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
-skip-zero-Fin (succ-ℕ k) (inl x) = inl (skip-zero-Fin k x)
-skip-zero-Fin (succ-ℕ k) (inr star) = inr star
-
-succ-Fin : (k : ℕ) → Fin k → Fin k
-succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
-succ-Fin (succ-ℕ k) (inr star) = (zero-Fin k)
-
-Fin-Type-With-Endomorphism : ℕ → Type-With-Endomorphism lzero
-pr1 (Fin-Type-With-Endomorphism k) = Fin k
-pr2 (Fin-Type-With-Endomorphism k) = succ-Fin k
 ```
 
 ```agda

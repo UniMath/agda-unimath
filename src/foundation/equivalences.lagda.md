@@ -16,6 +16,7 @@ open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
 open import foundation.logical-equivalences
+open import foundation.transport-along-identifications
 open import foundation.transposition-identifications-along-equivalences
 open import foundation.truncated-maps
 open import foundation.universal-property-equivalences
@@ -148,7 +149,8 @@ module _
     ( map-equiv e , map-inv-equiv e , is-retraction-map-inv-equiv e)
 
   retract-inv-equiv : B ≃ A → A retract-of B
-  retract-inv-equiv = retract-equiv ∘ inv-equiv
+  retract-inv-equiv e =
+    ( map-inv-equiv e , map-equiv e , is-section-map-inv-equiv e)
 ```
 
 ### Being an equivalence is a property
@@ -570,6 +572,19 @@ equiv-precomp-equiv :
   (A ≃ B) → (C : UU l3) → (B ≃ C) ≃ (A ≃ C)
 pr1 (equiv-precomp-equiv e C) = _∘e e
 pr2 (equiv-precomp-equiv e C) = is-equiv-precomp-equiv-equiv e
+```
+
+### Computing transport in the type of equivalences
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (B : A → UU l2) (C : A → UU l3)
+  where
+
+  tr-equiv-type :
+    {x y : A} (p : x ＝ y) (e : B x ≃ C x) →
+    tr (λ x → B x ≃ C x) p e ＝ equiv-tr C p ∘e e ∘e equiv-tr B (inv p)
+  tr-equiv-type refl e = eq-htpy-equiv refl-htpy
 ```
 
 ### A cospan in which one of the legs is an equivalence is a pullback if and only if the corresponding map on the cone is an equivalence

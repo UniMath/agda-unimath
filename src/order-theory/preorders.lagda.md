@@ -12,12 +12,14 @@ open import category-theory.precategories
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -28,17 +30,23 @@ open import foundation.universe-levels
 A **preorder** is a type equipped with a reflexive, transitive relation that is
 valued in propositions.
 
-## Definition
+## Definitions
+
+### The predicate on a propositional relation of being a preorder
+
+```agda
+is-preorder-Relation-Prop :
+  {l1 l2 : Level} {X : UU l1} → Relation-Prop l2 X → UU (l1 ⊔ l2)
+is-preorder-Relation-Prop R =
+  is-reflexive-Relation-Prop R × is-transitive-Relation-Prop R
+```
+
+### The type of preorders
 
 ```agda
 Preorder : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Preorder l1 l2 =
-  Σ ( UU l1)
-    ( λ X →
-      Σ ( Relation-Prop l2 X)
-        ( λ R →
-          ( is-reflexive (type-Relation-Prop R)) ×
-          ( is-transitive (type-Relation-Prop R))))
+  Σ (UU l1) (λ X → Σ (Relation-Prop l2 X) (is-preorder-Relation-Prop))
 
 module _
   {l1 l2 : Level} (X : Preorder l1 l2)
@@ -47,32 +55,48 @@ module _
   type-Preorder : UU l1
   type-Preorder = pr1 X
 
-  leq-Preorder-Prop : Relation-Prop l2 type-Preorder
-  leq-Preorder-Prop = pr1 (pr2 X)
+  leq-prop-Preorder : Relation-Prop l2 type-Preorder
+  leq-prop-Preorder = pr1 (pr2 X)
 
   leq-Preorder : (x y : type-Preorder) → UU l2
-  leq-Preorder x y = type-Prop (leq-Preorder-Prop x y)
+  leq-Preorder x y = type-Prop (leq-prop-Preorder x y)
 
   is-prop-leq-Preorder : (x y : type-Preorder) → is-prop (leq-Preorder x y)
-  is-prop-leq-Preorder = is-prop-type-Relation-Prop leq-Preorder-Prop
+  is-prop-leq-Preorder = is-prop-type-Relation-Prop leq-prop-Preorder
+
+  concatenate-eq-leq-Preorder' :
+    {x y z : type-Preorder} → x ＝ y → leq-Preorder x z → leq-Preorder y z
+  concatenate-eq-leq-Preorder' {z = z} = tr (λ p → leq-Preorder p z)
 
   concatenate-eq-leq-Preorder :
     {x y z : type-Preorder} → x ＝ y → leq-Preorder y z → leq-Preorder x z
-  concatenate-eq-leq-Preorder refl = id
+  concatenate-eq-leq-Preorder p = concatenate-eq-leq-Preorder' (inv p)
 
   concatenate-leq-eq-Preorder :
     {x y z : type-Preorder} → leq-Preorder x y → y ＝ z → leq-Preorder x z
-  concatenate-leq-eq-Preorder H refl = H
+  concatenate-leq-eq-Preorder {x} H p = tr (leq-Preorder x) p H
 
-  le-Preorder-Prop : Relation-Prop (l1 ⊔ l2) type-Preorder
-  le-Preorder-Prop x y =
-    product-Prop (x ≠ y , is-prop-neg) (leq-Preorder-Prop x y)
+  concatenate-eq-leq-eq-Preorder' :
+    {x y z w : type-Preorder} →
+    x ＝ y → leq-Preorder x z → z ＝ w → leq-Preorder y w
+  concatenate-eq-leq-eq-Preorder' p H q =
+    concatenate-eq-leq-Preorder' p (concatenate-leq-eq-Preorder H q)
+
+  concatenate-eq-leq-eq-Preorder :
+    {x y z w : type-Preorder} →
+    x ＝ y → leq-Preorder y z → z ＝ w → leq-Preorder x w
+  concatenate-eq-leq-eq-Preorder p H q =
+    concatenate-eq-leq-Preorder p (concatenate-leq-eq-Preorder H q)
+
+  le-prop-Preorder : Relation-Prop (l1 ⊔ l2) type-Preorder
+  le-prop-Preorder x y =
+    product-Prop (x ≠ y , is-prop-neg) (leq-prop-Preorder x y)
 
   le-Preorder : Relation (l1 ⊔ l2) type-Preorder
-  le-Preorder x y = type-Prop (le-Preorder-Prop x y)
+  le-Preorder x y = type-Prop (le-prop-Preorder x y)
 
   is-prop-le-Preorder : (x y : type-Preorder) → is-prop (le-Preorder x y)
-  is-prop-le-Preorder = is-prop-type-Relation-Prop le-Preorder-Prop
+  is-prop-le-Preorder = is-prop-type-Relation-Prop le-prop-Preorder
 
   is-reflexive-leq-Preorder : is-reflexive (leq-Preorder)
   is-reflexive-leq-Preorder = pr1 (pr2 (pr2 X))
@@ -140,13 +164,13 @@ module _
   precategory-Preorder =
     make-Precategory
       ( type-Preorder X)
-      ( λ x y → set-Prop (leq-Preorder-Prop X x y))
+      ( λ x y → set-Prop (leq-prop-Preorder X x y))
       ( λ {x} {y} {z} → is-transitive-leq-Preorder X x y z)
       ( refl-leq-Preorder X)
       ( λ {x} {y} {z} {w} h g f →
-        eq-is-prop (is-prop-type-Prop (leq-Preorder-Prop X x w)))
-      ( λ {x} {y} f → eq-is-prop (is-prop-type-Prop (leq-Preorder-Prop X x y)))
-      ( λ {x} {y} f → eq-is-prop (is-prop-type-Prop (leq-Preorder-Prop X x y)))
+        eq-is-prop (is-prop-type-Prop (leq-prop-Preorder X x w)))
+      ( λ {x} {y} f → eq-is-prop (is-prop-type-Prop (leq-prop-Preorder X x y)))
+      ( λ {x} {y} f → eq-is-prop (is-prop-type-Prop (leq-prop-Preorder X x y)))
 
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)

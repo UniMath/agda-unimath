@@ -43,6 +43,7 @@ open import foundation.universe-levels
 open import foundation-core.torsorial-type-families
 
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -50,9 +51,13 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A type is **finite** if it is
-[merely equivalent](foundation.mere-equivalences.md) to a
+A type is
+{{#concept "finite" Disambiguation="type" Agda=is-finite WD="finite set" WDID=Q272404}}
+if it is [merely equivalent](foundation.mere-equivalences.md) to a
 [standard finite type](univalent-combinatorics.standard-finite-types.md).
+
+**Terminology.** This finiteness condition is also referred to as _Bishop
+finiteness_. (Cf. the external links at the bottom of this page)
 
 ## Definition
 
@@ -81,18 +86,18 @@ abstract
 ### The type of all finite types of a universe level
 
 ```agda
-𝔽 : (l : Level) → UU (lsuc l)
-𝔽 l = Σ (UU l) is-finite
+Finite-Type : (l : Level) → UU (lsuc l)
+Finite-Type l = Σ (UU l) is-finite
 
-type-𝔽 : {l : Level} → 𝔽 l → UU l
-type-𝔽 = pr1
+type-Finite-Type : {l : Level} → Finite-Type l → UU l
+type-Finite-Type = pr1
 
-is-finite-type-𝔽 :
-  {l : Level} (X : 𝔽 l) → is-finite (type-𝔽 X)
-is-finite-type-𝔽 = pr2
+is-finite-type-Finite-Type :
+  {l : Level} (X : Finite-Type l) → is-finite (type-Finite-Type X)
+is-finite-type-Finite-Type = pr2
 ```
 
-### Types with cardinality `k`
+### Types with finite cardinality `k`
 
 ```agda
 has-cardinality-Prop :
@@ -188,9 +193,9 @@ abstract
   is-finite-empty : is-finite empty
   is-finite-empty = is-finite-count count-empty
 
-empty-𝔽 : 𝔽 lzero
-pr1 empty-𝔽 = empty
-pr2 empty-𝔽 = is-finite-empty
+empty-Finite-Type : Finite-Type lzero
+pr1 empty-Finite-Type = empty
+pr2 empty-Finite-Type = is-finite-empty
 
 empty-UU-Fin : UU-Fin lzero zero-ℕ
 pr1 empty-UU-Fin = empty
@@ -237,9 +242,9 @@ abstract
   is-finite-raise-unit {l1} =
     is-finite-equiv (compute-raise-unit l1) is-finite-unit
 
-unit-𝔽 : 𝔽 lzero
-pr1 unit-𝔽 = unit
-pr2 unit-𝔽 = is-finite-unit
+unit-Finite-Type : Finite-Type lzero
+pr1 unit-Finite-Type = unit
+pr2 unit-Finite-Type = is-finite-unit
 
 unit-UU-Fin : UU-Fin lzero 1
 pr1 unit-UU-Fin = unit
@@ -268,9 +273,9 @@ abstract
   is-finite-Fin : (k : ℕ) → is-finite (Fin k)
   is-finite-Fin k = is-finite-count (count-Fin k)
 
-Fin-𝔽 : ℕ → 𝔽 lzero
-pr1 (Fin-𝔽 k) = Fin k
-pr2 (Fin-𝔽 k) = is-finite-Fin k
+Fin-Finite-Type : ℕ → Finite-Type lzero
+pr1 (Fin-Finite-Type k) = Fin k
+pr2 (Fin-Finite-Type k) = is-finite-Fin k
 
 has-cardinality-raise-Fin :
   {l : Level} (k : ℕ) → has-cardinality k (raise-Fin l k)
@@ -297,7 +302,7 @@ abstract
       ( has-cardinality-type-UU-Fin k X)
       ( is-finite-Fin k)
 
-finite-type-UU-Fin : {l : Level} (k : ℕ) → UU-Fin l k → 𝔽 l
+finite-type-UU-Fin : {l : Level} (k : ℕ) → UU-Fin l k → Finite-Type l
 pr1 (finite-type-UU-Fin k X) = type-UU-Fin k X
 pr2 (finite-type-UU-Fin k X) = is-finite-type-UU-Fin k X
 ```
@@ -395,8 +400,9 @@ module _
   has-cardinality-is-finite H =
     pr2 (has-finite-cardinality-is-finite H)
 
-number-of-elements-𝔽 : {l : Level} → 𝔽 l → ℕ
-number-of-elements-𝔽 X = number-of-elements-is-finite (is-finite-type-𝔽 X)
+number-of-elements-Finite-Type : {l : Level} → Finite-Type l → ℕ
+number-of-elements-Finite-Type X =
+  number-of-elements-is-finite (is-finite-type-Finite-Type X)
 ```
 
 ### If a type has cardinality `k` and cardinality `l`, then `k = l`
@@ -414,6 +420,24 @@ eq-cardinality H K =
         ( λ f → is-equivalence-injective-Fin (inv-equiv f ∘e e)))
 ```
 
+### Equivalent finite types have the same cardinality
+
+```agda
+eq-cardinality-equiv-is-finite :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  (H : is-finite A) (K : is-finite B) →
+  number-of-elements-is-finite H ＝ number-of-elements-is-finite K
+eq-cardinality-equiv-is-finite e H K =
+  map-universal-property-trunc-Prop
+    ( Id-Prop ℕ-Set _ _)
+    ( λ c@(n , f) →
+      eq-cardinality
+        ( has-cardinality-is-finite H)
+        ( unit-trunc-Prop (inv-equiv e ∘e f)) ∙
+      compute-number-of-elements-is-finite c K)
+    ( K)
+```
+
 ### Any finite type is a set
 
 ```agda
@@ -425,12 +449,13 @@ abstract
       ( is-set-Prop X)
       ( λ e → is-set-count e)
 
-is-set-type-𝔽 : {l : Level} (X : 𝔽 l) → is-set (type-𝔽 X)
-is-set-type-𝔽 X = is-set-is-finite (is-finite-type-𝔽 X)
+is-set-type-Finite-Type :
+  {l : Level} (X : Finite-Type l) → is-set (type-Finite-Type X)
+is-set-type-Finite-Type X = is-set-is-finite (is-finite-type-Finite-Type X)
 
-set-𝔽 : {l : Level} → 𝔽 l → Set l
-pr1 (set-𝔽 X) = type-𝔽 X
-pr2 (set-𝔽 X) = is-set-is-finite (is-finite-type-𝔽 X)
+set-Finite-Type : {l : Level} → Finite-Type l → Set l
+pr1 (set-Finite-Type X) = type-Finite-Type X
+pr2 (set-Finite-Type X) = is-set-is-finite (is-finite-type-Finite-Type X)
 ```
 
 ### Any type of cardinality `k` is a set
@@ -502,12 +527,12 @@ is-decidable-is-contr-is-finite H =
 ### The type of all pairs consisting of a natural number `k` and a type of cardinality `k` is equivalent to the type of all finite types
 
 ```agda
-map-compute-total-UU-Fin : {l : Level} → Σ ℕ (UU-Fin l) → 𝔽 l
+map-compute-total-UU-Fin : {l : Level} → Σ ℕ (UU-Fin l) → Finite-Type l
 pr1 (map-compute-total-UU-Fin (pair k (pair X e))) = X
 pr2 (map-compute-total-UU-Fin (pair k (pair X e))) =
   is-finite-has-finite-cardinality (pair k e)
 
-compute-total-UU-Fin : {l : Level} → Σ ℕ (UU-Fin l) ≃ 𝔽 l
+compute-total-UU-Fin : {l : Level} → Σ ℕ (UU-Fin l) ≃ Finite-Type l
 compute-total-UU-Fin =
   ( equiv-tot
     ( λ X →
@@ -563,50 +588,61 @@ abstract
     {l1 : Level} {A : UU l1} → is-finite A → is-finite (type-trunc-Prop A)
   is-finite-type-trunc-Prop = map-trunc-Prop count-type-trunc-Prop
 
-trunc-Prop-𝔽 : {l : Level} → 𝔽 l → 𝔽 l
-pr1 (trunc-Prop-𝔽 A) = type-trunc-Prop (type-𝔽 A)
-pr2 (trunc-Prop-𝔽 A) = is-finite-type-trunc-Prop (is-finite-type-𝔽 A)
+trunc-prop-Finite-Type : {l : Level} → Finite-Type l → Finite-Type l
+pr1 (trunc-prop-Finite-Type A) = type-trunc-Prop (type-Finite-Type A)
+pr2 (trunc-prop-Finite-Type A) =
+  is-finite-type-trunc-Prop (is-finite-type-Finite-Type A)
 ```
 
-### We characterize the identity type of 𝔽
+### We characterize the identity type of Finite-Type
 
 ```agda
-equiv-𝔽 : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → UU (l1 ⊔ l2)
-equiv-𝔽 X Y = type-𝔽 X ≃ type-𝔽 Y
+equiv-Finite-Type :
+  {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → UU (l1 ⊔ l2)
+equiv-Finite-Type X Y = type-Finite-Type X ≃ type-Finite-Type Y
 
-id-equiv-𝔽 : {l : Level} → (X : 𝔽 l) → equiv-𝔽 X X
-id-equiv-𝔽 X = id-equiv
+id-equiv-Finite-Type : {l : Level} (X : Finite-Type l) → equiv-Finite-Type X X
+id-equiv-Finite-Type X = id-equiv
 
-extensionality-𝔽 : {l : Level} → (X Y : 𝔽 l) → Id X Y ≃ equiv-𝔽 X Y
-extensionality-𝔽 = extensionality-subuniverse is-finite-Prop
+extensionality-Finite-Type :
+  {l : Level} (X Y : Finite-Type l) → Id X Y ≃ equiv-Finite-Type X Y
+extensionality-Finite-Type = extensionality-subuniverse is-finite-Prop
 
-is-torsorial-equiv-𝔽 :
-  {l : Level} → (X : 𝔽 l) → is-torsorial (λ (Y : 𝔽 l) → equiv-𝔽 X Y)
-is-torsorial-equiv-𝔽 {l} X =
+is-torsorial-equiv-Finite-Type :
+  {l : Level} (X : Finite-Type l) →
+  is-torsorial (λ (Y : Finite-Type l) → equiv-Finite-Type X Y)
+is-torsorial-equiv-Finite-Type {l} X =
   is-contr-equiv'
-    ( Σ (𝔽 l) (Id X))
-    ( equiv-tot (extensionality-𝔽 X))
+    ( Σ (Finite-Type l) (Id X))
+    ( equiv-tot (extensionality-Finite-Type X))
     ( is-torsorial-Id X)
 
-equiv-eq-𝔽 : {l : Level} → (X Y : 𝔽 l) → Id X Y → equiv-𝔽 X Y
-equiv-eq-𝔽 X Y = map-equiv (extensionality-𝔽 X Y)
+equiv-eq-Finite-Type :
+  {l : Level} → (X Y : Finite-Type l) → Id X Y → equiv-Finite-Type X Y
+equiv-eq-Finite-Type X Y = map-equiv (extensionality-Finite-Type X Y)
 
-eq-equiv-𝔽 : {l : Level} → (X Y : 𝔽 l) → equiv-𝔽 X Y → Id X Y
-eq-equiv-𝔽 X Y = map-inv-equiv (extensionality-𝔽 X Y)
+eq-equiv-Finite-Type :
+  {l : Level} → (X Y : Finite-Type l) → equiv-Finite-Type X Y → Id X Y
+eq-equiv-Finite-Type X Y = map-inv-equiv (extensionality-Finite-Type X Y)
 ```
 
 ### We characterize the identity type of families of finite types
 
 ```agda
-equiv-fam-𝔽 : {l1 l2 : Level} {X : UU l1} (Y Z : X → 𝔽 l2) → UU (l1 ⊔ l2)
-equiv-fam-𝔽 Y Z = equiv-fam (type-𝔽 ∘ Y) (type-𝔽 ∘ Z)
+equiv-fam-Finite-Type :
+  {l1 l2 : Level} {X : UU l1} (Y Z : X → Finite-Type l2) → UU (l1 ⊔ l2)
+equiv-fam-Finite-Type Y Z =
+  equiv-fam (type-Finite-Type ∘ Y) (type-Finite-Type ∘ Z)
 
-id-equiv-fam-𝔽 : {l1 l2 : Level} {X : UU l1} → (Y : X → 𝔽 l2) → equiv-fam-𝔽 Y Y
-id-equiv-fam-𝔽 Y x = id-equiv
+id-equiv-fam-Finite-Type :
+  {l1 l2 : Level} {X : UU l1} (Y : X → Finite-Type l2) →
+  equiv-fam-Finite-Type Y Y
+id-equiv-fam-Finite-Type Y x = id-equiv
 
-extensionality-fam-𝔽 :
-  {l1 l2 : Level} {X : UU l1} (Y Z : X → 𝔽 l2) → Id Y Z ≃ equiv-fam-𝔽 Y Z
-extensionality-fam-𝔽 = extensionality-fam-subuniverse is-finite-Prop
+extensionality-fam-Finite-Type :
+  {l1 l2 : Level} {X : UU l1} (Y Z : X → Finite-Type l2) →
+  Id Y Z ≃ equiv-fam-Finite-Type Y Z
+extensionality-fam-Finite-Type = extensionality-fam-subuniverse is-finite-Prop
 ```
 
 ### We characterize the identity type of `UU-Fin`
@@ -707,3 +743,14 @@ abstract
           ( p)
           ( pr2 (has-finite-cardinality-is-finite H)))
 ```
+
+## External links
+
+- [Finiteness in Sheaf Topoi](https://grossack.site/2024/08/19/finiteness-in-sheaf-topoi),
+  blog post by Chris Grossack
+- [`Fin.Bishop`](https://www.cs.bham.ac.uk/~mhe/TypeTopology/Fin.Bishop.html) at
+  TypeTopology
+- [finite set](https://ncatlab.org/nlab/show/finite+set) at $n$Lab
+- [finite object](https://ncatlab.org/nlab/show/finite+object) at $n$Lab
+- [Finite set](https://en.wikipedia.org/wiki/Finite_set) at Wikipedia
+- [Finite set](https://www.wikidata.org/wiki/Q272404) at Wikidata

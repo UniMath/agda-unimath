@@ -28,6 +28,16 @@ consists of [posets](order-theory.posets.md) and
 
 ### The large precategory of posets
 
+**Remark.** In this formalization we see a clear limit to our approach using
+[large precategories](category-theory.large-precategories.md). Large
+precategories are only designed to encapsulate structures that are universe
+polymorphic in a single universe level variable. However, posets are polymorphic
+in two universe level variables, leading to a shortcoming in the below
+formalization. Namely, we cannot capture the structure of all posets and
+morphisms between them. For instance, we can only capture morphisms between two
+posets of the form `A : Poset (α l1) (β l1)` and `B : Poset (α l2) (β l2)`, and
+not arbitrary ones of the form `A : Poset l1 l2` and `B : Poset l3 l4`.
+
 ```agda
 parametric-Poset-Large-Precategory :
   (α β : Level → Level) →
@@ -55,9 +65,17 @@ Poset-Large-Precategory : Large-Precategory lsuc (_⊔_)
 Poset-Large-Precategory = parametric-Poset-Large-Precategory (λ l → l) (λ l → l)
 ```
 
-### The precategory or posets of universe level `l`
+### The precategory of posets at a universe level
 
 ```agda
-Poset-Precategory : (l : Level) → Precategory (lsuc l) l
-Poset-Precategory = precategory-Large-Precategory Poset-Large-Precategory
+Poset-Precategory : (l1 l2 : Level) → Precategory (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2)
+Poset-Precategory l1 l2 =
+  make-Precategory
+    ( Poset l1 l2)
+    ( hom-set-Poset)
+    ( λ {P} {Q} {R} → comp-hom-Poset P Q R)
+    ( id-hom-Poset)
+    ( λ {P} {Q} {R} {S} → associative-comp-hom-Poset P Q R S)
+    ( λ {P} {Q} → left-unit-law-comp-hom-Poset P Q)
+    ( λ {P} {Q} → right-unit-law-comp-hom-Poset P Q)
 ```

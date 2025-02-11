@@ -16,6 +16,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
@@ -54,14 +55,18 @@ module _
   type-Poset : UU l1
   type-Poset = type-Preorder preorder-Poset
 
-  leq-Poset-Prop : (x y : type-Poset) → Prop l2
-  leq-Poset-Prop = leq-Preorder-Prop preorder-Poset
+  leq-prop-Poset : (x y : type-Poset) → Prop l2
+  leq-prop-Poset = leq-prop-Preorder preorder-Poset
 
   leq-Poset : (x y : type-Poset) → UU l2
   leq-Poset = leq-Preorder preorder-Poset
 
   is-prop-leq-Poset : (x y : type-Poset) → is-prop (leq-Poset x y)
   is-prop-leq-Poset = is-prop-leq-Preorder preorder-Poset
+
+  concatenate-eq-leq-Poset' :
+    {x y z : type-Poset} → x ＝ y → leq-Poset x z → leq-Poset y z
+  concatenate-eq-leq-Poset' = concatenate-eq-leq-Preorder' preorder-Poset
 
   concatenate-eq-leq-Poset :
     {x y z : type-Poset} → x ＝ y → leq-Poset y z → leq-Poset x z
@@ -71,14 +76,22 @@ module _
     {x y z : type-Poset} → leq-Poset x y → y ＝ z → leq-Poset x z
   concatenate-leq-eq-Poset = concatenate-leq-eq-Preorder preorder-Poset
 
+  concatenate-eq-leq-eq-Poset :
+    {x y z w : type-Poset} → x ＝ y → leq-Poset y z → z ＝ w → leq-Poset x w
+  concatenate-eq-leq-eq-Poset = concatenate-eq-leq-eq-Preorder preorder-Poset
+
+  concatenate-eq-leq-eq-Poset' :
+    {x y z w : type-Poset} → x ＝ y → leq-Poset x z → z ＝ w → leq-Poset y w
+  concatenate-eq-leq-eq-Poset' = concatenate-eq-leq-eq-Preorder' preorder-Poset
+
   refl-leq-Poset : is-reflexive leq-Poset
   refl-leq-Poset = refl-leq-Preorder preorder-Poset
 
   transitive-leq-Poset : is-transitive leq-Poset
   transitive-leq-Poset = transitive-leq-Preorder preorder-Poset
 
-  le-Poset-Prop : (x y : type-Poset) → Prop (l1 ⊔ l2)
-  le-Poset-Prop = le-Preorder-Prop preorder-Poset
+  le-prop-Poset : (x y : type-Poset) → Prop (l1 ⊔ l2)
+  le-prop-Poset = le-prop-Preorder preorder-Poset
 
   le-Poset : (x y : type-Poset) → UU (l1 ⊔ l2)
   le-Poset = le-Preorder preorder-Poset

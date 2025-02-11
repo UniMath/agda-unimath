@@ -20,6 +20,7 @@ open import foundation.homotopy-induction
 open import foundation.morphisms-arrows
 open import foundation.negated-equality
 open import foundation.propositional-truncations
+open import foundation.retractions
 open import foundation.structure-identity-principle
 open import foundation.surjective-maps
 open import foundation.unit-type
@@ -28,6 +29,7 @@ open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
+open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -149,6 +151,12 @@ module _
         ( is-section-fiber-fiber-map-coproduct-inl x)
         ( is-retraction-fiber-fiber-map-coproduct-inl x)
 
+  compute-fiber-inl-map-coproduct :
+    (x : A) → fiber f x ≃ fiber (map-coproduct f g) (inl x)
+  compute-fiber-inl-map-coproduct x =
+    ( fiber-map-coproduct-inl-fiber x ,
+      is-equiv-fiber-map-coproduct-inl-fiber x)
+
   fiber-map-coproduct-inr-fiber :
     (y : B) → fiber g y → fiber (map-coproduct f g) (inr y)
   pr1 (fiber-map-coproduct-inr-fiber y (b' , p)) = inr b'
@@ -184,6 +192,12 @@ module _
         ( fiber-fiber-map-coproduct-inr y)
         ( is-section-fiber-fiber-map-coproduct-inr y)
         ( is-retraction-fiber-fiber-map-coproduct-inr y)
+
+  compute-fiber-inr-map-coproduct :
+    (y : B) → fiber g y ≃ fiber (map-coproduct f g) (inr y)
+  compute-fiber-inr-map-coproduct y =
+    ( fiber-map-coproduct-inr-fiber y ,
+      is-equiv-fiber-map-coproduct-inr-fiber y)
 ```
 
 ### Functoriality of coproducts preserves equivalences
@@ -245,7 +259,82 @@ module _
     is-equiv-map-coproduct (is-equiv-map-equiv e) (is-equiv-map-equiv e')
 ```
 
-### Functoriality of coproducts preserves being surjective
+### The functorial action of coproducts preserves retractions
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
+  {f : A → B} {f' : A' → B'} (r : retraction f) (r' : retraction f')
+  where
+
+  map-retraction-map-coproduct : B + B' → A + A'
+  map-retraction-map-coproduct =
+    map-coproduct (map-retraction f r) (map-retraction f' r')
+
+  is-retraction-retraction-map-coproduct :
+    is-retraction (map-coproduct f f') map-retraction-map-coproduct
+  is-retraction-retraction-map-coproduct =
+    ( inv-htpy
+      ( preserves-comp-map-coproduct
+        ( f)
+        ( map-retraction f r)
+        ( f')
+        ( map-retraction f' r'))) ∙h
+    ( htpy-map-coproduct
+      ( is-retraction-map-retraction f r)
+      ( is-retraction-map-retraction f' r')) ∙h
+    ( id-map-coproduct A A')
+
+  retraction-map-coproduct : retraction (map-coproduct f f')
+  retraction-map-coproduct =
+    ( map-retraction-map-coproduct , is-retraction-retraction-map-coproduct)
+```
+
+### Functoriality of coproducts preserves embeddings
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
+  where
+
+abstract
+  is-emb-map-coproduct :
+    {l1 l2 l3 l4 : Level}
+    {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+    {f : A → B} {g : X → Y} →
+    is-emb f → is-emb g → is-emb (map-coproduct f g)
+  is-emb-map-coproduct {f = f} {g} F G (inl x) (inl y) =
+    is-equiv-left-is-equiv-right-square
+      ( ap (map-coproduct f g))
+      ( ap f)
+      ( map-compute-eq-coproduct-inl-inl x y)
+      ( map-compute-eq-coproduct-inl-inl (f x) (f y))
+      ( λ where refl → refl)
+      ( is-equiv-map-compute-eq-coproduct-inl-inl x y)
+      ( is-equiv-map-compute-eq-coproduct-inl-inl (f x) (f y))
+      ( F x y)
+  is-emb-map-coproduct {f = f} {g} F G (inl x) (inr y) =
+    is-equiv-is-empty
+      ( ap (map-coproduct f g))
+      ( is-empty-eq-coproduct-inl-inr (f x) (g y))
+  is-emb-map-coproduct {f = f} {g} F G (inr x) (inl y) =
+    is-equiv-is-empty
+      ( ap (map-coproduct f g))
+      ( is-empty-eq-coproduct-inr-inl (g x) (f y))
+  is-emb-map-coproduct {f = f} {g} F G (inr x) (inr y) =
+    is-equiv-left-is-equiv-right-square
+      ( ap (map-coproduct f g))
+      ( ap g)
+      ( map-compute-eq-coproduct-inr-inr x y)
+      ( map-compute-eq-coproduct-inr-inr (g x) (g y))
+      ( λ where refl → refl)
+      ( is-equiv-map-compute-eq-coproduct-inr-inr x y)
+      ( is-equiv-map-compute-eq-coproduct-inr-inr (g x) (g y))
+      ( G x y)
+```
+
+### Functoriality of coproducts preserves surjections
 
 ```agda
 module _

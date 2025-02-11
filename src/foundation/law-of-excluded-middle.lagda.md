@@ -22,8 +22,9 @@ open import univalent-combinatorics.2-element-types
 
 ## Idea
 
-The {{#concept "law of excluded middle" Agda=LEM}} asserts that any
-[proposition](foundation-core.propositions.md) `P` is
+The
+{{#concept "law of excluded middle" WD="principle of excluded middle" WDID=Q468422 Agda=LEM}}
+asserts that any [proposition](foundation-core.propositions.md) `P` is
 [decidable](foundation.decidable-types.md).
 
 ## Definition
@@ -31,6 +32,9 @@ The {{#concept "law of excluded middle" Agda=LEM}} asserts that any
 ```agda
 LEM : (l : Level) → UU (lsuc l)
 LEM l = (P : Prop l) → is-decidable (type-Prop P)
+
+prop-LEM : (l : Level) → Prop (lsuc l)
+prop-LEM l = Π-Prop (Prop l) (is-decidable-Prop)
 ```
 
 ## Properties

@@ -129,36 +129,6 @@ module _
   pr2 (pr2 (gap c z)) = coherence-square-cone f g c z
 ```
 
-#### The standard ternary pullback
-
-Given two cospans with a shared vertex `B`:
-
-```text
-      f       g       h       i
-  A ----> X <---- B ----> Y <---- C,
-```
-
-we call the standard limit of the diagram the
-{{#concept "standard ternary pullback" Disambiguation="of types" Agda=standard-ternary-pullback}}.
-It is defined as the sum
-
-```text
-  standard-ternary-pullback f g h i :=
-    Σ (a : A) (b : B) (c : C), ((f a ＝ g b) × (h b ＝ i c)).
-```
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level}
-  {X : UU l1} {Y : UU l2} {A : UU l3} {B : UU l4} {C : UU l5}
-  (f : A → X) (g : B → X) (h : B → Y) (i : C → Y)
-  where
-
-  standard-ternary-pullback : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-  standard-ternary-pullback =
-    Σ A (λ a → Σ B (λ b → Σ C (λ c → (f a ＝ g b) × (h b ＝ i c))))
-```
-
 ## Properties
 
 ### Characterization of the identity type of the standard pullback
@@ -168,9 +138,22 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
   where
 
+  coherence-Eq-standard-pullback :
+    (t t' : standard-pullback f g) →
+    vertical-map-standard-pullback t ＝
+    vertical-map-standard-pullback t' →
+    horizontal-map-standard-pullback t ＝
+    horizontal-map-standard-pullback t' →
+    UU l3
+  coherence-Eq-standard-pullback (a , b , p) (a' , b' , p') α β =
+    ap f α ∙ p' ＝ p ∙ ap g β
+
   Eq-standard-pullback : (t t' : standard-pullback f g) → UU (l1 ⊔ l2 ⊔ l3)
   Eq-standard-pullback (a , b , p) (a' , b' , p') =
-    Σ (a ＝ a') (λ α → Σ (b ＝ b') (λ β → ap f α ∙ p' ＝ p ∙ ap g β))
+    Σ ( a ＝ a')
+      ( λ α →
+        Σ ( b ＝ b')
+          ( coherence-Eq-standard-pullback (a , b , p) (a' , b' , p') α))
 
   refl-Eq-standard-pullback :
     (t : standard-pullback f g) → Eq-standard-pullback t t
@@ -197,7 +180,7 @@ module _
         ( λ y → id-equiv)
         ( λ p' → equiv-concat' p' (inv right-unit) ∘e equiv-inv p p'))
 
-  map-extensionality-standard-pullback :
+  eq-Eq-standard-pullback :
     { s t : standard-pullback f g}
     ( α : vertical-map-standard-pullback s ＝ vertical-map-standard-pullback t)
     ( β :
@@ -206,7 +189,7 @@ module _
     ( ( ap f α ∙ coherence-square-standard-pullback t) ＝
       ( coherence-square-standard-pullback s ∙ ap g β)) →
     s ＝ t
-  map-extensionality-standard-pullback {s} {t} α β γ =
+  eq-Eq-standard-pullback {s} {t} α β γ =
     map-inv-equiv (extensionality-standard-pullback s t) (α , β , γ)
 ```
 
@@ -242,231 +225,6 @@ module _
   pr1 (htpy-cone-up-pullback-standard-pullback c) = refl-htpy
   pr1 (pr2 (htpy-cone-up-pullback-standard-pullback c)) = refl-htpy
   pr2 (pr2 (htpy-cone-up-pullback-standard-pullback c)) = right-unit-htpy
-```
-
-### Standard pullbacks are symmetric
-
-The standard pullback of `f : A -> X <- B : g` is equivalent to the standard
-pullback of `g : B -> X <- A : f`.
-
-```agda
-map-commutative-standard-pullback :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) → standard-pullback f g → standard-pullback g f
-pr1 (map-commutative-standard-pullback f g x) =
-  horizontal-map-standard-pullback x
-pr1 (pr2 (map-commutative-standard-pullback f g x)) =
-  vertical-map-standard-pullback x
-pr2 (pr2 (map-commutative-standard-pullback f g x)) =
-  inv (coherence-square-standard-pullback x)
-
-inv-inv-map-commutative-standard-pullback :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) →
-  ( map-commutative-standard-pullback f g ∘
-    map-commutative-standard-pullback g f) ~ id
-inv-inv-map-commutative-standard-pullback f g x =
-  eq-pair-eq-fiber
-    ( eq-pair-eq-fiber
-      ( inv-inv (coherence-square-standard-pullback x)))
-
-abstract
-  is-equiv-map-commutative-standard-pullback :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-    (f : A → X) (g : B → X) → is-equiv (map-commutative-standard-pullback f g)
-  is-equiv-map-commutative-standard-pullback f g =
-    is-equiv-is-invertible
-      ( map-commutative-standard-pullback g f)
-      ( inv-inv-map-commutative-standard-pullback f g)
-      ( inv-inv-map-commutative-standard-pullback g f)
-
-commutative-standard-pullback :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) →
-  standard-pullback f g ≃ standard-pullback g f
-pr1 (commutative-standard-pullback f g) =
-  map-commutative-standard-pullback f g
-pr2 (commutative-standard-pullback f g) =
-  is-equiv-map-commutative-standard-pullback f g
-```
-
-#### The gap map of the swapped cone computes as the underlying gap map followed by a swap
-
-```agda
-triangle-map-commutative-standard-pullback :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  (f : A → X) (g : B → X) (c : cone f g C) →
-  gap g f (swap-cone f g c) ~
-  map-commutative-standard-pullback f g ∘ gap f g c
-triangle-map-commutative-standard-pullback f g c = refl-htpy
-```
-
-### Standard pullbacks are associative
-
-Consider two cospans with a shared vertex `B`:
-
-```text
-      f       g       h       i
-  A ----> X <---- B ----> Y <---- C,
-```
-
-then we can construct their limit using standard pullbacks in two equivalent
-ways. We can construct it by first forming the standard pullback of `f` and `g`,
-and then forming the standard pullback of the resulting `h ∘ f'` and `i`
-
-```text
-  (A ×_X B) ×_Y C ---------------------> C
-         | ⌟                             |
-         |                               | i
-         ∨                               ∨
-      A ×_X B ---------> B ------------> Y
-         | ⌟     f'      |       h
-         |               | g
-         ∨               ∨
-         A ------------> X,
-                 f
-```
-
-or we can first form the pullback of `h` and `i`, and then form the pullback of
-`f` and the resulting `g ∘ i'`:
-
-```text
-  A ×_X (B ×_Y C) --> B ×_Y C ---------> C
-         | ⌟             | ⌟             |
-         |               | i'            | i
-         |               ∨               ∨
-         |               B ------------> Y
-         |               |       h
-         |               | g
-         ∨               ∨
-         A ------------> X.
-                 f
-```
-
-We show that both of these constructions are equivalent by showing they are
-equivalent to the standard ternary pullback.
-
-**Note:** Associativity with respect to ternary cospans
-
-```text
-              B
-              |
-              | g
-              ∨
-    A ------> X <------ C
-         f         h
-```
-
-is a special case of what we consider here that is recovered by using
-
-```text
-      f       g       g       h
-  A ----> X <---- B ----> X <---- C.
-```
-
-- See also the following relevant stack exchange question:
-  [Associativity of pullbacks](https://math.stackexchange.com/questions/2046276/associativity-of-pullbacks).
-
-#### Computing the left associated iterated standard pullback
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level}
-  {X : UU l1} {Y : UU l2} {A : UU l3} {B : UU l4} {C : UU l5}
-  (f : A → X) (g : B → X) (h : B → Y) (i : C → Y)
-  where
-
-  map-left-associative-standard-pullback :
-    standard-pullback (h ∘ horizontal-map-standard-pullback {f = f} {g = g}) i →
-    standard-ternary-pullback f g h i
-  map-left-associative-standard-pullback ((a , b , p) , c , q) =
-    ( a , b , c , p , q)
-
-  map-inv-left-associative-standard-pullback :
-    standard-ternary-pullback f g h i →
-    standard-pullback (h ∘ horizontal-map-standard-pullback {f = f} {g = g}) i
-  map-inv-left-associative-standard-pullback (a , b , c , p , q) =
-    ( ( a , b , p) , c , q)
-
-  is-equiv-map-left-associative-standard-pullback :
-    is-equiv map-left-associative-standard-pullback
-  is-equiv-map-left-associative-standard-pullback =
-    is-equiv-is-invertible
-      ( map-inv-left-associative-standard-pullback)
-      ( refl-htpy)
-      ( refl-htpy)
-
-  compute-left-associative-standard-pullback :
-    standard-pullback (h ∘ horizontal-map-standard-pullback {f = f} {g = g}) i ≃
-    standard-ternary-pullback f g h i
-  compute-left-associative-standard-pullback =
-    ( map-left-associative-standard-pullback ,
-      is-equiv-map-left-associative-standard-pullback)
-```
-
-#### Computing the right associated iterated dependent pullback
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level}
-  {X : UU l1} {Y : UU l2} {A : UU l3} {B : UU l4} {C : UU l5}
-  (f : A → X) (g : B → X) (h : B → Y) (i : C → Y)
-  where
-
-  map-right-associative-standard-pullback :
-    standard-pullback f (g ∘ vertical-map-standard-pullback {f = h} {g = i}) →
-    standard-ternary-pullback f g h i
-  map-right-associative-standard-pullback (a , (b , c , p) , q) =
-    ( a , b , c , q , p)
-
-  map-inv-right-associative-standard-pullback :
-    standard-ternary-pullback f g h i →
-    standard-pullback f (g ∘ vertical-map-standard-pullback {f = h} {g = i})
-  map-inv-right-associative-standard-pullback (a , b , c , p , q) =
-    ( a , (b , c , q) , p)
-
-  is-equiv-map-right-associative-standard-pullback :
-    is-equiv map-right-associative-standard-pullback
-  is-equiv-map-right-associative-standard-pullback =
-    is-equiv-is-invertible
-      ( map-inv-right-associative-standard-pullback)
-      ( refl-htpy)
-      ( refl-htpy)
-
-  compute-right-associative-standard-pullback :
-    standard-pullback f (g ∘ vertical-map-standard-pullback {f = h} {g = i}) ≃
-    standard-ternary-pullback f g h i
-  compute-right-associative-standard-pullback =
-    ( map-right-associative-standard-pullback ,
-      is-equiv-map-right-associative-standard-pullback)
-```
-
-#### Standard pullbacks are associative
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level}
-  {X : UU l1} {Y : UU l2} {A : UU l3} {B : UU l4} {C : UU l5}
-  (f : A → X) (g : B → X) (h : B → Y) (i : C → Y)
-  where
-
-  associative-standard-pullback :
-    standard-pullback (h ∘ horizontal-map-standard-pullback {f = f} {g = g}) i ≃
-    standard-pullback f (g ∘ vertical-map-standard-pullback {f = h} {g = i})
-  associative-standard-pullback =
-    ( inv-equiv (compute-right-associative-standard-pullback f g h i)) ∘e
-    ( compute-left-associative-standard-pullback f g h i)
-
-  map-associative-standard-pullback :
-    standard-pullback (h ∘ horizontal-map-standard-pullback {f = f} {g = g}) i →
-    standard-pullback f (g ∘ vertical-map-standard-pullback {f = h} {g = i})
-  map-associative-standard-pullback = map-equiv associative-standard-pullback
-
-  map-inv-associative-standard-pullback :
-    standard-pullback f (g ∘ vertical-map-standard-pullback {f = h} {g = i}) →
-    standard-pullback (h ∘ horizontal-map-standard-pullback {f = f} {g = g}) i
-  map-inv-associative-standard-pullback =
-    map-inv-equiv associative-standard-pullback
 ```
 
 ### Pullbacks can be "folded"
@@ -538,7 +296,7 @@ module _
         ( map-fold-cone-standard-pullback)
         ( map-inv-fold-cone-standard-pullback)
     is-section-map-inv-fold-cone-standard-pullback ((a , b) , (x , α)) =
-      map-extensionality-standard-pullback
+      eq-Eq-standard-pullback
         ( map-product f g)
         ( diagonal-product X)
         ( refl)
@@ -567,7 +325,7 @@ module _
         ( map-fold-cone-standard-pullback)
         ( map-inv-fold-cone-standard-pullback)
     is-retraction-map-inv-fold-cone-standard-pullback (a , b , p) =
-      map-extensionality-standard-pullback f g
+      eq-Eq-standard-pullback f g
         ( refl)
         ( refl)
         ( inv

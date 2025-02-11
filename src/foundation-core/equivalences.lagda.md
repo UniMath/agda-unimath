@@ -426,13 +426,13 @@ module _
     pr1 (is-equiv-comp g h (sh , rh) (sg , rg)) = section-comp g h sh sg
     pr2 (is-equiv-comp g h (sh , rh) (sg , rg)) = retraction-comp g h rg rh
 
-  equiv-comp : B ≃ X → A ≃ B → A ≃ X
-  pr1 (equiv-comp g h) = map-equiv g ∘ map-equiv h
-  pr2 (equiv-comp g h) = is-equiv-comp (pr1 g) (pr1 h) (pr2 h) (pr2 g)
+  comp-equiv : B ≃ X → A ≃ B → A ≃ X
+  pr1 (comp-equiv g h) = map-equiv g ∘ map-equiv h
+  pr2 (comp-equiv g h) = is-equiv-comp (pr1 g) (pr1 h) (pr2 h) (pr2 g)
 
   infixr 15 _∘e_
   _∘e_ : B ≃ X → A ≃ B → A ≃ X
-  _∘e_ = equiv-comp
+  _∘e_ = comp-equiv
 ```
 
 #### If a composite and its right factor are equivalences, then so is its left factor

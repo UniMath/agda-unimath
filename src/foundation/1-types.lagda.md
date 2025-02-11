@@ -181,3 +181,22 @@ module _
   eq-equiv-1-Type : (Y : 1-Type l) → type-equiv-1-Type Y → X ＝ Y
   eq-equiv-1-Type Y = eq-equiv-subuniverse is-1-type-Prop
 ```
+
+### 1-types are `k+3`-truncated for any `k`
+
+```agda
+is-trunc-is-1-type :
+  {l : Level} (k : 𝕋) {A : UU l} →
+  is-1-type A →
+  is-trunc (succ-𝕋 (succ-𝕋 (succ-𝕋 k))) A
+is-trunc-is-1-type neg-two-𝕋 is-1-type-A = is-1-type-A
+is-trunc-is-1-type (succ-𝕋 k) is-1-type-A =
+  is-trunc-succ-is-trunc
+    ( succ-𝕋 (succ-𝕋 (succ-𝕋 k)))
+    ( is-trunc-is-1-type k is-1-type-A)
+
+1-type-Truncated-Type :
+  {l : Level} (k : 𝕋) → 1-Type l → Truncated-Type l (succ-𝕋 (succ-𝕋 (succ-𝕋 k)))
+pr1 (1-type-Truncated-Type k A) = type-1-Type A
+pr2 (1-type-Truncated-Type k A) = is-trunc-is-1-type k (is-1-type-type-1-Type A)
+```

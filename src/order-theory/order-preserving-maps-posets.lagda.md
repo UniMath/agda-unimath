@@ -1,4 +1,4 @@
-# Order preserving maps on posets
+# Order preserving maps between posets
 
 ```agda
 module order-theory.order-preserving-maps-posets where
@@ -37,10 +37,10 @@ module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  preserves-order-Poset-Prop :
+  preserves-order-prop-Poset :
     (type-Poset P → type-Poset Q) → Prop (l1 ⊔ l2 ⊔ l4)
-  preserves-order-Poset-Prop =
-    preserves-order-Preorder-Prop (preorder-Poset P) (preorder-Poset Q)
+  preserves-order-prop-Poset =
+    preserves-order-prop-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   preserves-order-Poset :
     (type-Poset P → type-Poset Q) → UU (l1 ⊔ l2 ⊔ l4)
@@ -56,7 +56,7 @@ module _
   hom-set-Poset =
     set-subset
       ( function-Set (type-Poset P) (set-Poset Q))
-      ( preserves-order-Poset-Prop)
+      ( preserves-order-prop-Poset)
 
   hom-Poset : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-Poset = type-Set hom-set-Poset
@@ -64,10 +64,10 @@ module _
   map-hom-Poset : hom-Poset → type-Poset P → type-Poset Q
   map-hom-Poset = map-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
-  preserves-order-map-hom-Poset :
+  preserves-order-hom-Poset :
     (f : hom-Poset) → preserves-order-Poset (map-hom-Poset f)
-  preserves-order-map-hom-Poset =
-    preserves-order-map-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+  preserves-order-hom-Poset =
+    preserves-order-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 ```
 
 ### Homotopies of order preserving maps

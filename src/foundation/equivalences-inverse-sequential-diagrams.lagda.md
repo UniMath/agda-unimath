@@ -9,6 +9,7 @@ module foundation.equivalences-inverse-sequential-diagrams where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -56,8 +57,7 @@ equiv-inverse-sequential-diagram A B =
   Σ ( (n : ℕ) →
       family-inverse-sequential-diagram A n ≃
       family-inverse-sequential-diagram B n)
-    ( λ e →
-      (n : ℕ) → naturality-hom-inverse-sequential-diagram A B (map-equiv ∘ e) n)
+    ( λ e → naturality-hom-inverse-sequential-diagram A B (map-equiv ∘ e))
 
 hom-equiv-inverse-sequential-diagram :
   {l1 l2 : Level}
@@ -94,8 +94,7 @@ is-torsorial-equiv-inverse-sequential-diagram A =
     ( is-torsorial-Eq-Π
       ( λ n → is-torsorial-equiv (family-inverse-sequential-diagram A n)))
     ( family-inverse-sequential-diagram A , λ n → id-equiv)
-    ( is-torsorial-Eq-Π
-      ( λ n → is-torsorial-htpy (map-inverse-sequential-diagram A n)))
+    ( is-torsorial-binary-htpy (map-inverse-sequential-diagram A))
 
 is-equiv-equiv-eq-inverse-sequential-diagram :
   {l : Level} (A B : inverse-sequential-diagram l) →

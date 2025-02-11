@@ -29,6 +29,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.precomposition-dependent-functions
 open import foundation.raising-universe-levels
@@ -618,7 +619,7 @@ module _
   where
 
   is-nontrivial-loop-dependent-universal-property-circle :
-    ¬ (loop-free-loop l ＝ refl)
+    loop-free-loop l ≠ refl
   is-nontrivial-loop-dependent-universal-property-circle p =
     is-nonzero-one-ℤ
       ( is-injective-equiv

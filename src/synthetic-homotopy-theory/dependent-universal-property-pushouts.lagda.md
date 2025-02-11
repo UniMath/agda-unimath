@@ -251,20 +251,22 @@ module _
   (f : S → A) (g : S → B) (c : cocone f g X)
   where
 
-  universal-property-dependent-universal-property-pushout :
-    dependent-universal-property-pushout f g c →
-    universal-property-pushout f g c
-  universal-property-dependent-universal-property-pushout dup-c {l} =
-    universal-property-pushout-pullback-property-pushout f g c
-      ( pullback-property-dependent-pullback-property-pushout f g c
-        ( dependent-pullback-property-dependent-universal-property-pushout f g c
-          ( dup-c)))
+  abstract
+    universal-property-dependent-universal-property-pushout :
+      dependent-universal-property-pushout f g c →
+      universal-property-pushout f g c
+    universal-property-dependent-universal-property-pushout dup-c {l} =
+      universal-property-pushout-pullback-property-pushout f g c
+        ( pullback-property-dependent-pullback-property-pushout f g c
+          ( dependent-pullback-property-dependent-universal-property-pushout f g
+            ( c)
+            ( dup-c)))
 
-  dependent-universal-property-universal-property-pushout :
-    universal-property-pushout f g c →
-    dependent-universal-property-pushout f g c
-  dependent-universal-property-universal-property-pushout up-c =
-    dependent-universal-property-dependent-pullback-property-pushout f g c
-      ( dependent-pullback-property-pullback-property-pushout f g c
-        ( pullback-property-pushout-universal-property-pushout f g c up-c))
+    dependent-universal-property-universal-property-pushout :
+      universal-property-pushout f g c →
+      dependent-universal-property-pushout f g c
+    dependent-universal-property-universal-property-pushout up-c =
+      dependent-universal-property-dependent-pullback-property-pushout f g c
+        ( dependent-pullback-property-pullback-property-pushout f g c
+          ( pullback-property-pushout-universal-property-pushout f g c up-c))
 ```

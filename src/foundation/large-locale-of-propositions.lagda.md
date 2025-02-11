@@ -8,6 +8,7 @@ module foundation.large-locale-of-propositions where
 
 ```agda
 open import foundation.conjunction
+open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
@@ -18,6 +19,7 @@ open import foundation.universe-levels
 open import foundation-core.function-types
 open import foundation-core.propositions
 
+open import order-theory.bottom-elements-large-posets
 open import order-theory.large-frames
 open import order-theory.large-locales
 open import order-theory.large-meet-semilattices
@@ -87,6 +89,17 @@ is-top-element-top-has-top-element-Large-Poset
   star
 ```
 
+### The smallest element in the large poset of propositions
+
+```agda
+has-bottom-element-Prop-Large-Locale :
+  has-bottom-element-Large-Poset Prop-Large-Poset
+bottom-has-bottom-element-Large-Poset
+  has-bottom-element-Prop-Large-Locale = empty-Prop
+is-bottom-element-bottom-has-bottom-element-Large-Poset
+  has-bottom-element-Prop-Large-Locale P = ex-falso
+```
+
 ### The large poset of propositions is a large meet-semilattice
 
 ```agda
@@ -98,6 +111,12 @@ has-meets-is-large-meet-semilattice-Large-Poset
 has-top-element-is-large-meet-semilattice-Large-Poset
   is-large-meet-semilattice-Prop-Large-Locale =
   has-top-element-Prop-Large-Locale
+
+Prop-Large-Meet-Semilattice : Large-Meet-Semilattice lsuc (_⊔_)
+Prop-Large-Meet-Semilattice =
+  make-Large-Meet-Semilattice
+    ( Prop-Large-Poset)
+    ( is-large-meet-semilattice-Prop-Large-Locale)
 ```
 
 ### Suprema in the large poset of propositions
@@ -111,6 +130,10 @@ sup-has-least-upper-bound-family-of-elements-Large-Poset
 is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
   ( is-large-suplattice-Prop-Large-Locale {I = I} P) R =
   inv-iff (up-exists R)
+
+Prop-Large-Suplattice : Large-Suplattice lsuc (_⊔_) lzero
+Prop-Large-Suplattice =
+  make-Large-Suplattice Prop-Large-Poset is-large-suplattice-Prop-Large-Locale
 ```
 
 ### The large frame of propositions

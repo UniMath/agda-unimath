@@ -48,50 +48,50 @@ the form
 ### Morphisms of inverse sequential diagrams of types
 
 ```agda
-naturality-hom-inverse-sequential-diagram :
-  {l1 l2 : Level}
-  (A : inverse-sequential-diagram l1)
-  (B : inverse-sequential-diagram l2)
-  (h :
-    (n : ℕ) →
-    family-inverse-sequential-diagram A n →
-    family-inverse-sequential-diagram B n)
-  (n : ℕ) → UU (l1 ⊔ l2)
-naturality-hom-inverse-sequential-diagram A B =
-  naturality-section-dependent-inverse-sequential-diagram A
-    ( const-dependent-inverse-sequential-diagram A B)
-
-hom-inverse-sequential-diagram :
-  {l1 l2 : Level}
-  (A : inverse-sequential-diagram l1)
-  (B : inverse-sequential-diagram l2) →
-  UU (l1 ⊔ l2)
-hom-inverse-sequential-diagram A B =
-  section-dependent-inverse-sequential-diagram A
-    ( const-dependent-inverse-sequential-diagram A B)
-
 module _
   {l1 l2 : Level}
   (A : inverse-sequential-diagram l1)
   (B : inverse-sequential-diagram l2)
   where
 
+  naturality-hom-inverse-sequential-diagram :
+    (h :
+      (n : ℕ) →
+      family-inverse-sequential-diagram A n →
+      family-inverse-sequential-diagram B n) →
+    UU (l1 ⊔ l2)
+  naturality-hom-inverse-sequential-diagram =
+    naturality-section-dependent-inverse-sequential-diagram A
+      ( const-dependent-inverse-sequential-diagram A B)
+
+  hom-inverse-sequential-diagram : UU (l1 ⊔ l2)
+  hom-inverse-sequential-diagram =
+    section-dependent-inverse-sequential-diagram A
+      ( const-dependent-inverse-sequential-diagram A B)
+
+module _
+  {l1 l2 : Level}
+  (A : inverse-sequential-diagram l1)
+  (B : inverse-sequential-diagram l2)
+  (f : hom-inverse-sequential-diagram A B)
+  where
+
   map-hom-inverse-sequential-diagram :
-    hom-inverse-sequential-diagram A B → (n : ℕ) →
+    (n : ℕ) →
     family-inverse-sequential-diagram A n →
     family-inverse-sequential-diagram B n
   map-hom-inverse-sequential-diagram =
     map-section-dependent-inverse-sequential-diagram A
       ( const-dependent-inverse-sequential-diagram A B)
+      ( f)
 
   naturality-map-hom-inverse-sequential-diagram :
-    (f : hom-inverse-sequential-diagram A B) (n : ℕ) →
     naturality-hom-inverse-sequential-diagram A B
-      ( map-hom-inverse-sequential-diagram f)
-      ( n)
+      ( map-hom-inverse-sequential-diagram)
   naturality-map-hom-inverse-sequential-diagram =
     naturality-map-section-dependent-inverse-sequential-diagram A
       ( const-dependent-inverse-sequential-diagram A B)
+      ( f)
 ```
 
 ### Identity morphism on inverse sequential diagrams of types
@@ -107,39 +107,38 @@ pr2 (id-hom-inverse-sequential-diagram A) n = refl-htpy
 ### Composition of morphisms of inverse sequential diagrams of types
 
 ```agda
-map-comp-hom-inverse-sequential-diagram :
-  {l : Level} (A B C : inverse-sequential-diagram l) →
-  hom-inverse-sequential-diagram B C → hom-inverse-sequential-diagram A B →
-  (n : ℕ) →
-  family-inverse-sequential-diagram A n → family-inverse-sequential-diagram C n
-map-comp-hom-inverse-sequential-diagram A B C g f n =
-  map-hom-inverse-sequential-diagram B C g n ∘
-  map-hom-inverse-sequential-diagram A B f n
+module _
+  {l1 l2 l3 : Level}
+  ( A : inverse-sequential-diagram l1)
+  ( B : inverse-sequential-diagram l2)
+  ( C : inverse-sequential-diagram l3)
+  ( g : hom-inverse-sequential-diagram B C)
+  ( f : hom-inverse-sequential-diagram A B)
+  where
 
-naturality-comp-hom-inverse-sequential-diagram :
-  {l : Level} (A B C : inverse-sequential-diagram l)
-  (g : hom-inverse-sequential-diagram B C)
-  (f : hom-inverse-sequential-diagram A B)
-  (n : ℕ) →
-  naturality-hom-inverse-sequential-diagram A C
-    ( map-comp-hom-inverse-sequential-diagram A B C g f)
-    ( n)
-naturality-comp-hom-inverse-sequential-diagram A B C g f n x =
-  ( ap
-    ( map-hom-inverse-sequential-diagram B C g n)
-    ( naturality-map-hom-inverse-sequential-diagram A B f n x)) ∙
-  ( naturality-map-hom-inverse-sequential-diagram B C g n
-    ( map-hom-inverse-sequential-diagram A B f (succ-ℕ n) x))
+  map-comp-hom-inverse-sequential-diagram :
+    (n : ℕ) →
+    family-inverse-sequential-diagram A n →
+    family-inverse-sequential-diagram C n
+  map-comp-hom-inverse-sequential-diagram n =
+    map-hom-inverse-sequential-diagram B C g n ∘
+    map-hom-inverse-sequential-diagram A B f n
 
-comp-hom-inverse-sequential-diagram :
-  {l : Level} (A B C : inverse-sequential-diagram l) →
-  hom-inverse-sequential-diagram B C →
-  hom-inverse-sequential-diagram A B →
-  hom-inverse-sequential-diagram A C
-pr1 (comp-hom-inverse-sequential-diagram A B C g f) =
-  map-comp-hom-inverse-sequential-diagram A B C g f
-pr2 (comp-hom-inverse-sequential-diagram A B C g f) =
-  naturality-comp-hom-inverse-sequential-diagram A B C g f
+  naturality-comp-hom-inverse-sequential-diagram :
+    naturality-hom-inverse-sequential-diagram A C
+      ( map-comp-hom-inverse-sequential-diagram)
+  naturality-comp-hom-inverse-sequential-diagram n x =
+    ( ap
+      ( map-hom-inverse-sequential-diagram B C g n)
+      ( naturality-map-hom-inverse-sequential-diagram A B f n x)) ∙
+    ( naturality-map-hom-inverse-sequential-diagram B C g n
+      ( map-hom-inverse-sequential-diagram A B f (succ-ℕ n) x))
+
+  comp-hom-inverse-sequential-diagram :
+    hom-inverse-sequential-diagram A C
+  comp-hom-inverse-sequential-diagram =
+    map-comp-hom-inverse-sequential-diagram ,
+    naturality-comp-hom-inverse-sequential-diagram
 ```
 
 ## Properties
@@ -158,8 +157,9 @@ module _
     ((n : ℕ) →
       map-hom-inverse-sequential-diagram A B f n ~
       map-hom-inverse-sequential-diagram A B g n) →
-    (n : ℕ) → UU (l1 ⊔ l2)
-  coherence-htpy-hom-inverse-sequential-diagram f g H n =
+    UU (l1 ⊔ l2)
+  coherence-htpy-hom-inverse-sequential-diagram f g H =
+    (n : ℕ) →
     ( naturality-map-hom-inverse-sequential-diagram A B f n ∙h
       map-inverse-sequential-diagram B n ·l H (succ-ℕ n)) ~
     ( H n ·r map-inverse-sequential-diagram A n ∙h
@@ -171,7 +171,7 @@ module _
     Σ ( (n : ℕ) →
         map-hom-inverse-sequential-diagram A B f n ~
         map-hom-inverse-sequential-diagram A B g n)
-      ( λ H → (n : ℕ) → coherence-htpy-hom-inverse-sequential-diagram f g H n)
+      ( coherence-htpy-hom-inverse-sequential-diagram f g)
 
   refl-htpy-hom-inverse-sequential-diagram :
     (f : hom-inverse-sequential-diagram A B) →
@@ -193,11 +193,9 @@ module _
       ( is-torsorial-binary-htpy (map-hom-inverse-sequential-diagram A B f))
       ( map-hom-inverse-sequential-diagram A B f ,
         refl-binary-htpy (map-hom-inverse-sequential-diagram A B f))
-      ( is-torsorial-Eq-Π
+      ( is-torsorial-binary-htpy
         ( λ n →
-          is-torsorial-htpy
-            ( naturality-map-hom-inverse-sequential-diagram A B f n ∙h
-              refl-htpy)))
+          naturality-map-hom-inverse-sequential-diagram A B f n ∙h refl-htpy))
 
   is-equiv-htpy-eq-hom-inverse-sequential-diagram :
     (f g : hom-inverse-sequential-diagram A B) →

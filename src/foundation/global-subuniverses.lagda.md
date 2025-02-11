@@ -64,44 +64,38 @@ record global-subuniverse (α : Level → Level) : UUω where
       (l : Level) → subuniverse l (α l)
 
     is-closed-under-equiv-global-subuniverse :
-      (l1 l2 : Level) →
+      {l1 l2 : Level} →
       is-closed-under-equiv-subuniverses α subuniverse-global-subuniverse l1 l2
 
-open global-subuniverse public
-
-module _
-  {α : Level → Level} (P : global-subuniverse α)
-  where
+  is-in-global-subuniverse-Prop : {l : Level} → UU l → Prop (α l)
+  is-in-global-subuniverse-Prop {l} X =
+    subuniverse-global-subuniverse l X
 
   is-in-global-subuniverse : {l : Level} → UU l → UU (α l)
   is-in-global-subuniverse {l} X =
-    is-in-subuniverse (subuniverse-global-subuniverse P l) X
+    is-in-subuniverse (subuniverse-global-subuniverse l) X
+
+  is-prop-is-in-global-subuniverse :
+    {l : Level} (X : UU l) → is-prop (is-in-global-subuniverse X)
+  is-prop-is-in-global-subuniverse {l} X =
+    is-prop-type-Prop (subuniverse-global-subuniverse l X)
 
   type-global-subuniverse : (l : Level) → UU (α l ⊔ lsuc l)
   type-global-subuniverse l =
-    type-subuniverse (subuniverse-global-subuniverse P l)
+    type-subuniverse (subuniverse-global-subuniverse l)
 
   inclusion-global-subuniverse :
     {l : Level} → type-global-subuniverse l → UU l
   inclusion-global-subuniverse {l} =
-    inclusion-subuniverse (subuniverse-global-subuniverse P l)
-```
+    inclusion-subuniverse (subuniverse-global-subuniverse l)
 
-### Maps in a subuniverse
+  is-in-global-subuniverse-inclusion-global-subuniverse :
+    {l : Level} (X : type-global-subuniverse l) →
+    is-in-global-subuniverse (inclusion-global-subuniverse X)
+  is-in-global-subuniverse-inclusion-global-subuniverse {l} =
+    is-in-subuniverse-inclusion-subuniverse (subuniverse-global-subuniverse l)
 
-We say a map is _in_ a global subuniverse if each of its
-[fibers](foundation-core.fibers-of-maps.md) is.
-
-```agda
-module _
-  {α : Level → Level} (P : global-subuniverse α)
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-in-map-global-subuniverse : (A → B) → UU (α (l1 ⊔ l2) ⊔ l2)
-  is-in-map-global-subuniverse f =
-    (y : B) →
-    is-in-subuniverse (subuniverse-global-subuniverse P (l1 ⊔ l2)) (fiber f y)
+open global-subuniverse public
 ```
 
 ### The predicate of essentially being in a subuniverse
@@ -132,7 +126,7 @@ module _
 
 ## Properties
 
-### Global subuniverses are closed under homogenous equivalences
+### Global subuniverses are closed under equivalences between types in a single universe
 
 This is true for any family of subuniverses indexed by universe levels.
 
@@ -142,14 +136,14 @@ module _
   {l : Level} {X Y : UU l}
   where
 
-  is-in-global-subuniverse-homogenous-equiv :
+  is-in-global-subuniverse-equiv-Level :
     X ≃ Y → is-in-global-subuniverse P X → is-in-global-subuniverse P Y
-  is-in-global-subuniverse-homogenous-equiv =
+  is-in-global-subuniverse-equiv-Level =
     is-in-subuniverse-equiv (subuniverse-global-subuniverse P l)
 
-  is-in-global-subuniverse-homogenous-equiv' :
+  is-in-global-subuniverse-equiv-Level' :
     X ≃ Y → is-in-global-subuniverse P Y → is-in-global-subuniverse P X
-  is-in-global-subuniverse-homogenous-equiv' =
+  is-in-global-subuniverse-equiv-Level' =
     is-in-subuniverse-equiv' (subuniverse-global-subuniverse P l)
 ```
 

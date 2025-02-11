@@ -24,6 +24,8 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
 ```
@@ -112,30 +114,6 @@ module _
     map-inv-equiv (extensionality-subtype Q)
 ```
 
-### Similarity of subtypes
-
-```agda
-module _
-  {l1 : Level} {A : UU l1}
-  where
-
-  sim-subtype :
-    {l2 l3 : Level} → subtype l2 A → subtype l3 A → UU (l1 ⊔ l2 ⊔ l3)
-  sim-subtype P Q = (P ⊆ Q) × (Q ⊆ P)
-
-  has-same-elements-sim-subtype :
-    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) →
-    sim-subtype P Q → has-same-elements-subtype P Q
-  pr1 (has-same-elements-sim-subtype P Q s x) = pr1 s x
-  pr2 (has-same-elements-sim-subtype P Q s x) = pr2 s x
-
-  sim-has-same-elements-subtype :
-    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) →
-    has-same-elements-subtype P Q → sim-subtype P Q
-  pr1 (sim-has-same-elements-subtype P Q s) x = forward-implication (s x)
-  pr2 (sim-has-same-elements-subtype P Q s) x = backward-implication (s x)
-```
-
 ### The containment relation is antisymmetric
 
 ```agda
@@ -191,31 +169,27 @@ module _
   pr2 (inv-emb-into-subtype g) x =
     pr2 (map-emb g x)
 
-  issec-map-inv-emb-into-subtype :
-    ( ind-Σ (emb-into-subtype B) ∘ inv-emb-into-subtype) ~ id
-  issec-map-inv-emb-into-subtype g =
-    eq-type-subtype
-      is-emb-Prop
-      refl
+  is-section-map-inv-emb-into-subtype :
+    is-section (ind-Σ (emb-into-subtype B)) (inv-emb-into-subtype)
+  is-section-map-inv-emb-into-subtype g =
+    eq-type-subtype is-emb-Prop refl
 
-  isretr-map-inv-emb-into-subtype :
-    ( inv-emb-into-subtype ∘ ind-Σ (emb-into-subtype B)) ~ id
-  isretr-map-inv-emb-into-subtype (f , b) =
+  is-retraction-map-inv-emb-into-subtype :
+    is-retraction (ind-Σ (emb-into-subtype B)) (inv-emb-into-subtype)
+  is-retraction-map-inv-emb-into-subtype (f , b) =
     eq-type-subtype
-      (λ f → Π-Prop X (λ x → B (map-emb f x)))
-      (eq-type-subtype
-        is-emb-Prop
-        refl)
+      ( λ f → Π-Prop X (λ x → B (map-emb f x)))
+      ( eq-type-subtype is-emb-Prop refl)
 
   equiv-emb-into-subtype :
-    Σ (X ↪ A) (λ f →
-      (x : X) → is-in-subtype B (map-emb f x)) ≃ (X ↪ type-subtype B)
+    Σ ( X ↪ A)
+      ( λ f → (x : X) → is-in-subtype B (map-emb f x)) ≃ (X ↪ type-subtype B)
   pr1 equiv-emb-into-subtype = ind-Σ (emb-into-subtype B)
   pr2 equiv-emb-into-subtype =
     is-equiv-is-invertible
       inv-emb-into-subtype
-      issec-map-inv-emb-into-subtype
-      isretr-map-inv-emb-into-subtype
+      is-section-map-inv-emb-into-subtype
+      is-retraction-map-inv-emb-into-subtype
 ```
 
 ## See also

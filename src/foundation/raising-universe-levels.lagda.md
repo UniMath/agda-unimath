@@ -22,6 +22,7 @@ open import foundation-core.homotopies
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.subtypes
 ```
 
 </details>
@@ -71,6 +72,9 @@ compute-raise : (l : Level) {l1 : Level} (A : UU l1) → A ≃ raise l A
 pr1 (compute-raise l A) = map-raise
 pr2 (compute-raise l A) = is-equiv-map-raise
 
+inv-compute-raise : (l : Level) {l1 : Level} (A : UU l1) → raise l A ≃ A
+inv-compute-raise l A = inv-equiv (compute-raise l A)
+
 Raise : (l : Level) {l1 : Level} (A : UU l1) → Σ (UU (l1 ⊔ l)) (λ X → A ≃ X)
 pr1 (Raise l A) = raise l A
 pr2 (Raise l A) = compute-raise l A
@@ -92,6 +96,18 @@ raise-Set : (l : Level) {l1 : Level} → Set l1 → Set (l ⊔ l1)
 pr1 (raise-Set l A) = raise l (type-Set A)
 pr2 (raise-Set l A) =
   is-set-equiv' (type-Set A) (compute-raise l (type-Set A)) (is-set-type-Set A)
+```
+
+### Raising universe levels of subtypes
+
+```agda
+raise-subtype :
+  (l : Level) →
+  {l1 l2 : Level} →
+  {A : UU l1} →
+  subtype l2 A →
+  subtype (l2 ⊔ l) A
+raise-subtype l B x = raise-Prop l (B x)
 ```
 
 ### Raising equivalent types

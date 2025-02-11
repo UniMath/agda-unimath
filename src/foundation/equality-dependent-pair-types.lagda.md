@@ -192,13 +192,13 @@ module _
 
   coh-eq-base-Σ² :
     {s t : Σ A (λ x → Σ (B x) λ y → C x y)} (p : s ＝ t) →
-    eq-base-eq-pair-Σ p ＝
-    eq-base-eq-pair-Σ (eq-base-eq-pair-Σ (ap (map-inv-associative-Σ' A B C) p))
+    eq-base-eq-pair p ＝
+    eq-base-eq-pair (eq-base-eq-pair (ap (map-inv-associative-Σ' A B C) p))
   coh-eq-base-Σ² refl = refl
 
   dependent-eq-second-component-eq-Σ² :
     {s t : Σ A (λ x → Σ (B x) λ y → C x y)} (p : s ＝ t) →
-    dependent-identification B (eq-base-eq-pair-Σ p) (pr1 (pr2 s)) (pr1 (pr2 t))
+    dependent-identification B (eq-base-eq-pair p) (pr1 (pr2 s)) (pr1 (pr2 t))
   dependent-eq-second-component-eq-Σ² {s = s} {t = t} p =
     ( ap (λ q → tr B q (pr1 (pr2 s))) (coh-eq-base-Σ² p)) ∙
     ( pr2
@@ -219,14 +219,14 @@ module _
 
   coh-eq-base-Σ³ :
     { s t : Σ A (λ x → Σ (B x) (λ y → Σ (C x) (D x y)))} (p : s ＝ t) →
-    eq-base-eq-pair-Σ p ＝
-    eq-base-eq-pair-Σ (ap (map-equiv (interchange-Σ-Σ-Σ D)) p)
+    eq-base-eq-pair p ＝
+    eq-base-eq-pair (ap (map-equiv (interchange-Σ-Σ-Σ D)) p)
   coh-eq-base-Σ³ refl = refl
 
   dependent-eq-third-component-eq-Σ³ :
     { s t : Σ A (λ x → Σ (B x) (λ y → Σ (C x) (D x y)))} (p : s ＝ t) →
     dependent-identification C
-      ( eq-base-eq-pair-Σ p)
+      ( eq-base-eq-pair p)
       ( pr1 (pr2 (pr2 s)))
       ( pr1 (pr2 (pr2 t)))
   dependent-eq-third-component-eq-Σ³ {s = s} {t = t} p =

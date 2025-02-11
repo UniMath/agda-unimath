@@ -106,6 +106,10 @@ if __name__ == '__main__':
         output = re.sub(
             r'(^|\n)(#+\s.*)[\.,:;!?¡¿]\s*($|\n)', r'\1\2\3', output)
 
+        # Replace strange whitespace with normal spaces
+        output = re.sub(
+            r'(?<!^)(?![ \t\r\n\f\v])\s', r' ', output)
+
         if output != inputText:
             with open(fpath, 'w') as f:
                 f.write(output)

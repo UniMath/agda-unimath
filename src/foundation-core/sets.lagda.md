@@ -17,6 +17,7 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -25,7 +26,9 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A type is a set if its identity types are propositions.
+A type is a {{#concept "set" Agda=is-set}} if its
+[identity types](foundation-core.identity-types.md) are
+[propositions](foundation-core.propositions.md).
 
 ## Definition
 
@@ -86,7 +89,54 @@ module _
       ( contraction (is-proof-irrelevant-is-prop (H x x) refl) p)
 ```
 
+### A type is a set if and only if it satisfies uniqueness of identity proofs
+
+A type `A` is said to satisfy
+{{#concept "uniqueness of identity proofs" Agda=has-uip}} if for all elements
+`x y : A` all equality proofs `x ＝ y` are equal.
+
+```agda
+has-uip : {l : Level} → UU l → UU l
+has-uip A = (x y : A) → all-elements-equal (x ＝ y)
+
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-set-has-uip : is-set A → has-uip A
+  is-set-has-uip is-set-A x y = eq-is-prop' (is-set-A x y)
+
+  has-uip-is-set : has-uip A → is-set A
+  has-uip-is-set uip-A x y = is-prop-all-elements-equal (uip-A x y)
+```
+
 ### If a reflexive binary relation maps into the identity type of `A`, then `A` is a set
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (x : A) (R : A → UU l2)
+  (p : (y : A) → is-prop (R y)) (ρ : R x)
+  (i : (y : A) → R y → x ＝ y)
+  where
+
+  abstract
+    is-equiv-prop-in-based-id : (y : A) → is-equiv (i y)
+    is-equiv-prop-in-based-id =
+      fundamental-theorem-id-retraction x i
+        ( λ y → (ind-Id x (λ z p → R z) ρ y) , (λ r → eq-is-prop (p y)))
+
+  abstract
+    is-torsorial-prop-in-based-id : is-torsorial R
+    is-torsorial-prop-in-based-id =
+      fundamental-theorem-id'
+        ( λ y → map-inv-is-equiv (is-equiv-prop-in-based-id y))
+        ( λ y → is-equiv-map-inv-is-equiv (is-equiv-prop-in-based-id y))
+
+  abstract
+    is-prop-based-Id-prop-in-based-id : (y : A) → is-prop (x ＝ y)
+    is-prop-based-Id-prop-in-based-id y =
+      is-prop-is-equiv' (is-equiv-prop-in-based-id y) (p y)
+```
 
 ```agda
 module _
@@ -97,16 +147,12 @@ module _
 
   abstract
     is-equiv-prop-in-id : (x y : A) → is-equiv (i x y)
-    is-equiv-prop-in-id x =
-      fundamental-theorem-id-retraction x (i x)
-        ( λ y →
-          pair
-            ( ind-Id x (λ z p → R x z) (ρ x) y)
-            ( λ r → eq-is-prop (p x y)))
+    is-equiv-prop-in-id x = is-equiv-prop-in-based-id x (R x) (p x) (ρ x) (i x)
 
   abstract
     is-set-prop-in-id : is-set A
-    is-set-prop-in-id x y = is-prop-is-equiv' (is-equiv-prop-in-id x y) (p x y)
+    is-set-prop-in-id x =
+      is-prop-based-Id-prop-in-based-id x (R x) (p x) (ρ x) (i x)
 ```
 
 ### Any proposition is a set

@@ -10,6 +10,7 @@ module orthogonal-factorization-systems.pullback-hom where
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.cones-over-cospan-diagrams
+open import foundation.cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -19,6 +20,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-fibers-of-maps
+open import foundation.functoriality-morphisms-arrows
 open import foundation.higher-homotopies-morphisms-arrows
 open import foundation.homotopies
 open import foundation.homotopies-morphisms-arrows
@@ -27,6 +29,7 @@ open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
+open import foundation.pullback-cones
 open import foundation.pullbacks
 open import foundation.retractions
 open import foundation.sections
@@ -102,14 +105,15 @@ orthogonal to `g`, while the pullback-hom of `f` and `g` is
 [surjective](foundation.surjective-maps.md) if and only if `f` satisfies the
 left lifting property to `g`.
 
-There are two common ways to denote the pullback-hom: Some authors use `f ⋔ g`,
-while other authors use `⟨f , g⟩`. Both notations can be used, depending on what
-perspective of the pullback-hom is emphasized. The pitchfork-notation `f ⋔ g` is
-used more often in settings where a lifting property of `f` and `g` is
-emphasized, while the hom-notation `⟨f , g⟩` is used when the pullback-hom is
-thought of in terms of hom-sets. The latter notation is useful for instance, if
-one wants to emphasize an adjoint relation between the pullback-hom and the
-pushout-product:
+**Notation.** There are two common ways to denote the pullback-hom: Some authors
+use `f ⋔ g`, while other authors use `⟨f , g⟩`. Both notations can be used,
+depending on what perspective of the pullback-hom is emphasized. The
+pitchfork-notation `f ⋔ g` is used more often in settings where a lifting
+property of `f` and `g` is emphasized, while the hom-notation `⟨f , g⟩` is used
+when the pullback-hom is thought of in terms of hom-sets. The latter notation is
+useful for instance, if one wants to emphasize an adjoint relation between the
+pullback-hom and the
+[pushout-product](synthetic-homotopy-theory.pushout-products.md):
 
 ```text
   ⟨f □ g , h⟩ ＝ ⟨f , ⟨g , h⟩⟩.
@@ -153,9 +157,10 @@ module _
   coh-pullback-hom j = refl-htpy
 
   pullback-hom : (B → X) → hom-arrow f g
-  pr1 (pullback-hom j) = map-domain-pullback-hom j
-  pr1 (pr2 (pullback-hom j)) = map-codomain-pullback-hom j
-  pr2 (pr2 (pullback-hom j)) = coh-pullback-hom j
+  pullback-hom j =
+    ( map-domain-pullback-hom j ,
+      map-codomain-pullback-hom j ,
+      coh-pullback-hom j)
 
   infix 30 _⋔_
   _⋔_ = pullback-hom
@@ -237,9 +242,7 @@ module _
   where
 
   cone-pullback-hom : cone (precomp f Y) (postcomp A g) (B → X)
-  pr1 cone-pullback-hom = postcomp B g
-  pr1 (pr2 cone-pullback-hom) = precomp f X
-  pr2 (pr2 cone-pullback-hom) = refl-htpy
+  cone-pullback-hom = (postcomp B g , precomp f X , refl-htpy)
 
   gap-pullback-hom : (B → X) → type-standard-pullback-hom f g
   gap-pullback-hom = gap (precomp f Y) (postcomp A g) cone-pullback-hom
@@ -256,21 +259,17 @@ module _
 
   map-compute-pullback-hom :
     hom-arrow f g → type-standard-pullback-hom f g
-  pr1 (map-compute-pullback-hom h) =
-    map-codomain-hom-arrow f g h
-  pr1 (pr2 (map-compute-pullback-hom h)) =
-    map-domain-hom-arrow f g h
-  pr2 (pr2 (map-compute-pullback-hom h)) =
-    eq-htpy (coh-hom-arrow f g h)
+  map-compute-pullback-hom h =
+    ( map-codomain-hom-arrow f g h ,
+      map-domain-hom-arrow f g h ,
+      eq-htpy (coh-hom-arrow f g h))
 
   map-inv-compute-pullback-hom :
     type-standard-pullback-hom f g → hom-arrow f g
-  pr1 (map-inv-compute-pullback-hom h) =
-    map-domain-standard-pullback-hom f g h
-  pr1 (pr2 (map-inv-compute-pullback-hom h)) =
-    map-codomain-standard-pullback-hom f g h
-  pr2 (pr2 (map-inv-compute-pullback-hom h)) =
-    coh-standard-pullback-hom f g h
+  map-inv-compute-pullback-hom h =
+    ( map-domain-standard-pullback-hom f g h ,
+      map-codomain-standard-pullback-hom f g h ,
+      coh-standard-pullback-hom f g h)
 
   is-section-map-inv-compute-pullback-hom :
     is-section map-compute-pullback-hom map-inv-compute-pullback-hom
@@ -285,23 +284,21 @@ module _
     eq-pair-eq-fiber
       ( eq-pair-eq-fiber (is-section-eq-htpy (coh-hom-arrow f g h)))
 
-  abstract
-    is-equiv-map-compute-pullback-hom :
-      is-equiv map-compute-pullback-hom
-    is-equiv-map-compute-pullback-hom =
-      is-equiv-is-invertible
-        ( map-inv-compute-pullback-hom)
-        ( is-section-map-inv-compute-pullback-hom)
-        ( is-retraction-map-inv-compute-pullback-hom)
+  is-equiv-map-compute-pullback-hom :
+    is-equiv map-compute-pullback-hom
+  is-equiv-map-compute-pullback-hom =
+    is-equiv-is-invertible
+      ( map-inv-compute-pullback-hom)
+      ( is-section-map-inv-compute-pullback-hom)
+      ( is-retraction-map-inv-compute-pullback-hom)
 
-  abstract
-    is-equiv-map-inv-compute-pullback-hom :
-      is-equiv map-inv-compute-pullback-hom
-    is-equiv-map-inv-compute-pullback-hom =
-      is-equiv-is-invertible
-        ( map-compute-pullback-hom)
-        ( is-retraction-map-inv-compute-pullback-hom)
-        ( is-section-map-inv-compute-pullback-hom)
+  is-equiv-map-inv-compute-pullback-hom :
+    is-equiv map-inv-compute-pullback-hom
+  is-equiv-map-inv-compute-pullback-hom =
+    is-equiv-is-invertible
+      ( map-compute-pullback-hom)
+      ( is-retraction-map-inv-compute-pullback-hom)
+      ( is-section-map-inv-compute-pullback-hom)
 
   compute-pullback-hom : hom-arrow f g ≃ type-standard-pullback-hom f g
   pr1 compute-pullback-hom = map-compute-pullback-hom
@@ -337,7 +334,7 @@ module _
   triangle-pullback-hom :
     coherence-triangle-maps'
       ( gap-pullback-hom f g)
-      ( map-compute-pullback-hom f g)
+      ( gap (precomp f Y) (postcomp A g) (cone-hom-arrow' f g))
       ( pullback-hom f g)
   triangle-pullback-hom j =
     eq-pair-eq-fiber (eq-pair-eq-fiber (is-retraction-eq-htpy refl))
@@ -386,9 +383,18 @@ module _
   where
 
   is-pullback-cone-hom-arrow-pullback-hom :
-    is-pullback (precomp f Y) (postcomp A g) (cone-hom-arrow-pullback-hom f g)
+    is-pullback
+      ( precomp f Y)
+      ( postcomp A g)
+      ( cone-hom-arrow-pullback-hom f g)
   is-pullback-cone-hom-arrow-pullback-hom =
     is-equiv-map-compute-pullback-hom f g
+
+  pullback-cone-hom-arrow-pullback-hom :
+    pullback-cone (cospan-diagram-hom-arrow f g) (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  pullback-cone-hom-arrow-pullback-hom =
+    ( hom-arrow f g , cone-hom-arrow-pullback-hom f g) ,
+    ( is-pullback-cone-hom-arrow-pullback-hom)
 
   universal-property-pullback-cone-hom-arrow-pullback-hom :
     universal-property-pullback
@@ -518,6 +524,17 @@ module _
 
 ### Computing the fiber map between the vertical maps in the pullback-hom square
 
+We have an equivalence of arrows
+
+```text
+                                      ~
+      (Π (b : B), fiber g (h b)) ----------> fiber (g ∘ -) h
+                  |                                 |
+                  |                                 |
+                  ∨                   ~             ∨
+  (Π (a : A) → (fiber g (h (f a)))) ----> fiber (g ∘ -) (h ∘ f)
+```
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
@@ -543,7 +560,7 @@ module _
       ( postcomp A g)
       ( precomp f Y h)
       ( refl)
-      ( compute-eq-htpy-ap-precomp f (pr2 (map-distributive-Π-Σ H)))
+      ( coherence-eq-htpy-ap-precomp f (pr2 (map-distributive-Π-Σ H)))
 ```
 
 ## Table of files about pullbacks

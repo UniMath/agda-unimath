@@ -101,4 +101,4 @@ is-taxicab-number-ℕ n x =
 ## External links
 
 - [Taxicab numbers](https://en.wikipedia.org/wiki/Taxicab_number) at Wikipedia
-- [Taxicab nubmers](https://oeis.org/A011541) at the OEIS.
+- [Taxicab numbers](https://oeis.org/A011541) in the OEIS.

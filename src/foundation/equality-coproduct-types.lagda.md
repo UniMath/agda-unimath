@@ -140,6 +140,11 @@ module _
     map-compute-eq-coproduct-inl-inl : Id {A = A + B} (inl x) (inl y) → x ＝ y
     map-compute-eq-coproduct-inl-inl = map-equiv compute-eq-coproduct-inl-inl
 
+    is-equiv-map-compute-eq-coproduct-inl-inl :
+      is-equiv map-compute-eq-coproduct-inl-inl
+    is-equiv-map-compute-eq-coproduct-inl-inl =
+      is-equiv-map-equiv compute-eq-coproduct-inl-inl
+
   module _
     (x : A) (y : B)
     where
@@ -220,13 +225,18 @@ module _
 
     map-compute-eq-coproduct-inr-inr : Id {A = A + B} (inr x) (inr y) → x ＝ y
     map-compute-eq-coproduct-inr-inr = map-equiv compute-eq-coproduct-inr-inr
+
+    is-equiv-map-compute-eq-coproduct-inr-inr :
+      is-equiv map-compute-eq-coproduct-inr-inr
+    is-equiv-map-compute-eq-coproduct-inr-inr =
+      is-equiv-map-equiv compute-eq-coproduct-inr-inr
 ```
 
 ### The left and right inclusions into a coproduct are embeddings
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   abstract
@@ -303,7 +313,7 @@ module _
       ( ap inl)
       ( ap-comp (rec-coproduct f g) inl)
       ( H a a')
-      ( is-emb-inl A B a a')
+      ( is-emb-inl a a')
   is-emb-coproduct H K L (inl a) (inr b') =
     is-equiv-is-empty (ap (rec-coproduct f g)) (L a b')
   is-emb-coproduct H K L (inr b) (inl a') =
@@ -315,7 +325,7 @@ module _
       ( ap inr)
       ( ap-comp (rec-coproduct f g) inr)
       ( K b b')
-      ( is-emb-inr A B b b')
+      ( is-emb-inr b b')
 ```
 
 ### Coproducts of `k+2`-truncated types are `k+2`-truncated

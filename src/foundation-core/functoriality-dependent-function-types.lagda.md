@@ -22,6 +22,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.retractions
 open import foundation-core.type-theoretic-principle-of-choice
 ```
 
@@ -34,7 +35,7 @@ open import foundation-core.type-theoretic-principle-of-choice
 ```agda
 htpy-map-Π :
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  {f f' : (i : I) → A i → B i} (H : (i : I) → (f i) ~ (f' i)) →
+  {f f' : (i : I) → A i → B i} (H : (i : I) → f i ~ f' i) →
   map-Π f ~ map-Π f'
 htpy-map-Π H h = eq-htpy (λ i → H i (h i))
 
@@ -43,6 +44,32 @@ htpy-map-Π' :
   {J : UU l4} (α : J → I) {f f' : (i : I) → A i → B i} →
   ((i : I) → (f i) ~ (f' i)) → map-Π' α f ~ map-Π' α f'
 htpy-map-Π' α H = htpy-map-Π (H ∘ α)
+```
+
+### The operation `map-Π` preserves composition
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {I : UU l1}
+  {A : I → UU l2} {B : I → UU l3} {C : I → UU l4}
+  where
+
+  preserves-comp-map-Π :
+    (g : (i : I) → B i → C i)
+    (f : (i : I) → A i → B i) →
+    map-Π (λ i → g i ∘ f i) ~ map-Π g ∘ map-Π f
+  preserves-comp-map-Π g f = refl-htpy
+```
+
+### The operation `map-Π` preserves identity functions
+
+```agda
+module _
+  {l1 l2 : Level} {I : UU l1} {A : I → UU l2}
+  where
+
+  preserves-id-map-Π : map-Π (λ i → id {A = A i}) ~ id
+  preserves-id-map-Π = refl-htpy
 ```
 
 ### The fibers of `map-Π`
@@ -65,48 +92,50 @@ compute-fiber-map-Π' α f = compute-fiber-map-Π (f ∘ α)
 ### Families of equivalences induce equivalences of dependent function types
 
 ```agda
-abstract
-  is-equiv-map-Π-is-fiberwise-equiv :
-    {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-    {f : (i : I) → A i → B i} → is-fiberwise-equiv f →
-    is-equiv (map-Π f)
-  is-equiv-map-Π-is-fiberwise-equiv is-equiv-f =
-    is-equiv-is-contr-map
-      ( λ g →
-        is-contr-equiv' _
-          ( compute-fiber-map-Π _ g)
-          ( is-contr-Π (λ i → is-contr-map-is-equiv (is-equiv-f i) (g i))))
-
-equiv-Π-equiv-family :
+module _
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  (e : (i : I) → A i ≃ B i) → ((i : I) → A i) ≃ ((i : I) → B i)
-pr1 (equiv-Π-equiv-family e) =
-  map-Π (λ i → map-equiv (e i))
-pr2 (equiv-Π-equiv-family e) =
-  is-equiv-map-Π-is-fiberwise-equiv (λ i → is-equiv-map-equiv (e i))
+  where
+
+  abstract
+    is-equiv-map-Π-is-fiberwise-equiv :
+      {f : (i : I) → A i → B i} → is-fiberwise-equiv f → is-equiv (map-Π f)
+    is-equiv-map-Π-is-fiberwise-equiv is-equiv-f =
+      is-equiv-is-contr-map
+        ( λ g →
+          is-contr-equiv' _
+            ( compute-fiber-map-Π _ g)
+            ( is-contr-Π (λ i → is-contr-map-is-equiv (is-equiv-f i) (g i))))
+
+  equiv-Π-equiv-family :
+    (e : (i : I) → A i ≃ B i) → ((i : I) → A i) ≃ ((i : I) → B i)
+  equiv-Π-equiv-family e =
+    ( map-Π (λ i → map-equiv (e i)) ,
+      is-equiv-map-Π-is-fiberwise-equiv (λ i → is-equiv-map-equiv (e i)))
 ```
 
 ### Families of equivalences induce equivalences of implicit dependent function types
 
 ```agda
-is-equiv-map-implicit-Π-is-fiberwise-equiv :
-    {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-    {f : (i : I) → A i → B i} → is-fiberwise-equiv f →
-    is-equiv (map-implicit-Π f)
-is-equiv-map-implicit-Π-is-fiberwise-equiv is-equiv-f =
-  is-equiv-comp _ _
-    ( is-equiv-explicit-implicit-Π)
-    ( is-equiv-comp _ _
-      ( is-equiv-map-Π-is-fiberwise-equiv is-equiv-f)
-      ( is-equiv-implicit-explicit-Π))
-
-equiv-implicit-Π-equiv-family :
+module _
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  (e : (i : I) → (A i) ≃ (B i)) → ({i : I} → A i) ≃ ({i : I} → B i)
-equiv-implicit-Π-equiv-family e =
-  ( equiv-implicit-explicit-Π) ∘e
-  ( equiv-Π-equiv-family e) ∘e
-  ( equiv-explicit-implicit-Π)
+  where
+
+  is-equiv-map-implicit-Π-is-fiberwise-equiv :
+      {f : (i : I) → A i → B i} → is-fiberwise-equiv f →
+      is-equiv (map-implicit-Π f)
+  is-equiv-map-implicit-Π-is-fiberwise-equiv is-equiv-f =
+    is-equiv-comp _ _
+      ( is-equiv-explicit-implicit-Π)
+      ( is-equiv-comp _ _
+        ( is-equiv-map-Π-is-fiberwise-equiv is-equiv-f)
+        ( is-equiv-implicit-explicit-Π))
+
+  equiv-implicit-Π-equiv-family :
+    (e : (i : I) → (A i) ≃ (B i)) → ({i : I} → A i) ≃ ({i : I} → B i)
+  equiv-implicit-Π-equiv-family e =
+    ( equiv-implicit-explicit-Π) ∘e
+    ( equiv-Π-equiv-family e) ∘e
+    ( equiv-explicit-implicit-Π)
 ```
 
 ##### Computing the inverse of `equiv-Π-equiv-family`
@@ -125,6 +154,22 @@ module _
       ( equiv-Π-equiv-family e)
       ( ( is-section-map-inv-equiv (equiv-Π-equiv-family e) f) ∙
         ( eq-htpy (λ x → inv (is-section-map-inv-equiv (e x) (f x)))))
+```
+
+### Families of retracts induce retracts of dependent function types
+
+```agda
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  where
+
+  abstract
+    retraction-map-Π-fiberwise-retraction :
+      {f : (i : I) → A i → B i} →
+      ((i : I) → retraction (f i)) → retraction (map-Π f)
+    retraction-map-Π-fiberwise-retraction {f} r =
+      ( ( map-Π (λ i → map-retraction (f i) (r i))) ,
+        ( λ h → eq-htpy (λ i → is-retraction-map-retraction (f i) (r i) (h i))))
 ```
 
 ## See also

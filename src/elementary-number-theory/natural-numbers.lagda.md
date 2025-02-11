@@ -21,9 +21,10 @@ open import foundation-core.negation
 
 ## Idea
 
-The **natural numbers** is an inductively generated type by the zero element and
-the successor function. The induction principle for the natural numbers works to
-construct sections of type families over the natural numbers.
+The {{#concept "natural numbers" WD="natural number" WDID=Q21199 Agda=ℕ}} is an
+inductively generated type by the zero element and the successor function. The
+induction principle for the natural numbers works to construct sections of type
+families over the natural numbers.
 
 ## Definitions
 
@@ -81,6 +82,10 @@ is-not-one-ℕ' n = ¬ (is-one-ℕ' n)
 ## Properties
 
 ### The induction principle of ℕ
+
+The induction principle of the natural numbers is the 74th theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ```agda
 ind-ℕ :
@@ -146,3 +151,7 @@ is-not-one-two-ℕ ()
   [`strong-induction-natural-numbers`](elementary-number-theory.strong-induction-natural-numbers.md).
 - The based strong induction principle is defined in
   [`based-strong-induction-natural-numbers`](elementary-number-theory.based-strong-induction-natural-numbers.md).
+
+## References
+
+{{#bibliography}}

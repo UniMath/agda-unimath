@@ -1,4 +1,4 @@
-# The maybe modality on finite types
+# The maybe monad on finite types
 
 ```agda
 module univalent-combinatorics.maybe where

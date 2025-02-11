@@ -12,10 +12,10 @@ displayName = "Egbert Rijke"
 maintainer = true
 extra = " (Lead developer)"
 usernames = [ "Egbert Rijke" ]
-homepage = "https://users.fmf.uni-lj.si/rijke/"
+homepage = "https://egbertrijke.github.io"
 github = "EgbertRijke"
 bio = '''
-Egbert Rijke is a postdoctoral researcher at the University of Ljubljana. His
+Egbert Rijke is a postdoctoral researcher at Johns Hopkins University. His
 research is on homotopy type theory and general mathematics from a univalent
 point of view.
 '''
@@ -35,7 +35,7 @@ in Trondheim. His research is on homotopy type theory and higher category theory
 displayName = "Elisabeth Stenholm"
 maintainer = true
 usernames = [ "Elisabeth Stenholm", "Elisabeth Bonnevier" ]
-homepage = "https://elisabeth.bonnevier.one"
+homepage = "https://elisabeth.stenholm.one"
 github = "elisabethstenholm"
 bio = '''
 Elisabeth is a PhD student at the University of Bergen. Her research is on
@@ -75,16 +75,19 @@ github = "EleonoreMangel"
 displayName = "Bryan Lu"
 usernames = [ "Bryan Lu" ]
 github = "blu-bird"
+homepage = "https://blu-bird.github.io"
 
 [[contributors]]
 displayName = "Raymond Baker"
 usernames = [ "Raymond Baker" ]
 github = "morphismz"
+homepage = "https://morphismz.github.io"
 
 [[contributors]]
 displayName = "Elif Uskuplu"
 usernames = [ "ElifUskuplu" ]
 github = "ElifUskuplu"
+homepage = "https://elifuskuplu.github.io"
 
 [[contributors]]
 displayName = "Victor Blanchi"
@@ -149,6 +152,7 @@ usernames = [ "Julian KG" ]
 displayName = "favonia"
 usernames = [ "favonia" ]
 github = "favonia"
+homepage = "https://favonia.org"
 
 [[contributors]]
 displayName = "fernabnor"
@@ -217,6 +221,7 @@ github = "louismntnu"
 displayName = "Andrej Bauer"
 usernames = [ "Andrej Bauer" ]
 github = "andrejbauer"
+homepage = "https://www.andrej.com"
 
 [[contributors]]
 displayName = "Matej Petković"
@@ -242,3 +247,13 @@ github = "UlrikBuchholtz"
 displayName = "Garrett Figueroa"
 usernames = [ "Garrett Figueroa", "djspacewhale" ]
 github = "djspacewhale"
+
+[[contributors]]
+displayName = "Job Petrovčič"
+usernames = [ "Job Petrovčič", "JobPetrovcic" ]
+github = "JobPetrovcic"
+
+[[contributors]]
+displayName = "Louis Wasserman"
+usernames = [ "Louis Wasserman" ]
+github = "lowasser"
