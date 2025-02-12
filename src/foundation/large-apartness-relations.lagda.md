@@ -20,7 +20,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **large apartness relation** on a family of types indexed by universe levels
+A {{#concept "large apartness relation" Agda=Large-Apartness-Relation}} on a family of types indexed by universe levels
 `A` is a [large binary relation](foundation.large-binary-relations.md) `R` which
 is
 

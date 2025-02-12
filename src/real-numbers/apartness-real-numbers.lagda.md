@@ -25,8 +25,8 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-Two real numbers are [apart](foundation.large-apartness-relations.md) if one is
-strictly less than the other.
+Two [real numbers](real-numbers.dedekind-real-numbers.md) are [apart](foundation.large-apartness-relations.md) if one is
+[strictly less](real-numbers.strict-inequality-real-numbers.md) than the other.
 
 ```agda
 module _
@@ -65,7 +65,7 @@ symmetric-apart-ℝ x y =
 
 ```agda
 cotransitive-apart-ℝ : is-cotransitive-Large-Relation-Prop ℝ apart-ℝ-Prop
-cotransitive-apart-ℝ x y z x#y =
+cotransitive-apart-ℝ x y z =
   elim-disjunction
     ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop z y)
     ( λ x<y →
@@ -80,7 +80,6 @@ cotransitive-apart-ℝ x y z x#y =
         ( inr-disjunction ∘ inr-disjunction)
         ( inl-disjunction ∘ inr-disjunction)
         ( cotransitive-le-ℝ-Prop y x z y<x))
-    x#y
 ```
 
 ### Apartness on the reals is a large apartness relation

@@ -375,8 +375,8 @@ module _
 ### Strict inequality on the real numbers is cotransitive
 
 ```agda
-cotransitive-le-ℝ-Prop : is-cotransitive-Large-Relation-Prop ℝ le-ℝ-Prop
-cotransitive-le-ℝ-Prop x y z =
+cotransitive-le-ℝ : is-cotransitive-Large-Relation-Prop ℝ le-ℝ-Prop
+cotransitive-le-ℝ x y z =
   elim-exists
     (le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
     ( λ q (x<q , q<y) →
