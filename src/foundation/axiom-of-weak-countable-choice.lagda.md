@@ -10,7 +10,6 @@ module foundation.axiom-of-weak-countable-choice where
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.negated-equality
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.disjunction
@@ -20,6 +19,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.law-of-excluded-middle
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
