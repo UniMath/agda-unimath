@@ -28,11 +28,11 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import logic.functoriality-existential-quantification
-
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.minkowski-multiplication-commutative-monoids
+
+open import logic.functoriality-existential-quantification
 
 open import real-numbers.lower-dedekind-real-numbers
 ```
@@ -41,8 +41,11 @@ open import real-numbers.lower-dedekind-real-numbers
 
 ## Idea
 
-The sum of two [lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md)
-is the Minkowski sum of their cuts.
+The sum of two
+[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md) is
+the
+[Minkowski sum](group-theory.minkowski-multiplication-commutative-monoids.md) of
+their cuts.
 
 ```agda
 module _
@@ -109,13 +112,13 @@ module _
               in
               intro-exists
                 ( rx -ℚ ε , q -ℚ (rx -ℚ ε))
-                ( le-cut-lower-ℝ
+                ( is-in-cut-le-ℚ-lower-ℝ
                     ( x)
                     ( rx -ℚ ε)
                     ( rx)
                     ( le-diff-rational-ℚ⁺ rx ε⁺)
                     ( rx<x) ,
-                  le-cut-lower-ℝ
+                  is-in-cut-le-ℚ-lower-ℝ
                     ( y)
                     ( q -ℚ (rx -ℚ ε))
                     ( ry)

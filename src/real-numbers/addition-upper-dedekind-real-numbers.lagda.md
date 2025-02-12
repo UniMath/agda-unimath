@@ -28,11 +28,11 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import logic.functoriality-existential-quantification
-
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.minkowski-multiplication-commutative-monoids
+
+open import logic.functoriality-existential-quantification
 
 open import real-numbers.upper-dedekind-real-numbers
 ```
@@ -41,8 +41,11 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Idea
 
-The sum of two [upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md)
-is the Minkowski sum of their cuts.
+The sum of two
+[upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md) is
+the
+[Minkowski sum](group-theory.minkowski-multiplication-commutative-monoids.md) of
+their cuts.
 
 ```agda
 module _
@@ -84,82 +87,72 @@ module _
             ( add-ℚ)
             ( λ ux' uy' (ux'<ux , x<ux') (uy'<uy , y<uy') →
               tr
-                ( le-ℚ (ux' +ℚ uy') )
+                ( le-ℚ (ux' +ℚ uy'))
                 ( inv (q=ux+uy))
                 ( preserves-le-add-ℚ {ux'} {ux} {uy'} {uy} ux'<ux uy'<uy) ,
               intro-exists (ux' , uy') (x<ux' , y<uy' , refl))
             ( forward-implication (is-rounded-cut-upper-ℝ x ux) x<ux)
             ( forward-implication (is-rounded-cut-upper-ℝ y uy) y<uy))
-    pr2 (is-rounded-cut-add-upper-ℝ q) = {!   !}
-    {-
     pr2 (is-rounded-cut-add-upper-ℝ q) =
       elim-exists
         ( cut-add-upper-ℝ q)
-        ( λ r (q<r , r<x+y) →
+        ( λ p (p<q , x+y<r) →
           elim-exists
             ( cut-add-upper-ℝ q)
-            ( λ (rx , ry) (rx<x , ry<y , r=rx+ry) →
+            ( λ (px , py) (x<px , y<py , p=px+py) →
               let
-                r-q⁺ : ℚ⁺
-                r-q⁺ = positive-diff-le-ℚ q r q<r
-                ε⁺ : ℚ⁺
-                ε⁺ = mediant-zero-ℚ⁺ r-q⁺
-                ε : ℚ
+                q-p⁺ = positive-diff-le-ℚ p q p<q
+                ε⁺ = mediant-zero-ℚ⁺ q-p⁺
                 ε = rational-ℚ⁺ ε⁺
-                ε<r-q : le-ℚ ε (r -ℚ q)
-                ε<r-q = le-mediant-zero-ℚ⁺ r-q⁺
+                ε<q-p = le-mediant-zero-ℚ⁺ q-p⁺
               in
-              intro-exists
-                ( rx -ℚ ε , q -ℚ (rx -ℚ ε))
-                ( le-cut-upper-ℝ
+                intro-exists
+                  ( px +ℚ ε , q -ℚ (px +ℚ ε))
+                  ( is-in-cut-le-ℚ-upper-ℝ
                     ( x)
-                    ( rx -ℚ ε)
-                    ( rx)
-                    ( le-diff-rational-ℚ⁺ rx ε⁺)
-                    ( rx<x) ,
-                  le-cut-upper-ℝ
-                    ( y)
-                    ( q -ℚ (rx -ℚ ε))
-                    ( ry)
-                    ( binary-tr
+                    ( px)
+                    ( px +ℚ ε)
+                    ( le-right-add-rational-ℚ⁺ px ε⁺)
+                    ( x<px) ,
+                    is-in-cut-le-ℚ-upper-ℝ
+                      ( y)
+                      ( py)
+                      ( q -ℚ (px +ℚ ε))
+                      ( binary-tr
                         ( le-ℚ)
                         ( equational-reasoning
-                          (q -ℚ rx) +ℚ ε
-                          ＝ q +ℚ (neg-ℚ rx +ℚ ε)
-                            by associative-add-ℚ q (neg-ℚ rx) ε
-                          ＝ q +ℚ (ε -ℚ rx)
-                            by ap (q +ℚ_) (commutative-add-ℚ (neg-ℚ rx) ε)
-                          ＝ q -ℚ (rx -ℚ ε)
-                            by ap (q +ℚ_) (inv (distributive-neg-diff-ℚ rx ε)))
+                            (q -ℚ px) -ℚ (q -ℚ p)
+                            ＝ neg-ℚ (q -ℚ p) +ℚ (q -ℚ px)
+                              by commutative-add-ℚ (q -ℚ px) (neg-ℚ (q -ℚ p))
+                            ＝ (p -ℚ q) +ℚ (q -ℚ px)
+                              by
+                                ap (_+ℚ (q -ℚ px)) (distributive-neg-diff-ℚ q p)
+                            ＝ p -ℚ px by triangle-diff-ℚ p q px
+                            ＝ (px +ℚ py) -ℚ px by ap (_-ℚ px) p=px+py
+                            ＝ py
+                              by
+                                is-identity-left-conjugation-Ab
+                                  ( abelian-group-add-ℚ)
+                                  ( px)
+                                  ( py))
                         ( equational-reasoning
-                          (q -ℚ rx) +ℚ (r -ℚ q)
-                          ＝ (q -ℚ rx) +ℚ (neg-ℚ q +ℚ r)
-                            by
-                              ap ((q -ℚ rx) +ℚ_) (commutative-add-ℚ r (neg-ℚ q))
-                          ＝ (q -ℚ q) +ℚ (neg-ℚ rx +ℚ r)
-                            by
-                              interchange-law-add-add-ℚ q (neg-ℚ rx) (neg-ℚ q) r
-                          ＝ zero-ℚ +ℚ (neg-ℚ rx +ℚ r)
-                            by
-                              ap
-                                ( _+ℚ (neg-ℚ rx +ℚ r))
-                                ( right-inverse-law-add-ℚ q)
-                          ＝ neg-ℚ rx +ℚ r by left-unit-law-add-ℚ (neg-ℚ rx +ℚ r)
-                          ＝ neg-ℚ rx +ℚ (rx +ℚ ry) by ap (neg-ℚ rx +ℚ_) r=rx+ry
-                          ＝ ry
-                            by is-retraction-left-div-Group group-add-ℚ rx ry)
+                          (q -ℚ px) -ℚ ε
+                          ＝ q +ℚ (neg-ℚ px +ℚ neg-ℚ ε)
+                            by associative-add-ℚ q (neg-ℚ px) (neg-ℚ ε)
+                          ＝ q -ℚ (px +ℚ ε)
+                            by ap (q +ℚ_) (inv (distributive-neg-add-ℚ px ε)))
                         ( preserves-le-right-add-ℚ
-                          ( q -ℚ rx)
-                          ( ε)
-                          ( r -ℚ q)
-                          ( ε<r-q)))
-                    ( ry<y) ,
-                  inv
-                    ( is-identity-right-conjugation-Ab
-                      ( abelian-group-add-ℚ)
-                      ( rx -ℚ ε)
-                      ( q))))
-            ( r<x+y))-}
+                          ( q -ℚ px)
+                          ( neg-ℚ (q -ℚ p))
+                          ( neg-ℚ ε)
+                          ( neg-le-ℚ ε (q -ℚ p) ε<q-p)))
+                      ( y<py) ,
+                    inv
+                      ( is-identity-right-conjugation-Ab
+                        ( abelian-group-add-ℚ)
+                        ( px +ℚ ε)
+                        ( q))))
+            ( x+y<r))
 
   add-upper-ℝ : upper-ℝ (l1 ⊔ l2)
   pr1 add-upper-ℝ = cut-add-upper-ℝ
