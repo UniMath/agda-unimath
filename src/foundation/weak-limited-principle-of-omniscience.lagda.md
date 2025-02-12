@@ -14,8 +14,8 @@ open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.empty-types
 open import foundation.function-types
-open import foundation.limited-principle-of-omniscience
 open import foundation.inhabited-types
+open import foundation.limited-principle-of-omniscience
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
