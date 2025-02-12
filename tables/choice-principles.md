@@ -1,5 +1,5 @@
 | Choice principle                        | File                                                                                                          |
-|-----------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | Axiom of choice                         | [`foundation.axiom-of-choice`](foundation.axiom-of-choice.md)                                                 |
 | Axiom of countable choice               | [`foundation.axiom-of-countable-choice`](foundation.axiom-of-countable-choice.md)                             |
 | Axiom of dependent choice               | [`foundation.axiom-of-dependent-choice`](foundation.axiom-of-dependent-choice.md)                             |

@@ -10,6 +10,7 @@ module foundation.axiom-of-weak-countable-choice where
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.axiom-of-countable-choice
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.disjunction
@@ -107,6 +108,31 @@ wcc-lem {l} lem F inhab-F contr-le
     where
     claim : Prop l
     claim = is-inhabited-Prop ((n : ℕ) → type-Set (F n))
+```
+
+## Properties
+
+### The axiom of countable choice implies the axiom of weak countable choice
+
+```agda
+instance-weak-countable-choice-instance-countable-choice :
+  {l : Level} → (F : ℕ → UU l) →
+  instance-countable-choice F → instance-weak-countable-choice F
+instance-weak-countable-choice-instance-countable-choice F cc inhab-F _ =
+  cc inhab-F
+
+instance-weak-countable-choice-instance-countable-choice-Set :
+  {l : Level} → (F : ℕ → Set l) →
+  instance-countable-choice-Set F → instance-weak-countable-choice-Set F
+instance-weak-countable-choice-instance-countable-choice-Set F =
+  instance-weak-countable-choice-instance-countable-choice (type-Set ∘ F)
+
+level-WCC-level-ACω : {l : Level} → level-countable-choice-Set l → level-WCC l
+level-WCC-level-ACω acω-l F =
+  instance-weak-countable-choice-instance-countable-choice-Set F (acω-l F)
+
+WCC-ACω : ACω → WCC
+WCC-ACω acω = level-WCC-level-ACω acω
 ```
 
 ## Table of choice principles
