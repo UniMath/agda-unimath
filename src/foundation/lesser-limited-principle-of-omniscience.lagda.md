@@ -8,17 +8,18 @@ module foundation.lesser-limited-principle-of-omniscience where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 
-open import foundation.booleans
-open import foundation.dependent-pair-types
-open import foundation.disjunction
+open import foundation.contractible-types
+open import foundation.function-types
+open import foundation.decidable-subtypes
 open import foundation.universal-quantification
+open import foundation.propositions
+open import foundation.disjunction
+open import foundation.negation
 open import foundation.universe-levels
-
-open import foundation-core.fibers-of-maps
-open import foundation-core.propositions
-open import foundation-core.sets
+open import foundation.weak-limited-principle-of-omniscience
 ```
 
 </details>
@@ -26,28 +27,57 @@ open import foundation-core.sets
 ## Statement
 
 The {{#concept "lesser limited principle of omniscience" Agda=LLPO}} (LLPO)
-asserts that for any [sequence](foundation.sequences.md) of
-[booleans](foundation.booleans.md) `f : ℕ → bool` such that `f n` is true for
-[at most one](foundation-core.propositions.md) `n`, then either `f n` is false
-for all even `n` or `f n` is false for all odd `n`.
+asserts that any [contractible](foundation.contractible-types.md)
+[decidable subtype](foundation.decidable-subtypes.md) of the
+[natural numbers](elementary-number-theory.natural-numbers.md)
+either contains no even numbers or contains no odd numbers.
+
+### Instances of LLPO
 
 ```agda
-prop-LLPO : Prop lzero
-prop-LLPO =
-  ∀'
-    ( ℕ → bool)
-    ( λ f →
-      function-Prop
-        ( is-prop (Σ ℕ (λ n → is-true (f n))))
-        ( disjunction-Prop
-          ( ∀' ℕ (λ n → function-Prop (is-even-ℕ n) (is-false-Prop (f n))))
-          ( ∀' ℕ (λ n → function-Prop (is-odd-ℕ n) (is-false-Prop (f n))))))
+instance-LLPO-Prop :
+  {l : Level} →
+  (S : decidable-subtype l ℕ) →
+  is-contr (type-decidable-subtype S) →
+  Prop l
+instance-LLPO-Prop S H =
+  (∀'
+    ( ℕ)
+    ( λ n → function-Prop (is-even-ℕ n) (¬' (subtype-decidable-subtype S n)))) ∨
+  (∀'
+    ( ℕ)
+    ( λ n → function-Prop (is-odd-ℕ n) (¬' (subtype-decidable-subtype S n))))
 
-LLPO : UU lzero
-LLPO = type-Prop prop-LLPO
+instance-LLPO :
+  {l : Level} →
+  (S : decidable-subtype l ℕ) →
+  is-contr (type-decidable-subtype S) →
+  UU l
+instance-LLPO S H = type-Prop (instance-LLPO-Prop S H)
+```
 
-is-prop-LLPO : is-prop LLPO
-is-prop-LLPO = is-prop-type-Prop prop-LLPO
+### The lesser limited principle of omniscience
+
+```agda
+level-LLPO : (l : Level) → UU (lsuc l)
+level-LLPO l =
+  (S : decidable-subtype l ℕ) →
+  (H : is-contr (type-decidable-subtype S)) →
+  instance-LLPO S H
+
+LLPO : UUω
+LLPO = {l : Level} → level-LLPO l
+```
+
+## Properties
+
+### The weak limited principle of omniscience implies the lesser limited principle of omniscience
+
+```agda
+level-LLPO-WLPO : (l : Level) → level-WLPO l → level-LLPO l
+level-LLPO-WLPO l l-wlpo S H = {! (l-wlpo S)  !}
+  where S-even : decidable-subtype l ℕ
+
 ```
 
 ## See also

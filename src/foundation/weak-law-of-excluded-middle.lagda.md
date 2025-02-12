@@ -7,6 +7,7 @@ module foundation.weak-law-of-excluded-middle where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.law-of-excluded-middle
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -29,6 +30,13 @@ WLEM l = (P : Prop l) → is-de-morgan (type-Prop P)
 
 prop-WLEM : (l : Level) → Prop (lsuc l)
 prop-WLEM l = Π-Prop (Prop l) (λ P → is-de-morgan-Prop (type-Prop P))
+```
+
+### The law of excluded middle implies the weak law of excluded middle
+
+```agda
+WLEM-LEM : {l : Level} → LEM l → WLEM l
+WLEM-LEM lem P = is-de-morgan-is-decidable (lem P)
 ```
 
 ## External links

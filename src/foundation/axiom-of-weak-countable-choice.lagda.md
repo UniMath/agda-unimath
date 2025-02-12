@@ -58,6 +58,55 @@ WCC : UUω
 WCC = {l : Level} → level-WCC l
 ```
 
+## Properties
+
+### The law of excluded middle implies weak countable choice
+
+```agda
+wcc-lem : {l : Level} → LEM l → level-WCC l
+wcc-lem {l} lem F inhab-F contr-le
+  with lem (∃ ℕ (λ n → ¬' (is-contr-Prop (type-Set (F n)))))
+... | inr none-non-contractible =
+  unit-trunc-Prop
+    ( λ n →
+      rec-coproduct
+        ( center)
+        ( ex-falso ∘ none-non-contractible ∘ intro-exists n)
+        ( lem (is-contr-Prop (type-Set (F n)))))
+... | inl one-not-contractible =
+  elim-exists
+    ( claim)
+    ( λ n not-contractible-Fn →
+      rec-trunc-Prop
+        ( claim)
+        ( λ elem-Fn →
+          unit-trunc-Prop
+            ( λ m →
+              trichotomy-le-ℕ
+                ( m)
+                ( n)
+                ( λ m<n →
+                  center
+                    ( map-right-unit-law-disjunction-is-empty-Prop
+                      ( is-contr-Prop (type-Set (F m)))
+                      ( is-contr-Prop (type-Set (F n)))
+                      ( not-contractible-Fn)
+                      ( contr-le m n m<n)))
+                ( λ m=n → tr (type-Set ∘ F) (inv m=n) elem-Fn)
+                ( λ n<m →
+                  center
+                    ( map-left-unit-law-disjunction-is-empty-Prop
+                      ( is-contr-Prop (type-Set (F n)))
+                      ( is-contr-Prop (type-Set (F m)))
+                      ( not-contractible-Fn)
+                      ( contr-le n m n<m)))))
+        ( inhab-F n))
+    ( one-not-contractible)
+    where
+    claim : Prop l
+    claim = is-inhabited-Prop ((n : ℕ) → type-Set (F n))
+```
+
 ## External links
 
 - [Weak countable choice](https://ncatlab.org/nlab/show/countable+choice#WCC) at
