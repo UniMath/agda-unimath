@@ -9,14 +9,14 @@ module real-numbers.apartness-real-numbers where
 ```agda
 open import foundation.apartness-relations
 open import foundation.disjunction
-open import foundation.identity-types
 open import foundation.empty-types
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.large-apartness-relations
 open import foundation.large-binary-relations
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
-open import foundation.negated-equality
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -28,7 +28,8 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-Two [real numbers](real-numbers.dedekind-real-numbers.md) are [apart](foundation.large-apartness-relations.md) if one is
+Two [real numbers](real-numbers.dedekind-real-numbers.md) are
+[apart](foundation.large-apartness-relations.md) if one is
 [strictly less](real-numbers.strict-inequality-real-numbers.md) than the other.
 
 ```agda

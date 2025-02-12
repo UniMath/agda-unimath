@@ -20,9 +20,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "large apartness relation" Agda=Large-Apartness-Relation}} on a family of types indexed by universe levels
-`A` is a [large binary relation](foundation.large-binary-relations.md) `R` which
-is
+A {{#concept "large apartness relation" Agda=Large-Apartness-Relation}} on a
+family of types indexed by universe levels `A` is a
+[large binary relation](foundation.large-binary-relations.md) `R` which is
 
 - **Antireflexive:** For any `a : A` we have `¬ (R a a)`
 - **Symmetric:** For any `a b : A` we have `R a b → R b a`
