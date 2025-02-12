@@ -125,25 +125,3 @@ module _
         ( cut-lower-ℝ y)
         ( cut-lower-ℝ z))
 ```
-
-### The lower Dedekind reals form a large meet-semilattice
-
-```agda
-has-meets-lower-ℝ : has-meets-Large-Poset lower-ℝ-Large-Poset
-meet-has-meets-Large-Poset has-meets-lower-ℝ = binary-min-lower-ℝ
-is-greatest-binary-lower-bound-meet-has-meets-Large-Poset has-meets-lower-ℝ =
-  is-greatest-binary-lower-bound-binary-min-lower-ℝ
-
-is-large-meet-semilattice-lower-ℝ :
-  is-large-meet-semilattice-Large-Poset lower-ℝ-Large-Poset
-has-meets-is-large-meet-semilattice-Large-Poset
-  is-large-meet-semilattice-lower-ℝ = has-meets-lower-ℝ
-has-top-element-is-large-meet-semilattice-Large-Poset
-  is-large-meet-semilattice-lower-ℝ = has-top-element-lower-ℝ
-
-lower-ℝ-Large-Meet-Semilattice : Large-Meet-Semilattice lsuc _⊔_
-large-poset-Large-Meet-Semilattice lower-ℝ-Large-Meet-Semilattice =
-  lower-ℝ-Large-Poset
-is-large-meet-semilattice-Large-Meet-Semilattice
-  lower-ℝ-Large-Meet-Semilattice = is-large-meet-semilattice-lower-ℝ
-```
