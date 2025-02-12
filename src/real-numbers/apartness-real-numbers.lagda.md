@@ -86,12 +86,12 @@ cotransitive-apart-ℝ x y z =
 
 ```agda
 large-apartness-relation-apart-ℝ-Prop : Large-Apartness-Relation _⊔_ ℝ
-Large-Apartness-Relation.large-rel-Large-Apartness-Relation
-  large-apartness-relation-apart-ℝ-Prop = apart-ℝ-Prop
-Large-Apartness-Relation.antirefl-Large-Apartness-Relation
-  large-apartness-relation-apart-ℝ-Prop = antireflexive-apart-ℝ
-Large-Apartness-Relation.symmetric-Large-Apartness-Relation
-  large-apartness-relation-apart-ℝ-Prop = symmetric-apart-ℝ
-Large-Apartness-Relation.cotransitive-Large-Apartness-Relation
-  large-apartness-relation-apart-ℝ-Prop = cotransitive-apart-ℝ
+large-rel-Large-Apartness-Relation large-apartness-relation-apart-ℝ-Prop =
+  apart-ℝ-Prop
+antirefl-Large-Apartness-Relation large-apartness-relation-apart-ℝ-Prop =
+  antireflexive-apart-ℝ
+symmetric-Large-Apartness-Relation large-apartness-relation-apart-ℝ-Prop =
+  symmetric-apart-ℝ
+cotransitive-Large-Apartness-Relation large-apartness-relation-apart-ℝ-Prop =
+  cotransitive-apart-ℝ
 ```

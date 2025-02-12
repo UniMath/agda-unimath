@@ -55,6 +55,8 @@ record Large-Apartness-Relation
     ¬ (type-Prop (large-rel-Large-Apartness-Relation a b))
   consistent-Large-Apartness-Relation a .a refl =
     antirefl-Large-Apartness-Relation a
+
+open Large-Apartness-Relation public
 ```
 
 ### Type families equipped with large apartness relations
@@ -74,4 +76,6 @@ record Type-Family-With-Large-Apartness
   large-rel-Type-Family-With-Large-Apartness =
     Large-Apartness-Relation.large-rel-Large-Apartness-Relation
       large-apartness-relation-Type-Family-With-Large-Apartness
+
+open Type-Family-With-Large-Apartness public
 ```
