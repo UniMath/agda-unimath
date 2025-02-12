@@ -37,8 +37,8 @@ module _
   point-Pointed-Type : type-Pointed-Type
   point-Pointed-Type = pr2 A
 
-  point-type-Pointed-Type : unit → type-Pointed-Type
-  point-type-Pointed-Type = point point-Pointed-Type
+  point-point-Pointed-Type : unit → type-Pointed-Type
+  point-point-Pointed-Type = point point-Pointed-Type
 ```
 
 ### Evaluation at the base point

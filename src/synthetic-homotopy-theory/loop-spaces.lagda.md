@@ -224,13 +224,13 @@ module _
   where
 
   cone-type-Ω :
-    cone (point-type-Pointed-Type A) (point-type-Pointed-Type A) (type-Ω A)
+    cone (point-point-Pointed-Type A) (point-point-Pointed-Type A) (type-Ω A)
   cone-type-Ω = cone-Id (point-Pointed-Type A) (point-Pointed-Type A)
 
   is-pullback-type-Ω :
     is-pullback
-      ( point-type-Pointed-Type A)
-      ( point-type-Pointed-Type A)
+      ( point-point-Pointed-Type A)
+      ( point-point-Pointed-Type A)
       ( cone-type-Ω)
   is-pullback-type-Ω =
     is-pullback-Id (point-Pointed-Type A) (point-Pointed-Type A)

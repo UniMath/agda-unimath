@@ -347,20 +347,20 @@ module _
 
   is-fiber-inclusion-terminal-map-type-Ω :
     is-fiber-inclusion-of-map'
-      ( point-type-Pointed-Type A)
+      ( point-point-Pointed-Type A)
       ( point-Pointed-Type A)
       ( terminal-map (type-Ω A))
       ( id)
   is-fiber-inclusion-terminal-map-type-Ω =
     is-fiber-inclusion-pullback-condition-fiber-inclusion-of-map
-      ( point-type-Pointed-Type A)
+      ( point-point-Pointed-Type A)
       ( point-Pointed-Type A)
       ( terminal-map (type-Ω A))
       ( id)
       ( is-pullback-type-Ω A)
 
   fiber-inclusion-of-map-terminal-map-type-Ω :
-    fiber-inclusion-of-map l (point-type-Pointed-Type A) (point-Pointed-Type A)
+    fiber-inclusion-of-map l (point-point-Pointed-Type A) (point-Pointed-Type A)
   fiber-inclusion-of-map-terminal-map-type-Ω =
     ( type-Ω A ,
       terminal-map (type-Ω A) ,
