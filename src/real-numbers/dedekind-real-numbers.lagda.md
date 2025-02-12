@@ -51,8 +51,9 @@ open import real-numbers.upper-dedekind-real-numbers
 ## Idea
 
 A Dedekind real number consists of a [pair](foundation.dependent-pair-types.md)
-`(lx , uy)` of a [lower Dedekind real](real-numbers.lower-dedekind-real-numbers)
-and an [upper Dedekind real](real-numbers.upper-dedekind-real-numbers) that also
+`(lx , uy)` of a
+[lower Dedekind real](real-numbers.lower-dedekind-real-numbers.md) and an
+[upper Dedekind real](real-numbers.upper-dedekind-real-numbers.md) that also
 satisfy the following conditions:
 
 1. _Disjointness_. The cuts of `lx` and `uy` are disjoint subsets of `ℚ`.
