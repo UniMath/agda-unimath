@@ -9,7 +9,6 @@
 | Crisp law of excluded middle            | [`modal-type-theory.crisp-law-of-excluded-middle`](modal-type-theory.crisp-law-of-excluded-middle.md) |
 | Principle of omniscience                | [`foundation.principle-of-omniscience`](foundation.principle-of-omniscience.md)                       |
 | Limited principle of omniscience        | [`foundation.limited-principle-of-omniscience`](foundation.limited-principle-of-omniscience.md)       |
-| Weak principle of omniscience           | [`foundation.weak-principle-of-omniscience`](foundation.weak-principle-of-omniscience.md)             |
 | Weak limited principle of omniscience   | [`foundation.weak-limited-principle-of-omniscience`](foundation.weak-principle-of-omniscience.md)     |
 | Lesser limited principle of omniscience | [`foundation.lesser-limited-principle-of-omniscience`](foundation.weak-principle-of-omniscience.md)   |
 | Markov's principle                      | [`logic.markovs-principle`](logic.markovs-principle.md)                                               |
