@@ -112,18 +112,11 @@ module _
       x
       y
       binary-min-lower-ℝ
-  pr1 (is-greatest-binary-lower-bound-binary-min-lower-ℝ z) =
-    forward-implication
-      ( is-greatest-binary-lower-bound-intersection-subtype
-        ( cut-lower-ℝ x)
-        ( cut-lower-ℝ y)
-        ( cut-lower-ℝ z))
-  pr2 (is-greatest-binary-lower-bound-binary-min-lower-ℝ z) =
-    backward-implication
-      ( is-greatest-binary-lower-bound-intersection-subtype
-        ( cut-lower-ℝ x)
-        ( cut-lower-ℝ y)
-        ( cut-lower-ℝ z))
+  is-greatest-binary-lower-bound-binary-min-lower-ℝ z =
+    is-greatest-binary-lower-bound-intersection-subtype
+      ( cut-lower-ℝ x)
+      ( cut-lower-ℝ y)
+      ( cut-lower-ℝ z)
 ```
 
 ### The lower Dedekind reals form a large meet-semilattice
