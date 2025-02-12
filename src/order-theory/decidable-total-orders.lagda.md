@@ -428,7 +428,7 @@ module _
 ```agda
   left-leq-right-min-Decidable-Total-Order :
     leq-Decidable-Total-Order T x y → min-Decidable-Total-Order T x y ＝ x
-  left-leq-right-min-Decidable-Total-Order H =
+  left-leq-right-min-Decidable-Total-Order H
     with is-leq-or-strict-greater-Decidable-Total-Order T x y
   ... | inl x≤y = refl
   ... | inr y<x =
