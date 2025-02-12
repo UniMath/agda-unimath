@@ -73,12 +73,7 @@ LLPO = {l : Level} → level-LLPO l
 
 ### The weak limited principle of omniscience implies the lesser limited principle of omniscience
 
-```agda
-level-LLPO-WLPO : (l : Level) → level-WLPO l → level-LLPO l
-level-LLPO-WLPO l l-wlpo S H = {! (l-wlpo S)  !}
-  where S-even : decidable-subtype l ℕ
-
-```
+TODO
 
 ## See also
 
