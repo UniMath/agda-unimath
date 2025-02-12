@@ -132,13 +132,6 @@ module _
   is-antireflexive-Large-Relation =
     {l : Level} → (a : A l) → ¬ (R a a)
 
-  is-cotransitive-Large-Relation : UUω
-  is-cotransitive-Large-Relation =
-    {l1 l2 l3 : Level} →
-    (a : A l1) (b : A l2) (c : A l3) →
-    R a b →
-    R a c + R b c
-
 module _
   {α : Level → Level} {β : Level → Level → Level}
   (A : (l : Level) → UU (α l))

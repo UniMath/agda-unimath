@@ -9,12 +9,15 @@ module real-numbers.apartness-real-numbers where
 ```agda
 open import foundation.apartness-relations
 open import foundation.disjunction
+open import foundation.identity-types
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.large-apartness-relations
 open import foundation.large-binary-relations
 open import foundation.negation
 open import foundation.propositions
+open import foundation.negated-equality
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
@@ -73,13 +76,13 @@ cotransitive-apart-ℝ x y z =
         ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop z y)
         ( inl-disjunction ∘ inl-disjunction)
         ( inr-disjunction ∘ inl-disjunction)
-        ( cotransitive-le-ℝ-Prop x y z x<y))
+        ( cotransitive-le-ℝ x y z x<y))
     ( λ y<x →
       elim-disjunction
         ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop z y)
         ( inr-disjunction ∘ inr-disjunction)
         ( inl-disjunction ∘ inr-disjunction)
-        ( cotransitive-le-ℝ-Prop y x z y<x))
+        ( cotransitive-le-ℝ y x z y<x))
 ```
 
 ### Apartness on the reals is a large apartness relation
@@ -94,4 +97,21 @@ symmetric-Large-Apartness-Relation large-apartness-relation-apart-ℝ-Prop =
   symmetric-apart-ℝ
 cotransitive-Large-Apartness-Relation large-apartness-relation-apart-ℝ-Prop =
   cotransitive-apart-ℝ
+```
+
+### Apartness implies nonequality
+
+```agda
+module _
+  {l : Level}
+  (x y : ℝ l)
+  where
+
+  nonequal-apart-ℝ : apart-ℝ x y → x ≠ y
+  nonequal-apart-ℝ x#y x=y =
+    elim-disjunction
+      ( empty-Prop)
+      ( λ x<y → irreflexive-le-ℝ x (tr (le-ℝ x) (inv x=y) x<y))
+      ( λ y<x → irreflexive-le-ℝ y (tr (le-ℝ y) x=y y<x))
+      ( x#y)
 ```

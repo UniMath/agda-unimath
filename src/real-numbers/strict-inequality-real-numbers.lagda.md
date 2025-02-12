@@ -378,7 +378,7 @@ module _
 cotransitive-le-ℝ : is-cotransitive-Large-Relation-Prop ℝ le-ℝ-Prop
 cotransitive-le-ℝ x y z =
   elim-exists
-    (le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
+    ( le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
     ( λ q (x<q , q<y) →
       elim-exists
         ( le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
