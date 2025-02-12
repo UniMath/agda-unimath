@@ -41,7 +41,7 @@ module _
 
   instance-dependent-choice-Prop : Prop (l1 ⊔ l2)
   instance-dependent-choice-Prop =
-    ∃ (ℕ → A) (λ f → Π-Prop ℕ (λ n → R (f n) (f (succ-ℕ n))))
+    ∃ (ℕ → type-Set A) (λ f → Π-Prop ℕ (λ n → R (f n) (f (succ-ℕ n))))
 
   instance-dependent-choice : UU (l1 ⊔ l2)
   instance-dependent-choice = type-Prop instance-dependent-choice-Prop
@@ -52,7 +52,7 @@ module _
 ```agda
 level-ADC : (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
 level-ADC l1 l2 =
-  (A : UU l1) (H : is-inhabited (type-Set A)) →
+  (A : Set l1) (H : is-inhabited (type-Set A)) →
   (R : Relation-Prop l2 (type-Set A))
   (total-R : (a : type-Set A) → exists (type-Set A) (R a)) →
   instance-dependent-choice A H R total-R
