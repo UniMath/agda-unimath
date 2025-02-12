@@ -206,25 +206,25 @@ module _
     le-ℚ p q →
     is-in-lower-cut-ℝ x q →
     is-in-lower-cut-ℝ x p
-  le-lower-cut-ℝ = le-cut-lower-ℝ (lower-real-ℝ x) p q
+  le-lower-cut-ℝ = is-in-cut-le-ℚ-lower-ℝ (lower-real-ℝ x) p q
 
   leq-lower-cut-ℝ :
     leq-ℚ p q →
     is-in-lower-cut-ℝ x q →
     is-in-lower-cut-ℝ x p
-  leq-lower-cut-ℝ = leq-cut-lower-ℝ (lower-real-ℝ x) p q
+  leq-lower-cut-ℝ = is-in-cut-leq-ℚ-lower-ℝ (lower-real-ℝ x) p q
 
   le-upper-cut-ℝ :
     le-ℚ p q →
     is-in-upper-cut-ℝ x p →
     is-in-upper-cut-ℝ x q
-  le-upper-cut-ℝ = le-cut-upper-ℝ (upper-real-ℝ x) p q
+  le-upper-cut-ℝ = is-in-cut-le-ℚ-upper-ℝ (upper-real-ℝ x) p q
 
   leq-upper-cut-ℝ :
     leq-ℚ p q →
     is-in-upper-cut-ℝ x p →
     is-in-upper-cut-ℝ x q
-  leq-upper-cut-ℝ = leq-cut-upper-ℝ (upper-real-ℝ x) p q
+  leq-upper-cut-ℝ = is-in-cut-leq-ℚ-upper-ℝ (upper-real-ℝ x) p q
 ```
 
 ### Elements of the lower cut are lower bounds of the upper cut

@@ -94,10 +94,10 @@ module _
           rec-coproduct
             ( λ p<p' →
               inl-disjunction
-                ( le-cut-lower-ℝ x p p' p<p' p'∈L))
+                ( is-in-cut-le-ℚ-lower-ℝ x p p' p<p' p'∈L))
             ( λ p'≤p →
               inr-disjunction
-                (le-cut-upper-ℝ
+                ( is-in-cut-le-ℚ-upper-ℝ
                   ( y)
                   ( q')
                   ( q)
