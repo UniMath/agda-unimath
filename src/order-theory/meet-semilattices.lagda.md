@@ -35,7 +35,7 @@ binary-lower bound. Alternatively, meet-semilattices can be defined
 algebraically as a set `X` equipped with a binary operation `∧ : X → X → X`
 satisfying
 
-1. Asociativity: `(x ∧ y) ∧ z ＝ x ∧ (y ∧ z)`,
+1. Associativity: `(x ∧ y) ∧ z ＝ x ∧ (y ∧ z)`,
 2. Commutativity: `x ∧ y ＝ y ∧ x`,
 3. Idempotency: `x ∧ x ＝ x`.
 
