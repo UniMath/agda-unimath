@@ -1,7 +1,7 @@
-# Monoids with semiring actions
+# Monoids with left semiring actions
 
 ```agda
-module ring-theory.monoids-with-semiring-actions where
+module ring-theory.monoids-with-left-semiring-actions where
 ```
 
 <details><summary>Imports</summary>
@@ -29,23 +29,23 @@ operation $\mu : R \to M \to M$ satisfying the axioms of a ring action:
 
 1. The action distributes from the left over monoid multiplication:
    $$
-     r(xy) = (rx)(ry).
+     {}^r(xy) = ({}^rx)({}^ry).
    $$
 2. The action distributes from the right over addition in the semiring:
    $$
-     (r+s)x = (rx)(sx).
+     {}^{r+s}x = ({}^rx)({}^sx).
    $$
 3. Associativity of the action
    $$
-     (sr)x = s(rx).
+     {}^{sr}x = {}^s({}^rx).
    $$
 4. The unit element of the semiring acts as the identity
    $$
-     1x = x.
+     {}^1x = x.
    $$
 5. The unit element of the monoid absorbs any action
    $$
-     r1 = 1.
+     {}^r1 = 1.
    $$
 
 ## Definitions

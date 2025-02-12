@@ -24,7 +24,7 @@ open import lists.concatenation-lists
 open import lists.functoriality-lists
 open import lists.lists
 
-open import ring-theory.monoids-with-semiring-actions
+open import ring-theory.monoids-with-left-semiring-actions
 open import ring-theory.semirings
 open import ring-theory.subsets-semirings
 

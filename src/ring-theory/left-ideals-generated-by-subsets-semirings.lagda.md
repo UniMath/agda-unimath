@@ -34,7 +34,7 @@ open import order-theory.reflective-galois-connections-large-posets
 
 open import ring-theory.left-ideals-semirings
 open import ring-theory.left-linear-combinations-of-elements-semirings
-open import ring-theory.monoids-with-semiring-actions
+open import ring-theory.monoids-with-left-semiring-actions
 open import ring-theory.poset-of-left-ideals-semirings
 open import ring-theory.semirings
 open import ring-theory.subsets-semirings

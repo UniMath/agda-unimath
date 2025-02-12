@@ -57,7 +57,7 @@ open import ring-theory.local-rings public
 open import ring-theory.localizations-rings public
 open import ring-theory.maximal-ideals-rings public
 open import ring-theory.modules-rings public
-open import ring-theory.monoids-with-semiring-actions public
+open import ring-theory.monoids-with-left-semiring-actions public
 open import ring-theory.multiples-of-elements-rings public
 open import ring-theory.multiplicative-orders-of-units-rings public
 open import ring-theory.nil-ideals-rings public
