@@ -93,7 +93,8 @@ wcc-lem {l} lem F inhab-F contr-le
             ( λ m →
               rec-coproduct
                 ( λ m=n → tr (type-Set ∘ F) (inv m=n) elem-Fn)
-                ( λ m≠n → center
+                ( λ m≠n →
+                  center
                     ( map-right-unit-law-disjunction-is-empty-Prop
                       ( is-contr-Prop (type-Set (F m)))
                       ( is-contr-Prop (type-Set (F n)))
