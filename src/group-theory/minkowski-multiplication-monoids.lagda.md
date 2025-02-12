@@ -1,4 +1,4 @@
-# Minkowski multiplication of monoid subtypes
+# Minkowski multiplication on subsets of a monoid
 
 ```agda
 module group-theory.minkowski-multiplication-monoids where
@@ -28,12 +28,13 @@ open import group-theory.subsets-monoids
 
 ## Idea
 
-For two [subsets](group-theory.subsets-monoids.md) `A`, `B` of a
-[monoid](group-theory.monoids.md) `M`, the Minkowski multiplication of `A` and
-`B` is the set of elements that can be formed by multiplying an element of `A`
-and an element of `B`. (This is more usually referred to as a Minkowski sum, but
-as the operation on monoids is referred to as `mul`, we use multiplicative
-terminology.)
+Given two [subsets](group-theory.subsets-monoids.md) `A` and `B` of a
+[monoid](group-theory.monoids.md) `M`, the
+{{#concept "Minkowski multiplication" Disambiguation="on subsets of a monoid" WD="Minkowski addition" WDID=Q1322294  Agda=minkowski-mul-Monoid}}
+of `A` and `B` is the [set](foundation-core.sets.md) of elements that can be
+formed by multiplying an element of `A` and an element of `B`. This binary
+operation defines a monoid structure on the [powerset](foundation.powersets.md)
+of `M`.
 
 ## Definition
 
@@ -51,7 +52,7 @@ module _
 
 ## Properties
 
-### Minkowski multiplication of monoid subsets is associative
+### Minkowski multiplication on subsets of a monoid is associative
 
 ```agda
 module _
@@ -69,7 +70,7 @@ module _
     associative-minkowski-mul-Semigroup (semigroup-Monoid M) A B C
 ```
 
-### Unit laws for Minkowski multiplication of monoid subsets
+### Unit laws for Minkowski multiplication on subsets of a monoid
 
 ```agda
 module _
@@ -119,7 +120,7 @@ module _
       ( a∈A , refl , inv (right-unit-law-mul-Monoid M a))
 ```
 
-### Minkowski multiplication of subtypes of a monoid forms a monoid
+### Minkowski multiplication on subsets of a monoid forms a monoid
 
 ```agda
 module _
@@ -166,7 +167,7 @@ module _
     minkowski-mul-inhabited-is-inhabited-Semigroup (semigroup-Monoid M)
 ```
 
-### Containment is preserved by Minkowski multiplication of monoid subsets
+### Containment of subsets is preserved by Minkowski multiplication
 
 ```agda
 module _
@@ -188,7 +189,7 @@ module _
     preserves-leq-right-minkowski-mul-Semigroup (semigroup-Monoid M) B A A'
 ```
 
-### Similarity is preserved by Minkowski multiplication of monoid subsets
+### Similarity of subsets is preserved by Minkowski multiplication
 
 ```agda
 module _

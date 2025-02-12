@@ -1,4 +1,4 @@
-# Minkowski multiplication of commutative monoid subtypes
+# Minkowski multiplication of subsets of a commutative monoid
 
 ```agda
 module group-theory.minkowski-multiplication-commutative-monoids where
@@ -7,6 +7,7 @@ module group-theory.minkowski-multiplication-commutative-monoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
@@ -20,18 +21,21 @@ open import group-theory.commutative-monoids
 open import group-theory.minkowski-multiplication-monoids
 open import group-theory.monoids
 open import group-theory.subsets-commutative-monoids
+
+open import logic.functoriality-existential-quantification
 ```
 
 </details>
 
 ## Idea
 
-For two [subsets](group-theory.subsets-commutative-monoids.md) `A`, `B` of a
-[commutative monoid](group-theory.commutative-monoids.md) `M`, the Minkowski
-multiplication of `A` and `B` is the set of elements that can be formed by
-multiplying an element of `A` and an element of `B`. (This is more usually
-referred to as a Minkowski sum, but as the operation on commutative monoids is
-referred to as `mul`, we use multiplicative terminology.)
+Given two [subsets](group-theory.subsets-commutative-monoids.md) `A` and `B` of
+a [commutative monoid](group-theory.commutative-monoids.md) `M`, the
+{{#concept "Minkowski multiplication" Disambiguation="on subsets of a commutative monoid" WD="Minkowski addition" WDID=Q1322294 Agda=minkowski-mul-Commutative-Monoid}}
+of `A` and `B` is the [set](foundation-core.sets.md) of elements that can be
+formed by multiplying an element of `A` and an element of `B`. This binary
+operation defines a commutative monoid structure on the
+[powerset](foundation.powersets.md) of `M`.
 
 ## Definition
 
@@ -51,7 +55,7 @@ module _
 
 ## Properties
 
-### Minkowski multiplication of commutative monoid subsets is associative
+### Minkowski multiplication on subsets of a commutative monoid is associative
 
 ```agda
 module _
@@ -75,7 +79,7 @@ module _
     associative-minkowski-mul-Monoid (monoid-Commutative-Monoid M) A B C
 ```
 
-### Minkowski multiplication of commutative monoid subsets is unital
+### Minkowski multiplication on subsets of a commutative monoid is unital
 
 ```agda
 module _
@@ -119,7 +123,7 @@ module _
     is-unital-minkowski-mul-Monoid (monoid-Commutative-Monoid M)
 ```
 
-### Minkowski multiplication on a commutative monoid is commutative
+### Minkowski multiplication on subsets of a commutative monoid is commutative
 
 ```agda
 module _
@@ -134,7 +138,7 @@ module _
     minkowski-mul-Commutative-Monoid M B A
   commutative-minkowski-mul-leq-Commutative-Monoid x =
     elim-exists
-      (minkowski-mul-Commutative-Monoid M B A x)
+      ( minkowski-mul-Commutative-Monoid M B A x)
       ( λ (a , b) (a∈A , b∈B , x=ab) →
         intro-exists
           ( b , a)
@@ -158,7 +162,7 @@ module _
         commutative-minkowski-mul-leq-Commutative-Monoid M B A)
 ```
 
-### Minkowski multiplication on a commutative monoid is a commutative monoid
+### Minkowski multiplication on subsets of a commutative monoid is a commutative monoid
 
 ```agda
 module _
@@ -174,7 +178,7 @@ module _
     commutative-minkowski-mul-Commutative-Monoid M
 ```
 
-### The Minkowski multiplication of two inhabited subsets of a commutative monoid is inhabited
+### The Minkowski multiplication of two inhabited subsets is inhabited
 
 ```agda
 module _
@@ -193,7 +197,7 @@ module _
     minkowski-mul-inhabited-is-inhabited-Monoid (monoid-Commutative-Monoid M)
 ```
 
-### Containment is preserved by Minkowski multiplication of monoid subsets
+### Containment of subsets is preserved by Minkowski multiplication
 
 ```agda
 module _
@@ -223,7 +227,7 @@ module _
       ( A')
 ```
 
-### Similarity is preserved by Minkowski multiplication of monoid subsets
+### Similarity of subsets is preserved by Minkowski multiplication
 
 ```agda
 module _

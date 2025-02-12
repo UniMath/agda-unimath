@@ -7,16 +7,24 @@ module real-numbers.lower-dedekind-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.conjunction
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.powersets
 open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universal-quantification
 open import foundation.universe-levels
 ```
@@ -25,9 +33,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A lower
-{{#concept "Dedekind cut" Agda=is-dedekind-cut WD="dedekind cut" WDID=Q851333}}
-consists of a [subtype](foundation-core.subtypes.md) `L` of
+A {{#concept "lower Dedekind cut" Agda=is-lower-dedekind-cut}} consists of a
+[subtype](foundation-core.subtypes.md) `L` of
 [the rational numbers](elementary-number-theory.rational-numbers.md) `ℚ`,
 satisfying the following two conditions:
 
@@ -36,8 +43,8 @@ satisfying the following two conditions:
    [if and only if](foundation.logical-equivalences.md) there
    [exists](foundation.existential-quantification.md) `q < r` such that `r ∈ L`.
 
-The type of all lower Dedekind real numbers is the type of all lower Dedekind
-cuts.
+The {{#concept "lower Dedekind real numbers" Agda=lower-ℝ}} is the type of all
+lower Dedekind cuts.
 
 ## Definition
 
@@ -75,6 +82,9 @@ module _
   is-in-cut-lower-ℝ : ℚ → UU l
   is-in-cut-lower-ℝ = is-in-subtype cut-lower-ℝ
 
+  is-lower-dedekind-cut-lower-ℝ : is-lower-dedekind-cut cut-lower-ℝ
+  is-lower-dedekind-cut-lower-ℝ = pr2 x
+
   is-inhabited-cut-lower-ℝ : exists ℚ cut-lower-ℝ
   is-inhabited-cut-lower-ℝ = pr1 (pr2 x)
 
@@ -86,18 +96,44 @@ module _
 
 ## Properties
 
-### Lower Dedekind cuts are closed under the standard ordering on the rationals
+### The lower Dedekind reals form a set
+
+```agda
+abstract
+  is-set-lower-ℝ : (l : Level) → is-set (lower-ℝ l)
+  is-set-lower-ℝ l =
+    is-set-Σ
+      ( is-set-function-type (is-trunc-Truncated-Type neg-one-𝕋))
+      ( λ q → is-set-is-prop (is-prop-type-Prop (is-lower-dedekind-cut-Prop q)))
+```
+
+### Lower Dedekind cuts are closed under strict inequality on the rationals
 
 ```agda
 module _
   {l : Level} (x : lower-ℝ l) (p q : ℚ)
   where
 
-  le-cut-lower-ℝ : le-ℚ p q → is-in-cut-lower-ℝ x q → is-in-cut-lower-ℝ x p
-  le-cut-lower-ℝ p<q q<x =
+  is-in-cut-le-ℚ-lower-ℝ :
+    le-ℚ p q → is-in-cut-lower-ℝ x q → is-in-cut-lower-ℝ x p
+  is-in-cut-le-ℚ-lower-ℝ p<q q<x =
     backward-implication
       ( is-rounded-cut-lower-ℝ x p)
       ( intro-exists q (p<q , q<x))
+```
+
+### Lower Dedekind cuts are closed under inequality on the rationals
+
+```agda
+module _
+  {l : Level} (x : lower-ℝ l) (p q : ℚ)
+  where
+
+  is-in-cut-leq-ℚ-lower-ℝ :
+    leq-ℚ p q → is-in-cut-lower-ℝ x q → is-in-cut-lower-ℝ x p
+  is-in-cut-leq-ℚ-lower-ℝ p≤q q<x with decide-le-leq-ℚ p q
+  ... | inl p<q = is-in-cut-le-ℚ-lower-ℝ x p q p<q q<x
+  ... | inr q≤p = tr (is-in-cut-lower-ℝ x) (antisymmetric-leq-ℚ q p q≤p p≤q) q<x
 ```
 
 ### Two lower real numbers with the same cut are equal
@@ -109,6 +145,11 @@ module _
 
   eq-eq-cut-lower-ℝ : cut-lower-ℝ x ＝ cut-lower-ℝ y → x ＝ y
   eq-eq-cut-lower-ℝ = eq-type-subtype is-lower-dedekind-cut-Prop
+
+  eq-sim-cut-lower-ℝ : sim-subtype (cut-lower-ℝ x) (cut-lower-ℝ y) → x ＝ y
+  eq-sim-cut-lower-ℝ =
+    eq-eq-cut-lower-ℝ ∘
+    antisymmetric-sim-subtype (cut-lower-ℝ x) (cut-lower-ℝ y)
 ```
 
 ## See also

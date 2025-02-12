@@ -36,6 +36,10 @@ open import foundation.universe-levels
 open import logic.functoriality-existential-quantification
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.rational-lower-dedekind-real-numbers
+open import real-numbers.rational-upper-dedekind-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
@@ -53,42 +57,21 @@ the [image](foundation.images.md) of this embedding
 ### Strict inequality on rationals gives Dedekind cuts
 
 ```agda
-is-dedekind-cut-le-ℚ :
+is-dedekind-lower-upper-real-ℚ :
   (x : ℚ) →
-  is-dedekind-cut
-    (λ (q : ℚ) → le-ℚ-Prop q x)
-    (λ (r : ℚ) → le-ℚ-Prop x r)
-is-dedekind-cut-le-ℚ x =
-  ( exists-lesser-ℚ x , exists-greater-ℚ x) ,
-  ( ( λ (q : ℚ) →
-      dense-le-ℚ q x ,
-      elim-exists
-        ( le-ℚ-Prop q x)
-        ( λ r (H , H') → transitive-le-ℚ q r x H' H)) ,
-    ( λ (r : ℚ) →
-      α x r ∘ dense-le-ℚ x r ,
-      elim-exists
-        ( le-ℚ-Prop x r)
-        ( λ q (H , H') → transitive-le-ℚ x q r H H'))) ,
-  ( λ (q : ℚ) (H , H') → asymmetric-le-ℚ q x H H') ,
-  ( located-le-ℚ x)
-  where
-    α :
-      (a b : ℚ) →
-      exists ℚ (λ r → le-ℚ-Prop a r ∧ le-ℚ-Prop r b) →
-      exists ℚ (λ r → le-ℚ-Prop r b ∧ le-ℚ-Prop a r)
-    α a b = map-tot-exists (λ r (p , q) → (q , p))
+  is-dedekind-lower-upper-ℝ
+    (lower-real-ℚ x)
+    (upper-real-ℚ x)
+is-dedekind-lower-upper-real-ℚ x =
+  (λ q (H , K) → asymmetric-le-ℚ q x H K) ,
+  located-le-ℚ x
 ```
 
 ### The canonical map from `ℚ` to `ℝ`
 
 ```agda
 real-ℚ : ℚ → ℝ lzero
-real-ℚ x =
-  real-dedekind-cut
-    ( λ (q : ℚ) → le-ℚ-Prop q x)
-    ( λ (r : ℚ) → le-ℚ-Prop x r)
-    ( is-dedekind-cut-le-ℚ x)
+real-ℚ x = lower-real-ℚ x , upper-real-ℚ x , is-dedekind-lower-upper-real-ℚ x
 ```
 
 ### The property of being a rational real number

@@ -7,16 +7,24 @@ module real-numbers.upper-dedekind-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.conjunction
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.powersets
 open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universal-quantification
 open import foundation.universe-levels
 ```
@@ -25,9 +33,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A upper
-{{#concept "Dedekind cut" Agda=is-dedekind-cut WD="dedekind cut" WDID=Q851333}}
-consists of a [subtype](foundation-core.subtypes.md) `U` of
+An {{#concept "upper Dedekind cut" Agda=is-upper-dedekind-cut}} consists of a
+[subtype](foundation-core.subtypes.md) `U` of
 [the rational numbers](elementary-number-theory.rational-numbers.md) `ℚ`,
 satisfying the following two conditions:
 
@@ -36,8 +43,8 @@ satisfying the following two conditions:
    [if and only if](foundation.logical-equivalences.md) there
    [exists](foundation.existential-quantification.md) `p < q` such that `p ∈ U`.
 
-The type of all upper Dedekind real numbers is the type of all upper Dedekind
-cuts.
+The {{#concept "upper Dedekind real numbers" Agda=upper-ℝ}} is the type of all
+upper Dedekind cuts.
 
 ## Definition
 
@@ -75,6 +82,9 @@ module _
   is-in-cut-upper-ℝ : ℚ → UU l
   is-in-cut-upper-ℝ = is-in-subtype cut-upper-ℝ
 
+  is-upper-dedekind-cut-upper-ℝ : is-upper-dedekind-cut cut-upper-ℝ
+  is-upper-dedekind-cut-upper-ℝ = pr2 x
+
   is-inhabited-cut-upper-ℝ : exists ℚ cut-upper-ℝ
   is-inhabited-cut-upper-ℝ = pr1 (pr2 x)
 
@@ -86,18 +96,44 @@ module _
 
 ## Properties
 
-### Upper Dedekind cuts are closed under the standard ordering on the rationals
+### The upper Dedekind reals form a set
+
+```agda
+abstract
+  is-set-upper-ℝ : (l : Level) → is-set (upper-ℝ l)
+  is-set-upper-ℝ l =
+    is-set-Σ
+      ( is-set-function-type (is-trunc-Truncated-Type neg-one-𝕋))
+      ( λ q → is-set-is-prop (is-prop-type-Prop (is-upper-dedekind-cut-Prop q)))
+```
+
+### Upper Dedekind cuts are closed under strict inequality on the rationals
 
 ```agda
 module _
   {l : Level} (x : upper-ℝ l) (p q : ℚ)
   where
 
-  le-cut-upper-ℝ : le-ℚ p q → is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x q
-  le-cut-upper-ℝ p<q p<x =
+  is-in-cut-le-ℚ-upper-ℝ :
+    le-ℚ p q → is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x q
+  is-in-cut-le-ℚ-upper-ℝ p<q p<x =
     backward-implication
       ( is-rounded-cut-upper-ℝ x q)
       ( intro-exists p (p<q , p<x))
+```
+
+### Upper Dedekind cuts are closed under inequality on the rationals
+
+```agda
+module _
+  {l : Level} (x : upper-ℝ l) (p q : ℚ)
+  where
+
+  is-in-cut-leq-ℚ-upper-ℝ :
+    leq-ℚ p q → is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x q
+  is-in-cut-leq-ℚ-upper-ℝ p≤q x<p with decide-le-leq-ℚ p q
+  ... | inl p<q = is-in-cut-le-ℚ-upper-ℝ x p q p<q x<p
+  ... | inr q≤p = tr (is-in-cut-upper-ℝ x) (antisymmetric-leq-ℚ p q p≤q q≤p) x<p
 ```
 
 ### Two upper real numbers with the same cut are equal
@@ -109,6 +145,11 @@ module _
 
   eq-eq-cut-upper-ℝ : cut-upper-ℝ x ＝ cut-upper-ℝ y → x ＝ y
   eq-eq-cut-upper-ℝ = eq-type-subtype is-upper-dedekind-cut-Prop
+
+  eq-sim-cut-upper-ℝ : sim-subtype (cut-upper-ℝ x) (cut-upper-ℝ y) → x ＝ y
+  eq-sim-cut-upper-ℝ =
+    eq-eq-cut-upper-ℝ ∘
+    antisymmetric-sim-subtype (cut-upper-ℝ x) (cut-upper-ℝ y)
 ```
 
 ## See also

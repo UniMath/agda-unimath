@@ -17,6 +17,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -31,19 +32,24 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
 
 ## Definition
 
-A [Dedekind cut](real-numbers.dedekind-real-numbers.md) `(L, U)` is
-{{#concept "arithmetically located" Disambiguation="Dedekind cut"}} if for any
-positive [rational number](elementary-number-theory.rational-numbers.md)
+A pair of a [lower Dedekind real](real-numbers.lower-dedekind-real-numbers.md)
+`L` and an [upper Dedekind real](real-numbers.upper-dedekind-real-numbers.md) `U`
+is {{#concept "arithmetically located" Disambiguation="Dedekind cut"}} if for
+any positive [rational number](elementary-number-theory.rational-numbers.md)
 `ε : ℚ`, there exist `p, q : ℚ` such that `0 < q - p < ε`, `p ∈ L`, and `q ∈ U`.
-Intuitively, when `L , U` represent the Dedekind cuts of a real number `x`, `p`
-and `q` are rational approximations of `x` to within `ε`. This follows parts of
-Section 11 in {{#cite BauerTaylor2009}}.
+Intuitively, when `L , U` represent the cuts of a real number `x`, `p` and `q`
+are rational approximations of `x` to within `ε`. This follows parts of Section
+11 in {{#cite BauerTaylor2009}}.
 
 ## Definitions
 
@@ -51,16 +57,17 @@ Section 11 in {{#cite BauerTaylor2009}}.
 
 ```agda
 module _
-  {l : Level} (L : subtype l ℚ) (U : subtype l ℚ)
+  {l : Level} (L : lower-ℝ l) (U : upper-ℝ l)
   where
 
-  is-arithmetically-located-pair-of-subtypes-ℚ : UU l
-  is-arithmetically-located-pair-of-subtypes-ℚ =
-    (ε : ℚ) →
-    is-positive-ℚ ε →
+  arithmetically-located-lower-upper-ℝ : UU l
+  arithmetically-located-lower-upper-ℝ =
+    (ε⁺ : ℚ⁺) →
     exists
       ( ℚ × ℚ)
-      ( λ (p , q) → le-ℚ-Prop p q ∧ le-ℚ-Prop q (p +ℚ ε) ∧ L p ∧ U q)
+      ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
+        cut-lower-ℝ L p ∧
+        cut-upper-ℝ U q)
 ```
 
 ## Properties
@@ -72,50 +79,40 @@ rational numbers, it is also located.
 
 ```agda
 module _
-  {l : Level} (L : subtype l ℚ) (U : subtype l ℚ)
+  {l : Level} (x : lower-ℝ l) (y : upper-ℝ l)
   where
 
   abstract
-    is-located-is-arithmetically-located-pair-of-subtypes-ℚ :
-      is-arithmetically-located-pair-of-subtypes-ℚ L U →
-      ((p q : ℚ) → le-ℚ p q → is-in-subtype L q → is-in-subtype L p) →
-      ((p q : ℚ) → le-ℚ p q → is-in-subtype U p → is-in-subtype U q) →
-      (p q : ℚ) → le-ℚ p q → type-disjunction-Prop (L p) (U q)
-    is-located-is-arithmetically-located-pair-of-subtypes-ℚ
-      arithmetically-located lower-closed upper-closed p q p<q =
+    is-located-is-arithmetically-located-lower-upper-ℝ :
+      arithmetically-located-lower-upper-ℝ x y →
+      is-located-lower-upper-ℝ x y
+    is-located-is-arithmetically-located-lower-upper-ℝ
+      arithmetically-located p q p<q =
       elim-exists
-        ( L p ∨ U q)
-        ( λ (p' , q') (p'<q' , q'<p'+ε , p'-in-l , q'-in-u) →
+        ( cut-lower-ℝ x p ∨ cut-upper-ℝ y q)
+        ( λ (p' , q') (q'<p'+q-p , p'∈L , q'∈U) →
           rec-coproduct
-            ( λ p<p' → inl-disjunction (lower-closed p p' p<p' p'-in-l))
+            ( λ p<p' →
+              inl-disjunction
+                ( is-in-cut-le-ℚ-lower-ℝ x p p' p<p' p'∈L))
             ( λ p'≤p →
               inr-disjunction
-                ( upper-closed
+                ( is-in-cut-le-ℚ-upper-ℝ
+                  ( y)
                   ( q')
                   ( q)
                   ( concatenate-le-leq-ℚ
                     ( q')
                     ( p' +ℚ (q -ℚ p))
                     ( q)
-                    ( q'<p'+ε)
-                    ( tr
-                      ( leq-ℚ (p' +ℚ q -ℚ p))
-                      ( equational-reasoning
-                        p +ℚ (q -ℚ p)
-                        ＝ (p +ℚ q) -ℚ p
-                          by inv (associative-add-ℚ p q (neg-ℚ p))
-                        ＝ q
-                          by is-identity-conjugation-Ab abelian-group-add-ℚ p q)
-                      ( backward-implication
-                        ( iff-translate-right-leq-ℚ (q -ℚ p) p' p)
-                        ( p'≤p))))
-                  ( q'-in-u)))
+                    ( q'<p'+q-p)
+                  ( tr
+                    ( leq-ℚ (p' +ℚ (q -ℚ p)))
+                    ( is-identity-right-conjugation-Ab abelian-group-add-ℚ p q)
+                    ( preserves-leq-left-add-ℚ (q -ℚ p) p' p p'≤p)))
+                  ( q'∈U)))
             ( decide-le-leq-ℚ p p'))
-        ( arithmetically-located
-          ( q -ℚ p)
-          ( is-positive-le-zero-ℚ
-            ( q -ℚ p)
-            ( backward-implication (iff-translate-diff-le-zero-ℚ p q) p<q)))
+        ( arithmetically-located (positive-diff-le-ℚ p q p<q))
 ```
 
 ## References
