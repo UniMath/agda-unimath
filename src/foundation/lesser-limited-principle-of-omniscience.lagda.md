@@ -11,14 +11,18 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.conjunction
+open import foundation.coproduct-types
 open import foundation.decidable-subtypes
+open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.inhabited-types
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
+open import foundation.weak-limited-principle-of-omniscience
 ```
 
 </details>
@@ -35,32 +39,32 @@ the first is [empty](foundation.empty-types.md) or the second is empty.
 
 ```agda
 instance-LLPO-Prop :
-  {l : Level} →
-  (S T : decidable-subtype l ℕ) →
+  {l1 l2 : Level} →
+  (S : decidable-subtype l1 ℕ) (T : decidable-subtype l2 ℕ) →
   ¬
     ( is-inhabited (type-decidable-subtype S) ×
       is-inhabited (type-decidable-subtype T)) →
-  Prop l
+  Prop (l1 ⊔ l2)
 instance-LLPO-Prop S T not-both =
   ¬' (is-inhabited-Prop (type-decidable-subtype S)) ∨
   ¬' (is-inhabited-Prop (type-decidable-subtype T))
 
 instance-LLPO :
-  {l : Level} →
-  (S T : decidable-subtype l ℕ) →
+  {l1 l2 : Level} →
+  (S : decidable-subtype l1 ℕ) (T : decidable-subtype l2 ℕ) →
   ¬
     ( is-inhabited (type-decidable-subtype S) ×
       is-inhabited (type-decidable-subtype T)) →
-  UU l
+  UU (l1 ⊔ l2)
 instance-LLPO S T not-both = type-Prop (instance-LLPO-Prop S T not-both)
 ```
 
 ### The lesser limited principle of omniscience
 
 ```agda
-level-LLPO : (l : Level) → UU (lsuc l)
-level-LLPO l =
-  (S T : decidable-subtype l ℕ) →
+level-LLPO : (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
+level-LLPO l1 l2 =
+  (S : decidable-subtype l1 ℕ) (T : decidable-subtype l2 ℕ) →
   (H :
     ¬
       ( is-inhabited (type-decidable-subtype S) ×
@@ -68,14 +72,8 @@ level-LLPO l =
   instance-LLPO S T H
 
 LLPO : UUω
-LLPO = {l : Level} → level-LLPO l
+LLPO = {l1 l2 : Level} → level-LLPO l1 l2
 ```
-
-## Properties
-
-### The weak limited principle of omniscience implies the lesser limited principle of omniscience
-
-TODO
 
 ## Table of choice principles
 

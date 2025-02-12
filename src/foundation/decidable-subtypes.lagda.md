@@ -234,10 +234,10 @@ module _
 ### Decidable subtypes are double negation stable
 
 ```agda
-is-double-negation-stable-decicable-subtype :
+is-double-negation-stable-decidable-subtype :
   {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A) →
   is-double-negation-stable-subtype (subtype-decidable-subtype P)
-is-double-negation-stable-decicable-subtype P x =
+is-double-negation-stable-decidable-subtype P x =
   double-negation-elim-is-decidable (is-decidable-decidable-subtype P x)
 ```
 

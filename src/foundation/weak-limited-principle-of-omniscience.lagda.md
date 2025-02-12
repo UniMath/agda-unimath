@@ -15,9 +15,13 @@ open import foundation.decidable-subtypes
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.limited-principle-of-omniscience
+open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
+open import foundation.weak-law-of-excluded-middle
+
+open import logic.de-morgan-types
 ```
 
 </details>
@@ -55,16 +59,27 @@ WLPO = {l : Level} → level-WLPO l
 ### The limited principle of omniscience implies the weak limited principle of omniscience
 
 ```agda
-level-WLPO-LPO : (l : Level) → level-LPO l → level-WLPO l
-level-WLPO-LPO l l-lpo S with l-lpo S
+level-WLPO-LPO : {l : Level} → level-LPO l → level-WLPO l
+level-WLPO-LPO l-lpo S with l-lpo S
 ... | inl inhabited-S =
   inr (λ empty-S → rec-trunc-Prop empty-Prop empty-S inhabited-S)
 ... | inr not-inhabited-S = inl (not-inhabited-S ∘ unit-trunc-Prop)
+
+WLPO-LPO : LPO → WLPO
+WLPO-LPO lpo = level-WLPO-LPO lpo
 ```
 
 ### The weak law of excluded middle implies the weak limited principle of omniscience
 
-TODO
+```agda
+level-WLPO-WLEM : {l : Level} → level-WLEM l → level-WLPO l
+level-WLPO-WLEM wlem S with wlem (is-inhabited-Prop (type-decidable-subtype S))
+... | inl ¬S = inl (λ s → ¬S (unit-trunc-Prop s))
+... | inr ¬¬S = inr (λ ¬S → ¬¬S (rec-trunc-Prop empty-Prop ¬S))
+
+WLPO-WLEM : WLEM → WLPO
+WLPO-WLEM wlem = level-WLPO-WLEM wlem
+```
 
 ## Table of choice principles
 

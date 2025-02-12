@@ -25,18 +25,24 @@ The {{#concept "weak law of excluded middle" Agda=WLEM}} asserts that any
 ## Definition
 
 ```agda
-WLEM : (l : Level) → UU (lsuc l)
-WLEM l = (P : Prop l) → is-de-morgan (type-Prop P)
+level-WLEM : (l : Level) → UU (lsuc l)
+level-WLEM l = (P : Prop l) → is-de-morgan (type-Prop P)
 
-prop-WLEM : (l : Level) → Prop (lsuc l)
-prop-WLEM l = Π-Prop (Prop l) (λ P → is-de-morgan-Prop (type-Prop P))
+level-prop-WLEM : (l : Level) → Prop (lsuc l)
+level-prop-WLEM l = Π-Prop (Prop l) (λ P → is-de-morgan-Prop (type-Prop P))
+
+WLEM : UUω
+WLEM = {l : Level} → level-WLEM l
 ```
 
 ### The law of excluded middle implies the weak law of excluded middle
 
 ```agda
-WLEM-LEM : {l : Level} → LEM l → WLEM l
-WLEM-LEM lem P = is-de-morgan-is-decidable (lem P)
+level-WLEM-LEM : {l : Level} → level-LEM l → level-WLEM l
+level-WLEM-LEM lem P = is-de-morgan-is-decidable (lem P)
+
+WLEM-LEM : LEM → WLEM
+WLEM-LEM lem = level-WLEM-LEM lem
 ```
 
 ## Table of choice principles
