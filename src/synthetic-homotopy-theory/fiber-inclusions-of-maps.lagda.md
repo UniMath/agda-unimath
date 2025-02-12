@@ -73,8 +73,19 @@ module _
     gap g (point z) (cone-fiber g z) ∘ map-fiber-fiber-inclusion-of-map
   triangle-map-fiber-fiber-inclusion-of-map = refl-htpy
 
+  is-fiber-inclusion-of-map' : UU (l1 ⊔ l2 ⊔ l3)
+  is-fiber-inclusion-of-map' = is-equiv map-fiber-fiber-inclusion-of-map
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (g : B → C) (z : C) (f : A → B)
+  where
+
   is-fiber-inclusion-of-map : UU (l1 ⊔ l2 ⊔ l3)
-  is-fiber-inclusion-of-map = is-equiv map-fiber-fiber-inclusion-of-map
+  is-fiber-inclusion-of-map =
+    Σ ((x : A) → g (f x) ＝ z) (is-fiber-inclusion-of-map' g z f)
 ```
 
 ### The universal property of fiber inclusions
@@ -131,12 +142,7 @@ fiber-inclusion-of-map :
   (l1 : Level) {l2 l3 : Level} {B : UU l2} {C : UU l3}
   (g : B → C) (z : C) → UU (lsuc l1 ⊔ l2 ⊔ l3)
 fiber-inclusion-of-map l1 {B = B} g z =
-  Σ ( UU l1)
-    ( λ A →
-      Σ ( A → B)
-        ( λ f →
-          Σ ( (x : A) → g (f x) ＝ z)
-            ( is-fiber-inclusion-of-map g z f)))
+  Σ (UU l1) (λ A → Σ (A → B) (is-fiber-inclusion-of-map g z))
 
 module _
   {l1 l2 l3 : Level} {B : UU l2} {C : UU l3}
@@ -161,7 +167,7 @@ module _
       compute-point-fiber-inclusion-of-map)
 
   is-fiber-inclusion-fiber-inclusion-of-map :
-    is-fiber-inclusion-of-map g z
+    is-fiber-inclusion-of-map' g z
       ( inclusion-fiber-inclusion-of-map)
       ( compute-point-fiber-inclusion-of-map)
   is-fiber-inclusion-fiber-inclusion-of-map = pr2 (pr2 (pr2 F))
@@ -183,7 +189,7 @@ module _
   where
 
   pullback-condition-is-fiber-inclusion-of-map :
-    is-fiber-inclusion-of-map g z f H →
+    is-fiber-inclusion-of-map' g z f H →
     pullback-condition-fiber-inclusion-of-map g z f H
   pullback-condition-is-fiber-inclusion-of-map K =
     is-equiv-left-map-triangle
@@ -196,7 +202,7 @@ module _
 
   is-fiber-inclusion-pullback-condition-fiber-inclusion-of-map :
     pullback-condition-fiber-inclusion-of-map g z f H →
-    is-fiber-inclusion-of-map g z f H
+    is-fiber-inclusion-of-map' g z f H
   is-fiber-inclusion-pullback-condition-fiber-inclusion-of-map =
     is-equiv-top-map-triangle
       ( gap g (point z) (f , terminal-map A , H))
@@ -258,16 +264,16 @@ module _
   where
 
   fiber-condition-is-fiber-inclusion-of-map :
-    is-fiber-inclusion-of-map g z f H →
+    is-fiber-inclusion-of-map' g z f H →
     fiber-condition-fiber-inclusion-of-map g z f H
   fiber-condition-is-fiber-inclusion-of-map =
     fiber-condition-pullback-condition-fiber-inclusion-of-map g z f H ∘
     pullback-condition-is-fiber-inclusion-of-map g z f H
 
-  is-fiber-inclusion-of-map-fiber-condition-fiber-inclusion-of-map :
+  is-fiber-inclusion-fiber-condition-fiber-inclusion-of-map :
     fiber-condition-fiber-inclusion-of-map g z f H →
-    is-fiber-inclusion-of-map g z f H
-  is-fiber-inclusion-of-map-fiber-condition-fiber-inclusion-of-map =
+    is-fiber-inclusion-of-map' g z f H
+  is-fiber-inclusion-fiber-condition-fiber-inclusion-of-map =
     is-fiber-inclusion-pullback-condition-fiber-inclusion-of-map g z f H ∘
     pullback-condition-fiber-condition-fiber-inclusion-of-map g z f H
 ```
@@ -317,11 +323,11 @@ module _
   {l1 l2 : Level} {B : UU l1} {C : UU l2} (g : B → C) (z : C)
   where
 
-  is-fiber-inclusion-of-map-inclusion-fiber :
-    is-fiber-inclusion-of-map g z
+  is-fiber-inclusion-inclusion-fiber :
+    is-fiber-inclusion-of-map' g z
       ( inclusion-fiber g {z})
       ( compute-value-inclusion-fiber g {z})
-  is-fiber-inclusion-of-map-inclusion-fiber = is-equiv-id
+  is-fiber-inclusion-inclusion-fiber = is-equiv-id
 
   fiber-inclusion-of-map-inclusion-fiber :
     fiber-inclusion-of-map (l1 ⊔ l2) g z
@@ -329,7 +335,7 @@ module _
     ( fiber g z ,
       inclusion-fiber g {z} ,
       compute-value-inclusion-fiber g {z} ,
-      is-fiber-inclusion-of-map-inclusion-fiber)
+      is-fiber-inclusion-inclusion-fiber)
 ```
 
 ### Loop spaces are fiber inclusions of the point inclusion
@@ -339,11 +345,13 @@ module _
   {l : Level} (A : Pointed-Type l)
   where
 
-  is-fiber-inclusion-of-map-terminal-map-type-Ω :
-    is-fiber-inclusion-of-map (point-type-Pointed-Type A) (point-Pointed-Type A)
+  is-fiber-inclusion-terminal-map-type-Ω :
+    is-fiber-inclusion-of-map'
+      ( point-type-Pointed-Type A)
+      ( point-Pointed-Type A)
       ( terminal-map (type-Ω A))
       ( id)
-  is-fiber-inclusion-of-map-terminal-map-type-Ω =
+  is-fiber-inclusion-terminal-map-type-Ω =
     is-fiber-inclusion-pullback-condition-fiber-inclusion-of-map
       ( point-type-Pointed-Type A)
       ( point-Pointed-Type A)
@@ -357,5 +365,23 @@ module _
     ( type-Ω A ,
       terminal-map (type-Ω A) ,
       id ,
-      is-fiber-inclusion-of-map-terminal-map-type-Ω)
+      is-fiber-inclusion-terminal-map-type-Ω)
+```
+
+### If `f` is a fiber inclusion of `g` at `z` and `g y ＝ z`, then `Ω(C , z)` is a fiber inclusion of `f`
+
+```text
+  Ω C -----> A ------> *
+   | ⌟       | ⌟       |
+   |       f |         |
+   ∨         ∨         ∨
+   * ------> B ------> C
+             ⟒    g    ⟒
+             y    ↦    z
+```
+
+```agda
+module _
+  {l : Level} (C : Pointed-Type l)
+  where
 ```

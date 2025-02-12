@@ -67,6 +67,7 @@ open import synthetic-homotopy-theory.equivalences-sequential-diagrams public
 open import synthetic-homotopy-theory.families-descent-data-pushouts public
 open import synthetic-homotopy-theory.families-descent-data-sequential-colimits public
 open import synthetic-homotopy-theory.fiber-inclusions-of-maps public
+open import synthetic-homotopy-theory.fiber-sequences public
 open import synthetic-homotopy-theory.flattening-lemma-coequalizers public
 open import synthetic-homotopy-theory.flattening-lemma-pushouts public
 open import synthetic-homotopy-theory.flattening-lemma-sequential-colimits public
