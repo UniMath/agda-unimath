@@ -23,7 +23,7 @@ open import foundation.universe-levels
 The
 {{#concept "axiom of countable choice" WD="axiom of countable choice" WDID=Q1000116 Agda=ACω}}
 asserts that for every family of [inhabited](foundation.inhabited-types.md)
-types `F` indexed by [`ℕ`](elementary-number-theory.natural-numbers.md), the
+types `F` indexed by the type `ℕ` of [natural numbers](elementary-number-theory.natural-numbers.md), the
 type of sections of that family `(n : ℕ) → B n` is inhabited.
 
 ## Definition
