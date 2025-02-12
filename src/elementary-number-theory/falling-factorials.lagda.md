@@ -79,6 +79,6 @@ Fin-falling-factorial-ℕ (succ-ℕ n) (succ-ℕ m) =
     ( equiv-coproduct
       ( Fin-falling-factorial-ℕ n m)
       ( Fin-falling-factorial-ℕ n (succ-ℕ m)))) ∘e
-  ( Fin-add-ℕ (falling-factorial-ℕ n m) (falling-factorial-ℕ n (succ-ℕ m)))
+  ( inv-compute-coproduct-Fin (falling-factorial-ℕ n m) (falling-factorial-ℕ n (succ-ℕ m)))
 -}
 ```

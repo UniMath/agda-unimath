@@ -250,7 +250,7 @@ module _
     min-is-greatest-binary-lower-bound-Decidable-Total-Order
 ```
 
-### `max x y` is the least upper bound of `x` and `y`
+### The maximum of two values is their least upper bound
 
 ```agda
   max-is-least-binary-upper-bound-Decidable-Total-Order :
