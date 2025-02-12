@@ -13,6 +13,7 @@ open import foundation.binary-relations
 open import foundation.existential-quantification
 open import foundation.inhabited-types
 open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 ```
 
@@ -22,7 +23,8 @@ open import foundation.universe-levels
 
 The
 {{#concept "axiom of dependent choice" WD="axiom of dependent choice" WDID=Q3303153}}
-asserts that for every [inhabited type](foundation.inhabited-types.md) `A` and
+asserts that for every [inhabited](foundation.inhabited-types.md)
+[set](foundation.sets.md) `A` and
 [binary relation](foundation.binary-relations.md) `R` on `A`, such that for
 every `a : A`, `∃ A (λ b → R a b)`, there is a sequence `f : ℕ → A` with
 `R (f n) (f (succ-ℕ n))` for every `n`.
@@ -32,8 +34,9 @@ every `a : A`, `∃ A (λ b → R a b)`, there is a sequence `f : ℕ → A` wit
 ```agda
 module _
   {l1 l2 : Level}
-  (A : UU l1) (H : is-inhabited A)
-  (R : Relation-Prop l2 A) (total-R : (a : A) → exists A (R a))
+  (A : Set l1) (H : is-inhabited (type-Set A))
+  (R : Relation-Prop l2 (type-Set A))
+  (total-R : (a : type-Set A) → exists (type-Set A) (R a))
   where
 
   instance-dependent-choice-Prop : Prop (l1 ⊔ l2)
@@ -49,8 +52,9 @@ module _
 ```agda
 level-ADC : (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
 level-ADC l1 l2 =
-  (A : UU l1) (H : is-inhabited A) →
-  (R : Relation-Prop l2 A) (total-R : (a : A) → exists A (R a)) →
+  (A : UU l1) (H : is-inhabited (type-Set A)) →
+  (R : Relation-Prop l2 (type-Set A))
+  (total-R : (a : type-Set A) → exists (type-Set A) (R a)) →
   instance-dependent-choice A H R total-R
 
 ADC : UUω
