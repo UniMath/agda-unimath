@@ -286,8 +286,8 @@ module _
 
   map-quotient-delooping-sign :
     (n : ℕ) →
-    classifying-type-Concrete-Group (Type-With-Cardinality-ℕ-Group l1 n) →
-    classifying-type-Concrete-Group (Type-With-Cardinality-ℕ-Group l4 2)
+    classifying-type-Type-With-Cardinality-ℕ-Concrete-Group l1 n →
+    classifying-type-Type-With-Cardinality-ℕ-Concrete-Group l4 2
   map-quotient-delooping-sign 0 X = raise-Fin-Type-With-Cardinality-ℕ l4 2
   map-quotient-delooping-sign 1 X = raise-Fin-Type-With-Cardinality-ℕ l4 2
   pr1 (map-quotient-delooping-sign (succ-ℕ (succ-ℕ n)) X) =
@@ -298,8 +298,8 @@ module _
   quotient-delooping-sign :
     (n : ℕ) →
     hom-Concrete-Group
-      ( Type-With-Cardinality-ℕ-Group l1 n)
-      ( Type-With-Cardinality-ℕ-Group l4 2)
+      ( Type-With-Cardinality-ℕ-Concrete-Group l1 n)
+      ( Type-With-Cardinality-ℕ-Concrete-Group l4 2)
   pr1 (quotient-delooping-sign n) = map-quotient-delooping-sign n
   pr2 (quotient-delooping-sign 0) = refl
   pr2 (quotient-delooping-sign 1) = refl
@@ -1077,16 +1077,16 @@ module _
       ( comp-hom-Group
         ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-        ( Type-With-Cardinality-ℕ-Group' l4 2)
+        ( Type-With-Cardinality-ℕ-Group l4 2)
         ( hom-iso-Group
           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-          ( Type-With-Cardinality-ℕ-Group' l4 2)
+          ( Type-With-Cardinality-ℕ-Group l4 2)
           ( comp-iso-Group
             ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
             ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
-            ( Type-With-Cardinality-ℕ-Group' l4 2)
+            ( Type-With-Cardinality-ℕ-Group l4 2)
             ( inv-iso-Group
-              ( Type-With-Cardinality-ℕ-Group' l4 2)
+              ( Type-With-Cardinality-ℕ-Group l4 2)
               ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
               ( iso-loop-group-fin-Type-With-Cardinality-ℕ-Group l4 2))
             ( iso-loop-group-equiv-Set
@@ -1096,19 +1096,17 @@ module _
         ( quotient-delooping-sign-loop n))
       ( comp-hom-Group
         ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-        ( Type-With-Cardinality-ℕ-Group' l1 (n +ℕ 2))
-        ( Type-With-Cardinality-ℕ-Group' l4 2)
+        ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))
+        ( Type-With-Cardinality-ℕ-Group l4 2)
         ( hom-group-hom-Concrete-Group
-          ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))
-          ( Type-With-Cardinality-ℕ-Group l4 2)
+          ( Type-With-Cardinality-ℕ-Concrete-Group l1 (n +ℕ 2))
+          ( Type-With-Cardinality-ℕ-Concrete-Group l4 2)
           ( quotient-delooping-sign (n +ℕ 2)))
         ( hom-iso-Group
           ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-          ( group-Concrete-Group
-            ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2)))
+          ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))
           ( inv-iso-Group
-            ( group-Concrete-Group
-              ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2)))
+            ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))
             ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
             ( iso-loop-group-fin-Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2)))))
   eq-quotient-delooping-loop-Type-With-Cardinality-ℕ-Group n =
@@ -1278,22 +1276,21 @@ module _
         ( is-prop-preserves-mul-Semigroup
           ( semigroup-Group (loop-group-Set (raise-Fin-Set l1 (n +ℕ 2))))
           ( semigroup-Group
-            ( Type-With-Cardinality-ℕ-Group' l4 2))
+            ( Type-With-Cardinality-ℕ-Group l4 2))
           ( pr1
             ( comp-hom-Group
               ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-              ( group-Concrete-Group
-                ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2)))
-              ( Type-With-Cardinality-ℕ-Group' l4 2)
+              ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))
+              ( Type-With-Cardinality-ℕ-Group l4 2)
               ( hom-group-hom-Concrete-Group
-                ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))
-                ( Type-With-Cardinality-ℕ-Group l4 2)
+                ( Type-With-Cardinality-ℕ-Concrete-Group l1 (n +ℕ 2))
+                ( Type-With-Cardinality-ℕ-Concrete-Group l4 2)
                 ( quotient-delooping-sign (n +ℕ 2)))
               ( hom-iso-Group
                 ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-                ( Type-With-Cardinality-ℕ-Group' l1 (n +ℕ 2))
+                ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))
                 ( inv-iso-Group
-                  ( Type-With-Cardinality-ℕ-Group' l1 (n +ℕ 2))
+                  ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))
                   ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
                   ( iso-loop-group-fin-Type-With-Cardinality-ℕ-Group l1
                     ( n +ℕ 2))))))))
@@ -1302,25 +1299,25 @@ module _
     (n : ℕ) →
     hom-Group
       ( symmetric-Group (Fin-Set 2))
-      ( Type-With-Cardinality-ℕ-Group' l4 2)
+      ( Type-With-Cardinality-ℕ-Group l4 2)
   symmetric-abstract-type-with-cardinality-ℕ-group-quotient-hom n =
     comp-hom-Group
       ( symmetric-Group (Fin-Set 2))
       ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
-      ( Type-With-Cardinality-ℕ-Group' l4 2)
+      ( Type-With-Cardinality-ℕ-Group l4 2)
       ( comp-hom-Group
         ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-        ( Type-With-Cardinality-ℕ-Group' l4 2)
+        ( Type-With-Cardinality-ℕ-Group l4 2)
         ( hom-iso-Group
           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-          ( Type-With-Cardinality-ℕ-Group' l4 2)
+          ( Type-With-Cardinality-ℕ-Group l4 2)
           ( comp-iso-Group
             ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
             ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
-            ( Type-With-Cardinality-ℕ-Group' l4 2)
+            ( Type-With-Cardinality-ℕ-Group l4 2)
             ( inv-iso-Group
-              ( Type-With-Cardinality-ℕ-Group' l4 2)
+              ( Type-With-Cardinality-ℕ-Group l4 2)
               ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
               ( iso-loop-group-fin-Type-With-Cardinality-ℕ-Group l4 2))
             ( iso-loop-group-equiv-Set
@@ -1339,17 +1336,17 @@ module _
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
         ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-        ( Type-With-Cardinality-ℕ-Group' l4 2)
+        ( Type-With-Cardinality-ℕ-Group l4 2)
         ( comp-hom-Group
           ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-          ( Type-With-Cardinality-ℕ-Group' l1 (n +ℕ 2))
-          ( Type-With-Cardinality-ℕ-Group' l4 2)
+          ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))
+          ( Type-With-Cardinality-ℕ-Group l4 2)
           ( hom-group-hom-Concrete-Group
-            ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))
-            ( Type-With-Cardinality-ℕ-Group l4 2)
+            ( Type-With-Cardinality-ℕ-Concrete-Group l1 (n +ℕ 2))
+            ( Type-With-Cardinality-ℕ-Concrete-Group l4 2)
             ( quotient-delooping-sign (n +ℕ 2)))
           ( hom-inv-iso-Group
-            ( Type-With-Cardinality-ℕ-Group' l1 (n +ℕ 2))
+            ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))
             ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
             ( iso-loop-group-fin-Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))))
         ( hom-inv-symmetric-group-loop-group-Set
@@ -1357,11 +1354,11 @@ module _
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
         ( symmetric-Group (Fin-Set (n +ℕ 2)))
-        ( Type-With-Cardinality-ℕ-Group' l4 2)
+        ( Type-With-Cardinality-ℕ-Group l4 2)
         ( comp-hom-Group
           ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
-          ( Type-With-Cardinality-ℕ-Group' l4 2)
+          ( Type-With-Cardinality-ℕ-Group l4 2)
           ( symmetric-abstract-type-with-cardinality-ℕ-group-quotient-hom
             ( n))
           ( sign-homomorphism
@@ -1377,7 +1374,7 @@ module _
         comp-hom-Group
           ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
           ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-          ( Type-With-Cardinality-ℕ-Group' l4 2)
+          ( Type-With-Cardinality-ℕ-Group l4 2)
           ( f)
           ( hom-inv-symmetric-group-loop-group-Set
             ( raise-Fin-Set l1 (n +ℕ 2))))
@@ -1387,16 +1384,16 @@ module _
       ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
       ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
       ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-      ( Type-With-Cardinality-ℕ-Group' l4 2)
+      ( Type-With-Cardinality-ℕ-Group l4 2)
       ( hom-iso-Group
         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-        ( Type-With-Cardinality-ℕ-Group' l4 2)
+        ( Type-With-Cardinality-ℕ-Group l4 2)
         ( comp-iso-Group
           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
           ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
-          ( Type-With-Cardinality-ℕ-Group' l4 2)
+          ( Type-With-Cardinality-ℕ-Group l4 2)
           ( inv-iso-Group
-            ( Type-With-Cardinality-ℕ-Group' l4 2)
+            ( Type-With-Cardinality-ℕ-Group l4 2)
             ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
             ( iso-loop-group-fin-Type-With-Cardinality-ℕ-Group l4 2))
           ( iso-loop-group-equiv-Set
@@ -1409,16 +1406,16 @@ module _
         ( comp-hom-Group
             ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
             ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-            ( Type-With-Cardinality-ℕ-Group' l4 2)
+            ( Type-With-Cardinality-ℕ-Group l4 2)
             ( hom-iso-Group
               ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-              ( Type-With-Cardinality-ℕ-Group' l4 2)
+              ( Type-With-Cardinality-ℕ-Group l4 2)
               ( comp-iso-Group
                 ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
                 ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
-                ( Type-With-Cardinality-ℕ-Group' l4 2)
+                ( Type-With-Cardinality-ℕ-Group l4 2)
                 ( inv-iso-Group
-                  ( Type-With-Cardinality-ℕ-Group' l4 2)
+                  ( Type-With-Cardinality-ℕ-Group l4 2)
                   ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
                   ( iso-loop-group-fin-Type-With-Cardinality-ℕ-Group l4 2))
                 ( iso-loop-group-equiv-Set
@@ -1431,34 +1428,33 @@ module _
             ( is-prop-preserves-mul-Semigroup
               ( semigroup-Group (symmetric-Group (raise-Fin-Set l1 (n +ℕ 2))))
               ( semigroup-Group
-                ( Type-With-Cardinality-ℕ-Group' l4 2))
+                ( Type-With-Cardinality-ℕ-Group l4 2))
               ( pr1
                 ( comp-hom-Group
                   ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
                   ( symmetric-Group (Fin-Set (n +ℕ 2)))
-                  ( Type-With-Cardinality-ℕ-Group' l4 2)
+                  ( Type-With-Cardinality-ℕ-Group l4 2)
                   ( comp-hom-Group
                     ( symmetric-Group (Fin-Set (n +ℕ 2)))
                     ( symmetric-Group (Fin-Set 2))
-                    ( Type-With-Cardinality-ℕ-Group' l4 2)
+                    ( Type-With-Cardinality-ℕ-Group l4 2)
                     ( comp-hom-Group
                       ( symmetric-Group (Fin-Set 2))
                       ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
-                      ( Type-With-Cardinality-ℕ-Group' l4 2)
+                      ( Type-With-Cardinality-ℕ-Group l4 2)
                       ( comp-hom-Group
                         ( symmetric-Group (quotient-set-Fin (n +ℕ 2)))
                         ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-                        ( Type-With-Cardinality-ℕ-Group' l4 2)
+                        ( Type-With-Cardinality-ℕ-Group l4 2)
                         ( hom-iso-Group
                           ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
-                          ( Type-With-Cardinality-ℕ-Group' l4 2)
+                          ( Type-With-Cardinality-ℕ-Group l4 2)
                           ( comp-iso-Group
                             ( loop-group-Set ( quotient-set-Fin (n +ℕ 2)))
                             ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
-                            ( Type-With-Cardinality-ℕ-Group' l4 2)
+                            ( Type-With-Cardinality-ℕ-Group l4 2)
                             ( inv-iso-Group
-                              ( group-Concrete-Group
-                                ( Type-With-Cardinality-ℕ-Group l4 2))
+                              ( Type-With-Cardinality-ℕ-Group l4 2)
                               ( loop-group-Set (raise-Set l4 (Fin-Set 2)))
                               ( iso-loop-group-fin-Type-With-Cardinality-ℕ-Group
                                 ( l4)
@@ -1562,8 +1558,8 @@ module _
   delooping-sign :
     (n : ℕ) →
     hom-Concrete-Group
-      ( Type-With-Cardinality-ℕ-Group l1 n)
-      ( Type-With-Cardinality-ℕ-Group (lsuc l2) 2)
+      ( Type-With-Cardinality-ℕ-Concrete-Group l1 n)
+      ( Type-With-Cardinality-ℕ-Concrete-Group (lsuc l2) 2)
   delooping-sign =
     quotient-delooping-sign
       ( λ n X → type-Type-With-Cardinality-ℕ 2 (Q n X))
@@ -1582,28 +1578,28 @@ module _
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
         ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-        ( Type-With-Cardinality-ℕ-Group' (lsuc l2) 2)
+        ( Type-With-Cardinality-ℕ-Group (lsuc l2) 2)
         ( comp-hom-Group
           ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
-          ( Type-With-Cardinality-ℕ-Group' l1 (n +ℕ 2))
-          ( Type-With-Cardinality-ℕ-Group' (lsuc l2) 2)
+          ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))
+          ( Type-With-Cardinality-ℕ-Group (lsuc l2) 2)
           ( hom-group-hom-Concrete-Group
-            ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))
-            ( Type-With-Cardinality-ℕ-Group (lsuc l2) 2)
+            ( Type-With-Cardinality-ℕ-Concrete-Group l1 (n +ℕ 2))
+            ( Type-With-Cardinality-ℕ-Concrete-Group (lsuc l2) 2)
             ( delooping-sign (n +ℕ 2)))
           ( hom-inv-iso-Group
-            ( Type-With-Cardinality-ℕ-Group' l1 (n +ℕ 2))
+            ( Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))
             ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
             ( iso-loop-group-fin-Type-With-Cardinality-ℕ-Group l1 (n +ℕ 2))))
         ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l1 (n +ℕ 2))))
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
         ( symmetric-Group (Fin-Set (n +ℕ 2)))
-        ( Type-With-Cardinality-ℕ-Group' (lsuc l2) 2)
+        ( Type-With-Cardinality-ℕ-Group (lsuc l2) 2)
         ( comp-hom-Group
           ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
-          ( Type-With-Cardinality-ℕ-Group' (lsuc l2) 2)
+          ( Type-With-Cardinality-ℕ-Group (lsuc l2) 2)
           ( symmetric-abstract-type-with-cardinality-ℕ-group-quotient-hom
             ( λ n X → type-Type-With-Cardinality-ℕ 2 (Q n X))
             ( λ n X →
