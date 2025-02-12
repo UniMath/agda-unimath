@@ -39,6 +39,10 @@ WLEM-LEM : {l : Level} → LEM l → WLEM l
 WLEM-LEM lem P = is-de-morgan-is-decidable (lem P)
 ```
 
+## Table of choice principles
+
+{{#include tables/choice-principles.md}}
+
 ## External links
 
 - [Weak excluded middle](https://ncatlab.org/nlab/show/weak+excluded+middle) at

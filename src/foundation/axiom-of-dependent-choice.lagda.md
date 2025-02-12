@@ -61,6 +61,10 @@ ADC : UUω
 ADC = {l1 l2 : Level} → level-ADC l1 l2
 ```
 
+## Table of choice principles
+
+{{#include tables/choice-principles.md}}
+
 ## External links
 
 - [Axiom of dependent choice](https://en.wikipedia.org/wiki/Axiom_of_dependent_choice)

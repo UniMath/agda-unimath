@@ -76,6 +76,10 @@ WCC-ACω : ACω → WCC
 WCC-ACω acω = level-WCC-level-ACω acω
 ```
 
+## Table of choice principles
+
+{{#include tables/choice-principles.md}}
+
 ## External links
 
 - [Axiom of countable choice](https://ncatlab.org/nlab/show/countable+choice) at

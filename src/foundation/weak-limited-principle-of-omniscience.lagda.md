@@ -66,6 +66,10 @@ level-WLPO-LPO l l-lpo S with l-lpo S
 
 TODO
 
+## Table of choice principles
+
+{{#include tables/choice-principles.md}}
+
 ## See also
 
 - [The principle of omniscience](foundation.principle-of-omniscience.md)

@@ -58,6 +58,10 @@ abstract
     is-not-decidable-type-2-Element-Type (λ X → d (pr1 X))
 ```
 
+## Table of choice principles
+
+{{#include tables/choice-principles.md}}
+
 ## External links
 
 - [Excluded middle](https://ncatlab.org/nlab/show/excluded+middle) at nLab

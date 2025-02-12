@@ -131,6 +131,10 @@ ACω-AC-Set ac = level-ACω-AC-Set ac
 - [Diaconescu's theorem](foundation.diaconescus-theorem.md), which states that
   the axiom of choice implies the law of excluded middle.
 
+## Table of choice principles
+
+{{#include tables/choice-principles.md}}
+
 ## References
 
 {{#bibliography}}

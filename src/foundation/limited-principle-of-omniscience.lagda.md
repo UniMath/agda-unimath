@@ -49,12 +49,9 @@ LPO : UUω
 LPO = {l : Level} → level-LPO l
 ```
 
-## See also
+## Table of choice principles
 
-- [The principle of omniscience](foundation.principle-of-omniscience.md)
-- [The lesser limited principle of omniscience](foundation.lesser-limited-principle-of-omniscience.md)
-- [The weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)
-- [Markov's principle](logic.markovs-principle.md)
+{{#include tables/choice-principles.md}}
 
 ## External links
 

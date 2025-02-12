@@ -109,6 +109,10 @@ wcc-lem {l} lem F inhab-F contr-le
     claim = is-inhabited-Prop ((n : ℕ) → type-Set (F n))
 ```
 
+## Table of choice principles
+
+{{#include tables/choice-principles.md}}
+
 ## External links
 
 - [Weak countable choice](https://ncatlab.org/nlab/show/countable+choice#WCC) at
