@@ -7,19 +7,18 @@ module foundation.lesser-limited-principle-of-omniscience where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.parity-natural-numbers
 
-open import foundation.contractible-types
+open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.decidable-subtypes
 open import foundation.disjunction
+open import foundation.empty-types
 open import foundation.function-types
+open import foundation.inhabited-types
 open import foundation.negation
 open import foundation.propositions
-open import foundation.universal-quantification
 open import foundation.universe-levels
-open import foundation.weak-limited-principle-of-omniscience
 ```
 
 </details>
@@ -27,33 +26,33 @@ open import foundation.weak-limited-principle-of-omniscience
 ## Statement
 
 The {{#concept "lesser limited principle of omniscience" Agda=LLPO}} (LLPO)
-asserts that any [contractible](foundation.contractible-types.md)
-[decidable subtype](foundation.decidable-subtypes.md) of the
-[natural numbers](elementary-number-theory.natural-numbers.md) either contains
-no even numbers or contains no odd numbers.
+asserts that any pair of [decidable subtypes](foundation.decidable-subtypes.md)
+of the [natural numbers](elementary-number-theory.natural-numbers.md) such that
+it is not true that both are [inhabited](foundation.inhabited-types.md), either
+the first is [empty](foundation.empty-types.md) or the second is empty.
 
 ### Instances of LLPO
 
 ```agda
 instance-LLPO-Prop :
   {l : Level} →
-  (S : decidable-subtype l ℕ) →
-  is-contr (type-decidable-subtype S) →
+  (S T : decidable-subtype l ℕ) →
+  ¬
+    ( is-inhabited (type-decidable-subtype S) ×
+      is-inhabited (type-decidable-subtype T)) →
   Prop l
-instance-LLPO-Prop S H =
-  (∀'
-    ( ℕ)
-    ( λ n → function-Prop (is-even-ℕ n) (¬' (subtype-decidable-subtype S n)))) ∨
-  (∀'
-    ( ℕ)
-    ( λ n → function-Prop (is-odd-ℕ n) (¬' (subtype-decidable-subtype S n))))
+instance-LLPO-Prop S T not-both =
+  ¬' (is-inhabited-Prop (type-decidable-subtype S)) ∨
+  ¬' (is-inhabited-Prop (type-decidable-subtype T))
 
 instance-LLPO :
   {l : Level} →
-  (S : decidable-subtype l ℕ) →
-  is-contr (type-decidable-subtype S) →
+  (S T : decidable-subtype l ℕ) →
+  ¬
+    ( is-inhabited (type-decidable-subtype S) ×
+      is-inhabited (type-decidable-subtype T)) →
   UU l
-instance-LLPO S H = type-Prop (instance-LLPO-Prop S H)
+instance-LLPO S T not-both = type-Prop (instance-LLPO-Prop S T not-both)
 ```
 
 ### The lesser limited principle of omniscience
@@ -61,9 +60,12 @@ instance-LLPO S H = type-Prop (instance-LLPO-Prop S H)
 ```agda
 level-LLPO : (l : Level) → UU (lsuc l)
 level-LLPO l =
-  (S : decidable-subtype l ℕ) →
-  (H : is-contr (type-decidable-subtype S)) →
-  instance-LLPO S H
+  (S T : decidable-subtype l ℕ) →
+  (H :
+    ¬
+      ( is-inhabited (type-decidable-subtype S) ×
+        is-inhabited (type-decidable-subtype T))) →
+  instance-LLPO S T H
 
 LLPO : UUω
 LLPO = {l : Level} → level-LLPO l
