@@ -36,7 +36,8 @@ The {{#concept "axiom of weak countable choice" Agda=WCC}} asserts that for
 every family of [inhabited](foundation.inhabited-types.md) types `F` indexed by
 [`ℕ`](elementary-number-theory.natural-numbers.md), where for at most one `n`,
 `F n` is [contractible](foundation.contractible-types.md), the type of sections
-of that family `(n : ℕ) → B n` is inhabited.
+of that family `(n : ℕ) → B n` is inhabited.  This axiom was introduced in
+{{#cite Bridges2000}}.
 
 ## Definitions
 
@@ -112,3 +113,7 @@ wcc-lem {l} lem F inhab-F contr-le
 
 - [Weak countable choice](https://ncatlab.org/nlab/show/countable+choice#WCC) at
   nLab
+
+## References
+
+{{#bibliography}}
