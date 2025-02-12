@@ -42,8 +42,8 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Definition
 
-A pair of a [lower Dedekind cut](real-numbers.lower-dedekind-real-numbers.md)
-`L` and an [upper Dedekind cut](real-numbers.upper-dedekind-real-numbers.md) `U`
+A pair of a [lower Dedekind real](real-numbers.lower-dedekind-real-numbers.md)
+`L` and an [upper Dedekind real](real-numbers.upper-dedekind-real-numbers.md) `U`
 is {{#concept "arithmetically located" Disambiguation="Dedekind cut"}} if for
 any positive [rational number](elementary-number-theory.rational-numbers.md)
 `ε : ℚ`, there exist `p, q : ℚ` such that `0 < q - p < ε`, `p ∈ L`, and `q ∈ U`.
