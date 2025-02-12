@@ -374,18 +374,3 @@ preserves-le-add-ℕ {a} {b} {c} {d} H K =
     (preserves-le-right-add-ℕ c a b H)
     (preserves-le-left-add-ℕ b c d K)
 ```
-
-### Trichotomy on the natural numbers
-
-```agda
-trichotomy-le-ℕ :
-  {l : Level} {A : UU l} (x y : ℕ) →
-  ( le-ℕ x y → A) →
-  ( Id x y → A) →
-  ( le-ℕ y x → A) →
-  A
-trichotomy-le-ℕ x y left eq right with decide-le-leq-ℕ x y | decide-le-leq-ℕ y x
-... | inl I | _ = left I
-... | inr I | inl I' = right I'
-... | inr I | inr I' = eq (antisymmetric-leq-ℕ x y I' I)
-```

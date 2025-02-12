@@ -7,9 +7,10 @@ module foundation.axiom-of-weak-countable-choice where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.negated-equality
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.disjunction
@@ -46,7 +47,7 @@ instance-weak-countable-choice : {l : Level} → (ℕ → UU l) → UU l
 instance-weak-countable-choice F =
   ( (n : ℕ) → is-inhabited (F n)) →
   ( (m n : ℕ) →
-    le-ℕ m n →
+    m ≠ n →
     type-Prop (is-contr-Prop (F m) ∨ is-contr-Prop (F n))) →
   is-inhabited ((n : ℕ) → F n)
 ```
@@ -90,24 +91,15 @@ wcc-lem {l} lem F inhab-F contr-le
         ( λ elem-Fn →
           unit-trunc-Prop
             ( λ m →
-              trichotomy-le-ℕ
-                ( m)
-                ( n)
-                ( λ m<n →
-                  center
+              rec-coproduct
+                ( λ m=n → tr (type-Set ∘ F) (inv m=n) elem-Fn)
+                ( λ m≠n → center
                     ( map-right-unit-law-disjunction-is-empty-Prop
                       ( is-contr-Prop (type-Set (F m)))
                       ( is-contr-Prop (type-Set (F n)))
                       ( not-contractible-Fn)
-                      ( contr-le m n m<n)))
-                ( λ m=n → tr (type-Set ∘ F) (inv m=n) elem-Fn)
-                ( λ n<m →
-                  center
-                    ( map-left-unit-law-disjunction-is-empty-Prop
-                      ( is-contr-Prop (type-Set (F n)))
-                      ( is-contr-Prop (type-Set (F m)))
-                      ( not-contractible-Fn)
-                      ( contr-le n m n<m)))))
+                      ( contr-le m n m≠n)))
+                ( has-decidable-equality-ℕ m n)))
         ( inhab-F n))
     ( one-not-contractible)
     where
