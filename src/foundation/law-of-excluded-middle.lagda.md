@@ -58,3 +58,7 @@ abstract
   no-global-decidability {l} d =
     is-not-decidable-type-2-Element-Type (λ X → d (pr1 X))
 ```
+
+## External links
+
+- [Excluded middle](https://ncatlab.org/nlab/show/excluded+middle) at nLab

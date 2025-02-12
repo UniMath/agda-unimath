@@ -7,6 +7,10 @@ module foundation.axiom-of-choice where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.natural-numbers
+
+open import foundation.axiom-of-countable-choice
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
@@ -110,6 +114,16 @@ AC0-is-set-projective H A B K =
         ( A)
         ( pr1 , (λ a → map-trunc-Prop (map-inv-fiber-pr1 B a) (K a)))
         ( id))
+```
+
+### The axiom of choice for sets implies the axiom of countable choice
+
+```agda
+level-ACω-AC-Set : {l : Level} → level-AC-Set lzero l → level-ACω l
+level-ACω-AC-Set ac-l = ac-l ℕ-Set
+
+ACω-AC-Set : AC-Set → ACω
+ACω-AC-Set ac = level-ACω-AC-Set ac
 ```
 
 ## See also
