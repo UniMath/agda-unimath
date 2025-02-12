@@ -58,6 +58,7 @@ open import ring-theory.localizations-rings public
 open import ring-theory.maximal-ideals-rings public
 open import ring-theory.modules-rings public
 open import ring-theory.monoids-with-left-semiring-actions public
+open import ring-theory.monoids-with-right-semiring-actions public
 open import ring-theory.multiples-of-elements-rings public
 open import ring-theory.multiplicative-orders-of-units-rings public
 open import ring-theory.nil-ideals-rings public
@@ -69,6 +70,7 @@ open import ring-theory.poset-of-ideals-rings public
 open import ring-theory.poset-of-left-ideals-rings public
 open import ring-theory.poset-of-left-ideals-semirings public
 open import ring-theory.poset-of-right-ideals-rings public
+open import ring-theory.poset-of-right-ideals-semirings public
 open import ring-theory.powers-of-elements-rings public
 open import ring-theory.powers-of-elements-semirings public
 open import ring-theory.precategory-of-rings public
@@ -82,6 +84,7 @@ open import ring-theory.products-subsets-rings public
 open import ring-theory.quotient-rings public
 open import ring-theory.radical-ideals-rings public
 open import ring-theory.right-ideals-generated-by-subsets-rings public
+open import ring-theory.right-ideals-generated-by-subsets-semirings public
 open import ring-theory.right-ideals-rings public
 open import ring-theory.right-ideals-semirings public
 open import ring-theory.right-linear-combinations-of-elements-rings public

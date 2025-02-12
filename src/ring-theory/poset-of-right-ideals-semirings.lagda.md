@@ -134,7 +134,8 @@ module _
     {l2 l3 : Level}
     (I : right-ideal-Semiring l2 R) (J : right-ideal-Semiring l3 R) →
     UU (l1 ⊔ l2 ⊔ l3)
-  sim-right-ideal-Semiring = sim-Large-Poset (right-ideal-Semiring-Large-Poset R)
+  sim-right-ideal-Semiring =
+    sim-Large-Poset (right-ideal-Semiring-Large-Poset R)
 
   is-prop-sim-right-ideal-Semiring :
     {l2 l3 : Level}

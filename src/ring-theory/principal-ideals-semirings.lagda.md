@@ -18,6 +18,8 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import ring-theory.ideals-semirings
+open import ring-theory.left-ideals-semirings
+open import ring-theory.right-ideals-semirings
 open import ring-theory.semirings
 open import ring-theory.subsets-semirings
 ```
@@ -146,9 +148,9 @@ module _
   is-closed-under-addition-principal-left-ideal-Semiring :
     is-closed-under-addition-subset-Semiring R
       subset-principal-left-ideal-Semiring
-  is-closed-under-addition-principal-left-ideal-Semiring x y H K =
+  is-closed-under-addition-principal-left-ideal-Semiring H K =
     apply-twice-universal-property-trunc-Prop H K
-      ( subset-principal-left-ideal-Semiring (add-Semiring R x y))
+      ( subset-principal-left-ideal-Semiring (add-Semiring R _ _))
       ( λ (u , p) (v , q) →
         intro-exists
           ( add-Semiring R u v)
@@ -156,7 +158,7 @@ module _
             ap-add-Semiring R p q))
 
   is-additive-submonoid-principal-left-ideal-Semiring :
-    is-additive-submonoid-Semiring R subset-principal-left-ideal-Semiring
+    is-additive-submonoid-subset-Semiring R subset-principal-left-ideal-Semiring
   pr1 is-additive-submonoid-principal-left-ideal-Semiring =
     contains-zero-principal-left-ideal-Semiring
   pr2 is-additive-submonoid-principal-left-ideal-Semiring =
@@ -217,9 +219,9 @@ module _
   is-closed-under-addition-principal-right-ideal-Semiring :
     is-closed-under-addition-subset-Semiring R
       subset-principal-right-ideal-Semiring
-  is-closed-under-addition-principal-right-ideal-Semiring x y H K =
+  is-closed-under-addition-principal-right-ideal-Semiring H K =
     apply-twice-universal-property-trunc-Prop H K
-      ( subset-principal-right-ideal-Semiring (add-Semiring R x y))
+      ( subset-principal-right-ideal-Semiring (add-Semiring R _ _))
       ( λ (u , p) (v , q) →
         intro-exists
           ( add-Semiring R u v)
@@ -227,7 +229,8 @@ module _
             ap-add-Semiring R p q))
 
   is-additive-submonoid-principal-right-ideal-Semiring :
-    is-additive-submonoid-Semiring R subset-principal-right-ideal-Semiring
+    is-additive-submonoid-subset-Semiring R
+      ( subset-principal-right-ideal-Semiring)
   pr1 is-additive-submonoid-principal-right-ideal-Semiring =
     contains-zero-principal-right-ideal-Semiring
   pr2 is-additive-submonoid-principal-right-ideal-Semiring =
@@ -273,36 +276,48 @@ module _
 
   subset-principal-ideal-Semiring : subset-Semiring l1 R
   subset-principal-ideal-Semiring b =
+    {!!}
+
+{-
     ∃ ( type-Semiring R)
       ( λ x →
         ∃ ( type-Semiring R)
           ( λ y →
             Id-Prop (set-Semiring R) (mul-Semiring R (mul-Semiring R x a) y) b))
+-}
 
   is-in-principal-ideal-Semiring : type-Semiring R → UU l1
-  is-in-principal-ideal-Semiring =
+  is-in-principal-ideal-Semiring = {!!}
+
+{-
     is-in-subset-Semiring R subset-principal-ideal-Semiring
+-}
 
   contains-zero-principal-ideal-Semiring :
     is-in-principal-ideal-Semiring (zero-Semiring R)
-  contains-zero-principal-ideal-Semiring =
+  contains-zero-principal-ideal-Semiring = {!!}
+
+{-
     intro-exists
       ( zero-Semiring R)
       ( intro-exists
         ( zero-Semiring R)
         ( right-zero-law-mul-Semiring R (mul-Semiring R (zero-Semiring R) a)))
+-}
 
   is-closed-under-addition-principal-ideal-Semiring :
     is-closed-under-addition-subset-Semiring R
       subset-principal-ideal-Semiring
-  is-closed-under-addition-principal-ideal-Semiring x y H K =
+  is-closed-under-addition-principal-ideal-Semiring H K = {!!}
+
+{-
     apply-twice-universal-property-trunc-Prop H K
-      ( subset-principal-ideal-Semiring (add-Semiring R x y))
+      ( subset-principal-ideal-Semiring (add-Semiring R _ _))
       ( λ (u , H') (v , K') →
         apply-twice-universal-property-trunc-Prop H' K'
-          ( subset-principal-ideal-Semiring (add-Semiring R x y))
+          ( subset-principal-ideal-Semiring (add-Semiring R _ _))
           ( λ (s , p) (t , q) →
-            {!!}))
+            {!!})) -}
 ```
 
 ## References

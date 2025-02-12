@@ -148,10 +148,14 @@ module _
   is-closed-under-right-multiplication-ideal-Semiring =
     pr2 (pr2 is-ideal-subset-ideal-Semiring)
 
-  submonoid-ideal-Semiring : Submonoid l2 (additive-monoid-Semiring R)
-  pr1 submonoid-ideal-Semiring = subset-ideal-Semiring
-  pr1 (pr2 submonoid-ideal-Semiring) = contains-zero-ideal-Semiring
-  pr2 (pr2 submonoid-ideal-Semiring) = is-closed-under-addition-ideal-Semiring
+  submonoid-ideal-Semiring :
+    Submonoid l2 (additive-monoid-Semiring R)
+  pr1 submonoid-ideal-Semiring =
+    subset-ideal-Semiring
+  pr1 (pr2 submonoid-ideal-Semiring) =
+    contains-zero-ideal-Semiring
+  pr2 (pr2 submonoid-ideal-Semiring) x y =
+    is-closed-under-addition-ideal-Semiring {x} {y}
 ```
 
 ## Properties

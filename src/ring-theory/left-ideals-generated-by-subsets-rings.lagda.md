@@ -232,13 +232,14 @@ module _
         ( x)
         ( H))
 
-  left-ideal-subset-Ring : left-ideal-Ring (l1 ⊔ l2) R
-  pr1 left-ideal-subset-Ring = subset-left-ideal-subset-Ring
-  pr1 (pr1 (pr2 left-ideal-subset-Ring)) = contains-zero-left-ideal-subset-Ring
-  pr1 (pr2 (pr1 (pr2 left-ideal-subset-Ring))) =
+  left-ideal-subset-Ring :
+    left-ideal-Ring (l1 ⊔ l2) R
+  pr1 left-ideal-subset-Ring =
+    subset-left-ideal-subset-Ring
+  pr1 (pr1 (pr2 left-ideal-subset-Ring)) =
+    contains-zero-left-ideal-subset-Ring
+  pr2 (pr1 (pr2 left-ideal-subset-Ring)) =
     is-closed-under-addition-left-ideal-subset-Ring
-  pr2 (pr2 (pr1 (pr2 left-ideal-subset-Ring))) =
-    is-closed-under-negatives-left-ideal-subset-Ring
   pr2 (pr2 left-ideal-subset-Ring) =
     is-closed-under-left-multiplication-left-ideal-subset-Ring
 

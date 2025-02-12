@@ -7,17 +7,25 @@ module ring-theory.linear-combinations-of-elements-semirings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import group-theory.monoids
+
+open import lists.concatenation-lists
+open import lists.functoriality-lists
 open import lists.lists
 
+open import ring-theory.monoids-with-semiring-actions
 open import ring-theory.semirings
 open import ring-theory.subsets-semirings
 
@@ -60,36 +68,100 @@ module _
     list (type-Semiring R × A × type-Semiring R)
 ```
 
+### Multiplying linear combinations by a scalar on the left
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) {A : UU l2}
+  where
+
+  left-mul-linear-combination-Semiring :
+    type-Semiring R →
+    linear-combination-Semiring R A →
+    linear-combination-Semiring R A
+  left-mul-linear-combination-Semiring r =
+    map-list (λ (s , a , t) → (mul-Semiring R r s , a , t))
+```
+
+### Multiplying linear combinations by a scalar on the right
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) {A : UU l2}
+  where
+
+  right-mul-linear-combination-Semiring :
+    linear-combination-Semiring R A →
+    type-Semiring R →
+    linear-combination-Semiring R A
+  right-mul-linear-combination-Semiring l r =
+    map-list (λ (s , a , t) → (s , a , mul-Semiring R t r)) l
+```
+
+### Multiplying linear combinations by scalars on both sides
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) {A : UU l2}
+  where
+
+  mul-linear-combination-Semiring :
+    type-Semiring R →
+    linear-combination-Semiring R A →
+    type-Semiring R →
+    linear-combination-Semiring R A
+  mul-linear-combination-Semiring r l s =
+    map-list (λ (x , a , y) → (mul-Semiring R r x , a , mul-Semiring R y s)) l
+```
+
 ### Evaluating linear combinations of elements in unital magmas
 
 ```agda
 module _
   {l1 l2 l3 : Level} (R : Semiring l1)
-  {A : UU l2} (M : Unital-Magma l3)
-  (μ : type-Semiring R → A → type-Semiring R → type-Unital-Magma M)
+  {A : UU l2}
   where
 
-  ev-linear-combination-Semiring :
+  ev-unital-magma-linear-combination-Semiring :
+    (M : Unital-Magma l3)
+    (μ : type-Semiring R → A → type-Semiring R → type-Unital-Magma M) →
     linear-combination-Semiring R A → type-Unital-Magma M
-  ev-linear-combination-Semiring nil =
+  ev-unital-magma-linear-combination-Semiring M μ nil =
     unit-Unital-Magma M
-  ev-linear-combination-Semiring (cons (r , a , s) l) =
-    mul-Unital-Magma M (μ r a s) (ev-linear-combination-Semiring l)
+  ev-unital-magma-linear-combination-Semiring M μ (cons (r , a , s) l) =
+    mul-Unital-Magma M
+      ( μ r a s)
+      ( ev-unital-magma-linear-combination-Semiring M μ l)
+
+  ev-monoid-linear-combination-Semiring :
+    (M : Monoid l3)
+    (μ : type-Semiring R → A → type-Semiring R → type-Monoid M) →
+    linear-combination-Semiring R A → type-Monoid M
+  ev-monoid-linear-combination-Semiring M =
+    ev-unital-magma-linear-combination-Semiring
+      ( unital-magma-Monoid M)
 ```
 
 ### The predicate of being a linear combination
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (R : Semiring l1)
-  {A : UU l2} (M : Unital-Magma l3)
-  (μ : type-Semiring R → A → type-Semiring R → type-Unital-Magma M)
+  {l1 l2 l3 : Level} (R : Semiring l1) {A : UU l2}
   where
 
   is-linear-combination-Semiring :
+    (M : Unital-Magma l3)
+    (μ : type-Semiring R → A → type-Semiring R → type-Unital-Magma M) →
     type-Unital-Magma M → UU (l1 ⊔ l2 ⊔ l3)
-  is-linear-combination-Semiring =
-    fiber (ev-linear-combination-Semiring R M μ)
+  is-linear-combination-Semiring M μ =
+    fiber (ev-unital-magma-linear-combination-Semiring R M μ)
+
+  is-linear-combination-monoid-Semiring :
+    (M : Monoid l3)
+    (μ : type-Semiring R → A → type-Semiring R → type-Monoid M) →
+    type-Monoid M → UU (l1 ⊔ l2 ⊔ l3)
+  is-linear-combination-monoid-Semiring M =
+    is-linear-combination-Semiring (unital-magma-Monoid M)
 ```
 
 ### The predicate of being a mere linear combination
@@ -133,7 +205,7 @@ module _
   ev-linear-combination-subset-Semiring :
     linear-combination-subset-Semiring → type-Semiring R
   ev-linear-combination-subset-Semiring =
-    ev-linear-combination-Semiring R
+    ev-unital-magma-linear-combination-Semiring R
       ( additive-unital-magma-Semiring R)
       ( λ r s →
         mul-Semiring R (mul-Semiring R r (inclusion-subset-Semiring R S s)))
@@ -142,6 +214,14 @@ module _
     type-Semiring R → UU (l1 ⊔ l2)
   is-linear-combination-subset-Semiring =
     is-linear-combination-Semiring R
+      ( additive-unital-magma-Semiring R)
+      ( λ r s →
+        mul-Semiring R (mul-Semiring R r (inclusion-subset-Semiring R S s)))
+
+  is-mere-linear-combination-prop-subset-Semiring :
+    type-Semiring R → Prop (l1 ⊔ l2)
+  is-mere-linear-combination-prop-subset-Semiring =
+    is-mere-linear-combination-prop-Semiring R
       ( additive-unital-magma-Semiring R)
       ( λ r s →
         mul-Semiring R (mul-Semiring R r (inclusion-subset-Semiring R S s)))
@@ -209,4 +289,115 @@ module _
   is-linear-combination-element-Semiring =
     is-linear-combination-subset-Semiring R
       ( λ y → Id-Prop (set-Semiring R) y a)
+```
+
+## Properties
+
+### Given a left action of a semiring $R$ on a type $A$ with values in a monoid, the evaluation function preserves concatenation
+
+We assume a monoid here, because we need associativity for the multiplicative
+operation of the monoid.
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Semiring l1)
+  {A : UU l2} (M : Monoid l3)
+  (μ : type-Semiring R → A → type-Semiring R → type-Monoid M)
+  where
+
+  preserves-concat-ev-monoid-linear-combination-Semiring :
+    (u v : linear-combination-Semiring R A) →
+    ev-monoid-linear-combination-Semiring R M
+      ( μ)
+      ( concat-list u v) ＝
+    mul-Monoid M
+      ( ev-monoid-linear-combination-Semiring R M μ u)
+      ( ev-monoid-linear-combination-Semiring R M μ v)
+  preserves-concat-ev-monoid-linear-combination-Semiring nil v =
+    inv
+      ( left-unit-law-mul-Monoid M
+        ( ev-monoid-linear-combination-Semiring R M μ v))
+  preserves-concat-ev-monoid-linear-combination-Semiring
+    ( cons (r , x , s) u) v =
+    ( ap
+      ( mul-Monoid M (μ r x s))
+      ( preserves-concat-ev-monoid-linear-combination-Semiring u v)) ∙
+    ( inv
+      ( associative-mul-Monoid M
+        ( μ r x s)
+        ( ev-monoid-linear-combination-Semiring R M μ u)
+        ( ev-monoid-linear-combination-Semiring R M μ v)))
+
+  is-linear-combination-mul-monoid-Semiring :
+    (x y : type-Monoid M) →
+    is-linear-combination-monoid-Semiring R M μ x →
+    is-linear-combination-monoid-Semiring R M μ y →
+    is-linear-combination-monoid-Semiring R M μ (mul-Monoid M x y)
+  is-linear-combination-mul-monoid-Semiring x y (u , refl) (v , refl) =
+    ( concat-list u v ,
+      preserves-concat-ev-monoid-linear-combination-Semiring u v)
+```
+
+### Evaluation of linear combinations preserves scalar multiplication
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Semiring l1)
+  {A : UU l2} (M : Monoid-With-Semiring-Action l3 R)
+  (μ :
+    type-Semiring R → A → type-Semiring R →
+    type-Monoid-With-Semiring-Action R M)
+  (α :
+    (s r : type-Semiring R) (a : A) (t u : type-Semiring R) →
+    μ (mul-Semiring R s r) a (mul-Semiring R t u) ＝
+    action-Monoid-With-Semiring-Action R M s (μ r a t) u)
+  where
+
+  preserves-mul-ev-linear-combination-Semiring :
+    (r : type-Semiring R) →
+    (u : linear-combination-Semiring R A) →
+    (s : type-Semiring R) →
+    ev-monoid-linear-combination-Semiring R
+      ( monoid-Monoid-With-Semiring-Action R M)
+      ( μ)
+      ( mul-linear-combination-Semiring R r u s) ＝
+    action-Monoid-With-Semiring-Action R M
+      ( r)
+      ( ev-monoid-linear-combination-Semiring R
+        ( monoid-Monoid-With-Semiring-Action R M)
+        ( μ)
+        ( u))
+      ( s)
+  preserves-mul-ev-linear-combination-Semiring r nil s =
+    inv (absorption-law-action-Monoid-With-Semiring-Action R M r s)
+  preserves-mul-ev-linear-combination-Semiring r (cons (x , a) u) s = ?
+
+{-
+    ap-binary
+      ( mul-Monoid-With-Semiring-Action R M)
+      ( α r x a)
+      ( preserves-mul-ev-linear-combination-Semiring r u) ∙
+    inv
+      ( inner-distributive-action-mul-Monoid-With-Semiring-Action R M r
+        ( μ x a)
+        ( ev-monoid-linear-combination-Semiring R
+          ( monoid-Monoid-With-Semiring-Action R M)
+          ( μ)
+          ( u))) -}
+
+  is-linear-combination-action-Semiring :
+    (r : type-Semiring R)
+    (x : type-Monoid-With-Semiring-Action R M)
+    (s : type-Semiring R) →
+    is-linear-combination-monoid-Semiring R
+      ( monoid-Monoid-With-Semiring-Action R M)
+      ( μ)
+      ( x) →
+    is-linear-combination-monoid-Semiring R
+      ( monoid-Monoid-With-Semiring-Action R M)
+      ( μ)
+      ( action-Monoid-With-Semiring-Action R M r x s)
+  is-linear-combination-action-Semiring r x s (u , refl) =
+    ( mul-linear-combination-Semiring R r u s ,
+      preserves-mul-ev-linear-combination-Semiring r u s)
 ```
