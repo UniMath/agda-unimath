@@ -9,11 +9,14 @@ module foundation.law-of-excluded-middle where
 ```agda
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.weak-law-of-excluded-middle
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
 open import foundation-core.negation
 open import foundation-core.propositions
+
+open import logic.de-morgan-types
 
 open import univalent-combinatorics.2-element-types
 ```
@@ -57,6 +60,13 @@ abstract
     {l : Level} → ¬ ((X : UU l) → is-decidable X)
   no-global-decidability {l} d =
     is-not-decidable-type-2-Element-Type (λ X → d (pr1 X))
+```
+
+### The law of excluded middle implies the weak law of excluded middle
+
+```agda
+WLEM-LEM : {l : Level} → LEM l → WLEM l
+WLEM-LEM lem P = is-de-morgan-is-decidable (lem P)
 ```
 
 ## External links
