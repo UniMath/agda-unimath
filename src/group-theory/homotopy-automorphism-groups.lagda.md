@@ -38,7 +38,7 @@ open import structured-types.pointed-types
 
 The concrete
 {{#concept "homotopy automorphism group" Disambiguation="of a pointed type" Agda=concrete-group-Pointed-Type}}
-of [pointed type](structured-types.pointed-types.md) `A` is the
+of a [pointed type](structured-types.pointed-types.md) `A` is the
 [automorphism group](group-theory.automorphism-groups.md) of the
 [groupoidification](foundation.truncations.md) of `A` at its base point.
 
