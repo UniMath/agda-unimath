@@ -8,6 +8,7 @@ module foundation.decidable-subtypes where
 
 ```agda
 open import foundation.1-types
+open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-maps
@@ -19,6 +20,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.logical-equivalences
+open import foundation.postcomposition-functions
 open import foundation.propositional-maps
 open import foundation.sets
 open import foundation.structured-type-duality
@@ -346,4 +348,12 @@ equiv-Fiber-Decidable-Prop l A =
         ( λ f →
           ( inv-distributive-Π-Σ) ∘e
           ( equiv-product-left (equiv-is-prop-map-is-emb f)))))
+```
+
+### The type of decidable subtypes of `A` is equivalent to the type of all maps from `A` to booleans
+
+```agda
+equiv-decidable-subtype-map-bool :
+  {l1 l2 : Level} → (A : UU l1) → decidable-subtype l2 A ≃ (A → bool)
+equiv-decidable-subtype-map-bool A = equiv-postcomp A equiv-bool-Decidable-Prop
 ```
