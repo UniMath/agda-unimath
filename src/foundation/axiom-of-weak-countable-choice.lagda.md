@@ -12,9 +12,9 @@ open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.contractible-types
 open import foundation.disjunction
-open import foundation.propositions
 open import foundation.function-types
 open import foundation.inhabited-types
+open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 ```
@@ -23,11 +23,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-The {{#concept "axiom of weak countable choice" Agda=WCC}}
-asserts that for every family of [inhabited](foundation.inhabited-types.md)
-types `F` indexed by [`ℕ`](elementary-number-theory.natural-numbers.md),
-where for at most one `n`, `F n` is [contractible](foundation.contractible-types.md),
-the type of sections of that family `(n : ℕ) → B n` is inhabited.
+The {{#concept "axiom of weak countable choice" Agda=WCC}} asserts that for
+every family of [inhabited](foundation.inhabited-types.md) types `F` indexed by
+[`ℕ`](elementary-number-theory.natural-numbers.md), where for at most one `n`,
+`F n` is [contractible](foundation.contractible-types.md), the type of sections
+of that family `(n : ℕ) → B n` is inhabited.
 
 ## Definitions
 
@@ -36,8 +36,10 @@ the type of sections of that family `(n : ℕ) → B n` is inhabited.
 ```agda
 instance-weak-countable-choice : {l : Level} → (ℕ → UU l) → UU l
 instance-weak-countable-choice F =
-  ((n : ℕ) → is-inhabited (F n)) →
-  ((m n : ℕ) → le-ℕ m n → type-Prop (is-contr-Prop (F m) ∨ is-contr-Prop (F n))) →
+  ( (n : ℕ) → is-inhabited (F n)) →
+  ( (m n : ℕ) →
+    le-ℕ m n →
+    type-Prop (is-contr-Prop (F m) ∨ is-contr-Prop (F n))) →
   is-inhabited ((n : ℕ) → F n)
 ```
 
@@ -58,4 +60,5 @@ WCC = {l : Level} → level-WCC l
 
 ## External links
 
-- [Weak countable choice](https://ncatlab.org/nlab/show/countable+choice#WCC) at nLab
+- [Weak countable choice](https://ncatlab.org/nlab/show/countable+choice#WCC) at
+  nLab
