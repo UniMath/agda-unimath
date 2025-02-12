@@ -13,20 +13,20 @@ open import elementary-number-theory.strict-inequality-natural-numbers
 open import foundation.axiom-of-weak-countable-choice
 open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.disjunction
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.empty-types
+open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
-open import foundation.empty-types
-open import foundation.negation
-open import foundation.existential-quantification
 open import foundation.inhabited-types
+open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.weak-law-of-excluded-middle
-open import foundation.transport-along-identifications
-open import foundation.propositional-truncations
 
 open import foundation-core.decidable-propositions
 open import foundation-core.propositions
