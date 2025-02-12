@@ -62,6 +62,10 @@ level-WLPO-LPO l l-lpo S with l-lpo S
 ... | inr not-inhabited-S = inl (not-inhabited-S ∘ unit-trunc-Prop)
 ```
 
+### The weak law of excluded middle implies the weak limited principle of omniscience
+
+TODO
+
 ## See also
 
 - [The principle of omniscience](foundation.principle-of-omniscience.md)

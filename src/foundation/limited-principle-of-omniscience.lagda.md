@@ -11,11 +11,11 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
+open import foundation.principle-of-omniscience
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
-open import foundation.principle-of-omniscience
 ```
 
 </details>

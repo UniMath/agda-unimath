@@ -7,17 +7,17 @@ module foundation.lesser-limited-principle-of-omniscience where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 
 open import foundation.contractible-types
-open import foundation.function-types
 open import foundation.decidable-subtypes
-open import foundation.universal-quantification
-open import foundation.propositions
 open import foundation.disjunction
+open import foundation.function-types
 open import foundation.negation
+open import foundation.propositions
+open import foundation.universal-quantification
 open import foundation.universe-levels
 open import foundation.weak-limited-principle-of-omniscience
 ```
@@ -29,8 +29,8 @@ open import foundation.weak-limited-principle-of-omniscience
 The {{#concept "lesser limited principle of omniscience" Agda=LLPO}} (LLPO)
 asserts that any [contractible](foundation.contractible-types.md)
 [decidable subtype](foundation.decidable-subtypes.md) of the
-[natural numbers](elementary-number-theory.natural-numbers.md)
-either contains no even numbers or contains no odd numbers.
+[natural numbers](elementary-number-theory.natural-numbers.md) either contains
+no even numbers or contains no odd numbers.
 
 ### Instances of LLPO
 
