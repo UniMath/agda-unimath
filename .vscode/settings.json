@@ -101,8 +101,7 @@
     "editor.quickSuggestions": {
       "other": "on"
     },
-    "editor.autoClosingBrackets": "never",
-    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+    "editor.autoClosingBrackets": "never"
   },
 
   "[python]": {
