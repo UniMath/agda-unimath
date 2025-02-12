@@ -35,7 +35,7 @@ open import synthetic-homotopy-theory.loop-spaces
 
 Given a map `g : B → C` and an element `z : C`, then a
 {{#concept "fiber inclusion" Disambiguation="of types" Agda=fiber-inclusion-of-map}}
-is a map `f : A → B` such that the following is a
+of `g` at `z` is a map `f : A → B` such that the following is a
 [commuting](foundation-core.commuting-squares-of-maps.md)
 [pullback square](foundation.pullbacks.md)
 
@@ -101,7 +101,7 @@ module _
     universal-property-pullback g (point z) (f , terminal-map A , H)
 ```
 
-### The pullback of being a fiber inclusion
+### The pullback property of fiber inclusions
 
 ```agda
 pullback-condition-fiber-inclusion-of-map :
@@ -112,7 +112,7 @@ pullback-condition-fiber-inclusion-of-map {A = A} g z f H =
   is-pullback g (point z) (f , terminal-map A , H)
 ```
 
-### The fiber condition of being a fiber inclusion
+### The fiber property of fiber inclusions
 
 ```agda
 module _
@@ -171,11 +171,6 @@ module _
       ( inclusion-fiber-inclusion-of-map)
       ( compute-point-fiber-inclusion-of-map)
   is-fiber-inclusion-fiber-inclusion-of-map = pr2 (pr2 (pr2 F))
-
-{-# INJECTIVE_FOR_INFERENCE type-fiber-inclusion-of-map #-}
-{-# INJECTIVE_FOR_INFERENCE inclusion-fiber-inclusion-of-map #-}
-{-# INJECTIVE_FOR_INFERENCE compute-point-fiber-inclusion-of-map #-}
-{-# INJECTIVE_FOR_INFERENCE cone-fiber-inclusion-of-map #-}
 ```
 
 ## Properties
@@ -366,22 +361,4 @@ module _
       terminal-map (type-Ω A) ,
       id ,
       is-fiber-inclusion-terminal-map-type-Ω)
-```
-
-### If `f` is a fiber inclusion of `g` at `z` and `g y ＝ z`, then `Ω(C , z)` is a fiber inclusion of `f`
-
-```text
-  Ω C -----> A ------> *
-   | ⌟       | ⌟       |
-   |       f |         |
-   ∨         ∨         ∨
-   * ------> B ------> C
-             ⟒    g    ⟒
-             y    ↦    z
-```
-
-```agda
-module _
-  {l : Level} (C : Pointed-Type l)
-  where
 ```
