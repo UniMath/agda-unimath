@@ -17,6 +17,8 @@ open import foundation.intersections-subtypes
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import logic.functoriality-existential-quantification
+
 open import real-numbers.inequality-lower-dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 ```
@@ -47,8 +49,10 @@ module _
 
   is-inhabited-binary-min-cut-lower-ℝ : exists ℚ binary-min-cut-lower-ℝ
   is-inhabited-binary-min-cut-lower-ℝ =
-    elim-exists
-      ( ∃ ℚ binary-min-cut-lower-ℝ)
+    map-binary-exists
+      ( is-in-subtype binary-min-cut-lower-ℝ)
+      {!   !}
       {!   !}
       (is-inhabited-cut-lower-ℝ x)
+      (is-inhabited-cut-lower-ℝ y)
 ```
