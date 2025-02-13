@@ -38,21 +38,21 @@ open import synthetic-homotopy-theory.wedges-of-pointed-types
 
 Given two [pointed types](structured-types.pointed-types.md) `a : A` and `b : B`
 we may form their
-{{#concept "smash product" WD="smash product" WDID=Q2295009 Agda=smash-Pointed-Type}}
-as the following [pushout](synthetic-homotopy-theory.pushouts.md)
+{{#concept "smash product" Disambiguation="of pointed types" WD="smash product" WDID=Q2295009 Agda=smash-Pointed-Type}}
+`A ∧∗ B` as the cofiber of the canonical inclusion `A ∨∗ B →∗ A ×∗ B` from the
+[wedge](synthetic-homotopy-theory.wedges-of-pointed-types.md) into the
+[pointed cartesian product](structured-types.pointed-cartesian-product-types.md).
+In other words, the smash product `A ∧∗ B` is the
+[pushout](synthetic-homotopy-theory.pushouts-of-pointed-types.md) of pointed
+types
 
 ```text
   A ∨∗ B ----> A ×∗ B
     |            |
     |            |
     ∨          ⌜ ∨
-    * -------> A ∧∗ B
+    * -------> A ∧∗ B.
 ```
-
-where the pointed map `A ∨∗ B →∗ A ×∗ B` is the canonical inclusion
-`pointed-map-wedge-product-Pointed-Type` from the
-[wedge](synthetic-homotopy-theory.wedges-of-pointed-types.md) into the
-[pointed cartesian product](structured-types.pointed-cartesian-product-types.md).
 
 ## Definition
 
