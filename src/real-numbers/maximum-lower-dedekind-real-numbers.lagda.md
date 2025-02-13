@@ -145,7 +145,7 @@ module _
           ( forward-implication (is-rounded-cut-lower-ℝ (F a) q) q∈Fa))
   pr2 (is-rounded-cut-max-lower-ℝ q) =
     elim-exists
-      (cut-max-lower-ℝ q)
+      ( cut-max-lower-ℝ q)
       ( λ r (q<r , r∈max) →
         elim-exists
           ( cut-max-lower-ℝ q)

@@ -76,23 +76,17 @@ leq-right-min-ℚ = leq-right-min-Decidable-Total-Order ℚ-Decidable-Total-Orde
 le-min-le-both-ℚ : (z x y : ℚ) → le-ℚ z x → le-ℚ z y → le-ℚ z (min-ℚ x y)
 le-min-le-both-ℚ z x y z<x z<y with decide-le-leq-ℚ x y
 ... | inl x<y =
-  tr
+  inv-tr
     ( le-ℚ z)
-    ( inv
-      ( left-leq-right-min-Decidable-Total-Order
-        ( ℚ-Decidable-Total-Order)
-        ( x)
-        ( y)
-        ( leq-le-ℚ {x} {y} x<y)))
+    ( left-leq-right-min-Decidable-Total-Order
+      ( ℚ-Decidable-Total-Order)
+      ( x)
+      ( y)
+      ( leq-le-ℚ {x} {y} x<y))
     ( z<x)
 ... | inr y≤x =
-  tr
+  inv-tr
     ( le-ℚ z)
-    ( inv
-      ( right-leq-left-min-Decidable-Total-Order
-        ( ℚ-Decidable-Total-Order)
-        ( x)
-        ( y)
-        ( y≤x)))
+    ( right-leq-left-min-Decidable-Total-Order ℚ-Decidable-Total-Order x y y≤x)
     ( z<y)
 ```

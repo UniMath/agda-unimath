@@ -1,6 +1,8 @@
 # Lower Dedekind real numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.lower-dedekind-real-numbers where
 ```
 
