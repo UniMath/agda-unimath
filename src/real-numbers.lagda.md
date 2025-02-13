@@ -11,7 +11,9 @@ open import real-numbers.inequality-lower-dedekind-real-numbers public
 open import real-numbers.inequality-real-numbers public
 open import real-numbers.inequality-upper-dedekind-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
+open import real-numbers.maximum-lower-dedekind-real-numbers public
 open import real-numbers.metric-space-of-real-numbers public
+open import real-numbers.minimum-lower-dedekind-real-numbers public
 open import real-numbers.negation-lower-upper-dedekind-real-numbers public
 open import real-numbers.negation-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public

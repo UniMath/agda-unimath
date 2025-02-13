@@ -13,24 +13,24 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.conjunction
+open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
-open import foundation.dependent-pair-types
-open import foundation.inhabited-types
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
-open import foundation.propositional-truncations
-open import foundation.universe-levels
-open import foundation.subtypes
 open import foundation.powersets
+open import foundation.propositional-truncations
+open import foundation.subtypes
 open import foundation.unions-subtypes
+open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import foundation.functoriality-cartesian-product-types
 open import order-theory.large-suplattices
-open import order-theory.upper-bounds-large-posets
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.upper-bounds-large-posets
 
 open import real-numbers.inequality-lower-dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
@@ -42,10 +42,12 @@ open import real-numbers.lower-dedekind-real-numbers
 
 The maximum of two
 [lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers) `x`, `y`
-is a lower Dedekind real number with cut equal to the union of the cuts
-of `x` and `y`.  Unlike the case for the [minimum of lower Dedekind real numbers](real-numbers.minimum-lower-dedekind-real-numbers.md),
-the maximum of any inhabited family of lower Dedekind real numbers,
-the lower Dedekind real number by taking the union of the cuts of every element of the family, is also a lower Dedekind real number.
+is a lower Dedekind real number with cut equal to the union of the cuts of `x`
+and `y`. Unlike the case for the
+[minimum of lower Dedekind real numbers](real-numbers.minimum-lower-dedekind-real-numbers.md),
+the maximum of any inhabited family of lower Dedekind real numbers, the lower
+Dedekind real number by taking the union of the cuts of every element of the
+family, is also a lower Dedekind real number.
 
 ## Definition
 

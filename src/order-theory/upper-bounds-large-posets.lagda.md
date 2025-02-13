@@ -21,10 +21,11 @@ open import order-theory.large-posets
 
 ## Idea
 
-A **binary upper bound** of two elements `a` and `b` of a [large poset](order-theory.large-posets.md) `P` is an
-element `x` of `P` such that `a ≤ x` and `b ≤ x` both hold. Similarly, an
-**upper bound** of a family `a : I → P` of elements of `P` is an element `x` of
-`P` such that the inequality `(a i) ≤ x` holds for every `i : I`.
+A **binary upper bound** of two elements `a` and `b` of a
+[large poset](order-theory.large-posets.md) `P` is an element `x` of `P` such
+that `a ≤ x` and `b ≤ x` both hold. Similarly, an **upper bound** of a family
+`a : I → P` of elements of `P` is an element `x` of `P` such that the inequality
+`(a i) ≤ x` holds for every `i : I`.
 
 ## Definitions
 

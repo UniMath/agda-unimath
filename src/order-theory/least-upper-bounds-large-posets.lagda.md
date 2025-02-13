@@ -32,9 +32,8 @@ that the [logical equivalence](foundation.logical-equivalences.md)
 
 holds for every `y` in `P`.
 
-Similarly, a least upper bound of a family of elements `a : I → P` in a
-large poset `P` is an element `x` in `P` such
-that the logical equivalence
+Similarly, a least upper bound of a family of elements `a : I → P` in a large
+poset `P` is an element `x` in `P` such that the logical equivalence
 
 ```text
   is-upper-bound-family-of-elements-Large-Poset P a y ↔ (x ≤ y)

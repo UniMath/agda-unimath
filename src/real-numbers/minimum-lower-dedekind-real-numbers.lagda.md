@@ -24,8 +24,8 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import order-theory.large-meet-semilattices
 open import order-theory.greatest-lower-bounds-large-posets
+open import order-theory.large-meet-semilattices
 
 open import real-numbers.inequality-lower-dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
