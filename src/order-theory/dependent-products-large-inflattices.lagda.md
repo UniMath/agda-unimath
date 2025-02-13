@@ -12,18 +12,18 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import order-theory.dependent-products-large-posets
-open import order-theory.large-posets
-open import order-theory.large-inflattices
 open import order-theory.greatest-lower-bounds-large-posets
+open import order-theory.large-inflattices
+open import order-theory.large-posets
 ```
 
 </details>
 
 ## Idea
 
-Families of greatest lower bounds of families of elements in dependent products of
-large posets are again greatest lower bounds. Therefore it follows that dependent
-products of large inflattices are again large inflattices.
+Families of greatest lower bounds of families of elements in dependent products
+of large posets are again greatest lower bounds. Therefore it follows that
+dependent products of large inflattices are again large inflattices.
 
 ## Definitions
 
@@ -126,7 +126,8 @@ module _
     {l2 l3 l4 : Level} {J : UU l2} (x : J → type-Π-Large-Inflattice l3) →
     type-Π-Large-Inflattice l4 → UUω
   is-greatest-lower-bound-family-of-elements-Π-Large-Inflattice =
-    is-greatest-lower-bound-family-of-elements-Large-Inflattice Π-Large-Inflattice
+    is-greatest-lower-bound-family-of-elements-Large-Inflattice
+      ( Π-Large-Inflattice)
 
   is-greatest-lower-bound-inf-Π-Large-Inflattice :
     {l2 l3 : Level} {J : UU l2} (x : J → type-Π-Large-Inflattice l3) →
