@@ -446,7 +446,7 @@ module _
     is-equiv-map-inv-trunc-Prop-diagonal-coproduct
 ```
 
-## `do` syntax for propositional truncation {#do-syntax}
+## `do` syntax for propositional truncation { #do-syntax }
 
 [Agda's `do` syntax](https://agda.readthedocs.io/en/v2.7.0/language/syntactic-sugar.html#do-notation)
 is a handy tool to avoid deeply nesting calls to the same lambda-based function.
