@@ -204,25 +204,3 @@ module _
       y
       is-greatest-binary-lower-bound-binary-min-upper-ℝ
 ```
-
-### The minimum of an inhabited family of upper reals is a greatest lower bound
-
-```agda
-module _
-  {l1 l2 : Level}
-  (A : UU l1)
-  (H : is-inhabited A)
-  (F : A → upper-ℝ l2)
-  where
-
-  is-greatest-lower-bound-min-upper-ℝ :
-    is-greatest-lower-bound-family-of-elements-Large-Poset
-      upper-ℝ-Large-Poset
-      F
-      (min-upper-ℝ A H F)
-  is-greatest-lower-bound-min-upper-ℝ z =
-    is-greatest-lower-bound-inf-Large-Inflattice
-      ( powerset-Large-Inflattice ℚ)
-      ( cut-upper-ℝ ∘ F)
-      ( cut-upper-ℝ z)
-```

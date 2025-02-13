@@ -26,7 +26,6 @@ open import order-theory.dependent-products-large-meet-semilattices
 open import order-theory.dependent-products-large-posets
 open import order-theory.dependent-products-large-preorders
 open import order-theory.dependent-products-large-suplattices
-open import order-theory.dependent-products-large-inflattices
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-preorders
@@ -38,8 +37,6 @@ open import order-theory.posets
 open import order-theory.preorders
 open import order-theory.similarity-of-elements-large-posets
 open import order-theory.suplattices
-open import order-theory.inflattices
-open import order-theory.large-inflattices
 open import order-theory.top-elements-large-posets
 open import order-theory.top-elements-posets
 ```
@@ -183,23 +180,6 @@ module _
   powerset-Suplattice :
     (l2 l3 : Level) → Suplattice (l1 ⊔ lsuc l2 ⊔ lsuc l3) (l1 ⊔ l2 ⊔ l3) l2
   powerset-Suplattice = suplattice-Large-Suplattice powerset-Large-Suplattice
-```
-
-### The powerset inflattice
-
-```agda
-module _
-  {l1 : Level} (A : UU l1)
-  where
-
-  powerset-Large-Inflattice :
-    Large-Inflattice (λ l2 → ?) (λ l2 l3 → ?) lzero
-  powerset-Large-Inflattice =
-    Π-Large-Inflattice {I = A} (λ _ → Prop-Large-Inflattice)
-
-  powerset-Inflattice :
-    (l2 l3 : Level) → Inflattice ? ? ?
-  powerset-Inflattice = suplattice-Large-Inflattice powerset-Large-Inflattice
 ```
 
 ### Similarity of subtypes
