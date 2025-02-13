@@ -22,6 +22,7 @@ open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -49,20 +50,14 @@ presence of a [rational number](elementary-number-theory.rational-numbers.md)
 between them. This is the definition used in {{#cite UF13}}, section 11.2.1.
 
 ```agda
-module _
-  {l1 l2 : Level}
-  (x : ℝ l1)
-  (y : ℝ l2)
-  where
+le-ℝ-Prop : Large-Relation-Prop _⊔_ ℝ
+le-ℝ-Prop x y = ∃ ℚ (λ q → upper-cut-ℝ x q ∧ lower-cut-ℝ y q)
 
-  le-ℝ-Prop : Prop (l1 ⊔ l2)
-  le-ℝ-Prop = ∃ ℚ (λ q → upper-cut-ℝ x q ∧ lower-cut-ℝ y q)
+le-ℝ : Large-Relation _⊔_ ℝ
+le-ℝ x y = type-Prop (le-ℝ-Prop x y)
 
-  le-ℝ : UU (l1 ⊔ l2)
-  le-ℝ = type-Prop le-ℝ-Prop
-
-  is-prop-le-ℝ : is-prop le-ℝ
-  is-prop-le-ℝ = is-prop-type-Prop le-ℝ-Prop
+is-prop-le-ℝ : {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → is-prop (le-ℝ x y)
+is-prop-le-ℝ x y = is-prop-type-Prop (le-ℝ-Prop x y)
 ```
 
 ## Properties
@@ -342,6 +337,25 @@ module _
       open
         do-syntax-trunc-Prop
           ( ∃ (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y))
+```
+
+### Strict inequality on the real numbers is cotransitive
+
+```agda
+cotransitive-le-ℝ : is-cotransitive-Large-Relation-Prop ℝ le-ℝ-Prop
+cotransitive-le-ℝ x y z =
+  elim-exists
+    ( le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
+    ( λ q (x<q , q<y) →
+      elim-exists
+        ( le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
+        ( λ p (p<q , x<p) →
+          elim-disjunction
+            ( le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
+            ( λ p<z → inl-disjunction (intro-exists p (x<p , p<z)))
+            ( λ z<q → inr-disjunction (intro-exists q (z<q , q<y)))
+            ( is-located-lower-upper-cut-ℝ z p q p<q))
+        ( forward-implication (is-rounded-upper-cut-ℝ x q) x<q))
 ```
 
 ## References
