@@ -257,6 +257,7 @@ open import foundation.iterating-families-of-maps public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
 open import foundation.kernel-span-diagrams-of-maps public
+open import foundation.large-apartness-relations public
 open import foundation.large-binary-relations public
 open import foundation.large-dependent-pair-types public
 open import foundation.large-homotopies public
