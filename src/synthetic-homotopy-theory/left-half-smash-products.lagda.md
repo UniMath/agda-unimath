@@ -40,7 +40,7 @@ open import synthetic-homotopy-theory.wedges-of-pointed-types
 Given a type `A` and a [pointed type](structured-types.pointed-types.md) `b : B`
 we may form the
 {{#concept "left half-smash product" Disambiguation="of a type and a pointed type" Agda=pointed-type-left-half-smash}}
-`A ⋉∗ B` as the [cofiber](synthetic-homotopy-theory.cofibers.md) of the
+`A ⋉∗ B` as the [cofiber](synthetic-homotopy-theory.cofibers-of-maps.md) of the
 canonical inclusion `A → A × B` at the base point of `B`. In other words, the
 left half-smash product is the [pushout](synthetic-homotopy-theory.pushouts.md)
 
