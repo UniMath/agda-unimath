@@ -45,7 +45,7 @@ function that returns for each `n` the `n`-th prime, and we obtain the function
 that counts the number of primes below a number `n`.
 
 The infinitude of primes is the 11th theorem on
-[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ## Definition

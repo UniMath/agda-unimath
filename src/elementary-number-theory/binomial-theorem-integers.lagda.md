@@ -37,7 +37,7 @@ The binomial theorem for the integers asserts that for any two integers `x` and
 ```
 
 The binomial theorem is the 44th theorem on
-[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ## Definitions

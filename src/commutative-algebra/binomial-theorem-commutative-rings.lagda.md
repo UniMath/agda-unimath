@@ -40,7 +40,7 @@ The **binomial theorem** in commutative rings asserts that for any two elements
 ```
 
 The binomial theorem is the 44th theorem on
-[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ## Definitions
