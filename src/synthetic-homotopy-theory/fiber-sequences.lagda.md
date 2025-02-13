@@ -37,9 +37,8 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-A
-[sequential diagram of pointed types](foundation.inverse-sequential-diagrams.md)
-and maps that extend infinitely to the left
+A [sequential diagram](foundation.inverse-sequential-diagrams.md) of pointed
+types and maps that extend infinitely to the left
 
 ```text
      f₃      f₂      f₁      f₀
@@ -80,7 +79,7 @@ module _
 ```agda
 fiber-sequence : (l : Level) → UU (lsuc l)
 fiber-sequence l =
-  Σ ( ( n : ℕ) → Pointed-Type l)
+  Σ ( (n : ℕ) → Pointed-Type l)
     ( λ A →
       Σ ( (n : ℕ) → type-Pointed-Type (A (succ-ℕ n)) → type-Pointed-Type (A n))
         ( is-fiber-sequence A))
