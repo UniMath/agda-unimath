@@ -33,9 +33,10 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 ## Idea
 
 The
-{{#concept "cofiber" Disambiguation="of a pointed map of pointed types" WD="mapping cone" WDID=Q306560 Agda=cofiber-Poin}}
-of a map `f : A → B` is the [pushout](synthetic-homotopy-theory.pushouts.md) of
-the span `1 ← A → B`.
+{{#concept "cofiber" Disambiguation="of a pointed map of pointed types" WD="mapping cone" WDID=Q306560 Agda=cofiber-Pointed-Type}}
+of a [pointed map](structured-types.pointed-maps.md) `f : A →∗ B` is the
+[pushout](synthetic-homotopy-theory.pushouts-of-pointed-types.md) of the span of
+pointed maps `1 ← A → B`.
 
 ## Definitions
 

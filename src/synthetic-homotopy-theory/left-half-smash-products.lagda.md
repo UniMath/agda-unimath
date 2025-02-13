@@ -92,7 +92,7 @@ module _
 Given a type `A` and a pointed type `B`, then we have pointed equivalences
 
 $$
-  (A ⋉ B →∗ C) ≃∗ (A → (B →∗ C)) \quad\text{and}\quad (A ⋉ B → C) ≃∗ (B →∗ (A → C))
+  (A ⋉_* B →_* C) ≃_* (A → (B →_* C)) \quad\text{and}\quad (A ⋉_* B → C) ≃_* (B →_* (A → C))
 $$
 
 for every pointed type `C`.
