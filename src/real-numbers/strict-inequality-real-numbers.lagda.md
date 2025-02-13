@@ -24,6 +24,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
@@ -105,7 +106,7 @@ module _
             ( q)
             ( le-lower-upper-cut-ℝ y p q p<y y<q))
         ( decide-le-leq-ℚ p q)
-    where open do-syntax-elim-exists empty-Prop
+    where open do-syntax-trunc-Prop empty-Prop
 ```
 
 ### Strict inequality on the reals is transitive
@@ -127,7 +128,7 @@ module _
         ( p)
         ( x<p ,
           le-lower-cut-ℝ z p q (le-lower-upper-cut-ℝ y p q p<y y<q) q<z)
-    where open do-syntax-elim-exists (le-ℝ-Prop x z)
+    where open do-syntax-trunc-Prop (le-ℝ-Prop x z)
 ```
 
 ### The canonical map from rationals to reals preserves and reflects strict inequality
@@ -196,7 +197,7 @@ module _
       q , x<q ← is-inhabited-upper-cut-ℝ x
       r , r<q , x<r ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
       intro-exists (real-ℚ q) (intro-exists r (x<r , r<q))
-    where open do-syntax-elim-exists (∃ (ℝ lzero) (le-ℝ-Prop x))
+    where open do-syntax-trunc-Prop (∃ (ℝ lzero) (le-ℝ-Prop x))
 ```
 
 ### Negation reverses the strict ordering of real numbers
@@ -216,7 +217,7 @@ module _
         (neg-ℚ p)
         ( tr (is-in-lower-cut-ℝ y) (inv (neg-neg-ℚ p)) p<y ,
           tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) x<p)
-    where open do-syntax-elim-exists (le-ℝ-Prop (neg-ℝ y) (neg-ℝ x))
+    where open do-syntax-trunc-Prop (le-ℝ-Prop (neg-ℝ y) (neg-ℝ x))
 ```
 
 ### If `x` is less than `y`, then `y` is not less than or equal to `x`
@@ -339,7 +340,7 @@ module _
         ( intro-exists p (x<p , p<q) , intro-exists r (q<r , r<y))
     where
       open
-        do-syntax-elim-exists
+        do-syntax-trunc-Prop
           ( ∃ (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y))
 ```
 

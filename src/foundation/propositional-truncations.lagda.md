@@ -446,6 +446,65 @@ module _
     is-equiv-map-inv-trunc-Prop-diagonal-coproduct
 ```
 
+## `do` syntax for propositional truncation
+
+[Agda's `do` syntax](https://agda.readthedocs.io/en/v2.7.0/language/syntactic-sugar.html#do-notation)
+is a handy tool to avoid deeply nesting calls to the same lambda-based function.
+For example, consider a case where you are trying to prove a proposition,
+`motive : Prop l`, from a chain of truncated propositions `P` and `Q`, where
+showing `Q` requires having a value of `type-Prop P`:
+
+```text
+rec-trunc-Prop
+  ( motive)
+  ( λ q →
+    rec-trunc-Prop
+      ( motive)
+      ( λ q → derive-motive-from p q)
+      ( truncated-prop-Q p))
+  ( truncated-prop-P)
+```
+
+The tower of indentation, with many layers of indentation in the innermost
+derivation, is painful; there are many duplicated lines of
+`rec-trunc-Prop motive`. Agda's `do` syntax offers us an alternative.
+
+```agda
+module do-syntax-trunc-Prop {l : Level} (motive : Prop l) where
+  _>>=_ :
+    {l : Level} {A : UU l} →
+    type-trunc-Prop A → (A → type-Prop motive) →
+    type-Prop motive
+  trunc-prop-a >>= k = rec-trunc-Prop motive k trunc-prop-a
+```
+
+This allows us to rewrite the deeply nested chain above
+
+```text
+do
+  p ← truncated-prop-P
+  q ← truncated-prop-Q p
+  derive-motive-from p q
+where open do-syntax-trunc-Prop motive
+```
+
+Note that the last line, `where open do-syntax-trunc-Prop motive`, is required
+to make this syntax possible.
+
+In general, you can read the `p ← truncated-prop-P` as an _instruction_ saying,
+"Get the value `p` out of its truncation `truncated-prop-Q`." We obviously
+cannot get values out of truncations in general, but conceptually, we can do it
+in the service of proving a proposition, and that's what we're doing here. The
+following line `q ← truncated-prop-Q p` says, "Get the value `q` out of the
+truncation `truncated-prop-Q p`" -- noticing that we can make use of `p` in that
+line. Finally, `derive-motive-from p q` must give us a value of type
+`type-Prop motive` from `p` and `q`. The result of the entire `do` block is the
+value of type `type-Prop motive`, which is internally constructed with an
+appropriate chain of `rec-trunc-Prop` from the intermediate steps.
+
+While we had each line depend on all the values from the lines above it, this is
+not at all required.
+
 ## Table of files about propositional logic
 
 The following table gives an overview of basic constructions in propositional
