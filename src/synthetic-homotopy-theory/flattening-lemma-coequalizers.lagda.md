@@ -45,7 +45,7 @@ given a coequalizer
      f
 ```
 
-with homotopy `H : e ∘ f ~ e ∘ g`, and a type family `P : X → 𝓤` over `X`, the
+with homotopy `H : e ∘ f ~ e ∘ g`, and a type family `P : X → 𝒰` over `X`, the
 cofork
 
 ```text
