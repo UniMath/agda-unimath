@@ -412,8 +412,8 @@ module _
 
 ### The smash product is a pushout of half-smash products
 
-Given two pointed types `X` and `Y`, the smash product `X ∧∗ Y` fits into a
-pasting diagram of pushouts pushout
+Given two pointed types `X` and `Y`, then the smash product `X ∧∗ Y` is the
+pushout
 
 ```text
   X ×∗ Y -----> X ⋊∗ Y
