@@ -34,11 +34,11 @@ that for every family
   x : I → type-Large-Poset P l1
 ```
 
-indexed by `I : UU l2` there is an element `⋁ x : type-Large-Poset P (l1 ⊔ l2)`
+indexed by `I : UU l2` there is an element `⋀ x : type-Large-Poset P (l1 ⊔ l2)`
 such that the logical equivalence
 
 ```text
-  (∀ᵢ xᵢ ≤ y) ↔ ((⋁ x) ≤ y)
+  (∀ᵢ y ≤ xᵢ ) ↔ (y ≤ ⋀ x)
 ```
 
 holds for every element `y : type-Large-Poset P l3`.
