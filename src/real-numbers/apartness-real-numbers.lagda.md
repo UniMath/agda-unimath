@@ -89,30 +89,21 @@ cotransitive-apart-ℝ x y z =
 ### Apartness on the reals is a large apartness relation
 
 ```agda
-large-apartness-relation-apart-ℝ-Prop : Large-Apartness-Relation _⊔_ ℝ
-large-rel-Large-Apartness-Relation large-apartness-relation-apart-ℝ-Prop =
+large-apartness-relation-ℝ : Large-Apartness-Relation _⊔_ ℝ
+apart-prop-Large-Apartness-Relation large-apartness-relation-ℝ =
   apart-ℝ-Prop
-antirefl-Large-Apartness-Relation large-apartness-relation-apart-ℝ-Prop =
+antirefl-Large-Apartness-Relation large-apartness-relation-ℝ =
   antireflexive-apart-ℝ
-symmetric-Large-Apartness-Relation large-apartness-relation-apart-ℝ-Prop =
+symmetric-Large-Apartness-Relation large-apartness-relation-ℝ =
   symmetric-apart-ℝ
-cotransitive-Large-Apartness-Relation large-apartness-relation-apart-ℝ-Prop =
+cotransitive-Large-Apartness-Relation large-apartness-relation-ℝ =
   cotransitive-apart-ℝ
 ```
 
-### Apartness implies nonequality
+### Apart real numbers are nonequal
 
 ```agda
-module _
-  {l : Level}
-  (x y : ℝ l)
-  where
-
-  nonequal-apart-ℝ : apart-ℝ x y → x ≠ y
-  nonequal-apart-ℝ x#y x=y =
-    elim-disjunction
-      ( empty-Prop)
-      ( λ x<y → irreflexive-le-ℝ x (tr (le-ℝ x) (inv x=y) x<y))
-      ( λ y<x → irreflexive-le-ℝ y (tr (le-ℝ y) x=y y<x))
-      ( x#y)
+nonequal-apart-ℝ : {l : Level} (x y : ℝ l) → apart-ℝ x y → x ≠ y
+nonequal-apart-ℝ x y =
+  nonequal-apart-Large-Apartness-Relation large-apartness-relation-ℝ
 ```

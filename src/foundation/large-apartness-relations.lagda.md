@@ -11,6 +11,7 @@ open import foundation.cartesian-product-types
 open import foundation.disjunction
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
@@ -20,8 +21,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "large apartness relation" WD="apartness relation" WDID=Q4779193 Agda=Large-Apartness-Relation}} on a
-family of types indexed by universe levels `A` is a
+A
+{{#concept "large apartness relation" WD="apartness relation" WDID=Q4779193 Agda=Large-Apartness-Relation}}
+on a family of types indexed by universe levels `A` is a
 [large binary relation](foundation.large-binary-relations.md) `R` which is
 
 - **Antireflexive:** For any `a : A` we have `¬ (R a a)`
@@ -40,19 +42,22 @@ record Large-Apartness-Relation
   where
 
   field
-    large-rel-Large-Apartness-Relation : Large-Relation-Prop β A
+    apart-prop-Large-Apartness-Relation : Large-Relation-Prop β A
     antirefl-Large-Apartness-Relation :
-      is-antireflexive-Large-Relation-Prop A large-rel-Large-Apartness-Relation
+      is-antireflexive-Large-Relation-Prop A apart-prop-Large-Apartness-Relation
     symmetric-Large-Apartness-Relation :
-      is-symmetric-Large-Relation-Prop A large-rel-Large-Apartness-Relation
+      is-symmetric-Large-Relation-Prop A apart-prop-Large-Apartness-Relation
     cotransitive-Large-Apartness-Relation :
-      is-cotransitive-Large-Relation-Prop A large-rel-Large-Apartness-Relation
+      is-cotransitive-Large-Relation-Prop A apart-prop-Large-Apartness-Relation
+
+  apart-Large-Apartness-Relation : Large-Relation β A
+  apart-Large-Apartness-Relation a b =
+    type-Prop (apart-prop-Large-Apartness-Relation a b)
 
   consistent-Large-Apartness-Relation :
     {l : Level} →
     (a b : A l) →
-    a ＝ b →
-    ¬ (type-Prop (large-rel-Large-Apartness-Relation a b))
+    a ＝ b → ¬ (apart-Large-Apartness-Relation a b)
   consistent-Large-Apartness-Relation a .a refl =
     antirefl-Large-Apartness-Relation a
 
@@ -74,8 +79,24 @@ record Type-Family-With-Large-Apartness
   large-rel-Type-Family-With-Large-Apartness :
     Large-Relation-Prop β type-family-Type-Family-With-Large-Apartness
   large-rel-Type-Family-With-Large-Apartness =
-    Large-Apartness-Relation.large-rel-Large-Apartness-Relation
+    Large-Apartness-Relation.apart-prop-Large-Apartness-Relation
       large-apartness-relation-Type-Family-With-Large-Apartness
 
 open Type-Family-With-Large-Apartness public
+```
+
+## Properties
+
+### If two elements are apart, then they are nonequal
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  {A : (l : Level) → UU (α l)} (R : Large-Apartness-Relation β A)
+  where
+
+  nonequal-apart-Large-Apartness-Relation :
+    {l : Level} {a b : A l} → apart-Large-Apartness-Relation R a b → a ≠ b
+  nonequal-apart-Large-Apartness-Relation {a = a} p refl =
+    antirefl-Large-Apartness-Relation R a p
 ```
