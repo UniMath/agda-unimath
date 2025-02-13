@@ -78,30 +78,33 @@ iterating `f` on `x`.
 
 ```agda
 module _
-  {l : Level} (X : 𝔽 l) (e : type-𝔽 X ≃ type-𝔽 X)
+  {l : Level} (X : Finite-Type l) (e : type-Finite-Type X ≃ type-Finite-Type X)
   where
 
-  iso-iterative-groupoid-automorphism-𝔽 : (x y : type-𝔽 X) → UU l
-  iso-iterative-groupoid-automorphism-𝔽 x y =
+  iso-iterative-groupoid-automorphism-Finite-Type :
+    (x y : type-Finite-Type X) → UU l
+  iso-iterative-groupoid-automorphism-Finite-Type x y =
     Σ ℕ (λ n → Id (iterate n (map-equiv e) x) y)
 
-  natural-isomorphism-iterative-groupoid-automorphism-𝔽 :
-    (x y : type-𝔽 X) (f : iso-iterative-groupoid-automorphism-𝔽 x y) → ℕ
-  natural-isomorphism-iterative-groupoid-automorphism-𝔽 x y = pr1
+  natural-isomorphism-iterative-groupoid-automorphism-Finite-Type :
+    (x y : type-Finite-Type X)
+    (f : iso-iterative-groupoid-automorphism-Finite-Type x y) → ℕ
+  natural-isomorphism-iterative-groupoid-automorphism-Finite-Type x y = pr1
 
-  id-iso-iterative-groupoid-automorphism-𝔽 :
-    (x : type-𝔽 X) → iso-iterative-groupoid-automorphism-𝔽 x x
-  pr1 (id-iso-iterative-groupoid-automorphism-𝔽 x) = 0
-  pr2 (id-iso-iterative-groupoid-automorphism-𝔽 x) = refl
+  id-iso-iterative-groupoid-automorphism-Finite-Type :
+    (x : type-Finite-Type X) →
+    iso-iterative-groupoid-automorphism-Finite-Type x x
+  pr1 (id-iso-iterative-groupoid-automorphism-Finite-Type x) = 0
+  pr2 (id-iso-iterative-groupoid-automorphism-Finite-Type x) = refl
 
-  comp-iso-iterative-groupoid-automorphism-𝔽 :
-    {x y z : type-𝔽 X} →
-    iso-iterative-groupoid-automorphism-𝔽 y z →
-    iso-iterative-groupoid-automorphism-𝔽 x y →
-    iso-iterative-groupoid-automorphism-𝔽 x z
-  pr1 (comp-iso-iterative-groupoid-automorphism-𝔽 (pair n q) (pair m p)) =
+  comp-iso-iterative-groupoid-automorphism-Finite-Type :
+    {x y z : type-Finite-Type X} →
+    iso-iterative-groupoid-automorphism-Finite-Type y z →
+    iso-iterative-groupoid-automorphism-Finite-Type x y →
+    iso-iterative-groupoid-automorphism-Finite-Type x z
+  pr1 (comp-iso-iterative-groupoid-automorphism-Finite-Type (n , q) (m , p)) =
     n +ℕ m
-  pr2 (comp-iso-iterative-groupoid-automorphism-𝔽 (pair n q) (pair m p)) =
+  pr2 (comp-iso-iterative-groupoid-automorphism-Finite-Type (n , q) (m , p)) =
     iterate-add-ℕ n m (map-equiv e) _ ∙ (ap (iterate n (map-equiv e)) p ∙ q)
 ```
 

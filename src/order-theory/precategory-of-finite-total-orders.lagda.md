@@ -33,25 +33,27 @@ exhibited as a
 ### The large precategory of finite total orders
 
 ```agda
-parametric-Total-Order-𝔽-Full-Large-Subprecategory :
+parametric-Finite-Total-Order-Full-Large-Subprecategory :
   (α β : Level → Level) →
   Full-Large-Subprecategory
     ( λ l → α l ⊔ β l)
     ( parametric-Poset-Large-Precategory α β)
-parametric-Total-Order-𝔽-Full-Large-Subprecategory α β =
+parametric-Finite-Total-Order-Full-Large-Subprecategory α β =
   is-finite-total-order-Poset-Prop
 
-Total-Order-𝔽-Large-Precategory : Large-Precategory lsuc (_⊔_)
-Total-Order-𝔽-Large-Precategory =
+Finite-Total-Order-Large-Precategory : Large-Precategory lsuc (_⊔_)
+Finite-Total-Order-Large-Precategory =
   large-precategory-Full-Large-Subprecategory
     ( Poset-Large-Precategory)
-    ( parametric-Total-Order-𝔽-Full-Large-Subprecategory (λ l → l) (λ l → l))
+    ( parametric-Finite-Total-Order-Full-Large-Subprecategory
+      ( λ l → l)
+      ( λ l → l))
 ```
 
 ### The precategory of finite total orders of universe level `l`
 
 ```agda
-Total-Order-𝔽-Precategory : (l : Level) → Precategory (lsuc l) l
-Total-Order-𝔽-Precategory =
-  precategory-Large-Precategory Total-Order-𝔽-Large-Precategory
+Finite-Total-Order-Precategory : (l : Level) → Precategory (lsuc l) l
+Finite-Total-Order-Precategory =
+  precategory-Large-Precategory Finite-Total-Order-Large-Precategory
 ```
