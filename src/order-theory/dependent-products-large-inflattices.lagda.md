@@ -116,11 +116,11 @@ module _
   inf-Π-Large-Inflattice =
     inf-Large-Inflattice Π-Large-Inflattice
 
-  is-upper-bound-family-of-elements-Π-Large-Inflattice :
+  is-lower-bound-family-of-elements-Π-Large-Inflattice :
     {l2 l3 l4 : Level} {J : UU l2} (x : J → type-Π-Large-Inflattice l3)
-    (y : type-Π-Large-Inflattice l4) → UU (β l3 l4 ⊔ l1 ⊔ l2)
-  is-upper-bound-family-of-elements-Π-Large-Inflattice =
-    is-upper-bound-family-of-elements-Large-Inflattice Π-Large-Inflattice
+    (y : type-Π-Large-Inflattice l4) → UU (β l4 l3 ⊔ l1 ⊔ l2)
+  is-lower-bound-family-of-elements-Π-Large-Inflattice =
+    is-lower-bound-family-of-elements-Large-Inflattice Π-Large-Inflattice
 
   is-greatest-lower-bound-family-of-elements-Π-Large-Inflattice :
     {l2 l3 l4 : Level} {J : UU l2} (x : J → type-Π-Large-Inflattice l3) →

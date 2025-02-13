@@ -139,6 +139,7 @@ module _
         ↔ leq-Π-Large-Poset P u z
           by iff-Π-iff-family (λ i → H i (u i))
 ```
+
 ### A family of greatest lower bounds of families of elements in a family of large poset is a greatest lower bound in their dependent product
 
 ```agda
