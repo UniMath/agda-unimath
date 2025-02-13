@@ -312,14 +312,14 @@ module _
   leq-left-max-Decidable-Total-Order =
     leq-left-is-least-binary-upper-bound-Poset
       ( poset-Decidable-Total-Order T)
-      ( max-is-least-binary-upper-bound-Decidable-Total-Order T x y)
+      ( max-is-least-binary-upper-bound-Decidable-Total-Order)
 
   leq-right-max-Decidable-Total-Order :
     leq-Decidable-Total-Order T y (max-Decidable-Total-Order T x y)
   leq-right-max-Decidable-Total-Order =
     leq-right-is-least-binary-upper-bound-Poset
       ( poset-Decidable-Total-Order T)
-      ( max-is-least-binary-upper-bound-Decidable-Total-Order T x y)
+      ( max-is-least-binary-upper-bound-Decidable-Total-Order)
 ```
 
 ### Decidable total orders are meet semilattices
@@ -427,8 +427,9 @@ module _
 
 ```agda
   left-leq-right-min-Decidable-Total-Order :
+    (x y : type-Decidable-Total-Order T) →
     leq-Decidable-Total-Order T x y → min-Decidable-Total-Order T x y ＝ x
-  left-leq-right-min-Decidable-Total-Order H
+  left-leq-right-min-Decidable-Total-Order x y H
     with is-leq-or-strict-greater-Decidable-Total-Order T x y
   ... | inl x≤y = refl
   ... | inr y<x =
@@ -440,8 +441,9 @@ module _
 
 ```agda
   right-leq-left-min-Decidable-Total-Order :
+    (x y : type-Decidable-Total-Order T) →
     leq-Decidable-Total-Order T y x → min-Decidable-Total-Order T x y ＝ y
-  right-leq-left-min-Decidable-Total-Order H
+  right-leq-left-min-Decidable-Total-Order x y H
     with is-leq-or-strict-greater-Decidable-Total-Order T x y
   ... | inl x≤y = antisymmetric-leq-Decidable-Total-Order T x y x≤y H
   ... | inr y<x = refl
@@ -451,8 +453,9 @@ module _
 
 ```agda
   left-leq-right-max-Decidable-Total-Order :
+    (x y : type-Decidable-Total-Order T) →
     leq-Decidable-Total-Order T x y → max-Decidable-Total-Order T x y ＝ y
-  left-leq-right-max-Decidable-Total-Order H
+  left-leq-right-max-Decidable-Total-Order x y H
     with is-leq-or-strict-greater-Decidable-Total-Order T x y
   ... | inl x≤y = refl
   ... | inr y<x =
@@ -464,8 +467,9 @@ module _
 
 ```agda
   right-leq-left-max-Decidable-Total-Order :
+    (x y : type-Decidable-Total-Order T) →
     leq-Decidable-Total-Order T y x → max-Decidable-Total-Order T x y ＝ x
-  right-leq-left-max-Decidable-Total-Order H
+  right-leq-left-max-Decidable-Total-Order x y H
     with is-leq-or-strict-greater-Decidable-Total-Order T x y
   ... | inl x≤y = antisymmetric-leq-Decidable-Total-Order T y x H x≤y
   ... | inr y<x = refl
