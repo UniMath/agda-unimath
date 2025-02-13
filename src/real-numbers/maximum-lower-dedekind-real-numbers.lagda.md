@@ -43,9 +43,9 @@ open import real-numbers.lower-dedekind-real-numbers
 The maximum of two
 [lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers) `x`, `y`
 is a lower Dedekind real number with cut equal to the union of the cuts
-of `x` and `y`.  Unlike the case for the minimum of Dedekind real numbers,
-the maximum of any inhabited family of lower Dedekind real numbers is itself
-a lower Dedekind real number.
+of `x` and `y`.  Unlike the case for the [minimum of lower Dedekind real numbers](real-numbers.minimum-lower-dedekind-real-numbers.md),
+the maximum of any inhabited family of lower Dedekind real numbers,
+the lower Dedekind real number by taking the union of the cuts of every element of the family, is also a lower Dedekind real number.
 
 ## Definition
 
@@ -162,6 +162,46 @@ module _
 ```
 
 ## Properties
+
+### The maximum of two lower reals is a least upper bound
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : lower-ℝ l1)
+  (y : lower-ℝ l2)
+  where
+
+  is-least-binary-upper-bound-binary-max-lower-ℝ :
+    is-least-binary-upper-bound-Large-Poset
+      ( lower-ℝ-Large-Poset)
+      ( x)
+      ( y)
+      ( binary-max-lower-ℝ x y)
+  pr1 (is-least-binary-upper-bound-binary-max-lower-ℝ z) (x≤z , y≤z) p =
+    elim-disjunction (cut-lower-ℝ z p) (x≤z p) (y≤z p)
+  pr1 (pr2 (is-least-binary-upper-bound-binary-max-lower-ℝ z) max≤z) p p<x =
+    max≤z p (inl-disjunction p<x)
+  pr2 (pr2 (is-least-binary-upper-bound-binary-max-lower-ℝ z) max≤z) p p<y =
+    max≤z p (inr-disjunction p<y)
+```
+
+### The maximum of two reals is an upper bound
+
+```agda
+  is-binary-upper-bound-binary-max-lower-ℝ :
+    is-binary-upper-bound-Large-Poset
+      ( lower-ℝ-Large-Poset)
+      ( x)
+      ( y)
+      ( binary-max-lower-ℝ x y)
+  is-binary-upper-bound-binary-max-lower-ℝ =
+    is-binary-upper-bound-is-least-binary-upper-bound-Large-Poset
+      lower-ℝ-Large-Poset
+      x
+      y
+      is-least-binary-upper-bound-binary-max-lower-ℝ
+```
 
 ### The maximum of an inhabited family of lower reals is a least upper bound
 

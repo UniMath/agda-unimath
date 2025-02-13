@@ -8,7 +8,9 @@ module order-theory.lower-bounds-large-posets where
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.propositions
 open import foundation.logical-equivalences
 open import foundation.universe-levels
 
@@ -35,10 +37,15 @@ module _
   {l1 l2 : Level} (a : type-Large-Poset P l1) (b : type-Large-Poset P l2)
   where
 
+  is-binary-lower-bound-prop-Large-Poset :
+    {l3 : Level} → type-Large-Poset P l3 → Prop (β l3 l1 ⊔ β l3 l2)
+  is-binary-lower-bound-prop-Large-Poset x =
+    leq-prop-Large-Poset P x a ∧ leq-prop-Large-Poset P x b
+
   is-binary-lower-bound-Large-Poset :
     {l3 : Level} → type-Large-Poset P l3 → UU (β l3 l1 ⊔ β l3 l2)
   is-binary-lower-bound-Large-Poset x =
-    leq-Large-Poset P x a × leq-Large-Poset P x b
+    type-Prop (is-binary-lower-bound-prop-Large-Poset x)
 ```
 
 ## Properties
