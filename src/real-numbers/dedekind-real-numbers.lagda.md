@@ -438,10 +438,11 @@ module _
   (lx : lower-ℝ l)
   where
 
-  has-upper-real-Prop : Prop (lsuc l)
-  pr1 has-upper-real-Prop = Σ (upper-ℝ l) (is-dedekind-lower-upper-ℝ lx)
-  pr2 has-upper-real-Prop =
-    ( is-prop-all-elements-equal)
+  is-dedekind-cut-lower-ℝ-Prop : Prop (lsuc l)
+  pr1 is-dedekind-cut-lower-ℝ-Prop =
+    Σ (upper-ℝ l) (is-dedekind-lower-upper-ℝ lx)
+  pr2 is-dedekind-cut-lower-ℝ-Prop =
+    is-prop-all-elements-equal
     ( λ uy uy' →
       eq-type-subtype
         ( is-dedekind-prop-lower-upper-ℝ lx)
@@ -451,7 +452,7 @@ module _
           ( eq-upper-cut-eq-lower-cut-ℝ (lx , uy) (lx , uy') refl)))
 
 is-emb-lower-real : {l : Level} → is-emb (lower-real-ℝ {l})
-is-emb-lower-real = is-emb-inclusion-subtype has-upper-real-Prop
+is-emb-lower-real = is-emb-inclusion-subtype is-dedekind-cut-lower-ℝ-Prop
 ```
 
 ### Two real numbers with the same lower/upper real are equal
@@ -462,7 +463,7 @@ module _
   where
 
   eq-eq-lower-real-ℝ : lower-real-ℝ x ＝ lower-real-ℝ y → x ＝ y
-  eq-eq-lower-real-ℝ = eq-type-subtype has-upper-real-Prop
+  eq-eq-lower-real-ℝ = eq-type-subtype is-dedekind-cut-lower-ℝ-Prop
 
   eq-eq-upper-real-ℝ : upper-real-ℝ x ＝ upper-real-ℝ y → x ＝ y
   eq-eq-upper-real-ℝ = eq-eq-lower-real-ℝ ∘ (eq-lower-real-eq-upper-real-ℝ x y)
