@@ -214,7 +214,7 @@ module _
       ( is-leq-or-strict-greater-Decidable-Total-Order T x y)
 ```
 
-### `min x y` is the greatest lower bound of `x` and `y`
+### The binary minimum is the binary greatest lower bound
 
 ```agda
 module _
@@ -280,7 +280,7 @@ module _
     max-is-least-binary-upper-bound-Decidable-Total-Order
 ```
 
-### `T` is a meet semilattice
+### Decidable total orders are meet semilattices
 
 ```agda
 module _
@@ -299,7 +299,7 @@ module _
     poset-Decidable-Total-Order T , is-meet-semilattice-Decidable-Total-Order
 ```
 
-### `T` is a join semilattice
+### Decidable total orders are join semilattices
 
 ```agda
   is-join-semilattice-Decidable-Total-Order :
@@ -313,7 +313,7 @@ module _
     poset-Decidable-Total-Order T , is-join-semilattice-Decidable-Total-Order
 ```
 
-### The minimum operation is associative
+### The binary minimum operation is associative
 
 ```agda
   associative-min-Decidable-Total-Order :
@@ -325,7 +325,7 @@ module _
       ( order-theoretic-meet-semilattice-Decidable-Total-Order)
 ```
 
-### The maximum operator is associative
+### The binary maximum operation is associative
 
 ```agda
   associative-max-Decidable-Total-Order :
@@ -348,7 +348,7 @@ module _
       ( order-theoretic-meet-semilattice-Decidable-Total-Order)
 ```
 
-### `max` is commutative
+### The binary maximum operation is commutative
 
 ```agda
   commutative-max-Decidable-Total-Order :
@@ -359,7 +359,7 @@ module _
       ( order-theoretic-join-semilattice-Decidable-Total-Order)
 ```
 
-### `min` is idempotent
+### The binary minimum operation is idempotent
 
 ```agda
   idempotent-min-Decidable-Total-Order :
@@ -370,7 +370,7 @@ module _
       ( order-theoretic-meet-semilattice-Decidable-Total-Order)
 ```
 
-### `max` is idempotent
+### The binary maximum operation is idempotent
 
 ```agda
   idempotent-max-Decidable-Total-Order :
@@ -423,7 +423,7 @@ module _
       ( max-is-least-binary-upper-bound-Decidable-Total-Order T x y)
 ```
 
-### If x is less than or equal to y, the minimum of x and y is x
+### If `x` is less than or equal to `y`, the minimum of `x` and `y` is `x`
 
 ```agda
   left-leq-right-min-Decidable-Total-Order :
