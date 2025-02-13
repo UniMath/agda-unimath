@@ -121,7 +121,7 @@ module _
       ( is-binary-lower-bound-is-greatest-binary-lower-bound-Poset H)
 ```
 
-### The greatest lower bound of a and b is the greatest lower bound of b and a
+### The greatest lower bound of `a` and `b` is the greatest lower bound of `b` and `a`
 
 ```agda
 module _
