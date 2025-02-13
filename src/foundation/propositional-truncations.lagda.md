@@ -466,11 +466,10 @@ rec-trunc-Prop
 ```
 
 The tower of indentation, with many layers of indentation in the innermost
-derivation, is a little awkward even at two levels, let alone more.  In
-particular, we have the many duplicated lines of
-`rec-trunc-Prop motive`, and the increasing distance between the
-`rec-trunc-Prop` and the `trunc-Prop` being recursed on.
-Agda's `do` syntax offers us an alternative.
+derivation, is a little awkward even at two levels, let alone more. In
+particular, we have the many duplicated lines of `rec-trunc-Prop motive`, and
+the increasing distance between the `rec-trunc-Prop` and the `trunc-Prop` being
+recursed on. Agda's `do` syntax offers us an alternative.
 
 ```agda
 module do-syntax-trunc-Prop {l : Level} (motive : Prop l) where
