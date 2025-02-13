@@ -50,22 +50,21 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Idea
 
-A Dedekind real number consists of a [pair](foundation.dependent-pair-types.md)
-`(lx , uy)` of a
-[lower Dedekind real](real-numbers.lower-dedekind-real-numbers.md) and an
-[upper Dedekind real](real-numbers.upper-dedekind-real-numbers.md) that also
-satisfy the following conditions:
+A {{#concept "Dedekind real number" WD="real number" WDID=Q12916 Agda=ℝ}} `x` consists of a [pair](foundation.dependent-pair-types.md)
+ of _cuts_ `(L , U)` of [rational numbers](elementary-number-theory.rational-numbers.md), a
+[lower Dedekind cut](real-numbers.lower-dedekind-real-numbers.md) `L` and an
+[upper Dedekind cut](real-numbers.upper-dedekind-real-numbers.md) `U`. These cuts present lower and upper bounds on the Dedekind real number, and must satisfy the conditions
 
-1. _Disjointness_. The cuts of `lx` and `uy` are disjoint subsets of `ℚ`.
-2. _Locatedness_. If `q < r` then `q` is in the cut of `lx` or `r` is in the cut
-   of `uy`.
+1. _Disjointness_. The cuts `lx` and `uy` are disjoint subsets of `ℚ`.
+2. _Locatedness_. If `q < r` then `q` is in the cut `L` or `r` is in the cut `U`.
 
+The {{#concept "collection of all Dedekind real numbers" WD="set of real numbers" WDID=Q1174982 Agda=ℝ}} is denoted `ℝ`.
 The Dedekind real numbers will be taken as the standard definition of the real
 numbers in the agda-unimath library.
 
 ## Definition
 
-### Dedekind real numbers
+### Dedekind cuts
 
 ```agda
 module _
