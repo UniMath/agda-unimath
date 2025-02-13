@@ -89,7 +89,14 @@ module _
 
 ### The left half-smash product is a left tensoring
 
-Given a type `A` and a pointed type `B`, then we have pointed equivalences
+Given a type `A` and a pointed type `B`, then we have adjunctions
+
+$$
+  (A ⋉_* -) ⊣ (A → -) \quad\text{and}\quad (- ⋉_* B) ⊣ (B →_* -)
+$$
+
+viewed as functors into pointed types. In other words, we have pointed
+equivalences
 
 $$
   (A ⋉_* B →_* C) ≃_* (A → (B →_* C)) \quad\text{and}\quad (A ⋉_* B → C) ≃_* (B →_* (A → C))
