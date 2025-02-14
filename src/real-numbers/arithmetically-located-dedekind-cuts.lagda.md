@@ -31,15 +31,13 @@ open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
-
-open import logic.functoriality-existential-quantification
 
 open import real-numbers.dedekind-real-numbers
 ```
@@ -241,17 +239,12 @@ module _
                 ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε)
         intro-exists (r , r') (r'<r+ε , r<x , x<r+2ε')
       where
-      claim : Prop l
-      claim =
-        ∃
-          ( ℚ × ℚ)
-          ( λ (p , q) →
-            le-ℚ-Prop q (p +ℚ ε) ∧ lower-cut-ℝ x p ∧ upper-cut-ℝ x q)
-      _>>=_ :
-        {l1 l2 : Level} {A : UU l1} {B : A -> UU l2} →
-        exists-structure A B →
-        (Σ A B -> type-Prop claim) → type-Prop claim
-      x >>= f = elim-exists claim (ev-pair f) x
+        open
+          do-syntax-trunc-Prop
+            ( ∃
+              ( ℚ × ℚ)
+              ( λ (p , q) →
+                le-ℚ-Prop q (p +ℚ ε) ∧ lower-cut-ℝ x p ∧ upper-cut-ℝ x q))
 ```
 
 ## References
