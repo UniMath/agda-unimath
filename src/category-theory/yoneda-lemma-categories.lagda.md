@@ -22,8 +22,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a [category](category-theory.categories.md) `C`, an object `c`, and a
-[functor](category-theory.functors-categories.md) `F` from `C` to the
+The
+{{#concept "Yoneda lemma" Disambiguation="for set-level categories" WD="Yoneda lemma" WDID=Q320577 Agda=lemma-yoneda-Category}}
+states that, given a [category](category-theory.categories.md) `C`, an object
+`c`, and a [functor](category-theory.functors-categories.md) `F` from `C` to the
 [category of sets](foundation.category-of-sets.md)
 
 ```text
@@ -40,9 +42,9 @@ from the functor
   Nat(Hom(c , -) , F) ≃ F c
 ```
 
-More precisely, the **Yoneda lemma** asserts that the map from the type of
-natural transformations to the type `F c` defined by evaluating the component of
-the natural transformation at the object `c` at the identity arrow on `c` is an
+More precisely, the Yoneda lemma asserts that the map from the type of natural
+transformations to the type `F c` defined by evaluating the component of the
+natural transformation at the object `c` at the identity arrow on `c` is an
 equivalence.
 
 ## Theorem
