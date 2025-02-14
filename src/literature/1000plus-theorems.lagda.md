@@ -1,8 +1,12 @@
-# Freek Wiedijk's 1000+ theorems
+# 1000+ theorems
 
-This file records formalized results from
-[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s
-[_1000+ theorems_](https://1000-plus.github.io/). {{#cite 1000+theorems}}
+On this page, we record formalized results in the agda-unimath library following
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/) and
+[collaborators](https://github.com/1000-plus)'
+[_1000+ theorems_](https://1000-plus.github.io/) project
+{{#cite 1000+theorems}}. This project records the formalization status of
+theorems in mathematics that have their own Wikipedia entry. We welcome any
+contribution to this list!
 
 ```agda
 module literature.1000plus-theorems where
@@ -10,7 +14,7 @@ module literature.1000plus-theorems where
 
 ## Formalized theorems
 
-We order the theorems alphabetically and omit definite articles ("the").
+The theorems are ordered alphabetically, omitting definite articles ("the").
 
 ### Bézout's lemma {#Q513028}
 
@@ -23,7 +27,7 @@ open import elementary-number-theory.bezouts-lemma-natural-numbers using
   ( bezouts-lemma-ℕ)
 ```
 
-### Binomial theorem {#Q26708} {#Q114727876}
+### Binomial theorem {#Q26708}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
@@ -68,6 +72,8 @@ open import foundation.cantors-theorem using
 ```
 
 ### Cayley's theorem {#Q179208}
+
+**Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
 open import group-theory.cayleys-theorem using
@@ -135,6 +141,8 @@ open import order-theory.knaster-tarski-fixed-point-theorem using
 
 ### Lawvere's fixed point theorem {#Q15809744}
 
+**Author:** [Egbert Rijke](https://egbertrijke.github.io)
+
 ```agda
 open import foundation.lawveres-fixed-point-theorem using
   ( fixed-point-theorem-Lawvere)
@@ -163,4 +171,7 @@ open import category-theory.yoneda-lemma-precategories using
 
 ## External links
 
-- [github/1000-plus/1000-plus.github.io](https://github.com/1000-plus/1000-plus.github.io)
+- [List of theorems](https://en.wikipedia.org/wiki/List_of_theorems) on
+  Wikipedia
+- [1000+ theorems](https://1000-plus.github.io/)
+- [1000-plus](https://github.com/1000-plus/1000-plus.github.io) on GitHub
