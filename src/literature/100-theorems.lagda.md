@@ -41,9 +41,8 @@ theorem.
 
 ```agda
 open import foundation.cantor-schroder-bernstein-escardo using
-  ( Cantor-Schröder-Bernstein-Escardó)
-open import foundation.cantor-schroder-bernstein-escardo using
-  ( Cantor-Schröder-Bernstein)
+  ( Cantor-Schröder-Bernstein-Escardó ;
+    Cantor-Schröder-Bernstein)
 ```
 
 ### 44. The binomial theorem {#44}
