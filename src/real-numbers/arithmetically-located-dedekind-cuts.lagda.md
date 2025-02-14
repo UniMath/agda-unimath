@@ -49,7 +49,9 @@ for any [positive](elementary-number-theory.positive-rational-numbers.md)
 [rational number](elementary-number-theory.rational-numbers.md)
 `ε : ℚ⁺`, there exists `p, q : ℚ` where `p ∈ L` and `q ∈ U`, such that
 `0 < q - p < ε`. Intuitively, when `L , U` represent the cuts of a real number
-`x`, `p` and `q` are rational approximations of `x` to within `ε`. This follows
+`x`, `p` and `q` are rational approximations of `x` to within `ε`.
+
+This follows
 parts of Section 11 in {{#cite BauerTaylor2009}}.
 
 ## Definitions
