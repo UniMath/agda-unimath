@@ -62,7 +62,9 @@ Simple-Undirected-Graph l1 l2 =
     ( λ V →
       Σ ( unordered-pair V → Prop l2)
         ( λ E →
-          (x : V) → ¬ (type-Prop (E (pair (Fin-UU-Fin' 2) (λ y → x))))))
+          (x : V) →
+          ¬ ( type-Prop
+              ( E (pair (Fin-Type-With-Cardinality-ℕ 2) (λ y → x))))))
 ```
 
 ## External links
