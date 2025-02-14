@@ -459,6 +459,7 @@ of which the smash product `X ∧∗ Y` is the cofiber by definition.
 
 > This remains to be formalized, and depends on another unformalized result, the
 > 3×3-property for pushouts.
+> [#1326](https://github.com/UniMath/agda-unimath/issues/1326)
 
 As a corollary of the above, the smash product `X ∧∗ Y` is also the cofiber of
 the canonical maps `X → X ⋊∗ Y` and `Y → X ⋉∗ Y`, i.e., we have pushout squares
