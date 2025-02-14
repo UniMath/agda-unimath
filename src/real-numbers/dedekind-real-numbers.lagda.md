@@ -54,13 +54,18 @@ A {{#concept "Dedekind real number" WD="real number" WDID=Q12916 Agda=ℝ}} `x`
 consists of a [pair](foundation.dependent-pair-types.md) of _cuts_ `(L , U)` of
 [rational numbers](elementary-number-theory.rational-numbers.md), a
 [lower Dedekind cut](real-numbers.lower-dedekind-real-numbers.md) `L` and an
-[upper Dedekind cut](real-numbers.upper-dedekind-real-numbers.md) `U`. A lower
-Dedekind cut `L` is a subtype of the rational numbers that is
-[inhabited](foundation.inhabited-subtypes.md) and rounded, meaning that `q ∈ L`
-[if and only if](foundation.logical-equivalences.md) there exists `r`, with
-`q < r` and `r ∈ L`. An upper Dedekind cut is a subtype of the rational numbers
-that is inhabited and rounded "in the other direction": `q ∈ U` if and only if
-there is a `p < q` where `p ∈ U`.
+[upper Dedekind cut](real-numbers.upper-dedekind-real-numbers.md) `U`.
+
+A lower Dedekind cut `L` is a subtype of the rational numbers that is
+
+1. [Inhabited](foundation.inhabited-subtypes.md), meaning it has at least one
+   element.
+2. Rounded, meaning that `q ∈ L`
+   [if and only if](foundation.logical-equivalences.md) there exists `r`, with
+   `q < r` and `r ∈ L`.
+
+An upper Dedekind cut is analogous, but must be rounded "in the other
+direction": `q ∈ U` if and only if there is a `p < q` where `p ∈ U`.
 
 These cuts present lower and upper bounds on the Dedekind real number, and must
 satisfy the conditions
