@@ -40,12 +40,12 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Idea
 
-The negation of a
+The {{#concept "negation" Disambiguation="of a one-sided Dedekind real number" Agda=neg-lower-ℝ Agda=neg-upper-ℝ}} of a
 [lower Dedekind real number](real-numbers.lower-dedekind-real-numbers.md) is an
 [upper Dedekind real number](real-numbers.upper-dedekind-real-numbers.md) whose
 cut contains negations of elements in the lower cut, and vice versa.
 
-## Definition
+## Definitions
 
 ### The negation of a lower Dedekind real, as an upper Dedekind real
 
