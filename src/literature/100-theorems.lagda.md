@@ -29,10 +29,6 @@ open import elementary-number-theory.infinitude-of-primes using
   ( infinitude-of-primes-ℕ)
 ```
 
-### 22. The non-denumerability of the continuum {#22}
-
-> This is not yet formalized.
-
 ### 25. Schröder–Bernstein theorem {#25}
 
 **Author:** [Elif Uskuplu](https://elifuskuplu.github.io)
@@ -148,15 +144,12 @@ open import real-numbers.metric-space-of-real-numbers using
   ( is-triangular-premetric-leq-ℝ)
 ```
 
-### 96. Principle of inclusion/exclusion {#96}
+## See also
 
-> This is not yet formalized.
+- The spiritual successor to _Formalizing 100 Theorems_ is
+  [_1000+ theorems_](literature.1000plus-theorems.md), also due to Freek Wiedijk
+  {{#cite 1000+theorems}}.
 
 ## References
 
 {{#bibliography}}
-
-## External links
-
-- The spiritual successor to _Formalizing 100 Theorems_ is
-  [_1000+ theorems_](https://1000-plus.github.io/), also due to Freek Wiedijk.
