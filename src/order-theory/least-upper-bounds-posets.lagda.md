@@ -124,7 +124,7 @@ module _
       ( is-binary-upper-bound-is-least-binary-upper-bound-Poset H)
 ```
 
-### The least upper bound of a and b is the least upper bound of b and a
+### The least upper bound of `a` and `b` is the least upper bound of `b` and `a`
 
 ```agda
 module _
