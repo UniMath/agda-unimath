@@ -244,7 +244,7 @@ module _
       (X ≃ ((fiber f (inl (inr star))) + (fiber f (inr star))))
     matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ =
       ( ( equiv-coproduct
-          ( left-unit-law-Σ-is-contr ( is-contr-Fin-one-ℕ) ( inr star))
+          ( left-unit-law-Σ-is-contr ( is-contr-Fin-1) ( inr star))
           ( left-unit-law-Σ-is-contr is-contr-unit star)) ∘e
         ( ( right-distributive-Σ-coproduct ( Fin 1) unit (λ x → fiber f x) ∘e
             ( inv-equiv-total-fiber f))))
@@ -268,7 +268,7 @@ module _
                 inl y ＝
                 ( map-coproduct
                   ( map-left-unit-law-Σ-is-contr
-                    ( is-contr-Fin-one-ℕ)
+                    ( is-contr-Fin-1)
                     ( inr star))
                   ( map-left-unit-law-Σ-is-contr is-contr-unit star))
                 ( map-right-distributive-Σ-coproduct
@@ -283,7 +283,7 @@ module _
               ( inl)
               ( inv
                 ( map-inv-eq-transpose-equiv
-                  ( left-unit-law-Σ-is-contr is-contr-Fin-one-ℕ (inr star))
+                  ( left-unit-law-Σ-is-contr is-contr-Fin-1 (inr star))
                   ( refl))))) ,
           refl)
 
@@ -331,7 +331,7 @@ module _
                   inr y ＝
                   ( map-coproduct
                     ( map-left-unit-law-Σ-is-contr
-                      ( is-contr-Fin-one-ℕ)
+                      ( is-contr-Fin-1)
                       ( inr star))
                     ( map-left-unit-law-Σ-is-contr is-contr-unit star))
                   ( map-right-distributive-Σ-coproduct
@@ -516,7 +516,7 @@ module _
           ( f)
           ( x)
           ( map-coproduct
-            ( map-left-unit-law-Σ-is-contr is-contr-Fin-one-ℕ ( inr star))
+            ( map-left-unit-law-Σ-is-contr is-contr-Fin-1 ( inr star))
             ( map-left-unit-law-Σ-is-contr is-contr-unit star)
             ( map-right-distributive-Σ-coproduct
               ( Fin 1)
@@ -813,7 +813,7 @@ module _
   value-map-into-Fin-Two-ℕ-eq-zero-or-one-helper :
     (y : Fin 2) → (inl (inr star) ＝ y) + (inr star ＝ y)
   value-map-into-Fin-Two-ℕ-eq-zero-or-one-helper (inl x) =
-    inl (ap inl (eq-is-contr is-contr-Fin-one-ℕ))
+    inl (ap inl (eq-is-contr is-contr-Fin-1))
   value-map-into-Fin-Two-ℕ-eq-zero-or-one-helper (inr x) =
     inr (ap inr (eq-is-contr is-contr-unit))
 

@@ -11,22 +11,29 @@ module real-numbers.arithmetically-located-dedekind-cuts where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.archimedean-property-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.raising-universe-levels
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -116,6 +123,130 @@ module _
                   ( q'∈U)))
             ( decide-le-leq-ℚ p p'))
         ( arithmetically-located (positive-diff-le-ℚ p q p<q))
+```
+
+### The Dedekind cuts of real numbers are arithmetically located
+
+```agda
+module _
+  {l : Level}
+  (x : ℝ l)
+  where
+
+  abstract
+    arithmetic-location-from-multiple-difference-in-lower-upper-cut-ℝ :
+      (p ε : ℚ) →
+      (n : ℕ) →
+      is-positive-ℚ ε →
+      is-in-lower-cut-ℝ x p →
+      is-in-upper-cut-ℝ x (p +ℚ (rational-ℤ (int-ℕ n) *ℚ ε)) →
+      exists ℚ ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ ε +ℚ ε))
+    arithmetic-location-from-multiple-difference-in-lower-upper-cut-ℝ
+      p ε zero-ℕ positive-ε p<x p-plus-0-ε-in-U =
+      ex-falso
+        ( is-disjoint-cut-ℝ
+          ( x)
+          ( p)
+          ( p<x ,
+            tr
+              ( is-in-upper-cut-ℝ x)
+              ( ap (p +ℚ_) (left-zero-law-mul-ℚ ε) ∙ right-unit-law-add-ℚ p)
+              ( p-plus-0-ε-in-U)))
+    arithmetic-location-from-multiple-difference-in-lower-upper-cut-ℝ
+      p ε (succ-ℕ n) positive-ε p<x p-plus-sn-ε-in-U =
+      elim-disjunction
+        ( ∃ ℚ ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ ε +ℚ ε)))
+        ( λ p+ε-in-L →
+          arithmetic-location-in-arithmetic-sequence
+            ( p +ℚ ε)
+            ( ε)
+            ( n)
+            ( positive-ε)
+            ( p+ε-in-L)
+            ( tr
+              ( is-in-upper-cut-ℝ x)
+              ( equational-reasoning
+                p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)
+                ＝ p +ℚ (rational-ℤ (succ-ℤ (int-ℕ n)) *ℚ ε)
+                  by ap
+                      ( λ x → p +ℚ (rational-ℤ x *ℚ ε))
+                      ( inv (succ-int-ℕ n))
+                ＝ p +ℚ (succ-ℚ (rational-ℤ (int-ℕ n)) *ℚ ε)
+                  by ap (p +ℚ_) (ap (_*ℚ ε) (inv (succ-rational-ℤ (int-ℕ n))))
+                ＝ p +ℚ (ε +ℚ rational-ℤ (int-ℕ n) *ℚ ε)
+                  by ap (p +ℚ_) (mul-left-succ-ℚ (rational-ℤ (int-ℕ n)) ε)
+                ＝ (p +ℚ ε) +ℚ (rational-ℤ (int-ℕ n) *ℚ ε)
+                  by inv (associative-add-ℚ p ε (rational-ℤ (int-ℕ n) *ℚ ε)))
+              ( p-plus-sn-ε-in-U)))
+        ( λ p+2ε-in-U → intro-exists p (p<x , p+2ε-in-U))
+        ( is-located-lower-upper-cut-ℝ
+          ( x)
+          ( p +ℚ ε)
+          ( (p +ℚ ε) +ℚ ε)
+          ( le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε)))
+
+  abstract
+    bounded-arithmetic-location-twice-ε :
+      (p q ε : ℚ) →
+      is-positive-ℚ ε →
+      is-in-lower-cut-ℝ x p →
+      is-in-upper-cut-ℝ x q →
+      exists
+        ℚ
+        ( λ r →
+          lower-cut-ℝ x r ∧
+          upper-cut-ℝ x (r +ℚ ε +ℚ ε))
+    bounded-arithmetic-location-twice-ε p q ε pos-ε p<x x<q =
+      elim-exists
+        ( ∃ ℚ ( λ r → lower-cut-ℝ x r ∧ upper-cut-ℝ x (r +ℚ ε +ℚ ε)))
+        ( λ n q-p<nε →
+          arithmetic-location-from-multiple-difference-in-lower-upper-cut-ℝ
+            ( p)
+            ( ε)
+            ( n)
+            ( pos-ε)
+            ( p<x)
+            ( le-upper-cut-ℝ
+              ( x)
+              ( q)
+              ( p +ℚ rational-ℤ (int-ℕ n) *ℚ ε)
+              ( tr
+                ( λ r → le-ℚ r (p +ℚ rational-ℤ (int-ℕ n) *ℚ ε))
+                ( is-identity-right-conjugation-Ab abelian-group-add-ℚ p q)
+                ( preserves-le-right-add-ℚ
+                  ( p)
+                  ( q -ℚ p)
+                  ( rational-ℤ (int-ℕ n) *ℚ ε) q-p<nε))
+              ( x<q)))
+        ( archimedean-property-ℚ ε (q -ℚ p) pos-ε)
+
+  abstract
+    arithmetically-located-lower-upper-real-ℝ :
+      arithmetically-located-lower-upper-ℝ
+        ( lower-real-ℝ x)
+        ( upper-real-ℝ x)
+    arithmetically-located-lower-upper-real-ℝ ε⁺@(ε , positive-ε) =
+      do
+        (ε' , pos-ε') , 2ε'<ε ← double-le-ℚ⁺ ε⁺
+        (p , p<x) ← is-inhabited-lower-cut-ℝ x
+        (q , x<q) ← is-inhabited-upper-cut-ℝ x
+        (r , r<x , x<r+2ε') ←
+          bounded-arithmetic-location-twice-ε p q ε' pos-ε' p<x x<q
+        intro-exists
+          ( r , r +ℚ ε' +ℚ ε')
+          ( tr
+              ( λ s → le-ℚ s (r +ℚ ε))
+              ( inv (associative-add-ℚ r ε' ε'))
+              ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,
+            r<x ,
+            x<r+2ε')
+      where
+        open
+          do-syntax-trunc-Prop
+            ( ∃
+              ( ℚ × ℚ)
+              ( λ (p , q) →
+                le-ℚ-Prop q (p +ℚ ε) ∧ lower-cut-ℝ x p ∧ upper-cut-ℝ x q))
 ```
 
 ## References

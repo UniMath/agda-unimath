@@ -89,13 +89,13 @@ module _
       is-prop-type-Prop (standard-edge-ethane-Prop c c')
 
   abstract
-    is-decidable-edge-ethane-eq-Fin-two :
+    is-decidable-edge-ethane-eq-Fin-2 :
       (p : unordered-pair vertex-ethane) →
       type-unordered-pair p ＝ Fin 2 →
       is-decidable (edge-ethane p)
-    is-decidable-edge-ethane-eq-Fin-two p refl with
-      is-zero-or-one-Fin-two-ℕ (element-unordered-pair p (zero-Fin 1)) |
-      is-zero-or-one-Fin-two-ℕ (element-unordered-pair p (one-Fin 1))
+    is-decidable-edge-ethane-eq-Fin-2 p refl with
+      is-zero-or-one-Fin-2 (element-unordered-pair p (zero-Fin 1)) |
+      is-zero-or-one-Fin-2 (element-unordered-pair p (one-Fin 1))
     ... | inl is-zero | inl is-zero' =
       inr
         ( λ P →
@@ -124,7 +124,7 @@ module _
   is-decidable-standard-edge-ethane :
     (c c' : vertex-ethane) → is-decidable (standard-edge-ethane c c')
   is-decidable-standard-edge-ethane c c' =
-    is-decidable-edge-ethane-eq-Fin-two (standard-unordered-pair c c') refl
+    is-decidable-edge-ethane-eq-Fin-2 (standard-unordered-pair c c') refl
 
   abstract
     is-finite-edge-ethane :
@@ -136,7 +136,7 @@ module _
         ( λ e →
           is-finite-is-decidable-Prop
             ( edge-ethane-Prop p)
-            ( is-decidable-edge-ethane-eq-Fin-two p (inv (eq-equiv e))))
+            ( is-decidable-edge-ethane-eq-Fin-2 p (inv (eq-equiv e))))
 
   edge-ethane-Finite-Type : unordered-pair vertex-ethane → Finite-Type lzero
   pr1 (edge-ethane-Finite-Type p) = edge-ethane p
@@ -192,7 +192,7 @@ module _
     is-emb-bonding-ethane : (c : vertex-ethane) → is-emb (bonding-ethane c)
     is-emb-bonding-ethane c =
       is-emb-is-injective
-        ( is-set-type-UU-Fin 4 (pr1 t))
+        ( is-set-type-Type-With-Cardinality-ℕ 4 (pr1 t))
         ( is-injective-is-contr (λ e → v) (is-torsorial-standard-edge-ethane c))
 
   emb-bonding-ethane :
@@ -257,7 +257,7 @@ module _
             ( zero-Fin 1)
             ( element-standard-unordered-pair (zero-Fin 1) (one-Fin 1) x))
         ( compute-swap-2-Element-Type
-          ( Fin-UU-Fin' 2)
+          ( Fin-Type-With-Cardinality-ℕ 2)
           ( zero-Fin 1)
           ( one-Fin 1)
           ( neq-inl-inr))
@@ -276,7 +276,7 @@ module _
             ( one-Fin 1)
             ( element-standard-unordered-pair (one-Fin 1) (zero-Fin 1) x))
         ( compute-swap-2-Element-Type
-          ( Fin-UU-Fin' 2)
+          ( Fin-Type-With-Cardinality-ℕ 2)
           ( zero-Fin 1)
           ( one-Fin 1)
           ( neq-inl-inr))
