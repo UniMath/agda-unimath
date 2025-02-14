@@ -53,15 +53,17 @@ equiv-pr-product-unordered-tuple-types :
 equiv-pr-product-unordered-tuple-types n A i =
   ( equiv-Π
     ( element-unordered-tuple (succ-ℕ n) A)
-    ( equiv-maybe-structure-element-UU-Fin n
-      ( type-unordered-tuple-UU-Fin (succ-ℕ n) A) i)
+    ( equiv-maybe-structure-element-Type-With-Cardinality-ℕ n
+      ( type-unordered-tuple-Type-With-Cardinality-ℕ (succ-ℕ n) A) i)
     ( λ x → id-equiv)) ∘e
   ( inv-equiv
     ( equiv-dependent-universal-property-Maybe
       ( λ j →
         element-unordered-tuple (succ-ℕ n) A
-          ( map-equiv (equiv-maybe-structure-element-UU-Fin n
-            ( type-unordered-tuple-UU-Fin (succ-ℕ n) A) i)
+          ( map-equiv
+            ( equiv-maybe-structure-element-Type-With-Cardinality-ℕ n
+              ( type-unordered-tuple-Type-With-Cardinality-ℕ (succ-ℕ n) A)
+              ( i))
             ( j)))))
 
 map-equiv-pr-product-unordered-tuple-types :
