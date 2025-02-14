@@ -423,6 +423,10 @@ pushout
   X ⋉∗ Y -----> X ∧∗ Y.
 ```
 
+Where `X ⋉∗ Y` is the
+[left half-smash product](synthetic-homotopy-theory.left-half-smash-products.md),
+and `X ⋊∗ Y` is the right half-smash product.
+
 This is Remark 3.4 in {{#cite Lavenir23}}.
 
 **Proof.** Consider the diagram
@@ -439,22 +443,25 @@ This is Remark 3.4 in {{#cite Lavenir23}}.
   X ⋉∗ Y <--- X ×∗ Y ---> X ⋊∗ Y
 ```
 
-Observe that every column is a cofiber sequence. Therefore, if we take the
-pushouts of the rows we must also obtain a cofiber sequence, and the cofibers of
-the first two rows yield
+Observe that every column is a cofiber sequence. Therefore, by the 3×3-property
+for pushouts, if we take the pushouts of the rows we must also obtain a cofiber
+sequence, and the cofibers of the first two rows yield
 
 ```text
               X ∨∗ Y
                 |
                 |
                 ∨
-              X ×∗ Y.
+              X ×∗ Y
 ```
 
-> This remains to be formalized.
+of which the smash product `X ∧∗ Y` is the cofiber by definition.
+
+> This remains to be formalized, and depends on another unformalized result, the
+> 3×3-property for pushouts.
 
 As a corollary of the above, the smash product `X ∧∗ Y` is also the cofiber of
-the following:
+the canonical maps `X → X ⋊∗ Y` and `Y → X ⋉∗ Y`, i.e., we have pushout squares
 
 ```text
   X ------> X ⋊∗ Y         Y ------> X ⋉∗ Y

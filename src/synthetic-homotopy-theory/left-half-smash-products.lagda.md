@@ -81,7 +81,7 @@ module _
 
 > **Notation.** The symbols used for the left half-smash product `_⋉∗_` are the
 > [left normal factor semidirect product](https://codepoints.net/U+22c9) `⋉`
-> (agda-input: `\wedge` `\and`), and the
+> (agda-input: `\ltimes` `\join`), and the
 > [asterisk operator](https://codepoints.net/U+2217) `∗` (agda-input: `\ast`),
 > not the [asterisk](https://codepoints.net/U+002A) `*`.
 
@@ -95,16 +95,17 @@ $$
   (A ⋉_* -) ⊣ (A → -) \quad\text{and}\quad (- ⋉_* B) ⊣ (B →_* -)
 $$
 
-viewed as functors into pointed types. In other words, we have pointed
-equivalences
+viewed as functors into pointed types. In other words, we have equivalences
 
 $$
-  (A ⋉_* B →_* C) ≃_* (A → (B →_* C)) \quad\text{and}\quad (A ⋉_* B → C) ≃_* (B →_* (A → C))
+  (A ⋉_* B →_* C) ≃ (B →_* (A → C)) \quad\text{and}\quad (A ⋉_* B →_* C) ≃ (A → (B →_* C))
 $$
 
 for every pointed type `C`.
 
 This is Remark 3.2 of {{#cite Lavenir23}}.
+
+**Proof.** This is a consequence of the pullback-property of pushouts.
 
 > This remains to be formalized.
 

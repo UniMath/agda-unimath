@@ -32,7 +32,7 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 The
 {{#concept "cofiber" Disambiguation="of a map of types" WD="mapping cone" WDID=Q306560 Agda=cofiber}}
 of a map `f : A → B` is the [pushout](synthetic-homotopy-theory.pushouts.md) of
-the span `1 ← A → B`.
+the span `B ← A → *`.
 
 ## Definitions
 
