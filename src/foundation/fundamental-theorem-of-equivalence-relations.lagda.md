@@ -1,4 +1,4 @@
-# Equivalence relations
+# Fundamental theorem of equivalence relations
 
 ```agda
 module foundation.fundamental-theorem-of-equivalence-relations where
