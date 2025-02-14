@@ -33,8 +33,8 @@ open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.minkowski-multiplication-commutative-monoids
 
-open import real-numbers.upper-dedekind-real-numbers
 open import real-numbers.rational-upper-dedekind-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
