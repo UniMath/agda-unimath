@@ -96,8 +96,10 @@ module _
     is-torsorial (equiv-unordered-tuple-types n A)
   is-torsorial-equiv-unordered-tuple-types =
     is-torsorial-Eq-structure
-      ( is-torsorial-equiv-UU-Fin {k = n} (type-unordered-tuple-UU-Fin n A))
-      ( pair (type-unordered-tuple-UU-Fin n A) id-equiv)
+      ( is-torsorial-equiv-Type-With-Cardinality-ℕ
+        { k = n}
+        ( type-unordered-tuple-Type-With-Cardinality-ℕ n A))
+      ( pair (type-unordered-tuple-Type-With-Cardinality-ℕ n A) id-equiv)
       ( is-torsorial-equiv-fam (element-unordered-tuple n A))
 
   is-equiv-equiv-eq-unordered-tuple-types :
