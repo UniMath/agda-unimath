@@ -322,14 +322,17 @@ is-π-finite-succ-is-π-finite (succ-ℕ k) (H , K) =
 ### The type of all `n`-element types in `UU l` is π₁-finite
 
 ```agda
-is-π-finite-UU-Fin : {l : Level} (n : ℕ) → is-π-finite 1 (UU-Fin l n)
-is-π-finite-UU-Fin n =
+is-π-finite-Type-With-Cardinality-ℕ :
+  {l : Level} (n : ℕ) → is-π-finite 1 (Type-With-Cardinality-ℕ l n)
+is-π-finite-Type-With-Cardinality-ℕ n =
   is-π-finite-is-untruncated-π-finite 1
-    ( is-1-type-UU-Fin n)
-    ( is-untruncated-π-finite-UU-Fin 1 n)
+    ( is-1-type-Type-With-Cardinality-ℕ n)
+    ( is-untruncated-π-finite-Type-With-Cardinality-ℕ 1 n)
 
-UU-Fin-π-Finite-Type : (l : Level) (n : ℕ) → π-Finite-Type (lsuc l) 1
-UU-Fin-π-Finite-Type l n = (UU-Fin l n , is-π-finite-UU-Fin n)
+Type-With-Cardinality-ℕ-π-Finite-Type :
+  (l : Level) (n : ℕ) → π-Finite-Type (lsuc l) 1
+Type-With-Cardinality-ℕ-π-Finite-Type l n =
+  (Type-With-Cardinality-ℕ l n , is-π-finite-Type-With-Cardinality-ℕ n)
 ```
 
 ### Finite products of π-finite types are π-finite

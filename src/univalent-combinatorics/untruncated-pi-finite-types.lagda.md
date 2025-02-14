@@ -309,10 +309,11 @@ pr2 (is-untruncated-π-finite-Type-With-Cardinality-ℕ (succ-ℕ k) n) x y =
         ( is-finite-has-finite-cardinality (n , pr2 x))
         ( is-finite-has-finite-cardinality (n , pr2 y))))
 
-UU-Fin-Untruncated-π-Finite-Type :
+Type-With-Cardinality-ℕ-Untruncated-π-Finite-Type :
   (l : Level) (k n : ℕ) → Untruncated-π-Finite-Type (lsuc l) k
-UU-Fin-Untruncated-π-Finite-Type l k n =
-  ( UU-Fin l n , is-untruncated-π-finite-UU-Fin k n)
+Type-With-Cardinality-ℕ-Untruncated-π-Finite-Type l k n =
+  ( Type-With-Cardinality-ℕ l n ,
+    is-untruncated-π-finite-Type-With-Cardinality-ℕ k n)
 ```
 
 ### Untruncated πₙ₊₁-finite types are untruncated πₙ-finite
