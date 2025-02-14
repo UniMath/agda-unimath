@@ -7,30 +7,13 @@ module synthetic-homotopy-theory.left-half-smash-products where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-higher-identifications-functions
-open import foundation.action-on-identifications-dependent-functions
-open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
-open import foundation.whiskering-identifications-concatenation
 
-open import structured-types.constant-pointed-maps
-open import structured-types.pointed-cartesian-product-types
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
 open import structured-types.pointed-types
-open import structured-types.pointed-unit-type
 
-open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams
 open import synthetic-homotopy-theory.cofibers-of-maps
-open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.pushouts-of-pointed-types
-open import synthetic-homotopy-theory.wedges-of-pointed-types
 ```
 
 </details>
