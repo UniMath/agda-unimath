@@ -134,14 +134,14 @@ module _
   where
 
   abstract
-    arithmetic-location-in-arithmetic-sequence :
+    arithmetic-location-from-multiple-difference-in-lower-upper-cut-ℝ :
       (p ε : ℚ) →
       (n : ℕ) →
       is-positive-ℚ ε →
       is-in-lower-cut-ℝ x p →
       is-in-upper-cut-ℝ x (p +ℚ (rational-ℤ (int-ℕ n) *ℚ ε)) →
       exists ℚ ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ ε +ℚ ε))
-    arithmetic-location-in-arithmetic-sequence
+    arithmetic-location-from-multiple-difference-in-lower-upper-cut-ℝ
       p ε zero-ℕ positive-ε p<x p-plus-0-ε-in-U =
       ex-falso
         ( is-disjoint-cut-ℝ
@@ -152,7 +152,7 @@ module _
               ( is-in-upper-cut-ℝ x)
               ( ap (p +ℚ_) (left-zero-law-mul-ℚ ε) ∙ right-unit-law-add-ℚ p)
               ( p-plus-0-ε-in-U)))
-    arithmetic-location-in-arithmetic-sequence
+    arithmetic-location-from-multiple-difference-in-lower-upper-cut-ℝ
       p ε (succ-ℕ n) positive-ε p<x p-plus-sn-ε-in-U =
       elim-disjunction
         ( ∃ ℚ ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ ε +ℚ ε)))
@@ -200,7 +200,7 @@ module _
       elim-exists
         ( ∃ ℚ ( λ r → lower-cut-ℝ x r ∧ upper-cut-ℝ x (r +ℚ ε +ℚ ε)))
         ( λ n q-p<nε →
-          arithmetic-location-in-arithmetic-sequence
+          arithmetic-location-from-multiple-difference-in-lower-upper-cut-ℝ
             ( p)
             ( ε)
             ( n)
