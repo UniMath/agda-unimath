@@ -11,7 +11,7 @@ module literature.100-theorems where
 
 ## The list
 
-### 3. The denumerability of the tational numbers {#3}
+### 3. The denumerability of the rational numbers {#3}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 
