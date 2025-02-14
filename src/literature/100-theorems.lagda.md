@@ -11,7 +11,7 @@ module literature.100-theorems where
 
 ## The list
 
-### 3. The Denumerability of the Rational Numbers {#3}
+### 3. The denumerability of the tational numbers {#3}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 
@@ -20,7 +20,7 @@ open import elementary-number-theory.rational-numbers using
   ( is-countable-ℚ)
 ```
 
-### 11. The Infinitude of Primes {#11}
+### 11. The infinitude of primes {#11}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
@@ -29,18 +29,19 @@ open import elementary-number-theory.infinitude-of-primes using
   ( infinitude-of-primes-ℕ)
 ```
 
-### 22. The Non-Denumerability of the Continuum {#22}
+### 22. The non-denumerability of the continuum {#22}
 
 > This is not yet formalized.
 
-### 25. Schröder–Bernstein Theorem {#25}
+### 25. Schröder–Bernstein theorem {#25}
 
 **Author:** [Elif Uskuplu](https://elifuskuplu.github.io)
 
-Note: The formalization of the Cantor-Schröder-Bernstein theorem in agda-unimath
-is a generalization of the statement to all types, i.e., it is not restricted to
-sets. This generalization is originally due to Martin-Escardó, hence we refer to
-the generalization as the Cantor-Schröder-Bernstein-Escardó theorem.
+**Note:** The formalization of the Cantor-Schröder-Bernstein theorem in
+agda-unimath is a generalization of the statement to all types, i.e., it is not
+restricted to sets. This generalization is originally due to Martin-Escardó,
+hence we refer to the generalization as the Cantor-Schröder-Bernstein-Escardó
+theorem.
 
 ```agda
 open import foundation.cantor-schroder-bernstein-escardo using
@@ -49,7 +50,7 @@ open import foundation.cantor-schroder-bernstein-escardo using
   ( Cantor-Schröder-Bernstein)
 ```
 
-### 44. The Binomial Theorem {#44}
+### 44. The binomial theorem {#44}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
@@ -68,7 +69,7 @@ open import elementary-number-theory.binomial-theorem-natural-numbers using
   ( binomial-theorem-ℕ)
 ```
 
-### 52. The Number of Subsets of a Set {#52}
+### 52. The number of subsets of a set {#52}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
@@ -86,7 +87,7 @@ open import univalent-combinatorics.binomial-types using
   ( has-cardinality-binomial-type)
 ```
 
-### 60. Bezout's Lemma {#60}
+### 60. Bezout's lemma {#60}
 
 **Author:** [Bryan Lu](https://blu-bird.github.io)
 
@@ -101,7 +102,7 @@ open import elementary-number-theory.bezouts-lemma-natural-numbers using
   ( bezouts-lemma-ℕ)
 ```
 
-### 63. Cantor's Theorem {#63}
+### 63. Cantor's theorem {#63}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
@@ -110,7 +111,7 @@ open import foundation.cantors-theorem using
   ( theorem-Cantor)
 ```
 
-### 69. Greatest Common Divisor Algorithm {#69}
+### 69. Greatest common divisor algorithm {#69}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
@@ -120,7 +121,7 @@ open import
   ( GCD-ℕ)
 ```
 
-### 74. The Principle of Mathematical Induction {#74}
+### 74. The principle of mathematical induction {#74}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
@@ -129,7 +130,7 @@ open import elementary-number-theory.natural-numbers using
   ( ind-ℕ)
 ```
 
-### 80. The Fundamental Theorem of Arithmetic {#80}
+### 80. The fundamental theorem of arithmetic {#80}
 
 **Author:** [Victor Blanchi](https://github.com/VictorBlanchi)
 
@@ -138,7 +139,7 @@ open import elementary-number-theory.fundamental-theorem-of-arithmetic using
   ( fundamental-theorem-arithmetic-list-ℕ)
 ```
 
-### 91. The Triangle Inequality {#91}
+### 91. The triangle inequality {#91}
 
 **Author:** [malarbol](https://github.com/malarbol)
 
@@ -147,7 +148,7 @@ open import real-numbers.metric-space-of-real-numbers using
   ( is-triangular-premetric-leq-ℝ)
 ```
 
-### 96. Principle of Inclusion/Exclusion {#96}
+### 96. Principle of inclusion/exclusion {#96}
 
 > This is not yet formalized.
 
