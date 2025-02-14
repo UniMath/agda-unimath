@@ -40,8 +40,10 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Idea
 
-The negation of a lower Dedekind real is an upper Dedekind real containing the
-negations of elements in the lower cut, and vice versa.
+The negation of a
+[lower Dedekind real number](real-numbers.lower-dedekind-real-numbers.md) is an
+[upper Dedekind real number](real-numbers.upper-dedekind-real-numbers.md) whose
+cut contains negations of elements in the lower cut, and vice versa.
 
 ## Definition
 

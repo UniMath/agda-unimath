@@ -43,16 +43,16 @@ open import real-numbers.upper-dedekind-real-numbers
 ## Definition
 
 A pair of a [lower Dedekind cut](real-numbers.lower-dedekind-real-numbers.md)
-`L` and an [upper Dedekind cut](real-numbers.upper-dedekind-real-numbers.md)
-`U` is {{#concept "arithmetically located" Disambiguation="Dedekind cut" Agda=arithmetically-located-lower-upper-ℝ}} if
-for any [positive](elementary-number-theory.positive-rational-numbers.md)
-[rational number](elementary-number-theory.rational-numbers.md)
-`ε : ℚ⁺`, there exists `p, q : ℚ` where `p ∈ L` and `q ∈ U`, such that
-`0 < q - p < ε`. Intuitively, when `L , U` represent the cuts of a real number
-`x`, `p` and `q` are rational approximations of `x` to within `ε`.
+`L` and an [upper Dedekind cut](real-numbers.upper-dedekind-real-numbers.md) `U`
+is
+{{#concept "arithmetically located" Disambiguation="Dedekind cut" Agda=arithmetically-located-lower-upper-ℝ}}
+if for any [positive](elementary-number-theory.positive-rational-numbers.md)
+[rational number](elementary-number-theory.rational-numbers.md) `ε : ℚ⁺`, there
+exists `p, q : ℚ` where `p ∈ L` and `q ∈ U`, such that `0 < q - p < ε`.
+Intuitively, when `L , U` represent the cuts of a real number `x`, `p` and `q`
+are rational approximations of `x` to within `ε`.
 
-This follows
-parts of Section 11 in {{#cite BauerTaylor2009}}.
+This follows parts of Section 11 in {{#cite BauerTaylor2009}}.
 
 ## Definitions
 
@@ -77,7 +77,8 @@ module _
 
 ### Arithmetically located cuts are located
 
-If a pair of lower and upper Dedekind cuts is arithmetically located, it is also located.
+If a pair of lower and upper Dedekind cuts is arithmetically located, it is also
+located.
 
 ```agda
 module _
