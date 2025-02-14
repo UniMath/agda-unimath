@@ -34,11 +34,11 @@ module _
   where
 
   is-totally-faithful-hom-Undirected-Graph :
-    hom-Undirected-Graph G H → UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l4)
+    hom-Undirected-Graph G H → UU (lone ⊔ l1 ⊔ l2 ⊔ l4)
   is-totally-faithful-hom-Undirected-Graph f =
     is-emb (tot (edge-hom-Undirected-Graph G H f))
 
-  totally-faithful-hom-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  totally-faithful-hom-Undirected-Graph : UU (lone ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
   totally-faithful-hom-Undirected-Graph =
     Σ (hom-Undirected-Graph G H) is-totally-faithful-hom-Undirected-Graph
 

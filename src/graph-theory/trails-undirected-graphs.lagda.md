@@ -36,12 +36,12 @@ module _
 
   is-trail-walk-Undirected-Graph :
     {x y : vertex-Undirected-Graph G} → walk-Undirected-Graph G x y →
-    UU (lsuc lzero ⊔ l1 ⊔ l2)
+    UU (lone ⊔ l1 ⊔ l2)
   is-trail-walk-Undirected-Graph w =
     is-injective (edge-edge-on-walk-Undirected-Graph G w)
 
   trail-Undirected-Graph :
-    (x y : vertex-Undirected-Graph G) → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    (x y : vertex-Undirected-Graph G) → UU (lone ⊔ l1 ⊔ l2)
   trail-Undirected-Graph x y =
     Σ (walk-Undirected-Graph G x y) is-trail-walk-Undirected-Graph
 
@@ -77,13 +77,13 @@ module _
     {x y : vertex-Undirected-Graph G} →
     (t : trail-Undirected-Graph x y)
     (p : unordered-pair-vertices-Undirected-Graph G)
-    (e : edge-Undirected-Graph G p) → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    (e : edge-Undirected-Graph G p) → UU (lone ⊔ l1 ⊔ l2)
   is-edge-on-trail-Undirected-Graph t =
     is-edge-on-walk-Undirected-Graph G (walk-trail-Undirected-Graph t)
 
   edge-on-trail-Undirected-Graph :
     {x y : vertex-Undirected-Graph G} (t : trail-Undirected-Graph x y) →
-    UU (lsuc lzero ⊔ l1 ⊔ l2)
+    UU (lone ⊔ l1 ⊔ l2)
   edge-on-trail-Undirected-Graph t =
     edge-on-walk-Undirected-Graph G (walk-trail-Undirected-Graph t)
 

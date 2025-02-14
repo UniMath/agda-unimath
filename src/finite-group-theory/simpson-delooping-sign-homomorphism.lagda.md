@@ -177,10 +177,10 @@ module _
         ( Fin-Type-With-Cardinality-ℕ n)
         ( inv-equiv f ∘e g))
 
-  quotient-sign-comp : UU (lsuc lzero ⊔ l)
+  quotient-sign-comp : UU (lone ⊔ l)
   quotient-sign-comp = equivalence-class sign-comp-equivalence-relation
 
-  quotient-sign-comp-Set : Set (lsuc lzero ⊔ l)
+  quotient-sign-comp-Set : Set (lone ⊔ l)
   quotient-sign-comp-Set = equivalence-class-Set sign-comp-equivalence-relation
 
 module _
@@ -771,7 +771,7 @@ module _
     (n : ℕ) →
     hom-Concrete-Group
       ( Type-With-Cardinality-ℕ-Concrete-Group l n)
-      ( Type-With-Cardinality-ℕ-Concrete-Group (lsuc lzero ⊔ l) 2)
+      ( Type-With-Cardinality-ℕ-Concrete-Group (lone ⊔ l) 2)
   simpson-delooping-sign =
     quotient-delooping-sign
       ( λ n X → Fin n ≃ type-Type-With-Cardinality-ℕ n X)
@@ -787,14 +787,14 @@ module _
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
         ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
-        ( Type-With-Cardinality-ℕ-Group (lsuc lzero ⊔ l) 2)
+        ( Type-With-Cardinality-ℕ-Group (lone ⊔ l) 2)
         ( comp-hom-Group
           ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
           ( Type-With-Cardinality-ℕ-Group l (n +ℕ 2))
-          ( Type-With-Cardinality-ℕ-Group (lsuc lzero ⊔ l) 2)
+          ( Type-With-Cardinality-ℕ-Group (lone ⊔ l) 2)
           ( hom-group-hom-Concrete-Group
             ( Type-With-Cardinality-ℕ-Concrete-Group l (n +ℕ 2))
-            ( Type-With-Cardinality-ℕ-Concrete-Group (lsuc lzero ⊔ l) 2)
+            ( Type-With-Cardinality-ℕ-Concrete-Group (lone ⊔ l) 2)
             ( simpson-delooping-sign (n +ℕ 2)))
           ( hom-inv-iso-Group
             ( Type-With-Cardinality-ℕ-Group l (n +ℕ 2))
@@ -804,11 +804,11 @@ module _
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
         ( symmetric-Group (Fin-Set (n +ℕ 2)))
-        ( Type-With-Cardinality-ℕ-Group (lsuc lzero ⊔ l) 2)
+        ( Type-With-Cardinality-ℕ-Group (lone ⊔ l) 2)
         ( comp-hom-Group
           ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
-          ( Type-With-Cardinality-ℕ-Group (lsuc lzero ⊔ l) 2)
+          ( Type-With-Cardinality-ℕ-Group (lone ⊔ l) 2)
           ( symmetric-abstract-type-with-cardinality-ℕ-group-quotient-hom
             ( λ n X → Fin n ≃ type-Type-With-Cardinality-ℕ n X)
             ( sign-comp-equivalence-relation)

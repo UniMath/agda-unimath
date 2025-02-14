@@ -29,7 +29,7 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
 
-  orientation-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
+  orientation-Undirected-Graph : UU (lone ⊔ l1 ⊔ l2)
   orientation-Undirected-Graph =
     ( p : unordered-pair-vertices-Undirected-Graph G) →
     edge-Undirected-Graph G p → type-Type-With-Cardinality-ℕ 2 (pr1 p)

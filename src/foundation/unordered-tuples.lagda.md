@@ -49,7 +49,7 @@ of elements of a type `A` consists of an
 
 ```agda
 unordered-tuple :
-  {l : Level} (n : ℕ) (A : UU l) → UU (lsuc lzero ⊔ l)
+  {l : Level} (n : ℕ) (A : UU l) → UU (lone ⊔ l)
 unordered-tuple n A =
   Σ ( Type-With-Cardinality-ℕ lzero n)
     ( λ X → type-Type-With-Cardinality-ℕ n X → A)

@@ -37,7 +37,7 @@ module _
   vertex-Undirected-Graph : UU l1
   vertex-Undirected-Graph = pr1 G
 
-  unordered-pair-vertices-Undirected-Graph : UU (lsuc lzero ⊔ l1)
+  unordered-pair-vertices-Undirected-Graph : UU (lone ⊔ l1)
   unordered-pair-vertices-Undirected-Graph =
     unordered-pair vertex-Undirected-Graph
 
@@ -53,7 +53,7 @@ module _
   edge-Undirected-Graph : unordered-pair-vertices-Undirected-Graph → UU l2
   edge-Undirected-Graph = pr2 G
 
-  total-edge-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
+  total-edge-Undirected-Graph : UU (lone ⊔ l1 ⊔ l2)
   total-edge-Undirected-Graph =
     Σ unordered-pair-vertices-Undirected-Graph edge-Undirected-Graph
 ```
@@ -80,7 +80,7 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
 
-  graph-Undirected-Graph : Directed-Graph l1 (lsuc lzero ⊔ l1 ⊔ l2)
+  graph-Undirected-Graph : Directed-Graph l1 (lone ⊔ l1 ⊔ l2)
   pr1 graph-Undirected-Graph = vertex-Undirected-Graph G
   pr2 graph-Undirected-Graph x y =
     Σ ( unordered-pair-vertices-Undirected-Graph G)

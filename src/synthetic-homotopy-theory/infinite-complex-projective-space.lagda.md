@@ -22,7 +22,7 @@ open import synthetic-homotopy-theory.circle
 ### `ℂP∞` as the `1`-connected component of the universe at the circle
 
 ```agda
-ℂP∞ : UU (lsuc lzero)
+ℂP∞ : UU lone
 ℂP∞ = Σ (UU lzero) (λ X → type-trunc-Set (𝕊¹ ≃ X))
 
 point-ℂP∞ : ℂP∞

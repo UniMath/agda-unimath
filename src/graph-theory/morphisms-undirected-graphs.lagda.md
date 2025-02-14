@@ -40,7 +40,7 @@ module _
   (G : Undirected-Graph l1 l2) (H : Undirected-Graph l3 l4)
   where
 
-  hom-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  hom-Undirected-Graph : UU (lone ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-Undirected-Graph =
     Σ ( vertex-Undirected-Graph G → vertex-Undirected-Graph H)
       ( λ f →
@@ -108,7 +108,7 @@ module _
   where
 
   htpy-hom-Undirected-Graph :
-    (f g : hom-Undirected-Graph G H) → UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+    (f g : hom-Undirected-Graph G H) → UU (lone ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-hom-Undirected-Graph f g =
     Σ ( vertex-hom-Undirected-Graph G H f ~ vertex-hom-Undirected-Graph G H g)
       ( λ α →

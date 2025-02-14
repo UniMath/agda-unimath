@@ -53,7 +53,7 @@ module _
 
   data
     walk-Undirected-Graph (x : vertex-Undirected-Graph G) :
-      vertex-Undirected-Graph G → UU (l1 ⊔ l2 ⊔ lsuc lzero)
+      vertex-Undirected-Graph G → UU (l1 ⊔ l2 ⊔ lone)
       where
       refl-walk-Undirected-Graph : walk-Undirected-Graph x x
       cons-walk-Undirected-Graph :
@@ -99,9 +99,9 @@ module _
 
   is-edge-on-walk-Undirected-Graph' :
     {y : vertex-Undirected-Graph G} (w : walk-Undirected-Graph G x y) →
-    total-edge-Undirected-Graph G → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    total-edge-Undirected-Graph G → UU (lone ⊔ l1 ⊔ l2)
   is-edge-on-walk-Undirected-Graph' refl-walk-Undirected-Graph e =
-    raise-empty (lsuc lzero ⊔ l1 ⊔ l2)
+    raise-empty (lone ⊔ l1 ⊔ l2)
   is-edge-on-walk-Undirected-Graph' (cons-walk-Undirected-Graph q f w) e =
     ( is-edge-on-walk-Undirected-Graph' w e) +
     ( pair q f ＝ e)
@@ -109,13 +109,13 @@ module _
   is-edge-on-walk-Undirected-Graph :
     {y : vertex-Undirected-Graph G} (w : walk-Undirected-Graph G x y) →
     (p : unordered-pair-vertices-Undirected-Graph G) →
-    edge-Undirected-Graph G p → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    edge-Undirected-Graph G p → UU (lone ⊔ l1 ⊔ l2)
   is-edge-on-walk-Undirected-Graph w p e =
     is-edge-on-walk-Undirected-Graph' w (pair p e)
 
   edge-on-walk-Undirected-Graph :
     {y : vertex-Undirected-Graph G} (w : walk-Undirected-Graph G x y) →
-    UU (lsuc lzero ⊔ l1 ⊔ l2)
+    UU (lone ⊔ l1 ⊔ l2)
   edge-on-walk-Undirected-Graph w =
     Σ ( total-edge-Undirected-Graph G)
       ( λ e → is-edge-on-walk-Undirected-Graph' w e)
@@ -462,7 +462,7 @@ module _
     type-Prop (is-constant-walk-Undirected-Graph-Prop w)
 
   constant-walk-Undirected-Graph :
-    (y : vertex-Undirected-Graph G) → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    (y : vertex-Undirected-Graph G) → UU (lone ⊔ l1 ⊔ l2)
   constant-walk-Undirected-Graph y =
     Σ (walk-Undirected-Graph G x y) is-constant-walk-Undirected-Graph
 

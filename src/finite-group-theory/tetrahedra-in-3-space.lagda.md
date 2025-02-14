@@ -30,7 +30,7 @@ of opposing pairs of edges. There are three such pairs of edges.
 ## Definition
 
 ```agda
-tetrahedron-in-3-space : UU (lsuc lzero)
+tetrahedron-in-3-space : UU lone
 tetrahedron-in-3-space =
   Σ ( Type-With-Cardinality-ℕ lzero 4)
     ( λ X →

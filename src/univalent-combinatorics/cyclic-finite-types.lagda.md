@@ -136,7 +136,7 @@ pr2 (ℤ-Mod-Cyclic-Type k) =
 Fin-Cyclic-Type : (k : ℕ) → Cyclic-Type lzero (succ-ℕ k)
 Fin-Cyclic-Type k = ℤ-Mod-Cyclic-Type (succ-ℕ k)
 
-Cyclic-Type-Pointed-Type : (k : ℕ) → Pointed-Type (lsuc lzero)
+Cyclic-Type-Pointed-Type : (k : ℕ) → Pointed-Type lone
 pr1 (Cyclic-Type-Pointed-Type k) = Cyclic-Type lzero k
 pr2 (Cyclic-Type-Pointed-Type k) = ℤ-Mod-Cyclic-Type k
 ```
@@ -385,7 +385,7 @@ is-0-connected-Cyclic-Type k =
     ( mere-eq-Cyclic-Type k (ℤ-Mod-Cyclic-Type k))
 
 ∞-group-Cyclic-Type :
-  (k : ℕ) → ∞-Group (lsuc lzero)
+  (k : ℕ) → ∞-Group lone
 pr1 (∞-group-Cyclic-Type k) = Cyclic-Type-Pointed-Type k
 pr2 (∞-group-Cyclic-Type k) = is-0-connected-Cyclic-Type k
 
@@ -580,7 +580,7 @@ preserves-concat-equiv-compute-Ω-Cyclic-Type k {p} {q} =
     ( equiv-eq-Cyclic-Type k ( ℤ-Mod-Cyclic-Type k) ( ℤ-Mod-Cyclic-Type k) p)
     ( equiv-eq-Cyclic-Type k ( ℤ-Mod-Cyclic-Type k) ( ℤ-Mod-Cyclic-Type k) q))
 
-type-Ω-Cyclic-Type : (k : ℕ) → UU (lsuc lzero)
+type-Ω-Cyclic-Type : (k : ℕ) → UU lone
 type-Ω-Cyclic-Type k = Id (ℤ-Mod-Cyclic-Type k) (ℤ-Mod-Cyclic-Type k)
 
 is-set-type-Ω-Cyclic-Type : (k : ℕ) → is-set (type-Ω-Cyclic-Type k)
@@ -591,11 +591,11 @@ is-set-type-Ω-Cyclic-Type k =
     ( is-set-ℤ-Mod k)
 
 concrete-group-Cyclic-Type :
-  (k : ℕ) → Concrete-Group (lsuc lzero)
+  (k : ℕ) → Concrete-Group lone
 pr1 (concrete-group-Cyclic-Type k) = ∞-group-Cyclic-Type k
 pr2 (concrete-group-Cyclic-Type k) = is-set-type-Ω-Cyclic-Type k
 
-Ω-Cyclic-Type-Group : (k : ℕ) → Group (lsuc lzero)
+Ω-Cyclic-Type-Group : (k : ℕ) → Group lone
 Ω-Cyclic-Type-Group k =
   loop-space-Group
     ( pair (Cyclic-Type lzero k) (ℤ-Mod-Cyclic-Type k))

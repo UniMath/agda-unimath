@@ -39,7 +39,7 @@ In other words, it maps edges into the
 ```agda
 reflecting-map-Undirected-Graph :
   {l1 l2 l3 : Level} (G : Undirected-Graph l1 l2) (X : UU l3) →
-  UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3)
+  UU (lone ⊔ l1 ⊔ l2 ⊔ l3)
 reflecting-map-Undirected-Graph G X =
   Σ ( vertex-Undirected-Graph G → X)
     ( λ f →

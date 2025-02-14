@@ -28,13 +28,13 @@ if every [decidable subtype](foundation.decidable-subtypes.md) of `X` is either
 ## Definition
 
 ```agda
-is-omniscient-Prop : {l : Level} → UU l → Prop (lsuc lzero ⊔ l)
+is-omniscient-Prop : {l : Level} → UU l → Prop (lone ⊔ l)
 is-omniscient-Prop X =
   Π-Prop
     ( decidable-subtype lzero X)
     ( λ P → is-decidable-Prop (trunc-Prop (type-decidable-subtype P)))
 
-is-omniscient : {l : Level} → UU l → UU (lsuc lzero ⊔ l)
+is-omniscient : {l : Level} → UU l → UU (lone ⊔ l)
 is-omniscient X = type-Prop (is-omniscient-Prop X)
 ```
 

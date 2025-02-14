@@ -32,10 +32,10 @@ module _
   (n : ℕ)
   where
 
-  alternating-Concrete-Group : Concrete-Group (lsuc (lsuc lzero))
+  alternating-Concrete-Group : Concrete-Group ltwo
   alternating-Concrete-Group =
     concrete-group-kernel-hom-Concrete-Group
       ( Type-With-Cardinality-ℕ-Concrete-Group lzero n)
-      ( Type-With-Cardinality-ℕ-Concrete-Group (lsuc lzero) 2)
+      ( Type-With-Cardinality-ℕ-Concrete-Group lone 2)
       ( cartier-delooping-sign n)
 ```

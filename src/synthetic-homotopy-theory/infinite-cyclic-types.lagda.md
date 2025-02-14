@@ -52,7 +52,7 @@ Infinite-Cyclic-Type l = Cyclic-Type l zero-ℕ
 ℤ-Infinite-Cyclic-Type : Infinite-Cyclic-Type lzero
 ℤ-Infinite-Cyclic-Type = ℤ-Mod-Cyclic-Type zero-ℕ
 
-Infinite-Cyclic-Type-Pointed-Type : Pointed-Type (lsuc lzero)
+Infinite-Cyclic-Type-Pointed-Type : Pointed-Type lone
 Infinite-Cyclic-Type-Pointed-Type = Cyclic-Type-Pointed-Type zero-ℕ
 
 module _

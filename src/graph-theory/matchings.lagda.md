@@ -46,7 +46,7 @@ module _
         Σ ( edge-Undirected-Graph G (standard-unordered-pair x y))
           ( λ e → Id (c (standard-unordered-pair x y) e) (inr star)))
 
-  matching : Undirected-Graph l1 l2 → UU (lsuc lzero ⊔ l1 ⊔ l2)
+  matching : Undirected-Graph l1 l2 → UU (lone ⊔ l1 ⊔ l2)
   matching G =
     Σ ( (p : unordered-pair-vertices-Undirected-Graph G) →
         edge-Undirected-Graph G p → Fin 2)
@@ -54,7 +54,7 @@ module _
         ( x : vertex-Undirected-Graph G) →
         is-prop (selected-edges-vertex-Undirected-Graph G c x))
 
-  perfect-matching : Undirected-Graph l1 l2 → UU (lsuc lzero ⊔ l1 ⊔ l2)
+  perfect-matching : Undirected-Graph l1 l2 → UU (lone ⊔ l1 ⊔ l2)
   perfect-matching G =
     Σ ( (p : unordered-pair-vertices-Undirected-Graph G) →
         edge-Undirected-Graph G p → Fin 2)

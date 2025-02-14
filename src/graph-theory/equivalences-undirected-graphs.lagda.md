@@ -50,7 +50,7 @@ module _
   (G : Undirected-Graph l1 l2) (H : Undirected-Graph l3 l4)
   where
 
-  equiv-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  equiv-Undirected-Graph : UU (lone ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
   equiv-Undirected-Graph =
     Σ ( vertex-Undirected-Graph G ≃ vertex-Undirected-Graph H)
       ( λ f →
@@ -175,7 +175,7 @@ module _
   where
 
   htpy-equiv-Undirected-Graph :
-    (f g : equiv-Undirected-Graph G H) → UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+    (f g : equiv-Undirected-Graph G H) → UU (lone ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-equiv-Undirected-Graph f g =
     htpy-hom-Undirected-Graph G H
       ( hom-equiv-Undirected-Graph G H f)

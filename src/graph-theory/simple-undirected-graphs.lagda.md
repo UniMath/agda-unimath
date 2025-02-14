@@ -35,7 +35,7 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
 
-  is-simple-Undirected-Graph-Prop : Prop (lsuc lzero ⊔ l1 ⊔ l2)
+  is-simple-Undirected-Graph-Prop : Prop (lone ⊔ l1 ⊔ l2)
   is-simple-Undirected-Graph-Prop =
     product-Prop
       ( Π-Prop
@@ -49,7 +49,7 @@ module _
         ( unordered-pair-vertices-Undirected-Graph G)
         ( λ p → is-prop-Prop (edge-Undirected-Graph G p)))
 
-  is-simple-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
+  is-simple-Undirected-Graph : UU (lone ⊔ l1 ⊔ l2)
   is-simple-Undirected-Graph = type-Prop is-simple-Undirected-Graph-Prop
 
   is-prop-is-simple-Undirected-Graph : is-prop is-simple-Undirected-Graph

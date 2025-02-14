@@ -19,6 +19,6 @@ open import univalent-combinatorics.steiner-systems
 ## Definition
 
 ```agda
-Steiner-Triple-System : ℕ → UU (lsuc lzero)
+Steiner-Triple-System : ℕ → UU lone
 Steiner-Triple-System n = Steiner-System 2 3 n
 ```

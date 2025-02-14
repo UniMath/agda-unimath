@@ -23,7 +23,7 @@ open import univalent-combinatorics.finite-types
 ### Cubes
 
 ```agda
-cube : ℕ → UU (lsuc lzero)
+cube : ℕ → UU lone
 cube k =
   Σ ( Type-With-Cardinality-ℕ lzero k)
     ( λ X → type-Type-With-Cardinality-ℕ k X →

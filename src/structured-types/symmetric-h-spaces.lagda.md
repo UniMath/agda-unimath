@@ -31,7 +31,7 @@ on `A`.
 
 ```agda
 symmetric-H-Space :
-  {l1 : Level} (A : Pointed-Type l1) → UU (lsuc lzero ⊔ l1)
+  {l1 : Level} (A : Pointed-Type l1) → UU (lone ⊔ l1)
 symmetric-H-Space A =
   symmetric-element-Involutive-Type (h-space-Involutive-Type A)
 ```

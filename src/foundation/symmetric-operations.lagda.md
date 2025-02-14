@@ -79,7 +79,7 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  symmetric-operation : UU (lsuc lzero ⊔ l1 ⊔ l2)
+  symmetric-operation : UU (lone ⊔ l1 ⊔ l2)
   symmetric-operation = unordered-pair A → B
 
   map-symmetric-operation : symmetric-operation → A → A → B

@@ -35,7 +35,7 @@ module _
   {l1 l2 : Level} (k : ℕ) (G : Undirected-Graph l1 l2)
   where
 
-  cycle-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
+  cycle-Undirected-Graph : UU (lone ⊔ l1 ⊔ l2)
   cycle-Undirected-Graph =
     Σ (Polygon k) (λ H → emb-Undirected-Graph (undirected-graph-Polygon k H) G)
 ```

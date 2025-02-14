@@ -30,7 +30,7 @@ distinguished subset of the available (unbonded) electrons of the carbon atoms.
 ## Definition
 
 ```agda
-alcohol : UU (lsuc lzero)
+alcohol : UU lone
 alcohol =
   Σ ( hydrocarbon lzero lzero)
     ( λ X →

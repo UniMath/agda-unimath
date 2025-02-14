@@ -60,7 +60,7 @@ a map `X → A`.
 ### The definition of unordered pairs
 
 ```agda
-unordered-pair : {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)
+unordered-pair : {l : Level} (A : UU l) → UU (lone ⊔ l)
 unordered-pair A = Σ (2-Element-Type lzero) (λ X → type-2-Element-Type X → A)
 ```
 
@@ -525,7 +525,7 @@ id-equiv-standard-unordered-pair x y =
   ( eq-Eq-refl-unordered-pair (standard-unordered-pair x y))
 
 unordered-distinct-pair :
-  {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)
+  {l : Level} (A : UU l) → UU (lone ⊔ l)
 unordered-distinct-pair A =
   Σ (Type-With-Cardinality-ℕ lzero 2) (λ X → pr1 X ↪ A)
 ```

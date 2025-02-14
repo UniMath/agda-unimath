@@ -35,7 +35,7 @@ module _
   vertex-Hypergraph : UU l1
   vertex-Hypergraph = pr1 G
 
-  unordered-tuple-vertices-Hypergraph : UU (lsuc lzero ⊔ l1)
+  unordered-tuple-vertices-Hypergraph : UU (lone ⊔ l1)
   unordered-tuple-vertices-Hypergraph = unordered-tuple k vertex-Hypergraph
 
   simplex-Hypergraph : unordered-tuple-vertices-Hypergraph → UU l2

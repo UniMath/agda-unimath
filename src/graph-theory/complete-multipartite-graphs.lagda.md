@@ -60,7 +60,7 @@ module _
       vertex-finite-type-complete-multipartite-Finite-Undirected-Graph
 
   unordered-pair-vertices-complete-multipartite-Finite-Undirected-Graph :
-    UU (lsuc lzero ⊔ l1 ⊔ l2)
+    UU (lone ⊔ l1 ⊔ l2)
   unordered-pair-vertices-complete-multipartite-Finite-Undirected-Graph =
     unordered-pair vertex-complete-multipartite-Finite-Undirected-Graph
 

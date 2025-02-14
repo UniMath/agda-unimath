@@ -33,7 +33,7 @@ is branched, thus has a different geometry).
 ## Definition
 
 ```agda
-n-alkene : {l1 l2 : Level} → hydrocarbon l1 l2 → ℕ → UU (lsuc lzero ⊔ l1 ⊔ l2)
+n-alkene : {l1 l2 : Level} → hydrocarbon l1 l2 → ℕ → UU (lone ⊔ l1 ⊔ l2)
 n-alkene H n =
   Σ (Type-With-Cardinality-ℕ lzero n) λ carbons →
     Σ ( type-Type-With-Cardinality-ℕ n carbons ↪ vertex-hydrocarbon H)

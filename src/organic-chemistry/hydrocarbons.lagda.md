@@ -90,7 +90,7 @@ module _
   is-finite-vertex-hydrocarbon =
     is-finite-vertex-Finite-Undirected-Graph finite-graph-hydrocarbon
 
-  unordered-pair-vertices-hydrocarbon : UU (lsuc lzero ⊔ l1)
+  unordered-pair-vertices-hydrocarbon : UU (lone ⊔ l1)
   unordered-pair-vertices-hydrocarbon = unordered-pair vertex-hydrocarbon
 
   edge-hydrocarbon-Finite-Type :

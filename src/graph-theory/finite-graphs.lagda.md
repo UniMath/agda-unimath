@@ -50,7 +50,7 @@ module _
   vertex-Finite-Undirected-Graph : UU l1
   vertex-Finite-Undirected-Graph = type-Finite-Type (pr1 G)
 
-  unordered-pair-vertices-Finite-Undirected-Graph : UU (lsuc lzero ⊔ l1)
+  unordered-pair-vertices-Finite-Undirected-Graph : UU (lone ⊔ l1)
   unordered-pair-vertices-Finite-Undirected-Graph =
     unordered-pair vertex-Finite-Undirected-Graph
 
@@ -68,7 +68,7 @@ module _
   is-finite-edge-Finite-Undirected-Graph p =
     is-finite-type-Finite-Type (pr2 G p)
 
-  total-edge-Finite-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
+  total-edge-Finite-Undirected-Graph : UU (lone ⊔ l1 ⊔ l2)
   total-edge-Finite-Undirected-Graph =
     Σ unordered-pair-vertices-Finite-Undirected-Graph
       edge-Finite-Undirected-Graph
@@ -101,7 +101,7 @@ degree of x.
 ```agda
 incident-edges-vertex-Finite-Undirected-Graph :
   {l1 l2 : Level} (G : Finite-Undirected-Graph l1 l2)
-  (x : vertex-Finite-Undirected-Graph G) → UU (lsuc lzero ⊔ l1)
+  (x : vertex-Finite-Undirected-Graph G) → UU (lone ⊔ l1)
 incident-edges-vertex-Finite-Undirected-Graph G x =
   Σ ( unordered-pair (vertex-Finite-Undirected-Graph G))
     ( λ p → fiber (element-unordered-pair p) x)

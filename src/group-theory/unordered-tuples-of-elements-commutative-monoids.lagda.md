@@ -21,7 +21,7 @@ open import group-theory.commutative-monoids
 
 ```agda
 unordered-tuple-Commutative-Monoid :
-  {l : Level} (n : ℕ) (M : Commutative-Monoid l) → UU (lsuc lzero ⊔ l)
+  {l : Level} (n : ℕ) (M : Commutative-Monoid l) → UU (lone ⊔ l)
 unordered-tuple-Commutative-Monoid n M =
   unordered-tuple n (type-Commutative-Monoid M)
 

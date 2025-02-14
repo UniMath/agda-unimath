@@ -148,10 +148,10 @@ module _
 ### The impredicative encoding of the empty type
 
 ```agda
-impredicative-empty-Prop : Prop (lsuc lzero)
+impredicative-empty-Prop : Prop lone
 impredicative-empty-Prop = ∀' (Prop lzero) (λ P → P)
 
-type-impredicative-empty-Prop : UU (lsuc lzero)
+type-impredicative-empty-Prop : UU lone
 type-impredicative-empty-Prop = type-Prop impredicative-empty-Prop
 
 is-empty-impredicative-empty-Prop :

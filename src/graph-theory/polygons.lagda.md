@@ -46,7 +46,7 @@ presentation of the [dihedral group](group-theory.dihedral-groups.md) `Dₖ`.
 vertex-standard-polygon-Undirected-Graph : ℕ → UU lzero
 vertex-standard-polygon-Undirected-Graph k = ℤ-Mod k
 
-unordered-pair-vertices-standard-polygon-Undirected-Graph : ℕ → UU (lsuc lzero)
+unordered-pair-vertices-standard-polygon-Undirected-Graph : ℕ → UU lone
 unordered-pair-vertices-standard-polygon-Undirected-Graph k =
   unordered-pair (vertex-standard-polygon-Undirected-Graph k)
 
@@ -70,7 +70,7 @@ pr2 (standard-polygon-Undirected-Graph k) =
 ### The type of all polygons with `k` vertices
 
 ```agda
-Polygon : ℕ → UU (lsuc lzero)
+Polygon : ℕ → UU lone
 Polygon k =
   Σ ( Undirected-Graph lzero lzero)
     ( mere-equiv-Undirected-Graph (standard-polygon-Undirected-Graph k))
@@ -91,7 +91,7 @@ module _
   vertex-Polygon : UU lzero
   vertex-Polygon = vertex-Undirected-Graph undirected-graph-Polygon
 
-  unordered-pair-vertices-Polygon : UU (lsuc lzero)
+  unordered-pair-vertices-Polygon : UU lone
   unordered-pair-vertices-Polygon = unordered-pair vertex-Polygon
 
   edge-Polygon : unordered-pair-vertices-Polygon → UU lzero

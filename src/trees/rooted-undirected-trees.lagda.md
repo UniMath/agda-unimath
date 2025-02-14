@@ -103,7 +103,7 @@ module _
     ( unit)
 
   unordered-pair-of-nodes-rooted-tree-Forest-Rooted-Undirected-Trees :
-    UU (lsuc lzero ⊔ l1 ⊔ l2)
+    UU (lone ⊔ l1 ⊔ l2)
   unordered-pair-of-nodes-rooted-tree-Forest-Rooted-Undirected-Trees =
     unordered-pair node-rooted-tree-Forest-Rooted-Undirected-Trees
 ```

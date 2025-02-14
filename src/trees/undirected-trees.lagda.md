@@ -40,7 +40,7 @@ x to y is contractible for any two vertices x and y.
 
 ```agda
 is-tree-Undirected-Graph :
-  {l1 l2 : Level} (G : Undirected-Graph l1 l2) → UU (lsuc lzero ⊔ l1 ⊔ l2)
+  {l1 l2 : Level} (G : Undirected-Graph l1 l2) → UU (lone ⊔ l1 ⊔ l2)
 is-tree-Undirected-Graph G =
   (x y : vertex-Undirected-Graph G) → is-contr (trail-Undirected-Graph G x y)
 
@@ -62,7 +62,7 @@ module _
   node-Undirected-Tree =
     vertex-Undirected-Graph undirected-graph-Undirected-Tree
 
-  unordered-pair-nodes-Undirected-Tree : UU (lsuc lzero ⊔ l1)
+  unordered-pair-nodes-Undirected-Tree : UU (lone ⊔ l1)
   unordered-pair-nodes-Undirected-Tree =
     unordered-pair-vertices-Undirected-Graph undirected-graph-Undirected-Tree
 
@@ -70,7 +70,7 @@ module _
   edge-Undirected-Tree = edge-Undirected-Graph undirected-graph-Undirected-Tree
 
   walk-Undirected-Tree :
-    node-Undirected-Tree → node-Undirected-Tree → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    node-Undirected-Tree → node-Undirected-Tree → UU (lone ⊔ l1 ⊔ l2)
   walk-Undirected-Tree = walk-Undirected-Graph undirected-graph-Undirected-Tree
 
   is-node-on-walk-Undirected-Tree :
@@ -92,13 +92,13 @@ module _
   is-edge-on-walk-Undirected-Tree :
     {x y : node-Undirected-Tree} (w : walk-Undirected-Tree x y)
     (p : unordered-pair-nodes-Undirected-Tree) →
-    edge-Undirected-Tree p → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    edge-Undirected-Tree p → UU (lone ⊔ l1 ⊔ l2)
   is-edge-on-walk-Undirected-Tree =
     is-edge-on-walk-Undirected-Graph undirected-graph-Undirected-Tree
 
   edge-on-walk-Undirected-Tree :
     {x y : node-Undirected-Tree} →
-    walk-Undirected-Tree x y → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    walk-Undirected-Tree x y → UU (lone ⊔ l1 ⊔ l2)
   edge-on-walk-Undirected-Tree =
     edge-on-walk-Undirected-Graph undirected-graph-Undirected-Tree
 
@@ -111,12 +111,12 @@ module _
 
   is-trail-walk-Undirected-Tree :
     {x y : node-Undirected-Tree} →
-    walk-Undirected-Tree x y → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    walk-Undirected-Tree x y → UU (lone ⊔ l1 ⊔ l2)
   is-trail-walk-Undirected-Tree =
     is-trail-walk-Undirected-Graph undirected-graph-Undirected-Tree
 
   trail-Undirected-Tree :
-    node-Undirected-Tree → node-Undirected-Tree → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    node-Undirected-Tree → node-Undirected-Tree → UU (lone ⊔ l1 ⊔ l2)
   trail-Undirected-Tree =
     trail-Undirected-Graph undirected-graph-Undirected-Tree
 
@@ -151,13 +151,13 @@ module _
   is-edge-on-trail-Undirected-Tree :
     {x y : node-Undirected-Tree} (w : trail-Undirected-Tree x y)
     (p : unordered-pair-nodes-Undirected-Tree) →
-    edge-Undirected-Tree p → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    edge-Undirected-Tree p → UU (lone ⊔ l1 ⊔ l2)
   is-edge-on-trail-Undirected-Tree =
     is-edge-on-trail-Undirected-Graph undirected-graph-Undirected-Tree
 
   edge-on-trail-Undirected-Tree :
     {x y : node-Undirected-Tree} →
-    trail-Undirected-Tree x y → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    trail-Undirected-Tree x y → UU (lone ⊔ l1 ⊔ l2)
   edge-on-trail-Undirected-Tree =
     edge-on-trail-Undirected-Graph undirected-graph-Undirected-Tree
 
@@ -174,7 +174,7 @@ module _
     is-path-walk-Undirected-Graph undirected-graph-Undirected-Tree
 
   path-Undirected-Tree :
-    node-Undirected-Tree → node-Undirected-Tree → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    node-Undirected-Tree → node-Undirected-Tree → UU (lone ⊔ l1 ⊔ l2)
   path-Undirected-Tree = path-Undirected-Graph undirected-graph-Undirected-Tree
 
   walk-path-Undirected-Tree :

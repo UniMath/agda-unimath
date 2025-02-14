@@ -36,7 +36,7 @@ module _
   {l1 l2 : Level} (k : ℕ) (G : Undirected-Graph l1 l2)
   where
 
-  circuit-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
+  circuit-Undirected-Graph : UU (lone ⊔ l1 ⊔ l2)
   circuit-Undirected-Graph =
     Σ ( Polygon k)
       ( λ H →

@@ -50,7 +50,7 @@ decomposition of `n`.
 
 ```agda
 concrete-group-cycle-prime-decomposition-ℕ :
-  (n : ℕ) → leq-ℕ 1 n → Concrete-Group (lsuc lzero)
+  (n : ℕ) → leq-ℕ 1 n → Concrete-Group lone
 concrete-group-cycle-prime-decomposition-ℕ n H =
   iterated-product-Concrete-Group
     ( length-array
@@ -65,7 +65,7 @@ concrete-group-cycle-prime-decomposition-ℕ n H =
           ( list-fundamental-theorem-arithmetic-ℕ n H))))
 
 cycle-prime-decomposition-ℕ :
-  (n : ℕ) → leq-ℕ 1 n → UU (lsuc lzero)
+  (n : ℕ) → leq-ℕ 1 n → UU lone
 cycle-prime-decomposition-ℕ n H =
   iterated-product-lists
     ( map-list (Cyclic-Type lzero) (list-fundamental-theorem-arithmetic-ℕ n H))

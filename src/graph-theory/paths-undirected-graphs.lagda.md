@@ -46,7 +46,7 @@ module _
     is-injective (vertex-vertex-on-walk-Undirected-Graph G w)
 
   path-Undirected-Graph :
-    (x y : vertex-Undirected-Graph G) → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    (x y : vertex-Undirected-Graph G) → UU (lone ⊔ l1 ⊔ l2)
   path-Undirected-Graph x y =
     Σ (walk-Undirected-Graph G x y) is-path-walk-Undirected-Graph
 

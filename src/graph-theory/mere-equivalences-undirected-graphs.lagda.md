@@ -33,10 +33,10 @@ module _
   (G : Undirected-Graph l1 l2) (H : Undirected-Graph l3 l4)
   where
 
-  mere-equiv-Undirected-Graph-Prop : Prop (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  mere-equiv-Undirected-Graph-Prop : Prop (lone ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
   mere-equiv-Undirected-Graph-Prop = trunc-Prop (equiv-Undirected-Graph G H)
 
-  mere-equiv-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  mere-equiv-Undirected-Graph : UU (lone ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
   mere-equiv-Undirected-Graph = type-Prop mere-equiv-Undirected-Graph-Prop
 
   is-prop-mere-equiv-Undirected-Graph : is-prop mere-equiv-Undirected-Graph

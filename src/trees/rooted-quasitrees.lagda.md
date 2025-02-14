@@ -28,7 +28,7 @@ unique trail from `r` to `x`.
 ```agda
 is-rooted-quasitree-Undirected-Graph :
   {l1 l2 : Level} (G : Undirected-Graph l1 l2) →
-  vertex-Undirected-Graph G → UU (lsuc lzero ⊔ l1 ⊔ l2)
+  vertex-Undirected-Graph G → UU (lone ⊔ l1 ⊔ l2)
 is-rooted-quasitree-Undirected-Graph G r =
   (x : vertex-Undirected-Graph G) → is-contr (trail-Undirected-Graph G r x)
 

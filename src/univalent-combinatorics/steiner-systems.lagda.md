@@ -32,7 +32,7 @@ in `P`. A basic example is the Fano plane, which is a Steiner system of type
 ### Steiner systems
 
 ```agda
-Steiner-System : ℕ → ℕ → ℕ → UU (lsuc lzero)
+Steiner-System : ℕ → ℕ → ℕ → UU lone
 Steiner-System t k n =
   Σ ( Type-With-Cardinality-ℕ lzero n)
     ( λ X →

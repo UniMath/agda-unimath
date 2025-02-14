@@ -72,7 +72,7 @@ equiv-face-cube k X Y e d a =
           ( pair (dim-cube-Type-With-Cardinality-ℕ (succ-ℕ k) X) d) d')))
 
 cube-with-labeled-faces :
-  (k : ℕ) → UU (lsuc lzero)
+  (k : ℕ) → UU lone
 cube-with-labeled-faces k =
   Σ ( cube (succ-ℕ k))
     ( λ X →

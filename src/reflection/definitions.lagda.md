@@ -216,7 +216,7 @@ _ :
   sort-Term-Agda (universe-Sort-Agda (variable-Term-Agda 0 nil))
 _ = refl
 
-_ : quoteTerm (UU (lsuc lzero)) ＝ sort-Term-Agda (fixed-universe-Sort-Agda 1)
+_ : quoteTerm (UU lone) ＝ sort-Term-Agda (fixed-universe-Sort-Agda 1)
 _ = refl
 
 _ : quoteTerm (UUω) ＝ sort-Term-Agda (fixed-large-universe-Sort-Agda 0)

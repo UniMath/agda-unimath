@@ -43,7 +43,7 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
 
-  eulerian-circuit-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
+  eulerian-circuit-Undirected-Graph : UU (lone ⊔ l1 ⊔ l2)
   eulerian-circuit-Undirected-Graph =
     Σ ( ℕ)
       ( λ k →

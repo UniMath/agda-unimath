@@ -61,7 +61,7 @@ Main-Class-Latin-Hypercube l1 l2 n =
 ### The type of main classes of Latin hypercubes of fixed finite order
 
 ```agda
-Main-Class-Latin-Hypercube-of-Order : (n m : ℕ) → UU (lsuc lzero)
+Main-Class-Latin-Hypercube-of-Order : (n m : ℕ) → UU lone
 Main-Class-Latin-Hypercube-of-Order n m =
   Σ ( unordered-tuple (succ-ℕ n) (Type-With-Cardinality-ℕ lzero m))
     ( λ A →

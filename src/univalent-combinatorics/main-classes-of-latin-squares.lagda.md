@@ -42,7 +42,7 @@ Main-Class-Latin-Squares l1 l2 = Main-Class-Latin-Hypercube l1 l2 2
 ### Main classes of latin squares of fixed finite order
 
 ```agda
-Main-Class-Latin-Square-of-Order : (m : ℕ) → UU (lsuc lzero)
+Main-Class-Latin-Square-of-Order : (m : ℕ) → UU lone
 Main-Class-Latin-Square-of-Order m =
   Main-Class-Latin-Hypercube-of-Order 2 m
 ```

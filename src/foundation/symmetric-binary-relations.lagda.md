@@ -185,7 +185,7 @@ module _
 
   hom-Symmetric-Relation :
     Symmetric-Relation l2 A → Symmetric-Relation l3 A →
-    UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3)
+    UU (lone ⊔ l1 ⊔ l2 ⊔ l3)
   hom-Symmetric-Relation R S =
     (p : unordered-pair A) → R p → S p
 

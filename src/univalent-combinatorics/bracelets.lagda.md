@@ -24,7 +24,7 @@ open import univalent-combinatorics.standard-finite-types
 ### Bracelets
 
 ```agda
-bracelet : ℕ → ℕ → UU (lsuc lzero)
+bracelet : ℕ → ℕ → UU lone
 bracelet m n = Σ (Polygon m) (λ X → vertex-Polygon m X → Fin n)
 ```
 

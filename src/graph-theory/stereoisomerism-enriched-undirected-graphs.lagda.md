@@ -39,7 +39,7 @@ module _
   where
 
   stereoisomerism-Enriched-Undirected-Graph :
-    UU (lsuc lzero ⊔ l1 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
+    UU (lone ⊔ l1 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
   stereoisomerism-Enriched-Undirected-Graph =
     Σ ( equiv-Undirected-Graph
         ( undirected-graph-Enriched-Undirected-Graph A B G)
