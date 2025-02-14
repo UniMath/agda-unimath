@@ -60,17 +60,17 @@ This follows parts of Section 11 in {{#cite BauerTaylor2009}}.
 
 ```agda
 module _
-  {l1 l2 : Level} (L : lower-ℝ l1) (U : upper-ℝ l2)
+  {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
   where
 
-  arithmetically-located-lower-upper-ℝ : UU l
+  arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
   arithmetically-located-lower-upper-ℝ =
     (ε⁺ : ℚ⁺) →
     exists
       ( ℚ × ℚ)
       ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
-        cut-lower-ℝ L p ∧
-        cut-upper-ℝ U q)
+        cut-lower-ℝ x p ∧
+        cut-upper-ℝ y q)
 ```
 
 ## Properties
