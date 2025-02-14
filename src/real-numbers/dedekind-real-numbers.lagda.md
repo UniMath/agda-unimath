@@ -50,22 +50,38 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Idea
 
-A Dedekind real number consists of a [pair](foundation.dependent-pair-types.md)
-`(lx , uy)` of a
-[lower Dedekind real](real-numbers.lower-dedekind-real-numbers.md) and an
-[upper Dedekind real](real-numbers.upper-dedekind-real-numbers.md) that also
-satisfy the following conditions:
+A {{#concept "Dedekind real number" WD="real number" WDID=Q12916 Agda=ℝ}} `x`
+consists of a [pair](foundation.dependent-pair-types.md) of _cuts_ `(L , U)` of
+[rational numbers](elementary-number-theory.rational-numbers.md), a
+[lower Dedekind cut](real-numbers.lower-dedekind-real-numbers.md) `L` and an
+[upper Dedekind cut](real-numbers.upper-dedekind-real-numbers.md) `U`.
 
-1. _Disjointness_. The cuts of `lx` and `uy` are disjoint subsets of `ℚ`.
-2. _Locatedness_. If `q < r` then `q` is in the cut of `lx` or `r` is in the cut
-   of `uy`.
+A lower Dedekind cut `L` is a subtype of the rational numbers that is
 
-The Dedekind real numbers will be taken as the standard definition of the real
-numbers in the agda-unimath library.
+1. [Inhabited](foundation.inhabited-subtypes.md), meaning it has at least one
+   element.
+2. Rounded, meaning that `q ∈ L`
+   [if and only if](foundation.logical-equivalences.md) there exists `r`, with
+   `q < r` and `r ∈ L`.
+
+An upper Dedekind cut is analogous, but must be rounded "in the other
+direction": `q ∈ U` if and only if there is a `p < q` where `p ∈ U`.
+
+These cuts present lower and upper bounds on the Dedekind real number, and must
+satisfy the conditions
+
+1. _Disjointness_. The cuts `lx` and `uy` are disjoint subsets of `ℚ`.
+2. _Locatedness_. If `q < r` then `q` is in the cut `L` or `r` is in the cut
+   `U`.
+
+The
+{{#concept "collection of all Dedekind real numbers" WD="set of real numbers" WDID=Q1174982 Agda=ℝ}}
+is denoted `ℝ`. The Dedekind real numbers will be taken as the standard
+definition of the real numbers in the agda-unimath library.
 
 ## Definition
 
-### Dedekind real numbers
+### Dedekind cuts
 
 ```agda
 module _
@@ -439,10 +455,11 @@ module _
   (lx : lower-ℝ l)
   where
 
-  has-upper-real-Prop : Prop (lsuc l)
-  pr1 has-upper-real-Prop = Σ (upper-ℝ l) (is-dedekind-lower-upper-ℝ lx)
-  pr2 has-upper-real-Prop =
-    ( is-prop-all-elements-equal)
+  is-dedekind-cut-lower-ℝ-Prop : Prop (lsuc l)
+  pr1 is-dedekind-cut-lower-ℝ-Prop =
+    Σ (upper-ℝ l) (is-dedekind-lower-upper-ℝ lx)
+  pr2 is-dedekind-cut-lower-ℝ-Prop =
+    is-prop-all-elements-equal
     ( λ uy uy' →
       eq-type-subtype
         ( is-dedekind-prop-lower-upper-ℝ lx)
@@ -452,7 +469,7 @@ module _
           ( eq-upper-cut-eq-lower-cut-ℝ (lx , uy) (lx , uy') refl)))
 
 is-emb-lower-real : {l : Level} → is-emb (lower-real-ℝ {l})
-is-emb-lower-real = is-emb-inclusion-subtype has-upper-real-Prop
+is-emb-lower-real = is-emb-inclusion-subtype is-dedekind-cut-lower-ℝ-Prop
 ```
 
 ### Two real numbers with the same lower/upper real are equal
@@ -463,7 +480,7 @@ module _
   where
 
   eq-eq-lower-real-ℝ : lower-real-ℝ x ＝ lower-real-ℝ y → x ＝ y
-  eq-eq-lower-real-ℝ = eq-type-subtype has-upper-real-Prop
+  eq-eq-lower-real-ℝ = eq-type-subtype is-dedekind-cut-lower-ℝ-Prop
 
   eq-eq-upper-real-ℝ : upper-real-ℝ x ＝ upper-real-ℝ y → x ＝ y
   eq-eq-upper-real-ℝ = eq-eq-lower-real-ℝ ∘ (eq-lower-real-eq-upper-real-ℝ x y)

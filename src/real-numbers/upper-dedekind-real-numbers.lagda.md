@@ -38,10 +38,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-An {{#concept "upper Dedekind cut" Agda=is-upper-dedekind-cut}} consists of a
-[subtype](foundation-core.subtypes.md) `U` of
-[the rational numbers](elementary-number-theory.rational-numbers.md) `ℚ`,
-satisfying the following two conditions:
+A [subtype](foundation-core.subtypes.md) `U` of
+[the rational numbers](elementary-number-theory.rational-numbers.md) is an
+{{#concept "upper Dedekind cut" Agda=is-upper-dedekind-cut}} if it satisfies the
+following two conditions:
 
 1. _Inhabitedness_. `U` is [inhabited](foundation.inhabited-subtypes.md).
 2. _Roundedness_. A rational number `q` is in `U`

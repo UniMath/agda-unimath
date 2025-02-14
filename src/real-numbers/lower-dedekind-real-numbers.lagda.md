@@ -38,10 +38,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "lower Dedekind cut" Agda=is-lower-dedekind-cut}} consists of a
-[subtype](foundation-core.subtypes.md) `L` of
-[the rational numbers](elementary-number-theory.rational-numbers.md) `ℚ`,
-satisfying the following two conditions:
+A [subtype](foundation-core.subtypes.md) `L` of
+[the rational numbers](elementary-number-theory.rational-numbers.md) is a
+{{#concept "lower Dedekind cut" Agda=is-lower-dedekind-cut}} if it satisfies the
+following two conditions:
 
 1. _Inhabitedness_. `L` is [inhabited](foundation.inhabited-subtypes.md).
 2. _Roundedness_. A rational number `q` is in `L`
