@@ -60,7 +60,7 @@ This follows parts of Section 11 in {{#cite BauerTaylor2009}}.
 
 ```agda
 module _
-  {l : Level} (L : lower-ℝ l) (U : upper-ℝ l)
+  {l1 l2 : Level} (L : lower-ℝ l1) (U : upper-ℝ l2)
   where
 
   arithmetically-located-lower-upper-ℝ : UU l
@@ -82,7 +82,7 @@ located.
 
 ```agda
 module _
-  {l : Level} (x : lower-ℝ l) (y : upper-ℝ l)
+  {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
   where
 
   abstract
