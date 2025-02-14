@@ -15,6 +15,7 @@ open import foundation.universe-levels
 open import globular-types.binary-globular-maps
 open import globular-types.composition-structure-globular-types
 open import globular-types.globular-types
+open import globular-types.points-globular-types
 ```
 
 </details>
@@ -69,6 +70,11 @@ Morphisms in a noncoherent ω-semiprecategory:
     (x y : obj-Noncoherent-ω-Semiprecategory) → UU l2
   hom-Noncoherent-ω-Semiprecategory =
     1-cell-Globular-Type globular-type-Noncoherent-ω-Semiprecategory
+
+  hom-point-Noncoherent-ω-Semiprecategory :
+    (x y : obj-Noncoherent-ω-Semiprecategory) → UU l2
+  hom-point-Noncoherent-ω-Semiprecategory x y =
+    point-Globular-Type (hom-globular-type-Noncoherent-ω-Semiprecategory x y)
 ```
 
 Composition in a noncoherent ω-semiprecategory:

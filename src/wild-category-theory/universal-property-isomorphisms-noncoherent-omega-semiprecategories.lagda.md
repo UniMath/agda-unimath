@@ -49,8 +49,7 @@ every object `z`.
 module _
   {l1 l2 : Level} {𝒞 : Noncoherent-ω-Semiprecategory l1 l2}
   {x y : obj-Noncoherent-ω-Semiprecategory 𝒞}
-  (f :
-    point-Globular-Type (hom-globular-type-Noncoherent-ω-Semiprecategory 𝒞 x y))
+  (f : hom-point-Noncoherent-ω-Semiprecategory 𝒞 x y)
   where
 
   universal-property-iso-Noncoherent-ω-Semiprecategory : UU (l1 ⊔ l2)
