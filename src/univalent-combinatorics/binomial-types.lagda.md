@@ -388,7 +388,8 @@ equiv-binomial-type e f =
 ### Computation of the number of elements of the binomial type `((Fin n) (Fin m))`
 
 The computation of the number of subsets of a given cardinality of a finite set
-is the 58th theorem on [Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+is the [58th](literature.100-theorems.md#58) theorem on
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ```agda
