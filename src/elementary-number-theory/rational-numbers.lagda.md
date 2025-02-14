@@ -155,14 +155,15 @@ mediant-ℚ x y =
 ### The rational images of two similar integer fractions are equal
 
 ```agda
-eq-ℚ-sim-fraction-ℤ :
-  (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) →
-  rational-fraction-ℤ x ＝ rational-fraction-ℤ y
-eq-ℚ-sim-fraction-ℤ x y H =
-  eq-pair-Σ'
-    ( pair
-      ( unique-reduce-fraction-ℤ x y H)
-      ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (reduce-fraction-ℤ y))))
+abstract
+  eq-ℚ-sim-fraction-ℤ :
+    (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) →
+    rational-fraction-ℤ x ＝ rational-fraction-ℤ y
+  eq-ℚ-sim-fraction-ℤ x y H =
+    eq-pair-Σ'
+      ( pair
+        ( unique-reduce-fraction-ℤ x y H)
+        ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (reduce-fraction-ℤ y))))
 ```
 
 ### The type of rationals is a set
