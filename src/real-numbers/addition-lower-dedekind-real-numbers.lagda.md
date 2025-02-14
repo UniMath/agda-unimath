@@ -207,3 +207,9 @@ module _
         ( cut-lower-ℝ y)
         ( cut-lower-ℝ z))
 ```
+
+### Unit laws for the addition of lower Dedekind real numbers
+
+```agda
+
+```
