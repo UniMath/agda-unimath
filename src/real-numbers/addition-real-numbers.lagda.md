@@ -11,7 +11,8 @@ module real-numbers.addition-real-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
-
+open import elementary-number-theory.additive-group-of-rational-numbers
+open import group-theory.groups
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
@@ -207,13 +208,38 @@ right-unit-law-add-ℝ x =
 ### Inverse laws for addition
 
 ```agda
-left-inverse-law-add-ℝ : {l : Level} → (x : ℝ l) → sim-ℝ (neg-ℝ x +ℝ x) zero-ℝ
-left-inverse-law-add-ℝ x =
+right-inverse-law-add-ℝ : {l : Level} → (x : ℝ l) → sim-ℝ (x +ℝ neg-ℝ x) zero-ℝ
+right-inverse-law-add-ℝ x =
   sim-rational-ℝ
-    ( neg-ℝ x +ℝ x ,
+    ( x +ℝ neg-ℝ x ,
       zero-ℚ ,
       elim-exists
         ( empty-Prop)
-        ( λ (p , q) (x<-p , q<x , 0=p+q) → is-disjoint-cut-ℝ x {!   !} {!   !}) ,
-      {!   !})
+        ( λ (p , q) (p<x , x<-q , 0=p+q) →
+          is-disjoint-cut-ℝ
+            ( x)
+            ( p)
+            ( p<x ,
+              inv-tr
+                ( is-in-upper-cut-ℝ x)
+                ( unique-left-inv-Group group-add-ℚ p q (inv 0=p+q))
+                ( x<-q))) ,
+      elim-exists
+        ( empty-Prop)
+        ( λ (p , q) (x<p , -q<x , 0=p+q) →
+          is-disjoint-cut-ℝ
+            ( x)
+            ( p)
+            ( inv-tr
+                ( is-in-lower-cut-ℝ x)
+                (unique-left-inv-Group group-add-ℚ p q (inv (0=p+q)))
+                -q<x ,
+              x<p)))
+
+left-inverse-law-add-ℝ : {l : Level} (x : ℝ l) → sim-ℝ (neg-ℝ x +ℝ x) zero-ℝ
+left-inverse-law-add-ℝ x =
+  tr
+    ( λ y → sim-ℝ y zero-ℝ)
+    ( commutative-add-ℝ x (neg-ℝ x))
+    ( right-inverse-law-add-ℝ x)
 ```
