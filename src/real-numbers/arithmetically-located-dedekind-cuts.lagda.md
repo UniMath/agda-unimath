@@ -42,44 +42,47 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Definition
 
-A pair of a [lower Dedekind real](real-numbers.lower-dedekind-real-numbers.md)
-`L` and an [upper Dedekind real](real-numbers.upper-dedekind-real-numbers.md)
-`U` is {{#concept "arithmetically located" Disambiguation="Dedekind cut"}} if
-for any positive [rational number](elementary-number-theory.rational-numbers.md)
-`ε : ℚ`, there exist `p, q : ℚ` such that `0 < q - p < ε`, `p ∈ L`, and `q ∈ U`.
+A pair of a [lower Dedekind cut](real-numbers.lower-dedekind-real-numbers.md)
+`L` and an [upper Dedekind cut](real-numbers.upper-dedekind-real-numbers.md) `U`
+is
+{{#concept "arithmetically located" Disambiguation="Dedekind cut" Agda=arithmetically-located-lower-upper-ℝ}}
+if for any [positive](elementary-number-theory.positive-rational-numbers.md)
+[rational number](elementary-number-theory.rational-numbers.md) `ε : ℚ⁺`, there
+exists `p, q : ℚ` where `p ∈ L` and `q ∈ U`, such that `0 < q - p < ε`.
 Intuitively, when `L , U` represent the cuts of a real number `x`, `p` and `q`
-are rational approximations of `x` to within `ε`. This follows parts of Section
-11 in {{#cite BauerTaylor2009}}.
+are rational approximations of `x` to within `ε`.
+
+This follows parts of Section 11 in {{#cite BauerTaylor2009}}.
 
 ## Definitions
 
-### The predicate of being arithmetically located on pairs of subtypes of rational numbers
+### The predicate of being arithmetically located on pairs of lower and upper Dedekind real numbers
 
 ```agda
 module _
-  {l : Level} (L : lower-ℝ l) (U : upper-ℝ l)
+  {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
   where
 
-  arithmetically-located-lower-upper-ℝ : UU l
+  arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
   arithmetically-located-lower-upper-ℝ =
     (ε⁺ : ℚ⁺) →
     exists
       ( ℚ × ℚ)
       ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
-        cut-lower-ℝ L p ∧
-        cut-upper-ℝ U q)
+        cut-lower-ℝ x p ∧
+        cut-upper-ℝ y q)
 ```
 
 ## Properties
 
 ### Arithmetically located cuts are located
 
-If a cut is arithmetically located and closed under strict inequality on the
-rational numbers, it is also located.
+If a pair of lower and upper Dedekind cuts is arithmetically located, it is also
+located.
 
 ```agda
 module _
-  {l : Level} (x : lower-ℝ l) (y : upper-ℝ l)
+  {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
   where
 
   abstract
