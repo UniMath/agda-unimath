@@ -42,7 +42,8 @@ The greatest common divisor of two natural numbers `x` and `y` is a number
 `gcd x y` such that any natural number `d : ℕ` is a common divisor of `x` and
 `y` if and only if it is a divisor of `gcd x y`.
 
-The algorithm defining the greatest common divisor is the 69th theorem on
+The algorithm defining the greatest common divisor is the
+[69th](literature.100-theorems.md#69) theorem on
 [Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
