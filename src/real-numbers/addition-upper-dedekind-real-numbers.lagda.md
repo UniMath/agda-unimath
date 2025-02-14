@@ -24,6 +24,7 @@ open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -32,9 +33,8 @@ open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.minkowski-multiplication-commutative-monoids
 
-open import logic.functoriality-existential-quantification
-
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.rational-upper-dedekind-real-numbers
 ```
 
 </details>
@@ -78,81 +78,67 @@ module _
       (q : ℚ) →
       is-in-cut-add-upper-ℝ q ↔
       exists ℚ (λ p → le-ℚ-Prop p q ∧ cut-add-upper-ℝ p)
-    pr1 (is-rounded-cut-add-upper-ℝ q) =
-      elim-exists
-        ( ∃ ℚ (λ p → le-ℚ-Prop p q ∧ cut-add-upper-ℝ p))
-        ( λ (ux , uy) (x<ux , y<uy , q=ux+uy) →
-          map-binary-exists
-            ( λ p → le-ℚ p q × is-in-cut-add-upper-ℝ p)
-            ( add-ℚ)
-            ( λ ux' uy' (ux'<ux , x<ux') (uy'<uy , y<uy') →
-              tr
-                ( le-ℚ (ux' +ℚ uy'))
-                ( inv (q=ux+uy))
-                ( preserves-le-add-ℚ {ux'} {ux} {uy'} {uy} ux'<ux uy'<uy) ,
-              intro-exists (ux' , uy') (x<ux' , y<uy' , refl))
-            ( forward-implication (is-rounded-cut-upper-ℝ x ux) x<ux)
-            ( forward-implication (is-rounded-cut-upper-ℝ y uy) y<uy))
-    pr2 (is-rounded-cut-add-upper-ℝ q) =
-      elim-exists
-        ( cut-add-upper-ℝ q)
-        ( λ p (p<q , x+y<r) →
-          elim-exists
-            ( cut-add-upper-ℝ q)
-            ( λ (px , py) (x<px , y<py , p=px+py) →
-              let
-                q-p⁺ = positive-diff-le-ℚ p q p<q
-                ε⁺ = mediant-zero-ℚ⁺ q-p⁺
-                ε = rational-ℚ⁺ ε⁺
-                ε<q-p = le-mediant-zero-ℚ⁺ q-p⁺
-              in
-                intro-exists
-                  ( px +ℚ ε , q -ℚ (px +ℚ ε))
-                  ( is-in-cut-le-ℚ-upper-ℝ
-                    ( x)
-                    ( px)
-                    ( px +ℚ ε)
-                    ( le-right-add-rational-ℚ⁺ px ε⁺)
-                    ( x<px) ,
-                    is-in-cut-le-ℚ-upper-ℝ
-                      ( y)
-                      ( py)
-                      ( q -ℚ (px +ℚ ε))
-                      ( binary-tr
-                        ( le-ℚ)
-                        ( equational-reasoning
-                            (q -ℚ px) -ℚ (q -ℚ p)
-                            ＝ neg-ℚ (q -ℚ p) +ℚ (q -ℚ px)
-                              by commutative-add-ℚ (q -ℚ px) (neg-ℚ (q -ℚ p))
-                            ＝ (p -ℚ q) +ℚ (q -ℚ px)
-                              by
-                                ap (_+ℚ (q -ℚ px)) (distributive-neg-diff-ℚ q p)
-                            ＝ p -ℚ px by triangle-diff-ℚ p q px
-                            ＝ (px +ℚ py) -ℚ px by ap (_-ℚ px) p=px+py
-                            ＝ py
-                              by
-                                is-identity-left-conjugation-Ab
-                                  ( abelian-group-add-ℚ)
-                                  ( px)
-                                  ( py))
-                        ( equational-reasoning
-                          (q -ℚ px) -ℚ ε
-                          ＝ q +ℚ (neg-ℚ px +ℚ neg-ℚ ε)
-                            by associative-add-ℚ q (neg-ℚ px) (neg-ℚ ε)
-                          ＝ q -ℚ (px +ℚ ε)
-                            by ap (q +ℚ_) (inv (distributive-neg-add-ℚ px ε)))
-                        ( preserves-le-right-add-ℚ
-                          ( q -ℚ px)
-                          ( neg-ℚ (q -ℚ p))
-                          ( neg-ℚ ε)
-                          ( neg-le-ℚ ε (q -ℚ p) ε<q-p)))
-                      ( y<py) ,
-                    inv
-                      ( is-identity-right-conjugation-Ab
-                        ( abelian-group-add-ℚ)
-                        ( px +ℚ ε)
-                        ( q))))
-            ( x+y<r))
+    pr1 (is-rounded-cut-add-upper-ℝ q) q<x+y =
+      do
+        ((ux , uy) , (x<ux , y<uy , q=ux+uy)) ← q<x+y
+        (ux' , ux'<ux , x<ux') ←
+          forward-implication (is-rounded-cut-upper-ℝ x ux) x<ux
+        (uy' , uy'<uy , y<uy') ←
+          forward-implication (is-rounded-cut-upper-ℝ y uy) y<uy
+        intro-exists
+          ( ux' +ℚ uy')
+          ( tr
+              ( le-ℚ (ux' +ℚ uy'))
+              ( inv (q=ux+uy))
+              ( preserves-le-add-ℚ {ux'} {ux} {uy'} {uy} ux'<ux uy'<uy) ,
+            intro-exists (ux' , uy') (x<ux' , y<uy' , refl))
+      where
+        open
+          do-syntax-trunc-Prop (∃ ℚ (λ p → le-ℚ-Prop p q ∧ cut-add-upper-ℝ p))
+    pr2 (is-rounded-cut-add-upper-ℝ q) exists-p =
+      do
+        (p , p<q , x+y<p) ← exists-p
+        ((px , py) , (x<px , y<py , p=px+py)) ← x+y<p
+        let
+          q-p⁺ = positive-diff-le-ℚ p q p<q
+          ε⁺ = mediant-zero-ℚ⁺ q-p⁺
+          ε = rational-ℚ⁺ ε⁺
+          ε<q-p = le-mediant-zero-ℚ⁺ q-p⁺
+        intro-exists
+          ( px +ℚ ε , q -ℚ (px +ℚ ε))
+          ( is-in-cut-add-rational-ℚ⁺-upper-ℝ x px ε⁺ x<px ,
+            is-in-cut-le-ℚ-upper-ℝ
+              ( y)
+              ( py)
+              ( q -ℚ (px +ℚ ε))
+              ( binary-tr
+                ( le-ℚ)
+                ( equational-reasoning
+                    (q -ℚ px) -ℚ (q -ℚ p)
+                    ＝ neg-ℚ px -ℚ neg-ℚ p
+                      by left-translation-diff-ℚ (neg-ℚ px) (neg-ℚ p) q
+                    ＝ neg-ℚ px +ℚ (px +ℚ py)
+                      by ap (neg-ℚ px +ℚ_) (neg-neg-ℚ p ∙ p=px+py)
+                    ＝ py
+                      by is-retraction-left-div-Group group-add-ℚ px py)
+                ( equational-reasoning
+                  (q -ℚ px) -ℚ ε
+                  ＝ q +ℚ (neg-ℚ px +ℚ neg-ℚ ε)
+                    by associative-add-ℚ q (neg-ℚ px) (neg-ℚ ε)
+                  ＝ q -ℚ (px +ℚ ε)
+                    by ap (q +ℚ_) (inv (distributive-neg-add-ℚ px ε)))
+                ( preserves-le-right-add-ℚ
+                  ( q -ℚ px)
+                  ( neg-ℚ (q -ℚ p))
+                  ( neg-ℚ ε)
+                  ( neg-le-ℚ ε (q -ℚ p) ε<q-p)))
+              ( y<py) ,
+            inv
+              ( is-identity-right-conjugation-Ab
+                ( abelian-group-add-ℚ)
+                ( px +ℚ ε)
+                ( q)))
+      where open do-syntax-trunc-Prop (cut-add-upper-ℝ q)
 
   add-upper-ℝ : upper-ℝ (l1 ⊔ l2)
   pr1 add-upper-ℝ = cut-add-upper-ℝ
@@ -198,4 +184,44 @@ module _
         ( cut-upper-ℝ x)
         ( cut-upper-ℝ y)
         ( cut-upper-ℝ z))
+```
+
+### Unit laws for addition of upper Dedekind real numbers
+
+```agda
+module _
+  {l : Level} (x : upper-ℝ l)
+  where
+
+  right-unit-law-add-upper-ℝ : add-upper-ℝ x (upper-real-ℚ zero-ℚ) ＝ x
+  right-unit-law-add-upper-ℝ =
+    eq-sim-cut-upper-ℝ
+      ( add-upper-ℝ x (upper-real-ℚ zero-ℚ))
+      ( x)
+      ( (λ r →
+          elim-exists
+            ( cut-upper-ℝ x r)
+            ( λ (p , q) (x<p , 0<q , r=p+q) →
+              inv-tr
+                ( is-in-cut-upper-ℝ x)
+                ( r=p+q)
+                ( is-in-cut-add-rational-ℚ⁺-upper-ℝ
+                  ( x)
+                  ( p)
+                  ( q , is-positive-le-zero-ℚ q 0<q)
+                  ( x<p)))) ,
+        ( λ q x<q →
+          elim-exists
+            ( cut-add-upper-ℝ x (upper-real-ℚ zero-ℚ) q)
+            ( λ r (r<q , x<r) →
+              intro-exists
+                ( r , q -ℚ r)
+                ( x<r ,
+                  backward-implication (iff-translate-diff-le-zero-ℚ r q) r<q ,
+                  inv
+                    ( is-identity-right-conjugation-Ab
+                      ( abelian-group-add-ℚ)
+                      ( r)
+                      ( q))))
+            ( forward-implication (is-rounded-cut-upper-ℝ x q) x<q)))
 ```

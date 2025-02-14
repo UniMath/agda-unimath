@@ -24,6 +24,7 @@ open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -35,6 +36,7 @@ open import group-theory.minkowski-multiplication-commutative-monoids
 open import logic.functoriality-existential-quantification
 
 open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.rational-lower-dedekind-real-numbers
 ```
 
 </details>
@@ -78,89 +80,67 @@ module _
       (q : ℚ) →
       is-in-cut-add-lower-ℝ q ↔
       exists ℚ (λ r → le-ℚ-Prop q r ∧ cut-add-lower-ℝ r)
-    pr1 (is-rounded-cut-add-lower-ℝ q) =
-      elim-exists
-        ( ∃ ℚ (λ r → le-ℚ-Prop q r ∧ cut-add-lower-ℝ r))
-        ( λ (lx , ly) (lx<x , ly<y , q=lx+ly) →
-          map-binary-exists
-            ( λ r → le-ℚ q r × is-in-cut-add-lower-ℝ r)
-            ( add-ℚ)
-            ( λ lx' ly' (lx<lx' , lx'<x) (ly<ly' , ly'<y) →
-              tr
-                ( λ p → le-ℚ p (lx' +ℚ ly'))
-                ( inv q=lx+ly)
-                ( preserves-le-add-ℚ {lx} {lx'} {ly} {ly'} lx<lx' ly<ly') ,
-              intro-exists (lx' , ly') (lx'<x , ly'<y , refl))
-            ( forward-implication (is-rounded-cut-lower-ℝ x lx) lx<x)
-            ( forward-implication (is-rounded-cut-lower-ℝ y ly) ly<y))
-    pr2 (is-rounded-cut-add-lower-ℝ q) =
-      elim-exists
-        ( cut-add-lower-ℝ q)
-        ( λ r (q<r , r<x+y) →
-          elim-exists
-            ( cut-add-lower-ℝ q)
-            ( λ (rx , ry) (rx<x , ry<y , r=rx+ry) →
-              let
-                r-q⁺ : ℚ⁺
-                r-q⁺ = positive-diff-le-ℚ q r q<r
-                ε⁺ : ℚ⁺
-                ε⁺ = mediant-zero-ℚ⁺ r-q⁺
-                ε : ℚ
-                ε = rational-ℚ⁺ ε⁺
-                ε<r-q : le-ℚ ε (r -ℚ q)
-                ε<r-q = le-mediant-zero-ℚ⁺ r-q⁺
-              in
-              intro-exists
-                ( rx -ℚ ε , q -ℚ (rx -ℚ ε))
-                ( is-in-cut-le-ℚ-lower-ℝ
-                    ( x)
-                    ( rx -ℚ ε)
-                    ( rx)
-                    ( le-diff-rational-ℚ⁺ rx ε⁺)
-                    ( rx<x) ,
-                  is-in-cut-le-ℚ-lower-ℝ
-                    ( y)
-                    ( q -ℚ (rx -ℚ ε))
-                    ( ry)
-                    ( binary-tr
-                        ( le-ℚ)
-                        ( equational-reasoning
-                          (q -ℚ rx) +ℚ ε
-                          ＝ q +ℚ (neg-ℚ rx +ℚ ε)
-                            by associative-add-ℚ q (neg-ℚ rx) ε
-                          ＝ q +ℚ (ε -ℚ rx)
-                            by ap (q +ℚ_) (commutative-add-ℚ (neg-ℚ rx) ε)
-                          ＝ q -ℚ (rx -ℚ ε)
-                            by ap (q +ℚ_) (inv (distributive-neg-diff-ℚ rx ε)))
-                        ( equational-reasoning
-                          (q -ℚ rx) +ℚ (r -ℚ q)
-                          ＝ (q -ℚ rx) +ℚ (neg-ℚ q +ℚ r)
-                            by
-                              ap ((q -ℚ rx) +ℚ_) (commutative-add-ℚ r (neg-ℚ q))
-                          ＝ (q -ℚ q) +ℚ (neg-ℚ rx +ℚ r)
-                            by
-                              interchange-law-add-add-ℚ q (neg-ℚ rx) (neg-ℚ q) r
-                          ＝ zero-ℚ +ℚ (neg-ℚ rx +ℚ r)
-                            by
-                              ap
-                                ( _+ℚ (neg-ℚ rx +ℚ r))
-                                ( right-inverse-law-add-ℚ q)
-                          ＝ neg-ℚ rx +ℚ r by left-unit-law-add-ℚ (neg-ℚ rx +ℚ r)
-                          ＝ neg-ℚ rx +ℚ (rx +ℚ ry) by ap (neg-ℚ rx +ℚ_) r=rx+ry
-                          ＝ ry
-                            by is-retraction-left-div-Group group-add-ℚ rx ry)
-                        ( preserves-le-right-add-ℚ
-                          ( q -ℚ rx)
-                          ( ε)
-                          ( r -ℚ q)
-                          ( ε<r-q)))
-                    ( ry<y) ,
-                  inv
-                    ( is-identity-right-conjugation-Ab
-                      ( abelian-group-add-ℚ)
-                      ( rx -ℚ ε)
-                      ( q))))
-            ( r<x+y))
+    pr1 (is-rounded-cut-add-lower-ℝ q) q<x+y =
+      do
+        ((lx , ly) , (lx<x , ly<y , q=lx+ly)) ← q<x+y
+        (lx' , lx<lx' , lx'<x) ←
+          forward-implication (is-rounded-cut-lower-ℝ x lx) lx<x
+        (ly' , ly<ly' , ly'<y) ←
+          forward-implication (is-rounded-cut-lower-ℝ y ly) ly<y
+        intro-exists
+          ( lx' +ℚ ly')
+          ( tr
+              ( λ p → le-ℚ p (lx' +ℚ ly'))
+              ( inv q=lx+ly)
+              ( preserves-le-add-ℚ {lx} {lx'} {ly} {ly'} lx<lx' ly<ly') ,
+            intro-exists (lx' , ly') (lx'<x , ly'<y , refl))
+      where
+        open
+          do-syntax-trunc-Prop (∃ ℚ (λ r → le-ℚ-Prop q r ∧ cut-add-lower-ℝ r))
+    pr2 (is-rounded-cut-add-lower-ℝ q) exists-r =
+      do
+        (r , q<r , r<x+y) ← exists-r
+        ((rx , ry) , (rx<x , ry<y , r=rx+ry)) ← r<x+y
+        let
+          r-q⁺ = positive-diff-le-ℚ q r q<r
+          ε⁺ = mediant-zero-ℚ⁺ r-q⁺
+          ε = rational-ℚ⁺ ε⁺
+          ε<r-q = le-mediant-zero-ℚ⁺ r-q⁺
+        intro-exists
+          ( rx -ℚ ε , q -ℚ (rx -ℚ ε))
+          ( is-in-cut-diff-rational-ℚ⁺-lower-ℝ x rx ε⁺ rx<x ,
+            is-in-cut-le-ℚ-lower-ℝ
+              ( y)
+              ( q -ℚ (rx -ℚ ε))
+              ( ry)
+              ( binary-tr
+                ( le-ℚ)
+                ( equational-reasoning
+                  (q -ℚ rx) +ℚ ε
+                  ＝ q +ℚ (neg-ℚ rx +ℚ ε)
+                    by associative-add-ℚ q (neg-ℚ rx) ε
+                  ＝ q +ℚ (ε -ℚ rx)
+                    by ap (q +ℚ_) (commutative-add-ℚ (neg-ℚ rx) ε)
+                  ＝ q -ℚ (rx -ℚ ε)
+                    by ap (q +ℚ_) (inv (distributive-neg-diff-ℚ rx ε)))
+                ( equational-reasoning
+                  (q -ℚ rx) +ℚ (r -ℚ q)
+                  ＝ (q -ℚ rx) -ℚ (q -ℚ r)
+                    by ap ((q -ℚ rx) +ℚ_) (inv (distributive-neg-diff-ℚ q r))
+                  ＝ neg-ℚ rx -ℚ neg-ℚ r
+                    by left-translation-diff-ℚ (neg-ℚ rx) (neg-ℚ r) q
+                  ＝ neg-ℚ rx +ℚ (rx +ℚ ry)
+                    by ap (neg-ℚ rx +ℚ_) (neg-neg-ℚ r ∙ r=rx+ry)
+                  ＝ ry
+                    by is-retraction-left-div-Group group-add-ℚ rx ry)
+                ( preserves-le-right-add-ℚ (q -ℚ rx) ε (r -ℚ q) ε<r-q))
+              ( ry<y) ,
+            inv
+              ( is-identity-right-conjugation-Ab
+                ( abelian-group-add-ℚ)
+                ( rx -ℚ ε)
+                ( q)))
+      where open do-syntax-trunc-Prop (cut-add-lower-ℝ q)
 
   add-lower-ℝ : lower-ℝ (l1 ⊔ l2)
   pr1 add-lower-ℝ = cut-add-lower-ℝ
@@ -211,5 +191,53 @@ module _
 ### Unit laws for the addition of lower Dedekind real numbers
 
 ```agda
+module _
+  {l : Level} (x : lower-ℝ l)
+  where
 
+  abstract
+    right-unit-law-add-lower-ℝ : add-lower-ℝ x (lower-real-ℚ zero-ℚ) ＝ x
+    right-unit-law-add-lower-ℝ =
+      eq-sim-cut-lower-ℝ
+        ( add-lower-ℝ x (lower-real-ℚ zero-ℚ))
+        ( x)
+        ( (λ r →
+            elim-exists
+              ( cut-lower-ℝ x r)
+              ( λ (p , q) (p<x , q<0 , r=p+q) →
+                inv-tr
+                  ( is-in-cut-lower-ℝ x)
+                  ( r=p+q ∙ ap (p +ℚ_) (inv (neg-neg-ℚ q)))
+                  ( is-in-cut-diff-rational-ℚ⁺-lower-ℝ
+                    ( x)
+                    ( p)
+                    ( neg-ℚ q ,
+                      is-positive-le-zero-ℚ (neg-ℚ q) (neg-le-ℚ q zero-ℚ q<0))
+                    ( p<x)))) ,
+          (λ p p<x →
+            elim-exists
+              ( cut-add-lower-ℝ x (lower-real-ℚ zero-ℚ) p)
+              ( λ q (p<q , q<x) →
+                intro-exists
+                  ( q , p -ℚ q)
+                  ( q<x ,
+                    tr
+                      ( λ r → le-ℚ r zero-ℚ)
+                      ( distributive-neg-diff-ℚ q p)
+                      ( neg-le-ℚ
+                        ( zero-ℚ)
+                        ( q -ℚ p)
+                        ( backward-implication
+                          ( iff-translate-diff-le-zero-ℚ p q)
+                          ( p<q))) ,
+                    inv
+                      ( is-identity-right-conjugation-Ab
+                        ( abelian-group-add-ℚ)
+                        ( q)
+                        ( p))))
+              ( forward-implication (is-rounded-cut-lower-ℝ x p) p<x)))
+
+  left-unit-law-add-lower-ℝ : add-lower-ℝ (lower-real-ℚ zero-ℚ) x ＝ x
+  left-unit-law-add-lower-ℝ =
+    commutative-add-lower-ℝ (lower-real-ℚ zero-ℚ) x ∙ right-unit-law-add-lower-ℝ
 ```
