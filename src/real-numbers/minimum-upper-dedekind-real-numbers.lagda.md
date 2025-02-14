@@ -188,7 +188,7 @@ module _
     z≤min p (inr-disjunction y<p)
 ```
 
-### The minimum of two reals is a lower bound
+### The minimum of two upper reals is a lower bound
 
 ```agda
   is-binary-lower-bound-binary-min-upper-ℝ :
