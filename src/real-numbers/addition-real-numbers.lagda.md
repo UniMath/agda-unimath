@@ -208,8 +208,12 @@ right-unit-law-add-ℝ x =
 
 ```agda
 left-inverse-law-add-ℝ : {l : Level} → (x : ℝ l) → sim-ℝ (neg-ℝ x +ℝ x) zero-ℝ
-pr1 (left-inverse-law-add-ℝ x) r =
-  elim-exists
-    ( le-ℚ-Prop r zero-ℚ)
-    ( λ (p , q) (x<-p , q<x , r=p+q) → {!   !})
+left-inverse-law-add-ℝ x =
+  sim-rational-ℝ
+    ( neg-ℝ x +ℝ x ,
+      zero-ℚ ,
+      elim-exists
+        ( empty-Prop)
+        ( λ (p , q) (x<-p , q<x , 0=p+q) → is-disjoint-cut-ℝ x {!   !} {!   !}) ,
+      {!   !})
 ```
