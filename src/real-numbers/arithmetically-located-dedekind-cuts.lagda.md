@@ -21,11 +21,8 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-<<<<<<< HEAD
 open import foundation.action-on-identifications-functions
-=======
 open import foundation.binary-transport
->>>>>>> lower-upper-neg
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -44,11 +41,8 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 
 open import real-numbers.dedekind-real-numbers
-<<<<<<< HEAD
-=======
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
->>>>>>> lower-upper-neg
 ```
 
 </details>
@@ -76,14 +70,6 @@ module _
   {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
   where
 
-<<<<<<< HEAD
-  is-arithmetically-located-pair-of-subtypes-ℚ : UU l
-  is-arithmetically-located-pair-of-subtypes-ℚ =
-    (ε : ℚ⁺) →
-    exists
-      ( ℚ × ℚ)
-      ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε) ∧ L p ∧ U q)
-=======
   arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
   arithmetically-located-lower-upper-ℝ =
     (ε⁺ : ℚ⁺) →
@@ -92,7 +78,6 @@ module _
       ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
         cut-lower-ℝ x p ∧
         cut-upper-ℝ y q)
->>>>>>> lower-upper-neg
 ```
 
 ## Properties
@@ -114,13 +99,8 @@ module _
     is-located-is-arithmetically-located-lower-upper-ℝ
       arithmetically-located p q p<q =
       elim-exists
-<<<<<<< HEAD
-        ( L p ∨ U q)
-        ( λ (p' , q') (q'<p'+ε , p'-in-l , q'-in-u) →
-=======
         ( cut-lower-ℝ x p ∨ cut-upper-ℝ y q)
         ( λ (p' , q') (q'<p'+q-p , p'∈L , q'∈U) →
->>>>>>> lower-upper-neg
           rec-coproduct
             ( λ p<p' →
               inl-disjunction
@@ -143,10 +123,9 @@ module _
                   ( q'∈U)))
             ( decide-le-leq-ℚ p p'))
         ( arithmetically-located (positive-diff-le-ℚ p q p<q))
-<<<<<<< HEAD
 ```
 
-### Real numbers are arithmetically located
+### The Dedekind cuts of real numbers are arithmetically located
 
 ```agda
 module _
@@ -242,26 +221,25 @@ module _
         ( archimedean-property-ℚ ε (q -ℚ p) pos-ε)
 
   abstract
-    arithmetically-located-lower-upper-cut-ℝ :
-      is-arithmetically-located-pair-of-subtypes-ℚ
-        ( lower-cut-ℝ x)
-        ( upper-cut-ℝ x)
-    arithmetically-located-lower-upper-cut-ℝ ε⁺@(ε , positive-ε) =
+    arithmetically-located-lower-upper-real-ℝ :
+      arithmetically-located-lower-upper-ℝ
+        ( lower-real-ℝ x)
+        ( upper-real-ℝ x)
+    arithmetically-located-lower-upper-real-ℝ ε⁺@(ε , positive-ε) =
       do
         (ε' , pos-ε') , 2ε'<ε ← double-le-ℚ⁺ ε⁺
-        p , p<x ← is-inhabited-lower-cut-ℝ x
-        q , x<q ← is-inhabited-upper-cut-ℝ x
-        r , r<x , x<r+2ε' ←
+        (p , p<x) ← is-inhabited-lower-cut-ℝ x
+        (q , x<q) ← is-inhabited-upper-cut-ℝ x
+        (r , r<x , x<r+2ε') ←
           bounded-arithmetic-location-twice-ε p q ε' pos-ε' p<x x<q
-        let r' : ℚ
-            r' = r +ℚ ε' +ℚ ε'
-            r'<r+ε : le-ℚ r' (r +ℚ ε)
-            r'<r+ε =
-              tr
-                ( λ s → le-ℚ s (r +ℚ ε))
-                ( inv (associative-add-ℚ r ε' ε'))
-                ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε)
-        intro-exists (r , r') (r'<r+ε , r<x , x<r+2ε')
+        intro-exists
+          ( r , r +ℚ ε' +ℚ ε')
+          ( tr
+              ( λ s → le-ℚ s (r +ℚ ε))
+              ( inv (associative-add-ℚ r ε' ε'))
+              ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,
+            r<x ,
+            x<r+2ε')
       where
         open
           do-syntax-trunc-Prop
@@ -269,8 +247,6 @@ module _
               ( ℚ × ℚ)
               ( λ (p , q) →
                 le-ℚ-Prop q (p +ℚ ε) ∧ lower-cut-ℝ x p ∧ upper-cut-ℝ x q))
-=======
->>>>>>> lower-upper-neg
 ```
 
 ## References
