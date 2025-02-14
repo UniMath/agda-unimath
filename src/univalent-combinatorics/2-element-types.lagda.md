@@ -97,7 +97,7 @@ is-finite-type-2-Element-Type :
 is-finite-type-2-Element-Type X =
   is-finite-has-cardinality 2 (has-two-elements-type-2-Element-Type X)
 
-finite-type-2-Element-Type : {l : Level} → 2-Element-Type l → 𝔽 l
+finite-type-2-Element-Type : {l : Level} → 2-Element-Type l → Finite-Type l
 pr1 (finite-type-2-Element-Type X) = type-2-Element-Type X
 pr2 (finite-type-2-Element-Type X) = is-finite-type-2-Element-Type X
 

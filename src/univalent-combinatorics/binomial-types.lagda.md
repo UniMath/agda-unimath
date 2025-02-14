@@ -402,7 +402,7 @@ binomial-type-Fin (succ-ℕ n) zero-ℕ =
   equiv-is-contr binomial-type-over-empty is-contr-Fin-one-ℕ
 binomial-type-Fin (succ-ℕ n) (succ-ℕ m) =
   ( ( inv-equiv
-      ( Fin-add-ℕ
+      ( inv-compute-coproduct-Fin
         ( binomial-coefficient-ℕ n m)
         ( binomial-coefficient-ℕ n (succ-ℕ m)))) ∘e
     ( equiv-coproduct
@@ -454,12 +454,16 @@ abstract
         ( has-finite-cardinality-is-finite H)
         ( has-finite-cardinality-is-finite K))
 
-binomial-type-𝔽 : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → 𝔽 (l1 ⊔ l2)
-pr1 (binomial-type-𝔽 A B) = small-binomial-type (type-𝔽 A) (type-𝔽 B)
-pr2 (binomial-type-𝔽 A B) =
+binomial-type-Finite-Type :
+  {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → Finite-Type (l1 ⊔ l2)
+pr1 (binomial-type-Finite-Type A B) =
+  small-binomial-type (type-Finite-Type A) (type-Finite-Type B)
+pr2 (binomial-type-Finite-Type A B) =
   is-finite-equiv
-    ( compute-small-binomial-type (type-𝔽 A) (type-𝔽 B))
-    ( is-finite-binomial-type (is-finite-type-𝔽 A) (is-finite-type-𝔽 B))
+    ( compute-small-binomial-type (type-Finite-Type A) (type-Finite-Type B))
+    ( is-finite-binomial-type
+      ( is-finite-type-Finite-Type A)
+      ( is-finite-type-Finite-Type B))
 ```
 
 ## References
