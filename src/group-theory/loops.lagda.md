@@ -23,6 +23,7 @@ open import foundation-core.dependent-identifications
 open import foundation-core.subtypes
 
 open import group-theory.quasigroups
+open import group-theory.units-quasigroups
 ```
 
 </details>
