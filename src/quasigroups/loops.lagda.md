@@ -30,8 +30,8 @@ open import quasigroups.quasigroups
 ## Idea
 
 {{#concept "Loops" Agda=Loop}} are [quasigroups](quasigroups.quasigroups.md)
-with a designated identity element, that is, an element `e : Q` such that
-for any `x : type-Quasigroup Q`:
+with a designated identity element, that is, an element `e : Q` such that for
+any `x : type-Quasigroup Q`:
 
 ```text
   e * x ＝ x
@@ -76,12 +76,12 @@ module _
   has-left-unit-Quasigroup =
     Σ (type-Quasigroup Q) λ e → is-left-unit-Quasigroup e
 
-  term-has-left-unit-Quasigroup : has-left-unit-Quasigroup → type-Quasigroup Q
-  term-has-left-unit-Quasigroup (e , _) = e
+  element-has-left-unit-Quasigroup : has-left-unit-Quasigroup → type-Quasigroup Q
+  element-has-left-unit-Quasigroup (e , _) = e
 
   left-units-agree-Quasigroup :
-    (e f : has-left-unit-Quasigroup) → term-has-left-unit-Quasigroup e
-    ＝ term-has-left-unit-Quasigroup f
+    (e f : has-left-unit-Quasigroup) → element-has-left-unit-Quasigroup e
+    ＝ element-has-left-unit-Quasigroup f
   left-units-agree-Quasigroup (e , e-left-unit) (f , f-left-unit) =
     equational-reasoning
     e
@@ -100,9 +100,9 @@ module _
       ( is-left-unit-Quasigroup-Prop)
       ( left-units-agree-Quasigroup e f)
   pr2 (is-prop-has-left-unit-Quasigroup e f) =
-    is-set-has-uip 
+    is-set-has-uip
       ( is-set-type-subtype is-left-unit-Quasigroup-Prop
-        ( is-set-Quasigroup Q)) 
+        ( is-set-Quasigroup Q))
       ( e)
       ( f)
       ( pr1 (is-prop-has-left-unit-Quasigroup e f))
@@ -127,12 +127,12 @@ module _
   has-right-unit-Quasigroup =
     Σ (type-Quasigroup Q) λ e → is-right-unit-Quasigroup e
 
-  term-has-right-unit-Quasigroup : has-right-unit-Quasigroup → type-Quasigroup Q
-  term-has-right-unit-Quasigroup (e , _) = e
+  element-has-right-unit-Quasigroup : has-right-unit-Quasigroup → type-Quasigroup Q
+  element-has-right-unit-Quasigroup (e , _) = e
 
   right-units-agree-Quasigroup :
-    (e f : has-right-unit-Quasigroup) → term-has-right-unit-Quasigroup e
-    ＝ term-has-right-unit-Quasigroup f
+    (e f : has-right-unit-Quasigroup) → element-has-right-unit-Quasigroup e
+    ＝ element-has-right-unit-Quasigroup f
   right-units-agree-Quasigroup (e , e-right-unit) (f , f-right-unit) =
     equational-reasoning
     e
@@ -182,15 +182,15 @@ type of units is equivalent to the type of pairs of left and right units.
     has-unit-Quasigroup → has-right-unit-Quasigroup
   has-unit-has-right-unit-Quasigroup (e , _ , e-right-unit) = (e , e-right-unit)
 
-  has-unit-has-left-and-right-units-Quasigroup :
+  has-left-and-right-units-has-unit-Quasigroup :
     has-unit-Quasigroup → has-left-unit-Quasigroup × has-right-unit-Quasigroup
-  has-unit-has-left-and-right-units-Quasigroup e =
+  has-left-and-right-units-has-unit-Quasigroup e =
     ( has-unit-has-left-unit-Quasigroup e) ,
     ( has-unit-has-right-unit-Quasigroup e)
 
   left-and-right-units-agree-Quasigroup :
     (e : has-left-unit-Quasigroup) → (f : has-right-unit-Quasigroup) →
-    term-has-left-unit-Quasigroup e ＝ term-has-right-unit-Quasigroup f
+    element-has-left-unit-Quasigroup e ＝ element-has-right-unit-Quasigroup f
   left-and-right-units-agree-Quasigroup (e , e-left-unit) (f , f-right-unit) =
     equational-reasoning
     e
@@ -203,20 +203,20 @@ type of units is equivalent to the type of pairs of left and right units.
     ＝ f
       by inv (is-right-cancellative-right-div-Quasigroup Q f f)
 
-  has-left-and-right-units-is-left-unit-is-right-unit :
+  is-right-unit-has-left-unit-Quasigroup :
     (e : has-left-unit-Quasigroup) → has-right-unit-Quasigroup →
-    is-right-unit-Quasigroup (term-has-left-unit-Quasigroup e)
-  has-left-and-right-units-is-left-unit-is-right-unit e f x =
+    is-right-unit-Quasigroup (element-has-left-unit-Quasigroup e)
+  is-right-unit-has-left-unit-Quasigroup e f x =
     inv-tr is-right-unit-Quasigroup (left-and-right-units-agree-Quasigroup e f)
     (pr2 f) x
 
-  has-left-and-right-units-has-unit-Quasigroup :
+  has-unit-has-right-unit-has-left-unit-Quasigroup :
     has-left-unit-Quasigroup → has-right-unit-Quasigroup → has-unit-Quasigroup
-  pr1 (has-left-and-right-units-has-unit-Quasigroup (e , _) _) = e
-  pr1 (pr2 (has-left-and-right-units-has-unit-Quasigroup (e , e-left-unit) _)) =
+  pr1 (has-unit-has-right-unit-has-left-unit-Quasigroup (e , _) _) = e
+  pr1 (pr2 (has-unit-has-right-unit-has-left-unit-Quasigroup (e , e-left-unit) _)) =
     e-left-unit
-  pr2 (pr2 (has-left-and-right-units-has-unit-Quasigroup e f)) =
-    has-left-and-right-units-is-left-unit-is-right-unit e f
+  pr2 (pr2 (has-unit-has-right-unit-has-left-unit-Quasigroup e f)) =
+    is-right-unit-has-left-unit-Quasigroup e f
 ```
 
 ### Loops
