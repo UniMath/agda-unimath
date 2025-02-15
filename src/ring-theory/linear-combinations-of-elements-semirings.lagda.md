@@ -370,7 +370,8 @@ module _
       ( s)
   preserves-mul-ev-linear-combination-Semiring r nil s =
     inv (absorption-law-action-Monoid-With-Semiring-Action R M r s)
-  preserves-mul-ev-linear-combination-Semiring r (cons (x , a) u) s = ?
+  preserves-mul-ev-linear-combination-Semiring r (cons (x , a , y) l) s =
+    {!!}
 
 {-
     ap-binary
