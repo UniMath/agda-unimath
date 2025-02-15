@@ -96,11 +96,16 @@ module _
 
   is-prop-has-left-unit-Quasigroup : is-prop has-left-unit-Quasigroup
   pr1 (is-prop-has-left-unit-Quasigroup e f) =
-    eq-type-subtype is-left-unit-Quasigroup-Prop
-    (left-units-agree-Quasigroup e f)
-  pr2 (is-prop-has-left-unit-Quasigroup e f) p =
-    is-set-has-uip (is-set-type-subtype is-left-unit-Quasigroup-Prop
-    (is-set-Quasigroup Q)) e f (pr1 (is-prop-has-left-unit-Quasigroup e f)) p
+    eq-type-subtype
+      ( is-left-unit-Quasigroup-Prop)
+      ( left-units-agree-Quasigroup e f)
+  pr2 (is-prop-has-left-unit-Quasigroup e f) =
+    is-set-has-uip 
+      ( is-set-type-subtype is-left-unit-Quasigroup-Prop
+        ( is-set-Quasigroup Q)) 
+      ( e)
+      ( f)
+      ( pr1 (is-prop-has-left-unit-Quasigroup e f))
 ```
 
 ### Right units in quasigroups
@@ -142,11 +147,16 @@ module _
 
   is-prop-has-right-unit-Quasigroup : is-prop has-right-unit-Quasigroup
   pr1 (is-prop-has-right-unit-Quasigroup e f) =
-    eq-type-subtype is-right-unit-Quasigroup-Prop
-    (right-units-agree-Quasigroup e f)
-  pr2 (is-prop-has-right-unit-Quasigroup e f) p =
-    is-set-has-uip (is-set-type-subtype is-right-unit-Quasigroup-Prop
-    (is-set-Quasigroup Q)) e f (pr1 (is-prop-has-right-unit-Quasigroup e f)) p
+    eq-type-subtype
+      ( is-right-unit-Quasigroup-Prop)
+      ( right-units-agree-Quasigroup e f)
+  pr2 (is-prop-has-right-unit-Quasigroup e f) =
+    is-set-has-uip
+      ( is-set-type-subtype is-right-unit-Quasigroup-Prop
+        ( is-set-Quasigroup Q))
+      ( e)
+      ( f)
+      ( pr1 (is-prop-has-right-unit-Quasigroup e f))
 ```
 
 ### Units in quasigroups
@@ -158,25 +168,25 @@ type of units is equivalent to the type of pairs of left and right units.
 ```agda
   has-unit-Quasigroup : UU l
   has-unit-Quasigroup =
-    Σ (type-Quasigroup Q)
-    λ e → is-left-unit-Quasigroup e × is-right-unit-Quasigroup e
+    Σ ( type-Quasigroup Q)
+      ( λ e → is-left-unit-Quasigroup e × is-right-unit-Quasigroup e)
 
   unit-has-unit-Quasigroup : has-unit-Quasigroup → type-Quasigroup Q
   unit-has-unit-Quasigroup (e , _) = e
 
   has-unit-has-left-unit-Quasigroup :
     has-unit-Quasigroup → has-left-unit-Quasigroup
-  has-unit-has-left-unit-Quasigroup (e , e-left-unit , _) = e , e-left-unit
+  has-unit-has-left-unit-Quasigroup (e , e-left-unit , _) = (e , e-left-unit)
 
   has-unit-has-right-unit-Quasigroup :
     has-unit-Quasigroup → has-right-unit-Quasigroup
-  has-unit-has-right-unit-Quasigroup (e , _ , e-right-unit) = e , e-right-unit
+  has-unit-has-right-unit-Quasigroup (e , _ , e-right-unit) = (e , e-right-unit)
 
   has-unit-has-left-and-right-units-Quasigroup :
     has-unit-Quasigroup → has-left-unit-Quasigroup × has-right-unit-Quasigroup
   has-unit-has-left-and-right-units-Quasigroup e =
-    (has-unit-has-left-unit-Quasigroup e) ,
-    (has-unit-has-right-unit-Quasigroup e)
+    ( has-unit-has-left-unit-Quasigroup e) ,
+    ( has-unit-has-right-unit-Quasigroup e)
 
   left-and-right-units-agree-Quasigroup :
     (e : has-left-unit-Quasigroup) → (f : has-right-unit-Quasigroup) →
