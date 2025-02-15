@@ -410,10 +410,13 @@ module _
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : UU-Fin l n) (f : Aut (type-UU-Fin n X))
+  {l : Level} (n : ℕ)
+  (X : Type-With-Cardinality-ℕ l n)
+  (f : Aut (type-Type-With-Cardinality-ℕ n X))
   where
 
-  same-orbits-permutation : equivalence-relation l (type-UU-Fin n X)
+  same-orbits-permutation :
+    equivalence-relation l (type-Type-With-Cardinality-ℕ n X)
   (pr1 same-orbits-permutation) a b =
     trunc-Prop (Σ ℕ (λ k → Id (iterate k (map-equiv f) a) b))
   pr1 (pr2 same-orbits-permutation) _ = unit-trunc-Prop (0 , refl)
@@ -423,7 +426,7 @@ module _
       ( pr1 same-orbits-permutation b a)
       ( λ (k , p) →
         apply-universal-property-trunc-Prop
-          ( has-cardinality-type-UU-Fin n X)
+          ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
           ( pr1 same-orbits-permutation b a)
           ( λ h →
             unit-trunc-Prop
@@ -435,19 +438,23 @@ module _
                         ( λ x → iterate x (map-equiv f) a)
                         ( pr2 (lemma h k))) ∙
                       ( mult-has-finite-orbits-permutation
-                        ( type-UU-Fin n X)
+                        ( type-Type-With-Cardinality-ℕ n X)
                         ( pair n h)
                         ( f)
                         ( a)
                         ( k))))))))
     where
     has-finite-orbits-permutation-a :
-      (h : Fin n ≃ type-UU-Fin n X) →
+      (h : Fin n ≃ type-Type-With-Cardinality-ℕ n X) →
       Σ ℕ (λ l → (is-nonzero-ℕ l) × Id (iterate l (map-equiv f) a) a)
     has-finite-orbits-permutation-a h =
-      has-finite-orbits-permutation (type-UU-Fin n X) (pair n h) f a
+      has-finite-orbits-permutation
+        ( type-Type-With-Cardinality-ℕ n X)
+        ( pair n h)
+        ( f)
+        ( a)
     lemma :
-      (h : Fin n ≃ type-UU-Fin n X) (k : ℕ) →
+      (h : Fin n ≃ type-Type-With-Cardinality-ℕ n X) (k : ℕ) →
       Σ ( ℕ)
         ( λ j →
           Id (j +ℕ k) (k *ℕ (pr1 (has-finite-orbits-permutation-a h))))
@@ -475,11 +482,11 @@ module _
 
   abstract
     is-decidable-same-orbits-permutation :
-      ( a b : type-UU-Fin n X) →
+      ( a b : type-Type-With-Cardinality-ℕ n X) →
       is-decidable (sim-equivalence-relation same-orbits-permutation a b)
     is-decidable-same-orbits-permutation a b =
       apply-universal-property-trunc-Prop
-        ( has-cardinality-type-UU-Fin n X)
+        ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
         ( is-decidable-Prop
           ( prop-equivalence-relation same-orbits-permutation a b))
         ( λ h →
@@ -500,7 +507,8 @@ module _
                   ( λ m p → p)))))
       where
       is-decidable-iterate-is-decidable-bounded :
-        ( h : Fin n ≃ type-UU-Fin n X) (a b : type-UU-Fin n X) →
+        ( h : Fin n ≃ type-Type-With-Cardinality-ℕ n X)
+        (a b : type-Type-With-Cardinality-ℕ n X) →
         is-decidable
           ( Σ ℕ (λ m → (m ≤-ℕ n) × (Id (iterate m (map-equiv f) a) b))) →
         is-decidable (Σ ℕ (λ m → Id (iterate m (map-equiv f) a) b))
@@ -524,12 +532,12 @@ module _
                         ( pr1
                           ( pr2
                             ( has-finite-orbits-permutation
-                              ( type-UU-Fin n X)
+                              ( type-Type-With-Cardinality-ℕ n X)
                               ( pair n h)
                               ( f)
                               ( a)))))
                       ( leq-has-finite-orbits-permutation-number-elements
-                        ( type-UU-Fin n X)
+                        ( type-Type-With-Cardinality-ℕ n X)
                         ( pair n h)
                         ( f)
                         ( a))))
@@ -539,7 +547,7 @@ module _
                         ( map-equiv f))
                       ( inv
                         ( mult-has-finite-orbits-permutation
-                          ( type-UU-Fin n X)
+                          ( type-Type-With-Cardinality-ℕ n X)
                           ( pair n h)
                           ( f)
                           ( a)
@@ -561,7 +569,7 @@ module _
         m : ℕ
         m = pr1
             ( has-finite-orbits-permutation
-              ( type-UU-Fin n X)
+              ( type-Type-With-Cardinality-ℕ n X)
               ( pair n h)
               ( f)
               ( a))
@@ -569,7 +577,7 @@ module _
   abstract
     is-decidable-is-in-equivalence-class-same-orbits-permutation :
       (T : equivalence-class same-orbits-permutation) →
-      (a : type-UU-Fin n X) →
+      (a : type-Type-With-Cardinality-ℕ n X) →
       is-decidable (is-in-equivalence-class same-orbits-permutation T a)
     is-decidable-is-in-equivalence-class-same-orbits-permutation T a =
       is-decidable-is-in-equivalence-class-is-decidable
@@ -583,10 +591,10 @@ module _
       is-finite (equivalence-class same-orbits-permutation)
     has-finite-number-orbits-permutation =
       is-finite-codomain
-        ( is-finite-type-UU-Fin n X)
+        ( is-finite-type-Type-With-Cardinality-ℕ n X)
         ( is-surjective-class same-orbits-permutation)
         ( apply-universal-property-trunc-Prop
-          ( has-cardinality-type-UU-Fin n X)
+          ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
           ( pair
             ( has-decidable-equality
               ( equivalence-class same-orbits-permutation))
@@ -611,7 +619,7 @@ module _
       where
       cases-decidable-equality :
         (T1 T2 : equivalence-class same-orbits-permutation)
-        (t1 : type-UU-Fin n X) →
+        (t1 : type-Type-With-Cardinality-ℕ n X) →
         Id T1 (class same-orbits-permutation t1) →
         is-decidable
           ( is-in-equivalence-class same-orbits-permutation T2 t1) →
@@ -2345,7 +2353,7 @@ module _
               ( composition-transposition-a-b g)))
       cases-opposite-sign-composition-transposition (inl P) =
         inv
-          ( is-involution-aut-Fin-two-ℕ
+          ( is-involution-aut-Fin-2
             ( equiv-succ-Fin 2)
             ( sign-permutation-orbit
               ( number-of-elements-count eX)
@@ -2379,7 +2387,7 @@ module _
         list
           ( Σ ( X → Decidable-Prop l)
               ( λ P →
-                has-cardinality 2 (Σ X (type-Decidable-Prop ∘ P))))) →
+                has-cardinality-ℕ 2 (Σ X (type-Decidable-Prop ∘ P))))) →
       Id
         ( iterate
           ( length-list li)
@@ -2403,7 +2411,7 @@ module _
             ( pr1 (pr2 two-elements-t))
             ( pr1 (pr2 (pr2 two-elements-t)))
             ( permutation-list-transpositions li)) ∙
-        ( is-involution-aut-Fin-two-ℕ
+        ( is-involution-aut-Fin-2
           ( equiv-succ-Fin 2)
           ( sign-permutation-orbit
             ( number-of-elements-count eX)
