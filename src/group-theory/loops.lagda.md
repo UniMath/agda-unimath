@@ -22,7 +22,7 @@ open import foundation-core.contractible-types
 open import foundation-core.dependent-identifications
 open import foundation-core.subtypes
 
-open import quasigroups.quasigroups
+open import group-theory.quasigroups
 ```
 
 </details>
