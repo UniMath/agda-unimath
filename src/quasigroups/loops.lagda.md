@@ -130,7 +130,8 @@ module _
     ＝ term-has-right-unit-Quasigroup f
   right-units-agree-Quasigroup (e , e-right-unit) (f , f-right-unit) =
     equational-reasoning
-    e ＝ f l/ (f * e)
+    e
+    ＝ f l/ (f * e)
       by is-right-cancellative-left-div-Quasigroup Q f e
     ＝ f l/ f
       by ap (λ x → f l/ x) (e-right-unit f)
