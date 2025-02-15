@@ -252,7 +252,7 @@ count-Decidable-Prop :
   {l : Level} → count (Decidable-Prop l)
 pr1 count-Decidable-Prop = 2
 pr2 count-Decidable-Prop =
-  inv-equiv equiv-bool-Decidable-Prop ∘e equiv-bool-Fin-two-ℕ
+  inv-equiv equiv-bool-Decidable-Prop ∘e equiv-bool-Fin-2
 
 is-finite-Decidable-Prop : {l : Level} → is-finite (Decidable-Prop l)
 is-finite-Decidable-Prop {l} = unit-trunc-Prop count-Decidable-Prop
@@ -265,9 +265,8 @@ number-of-elements-Decidable-Prop =
       ( count-Decidable-Prop)
       ( is-finite-Decidable-Prop))
 
-decidable-Prop-𝔽 : (l : Level) → 𝔽 (lsuc l)
-pr1 (decidable-Prop-𝔽 l) = Decidable-Prop l
-pr2 (decidable-Prop-𝔽 l) = is-finite-Decidable-Prop
+Decidable-Prop-Finite-Type : (l : Level) → Finite-Type (lsuc l)
+Decidable-Prop-Finite-Type l = (Decidable-Prop l , is-finite-Decidable-Prop)
 ```
 
 ### Decidable propositions are closed under retracts

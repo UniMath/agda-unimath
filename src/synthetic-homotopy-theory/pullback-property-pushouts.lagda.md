@@ -26,12 +26,21 @@ The
 [universal property of the pushout](synthetic-homotopy-theory.universal-property-pushouts.md)
 of a span `S` can also be stated as a
 [pullback property](foundation-core.universal-property-pullbacks.md): a cocone
-`c ≐ (i , j , H)` with vertex `X` satisfies the universal property of the
-pushout of `S` if and only if the square
+`c ≐ (i , j , H)` with vertex `X`,
+
+```text
+   S -------> B
+   |          |
+   |          |
+   ∨          ∨
+   A -------> X,
+```
+
+satisfies the universal property of the pushout of `S` if and only if the square
 
 ```text
   Y^X -----> Y^B
-   | ⌟        |
+   |          |
    |          |
    ∨          ∨
   Y^A -----> Y^S

@@ -129,6 +129,7 @@ open import category-theory.opposite-categories public
 open import category-theory.opposite-large-precategories public
 open import category-theory.opposite-precategories public
 open import category-theory.opposite-preunivalent-categories public
+open import category-theory.opposite-strongly-preunivalent-categories public
 open import category-theory.pointed-endofunctors-categories public
 open import category-theory.pointed-endofunctors-precategories public
 open import category-theory.precategories public
@@ -160,6 +161,7 @@ open import category-theory.simplex-category public
 open import category-theory.slice-precategories public
 open import category-theory.split-essentially-surjective-functors-precategories public
 open import category-theory.strict-categories public
+open import category-theory.strongly-preunivalent-categories public
 open import category-theory.structure-equivalences-set-magmoids public
 open import category-theory.subcategories public
 open import category-theory.subprecategories public

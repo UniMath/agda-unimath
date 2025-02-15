@@ -105,6 +105,13 @@ open import elementary-number-theory.catalan-numbers using
   ( catalan-numbers)
 ```
 
+### [A000110](https://oeis.org/A000110) The Bell numbers
+
+```agda
+open import elementary-number-theory.bell-numbers using
+  ( bell-number-ℕ)
+```
+
 ### [A000142](https://oeis.org/A000142) Factorials
 
 ```agda
