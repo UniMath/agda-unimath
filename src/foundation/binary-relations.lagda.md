@@ -21,6 +21,7 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.negation
 open import foundation-core.propositions
+open import foundation-core.sets
 open import foundation-core.torsorial-type-families
 ```
 
@@ -191,7 +192,14 @@ module _
   where
 
   is-irreflexive : UU (l1 ⊔ l2)
-  is-irreflexive = (x : A) → ¬ (R x x)
+  is-irreflexive = (x : A) → ¬ R x x
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
+  where
+
+  is-irreflexive-Relation-Prop : UU (l1 ⊔ l2)
+  is-irreflexive-Relation-Prop = is-irreflexive (type-Relation-Prop R)
 ```
 
 ### The predicate of being an asymmetric relation

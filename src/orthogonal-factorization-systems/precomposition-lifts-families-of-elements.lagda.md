@@ -33,7 +33,7 @@ open import orthogonal-factorization-systems.lifts-families-of-elements
 
 ## Idea
 
-Consider a type family `B : A → 𝓤` and a map `a : I → A`. Then, given a map
+Consider a type family `B : A → 𝒰` and a map `a : I → A`. Then, given a map
 `f : J → I`, we may pull back a
 [lift](orthogonal-factorization-systems.lifts-families-of-elements.md) of `a` to
 a lift of `a ∘ f`.

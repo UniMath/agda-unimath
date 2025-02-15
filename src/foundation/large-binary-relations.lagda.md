@@ -8,10 +8,13 @@ module foundation.large-binary-relations where
 
 ```agda
 open import foundation.binary-relations
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.negation
 open import foundation-core.propositions
 ```
 
@@ -125,6 +128,10 @@ module _
   is-antisymmetric-Large-Relation =
     {l : Level} → is-antisymmetric (relation-Large-Relation A R l)
 
+  is-antireflexive-Large-Relation : UUω
+  is-antireflexive-Large-Relation =
+    {l : Level} → (a : A l) → ¬ (R a a)
+
 module _
   {α : Level → Level} {β : Level → Level → Level}
   (A : (l : Level) → UU (α l))
@@ -146,6 +153,17 @@ module _
   is-antisymmetric-Large-Relation-Prop : UUω
   is-antisymmetric-Large-Relation-Prop =
     is-antisymmetric-Large-Relation A (large-relation-Large-Relation-Prop A R)
+
+  is-antireflexive-Large-Relation-Prop : UUω
+  is-antireflexive-Large-Relation-Prop =
+    is-antireflexive-Large-Relation A (large-relation-Large-Relation-Prop A R)
+
+  is-cotransitive-Large-Relation-Prop : UUω
+  is-cotransitive-Large-Relation-Prop =
+    {l1 l2 l3 : Level} →
+    (a : A l1) (b : A l2) (c : A l3) →
+    type-Prop (R a b) →
+    type-Prop ((R a c) ∨ (R c b))
 ```
 
 ## See also

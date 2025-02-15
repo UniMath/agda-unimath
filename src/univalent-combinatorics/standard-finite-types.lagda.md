@@ -143,33 +143,33 @@ is-decidable-is-inl-Fin k (inr star) = inr α
 ### `Fin 1` is contractible
 
 ```agda
-map-equiv-Fin-one-ℕ : Fin 1 → unit
-map-equiv-Fin-one-ℕ (inr x) = x
+map-equiv-Fin-1 : Fin 1 → unit
+map-equiv-Fin-1 (inr x) = x
 
-map-inv-equiv-Fin-one-ℕ : unit → Fin 1
-map-inv-equiv-Fin-one-ℕ x = inr x
+map-inv-equiv-Fin-1 : unit → Fin 1
+map-inv-equiv-Fin-1 x = inr x
 
-is-section-map-inv-equiv-Fin-one-ℕ :
-  ( map-equiv-Fin-one-ℕ ∘ map-inv-equiv-Fin-one-ℕ) ~ id
-is-section-map-inv-equiv-Fin-one-ℕ _ = refl
+is-section-map-inv-equiv-Fin-1 :
+  ( map-equiv-Fin-1 ∘ map-inv-equiv-Fin-1) ~ id
+is-section-map-inv-equiv-Fin-1 _ = refl
 
-is-retraction-map-inv-equiv-Fin-one-ℕ :
-  ( map-inv-equiv-Fin-one-ℕ ∘ map-equiv-Fin-one-ℕ) ~ id
-is-retraction-map-inv-equiv-Fin-one-ℕ (inr _) = refl
+is-retraction-map-inv-equiv-Fin-1 :
+  ( map-inv-equiv-Fin-1 ∘ map-equiv-Fin-1) ~ id
+is-retraction-map-inv-equiv-Fin-1 (inr _) = refl
 
-is-equiv-map-equiv-Fin-one-ℕ : is-equiv map-equiv-Fin-one-ℕ
-is-equiv-map-equiv-Fin-one-ℕ =
+is-equiv-map-equiv-Fin-1 : is-equiv map-equiv-Fin-1
+is-equiv-map-equiv-Fin-1 =
   is-equiv-is-invertible
-    map-inv-equiv-Fin-one-ℕ
-    is-section-map-inv-equiv-Fin-one-ℕ
-    is-retraction-map-inv-equiv-Fin-one-ℕ
+    map-inv-equiv-Fin-1
+    is-section-map-inv-equiv-Fin-1
+    is-retraction-map-inv-equiv-Fin-1
 
-equiv-Fin-one-ℕ : Fin 1 ≃ unit
-pr1 equiv-Fin-one-ℕ = map-equiv-Fin-one-ℕ
-pr2 equiv-Fin-one-ℕ = is-equiv-map-equiv-Fin-one-ℕ
+equiv-Fin-1 : Fin 1 ≃ unit
+pr1 equiv-Fin-1 = map-equiv-Fin-1
+pr2 equiv-Fin-1 = is-equiv-map-equiv-Fin-1
 
-is-contr-Fin-one-ℕ : is-contr (Fin 1)
-is-contr-Fin-one-ℕ = is-contr-equiv unit equiv-Fin-one-ℕ is-contr-unit
+is-contr-Fin-1 : is-contr (Fin 1)
+is-contr-Fin-1 = is-contr-equiv unit equiv-Fin-1 is-contr-unit
 
 is-not-contractible-Fin :
   (k : ℕ) → is-not-one-ℕ k → is-not-contractible (Fin k)
@@ -301,10 +301,10 @@ one-Fin k = succ-Fin (succ-ℕ k) (zero-Fin k)
 is-one-Fin : (k : ℕ) → Fin k → UU lzero
 is-one-Fin (succ-ℕ k) x = x ＝ one-Fin k
 
-is-zero-or-one-Fin-two-ℕ :
+is-zero-or-one-Fin-2 :
   (x : Fin 2) → (is-zero-Fin 2 x) + (is-one-Fin 2 x)
-is-zero-or-one-Fin-two-ℕ (inl (inr star)) = inl refl
-is-zero-or-one-Fin-two-ℕ (inr star) = inr refl
+is-zero-or-one-Fin-2 (inl (inr star)) = inl refl
+is-zero-or-one-Fin-2 (inr star) = inr refl
 
 is-one-nat-one-Fin :
   (k : ℕ) → is-one-ℕ (nat-Fin (succ-ℕ (succ-ℕ k)) (one-Fin (succ-ℕ k)))
