@@ -1,7 +1,7 @@
 # Quasigroups
 
 ```agda
-module quasigroups.quasigroups where
+module group-theory.quasigroups where
 ```
 
 <details><summary>Imports</summary>
@@ -13,6 +13,9 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+
+open import group-theory.left-quasigroups
+open import group-theory.right-quasigroups
 ```
 
 </details>

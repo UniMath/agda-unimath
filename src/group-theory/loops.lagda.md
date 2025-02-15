@@ -1,7 +1,7 @@
 # Loops
 
 ```agda
-module quasigroups.loops where
+module group-theory.loops where
 ```
 
 <details><summary>Imports</summary>
