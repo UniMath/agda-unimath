@@ -30,7 +30,7 @@ open import quasigroups.quasigroups
 ## Idea
 
 {{#concept "Loops" Agda=Loop}} are [quasigroups](quasigroups.quasigroups.md)
-with a designated identity element, that is, `e : type-Quasigroup Q` such that
+with a designated identity element, that is, an element `e : Q` such that
 for any `x : type-Quasigroup Q`:
 
 ```text
