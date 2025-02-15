@@ -37,23 +37,32 @@ module _
   where
 
   is-left-cancellative-right-div : UU l
-  is-left-cancellative-right-div = (x y : type-Set Q) → y ＝ mul (right-div y x) x
+  is-left-cancellative-right-div =
+    (x y : type-Set Q) → y ＝ mul (right-div y x) x
 
-  is-prop-is-left-cancellative-right-div : is-prop is-left-cancellative-right-div
-  is-prop-is-left-cancellative-right-div = is-prop-Π (λ x → is-prop-Π (λ y → is-set-type-Set Q y (mul (right-div y x) x)))
+  is-prop-is-left-cancellative-right-div :
+    is-prop is-left-cancellative-right-div
+  is-prop-is-left-cancellative-right-div =
+    is-prop-Π (λ x → is-prop-Π (λ y → is-set-type-Set Q y (mul (right-div y x) x)))
 
   is-right-cancellative-right-div : UU l
-  is-right-cancellative-right-div = (x y : type-Set Q) → y ＝ right-div (mul y x) x
+  is-right-cancellative-right-div =
+    (x y : type-Set Q) → y ＝ right-div (mul y x) x
 
-  is-prop-is-right-cancellative-right-div : is-prop is-right-cancellative-right-div
-  is-prop-is-right-cancellative-right-div = is-prop-Π (λ x → is-prop-Π (λ y → is-set-type-Set Q y (right-div (mul y x) x)))
+  is-prop-is-right-cancellative-right-div :
+    is-prop is-right-cancellative-right-div
+  is-prop-is-right-cancellative-right-div =
+    is-prop-Π (λ x → is-prop-Π (λ y → is-set-type-Set Q y (right-div (mul y x) x)))
 
   is-right-Quasigroup : UU l
-  is-right-Quasigroup = is-left-cancellative-right-div × is-right-cancellative-right-div
+  is-right-Quasigroup =
+    is-left-cancellative-right-div × is-right-cancellative-right-div
 
   is-prop-is-right-Quasigroup : is-prop is-right-Quasigroup
-  is-prop-is-right-Quasigroup = is-prop-Σ is-prop-is-left-cancellative-right-div (λ _ → is-prop-is-right-cancellative-right-div)
+  is-prop-is-right-Quasigroup =
+    is-prop-Σ is-prop-is-left-cancellative-right-div (λ _ → is-prop-is-right-cancellative-right-div)
 
 right-Quasigroup : (l : Level) → UU (lsuc l)
-right-Quasigroup l = Σ (Set l) (λ Q → Σ (type-Set Q → type-Set Q → type-Set Q) (λ mul → Σ (type-Set Q → type-Set Q → type-Set Q) λ right-div → is-right-Quasigroup Q mul right-div))
+right-Quasigroup l =
+  Σ (Set l) (λ Q → Σ (type-Set Q → type-Set Q → type-Set Q) (λ mul → Σ (type-Set Q → type-Set Q → type-Set Q) λ right-div → is-right-Quasigroup Q mul right-div))
 ```

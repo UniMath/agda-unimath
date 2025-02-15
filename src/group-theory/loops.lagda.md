@@ -77,7 +77,8 @@ module _
   has-left-unit-Quasigroup =
     Σ (type-Quasigroup Q) λ e → is-left-unit-Quasigroup e
 
-  element-has-left-unit-Quasigroup : has-left-unit-Quasigroup → type-Quasigroup Q
+  element-has-left-unit-Quasigroup :
+    has-left-unit-Quasigroup → type-Quasigroup Q
   element-has-left-unit-Quasigroup (e , _) = e
 
   left-units-agree-Quasigroup :
@@ -128,7 +129,8 @@ module _
   has-right-unit-Quasigroup =
     Σ (type-Quasigroup Q) λ e → is-right-unit-Quasigroup e
 
-  element-has-right-unit-Quasigroup : has-right-unit-Quasigroup → type-Quasigroup Q
+  element-has-right-unit-Quasigroup :
+    has-right-unit-Quasigroup → type-Quasigroup Q
   element-has-right-unit-Quasigroup (e , _) = e
 
   right-units-agree-Quasigroup :
