@@ -58,9 +58,13 @@ module _
 
   is-prop-is-left-Quasigroup : is-prop is-left-Quasigroup
   is-prop-is-left-Quasigroup =
-    is-prop-Σ is-prop-is-left-cancellative-left-div (λ _ → is-prop-is-right-cancellative-left-div)
+    is-prop-Σ is-prop-is-left-cancellative-left-div
+      ( λ _ → is-prop-is-right-cancellative-left-div)
 
 left-Quasigroup : (l : Level) → UU (lsuc l)
 left-Quasigroup l =
-  Σ (Set l) (λ Q → Σ (type-Set Q → type-Set Q → type-Set Q) (λ mul → Σ (type-Set Q → type-Set Q → type-Set Q) λ left-div → is-left-Quasigroup Q mul left-div))
+  Σ ( Set l)
+    ( λ Q → Σ (type-Set Q → type-Set Q → type-Set Q)
+    ( λ mul → Σ (type-Set Q → type-Set Q → type-Set Q)
+    ( λ left-div → is-left-Quasigroup Q mul left-div)))
 ```
