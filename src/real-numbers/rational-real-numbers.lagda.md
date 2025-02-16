@@ -60,8 +60,8 @@ the [image](foundation.images.md) of this embedding
 is-dedekind-lower-upper-real-ℚ :
   (x : ℚ) →
   is-dedekind-lower-upper-ℝ
-    (lower-real-ℚ x)
-    (upper-real-ℚ x)
+    ( lower-real-ℚ x)
+    ( upper-real-ℚ x)
 is-dedekind-lower-upper-real-ℚ x =
   (λ q (H , K) → asymmetric-le-ℚ q x H K) ,
   located-le-ℚ x
@@ -71,7 +71,7 @@ is-dedekind-lower-upper-real-ℚ x =
 
 ```agda
 real-ℚ : ℚ → ℝ lzero
-real-ℚ x = lower-real-ℚ x , upper-real-ℚ x , is-dedekind-lower-upper-real-ℚ x
+real-ℚ x = (lower-real-ℚ x , upper-real-ℚ x , is-dedekind-lower-upper-real-ℚ x)
 ```
 
 ### The property of being a rational real number

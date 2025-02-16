@@ -213,6 +213,7 @@ open import foundation.functoriality-sequential-limits public
 open import foundation.functoriality-set-quotients public
 open import foundation.functoriality-set-truncation public
 open import foundation.functoriality-truncation public
+open import foundation.fundamental-theorem-of-equivalence-relations public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
 open import foundation.global-subuniverses public
