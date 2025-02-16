@@ -33,17 +33,23 @@ the (wild) category of [pointed types](structured-types.pointed-types.md).
 module _
   {l1 l2 l3 : Level}
   {S : Pointed-Type l1} {A : Pointed-Type l2} {B : Pointed-Type l3}
+  (f : S →∗ A) (g : S →∗ B)
   where
 
-  pushout-Pointed-Type :
-    (f : S →∗ A) (g : S →∗ B) → Pointed-Type (l1 ⊔ l2 ⊔ l3)
-  pr1 (pushout-Pointed-Type f g) =
+  type-pushout-Pointed-Type : UU (l1 ⊔ l2 ⊔ l3)
+  type-pushout-Pointed-Type =
     pushout (map-pointed-map f) (map-pointed-map g)
-  pr2 (pushout-Pointed-Type f g) =
+
+  point-pushout-Pointed-Type : type-pushout-Pointed-Type
+  point-pushout-Pointed-Type =
     inl-pushout
       ( map-pointed-map f)
       ( map-pointed-map g)
       ( point-Pointed-Type A)
+
+  pushout-Pointed-Type : Pointed-Type (l1 ⊔ l2 ⊔ l3)
+  pushout-Pointed-Type =
+    ( type-pushout-Pointed-Type , point-pushout-Pointed-Type)
 ```
 
 ## Properties
@@ -54,19 +60,16 @@ module _
 module _
   {l1 l2 l3 : Level}
   {S : Pointed-Type l1} {A : Pointed-Type l2} {B : Pointed-Type l3}
+  (f : S →∗ A) (g : S →∗ B)
   where
 
-  inl-pushout-Pointed-Type :
-      (f : S →∗ A) (g : S →∗ B) → A →∗ pushout-Pointed-Type f g
-  pr1 (inl-pushout-Pointed-Type f g) =
-    inl-pushout (map-pointed-map f) (map-pointed-map g)
-  pr2 (inl-pushout-Pointed-Type f g) = refl
+  inl-pushout-Pointed-Type : A →∗ pushout-Pointed-Type f g
+  inl-pushout-Pointed-Type =
+    ( inl-pushout (map-pointed-map f) (map-pointed-map g) , refl)
 
-  inr-pushout-Pointed-Type :
-      (f : S →∗ A) (g : S →∗ B) → B →∗ pushout-Pointed-Type f g
-  pr1 (inr-pushout-Pointed-Type f g) =
-    inr-pushout (map-pointed-map f) (map-pointed-map g)
-  pr2 (inr-pushout-Pointed-Type f g) =
+  inr-pushout-Pointed-Type : B →∗ pushout-Pointed-Type f g
+  inr-pushout-Pointed-Type =
+    ( ( inr-pushout (map-pointed-map f) (map-pointed-map g)) ,
       ( ( ap
           ( inr-pushout (map-pointed-map f) (map-pointed-map g))
           ( inv (preserves-point-pointed-map g))) ∙
@@ -77,7 +80,7 @@ module _
             ( point-Pointed-Type S)))) ∙
       ( ap
         ( inl-pushout (map-pointed-map f) (map-pointed-map g))
-        ( preserves-point-pointed-map f))
+        ( preserves-point-pointed-map f)))
 ```
 
 ### The cogap map for pushouts of pointed types
@@ -86,27 +89,24 @@ module _
 module _
   {l1 l2 l3 : Level}
   {S : Pointed-Type l1} {A : Pointed-Type l2} {B : Pointed-Type l3}
+  (f : S →∗ A) (g : S →∗ B)
   where
 
   map-cogap-Pointed-Type :
-    {l4 : Level}
-    (f : S →∗ A) (g : S →∗ B) →
-    {X : Pointed-Type l4} →
+    {l4 : Level} {X : Pointed-Type l4} →
     cocone-Pointed-Type f g X →
-    type-Pointed-Type (pushout-Pointed-Type f g) → type-Pointed-Type X
-  map-cogap-Pointed-Type f g c =
+    type-pushout-Pointed-Type f g → type-Pointed-Type X
+  map-cogap-Pointed-Type c =
     cogap
       ( map-pointed-map f)
       ( map-pointed-map g)
       ( cocone-cocone-Pointed-Type f g c)
 
   cogap-Pointed-Type :
-    {l4 : Level}
-    (f : S →∗ A) (g : S →∗ B) →
-    {X : Pointed-Type l4} →
+    {l4 : Level} {X : Pointed-Type l4} →
     cocone-Pointed-Type f g X → pushout-Pointed-Type f g →∗ X
-  pr1 (cogap-Pointed-Type f g c) = map-cogap-Pointed-Type f g c
-  pr2 (cogap-Pointed-Type f g {X} c) =
+  pr1 (cogap-Pointed-Type c) = map-cogap-Pointed-Type c
+  pr2 (cogap-Pointed-Type {X} c) =
     ( compute-inl-cogap
       ( map-pointed-map f)
       ( map-pointed-map g)

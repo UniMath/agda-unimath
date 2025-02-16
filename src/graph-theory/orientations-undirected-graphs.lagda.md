@@ -32,7 +32,7 @@ module _
   orientation-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
   orientation-Undirected-Graph =
     ( p : unordered-pair-vertices-Undirected-Graph G) →
-    edge-Undirected-Graph G p → type-UU-Fin 2 (pr1 p)
+    edge-Undirected-Graph G p → type-Type-With-Cardinality-ℕ 2 (pr1 p)
 
   source-edge-orientation-Undirected-Graph :
     orientation-Undirected-Graph →
