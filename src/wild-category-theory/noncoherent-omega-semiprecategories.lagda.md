@@ -242,3 +242,70 @@ Higher morphisms in a noncoherent ω-semiprecategory:
   4-hom-Noncoherent-ω-Semiprecategory =
     4-cell-Globular-Type globular-type-Noncoherent-ω-Semiprecategory
 ```
+
+### Structure syntax for noncoherent ω-semiprecategories
+
+```agda
+module
+  structure-syntax-Noncoherent-ω-Semiprecategory
+  {l1 l2 : Level} (𝒞 : Noncoherent-ω-Semiprecategory l1 l2)
+  where
+
+  infix 15 _∘₁_
+  _∘₁_ :
+    {x y z : obj-Noncoherent-ω-Semiprecategory 𝒞} →
+    hom-Noncoherent-ω-Semiprecategory 𝒞 y z →
+    hom-Noncoherent-ω-Semiprecategory 𝒞 x y →
+    hom-Noncoherent-ω-Semiprecategory 𝒞 x z
+  _∘₁_ = comp-hom-Noncoherent-ω-Semiprecategory 𝒞
+  {-# NOINLINE _∘₁_ #-}
+
+  infix 15 _∘₂_
+  _∘₂_ :
+    {x y : obj-Noncoherent-ω-Semiprecategory 𝒞}
+    {f g h : hom-Noncoherent-ω-Semiprecategory 𝒞 x y} →
+    2-hom-Noncoherent-ω-Semiprecategory 𝒞 g h →
+    2-hom-Noncoherent-ω-Semiprecategory 𝒞 f g →
+    2-hom-Noncoherent-ω-Semiprecategory 𝒞 f h
+  _∘₂_ = comp-2-hom-Noncoherent-ω-Semiprecategory 𝒞
+  {-# NOINLINE _∘₂_ #-}
+
+  infix 15 _∙₂_
+  _∙₂_ :
+    {x y z : obj-Noncoherent-ω-Semiprecategory 𝒞} →
+    {g g' : hom-Noncoherent-ω-Semiprecategory 𝒞 y z}
+    {f f' : hom-Noncoherent-ω-Semiprecategory 𝒞 x y} →
+    2-hom-Noncoherent-ω-Semiprecategory 𝒞 g g' →
+    2-hom-Noncoherent-ω-Semiprecategory 𝒞 f f' →
+    2-hom-Noncoherent-ω-Semiprecategory 𝒞
+      ( comp-hom-Noncoherent-ω-Semiprecategory 𝒞 g f)
+      ( comp-hom-Noncoherent-ω-Semiprecategory 𝒞 g' f')
+  _∙₂_ = horizontal-comp-2-hom-Noncoherent-ω-Semiprecategory 𝒞
+  {-# NOINLINE _∙₂_ #-}
+
+  infix 15 _∘₃_
+  _∘₃_ :
+    {x y : obj-Noncoherent-ω-Semiprecategory 𝒞}
+    {f g : hom-Noncoherent-ω-Semiprecategory 𝒞 x y}
+    {α β γ : 2-hom-Noncoherent-ω-Semiprecategory 𝒞 f g} →
+    3-hom-Noncoherent-ω-Semiprecategory 𝒞 β γ →
+    3-hom-Noncoherent-ω-Semiprecategory 𝒞 α β →
+    3-hom-Noncoherent-ω-Semiprecategory 𝒞 α γ
+  _∘₃_ = comp-3-hom-Noncoherent-ω-Semiprecategory 𝒞
+  {-# NOINLINE _∘₃_ #-}
+
+  infix 15 _∙₃_
+  _∙₃_ :
+    {x y z : obj-Noncoherent-ω-Semiprecategory 𝒞}
+    {g g' : hom-Noncoherent-ω-Semiprecategory 𝒞 y z}
+    {f f' : hom-Noncoherent-ω-Semiprecategory 𝒞 x y}
+    {α α' : 2-hom-Noncoherent-ω-Semiprecategory 𝒞 g g'}
+    {β β' : 2-hom-Noncoherent-ω-Semiprecategory 𝒞 f f'} →
+    3-hom-Noncoherent-ω-Semiprecategory 𝒞 α α' →
+    3-hom-Noncoherent-ω-Semiprecategory 𝒞 β β' →
+    3-hom-Noncoherent-ω-Semiprecategory 𝒞
+      ( horizontal-comp-2-hom-Noncoherent-ω-Semiprecategory 𝒞 α β)
+      ( horizontal-comp-2-hom-Noncoherent-ω-Semiprecategory 𝒞 α' β')
+  _∙₃_ = horizontal-comp-3-hom-Noncoherent-ω-Semiprecategory 𝒞
+  {-# NOINLINE _∙₃_ #-}
+```
