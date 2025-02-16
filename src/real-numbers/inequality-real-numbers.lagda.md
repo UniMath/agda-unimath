@@ -28,7 +28,13 @@ open import order-theory.posets
 open import order-theory.preorders
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-lower-dedekind-real-numbers
+open import real-numbers.inequality-upper-dedekind-real-numbers
+open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.negation-lower-upper-dedekind-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
@@ -48,7 +54,7 @@ module _
   where
 
   leq-ℝ-Prop : Prop (l1 ⊔ l2)
-  leq-ℝ-Prop = leq-prop-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
+  leq-ℝ-Prop = leq-lower-ℝ-Prop (lower-real-ℝ x) (lower-real-ℝ y)
 
   leq-ℝ : UU (l1 ⊔ l2)
   leq-ℝ = type-Prop leq-ℝ-Prop
@@ -56,7 +62,7 @@ module _
 
 ## Properties
 
-### Equivalence with reversed containment of upper cuts
+### Equivalence with inequality on upper cuts
 
 ```agda
 module _
@@ -64,7 +70,7 @@ module _
   where
 
   leq-ℝ-Prop' : Prop (l1 ⊔ l2)
-  leq-ℝ-Prop' = leq-prop-subtype (upper-cut-ℝ y) (upper-cut-ℝ x)
+  leq-ℝ-Prop' = leq-upper-ℝ-Prop (upper-real-ℝ x) (upper-real-ℝ y)
 
   leq-ℝ' : UU (l1 ⊔ l2)
   leq-ℝ' = type-Prop leq-ℝ-Prop'
@@ -73,7 +79,7 @@ module _
   pr1 (leq-iff-ℝ') lx⊆ly q q-in-uy =
     elim-exists
       ( upper-cut-ℝ x q)
-      ( λ p (p<q , p∉ly) →
+      ( λ p (p<q , p≮y) →
         subset-upper-cut-upper-complement-lower-cut-ℝ
           ( x)
           ( q)
@@ -85,12 +91,12 @@ module _
                 ( lower-cut-ℝ y)
                 ( lx⊆ly)
                 ( p)
-                ( p∉ly))))
+                ( p≮y))))
       ( subset-upper-complement-lower-cut-upper-cut-ℝ y q q-in-uy)
-  pr2 (leq-iff-ℝ') uy⊆ux p p-in-lx =
+  pr2 leq-iff-ℝ' uy⊆ux p p-in-lx =
     elim-exists
       ( lower-cut-ℝ y p)
-      ( λ q (p<q , q∉ux) →
+      ( λ q (p<q , x≮q) →
         subset-lower-cut-lower-complement-upper-cut-ℝ
           ( y)
           ( p)
@@ -102,7 +108,7 @@ module _
                 ( upper-cut-ℝ x)
                 ( uy⊆ux)
                 ( q)
-                ( q∉ux))))
+                ( x≮q))))
       ( subset-lower-complement-upper-cut-lower-cut-ℝ x p p-in-lx)
 ```
 
@@ -110,7 +116,7 @@ module _
 
 ```agda
 refl-leq-ℝ : {l : Level} → (x : ℝ l) → leq-ℝ x x
-refl-leq-ℝ x = refl-leq-subtype (lower-cut-ℝ x)
+refl-leq-ℝ x = refl-leq-Large-Preorder lower-ℝ-Large-Preorder (lower-real-ℝ x)
 ```
 
 ### Inequality on the real numbers is antisymmetric
@@ -171,16 +177,13 @@ antisymmetric-leq-Large-Poset ℝ-Large-Poset = antisymmetric-leq-ℝ
 
 ```agda
 preserves-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℝ (real-ℚ x) (real-ℚ y)
-preserves-leq-real-ℚ x y x≤y q q<x = concatenate-le-leq-ℚ q x y q<x x≤y
+preserves-leq-real-ℚ = preserves-leq-lower-real-ℚ
 
 reflects-leq-real-ℚ : (x y : ℚ) → leq-ℝ (real-ℚ x) (real-ℚ y) → leq-ℚ x y
-reflects-leq-real-ℚ x y rx≤ry with decide-le-leq-ℚ y x
-... | inl y<x = ex-falso (irreflexive-le-ℚ y (rx≤ry y y<x))
-... | inr x≤y = x≤y
+reflects-leq-real-ℚ = reflects-leq-lower-real-ℚ
 
 iff-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y ↔ leq-ℝ (real-ℚ x) (real-ℚ y)
-pr1 (iff-leq-real-ℚ x y) = preserves-leq-real-ℚ x y
-pr2 (iff-leq-real-ℚ x y) = reflects-leq-real-ℚ x y
+iff-leq-real-ℚ = iff-leq-lower-real-ℚ
 ```
 
 ## References
