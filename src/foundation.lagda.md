@@ -89,6 +89,7 @@ open import foundation.connected-types public
 open import foundation.constant-maps public
 open import foundation.constant-span-diagrams public
 open import foundation.constant-type-families public
+open import foundation.constructive-cantor-schroder-bernstein public
 open import foundation.continuations public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public
@@ -182,6 +183,7 @@ open import foundation.exclusive-disjunction public
 open import foundation.exclusive-sum public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
+open import foundation.extended-perfect-images public
 open import foundation.extensions-types public
 open import foundation.extensions-types-global-subuniverses public
 open import foundation.extensions-types-subuniverses public
@@ -193,7 +195,9 @@ open import foundation.fiber-inclusions public
 open import foundation.fibered-equivalences public
 open import foundation.fibered-involutions public
 open import foundation.fibered-maps public
+open import foundation.fibers-of-extended-iterated-maps public
 open import foundation.fibers-of-maps public
+open import foundation.fibers-of-transfinitely-iterated-maps public
 open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
 open import foundation.fixed-points-endofunctions public

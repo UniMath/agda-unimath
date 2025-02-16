@@ -12,7 +12,6 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
-open import foundation.double-negation-stable-equality
 open import foundation.equivalences
 open import foundation.injective-maps
 open import foundation.negation

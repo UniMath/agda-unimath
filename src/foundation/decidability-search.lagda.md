@@ -55,7 +55,7 @@ open import foundation-core.contractible-types
 
 open import logic.complements-decidable-subtypes
 open import logic.de-morgan-subtypes
-open import logic.irrefutably-surjective-maps
+open import logic.double-negation-dense-maps
 open import logic.propositionally-decidable-types
 
 open import univalent-combinatorics.counting
@@ -291,20 +291,20 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (h : X ↠¬¬ Y)
   where
 
-  has-decidability-search-irrefutable-surjection :
+  has-decidability-search-double-negation-dense-map :
     has-decidability-search X → has-decidability-search Y
-  has-decidability-search-irrefutable-surjection f P =
+  has-decidability-search-double-negation-dense-map f P =
     map-coproduct
-      ( λ xp → map-irrefutable-surjection h (pr1 xp) , pr2 xp)
+      ( λ xp → map-double-negation-dense-map h (pr1 xp) , pr2 xp)
       ( λ nxpf yp →
-        is-irrefutably-surjective-map-irrefutable-surjection
+        is-double-negation-dense-map-double-negation-dense-map
           ( h)
           ( pr1 yp)
           ( λ xr →
             nxpf
               ( pr1 xr ,
                 tr (family-decidable-family P) (inv (pr2 xr)) (pr2 yp))))
-      ( f (reindex-decidable-family P (map-irrefutable-surjection h)))
+      ( f (reindex-decidable-family P (map-double-negation-dense-map h)))
 ```
 
 ### Decidability search transfers along surjections
@@ -314,8 +314,8 @@ has-decidability-search-surjection :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↠ Y →
   has-decidability-search X → has-decidability-search Y
 has-decidability-search-surjection h =
-  has-decidability-search-irrefutable-surjection
-    ( irrefutable-surjection-surjection h)
+  has-decidability-search-double-negation-dense-map
+    ( double-negation-dense-map-surjection h)
 ```
 
 ### Types with decidability search are closed under retracts
@@ -325,8 +325,8 @@ has-decidability-search-retract :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
   Y retract-of X → has-decidability-search X → has-decidability-search Y
 has-decidability-search-retract R =
-  has-decidability-search-irrefutable-surjection
-    ( irrefutable-surjection-retract R)
+  has-decidability-search-double-negation-dense-map
+    ( double-negation-dense-map-retract R)
 ```
 
 ### Types with decidability search are closed under equivalences
