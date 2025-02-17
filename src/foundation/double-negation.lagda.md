@@ -89,6 +89,12 @@ double-negation-linearity-implication {P = P} {Q = Q} f =
   ( λ (np : ¬ P) →
     map-neg (inl {A = P → Q} {B = Q → P}) f (λ p → ex-falso (np p)))
   ( λ (p : P) → map-neg (inr {A = P → Q} {B = Q → P}) f (λ _ → p))
+
+double-negation-decidability :
+  {l : Level} {P : UU l} → ¬¬ (P + ¬ P)
+double-negation-decidability {P = P} f =
+  ( λ (np : ¬ P) → f (inr np))
+  ( λ (p : P) → f (inl p))
 ```
 
 ### Maps into double negations extend along `intro-double-negation`
