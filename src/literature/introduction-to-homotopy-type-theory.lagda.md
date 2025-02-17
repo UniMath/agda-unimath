@@ -192,7 +192,7 @@ judgmental eta law for pairs.
 ```agda
 open import foundation.dependent-pair-types using
   ( Σ
-  ; pair
+  ; pair ; _,_
   ; ind-Σ)
 ```
 
@@ -607,7 +607,7 @@ open import elementary-number-theory.equality-natural-numbers using
   ( Eq-eq-ℕ
   ; eq-Eq-ℕ)
 _ : (m n : ℕ) → (m ＝ n) ↔ Eq-ℕ m n
-_ = λ m n → pair Eq-eq-ℕ (eq-Eq-ℕ m n)
+_ = λ m n → (Eq-eq-ℕ , (eq-Eq-ℕ m n))
 ```
 
 ### 6.4 Peano's seventh and eighth axioms
@@ -620,7 +620,7 @@ TODO: do we have `app succ-ℕ` as a definition?
 open import elementary-number-theory.natural-numbers using
   ( is-injective-succ-ℕ)
 _ : (m n : ℕ) → (m ＝ n) ↔ (succ-ℕ m ＝ succ-ℕ n)
-_ = λ m n → pair (ap succ-ℕ) is-injective-succ-ℕ
+_ = λ m n → (ap succ-ℕ , is-injective-succ-ℕ)
 ```
 
 **Theorem 6.4.2.** Peano's eighth axiom.
@@ -648,13 +648,12 @@ injective functions.
 open import elementary-number-theory.addition-natural-numbers using
   ( is-injective-right-add-ℕ)
 _ : (m n k : ℕ) → (m ＝ n) ↔ (add-ℕ m k ＝ add-ℕ n k)
-_ = λ m n k → pair (ap (λ x → add-ℕ x k)) (is-injective-right-add-ℕ k)
+_ = λ m n k → (ap (λ x → add-ℕ x k) , is-injective-right-add-ℕ k)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( is-injective-right-mul-succ-ℕ)
 _ : (m n k : ℕ) → (m ＝ n) ↔ (mul-ℕ m (succ-ℕ k) ＝ mul-ℕ n (succ-ℕ k))
 _ =
-  λ m n k →
-    pair (ap (λ x → mul-ℕ x (succ-ℕ k))) (is-injective-right-mul-succ-ℕ k)
+  λ m n k → (ap (λ x → mul-ℕ x (succ-ℕ k)) , is-injective-right-mul-succ-ℕ k)
 -- TODO: b, c, report that multiplication is denoted by juxtaposition
 ```
 
@@ -667,7 +666,7 @@ open import foundation.booleans using
   ( Eq-eq-bool
   ; eq-Eq-bool)
 _ : (x y : bool) → (x ＝ y) ↔ Eq-bool x y
-_ = λ x y → pair Eq-eq-bool eq-Eq-bool
+_ = λ x y → (Eq-eq-bool , eq-Eq-bool)
 open import foundation.booleans using
   ( neq-neg-bool -- b ≠ neg-bool b
   )
@@ -689,15 +688,14 @@ open import elementary-number-theory.inequality-natural-numbers using
   ; reflects-leq-left-add-ℕ)
 _ : (m n k : ℕ) → (m ≤-ℕ n) ↔ (add-ℕ m k ≤-ℕ add-ℕ n k)
 _ =
-  λ m n k →
-    pair (preserves-leq-left-add-ℕ k m n) (reflects-leq-left-add-ℕ k m n)
+  λ m n k → (preserves-leq-left-add-ℕ k m n , reflects-leq-left-add-ℕ k m n)
 open import elementary-number-theory.inequality-natural-numbers using
   ( preserves-leq-left-mul-ℕ
   ; reflects-order-mul-ℕ)
 _ : (m n k : ℕ) → (m ≤-ℕ n) ↔ (mul-ℕ m (succ-ℕ k) ≤-ℕ mul-ℕ n (succ-ℕ k))
 _ =
   λ m n k →
-    pair (preserves-leq-left-mul-ℕ (succ-ℕ k) m n) (reflects-order-mul-ℕ k m n)
+    (preserves-leq-left-mul-ℕ (succ-ℕ k) m n , reflects-order-mul-ℕ k m n)
 open import elementary-number-theory.minimum-natural-numbers using
   ( is-greatest-lower-bound-min-ℕ)
 open import elementary-number-theory.maximum-natural-numbers using
@@ -735,7 +733,7 @@ open import elementary-number-theory.distance-natural-numbers using
   ; triangle-inequality-dist-ℕ -- dist m n ≤ dist m k + dist k n
   )
 _ : (m n : ℕ) → (m ＝ n) ↔ (dist-ℕ m n ＝ zero-ℕ)
-_ = λ m n → pair (dist-eq-ℕ m n) (eq-dist-ℕ m n)
+_ = λ m n → (dist-eq-ℕ m n , eq-dist-ℕ m n)
 -- TODO: b
 open import elementary-number-theory.distance-natural-numbers using
   ( translation-invariant-dist-ℕ -- dist (a + m) (a + n) = dist m n
@@ -754,7 +752,7 @@ open import elementary-number-theory.absolute-value-integers using
   ; multiplicative-abs-ℤ -- |x * y| = |x| * |y|
   )
 _ : (x : ℤ) → (x ＝ zero-ℤ) ↔ (abs-ℤ x ＝ zero-ℕ)
-_ = λ x → pair (abs-eq-ℤ x) (eq-abs-ℤ x)
+_ = λ x → (abs-eq-ℤ x , eq-abs-ℤ x)
 ```
 
 ## 7 Modular arithmetic via the Curry-Howard interpretation
@@ -915,14 +913,12 @@ open import elementary-number-theory.divisibility-natural-numbers using
   ( is-zero-div-ℕ
   ; div-is-zero-ℕ)
 _ : (d x : ℕ) → x <-ℕ d → div-ℕ d x ↔ (x ＝ 0)
-_ = λ d x x<d → pair (is-zero-div-ℕ d x x<d) (div-is-zero-ℕ d x)
+_ = λ d x x<d → (is-zero-div-ℕ d x x<d , div-is-zero-ℕ d x)
 open import elementary-number-theory.congruence-natural-numbers using
   ( eq-cong-le-dist-ℕ
   ; cong-identification-ℕ)
 _ : (k x y : ℕ) → dist-ℕ x y <-ℕ k → x ≡ y mod k ↔ (x ＝ y)
-_ =
-  λ k x y dist<d →
-    pair (eq-cong-le-dist-ℕ k x y dist<d) (cong-identification-ℕ k)
+_ = λ k x y dist<d → (eq-cong-le-dist-ℕ k x y dist<d , cong-identification-ℕ k)
 ```
 
 **Theorem 7.4.7.** Equality modulo `k + 1` corresponds to equality after inclusion to `Fin (k + 1)`.
@@ -932,7 +928,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
   ( cong-eq-mod-succ-ℕ
   ; eq-mod-succ-cong-ℕ)
 _ : (k x y : ℕ) → (mod-succ-ℕ k x ＝ mod-succ-ℕ k y) ↔ (x ≡ y mod (succ-ℕ k))
-_ = λ k x y → pair (cong-eq-mod-succ-ℕ k x y) (eq-mod-succ-cong-ℕ k x y)
+_ = λ k x y → (cong-eq-mod-succ-ℕ k x y , eq-mod-succ-cong-ℕ k x y)
 ```
 
 **Theorem 7.4.8.** The map from natural numbers is split surjective.
@@ -1024,7 +1020,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
   ( is-add-one-succ-Fin')
 ```
 
-**Exercise 7.5.** Observational equality on `Fin k`.
+**Exercise 7.5.** Observational equality of `Fin k`.
 
 ```agda
 open import univalent-combinatorics.equality-standard-finite-types using
@@ -1033,7 +1029,7 @@ open import univalent-combinatorics.equality-standard-finite-types using
   ( Eq-Fin-eq
   ; eq-Eq-Fin)
 _ : (k : ℕ) → {x y : Fin k} → (x ＝ y) ↔ Eq-Fin k x y
-_ = λ k → pair (Eq-Fin-eq k) (eq-Eq-Fin k)
+_ = λ k → (Eq-Fin-eq k , eq-Eq-Fin k)
 open import univalent-combinatorics.standard-finite-types using
   ( is-injective-inl-Fin)
 open import univalent-combinatorics.standard-finite-types using
@@ -1064,7 +1060,7 @@ open import univalent-combinatorics.classical-finite-types using
   ; Eq-eq-classical-Fin
   ; eq-Eq-classical-Fin)
 _ : (k : ℕ) → (x y : classical-Fin k) → (x ＝ y) ↔ Eq-classical-Fin k x y
-_ = λ k x y → pair (Eq-eq-classical-Fin k x y) (eq-Eq-classical-Fin k x y)
+_ = λ k x y → (Eq-eq-classical-Fin k x y , eq-Eq-classical-Fin k x y)
 open import univalent-combinatorics.classical-finite-types using
   ( classical-standard-Fin -- ι
   ; standard-classical-Fin -- α
@@ -1118,4 +1114,450 @@ open import elementary-number-theory.finitary-natural-numbers using
   ; is-section-inv-convert-based-ℕ -- fₖ₊₁ (gₖ n) = n
   ; is-retraction-inv-convert-based-ℕ -- gₖ (fₖ₊₁ x) = x
   )
+```
+
+## 8 Decidability in elementary number theory
+
+### 8.1 Decidability and decidable equality
+
+**Definition 8.1.1.** Decidable types.
+
+```agda
+open import foundation.decidable-types using
+  ( is-decidable)
+```
+
+**Example 8.1.2.** The unit type and the empty type are decidable
+
+```agda
+open import foundation.decidable-types using
+  ( is-decidable-unit
+  ; is-decidable-empty)
+```
+
+**Example 8.1.3.** Decidability of coproducts, products and functions.
+
+```agda
+open import foundation.decidable-types using
+  ( is-decidable-coproduct -- if A and B are decidable, then A + B is decidable
+  ; is-decidable-product -- if A and B are decidable, then A × B is decidable
+  ; is-decidable-function-type -- if A and B are decidable, then A → B is decidable
+  ; is-decidable-neg -- if A is decidable, then ¬A is decidable
+  )
+```
+
+**Example 8.1.4.** Decidability of observational equality and inequality on ℕ.
+
+```agda
+open import elementary-number-theory.equality-natural-numbers using
+  ( is-decidable-Eq-ℕ)
+open import elementary-number-theory.inequality-natural-numbers using
+  ( is-decidable-leq-ℕ)
+open import elementary-number-theory.strict-inequality-natural-numbers using
+  ( is-decidable-le-ℕ)
+```
+
+**Definition 8.1.5.** Decidable equality.
+
+```agda
+open import foundation.decidable-equality using
+  ( has-decidable-equality)
+```
+
+**Lemma 8.1.6.** Decidability of logically equivalent types is logically equivalent.
+
+```agda
+open import foundation.decidable-types using
+  ( is-decidable-iff')
+```
+
+**Proposition 8.1.7.** Equality on ℕ is decidable.
+
+```agda
+open import elementary-number-theory.equality-natural-numbers using
+  ( has-decidable-equality-ℕ)
+```
+
+**Proposition 8.1.8.** Equality on `Fin k` is decidable.
+
+```agda
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( is-decidable-Eq-Fin
+  ; has-decidable-equality-Fin)
+```
+
+**Theorem 8.1.9.** Divisibility is decidable.
+
+```agda
+open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+  ( is-decidable-div-ℕ)
+```
+
+### 8.2 Constructions by case analysis
+
+**Definition 8.2.1.** The Collatz function.
+TODO: report that "collatz function" is inconsistently capitalized.
+
+Note that we don't store the helper function `h` in a separate definition.
+Instead we use Agda's `with` abstraction to do case analysis on the result of
+`is-decidable-div-ℕ 2 n`, as explained in Remark 8.2.2.
+
+```agda
+open import elementary-number-theory.collatz-conjecture using
+  ( collatz)
+```
+
+**Proposition 8.2.3.** Decidability of products and function types with weaker
+assumptions.
+
+```agda
+open import foundation.decidable-types using
+  ( is-decidable-product'
+  ; is-decidable-function-type')
+```
+
+**Proposition 8.2.4.**
+
+```agda
+open import elementary-number-theory.decidable-types using
+  ( is-decidable-Π-ℕ)
+```
+
+**Corollary 8.2.5.** TODO: "upper bound for P" is only defined in the next section.
+
+```agda
+open import elementary-number-theory.decidable-types using
+  ( is-decidable-bounded-Π-ℕ)
+```
+
+### 8.3 The well-ordering principle of ℕ
+
+**Definition 8.3.1.** Bounds for families over ℕ.
+
+```agda
+open import elementary-number-theory.lower-bounds-natural-numbers using
+  ( is-lower-bound-ℕ)
+open import elementary-number-theory.upper-bounds-natural-numbers using
+  ( is-upper-bound-ℕ)
+open import elementary-number-theory.well-ordering-principle-natural-numbers using
+  ( minimal-element-ℕ)
+```
+
+**Theorem 8.3.2.** Well-ordering principle of ℕ.
+
+```agda
+open import elementary-number-theory.well-ordering-principle-natural-numbers using
+  ( well-ordering-principle-ℕ)
+```
+
+### 8.4 The greatest common divisor
+
+**Definition 8.4.1.** The type of greatest common divisors.
+
+```agda
+open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+  ( is-gcd-ℕ)
+```
+
+**Proposition 8.4.2.** Uniqueness of the greatest common divisor.
+
+```agda
+open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+  ( uniqueness-is-gcd-ℕ)
+```
+
+**Definition 8.4.3.** Multiples of the greatest common divisor.
+
+```agda
+open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+  ( is-multiple-of-gcd-ℕ)
+```
+
+**Proposition 8.4.4.** Decidability of multiples of the greatest common divisor.
+
+```agda
+open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+  ( is-decidable-is-multiple-of-gcd-ℕ)
+```
+
+**Lemma 8.4.5.** `a + b` is a multiple of `gcd(a, b)`.
+
+```agda
+open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+  ( sum-is-multiple-of-gcd-ℕ)
+```
+
+**Definition 8.4.6.** The greatest common divisor.
+
+```agda
+open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+  ( gcd-ℕ)
+```
+
+**Lemma 8.4.7.** `gcd(a, b)` is zero if and only if `a + b` = 0.
+
+```agda
+open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+  ( is-zero-gcd-ℕ
+  ; is-zero-add-is-zero-gcd-ℕ)
+_ : (a b : ℕ) → (gcd-ℕ a b ＝ zero-ℕ) ↔ (add-ℕ a b ＝ zero-ℕ)
+_ = λ a b → (is-zero-add-is-zero-gcd-ℕ a b , is-zero-gcd-ℕ a b)
+```
+
+**Theorem 8.4.8.** `gcd(a, b)` is a greatest common divisor.
+
+```agda
+open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+  ( is-gcd-gcd-ℕ)
+```
+
+### 8.5 The infinitude of primes
+
+**Definition 8.5.1.** Proper divisors and primes.
+
+```agda
+open import elementary-number-theory.proper-divisors-natural-numbers using
+  ( is-proper-divisor-ℕ)
+open import elementary-number-theory.prime-numbers using
+  ( is-prime-ℕ)
+```
+
+**Proposition 8.5.2.** Being a prime is decidable.
+
+```agda
+open import elementary-number-theory.prime-numbers using
+  ( is-decidable-is-prime-ℕ)
+```
+
+**Definition 8.5.3.** Sieve of Erathostenes.
+
+```agda
+open import elementary-number-theory.sieve-of-eratosthenes using
+  ( in-sieve-of-eratosthenes-ℕ)
+```
+
+**Lemma 8.5.4.** Being in the sieve of Erathostenes is decidable.
+
+```agda
+open import elementary-number-theory.sieve-of-eratosthenes using
+  ( is-decidable-in-sieve-of-eratosthenes-ℕ)
+```
+
+**Lemma 8.5.5.** `n! + 1` is above `n` in the sieve.
+
+```agda
+open import elementary-number-theory.sieve-of-eratosthenes using
+  ( in-sieve-of-eratosthenes-succ-factorial-ℕ)
+```
+
+**Theorem 8.5.6.** Infinitude of primes.
+
+```agda
+open import elementary-number-theory.infinitude-of-primes using
+  ( infinitude-of-primes-ℕ)
+```
+
+### 8.6 Boolean reflection
+
+**Definition 8.6.1.** Booleanization.
+
+```agda
+open import reflection.boolean-reflection using
+  ( booleanization)
+```
+
+**Theorem 8.6.2.** Boolean reflection principle.
+
+```agda
+open import reflection.boolean-reflection using
+  ( boolean-reflection -- reflect
+  )
+_ : is-prime-ℕ 37
+_ = boolean-reflection (is-decidable-is-prime-ℕ 37) refl
+```
+
+### Exercises
+
+**Exercise 8.1.** Statements of famous conjectures.
+
+```agda
+open import elementary-number-theory.goldbach-conjecture using
+  ( Goldbach-conjecture)
+open import elementary-number-theory.twin-prime-conjecture using
+  ( twin-prime-conjecture)
+open import elementary-number-theory.collatz-conjecture using
+  ( Collatz-conjecture)
+```
+
+**Exercise 8.2.** `is-decidable` is idempotent.
+
+```agda
+open import foundation.decidable-types using
+  ( idempotent-is-decidable -- is-decidable (is-decidable P) → is-decidable P
+  )
+```
+
+**Exercise 8.3.** Markov's principle over finite types.
+
+```agda
+open import elementary-number-theory.well-ordering-principle-standard-finite-types using
+  ( exists-not-not-for-all-Fin -- ¬((x : Fin k) → P x) → Σ (x : Fin k) ¬(P x)
+  )
+```
+
+**Exercise 8.4.** Prime functions.
+
+```agda
+open import elementary-number-theory.infinitude-of-primes using
+  ( prime-ℕ -- n-th prime
+  ; prime-counting-ℕ -- number of primes less than or equal `n`
+  )
+```
+
+**Exercise 8.5.** Alternative definition of prime numbers.
+
+TODO
+
+**Exercise 8.6.** Products have decidable equality if and only if factors have
+decidable equality, assuming the other factor is pointed.
+
+```agda
+open import foundation.decidable-equality using
+  ( has-decidable-equality-product'
+  ; has-decidable-equality-left-factor
+  ; has-decidable-equality-right-factor)
+_ :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (B → has-decidable-equality A) × (A → has-decidable-equality B) ↔
+  has-decidable-equality (A × B)
+_ =
+  ( λ (eqA , eqB) → has-decidable-equality-product' eqA eqB) ,
+  ( λ eqAB →
+    has-decidable-equality-left-factor eqAB ,
+    has-decidable-equality-right-factor eqAB)
+open import foundation.decidable-equality using
+  ( has-decidable-equality-product)
+```
+
+**Exercise 8.7.** Observational equality of coproducts.
+
+TODO: Equality of coproducts is defined as an inductive instead of recursively.
+Is that because the identity types need to be raised?
+
+```agda
+open import foundation.equality-coproduct-types using
+  ( Eq-coproduct)
+open import foundation.equality-coproduct-types using
+  ( Eq-eq-coproduct
+  ; eq-Eq-coproduct)
+_ :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (x y : A + B) → (x ＝ y) ↔ Eq-coproduct x y
+_ = λ x y → (Eq-eq-coproduct x y , eq-Eq-coproduct x y)
+open import foundation.decidable-equality using
+  ( has-decidable-equality-coproduct
+  ; has-decidable-equality-left-summand
+  ; has-decidable-equality-right-summand)
+_ :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  has-decidable-equality A × has-decidable-equality B ↔
+  has-decidable-equality (A + B)
+_ =
+  ( λ (eqA , eqB) → has-decidable-equality-coproduct eqA eqB) ,
+  ( λ eqAB →
+    has-decidable-equality-left-summand eqAB ,
+    has-decidable-equality-right-summand eqAB)
+open import elementary-number-theory.equality-integers using
+  ( has-decidable-equality-ℤ)
+```
+
+**Exercise 8.8.** Decidable equality in dependent pair types.
+
+TODO: This needs Eq-Σ, which is introduced in Section 9.3, right?
+
+```agda
+open import foundation.decidable-equality using
+  ( has-decidable-equality-Σ
+  ; has-decidable-equality-fiber-has-decidable-equality-Σ)
+_ :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → has-decidable-equality A →
+  ((x : A) → has-decidable-equality (B x)) ↔
+  has-decidable-equality (Σ A B)
+_ =
+  λ eqA →
+    has-decidable-equality-Σ eqA ,
+    has-decidable-equality-fiber-has-decidable-equality-Σ eqA
+open import foundation.decidable-equality using
+  ( has-decidable-equality-base-has-decidable-equality-Σ)
+```
+
+**Exercise 8.9.** Decidability and decidable equality of dependent function out
+of `Fin k`
+
+TODO: Decidable equality needs function extensionality, right?
+
+```agda
+open import univalent-combinatorics.decidable-dependent-function-types using
+  ( is-decidable-Π-Fin)
+-- TODO: b
+```
+
+**Exercise 8.10.** Definition of the greatest common divisor as the maximal
+element of common divisors.
+
+TODO
+
+**Exercise 8.11.** Bézout's identity.
+
+```agda
+open import elementary-number-theory.bezouts-lemma-natural-numbers using
+  ( is-decidable-is-distance-between-multiples-ℕ
+    --^ Σ (k : ℕ) Σ (l : ℕ) dist(k*x, l*x) = z is decidable
+  ; minimal-positive-distance-x-coeff
+  ; minimal-positive-distance-y-coeff
+  ; bezouts-lemma-eqn-ℕ
+  )
+-- TODO: handle a+b=0
+_ :
+  (x y : ℕ) → ¬ (add-ℕ x y ＝ zero-ℕ) →
+  Σ ℕ (λ k → Σ ℕ (λ l → dist-ℕ (mul-ℕ k x) (mul-ℕ l y) ＝ gcd-ℕ x y))
+_ =
+  λ x y possum →
+    minimal-positive-distance-x-coeff x y possum ,
+    minimal-positive-distance-y-coeff x y possum ,
+    bezouts-lemma-eqn-ℕ x y possum
+```
+
+**Exercise 8.12.** Prime factor decomposition.
+
+```agda
+open import elementary-number-theory.fundamental-theorem-of-arithmetic using
+  ( nat-least-nontrivial-divisor-ℕ -- for every 1 < n a number...
+  ; is-prime-least-nontrivial-divisor-ℕ -- which is a prime...
+  ; div-least-nontrivial-divisor-ℕ -- and divides n
+  )
+open import elementary-number-theory.fundamental-theorem-of-arithmetic using
+  ( list-fundamental-theorem-arithmetic-ℕ -- for every 1 < n a list of numbers...
+  ; is-sorted-list-fundamental-theorem-arithmetic-ℕ -- which is sorted...
+  ; is-prime-list-fundamental-theorem-arithmetic-ℕ -- only contains primes...
+  ; is-decomposition-list-fundamental-theorem-arithmetic-ℕ -- and multiplies up to n
+  )
+open import elementary-number-theory.fundamental-theorem-of-arithmetic using
+  ( eq-prime-decomposition-list-ℕ -- prime decompositions of a fixed number are equal
+  )
+```
+
+**Exercise 8.13.** TODO
+
+**Exercise 8.14.** Prime fields.
+
+TODO.
+
+**Exercise 8.15.** The cofibonacci sequenece.
+
+```agda
+open import elementary-number-theory.cofibonacci using
+  ( cofibonacci
+  ; forward-is-left-adjoint-cofibonacci)
+-- TODO: backward direction of the adjointness equivalence
 ```
