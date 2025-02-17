@@ -371,20 +371,19 @@ module _
   preserves-mul-ev-linear-combination-Semiring r nil s =
     inv (absorption-law-action-Monoid-With-Semiring-Action R M r s)
   preserves-mul-ev-linear-combination-Semiring r (cons (x , a , y) l) s =
-    {!!}
-
-{-
     ap-binary
       ( mul-Monoid-With-Semiring-Action R M)
-      ( α r x a)
-      ( preserves-mul-ev-linear-combination-Semiring r u) ∙
+      ( α r x a y s)
+      ( preserves-mul-ev-linear-combination-Semiring r l s) ∙
     inv
-      ( inner-distributive-action-mul-Monoid-With-Semiring-Action R M r
-        ( μ x a)
+      ( inner-distributive-action-mul-Monoid-With-Semiring-Action R M
+        ( r)
+        ( μ x a y)
         ( ev-monoid-linear-combination-Semiring R
           ( monoid-Monoid-With-Semiring-Action R M)
           ( μ)
-          ( u))) -}
+          ( l))
+        ( s))
 
   is-linear-combination-action-Semiring :
     (r : type-Semiring R)
