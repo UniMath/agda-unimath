@@ -76,7 +76,8 @@ open import elementary-number-theory.binomial-coefficients using
   ; is-zero-binomial-coefficient-ℕ)
 ```
 
-**Exercise 3.5.** Fibonacci sequence using the induction principle of natural numbers.
+**Exercise 3.5.** Fibonacci sequence using the induction principle of natural
+numbers.
 
 ```agda
 open import elementary-number-theory.fibonacci-sequence using
@@ -185,7 +186,7 @@ open import elementary-number-theory.integers using
 
 **Definition 4.6.1.** The dependent pair type.
 
-Note that the library defines the type of dependent pairs as a *record* as
+Note that the library defines the type of dependent pairs as a _record_ as
 opposed to an inductive type. This allows us to instruct Agda to add a
 judgmental eta law for pairs.
 
@@ -221,7 +222,8 @@ open import foundation.cartesian-product-types using
 
 ### Exercises
 
-**Exercise 4.1.** Predecessor, addition, negation and multiplication on integers.
+**Exercise 4.1.** Predecessor, addition, negation and multiplication on
+integers.
 
 ```agda
 open import elementary-number-theory.integers using
@@ -247,7 +249,7 @@ open import foundation.booleans using
 
 **Exercise 4.3.** Double negation.
 
-Note that we call bi-implications *logical equivalences* in the library.
+Note that we call bi-implications _logical equivalences_ in the library.
 
 ```agda
 open import foundation.logical-equivalences using
@@ -472,7 +474,8 @@ open import foundation.identity-types using
   ( mac-lane-pentagon)
 ```
 
-**Exercise 5.5.** Semiring laws for addition and multiplication of natural numbers.
+**Exercise 5.5.** Semiring laws for addition and multiplication of natural
+numbers.
 
 ```agda
 open import elementary-number-theory.multiplication-natural-numbers using
@@ -495,7 +498,8 @@ open import elementary-number-theory.multiplication-natural-numbers using
   )
 ```
 
-**Exercise 5.6.** Successor and predecessor operations on integers are mutual inverses.
+**Exercise 5.6.** Successor and predecessor operations on integers are mutual
+inverses.
 
 ```agda
 open import elementary-number-theory.integers using
@@ -921,7 +925,8 @@ _ : (k x y : ℕ) → dist-ℕ x y <-ℕ k → x ≡ y mod k ↔ (x ＝ y)
 _ = λ k x y dist<d → (eq-cong-le-dist-ℕ k x y dist<d , cong-identification-ℕ k)
 ```
 
-**Theorem 7.4.7.** Equality modulo `k + 1` corresponds to equality after inclusion to `Fin (k + 1)`.
+**Theorem 7.4.7.** Equality modulo `k + 1` corresponds to equality after
+inclusion to `Fin (k + 1)`.
 
 ```agda
 open import elementary-number-theory.modular-arithmetic-standard-finite-types using
@@ -1164,7 +1169,8 @@ open import foundation.decidable-equality using
   ( has-decidable-equality)
 ```
 
-**Lemma 8.1.6.** Decidability of logically equivalent types is logically equivalent.
+**Lemma 8.1.6.** Decidability of logically equivalent types is logically
+equivalent.
 
 ```agda
 open import foundation.decidable-types using
@@ -1195,8 +1201,8 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 
 ### 8.2 Constructions by case analysis
 
-**Definition 8.2.1.** The Collatz function.
-TODO: report that "collatz function" is inconsistently capitalized.
+**Definition 8.2.1.** The Collatz function. TODO: report that "collatz function"
+is inconsistently capitalized.
 
 Note that we don't store the helper function `h` in a separate definition.
 Instead we use Agda's `with` abstraction to do case analysis on the result of
@@ -1223,7 +1229,8 @@ open import elementary-number-theory.decidable-types using
   ( is-decidable-Π-ℕ)
 ```
 
-**Corollary 8.2.5.** TODO: "upper bound for P" is only defined in the next section.
+**Corollary 8.2.5.** TODO: "upper bound for P" is only defined in the next
+section.
 
 ```agda
 open import elementary-number-theory.decidable-types using
