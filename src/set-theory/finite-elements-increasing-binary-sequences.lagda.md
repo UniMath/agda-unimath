@@ -7,6 +7,7 @@ module set-theory.finite-elements-increasing-binary-sequences where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -92,6 +93,39 @@ is-prop-leq-ℕ-ℕ∞↑ x n =
 is-decidable-leq-ℕ-ℕ∞↑ : (x : ℕ∞↑) (n : ℕ) → is-decidable (x ≤-ℕ∞↑-ℕ n)
 is-decidable-leq-ℕ-ℕ∞↑ x n =
   is-decidable-Decidable-Prop (leq-decidable-prop-ℕ-ℕ∞↑ x n)
+```
+
+### Strict finite boundedness below of increasing binary sequences
+
+An increasing binary sequence `x` is _bounded below_ by a natural number `n` if
+`x n` is false.
+
+```agda
+le-decidable-prop-ℕ∞↑-ℕ : ℕ → ℕ∞↑ → Decidable-Prop lzero
+le-decidable-prop-ℕ∞↑-ℕ n x = is-false-Decidable-Prop (sequence-ℕ∞↑ x n)
+
+le-prop-ℕ∞↑-ℕ : ℕ → ℕ∞↑ → Prop lzero
+le-prop-ℕ∞↑-ℕ n x = prop-Decidable-Prop (le-decidable-prop-ℕ∞↑-ℕ n x)
+
+le-ℕ∞↑-ℕ : ℕ → ℕ∞↑ → UU lzero
+le-ℕ∞↑-ℕ x n = type-Decidable-Prop (le-decidable-prop-ℕ∞↑-ℕ x n)
+
+infix 30 _<-ℕ-ℕ∞↑_
+_<-ℕ-ℕ∞↑_ : ℕ → ℕ∞↑ → UU lzero
+_<-ℕ-ℕ∞↑_ = le-ℕ∞↑-ℕ
+
+is-prop-le-ℕ∞↑-ℕ : (n : ℕ) (x : ℕ∞↑) → is-prop (n <-ℕ-ℕ∞↑ x)
+is-prop-le-ℕ∞↑-ℕ n x =
+  is-prop-type-Decidable-Prop (le-decidable-prop-ℕ∞↑-ℕ n x)
+
+is-decidable-le-ℕ∞↑-ℕ : (n : ℕ) (x : ℕ∞↑) → is-decidable (n <-ℕ-ℕ∞↑ x)
+is-decidable-le-ℕ∞↑-ℕ n x =
+  is-decidable-Decidable-Prop (le-decidable-prop-ℕ∞↑-ℕ n x)
+```
+
+```agda
+is-positive-ℕ∞↑ : ℕ∞↑ → UU lzero
+is-positive-ℕ∞↑ x = 0 <-ℕ-ℕ∞↑ x
 ```
 
 ### Bounds on the size of a finite element in increasing binary sequences
@@ -196,4 +230,41 @@ module _
 --   upper-bound-ℕ∞↑ x →
 --   least-upper-bound-ℕ∞↑ x
 -- least-upper-bound-upper-bound-ℕ∞↑ x H = {!   !}
+```
+
+### If an increasing binary sequence is strictly bounded below by a natural number, then it is positive
+
+```agda
+le-le-succ-ℕ∞↑-ℕ : (x : ℕ∞↑) (n : ℕ) → (succ-ℕ n) <-ℕ-ℕ∞↑ x → n <-ℕ-ℕ∞↑ x
+le-le-succ-ℕ∞↑-ℕ x n =
+  is-false-is-false-leq-bool (is-increasing-sequence-ℕ∞↑ x n)
+
+is-positive-le-ℕ∞↑-ℕ : (x : ℕ∞↑) (n : ℕ) → n <-ℕ-ℕ∞↑ x → is-positive-ℕ∞↑ x
+is-positive-le-ℕ∞↑-ℕ x 0 p = p
+is-positive-le-ℕ∞↑-ℕ x (succ-ℕ n) p =
+  is-positive-le-ℕ∞↑-ℕ x n (le-le-succ-ℕ∞↑-ℕ x n p)
+```
+
+### If an increasing binary sequence is bounded above by a finite number, then it is bounded above by any larger finite number
+
+```agda
+abstract
+  leq-succ-leq-ℕ-ℕ∞↑ : (x : ℕ∞↑) (n : ℕ) → x ≤-ℕ∞↑-ℕ n → x ≤-ℕ∞↑-ℕ (succ-ℕ n)
+  leq-succ-leq-ℕ-ℕ∞↑ x n =
+    is-true-is-true-leq-bool (is-increasing-sequence-ℕ∞↑ x n)
+
+abstract
+  leq-leq-zero-ℕ-ℕ∞↑ : (x : ℕ∞↑) (n : ℕ) → x ≤-ℕ∞↑-ℕ 0 → x ≤-ℕ∞↑-ℕ n
+  leq-leq-zero-ℕ-ℕ∞↑ x 0 s = s
+  leq-leq-zero-ℕ-ℕ∞↑ x (succ-ℕ i) s =
+    contrapositive-is-false-bool
+      ( is-false-is-false-leq-bool (is-increasing-sequence-ℕ∞↑ x i))
+      ( leq-leq-zero-ℕ-ℕ∞↑ x i s)
+
+abstract
+  concatenate-right-leq-ℕ-ℕ∞↑ :
+    (x : ℕ∞↑) (n m : ℕ) → n ≤-ℕ m → x ≤-ℕ∞↑-ℕ n → x ≤-ℕ∞↑-ℕ m
+  concatenate-right-leq-ℕ-ℕ∞↑ x 0 m p = leq-leq-zero-ℕ-ℕ∞↑ x m
+  concatenate-right-leq-ℕ-ℕ∞↑ x (succ-ℕ n) (succ-ℕ m) =
+    concatenate-right-leq-ℕ-ℕ∞↑ (shift-left-ℕ∞↑ x) n m
 ```

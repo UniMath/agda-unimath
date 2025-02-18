@@ -267,6 +267,16 @@ is-false-is-not-true false np = refl
 is-true-is-not-false : (x : bool) → ¬ (is-false x) → is-true x
 is-true-is-not-false true np = refl
 is-true-is-not-false false np = ex-falso (np refl)
+
+contrapositive-is-true-bool :
+  {x y : bool} → (is-true x → is-true y) → is-false y → is-false x
+contrapositive-is-true-bool {x} f refl =
+  is-false-is-not-true x (neq-false-true-bool ∘ f)
+
+contrapositive-is-false-bool :
+  {x y : bool} → (is-false x → is-false y) → is-true y → is-true x
+contrapositive-is-false-bool {x} f refl =
+  is-true-is-not-false x (neq-true-false-bool ∘ f)
 ```
 
 ### The type of booleans is equivalent to `Fin 2`

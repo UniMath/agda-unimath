@@ -124,9 +124,12 @@ succ-ℕ∞↑ (x , H) =
 ### The predecessor function
 
 ```agda
+shift-left-ℕ∞↑ : ℕ∞↑ → ℕ∞↑
+shift-left-ℕ∞↑ (x , H) = (x ∘ succ-ℕ , H ∘ succ-ℕ)
+
 decons-ℕ∞↑ : ℕ∞↑ → Maybe ℕ∞↑
 decons-ℕ∞↑ (x , H) =
-  rec-bool exception-Maybe (unit-Maybe (x ∘ succ-ℕ , H ∘ succ-ℕ)) (x 0)
+  rec-bool exception-Maybe (unit-Maybe (shift-left-ℕ∞↑ (x , H))) (x 0)
 ```
 
 ### The constructor function

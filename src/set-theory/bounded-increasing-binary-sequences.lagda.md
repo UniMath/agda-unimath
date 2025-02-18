@@ -42,8 +42,8 @@ open import foundation.universe-levels
 
 open import foundation-core.identity-types
 
+open import logic.double-negation-dense-maps
 open import logic.double-negation-eliminating-maps
-open import logic.irrefutably-surjective-maps
 
 open import order-theory.order-preserving-maps-posets
 open import order-theory.posets

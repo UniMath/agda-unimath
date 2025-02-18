@@ -222,6 +222,16 @@ leq-and-bool'' {true} {true} {true} p q = star
 leq-and-bool'' {false} {y} {z} p q = star
 ```
 
+```agda
+is-false-is-false-leq-bool :
+  {x y : bool} → leq-bool x y → is-false y → is-false x
+is-false-is-false-leq-bool {false} {false} p refl = refl
+
+is-true-is-true-leq-bool :
+  {x y : bool} → leq-bool x y → is-true x → is-true y
+is-true-is-true-leq-bool {true} {true} p refl = refl
+```
+
 ## See also
 
 - The underlying category of the poset of booleans is called

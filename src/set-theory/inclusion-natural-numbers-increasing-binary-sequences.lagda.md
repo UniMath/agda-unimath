@@ -22,6 +22,7 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
@@ -38,14 +39,15 @@ open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.tight-apartness-relations
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
 
+open import logic.double-negation-dense-maps
 open import logic.double-negation-eliminating-maps
-open import logic.irrefutably-surjective-maps
 
 open import order-theory.order-preserving-maps-posets
 
@@ -71,8 +73,8 @@ at infinity. We may extend this inclusion by adding a point at infinity
   ℕ + {∞} ↪ ℕ∞↑
 ```
 
-to obtain a [dense](logic.irrefutably-surjective-maps.md) embedding of sets.
-This map is surjective if and only if the
+to obtain a [double negation dense](logic.double-negation-dense-maps.md)
+embedding of sets. This map is surjective if and only if the
 [weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)
 holds.
 
@@ -114,16 +116,6 @@ abstract
     is-emb-is-injective is-set-ℕ∞↑ is-injective-inclusion-ℕ∞↑-ℕ
 ```
 
-### The canonical inclusion is double negation stable
-
-> Needs case analysis on infinity
-
-```agda
--- double-negation-elim-inclusion-ℕ∞↑-ℕ :
---   is-double-negation-eliminating-map inclusion-ℕ∞↑-ℕ
--- double-negation-elim-inclusion-ℕ∞↑-ℕ x = {!   !}
-```
-
 ### The canonical inclusion preserves order
 
 ```agda
@@ -140,60 +132,32 @@ abstract
       ( preserves-order-inclusion-ℕ∞↑-ℕ x y p)
 ```
 
-### If an increasing binary sequence changes from false to true at position `n`, then it is in the image of the canonical inclusion
-
-```agda
-leq-inclusion-ℕ∞↑-ℕ-leq-ℕ-ℕ∞↑ :
-    (x : ℕ∞↑) (n : ℕ) → x ≤-ℕ∞↑-ℕ n → x ≤-ℕ∞↑ (inclusion-ℕ∞↑-ℕ n)
-leq-inclusion-ℕ∞↑-ℕ-leq-ℕ-ℕ∞↑ x zero-ℕ p zero-ℕ =
-  leq-eq-bool {true} {sequence-ℕ∞↑ x zero-ℕ} (inv p)
-leq-inclusion-ℕ∞↑-ℕ-leq-ℕ-ℕ∞↑ x zero-ℕ p (succ-ℕ i) =
-  {! leq-inclusion-ℕ∞↑-ℕ-leq-ℕ-ℕ∞↑ x zero-ℕ p i  !}
-leq-inclusion-ℕ∞↑-ℕ-leq-ℕ-ℕ∞↑ x (succ-ℕ n) p i = {!   !}
-
-abstract
-  Eq-inclusion-ℕ∞↑-ℕ :
-    (x : ℕ∞↑) (n : ℕ) →
-    ¬ (x ≤-ℕ∞↑-ℕ n) → x ≤-ℕ∞↑-ℕ (succ-ℕ n) →
-    Eq-ℕ∞↑ x (inclusion-ℕ∞↑-ℕ (succ-ℕ n))
-  Eq-inclusion-ℕ∞↑-ℕ x zero-ℕ np p zero-ℕ =
-    is-false-is-not-true (pr1 x 0) np
-  Eq-inclusion-ℕ∞↑-ℕ x zero-ℕ np p (succ-ℕ k) =
-    Eq-leq-zero-ℕ∞↑ (pr1 x ∘ succ-ℕ , pr2 x ∘ succ-ℕ) (λ n → {! p   !}) k
-  Eq-inclusion-ℕ∞↑-ℕ x (succ-ℕ n) np p = {!   !}
-
--- abstract
---   eq-zero-is-zero-ℕ∞↑ :
---     (x : ℕ∞↑) →
---     is-true (sequence-ℕ∞↑ x 0) →
---     x ＝ zero-ℕ∞↑
---   eq-zero-is-zero-ℕ∞↑ x p =
---     eq-Eq-ℕ∞↑
---       ( Eq-zero-is-zero-ℕ∞↑ x p)
-```
-
-### If an increasing binary sequence is not in the image of the canonical inclusion then it is infinity
-
-```agda
-module _
-  (x : ℕ∞↑)
-  (H : (n : ℕ) → x ≠ inclusion-ℕ∞↑-ℕ n)
-  where
-
-  Eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ :
-    sequence-ℕ∞↑ x ~ const ℕ false
-  Eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ zero-ℕ =
-    is-false-is-not-true (sequence-ℕ∞↑ x 0) λ t → H 0 {!   !}
-  Eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ (succ-ℕ n) = {!   !}
-
-  eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ :
-    x ＝ infinity-ℕ∞↑
-  eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ =
-    eq-Eq-ℕ∞↑
-      ( Eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ)
-```
-
 ### The canonical inclusion is not surjective
+
+```agda
+abstract
+  Neq-infinity-inclusion-ℕ∞↑-ℕ :
+    (n : ℕ) → ¬ (sequence-ℕ∞↑ (inclusion-ℕ∞↑-ℕ n) ~ const ℕ false)
+  Neq-infinity-inclusion-ℕ∞↑-ℕ zero-ℕ H = neq-true-false-bool (H 0)
+  Neq-infinity-inclusion-ℕ∞↑-ℕ (succ-ℕ n) H =
+    Neq-infinity-inclusion-ℕ∞↑-ℕ n (H ∘ succ-ℕ)
+
+neq-infinity-inclusion-ℕ∞↑-ℕ :
+    (n : ℕ) → inclusion-ℕ∞↑-ℕ n ≠ infinity-ℕ∞↑
+neq-infinity-inclusion-ℕ∞↑-ℕ n =
+  map-neg Eq-eq-ℕ∞↑ (Neq-infinity-inclusion-ℕ∞↑-ℕ n)
+
+is-not-double-negation-dense-inclusion-ℕ∞↑-ℕ :
+  ¬ (is-double-negation-dense-map inclusion-ℕ∞↑-ℕ)
+is-not-double-negation-dense-inclusion-ℕ∞↑-ℕ H =
+  H infinity-ℕ∞↑ (λ p → neq-infinity-inclusion-ℕ∞↑-ℕ (pr1 p) (pr2 p))
+
+is-not-surjective-inclusion-ℕ∞↑-ℕ : ¬ (is-surjective inclusion-ℕ∞↑-ℕ)
+is-not-surjective-inclusion-ℕ∞↑-ℕ =
+  map-neg
+    is-double-negation-dense-map-is-surjective
+    is-not-double-negation-dense-inclusion-ℕ∞↑-ℕ
+```
 
 ### The canonical extended inclusion is an embedding
 
@@ -201,24 +165,79 @@ module _
 abstract
   is-emb-inclusion-ℕ∞↑-Maybe-ℕ : is-emb inclusion-ℕ∞↑-Maybe-ℕ
   is-emb-inclusion-ℕ∞↑-Maybe-ℕ =
-    is-emb-coproduct is-emb-inclusion-ℕ∞↑-ℕ (is-emb-is-injective is-set-ℕ∞↑ (is-injective-point infinity-ℕ∞↑)) {!   !}
+    is-emb-coproduct
+      ( is-emb-inclusion-ℕ∞↑-ℕ)
+      ( is-emb-is-injective is-set-ℕ∞↑ (is-injective-point infinity-ℕ∞↑))
+      ( λ n * → neq-infinity-inclusion-ℕ∞↑-ℕ n)
 ```
 
-### The canonical extended inclusion is irrefutably surjective
+#### Successor condition on the image of the natural numbers
+
+If an increasing binary sequence `x` switches from `false` to `true` at `n + 1`,
+then it is the image of `n + 1`.
 
 ```agda
-is-irrefutably-surjective-inclusion-ℕ∞↑-Maybe-ℕ :
-  is-irrefutably-surjective inclusion-ℕ∞↑-Maybe-ℕ
-is-irrefutably-surjective-inclusion-ℕ∞↑-Maybe-ℕ x np =
-  g (eq-infinity-is-not-finitely-bounded-ℕ∞↑ x λ n → map-neg {!   !} (h n)) -- TODO: need succ condition
-  where
-  g : ¬ (x ＝ infinity-ℕ∞↑)
-  g p = np (exception-Maybe , inv p)
+abstract
+  Eq-succ-criterion-ℕ∞↑ :
+    {x : ℕ∞↑} {n : ℕ} →
+    n <-ℕ-ℕ∞↑ x → x ≤-ℕ∞↑-ℕ (succ-ℕ n) → Eq-ℕ∞↑ x (inclusion-ℕ∞↑-ℕ (succ-ℕ n))
+  Eq-succ-criterion-ℕ∞↑ {x} {0} r s 0 = r
+  Eq-succ-criterion-ℕ∞↑ {x} {0} r s (succ-ℕ i) =
+    leq-leq-zero-ℕ-ℕ∞↑ (shift-left-ℕ∞↑ x) i s
+  Eq-succ-criterion-ℕ∞↑ {x} {succ-ℕ n} r s 0 =
+    is-positive-le-ℕ∞↑-ℕ x (succ-ℕ n) r
+  Eq-succ-criterion-ℕ∞↑ {x} {succ-ℕ n} r s (succ-ℕ i) =
+    Eq-succ-criterion-ℕ∞↑ {shift-left-ℕ∞↑ x} {n} r s i
 
-  h : (n : ℕ) → ¬ (x ＝ inclusion-ℕ∞↑-ℕ n)
-  h n p = np (inl n , inv p)
+eq-succ-criterion-ℕ∞↑ :
+  {x : ℕ∞↑} {n : ℕ} →
+  n <-ℕ-ℕ∞↑ x → x ≤-ℕ∞↑-ℕ (succ-ℕ n) → x ＝ inclusion-ℕ∞↑-ℕ (succ-ℕ n)
+eq-succ-criterion-ℕ∞↑ {x} {n} r s =
+  is-injective-sequence-ℕ∞↑ (eq-htpy (Eq-succ-criterion-ℕ∞↑ {x} {n} r s))
 ```
 
-### An increasing binary sequence is finitely bounded if and only if it is less than an increasing binary sequence in the image of the natural numbers
+### If an increasing binary sequence is not in the image of the natural numbers it is infinite
 
-> This remains to be formalized.
+```agda
+module _
+  (x : ℕ∞↑)
+  (H : (n : ℕ) → x ≠ inclusion-ℕ∞↑-ℕ n)
+  where
+
+  abstract
+    Eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ :
+      sequence-ℕ∞↑ x ~ const ℕ false
+    Eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ zero-ℕ =
+      is-false-is-not-true (sequence-ℕ∞↑ x 0) (H 0 ∘ eq-zero-is-zero-ℕ∞↑ x)
+    Eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ (succ-ℕ n) =
+      is-false-is-not-true
+        ( sequence-ℕ∞↑ x (succ-ℕ n))
+        ( H (succ-ℕ n) ∘
+          eq-succ-criterion-ℕ∞↑ (Eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ n))
+
+  eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ : x ＝ infinity-ℕ∞↑
+  eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ =
+    eq-Eq-ℕ∞↑ Eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ
+
+  eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ' : infinity-ℕ∞↑ ＝ x
+  eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ' =
+    inv eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ
+```
+
+### The extended inclusion is double negation dense
+
+```agda
+is-double-negation-dense-inclusion-ℕ∞↑-Maybe-ℕ :
+  is-double-negation-dense-map inclusion-ℕ∞↑-Maybe-ℕ
+is-double-negation-dense-inclusion-ℕ∞↑-Maybe-ℕ x H =
+  H ( inr star ,
+      eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ' x
+        ( λ n p → H (inl n , inv p)))
+```
+
+## References
+
+- [`CoNaturals.GenericConvergentSequence`](https://martinescardo.github.io/TypeTopology/CoNaturals.GenericConvergentSequence.html)
+  at TypeTopology {{#cite TypeTopology}}
+
+{{#bibliography}}

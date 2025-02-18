@@ -22,6 +22,7 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-coproduct-types
 open import foundation.homotopies
 open import foundation.inequality-booleans
 open import foundation.injective-maps
@@ -160,18 +161,6 @@ is-preorder-leq-ℕ∞↑ =
     antisymmetric-leq-ℕ∞↑)
 ```
 
-### `x ≤ y` if and only if, for all `n : ℕ`, `(n < x) → (n < y)`
-
-### Inequality of increasing binary sequences is linear
-
-> TODO: Probably need case analysis on infinity
-
-```agda
--- linear-leq-ℕ∞↑ :
---   (x y : ℕ∞↑) → (x ≤-ℕ∞↑ y) + (y ≤-ℕ∞↑ x)
--- linear-leq-ℕ∞↑ x y = {!   !}
-```
-
 ### The successor function preserves order
 
 ```agda
@@ -214,6 +203,15 @@ Eq-leq-infinity-ℕ∞↑ x p = eq-leq-false-bool ∘ p
 
 eq-leq-infinity-ℕ∞↑ : (x : ℕ∞↑) → infinity-ℕ∞↑ ≤-ℕ∞↑ x → x ＝ infinity-ℕ∞↑
 eq-leq-infinity-ℕ∞↑ x p = eq-Eq-ℕ∞↑ (Eq-leq-infinity-ℕ∞↑ x p)
+```
+
+### Inequality of increasing binary sequences is linear
+
+> TODO: Probably need case analysis on infinity
+
+```agda
+-- linear-leq-ℕ∞↑ : (x y : ℕ∞↑) → (x ≤-ℕ∞↑ y) + (y ≤-ℕ∞↑ x)
+-- linear-leq-ℕ∞↑ x y = map-coproduct {!   !} {!   !} {!   !}
 ```
 
 ### Joins

@@ -59,7 +59,7 @@ open import foundation-core.contractible-types
 open import logic.complements-decidable-subtypes
 open import logic.de-morgan-subtypes
 open import logic.de-morgan-types
-open import logic.irrefutably-surjective-maps
+open import logic.double-negation-dense-maps
 open import logic.propositionally-decidable-types
 
 open import univalent-combinatorics.counting
@@ -166,22 +166,22 @@ has-universal-decidability-search-has-universal-decidability-search-on-subtypes
 ### Universal decidability search transfers along irrefutable surjections
 
 ```agda
-has-universal-decidability-search-irrefutable-surjection :
+has-universal-decidability-search-double-negation-dense-map :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↠¬¬ Y →
   has-universal-decidability-search X → has-universal-decidability-search Y
-has-universal-decidability-search-irrefutable-surjection h f P =
+has-universal-decidability-search-double-negation-dense-map h f P =
   map-coproduct
     ( λ p x →
       rec-coproduct
         ( id)
         ( λ np →
           ex-falso
-            ( is-irrefutably-surjective-map-irrefutable-surjection h x
+            ( is-double-negation-dense-map-double-negation-dense-map h x
               ( λ yp →
                 np (tr (family-decidable-family P) (pr2 yp) (p (pr1 yp))))))
         ( is-decidable-decidable-family P x))
-    ( λ nph p → nph (p ∘ map-irrefutable-surjection h))
-    ( f (reindex-decidable-family P (map-irrefutable-surjection h)))
+    ( λ nph p → nph (p ∘ map-double-negation-dense-map h))
+    ( f (reindex-decidable-family P (map-double-negation-dense-map h)))
 ```
 
 ### Universal decidability search transfers along surjections
@@ -191,8 +191,8 @@ has-universal-decidability-search-surjection :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↠ Y →
   has-universal-decidability-search X → has-universal-decidability-search Y
 has-universal-decidability-search-surjection h =
-  has-universal-decidability-search-irrefutable-surjection
-    ( irrefutable-surjection-surjection h)
+  has-universal-decidability-search-double-negation-dense-map
+    ( double-negation-dense-map-surjection h)
 ```
 
 ### Types with universal decidability search are closed under retracts
@@ -202,8 +202,8 @@ has-universal-decidability-search-retract :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → Y retract-of X →
   has-universal-decidability-search X → has-universal-decidability-search Y
 has-universal-decidability-search-retract R =
-  has-universal-decidability-search-irrefutable-surjection
-    ( irrefutable-surjection-retract R)
+  has-universal-decidability-search-double-negation-dense-map
+    ( double-negation-dense-map-retract R)
 ```
 
 ### Types with universal decidability search are closed under equivalences
