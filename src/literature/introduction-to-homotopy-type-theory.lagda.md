@@ -318,6 +318,8 @@ open import foundation.booleans using
 
 Note that we call bi-implications _logical equivalences_ in the library.
 
+A type `X` for which we can show `¬¬X` is called _irrefutable_.
+
 ```agda
 open import foundation.logical-equivalences using
   ( _↔_)
@@ -342,7 +344,9 @@ open import foundation.double-negation using
   ( double-negation-double-negation-elim -- ¬¬(¬¬P → P)
   ; double-negation-Peirces-law -- ¬¬(((P → Q) → P) → P)
   ; double-negation-linearity-implication -- ¬¬((P → Q) + (Q → P))
-  ; double-negation-decidability -- ¬¬ (P + ¬ P)
+  )
+open import foundation.irrefutable-propositions using
+  ( is-irrefutable-is-decidable -- ¬¬(P + ¬P)
   )
 
 -- (d)
@@ -878,7 +882,41 @@ open import elementary-number-theory.multiplication-natural-numbers using
 _ : (m n k : ℕ) → (m ＝ n) ↔ (m *ℕ (succ-ℕ k) ＝ n *ℕ (succ-ℕ k))
 _ =
   λ m n k → (ap (λ x → x *ℕ (succ-ℕ k)) , is-injective-right-mul-succ-ℕ k)
--- TODO: b, c
+
+open import elementary-number-theory.addition-natural-numbers using
+  ( is-zero-summand-is-zero-sum-ℕ
+  ; is-zero-sum-is-zero-summand-ℕ)
+
+_ : (m n : ℕ) → (m +ℕ n ＝ 0) ↔ (m ＝ 0) × (n ＝ 0)
+_ =
+  λ m n →
+    ( is-zero-summand-is-zero-sum-ℕ m n , is-zero-sum-is-zero-summand-ℕ m n)
+
+open import elementary-number-theory.multiplication-natural-numbers using
+  ( is-zero-summand-is-zero-mul-ℕ
+  ; is-zero-mul-ℕ-is-zero-summand
+  ; is-one-mul-ℕ
+  ; is-one-left-is-one-mul-ℕ
+  ; is-one-right-is-one-mul-ℕ)
+
+_ : (m n : ℕ) → (m *ℕ n ＝ 0) ↔ (m ＝ 0) + (n ＝ 0)
+_ =
+  λ m n →
+    is-zero-summand-is-zero-mul-ℕ m n , is-zero-mul-ℕ-is-zero-summand m n
+
+_ : (m n : ℕ) → (m *ℕ n ＝ 1) ↔ (m ＝ 1) × (n ＝ 1)
+_ =
+  λ m n →
+    ( λ H → is-one-left-is-one-mul-ℕ m n H , is-one-right-is-one-mul-ℕ m n H) ,
+    ( λ (H , K) → is-one-mul-ℕ m n H K)
+
+-- (c)
+open import elementary-number-theory.addition-natural-numbers using
+  ( neq-add-ℕ -- m ≠ m + (n + 1)
+  )
+open import elementary-number-theory.multiplication-natural-numbers using
+  ( neq-mul-ℕ -- m + 1 ≠ (m + 1) * (n + 2)
+  )
 ```
 
 **Exercise 6.2.** Observational equality of booleans.
@@ -970,8 +1008,15 @@ open import elementary-number-theory.strict-inequality-natural-numbers using
 -- (c)
 open import elementary-number-theory.strict-inequality-natural-numbers using
   ( leq-succ-le-ℕ
-  ; contradiction-le-ℕ)
--- TODO: backward directions
+  ; le-leq-succ-ℕ
+  ; contradiction-le-ℕ
+  ; le-not-leq-ℕ)
+
+_ : (m n : ℕ) → (m <-ℕ n) ↔ (succ-ℕ m ≤-ℕ n)
+_ = λ m n → leq-succ-le-ℕ m n , le-leq-succ-ℕ m n
+
+_ : (m n : ℕ) → (m <-ℕ n) ↔ ¬ (n ≤-ℕ m)
+_ = λ m n → contradiction-le-ℕ m n , le-not-leq-ℕ m n
 ```
 
 **Exercise 6.5.** Distance function on ℕ.
