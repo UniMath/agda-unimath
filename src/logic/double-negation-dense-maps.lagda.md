@@ -228,7 +228,8 @@ is-double-negation-dense-map-is-connected-map :
   {f : A → B} → is-connected-map (succ-𝕋 k) f →
   is-double-negation-dense-map f
 is-double-negation-dense-map-is-connected-map k H =
-  is-double-negation-dense-map-is-surjective (is-surjective-is-connected-map k H)
+  is-double-negation-dense-map-is-surjective
+    ( is-surjective-is-connected-map k H)
 ```
 
 ### Maps which are homotopic to dense maps are dense
@@ -259,7 +260,9 @@ module _
 abstract
   is-equiv-is-double-negation-stable-emb-is-double-negation-dense-map :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-    is-double-negation-dense-map f → is-double-negation-stable-emb f → is-equiv f
+    is-double-negation-dense-map f →
+    is-double-negation-stable-emb f →
+    is-equiv f
   is-equiv-is-double-negation-stable-emb-is-double-negation-dense-map H K =
     is-equiv-is-contr-map
       ( λ y →
@@ -319,7 +322,9 @@ module _
   double-negation-dense-map-product :
     (A ↠¬¬ C) → (B ↠¬¬ D) → ((A × B) ↠¬¬ (C × D))
   double-negation-dense-map-product f g =
-    map-product (map-double-negation-dense-map f) (map-double-negation-dense-map g) ,
+    map-product
+      ( map-double-negation-dense-map f)
+      ( map-double-negation-dense-map g) ,
     is-double-negation-dense-map-product
       ( is-double-negation-dense-map-double-negation-dense-map f)
       ( is-double-negation-dense-map-double-negation-dense-map g)
@@ -366,7 +371,8 @@ module _
     (f : A → X) (g : B → X) (h : A → B) → g ∘ h ~ f →
     is-double-negation-dense-map f → is-double-negation-dense-map g
   is-double-negation-dense-map-right-map-triangle' f g h K F =
-    is-double-negation-dense-map-left-factor h (is-double-negation-dense-map-htpy K F)
+    is-double-negation-dense-map-left-factor h
+      ( is-double-negation-dense-map-htpy K F)
 
   is-double-negation-dense-map-right-map-triangle :
     (f : A → X) (g : B → X) (h : A → B) → f ~ g ∘ h →
@@ -428,11 +434,15 @@ module _
 ```agda
 equiv-Double-Negation-Dense-Map :
   {l1 l2 l3 : Level} {A : UU l1} →
-  Double-Negation-Dense-Map l2 A → Double-Negation-Dense-Map l3 A → UU (l1 ⊔ l2 ⊔ l3)
+  Double-Negation-Dense-Map l2 A →
+  Double-Negation-Dense-Map l3 A →
+  UU (l1 ⊔ l2 ⊔ l3)
 equiv-Double-Negation-Dense-Map f g =
-  Σ ( type-Double-Negation-Dense-Map f ≃ type-Double-Negation-Dense-Map g)
+  Σ ( type-Double-Negation-Dense-Map f ≃
+      type-Double-Negation-Dense-Map g)
     ( λ e →
-      map-equiv e ∘ map-Double-Negation-Dense-Map f ~ map-Double-Negation-Dense-Map g)
+      map-equiv e ∘ map-Double-Negation-Dense-Map f ~
+      map-Double-Negation-Dense-Map g)
 
 module _
   {l1 l2 : Level} {A : UU l1} (f : Double-Negation-Dense-Map l2 A)
@@ -452,7 +462,8 @@ module _
         ( double-negation-dense-map-Double-Negation-Dense-Map f))
 
   equiv-eq-Double-Negation-Dense-Map :
-    (g : Double-Negation-Dense-Map l2 A) → f ＝ g → equiv-Double-Negation-Dense-Map f g
+    (g : Double-Negation-Dense-Map l2 A) →
+    f ＝ g → equiv-Double-Negation-Dense-Map f g
   equiv-eq-Double-Negation-Dense-Map .f refl =
     id-equiv-Double-Negation-Dense-Map
 
@@ -546,7 +557,7 @@ module _
       ( is-double-negation-stable-emb-map-double-negation-stable-emb g)
 ```
 
-### Every type that irrefutably surjects onto an irrefutable type is irrefutable
+### Every type that maps double negation densely onto an irrefutable type is irrefutable
 
 ```agda
 module _
@@ -565,7 +576,7 @@ module _
       ( is-double-negation-dense-map-double-negation-dense-map f)
 ```
 
-### The type of surjections `A ↠¬¬ B` is equivalent to the type of families `P` of irrefutable types over `B` equipped with an equivalence `A ≃ Σ B P`
+### The type of double negation dense maps `A ↠¬¬ B` is equivalent to the type of families `P` of irrefutable types over `B` equipped with an equivalence `A ≃ Σ B P`
 
 > This remains to be shown.
 

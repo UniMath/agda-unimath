@@ -105,6 +105,12 @@ neq-neg-bool false ()
 
 neq-neg-bool' : (b : bool) → neg-bool b ≠ b
 neq-neg-bool' b = neq-neg-bool b ∘ inv
+
+is-true-is-false-neg-bool : {b : bool} → is-false (neg-bool b) → is-true b
+is-true-is-false-neg-bool {true} p = refl
+
+is-false-is-true-neg-bool : {b : bool} → is-true (neg-bool b) → is-false b
+is-false-is-true-neg-bool {false} p = refl
 ```
 
 ### Boolean negation is an involution

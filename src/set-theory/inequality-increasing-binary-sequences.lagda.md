@@ -204,20 +204,3 @@ Eq-leq-infinity-ℕ∞↑ x p = eq-leq-false-bool ∘ p
 eq-leq-infinity-ℕ∞↑ : (x : ℕ∞↑) → infinity-ℕ∞↑ ≤-ℕ∞↑ x → x ＝ infinity-ℕ∞↑
 eq-leq-infinity-ℕ∞↑ x p = eq-Eq-ℕ∞↑ (Eq-leq-infinity-ℕ∞↑ x p)
 ```
-
-### Inequality of increasing binary sequences is linear
-
-> TODO: Probably need case analysis on infinity
-
-```agda
--- linear-leq-ℕ∞↑ : (x y : ℕ∞↑) → (x ≤-ℕ∞↑ y) + (y ≤-ℕ∞↑ x)
--- linear-leq-ℕ∞↑ x y = map-coproduct {!   !} {!   !} {!   !}
-```
-
-### Joins
-
-> TODO
-
-### Meets
-
-> TODO

@@ -34,6 +34,8 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.irrefutable-equality
 open import foundation.locally-small-types
+open import foundation.logical-operations-booleans
+open import foundation.mere-equality
 open import foundation.negation
 open import foundation.pi-0-trivial-maps
 open import foundation.propositional-extensionality
@@ -151,23 +153,27 @@ has-pointed-decidability-search X =
 ```agda
 has-pointed-decidability-search-on-subtypes-Level :
   {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
-has-pointed-decidability-search-Level l2 X =
-  ( P : decidable-family l2 X) →
+has-pointed-decidability-search-on-subtypes-Level l2 X =
+  ( P : decidable-subtype l2 X) →
   Σ X
     ( λ x₀ →
-      family-decidable-family P x₀ → (x : X) → family-decidable-family P x)
+      is-in-decidable-subtype P x₀ → (x : X) → is-in-decidable-subtype P x)
 
-has-pointed-decidability-search : {l1 : Level} → UU l1 → UUω
-has-pointed-decidability-search X =
-  {l2 : Level} → has-pointed-decidability-search-Level l2 X
+has-pointed-decidability-search-on-subtypes : {l1 : Level} → UU l1 → UUω
+has-pointed-decidability-search-on-subtypes X =
+  {l2 : Level} → has-pointed-decidability-search-on-subtypes-Level l2 X
 ```
 
 ### The small predicate of having pointed decidability search
 
 ```agda
-has-pointed-decidability-search-bool : {l1 : Level} → UU l1 → UU l1
+has-pointed-decidability-search-bool : {l : Level} → UU l → UU l
 has-pointed-decidability-search-bool X =
   (b : X → bool) → Σ X (λ x₀ → is-true (b x₀) → (x : X) → is-true (b x))
+
+has-pointed-decidability-search-bool' : {l : Level} → UU l → UU l
+has-pointed-decidability-search-bool' X =
+  (b : X → bool) → Σ X (λ x₀ → is-false (b x₀) → (x : X) → is-false (b x))
 ```
 
 ## Properties
@@ -181,25 +187,6 @@ is-decidable-type-has-decidability-search f =
   is-decidable-equiv'
     ( right-unit-law-product)
     ( f ((λ _ → unit) , (λ _ → inl star)))
-```
-
-### A pointed type with decidability search has pointed decidability search
-
-```agda
-has-pointed-decidability-search-has-decidability-search-has-element :
-  {l : Level} {X : UU l} →
-  X → has-decidability-search X → has-pointed-decidability-search X
-has-pointed-decidability-search-has-decidability-search-has-element x₀ f P =
-  rec-coproduct
-    ( λ xr → (pr1 xr , ex-falso ∘ pr2 xr))
-    ( λ nx →
-      ( x₀ ,
-        λ _ x →
-        rec-coproduct
-          ( id)
-          ( λ npx → ex-falso (nx (x , npx)))
-          ( is-decidable-decidable-family P x)))
-    ( f (neg-decidable-family P))
 ```
 
 ### Types with decidability search on subtypes have decidability search
@@ -257,14 +244,54 @@ module _
     f (is-true ∘ P , λ x → has-decidable-equality-bool (P x) true)
 ```
 
+### A pointed type with decidability search has pointed decidability search
+
+```agda
+has-pointed-decidability-search-has-decidability-search-has-element :
+  {l : Level} {X : UU l} →
+  X → has-decidability-search X → has-pointed-decidability-search X
+has-pointed-decidability-search-has-decidability-search-has-element x₀ f P =
+  rec-coproduct
+    ( λ xr → (pr1 xr , ex-falso ∘ pr2 xr))
+    ( λ nx →
+      ( x₀ ,
+        λ _ x →
+        rec-coproduct
+          ( id)
+          ( λ npx → ex-falso (nx (x , npx)))
+          ( is-decidable-decidable-family P x)))
+    ( f (neg-decidable-family P))
+```
+
+### The two small predicate of having pointed decidability search are equivalent
+
+```agda
+flip-has-pointed-decidability-search-bool :
+  {l : Level} {X : UU l} →
+  has-pointed-decidability-search-bool' X →
+  has-pointed-decidability-search-bool X
+pr1 (flip-has-pointed-decidability-search-bool H b) = pr1 (H (neg-bool ∘ b))
+pr2 (flip-has-pointed-decidability-search-bool H b) p x =
+  is-true-is-false-neg-bool
+    ( pr2
+      ( H (neg-bool ∘ b))
+      ( is-false-is-true-neg-bool
+        ( is-involution-neg-bool (b (pr1 (H (neg-bool ∘ b)))) ∙ p))
+      ( x))
+```
+
+> The converse remains to be formalized.
+
 ### A type has pointed decidability search if and only if it has small pointed decidability search
 
 ```agda
 abstract
-  has-pointed-decidability-search-has-pointed-decidability-search-bool :
+  has-pointed-decidability-search-on-subtypes-has-pointed-decidability-search-bool :
     {l : Level} {X : UU l} →
-    has-pointed-decidability-search-bool X → has-pointed-decidability-search X
-  has-pointed-decidability-search-has-pointed-decidability-search-bool f P =
+    has-pointed-decidability-search-bool X →
+    has-pointed-decidability-search-on-subtypes X
+  has-pointed-decidability-search-on-subtypes-has-pointed-decidability-search-bool
+    f P =
     ( pr1 (f (bool-Decidable-Prop ∘ P))) ,
     ( λ Px₀ x →
       map-inv-equiv
@@ -277,14 +304,65 @@ abstract
               ( Px₀))
             ( x)))
 
-has-pointed-decidability-search-bool-has-pointed-decidability-search :
+has-pointed-decidability-search-bool-has-pointed-decidability-search-on-subtypes :
   {l : Level} {X : UU l} →
-  has-pointed-decidability-search X → has-pointed-decidability-search-bool X
-has-pointed-decidability-search-bool-has-pointed-decidability-search f b =
+  has-pointed-decidability-search-on-subtypes X →
+  has-pointed-decidability-search-bool X
+has-pointed-decidability-search-bool-has-pointed-decidability-search-on-subtypes
+  f b =
   f (is-true-Decidable-Prop ∘ b)
 ```
 
-### Decidability search transfers along irrefutable surjections
+### Types with pointed decidability search on subtypes has pointed decidability search
+
+```agda
+abstract
+  has-pointed-decidability-search-has-pointed-decidability-search-on-subtypes :
+    {l1 : Level} {X : UU l1} →
+    has-pointed-decidability-search-on-subtypes X →
+    has-pointed-decidability-search X
+  has-pointed-decidability-search-has-pointed-decidability-search-on-subtypes
+    {X = X} f P =
+      ( pr1 g) ,
+      ( λ p x →
+        rec-coproduct
+          ( id)
+          ( ex-falso ∘ pr2 g (intro-double-negation p) x)
+          ( is-decidable-decidable-family P x))
+      where
+        g : Σ X
+              ( λ x₀ →
+                ¬¬ (family-decidable-family P x₀) →
+                (x : X) → ¬¬ (family-decidable-family P x))
+        g =
+          f
+          ( λ x →
+            neg-type-Decidable-Prop
+              ( ¬ (family-decidable-family P x))
+              ( is-decidable-neg (is-decidable-decidable-family P x)))
+```
+
+### Types with pointed decidability search have decidability search
+
+```agda
+is-decidable-Σ-is-this-other-thing :
+  {l1 l2 : Level} {X : UU l1} {Y : X → UU l2} →
+  ((x : X) → ¬ (Y x)) → ¬ (Σ X Y)
+is-decidable-Σ-is-this-other-thing f xp = f (pr1 xp) (pr2 xp)
+
+has-decidability-search-has-pointed-decidability-search :
+  {l : Level} {X : UU l} →
+  has-pointed-decidability-search X → has-decidability-search X
+has-decidability-search-has-pointed-decidability-search {X = X} f P =
+  map-coproduct
+    ( pair (pr1 (f P)))
+    ( λ np xp → np TODO)
+    ( is-decidable-decidable-family P (pr1 (f P)))
+ where postulate TODO : _ -- TODO
+
+```
+
+### Decidability search transfers along double negation dense maps
 
 ```agda
 module _
@@ -349,7 +427,7 @@ has-decidability-search-equiv' e =
 
 ```agda
 has-decidability-search-is-decidable-all-elements-irrefutably-equal :
-  {l1 : Level} {X : UU l1} → all-elements-merely-equal X →
+  {l1 : Level} {X : UU l1} → all-elements-irrefutably-equal X →
   is-decidable X → has-decidability-search X
 has-decidability-search-is-decidable-all-elements-irrefutably-equal H d P =
   is-decidable-Σ-all-elements-irrefutably-equal-base H d
@@ -465,13 +543,13 @@ module _
 
 ```agda
 abstract
-  has-universal-decidability-search-Σ-decidable-family-all-elements-merely-equal :
+  has-decidability-search-Σ-decidable-family-all-elements-irrefutably-equal :
     {l1 l2 : Level} {X : UU l1} →
     has-decidability-search X →
     (P : decidable-family l2 X) →
-    ((x : X) → (p q : family-decidable-family P x) → ¬¬ (p ＝ q)) →
+    ((x : X) → all-elements-irrefutably-equal (family-decidable-family P x)) →
     has-decidability-search (Σ X (family-decidable-family P))
-  has-universal-decidability-search-Σ-decidable-family-all-elements-merely-equal
+  has-decidability-search-Σ-decidable-family-all-elements-irrefutably-equal
     f P H =
     has-decidability-search-Σ f
       ( λ x →

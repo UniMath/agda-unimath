@@ -42,6 +42,7 @@ open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.tight-apartness-relations
 open import foundation.unit-type
+open import foundation.universal-property-maybe
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
@@ -233,6 +234,42 @@ is-double-negation-dense-inclusion-ℕ∞↑-Maybe-ℕ x H =
   H ( inr star ,
       eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ' x
         ( λ n p → H (inl n , inv p)))
+
+double-negation-dense-inclusion-ℕ∞↑-Maybe-ℕ : Maybe ℕ ↠¬¬ ℕ∞↑
+double-negation-dense-inclusion-ℕ∞↑-Maybe-ℕ =
+  ( inclusion-ℕ∞↑-Maybe-ℕ , is-double-negation-dense-inclusion-ℕ∞↑-Maybe-ℕ)
+```
+
+```agda
+module _
+  {l : Level} {Y : ℕ∞↑ → UU l}
+  {f g : (x : ℕ∞↑) → Y x}
+  where
+
+  htpy-ℕ∞↑-htpy-ℕ :
+    (H : (x : ℕ∞↑) → has-double-negation-stable-equality (Y x)) →
+    ((n : ℕ) → f (inclusion-ℕ∞↑-ℕ n) ＝ g (inclusion-ℕ∞↑-ℕ n)) →
+    f infinity-ℕ∞↑ ＝ g infinity-ℕ∞↑ →
+    f ~ g
+  htpy-ℕ∞↑-htpy-ℕ H h h∞ =
+    htpy-htpy-double-negation-dense-map
+      ( double-negation-dense-inclusion-ℕ∞↑-Maybe-ℕ)
+      ( H)
+      ( ind-Maybe (h , h∞))
+```
+
+### The tight bounds on the image of natural numbers
+
+```agda
+refl-leq-ℕ-ℕ∞↑ : (n : ℕ) → inclusion-ℕ∞↑-ℕ n ≤-ℕ∞↑-ℕ n
+refl-leq-ℕ-ℕ∞↑ zero-ℕ = refl
+refl-leq-ℕ-ℕ∞↑ (succ-ℕ n) = refl-leq-ℕ-ℕ∞↑ n
+```
+
+```agda
+le-succ-ℕ-ℕ∞↑ : (n : ℕ) → n <-ℕ-ℕ∞↑ (inclusion-ℕ∞↑-ℕ (succ-ℕ n))
+le-succ-ℕ-ℕ∞↑ zero-ℕ = refl
+le-succ-ℕ-ℕ∞↑ (succ-ℕ n) = le-succ-ℕ-ℕ∞↑ n
 ```
 
 ## References

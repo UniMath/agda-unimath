@@ -11,8 +11,10 @@ open import foundation-core.decidable-propositions public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
+open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.discrete-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
@@ -167,6 +169,21 @@ pr2 (iff-universes-Decidable-Prop l l' P) p =
         ( compute-equiv-bool-Decidable-Prop
           ( map-equiv (equiv-universes-Decidable-Prop l l') P))
         ( p)))
+```
+
+### The type of decidable propositions in any universe is discrete
+
+```agda
+has-decidable-equality-Decidable-Prop :
+  {l : Level} → has-decidable-equality (Decidable-Prop l)
+has-decidable-equality-Decidable-Prop =
+  has-decidable-equality-equiv
+    ( equiv-bool-Decidable-Prop)
+    ( has-decidable-equality-bool)
+
+Decidable-Prop-Discrete-Type : (l : Level) → Discrete-Type (lsuc l)
+Decidable-Prop-Discrete-Type l =
+  ( Decidable-Prop l , has-decidable-equality-Decidable-Prop)
 ```
 
 ### The type of decidable propositions in any universe is a set

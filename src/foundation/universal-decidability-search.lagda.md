@@ -163,7 +163,7 @@ has-universal-decidability-search-has-universal-decidability-search-on-subtypes
             ( is-decidable-neg (is-decidable-decidable-family P x))))
 ```
 
-### Universal decidability search transfers along irrefutable surjections
+### Universal decidability search transfers along double negation dense maps
 
 ```agda
 has-universal-decidability-search-double-negation-dense-map :
@@ -470,7 +470,7 @@ abstract
     {l1 l2 : Level} {X : UU l1} →
     has-universal-decidability-search X →
     (P : decidable-family l2 X) →
-    ((x : X) → all-elements-irrefutably-equal (P x)) →
+    ((x : X) → all-elements-irrefutably-equal (family-decidable-family P x)) →
     has-universal-decidability-search (Σ X (family-decidable-family P))
   has-universal-decidability-search-Σ-decidable-family-all-elements-irrefutably-equal
     f P H =
