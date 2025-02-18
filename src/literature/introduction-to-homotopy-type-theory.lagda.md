@@ -27,9 +27,11 @@ open import elementary-number-theory.natural-numbers using
 
 ### 3.2 Addition on the natural numbers
 
+**Definition 3.2.1.** Addition on the natural numbers.
+
 ```agda
 open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ)
+  ( add-ℕ ; _+ℕ_)
 ```
 
 ### 3.3 Pattern matching
@@ -44,8 +46,11 @@ open import elementary-number-theory.fibonacci-sequence using
 **Exercise 3.1.** Multiplication and exponentiation.
 
 ```agda
+-- (a)
 open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
+  ( mul-ℕ ; _*ℕ_)
+
+-- (b)
 open import elementary-number-theory.exponentiation-natural-numbers using
   ( exp-ℕ)
 ```
@@ -62,8 +67,11 @@ open import elementary-number-theory.maximum-natural-numbers using
 **Exercise 3.3.** Triangular numbers and factorial.
 
 ```agda
+-- (a)
 open import elementary-number-theory.triangular-numbers using
   ( triangular-number-ℕ)
+
+-- (b)
 open import elementary-number-theory.factorials using
   ( factorial-ℕ)
 ```
@@ -86,18 +94,59 @@ open import elementary-number-theory.fibonacci-sequence using
 
 **Exercise 3.6.** Division by two using pattern matching and induction.
 
-> TODO
+```agda
+div-two-pattern-match : ℕ → ℕ
+div-two-pattern-match 0 = 0
+div-two-pattern-match 1 = 0
+div-two-pattern-match (succ-ℕ (succ-ℕ n)) = succ-ℕ (div-two-pattern-match n)
+```
+
+For the definition using the induction principle, we think of iterating the
+swapping operation `(m, 0) ↦ (m, 1) ; (m, 1) ↦ (m + 1, 0)`, using the same
+encoding of pairs with functions as the definition of the Fibonacci sequence.
+
+```agda
+open import elementary-number-theory.fibonacci-sequence using
+  ( shift-one ; shift-two )
+
+div-two-induction-step : (ℕ → ℕ) → (ℕ → ℕ)
+div-two-induction-step f =
+  ind-ℕ
+    ( shift-one (f 0) (λ _ → 1))
+    ( λ _ _ → shift-one (succ-ℕ (f 0)) (λ _ → 0))
+    ( f 1)
+
+div-two-induction-zero : ℕ → ℕ
+div-two-induction-zero = λ _ → 0
+
+div-two-induction-function : ℕ → (ℕ → ℕ)
+div-two-induction-function =
+  ind-ℕ
+    ( div-two-induction-zero)
+    ( λ _ → div-two-induction-step)
+
+div-two-induction : ℕ → ℕ
+div-two-induction n = div-two-induction-function n 0
+```
 
 ## 4 More inductive types
 
 ### 4.2 The unit type
 
+**Definition 4.2.1.** The unit type.
+
+Note that the unit type in the library is defined as a _record_ type, as opposed
+to an inductive type with one constructor. That allows us to have a judmental
+eta law, which states that every element of the unit type is judgmentally equal
+to `star`. This rule is not assumed in the book.
+
 ```agda
 open import foundation.unit-type using
-  ( unit
-  ; star
+  ( unit -- 𝟏
+  ; star -- ⋆
   ; ind-unit
-  ; point)
+  ; point -- pt
+  )
 ```
 
 ### 4.3 The empty type
@@ -106,7 +155,7 @@ open import foundation.unit-type using
 
 ```agda
 open import foundation.empty-types using
-  ( empty
+  ( empty -- ∅
   ; ind-empty
   ; ex-falso)
 ```
@@ -144,14 +193,16 @@ open import foundation.coproduct-types using
 
 ```agda
 open import foundation.functoriality-coproduct-types using
-  ( map-coproduct)
+  ( map-coproduct -- f + g : A + B → A' + B'
+  )
 ```
 
 **Proposition 4.4.3.** Projections from coproducts with an empty type.
 
 ```agda
 open import foundation.type-arithmetic-empty-type using
-  ( map-right-unit-law-coproduct-is-empty)
+  ( map-right-unit-law-coproduct-is-empty -- is-empty B → (A + B) → A
+  )
 ```
 
 ### 4.5 The type of integers
@@ -163,9 +214,10 @@ open import elementary-number-theory.integers using
   ( ℤ
   ; in-pos-ℤ
   ; in-neg-ℤ
-  ; neg-one-ℤ
-  ; zero-ℤ
-  ; one-ℤ)
+  ; neg-one-ℤ -- -1
+  ; zero-ℤ -- 0
+  ; one-ℤ -- 1
+  )
 ```
 
 **Remark 4.5.2.** The induction principle of integers.
@@ -186,9 +238,8 @@ open import elementary-number-theory.integers using
 
 **Definition 4.6.1.** The dependent pair type.
 
-Note that the library defines the type of dependent pairs as a _record_ as
-opposed to an inductive type. This allows us to instruct Agda to add a
-judgmental eta law for pairs.
+Note that similarly to the unit type, dependent pair types are defined as a
+record and enjoy a judgmental eta law in the library.
 
 ```agda
 open import foundation.dependent-pair-types using
@@ -226,12 +277,17 @@ open import foundation.cartesian-product-types using
 integers.
 
 ```agda
+-- (a)
 open import elementary-number-theory.integers using
   ( pred-ℤ)
+
+-- (b)
 open import elementary-number-theory.addition-integers using
   ( add-ℤ)
 open import elementary-number-theory.integers using
   ( neg-ℤ)
+
+-- (c)
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ)
 ```
@@ -241,10 +297,21 @@ open import elementary-number-theory.multiplication-integers using
 ```agda
 open import foundation.booleans using
   ( bool
-  ; ind-bool
-  ; neg-bool
-  ; conjunction-bool
-  ; disjunction-bool)
+  ; false
+  ; true
+  ; ind-bool )
+
+-- (a)
+open import foundation.booleans using
+  ( neg-bool)
+
+-- (b)
+open import foundation.booleans using
+  ( conjunction-bool)
+
+-- (c)
+open import foundation.booleans using
+  ( disjunction-bool)
 ```
 
 **Exercise 4.3.** Double negation.
@@ -254,40 +321,89 @@ Note that we call bi-implications _logical equivalences_ in the library.
 ```agda
 open import foundation.logical-equivalences using
   ( _↔_)
--- TODO: Put this somewhere
-neg-elim : {l : Level} (P : UU l) → ¬ (P × ¬ P)
-neg-elim P (pair p np) = np p
+
+-- (a)
+_ : {l : Level} (P : UU l) → ¬ (P × ¬ P)
+_ = λ P (p , np) → np p
 open import foundation.negation using
   ( no-fixed-points-neg -- ¬(P ↔ ¬P)
   )
+
+-- (b)
 open import foundation.double-negation using
-  ( intro-double-negation -- P → ¬¬P
+  ( ¬¬_
+  ; intro-double-negation -- P → ¬¬P
   ; map-double-negation -- (P → Q) → (¬¬P → ¬¬Q)
   ; double-negation-extend -- (P → ¬¬Q) → (¬¬P → ¬¬Q)
   )
+
+-- (c)
 open import foundation.double-negation using
   ( double-negation-double-negation-elim -- ¬¬(¬¬P → P)
   ; double-negation-Peirces-law -- ¬¬(((P → Q) → P) → P)
   ; double-negation-linearity-implication -- ¬¬((P → Q) + (Q → P))
   ; double-negation-decidability -- ¬¬ (P + ¬ P)
   )
+
+-- (d)
 open import foundation.decidable-types using
   ( double-negation-elim-is-decidable -- (P + ¬P) → (¬¬P → P)
-  -- TODO: ¬¬(Q → P) ↔ ((P + ¬P) → (Q → P))
   )
+
+_ : {l1 l2 : Level} (P : UU l1) (Q : UU l2) → ¬¬ (Q → P) → ((P + ¬ P) → Q → P)
+_ =
+  λ P Q nnqp →
+    rec-coproduct (λ p q → p) (λ np q → ex-falso (nnqp (λ qp → np (qp q))))
+
+_ : {l1 l2 : Level} (P : UU l1) (Q : UU l2) → ((P + ¬ P) → Q → P) → ¬¬ (Q → P)
+_ =
+  λ P Q pnpqp nqp →
+    ( λ (np : ¬ P) → nqp (pnpqp (inr np)))
+    ( λ (p : P) → nqp (λ _ → p))
+
+-- (e)
 open import logic.double-negation-elimination using
   ( double-negation-elim-neg -- ¬¬(¬ P) → P
   ; double-negation-elim-exp-neg-neg -- ¬¬(P → ¬¬Q) → (P → ¬¬Q)
   ; double-negation-elim-product
   )
-has-double-negation-elim-prod-neg-neg :
-  {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
-  ¬ ¬ ((¬ ¬ P) × (¬ ¬ Q)) → (¬ ¬ P) × (¬ ¬ Q)
-has-double-negation-elim-prod-neg-neg {P = P} {Q = Q} =
-  double-negation-elim-product
-    ( double-negation-elim-neg (¬ P))
-    ( double-negation-elim-neg (¬ Q))
--- TODO: f
+
+_ :
+  {l1 l2 : Level} (P : UU l1) (Q : UU l2) →
+  ¬¬ ((¬¬ P) × (¬¬ Q)) → (¬¬ P) × (¬¬ Q)
+_ =
+  λ P Q →
+    double-negation-elim-product
+      ( double-negation-elim-neg (¬ P))
+      ( double-negation-elim-neg (¬ Q))
+
+-- (f)
+open import foundation.irrefutable-propositions using
+  ( is-irrefutable-product -- ¬¬A → ¬¬B → ¬¬(A × B)
+  )
+
+module _
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2}
+  where
+  _ : ¬¬(P × Q) → ¬¬ P × ¬¬ Q
+  _ =
+    λ nnpq → (λ np → nnpq (λ (p , q) → np p)) , (λ nq → nnpq (λ (p , q) → nq q))
+
+  _ : ¬¬(P + Q) → ¬(¬ P × ¬ Q)
+  _ =
+    λ nnpq (np , nq) → nnpq (rec-coproduct np nq)
+  _ : ¬(¬ P × ¬ Q) → ¬¬(P + Q)
+  _ = λ nnpnq npq → nnpnq ((λ p → npq (inl p)) , (λ q → npq (inr q)))
+
+  _ : ¬¬(P → Q) → (¬¬ P → ¬¬ Q)
+  _ = λ nnpq nnp nq → nnp (λ p → nnpq (λ pq → nq (pq p)))
+
+  _ : (¬¬ P → ¬¬ Q) → ¬¬(P → Q)
+  _ =
+    λ nnpnnq npq →
+      ( λ (nq : ¬ Q) →
+        npq (λ p → ex-falso (nnpnnq (intro-double-negation p) nq)))
+      ( λ (q : Q) → npq (λ _ → q))
 ```
 
 **Exercise 4.4.** Lists.
@@ -296,21 +412,39 @@ has-double-negation-elim-prod-neg-neg {P = P} {Q = Q} =
 open import lists.lists using
   ( list
   ; nil
-  ; cons
-  ; ind-list
-  ; fold-list)
+  ; cons)
+
+-- (a)
+open import lists.lists using
+  ( ind-list)
+
+-- (b)
+open import lists.lists using
+  ( fold-list)
+
+-- (c)
 open import lists.functoriality-lists using
   ( map-list)
+
+-- (d)
 open import lists.lists using
   ( length-list)
+
+-- (e)
 open import elementary-number-theory.sums-of-natural-numbers using
   ( sum-list-ℕ)
 open import elementary-number-theory.products-of-natural-numbers using
   ( product-list-ℕ)
+
+-- (f)
 open import lists.concatenation-lists using
   ( concat-list)
+
+-- (g)
 open import lists.flattening-lists using
   ( flatten-list)
+
+-- (h)
 open import lists.reversing-lists using
   ( reverse-list)
 ```
@@ -319,9 +453,11 @@ open import lists.reversing-lists using
 
 ### 5.1 The inductive definition of identity types
 
+**Definition 5.1.1.** The identity type.
+
 ```agda
 open import foundation.identity-types using
-  ( _＝_
+  ( _＝_ ; Id
   ; refl
   ; ind-Id)
 ```
@@ -332,7 +468,7 @@ open import foundation.identity-types using
 
 ```agda
 open import foundation.identity-types using
-  ( concat)
+  ( concat ; _∙_)
 ```
 
 **Definition 5.2.2.** Inverse operation.
@@ -346,23 +482,26 @@ open import foundation.identity-types using
 
 ```agda
 open import foundation.identity-types using
-  ( assoc)
+  ( assoc -- (p ∙ q) ∙ r = p ∙ (q ∙ r)
+  )
 ```
 
 **Definition 5.2.5.** Unit law operations.
 
 ```agda
 open import foundation.identity-types using
-  ( left-unit
-  ; right-unit)
+  ( left-unit -- refl ∙ p = p
+  ; right-unit -- p ∙ refl = p
+  )
 ```
 
 **Definition 5.2.5.** Inverse law operations.
 
 ```agda
 open import foundation.identity-types using
-  ( left-inv
-  ; right-inv)
+  ( left-inv -- inv p ∙ p = refl
+  ; right-inv -- p ∙ inv p = refl
+  )
 ```
 
 ### 5.3 The action on identifications of functions
@@ -375,17 +514,19 @@ inverse direction from the ones in the book.
 ```agda
 open import foundation.action-on-identifications-functions using
   ( ap
-  ; ap-id
-  ; ap-comp)
+  ; ap-id -- ap id p = p
+  ; ap-comp -- ap (g ∘ f) p = ap g (ap f (p))
+  )
 ```
 
 **Definition 5.3.2.** Preservation rules.
 
 ```agda
 open import foundation.action-on-identifications-functions using
-  ( ap-refl
-  ; ap-inv
-  ; ap-concat)
+  ( ap-refl -- ap f refl = refl
+  ; ap-inv -- ap f (inv p) = inv (ap f p)
+  ; ap-concat -- ap f (p ∙ q) = ap f p ∙ ap f q
+  )
 ```
 
 ### 5.4 Transport
@@ -406,9 +547,16 @@ open import foundation.action-on-identifications-dependent-functions using
 
 ### 5.5 The uniqueness of `refl`
 
+**Proposition 5.5.1.** Contractibility of singletons.
+
 ```agda
 open import foundation.torsorial-type-families using
   ( is-torsorial-Id)
+open import foundation.contractible-types using
+  ( eq-is-contr')
+
+_ : {l : Level} {A : UU l} (a : A) (y : Σ A (λ x → a ＝ x)) → (a , refl) ＝ y
+_ = λ a → eq-is-contr' (is-torsorial-Id a) (a , refl)
 ```
 
 ### 5.6 The laws of addition on ℕ
@@ -417,30 +565,34 @@ open import foundation.torsorial-type-families using
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers using
-  ( left-unit-law-add-ℕ
-  ; right-unit-law-add-ℕ)
+  ( left-unit-law-add-ℕ -- 0 + n = n
+  ; right-unit-law-add-ℕ -- n + 0 = n
+  )
 ```
 
 **Proposition 5.6.2.** Successor laws.
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers using
-  ( left-successor-law-add-ℕ
-  ; right-successor-law-add-ℕ)
+  ( left-successor-law-add-ℕ -- succ m + n = succ (m + n)
+  ; right-successor-law-add-ℕ -- m + succ n = succ (m + n)
+  )
 ```
 
 **Proposition 5.6.3.** Associativity.
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers using
-  ( associative-add-ℕ)
+  ( associative-add-ℕ -- (m + n) + k = m + (n + k)
+  )
 ```
 
 **Proposition 5.6.4.** Commutativity.
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers using
-  ( commutative-add-ℕ)
+  ( commutative-add-ℕ -- m + n = n + m
+  )
 ```
 
 ### Exercises
@@ -449,15 +601,17 @@ open import elementary-number-theory.addition-natural-numbers using
 
 ```agda
 open import foundation.identity-types using
-  ( distributive-inv-concat)
+  ( distributive-inv-concat -- inv (p ∙ q) = inv q ∙ inv p
+  )
 ```
 
 **Exercise 5.2.** Transposing concatenation.
 
 ```agda
 open import foundation.identity-types using
-  ( left-transpose-eq-concat
-  ; right-transpose-eq-concat)
+  ( left-transpose-eq-concat -- (p ∙ q = r) → (q = inv p ∙ r)
+  ; right-transpose-eq-concat -- (p ∙ q = r) → (p = r ∙ inv q)
+  )
 ```
 
 **Exercise 5.3.** Path lifting.
@@ -478,6 +632,7 @@ open import foundation.identity-types using
 numbers.
 
 ```agda
+-- (a)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( right-zero-law-mul-ℕ -- m * 0 = 0
   ; left-zero-law-mul-ℕ -- 0 * m = 0
@@ -486,13 +641,19 @@ open import elementary-number-theory.multiplication-natural-numbers using
   ; right-successor-law-mul-ℕ -- m * (succ n) = m + m * n
   ; left-successor-law-mul-ℕ -- (succ m) * n = m * n + n
   )
+
+-- (b)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( commutative-mul-ℕ -- m * n = n * m
   )
+
+-- (c)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( left-distributive-mul-add-ℕ -- m * (n + k) = m * n + m * k
   ; right-distributive-mul-add-ℕ -- (m + n) * k = m * k + n * k
   )
+
+-- (d)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( associative-mul-ℕ -- (m * n) * k = m * (n * k)
   )
@@ -511,20 +672,27 @@ open import elementary-number-theory.integers using
 **Exercise 5.7.** Abelian group laws for addition of integers.
 
 ```agda
+-- (a)
 open import elementary-number-theory.addition-integers using
   ( left-unit-law-add-ℤ -- 0 + x = x
   ; right-unit-law-add-ℤ -- x + 0 = x
   )
+
+-- (b)
 open import elementary-number-theory.addition-integers using
   ( left-predecessor-law-add-ℤ -- pred x + y = pred (x + y)
   ; right-predecessor-law-add-ℤ -- x + pred y = pred (x + y)
   ; left-successor-law-add-ℤ -- succ x + y = succ (x + y)
   ; right-successor-law-add-ℤ -- x + succ y = succ (x + y)
   )
+
+-- (c)
 open import elementary-number-theory.addition-integers using
   ( associative-add-ℤ -- (x + y) + z = x + (y + z)
   ; commutative-add-ℤ -- x + y = y + x
   )
+
+-- (d)
 open import elementary-number-theory.addition-integers using
   ( left-inverse-law-add-ℤ -- (-x) + x = 0
   ; right-inverse-law-add-ℤ -- x + (-x) = 0
@@ -534,18 +702,29 @@ open import elementary-number-theory.addition-integers using
 **Exercise 5.8.** Ring laws for multiplication of integers.
 
 ```agda
+-- (a)
 open import elementary-number-theory.multiplication-integers using
   ( left-zero-law-mul-ℤ -- 0 * x = x
   ; right-zero-law-mul-ℤ -- x * 0 = x
   ; left-unit-law-mul-ℤ -- 1 * x = x
   ; right-unit-law-mul-ℤ -- x * 1 = x
   )
+
+-- (b)
 open import elementary-number-theory.multiplication-integers using
   ( left-predecessor-law-mul-ℤ' -- pred x * y = x * y - y
   ; right-predecessor-law-mul-ℤ' -- x * pred y = x * y - x
   ; left-successor-law-mul-ℤ' -- succ x * y = x * y + y
-  ; right-successor-law-mul-ℤ' -- x * succ y = x * y + x TODO: report typo in the book
+  ; right-successor-law-mul-ℤ' -- x * succ y = x * y + x
   )
+
+-- (c)
+open import elementary-number-theory.multiplication-integers using
+  ( left-distributive-mul-add-ℤ -- x * (y + z) = x * y + x * z
+  ; right-distributive-mul-add-ℤ -- (x + y) * z = x * z + y * z
+  )
+
+-- (d)
 open import elementary-number-theory.multiplication-integers using
   ( associative-mul-ℤ -- (x * y) * z = x * (y * z)
   ; commutative-mul-ℤ -- x * y = y * x
@@ -554,7 +733,30 @@ open import elementary-number-theory.multiplication-integers using
 
 ## 6 Universes
 
-TODO: Properly explain how this section relates to Agda's Levels and Sets.
+### 6.1 Specification of type theoretic universes
+
+**Definition 6.1.1** Universes.
+
+The book's metatheory uses universes _à la Tarski_, which considers a universe
+`𝒰` a type of _codes_, such that for every code `X : 𝒰` we may derive
+`𝒯(X) type`. In contrast, Agda uses universes _à la Russell_, where the elements
+`X : 𝒰` are themselves types.
+
+The only exception is the universe types themselves — we have the type `Level`
+of codes for universes, and for every code `l : Level` we have the judgment `UU
+l type`.
+
+Universes are called `UU` in the library, which stands for _univalent universe_.
+
+Closure of universes under various type constructors is guaranteed by Agda's
+[sort system](https://agda.readthedocs.io/en/latest/language/sort-system.html).
+
+```agda
+open import foundation.universe-levels using
+  ( Level -- type of codes for universes
+  ; UU -- the universal family decoding universes
+  )
+```
 
 ### 6.2 Assuming enough universes
 
@@ -577,6 +779,16 @@ open import foundation.universe-levels using
   ( lsuc)
 ```
 
+**Remark 6.2.4.** Inclusions into the successor universe.
+
+```agda
+open import foundation.raising-universe-levels using
+  ( raise)
+
+_ : (l : Level) → UU l → UU (lsuc l)
+_ = λ l → raise (lsuc l)
+```
+
 **Definition 6.2.5.** The join of two universes.
 
 ```agda
@@ -584,8 +796,12 @@ open import foundation.universe-levels using
   ( _⊔_)
 ```
 
+**Remark 6.2.6.** Universe arithmetic.
+
 Note that while in the book `(𝒰 ⊔ 𝒱) ⊔ 𝒲` and `𝒰 ⊔ (𝒱 ⊔ 𝒲)` are a priori
-unrelated, Agda considers them equal.
+unrelated, Agda considers them equal. Other universe equalities may be found
+in
+[the documentation](https://agda.readthedocs.io/en/latest/language/universe-levels.html#intrinsic-level-properties).
 
 ### 6.3 Observational equality of the natural numbers
 
@@ -610,6 +826,7 @@ identifications.
 open import elementary-number-theory.equality-natural-numbers using
   ( Eq-eq-ℕ
   ; eq-Eq-ℕ)
+
 _ : (m n : ℕ) → (m ＝ n) ↔ Eq-ℕ m n
 _ = λ m n → (Eq-eq-ℕ , (eq-Eq-ℕ m n))
 ```
@@ -618,11 +835,10 @@ _ = λ m n → (Eq-eq-ℕ , (eq-Eq-ℕ m n))
 
 **Theorem 6.4.1.** Peano's seventh axiom.
 
-TODO: do we have `app succ-ℕ` as a definition?
-
 ```agda
 open import elementary-number-theory.natural-numbers using
   ( is-injective-succ-ℕ)
+
 _ : (m n : ℕ) → (m ＝ n) ↔ (succ-ℕ m ＝ succ-ℕ n)
 _ = λ m n → (ap succ-ℕ , is-injective-succ-ℕ)
 ```
@@ -631,7 +847,8 @@ _ = λ m n → (ap succ-ℕ , is-injective-succ-ℕ)
 
 ```agda
 open import elementary-number-theory.natural-numbers using
-  ( is-nonzero-succ-ℕ)
+  ( is-nonzero-succ-ℕ -- succ n ≠ 0
+  )
 ```
 
 The above proof uses Agda's built-in mechanism for recognizing that two elemens
@@ -649,31 +866,43 @@ _ = λ n → Eq-eq-ℕ
 injective functions.
 
 ```agda
+-- (a)
 open import elementary-number-theory.addition-natural-numbers using
   ( is-injective-right-add-ℕ)
-_ : (m n k : ℕ) → (m ＝ n) ↔ (add-ℕ m k ＝ add-ℕ n k)
-_ = λ m n k → (ap (λ x → add-ℕ x k) , is-injective-right-add-ℕ k)
+
+_ : (m n k : ℕ) → (m ＝ n) ↔ (m +ℕ k ＝ n +ℕ k)
+_ = λ m n k → (ap (λ x → x +ℕ k) , is-injective-right-add-ℕ k)
+
 open import elementary-number-theory.multiplication-natural-numbers using
   ( is-injective-right-mul-succ-ℕ)
-_ : (m n k : ℕ) → (m ＝ n) ↔ (mul-ℕ m (succ-ℕ k) ＝ mul-ℕ n (succ-ℕ k))
+
+_ : (m n k : ℕ) → (m ＝ n) ↔ (m *ℕ (succ-ℕ k) ＝ n *ℕ (succ-ℕ k))
 _ =
-  λ m n k → (ap (λ x → mul-ℕ x (succ-ℕ k)) , is-injective-right-mul-succ-ℕ k)
--- TODO: b, c, report that multiplication is denoted by juxtaposition
+  λ m n k → (ap (λ x → x *ℕ (succ-ℕ k)) , is-injective-right-mul-succ-ℕ k)
+-- TODO: b, c
 ```
 
 **Exercise 6.2.** Observational equality of booleans.
 
 ```agda
+-- (a)
 open import foundation.booleans using
   ( Eq-bool)
+
+-- (b)
 open import foundation.booleans using
   ( Eq-eq-bool
   ; eq-Eq-bool)
+
 _ : (x y : bool) → (x ＝ y) ↔ Eq-bool x y
 _ = λ x y → (Eq-eq-bool , eq-Eq-bool)
+
+-- (c)
 open import foundation.booleans using
   ( neq-neg-bool -- b ≠ neg-bool b
   )
+_ : ¬ (false ＝ true)
+_ = neq-neg-bool false
 ```
 
 **Exercise 6.3.** Standard linear order on ℕ.
@@ -681,29 +910,44 @@ open import foundation.booleans using
 ```agda
 open import elementary-number-theory.inequality-natural-numbers using
   ( _≤-ℕ_)
+
+-- (a)
 open import elementary-number-theory.inequality-natural-numbers using
   ( refl-leq-ℕ
   ; antisymmetric-leq-ℕ
   ; transitive-leq-ℕ)
+
+-- (b)
 open import elementary-number-theory.inequality-natural-numbers using
-  ( linear-leq-ℕ)
+  ( linear-leq-ℕ -- (m ≤ n) + (n ≤ m)
+  )
+
+-- (c)
 open import elementary-number-theory.inequality-natural-numbers using
   ( preserves-leq-left-add-ℕ
   ; reflects-leq-left-add-ℕ)
-_ : (m n k : ℕ) → (m ≤-ℕ n) ↔ (add-ℕ m k ≤-ℕ add-ℕ n k)
+
+_ : (m n k : ℕ) → (m ≤-ℕ n) ↔ (m +ℕ k ≤-ℕ n +ℕ k)
 _ =
   λ m n k → (preserves-leq-left-add-ℕ k m n , reflects-leq-left-add-ℕ k m n)
+
+-- (d)
 open import elementary-number-theory.inequality-natural-numbers using
   ( preserves-leq-left-mul-ℕ
   ; reflects-order-mul-ℕ)
-_ : (m n k : ℕ) → (m ≤-ℕ n) ↔ (mul-ℕ m (succ-ℕ k) ≤-ℕ mul-ℕ n (succ-ℕ k))
+
+_ : (m n k : ℕ) → (m ≤-ℕ n) ↔ (m *ℕ (succ-ℕ k) ≤-ℕ n *ℕ (succ-ℕ k))
 _ =
   λ m n k →
     (preserves-leq-left-mul-ℕ (succ-ℕ k) m n , reflects-order-mul-ℕ k m n)
+
+-- (e)
 open import elementary-number-theory.minimum-natural-numbers using
-  ( is-greatest-lower-bound-min-ℕ)
+  ( is-greatest-lower-bound-min-ℕ -- (k ≤ min m n) ↔ (k ≤ m) × (k ≤ n)
+  )
 open import elementary-number-theory.maximum-natural-numbers using
-  ( is-least-upper-bound-max-ℕ)
+  ( is-least-upper-bound-max-ℕ -- (max m n ≤ k) ↔ (m ≤ k) × (n ≤ k)
+  )
 ```
 
 **Exercise 6.4.** Standard strict order on ℕ.
@@ -711,14 +955,20 @@ open import elementary-number-theory.maximum-natural-numbers using
 ```agda
 open import elementary-number-theory.strict-inequality-natural-numbers using
   ( _<-ℕ_)
+
+-- (a)
 open import elementary-number-theory.strict-inequality-natural-numbers using
   ( anti-reflexive-le-ℕ
   ; antisymmetric-le-ℕ
   ; transitive-le-ℕ)
+
+-- (b)
 open import elementary-number-theory.strict-inequality-natural-numbers using
   ( succ-le-ℕ -- n < n + 1
   ; preserves-le-succ-ℕ -- m < n → m < n + 1
   )
+
+-- (c)
 open import elementary-number-theory.strict-inequality-natural-numbers using
   ( leq-succ-le-ℕ
   ; contradiction-le-ℕ)
@@ -730,18 +980,29 @@ open import elementary-number-theory.strict-inequality-natural-numbers using
 ```agda
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-ℕ)
+
+-- (a)
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-eq-ℕ
   ; eq-dist-ℕ
   ; symmetric-dist-ℕ -- dist m n = dist n m
   ; triangle-inequality-dist-ℕ -- dist m n ≤ dist m k + dist k n
   )
-_ : (m n : ℕ) → (m ＝ n) ↔ (dist-ℕ m n ＝ zero-ℕ)
+
+_ : (m n : ℕ) → (m ＝ n) ↔ (dist-ℕ m n ＝ 0)
 _ = λ m n → (dist-eq-ℕ m n , eq-dist-ℕ m n)
+
 -- TODO: b
+
+-- (c)
 open import elementary-number-theory.distance-natural-numbers using
   ( translation-invariant-dist-ℕ -- dist (a + m) (a + n) = dist m n
   ; left-distributive-mul-dist-ℕ' -- dist (k * m) (k * n) = k * (dist m n)
+  )
+
+-- (d)
+open import elementary-number-theory.distance-natural-numbers using
+  ( is-additive-right-inverse-dist-ℕ -- x + dist x y = y for x ≤ y
   )
 ```
 
@@ -752,10 +1013,11 @@ open import elementary-number-theory.absolute-value-integers using
   ( abs-ℤ
   ; eq-abs-ℤ
   ; abs-eq-ℤ
-  ; subadditive-abs-ℤ -- |x + y| < |x| + |y|
+  ; subadditive-abs-ℤ -- |x + y| ≤ |x| + |y|
   ; multiplicative-abs-ℤ -- |x * y| = |x| * |y|
   )
-_ : (x : ℤ) → (x ＝ zero-ℤ) ↔ (abs-ℤ x ＝ zero-ℕ)
+
+_ : (x : ℤ) → (x ＝ zero-ℤ) ↔ (abs-ℤ x ＝ 0)
 _ = λ x → (abs-eq-ℤ x , eq-abs-ℤ x)
 ```
 
@@ -777,7 +1039,8 @@ open import elementary-number-theory.divisibility-natural-numbers using
 
 ```agda
 open import elementary-number-theory.divisibility-natural-numbers using
-  ( div-one-ℕ)
+  ( div-one-ℕ -- 1 | x
+  )
 ```
 
 **Proposition 7.1.5.** A 3-for-2 property of division.
@@ -785,7 +1048,8 @@ open import elementary-number-theory.divisibility-natural-numbers using
 
 ```agda
 open import elementary-number-theory.divisibility-natural-numbers using
-  ( div-add-ℕ)
+  ( div-add-ℕ -- d | x → d | y → d | (x + y)
+  )
 ```
 
 The other other two claims are shown in Exercise [7.1](#exercise-7.1).
@@ -814,7 +1078,8 @@ open import elementary-number-theory.congruence-natural-numbers using
 
 ```agda
 open import elementary-number-theory.congruence-natural-numbers using
-  ( cong-zero-ℕ)
+  ( cong-zero-ℕ -- k ≡ 0 mod k
+  )
 ```
 
 **Proposition 7.2.4.** Congruence modulo `k` is an equivalence relation.
@@ -830,10 +1095,8 @@ open import elementary-number-theory.congruence-natural-numbers using
 
 **Definition 7.3.2.** The standard finite types.
 
-TODO: is neg-one-Fin called that because it's "k - 1"?
-
-TODO: we could implement the pattern matching on `i(x)` and `*` instead of
-`inl x` and `inr *` by using pattern synonyms. Would we be interested in that?
+The point `⋆` is called `neg-one-Fin` because it represents the element `k - 1`
+under the inclusion into ℕ.
 
 ```agda
 open import univalent-combinatorics.standard-finite-types using
@@ -854,7 +1117,8 @@ open import univalent-combinatorics.standard-finite-types using
 
 ```agda
 open import univalent-combinatorics.standard-finite-types using
-  ( strict-upper-bound-nat-Fin)
+  ( strict-upper-bound-nat-Fin -- ι x < k
+  )
 ```
 
 **Proposition 7.3.6.** The inclusion into ℕ is injective.
@@ -916,11 +1180,14 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 open import elementary-number-theory.divisibility-natural-numbers using
   ( is-zero-div-ℕ
   ; div-is-zero-ℕ)
+
 _ : (d x : ℕ) → x <-ℕ d → div-ℕ d x ↔ (x ＝ 0)
 _ = λ d x x<d → (is-zero-div-ℕ d x x<d , div-is-zero-ℕ d x)
+
 open import elementary-number-theory.congruence-natural-numbers using
   ( eq-cong-le-dist-ℕ
   ; cong-identification-ℕ)
+
 _ : (k x y : ℕ) → dist-ℕ x y <-ℕ k → x ≡ y mod k ↔ (x ＝ y)
 _ = λ k x y dist<d → (eq-cong-le-dist-ℕ k x y dist<d , cong-identification-ℕ k)
 ```
@@ -932,6 +1199,7 @@ inclusion to `Fin (k + 1)`.
 open import elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( cong-eq-mod-succ-ℕ
   ; eq-mod-succ-cong-ℕ)
+
 _ : (k x y : ℕ) → (mod-succ-ℕ k x ＝ mod-succ-ℕ k y) ↔ (x ≡ y mod (succ-ℕ k))
 _ = λ k x y → (cong-eq-mod-succ-ℕ k x y , eq-mod-succ-cong-ℕ k x y)
 ```
@@ -979,9 +1247,10 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 
 ```agda
 open import elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( congruence-add-ℕ
-  ; cong-right-summand-ℕ
-  ; cong-left-summand-ℕ)
+  ( congruence-add-ℕ -- x ≡ x' → y ≡ y' → (x + y ≡ x' + y')
+  ; cong-right-summand-ℕ -- x ≡ x' → (x + y ≡ x' + y') → y ≡ y'
+  ; cong-left-summand-ℕ -- y ≡ y' → (x + y ≡ x' + y') → x ≡ x'
+  )
 ```
 
 **Theorem 7.5.5.** ℤ/k with addition and negation form an Abelian group.
@@ -1001,6 +1270,13 @@ open import elementary-number-theory.modular-arithmetic using
 
 **Exercise 7.1.** The rest of Proposition [7.1.5](#proposition-7.1.5)
 <a id="exercise-7.1"></a>
+
+```agda
+open import elementary-number-theory.divisibility-natural-numbers using
+  ( div-right-summand-ℕ -- d | x → d | x + y → d | y
+  ; div-left-summand-ℕ -- d | y → d | x + y → d | x
+  )
+```
 
 **Exercise 7.2.** Divisibility is a partial order.
 
@@ -1030,15 +1306,24 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 ```agda
 open import univalent-combinatorics.equality-standard-finite-types using
   ( Eq-Fin)
+
+-- (a)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( Eq-Fin-eq
   ; eq-Eq-Fin)
+
 _ : (k : ℕ) → {x y : Fin k} → (x ＝ y) ↔ Eq-Fin k x y
 _ = λ k → (Eq-Fin-eq k , eq-Eq-Fin k)
+
+-- (b)
 open import univalent-combinatorics.standard-finite-types using
   ( is-injective-inl-Fin)
+
+-- (c)
 open import univalent-combinatorics.standard-finite-types using
   ( neq-zero-succ-Fin)
+
+-- (d)
 open import univalent-combinatorics.standard-finite-types using
   ( is-injective-succ-Fin)
 ```
@@ -1060,12 +1345,17 @@ open import univalent-combinatorics.standard-finite-types using
 ```agda
 open import univalent-combinatorics.classical-finite-types using
   ( classical-Fin)
+
+-- (a)
 open import univalent-combinatorics.classical-finite-types using
   ( Eq-classical-Fin
   ; Eq-eq-classical-Fin
   ; eq-Eq-classical-Fin)
+
 _ : (k : ℕ) → (x y : classical-Fin k) → (x ＝ y) ↔ Eq-classical-Fin k x y
 _ = λ k x y → (Eq-eq-classical-Fin k x y , eq-Eq-classical-Fin k x y)
+
+-- (b)
 open import univalent-combinatorics.classical-finite-types using
   ( classical-standard-Fin -- ι
   ; standard-classical-Fin -- α
@@ -1079,12 +1369,18 @@ open import univalent-combinatorics.classical-finite-types using
 ```agda
 open import elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( mul-Fin)
+
+-- (a)
 open import elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( cong-mul-Fin -- ι(x * y) ≡ ι x * ι y mod (k + 1)
   )
+
+-- (b)
 open import elementary-number-theory.congruence-natural-numbers using
   ( congruence-mul-ℕ -- x ≡ x' → y ≡ y' → (x * y) ≡ (x' * y')
   )
+
+-- (c)
 open import elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( associative-mul-Fin -- (x * y) * z = x * (y * z)
   ; commutative-mul-Fin -- x * y = y * x
@@ -1098,8 +1394,10 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 **Exercise 7.9.** Euclidean division.
 
 ```agda
+-- (a)
 open import elementary-number-theory.euclidean-division-natural-numbers using
   ( euclidean-division-ℕ)
+
 -- TODO: b
 ```
 
@@ -1110,10 +1408,16 @@ open import elementary-number-theory.finitary-natural-numbers using
   ( based-ℕ -- ℕₖ
   ; convert-based-ℕ -- fₖ
   )
+
+-- (a)
 open import elementary-number-theory.finitary-natural-numbers using
   ( is-empty-based-zero-ℕ)
+
+-- (b)
 open import elementary-number-theory.finitary-natural-numbers using
   ( is-injective-convert-based-ℕ)
+
+-- (c)
 open import elementary-number-theory.finitary-natural-numbers using
   ( inv-convert-based-ℕ -- gₖ
   ; is-section-inv-convert-based-ℕ -- fₖ₊₁ (gₖ n) = n
@@ -1201,8 +1505,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 
 ### 8.2 Constructions by case analysis
 
-**Definition 8.2.1.** The Collatz function. TODO: report that "collatz function"
-is inconsistently capitalized.
+**Definition 8.2.1.** The Collatz function.
 
 Note that we don't store the helper function `h` in a separate definition.
 Instead we use Agda's `with` abstraction to do case analysis on the result of
@@ -1229,8 +1532,7 @@ open import elementary-number-theory.decidable-types using
   ( is-decidable-Π-ℕ)
 ```
 
-**Corollary 8.2.5.** TODO: "upper bound for P" is only defined in the next
-section.
+**Corollary 8.2.5.**
 
 ```agda
 open import elementary-number-theory.decidable-types using
@@ -1307,7 +1609,8 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers usi
 open import elementary-number-theory.greatest-common-divisor-natural-numbers using
   ( is-zero-gcd-ℕ
   ; is-zero-add-is-zero-gcd-ℕ)
-_ : (a b : ℕ) → (gcd-ℕ a b ＝ zero-ℕ) ↔ (add-ℕ a b ＝ zero-ℕ)
+
+_ : (a b : ℕ) → (gcd-ℕ a b ＝ 0) ↔ (add-ℕ a b ＝ 0)
 _ = λ a b → (is-zero-add-is-zero-gcd-ℕ a b , is-zero-gcd-ℕ a b)
 ```
 
@@ -1379,6 +1682,7 @@ open import reflection.boolean-reflection using
 open import reflection.boolean-reflection using
   ( boolean-reflection -- reflect
   )
+
 _ : is-prime-ℕ 37
 _ = boolean-reflection (is-decidable-is-prime-ℕ 37) refl
 ```
@@ -1388,10 +1692,15 @@ _ = boolean-reflection (is-decidable-is-prime-ℕ 37) refl
 **Exercise 8.1.** Statements of famous conjectures.
 
 ```agda
+-- (a)
 open import elementary-number-theory.goldbach-conjecture using
   ( Goldbach-conjecture)
+
+-- (b)
 open import elementary-number-theory.twin-prime-conjecture using
   ( twin-prime-conjecture)
+
+-- (c)
 open import elementary-number-theory.collatz-conjecture using
   ( Collatz-conjecture)
 ```
@@ -1433,6 +1742,7 @@ open import foundation.decidable-equality using
   ( has-decidable-equality-product'
   ; has-decidable-equality-left-factor
   ; has-decidable-equality-right-factor)
+
 _ :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (B → has-decidable-equality A) × (A → has-decidable-equality B) ↔
@@ -1442,29 +1752,38 @@ _ =
   ( λ eqAB →
     has-decidable-equality-left-factor eqAB ,
     has-decidable-equality-right-factor eqAB)
+
 open import foundation.decidable-equality using
   ( has-decidable-equality-product)
 ```
 
 **Exercise 8.7.** Observational equality of coproducts.
 
-TODO: Equality of coproducts is defined as an inductive instead of recursively.
-Is that because the identity types need to be raised?
+Note that observational equality of coproducts is defined as a bespoke inductive
+type, because the book definition requires raising universe levels: if `A : 𝒰`
+and `B : 𝒱` aren't assumed to be in the same universe, then we need to raise the
+identity type of `A`, the identity type of `B`, and the empty type to `𝒰 ⊔ 𝒱`.
 
 ```agda
 open import foundation.equality-coproduct-types using
   ( Eq-coproduct)
+
+-- (a)
 open import foundation.equality-coproduct-types using
   ( Eq-eq-coproduct
   ; eq-Eq-coproduct)
+
 _ :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (x y : A + B) → (x ＝ y) ↔ Eq-coproduct x y
 _ = λ x y → (Eq-eq-coproduct x y , eq-Eq-coproduct x y)
+
+-- (b)
 open import foundation.decidable-equality using
   ( has-decidable-equality-coproduct
   ; has-decidable-equality-left-summand
   ; has-decidable-equality-right-summand)
+
 _ :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   has-decidable-equality A × has-decidable-equality B ↔
@@ -1474,18 +1793,18 @@ _ =
   ( λ eqAB →
     has-decidable-equality-left-summand eqAB ,
     has-decidable-equality-right-summand eqAB)
+
 open import elementary-number-theory.equality-integers using
   ( has-decidable-equality-ℤ)
 ```
 
 **Exercise 8.8.** Decidable equality in dependent pair types.
 
-TODO: This needs Eq-Σ, which is introduced in Section 9.3, right?
-
 ```agda
 open import foundation.decidable-equality using
   ( has-decidable-equality-Σ
   ; has-decidable-equality-fiber-has-decidable-equality-Σ)
+
 _ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → has-decidable-equality A →
   ((x : A) → has-decidable-equality (B x)) ↔
@@ -1494,6 +1813,7 @@ _ =
   λ eqA →
     has-decidable-equality-Σ eqA ,
     has-decidable-equality-fiber-has-decidable-equality-Σ eqA
+
 open import foundation.decidable-equality using
   ( has-decidable-equality-base-has-decidable-equality-Σ)
 ```
@@ -1501,11 +1821,10 @@ open import foundation.decidable-equality using
 **Exercise 8.9.** Decidability and decidable equality of dependent function out
 of `Fin k`
 
-TODO: Decidable equality needs function extensionality, right?
-
 ```agda
 open import univalent-combinatorics.decidable-dependent-function-types using
   ( is-decidable-Π-Fin)
+
 -- TODO: b
 ```
 
@@ -1554,7 +1873,9 @@ open import elementary-number-theory.fundamental-theorem-of-arithmetic using
   )
 ```
 
-**Exercise 8.13.** TODO
+**Exercise 8.13.** There are infinitely many primes `p ≡ 3 mod 4`.
+
+TODO.
 
 **Exercise 8.14.** Prime fields.
 
@@ -1566,5 +1887,6 @@ TODO.
 open import elementary-number-theory.cofibonacci using
   ( cofibonacci
   ; forward-is-left-adjoint-cofibonacci)
+
 -- TODO: backward direction of the adjointness equivalence
 ```
