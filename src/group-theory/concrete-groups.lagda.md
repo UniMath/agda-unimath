@@ -200,6 +200,9 @@ module _
   group-Concrete-Group : Group l
   pr1 group-Concrete-Group = semigroup-Concrete-Group
   pr2 group-Concrete-Group = is-group-Concrete-Group
+
+  monoid-Concrete-Group : Monoid l
+  monoid-Concrete-Group = monoid-Group group-Concrete-Group
 ```
 
 ### The opposite abstract group associated to a concrete group

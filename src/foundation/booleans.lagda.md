@@ -288,49 +288,49 @@ contrapositive-is-false-bool {x} f refl =
 ### The type of booleans is equivalent to `Fin 2`
 
 ```agda
-bool-Fin-two-ℕ : Fin 2 → bool
-bool-Fin-two-ℕ (inl (inr star)) = true
-bool-Fin-two-ℕ (inr star) = false
+bool-Fin-2 : Fin 2 → bool
+bool-Fin-2 (inl (inr star)) = true
+bool-Fin-2 (inr star) = false
 
-Fin-two-ℕ-bool : bool → Fin 2
-Fin-two-ℕ-bool true = inl (inr star)
-Fin-two-ℕ-bool false = inr star
-
-abstract
-  is-retraction-Fin-two-ℕ-bool : Fin-two-ℕ-bool ∘ bool-Fin-two-ℕ ~ id
-  is-retraction-Fin-two-ℕ-bool (inl (inr star)) = refl
-  is-retraction-Fin-two-ℕ-bool (inr star) = refl
+Fin-2-bool : bool → Fin 2
+Fin-2-bool true = inl (inr star)
+Fin-2-bool false = inr star
 
 abstract
-  is-section-Fin-two-ℕ-bool : bool-Fin-two-ℕ ∘ Fin-two-ℕ-bool ~ id
-  is-section-Fin-two-ℕ-bool true = refl
-  is-section-Fin-two-ℕ-bool false = refl
+  is-retraction-Fin-2-bool : Fin-2-bool ∘ bool-Fin-2 ~ id
+  is-retraction-Fin-2-bool (inl (inr star)) = refl
+  is-retraction-Fin-2-bool (inr star) = refl
 
-equiv-bool-Fin-two-ℕ : Fin 2 ≃ bool
-pr1 equiv-bool-Fin-two-ℕ = bool-Fin-two-ℕ
-pr2 equiv-bool-Fin-two-ℕ =
+abstract
+  is-section-Fin-2-bool : bool-Fin-2 ∘ Fin-2-bool ~ id
+  is-section-Fin-2-bool true = refl
+  is-section-Fin-2-bool false = refl
+
+equiv-bool-Fin-2 : Fin 2 ≃ bool
+pr1 equiv-bool-Fin-2 = bool-Fin-2
+pr2 equiv-bool-Fin-2 =
   is-equiv-is-invertible
-    ( Fin-two-ℕ-bool)
-    ( is-section-Fin-two-ℕ-bool)
-    ( is-retraction-Fin-two-ℕ-bool)
+    ( Fin-2-bool)
+    ( is-section-Fin-2-bool)
+    ( is-retraction-Fin-2-bool)
 ```
 
 ### The type of booleans is finite
 
 ```agda
 is-finite-bool : is-finite bool
-is-finite-bool = is-finite-equiv equiv-bool-Fin-two-ℕ (is-finite-Fin 2)
+is-finite-bool = is-finite-equiv equiv-bool-Fin-2 (is-finite-Fin 2)
 
 number-of-elements-bool : number-of-elements-is-finite is-finite-bool ＝ 2
 number-of-elements-bool =
   inv
     ( compute-number-of-elements-is-finite
-      ( 2 , equiv-bool-Fin-two-ℕ)
+      ( 2 , equiv-bool-Fin-2)
       ( is-finite-bool))
 
-bool-𝔽 : 𝔽 lzero
-pr1 bool-𝔽 = bool
-pr2 bool-𝔽 = is-finite-bool
+bool-Finite-Type : Finite-Type lzero
+pr1 bool-Finite-Type = bool
+pr2 bool-Finite-Type = is-finite-bool
 ```
 
 ### The constant function `const bool b` is not an equivalence

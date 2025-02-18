@@ -101,6 +101,9 @@ module _
     is-injective h → is-injective g → is-injective (g ∘ h)
   is-injective-comp is-inj-h is-inj-g = is-inj-h ∘ is-inj-g
 
+  comp-injection : injection B C → injection A B → injection A C
+  comp-injection (g , G) (h , H) = (g ∘ h , is-injective-comp H G)
+
   is-injective-left-map-triangle :
     (f : A → C) (g : B → C) (h : A → B) → f ~ (g ∘ h) →
     is-injective h → is-injective g → is-injective f
@@ -154,6 +157,9 @@ module _
 
   is-injective-equiv : (e : A ≃ B) → is-injective (map-equiv e)
   is-injective-equiv e = is-injective-is-equiv (is-equiv-map-equiv e)
+
+  injection-equiv : A ≃ B → injection A B
+  injection-equiv e = (map-equiv e , is-injective-equiv e)
 
 abstract
   is-injective-map-inv-equiv :

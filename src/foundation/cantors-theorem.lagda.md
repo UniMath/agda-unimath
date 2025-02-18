@@ -63,8 +63,8 @@ would have to be a fixed point of the negation operation, since
 
 but negation has no fixed points.
 
-Cantor's theorem is the 63rd theorem on
-[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+Cantor's theorem is the [63rd](literature.100-theorems.md#63) theorem on
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ```agda

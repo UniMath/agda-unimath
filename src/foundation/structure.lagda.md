@@ -21,8 +21,8 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-Given a type family `𝒫` on the universe, a **`𝒫`-structured type** consists of a
-type `A` equipped with an element of type `𝒫 A`.
+Given a type family `𝒫` on the universe, a {{#concept "`𝒫`-structured type"}}
+consists of a type `A` _equipped_ with an element of type `𝒫 A`.
 
 ## Definitions
 
@@ -56,11 +56,17 @@ hom-structure :
   {l1 l2 l3 : Level} (𝒫 : UU (l1 ⊔ l2) → UU l3) →
   UU l1 → UU l2 → UU (l1 ⊔ l2 ⊔ l3)
 hom-structure 𝒫 A B = Σ (A → B) (structure-map 𝒫)
+
+structure-equality :
+  {l1 l2 : Level} (𝒫 : UU l1 → UU l2) → UU l1 → UU (l1 ⊔ l2)
+structure-equality 𝒫 A = (x y : A) → 𝒫 (x ＝ y)
 ```
 
 ## Properties
 
 ### Having structure is closed under equivalences
+
+This is a consequence of [the univalence axiom](foundation.univalence.md)
 
 ```agda
 has-structure-equiv :
@@ -71,5 +77,3 @@ has-structure-equiv' :
   {l1 l2 : Level} (𝒫 : UU l1 → UU l2) {X Y : UU l1} → X ≃ Y → 𝒫 Y → 𝒫 X
 has-structure-equiv' 𝒫 e = tr 𝒫 (inv (eq-equiv e))
 ```
-
-cl

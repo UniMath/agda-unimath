@@ -159,16 +159,17 @@ module _
   (p q : fraction-ℤ)
   where
 
-  preserves-le-rational-fraction-ℤ :
-    le-fraction-ℤ p q → le-ℚ (rational-fraction-ℤ p) (rational-fraction-ℤ q)
-  preserves-le-rational-fraction-ℤ =
-    preserves-le-sim-fraction-ℤ
-      ( p)
-      ( q)
-      ( reduce-fraction-ℤ p)
-      ( reduce-fraction-ℤ q)
-      ( sim-reduced-fraction-ℤ p)
-      ( sim-reduced-fraction-ℤ q)
+  abstract
+    preserves-le-rational-fraction-ℤ :
+      le-fraction-ℤ p q → le-ℚ (rational-fraction-ℤ p) (rational-fraction-ℤ q)
+    preserves-le-rational-fraction-ℤ =
+      preserves-le-sim-fraction-ℤ
+        ( p)
+        ( q)
+        ( reduce-fraction-ℤ p)
+        ( reduce-fraction-ℤ q)
+        ( sim-reduced-fraction-ℤ p)
+        ( sim-reduced-fraction-ℤ q)
 
 module _
   (x : ℚ) (p : fraction-ℤ)
@@ -448,4 +449,11 @@ located-le-ℚ x y z H =
       ( id)
       ( λ p → concatenate-leq-le-ℚ x y z p H)
       ( decide-le-leq-ℚ y x))
+```
+
+### Negation reverses the ordering of strict inequality on the rational numbers
+
+```agda
+neg-le-ℚ : (x y : ℚ) → le-ℚ x y → le-ℚ (neg-ℚ y) (neg-ℚ x)
+neg-le-ℚ x y = neg-le-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
 ```

@@ -27,7 +27,7 @@ open import univalent-combinatorics.finite-types
 
 Consider two [finite sets](univalent-combinatorics.finite-types.md) `X` and `Y`.
 The
-{{#concept "complete bipartite graph" Agda=complete-bipartite-Undirected-Graph-𝔽 WDID=Q913598 WD="complete bipartite graph"}}
+{{#concept "complete bipartite graph" Agda=complete-bipartite-Finite-Undirected-Graph WDID=Q913598 WD="complete bipartite graph"}}
 on `X` and `Y` is the [undirected finite graph](graph-theory.finite-graphs.md)
 consisting of:
 
@@ -49,51 +49,57 @@ consisting of:
 
 ```agda
 module _
-  {l1 l2 : Level} (X : 𝔽 l1) (Y : 𝔽 l2)
+  {l1 l2 : Level} (X : Finite-Type l1) (Y : Finite-Type l2)
   where
 
-  vertex-finite-type-complete-bipartite-Undirected-Graph-𝔽 : 𝔽 (l1 ⊔ l2)
-  vertex-finite-type-complete-bipartite-Undirected-Graph-𝔽 = coproduct-𝔽 X Y
+  vertex-finite-type-complete-bipartite-Finite-Undirected-Graph :
+    Finite-Type (l1 ⊔ l2)
+  vertex-finite-type-complete-bipartite-Finite-Undirected-Graph =
+    coproduct-Finite-Type X Y
 
-  vertex-complete-bipartite-Undirected-Graph-𝔽 : UU (l1 ⊔ l2)
-  vertex-complete-bipartite-Undirected-Graph-𝔽 =
-    type-𝔽 vertex-finite-type-complete-bipartite-Undirected-Graph-𝔽
+  vertex-complete-bipartite-Finite-Undirected-Graph : UU (l1 ⊔ l2)
+  vertex-complete-bipartite-Finite-Undirected-Graph =
+    type-Finite-Type
+      vertex-finite-type-complete-bipartite-Finite-Undirected-Graph
 
-  unordered-pair-vertices-complete-bipartite-Undirected-Graph-𝔽 :
+  unordered-pair-vertices-complete-bipartite-Finite-Undirected-Graph :
     UU (lsuc lzero ⊔ l1 ⊔ l2)
-  unordered-pair-vertices-complete-bipartite-Undirected-Graph-𝔽 =
-    unordered-pair vertex-complete-bipartite-Undirected-Graph-𝔽
+  unordered-pair-vertices-complete-bipartite-Finite-Undirected-Graph =
+    unordered-pair vertex-complete-bipartite-Finite-Undirected-Graph
 
-  edge-finite-type-complete-bipartite-Undirected-Graph-𝔽 :
-    unordered-pair-vertices-complete-bipartite-Undirected-Graph-𝔽 → 𝔽 (l1 ⊔ l2)
-  edge-finite-type-complete-bipartite-Undirected-Graph-𝔽 p =
-    product-𝔽
-      ( Σ-𝔽 X
+  edge-finite-type-complete-bipartite-Finite-Undirected-Graph :
+    unordered-pair-vertices-complete-bipartite-Finite-Undirected-Graph →
+    Finite-Type (l1 ⊔ l2)
+  edge-finite-type-complete-bipartite-Finite-Undirected-Graph p =
+    product-Finite-Type
+      ( Σ-Finite-Type X
         ( λ x →
-          fiber-𝔽
+          fiber-Finite-Type
             ( finite-type-2-Element-Type (pr1 p))
-            ( coproduct-𝔽 X Y)
+            ( coproduct-Finite-Type X Y)
             ( element-unordered-pair p)
             ( inl x)))
-      ( Σ-𝔽 Y
+      ( Σ-Finite-Type Y
         ( λ y →
-          fiber-𝔽
+          fiber-Finite-Type
             ( finite-type-2-Element-Type (pr1 p))
-            ( coproduct-𝔽 X Y)
+            ( coproduct-Finite-Type X Y)
             ( element-unordered-pair p)
             ( inr y)))
 
   edge-complete-bipartite-Undirected-Graph :
-    unordered-pair-vertices-complete-bipartite-Undirected-Graph-𝔽 → UU (l1 ⊔ l2)
+    unordered-pair-vertices-complete-bipartite-Finite-Undirected-Graph →
+    UU (l1 ⊔ l2)
   edge-complete-bipartite-Undirected-Graph p =
-    type-𝔽 (edge-finite-type-complete-bipartite-Undirected-Graph-𝔽 p)
+    type-Finite-Type
+      ( edge-finite-type-complete-bipartite-Finite-Undirected-Graph p)
 
-  complete-bipartite-Undirected-Graph-𝔽 :
-    Undirected-Graph-𝔽 (l1 ⊔ l2) (l1 ⊔ l2)
-  pr1 complete-bipartite-Undirected-Graph-𝔽 =
-    vertex-finite-type-complete-bipartite-Undirected-Graph-𝔽
-  pr2 complete-bipartite-Undirected-Graph-𝔽 =
-    edge-finite-type-complete-bipartite-Undirected-Graph-𝔽
+  complete-bipartite-Finite-Undirected-Graph :
+    Finite-Undirected-Graph (l1 ⊔ l2) (l1 ⊔ l2)
+  pr1 complete-bipartite-Finite-Undirected-Graph =
+    vertex-finite-type-complete-bipartite-Finite-Undirected-Graph
+  pr2 complete-bipartite-Finite-Undirected-Graph =
+    edge-finite-type-complete-bipartite-Finite-Undirected-Graph
 ```
 
 ## External links
