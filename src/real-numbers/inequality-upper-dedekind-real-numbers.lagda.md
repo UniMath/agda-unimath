@@ -1,6 +1,8 @@
 # Inequality on the upper Dedekind real numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.inequality-upper-dedekind-real-numbers where
 ```
 
@@ -22,9 +24,9 @@ open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import order-theory.bottom-elements-large-posets
 open import order-theory.large-posets
 open import order-theory.large-preorders
-open import order-theory.bottom-elements-large-posets
 
 open import real-numbers.rational-upper-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers

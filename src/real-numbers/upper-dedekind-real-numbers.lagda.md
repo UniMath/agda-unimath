@@ -24,12 +24,12 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositions
-open import foundation.unit-type
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
+open import foundation.unit-type
 open import foundation.universal-quantification
 open import foundation.universe-levels
 ```

@@ -28,8 +28,8 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import order-theory.large-inflattices
 open import order-theory.greatest-lower-bounds-large-posets
+open import order-theory.large-inflattices
 open import order-theory.lower-bounds-large-posets
 
 open import real-numbers.inequality-upper-dedekind-real-numbers

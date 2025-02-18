@@ -1,6 +1,8 @@
 # Inequality on the lower Dedekind real numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.inequality-lower-dedekind-real-numbers where
 ```
 
