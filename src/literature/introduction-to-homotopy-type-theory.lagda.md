@@ -107,7 +107,7 @@ encoding of pairs with functions as the definition of the Fibonacci sequence.
 
 ```agda
 open import elementary-number-theory.fibonacci-sequence using
-  ( shift-one ; shift-two )
+  ( shift-one ; shift-two)
 
 div-two-induction-step : (ℕ → ℕ) → (ℕ → ℕ)
 div-two-induction-step f =
@@ -299,7 +299,7 @@ open import foundation.booleans using
   ( bool
   ; false
   ; true
-  ; ind-bool )
+  ; ind-bool)
 
 -- (a)
 open import foundation.booleans using
@@ -385,20 +385,20 @@ open import foundation.irrefutable-propositions using
 module _
   {l1 l2 : Level} {P : UU l1} {Q : UU l2}
   where
-  _ : ¬¬(P × Q) → ¬¬ P × ¬¬ Q
+  _ : ¬¬ (P × Q) → ¬¬ P × ¬¬ Q
   _ =
     λ nnpq → (λ np → nnpq (λ (p , q) → np p)) , (λ nq → nnpq (λ (p , q) → nq q))
 
-  _ : ¬¬(P + Q) → ¬(¬ P × ¬ Q)
+  _ : ¬¬ (P + Q) → ¬ (¬ P × ¬ Q)
   _ =
     λ nnpq (np , nq) → nnpq (rec-coproduct np nq)
-  _ : ¬(¬ P × ¬ Q) → ¬¬(P + Q)
+  _ : ¬ (¬ P × ¬ Q) → ¬¬ (P + Q)
   _ = λ nnpnq npq → nnpnq ((λ p → npq (inl p)) , (λ q → npq (inr q)))
 
-  _ : ¬¬(P → Q) → (¬¬ P → ¬¬ Q)
+  _ : ¬¬ (P → Q) → (¬¬ P → ¬¬ Q)
   _ = λ nnpq nnp nq → nnp (λ p → nnpq (λ pq → nq (pq p)))
 
-  _ : (¬¬ P → ¬¬ Q) → ¬¬(P → Q)
+  _ : (¬¬ P → ¬¬ Q) → ¬¬ (P → Q)
   _ =
     λ nnpnnq npq →
       ( λ (nq : ¬ Q) →
@@ -743,8 +743,8 @@ The book's metatheory uses universes _à la Tarski_, which considers a universe
 `X : 𝒰` are themselves types.
 
 The only exception is the universe types themselves — we have the type `Level`
-of codes for universes, and for every code `l : Level` we have the judgment `UU
-l type`.
+of codes for universes, and for every code `l : Level` we have the judgment
+`UU l type`.
 
 Universes are called `UU` in the library, which stands for _univalent universe_.
 
@@ -799,8 +799,7 @@ open import foundation.universe-levels using
 **Remark 6.2.6.** Universe arithmetic.
 
 Note that while in the book `(𝒰 ⊔ 𝒱) ⊔ 𝒲` and `𝒰 ⊔ (𝒱 ⊔ 𝒲)` are a priori
-unrelated, Agda considers them equal. Other universe equalities may be found
-in
+unrelated, Agda considers them equal. Other universe equalities may be found in
 [the documentation](https://agda.readthedocs.io/en/latest/language/universe-levels.html#intrinsic-level-properties).
 
 ### 6.3 Observational equality of the natural numbers
