@@ -334,6 +334,15 @@ leq-succ-le-ℕ zero-ℕ (succ-ℕ y) H = star
 leq-succ-le-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-succ-le-ℕ x y H
 ```
 
+### If `x + 1 ≤ y` then `x < y`
+
+```agda
+le-leq-succ-ℕ :
+  (x y : ℕ) → leq-ℕ (succ-ℕ x) y → le-ℕ x y
+le-leq-succ-ℕ zero-ℕ (succ-ℕ y) H = star
+le-leq-succ-ℕ (succ-ℕ x) (succ-ℕ y) H = le-leq-succ-ℕ x y H
+```
+
 ### If `x ≤ y` then `x < y + 1`
 
 ```agda

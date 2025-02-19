@@ -288,6 +288,12 @@ pr1 (reflects-cong-add-ℕ {k} x {y} {z} (d , p)) = d
 pr2 (reflects-cong-add-ℕ {k} x {y} {z} (d , p)) =
   p ∙ translation-invariant-dist-ℕ x y z
 
+reflects-cong-left-add-ℕ :
+  {k : ℕ} (x : ℕ) {y z : ℕ} → cong-ℕ k (x +ℕ z) (y +ℕ z) → cong-ℕ k x y
+pr1 (reflects-cong-left-add-ℕ x (d , p)) = d
+pr2 (reflects-cong-left-add-ℕ {k} x {y} {z} (d , p)) =
+  p ∙ translation-invariant-dist-ℕ' z x y
+
 reflects-cong-add-ℕ' :
   {k : ℕ} (x : ℕ) {y z : ℕ} → y +ℕ x ≡ z +ℕ x mod-ℕ k → y ≡ z mod-ℕ k
 reflects-cong-add-ℕ' {k} x {y} {z} H =
@@ -308,6 +314,30 @@ congruence-add-ℕ k {x} {y} {x'} {y'} H K =
   transitive-cong-ℕ k (x +ℕ y) (x +ℕ y') (x' +ℕ y')
     ( translation-invariant-cong-ℕ' k x x' y' H)
     ( translation-invariant-cong-ℕ k y y' x K)
+
+congruence-right-summand-ℕ :
+  (k : ℕ) {x y x' y' : ℕ} →
+  cong-ℕ k x x' → cong-ℕ k (x +ℕ y) (x' +ℕ y') → cong-ℕ k y y'
+congruence-right-summand-ℕ k {x} {y} {x'} {y'} H K =
+  reflects-cong-add-ℕ x {y}
+    ( transitive-cong-ℕ k
+      ( x +ℕ y)
+      ( x' +ℕ y')
+      ( x +ℕ y')
+      ( translation-invariant-cong-ℕ' k x' x y'
+        ( symmetric-cong-ℕ k x x' H))
+      ( K))
+
+congruence-left-summand-ℕ :
+  (k : ℕ) {x y x' y' : ℕ} →
+  cong-ℕ k y y' → cong-ℕ k (x +ℕ y) (x' +ℕ y') → cong-ℕ k x x'
+congruence-left-summand-ℕ k {x} {y} {x'} {y'} H K =
+  congruence-right-summand-ℕ k {y} {x} {y'} {x'} H
+    ( concatenate-eq-cong-ℕ k
+      ( commutative-add-ℕ y x)
+      ( concatenate-cong-eq-ℕ k {x1 = x +ℕ y}
+        ( K)
+        ( commutative-add-ℕ x' y')))
 ```
 
 ## See also

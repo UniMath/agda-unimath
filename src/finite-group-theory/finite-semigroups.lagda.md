@@ -125,8 +125,8 @@ module _
 ```agda
 Semigroup-of-Order' : (l : Level) (n : ℕ) → UU (lsuc l)
 Semigroup-of-Order' l n =
-  Σ ( UU-Fin l n)
-    ( λ X → has-associative-mul (type-UU-Fin n X))
+  Σ ( Type-With-Cardinality-ℕ l n)
+    ( λ X → has-associative-mul (type-Type-With-Cardinality-ℕ n X))
 
 Semigroup-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
 Semigroup-of-Order l n =
@@ -142,12 +142,12 @@ compute-Semigroup-of-Order :
   {l : Level} (n : ℕ) → Semigroup-of-Order l n ≃ Semigroup-of-Order' l n
 compute-Semigroup-of-Order {l} n =
   ( equiv-Σ
-    ( has-associative-mul ∘ type-UU-Fin n)
+    ( has-associative-mul ∘ type-Type-With-Cardinality-ℕ n)
     ( ( right-unit-law-Σ-is-contr
         ( λ X →
           is-proof-irrelevant-is-prop
             ( is-prop-is-set _)
-            ( is-set-is-finite (is-finite-has-cardinality n (pr2 X))))) ∘e
+            ( is-set-is-finite (is-finite-has-cardinality-ℕ n (pr2 X))))) ∘e
       ( equiv-right-swap-Σ))
     ( λ X → id-equiv)) ∘e
   ( equiv-right-swap-Σ
@@ -192,11 +192,11 @@ is-untruncated-π-finite-Semigroup-of-Order' :
   {l : Level} (k n : ℕ) → is-untruncated-π-finite k (Semigroup-of-Order' l n)
 is-untruncated-π-finite-Semigroup-of-Order' k n =
   is-untruncated-π-finite-Σ k
-    ( is-untruncated-π-finite-UU-Fin (succ-ℕ k) n)
+    ( is-untruncated-π-finite-Type-With-Cardinality-ℕ (succ-ℕ k) n)
     ( λ x →
       is-untruncated-π-finite-is-finite k
         ( is-finite-has-associative-mul
-          ( is-finite-type-UU-Fin n x)))
+          ( is-finite-type-Type-With-Cardinality-ℕ n x)))
 
 is-untruncated-π-finite-Semigroup-of-Order :
   {l : Level} (k n : ℕ) → is-untruncated-π-finite k (Semigroup-of-Order l n)

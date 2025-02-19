@@ -213,6 +213,7 @@ open import foundation.functoriality-sequential-limits public
 open import foundation.functoriality-set-quotients public
 open import foundation.functoriality-set-truncation public
 open import foundation.functoriality-truncation public
+open import foundation.fundamental-theorem-of-equivalence-relations public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
 open import foundation.global-subuniverses public
@@ -257,6 +258,7 @@ open import foundation.iterating-families-of-maps public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
 open import foundation.kernel-span-diagrams-of-maps public
+open import foundation.large-apartness-relations public
 open import foundation.large-binary-relations public
 open import foundation.large-dependent-pair-types public
 open import foundation.large-homotopies public

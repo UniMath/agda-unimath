@@ -103,33 +103,35 @@ refl-leq-ℚ x =
 ### Inequality on the rational numbers is antisymmetric
 
 ```agda
-antisymmetric-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ y x → x ＝ y
-antisymmetric-leq-ℚ x y H H' =
-  ( inv (is-retraction-rational-fraction-ℚ x)) ∙
-  ( eq-ℚ-sim-fraction-ℤ
-    ( fraction-ℚ x)
-    ( fraction-ℚ y)
-    ( is-sim-antisymmetric-leq-fraction-ℤ
+abstract
+  antisymmetric-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ y x → x ＝ y
+  antisymmetric-leq-ℚ x y H H' =
+    ( inv (is-retraction-rational-fraction-ℚ x)) ∙
+    ( eq-ℚ-sim-fraction-ℤ
       ( fraction-ℚ x)
       ( fraction-ℚ y)
-      ( H)
-      ( H'))) ∙
-  ( is-retraction-rational-fraction-ℚ y)
+      ( is-sim-antisymmetric-leq-fraction-ℤ
+        ( fraction-ℚ x)
+        ( fraction-ℚ y)
+        ( H)
+        ( H'))) ∙
+    ( is-retraction-rational-fraction-ℚ y)
 ```
 
 ### Inequality on the rational numbers is linear
 
 ```agda
-linear-leq-ℚ : (x y : ℚ) → (leq-ℚ x y) + (leq-ℚ y x)
-linear-leq-ℚ x y =
-  map-coproduct
-    ( id)
-    ( is-nonnegative-eq-ℤ
-      (distributive-neg-diff-ℤ
-        ( numerator-ℚ y *ℤ denominator-ℚ x)
-        ( numerator-ℚ x *ℤ denominator-ℚ y)))
-    ( decide-is-nonnegative-is-nonnegative-neg-ℤ
-      { cross-mul-diff-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)})
+abstract
+  linear-leq-ℚ : (x y : ℚ) → (leq-ℚ x y) + (leq-ℚ y x)
+  linear-leq-ℚ x y =
+    map-coproduct
+      ( id)
+      ( is-nonnegative-eq-ℤ
+        (distributive-neg-diff-ℤ
+          ( numerator-ℚ y *ℤ denominator-ℚ x)
+          ( numerator-ℚ x *ℤ denominator-ℚ y)))
+      ( decide-is-nonnegative-is-nonnegative-neg-ℤ
+        { cross-mul-diff-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)})
 ```
 
 ### Inequality on the rational numbers is transitive
@@ -139,12 +141,13 @@ module _
   (x y z : ℚ)
   where
 
-  transitive-leq-ℚ : leq-ℚ y z → leq-ℚ x y → leq-ℚ x z
-  transitive-leq-ℚ =
-    transitive-leq-fraction-ℤ
-      ( fraction-ℚ x)
-      ( fraction-ℚ y)
-      ( fraction-ℚ z)
+  abstract
+    transitive-leq-ℚ : leq-ℚ y z → leq-ℚ x y → leq-ℚ x z
+    transitive-leq-ℚ =
+      transitive-leq-fraction-ℤ
+        ( fraction-ℚ x)
+        ( fraction-ℚ y)
+        ( fraction-ℚ z)
 ```
 
 ### The partially ordered set of rational numbers ordered by inequality
@@ -165,43 +168,45 @@ module _
   (p q : fraction-ℤ)
   where
 
-  preserves-order-rational-fraction-ℤ :
-    leq-fraction-ℤ p q → leq-ℚ (rational-fraction-ℤ p) (rational-fraction-ℤ q)
-  preserves-order-rational-fraction-ℤ =
-    leq-sim-fraction-ℤ
-      ( p)
-      ( q)
-      ( reduce-fraction-ℤ p)
-      ( reduce-fraction-ℤ q)
-      ( sim-reduced-fraction-ℤ p)
-      ( sim-reduced-fraction-ℤ q)
+  abstract
+    preserves-order-rational-fraction-ℤ :
+      leq-fraction-ℤ p q → leq-ℚ (rational-fraction-ℤ p) (rational-fraction-ℤ q)
+    preserves-order-rational-fraction-ℤ =
+      leq-sim-fraction-ℤ
+        ( p)
+        ( q)
+        ( reduce-fraction-ℤ p)
+        ( reduce-fraction-ℤ q)
+        ( sim-reduced-fraction-ℤ p)
+        ( sim-reduced-fraction-ℤ q)
 
 module _
   (x : ℚ) (p : fraction-ℤ)
   where
 
-  preserves-leq-right-rational-fraction-ℤ :
-    leq-fraction-ℤ (fraction-ℚ x) p → leq-ℚ x (rational-fraction-ℤ p)
-  preserves-leq-right-rational-fraction-ℤ H =
-    concatenate-leq-sim-fraction-ℤ
-      ( fraction-ℚ x)
-      ( p)
-      ( fraction-ℚ ( rational-fraction-ℤ p))
-      ( H)
-      ( sim-reduced-fraction-ℤ p)
-
-  reflects-leq-right-rational-fraction-ℤ :
-    leq-ℚ x (rational-fraction-ℤ p) → leq-fraction-ℤ (fraction-ℚ x) p
-  reflects-leq-right-rational-fraction-ℤ H =
-    concatenate-leq-sim-fraction-ℤ
-      ( fraction-ℚ x)
-      ( reduce-fraction-ℤ p)
-      ( p)
-      ( H)
-      ( symmetric-sim-fraction-ℤ
+  abstract
+    preserves-leq-right-rational-fraction-ℤ :
+      leq-fraction-ℤ (fraction-ℚ x) p → leq-ℚ x (rational-fraction-ℤ p)
+    preserves-leq-right-rational-fraction-ℤ H =
+      concatenate-leq-sim-fraction-ℤ
+        ( fraction-ℚ x)
         ( p)
+        ( fraction-ℚ ( rational-fraction-ℤ p))
+        ( H)
+        ( sim-reduced-fraction-ℤ p)
+
+    reflects-leq-right-rational-fraction-ℤ :
+      leq-ℚ x (rational-fraction-ℤ p) → leq-fraction-ℤ (fraction-ℚ x) p
+    reflects-leq-right-rational-fraction-ℤ H =
+      concatenate-leq-sim-fraction-ℤ
+        ( fraction-ℚ x)
         ( reduce-fraction-ℤ p)
-        ( sim-reduced-fraction-ℤ p))
+        ( p)
+        ( H)
+        ( symmetric-sim-fraction-ℤ
+          ( p)
+          ( reduce-fraction-ℤ p)
+          ( sim-reduced-fraction-ℤ p))
 
   iff-leq-right-rational-fraction-ℤ :
     leq-fraction-ℤ (fraction-ℚ x) p ↔ leq-ℚ x (rational-fraction-ℤ p)
@@ -209,26 +214,27 @@ module _
     preserves-leq-right-rational-fraction-ℤ
   pr2 iff-leq-right-rational-fraction-ℤ = reflects-leq-right-rational-fraction-ℤ
 
-  preserves-leq-left-rational-fraction-ℤ :
-    leq-fraction-ℤ p (fraction-ℚ x) → leq-ℚ (rational-fraction-ℤ p) x
-  preserves-leq-left-rational-fraction-ℤ =
-    concatenate-sim-leq-fraction-ℤ
-      ( fraction-ℚ ( rational-fraction-ℤ p))
-      ( p)
-      ( fraction-ℚ x)
-      ( symmetric-sim-fraction-ℤ
-        ( p)
+  abstract
+    preserves-leq-left-rational-fraction-ℤ :
+      leq-fraction-ℤ p (fraction-ℚ x) → leq-ℚ (rational-fraction-ℤ p) x
+    preserves-leq-left-rational-fraction-ℤ =
+      concatenate-sim-leq-fraction-ℤ
         ( fraction-ℚ ( rational-fraction-ℤ p))
-        ( sim-reduced-fraction-ℤ p))
+        ( p)
+        ( fraction-ℚ x)
+        ( symmetric-sim-fraction-ℤ
+          ( p)
+          ( fraction-ℚ ( rational-fraction-ℤ p))
+          ( sim-reduced-fraction-ℤ p))
 
-  reflects-leq-left-rational-fraction-ℤ :
-    leq-ℚ (rational-fraction-ℤ p) x → leq-fraction-ℤ p (fraction-ℚ x)
-  reflects-leq-left-rational-fraction-ℤ =
-    concatenate-sim-leq-fraction-ℤ
-      ( p)
-      ( reduce-fraction-ℤ p)
-      ( fraction-ℚ x)
-      ( sim-reduced-fraction-ℤ p)
+    reflects-leq-left-rational-fraction-ℤ :
+      leq-ℚ (rational-fraction-ℤ p) x → leq-fraction-ℤ p (fraction-ℚ x)
+    reflects-leq-left-rational-fraction-ℤ =
+      concatenate-sim-leq-fraction-ℤ
+        ( p)
+        ( reduce-fraction-ℤ p)
+        ( fraction-ℚ x)
+        ( sim-reduced-fraction-ℤ p)
 
   iff-leq-left-rational-fraction-ℤ :
     leq-fraction-ℤ p (fraction-ℚ x) ↔ leq-ℚ (rational-fraction-ℤ p) x
@@ -243,26 +249,29 @@ module _
   (x y : ℚ)
   where
 
-  iff-translate-diff-leq-zero-ℚ : leq-ℚ zero-ℚ (y -ℚ x) ↔ leq-ℚ x y
-  iff-translate-diff-leq-zero-ℚ =
-    logical-equivalence-reasoning
-      leq-ℚ zero-ℚ (y -ℚ x)
-      ↔ leq-fraction-ℤ
-        ( zero-fraction-ℤ)
-        ( add-fraction-ℤ (fraction-ℚ y) (neg-fraction-ℤ (fraction-ℚ x)))
-        by
-          inv-iff
-            ( iff-leq-right-rational-fraction-ℤ
-              ( zero-ℚ)
-              ( add-fraction-ℤ (fraction-ℚ y) (neg-fraction-ℤ (fraction-ℚ x))))
-      ↔ leq-ℚ x y
-        by
-          inv-tr
-            ( _↔ leq-ℚ x y)
-            ( eq-translate-diff-leq-zero-fraction-ℤ
-              ( fraction-ℚ x)
-              ( fraction-ℚ y))
-            ( id-iff)
+  abstract
+    iff-translate-diff-leq-zero-ℚ : leq-ℚ zero-ℚ (y -ℚ x) ↔ leq-ℚ x y
+    iff-translate-diff-leq-zero-ℚ =
+      logical-equivalence-reasoning
+        leq-ℚ zero-ℚ (y -ℚ x)
+        ↔ leq-fraction-ℤ
+          ( zero-fraction-ℤ)
+          ( add-fraction-ℤ (fraction-ℚ y) (neg-fraction-ℤ (fraction-ℚ x)))
+          by
+            inv-iff
+              ( iff-leq-right-rational-fraction-ℤ
+                ( zero-ℚ)
+                ( add-fraction-ℤ
+                  ( fraction-ℚ y)
+                  ( neg-fraction-ℤ (fraction-ℚ x))))
+        ↔ leq-ℚ x y
+          by
+            inv-tr
+              ( _↔ leq-ℚ x y)
+              ( eq-translate-diff-leq-zero-fraction-ℤ
+                ( fraction-ℚ x)
+                ( fraction-ℚ y))
+              ( id-iff)
 ```
 
 ### Inequality on the rational numbers is invariant by translation
@@ -272,34 +281,35 @@ module _
   (z x y : ℚ)
   where
 
-  iff-translate-left-leq-ℚ : leq-ℚ (z +ℚ x) (z +ℚ y) ↔ leq-ℚ x y
-  iff-translate-left-leq-ℚ =
-    logical-equivalence-reasoning
-      leq-ℚ (z +ℚ x) (z +ℚ y)
-      ↔ leq-ℚ zero-ℚ ((z +ℚ y) -ℚ (z +ℚ x))
-        by (inv-iff (iff-translate-diff-leq-zero-ℚ (z +ℚ x) (z +ℚ y)))
-      ↔ leq-ℚ zero-ℚ (y -ℚ x)
-        by
-          ( inv-tr
-            ( _↔ leq-ℚ zero-ℚ (y -ℚ x))
-            ( ap (leq-ℚ zero-ℚ) (left-translation-diff-ℚ y x z))
-            ( id-iff))
-      ↔ leq-ℚ x y
-        by (iff-translate-diff-leq-zero-ℚ x y)
+  abstract
+    iff-translate-left-leq-ℚ : leq-ℚ (z +ℚ x) (z +ℚ y) ↔ leq-ℚ x y
+    iff-translate-left-leq-ℚ =
+      logical-equivalence-reasoning
+        leq-ℚ (z +ℚ x) (z +ℚ y)
+        ↔ leq-ℚ zero-ℚ ((z +ℚ y) -ℚ (z +ℚ x))
+          by (inv-iff (iff-translate-diff-leq-zero-ℚ (z +ℚ x) (z +ℚ y)))
+        ↔ leq-ℚ zero-ℚ (y -ℚ x)
+          by
+            ( inv-tr
+              ( _↔ leq-ℚ zero-ℚ (y -ℚ x))
+              ( ap (leq-ℚ zero-ℚ) (left-translation-diff-ℚ y x z))
+              ( id-iff))
+        ↔ leq-ℚ x y
+          by (iff-translate-diff-leq-zero-ℚ x y)
 
-  iff-translate-right-leq-ℚ : leq-ℚ (x +ℚ z) (y +ℚ z) ↔ leq-ℚ x y
-  iff-translate-right-leq-ℚ =
-    logical-equivalence-reasoning
-      leq-ℚ (x +ℚ z) (y +ℚ z)
-      ↔ leq-ℚ zero-ℚ ((y +ℚ z) -ℚ (x +ℚ z))
-        by (inv-iff (iff-translate-diff-leq-zero-ℚ (x +ℚ z) (y +ℚ z)))
-      ↔ leq-ℚ zero-ℚ (y -ℚ x)
-        by
-          ( inv-tr
-            ( _↔ leq-ℚ zero-ℚ (y -ℚ x))
-            ( ap (leq-ℚ zero-ℚ) (right-translation-diff-ℚ y x z))
-            ( id-iff))
-      ↔ leq-ℚ x y by (iff-translate-diff-leq-zero-ℚ x y)
+    iff-translate-right-leq-ℚ : leq-ℚ (x +ℚ z) (y +ℚ z) ↔ leq-ℚ x y
+    iff-translate-right-leq-ℚ =
+      logical-equivalence-reasoning
+        leq-ℚ (x +ℚ z) (y +ℚ z)
+        ↔ leq-ℚ zero-ℚ ((y +ℚ z) -ℚ (x +ℚ z))
+          by (inv-iff (iff-translate-diff-leq-zero-ℚ (x +ℚ z) (y +ℚ z)))
+        ↔ leq-ℚ zero-ℚ (y -ℚ x)
+          by
+            ( inv-tr
+              ( _↔ leq-ℚ zero-ℚ (y -ℚ x))
+              ( ap (leq-ℚ zero-ℚ) (right-translation-diff-ℚ y x z))
+              ( id-iff))
+        ↔ leq-ℚ x y by (iff-translate-diff-leq-zero-ℚ x y)
 
   preserves-leq-left-add-ℚ : leq-ℚ x y → leq-ℚ (x +ℚ z) (y +ℚ z)
   preserves-leq-left-add-ℚ = backward-implication iff-translate-right-leq-ℚ
