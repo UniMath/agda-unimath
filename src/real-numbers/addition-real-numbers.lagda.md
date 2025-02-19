@@ -10,15 +10,18 @@ module real-numbers.addition-real-numbers where
 
 ```agda
 open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
-open import group-theory.groups
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
+
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
 open import foundation.conjunction
+open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
@@ -33,24 +36,30 @@ open import real-numbers.dedekind-real-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
+open import foundation.transport-along-identifications
+open import foundation.universe-levels
+
+open import group-theory.groups
+
 open import real-numbers.addition-lower-dedekind-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
 open import real-numbers.addition-upper-dedekind-real-numbers
 open import real-numbers.arithmetically-located-dedekind-cuts
-open import real-numbers.negation-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.negation-lower-upper-dedekind-real-numbers
+open import real-numbers.negation-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import foundation.equivalences
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
 
 ## Idea
 
-The sum of two
-[Dedekind real numbers](real-numbers.dedekind-real-numbers.md) is
-is a Dedekind real number whose lower cut (upper cut) is the
-the
+The sum of two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) is
+is a Dedekind real number whose lower cut (upper cut) is the the
 [Minkowski sum](group-theory.minkowski-multiplication-commutative-monoids.md) of
 their lower (upper) cuts.
 
