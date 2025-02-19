@@ -246,11 +246,13 @@ abstract
   is-finite-right-summand =
     map-trunc-Prop count-right-summand
 
-coproduct-UU-Fin :
-  {l1 l2 : Level} (k l : ℕ) → UU-Fin l1 k → UU-Fin l2 l →
-  UU-Fin (l1 ⊔ l2) (k +ℕ l)
-pr1 (coproduct-UU-Fin {l1} {l2} k l (pair X H) (pair Y K)) = X + Y
-pr2 (coproduct-UU-Fin {l1} {l2} k l (pair X H) (pair Y K)) =
+coproduct-Type-With-Cardinality-ℕ :
+  {l1 l2 : Level} (k l : ℕ) →
+  Type-With-Cardinality-ℕ l1 k → Type-With-Cardinality-ℕ l2 l →
+  Type-With-Cardinality-ℕ (l1 ⊔ l2) (k +ℕ l)
+pr1 (coproduct-Type-With-Cardinality-ℕ k l (pair X H) (pair Y K)) =
+  X + Y
+pr2 (coproduct-Type-With-Cardinality-ℕ k l (pair X H) (pair Y K)) =
   apply-universal-property-trunc-Prop H
     ( mere-equiv-Prop (Fin (k +ℕ l)) (X + Y))
     ( λ e1 →
@@ -271,9 +273,9 @@ coproduct-eq-is-finite {X = X} {Y = Y} P Q =
     ( all-elements-equal-has-finite-cardinality
       ( pair
         ( number-of-elements-is-finite P +ℕ number-of-elements-is-finite Q)
-        ( has-cardinality-type-UU-Fin
+        ( has-cardinality-type-Type-With-Cardinality-ℕ
           ( number-of-elements-is-finite P +ℕ number-of-elements-is-finite Q)
-          ( coproduct-UU-Fin
+          ( coproduct-Type-With-Cardinality-ℕ
             ( number-of-elements-is-finite P)
             ( number-of-elements-is-finite Q)
             ( pair X

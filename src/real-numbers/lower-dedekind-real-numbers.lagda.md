@@ -44,7 +44,7 @@ A [subtype](foundation-core.subtypes.md) `L` of
 following two conditions:
 
 1. _Inhabitedness_. `L` is [inhabited](foundation.inhabited-subtypes.md).
-2. _Roundedness_. A rational number `q` is in `L`
+2. _Lower roundedness_. A rational number `q` is in `L`
    [if and only if](foundation.logical-equivalences.md) there
    [exists](foundation.existential-quantification.md) `q < r` such that `r ∈ L`.
 
