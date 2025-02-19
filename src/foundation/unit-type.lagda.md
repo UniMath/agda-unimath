@@ -129,7 +129,10 @@ module _
     is-contr-retraction-terminal-map (retraction-is-equiv H)
 
   is-contr-equiv-unit : A ≃ unit → is-contr A
-  is-contr-equiv-unit e = map-inv-equiv e star , is-retraction-map-inv-equiv e
+  is-contr-equiv-unit e = (map-inv-equiv e star , is-retraction-map-inv-equiv e)
+
+  is-contr-equiv-unit' : unit ≃ A → is-contr A
+  is-contr-equiv-unit' e = (map-equiv e star , is-section-map-inv-equiv e)
 ```
 
 ### Any contractible type is equivalent to the raised unit type
