@@ -200,11 +200,11 @@ module _
   where
 
   min-Decidable-Total-Order : type-Decidable-Total-Order T
-  min-Decidable-Total-Order
-    with
-      is-leq-or-strict-greater-Decidable-Total-Order T x y
-  ... | inl x≤y = x
-  ... | inr y<x = y
+  min-Decidable-Total-Order =
+    rec-coproduct
+      ( λ x≤y → x)
+      ( λ y<x → y)
+      ( is-leq-or-strict-greater-Decidable-Total-Order T x y)
 
   max-Decidable-Total-Order : type-Decidable-Total-Order T
   max-Decidable-Total-Order =
