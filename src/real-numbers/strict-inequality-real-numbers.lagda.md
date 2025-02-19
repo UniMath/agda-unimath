@@ -9,9 +9,15 @@ module real-numbers.strict-inequality-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -33,10 +39,15 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
+open import group-theory.abelian-groups
+
+open import real-numbers.arithmetically-located-dedekind-cuts
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 ```
 
 </details>
@@ -342,20 +353,141 @@ module _
 ### Strict inequality on the real numbers is cotransitive
 
 ```agda
-cotransitive-le-ℝ : is-cotransitive-Large-Relation-Prop ℝ le-ℝ-Prop
-cotransitive-le-ℝ x y z =
-  elim-exists
-    ( le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
-    ( λ q (x<q , q<y) →
-      elim-exists
+abstract
+  cotransitive-le-ℝ : is-cotransitive-Large-Relation-Prop ℝ le-ℝ-Prop
+  cotransitive-le-ℝ x y z x<y =
+    do
+      q , x<q , q<y ← x<y
+      p , p<q , x<p ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
+      elim-disjunction
         ( le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
-        ( λ p (p<q , x<p) →
-          elim-disjunction
-            ( le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
-            ( λ p<z → inl-disjunction (intro-exists p (x<p , p<z)))
-            ( λ z<q → inr-disjunction (intro-exists q (z<q , q<y)))
-            ( is-located-lower-upper-cut-ℝ z p q p<q))
-        ( forward-implication (is-rounded-upper-cut-ℝ x q) x<q))
+        ( λ p<z → inl-disjunction (intro-exists p (x<p , p<z)))
+        ( λ z<q → inr-disjunction (intro-exists q (z<q , q<y)))
+        ( is-located-lower-upper-cut-ℝ z p q p<q)
+    where
+      open do-syntax-trunc-Prop (le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
+```
+
+### Strict inequality on the real numbers is invariant under similarity
+
+```agda
+module _
+  {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) (x≈y : sim-ℝ x y)
+  where
+
+  preserves-le-left-sim-ℝ : le-ℝ x z → le-ℝ y z
+  preserves-le-left-sim-ℝ =
+    map-tot-exists
+      ( λ q →
+        map-product
+          ( pr1 (backward-implication (sim-upper-cut-iff-sim-ℝ x y) x≈y) q)
+          ( id))
+
+  preserves-le-right-sim-ℝ : le-ℝ z x → le-ℝ z y
+  preserves-le-right-sim-ℝ = map-tot-exists ( λ q → map-product id (pr1 x≈y q))
+
+module _
+  {l1 l2 l3 l4 : Level}
+  (x1 : ℝ l1) (x2 : ℝ l2) (y1 : ℝ l3) (y2 : ℝ l4)
+  (x1≈x2 : sim-ℝ x1 x2) (y1≈y2 : sim-ℝ y1 y2)
+  where
+
+  preserves-le-sim-ℝ : le-ℝ x1 y1 → le-ℝ x2 y2
+  preserves-le-sim-ℝ x1<y1 =
+    preserves-le-left-sim-ℝ
+      ( y2)
+      ( x1)
+      ( x2)
+      ( x1≈x2)
+      ( preserves-le-right-sim-ℝ x1 y1 y2 y1≈y2 x1<y1)
+```
+
+### Strict inequality on the real numbers is invariant by translation
+
+```agda
+module _
+  {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
+  where
+
+  abstract
+    preserves-le-right-add-ℝ : le-ℝ x y → le-ℝ (x +ℝ z) (y +ℝ z)
+    preserves-le-right-add-ℝ x<y =
+      do
+        p , x<p , p<y ← x<y
+        q , p<q , q<y ← forward-implication (is-rounded-lower-cut-ℝ y p) p<y
+        (r , s) , s<r+q-p , r<z , z<s ←
+          is-arithmetically-located-lower-upper-real-ℝ
+            ( z)
+            ( positive-diff-le-ℚ p q p<q)
+        let
+          p-q+s<r : le-ℚ ((p -ℚ q) +ℚ s) r
+          p-q+s<r =
+            tr
+              ( le-ℚ ((p -ℚ q) +ℚ s))
+              ( equational-reasoning
+                  (p -ℚ q) +ℚ (r +ℚ (q -ℚ p))
+                  ＝ (p -ℚ q) +ℚ (r -ℚ (p -ℚ q))
+                    by
+                      ap
+                        ( λ t → (p -ℚ q) +ℚ (r +ℚ t))
+                        ( inv (distributive-neg-diff-ℚ p q))
+                  ＝ r
+                    by
+                      is-identity-right-conjugation-Ab
+                        ( abelian-group-add-ℚ)
+                        ( p -ℚ q)
+                        ( r))
+              ( preserves-le-right-add-ℚ (p -ℚ q) s (r +ℚ (q -ℚ p)) s<r+q-p)
+        intro-exists
+          ( p +ℚ s)
+          ( intro-exists (p , s) (x<p , z<s , refl) ,
+            intro-exists
+              ( q , (p -ℚ q) +ℚ s)
+              ( q<y ,
+                le-lower-cut-ℝ z ((p -ℚ q) +ℚ s) r p-q+s<r r<z ,
+                ( equational-reasoning
+                  p +ℚ s
+                  ＝ zero-ℚ +ℚ (p +ℚ s) by inv (left-unit-law-add-ℚ (p +ℚ s))
+                  ＝ (q -ℚ q) +ℚ (p +ℚ s)
+                    by ap (_+ℚ (p +ℚ s)) (inv (right-inverse-law-add-ℚ q))
+                  ＝ (q +ℚ p) +ℚ (neg-ℚ q +ℚ s)
+                    by interchange-law-add-add-ℚ q (neg-ℚ q) p s
+                  ＝ q +ℚ (p +ℚ (neg-ℚ q +ℚ s))
+                    by associative-add-ℚ q p (neg-ℚ q +ℚ s)
+                  ＝ q +ℚ ((p -ℚ q) +ℚ s)
+                    by ap (q +ℚ_) (inv (associative-add-ℚ p (neg-ℚ q) s)))))
+      where
+        open
+          do-syntax-trunc-Prop
+            ( ∃ ℚ (λ r → upper-cut-ℝ (x +ℝ z) r ∧ lower-cut-ℝ (y +ℝ z) r))
+
+    preserves-le-left-add-ℝ : le-ℝ x y → le-ℝ (z +ℝ x) (z +ℝ y)
+    preserves-le-left-add-ℝ x<y =
+      binary-tr
+        ( le-ℝ)
+        ( commutative-add-ℝ x z)
+        ( commutative-add-ℝ y z)
+        ( preserves-le-right-add-ℝ x<y)
+
+module _
+  {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
+  where
+
+  reflects-le-right-add-ℝ : le-ℝ (x +ℝ z) (y +ℝ z) → le-ℝ x y
+  reflects-le-right-add-ℝ x+z<y+z =
+    preserves-le-sim-ℝ
+      ( (x +ℝ z) +ℝ neg-ℝ z)
+      ( x)
+      ( (y +ℝ z) +ℝ neg-ℝ z)
+      ( y)
+      ( cancel-right-add-ℝ x z)
+      ( cancel-right-add-ℝ y z)
+      ( preserves-le-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z<y+z)
+
+  reflects-le-left-add-ℝ : le-ℝ (z +ℝ x) (z +ℝ y) → le-ℝ x y
+  reflects-le-left-add-ℝ z+x<z+y =
+    reflects-le-right-add-ℝ
+      ( binary-tr le-ℝ (commutative-add-ℝ z x) (commutative-add-ℝ z y) z+x<z+y)
 ```
 
 ## References
