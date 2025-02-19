@@ -52,12 +52,12 @@ open import real-numbers.upper-dedekind-real-numbers
 A pair of a [lower Dedekind cut](real-numbers.lower-dedekind-real-numbers.md)
 `L` and an [upper Dedekind cut](real-numbers.upper-dedekind-real-numbers.md) `U`
 is
-{{#concept "arithmetically located" Disambiguation="Dedekind cut" Agda=arithmetically-located-lower-upper-ℝ}}
+{{#concept "arithmetically located" Disambiguation="Dedekind cut" Agda=is-arithmetically-located-lower-upper-ℝ}}
 if for any [positive](elementary-number-theory.positive-rational-numbers.md)
 [rational number](elementary-number-theory.rational-numbers.md) `ε : ℚ⁺`, there
 exists `p, q : ℚ` where `p ∈ L` and `q ∈ U`, such that `0 < q - p < ε`.
-Intuitively, when `L , U` represent the cuts of a real number `x`, `p` and `q`
-are rational approximations of `x` to within `ε`.
+Intuitively, when `L` and `U` are the lower and upper cuts of a real number `x`,
+then `p` and `q` are rational approximations of `x` to within `ε`.
 
 This follows parts of Section 11 in {{#cite BauerTaylor2009}}.
 
@@ -70,20 +70,14 @@ module _
   {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
   where
 
-  arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
-  arithmetically-located-prop-lower-upper-ℝ =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ ε⁺ → ∃
-        ( ℚ × ℚ)
-        ( λ (p , q) →
-          le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
-          cut-lower-ℝ x p ∧
-          cut-upper-ℝ y q))
-
   is-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
   is-arithmetically-located-lower-upper-ℝ =
-    type-Prop (arithmetically-located-prop-lower-upper-ℝ)
+    (ε⁺ : ℚ⁺) →
+    exists
+      ( ℚ × ℚ)
+      ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
+        cut-lower-ℝ x p ∧
+        cut-upper-ℝ y q)
 ```
 
 ## Properties
@@ -232,27 +226,43 @@ module _
         ( lower-real-ℝ x)
         ( upper-real-ℝ x)
     is-arithmetically-located-lower-upper-real-ℝ ε⁺@(ε , positive-ε) =
-      do
-        (ε' , pos-ε') , 2ε'<ε ← double-le-ℚ⁺ ε⁺
-        (p , p<x) ← is-inhabited-lower-cut-ℝ x
-        (q , x<q) ← is-inhabited-upper-cut-ℝ x
-        (r , r<x , x<r+2ε') ←
-          bounded-arithmetic-location-twice-ε p q ε' pos-ε' p<x x<q
-        intro-exists
-          ( r , r +ℚ ε' +ℚ ε')
-          ( tr
-              ( λ s → le-ℚ s (r +ℚ ε))
-              ( inv (associative-add-ℚ r ε' ε'))
-              ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,
-            r<x ,
-            x<r+2ε')
+      elim-exists
+        ( claim)
+        ( λ (ε' , pos-ε') 2ε'<ε →
+          elim-exists
+            ( claim)
+            ( λ p p<x →
+              elim-exists
+                ( claim)
+                ( λ q x<q →
+                  elim-exists
+                    ( claim)
+                    ( λ r (r<x , x<r+2ε') →
+                      intro-exists
+                        ( r , r +ℚ ε' +ℚ ε')
+                        ( tr
+                            ( λ s → le-ℚ s (r +ℚ ε))
+                            ( inv (associative-add-ℚ r ε' ε'))
+                            ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,
+                          r<x ,
+                          x<r+2ε'))
+                    ( bounded-arithmetic-location-twice-ε
+                      ( p)
+                      ( q)
+                      ( ε')
+                      ( pos-ε')
+                      ( p<x)
+                      ( x<q)))
+                ( is-inhabited-upper-cut-ℝ x))
+            ( is-inhabited-lower-cut-ℝ x))
+        ( double-le-ℚ⁺ ε⁺)
       where
-        open
-          do-syntax-trunc-Prop
-            ( ∃
-              ( ℚ × ℚ)
-              ( λ (p , q) →
-                le-ℚ-Prop q (p +ℚ ε) ∧ lower-cut-ℝ x p ∧ upper-cut-ℝ x q))
+        claim : Prop l
+        claim =
+          ∃
+            ( ℚ × ℚ)
+            ( λ (p , q) →
+              le-ℚ-Prop q (p +ℚ ε) ∧ lower-cut-ℝ x p ∧ upper-cut-ℝ x q)
 ```
 
 ## References
