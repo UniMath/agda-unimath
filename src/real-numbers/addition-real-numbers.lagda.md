@@ -21,25 +21,19 @@ open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.universe-levels
 open import foundation.function-types
-open import foundation.logical-equivalences
 open import foundation.functoriality-cartesian-product-types
-open import foundation.transport-along-identifications
-open import foundation.existential-quantification
-open import logic.functoriality-existential-quantification
-open import elementary-number-theory.rational-numbers
-open import real-numbers.dedekind-real-numbers
-open import elementary-number-theory.positive-rational-numbers
-open import real-numbers.rational-real-numbers
-open import real-numbers.lower-dedekind-real-numbers
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.groups
+
+open import logic.functoriality-existential-quantification
 
 open import real-numbers.addition-lower-dedekind-real-numbers
 open import real-numbers.addition-upper-dedekind-real-numbers
@@ -50,7 +44,6 @@ open import real-numbers.negation-lower-upper-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
-open import foundation.equivalences
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
@@ -302,7 +295,6 @@ module _
         ( y +ℝ neg-ℝ y)
         ( zero-ℝ)
         ( right-inverse-law-add-ℝ y))
-
 ```
 
 ### Addition reflects similarity
