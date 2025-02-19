@@ -21,13 +21,19 @@ open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.groups
+
+open import logic.functoriality-existential-quantification
 
 open import real-numbers.addition-lower-dedekind-real-numbers
 open import real-numbers.addition-upper-dedekind-real-numbers
@@ -243,4 +249,91 @@ left-inverse-law-add-ℝ x =
     ( λ y → sim-ℝ y zero-ℝ)
     ( commutative-add-ℝ x (neg-ℝ x))
     ( right-inverse-law-add-ℝ x)
+```
+
+### Addition on the real numbers preserves similarity
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
+  where
+
+  preserves-sim-right-add-ℝ : sim-ℝ x y → sim-ℝ (x +ℝ z) (y +ℝ z)
+  pr1 (preserves-sim-right-add-ℝ (lx⊆ly , _)) q =
+    map-tot-exists (λ (qx , _) → map-product (lx⊆ly qx) id)
+  pr2 (preserves-sim-right-add-ℝ (_ , ly⊆lx)) q =
+    map-tot-exists (λ (qy , _) → map-product (ly⊆lx qy) id)
+
+  preserves-sim-left-add-ℝ : sim-ℝ x y → sim-ℝ (z +ℝ x) (z +ℝ y)
+  preserves-sim-left-add-ℝ x≈y =
+    binary-tr
+      ( sim-ℝ)
+      ( commutative-add-ℝ x z)
+      ( commutative-add-ℝ y z)
+      ( preserves-sim-right-add-ℝ x≈y)
+```
+
+### Addition and subtraction on the right cancel out
+
+DO NOT SUBMIT: I don't know what to call this, because the usual notions of
+equivalences, retractions, etc. don't work for similarity.
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  cancel-right-add-ℝ : sim-ℝ ((x +ℝ y) +ℝ neg-ℝ y) x
+  cancel-right-add-ℝ =
+    binary-tr
+      ( sim-ℝ)
+      ( inv (associative-add-ℝ x y (neg-ℝ y)))
+      ( right-unit-law-add-ℝ x)
+      ( preserves-sim-left-add-ℝ
+        ( x)
+        ( y +ℝ neg-ℝ y)
+        ( zero-ℝ)
+        ( right-inverse-law-add-ℝ y))
+```
+
+### Addition reflects similarity
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
+  where
+
+  reflects-sim-right-add-ℝ : sim-ℝ (x +ℝ z) (y +ℝ z) → sim-ℝ x y
+  reflects-sim-right-add-ℝ x+z≈y+z =
+    transitive-sim-ℝ
+      ( x)
+      ( (x +ℝ z) +ℝ neg-ℝ z)
+      ( y)
+      ( transitive-sim-ℝ
+        ( (x +ℝ z) +ℝ neg-ℝ z)
+        ( (y +ℝ z) +ℝ neg-ℝ z)
+        ( y)
+        ( cancel-right-add-ℝ y z)
+        ( preserves-sim-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≈y+z))
+      ( symmetric-sim-ℝ ((x +ℝ z) +ℝ neg-ℝ z) x (cancel-right-add-ℝ x z))
+
+  reflects-sim-left-add-ℝ : sim-ℝ (z +ℝ x) (z +ℝ y) → sim-ℝ x y
+  reflects-sim-left-add-ℝ z+x≈z+y =
+    reflects-sim-right-add-ℝ
+      ( binary-tr sim-ℝ (commutative-add-ℝ z x) (commutative-add-ℝ z y) z+x≈z+y)
+
+module _
+  {l1 l2 l3 : Level}
+  (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
+  where
+
+  iff-translate-right-sim-ℝ : sim-ℝ x y ↔ sim-ℝ (x +ℝ z) (y +ℝ z)
+  pr1 iff-translate-right-sim-ℝ = preserves-sim-right-add-ℝ z x y
+  pr2 iff-translate-right-sim-ℝ = reflects-sim-right-add-ℝ z x y
+
+  iff-translate-left-sim-ℝ : sim-ℝ x y ↔ sim-ℝ (z +ℝ x) (z +ℝ y)
+  pr1 iff-translate-left-sim-ℝ = preserves-sim-left-add-ℝ z x y
+  pr2 iff-translate-left-sim-ℝ = reflects-sim-left-add-ℝ z x y
 ```
