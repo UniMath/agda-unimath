@@ -56,8 +56,8 @@ is
 if for any [positive](elementary-number-theory.positive-rational-numbers.md)
 [rational number](elementary-number-theory.rational-numbers.md) `ε : ℚ⁺`, there
 exists `p, q : ℚ` where `p ∈ L` and `q ∈ U`, such that `0 < q - p < ε`.
-Intuitively, when `L , U` represent the cuts of a real number `x`, `p` and `q`
-are rational approximations of `x` to within `ε`.
+Intuitively, when `L` and `U` are the lower and upper cuts of a real number `x`,
+then `p` and `q` are rational approximations of `x` to within `ε`.
 
 This follows parts of Section 11 in {{#cite BauerTaylor2009}}.
 
@@ -70,20 +70,14 @@ module _
   {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
   where
 
-  arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
-  arithmetically-located-prop-lower-upper-ℝ =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ ε⁺ → ∃
-        ( ℚ × ℚ)
-        ( λ (p , q) →
-          le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
-          cut-lower-ℝ x p ∧
-          cut-upper-ℝ y q))
-
-  is-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
-  is-arithmetically-located-lower-upper-ℝ =
-    type-Prop (arithmetically-located-prop-lower-upper-ℝ)
+  arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
+  arithmetically-located-lower-upper-ℝ =
+    (ε⁺ : ℚ⁺) →
+    exists
+      ( ℚ × ℚ)
+      ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
+        cut-lower-ℝ x p ∧
+        cut-upper-ℝ y q)
 ```
 
 ## Properties
@@ -100,7 +94,7 @@ module _
 
   abstract
     is-located-is-arithmetically-located-lower-upper-ℝ :
-      is-arithmetically-located-lower-upper-ℝ x y →
+      arithmetically-located-lower-upper-ℝ x y →
       is-located-lower-upper-ℝ x y
     is-located-is-arithmetically-located-lower-upper-ℝ
       arithmetically-located p q p<q =
