@@ -488,7 +488,11 @@ module _
     reflects-le-left-add-ℝ : le-ℝ (z +ℝ x) (z +ℝ y) → le-ℝ x y
     reflects-le-left-add-ℝ z+x<z+y =
       reflects-le-right-add-ℝ
-        ( binary-tr le-ℝ (commutative-add-ℝ z x) (commutative-add-ℝ z y) z+x<z+y)
+        ( binary-tr
+          ( le-ℝ)
+          ( commutative-add-ℝ z x)
+          ( commutative-add-ℝ z y)
+          ( z+x<z+y))
 
 module _
   {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
