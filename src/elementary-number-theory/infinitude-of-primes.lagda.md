@@ -42,10 +42,11 @@ the
 that there are infinitely many
 [primes](elementary-number-theory.prime-numbers.md). Consequently we obtain the
 function that returns for each `n` the `n`-th prime, and we obtain the function
-that counts the number of primes below a number `n`.
+that counts the number of primes below a number `n`. This result is known as
+{{#concept "Euclid's theorem" WD="Euclid's theorem" WDID=Q1506253 Agda=infinitude-of-primes-ℕ}}
 
-The infinitude of primes is the 11th theorem on
-[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+The infinitude of primes is the [11th](literature.100-theorems.md#11) theorem on
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ## Definition
@@ -188,3 +189,8 @@ prime-counting-ℕ (succ-ℕ n) =
 ## References
 
 {{#bibliography}}
+
+## External links
+
+- [Euclid's theorem](https://en.wikipedia.org/wiki/Euclid%27s_theorem) on
+  Wikipedia
