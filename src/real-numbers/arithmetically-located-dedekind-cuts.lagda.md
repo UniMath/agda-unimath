@@ -232,27 +232,43 @@ module _
         ( lower-real-ℝ x)
         ( upper-real-ℝ x)
     is-arithmetically-located-lower-upper-real-ℝ ε⁺@(ε , positive-ε) =
-      do
-        (ε' , pos-ε') , 2ε'<ε ← double-le-ℚ⁺ ε⁺
-        (p , p<x) ← is-inhabited-lower-cut-ℝ x
-        (q , x<q) ← is-inhabited-upper-cut-ℝ x
-        (r , r<x , x<r+2ε') ←
-          bounded-arithmetic-location-twice-ε p q ε' pos-ε' p<x x<q
-        intro-exists
-          ( r , r +ℚ ε' +ℚ ε')
-          ( tr
-              ( λ s → le-ℚ s (r +ℚ ε))
-              ( inv (associative-add-ℚ r ε' ε'))
-              ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,
-            r<x ,
-            x<r+2ε')
+      elim-exists
+        ( claim)
+        ( λ (ε' , pos-ε') 2ε'<ε →
+          elim-exists
+            ( claim)
+            ( λ p p<x →
+              elim-exists
+                ( claim)
+                ( λ q x<q →
+                  elim-exists
+                    ( claim)
+                    ( λ r (r<x , x<r+2ε') →
+                      intro-exists
+                        ( r , r +ℚ ε' +ℚ ε')
+                        ( tr
+                            ( λ s → le-ℚ s (r +ℚ ε))
+                            ( inv (associative-add-ℚ r ε' ε'))
+                            ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,
+                          r<x ,
+                          x<r+2ε'))
+                    ( bounded-arithmetic-location-twice-ε
+                      ( p)
+                      ( q)
+                      ( ε')
+                      ( pos-ε')
+                      ( p<x)
+                      ( x<q)))
+                ( is-inhabited-upper-cut-ℝ x))
+            ( is-inhabited-lower-cut-ℝ x))
+        ( double-le-ℚ⁺ ε⁺)
       where
-        open
-          do-syntax-trunc-Prop
-            ( ∃
-              ( ℚ × ℚ)
-              ( λ (p , q) →
-                le-ℚ-Prop q (p +ℚ ε) ∧ lower-cut-ℝ x p ∧ upper-cut-ℝ x q))
+        claim : Prop l
+        claim =
+          ∃
+            ( ℚ × ℚ)
+            ( λ (p , q) →
+              le-ℚ-Prop q (p +ℚ ε) ∧ lower-cut-ℝ x p ∧ upper-cut-ℝ x q)
 ```
 
 ## References
