@@ -154,13 +154,13 @@ module _
           ( is-linear-combination-action-Semiring
             ( R)
             ( additive-monoid-Semiring R , {!!} , {!!})
-            {! !}
+            {!!}
             {!!}
             {!!}
             {!!}
             {!!}
             {!!}))
-
+;
 {-
         unit-trunc-Prop
           ( is-linear-combination-action-Semiring
