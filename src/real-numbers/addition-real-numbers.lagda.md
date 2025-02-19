@@ -86,8 +86,8 @@ module _
               { qx}
               { py}
               { qy}
-              (le-lower-upper-cut-ℝ x px qx px<x x<qx)
-              (le-lower-upper-cut-ℝ y py qy py<y y<qy)))
+              ( le-lower-upper-cut-ℝ x px qx px<x x<qx)
+              ( le-lower-upper-cut-ℝ y py qy py<y y<qy)))
       where open do-syntax-trunc-Prop empty-Prop
 
     is-arithmetically-located-lower-upper-add-ℝ :
@@ -239,8 +239,8 @@ right-inverse-law-add-ℝ x =
             ( p)
             ( inv-tr
                 ( is-in-lower-cut-ℝ x)
-                (unique-left-inv-Group group-add-ℚ p q (inv (0=p+q)))
-                -q<x ,
+                ( unique-left-inv-Group group-add-ℚ p q (inv (0=p+q)))
+                ( -q<x) ,
               x<p)))
 
 left-inverse-law-add-ℝ : {l : Level} (x : ℝ l) → sim-ℝ (neg-ℝ x +ℝ x) zero-ℝ
