@@ -32,14 +32,14 @@ of opposing pairs of edges. There are three such pairs of edges.
 ```agda
 tetrahedron-in-3-space : UU (lsuc lzero)
 tetrahedron-in-3-space =
-  Σ ( UU-Fin lzero 4)
+  Σ ( Type-With-Cardinality-ℕ lzero 4)
     ( λ X →
       cyclic-structure 3
         ( Σ ( 2-Element-Decidable-Subtype lzero
               ( 2-Element-Decidable-Subtype lzero
-                ( type-UU-Fin 4 X)))
+                ( type-Type-With-Cardinality-ℕ 4 X)))
             ( λ Q →
-              (x : type-UU-Fin 4 X) →
+              (x : type-Type-With-Cardinality-ℕ 4 X) →
               is-empty
                 ( (P : type-2-Element-Decidable-Subtype Q) →
                   is-in-2-Element-Decidable-Subtype
@@ -51,7 +51,7 @@ module _
   where
 
   vertex-tetrahedron-in-3-space : UU lzero
-  vertex-tetrahedron-in-3-space = type-UU-Fin 4 (pr1 T)
+  vertex-tetrahedron-in-3-space = type-Type-With-Cardinality-ℕ 4 (pr1 T)
 
   cyclic-structure-tetrahedron-in-3-space :
     cyclic-structure 3
