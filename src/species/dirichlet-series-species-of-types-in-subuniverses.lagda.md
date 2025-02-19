@@ -43,7 +43,7 @@ of this formula then becomes
 
 ```text
 Σ ( n : ℕ ∖ {0}),
-  ( Σ (F : UU-Fin n) , T (F) × (S → cycle-prime-decomposition-ℕ (n))
+  ( Σ (F : Type-With-Cardinality-ℕ n) , T (F) × (S → cycle-prime-decomposition-ℕ (n))
 ```
 
 We can generalize the two notions to species of types in subuniverses. Let `P`

@@ -69,7 +69,7 @@ list-transpositions-permutation-Fin' :
     ( Σ
       ( Fin (succ-ℕ n) → Decidable-Prop lzero)
       ( λ P →
-        has-cardinality 2
+        has-cardinality-ℕ 2
           ( Σ (Fin (succ-ℕ n)) (type-Decidable-Prop ∘ P)))))
 list-transpositions-permutation-Fin' zero-ℕ f x p = nil
 list-transpositions-permutation-Fin' (succ-ℕ n) f (inl x) p =
@@ -86,7 +86,7 @@ list-transpositions-permutation-Fin' (succ-ℕ n) f (inl x) p =
   t :
     Σ ( Fin (succ-ℕ (succ-ℕ n)) → Decidable-Prop lzero)
       ( λ P →
-        has-cardinality 2
+        has-cardinality-ℕ 2
           ( Σ (Fin (succ-ℕ (succ-ℕ n))) (type-Decidable-Prop ∘ P)))
   t = standard-2-Element-Decidable-Subtype
       ( has-decidable-equality-Fin (succ-ℕ (succ-ℕ n)))
@@ -118,7 +118,7 @@ list-transpositions-permutation-Fin :
   ( list
     ( Σ
       ( Fin n → Decidable-Prop lzero)
-      ( λ P → has-cardinality 2 (Σ (Fin n) (type-Decidable-Prop ∘ P)))))
+      ( λ P → has-cardinality-ℕ 2 (Σ (Fin n) (type-Decidable-Prop ∘ P)))))
 list-transpositions-permutation-Fin zero-ℕ f = nil
 list-transpositions-permutation-Fin (succ-ℕ n) f =
   list-transpositions-permutation-Fin' n f (map-equiv f (inr star)) refl
@@ -180,7 +180,7 @@ abstract
     t :
       Σ ( Fin (succ-ℕ (succ-ℕ n)) → Decidable-Prop lzero)
         ( λ P →
-          has-cardinality 2
+          has-cardinality-ℕ 2
             ( Σ (Fin (succ-ℕ (succ-ℕ n))) (type-Decidable-Prop ∘ P)))
     t =
       standard-2-Element-Decidable-Subtype
@@ -274,7 +274,7 @@ abstract
     t :
       Σ ( Fin (succ-ℕ (succ-ℕ n)) → Decidable-Prop lzero)
         ( λ P →
-          has-cardinality 2
+          has-cardinality-ℕ 2
             ( Σ (Fin (succ-ℕ (succ-ℕ n))) (type-Decidable-Prop ∘ P)))
     t =
       standard-2-Element-Decidable-Subtype
@@ -350,7 +350,7 @@ abstract
     t :
       Σ ( Fin (succ-ℕ (succ-ℕ n)) → Decidable-Prop lzero)
         ( λ P →
-          has-cardinality 2
+          has-cardinality-ℕ 2
             ( Σ (Fin (succ-ℕ (succ-ℕ n))) (type-Decidable-Prop ∘ P)))
     t =
       standard-2-Element-Decidable-Subtype

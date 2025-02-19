@@ -31,7 +31,10 @@ There is a canonical mapping from the
 ## Definition
 
 ```agda
-module _ (q : ℚ) where
+module _
+  (q : ℚ)
+  where
+
   cut-lower-real-ℚ : subtype lzero ℚ
   cut-lower-real-ℚ p = le-ℚ-Prop p q
 

@@ -44,7 +44,7 @@ A [subtype](foundation-core.subtypes.md) `U` of
 following two conditions:
 
 1. _Inhabitedness_. `U` is [inhabited](foundation.inhabited-subtypes.md).
-2. _Roundedness_. A rational number `q` is in `U`
+2. _Upper roundedness_. A rational number `q` is in `U`
    [if and only if](foundation.logical-equivalences.md) there
    [exists](foundation.existential-quantification.md) `p < q` such that `p ∈ U`.
 

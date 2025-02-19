@@ -127,12 +127,12 @@ module _
       ( λ e e' →
         is-weakly-constant-on-equivalences-is-commutative f H X p e e'
           ( map-equiv-coproduct
-            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ (pair X K) e e'))
-            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ
+            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-2 (pair X K) e e'))
+            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-2
               ( pair X K)
               ( e)
               ( e' ∘e equiv-succ-Fin 2)))
-            ( decide-value-equiv-Fin-two-ℕ
+            ( decide-value-equiv-Fin-2
               ( pair X K)
               ( e')
               ( map-equiv e (zero-Fin 1)))))
@@ -149,13 +149,16 @@ module _
         is-weakly-constant-on-equivalences-is-commutative f H (Fin 2) p e e'
           ( map-equiv-coproduct
             ( inv-equiv
-              ( equiv-ev-zero-htpy-equiv-Fin-two-ℕ (Fin-UU-Fin' 2) e e'))
-            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ
-              ( Fin-UU-Fin' 2)
+              ( equiv-ev-zero-htpy-equiv-Fin-2
+                ( Fin-Type-With-Cardinality-ℕ 2)
+                ( e)
+                ( e')))
+            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-2
+              ( Fin-Type-With-Cardinality-ℕ 2)
               ( e)
               ( e' ∘e equiv-succ-Fin 2)))
-            ( decide-value-equiv-Fin-two-ℕ
-              ( Fin-UU-Fin' 2)
+            ( decide-value-equiv-Fin-2
+              ( Fin-Type-With-Cardinality-ℕ 2)
               ( e')
               ( map-equiv e (zero-Fin 1)))))
       ( id-equiv)
