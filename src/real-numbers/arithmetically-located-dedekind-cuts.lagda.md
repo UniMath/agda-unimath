@@ -70,8 +70,8 @@ module _
   {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
   where
 
-  arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
-  arithmetically-located-lower-upper-ℝ =
+  is-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
+  is-arithmetically-located-lower-upper-ℝ =
     (ε⁺ : ℚ⁺) →
     exists
       ( ℚ × ℚ)
@@ -94,7 +94,7 @@ module _
 
   abstract
     is-located-is-arithmetically-located-lower-upper-ℝ :
-      arithmetically-located-lower-upper-ℝ x y →
+      is-arithmetically-located-lower-upper-ℝ x y →
       is-located-lower-upper-ℝ x y
     is-located-is-arithmetically-located-lower-upper-ℝ
       arithmetically-located p q p<q =
