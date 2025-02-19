@@ -37,12 +37,12 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import logic.functoriality-existential-quantification
-
 open import group-theory.abelian-groups
 
-open import real-numbers.arithmetically-located-dedekind-cuts
+open import logic.functoriality-existential-quantification
+
 open import real-numbers.addition-real-numbers
+open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
@@ -473,21 +473,34 @@ module _
   {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
   where
 
-  reflects-le-right-add-ℝ : le-ℝ (x +ℝ z) (y +ℝ z) → le-ℝ x y
-  reflects-le-right-add-ℝ x+z<y+z =
-    preserves-le-sim-ℝ
-      ( (x +ℝ z) +ℝ neg-ℝ z)
-      ( x)
-      ( (y +ℝ z) +ℝ neg-ℝ z)
-      ( y)
-      ( cancel-right-add-ℝ x z)
-      ( cancel-right-add-ℝ y z)
-      ( preserves-le-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z<y+z)
+  abstract
+    reflects-le-right-add-ℝ : le-ℝ (x +ℝ z) (y +ℝ z) → le-ℝ x y
+    reflects-le-right-add-ℝ x+z<y+z =
+      preserves-le-sim-ℝ
+        ( (x +ℝ z) +ℝ neg-ℝ z)
+        ( x)
+        ( (y +ℝ z) +ℝ neg-ℝ z)
+        ( y)
+        ( cancel-right-add-ℝ x z)
+        ( cancel-right-add-ℝ y z)
+        ( preserves-le-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z<y+z)
 
-  reflects-le-left-add-ℝ : le-ℝ (z +ℝ x) (z +ℝ y) → le-ℝ x y
-  reflects-le-left-add-ℝ z+x<z+y =
-    reflects-le-right-add-ℝ
-      ( binary-tr le-ℝ (commutative-add-ℝ z x) (commutative-add-ℝ z y) z+x<z+y)
+    reflects-le-left-add-ℝ : le-ℝ (z +ℝ x) (z +ℝ y) → le-ℝ x y
+    reflects-le-left-add-ℝ z+x<z+y =
+      reflects-le-right-add-ℝ
+        ( binary-tr le-ℝ (commutative-add-ℝ z x) (commutative-add-ℝ z y) z+x<z+y)
+
+module _
+  {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
+  where
+
+  iff-translate-right-le-ℝ : le-ℝ x y ↔ le-ℝ (x +ℝ z) (y +ℝ z)
+  pr1 iff-translate-right-le-ℝ = preserves-le-right-add-ℝ z x y
+  pr2 iff-translate-right-le-ℝ = reflects-le-right-add-ℝ z x y
+
+  iff-translate-left-le-ℝ : le-ℝ x y ↔ le-ℝ (z +ℝ x) (z +ℝ y)
+  pr1 iff-translate-left-le-ℝ = preserves-le-left-add-ℝ z x y
+  pr2 iff-translate-left-le-ℝ = reflects-le-left-add-ℝ z x y
 ```
 
 ## References
