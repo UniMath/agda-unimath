@@ -9,19 +9,21 @@ module real-numbers.maximum-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.empty-types
+open import foundation.propositions
+open import foundation.universe-levels
+
+open import order-theory.large-join-semilattices
+open import order-theory.least-upper-bounds-large-posets
+
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
 open import real-numbers.maximum-lower-dedekind-real-numbers
 open import real-numbers.maximum-upper-dedekind-real-numbers
-open import real-numbers.inequality-real-numbers
-open import real-numbers.dedekind-real-numbers
-open import foundation.empty-types
-open import foundation.dependent-pair-types
-open import foundation.propositions
-open import foundation.disjunction
-open import foundation.universe-levels
-open import order-theory.least-upper-bounds-large-posets
-open import order-theory.large-join-semilattices
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
@@ -29,9 +31,9 @@ open import order-theory.large-join-semilattices
 ## Idea
 
 The **binary maximum** of two
-[Dedekind real numbers](real-numbers.dedekind-real-numbers) `x`, `y`
-is a Dedekind real number with lower cut equal to the union of `x` and `y`'s
-lower cuts, and upper cut equal to the intersection of their upper cuts.
+[Dedekind real numbers](real-numbers.dedekind-real-numbers) `x`, `y` is a
+Dedekind real number with lower cut equal to the union of `x` and `y`'s lower
+cuts, and upper cut equal to the intersection of their upper cuts.
 
 ## Definition
 

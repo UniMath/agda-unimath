@@ -9,20 +9,21 @@ module real-numbers.minimum-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
-open import real-numbers.minimum-lower-dedekind-real-numbers
-open import real-numbers.minimum-upper-dedekind-real-numbers
-open import real-numbers.inequality-real-numbers
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.inequality-real-numbers
-open import foundation.empty-types
 open import foundation.dependent-pair-types
-open import foundation.propositions
 open import foundation.disjunction
+open import foundation.empty-types
+open import foundation.propositions
 open import foundation.universe-levels
+
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-meet-semilattices
+
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-real-numbers
+open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.minimum-lower-dedekind-real-numbers
+open import real-numbers.minimum-upper-dedekind-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
@@ -30,8 +31,8 @@ open import order-theory.large-meet-semilattices
 ## Idea
 
 The **binary minimum** of two
-[Dedekind real numbers](real-numbers.dedekind-real-numbers) `x`, `y`
-is a Dedekind real number with lower cut equal to the intersection of `x` and `y`'s
+[Dedekind real numbers](real-numbers.dedekind-real-numbers) `x`, `y` is a
+Dedekind real number with lower cut equal to the intersection of `x` and `y`'s
 lower cuts, and upper cut equal to the union of their upper cuts.
 
 ## Definition
