@@ -41,9 +41,9 @@ open import real-numbers.lower-dedekind-real-numbers
 ## Idea
 
 The maximum of two
-[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers) `x`, `y`
-is a lower Dedekind real number with cut equal to the union of the cuts of `x`
-and `y`. Unlike the case for the
+[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md) `x`,
+`y` is a lower Dedekind real number with cut equal to the union of the cuts of
+`x` and `y`. Unlike the case for the
 [minimum of lower Dedekind real numbers](real-numbers.minimum-lower-dedekind-real-numbers.md),
 the maximum of any inhabited family of lower Dedekind real numbers, the lower
 Dedekind real number by taking the union of the cuts of every element of the

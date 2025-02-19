@@ -41,9 +41,9 @@ open import real-numbers.upper-dedekind-real-numbers
 ## Idea
 
 The minimum of two
-[upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers) `x`, `y`
-is a upper Dedekind real number with cut equal to the union of the cuts of `x`
-and `y`. Unlike the case for the
+[upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md) `x`,
+`y` is a upper Dedekind real number with cut equal to the union of the cuts of
+`x` and `y`. Unlike the case for the
 [minimum of upper Dedekind real numbers](real-numbers.minimum-upper-dedekind-real-numbers.md),
 the minimum of any inhabited family of upper Dedekind real numbers, the upper
 Dedekind real number by taking the union of the cuts of every element of the

@@ -42,9 +42,9 @@ open import real-numbers.upper-dedekind-real-numbers
 ## Idea
 
 The maximum of two
-[upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers) `x`, `y`
-is a upper Dedekind real number with cut equal to the intersection of the cuts
-of `x` and `y`.
+[upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md) `x`,
+`y` is a upper Dedekind real number with cut equal to the intersection of the
+cuts of `x` and `y`.
 
 ## Definition
 

@@ -37,9 +37,9 @@ open import real-numbers.lower-dedekind-real-numbers
 ## Idea
 
 The minimum of two
-[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers) `x`, `y`
-is a lower Dedekind real number with cut equal to the intersection of the cuts
-of `x` and `y`.
+[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md) `x`,
+`y` is a lower Dedekind real number with cut equal to the intersection of the
+cuts of `x` and `y`.
 
 The minimum of a family of lower Dedekind real numbers is not always a lower
 Dedekind real number.
