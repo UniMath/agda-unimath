@@ -82,6 +82,14 @@ refl-sim-ℝ : {l : Level} → (x : ℝ l) → sim-ℝ x x
 refl-sim-ℝ x = refl-sim-subtype (lower-cut-ℝ x)
 ```
 
+### Symmetry
+
+```agda
+symmetric-sim-ℝ :
+  {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → sim-ℝ x y → sim-ℝ y x
+symmetric-sim-ℝ x y = symmetric-sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
+```
+
 ### Transitivity
 
 ```agda
