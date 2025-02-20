@@ -460,6 +460,21 @@ module _
               ( ℚ)
               ( λ p →
                 le-ℚ-Prop p q ∧ upper-cut-lim-cauchy-approximation-leq-ℝ p))
+    pr2 (is-rounded-upper-cut-lim-cauchy-approximation-leq-ℝ q) ∃p =
+      do
+        p , p<q , lim<p ← ∃p
+        (ε⁺@(ε , _) , θ⁺@(θ , _)) , xε<p-ε-θ ← lim<p
+        let xε = map-cauchy-approximation-leq-ℝ x ε⁺
+        intro-exists
+          ( ε⁺ , θ⁺)
+          ( le-upper-cut-ℝ
+            ( xε)
+            ( p -ℚ (ε +ℚ θ))
+            ( q -ℚ (ε +ℚ θ))
+            ( preserves-le-left-add-ℚ (neg-ℚ (ε +ℚ θ)) p q p<q)
+            ( xε<p-ε-θ))
+      where
+        open do-syntax-trunc-Prop (upper-cut-lim-cauchy-approximation-leq-ℝ q)
 
   lower-real-lim-cauchy-approximation-leq-ℝ : lower-ℝ l
   lower-real-lim-cauchy-approximation-leq-ℝ =
@@ -604,6 +619,33 @@ module _
 TODO. To do this, we'll need positive real numbers, to show that embedded positive
 rational numbers are positive reals, and that addition (subtraction) of a positive real
 number is a strictly inflationary (deflationary) map.
+
+```agda
+module _
+  {l : Level} (x : cauchy-approximation-leq-ℝ l)
+  where
+
+  is-limit-lim-cauchy-approximation-leq-ℝ :
+    is-limit-cauchy-approximation-Premetric-Space
+      ( premetric-space-leq-ℝ l)
+      ( x)
+      ( lim-cauchy-approximation-leq-ℝ x)
+  is-limit-lim-cauchy-approximation-leq-ℝ ε⁺@(ε , _) θ⁺@(θ , _) =
+    do
+      θ₂⁺@(θ₂ , _) , 2θ₂<θ ← double-le-ℚ⁺ θ⁺
+      θ₄⁺@(θ₄ , _) , 2θ₄<θ₂ ← double-le-ℚ⁺ θ₂⁺
+      let
+        xε = map-cauchy-approximation-leq-ℝ x ε⁺
+      {!   !}
+    where
+      open
+        do-syntax-trunc-Prop
+          ( premetric-leq-ℝ
+            ( l)
+            ( ε⁺ +ℚ⁺ θ⁺)
+            ( map-cauchy-approximation-leq-ℝ x ε⁺)
+            ( lim-cauchy-approximation-leq-ℝ x))
+```
 
 ### The standard metric space of real numbers is complete
 
