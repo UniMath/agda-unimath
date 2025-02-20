@@ -85,27 +85,3 @@ module _
   is-right-cancellative-right-div-Quasigroup =
     pr2 (pr2 (pr2 (pr2 (pr2 (pr2 Q)))))
 ```
-
-## Properties
-
-### A [magma](structured-types.magmas.md) `M` with carrier type a set is a quasigroup iff `M`'s multiplication is a [binary equivalence](foundation.binary-equivalences.md)
-
-Essentially, this follows from the right and left cancellation laws of
-quasigroups; these equivalently state that left/right division (by, say, `x`)
-are left/right inverses to multiplication by `x`.
-
-```agda
-module _
-  {l : Level} (M : Magma l) (M-is-set : is-set (type-Magma M)) (M-bin-equiv : is-binary-equiv (mul-Magma M))
-  where
-```
-
-This presentation of quasigroups makes explicit the to-be-formalized connection
-with Latin squares - roughly, one should be able to show the type of
-[Latin squares](univalent-combinatorics.latin-squares.md) satisfies the
-universal property of homotopy-quotienting `Quasigroup' _` by isotopies - while
-the main definition allows realization of quasigroups as algebras of an
-[algebraic theory](universal-algebra.algebras-of-theories) and has a
-better-behaved notion of morphisms.
-
-## References
