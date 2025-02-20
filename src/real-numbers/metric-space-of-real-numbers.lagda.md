@@ -62,10 +62,12 @@ open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.addition-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
@@ -114,6 +116,20 @@ premetric-leq-ℝ l d x y =
 ```
 
 ## Properties
+
+### `x` is in a neighborhood `d` of `y` if `x - d < y < x + d`
+
+```agda
+module _
+  {l : Level} (d : ℚ⁺) (x y : ℝ l)
+  where
+
+  neighborhood-±-bound :
+    le-ℝ (x -ℝ real-ℚ (rational-ℚ⁺ d)) y →
+    le-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
+    type-Prop (premetric-leq-ℝ l d x y)
+  -- DO NOT SUBMIT : todo
+```
 
 ### The standard premetric on the real numbers is a metric structure
 
@@ -641,37 +657,79 @@ module _
       θ₄⁺@(θ₄ , _) , 2θ₄<θ₂ ← double-le-ℚ⁺ θ₂⁺
       let
         xε = map-cauchy-approximation-leq-ℝ x ε⁺
-        εℝ = real-ℚ ε
-        θ₄ℝ = real-ℚ θ₄
         θ₄ℝ⁺ = positive-real-ℚ⁺ θ₄⁺
-      q , xε-ε-2θ₄<q , q<xε-ε-θ₄ ← le-diff-real-ℝ⁺ (xε -ℝ εℝ -ℝ θ₄ℝ) θ₄ℝ⁺
-      r , xε+ε+θ₄<r , r<xε+ε+2θ₄ ← le-left-add-real-ℝ⁺ (xε +ℝ εℝ +ℝ θ₄ℝ) θ₄ℝ⁺
+        2θ₄⁺ = θ₄⁺ +ℚ⁺ θ₄⁺
+        2θ₄ℝ⁺ = positive-real-ℚ⁺ 2θ₄⁺
+      q , xε-ε-2θ₄<q , q<xε-ε-θ₄ ←
+        le-diff-real-ℝ⁺ (xε -ℝ real-ℚ (ε +ℚ θ₄)) θ₄ℝ⁺
+      r , xε+ε+θ₄<r , r<xε+ε+2θ₄ ←
+        le-left-add-real-ℝ⁺ (xε +ℝ real-ℚ (ε +ℚ θ₄)) θ₄ℝ⁺
       let
         q+ε+θ₄<xε : is-in-lower-cut-ℝ xε (q +ℚ (ε +ℚ θ₄))
         q+ε+θ₄<xε =
           lower-cut-real-le-ℚ
             ( q +ℚ (ε +ℚ θ₄))
             ( xε)
-            ( binary-tr
-                ( le-ℝ)
-                {!   !}
-                {!   !}
-                ( preserves-le-right-add-ℝ
-                  ( real-ℚ (ε +ℚ θ₄))
-                  ( real-ℚ q)
-                  ( xε -ℝ εℝ -ℝ θ₄ℝ)
-                  ( le-lower-cut-real-ℚ q (xε -ℝ εℝ -ℝ θ₄ℝ) q<xε-ε-θ₄)))
+            ( preserves-le-sim-ℝ
+              ( real-ℚ q +ℝ real-ℚ (ε +ℚ θ₄))
+              ( real-ℚ (q +ℚ (ε +ℚ θ₄)))
+              ( (xε -ℝ real-ℚ (ε +ℚ θ₄)) +ℝ real-ℚ (ε +ℚ θ₄))
+              ( xε)
+              ( sim-eq-ℝ (add-real-ℚ _ _))
+              ( cancel-right-add-subtract-ℝ xε (real-ℚ (ε +ℚ θ₄)))
+              ( preserves-le-right-add-ℝ
+                ( real-ℚ (ε +ℚ θ₄))
+                ( real-ℚ q)
+                ( xε -ℝ real-ℚ (ε +ℚ θ₄))
+                ( le-lower-cut-real-ℚ q (xε -ℝ real-ℚ (ε +ℚ θ₄)) q<xε-ε-θ₄)))
         q<lim : is-in-lower-cut-ℝ lim q
         q<lim = intro-exists ( ε⁺ , θ₄⁺) q+ε+θ₄<xε
-      {!   !}
+        xε<r-ε-θ₄ : is-in-upper-cut-ℝ xε (r -ℚ (ε +ℚ θ₄))
+        xε<r-ε-θ₄ =
+          upper-cut-real-le-ℚ
+            ( r -ℚ (ε +ℚ θ₄))
+            ( xε)
+            ( preserves-le-sim-ℝ
+              ( (xε +ℝ real-ℚ (ε +ℚ θ₄)) -ℝ real-ℚ (ε +ℚ θ₄))
+              ( xε)
+              ( real-ℚ r -ℝ real-ℚ (ε +ℚ θ₄))
+              ( real-ℚ (r -ℚ (ε +ℚ θ₄)))
+              ( cancel-right-subtract-add-ℝ xε (real-ℚ (ε +ℚ θ₄)))
+              ( sim-eq-ℝ (ap (real-ℚ r +ℝ_) (neg-real-ℚ _) ∙ add-real-ℚ _ _))
+              ( preserves-le-right-add-ℝ
+                ( neg-ℝ (real-ℚ (ε +ℚ θ₄)))
+                ( xε +ℝ real-ℚ (ε +ℚ θ₄))
+                ( real-ℚ r)
+                ( le-upper-cut-real-ℚ r (xε +ℝ real-ℚ (ε +ℚ θ₄)) xε+ε+θ₄<r)))
+        lim<r : is-in-upper-cut-ℝ lim r
+        lim<r = intro-exists (ε⁺ , θ₄⁺) xε<r-ε-θ₄
+        xε-2θ₄<xε+2θ₄ :
+          le-ℝ (xε -ℝ real-ℚ (θ₄ +ℚ θ₄)) (xε +ℝ real-ℚ (θ₄ +ℚ θ₄))
+        xε-2θ₄<xε+2θ₄ =
+          transitive-le-ℝ
+            ( xε -ℝ real-ℚ (θ₄ +ℚ θ₄))
+            ( xε)
+            ( xε +ℝ real-ℚ (θ₄ +ℚ θ₄))
+            ( le-left-add-real-ℝ⁺ xε 2θ₄ℝ⁺)
+            ( le-diff-real-ℝ⁺ xε 2θ₄ℝ⁺)
+      elim-disjunction
+        ( claim)
+        {!   !}
+        {!   !}
+        ( cotransitive-le-ℝ
+          ( xε -ℝ real-ℚ (θ₄ +ℚ θ₄))
+          ( xε +ℝ real-ℚ (θ₄ +ℚ θ₄))
+          ( lim)
+          ( xε-2θ₄<xε+2θ₄))
     where
-      open
-        do-syntax-trunc-Prop
-          ( premetric-leq-ℝ
-            ( l)
-            ( ε⁺ +ℚ⁺ θ⁺)
-            ( map-cauchy-approximation-leq-ℝ x ε⁺)
-            ( lim-cauchy-approximation-leq-ℝ x))
+      claim : Prop l
+      claim =
+        premetric-leq-ℝ
+          ( l)
+          ( ε⁺ +ℚ⁺ θ⁺)
+          ( map-cauchy-approximation-leq-ℝ x ε⁺)
+          ( lim-cauchy-approximation-leq-ℝ x)
+      open do-syntax-trunc-Prop claim
 ```
 
 ### The standard metric space of real numbers is complete

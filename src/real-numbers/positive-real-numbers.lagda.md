@@ -161,7 +161,7 @@ abstract
       ( tr
         ( λ y → sim-ℝ y x)
         ( right-swap-add-ℝ x d (neg-ℝ d))
-        ( cancel-right-add-ℝ x d))
+        ( cancel-right-subtract-add-ℝ x d))
       ( le-left-add-real-ℝ⁺ (x -ℝ d) d⁺)
 ```
 

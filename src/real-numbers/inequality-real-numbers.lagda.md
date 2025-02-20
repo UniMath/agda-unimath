@@ -253,8 +253,8 @@ module _
       ( x)
       ( (y +ℝ z) +ℝ neg-ℝ z)
       ( y)
-      ( cancel-right-add-ℝ x z)
-      ( cancel-right-add-ℝ y z)
+      ( cancel-right-subtract-add-ℝ x z)
+      ( cancel-right-subtract-add-ℝ y z)
       ( preserves-leq-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≤y+z)
 
   reflects-leq-left-add-ℝ : leq-ℝ (z +ℝ x) (z +ℝ y) → leq-ℝ x y

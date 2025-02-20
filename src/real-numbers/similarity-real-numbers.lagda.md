@@ -80,6 +80,9 @@ module _
 ```agda
 refl-sim-ℝ : {l : Level} → (x : ℝ l) → sim-ℝ x x
 refl-sim-ℝ x = refl-sim-subtype (lower-cut-ℝ x)
+
+sim-eq-ℝ : {l : Level} → {x y : ℝ l} → x ＝ y → sim-ℝ x y
+sim-eq-ℝ {_} {x} {y} x=y = tr (sim-ℝ x) x=y (refl-sim-ℝ x)
 ```
 
 ### Symmetry

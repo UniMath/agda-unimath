@@ -277,31 +277,41 @@ module _
 ### Algebraic laws for addition on real numbers
 
 ```agda
+abstract
+  right-swap-add-ℝ :
+    {l1 l2 l3 : Level} → (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    (x +ℝ y) +ℝ z ＝ (x +ℝ z) +ℝ y
+  right-swap-add-ℝ x y z =
+    equational-reasoning
+      (x +ℝ y) +ℝ z
+      ＝ x +ℝ (y +ℝ z) by associative-add-ℝ x y z
+      ＝ x +ℝ (z +ℝ y) by ap (x +ℝ_) (commutative-add-ℝ y z)
+      ＝ (x +ℝ z) +ℝ y by inv (associative-add-ℝ x z y)
+
 module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  cancel-right-add-ℝ : sim-ℝ ((x +ℝ y) +ℝ neg-ℝ y) x
-  cancel-right-add-ℝ =
-    binary-tr
-      ( sim-ℝ)
-      ( inv (associative-add-ℝ x y (neg-ℝ y)))
-      ( right-unit-law-add-ℝ x)
-      ( preserves-sim-left-add-ℝ
-        ( x)
-        ( y +ℝ neg-ℝ y)
-        ( zero-ℝ)
-        ( right-inverse-law-add-ℝ y))
+  abstract
+    cancel-right-subtract-add-ℝ : sim-ℝ ((x +ℝ y) +ℝ neg-ℝ y) x
+    cancel-right-subtract-add-ℝ =
+      binary-tr
+        ( sim-ℝ)
+        ( inv (associative-add-ℝ x y (neg-ℝ y)))
+        ( right-unit-law-add-ℝ x)
+        ( preserves-sim-left-add-ℝ
+          ( x)
+          ( y +ℝ neg-ℝ y)
+          ( zero-ℝ)
+          ( right-inverse-law-add-ℝ y))
 
-right-swap-add-ℝ :
-  {l1 l2 l3 : Level} → (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
-  (x +ℝ y) +ℝ z ＝ (x +ℝ z) +ℝ y
-right-swap-add-ℝ x y z =
-  equational-reasoning
-    (x +ℝ y) +ℝ z
-    ＝ x +ℝ (y +ℝ z) by associative-add-ℝ x y z
-    ＝ x +ℝ (z +ℝ y) by ap (x +ℝ_) (commutative-add-ℝ y z)
-    ＝ (x +ℝ z) +ℝ y by inv (associative-add-ℝ x z y)
+    cancel-right-add-subtract-ℝ : sim-ℝ ((x +ℝ neg-ℝ y) +ℝ y) x
+    cancel-right-add-subtract-ℝ =
+      tr
+        ( λ z → sim-ℝ z x)
+        ( right-swap-add-ℝ x y (neg-ℝ y))
+        ( cancel-right-subtract-add-ℝ)
+
 ```
 
 ### Addition reflects similarity
@@ -322,9 +332,9 @@ module _
         ( (x +ℝ z) +ℝ neg-ℝ z)
         ( (y +ℝ z) +ℝ neg-ℝ z)
         ( y)
-        ( cancel-right-add-ℝ y z)
+        ( cancel-right-subtract-add-ℝ y z)
         ( preserves-sim-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≈y+z))
-      ( symmetric-sim-ℝ ((x +ℝ z) +ℝ neg-ℝ z) x (cancel-right-add-ℝ x z))
+      ( symmetric-sim-ℝ ((x +ℝ z) +ℝ neg-ℝ z) x (cancel-right-subtract-add-ℝ x z))
 
   reflects-sim-left-add-ℝ : sim-ℝ (z +ℝ x) (z +ℝ y) → sim-ℝ x y
   reflects-sim-left-add-ℝ z+x≈z+y =

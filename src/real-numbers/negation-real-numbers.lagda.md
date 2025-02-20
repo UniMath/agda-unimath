@@ -39,6 +39,7 @@ open import real-numbers.rational-lower-dedekind-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.rational-upper-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.similarity-real-numbers
 ```
 
 </details>
@@ -119,4 +120,11 @@ neg-Rational-ℝ (x , q , q≮x , x≮q) =
   neg-ℚ q ,
   x≮q ∘ tr (is-in-upper-cut-ℝ x) (neg-neg-ℚ q) ,
   q≮x ∘ tr (is-in-lower-cut-ℝ x) (neg-neg-ℚ q)
+
+neg-real-ℚ : (q : ℚ) → neg-ℝ (real-ℚ q) ＝ real-ℚ (neg-ℚ q)
+neg-real-ℚ q =
+  eq-sim-ℝ
+    ( neg-ℝ (real-ℚ q))
+    ( real-ℚ (neg-ℚ q))
+    ( sim-rational-ℝ (neg-Rational-ℝ (rational-real-ℚ q)))
 ```
