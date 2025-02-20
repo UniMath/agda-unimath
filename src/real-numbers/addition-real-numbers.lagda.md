@@ -341,30 +341,31 @@ module _
 ### The inclusion of rational numbers preserves addition
 
 ```agda
-add-real-ℚ : (p q : ℚ) → real-ℚ p +ℝ real-ℚ q ＝ real-ℚ (p +ℚ q)
-add-real-ℚ p q =
-  eq-sim-ℝ
-    ( real-ℚ p +ℝ real-ℚ q)
-    ( real-ℚ (p +ℚ q))
-    ( sim-rational-ℝ
-      ( real-ℚ p +ℝ real-ℚ q ,
-        p +ℚ q ,
-        elim-exists
-          ( empty-Prop)
-          ( λ (pl , ql) (pl<p , ql<q , p+q=pl+ql) →
-            irreflexive-le-ℚ
-              ( p +ℚ q)
-              ( inv-tr
-                ( λ r → le-ℚ r (p +ℚ q))
-                ( p+q=pl+ql)
-                ( preserves-le-add-ℚ {pl} {p} {ql} {q} pl<p ql<q))) ,
-        elim-exists
-          ( empty-Prop)
-          ( λ (pu , qu) (p<pu , q<qu , p+q=pu+qu) →
-            irreflexive-le-ℚ
-              ( p +ℚ q)
-              ( inv-tr
-                ( le-ℚ (p +ℚ q))
-                ( p+q=pu+qu)
-                ( preserves-le-add-ℚ {p} {pu} {q} {qu} p<pu q<qu)))))
+abstract
+  add-real-ℚ : (p q : ℚ) → real-ℚ p +ℝ real-ℚ q ＝ real-ℚ (p +ℚ q)
+  add-real-ℚ p q =
+    eq-sim-ℝ
+      ( real-ℚ p +ℝ real-ℚ q)
+      ( real-ℚ (p +ℚ q))
+      ( sim-rational-ℝ
+        ( real-ℚ p +ℝ real-ℚ q ,
+          p +ℚ q ,
+          elim-exists
+            ( empty-Prop)
+            ( λ (pl , ql) (pl<p , ql<q , p+q=pl+ql) →
+              irreflexive-le-ℚ
+                ( p +ℚ q)
+                ( inv-tr
+                  ( λ r → le-ℚ r (p +ℚ q))
+                  ( p+q=pl+ql)
+                  ( preserves-le-add-ℚ {pl} {p} {ql} {q} pl<p ql<q))) ,
+          elim-exists
+            ( empty-Prop)
+            ( λ (pu , qu) (p<pu , q<qu , p+q=pu+qu) →
+              irreflexive-le-ℚ
+                ( p +ℚ q)
+                ( inv-tr
+                  ( le-ℚ (p +ℚ q))
+                  ( p+q=pu+qu)
+                  ( preserves-le-add-ℚ {p} {pu} {q} {qu} p<pu q<qu)))))
 ```
