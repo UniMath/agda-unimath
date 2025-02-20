@@ -20,6 +20,7 @@ open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
@@ -70,17 +71,44 @@ is-positive-real-ℝ⁺ = pr2
 
 ## Properties
 
-### There exists a positive rational number in the lower cut of every positive real number
+### A real number is positive if and only if zero is in its lower cut
 
 ```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  is-positive-iff-zero-in-lower-cut-ℝ :
+    is-positive-ℝ x ↔ is-in-lower-cut-ℝ x zero-ℚ
+  is-positive-iff-zero-in-lower-cut-ℝ =
+    inv-iff (le-iff-lower-cut-real-ℚ zero-ℚ x)
+```
+
+### A real number is positive if and only if there is a positive rational number in its lower cut
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  is-positive-iff-exists-ℚ⁺-in-lower-cut-ℝ :
+    is-positive-ℝ x ↔ exists ℚ⁺ (λ p → lower-cut-ℝ x (rational-ℚ⁺ p))
+  pr1 is-positive-iff-exists-ℚ⁺-in-lower-cut-ℝ =
+    elim-exists
+      ( ∃ ℚ⁺ (λ p → lower-cut-ℝ x (rational-ℚ⁺ p)))
+      ( λ p (0<p , p<x) → intro-exists (p , is-positive-le-zero-ℚ p 0<p) p<x)
+  pr2 is-positive-iff-exists-ℚ⁺-in-lower-cut-ℝ =
+    elim-exists
+      ( is-positive-prop-ℝ x)
+      ( λ (p , pos-p) p<x →
+        intro-exists p (le-zero-is-positive-ℚ p pos-p , p<x))
+
+
 exists-ℚ⁺-in-lower-cut-ℝ⁺ :
   {l : Level} → (x : ℝ⁺ l) →
   exists ℚ⁺ (λ p → lower-cut-ℝ (real-ℝ⁺ x) (rational-ℚ⁺ p))
 exists-ℚ⁺-in-lower-cut-ℝ⁺ (x , pos-x) =
-  elim-exists
-    ( ∃ ℚ⁺ (λ p → lower-cut-ℝ x (rational-ℚ⁺ p)))
-    ( λ p (0<p , p<x) → intro-exists (p , is-positive-le-zero-ℚ p 0<p) p<x)
-    ( pos-x)
+  forward-implication (is-positive-iff-exists-ℚ⁺-in-lower-cut-ℝ x) pos-x
 ```
 
 ### Addition with a positive real number is a strictly inflationary map
