@@ -274,10 +274,7 @@ module _
       ( preserves-sim-right-add-ℝ x≈y)
 ```
 
-### Addition and subtraction on the right cancel out
-
-DO NOT SUBMIT: I don't know what to call this, because the usual notions of
-equivalences, retractions, etc. don't work for similarity.
+### Algebraic laws for addition on real numbers
 
 ```agda
 module _
@@ -295,6 +292,16 @@ module _
         ( y +ℝ neg-ℝ y)
         ( zero-ℝ)
         ( right-inverse-law-add-ℝ y))
+
+right-swap-add-ℝ :
+  {l1 l2 l3 : Level} → (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+  (x +ℝ y) +ℝ z ＝ (x +ℝ z) +ℝ y
+right-swap-add-ℝ x y z =
+  equational-reasoning
+    (x +ℝ y) +ℝ z
+    ＝ x +ℝ (y +ℝ z) by associative-add-ℝ x y z
+    ＝ x +ℝ (z +ℝ y) by ap (x +ℝ_) (commutative-add-ℝ y z)
+    ＝ (x +ℝ z) +ℝ y by inv (associative-add-ℝ x z y)
 ```
 
 ### Addition reflects similarity
