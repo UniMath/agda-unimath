@@ -61,6 +61,10 @@ open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.addition-real-numbers
+open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.difference-real-numbers
+open import real-numbers.positive-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
@@ -632,10 +636,33 @@ module _
       ( lim-cauchy-approximation-leq-ℝ x)
   is-limit-lim-cauchy-approximation-leq-ℝ ε⁺@(ε , _) θ⁺@(θ , _) =
     do
+      let lim = lim-cauchy-approximation-leq-ℝ x
       θ₂⁺@(θ₂ , _) , 2θ₂<θ ← double-le-ℚ⁺ θ⁺
       θ₄⁺@(θ₄ , _) , 2θ₄<θ₂ ← double-le-ℚ⁺ θ₂⁺
       let
         xε = map-cauchy-approximation-leq-ℝ x ε⁺
+        εℝ = real-ℚ ε
+        θ₄ℝ = real-ℚ θ₄
+        θ₄ℝ⁺ = positive-real-ℚ⁺ θ₄⁺
+      q , xε-ε-2θ₄<q , q<xε-ε-θ₄ ← le-diff-real-ℝ⁺ (xε -ℝ εℝ -ℝ θ₄ℝ) θ₄ℝ⁺
+      r , xε+ε+θ₄<r , r<xε+ε+2θ₄ ← le-left-add-real-ℝ⁺ (xε +ℝ εℝ +ℝ θ₄ℝ) θ₄ℝ⁺
+      let
+        q+ε+θ₄<xε : is-in-lower-cut-ℝ xε (q +ℚ (ε +ℚ θ₄))
+        q+ε+θ₄<xε =
+          lower-cut-real-le-ℚ
+            ( q +ℚ (ε +ℚ θ₄))
+            ( xε)
+            ( binary-tr
+                ( le-ℝ)
+                {!   !}
+                {!   !}
+                ( preserves-le-right-add-ℝ
+                  ( real-ℚ (ε +ℚ θ₄))
+                  ( real-ℚ q)
+                  ( xε -ℝ εℝ -ℝ θ₄ℝ)
+                  ( le-lower-cut-real-ℚ q (xε -ℝ εℝ -ℝ θ₄ℝ) q<xε-ε-θ₄)))
+        q<lim : is-in-lower-cut-ℝ lim q
+        q<lim = intro-exists ( ε⁺ , θ₄⁺) q+ε+θ₄<xε
       {!   !}
     where
       open
