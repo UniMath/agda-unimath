@@ -448,9 +448,7 @@ module _
 
 ## `do` syntax for propositional truncation { #do-syntax }
 
-[Agda's `do` syntax](https://agda.readthedocs.io/en/latest/language/syntactic-sugar.html#do-notation)
-is a handy tool to avoid deeply nesting calls to the same lambda-based function.
-For example, consider a case where you are trying to prove a proposition,
+Consider a case where you are trying to prove a proposition,
 `motive : Prop l`, from witnesses of propositional truncations of types `P` and
 `Q`:
 
@@ -465,11 +463,8 @@ rec-trunc-Prop
   ( witness-truncated-prop-P)
 ```
 
-The tower of indentation, with many layers of indentation in the innermost
-derivation, is a little awkward even at two levels, let alone more. In
-particular, we have the many duplicated lines of `rec-trunc-Prop motive`, and
-the increasing distance between the `rec-trunc-Prop` and the `trunc-Prop` being
-recursed on. Agda's `do` syntax offers us an alternative.
+We can rewrite this using [Agda's `do` syntax](https://agda.readthedocs.io/en/latest/language/syntactic-sugar.html#do-notation)
+with the module
 
 ```agda
 module do-syntax-trunc-Prop {l : Level} (motive : Prop l) where
