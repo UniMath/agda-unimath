@@ -7,24 +7,25 @@ module order-theory.transposition-inequalities-along-sections-of-order-preservin
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
 open import foundation.function-types
 open import foundation.homotopies
-open import foundation.transport-along-identifications
 open import foundation.identity-types
+open import foundation.transport-along-identifications
+open import foundation.universe-levels
 
-open import order-theory.posets
 open import order-theory.order-preserving-maps-posets
+open import order-theory.posets
 ```
+
+</details>
 
 ## Idea
 
 Given a pair of posets `P` and `Q`, consider an
 [order preserving map](order-theory.order-preserving-maps-posets.md)
-`f : type-Poset P → type-Poset Q` and a map
-`g : type-Poset Q → type-Poset P` in the converse direction, such that `g` is a
-[section](foundation.sections.md) of `f`. Then there is a family of
-transposition maps
+`f : type-Poset P → type-Poset Q` and a map `g : type-Poset Q → type-Poset P` in
+the converse direction, such that `g` is a [section](foundation.sections.md) of
+`f`. Then there is a family of transposition maps
 
 ```text
 x ≤ g y → f x ≤ y

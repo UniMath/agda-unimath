@@ -7,15 +7,17 @@ module order-theory.transposition-inequalities-along-order-preserving-retraction
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
 open import foundation.function-types
 open import foundation.homotopies
-open import foundation.transport-along-identifications
 open import foundation.identity-types
+open import foundation.transport-along-identifications
+open import foundation.universe-levels
 
-open import order-theory.posets
 open import order-theory.order-preserving-maps-posets
+open import order-theory.posets
 ```
+
+</details>
 
 ## Idea
 

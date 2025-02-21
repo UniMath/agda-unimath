@@ -10,8 +10,8 @@ module elementary-number-theory.inequality-rational-numbers where
 
 ```agda
 open import elementary-number-theory.addition-integer-fractions
-open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.difference-rational-numbers
@@ -42,11 +42,11 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
 open import order-theory.preorders
-open import order-theory.transposition-inequalities-along-sections-of-order-preserving-maps-posets
 open import order-theory.transposition-inequalities-along-order-preserving-retractions-posets
-open import order-theory.order-preserving-maps-posets
+open import order-theory.transposition-inequalities-along-sections-of-order-preserving-maps-posets
 ```
 
 </details>

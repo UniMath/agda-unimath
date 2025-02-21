@@ -30,7 +30,7 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 open import elementary-number-theory.strict-inequality-integer-fractions
 open import elementary-number-theory.strict-inequality-integers
-open import group-theory.groups
+
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
@@ -49,6 +49,8 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import group-theory.groups
 ```
 
 </details>
