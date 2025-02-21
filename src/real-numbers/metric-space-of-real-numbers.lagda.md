@@ -719,93 +719,69 @@ module _
                 ( le-upper-cut-real-ℚ r (xε +ℝ real-ℚ (ε +ℚ θ₂)) xε+ε+θ₂<r)))
         lim<r : is-in-upper-cut-ℝ lim r
         lim<r = intro-exists (ε⁺ , θ₂⁺) xε<r-ε-θ₂
-      elim-disjunction
-        ( claim)
-        ( λ xε-θ<lim →
-          let
-            xε<lim+ε+θ : le-ℝ xε (lim +ℝ real-ℚ (ε +ℚ θ))
-            xε<lim+ε+θ =
-              transitive-le-ℝ
+        lim<xε+ε+θ : le-ℝ lim (xε +ℝ real-ℚ (ε +ℚ θ))
+        lim<xε+ε+θ =
+          transitive-le-ℝ
+            ( lim)
+            ( real-ℚ r)
+            ( xε +ℝ real-ℚ (ε +ℚ θ))
+            ( transitive-le-ℝ
+              ( real-ℚ r)
+              ( xε +ℝ (real-ℚ (ε +ℚ θ₂) +ℝ real-ℚ θ₂))
+              ( xε +ℝ real-ℚ (ε +ℚ θ))
+              ( preserves-le-left-add-ℝ
                 ( xε)
-                ( lim +ℝ real-ℚ θ)
-                ( lim +ℝ real-ℚ (ε +ℚ θ))
-                ( tr
-                  ( le-ℝ (lim +ℝ real-ℚ θ))
-                  ( combine-right-add-two-real-ℚ lim θ ε ∙
-                    ap (λ p → lim +ℝ real-ℚ p) (commutative-add-ℚ θ ε))
-                  ( le-left-add-real-ℝ⁺
-                    ( lim +ℝ real-ℚ θ)
-                    ( positive-real-ℚ⁺ ε⁺)))
-                ( forward-implication
-                  ( iff-add-right-le-ℝ xε (real-ℚ θ) lim)
-                  ( xε-θ<lim))
-            lim<xε+ε+θ : le-ℝ lim (xε +ℝ real-ℚ (ε +ℚ θ))
-            lim<xε+ε+θ =
-              transitive-le-ℝ
-                ( lim)
-                ( real-ℚ r)
-                ( xε +ℝ real-ℚ (ε +ℚ θ))
-                ( transitive-le-ℝ
-                  ( real-ℚ r)
-                  ( xε +ℝ real-ℚ (ε +ℚ 2θ₂))
-                  ( xε +ℝ real-ℚ (ε +ℚ θ))
-                  ( binary-tr
-                    ( le-ℝ)
-                    ( combine-right-add-two-real-ℚ xε ε 2θ₂)
-                    ( combine-right-add-two-real-ℚ xε ε θ)
-                    ( preserves-le-left-add-ℝ
-                      ( xε +ℝ real-ℚ ε)
-                      ( real-ℚ 2θ₂)
-                      ( real-ℚ θ)
-                      ( preserves-le-real-ℚ 2θ₂ θ 2θ₂<θ)))
-                  ( tr
-                    ( le-ℝ (real-ℚ r))
-                    ( combine-right-add-two-real-ℚ xε (ε +ℚ θ₂) θ₂ ∙
-                      ap (λ p → xε +ℝ real-ℚ p) (associative-add-ℚ _ _ _))
-                    ( le-lower-cut-real-ℚ
-                      ( r)
-                      ( xε +ℝ real-ℚ (ε +ℚ θ₂) +ℝ real-ℚ θ₂)
-                      ( r<xε+ε+2θ₂))))
-                ( le-upper-cut-real-ℚ r lim lim<r)
-          in
-            neighborhood-±-bound-leq-ℝ
-              ( ε⁺ +ℚ⁺ θ⁺)
-              ( xε)
-              ( lim)
-              ( leq-le-ℝ xε (lim +ℝ real-ℚ (ε +ℚ θ)) xε<lim+ε+θ)
-              ( leq-le-ℝ lim (xε +ℝ real-ℚ (ε +ℚ θ)) lim<xε+ε+θ))
-        ( λ lim<xε+θ →
-            let
-              lim<xε+ε+θ : le-ℝ lim (xε +ℝ real-ℚ (ε +ℚ θ))
-              lim<xε+ε+θ =
-                transitive-le-ℝ
-                  ( lim)
-                  ( xε +ℝ real-ℚ θ)
-                  ( xε +ℝ real-ℚ (ε +ℚ θ))
-                  ( tr
-                    ( le-ℝ (xε +ℝ real-ℚ θ))
-                    ( combine-right-add-two-real-ℚ xε θ ε ∙
-                      ap (λ p → xε +ℝ real-ℚ p) (commutative-add-ℚ θ ε))
-                    ( le-left-add-real-ℝ⁺
-                      ( xε +ℝ real-ℚ θ)
-                      ( positive-real-ℚ⁺ ε⁺)))
-                  ( lim<xε+θ)
-              xε<lim+ε+θ : le-ℝ xε (lim +ℝ real-ℚ (ε +ℚ θ))
-              xε<lim+ε+θ =
-                transitive-le-ℝ
-                  xε
-
-            in {!   !})
-        ( cotransitive-le-ℝ
-          ( xε -ℝ real-ℚ θ)
-          ( xε +ℝ real-ℚ θ)
-          ( lim)
-          ( transitive-le-ℝ
-            ( xε -ℝ real-ℚ θ)
+                ( real-ℚ (ε +ℚ θ₂) +ℝ real-ℚ θ₂)
+                ( real-ℚ (ε +ℚ θ))
+                ( inv-tr
+                  ( λ z → le-ℝ z (real-ℚ (ε +ℚ θ)))
+                  ( add-real-ℚ _ _)
+                  ( preserves-le-real-ℚ
+                    ( ε +ℚ θ₂ +ℚ θ₂)
+                    ( ε +ℚ θ)
+                    ( inv-tr
+                      ( λ p → le-ℚ p (ε +ℚ θ))
+                      ( associative-add-ℚ _ _ _)
+                      ( preserves-le-right-add-ℚ ε 2θ₂ θ 2θ₂<θ)))))
+              ( tr
+                ( le-ℝ (real-ℚ r))
+                ( associative-add-ℝ _ _ _)
+                ( le-lower-cut-real-ℚ
+                  ( r)
+                  ( xε +ℝ real-ℚ (ε +ℚ θ₂) +ℝ real-ℚ θ₂)
+                  ( r<xε+ε+2θ₂))))
+            ( le-upper-cut-real-ℚ r lim lim<r)
+        -- xε-ε-2θ₂<q
+        xε<lim+ε+θ : le-ℝ xε (lim +ℝ real-ℚ (ε +ℚ θ))
+        xε<lim+ε+θ =
+          transitive-le-ℝ
             ( xε)
-            ( xε +ℝ real-ℚ θ)
-            ( le-left-add-real-ℝ⁺ xε (positive-real-ℚ⁺ θ⁺))
-            ( le-diff-real-ℝ⁺ xε (positive-real-ℚ⁺ θ⁺))))
+            ( real-ℚ q +ℝ real-ℚ (ε +ℚ θ))
+            ( lim +ℝ real-ℚ (ε +ℚ θ))
+            ( preserves-le-right-add-ℝ
+              ( real-ℚ (ε +ℚ θ))
+              ( real-ℚ q)
+              ( lim)
+              ( le-lower-cut-real-ℚ q lim q<lim))
+            ( transitive-le-ℝ
+              ( xε)
+              ( real-ℚ q +ℝ real-ℚ (ε +ℚ 2θ₂))
+              ( real-ℚ q +ℝ real-ℚ (ε +ℚ θ))
+              {!   !}
+              ( forward-implication
+                ( iff-add-right-le-ℝ xε (real-ℚ (ε +ℚ 2θ₂)) (real-ℚ q))
+                ( tr
+                  ( λ y → le-ℝ y (real-ℚ q))
+                  ( equational-reasoning
+                    xε -ℝ real-ℚ (ε +ℚ θ₂) -ℝ real-ℚ θ₂
+                    ＝ xε +ℝ (neg-ℝ (real-ℚ (ε +ℚ θ₂)) -ℝ real-ℚ θ₂)
+                      by associative-add-ℝ _ _ _
+                    ＝ {!   !} by {!   !})
+                  ( le-upper-cut-real-ℚ
+                    ( q)
+                    ( xε -ℝ real-ℚ (ε +ℚ θ₂) -ℝ real-ℚ θ₂)
+                    ( xε-ε-2θ₂<q)))))
+      {!   !}
     where
       claim : Prop l
       claim =
