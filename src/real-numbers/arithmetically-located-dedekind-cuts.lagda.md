@@ -19,6 +19,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.archimedean-property-rational-numbers
 
 open import foundation.binary-transport
 open import foundation.action-on-identifications-functions
@@ -33,6 +34,7 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.raising-universe-levels
 open import foundation.subtypes
+open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -187,7 +189,43 @@ module _
 
   arithmetically-located-cuts-ℝ :
     arithmetically-located-lower-upper-ℝ (lower-real-ℝ x) (upper-real-ℝ x)
-  arithmetically-located-cuts-ℝ = {!   !}
+  arithmetically-located-cuts-ℝ ε⁺@(ε , _)=
+    do
+      ε'⁺@(ε' , pos-ε') , 2ε'<ε ← double-le-ℚ⁺ ε⁺
+      p , p<x ← is-inhabited-lower-cut-ℝ x
+      q , x<q ← is-inhabited-upper-cut-ℝ x
+      let p<q = le-lower-upper-cut-ℝ x p q p<x x<q
+      n , q-p<nε' ← archimedean-property-ℚ ε' (q -ℚ p) pos-ε'
+      let nℚ = rational-ℤ (int-ℕ n)
+      r , r<x , x<r+2ε' ←
+        location-in-arithmetic-sequence-located-ℝ
+          ( ε'⁺)
+          ( n)
+          ( p)
+          ( p<x)
+          ( le-upper-cut-ℝ
+            ( x)
+            ( q)
+            ( p +ℚ (rational-ℤ (int-ℕ n) *ℚ ε'))
+            ( tr
+              ( le-ℚ q)
+              ( commutative-add-ℚ (nℚ *ℚ ε') p)
+              ( le-transpose-left-diff-ℚ q p (nℚ *ℚ ε') ( q-p<nε')))
+            ( x<q))
+      intro-exists
+        ( r , r +ℚ (ε' +ℚ ε'))
+        ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε ,
+          r<x ,
+          x<r+2ε')
+    where
+      open
+        do-syntax-trunc-Prop
+          (∃
+            ( ℚ × ℚ)
+            ( λ (p , q) →
+              le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
+              lower-cut-ℝ x p ∧
+              upper-cut-ℝ x q))
 ```
 
 ## References
