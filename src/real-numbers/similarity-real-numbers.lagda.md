@@ -45,6 +45,9 @@ sim-prop-ℝ x y = sim-prop-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
 
 sim-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)
 sim-ℝ x y = type-Prop (sim-prop-ℝ x y)
+
+infix 6 _≈ℝ_
+_≈ℝ_ = sim-ℝ
 ```
 
 ## Properties
@@ -57,7 +60,7 @@ module _
   where
 
   sim-lower-cut-iff-sim-ℝ :
-    sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) ↔ sim-ℝ x y
+    sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) ↔ (x ≈ℝ y)
   sim-lower-cut-iff-sim-ℝ = id-iff
 ```
 
@@ -106,6 +109,44 @@ transitive-sim-ℝ x y z =
 ### Similar real numbers in the same universe are equal
 
 ```agda
-eq-sim-ℝ : {l : Level} → (x y : ℝ l) → sim-ℝ x y → x ＝ y
+eq-sim-ℝ : {l : Level} → (x y : ℝ l) → x ≈ℝ y → x ＝ y
 eq-sim-ℝ x y H = eq-eq-lower-cut-ℝ x y (antisymmetric-sim-subtype _ _ H)
+```
+
+### Similarity reasoning
+
+Similarities between real numbers can be constructed by similarity reasoning in
+the following way:
+
+```text
+similarity-reasoning-ℝ
+  x ≈ℝ y by sim-1
+    ≅ℝ z by eq-2
+    ≈ℝ v by sim-3
+```
+
+Note that we can use both similarities (with `≈ℝ`) and equalities (with `≅ℝ`) in
+the chain of reasoning.
+
+```agda
+infixl 1 similarity-reasoning-ℝ_
+infixl 0 step-similarity-reasoning-ℝ
+infixl 0 step-eq-similarity-reasoning-ℝ
+
+similarity-reasoning-ℝ_ :
+  {l : Level} → (x : ℝ l) → sim-ℝ x x
+similarity-reasoning-ℝ x = refl-sim-ℝ x
+
+step-similarity-reasoning-ℝ :
+  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+  sim-ℝ x y → {l3 : Level} → (u : ℝ l3) → sim-ℝ y u → sim-ℝ x u
+step-similarity-reasoning-ℝ {x = x} {y = y} p u q = transitive-sim-ℝ x y u q p
+
+step-eq-similarity-reasoning-ℝ :
+  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+  sim-ℝ x y → {l3 : Level} → (u : ℝ l2) → y ＝ u → sim-ℝ x u
+step-eq-similarity-reasoning-ℝ {x = x} {y = y} p u q = tr (sim-ℝ x) q p
+
+syntax step-similarity-reasoning-ℝ p u q = p ≈ℝ u by q
+syntax step-eq-similarity-reasoning-ℝ p u q = p ≅ℝ u by q
 ```

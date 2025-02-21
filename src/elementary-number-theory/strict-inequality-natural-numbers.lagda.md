@@ -253,6 +253,16 @@ leq-not-le-ℕ (succ-ℕ m) zero-ℕ H = star
 leq-not-le-ℕ (succ-ℕ m) (succ-ℕ n) H = leq-not-le-ℕ m n H
 ```
 
+### If `n ≰ m` then `m < n`
+
+```agda
+le-not-leq-ℕ : (m n : ℕ) → ¬ (n ≤-ℕ m) → le-ℕ m n
+le-not-leq-ℕ zero-ℕ zero-ℕ H = ex-falso (H star)
+le-not-leq-ℕ zero-ℕ (succ-ℕ n) H = star
+le-not-leq-ℕ (succ-ℕ m) zero-ℕ H = ex-falso (H star)
+le-not-leq-ℕ (succ-ℕ m) (succ-ℕ n) H = le-not-leq-ℕ m n H
+```
+
 ### If `x < y` then `x ≤ y`
 
 ```agda
@@ -280,13 +290,21 @@ leq-succ-le-ℕ zero-ℕ (succ-ℕ y) H = star
 leq-succ-le-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-succ-le-ℕ x y H
 ```
 
+### If `x + 1 ≤ y` then `x < y`
+
+```agda
+le-leq-succ-ℕ :
+  (x y : ℕ) → leq-ℕ (succ-ℕ x) y → le-ℕ x y
+le-leq-succ-ℕ zero-ℕ (succ-ℕ y) H = star
+le-leq-succ-ℕ (succ-ℕ x) (succ-ℕ y) H = le-leq-succ-ℕ x y H
+```
+
 ### If `x ≤ y` then `x < y + 1`
 
 ```agda
 le-succ-leq-ℕ :
   (x y : ℕ) → leq-ℕ x y → le-ℕ x (succ-ℕ y)
-le-succ-leq-ℕ zero-ℕ zero-ℕ H = star
-le-succ-leq-ℕ zero-ℕ (succ-ℕ y) H = star
+le-succ-leq-ℕ zero-ℕ y H = star
 le-succ-leq-ℕ (succ-ℕ x) (succ-ℕ y) H = le-succ-leq-ℕ x y H
 ```
 
