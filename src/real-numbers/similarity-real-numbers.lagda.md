@@ -60,7 +60,7 @@ module _
   where
 
   sim-lower-cut-iff-sim-ℝ :
-    sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) ↔ x ≈ℝ y
+    sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) ↔ (x ≈ℝ y)
   sim-lower-cut-iff-sim-ℝ = id-iff
 ```
 
@@ -72,7 +72,7 @@ module _
   where
 
   sim-upper-cut-iff-sim-ℝ :
-    sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) ↔ x ≈ℝ y
+    sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) ↔ (x ≈ℝ y)
   pr1 sim-upper-cut-iff-sim-ℝ = sim-lower-cut-sim-upper-cut-ℝ x y
   pr2 sim-upper-cut-iff-sim-ℝ = sim-upper-cut-sim-lower-cut-ℝ x y
 ```
@@ -135,12 +135,12 @@ infixl 0 step-eq-similarity-reasoning-ℝ
 
 similarity-reasoning-ℝ_ :
   {l : Level} → (x : ℝ l) → sim-ℝ x x
-similarity-reasoning-ℝ = refl-sim-ℝ
+similarity-reasoning-ℝ x = refl-sim-ℝ x
 
 step-similarity-reasoning-ℝ :
   {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
   sim-ℝ x y → {l3 : Level} → (u : ℝ l3) → sim-ℝ y u → sim-ℝ x u
-step-similarity-reasoning-ℝ {x = x} {y = y} p u q = transitive-sim-ℝ x y u p q
+step-similarity-reasoning-ℝ {x = x} {y = y} p u q = transitive-sim-ℝ x y u q p
 
 step-eq-similarity-reasoning-ℝ :
   {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
