@@ -89,8 +89,8 @@ module _
   asymmetric-le-ℝ : le-ℝ x y → ¬ (le-ℝ y x)
   asymmetric-le-ℝ x<y y<x =
     do
-      p , x<p , p<y ← x<y
-      q , y<q , q<x ← y<x
+      ( p , x<p , p<y) ← x<y
+      ( q , y<q , q<x) ← y<x
       rec-coproduct
         ( asymmetric-le-ℚ
             ( q)
@@ -117,8 +117,8 @@ module _
   transitive-le-ℝ : le-ℝ y z → le-ℝ x y → le-ℝ x z
   transitive-le-ℝ y<z x<y =
     do
-      p , x<p , p<y ← x<y
-      q , y<q , q<z ← y<z
+      ( p , x<p , p<y) ← x<y
+      ( q , y<q , q<z) ← y<z
       intro-exists
         ( p)
         ( x<p ,
@@ -207,7 +207,7 @@ module _
   reverses-order-neg-ℝ : le-ℝ x y → le-ℝ (neg-ℝ y) (neg-ℝ x)
   reverses-order-neg-ℝ x<y =
     do
-      p , x<p , p<y ← x<y
+      ( p , x<p , p<y) ← x<y
       intro-exists
         (neg-ℚ p)
         ( tr (is-in-lower-cut-ℝ y) (inv (neg-neg-ℚ p)) p<y ,
@@ -327,9 +327,9 @@ module _
   dense-le-ℝ : le-ℝ x y → exists (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y)
   dense-le-ℝ x<y =
     do
-      q , x<q , q<y ← x<y
-      p , p<q , x<p ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
-      r , q<r , r<y ← forward-implication (is-rounded-lower-cut-ℝ y q) q<y
+      ( q , x<q , q<y) ← x<y
+      ( p , p<q , x<p) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
+      ( r , q<r , r<y) ← forward-implication (is-rounded-lower-cut-ℝ y q) q<y
       intro-exists
         ( real-ℚ q)
         ( intro-exists p (x<p , p<q) , intro-exists r (q<r , r<y))

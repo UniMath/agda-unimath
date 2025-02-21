@@ -448,7 +448,7 @@ module _
 
 ## `do` syntax for propositional truncation { #do-syntax }
 
-[Agda's `do` syntax](https://agda.readthedocs.io/en/v2.7.0/language/syntactic-sugar.html#do-notation)
+[Agda's `do` syntax](https://agda.readthedocs.io/en/latest/language/syntactic-sugar.html#do-notation)
 is a handy tool to avoid deeply nesting calls to the same lambda-based function.
 For example, consider a case where you are trying to prove a proposition,
 `motive : Prop l`, from witnesses of propositional truncations of types `P` and
