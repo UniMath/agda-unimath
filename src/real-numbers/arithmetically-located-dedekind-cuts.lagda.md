@@ -16,13 +16,18 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-rational-numbers
 
 open import foundation.binary-transport
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -116,6 +121,73 @@ module _
                   ( q'∈U)))
             ( decide-le-leq-ℚ p p'))
         ( arithmetically-located (positive-diff-le-ℚ p q p<q))
+```
+
+### The cuts of Dedekind real numbers are arithmetically located
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  location-in-arithmetic-sequence-located-ℝ :
+    (ε : ℚ⁺) (n : ℕ) (p : ℚ) →
+    is-in-lower-cut-ℝ x p →
+    is-in-upper-cut-ℝ x (p +ℚ (rational-ℤ (int-ℕ n) *ℚ rational-ℚ⁺ ε)) →
+    exists
+      ( ℚ)
+      ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ rational-ℚ⁺ (ε +ℚ⁺ ε)))
+  location-in-arithmetic-sequence-located-ℝ ε⁺@(ε , _) zero-ℕ p p<x x<p+0ε =
+    ex-falso
+      ( is-disjoint-cut-ℝ
+        ( x)
+        ( p)
+        ( p<x ,
+          tr
+            ( is-in-upper-cut-ℝ x)
+            ( ap (p +ℚ_) (left-zero-law-mul-ℚ ε) ∙ right-unit-law-add-ℚ p)
+            ( x<p+0ε)))
+  location-in-arithmetic-sequence-located-ℝ ε⁺@(ε , _) (succ-ℕ n) p p<x x<p+nε =
+    elim-disjunction
+      ( ∃
+        ( ℚ)
+        ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ (ε +ℚ ε))))
+      ( λ p+ε<x →
+        location-in-arithmetic-sequence-located-ℝ
+          ( ε⁺)
+          ( n)
+          ( p +ℚ ε)
+          ( p+ε<x)
+          ( tr
+            ( is-in-upper-cut-ℝ x)
+            ( equational-reasoning
+              p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)
+              ＝ p +ℚ (rational-ℤ (succ-ℤ (int-ℕ n)) *ℚ ε)
+                by ap (λ m → p +ℚ (rational-ℤ m *ℚ ε)) (inv (succ-int-ℕ n))
+              ＝ p +ℚ (succ-ℚ (rational-ℤ (int-ℕ n)) *ℚ ε)
+                by ap (λ m → p +ℚ (m *ℚ ε)) (inv (succ-rational-ℤ _))
+              ＝ p +ℚ (ε +ℚ (rational-ℤ (int-ℕ n) *ℚ ε))
+                by ap (p +ℚ_) (mul-left-succ-ℚ _ _)
+              ＝ (p +ℚ ε) +ℚ rational-ℤ (int-ℕ n) *ℚ ε
+                by inv (associative-add-ℚ _ _ _))
+            ( x<p+nε)))
+      ( λ x<p+2ε →
+        intro-exists
+          ( p)
+          ( p<x ,
+            tr
+              ( is-in-upper-cut-ℝ x)
+              ( associative-add-ℚ p ε ε)
+              ( x<p+2ε)))
+      ( is-located-lower-upper-cut-ℝ
+        ( x)
+        ( p +ℚ ε)
+        ( (p +ℚ ε) +ℚ ε)
+        ( le-right-add-rational-ℚ⁺ (p +ℚ ε) ε⁺))
+
+  arithmetically-located-cuts-ℝ :
+    arithmetically-located-lower-upper-ℝ (lower-real-ℝ x) (upper-real-ℝ x)
+  arithmetically-located-cuts-ℝ = {!   !}
 ```
 
 ## References
