@@ -24,36 +24,40 @@ open import univalent-combinatorics.finite-types
 
 ```agda
 cube : ℕ → UU (lsuc lzero)
-cube k = Σ (UU-Fin lzero k) (λ X → type-UU-Fin k X → UU-Fin lzero 2)
+cube k =
+  Σ ( Type-With-Cardinality-ℕ lzero k)
+    ( λ X → type-Type-With-Cardinality-ℕ k X →
+      Type-With-Cardinality-ℕ lzero 2)
 
 module _
   (k : ℕ) (X : cube k)
   where
 
-  dim-cube-UU-Fin : UU-Fin lzero k
-  dim-cube-UU-Fin = pr1 X
+  dim-cube-Type-With-Cardinality-ℕ : Type-With-Cardinality-ℕ lzero k
+  dim-cube-Type-With-Cardinality-ℕ = pr1 X
 
   dim-cube : UU lzero
-  dim-cube = type-UU-Fin k dim-cube-UU-Fin
+  dim-cube =
+    type-Type-With-Cardinality-ℕ k dim-cube-Type-With-Cardinality-ℕ
 
-  has-cardinality-dim-cube : has-cardinality k dim-cube
-  has-cardinality-dim-cube = pr2 dim-cube-UU-Fin
+  has-cardinality-dim-cube : has-cardinality-ℕ k dim-cube
+  has-cardinality-dim-cube = pr2 dim-cube-Type-With-Cardinality-ℕ
 
   has-finite-cardinality-dim-cube : has-finite-cardinality dim-cube
   has-finite-cardinality-dim-cube =
-    pair k (pr2 dim-cube-UU-Fin)
+    pair k (pr2 dim-cube-Type-With-Cardinality-ℕ)
 
   is-finite-dim-cube : is-finite dim-cube
   is-finite-dim-cube =
     is-finite-has-finite-cardinality has-finite-cardinality-dim-cube
 
-  axis-cube-UU-2 : dim-cube → UU-Fin lzero 2
+  axis-cube-UU-2 : dim-cube → Type-With-Cardinality-ℕ lzero 2
   axis-cube-UU-2 = pr2 X
 
   axis-cube : dim-cube → UU lzero
-  axis-cube d = type-UU-Fin 2 (axis-cube-UU-2 d)
+  axis-cube d = type-Type-With-Cardinality-ℕ 2 (axis-cube-UU-2 d)
 
-  has-cardinality-axis-cube : (d : dim-cube) → has-cardinality 2 (axis-cube d)
+  has-cardinality-axis-cube : (d : dim-cube) → has-cardinality-ℕ 2 (axis-cube d)
   has-cardinality-axis-cube d = pr2 (axis-cube-UU-2 d)
 
   has-finite-cardinality-axis-cube :
@@ -63,7 +67,7 @@ module _
 
   is-finite-axis-cube : (d : dim-cube) → is-finite (axis-cube d)
   is-finite-axis-cube d =
-    is-finite-has-cardinality 2 (has-cardinality-axis-cube d)
+    is-finite-has-cardinality-ℕ 2 (has-cardinality-axis-cube d)
 
   vertex-cube : UU lzero
   vertex-cube = (d : dim-cube) → axis-cube d
@@ -72,21 +76,30 @@ module _
 ### The standard cube
 
 ```agda
-dim-standard-cube-UU-Fin : (k : ℕ) → UU-Fin lzero k
-dim-standard-cube-UU-Fin k = Fin-UU-Fin' k
+dim-standard-cube-Type-With-Cardinality-ℕ :
+  (k : ℕ) → Type-With-Cardinality-ℕ lzero k
+dim-standard-cube-Type-With-Cardinality-ℕ k =
+  Fin-Type-With-Cardinality-ℕ k
 
 dim-standard-cube : ℕ → UU lzero
-dim-standard-cube k = type-UU-Fin k (dim-standard-cube-UU-Fin k)
+dim-standard-cube k =
+  type-Type-With-Cardinality-ℕ k
+    ( dim-standard-cube-Type-With-Cardinality-ℕ k)
 
-axis-standard-cube-UU-Fin : (k : ℕ) → dim-standard-cube k → UU-Fin lzero 2
-axis-standard-cube-UU-Fin k d = Fin-UU-Fin' 2
+axis-standard-cube-Type-With-Cardinality-ℕ :
+  (k : ℕ) → dim-standard-cube k → Type-With-Cardinality-ℕ lzero 2
+axis-standard-cube-Type-With-Cardinality-ℕ k d =
+  Fin-Type-With-Cardinality-ℕ 2
 
 axis-standard-cube : (k : ℕ) → dim-standard-cube k → UU lzero
-axis-standard-cube k d = type-UU-Fin 2 (axis-standard-cube-UU-Fin k d)
+axis-standard-cube k d =
+  type-Type-With-Cardinality-ℕ 2
+    ( axis-standard-cube-Type-With-Cardinality-ℕ k d)
 
 standard-cube : (k : ℕ) → cube k
 standard-cube k =
-  pair (dim-standard-cube-UU-Fin k) (axis-standard-cube-UU-Fin k)
+  ( dim-standard-cube-Type-With-Cardinality-ℕ k) ,
+  ( axis-standard-cube-Type-With-Cardinality-ℕ k)
 
 {-
 mere-equiv-standard-cube :
@@ -106,9 +119,10 @@ face-cube :
   (k : ℕ) (X : cube (succ-ℕ k)) (d : dim-cube (succ-ℕ k) X)
   (a : axis-cube (succ-ℕ k) X d) → cube k
 pr1 (face-cube k X d a) =
-  complement-element-UU-Fin k (pair (dim-cube-UU-Fin (succ-ℕ k) X) d)
+  complement-element-Type-With-Cardinality-ℕ k
+    ( pair (dim-cube-Type-With-Cardinality-ℕ (succ-ℕ k) X) d)
 pr2 (face-cube k X d a) d' =
   axis-cube-UU-2 (succ-ℕ k) X
-    ( inclusion-complement-element-UU-Fin k
-      ( pair (dim-cube-UU-Fin (succ-ℕ k) X) d) d')
+    ( inclusion-complement-element-Type-With-Cardinality-ℕ k
+      ( pair (dim-cube-Type-With-Cardinality-ℕ (succ-ℕ k) X) d) d')
 ```
