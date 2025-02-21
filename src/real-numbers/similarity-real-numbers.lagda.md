@@ -24,7 +24,6 @@ open import order-theory.large-posets
 open import order-theory.similarity-of-elements-large-posets
 
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.rational-real-numbers
 ```
 
 </details>
@@ -80,6 +79,9 @@ module _
 ```agda
 refl-sim-ℝ : {l : Level} → (x : ℝ l) → sim-ℝ x x
 refl-sim-ℝ x = refl-sim-subtype (lower-cut-ℝ x)
+
+sim-eq-ℝ : {l : Level} → {x y : ℝ l} → x ＝ y → sim-ℝ x y
+sim-eq-ℝ {_} {x} {y} x=y = tr (sim-ℝ x) x=y (refl-sim-ℝ x)
 ```
 
 ### Symmetry
@@ -106,26 +108,4 @@ transitive-sim-ℝ x y z =
 ```agda
 eq-sim-ℝ : {l : Level} → (x y : ℝ l) → sim-ℝ x y → x ＝ y
 eq-sim-ℝ x y H = eq-eq-lower-cut-ℝ x y (antisymmetric-sim-subtype _ _ H)
-```
-
-### A rational real is similar to the canonical projection of its rational
-
-```agda
-sim-rational-ℝ :
-  {l : Level} →
-  (x : Rational-ℝ l) →
-  sim-ℝ (real-rational-ℝ x) (real-ℚ (rational-rational-ℝ x))
-pr1 (sim-rational-ℝ (x , q , q∉lx , q∉ux)) p p∈lx =
-  trichotomy-le-ℚ
-    ( p)
-    ( q)
-    ( id)
-    ( λ p=q → ex-falso (q∉lx (tr (is-in-lower-cut-ℝ x) p=q p∈lx)))
-    ( λ q<p → ex-falso (q∉lx (le-lower-cut-ℝ x q p q<p p∈lx)))
-pr2 (sim-rational-ℝ (x , q , q∉lx , q∉ux)) p p<q =
-  elim-disjunction
-    ( lower-cut-ℝ x p)
-    ( id)
-    ( ex-falso ∘ q∉ux)
-    ( is-located-lower-upper-cut-ℝ x p q p<q)
 ```

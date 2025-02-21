@@ -274,27 +274,55 @@ module _
       ( preserves-sim-right-add-ℝ x≈y)
 ```
 
-### Addition and subtraction on the right cancel out
-
-DO NOT SUBMIT: I don't know what to call this, because the usual notions of
-equivalences, retractions, etc. don't work for similarity.
+### Swapping laws for addition on real numbers
 
 ```agda
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  abstract
+    right-swap-add-ℝ :
+      (x +ℝ y) +ℝ z ＝ (x +ℝ z) +ℝ y
+    right-swap-add-ℝ =
+      equational-reasoning
+        (x +ℝ y) +ℝ z
+        ＝ x +ℝ (y +ℝ z) by associative-add-ℝ x y z
+        ＝ x +ℝ (z +ℝ y) by ap (x +ℝ_) (commutative-add-ℝ y z)
+        ＝ (x +ℝ z) +ℝ y by inv (associative-add-ℝ x z y)
+    left-swap-add-ℝ :
+      x +ℝ (y +ℝ z) ＝ y +ℝ (x +ℝ z)
+    left-swap-add-ℝ =
+      equational-reasoning
+        x +ℝ (y +ℝ z)
+        ＝ (x +ℝ y) +ℝ z by inv (associative-add-ℝ x y z)
+        ＝ (y +ℝ x) +ℝ z by ap (_+ℝ z) (commutative-add-ℝ x y)
+        ＝ y +ℝ (x +ℝ z) by associative-add-ℝ y x z
+
 module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  cancel-right-add-ℝ : sim-ℝ ((x +ℝ y) +ℝ neg-ℝ y) x
-  cancel-right-add-ℝ =
-    binary-tr
-      ( sim-ℝ)
-      ( inv (associative-add-ℝ x y (neg-ℝ y)))
-      ( right-unit-law-add-ℝ x)
-      ( preserves-sim-left-add-ℝ
-        ( x)
-        ( y +ℝ neg-ℝ y)
-        ( zero-ℝ)
-        ( right-inverse-law-add-ℝ y))
+  abstract
+    cancel-right-diff-add-ℝ : sim-ℝ ((x +ℝ y) +ℝ neg-ℝ y) x
+    cancel-right-diff-add-ℝ =
+      binary-tr
+        ( sim-ℝ)
+        ( inv (associative-add-ℝ x y (neg-ℝ y)))
+        ( right-unit-law-add-ℝ x)
+        ( preserves-sim-left-add-ℝ
+          ( x)
+          ( y +ℝ neg-ℝ y)
+          ( zero-ℝ)
+          ( right-inverse-law-add-ℝ y))
+
+    cancel-right-add-diff-ℝ : sim-ℝ ((x +ℝ neg-ℝ y) +ℝ y) x
+    cancel-right-add-diff-ℝ =
+      tr
+        ( λ z → sim-ℝ z x)
+        ( right-swap-add-ℝ x y (neg-ℝ y))
+        ( cancel-right-diff-add-ℝ)
+
 ```
 
 ### Addition reflects similarity
@@ -315,9 +343,9 @@ module _
         ( (x +ℝ z) +ℝ neg-ℝ z)
         ( (y +ℝ z) +ℝ neg-ℝ z)
         ( y)
-        ( cancel-right-add-ℝ y z)
+        ( cancel-right-diff-add-ℝ y z)
         ( preserves-sim-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≈y+z))
-      ( symmetric-sim-ℝ ((x +ℝ z) +ℝ neg-ℝ z) x (cancel-right-add-ℝ x z))
+      ( symmetric-sim-ℝ ((x +ℝ z) +ℝ neg-ℝ z) x (cancel-right-diff-add-ℝ x z))
 
   reflects-sim-left-add-ℝ : sim-ℝ (z +ℝ x) (z +ℝ y) → sim-ℝ x y
   reflects-sim-left-add-ℝ z+x≈z+y =
@@ -368,4 +396,93 @@ abstract
                   ( le-ℚ (p +ℚ q))
                   ( p+q=pu+qu)
                   ( preserves-le-add-ℚ {p} {pu} {q} {qu} p<pu q<qu)))))
+
+abstract
+  combine-right-add-two-real-ℚ :
+    {l : Level} → (x : ℝ l) → (p q : ℚ) →
+    x +ℝ real-ℚ p +ℝ real-ℚ q ＝ x +ℝ real-ℚ (p +ℚ q)
+  combine-right-add-two-real-ℚ x p q =
+    equational-reasoning
+      x +ℝ real-ℚ p +ℝ real-ℚ q
+      ＝ x +ℝ (real-ℚ p +ℝ real-ℚ q) by associative-add-ℝ _ _ _
+      ＝ x +ℝ real-ℚ (p +ℚ q) by ap (x +ℝ_) (add-real-ℚ p q)
+```
+
+### Interchange laws for addition on real numbers
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) (w : ℝ l4)
+  where
+
+  interchange-law-add-add-ℝ : (x +ℝ y) +ℝ (z +ℝ w) ＝ (x +ℝ z) +ℝ (y +ℝ w)
+  interchange-law-add-add-ℝ =
+    equational-reasoning
+      (x +ℝ y) +ℝ (z +ℝ w)
+      ＝ x +ℝ (y +ℝ (z +ℝ w)) by associative-add-ℝ _ _ _
+      ＝ x +ℝ (z +ℝ (y +ℝ w)) by ap (x +ℝ_) (left-swap-add-ℝ y z w)
+      ＝ (x +ℝ z) +ℝ (y +ℝ w) by inv (associative-add-ℝ x z (y +ℝ w))
+```
+
+### Negation is distributive across addition
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  abstract
+    distributive-neg-add-ℝ : neg-ℝ (x +ℝ y) ＝ neg-ℝ x +ℝ neg-ℝ y
+    distributive-neg-add-ℝ =
+      equational-reasoning
+        neg-ℝ (x +ℝ y)
+        ＝ neg-ℝ (x +ℝ y) +ℝ zero-ℝ by inv (right-unit-law-add-ℝ _)
+        ＝ neg-ℝ (x +ℝ y) +ℝ (x +ℝ neg-ℝ x)
+          by
+            eq-sim-ℝ
+              ( neg-ℝ (x +ℝ y) +ℝ zero-ℝ)
+              ( neg-ℝ (x +ℝ y) +ℝ (x +ℝ neg-ℝ x))
+              ( preserves-sim-left-add-ℝ
+                ( neg-ℝ (x +ℝ y))
+                ( zero-ℝ)
+                ( x +ℝ neg-ℝ x)
+                ( symmetric-sim-ℝ
+                  ( x +ℝ neg-ℝ x)
+                  ( zero-ℝ)
+                  ( right-inverse-law-add-ℝ x)))
+        ＝ neg-ℝ (x +ℝ y) +ℝ (x +ℝ neg-ℝ x) +ℝ zero-ℝ
+          by inv (right-unit-law-add-ℝ _)
+        ＝ neg-ℝ (x +ℝ y) +ℝ (x +ℝ neg-ℝ x) +ℝ (y +ℝ neg-ℝ y)
+          by
+            eq-sim-ℝ
+              _
+              _
+              ( preserves-sim-left-add-ℝ
+                ( neg-ℝ (x +ℝ y) +ℝ (x +ℝ neg-ℝ x))
+                ( zero-ℝ)
+                ( y +ℝ neg-ℝ y)
+                ( symmetric-sim-ℝ
+                  ( y +ℝ neg-ℝ y)
+                  ( zero-ℝ)
+                  ( right-inverse-law-add-ℝ y)))
+        ＝ neg-ℝ (x +ℝ y) +ℝ ((x +ℝ neg-ℝ x) +ℝ (y +ℝ neg-ℝ y))
+          by associative-add-ℝ _ _ _
+        ＝ neg-ℝ (x +ℝ y) +ℝ ((x +ℝ y) +ℝ (neg-ℝ x +ℝ neg-ℝ y))
+          by
+            ap
+              ( neg-ℝ (x +ℝ y) +ℝ_)
+              ( interchange-law-add-add-ℝ x (neg-ℝ x) y (neg-ℝ y))
+        ＝ (neg-ℝ (x +ℝ y) +ℝ (x +ℝ y)) +ℝ (neg-ℝ x +ℝ neg-ℝ y)
+          by inv (associative-add-ℝ _ _ _)
+        ＝ zero-ℝ +ℝ (neg-ℝ x +ℝ neg-ℝ y)
+          by
+            eq-sim-ℝ
+              _
+              _
+              ( preserves-sim-right-add-ℝ
+                ( neg-ℝ x +ℝ neg-ℝ y)
+                ( neg-ℝ (x +ℝ y) +ℝ (x +ℝ y))
+                ( zero-ℝ)
+                ( left-inverse-law-add-ℝ (x +ℝ y)))
+        ＝ neg-ℝ x +ℝ neg-ℝ y by left-unit-law-add-ℝ _
 ```
