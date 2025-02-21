@@ -133,11 +133,7 @@ module _
                   ( neg-ℚ ε)
                   ( neg-le-ℚ ε (q -ℚ p) ε<q-p)))
               ( y<py) ,
-            inv
-              ( is-identity-right-conjugation-Ab
-                ( abelian-group-add-ℚ)
-                ( px +ℚ ε)
-                ( q)))
+            inv ( is-identity-right-conjugation-add-ℚ (px +ℚ ε) q))
       where open do-syntax-trunc-Prop (cut-add-upper-ℝ q)
 
   add-upper-ℝ : upper-ℝ (l1 ⊔ l2)
