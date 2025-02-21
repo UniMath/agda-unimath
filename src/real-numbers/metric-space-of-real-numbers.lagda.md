@@ -776,6 +776,8 @@ module _
                     xε -ℝ real-ℚ (ε +ℚ θ₂) -ℝ real-ℚ θ₂
                     ＝ xε +ℝ (neg-ℝ (real-ℚ (ε +ℚ θ₂)) -ℝ real-ℚ θ₂)
                       by associative-add-ℝ _ _ _
+                    ＝ xε -ℝ (real-ℚ (ε +ℚ θ₂) +ℝ real-ℚ θ₂)
+                      by ap (xε +ℝ_) (inv (distributive-neg-add-ℝ
                     ＝ {!   !} by {!   !})
                   ( le-upper-cut-real-ℚ
                     ( q)
