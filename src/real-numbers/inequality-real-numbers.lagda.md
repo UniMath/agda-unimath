@@ -22,6 +22,8 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.action-on-identifications-functions
+open import foundation.transport-along-identifications
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -42,6 +44,7 @@ open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 ```
 
 </details>
@@ -253,8 +256,8 @@ module _
       ( x)
       ( (y +ℝ z) +ℝ neg-ℝ z)
       ( y)
-      ( cancel-right-subtract-add-ℝ x z)
-      ( cancel-right-subtract-add-ℝ y z)
+      ( cancel-right-diff-add-ℝ x z)
+      ( cancel-right-diff-add-ℝ y z)
       ( preserves-leq-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≤y+z)
 
   reflects-leq-left-add-ℝ : leq-ℝ (z +ℝ x) (z +ℝ y) → leq-ℝ x y
@@ -274,6 +277,52 @@ module _
   iff-leq-left-add-ℝ : leq-ℝ x y ↔ leq-ℝ (z +ℝ x) (z +ℝ y)
   pr1 iff-leq-left-add-ℝ = preserves-leq-left-add-ℝ z x y
   pr2 iff-leq-left-add-ℝ = reflects-leq-left-add-ℝ z x y
+```
+
+### Negation reverses the ordering of inequality on real numbers
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  neg-leq-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ y) (neg-ℝ x)
+  neg-leq-ℝ x≤y p = forward-implication (leq-iff-ℝ' x y) x≤y (neg-ℚ p)
+```
+
+### `x + y ≤ z` if and only if `x ≤ y - z`
+
+```agda
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  iff-diff-right-leq-ℝ : leq-ℝ (x +ℝ y) z ↔ leq-ℝ x (z -ℝ y)
+  pr1 iff-diff-right-leq-ℝ x+y<z =
+    preserves-leq-left-sim-ℝ
+      ( z -ℝ y)
+      ( (x +ℝ y) -ℝ y)
+      ( x)
+      ( cancel-right-diff-add-ℝ x y)
+      ( preserves-leq-right-add-ℝ (neg-ℝ y) (x +ℝ y) z x+y<z)
+  pr2 iff-diff-right-leq-ℝ x<z-y =
+    preserves-leq-right-sim-ℝ
+      ( x +ℝ y)
+      ( (z -ℝ y) +ℝ y)
+      ( z)
+      ( cancel-right-add-diff-ℝ z y)
+      ( preserves-leq-right-add-ℝ y x (z -ℝ y) x<z-y)
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  iff-add-right-leq-ℝ : leq-ℝ (x -ℝ y) z ↔ leq-ℝ x (z +ℝ y)
+  iff-add-right-leq-ℝ =
+    tr
+      ( λ w → leq-ℝ (x -ℝ y) z ↔ leq-ℝ x (z +ℝ w))
+      ( neg-neg-ℝ y)
+      ( iff-diff-right-leq-ℝ x (neg-ℝ y) z)
 ```
 
 ## References

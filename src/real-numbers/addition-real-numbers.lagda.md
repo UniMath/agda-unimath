@@ -293,8 +293,8 @@ module _
   where
 
   abstract
-    cancel-right-subtract-add-ℝ : sim-ℝ ((x +ℝ y) +ℝ neg-ℝ y) x
-    cancel-right-subtract-add-ℝ =
+    cancel-right-diff-add-ℝ : sim-ℝ ((x +ℝ y) +ℝ neg-ℝ y) x
+    cancel-right-diff-add-ℝ =
       binary-tr
         ( sim-ℝ)
         ( inv (associative-add-ℝ x y (neg-ℝ y)))
@@ -305,12 +305,12 @@ module _
           ( zero-ℝ)
           ( right-inverse-law-add-ℝ y))
 
-    cancel-right-add-subtract-ℝ : sim-ℝ ((x +ℝ neg-ℝ y) +ℝ y) x
-    cancel-right-add-subtract-ℝ =
+    cancel-right-add-diff-ℝ : sim-ℝ ((x +ℝ neg-ℝ y) +ℝ y) x
+    cancel-right-add-diff-ℝ =
       tr
         ( λ z → sim-ℝ z x)
         ( right-swap-add-ℝ x y (neg-ℝ y))
-        ( cancel-right-subtract-add-ℝ)
+        ( cancel-right-diff-add-ℝ)
 
 ```
 
@@ -332,9 +332,9 @@ module _
         ( (x +ℝ z) +ℝ neg-ℝ z)
         ( (y +ℝ z) +ℝ neg-ℝ z)
         ( y)
-        ( cancel-right-subtract-add-ℝ y z)
+        ( cancel-right-diff-add-ℝ y z)
         ( preserves-sim-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≈y+z))
-      ( symmetric-sim-ℝ ((x +ℝ z) +ℝ neg-ℝ z) x (cancel-right-subtract-add-ℝ x z))
+      ( symmetric-sim-ℝ ((x +ℝ z) +ℝ neg-ℝ z) x (cancel-right-diff-add-ℝ x z))
 
   reflects-sim-left-add-ℝ : sim-ℝ (z +ℝ x) (z +ℝ y) → sim-ℝ x y
   reflects-sim-left-add-ℝ z+x≈z+y =
@@ -385,4 +385,14 @@ abstract
                   ( le-ℚ (p +ℚ q))
                   ( p+q=pu+qu)
                   ( preserves-le-add-ℚ {p} {pu} {q} {qu} p<pu q<qu)))))
+
+abstract
+  combine-right-add-two-real-ℚ :
+    {l : Level} → (x : ℝ l) → (p q : ℚ) →
+    x +ℝ real-ℚ p +ℝ real-ℚ q ＝ x +ℝ real-ℚ (p +ℚ q)
+  combine-right-add-two-real-ℚ x p q =
+    equational-reasoning
+      x +ℝ real-ℚ p +ℝ real-ℚ q
+      ＝ x +ℝ (real-ℚ p +ℝ real-ℚ q) by associative-add-ℝ _ _ _
+      ＝ x +ℝ real-ℚ (p +ℚ q) by ap (x +ℝ_) (add-real-ℚ p q)
 ```

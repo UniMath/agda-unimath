@@ -40,6 +40,7 @@ open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.rational-lower-dedekind-real-numbers
 open import real-numbers.rational-upper-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.similarity-real-numbers
 ```
 
 </details>
@@ -230,4 +231,26 @@ pr2 equiv-rational-real =
   retraction-rational-rational-ℝ : retraction rational-rational-ℝ
   retraction-rational-rational-ℝ =
     (rational-real-ℚ , is-retraction-rational-real-ℚ)
+```
+
+### A rational real is similar to the canonical projection of its rational
+
+```agda
+sim-rational-ℝ :
+  {l : Level} →
+  (x : Rational-ℝ l) →
+  sim-ℝ (real-rational-ℝ x) (real-ℚ (rational-rational-ℝ x))
+pr1 (sim-rational-ℝ (x , q , q∉lx , q∉ux)) p p∈lx =
+  trichotomy-le-ℚ
+    ( p)
+    ( q)
+    ( id)
+    ( λ p=q → ex-falso (q∉lx (tr (is-in-lower-cut-ℝ x) p=q p∈lx)))
+    ( λ q<p → ex-falso (q∉lx (le-lower-cut-ℝ x q p q<p p∈lx)))
+pr2 (sim-rational-ℝ (x , q , q∉lx , q∉ux)) p p<q =
+  elim-disjunction
+    ( lower-cut-ℝ x p)
+    ( id)
+    ( ex-falso ∘ q∉ux)
+    ( is-located-lower-upper-cut-ℝ x p q p<q)
 ```
