@@ -24,6 +24,7 @@ open import elementary-number-theory.archimedean-property-rational-numbers
 open import foundation.binary-transport
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.propositions
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -70,14 +71,20 @@ module _
   {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
   where
 
-  arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
-  arithmetically-located-lower-upper-ℝ =
-    (ε⁺ : ℚ⁺) →
-    exists
-      ( ℚ × ℚ)
-      ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
-        cut-lower-ℝ x p ∧
-        cut-upper-ℝ y q)
+  arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
+  arithmetically-located-prop-lower-upper-ℝ =
+    Π-Prop
+      ( ℚ⁺)
+      ( λ ε⁺ →
+        ∃
+          ( ℚ × ℚ)
+          ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
+            cut-lower-ℝ x p ∧
+            cut-upper-ℝ y q))
+
+  is-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
+  is-arithmetically-located-lower-upper-ℝ =
+    type-Prop arithmetically-located-prop-lower-upper-ℝ
 ```
 
 ## Properties
@@ -94,7 +101,7 @@ module _
 
   abstract
     is-located-is-arithmetically-located-lower-upper-ℝ :
-      arithmetically-located-lower-upper-ℝ x y →
+      is-arithmetically-located-lower-upper-ℝ x y →
       is-located-lower-upper-ℝ x y
     is-located-is-arithmetically-located-lower-upper-ℝ
       arithmetically-located p q p<q =
@@ -187,9 +194,9 @@ module _
         ( (p +ℚ ε) +ℚ ε)
         ( le-right-add-rational-ℚ⁺ (p +ℚ ε) ε⁺))
 
-  arithmetically-located-cuts-ℝ :
-    arithmetically-located-lower-upper-ℝ (lower-real-ℝ x) (upper-real-ℝ x)
-  arithmetically-located-cuts-ℝ ε⁺@(ε , _)=
+  is-arithmetically-located-ℝ :
+    is-arithmetically-located-lower-upper-ℝ (lower-real-ℝ x) (upper-real-ℝ x)
+  is-arithmetically-located-ℝ ε⁺@(ε , _)=
     do
       ε'⁺@(ε' , pos-ε') , 2ε'<ε ← double-le-ℚ⁺ ε⁺
       p , p<x ← is-inhabited-lower-cut-ℝ x
