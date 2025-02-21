@@ -218,10 +218,6 @@ module _
                 ( r , q -ℚ r)
                 ( x<r ,
                   backward-implication (iff-translate-diff-le-zero-ℚ r q) r<q ,
-                  inv
-                    ( is-identity-right-conjugation-Ab
-                      ( abelian-group-add-ℚ)
-                      ( r)
-                      ( q))))
+                  inv (is-identity-right-conjugation-add-ℚ r q)))
             ( forward-implication (is-rounded-cut-upper-ℝ x q) x<q)))
 ```
