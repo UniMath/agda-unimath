@@ -42,8 +42,6 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.groups
-
 open import order-theory.posets
 open import order-theory.preorders
 open import order-theory.transposition-inequalities-along-sections-of-order-preserving-maps-posets
@@ -364,7 +362,7 @@ leq-transpose-right-diff-ℚ x y z x≤y-z =
     ( ℚ-Poset)
     ( right-add-hom-leq-ℚ z)
     ( _-ℚ z)
-    ( is-section-right-div-Group group-add-ℚ z)
+    ( is-section-diff-ℚ z)
     ( x)
     ( y)
     ( x≤y-z)
@@ -376,7 +374,7 @@ leq-transpose-right-add-ℚ x y z x≤y+z =
     ( ℚ-Poset)
     ( right-add-hom-leq-ℚ (neg-ℚ z))
     ( _+ℚ z)
-    ( is-retraction-right-div-Group group-add-ℚ z)
+    ( is-retraction-diff-ℚ z)
     ( x)
     ( y)
     ( x≤y+z)
@@ -388,7 +386,7 @@ leq-transpose-left-add-ℚ x y z x+y≤z =
     ( ℚ-Poset)
     ( _+ℚ y)
     ( right-add-hom-leq-ℚ (neg-ℚ y))
-    ( is-retraction-right-div-Group group-add-ℚ y)
+    ( is-retraction-diff-ℚ y)
     ( x)
     ( z)
     ( x+y≤z)
@@ -400,7 +398,7 @@ leq-transpose-left-diff-ℚ x y z x-y≤z =
     ( ℚ-Poset)
     ( _-ℚ y)
     ( right-add-hom-leq-ℚ y)
-    ( is-section-right-div-Group group-add-ℚ y)
+    ( is-section-diff-ℚ y)
     ( x)
     ( z)
     ( x-y≤z)
