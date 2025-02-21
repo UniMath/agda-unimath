@@ -8,6 +8,9 @@ module order-theory.transposition-inequalities-along-sections-of-order-preservin
 
 ```agda
 open import foundation.universe-levels
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.transport-along-identifications
 open import foundation.sections
 open import foundation.identity-types
 
@@ -28,3 +31,22 @@ x ≤ g y → f x ≤ y
 ```
 
 indexed by `x : type-Poset P` and `y : type-Poset Q`.
+
+## Definition
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
+  (f : hom-Poset P Q)
+  (g : type-Poset Q → type-Poset P)
+  where
+
+  leq-transpose-is-section-hom-Poset :
+    (map-hom-Poset P Q f ∘ g ~ id) → {x : type-Poset P} {y : type-Poset Q} →
+    leq-Poset P x (g y) → leq-Poset Q (map-hom-Poset P Q f x) y
+  leq-transpose-is-section-hom-Poset f-section-g {x} {y} x≤gy =
+    tr
+      ( leq-Poset Q (map-hom-Poset P Q f x))
+      ( f-section-g y)
+      ( preserves-order-hom-Poset P Q f x (g y) x≤gy)
+```
