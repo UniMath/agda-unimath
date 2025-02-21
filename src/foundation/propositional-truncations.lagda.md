@@ -490,39 +490,6 @@ do
 where open do-syntax-trunc-Prop motive
 ```
 
-Since Agda's `do` syntax desugars to calls to `>>=`, this is syntactic sugar for
-
-```text
-witness-truncated-prop-P >>=
-  ( λ p → witness-truncated-prop-Q p >>=
-    ( λ q → witness-motive-P-Q p q))
-```
-
-which, inlining the definition of `>>=`, becomes exactly the chain of
-`rec-trunc-Prop` used above.
-
-To read the `do` syntax, it may help to go through each line:
-
-1. `do` indicates that we will be using Agda's syntactic sugar for the `>>=`
-   function defined in the `do-syntax-trunc-Prop` module.
-1. You can read the `p ← witness-truncated-prop-P` as an _instruction_ saying,
-   "Get the value `p` out of the witness of `trunc-Prop P`." We cannot extract
-   elements out of witnesses of propositionally truncated types, but since we're
-   eliminating into a proposition, the universal property of the truncation
-   allows us to lift a map from the untruncated type to a map from its
-   truncation.
-1. `q ← witness-truncated-prop-Q p` says, "Get the value `q` out of the witness
-   for the truncation `witness-truncated-prop-Q p`" --- noticing that we can
-   make use of `p : P` in that line.
-1. `witness-motive-P-Q p q` must give us a witness of `motive` --- that is, a
-   value of type `type-Prop motive` --- from `p` and `q`.
-1. `where open do-syntax-trunc-Prop motive` is required to allow us to use the
-   `do` syntax.
-
-The result of the entire `do` block is the value of type `type-Prop motive`,
-which is internally constructed with an appropriate chain of `rec-trunc-Prop`
-from the intermediate steps.
-
 ## Table of files about propositional logic
 
 The following table gives an overview of basic constructions in propositional
