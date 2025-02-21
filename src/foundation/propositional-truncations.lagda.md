@@ -448,9 +448,8 @@ module _
 
 ## `do` syntax for propositional truncation { #do-syntax }
 
-Consider a case where you are trying to prove a proposition,
-`motive : Prop l`, from witnesses of propositional truncations of types `P` and
-`Q`:
+Consider a case where you are trying to prove a proposition, `motive : Prop l`,
+from witnesses of propositional truncations of types `P` and `Q`:
 
 ```text
 rec-trunc-Prop
@@ -463,7 +462,8 @@ rec-trunc-Prop
   ( witness-truncated-prop-P)
 ```
 
-We can rewrite this using [Agda's `do` syntax](https://agda.readthedocs.io/en/latest/language/syntactic-sugar.html#do-notation)
+We can rewrite this using
+[Agda's `do` syntax](https://agda.readthedocs.io/en/latest/language/syntactic-sugar.html#do-notation)
 with the module
 
 ```agda
