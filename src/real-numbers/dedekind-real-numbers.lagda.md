@@ -420,7 +420,7 @@ module _
   eq-lower-cut-eq-upper-cut-ℝ :
     upper-cut-ℝ x ＝ upper-cut-ℝ y → lower-cut-ℝ x ＝ lower-cut-ℝ y
   eq-lower-cut-eq-upper-cut-ℝ H =
-    antisymmetric-sim-subtype
+    eq-sim-subtype
       ( lower-cut-ℝ x)
       ( lower-cut-ℝ y)
       ( sim-lower-cut-sim-upper-cut-ℝ
