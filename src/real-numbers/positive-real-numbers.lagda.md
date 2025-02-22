@@ -103,7 +103,6 @@ module _
       ( λ (p , pos-p) p<x →
         intro-exists p (le-zero-is-positive-ℚ p pos-p , p<x))
 
-
 exists-ℚ⁺-in-lower-cut-ℝ⁺ :
   {l : Level} → (x : ℝ⁺ l) →
   exists ℚ⁺ (λ p → lower-cut-ℝ (real-ℝ⁺ x) (rational-ℚ⁺ p))

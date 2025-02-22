@@ -153,8 +153,8 @@ module _
     transitive-le-ℝ : le-ℝ y z → le-ℝ x y → le-ℝ x z
     transitive-le-ℝ y<z x<y =
       do
-        ( p , x<p , p<y ) ← x<y
-        ( q , y<q , q<z ) ← y<z
+        ( p , x<p , p<y) ← x<y
+        ( q , y<q , q<z) ← y<z
         intro-exists
           ( p)
           ( x<p ,
@@ -261,14 +261,14 @@ module _
     exists-lesser-ℝ : exists (ℝ lzero) (λ y → le-ℝ-Prop y x)
     exists-lesser-ℝ =
       do
-        ( q , q<x ) ← is-inhabited-lower-cut-ℝ x
+        ( q , q<x) ← is-inhabited-lower-cut-ℝ x
         intro-exists (real-ℚ q) (le-lower-cut-real-ℚ q x q<x)
       where open do-syntax-trunc-Prop (∃ (ℝ lzero) (λ y → le-ℝ-Prop y x))
 
     exists-greater-ℝ : exists (ℝ lzero) (λ y → le-ℝ-Prop x y)
     exists-greater-ℝ =
       do
-        ( q , x<q ) ← is-inhabited-upper-cut-ℝ x
+        ( q , x<q) ← is-inhabited-upper-cut-ℝ x
         intro-exists (real-ℚ q) (le-upper-cut-real-ℚ q x x<q)
       where open do-syntax-trunc-Prop (∃ (ℝ lzero) (le-ℝ-Prop x))
 ```
@@ -321,7 +321,7 @@ module _
     leq-not-le-ℝ : ¬ (le-ℝ x y) → leq-ℝ y x
     leq-not-le-ℝ x≮y p p<y =
       do
-        ( q , p<q , q<y ) ←
+        ( q , p<q , q<y) ←
           forward-implication (is-rounded-lower-cut-ℝ y p) p<y
         elim-disjunction
           ( lower-cut-ℝ x p)
@@ -368,9 +368,9 @@ module _
       le-ℝ x y → exists (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y)
     dense-le-ℝ x<y =
       do
-        ( q , x<q , q<y ) ← x<y
-        ( p , p<q , x<p ) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
-        ( r , q<r , r<y ) ← forward-implication (is-rounded-lower-cut-ℝ y q) q<y
+        ( q , x<q , q<y) ← x<y
+        ( p , p<q , x<p) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
+        ( r , q<r , r<y) ← forward-implication (is-rounded-lower-cut-ℝ y q) q<y
         intro-exists
           ( real-ℚ q)
           ( intro-exists p (x<p , p<q) , intro-exists r (q<r , r<y))
@@ -387,8 +387,8 @@ abstract
   cotransitive-le-ℝ : is-cotransitive-Large-Relation-Prop ℝ le-ℝ-Prop
   cotransitive-le-ℝ x y z x<y =
     do
-      ( q , x<q , q<y ) ← x<y
-      ( p , p<q , x<p ) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
+      ( q , x<q , q<y) ← x<y
+      ( p , p<q , x<p) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
       elim-disjunction
         ( le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
         ( λ p<z → inl-disjunction (intro-exists p (x<p , p<z)))
@@ -446,9 +446,9 @@ module _
     preserves-le-right-add-ℝ : le-ℝ x y → le-ℝ (x +ℝ z) (y +ℝ z)
     preserves-le-right-add-ℝ x<y =
       do
-        ( p , x<p , p<y ) ← x<y
-        ( q , p<q , q<y ) ← forward-implication (is-rounded-lower-cut-ℝ y p) p<y
-        ( (r , s) , s<r+q-p , r<z , z<s ) ←
+        ( p , x<p , p<y) ← x<y
+        ( q , p<q , q<y) ← forward-implication (is-rounded-lower-cut-ℝ y p) p<y
+        ( (r , s) , s<r+q-p , r<z , z<s) ←
           is-arithmetically-located-ℝ
             ( z)
             ( positive-diff-le-ℚ p q p<q)

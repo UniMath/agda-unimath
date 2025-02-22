@@ -17,14 +17,14 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.conjunction
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.diagonal-maps-cartesian-products-of-types
+open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -41,8 +41,12 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.groups
 
+open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.complete-metric-spaces
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
@@ -54,21 +58,17 @@ open import metric-spaces.reflexive-premetric-structures
 open import metric-spaces.saturated-metric-spaces
 open import metric-spaces.symmetric-premetric-structures
 open import metric-spaces.triangular-premetric-structures
-open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.complete-metric-spaces
-open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
 
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.rational-real-numbers
 open import real-numbers.addition-real-numbers
-open import real-numbers.similarity-real-numbers
-open import real-numbers.inequality-real-numbers
-open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
-open import real-numbers.positive-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.positive-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
@@ -665,7 +665,7 @@ module _
         xε = map-cauchy-approximation-leq-ℝ x ε⁺
         θ'⁺@(θ' , _) = left-summand-split-ℚ⁺ θ⁺
         θ''⁺@(θ'' , _) = right-summand-split-ℚ⁺ θ⁺
-      ( r , xε+ε+θ'<r , r<xε+ε+θ ) ←
+      ( r , xε+ε+θ'<r , r<xε+ε+θ) ←
         tr
           ( le-ℝ (xε +ℝ real-ℚ (ε +ℚ θ')))
           ( equational-reasoning
@@ -682,7 +682,7 @@ module _
           ( le-left-add-real-ℝ⁺
             ( xε +ℝ (real-ℚ (ε +ℚ θ')))
             ( positive-real-ℚ⁺ θ''⁺))
-      ( q , xε-ε-θ<q , q<xε-ε-θ' ) ←
+      ( q , xε-ε-θ<q , q<xε-ε-θ') ←
         tr
           ( λ y → le-ℝ y (xε -ℝ real-ℚ (ε +ℚ θ')))
           ( equational-reasoning
