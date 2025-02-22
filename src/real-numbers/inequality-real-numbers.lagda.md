@@ -11,6 +11,7 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.complements-subtypes
 open import foundation.coproduct-types
@@ -22,9 +23,8 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
-open import foundation.action-on-identifications-functions
-open import foundation.transport-along-identifications
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
@@ -36,6 +36,7 @@ open import order-theory.preorders
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-lower-dedekind-real-numbers
 open import real-numbers.inequality-upper-dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
@@ -44,7 +45,6 @@ open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
-open import real-numbers.difference-real-numbers
 ```
 
 </details>
@@ -86,7 +86,7 @@ module _
   leq-ℝ' = type-Prop leq-ℝ-Prop'
 
   leq-iff-ℝ' : leq-ℝ x y ↔ leq-ℝ'
-  pr1 (leq-iff-ℝ') lx⊆ly q q-in-uy =
+  pr1 leq-iff-ℝ' x≤y q y<q =
     elim-exists
       ( upper-cut-ℝ x q)
       ( λ p (p<q , p≮y) →
@@ -99,11 +99,11 @@ module _
               reverses-order-complement-subtype
                 ( lower-cut-ℝ x)
                 ( lower-cut-ℝ y)
-                ( lx⊆ly)
+                ( x≤y)
                 ( p)
                 ( p≮y))))
-      ( subset-upper-complement-lower-cut-upper-cut-ℝ y q q-in-uy)
-  pr2 leq-iff-ℝ' uy⊆ux p p-in-lx =
+      ( subset-upper-complement-lower-cut-upper-cut-ℝ y q y<q)
+  pr2 leq-iff-ℝ' uy⊆ux p p<x =
     elim-exists
       ( lower-cut-ℝ y p)
       ( λ q (p<q , x≮q) →
@@ -119,7 +119,7 @@ module _
                 ( uy⊆ux)
                 ( q)
                 ( x≮q))))
-      ( subset-lower-complement-upper-cut-lower-cut-ℝ x p p-in-lx)
+      ( subset-lower-complement-upper-cut-lower-cut-ℝ x p p<x)
 ```
 
 ### Inequality on the real numbers is reflexive
@@ -201,19 +201,22 @@ iff-leq-real-ℚ = iff-leq-lower-real-ℚ
 ```agda
 module _
   {l1 l2 l3 : Level}
-  (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) (x≈y : sim-ℝ x y)
+  (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) (x~y : sim-ℝ x y)
   where
 
-  preserves-leq-left-sim-ℝ : leq-ℝ x z → leq-ℝ y z
-  preserves-leq-left-sim-ℝ lx⊆lz q q<y = lx⊆lz q (pr2 x≈y q q<y)
+  opaque
+    unfolding sim-ℝ
 
-  preserves-leq-right-sim-ℝ : leq-ℝ z x → leq-ℝ z y
-  preserves-leq-right-sim-ℝ lz⊆lx q q<z = pr1 x≈y q (lz⊆lx q q<z)
+    preserves-leq-left-sim-ℝ : leq-ℝ x z → leq-ℝ y z
+    preserves-leq-left-sim-ℝ lx⊆lz q q<y = lx⊆lz q (pr2 x~y q q<y)
+
+    preserves-leq-right-sim-ℝ : leq-ℝ z x → leq-ℝ z y
+    preserves-leq-right-sim-ℝ lz⊆lx q q<z = pr1 x~y q (lz⊆lx q q<z)
 
 module _
   {l1 l2 l3 l4 : Level}
   (x1 : ℝ l1) (x2 : ℝ l2) (y1 : ℝ l3) (y2 : ℝ l4)
-  (x1≈x2 : sim-ℝ x1 x2) (y1≈y2 : sim-ℝ y1 y2)
+  (x1~x2 : sim-ℝ x1 x2) (y1~y2 : sim-ℝ y1 y2)
   where
 
   preserves-leq-sim-ℝ : leq-ℝ x1 y1 → leq-ℝ x2 y2
@@ -222,8 +225,8 @@ module _
       ( y2)
       ( x1)
       ( x2)
-      ( x1≈x2)
-      ( preserves-leq-right-sim-ℝ x1 y1 y2 y1≈y2 x1≤y1)
+      ( x1~x2)
+      ( preserves-leq-right-sim-ℝ x1 y1 y2 y1~y2 x1≤y1)
 ```
 
 ### Inequality on the real numbers is invariant by translation
@@ -256,8 +259,8 @@ module _
       ( x)
       ( (y +ℝ z) +ℝ neg-ℝ z)
       ( y)
-      ( cancel-right-diff-add-ℝ x z)
-      ( cancel-right-diff-add-ℝ y z)
+      ( cancel-right-add-diff-ℝ x z)
+      ( cancel-right-add-diff-ℝ y z)
       ( preserves-leq-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≤y+z)
 
   reflects-leq-left-add-ℝ : leq-ℝ (z +ℝ x) (z +ℝ y) → leq-ℝ x y
@@ -303,14 +306,14 @@ module _
       ( z -ℝ y)
       ( (x +ℝ y) -ℝ y)
       ( x)
-      ( cancel-right-diff-add-ℝ x y)
+      ( cancel-right-add-diff-ℝ x y)
       ( preserves-leq-right-add-ℝ (neg-ℝ y) (x +ℝ y) z x+y<z)
   pr2 iff-diff-right-leq-ℝ x<z-y =
     preserves-leq-right-sim-ℝ
       ( x +ℝ y)
       ( (z -ℝ y) +ℝ y)
       ( z)
-      ( cancel-right-add-diff-ℝ z y)
+      ( cancel-right-diff-add-ℝ z y)
       ( preserves-leq-right-add-ℝ y x (z -ℝ y) x<z-y)
 
 module _

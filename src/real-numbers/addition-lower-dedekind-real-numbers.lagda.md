@@ -43,11 +43,13 @@ open import real-numbers.rational-lower-dedekind-real-numbers
 
 ## Idea
 
-The sum of two
-[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md) is
-the
+We introduce
+{{#concept "addition" Disambiguation="lower Dedekind real numbers" Agda=add-lower-ℝ}}
+of two
+[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md) `x`
+and `y`, which is a lower Dedekind real number with cut equal to the
 [Minkowski sum](group-theory.minkowski-multiplication-commutative-monoids.md) of
-their cuts.
+the cuts of `x` and `y`.
 
 ```agda
 module _
@@ -135,11 +137,7 @@ module _
                     by is-retraction-left-div-Group group-add-ℚ rx ry)
                 ( preserves-le-right-add-ℚ (q -ℚ rx) ε (r -ℚ q) ε<r-q))
               ( ry<y) ,
-            inv
-              ( is-identity-right-conjugation-Ab
-                ( abelian-group-add-ℚ)
-                ( rx -ℚ ε)
-                ( q)))
+            inv ( is-identity-right-conjugation-add-ℚ (rx -ℚ ε) q))
       where open do-syntax-trunc-Prop (cut-add-lower-ℝ q)
 
   add-lower-ℝ : lower-ℝ (l1 ⊔ l2)
@@ -230,11 +228,7 @@ module _
                         ( backward-implication
                           ( iff-translate-diff-le-zero-ℚ p q)
                           ( p<q))) ,
-                    inv
-                      ( is-identity-right-conjugation-Ab
-                        ( abelian-group-add-ℚ)
-                        ( q)
-                        ( p))))
+                    inv (is-identity-right-conjugation-add-ℚ q p)))
               ( forward-implication (is-rounded-cut-lower-ℝ x p) p<x)))
 
   left-unit-law-add-lower-ℝ : add-lower-ℝ (lower-real-ℚ zero-ℚ) x ＝ x
