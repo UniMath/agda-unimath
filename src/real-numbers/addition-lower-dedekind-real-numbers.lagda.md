@@ -43,11 +43,13 @@ open import real-numbers.rational-lower-dedekind-real-numbers
 
 ## Idea
 
-The sum of two
-[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md) is
-the
+We introduce
+{{#concept "addition" Disambiguation="lower Dedekind real numbers" Agda=add-lower-ℝ}}
+of two
+[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md) `x`
+and `y`, which is a lower Dedekind real number with cut equal to the
 [Minkowski sum](group-theory.minkowski-multiplication-commutative-monoids.md) of
-their cuts.
+the cuts of `x` and `y`.
 
 ```agda
 module _

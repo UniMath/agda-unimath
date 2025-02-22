@@ -41,11 +41,13 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Idea
 
-The sum of two
-[upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md) is
-the
+We introduce
+{{#concept "addition" Disambiguation="upper Dedekind real numbers" Agda=add-upper-ℝ}}
+of two
+[upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md) `x`
+and `y`, which is an upper Dedekind real number with cut equal to the
 [Minkowski sum](group-theory.minkowski-multiplication-commutative-monoids.md) of
-their cuts.
+the cuts of `x` and `y`.
 
 ```agda
 module _
