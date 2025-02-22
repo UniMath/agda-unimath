@@ -122,9 +122,5 @@ neg-Rational-ℝ (x , q , q≮x , x≮q) =
   q≮x ∘ tr (is-in-lower-cut-ℝ x) (neg-neg-ℚ q)
 
 neg-real-ℚ : (q : ℚ) → neg-ℝ (real-ℚ q) ＝ real-ℚ (neg-ℚ q)
-neg-real-ℚ q =
-  eq-sim-ℝ
-    ( neg-ℝ (real-ℚ q))
-    ( real-ℚ (neg-ℚ q))
-    ( sim-rational-ℝ (neg-Rational-ℝ (rational-real-ℚ q)))
+neg-real-ℚ q = eq-sim-ℝ (sim-rational-ℝ (neg-Rational-ℝ (rational-real-ℚ q)))
 ```

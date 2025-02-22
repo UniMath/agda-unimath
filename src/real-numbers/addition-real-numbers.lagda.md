@@ -92,8 +92,11 @@ module _
 
     is-arithmetically-located-lower-upper-add-ℝ :
       is-arithmetically-located-lower-upper-ℝ lower-real-add-ℝ upper-real-add-ℝ
-    is-arithmetically-located-lower-upper-add-ℝ ε⁺ =
+    is-arithmetically-located-lower-upper-add-ℝ ε⁺@(ε , _) =
       do
+        let
+          εx⁺@(εx , _) = left-summand-split-ℚ⁺ ε⁺
+          εy⁺@(εy , _) = right-summand-split-ℚ⁺ ε⁺
         (px , qx) , qx<px+εx , px<x , x<qx ← is-arithmetically-located-ℝ x εx⁺
         (py , qy) , qy<py+εy , py<y , y<qy ← is-arithmetically-located-ℝ y εy⁺
         intro-exists
@@ -105,7 +108,8 @@ module _
                   ＝ (px +ℚ py) +ℚ (εx +ℚ εy)
                     by interchange-law-add-add-ℚ px εx py εy
                   ＝ (px +ℚ py) +ℚ ε
-                    by ap ((px +ℚ py) +ℚ_) εx+εy=ε)
+                    by
+                      ap ((px +ℚ py) +ℚ_) (ap rational-ℚ⁺ (eq-add-split-ℚ⁺ ε⁺)))
               ( preserves-le-add-ℚ
                 { qx}
                 { px +ℚ εx}
@@ -116,18 +120,6 @@ module _
             intro-exists (px , py) (px<x , py<y , refl) ,
             intro-exists (qx , qy) (x<qx , y<qy , refl))
       where
-        εx⁺ : ℚ⁺
-        εx⁺ = left-summand-split-ℚ⁺ ε⁺
-        εy⁺ : ℚ⁺
-        εy⁺ = right-summand-split-ℚ⁺ ε⁺
-        εx : ℚ
-        εx = rational-ℚ⁺ εx⁺
-        εy : ℚ
-        εy = rational-ℚ⁺ εy⁺
-        ε : ℚ
-        ε = rational-ℚ⁺ ε⁺
-        εx+εy=ε : εx +ℚ εy ＝ ε
-        εx+εy=ε = ap rational-ℚ⁺ (eq-add-split-ℚ⁺ ε⁺)
         open
           do-syntax-trunc-Prop
             (∃
@@ -146,10 +138,12 @@ module _
         ( is-arithmetically-located-lower-upper-add-ℝ)
 
   add-ℝ : ℝ (l1 ⊔ l2)
-  pr1 add-ℝ = lower-real-add-ℝ
-  pr1 (pr2 add-ℝ) = upper-real-add-ℝ
-  pr1 (pr2 (pr2 add-ℝ)) = is-disjoint-lower-upper-add-ℝ
-  pr2 (pr2 (pr2 add-ℝ)) = is-located-lower-upper-add-ℝ
+  add-ℝ =
+    real-lower-upper-ℝ
+      ( lower-real-add-ℝ)
+      ( upper-real-add-ℝ)
+      ( is-disjoint-lower-upper-add-ℝ)
+      ( is-located-lower-upper-add-ℝ)
 
 infixl 35 _+ℝ_
 _+ℝ_ = add-ℝ
@@ -306,8 +300,8 @@ module _
   where
 
   abstract
-    cancel-right-diff-add-ℝ : sim-ℝ ((x +ℝ y) +ℝ neg-ℝ y) x
-    cancel-right-diff-add-ℝ =
+    cancel-right-add-diff-ℝ : sim-ℝ ((x +ℝ y) +ℝ neg-ℝ y) x
+    cancel-right-add-diff-ℝ =
       binary-tr
         ( sim-ℝ)
         ( inv (associative-add-ℝ x y (neg-ℝ y)))
@@ -318,12 +312,12 @@ module _
           ( zero-ℝ)
           ( right-inverse-law-add-ℝ y))
 
-    cancel-right-add-diff-ℝ : sim-ℝ ((x +ℝ neg-ℝ y) +ℝ y) x
-    cancel-right-add-diff-ℝ =
+    cancel-right-diff-add-ℝ : sim-ℝ ((x +ℝ neg-ℝ y) +ℝ y) x
+    cancel-right-diff-add-ℝ =
       tr
         ( λ z → sim-ℝ z x)
         ( right-swap-add-ℝ x y (neg-ℝ y))
-        ( cancel-right-diff-add-ℝ)
+        ( cancel-right-add-diff-ℝ)
 
 ```
 
@@ -340,10 +334,10 @@ module _
     similarity-reasoning-ℝ
       x
       ~ℝ (x +ℝ z) +ℝ neg-ℝ z
-        by symmetric-sim-ℝ ((x +ℝ z) +ℝ neg-ℝ z) x (cancel-right-diff-add-ℝ x z)
+        by symmetric-sim-ℝ (cancel-right-add-diff-ℝ x z)
       ~ℝ (y +ℝ z) +ℝ neg-ℝ z
         by preserves-sim-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≈y+z
-      ~ℝ y by cancel-right-diff-add-ℝ y z
+      ~ℝ y by cancel-right-add-diff-ℝ y z
 
   reflects-sim-left-add-ℝ : sim-ℝ (z +ℝ x) (z +ℝ y) → sim-ℝ x y
   reflects-sim-left-add-ℝ z+x≈z+y =
@@ -371,8 +365,6 @@ abstract
   add-real-ℚ : (p q : ℚ) → real-ℚ p +ℝ real-ℚ q ＝ real-ℚ (p +ℚ q)
   add-real-ℚ p q =
     eq-sim-ℝ
-      ( real-ℚ p +ℝ real-ℚ q)
-      ( real-ℚ (p +ℚ q))
       ( sim-rational-ℝ
         ( real-ℚ p +ℝ real-ℚ q ,
           p +ℚ q ,
@@ -432,55 +424,32 @@ module _
   abstract
     distributive-neg-add-ℝ : neg-ℝ (x +ℝ y) ＝ neg-ℝ x +ℝ neg-ℝ y
     distributive-neg-add-ℝ =
-      equational-reasoning
-        neg-ℝ (x +ℝ y)
-        ＝ neg-ℝ (x +ℝ y) +ℝ zero-ℝ by inv (right-unit-law-add-ℝ _)
-        ＝ neg-ℝ (x +ℝ y) +ℝ (x +ℝ neg-ℝ x)
-          by
-            eq-sim-ℝ
-              ( neg-ℝ (x +ℝ y) +ℝ zero-ℝ)
-              ( neg-ℝ (x +ℝ y) +ℝ (x +ℝ neg-ℝ x))
-              ( preserves-sim-left-add-ℝ
-                ( neg-ℝ (x +ℝ y))
-                ( zero-ℝ)
-                ( x +ℝ neg-ℝ x)
-                ( symmetric-sim-ℝ
-                  ( x +ℝ neg-ℝ x)
-                  ( zero-ℝ)
-                  ( right-inverse-law-add-ℝ x)))
-        ＝ neg-ℝ (x +ℝ y) +ℝ (x +ℝ neg-ℝ x) +ℝ zero-ℝ
-          by inv (right-unit-law-add-ℝ _)
-        ＝ neg-ℝ (x +ℝ y) +ℝ (x +ℝ neg-ℝ x) +ℝ (y +ℝ neg-ℝ y)
-          by
-            eq-sim-ℝ
-              _
-              _
-              ( preserves-sim-left-add-ℝ
-                ( neg-ℝ (x +ℝ y) +ℝ (x +ℝ neg-ℝ x))
-                ( zero-ℝ)
-                ( y +ℝ neg-ℝ y)
-                ( symmetric-sim-ℝ
-                  ( y +ℝ neg-ℝ y)
-                  ( zero-ℝ)
-                  ( right-inverse-law-add-ℝ y)))
-        ＝ neg-ℝ (x +ℝ y) +ℝ ((x +ℝ neg-ℝ x) +ℝ (y +ℝ neg-ℝ y))
-          by associative-add-ℝ _ _ _
-        ＝ neg-ℝ (x +ℝ y) +ℝ ((x +ℝ y) +ℝ (neg-ℝ x +ℝ neg-ℝ y))
-          by
-            ap
-              ( neg-ℝ (x +ℝ y) +ℝ_)
-              ( interchange-law-add-add-ℝ x (neg-ℝ x) y (neg-ℝ y))
-        ＝ (neg-ℝ (x +ℝ y) +ℝ (x +ℝ y)) +ℝ (neg-ℝ x +ℝ neg-ℝ y)
-          by inv (associative-add-ℝ _ _ _)
-        ＝ zero-ℝ +ℝ (neg-ℝ x +ℝ neg-ℝ y)
-          by
-            eq-sim-ℝ
-              _
-              _
-              ( preserves-sim-right-add-ℝ
-                ( neg-ℝ x +ℝ neg-ℝ y)
-                ( neg-ℝ (x +ℝ y) +ℝ (x +ℝ y))
-                ( zero-ℝ)
-                ( left-inverse-law-add-ℝ (x +ℝ y)))
-        ＝ neg-ℝ x +ℝ neg-ℝ y by left-unit-law-add-ℝ _
+      eq-sim-ℝ
+        ( similarity-reasoning-ℝ
+          neg-ℝ (x +ℝ y)
+          ~ℝ neg-ℝ (x +ℝ y) +ℝ x +ℝ neg-ℝ x
+            by symmetric-sim-ℝ (cancel-right-add-diff-ℝ _ x)
+          ~ℝ (((neg-ℝ (x +ℝ y) +ℝ x) +ℝ neg-ℝ x) +ℝ y) +ℝ neg-ℝ y
+            by symmetric-sim-ℝ (cancel-right-add-diff-ℝ _ y)
+          ~ℝ (((neg-ℝ (x +ℝ y) +ℝ x) +ℝ y) +ℝ neg-ℝ x) +ℝ neg-ℝ y
+            by sim-eq-ℝ (ap (_+ℝ neg-ℝ y) (right-swap-add-ℝ _ (neg-ℝ x) y))
+          ~ℝ ((neg-ℝ (x +ℝ y) +ℝ (x +ℝ y)) +ℝ neg-ℝ x) +ℝ neg-ℝ y
+            by
+              sim-eq-ℝ
+                ( ap
+                  ( _+ℝ neg-ℝ y)
+                  ( ap (_+ℝ neg-ℝ x) (associative-add-ℝ _ _ _)))
+          ~ℝ (zero-ℝ +ℝ neg-ℝ x) +ℝ neg-ℝ y
+            by
+              preserves-sim-right-add-ℝ
+                ( neg-ℝ y)
+                ( _)
+                ( _)
+                ( preserves-sim-right-add-ℝ
+                  ( neg-ℝ x)
+                  ( _)
+                  ( _)
+                  ( left-inverse-law-add-ℝ _))
+          ~ℝ neg-ℝ x +ℝ neg-ℝ y
+            by sim-eq-ℝ (ap (_+ℝ neg-ℝ y) (left-unit-law-add-ℝ _)))
 ```
