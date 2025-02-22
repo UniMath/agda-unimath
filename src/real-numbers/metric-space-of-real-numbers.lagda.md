@@ -582,7 +582,7 @@ module _
                   ＝ ((q -ℚ εu) -ℚ θu) +ℚ θu
                     by ap (_+ℚ θu) (inv (associative-add-ℚ _ _ _))
                   ＝ q -ℚ εu by is-section-diff-ℚ θu _)
-                (le-upper-cut-ℝ
+                ( le-upper-cut-ℝ
                   ( xεu)
                   ( q -ℚ (εu +ℚ θu))
                   ( (q -ℚ (εu +ℚ θu)) +ℚ θu)
@@ -665,44 +665,25 @@ module _
         xε = map-cauchy-approximation-leq-ℝ x ε⁺
         θ'⁺@(θ' , _) = left-summand-split-ℚ⁺ θ⁺
         θ''⁺@(θ'' , _) = right-summand-split-ℚ⁺ θ⁺
+        ε+θ'+θ''=ε+θ =
+          associative-add-ℚ _ _ _ ∙
+          ap (ε +ℚ_) (ap rational-ℚ⁺ (eq-add-split-ℚ⁺ θ⁺))
       ( r , xε+ε+θ'<r , r<xε+ε+θ) ←
         tr
           ( le-ℝ (xε +ℝ real-ℚ (ε +ℚ θ')))
-          ( equational-reasoning
-            xε +ℝ real-ℚ (ε +ℚ θ') +ℝ real-ℚ θ''
-            ＝ xε +ℝ (real-ℚ (ε +ℚ θ') +ℝ real-ℚ θ'') by associative-add-ℝ _ _ _
-            ＝ xε +ℝ real-ℚ (ε +ℚ θ' +ℚ θ'') by ap (xε +ℝ_) (add-real-ℚ _ _)
-            ＝ xε +ℝ real-ℚ (ε +ℚ (θ' +ℚ θ''))
-              by ap (λ a → xε +ℝ real-ℚ a) (associative-add-ℚ ε θ' θ'')
-            ＝ xε +ℝ real-ℚ (ε +ℚ θ)
-              by
-                ap
-                  ( λ a → xε +ℝ real-ℚ (ε +ℚ rational-ℚ⁺ a))
-                  ( eq-add-split-ℚ⁺ θ⁺))
+          ( associative-add-ℝ _ _ _ ∙
+            ap ( xε +ℝ_) (add-real-ℚ _ _ ∙ ap real-ℚ ε+θ'+θ''=ε+θ))
           ( le-left-add-real-ℝ⁺
             ( xε +ℝ (real-ℚ (ε +ℚ θ')))
             ( positive-real-ℚ⁺ θ''⁺))
       ( q , xε-ε-θ<q , q<xε-ε-θ') ←
         tr
           ( λ y → le-ℝ y (xε -ℝ real-ℚ (ε +ℚ θ')))
-          ( equational-reasoning
-            xε -ℝ real-ℚ (ε +ℚ θ') -ℝ real-ℚ θ''
-            ＝ xε +ℝ (neg-ℝ (real-ℚ (ε +ℚ θ')) +ℝ neg-ℝ (real-ℚ θ''))
-              by associative-add-ℝ _ _ _
-            ＝ xε -ℝ (real-ℚ (ε +ℚ θ') +ℝ real-ℚ θ'')
-              by
-                ap
-                  ( xε +ℝ_)
-                  ( inv
-                    ( distributive-neg-add-ℝ (real-ℚ (ε +ℚ θ')) (real-ℚ θ'')))
-            ＝ xε -ℝ real-ℚ (ε +ℚ θ' +ℚ θ'') by ap (xε -ℝ_) (add-real-ℚ _ _)
-            ＝ xε -ℝ real-ℚ (ε +ℚ (θ' +ℚ θ''))
-              by ap (λ a → xε -ℝ real-ℚ a) (associative-add-ℚ _ _ _)
-            ＝ xε -ℝ real-ℚ (ε +ℚ θ)
-              by
-                ap
-                  ( λ a → xε -ℝ real-ℚ (ε +ℚ rational-ℚ⁺ a))
-                  ( eq-add-split-ℚ⁺ θ⁺))
+          ( associative-add-ℝ _ _ _ ∙
+            ap
+              ( xε +ℝ_)
+              ( inv (distributive-neg-add-ℝ _ _) ∙
+                ap neg-ℝ (add-real-ℚ _ _ ∙ ap real-ℚ ε+θ'+θ''=ε+θ)))
           ( le-diff-real-ℝ⁺ (xε -ℝ real-ℚ (ε +ℚ θ')) (positive-real-ℚ⁺ θ''⁺))
       let
         xε<r-ε-θ' : is-in-upper-cut-ℝ xε (r -ℚ (ε +ℚ θ'))
@@ -712,11 +693,7 @@ module _
             ( xε)
             ( tr
               ( le-ℝ xε)
-              ( equational-reasoning
-                real-ℚ r -ℝ real-ℚ (ε +ℚ θ')
-                ＝ real-ℚ r +ℝ real-ℚ (neg-ℚ (ε +ℚ θ'))
-                  by ap (real-ℚ r +ℝ_) (neg-real-ℚ _)
-                ＝ real-ℚ (r -ℚ (ε +ℚ θ')) by add-real-ℚ _ _)
+              ( ap (real-ℚ r +ℝ_) (neg-real-ℚ _) ∙ add-real-ℚ _ _)
               ( forward-implication
                 ( iff-diff-right-le-ℝ xε (real-ℚ (ε +ℚ θ')) (real-ℚ r))
                 ( le-upper-cut-real-ℚ r (xε +ℝ real-ℚ (ε +ℚ θ')) xε+ε+θ'<r)))
