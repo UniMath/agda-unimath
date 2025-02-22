@@ -333,7 +333,7 @@ module _
             ( eq-is-prop (is-prop-is-decidable (pr1 (pr2 (pr1 Y x))))))))
       ( eq-is-prop
         ( pr2
-          ( has-cardinality-Prop 2
+          ( has-cardinality-ℕ-Prop 2
             ( Σ X (λ x → type-Decidable-Prop (pr1 Y x))))))
     where
     type-decidable-prop-pr1-two-elements-transposition :
@@ -661,13 +661,13 @@ module _
     ( Σ
       ( X → Decidable-Prop l3)
       ( λ P →
-        has-cardinality
+        has-cardinality-ℕ
           ( 2)
           ( Σ X (type-Decidable-Prop ∘ P)))) →
       ( Σ
         ( Y → Decidable-Prop (l3 ⊔ l4))
         ( λ P →
-          has-cardinality 2
+          has-cardinality-ℕ 2
             ( Σ Y (type-Decidable-Prop ∘ P))))
   pr1 (pr1 (transposition-conjugation-equiv (pair P H)) x) =
     raise l4 (type-Decidable-Prop (P (map-inv-equiv e x)))
@@ -685,7 +685,7 @@ module _
   pr2 (transposition-conjugation-equiv (pair P H)) =
     apply-universal-property-trunc-Prop
       ( H)
-      ( has-cardinality-Prop 2
+      ( has-cardinality-ℕ-Prop 2
         ( Σ Y (λ x → raise l4 (type-Decidable-Prop (P (map-inv-equiv e x))))))
       λ h →
       unit-trunc-Prop
@@ -739,7 +739,7 @@ module _
     correct-transposition-conjugation-equiv :
       (t : Σ
         ( X → Decidable-Prop l3)
-        ( λ P → has-cardinality 2 (Σ X (type-Decidable-Prop ∘ P)))) →
+        ( λ P → has-cardinality-ℕ 2 (Σ X (type-Decidable-Prop ∘ P)))) →
       htpy-equiv
         ( transposition
           (transposition-conjugation-equiv t))
@@ -805,7 +805,7 @@ module _
         ( Σ
           ( X → Decidable-Prop l3)
           ( λ P →
-            has-cardinality 2 (Σ X (type-Decidable-Prop ∘ P))))) →
+            has-cardinality-ℕ 2 (Σ X (type-Decidable-Prop ∘ P))))) →
       htpy-equiv
         ( permutation-list-transpositions
           ( map-list transposition-conjugation-equiv li))
@@ -839,11 +839,11 @@ Fin-succ-Fin-transposition :
   (n : ℕ) →
   ( Σ
     ( Fin n → Decidable-Prop lzero)
-    ( λ P → has-cardinality 2 (Σ (Fin n) (type-Decidable-Prop ∘ P)))) →
+    ( λ P → has-cardinality-ℕ 2 (Σ (Fin n) (type-Decidable-Prop ∘ P)))) →
     ( Σ
       ( Fin (succ-ℕ n) → Decidable-Prop lzero)
       ( λ P →
-        has-cardinality 2
+        has-cardinality-ℕ 2
           ( Σ (Fin (succ-ℕ n)) (type-Decidable-Prop ∘ P))))
 pr1 (Fin-succ-Fin-transposition n (pair P H)) (inl x) = P x
 pr1 (Fin-succ-Fin-transposition n (pair P H)) (inr x) =
@@ -851,7 +851,7 @@ pr1 (Fin-succ-Fin-transposition n (pair P H)) (inr x) =
 pr2 (Fin-succ-Fin-transposition n (pair P H)) =
   apply-universal-property-trunc-Prop
     ( H)
-    ( has-cardinality-Prop 2
+    ( has-cardinality-ℕ-Prop 2
       ( Σ
         ( Fin (succ-ℕ n))
         ( type-Decidable-Prop ∘ pr1 (Fin-succ-Fin-transposition n (pair P H)))))
@@ -889,7 +889,7 @@ correct-Fin-succ-Fin-transposition :
   (n : ℕ) →
   (t : Σ
     ( Fin n → Decidable-Prop lzero)
-    ( λ P → has-cardinality 2 (Σ (Fin n) (type-Decidable-Prop ∘ P)))) →
+    ( λ P → has-cardinality-ℕ 2 (Σ (Fin n) (type-Decidable-Prop ∘ P)))) →
   htpy-equiv
     ( transposition (Fin-succ-Fin-transposition n t))
     ( pr1
@@ -938,7 +938,7 @@ correct-Fin-succ-Fin-transposition-list :
     ( Σ
       ( Fin n → Decidable-Prop lzero)
       ( λ P →
-        has-cardinality 2 (Σ (Fin n) (type-Decidable-Prop ∘ P))))) →
+        has-cardinality-ℕ 2 (Σ (Fin n) (type-Decidable-Prop ∘ P))))) →
   htpy-equiv
     ( permutation-list-transpositions
       ( map-list (Fin-succ-Fin-transposition n) l))

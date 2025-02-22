@@ -49,10 +49,10 @@ has-decidable-equality-is-finite {l1} {X} is-finite-X =
 ### Any type of finite cardinality has decidable equality
 
 ```agda
-has-decidable-equality-has-cardinality :
+has-decidable-equality-has-cardinality-ℕ :
   {l1 : Level} {X : UU l1} (k : ℕ) →
-  has-cardinality k X → has-decidable-equality X
-has-decidable-equality-has-cardinality {l1} {X} k H =
+  has-cardinality-ℕ k X → has-decidable-equality X
+has-decidable-equality-has-cardinality-ℕ {l1} {X} k H =
   apply-universal-property-trunc-Prop H
     ( has-decidable-equality-Prop X)
     ( λ e → has-decidable-equality-equiv' e (has-decidable-equality-Fin k))

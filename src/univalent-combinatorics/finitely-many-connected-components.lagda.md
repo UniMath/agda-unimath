@@ -78,7 +78,7 @@ mere-equiv-number-of-connected-components H =
 ```agda
 has-cardinality-connected-components-Prop : {l : Level} (k : ℕ) → UU l → Prop l
 has-cardinality-connected-components-Prop k A =
-  has-cardinality-Prop k (type-trunc-Set A)
+  has-cardinality-ℕ-Prop k (type-trunc-Set A)
 
 has-cardinality-connected-components : {l : Level} (k : ℕ) → UU l → UU l
 has-cardinality-connected-components k A =
@@ -196,11 +196,12 @@ is-finite-has-finitely-many-connected-components H =
 ### The type of all `n`-element types in `UU l` has finitely many connected components
 
 ```agda
-has-finitely-many-connected-components-UU-Fin :
-  {l : Level} (n : ℕ) → has-finitely-many-connected-components (UU-Fin l n)
-has-finitely-many-connected-components-UU-Fin n =
+has-finitely-many-connected-components-Type-With-Cardinality-ℕ :
+  {l : Level} (n : ℕ) →
+  has-finitely-many-connected-components (Type-With-Cardinality-ℕ l n)
+has-finitely-many-connected-components-Type-With-Cardinality-ℕ n =
   has-finitely-many-connected-components-is-0-connected
-    ( is-0-connected-UU-Fin n)
+    ( is-0-connected-Type-With-Cardinality-ℕ n)
 ```
 
 ### Finite products of types with finitely many connected components
