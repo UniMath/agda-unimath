@@ -94,10 +94,8 @@ module _
       is-arithmetically-located-lower-upper-ℝ lower-real-add-ℝ upper-real-add-ℝ
     is-arithmetically-located-lower-upper-add-ℝ ε⁺ =
       do
-        (px , qx) , qx<px+εx , px<x , x<qx ←
-          is-arithmetically-located-lower-upper-real-ℝ x εx⁺
-        (py , qy) , qy<py+εy , py<y , y<qy ←
-          is-arithmetically-located-lower-upper-real-ℝ y εy⁺
+        (px , qx) , qx<px+εx , px<x , x<qx ← is-arithmetically-located-ℝ x εx⁺
+        (py , qy) , qy<py+εy , py<y , y<qy ← is-arithmetically-located-ℝ y εy⁺
         intro-exists
           ( px +ℚ py , qx +ℚ qy)
           ( tr
@@ -290,6 +288,7 @@ module _
         ＝ x +ℝ (y +ℝ z) by associative-add-ℝ x y z
         ＝ x +ℝ (z +ℝ y) by ap (x +ℝ_) (commutative-add-ℝ y z)
         ＝ (x +ℝ z) +ℝ y by inv (associative-add-ℝ x z y)
+
     left-swap-add-ℝ :
       x +ℝ (y +ℝ z) ＝ y +ℝ (x +ℝ z)
     left-swap-add-ℝ =
@@ -335,7 +334,14 @@ module _
 
   reflects-sim-right-add-ℝ : sim-ℝ (x +ℝ z) (y +ℝ z) → sim-ℝ x y
   reflects-sim-right-add-ℝ x+z≈y+z =
-    transitive-sim-ℝ
+    similarity-reasoning-ℝ
+      x
+      ≈ℝ (x +ℝ z) +ℝ neg-ℝ z
+        by symmetric-sim-ℝ ((x +ℝ z) +ℝ neg-ℝ z) x (cancel-right-diff-add-ℝ x z)
+      ≈ℝ (y +ℝ z) +ℝ neg-ℝ z
+        by preserves-sim-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≈y+z
+      ≈ℝ y by cancel-right-diff-add-ℝ y z
+    {- transitive-sim-ℝ
       ( x)
       ( (x +ℝ z) +ℝ neg-ℝ z)
       ( y)
@@ -345,7 +351,7 @@ module _
         ( y)
         ( cancel-right-diff-add-ℝ y z)
         ( preserves-sim-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≈y+z))
-      ( symmetric-sim-ℝ ((x +ℝ z) +ℝ neg-ℝ z) x (cancel-right-diff-add-ℝ x z))
+      ( symmetric-sim-ℝ ((x +ℝ z) +ℝ neg-ℝ z) x (cancel-right-diff-add-ℝ x z))-}
 
   reflects-sim-left-add-ℝ : sim-ℝ (z +ℝ x) (z +ℝ y) → sim-ℝ x y
   reflects-sim-left-add-ℝ z+x≈z+y =

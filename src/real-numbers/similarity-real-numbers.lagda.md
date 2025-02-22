@@ -129,24 +129,15 @@ Note that we can use both similarities (with `≈ℝ`) and equalities (with `≅
 the chain of reasoning.
 
 ```agda
-infixl 1 similarity-reasoning-ℝ_
-infixl 0 step-similarity-reasoning-ℝ
-infixl 0 step-eq-similarity-reasoning-ℝ
+infix 1 similarity-reasoning-ℝ_
 
 similarity-reasoning-ℝ_ :
-  {l : Level} → (x : ℝ l) → sim-ℝ x x
-similarity-reasoning-ℝ x = refl-sim-ℝ x
+  {l1 l2 : Level} → {x : ℝ l1} {y : ℝ l2} → sim-ℝ x y → sim-ℝ x y
+similarity-reasoning-ℝ x≈y = x≈y
 
 step-similarity-reasoning-ℝ :
-  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
-  sim-ℝ x y → {l3 : Level} → (u : ℝ l3) → sim-ℝ y u → sim-ℝ x u
-step-similarity-reasoning-ℝ {x = x} {y = y} p u q = transitive-sim-ℝ x y u q p
-
-step-eq-similarity-reasoning-ℝ :
-  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
-  sim-ℝ x y → {l3 : Level} → (u : ℝ l2) → y ＝ u → sim-ℝ x u
-step-eq-similarity-reasoning-ℝ {x = x} {y = y} p u q = tr (sim-ℝ x) q p
-
-syntax step-similarity-reasoning-ℝ p u q = p ≈ℝ u by q
-syntax step-eq-similarity-reasoning-ℝ p u q = p ≅ℝ u by q
+  {l1 l2 l3 : Level} → (x : ℝ l1) → {y : ℝ l2} {z : ℝ l3} →
+  sim-ℝ y z → sim-ℝ x y → sim-ℝ x z
+step-similarity-reasoning-ℝ x {y = y} {z = z} y≈z z≈y =
+  transitive-sim-ℝ x y z y≈z z≈y
 ```
