@@ -105,8 +105,9 @@ opaque
   unfolding sim-ℝ
 
   symmetric-sim-ℝ :
-    {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → x ~ℝ y → y ~ℝ x
-  symmetric-sim-ℝ x y = symmetric-sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
+    {l1 l2 : Level} → {x : ℝ l1} {y : ℝ l2} → x ~ℝ y → y ~ℝ x
+  symmetric-sim-ℝ {x = x} {y = y} =
+    symmetric-sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
 ```
 
 ### Transitivity
@@ -130,8 +131,9 @@ opaque
 
   unfolding sim-ℝ
 
-  eq-sim-ℝ : {l : Level} → (x y : ℝ l) → x ~ℝ y → x ＝ y
-  eq-sim-ℝ x y H = eq-eq-lower-cut-ℝ x y (antisymmetric-sim-subtype _ _ H)
+  eq-sim-ℝ : {l : Level} → {x y : ℝ l} → x ~ℝ y → x ＝ y
+  eq-sim-ℝ {x = x} {y = y} H =
+    eq-eq-lower-cut-ℝ x y (antisymmetric-sim-subtype _ _ H)
 ```
 
 ### Similarity reasoning
@@ -142,17 +144,12 @@ the following way:
 ```text
 similarity-reasoning-ℝ
   x ~ℝ y by sim-1
-    ≅ℝ z by eq-2
-    ~ℝ v by sim-3
+    ~ℝ z by sim-2
 ```
-
-Note that we can use both similarities (with `~ℝ`) and equalities (with `≅ℝ`) in
-the chain of reasoning.
 
 ```agda
 infixl 1 similarity-reasoning-ℝ_
 infixl 0 step-similarity-reasoning-ℝ
-infixl 0 step-eq-similarity-reasoning-ℝ
 
 opaque
   unfolding sim-ℝ
@@ -166,11 +163,5 @@ opaque
     sim-ℝ x y → {l3 : Level} → (u : ℝ l3) → sim-ℝ y u → sim-ℝ x u
   step-similarity-reasoning-ℝ {x = x} {y = y} p u q = transitive-sim-ℝ x y u q p
 
-  step-eq-similarity-reasoning-ℝ :
-    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
-    sim-ℝ x y → {l3 : Level} → (u : ℝ l2) → y ＝ u → sim-ℝ x u
-  step-eq-similarity-reasoning-ℝ {x = x} {y = y} p u q = tr (sim-ℝ x) q p
-
   syntax step-similarity-reasoning-ℝ p u q = p ~ℝ u by q
-  syntax step-eq-similarity-reasoning-ℝ p u q = p ≅ℝ u by q
 ```
