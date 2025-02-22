@@ -230,11 +230,7 @@ module _
                         ( backward-implication
                           ( iff-translate-diff-le-zero-ℚ p q)
                           ( p<q))) ,
-                    inv
-                      ( is-identity-right-conjugation-Ab
-                        ( abelian-group-add-ℚ)
-                        ( q)
-                        ( p))))
+                    inv (is-identity-right-conjugation-add-ℚ q p)))
               ( forward-implication (is-rounded-cut-lower-ℝ x p) p<x)))
 
   left-unit-law-add-lower-ℝ : add-lower-ℝ (lower-real-ℚ zero-ℚ) x ＝ x
