@@ -257,19 +257,22 @@ module _
   (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
   where
 
-  preserves-sim-right-add-ℝ : sim-ℝ x y → sim-ℝ (x +ℝ z) (y +ℝ z)
-  pr1 (preserves-sim-right-add-ℝ (lx⊆ly , _)) q =
-    map-tot-exists (λ (qx , _) → map-product (lx⊆ly qx) id)
-  pr2 (preserves-sim-right-add-ℝ (_ , ly⊆lx)) q =
-    map-tot-exists (λ (qy , _) → map-product (ly⊆lx qy) id)
+  opaque
+    unfolding sim-ℝ
 
-  preserves-sim-left-add-ℝ : sim-ℝ x y → sim-ℝ (z +ℝ x) (z +ℝ y)
-  preserves-sim-left-add-ℝ x≈y =
-    binary-tr
-      ( sim-ℝ)
-      ( commutative-add-ℝ x z)
-      ( commutative-add-ℝ y z)
-      ( preserves-sim-right-add-ℝ x≈y)
+    preserves-sim-right-add-ℝ : sim-ℝ x y → sim-ℝ (x +ℝ z) (y +ℝ z)
+    pr1 (preserves-sim-right-add-ℝ (lx⊆ly , _)) q =
+      map-tot-exists (λ (qx , _) → map-product (lx⊆ly qx) id)
+    pr2 (preserves-sim-right-add-ℝ (_ , ly⊆lx)) q =
+      map-tot-exists (λ (qy , _) → map-product (ly⊆lx qy) id)
+
+    preserves-sim-left-add-ℝ : sim-ℝ x y → sim-ℝ (z +ℝ x) (z +ℝ y)
+    preserves-sim-left-add-ℝ x≈y =
+      binary-tr
+        ( sim-ℝ)
+        ( commutative-add-ℝ x z)
+        ( commutative-add-ℝ y z)
+        ( preserves-sim-right-add-ℝ x≈y)
 ```
 
 ### Swapping laws for addition on real numbers
@@ -336,22 +339,11 @@ module _
   reflects-sim-right-add-ℝ x+z≈y+z =
     similarity-reasoning-ℝ
       x
-      ≈ℝ (x +ℝ z) +ℝ neg-ℝ z
+      ~ℝ (x +ℝ z) +ℝ neg-ℝ z
         by symmetric-sim-ℝ ((x +ℝ z) +ℝ neg-ℝ z) x (cancel-right-diff-add-ℝ x z)
-      ≈ℝ (y +ℝ z) +ℝ neg-ℝ z
+      ~ℝ (y +ℝ z) +ℝ neg-ℝ z
         by preserves-sim-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≈y+z
-      ≈ℝ y by cancel-right-diff-add-ℝ y z
-    {- transitive-sim-ℝ
-      ( x)
-      ( (x +ℝ z) +ℝ neg-ℝ z)
-      ( y)
-      ( transitive-sim-ℝ
-        ( (x +ℝ z) +ℝ neg-ℝ z)
-        ( (y +ℝ z) +ℝ neg-ℝ z)
-        ( y)
-        ( cancel-right-diff-add-ℝ y z)
-        ( preserves-sim-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≈y+z))
-      ( symmetric-sim-ℝ ((x +ℝ z) +ℝ neg-ℝ z) x (cancel-right-diff-add-ℝ x z))-}
+      ~ℝ y by cancel-right-diff-add-ℝ y z
 
   reflects-sim-left-add-ℝ : sim-ℝ (z +ℝ x) (z +ℝ y) → sim-ℝ x y
   reflects-sim-left-add-ℝ z+x≈z+y =
