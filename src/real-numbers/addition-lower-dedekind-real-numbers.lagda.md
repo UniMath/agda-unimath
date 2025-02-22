@@ -135,11 +135,7 @@ module _
                     by is-retraction-left-div-Group group-add-ℚ rx ry)
                 ( preserves-le-right-add-ℚ (q -ℚ rx) ε (r -ℚ q) ε<r-q))
               ( ry<y) ,
-            inv
-              ( is-identity-right-conjugation-Ab
-                ( abelian-group-add-ℚ)
-                ( rx -ℚ ε)
-                ( q)))
+            inv ( is-identity-right-conjugation-add-ℚ (rx -ℚ ε) q))
       where open do-syntax-trunc-Prop (cut-add-lower-ℝ q)
 
   add-lower-ℝ : lower-ℝ (l1 ⊔ l2)
