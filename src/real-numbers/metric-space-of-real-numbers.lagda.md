@@ -134,8 +134,8 @@ is-in-lower-neighborhood-real-bound-leq-ℝ d⁺@(d , _) x y y≤x+d q q+d<y =
       ( real-ℚ q)
       ( (x +ℝ real-ℚ d) -ℝ real-ℚ d)
       ( x)
-      ( cancel-right-diff-add-ℝ (real-ℚ q) (real-ℚ d))
-      ( cancel-right-diff-add-ℝ x (real-ℚ d))
+      ( cancel-right-add-diff-ℝ (real-ℚ q) (real-ℚ d))
+      ( cancel-right-add-diff-ℝ x (real-ℚ d))
       ( preserves-le-right-add-ℝ
         ( neg-ℝ (real-ℚ d))
         ( real-ℚ q +ℝ real-ℚ d)
@@ -559,20 +559,14 @@ module _
                   ( is-in-lower-cut-ℝ xεl)
                   ( equational-reasoning
                       ((q -ℚ εu) +ℚ θl) +ℚ (εl +ℚ εu)
-                      ＝ ((q +ℚ θl) -ℚ εu) +ℚ (εl +ℚ εu)
+                      ＝ ((q +ℚ θl) -ℚ εu) +ℚ (εu +ℚ εl)
                         by
                           ap-add-ℚ
-                            ( right-swap-add-Ab
-                              ( abelian-group-add-ℚ)
-                              ( q)
-                              ( neg-ℚ εu)
-                              ( θl))
-                            ( refl)
-                      ＝ ((q +ℚ θl) +ℚ εl) +ℚ (neg-ℚ εu +ℚ εu)
-                        by interchange-law-add-add-ℚ _ _ _ _
-                      ＝ ((q +ℚ θl) +ℚ εl) +ℚ zero-ℚ
-                        by ap-add-ℚ refl (left-inverse-law-add-ℚ εu)
-                      ＝ (q +ℚ θl) +ℚ εl by right-unit-law-add-ℚ _
+                            ( right-swap-add-ℚ q (neg-ℚ εu) θl)
+                            ( commutative-add-ℚ εl εu)
+                      ＝ ((q +ℚ θl) -ℚ εu) +ℚ εu +ℚ εl
+                        by inv (associative-add-ℚ _ _ _)
+                      ＝ (q +ℚ θl) +ℚ εl by ap (_+ℚ εl) (is-section-diff-ℚ _ _)
                       ＝ q +ℚ (θl +ℚ εl) by associative-add-ℚ _ _ _
                       ＝ q +ℚ (εl +ℚ θl) by ap (q +ℚ_) (commutative-add-ℚ _ _))
                   ( q+εl+θl<xεl))
@@ -594,7 +588,7 @@ module _
                     by ap (λ r → (q +ℚ r) +ℚ θu) (distributive-neg-add-ℚ εu θu)
                   ＝ ((q -ℚ εu) -ℚ θu) +ℚ θu
                     by ap (_+ℚ θu) (inv (associative-add-ℚ _ _ _))
-                  ＝ q -ℚ εu by is-section-right-div-Group group-add-ℚ θu _)
+                  ＝ q -ℚ εu by is-section-diff-ℚ θu _)
                 (le-upper-cut-ℝ
                   ( xεu)
                   ( q -ℚ (εu +ℚ θu))
@@ -626,19 +620,14 @@ module _
               ( preserves-le-add-ℚ {2ε} {ε'} {2ε} {ε'} 2ε⁺<ε'⁺ 2ε⁺<ε'⁺)
           p+2ε<q-2ε : le-ℚ (p +ℚ 2ε) (q -ℚ 2ε)
           p+2ε<q-2ε =
-            reflects-le-left-add-ℚ
-              ( 2ε)
+            le-transpose-left-add-ℚ
               ( p +ℚ 2ε)
-              ( q -ℚ 2ε)
-              ( binary-tr
-                ( le-ℚ)
-                ( inv (associative-add-ℚ p 2ε 2ε))
-                ( equational-reasoning
-                    p +ℚ (q -ℚ p)
-                    ＝ q by is-identity-right-conjugation-Ab abelian-group-add-ℚ p q
-                    ＝ (q -ℚ 2ε) +ℚ 2ε
-                      by inv (is-section-right-div-Group group-add-ℚ 2ε q))
-                ( preserves-le-right-add-ℚ p 4ε (q -ℚ p) 4ε<q-p))
+              ( 2ε)
+              ( q)
+              ( inv-tr
+                ( λ r → le-ℚ r q)
+                ( associative-add-ℚ p 2ε 2ε ∙ commutative-add-ℚ p 4ε)
+                ( le-transpose-right-diff-ℚ 4ε q p 4ε<q-p))
         elim-disjunction
           claim
           ( λ p+2ε<xε → inl-disjunction (intro-exists (ε⁺ , ε⁺) p+2ε<xε))
@@ -664,7 +653,7 @@ module _
       ( is-located-lower-upper-cut-lim-cauchy-approximation-leq-ℝ)
 ```
 
-#### The limit of a Cauchy sequence is its limit in the metric space of real numbers
+#### The limit satisfies the definition of a limit of a Cauchy approximation
 
 ```agda
 module _
@@ -678,129 +667,123 @@ module _
       ( lim-cauchy-approximation-leq-ℝ x)
   is-limit-lim-cauchy-approximation-leq-ℝ ε⁺@(ε , _) θ⁺@(θ , _) =
     do
-      let lim = lim-cauchy-approximation-leq-ℝ x
-      θ₂⁺@(θ₂ , _) , 2θ₂<θ ← double-le-ℚ⁺ θ⁺
       let
+        lim = lim-cauchy-approximation-leq-ℝ x
         xε = map-cauchy-approximation-leq-ℝ x ε⁺
-        θ₂ℝ⁺ = positive-real-ℚ⁺ θ₂⁺
-        2θ₂ = θ₂ +ℚ θ₂
-        2θ₂⁺ = θ₂⁺ +ℚ⁺ θ₂⁺
-        2θ₂ℝ⁺ = positive-real-ℚ⁺ 2θ₂⁺
-        θ₂<θ : le-ℚ θ₂ θ
-        θ₂<θ = transitive-le-ℚ θ₂ 2θ₂ θ 2θ₂<θ (le-right-add-rational-ℚ⁺ θ₂ θ₂⁺)
-      q , xε-ε-2θ₂<q , q<xε-ε-θ₂ ←
-        le-diff-real-ℝ⁺ (xε -ℝ real-ℚ (ε +ℚ θ₂)) θ₂ℝ⁺
-      r , xε+ε+θ₂<r , r<xε+ε+2θ₂ ←
-        le-left-add-real-ℝ⁺ (xε +ℝ real-ℚ (ε +ℚ θ₂)) θ₂ℝ⁺
+        θ'⁺@(θ' , _) = left-summand-split-ℚ⁺ θ⁺
+        θ''⁺@(θ'' , _) = right-summand-split-ℚ⁺ θ⁺
+      ( r , xε+ε+θ'<r , r<xε+ε+θ ) ←
+        tr
+          ( le-ℝ (xε +ℝ real-ℚ (ε +ℚ θ')))
+          ( equational-reasoning
+            xε +ℝ real-ℚ (ε +ℚ θ') +ℝ real-ℚ θ''
+            ＝ xε +ℝ (real-ℚ (ε +ℚ θ') +ℝ real-ℚ θ'') by associative-add-ℝ _ _ _
+            ＝ xε +ℝ real-ℚ (ε +ℚ θ' +ℚ θ'') by ap (xε +ℝ_) (add-real-ℚ _ _)
+            ＝ xε +ℝ real-ℚ (ε +ℚ (θ' +ℚ θ''))
+              by ap (λ a → xε +ℝ real-ℚ a) (associative-add-ℚ ε θ' θ'')
+            ＝ xε +ℝ real-ℚ (ε +ℚ θ)
+              by
+                ap
+                  ( λ a → xε +ℝ real-ℚ (ε +ℚ rational-ℚ⁺ a))
+                  ( eq-add-split-ℚ⁺ θ⁺))
+          ( le-left-add-real-ℝ⁺
+            ( xε +ℝ (real-ℚ (ε +ℚ θ')))
+            ( positive-real-ℚ⁺ θ''⁺))
+      ( q , xε-ε-θ<q , q<xε-ε-θ' ) ←
+        tr
+          ( λ y → le-ℝ y (xε -ℝ real-ℚ (ε +ℚ θ')))
+          ( equational-reasoning
+            xε -ℝ real-ℚ (ε +ℚ θ') -ℝ real-ℚ θ''
+            ＝ xε +ℝ (neg-ℝ (real-ℚ (ε +ℚ θ')) +ℝ neg-ℝ (real-ℚ θ''))
+              by associative-add-ℝ _ _ _
+            ＝ xε -ℝ (real-ℚ (ε +ℚ θ') +ℝ real-ℚ θ'')
+              by
+                ap
+                  ( xε +ℝ_)
+                  ( inv
+                    ( distributive-neg-add-ℝ (real-ℚ (ε +ℚ θ')) (real-ℚ θ'')))
+            ＝ xε -ℝ real-ℚ (ε +ℚ θ' +ℚ θ'') by ap (xε -ℝ_) (add-real-ℚ _ _)
+            ＝ xε -ℝ real-ℚ (ε +ℚ (θ' +ℚ θ''))
+              by ap (λ a → xε -ℝ real-ℚ a) (associative-add-ℚ _ _ _)
+            ＝ xε -ℝ real-ℚ (ε +ℚ θ)
+              by
+                ap
+                  ( λ a → xε -ℝ real-ℚ (ε +ℚ rational-ℚ⁺ a))
+                  ( eq-add-split-ℚ⁺ θ⁺))
+          ( le-diff-real-ℝ⁺ (xε -ℝ real-ℚ (ε +ℚ θ')) (positive-real-ℚ⁺ θ''⁺))
       let
-        q+ε+θ₂<xε : is-in-lower-cut-ℝ xε (q +ℚ (ε +ℚ θ₂))
-        q+ε+θ₂<xε =
-          lower-cut-real-le-ℚ
-            ( q +ℚ (ε +ℚ θ₂))
-            ( xε)
-            ( tr
-              ( λ y → le-ℝ y xε)
-              ( add-real-ℚ q (ε +ℚ θ₂))
-              ( backward-implication
-                ( iff-diff-right-le-ℝ (real-ℚ q) (real-ℚ (ε +ℚ θ₂)) xε)
-                ( le-lower-cut-real-ℚ q (xε -ℝ real-ℚ (ε +ℚ θ₂)) q<xε-ε-θ₂)))
-        q<lim : is-in-lower-cut-ℝ lim q
-        q<lim = intro-exists ( ε⁺ , θ₂⁺) q+ε+θ₂<xε
-        xε<r-ε-θ₂ : is-in-upper-cut-ℝ xε (r -ℚ (ε +ℚ θ₂))
-        xε<r-ε-θ₂ =
+        xε<r-ε-θ' : is-in-upper-cut-ℝ xε (r -ℚ (ε +ℚ θ'))
+        xε<r-ε-θ' =
           upper-cut-real-le-ℚ
-            ( r -ℚ (ε +ℚ θ₂))
+            ( r -ℚ (ε +ℚ θ'))
             ( xε)
             ( tr
               ( le-ℝ xε)
-              ( diff-real-ℚ r (ε +ℚ θ₂))
+              ( equational-reasoning
+                real-ℚ r -ℝ real-ℚ (ε +ℚ θ')
+                ＝ real-ℚ r +ℝ real-ℚ (neg-ℚ (ε +ℚ θ'))
+                  by ap (real-ℚ r +ℝ_) (neg-real-ℚ _)
+                ＝ real-ℚ (r -ℚ (ε +ℚ θ')) by add-real-ℚ _ _)
               ( forward-implication
-                ( iff-diff-right-le-ℝ xε (real-ℚ (ε +ℚ θ₂)) (real-ℚ r))
-                ( le-upper-cut-real-ℚ r (xε +ℝ real-ℚ (ε +ℚ θ₂)) xε+ε+θ₂<r)))
+                ( iff-diff-right-le-ℝ xε (real-ℚ (ε +ℚ θ')) (real-ℚ r))
+                ( le-upper-cut-real-ℚ r (xε +ℝ real-ℚ (ε +ℚ θ')) xε+ε+θ'<r)))
         lim<r : is-in-upper-cut-ℝ lim r
-        lim<r = intro-exists (ε⁺ , θ₂⁺) xε<r-ε-θ₂
-        lim<xε+ε+θ : le-ℝ lim (xε +ℝ real-ℚ (ε +ℚ θ))
-        lim<xε+ε+θ =
-          transitive-le-ℝ
+        lim<r = intro-exists (ε⁺ , θ'⁺) xε<r-ε-θ'
+        q+ε+θ'<xε : is-in-lower-cut-ℝ xε (q +ℚ (ε +ℚ θ'))
+        q+ε+θ'<xε =
+          lower-cut-real-le-ℚ
+            ( q +ℚ (ε +ℚ θ'))
+            ( xε)
+            ( tr
+              ( λ y → le-ℝ y xε)
+              ( add-real-ℚ _ _)
+              ( backward-implication
+                ( iff-diff-right-le-ℝ (real-ℚ q) (real-ℚ (ε +ℚ θ')) xε)
+                ( le-lower-cut-real-ℚ q (xε -ℝ real-ℚ (ε +ℚ θ')) q<xε-ε-θ')))
+        q<lim : is-in-lower-cut-ℝ lim q
+        q<lim = intro-exists (ε⁺ , θ'⁺) q+ε+θ'<xε
+      neighborhood-±-bound-leq-ℝ
+        ( ε⁺ +ℚ⁺ θ⁺)
+        ( xε)
+        ( lim)
+        ( leq-le-ℝ
+          ( xε)
+          ( lim +ℝ real-ℚ (ε +ℚ θ))
+          ( forward-implication
+            ( iff-add-right-le-ℝ
+              ( xε)
+              ( real-ℚ (ε +ℚ θ))
+              ( lim))
+            ( transitive-le-ℝ
+              ( xε -ℝ real-ℚ (ε +ℚ θ))
+              ( real-ℚ q)
+              ( lim)
+              ( le-lower-cut-real-ℚ q lim q<lim)
+              ( le-upper-cut-real-ℚ q (xε -ℝ real-ℚ (ε +ℚ θ)) xε-ε-θ<q))))
+        ( leq-le-ℝ
+          ( lim)
+          ( xε +ℝ real-ℚ (ε +ℚ θ))
+          ( transitive-le-ℝ
             ( lim)
             ( real-ℚ r)
             ( xε +ℝ real-ℚ (ε +ℚ θ))
-            ( transitive-le-ℝ
-              ( real-ℚ r)
-              ( xε +ℝ (real-ℚ (ε +ℚ θ₂) +ℝ real-ℚ θ₂))
-              ( xε +ℝ real-ℚ (ε +ℚ θ))
-              ( preserves-le-left-add-ℝ
-                ( xε)
-                ( real-ℚ (ε +ℚ θ₂) +ℝ real-ℚ θ₂)
-                ( real-ℚ (ε +ℚ θ))
-                ( inv-tr
-                  ( λ z → le-ℝ z (real-ℚ (ε +ℚ θ)))
-                  ( add-real-ℚ _ _)
-                  ( preserves-le-real-ℚ
-                    ( ε +ℚ θ₂ +ℚ θ₂)
-                    ( ε +ℚ θ)
-                    ( inv-tr
-                      ( λ p → le-ℚ p (ε +ℚ θ))
-                      ( associative-add-ℚ _ _ _)
-                      ( preserves-le-right-add-ℚ ε 2θ₂ θ 2θ₂<θ)))))
-              ( tr
-                ( le-ℝ (real-ℚ r))
-                ( associative-add-ℝ _ _ _)
-                ( le-lower-cut-real-ℚ
-                  ( r)
-                  ( xε +ℝ real-ℚ (ε +ℚ θ₂) +ℝ real-ℚ θ₂)
-                  ( r<xε+ε+2θ₂))))
-            ( le-upper-cut-real-ℚ r lim lim<r)
-        -- xε-ε-2θ₂<q
-        xε<lim+ε+θ : le-ℝ xε (lim +ℝ real-ℚ (ε +ℚ θ))
-        xε<lim+ε+θ =
-          transitive-le-ℝ
-            ( xε)
-            ( real-ℚ q +ℝ real-ℚ (ε +ℚ θ))
-            ( lim +ℝ real-ℚ (ε +ℚ θ))
-            ( preserves-le-right-add-ℝ
-              ( real-ℚ (ε +ℚ θ))
-              ( real-ℚ q)
-              ( lim)
-              ( le-lower-cut-real-ℚ q lim q<lim))
-            ( transitive-le-ℝ
-              ( xε)
-              ( real-ℚ q +ℝ real-ℚ (ε +ℚ 2θ₂))
-              ( real-ℚ q +ℝ real-ℚ (ε +ℚ θ))
-              {!   !}
-              ( forward-implication
-                ( iff-add-right-le-ℝ xε (real-ℚ (ε +ℚ 2θ₂)) (real-ℚ q))
-                ( tr
-                  ( λ y → le-ℝ y (real-ℚ q))
-                  ( equational-reasoning
-                    xε -ℝ real-ℚ (ε +ℚ θ₂) -ℝ real-ℚ θ₂
-                    ＝ xε +ℝ (neg-ℝ (real-ℚ (ε +ℚ θ₂)) -ℝ real-ℚ θ₂)
-                      by associative-add-ℝ _ _ _
-                    ＝ xε -ℝ (real-ℚ (ε +ℚ θ₂) +ℝ real-ℚ θ₂)
-                      by ap (xε +ℝ_) (inv (distributive-neg-add-ℝ
-                    ＝ {!   !} by {!   !})
-                  ( le-upper-cut-real-ℚ
-                    ( q)
-                    ( xε -ℝ real-ℚ (ε +ℚ θ₂) -ℝ real-ℚ θ₂)
-                    ( xε-ε-2θ₂<q)))))
-      {!   !}
+            ( le-lower-cut-real-ℚ r (xε +ℝ real-ℚ (ε +ℚ θ)) r<xε+ε+θ)
+            ( le-upper-cut-real-ℚ r lim lim<r)))
     where
-      claim : Prop l
-      claim =
-        premetric-leq-ℝ
-          ( l)
-          ( ε⁺ +ℚ⁺ θ⁺)
-          ( map-cauchy-approximation-leq-ℝ x ε⁺)
-          ( lim-cauchy-approximation-leq-ℝ x)
-      open do-syntax-trunc-Prop claim
+      open
+        do-syntax-trunc-Prop
+          ( premetric-leq-ℝ
+            ( l)
+            ( ε⁺ +ℚ⁺ θ⁺)
+            ( map-cauchy-approximation-leq-ℝ x ε⁺)
+            ( lim-cauchy-approximation-leq-ℝ x))
 
   is-convergent-cauchy-approximation-leq-ℝ :
     is-convergent-cauchy-approximation-Metric-Space
       ( metric-space-leq-ℝ l)
       ( x)
-  pr1 is-convergent-cauchy-approximation-leq-ℝ =
-    lim-cauchy-approximation-leq-ℝ x
-  pr2 is-convergent-cauchy-approximation-leq-ℝ =
+  is-convergent-cauchy-approximation-leq-ℝ =
+    lim-cauchy-approximation-leq-ℝ x ,
     is-limit-lim-cauchy-approximation-leq-ℝ
 ```
 

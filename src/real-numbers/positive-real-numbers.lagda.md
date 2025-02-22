@@ -121,7 +121,7 @@ abstract
     do
       r⁺@(r , _) , r<d ← exists-ℚ⁺-in-lower-cut-ℝ⁺ d⁺
       (p , q) , (q<p+r , p<x , x<q) ←
-        is-arithmetically-located-lower-upper-real-ℝ x r⁺
+        is-arithmetically-located-ℝ x r⁺
       intro-exists
         ( q)
         ( x<q ,
@@ -132,13 +132,13 @@ abstract
                 ( d)
                 ( q -ℚ p)
                 ( r)
-                ( binary-tr
-                  ( le-ℚ)
-                  ( commutative-add-ℚ (neg-ℚ p) q)
-                  ( is-retraction-left-div-Group group-add-ℚ p r)
-                  ( preserves-le-right-add-ℚ (neg-ℚ p) q (p +ℚ r) q<p+r))
+                ( le-transpose-right-add-ℚ
+                  ( q)
+                  ( r)
+                  ( p)
+                  ( tr (le-ℚ q) (commutative-add-ℚ p r) q<p+r))
                 ( r<d) ,
-              inv (is-identity-right-conjugation-Ab abelian-group-add-ℚ p q)))
+              inv (is-identity-right-conjugation-add-ℚ p q)))
     where open do-syntax-trunc-Prop (le-ℝ-Prop x (x +ℝ d))
 
 le-right-add-real-ℝ⁺ :
@@ -161,7 +161,7 @@ abstract
       ( tr
         ( λ y → sim-ℝ y x)
         ( right-swap-add-ℝ x d (neg-ℝ d))
-        ( cancel-right-diff-add-ℝ x d))
+        ( cancel-right-add-diff-ℝ x d))
       ( le-left-add-real-ℝ⁺ (x -ℝ d) d⁺)
 ```
 
@@ -192,6 +192,14 @@ is-positive-real-positive-ℚ :
   (q : ℚ) → is-positive-ℚ q → is-positive-ℝ (real-ℚ q)
 is-positive-real-positive-ℚ q pos-q =
   preserves-le-real-ℚ zero-ℚ q (le-zero-is-positive-ℚ q pos-q)
+
+is-positive-rational-positive-real-ℚ :
+  (q : ℚ) → is-positive-ℝ (real-ℚ q) → is-positive-ℚ q
+is-positive-rational-positive-real-ℚ q =
+  elim-exists
+    ( is-positive-prop-ℚ q)
+    ( λ r (0<r , r<q) →
+      is-positive-le-zero-ℚ q (transitive-le-ℚ zero-ℚ r q r<q 0<r))
 
 positive-real-ℚ⁺ : ℚ⁺ → ℝ⁺ lzero
 positive-real-ℚ⁺ (q , pos-q) = (real-ℚ q , is-positive-real-positive-ℚ q pos-q)
