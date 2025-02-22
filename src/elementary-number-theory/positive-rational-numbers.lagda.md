@@ -439,22 +439,6 @@ module _
     right-inverse-law-mul-is-positive-ℚ
   pr2 (pr2 is-mul-invertible-is-positive-ℚ) =
     left-inverse-law-mul-is-positive-ℚ
-
-inv-ℚ⁺ : ℚ⁺ → ℚ⁺
-pr1 (inv-ℚ⁺ x) = inv-is-positive-ℚ (rational-ℚ⁺ x) (is-positive-rational-ℚ⁺ x)
-pr2 (inv-ℚ⁺ x) = is-positive-denominator-ℚ⁺ x
-
-abstract
-  left-inverse-law-mul-ℚ⁺ : (x : ℚ⁺) → inv-ℚ⁺ x *ℚ⁺ x ＝ one-ℚ⁺
-  left-inverse-law-mul-ℚ⁺ x =
-    eq-ℚ⁺
-      ( left-inverse-law-mul-is-positive-ℚ
-        ( rational-ℚ⁺ x)
-        ( is-positive-rational-ℚ⁺ x))
-
-  right-inverse-law-mul-ℚ⁺ : (x : ℚ⁺) → x *ℚ⁺ inv-ℚ⁺ x ＝ one-ℚ⁺
-  right-inverse-law-mul-ℚ⁺ x =
-    commutative-mul-ℚ⁺ _ _ ∙ left-inverse-law-mul-ℚ⁺ x
 ```
 
 ### The strict inequality on positive rational numbers
