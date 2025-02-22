@@ -243,16 +243,15 @@ module _
   (y : ℝ l2)
   where
 
-  abstract
-    neg-le-ℝ : le-ℝ x y → le-ℝ (neg-ℝ y) (neg-ℝ x)
-    neg-le-ℝ x<y =
-      do
-        p , x<p , p<y ← x<y
-        intro-exists
-          (neg-ℚ p)
-          ( tr (is-in-lower-cut-ℝ y) (inv (neg-neg-ℚ p)) p<y ,
-            tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) x<p)
-      where open do-syntax-trunc-Prop (le-ℝ-Prop (neg-ℝ y) (neg-ℝ x))
+  reverses-order-neg-ℝ : le-ℝ x y → le-ℝ (neg-ℝ y) (neg-ℝ x)
+  reverses-order-neg-ℝ x<y =
+    do
+      (p , x<p , p<y) ← x<y
+      intro-exists
+        (neg-ℚ p)
+        ( tr (is-in-lower-cut-ℝ y) (inv (neg-neg-ℚ p)) p<y ,
+          tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) x<p)
+    where open do-syntax-trunc-Prop (le-ℝ-Prop (neg-ℝ y) (neg-ℝ x))
 ```
 
 ### If `x` is less than `y`, then `y` is not less than or equal to `x`
