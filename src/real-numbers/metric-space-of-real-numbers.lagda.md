@@ -129,35 +129,28 @@ is-in-lower-neighborhood-real-bound-leq-ℝ d⁺@(d , _) x y y≤x+d q q+d<y =
   lower-cut-real-le-ℚ
     ( q)
     ( x)
-    ( preserves-le-sim-ℝ
-      ( (real-ℚ q +ℝ real-ℚ d) -ℝ real-ℚ d)
+    ( concatenate-le-leq-ℝ
       ( real-ℚ q)
-      ( (x +ℝ real-ℚ d) -ℝ real-ℚ d)
+      ( y -ℝ real-ℚ d)
       ( x)
-      ( cancel-right-add-diff-ℝ (real-ℚ q) (real-ℚ d))
-      ( cancel-right-add-diff-ℝ x (real-ℚ d))
-      ( preserves-le-right-add-ℝ
-        ( neg-ℝ (real-ℚ d))
-        ( real-ℚ q +ℝ real-ℚ d)
-        ( x +ℝ real-ℚ d)
+      ( forward-implication
+        ( iff-diff-right-le-ℝ
+          ( real-ℚ q)
+          ( real-ℚ d)
+          ( y))
         ( inv-tr
-          ( λ y → le-ℝ y (x +ℝ real-ℚ d))
+          ( λ z → le-ℝ z y)
           ( add-real-ℚ q d)
-          ( concatenate-le-leq-ℝ
-            ( real-ℚ (q +ℚ d))
-            ( y)
-            ( x +ℝ real-ℚ d)
-            ( le-lower-cut-real-ℚ (q +ℚ d) y q+d<y)
-            ( y≤x+d)))))
+          ( le-lower-cut-real-ℚ (q +ℚ d) y q+d<y)))
+      ( backward-implication (iff-add-right-leq-ℝ y (real-ℚ d) x) y≤x+d))
 
 neighborhood-±-bound-leq-ℝ :
   {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
   leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d)) →
   leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
   type-Prop (premetric-leq-ℝ l d x y)
-pr1 (neighborhood-±-bound-leq-ℝ d x y x≤y+d y≤x+d) =
-  is-in-lower-neighborhood-real-bound-leq-ℝ d x y y≤x+d
-pr2 (neighborhood-±-bound-leq-ℝ d x y x≤y+d y≤x+d) =
+neighborhood-±-bound-leq-ℝ d x y x≤y+d y≤x+d =
+  is-in-lower-neighborhood-real-bound-leq-ℝ d x y y≤x+d ,
   is-in-lower-neighborhood-real-bound-leq-ℝ d y x x≤y+d
 ```
 
