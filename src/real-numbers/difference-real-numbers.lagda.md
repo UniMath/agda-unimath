@@ -9,8 +9,8 @@ module real-numbers.difference-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types

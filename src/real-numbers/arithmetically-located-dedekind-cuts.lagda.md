@@ -20,16 +20,10 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.archimedean-property-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
-open import foundation.propositions
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -41,7 +35,6 @@ open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
-open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -202,7 +195,7 @@ module _
 
   is-arithmetically-located-ℝ :
     is-arithmetically-located-lower-upper-ℝ (lower-real-ℝ x) (upper-real-ℝ x)
-  is-arithmetically-located-ℝ ε⁺@(ε , _)=
+  is-arithmetically-located-ℝ ε⁺@(ε , _) =
     do
       ε'⁺@(ε' , pos-ε') , 2ε'<ε ← double-le-ℚ⁺ ε⁺
       p , p<x ← is-inhabited-lower-cut-ℝ x

@@ -318,7 +318,6 @@ module _
         ( λ z → sim-ℝ z x)
         ( right-swap-add-ℝ x y (neg-ℝ y))
         ( cancel-right-add-diff-ℝ)
-
 ```
 
 ### Addition reflects similarity
