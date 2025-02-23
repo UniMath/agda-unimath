@@ -20,7 +20,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-Two [subtypes](foundation-core.subtype.md) are
+Two [subtypes](foundation-core.subtypes.md) are
 {{#concept "disjoint" WDID=Q215382 WD="disjoint sets" Agda=disjoint-subtype}} if
 their [intersection](foundation.intersections-subtypes.md) is
 [empty](foundation.empty-types.md).
