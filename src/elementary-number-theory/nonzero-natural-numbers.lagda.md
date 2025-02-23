@@ -15,15 +15,15 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.coproduct-types
-open import foundation.negated-equality
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.negated-equality
+open import foundation.propositions
+open import foundation.sections
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import foundation.sections
-open import foundation.propositions
-open import foundation.equality-dependent-pair-types
 ```
 
 </details>
@@ -168,7 +168,8 @@ le-left-add-nat-ℕ⁺ m (n , n≠0) =
 ### The predecessor function from the nonzero natural numbers reflects inequality
 
 ```agda
-reflects-leq-pred-nonzero-ℕ : (m n : ℕ⁺) → leq-ℕ (pred-ℕ⁺ m) (pred-ℕ⁺ n) → leq-ℕ⁺ m n
+reflects-leq-pred-nonzero-ℕ :
+  (m n : ℕ⁺) → leq-ℕ (pred-ℕ⁺ m) (pred-ℕ⁺ n) → leq-ℕ⁺ m n
 reflects-leq-pred-nonzero-ℕ (succ-ℕ m , _) (succ-ℕ n , _) m≤n = m≤n
 reflects-leq-pred-nonzero-ℕ (zero-ℕ , H) _ = ex-falso (H refl)
 reflects-leq-pred-nonzero-ℕ (succ-ℕ _ , _) (zero-ℕ , H) = ex-falso (H refl)

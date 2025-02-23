@@ -724,7 +724,6 @@ abstract
           ( le-left-min-ℚ⁺ q r)
           ( le-right-min-ℚ⁺ q r))
 
-
   double-le-ℚ⁺ :
     (p : ℚ⁺) →
     exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)

@@ -10,23 +10,25 @@ module metric-spaces.cauchy-sequences-metric-spaces where
 
 ```agda
 open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.archimedean-property-positive-rational-numbers
-open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-natural-numbers
-open import foundation.identity-types
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
+
+open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.universe-levels
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.transport-along-identifications
-open import foundation.action-on-identifications-functions
+open import foundation.universe-levels
+
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
 open import metric-spaces.metric-spaces
@@ -39,17 +41,17 @@ open import metric-spaces.metric-spaces
 A
 {{#concept "Cauchy sequence" Disambiguation="in a metric space" Agda=is-cauchy-approximation-Metric-Space}}
 `x` in a [metric space](metric-spaces.metric-spaces.md) is a mapping from the
-[natural numbers](elementary-number-theory.natural-numbers.md) to the
-underlying type of the metric space such that for any
+[natural numbers](elementary-number-theory.natural-numbers.md) to the underlying
+type of the metric space such that for any
 [positive rational](elementary-number-theory.positive-rational-numbers.md) `ε`,
-there is a concrete `n : ℕ` such that for any `m, k ≥ n`, `x m` and `x k` are
-in a neighborhood of `ε` of each other.
+there is a concrete `n : ℕ` such that for any `m, k ≥ n`, `x m` and `x k` are in
+a neighborhood of `ε` of each other.
 
 Importantly, this is a structure, not a proposition, allowing us to explicitly
-calculate rates of convergence.  This follows Section 11.2.2 in {{#cite UF13}}.
+calculate rates of convergence. This follows Section 11.2.2 in {{#cite UF13}}.
 
-In a metric space, every Cauchy sequence has a (non-unique) corresponding
-Cauchy approximation, with the same limit if either exists, and vice versa.
+In a metric space, every Cauchy sequence has a (non-unique) corresponding Cauchy
+approximation, with the same limit if either exists, and vice versa.
 
 ## Definition
 

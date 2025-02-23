@@ -14,19 +14,18 @@ open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-sequences-metric-spaces
-open import metric-spaces.metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.metric-spaces
 ```
 
 </details>
 
 ## Idea
 
-A
-[Cauchy sequence](metric-spaces.cauchy-sequence-metric-spaces.md)
-in a [complete metric space](metric-spaces.complete-metric-spaces.md)
-is a Cauchy sequence in the underlying metric space, and always has a limit.
+A [Cauchy sequence](metric-spaces.cauchy-sequence-metric-spaces.md) in a
+[complete metric space](metric-spaces.complete-metric-spaces.md) is a Cauchy
+sequence in the underlying metric space, and always has a limit.
 
 ## Definition
 
