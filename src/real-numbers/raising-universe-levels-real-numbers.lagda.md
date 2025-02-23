@@ -16,16 +16,21 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.negation
-open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import logic.functoriality-existential-quantification
+
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
@@ -35,100 +40,121 @@ open import real-numbers.similarity-real-numbers
 Real numbers have designated universe levels. For any real number, we can
 construct an equivalent real number in any higher universe.
 
+## Definition
+
+### Raising lower Dedekind real numbers
+
 ```agda
 module _
-  {l1 : Level}
-  (l : Level)
-  (x : ℝ l1)
+  {l0 : Level} (l : Level) (x : lower-ℝ l0)
   where
 
-  lower-cut-raise-ℝ : subtype (l1 ⊔ l) ℚ
-  lower-cut-raise-ℝ = raise-subtype l (lower-cut-ℝ x)
+  cut-raise-lower-ℝ : subtype (l0 ⊔ l) ℚ
+  cut-raise-lower-ℝ = raise-subtype l (cut-lower-ℝ x)
 
-  is-in-lower-cut-raise-ℝ : ℚ → UU (l1 ⊔ l)
-  is-in-lower-cut-raise-ℝ = is-in-subtype lower-cut-raise-ℝ
+  abstract
+    is-inhabited-cut-raise-lower-ℝ : is-inhabited-subtype cut-raise-lower-ℝ
+    is-inhabited-cut-raise-lower-ℝ =
+      map-tot-exists (λ _ → map-raise) (is-inhabited-cut-lower-ℝ x)
 
-  upper-cut-raise-ℝ : subtype (l1 ⊔ l) ℚ
-  upper-cut-raise-ℝ = raise-subtype l (upper-cut-ℝ x)
+    is-rounded-cut-raise-lower-ℝ :
+      (q : ℚ) →
+      is-in-subtype cut-raise-lower-ℝ q ↔
+      exists ℚ (λ r → le-ℚ-Prop q r ∧ cut-raise-lower-ℝ r)
+    pr1 (is-rounded-cut-raise-lower-ℝ q) (map-raise q<x) =
+      map-tot-exists
+        ( λ _ → map-product id map-raise)
+        ( forward-implication (is-rounded-cut-lower-ℝ x q) q<x)
+    pr2 (is-rounded-cut-raise-lower-ℝ q) ∃r =
+      map-raise
+        ( backward-implication
+          ( is-rounded-cut-lower-ℝ x q)
+          ( map-tot-exists (λ _ → map-product id map-inv-raise) ∃r))
 
-  is-in-upper-cut-raise-ℝ : ℚ → UU (l1 ⊔ l)
-  is-in-upper-cut-raise-ℝ = is-in-subtype upper-cut-raise-ℝ
+  raise-lower-ℝ : lower-ℝ (l0 ⊔ l)
+  raise-lower-ℝ =
+    cut-raise-lower-ℝ ,
+    is-inhabited-cut-raise-lower-ℝ ,
+    is-rounded-cut-raise-lower-ℝ
+```
 
-  is-inhabited-lower-cut-raise-ℝ : exists ℚ lower-cut-raise-ℝ
-  is-inhabited-lower-cut-raise-ℝ =
-    elim-exists
-      (∃ ℚ lower-cut-raise-ℝ)
-      (λ q q∈L → intro-exists q (map-raise q∈L))
-      (is-inhabited-lower-cut-ℝ x)
+### Raising upper Dedekind real numbers
 
-  is-inhabited-upper-cut-raise-ℝ : exists ℚ upper-cut-raise-ℝ
-  is-inhabited-upper-cut-raise-ℝ =
-    elim-exists
-      ( ∃ ℚ upper-cut-raise-ℝ)
-      ( λ q q∈U → intro-exists q (map-raise q∈U))
-      ( is-inhabited-upper-cut-ℝ x)
+```agda
+module _
+  {l0 : Level} (l : Level) (x : upper-ℝ l0)
+  where
 
-  is-rounded-lower-cut-raise-ℝ :
-    (q : ℚ) →
-    is-in-lower-cut-raise-ℝ q ↔
-    exists ℚ (λ r → le-ℚ-Prop q r ∧ lower-cut-raise-ℝ r)
-  pr1 (is-rounded-lower-cut-raise-ℝ q) (map-raise q∈L) =
-    elim-exists
-      ( ∃ ℚ (λ r → le-ℚ-Prop q r ∧ lower-cut-raise-ℝ r))
-      ( λ r (q<r , r∈L) → intro-exists r (q<r , map-raise r∈L))
-      ( forward-implication (is-rounded-lower-cut-ℝ x q) q∈L)
-  pr2 (is-rounded-lower-cut-raise-ℝ q) =
-    elim-exists
-      ( lower-cut-raise-ℝ q)
-      ( λ r (q<r , r∈L) →
-        map-raise
-          ( backward-implication
-            ( is-rounded-lower-cut-ℝ x q)
-            ( intro-exists r (q<r , map-inv-raise r∈L))))
+  cut-raise-upper-ℝ : subtype (l0 ⊔ l) ℚ
+  cut-raise-upper-ℝ = raise-subtype l (cut-upper-ℝ x)
 
-  is-rounded-upper-cut-raise-ℝ :
-    (r : ℚ) →
-    is-in-upper-cut-raise-ℝ r ↔
-    exists ℚ (λ q → le-ℚ-Prop q r ∧ upper-cut-raise-ℝ q)
-  pr1 (is-rounded-upper-cut-raise-ℝ r) (map-raise r∈U) =
-    elim-exists
-      ( ∃ ℚ (λ q → le-ℚ-Prop q r ∧ upper-cut-raise-ℝ q))
-      ( λ q (q<r , q∈U) → intro-exists q (q<r , map-raise q∈U))
-      ( forward-implication (is-rounded-upper-cut-ℝ x r) r∈U)
-  pr2 (is-rounded-upper-cut-raise-ℝ r) =
-    elim-exists
-      ( upper-cut-raise-ℝ r)
-      ( λ q (q<r , q∈U) →
-        map-raise
-          ( backward-implication
-            ( is-rounded-upper-cut-ℝ x r)
-            ( intro-exists q (q<r , map-inv-raise q∈U))))
+  abstract
+    is-inhabited-cut-raise-upper-ℝ : is-inhabited-subtype cut-raise-upper-ℝ
+    is-inhabited-cut-raise-upper-ℝ =
+      map-tot-exists (λ _ → map-raise) (is-inhabited-cut-upper-ℝ x)
 
-  is-disjoint-cut-raise-ℝ :
-    (q : ℚ) → ¬ (is-in-lower-cut-raise-ℝ q × is-in-upper-cut-raise-ℝ q)
-  is-disjoint-cut-raise-ℝ q (map-raise q∈L , map-raise q∈U) =
-    is-disjoint-cut-ℝ x q (q∈L , q∈U)
+    is-rounded-cut-raise-upper-ℝ :
+      (q : ℚ) →
+      is-in-subtype cut-raise-upper-ℝ q ↔
+      exists ℚ (λ p → le-ℚ-Prop p q ∧ cut-raise-upper-ℝ p)
+    pr1 (is-rounded-cut-raise-upper-ℝ q) (map-raise x<q) =
+      map-tot-exists
+        ( λ _ → map-product id map-raise)
+        ( forward-implication (is-rounded-cut-upper-ℝ x q) x<q)
+    pr2 (is-rounded-cut-raise-upper-ℝ q) ∃p =
+      map-raise
+        ( backward-implication
+          ( is-rounded-cut-upper-ℝ x q)
+          ( map-tot-exists (λ _ → map-product id map-inv-raise) ∃p))
 
-  is-located-lower-upper-cut-raise-ℝ :
-    (q r : ℚ) →
-    le-ℚ q r →
-    type-disjunction-Prop (lower-cut-raise-ℝ q) (upper-cut-raise-ℝ r)
-  is-located-lower-upper-cut-raise-ℝ q r q<r =
-    elim-disjunction
-      ( lower-cut-raise-ℝ q ∨ upper-cut-raise-ℝ r)
-      ( inl-disjunction ∘ map-raise)
-      ( inr-disjunction ∘ map-raise)
-      ( is-located-lower-upper-cut-ℝ x q r q<r)
+  raise-upper-ℝ : upper-ℝ (l0 ⊔ l)
+  raise-upper-ℝ =
+    cut-raise-upper-ℝ ,
+    is-inhabited-cut-raise-upper-ℝ ,
+    is-rounded-cut-raise-upper-ℝ
+```
 
-  raise-ℝ : ℝ (l1 ⊔ l)
+### Raising Dedekind real numbers
+
+```agda
+module _
+  {l0 : Level} (l : Level) (x : ℝ l0)
+  where
+
+  lower-real-raise-ℝ : lower-ℝ (l0 ⊔ l)
+  lower-real-raise-ℝ = raise-lower-ℝ l (lower-real-ℝ x)
+
+  upper-real-raise-ℝ : upper-ℝ (l0 ⊔ l)
+  upper-real-raise-ℝ = raise-upper-ℝ l (upper-real-ℝ x)
+
+  abstract
+    is-disjoint-cut-raise-ℝ :
+      (q : ℚ) →
+      ¬
+        ( is-in-cut-lower-ℝ lower-real-raise-ℝ q ×
+          is-in-cut-upper-ℝ upper-real-raise-ℝ q)
+    is-disjoint-cut-raise-ℝ q (map-raise q<x , map-raise x<q) =
+      is-disjoint-cut-ℝ x q (q<x , x<q)
+
+    is-located-lower-upper-cut-raise-ℝ :
+      (p q : ℚ) → le-ℚ p q →
+      type-disjunction-Prop
+        ( cut-lower-ℝ lower-real-raise-ℝ p)
+        ( cut-upper-ℝ upper-real-raise-ℝ q)
+    is-located-lower-upper-cut-raise-ℝ p q p<q =
+      elim-disjunction
+        ( cut-lower-ℝ lower-real-raise-ℝ p ∨ cut-upper-ℝ upper-real-raise-ℝ q)
+        ( inl-disjunction ∘ map-raise)
+        ( inr-disjunction ∘ map-raise)
+        ( is-located-lower-upper-cut-ℝ x p q p<q)
+
+  raise-ℝ : ℝ (l0 ⊔ l)
   raise-ℝ =
-    real-dedekind-cut
-      ( lower-cut-raise-ℝ)
-      ( upper-cut-raise-ℝ)
-      ( (is-inhabited-lower-cut-raise-ℝ , is-inhabited-upper-cut-raise-ℝ) ,
-        (is-rounded-lower-cut-raise-ℝ , is-rounded-upper-cut-raise-ℝ) ,
-        is-disjoint-cut-raise-ℝ ,
-        is-located-lower-upper-cut-raise-ℝ)
+    real-lower-upper-ℝ
+      ( lower-real-raise-ℝ)
+      ( upper-real-raise-ℝ)
+      ( is-disjoint-cut-raise-ℝ)
+      ( is-located-lower-upper-cut-raise-ℝ)
 ```
 
 ## Properties
@@ -136,7 +162,7 @@ module _
 ### Reals are similar to their raised-universe equivalents
 
 ```agda
-sim-raise-ℝ : {l1 : Level} → (l : Level) → (x : ℝ l1) → sim-ℝ x (raise-ℝ l x)
+sim-raise-ℝ : {l0 : Level} → (l : Level) → (x : ℝ l0) → sim-ℝ x (raise-ℝ l x)
 pr1 (sim-raise-ℝ l x) _ = map-raise
 pr2 (sim-raise-ℝ l x) _ = map-inv-raise
 ```
