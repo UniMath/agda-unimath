@@ -16,6 +16,7 @@ open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-sequences-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.complete-metric-spaces
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 ```
 
 </details>
@@ -92,4 +93,41 @@ module _
   has-limit-cauchy-sequence-Complete-Metric-Space =
     limit-cauchy-sequence-Complete-Metric-Space ,
     is-limit-limit-cauchy-sequence-Complete-Metric-Space
+```
+
+### If every Cauchy sequence has a limit in a metric space, the metric space is complete
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  where
+
+  cauchy-sequences-have-limits-Metric-Space : UU (l1 ⊔ l2)
+  cauchy-sequences-have-limits-Metric-Space =
+    (x : cauchy-sequence-Metric-Space M) →
+    has-limit-cauchy-sequence-Metric-Space M x
+
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (H : cauchy-sequences-have-limits-Metric-Space M)
+  where
+
+  is-complete-metric-space-cauchy-sequences-have-limits-Metric-Space :
+    is-complete-Metric-Space M
+  is-complete-metric-space-cauchy-sequences-have-limits-Metric-Space x =
+    let
+      (lim , lim-is-seq-lim) =
+        H (cauchy-sequence-cauchy-approximation-Metric-Space M x)
+    in
+      lim ,
+      is-limit-cauchy-approximation-limit-cauchy-sequence-cauchy-approximation-Metric-Space
+        ( M)
+        ( x)
+        ( lim)
+        ( lim-is-seq-lim)
+
+  complete-metric-space-cauchy-sequences-have-limits-Metric-Space :
+    Complete-Metric-Space l1 l2
+  complete-metric-space-cauchy-sequences-have-limits-Metric-Space =
+    M , is-complete-metric-space-cauchy-sequences-have-limits-Metric-Space
 ```

@@ -98,6 +98,8 @@ pred-nonzero-ℕ : nonzero-ℕ → ℕ
 pred-nonzero-ℕ (succ-ℕ n , _) = n
 pred-nonzero-ℕ (zero-ℕ , H) = ex-falso (H refl)
 
+pred-ℕ⁺ = pred-nonzero-ℕ
+
 is-section-succ-nonzero-ℕ' : is-section succ-nonzero-ℕ' pred-nonzero-ℕ
 is-section-succ-nonzero-ℕ' (zero-ℕ , H) = ex-falso (H refl)
 is-section-succ-nonzero-ℕ' n⁺@(succ-ℕ n , _) = eq-nonzero-ℕ refl
@@ -161,4 +163,13 @@ le-left-add-nat-ℕ⁺ m (n , n≠0) =
     ( λ p → le-ℕ p (m +ℕ n))
     ( right-unit-law-add-ℕ m)
     ( preserves-le-left-add-ℕ m zero-ℕ n (le-is-nonzero-ℕ n n≠0))
+```
+
+### The predecessor function from the nonzero natural numbers reflects inequality
+
+```agda
+reflects-leq-pred-nonzero-ℕ : (m n : ℕ⁺) → leq-ℕ (pred-ℕ⁺ m) (pred-ℕ⁺ n) → leq-ℕ⁺ m n
+reflects-leq-pred-nonzero-ℕ (succ-ℕ m , _) (succ-ℕ n , _) m≤n = m≤n
+reflects-leq-pred-nonzero-ℕ (zero-ℕ , H) _ = ex-falso (H refl)
+reflects-leq-pred-nonzero-ℕ (succ-ℕ _ , _) (zero-ℕ , H) = ex-falso (H refl)
 ```
