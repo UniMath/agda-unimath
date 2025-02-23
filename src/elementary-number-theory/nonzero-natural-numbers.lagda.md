@@ -83,6 +83,14 @@ pr1 (succ-nonzero-ℕ' n) = succ-ℕ n
 pr2 (succ-nonzero-ℕ' n) = is-nonzero-succ-ℕ n
 ```
 
+### The predecessor function from the nonzero natural numbers to the natural numbers
+
+```agda
+pred-nonzero-ℕ : nonzero-ℕ → ℕ
+pred-nonzero-ℕ (succ-ℕ n , _) = n
+pred-nonzero-ℕ (zero-ℕ , H) = ex-falso (H refl)
+```
+
 ### The quotient of a nonzero natural number by a divisor
 
 ```agda

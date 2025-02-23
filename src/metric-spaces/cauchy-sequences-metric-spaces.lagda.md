@@ -9,14 +9,19 @@ module metric-spaces.cauchy-sequences-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import foundation.propositions
+open import foundation.transport-along-identifications
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
@@ -102,11 +107,20 @@ module _
           ( ε)
           ( map-cauchy-sequence-Metric-Space M x m)
           ( l))
+
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (x : cauchy-sequence-Metric-Space M)
+  where
+
+  has-limit-cauchy-sequence-Metric-Space : UU (l1 ⊔ l2)
+  has-limit-cauchy-sequence-Metric-Space =
+    Σ (type-Metric-Space M) (is-limit-cauchy-sequence-Metric-Space M x)
 ```
 
 ## Properties
 
-### Correspondence with Cauchy approximations
+### Correspondence to Cauchy approximations
 
 ```agda
 module _
@@ -188,10 +202,82 @@ module _
 
   is-limit-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space :
     is-limit-cauchy-sequence-Metric-Space M x l
-  pr1
-    ( is-limit-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space
-      ε⁺@(ε , _)) =
-        {! modulus-of-convergence-cauchy-sequence-Metric-Space M x ?  !}
+  is-limit-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space
+    ε⁺@(ε , _) =
+    let
+      (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
+      ε''⁺@(ε'' , _) = left-summand-split-ℚ⁺ ε'⁺
+      n =
+        modulus-of-convergence-cauchy-sequence-Metric-Space M x ε''⁺
+      xn = map-cauchy-sequence-Metric-Space M x n
+    in
+      n ,
+      ( λ m n≤m →
+        let
+          xm = map-cauchy-sequence-Metric-Space M x m
+          neighborhood-ε''-xm-xn : neighborhood-Metric-Space M ε''⁺ xm xn
+          neighborhood-ε''-xm-xn =
+            pr2
+              ( is-cauchy-sequence-cauchy-sequence-Metric-Space M x ε''⁺)
+              ( m)
+              ( n)
+              ( n≤m)
+              ( refl-leq-ℕ _)
+          neighborhood-ε'-xn-l :
+            neighborhood-Metric-Space M ε'⁺ xn l
+          neighborhood-ε'-xn-l =
+            tr
+              ( λ d → neighborhood-Metric-Space M d xn l)
+              ( eq-add-split-ℚ⁺ ε'⁺)
+              ( H ε''⁺ (right-summand-split-ℚ⁺ ε'⁺))
+          neighborhood-ε''+ε'-xm-l :
+            neighborhood-Metric-Space M (ε''⁺ +ℚ⁺ ε'⁺) xm l
+          neighborhood-ε''+ε'-xm-l =
+            is-triangular-structure-Metric-Space
+              ( M)
+              ( xm)
+              ( xn)
+              ( l)
+              ( ε''⁺)
+              ( ε'⁺)
+              ( neighborhood-ε'-xn-l)
+              ( neighborhood-ε''-xm-xn)
+        in
+          is-monotonic-structure-Metric-Space
+            ( M)
+            ( xm)
+            ( l)
+            ( ε''⁺ +ℚ⁺ ε'⁺)
+            ( ε⁺)
+            ( transitive-le-ℚ
+              ( ε'' +ℚ ε')
+              ( ε' +ℚ ε')
+              ( ε)
+              ( 2ε'<ε)
+              ( preserves-le-left-add-ℚ ε' ε'' ε' (le-mediant-zero-ℚ⁺ ε'⁺)))
+            ( neighborhood-ε''+ε'-xm-l))
+```
+
+### Correspondence of Cauchy approximations to Cauchy sequences
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (x : cauchy-approximation-Metric-Space M)
+  where
+
+  map-cauchy-sequence-cauchy-approximation-Metric-Space :
+    ℕ → type-Metric-Space M
+  map-cauchy-sequence-cauchy-approximation-Metric-Space n =
+    map-cauchy-approximation-Metric-Space
+      ( M)
+      ( x)
+      ( positive-reciprocal-rational-ℕ⁺ (succ-nonzero-ℕ' n))
+
+  modulus-of-convergence-cauchy-sequence-cauchy-approximation-Metric-Space :
+    ℚ⁺ → ℕ
+  modulus-of-convergence-cauchy-sequence-cauchy-approximation-Metric-Space ε⁺ =
+    pred-nonzero-ℕ (pr1 (smaller-reciprocal-ℚ⁺ ε⁺))
 ```
 
 ## References

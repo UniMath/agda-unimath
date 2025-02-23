@@ -685,10 +685,10 @@ module _
 
 ```agda
 abstract
-  double-le-ℚ⁺ :
+  bound-double-le-ℚ⁺ :
     (p : ℚ⁺) →
-    exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
-  double-le-ℚ⁺ p = unit-trunc-Prop dependent-pair-result
+    Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
+  bound-double-le-ℚ⁺ p = dependent-pair-result
     where
     q : ℚ⁺
     q = left-summand-split-ℚ⁺ p
@@ -710,6 +710,12 @@ abstract
           { rational-ℚ⁺ r}
           ( le-left-min-ℚ⁺ q r)
           ( le-right-min-ℚ⁺ q r))
+
+
+  double-le-ℚ⁺ :
+    (p : ℚ⁺) →
+    exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
+  double-le-ℚ⁺ p = unit-trunc-Prop (bound-double-le-ℚ⁺ p)
 ```
 
 ### Addition with a positive rational number is an increasing map
