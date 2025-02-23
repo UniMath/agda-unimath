@@ -23,7 +23,7 @@ open import metric-spaces.metric-spaces
 
 ## Idea
 
-A [Cauchy sequence](metric-spaces.cauchy-sequence-metric-spaces.md) in a
+A [Cauchy sequence](metric-spaces.cauchy-sequences-metric-spaces.md) in a
 [complete metric space](metric-spaces.complete-metric-spaces.md) is a Cauchy
 sequence in the underlying metric space, and always has a limit.
 
