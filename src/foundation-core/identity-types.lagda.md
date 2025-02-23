@@ -240,7 +240,7 @@ module _
 
   assoc :
     {x y z w : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) →
-    ((p ∙ q) ∙ r) ＝ (p ∙ (q ∙ r))
+    (p ∙ q) ∙ r ＝ p ∙ (q ∙ r)
   assoc refl q r = refl
 ```
 
@@ -268,13 +268,13 @@ module _
 
   double-assoc :
     {x y z w v : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) (s : w ＝ v) →
-    (((p ∙ q) ∙ r) ∙ s) ＝ p ∙ (q ∙ (r ∙ s))
+    ((p ∙ q) ∙ r) ∙ s ＝ p ∙ (q ∙ (r ∙ s))
   double-assoc refl q r s = assoc q r s
 
   triple-assoc :
     {x y z w v u : A}
     (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) (s : w ＝ v) (t : v ＝ u) →
-    ((((p ∙ q) ∙ r) ∙ s) ∙ t) ＝ p ∙ (q ∙ (r ∙ (s ∙ t)))
+    (((p ∙ q) ∙ r) ∙ s) ∙ t ＝ p ∙ (q ∙ (r ∙ (s ∙ t)))
   triple-assoc refl q r s t = double-assoc q r s t
 ```
 
@@ -298,7 +298,7 @@ module _
   left-inv : {x y : A} (p : x ＝ y) → inv p ∙ p ＝ refl
   left-inv refl = refl
 
-  right-inv : {x y : A} (p : x ＝ y) → p ∙ (inv p) ＝ refl
+  right-inv : {x y : A} (p : x ＝ y) → p ∙ inv p ＝ refl
   right-inv refl = refl
 ```
 
@@ -355,11 +355,11 @@ module _
   where
 
   is-retraction-inv-concat :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) → (inv p ∙ (p ∙ q)) ＝ q
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) → inv p ∙ (p ∙ q) ＝ q
   is-retraction-inv-concat refl q = refl
 
   is-section-inv-concat :
-    {x y z : A} (p : x ＝ y) (r : x ＝ z) → (p ∙ (inv p ∙ r)) ＝ r
+    {x y z : A} (p : x ＝ y) (r : x ＝ z) → p ∙ (inv p ∙ r) ＝ r
   is-section-inv-concat refl r = refl
 
   is-retraction-inv-concat' :
