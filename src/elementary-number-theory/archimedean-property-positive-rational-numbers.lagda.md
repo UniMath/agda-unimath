@@ -9,23 +9,23 @@ module elementary-number-theory.archimedean-property-positive-rational-numbers w
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.nonzero-natural-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.archimedean-property-rational-numbers
 open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.binary-transport
-open import foundation.existential-quantification
-open import foundation.propositional-truncations
-open import foundation.dependent-pair-types
-open import foundation.transport-along-identifications
-open import foundation.identity-types
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
+open import foundation.dependent-pair-types
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.transport-along-identifications
 ```
 
 </details>
@@ -35,8 +35,9 @@ open import foundation.action-on-identifications-functions
 The
 {{#concept "Archimedean property" Disambiguation="positive rational numbers" Agda=archimedean-property-ℚ⁺}}
 of `ℚ⁺` is that for any two
-[positive rational numbers](elementary-number-theory.positive-rational-numbers.md) `x y : ℚ⁺`,
-there is an `n : ℕ⁺` such that `y` is less than `n` as a rational number times `x`.
+[positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
+`x y : ℚ⁺`, there is an `n : ℕ⁺` such that `y` is less than `n` as a rational
+number times `x`.
 
 ```agda
 abstract

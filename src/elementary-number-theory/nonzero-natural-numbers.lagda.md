@@ -7,23 +7,23 @@ module elementary-number-theory.nonzero-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
-open import foundation.transport-along-identifications
 open import foundation.coproduct-types
 open import foundation.negated-equality
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.sections
 open import foundation.propositions
 open import foundation.equality-dependent-pair-types
-open import foundation.empty-types
 ```
 
 </details>
