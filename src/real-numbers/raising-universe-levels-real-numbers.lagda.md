@@ -37,8 +37,12 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Idea
 
-Real numbers have designated universe levels. For any real number, we can
-construct an equivalent real number in any higher universe.
+[Real numbers](real-numbers.dedekind-real-numbers.md) are defined at specific
+[universe levels](foundation.universe-levels.md), which do not overlap.
+
+For any real number, we can construct a
+[similar](real-numbers.similarity-real-numbers.md) real number in any higher
+universe.
 
 ## Definition
 
