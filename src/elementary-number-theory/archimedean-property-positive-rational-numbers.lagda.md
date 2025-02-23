@@ -67,7 +67,13 @@ abstract
     exists ℕ⁺ (λ n → le-prop-ℚ⁺ y (positive-rational-ℕ⁺ n *ℚ⁺ x))
   archimedean-property-ℚ⁺ x y =
     unit-trunc-Prop (bound-archimedean-property-ℚ⁺ x y)
+```
 
+## Corollaries
+
+### For every positive rational number, there is a smaller `1 / n` for a natural number n
+
+```agda
 smaller-reciprocal-ℚ⁺ :
   (q : ℚ⁺) → Σ ℕ⁺ (λ n → le-ℚ⁺ (positive-reciprocal-rational-ℕ⁺ n) q)
 smaller-reciprocal-ℚ⁺ q⁺@(q , _) =
