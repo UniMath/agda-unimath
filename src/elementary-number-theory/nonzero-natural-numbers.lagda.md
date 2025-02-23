@@ -10,14 +10,19 @@ module elementary-number-theory.nonzero-natural-numbers where
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.transport-along-identifications
 open import foundation.coproduct-types
+open import foundation.negated-equality
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+open import foundation.sections
+open import foundation.propositions
+open import foundation.equality-dependent-pair-types
 open import foundation.empty-types
 ```
 
@@ -55,6 +60,9 @@ nat-ℕ⁺ = nat-nonzero-ℕ
 
 is-nonzero-nat-nonzero-ℕ : (n : nonzero-ℕ) → is-nonzero-ℕ (nat-nonzero-ℕ n)
 is-nonzero-nat-nonzero-ℕ = pr2
+
+eq-nonzero-ℕ : {m n : nonzero-ℕ} → nat-nonzero-ℕ m ＝ nat-nonzero-ℕ n → m ＝ n
+eq-nonzero-ℕ m=n = eq-pair-Σ m=n (eq-is-prop is-prop-nonequal)
 ```
 
 ### The nonzero natural number `1`
@@ -89,6 +97,13 @@ pr2 (succ-nonzero-ℕ' n) = is-nonzero-succ-ℕ n
 pred-nonzero-ℕ : nonzero-ℕ → ℕ
 pred-nonzero-ℕ (succ-ℕ n , _) = n
 pred-nonzero-ℕ (zero-ℕ , H) = ex-falso (H refl)
+
+is-section-succ-nonzero-ℕ' : is-section succ-nonzero-ℕ' pred-nonzero-ℕ
+is-section-succ-nonzero-ℕ' (zero-ℕ , H) = ex-falso (H refl)
+is-section-succ-nonzero-ℕ' n⁺@(succ-ℕ n , _) = eq-nonzero-ℕ refl
+
+is-section-pred-nonzero-ℕ : is-section pred-nonzero-ℕ succ-nonzero-ℕ'
+is-section-pred-nonzero-ℕ n = refl
 ```
 
 ### The quotient of a nonzero natural number by a divisor
@@ -128,6 +143,13 @@ _*ℕ⁺_ = mul-nonzero-ℕ
 ```agda
 le-ℕ⁺ : ℕ⁺ → ℕ⁺ → UU lzero
 le-ℕ⁺ (p , _) (q , _) = le-ℕ p q
+```
+
+### Inequality on nonzero natural numbers
+
+```agda
+leq-ℕ⁺ : ℕ⁺ → ℕ⁺ → UU lzero
+leq-ℕ⁺ (p , _) (q , _) = leq-ℕ p q
 ```
 
 ### Addition of nonzero natural numbers is a strictly inflationary map

@@ -19,6 +19,9 @@ open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.strict-inequality-integers
+open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-rational-numbers
 
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
@@ -113,4 +116,21 @@ abstract
       ( left-unit-law-mul-ℤ _)
       ( left-unit-law-mul-ℤ _)
       ( le-natural-le-ℤ m n m<n)
+```
+
+### If `m ≤ n`, the reciprocal of `n` is less than or equal to the reciprocal of `n`
+
+```agda
+abstract
+  leq-reciprocal-rational-ℕ⁺ :
+    (m n : ℕ⁺) → leq-ℕ⁺ m n →
+    leq-ℚ⁺
+      ( positive-reciprocal-rational-ℕ⁺ n)
+      ( positive-reciprocal-rational-ℕ⁺ m)
+  leq-reciprocal-rational-ℕ⁺ (m , pos-m) (n , pos-n) m≤n =
+    binary-tr
+      ( leq-ℤ)
+      ( left-unit-law-mul-ℤ _)
+      ( left-unit-law-mul-ℤ _)
+      ( leq-int-ℕ m n m≤n)
 ```

@@ -468,6 +468,19 @@ is-prop-le-ℚ⁺ : (x y : ℚ⁺) → is-prop (le-ℚ⁺ x y)
 is-prop-le-ℚ⁺ x y = is-prop-type-Prop (le-prop-ℚ⁺ x y)
 ```
 
+### The inequality on positive rational numbers
+
+```agda
+leq-prop-ℚ⁺ : ℚ⁺ → ℚ⁺ → Prop lzero
+leq-prop-ℚ⁺ x y = leq-ℚ-Prop (rational-ℚ⁺ x) (rational-ℚ⁺ y)
+
+leq-ℚ⁺ : ℚ⁺ → ℚ⁺ → UU lzero
+leq-ℚ⁺ x y = type-Prop (leq-prop-ℚ⁺ x y)
+
+is-prop-leq-ℚ⁺ : (x y : ℚ⁺) → is-prop (leq-ℚ⁺ x y)
+is-prop-leq-ℚ⁺ x y = is-prop-type-Prop (leq-prop-ℚ⁺ x y)
+```
+
 ### The sum of two positive rational numbers is greater than each of them
 
 ```agda
