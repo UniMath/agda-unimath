@@ -30,7 +30,7 @@ words, a map `f` is `k`-cellular if the
 
 with any `k`-connected map `g` is [surjective](foundation.surjective-maps.md).
 The terminology `k`-cellular comes from the fact that the `k`-connected maps are
-precisely the maps that satisfy the right mere lifting property wtih respect to
+precisely the maps that satisfy the right mere lifting property with respect to
 the [spheres](synthetic-homotopy-theory.spheres.md)
 
 ```text
