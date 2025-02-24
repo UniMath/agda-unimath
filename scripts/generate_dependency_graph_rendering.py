@@ -64,7 +64,7 @@ def build_dependency_graph(root_dir, min_rank_node=20):
 
     print("Excluding modules:")
     for i, m in enumerate(_top_imports):
-        print(f"{i+1:>3} ({import_counts[m]:>3} imports) {m}")
+        print(f"{i+1:>3} ({import_counts[m]:>4} imports) {m}")
 
     # Remove top modules from the graph
     for module in top_imports:
@@ -96,7 +96,6 @@ def render_graph(graph, file_sizes, output_file, format, repo):
                 dot.edge(node, dep, color=edge_color, arrowhead="none")
 
     dot.render(output_file, format=format, cleanup=True)
-    print(f"Graph saved as {output_file}.{format}")
 
 if __name__ == "__main__":
     root_dir = "src"
