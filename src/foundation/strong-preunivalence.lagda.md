@@ -84,6 +84,7 @@ based-preunivalence-instance-strong-preunivalence X L Y =
   is-emb-is-prop-map
     ( backward-implication-subuniverse-equality-duality
       ( is-prop-Prop)
+      ( is-prop-equiv')
       ( L)
       ( X)
       ( λ _ → equiv-eq)
