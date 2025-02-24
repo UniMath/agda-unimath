@@ -131,8 +131,7 @@ module _
 
 We give a similar characterization for a binary family of types `B : A → A → 𝒰`
 over a not necessarily pointed or inhabited type `A` whose elements are all
-merely equal. In other words, `A` is any π₀-trivial type. The characterization
-asserts that the following are equivalent:
+merely equal. The characterization asserts that the following are equivalent:
 
 1. For every `x : A`, every family of maps out of the identity types
    `f : (y : A) → (x ＝ y) → B x y`, is a family of `𝒫`-maps.
