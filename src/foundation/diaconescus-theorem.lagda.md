@@ -32,9 +32,12 @@ open import synthetic-homotopy-theory.suspensions-of-types
 ## Idea
 
 The [axiom of choice](foundation.axiom-of-choice.md) implies the
-[law of excluded middle](foundation.law-of-excluded-middle.md). This is often
-referred to as
-{{#concept "Diaconescu's theorem" WD="Diaconescu's theorem" WDID=Q3527059 Agda=theorem-Diaconescu}}.
+[law of excluded middle](foundation.law-of-excluded-middle.md). This is known as
+{{#concept "Diaconescu's theorem" WD="Diaconescu's theorem" WDID=Q3527059 Agda=theorem-Diaconescu}}
+or the **Diaconescu-Goodman-Myhill theorem**.
+
+**Note.** This theorem should not be confused with _Diaconescu's theorem_ in
+Topos Theory.
 
 ## Theorem
 
@@ -89,3 +92,10 @@ theorem-Diaconescu ac P =
 ## References
 
 {{#bibliography}}
+
+## External links
+
+- [Diaconescu's theorem](https://en.wikipedia.org/wiki/Diaconescu%27s_theorem)
+  on Wikipedia
+- [Diaconescu-Goodman-Myhill theorem](https://ncatlab.org/nlab/show/Diaconescu-Goodman-Myhill+theorem)
+  on $n$Lab
