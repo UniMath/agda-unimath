@@ -25,7 +25,6 @@ def module_based_color(module_name, label_colors):
         if label == module_name or (label == "foundation" and module_name == "foundation-core"):
             return f"#{color}"
 
-    # raise Exception(f"There is no label for {module_name}.")
     # Fallback to random color generation if no label matches
     base_color = (91, 155, 213)
     seed = hash_str(module_name)
@@ -58,7 +57,7 @@ def build_dependency_graph(root_dir, min_rank_node=20):
     # Convert defaultdict to dict for faster lookup
     graph = dict(graph)
 
-    # Count imports and find top 20 most imported modules
+    # Count imports and find top imported modules
     import_counts = count_imports(graph)
     _top_imports = sorted(import_counts, key=import_counts.get, reverse=True)[:min_rank_node]
     top_imports = set(_top_imports)
