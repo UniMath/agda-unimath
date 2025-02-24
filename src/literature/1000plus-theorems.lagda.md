@@ -14,8 +14,7 @@ module literature.1000plus-theorems where
 
 ## Formalized theorems
 
-The theorems are ordered alphabetically, omitting leading definite articles
-("the").
+The theorems are ordered alphabetically, omitting definite articles ("the").
 
 ### Bézout's lemma {#Q513028}
 

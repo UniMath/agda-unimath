@@ -40,7 +40,7 @@ following:
 2. `𝒫`-structures on the equality of `Σ A B`.
 
 We refer to this as
-{{#concept "structured equality duality" Disambiguation="on types" Agda=structured-equality-duality}}.
+{{#concept "structured equality duality" Agda=structured-equality-duality}}.
 
 **Note.** by [the univalence axiom](foundation.univalence.md), every structure
 [transfers along equivalences](foundation.transport-along-equivalences.md).
@@ -49,9 +49,9 @@ structure this property is independent of the univalence axiom.
 
 One potential but crude justification for using the term "duality" for this
 principle is as follows. The principle gives a correspondence between structures
-on families of **maps mapping into** the **type family** `B`, and structures on
-the binary **family of equality** over the **dependent sum** `Σ A B`, and so, in
-a certain sense, we are trading one straightened dimension for another.
+on families of _maps mapping into_ the **type family** `B`, and structures on
+the binary family of equality over the _dependent sum_ `Σ A B`, and so, in a
+certain sense, one is trading one straightened dimension for another.
 
 ## Duality
 
@@ -101,9 +101,6 @@ logically equivalent:
 ```agda
 module _
   {l1 l2 l3 : Level} (𝒫 : subuniverse (l1 ⊔ l2) l3)
-  (tr-𝒫 :
-    {X Y : UU (l1 ⊔ l2)} →
-    X ≃ Y → is-in-subuniverse 𝒫 X → is-in-subuniverse 𝒫 Y)
   {A : UU l1} {B : A → UU l2}
   where
 
@@ -112,21 +109,23 @@ module _
       (y : A) → is-in-subuniverse-map 𝒫 (f y)) →
     is-separated 𝒫 (Σ A B)
   forward-implication-subuniverse-equality-duality =
-    forward-implication-structured-equality-duality tr-𝒫
+    forward-implication-structured-equality-duality
+      ( is-in-subuniverse-equiv 𝒫)
 
   backward-implication-subuniverse-equality-duality :
     is-separated 𝒫 (Σ A B) →
     ( (x : A) (f : (y : A) → (x ＝ y) → B y)
       (y : A) → is-in-subuniverse-map 𝒫 (f y))
   backward-implication-subuniverse-equality-duality =
-    backward-implication-structured-equality-duality tr-𝒫
+    backward-implication-structured-equality-duality
+      ( is-in-subuniverse-equiv 𝒫)
 
   subuniverse-equality-duality :
     ( (x : A) (f : (y : A) → (x ＝ y) → B y)
       (y : A) → is-in-subuniverse-map 𝒫 (f y)) ↔
     is-separated 𝒫 (Σ A B)
   subuniverse-equality-duality =
-    structured-equality-duality tr-𝒫
+    structured-equality-duality (is-in-subuniverse-equiv 𝒫)
 ```
 
 ## See also

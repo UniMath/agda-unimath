@@ -132,14 +132,15 @@ module _
   is-prop-is-small = is-prop-is-proof-irrelevant is-proof-irrelevant-is-small
 
   is-small-Prop : Prop (lsuc l ⊔ l1)
-  is-small-Prop = (is-small l A , is-prop-is-small)
+  is-small-Prop = is-small l A , is-prop-is-small
 ```
 
 ### Any type in `UU l1` is `l1`-small
 
 ```agda
 is-small' : {l1 : Level} {A : UU l1} → is-small l1 A
-is-small' {A = A} = (A , id-equiv)
+pr1 (is-small' {A = A}) = A
+pr2 is-small' = id-equiv
 ```
 
 ### Every type of universe level `l1` is `(l1 ⊔ l2)`-small
@@ -150,7 +151,8 @@ module _
   where
 
   is-small-lmax : is-small (l1 ⊔ l2) X
-  is-small-lmax = (raise l2 X , compute-raise l2 X)
+  pr1 is-small-lmax = raise l2 X
+  pr2 is-small-lmax = compute-raise l2 X
 
   is-contr-is-small-lmax :
     is-contr (is-small (l1 ⊔ l2) X)
@@ -162,7 +164,7 @@ module _
 
 ```agda
 is-small-lsuc : {l : Level} (X : UU l) → is-small (lsuc l) X
-is-small-lsuc {l} = is-small-lmax (lsuc l)
+is-small-lsuc {l} X = is-small-lmax (lsuc l) X
 ```
 
 ### Small types are closed under equivalences
@@ -171,7 +173,8 @@ is-small-lsuc {l} = is-small-lmax (lsuc l)
 is-small-equiv :
   {l1 l2 l3 : Level} {A : UU l1} (B : UU l2) →
   A ≃ B → is-small l3 B → is-small l3 A
-is-small-equiv B e (X , h) = (X , h ∘e e)
+pr1 (is-small-equiv B e (X , h)) = X
+pr2 (is-small-equiv B e (X , h)) = h ∘e e
 
 is-small-equiv' :
   {l1 l2 l3 : Level} (A : UU l1) {B : UU l2} →
@@ -212,7 +215,8 @@ is-small-mere-equiv l e H =
 ```agda
 is-small-is-contr :
   (l : Level) {l1 : Level} {A : UU l1} → is-contr A → is-small l A
-is-small-is-contr l H = (raise-unit l , equiv-is-contr H is-contr-raise-unit)
+pr1 (is-small-is-contr l H) = raise-unit l
+pr2 (is-small-is-contr l H) = equiv-is-contr H is-contr-raise-unit
 ```
 
 ### The unit type is small with respect to any universe

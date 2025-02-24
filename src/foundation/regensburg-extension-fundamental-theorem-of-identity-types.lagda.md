@@ -101,7 +101,6 @@ module _
       is-separated 𝒫 (Σ A B)
     forward-implication-extended-fundamental-theorem-id H K =
       forward-implication-subuniverse-equality-duality 𝒫
-        ( is-in-subuniverse-equiv 𝒫)
         ( λ x f y b →
           apply-universal-property-trunc-Prop
             ( mere-eq-is-0-connected H a x)
@@ -113,10 +112,7 @@ module _
       is-separated 𝒫 (Σ A B) →
       (f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map 𝒫 (f x)
     backward-implication-extended-fundamental-theorem-id K =
-      backward-implication-subuniverse-equality-duality 𝒫
-        ( is-in-subuniverse-equiv 𝒫)
-        ( K)
-        ( a)
+      backward-implication-subuniverse-equality-duality 𝒫 K a
 
   extended-fundamental-theorem-id :
     is-0-connected A →
@@ -124,14 +120,15 @@ module _
     is-separated 𝒫 (Σ A B)
   extended-fundamental-theorem-id H =
     ( forward-implication-extended-fundamental-theorem-id H ,
-      backward-implication-extended-fundamental-theorem-id)
+    backward-implication-extended-fundamental-theorem-id)
 ```
 
 ### The unbased extended fundamental theorem of identity types
 
 We give a similar characterization for a binary family of types `B : A → A → 𝒰`
 over a not necessarily pointed or inhabited type `A` whose elements are all
-merely equal. The characterization asserts that the following are equivalent:
+merely equal. In other words, `A` is any π₀-trivial type. The characterization
+asserts that the following are equivalent:
 
 1. For every `x : A`, every family of maps out of the identity types
    `f : (y : A) → (x ＝ y) → B x y`, is a family of `𝒫`-maps.

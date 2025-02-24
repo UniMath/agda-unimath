@@ -82,7 +82,6 @@ module _
     is-emb-is-prop-map
       ( backward-implication-subuniverse-equality-duality
         ( is-prop-Prop)
-        ( is-prop-equiv')
         ( H x)
         ( x)
         ( iso-eq-Precategory 𝒞 x)
