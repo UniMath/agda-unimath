@@ -40,7 +40,7 @@ following:
 2. `𝒫`-structures on the equality of `Σ A B`.
 
 We refer to this as
-{{#concept "structured equality duality" Agda=structured-equality-duality}}.
+{{#concept "structured equality duality" Disambiguation="on types" Agda=structured-equality-duality}}.
 
 **Note.** by [the univalence axiom](foundation.univalence.md), every structure
 [transfers along equivalences](foundation.transport-along-equivalences.md).
