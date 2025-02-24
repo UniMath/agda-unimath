@@ -3,7 +3,7 @@ import pathlib
 import os
 import subprocess
 import sys
-from typing import List
+from typing import List, Set
 
 GITHUB_ROOT = 'https://github.com/'
 GITHUB_REPO = 'UniMath/agda-unimath'
@@ -242,3 +242,34 @@ def is_file_modified(file_path):
         return False
     except subprocess.CalledProcessError:
         return True
+
+def find_agda_files(root_dir: str) -> List[str]:
+    """
+    Recursively find all .lagda.md files in subdirectories of the given directory.
+    """
+    agda_files = []
+    for dirpath, _, filenames in os.walk(root_dir):
+        if dirpath == root_dir:
+            continue  # Skip files directly in the root directory
+        for file in filenames:
+            if file.endswith(".lagda.md"):
+                agda_files.append(os.path.join(dirpath, file))
+    return agda_files
+
+def parse_agda_imports(agda_file: str) -> Set[str]:
+    """Extract import statements from an Agda file."""
+    imports = set()
+    with open(agda_file, "r", encoding="utf-8") as f:
+        for line in f:
+            match = re.match(r"^\s*open\s+import\s+([A-Za-z0-9\-.]+)", line)
+            if match:
+                imports.add(match.group(1))
+    return imports
+
+def count_lines_in_file(file_path: str) -> int:
+    """Count lines of code in a file."""
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            return sum(1 for _ in f)
+    except Exception:
+        return 0

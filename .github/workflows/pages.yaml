@@ -93,7 +93,9 @@ jobs:
       - run: python3 -m pip install -r master/scripts/requirements.txt
 
       - name: Generate dependency graph rendering
-        run: python3 master/scripts/generate_dependency_graph_rendering.py
+        run:
+          python3 master/scripts/generate_dependency_graph_rendering.py
+          website/images/agda_dependency_graph svg
         continue-on-error: true
 
       - name: Generate book

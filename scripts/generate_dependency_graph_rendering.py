@@ -1,10 +1,11 @@
 import os
-import re
 import graphviz
 import random
 import math
 import requests
 from collections import defaultdict
+from utils import find_agda_files, parse_agda_imports, count_lines_in_file
+import argparse
 
 primes_hash_str = (19,2,1,7,5,3,11,13,17)
 def hash_str(s) :
@@ -33,37 +34,6 @@ def module_based_color(module_name, label_colors):
     new_color = tuple(min(255, max(0, base_color[i] + variation[i])) for i in range(3))
     return "#{:02X}{:02X}{:02X}".format(*new_color)
 
-def find_agda_files(root_dir):
-    """
-    Recursively find all .lagda.md files in subdirectories of the given directory.
-    """
-    agda_files = []
-    for dirpath, _, filenames in os.walk(root_dir):
-        if dirpath == root_dir:
-            continue  # Skip files directly in the root directory
-        for file in filenames:
-            if file.endswith(".lagda.md"):
-                agda_files.append(os.path.join(dirpath, file))
-    return agda_files
-
-def parse_imports(agda_file):
-    """Extract import statements from an Agda file."""
-    imports = set()
-    with open(agda_file, "r", encoding="utf-8") as f:
-        for line in f:
-            match = re.match(r"^\s*open\s+import\s+([A-Za-z0-9\-.]+)", line)
-            if match:
-                imports.add(match.group(1))
-    return imports
-
-def count_lines_of_code(file_path):
-    """Count lines of code in a file."""
-    try:
-        with open(file_path, "r", encoding="utf-8") as f:
-            return sum(1 for _ in f)
-    except Exception:
-        return 0
-
 def count_imports(graph):
     """Count the number of times each module is imported."""
     import_counts = defaultdict(int)
@@ -81,9 +51,9 @@ def build_dependency_graph(root_dir, min_rank_node=20):
     for file in agda_files:
         module_name = os.path.splitext(os.path.relpath(file, root_dir))[0].replace(os.sep, ".")
         module_name = module_name[:module_name.rfind('.')]
-        imports = parse_imports(file)
+        imports = parse_agda_imports(file)
         graph[module_name].update(imports)
-        file_sizes[module_name] = count_lines_of_code(file)
+        file_sizes[module_name] = count_lines_in_file(file)
 
     # Convert defaultdict to dict for faster lookup
     graph = dict(graph)
@@ -139,8 +109,17 @@ def render_graph(graph, file_sizes, output_file, format, repo):
     print(f"Graph saved as {output_file}.{format}")
 
 if __name__ == "__main__":
-    root_directory = "src"
     repo = "unimath/agda-unimath"
-    min_rank_imports = 20 # Exclude top 20 imported files
-    graph, file_sizes = build_dependency_graph(root_directory, min_rank_node=min_rank_imports)
-    render_graph(graph, file_sizes, "website/images/agda_dependency_graph", format="svg", repo=repo)
+    root_dir = "src"
+    min_rank_imports = 20
+
+    parser = argparse.ArgumentParser(description="Generate Agda dependency graph.")
+    parser.add_argument("output_file", type=str, help="Path to save the output graph.")
+    parser.add_argument("format", type=str, choices=["svg", "png", "pdf"], help="Output format of the graph.")
+    parser.add_argument("--min_rank_imports", type=int, default=20, help="Number of top imported files to exclude from the graph.")
+
+    args = parser.parse_args()
+
+    graph, file_sizes = build_dependency_graph(root_dir, min_rank_node=min_rank_imports)
+    render_graph(graph, file_sizes, args.output_file, format=args.format, repo=repo)
+    print(f"Graph saved as {args.output_file}.{args.format}")
