@@ -4,7 +4,7 @@ import random
 import math
 import requests
 from collections import defaultdict
-from utils import find_agda_files, parse_agda_imports, count_lines_in_file
+from utils import find_agda_files, parse_agda_imports, count_lines_in_file, GITHUB_ROOT, GITHUB_REPO
 import argparse
 
 primes_hash_str = (19,2,1,7,5,3,11,13,17)
@@ -75,13 +75,6 @@ def build_dependency_graph(root_dir, min_rank_node=20):
 
     return graph, file_sizes
 
-def average_color(color1, color2):
-    """Calculate the average color between two hex colors."""
-    color1_rgb = tuple(int(color1[i:i+2], 16) for i in (1, 3, 5))
-    color2_rgb = tuple(int(color2[i:i+2], 16) for i in (1, 3, 5))
-    avg_rgb = tuple((c1 + c2) // 2 for c1, c2 in zip(color1_rgb, color2_rgb))
-    return "#{:02X}{:02X}{:02X}".format(*avg_rgb)
-
 def render_graph(graph, file_sizes, output_file, format, repo):
     """Render the dependency graph using Graphviz."""
     # Fetch GitHub labels and colors
@@ -99,8 +92,6 @@ def render_graph(graph, file_sizes, output_file, format, repo):
         dot.node(node, shape="circle", style="filled", fillcolor=node_color, color="#00000000", width=str(node_sizes[node]), height=str(node_sizes[node]), label="")
         for dep in dependencies:
             if dep in graph:  # Ensure we're not linking to removed nodes
-                # dep_color = node_colors[dep]
-                # edge_color =  average_color(node_color, dep_color) + "10"
                 edge_color =  node_color + "10"
                 dot.edge(node, dep, color=edge_color, arrowhead="none")
 
@@ -108,17 +99,15 @@ def render_graph(graph, file_sizes, output_file, format, repo):
     print(f"Graph saved as {output_file}.{format}")
 
 if __name__ == "__main__":
-    repo = "unimath/agda-unimath"
     root_dir = "src"
     min_rank_imports = 20
 
     parser = argparse.ArgumentParser(description="Generate Agda dependency graph.")
     parser.add_argument("output_file", type=str, help="Path to save the output graph.")
     parser.add_argument("format", type=str, choices=["svg", "png", "pdf"], help="Output format of the graph.")
-    parser.add_argument("--min_rank_imports", type=int, default=20, help="Number of top imported files to exclude from the graph.")
 
     args = parser.parse_args()
 
     graph, file_sizes = build_dependency_graph(root_dir, min_rank_node=min_rank_imports)
-    render_graph(graph, file_sizes, args.output_file, format=args.format, repo=repo)
+    render_graph(graph, file_sizes, args.output_file, format=args.format, repo=GITHUB_REPO)
     print(f"Graph saved as {args.output_file}.{args.format}")
