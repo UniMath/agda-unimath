@@ -186,6 +186,17 @@ module _
 
   is-in-cut-ℝ : ℚ → UU l
   is-in-cut-ℝ = is-in-subtype cut-ℝ
+
+  rational-bounds-ℝ : subtype l (ℚ × ℚ)
+  rational-bounds-ℝ (p , q) = lower-cut-ℝ p ∧ upper-cut-ℝ q
+
+  is-inhabited-rational-bounds-ℝ : exists (ℚ × ℚ) rational-bounds-ℝ
+  is-inhabited-rational-bounds-ℝ =
+    do
+      p , p<x ← is-inhabited-lower-cut-ℝ
+      q , x<q ← is-inhabited-upper-cut-ℝ
+      intro-exists (p , q) (p<x , x<q)
+    where open do-syntax-trunc-Prop (∃ (ℚ × ℚ) rational-bounds-ℝ)
 ```
 
 ## Properties

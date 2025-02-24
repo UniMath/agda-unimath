@@ -63,30 +63,36 @@ idempotent-min-ℚ =
 ### The minimum is a lower bound
 
 ```agda
-leq-left-min-ℚ : (x y : ℚ) → min-ℚ x y ≤-ℚ x
-leq-left-min-ℚ = leq-left-min-Decidable-Total-Order ℚ-Decidable-Total-Order
+abstract
+  leq-left-min-ℚ : (x y : ℚ) → min-ℚ x y ≤-ℚ x
+  leq-left-min-ℚ = leq-left-min-Decidable-Total-Order ℚ-Decidable-Total-Order
 
-leq-right-min-ℚ : (x y : ℚ) → min-ℚ x y ≤-ℚ y
-leq-right-min-ℚ = leq-right-min-Decidable-Total-Order ℚ-Decidable-Total-Order
+  leq-right-min-ℚ : (x y : ℚ) → min-ℚ x y ≤-ℚ y
+  leq-right-min-ℚ = leq-right-min-Decidable-Total-Order ℚ-Decidable-Total-Order
 ```
 
 ### If `z` is less than both `x` and `y`, it is less than their minimum
 
 ```agda
-le-min-le-both-ℚ : (z x y : ℚ) → le-ℚ z x → le-ℚ z y → le-ℚ z (min-ℚ x y)
-le-min-le-both-ℚ z x y z<x z<y with decide-le-leq-ℚ x y
-... | inl x<y =
-  inv-tr
-    ( le-ℚ z)
-    ( left-leq-right-min-Decidable-Total-Order
-      ( ℚ-Decidable-Total-Order)
-      ( x)
-      ( y)
-      ( leq-le-ℚ {x} {y} x<y))
-    ( z<x)
-... | inr y≤x =
-  inv-tr
-    ( le-ℚ z)
-    ( right-leq-left-min-Decidable-Total-Order ℚ-Decidable-Total-Order x y y≤x)
-    ( z<y)
+abstract
+  le-min-le-both-ℚ : (z x y : ℚ) → le-ℚ z x → le-ℚ z y → le-ℚ z (min-ℚ x y)
+  le-min-le-both-ℚ z x y z<x z<y with decide-le-leq-ℚ x y
+  ... | inl x<y =
+    inv-tr
+      ( le-ℚ z)
+      ( left-leq-right-min-Decidable-Total-Order
+        ( ℚ-Decidable-Total-Order)
+        ( x)
+        ( y)
+        ( leq-le-ℚ {x} {y} x<y))
+      ( z<x)
+  ... | inr y≤x =
+    inv-tr
+      ( le-ℚ z)
+      ( right-leq-left-min-Decidable-Total-Order
+        ( ℚ-Decidable-Total-Order)
+        ( x)
+        ( y)
+        ( y≤x))
+      ( z<y)
 ```
