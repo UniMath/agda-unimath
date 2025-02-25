@@ -243,18 +243,6 @@ def is_file_modified(file_path):
     except subprocess.CalledProcessError:
         return True
 
-def find_agda_files(root_dir: str) -> List[str]:
-    """
-    Recursively find all .lagda.md files in subdirectories of the given directory.
-    """
-    agda_files = []
-    for dirpath, _, filenames in os.walk(root_dir):
-        if dirpath == root_dir:
-            continue  # Skip files directly in the root directory
-        for file in filenames:
-            if file.endswith(".lagda.md"):
-                agda_files.append(os.path.join(dirpath, file))
-    return agda_files
 
 def parse_agda_imports(agda_file: str) -> Set[str]:
     """Extract import statements from an Agda file."""
