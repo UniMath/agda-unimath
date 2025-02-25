@@ -12,6 +12,7 @@ open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -120,6 +121,13 @@ _*ℕ⁺_ = mul-nonzero-ℕ
 ```agda
 le-ℕ⁺ : ℕ⁺ → ℕ⁺ → UU lzero
 le-ℕ⁺ (p , _) (q , _) = le-ℕ p q
+```
+
+### Inequality on nonzero natural numbers
+
+```agda
+leq-ℕ⁺ : ℕ⁺ → ℕ⁺ → UU lzero
+leq-ℕ⁺ (p , _) (q , _) = leq-ℕ p q
 ```
 
 ### Addition of nonzero natural numbers is a strictly inflationary map

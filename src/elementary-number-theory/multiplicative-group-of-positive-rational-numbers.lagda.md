@@ -90,27 +90,3 @@ abelian-group-mul-ℚ⁺ : Ab lzero
 pr1 abelian-group-mul-ℚ⁺ = group-mul-ℚ⁺
 pr2 abelian-group-mul-ℚ⁺ = commutative-mul-ℚ⁺
 ```
-
-### Reciprocals of nonzero natural numbers
-
-```agda
-positive-reciprocal-rational-ℕ⁺ : ℕ⁺ → ℚ⁺
-positive-reciprocal-rational-ℕ⁺ n = inv-ℚ⁺ (positive-rational-ℕ⁺ n)
-```
-
-### If `m < n`, the reciprocal of `n` is less than the reciprocal of `n`
-
-```agda
-abstract
-  le-reciprocal-rational-ℕ⁺ :
-    (m n : ℕ⁺) → le-ℕ⁺ m n →
-    le-ℚ⁺
-      ( positive-reciprocal-rational-ℕ⁺ n)
-      ( positive-reciprocal-rational-ℕ⁺ m)
-  le-reciprocal-rational-ℕ⁺ (m , pos-m) (n , pos-n) m<n =
-    binary-tr
-      ( le-ℤ)
-      ( left-unit-law-mul-ℤ _)
-      ( left-unit-law-mul-ℤ _)
-      ( le-natural-le-ℤ m n m<n)
-```
