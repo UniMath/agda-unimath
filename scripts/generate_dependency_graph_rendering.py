@@ -21,7 +21,7 @@ def find_agda_files(root_dir):
     return [str(f) for f in agda_files if f.parts[0] == root_dir and len(f.parts) > 2]
 
 
-fallback_label_colors = {
+LABEL_COLORS_FALLBACK = {
     "category-theory": "fbca04",
     "commutative-algebra": "3577BB",
     "domain-theory": "FCBFF5",
@@ -74,7 +74,7 @@ def fetch_github_labels(repo):
     except requests.RequestException as e:
         eprint(f"Failed to fetch GitHub labels: {e}")
         # Fallback to preloaded values
-        return fallback_label_colors
+        return LABEL_COLORS_FALLBACK
     return labels
 
 def module_based_color(module_name, label_colors):
