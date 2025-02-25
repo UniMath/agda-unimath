@@ -9,26 +9,25 @@ module elementary-number-theory.unit-fractions-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.archimedean-property-positive-rational-numbers
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
-open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.strict-inequality-integers
 open import elementary-number-theory.strict-inequality-rational-numbers
-open import elementary-number-theory.archimedean-property-positive-rational-numbers
-
-open import group-theory.groups
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.identity-types
 open import foundation.dependent-pair-types
+open import foundation.functoriality-dependent-pair-types
+
+open import group-theory.groups
 ```
 
 </details>
@@ -92,20 +91,21 @@ abstract
 smaller-reciprocal-ℚ⁺ :
   (q : ℚ⁺) → Σ ℕ⁺ (λ n → le-ℚ⁺ (positive-reciprocal-rational-ℕ⁺ n) q)
 smaller-reciprocal-ℚ⁺ q⁺@(q , _) =
-  let (n⁺ , 1<nq) = bound-archimedean-property-ℚ⁺ q⁺ one-ℚ⁺ in
-  n⁺ ,
-  binary-tr
-    ( le-ℚ)
-    ( right-unit-law-mul-ℚ _)
-    ( ap
-      ( rational-ℚ⁺)
-      ( is-retraction-left-div-Group
-        ( group-mul-ℚ⁺)
-        ( positive-rational-ℕ⁺ n⁺)
-        ( q⁺)))
-    ( preserves-le-left-mul-ℚ⁺
-      ( positive-reciprocal-rational-ℕ⁺ n⁺)
-      ( one-ℚ)
-      ( rational-ℚ⁺ (positive-rational-ℕ⁺ n⁺ *ℚ⁺ q⁺))
-      ( 1<nq))
+  tot
+    ( λ n⁺ 1<nq →
+      binary-tr
+        ( le-ℚ)
+        ( right-unit-law-mul-ℚ _)
+        ( ap
+          ( rational-ℚ⁺)
+          ( is-retraction-left-div-Group
+            ( group-mul-ℚ⁺)
+            ( positive-rational-ℕ⁺ n⁺)
+            ( q⁺)))
+        ( preserves-le-left-mul-ℚ⁺
+          ( positive-reciprocal-rational-ℕ⁺ n⁺)
+          ( one-ℚ)
+          ( rational-ℚ⁺ (positive-rational-ℕ⁺ n⁺ *ℚ⁺ q⁺))
+          ( 1<nq)))
+    ( bound-archimedean-property-ℚ⁺ q⁺ one-ℚ⁺)
 ```
