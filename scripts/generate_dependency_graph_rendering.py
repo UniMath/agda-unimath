@@ -104,7 +104,7 @@ def render_graph(graph, file_sizes, output_file, format, repo):
     eprint("Label colors:", label_colors)
 
     dot = graphviz.Digraph(engine="sfdp", format=format)
-    dot.attr(splines="false", overlap="prism10000", bgcolor="#00000000", K="0.3", repulsiveforce="0.3") #sfdp
+    dot.attr(splines="false", overlap="prism10000", bgcolor="#FFFFFF00", K="0.3", repulsiveforce="0.3") #sfdp
 
     max_lines = max(file_sizes.values(), default=1)
     node_sizes = {node: max(0.05, 0.3 * math.sqrt(file_sizes.get(node, 0) / max_lines)) for node in graph}
@@ -112,7 +112,7 @@ def render_graph(graph, file_sizes, output_file, format, repo):
 
     for node, dependencies in graph.items():
         node_color = node_colors[node]
-        dot.node(node, shape="circle", style="filled", fillcolor=node_color, color="#00000000", width=str(node_sizes[node]), height=str(node_sizes[node]), label="")
+        dot.node(node, shape="circle", style="filled", fillcolor=node_color, color="#FFFFFF00", width=str(node_sizes[node]), height=str(node_sizes[node]), label="")
         for dep in dependencies:
             if dep in graph:  # Ensure we're not linking to removed nodes
                 edge_color =  node_color + "10"
