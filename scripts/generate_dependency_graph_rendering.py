@@ -99,7 +99,7 @@ def count_imports(graph):
             import_counts[dep] += 1
     return import_counts
 
-def build_dependency_graph(root_dir, min_rank_indegree_node=20):
+def build_dependency_graph(root_dir, min_rank_imports=20):
     """Construct a dependency graph from Agda files."""
     graph = defaultdict(set)
     file_sizes = {}
@@ -117,7 +117,7 @@ def build_dependency_graph(root_dir, min_rank_indegree_node=20):
 
     # Count imports and find top imported modules
     import_counts = count_imports(graph)
-    _top_imports = sorted(import_counts, key=import_counts.get, reverse=True)[:min_rank_indegree_node]
+    _top_imports = sorted(import_counts, key=import_counts.get, reverse=True)[:min_rank_imports]
     top_imports = set(_top_imports)
 
     eprint("Excluding modules:")
@@ -166,6 +166,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    graph, file_sizes = build_dependency_graph(root_dir, min_rank_indegree_node=min_rank_imports)
+    graph, file_sizes = build_dependency_graph(root_dir, min_rank_imports=min_rank_imports)
     render_graph(graph, file_sizes, args.output_file, format=args.format, repo=GITHUB_REPO)
     eprint(f"Graph saved as {args.output_file}.{args.format}")
