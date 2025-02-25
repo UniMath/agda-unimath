@@ -157,6 +157,7 @@ website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md ./MAINTAINERS.md ./web
 .PHONY: website
 website: website-prepare
 	@mdbook build
+	@python3 ./scripts/generate_dependency_graph_rendering.py website/images/agda_dependency_graph svg || true
 
 .PHONY: serve-website
 serve-website: website-prepare
