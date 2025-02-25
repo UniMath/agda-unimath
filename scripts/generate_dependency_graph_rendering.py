@@ -21,7 +21,43 @@ def find_agda_files(root_dir):
     return [str(f) for f in agda_files if f.parts[0] == root_dir and len(f.parts) > 2]
 
 
-fallback_label_colors = {'category-theory': 'fbca04', 'commutative-algebra': '3577BB','domain-theory': 'FCBFF5', 'elementary-number-theory': '4A6123', 'finite-algebra': '524F88', 'finite-group-theory': '9A01E2', 'foundation': '284530', 'globular-types': '4A7555', 'graph-theory': 'CCC0C4', 'group-theory': '963872', 'higher-group-theory': 'E79FEE', 'lists': 'C9D999', 'literature': '3C3C0A', 'logic': 'A9CFCE', 'metric-spaces': '923E82', 'modal-logic': 'A4DC70', 'modal-type-theory': 'E45F85', 'oeis': 'F984EC', 'order-theory': '533A22', 'organic-chemistry': '07C851', 'orthogonal-factorization-systems': '578072', 'real-numbers': 'B66877', 'reflection': '000000', 'ring-theory': '1A1277', 'set-theory': '98335C', 'simplicial-type-theory': '8C3F69', 'species': 'EDA55F', 'structured-types': '069F6E', 'synthetic-category-theory': '2FEABE', 'synthetic-homotopy-theory': 'B0D45A', 'trees': '0F1D69', 'type-theories': '610CCA', 'univalent-combinatorics': 'F70D61', 'universal-algebra': '5467C3', 'wild-category-theory': 'E2C12E'}
+fallback_label_colors = {
+    "category-theory": "fbca04",
+    "commutative-algebra": "3577BB",
+    "domain-theory": "FCBFF5",
+    "elementary-number-theory": "4A6123",
+    "finite-algebra": "524F88",
+    "finite-group-theory": "9A01E2",
+    "foundation": "284530",
+    "globular-types": "4A7555",
+    "graph-theory": "CCC0C4",
+    "group-theory": "963872",
+    "higher-group-theory": "E79FEE",
+    "lists": "C9D999",
+    "literature": "3C3C0A",
+    "logic": "A9CFCE",
+    "metric-spaces": "923E82",
+    "modal-logic": "A4DC70",
+    "modal-type-theory": "E45F85",
+    "oeis": "F984EC",
+    "order-theory": "533A22",
+    "organic-chemistry": "07C851",
+    "orthogonal-factorization-systems": "578072",
+    "real-numbers": "B66877",
+    "reflection": "000000",
+    "ring-theory": "1A1277",
+    "set-theory": "98335C",
+    "simplicial-type-theory": "8C3F69",
+    "species": "EDA55F",
+    "structured-types": "069F6E",
+    "synthetic-category-theory": "2FEABE",
+    "synthetic-homotopy-theory": "B0D45A",
+    "trees": "0F1D69",
+    "type-theories": "610CCA",
+    "univalent-combinatorics": "F70D61",
+    "universal-algebra": "5467C3",
+    "wild-category-theory": "E2C12E",
+}
 
 def fetch_github_labels(repo):
     """Fetch labels and their colors from a GitHub repository."""
@@ -63,7 +99,7 @@ def count_imports(graph):
             import_counts[dep] += 1
     return import_counts
 
-def build_dependency_graph(root_dir, min_rank_node=20):
+def build_dependency_graph(root_dir, min_rank_indegree_node=20):
     """Construct a dependency graph from Agda files."""
     graph = defaultdict(set)
     file_sizes = {}
@@ -81,7 +117,7 @@ def build_dependency_graph(root_dir, min_rank_node=20):
 
     # Count imports and find top imported modules
     import_counts = count_imports(graph)
-    _top_imports = sorted(import_counts, key=import_counts.get, reverse=True)[:min_rank_node]
+    _top_imports = sorted(import_counts, key=import_counts.get, reverse=True)[:min_rank_indegree_node]
     top_imports = set(_top_imports)
 
     eprint("Excluding modules:")
@@ -130,6 +166,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    graph, file_sizes = build_dependency_graph(root_dir, min_rank_node=min_rank_imports)
+    graph, file_sizes = build_dependency_graph(root_dir, min_rank_indegree_node=min_rank_imports)
     render_graph(graph, file_sizes, args.output_file, format=args.format, repo=GITHUB_REPO)
     eprint(f"Graph saved as {args.output_file}.{args.format}")
