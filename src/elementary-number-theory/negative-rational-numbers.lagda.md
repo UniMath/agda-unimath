@@ -11,15 +11,24 @@ module elementary-number-theory.negative-rational-numbers where
 ```agda
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
+open import elementary-number-theory.cross-multiplication-difference-integer-fractions
+open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.negative-integer-fractions
 open import elementary-number-theory.negative-integers
 open import elementary-number-theory.positive-integers
+open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.nonzero-rational-numbers
 
+open import foundation.coproduct-types
+open import foundation.transport-along-identifications
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.logical-equivalences
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -118,4 +127,94 @@ abstract
 
 negative-rational-negative-ℤ : negative-ℤ → ℚ⁻
 negative-rational-negative-ℤ (z , pos-z) = rational-ℤ z , pos-z
+```
+
+### The rational image of a negative integer fraction is negative
+
+```agda
+abstract
+  is-negative-rational-fraction-ℤ :
+    {x : fraction-ℤ} (P : is-negative-fraction-ℤ x) →
+    is-negative-ℚ (rational-fraction-ℤ x)
+  is-negative-rational-fraction-ℤ = is-negative-reduce-fraction-ℤ
+```
+
+### A rational number `x` is negative if and only if its negation is positive
+
+```agda
+is-negative-iff-negation-is-positive-ℚ :
+  (q : ℚ) → is-negative-ℚ q ↔ is-positive-ℚ (neg-ℚ q)
+pr1 (is-negative-iff-negation-is-positive-ℚ q) = is-positive-neg-is-negative-ℤ
+pr2 (is-negative-iff-negation-is-positive-ℚ q) neg-is-pos =
+  tr
+    ( is-negative-ℤ)
+    ( neg-neg-ℤ (numerator-ℚ q))
+    ( is-negative-neg-is-positive-ℤ neg-is-pos)
+```
+
+### A rational number `x` is negative if and only if `x < 0`
+
+```agda
+module _
+  (x : ℚ)
+  where
+
+  abstract
+    le-zero-is-negative-ℚ : is-negative-ℚ x → le-ℚ x zero-ℚ
+    le-zero-is-negative-ℚ x-is-neg =
+      tr
+        ( λ y → le-ℚ y zero-ℚ)
+        ( neg-neg-ℚ x)
+        ( neg-le-ℚ
+          ( zero-ℚ)
+          ( neg-ℚ x)
+          ( le-zero-is-positive-ℚ
+            ( neg-ℚ x)
+            ( forward-implication
+              ( is-negative-iff-negation-is-positive-ℚ x)
+              ( x-is-neg))))
+
+    is-negative-le-zero-ℚ : le-ℚ x zero-ℚ → is-negative-ℚ x
+    is-negative-le-zero-ℚ x<0 =
+      backward-implication
+        ( is-negative-iff-negation-is-positive-ℚ x)
+        ( is-positive-le-zero-ℚ
+          ( neg-ℚ x)
+          ( neg-le-ℚ x zero-ℚ x<0))
+
+    is-negative-iff-le-zero-ℚ : is-negative-ℚ x ↔ le-ℚ x zero-ℚ
+    is-negative-iff-le-zero-ℚ =
+      le-zero-is-negative-ℚ ,
+      is-negative-le-zero-ℚ
+```
+
+### The difference of a rational number with a greater rational number is negative
+
+```agda
+module _
+  (x y : ℚ) (H : le-ℚ x y)
+  where
+
+  is-negative-diff-le-ℚ : is-negative-ℚ (x -ℚ y)
+  is-negative-diff-le-ℚ =
+    backward-implication
+      ( is-negative-iff-negation-is-positive-ℚ (x -ℚ y))
+      ( inv-tr
+        ( is-positive-ℚ)
+        ( distributive-neg-diff-ℚ x y)
+        ( is-positive-diff-le-ℚ x y H))
+
+  negative-diff-le-ℚ : ℚ⁻
+  negative-diff-le-ℚ = x -ℚ y , is-negative-diff-le-ℚ
+```
+
+### Negative rational numbers are nonzero
+
+```agda
+abstract
+  is-nonzero-is-negative-ℚ : {x : ℚ} → is-negative-ℚ x → is-nonzero-ℚ x
+  is-nonzero-is-negative-ℚ {x} H =
+    is-nonzero-is-nonzero-numerator-ℚ
+      ( x)
+      ( is-nonzero-is-negative-ℤ {numerator-ℚ x} H)
 ```
