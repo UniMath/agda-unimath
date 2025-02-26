@@ -309,7 +309,6 @@ module _
         ( λ m n≤m →
           let
             xm = map-cauchy-sequence-Metric-Space M x m
-            neighborhood-ε''-xm-xn : neighborhood-Metric-Space M ε''⁺ xm xn
             neighborhood-ε''-xm-xn =
               pr2
                 ( is-cauchy-sequence-cauchy-sequence-Metric-Space M x ε''⁺)
@@ -317,15 +316,11 @@ module _
                 ( n)
                 ( n≤m)
                 ( refl-leq-ℕ _)
-            neighborhood-ε'-xn-l :
-              neighborhood-Metric-Space M ε'⁺ xn l
             neighborhood-ε'-xn-l =
               tr
                 ( λ d → neighborhood-Metric-Space M d xn l)
                 ( eq-add-split-ℚ⁺ ε'⁺)
                 ( H ε''⁺ (right-summand-split-ℚ⁺ ε'⁺))
-            neighborhood-ε''+ε'-xm-l :
-              neighborhood-Metric-Space M (ε''⁺ +ℚ⁺ ε'⁺) xm l
             neighborhood-ε''+ε'-xm-l =
               is-triangular-structure-Metric-Space
                 ( M)
@@ -398,12 +393,6 @@ module _
             n'≤k' = tr (λ p → leq-ℕ⁺ p k') (is-section-succ-nonzero-ℕ' n') n≤k
             1/m' = positive-reciprocal-rational-ℕ⁺ m'
             1/k' = positive-reciprocal-rational-ℕ⁺ k'
-            neighborhood-⟨1/m'⟩+⟨1/k'⟩-xm-xk =
-              is-cauchy-approximation-map-cauchy-approximation-Metric-Space
-                ( M)
-                ( x)
-                ( 1/m')
-                ( 1/k')
           in
             is-monotonic-structure-Metric-Space
               ( M)
@@ -434,7 +423,11 @@ module _
                     { ε'}
                     ( 1/n'<ε')
                     ( 1/n'<ε'))))
-              ( neighborhood-⟨1/m'⟩+⟨1/k'⟩-xm-xk)
+              ( is-cauchy-approximation-map-cauchy-approximation-Metric-Space
+                ( M)
+                ( x)
+                ( 1/m')
+                ( 1/k'))
 
   cauchy-sequence-cauchy-approximation-Metric-Space :
     cauchy-sequence-Metric-Space M
@@ -472,43 +465,6 @@ module _
         1/n' = positive-reciprocal-rational-ℕ⁺ n'
         xε = map-cauchy-approximation-Metric-Space M x ε⁺
         x1/n' = map-cauchy-approximation-Metric-Space M x 1/n'
-        1/n'<δ' : le-ℚ⁺ 1/n' δ'⁺
-        1/n'<δ' =
-          concatenate-leq-le-ℚ
-            ( rational-ℚ⁺ 1/n')
-            ( rational-ℚ⁺ 1/n₁')
-            ( δ')
-            ( leq-reciprocal-rational-ℕ⁺
-              ( n₁')
-              ( n')
-              ( reflects-leq-pred-nonzero-ℕ
-                ( n₁')
-                ( n')
-                ( inv-tr
-                  ( leq-ℕ n₁)
-                  ( is-section-pred-nonzero-ℕ n)
-                  ( left-leq-max-ℕ n₁ n₂))))
-            ( 1/n₁'<δ')
-        neighborhood-ε+1/n'-xε-x1/n' =
-          is-cauchy-approximation-map-cauchy-approximation-Metric-Space
-            ( M)
-            ( x)
-            ( ε⁺)
-            ( 1/n')
-        neighborhood-ε+δ'-xε-x1/n' =
-          is-monotonic-structure-Metric-Space
-            ( M)
-            ( xε)
-            ( x1/n')
-            ( ε⁺ +ℚ⁺ 1/n')
-            ( ε⁺ +ℚ⁺ δ'⁺)
-            ( preserves-le-right-add-ℚ ε (rational-ℚ⁺ 1/n') δ' 1/n'<δ')
-            ( neighborhood-ε+1/n'-xε-x1/n')
-        neighborhood-δ'-x1/n'-lim =
-          pr2
-            ( l-is-sequence-limit δ'⁺)
-            ( n)
-            ( right-leq-max-ℕ n₁ n₂)
       in
         is-monotonic-structure-Metric-Space
           ( M)
@@ -527,8 +483,40 @@ module _
             ( l)
             ( ε⁺ +ℚ⁺ δ'⁺)
             ( δ'⁺)
-            ( neighborhood-δ'-x1/n'-lim)
-            ( neighborhood-ε+δ'-xε-x1/n'))
+            ( pr2
+              ( l-is-sequence-limit δ'⁺)
+              ( n)
+              ( right-leq-max-ℕ n₁ n₂))
+            ( is-monotonic-structure-Metric-Space
+              ( M)
+              ( xε)
+              ( x1/n')
+              ( ε⁺ +ℚ⁺ 1/n')
+              ( ε⁺ +ℚ⁺ δ'⁺)
+              ( preserves-le-right-add-ℚ
+                ( ε)
+                ( rational-ℚ⁺ 1/n')
+                ( δ')
+                ( concatenate-leq-le-ℚ
+                  ( rational-ℚ⁺ 1/n')
+                  ( rational-ℚ⁺ 1/n₁')
+                  ( δ')
+                  ( leq-reciprocal-rational-ℕ⁺
+                    ( n₁')
+                    ( n')
+                    ( reflects-leq-pred-nonzero-ℕ
+                      ( n₁')
+                      ( n')
+                      ( inv-tr
+                        ( leq-ℕ n₁)
+                        ( is-section-pred-nonzero-ℕ n)
+                        ( left-leq-max-ℕ n₁ n₂))))
+                  ( 1/n₁'<δ')))
+              ( is-cauchy-approximation-map-cauchy-approximation-Metric-Space
+                ( M)
+                ( x)
+                ( ε⁺)
+                ( 1/n'))))
 ```
 
 ## References
