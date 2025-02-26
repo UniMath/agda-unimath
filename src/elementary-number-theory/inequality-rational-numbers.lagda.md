@@ -98,6 +98,9 @@ leq-ℚ-Decidable-Prop x y =
 refl-leq-ℚ : (x : ℚ) → leq-ℚ x x
 refl-leq-ℚ x =
   refl-leq-ℤ (numerator-ℚ x *ℤ denominator-ℚ x)
+
+leq-eq-ℚ : (x y : ℚ) → x ＝ y → leq-ℚ x y
+leq-eq-ℚ x y x=y = tr (leq-ℚ x) x=y (refl-leq-ℚ x)
 ```
 
 ### Inequality on the rational numbers is antisymmetric
