@@ -10,6 +10,7 @@ module metric-spaces.cauchy-sequences-complete-metric-spaces where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
@@ -114,16 +115,11 @@ module _
   is-complete-metric-space-cauchy-sequences-have-limits-Metric-Space :
     is-complete-Metric-Space M
   is-complete-metric-space-cauchy-sequences-have-limits-Metric-Space x =
-    let
-      (lim , lim-is-seq-lim) =
-        H (cauchy-sequence-cauchy-approximation-Metric-Space M x)
-    in
-      lim ,
-      is-limit-cauchy-approximation-limit-cauchy-sequence-cauchy-approximation-Metric-Space
+    tot
+      ( is-limit-cauchy-approximation-limit-cauchy-sequence-cauchy-approximation-Metric-Space
         ( M)
-        ( x)
-        ( lim)
-        ( lim-is-seq-lim)
+        ( x))
+      ( H (cauchy-sequence-cauchy-approximation-Metric-Space M x))
 
   complete-metric-space-cauchy-sequences-have-limits-Metric-Space :
     Complete-Metric-Space l1 l2

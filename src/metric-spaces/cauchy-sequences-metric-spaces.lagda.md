@@ -19,6 +19,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
@@ -95,6 +96,47 @@ module _
   is-cauchy-sequence-cauchy-sequence-Metric-Space = pr2
 ```
 
+### Limits of arbitrary sequences
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (x : ℕ → type-Metric-Space M)
+  (l : type-Metric-Space M)
+  where
+
+  is-limit-sequence-Metric-Space : UU l2
+  is-limit-sequence-Metric-Space =
+    (ε : ℚ⁺) →
+    Σ
+      ( ℕ)
+      ( λ n →
+        (m : ℕ) → leq-ℕ n m →
+        neighborhood-Metric-Space
+          ( M)
+          ( ε)
+          ( x m)
+          ( l))
+
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (x : ℕ → type-Metric-Space M)
+  where
+
+  has-limit-sequence-Metric-Space : UU (l1 ⊔ l2)
+  has-limit-sequence-Metric-Space =
+    Σ (type-Metric-Space M) (is-limit-sequence-Metric-Space M x)
+
+  limit-has-limit-sequence-Metric-Space :
+    has-limit-sequence-Metric-Space → type-Metric-Space M
+  limit-has-limit-sequence-Metric-Space = pr1
+
+  is-limit-limit-has-limit-sequence-Metric-Space :
+    (H : has-limit-sequence-Metric-Space) →
+    is-limit-sequence-Metric-Space M x (limit-has-limit-sequence-Metric-Space H)
+  is-limit-limit-has-limit-sequence-Metric-Space = pr2
+```
+
 ### Limits of Cauchy sequences
 
 ```agda
@@ -106,16 +148,10 @@ module _
 
   is-limit-cauchy-sequence-Metric-Space : UU l2
   is-limit-cauchy-sequence-Metric-Space =
-    (ε : ℚ⁺) →
-    Σ
-      ( ℕ)
-      ( λ n →
-        (m : ℕ) → leq-ℕ n m →
-        neighborhood-Metric-Space
-          ( M)
-          ( ε)
-          ( map-cauchy-sequence-Metric-Space M x m)
-          ( l))
+    is-limit-sequence-Metric-Space
+      ( M)
+      ( map-cauchy-sequence-Metric-Space M x)
+      ( l)
 
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
@@ -124,10 +160,55 @@ module _
 
   has-limit-cauchy-sequence-Metric-Space : UU (l1 ⊔ l2)
   has-limit-cauchy-sequence-Metric-Space =
-    Σ (type-Metric-Space M) (is-limit-cauchy-sequence-Metric-Space M x)
+    has-limit-sequence-Metric-Space
+      ( M)
+      ( map-cauchy-sequence-Metric-Space M x)
 ```
 
 ## Properties
+
+### If a sequence has a limit, it is Cauchy
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (x : ℕ → type-Metric-Space M)
+  (H : has-limit-sequence-Metric-Space M x)
+  where
+
+  is-cauchy-sequence-has-limit-Metric-Space :
+    is-cauchy-sequence-Metric-Space M x
+  is-cauchy-sequence-has-limit-Metric-Space ε⁺@(ε , _) =
+    let
+      lim = limit-has-limit-sequence-Metric-Space M x H
+      lim-is-lim = is-limit-limit-has-limit-sequence-Metric-Space M x H
+      (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
+      (n , n≤m⇒|xm-l|<ε') = lim-is-lim ε'⁺
+    in
+      n ,
+      λ m k n≤m n≤k →
+        is-monotonic-structure-Metric-Space
+          ( M)
+          ( x m)
+          ( x k)
+          ( ε'⁺ +ℚ⁺ ε'⁺)
+          ( ε⁺)
+          ( 2ε'<ε)
+          ( is-triangular-structure-Metric-Space
+            ( M)
+            ( x m)
+            ( lim)
+            ( x k)
+            ( ε'⁺)
+            ( ε'⁺)
+            ( is-symmetric-structure-Metric-Space
+              ( M)
+              ( ε'⁺)
+              ( x k)
+              ( lim)
+              ( n≤m⇒|xm-l|<ε' k n≤k))
+            ( n≤m⇒|xm-l|<ε' m n≤m))
+```
 
 ### Correspondence to Cauchy approximations
 
