@@ -9,32 +9,32 @@ module elementary-number-theory.negative-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.cross-multiplication-difference-integer-fractions
+open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
-open import elementary-number-theory.cross-multiplication-difference-integer-fractions
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.difference-rational-numbers
-open import elementary-number-theory.negative-integer-fractions
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.negative-integer-fractions
 open import elementary-number-theory.negative-integers
-open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.positive-integers
-open import elementary-number-theory.positive-integer-fractions
+open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integer-fractions
+open import elementary-number-theory.positive-integers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
-open import elementary-number-theory.nonzero-rational-numbers
 
 open import foundation.binary-transport
 open import foundation.coproduct-types
-open import foundation.transport-along-identifications
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.logical-equivalences
+open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
