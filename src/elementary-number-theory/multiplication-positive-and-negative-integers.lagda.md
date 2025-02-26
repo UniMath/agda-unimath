@@ -23,8 +23,8 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
-open import foundation.unit-type
 open import foundation.transport-along-identifications
+open import foundation.unit-type
 ```
 
 </details>

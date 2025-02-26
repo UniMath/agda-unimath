@@ -23,8 +23,8 @@ open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.strict-inequality-integers
 
-open import foundation.binary-transport
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions

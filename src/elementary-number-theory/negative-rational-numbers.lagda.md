@@ -9,19 +9,20 @@ module elementary-number-theory.negative-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.integers
-open import elementary-number-theory.negative-integers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.integers
 open import elementary-number-theory.negative-integer-fractions
+open import elementary-number-theory.negative-integers
+open import elementary-number-theory.positive-integers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
+
+open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
-open import foundation.dependent-pair-types
-open import foundation.sets
-open import foundation.identity-types
-open import elementary-number-theory.positive-integers
 ```
 
 </details>
