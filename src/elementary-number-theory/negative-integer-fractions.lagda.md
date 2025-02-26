@@ -15,12 +15,14 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.multiplication-positive-and-negative-integers
 open import elementary-number-theory.negative-integers
 open import elementary-number-theory.positive-integer-fractions
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.reduced-integer-fractions
 
+open import foundation.transport-along-identifications
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -55,6 +57,26 @@ module _
 ```
 
 ## Properties
+
+### The negative of a positive integer fraction is negative
+
+```agda
+abstract
+  is-negative-neg-positive-fraction-ℤ :
+    (x : fraction-ℤ) → is-positive-fraction-ℤ x →
+    is-negative-fraction-ℤ (neg-fraction-ℤ x)
+  is-negative-neg-positive-fraction-ℤ _ = is-negative-neg-is-positive-ℤ
+```
+
+### The negative of a negative integer fraction is positive
+
+```agda
+abstract
+  is-positive-neg-negative-fraction-ℤ :
+    (x : fraction-ℤ) → is-negative-fraction-ℤ x →
+    is-positive-fraction-ℤ (neg-fraction-ℤ x)
+  is-positive-neg-negative-fraction-ℤ _ = is-positive-neg-is-negative-ℤ
+```
 
 ### An integer fraction similar to a negative integer fraction is negative
 

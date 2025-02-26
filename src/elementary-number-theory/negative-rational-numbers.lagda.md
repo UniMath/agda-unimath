@@ -15,14 +15,18 @@ open import elementary-number-theory.cross-multiplication-difference-integer-fra
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.negative-integer-fractions
+open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.negative-integers
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-integers
+open import elementary-number-theory.positive-integer-fractions
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.nonzero-rational-numbers
 
+open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.transport-along-identifications
 open import foundation.dependent-pair-types
@@ -40,9 +44,9 @@ open import foundation.universe-levels
 
 A [rational number](elementary-number-theory.rational-numbers.md) `x` is said to
 be {{#concept "negative" Disambiguation="rational number" Agda=is-negative-ℚ}}
-if its underlying fraction is negative.
+if its negation is positive.
 
-Positive rational numbers are a [subsemigroup](group-theory.subsemigroups.md) of
+Negative rational numbers are a [subsemigroup](group-theory.subsemigroups.md) of
 the
 [additive monoid of rational numbers](elementary-number-theory.additive-group-of-rational-numbers.md).
 
@@ -52,14 +56,14 @@ the
 
 ```agda
 module _
-  (x : ℚ)
+  (q : ℚ)
   where
 
   is-negative-ℚ : UU lzero
-  is-negative-ℚ = is-negative-fraction-ℤ (fraction-ℚ x)
+  is-negative-ℚ = is-positive-ℚ (neg-ℚ q)
 
   is-prop-is-negative-ℚ : is-prop is-negative-ℚ
-  is-prop-is-negative-ℚ = is-prop-is-negative-fraction-ℤ (fraction-ℚ x)
+  is-prop-is-negative-ℚ = is-prop-is-positive-ℚ (neg-ℚ q)
 
   is-negative-prop-ℚ : Prop lzero
   pr1 is-negative-prop-ℚ = is-negative-ℚ
@@ -95,13 +99,25 @@ module _
   is-negative-rational-ℚ⁻ = pr2 x
 
   is-negative-fraction-ℚ⁻ : is-negative-fraction-ℤ fraction-ℚ⁻
-  is-negative-fraction-ℚ⁻ = is-negative-rational-ℚ⁻
+  is-negative-fraction-ℚ⁻ =
+    tr
+      ( is-negative-fraction-ℤ)
+      ( neg-neg-fraction-ℤ fraction-ℚ⁻)
+      ( is-negative-neg-positive-fraction-ℤ
+        ( neg-fraction-ℤ fraction-ℚ⁻)
+        ( is-negative-rational-ℚ⁻))
 
   is-negative-numerator-ℚ⁻ : is-negative-ℤ numerator-ℚ⁻
-  is-negative-numerator-ℚ⁻ = is-negative-rational-ℚ⁻
+  is-negative-numerator-ℚ⁻ = is-negative-fraction-ℚ⁻
 
   is-positive-denominator-ℚ⁻ : is-positive-ℤ denominator-ℚ⁻
   is-positive-denominator-ℚ⁻ = is-positive-denominator-ℚ rational-ℚ⁻
+
+  neg-ℚ⁻ : ℚ⁺
+  neg-ℚ⁻ = (neg-ℚ rational-ℚ⁻) , is-negative-rational-ℚ⁻
+
+neg-ℚ⁺ : ℚ⁺ → ℚ⁻
+neg-ℚ⁺ (q , q-is-pos) = neg-ℚ q , inv-tr is-positive-ℚ (neg-neg-ℚ q) q-is-pos
 
 abstract
   eq-ℚ⁻ : {x y : ℚ⁻} → rational-ℚ⁻ x ＝ rational-ℚ⁻ y → x ＝ y
@@ -123,10 +139,11 @@ is-set-ℚ⁻ = is-set-type-subtype is-negative-prop-ℚ is-set-ℚ
 abstract
   is-negative-rational-ℤ :
     (x : ℤ) → is-negative-ℤ x → is-negative-ℚ (rational-ℤ x)
-  is-negative-rational-ℤ x P = P
+  is-negative-rational-ℤ _ = is-positive-neg-is-negative-ℤ
 
 negative-rational-negative-ℤ : negative-ℤ → ℚ⁻
-negative-rational-negative-ℤ (z , pos-z) = rational-ℤ z , pos-z
+negative-rational-negative-ℤ (x , x-is-neg) =
+  rational-ℤ x , is-negative-rational-ℤ x x-is-neg
 ```
 
 ### The rational image of a negative integer fraction is negative
@@ -136,20 +153,8 @@ abstract
   is-negative-rational-fraction-ℤ :
     {x : fraction-ℤ} (P : is-negative-fraction-ℤ x) →
     is-negative-ℚ (rational-fraction-ℤ x)
-  is-negative-rational-fraction-ℤ = is-negative-reduce-fraction-ℤ
-```
-
-### A rational number `x` is negative if and only if its negation is positive
-
-```agda
-is-negative-iff-negation-is-positive-ℚ :
-  (q : ℚ) → is-negative-ℚ q ↔ is-positive-ℚ (neg-ℚ q)
-pr1 (is-negative-iff-negation-is-positive-ℚ q) = is-positive-neg-is-negative-ℤ
-pr2 (is-negative-iff-negation-is-positive-ℚ q) neg-is-pos =
-  tr
-    ( is-negative-ℤ)
-    ( neg-neg-ℤ (numerator-ℚ q))
-    ( is-negative-neg-is-positive-ℤ neg-is-pos)
+  is-negative-rational-fraction-ℤ P =
+    is-positive-neg-is-negative-ℤ (is-negative-reduce-fraction-ℤ P)
 ```
 
 ### A rational number `x` is negative if and only if `x < 0`
@@ -165,22 +170,11 @@ module _
       tr
         ( λ y → le-ℚ y zero-ℚ)
         ( neg-neg-ℚ x)
-        ( neg-le-ℚ
-          ( zero-ℚ)
-          ( neg-ℚ x)
-          ( le-zero-is-positive-ℚ
-            ( neg-ℚ x)
-            ( forward-implication
-              ( is-negative-iff-negation-is-positive-ℚ x)
-              ( x-is-neg))))
+        ( neg-le-ℚ zero-ℚ (neg-ℚ x) (le-zero-is-positive-ℚ (neg-ℚ x) x-is-neg))
 
     is-negative-le-zero-ℚ : le-ℚ x zero-ℚ → is-negative-ℚ x
-    is-negative-le-zero-ℚ x<0 =
-      backward-implication
-        ( is-negative-iff-negation-is-positive-ℚ x)
-        ( is-positive-le-zero-ℚ
-          ( neg-ℚ x)
-          ( neg-le-ℚ x zero-ℚ x<0))
+    is-negative-le-zero-ℚ x-is-neg =
+      is-positive-le-zero-ℚ (neg-ℚ x) (neg-le-ℚ x zero-ℚ x-is-neg)
 
     is-negative-iff-le-zero-ℚ : is-negative-ℚ x ↔ le-ℚ x zero-ℚ
     is-negative-iff-le-zero-ℚ =
@@ -195,14 +189,13 @@ module _
   (x y : ℚ) (H : le-ℚ x y)
   where
 
-  is-negative-diff-le-ℚ : is-negative-ℚ (x -ℚ y)
-  is-negative-diff-le-ℚ =
-    backward-implication
-      ( is-negative-iff-negation-is-positive-ℚ (x -ℚ y))
-      ( inv-tr
+  abstract
+    is-negative-diff-le-ℚ : is-negative-ℚ (x -ℚ y)
+    is-negative-diff-le-ℚ =
+      inv-tr
         ( is-positive-ℚ)
         ( distributive-neg-diff-ℚ x y)
-        ( is-positive-diff-le-ℚ x y H))
+        ( is-positive-diff-le-ℚ x y H)
 
   negative-diff-le-ℚ : ℚ⁻
   negative-diff-le-ℚ = x -ℚ y , is-negative-diff-le-ℚ
@@ -214,7 +207,66 @@ module _
 abstract
   is-nonzero-is-negative-ℚ : {x : ℚ} → is-negative-ℚ x → is-nonzero-ℚ x
   is-nonzero-is-negative-ℚ {x} H =
-    is-nonzero-is-nonzero-numerator-ℚ
-      ( x)
-      ( is-nonzero-is-negative-ℤ {numerator-ℚ x} H)
+    tr
+      ( is-nonzero-ℚ)
+      ( neg-neg-ℚ x)
+      ( is-nonzero-neg-ℚ (is-nonzero-is-positive-ℚ H))
+```
+
+### The product of two negative rational numbers is positive
+
+```agda
+  is-positive-mul-negative-ℚ :
+    {x y : ℚ} → is-negative-ℚ x → is-negative-ℚ y → is-positive-ℚ (x *ℚ y)
+  is-positive-mul-negative-ℚ {x} {y} P Q =
+    is-positive-reduce-fraction-ℤ
+      ( is-positive-mul-negative-fraction-ℤ
+        { fraction-ℚ x}
+        { fraction-ℚ y}
+        ( is-negative-fraction-ℚ⁻ (x , P))
+        ( is-negative-fraction-ℚ⁻ (y , Q)))
+```
+
+### Multiplication by a negative rational number reverses inequality
+
+```agda
+module _
+  (p : ℚ⁻)
+  (q r : ℚ)
+  (H : leq-ℚ q r)
+  where
+
+  reverses-leq-right-mul-ℚ⁻ : leq-ℚ (r *ℚ rational-ℚ⁻ p) (q *ℚ rational-ℚ⁻ p)
+  reverses-leq-right-mul-ℚ⁻ =
+    binary-tr
+      ( leq-ℚ)
+      ( negative-law-mul-ℚ r (rational-ℚ⁻ p))
+      ( negative-law-mul-ℚ q (rational-ℚ⁻ p))
+      ( preserves-leq-right-mul-ℚ⁺
+        ( neg-ℚ⁻ p)
+        ( neg-ℚ r)
+        ( neg-ℚ q)
+        ( neg-leq-ℚ q r H))
+```
+
+### Multiplication by a negative rational number reverses strict inequality
+
+```agda
+module _
+  (p : ℚ⁻)
+  (q r : ℚ)
+  (H : le-ℚ q r)
+  where
+
+  reverses-le-right-mul-ℚ⁻ : le-ℚ (r *ℚ rational-ℚ⁻ p) (q *ℚ rational-ℚ⁻ p)
+  reverses-le-right-mul-ℚ⁻ =
+    binary-tr
+      ( le-ℚ)
+      ( negative-law-mul-ℚ r (rational-ℚ⁻ p))
+      ( negative-law-mul-ℚ q (rational-ℚ⁻ p))
+      ( preserves-le-right-mul-ℚ⁺
+        ( neg-ℚ⁻ p)
+        ( neg-ℚ r)
+        ( neg-ℚ q)
+        ( neg-le-ℚ q r H))
 ```
