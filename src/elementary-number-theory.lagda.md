@@ -32,6 +32,7 @@ open import elementary-number-theory.binomial-theorem-integers public
 open import elementary-number-theory.binomial-theorem-natural-numbers public
 open import elementary-number-theory.bounded-sums-arithmetic-functions public
 open import elementary-number-theory.catalan-numbers public
+open import elementary-number-theory.closed-intervals-rational-numbers public
 open import elementary-number-theory.cofibonacci public
 open import elementary-number-theory.collatz-bijection public
 open import elementary-number-theory.collatz-conjecture public
@@ -95,10 +96,12 @@ open import elementary-number-theory.kolakoski-sequence public
 open import elementary-number-theory.legendre-symbol public
 open import elementary-number-theory.lower-bounds-natural-numbers public
 open import elementary-number-theory.maximum-natural-numbers public
+open import elementary-number-theory.maximum-rational-numbers public
 open import elementary-number-theory.maximum-standard-finite-types public
 open import elementary-number-theory.mediant-integer-fractions public
 open import elementary-number-theory.mersenne-primes public
 open import elementary-number-theory.minimum-natural-numbers public
+open import elementary-number-theory.minimum-rational-numbers public
 open import elementary-number-theory.minimum-standard-finite-types public
 open import elementary-number-theory.modular-arithmetic public
 open import elementary-number-theory.modular-arithmetic-standard-finite-types public
@@ -119,7 +122,9 @@ open import elementary-number-theory.multiplicative-units-integers public
 open import elementary-number-theory.multiplicative-units-standard-cyclic-rings public
 open import elementary-number-theory.multiset-coefficients public
 open import elementary-number-theory.natural-numbers public
+open import elementary-number-theory.negative-integer-fractions public
 open import elementary-number-theory.negative-integers public
+open import elementary-number-theory.negative-rational-numbers public
 open import elementary-number-theory.nonnegative-integers public
 open import elementary-number-theory.nonpositive-integers public
 open import elementary-number-theory.nonzero-integers public
