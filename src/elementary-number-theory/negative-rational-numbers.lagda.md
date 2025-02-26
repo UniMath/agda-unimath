@@ -9,8 +9,6 @@ module elementary-number-theory.negative-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
@@ -27,7 +25,6 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.binary-transport
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
