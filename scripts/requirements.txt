@@ -3,3 +3,4 @@ pre-commit
 pybtex
 requests
 tomli
+graphviz
