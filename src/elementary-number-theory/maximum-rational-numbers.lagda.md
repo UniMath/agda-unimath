@@ -70,6 +70,18 @@ leq-right-max-ℚ : (x y : ℚ) → y ≤-ℚ max-ℚ x y
 leq-right-max-ℚ = leq-right-max-Decidable-Total-Order ℚ-Decidable-Total-Order
 ```
 
+### If `a ≤ b`, `max a b = b`
+
+```agda
+left-leq-right-max-ℚ : (x y : ℚ) → leq-ℚ x y → max-ℚ x y ＝ y
+left-leq-right-max-ℚ =
+  left-leq-right-max-Decidable-Total-Order ℚ-Decidable-Total-Order
+
+right-leq-left-max-ℚ : (x y : ℚ) → leq-ℚ y x → max-ℚ x y ＝ x
+right-leq-left-max-ℚ =
+  right-leq-left-max-Decidable-Total-Order ℚ-Decidable-Total-Order
+```
+
 ### If both `x` and `y` are less than `z`, so is their maximum
 
 ```agda

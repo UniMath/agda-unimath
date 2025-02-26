@@ -1,6 +1,8 @@
 # Inequality on the rational numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.inequality-rational-numbers where
 ```
 
@@ -339,6 +341,13 @@ preserves-leq-add-ℚ {a} {b} {c} {d} H K =
     ( b +ℚ d)
     ( preserves-leq-right-add-ℚ b c d K)
     ( preserves-leq-left-add-ℚ c a b H)
+```
+
+### Negation of rational numbers reverses inequality
+
+```agda
+neg-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ (neg-ℚ y) (neg-ℚ x)
+neg-leq-ℚ x y = neg-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
 ```
 
 ## See also

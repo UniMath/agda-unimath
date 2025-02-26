@@ -15,6 +15,7 @@ open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
@@ -605,11 +606,22 @@ preserves-leq-left-mul-ℚ⁺
         ( leq-ℤ)
         ( interchange-law-mul-mul-ℤ _ _ _ _)
         ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( preserves-le-right-mul-positive-ℤ
-          ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos))
+        ( preserves-leq-right-mul-nonnegative-ℤ
+          ( nonnegative-positive-ℤ
+            ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos)))
           ( q-num *ℤ r-denom)
           ( r-num *ℤ q-denom)
           ( q≤r)))
+
+preserves-leq-right-mul-ℚ⁺ :
+  (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
+  leq-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
+preserves-leq-right-mul-ℚ⁺ p q r q≤r =
+  binary-tr
+    ( leq-ℚ)
+    ( commutative-mul-ℚ (rational-ℚ⁺ p) q)
+    ( commutative-mul-ℚ (rational-ℚ⁺ p) r)
+    ( preserves-leq-left-mul-ℚ⁺ p q r q≤r)
 ```
 
 ### Multiplication of a positive rational by another positive rational less than 1 is a strictly deflationary map

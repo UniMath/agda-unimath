@@ -70,6 +70,18 @@ leq-right-min-ℚ : (x y : ℚ) → min-ℚ x y ≤-ℚ y
 leq-right-min-ℚ = leq-right-min-Decidable-Total-Order ℚ-Decidable-Total-Order
 ```
 
+### If `a ≤ b`, `min a b = a`
+
+```agda
+left-leq-right-min-ℚ : (x y : ℚ) → leq-ℚ x y → min-ℚ x y ＝ x
+left-leq-right-min-ℚ =
+  left-leq-right-min-Decidable-Total-Order ℚ-Decidable-Total-Order
+
+right-leq-left-min-ℚ : (x y : ℚ) → leq-ℚ y x → min-ℚ x y ＝ y
+right-leq-left-min-ℚ =
+  right-leq-left-min-Decidable-Total-Order ℚ-Decidable-Total-Order
+```
+
 ### If `z` is less than both `x` and `y`, it is less than their minimum
 
 ```agda
