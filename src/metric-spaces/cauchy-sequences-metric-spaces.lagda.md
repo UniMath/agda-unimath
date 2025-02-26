@@ -451,7 +451,10 @@ module _
         ( M)
         ( cauchy-sequence-cauchy-approximation-Metric-Space M x)
         ( l) →
-      is-limit-cauchy-approximation-Premetric-Space (premetric-Metric-Space M) x l
+      is-limit-cauchy-approximation-Premetric-Space
+        ( premetric-Metric-Space M)
+        ( x)
+        ( l)
     is-limit-cauchy-approximation-limit-cauchy-sequence-cauchy-approximation-Metric-Space
       l-is-sequence-limit ε⁺@(ε , _) δ⁺@(δ , _) =
       let
