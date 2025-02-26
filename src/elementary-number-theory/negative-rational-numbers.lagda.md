@@ -13,6 +13,15 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.negative-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.negative-integer-fractions
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
+open import foundation.dependent-pair-types
+open import foundation.sets
+open import foundation.identity-types
+open import elementary-number-theory.positive-integers
 ```
 
 </details>
@@ -36,77 +45,76 @@ module _
   (x : ℚ)
   where
 
-  is-positive-ℚ : UU lzero
-  is-positive-ℚ = is-positive-fraction-ℤ (fraction-ℚ x)
+  is-negative-ℚ : UU lzero
+  is-negative-ℚ = is-negative-fraction-ℤ (fraction-ℚ x)
 
-  is-prop-is-positive-ℚ : is-prop is-positive-ℚ
-  is-prop-is-positive-ℚ = is-prop-is-positive-fraction-ℤ (fraction-ℚ x)
+  is-prop-is-negative-ℚ : is-prop is-negative-ℚ
+  is-prop-is-negative-ℚ = is-prop-is-negative-fraction-ℤ (fraction-ℚ x)
 
-  is-positive-prop-ℚ : Prop lzero
-  pr1 is-positive-prop-ℚ = is-positive-ℚ
-  pr2 is-positive-prop-ℚ = is-prop-is-positive-ℚ
+  is-negative-prop-ℚ : Prop lzero
+  pr1 is-negative-prop-ℚ = is-negative-ℚ
+  pr2 is-negative-prop-ℚ = is-prop-is-negative-ℚ
 ```
 
-### The type of positive rational numbers
+### The type of negative rational numbers
 
 ```agda
-positive-ℚ : UU lzero
-positive-ℚ = type-subtype is-positive-prop-ℚ
+negative-ℚ : UU lzero
+negative-ℚ = type-subtype is-negative-prop-ℚ
 
-ℚ⁺ : UU lzero
-ℚ⁺ = positive-ℚ
+ℚ⁻ : UU lzero
+ℚ⁻ = negative-ℚ
 
 module _
-  (x : positive-ℚ)
+  (x : negative-ℚ)
   where
 
-  rational-ℚ⁺ : ℚ
-  rational-ℚ⁺ = pr1 x
+  rational-ℚ⁻ : ℚ
+  rational-ℚ⁻ = pr1 x
 
-  fraction-ℚ⁺ : fraction-ℤ
-  fraction-ℚ⁺ = fraction-ℚ rational-ℚ⁺
+  fraction-ℚ⁻ : fraction-ℤ
+  fraction-ℚ⁻ = fraction-ℚ rational-ℚ⁻
 
-  numerator-ℚ⁺ : ℤ
-  numerator-ℚ⁺ = numerator-ℚ rational-ℚ⁺
+  numerator-ℚ⁻ : ℤ
+  numerator-ℚ⁻ = numerator-ℚ rational-ℚ⁻
 
-  denominator-ℚ⁺ : ℤ
-  denominator-ℚ⁺ = denominator-ℚ rational-ℚ⁺
+  denominator-ℚ⁻ : ℤ
+  denominator-ℚ⁻ = denominator-ℚ rational-ℚ⁻
 
-  is-positive-rational-ℚ⁺ : is-positive-ℚ rational-ℚ⁺
-  is-positive-rational-ℚ⁺ = pr2 x
+  is-negative-rational-ℚ⁻ : is-negative-ℚ rational-ℚ⁻
+  is-negative-rational-ℚ⁻ = pr2 x
 
-  is-positive-fraction-ℚ⁺ : is-positive-fraction-ℤ fraction-ℚ⁺
-  is-positive-fraction-ℚ⁺ = is-positive-rational-ℚ⁺
+  is-negative-fraction-ℚ⁻ : is-negative-fraction-ℤ fraction-ℚ⁻
+  is-negative-fraction-ℚ⁻ = is-negative-rational-ℚ⁻
 
-  is-positive-numerator-ℚ⁺ : is-positive-ℤ numerator-ℚ⁺
-  is-positive-numerator-ℚ⁺ = is-positive-rational-ℚ⁺
+  is-negative-numerator-ℚ⁻ : is-negative-ℤ numerator-ℚ⁻
+  is-negative-numerator-ℚ⁻ = is-negative-rational-ℚ⁻
 
-  is-positive-denominator-ℚ⁺ : is-positive-ℤ denominator-ℚ⁺
-  is-positive-denominator-ℚ⁺ = is-positive-denominator-ℚ rational-ℚ⁺
+  is-positive-denominator-ℚ⁻ : is-positive-ℤ denominator-ℚ⁻
+  is-positive-denominator-ℚ⁻ = is-positive-denominator-ℚ rational-ℚ⁻
 
 abstract
-  eq-ℚ⁺ : {x y : ℚ⁺} → rational-ℚ⁺ x ＝ rational-ℚ⁺ y → x ＝ y
-  eq-ℚ⁺ {x} {y} = eq-type-subtype is-positive-prop-ℚ
+  eq-ℚ⁻ : {x y : ℚ⁻} → rational-ℚ⁻ x ＝ rational-ℚ⁻ y → x ＝ y
+  eq-ℚ⁻ {x} {y} = eq-type-subtype is-negative-prop-ℚ
 ```
 
 ## Properties
 
-### The positive rational numbers form a set
+### The negative rational numbers form a set
 
 ```agda
-is-set-ℚ⁺ : is-set ℚ⁺
-is-set-ℚ⁺ = is-set-type-subtype is-positive-prop-ℚ is-set-ℚ
+is-set-ℚ⁻ : is-set ℚ⁻
+is-set-ℚ⁻ = is-set-type-subtype is-negative-prop-ℚ is-set-ℚ
 ```
 
-### The rational image of a positive integer is positive
+### The rational image of a negative integer is negative
 
 ```agda
 abstract
-  is-positive-rational-ℤ :
-    (x : ℤ) → is-positive-ℤ x → is-positive-ℚ (rational-ℤ x)
-  is-positive-rational-ℤ x P = P
+  is-negative-rational-ℤ :
+    (x : ℤ) → is-negative-ℤ x → is-negative-ℚ (rational-ℤ x)
+  is-negative-rational-ℤ x P = P
 
-positive-rational-positive-ℤ : positive-ℤ → ℚ⁺
-positive-rational-positive-ℤ (z , pos-z) = rational-ℤ z , pos-z
-
+negative-rational-negative-ℤ : negative-ℤ → ℚ⁻
+negative-rational-negative-ℤ (z , pos-z) = rational-ℤ z , pos-z
 ```
