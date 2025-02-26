@@ -36,8 +36,9 @@ The
 {{#concept "Archimedean property" Disambiguation="positive rational numbers" Agda=archimedean-property-ℚ⁺}}
 of `ℚ⁺` is that for any two
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
-`x y : ℚ⁺`, there is an `n : ℕ⁺` such that `y` is less than `n` as a rational
-number times `x`.
+`x y : ℚ⁺`, there is a
+[nonzero natural number](elementary-number-theory.nonzero-natural-numbers.md)
+`n` such that `y` is less than `n` as a rational number times `x`.
 
 ```agda
 abstract
@@ -68,34 +69,4 @@ abstract
     exists ℕ⁺ (λ n → le-prop-ℚ⁺ y (positive-rational-ℕ⁺ n *ℚ⁺ x))
   archimedean-property-ℚ⁺ x y =
     unit-trunc-Prop (bound-archimedean-property-ℚ⁺ x y)
-```
-
-## Corollaries
-
-### For every positive rational number, there is a smaller `1 / n` for a natural number n
-
-```agda
-smaller-reciprocal-ℚ⁺ :
-  (q : ℚ⁺) → Σ ℕ⁺ (λ n → le-ℚ⁺ (positive-reciprocal-rational-ℕ⁺ n) q)
-smaller-reciprocal-ℚ⁺ q⁺@(q , _) =
-  let (n⁺ , 1<nq) = bound-archimedean-property-ℚ⁺ q⁺ one-ℚ⁺ in
-  n⁺ ,
-  binary-tr
-    ( le-ℚ)
-    ( right-unit-law-mul-ℚ _)
-    ( ap
-      ( rational-ℚ⁺)
-      ( equational-reasoning
-        positive-reciprocal-rational-ℕ⁺ n⁺ *ℚ⁺
-          (positive-rational-ℕ⁺ n⁺ *ℚ⁺ q⁺)
-        ＝ (positive-reciprocal-rational-ℕ⁺ n⁺ *ℚ⁺ positive-rational-ℕ⁺ n⁺)
-          *ℚ⁺ q⁺
-          by inv (associative-mul-ℚ⁺ _ _ _)
-        ＝ one-ℚ⁺ *ℚ⁺ q⁺ by ap (_*ℚ⁺ q⁺) (left-inverse-law-mul-ℚ⁺ _)
-        ＝ q⁺ by left-unit-law-mul-ℚ⁺ q⁺))
-    ( preserves-le-left-mul-ℚ⁺
-      ( positive-reciprocal-rational-ℕ⁺ n⁺)
-      ( one-ℚ)
-      ( rational-ℚ⁺ (positive-rational-ℕ⁺ n⁺ *ℚ⁺ q⁺))
-      ( 1<nq))
 ```
