@@ -40,9 +40,7 @@ module _
     cauchy-sequence-Metric-Space (metric-space-Complete-Metric-Space M)
 
   is-limit-cauchy-sequence-Complete-Metric-Space :
-    cauchy-sequence-Complete-Metric-Space →
-    type-Complete-Metric-Space M →
-    UU l2
+    cauchy-sequence-Complete-Metric-Space → type-Complete-Metric-Space M → UU l2
   is-limit-cauchy-sequence-Complete-Metric-Space x l =
     is-limit-cauchy-sequence-Metric-Space
       ( metric-space-Complete-Metric-Space M)
