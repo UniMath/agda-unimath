@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.inverse-sequential-diagrams
+open import foundation.iterating-families-of-maps
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -114,9 +115,10 @@ module _
   naturality-section-dependent-inverse-sequential-diagram :
     (h :
       (n : ℕ) (x : family-inverse-sequential-diagram A n) →
-      family-dependent-inverse-sequential-diagram B n x)
-    (n : ℕ) → UU (l1 ⊔ l2)
-  naturality-section-dependent-inverse-sequential-diagram h n =
+      family-dependent-inverse-sequential-diagram B n x) →
+    UU (l1 ⊔ l2)
+  naturality-section-dependent-inverse-sequential-diagram h =
+    ( n : ℕ) →
     h n ∘ map-inverse-sequential-diagram A n ~
     map-dependent-inverse-sequential-diagram B n _ ∘ h (succ-ℕ n)
 
@@ -124,8 +126,7 @@ module _
   section-dependent-inverse-sequential-diagram =
     Σ ( (n : ℕ) (x : family-inverse-sequential-diagram A n) →
         family-dependent-inverse-sequential-diagram B n x)
-      ( λ h → (n : ℕ) →
-        naturality-section-dependent-inverse-sequential-diagram h n)
+      ( naturality-section-dependent-inverse-sequential-diagram)
 
   map-section-dependent-inverse-sequential-diagram :
     section-dependent-inverse-sequential-diagram →
@@ -134,10 +135,9 @@ module _
   map-section-dependent-inverse-sequential-diagram = pr1
 
   naturality-map-section-dependent-inverse-sequential-diagram :
-    (f : section-dependent-inverse-sequential-diagram) (n : ℕ) →
+    (f : section-dependent-inverse-sequential-diagram) →
     naturality-section-dependent-inverse-sequential-diagram
       ( map-section-dependent-inverse-sequential-diagram f)
-      ( n)
   naturality-map-section-dependent-inverse-sequential-diagram = pr2
 ```
 
@@ -158,6 +158,17 @@ pr1 (right-shift-dependent-inverse-sequential-diagram B) n =
   family-dependent-inverse-sequential-diagram B (succ-ℕ n)
 pr2 (right-shift-dependent-inverse-sequential-diagram B) n =
   map-dependent-inverse-sequential-diagram B (succ-ℕ n)
+
+iterated-right-shift-dependent-inverse-sequential-diagram :
+  {l1 l2 : Level} (n : ℕ) →
+  (A : inverse-sequential-diagram l1) →
+  dependent-inverse-sequential-diagram l2 A →
+  dependent-inverse-sequential-diagram l2
+    ( iterated-right-shift-inverse-sequential-diagram n A)
+iterated-right-shift-dependent-inverse-sequential-diagram n A =
+  iterate-family-of-maps n
+    ( λ A → right-shift-dependent-inverse-sequential-diagram {A = A})
+    ( A)
 ```
 
 ### Left shifting a dependent inverse sequential diagram
@@ -179,6 +190,17 @@ pr2 (left-shift-dependent-inverse-sequential-diagram B) 0 x =
   raise-terminal-map (family-dependent-inverse-sequential-diagram B 0 x)
 pr2 (left-shift-dependent-inverse-sequential-diagram B) (succ-ℕ n) =
   map-dependent-inverse-sequential-diagram B n
+
+iterated-left-shift-dependent-inverse-sequential-diagram :
+  {l1 l2 : Level} (n : ℕ) →
+  (A : inverse-sequential-diagram l1) →
+  dependent-inverse-sequential-diagram l2 A →
+  dependent-inverse-sequential-diagram l2
+    ( iterated-left-shift-inverse-sequential-diagram n A)
+iterated-left-shift-dependent-inverse-sequential-diagram n A =
+  iterate-family-of-maps n
+    ( λ A → left-shift-dependent-inverse-sequential-diagram {A = A})
+    ( A)
 ```
 
 ## Table of files about sequential limits

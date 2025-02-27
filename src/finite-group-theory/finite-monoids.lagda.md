@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.finite-semigroups
 
+open import foundation.1-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -39,85 +40,97 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
 </details>
 
 ## Idea
 
-A finite monoid is a monoid of which the underlying type is finite.
+A {{#concept "finite monoid" Agda=Finite-Monoid}} is a
+[monoid](group-theory.monoids.md) of which the underlying type is
+[finite](univalent-combinatorics.finite-types.md).
 
 ## Definition
 
 ### The type of finite monoids
 
 ```agda
-is-unital-Semigroup-𝔽 :
-  {l : Level} → Semigroup-𝔽 l → UU l
-is-unital-Semigroup-𝔽 G = is-unital (mul-Semigroup-𝔽 G)
+is-unital-Finite-Semigroup :
+  {l : Level} → Finite-Semigroup l → UU l
+is-unital-Finite-Semigroup G = is-unital (mul-Finite-Semigroup G)
 
-Monoid-𝔽 :
+Finite-Monoid :
   (l : Level) → UU (lsuc l)
-Monoid-𝔽 l = Σ (Semigroup-𝔽 l) is-unital-Semigroup-𝔽
+Finite-Monoid l = Σ (Finite-Semigroup l) is-unital-Finite-Semigroup
 
 module _
-  {l : Level} (M : Monoid-𝔽 l)
+  {l : Level} (M : Finite-Monoid l)
   where
 
-  finite-semigroup-Monoid-𝔽 : Semigroup-𝔽 l
-  finite-semigroup-Monoid-𝔽 = pr1 M
+  finite-semigroup-Finite-Monoid : Finite-Semigroup l
+  finite-semigroup-Finite-Monoid = pr1 M
 
-  semigroup-Monoid-𝔽 : Semigroup l
-  semigroup-Monoid-𝔽 = semigroup-Semigroup-𝔽 finite-semigroup-Monoid-𝔽
+  semigroup-Finite-Monoid : Semigroup l
+  semigroup-Finite-Monoid =
+    semigroup-Finite-Semigroup finite-semigroup-Finite-Monoid
 
-  finite-type-Monoid-𝔽 : 𝔽 l
-  finite-type-Monoid-𝔽 = finite-type-Semigroup-𝔽 finite-semigroup-Monoid-𝔽
+  finite-type-Finite-Monoid : Finite-Type l
+  finite-type-Finite-Monoid =
+    finite-type-Finite-Semigroup finite-semigroup-Finite-Monoid
 
-  type-Monoid-𝔽 : UU l
-  type-Monoid-𝔽 = type-Semigroup-𝔽 finite-semigroup-Monoid-𝔽
+  type-Finite-Monoid : UU l
+  type-Finite-Monoid = type-Finite-Semigroup finite-semigroup-Finite-Monoid
 
-  is-finite-type-Monoid-𝔽 : is-finite type-Monoid-𝔽
-  is-finite-type-Monoid-𝔽 = is-finite-type-Semigroup-𝔽 finite-semigroup-Monoid-𝔽
+  is-finite-type-Finite-Monoid : is-finite type-Finite-Monoid
+  is-finite-type-Finite-Monoid =
+    is-finite-type-Finite-Semigroup finite-semigroup-Finite-Monoid
 
-  set-Monoid-𝔽 : Set l
-  set-Monoid-𝔽 = set-Semigroup semigroup-Monoid-𝔽
+  set-Finite-Monoid : Set l
+  set-Finite-Monoid = set-Semigroup semigroup-Finite-Monoid
 
-  is-set-type-Monoid-𝔽 : is-set type-Monoid-𝔽
-  is-set-type-Monoid-𝔽 = is-set-type-Semigroup semigroup-Monoid-𝔽
+  is-set-type-Finite-Monoid : is-set type-Finite-Monoid
+  is-set-type-Finite-Monoid = is-set-type-Semigroup semigroup-Finite-Monoid
 
-  mul-Monoid-𝔽 : type-Monoid-𝔽 → type-Monoid-𝔽 → type-Monoid-𝔽
-  mul-Monoid-𝔽 = mul-Semigroup semigroup-Monoid-𝔽
+  mul-Finite-Monoid :
+    type-Finite-Monoid → type-Finite-Monoid → type-Finite-Monoid
+  mul-Finite-Monoid = mul-Semigroup semigroup-Finite-Monoid
 
-  mul-Monoid-𝔽' : type-Monoid-𝔽 → type-Monoid-𝔽 → type-Monoid-𝔽
-  mul-Monoid-𝔽' y x = mul-Monoid-𝔽 x y
+  mul-Finite-Monoid' :
+    type-Finite-Monoid → type-Finite-Monoid → type-Finite-Monoid
+  mul-Finite-Monoid' y x = mul-Finite-Monoid x y
 
-  ap-mul-Monoid-𝔽 :
-    {x x' y y' : type-Monoid-𝔽} →
-    x ＝ x' → y ＝ y' → mul-Monoid-𝔽 x y ＝ mul-Monoid-𝔽 x' y'
-  ap-mul-Monoid-𝔽 = ap-mul-Semigroup semigroup-Monoid-𝔽
+  ap-mul-Finite-Monoid :
+    {x x' y y' : type-Finite-Monoid} →
+    x ＝ x' → y ＝ y' → mul-Finite-Monoid x y ＝ mul-Finite-Monoid x' y'
+  ap-mul-Finite-Monoid = ap-mul-Semigroup semigroup-Finite-Monoid
 
-  associative-mul-Monoid-𝔽 :
-    (x y z : type-Monoid-𝔽) →
-    mul-Monoid-𝔽 (mul-Monoid-𝔽 x y) z ＝ mul-Monoid-𝔽 x (mul-Monoid-𝔽 y z)
-  associative-mul-Monoid-𝔽 = associative-mul-Semigroup semigroup-Monoid-𝔽
+  associative-mul-Finite-Monoid :
+    (x y z : type-Finite-Monoid) →
+    mul-Finite-Monoid (mul-Finite-Monoid x y) z ＝
+    mul-Finite-Monoid x (mul-Finite-Monoid y z)
+  associative-mul-Finite-Monoid =
+    associative-mul-Semigroup semigroup-Finite-Monoid
 
-  has-unit-Monoid-𝔽 : is-unital mul-Monoid-𝔽
-  has-unit-Monoid-𝔽 = pr2 M
+  has-unit-Finite-Monoid : is-unital mul-Finite-Monoid
+  has-unit-Finite-Monoid = pr2 M
 
-  monoid-Monoid-𝔽 : Monoid l
-  pr1 monoid-Monoid-𝔽 = semigroup-Monoid-𝔽
-  pr2 monoid-Monoid-𝔽 = has-unit-Monoid-𝔽
+  monoid-Finite-Monoid : Monoid l
+  pr1 monoid-Finite-Monoid = semigroup-Finite-Monoid
+  pr2 monoid-Finite-Monoid = has-unit-Finite-Monoid
 
-  unit-Monoid-𝔽 : type-Monoid-𝔽
-  unit-Monoid-𝔽 = unit-Monoid monoid-Monoid-𝔽
+  unit-Finite-Monoid : type-Finite-Monoid
+  unit-Finite-Monoid = unit-Monoid monoid-Finite-Monoid
 
-  left-unit-law-mul-Monoid-𝔽 :
-    (x : type-Monoid-𝔽) → mul-Monoid-𝔽 unit-Monoid-𝔽 x ＝ x
-  left-unit-law-mul-Monoid-𝔽 = left-unit-law-mul-Monoid monoid-Monoid-𝔽
+  left-unit-law-mul-Finite-Monoid :
+    (x : type-Finite-Monoid) → mul-Finite-Monoid unit-Finite-Monoid x ＝ x
+  left-unit-law-mul-Finite-Monoid =
+    left-unit-law-mul-Monoid monoid-Finite-Monoid
 
-  right-unit-law-mul-Monoid-𝔽 :
-    (x : type-Monoid-𝔽) → mul-Monoid-𝔽 x unit-Monoid-𝔽 ＝ x
-  right-unit-law-mul-Monoid-𝔽 = right-unit-law-mul-Monoid monoid-Monoid-𝔽
+  right-unit-law-mul-Finite-Monoid :
+    (x : type-Finite-Monoid) → mul-Finite-Monoid x unit-Finite-Monoid ＝ x
+  right-unit-law-mul-Finite-Monoid =
+    right-unit-law-mul-Monoid monoid-Finite-Monoid
 ```
 
 ### Monoids of order `n`
@@ -125,6 +138,14 @@ module _
 ```agda
 Monoid-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
 Monoid-of-Order l n = Σ (Monoid l) (λ M → mere-equiv (Fin n) (type-Monoid M))
+
+Monoid-of-Order' : (l : Level) (n : ℕ) → UU (lsuc l)
+Monoid-of-Order' l n =
+    Σ (Semigroup-of-Order l n) (λ X → is-unital-Semigroup (pr1 X))
+
+compute-Monoid-of-Order :
+  {l : Level} (n : ℕ) → Monoid-of-Order l n ≃ Monoid-of-Order' l n
+compute-Monoid-of-Order n = equiv-right-swap-Σ
 ```
 
 ## Properties
@@ -162,32 +183,59 @@ is-finite-is-unital-Semigroup {l} n X =
                     ( x))))))
 ```
 
-### The type of monoids of order `n` is π-finite
+### The type of monoids of order `n` is a 1-type
 
 ```agda
-is-π-finite-Monoid-of-Order :
-  {l : Level} (k n : ℕ) → is-π-finite k (Monoid-of-Order l n)
-is-π-finite-Monoid-of-Order {l} k n =
-  is-π-finite-equiv k e
-    ( is-π-finite-Σ k
-      ( is-π-finite-Semigroup-of-Order (succ-ℕ k) n)
-      ( λ X →
-        is-π-finite-is-finite k
-          ( is-finite-is-unital-Semigroup n X)))
-  where
-  e :
-    Monoid-of-Order l n ≃
-    Σ (Semigroup-of-Order l n) (λ X → is-unital-Semigroup (pr1 X))
-  e = equiv-right-swap-Σ
+is-1-type-Monoid-of-Order' :
+  {l : Level} (n : ℕ) → is-1-type (Monoid-of-Order' l n)
+is-1-type-Monoid-of-Order' n =
+  is-1-type-Σ
+    ( is-1-type-Semigroup-of-Order n)
+    ( λ G →
+      is-1-type-is-set (is-set-is-finite (is-finite-is-unital-Semigroup n G)))
+
+is-1-type-Monoid-of-Order :
+  {l : Level} (n : ℕ) → is-1-type (Monoid-of-Order l n)
+is-1-type-Monoid-of-Order {l} n =
+  is-1-type-equiv
+    ( Monoid-of-Order' l n)
+    ( compute-Monoid-of-Order n)
+    ( is-1-type-Monoid-of-Order' n)
 ```
 
-### The function that returns for any `n` the number of monoids of order `n` up to isomorphism
+### The type of monoids of order `n` is π₁-finite
+
+```agda
+is-untruncated-π-finite-Monoid-of-Order :
+  {l : Level} (k n : ℕ) → is-untruncated-π-finite k (Monoid-of-Order l n)
+is-untruncated-π-finite-Monoid-of-Order {l} k n =
+  is-untruncated-π-finite-equiv k
+    ( compute-Monoid-of-Order n)
+    ( is-untruncated-π-finite-Σ k
+      ( is-untruncated-π-finite-Semigroup-of-Order (succ-ℕ k) n)
+      ( λ X →
+        is-untruncated-π-finite-is-finite k
+          ( is-finite-is-unital-Semigroup n X)))
+
+is-π-finite-Monoid-of-Order :
+  {l : Level} (n : ℕ) → is-π-finite 1 (Monoid-of-Order l n)
+is-π-finite-Monoid-of-Order n =
+  is-π-finite-is-untruncated-π-finite 1
+    ( is-1-type-Monoid-of-Order n)
+    ( is-untruncated-π-finite-Monoid-of-Order 1 n)
+```
+
+### The number of monoids of a given order up to isomorphism
+
+The number of monoids of order `n` is listed as
+[A058129](https://oeis.org/A058129) in the [OEIS](literature.oeis.md)
+{{#cite oeis}}.
 
 ```agda
 number-of-monoids-of-order : ℕ → ℕ
 number-of-monoids-of-order n =
   number-of-connected-components
-    ( is-π-finite-Monoid-of-Order {lzero} zero-ℕ n)
+    ( is-untruncated-π-finite-Monoid-of-Order {lzero} zero-ℕ n)
 
 mere-equiv-number-of-monoids-of-order :
   (n : ℕ) →
@@ -196,58 +244,66 @@ mere-equiv-number-of-monoids-of-order :
     ( type-trunc-Set (Monoid-of-Order lzero n))
 mere-equiv-number-of-monoids-of-order n =
   mere-equiv-number-of-connected-components
-    ( is-π-finite-Monoid-of-Order {lzero} zero-ℕ n)
+    ( is-untruncated-π-finite-Monoid-of-Order {lzero} zero-ℕ n)
 ```
 
 ### For any finite semigroup `G`, being unital is a property
 
 ```agda
 abstract
-  is-prop-is-unital-Semigroup-𝔽 :
-    {l : Level} (G : Semigroup-𝔽 l) → is-prop (is-unital-Semigroup-𝔽 G)
-  is-prop-is-unital-Semigroup-𝔽 G =
-    is-prop-is-unital-Semigroup (semigroup-Semigroup-𝔽 G)
+  is-prop-is-unital-Finite-Semigroup :
+    {l : Level} (G : Finite-Semigroup l) →
+    is-prop (is-unital-Finite-Semigroup G)
+  is-prop-is-unital-Finite-Semigroup G =
+    is-prop-is-unital-Semigroup (semigroup-Finite-Semigroup G)
 
-is-unital-Semigroup-𝔽-Prop : {l : Level} (G : Semigroup-𝔽 l) → Prop l
-pr1 (is-unital-Semigroup-𝔽-Prop G) = is-unital-Semigroup-𝔽 G
-pr2 (is-unital-Semigroup-𝔽-Prop G) = is-prop-is-unital-Semigroup-𝔽 G
+is-unital-Finite-Semigroup-Prop : {l : Level} (G : Finite-Semigroup l) → Prop l
+pr1 (is-unital-Finite-Semigroup-Prop G) = is-unital-Finite-Semigroup G
+pr2 (is-unital-Finite-Semigroup-Prop G) = is-prop-is-unital-Finite-Semigroup G
 ```
 
 ### For any finite semigroup `G`, being unital is finite
 
 ```agda
-is-finite-is-unital-Semigroup-𝔽 :
-  {l : Level} (G : Semigroup-𝔽 l) → is-finite (is-unital-Semigroup-𝔽 G)
-is-finite-is-unital-Semigroup-𝔽 G =
+is-finite-is-unital-Finite-Semigroup :
+  {l : Level} (G : Finite-Semigroup l) →
+  is-finite (is-unital-Finite-Semigroup G)
+is-finite-is-unital-Finite-Semigroup G =
   is-finite-Σ
-    ( is-finite-type-Semigroup-𝔽 G)
+    ( is-finite-type-Finite-Semigroup G)
     ( λ e →
       is-finite-product
         ( is-finite-Π
-          ( is-finite-type-Semigroup-𝔽 G)
-          ( λ x → is-finite-eq-𝔽 (finite-type-Semigroup-𝔽 G)))
+          ( is-finite-type-Finite-Semigroup G)
+          ( λ x → is-finite-eq-Finite-Type (finite-type-Finite-Semigroup G)))
         ( is-finite-Π
-          ( is-finite-type-Semigroup-𝔽 G)
-          ( λ x → is-finite-eq-𝔽 (finite-type-Semigroup-𝔽 G))))
+          ( is-finite-type-Finite-Semigroup G)
+          ( λ x → is-finite-eq-Finite-Type (finite-type-Finite-Semigroup G))))
 ```
 
 ### There is a finite number of ways to equip a finite type with the structure of a monoid
 
 ```agda
-structure-monoid-𝔽 :
-  {l1 : Level} → 𝔽 l1 → UU l1
-structure-monoid-𝔽 X =
-  Σ (structure-semigroup-𝔽 X) (λ p → is-unital-Semigroup-𝔽 (X , p))
+structure-monoid-Finite-Type :
+  {l1 : Level} → Finite-Type l1 → UU l1
+structure-monoid-Finite-Type X =
+  Σ ( structure-semigroup-Finite-Type X)
+    ( λ p → is-unital-Finite-Semigroup (X , p))
 
-finite-monoid-structure-monoid-𝔽 :
-  {l : Level} → (X : 𝔽 l) → structure-monoid-𝔽 X → Monoid-𝔽 l
-pr1 (finite-monoid-structure-monoid-𝔽 X (a , u)) = X , a
-pr2 (finite-monoid-structure-monoid-𝔽 X (a , u)) = u
+finite-monoid-structure-monoid-Finite-Type :
+  {l : Level} → (X : Finite-Type l) →
+  structure-monoid-Finite-Type X → Finite-Monoid l
+pr1 (finite-monoid-structure-monoid-Finite-Type X (a , u)) = X , a
+pr2 (finite-monoid-structure-monoid-Finite-Type X (a , u)) = u
 
-is-finite-structure-monoid-𝔽 :
-  {l : Level} → (X : 𝔽 l) → is-finite (structure-monoid-𝔽 X)
-is-finite-structure-monoid-𝔽 X =
+is-finite-structure-monoid-Finite-Type :
+  {l : Level} → (X : Finite-Type l) → is-finite (structure-monoid-Finite-Type X)
+is-finite-structure-monoid-Finite-Type X =
   is-finite-Σ
-    ( is-finite-structure-semigroup-𝔽 X)
-    ( λ m → is-finite-is-unital-Semigroup-𝔽 (X , m))
+    ( is-finite-structure-semigroup-Finite-Type X)
+    ( λ m → is-finite-is-unital-Finite-Semigroup (X , m))
 ```
+
+## References
+
+{{#bibliography}}

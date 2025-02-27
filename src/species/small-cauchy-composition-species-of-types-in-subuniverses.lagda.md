@@ -193,12 +193,9 @@ module _
     pr2 (equiv-Σ-extension-small-cauchy-composition-unit-subuniverse X) =
       is-equiv-is-invertible
         ( λ S →
-          ( tr
+          ( inv-tr
               ( is-in-subuniverse P)
-              ( eq-equiv
-                  ( ( inv-equiv
-                      ( terminal-map X , is-equiv-terminal-map-is-contr S)) ∘e
-                    ( inv-equiv (compute-raise-unit l1))))
+              ( eq-equiv (equiv-raise-unit-is-contr S))
               ( C4) ,
             map-equiv-is-small (C5 X) S))
         ( λ x → eq-is-prop is-property-is-contr)

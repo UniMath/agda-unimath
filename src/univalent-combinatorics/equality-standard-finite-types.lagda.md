@@ -128,9 +128,9 @@ is-prop-is-one-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → is-prop (is-one-Fin (succ-ℕ k) x)
 is-prop-is-one-Fin k x = is-set-Fin (succ-ℕ k) x (one-Fin k)
 
-is-prop-is-zero-or-one-Fin-two-ℕ :
+is-prop-is-zero-or-one-Fin-2 :
   (x : Fin 2) → is-prop ((is-zero-Fin 2 x) + (is-one-Fin 2 x))
-is-prop-is-zero-or-one-Fin-two-ℕ x =
+is-prop-is-zero-or-one-Fin-2 x =
   is-prop-coproduct
     ( λ p q → Eq-Fin-eq 2 (inv p ∙ q))
     ( is-prop-is-zero-Fin 1 x)
@@ -140,12 +140,12 @@ is-prop-is-zero-or-one-Fin-two-ℕ x =
 ### Every element in the standard two-element type is either `0` or `1`
 
 ```agda
-is-contr-is-zero-or-one-Fin-two-ℕ :
+is-contr-is-zero-or-one-Fin-2 :
   (x : Fin 2) → is-contr ((is-zero-Fin 2 x) + (is-one-Fin 2 x))
-is-contr-is-zero-or-one-Fin-two-ℕ x =
+is-contr-is-zero-or-one-Fin-2 x =
   is-proof-irrelevant-is-prop
-    ( is-prop-is-zero-or-one-Fin-two-ℕ x)
-    ( is-zero-or-one-Fin-two-ℕ x)
+    ( is-prop-is-zero-or-one-Fin-2 x)
+    ( is-zero-or-one-Fin-2 x)
 ```
 
 ```agda

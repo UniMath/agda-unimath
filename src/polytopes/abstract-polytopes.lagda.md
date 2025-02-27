@@ -7,11 +7,13 @@ module polytopes.abstract-polytopes where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory
+open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.natural-numbers
 
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -24,7 +26,8 @@ open import foundation.universe-levels
 open import order-theory.finitely-graded-posets
 open import order-theory.posets
 
-open import univalent-combinatorics
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -66,7 +69,7 @@ diamond-condition-finitely-graded-poset-Prop {k = succ-ℕ k} X =
                   ( succ-ℕ (succ-ℕ k))
                   ( inl-Fin (succ-ℕ k) (inl-Fin k i)))))
             ( λ y →
-              has-cardinality-Prop 2
+              has-cardinality-ℕ-Prop 2
                 ( Σ ( face-Finitely-Graded-Poset X
                       ( succ-Fin
                         ( succ-ℕ (succ-ℕ k))

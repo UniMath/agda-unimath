@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.double-negation-stable-propositions
 open import foundation.function-extensionality
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -22,6 +23,10 @@ open import foundation.universe-levels
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
+
+open import logic.de-morgan-propositions
+open import logic.de-morgan-subtypes
+open import logic.double-negation-stable-subtypes
 ```
 
 </details>
@@ -57,8 +62,8 @@ would have to be a fixed point of the negation operation, since
 
 but negation has no fixed points.
 
-Cantor's theorem is the 63rd theorem on
-[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+Cantor's theorem is the [63rd](literature.100-theorems.md#63) theorem on
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ```agda
@@ -85,6 +90,9 @@ module _
 
 ### Cantor's theorem for the set of decidable subtypes
 
+**Statement.** There is no surjective map from a type `X` to its set of
+decidable subtypes `𝒫ᵈ(X)`.
+
 ```agda
 module _
   {l1 l2 : Level} {X : UU l1} (f : X → decidable-subtype l2 X)
@@ -108,6 +116,68 @@ module _
         ( H map-theorem-decidable-Cantor)
         ( empty-Prop)
         ( not-in-image-map-theorem-decidable-Cantor)
+```
+
+### Cantor's theorem for the set of double negation stable subtypes
+
+**Statement.** There is no surjective map from a type `X` to its set of double
+negation stable subtypes `𝒫^¬¬(X)`.
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (f : X → double-negation-stable-subtype l2 X)
+  where
+
+  map-theorem-double-negation-stable-Cantor :
+    double-negation-stable-subtype l2 X
+  map-theorem-double-negation-stable-Cantor x =
+    neg-Double-Negation-Stable-Prop (f x x)
+
+  abstract
+    not-in-image-map-theorem-double-negation-stable-Cantor :
+      ¬ (fiber f map-theorem-double-negation-stable-Cantor)
+    not-in-image-map-theorem-double-negation-stable-Cantor (x , α) =
+      no-fixed-points-neg-Double-Negation-Stable-Prop
+        ( f x x)
+        ( iff-eq (ap prop-Double-Negation-Stable-Prop (htpy-eq α x)))
+
+  abstract
+    theorem-double-negation-stable-Cantor : ¬ (is-surjective f)
+    theorem-double-negation-stable-Cantor H =
+      apply-universal-property-trunc-Prop
+        ( H map-theorem-double-negation-stable-Cantor)
+        ( empty-Prop)
+        ( not-in-image-map-theorem-double-negation-stable-Cantor)
+```
+
+### Cantor's theorem for the set of De Morgan subtypes
+
+**Statement.** There is no surjective map from a type `X` to its set of De
+Morgan subtypes `𝒫ᵈᵐ(X)`.
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (f : X → de-morgan-subtype l2 X)
+  where
+
+  map-theorem-de-morgan-Cantor : de-morgan-subtype l2 X
+  map-theorem-de-morgan-Cantor x = neg-De-Morgan-Prop (f x x)
+
+  abstract
+    not-in-image-map-theorem-de-morgan-Cantor :
+      ¬ (fiber f map-theorem-de-morgan-Cantor)
+    not-in-image-map-theorem-de-morgan-Cantor (x , α) =
+      no-fixed-points-neg-De-Morgan-Prop
+        ( f x x)
+        ( iff-eq (ap prop-De-Morgan-Prop (htpy-eq α x)))
+
+  abstract
+    theorem-de-morgan-Cantor : ¬ (is-surjective f)
+    theorem-de-morgan-Cantor H =
+      apply-universal-property-trunc-Prop
+        ( H map-theorem-de-morgan-Cantor)
+        ( empty-Prop)
+        ( not-in-image-map-theorem-de-morgan-Cantor)
 ```
 
 ## References

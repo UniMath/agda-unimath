@@ -22,6 +22,8 @@ open import order-theory.decidable-subposets public
 open import order-theory.decidable-subpreorders public
 open import order-theory.decidable-total-orders public
 open import order-theory.decidable-total-preorders public
+open import order-theory.deflationary-maps-posets public
+open import order-theory.deflationary-maps-preorders public
 open import order-theory.dependent-products-large-frames public
 open import order-theory.dependent-products-large-locales public
 open import order-theory.dependent-products-large-meet-semilattices public
@@ -49,6 +51,8 @@ open import order-theory.homomorphisms-meet-suplattices public
 open import order-theory.homomorphisms-suplattices public
 open import order-theory.ideals-preorders public
 open import order-theory.incidence-algebras public
+open import order-theory.inflationary-maps-posets public
+open import order-theory.inflationary-maps-preorders public
 open import order-theory.inflattices public
 open import order-theory.inhabited-chains-posets public
 open import order-theory.inhabited-chains-preorders public
@@ -111,6 +115,10 @@ open import order-theory.similarity-of-elements-large-posets public
 open import order-theory.similarity-of-elements-large-preorders public
 open import order-theory.similarity-of-order-preserving-maps-large-posets public
 open import order-theory.similarity-of-order-preserving-maps-large-preorders public
+open import order-theory.strict-order-preserving-maps public
+open import order-theory.strict-preorders public
+open import order-theory.strictly-inflationary-maps-strict-preorders public
+open import order-theory.strictly-preordered-sets public
 open import order-theory.subposets public
 open import order-theory.subpreorders public
 open import order-theory.suplattices public
@@ -120,11 +128,11 @@ open import order-theory.top-elements-posets public
 open import order-theory.top-elements-preorders public
 open import order-theory.total-orders public
 open import order-theory.total-preorders public
+open import order-theory.transitive-well-founded-relations public
 open import order-theory.upper-bounds-chains-posets public
 open import order-theory.upper-bounds-large-posets public
 open import order-theory.upper-bounds-posets public
 open import order-theory.upper-sets-large-posets public
-open import order-theory.well-founded-orders public
 open import order-theory.well-founded-relations public
 open import order-theory.zorns-lemma public
 ```

@@ -43,7 +43,7 @@ Pseudomonic functors present
 is the "right notion" of subcategory with respect to the _principle of
 invariance under equivalences_.
 
-## Definition
+## Definitions
 
 ### The predicate on isomorphisms of being full
 

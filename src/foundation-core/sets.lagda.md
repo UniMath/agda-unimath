@@ -17,6 +17,7 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -113,6 +114,32 @@ module _
 
 ```agda
 module _
+  {l1 l2 : Level} {A : UU l1} (x : A) (R : A → UU l2)
+  (p : (y : A) → is-prop (R y)) (ρ : R x)
+  (i : (y : A) → R y → x ＝ y)
+  where
+
+  abstract
+    is-equiv-prop-in-based-id : (y : A) → is-equiv (i y)
+    is-equiv-prop-in-based-id =
+      fundamental-theorem-id-retraction x i
+        ( λ y → (ind-Id x (λ z p → R z) ρ y) , (λ r → eq-is-prop (p y)))
+
+  abstract
+    is-torsorial-prop-in-based-id : is-torsorial R
+    is-torsorial-prop-in-based-id =
+      fundamental-theorem-id'
+        ( λ y → map-inv-is-equiv (is-equiv-prop-in-based-id y))
+        ( λ y → is-equiv-map-inv-is-equiv (is-equiv-prop-in-based-id y))
+
+  abstract
+    is-prop-based-Id-prop-in-based-id : (y : A) → is-prop (x ＝ y)
+    is-prop-based-Id-prop-in-based-id y =
+      is-prop-is-equiv' (is-equiv-prop-in-based-id y) (p y)
+```
+
+```agda
+module _
   {l1 l2 : Level} {A : UU l1} (R : A → A → UU l2)
   (p : (x y : A) → is-prop (R x y)) (ρ : (x : A) → R x x)
   (i : (x y : A) → R x y → x ＝ y)
@@ -120,16 +147,12 @@ module _
 
   abstract
     is-equiv-prop-in-id : (x y : A) → is-equiv (i x y)
-    is-equiv-prop-in-id x =
-      fundamental-theorem-id-retraction x (i x)
-        ( λ y →
-          pair
-            ( ind-Id x (λ z p → R x z) (ρ x) y)
-            ( λ r → eq-is-prop (p x y)))
+    is-equiv-prop-in-id x = is-equiv-prop-in-based-id x (R x) (p x) (ρ x) (i x)
 
   abstract
     is-set-prop-in-id : is-set A
-    is-set-prop-in-id x y = is-prop-is-equiv' (is-equiv-prop-in-id x y) (p x y)
+    is-set-prop-in-id x =
+      is-prop-based-Id-prop-in-based-id x (R x) (p x) (ρ x) (i x)
 ```
 
 ### Any proposition is a set

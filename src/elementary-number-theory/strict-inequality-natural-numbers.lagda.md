@@ -12,7 +12,9 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -173,7 +175,7 @@ linear-le-ℕ (succ-ℕ x) (succ-ℕ y) =
   map-coproduct id (map-coproduct (ap succ-ℕ) id) (linear-le-ℕ x y)
 ```
 
-### `n < m` if and only if there exists a nonzero natural number `l` such that `n + l = m`
+### `n < m` if and only if there exists a nonzero natural number `l` such that `l + n = m`
 
 ```agda
 subtraction-le-ℕ :
@@ -251,6 +253,16 @@ leq-not-le-ℕ (succ-ℕ m) zero-ℕ H = star
 leq-not-le-ℕ (succ-ℕ m) (succ-ℕ n) H = leq-not-le-ℕ m n H
 ```
 
+### If `n ≰ m` then `m < n`
+
+```agda
+le-not-leq-ℕ : (m n : ℕ) → ¬ (n ≤-ℕ m) → le-ℕ m n
+le-not-leq-ℕ zero-ℕ zero-ℕ H = ex-falso (H star)
+le-not-leq-ℕ zero-ℕ (succ-ℕ n) H = star
+le-not-leq-ℕ (succ-ℕ m) zero-ℕ H = ex-falso (H star)
+le-not-leq-ℕ (succ-ℕ m) (succ-ℕ n) H = le-not-leq-ℕ m n H
+```
+
 ### If `x < y` then `x ≤ y`
 
 ```agda
@@ -278,13 +290,21 @@ leq-succ-le-ℕ zero-ℕ (succ-ℕ y) H = star
 leq-succ-le-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-succ-le-ℕ x y H
 ```
 
+### If `x + 1 ≤ y` then `x < y`
+
+```agda
+le-leq-succ-ℕ :
+  (x y : ℕ) → leq-ℕ (succ-ℕ x) y → le-ℕ x y
+le-leq-succ-ℕ zero-ℕ (succ-ℕ y) H = star
+le-leq-succ-ℕ (succ-ℕ x) (succ-ℕ y) H = le-leq-succ-ℕ x y H
+```
+
 ### If `x ≤ y` then `x < y + 1`
 
 ```agda
 le-succ-leq-ℕ :
   (x y : ℕ) → leq-ℕ x y → le-ℕ x (succ-ℕ y)
-le-succ-leq-ℕ zero-ℕ zero-ℕ H = star
-le-succ-leq-ℕ zero-ℕ (succ-ℕ y) H = star
+le-succ-leq-ℕ zero-ℕ y H = star
 le-succ-leq-ℕ (succ-ℕ x) (succ-ℕ y) H = le-succ-leq-ℕ x y H
 ```
 
@@ -318,9 +338,57 @@ le-leq-neq-ℕ {succ-ℕ x} {succ-ℕ y} l f =
   le-leq-neq-ℕ {x} {y} l (λ p → f (ap succ-ℕ p))
 ```
 
+### For any two natural numbers `x` and `y`, either `x < y` or `y ≤ x`
+
+```agda
+decide-le-leq-ℕ : (x y : ℕ) → le-ℕ x y + leq-ℕ y x
+decide-le-leq-ℕ x zero-ℕ = inr star
+decide-le-leq-ℕ zero-ℕ (succ-ℕ _) = inl star
+decide-le-leq-ℕ (succ-ℕ x) (succ-ℕ y) = decide-le-leq-ℕ x y
+```
+
 ### If `1 < x` and `1 < y`, then `1 < xy`
 
 ```agda
 le-one-mul-ℕ : (x y : ℕ) → 1 <-ℕ x → 1 <-ℕ y → 1 <-ℕ (x *ℕ y)
 le-one-mul-ℕ (succ-ℕ (succ-ℕ x)) (succ-ℕ (succ-ℕ y)) star star = star
+```
+
+### Strict inequality on the natural numbers is invariant by translation
+
+```agda
+eq-translate-right-le-ℕ : (z x y : ℕ) → le-ℕ (x +ℕ z) (y +ℕ z) ＝ le-ℕ x y
+eq-translate-right-le-ℕ zero-ℕ x y = refl
+eq-translate-right-le-ℕ (succ-ℕ z) x y = eq-translate-right-le-ℕ z x y
+
+eq-translate-left-le-ℕ : (z x y : ℕ) → le-ℕ (z +ℕ x) (z +ℕ y) ＝ le-ℕ x y
+eq-translate-left-le-ℕ z x y =
+  ap-binary le-ℕ (commutative-add-ℕ z x) (commutative-add-ℕ z y) ∙
+  eq-translate-right-le-ℕ z x y
+```
+
+### Addition on the natural numbers preserves strict inequality
+
+```agda
+preserves-le-right-add-ℕ : (z x y : ℕ) → le-ℕ x y → le-ℕ (x +ℕ z) (y +ℕ z)
+preserves-le-right-add-ℕ zero-ℕ x y I = I
+preserves-le-right-add-ℕ (succ-ℕ z) x y I = preserves-le-right-add-ℕ z x y I
+
+preserves-le-left-add-ℕ : (z x y : ℕ) → le-ℕ x y → le-ℕ (z +ℕ x) (z +ℕ y)
+preserves-le-left-add-ℕ z x y I =
+  binary-tr
+    le-ℕ
+    (commutative-add-ℕ x z)
+    (commutative-add-ℕ y z)
+    (preserves-le-right-add-ℕ z x y I)
+
+preserves-le-add-ℕ :
+  {a b c d : ℕ} → le-ℕ a b → le-ℕ c d → le-ℕ (a +ℕ c) (b +ℕ d)
+preserves-le-add-ℕ {a} {b} {c} {d} H K =
+  transitive-le-ℕ
+    (a +ℕ c)
+    (b +ℕ c)
+    (b +ℕ d)
+    (preserves-le-right-add-ℕ c a b H)
+    (preserves-le-left-add-ℕ b c d K)
 ```

@@ -32,7 +32,7 @@ is the formal series in `x` :
 The categorified version of this series is :
 
 ```text
-  Σ (F : 𝔽), S(F) × (F → X)
+  Σ (F : Finite-Type), S(F) × (F → X)
 ```
 
 Remarks that we can generalized this to species of types with the following

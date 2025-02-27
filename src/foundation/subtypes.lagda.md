@@ -114,30 +114,6 @@ module _
     map-inv-equiv (extensionality-subtype Q)
 ```
 
-### Similarity of subtypes
-
-```agda
-module _
-  {l1 : Level} {A : UU l1}
-  where
-
-  sim-subtype :
-    {l2 l3 : Level} → subtype l2 A → subtype l3 A → UU (l1 ⊔ l2 ⊔ l3)
-  sim-subtype P Q = (P ⊆ Q) × (Q ⊆ P)
-
-  has-same-elements-sim-subtype :
-    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) →
-    sim-subtype P Q → has-same-elements-subtype P Q
-  pr1 (has-same-elements-sim-subtype P Q s x) = pr1 s x
-  pr2 (has-same-elements-sim-subtype P Q s x) = pr2 s x
-
-  sim-has-same-elements-subtype :
-    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) →
-    has-same-elements-subtype P Q → sim-subtype P Q
-  pr1 (sim-has-same-elements-subtype P Q s) x = forward-implication (s x)
-  pr2 (sim-has-same-elements-subtype P Q s) x = backward-implication (s x)
-```
-
 ### The containment relation is antisymmetric
 
 ```agda

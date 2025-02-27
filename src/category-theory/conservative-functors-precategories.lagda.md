@@ -22,8 +22,9 @@ open import foundation.universe-levels
 ## Idea
 
 A [functor](category-theory.functors-precategories.md) `F : C → D` between
-[precategories](category-theory.precategories.md) is **conservative** if every
-morphism that is mapped to an
+[precategories](category-theory.precategories.md) is
+{{#concept "conservative" Disambiguation="functor of set-level precategories" WDID=Q23808682 WD="conservative functor" Agda=is-conservative-functor-Precategory Agda=conservative-functor-Precategory}}
+if every morphism that is mapped to an
 [isomorphism](category-theory.isomorphisms-in-precategories.md) in `D` is an
 isomorphism in `C`.
 

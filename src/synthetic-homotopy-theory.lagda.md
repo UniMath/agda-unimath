@@ -23,7 +23,8 @@ open import synthetic-homotopy-theory.cocones-under-sequential-diagrams public
 open import synthetic-homotopy-theory.cocones-under-spans public
 open import synthetic-homotopy-theory.codiagonals-of-maps public
 open import synthetic-homotopy-theory.coequalizers public
-open import synthetic-homotopy-theory.cofibers public
+open import synthetic-homotopy-theory.cofibers-of-maps public
+open import synthetic-homotopy-theory.cofibers-of-pointed-maps public
 open import synthetic-homotopy-theory.coforks public
 open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams public
 open import synthetic-homotopy-theory.conjugation-loops public
@@ -84,6 +85,7 @@ open import synthetic-homotopy-theory.iterated-suspensions-of-pointed-types publ
 open import synthetic-homotopy-theory.join-powers-of-types public
 open import synthetic-homotopy-theory.joins-of-maps public
 open import synthetic-homotopy-theory.joins-of-types public
+open import synthetic-homotopy-theory.left-half-smash-products public
 open import synthetic-homotopy-theory.loop-homotopy-circle public
 open import synthetic-homotopy-theory.loop-spaces public
 open import synthetic-homotopy-theory.maps-of-prespectra public
@@ -120,6 +122,7 @@ open import synthetic-homotopy-theory.spheres public
 open import synthetic-homotopy-theory.suspension-prespectra public
 open import synthetic-homotopy-theory.suspension-structures public
 open import synthetic-homotopy-theory.suspensions-of-pointed-types public
+open import synthetic-homotopy-theory.suspensions-of-propositions public
 open import synthetic-homotopy-theory.suspensions-of-types public
 open import synthetic-homotopy-theory.tangent-spheres public
 open import synthetic-homotopy-theory.total-cocones-families-sequential-diagrams public

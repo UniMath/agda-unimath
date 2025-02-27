@@ -105,6 +105,13 @@ open import elementary-number-theory.catalan-numbers using
   ( catalan-numbers)
 ```
 
+### [A000110](https://oeis.org/A000110) The Bell numbers
+
+```agda
+open import elementary-number-theory.bell-numbers using
+  ( bell-number-ℕ)
+```
+
 ### [A000142](https://oeis.org/A000142) Factorials
 
 ```agda
@@ -175,11 +182,25 @@ open import elementary-number-theory.collatz-bijection using
   ( map-collatz-bijection)
 ```
 
+### [A027851](https://oeis.org/A027851) The number of semigroups of order `n` up to isomorphism
+
+```agda
+open import finite-group-theory.finite-semigroups using
+  ( number-of-semigroups-of-order)
+```
+
 ### [A046859](https://oeis.org/A046859) The main diagonal of the Ackermann–Péter function
 
 ```agda
 open import elementary-number-theory.ackermann-function using
   ( simplified-ackermann-ℕ)
+```
+
+### [A058129](https://oeis.org/A058129) The number of monoids of order `n` up to isomorphism
+
+```agda
+open import finite-group-theory.finite-monoids using
+  ( number-of-monoids-of-order)
 ```
 
 ## References

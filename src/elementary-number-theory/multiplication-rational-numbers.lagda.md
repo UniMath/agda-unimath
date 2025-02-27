@@ -325,9 +325,58 @@ abstract
     ( ap ((x *ℚ z) +ℚ_) (left-negative-law-mul-ℚ y z))
 ```
 
+### The inclusion of integer fractions preserves multiplication
+
+```agda
+abstract
+  mul-rational-fraction-ℤ :
+    (x y : fraction-ℤ) →
+    rational-fraction-ℤ x *ℚ rational-fraction-ℤ y ＝
+    rational-fraction-ℤ (x *fraction-ℤ y)
+  mul-rational-fraction-ℤ x y =
+    eq-ℚ-sim-fraction-ℤ
+      ( mul-fraction-ℤ (reduce-fraction-ℤ x) (reduce-fraction-ℤ y))
+      ( x *fraction-ℤ y)
+      ( sim-fraction-mul-fraction-ℤ
+        ( symmetric-sim-fraction-ℤ
+          ( x)
+          ( reduce-fraction-ℤ x)
+          ( sim-reduced-fraction-ℤ x))
+        ( symmetric-sim-fraction-ℤ
+          ( y)
+          ( reduce-fraction-ℤ y)
+          ( sim-reduced-fraction-ℤ y)))
+```
+
+### `succ-ℚ p * q = q + (p * q)`
+
+```agda
+abstract
+  mul-left-succ-ℚ :
+    (p q : ℚ) →
+    (succ-ℚ p *ℚ q) ＝ q +ℚ (p *ℚ q)
+  mul-left-succ-ℚ p q =
+    equational-reasoning
+      succ-ℚ p *ℚ q
+      ＝ (one-ℚ *ℚ q) +ℚ (p *ℚ q)
+        by right-distributive-mul-add-ℚ one-ℚ p q
+      ＝ q +ℚ (p *ℚ q) by ap-add-ℚ (left-unit-law-mul-ℚ q) refl
+
+  mul-right-succ-ℚ :
+    (p q : ℚ) →
+    (p *ℚ succ-ℚ q) ＝ p +ℚ (p *ℚ q)
+  mul-right-succ-ℚ p q =
+    equational-reasoning
+      p *ℚ succ-ℚ q
+      ＝ (p *ℚ one-ℚ) +ℚ (p *ℚ q)
+        by left-distributive-mul-add-ℚ p one-ℚ q
+      ＝ p +ℚ (p *ℚ q)
+        by ap-add-ℚ (right-unit-law-mul-ℚ p) refl
+```
+
 ## See also
 
-- The multiplicative monoid strucutre on the rational numbers is defined in
+- The multiplicative monoid structure on the rational numbers is defined in
   [`elementary-number-theory.multiplicative-monoid-of-rational-numbers`](elementary-number-theory.multiplicative-monoid-of-rational-numbers.md);
 - The multiplicative group structure on the rational numbers is defined in
   [`elementary-number-theory.multiplicative-group-of-rational-numbers`](elementary-number-theory.multiplicative-group-of-rational-numbers.md).

@@ -5,7 +5,7 @@
 ### Quick setup
 
 To work or experiment with the agda-unimath library on your machine, you will
-need to have `agda` version 2.6.4 installed, and a suitable editor such as
+need to have `agda` version 2.7.0 installed, and a suitable editor such as
 [Emacs](https://www.gnu.org/software/emacs/) or
 [Visual Studio Code](https://code.visualstudio.com/). The following instructions
 will help you on your way right away:
@@ -21,8 +21,8 @@ In order to contribute to the agda-unimath library you will additionally need:
 1. `git`
 2. `make`
 3. `python` version 3.8 or newer
-4. The python libraries `pre-commit`, `pybtex`, `requests` and `tomli`. Those
-   can be installed by running
+4. The python libraries `pre-commit`, `pybtex`, `requests`, `tomli`, and
+   `graphviz`. These can be installed by running
    ```shell
    python3 -m pip install -r scripts/requirements.txt
    ```
@@ -33,6 +33,7 @@ In order to contribute to the agda-unimath library you will additionally need:
    ```shell
    make install-website-dev
    ```
+7. `graphviz`
 
 All of these can also be installed in one go by using `nix`. In the section
 [Creating a setup for contributors](#contributor-setup) we will walk you through
@@ -122,7 +123,7 @@ working branches when necessary.
 
 ## Installing Agda {#installing-agda}
 
-The agda-unimath library is built and verified with Agda 2.6.4, and we provide
+The agda-unimath library is built and verified with Agda 2.7.0, and we provide
 two methods for installation: with or without the package manager
 [Nix](https://nixos.org/). Nix streamlines the installation of Agda and its
 dependencies, providing a consistent and reproducible environment for the
@@ -130,7 +131,7 @@ library across different systems.
 
 ### Without Nix
 
-To install Agda 2.6.4 without Nix, follow the
+To install Agda 2.7.0 without Nix, follow the
 [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html)
 provided on the Agda documentation page.
 

@@ -40,106 +40,118 @@ open import univalent-combinatorics.type-duality
 ## Definition
 
 ```agda
-Σ-Decomposition-𝔽 :
-  {l : Level} → (l1 l2 : Level) → 𝔽 l → UU (l ⊔ lsuc l1 ⊔ lsuc l2)
-Σ-Decomposition-𝔽 l1 l2 A =
-  Σ ( 𝔽 l1)
+Σ-Decomposition-Finite-Type :
+  {l : Level} → (l1 l2 : Level) → Finite-Type l → UU (l ⊔ lsuc l1 ⊔ lsuc l2)
+Σ-Decomposition-Finite-Type l1 l2 A =
+  Σ ( Finite-Type l1)
     ( λ X →
-      Σ ( type-𝔽 X → Inhabited-𝔽 l2)
-        ( λ Y → type-𝔽 A ≃ (Σ (type-𝔽 X) (λ x → type-Inhabited-𝔽 (Y x)))))
+      Σ ( type-Finite-Type X → Inhabited-Finite-Type l2)
+        ( λ Y →
+          type-Finite-Type A ≃
+          ( Σ (type-Finite-Type X) (λ x → type-Inhabited-Finite-Type (Y x)))))
 
 module _
-  {l l1 l2 : Level} (A : 𝔽 l) (D : Σ-Decomposition-𝔽 l1 l2 A)
+  {l l1 l2 : Level} (A : Finite-Type l)
+  (D : Σ-Decomposition-Finite-Type l1 l2 A)
   where
 
-  finite-indexing-type-Σ-Decomposition-𝔽 : 𝔽 l1
-  finite-indexing-type-Σ-Decomposition-𝔽 = pr1 D
+  finite-indexing-type-Σ-Decomposition-Finite-Type : Finite-Type l1
+  finite-indexing-type-Σ-Decomposition-Finite-Type = pr1 D
 
-  indexing-type-Σ-Decomposition-𝔽 : UU l1
-  indexing-type-Σ-Decomposition-𝔽 =
-    type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽
+  indexing-type-Σ-Decomposition-Finite-Type : UU l1
+  indexing-type-Σ-Decomposition-Finite-Type =
+    type-Finite-Type finite-indexing-type-Σ-Decomposition-Finite-Type
 
-  is-finite-indexing-type-Σ-Decomposition-𝔽 :
-    is-finite (indexing-type-Σ-Decomposition-𝔽)
-  is-finite-indexing-type-Σ-Decomposition-𝔽 =
-    is-finite-type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽
+  is-finite-indexing-type-Σ-Decomposition-Finite-Type :
+    is-finite (indexing-type-Σ-Decomposition-Finite-Type)
+  is-finite-indexing-type-Σ-Decomposition-Finite-Type =
+    is-finite-type-Finite-Type finite-indexing-type-Σ-Decomposition-Finite-Type
 
-  finite-inhabited-cotype-Σ-Decomposition-𝔽 :
-    Fam-Inhabited-Types-𝔽 l2 finite-indexing-type-Σ-Decomposition-𝔽
-  finite-inhabited-cotype-Σ-Decomposition-𝔽 = pr1 (pr2 D)
+  finite-inhabited-cotype-Σ-Decomposition-Finite-Type :
+    Family-Of-Inhabited-Finite-Types l2
+      finite-indexing-type-Σ-Decomposition-Finite-Type
+  finite-inhabited-cotype-Σ-Decomposition-Finite-Type = pr1 (pr2 D)
 
-  finite-cotype-Σ-Decomposition-𝔽 :
-    type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽 → 𝔽 l2
-  finite-cotype-Σ-Decomposition-𝔽 =
-    finite-type-Fam-Inhabited-Types-𝔽
-      finite-indexing-type-Σ-Decomposition-𝔽
-      finite-inhabited-cotype-Σ-Decomposition-𝔽
+  finite-cotype-Σ-Decomposition-Finite-Type :
+    type-Finite-Type finite-indexing-type-Σ-Decomposition-Finite-Type →
+    Finite-Type l2
+  finite-cotype-Σ-Decomposition-Finite-Type =
+    finite-type-Family-Of-Inhabited-Finite-Types
+      finite-indexing-type-Σ-Decomposition-Finite-Type
+      finite-inhabited-cotype-Σ-Decomposition-Finite-Type
 
-  cotype-Σ-Decomposition-𝔽 :
-    type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽 → UU l2
-  cotype-Σ-Decomposition-𝔽 x = type-𝔽 (finite-cotype-Σ-Decomposition-𝔽 x)
+  cotype-Σ-Decomposition-Finite-Type :
+    type-Finite-Type finite-indexing-type-Σ-Decomposition-Finite-Type → UU l2
+  cotype-Σ-Decomposition-Finite-Type x =
+    type-Finite-Type (finite-cotype-Σ-Decomposition-Finite-Type x)
 
-  is-finite-cotype-Σ-Decomposition-𝔽 :
-    (x : type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽) →
-    is-finite (cotype-Σ-Decomposition-𝔽 x)
-  is-finite-cotype-Σ-Decomposition-𝔽 x =
-    is-finite-type-𝔽 (finite-cotype-Σ-Decomposition-𝔽 x)
+  is-finite-cotype-Σ-Decomposition-Finite-Type :
+    (x : type-Finite-Type finite-indexing-type-Σ-Decomposition-Finite-Type) →
+    is-finite (cotype-Σ-Decomposition-Finite-Type x)
+  is-finite-cotype-Σ-Decomposition-Finite-Type x =
+    is-finite-type-Finite-Type (finite-cotype-Σ-Decomposition-Finite-Type x)
 
-  is-inhabited-cotype-Σ-Decomposition-𝔽 :
-    (x : type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽) →
-    is-inhabited (cotype-Σ-Decomposition-𝔽 x)
-  is-inhabited-cotype-Σ-Decomposition-𝔽 x =
-    is-inhabited-type-Inhabited-𝔽
-      ( finite-inhabited-cotype-Σ-Decomposition-𝔽 x)
+  is-inhabited-cotype-Σ-Decomposition-Finite-Type :
+    (x : type-Finite-Type finite-indexing-type-Σ-Decomposition-Finite-Type) →
+    is-inhabited (cotype-Σ-Decomposition-Finite-Type x)
+  is-inhabited-cotype-Σ-Decomposition-Finite-Type x =
+    is-inhabited-type-Inhabited-Finite-Type
+      ( finite-inhabited-cotype-Σ-Decomposition-Finite-Type x)
 
-  inhabited-cotype-Σ-Decomposition-𝔽 :
-    Fam-Inhabited-Types l2 indexing-type-Σ-Decomposition-𝔽
-  pr1 (inhabited-cotype-Σ-Decomposition-𝔽 x) =
-    cotype-Σ-Decomposition-𝔽 x
-  pr2 (inhabited-cotype-Σ-Decomposition-𝔽 x) =
-    is-inhabited-cotype-Σ-Decomposition-𝔽 x
+  inhabited-cotype-Σ-Decomposition-Finite-Type :
+    Fam-Inhabited-Types l2 indexing-type-Σ-Decomposition-Finite-Type
+  pr1 (inhabited-cotype-Σ-Decomposition-Finite-Type x) =
+    cotype-Σ-Decomposition-Finite-Type x
+  pr2 (inhabited-cotype-Σ-Decomposition-Finite-Type x) =
+    is-inhabited-cotype-Σ-Decomposition-Finite-Type x
 
-  matching-correspondence-Σ-Decomposition-𝔽 :
-    type-𝔽 A ≃ Σ indexing-type-Σ-Decomposition-𝔽 cotype-Σ-Decomposition-𝔽
-  matching-correspondence-Σ-Decomposition-𝔽 = pr2 (pr2 D)
+  matching-correspondence-Σ-Decomposition-Finite-Type :
+    type-Finite-Type A ≃
+    Σ indexing-type-Σ-Decomposition-Finite-Type
+      cotype-Σ-Decomposition-Finite-Type
+  matching-correspondence-Σ-Decomposition-Finite-Type = pr2 (pr2 D)
 
-  map-matching-correspondence-Σ-Decomposition-𝔽 :
-    type-𝔽 A → Σ indexing-type-Σ-Decomposition-𝔽 cotype-Σ-Decomposition-𝔽
-  map-matching-correspondence-Σ-Decomposition-𝔽 =
-    map-equiv matching-correspondence-Σ-Decomposition-𝔽
+  map-matching-correspondence-Σ-Decomposition-Finite-Type :
+    type-Finite-Type A →
+    Σ indexing-type-Σ-Decomposition-Finite-Type
+      cotype-Σ-Decomposition-Finite-Type
+  map-matching-correspondence-Σ-Decomposition-Finite-Type =
+    map-equiv matching-correspondence-Σ-Decomposition-Finite-Type
 
-  Σ-Decomposition-Σ-Decomposition-𝔽 :
-    Σ-Decomposition l1 l2 (type-𝔽 A)
-  pr1 Σ-Decomposition-Σ-Decomposition-𝔽 =
-    indexing-type-Σ-Decomposition-𝔽
-  pr1 (pr2 Σ-Decomposition-Σ-Decomposition-𝔽) =
-    inhabited-cotype-Σ-Decomposition-𝔽
-  pr2 (pr2 Σ-Decomposition-Σ-Decomposition-𝔽) =
-    matching-correspondence-Σ-Decomposition-𝔽
+  Σ-Decomposition-Σ-Decomposition-Finite-Type :
+    Σ-Decomposition l1 l2 (type-Finite-Type A)
+  pr1 Σ-Decomposition-Σ-Decomposition-Finite-Type =
+    indexing-type-Σ-Decomposition-Finite-Type
+  pr1 (pr2 Σ-Decomposition-Σ-Decomposition-Finite-Type) =
+    inhabited-cotype-Σ-Decomposition-Finite-Type
+  pr2 (pr2 Σ-Decomposition-Σ-Decomposition-Finite-Type) =
+    matching-correspondence-Σ-Decomposition-Finite-Type
 ```
 
 ### Fibered double finite Σ-decompositions
 
 ```agda
-fibered-Σ-Decomposition-𝔽 :
-  {l1 : Level} (l2 l3 l4 l5 : Level) (A : 𝔽 l1) →
+fibered-Σ-Decomposition-Finite-Type :
+  {l1 : Level} (l2 l3 l4 l5 : Level) (A : Finite-Type l1) →
   UU (l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
-fibered-Σ-Decomposition-𝔽 l2 l3 l4 l5 A =
-  Σ ( Σ-Decomposition-𝔽 l2 l3 A)
+fibered-Σ-Decomposition-Finite-Type l2 l3 l4 l5 A =
+  Σ ( Σ-Decomposition-Finite-Type l2 l3 A)
     ( λ D →
-      Σ-Decomposition-𝔽 l4 l5 (finite-indexing-type-Σ-Decomposition-𝔽 A D))
+      Σ-Decomposition-Finite-Type l4 l5
+        ( finite-indexing-type-Σ-Decomposition-Finite-Type A D))
 ```
 
 ### Displayed double Σ-decompositions
 
 ```agda
-displayed-Σ-Decomposition-𝔽 :
-  {l1 : Level} (l2 l3 l4 l5 : Level) (A : 𝔽 l1) →
+displayed-Σ-Decomposition-Finite-Type :
+  {l1 : Level} (l2 l3 l4 l5 : Level) (A : Finite-Type l1) →
   UU (l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
-displayed-Σ-Decomposition-𝔽 l2 l3 l4 l5 A =
-  ( Σ ( Σ-Decomposition-𝔽 l2 l3 A)
-      ( λ D → (u : indexing-type-Σ-Decomposition-𝔽 A D) →
-        Σ-Decomposition-𝔽 l4 l5 (finite-cotype-Σ-Decomposition-𝔽 A D u)))
+displayed-Σ-Decomposition-Finite-Type l2 l3 l4 l5 A =
+  ( Σ ( Σ-Decomposition-Finite-Type l2 l3 A)
+      ( λ D → (u : indexing-type-Σ-Decomposition-Finite-Type A D) →
+        Σ-Decomposition-Finite-Type l4 l5
+          ( finite-cotype-Σ-Decomposition-Finite-Type A D u)))
 ```
 
 ## Properties
@@ -147,23 +159,23 @@ displayed-Σ-Decomposition-𝔽 l2 l3 l4 l5 A =
 ### Finite Σ-Decomposition as a relaxed Σ-Decomposition with conditions
 
 ```agda
-equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 :
-  {l1 l2 l3 : Level} (A : 𝔽 l1) →
-  Σ-Decomposition-𝔽 l2 l3 A ≃
-  Σ ( Relaxed-Σ-Decomposition l2 l3 (type-𝔽 A))
+equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-Finite-Type :
+  {l1 l2 l3 : Level} (A : Finite-Type l1) →
+  Σ-Decomposition-Finite-Type l2 l3 A ≃
+  Σ ( Relaxed-Σ-Decomposition l2 l3 (type-Finite-Type A))
     ( λ D →
       is-finite (indexing-type-Relaxed-Σ-Decomposition D) ×
       ((x : indexing-type-Relaxed-Σ-Decomposition D) →
         is-finite (cotype-Relaxed-Σ-Decomposition D x) ×
         is-inhabited (cotype-Relaxed-Σ-Decomposition D x)))
-pr1 ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 A) D =
-  ( indexing-type-Σ-Decomposition-𝔽 A D ,
-    ( cotype-Σ-Decomposition-𝔽 A D) ,
-    ( matching-correspondence-Σ-Decomposition-𝔽 A D)) ,
-    ( is-finite-indexing-type-Σ-Decomposition-𝔽 A D) ,
-    ( λ x → is-finite-cotype-Σ-Decomposition-𝔽 A D x ,
-            is-inhabited-cotype-Σ-Decomposition-𝔽 A D x)
-pr2 ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 A) =
+pr1 ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-Finite-Type A) D =
+  ( indexing-type-Σ-Decomposition-Finite-Type A D ,
+    ( cotype-Σ-Decomposition-Finite-Type A D) ,
+    ( matching-correspondence-Σ-Decomposition-Finite-Type A D)) ,
+    ( is-finite-indexing-type-Σ-Decomposition-Finite-Type A D) ,
+    ( λ x → is-finite-cotype-Σ-Decomposition-Finite-Type A D x ,
+            is-inhabited-cotype-Σ-Decomposition-Finite-Type A D x)
+pr2 ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-Finite-Type A) =
   is-equiv-is-invertible
     ( λ X →
       ( pr1 (pr1 X) , pr1 (pr2 X)) ,
@@ -179,49 +191,55 @@ pr2 ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 A) =
 
 ```agda
 module _
-  {l : Level} (A : 𝔽 l)
+  {l : Level} (A : Finite-Type l)
   where
 
-  equiv-finite-surjection-Σ-Decomposition-𝔽 :
-    Σ-Decomposition-𝔽 l l A ≃ Σ (𝔽 l) (λ B → (type-𝔽 A) ↠ (type-𝔽 B))
-  equiv-finite-surjection-Σ-Decomposition-𝔽 =
+  equiv-finite-surjection-Σ-Decomposition-Finite-Type :
+    Σ-Decomposition-Finite-Type l l A ≃
+    Σ (Finite-Type l) (λ B → (type-Finite-Type A) ↠ (type-Finite-Type B))
+  equiv-finite-surjection-Σ-Decomposition-Finite-Type =
     equiv-Σ
-      ( λ B → type-𝔽 A ↠ type-𝔽 B)
+      ( λ B → type-Finite-Type A ↠ type-Finite-Type B)
       ( id-equiv)
-      ( λ X → inv-equiv (equiv-surjection-𝔽-family-finite-inhabited-type A X))
+      ( λ X →
+        inv-equiv
+          ( equiv-surjection-finite-type-family-finite-inhabited-type A X))
 ```
 
 ### Equivalence between finite decidable equivalence relations and finite Σ-decompositions
 
 ```agda
-  equiv-Decidable-equivalence-relation-𝔽-Σ-Decomposition-𝔽 :
-    Σ-Decomposition-𝔽 l l A ≃
-    Decidable-equivalence-relation-𝔽 l A
-  equiv-Decidable-equivalence-relation-𝔽-Σ-Decomposition-𝔽 =
-    inv-equiv (equiv-Surjection-𝔽-Decidable-equivalence-relation-𝔽 A) ∘e
-    equiv-finite-surjection-Σ-Decomposition-𝔽
+  equiv-Decidable-Equivalence-Relation-Finite-Type-Σ-Decomposition-Finite-Type :
+    Σ-Decomposition-Finite-Type l l A ≃
+    type-Decidable-Equivalence-Relation-Finite-Type l A
+  equiv-Decidable-Equivalence-Relation-Finite-Type-Σ-Decomposition-Finite-Type =
+    inv-equiv
+      ( equiv-Surjection-Finite-Type-Decidable-Equivalence-Relation-Finite-Type
+        ( A)) ∘e
+    equiv-finite-surjection-Σ-Decomposition-Finite-Type
 ```
 
 ### The type of all finite Σ-Decomposition is finite
 
 ```agda
-  is-finite-Σ-Decomposition-𝔽 :
-    is-finite (Σ-Decomposition-𝔽 l l A)
-  is-finite-Σ-Decomposition-𝔽 =
+  is-finite-Σ-Decomposition-Finite-Type :
+    is-finite (Σ-Decomposition-Finite-Type l l A)
+  is-finite-Σ-Decomposition-Finite-Type =
     is-finite-equiv
-      ( inv-equiv equiv-Decidable-equivalence-relation-𝔽-Σ-Decomposition-𝔽)
-      ( is-finite-Decidable-equivalence-relation-𝔽 A)
+      ( inv-equiv
+          equiv-Decidable-Equivalence-Relation-Finite-Type-Σ-Decomposition-Finite-Type)
+      ( is-finite-type-Decidable-Equivalence-Relation-Finite-Type l A)
 ```
 
 ### Characterization of the equality of finite Σ-decompositions
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : 𝔽 l1)
+  {l1 l2 l3 : Level} (A : Finite-Type l1)
   where
 
   is-finite-Σ-Decomposition :
-    subtype (l2 ⊔ l3) (Σ-Decomposition l2 l3 (type-𝔽 A))
+    subtype (l2 ⊔ l3) (Σ-Decomposition l2 l3 (type-Finite-Type A))
   is-finite-Σ-Decomposition D =
     Σ-Prop
       ( is-finite-Prop (indexing-type-Σ-Decomposition D))
@@ -230,78 +248,83 @@ module _
           ( indexing-type-Σ-Decomposition D)
           ( λ x → is-finite-Prop (cotype-Σ-Decomposition D x)))
 
-  map-Σ-Decomposition-𝔽-subtype-is-finite :
-    type-subtype is-finite-Σ-Decomposition → Σ-Decomposition-𝔽 l2 l3 A
-  map-Σ-Decomposition-𝔽-subtype-is-finite ((X , (Y , e)) , (fin-X , fin-Y)) =
+  map-Σ-Decomposition-Finite-Type-subtype-is-finite :
+    type-subtype is-finite-Σ-Decomposition → Σ-Decomposition-Finite-Type l2 l3 A
+  map-Σ-Decomposition-Finite-Type-subtype-is-finite
+    ( ( X , (Y , e)) , (fin-X , fin-Y)) =
     ( ( X , fin-X) ,
         ( ( λ x →
             ( (type-Inhabited-Type (Y x)) , (fin-Y x)) ,
               (is-inhabited-type-Inhabited-Type (Y x))) ,
         e))
 
-  map-inv-Σ-Decomposition-𝔽-subtype-is-finite :
-    Σ-Decomposition-𝔽 l2 l3 A → type-subtype is-finite-Σ-Decomposition
-  map-inv-Σ-Decomposition-𝔽-subtype-is-finite ((X , fin-X) , (Y , e)) =
+  map-inv-Σ-Decomposition-Finite-Type-subtype-is-finite :
+    Σ-Decomposition-Finite-Type l2 l3 A → type-subtype is-finite-Σ-Decomposition
+  map-inv-Σ-Decomposition-Finite-Type-subtype-is-finite
+    ( ( X , fin-X) , (Y , e)) =
     ( ( X ,
-        ( ( λ x → inhabited-type-Inhabited-𝔽 (Y x)) ,
+        ( ( λ x → inhabited-type-Inhabited-Finite-Type (Y x)) ,
           ( e))) ,
-      (fin-X , (λ x → is-finite-Inhabited-𝔽 (Y x))))
+      (fin-X , (λ x → is-finite-Inhabited-Finite-Type (Y x))))
 
-  equiv-Σ-Decomposition-𝔽-is-finite-subtype :
-    type-subtype is-finite-Σ-Decomposition ≃ Σ-Decomposition-𝔽 l2 l3 A
-  pr1 (equiv-Σ-Decomposition-𝔽-is-finite-subtype) =
-    map-Σ-Decomposition-𝔽-subtype-is-finite
-  pr2 (equiv-Σ-Decomposition-𝔽-is-finite-subtype) =
+  equiv-Σ-Decomposition-Finite-Type-is-finite-subtype :
+    type-subtype is-finite-Σ-Decomposition ≃ Σ-Decomposition-Finite-Type l2 l3 A
+  pr1 (equiv-Σ-Decomposition-Finite-Type-is-finite-subtype) =
+    map-Σ-Decomposition-Finite-Type-subtype-is-finite
+  pr2 (equiv-Σ-Decomposition-Finite-Type-is-finite-subtype) =
     is-equiv-is-invertible
-      map-inv-Σ-Decomposition-𝔽-subtype-is-finite
+      map-inv-Σ-Decomposition-Finite-Type-subtype-is-finite
       refl-htpy
       refl-htpy
 
-  is-emb-Σ-Decomposition-Σ-Decomposition-𝔽 :
-    is-emb (Σ-Decomposition-Σ-Decomposition-𝔽 {l1} {l2} {l3} A)
-  is-emb-Σ-Decomposition-Σ-Decomposition-𝔽 =
+  is-emb-Σ-Decomposition-Σ-Decomposition-Finite-Type :
+    is-emb (Σ-Decomposition-Σ-Decomposition-Finite-Type {l1} {l2} {l3} A)
+  is-emb-Σ-Decomposition-Σ-Decomposition-Finite-Type =
     is-emb-triangle-is-equiv
-      ( Σ-Decomposition-Σ-Decomposition-𝔽 A)
+      ( Σ-Decomposition-Σ-Decomposition-Finite-Type A)
       ( pr1)
-      ( map-inv-equiv ( equiv-Σ-Decomposition-𝔽-is-finite-subtype))
+      ( map-inv-equiv ( equiv-Σ-Decomposition-Finite-Type-is-finite-subtype))
       ( refl-htpy)
       ( is-equiv-map-inv-equiv
-        ( equiv-Σ-Decomposition-𝔽-is-finite-subtype))
+        ( equiv-Σ-Decomposition-Finite-Type-is-finite-subtype))
       ( is-emb-inclusion-subtype (is-finite-Σ-Decomposition))
 
-  emb-Σ-Decomposition-Σ-Decomposition-𝔽 :
-    Σ-Decomposition-𝔽 l2 l3 A ↪ Σ-Decomposition l2 l3 (type-𝔽 A)
-  pr1 (emb-Σ-Decomposition-Σ-Decomposition-𝔽) =
-    Σ-Decomposition-Σ-Decomposition-𝔽 A
-  pr2 (emb-Σ-Decomposition-Σ-Decomposition-𝔽) =
-    is-emb-Σ-Decomposition-Σ-Decomposition-𝔽
+  emb-Σ-Decomposition-Σ-Decomposition-Finite-Type :
+    Σ-Decomposition-Finite-Type l2 l3 A ↪
+    Σ-Decomposition l2 l3 (type-Finite-Type A)
+  pr1 (emb-Σ-Decomposition-Σ-Decomposition-Finite-Type) =
+    Σ-Decomposition-Σ-Decomposition-Finite-Type A
+  pr2 (emb-Σ-Decomposition-Σ-Decomposition-Finite-Type) =
+    is-emb-Σ-Decomposition-Σ-Decomposition-Finite-Type
 
-equiv-Σ-Decomposition-𝔽 :
-  {l1 l2 l3 l4 l5 : Level} (A : 𝔽 l1)
-  (X : Σ-Decomposition-𝔽 l2 l3 A) (Y : Σ-Decomposition-𝔽 l4 l5 A) →
+equiv-Σ-Decomposition-Finite-Type :
+  {l1 l2 l3 l4 l5 : Level} (A : Finite-Type l1)
+  (X : Σ-Decomposition-Finite-Type l2 l3 A)
+  (Y : Σ-Decomposition-Finite-Type l4 l5 A) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-equiv-Σ-Decomposition-𝔽 A X Y =
+equiv-Σ-Decomposition-Finite-Type A X Y =
   equiv-Σ-Decomposition
-    ( Σ-Decomposition-Σ-Decomposition-𝔽 A X)
-    ( Σ-Decomposition-Σ-Decomposition-𝔽 A Y)
+    ( Σ-Decomposition-Σ-Decomposition-Finite-Type A X)
+    ( Σ-Decomposition-Σ-Decomposition-Finite-Type A Y)
 
 module _
-  {l1 l2 l3 : Level} (A : 𝔽 l1)
-  (X : Σ-Decomposition-𝔽 l2 l3 A) (Y : Σ-Decomposition-𝔽 l2 l3 A)
+  {l1 l2 l3 : Level} (A : Finite-Type l1)
+  (X : Σ-Decomposition-Finite-Type l2 l3 A)
+  (Y : Σ-Decomposition-Finite-Type l2 l3 A)
   where
 
-  extensionality-Σ-Decomposition-𝔽 :
-    (X ＝ Y) ≃ equiv-Σ-Decomposition-𝔽 A X Y
-  extensionality-Σ-Decomposition-𝔽 =
+  extensionality-Σ-Decomposition-Finite-Type :
+    (X ＝ Y) ≃ equiv-Σ-Decomposition-Finite-Type A X Y
+  extensionality-Σ-Decomposition-Finite-Type =
     extensionality-Σ-Decomposition
-      ( Σ-Decomposition-Σ-Decomposition-𝔽 A X)
-      ( Σ-Decomposition-Σ-Decomposition-𝔽 A Y) ∘e
-    equiv-ap-emb (emb-Σ-Decomposition-Σ-Decomposition-𝔽 A)
+      ( Σ-Decomposition-Σ-Decomposition-Finite-Type A X)
+      ( Σ-Decomposition-Σ-Decomposition-Finite-Type A Y) ∘e
+    equiv-ap-emb (emb-Σ-Decomposition-Σ-Decomposition-Finite-Type A)
 
-  eq-equiv-Σ-Decomposition-𝔽 :
-    equiv-Σ-Decomposition-𝔽 A X Y → (X ＝ Y)
-  eq-equiv-Σ-Decomposition-𝔽 =
-    map-inv-equiv (extensionality-Σ-Decomposition-𝔽)
+  eq-equiv-Σ-Decomposition-Finite-Type :
+    equiv-Σ-Decomposition-Finite-Type A X Y → (X ＝ Y)
+  eq-equiv-Σ-Decomposition-Finite-Type =
+    map-inv-equiv (extensionality-Σ-Decomposition-Finite-Type)
 ```
 
 ### Iterated finite Σ-Decomposition
@@ -310,12 +333,12 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (A : 𝔽 l1)
+  {l1 l2 l3 l4 l5 : Level} (A : Finite-Type l1)
   where
 
   is-finite-fibered-Σ-Decomposition :
     subtype (l2 ⊔ l3 ⊔ l4 ⊔ l5)
-      ( fibered-Σ-Decomposition l2 l3 l4 l5 (type-𝔽 A))
+      ( fibered-Σ-Decomposition l2 l3 l4 l5 (type-Finite-Type A))
   is-finite-fibered-Σ-Decomposition D =
     Σ-Prop
       ( is-finite-Σ-Decomposition A ( fst-fibered-Σ-Decomposition D))
@@ -325,16 +348,17 @@ module _
             (pr1 p))
           ( snd-fibered-Σ-Decomposition D))
 
-  equiv-fibered-Σ-Decomposition-𝔽-is-finite-subtype :
+  equiv-fibered-Σ-Decomposition-Finite-Type-is-finite-subtype :
     type-subtype is-finite-fibered-Σ-Decomposition ≃
-    fibered-Σ-Decomposition-𝔽 l2 l3 l4 l5 A
-  equiv-fibered-Σ-Decomposition-𝔽-is-finite-subtype =
+    fibered-Σ-Decomposition-Finite-Type l2 l3 l4 l5 A
+  equiv-fibered-Σ-Decomposition-Finite-Type-is-finite-subtype =
     equiv-Σ
       ( λ D →
-        Σ-Decomposition-𝔽 l4 l5 ( finite-indexing-type-Σ-Decomposition-𝔽 A D))
-      ( equiv-Σ-Decomposition-𝔽-is-finite-subtype A)
+        Σ-Decomposition-Finite-Type l4 l5
+          ( finite-indexing-type-Σ-Decomposition-Finite-Type A D))
+      ( equiv-Σ-Decomposition-Finite-Type-is-finite-subtype A)
       ( λ x →
-        equiv-Σ-Decomposition-𝔽-is-finite-subtype
+        equiv-Σ-Decomposition-Finite-Type-is-finite-subtype
         ( indexing-type-Σ-Decomposition
           ( inclusion-subtype (is-finite-Σ-Decomposition A) x) ,
             pr1
@@ -355,7 +379,7 @@ module _
 ```agda
   is-finite-displayed-Σ-Decomposition :
     subtype (l2 ⊔ l3 ⊔ l4 ⊔ l5)
-      ( displayed-Σ-Decomposition l2 l3 l4 l5 (type-𝔽 A))
+      ( displayed-Σ-Decomposition l2 l3 l4 l5 (type-Finite-Type A))
   is-finite-displayed-Σ-Decomposition D =
     Σ-Prop
       ( is-finite-Σ-Decomposition A (fst-displayed-Σ-Decomposition D))
@@ -368,21 +392,22 @@ module _
                 pr2 p x)
               ( snd-displayed-Σ-Decomposition D x)))
 
-  equiv-displayed-Σ-Decomposition-𝔽-is-finite-subtype :
+  equiv-displayed-Σ-Decomposition-Finite-Type-is-finite-subtype :
     type-subtype is-finite-displayed-Σ-Decomposition ≃
-    displayed-Σ-Decomposition-𝔽 l2 l3 l4 l5 A
-  equiv-displayed-Σ-Decomposition-𝔽-is-finite-subtype =
+    displayed-Σ-Decomposition-Finite-Type l2 l3 l4 l5 A
+  equiv-displayed-Σ-Decomposition-Finite-Type-is-finite-subtype =
     equiv-Σ
       ( λ D →
-        ( x : indexing-type-Σ-Decomposition-𝔽 A D) →
-        ( Σ-Decomposition-𝔽 l4 l5 ( finite-cotype-Σ-Decomposition-𝔽 A D x)))
-      ( equiv-Σ-Decomposition-𝔽-is-finite-subtype A)
+        ( x : indexing-type-Σ-Decomposition-Finite-Type A D) →
+        ( Σ-Decomposition-Finite-Type l4 l5
+          ( finite-cotype-Σ-Decomposition-Finite-Type A D x)))
+      ( equiv-Σ-Decomposition-Finite-Type-is-finite-subtype A)
       ( λ D1 →
         equiv-Π
           ( _)
           ( id-equiv)
           ( λ x →
-            equiv-Σ-Decomposition-𝔽-is-finite-subtype
+            equiv-Σ-Decomposition-Finite-Type-is-finite-subtype
             ( ( cotype-Σ-Decomposition
                 ( inclusion-subtype (is-finite-Σ-Decomposition A) D1)
                 ( x)) ,
@@ -397,8 +422,8 @@ module _
 
 ```agda
 module _
-  {l1 l : Level} (A : 𝔽 l1)
-  (D : fibered-Σ-Decomposition l l l l (type-𝔽 A))
+  {l1 l : Level} (A : Finite-Type l1)
+  (D : fibered-Σ-Decomposition l l l l (type-Finite-Type A))
   where
 
   map-is-finite-displayed-fibered-Σ-Decomposition :
@@ -446,14 +471,16 @@ module _
       ( map-is-finite-displayed-fibered-Σ-Decomposition)
       ( map-inv-is-finite-displayed-fibered-Σ-Decomposition)
 
-equiv-displayed-fibered-Σ-Decomposition-𝔽 :
-  {l1 l : Level} (A : 𝔽 l1) →
-  fibered-Σ-Decomposition-𝔽 l l l l A ≃ displayed-Σ-Decomposition-𝔽 l l l l A
-equiv-displayed-fibered-Σ-Decomposition-𝔽 A =
-  equiv-displayed-Σ-Decomposition-𝔽-is-finite-subtype A ∘e
+equiv-displayed-fibered-Σ-Decomposition-Finite-Type :
+  {l1 l : Level} (A : Finite-Type l1) →
+  fibered-Σ-Decomposition-Finite-Type l l l l A ≃
+  displayed-Σ-Decomposition-Finite-Type l l l l A
+equiv-displayed-fibered-Σ-Decomposition-Finite-Type A =
+  equiv-displayed-Σ-Decomposition-Finite-Type-is-finite-subtype A ∘e
     ( equiv-Σ
         ( λ x → type-Prop (is-finite-displayed-Σ-Decomposition A x))
         ( equiv-displayed-fibered-Σ-Decomposition)
         ( equiv-is-finite-displayed-fibered-Σ-Decomposition A) ∘e
-      inv-equiv ( equiv-fibered-Σ-Decomposition-𝔽-is-finite-subtype A))
+      inv-equiv
+        ( equiv-fibered-Σ-Decomposition-Finite-Type-is-finite-subtype A))
 ```
