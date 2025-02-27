@@ -34,7 +34,7 @@ characterized by similarity of the underlying
 [integer fractions](elementary-number-theory.integer-fractions.md): `a/b` is
 equal to `c/d` if and only if `a * d ＝ c * b`.
 
-## Definition
+## Definitions
 
 ```agda
 Eq-ℚ : ℚ → ℚ → UU lzero
