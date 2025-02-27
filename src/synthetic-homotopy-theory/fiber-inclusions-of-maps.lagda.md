@@ -36,7 +36,6 @@ open import synthetic-homotopy-theory.loop-spaces
 Given a map `g : B → C` and an element `z : C`, then a
 {{#concept "fiber inclusion" Disambiguation="of types" Agda=fiber-inclusion-of-map}}
 of `g` at `z` is a map `f : A → B` such that the following is a
-[commuting](foundation-core.commuting-squares-of-maps.md)
 [pullback square](foundation.pullbacks.md)
 
 ```text
@@ -51,7 +50,7 @@ of `g` at `z` is a map `f : A → B` such that the following is a
 The following conditions are equivalent:
 
 1. The map `f` is the fiber inclusion of `g` at `z`.
-2. `g ∘ f` is constant at `z` with homotopy `H` and the induced map
+2. `g ∘ f` is constant at `z` with homotopy `H`, and the induced map
    `x ↦ (f x , H x) : A → fiber g z` is an equivalence.
 3. For every `y : B` there is an equivalence `(fiber f y) ≃ (z ＝ g y)`.
 
@@ -273,7 +272,7 @@ module _
     pullback-condition-fiber-condition-fiber-inclusion-of-map g z f H
 ```
 
-### Fiber inclusions satisfy the conditions of being fiber inclusions
+### Fiber inclusions satisfy the condition of being fiber inclusions
 
 ```agda
 module _

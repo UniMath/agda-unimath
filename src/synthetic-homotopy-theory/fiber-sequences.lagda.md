@@ -58,6 +58,11 @@ consecutive maps is a
   * --------> Aₙ.
 ```
 
+**Note.** The data of a fiber sequence is not fully coherent, and is in general
+not a property of a sequential diagram. This is because the chosen homotopy of
+each fiber inclusion may fail to be unique. One invariant that detects
+nonuniqueness of this homotopy is the Toda bracket.
+
 ## Definitions
 
 ### The predicate of being a fiber sequence
