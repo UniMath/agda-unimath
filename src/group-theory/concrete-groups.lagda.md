@@ -185,10 +185,6 @@ module _
   pr1 (pr2 is-unital-Concrete-Group) = left-unit-law-mul-Concrete-Group
   pr2 (pr2 is-unital-Concrete-Group) = right-unit-law-mul-Concrete-Group
 
-  monoid-Concrete-Group : Monoid l
-  pr1 monoid-Concrete-Group = semigroup-Concrete-Group
-  pr2 monoid-Concrete-Group = is-unital-Concrete-Group
-
   is-group-Concrete-Group' :
     is-group-is-unital-Semigroup
       ( semigroup-Concrete-Group)
