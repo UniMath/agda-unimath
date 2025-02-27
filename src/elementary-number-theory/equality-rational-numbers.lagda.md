@@ -62,8 +62,9 @@ eq-Eq-ℚ x y H =
 ### Equality on the rationals is a proposition
 
 ```agda
-is-prop-Eq-ℚ : (x y : ℚ) → is-prop (Eq-ℚ x y)
-is-prop-Eq-ℚ x y = is-prop-sim-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
+abstract
+  is-prop-Eq-ℚ : (x y : ℚ) → is-prop (Eq-ℚ x y)
+  is-prop-Eq-ℚ x y = is-prop-sim-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
 
 Eq-ℚ-Prop : (x y : ℚ) → Prop lzero
 Eq-ℚ-Prop x y = (Eq-ℚ x y , is-prop-Eq-ℚ x y)
@@ -72,22 +73,24 @@ Eq-ℚ-Prop x y = (Eq-ℚ x y , is-prop-Eq-ℚ x y)
 ## The full characterization of the identity type of `ℚ`
 
 ```agda
-contraction-total-Eq-ℚ :
-  (x : ℚ) (y : Σ ℚ (Eq-ℚ x)) → (x , refl-Eq-ℚ x) ＝ y
-contraction-total-Eq-ℚ x (y , e) =
-  eq-pair-Σ (eq-Eq-ℚ x y e) (eq-is-prop (is-prop-Eq-ℚ x y))
+abstract
+  contraction-total-Eq-ℚ :
+    (x : ℚ) (y : Σ ℚ (Eq-ℚ x)) → (x , refl-Eq-ℚ x) ＝ y
+  contraction-total-Eq-ℚ x (y , e) =
+    eq-pair-Σ (eq-Eq-ℚ x y e) (eq-is-prop (is-prop-Eq-ℚ x y))
 
-is-torsorial-Eq-ℚ : (x : ℚ) → is-torsorial (Eq-ℚ x)
-is-torsorial-Eq-ℚ x = ((x , refl-Eq-ℚ x) , contraction-total-Eq-ℚ x)
+abstract
+  is-torsorial-Eq-ℚ : (x : ℚ) → is-torsorial (Eq-ℚ x)
+  is-torsorial-Eq-ℚ x = ((x , refl-Eq-ℚ x) , contraction-total-Eq-ℚ x)
 
-is-equiv-Eq-eq-ℚ :
-  (x y : ℚ) → is-equiv (Eq-eq-ℚ {x} {y})
-is-equiv-Eq-eq-ℚ x =
-  fundamental-theorem-id (is-torsorial-Eq-ℚ x) (λ y → Eq-eq-ℚ {x} {y})
+abstract
+  is-equiv-Eq-eq-ℚ :
+    (x y : ℚ) → is-equiv (Eq-eq-ℚ {x} {y})
+  is-equiv-Eq-eq-ℚ x =
+    fundamental-theorem-id (is-torsorial-Eq-ℚ x) (λ y → Eq-eq-ℚ {x} {y})
 
-is-prop-eq-ℚ : {x y : ℚ} → is-prop (x ＝ y)
-is-prop-eq-ℚ {x} {y} =
-  is-prop-is-equiv (is-equiv-Eq-eq-ℚ x y) (is-prop-Eq-ℚ x y)
+extensionality-ℚ : (x y : ℚ) → (x ＝ y) ≃ (Eq-ℚ x y)
+extensionality-ℚ x y = (Eq-eq-ℚ , is-equiv-Eq-eq-ℚ x y)
 ```
 
 ### Equality on the rationals is decidable
