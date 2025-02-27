@@ -186,7 +186,7 @@ module _
   compute-vertex-on-walk-Undirected-Graph refl-walk-Undirected-Graph =
     equiv-is-contr
       ( is-contr-vertex-on-walk-refl-walk-Undirected-Graph G x)
-      ( is-contr-Fin-one-ℕ)
+      ( is-contr-Fin-1)
   compute-vertex-on-walk-Undirected-Graph
     ( cons-walk-Undirected-Graph p e {y} w) =
     ( equiv-coproduct

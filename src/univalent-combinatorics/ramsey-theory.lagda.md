@@ -10,6 +10,7 @@ module univalent-combinatorics.ramsey-theory where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.unit-type
@@ -31,7 +32,7 @@ full-subset X x = unit-Prop
 subset-of-size : {l : Level} (k : ℕ) → Finite-Type l → UU (lsuc lzero ⊔ l)
 subset-of-size k X =
   Σ ( type-Finite-Type X → Prop lzero)
-    ( λ P → has-cardinality k (Σ (type-Finite-Type X) (λ x → type-Prop (P x))))
+    ( λ P → has-cardinality-ℕ k (Σ (type-Finite-Type X) (type-Prop ∘ P)))
 
 is-ramsey-set :
   {l : Level} {k : ℕ} (q : Fin k → ℕ) (r : ℕ) (A : Finite-Type l) →

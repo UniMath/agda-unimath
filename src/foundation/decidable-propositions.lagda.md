@@ -252,7 +252,7 @@ count-Decidable-Prop :
   {l : Level} → count (Decidable-Prop l)
 pr1 count-Decidable-Prop = 2
 pr2 count-Decidable-Prop =
-  inv-equiv equiv-bool-Decidable-Prop ∘e equiv-bool-Fin-two-ℕ
+  inv-equiv equiv-bool-Decidable-Prop ∘e equiv-bool-Fin-2
 
 is-finite-Decidable-Prop : {l : Level} → is-finite (Decidable-Prop l)
 is-finite-Decidable-Prop {l} = unit-trunc-Prop count-Decidable-Prop
