@@ -187,7 +187,6 @@ install-website-dev:
 	@cargo install mdbook-katex@0.5.7
 	@cargo install mdbook-pagetoc@0.1.7
 	@cargo install mdbook-catppuccin@1.2.0
-	@sudo apt-get install -y graphviz
 
 .PHONY: unused-imports
 unused-imports:

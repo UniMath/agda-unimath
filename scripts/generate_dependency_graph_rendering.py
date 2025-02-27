@@ -143,6 +143,7 @@ def render_graph(graph, file_sizes, output_file, format, repo):
     dot.attr(splines="false", overlap="prism10000", bgcolor="#FFFFFF00", K="0.3", repulsiveforce="0.3") #sfdp
 
     max_lines = max(file_sizes.values(), default=1)
+    eprint("Maximum lines of code:", max_lines)
     node_sizes = {node: max(0.05, 0.3 * math.sqrt(file_sizes.get(node, 0) / max_lines)) for node in graph}
     node_colors = {node: module_based_color(node[:node.rfind(".")], label_colors) for node in graph}
 

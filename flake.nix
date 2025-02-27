@@ -49,7 +49,7 @@
             # https://nix.dev/recipes/best-practices#reproducible-source-paths
             src = ./.;
 
-            nativeBuildInputs = [ time ];
+            nativeBuildInputs = [ time pkgs.graphviz ];
 
             buildPhase = ''
               runHook preBuild
@@ -82,6 +82,8 @@
               # pre-commit checks
               pkgs.pre-commit
               pkgs.nodejs
+              # Dependency graph rendering
+              pkgs.graphviz
             ] ++ (with pkgs-mdbook; [
               # working on the website
               mdbook
