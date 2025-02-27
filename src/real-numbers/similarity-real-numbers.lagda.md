@@ -128,7 +128,6 @@ opaque
 
 ```agda
 opaque
-
   unfolding sim-ℝ
 
   eq-sim-ℝ : {l : Level} → {x y : ℝ l} → x ~ℝ y → x ＝ y
