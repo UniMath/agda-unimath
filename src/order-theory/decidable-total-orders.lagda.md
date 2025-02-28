@@ -14,8 +14,10 @@ open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import order-theory.decidable-posets
@@ -473,4 +475,52 @@ module _
     with is-leq-or-strict-greater-Decidable-Total-Order T x y
   ... | inl x≤y = antisymmetric-leq-Decidable-Total-Order T y x H x≤y
   ... | inr y<x = refl
+```
+
+### If `a ≤ b` and `c ≤ d`, `min a c ≤ min b d`
+
+```agda
+  min-leq-leq-Decidable-Total-Order :
+    (a b c d : type-Decidable-Total-Order T) →
+    leq-Decidable-Total-Order T a b → leq-Decidable-Total-Order T c d →
+    leq-Decidable-Total-Order
+      ( T)
+      ( min-Decidable-Total-Order T a c)
+      ( min-Decidable-Total-Order T b d)
+  min-leq-leq-Decidable-Total-Order a b c d a≤b c≤d
+    with is-leq-or-strict-greater-Decidable-Total-Order T a c
+  ... | inl a≤c =
+    forward-implication
+      ( min-is-greatest-binary-lower-bound-Decidable-Total-Order T b d a)
+      ( a≤b ,
+        transitive-leq-Decidable-Total-Order T a c d c≤d a≤c)
+  ... | inr c<a =
+    forward-implication
+      ( min-is-greatest-binary-lower-bound-Decidable-Total-Order T b d c)
+      ( transitive-leq-Decidable-Total-Order T c a b a≤b (pr2 c<a) ,
+        c≤d)
+```
+
+### If `a ≤ b` and `c ≤ d`, `max a c ≤ max b d`
+
+```agda
+  max-leq-leq-Decidable-Total-Order :
+    (a b c d : type-Decidable-Total-Order T) →
+    leq-Decidable-Total-Order T a b → leq-Decidable-Total-Order T c d →
+    leq-Decidable-Total-Order
+      ( T)
+      ( max-Decidable-Total-Order T a c)
+      ( max-Decidable-Total-Order T b d)
+  max-leq-leq-Decidable-Total-Order a b c d a≤b c≤d
+    with is-leq-or-strict-greater-Decidable-Total-Order T b d
+  ... | inl b≤d =
+    forward-implication
+      ( max-is-least-binary-upper-bound-Decidable-Total-Order T a c d)
+      ( transitive-leq-Decidable-Total-Order T a b d b≤d a≤b ,
+        c≤d)
+  ... | inr d<b =
+    forward-implication
+      ( max-is-least-binary-upper-bound-Decidable-Total-Order T a c b)
+      ( a≤b ,
+        transitive-leq-Decidable-Total-Order T c d b (pr2 d<b) c≤d)
 ```

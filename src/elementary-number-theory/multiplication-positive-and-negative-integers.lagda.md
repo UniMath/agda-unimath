@@ -23,6 +23,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 ```
 
@@ -300,6 +301,35 @@ is-nonnegative-right-factor-mul-ℤ :
 is-nonnegative-right-factor-mul-ℤ {x} {y} H =
   is-nonnegative-left-factor-mul-ℤ
     ( is-nonnegative-eq-ℤ (commutative-mul-ℤ x y) H)
+```
+
+### The left factor of a negative product with a positive right factor is negative
+
+```agda
+abstract
+  is-negative-left-factor-mul-positive-ℤ :
+    {x y : ℤ} → is-negative-ℤ (x *ℤ y) → is-positive-ℤ y → is-negative-ℤ x
+  is-negative-left-factor-mul-positive-ℤ {inl x} {inr (inr y)} _ _ = star
+  is-negative-left-factor-mul-positive-ℤ {inr x} {inr (inr y)} H _ =
+    is-not-negative-and-nonnegative-ℤ
+      ( inr x *ℤ inr (inr y))
+      ( H ,
+        is-nonnegative-mul-nonnegative-positive-ℤ
+          { inr x}
+          { inr (inr y)}
+          ( star)
+          ( star))
+```
+
+### The right factor of a negative product with a positive right factor is negative
+
+```agda
+abstract
+  is-negative-right-factor-mul-positive-ℤ :
+    {x y : ℤ} → is-negative-ℤ (x *ℤ y) → is-positive-ℤ x → is-negative-ℤ y
+  is-negative-right-factor-mul-positive-ℤ {x} {y} xy-is-neg =
+    is-negative-left-factor-mul-positive-ℤ
+      ( tr is-negative-ℤ (commutative-mul-ℤ x y) xy-is-neg)
 ```
 
 ## Definitions

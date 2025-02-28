@@ -1,6 +1,8 @@
 # Inequality on the rational numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.inequality-rational-numbers where
 ```
 
@@ -98,6 +100,9 @@ leq-ℚ-Decidable-Prop x y =
 refl-leq-ℚ : (x : ℚ) → leq-ℚ x x
 refl-leq-ℚ x =
   refl-leq-ℤ (numerator-ℚ x *ℤ denominator-ℚ x)
+
+leq-eq-ℚ : (x y : ℚ) → x ＝ y → leq-ℚ x y
+leq-eq-ℚ x y x=y = tr (leq-ℚ x) x=y (refl-leq-ℚ x)
 ```
 
 ### Inequality on the rational numbers is antisymmetric
@@ -336,6 +341,13 @@ preserves-leq-add-ℚ {a} {b} {c} {d} H K =
     ( b +ℚ d)
     ( preserves-leq-right-add-ℚ b c d K)
     ( preserves-leq-left-add-ℚ c a b H)
+```
+
+### Negation of rational numbers reverses inequality
+
+```agda
+neg-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ (neg-ℚ y) (neg-ℚ x)
+neg-leq-ℚ x y = neg-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
 ```
 
 ## See also

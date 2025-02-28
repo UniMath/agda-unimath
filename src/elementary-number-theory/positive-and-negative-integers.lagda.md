@@ -51,6 +51,15 @@ is-not-negative-and-positive-ℤ (inl x) (H , K) = K
 is-not-negative-and-positive-ℤ (inr x) (H , K) = H
 ```
 
+### No integer is both nonnegative and negative
+
+```agda
+is-not-negative-and-nonnegative-ℤ :
+  (x : ℤ) → ¬ (is-negative-ℤ x × is-nonnegative-ℤ x)
+is-not-negative-and-nonnegative-ℤ (inl x) (H , K) = K
+is-not-negative-and-nonnegative-ℤ (inr x) (H , K) = H
+```
+
 ### Dichotomies
 
 #### A nonzero integer is either negative or positive
