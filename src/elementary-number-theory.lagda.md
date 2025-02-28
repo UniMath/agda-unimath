@@ -60,6 +60,7 @@ open import elementary-number-theory.divisibility-standard-finite-types public
 open import elementary-number-theory.equality-conatural-numbers public
 open import elementary-number-theory.equality-integers public
 open import elementary-number-theory.equality-natural-numbers public
+open import elementary-number-theory.equality-rational-numbers public
 open import elementary-number-theory.euclid-mullin-sequence public
 open import elementary-number-theory.euclidean-division-natural-numbers public
 open import elementary-number-theory.eulers-totient-function public
