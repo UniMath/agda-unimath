@@ -37,12 +37,13 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Idea
 
-[Real numbers](real-numbers.dedekind-real-numbers.md) are defined at specific
-[universe levels](foundation.universe-levels.md), which do not overlap.
-
-For any real number, we can construct a
-[similar](real-numbers.similarity-real-numbers.md) real number in any higher
-universe.
+For every [universe](foundation.universe-levels.md) `𝒰` there is a type of
+[real numbers](real-numbers.dedekind-real-numbers.md) `ℝ` relative to `𝒰`,
+`ℝ 𝒰`. Given a larger universe `𝒱`, then we may
+{{#concept "raise" Disambiguation="a dedekind real number" Agda=raise-ℝ}} a real
+number `x` from the universe `𝒰` to a
+[similar](real-numbers.similarity-real-numbers.md) real number in the universe
+`𝒱`.
 
 ## Definition
 
