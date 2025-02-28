@@ -7,6 +7,7 @@ module foundation.maps-in-subuniverses where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.homotopies
 open import foundation.subuniverses
 open import foundation.universe-levels
 
@@ -31,6 +32,22 @@ is-in-subuniverse-map :
   {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3) {A : UU l1} {B : UU l2} →
   (A → B) → UU (l2 ⊔ l3)
 is-in-subuniverse-map P {A} {B} f = (b : B) → is-in-subuniverse P (fiber f b)
+```
+
+## Properties
+
+### Subuniverses are closed under homotopies of maps
+
+```agda
+module _
+  {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3) {A : UU l1} {B : UU l2}
+  {f g : A → B}
+  where
+
+  is-in-subuniverse-map-htpy :
+    f ~ g → is-in-subuniverse-map P f → is-in-subuniverse-map P g
+  is-in-subuniverse-map-htpy H F y =
+    is-in-subuniverse-equiv' P (equiv-fiber-htpy H y) (F y)
 ```
 
 ## See also

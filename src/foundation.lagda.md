@@ -140,10 +140,12 @@ open import foundation.discrete-reflexive-relations public
 open import foundation.discrete-relaxed-sigma-decompositions public
 open import foundation.discrete-sigma-decompositions public
 open import foundation.discrete-types public
+open import foundation.disjoint-subtypes public
 open import foundation.disjunction public
 open import foundation.double-arrows public
 open import foundation.double-negation public
 open import foundation.double-negation-modality public
+open import foundation.double-negation-stable-equality public
 open import foundation.double-negation-stable-propositions public
 open import foundation.double-powersets public
 open import foundation.dubuc-penon-compact-types public
@@ -180,6 +182,8 @@ open import foundation.exclusive-sum public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
 open import foundation.extensions-types public
+open import foundation.extensions-types-global-subuniverses public
+open import foundation.extensions-types-subuniverses public
 open import foundation.faithful-maps public
 open import foundation.families-of-equivalences public
 open import foundation.families-of-maps public
@@ -210,6 +214,7 @@ open import foundation.functoriality-sequential-limits public
 open import foundation.functoriality-set-quotients public
 open import foundation.functoriality-set-truncation public
 open import foundation.functoriality-truncation public
+open import foundation.fundamental-theorem-of-equivalence-relations public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
 open import foundation.global-subuniverses public
@@ -254,6 +259,7 @@ open import foundation.iterating-families-of-maps public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
 open import foundation.kernel-span-diagrams-of-maps public
+open import foundation.large-apartness-relations public
 open import foundation.large-binary-relations public
 open import foundation.large-dependent-pair-types public
 open import foundation.large-homotopies public
@@ -392,9 +398,11 @@ open import foundation.standard-ternary-pullbacks public
 open import foundation.strict-symmetrization-binary-relations public
 open import foundation.strictly-involutive-identity-types public
 open import foundation.strictly-right-unital-concatenation-identifications public
+open import foundation.strong-preunivalence public
 open import foundation.strongly-extensional-maps public
 open import foundation.structure public
 open import foundation.structure-identity-principle public
+open import foundation.structured-equality-duality public
 open import foundation.structured-type-duality public
 open import foundation.subsingleton-induction public
 open import foundation.subterminal-types public

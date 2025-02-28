@@ -307,25 +307,27 @@ is-unbounded-π-finite-is-finite {A = A} H =
   .is-unbounded-π-finite-Id-is-unbounded-π-finite x y →
     is-unbounded-π-finite-is-finite (is-finite-eq-is-finite H)
 
-unbounded-π-finite-𝔽 : {l : Level} → 𝔽 l → Unbounded-π-Finite-Type l
-unbounded-π-finite-𝔽 A =
-  ( type-𝔽 A , is-unbounded-π-finite-is-finite (is-finite-type-𝔽 A))
+unbounded-π-finite-type-Finite-Type :
+  {l : Level} → Finite-Type l → Unbounded-π-Finite-Type l
+unbounded-π-finite-type-Finite-Type A =
+  ( type-Finite-Type A ,
+    is-unbounded-π-finite-is-finite (is-finite-type-Finite-Type A))
 ```
 
 ### The type of all `n`-element types in `UU l` is unbounded π-finite
 
 ```agda
-is-unbounded-π-finite-UU-Fin :
-  {l : Level} (n : ℕ) → is-unbounded-π-finite (UU-Fin l n)
-is-unbounded-π-finite-UU-Fin n =
+is-unbounded-π-finite-Type-With-Cardinality-ℕ :
+  {l : Level} (n : ℕ) → is-unbounded-π-finite (Type-With-Cardinality-ℕ l n)
+is-unbounded-π-finite-Type-With-Cardinality-ℕ n =
   λ where
   .has-finitely-many-connected-components-is-unbounded-π-finite →
-    has-finitely-many-connected-components-UU-Fin n
+    has-finitely-many-connected-components-Type-With-Cardinality-ℕ n
   .is-unbounded-π-finite-Id-is-unbounded-π-finite x y →
     is-unbounded-π-finite-equiv
-      ( equiv-equiv-eq-UU-Fin n x y)
+      ( equiv-equiv-eq-Type-With-Cardinality-ℕ n x y)
       ( is-unbounded-π-finite-is-finite
-        ( is-finite-≃
+        ( is-finite-type-equiv
           ( is-finite-has-finite-cardinality (n , pr2 x))
           ( is-finite-has-finite-cardinality (n , pr2 y))))
 ```

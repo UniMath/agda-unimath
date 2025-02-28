@@ -64,10 +64,10 @@ module _
   map-hom-Poset : hom-Poset → type-Poset P → type-Poset Q
   map-hom-Poset = map-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
-  preserves-order-map-hom-Poset :
+  preserves-order-hom-Poset :
     (f : hom-Poset) → preserves-order-Poset (map-hom-Poset f)
-  preserves-order-map-hom-Poset =
-    preserves-order-map-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+  preserves-order-hom-Poset =
+    preserves-order-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 ```
 
 ### Homotopies of order preserving maps

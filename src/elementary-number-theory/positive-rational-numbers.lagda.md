@@ -37,10 +37,12 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -611,6 +613,37 @@ module _
   le-right-min-ℚ⁺ = pr2 (pr2 strict-min-law-ℚ⁺)
 ```
 
+### Any positive rational number `p` has a `q` with `q + q < p`
+
+```agda
+abstract
+  double-le-ℚ⁺ :
+    (p : ℚ⁺) →
+    exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
+  double-le-ℚ⁺ p = unit-trunc-Prop dependent-pair-result
+    where
+    q : ℚ⁺
+    q = left-summand-split-ℚ⁺ p
+    r : ℚ⁺
+    r = right-summand-split-ℚ⁺ p
+    s : ℚ⁺
+    s = strict-min-ℚ⁺ q r
+    -- Inlining this blows up compile times for some unclear reason.
+    dependent-pair-result : Σ ℚ⁺ (λ x → le-ℚ⁺ (x +ℚ⁺ x) p)
+    dependent-pair-result =
+      s ,
+      tr
+        ( le-ℚ⁺ (s +ℚ⁺ s))
+        ( eq-add-split-ℚ⁺ p)
+        ( preserves-le-add-ℚ
+          { rational-ℚ⁺ s}
+          { rational-ℚ⁺ q}
+          { rational-ℚ⁺ s}
+          { rational-ℚ⁺ r}
+          ( le-left-min-ℚ⁺ q r)
+          ( le-right-min-ℚ⁺ q r))
+```
+
 ### Addition with a positive rational number is an increasing map
 
 ```agda
@@ -635,6 +668,23 @@ le-right-add-rational-ℚ⁺ x d =
     ( le-ℚ x)
     ( commutative-add-ℚ x (rational-ℚ⁺ d))
     ( le-left-add-rational-ℚ⁺ x d)
+```
+
+### Subtraction by a positive rational number is a strictly deflationary map
+
+```agda
+le-diff-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ (x -ℚ rational-ℚ⁺ d) x
+le-diff-rational-ℚ⁺ x d =
+  tr
+    ( le-ℚ (x -ℚ rational-ℚ⁺ d))
+    ( equational-reasoning
+      (x -ℚ rational-ℚ⁺ d) +ℚ rational-ℚ⁺ d
+      ＝ x +ℚ (neg-ℚ (rational-ℚ⁺ d) +ℚ rational-ℚ⁺ d)
+        by associative-add-ℚ x (neg-ℚ (rational-ℚ⁺ d)) (rational-ℚ⁺ d)
+      ＝ x +ℚ zero-ℚ
+        by ap (x +ℚ_) (left-inverse-law-add-ℚ (rational-ℚ⁺ d))
+      ＝ x by right-unit-law-add-ℚ x)
+    ( le-right-add-rational-ℚ⁺ (x -ℚ rational-ℚ⁺ d) d)
 ```
 
 ### Characterization of inequality on the rational numbers by the additive action of `ℚ⁺`

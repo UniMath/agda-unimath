@@ -43,7 +43,8 @@ map
 is an [equivalence](foundation-core.equivalences.md) for every `x y : A`. By
 [the univalence axiom](foundation-core.univalence.md), this is equivalent to the
 type family `B` being an [embedding](foundation-core.embeddings.md) considered
-as a map.
+as a map. In other words, that `A` is a
+[subuniverse](foundation.subuniverses.md).
 
 ## Definition
 

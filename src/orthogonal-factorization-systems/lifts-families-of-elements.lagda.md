@@ -53,7 +53,7 @@ A family of elements equipped with a dependent lift is a
 elements equipped with a lift is a {{#concept "lifted family of elements"}}.
 
 To see how these families relate to
-[lifts of maps](orthogonal-factorization-systems.lifts-of-maps.md), consider the
+[lifts of maps](orthogonal-factorization-systems.lifts-maps.md), consider the
 lifting diagram
 
 ```text
@@ -167,14 +167,14 @@ module _
 Given a map `a : I → A`, and a homotopy `H : f ~ g`, where `f, g : J → I`, we
 know that there is an identification `a ∘ f ＝ a ∘ g`. Transporting along this
 identification in the type of lifts of families of elements into a type family
-`B : A → 𝓤`, we get a map
+`B : A → 𝒰`, we get a map
 
 ```text
   ((j : J) → B (a (f j))) → ((j : J) → B (a (g j))) .
 ```
 
 We show that this map is homotopic to transporting along `H` in the type family
-`B ∘ a : I → 𝓤`.
+`B ∘ a : I → 𝒰`.
 
 ```agda
 module _
@@ -215,4 +215,4 @@ module _
 ## See also
 
 - [Double lifts of families of elements](orthogonal-factorization-systems.double-lifts-families-of-elements.md)
-- [Lifts of maps](orthogonal-factorization-systems.lifts-of-maps.md)
+- [Lifts of maps](orthogonal-factorization-systems.lifts-maps.md)

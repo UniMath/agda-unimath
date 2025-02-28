@@ -94,6 +94,7 @@ open import group-theory.homomorphisms-groups public
 open import group-theory.homomorphisms-groups-equipped-with-normal-subgroups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
+open import group-theory.homotopy-automorphism-groups public
 open import group-theory.images-of-group-homomorphisms public
 open import group-theory.images-of-semigroup-homomorphisms public
 open import group-theory.integer-multiples-of-elements-abelian-groups public
@@ -116,6 +117,9 @@ open import group-theory.large-semigroups public
 open import group-theory.loop-groups-sets public
 open import group-theory.mere-equivalences-concrete-group-actions public
 open import group-theory.mere-equivalences-group-actions public
+open import group-theory.minkowski-multiplication-commutative-monoids public
+open import group-theory.minkowski-multiplication-monoids public
+open import group-theory.minkowski-multiplication-semigroups public
 open import group-theory.monoid-actions public
 open import group-theory.monoids public
 open import group-theory.monomorphisms-concrete-groups public

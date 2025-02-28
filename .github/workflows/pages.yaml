@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        agda: ['2.6.4']
+        agda: ['2.7.0']
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -32,18 +32,18 @@ jobs:
       id-token: write # to verify the deployment originates from an appropriate source
     steps:
       - name: Checkout our repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: master
           # We need the entire history for contributor information
           fetch-depth: 0
 
       - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.1.0
+        uses: wenkokke/setup-agda@v2.5.0
         with:
           agda-version: ${{ matrix.agda }}
 
-      - uses: actions/cache/restore@v3
+      - uses: actions/cache/restore@v4
         id: cache-agda-formalization
         name: Restore Agda formalization cache
         with:
@@ -56,35 +56,38 @@ jobs:
 
       # Keep versions in sync with the Makefile
       - name: MDBook setup
-        uses: peaceiris/actions-mdbook@v1
+        uses: peaceiris/actions-mdbook@v2
         with:
           mdbook-version: '0.4.34'
 
       - name: Install mdbook-pagetoc
-        uses: baptiste0928/cargo-install@v2
+        uses: baptiste0928/cargo-install@v3
         with:
           crate: mdbook-pagetoc
           version: '0.1.7'
 
       - name: Install mdbook-katex
-        uses: baptiste0928/cargo-install@v2
+        uses: baptiste0928/cargo-install@v3
         with:
           crate: mdbook-katex
           version: '0.5.7'
 
       - name: Install mdbook-linkcheck
-        uses: baptiste0928/cargo-install@v2
+        uses: baptiste0928/cargo-install@v3
         with:
           crate: mdbook-linkcheck
           version: '0.7.7'
 
       - name: Install mdbook-catppuccin
-        uses: baptiste0928/cargo-install@v2
+        uses: baptiste0928/cargo-install@v3
         with:
           crate: mdbook-catppuccin
           version: '1.2.0'
 
-      - uses: actions/setup-python@v4
+      - name: Install Graphviz
+        run: sudo apt-get install -y graphviz
+
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.8'
           check-latest: true
@@ -100,13 +103,13 @@ jobs:
           make website
 
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v5
         if: >-
           github.ref == 'refs/heads/master' || github.event_name ==
           'workflow_dispatch'
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         if: >-
           github.ref == 'refs/heads/master' || github.event_name ==
           'workflow_dispatch'
@@ -114,7 +117,7 @@ jobs:
           path: master/book/html
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
         id: deployment
         if: >-
           github.ref == 'refs/heads/master' || github.event_name ==
