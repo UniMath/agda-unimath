@@ -8,26 +8,27 @@ module foundation.fibers-of-transfinitely-iterated-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.dependent-pair-types
-open import set-theory.increasing-binary-sequences
-open import set-theory.inequality-increasing-binary-sequences
-open import set-theory.bounded-increasing-binary-sequences
-open import foundation.strictly-right-unital-concatenation-identifications
-open import foundation.decidable-embeddings
 open import foundation.coproduct-types
+open import foundation.decidable-embeddings
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.strictly-right-unital-concatenation-identifications
 open import foundation.universe-levels
 
+open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.cartesian-product-types
-open import foundation.decidable-types
 open import foundation-core.homotopies
-open import foundation-core.propositions
 open import foundation-core.identity-types
 open import foundation-core.postcomposition-functions
+open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.transport-along-identifications
+
+open import set-theory.bounded-increasing-binary-sequences
+open import set-theory.increasing-binary-sequences
+open import set-theory.inequality-increasing-binary-sequences
 ```
 
 </details>
@@ -61,7 +62,6 @@ module _
    Σ (ℕ∞↑ → A)
     ( λ x → (b ＝ f (x zero-ℕ∞↑)) × ((k : ℕ∞↑) → x k ＝ f (x (succ-ℕ∞↑ k))))
 
-
 module _
   {l1 : Level} {A : UU l1} (f : A → A) (b : A)
   where
@@ -84,11 +84,19 @@ module _
   {l1 : Level} {A : UU l1} (f : A → A) (F : is-decidable-emb f)
   where
 
-
   is-decidable-fiber-transfinite-iterate :
     (b : A) → is-decidable (fiber-transfinite-iterate f b)
   is-decidable-fiber-transfinite-iterate b =
-    rec-coproduct (λ p → is-decidable-fiber-transfinite-iterate {!   !}) (λ np → inr λ p' → np (sequence-fiber-transfinite-iterate f b p' zero-ℕ∞↑ , pr1 (pr2 p'))) (is-decidable-map-is-decidable-emb F b)
+    rec-coproduct
+      ( λ p →
+        is-decidable-fiber-transfinite-iterate {!   !})
+      ( λ np →
+        inr
+          ( λ p' →
+            np
+              ( sequence-fiber-transfinite-iterate f b p' zero-ℕ∞↑ ,
+                pr1 (pr2 p'))))
+      ( is-decidable-map-is-decidable-emb F b)
 
   is-prop-fiber-transfinite-iterate :
     (b : A) → is-prop (fiber-transfinite-iterate f b)

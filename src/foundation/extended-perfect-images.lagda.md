@@ -16,23 +16,20 @@ open import foundation.connected-maps
 open import foundation.coproduct-types
 open import foundation.decidable-dependent-function-types
 open import foundation.decidable-embeddings
-open import foundation.fibers-of-extended-iterated-maps
 open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-types
-open import foundation.fibers-of-extended-iterated-maps
-open import set-theory.bounded-increasing-binary-sequences
-open import set-theory.increasing-binary-sequences
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.double-negation-stable-propositions
+open import foundation.fibers-of-extended-iterated-maps
 open import foundation.functoriality-dependent-function-types
 open import foundation.inhabited-types
+open import foundation.irrefutable-equality
 open import foundation.iterated-dependent-product-types
 open import foundation.iterating-functions
 open import foundation.law-of-excluded-middle
 open import foundation.mere-equality
-open import foundation.irrefutable-equality
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -58,6 +55,9 @@ open import logic.double-negation-elimination
 open import logic.double-negation-stable-embeddings
 open import logic.propositionally-decidable-maps
 open import logic.propositionally-double-negation-eliminating-maps
+
+open import set-theory.bounded-increasing-binary-sequences
+open import set-theory.increasing-binary-sequences
 ```
 
 </details>
@@ -248,7 +248,8 @@ module _
 
   previous-extended-perfect-image :
     (a : A) → is-extended-perfect-image f g (g (f a)) → is-extended-perfect-image f g a
-  previous-extended-perfect-image a γ n = previous-extended-perfect-image-at a n (γ (succ-ℕ∞↑ n))
+  previous-extended-perfect-image a γ n =
+    previous-extended-perfect-image-at a n (γ (succ-ℕ∞↑ n))
     -- previous-extended-perfect-image-at a n (γ (succ-ℕ∞↑ n))
 ```
 
@@ -328,14 +329,12 @@ module _
   --   ( iterate n (g ∘ f) x₀ , G (pr1 u)) ,
   --   ( λ s → pr2 u (s x₀ n refl))
 
-
-
-
   is-irrefutable-has-extended-nonperfect-fiber-is-not-extended-perfect-image :
     is-double-negation-eliminating-map g → is-injective g →
     (b : B) → ¬ (is-extended-perfect-image f g (g b)) →
     ¬¬ (has-extended-nonperfect-fiber f g b)
-  is-irrefutable-has-extended-nonperfect-fiber-is-not-extended-perfect-image G G' b nρ t =
+  is-irrefutable-has-extended-nonperfect-fiber-is-not-extended-perfect-image
+    G G' b nρ t =
     is-irrefutable-is-extended-nonperfect-image-is-not-extended-perfect-image G b nρ
       ( λ s → t (has-extended-nonperfect-fiber-is-extended-nonperfect-image G' b s))
 ```

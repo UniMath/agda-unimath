@@ -16,13 +16,13 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.extended-perfect-images
 open import foundation.function-types
-open import foundation.irrefutable-equality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.injective-maps
+open import foundation.irrefutable-equality
 open import foundation.law-of-excluded-middle
 open import foundation.maps-with-hilbert-epsilon-operators
-open import foundation.extended-perfect-images
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sections
