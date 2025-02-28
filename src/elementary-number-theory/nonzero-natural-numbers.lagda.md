@@ -56,6 +56,7 @@ nonzero-ℕ = Σ ℕ is-nonzero-ℕ
 nat-nonzero-ℕ : nonzero-ℕ → ℕ
 nat-nonzero-ℕ = pr1
 
+nat-ℕ⁺ : ℕ⁺ → ℕ
 nat-ℕ⁺ = nat-nonzero-ℕ
 
 is-nonzero-nat-nonzero-ℕ : (n : nonzero-ℕ) → is-nonzero-ℕ (nat-nonzero-ℕ n)
@@ -72,6 +73,7 @@ one-nonzero-ℕ : nonzero-ℕ
 pr1 one-nonzero-ℕ = 1
 pr2 one-nonzero-ℕ = is-nonzero-one-ℕ
 
+one-ℕ⁺ : ℕ⁺
 one-ℕ⁺ = one-nonzero-ℕ
 ```
 
@@ -126,6 +128,8 @@ pr2 (add-nonzero-ℕ (succ-ℕ p , H) (succ-ℕ q , K)) ()
 pr2 (add-nonzero-ℕ (succ-ℕ p , H) (zero-ℕ , K)) = ex-falso (K refl)
 pr2 (add-nonzero-ℕ (zero-ℕ , H) (q , K)) = ex-falso (H refl)
 
+infixl 35 _+ℕ⁺_
+_+ℕ⁺_ : ℕ⁺ → ℕ⁺ → ℕ⁺
 _+ℕ⁺_ = add-nonzero-ℕ
 ```
 
@@ -137,6 +141,8 @@ pr1 (mul-nonzero-ℕ (p , p≠0) (q , q≠0)) = p *ℕ q
 pr2 (mul-nonzero-ℕ (p , p≠0) (q , q≠0)) pq=0 =
   rec-coproduct p≠0 q≠0 (is-zero-summand-is-zero-mul-ℕ p q pq=0)
 
+infixl 40 _*ℕ⁺_
+_*ℕ⁺_ : ℕ⁺ → ℕ⁺ → ℕ⁺
 _*ℕ⁺_ = mul-nonzero-ℕ
 ```
 
