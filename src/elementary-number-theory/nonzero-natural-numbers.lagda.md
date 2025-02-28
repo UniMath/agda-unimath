@@ -117,7 +117,7 @@ pr1 (mul-nonzero-ℕ (p , p≠0) (q , q≠0)) = p *ℕ q
 pr2 (mul-nonzero-ℕ (p , p≠0) (q , q≠0)) pq=0 =
   rec-coproduct p≠0 q≠0 (is-zero-summand-is-zero-mul-ℕ p q pq=0)
 
-infixl 40 _*ℕ⁺_ :
+infixl 40 _*ℕ⁺_
 _*ℕ⁺_ : ℕ⁺ → ℕ⁺ → ℕ⁺
 _*ℕ⁺_ = mul-nonzero-ℕ
 ```
