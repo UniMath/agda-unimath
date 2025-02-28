@@ -104,6 +104,8 @@ pr2 (add-nonzero-ℕ (succ-ℕ p , H) (succ-ℕ q , K)) ()
 pr2 (add-nonzero-ℕ (succ-ℕ p , H) (zero-ℕ , K)) = ex-falso (K refl)
 pr2 (add-nonzero-ℕ (zero-ℕ , H) (q , K)) = ex-falso (H refl)
 
+infixl 35 _+ℕ⁺_
+_+ℕ⁺_ : ℕ⁺ → ℕ⁺ → ℕ⁺
 _+ℕ⁺_ = add-nonzero-ℕ
 ```
 
