@@ -27,8 +27,8 @@ open import order-theory.posets
 
 ## Idea
 
-A {{#concept "large inflattice" Agda=Large-Inflattice}} is a [large poset](order-theory.large-posets.md) `P` such
-that for every family
+A {{#concept "large inflattice" Agda=Large-Inflattice}} is a
+[large poset](order-theory.large-posets.md) `P` such that for every family
 
 ```text
   x : I → type-Large-Poset P l1
