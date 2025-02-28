@@ -167,9 +167,12 @@ module _
 ### Reals are similar to their raised-universe equivalents
 
 ```agda
-sim-raise-ℝ : {l0 : Level} → (l : Level) → (x : ℝ l0) → sim-ℝ x (raise-ℝ l x)
-pr1 (sim-raise-ℝ l x) _ = map-raise
-pr2 (sim-raise-ℝ l x) _ = map-inv-raise
+opaque
+  unfolding sim-ℝ
+
+  sim-raise-ℝ : {l0 : Level} → (l : Level) → (x : ℝ l0) → sim-ℝ x (raise-ℝ l x)
+  pr1 (sim-raise-ℝ l x) _ = map-raise
+  pr2 (sim-raise-ℝ l x) _ = map-inv-raise
 ```
 
 ### Raising a real to its own level is the identity
