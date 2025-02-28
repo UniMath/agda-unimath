@@ -25,7 +25,7 @@ open import order-theory.posets
 
 ## Idea
 
-A **large join-semilattice** is a [large poset](order-theory.large-posets.md) in
+A {{#concept "large join-semilattice" WD="semilattice" WDID=Q834585 Agda=Large-Join-Semilattice}} is a [large poset](order-theory.large-posets.md) in
 which every pair of elements has a
 [least binary upper bound](order-theory.least-upper-bounds-large-posets.md).
 

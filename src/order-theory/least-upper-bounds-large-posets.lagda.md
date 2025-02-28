@@ -22,7 +22,7 @@ open import order-theory.upper-bounds-large-posets
 
 ## Idea
 
-A **binary least upper bound** on a pair of elements `a`, `b` in a
+A {{#concept "binary least upper bound" Disambiguation="in a large poset" Agda=is-least-binary-upper-bound-Large-Poset}} on a pair of elements `a`, `b` in a
 [large poset](order-theory.large-posets.md) `P` is an element `x` in `P` such
 that the [logical equivalence](foundation.logical-equivalences.md)
 
