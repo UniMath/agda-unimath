@@ -1,4 +1,4 @@
-# The Archimedean property of `ℚ⁺`
+# The Archimedean property of the positive rational numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -38,7 +38,7 @@ of `ℚ⁺` is that for any two
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 `x y : ℚ⁺`, there is a
 [nonzero natural number](elementary-number-theory.nonzero-natural-numbers.md)
-`n` such that `y` is less than `n` as a rational number times `x`.
+`n` such that `y` is [less than](elementary-number-theory.strict-inequality-rational-numbers.md) `n` times `x`.
 
 ```agda
 abstract

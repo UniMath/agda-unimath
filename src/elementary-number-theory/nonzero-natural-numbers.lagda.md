@@ -52,6 +52,7 @@ nonzero-ℕ = Σ ℕ is-nonzero-ℕ
 nat-nonzero-ℕ : nonzero-ℕ → ℕ
 nat-nonzero-ℕ = pr1
 
+nat-ℕ⁺ : ℕ⁺ → ℕ
 nat-ℕ⁺ = nat-nonzero-ℕ
 
 is-nonzero-nat-nonzero-ℕ : (n : nonzero-ℕ) → is-nonzero-ℕ (nat-nonzero-ℕ n)
@@ -65,6 +66,7 @@ one-nonzero-ℕ : nonzero-ℕ
 pr1 one-nonzero-ℕ = 1
 pr2 one-nonzero-ℕ = is-nonzero-one-ℕ
 
+one-ℕ⁺ : ℕ⁺
 one-ℕ⁺ = one-nonzero-ℕ
 ```
 
