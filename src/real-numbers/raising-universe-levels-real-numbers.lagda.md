@@ -179,5 +179,5 @@ opaque
 
 ```agda
 eq-raise-ℝ : {l : Level} → (x : ℝ l) → x ＝ raise-ℝ l x
-eq-raise-ℝ {l} x = eq-sim-ℝ x (raise-ℝ l x) (sim-raise-ℝ l x)
+eq-raise-ℝ {l} x = eq-sim-ℝ (sim-raise-ℝ l x)
 ```
