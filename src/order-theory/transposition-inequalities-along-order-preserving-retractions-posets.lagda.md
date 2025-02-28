@@ -29,7 +29,7 @@ Given a pair of posets `P` and `Q`, consider a map
 transposition maps
 
 ```text
-f x ≤ y → x ≤ g y
+  f x ≤ y → x ≤ g y
 ```
 
 indexed by `x : type-Poset P` and `y : type-Poset Q`.
@@ -44,7 +44,7 @@ module _
   where
 
   leq-transpose-is-retraction-hom-Poset :
-    (map-hom-Poset Q P g ∘ f ~ id) → (x : type-Poset P) (y : type-Poset Q) →
+    is-retraction f (map-hom-Poset Q P g) → (x : type-Poset P) (y : type-Poset Q) →
     leq-Poset Q (f x) y → leq-Poset P x (map-hom-Poset Q P g y)
   leq-transpose-is-retraction-hom-Poset f-retraction-g x y fx≤y =
     tr

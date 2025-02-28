@@ -28,7 +28,7 @@ the converse direction, such that `g` is a [section](foundation.sections.md) of
 `f`. Then there is a family of transposition maps
 
 ```text
-x ≤ g y → f x ≤ y
+  x ≤ g y → f x ≤ y
 ```
 
 indexed by `x : type-Poset P` and `y : type-Poset Q`.
@@ -43,7 +43,7 @@ module _
   where
 
   leq-transpose-is-section-hom-Poset :
-    (map-hom-Poset P Q f ∘ g ~ id) → (x : type-Poset P) (y : type-Poset Q) →
+    is-section g (map-hom-Poset P Q f) → (x : type-Poset P) (y : type-Poset Q) →
     leq-Poset P x (g y) → leq-Poset Q (map-hom-Poset P Q f x) y
   leq-transpose-is-section-hom-Poset f-section-g x y x≤gy =
     tr
