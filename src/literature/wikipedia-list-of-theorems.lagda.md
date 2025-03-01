@@ -2,8 +2,10 @@
 
 On this page, we record formalized results in the agda-unimath library that are
 on
-[Wikipedia's list of theorems](https://en.wikipedia.org/wiki/List_of_theorems).
-We welcome any contribution to this list!
+[Wikipedia's list of theorems](https://en.wikipedia.org/wiki/List_of_theorems)
+or have a Wikidata entry listed as an instance of a
+[theorem](https://www.wikidata.org/wiki/Q65943). Additions to this list are very
+welcome!
 
 ```agda
 module literature.wikipedia-list-of-theorems where
