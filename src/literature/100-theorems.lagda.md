@@ -145,8 +145,7 @@ open import real-numbers.metric-space-of-real-numbers using
 
 ## See also
 
-- The spiritual successor to _Formalizing 100 Theorems_ is
-  [_1000+ theorems_](literature.wikipedia-list-of-theorems.md)
+- The spiritual successor to _Formalizing 100 Theorems_ is _1000+ theorems_
   {{#cite 1000+theorems}}.
 
 ## References
