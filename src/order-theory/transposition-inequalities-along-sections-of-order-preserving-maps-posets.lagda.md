@@ -10,6 +10,7 @@ module order-theory.transposition-inequalities-along-sections-of-order-preservin
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.sections
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
