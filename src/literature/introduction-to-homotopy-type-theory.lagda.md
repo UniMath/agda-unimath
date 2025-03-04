@@ -1852,37 +1852,55 @@ and `B : 𝒱` aren't assumed to be in the same universe, then we need to raise 
 identity type of `A`, the identity type of `B`, and the empty type to `𝒰 ⊔ 𝒱`.
 
 ```agda
-open import foundation.equality-coproduct-types using
-  ( Eq-coproduct)
+module _
+  {A B : UU}
+  where
 
--- (a)
-open import foundation.equality-coproduct-types using
-  ( Eq-eq-coproduct
-  ; eq-Eq-coproduct)
+  Eq-copr : (x y : A + B) → UU
+  Eq-copr (inl x) (inl x') = x ＝ x'
+  Eq-copr (inl x) (inr y') = empty
+  Eq-copr (inr y) (inl x') = empty
+  Eq-copr (inr y) (inr y') = y ＝ y'
 
-_ :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  (x y : A + B) → (x ＝ y) ↔ Eq-coproduct x y
-_ = λ x y → (Eq-eq-coproduct x y , eq-Eq-coproduct x y)
+  -- (a)
+  open import foundation.equality-coproduct-types using
+    ( Eq-eq-coproduct
+    ; eq-Eq-coproduct)
 
--- (b)
-open import foundation.decidable-equality using
-  ( has-decidable-equality-coproduct
-  ; has-decidable-equality-left-summand
-  ; has-decidable-equality-right-summand)
+  refl-Eq-copr : (x : A + B) → Eq-copr x x
+  refl-Eq-copr (inl x) = refl
+  refl-Eq-copr (inr y) = refl
 
-_ :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  has-decidable-equality A × has-decidable-equality B ↔
-  has-decidable-equality (A + B)
-_ =
-  ( λ (eqA , eqB) → has-decidable-equality-coproduct eqA eqB) ,
-  ( λ eqAB →
-    has-decidable-equality-left-summand eqAB ,
-    has-decidable-equality-right-summand eqAB)
+  Eq-eq-copr : (x y : A + B) → x ＝ y → Eq-copr x y
+  Eq-eq-copr x ._ refl = refl-Eq-copr x
 
-open import elementary-number-theory.equality-integers using
-  ( has-decidable-equality-ℤ)
+  eq-Eq-copr : (x y : A + B) → Eq-copr x y → x ＝ y
+  eq-Eq-copr (inl x) (inl x') p = ap inl p
+  eq-Eq-copr (inr y) (inr y') p = ap inr p
+
+  _ : (x y : A + B) → (x ＝ y) ↔ Eq-copr x y
+  _ = λ x y → (Eq-eq-copr x y , eq-Eq-copr x y)
+
+  -- TODO the rest
+
+  -- (b)
+  open import foundation.decidable-equality using
+    ( has-decidable-equality-coproduct
+    ; has-decidable-equality-left-summand
+    ; has-decidable-equality-right-summand)
+
+  _ :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    has-decidable-equality A × has-decidable-equality B ↔
+    has-decidable-equality (A + B)
+  _ =
+    ( λ (eqA , eqB) → has-decidable-equality-coproduct eqA eqB) ,
+    ( λ eqAB →
+      has-decidable-equality-left-summand eqAB ,
+      has-decidable-equality-right-summand eqAB)
+
+  open import elementary-number-theory.equality-integers using
+    ( has-decidable-equality-ℤ)
 ```
 
 **Exercise 8.8.** Decidable equality in dependent pair types.
@@ -2295,6 +2313,7 @@ open import foundation.equivalences using
   ; is-equiv-top-map-triangle -- is-equiv g → is-equiv f → is-equiv h
   ; is-equiv-is-section
   ; is-equiv-is-retraction
+  ; _∘e_ -- in particular, equivalences compose
   )
 ```
 
@@ -2330,7 +2349,7 @@ open import foundation.functoriality-coproduct-types using
 
 -- (d)
 open import foundation.functoriality-coproduct-types using
-  ( is-equiv-map-coproduct)
+  ( is-equiv-map-coproduct ; equiv-coproduct)
 ```
 
 **Exercise 9.7.** Functoriality of products.
@@ -2684,6 +2703,7 @@ open import foundation.contractible-types using
   ( is-equiv-is-contr -- is-contr A → is-contr B → is-equiv f
   ; is-contr-is-equiv -- is-equiv f → is-contr B → is-contr A
   ; is-contr-is-equiv' -- is-equiv f → is-contr A → is-contr B
+  ; is-contr-equiv
   )
 ```
 
@@ -2799,3 +2819,237 @@ _ :
   coherence-triangle-maps f pr1 (map-equiv (inv-equiv-total-fiber f))
 _ = λ f → refl-htpy
 ```
+
+## 11 The fundamental theorem of identity types
+
+### 11.1 Families of equivalences
+
+**Definition 11.1.1.** Induced maps of total spaces.
+
+```agda
+open import foundation.functoriality-dependent-pair-types using
+  ( tot)
+```
+
+**Lemma 11.1.2.** Fibers of `tot f`.
+
+```agda
+open import foundation.functoriality-dependent-pair-types using
+  ( compute-fiber-tot)
+```
+
+**Theorem 11.1.3.** `f` is a family of equivalences if and only if `tot f` is an
+equivalence.
+
+```agda
+open import foundation.functoriality-dependent-pair-types using
+  ( is-equiv-tot-is-fiberwise-equiv
+  ; is-fiberwise-equiv-is-equiv-tot)
+
+_ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f : (x : A) → B x → C x} →
+  ((x : A) → is-equiv (f x)) ↔ is-equiv (tot f)
+_ = is-equiv-tot-is-fiberwise-equiv , is-fiberwise-equiv-is-equiv-tot
+```
+
+**Lemma 11.1.4.** If `f` is an equivalence, then `σf` is an equivalence.
+
+```agda
+open import foundation.functoriality-dependent-pair-types using
+  ( map-Σ-map-base -- σ
+  ; is-equiv-map-Σ-map-base
+  )
+```
+
+**Definition 11.1.5.** Bifunctoriality of dependent pair types.
+
+```agda
+open import foundation.functoriality-dependent-pair-types using
+  ( map-Σ -- tot f g
+  )
+```
+
+**Theorem 11.1.6.** A family of maps `g` over an equivalence is a family of
+equivalences if and only if `tot f g` is an equivalence.
+
+```agda
+open import foundation.functoriality-dependent-pair-types using
+  ( is-equiv-map-Σ
+  ; is-fiberwise-equiv-is-equiv-map-Σ)
+
+_ :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} (D : B → UU l4)
+  {f : A → B} {g : (x : A) → C x → D (f x)} → is-equiv f →
+  ((x : A) → is-equiv (g x)) ↔ is-equiv (map-Σ D f g)
+_ = λ D H → is-equiv-map-Σ D H , is-fiberwise-equiv-is-equiv-map-Σ D _ _ H
+```
+
+### 11.2 The fundamental theorem
+
+**Definition 11.2.1.** Unary identity systems.
+
+```agda
+open import foundation.identity-systems using
+  ( is-identity-system)
+```
+
+**Theorem 11.2.2.** The fundamental theorem of identity types.
+
+```agda
+open import foundation.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id -- (ii) → (i)
+  ; fundamental-theorem-id' -- (i) → (ii)
+  )
+open import foundation.identity-systems using
+  ( is-identity-system-is-torsorial -- (ii) → (iii)
+  ; fundamental-theorem-id-is-identity-system -- (iii) → (i)
+  )
+open import foundation.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id-J -- the particular case
+  ; fundamental-theorem-id-J'
+  )
+```
+
+### 11.3 Equality on the natural numbers
+
+**Theorem 11.3.1.** Characterization of equality of natural numbers.
+
+```agda
+open import elementary-number-theory.equality-natural-numbers using
+  ( is-equiv-Eq-eq-ℕ)
+```
+
+### 11.4 Embeddings
+
+**Definition 11.4.1.** Embeddings.
+
+```agda
+open import foundation.embeddings using
+  ( is-emb
+  ; _↪_)
+```
+
+**Theorem 11.4.2.** Any equivalence is an embedding.
+
+```agda
+open import foundation.equivalences using
+  ( is-emb-is-equiv)
+```
+
+### 11.5 Disjointness of coproducts
+
+**Definition 11.5.2.** Observational equality of coproducts.
+
+TODO: report that `Eq-copr` has already been defined in Exercise 8.7?
+
+```agda
+_ = Eq-copr
+```
+
+**Lemma 11.5.3.** Reflexivity of `Eq-copr`.
+
+```agda
+_ = refl-Eq-copr
+```
+
+**Proposition 11.5.4.** Torsoriality of observational equality of coproducts.
+
+```agda
+is-torsorial-Eq-copr :
+  {A B : UU} (s : A + B) → is-contr (Σ (A + B) (λ t → Eq-copr s t))
+is-torsorial-Eq-copr {A} {B} (inl x) =
+  is-contr-equiv
+    ( Σ A (λ x' → x ＝ x'))
+    ( right-unit-law-coproduct (Σ A (λ x' → x ＝ x')) ∘e
+      equiv-coproduct id-equiv (right-zero-law-product B) ∘e
+      right-distributive-Σ-coproduct A B (Eq-copr (inl x)) )
+    ( is-torsorial-Id x)
+is-torsorial-Eq-copr {A} {B} (inr y) =
+  is-contr-equiv
+    ( Σ B (λ y' → y ＝ y'))
+    ( left-unit-law-coproduct (Σ B (λ y' → y ＝ y')) ∘e
+      equiv-coproduct (right-zero-law-product A) id-equiv ∘e
+      right-distributive-Σ-coproduct A B (Eq-copr (inr y)))
+    ( is-torsorial-Id y)
+```
+
+**Theorem 11.5.1.** Characterization of equality of coproducts.
+
+```agda
+is-equiv-Eq-eq-copr : {A B : UU} (x y : A + B) → is-equiv (Eq-eq-copr x y)
+is-equiv-Eq-eq-copr x =
+  fundamental-theorem-id (is-torsorial-Eq-copr x) (Eq-eq-copr x)
+
+equiv-Eq-eq-copr : {A B : UU} (x y : A + B) → (x ＝ y) ≃ (Eq-copr x y)
+pr1 (equiv-Eq-eq-copr x y) = Eq-eq-copr x y
+pr2 (equiv-Eq-eq-copr x y) = is-equiv-Eq-eq-copr x y
+
+module _
+  {A B : UU}
+  where
+
+  private variable
+    x x' : A
+    y y' : B
+
+  _ : (inl {B = B} x ＝ inl x') ≃ (x ＝ x')
+  _ = equiv-Eq-eq-copr (inl _) (inl _)
+
+  _ : (inl x ＝ inr y') ≃ empty
+  _ = equiv-Eq-eq-copr (inl _) (inr _)
+
+  _ : (inr y ＝ inl x') ≃ empty
+  _ = equiv-Eq-eq-copr (inr _) (inl _)
+
+  _ : (inr {A = A} y ＝ inr y') ≃ (y ＝ y')
+  _ = equiv-Eq-eq-copr (inr _) (inr _)
+```
+
+### 11.6 The structure identity principle
+
+**Definition 11.6.1.** Dependent identity systems.
+
+TODO, apparently?
+
+**Theorem 11.6.2.** The structure identity principle.
+
+TODO as stated? We use torsoriality instead of dependent identity systems.
+
+```agda
+open import foundation.structure-identity-principle using
+  ( extensionality-Σ)
+```
+
+**Example 11.6.3.** Characterization of equality of fibers.
+
+TODO: report "alternative characterization of the fiber" should probably say
+"equality"
+
+TODO: do we have access to `equiv-right-transpose-eq-concat`?
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (b : B)
+  where
+
+  open import foundation.identity-types
+
+  alt-Eq-fiber : (x y : fiber f b) → UU (l1 ⊔ l2)
+  alt-Eq-fiber (x , p) (y , q) = fiber (ap f) (p ∙ inv q)
+
+  refl-alt-Eq-fiber : (x : fiber f b) → alt-Eq-fiber x x
+  refl-alt-Eq-fiber (x , p) = refl , (inv (right-inv p))
+
+  _ : (x y : fiber f b) → (x ＝ y) ≃ alt-Eq-fiber x y
+  _ =
+    λ (x , p) →
+      extensionality-Σ
+        ( λ q α → ap f α ＝ p ∙ inv q)
+        ( refl)
+        ( inv (right-inv p))
+        ( λ y → id-equiv)
+        ( λ q → equiv-right-transpose-eq-concat refl q p ∘e equiv-inv p q)
+```
+
+### Exercises
