@@ -111,7 +111,7 @@ module _
     is-binary-lower-bound-is-binary-lower-bound-Π-Large-Poset z
 ```
 
-### An element `x : Π-Large-Poset P` of a dependent product of large posets `P i` indexed by `i : I` is a lower bound of a family `a : J → Π-Large-Poset P` if and only if `x i` is a lower bound of the family `(j ↦ a j i) : J → P i` of elements of `P i`
+### An element of a dependent product of large posets is a lower bound if and only if it is a pointwise lower bound
 
 ```agda
 module _
