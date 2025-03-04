@@ -100,6 +100,7 @@ pred-nonzero-ℕ : nonzero-ℕ → ℕ
 pred-nonzero-ℕ (succ-ℕ n , _) = n
 pred-nonzero-ℕ (zero-ℕ , H) = ex-falso (H refl)
 
+pred-ℕ⁺ : nonzero-ℕ → ℕ
 pred-ℕ⁺ = pred-nonzero-ℕ
 
 is-section-succ-nonzero-ℕ' : is-section succ-nonzero-ℕ' pred-nonzero-ℕ
