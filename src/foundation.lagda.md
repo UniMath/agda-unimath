@@ -140,6 +140,7 @@ open import foundation.discrete-reflexive-relations public
 open import foundation.discrete-relaxed-sigma-decompositions public
 open import foundation.discrete-sigma-decompositions public
 open import foundation.discrete-types public
+open import foundation.disjoint-subtypes public
 open import foundation.disjunction public
 open import foundation.double-arrows public
 open import foundation.double-negation public
@@ -213,6 +214,7 @@ open import foundation.functoriality-sequential-limits public
 open import foundation.functoriality-set-quotients public
 open import foundation.functoriality-set-truncation public
 open import foundation.functoriality-truncation public
+open import foundation.fundamental-theorem-of-equivalence-relations public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
 open import foundation.global-subuniverses public
