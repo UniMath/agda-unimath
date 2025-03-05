@@ -10,6 +10,7 @@ module foundation.path-cosplit-maps where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.addition-truncation-levels
 open import foundation.commuting-triangles-of-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -40,7 +41,6 @@ open import foundation.retractions
 open import foundation.retracts-of-maps
 open import foundation.truncated-maps
 open import foundation.truncation-levels
-open import foundation.addition-truncation-levels
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps

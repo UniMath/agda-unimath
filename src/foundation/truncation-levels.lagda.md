@@ -14,8 +14,8 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 
 open import foundation-core.function-types
-open import foundation-core.identity-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 ```
 
 </details>

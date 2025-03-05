@@ -8,24 +8,23 @@ module foundation.equality-truncation-levels where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation-core.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation-core.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.set-truncations
-open import foundation.sets
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
 open import foundation-core.discrete-types
+open import foundation-core.empty-types
+open import foundation-core.sets
 open import foundation-core.torsorial-type-families
 ```
 
@@ -158,11 +157,4 @@ pr2 (is-torsorial-Eq-𝕋 (succ-𝕋 m)) (succ-𝕋 n , e) =
 is-equiv-Eq-eq-𝕋 : {m n : 𝕋} → is-equiv (Eq-eq-𝕋 {m} {n})
 is-equiv-Eq-eq-𝕋 {m} {n} =
   fundamental-theorem-id (is-torsorial-Eq-𝕋 m) (λ y → Eq-eq-𝕋 {m} {y}) n
-```
-
-### The type of truncation levels is its own set truncation
-
-```agda
-equiv-unit-trunc-𝕋-Set : 𝕋 ≃ type-trunc-Set 𝕋
-equiv-unit-trunc-𝕋-Set = equiv-unit-trunc-Set 𝕋-Set
 ```

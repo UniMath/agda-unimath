@@ -7,6 +7,7 @@ module foundation.connected-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.addition-truncation-levels
 open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
@@ -18,7 +19,6 @@ open import foundation.subtype-identity-principle
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.truncations
-open import foundation.addition-truncation-levels
 open import foundation.univalence
 open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels

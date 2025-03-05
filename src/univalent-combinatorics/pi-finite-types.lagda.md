@@ -1,6 +1,8 @@
 # π-finite types
 
 ```agda
+{-# OPTIONS --guardedness #-}
+
 module univalent-combinatorics.pi-finite-types where
 ```
 
@@ -9,6 +11,7 @@ module univalent-combinatorics.pi-finite-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.conjunction
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-function-types
@@ -16,11 +19,13 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.maybe
+open import foundation.merely-truncated-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retracts-of-types
@@ -38,6 +43,8 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.retracts-of-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.truncated-pi-finite-types
+open import univalent-combinatorics.unbounded-pi-finite-types
 open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
@@ -46,347 +53,231 @@ open import univalent-combinatorics.untruncated-pi-finite-types
 ## Idea
 
 A type is
-{{#concept "πₙ-finite" Disambiguation="type" Agda=is-π-finite Agda=π-Finite-Type}}
-if it has [finitely](univalent-combinatorics.finite-types.md) many
-[connected components](foundation.connected-components.md), all of its homotopy
-groups up to level `n` at all base points are finite, and all higher homotopy
-groups are [trivial](group-theory.trivial-groups.md). A type is
-{{#concept "π-finite"}} if it is πₙ-finite for some `n`.
+{{#concept "π-finite" Disambiguation="type" Agda=is-π-finite Agda=π-Finite-Type}}
+if all of its [homotopy groups](synthetic-homotopy-theory.homotopy-groups.md)
+are [finite](univalent-combinatorics.finite-types.md) and it is $n$-truncated
+for some $n$.
 
 ## Definitions
 
-### The πₙ-finiteness predicate
+### The π-finiteness predicate
 
 ```agda
-is-π-finite-Prop : {l : Level} (k : ℕ) → UU l → Prop l
-is-π-finite-Prop zero-ℕ X = is-finite-Prop X
-is-π-finite-Prop (succ-ℕ k) X =
-  product-Prop
-    ( has-finitely-many-connected-components-Prop X)
-    ( Π-Prop X (λ x → Π-Prop X (λ y → is-π-finite-Prop k (x ＝ y))))
+is-π-finite-Prop : {l : Level} → UU l → Prop l
+is-π-finite-Prop A =
+  is-merely-trunc-Prop A ∧ is-unbounded-π-finite-Prop' A
 
-is-π-finite : {l : Level} (k : ℕ) → UU l → UU l
-is-π-finite k A =
-  type-Prop (is-π-finite-Prop k A)
+is-π-finite : {l : Level} → UU l → UU l
+is-π-finite A = type-Prop (is-π-finite-Prop A)
 
 is-prop-is-π-finite :
-  {l : Level} (k : ℕ) {A : UU l} → is-prop (is-π-finite k A)
-is-prop-is-π-finite k {A} =
-  is-prop-type-Prop (is-π-finite-Prop k A)
-
-has-finitely-many-connected-components-is-π-finite :
-  {l : Level} (k : ℕ) {X : UU l} →
-  is-π-finite k X → has-finitely-many-connected-components X
-has-finitely-many-connected-components-is-π-finite zero-ℕ =
-  has-finitely-many-connected-components-is-finite
-has-finitely-many-connected-components-is-π-finite (succ-ℕ k) = pr1
-```
-
-### πₙ-finite types are n-truncated
-
-```agda
-is-trunc-is-π-finite :
-  {l : Level} (k : ℕ) {X : UU l} →
-  is-π-finite k X → is-trunc (truncation-level-ℕ k) X
-is-trunc-is-π-finite zero-ℕ = is-set-is-finite
-is-trunc-is-π-finite (succ-ℕ k) H x y =
-  is-trunc-is-π-finite k (pr2 H x y)
-```
-
-### πₙ-finite types are untruncated πₙ-finite
-
-```agda
-is-untruncated-π-finite-is-π-finite :
-  {l : Level} (k : ℕ) {A : UU l} →
-  is-π-finite k A → is-untruncated-π-finite k A
-is-untruncated-π-finite-is-π-finite zero-ℕ H =
-  is-finite-equiv
-    ( equiv-unit-trunc-Set (_ , (is-set-is-finite H)))
-    ( H)
-pr1 (is-untruncated-π-finite-is-π-finite (succ-ℕ k) H) = pr1 H
-pr2 (is-untruncated-π-finite-is-π-finite (succ-ℕ k) H) x y =
-  is-untruncated-π-finite-is-π-finite k (pr2 H x y)
-```
-
-### The subuniverse of πₙ-finite types
-
-```agda
-π-Finite-Type : (l : Level) (k : ℕ) → UU (lsuc l)
-π-Finite-Type l k = Σ (UU l) (is-π-finite k)
+  {l : Level} {A : UU l} → is-prop (is-π-finite A)
+is-prop-is-π-finite {A = A} =
+  is-prop-type-Prop (is-π-finite-Prop A)
 
 module _
-  {l : Level} (k : ℕ) (A : π-Finite-Type l k)
+  {l : Level} {A : UU l} (H : is-π-finite A)
+  where
+
+  is-merely-trunc-is-π-finite : is-merely-trunc A
+  is-merely-trunc-is-π-finite = pr1 H
+
+  is-unbounded-π-finite-is-π-finite : is-unbounded-π-finite' A
+  is-unbounded-π-finite-is-π-finite = pr2 H
+
+  has-finitely-many-connected-components-is-π-finite :
+    has-finitely-many-connected-components A
+  has-finitely-many-connected-components-is-π-finite =
+    has-finitely-many-connected-components-is-untruncated-π-finite 0
+      ( is-unbounded-π-finite-is-π-finite 0)
+```
+
+### The subuniverse of π-finite types
+
+```agda
+π-Finite-Type : (l : Level) → UU (lsuc l)
+π-Finite-Type l = Σ (UU l) (is-π-finite)
+
+module _
+  {l : Level} (A : π-Finite-Type l)
   where
 
   type-π-Finite-Type : UU l
   type-π-Finite-Type = pr1 A
 
-  is-π-finite-type-π-Finite-Type : is-π-finite k type-π-Finite-Type
+  is-π-finite-type-π-Finite-Type : is-π-finite type-π-Finite-Type
   is-π-finite-type-π-Finite-Type = pr2 A
 
-  is-trunc-type-π-Finite-Type :
-    is-trunc (truncation-level-ℕ k) type-π-Finite-Type
-  is-trunc-type-π-Finite-Type =
-    is-trunc-is-π-finite k is-π-finite-type-π-Finite-Type
+  is-merely-trunc-type-π-Finite-Type :
+    is-merely-trunc type-π-Finite-Type
+  is-merely-trunc-type-π-Finite-Type =
+    is-merely-trunc-is-π-finite is-π-finite-type-π-Finite-Type
 
-  is-untruncated-π-finite-type-π-Finite-Type :
-    is-untruncated-π-finite k type-π-Finite-Type
-  is-untruncated-π-finite-type-π-Finite-Type =
-    is-untruncated-π-finite-is-π-finite k is-π-finite-type-π-Finite-Type
+  is-unbounded-π-finite-type-π-Finite-Type :
+    is-unbounded-π-finite' type-π-Finite-Type
+  is-unbounded-π-finite-type-π-Finite-Type =
+    is-unbounded-π-finite-is-π-finite is-π-finite-type-π-Finite-Type
+
+  has-finitely-many-connected-components-type-π-Finite-Type :
+    has-finitely-many-connected-components type-π-Finite-Type
+  has-finitely-many-connected-components-type-π-Finite-Type =
+    has-finitely-many-connected-components-is-π-finite
+      is-π-finite-type-π-Finite-Type
 ```
 
 ## Properties
 
-### Untruncated πₙ-finite n-truncated types are πₙ-finite
+### Truncated π-finite types are π-finite
 
 ```agda
-is-π-finite-is-untruncated-π-finite :
-  {l : Level} (k : ℕ) {A : UU l} → is-trunc (truncation-level-ℕ k) A →
-  is-untruncated-π-finite k A → is-π-finite k A
-is-π-finite-is-untruncated-π-finite zero-ℕ H K =
-  is-finite-is-untruncated-π-finite zero-ℕ H K
-pr1 (is-π-finite-is-untruncated-π-finite (succ-ℕ k) H K) = pr1 K
-pr2 (is-π-finite-is-untruncated-π-finite (succ-ℕ k) H K) x y =
-  is-π-finite-is-untruncated-π-finite k (H x y) (pr2 K x y)
+is-π-finite-is-truncated-π-finite :
+  {l : Level} (n : ℕ) {A : UU l} → is-truncated-π-finite n A → is-π-finite A
+is-π-finite-is-truncated-π-finite n H =
+  ( intro-exists (truncation-level-ℕ n) (is-trunc-is-truncated-π-finite n H) ,
+    is-unbounded-π-finite-is-truncated-π-finite' n H)
 ```
 
-### πₙ-finite types are closed under retracts
+### π-finite types are closed under retracts
 
 ```agda
 is-π-finite-retract :
-  {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : UU l2} →
-  A retract-of B → is-π-finite k B → is-π-finite k A
-is-π-finite-retract zero-ℕ = is-finite-retract
-pr1 (is-π-finite-retract (succ-ℕ k) r H) =
-  has-finitely-many-connected-components-retract
-    ( r)
-    ( has-finitely-many-connected-components-is-π-finite (succ-ℕ k) H)
-pr2 (is-π-finite-retract (succ-ℕ k) r H) x y =
-  is-π-finite-retract k
-    ( retract-eq r x y)
-    ( pr2 H (inclusion-retract r x) (inclusion-retract r y))
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  A retract-of B → is-π-finite B → is-π-finite A
+is-π-finite-retract R H =
+  ( is-merely-trunc-retract-of R (is-merely-trunc-is-π-finite H) ,
+    λ n →
+    is-untruncated-π-finite-retract n R (is-unbounded-π-finite-is-π-finite H n))
 ```
 
 ### π-finite types are closed under equivalences
 
 ```agda
 is-π-finite-equiv :
-  {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : UU l2} →
-  A ≃ B → is-π-finite k B → is-π-finite k A
-is-π-finite-equiv k e =
-  is-π-finite-retract k (retract-equiv e)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  A ≃ B → is-π-finite B → is-π-finite A
+is-π-finite-equiv e =
+  is-π-finite-retract (retract-equiv e)
 
 is-π-finite-equiv' :
-  {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : UU l2} →
-  A ≃ B → is-π-finite k A → is-π-finite k B
-is-π-finite-equiv' k e =
-  is-π-finite-retract k (retract-inv-equiv e)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  A ≃ B → is-π-finite A → is-π-finite B
+is-π-finite-equiv' e =
+  is-π-finite-retract (retract-inv-equiv e)
 ```
 
 ### Empty types are π-finite
 
 ```agda
-is-π-finite-empty : (k : ℕ) → is-π-finite k empty
-is-π-finite-empty zero-ℕ = is-finite-empty
-is-π-finite-empty (succ-ℕ k) =
-  ( has-finitely-many-connected-components-empty , ind-empty)
+is-π-finite-empty : is-π-finite empty
+is-π-finite-empty =
+  is-π-finite-is-truncated-π-finite 0 (is-truncated-π-finite-empty 0)
 
-empty-π-Finite-Type : (k : ℕ) → π-Finite-Type lzero k
-empty-π-Finite-Type k = (empty , is-π-finite-empty k)
+empty-π-Finite-Type : π-Finite-Type lzero
+empty-π-Finite-Type = (empty , is-π-finite-empty)
 
 is-π-finite-is-empty :
-  {l : Level} (k : ℕ) {A : UU l} → is-empty A → is-π-finite k A
-is-π-finite-is-empty zero-ℕ = is-finite-is-empty
-is-π-finite-is-empty (succ-ℕ k) f =
-  ( has-finitely-many-connected-components-is-empty f , ex-falso ∘ f)
+  {l : Level} {A : UU l} → is-empty A → is-π-finite A
+is-π-finite-is-empty H =
+  is-π-finite-is-truncated-π-finite 0 (is-truncated-π-finite-is-empty 0 H)
 ```
 
 ### Contractible types are π-finite
 
 ```agda
 is-π-finite-is-contr :
-  {l : Level} (k : ℕ) {A : UU l} → is-contr A → is-π-finite k A
-is-π-finite-is-contr zero-ℕ =
-  is-finite-is-contr
-pr1 (is-π-finite-is-contr (succ-ℕ k) H) =
-  has-finitely-many-connected-components-is-contr H
-pr2 (is-π-finite-is-contr (succ-ℕ k) H) x y =
-  is-π-finite-is-contr k (is-prop-is-contr H x y)
+  {l : Level} {A : UU l} → is-contr A → is-π-finite A
+is-π-finite-is-contr H =
+  is-π-finite-is-truncated-π-finite 0 (is-truncated-π-finite-is-contr 0 H)
 
-is-π-finite-unit : (k : ℕ) → is-π-finite k unit
-is-π-finite-unit k =
-  is-π-finite-is-contr k is-contr-unit
+is-π-finite-unit : is-π-finite unit
+is-π-finite-unit =
+  is-π-finite-is-contr is-contr-unit
 
-unit-π-Finite-Type : (k : ℕ) → π-Finite-Type lzero k
-unit-π-Finite-Type k =
-  ( unit , is-π-finite-unit k)
+unit-π-Finite-Type : π-Finite-Type lzero
+unit-π-Finite-Type =
+  ( unit , is-π-finite-unit)
 ```
 
 ### Coproducts of π-finite types are π-finite
 
 ```agda
 is-π-finite-coproduct :
-  {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : UU l2} →
-  is-π-finite k A → is-π-finite k B →
-  is-π-finite k (A + B)
-is-π-finite-coproduct k hA hB =
-  is-π-finite-is-untruncated-π-finite k
-    ( is-trunc-coproduct
-      ( truncation-level-minus-two-ℕ k)
-      ( is-trunc-is-π-finite k hA)
-      ( is-trunc-is-π-finite k hB))
-    ( is-untruncated-π-finite-coproduct k
-      ( is-untruncated-π-finite-is-π-finite k hA)
-      ( is-untruncated-π-finite-is-π-finite k hB))
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-π-finite A → is-π-finite B →
+  is-π-finite (A + B)
+is-π-finite-coproduct hA hB =
+  ( ( is-merely-trunc-coproduct
+      ( is-merely-trunc-is-π-finite hA)
+      ( is-merely-trunc-is-π-finite hB)) ,
+    ( λ n →
+      is-untruncated-π-finite-coproduct n
+        ( is-unbounded-π-finite-is-π-finite hA n)
+        ( is-unbounded-π-finite-is-π-finite hB n)))
 
 coproduct-π-Finite-Type :
-  {l1 l2 : Level} (k : ℕ) →
-  π-Finite-Type l1 k →
-  π-Finite-Type l2 k →
-  π-Finite-Type (l1 ⊔ l2) k
-pr1 (coproduct-π-Finite-Type k A B) =
-  (type-π-Finite-Type k A + type-π-Finite-Type k B)
-pr2 (coproduct-π-Finite-Type k A B) =
-  is-π-finite-coproduct k
-    ( is-π-finite-type-π-Finite-Type k A)
-    ( is-π-finite-type-π-Finite-Type k B)
+  {l1 l2 : Level} →
+  π-Finite-Type l1 → π-Finite-Type l2 → π-Finite-Type (l1 ⊔ l2)
+coproduct-π-Finite-Type A B =
+  ( type-π-Finite-Type A + type-π-Finite-Type B) ,
+  ( is-π-finite-coproduct
+    ( is-π-finite-type-π-Finite-Type A)
+    ( is-π-finite-type-π-Finite-Type B))
 ```
 
 ### `Maybe A` of any π-finite type `A` is π-finite
 
 ```agda
 is-π-finite-Maybe :
-  {l : Level} (k : ℕ) {A : UU l} → is-π-finite k A → is-π-finite k (Maybe A)
-is-π-finite-Maybe k H = is-π-finite-coproduct k H (is-π-finite-unit k)
+  {l : Level} {A : UU l} → is-π-finite A → is-π-finite (Maybe A)
+is-π-finite-Maybe H = is-π-finite-coproduct H (is-π-finite-unit)
 
 Maybe-π-Finite-Type :
-  {l : Level} (k : ℕ) → π-Finite-Type l k → π-Finite-Type l k
-Maybe-π-Finite-Type k A = coproduct-π-Finite-Type k A (unit-π-Finite-Type k)
+  {l : Level} → π-Finite-Type l → π-Finite-Type l
+Maybe-π-Finite-Type A = coproduct-π-Finite-Type A (unit-π-Finite-Type)
 ```
 
 ### Any standard finite type is π-finite
 
 ```agda
-is-π-finite-Fin : (k n : ℕ) → is-π-finite k (Fin n)
-is-π-finite-Fin k zero-ℕ = is-π-finite-empty k
-is-π-finite-Fin k (succ-ℕ n) = is-π-finite-Maybe k (is-π-finite-Fin k n)
+is-π-finite-Fin : (n : ℕ) → is-π-finite (Fin n)
+is-π-finite-Fin n =
+  is-π-finite-is-truncated-π-finite 0 (is-truncated-π-finite-Fin 0 n)
 
-Fin-π-Finite-Type : (k : ℕ) (n : ℕ) → π-Finite-Type lzero k
-Fin-π-Finite-Type k n = (Fin n , is-π-finite-Fin k n)
+Fin-π-Finite-Type : (n : ℕ) → π-Finite-Type lzero
+Fin-π-Finite-Type n = (Fin n , is-π-finite-Fin n)
 ```
 
 ### Any type equipped with a counting is π-finite
 
 ```agda
-is-π-finite-count : {l : Level} (k : ℕ) {A : UU l} → count A → is-π-finite k A
-is-π-finite-count k (n , e) = is-π-finite-equiv' k e (is-π-finite-Fin k n)
+is-π-finite-count : {l : Level} {A : UU l} → count A → is-π-finite A
+is-π-finite-count (n , e) = is-π-finite-equiv' e (is-π-finite-Fin n)
 ```
 
 ### Any finite type is π-finite
 
 ```agda
 is-π-finite-is-finite :
-  {l : Level} (k : ℕ) {A : UU l} → is-finite A → is-π-finite k A
-is-π-finite-is-finite k {A} H =
+  {l : Level} {A : UU l} → is-finite A → is-π-finite A
+is-π-finite-is-finite {A = A} H =
   apply-universal-property-trunc-Prop H
-    ( is-π-finite-Prop k A)
-    ( is-π-finite-count k)
+    ( is-π-finite-Prop A)
+    ( is-π-finite-count)
 
-π-finite-Finite-Type : {l : Level} (k : ℕ) → Finite-Type l → π-Finite-Type l k
-π-finite-Finite-Type k A =
-  ( type-Finite-Type A , is-π-finite-is-finite k (is-finite-type-Finite-Type A))
+π-finite-Finite-Type : {l : Level} → Finite-Type l → π-Finite-Type l
+π-finite-Finite-Type A =
+  ( type-Finite-Type A , is-π-finite-is-finite (is-finite-type-Finite-Type A))
 ```
 
 ### π-finite sets are finite
 
 ```agda
 is-finite-is-π-finite :
-  {l : Level} (k : ℕ) {A : UU l} → is-set A → is-π-finite k A → is-finite A
-is-finite-is-π-finite k H K =
+  {l : Level} {A : UU l} → is-set A → is-π-finite A → is-finite A
+is-finite-is-π-finite H K =
   is-finite-equiv'
     ( equiv-unit-trunc-Set (_ , H))
-    ( has-finitely-many-connected-components-is-π-finite k K)
-```
-
-### πₙ-finite types are πₙ₊₁-finite
-
-```agda
-is-π-finite-succ-is-π-finite :
-  {l : Level} (k : ℕ) {A : UU l} → is-π-finite k A → is-π-finite (succ-ℕ k) A
-is-π-finite-succ-is-π-finite zero-ℕ =
-  is-π-finite-is-finite 1
-is-π-finite-succ-is-π-finite (succ-ℕ k) (H , K) =
-  ( H , (λ x y → is-π-finite-succ-is-π-finite k (K x y)))
-```
-
-### The type of all `n`-element types in `UU l` is π₁-finite
-
-```agda
-is-π-finite-Type-With-Cardinality-ℕ :
-  {l : Level} (n : ℕ) → is-π-finite 1 (Type-With-Cardinality-ℕ l n)
-is-π-finite-Type-With-Cardinality-ℕ n =
-  is-π-finite-is-untruncated-π-finite 1
-    ( is-1-type-Type-With-Cardinality-ℕ n)
-    ( is-untruncated-π-finite-Type-With-Cardinality-ℕ 1 n)
-
-Type-With-Cardinality-ℕ-π-Finite-Type :
-  (l : Level) (n : ℕ) → π-Finite-Type (lsuc l) 1
-Type-With-Cardinality-ℕ-π-Finite-Type l n =
-  (Type-With-Cardinality-ℕ l n , is-π-finite-Type-With-Cardinality-ℕ n)
-```
-
-### Finite products of π-finite types are π-finite
-
-```agda
-is-π-finite-Π :
-  {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : A → UU l2} →
-  is-finite A → ((a : A) → is-π-finite k (B a)) →
-  is-π-finite k ((a : A) → B a)
-is-π-finite-Π k hA hB =
-  is-π-finite-is-untruncated-π-finite k
-    ( is-trunc-Π (truncation-level-ℕ k) (is-trunc-is-π-finite k ∘ hB))
-    ( is-untruncated-π-finite-Π k hA
-      ( is-untruncated-π-finite-is-π-finite k ∘ hB))
-
-finite-Π-π-Finite-Type :
-  {l1 l2 : Level} (k : ℕ) (A : Finite-Type l1)
-  (B : type-Finite-Type A → π-Finite-Type l2 k) →
-  π-Finite-Type (l1 ⊔ l2) k
-pr1 (finite-Π-π-Finite-Type k A B) =
-  (x : type-Finite-Type A) → (type-π-Finite-Type k (B x))
-pr2 (finite-Π-π-Finite-Type k A B) =
-  is-π-finite-Π k
-    ( is-finite-type-Finite-Type A)
-      ( λ x → is-π-finite-type-π-Finite-Type k (B x))
-```
-
-### Dependent sums of π-finite types are π-finite
-
-```agda
-is-π-finite-Σ :
-  {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : A → UU l2} →
-  is-π-finite k A → ((a : A) → is-π-finite k (B a)) →
-  is-π-finite k (Σ A B)
-is-π-finite-Σ k hA hB =
-  is-π-finite-is-untruncated-π-finite k
-    ( is-trunc-Σ
-      ( is-trunc-is-π-finite k hA)
-      ( is-trunc-is-π-finite k ∘ hB))
-    ( is-untruncated-π-finite-Σ k
-      ( is-untruncated-π-finite-is-π-finite (succ-ℕ k)
-        ( is-π-finite-succ-is-π-finite k hA))
-      ( is-untruncated-π-finite-is-π-finite k ∘ hB))
-
-Σ-π-Finite-Type :
-  {l1 l2 : Level} (k : ℕ) (A : π-Finite-Type l1 k)
-  (B : type-π-Finite-Type k A → π-Finite-Type l2 k) →
-  π-Finite-Type (l1 ⊔ l2) k
-pr1 (Σ-π-Finite-Type k A B) =
-  Σ (type-π-Finite-Type k A) (type-π-Finite-Type k ∘ B)
-pr2 (Σ-π-Finite-Type k A B) =
-  is-π-finite-Σ k
-    ( is-π-finite-type-π-Finite-Type k A)
-    ( is-π-finite-type-π-Finite-Type k ∘ B)
+    ( has-finitely-many-connected-components-is-π-finite K)
 ```
 
 ## See also

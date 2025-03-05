@@ -8,8 +8,8 @@ module foundation.inequality-truncation-levels where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
 open import foundation.addition-truncation-levels
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types

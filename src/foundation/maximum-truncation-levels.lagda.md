@@ -2,18 +2,21 @@
 
 ```agda
 module foundation.maximum-truncation-levels where
-
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.inequality-truncation-levels
 open import foundation.unit-type
+open import foundation.universe-levels
 
+open import foundation-core.function-types
+open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 
 open import order-theory.least-upper-bounds-posets
@@ -146,4 +149,25 @@ right-successor-diagonal-law-max-𝕋 : (x : 𝕋) → x ⊔𝕋 succ-𝕋 x ＝
 right-successor-diagonal-law-max-𝕋 neg-two-𝕋 = refl
 right-successor-diagonal-law-max-𝕋 (succ-𝕋 x) =
   ap succ-𝕋 (right-successor-diagonal-law-max-𝕋 x)
+```
+
+### If a type is `k`-truncated and `k ≤ r`, then it is `r`-truncated
+
+```agda
+is-trunc-left-max-𝕋 :
+  (k r : 𝕋) → {l : Level} {A : UU l} → is-trunc k A → is-trunc (k ⊔𝕋 r) A
+is-trunc-left-max-𝕋 k neg-two-𝕋 =
+  is-trunc-eq inv-right-unit-law-𝕋
+is-trunc-left-max-𝕋 neg-two-𝕋 (succ-𝕋 r) H =
+  is-trunc-is-contr (succ-𝕋 r) H
+is-trunc-left-max-𝕋 (succ-𝕋 k) (succ-𝕋 r) H x y =
+  is-trunc-left-max-𝕋 k r (H x y)
+
+is-trunc-right-max-𝕋 :
+  (k r : 𝕋) → {l : Level} {A : UU l} → is-trunc k A → is-trunc (r ⊔𝕋 k) A
+is-trunc-right-max-𝕋 k neg-two-𝕋 = id
+is-trunc-right-max-𝕋 neg-two-𝕋 (succ-𝕋 r) H =
+  is-trunc-is-contr (succ-𝕋 r) H
+is-trunc-right-max-𝕋 (succ-𝕋 k) (succ-𝕋 r) H x y =
+  is-trunc-right-max-𝕋 k r (H x y)
 ```

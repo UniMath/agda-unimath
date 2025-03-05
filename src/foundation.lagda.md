@@ -24,6 +24,7 @@ open import foundation.action-on-identifications-binary-dependent-functions publ
 open import foundation.action-on-identifications-binary-functions public
 open import foundation.action-on-identifications-dependent-functions public
 open import foundation.action-on-identifications-functions public
+open import foundation.addition-truncation-levels public
 open import foundation.apartness-relations public
 open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.arithmetic-law-product-and-pi-decompositions public
@@ -161,6 +162,7 @@ open import foundation.equality-coproduct-types public
 open import foundation.equality-dependent-function-types public
 open import foundation.equality-dependent-pair-types public
 open import foundation.equality-fibers-of-maps public
+open import foundation.equality-truncation-levels public
 open import foundation.equivalence-classes public
 open import foundation.equivalence-extensionality public
 open import foundation.equivalence-induction public
@@ -239,6 +241,7 @@ open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.induction-principle-propositional-truncation public
+open import foundation.inequality-truncation-levels public
 open import foundation.infinitely-coherent-equivalences public
 open import foundation.inhabited-subtypes public
 open import foundation.inhabited-types public
@@ -276,6 +279,7 @@ open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
 open import foundation.maps-in-global-subuniverses public
 open import foundation.maps-in-subuniverses public
+open import foundation.maximum-truncation-levels public
 open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
@@ -283,6 +287,7 @@ open import foundation.mere-equivalences public
 open import foundation.mere-functions public
 open import foundation.mere-logical-equivalences public
 open import foundation.mere-path-cosplit-maps public
+open import foundation.merely-truncated-types public
 open import foundation.monomorphisms public
 open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
