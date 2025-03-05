@@ -94,6 +94,45 @@ module _
     (x : cauchy-sequence-Metric-Space) →
     is-cauchy-sequence-Metric-Space M (map-cauchy-sequence-Metric-Space x)
   is-cauchy-sequence-cauchy-sequence-Metric-Space = pr2
+
+  neighborhood-modulus-of-convergence-cauchy-sequence-Metric-Space :
+    (x : cauchy-sequence-Metric-Space) (ε⁺ : ℚ⁺) (m k : ℕ) →
+    leq-ℕ (modulus-of-convergence-cauchy-sequence-Metric-Space x ε⁺) m →
+    leq-ℕ (modulus-of-convergence-cauchy-sequence-Metric-Space x ε⁺) k →
+    neighborhood-Metric-Space
+      ( M)
+      ( ε⁺)
+      ( map-cauchy-sequence-Metric-Space x m)
+      ( map-cauchy-sequence-Metric-Space x k)
+
+  map-at-modulus-of-convergence-cauchy-sequence-Metric-Space :
+    (x : cauchy-sequence-Metric-Space) (ε⁺ : ℚ⁺) → type-Metric-Space M
+  map-at-modulus-of-convergence-cauchy-sequence-Metric-Space x ε⁺ =
+    map-cauchy-sequence-Metric-Space
+      ( x)
+      ( modulus-of-convergence-cauchy-sequence-Metric-Space x ε⁺)
+
+  neighborhood-at-modulus-of-convergence-cauchy-sequence-Metric-Space :
+    (x : cauchy-sequence-Metric-Space) (ε⁺ : ℚ⁺) (m : ℕ) →
+    leq-ℕ (modulus-of-convergence-cauchy-sequence-Metric-Space x ε⁺) m →
+    neighborhood-Metric-Space
+      ( M)
+      ( ε⁺)
+      ( map-at-modulus-of-convergence-cauchy-sequence-Metric-Space x ε⁺)
+      ( map-cauchy-sequence-Metric-Space x m)
+  neighborhood-at-modulus-of-convergence-cauchy-sequence-Metric-Space
+    x ε⁺ m n≤m =
+    let
+      n = modulus-of-convergence-cauchy-sequence-Metric-Space x ε⁺
+    in
+      neighborhood-at-modulus-of-convergence-cauchy-sequence-Metric-Space
+        ( x)
+        ( ε⁺)
+        ( n)
+        ( m)
+        ( refl-leq-ℕ n)
+        ( n≤m)
+
 ```
 
 ### Limits of arbitrary sequences
@@ -182,9 +221,9 @@ module _
     is-cauchy-sequence-has-limit-Metric-Space ε⁺@(ε , _) =
       let
         lim = limit-has-limit-sequence-Metric-Space M x H
-        lim-is-lim = is-limit-limit-has-limit-sequence-Metric-Space M x H
         (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
-        (n , n≤m⇒|xm-l|<ε') = lim-is-lim ε'⁺
+        (n , n≤m⇒|xm-l|<ε') =
+          is-limit-limit-has-limit-sequence-Metric-Space M x H ε'⁺
       in
         n ,
         λ m k n≤m n≤k →
@@ -249,11 +288,10 @@ module _
                 ( ε⁺)
                 ( ε⁺ +ℚ⁺ δ⁺)
                 ( le-right-add-rational-ℚ⁺ ε δ⁺)
-                ( pr2
-                  ( is-cauchy-sequence-cauchy-sequence-Metric-Space M x ε⁺)
-                  ( mε)
-                  ( mδ)
-                  ( refl-leq-ℕ mε)
+                ( neighborhood-at-modulus-of-convergence-cauchy-sequence-Metric-Space
+                  ( M)
+                  ( x)
+                  ( ε⁺)
                   ( mε≤mδ)))
             ( λ mδ≤mε →
               is-monotonic-structure-Metric-Space
@@ -263,12 +301,16 @@ module _
                 ( δ⁺)
                 ( ε⁺ +ℚ⁺ δ⁺)
                 ( le-left-add-rational-ℚ⁺ δ ε⁺)
-                ( pr2
-                  ( is-cauchy-sequence-cauchy-sequence-Metric-Space M x δ⁺)
-                  ( mε)
-                  ( mδ)
-                  ( mδ≤mε)
-                  ( refl-leq-ℕ mδ)))
+                ( is-symmetric-structure-Metric-Space
+                  ( M)
+                  ( δ⁺)
+                  ( xmδ)
+                  ( xmε)
+                  ( neighborhood-at-modulus-of-convergence-cauchy-sequence-Metric-Space
+                    ( M)
+                    ( δ⁺)
+                    ( mε)
+                    ( mδ≤mε))))
             ( linear-leq-ℕ mε mδ)
 
   cauchy-approximation-cauchy-sequence-Metric-Space :
@@ -306,31 +348,9 @@ module _
         xn = map-cauchy-sequence-Metric-Space M x n
       in
         n ,
-        ( λ m n≤m →
+        λ m n≤m →
           let
             xm = map-cauchy-sequence-Metric-Space M x m
-            neighborhood-ε''-xm-xn =
-              pr2
-                ( is-cauchy-sequence-cauchy-sequence-Metric-Space M x ε''⁺)
-                ( m)
-                ( n)
-                ( n≤m)
-                ( refl-leq-ℕ _)
-            neighborhood-ε'-xn-l =
-              tr
-                ( λ d → neighborhood-Metric-Space M d xn l)
-                ( eq-add-split-ℚ⁺ ε'⁺)
-                ( H ε''⁺ (right-summand-split-ℚ⁺ ε'⁺))
-            neighborhood-ε''+ε'-xm-l =
-              is-triangular-structure-Metric-Space
-                ( M)
-                ( xm)
-                ( xn)
-                ( l)
-                ( ε''⁺)
-                ( ε'⁺)
-                ( neighborhood-ε'-xn-l)
-                ( neighborhood-ε''-xm-xn)
           in
             is-monotonic-structure-Metric-Space
               ( M)
@@ -344,7 +364,28 @@ module _
                 ( ε)
                 ( 2ε'<ε)
                 ( preserves-le-left-add-ℚ ε' ε'' ε' (le-mediant-zero-ℚ⁺ ε'⁺)))
-              ( neighborhood-ε''+ε'-xm-l))
+              ( is-triangular-structure-Metric-Space
+                ( M)
+                ( xm)
+                ( xn)
+                ( l)
+                ( ε''⁺)
+                ( ε'⁺)
+                ( tr
+                  ( λ d → neighborhood-Metric-Space M d xn l)
+                  ( eq-add-split-ℚ⁺ ε'⁺)
+                  ( H ε''⁺ (right-summand-split-ℚ⁺ ε'⁺)))
+                ( is-symmetric-structure-Metric-Space
+                  ( M)
+                  ( ε''⁺)
+                  ( xn)
+                  ( xm)
+                  ( neighborhood-at-modulus-of-convergence-cauchy-sequence-Metric-Space
+                    ( M)
+                    ( x)
+                    ( ε''⁺)
+                    ( m)
+                    ( n≤m))))
 ```
 
 ### Correspondence of Cauchy approximations to Cauchy sequences
@@ -376,7 +417,7 @@ module _
     is-cauchy-sequence-cauchy-sequence-cauchy-approximation-Metric-Space
       ε⁺@(ε , _) =
       let
-        (ε'⁺@(ε' , _) , 2ε<ε) = bound-double-le-ℚ⁺ ε⁺
+        (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
         (n' , 1/n'<ε') = smaller-reciprocal-ℚ⁺ ε'⁺
         n = pred-nonzero-ℕ n'
         1/n' = positive-reciprocal-rational-ℕ⁺ n'
@@ -415,7 +456,7 @@ module _
                   ( rational-ℚ⁺ (1/n' +ℚ⁺ 1/n'))
                   ( ε' +ℚ ε')
                   ( ε)
-                  ( 2ε<ε)
+                  ( 2ε'<ε)
                   ( preserves-le-add-ℚ
                     { rational-ℚ⁺ 1/n'}
                     { ε'}
