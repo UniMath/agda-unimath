@@ -40,6 +40,7 @@ open import foundation.retractions
 open import foundation.retracts-of-maps
 open import foundation.truncated-maps
 open import foundation.truncation-levels
+open import foundation.addition-truncation-levels
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
@@ -269,7 +270,7 @@ is-trunc-map-is-path-cosplit-is-trunc-codomain k is-trunc-B is-cosplit-f =
 ```agda
 is-trunc-is-path-cosplit-is-trunc-succ-domain :
   {l1 l2 : Level} {k r : 𝕋} {A : UU l1} {B : UU l2} {f : A → B} →
-  is-trunc (succ-succ-add-𝕋 r k) A → is-trunc r (is-path-cosplit k f)
+  is-trunc (add+2-𝕋 r k) A → is-trunc r (is-path-cosplit k f)
 is-trunc-is-path-cosplit-is-trunc-succ-domain {k = neg-two-𝕋} =
   is-trunc-retraction
 is-trunc-is-path-cosplit-is-trunc-succ-domain {k = succ-𝕋 k} {r} is-trunc-A =

@@ -18,6 +18,7 @@ open import foundation.subtype-identity-principle
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.truncations
+open import foundation.addition-truncation-levels
 open import foundation.univalence
 open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
@@ -422,7 +423,7 @@ module _
 
 ```agda
 is-trunc-map-precomp-Π-is-connected-map :
-  {l1 l2 l3 : Level} (k l n : 𝕋) → k +𝕋 (succ-𝕋 (succ-𝕋 n)) ＝ l →
+  {l1 l2 l3 : Level} (k l n : 𝕋) → succ-𝕋 (succ-𝕋 n) +𝕋 k ＝ l →
   {A : UU l1} {B : UU l2} {f : A → B} → is-connected-map k f →
   (P : B → Truncated-Type l3 l) →
   is-trunc-map
@@ -436,7 +437,7 @@ is-trunc-map-precomp-Π-is-connected-map
         pair
           ( type-Truncated-Type (P b))
           ( is-trunc-eq
-            ( right-unit-law-add-𝕋 k)
+            ( left-unit-law-add-𝕋 k)
             ( is-trunc-type-Truncated-Type (P b)))))
 is-trunc-map-precomp-Π-is-connected-map k ._ (succ-𝕋 n) refl {A} {B} {f} H P =
   is-trunc-map-succ-precomp-Π
@@ -446,7 +447,7 @@ is-trunc-map-precomp-Π-is-connected-map k ._ (succ-𝕋 n) refl {A} {B} {f} H P
           pair
             ( eq-value g h b)
             ( is-trunc-eq
-              ( right-successor-law-add-𝕋 k n)
+              ( left-successor-law-add-𝕋 k n)
               ( is-trunc-type-Truncated-Type (P b))
               ( g b)
               ( h b))))
