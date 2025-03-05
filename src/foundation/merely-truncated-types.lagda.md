@@ -295,7 +295,7 @@ optimal.
 abstract
   is-merely-trunc-coproduct :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-     is-merely-trunc A → is-merely-trunc B → is-merely-trunc (A + B)
+    is-merely-trunc A → is-merely-trunc B → is-merely-trunc (A + B)
   is-merely-trunc-coproduct {A = A} {B} =
     map-binary-exists
       ( λ k → is-trunc k (A + B))

@@ -73,7 +73,7 @@ open is-unbounded-π-finite public
 
 ```agda
 module _
-   {l : Level} (A : UU l)
+  {l : Level} (A : UU l)
   where
 
   is-unbounded-π-finite' : UU l
