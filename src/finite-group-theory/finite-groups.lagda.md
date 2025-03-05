@@ -424,10 +424,10 @@ is-untruncated-π-finite-Group-of-Order {l} k n =
         is-untruncated-π-finite-is-finite k
           ( is-finite-is-group-Semigroup n X)))
 
-is-π-finite-Group-of-Order :
-  {l : Level} (n : ℕ) → is-π-finite 1 (Group-of-Order l n)
-is-π-finite-Group-of-Order n =
-  is-π-finite-is-untruncated-π-finite 1
+is-truncated-π-finite-Group-of-Order :
+  {l : Level} (n : ℕ) → is-truncated-π-finite 1 (Group-of-Order l n)
+is-truncated-π-finite-Group-of-Order n =
+  is-truncated-π-finite-is-untruncated-π-finite 1
     ( is-1-type-Group-of-Order n)
     ( is-untruncated-π-finite-Group-of-Order 1 n)
 ```

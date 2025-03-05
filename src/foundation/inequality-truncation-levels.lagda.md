@@ -13,25 +13,25 @@ open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
-open import foundation.disjunction
-open import foundation.propositional-truncations
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.equality-truncation-levels
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import order-theory.posets
 open import order-theory.decidable-posets
 open import order-theory.decidable-total-orders
-open import order-theory.total-orders
+open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.total-orders
 ```
 
 </details>
