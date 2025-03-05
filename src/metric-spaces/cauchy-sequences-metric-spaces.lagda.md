@@ -46,7 +46,7 @@ A
 type of the metric space such that for any
 [positive rational](elementary-number-theory.positive-rational-numbers.md) `ε`,
 there is a concrete `n : ℕ` such that for any `m, k ≥ n`, `x m` and `x k` are in
-a neighborhood of `ε` of each other.
+an `ε`-neighborhood of each other.
 
 Importantly, this is a structure, not a proposition, allowing us to explicitly
 calculate rates of convergence. This follows Section 11.2.2 in {{#cite UF13}}.
@@ -188,27 +188,27 @@ module _
       in
         n ,
         λ m k n≤m n≤k →
-          is-monotonic-structure-Metric-Space
+        is-monotonic-structure-Metric-Space
+          ( M)
+          ( x m)
+          ( x k)
+          ( ε'⁺ +ℚ⁺ ε'⁺)
+          ( ε⁺)
+          ( 2ε'<ε)
+          ( is-triangular-structure-Metric-Space
             ( M)
             ( x m)
+            ( lim)
             ( x k)
-            ( ε'⁺ +ℚ⁺ ε'⁺)
-            ( ε⁺)
-            ( 2ε'<ε)
-            ( is-triangular-structure-Metric-Space
+            ( ε'⁺)
+            ( ε'⁺)
+            ( is-symmetric-structure-Metric-Space
               ( M)
-              ( x m)
-              ( lim)
+              ( ε'⁺)
               ( x k)
-              ( ε'⁺)
-              ( ε'⁺)
-              ( is-symmetric-structure-Metric-Space
-                ( M)
-                ( ε'⁺)
-                ( x k)
-                ( lim)
-                ( n≤m⇒|xm-l|<ε' k n≤k))
-              ( n≤m⇒|xm-l|<ε' m n≤m))
+              ( lim)
+              ( n≤m⇒|xm-l|<ε' k n≤k))
+            ( n≤m⇒|xm-l|<ε' m n≤m))
 ```
 
 ### Correspondence to Cauchy approximations

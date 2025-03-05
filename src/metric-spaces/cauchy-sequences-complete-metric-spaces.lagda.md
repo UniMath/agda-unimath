@@ -26,7 +26,8 @@ open import metric-spaces.metric-spaces
 
 A [Cauchy sequence](metric-spaces.cauchy-sequences-metric-spaces.md) in a
 [complete metric space](metric-spaces.complete-metric-spaces.md) is a Cauchy
-sequence in the underlying metric space, and always has a limit.
+sequence in the underlying [metric space](metric-spaces.metric-spaces.md).
+Cauchy sequences in complete metric spaces always have a limit.
 
 ## Definition
 

@@ -105,7 +105,7 @@ pred-ℕ⁺ = pred-nonzero-ℕ
 
 is-section-succ-nonzero-ℕ' : is-section succ-nonzero-ℕ' pred-nonzero-ℕ
 is-section-succ-nonzero-ℕ' (zero-ℕ , H) = ex-falso (H refl)
-is-section-succ-nonzero-ℕ' n⁺@(succ-ℕ n , _) = eq-nonzero-ℕ refl
+is-section-succ-nonzero-ℕ' (succ-ℕ n , _) = eq-nonzero-ℕ refl
 
 is-section-pred-nonzero-ℕ : is-section pred-nonzero-ℕ succ-nonzero-ℕ'
 is-section-pred-nonzero-ℕ n = refl
