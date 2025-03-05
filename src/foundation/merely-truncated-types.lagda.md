@@ -288,9 +288,6 @@ hom-Merely-Truncated-Type A B =
 
 ### The coproduct type is merely truncated
 
-**Note.** The bound on the truncation level in the following proof is not
-optimal.
-
 ```agda
 abstract
   is-merely-trunc-coproduct :
@@ -312,6 +309,9 @@ abstract
             ( 2)
             ( is-trunc-right-max-𝕋 r k R)))
 ```
+
+Note that the bound on the truncation level in the preceding proof is not
+optimal.
 
 ### The type of equivalences between truncated types is truncated
 

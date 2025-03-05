@@ -157,4 +157,7 @@ pr2 (is-torsorial-Eq-𝕋 (succ-𝕋 m)) (succ-𝕋 n , e) =
 is-equiv-Eq-eq-𝕋 : {m n : 𝕋} → is-equiv (Eq-eq-𝕋 {m} {n})
 is-equiv-Eq-eq-𝕋 {m} {n} =
   fundamental-theorem-id (is-torsorial-Eq-𝕋 m) (λ y → Eq-eq-𝕋 {m} {y}) n
+
+extensionality-𝕋 : {m n : 𝕋} → (m ＝ n) ≃ Eq-𝕋 m n
+extensionality-𝕋 = (Eq-eq-𝕋 , is-equiv-Eq-eq-𝕋)
 ```

@@ -13,6 +13,8 @@ open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
+open import foundation.disjunction
+open import foundation.propositional-truncations
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-truncation-levels
@@ -26,6 +28,9 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import order-theory.posets
+open import order-theory.decidable-posets
+open import order-theory.decidable-total-orders
+open import order-theory.total-orders
 open import order-theory.preorders
 ```
 
@@ -127,16 +132,6 @@ antisymmetric-leq-𝕋 (succ-𝕋 m) (succ-𝕋 n) p q =
   ap succ-𝕋 (antisymmetric-leq-𝕋 m n p q)
 ```
 
-### The partially ordered set of truncation levels ordered by inequality
-
-```agda
-𝕋-Preorder : Preorder lzero lzero
-𝕋-Preorder = (𝕋 , leq-𝕋-Prop , refl-leq-𝕋 , transitive-leq-𝕋)
-
-𝕋-Poset : Poset lzero lzero
-𝕋-Poset = (𝕋-Preorder , antisymmetric-leq-𝕋)
-```
-
 ### For any two truncation levels we can decide which one is less than the other
 
 ```agda
@@ -145,6 +140,10 @@ linear-leq-𝕋 neg-two-𝕋 neg-two-𝕋 = inl star
 linear-leq-𝕋 neg-two-𝕋 (succ-𝕋 n) = inl star
 linear-leq-𝕋 (succ-𝕋 m) neg-two-𝕋 = inr star
 linear-leq-𝕋 (succ-𝕋 m) (succ-𝕋 n) = linear-leq-𝕋 m n
+
+abstract
+  is-total-leq-𝕋 : (m n : 𝕋) → disjunction-type (m ≤-𝕋 n) (n ≤-𝕋 m)
+  is-total-leq-𝕋 m n = unit-trunc-Prop (linear-leq-𝕋 m n)
 ```
 
 ### For any three truncation levels, there are three cases in how they can be ordered
@@ -266,4 +265,23 @@ example-not-reflects-leq-left-add-𝕋 = (star , id)
 
 not-reflects-leq-left-add-𝕋 : ¬ ((k m n : 𝕋) → (m +𝕋 k) ≤-𝕋 (n +𝕋 k) → m ≤-𝕋 n)
 not-reflects-leq-left-add-𝕋 α = α neg-two-𝕋 neg-one-𝕋 neg-two-𝕋 star
+```
+
+### The partially ordered set of truncation levels ordered by inequality
+
+```agda
+𝕋-Preorder : Preorder lzero lzero
+𝕋-Preorder = (𝕋 , leq-𝕋-Prop , refl-leq-𝕋 , transitive-leq-𝕋)
+
+𝕋-Poset : Poset lzero lzero
+𝕋-Poset = (𝕋-Preorder , antisymmetric-leq-𝕋)
+
+𝕋-Total-Order : Total-Order lzero lzero
+𝕋-Total-Order = (𝕋-Poset , is-total-leq-𝕋)
+
+𝕋-Decidable-Poset : Decidable-Poset lzero lzero
+𝕋-Decidable-Poset = (𝕋-Poset , is-decidable-leq-𝕋)
+
+𝕋-Decidable-Total-Order : Decidable-Total-Order lzero lzero
+𝕋-Decidable-Total-Order = (𝕋-Poset , is-total-leq-𝕋 , is-decidable-leq-𝕋)
 ```

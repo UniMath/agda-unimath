@@ -19,6 +19,12 @@ open import foundation.truncation-levels
 
 </details>
 
+## Idea
+
+We define the partial
+{{#concept "addition" Disambiguation="of truncation levels" Agda=add-𝕋 Agda=_+𝕋_}}
+binary operation on [truncation levels](foundation-core.truncation-levels.md).
+
 ## Definitions
 
 ### Addition of truncation levels
@@ -37,8 +43,7 @@ add-𝕋 : 𝕋 → 𝕋 → 𝕋
 add-𝕋 k r = add-𝕋' r k
 ```
 
-For some reason, Agda is not happy with the following definition due to the
-`--exact-split` flag.
+Agda is not happy with the following definition due to the `--exact-split` flag.
 
 ```text
 add-𝕋 : 𝕋 → 𝕋 → 𝕋
@@ -188,8 +193,3 @@ abstract
       ( balance-succ-add-𝕋 (succ-𝕋 x) (succ-𝕋 y) ∙
         commutative-add-𝕋 (succ-𝕋 x) (succ-𝕋 (succ-𝕋 y)))
 ```
-
-## See also
-
-- The commutative monoid of the natural numbers with addition is defined in
-  [`monoid-of-natural-numbers-with-addition`](elementary-number-theory.monoid-of-natural-numbers-with-addition.md).
