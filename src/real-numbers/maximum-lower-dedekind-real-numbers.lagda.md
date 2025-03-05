@@ -103,9 +103,10 @@ module _
           ( r<max))
 
   binary-max-lower-ℝ : lower-ℝ (l1 ⊔ l2)
-  pr1 binary-max-lower-ℝ = cut-binary-max-lower-ℝ
-  pr1 (pr2 binary-max-lower-ℝ) = is-inhabited-cut-binary-max-lower-ℝ
-  pr2 (pr2 binary-max-lower-ℝ) = is-rounded-cut-binary-max-lower-ℝ
+  binary-max-lower-ℝ =
+    cut-binary-max-lower-ℝ ,
+    is-inhabited-cut-binary-max-lower-ℝ ,
+    is-rounded-cut-binary-max-lower-ℝ
 ```
 
 ### Maximum of an inhabited family of lower reals
@@ -158,14 +159,15 @@ module _
           ( r∈max))
 
   max-lower-ℝ : lower-ℝ (l1 ⊔ l2)
-  pr1 max-lower-ℝ = cut-max-lower-ℝ
-  pr1 (pr2 max-lower-ℝ) = is-inhabited-cut-max-lower-ℝ
-  pr2 (pr2 max-lower-ℝ) = is-rounded-cut-max-lower-ℝ
+  max-lower-ℝ =
+    cut-max-lower-ℝ ,
+    is-inhabited-cut-max-lower-ℝ ,
+    is-rounded-cut-max-lower-ℝ
 ```
 
 ## Properties
 
-### The maximum of two lower reals is a least upper bound
+### The maximum is a least upper bound
 
 ```agda
 module _
@@ -188,7 +190,7 @@ module _
     max≤z p (inr-disjunction p<y)
 ```
 
-### The maximum of two reals is an upper bound
+### The maximum is an upper bound
 
 ```agda
   is-binary-upper-bound-binary-max-lower-ℝ :
@@ -205,7 +207,7 @@ module _
       is-least-binary-upper-bound-binary-max-lower-ℝ
 ```
 
-### The maximum of an inhabited family of lower reals is a least upper bound
+### The maximum of an inhabited family is a least upper bound
 
 ```agda
 module _

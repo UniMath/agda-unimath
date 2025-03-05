@@ -63,8 +63,8 @@ module _
   is-located-lower-upper-binary-max-ℝ p q p<q =
     elim-disjunction
       ( claim)
-      (λ p<x → inl-disjunction (inl-disjunction p<x))
-      (λ x<q →
+      ( λ p<x → inl-disjunction (inl-disjunction p<x))
+      ( λ x<q →
         elim-disjunction
           ( claim)
           ( λ p<y → inl-disjunction (inr-disjunction p<y))

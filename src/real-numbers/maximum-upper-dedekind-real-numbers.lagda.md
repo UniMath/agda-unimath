@@ -99,9 +99,10 @@ module _
           ( intro-exists p (p<q , y<p)))
 
   binary-max-upper-ℝ : upper-ℝ (l1 ⊔ l2)
-  pr1 binary-max-upper-ℝ = cut-binary-max-upper-ℝ
-  pr1 (pr2 binary-max-upper-ℝ) = is-inhabited-cut-binary-max-upper-ℝ
-  pr2 (pr2 binary-max-upper-ℝ) = is-rounded-cut-binary-max-upper-ℝ
+  binary-max-upper-ℝ =
+    cut-binary-max-upper-ℝ ,
+    is-inhabited-cut-binary-max-upper-ℝ ,
+    is-rounded-cut-binary-max-upper-ℝ
 ```
 
 ## Properties

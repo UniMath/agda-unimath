@@ -97,14 +97,15 @@ module _
           ( intro-exists r (q<r , q<y)))
 
   binary-min-lower-ℝ : lower-ℝ (l1 ⊔ l2)
-  pr1 binary-min-lower-ℝ = cut-binary-min-lower-ℝ
-  pr1 (pr2 binary-min-lower-ℝ) = is-inhabited-cut-binary-min-lower-ℝ
-  pr2 (pr2 binary-min-lower-ℝ) = is-rounded-cut-binary-min-lower-ℝ
+  binary-min-lower-ℝ =
+    cut-binary-min-lower-ℝ ,
+    is-inhabited-cut-binary-min-lower-ℝ ,
+    is-rounded-cut-binary-min-lower-ℝ
 ```
 
 ## Properties
 
-### The binary minimum is a greatest lower bound
+### The binary minimum of lower Dedekind real numbers is a greatest lower bound
 
 ```agda
   is-greatest-binary-lower-bound-binary-min-lower-ℝ :
@@ -120,7 +121,7 @@ module _
       ( cut-lower-ℝ z)
 ```
 
-### The lower Dedekind reals form a large meet-semilattice
+### The lower Dedekind real numbers form a large meet-semilattice
 
 ```agda
 has-meets-lower-ℝ : has-meets-Large-Poset lower-ℝ-Large-Poset

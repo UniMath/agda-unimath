@@ -44,9 +44,9 @@ The minimum of two
 [upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md) `x`,
 `y` is a upper Dedekind real number with cut equal to the union of the cuts of
 `x` and `y`. Unlike the case for the
-[minimum of upper Dedekind real numbers](real-numbers.minimum-upper-dedekind-real-numbers.md),
+[maximum of upper Dedekind real numbers](real-numbers.maximum-upper-dedekind-real-numbers.md),
 the minimum of any inhabited family of upper Dedekind real numbers, the upper
-Dedekind real number by taking the union of the cuts of every element of the
+Dedekind real number whose cut is union of the cuts of every element of the
 family, is also a upper Dedekind real number.
 
 ## Definition
@@ -103,12 +103,13 @@ module _
           ( r<min))
 
   binary-min-upper-ℝ : upper-ℝ (l1 ⊔ l2)
-  pr1 binary-min-upper-ℝ = cut-binary-min-upper-ℝ
-  pr1 (pr2 binary-min-upper-ℝ) = is-inhabited-cut-binary-min-upper-ℝ
-  pr2 (pr2 binary-min-upper-ℝ) = is-rounded-cut-binary-min-upper-ℝ
+  binary-min-upper-ℝ =
+    cut-binary-min-upper-ℝ ,
+    is-inhabited-cut-binary-min-upper-ℝ ,
+    is-rounded-cut-binary-min-upper-ℝ
 ```
 
-### Minimum of an inhabited family of upper reals
+### Minimum of an inhabited family of upper Dedekind real numbers
 
 ```agda
 module _
@@ -127,7 +128,7 @@ module _
       ( ∃ ℚ cut-min-upper-ℝ)
       ( λ a →
         map-tot-exists
-          ( λ q q∈Fa → intro-exists a q∈Fa)
+          ( λ _ → intro-exists a)
           ( is-inhabited-cut-upper-ℝ (F a)))
       ( H)
 
