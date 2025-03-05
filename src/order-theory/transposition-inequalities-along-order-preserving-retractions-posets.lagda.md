@@ -45,8 +45,9 @@ module _
   where
 
   leq-transpose-is-retraction-hom-Poset :
-    is-retraction f (map-hom-Poset Q P g) → (x : type-Poset P) (y : type-Poset Q) →
-    leq-Poset Q (f x) y → leq-Poset P x (map-hom-Poset Q P g y)
+    is-retraction f (map-hom-Poset Q P g) →
+    (x : type-Poset P) (y : type-Poset Q) → leq-Poset Q (f x) y →
+    leq-Poset P x (map-hom-Poset Q P g y)
   leq-transpose-is-retraction-hom-Poset f-retraction-g x y fx≤y =
     tr
       ( λ z → leq-Poset P z (map-hom-Poset Q P g y))
