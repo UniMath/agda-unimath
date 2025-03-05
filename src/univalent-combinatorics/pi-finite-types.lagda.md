@@ -108,7 +108,7 @@ pr2 (is-untruncated-π-finite-is-π-finite (succ-ℕ k) H) x y =
   is-untruncated-π-finite-is-π-finite k (pr2 H x y)
 ```
 
-### The subuniverse πₙ-finite types
+### The subuniverse of πₙ-finite types
 
 ```agda
 π-Finite-Type : (l : Level) (k : ℕ) → UU (lsuc l)
