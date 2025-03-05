@@ -430,8 +430,6 @@ module _
             xk = map-cauchy-sequence-cauchy-approximation-Metric-Space k
             m' = succ-nonzero-ℕ' m
             k' = succ-nonzero-ℕ' k
-            n'≤m' = tr (λ p → leq-ℕ⁺ p m') (is-section-succ-nonzero-ℕ' n') n≤m
-            n'≤k' = tr (λ p → leq-ℕ⁺ p k') (is-section-succ-nonzero-ℕ' n') n≤k
             1/m' = positive-reciprocal-rational-ℕ⁺ m'
             1/k' = positive-reciprocal-rational-ℕ⁺ k'
           in
@@ -450,8 +448,20 @@ module _
                   { rational-ℚ⁺ 1/n'}
                   { rational-ℚ⁺ 1/k'}
                   { rational-ℚ⁺ 1/n'}
-                  ( leq-reciprocal-rational-ℕ⁺ n' m' n'≤m')
-                  ( leq-reciprocal-rational-ℕ⁺ n' k' n'≤k'))
+                  ( leq-reciprocal-rational-ℕ⁺
+                    ( n')
+                    ( m')
+                    ( tr
+                      ( λ p → leq-ℕ⁺ p m')
+                      ( is-section-succ-nonzero-ℕ' n')
+                      ( n≤m)))
+                  ( leq-reciprocal-rational-ℕ⁺
+                    ( n')
+                    ( k')
+                    ( tr
+                      ( λ p → leq-ℕ⁺ p k')
+                      ( is-section-succ-nonzero-ℕ' n')
+                      ( n≤k))))
                 ( transitive-le-ℚ
                   ( rational-ℚ⁺ (1/n' +ℚ⁺ 1/n'))
                   ( ε' +ℚ ε')
