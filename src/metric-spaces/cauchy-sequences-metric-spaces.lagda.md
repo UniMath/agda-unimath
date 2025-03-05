@@ -104,6 +104,8 @@ module _
       ( ε⁺)
       ( map-cauchy-sequence-Metric-Space x m)
       ( map-cauchy-sequence-Metric-Space x k)
+  neighborhood-modulus-of-convergence-cauchy-sequence-Metric-Space
+    (x , is-cauchy-x) ε⁺ = pr2 (is-cauchy-x ε⁺)
 
   map-at-modulus-of-convergence-cauchy-sequence-Metric-Space :
     (x : cauchy-sequence-Metric-Space) (ε⁺ : ℚ⁺) → type-Metric-Space M
@@ -132,7 +134,6 @@ module _
         ( m)
         ( refl-leq-ℕ n)
         ( n≤m)
-
 ```
 
 ### Limits of arbitrary sequences
