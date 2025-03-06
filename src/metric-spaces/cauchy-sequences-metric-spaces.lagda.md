@@ -127,7 +127,7 @@ module _
     let
       n = modulus-of-convergence-cauchy-sequence-Metric-Space x ε⁺
     in
-      neighborhood-at-modulus-of-convergence-cauchy-sequence-Metric-Space
+      neighborhood-modulus-of-convergence-cauchy-sequence-Metric-Space
         ( x)
         ( ε⁺)
         ( n)
