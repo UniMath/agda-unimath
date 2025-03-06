@@ -310,6 +310,7 @@ module _
                   ( xmε)
                   ( neighborhood-at-modulus-of-convergence-cauchy-sequence-Metric-Space
                     ( M)
+                    ( x)
                     ( δ⁺)
                     ( mε)
                     ( mδ≤mε))))
