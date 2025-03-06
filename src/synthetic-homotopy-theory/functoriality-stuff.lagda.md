@@ -55,6 +55,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
+open import foundation.transposition-identifications-along-equivalences
 ```
 
 </details>
@@ -703,6 +704,45 @@ module _
 
 ```agda
 module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  (f : (a : A) → B a)
+  where
+
+  lemma :
+    {x y : A} (p : x ＝ y) →
+    apd f (inv p) ＝ inv (map-eq-transpose-equiv (equiv-tr B p) (apd f p))
+  lemma refl = inv (ap inv (compute-refl-eq-transpose-equiv (equiv-tr B refl)))
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
+  (f : A → B) (s : (b : B) → C b)
+  where
+
+  apd-left :
+    {x y : A} (p : x ＝ y) →
+    apd (s ∘ f) p ＝ inv (substitution-law-tr C f p) ∙ apd s (ap f p)
+  apd-left refl = refl
+
+  apd-left' :
+    {x y : A} (p : x ＝ y) →
+    substitution-law-tr C f p ∙ apd (s ∘ f) p ＝ apd s (ap f p)
+  apd-left' refl = refl
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  (s : (a : A) → B a) (f : {a : A} → B a → C a)
+  where
+
+  apd-right :
+    {x y : A} (p : x ＝ y) →
+    apd (f ∘ s) p ＝ inv (preserves-tr (λ a → f {a}) p (s x)) ∙ ap f (apd s p)
+  apd-right refl = refl
+```
+
+```agda
+module _
   {l1 l2 l3 l4 l5 : Level}
   {A : sequential-diagram l1} {X : UU l2}
   {c : cocone-sequential-diagram A X}
@@ -710,6 +750,9 @@ module _
   {B : sequential-diagram l3} {Y : UU l4}
   {c' : cocone-sequential-diagram B Y}
   (up-c' : universal-property-sequential-colimit c')
+  (let
+    dup-c' =
+      dependent-universal-property-universal-property-sequential-colimit _ up-c')
   (Q : Y → UU l5)
   (let Q' = descent-data-family-cocone-sequential-diagram c' Q)
   (f : hom-sequential-diagram A B)
@@ -720,14 +763,20 @@ module _
   (let f∞n = λ n a → tr Q (C n a))
   (s : section-descent-data-sequential-colimit Q')
   (let s∞ = sect-family-sect-dd-sequential-colimit up-c' Q s)
+  (let
+    𝒞 =
+      htpy-dependent-cocone-dependent-universal-property-sequential-colimit
+        ( dup-c')
+        ( s))
+  (let C' = htpy-htpy-dependent-cocone-sequential-diagram Q 𝒞)
   where
 
   private
-    abstract
-      γ :
+    opaque
+      γ-base :
         (n : ℕ) (a : family-sequential-diagram A n) →
         coherence-square-maps
-          ( tr (Q ∘ f∞) (coherence-cocone-sequential-diagram c n a))
+          ( tr Q (ap f∞ (coherence-cocone-sequential-diagram c n a)))
           ( f∞n n a)
           ( f∞n (succ-ℕ n) (map-sequential-diagram A n a))
           ( ( tr
@@ -736,7 +785,7 @@ module _
             ( tr Q
               ( coherence-cocone-sequential-diagram c' n
                 ( map-hom-sequential-diagram B f n a))))
-      γ n a q =
+      γ-base n a q =
         inv
           ( ( tr-concat
               ( C n a)
@@ -756,35 +805,50 @@ module _
         tr-concat
           ( ap f∞ (coherence-cocone-sequential-diagram c n a))
           ( C (succ-ℕ n) (map-sequential-diagram A n a))
-          ( q) ∙
+          ( q)
+
+      γ :
+        (n : ℕ) (a : family-sequential-diagram A n) →
+        coherence-square-maps
+          ( tr (Q ∘ f∞) (coherence-cocone-sequential-diagram c n a))
+          ( f∞n n a)
+          ( f∞n (succ-ℕ n) (map-sequential-diagram A n a))
+          ( ( tr
+              ( Q ∘ map-cocone-sequential-diagram c' (succ-ℕ n))
+              ( naturality-map-hom-sequential-diagram B f n a)) ∘
+            ( tr Q
+              ( coherence-cocone-sequential-diagram c' n
+                ( map-hom-sequential-diagram B f n a))))
+      γ n a q =
+        γ-base n a q ∙
         ap
           ( tr Q (C (succ-ℕ n) (map-sequential-diagram A n a)))
           ( substitution-law-tr Q f∞ (coherence-cocone-sequential-diagram c n a))
 
-    γ-flip :
-      (n : ℕ) (a : family-sequential-diagram A n) →
-      coherence-square-maps
-        ( ( tr
-            ( Q ∘ map-cocone-sequential-diagram c' (succ-ℕ n))
-            ( naturality-map-hom-sequential-diagram B f n a)) ∘
-          ( tr Q
-            ( coherence-cocone-sequential-diagram c' n
-              ( map-hom-sequential-diagram B f n a))))
-        ( tr Q (inv (C n a)))
-        ( tr Q (inv (C (succ-ℕ n) (map-sequential-diagram A n a))))
-        ( tr (Q ∘ f∞) (coherence-cocone-sequential-diagram c n a))
-    γ-flip n a =
-      vertical-inv-equiv-coherence-square-maps
-        ( tr (Q ∘ f∞) (coherence-cocone-sequential-diagram c n a))
-        ( equiv-tr Q (C n a))
-        ( equiv-tr Q (C (succ-ℕ n) (map-sequential-diagram A n a)))
-        ( ( tr
-            ( Q ∘ map-cocone-sequential-diagram c' (succ-ℕ n))
-            ( naturality-map-hom-sequential-diagram B f n a)) ∘
-          ( tr Q
-            ( coherence-cocone-sequential-diagram c' n
-              ( map-hom-sequential-diagram B f n a))))
-        ( γ n a)
+      γ-flip :
+        (n : ℕ) (a : family-sequential-diagram A n) →
+        coherence-square-maps
+          ( ( tr
+              ( Q ∘ map-cocone-sequential-diagram c' (succ-ℕ n))
+              ( naturality-map-hom-sequential-diagram B f n a)) ∘
+            ( tr Q
+              ( coherence-cocone-sequential-diagram c' n
+                ( map-hom-sequential-diagram B f n a))))
+          ( tr Q (inv (C n a)))
+          ( tr Q (inv (C (succ-ℕ n) (map-sequential-diagram A n a))))
+          ( tr (Q ∘ f∞) (coherence-cocone-sequential-diagram c n a))
+      γ-flip n a =
+        vertical-inv-equiv-coherence-square-maps
+          ( tr (Q ∘ f∞) (coherence-cocone-sequential-diagram c n a))
+          ( equiv-tr Q (C n a))
+          ( equiv-tr Q (C (succ-ℕ n) (map-sequential-diagram A n a)))
+          ( ( tr
+              ( Q ∘ map-cocone-sequential-diagram c' (succ-ℕ n))
+              ( naturality-map-hom-sequential-diagram B f n a)) ∘
+            ( tr Q
+              ( coherence-cocone-sequential-diagram c' n
+                ( map-hom-sequential-diagram B f n a))))
+          ( γ n a)
 
   comp-over-diagram :
     section-descent-data-sequential-colimit
@@ -825,8 +889,11 @@ module _
       ( section-descent-data-section-family-cocone-sequential-colimit c P
         ( s∞ ∘ f∞))
       ( comp-over-diagram)
-  pr1 lemma-1-2 n a = {!!}
-  pr2 lemma-1-2 = {!!}
+  pr1 lemma-1-2 n a =
+    map-eq-transpose-equiv
+      ( equiv-tr Q (C n a))
+      ( apd s∞ (C n a) ∙ C' n (map-hom-sequential-diagram B f n a))
+  pr2 lemma-1-2 n a = {!!}
 
   lemma-1 :
     s∞ ∘ f∞ ~ sect-family-sect-dd-sequential-colimit up-c P comp-over-diagram
@@ -867,61 +934,64 @@ module _
         ( λ {a} → γ n a))
     where
 
-    lemma-2 : htpy-section-dependent-sequential-diagram t comp-over-diagram
-    pr1 lemma-2 n =
-      invert-fiberwise-triangle
-        ( map-section-dependent-sequential-diagram _ _ t n)
-        ( map-section-dependent-sequential-diagram _ _ s n ∘ map-hom-sequential-diagram B f n)
-        ( λ a → equiv-tr Q (C n a))
-        ( F n)
-    pr2 lemma-2 n a =
-      flop-section
-        ( map-sequential-diagram A n)
-        ( map-hom-sequential-diagram B f n)
-        ( map-hom-sequential-diagram B f (succ-ℕ n))
-        ( map-sequential-diagram B n)
-        ( λ {a} → tr (Q ∘ f∞) (coherence-cocone-sequential-diagram c n a))
-        ( λ a → equiv-tr Q (C n a))
-        ( λ a → equiv-tr Q (C (succ-ℕ n) a))
-        ( λ {b} → tr Q (coherence-cocone-sequential-diagram c' n b))
-        ( map-section-dependent-sequential-diagram _ _ t n)
-        ( map-section-dependent-sequential-diagram _ _ s n)
-        ( map-section-dependent-sequential-diagram _ _ t (succ-ℕ n))
-        ( map-section-dependent-sequential-diagram _ _ s (succ-ℕ n))
-        ( naturality-map-section-dependent-sequential-diagram _ _ t n)
-        ( F n)
-        ( F (succ-ℕ n))
-        ( naturality-map-section-dependent-sequential-diagram _ _ s n)
-        ( naturality-map-hom-sequential-diagram B f n)
-        ( λ {a} → γ n a)
-        ( cubes n)
-        ( a) ∙
-      assoc _ _ _ ∙
-      ap
-        ( ap
-          ( tr P (coherence-cocone-sequential-diagram c n a))
-          ( pr1 lemma-2 n a) ∙
-          γ-flip n a (map-section-dependent-sequential-diagram _ _ s n (map-hom-sequential-diagram B f n a)) ∙_)
-        ( ( ap
-            ( _∙
-              ap
+    opaque
+      unfolding γ-flip
+
+      lemma-2 : htpy-section-dependent-sequential-diagram t comp-over-diagram
+      pr1 lemma-2 n =
+        invert-fiberwise-triangle
+          ( map-section-dependent-sequential-diagram _ _ t n)
+          ( map-section-dependent-sequential-diagram _ _ s n ∘ map-hom-sequential-diagram B f n)
+          ( λ a → equiv-tr Q (C n a))
+          ( F n)
+      pr2 lemma-2 n a =
+        flop-section
+          ( map-sequential-diagram A n)
+          ( map-hom-sequential-diagram B f n)
+          ( map-hom-sequential-diagram B f (succ-ℕ n))
+          ( map-sequential-diagram B n)
+          ( λ {a} → tr (Q ∘ f∞) (coherence-cocone-sequential-diagram c n a))
+          ( λ a → equiv-tr Q (C n a))
+          ( λ a → equiv-tr Q (C (succ-ℕ n) a))
+          ( λ {b} → tr Q (coherence-cocone-sequential-diagram c' n b))
+          ( map-section-dependent-sequential-diagram _ _ t n)
+          ( map-section-dependent-sequential-diagram _ _ s n)
+          ( map-section-dependent-sequential-diagram _ _ t (succ-ℕ n))
+          ( map-section-dependent-sequential-diagram _ _ s (succ-ℕ n))
+          ( naturality-map-section-dependent-sequential-diagram _ _ t n)
+          ( F n)
+          ( F (succ-ℕ n))
+          ( naturality-map-section-dependent-sequential-diagram _ _ s n)
+          ( naturality-map-hom-sequential-diagram B f n)
+          ( λ {a} → γ n a)
+          ( cubes n)
+          ( a) ∙
+        assoc _ _ _ ∙
+        ap
+          ( ap
+            ( tr P (coherence-cocone-sequential-diagram c n a))
+            ( pr1 lemma-2 n a) ∙
+            γ-flip n a (map-section-dependent-sequential-diagram _ _ s n (map-hom-sequential-diagram B f n a)) ∙_)
+          ( ( ap
+              ( _∙
+                ap
+                  ( tr Q (inv (C (succ-ℕ n) (map-sequential-diagram A n a))))
+                  ( apd
+                    ( map-section-dependent-sequential-diagram _ _ s (succ-ℕ n))
+                    ( naturality-map-hom-sequential-diagram B f n a)))
+              ( ap-comp
                 ( tr Q (inv (C (succ-ℕ n) (map-sequential-diagram A n a))))
-                ( apd
-                  ( map-section-dependent-sequential-diagram _ _ s (succ-ℕ n))
-                  ( naturality-map-hom-sequential-diagram B f n a)))
-            ( ap-comp
-              ( tr Q (inv (C (succ-ℕ n) (map-sequential-diagram A n a))))
-              ( tr
-                ( Q ∘ map-cocone-sequential-diagram c' (succ-ℕ n))
-                ( naturality-map-hom-sequential-diagram B f n a))
-              ( naturality-map-section-dependent-sequential-diagram _ _ s n
-                ( map-hom-sequential-diagram B f n a)))) ∙
-          inv
-          ( ( ap-concat
-              ( tr Q (inv (C (succ-ℕ n) (map-sequential-diagram A n a))))
-              ( _)
-              ( _)))) ∙
-      assoc _ _ _
+                ( tr
+                  ( Q ∘ map-cocone-sequential-diagram c' (succ-ℕ n))
+                  ( naturality-map-hom-sequential-diagram B f n a))
+                ( naturality-map-section-dependent-sequential-diagram _ _ s n
+                  ( map-hom-sequential-diagram B f n a)))) ∙
+            inv
+            ( ( ap-concat
+                ( tr Q (inv (C (succ-ℕ n) (map-sequential-diagram A n a))))
+                ( _)
+                ( _)))) ∙
+        assoc _ _ _
 
     theorem : t∞ ~ s∞ ∘ f∞
     theorem =
