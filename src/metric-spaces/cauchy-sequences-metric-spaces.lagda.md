@@ -293,6 +293,7 @@ module _
                   ( M)
                   ( x)
                   ( ε⁺)
+                  ( mδ)
                   ( mε≤mδ)))
             ( λ mδ≤mε →
               is-monotonic-structure-Metric-Space
