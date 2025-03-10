@@ -29,6 +29,7 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
 open import foundation.postcomposition-pullbacks
@@ -37,6 +38,7 @@ open import foundation.precomposition-functions
 open import foundation.products-pullbacks
 open import foundation.propositions
 open import foundation.pullbacks
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
@@ -51,6 +53,10 @@ open import foundation.whiskering-homotopies-composition
 open import orthogonal-factorization-systems.lifting-structures-on-squares
 open import orthogonal-factorization-systems.pullback-hom
 open import orthogonal-factorization-systems.types-local-at-maps
+
+open import synthetic-homotopy-theory.cocartesian-morphisms-arrows
+open import synthetic-homotopy-theory.pullback-property-pushouts
+open import synthetic-homotopy-theory.pushouts
 ```
 
 </details>
@@ -426,19 +432,40 @@ module _
         ( ( commutative-htpy-postcomp-htpy-precomp F G) ∙h
           ( inv-htpy-right-unit-htpy)))
 
-  is-orthogonal-pullback-condition-htpy-left :
-    {f' : A → B} → f ~ f' →
-    is-orthogonal-pullback-condition f g →
-    is-orthogonal-pullback-condition f' g
-  is-orthogonal-pullback-condition-htpy-left F =
-    is-orthogonal-pullback-condition-htpy F refl-htpy
+  abstract
+    is-orthogonal-pullback-condition-htpy-left :
+      {f' : A → B} → f ~ f' →
+      is-orthogonal-pullback-condition f g →
+      is-orthogonal-pullback-condition f' g
+    is-orthogonal-pullback-condition-htpy-left F =
+      is-orthogonal-pullback-condition-htpy F refl-htpy
 
-  is-orthogonal-pullback-condition-htpy-right :
-    {g' : X → Y} → g ~ g' →
-    is-orthogonal-pullback-condition f g →
-    is-orthogonal-pullback-condition f g'
-  is-orthogonal-pullback-condition-htpy-right =
-    is-orthogonal-pullback-condition-htpy refl-htpy
+  abstract
+    is-orthogonal-pullback-condition-htpy-right :
+      {g' : X → Y} → g ~ g' →
+      is-orthogonal-pullback-condition f g →
+      is-orthogonal-pullback-condition f g'
+    is-orthogonal-pullback-condition-htpy-right =
+      is-orthogonal-pullback-condition-htpy refl-htpy
+
+  abstract
+    is-orthogonal-htpy :
+      {f' : A → B} {g' : X → Y} → f ~ f' → g ~ g' →
+      is-orthogonal f g → is-orthogonal f' g'
+    is-orthogonal-htpy {f'} {g'} F G H =
+      is-orthogonal-is-orthogonal-pullback-condition f' g'
+        ( is-orthogonal-pullback-condition-htpy F G
+          ( is-orthogonal-pullback-condition-is-orthogonal f g H))
+
+  abstract
+    is-orthogonal-htpy-left :
+      {f' : A → B} → f ~ f' → is-orthogonal f g → is-orthogonal f' g
+    is-orthogonal-htpy-left F = is-orthogonal-htpy F refl-htpy
+
+  abstract
+    is-orthogonal-htpy-right :
+      {g' : X → Y} → g ~ g' → is-orthogonal f g → is-orthogonal f g'
+    is-orthogonal-htpy-right = is-orthogonal-htpy refl-htpy
 ```
 
 ### Equivalences are orthogonal to every map
@@ -698,6 +725,70 @@ module _
         ( is-orthogonal-pullback-condition-is-orthogonal (h ∘ f) g HF))
 ```
 
+### Orthogonality is preserved by equivalences of maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {A' : UU l3} {B' : UU l4} {X : UU l5} {Y : UU l6}
+  {f : A → B} {f' : A' → B'}
+  where
+
+  abstract
+    is-orthogonal-left-equiv-arrow :
+      equiv-arrow f f' → (g : X → Y) → is-orthogonal f g → is-orthogonal f' g
+    is-orthogonal-left-equiv-arrow α g F =
+      is-orthogonal-htpy-left
+        ( map-codomain-equiv-arrow f f' α ∘
+          f ∘
+          map-inv-domain-equiv-arrow f f' α)
+        ( g)
+        ( ( coh-equiv-arrow f f' α ·r map-inv-domain-equiv-arrow f f' α) ∙h
+          ( f' ·l is-section-map-inv-equiv (equiv-domain-equiv-arrow f f' α)))
+        ( is-orthogonal-left-comp
+          ( f ∘ map-inv-domain-equiv-arrow f f' α)
+          ( map-codomain-equiv-arrow f f' α)
+          ( g)
+          ( is-orthogonal-left-comp
+            ( map-inv-domain-equiv-arrow f f' α)
+            ( f)
+            ( g)
+            ( is-orthogonal-equiv-left (equiv-domain-inv-equiv-arrow f f' α) g)
+            ( F))
+          ( is-orthogonal-equiv-left (equiv-codomain-equiv-arrow f f' α) g))
+
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {X' : UU l5} {Y' : UU l6}
+  (f : A → B) {g : X → Y} {g' : X' → Y'}
+  where
+
+  abstract
+    is-orthogonal-right-equiv-arrow :
+      equiv-arrow g g' → is-orthogonal f g → is-orthogonal f g'
+    is-orthogonal-right-equiv-arrow α G =
+      is-orthogonal-htpy-right
+        ( f)
+        ( map-codomain-equiv-arrow g g' α ∘
+          g ∘
+          map-inv-domain-equiv-arrow g g' α)
+        ( ( coh-equiv-arrow g g' α ·r map-inv-domain-equiv-arrow g g' α) ∙h
+          ( g' ·l is-section-map-inv-equiv (equiv-domain-equiv-arrow g g' α)))
+        ( is-orthogonal-right-comp
+          ( f)
+          ( g ∘ map-inv-domain-equiv-arrow g g' α)
+          ( map-codomain-equiv-arrow g g' α)
+          ( is-orthogonal-equiv-right f (equiv-codomain-equiv-arrow g g' α))
+          ( is-orthogonal-right-comp
+            ( f)
+            ( map-inv-domain-equiv-arrow g g' α)
+            ( g)
+            ( G)
+            ( is-orthogonal-equiv-right
+              ( f)
+              ( equiv-domain-inv-equiv-arrow g g' α))))
+```
+
 ### Right orthogonality is preserved by dependent products
 
 If `f ⊥ gᵢ`, for each `i : I`, then `f ⊥ (map-Π g)`.
@@ -912,10 +1003,10 @@ module _
   (f : (i : I) → A i → B i) (g : X → Y)
   where
 
-  is-orthogonal-pullback-condition-left-Σ :
+  is-orthogonal-pullback-condition-left-tot :
     ((i : I) → is-orthogonal-pullback-condition (f i) g) →
     is-orthogonal-pullback-condition (tot f) g
-  is-orthogonal-pullback-condition-left-Σ F =
+  is-orthogonal-pullback-condition-left-tot F =
     is-pullback-top-is-pullback-bottom-cube-is-equiv
       ( map-Π (λ i → postcomp (B i) g))
       ( map-Π (λ i → precomp (f i) X))
@@ -951,12 +1042,54 @@ module _
         ( λ i → cone-pullback-hom (f i) g)
         ( F))
 
-  is-orthogonal-left-Σ :
+  is-orthogonal-left-tot :
     ((i : I) → is-orthogonal (f i) g) → is-orthogonal (tot f) g
-  is-orthogonal-left-Σ F =
+  is-orthogonal-left-tot F =
     is-orthogonal-is-orthogonal-pullback-condition (tot f) g
-      ( is-orthogonal-pullback-condition-left-Σ
+      ( is-orthogonal-pullback-condition-left-tot
         ( λ i → is-orthogonal-pullback-condition-is-orthogonal (f i) g (F i)))
+```
+
+### Left orthogonality is preserved by products
+
+If `f ⊥ g` and `f' ⊥ g`, then `(f × f') ⊥ g`.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-orthogonal-left-map-right-product :
+    {l5 : Level} (C : UU l5) →
+    is-orthogonal f g → is-orthogonal (map-product (id' C) f) g
+  is-orthogonal-left-map-right-product C F =
+    is-orthogonal-left-tot (λ _ → f) g (λ _ → F)
+
+  is-orthogonal-left-map-left-product :
+    {l5 : Level} (C : UU l5) →
+    is-orthogonal f g → is-orthogonal (map-product f (id' C)) g
+  is-orthogonal-left-map-left-product C F =
+    is-orthogonal-left-equiv-arrow
+      ( commutative-product , commutative-product , refl-htpy)
+      ( g)
+      ( is-orthogonal-left-map-right-product C F)
+
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {A' : UU l3} {B' : UU l4} {X : UU l5} {Y : UU l6}
+  (f : A → B) (f' : A' → B') (g : X → Y)
+  where
+
+  is-orthogonal-left-product :
+    is-orthogonal f g → is-orthogonal f' g → is-orthogonal (map-product f f') g
+  is-orthogonal-left-product F F' =
+    is-orthogonal-left-comp
+      ( map-product f id)
+      ( map-product id f')
+      ( g)
+      ( is-orthogonal-left-map-left-product f g A' F)
+      ( is-orthogonal-left-map-right-product f' g B F')
 ```
 
 ### Left orthogonality is preserved by coproducts
@@ -966,7 +1099,7 @@ If `f ⊥ g` and `f' ⊥ g`, then `(f + f') ⊥ g`.
 **Proof:** We need to show that the square
 
 ```text
-                     - ∘ (f + f')
+                   - ∘ (f + f')
   ((B + B') → X) ---------------> ((A + A') → X)
         |                               |
         |                               |
@@ -1112,6 +1245,94 @@ module _
     is-orthogonal-is-orthogonal-pullback-condition f g'
       ( is-orthogonal-pullback-condition-right-base-change
         ( is-orthogonal-pullback-condition-is-orthogonal f g G))
+```
+
+### Left orthogonality is preserved under cobase change
+
+Given a pushout square
+
+```text
+    A ------> A'
+    |         |
+  f'|         | f'
+    ∨       ⌜ ∨
+    B ------> B',
+```
+
+if `f ⊥ g`, then `f' ⊥ g`.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {A' : UU l5} {B' : UU l6}
+  (f : A → B) (f' : A' → B') (g : X → Y) (α : cocartesian-hom-arrow f f')
+  where
+
+  abstract
+    is-orthogonal-pullback-condition-left-cobase-change :
+      is-orthogonal-pullback-condition f g →
+      is-orthogonal-pullback-condition f' g
+    is-orthogonal-pullback-condition-left-cobase-change F =
+      is-pullback-swap-cone
+        ( postcomp A' g)
+        ( precomp f' Y)
+        ( precomp f' X , postcomp B' g , refl-htpy)
+        ( is-pullback-back-left-is-pullback-back-right-cube
+          ( refl-htpy)
+          ( refl-htpy)
+          ( inv-htpy (htpy-precomp (coh-cocartesian-hom-arrow f f' α) X))
+          ( inv-htpy (htpy-precomp (coh-cocartesian-hom-arrow f f' α) Y))
+          ( refl-htpy)
+          ( refl-htpy)
+          ( right-unit-htpy ∙h
+            ( inv ·l
+              commutative-postcomp-htpy-precomp g
+                ( coh-cocartesian-hom-arrow f f' α)) ∙h
+            ( inv-htpy
+              ( left-whisker-inv-htpy
+                ( postcomp A g)
+                ( htpy-precomp (coh-cocartesian-hom-arrow f f' α) X))) ∙h
+            ( inv-htpy-right-unit-htpy))
+          ( is-pullback-swap-cone
+            ( precomp f Y)
+            ( precomp (map-domain-cocartesian-hom-arrow f f' α) Y)
+            ( cone-hom-arrow
+              ( precomp (map-codomain-cocartesian-hom-arrow f f' α) Y)
+              ( precomp (map-domain-cocartesian-hom-arrow f f' α) Y)
+              ( transpose-precomp-hom-arrow f f'
+                ( hom-arrow-cocartesian-hom-arrow f f' α)
+                ( Y)))
+            ( pullback-property-pushout-is-pushout
+              ( f)
+              ( map-domain-cocartesian-hom-arrow f f' α)
+              ( cocone-cocartesian-hom-arrow f f' α)
+              ( is-cocartesian-cocartesian-hom-arrow f f' α)
+              ( Y)))
+          ( is-pullback-swap-cone
+            ( precomp f Y)
+            ( postcomp A g)
+            ( cone-pullback-hom f g)
+            ( F))
+          ( is-pullback-swap-cone
+            ( precomp f X)
+            ( precomp (map-domain-cocartesian-hom-arrow f f' α) X)
+            ( cone-hom-arrow
+              ( precomp (map-codomain-cocartesian-hom-arrow f f' α) X)
+              ( precomp (map-domain-cocartesian-hom-arrow f f' α) X)
+              ( transpose-precomp-hom-arrow f f'
+                ( hom-arrow-cocartesian-hom-arrow f f' α)
+                ( X)))
+            ( pullback-property-pushout-is-pushout f
+              ( map-domain-cocartesian-hom-arrow f f' α)
+              ( cocone-cocartesian-hom-arrow f f' α)
+              ( is-cocartesian-cocartesian-hom-arrow f f' α) X)))
+
+    is-orthogonal-left-cobase-change :
+      is-orthogonal f g → is-orthogonal f' g
+    is-orthogonal-left-cobase-change F =
+      is-orthogonal-is-orthogonal-pullback-condition f' g
+        ( is-orthogonal-pullback-condition-left-cobase-change
+          ( is-orthogonal-pullback-condition-is-orthogonal f g F))
 ```
 
 ### A type is `f`-local if and only if its terminal map is `f`-orthogonal

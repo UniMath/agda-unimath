@@ -9,6 +9,7 @@
 ```agda
 module orthogonal-factorization-systems where
 
+open import orthogonal-factorization-systems.anodyne-maps public
 open import orthogonal-factorization-systems.cd-structures public
 open import orthogonal-factorization-systems.cellular-maps public
 open import orthogonal-factorization-systems.closed-modalities public
