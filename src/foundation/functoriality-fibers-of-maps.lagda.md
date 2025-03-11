@@ -103,6 +103,41 @@ module _
   pr1 hom-arrow-fiber = map-domain-hom-arrow-fiber
   pr1 (pr2 hom-arrow-fiber) = map-codomain-hom-arrow-fiber
   pr2 (pr2 hom-arrow-fiber) = coh-hom-arrow-fiber
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : hom-arrow f g) (b : B)
+  where
+
+  map-domain-hom-arrow-fiber' :
+    fiber' f b → fiber' g (map-codomain-hom-arrow f g α b)
+  map-domain-hom-arrow-fiber' =
+    map-Σ _
+      ( map-domain-hom-arrow f g α)
+      ( λ a p → ap (map-codomain-hom-arrow f g α) p ∙ coh-hom-arrow f g α a)
+
+  map-fiber' :
+    fiber' f b → fiber' g (map-codomain-hom-arrow f g α b)
+  map-fiber' = map-domain-hom-arrow-fiber'
+
+  map-codomain-hom-arrow-fiber' : A → X
+  map-codomain-hom-arrow-fiber' = map-domain-hom-arrow f g α
+
+  coh-hom-arrow-fiber' :
+    coherence-square-maps
+      ( map-domain-hom-arrow-fiber')
+      ( inclusion-fiber' f)
+      ( inclusion-fiber' g)
+      ( map-domain-hom-arrow f g α)
+  coh-hom-arrow-fiber' = refl-htpy
+
+  hom-arrow-fiber' :
+    hom-arrow
+      ( inclusion-fiber' f {b})
+      ( inclusion-fiber' g {map-codomain-hom-arrow f g α b})
+  pr1 hom-arrow-fiber' = map-domain-hom-arrow-fiber'
+  pr1 (pr2 hom-arrow-fiber') = map-codomain-hom-arrow-fiber'
+  pr2 (pr2 hom-arrow-fiber') = coh-hom-arrow-fiber'
 ```
 
 ### Any cone induces a family of maps between the fibers of the vertical maps
@@ -121,6 +156,15 @@ module _
       ( g)
       ( hom-arrow-cone f g c)
       ( a)
+
+  map-fiber-vertical-map-cone' :
+    fiber' (vertical-map-cone f g c) a → fiber' g (f a)
+  map-fiber-vertical-map-cone' =
+    map-domain-hom-arrow-fiber'
+      ( vertical-map-cone f g c)
+      ( g)
+      ( hom-arrow-cone f g c)
+      ( a)
 ```
 
 ### Any cone induces a family of maps between the fibers of the vertical maps
@@ -135,6 +179,15 @@ module _
     fiber (horizontal-map-cone f g c) b → fiber f (g b)
   map-fiber-horizontal-map-cone =
     map-domain-hom-arrow-fiber
+      ( horizontal-map-cone f g c)
+      ( f)
+      ( hom-arrow-cone' f g c)
+      ( b)
+
+  map-fiber-horizontal-map-cone' :
+    fiber' (horizontal-map-cone f g c) b → fiber' f (g b)
+  map-fiber-horizontal-map-cone' =
+    map-domain-hom-arrow-fiber'
       ( horizontal-map-cone f g c)
       ( f)
       ( hom-arrow-cone' f g c)
