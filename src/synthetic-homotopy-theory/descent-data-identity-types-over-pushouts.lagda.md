@@ -66,7 +66,7 @@ module _
   family-cocone-identity-type-pushout : X → UU l4
   family-cocone-identity-type-pushout x = x₀ ＝ x
 
-  descent-data-identity-type-pushout : descent-data-pushout 𝒮 l4
+  descent-data-identity-type-pushout : descent-data-pushout 𝒮 l4 l4
   pr1 descent-data-identity-type-pushout a =
     x₀ ＝ horizontal-map-cocone _ _ c a
   pr1 (pr2 descent-data-identity-type-pushout) b =
@@ -85,7 +85,7 @@ module _
     tr-Id-right (coherence-square-cocone _ _ c s)
 
   family-with-descent-data-identity-type-pushout :
-    family-with-descent-data-pushout c l4
+    family-with-descent-data-pushout c l4 l4 l4
   pr1 family-with-descent-data-identity-type-pushout =
     family-cocone-identity-type-pushout
   pr1 (pr2 family-with-descent-data-identity-type-pushout) =

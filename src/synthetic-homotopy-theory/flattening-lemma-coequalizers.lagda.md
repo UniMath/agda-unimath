@@ -137,7 +137,7 @@ module _
       universal-property-coequalizer-universal-property-pushout
         ( double-arrow-flattening-lemma-coequalizer a P e)
         ( cofork-flattening-lemma-coequalizer a P e)
-        ( universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv
+        ( universal-property-pushout-bottom-universal-property-pushout-top-cube-equiv
           ( vertical-map-span-cocone-cofork
             ( double-arrow-flattening-lemma-coequalizer a P e))
           ( horizontal-map-span-cocone-cofork
@@ -166,16 +166,15 @@ module _
             ( vertical-map-span-cocone-cofork a)
             ( horizontal-map-span-cocone-cofork a)
             ( cocone-codiagonal-cofork a e))
-          ( map-equiv
-            ( right-distributive-Σ-coproduct
-              ( domain-double-arrow a)
-              ( domain-double-arrow a)
-              ( ( P) ∘
-                ( horizontal-map-cocone-cofork a e) ∘
-                ( vertical-map-span-cocone-cofork a))))
-          ( id)
-          ( id)
-          ( id)
+          ( right-distributive-Σ-coproduct
+            ( domain-double-arrow a)
+            ( domain-double-arrow a)
+            ( ( P) ∘
+              ( horizontal-map-cocone-cofork a e) ∘
+              ( vertical-map-span-cocone-cofork a)))
+          ( id-equiv)
+          ( id-equiv)
+          ( id-equiv)
           ( coherence-square-cocone-flattening-pushout P
             ( vertical-map-span-cocone-cofork a)
             ( horizontal-map-span-cocone-cofork a)
@@ -191,16 +190,6 @@ module _
             ( ind-coproduct _
               ( ev-pair refl-htpy)
               ( ev-pair (λ t → ap-id _ ∙ inv right-unit))))
-          ( is-equiv-map-equiv
-            ( right-distributive-Σ-coproduct
-              ( domain-double-arrow a)
-              ( domain-double-arrow a)
-              ( ( P) ∘
-                ( horizontal-map-cocone-cofork a e) ∘
-                ( vertical-map-span-cocone-cofork a))))
-          ( is-equiv-id)
-          ( is-equiv-id)
-          ( is-equiv-id)
           ( flattening-lemma-pushout P
             ( vertical-map-span-cocone-cofork a)
             ( horizontal-map-span-cocone-cofork a)

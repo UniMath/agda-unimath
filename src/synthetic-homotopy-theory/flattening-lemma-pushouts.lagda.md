@@ -154,8 +154,8 @@ data for the pushout.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4)
+  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4 l5)
   where
 
   vertical-map-span-flattening-descent-data-pushout :
@@ -178,17 +178,18 @@ module _
       ( λ s → map-equiv (pr2 (pr2 P) s))
 
   span-diagram-flattening-descent-data-pushout :
-    span-diagram (l1 ⊔ l4) (l2 ⊔ l4) (l3 ⊔ l4)
+    span-diagram (l1 ⊔ l4) (l2 ⊔ l5) (l3 ⊔ l4)
   span-diagram-flattening-descent-data-pushout =
     make-span-diagram
       ( vertical-map-span-flattening-descent-data-pushout)
       ( horizontal-map-span-flattening-descent-data-pushout)
 
 module _
-  { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  { l1 l2 l3 l4 l5 l6 l7 : Level}
+  {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   ( f : S → A) (g : S → B) (c : cocone f g X)
-  ( P : descent-data-pushout (make-span-diagram f g) l5)
-  ( Q : X → UU l5)
+  ( P : descent-data-pushout (make-span-diagram f g) l5 l6)
+  ( Q : X → UU l7)
   ( e :
     equiv-descent-data-pushout P (descent-data-family-cocone-span-diagram c Q))
   where
@@ -354,10 +355,11 @@ descent data.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  { l1 l2 l3 l4 l5 l6 l7 : Level}
+  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   ( f : S → A) (g : S → B) (c : cocone f g X)
-  ( P : descent-data-pushout (make-span-diagram f g) l5)
-  ( Q : X → UU l5)
+  ( P : descent-data-pushout (make-span-diagram f g) l5 l6)
+  ( Q : X → UU l7)
   ( e :
     equiv-descent-data-pushout P (descent-data-family-cocone-span-diagram c Q))
   where
@@ -408,7 +410,7 @@ module _
     flattening-lemma-descent-data-pushout :
       flattening-lemma-descent-data-pushout-statement f g c P Q e
     flattening-lemma-descent-data-pushout up-c =
-      universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
+      universal-property-pushout-top-universal-property-pushout-bottom-cube-equiv
         ( vertical-map-span-flattening-pushout Q f g c)
         ( horizontal-map-span-flattening-pushout Q f g c)
         ( horizontal-map-cocone-flattening-pushout Q f g c)
@@ -417,10 +419,10 @@ module _
         ( horizontal-map-span-flattening-descent-data-pushout P)
         ( horizontal-map-cocone-flattening-descent-data-pushout f g c P Q e)
         ( vertical-map-cocone-flattening-descent-data-pushout f g c P Q e)
-        ( tot (λ s → map-equiv (pr1 e (f s))))
-        ( tot (λ a → map-equiv (pr1 e a)))
-        ( tot (λ b → map-equiv (pr1 (pr2 e) b)))
-        ( id)
+        ( equiv-tot (pr1 e ∘ f))
+        ( equiv-tot (pr1 e))
+        ( equiv-tot (pr1 (pr2 e)))
+        ( id-equiv)
         ( coherence-square-cocone-flattening-descent-data-pushout f g c P Q e)
         ( refl-htpy)
         ( htpy-map-Σ
@@ -433,12 +435,5 @@ module _
         ( refl-htpy)
         ( coherence-square-cocone-flattening-pushout Q f g c)
         ( coherence-cube-flattening-lemma-descent-data-pushout)
-        ( is-equiv-tot-is-fiberwise-equiv
-          ( λ s → is-equiv-map-equiv (pr1 e (f s))))
-        ( is-equiv-tot-is-fiberwise-equiv
-          ( λ a → is-equiv-map-equiv (pr1 e a)))
-        ( is-equiv-tot-is-fiberwise-equiv
-          ( λ b → is-equiv-map-equiv (pr1 (pr2 e) b)))
-        ( is-equiv-id)
         ( flattening-lemma-pushout Q f g c up-c)
 ```
