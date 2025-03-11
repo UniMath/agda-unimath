@@ -348,7 +348,7 @@ assumption, so the right map has a section.
               ( family-cocone-family-with-descent-data-pushout P)
               ( inv-equiv-descent-data-family-with-descent-data-pushout P)
               ( up-c))
-            (  R)
+            ( R)
 ```
 
 ### The canonical descent data for families of identity types is an identity system
