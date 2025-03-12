@@ -22,7 +22,8 @@ body {
 }
 
 pre,
-code {
+code,
+.code {
   font-family: var(--mono-font) !important;
   font-size: var(--code-font-size) !important;
 }

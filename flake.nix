@@ -32,6 +32,7 @@
             pybtex
             requests
             tomli
+            setuptools
             graphviz
           ]);
 
