@@ -998,4 +998,75 @@ module _
             ( h' , k' , top)
             ( up-top)
             ( W)))
+
+module _
+  { l1 l2 l3 l4 l1' l2' l3' l4' : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  ( f : A → B) (g : A → C) (h : B → D) (k : C → D)
+  { A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
+  ( f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
+  ( hA : A' ≃ A) (hB : B' ≃ B) (hC : C' ≃ C) (hD : D' ≃ D)
+  ( top : coherence-square-maps g' f' k' h')
+  ( back-left : coherence-square-maps f' (map-equiv hA) (map-equiv hB) f)
+  ( back-right : coherence-square-maps g' (map-equiv hA) (map-equiv hC) g)
+  ( front-left : coherence-square-maps h' (map-equiv hB) (map-equiv hD) h)
+  ( front-right : coherence-square-maps k' (map-equiv hC) (map-equiv hD) k)
+  ( bottom : coherence-square-maps g f k h)
+  ( c :
+    coherence-cube-maps f g h k f' g' h' k'
+      ( map-equiv hA)
+      ( map-equiv hB)
+      ( map-equiv hC)
+      ( map-equiv hD)
+      ( top)
+      ( back-left)
+      ( back-right)
+      ( front-left)
+      ( front-right)
+      ( bottom))
+  where
+
+  universal-property-pushout-top-universal-property-pushout-bottom-cube-equiv :
+    universal-property-pushout f g (h , k , bottom) →
+    universal-property-pushout f' g' (h' , k' , top)
+  universal-property-pushout-top-universal-property-pushout-bottom-cube-equiv =
+    universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
+      f g h k f' g' h' k'
+      ( map-equiv hA)
+      ( map-equiv hB)
+      ( map-equiv hC)
+      ( map-equiv hD)
+      ( top)
+      ( back-left)
+      ( back-right)
+      ( front-left)
+      ( front-right)
+      ( bottom)
+      ( c)
+      ( is-equiv-map-equiv hA)
+      ( is-equiv-map-equiv hB)
+      ( is-equiv-map-equiv hC)
+      ( is-equiv-map-equiv hD)
+
+  universal-property-pushout-bottom-universal-property-pushout-top-cube-equiv :
+    universal-property-pushout f' g' (h' , k' , top) →
+    universal-property-pushout f g (h , k , bottom)
+  universal-property-pushout-bottom-universal-property-pushout-top-cube-equiv =
+    universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv
+      f g h k f' g' h' k'
+      ( map-equiv hA)
+      ( map-equiv hB)
+      ( map-equiv hC)
+      ( map-equiv hD)
+      ( top)
+      ( back-left)
+      ( back-right)
+      ( front-left)
+      ( front-right)
+      ( bottom)
+      ( c)
+      ( is-equiv-map-equiv hA)
+      ( is-equiv-map-equiv hB)
+      ( is-equiv-map-equiv hC)
+      ( is-equiv-map-equiv hD)
 ```
