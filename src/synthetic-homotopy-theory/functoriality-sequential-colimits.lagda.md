@@ -146,87 +146,88 @@ module _
   ( f : hom-sequential-diagram A B)
   where
 
-  map-sequential-colimit-hom-sequential-diagram : X → Y
-  map-sequential-colimit-hom-sequential-diagram =
-    map-universal-property-sequential-colimit up-c
-      ( map-cocone-hom-sequential-diagram f c')
-
-  htpy-cocone-map-sequential-colimit-hom-sequential-diagram :
-    htpy-cocone-sequential-diagram
-      ( cocone-map-sequential-diagram c
-        ( map-sequential-colimit-hom-sequential-diagram))
-      ( map-cocone-hom-sequential-diagram f c')
-  htpy-cocone-map-sequential-colimit-hom-sequential-diagram =
-    htpy-cocone-universal-property-sequential-colimit up-c
-      ( map-cocone-hom-sequential-diagram f c')
-
-  htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram :
-    ( n : ℕ) →
-    coherence-square-maps
-      ( map-hom-sequential-diagram B f n)
-      ( map-cocone-sequential-diagram c n)
-      ( map-cocone-sequential-diagram c' n)
-      ( map-sequential-colimit-hom-sequential-diagram)
-  htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram =
-    htpy-htpy-cocone-sequential-diagram
-      ( htpy-cocone-map-sequential-colimit-hom-sequential-diagram)
-
-  coherence-htpy-cocone-map-sequential-colimit-hom-sequential-diagram :
-    ( n : ℕ) →
-    coherence-square-homotopies
-      ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram n)
-      ( ( map-sequential-colimit-hom-sequential-diagram) ·l
-        ( coherence-cocone-sequential-diagram c n))
-      ( coherence-cocone-sequential-diagram
+  opaque
+    map-sequential-colimit-hom-sequential-diagram : X → Y
+    map-sequential-colimit-hom-sequential-diagram =
+      map-universal-property-sequential-colimit up-c
         ( map-cocone-hom-sequential-diagram f c')
-        ( n))
-      ( ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram
-          ( succ-ℕ n)) ·r
-        ( map-sequential-diagram A n))
-  coherence-htpy-cocone-map-sequential-colimit-hom-sequential-diagram =
-    coherence-htpy-htpy-cocone-sequential-diagram
-      htpy-cocone-map-sequential-colimit-hom-sequential-diagram
 
-  prism-htpy-cocone-map-sequential-colimit-hom-sequential-diagram :
-    ( n : ℕ) →
-    vertical-coherence-prism-maps
-      ( map-cocone-sequential-diagram c n)
-      ( map-cocone-sequential-diagram c (succ-ℕ n))
-      ( map-sequential-diagram A n)
-      ( map-cocone-sequential-diagram c' n)
-      ( map-cocone-sequential-diagram c' (succ-ℕ n))
-      ( map-sequential-diagram B n)
-      ( map-hom-sequential-diagram B f n)
-      ( map-hom-sequential-diagram B f (succ-ℕ n))
-      ( map-sequential-colimit-hom-sequential-diagram)
-      ( coherence-cocone-sequential-diagram c n)
-      ( inv-htpy
-        ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram n))
-      ( inv-htpy
+    htpy-cocone-map-sequential-colimit-hom-sequential-diagram :
+      htpy-cocone-sequential-diagram
+        ( cocone-map-sequential-diagram c
+          ( map-sequential-colimit-hom-sequential-diagram))
+        ( map-cocone-hom-sequential-diagram f c')
+    htpy-cocone-map-sequential-colimit-hom-sequential-diagram =
+      htpy-cocone-universal-property-sequential-colimit up-c
+        ( map-cocone-hom-sequential-diagram f c')
+
+    htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram :
+      ( n : ℕ) →
+      coherence-square-maps
+        ( map-hom-sequential-diagram B f n)
+        ( map-cocone-sequential-diagram c n)
+        ( map-cocone-sequential-diagram c' n)
+        ( map-sequential-colimit-hom-sequential-diagram)
+    htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram =
+      htpy-htpy-cocone-sequential-diagram
+        ( htpy-cocone-map-sequential-colimit-hom-sequential-diagram)
+
+    coherence-htpy-cocone-map-sequential-colimit-hom-sequential-diagram :
+      ( n : ℕ) →
+      coherence-square-homotopies
+        ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram n)
+        ( ( map-sequential-colimit-hom-sequential-diagram) ·l
+          ( coherence-cocone-sequential-diagram c n))
+        ( coherence-cocone-sequential-diagram
+          ( map-cocone-hom-sequential-diagram f c')
+          ( n))
+        ( ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram
+            ( succ-ℕ n)) ·r
+          ( map-sequential-diagram A n))
+    coherence-htpy-cocone-map-sequential-colimit-hom-sequential-diagram =
+      coherence-htpy-htpy-cocone-sequential-diagram
+        htpy-cocone-map-sequential-colimit-hom-sequential-diagram
+
+    prism-htpy-cocone-map-sequential-colimit-hom-sequential-diagram :
+      ( n : ℕ) →
+      vertical-coherence-prism-maps
+        ( map-cocone-sequential-diagram c n)
+        ( map-cocone-sequential-diagram c (succ-ℕ n))
+        ( map-sequential-diagram A n)
+        ( map-cocone-sequential-diagram c' n)
+        ( map-cocone-sequential-diagram c' (succ-ℕ n))
+        ( map-sequential-diagram B n)
+        ( map-hom-sequential-diagram B f n)
+        ( map-hom-sequential-diagram B f (succ-ℕ n))
+        ( map-sequential-colimit-hom-sequential-diagram)
+        ( coherence-cocone-sequential-diagram c n)
+        ( inv-htpy
+          ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram n))
+        ( inv-htpy
+          ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram
+            ( succ-ℕ n)))
+        ( naturality-map-hom-sequential-diagram B f n)
+        ( coherence-cocone-sequential-diagram c' n)
+    prism-htpy-cocone-map-sequential-colimit-hom-sequential-diagram n =
+      rotate-vertical-coherence-prism-maps
+        ( map-cocone-sequential-diagram c n)
+        ( map-cocone-sequential-diagram c (succ-ℕ n))
+        ( map-sequential-diagram A n)
+        ( map-cocone-sequential-diagram c' n)
+        ( map-cocone-sequential-diagram c' (succ-ℕ n))
+        ( map-sequential-diagram B n)
+        ( map-hom-sequential-diagram B f n)
+        ( map-hom-sequential-diagram B f (succ-ℕ n))
+        ( map-sequential-colimit-hom-sequential-diagram)
+        ( coherence-cocone-sequential-diagram c n)
+        ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram n)
         ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram
-          ( succ-ℕ n)))
-      ( naturality-map-hom-sequential-diagram B f n)
-      ( coherence-cocone-sequential-diagram c' n)
-  prism-htpy-cocone-map-sequential-colimit-hom-sequential-diagram n =
-    rotate-vertical-coherence-prism-maps
-      ( map-cocone-sequential-diagram c n)
-      ( map-cocone-sequential-diagram c (succ-ℕ n))
-      ( map-sequential-diagram A n)
-      ( map-cocone-sequential-diagram c' n)
-      ( map-cocone-sequential-diagram c' (succ-ℕ n))
-      ( map-sequential-diagram B n)
-      ( map-hom-sequential-diagram B f n)
-      ( map-hom-sequential-diagram B f (succ-ℕ n))
-      ( map-sequential-colimit-hom-sequential-diagram)
-      ( coherence-cocone-sequential-diagram c n)
-      ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram n)
-      ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram
-        ( succ-ℕ n))
-      ( naturality-map-hom-sequential-diagram B f n)
-      ( coherence-cocone-sequential-diagram c' n)
-      ( inv-htpy
-        ( coherence-htpy-cocone-map-sequential-colimit-hom-sequential-diagram
-          ( n)))
+          ( succ-ℕ n))
+        ( naturality-map-hom-sequential-diagram B f n)
+        ( coherence-cocone-sequential-diagram c' n)
+        ( inv-htpy
+          ( coherence-htpy-cocone-map-sequential-colimit-hom-sequential-diagram
+            ( n)))
 ```
 
 ### Homotopies between morphisms of sequential diagrams induce homotopies of corresponding maps between sequential colimits
