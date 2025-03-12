@@ -153,12 +153,6 @@ def render_graph(graph, file_sizes, output_file, format, repo):
     label_colors = fetch_github_labels(repo)
     eprint("Label colors:", label_colors)
 
-    # Print the top 20 longest files
-    top_longest_files = sorted(file_sizes.items(), key=lambda x: x[1], reverse=True)[:20]
-    eprint("Top 20 longest files:")
-    for i, (file, size) in enumerate(top_longest_files):
-        eprint(f"{i+1:>3}. {file} - {size} lines")
-
     dot = graphviz.Digraph(engine="sfdp", format=format)
     dot.attr(splines="false", overlap="prism10000", bgcolor="#FFFFFF00", K="0.3", repulsiveforce="0.3") #sfdp
 
