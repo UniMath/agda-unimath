@@ -138,13 +138,13 @@ def generate_html_legend(label_colors, used_labels, output_file, label_counts):
     sorted_labels = sorted(used_labels, key=lambda label: label_counts.get(label, 0), reverse=True)
     with open(output_file, 'w') as f:
         f.write('<html>\n<head>\n<style>\n')
-        f.write('.dot { height: 12px; width: 12px; border-radius: 50%; display: inline-block; margin-right: 3px; margin-left: 10px }\n')
-        f.write('.label { white-space: nowrap; font-family: monospace; }\n')
+        f.write('.dot { height: 9px; width: 9px; border-radius: 50%; display: inline-block; margin-right: 2.5px; margin-left: 5px }\n')
+        f.write('.label { white-space: nowrap; font-family: monospaced; font-size: 50%; display: inline-block; }\n')
         f.write('</style>\n</head>\n<body>\n')
         for label in sorted_labels:
             if label in label_colors:
                 color = label_colors[label]
-                f.write(f'<span class="label" class="code" id="{label}"><span class="dot" style="background-color: #{color};"></span>{label}</span>\n')
+                f.write(f'<span class="code" class="label" id="{label}"><span class="dot" style="background-color: #{color};"></span>{label}</span>\n')
         f.write('</body>\n</html>')
 
 def render_graph(graph, file_sizes, output_file, format, repo):

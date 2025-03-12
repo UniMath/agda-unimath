@@ -3,9 +3,11 @@
 <div align="center" style="margin: 2em 0;">
   <figure>
     <img src="website/images/agda_dependency_graph.svg" alt="A dependency graph of the library, color coded by namespace. Fredrik Bakke. 2025 — perpetuity" width="95%" style="border-radius: 10px;">
+    <br>
+    <span>
+    {{#include website/images/agda_dependency_graph_legend.html}}
+    </span>
     <figcaption>A dependency graph of the library, color coded by namespace. Fredrik Bakke. 2025 — perpetuity</figcaption>
-
-{{#include website/images/agda_dependency_graph_legend.html}}
 
   </figure>
 </div>
