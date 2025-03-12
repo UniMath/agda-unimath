@@ -77,13 +77,12 @@ the proofs of `is-equiv` of their gluing maps.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 l7 : Level}
-  {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4 l5)
-  (Q : descent-data-pushout 𝒮 l6 l7)
+  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4)
+  (Q : descent-data-pushout 𝒮 l5)
   where
 
-  equiv-descent-data-pushout : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7)
+  equiv-descent-data-pushout : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   equiv-descent-data-pushout =
     Σ ( (a : domain-span-diagram 𝒮) →
         left-family-descent-data-pushout P a ≃
@@ -382,8 +381,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4 l5)
+  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4)
   where
 
   id-equiv-descent-data-pushout : equiv-descent-data-pushout P P
@@ -417,9 +416,9 @@ and mirroring the coherence squares vertically to get
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 l7 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4 l5)
-  (Q : descent-data-pushout 𝒮 l6 l7)
+  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4)
+  (Q : descent-data-pushout 𝒮 l5)
   where
 
   inv-equiv-descent-data-pushout :
@@ -442,14 +441,13 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 l7 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4 l5)
-  (Q : descent-data-pushout 𝒮 l6 l7)
+  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4)
+  (Q : descent-data-pushout 𝒮 l5)
   where
 
   htpy-equiv-descent-data-pushout :
-    (e f : equiv-descent-data-pushout P Q) →
-    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7)
+    (e f : equiv-descent-data-pushout P Q) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   htpy-equiv-descent-data-pushout e f =
     htpy-hom-descent-data-pushout P Q
       ( hom-equiv-descent-data-pushout P Q e)
@@ -462,18 +460,18 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4 l5)
+  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4)
   where
 
   equiv-eq-descent-data-pushout :
-    (Q : descent-data-pushout 𝒮 l4 l5) →
+    (Q : descent-data-pushout 𝒮 l4) →
     P ＝ Q → equiv-descent-data-pushout P Q
   equiv-eq-descent-data-pushout .P refl = id-equiv-descent-data-pushout P
 
   abstract
     is-torsorial-equiv-descent-data-pushout :
-      is-torsorial (equiv-descent-data-pushout {l6 = l4} {l7 = l5} P)
+      is-torsorial (equiv-descent-data-pushout {l5 = l4} P)
     is-torsorial-equiv-descent-data-pushout =
       is-torsorial-Eq-structure
         ( is-torsorial-Eq-Π
@@ -488,7 +486,7 @@ module _
               is-torsorial-htpy-equiv (equiv-family-descent-data-pushout P s))))
 
     is-equiv-equiv-eq-descent-data-pushout :
-      (Q : descent-data-pushout 𝒮 l4 l5) →
+      (Q : descent-data-pushout 𝒮 l4) →
       is-equiv (equiv-eq-descent-data-pushout Q)
     is-equiv-equiv-eq-descent-data-pushout =
       fundamental-theorem-id
@@ -496,7 +494,7 @@ module _
         ( equiv-eq-descent-data-pushout)
 
   extensionality-descent-data-pushout :
-    (Q : descent-data-pushout 𝒮 l4 l5) →
+    (Q : descent-data-pushout 𝒮 l4) →
     (P ＝ Q) ≃ equiv-descent-data-pushout P Q
   pr1 (extensionality-descent-data-pushout Q) =
     equiv-eq-descent-data-pushout Q
@@ -504,7 +502,7 @@ module _
     is-equiv-equiv-eq-descent-data-pushout Q
 
   eq-equiv-descent-data-pushout :
-    (Q : descent-data-pushout 𝒮 l4 l5) →
+    (Q : descent-data-pushout 𝒮 l4) →
     equiv-descent-data-pushout P Q → P ＝ Q
   eq-equiv-descent-data-pushout Q =
     map-inv-equiv (extensionality-descent-data-pushout Q)
@@ -514,9 +512,9 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 l7 : Level} {𝒮 : span-diagram l1 l2 l3}
-  {P : descent-data-pushout 𝒮 l4 l5}
-  {Q : descent-data-pushout 𝒮 l6 l7}
+  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  {P : descent-data-pushout 𝒮 l4}
+  {Q : descent-data-pushout 𝒮 l5}
   (e : equiv-descent-data-pushout P Q)
   where
 

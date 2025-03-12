@@ -70,11 +70,11 @@ module _
   {l1 l2 l3 : Level} (𝒮 : span-diagram l1 l2 l3)
   where
 
-  descent-data-pushout : (l4 l5 : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4 ⊔ lsuc l5)
-  descent-data-pushout l4 l5 =
-    Σ ( domain-span-diagram 𝒮 → UU l4)
+  descent-data-pushout : (l4 : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4)
+  descent-data-pushout l =
+    Σ ( domain-span-diagram 𝒮 → UU l)
       ( λ PA →
-        Σ ( codomain-span-diagram 𝒮 → UU l5)
+        Σ ( codomain-span-diagram 𝒮 → UU l)
           ( λ PB →
             (s : spanning-type-span-diagram 𝒮) →
             PA (left-map-span-diagram 𝒮 s) ≃ PB (right-map-span-diagram 𝒮 s)))
@@ -84,14 +84,14 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4 l5)
+  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4)
   where
 
   left-family-descent-data-pushout : domain-span-diagram 𝒮 → UU l4
   left-family-descent-data-pushout = pr1 P
 
-  right-family-descent-data-pushout : codomain-span-diagram 𝒮 → UU l5
+  right-family-descent-data-pushout : codomain-span-diagram 𝒮 → UU l4
   right-family-descent-data-pushout = pr1 (pr2 P)
 
   equiv-family-descent-data-pushout :
@@ -275,18 +275,11 @@ module _
   where
 
   descent-data-family-cocone-span-diagram :
-    {l5 : Level} → (X → UU l5) → descent-data-pushout 𝒮 l5 l5
-  descent-data-family-cocone-span-diagram P =
-    ( P ∘ horizontal-map-cocone _ _ c) ,
-    ( P ∘ vertical-map-cocone _ _ c) ,
-    ( equiv-tr P ∘ coherence-square-cocone _ _ c)
-
-  symmetric-descent-data-family-cocone-span-diagram :
-    {l5 : Level} → (X → UU l5) → symmetric-descent-data-pushout 𝒮 l5 l5 l5
-  symmetric-descent-data-family-cocone-span-diagram P =
-    ( P ∘ horizontal-map-cocone _ _ c) ,
-    ( P ∘ vertical-map-cocone _ _ c) ,
-    ( P ∘ horizontal-map-cocone _ _ c ∘ left-map-span-diagram 𝒮) ,
-    ( λ _ → id-equiv) ,
-    ( equiv-tr P ∘ coherence-square-cocone _ _ c)
+    {l5 : Level} → (X → UU l5) → descent-data-pushout 𝒮 l5
+  pr1 (descent-data-family-cocone-span-diagram P) =
+    P ∘ horizontal-map-cocone _ _ c
+  pr1 (pr2 (descent-data-family-cocone-span-diagram P)) =
+    P ∘ vertical-map-cocone _ _ c
+  pr2 (pr2 (descent-data-family-cocone-span-diagram P)) s =
+    equiv-tr P (coherence-square-cocone _ _ c s)
 ```
