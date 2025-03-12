@@ -148,9 +148,6 @@ website/css/Agda-highlight.css: ./scripts/generate_agda_css.py ./theme/catppucci
 website/images/agda_dependency_graph.svg: ${AGDAFILES}
 	@python3 ./scripts/generate_dependency_graph_rendering.py website/images/agda_dependency_graph svg || true
 
-website/images/agda_dependency_graph_legend.svg: ${AGDAFILES}
-	@python3 ./scripts/generate_dependency_graph_rendering.py website/images/agda_dependency_graph svg || true
-
 website/images/agda_dependency_graph_legend.html: ${AGDAFILES}
 	@python3 ./scripts/generate_dependency_graph_rendering.py website/images/agda_dependency_graph svg || true
 
