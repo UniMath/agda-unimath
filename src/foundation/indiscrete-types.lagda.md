@@ -34,14 +34,15 @@ open import set-theory.increasing-binary-sequences
 ## Idea
 
 A type `A` is {{#concept "indiscrete" Disambiguation="type" Agda=is-indiscrete}}
-if it is [local](orthogonal-factorization-systems.types-local-at-maps.md) at the
-map
+if it is
+[fiberwise orthogonal](orthogonal-factorization-systems.fiberwise-orthogonal-maps.md)
+to the map
 
 ```text
-  ℕ+{∞} → ℕ∞.
+  ℕ + {∞} → ℕ∞.
 ```
 
-This defines a topological (duh!)
+This defines a topological
 [modality](orthogonal-factorization-systems.higher-modalities.md) presented by
 the predicate that `∞` is an isolated element in `ℕ∞`.
 
@@ -54,9 +55,6 @@ to every element.
 ### The predicate of being indiscrete
 
 ```agda
-is-indiscrete' : {l : Level} → UU l → UU l
-is-indiscrete' A = is-local inclusion-ℕ∞↑-Maybe-ℕ A
-
 is-indiscrete : {l : Level} → UU l → UU l
 is-indiscrete A = (n : ℕ∞↑) → is-null (is-decidable (infinity-ℕ∞↑ ＝ n)) A
 ```

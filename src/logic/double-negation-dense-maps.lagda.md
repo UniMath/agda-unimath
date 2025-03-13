@@ -1,4 +1,4 @@
-# Dense maps
+# Double negation dense maps
 
 ```agda
 module logic.double-negation-dense-maps where
@@ -62,8 +62,9 @@ open import orthogonal-factorization-systems.extensions-maps
 
 ## Idea
 
-A map `f : A → B` is {{#concept "dense" Agda=is-double-negation-dense-map}}, if
-all of its [fibers](foundation-core.fibers-of-maps.md) are
+A map `f : A → B` is
+{{#concept "double negation dense" Agda=is-double-negation-dense-map}}, if all
+of its [fibers](foundation-core.fibers-of-maps.md) are
 [irrefutable](logic.irrefutable-propositions.md). I.e., for every `y : B`, it is
 not not true that `y` has a preimage under `f`.
 
@@ -86,10 +87,17 @@ is-prop-is-double-negation-dense-map :
   is-prop (is-double-negation-dense-map f)
 is-prop-is-double-negation-dense-map f =
   is-prop-type-Prop (is-double-negation-dense-map-Prop f)
+```
 
+### The type of double negation dense maps
+
+```agda
 infix 5 _↠¬¬_
 _↠¬¬_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 A ↠¬¬ B = Σ (A → B) is-double-negation-dense-map
+
+double-negation-dense-map : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+double-negation-dense-map = _↠¬¬_
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↠¬¬ B)
@@ -135,7 +143,7 @@ module _
 
 ## Properties
 
-### Any surjective map is dense
+### Any surjective map is double negation dense
 
 ```agda
 module _
@@ -152,7 +160,7 @@ module _
     tot (λ _ → is-double-negation-dense-map-is-surjective)
 ```
 
-### Any map that has a section is dense
+### Any map that has a section is double negation dense
 
 ```agda
 is-double-negation-dense-map-has-section :
@@ -162,7 +170,7 @@ is-double-negation-dense-map-has-section (g , G) b =
   intro-double-negation (g b , G b)
 ```
 
-### The underlying irrefutable surjection of a retract
+### The underlying double negation dense map of a retract
 
 ```agda
 double-negation-dense-map-retract :
@@ -173,7 +181,7 @@ double-negation-dense-map-retract R =
     is-double-negation-dense-map-has-section (section-retract R))
 ```
 
-### Any split surjective map is dense
+### Any split surjective map is double negation dense
 
 ```agda
 is-double-negation-dense-map-is-split-surjective :
@@ -183,7 +191,7 @@ is-double-negation-dense-map-is-split-surjective H =
   intro-double-negation ∘ H
 ```
 
-### Any equivalence is dense
+### Any equivalence is double negation dense
 
 ```agda
 module _
@@ -209,7 +217,7 @@ module _
     double-negation-dense-map-equiv (inv-equiv e)
 ```
 
-### The identity function is dense
+### The identity function is double negation dense
 
 ```agda
 module _
@@ -220,7 +228,7 @@ module _
   is-double-negation-dense-map-id a = intro-double-negation (a , refl)
 ```
 
-### A (k+1)-connected map is dense
+### A (k+1)-connected map is double negation dense
 
 ```agda
 is-double-negation-dense-map-is-connected-map :
@@ -232,7 +240,7 @@ is-double-negation-dense-map-is-connected-map k H =
     ( is-surjective-is-connected-map k H)
 ```
 
-### Maps which are homotopic to dense maps are dense
+### Maps which are homotopic to double negation dense maps are double negation dense
 
 ```agda
 module _
@@ -254,7 +262,7 @@ module _
       is-double-negation-dense-map-htpy (inv-htpy H)
 ```
 
-### A map that is both dense and a double negation stable embedding is an equivalence
+### A map that is both double negation dense and a double negation stable embedding is an equivalence
 
 ```agda
 abstract
@@ -272,7 +280,7 @@ abstract
             ( H y)))
 ```
 
-### The composite of dense maps is dense
+### Composite of double negation dense maps
 
 ```agda
 module _
@@ -302,7 +310,7 @@ module _
     ( g ∘ h , is-double-negation-dense-map-comp G H)
 ```
 
-### Functoriality of products preserves being dense
+### Products of double negation dense maps
 
 ```agda
 module _
@@ -330,7 +338,7 @@ module _
       ( is-double-negation-dense-map-double-negation-dense-map g)
 ```
 
-### The composite of a surjective map before an equivalence is dense
+### The composite of a double negation dense map before an equivalence is double negation dense
 
 ```agda
 is-double-negation-dense-map-left-comp-equiv :
@@ -342,7 +350,7 @@ is-double-negation-dense-map-left-comp-equiv e =
   is-double-negation-dense-map-comp (is-double-negation-dense-map-equiv e)
 ```
 
-### The composite of a surjective map after an equivalence is dense
+### The composite of a double negation dense map after an equivalence is double negation dense
 
 ```agda
 is-double-negation-dense-map-right-comp-equiv :
@@ -354,7 +362,7 @@ is-double-negation-dense-map-right-comp-equiv H e =
   is-double-negation-dense-map-comp H (is-double-negation-dense-map-equiv e)
 ```
 
-### If a composite is dense, then so is its left factor
+### If a composite is double negation dense, then so is its left factor
 
 ```agda
 module _
@@ -490,7 +498,7 @@ module _
     map-inv-equiv (extensionality-Double-Negation-Dense-Map g)
 ```
 
-### Postcomposition of extensions along dense maps by a double negation stable embedding is an equivalence
+### Postcomposition of extensions along double negation dense maps by a double negation stable embedding is an equivalence
 
 ```text
 module _
