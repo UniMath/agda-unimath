@@ -1,4 +1,4 @@
-# Σ-decidability search
+# Σ-Decidability search
 
 ```agda
 module foundation.decidability-search-untruncated-existential-quantification where

@@ -31,8 +31,8 @@ preordered set consists of a set $A$, a
 [propositions](foundation-core.propositions.md), such that the relation $<$ is
 irreflexive and transitive:
 
-- For any $x:A$ we have $x \nle x$.
-- For any $x,y,z:A$ we have $y<z \to x<y \to x<z$.
+- For any $x:A$ we have $x \nless x$.
+- For any $x,y,z:A$ we have $(y<z) → (x<y) → (x<z)$.
 
 Strictly preordered sets satisfy antisymmetry by irreflexivity and transitivity.
 

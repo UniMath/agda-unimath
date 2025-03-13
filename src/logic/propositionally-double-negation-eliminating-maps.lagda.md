@@ -59,7 +59,7 @@ maps come [equipped](foundation.structure.md) with a map
 
 ## Definintion
 
-### Double negation elimination structure on a map
+### Propositional double negation elimination on a map
 
 ```agda
 module _

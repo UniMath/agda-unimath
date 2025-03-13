@@ -17,8 +17,9 @@ open import foundation-core.fibers-of-maps
 
 ## Idea
 
-A {{#concept "Hilbert ε-operator" Disambiguation="on a map" Agda=}} on a map
-$f : A → B$ is a family of
+A
+{{#concept "Hilbert ε-operator" Disambiguation="on a map" Agda=ε-operator-map}}
+on a map $f : A → B$ is a family of
 [Hilbert ε-operators](foundation.hilberts-epsilon-operators.md) on its
 [fibers](foundation-core.fibers-of-maps.md). I.e., for every `y : B` there is an
 operator

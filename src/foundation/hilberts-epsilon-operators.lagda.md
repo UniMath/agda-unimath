@@ -1,4 +1,4 @@
-# Hilbert's `ε`-operators
+# Hilbert ε-operators
 
 ```agda
 module foundation.hilberts-epsilon-operators where
@@ -19,7 +19,8 @@ open import foundation-core.function-types
 
 ## Idea
 
-{{#concept "Hilbert's $ε$-operator"}} at a type `A` is a map
+{{#concept "Hilbert's ε-operator" Disambiguation="on types" Agda=ε-operator-Hilbert}}
+at a type `A` is a map
 
 ```text
   ε : ║A║₋₁ → A

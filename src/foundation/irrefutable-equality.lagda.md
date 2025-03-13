@@ -30,13 +30,15 @@ open import foundation-core.sets
 ## Idea
 
 Two elements `x` and `y` in a type are said to be
-{{#concept "irrefutably equal" Agda=irrefutable-eq}} if there is an element of
-the [double negation](foundation.double-negation.md) of the
-[identity type](foundation-core.identity-types.md) between them, `¬¬ (x ＝ y)`.
-If every two elements of a type are irrefutably equal, we say the type _has
-double negation dense equality_.
+{{#concept "irrefutably equal" Disambiguation="elements of a type" Agda=irrefutable-eq}}
+if there is an element of the [double negation](foundation.double-negation.md)
+of the [identity type](foundation-core.identity-types.md) between them,
+`¬¬ (x ＝ y)`. If every two elements of a type are irrefutably equal, we say the
+type _has double negation dense equality_.
 
 ## Definitions
+
+### Irrefutably equal elements
 
 ```agda
 module _
@@ -116,7 +118,7 @@ is-set-irrefutable-eq-in-id =
   is-set-prop-in-id irrefutable-eq is-prop-irrefutable-eq refl-irrefutable-eq
 ```
 
-### Retracts of types with irrefutable equality
+### Retracts of types with double negation dense equality
 
 ```agda
 module _
@@ -143,7 +145,7 @@ module _
     has-double-negation-dense-equality-retract-of (retract-inv-equiv e)
 ```
 
-### Dependent sums of types with irrefutable equality
+### Dependent sums of types with double negation dense equality
 
 ```agda
 module _

@@ -1,4 +1,4 @@
-# Π-decidability search
+# Π-Decidability search
 
 ```agda
 module foundation.decidability-search-untruncated-universal-quantification where
@@ -70,9 +70,9 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 A type `X` has
-{{#concept "Π-decidability search" Disambiguation="on type" Agda=has-Π-decidability-search}},
-or **Π-decidability search**, if we have a terminating algorithm `f` that, for
-every [decidable type family](foundation.decidable-type-families.md) `P` on `X`
+{{#concept "Π-decidability search" Disambiguation="on type" Agda=has-Π-decidability-search}}
+if we have a terminating algorithm `f` that, for every
+[decidable type family](foundation.decidable-type-families.md) `P` on `X`
 computes a section of `P`, `(x : X) → P x`, or produces a proof that no such
 section exists, in other words, exhibits a fiber of `P` that is
 [empty](foundation.empty-types.md).

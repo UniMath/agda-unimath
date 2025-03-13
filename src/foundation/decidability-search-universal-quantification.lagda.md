@@ -1,4 +1,4 @@
-# ∀-decidability search
+# ∀-Decidability search
 
 ```agda
 module foundation.decidability-search-universal-quantification where
@@ -71,11 +71,10 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 A type `X` has
-{{#concept "decidability search for universal quantification" Disambiguation="on type" Agda=has-∀-decidability-search}},
-or has **∀-decidability search**, or is **∀-decidability searchable**, if we
-have a terminating algorithm `f` that, for every
-[decidable subtype](foundation.decidable-subtypes.md) `P` of `X` decides if `P`
-is the full subtype. In other words, `f` is an element of type
+{{#concept "∀-decidability search" Disambiguation="on type" Agda=has-∀-decidability-search}},
+or is **∀-decidability searchable**, if we have a terminating algorithm `f`
+that, for every [decidable subtype](foundation.decidable-subtypes.md) `P` of `X`
+decides if `P` is the full subtype. In other words, `f` is an element of type
 
 ```text
   (P : decidable-subtype X) → is-decidable (∀ x. x ∈ P).

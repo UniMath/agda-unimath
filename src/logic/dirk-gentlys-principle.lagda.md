@@ -29,10 +29,10 @@ open import foundation-core.decidable-propositions
 
 ## Idea
 
-{{#concept "Dirk Gently's principle"}} is the logical axiom that the type of
-[propositions](foundation-core.propositions.md) is
-[linearly ordered](order-theory.total-orders.md). In other words, for every pair
-of propositions `P` and `Q`, either `P` implies `Q` or `Q` implies `P`:
+{{#concept "Dirk Gently's principle" Agda=Dirk-Gently's-Principle}} is the
+logical axiom that the type of [propositions](foundation-core.propositions.md)
+is [linearly ordered](order-theory.total-orders.md). In other words, for every
+pair of propositions `P` and `Q`, either `P` implies `Q` or `Q` implies `P`:
 
 $$
   (P ⇒ Q) ∨ (Q ⇒ P).
@@ -48,4 +48,21 @@ The proof strength of this principle lies strictly between the
 instance-prop-Dirk-Gently's-Principle :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
 instance-prop-Dirk-Gently's-Principle P Q = (P ⇒ Q) ∨ (Q ⇒ P)
+
+instance-Dirk-Gently's-Principle :
+  {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
+instance-Dirk-Gently's-Principle P Q =
+  type-Prop (instance-prop-Dirk-Gently's-Principle P Q)
+
+Dirk-Gently's-Principle-Level : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Dirk-Gently's-Principle-Level l1 l2 =
+  (P : Prop l1) (Q : Prop l2) → instance-Dirk-Gently's-Principle P Q
+
+Dirk-Gently's-Principle : UUω
+Dirk-Gently's-Principle =
+  {l1 l2 : Level} → Dirk-Gently's-Principle-Level l1 l2
 ```
+
+## References
+
+{{#bibliography}}

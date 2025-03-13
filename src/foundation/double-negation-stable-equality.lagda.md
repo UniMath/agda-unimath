@@ -92,7 +92,7 @@ module _
 ```
 
 As a corollary, if `f` is constant on `P`, it is constant on all of `X`. This is
-Lemma 3.4 in {{#cite Esc13}}
+Lemma 3.4 in {{#cite Esc13}}.
 
 ```agda
 module _

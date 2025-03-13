@@ -19,6 +19,7 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.hilberts-epsilon-operators
 open import foundation.injective-maps
+open import foundation.irrefutable-equality
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-extensionality
@@ -118,9 +119,9 @@ module _
 
 ### Composition of decidable families
 
-Given a decidable type family of propositions `P : A → 𝒰` and a decidable type
-family `Q : (x : A) → P x → 𝒰` then we may _compose_ `Q` after `P` and obtain a
-decidabe type family `Q ∘ P : A → 𝒰`.
+Given a decidable family of types with double negation dense equality
+`P : A → 𝒰` and a decidable type family `Q : (x : A) → P x → 𝒰` then we may
+_compose_ `Q` after `P` and obtain a decidabe type family `Q ∘ P : A → 𝒰`.
 
 ```agda
 module _
@@ -130,7 +131,8 @@ module _
   is-decidable-comp-decidable-family-decidable-subtype' :
     (P : decidable-family l2 A)
     (Q : (x : A) → decidable-family l3 (family-decidable-family P x)) →
-    ((x : A) → is-prop (family-decidable-family P x)) →
+    ( (x : A) →
+      has-double-negation-dense-equality (family-decidable-family P x)) →
     is-decidable-family
       ( λ x → Σ (family-decidable-family P x) (family-decidable-family (Q x)))
   is-decidable-comp-decidable-family-decidable-subtype' P Q H x =
@@ -140,13 +142,12 @@ module _
           ( λ q → inl (p , q))
           (λ nq →
             inr
-              ( map-neg
-                ( λ pq →
-                  tr
-                    ( family-decidable-family (Q x))
-                    ( eq-is-prop (H x))
-                    ( pr2 pq))
-                ( nq)))
+              ( λ q →
+                H ( x)
+                  ( p)
+                  ( pr1 q)
+                  ( λ r →
+                    nq (tr (family-decidable-family (Q x)) (inv r) (pr2 q)))))
           ( is-decidable-decidable-family (Q x) p))
       (λ np → inr (map-neg pr1 np))
       ( is-decidable-decidable-family P x)
@@ -154,7 +155,8 @@ module _
   comp-decidable-family-decidable-subtype' :
     (P : decidable-family l2 A) →
     ((x : A) → decidable-family l3 (family-decidable-family P x)) →
-    ((x : A) → is-prop (family-decidable-family P x)) →
+    ( (x : A) →
+      has-double-negation-dense-equality (family-decidable-family P x)) →
     decidable-family (l2 ⊔ l3) A
   comp-decidable-family-decidable-subtype' P Q H =
     ( λ x → Σ (family-decidable-family P x) (family-decidable-family (Q x))) ,
@@ -168,24 +170,14 @@ module _
     comp-decidable-family-decidable-subtype'
       ( decidable-family-decidable-subtype P)
       ( Q)
-      ( is-prop-is-in-decidable-subtype P)
+      ( λ x p q →
+        intro-double-negation
+          ( eq-is-prop (is-prop-is-in-decidable-subtype P x)))
 ```
-
-**Comment.** It should be possible to relax the condition on `P` of being a
-family of propositions to asking that the first projection map `Σ A P → A` is
-injective.
 
 ### Decidable families on the subuniverse of propositions
 
-```text
-blabla :
-  {l1 l2 : Level} (P : decidable-family l2 (Prop l1)) →
-  family-decidable-family P (raise-empty-Prop l1) ＝
-  family-decidable-family P (raise-unit-Prop l1) →
-  (Q : Prop l1) →
-  family-decidable-family P (raise-empty-Prop l1) ＝ family-decidable-family P Q
-blabla = {!   !}
-```
+> TODO
 
 ## See also
 

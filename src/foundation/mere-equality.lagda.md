@@ -135,7 +135,7 @@ is-set-mere-eq-in-id =
 In other words, if equality on `A` has an
 [ε-operator](foundation.hilbert-epsilon-operators.md), then `A` is a set.
 
-### Retracts of types with mere equality
+### Retracts of types with merely equal elements
 
 ```agda
 module _
@@ -161,7 +161,7 @@ module _
     all-elements-merely-equal-retract-of (retract-inv-equiv e)
 ```
 
-### Dependent sums of types with mere equality
+### Dependent sums of types with merely equal elements
 
 ```agda
 all-elements-merely-equal-Σ :

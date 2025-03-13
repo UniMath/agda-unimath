@@ -51,7 +51,7 @@ if there is a map
 
 ## Definitions
 
-### Untruncated double negation elimination
+### Propositional double negation elimination
 
 ```agda
 module _

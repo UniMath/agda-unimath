@@ -50,11 +50,13 @@ open import logic.propositionally-decidable-types
 A [map](foundation-core.function-types.md) is said to be
 {{#concept "propositionally decidable" Disambiguation="map of types" Agda=is-inhabited-or-empty-map}}
 if its [fibers](foundation-core.fibers-of-maps.md) are
-[propositionally decidable types](logic.propositionally-decidable-types.md).
+[propositionally decidable types](logic.propositionally-decidable-types.md),
+i.e., if they are merely [inhabited](foundation.inhabited-types.md) or
+[empty](foundation.empty-types.md).
 
 ## Definitions
 
-### The structure on a map of decidability
+### The propositional decidability predicate on a map
 
 ```agda
 module _
@@ -65,7 +67,7 @@ module _
   is-inhabited-or-empty-map f = (y : B) → is-inhabited-or-empty (fiber f y)
 ```
 
-### The type of decidable maps
+### The type of propositionally decidable maps
 
 ```agda
 inhabited-or-empty-map : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
@@ -108,7 +110,7 @@ is-inhabited-or-empty-map-is-decidable-map H x =
   is-inhabited-or-empty-is-decidable (H x)
 ```
 
-### The identity map is decidable
+### The identity map is propositionally decidable
 
 ```agda
 abstract

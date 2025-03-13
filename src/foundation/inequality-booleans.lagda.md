@@ -50,10 +50,17 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The type of {{#concept "booleans" WD="Boolean domain" WDID=Q3269980 Agda=bool}}
-is a [2-element type](univalent-combinatorics.2-element-types.md) with elements
-`true false : bool`, which is used for reasoning with
-[decidable propositions](foundation-core.decidable-propositions.md).
+The
+{{#concept "standard inequality relation" Disambiguation="on booleans" Agda=}}
+on [booleans](foundation.booleans.md) is the inductively defined
+[relation](foundation.binary-relations.md) given by the four inequalities
+
+```text
+  false ≤ false
+  false ≤ true
+  true ≤ true
+  true ≰ false.
+```
 
 ## Definitions
 
