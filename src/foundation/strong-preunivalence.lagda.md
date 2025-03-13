@@ -8,9 +8,12 @@ module foundation.strong-preunivalence where
 
 ```agda
 open import foundation.contractible-types
+open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
 open import foundation.preunivalence
 open import foundation.propositional-maps
 open import foundation.propositions
@@ -136,6 +139,18 @@ strong-preunivalence-axiom-univalence-axiom UA {l1} {l2} A =
 ```agda
 strong-preunivalence : strong-preunivalence-axiom
 strong-preunivalence = strong-preunivalence-axiom-univalence-axiom univalence
+```
+
+### The preunivalence axiom together with function extensionality implies strong preunivalence
+
+```agda
+funext-and-preunivalence-give-strong-preunivalence :
+  {l1 l2 : Level} →
+  preunivalence-axiom-Level l1 → strong-preunivalence-axiom-Level l2 l1
+funext-and-preunivalence-give-strong-preunivalence pua X (Y , α) (Y' , α') =
+  is-prop-equiv
+    ( compute-eq-is-small (Y , α) (Y' , α'))
+    ( is-prop-map-is-emb (pua Y Y') (α' ∘e inv-equiv α))
 ```
 
 ## See also

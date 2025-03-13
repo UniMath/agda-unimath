@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
@@ -25,8 +26,10 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
+open import foundation-core.dependent-identifications
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.fibers-of-maps
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
@@ -208,6 +211,23 @@ is-small-mere-equiv l e H =
   apply-universal-property-trunc-Prop e
     ( is-small-Prop l _)
     ( λ e' → is-small-equiv _ e' H)
+```
+
+### The equality type of the smallness predicate is equivalent to the fiber of `equiv-eq`
+
+```agda
+compute-eq-is-small :
+  {l1 l2 : Level} {X : UU l1} (α β : is-small l2 X) →
+  (α ＝ β) ≃ fiber equiv-eq (equiv-is-small β ∘e inv-equiv-is-small α)
+compute-eq-is-small {X = X} (Y , α) (Y' , α') =
+  equivalence-reasoning
+  ( (Y , α) ＝ (Y' , α'))
+  ≃ Σ (Y ＝ Y') (λ x → dependent-identification (λ Y → X ≃ Y) x α α')
+  by equiv-pair-eq-Σ (Y , α) (Y' , α')
+  ≃ Σ (Y ＝ Y') (λ x → equiv-eq x ∘e α ＝ α')
+  by equiv-tot (λ p → equiv-concat (tr-equiv-type-left p α) α')
+  ≃ Σ (Y ＝ Y') (λ x → equiv-eq x ＝ α' ∘e inv-equiv α)
+  by equiv-tot (λ p → equiv-right-transpose-equiv-comp α (equiv-eq p) α')
 ```
 
 ### Any contractible type is small
