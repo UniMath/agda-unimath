@@ -141,7 +141,7 @@ strong-preunivalence : strong-preunivalence-axiom
 strong-preunivalence = strong-preunivalence-axiom-univalence-axiom univalence
 ```
 
-### The preunivalence axiom together with function extensionality implies strong preunivalence
+### The preunivalence axiom implies the strong preunivalence axiom
 
 This argument is due to Evan Cavallo. Note that it critically depends on
 function extensionality, both for the implication that embeddings have
