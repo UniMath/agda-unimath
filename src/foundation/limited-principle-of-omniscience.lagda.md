@@ -55,7 +55,7 @@ is-prop-LPO =
       is-prop-coproduct
         ( elim-exists
           ( ¬' ∀' ℕ (λ n → is-false-Prop (f n)))
-          ( λ n t h → not-is-false-is-true (f n) t (h n)))
+          ( λ n t h → is-not-false-is-true (f n) t (h n)))
         ( is-prop-exists ℕ (λ n → is-true-Prop (f n)))
         ( is-prop-for-all-Prop ℕ (λ n → is-false-Prop (f n))))
 
