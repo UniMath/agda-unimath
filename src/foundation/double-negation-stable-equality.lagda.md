@@ -37,7 +37,7 @@ types with double negation stable equality are [sets](foundation-core.sets.md).
 
 ## Properties
 
-## Homotopies of maps into types with double negation stable equality
+### Homotopies of maps into types with double negation stable equality
 
 Given a double negation dense subtype `P ⊆ X` and two functions `f` and
 `g : X → Y` into a type `Y` with double negation stable equality. Then if `f`

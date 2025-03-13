@@ -181,12 +181,12 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  has-prop-double-negation-elim-Σ-all-elements-irrefutably-equal-base :
-    all-elements-irrefutably-equal A →
+  has-prop-double-negation-elim-Σ-has-double-negation-dense-equality-base :
+    has-double-negation-dense-equality A →
     has-prop-double-negation-elim A →
     ((x : A) → has-prop-double-negation-elim (B x)) →
     has-prop-double-negation-elim (Σ A B)
-  has-prop-double-negation-elim-Σ-all-elements-irrefutably-equal-base
+  has-prop-double-negation-elim-Σ-has-double-negation-dense-equality-base
     H f g nnab =
     rec-trunc-Prop
       ( trunc-Prop (Σ A B))
@@ -203,7 +203,7 @@ module _
     ((x : A) → has-prop-double-negation-elim (B x)) →
     has-prop-double-negation-elim (Σ A B)
   has-prop-double-negation-elim-Σ-all-elements-merely-equal-base H =
-    has-prop-double-negation-elim-Σ-all-elements-irrefutably-equal-base
+    has-prop-double-negation-elim-Σ-has-double-negation-dense-equality-base
       ( λ x y →
         double-negation-double-negation-type-trunc-Prop
           ( intro-double-negation (H x y)))

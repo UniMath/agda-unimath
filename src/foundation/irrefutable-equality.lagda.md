@@ -32,7 +32,9 @@ open import foundation-core.sets
 Two elements `x` and `y` in a type are said to be
 {{#concept "irrefutably equal" Agda=irrefutable-eq}} if there is an element of
 the [double negation](foundation.double-negation.md) of the
-[identity type](foundation-core.identity-types.md) between them `¬¬ (x ＝ y)`.
+[identity type](foundation-core.identity-types.md) between them, `¬¬ (x ＝ y)`.
+If every two elements of a type are irrefutably equal, we say the type _has
+double negation dense equality_.
 
 ## Definitions
 
@@ -51,11 +53,11 @@ module _
   irrefutable-eq-Prop x y = (irrefutable-eq x y , is-prop-irrefutable-eq x y)
 ```
 
-### Types whose elements are irrefutably equal
+### Types with double negation dense equality
 
 ```agda
-all-elements-irrefutably-equal : {l : Level} → UU l → UU l
-all-elements-irrefutably-equal A = (x y : A) → irrefutable-eq x y
+has-double-negation-dense-equality : {l : Level} → UU l → UU l
+has-double-negation-dense-equality A = (x y : A) → irrefutable-eq x y
 ```
 
 ## Properties
@@ -121,22 +123,24 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  all-elements-irrefutably-equal-retract-of :
+  has-double-negation-dense-equality-retract-of :
     B retract-of A →
-    all-elements-irrefutably-equal A →
-    all-elements-irrefutably-equal B
-  all-elements-irrefutably-equal-retract-of (i , r , R) H x y =
+    has-double-negation-dense-equality A →
+    has-double-negation-dense-equality B
+  has-double-negation-dense-equality-retract-of (i , r , R) H x y =
     map-double-negation (λ p → inv (R x) ∙ ap r p ∙ R y) (H (i x) (i y))
 
-  all-elements-irrefutably-equal-equiv :
-    B ≃ A → all-elements-irrefutably-equal A → all-elements-irrefutably-equal B
-  all-elements-irrefutably-equal-equiv e =
-    all-elements-irrefutably-equal-retract-of (retract-equiv e)
+  has-double-negation-dense-equality-equiv :
+    B ≃ A →
+    has-double-negation-dense-equality A → has-double-negation-dense-equality B
+  has-double-negation-dense-equality-equiv e =
+    has-double-negation-dense-equality-retract-of (retract-equiv e)
 
-  all-elements-irrefutably-equal-equiv' :
-    A ≃ B → all-elements-irrefutably-equal A → all-elements-irrefutably-equal B
-  all-elements-irrefutably-equal-equiv' e =
-    all-elements-irrefutably-equal-retract-of (retract-inv-equiv e)
+  has-double-negation-dense-equality-equiv' :
+    A ≃ B →
+    has-double-negation-dense-equality A → has-double-negation-dense-equality B
+  has-double-negation-dense-equality-equiv' e =
+    has-double-negation-dense-equality-retract-of (retract-inv-equiv e)
 ```
 
 ### Dependent sums of types with irrefutable equality
@@ -144,12 +148,13 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (mA : all-elements-irrefutably-equal A)
-  (mB : (x : A) → all-elements-irrefutably-equal (B x))
+  (mA : has-double-negation-dense-equality A)
+  (mB : (x : A) → has-double-negation-dense-equality (B x))
   where
 
-  all-elements-irrefutably-equal-Σ : all-elements-irrefutably-equal (Σ A B)
-  all-elements-irrefutably-equal-Σ x y =
+  has-double-negation-dense-equality-Σ :
+    has-double-negation-dense-equality (Σ A B)
+  has-double-negation-dense-equality-Σ x y =
     extend-double-negation
       ( λ p →
         map-double-negation (eq-pair-Σ p) (mB (pr1 y) (tr B p (pr2 x)) (pr2 y)))

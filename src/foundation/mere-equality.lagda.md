@@ -183,9 +183,9 @@ irrefutable-eq-mere-eq :
   {l : Level} {A : UU l} {x y : A} → mere-eq x y → irrefutable-eq x y
 irrefutable-eq-mere-eq = intro-double-negation-type-trunc-Prop
 
-all-elements-irrefutably-equal-all-elements-merely-equal :
+has-double-negation-dense-equality-all-elements-merely-equal :
   {l : Level} {A : UU l} →
-  all-elements-merely-equal A → all-elements-irrefutably-equal A
-all-elements-irrefutably-equal-all-elements-merely-equal H x y =
+  all-elements-merely-equal A → has-double-negation-dense-equality A
+has-double-negation-dense-equality-all-elements-merely-equal H x y =
   irrefutable-eq-mere-eq (H x y)
 ```

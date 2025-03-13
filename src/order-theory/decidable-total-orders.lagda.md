@@ -194,7 +194,6 @@ module _
 
 ## Properties
 
-
 ### Decidable total orders have decidable equality
 
 **Proof.** By antisymmetry, equality `x ＝ y` in a decidable total order is

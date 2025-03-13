@@ -198,20 +198,20 @@ module _
   pr2 product-Decidable-Prop = is-decidable-prop-product-Decidable-Prop
 ```
 
-### The dependent sum of a family of decidable propositions over a decidable, irrefutably π₀-trivial base is decidable
+### The dependent sum of a family of decidable propositions over a decidable base with double negation dense equality is decidable
 
 ```agda
-is-decidable-Σ-all-elements-irrefutably-equal-base :
+is-decidable-Σ-has-double-negation-dense-equality-base :
   {l1 l2 : Level} {P : UU l1} {Q : P → UU l2} →
-  all-elements-irrefutably-equal P →
+  has-double-negation-dense-equality P →
   is-decidable P →
   ((x : P) → is-decidable (Q x)) → is-decidable (Σ P Q)
-is-decidable-Σ-all-elements-irrefutably-equal-base {Q = Q} hP (inl p) dQ =
+is-decidable-Σ-has-double-negation-dense-equality-base {Q = Q} hP (inl p) dQ =
   map-coproduct
     ( pair p)
     ( λ nq pq → hP (pr1 pq) p (λ r → nq (tr Q r (pr2 pq))))
     ( dQ p)
-is-decidable-Σ-all-elements-irrefutably-equal-base hP (inr np) dQ =
+is-decidable-Σ-has-double-negation-dense-equality-base hP (inr np) _ =
   inr (map-neg pr1 np)
 ```
 
@@ -231,7 +231,7 @@ module _
 
   is-decidable-is-decidable-prop-Σ : is-decidable (Σ P Q)
   is-decidable-is-decidable-prop-Σ =
-    is-decidable-Σ-all-elements-irrefutably-equal-base
+    is-decidable-Σ-has-double-negation-dense-equality-base
       ( λ x y →
         intro-double-negation (eq-is-prop (is-prop-type-is-decidable-prop H)))
       ( is-decidable-type-is-decidable-prop H)

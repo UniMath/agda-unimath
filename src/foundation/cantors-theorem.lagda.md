@@ -79,8 +79,8 @@ module _
   not-in-image-subtype-theorem-Cantor (ξ , α) =
     no-fixed-points-neg-Prop (f ξ ξ) (iff-eq (htpy-eq α ξ))
 
-  theorem-irrefutably-surjective-Cantor : ¬ (is-double-negation-dense-map f)
-  theorem-irrefutably-surjective-Cantor H =
+  theorem-double-negation-dense-Cantor : ¬ (is-double-negation-dense-map f)
+  theorem-double-negation-dense-Cantor H =
     H subtype-theorem-Cantor not-in-image-subtype-theorem-Cantor
 
   abstract
@@ -88,7 +88,7 @@ module _
     theorem-Cantor =
       map-neg
         is-double-negation-dense-map-is-surjective
-        theorem-irrefutably-surjective-Cantor
+        theorem-double-negation-dense-Cantor
 ```
 
 ### Cantor's theorem for the set of decidable subtypes
@@ -111,9 +111,9 @@ module _
       ( f x x)
       ( iff-eq (ap prop-Decidable-Prop (htpy-eq α x)))
 
-  theorem-irrefutably-surjective-decidable-Cantor :
+  theorem-double-negation-dense-decidable-Cantor :
     ¬ (is-double-negation-dense-map f)
-  theorem-irrefutably-surjective-decidable-Cantor H =
+  theorem-double-negation-dense-decidable-Cantor H =
     H map-theorem-decidable-Cantor not-in-image-map-theorem-decidable-Cantor
 
   abstract
@@ -121,7 +121,7 @@ module _
     theorem-decidable-Cantor =
       map-neg
         is-double-negation-dense-map-is-surjective
-        theorem-irrefutably-surjective-decidable-Cantor
+        theorem-double-negation-dense-decidable-Cantor
 ```
 
 ### Cantor's theorem for the set of double negation stable subtypes
@@ -146,9 +146,9 @@ module _
       ( f x x)
       ( iff-eq (ap prop-Double-Negation-Stable-Prop (htpy-eq α x)))
 
-  theorem-irrefutably-surjective-double-negation-stable-Cantor :
+  theorem-double-negation-dense-double-negation-stable-Cantor :
     ¬ (is-double-negation-dense-map f)
-  theorem-irrefutably-surjective-double-negation-stable-Cantor H =
+  theorem-double-negation-dense-double-negation-stable-Cantor H =
     H map-theorem-double-negation-stable-Cantor
       not-in-image-map-theorem-double-negation-stable-Cantor
 
@@ -157,7 +157,7 @@ module _
     theorem-double-negation-stable-Cantor =
       map-neg
         is-double-negation-dense-map-is-surjective
-        theorem-irrefutably-surjective-double-negation-stable-Cantor
+        theorem-double-negation-dense-double-negation-stable-Cantor
 ```
 
 ### Cantor's theorem for the set of De Morgan subtypes
@@ -180,9 +180,9 @@ module _
       ( f x x)
       ( iff-eq (ap prop-De-Morgan-Prop (htpy-eq α x)))
 
-  theorem-irrefutably-surjective-de-morgan-Cantor :
+  theorem-double-negation-dense-de-morgan-Cantor :
     ¬ (is-double-negation-dense-map f)
-  theorem-irrefutably-surjective-de-morgan-Cantor H =
+  theorem-double-negation-dense-de-morgan-Cantor H =
     H map-theorem-de-morgan-Cantor not-in-image-map-theorem-de-morgan-Cantor
 
   abstract
@@ -190,7 +190,7 @@ module _
     theorem-de-morgan-Cantor =
       map-neg
         is-double-negation-dense-map-is-surjective
-        theorem-irrefutably-surjective-de-morgan-Cantor
+        theorem-double-negation-dense-de-morgan-Cantor
 ```
 
 ## References

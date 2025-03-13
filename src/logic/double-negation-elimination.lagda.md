@@ -219,12 +219,12 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  double-negation-elim-Σ-all-elements-irrefutably-equal-base :
-    all-elements-irrefutably-equal A →
+  double-negation-elim-Σ-has-double-negation-dense-equality-base :
+    has-double-negation-dense-equality A →
     has-double-negation-elim A →
     ((x : A) → has-double-negation-elim (B x)) →
     has-double-negation-elim (Σ A B)
-  double-negation-elim-Σ-all-elements-irrefutably-equal-base H f g h =
+  double-negation-elim-Σ-has-double-negation-dense-equality-base H f g h =
     ( f ( map-double-negation pr1 h)) ,
     ( g ( f ( map-double-negation pr1 h))
         ( λ nb →
@@ -239,8 +239,8 @@ module _
     ((x : A) → has-double-negation-elim (B x)) →
     has-double-negation-elim (Σ A B)
   double-negation-elim-Σ-all-elements-merely-equal-base H =
-    double-negation-elim-Σ-all-elements-irrefutably-equal-base
-      ( all-elements-irrefutably-equal-all-elements-merely-equal H)
+    double-negation-elim-Σ-has-double-negation-dense-equality-base
+      ( has-double-negation-dense-equality-all-elements-merely-equal H)
 
   double-negation-elim-Σ-is-prop-base :
     is-prop A → has-double-negation-elim A →

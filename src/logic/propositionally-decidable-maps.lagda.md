@@ -17,11 +17,11 @@ open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.double-negation-dense-equality-maps
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.mere-equality
-open import foundation.pi-0-trivial-maps
 open import foundation.propositional-truncations
 open import foundation.retracts-of-maps
 open import foundation.transport-along-identifications
@@ -156,7 +156,7 @@ module _
 ```
 
 The composite `g ∘ f` of two propositionally decidable maps is propositionally
-decidable if `g` is π₀-trivial.
+decidable if `g` has double negation dense equality.
 
 ```agda
 module _
@@ -165,15 +165,16 @@ module _
   where
 
   abstract
-    is-inhabited-or-empty-map-comp-is-π₀-trivial-map' :
-      is-π₀-trivial-map' g →
+    is-inhabited-or-empty-map-comp-has-double-negation-dense-equality-map :
+      has-double-negation-dense-equality-map g →
       is-inhabited-or-empty-map g →
       is-inhabited-or-empty-map f →
       is-inhabited-or-empty-map (g ∘ f)
-    is-inhabited-or-empty-map-comp-is-π₀-trivial-map' H G F x =
+    is-inhabited-or-empty-map-comp-has-double-negation-dense-equality-map
+      H G F x =
       is-inhabited-or-empty-equiv
         ( compute-fiber-comp g f x)
-        ( is-inhabited-or-empty-Σ-all-elements-merely-equal-base
+        ( is-inhabited-or-empty-Σ-has-double-negation-dense-equality-base
           ( H x)
           ( G x)
           ( F ∘ pr1))
@@ -181,16 +182,19 @@ module _
 module _
   {l1 : Level} {A : UU l1} {f : A → A}
   (is-inhabited-or-empty-f : is-inhabited-or-empty-map f)
-  (is-π₀-trivial-f : is-π₀-trivial-map' f)
+  (F : has-double-negation-dense-equality-map f)
   where
 
-  is-inhabited-or-empty-map-iterate-is-π₀-trivial-map' :
+  is-inhabited-or-empty-map-iterate-has-double-negation-dense-equality-map :
     (n : ℕ) → is-inhabited-or-empty-map (iterate n f)
-  is-inhabited-or-empty-map-iterate-is-π₀-trivial-map' zero-ℕ =
+  is-inhabited-or-empty-map-iterate-has-double-negation-dense-equality-map
+    zero-ℕ =
     is-inhabited-or-empty-map-id
-  is-inhabited-or-empty-map-iterate-is-π₀-trivial-map' (succ-ℕ n) =
-    is-inhabited-or-empty-map-comp-is-π₀-trivial-map'
-      ( is-π₀-trivial-f)
+  is-inhabited-or-empty-map-iterate-has-double-negation-dense-equality-map
+    ( succ-ℕ n) =
+    is-inhabited-or-empty-map-comp-has-double-negation-dense-equality-map
+      ( F)
       ( is-inhabited-or-empty-f)
-      ( is-inhabited-or-empty-map-iterate-is-π₀-trivial-map' n)
+      ( is-inhabited-or-empty-map-iterate-has-double-negation-dense-equality-map
+        ( n))
 ```

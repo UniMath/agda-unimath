@@ -49,6 +49,7 @@ open import set-theory.bounded-increasing-binary-sequences public
 open import set-theory.cantor-space public
 open import set-theory.cantors-diagonal-argument public
 open import set-theory.cardinalities public
+open import set-theory.compactness-increasing-binary-sequences public
 open import set-theory.countable-sets public
 open import set-theory.cumulative-hierarchy public
 open import set-theory.finite-elements-increasing-binary-sequences public

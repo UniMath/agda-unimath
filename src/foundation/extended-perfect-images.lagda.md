@@ -21,6 +21,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-dense-equality-maps
 open import foundation.double-negation-stable-propositions
 open import foundation.fibers-of-extended-iterated-maps
 open import foundation.functoriality-dependent-function-types
@@ -109,10 +110,10 @@ module _
 
   is-extended-nonperfect-image : (a : A) → UU (l1 ⊔ l2)
   is-extended-nonperfect-image a =
-   Σ ℕ∞↑ -- TODO: does it suffice to consider finite `n` here?
-    ( λ n →
-      Σ ( fiber-extended-iterate n (g ∘ f) a)
-        ( λ p → ¬ (fiber g (inclusion-fiber-extended-iterate n (g ∘ f) p))))
+    Σ ℕ∞↑ -- TODO: does it suffice to consider finite `n` here?
+      ( λ n →
+        Σ ( fiber-extended-iterate n (g ∘ f) a)
+          ( λ p → ¬ (fiber g (inclusion-fiber-extended-iterate n (g ∘ f) p))))
 ```
 
 ### Extended nonperfect fibers over an element
@@ -247,7 +248,8 @@ module _
       ( γ (ap-fiber-extended-iterate' n (g ∘ f) a p))
 
   previous-extended-perfect-image :
-    (a : A) → is-extended-perfect-image f g (g (f a)) → is-extended-perfect-image f g a
+    (a : A) →
+    is-extended-perfect-image f g (g (f a)) → is-extended-perfect-image f g a
   previous-extended-perfect-image a γ n =
     previous-extended-perfect-image-at a n (γ (succ-ℕ∞↑ n))
     -- previous-extended-perfect-image-at a n (γ (succ-ℕ∞↑ n))
@@ -293,7 +295,7 @@ module _
   double-negation-elim-is-extended-perfect-image :
     is-double-negation-eliminating-map g →
     (a : A) →
-     ¬ (is-extended-nonperfect-image f g a) → is-extended-perfect-image f g a
+    ¬ (is-extended-nonperfect-image f g a) → is-extended-perfect-image f g a
   double-negation-elim-is-extended-perfect-image G a nρ n q =
     G (inclusion-fiber-extended-iterate n (g ∘ f) q) (λ ng → nρ (n , q , ng))
 ```
@@ -318,7 +320,7 @@ module _
     is-injective g → (b : B) →
     is-extended-nonperfect-image f g (g b) → has-extended-nonperfect-fiber f g b
   has-extended-nonperfect-fiber-is-extended-nonperfect-image G b (n , p , ng) =
-    ( (g ∘ f) (sequence-fiber-extended-iterate n (g ∘ f) p (self-bounded-ℕ∞↑ n)) ,
+    ( g (f (sequence-fiber-extended-iterate n (g ∘ f) p (self-bounded-ℕ∞↑ n))) ,
       G {!   !}) , {! ng  !}
   -- TODO: gotta find a way to show this by coinduction... 👀
   -- TODO: this lemma is only used to prove a negative result, so it might be possible to case analyze at infinity mayhaps?
@@ -335,8 +337,10 @@ module _
     ¬¬ (has-extended-nonperfect-fiber f g b)
   is-irrefutable-has-extended-nonperfect-fiber-is-not-extended-perfect-image
     G G' b nρ t =
-    is-irrefutable-is-extended-nonperfect-image-is-not-extended-perfect-image G b nρ
-      ( λ s → t (has-extended-nonperfect-fiber-is-extended-nonperfect-image G' b s))
+    is-irrefutable-is-extended-nonperfect-image-is-not-extended-perfect-image
+      G b nρ
+      ( λ s →
+        t (has-extended-nonperfect-fiber-is-extended-nonperfect-image G' b s))
 ```
 
 If `f` has double negation elimination and dense equality on fibers, then
@@ -348,10 +352,10 @@ module _
 
   double-negation-elim-has-extended-nonperfect-fiber :
     is-double-negation-eliminating-map f →
-    ((y : B) → all-elements-irrefutably-equal (fiber f y)) →
+    (has-double-negation-dense-equality-map f) →
     (b : B) → has-double-negation-elim (has-extended-nonperfect-fiber f g b)
   double-negation-elim-has-extended-nonperfect-fiber F F' b =
-    double-negation-elim-Σ-all-elements-irrefutably-equal-base (F' b) (F b)
+    double-negation-elim-Σ-has-double-negation-dense-equality-base (F' b) (F b)
       ( λ p → double-negation-elim-neg (is-extended-perfect-image f g (pr1 p)))
 
 module _
@@ -359,7 +363,8 @@ module _
   (is-double-negation-eliminating-g : is-double-negation-eliminating-map g)
   (is-injective-g : is-injective g)
   (is-double-negation-eliminating-f : is-double-negation-eliminating-map f)
-  (is-π₀-trivial-f : (y : B) → all-elements-irrefutably-equal (fiber f y))
+  (has-double-negation-dense-equality-f :
+    has-double-negation-dense-equality-map f)
   (b : B) (nρ : ¬ (is-extended-perfect-image f g (g b)))
   where
 
@@ -368,7 +373,7 @@ module _
   has-extended-nonperfect-fiber-is-not-extended-perfect-image =
     double-negation-elim-has-extended-nonperfect-fiber
       ( is-double-negation-eliminating-f)
-      ( is-π₀-trivial-f)
+      ( has-double-negation-dense-equality-f)
       ( b)
       ( is-irrefutable-has-extended-nonperfect-fiber-is-not-extended-perfect-image
         ( is-double-negation-eliminating-g)
@@ -390,7 +395,10 @@ module _
     pr2 fiber-has-extended-nonperfect-fiber-is-not-extended-perfect-image
 
   is-not-extended-perfect-image-has-extended-nonperfect-fiber-is-not-extended-perfect-image :
-    ¬ (is-extended-perfect-image f g element-has-extended-nonperfect-fiber-is-not-extended-perfect-image)
+    ¬ ( is-extended-perfect-image
+          f
+          g
+          element-has-extended-nonperfect-fiber-is-not-extended-perfect-image)
   is-not-extended-perfect-image-has-extended-nonperfect-fiber-is-not-extended-perfect-image =
     pr2 has-extended-nonperfect-fiber-is-not-extended-perfect-image
 ```
@@ -400,7 +408,7 @@ module _
 Assuming `g` and `f` are decidable embedding, then for every natural number
 `n : ℕ∞↑` and every element `a : A` it is decidable whether `a` is a perfect
 image of `g` relative to `f` after `n` iterations. In fact, the map `f` need
-only be propositionally decidable and π₀-trivial.
+only be propositionally decidable and have double negation dense equality.
 
 ```text
 module _
@@ -411,7 +419,7 @@ module _
     is-decidable-emb g → is-inhabited-or-empty-map f → is-π₀-trivial-map' f →
     (a : A) (n : ℕ∞↑) → is-decidable-prop (is-extended-perfect-image-at f g a n)
   is-decidable-prop-is-extended-perfect-image-at' G F F' a n =
-    is-decidable-prop-Π-all-elements-irrefutably-equal-base'
+    is-decidable-prop-Π-has-double-negation-dense-equality-base'
     ( λ x → fiber g (pr1 x) , is-decidable-prop-map-is-decidable-emb G (pr1 x))
     ( is-π₀-trivial-map'-iterate
       ( is-π₀-trivial-map'-comp

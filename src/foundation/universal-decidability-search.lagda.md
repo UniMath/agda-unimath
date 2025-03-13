@@ -37,7 +37,6 @@ open import foundation.irrefutable-equality
 open import foundation.locally-small-types
 open import foundation.mere-equality
 open import foundation.negation
-open import foundation.pi-0-trivial-maps
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -372,7 +371,7 @@ has-universal-decidability-search-count f =
 has-universal-decidability-search-bool : has-universal-decidability-search bool
 has-universal-decidability-search-bool =
   has-universal-decidability-search-equiv'
-    ( equiv-bool-Fin-two-ℕ)
+    ( equiv-bool-Fin-2)
     ( has-universal-decidability-search-Fin 2)
 ```
 
@@ -447,36 +446,39 @@ abstract
       ( is-inhabited-or-empty-is-decidable d)
 ```
 
-### Decidable irrefutably π₀-trivial types have universal decidability search
+### Decidable types with double negation dense equality have universal decidability search
 
 ```agda
 abstract
-  has-universal-decidability-search-is-decidable-all-elements-irrefutably-equal :
+  has-universal-decidability-search-is-decidable-has-double-negation-dense-equality :
     {l : Level} {X : UU l} →
-    all-elements-irrefutably-equal X →
+    has-double-negation-dense-equality X →
     is-decidable X →
     has-universal-decidability-search X
-  has-universal-decidability-search-is-decidable-all-elements-irrefutably-equal
+  has-universal-decidability-search-is-decidable-has-double-negation-dense-equality
     H d =
     has-universal-decidability-search-has-decidability-search
-      ( has-decidability-search-is-decidable-all-elements-irrefutably-equal H d)
+      ( has-decidability-search-is-decidable-has-double-negation-dense-equality
+        ( H)
+        ( d))
 ```
 
 ### The total space of decidable π₀-trivial families over types with universal decidability search have universal decidability search
 
 ```agda
 abstract
-  has-universal-decidability-search-Σ-decidable-family-all-elements-irrefutably-equal :
+  has-universal-decidability-search-Σ-decidable-family-has-double-negation-dense-equality :
     {l1 l2 : Level} {X : UU l1} →
     has-universal-decidability-search X →
     (P : decidable-family l2 X) →
-    ((x : X) → all-elements-irrefutably-equal (family-decidable-family P x)) →
+    ( (x : X) →
+      has-double-negation-dense-equality (family-decidable-family P x)) →
     has-universal-decidability-search (Σ X (family-decidable-family P))
-  has-universal-decidability-search-Σ-decidable-family-all-elements-irrefutably-equal
+  has-universal-decidability-search-Σ-decidable-family-has-double-negation-dense-equality
     f P H =
     has-universal-decidability-search-Σ f
       ( λ x →
-        has-universal-decidability-search-is-decidable-all-elements-irrefutably-equal
+        has-universal-decidability-search-is-decidable-has-double-negation-dense-equality
           ( H x)
           ( is-decidable-decidable-family P x))
 ```
@@ -491,7 +493,7 @@ abstract
     (P : decidable-subtype l2 X) →
     has-universal-decidability-search (type-decidable-subtype P)
   has-universal-decidability-search-type-decidable-subtype {X = X} f P =
-    has-universal-decidability-search-Σ-decidable-family-all-elements-irrefutably-equal
+    has-universal-decidability-search-Σ-decidable-family-has-double-negation-dense-equality
       ( f)
       ( decidable-family-decidable-subtype P)
       ( λ x p q →

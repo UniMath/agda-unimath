@@ -9,6 +9,7 @@ module set-theory.compactness-increasing-binary-sequences where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.conatural-numbers
 open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -16,39 +17,34 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.constant-maps
-open import foundation.transport-along-identifications
-open import foundation.functoriality-coproduct-types
-open import foundation.negation
 open import foundation.coproduct-types
+open import foundation.decidability-search
+open import foundation.decidable-type-families
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.double-negation-stable-equality
-open import foundation.decidable-type-families
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.universal-decidability-search
-open import foundation.decidability-search
 open import foundation.function-types
+open import foundation.functoriality-coproduct-types
 open import foundation.homotopies
 open import foundation.inequality-booleans
-open import set-theory.increasing-binary-sequences
 open import foundation.injective-maps
 open import foundation.logical-operations-booleans
 open import foundation.maybe
-open import elementary-number-theory.conatural-numbers
 open import foundation.negated-equality
+open import foundation.negation
 open import foundation.propositions
 open import foundation.retractions
-open import foundation.decidability-search
 open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.tight-apartness-relations
+open import foundation.transport-along-identifications
 open import foundation.unit-type
-open import foundation.decidability-search
 open import foundation.universal-decidability-search
 open import foundation.universe-levels
 
@@ -57,8 +53,8 @@ open import foundation-core.identity-types
 open import order-theory.order-preserving-maps-posets
 
 open import set-theory.cantor-space
-open import set-theory.increasing-binary-sequences
 open import set-theory.inclusion-natural-numbers-increasing-binary-sequences
+open import set-theory.increasing-binary-sequences
 ```
 
 </details>
@@ -95,7 +91,7 @@ abstract
       ( refl-leq-ℕ-ℕ∞↑ n)
 
     Dagger₁ : a ＝ infinity-ℕ∞↑ → (n : ℕ) → p (inclusion-ℕ∞↑-ℕ n) ＝ false
-    Dagger₁ r 0 =  ap (λ - →  pr1 - 0) r
+    Dagger₁ r 0 = ap (λ - → pr1 - 0) r
     Dagger₁ r (succ-ℕ n) =
       ( inv
         ( ( ap

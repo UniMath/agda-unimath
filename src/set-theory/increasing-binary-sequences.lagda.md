@@ -326,10 +326,6 @@ abstract
   eq-zero-is-zero-ℕ∞↑ x p = eq-Eq-ℕ∞↑ (Eq-zero-is-zero-ℕ∞↑ x p)
 ```
 
-### Case analysis on zero
-
-### If two increasing binary sequences are nonequal, then they must differ at some position
-
 ## See also
 
 - [The conatural numbers](elementary-number-theory.conatural-numbers.md)

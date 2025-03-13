@@ -37,7 +37,6 @@ open import foundation.locally-small-types
 open import foundation.logical-operations-booleans
 open import foundation.mere-equality
 open import foundation.negation
-open import foundation.pi-0-trivial-maps
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -358,8 +357,7 @@ has-decidability-search-has-pointed-decidability-search {X = X} f P =
     ( pair (pr1 (f P)))
     ( λ np xp → np TODO)
     ( is-decidable-decidable-family P (pr1 (f P)))
- where postulate TODO : _ -- TODO
-
+  where postulate TODO : _ -- TODO
 ```
 
 ### Decidability search transfers along double negation dense maps
@@ -423,14 +421,14 @@ has-decidability-search-equiv' e =
   has-decidability-search-retract (retract-inv-equiv e)
 ```
 
-### Decidable types that are irrefutably π₀-trivial have decidability search
+### Decidable types that with double negation dense equality have decidability search
 
 ```agda
-has-decidability-search-is-decidable-all-elements-irrefutably-equal :
-  {l1 : Level} {X : UU l1} → all-elements-irrefutably-equal X →
+has-decidability-search-is-decidable-has-double-negation-dense-equality :
+  {l1 : Level} {X : UU l1} → has-double-negation-dense-equality X →
   is-decidable X → has-decidability-search X
-has-decidability-search-is-decidable-all-elements-irrefutably-equal H d P =
-  is-decidable-Σ-all-elements-irrefutably-equal-base H d
+has-decidability-search-is-decidable-has-double-negation-dense-equality H d P =
+  is-decidable-Σ-has-double-negation-dense-equality-base H d
     ( is-decidable-decidable-family P)
 ```
 
@@ -539,21 +537,22 @@ module _
             ( λ x → g x (reindex-decidable-family P (λ b → (x , b))))))
 ```
 
-### The total space of decidable irrefutably π₀-trivial families over types with decidability search have decidability search
+### The total space of decidable families of types with double negation dense equality over types with decidability search have decidability search
 
 ```agda
 abstract
-  has-decidability-search-Σ-decidable-family-all-elements-irrefutably-equal :
+  has-decidability-search-Σ-decidable-family-has-double-negation-dense-equality :
     {l1 l2 : Level} {X : UU l1} →
     has-decidability-search X →
     (P : decidable-family l2 X) →
-    ((x : X) → all-elements-irrefutably-equal (family-decidable-family P x)) →
+    ( (x : X) →
+      has-double-negation-dense-equality (family-decidable-family P x)) →
     has-decidability-search (Σ X (family-decidable-family P))
-  has-decidability-search-Σ-decidable-family-all-elements-irrefutably-equal
+  has-decidability-search-Σ-decidable-family-has-double-negation-dense-equality
     f P H =
     has-decidability-search-Σ f
       ( λ x →
-        has-decidability-search-is-decidable-all-elements-irrefutably-equal
+        has-decidability-search-is-decidable-has-double-negation-dense-equality
           ( H x)
           ( is-decidable-decidable-family P x))
 ```
@@ -632,7 +631,7 @@ has-decidability-search-count f =
 has-decidability-search-bool' : has-decidability-search bool
 has-decidability-search-bool' =
   has-decidability-search-equiv'
-    ( equiv-bool-Fin-two-ℕ)
+    ( equiv-bool-Fin-2)
     ( has-decidability-search-Fin 2)
 ```
 

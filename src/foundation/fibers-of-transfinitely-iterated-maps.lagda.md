@@ -55,12 +55,14 @@ module _
   fiber-transfinite-iterate : UU l1
   fiber-transfinite-iterate =
     Σ ( ℕ∞↑ → A)
-      ( λ x → (f (x zero-ℕ∞↑) ＝ b) × ((k : ℕ∞↑) → f (x (succ-ℕ∞↑ (succ-ℕ∞↑ k))) ＝ x (succ-ℕ∞↑ k)))
+      ( λ x →
+        ( f (x zero-ℕ∞↑) ＝ b) ×
+        ( (k : ℕ∞↑) → f (x (succ-ℕ∞↑ (succ-ℕ∞↑ k))) ＝ x (succ-ℕ∞↑ k)))
 
   fiber-transfinite-iterate' : UU l1
   fiber-transfinite-iterate' =
-   Σ (ℕ∞↑ → A)
-    ( λ x → (b ＝ f (x zero-ℕ∞↑)) × ((k : ℕ∞↑) → x k ＝ f (x (succ-ℕ∞↑ k))))
+    Σ (ℕ∞↑ → A)
+      ( λ x → (b ＝ f (x zero-ℕ∞↑)) × ((k : ℕ∞↑) → x k ＝ f (x (succ-ℕ∞↑ k))))
 
 module _
   {l1 : Level} {A : UU l1} (f : A → A) (b : A)

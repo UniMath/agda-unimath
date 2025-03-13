@@ -16,6 +16,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-dense-equality-maps
 open import foundation.extended-perfect-images
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -110,7 +111,7 @@ module _
     ex-falso (v γ)
 
   compute-map-construction-is-not-extended-perfect-image-Cantor-Schröder-Bernstein–Escardó :
-    (F' : (y : B) → all-elements-irrefutably-equal (fiber f y)) →
+    (F' : has-double-negation-dense-equality-map f) →
     (y : B) →
     (nγ : ¬ (is-extended-perfect-image f g (g y))) →
     (d :
@@ -119,7 +120,8 @@ module _
           ( element-has-extended-nonperfect-fiber-is-not-extended-perfect-image
               G G' F F' y nγ))) →
     map-construction-is-decidable-is-extended-perfect-image-Cantor-Schröder-Bernstein–Escardó
-      ( element-has-extended-nonperfect-fiber-is-not-extended-perfect-image G G' F F' y nγ)
+      ( element-has-extended-nonperfect-fiber-is-not-extended-perfect-image
+          G G' F F' y nγ)
       ( d) ＝
     y
   compute-map-construction-is-not-extended-perfect-image-Cantor-Schröder-Bernstein–Escardó
@@ -133,16 +135,17 @@ module _
       G G' F F' y nγ
 
   map-section-construction-is-decidable-is-extended-perfect-image-Cantor-Schröder-Bernstein–Escardó :
-    (F' : (y : B) → all-elements-irrefutably-equal (fiber f y)) →
+    (F' : has-double-negation-dense-equality-map f) →
     (y : B) → is-decidable (is-extended-perfect-image f g (g y)) → A
   map-section-construction-is-decidable-is-extended-perfect-image-Cantor-Schröder-Bernstein–Escardó
     F' y (inl _) = g y
   map-section-construction-is-decidable-is-extended-perfect-image-Cantor-Schröder-Bernstein–Escardó
     F' y (inr nγ) =
-    element-has-extended-nonperfect-fiber-is-not-extended-perfect-image G G' F F' y nγ
+    element-has-extended-nonperfect-fiber-is-not-extended-perfect-image
+      G G' F F' y nγ
 
   is-section-map-section-construction-is-decidable-is-extended-perfect-image-Cantor-Schröder-Bernstein–Escardó :
-    (F' : (y : B) → all-elements-irrefutably-equal (fiber f y)) →
+    (F' : has-double-negation-dense-equality-map f) →
     (y : B)
     (d : is-decidable (is-extended-perfect-image f g (g y))) →
     (d' :
@@ -172,7 +175,7 @@ module _
       ( D x)
 
   map-section-construction-Cantor-Schröder-Bernstein–Escardó :
-    (F' : (y : B) → all-elements-irrefutably-equal (fiber f y)) →
+    (F' : has-double-negation-dense-equality-map f) →
     (D : (y : B) → is-decidable (is-extended-perfect-image f g (g y))) → B → A
   map-section-construction-Cantor-Schröder-Bernstein–Escardó F' D y =
     map-section-construction-is-decidable-is-extended-perfect-image-Cantor-Schröder-Bernstein–Escardó
@@ -181,7 +184,7 @@ module _
       ( D y)
 
   is-section-map-section-construction-Cantor-Schröder-Bernstein–Escardó :
-    (F' : (y : B) → all-elements-irrefutably-equal (fiber f y)) →
+    (F' : has-double-negation-dense-equality-map f) →
     (D : (x : A) → is-decidable (is-extended-perfect-image f g x)) →
     is-section
       ( map-construction-Cantor-Schröder-Bernstein–Escardó D)
@@ -195,7 +198,7 @@ module _
               F' (D ∘ g) y))
 
   section-construction-Cantor-Schröder-Bernstein–Escardó :
-    (F' : (y : B) → all-elements-irrefutably-equal (fiber f y)) →
+    (F' : has-double-negation-dense-equality-map f) →
     (D : (x : A) → is-decidable (is-extended-perfect-image f g x)) →
     section (map-construction-Cantor-Schröder-Bernstein–Escardó D)
   section-construction-Cantor-Schröder-Bernstein–Escardó F' D =
@@ -237,7 +240,7 @@ Piecing it all together.
 
 ```agda
   is-equiv-map-construction-Cantor-Schröder-Bernstein–Escardó :
-    (F' : (y : B) → all-elements-irrefutably-equal (fiber f y)) →
+    (F' : has-double-negation-dense-equality-map f) →
     (F'' : is-injective f) →
     (D : (x : A) → is-decidable (is-extended-perfect-image f g x)) →
     is-equiv (map-construction-Cantor-Schröder-Bernstein–Escardó D)
@@ -252,7 +255,7 @@ Piecing it all together.
           ( D x'))
 
   equiv-construction-Cantor-Schröder-Bernstein–Escardó :
-    (F' : (y : B) → all-elements-irrefutably-equal (fiber f y)) →
+    (F' : has-double-negation-dense-equality-map f) →
     (F'' : is-injective f) →
     (D : (x : A) → is-decidable (is-extended-perfect-image f g x)) →
     A ≃ B

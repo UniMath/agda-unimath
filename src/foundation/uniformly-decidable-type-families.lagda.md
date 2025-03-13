@@ -194,20 +194,21 @@ module _
     is-trunc-succ-succ-is-uniformly-decidable-family k H
 ```
 
-### A family of decidable propositions over a irrefutably π₀-trivial decidable base are uniformly decidable
+### Every family of decidable propositions over a decidable base with double negation dense equality is uniformly decidable
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (H : all-elements-irrefutably-equal A)
+  (H : has-double-negation-dense-equality A)
   (dB : is-decidable-family B)
   where
 
   abstract
-    is-uniformly-decidable-family-all-elements-irrefutably-equal-base :
+    is-uniformly-decidable-family-has-double-negation-dense-equality-base :
       is-decidable A →
       is-uniformly-decidable-family B
-    is-uniformly-decidable-family-all-elements-irrefutably-equal-base (inl a) =
+    is-uniformly-decidable-family-has-double-negation-dense-equality-base
+      (inl a) =
       map-coproduct
         ( λ b x →
           double-negation-elim-is-decidable
@@ -215,24 +216,26 @@ module _
             ( λ nb → H a x (λ p → nb (tr B p b))))
         ( λ nb x b → H x a (λ p → nb (tr B p b)))
         ( dB a)
-    is-uniformly-decidable-family-all-elements-irrefutably-equal-base (inr na) =
+    is-uniformly-decidable-family-has-double-negation-dense-equality-base
+      (inr na) =
       inr (ex-falso ∘ na)
 
   abstract
-    is-uniformly-decidable-family-all-elements-irrefutably-equal-base' :
+    is-uniformly-decidable-family-has-double-negation-dense-equality-base' :
       is-inhabited-or-empty A →
       ((x : A) → is-prop (B x)) →
       is-uniformly-decidable-family B
-    is-uniformly-decidable-family-all-elements-irrefutably-equal-base'
+    is-uniformly-decidable-family-has-double-negation-dense-equality-base'
       ( inl |a|) K =
       rec-trunc-Prop
         ( is-uniformly-decidable-family-Prop (A , |a|) (λ x → (B x , K x)))
-        ( is-uniformly-decidable-family-all-elements-irrefutably-equal-base ∘
+        ( is-uniformly-decidable-family-has-double-negation-dense-equality-base ∘
           inl)
         ( |a|)
-    is-uniformly-decidable-family-all-elements-irrefutably-equal-base'
+    is-uniformly-decidable-family-has-double-negation-dense-equality-base'
       ( inr na) K =
-      is-uniformly-decidable-family-all-elements-irrefutably-equal-base (inr na)
+      is-uniformly-decidable-family-has-double-negation-dense-equality-base
+        ( inr na)
 ```
 
 ### A family of decidable propositions over a π₀-trivial decidable base are uniformly decidable
@@ -249,8 +252,8 @@ module _
       is-decidable A →
       is-uniformly-decidable-family B
     is-uniformly-decidable-family-all-elements-merely-equal-base =
-      is-uniformly-decidable-family-all-elements-irrefutably-equal-base
-        ( all-elements-irrefutably-equal-all-elements-merely-equal H)
+      is-uniformly-decidable-family-has-double-negation-dense-equality-base
+        ( has-double-negation-dense-equality-all-elements-merely-equal H)
         ( dB)
 
   abstract
@@ -259,7 +262,7 @@ module _
       ((x : A) → is-prop (B x)) →
       is-uniformly-decidable-family B
     is-uniformly-decidable-family-all-elements-merely-equal-base' =
-      is-uniformly-decidable-family-all-elements-irrefutably-equal-base'
-        ( all-elements-irrefutably-equal-all-elements-merely-equal H)
+      is-uniformly-decidable-family-has-double-negation-dense-equality-base'
+        ( has-double-negation-dense-equality-all-elements-merely-equal H)
         ( dB)
 ```

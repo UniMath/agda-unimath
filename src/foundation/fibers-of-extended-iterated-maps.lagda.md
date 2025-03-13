@@ -63,7 +63,7 @@ module _
 
   fiber-extended-iterate' : UU l
   fiber-extended-iterate' =
-   Σ ( bounded-ℕ∞↑ (succ-ℕ∞↑ n) → A)
+    Σ ( bounded-ℕ∞↑ (succ-ℕ∞↑ n) → A)
       ( λ x →
         ( b ＝ x (zero-bounded-ℕ∞↑ (succ-ℕ∞↑ n))) ×
         ( (k : bounded-ℕ∞↑ n) →
@@ -141,13 +141,21 @@ module _
   ap-fiber-extended-iterate (x , p₀ , p) = (f ∘ x , ap f p₀ , ap f ∘ p)
 
   ap-fiber-extended-iterate' :
-    (p : fiber-extended-iterate n f a) → fiber-extended-iterate (succ-ℕ∞↑ n) f (f a)
+    (p : fiber-extended-iterate n f a) →
+    fiber-extended-iterate (succ-ℕ∞↑ n) f (f a)
   ap-fiber-extended-iterate' p =
-    pad-left-fiber-extended-iterate n f (f a) (ap-fiber-extended-iterate p) (sequence-fiber-extended-iterate n f p (self-bounded-ℕ∞↑ n)) refl
+    pad-left-fiber-extended-iterate n f (f a)
+      ( ap-fiber-extended-iterate p)
+      ( sequence-fiber-extended-iterate n f p (self-bounded-ℕ∞↑ n))
+      ( refl)
 
   compute-ap-fiber-extended-iterate' :
     (p : fiber-extended-iterate n f a) →
-    inclusion-fiber-extended-iterate (succ-ℕ∞↑ n) f (ap-fiber-extended-iterate' p) ＝ inclusion-fiber-extended-iterate n f p
+    inclusion-fiber-extended-iterate
+      ( succ-ℕ∞↑ n)
+      ( f)
+      ( ap-fiber-extended-iterate' p) ＝
+    inclusion-fiber-extended-iterate n f p
   compute-ap-fiber-extended-iterate' p = {!   !}
 ```
 
@@ -157,7 +165,11 @@ module _
 
 ### If the fibers of `f` are decidable then so is `extended-fiber-iterate n f`
 
+> TODO
+
 ### Characterization of the identity types of the fibers of a map
+
+> TODO
 
 #### The case of `fiber-extended-iterate`
 
