@@ -85,8 +85,8 @@ based-preunivalence-instance-strong-preunivalence :
   instance-strong-preunivalence l X → based-preunivalence-axiom X
 based-preunivalence-instance-strong-preunivalence X L Y =
   is-emb-is-prop-map
-    ( backward-implication-subuniverse-equality-duality
-      ( is-prop-Prop)
+    ( backward-implication-structured-equality-duality
+      ( is-prop-equiv')
       ( L)
       ( X)
       ( λ _ → equiv-eq)

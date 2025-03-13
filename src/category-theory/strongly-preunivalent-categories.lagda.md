@@ -83,8 +83,8 @@ module _
     is-preunivalent-Precategory 𝒞
   is-preunivalent-is-strongly-preunivalent-Precategory H x y =
     is-emb-is-prop-map
-      ( backward-implication-subuniverse-equality-duality
-        ( is-prop-Prop)
+      ( backward-implication-structured-equality-duality
+        ( is-prop-equiv')
         ( H x)
         ( x)
         ( iso-eq-Precategory 𝒞 x)
