@@ -1,5 +1,9 @@
 # Set theory
 
+```agda
+{-# OPTIONS --guardedness #-}
+```
+
 ## Idea
 
 In univalent type theory, what we refer to formally as a _set_ is only in one
