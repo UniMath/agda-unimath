@@ -143,6 +143,8 @@ strong-preunivalence = strong-preunivalence-axiom-univalence-axiom univalence
 
 ### The preunivalence axiom together with function extensionality implies strong preunivalence
 
+This argument is due to Evan Cavallo.
+
 ```agda
 funext-and-preunivalence-give-strong-preunivalence :
   {l1 l2 : Level} →

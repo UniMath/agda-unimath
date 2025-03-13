@@ -527,6 +527,48 @@ module _
       ( is-section-hom-inv-iso-Precategory C f)
 ```
 
+### The 3-for-2 property of isomorphisms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Precategory l1 l2)
+  {x y z : obj-Precategory C}
+  (f : hom-Precategory C x y)
+  (g : hom-Precategory C y z)
+  where
+
+  postulate
+    is-iso-left-factor-Precategory :
+      is-iso-Precategory C f →
+      is-iso-Precategory C (comp-hom-Precategory C g f) →
+      is-iso-Precategory C g
+  -- is-iso-left-factor-Precategory is-iso-f is-iso-gf =
+  --   comp-hom-Precategory C f (hom-inv-is-iso-Precategory C is-iso-gf) ,
+  --   ( equational-reasoning
+  --     comp-hom-Precategory C
+  --       ( g)
+  --       ( comp-hom-Precategory C f (hom-inv-is-iso-Precategory C is-iso-gf))
+  --     ＝
+  --     comp-hom-Precategory C
+  --       ( comp-hom-Precategory C g f)
+  --       ( hom-inv-is-iso-Precategory C is-iso-gf)
+  --       by
+  --         inv
+  --           ( associative-comp-hom-Precategory C
+  --             ( g)
+  --             ( f)
+  --             ( hom-inv-is-iso-Precategory C is-iso-gf))
+  --     ＝ id-hom-Precategory C
+  --       by is-section-hom-inv-is-iso-Precategory C is-iso-gf) ,
+  --   ( equational-reasoning
+  --     comp-hom-Precategory C
+  --       ( comp-hom-Precategory C f (hom-inv-is-iso-Precategory C is-iso-gf))
+  --       ( g)
+  --     ＝ {!   !} by associative-comp-hom-Precategory C f (hom-inv-is-iso-Precategory C is-iso-gf) g
+  --     ＝ id-hom-Precategory C by {!   !})
+```
+
 ### The inverse operation is a fibered involution on isomorphisms
 
 ```agda
@@ -704,6 +746,37 @@ module _
     hom-Precategory C y z ≃ hom-Precategory C x z
   equiv-precomp-hom-iso-Precategory =
     equiv-precomp-hom-is-iso-Precategory C (is-iso-iso-Precategory C f) z
+```
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Precategory l1 l2)
+  {x y : obj-Precategory C}
+  (f : iso-Precategory C x y)
+  (z : obj-Precategory C)
+  where
+
+  precomp-iso-Precategory : iso-Precategory C y z → iso-Precategory C x z
+  precomp-iso-Precategory g = comp-iso-Precategory C g f
+
+  is-equiv-precomp-iso-Precategory : is-equiv precomp-iso-Precategory
+  is-equiv-precomp-iso-Precategory =
+    is-equiv-subtype-is-equiv
+      ( is-prop-is-iso-Precategory C)
+      ( is-prop-is-iso-Precategory C)
+      ( precomp-hom-Precategory C (hom-iso-Precategory C f) z)
+      ( λ g is-iso-g →
+        is-iso-comp-is-iso-Precategory C is-iso-g (is-iso-iso-Precategory C f))
+      ( is-equiv-precomp-hom-iso-Precategory C f z)
+      ( λ g →
+        is-iso-left-factor-Precategory C (hom-iso-Precategory C f) g
+          ( is-iso-iso-Precategory C f))
+
+  equiv-precomp-iso-Precategory :
+    iso-Precategory C y z ≃ iso-Precategory C x z
+  equiv-precomp-iso-Precategory =
+    ( precomp-iso-Precategory , is-equiv-precomp-iso-Precategory)
 ```
 
 ### A morphism `f` is an isomorphism if and only if postcomposition by `f` is an equivalence
