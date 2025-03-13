@@ -1,7 +1,7 @@
-# Maps with Hilbert ε-operators
+# Hilbert ε-operators on maps
 
 ```agda
-module foundation.maps-with-hilbert-epsilon-operators where
+module foundation.hilbert-epsilon-operators-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -17,7 +17,8 @@ open import foundation-core.fibers-of-maps
 
 ## Idea
 
-We consider maps `f : A → B` [equipped](foundation.structure.md) with
+A {{#concept "Hilbert ε-operator" Disambiguation="on a map" Agda=}} on a map
+$f : A → B$ is a family of
 [Hilbert ε-operators](foundation.hilberts-epsilon-operators.md) on its
 [fibers](foundation-core.fibers-of-maps.md). I.e., for every `y : B` there is an
 operator

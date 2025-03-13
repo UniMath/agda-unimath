@@ -18,7 +18,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.constant-maps
 open import foundation.coproduct-types
-open import foundation.decidability-search
+open import foundation.decidability-search-untruncated-existential-quantification
+open import foundation.decidability-search-untruncated-universal-quantification
 open import foundation.decidable-type-families
 open import foundation.dependent-pair-types
 open import foundation.double-negation
@@ -45,7 +46,6 @@ open import foundation.subtypes
 open import foundation.tight-apartness-relations
 open import foundation.transport-along-identifications
 open import foundation.unit-type
-open import foundation.universal-decidability-search
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
@@ -72,9 +72,9 @@ formalizations written by Martín Escardó {{#cite TypeTopology}}.
 
 ```agda
 abstract
-  has-pointed-decidability-search-bool-ℕ∞↑' :
-    has-pointed-decidability-search-bool' ℕ∞↑
-  has-pointed-decidability-search-bool-ℕ∞↑' p = (a , Lemma)
+  has-pointed-Σ-decidability-search-bool-ℕ∞↑' :
+    has-pointed-Σ-decidability-search-bool' ℕ∞↑
+  has-pointed-Σ-decidability-search-bool-ℕ∞↑' p = (a , Lemma)
     where
     a : ℕ∞↑
     a = force-ℕ∞↑ (p ∘ inclusion-ℕ∞↑-ℕ)
@@ -131,36 +131,36 @@ Thank you Professor Escardó! 🙏
 
 ```agda
 abstract
-  has-pointed-decidability-search-bool-ℕ∞↑ :
-    has-pointed-decidability-search-bool ℕ∞↑
-  has-pointed-decidability-search-bool-ℕ∞↑ =
-    flip-has-pointed-decidability-search-bool
-      ( has-pointed-decidability-search-bool-ℕ∞↑')
+  has-pointed-Σ-decidability-search-bool-ℕ∞↑ :
+    has-pointed-Σ-decidability-search-bool ℕ∞↑
+  has-pointed-Σ-decidability-search-bool-ℕ∞↑ =
+    flip-has-pointed-Σ-decidability-search-bool
+      ( has-pointed-Σ-decidability-search-bool-ℕ∞↑')
 
-has-pointed-decidability-search-on-subtypes-ℕ∞↑ :
-  has-pointed-decidability-search-on-subtypes ℕ∞↑
-has-pointed-decidability-search-on-subtypes-ℕ∞↑ =
-  has-pointed-decidability-search-on-subtypes-has-pointed-decidability-search-bool
-    ( has-pointed-decidability-search-bool-ℕ∞↑)
+has-pointed-Σ-decidability-search-on-subtypes-ℕ∞↑ :
+  has-pointed-Σ-decidability-search-on-subtypes ℕ∞↑
+has-pointed-Σ-decidability-search-on-subtypes-ℕ∞↑ =
+  has-pointed-Σ-decidability-search-on-subtypes-has-pointed-Σ-decidability-search-bool
+    ( has-pointed-Σ-decidability-search-bool-ℕ∞↑)
 
-has-pointed-decidability-search-ℕ∞↑ : has-pointed-decidability-search ℕ∞↑
-has-pointed-decidability-search-ℕ∞↑ =
-  has-pointed-decidability-search-has-pointed-decidability-search-on-subtypes
-    ( has-pointed-decidability-search-on-subtypes-ℕ∞↑)
+has-pointed-Σ-decidability-search-ℕ∞↑ : has-pointed-Σ-decidability-search ℕ∞↑
+has-pointed-Σ-decidability-search-ℕ∞↑ =
+  has-pointed-Σ-decidability-search-has-pointed-Σ-decidability-search-on-subtypes
+    ( has-pointed-Σ-decidability-search-on-subtypes-ℕ∞↑)
 
-has-decidability-search-ℕ∞↑ : has-decidability-search ℕ∞↑
-has-decidability-search-ℕ∞↑ =
-  has-decidability-search-has-pointed-decidability-search
-    ( has-pointed-decidability-search-ℕ∞↑)
+has-Σ-decidability-search-ℕ∞↑ : has-Σ-decidability-search ℕ∞↑
+has-Σ-decidability-search-ℕ∞↑ =
+  has-Σ-decidability-search-has-pointed-Σ-decidability-search
+    ( has-pointed-Σ-decidability-search-ℕ∞↑)
 ```
 
-### The type of increasing binary sequences has universal decidability search
+### The type of increasing binary sequences has Π-decidability search
 
 ```agda
-has-universal-decidability-search-ℕ∞↑ : has-universal-decidability-search ℕ∞↑
-has-universal-decidability-search-ℕ∞↑ =
-  has-universal-decidability-search-has-decidability-search
-    ( has-decidability-search-ℕ∞↑)
+has-Π-decidability-search-ℕ∞↑ : has-Π-decidability-search ℕ∞↑
+has-Π-decidability-search-ℕ∞↑ =
+  has-Π-decidability-search-has-Σ-decidability-search
+    ( has-Σ-decidability-search-ℕ∞↑)
 ```
 
 ## References

@@ -151,7 +151,7 @@ module _
       ( is-prop-type-Decidable-Prop ∘ B)
 ```
 
-### Dependent products of decidable propositions over an π₀-trivial base are decidable propositions
+### Dependent products of decidable propositions over a base with mere equality are decidable propositions
 
 Assuming the base `A` is empty or 0-connected, a dependent product of decidable
 propositions over `A` is again a decidable proposition.

@@ -238,7 +238,7 @@ module _
         ( inr na)
 ```
 
-### A family of decidable propositions over a π₀-trivial decidable base are uniformly decidable
+### A family of decidable propositions over a decidable base with mere equality is uniformly decidable
 
 ```agda
 module _

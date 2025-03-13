@@ -101,7 +101,9 @@ open import foundation.coproducts-pullbacks public
 open import foundation.coslice public
 open import foundation.cospan-diagrams public
 open import foundation.cospans public
-open import foundation.decidability-search public
+open import foundation.decidability-search-universal-quantification public
+open import foundation.decidability-search-untruncated-existential-quantification public
+open import foundation.decidability-search-untruncated-universal-quantification public
 open import foundation.decidable-dependent-function-types public
 open import foundation.decidable-dependent-pair-types public
 open import foundation.decidable-embeddings public
@@ -224,6 +226,7 @@ open import foundation.global-subuniverses public
 open import foundation.globular-type-of-dependent-functions public
 open import foundation.globular-type-of-functions public
 open import foundation.higher-homotopies-morphisms-arrows public
+open import foundation.hilbert-epsilon-operators-maps public
 open import foundation.hilberts-epsilon-operators public
 open import foundation.homotopies public
 open import foundation.homotopies-morphisms-arrows public
@@ -282,7 +285,6 @@ open import foundation.logical-equivalences public
 open import foundation.logical-operations-booleans public
 open import foundation.maps-in-global-subuniverses public
 open import foundation.maps-in-subuniverses public
-open import foundation.maps-with-hilbert-epsilon-operators public
 open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
@@ -472,7 +474,6 @@ open import foundation.unital-binary-operations public
 open import foundation.univalence public
 open import foundation.univalence-implies-function-extensionality public
 open import foundation.univalent-type-families public
-open import foundation.universal-decidability-search public
 open import foundation.universal-property-booleans public
 open import foundation.universal-property-cartesian-product-types public
 open import foundation.universal-property-contractible-types public

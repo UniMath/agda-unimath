@@ -93,7 +93,7 @@ module _
 
 ### Types with decidability search are markovian
 
-> TODO
+> This remains to be formalized.
 
 ## See also
 

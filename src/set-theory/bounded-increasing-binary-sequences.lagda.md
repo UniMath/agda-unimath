@@ -238,4 +238,4 @@ has-double-negation-stable-equality-bounded-ℕ∞↑ n =
 
 ### If `n` is finite then `bounded-ℕ∞↑ n` is a finite set with `n + 1` elements
 
-> TODO
+> This remains to be formalized.

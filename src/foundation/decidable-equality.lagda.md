@@ -351,7 +351,8 @@ module _
 ## See also
 
 - An element `x` is [isolated](foundation.isolated-elements.md) if `A` has
-  decidable equality locally at `x`.
+  decidable equality locally at `x`, meaning that for every `y`, the identity
+  type `x ＝ y` is decidable.
 
 ## External links
 
