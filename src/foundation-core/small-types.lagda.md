@@ -225,7 +225,7 @@ compute-eq-is-small {X = X} (Y , α) (Y' , α') =
   ≃ Σ (Y ＝ Y') (λ x → dependent-identification (λ Y → X ≃ Y) x α α')
   by equiv-pair-eq-Σ (Y , α) (Y' , α')
   ≃ Σ (Y ＝ Y') (λ x → equiv-eq x ∘e α ＝ α')
-  by equiv-tot (λ p → equiv-concat (tr-equiv-type-left p α) α')
+  by equiv-tot (λ p → equiv-concat (tr-equiv-type-right p α) α')
   ≃ Σ (Y ＝ Y') (λ x → equiv-eq x ＝ α' ∘e inv-equiv α)
   by equiv-tot (λ p → equiv-right-transpose-equiv-comp α (equiv-eq p) α')
 ```

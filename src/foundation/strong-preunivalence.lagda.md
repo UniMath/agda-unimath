@@ -143,13 +143,15 @@ strong-preunivalence = strong-preunivalence-axiom-univalence-axiom univalence
 
 ### The preunivalence axiom together with function extensionality implies strong preunivalence
 
-This argument is due to Evan Cavallo.
+This argument is due to Evan Cavallo. Note that it critically depends on
+function extensionality, both for the implication that embeddings have
+propositional fibers, and to compute the equality type of `is-small`.
 
 ```agda
-funext-and-preunivalence-give-strong-preunivalence :
+strong-preunivalence-axiom-preunivalence-axiom-Level :
   {l1 l2 : Level} →
   preunivalence-axiom-Level l1 → strong-preunivalence-axiom-Level l2 l1
-funext-and-preunivalence-give-strong-preunivalence pua X (Y , α) (Y' , α') =
+strong-preunivalence-axiom-preunivalence-axiom-Level pua X (Y , α) (Y' , α') =
   is-prop-equiv
     ( compute-eq-is-small (Y , α) (Y' , α'))
     ( is-prop-map-is-emb (pua Y Y') (α' ∘e inv-equiv α))

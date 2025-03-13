@@ -629,13 +629,13 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y Y' : UU l2}
   where
 
-  tr-equiv-type-left :
-    (p : Y ＝ Y') (α : X ≃ Y) → equiv-tr id p ∘e α ＝ tr (X ≃_) p α
-  tr-equiv-type-left refl = left-unit-law-equiv
-
   tr-equiv-type-right :
+    (p : Y ＝ Y') (α : X ≃ Y) → equiv-tr id p ∘e α ＝ tr (X ≃_) p α
+  tr-equiv-type-right refl = left-unit-law-equiv
+
+  tr-equiv-type-left :
     (p : Y ＝ Y') (α : Y ≃ X) → α ∘e equiv-tr id (inv p) ＝ tr (_≃ X) p α
-  tr-equiv-type-right refl = right-unit-law-equiv
+  tr-equiv-type-left refl = right-unit-law-equiv
 ```
 
 ### A cospan in which one of the legs is an equivalence is a pullback if and only if the corresponding map on the cone is an equivalence

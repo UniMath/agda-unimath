@@ -543,30 +543,6 @@ module _
       is-iso-Precategory C f →
       is-iso-Precategory C (comp-hom-Precategory C g f) →
       is-iso-Precategory C g
-  -- is-iso-left-factor-Precategory is-iso-f is-iso-gf =
-  --   comp-hom-Precategory C f (hom-inv-is-iso-Precategory C is-iso-gf) ,
-  --   ( equational-reasoning
-  --     comp-hom-Precategory C
-  --       ( g)
-  --       ( comp-hom-Precategory C f (hom-inv-is-iso-Precategory C is-iso-gf))
-  --     ＝
-  --     comp-hom-Precategory C
-  --       ( comp-hom-Precategory C g f)
-  --       ( hom-inv-is-iso-Precategory C is-iso-gf)
-  --       by
-  --         inv
-  --           ( associative-comp-hom-Precategory C
-  --             ( g)
-  --             ( f)
-  --             ( hom-inv-is-iso-Precategory C is-iso-gf))
-  --     ＝ id-hom-Precategory C
-  --       by is-section-hom-inv-is-iso-Precategory C is-iso-gf) ,
-  --   ( equational-reasoning
-  --     comp-hom-Precategory C
-  --       ( comp-hom-Precategory C f (hom-inv-is-iso-Precategory C is-iso-gf))
-  --       ( g)
-  --     ＝ {!   !} by associative-comp-hom-Precategory C f (hom-inv-is-iso-Precategory C is-iso-gf) g
-  --     ＝ id-hom-Precategory C by {!   !})
 ```
 
 ### The inverse operation is a fibered involution on isomorphisms
