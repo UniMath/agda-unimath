@@ -7,31 +7,23 @@ module logic.propositionally-decidable-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.coinhabited-pairs-of-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
-open import foundation.hilberts-epsilon-operators
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
-open import foundation.raising-universe-levels
 open import foundation.retracts-of-types
-open import foundation.type-arithmetic-empty-type
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.decidable-propositions
 open import foundation-core.function-types
 open import foundation-core.propositions
-open import foundation-core.retractions
-open import foundation-core.sections
 ```
 
 </details>

@@ -1,15 +1,12 @@
-# Compactness of the type of increasing binary sequences
+# Decidability search on increasing binary sequences
 
 ```agda
-{-# OPTIONS --guardedness #-}
-
-module set-theory.compactness-increasing-binary-sequences where
+module set-theory.decidability-search-increasing-binary-sequences where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.conatural-numbers
 open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -63,12 +60,12 @@ open import set-theory.increasing-binary-sequences
 
 The type of
 [increasing binary sequences](set-theory.increasing-binary-sequences.md) is
-compact. {{#cite TypeTopology}}
+decidability searchable. {{#cite TypeTopology}}
 
 ## Theorem
 
-The following formalization is more or less a direct translation from
-formalizations written by Martín Escardó {{#cite TypeTopology}}.
+The following formalization is a direct translation of formalizations written by
+Martín Escardó {{#cite TypeTopology}}.
 
 ```agda
 abstract

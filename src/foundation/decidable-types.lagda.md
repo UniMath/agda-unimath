@@ -259,10 +259,10 @@ See also
 ### Decidable types have ε-operators
 
 ```agda
-elim-trunc-Prop-is-decidable :
+ε-operator-is-decidable :
   {l : Level} {A : UU l} → is-decidable A → ε-operator-Hilbert A
-elim-trunc-Prop-is-decidable (inl a) x = a
-elim-trunc-Prop-is-decidable (inr f) x =
+ε-operator-is-decidable (inl a) x = a
+ε-operator-is-decidable (inr f) x =
   ex-falso (apply-universal-property-trunc-Prop x empty-Prop f)
 ```
 
