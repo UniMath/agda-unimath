@@ -133,7 +133,7 @@ is-set-mere-eq-in-id =
 ```
 
 In other words, if equality on `A` has an
-[ε-operator](foundation.hilbert-epsilon-operators.md), then `A` is a set.
+[ε-operator](foundation.hilberts-epsilon-operators.md), then `A` is a set.
 
 ### Retracts of types with merely equal elements
 
