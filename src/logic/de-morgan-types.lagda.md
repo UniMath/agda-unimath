@@ -19,7 +19,6 @@ open import foundation.empty-types
 open import foundation.evaluation-functions
 open import foundation.function-types
 open import foundation.identity-types
-open import foundation.irrefutable-propositions
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.precomposition-functions
@@ -35,6 +34,7 @@ open import foundation-core.equivalences
 open import foundation-core.propositions
 
 open import logic.de-morgans-law
+open import logic.irrefutable-types
 open import logic.propositionally-decidable-types
 ```
 
@@ -250,7 +250,8 @@ module _
 ### It is irrefutable that a type is De Morgan
 
 ```agda
-is-irrefutable-is-de-morgan : {l : Level} {A : UU l} → ¬¬ (is-de-morgan A)
+is-irrefutable-is-de-morgan :
+  {l : Level} {A : UU l} → is-irrefutable (is-de-morgan A)
 is-irrefutable-is-de-morgan = is-irrefutable-is-decidable
 ```
 

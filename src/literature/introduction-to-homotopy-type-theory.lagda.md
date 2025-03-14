@@ -345,7 +345,7 @@ open import foundation.double-negation using
   ; double-negation-Peirces-law -- ¬¬(((P → Q) → P) → P)
   ; double-negation-linearity-implication -- ¬¬((P → Q) + (Q → P))
   )
-open import foundation.irrefutable-propositions using
+open import logic.irrefutable-types using
   ( is-irrefutable-is-decidable -- ¬¬(P + ¬P)
   )
 
@@ -382,7 +382,7 @@ _ =
       ( double-negation-elim-neg (¬ Q))
 
 -- (f)
-open import foundation.irrefutable-propositions using
+open import logic.irrefutable-types using
   ( is-irrefutable-product -- ¬¬A → ¬¬B → ¬¬(A × B)
   )
 

@@ -21,7 +21,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.inhabited-types
-open import foundation.irrefutable-propositions
 open import foundation.postcomposition-dependent-functions
 open import foundation.propositional-truncations
 open import foundation.split-surjective-maps
@@ -54,6 +53,7 @@ open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 
 open import logic.double-negation-stable-embeddings
+open import logic.irrefutable-types
 
 open import orthogonal-factorization-systems.extensions-maps
 ```
@@ -65,8 +65,8 @@ open import orthogonal-factorization-systems.extensions-maps
 A map `f : A → B` is
 {{#concept "double negation dense" Agda=is-double-negation-dense-map}}, if all
 of its [fibers](foundation-core.fibers-of-maps.md) are
-[irrefutable](logic.irrefutable-propositions.md). I.e., for every `y : B`, it is
-not not true that `y` has a preimage under `f`.
+[irrefutable](foundation.irrefutable-propositions.md). I.e., for every `y : B`,
+it is not not true that `y` has a preimage under `f`.
 
 ## Definitions
 
