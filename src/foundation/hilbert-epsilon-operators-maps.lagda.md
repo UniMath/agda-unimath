@@ -7,10 +7,16 @@ module foundation.hilbert-epsilon-operators-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.hilberts-epsilon-operators
+open import foundation.images
 open import foundation.universe-levels
 
+open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
+open import foundation-core.injective-maps
+open import foundation-core.sections
 ```
 
 </details>
@@ -39,4 +45,49 @@ Hilbert, we do not assume that such an operator exists for every map.
 ε-operator-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 ε-operator-map {B = B} f = (y : B) → ε-operator-Hilbert (fiber f y)
+```
+
+## Properties
+
+### ε-operators on maps are sections of the image-unit
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  map-section-map-unit-im-ε-operator-map : ε-operator-map f → im f → A
+  map-section-map-unit-im-ε-operator-map ε (y , p) = pr1 (ε y p)
+
+  is-section-map-section-map-unit-im-ε-operator-map :
+    (ε : ε-operator-map f) →
+    is-section (map-unit-im f) (map-section-map-unit-im-ε-operator-map ε)
+  is-section-map-section-map-unit-im-ε-operator-map ε (y , p) =
+    eq-Eq-im f _ _ (pr2 (ε y p))
+
+  section-map-unit-im-ε-operator-map :
+    ε-operator-map f → section (map-unit-im f)
+  section-map-unit-im-ε-operator-map ε =
+    ( map-section-map-unit-im-ε-operator-map ε ,
+      is-section-map-section-map-unit-im-ε-operator-map ε)
+```
+
+### Injective maps with ε-operators are embeddings
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-emb-is-injective-ε-operator-map :
+    ε-operator-map f → is-injective f → is-emb f
+  is-emb-is-injective-ε-operator-map ε H =
+    is-emb-comp
+      ( inclusion-im f)
+      ( map-unit-im f)
+      ( is-emb-inclusion-im f)
+      ( is-emb-is-equiv
+        ( is-equiv-is-injective
+          ( section-map-unit-im-ε-operator-map ε)
+          ( is-injective-right-factor (inclusion-im f) (map-unit-im f) H)))
 ```
