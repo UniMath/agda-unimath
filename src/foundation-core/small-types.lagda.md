@@ -212,6 +212,8 @@ is-small-mere-equiv l e H =
 
 ### The equality type of the smallness predicate is equivalent to the fiber of `equiv-eq`
 
+This computation uses the function extensionality axiom.
+
 ```agda
 compute-eq-is-small :
   {l1 l2 : Level} {X : UU l1} (α β : is-small l2 X) →
@@ -220,11 +222,11 @@ compute-eq-is-small {X = X} (Y , α) (Y' , α') =
   equivalence-reasoning
   ( (Y , α) ＝ (Y' , α'))
   ≃ Σ (Y ＝ Y') (λ x → dependent-identification (λ Y → X ≃ Y) x α α')
-  by equiv-pair-eq-Σ (Y , α) (Y' , α')
+    by equiv-pair-eq-Σ (Y , α) (Y' , α')
   ≃ Σ (Y ＝ Y') (λ x → equiv-eq x ∘e α ＝ α')
-  by equiv-tot (λ p → equiv-concat (tr-equiv-type-right p α) α')
+    by equiv-tot (λ p → equiv-concat (tr-equiv-type-right p α) α')
   ≃ Σ (Y ＝ Y') (λ x → equiv-eq x ＝ α' ∘e inv-equiv α)
-  by equiv-tot (λ p → equiv-right-transpose-equiv-comp α (equiv-eq p) α')
+    by equiv-tot (λ p → equiv-right-transpose-equiv-comp α (equiv-eq p) α')
 ```
 
 ### Any contractible type is small

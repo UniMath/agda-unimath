@@ -157,6 +157,10 @@ strong-preunivalence-axiom-preunivalence-axiom-Level pua X (Y , α) (Y' , α') =
     ( is-prop-map-is-emb (pua Y Y') (α' ∘e inv-equiv α))
 ```
 
+See
+[`UF.PreUnivalence`](https://martinescardo.github.io/TypeTopology/UF.PreUnivalence.html)
+at TypeTopology for Cavallo's original formalizations.
+
 ## See also
 
 - [Strongly preunivalent categories](category-theory.strongly-preunivalent-categories.md)
