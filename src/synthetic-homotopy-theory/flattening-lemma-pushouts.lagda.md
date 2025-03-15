@@ -149,7 +149,7 @@ module _
       ( horizontal-map-span-flattening-pushout P _ _ c)
 ```
 
-### The statement of the flattening lemma for pushouts, phrased using descent data
+### The statement of the flattening lemma for pushouts, using descent data
 
 The above statement of the flattening lemma works with a provided type family
 over the pushout. We can instead accept a definition of this family via descent
@@ -256,6 +256,44 @@ module _
       ( vertical-map-span-flattening-descent-data-pushout P)
       ( horizontal-map-span-flattening-descent-data-pushout P)
       ( cocone-flattening-descent-data-pushout)
+```
+
+### The statement of the flattening lemma for pushouts, using equifibered dependent span diagrams
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : equifibered-dependent-span-diagram 𝒮 l4 l5 l6)
+  where
+
+  vertical-map-span-flattening-equifibered-dependent-span-diagram :
+    Σ ( spanning-type-span-diagram 𝒮)
+      ( spanning-type-family-equifibered-dependent-span-diagram P) →
+    Σ ( domain-span-diagram 𝒮)
+      ( left-family-equifibered-dependent-span-diagram P)
+  vertical-map-span-flattening-equifibered-dependent-span-diagram =
+    map-Σ
+      ( left-family-equifibered-dependent-span-diagram P)
+      ( left-map-span-diagram 𝒮)
+      ( map-left-family-equifibered-dependent-span-diagram P)
+
+  horizontal-map-span-flattening-equifibered-dependent-span-diagram :
+    Σ ( spanning-type-span-diagram 𝒮)
+      ( spanning-type-family-equifibered-dependent-span-diagram P) →
+    Σ ( codomain-span-diagram 𝒮)
+      ( right-family-equifibered-dependent-span-diagram P)
+  horizontal-map-span-flattening-equifibered-dependent-span-diagram =
+     map-Σ
+      ( right-family-equifibered-dependent-span-diagram P)
+      ( right-map-span-diagram 𝒮)
+      ( map-right-family-equifibered-dependent-span-diagram P)
+
+  span-diagram-flattening-equifibered-dependent-span-diagram :
+    span-diagram (l1 ⊔ l4) (l2 ⊔ l5) (l3 ⊔ l6)
+  span-diagram-flattening-equifibered-dependent-span-diagram =
+    make-span-diagram
+      ( vertical-map-span-flattening-equifibered-dependent-span-diagram)
+      ( horizontal-map-span-flattening-equifibered-dependent-span-diagram)
 ```
 
 ## Properties
