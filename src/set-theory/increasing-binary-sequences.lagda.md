@@ -49,8 +49,9 @@ open import set-theory.cantor-space
 
 ## Idea
 
-The type of {{#concept "increasing binary sequences" Agda=ℕ∞↑}}is the
-[subset](foundation-core.subtypes.md) of the
+The type of
+{{#concept "increasing binary sequences" WD="Extended natural numbers" WDID=Q105759800 Agda=ℕ∞↑}}
+is the [subset](foundation-core.subtypes.md) of the
 [cantor set](set-theory.cantor-space.md) consisting of increasing sequences of
 binary numbers. This type is equivalent to the
 [conatural numbers](elementary-number-theory.conatural-numbers.md).
@@ -155,7 +156,7 @@ three-ℕ∞↑ = succ-ℕ∞↑ two-ℕ∞↑
 
 ## Properties
 
-### Equality on elements of the generic convergent sequence
+### Equality on elements of increasing binary sequences
 
 ```agda
 Eq-ℕ∞↑ : ℕ∞↑ → ℕ∞↑ → UU lzero
@@ -210,7 +211,7 @@ abstract
     is-set-type-Type-With-Tight-Apartness ℕ∞↑-Type-With-Tight-Apartness
 ```
 
-### The successor function is injective
+### The successor function is an embedding
 
 ```agda
 is-injective-succ-ℕ∞↑ : is-injective succ-ℕ∞↑
@@ -219,6 +220,9 @@ is-injective-succ-ℕ∞↑ p = eq-Eq-ℕ∞↑ (Eq-eq-ℕ∞↑ p ∘ succ-ℕ)
 abstract
   is-emb-succ-ℕ∞↑ : is-emb succ-ℕ∞↑
   is-emb-succ-ℕ∞↑ = is-emb-is-injective is-set-ℕ∞↑ is-injective-succ-ℕ∞↑
+
+emb-succ-ℕ∞↑ : ℕ∞↑ ↪ ℕ∞↑
+emb-succ-ℕ∞↑ = (succ-ℕ∞↑ , is-emb-succ-ℕ∞↑)
 ```
 
 ### Zero is not a successor of any increasing binary sequence
@@ -233,7 +237,7 @@ abstract
   neq-succ-zero-ℕ∞↑ p = neq-false-true-bool (Eq-eq-ℕ∞↑ p 0)
 ```
 
-### The type of increasing binary sequences is a fixed point of the maybe monad
+### The constructor is a section of the destructor function
 
 ```agda
 is-section-cons-ℕ∞↑ : is-section decons-ℕ∞↑ cons-ℕ∞↑
@@ -244,8 +248,6 @@ is-injective-cons-ℕ∞↑ : is-injective cons-ℕ∞↑
 is-injective-cons-ℕ∞↑ =
   is-injective-has-retraction cons-ℕ∞↑ decons-ℕ∞↑ is-section-cons-ℕ∞↑
 ```
-
-> It remains to formalize the full equivalence.
 
 ### The type of increasing binary sequences as a retract of the cantor space
 

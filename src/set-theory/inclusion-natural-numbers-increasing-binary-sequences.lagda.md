@@ -115,6 +115,9 @@ abstract
   is-emb-inclusion-ℕ∞↑-ℕ : is-emb inclusion-ℕ∞↑-ℕ
   is-emb-inclusion-ℕ∞↑-ℕ =
     is-emb-is-injective is-set-ℕ∞↑ is-injective-inclusion-ℕ∞↑-ℕ
+
+emb-ℕ∞↑-ℕ : ℕ ↪ ℕ∞↑
+emb-ℕ∞↑-ℕ = (inclusion-ℕ∞↑-ℕ , is-emb-inclusion-ℕ∞↑-ℕ)
 ```
 
 ### The canonical inclusion preserves order
@@ -170,6 +173,9 @@ abstract
       ( is-emb-inclusion-ℕ∞↑-ℕ)
       ( is-emb-is-injective is-set-ℕ∞↑ (is-injective-point infinity-ℕ∞↑))
       ( λ n * → neq-infinity-inclusion-ℕ∞↑-ℕ n)
+
+emb-ℕ∞↑-Maybe-ℕ : Maybe ℕ ↪ ℕ∞↑
+emb-ℕ∞↑-Maybe-ℕ = (inclusion-ℕ∞↑-Maybe-ℕ , is-emb-inclusion-ℕ∞↑-Maybe-ℕ)
 ```
 
 #### Successor condition on the image of the natural numbers
@@ -201,8 +207,7 @@ eq-succ-criterion-ℕ∞↑ {x} {n} r s =
 
 ```agda
 module _
-  (x : ℕ∞↑)
-  (H : (n : ℕ) → x ≠ inclusion-ℕ∞↑-ℕ n)
+  (x : ℕ∞↑) (H : (n : ℕ) → x ≠ inclusion-ℕ∞↑-ℕ n)
   where
 
   abstract
@@ -258,15 +263,13 @@ module _
       ( ind-Maybe (h , h∞))
 ```
 
-### The tight bounds on the image of natural numbers
+### The tight bounds on the image of the natural numbers
 
 ```agda
 refl-leq-ℕ-ℕ∞↑ : (n : ℕ) → inclusion-ℕ∞↑-ℕ n ≤-ℕ∞↑-ℕ n
 refl-leq-ℕ-ℕ∞↑ zero-ℕ = refl
 refl-leq-ℕ-ℕ∞↑ (succ-ℕ n) = refl-leq-ℕ-ℕ∞↑ n
-```
 
-```agda
 le-succ-ℕ-ℕ∞↑ : (n : ℕ) → n <-ℕ-ℕ∞↑ (inclusion-ℕ∞↑-ℕ (succ-ℕ n))
 le-succ-ℕ-ℕ∞↑ zero-ℕ = refl
 le-succ-ℕ-ℕ∞↑ (succ-ℕ n) = le-succ-ℕ-ℕ∞↑ n
