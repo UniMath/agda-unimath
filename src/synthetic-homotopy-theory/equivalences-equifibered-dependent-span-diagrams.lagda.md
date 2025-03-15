@@ -30,6 +30,13 @@ open import synthetic-homotopy-theory.equifibered-dependent-span-diagrams
 
 ## Idea
 
+An
+{{#concept "equivalence" Disambiguation="of equifibered dependent span diagrams" Agda=equiv-equifibered-dependent-span-diagram}}
+of two
+[equifibered dependent span diagrams](synthetic-homotopy-theory.equifibered-dependent-span-diagrams.md)
+is a coherent system of equivalences of families over the base
+[span diagram](foundation.span-diagrams.md).
+
 ## Definitions
 
 ### Equivalences of equifibered dependent span diagrams
