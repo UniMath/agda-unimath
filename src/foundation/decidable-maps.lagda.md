@@ -308,3 +308,5 @@ module _
   is-emb-is-injective-is-decidable-map H K =
     is-emb-is-injective-ε-operator-map (ε-operator-map-is-decidable-map H) K
 ```
+
+There is also an analogous proof using the double negation image.

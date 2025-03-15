@@ -149,6 +149,7 @@ open import foundation.disjunction public
 open import foundation.double-arrows public
 open import foundation.double-negation public
 open import foundation.double-negation-dense-equality-maps public
+open import foundation.double-negation-images public
 open import foundation.double-negation-modality public
 open import foundation.double-negation-stable-equality public
 open import foundation.double-negation-stable-propositions public
