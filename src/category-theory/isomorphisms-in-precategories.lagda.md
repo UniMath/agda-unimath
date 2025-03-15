@@ -22,6 +22,7 @@ open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -420,7 +421,7 @@ module _
     is-section-hom-inv-is-iso-Precategory C p
 ```
 
-### Inverses of isomorphisms
+### The inverse operation on isomorphisms
 
 ```agda
 module _
@@ -538,12 +539,36 @@ module _
   (g : hom-Precategory C y z)
   where
 
-  postulate
-    is-iso-left-factor-Precategory :
-      is-iso-Precategory C f →
-      is-iso-Precategory C (comp-hom-Precategory C g f) →
-      is-iso-Precategory C g
+  is-iso-left-factor-Precategory :
+    is-iso-Precategory C f →
+    is-iso-Precategory C (comp-hom-Precategory C g f) →
+    is-iso-Precategory C g
+  is-iso-left-factor-Precategory F GF =
+    tr
+      ( is-iso-Precategory C)
+      ( equational-reasoning
+        ( comp-hom-Precategory C
+          ( comp-hom-Precategory C g f)
+          ( hom-inv-is-iso-Precategory C F))
+        ＝ ( comp-hom-Precategory C
+            ( g)
+            ( comp-hom-Precategory C f ( hom-inv-is-iso-Precategory C F)))
+          by
+          associative-comp-hom-Precategory C
+            ( g)
+            ( f)
+            ( hom-inv-is-iso-Precategory C F)
+        ＝ (comp-hom-Precategory C g (id-hom-Precategory C))
+          by
+            ap
+              ( comp-hom-Precategory C g)
+              ( is-section-hom-inv-is-iso-Precategory C F)
+        ＝ g
+          by right-unit-law-comp-hom-Precategory C g)
+      ( is-iso-comp-is-iso-Precategory C GF (is-iso-inv-is-iso-Precategory C F))
 ```
+
+> It remains to formalize the other 2 cases of the 3-for-2 property.
 
 ### The inverse operation is a fibered involution on isomorphisms
 
