@@ -107,6 +107,13 @@ module _
   map-family-descent-data-pushout s =
     map-equiv (equiv-family-descent-data-pushout s)
 
+  map-inv-family-descent-data-pushout :
+    (s : spanning-type-span-diagram 𝒮) →
+    right-family-descent-data-pushout (right-map-span-diagram 𝒮 s) →
+    left-family-descent-data-pushout (left-map-span-diagram 𝒮 s)
+  map-inv-family-descent-data-pushout s =
+    map-inv-equiv (equiv-family-descent-data-pushout s)
+
   is-equiv-map-family-descent-data-pushout :
     (s : spanning-type-span-diagram 𝒮) →
     is-equiv (map-family-descent-data-pushout s)

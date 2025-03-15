@@ -29,7 +29,9 @@ open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.descent-data-pushouts
+open import synthetic-homotopy-theory.equifibered-dependent-span-diagrams
 open import synthetic-homotopy-theory.equivalences-descent-data-pushouts
+open import synthetic-homotopy-theory.equivalences-equifibered-dependent-span-diagrams
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -37,10 +39,11 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The **flattening lemma** for [pushouts](synthetic-homotopy-theory.pushouts.md)
-states that pushouts commute with
-[dependent pair types](foundation.dependent-pair-types.md). More precisely,
-given a pushout square
+The
+{{#concept "flattening lemma" Disambiguation="for pushouts" Agda=flattening-lemma-pushout Agda=flattening-lemma-descent-data-pushout}}
+for [pushouts](synthetic-homotopy-theory.pushouts.md) states that pushouts
+commute with [dependent pair types](foundation.dependent-pair-types.md). More
+precisely, given a pushout square
 
 ```text
       g
@@ -160,22 +163,22 @@ module _
 
   vertical-map-span-flattening-descent-data-pushout :
     Σ ( spanning-type-span-diagram 𝒮)
-      ( λ s → pr1 P (left-map-span-diagram 𝒮 s)) →
-    Σ ( domain-span-diagram 𝒮) (pr1 P)
+      ( left-family-descent-data-pushout P ∘ left-map-span-diagram 𝒮) →
+    Σ ( domain-span-diagram 𝒮) (left-family-descent-data-pushout P)
   vertical-map-span-flattening-descent-data-pushout =
     map-Σ-map-base
       ( left-map-span-diagram 𝒮)
-      ( pr1 P)
+      ( left-family-descent-data-pushout P)
 
   horizontal-map-span-flattening-descent-data-pushout :
     Σ ( spanning-type-span-diagram 𝒮)
-      ( λ s → pr1 P (left-map-span-diagram 𝒮 s)) →
-    Σ ( codomain-span-diagram 𝒮) (pr1 (pr2 P))
+      ( left-family-descent-data-pushout P ∘ left-map-span-diagram 𝒮) →
+    Σ ( codomain-span-diagram 𝒮) (right-family-descent-data-pushout P)
   horizontal-map-span-flattening-descent-data-pushout =
     map-Σ
-      ( pr1 (pr2 P))
+      ( right-family-descent-data-pushout P)
       ( right-map-span-diagram 𝒮)
-      ( λ s → map-equiv (pr2 (pr2 P) s))
+      ( map-family-descent-data-pushout P)
 
   span-diagram-flattening-descent-data-pushout :
     span-diagram (l1 ⊔ l4) (l2 ⊔ l5) (l3 ⊔ l4)
@@ -195,18 +198,24 @@ module _
   where
 
   horizontal-map-cocone-flattening-descent-data-pushout :
-    Σ A (pr1 P) → Σ X Q
+    Σ A (left-family-descent-data-pushout P) → Σ X Q
   horizontal-map-cocone-flattening-descent-data-pushout =
     map-Σ Q
       ( horizontal-map-cocone f g c)
-      ( λ a → map-equiv (pr1 e a))
+      ( left-map-equiv-descent-data-pushout
+        ( P)
+        ( descent-data-family-cocone-span-diagram c Q)
+        ( e))
 
   vertical-map-cocone-flattening-descent-data-pushout :
-    Σ B (pr1 (pr2 P)) → Σ X Q
+    Σ B (right-family-descent-data-pushout P) → Σ X Q
   vertical-map-cocone-flattening-descent-data-pushout =
     map-Σ Q
       ( vertical-map-cocone f g c)
-      ( λ b → map-equiv (pr1 (pr2 e) b))
+      ( right-map-equiv-descent-data-pushout
+        ( P)
+        ( descent-data-family-cocone-span-diagram c Q)
+        ( e))
 
   coherence-square-cocone-flattening-descent-data-pushout :
     coherence-square-maps
@@ -217,8 +226,16 @@ module _
   coherence-square-cocone-flattening-descent-data-pushout =
     htpy-map-Σ Q
       ( coherence-square-cocone f g c)
-      ( λ s → map-equiv (pr1 e (f s)))
-      ( λ s → inv-htpy (pr2 (pr2 e) s))
+      ( ( left-map-equiv-descent-data-pushout
+          ( P)
+          ( descent-data-family-cocone-span-diagram c Q)
+          ( e)) ∘
+        ( f))
+      ( inv-htpy ∘
+        coherence-equiv-descent-data-pushout
+          ( P)
+          ( descent-data-family-cocone-span-diagram c Q)
+          ( e))
 
   cocone-flattening-descent-data-pushout :
     cocone
@@ -374,9 +391,22 @@ module _
       ( horizontal-map-span-flattening-descent-data-pushout P)
       ( horizontal-map-cocone-flattening-descent-data-pushout f g c P Q e)
       ( vertical-map-cocone-flattening-descent-data-pushout f g c P Q e)
-      ( tot (λ s → map-equiv (pr1 e (f s))))
-      ( tot (λ a → map-equiv (pr1 e a)))
-      ( tot (λ b → map-equiv (pr1 (pr2 e) b)))
+      ( tot
+        ( ( left-map-equiv-descent-data-pushout
+            ( P)
+            ( descent-data-family-cocone-span-diagram c Q)
+            ( e)) ∘
+          ( f)))
+      ( tot
+        ( left-map-equiv-descent-data-pushout
+          ( P)
+          ( descent-data-family-cocone-span-diagram c Q)
+          ( e)))
+      ( tot
+        ( right-map-equiv-descent-data-pushout
+          ( P)
+          ( descent-data-family-cocone-span-diagram c Q)
+          ( e)))
       ( id)
       ( coherence-square-cocone-flattening-descent-data-pushout f g c P Q e)
       ( refl-htpy)
@@ -384,8 +414,17 @@ module _
         ( Q ∘ vertical-map-cocone f g c)
         ( refl-htpy)
         ( λ s →
-          tr Q (coherence-square-cocone f g c s) ∘ (map-equiv (pr1 e (f s))))
-        ( λ s → inv-htpy (pr2 (pr2 e) s)))
+          ( tr Q (coherence-square-cocone f g c s)) ∘
+          ( left-map-equiv-descent-data-pushout
+            ( P)
+            ( descent-data-family-cocone-span-diagram c Q)
+            ( e)
+            ( f s)))
+        ( inv-htpy ∘
+          coherence-equiv-descent-data-pushout
+            ( P)
+            ( descent-data-family-cocone-span-diagram c Q)
+            ( e)))
       ( refl-htpy)
       ( refl-htpy)
       ( coherence-square-cocone-flattening-pushout Q f g c)
@@ -395,7 +434,13 @@ module _
         ( s , t))) ∙
     ( triangle-eq-pair-Σ Q
       ( coherence-square-cocone f g c s)
-      ( inv (pr2 (pr2 e) s t))) ∙
+      ( inv
+        ( coherence-equiv-descent-data-pushout
+          ( P)
+          ( descent-data-family-cocone-span-diagram c Q)
+          ( e)
+          ( s)
+          ( t)))) ∙
     ( ap
       ( eq-pair-Σ (coherence-square-cocone f g c s) refl ∙_)
       ( inv
@@ -404,7 +449,13 @@ module _
             ( vertical-map-cocone f g c)
             ( Q)
             ( refl)
-            ( inv (pr2 (pr2 e) s t))))))
+            ( inv
+              ( coherence-equiv-descent-data-pushout
+                ( P)
+                ( descent-data-family-cocone-span-diagram c Q)
+                ( e)
+                ( s)
+                ( t)))))))
 
   abstract
     flattening-lemma-descent-data-pushout :
@@ -419,9 +470,22 @@ module _
         ( horizontal-map-span-flattening-descent-data-pushout P)
         ( horizontal-map-cocone-flattening-descent-data-pushout f g c P Q e)
         ( vertical-map-cocone-flattening-descent-data-pushout f g c P Q e)
-        ( equiv-tot (pr1 e ∘ f))
-        ( equiv-tot (pr1 e))
-        ( equiv-tot (pr1 (pr2 e)))
+        ( equiv-tot
+          ( ( left-equiv-equiv-descent-data-pushout
+              ( P)
+              ( descent-data-family-cocone-span-diagram c Q)
+              ( e)) ∘
+            ( f)))
+        ( equiv-tot
+          ( left-equiv-equiv-descent-data-pushout
+            ( P)
+            ( descent-data-family-cocone-span-diagram c Q)
+            ( e)))
+        ( equiv-tot
+          ( right-equiv-equiv-descent-data-pushout
+            ( P)
+            ( descent-data-family-cocone-span-diagram c Q)
+            ( e)))
         ( id-equiv)
         ( coherence-square-cocone-flattening-descent-data-pushout f g c P Q e)
         ( refl-htpy)
@@ -429,8 +493,17 @@ module _
           ( Q ∘ vertical-map-cocone f g c)
           ( refl-htpy)
           ( λ s →
-            tr Q (coherence-square-cocone f g c s) ∘ (map-equiv (pr1 e (f s))))
-          ( λ s → inv-htpy (pr2 (pr2 e) s)))
+            ( tr Q (coherence-square-cocone f g c s)) ∘
+            ( left-map-equiv-descent-data-pushout
+              ( P)
+              ( descent-data-family-cocone-span-diagram c Q)
+              ( e)
+              ( f s)))
+          ( inv-htpy ∘
+            coherence-equiv-descent-data-pushout
+              ( P)
+              ( descent-data-family-cocone-span-diagram c Q)
+              ( e)))
         ( refl-htpy)
         ( refl-htpy)
         ( coherence-square-cocone-flattening-pushout Q f g c)
