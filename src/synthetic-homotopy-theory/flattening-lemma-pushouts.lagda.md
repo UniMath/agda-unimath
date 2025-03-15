@@ -294,6 +294,38 @@ module _
     make-span-diagram
       ( vertical-map-span-flattening-equifibered-dependent-span-diagram)
       ( horizontal-map-span-flattening-equifibered-dependent-span-diagram)
+
+module _
+  { l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  ( f : S → A) (g : S → B) (c : cocone f g X)
+  ( P : equifibered-dependent-span-diagram (make-span-diagram f g) l5 l6 l7)
+  ( Q : X → UU l8)
+  ( e :
+    equiv-equifibered-dependent-span-diagram
+      ( P)
+      ( equifibered-dependent-span-diagram-family-cocone-span-diagram c Q))
+  where
+
+  horizontal-map-cocone-flattening-equifibered-dependent-span-diagram :
+    Σ A (left-family-equifibered-dependent-span-diagram P) → Σ X Q
+  horizontal-map-cocone-flattening-equifibered-dependent-span-diagram =
+    map-Σ Q
+      ( horizontal-map-cocone f g c)
+      ( left-map-equiv-equifibered-dependent-span-diagram
+        ( P)
+        ( equifibered-dependent-span-diagram-family-cocone-span-diagram c Q)
+        ( e))
+
+  vertical-map-cocone-flattening-equifibered-dependent-span-diagram :
+    Σ B (right-family-equifibered-dependent-span-diagram P) → Σ X Q
+  vertical-map-cocone-flattening-equifibered-dependent-span-diagram =
+    map-Σ Q
+      ( vertical-map-cocone f g c)
+      ( right-map-equiv-equifibered-dependent-span-diagram
+        ( P)
+        ( equifibered-dependent-span-diagram-family-cocone-span-diagram c Q)
+        ( e))
 ```
 
 ## Properties
