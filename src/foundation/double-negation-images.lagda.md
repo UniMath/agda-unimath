@@ -7,10 +7,12 @@ module foundation.double-negation-images where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.embeddings
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.hilbert-epsilon-operators-maps
 open import foundation.slice
 open import foundation.split-surjective-maps
 open import foundation.subtype-identity-principle
@@ -31,6 +33,7 @@ open import foundation-core.truncation-levels
 
 open import logic.double-negation-dense-maps
 open import logic.double-negation-eliminating-maps
+open import logic.double-negation-stable-embeddings
 ```
 
 </details>
@@ -127,6 +130,22 @@ module _
     map-inv-is-equiv (is-equiv-Eq-eq-double-negation-im x y)
 ```
 
+### The unit map of the double negation image is double negation dense
+
+```agda
+abstract
+  is-double-negation-dense-unit-double-negation-im :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    is-double-negation-dense-map (map-unit-double-negation-im f)
+  is-double-negation-dense-unit-double-negation-im f (y , nnq) np =
+    nnq
+      ( λ p →
+        np
+          ( pr1 p ,
+            eq-Eq-double-negation-im f
+              ( map-unit-double-negation-im f (pr1 p)) (y , nnq) (pr2 p)))
+```
+
 ### The double negation image inclusion is a double negation stable embedding
 
 ```agda
@@ -147,24 +166,44 @@ module _
     is-injective (inclusion-double-negation-im f)
   is-injective-inclusion-double-negation-im =
     is-injective-is-emb is-emb-inclusion-double-negation-im
-```
 
-> It remains to show this map is double negation stable.
+  is-double-negation-eliminating-map-inclusion-double-negation-im :
+    is-double-negation-eliminating-map (inclusion-double-negation-im f)
+  is-double-negation-eliminating-map-inclusion-double-negation-im x nnip =
+    ( ( x ,
+        ( λ np →
+          nnip
+            ( λ ip →
+              is-double-negation-dense-unit-double-negation-im f
+                ( pr1 ip)
+                ( λ ηq →
+                  np
+                  ( pr1 ηq ,
+                    ap (inclusion-double-negation-im f) (pr2 ηq) ∙ pr2 ip))))) ,
+      ( refl))
 
-### The unit map of the double negation image is double negation dense
+  double-negation-eliminating-map-inclusion-double-negation-im :
+    double-negation-im f →¬¬ X
+  double-negation-eliminating-map-inclusion-double-negation-im =
+    ( inclusion-double-negation-im f ,
+      is-double-negation-eliminating-map-inclusion-double-negation-im)
 
-```agda
-abstract
-  is-double-negation-dense-unit-double-negation-im :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    is-double-negation-dense-map (map-unit-double-negation-im f)
-  is-double-negation-dense-unit-double-negation-im f (y , nnq) np =
-    nnq
-      ( λ p →
-        np
-          ( pr1 p ,
-            eq-Eq-double-negation-im f
-              ( map-unit-double-negation-im f (pr1 p)) (y , nnq) (pr2 p)))
+  is-double-negation-stable-emb-inclusion-double-negation-im :
+    is-double-negation-stable-emb (inclusion-double-negation-im f)
+  is-double-negation-stable-emb-inclusion-double-negation-im =
+    ( is-emb-inclusion-double-negation-im ,
+      is-double-negation-eliminating-map-inclusion-double-negation-im)
+
+  double-negation-stable-emb-double-negation-im : double-negation-im f ↪¬¬ X
+  double-negation-stable-emb-double-negation-im =
+    ( inclusion-double-negation-im f ,
+      is-double-negation-stable-emb-inclusion-double-negation-im)
+
+  ε-operator-map-inclusion-double-negation-im :
+    ε-operator-map (inclusion-double-negation-im f)
+  ε-operator-map-inclusion-double-negation-im =
+    ε-operator-double-negation-eliminating-map
+      ( double-negation-eliminating-map-inclusion-double-negation-im)
 ```
 
 ### The double negation image of a map into a truncated type is truncated

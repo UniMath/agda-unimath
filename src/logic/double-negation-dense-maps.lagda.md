@@ -13,6 +13,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.double-negation
+open import foundation.double-negation-stable-propositions
 open import foundation.embeddings
 open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
@@ -498,73 +499,6 @@ module _
     map-inv-equiv (extensionality-Double-Negation-Dense-Map g)
 ```
 
-### Postcomposition of extensions along double negation dense maps by a double negation stable embedding is an equivalence
-
-```text
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  where
-
-  is-double-negation-dense-map-postcomp-extension-surjective-map :
-    (f : A → B) (i : A → X) (g : X → Y) →
-    is-double-negation-dense-map f → is-double-negation-stable-emb g →
-    is-double-negation-dense-map (postcomp-extension f i g)
-  is-double-negation-dense-map-postcomp-extension-surjective-map f i g H K (h , L) =
-    intro-double-negation
-      ( ( j , N) ,
-        ( eq-htpy-extension f
-          ( g ∘ i)
-          ( postcomp-extension f i g (j , N))
-          ( h , L)
-          ( M)
-          ( λ a →
-            ( ap
-              ( concat' (g (i a)) (M (f a)))
-              ( is-section-map-inv-is-equiv
-                ( K (i a) (j (f a)))
-                ( L a ∙ inv (M (f a))))) ∙
-            ( is-section-inv-concat' (M (f a)) (L a)))))
-    where
-
-    J : (b : B) → fiber g (h b)
-    J =
-      apply-dependent-universal-property-double-negation-dense-map-is-double-negation-dense-map f H
-        ( λ b → fiber-emb-Prop (g , K) (h b))
-        ( λ a → (i a , L a))
-
-    j : B → X
-    j b = pr1 (J b)
-
-    M : (g ∘ j) ~ h
-    M b = pr2 (J b)
-
-    N : i ~ (j ∘ f)
-    N a = map-inv-is-equiv (K (i a) (j (f a))) (L a ∙ inv (M (f a)))
-
-  is-equiv-postcomp-extension-is-double-negation-dense-map :
-    (f : A → B) (i : A → X) (g : X → Y) →
-    is-double-negation-dense-map f → is-double-negation-stable-emb g →
-    is-equiv (postcomp-extension f i g)
-  is-equiv-postcomp-extension-is-double-negation-dense-map f i g H K =
-    is-equiv-is-double-negation-stable-emb-is-double-negation-dense-map
-      ( is-double-negation-dense-map-postcomp-extension-surjective-map f i g H K)
-      ( is-double-negation-stable-emb-postcomp-extension f i g K)
-
-  equiv-postcomp-extension-double-negation-dense-map :
-    (f : A ↠¬¬ B) (i : A → X) (g : X ↪¬¬ Y) →
-    extension (map-double-negation-dense-map f) i ≃
-    extension (map-double-negation-dense-map f) (map-double-negation-stable-emb g ∘ i)
-  pr1 (equiv-postcomp-extension-double-negation-dense-map f i g) =
-    postcomp-extension (map-double-negation-dense-map f) i (map-double-negation-stable-emb g)
-  pr2 (equiv-postcomp-extension-double-negation-dense-map f i g) =
-    is-equiv-postcomp-extension-is-double-negation-dense-map
-      ( map-double-negation-dense-map f)
-      ( i)
-      ( map-double-negation-stable-emb g)
-      ( is-double-negation-dense-map-double-negation-dense-map f)
-      ( is-double-negation-stable-emb-map-double-negation-stable-emb g)
-```
-
 ### Every type that maps double negation densely onto an irrefutable type is irrefutable
 
 ```agda
@@ -583,10 +517,6 @@ module _
     is-irrefutable-is-double-negation-dense-map
       ( is-double-negation-dense-map-double-negation-dense-map f)
 ```
-
-### The type of double negation dense maps `A ↠¬¬ B` is equivalent to the type of families `P` of irrefutable types over `B` equipped with an equivalence `A ≃ Σ B P`
-
-> This remains to be shown.
 
 ## External links
 

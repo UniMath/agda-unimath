@@ -19,7 +19,6 @@ open import foundation.irrefutable-equality
 open import foundation.logical-equivalences
 open import foundation.mere-equality
 open import foundation.negation
-open import foundation.propositional-truncations
 open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.unit-type
@@ -28,7 +27,6 @@ open import foundation.universe-levels
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.identity-types
 open import foundation-core.propositions
 ```
 
@@ -174,44 +172,6 @@ double-negation-elim-neg :
 double-negation-elim-neg A f p = f (ev p)
 ```
 
-### Double negation elimination for universal quantification over double negations
-
-```agda
-module _
-  {l1 l2 : Level} {P : UU l1} {Q : P → UU l2}
-  where
-
-  double-negation-elim-for-all-neg-neg :
-    has-double-negation-elim ((p : P) → ¬¬ (Q p))
-  double-negation-elim-for-all-neg-neg f p =
-    double-negation-elim-neg
-      ( ¬ (Q p))
-      ( map-double-negation (λ (g : (u : P) → ¬¬ (Q u)) → g p) f)
-
-  double-negation-elim-for-all :
-    ((p : P) → has-double-negation-elim (Q p)) →
-    has-double-negation-elim ((p : P) → Q p)
-  double-negation-elim-for-all H f p = H p (map-double-negation (ev p) f)
-```
-
-### Double negation elimination for function types into double negations
-
-```agda
-module _
-  {l1 l2 : Level} {P : UU l1} {Q : UU l2}
-  where
-
-  double-negation-elim-exp-neg-neg :
-    has-double-negation-elim (P → ¬¬ Q)
-  double-negation-elim-exp-neg-neg =
-    double-negation-elim-for-all-neg-neg
-
-  double-negation-elim-exp :
-    has-double-negation-elim Q →
-    has-double-negation-elim (P → Q)
-  double-negation-elim-exp q = double-negation-elim-for-all (λ _ → q)
-```
-
 ### Double negation elimination for dependent sums of types with double negation elimination over a double negation stable proposition
 
 ```agda
@@ -246,20 +206,13 @@ module _
     is-prop A → has-double-negation-elim A →
     ((x : A) → has-double-negation-elim (B x)) →
     has-double-negation-elim (Σ A B)
-  double-negation-elim-Σ-is-prop-base is-prop-A f g h =
-    ( f ( map-double-negation pr1 h)) ,
-    ( g ( f ( map-double-negation pr1 h))
-        ( map-double-negation (tr B (eq-is-prop is-prop-A) ∘ pr2) h))
-
-  -- double-negation-elim-Σ-is-decidable-prop-base :
-  --   is-decidable-prop A →
-  --   ((x : A) → has-double-negation-elim (B x)) →
-  --   has-double-negation-elim (Σ A B)
-  -- double-negation-elim-Σ-is-decidable-prop-base (H , d) =
-  --   double-negation-elim-Σ-is-prop-base H (double-negation-elim-is-decidable d)
+  double-negation-elim-Σ-is-prop-base is-prop-A =
+    double-negation-elim-Σ-has-double-negation-dense-equality-base
+      ( λ x y → intro-double-negation (eq-is-prop is-prop-A))
 
   double-negation-elim-base-Σ-section' :
-    has-double-negation-elim (Σ A B) → (A → Σ A B) →
+    has-double-negation-elim (Σ A B) →
+    (A → Σ A B) →
     has-double-negation-elim A
   double-negation-elim-base-Σ-section' H f nna =
     pr1 (H (map-double-negation f nna))
@@ -276,7 +229,7 @@ module _
     is-prop A →
     (x : A) → has-double-negation-elim (B x)
   double-negation-elim-family-Σ-is-prop-base K is-prop-A x nnb =
-    tr B (eq-is-prop is-prop-A) (pr2 (K (λ nab → nnb (λ y → nab (x , y)))))
+    tr B (eq-is-prop is-prop-A) (pr2 (K (map-double-negation (pair x) nnb)))
 ```
 
 ### Double negation elimination for products of types with double negation elimination
@@ -294,17 +247,37 @@ module _
     ( f (map-double-negation pr1 h) , g (map-double-negation pr2 h))
 ```
 
-### Double negation elimination for dependent products
+### Double negation elimination for universal quantification over double negations
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  {l1 l2 : Level} {P : UU l1} {Q : P → UU l2}
   where
 
+  double-negation-elim-Π-neg-neg :
+    has-double-negation-elim ((p : P) → ¬¬ (Q p))
+  double-negation-elim-Π-neg-neg f p =
+    double-negation-elim-neg (¬ (Q p)) (map-double-negation (ev p) f)
+
   double-negation-elim-Π :
-    ((x : A) → has-double-negation-elim (B x)) →
-    has-double-negation-elim ((x : A) → B x)
-  double-negation-elim-Π dnb nnb x = dnb x (λ nb → nnb (λ b → nb (b x)))
+    ((p : P) → has-double-negation-elim (Q p)) →
+    has-double-negation-elim ((p : P) → Q p)
+  double-negation-elim-Π H f p = H p (map-double-negation (ev p) f)
+```
+
+### Double negation elimination for function types into double negations
+
+```agda
+module _
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2}
+  where
+
+  double-negation-elim-exp-neg-neg : has-double-negation-elim (P → ¬¬ Q)
+  double-negation-elim-exp-neg-neg = double-negation-elim-Π-neg-neg
+
+  double-negation-elim-exp :
+    has-double-negation-elim Q → has-double-negation-elim (P → Q)
+  double-negation-elim-exp q = double-negation-elim-Π (λ _ → q)
 ```
 
 ### If a type satisfies untruncated double negation elimination then it has a Hilbert ε-operator
@@ -312,7 +285,7 @@ module _
 ```agda
 ε-operator-Hilbert-has-double-negation-elim :
   {l1 : Level} {A : UU l1} → has-double-negation-elim A → ε-operator-Hilbert A
-ε-operator-Hilbert-has-double-negation-elim {A = A} H =
+ε-operator-Hilbert-has-double-negation-elim H =
   H ∘ double-negation-double-negation-type-trunc-Prop ∘ intro-double-negation
 ```
 

@@ -26,7 +26,9 @@ open import foundation-core.sections
 
 ## Idea
 
-A map `f : A → B` is **injective** if `f x ＝ f y` implies `x ＝ y`.
+A map `f : A → B` is
+{{#concept "injective" Disambiguation="map of types" Agda=is-injective Agda=injection}},
+also called _left cancellable_, if `f x ＝ f y` implies `x ＝ y`.
 
 ## Warning
 
