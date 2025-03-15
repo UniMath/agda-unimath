@@ -157,7 +157,8 @@ module _
       (b : codomain-span-diagram 𝒮) →
       is-equiv (right-map-equiv-equifibered-dependent-span-diagram b)
     is-equiv-right-map-equiv-equifibered-dependent-span-diagram b =
-      is-equiv-map-equiv (right-equiv-equiv-equifibered-dependent-span-diagram b)
+      is-equiv-map-equiv
+        ( right-equiv-equiv-equifibered-dependent-span-diagram b)
 
     inv-right-map-equiv-equifibered-dependent-span-diagram :
       (b : codomain-span-diagram 𝒮) →
@@ -192,7 +193,8 @@ module _
       spanning-type-family-equifibered-dependent-span-diagram Q b →
       spanning-type-family-equifibered-dependent-span-diagram P b
     inv-spanning-type-map-equiv-equifibered-dependent-span-diagram b =
-      map-inv-equiv (spanning-type-equiv-equiv-equifibered-dependent-span-diagram b)
+      map-inv-equiv
+        ( spanning-type-equiv-equiv-equifibered-dependent-span-diagram b)
 
     coherence-left-equiv-equifibered-dependent-span-diagram :
       (s : spanning-type-span-diagram 𝒮) →
