@@ -8,15 +8,19 @@ module commutative-algebra.formal-power-series-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.sums-commutative-rings
 
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.coproduct-types
 open import foundation.function-types
 open import foundation.homotopies
+open import foundation.unit-type
 open import foundation.identity-types
+open import foundation.involutions
 open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
@@ -25,6 +29,9 @@ open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
+
+open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.involution-standard-finite-types
 ```
 
 </details>
@@ -141,6 +148,11 @@ module _
       coefficient-constant-formal-power-series-Commutative-Ring c
     eq-coefficient-constant-formal-power-series-Commutative-Ring c =
       coefficient-formal-power-series-coefficients-Commutative-Ring R _
+
+  one-formal-power-series-Commutative-Ring :
+    formal-power-series-Commutative-Ring R
+  one-formal-power-series-Commutative-Ring =
+    constant-formal-power-series-Commutative-Ring (one-Commutative-Ring R)
 ```
 
 #### The zero formal power series is the constant formal power series for zero
@@ -638,4 +650,218 @@ module _
   abelian-group-add-formal-power-series-Commutative-Ring =
     group-add-formal-power-series-Commutative-Ring ,
     commutative-add-formal-power-series-Commutative-Ring R
+```
+
+### Multiplication
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  (p q : formal-power-series-Commutative-Ring R)
+  where
+
+  coefficient-mul-formal-power-series-Commutative-Ring :
+    ℕ → type-Commutative-Ring R
+  coefficient-mul-formal-power-series-Commutative-Ring n =
+    sum-Commutative-Ring
+      ( R)
+      ( succ-ℕ n)
+      ( λ k →
+        mul-Commutative-Ring
+          ( R)
+          ( coefficient-formal-power-series-Commutative-Ring
+            ( R)
+            ( p)
+            ( nat-Fin (succ-ℕ n) k))
+          ( coefficient-formal-power-series-Commutative-Ring
+            ( R)
+            ( q)
+            ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) k))))
+
+  abstract
+    mul-formal-power-series-Commutative-Ring :
+      formal-power-series-Commutative-Ring R
+    mul-formal-power-series-Commutative-Ring =
+      formal-power-series-coefficients-Commutative-Ring
+        ( R)
+        ( coefficient-mul-formal-power-series-Commutative-Ring)
+
+    eq-coefficient-mul-formal-power-series-Commutative-Ring :
+      coefficient-formal-power-series-Commutative-Ring
+        ( R)
+        ( mul-formal-power-series-Commutative-Ring) ~
+      coefficient-mul-formal-power-series-Commutative-Ring
+    eq-coefficient-mul-formal-power-series-Commutative-Ring =
+      coefficient-formal-power-series-coefficients-Commutative-Ring R _
+```
+
+#### Commutativity
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  (p q : formal-power-series-Commutative-Ring R)
+  where
+
+  abstract
+    htpy-coefficients-commutative-mul-formal-power-series-Commutative-Ring :
+      coefficient-mul-formal-power-series-Commutative-Ring R p q ~
+      coefficient-mul-formal-power-series-Commutative-Ring R q p
+    htpy-coefficients-commutative-mul-formal-power-series-Commutative-Ring n =
+      preserves-sum-permutation-Commutative-Ring
+        ( R)
+        ( succ-ℕ n)
+        ( equiv-involution (involution-opposite-Fin (succ-ℕ n)))
+        ( λ k →
+          mul-Commutative-Ring
+            ( R)
+            ( coefficient-formal-power-series-Commutative-Ring
+              ( R)
+              ( p)
+              ( nat-Fin (succ-ℕ n) k))
+            ( coefficient-formal-power-series-Commutative-Ring
+              ( R)
+              ( q)
+              ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) k)))) ∙
+      htpy-sum-Commutative-Ring
+        ( R)
+        ( succ-ℕ n)
+        ( λ k →
+          ap
+            ( λ m →
+              mul-Commutative-Ring
+                ( R)
+                ( coefficient-formal-power-series-Commutative-Ring
+                  ( R)
+                  ( p)
+                  ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) k)))
+                ( coefficient-formal-power-series-Commutative-Ring
+                  ( R)
+                  ( q)
+                  ( nat-Fin (succ-ℕ n) m)))
+            (is-involution-opposite-Fin (succ-ℕ n) k) ∙
+          commutative-mul-Commutative-Ring R _ _)
+
+    commutative-mul-formal-power-series-Commutative-Ring :
+      mul-formal-power-series-Commutative-Ring R p q ＝
+      mul-formal-power-series-Commutative-Ring R q p
+    commutative-mul-formal-power-series-Commutative-Ring =
+      eq-htpy-coefficients-formal-power-series-Commutative-Ring
+        ( R)
+        ( _)
+        ( _)
+        ( eq-coefficient-mul-formal-power-series-Commutative-Ring R p q ∙h
+          htpy-coefficients-commutative-mul-formal-power-series-Commutative-Ring ∙h
+          inv-htpy
+            ( eq-coefficient-mul-formal-power-series-Commutative-Ring R q p))
+```
+
+#### Unit laws
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  (p : formal-power-series-Commutative-Ring R)
+  where
+
+  abstract
+    htpy-coefficients-right-unit-law-mul-formal-power-series-Commutative-Ring :
+      coefficient-mul-formal-power-series-Commutative-Ring
+        ( R)
+        ( p)
+        ( one-formal-power-series-Commutative-Ring R) ~
+      coefficient-formal-power-series-Commutative-Ring R p
+    htpy-coefficients-right-unit-law-mul-formal-power-series-Commutative-Ring n =
+      equational-reasoning
+        sum-Commutative-Ring
+          ( R)
+          ( succ-ℕ n)
+          ( λ k →
+            mul-Commutative-Ring
+              ( R)
+              ( coefficient-formal-power-series-Commutative-Ring
+                ( R)
+                ( p)
+                ( nat-Fin (succ-ℕ n) k))
+              ( coefficient-formal-power-series-Commutative-Ring
+                ( R)
+                ( one-formal-power-series-Commutative-Ring R)
+                ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) k))))
+          ＝
+            sum-Commutative-Ring
+              ( R)
+              ( succ-ℕ n)
+              ( λ k →
+                mul-Commutative-Ring
+                  ( R)
+                  ( coefficient-formal-power-series-Commutative-Ring
+                    ( R)
+                    ( p)
+                    ( nat-Fin (succ-ℕ n) k))
+                  ( coefficient-constant-formal-power-series-Commutative-Ring
+                    ( R)
+                    ( one-Commutative-Ring R)
+                    ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) k))))
+            by
+              htpy-sum-Commutative-Ring
+                ( R)
+                ( succ-ℕ n)
+                ( λ k →
+                  ap
+                    ( mul-Commutative-Ring
+                      ( R)
+                      ( coefficient-formal-power-series-Commutative-Ring
+                        ( R)
+                        ( p)
+                        ( nat-Fin (succ-ℕ n) k)))
+                    ( eq-coefficient-constant-formal-power-series-Commutative-Ring
+                      ( R)
+                      ( one-Commutative-Ring R)
+                      ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) k))))
+          ＝
+            add-Commutative-Ring
+              ( R)
+              ( sum-Commutative-Ring
+                ( R)
+                ( n)
+                ( λ k →
+                  mul-Commutative-Ring
+                    ( R)
+                    ( coefficient-formal-power-series-Commutative-Ring
+                      ( R)
+                      ( p)
+                      ( nat-Fin (succ-ℕ n) (inl-Fin n k)))
+                    ( coefficient-constant-formal-power-series-Commutative-Ring
+                      ( R)
+                      ( one-Commutative-Ring R)
+                      ( nat-Fin
+                        ( succ-ℕ n)
+                        ( opposite-Fin (succ-ℕ n) (inl-Fin n k))))))
+              ( mul-Commutative-Ring
+                ( R)
+                ( coefficient-formal-power-series-Commutative-Ring R p n)
+                ( coefficient-constant-formal-power-series-Commutative-Ring
+                  ( R)
+                  ( one-Commutative-Ring R)
+                  ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) (inr star)))))
+            by
+              cons-sum-Commutative-Ring
+                ( R)
+                ( n)
+                ( λ k →
+                  mul-Commutative-Ring
+                    ( R)
+                    ( coefficient-formal-power-series-Commutative-Ring
+                      ( R)
+                      ( p)
+                      ( nat-Fin (succ-ℕ n) k))
+                    ( coefficient-constant-formal-power-series-Commutative-Ring
+                      ( R)
+                      ( one-Commutative-Ring R)
+                      ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) k))))
+                ( refl)
+          ＝ {!   !} by {!   !}
+
+  -- left-unit-law-mul-formal-power-series-Commutative-Ring :
+
 ```

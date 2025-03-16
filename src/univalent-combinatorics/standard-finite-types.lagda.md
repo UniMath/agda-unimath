@@ -228,7 +228,7 @@ nat-Fin (succ-ℕ k) (inl x) = nat-Fin k x
 nat-Fin (succ-ℕ k) (inr x) = k
 
 nat-Fin-reverse : (k : ℕ) → Fin k → ℕ
-nat-Fin-reverse (succ-ℕ k) (inl x) = succ-ℕ (nat-Fin k x)
+nat-Fin-reverse (succ-ℕ k) (inl x) = succ-ℕ (nat-Fin-reverse k x)
 nat-Fin-reverse (succ-ℕ k) (inr x) = 0
 
 strict-upper-bound-nat-Fin : (k : ℕ) (x : Fin k) → le-ℕ (nat-Fin k x) k
