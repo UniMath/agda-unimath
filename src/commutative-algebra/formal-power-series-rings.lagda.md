@@ -13,15 +13,15 @@ open import commutative-algebra.sums-commutative-rings
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.coproduct-types
 open import foundation.function-types
 open import foundation.homotopies
-open import foundation.unit-type
 open import foundation.identity-types
 open import foundation.involutions
 open import foundation.sets
+open import foundation.unit-type
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
@@ -30,8 +30,8 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.involution-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -771,7 +771,8 @@ module _
         ( p)
         ( one-formal-power-series-Commutative-Ring R) ~
       coefficient-formal-power-series-Commutative-Ring R p
-    htpy-coefficients-right-unit-law-mul-formal-power-series-Commutative-Ring n =
+    htpy-coefficients-right-unit-law-mul-formal-power-series-Commutative-Ring
+      n =
       equational-reasoning
         sum-Commutative-Ring
           ( R)
@@ -863,5 +864,4 @@ module _
           ＝ {!   !} by {!   !}
 
   -- left-unit-law-mul-formal-power-series-Commutative-Ring :
-
 ```
