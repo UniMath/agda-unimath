@@ -12,13 +12,27 @@ open import commutative-algebra.commutative-semirings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import finite-group-theory.permutations
+open import finite-group-theory.permutations-standard-finite-types
+open import finite-group-theory.transpositions
+open import finite-group-theory.transpositions-standard-finite-types
+
+open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.negated-equality
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-commutative-semirings
+
+open import lists.lists
 
 open import ring-theory.sums-semirings
 
@@ -212,4 +226,98 @@ split-sum-Commutative-Semiring :
     ( sum-Commutative-Semiring A m (f ∘ inr-coproduct-Fin n m))
 split-sum-Commutative-Semiring A =
   split-sum-Semiring (semiring-Commutative-Semiring A)
+```
+
+### Permutations preserve sums
+
+```agda
+module _
+  {l : Level} (A : Commutative-Semiring l)
+  where
+
+  abstract
+    preserves-sum-adjacent-transposition-sum-Commutative-Semiring :
+      (n : ℕ) → (k : Fin n) →
+      (f : functional-vec-Commutative-Semiring A (succ-ℕ n)) →
+      sum-Commutative-Semiring A (succ-ℕ n) f ＝
+      sum-Commutative-Semiring
+        A (succ-ℕ n) (f ∘ map-adjacent-transposition-Fin n k)
+    preserves-sum-adjacent-transposition-sum-Commutative-Semiring
+      (succ-ℕ n) (inl x) f =
+        ap-add-Commutative-Semiring
+          ( A)
+          ( preserves-sum-adjacent-transposition-sum-Commutative-Semiring
+            ( n)
+            ( x)
+            ( f ∘ inl-Fin (succ-ℕ n)))
+          ( refl)
+    preserves-sum-adjacent-transposition-sum-Commutative-Semiring
+      (succ-ℕ n) (inr star) f = right-swap-add-Commutative-Semiring A _ _ _
+
+    preserves-sum-permutation-list-adjacent-transpositions-Commutative-Semiring :
+      (n : ℕ) → (L : list (Fin n)) →
+      (f : functional-vec-Commutative-Semiring A (succ-ℕ n)) →
+      sum-Commutative-Semiring A (succ-ℕ n) f ＝
+      sum-Commutative-Semiring
+        A (succ-ℕ n) (f ∘ map-permutation-list-adjacent-transpositions n L)
+    preserves-sum-permutation-list-adjacent-transpositions-Commutative-Semiring
+      n nil f = refl
+    preserves-sum-permutation-list-adjacent-transpositions-Commutative-Semiring
+      n (cons x L) f =
+        preserves-sum-adjacent-transposition-sum-Commutative-Semiring n x f ∙
+        preserves-sum-permutation-list-adjacent-transpositions-Commutative-Semiring
+          ( n)
+          ( L)
+          ( f ∘ map-adjacent-transposition-Fin n x)
+
+    preserves-sum-transposition-Commutative-Semiring :
+      (n : ℕ) (i j : Fin (succ-ℕ n)) (neq : i ≠ j) →
+      (f : functional-vec-Commutative-Semiring A (succ-ℕ n)) →
+      sum-Commutative-Semiring A (succ-ℕ n) f ＝
+      sum-Commutative-Semiring
+        A (succ-ℕ n) (f ∘ map-transposition-Fin (succ-ℕ n) i j neq)
+    preserves-sum-transposition-Commutative-Semiring n i j i≠j f =
+      preserves-sum-permutation-list-adjacent-transpositions-Commutative-Semiring
+        ( n)
+        ( list-adjacent-transpositions-transposition-Fin n i j)
+        ( f) ∙
+      ap
+        ( λ g → sum-Commutative-Semiring A (succ-ℕ n) (f ∘ map-equiv g))
+        ( eq-permutation-list-adjacent-transpositions-transposition-Fin
+          ( n)
+          ( i)
+          ( j)
+          ( i≠j))
+
+    preserves-sum-permutation-list-standard-transpositions-Commutative-Semiring :
+      (n : ℕ) → (L : list (Σ (Fin n × Fin n) ( λ (i , j) → i ≠ j))) →
+      (f : functional-vec-Commutative-Semiring A n) →
+      sum-Commutative-Semiring A n f ＝
+      sum-Commutative-Semiring
+        A n (f ∘ map-equiv (permutation-list-standard-transpositions-Fin n L))
+    preserves-sum-permutation-list-standard-transpositions-Commutative-Semiring
+      zero-ℕ _ _ = refl
+    preserves-sum-permutation-list-standard-transpositions-Commutative-Semiring
+      (succ-ℕ n) nil f = refl
+    preserves-sum-permutation-list-standard-transpositions-Commutative-Semiring
+      (succ-ℕ n) (cons ((i , j) , i≠j) L) f =
+        preserves-sum-transposition-Commutative-Semiring n i j i≠j f ∙
+        preserves-sum-permutation-list-standard-transpositions-Commutative-Semiring
+          ( succ-ℕ n)
+          ( L)
+          ( f ∘ map-transposition-Fin (succ-ℕ n) i j i≠j)
+
+    preserves-sum-permutation-Commutative-Semiring :
+      (n : ℕ) → (σ : Permutation n) →
+      (f : functional-vec-Commutative-Semiring A n) →
+      sum-Commutative-Semiring A n f ＝
+      sum-Commutative-Semiring A n (f ∘ map-equiv σ)
+    preserves-sum-permutation-Commutative-Semiring n σ f =
+      preserves-sum-permutation-list-standard-transpositions-Commutative-Semiring
+        ( n)
+        ( list-standard-transpositions-permutation-Fin n σ)
+        ( f) ∙
+      ap
+        ( λ τ → sum-Commutative-Semiring A n (f ∘ map-equiv τ))
+        ( eq-permutation-list-standard-transpositions-Fin n σ)
 ```
