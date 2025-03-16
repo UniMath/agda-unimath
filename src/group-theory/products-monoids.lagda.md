@@ -31,8 +31,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The product operation extends the binary multiplication operation on a monoid
-`M` to any family of elements of `M` indexed by a standard finite type.
+The product operation extends the binary multiplication operation on a
+[monoid](group-theory.monoids.md) `M` to any family of elements of `M` indexed
+by a [standard finite type](univalent-combinatorics.standard-finite-types.md).
 
 ## Definition
 
