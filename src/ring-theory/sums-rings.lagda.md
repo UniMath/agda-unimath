@@ -10,6 +10,9 @@ module ring-theory.sums-rings where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import finite-group-theory.permutations-standard-finite-types
+
+open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -22,6 +25,7 @@ open import ring-theory.rings
 open import ring-theory.sums-semirings
 
 open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -29,8 +33,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The sum operation extends the binary addition operation on a ring `R` to any
-family of elements of `R` indexed by a standard finite type.
+The sum operation extends the binary addition operation on a
+[ring](ring-theory.rings.md) `R` to any family of elements of `R` indexed by a
+[standard finite type](univalent-combinatorics.standard-finite-types.md), or by
+a [finite type](univalent-combinatorics.finite-types.md).
 
 ## Definition
 
@@ -38,6 +44,11 @@ family of elements of `R` indexed by a standard finite type.
 sum-Ring :
   {l : Level} (R : Ring l) (n : ℕ) → functional-vec-Ring R n → type-Ring R
 sum-Ring R = sum-Semiring (semiring-Ring R)
+
+sum-finite-Ring :
+  {l1 l2 : Level} (R : Ring l1) (A : Finite-Type l2) →
+  (type-Finite-Type A → type-Ring R) → type-Ring R
+sum-finite-Ring R = sum-finite-Semiring (semiring-Ring R)
 ```
 
 ## Properties
@@ -193,4 +204,34 @@ split-sum-Ring :
     ( sum-Ring R n (f ∘ inl-coproduct-Fin n m))
     ( sum-Ring R m (f ∘ inr-coproduct-Fin n m))
 split-sum-Ring R = split-sum-Semiring (semiring-Ring R)
+```
+
+### Permutations preserve sums
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  preserves-sum-permutation-Ring :
+    (n : ℕ) → (σ : Permutation n) →
+    (f : functional-vec-Ring R n) →
+    sum-Ring R n f ＝ sum-Ring R n (f ∘ map-equiv σ)
+  preserves-sum-permutation-Ring =
+    preserves-sum-permutation-Semiring (semiring-Ring R)
+```
+
+### Sums over finite types are preserved by equivalences
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Ring l1) (A : Finite-Type l2) (B : Finite-Type l3)
+  (H : equiv-Finite-Type A B)
+  where
+
+  sum-equiv-finite-Ring :
+    (f : type-Finite-Type B → type-Ring R) →
+    sum-finite-Ring R B f ＝
+    sum-finite-Ring R A (f ∘ map-equiv H)
+  sum-equiv-finite-Ring = sum-equiv-finite-Semiring (semiring-Ring R) A B H
 ```

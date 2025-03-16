@@ -10,14 +10,18 @@ module ring-theory.sums-semirings where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import finite-group-theory.permutations-standard-finite-types
+
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
+
+open import group-theory.products-commutative-monoids
 
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-semirings
@@ -25,6 +29,7 @@ open import linear-algebra.vectors-on-semirings
 open import ring-theory.semirings
 
 open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -32,8 +37,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The sum operation extends the binary addition operation on a semiring `R` to any
-family of elements of `R` indexed by a standard finite type.
+The sum operation extends the binary addition operation on a
+[semiring](ring-theory.semirings.md) `R` to any family of elements of `R`
+indexed by a
+[standard finite type](univalent-combinatorics.standard-finite-types.md), or by
+a [finite type](univalent-combinatorics.finite-types.md).
 
 ## Definition
 
@@ -41,11 +49,14 @@ family of elements of `R` indexed by a standard finite type.
 sum-Semiring :
   {l : Level} (R : Semiring l) (n : ℕ) →
   (functional-vec-Semiring R n) → type-Semiring R
-sum-Semiring R zero-ℕ f = zero-Semiring R
-sum-Semiring R (succ-ℕ n) f =
-  add-Semiring R
-    ( sum-Semiring R n (f ∘ inl-Fin n))
-    ( f (inr star))
+sum-Semiring R =
+  product-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+
+sum-finite-Semiring :
+  {l1 l2 : Level} (R : Semiring l1) (A : Finite-Type l2) →
+  (type-Finite-Type A → type-Semiring R) → type-Semiring R
+sum-finite-Semiring R =
+  product-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ## Properties
@@ -60,17 +71,16 @@ module _
   sum-one-element-Semiring :
     (f : functional-vec-Semiring R 1) →
     sum-Semiring R 1 f ＝ head-functional-vec 0 f
-  sum-one-element-Semiring f =
-    left-unit-law-add-Semiring R (f (inr star))
+  sum-one-element-Semiring =
+    product-one-element-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 
   sum-two-elements-Semiring :
     (f : functional-vec-Semiring R 2) →
     sum-Semiring R 2 f ＝ add-Semiring R (f (zero-Fin 1)) (f (one-Fin 1))
-  sum-two-elements-Semiring f =
-    ( associative-add-Semiring R
-      (zero-Semiring R) (f (zero-Fin 1)) (f (one-Fin 1))) ∙
-    ( left-unit-law-add-Semiring R
-      ( add-Semiring R (f (zero-Fin 1)) (f (one-Fin 1))))
+  sum-two-elements-Semiring =
+    product-two-elements-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 ```
 
 ### Sums are homotopy invariant
@@ -83,11 +93,8 @@ module _
   htpy-sum-Semiring :
     (n : ℕ) {f g : functional-vec-Semiring R n} →
     (f ~ g) → sum-Semiring R n f ＝ sum-Semiring R n g
-  htpy-sum-Semiring zero-ℕ H = refl
-  htpy-sum-Semiring (succ-ℕ n) H =
-    ap-add-Semiring R
-      ( htpy-sum-Semiring n (H ·r inl-Fin n))
-      ( H (inr star))
+  htpy-sum-Semiring =
+    htpy-product-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Sums are equal to the zero-th term plus the rest
@@ -111,17 +118,8 @@ module _
     add-Semiring R
       ( x)
       ( sum-Semiring R n (f ∘ inr-Fin n))
-  snoc-sum-Semiring zero-ℕ f refl =
-    ( sum-one-element-Semiring R f) ∙
-    ( inv (right-unit-law-add-Semiring R (f (zero-Fin 0))))
-  snoc-sum-Semiring (succ-ℕ n) f refl =
-    ( ap
-      ( add-Semiring' R (head-functional-vec (succ-ℕ n) f))
-      ( snoc-sum-Semiring n (f ∘ inl-Fin (succ-ℕ n)) refl)) ∙
-    ( associative-add-Semiring R
-      ( f (zero-Fin (succ-ℕ n)))
-      ( sum-Semiring R n (f ∘ (inr-Fin (succ-ℕ n) ∘ inl-Fin n)))
-      ( head-functional-vec (succ-ℕ n) f))
+  snoc-sum-Semiring =
+    snoc-product-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Multiplication distributes over sums
@@ -206,8 +204,8 @@ module _
       ( succ-ℕ n)
       ( cons-functional-vec-Semiring R n (zero-Semiring R) f) ＝
     sum-Semiring R n f
-  extend-sum-Semiring n f =
-    right-unit-law-add-Semiring R (sum-Semiring R n f)
+  extend-sum-Semiring =
+    extend-product-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Shifting a sum of elements in a semiring
@@ -224,14 +222,8 @@ module _
       ( snoc-functional-vec-Semiring R n f
         ( zero-Semiring R)) ＝
     sum-Semiring R n f
-  shift-sum-Semiring zero-ℕ f =
-    left-unit-law-add-Semiring R (zero-Semiring R)
-  shift-sum-Semiring (succ-ℕ n) f =
-    ap
-      ( add-Semiring' R
-        ( head-functional-vec-Semiring R n f))
-      ( shift-sum-Semiring n
-        ( tail-functional-vec-Semiring R n f))
+  shift-sum-Semiring =
+    shift-product-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### A sum of zeroes is zero
@@ -244,9 +236,8 @@ module _
   sum-zero-Semiring :
     (n : ℕ) →
     sum-Semiring R n (zero-functional-vec-Semiring R n) ＝ zero-Semiring R
-  sum-zero-Semiring zero-ℕ = refl
-  sum-zero-Semiring (succ-ℕ n) =
-    right-unit-law-add-Semiring R _ ∙ sum-zero-Semiring n
+  sum-zero-Semiring =
+    product-unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Splitting sums
@@ -259,11 +250,41 @@ split-sum-Semiring :
   add-Semiring R
     ( sum-Semiring R n (f ∘ inl-coproduct-Fin n m))
     ( sum-Semiring R m (f ∘ inr-coproduct-Fin n m))
-split-sum-Semiring R n zero-ℕ f =
-  inv (right-unit-law-add-Semiring R (sum-Semiring R n f))
-split-sum-Semiring R n (succ-ℕ m) f =
-  ( ap
-    ( add-Semiring' R (f (inr star)))
-    ( split-sum-Semiring R n m (f ∘ inl))) ∙
-  ( associative-add-Semiring R _ _ _)
+split-sum-Semiring R =
+  split-product-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+```
+
+### Permutations preserve sums
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  preserves-sum-permutation-Semiring :
+    (n : ℕ) → (σ : Permutation n) →
+    (f : functional-vec-Semiring R n) →
+    sum-Semiring R n f ＝ sum-Semiring R n (f ∘ map-equiv σ)
+  preserves-sum-permutation-Semiring =
+    preserves-product-permutation-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
+```
+
+### Sums over finite types are preserved by equivalences
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Semiring l1) (A : Finite-Type l2) (B : Finite-Type l3)
+  (H : equiv-Finite-Type A B)
+  where
+
+  sum-equiv-finite-Semiring :
+    (f : type-Finite-Type B → type-Semiring R) →
+    sum-finite-Semiring R B f ＝ sum-finite-Semiring R A (f ∘ map-equiv H)
+  sum-equiv-finite-Semiring =
+    product-equiv-finite-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
+      ( A)
+      ( B)
+      ( H)
 ```

@@ -38,8 +38,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The **sum operation** extends the binary addition operation on a commutative
-ring `A` to any family of elements of `A` indexed by a standard finite type.
+The **sum operation** extends the binary addition operation on a
+[commutative ring](commutative-algebra.commutative-rings.md) `A` to any family
+of elements of `A` indexed by a
+[standard finite type](univalent-combinatorics.standard-finite-types.md),
+or by a [finite type](univalent-combinatorics.finite-types.md).
 
 ## Definition
 
@@ -240,4 +243,24 @@ module _
   preserves-sum-permutation-Commutative-Ring =
     preserves-sum-permutation-Commutative-Semiring
       ( commutative-semiring-Commutative-Ring A)
+```
+
+### Sums over finite types are preserved by equivalences
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Commutative-Ring l1)
+  (A : Finite-Type l2) (B : Finite-Type l3) (H : equiv-Finite-Type A B)
+  where
+
+  sum-equiv-finite-Commutative-Ring :
+    (f : type-Finite-Type B → type-Commutative-Ring R) →
+    sum-finite-Commutative-Ring R B f ＝
+    sum-finite-Commutative-Ring R A (f ∘ map-equiv H)
+  sum-equiv-finite-Commutative-Ring =
+    sum-equiv-finite-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( A)
+      ( B)
+      ( H)
 ```

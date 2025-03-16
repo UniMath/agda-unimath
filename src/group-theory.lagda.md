@@ -155,6 +155,8 @@ open import group-theory.precategory-of-orbits-monoid-actions public
 open import group-theory.precategory-of-semigroups public
 open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public
+open import group-theory.products-commutative-monoids public
+open import group-theory.products-monoids public
 open import group-theory.products-of-elements-monoids public
 open import group-theory.products-of-tuples-of-elements-commutative-monoids public
 open import group-theory.pullbacks-subgroups public
