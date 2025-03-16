@@ -13,9 +13,11 @@ open import commutative-algebra.sums-commutative-semirings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import finite-group-theory.permutations-standard-finite-types
+
 open import foundation.action-on-identifications-functions
-open import foundation.equivalences
 open import foundation.coproduct-types
+open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -29,8 +31,6 @@ open import ring-theory.sums-rings
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types
-
-open import finite-group-theory.permutations-standard-finite-types
 ```
 
 </details>

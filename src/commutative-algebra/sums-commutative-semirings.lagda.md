@@ -12,31 +12,32 @@ open import commutative-algebra.commutative-semirings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
+open import finite-group-theory.permutations
+open import finite-group-theory.permutations-standard-finite-types
+open import finite-group-theory.transpositions
+open import finite-group-theory.transpositions-standard-finite-types
+
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.equivalences
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-types
-open import foundation.negated-equality
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.universe-levels
+open import foundation.negated-equality
 open import foundation.unit-type
-
-open import lists.lists
+open import foundation.universe-levels
 
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-commutative-semirings
+
+open import lists.lists
 
 open import ring-theory.sums-semirings
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types
-open import finite-group-theory.permutations-standard-finite-types
-open import finite-group-theory.permutations
-open import finite-group-theory.transpositions
-open import finite-group-theory.transpositions-standard-finite-types
 ```
 
 </details>
