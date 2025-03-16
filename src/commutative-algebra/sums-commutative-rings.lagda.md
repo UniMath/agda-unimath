@@ -8,11 +8,13 @@ module commutative-algebra.sums-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.sums-commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.equivalences
 open import foundation.coproduct-types
 open import foundation.function-types
 open import foundation.homotopies
@@ -27,6 +29,8 @@ open import ring-theory.sums-rings
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types
+
+open import finite-group-theory.permutations-standard-finite-types
 ```
 
 </details>
@@ -213,4 +217,20 @@ module _
       ( zero-functional-vec-Commutative-Ring A n) ＝
     zero-Commutative-Ring A
   sum-zero-Commutative-Ring = sum-zero-Ring (ring-Commutative-Ring A)
+```
+
+### Permutations preserve sums
+
+```agda
+module _
+  {l : Level} (A : Commutative-Ring l)
+  where
+
+  preserves-sum-permutation-Commutative-Ring :
+    (n : ℕ) → (σ : Permutation n) →
+    (f : functional-vec-Commutative-Ring A n) →
+    sum-Commutative-Ring A n f ＝ sum-Commutative-Ring A n (f ∘ map-equiv σ)
+  preserves-sum-permutation-Commutative-Ring =
+    preserves-sum-permutation-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring A)
 ```
