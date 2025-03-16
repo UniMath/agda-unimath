@@ -30,6 +30,7 @@ open import linear-algebra.vectors-on-commutative-rings
 open import ring-theory.sums-rings
 
 open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -47,6 +48,12 @@ sum-Commutative-Ring :
   {l : Level} (A : Commutative-Ring l) (n : ℕ) →
   (functional-vec-Commutative-Ring A n) → type-Commutative-Ring A
 sum-Commutative-Ring A = sum-Ring (ring-Commutative-Ring A)
+
+sum-finite-Commutative-Ring :
+  {l1 l2 : Level} (R : Commutative-Ring l1) (A : Finite-Type l2) →
+  (type-Finite-Type A → type-Commutative-Ring R) → type-Commutative-Ring R
+sum-finite-Commutative-Ring R =
+  sum-finite-Commutative-Semiring (commutative-semiring-Commutative-Ring R)
 ```
 
 ## Properties

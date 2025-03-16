@@ -87,6 +87,20 @@ pr1 (count-Fin k) = k
 pr2 (count-Fin k) = id-equiv
 ```
 
+### Any two counts for the same type have the same number of elements
+
+```agda
+module _
+  {l : Level} (X : UU l)
+  where
+
+  eq-number-of-elements-count :
+    (c1 c2 : count X) →
+    number-of-elements-count c1 ＝ number-of-elements-count c2
+  eq-number-of-elements-count (n1 , e1) (n2 , e2) =
+    is-equivalence-injective-Fin (inv-equiv e2 ∘e e1)
+```
+
 ### Types equipped with countings are closed under equivalences
 
 ```agda

@@ -22,11 +22,13 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.unit-type
+open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 
 open import linear-algebra.vectors
@@ -37,6 +39,8 @@ open import lists.lists
 open import ring-theory.sums-semirings
 
 open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -320,4 +324,93 @@ module _
       ap
         ( λ τ → sum-Commutative-Semiring A n (f ∘ map-equiv τ))
         ( eq-permutation-list-standard-transpositions-Fin n σ)
+```
+
+### Sums for a count for a type
+
+```agda
+sum-count-Commutative-Semiring :
+  {l1 l2 : Level} (R : Commutative-Semiring l1) (A : UU l2) →
+  count A → (A → type-Commutative-Semiring R) → type-Commutative-Semiring R
+sum-count-Commutative-Semiring R A (n , Fin-n≃A) f =
+  sum-Commutative-Semiring R n (f ∘ map-equiv Fin-n≃A)
+```
+
+### Two counts for the same set produce equivalent sums
+
+```agda
+module _
+  {l1 l2 : Level} (R : Commutative-Semiring l1) (A : UU l2)
+  where
+
+  abstract
+    eq-sum-count-equiv-Commutative-Semiring :
+      (n : ℕ) → (equiv1 equiv2 : Fin n ≃ A) →
+      (f : A → type-Commutative-Semiring R) →
+      sum-count-Commutative-Semiring R A (n , equiv1) f ＝
+      sum-count-Commutative-Semiring R A (n , equiv2) f
+    eq-sum-count-equiv-Commutative-Semiring n equiv1 equiv2 f =
+      equational-reasoning
+      sum-Commutative-Semiring R n (f ∘ map-equiv equiv1)
+      ＝
+        sum-Commutative-Semiring
+          ( R)
+          ( n)
+          ( (f ∘ map-equiv equiv1) ∘ (map-inv-equiv equiv1 ∘ map-equiv equiv2))
+        by
+          preserves-sum-permutation-Commutative-Semiring
+            ( R)
+            ( n)
+            ( inv-equiv equiv1 ∘e equiv2)
+            ( f ∘ map-equiv equiv1)
+      ＝
+        sum-Commutative-Semiring
+          ( R)
+          ( n)
+          ( f ∘ (map-equiv equiv1 ∘ (map-inv-equiv equiv1 ∘ map-equiv equiv2)))
+        by
+          ap
+            ( sum-Commutative-Semiring R n)
+            ( associative-comp f (map-equiv equiv1) _)
+      ＝
+        sum-Commutative-Semiring
+          ( R)
+          ( n)
+          ( f ∘ ((map-equiv equiv1 ∘ map-inv-equiv equiv1) ∘ map-equiv equiv2))
+        by
+          ap
+            ( λ g → sum-Commutative-Semiring R n (f ∘ g))
+            ( inv
+              ( associative-comp (map-equiv equiv1) (map-inv-equiv equiv1) _))
+      ＝ sum-Commutative-Semiring R n (f ∘ map-equiv equiv2)
+        by
+          ap
+            ( λ g → sum-Commutative-Semiring R n (f ∘ (g ∘ map-equiv equiv2)))
+            ( eq-htpy (is-section-map-inv-equiv equiv1))
+
+    eq-sum-count-Commutative-Semiring :
+      (f : A → type-Commutative-Semiring R) (c1 c2 : count A) →
+      sum-count-Commutative-Semiring R A c1 f ＝
+      sum-count-Commutative-Semiring R A c2 f
+    eq-sum-count-Commutative-Semiring f c1@(n , e1) c2@(_ , e2)
+      with eq-number-of-elements-count A c1 c2
+    ... | refl = eq-sum-count-equiv-Commutative-Semiring n e1 e2 f
+```
+
+### Sums over finite types
+
+```agda
+module _
+  {l1 l2 : Level} (R : Commutative-Semiring l1) (A : Finite-Type l2)
+  where
+
+  sum-finite-Commutative-Semiring :
+    (f : type-Finite-Type A → type-Commutative-Semiring R) →
+    type-Commutative-Semiring R
+  sum-finite-Commutative-Semiring f =
+    map-universal-property-set-quotient-trunc-Prop
+      ( set-Commutative-Semiring R)
+      ( λ c → sum-count-Commutative-Semiring R (type-Finite-Type A) c f)
+      ( eq-sum-count-Commutative-Semiring R (type-Finite-Type A) f)
+      ( is-finite-type-Finite-Type A)
 ```
