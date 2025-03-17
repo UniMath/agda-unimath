@@ -23,7 +23,8 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-We define the operation of {{#concept "maximum" Disambiguation="of pairs of rational numbers" Agda=max-ℚ}}
+We define the operation of
+{{#concept "maximum" Disambiguation="of pairs of rational numbers" Agda=max-ℚ}}
 ([least upper bound](order-theory.least-upper-bounds-posets.md)) for the
 [rational numbers](elementary-number-theory.rational-numbers.md).
 

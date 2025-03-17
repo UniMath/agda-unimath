@@ -23,7 +23,8 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-We define the operation of {{#concept "minimum" Disambiguation="of pairs of rational numbers" Agda=min-ℚ}}
+We define the operation of
+{{#concept "minimum" Disambiguation="of pairs of rational numbers" Agda=min-ℚ}}
 ([greatest lower bound](order-theory.greatest-lower-bounds-posets.md)) for the
 [rational numbers](elementary-number-theory.rational-numbers.md).
 
