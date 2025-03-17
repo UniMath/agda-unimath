@@ -23,7 +23,7 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-We define the operation of minimum
+We define the operation of {{#concept "minimum" Disambiguation="of pairs of rational numbers" Agda=min-ℚ}}
 ([greatest lower bound](order-theory.greatest-lower-bounds-posets.md)) for the
 [rational numbers](elementary-number-theory.rational-numbers.md).
 
@@ -36,7 +36,7 @@ min-ℚ = min-Decidable-Total-Order ℚ-Decidable-Total-Order
 
 ## Properties
 
-### Associativity of `min-ℚ`
+### Associativity of the minimum operation
 
 ```agda
 associative-min-ℚ : (x y z : ℚ) → min-ℚ (min-ℚ x y) z ＝ min-ℚ x (min-ℚ y z)
@@ -44,7 +44,7 @@ associative-min-ℚ =
   associative-min-Decidable-Total-Order ℚ-Decidable-Total-Order
 ```
 
-### Commutativity of `min-ℚ`
+### Commutativity of the minimum operation
 
 ```agda
 commutative-min-ℚ : (x y : ℚ) → min-ℚ x y ＝ min-ℚ y x
@@ -52,7 +52,7 @@ commutative-min-ℚ =
   commutative-min-Decidable-Total-Order ℚ-Decidable-Total-Order
 ```
 
-### `min-ℚ` is idempotent
+### The minimum operation is idempotent
 
 ```agda
 idempotent-min-ℚ : (x : ℚ) → min-ℚ x x ＝ x
@@ -70,7 +70,7 @@ leq-right-min-ℚ : (x y : ℚ) → min-ℚ x y ≤-ℚ y
 leq-right-min-ℚ = leq-right-min-Decidable-Total-Order ℚ-Decidable-Total-Order
 ```
 
-### If `a ≤ b`, `min a b = a`
+### If `a` is less than or equal to `b`, then the minimum of `a` and `b` is `a`
 
 ```agda
 left-leq-right-min-ℚ : (x y : ℚ) → leq-ℚ x y → min-ℚ x y ＝ x
