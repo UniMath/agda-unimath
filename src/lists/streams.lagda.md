@@ -76,7 +76,8 @@ refl-bisimulation : {l : Level} {A : UU l} (as : stream A) → bisimulation as a
 head-eq (refl-bisimulation as) = refl
 tail-eq (refl-bisimulation as) = refl-bisimulation (tail as)
 
-eq-bisim : {l : Level} {A : UU l} (xs ys : stream A) → xs ＝ ys → bisimulation xs ys
+eq-bisim :
+  {l : Level} {A : UU l} (xs ys : stream A) → xs ＝ ys → bisimulation xs ys
 eq-bisim xs xs refl = refl-bisimulation xs
 ```
 

@@ -22,5 +22,6 @@ open import lists.sorted-lists public
 open import lists.sorted-vectors public
 open import lists.sorting-algorithms-lists public
 open import lists.sorting-algorithms-vectors public
+open import lists.streams public
 open import lists.universal-property-lists-wild-monoids public
 ```
