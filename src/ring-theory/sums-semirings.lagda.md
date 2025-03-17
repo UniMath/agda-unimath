@@ -288,3 +288,26 @@ module _
       ( B)
       ( H)
 ```
+
+### Sums over finite types distribute over coproducts
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Semiring l1)
+  (A : Finite-Type l2) (B : Finite-Type l3)
+  where
+
+  sum-coproduct-finite-Semiring :
+    (f :
+      type-Finite-Type A + type-Finite-Type B → type-Semiring R) →
+    sum-finite-Semiring R (coproduct-Finite-Type A B) f ＝
+    add-Semiring
+      ( R)
+      ( sum-finite-Semiring R A (f ∘ inl))
+      ( sum-finite-Semiring R B (f ∘ inr))
+  sum-coproduct-finite-Semiring =
+    product-coproduct-finite-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
+      ( A)
+      ( B)
+```

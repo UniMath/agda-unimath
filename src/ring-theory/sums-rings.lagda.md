@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
+open import foundation.coproduct-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
@@ -234,4 +235,24 @@ module _
     sum-finite-Ring R B f ＝
     sum-finite-Ring R A (f ∘ map-equiv H)
   sum-equiv-finite-Ring = sum-equiv-finite-Semiring (semiring-Ring R) A B H
+```
+
+### Sums over finite types distribute over coproducts
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Ring l1)
+  (A : Finite-Type l2) (B : Finite-Type l3)
+  where
+
+  sum-coproduct-finite-Ring :
+    (f :
+      type-Finite-Type A + type-Finite-Type B → type-Ring R) →
+    sum-finite-Ring R (coproduct-Finite-Type A B) f ＝
+    add-Ring
+      ( R)
+      ( sum-finite-Ring R A (f ∘ inl))
+      ( sum-finite-Ring R B (f ∘ inr))
+  sum-coproduct-finite-Ring =
+    sum-coproduct-finite-Semiring (semiring-Ring R) A B
 ```

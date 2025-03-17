@@ -264,3 +264,23 @@ module _
       ( B)
       ( H)
 ```
+
+### Sums over finite types distribute over coproducts
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Commutative-Ring l1)
+  (A : Finite-Type l2) (B : Finite-Type l3)
+  where
+
+  sum-coproduct-finite-Commutative-Ring :
+    (f :
+      type-Finite-Type A + type-Finite-Type B → type-Commutative-Ring R) →
+    sum-finite-Commutative-Ring R (coproduct-Finite-Type A B) f ＝
+    add-Commutative-Ring
+      ( R)
+      ( sum-finite-Commutative-Ring R A (f ∘ inl))
+      ( sum-finite-Commutative-Ring R B (f ∘ inr))
+  sum-coproduct-finite-Commutative-Ring =
+    sum-coproduct-finite-Ring (ring-Commutative-Ring R) A B
+```

@@ -26,6 +26,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.propositional-truncations
+open import foundation.functoriality-coproduct-types
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universal-property-propositional-truncation-into-sets
@@ -509,106 +510,193 @@ module _
 ### Products over finite types distribute over coproducts
 
 ```agda
-{- module _
+module _
   {l1 l2 l3 : Level} (M : Commutative-Monoid l1)
   (A : Finite-Type l2) (B : Finite-Type l3)
   where
 
-  product-coproduct-finite-Commutative-Monoid :
-    (f :
-      type-Finite-Type A + type-Finite-Type B → type-Commutative-Monoid M) →
-    product-finite-Commutative-Monoid M (coproduct-Finite-Type A B) f ＝
-    mul-Commutative-Monoid
-      ( M)
-      ( product-finite-Commutative-Monoid M A (f ∘ inl))
-      ( product-finite-Commutative-Monoid M B (f ∘ inr))
-  product-coproduct-finite-Commutative-Monoid f =
-    do
-      cA@(nA , Fin-nA≃A) ← is-finite-type-Finite-Type A
-      cB@(nB , Fin-nB≃B) ← is-finite-type-Finite-Type B
-      equational-reasoning
-        product-finite-Commutative-Monoid M (coproduct-Finite-Type A B) f
-        ＝
-          product-Commutative-Monoid
-            ( M)
-            ( nA +ℕ nB)
-            ( f ∘ map-equiv-count (count-coproduct cA cB))
-          by
-            eq-product-finite-count-Commutative-Monoid
+  abstract
+    product-coproduct-finite-Commutative-Monoid :
+      (f :
+        type-Finite-Type A + type-Finite-Type B → type-Commutative-Monoid M) →
+      product-finite-Commutative-Monoid M (coproduct-Finite-Type A B) f ＝
+      mul-Commutative-Monoid
+        ( M)
+        ( product-finite-Commutative-Monoid M A (f ∘ inl))
+        ( product-finite-Commutative-Monoid M B (f ∘ inr))
+    product-coproduct-finite-Commutative-Monoid f =
+      do
+        cA@(nA , Fin-nA≃A) ← is-finite-type-Finite-Type A
+        cB@(nB , Fin-nB≃B) ← is-finite-type-Finite-Type B
+        equational-reasoning
+          product-finite-Commutative-Monoid M (coproduct-Finite-Type A B) f
+          ＝
+            product-Commutative-Monoid
               ( M)
-              ( coproduct-Finite-Type A B)
-              ( count-coproduct cA cB)
-              ( f)
-        ＝
-          mul-Commutative-Monoid M
-            ( product-Commutative-Monoid
-              ( M)
-              ( nA)
-              ( f ∘
-                map-equiv-count (count-coproduct cA cB) ∘
-                inl-coproduct-Fin nA nB))
-            ( product-Commutative-Monoid
-              ( M)
-              ( nB)
-              ( f ∘
-                map-equiv-count (count-coproduct cA cB) ∘
-                inr-coproduct-Fin nA nB))
-          by
-            split-product-Commutative-Monoid
-              ( M)
-              ( nA)
-              ( nB)
+              ( nA +ℕ nB)
               ( f ∘ map-equiv-count (count-coproduct cA cB))
-        ＝
-          mul-Commutative-Monoid
-            ( M)
-            ( product-count-Commutative-Monoid
+            by
+              eq-product-finite-count-Commutative-Monoid
+                ( M)
+                ( coproduct-Finite-Type A B)
+                ( count-coproduct cA cB)
+                ( f)
+          ＝
+            mul-Commutative-Monoid M
+              ( product-Commutative-Monoid
+                ( M)
+                ( nA)
+                ( f ∘
+                  map-equiv-count (count-coproduct cA cB) ∘
+                  inl-coproduct-Fin nA nB))
+              ( product-Commutative-Monoid
+                ( M)
+                ( nB)
+                ( f ∘
+                  map-equiv-count (count-coproduct cA cB) ∘
+                  inr-coproduct-Fin nA nB))
+            by
+              split-product-Commutative-Monoid
+                ( M)
+                ( nA)
+                ( nB)
+                ( f ∘ map-equiv-count (count-coproduct cA cB))
+          ＝
+            mul-Commutative-Monoid
               ( M)
-              ( type-Finite-Type A)
-              ( cA)
-              ( f ∘
-                map-equiv-count (count-coproduct cA cB) ∘
-                inl-coproduct-Fin nA nB ∘
-                map-inv-equiv Fin-nA≃A))
-            ( product-count-Commutative-Monoid
-              ( M)
-              ( type-Finite-Type B)
-              ( cB)
-              ( f ∘
-                map-equiv-count (count-coproduct cA cB) ∘
-                inr-coproduct-Fin nA nB ∘
-                map-inv-equiv Fin-nB≃B))
-          by
-            ap-mul-Commutative-Monoid
-              ( M)
-              ( ap
-                ( product-Commutative-Monoid M nA)
+              ( product-count-Commutative-Monoid
+                ( M)
+                ( type-Finite-Type A)
+                ( cA)
+                ( f ∘
+                  map-coproduct (map-equiv-count cA) (map-equiv-count cB) ∘
+                  map-inv-compute-coproduct-Fin nA nB ∘
+                  map-compute-coproduct-Fin nA nB ∘
+                  inl ∘
+                  map-inv-equiv Fin-nA≃A))
+              ( product-count-Commutative-Monoid
+                ( M)
+                ( type-Finite-Type B)
+                ( cB)
+                ( f ∘
+                  map-coproduct (map-equiv-count cA) (map-equiv-count cB) ∘
+                  map-inv-compute-coproduct-Fin nA nB ∘
+                  map-compute-coproduct-Fin nA nB ∘
+                  inr ∘
+                  map-inv-equiv Fin-nB≃B))
+            by
+              ap-mul-Commutative-Monoid
+                ( M)
                 ( ap
-                  ((f ∘
-                    map-equiv-count (count-coproduct cA cB) ∘
-                    inl-coproduct-Fin nA nB) ∘_)
-                  (inv (eq-htpy (is-retraction-map-inv-equiv Fin-nA≃A)))))
-              ( ap
-                ( product-Commutative-Monoid M nB)
+                  ( product-Commutative-Monoid M nA)
+                  ( ap
+                    ((f ∘
+                      map-equiv-count (count-coproduct cA cB) ∘
+                      inl-coproduct-Fin nA nB) ∘_)
+                    (inv (eq-htpy (is-retraction-map-inv-equiv Fin-nA≃A)))))
                 ( ap
-                  ((f ∘
-                    map-equiv-count (count-coproduct cA cB) ∘
-                    inr-coproduct-Fin nA nB) ∘_)
-                  ( inv (eq-htpy (is-retraction-map-inv-equiv Fin-nB≃B)))))
-        ＝
-          mul-Commutative-Monoid
-            ( M)
-            ( product-finite-Commutative-Monoid M A (f ∘ inl))
-            ( product-finite-Commutative-Monoid M B (f ∘ inr))
-          by {!   !}
-    where
-      open
-        do-syntax-trunc-Prop
-          ( Id-Prop
-            ( set-Commutative-Monoid M)
-            ( product-finite-Commutative-Monoid M (coproduct-Finite-Type A B) f)
-            ( mul-Commutative-Monoid
+                  ( product-Commutative-Monoid M nB)
+                  ( ap
+                    ((f ∘
+                      map-equiv-count (count-coproduct cA cB) ∘
+                      inr-coproduct-Fin nA nB) ∘_)
+                    ( inv (eq-htpy (is-retraction-map-inv-equiv Fin-nB≃B)))))
+          ＝
+            mul-Commutative-Monoid
+              ( M)
+              ( product-count-Commutative-Monoid
+                ( M)
+                ( type-Finite-Type A)
+                ( cA)
+                ( f ∘ inl ∘ map-equiv Fin-nA≃A ∘ map-inv-equiv Fin-nA≃A))
+              ( product-count-Commutative-Monoid
+                ( M)
+                ( type-Finite-Type B)
+                ( cB)
+                ( f ∘ inr ∘ map-equiv Fin-nB≃B ∘ map-inv-equiv Fin-nB≃B))
+            by
+              ap-mul-Commutative-Monoid
+                ( M)
+                ( ap
+                  ( product-count-Commutative-Monoid M (type-Finite-Type A) cA)
+                  ( eq-htpy
+                    ( λ a →
+                      ap
+                        ( f ∘
+                          map-coproduct
+                            ( map-equiv-count cA)
+                            ( map-equiv-count cB))
+                        ( is-retraction-map-inv-equiv
+                          ( compute-coproduct-Fin nA nB)
+                          ( _)))))
+                ( ap
+                  ( product-count-Commutative-Monoid M (type-Finite-Type B) cB)
+                  ( eq-htpy
+                    ( λ b →
+                      ap
+                        ( f ∘
+                          map-coproduct
+                            ( map-equiv-count cA)
+                            ( map-equiv-count cB))
+                        ( is-retraction-map-inv-equiv
+                          ( compute-coproduct-Fin nA nB)
+                          ( _)))))
+          ＝
+            mul-Commutative-Monoid
+              ( M)
+              ( product-count-Commutative-Monoid
+                ( M)
+                ( type-Finite-Type A)
+                ( cA)
+                ( f ∘ inl))
+              ( product-count-Commutative-Monoid
+                ( M)
+                ( type-Finite-Type B)
+                ( cB)
+                ( f ∘ inr))
+            by
+              ap-mul-Commutative-Monoid
+                ( M)
+                ( ap
+                  ( product-count-Commutative-Monoid M (type-Finite-Type A) cA)
+                  ( eq-htpy
+                    ( λ a →
+                      ap (f ∘ inl) (is-section-map-inv-equiv Fin-nA≃A a))))
+                ( ap
+                  ( product-count-Commutative-Monoid M (type-Finite-Type B) cB)
+                  ( eq-htpy
+                    ( λ b →
+                      ap (f ∘ inr) (is-section-map-inv-equiv Fin-nB≃B b))))
+          ＝
+            mul-Commutative-Monoid
               ( M)
               ( product-finite-Commutative-Monoid M A (f ∘ inl))
-              ( product-finite-Commutative-Monoid M B (f ∘ inr)))) -}
+              ( product-finite-Commutative-Monoid M B (f ∘ inr))
+            by
+              inv
+                ( ap-mul-Commutative-Monoid
+                  ( M)
+                  ( eq-product-finite-count-Commutative-Monoid
+                    ( M)
+                    ( A)
+                    ( cA)
+                    ( f ∘ inl))
+                  ( eq-product-finite-count-Commutative-Monoid
+                    ( M)
+                    ( B)
+                    ( cB)
+                    ( f ∘ inr)))
+      where
+        open
+          do-syntax-trunc-Prop
+            ( Id-Prop
+              ( set-Commutative-Monoid M)
+              ( product-finite-Commutative-Monoid
+                ( M)
+                ( coproduct-Finite-Type A B)
+                ( f))
+              ( mul-Commutative-Monoid
+                ( M)
+                ( product-finite-Commutative-Monoid M A (f ∘ inl))
+                ( product-finite-Commutative-Monoid M B (f ∘ inr))))
 ```
