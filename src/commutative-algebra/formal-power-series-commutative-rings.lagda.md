@@ -833,4 +833,47 @@ module _
   {l : Level} (R : Commutative-Ring l)
   (p q r : formal-power-series-Commutative-Ring R)
   where
+
+  abstract
+    associative-mul-formal-power-series-Commutative-Ring :
+      mul-formal-power-series-Commutative-Ring
+        ( R)
+        ( mul-formal-power-series-Commutative-Ring R p q)
+        ( r) ＝
+      mul-formal-power-series-Commutative-Ring
+        ( R)
+        ( p)
+        ( mul-formal-power-series-Commutative-Ring R q r)
+    associative-mul-formal-power-series-Commutative-Ring =
+      eq-htpy-coefficients-formal-power-series-Commutative-Ring
+        ( R)
+        ( _)
+        ( _)
+        ( λ n → equational-reasoning
+          coeff ((p *fps q) *fps r) n
+          ＝
+            sum-finite-Commutative-Ring
+              ( R)
+              ( finite-type-pair-with-sum-ℕ n)
+              ( λ (a , b , _) → coeff (p *fps q) a *R coeff r b)
+            by
+              eq-coefficient-mul-formal-power-series-Commutative-Ring
+                ( R)
+                ( p *fps q)
+                ( r)
+                ( n)
+          ＝ {!   !} by {!   !})
+      where
+        _*R_ :
+          type-Commutative-Ring R → type-Commutative-Ring R →
+          type-Commutative-Ring R
+        _*R_ = mul-Commutative-Ring R
+        _*fps_ :
+          formal-power-series-Commutative-Ring R →
+          formal-power-series-Commutative-Ring R →
+          formal-power-series-Commutative-Ring R
+        _*fps_ = mul-formal-power-series-Commutative-Ring R
+        coeff :
+          formal-power-series-Commutative-Ring R → ℕ → type-Commutative-Ring R
+        coeff = coefficient-formal-power-series-Commutative-Ring R
 ```
