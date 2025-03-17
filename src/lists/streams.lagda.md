@@ -25,7 +25,8 @@ open import lists.lists
 
 **Streams** are, in a sense, the dual of lists. Whereas a [list](lists.lists.md)
 is built inductively by constructors `nil cons`, a stream is _deconstructed_
-coinductively by destructors `head tail`.
+coinductively by destructors `head tail`. Streams will be used to formalize e.g.
+polynomial algebras (via the embedding of lists) and power series.
 
 ## Definitions
 
@@ -41,11 +42,7 @@ open stream public
 
 ### The coinduction principle of the type of streams
 
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-```
+This remains to be formalized.
 
 ### The counit and comultiplication laws of streams
 
@@ -62,11 +59,7 @@ tail (comultiplication-stream as) = comultiplication-stream as
 
 ### Lists embed into streams
 
-```agda
-stream-list : {l : Level} {A : UU l} → list A → stream A
-head (stream-list as) = {!   !}
-tail (stream-list as) = {!   !}
-```
+This remains to be formalized.
 
 ### Characterizing the identity type of streams
 
@@ -85,14 +78,10 @@ tail-eq (refl-bisimulation as) = refl-bisimulation (tail as)
 
 eq-bisim : {l : Level} {A : UU l} (xs ys : stream A) → xs ＝ ys → bisimulation xs ys
 eq-bisim xs xs refl = refl-bisimulation xs
-
-bisim-eq : {l : Level} {A : UU l} (xs ys : stream A) → bisimulation xs ys → xs ＝ ys
-bisim-eq {l} {A} xs ys p = {!   !}
-
-is-torsorial-bisimulation : {l : Level} {A : UU l} (as : stream A) → is-torsorial (bisimulation as)
-pr1 (is-torsorial-bisimulation as) = as , (refl-bisimulation as)
-pr2 (is-torsorial-bisimulation as) (bs , bisim) = {!   !}
 ```
+
+It remains to be shown that bisimulations form a
+[torsorial type family](foundation.torsorial-type-families).
 
 ## External links
 
