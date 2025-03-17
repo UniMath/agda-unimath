@@ -17,14 +17,18 @@ open import finite-group-theory.transpositions-standard-finite-types
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.type-arithmetic-unit-type
+open import foundation.functoriality-coproduct-types
 open import foundation.negated-equality
 open import foundation.propositional-truncations
 open import foundation.sets
@@ -45,6 +49,8 @@ open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.dependent-pair-types
 ```
 
 </details>
@@ -414,11 +420,11 @@ module _
   where
 
   abstract
-    product-equiv-count-Commutative-Monoid :
+    mul-equiv-count-Commutative-Monoid :
       (cA : count A) (cB : count B) (f : B → type-Commutative-Monoid M) →
       mul-count-Commutative-Monoid M B cB f ＝
       mul-count-Commutative-Monoid M A cA (f ∘ map-equiv H)
-    product-equiv-count-Commutative-Monoid
+    mul-equiv-count-Commutative-Monoid
       cA@(_ , Fin-nA≃A) cB@(nB , Fin-nB≃B) f
       with eq-number-of-elements-count-equiv A B H cA cB
     ... | refl =
@@ -515,11 +521,11 @@ module _
   where
 
   abstract
-    product-equiv-finite-Commutative-Monoid :
+    mul-equiv-finite-Commutative-Monoid :
       (f : type-Finite-Type B → type-Commutative-Monoid M) →
       mul-finite-Commutative-Monoid M B f ＝
       mul-finite-Commutative-Monoid M A (f ∘ map-equiv H)
-    product-equiv-finite-Commutative-Monoid f =
+    mul-equiv-finite-Commutative-Monoid f =
       do
         cA ← is-finite-type-Finite-Type A
         cB ← is-finite-type-Finite-Type B
@@ -534,7 +540,7 @@ module _
               ( cA)
               ( f ∘ map-equiv H)
             by
-              product-equiv-count-Commutative-Monoid
+              mul-equiv-count-Commutative-Monoid
                 ( M)
                 ( type-Finite-Type A)
                 ( type-Finite-Type B)
@@ -667,4 +673,172 @@ module _
                 ( M)
                 ( mul-finite-Commutative-Monoid M A (f ∘ inl))
                 ( mul-finite-Commutative-Monoid M B (f ∘ inr))))
+```
+
+### Products distribute over dependent pair types
+
+```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
+
+  abstract
+    mul-fin-count-Σ-Commutative-Monoid :
+      (n : ℕ) →
+      {l2 : Level} →
+      (B : Fin n → UU l2) (cB : (k : Fin n) → count (B k)) →
+      (f : (k : Fin n) → B k → type-Commutative-Monoid M) →
+      mul-fin-Commutative-Monoid M n
+        (λ k → mul-count-Commutative-Monoid M (B k) (cB k) (f k)) ＝
+      mul-count-Commutative-Monoid
+        M (Σ (Fin n) B) (count-Σ (n , id-equiv) cB) (ind-Σ f)
+    mul-fin-count-Σ-Commutative-Monoid zero-ℕ B cB f = refl
+    mul-fin-count-Σ-Commutative-Monoid (succ-ℕ n) B cB f = equational-reasoning
+      mul-fin-Commutative-Monoid
+        ( M)
+        ( succ-ℕ n)
+        ( λ k → mul-count-Commutative-Monoid M (B k) (cB k) (f k))
+      ＝
+        mul-Commutative-Monoid
+          ( M)
+          ( mul-fin-Commutative-Monoid
+            ( M)
+            ( n)
+            ( λ k →
+              mul-count-Commutative-Monoid
+                ( M)
+                ( B (inl k))
+                ( cB (inl k))
+                ( f (inl k))))
+          ( mul-count-Commutative-Monoid
+            ( M)
+            ( B (inr star))
+            ( cB (inr star))
+            ( f (inr star)))
+        by
+          cons-mul-fin-Commutative-Monoid
+            ( M)
+            ( n)
+            ( λ k → mul-count-Commutative-Monoid M (B k) (cB k) (f k))
+            ( refl)
+      ＝
+        mul-Commutative-Monoid
+          ( M)
+          ( mul-count-Commutative-Monoid
+            ( M)
+            ( Σ (Fin n) (B ∘ inl))
+            ( count-Σ (n , id-equiv) (cB ∘ inl))
+            ( ind-Σ (f ∘ inl)))
+          ( mul-count-Commutative-Monoid
+            ( M)
+            ( B (inr star))
+            ( cB (inr star))
+            ( f (inr star)))
+        by
+          ap-mul-Commutative-Monoid
+            ( M)
+            ( mul-fin-count-Σ-Commutative-Monoid
+              ( n)
+              ( B ∘ inl)
+              ( cB ∘ inl)
+              ( f ∘ inl))
+            ( refl)
+      ＝
+        mul-Commutative-Monoid
+          ( M)
+          ( mul-finite-Commutative-Monoid
+            ( M)
+            ( Σ-Finite-Type
+              ( Fin-Finite-Type n)
+              ( λ k → B (inl k) , is-finite-count (cB (inl k))))
+            ( ind-Σ (f ∘ inl)))
+          ( mul-finite-Commutative-Monoid
+            ( M)
+            ( B (inr star) , is-finite-count (cB (inr star)))
+            ( f (inr star)))
+        by
+          inv
+            ( ap-mul-Commutative-Monoid
+              ( M)
+              ( eq-product-finite-count-Commutative-Monoid
+                ( M)
+                ( Σ-Finite-Type
+                  ( Fin-Finite-Type n)
+                  ( λ k → B (inl k) , is-finite-count (cB (inl k))))
+                ( count-Σ (n , id-equiv) (cB ∘ inl))
+                ( ind-Σ (f ∘ inl)))
+              ( eq-product-finite-count-Commutative-Monoid
+                ( M)
+                ( B (inr star) ,
+                  is-finite-count (cB (inr star))) (cB (inr star))
+                ( f (inr star))))
+      ＝
+        mul-finite-Commutative-Monoid
+          ( M)
+          ( coproduct-Finite-Type
+            ( Σ-Finite-Type
+              ( Fin-Finite-Type n)
+              (λ k → B (inl k) , is-finite-count (cB (inl k))))
+            ( B (inr star) , is-finite-count (cB (inr star))))
+          ( rec-coproduct (ind-Σ (f ∘ inl)) (f (inr star)))
+        by
+          inv
+            ( mul-coproduct-finite-Commutative-Monoid
+              ( M)
+              ( Σ-Finite-Type
+                ( Fin-Finite-Type n)
+                (  λ k → B (inl k) , is-finite-count (cB (inl k))))
+              ( B (inr star) , is-finite-count (cB (inr star)))
+              ( rec-coproduct (ind-Σ (f ∘ inl)) (f (inr star))))
+      ＝
+        mul-finite-Commutative-Monoid
+          ( M)
+          ( Σ-Finite-Type
+            ( Fin-Finite-Type (succ-ℕ n))
+            ( λ k → B k , is-finite-count (cB k)))
+            ( rec-coproduct (ind-Σ (f ∘ inl)) (f (inr star)) ∘
+              map-coproduct id (map-left-unit-law-Σ (B ∘ inr)) ∘
+              map-right-distributive-Σ-coproduct (Fin n) unit B)
+        by
+          mul-equiv-finite-Commutative-Monoid
+            ( M)
+            ( Σ-Finite-Type
+              ( Fin-Finite-Type (succ-ℕ n))
+              ( λ k → B k , is-finite-count (cB k)))
+            ( coproduct-Finite-Type
+              ( Σ-Finite-Type
+                ( Fin-Finite-Type n)
+                ( λ k → B (inl k) , is-finite-count (cB (inl k))))
+              ( B (inr star) , is-finite-count (cB (inr star))))
+            ( equiv-coproduct id-equiv (left-unit-law-Σ (B ∘ inr)) ∘e
+              right-distributive-Σ-coproduct (Fin n) unit B)
+            ( rec-coproduct (ind-Σ (f ∘ inl)) (f (inr star)))
+      ＝
+        mul-finite-Commutative-Monoid
+          ( M)
+          ( Σ-Finite-Type
+            ( Fin-Finite-Type (succ-ℕ n))
+            ( λ k → B k , is-finite-count (cB k)))
+            ( ind-Σ f)
+        by
+          htpy-mul-finite-Commutative-Monoid
+            ( M)
+            ( Σ-Finite-Type
+              ( Fin-Finite-Type (succ-ℕ n))
+              ( λ k → B k , is-finite-count (cB k)))
+            ( λ { (inl k , b) → refl ; (inr k , b) → refl})
+      ＝
+        mul-count-Commutative-Monoid
+          ( M)
+          ( Σ (Fin (succ-ℕ n)) B)
+          ( count-Σ (succ-ℕ n , id-equiv) cB)
+          ( ind-Σ f)
+        by
+          eq-product-finite-count-Commutative-Monoid
+            ( M)
+            ( Σ-Finite-Type
+              ( Fin-Finite-Type (succ-ℕ n))
+              ( λ k → B k , is-finite-count (cB k)))
+            ( count-Σ (succ-ℕ n , id-equiv) cB)
+            ( ind-Σ f)
 ```
