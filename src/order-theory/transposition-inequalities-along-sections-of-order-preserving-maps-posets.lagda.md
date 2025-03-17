@@ -44,7 +44,7 @@ module _
   where
 
   leq-transpose-is-section-hom-Poset :
-    is-section g (map-hom-Poset P Q f) → (x : type-Poset P) (y : type-Poset Q) →
+    is-section (map-hom-Poset P Q f) g → (x : type-Poset P) (y : type-Poset Q) →
     leq-Poset P x (g y) → leq-Poset Q (map-hom-Poset P Q f x) y
   leq-transpose-is-section-hom-Poset f-section-g x y x≤gy =
     tr
