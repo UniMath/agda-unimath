@@ -1,5 +1,9 @@
 # Lists
 
+```agda
+{-# OPTIONS --guardedness #-}
+```
+
 ## Modules in the lists namespace
 
 ```agda
