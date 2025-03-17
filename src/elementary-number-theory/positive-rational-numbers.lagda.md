@@ -161,8 +161,7 @@ positive-rational-positive-ℤ : positive-ℤ → ℚ⁺
 positive-rational-positive-ℤ (z , pos-z) = rational-ℤ z , pos-z
 
 one-ℚ⁺ : ℚ⁺
-one-ℚ⁺ = (one-ℚ , is-positive-int-po
-sitive-ℤ one-positive-ℤ)
+one-ℚ⁺ = (one-ℚ , is-positive-int-positive-ℤ one-positive-ℤ)
 ```
 
 ### The rational image of a positive integer fraction is positive
@@ -615,59 +614,6 @@ preserves-leq-right-mul-ℚ⁺ p q r q≤r =
     ( commutative-mul-ℚ (rational-ℚ⁺ p) q)
     ( commutative-mul-ℚ (rational-ℚ⁺ p) r)
     ( preserves-leq-left-mul-ℚ⁺ p q r q≤r)
-```
-
-### Multiplication of a positive rational by another positive rational less than 1 is a strictly deflationary map
-
-```agda
-le-left-mul-less-than-one-ℚ⁺ :
-  (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (p *ℚ⁺ q) q
-le-left-mul-less-than-one-ℚ⁺ p p<1 q =
-  tr
-    ( le-ℚ⁺ ( p *ℚ⁺ q))
-    ( left-unit-law-mul-ℚ⁺ q)
-    ( preserves-le-right-mul-ℚ⁺ q (rational-ℚ⁺ p) one-ℚ p<1)
-
-le-right-mul-less-than-one-ℚ⁺ :
-  (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (q *ℚ⁺ p) q
-le-right-mul-less-than-one-ℚ⁺ p p<1 q =
-  tr
-    ( λ r → le-ℚ⁺ r q)
-    ( commutative-mul-ℚ⁺ p q)
-    ( le-left-mul-less-than-one-ℚ⁺ p p<1 q)
-```
-
-### Multiplication by a positive rational number preserves strict inequality
-
-```agda
-preserves-le-left-mul-ℚ⁺ :
-  (p : ℚ⁺) (q r : ℚ) → le-ℚ q r → le-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
-preserves-le-left-mul-ℚ⁺
-  p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
-  q@((q-num , q-denom , _) , _)
-  r@((r-num , r-denom , _) , _)
-  q<r =
-    preserves-le-rational-fraction-ℤ
-      ( mul-fraction-ℤ p (fraction-ℚ q))
-      ( mul-fraction-ℤ p (fraction-ℚ r))
-      ( binary-tr
-        ( le-ℤ)
-        ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( preserves-le-right-mul-positive-ℤ
-          ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos))
-          ( q-num *ℤ r-denom)
-          ( r-num *ℤ q-denom)
-          ( q<r)))
-
-preserves-le-right-mul-ℚ⁺ :
-  (p : ℚ⁺) (q r : ℚ) → le-ℚ q r → le-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
-preserves-le-right-mul-ℚ⁺ p⁺@(p , _) q r q<r =
-  binary-tr
-    ( le-ℚ)
-    ( commutative-mul-ℚ p q)
-    ( commutative-mul-ℚ p r)
-    ( preserves-le-left-mul-ℚ⁺ p⁺ q r q<r)
 ```
 
 ### Multiplication of a positive rational by another positive rational less than 1 is a strictly deflationary map
