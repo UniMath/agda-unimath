@@ -20,6 +20,7 @@ open import elementary-number-theory.additive-group-of-rational-numbers public
 open import elementary-number-theory.archimedean-property-integer-fractions public
 open import elementary-number-theory.archimedean-property-integers public
 open import elementary-number-theory.archimedean-property-natural-numbers public
+open import elementary-number-theory.archimedean-property-positive-rational-numbers public
 open import elementary-number-theory.archimedean-property-rational-numbers public
 open import elementary-number-theory.arithmetic-functions public
 open import elementary-number-theory.based-induction-natural-numbers public
@@ -60,6 +61,7 @@ open import elementary-number-theory.divisibility-standard-finite-types public
 open import elementary-number-theory.equality-conatural-numbers public
 open import elementary-number-theory.equality-integers public
 open import elementary-number-theory.equality-natural-numbers public
+open import elementary-number-theory.equality-rational-numbers public
 open import elementary-number-theory.euclid-mullin-sequence public
 open import elementary-number-theory.euclidean-division-natural-numbers public
 open import elementary-number-theory.eulers-totient-function public
@@ -177,6 +179,7 @@ open import elementary-number-theory.triangular-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.type-arithmetic-natural-numbers public
 open import elementary-number-theory.unit-elements-standard-finite-types public
+open import elementary-number-theory.unit-fractions-rational-numbers public
 open import elementary-number-theory.unit-similarity-standard-finite-types public
 open import elementary-number-theory.universal-property-conatural-numbers public
 open import elementary-number-theory.universal-property-integers public
