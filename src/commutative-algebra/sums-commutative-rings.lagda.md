@@ -41,8 +41,8 @@ open import univalent-combinatorics.standard-finite-types
 The **sum operation** extends the binary addition operation on a
 [commutative ring](commutative-algebra.commutative-rings.md) `A` to any family
 of elements of `A` indexed by a
-[standard finite type](univalent-combinatorics.standard-finite-types.md),
-or by a [finite type](univalent-combinatorics.finite-types.md).
+[standard finite type](univalent-combinatorics.standard-finite-types.md), or by
+a [finite type](univalent-combinatorics.finite-types.md).
 
 ## Definition
 

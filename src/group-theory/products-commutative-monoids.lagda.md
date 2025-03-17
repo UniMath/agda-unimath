@@ -22,11 +22,11 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-coproduct-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.propositional-truncations
-open import foundation.functoriality-coproduct-types
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universal-property-propositional-truncation-into-sets
