@@ -124,6 +124,14 @@ module _
     ( q' : dependent-identification B q y' z') →
     concat-dependent-identification refl q p' q' ＝ ap (tr B q) p' ∙ q'
   compute-concat-dependent-identification-left-base-refl q p' q' = refl
+
+  compute-concat-dependent-identification :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    {x' : B x} {y' : B y} {z' : B z} →
+    (p' : dependent-identification B p x' y') →
+    (q' : dependent-identification B q y' z') →
+    concat-dependent-identification p q p' q' ＝ tr-concat p q x' ∙ ap (tr B q) p' ∙ q'
+  compute-concat-dependent-identification refl q p' q' = refl
 ```
 
 #### Strictly right unital concatenation of dependent identifications
