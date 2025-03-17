@@ -17,6 +17,7 @@ open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
@@ -30,6 +31,7 @@ open import linear-algebra.vectors-on-commutative-rings
 open import ring-theory.sums-rings
 
 open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -290,4 +292,39 @@ module _
       ( sum-finite-Commutative-Ring R B (f ∘ inr))
   sum-coproduct-finite-Commutative-Ring =
     sum-coproduct-finite-Ring (ring-Commutative-Ring R) A B
+```
+
+### Sums distribute over dependent pair types
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Commutative-Ring l1)
+  (A : Finite-Type l2) (B : type-Finite-Type A → Finite-Type l3)
+  where
+
+  sum-Σ-finite-Commutative-Ring :
+    (f :
+      (a : type-Finite-Type A) →
+      type-Finite-Type (B a) →
+      type-Commutative-Ring R) →
+    sum-finite-Commutative-Ring R (Σ-Finite-Type A B) (ind-Σ f) ＝
+    sum-finite-Commutative-Ring
+      R A (λ a → sum-finite-Commutative-Ring R (B a) (f a))
+  sum-Σ-finite-Commutative-Ring =
+    sum-Σ-finite-Ring (ring-Commutative-Ring R) A B
+```
+
+### The sum over an empty type is zero
+
+```agda
+module _
+  {l1 l2 : Level} (R : Commutative-Ring l1) (A : Finite-Type l2)
+  (H : is-empty (type-Finite-Type A))
+  where
+
+  sum-is-empty-finite-Commutative-Ring :
+    (f : type-Finite-Type A → type-Commutative-Ring R) →
+    is-zero-Commutative-Ring R (sum-finite-Commutative-Ring R A f)
+  sum-is-empty-finite-Commutative-Ring =
+    sum-is-empty-finite-Ring (ring-Commutative-Ring R) A H
 ```

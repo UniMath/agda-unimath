@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.coproduct-types
+open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
@@ -26,6 +27,7 @@ open import ring-theory.rings
 open import ring-theory.sums-semirings
 
 open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -261,4 +263,33 @@ module _
       ( sum-finite-Ring R B (f ∘ inr))
   sum-coproduct-finite-Ring =
     sum-coproduct-finite-Semiring (semiring-Ring R) A B
+```
+
+### Sums distribute over dependent pair types
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Ring l1)
+  (A : Finite-Type l2) (B : type-Finite-Type A → Finite-Type l3)
+  where
+
+  sum-Σ-finite-Ring :
+    (f : (a : type-Finite-Type A) → type-Finite-Type (B a) → type-Ring R) →
+    sum-finite-Ring R (Σ-Finite-Type A B) (ind-Σ f) ＝
+    sum-finite-Ring R A (λ a → sum-finite-Ring R (B a) (f a))
+  sum-Σ-finite-Ring = sum-Σ-finite-Semiring (semiring-Ring R) A B
+```
+
+### The sum over an empty type is zero
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (A : Finite-Type l2)
+  (H : is-empty (type-Finite-Type A))
+  where
+
+  sum-is-empty-finite-Ring :
+    (f : type-Finite-Type A → type-Ring R) →
+    is-zero-Ring R (sum-finite-Ring R A f)
+  sum-is-empty-finite-Ring = sum-is-empty-finite-Semiring (semiring-Ring R) A H
 ```
