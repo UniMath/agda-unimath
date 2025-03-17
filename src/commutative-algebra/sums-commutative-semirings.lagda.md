@@ -15,6 +15,7 @@ open import elementary-number-theory.natural-numbers
 open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.coproduct-types
+open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
@@ -31,6 +32,7 @@ open import lists.lists
 open import ring-theory.sums-semirings
 
 open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -291,4 +293,39 @@ module _
       ( sum-finite-Commutative-Semiring R B (f ∘ inr))
   sum-coproduct-finite-Commutative-Semiring =
     sum-coproduct-finite-Semiring (semiring-Commutative-Semiring R) A B
+```
+
+### Sums distribute over dependent pair types
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Commutative-Semiring l1)
+  (A : Finite-Type l2) (B : type-Finite-Type A → Finite-Type l3)
+  where
+
+  sum-Σ-finite-Commutative-Semiring :
+    (f :
+      (a : type-Finite-Type A) →
+      type-Finite-Type (B a) →
+      type-Commutative-Semiring R) →
+    sum-finite-Commutative-Semiring R (Σ-Finite-Type A B) (ind-Σ f) ＝
+    sum-finite-Commutative-Semiring
+      R A (λ a → sum-finite-Commutative-Semiring R (B a) (f a))
+  sum-Σ-finite-Commutative-Semiring =
+    sum-Σ-finite-Semiring (semiring-Commutative-Semiring R) A B
+```
+
+### The sum over an empty type is zero
+
+```agda
+module _
+  {l1 l2 : Level} (R : Commutative-Semiring l1) (A : Finite-Type l2)
+  (H : is-empty (type-Finite-Type A))
+  where
+
+  sum-is-empty-finite-Commutative-Semiring :
+    (f : type-Finite-Type A → type-Commutative-Semiring R) →
+    is-zero-Commutative-Semiring R (sum-finite-Commutative-Semiring R A f)
+  sum-is-empty-finite-Commutative-Semiring =
+    sum-is-empty-finite-Semiring (semiring-Commutative-Semiring R) A H
 ```

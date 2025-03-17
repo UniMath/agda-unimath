@@ -14,6 +14,7 @@ open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
@@ -29,6 +30,7 @@ open import linear-algebra.vectors-on-semirings
 open import ring-theory.semirings
 
 open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -289,7 +291,7 @@ module _
     (f : type-Finite-Type B → type-Semiring R) →
     sum-finite-Semiring R B f ＝ sum-finite-Semiring R A (f ∘ map-equiv H)
   sum-equiv-finite-Semiring =
-    product-equiv-finite-Commutative-Monoid
+    mul-equiv-finite-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
       ( A)
       ( B)
@@ -300,8 +302,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (R : Semiring l1)
-  (A : Finite-Type l2) (B : Finite-Type l3)
+  {l1 l2 l3 : Level} (R : Semiring l1) (A : Finite-Type l2) (B : Finite-Type l3)
   where
 
   sum-coproduct-finite-Semiring :
@@ -317,4 +318,38 @@ module _
       ( additive-commutative-monoid-Semiring R)
       ( A)
       ( B)
+```
+
+### Sums distribute over dependent pair types
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Semiring l1)
+  (A : Finite-Type l2) (B : type-Finite-Type A → Finite-Type l3)
+  where
+
+  sum-Σ-finite-Semiring :
+    (f : (a : type-Finite-Type A) → type-Finite-Type (B a) → type-Semiring R) →
+    sum-finite-Semiring R (Σ-Finite-Type A B) (ind-Σ f) ＝
+    sum-finite-Semiring R A (λ a → sum-finite-Semiring R (B a) (f a))
+  sum-Σ-finite-Semiring =
+    mul-Σ-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R) A B
+```
+
+### The sum over an empty type is zero
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (A : Finite-Type l2)
+  (H : is-empty (type-Finite-Type A))
+  where
+
+  sum-is-empty-finite-Semiring :
+    (f : type-Finite-Type A → type-Semiring R) →
+    is-zero-Semiring R (sum-finite-Semiring R A f)
+  sum-is-empty-finite-Semiring =
+    mul-is-empty-finite-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
+      ( A)
+      ( H)
 ```
