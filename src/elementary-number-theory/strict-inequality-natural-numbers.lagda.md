@@ -17,9 +17,11 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
+open import foundation.equivalences
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
@@ -29,6 +31,8 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.sections
+open import foundation.retractions
 ```
 
 </details>
@@ -306,6 +310,19 @@ le-succ-leq-ℕ :
   (x y : ℕ) → leq-ℕ x y → le-ℕ x (succ-ℕ y)
 le-succ-leq-ℕ zero-ℕ y H = star
 le-succ-leq-ℕ (succ-ℕ x) (succ-ℕ y) H = le-succ-leq-ℕ x y H
+```
+
+### There is an equivalence between natural numbers less than `succ-ℕ n` and natural numbers less than or equal to `n`
+
+```
+equiv-le-succ-ℕ-leq-ℕ :
+  (n : ℕ) → Σ ℕ (λ k → le-ℕ k (succ-ℕ n)) ≃ Σ ℕ (λ k → leq-ℕ k n)
+equiv-le-succ-ℕ-leq-ℕ n =
+  ( λ (k , k<sn) → k , leq-le-succ-ℕ k n k<sn) ,
+  ((λ (k , k≤n) → k , le-succ-leq-ℕ k n k≤n) ,
+    λ (k , k≤n) → eq-pair-Σ refl (eq-type-Prop (leq-ℕ-Prop k n))) ,
+  ((λ (k , k≤n) → k , le-succ-leq-ℕ k n k≤n) ,
+    λ (k , k<sn) → eq-pair-Σ refl (eq-type-Prop (le-ℕ-Prop k (succ-ℕ n))))
 ```
 
 ### `x ≤ y` if and only if `(x ＝ y) + (x < y)`

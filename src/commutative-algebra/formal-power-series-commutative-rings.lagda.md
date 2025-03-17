@@ -1,7 +1,7 @@
-# Formal power series rings
+# Formal power series commutative rings
 
 ```agda
-module commutative-algebra.formal-power-series-rings where
+module commutative-algebra.formal-power-series-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -10,17 +10,26 @@ module commutative-algebra.formal-power-series-rings where
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.sums-commutative-rings
 
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.equality-dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.propositions
+open import foundation.cartesian-product-types
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.involutions
 open import foundation.sets
+open import foundation.equivalences
 open import foundation.unit-type
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
@@ -30,8 +39,9 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
@@ -655,6 +665,36 @@ module _
 ### Multiplication
 
 ```agda
+pair-with-sum-ℕ : ℕ → UU lzero
+pair-with-sum-ℕ n = Σ ℕ ( λ a → Σ ℕ (λ b → b +ℕ a ＝ n))
+
+abstract
+  equiv-pair-with-sum-leq-ℕ :
+    (n : ℕ) → Σ ℕ (λ k → leq-ℕ k n) ≃ pair-with-sum-ℕ n
+  equiv-pair-with-sum-leq-ℕ n =
+    ( λ (k , k≤n) → k , subtraction-leq-ℕ k n k≤n) ,
+    ((λ (k , l , l+k=n) → k , leq-subtraction-ℕ k n l l+k=n) ,
+      λ (k , l , l+k=n) →
+        let
+          (l' , l'+k=n) = subtraction-leq-ℕ k n (leq-subtraction-ℕ k n l l+k=n)
+        in
+          eq-pair-Σ
+            ( refl)
+            ( eq-pair-Σ
+              (is-injective-right-add-ℕ k (l'+k=n ∙ inv l+k=n))
+              (eq-type-Prop (Id-Prop ℕ-Set (l +ℕ k) n)))) ,
+    ((λ (k , l , l+k=n) → k , leq-subtraction-ℕ k n l l+k=n) ,
+    (λ (k , k≤n) → eq-pair-Σ refl (eq-type-Prop (leq-ℕ-Prop k n))))
+
+  count-pair-with-sum-ℕ : (n : ℕ) → count (pair-with-sum-ℕ n)
+  count-pair-with-sum-ℕ n =
+    succ-ℕ n , equiv-pair-with-sum-leq-ℕ n ∘e equiv-fin-succ-leq-ℕ n
+
+finite-type-pair-with-sum-ℕ : ℕ → Finite-Type lzero
+finite-type-pair-with-sum-ℕ n =
+  pair-with-sum-ℕ n ,
+  is-finite-count (count-pair-with-sum-ℕ n)
+
 module _
   {l : Level} (R : Commutative-Ring l)
   (p q : formal-power-series-Commutative-Ring R)
@@ -663,20 +703,14 @@ module _
   coefficient-mul-formal-power-series-Commutative-Ring :
     ℕ → type-Commutative-Ring R
   coefficient-mul-formal-power-series-Commutative-Ring n =
-    sum-Commutative-Ring
+    sum-finite-Commutative-Ring
       ( R)
-      ( succ-ℕ n)
-      ( λ k →
+      ( finite-type-pair-with-sum-ℕ n)
+      ( λ (a , b , _) →
         mul-Commutative-Ring
           ( R)
-          ( coefficient-formal-power-series-Commutative-Ring
-            ( R)
-            ( p)
-            ( nat-Fin (succ-ℕ n) k))
-          ( coefficient-formal-power-series-Commutative-Ring
-            ( R)
-            ( q)
-            ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) k))))
+          ( coefficient-formal-power-series-Commutative-Ring R p a)
+          ( coefficient-formal-power-series-Commutative-Ring R q b))
 
   abstract
     mul-formal-power-series-Commutative-Ring :
@@ -699,49 +733,31 @@ module _
 
 ```agda
 module _
+  (n : ℕ)
+  where
+
+  swap-pair-with-sum : pair-with-sum-ℕ n → pair-with-sum-ℕ n
+  swap-pair-with-sum (k , l , l+k=n) = l , k , commutative-add-ℕ k l ∙ l+k=n
+
+  abstract
+    is-involution-swap-pair-with-sum : is-involution swap-pair-with-sum
+    is-involution-swap-pair-with-sum (k , l , l+k=n) =
+      eq-pair-Σ refl (eq-pair-Σ refl (eq-type-Prop (Id-Prop ℕ-Set (l +ℕ k) n)))
+
+  equiv-swap-pair-with-sum : pair-with-sum-ℕ n ≃ pair-with-sum-ℕ n
+  equiv-swap-pair-with-sum =
+    equiv-is-involution
+      { lzero}
+      { pair-with-sum-ℕ n}
+      { swap-pair-with-sum}
+      ( is-involution-swap-pair-with-sum)
+
+module _
   {l : Level} (R : Commutative-Ring l)
   (p q : formal-power-series-Commutative-Ring R)
   where
 
   abstract
-    htpy-coefficients-commutative-mul-formal-power-series-Commutative-Ring :
-      coefficient-mul-formal-power-series-Commutative-Ring R p q ~
-      coefficient-mul-formal-power-series-Commutative-Ring R q p
-    htpy-coefficients-commutative-mul-formal-power-series-Commutative-Ring n =
-      preserves-sum-permutation-Commutative-Ring
-        ( R)
-        ( succ-ℕ n)
-        ( equiv-involution (involution-opposite-Fin (succ-ℕ n)))
-        ( λ k →
-          mul-Commutative-Ring
-            ( R)
-            ( coefficient-formal-power-series-Commutative-Ring
-              ( R)
-              ( p)
-              ( nat-Fin (succ-ℕ n) k))
-            ( coefficient-formal-power-series-Commutative-Ring
-              ( R)
-              ( q)
-              ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) k)))) ∙
-      htpy-sum-Commutative-Ring
-        ( R)
-        ( succ-ℕ n)
-        ( λ k →
-          ap
-            ( λ m →
-              mul-Commutative-Ring
-                ( R)
-                ( coefficient-formal-power-series-Commutative-Ring
-                  ( R)
-                  ( p)
-                  ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) k)))
-                ( coefficient-formal-power-series-Commutative-Ring
-                  ( R)
-                  ( q)
-                  ( nat-Fin (succ-ℕ n) m)))
-            (is-involution-opposite-Fin (succ-ℕ n) k) ∙
-          commutative-mul-Commutative-Ring R _ _)
-
     commutative-mul-formal-power-series-Commutative-Ring :
       mul-formal-power-series-Commutative-Ring R p q ＝
       mul-formal-power-series-Commutative-Ring R q p
@@ -750,118 +766,47 @@ module _
         ( R)
         ( _)
         ( _)
-        ( eq-coefficient-mul-formal-power-series-Commutative-Ring R p q ∙h
-          htpy-coefficients-commutative-mul-formal-power-series-Commutative-Ring ∙h
-          inv-htpy
-            ( eq-coefficient-mul-formal-power-series-Commutative-Ring R q p))
-```
-
-#### Unit laws
-
-```agda
-module _
-  {l : Level} (R : Commutative-Ring l)
-  (p : formal-power-series-Commutative-Ring R)
-  where
-
-  abstract
-    htpy-coefficients-right-unit-law-mul-formal-power-series-Commutative-Ring :
-      coefficient-mul-formal-power-series-Commutative-Ring
-        ( R)
-        ( p)
-        ( one-formal-power-series-Commutative-Ring R) ~
-      coefficient-formal-power-series-Commutative-Ring R p
-    htpy-coefficients-right-unit-law-mul-formal-power-series-Commutative-Ring
-      n =
-      equational-reasoning
-        sum-Commutative-Ring
-          ( R)
-          ( succ-ℕ n)
-          ( λ k →
-            mul-Commutative-Ring
-              ( R)
-              ( coefficient-formal-power-series-Commutative-Ring
-                ( R)
-                ( p)
-                ( nat-Fin (succ-ℕ n) k))
-              ( coefficient-formal-power-series-Commutative-Ring
-                ( R)
-                ( one-formal-power-series-Commutative-Ring R)
-                ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) k))))
+        ( λ n → equational-reasoning
+          coefficient-formal-power-series-Commutative-Ring R _ n
           ＝
-            sum-Commutative-Ring
+            sum-finite-Commutative-Ring
               ( R)
-              ( succ-ℕ n)
-              ( λ k →
+              ( finite-type-pair-with-sum-ℕ n)
+              ( λ (a , b , _) →
                 mul-Commutative-Ring
                   ( R)
-                  ( coefficient-formal-power-series-Commutative-Ring
-                    ( R)
-                    ( p)
-                    ( nat-Fin (succ-ℕ n) k))
-                  ( coefficient-constant-formal-power-series-Commutative-Ring
-                    ( R)
-                    ( one-Commutative-Ring R)
-                    ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) k))))
+                  ( coefficient-formal-power-series-Commutative-Ring R p a)
+                  ( coefficient-formal-power-series-Commutative-Ring R q b))
             by
-              htpy-sum-Commutative-Ring
+              eq-coefficient-mul-formal-power-series-Commutative-Ring
                 ( R)
-                ( succ-ℕ n)
-                ( λ k →
-                  ap
-                    ( mul-Commutative-Ring
-                      ( R)
-                      ( coefficient-formal-power-series-Commutative-Ring
-                        ( R)
-                        ( p)
-                        ( nat-Fin (succ-ℕ n) k)))
-                    ( eq-coefficient-constant-formal-power-series-Commutative-Ring
-                      ( R)
-                      ( one-Commutative-Ring R)
-                      ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) k))))
+                ( p)
+                ( q)
+                ( n)
           ＝
-            add-Commutative-Ring
+            sum-finite-Commutative-Ring
               ( R)
-              ( sum-Commutative-Ring
-                ( R)
-                ( n)
-                ( λ k →
-                  mul-Commutative-Ring
-                    ( R)
-                    ( coefficient-formal-power-series-Commutative-Ring
-                      ( R)
-                      ( p)
-                      ( nat-Fin (succ-ℕ n) (inl-Fin n k)))
-                    ( coefficient-constant-formal-power-series-Commutative-Ring
-                      ( R)
-                      ( one-Commutative-Ring R)
-                      ( nat-Fin
-                        ( succ-ℕ n)
-                        ( opposite-Fin (succ-ℕ n) (inl-Fin n k))))))
-              ( mul-Commutative-Ring
-                ( R)
-                ( coefficient-formal-power-series-Commutative-Ring R p n)
-                ( coefficient-constant-formal-power-series-Commutative-Ring
+              ( finite-type-pair-with-sum-ℕ n)
+              ( λ (a , b , _) →
+                mul-Commutative-Ring
                   ( R)
-                  ( one-Commutative-Ring R)
-                  ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) (inr star)))))
+                  ( coefficient-formal-power-series-Commutative-Ring R p b)
+                  ( coefficient-formal-power-series-Commutative-Ring R q a))
             by
-              cons-sum-Commutative-Ring
+              sum-aut-finite-Commutative-Ring
                 ( R)
-                ( n)
-                ( λ k →
-                  mul-Commutative-Ring
-                    ( R)
-                    ( coefficient-formal-power-series-Commutative-Ring
-                      ( R)
-                      ( p)
-                      ( nat-Fin (succ-ℕ n) k))
-                    ( coefficient-constant-formal-power-series-Commutative-Ring
-                      ( R)
-                      ( one-Commutative-Ring R)
-                      ( nat-Fin (succ-ℕ n) (opposite-Fin (succ-ℕ n) k))))
-                ( refl)
-          ＝ {!   !} by {!   !}
-
-  -- left-unit-law-mul-formal-power-series-Commutative-Ring :
+                ( finite-type-pair-with-sum-ℕ n)
+                ( equiv-swap-pair-with-sum n)
+                _
+          ＝
+            sum-finite-Commutative-Ring
+              ( R)
+              ( finite-type-pair-with-sum-ℕ n)
+              ( λ (a , b , _) →
+                mul-Commutative-Ring
+                  ( R)
+                  ( coefficient-formal-power-series-Commutative-Ring R q a)
+                  ( coefficient-formal-power-series-Commutative-Ring R p b))
+            by
+          ＝ {!   !} by {!   !})
 ```

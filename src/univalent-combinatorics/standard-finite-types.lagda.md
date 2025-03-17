@@ -18,9 +18,12 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.sections
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-injective-type-families
 open import foundation.equivalences
 open import foundation.equivalences-maybe
@@ -29,6 +32,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
+open import foundation.propositions
 open import foundation.negation
 open import foundation.noncontractible-types
 open import foundation.preunivalent-type-families
@@ -490,4 +494,41 @@ pr2 (retraction-equiv-tr-Fin n m) = is-retraction-is-equivalence-injective-Fin
 is-preunivalent-Fin : is-preunivalent Fin
 is-preunivalent-Fin =
   is-preunivalent-retraction-equiv-tr-Set Fin-Set retraction-equiv-tr-Fin
+```
+
+### `Fin n` is equivalent to the set of natural numbers less than `n`
+
+```agda
+nat-le-Fin-reverse : (n : ℕ) (k : Fin n) → Σ ℕ (λ m → le-ℕ m n)
+nat-le-Fin-reverse (succ-ℕ n) (inr star) = zero-ℕ , star
+nat-le-Fin-reverse (succ-ℕ n) (inl k) =
+  ind-Σ (λ m m<n → succ-ℕ m , m<n) (nat-le-Fin-reverse n k)
+
+fin-reverse-le-ℕ : (n : ℕ) → Σ ℕ (λ k → le-ℕ k n) → Fin n
+fin-reverse-le-ℕ (succ-ℕ n) (zero-ℕ , star) = inr star
+fin-reverse-le-ℕ (succ-ℕ n) (succ-ℕ k , H) = inl (fin-reverse-le-ℕ n (k , H))
+
+is-section-fin-reverse-le-ℕ :
+  (n : ℕ) → is-section (nat-le-Fin-reverse n) (fin-reverse-le-ℕ n)
+is-section-fin-reverse-le-ℕ (succ-ℕ n) (zero-ℕ , k<n) = refl
+is-section-fin-reverse-le-ℕ (succ-ℕ n) (succ-ℕ k , k<n) =
+  eq-pair-Σ
+    ( ap (succ-ℕ ∘ pr1) (is-section-fin-reverse-le-ℕ n (k , k<n)))
+    ( eq-type-Prop (le-ℕ-Prop k n))
+
+is-retraction-fin-reverse-le-ℕ :
+  (n : ℕ) → is-retraction (nat-le-Fin-reverse n) (fin-reverse-le-ℕ n)
+is-retraction-fin-reverse-le-ℕ (succ-ℕ n) (inl x) =
+  ap inl (is-retraction-fin-reverse-le-ℕ n x)
+is-retraction-fin-reverse-le-ℕ (succ-ℕ n) (inr star) = refl
+
+abstract
+  equiv-fin-le-ℕ : (n : ℕ) → Fin n ≃ Σ ℕ (λ m → le-ℕ m n)
+  equiv-fin-le-ℕ n =
+    nat-le-Fin-reverse n ,
+    ( fin-reverse-le-ℕ n , is-section-fin-reverse-le-ℕ n) ,
+    ( fin-reverse-le-ℕ n , is-retraction-fin-reverse-le-ℕ n)
+
+  equiv-fin-succ-leq-ℕ : (n : ℕ) → Fin (succ-ℕ n) ≃ Σ ℕ (λ m → leq-ℕ m n)
+  equiv-fin-succ-leq-ℕ n = equiv-le-succ-ℕ-leq-ℕ n ∘e equiv-fin-le-ℕ (succ-ℕ n)
 ```
