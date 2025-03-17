@@ -82,6 +82,12 @@ module _
     (n : ℕ) {f g : functional-vec-Ring R n} →
     (f ~ g) → sum-Ring R n f ＝ sum-Ring R n g
   htpy-sum-Ring = htpy-sum-Semiring (semiring-Ring R)
+
+  htpy-sum-finite-Ring :
+    {l2 : Level} (A : Finite-Type l2) →
+    {f g : type-Finite-Type A → type-Ring R} → (f ~ g) →
+    sum-finite-Ring R A f ＝ sum-finite-Ring R A g
+  htpy-sum-finite-Ring = htpy-sum-finite-Semiring (semiring-Ring R)
 ```
 
 ### Sums are equal to the zero-th term plus the rest

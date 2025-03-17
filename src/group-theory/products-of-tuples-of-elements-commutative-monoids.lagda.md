@@ -303,11 +303,27 @@ module _
 ### Products for a count for a type
 
 ```agda
-product-count-Commutative-Monoid :
+mul-count-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1) (A : UU l2) →
   count A → (A → type-Commutative-Monoid M) → type-Commutative-Monoid M
-product-count-Commutative-Monoid M A (n , Fin-n≃A) f =
+mul-count-Commutative-Monoid M A (n , Fin-n≃A) f =
   mul-fin-Commutative-Monoid M n (f ∘ map-equiv Fin-n≃A)
+```
+
+### Products for a count for a type are homotopy invariant
+
+```agda
+module _
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (A : UU l2)
+  where
+
+  htpy-mul-count-Commutative-Monoid :
+    (c : count A) →
+    {f g : A → type-Commutative-Monoid M} → (f ~ g) →
+    mul-count-Commutative-Monoid M A c f ＝
+    mul-count-Commutative-Monoid M A c g
+  htpy-mul-count-Commutative-Monoid (nA , _) H =
+    htpy-mul-fin-Commutative-Monoid M nA (λ i → H _)
 ```
 
 ### Two counts for the same set produce equal products
@@ -318,12 +334,12 @@ module _
   where
 
   abstract
-    eq-product-count-equiv-Commutative-Monoid :
+    eq-mul-count-equiv-Commutative-Monoid :
       (n : ℕ) → (equiv1 equiv2 : Fin n ≃ A) →
       (f : A → type-Commutative-Monoid M) →
-      product-count-Commutative-Monoid M A (n , equiv1) f ＝
-      product-count-Commutative-Monoid M A (n , equiv2) f
-    eq-product-count-equiv-Commutative-Monoid n equiv1 equiv2 f =
+      mul-count-Commutative-Monoid M A (n , equiv1) f ＝
+      mul-count-Commutative-Monoid M A (n , equiv2) f
+    eq-mul-count-equiv-Commutative-Monoid n equiv1 equiv2 f =
       equational-reasoning
       mul-fin-Commutative-Monoid M n (f ∘ map-equiv equiv1)
       ＝
@@ -362,13 +378,13 @@ module _
             ( λ g → mul-fin-Commutative-Monoid M n (f ∘ (g ∘ map-equiv equiv2)))
             ( eq-htpy (is-section-map-inv-equiv equiv1))
 
-    eq-product-count-Commutative-Monoid :
+    eq-mul-count-Commutative-Monoid :
       (f : A → type-Commutative-Monoid M) (c1 c2 : count A) →
-      product-count-Commutative-Monoid M A c1 f ＝
-      product-count-Commutative-Monoid M A c2 f
-    eq-product-count-Commutative-Monoid f c1@(n , e1) c2@(_ , e2)
+      mul-count-Commutative-Monoid M A c1 f ＝
+      mul-count-Commutative-Monoid M A c2 f
+    eq-mul-count-Commutative-Monoid f c1@(n , e1) c2@(_ , e2)
       with eq-number-of-elements-count A c1 c2
-    ... | refl = eq-product-count-equiv-Commutative-Monoid n e1 e2 f
+    ... | refl = eq-mul-count-equiv-Commutative-Monoid n e1 e2 f
 ```
 
 ### Products over finite types
@@ -384,12 +400,12 @@ module _
   mul-finite-Commutative-Monoid f =
     map-universal-property-set-quotient-trunc-Prop
       ( set-Commutative-Monoid M)
-      ( λ c → product-count-Commutative-Monoid M (type-Finite-Type A) c f)
-      ( eq-product-count-Commutative-Monoid M (type-Finite-Type A) f)
+      ( λ c → mul-count-Commutative-Monoid M (type-Finite-Type A) c f)
+      ( eq-mul-count-Commutative-Monoid M (type-Finite-Type A) f)
       ( is-finite-type-Finite-Type A)
 ```
 
-### Products over finite types are preserved by equivalences
+### The product over a finite type is its product over any count for the type
 
 ```agda
 module _
@@ -400,8 +416,8 @@ module _
   abstract
     product-equiv-count-Commutative-Monoid :
       (cA : count A) (cB : count B) (f : B → type-Commutative-Monoid M) →
-      product-count-Commutative-Monoid M B cB f ＝
-      product-count-Commutative-Monoid M A cA (f ∘ map-equiv H)
+      mul-count-Commutative-Monoid M B cB f ＝
+      mul-count-Commutative-Monoid M A cA (f ∘ map-equiv H)
     product-equiv-count-Commutative-Monoid
       cA@(_ , Fin-nA≃A) cB@(nB , Fin-nB≃B) f
       with eq-number-of-elements-count-equiv A B H cA cB
@@ -428,7 +444,7 @@ module _
     eq-product-finite-count-Commutative-Monoid :
       (f : type-Finite-Type A → type-Commutative-Monoid M) →
       mul-finite-Commutative-Monoid M A f ＝
-      product-count-Commutative-Monoid M (type-Finite-Type A) cA f
+      mul-count-Commutative-Monoid M (type-Finite-Type A) cA f
     eq-product-finite-count-Commutative-Monoid f =
       equational-reasoning
         mul-finite-Commutative-Monoid M A f
@@ -447,15 +463,51 @@ module _
               ( all-elements-equal-type-trunc-Prop
                 ( is-finite-type-Finite-Type A)
                 ( unit-trunc-Prop cA))
-        ＝ product-count-Commutative-Monoid M (type-Finite-Type A) cA f
+        ＝ mul-count-Commutative-Monoid M (type-Finite-Type A) cA f
           by
             htpy-universal-property-set-quotient-trunc-Prop
               ( set-Commutative-Monoid M)
               ( λ c →
-                product-count-Commutative-Monoid M (type-Finite-Type A) c f)
-              ( eq-product-count-Commutative-Monoid M (type-Finite-Type A) f)
+                mul-count-Commutative-Monoid M (type-Finite-Type A) c f)
+              ( eq-mul-count-Commutative-Monoid M (type-Finite-Type A) f)
               ( cA)
+```
 
+### Products over a finite type are homotopy invariant
+
+```agda
+module _
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (A : Finite-Type l2)
+  where
+
+  abstract
+    htpy-mul-finite-Commutative-Monoid :
+      {f g : type-Finite-Type A → type-Commutative-Monoid M} →
+      f ~ g →
+      mul-finite-Commutative-Monoid M A f ＝ mul-finite-Commutative-Monoid M A g
+    htpy-mul-finite-Commutative-Monoid {f} {g} H =
+      do
+        cA ← is-finite-type-Finite-Type A
+        equational-reasoning
+          mul-finite-Commutative-Monoid M A f
+          ＝ mul-count-Commutative-Monoid M (type-Finite-Type A) cA f
+            by eq-product-finite-count-Commutative-Monoid M A cA f
+          ＝ mul-count-Commutative-Monoid M (type-Finite-Type A) cA g
+            by htpy-mul-count-Commutative-Monoid M (type-Finite-Type A) cA H
+          ＝ mul-finite-Commutative-Monoid M A g
+            by inv (eq-product-finite-count-Commutative-Monoid M A cA g)
+      where
+        open
+          do-syntax-trunc-Prop
+            ( Id-Prop
+              ( set-Commutative-Monoid M)
+              ( mul-finite-Commutative-Monoid M A f)
+              ( mul-finite-Commutative-Monoid M A g))
+```
+
+### Products over finite types are preserved by equivalences
+
+```agda
 module _
   {l1 l2 l3 : Level} (M : Commutative-Monoid l1)
   (A : Finite-Type l2) (B : Finite-Type l3)
@@ -473,10 +525,10 @@ module _
         cB ← is-finite-type-Finite-Type B
         equational-reasoning
           mul-finite-Commutative-Monoid M B f
-          ＝ product-count-Commutative-Monoid M (type-Finite-Type B) cB f
+          ＝ mul-count-Commutative-Monoid M (type-Finite-Type B) cB f
             by eq-product-finite-count-Commutative-Monoid M B cB f
           ＝
-            product-count-Commutative-Monoid
+            mul-count-Commutative-Monoid
               ( M)
               ( type-Finite-Type A)
               ( cA)
