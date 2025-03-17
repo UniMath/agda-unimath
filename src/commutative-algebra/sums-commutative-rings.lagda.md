@@ -87,13 +87,20 @@ module _
 
 ```agda
 module _
-  {l : Level} (A : Commutative-Ring l)
+  {l : Level} (R : Commutative-Ring l)
   where
 
   htpy-sum-Commutative-Ring :
-    (n : ℕ) {f g : functional-vec-Commutative-Ring A n} →
-    (f ~ g) → sum-Commutative-Ring A n f ＝ sum-Commutative-Ring A n g
-  htpy-sum-Commutative-Ring = htpy-sum-Ring (ring-Commutative-Ring A)
+    (n : ℕ) {f g : functional-vec-Commutative-Ring R n} →
+    (f ~ g) → sum-Commutative-Ring R n f ＝ sum-Commutative-Ring R n g
+  htpy-sum-Commutative-Ring = htpy-sum-Ring (ring-Commutative-Ring R)
+
+  htpy-sum-finite-Commutative-Ring :
+    {l2 : Level} (A : Finite-Type l2) →
+    {f g : type-Finite-Type A → type-Commutative-Ring R} → (f ~ g) →
+    sum-finite-Commutative-Ring R A f ＝ sum-finite-Commutative-Ring R A g
+  htpy-sum-finite-Commutative-Ring =
+    htpy-sum-finite-Ring (ring-Commutative-Ring R)
 ```
 
 ### Sums are equal to the zero-th term plus the rest

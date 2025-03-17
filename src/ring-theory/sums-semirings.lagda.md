@@ -95,6 +95,13 @@ module _
     (f ~ g) → sum-Semiring R n f ＝ sum-Semiring R n g
   htpy-sum-Semiring =
     htpy-mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+
+  htpy-sum-finite-Semiring :
+    {l2 : Level} (A : Finite-Type l2) →
+    {f g : type-Finite-Type A → type-Semiring R} → (f ~ g) →
+    sum-finite-Semiring R A f ＝ sum-finite-Semiring R A g
+  htpy-sum-finite-Semiring =
+    htpy-mul-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Sums are equal to the zero-th term plus the rest

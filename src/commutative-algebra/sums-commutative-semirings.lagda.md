@@ -88,14 +88,22 @@ module _
 
 ```agda
 module _
-  {l : Level} (A : Commutative-Semiring l)
+  {l : Level} (R : Commutative-Semiring l)
   where
 
   htpy-sum-Commutative-Semiring :
-    (n : ℕ) {f g : functional-vec-Commutative-Semiring A n} →
-    (f ~ g) → sum-Commutative-Semiring A n f ＝ sum-Commutative-Semiring A n g
+    (n : ℕ) {f g : functional-vec-Commutative-Semiring R n} →
+    (f ~ g) → sum-Commutative-Semiring R n f ＝ sum-Commutative-Semiring R n g
   htpy-sum-Commutative-Semiring =
-    htpy-sum-Semiring (semiring-Commutative-Semiring A)
+    htpy-sum-Semiring (semiring-Commutative-Semiring R)
+
+  htpy-sum-finite-Commutative-Semiring :
+    {l2 : Level} (A : Finite-Type l2) →
+    {f g : type-Finite-Type A → type-Commutative-Semiring R} → (f ~ g) →
+    sum-finite-Commutative-Semiring R A f ＝
+    sum-finite-Commutative-Semiring R A g
+  htpy-sum-finite-Commutative-Semiring =
+    htpy-sum-finite-Semiring (semiring-Commutative-Semiring R)
 ```
 
 ### Sums are equal to the zero-th term plus the rest
