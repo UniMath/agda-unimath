@@ -487,18 +487,9 @@ module _
       ( T)
       ( min-Decidable-Total-Order T a c)
       ( min-Decidable-Total-Order T b d)
-  min-leq-leq-Decidable-Total-Order a b c d a≤b c≤d
-    with is-leq-or-strict-greater-Decidable-Total-Order T a c
-  ... | inl a≤c =
-    forward-implication
-      ( min-is-greatest-binary-lower-bound-Decidable-Total-Order T b d a)
-      ( a≤b ,
-        transitive-leq-Decidable-Total-Order T a c d c≤d a≤c)
-  ... | inr c<a =
-    forward-implication
-      ( min-is-greatest-binary-lower-bound-Decidable-Total-Order T b d c)
-      ( transitive-leq-Decidable-Total-Order T c a b a≤b (pr2 c<a) ,
-        c≤d)
+  min-leq-leq-Decidable-Total-Order =
+    meet-leq-leq-Order-Theoretic-Meet-Semilattice
+      ( order-theoretic-meet-semilattice-Decidable-Total-Order)
 ```
 
 ### If `a ≤ b` and `c ≤ d`, `max a c ≤ max b d`
@@ -511,16 +502,7 @@ module _
       ( T)
       ( max-Decidable-Total-Order T a c)
       ( max-Decidable-Total-Order T b d)
-  max-leq-leq-Decidable-Total-Order a b c d a≤b c≤d
-    with is-leq-or-strict-greater-Decidable-Total-Order T b d
-  ... | inl b≤d =
-    forward-implication
-      ( max-is-least-binary-upper-bound-Decidable-Total-Order T a c d)
-      ( transitive-leq-Decidable-Total-Order T a b d b≤d a≤b ,
-        c≤d)
-  ... | inr d<b =
-    forward-implication
-      ( max-is-least-binary-upper-bound-Decidable-Total-Order T a c b)
-      ( a≤b ,
-        transitive-leq-Decidable-Total-Order T c d b (pr2 d<b) c≤d)
+  max-leq-leq-Decidable-Total-Order =
+    join-leq-leq-Order-Theoretic-Join-Semilattice
+      ( order-theoretic-join-semilattice-Decidable-Total-Order)
 ```
