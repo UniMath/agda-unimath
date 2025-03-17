@@ -157,6 +157,7 @@ open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public
 open import group-theory.products-of-elements-monoids public
 open import group-theory.products-of-tuples-of-elements-commutative-monoids public
+open import group-theory.products-of-tuples-of-elements-monoids public
 open import group-theory.pullbacks-subgroups public
 open import group-theory.pullbacks-subsemigroups public
 open import group-theory.quotient-groups public
