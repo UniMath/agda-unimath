@@ -168,7 +168,7 @@ module _
         ( inl a))
 ```
 
-### Mapping the `count-coproduct` equivalence on `inr-coproduct-Fin` is `inr` on the left count
+### Mapping the `count-coproduct` equivalence on `inr-coproduct-Fin` is `inr` on the right count
 
 ```agda
 module _
