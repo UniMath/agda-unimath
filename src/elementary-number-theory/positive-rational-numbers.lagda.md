@@ -164,6 +164,13 @@ one-ℚ⁺ : ℚ⁺
 one-ℚ⁺ = (one-ℚ , is-positive-int-positive-ℤ one-positive-ℤ)
 ```
 
+### The rational image of a positive natural number is positive
+
+```agda
+positive-rational-ℕ⁺ : ℕ⁺ → ℚ⁺
+positive-rational-ℕ⁺ n = positive-rational-positive-ℤ (positive-int-ℕ⁺ n)
+```
+
 ### The rational image of a positive integer fraction is positive
 
 ```agda
