@@ -21,7 +21,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.products-commutative-monoids
+open import group-theory.products-of-tuples-of-elements-commutative-monoids
 
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-semirings
@@ -50,13 +50,13 @@ sum-Semiring :
   {l : Level} (R : Semiring l) (n : ℕ) →
   (functional-vec-Semiring R n) → type-Semiring R
 sum-Semiring R =
-  product-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+  mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
 sum-finite-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (A : Finite-Type l2) →
   (type-Finite-Type A → type-Semiring R) → type-Semiring R
 sum-finite-Semiring R =
-  product-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+  mul-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ## Properties
@@ -94,7 +94,7 @@ module _
     (n : ℕ) {f g : functional-vec-Semiring R n} →
     (f ~ g) → sum-Semiring R n f ＝ sum-Semiring R n g
   htpy-sum-Semiring =
-    htpy-product-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    htpy-mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Sums are equal to the zero-th term plus the rest
@@ -119,7 +119,7 @@ module _
       ( x)
       ( sum-Semiring R n (f ∘ inr-Fin n))
   snoc-sum-Semiring =
-    snoc-product-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    snoc-mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Multiplication distributes over sums
@@ -205,7 +205,7 @@ module _
       ( cons-functional-vec-Semiring R n (zero-Semiring R) f) ＝
     sum-Semiring R n f
   extend-sum-Semiring =
-    extend-product-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    extend-mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Shifting a sum of elements in a semiring
@@ -223,7 +223,7 @@ module _
         ( zero-Semiring R)) ＝
     sum-Semiring R n f
   shift-sum-Semiring =
-    shift-product-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    shift-mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### A sum of zeroes is zero
@@ -251,7 +251,7 @@ split-sum-Semiring :
     ( sum-Semiring R n (f ∘ inl-coproduct-Fin n m))
     ( sum-Semiring R m (f ∘ inr-coproduct-Fin n m))
 split-sum-Semiring R =
-  split-product-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+  split-mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Permutations preserve sums
@@ -306,7 +306,7 @@ module _
       ( sum-finite-Semiring R A (f ∘ inl))
       ( sum-finite-Semiring R B (f ∘ inr))
   sum-coproduct-finite-Semiring =
-    product-coproduct-finite-Commutative-Monoid
+    mul-coproduct-finite-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
       ( A)
       ( B)

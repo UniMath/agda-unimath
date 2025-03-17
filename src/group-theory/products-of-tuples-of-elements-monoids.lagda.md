@@ -1,7 +1,7 @@
-# Products of elements in monoids
+# Products of tuples of elements in monoids
 
 ```agda
-module group-theory.products-monoids where
+module group-theory.products-of-tuples-of-elements-monoids where
 ```
 
 <details><summary>Imports</summary>
@@ -38,13 +38,13 @@ by a [standard finite type](univalent-combinatorics.standard-finite-types.md).
 ## Definition
 
 ```agda
-product-Monoid :
+mul-fin-Monoid :
   {l : Level} (M : Monoid l) (n : ℕ) →
   (functional-vec-Monoid M n) → type-Monoid M
-product-Monoid M zero-ℕ f = unit-Monoid M
-product-Monoid M (succ-ℕ n) f =
+mul-fin-Monoid M zero-ℕ f = unit-Monoid M
+mul-fin-Monoid M (succ-ℕ n) f =
   mul-Monoid M
-    ( product-Monoid M n (f ∘ inl-Fin n))
+    ( mul-fin-Monoid M n (f ∘ inl-Fin n))
     ( f (inr star))
 ```
 
@@ -59,13 +59,13 @@ module _
 
   product-one-element-Monoid :
     (f : functional-vec-Monoid M 1) →
-    product-Monoid M 1 f ＝ head-functional-vec-Monoid M 0 f
+    mul-fin-Monoid M 1 f ＝ head-functional-vec-Monoid M 0 f
   product-one-element-Monoid f =
     left-unit-law-mul-Monoid M (f (inr star))
 
   product-two-elements-Monoid :
     (f : functional-vec-Monoid M 2) →
-    product-Monoid M 2 f ＝ mul-Monoid M (f (zero-Fin 1)) (f (one-Fin 1))
+    mul-fin-Monoid M 2 f ＝ mul-Monoid M (f (zero-Fin 1)) (f (one-Fin 1))
   product-two-elements-Monoid f =
     ( associative-mul-Monoid M
       (unit-Monoid M) (f (zero-Fin 1)) (f (one-Fin 1))) ∙
@@ -80,13 +80,13 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  htpy-product-Monoid :
+  htpy-mul-fin-Monoid :
     (n : ℕ) {f g : functional-vec-Monoid M n} →
-    (f ~ g) → product-Monoid M n f ＝ product-Monoid M n g
-  htpy-product-Monoid zero-ℕ H = refl
-  htpy-product-Monoid (succ-ℕ n) H =
+    (f ~ g) → mul-fin-Monoid M n f ＝ mul-fin-Monoid M n g
+  htpy-mul-fin-Monoid zero-ℕ H = refl
+  htpy-mul-fin-Monoid (succ-ℕ n) H =
     ap-mul-Monoid M
-      ( htpy-product-Monoid n (H ·r inl-Fin n))
+      ( htpy-mul-fin-Monoid n (H ·r inl-Fin n))
       ( H (inr star))
 ```
 
@@ -97,30 +97,30 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  cons-product-Monoid :
+  cons-mul-fin-Monoid :
     (n : ℕ) (f : functional-vec-Monoid M (succ-ℕ n)) →
     {x : type-Monoid M} → head-functional-vec-Monoid M n f ＝ x →
-    product-Monoid M (succ-ℕ n) f ＝
-    mul-Monoid M (product-Monoid M n (f ∘ inl-Fin n)) x
-  cons-product-Monoid n f refl = refl
+    mul-fin-Monoid M (succ-ℕ n) f ＝
+    mul-Monoid M (mul-fin-Monoid M n (f ∘ inl-Fin n)) x
+  cons-mul-fin-Monoid n f refl = refl
 
-  snoc-product-Monoid :
+  snoc-mul-fin-Monoid :
     (n : ℕ) (f : functional-vec-Monoid M (succ-ℕ n)) →
     {x : type-Monoid M} → f (zero-Fin n) ＝ x →
-    product-Monoid M (succ-ℕ n) f ＝
+    mul-fin-Monoid M (succ-ℕ n) f ＝
     mul-Monoid M
       ( x)
-      ( product-Monoid M n (f ∘ inr-Fin n))
-  snoc-product-Monoid zero-ℕ f refl =
+      ( mul-fin-Monoid M n (f ∘ inr-Fin n))
+  snoc-mul-fin-Monoid zero-ℕ f refl =
     ( product-one-element-Monoid M f) ∙
     ( inv (right-unit-law-mul-Monoid M (f (zero-Fin 0))))
-  snoc-product-Monoid (succ-ℕ n) f refl =
+  snoc-mul-fin-Monoid (succ-ℕ n) f refl =
     ( ap
       ( mul-Monoid' M (head-functional-vec-Monoid M (succ-ℕ n) f))
-      ( snoc-product-Monoid n (f ∘ inl-Fin (succ-ℕ n)) refl)) ∙
+      ( snoc-mul-fin-Monoid n (f ∘ inl-Fin (succ-ℕ n)) refl)) ∙
     ( associative-mul-Monoid M
       ( f (zero-Fin (succ-ℕ n)))
-      ( product-Monoid M n (f ∘ (inr-Fin (succ-ℕ n) ∘ inl-Fin n)))
+      ( mul-fin-Monoid M n (f ∘ (inr-Fin (succ-ℕ n) ∘ inl-Fin n)))
       ( head-functional-vec-Monoid M (succ-ℕ n) f))
 ```
 
@@ -131,14 +131,14 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  extend-product-Monoid :
+  extend-mul-fin-Monoid :
     (n : ℕ) (f : functional-vec-Monoid M n) →
-    product-Monoid M
+    mul-fin-Monoid M
       ( succ-ℕ n)
       ( cons-functional-vec-Monoid M n (unit-Monoid M) f) ＝
-    product-Monoid M n f
-  extend-product-Monoid n f =
-    right-unit-law-mul-Monoid M (product-Monoid M n f)
+    mul-fin-Monoid M n f
+  extend-mul-fin-Monoid n f =
+    right-unit-law-mul-Monoid M (mul-fin-Monoid M n f)
 ```
 
 ### Shifting a product of elements in a monoid
@@ -148,20 +148,20 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  shift-product-Monoid :
+  shift-mul-fin-Monoid :
     (n : ℕ) (f : functional-vec-Monoid M n) →
-    product-Monoid M
+    mul-fin-Monoid M
       ( succ-ℕ n)
       ( snoc-functional-vec-Monoid M n f
         ( unit-Monoid M)) ＝
-    product-Monoid M n f
-  shift-product-Monoid zero-ℕ f =
+    mul-fin-Monoid M n f
+  shift-mul-fin-Monoid zero-ℕ f =
     left-unit-law-mul-Monoid M (unit-Monoid M)
-  shift-product-Monoid (succ-ℕ n) f =
+  shift-mul-fin-Monoid (succ-ℕ n) f =
     ap
       ( mul-Monoid' M
         ( head-functional-vec-Monoid M n f))
-      ( shift-product-Monoid n
+      ( shift-mul-fin-Monoid n
         ( tail-functional-vec-Monoid M n f))
 ```
 
@@ -174,7 +174,7 @@ module _
 
   product-unit-Monoid :
     (n : ℕ) →
-    product-Monoid M n (unit-functional-vec-Monoid M n) ＝ unit-Monoid M
+    mul-fin-Monoid M n (unit-functional-vec-Monoid M n) ＝ unit-Monoid M
   product-unit-Monoid zero-ℕ = refl
   product-unit-Monoid (succ-ℕ n) =
     right-unit-law-mul-Monoid M _ ∙ product-unit-Monoid n
@@ -183,18 +183,18 @@ module _
 ### Splitting products
 
 ```agda
-split-product-Monoid :
+split-mul-fin-Monoid :
   {l : Level} (M : Monoid l)
   (n m : ℕ) (f : functional-vec-Monoid M (n +ℕ m)) →
-  product-Monoid M (n +ℕ m) f ＝
+  mul-fin-Monoid M (n +ℕ m) f ＝
   mul-Monoid M
-    ( product-Monoid M n (f ∘ inl-coproduct-Fin n m))
-    ( product-Monoid M m (f ∘ inr-coproduct-Fin n m))
-split-product-Monoid M n zero-ℕ f =
-  inv (right-unit-law-mul-Monoid M (product-Monoid M n f))
-split-product-Monoid M n (succ-ℕ m) f =
+    ( mul-fin-Monoid M n (f ∘ inl-coproduct-Fin n m))
+    ( mul-fin-Monoid M m (f ∘ inr-coproduct-Fin n m))
+split-mul-fin-Monoid M n zero-ℕ f =
+  inv (right-unit-law-mul-Monoid M (mul-fin-Monoid M n f))
+split-mul-fin-Monoid M n (succ-ℕ m) f =
   ( ap
     ( mul-Monoid' M (f (inr star)))
-    ( split-product-Monoid M n m (f ∘ inl))) ∙
+    ( split-mul-fin-Monoid M n m (f ∘ inl))) ∙
   ( associative-mul-Monoid M _ _ _)
 ```
