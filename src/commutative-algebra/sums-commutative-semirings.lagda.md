@@ -139,24 +139,41 @@ module _
 
 ```agda
 module _
-  {l : Level} (A : Commutative-Semiring l)
+  {l : Level} (R : Commutative-Semiring l)
   where
 
   left-distributive-mul-sum-Commutative-Semiring :
-    (n : ℕ) (x : type-Commutative-Semiring A)
-    (f : functional-vec-Commutative-Semiring A n) →
-    mul-Commutative-Semiring A x (sum-Commutative-Semiring A n f) ＝
-    sum-Commutative-Semiring A n (λ i → mul-Commutative-Semiring A x (f i))
+    (n : ℕ) (x : type-Commutative-Semiring R)
+    (f : functional-vec-Commutative-Semiring R n) →
+    mul-Commutative-Semiring R x (sum-Commutative-Semiring R n f) ＝
+    sum-Commutative-Semiring R n (λ i → mul-Commutative-Semiring R x (f i))
   left-distributive-mul-sum-Commutative-Semiring =
-    left-distributive-mul-sum-Semiring (semiring-Commutative-Semiring A)
+    left-distributive-mul-sum-Semiring (semiring-Commutative-Semiring R)
 
   right-distributive-mul-sum-Commutative-Semiring :
-    (n : ℕ) (f : functional-vec-Commutative-Semiring A n)
-    (x : type-Commutative-Semiring A) →
-    mul-Commutative-Semiring A (sum-Commutative-Semiring A n f) x ＝
-    sum-Commutative-Semiring A n (λ i → mul-Commutative-Semiring A (f i) x)
+    (n : ℕ) (f : functional-vec-Commutative-Semiring R n)
+    (x : type-Commutative-Semiring R) →
+    mul-Commutative-Semiring R (sum-Commutative-Semiring R n f) x ＝
+    sum-Commutative-Semiring R n (λ i → mul-Commutative-Semiring R (f i) x)
   right-distributive-mul-sum-Commutative-Semiring =
-    right-distributive-mul-sum-Semiring (semiring-Commutative-Semiring A)
+    right-distributive-mul-sum-Semiring (semiring-Commutative-Semiring R)
+
+  left-distributive-mul-finite-Commutative-Semiring :
+    {l2 : Level} (A : Finite-Type l2) (x : type-Commutative-Semiring R) →
+    (f : type-Finite-Type A → type-Commutative-Semiring R) →
+    mul-Commutative-Semiring R x (sum-finite-Commutative-Semiring R A f) ＝
+    sum-finite-Commutative-Semiring R A (mul-Commutative-Semiring R x ∘ f)
+  left-distributive-mul-finite-Commutative-Semiring =
+    left-distributive-mul-finite-Semiring (semiring-Commutative-Semiring R)
+
+  right-distributive-mul-finite-Commutative-Semiring :
+    {l2 : Level} (A : Finite-Type l2) →
+    (f : type-Finite-Type A → type-Commutative-Semiring R) →
+    (x : type-Commutative-Semiring R) →
+    mul-Commutative-Semiring R (sum-finite-Commutative-Semiring R A f) x ＝
+    sum-finite-Commutative-Semiring R A (mul-Commutative-Semiring' R x ∘ f)
+  right-distributive-mul-finite-Commutative-Semiring =
+    right-distributive-mul-finite-Semiring (semiring-Commutative-Semiring R)
 ```
 
 ### Interchange law of sums and addition in a commutative semiring

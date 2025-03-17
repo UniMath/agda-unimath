@@ -138,6 +138,22 @@ module _
     sum-Ring R n (λ i → mul-Ring R (f i) x)
   right-distributive-mul-sum-Ring =
     right-distributive-mul-sum-Semiring (semiring-Ring R)
+
+  left-distributive-mul-finite-Ring :
+    {l2 : Level} (A : Finite-Type l2) (x : type-Ring R) →
+    (f : type-Finite-Type A → type-Ring R) →
+    mul-Ring R x (sum-finite-Ring R A f) ＝
+    sum-finite-Ring R A (mul-Ring R x ∘ f)
+  left-distributive-mul-finite-Ring =
+    left-distributive-mul-finite-Semiring (semiring-Ring R)
+
+  right-distributive-mul-finite-Ring :
+    {l2 : Level} (A : Finite-Type l2) →
+    (f : type-Finite-Type A → type-Ring R) (x : type-Ring R) →
+    mul-Ring R (sum-finite-Ring R A f) x ＝
+    sum-finite-Ring R A (mul-Ring' R x ∘ f)
+  right-distributive-mul-finite-Ring =
+    right-distributive-mul-finite-Semiring (semiring-Ring R)
 ```
 
 ### Interchange law of sums and addition in a semiring
