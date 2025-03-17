@@ -1,4 +1,4 @@
-# Formal power series commutative rings
+# Formal power series on commutative rings
 
 ```agda
 module commutative-algebra.formal-power-series-commutative-rings where
@@ -808,5 +808,29 @@ module _
                   ( coefficient-formal-power-series-Commutative-Ring R q a)
                   ( coefficient-formal-power-series-Commutative-Ring R p b))
             by
-          ＝ {!   !} by {!   !})
+              htpy-sum-finite-Commutative-Ring
+                ( R)
+                ( finite-type-pair-with-sum-ℕ n)
+                ( λ _ → commutative-mul-Commutative-Ring R _ _)
+          ＝
+            coefficient-formal-power-series-Commutative-Ring
+              ( R)
+              ( mul-formal-power-series-Commutative-Ring R q p)
+              ( n)
+            by
+              inv
+                ( eq-coefficient-mul-formal-power-series-Commutative-Ring
+                  ( R)
+                  ( q)
+                  ( p)
+                  ( n)))
+```
+
+#### Associativity
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  (p q r : formal-power-series-Commutative-Ring R)
+  where
 ```
