@@ -200,7 +200,7 @@ module _
         ( d))
 ```
 
-### The terms of an arithmetic sequence of positive rational numbers are greater or equal to its initial term
+### The terms of an arithmetic sequence of positive rational numbers are greater than or equal to its initial term
 
 ```agda
 module _
