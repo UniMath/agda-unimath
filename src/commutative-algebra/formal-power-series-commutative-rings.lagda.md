@@ -40,6 +40,7 @@ open import group-theory.monoids
 open import group-theory.semigroups
 
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 ```
@@ -830,6 +831,48 @@ module _
 
 ```agda
 module _
+  (n : ℕ)
+  where
+
+  triple-with-sum-ℕ : UU lzero
+  triple-with-sum-ℕ = Σ ℕ (λ a → Σ ℕ (λ b → Σ ℕ (λ c → c +ℕ b +ℕ a ＝ n)))
+
+  map-equiv-triple-with-sum-Σ-pair-with-sum :
+    triple-with-sum-ℕ → Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1)
+  map-equiv-triple-with-sum-Σ-pair-with-sum (a , b , c , c+b+a=n) =
+    ( a +ℕ b ,
+      c ,
+      ap (c +ℕ_) (commutative-add-ℕ a b) ∙
+      inv (associative-add-ℕ c b a) ∙
+      c+b+a=n) ,
+    b ,
+    a ,
+    refl
+
+  map-inv-equiv-triple-with-sum-Σ-pair-with-sum :
+    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1) → triple-with-sum-ℕ
+  map-inv-equiv-triple-with-sum-Σ-pair-with-sum
+    ((a+b , c , c+⟨a+b⟩=n) , b , a , a+b=a+b) =
+      a , b , c ,
+      associative-add-ℕ c b a ∙
+      ap (c +ℕ_) (commutative-add-ℕ b a ∙ a+b=a+b) ∙
+      c+⟨a+b⟩=n
+
+  triple-with-sum-equiv-Σ-pair-with-sum :
+    triple-with-sum-ℕ ≃ Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1)
+  triple-with-sum-equiv-Σ-pair-with-sum =
+    map-equiv-triple-with-sum-Σ-pair-with-sum ,
+    ( map-inv-equiv-triple-with-sum-Σ-pair-with-sum ,
+      λ { ((H , c , refl) , b , a , refl) →
+        eq-pair-Σ
+          (eq-pair-Σ
+            ( refl)
+            ( eq-pair-Σ refl (eq-type-Prop (Id-Prop ℕ-Set _ _))))
+          ( eq-pair-Σ {!   !} (eq-pair-Σ {!   !} (eq-type-Prop (Id-Prop ℕ-Set _ _))))} ) ,
+    ( map-inv-equiv-triple-with-sum-Σ-pair-with-sum ,
+      {!   !})
+
+module _
   {l : Level} (R : Commutative-Ring l)
   (p q r : formal-power-series-Commutative-Ring R)
   where
@@ -862,6 +905,48 @@ module _
                 ( p *fps q)
                 ( r)
                 ( n)
+          ＝
+            sum-finite-Commutative-Ring
+              ( R)
+              ( finite-type-pair-with-sum-ℕ n)
+              ( λ (a , b , _) →
+                sum-finite-Commutative-Ring
+                  ( R)
+                  ( finite-type-pair-with-sum-ℕ a)
+                  ( λ (c , d , _) → (coeff p c *R coeff q d) *R coeff r b))
+            by
+              ap
+                ( sum-finite-Commutative-Ring R (finite-type-pair-with-sum-ℕ n))
+                ( eq-htpy
+                  ( λ (a , b , _) →
+                    ap-mul-Commutative-Ring
+                      ( R)
+                      ( eq-coefficient-mul-formal-power-series-Commutative-Ring
+                        ( R)
+                        ( p)
+                        ( q)
+                        ( a))
+                      ( refl) ∙
+                    right-distributive-mul-finite-Commutative-Ring
+                      ( R)
+                      ( _)
+                      ( _)
+                      ( coeff r b)))
+          ＝
+            sum-finite-Commutative-Ring
+              ( R)
+              ( Σ-Finite-Type
+                ( finite-type-pair-with-sum-ℕ n)
+                ( finite-type-pair-with-sum-ℕ ∘ pr1))
+              ( λ ((a , b , _) , c , d , _) →
+                (coeff p c *R coeff q d) *R coeff r b)
+            by
+              inv
+                ( sum-Σ-finite-Commutative-Ring
+                  ( R)
+                  ( finite-type-pair-with-sum-ℕ n)
+                  ( finite-type-pair-with-sum-ℕ ∘ pr1)
+                  ( _))
           ＝ {!   !} by {!   !})
       where
         _*R_ :
