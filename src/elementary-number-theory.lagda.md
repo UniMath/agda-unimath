@@ -23,6 +23,7 @@ open import elementary-number-theory.archimedean-property-natural-numbers public
 open import elementary-number-theory.archimedean-property-positive-rational-numbers public
 open import elementary-number-theory.archimedean-property-rational-numbers public
 open import elementary-number-theory.arithmetic-functions public
+open import elementary-number-theory.arithmetic-sequences-positive-rational-numbers public
 open import elementary-number-theory.based-induction-natural-numbers public
 open import elementary-number-theory.based-strong-induction-natural-numbers public
 open import elementary-number-theory.bell-numbers public

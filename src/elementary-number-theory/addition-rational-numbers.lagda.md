@@ -13,6 +13,7 @@ open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
@@ -274,6 +275,15 @@ abstract
 abstract
   succ-rational-ℤ : (x : ℤ) → succ-ℚ (rational-ℤ x) ＝ rational-ℤ (succ-ℤ x)
   succ-rational-ℤ = add-rational-ℤ one-ℤ
+```
+
+### The rational successor of a natural number is the successor of the natural number
+
+```agda
+abstract
+  succ-rational-ℕ : (x : ℕ) → succ-ℚ (rational-ℕ x) ＝ rational-ℕ (succ-ℕ x)
+  succ-rational-ℕ x =
+    succ-rational-ℤ (int-ℕ x) ∙ ap rational-ℤ (succ-int-ℕ x)
 ```
 
 ## See also

@@ -11,12 +11,14 @@ module elementary-number-theory.multiplication-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
@@ -26,6 +28,8 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.interchange-law
+
+open import group-theory.powers-of-elements-monoids
 ```
 
 </details>
@@ -372,6 +376,36 @@ abstract
         by left-distributive-mul-add-ℚ p one-ℚ q
       ＝ p +ℚ (p *ℚ q)
         by ap-add-ℚ (right-unit-law-mul-ℚ p) refl
+```
+
+### Multiplication by a natural number is the power in the additive monoid of rational numbers
+
+```agda
+compute-power-monoid-add-ℚ :
+  (n : ℕ) (p : ℚ) → rational-ℕ n *ℚ p ＝ power-Monoid monoid-add-ℚ n p
+compute-power-monoid-add-ℚ zero-ℕ p = left-zero-law-mul-ℚ p
+compute-power-monoid-add-ℚ (succ-ℕ n) p =
+  equational-reasoning
+  rational-ℕ (succ-ℕ n) *ℚ p
+  ＝ (one-ℚ +ℚ (rational-ℕ n)) *ℚ p
+    by
+      ap (λ x → x *ℚ p) (inv (succ-rational-ℕ n))
+  ＝ (one-ℚ *ℚ p) +ℚ (rational-ℕ n *ℚ p)
+    by
+      right-distributive-mul-add-ℚ
+        ( one-ℚ)
+        ( rational-ℕ n)
+        ( p)
+  ＝ p +ℚ (rational-ℕ n *ℚ p)
+    by
+      ap
+        ( λ x → x +ℚ (rational-ℕ n *ℚ p))
+        ( left-unit-law-mul-ℚ p)
+  ＝ p +ℚ (power-Monoid monoid-add-ℚ n p)
+    by ap (add-ℚ p) (compute-power-monoid-add-ℚ n p)
+  ＝ power-Monoid monoid-add-ℚ (succ-ℕ n) p
+    by
+      inv (power-succ-Monoid' monoid-add-ℚ n p)
 ```
 
 ## See also
