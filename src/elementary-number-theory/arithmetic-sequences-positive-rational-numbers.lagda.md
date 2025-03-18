@@ -187,11 +187,11 @@ module _
   (a d : ℚ⁺) (n : ℕ)
   where
 
-  is-strictly-inscreasing-arithmetic-sequence-ℚ⁺ :
+  is-strictly-increasing-arithmetic-sequence-ℚ⁺ :
     le-ℚ⁺
       ( arithmetic-sequence-ℚ⁺ a d n)
       ( arithmetic-sequence-ℚ⁺ a d (succ-ℕ n))
-  is-strictly-inscreasing-arithmetic-sequence-ℚ⁺ =
+  is-strictly-increasing-arithmetic-sequence-ℚ⁺ =
     inv-tr
       ( le-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d n))
       ( eq-succ-arithmetic-sequence-ℚ⁺ a d n)
@@ -222,7 +222,7 @@ module _
       ( leq-le-ℚ
         { rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d n)}
         { rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d (succ-ℕ n))}
-        ( is-strictly-inscreasing-arithmetic-sequence-ℚ⁺ a d n))
+        ( is-strictly-increasing-arithmetic-sequence-ℚ⁺ a d n))
       ( leq-init-arithmetic-sequence-ℚ⁺ n)
 ```
 
