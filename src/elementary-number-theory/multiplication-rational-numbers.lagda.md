@@ -381,31 +381,32 @@ abstract
 ### Multiplication by a natural number is the power in the additive monoid of rational numbers
 
 ```agda
-compute-power-monoid-add-ℚ :
-  (n : ℕ) (p : ℚ) → rational-ℕ n *ℚ p ＝ power-Monoid monoid-add-ℚ n p
-compute-power-monoid-add-ℚ zero-ℕ p = left-zero-law-mul-ℚ p
-compute-power-monoid-add-ℚ (succ-ℕ n) p =
-  equational-reasoning
-  rational-ℕ (succ-ℕ n) *ℚ p
-  ＝ (one-ℚ +ℚ (rational-ℕ n)) *ℚ p
-    by
-      ap (λ x → x *ℚ p) (inv (succ-rational-ℕ n))
-  ＝ (one-ℚ *ℚ p) +ℚ (rational-ℕ n *ℚ p)
-    by
-      right-distributive-mul-add-ℚ
-        ( one-ℚ)
-        ( rational-ℕ n)
-        ( p)
-  ＝ p +ℚ (rational-ℕ n *ℚ p)
-    by
-      ap
-        ( λ x → x +ℚ (rational-ℕ n *ℚ p))
-        ( left-unit-law-mul-ℚ p)
-  ＝ p +ℚ (power-Monoid monoid-add-ℚ n p)
-    by ap (add-ℚ p) (compute-power-monoid-add-ℚ n p)
-  ＝ power-Monoid monoid-add-ℚ (succ-ℕ n) p
-    by
-      inv (power-succ-Monoid' monoid-add-ℚ n p)
+abstract
+  compute-power-monoid-add-ℚ :
+    (n : ℕ) (p : ℚ) → rational-ℕ n *ℚ p ＝ power-Monoid monoid-add-ℚ n p
+  compute-power-monoid-add-ℚ zero-ℕ p = left-zero-law-mul-ℚ p
+  compute-power-monoid-add-ℚ (succ-ℕ n) p =
+    equational-reasoning
+    rational-ℕ (succ-ℕ n) *ℚ p
+    ＝ (one-ℚ +ℚ (rational-ℕ n)) *ℚ p
+      by
+        ap (λ x → x *ℚ p) (inv (succ-rational-ℕ n))
+    ＝ (one-ℚ *ℚ p) +ℚ (rational-ℕ n *ℚ p)
+      by
+        right-distributive-mul-add-ℚ
+          ( one-ℚ)
+          ( rational-ℕ n)
+          ( p)
+    ＝ p +ℚ (rational-ℕ n *ℚ p)
+      by
+        ap
+          ( λ x → x +ℚ (rational-ℕ n *ℚ p))
+          ( left-unit-law-mul-ℚ p)
+    ＝ p +ℚ (power-Monoid monoid-add-ℚ n p)
+      by ap (add-ℚ p) (compute-power-monoid-add-ℚ n p)
+    ＝ power-Monoid monoid-add-ℚ (succ-ℕ n) p
+      by
+        inv (power-succ-Monoid' monoid-add-ℚ n p)
 ```
 
 ## See also
