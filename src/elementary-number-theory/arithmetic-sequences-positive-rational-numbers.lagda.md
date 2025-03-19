@@ -233,9 +233,9 @@ module _
   (a d : ℚ⁺)
   where
 
-  unbounded-arithmetic-sequence-ℚ⁺ :
+  is-unbounded-arithmetic-sequence-ℚ⁺ :
     (M : ℚ⁺) → Σ ℕ (le-ℚ⁺ M ∘ arithmetic-sequence-ℚ⁺ a d)
-  unbounded-arithmetic-sequence-ℚ⁺ M =
+  is-unbounded-arithmetic-sequence-ℚ⁺ M =
     tot
       ( tr-archimidean-bound)
       ( bound-archimedean-property-ℚ
@@ -243,6 +243,7 @@ module _
         ( rational-ℚ⁺ M)
         ( is-positive-rational-ℚ⁺ d))
     where
+
       tr-archimidean-bound :
         (n : ℕ) (I : le-ℚ (rational-ℚ⁺ M) (rational-ℕ n *ℚ (rational-ℚ⁺ d))) →
         le-ℚ⁺ M (arithmetic-sequence-ℚ⁺ a d n)
