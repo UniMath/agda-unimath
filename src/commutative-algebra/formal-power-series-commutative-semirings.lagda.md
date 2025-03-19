@@ -429,70 +429,22 @@ module _
   (n : ℕ)
   where
 
-  triple-with-sum-ℕ : UU lzero
-  triple-with-sum-ℕ = Σ ℕ (λ a → Σ ℕ (λ b → Σ ℕ (λ c → c +ℕ b +ℕ a ＝ n)))
+  map-equiv-pair-with-sum-pr1-pr2 :
+    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1) →
+    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2)
+  map-equiv-pair-with-sum-pr1-pr2 ((p , c , c+p=n) , a , b , b+a=p) =
+    ((c , p , commutative-add-ℕ p c ∙ c+p=n) , a , b , b+a=p)
 
-  map-equiv-triple-with-sum-Σ-pair-with-sum-pr1 :
-    triple-with-sum-ℕ → Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1)
-  map-equiv-triple-with-sum-Σ-pair-with-sum-pr1 (a , b , c , c+b+a=n) =
-    ( a +ℕ b ,
-      c ,
-      ap (c +ℕ_) (commutative-add-ℕ a b) ∙
-      inv (associative-add-ℕ c b a) ∙
-      c+b+a=n) ,
-    b ,
-    a ,
-    refl
+  map-inv-equiv-pair-with-sum-pr1-pr2 :
+    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2) →
+    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1)
+  map-inv-equiv-pair-with-sum-pr1-pr2 ((c , p , p+c=n) , a , b , b+a=p) =
+    ((p , c , commutative-add-ℕ c p ∙ p+c=n) , a , b , b+a=p)
 
-  map-inv-equiv-triple-with-sum-Σ-pair-with-sum-pr1 :
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1) → triple-with-sum-ℕ
-  map-inv-equiv-triple-with-sum-Σ-pair-with-sum-pr1
-    ((a+b , c , c+⟨a+b⟩=n) , b , a , a+b=a+b) =
-      a , b , c ,
-      associative-add-ℕ c b a ∙
-      ap (c +ℕ_) (commutative-add-ℕ b a ∙ a+b=a+b) ∙
-      c+⟨a+b⟩=n
-
-  is-section-map-inv-equiv-triple-with-sum-Σ-pair-with-sum-pr1 :
-    is-section
-      map-equiv-triple-with-sum-Σ-pair-with-sum-pr1
-      map-inv-equiv-triple-with-sum-Σ-pair-with-sum-pr1
-  is-section-map-inv-equiv-triple-with-sum-Σ-pair-with-sum-pr1
-    x@(y@(.(a +ℕ b) , c , refl) , b , a , refl)
-      with
-        eq-type-Prop
-          (Id-Prop ℕ-Set (c +ℕ (a +ℕ b)) (c +ℕ (a +ℕ b)))
-          {tr
-            (λ b₁ →
-              b₁ +ℕ
-              pr1
-              (pr1
-                ((map-equiv-triple-with-sum-Σ-pair-with-sum-pr1 ∘
-                  map-inv-equiv-triple-with-sum-Σ-pair-with-sum-pr1)
-                ((a +ℕ b , c , refl) , b , a , refl)))
-              ＝ c +ℕ (a +ℕ b))
-            refl
-            (pr2
-            (tr (λ a₁ → Σ ℕ (λ b₁ → b₁ +ℕ a₁ ＝ c +ℕ (a +ℕ b))) refl
-              (pr2
-              (pr1
-                ((map-equiv-triple-with-sum-Σ-pair-with-sum-pr1 ∘
-                  map-inv-equiv-triple-with-sum-Σ-pair-with-sum-pr1)
-                ((a +ℕ b , c , refl) , b , a , refl))))))}
-          {refl}
-  ... | refl =
-      let x' = map-equiv-triple-with-sum-Σ-pair-with-sum-pr1 (map-inv-equiv-triple-with-sum-Σ-pair-with-sum-pr1 x)
-      in eq-pair-Σ (eq-pair-Σ refl (eq-pair-Σ refl (eq-type-Prop (Id-Prop ℕ-Set (c +ℕ (a +ℕ b)) (c +ℕ (a +ℕ b)))))) {!   !}
-
-{-
-  triple-with-sum-equiv-Σ-pair-with-sum :
-    triple-with-sum-ℕ ≃ Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1)
-  triple-with-sum-equiv-Σ-pair-with-sum =
-    map-equiv-triple-with-sum-Σ-pair-with-sum ,
-    ( map-inv-equiv-triple-with-sum-Σ-pair-with-sum ,
-      {!   !}) ,
-    ( map-inv-equiv-triple-with-sum-Σ-pair-with-sum ,
-      {!   !})-}
+  is-section-map-inv-equiv-pair-with-sum-pr1-pr2 :
+    is-section map-equiv-pair-with-sum-pr1-pr2 map-inv-equiv-pair-with-sum-pr1-pr2
+  is-section-map-inv-equiv-pair-with-sum-pr1-pr2 ((c , p , p+c=n) , a , b , b+a=p)
+    = eq-pair-Σ (eq-pair-Σ refl (eq-pair-Σ refl (eq-type-Prop (Id-Prop ℕ-Set _ _)))) (eq-pair-Σ {!  !} (eq-pair-Σ {!   !} {!   !}))
 
 module _
   {l : Level} (R : Commutative-Semiring l)
