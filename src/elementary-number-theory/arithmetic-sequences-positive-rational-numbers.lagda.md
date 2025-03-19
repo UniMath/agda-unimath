@@ -104,10 +104,10 @@ module _
           ( power-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
           ( a)))
 
-  arithmetic-sequence-ℚ⁺ : sequence ℚ⁺
-  arithmetic-sequence-ℚ⁺ n =
-    ( rational-arithmetic-sequence-ℚ⁺ n) ,
-    ( is-positive-rational-arithmetic-sequence-ℚ⁺ n)
+arithmetic-sequence-ℚ⁺ : (a d : ℚ⁺) → sequence ℚ⁺
+arithmetic-sequence-ℚ⁺ a d n =
+  ( rational-arithmetic-sequence-ℚ⁺ a d n) ,
+  ( is-positive-rational-arithmetic-sequence-ℚ⁺ a d n)
 ```
 
 ### Unitary arithmetic sequences of rational numbers
