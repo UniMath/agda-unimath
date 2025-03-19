@@ -82,9 +82,10 @@ right-inverse-law-mul-ℚ⁺ = right-inverse-law-mul-Group group-mul-ℚ⁺
 ### `one-ℚ⁺` is its own inverse
 
 ```agda
-inv-one-ℚ⁺ : inv-ℚ⁺ one-ℚ⁺ ＝ one-ℚ⁺
-inv-one-ℚ⁺ =
-  inv-unit-Group group-mul-ℚ⁺
+abstract
+  inv-one-ℚ⁺ : inv-ℚ⁺ one-ℚ⁺ ＝ one-ℚ⁺
+  inv-one-ℚ⁺ =
+    inv-unit-Group group-mul-ℚ⁺
 ```
 
 ### The multiplicative group of positive rational numbers is commutative
@@ -98,33 +99,36 @@ pr2 abelian-group-mul-ℚ⁺ = commutative-mul-ℚ⁺
 ### Inversion on the positive rational numbers is an involution
 
 ```agda
-inv-inv-ℚ⁺ : (x : ℚ⁺) → inv-ℚ⁺ (inv-ℚ⁺ x) ＝ x
-inv-inv-ℚ⁺ = inv-inv-Group group-mul-ℚ⁺
+abstract
+  inv-inv-ℚ⁺ : (x : ℚ⁺) → inv-ℚ⁺ (inv-ℚ⁺ x) ＝ x
+  inv-inv-ℚ⁺ = inv-inv-Group group-mul-ℚ⁺
 ```
 
 ### Inversion reverses strict inequality on the positive rational numbers
 
 ```agda
-inv-le-ℚ⁺ : (x y : ℚ⁺) → le-ℚ⁺ (inv-ℚ⁺ x) (inv-ℚ⁺ y) → le-ℚ⁺ y x
-inv-le-ℚ⁺ x y =
-  binary-tr
-    ( le-ℤ)
-    ( commutative-mul-ℤ
-      ( denominator-ℚ⁺ x)
-      ( numerator-ℚ⁺ y))
-    ( commutative-mul-ℤ
-      ( denominator-ℚ⁺ y)
-      ( numerator-ℚ⁺ x))
+abstract
+  inv-le-ℚ⁺ : (x y : ℚ⁺) → le-ℚ⁺ (inv-ℚ⁺ x) (inv-ℚ⁺ y) → le-ℚ⁺ y x
+  inv-le-ℚ⁺ x y =
+    binary-tr
+      ( le-ℤ)
+      ( commutative-mul-ℤ
+        ( denominator-ℚ⁺ x)
+        ( numerator-ℚ⁺ y))
+      ( commutative-mul-ℤ
+        ( denominator-ℚ⁺ y)
+        ( numerator-ℚ⁺ x))
 ```
 
 ### Inversion of positive rational numbers commutes with multiplication
 
 ```agda
-inv-mul-ℚ⁺ : (x y : ℚ⁺) → inv-ℚ⁺ (x *ℚ⁺ y) ＝ inv-ℚ⁺ x *ℚ⁺ inv-ℚ⁺ y
-inv-mul-ℚ⁺ x y =
-  distributive-inv-mul-Group'
-    ( group-mul-ℚ⁺)
-    ( x)
-    ( y)
-    ( commutative-mul-ℚ⁺ x y)
+abstract
+  inv-mul-ℚ⁺ : (x y : ℚ⁺) → inv-ℚ⁺ (x *ℚ⁺ y) ＝ inv-ℚ⁺ x *ℚ⁺ inv-ℚ⁺ y
+  inv-mul-ℚ⁺ x y =
+    distributive-inv-mul-Group'
+      ( group-mul-ℚ⁺)
+      ( x)
+      ( y)
+      ( commutative-mul-ℚ⁺ x y)
 ```
