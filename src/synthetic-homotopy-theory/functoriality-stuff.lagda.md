@@ -869,50 +869,95 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 l7 : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l7}
-  {P : A → UU l4} {P' : B → UU l5} {Q' : C → UU l6}
-  {h : A → B} (h' : (a : A) → P a → P' (h a))
-  {l : A → D} (j : D → C) (l' : (a : A) → P a → Q' (j (l a)))
-  (s : (a : A) → P' (h a) → Q' (j (l a)))
-  {k : D → B} (t : (a : A) → Q' (j (l a)) → P' (k (l a)))
-  (U : h ~ k ∘ l)
-  (H : (a : A) (p : P a) → l' a p ＝ s a (h' a p))
-  (K : (a : A) (p : P' (h a)) → t a (s a p) ＝ tr P' (U a) p)
+  {l1 l2 : Level}
+  {A : UU l1}
+  {P : A → UU l2}
+  where
+  open import foundation.dependent-identifications
+
+  compute-lemma'' :
+    {x y : A} (p : x ＝ y) →
+    {x' : P x} {y' z' : P y}
+    (K : dependent-identification P p x' y')
+    (H : y' ＝ z') →
+    inv-dependent-identification P p (K ∙ H) ＝
+    ap
+      ( tr P (inv p))
+      ( inv H) ∙
+    inv-dependent-identification P p K
+  compute-lemma'' refl K refl = ap inv right-unit
+
+module _
+  {l1 l2 l5 l6 : Level}
+  {A : UU l1} {B : UU l2}
+  {P : A → UU l5} {Q : UU l6} -- {Q : B → UU l6}
   where
   open import foundation.dependent-identifications
 
   compute-lemma :
-    (a : A) (p : P a) →
-    inv-dependent-identification P' (U a)
-      ( inv
-        ( ap (t a) (H a p) ∙
-          K a (h' a p))) ＝
+    {x y : A} (p : x ＝ y) →
+    {u v : Q} (H : u ＝ v) →
+    (f : Q → P y)
+    {x' : P x} (K : dependent-identification P p x' (f u)) →
+    inv-dependent-identification P p (K ∙ ap f H) ＝
     ap
-      ( tr P' (inv (U a)) ∘ t a)
-      ( H a p) ∙
-    inv-dependent-identification P' (U a)
-      ( inv (K a (h' a p)))
-  compute-lemma a p =
-    compute-inv-dependent-identification (U a) _ ∙
+      ( tr P (inv p) ∘ f)
+      ( inv H) ∙
+    inv-dependent-identification P p K
+  compute-lemma p H f K =
+    compute-lemma'' p K (ap f H) ∙
     ap
-      ( map-eq-transpose-equiv-inv' (equiv-tr P' (U a)))
-      ( inv-inv _) ∙
+      ( _∙ inv-dependent-identification P p K)
+      ( ap
+          ( ap (tr P (inv p)))
+          ( inv (ap-inv f H)) ∙
+        inv (ap-comp (tr P (inv p)) f (inv H)))
+
+  compute-lemma' :
+    {x y : A} (p : x ＝ y) →
+    {u v : Q} (H : u ＝ v) →
+    (f : Q → P y) →
+    {x' : P x} (K : f v ＝ tr P p x') →
+    inv-dependent-identification P p (inv (ap f H ∙ K)) ＝
     ap
-      ( _∙ is-retraction-map-inv-equiv (equiv-tr P' (U a)) _)
-      ( ap-concat (tr P' (inv (U a))) _ _) ∙
-    assoc _ _ _ ∙
-    ap
-      (_∙ map-eq-transpose-equiv-inv' (equiv-tr P' (U a)) (K a (h' a p)))
-      ( inv (ap-comp (tr P' (inv (U a))) (t a) (H a p))) ∙
-    ap
-      ( ap (tr P' (inv (U a)) ∘ t a) (H a p) ∙_)
-      ( inv
-        ( compute-inv-dependent-identification (U a) _ ∙
-          ap (map-eq-transpose-equiv-inv' (equiv-tr P' (U a))) (inv-inv _)))
+      ( tr P (inv p) ∘ f)
+      ( H) ∙
+    inv-dependent-identification P p (inv K)
+  compute-lemma' refl refl f K = refl
+    -- ap
+    --   ( inv-dependent-identification P p)
+    --   ( distributive-inv-concat (ap f H) K ∙ ap (inv K ∙_) (inv (ap-inv f H))) ∙
+    -- compute-lemma p (inv H) f (inv K) ∙
+    -- ap
+    --   ( λ r → ap (tr P (inv p) ∘ f) r ∙ inv-dependent-identification P p (inv K))
+    --   ( inv-inv H)
 ```
 
 ```agda
+
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : A → UU l2}
+  {X : UU l3} {Y : X → UU l4}
+  where
+
+  compute-left-whisker-transpose :
+    {s : A → X} (s' : {a : A} → B a → Y (s a))
+    {x y : A} (p : y ＝ x)
+    {x' : B x} {y' : B y} (p' : x' ＝ tr B p y') →
+    left-whisk-dependent-identification {B' = Y} s' (inv p)
+      ( map-eq-transpose-equiv-inv' (equiv-tr B p) p') ＝
+    ap
+      ( λ r → tr Y r (s' x'))
+      ( ap-inv s p) ∙
+    inv
+      ( map-eq-transpose-equiv
+        ( equiv-tr Y (ap s p))
+        ( left-whisk-dependent-identification {B' = Y} s' p
+          ( inv p')))
+  compute-left-whisker-transpose s' refl refl =
+    inv (ap inv (compute-refl-eq-transpose-equiv id-equiv))
+
 open import synthetic-homotopy-theory.zigzags-sequential-diagrams
 module _
   {l1 l2 l3 l4 l5 : Level}
@@ -972,8 +1017,53 @@ module _
       tr
         ( family-descent-data-sequential-colimit P' (succ-ℕ n))
         ( upper-triangle-zigzag-sequential-diagram z n a)
-    inv-upper-triangle-over' n a =
-      {!!}
+    inv-upper-triangle-over' n a p =
+      inv
+        ( ( preserves-tr
+            ( map-over-diagram-equiv-over-colimit up-c c' f P Q e (succ-ℕ n))
+            ( upper-triangle-zigzag-sequential-diagram z n a)
+            ( p)) ∙
+        ( inv
+          ( substitution-law-tr
+            ( family-descent-data-sequential-colimit Q' (succ-ℕ n))
+            ( map-zigzag-sequential-diagram z (succ-ℕ n))
+            ( upper-triangle-zigzag-sequential-diagram z n a))) ∙
+        ( ap
+          ( λ r →
+            tr
+              ( family-descent-data-sequential-colimit Q' (succ-ℕ n))
+              ( r)
+              ( map-over-diagram-equiv-over-colimit up-c c' f P Q e (succ-ℕ n)
+                ( map-sequential-diagram A n a)
+                ( p)))
+          ( inv
+            ( ap
+              ( _∙ lower-triangle-zigzag-sequential-diagram z n (map-zigzag-sequential-diagram z n a))
+              ( distributive-inv-concat
+                ( lower-triangle-zigzag-sequential-diagram z n
+                  ( map-zigzag-sequential-diagram z n a))
+                ( ap
+                  ( map-zigzag-sequential-diagram z (succ-ℕ n))
+                  ( inv (upper-triangle-zigzag-sequential-diagram z n a)))) ∙
+            assoc _ _ _ ∙
+            ap
+              ( inv (ap (map-zigzag-sequential-diagram z (succ-ℕ n)) (inv (upper-triangle-zigzag-sequential-diagram z n a))) ∙_)
+              ( left-inv (lower-triangle-zigzag-sequential-diagram z n (map-zigzag-sequential-diagram z n a))) ∙
+            right-unit ∙
+            ap inv (ap-inv _ _) ∙
+            inv-inv _))) ∙
+        ( tr-concat
+          ( inv (naturality-map-hom-diagram-zigzag-sequential-diagram z n a))
+          ( lower-triangle-zigzag-sequential-diagram z n (map-zigzag-sequential-diagram z n a))
+          ( map-over-diagram-equiv-over-colimit up-c c' f P Q e (succ-ℕ n) (map-sequential-diagram A n a) p)))
+      -- inv
+      --   ( tr-concat
+      --     ( inv (naturality-map-hom-diagram-zigzag-sequential-diagram z n a))
+      --     ( lower-triangle-zigzag-sequential-diagram z n (map-zigzag-sequential-diagram z n a))
+      --     ( map-over-diagram-equiv-over-colimit up-c c' f P Q e (succ-ℕ n) (map-sequential-diagram A n a) p)) ∙
+      -- {!preserves-tr
+      --   ( map-over-diagram-equiv-over-colimit up-c c' f P Q e (succ-ℕ n))
+      --   ( )!}
 
   opaque
     upper-triangle-over' :
@@ -1008,8 +1098,7 @@ module _
       ( inv-map-over-diagram-equiv-zigzag n (map-zigzag-sequential-diagram z n a))
   inv-upper-triangle-over n a p =
     ap
-      ( map-inv-fam-equiv e _ ∘
-        tr Q (inv (C (succ-ℕ n) _)) ∘
+      ( inv-map-over-diagram-equiv-zigzag' (succ-ℕ n) _ ∘
         tr
           ( family-descent-data-sequential-colimit Q' (succ-ℕ n))
           ( lower-triangle-zigzag-sequential-diagram z n (map-zigzag-sequential-diagram z n a)))
@@ -1077,6 +1166,65 @@ module _
          ( family-descent-data-sequential-colimit Q' (succ-ℕ n))
          ( lower-triangle-zigzag-sequential-diagram z n b)
          ( map-family-descent-data-sequential-colimit Q' n b q))
+
+  trivial-pasting :
+    (n : ℕ) →
+    htpy-over
+      ( family-descent-data-sequential-colimit Q' (succ-ℕ n))
+      ( naturality-map-hom-diagram-zigzag-sequential-diagram z n)
+      ( tr
+        ( family-descent-data-sequential-colimit Q' (succ-ℕ n))
+        ( inv (naturality-map-hom-diagram-zigzag-sequential-diagram z n _)) ∘
+        map-over-diagram-equiv-over-colimit up-c c' f P Q e (succ-ℕ n) _)
+      ( map-over-diagram-equiv-over-colimit up-c c' f P Q e (succ-ℕ n) _)
+  trivial-pasting n =
+    concat-htpy-over
+      ( lower-triangle-zigzag-sequential-diagram z n ·r
+        ( map-zigzag-sequential-diagram z n))
+      ( ( map-zigzag-sequential-diagram z (succ-ℕ n)) ·l
+        ( inv-htpy (upper-triangle-zigzag-sequential-diagram z n)))
+      ( λ p →
+        lower-triangle-over' (succ-ℕ n) _
+          ( tr
+            ( family-descent-data-sequential-colimit Q' (succ-ℕ n))
+            ( lower-triangle-zigzag-sequential-diagram z n _)
+            ( tr
+              ( family-descent-data-sequential-colimit Q' (succ-ℕ n))
+              ( inv (naturality-map-hom-diagram-zigzag-sequential-diagram z n _))
+              ( map-over-diagram-equiv-over-colimit up-c c' f P Q e (succ-ℕ n)
+                ( map-sequential-diagram A n _)
+                ( p)))))
+      ( left-whisk-htpy-over
+        ( inv-htpy (upper-triangle-zigzag-sequential-diagram z n))
+        ( λ p →
+          map-eq-transpose-equiv-inv'
+            ( equiv-tr
+              ( family-descent-data-sequential-colimit P' (succ-ℕ n))
+              ( upper-triangle-zigzag-sequential-diagram z n _))
+            ( upper-triangle-over' n _ p))
+        ( map-over-diagram-equiv-over-colimit up-c c' f P Q e (succ-ℕ n) _))
+
+  abstract
+    open import foundation.dependent-identifications
+    is-trivial-trivial-pasting :
+      (n : ℕ) (a : family-sequential-diagram A n) →
+      trivial-pasting n {a} ~
+      is-section-map-inv-equiv
+        ( equiv-tr
+          ( family-descent-data-sequential-colimit Q' (succ-ℕ n))
+          ( naturality-map-hom-diagram-zigzag-sequential-diagram z n a)) ·r
+        map-over-diagram-equiv-over-colimit up-c c' f P Q e (succ-ℕ n) (map-sequential-diagram A n a)
+    is-trivial-trivial-pasting n a p =
+      ap
+        ( λ K' →
+          concat-dependent-identification _ _ _
+          ( lower-triangle-over' (succ-ℕ n) _ _)
+          ( K'))
+        ( compute-left-whisker-transpose
+          ( λ {a} → map-over-diagram-equiv-over-colimit up-c c' f P Q e (succ-ℕ n) a)
+          ( upper-triangle-zigzag-sequential-diagram z n a)
+          ( upper-triangle-over' n a p)) ∙
+      {!!}
 ```
 
 ```agda
@@ -1138,7 +1286,7 @@ module _
 
   opaque
     -- TODO: Maybe this goes through for general equivalences immediately?
-    -- I haven't tried
+    -- I haven't tried yet
     compute-square-over-zigzag-square-over-colimit-id :
       (n : ℕ) (a : family-sequential-diagram A n) →
       pasting-triangles-over
@@ -1326,7 +1474,57 @@ module _
       assoc _ _ _ ∙
       ap
         ( square-over-diagram-square-over-colimit up-c c' f P Q id-fam-equiv n a p ∙_)
-        ( {!!}) ∙
+        ( ap
+          ( inv
+            ( is-section-map-inv-equiv
+              ( equiv-tr
+                ( family-descent-data-sequential-colimit Q' (succ-ℕ n))
+                ( naturality-map-hom-diagram-zigzag-sequential-diagram z n a))
+              ( map-over-diagram-equiv-over-colimit up-c c' f P Q id-fam-equiv (succ-ℕ n)
+                ( map-sequential-diagram A n a)
+                ( map-family-descent-data-sequential-colimit P' n a p))) ∙_)
+          ( assoc _ _ _ ∙
+            inv
+              ( compute-concat-dependent-identification
+                ( family-descent-data-sequential-colimit Q' (succ-ℕ n))
+                ( lower-triangle-zigzag-sequential-diagram z n (map-zigzag-sequential-diagram z n a))
+                ( ap (map-zigzag-sequential-diagram z (succ-ℕ n)) (inv (upper-triangle-zigzag-sequential-diagram z n a)))
+                ( lower-triangle-over' up-c c' z P Q id-fam-equiv (succ-ℕ n)
+                  ( inv-map-zigzag-sequential-diagram z n
+                    ( map-zigzag-sequential-diagram z n a))
+                  ( tr
+                    ( family-descent-data-sequential-colimit Q' (succ-ℕ n))
+                    ( lower-triangle-zigzag-sequential-diagram z n (map-zigzag-sequential-diagram z n a))
+                    ( tr
+                      ( family-descent-data-sequential-colimit Q' (succ-ℕ n))
+                      ( inv (naturality-map-hom-diagram-zigzag-sequential-diagram z n a))
+                      ( map-over-diagram-equiv-over-colimit up-c c' f P Q id-fam-equiv (succ-ℕ n)
+                        ( map-sequential-diagram A n a)
+                        ( map-family-descent-data-sequential-colimit P' n a p)))))
+                ( _)) ∙
+              ap
+                ( concat-dependent-identification
+                  ( family-descent-data-sequential-colimit Q' (succ-ℕ n))
+                  ( lower-triangle-zigzag-sequential-diagram z n (map-zigzag-sequential-diagram z n a))
+                  ( ap
+                    ( map-zigzag-sequential-diagram z (succ-ℕ n))
+                    ( inv (upper-triangle-zigzag-sequential-diagram z n a)))
+                  ( lower-triangle-over' up-c c' z P Q id-fam-equiv (succ-ℕ n)
+                    ( inv-map-zigzag-sequential-diagram z n (map-zigzag-sequential-diagram z n a))
+                    ( _)))
+                ( inv
+                  ( compute-left-whisk-dependent-identification
+                    ( map-over-diagram-equiv-over-colimit up-c c' f P Q id-fam-equiv (succ-ℕ n) _)
+                    ( inv (upper-triangle-zigzag-sequential-diagram z n a))
+                    ( map-eq-transpose-equiv-inv'
+                      ( equiv-tr
+                        ( family-descent-data-sequential-colimit P' (succ-ℕ n))
+                        ( upper-triangle-zigzag-sequential-diagram z n a))
+                      ( upper-triangle-over' up-c c' z P Q id-fam-equiv n a
+                        ( map-family-descent-data-sequential-colimit P' n _ p))))) ∙
+              is-trivial-trivial-pasting up-c c' z P Q id-fam-equiv n a
+                ( map-family-descent-data-sequential-colimit P' n _ p)) ∙
+          ( left-inv _)) ∙
       right-unit
 ```
 

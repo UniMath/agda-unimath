@@ -24,6 +24,7 @@ open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-concatenation
 
 open import synthetic-homotopy-theory.dependent-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-diagrams
