@@ -198,23 +198,6 @@ module _
   pr2 product-Decidable-Prop = is-decidable-prop-product-Decidable-Prop
 ```
 
-### The dependent sum of a family of decidable propositions over a decidable base with double negation dense equality is decidable
-
-```agda
-is-decidable-Σ-has-double-negation-dense-equality-base :
-  {l1 l2 : Level} {P : UU l1} {Q : P → UU l2} →
-  has-double-negation-dense-equality P →
-  is-decidable P →
-  ((x : P) → is-decidable (Q x)) → is-decidable (Σ P Q)
-is-decidable-Σ-has-double-negation-dense-equality-base {Q = Q} hP (inl p) dQ =
-  map-coproduct
-    ( pair p)
-    ( λ nq pq → hP (pr1 pq) p (λ r → nq (tr Q r (pr2 pq))))
-    ( dQ p)
-is-decidable-Σ-has-double-negation-dense-equality-base hP (inr np) _ =
-  inr (map-neg pr1 np)
-```
-
 ### The dependent sum of a family of decidable propositions over a decidable proposition
 
 ```agda

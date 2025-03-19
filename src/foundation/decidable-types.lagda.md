@@ -14,12 +14,15 @@ open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.evaluation-functions
+open import foundation.functoriality-coproduct-types
 open import foundation.hilberts-epsilon-operators
+open import foundation.irrefutable-equality
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.retracts-of-types
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -290,6 +293,23 @@ is-fixed-point-is-decidable-is-inhabited :
   {l : Level} {X : UU l} → type-trunc-Prop X → is-decidable X ≃ X
 is-fixed-point-is-decidable-is-inhabited {l} {X} t =
   right-unit-law-coproduct-is-empty X (¬ X) (is-nonempty-is-inhabited t)
+```
+
+### The dependent sum of a family of decidable propositions over a decidable base with double negation dense equality is decidable
+
+```agda
+is-decidable-Σ-has-double-negation-dense-equality-base :
+  {l1 l2 : Level} {P : UU l1} {Q : P → UU l2} →
+  has-double-negation-dense-equality P →
+  is-decidable P →
+  ((x : P) → is-decidable (Q x)) → is-decidable (Σ P Q)
+is-decidable-Σ-has-double-negation-dense-equality-base {Q = Q} hP (inl p) dQ =
+  map-coproduct
+    ( pair p)
+    ( λ nq pq → hP (pr1 pq) p (λ r → nq (tr Q r (pr2 pq))))
+    ( dQ p)
+is-decidable-Σ-has-double-negation-dense-equality-base hP (inr np) _ =
+  inr (map-neg pr1 np)
 ```
 
 ### Raising universe level conserves decidability

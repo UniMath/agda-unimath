@@ -73,6 +73,11 @@ factorization-through-Prop l3 {A} {B} f =
     ( λ P → Σ (type-Prop P → B) (λ i → Σ (A → type-Prop P) (λ j → i ∘ j ~ f)))
 ```
 
+**Comment.** We need this type to state a factorization property of weakly
+constant maps, but placing it in its appropriate place
+(`orthogonal-factorization-systems.factorizations-of-maps`) leads to circular
+dependencies.
+
 ## Properties
 
 ### Being weakly constant is a property if the codomain is a set

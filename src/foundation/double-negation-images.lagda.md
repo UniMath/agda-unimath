@@ -42,7 +42,7 @@ open import logic.double-negation-stable-embeddings
 
 The
 {{#concept "double negation image" Disambiguation="of a map" Agda=double-negation-im}}
-`f : A → B` is the essentially unique type that factorizes `f` as a
+of `f : A → B` is the essentially unique type that factorizes `f` as a
 [double negation dense map](logic.double-negation-dense-maps.md) followed by a
 [double negation stable embedding](logic.double-negation-stable-embeddings.md).
 
