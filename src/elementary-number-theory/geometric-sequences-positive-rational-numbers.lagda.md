@@ -38,7 +38,7 @@ open import group-theory.powers-of-elements-monoids
 ## Idea
 
 The
-{{#concept "geometric sequence" Disambiguation="of positive rational numbers" Agda="geometric-sequence-ℚ⁺"}}
+{{#concept "geometric sequence" Disambiguation="of positive rational numbers" Agda=geometric-sequence-ℚ⁺}}
 of positive rational numbers with initial term `(a : ℚ⁺)` and common ratio
 `(r : ℚ⁺)` is the sequence `u : ℕ → ℚ⁺` characterized by
 
