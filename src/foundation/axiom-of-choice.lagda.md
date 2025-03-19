@@ -9,6 +9,7 @@ module foundation.axiom-of-choice where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.postcomposition-functions

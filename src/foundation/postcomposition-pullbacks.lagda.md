@@ -10,6 +10,7 @@ module foundation.postcomposition-pullbacks where
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.identity-types
 open import foundation.standard-pullbacks
 open import foundation.universe-levels

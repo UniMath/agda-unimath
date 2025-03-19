@@ -9,6 +9,7 @@ module foundation-core.propositions where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

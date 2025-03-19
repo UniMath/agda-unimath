@@ -20,6 +20,7 @@ open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-function-types
 open import foundation.standard-pullbacks

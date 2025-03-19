@@ -12,6 +12,7 @@ open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 

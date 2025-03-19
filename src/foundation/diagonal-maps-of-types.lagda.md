@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.functoriality-dependent-pair-types
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions

@@ -12,6 +12,7 @@ open import foundation-core.precomposition-functions public
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.precomposition-dependent-functions
 open import foundation.sections
 open import foundation.universe-levels

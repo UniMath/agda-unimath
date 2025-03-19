@@ -17,6 +17,7 @@ open import foundation.epimorphisms-with-respect-to-sets
 open import foundation.equivalence-classes
 open import foundation.existential-quantification
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.images

@@ -10,6 +10,7 @@ module foundation.precomposition-functions-into-subuniverses where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.precomposition-functions
 open import foundation.universe-levels
 

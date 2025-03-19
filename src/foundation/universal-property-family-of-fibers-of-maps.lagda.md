@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.families-of-equivalences
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 

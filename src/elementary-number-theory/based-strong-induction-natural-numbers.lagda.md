@@ -17,6 +17,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions

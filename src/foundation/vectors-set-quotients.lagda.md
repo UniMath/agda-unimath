@@ -16,6 +16,7 @@ open import foundation.cartesian-products-set-quotients
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.multivariable-operations
 open import foundation.products-equivalence-relations
 open import foundation.raising-universe-levels

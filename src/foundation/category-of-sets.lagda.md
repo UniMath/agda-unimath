@@ -27,6 +27,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types

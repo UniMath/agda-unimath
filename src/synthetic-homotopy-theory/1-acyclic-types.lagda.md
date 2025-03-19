@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.injective-maps

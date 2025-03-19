@@ -12,6 +12,7 @@ module foundation.exponents-set-quotients where
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.functoriality-set-quotients
 open import foundation.postcomposition-functions
 open import foundation.reflecting-maps-equivalence-relations

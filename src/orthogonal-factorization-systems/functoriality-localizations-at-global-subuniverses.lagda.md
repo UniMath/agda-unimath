@@ -16,6 +16,7 @@ open import foundation.equivalences
 open import foundation.extensions-types-global-subuniverses
 open import foundation.extensions-types-subuniverses
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.global-subuniverses
 open import foundation.homotopies

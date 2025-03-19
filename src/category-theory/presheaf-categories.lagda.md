@@ -19,6 +19,7 @@ open import category-theory.precategories
 open import foundation.category-of-sets
 open import foundation.commuting-squares-of-maps
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types

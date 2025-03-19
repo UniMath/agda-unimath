@@ -14,6 +14,7 @@ open import category-theory.precategories
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions

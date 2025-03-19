@@ -34,6 +34,7 @@ open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation

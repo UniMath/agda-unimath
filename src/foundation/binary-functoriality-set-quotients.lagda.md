@@ -13,6 +13,7 @@ open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
 open import foundation.exponents-set-quotients
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.functoriality-set-quotients
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies

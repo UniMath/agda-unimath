@@ -10,6 +10,7 @@ module foundation.univalence-implies-function-extensionality where
 open import foundation.dependent-pair-types
 open import foundation.equivalence-induction
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.postcomposition-functions
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

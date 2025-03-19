@@ -11,6 +11,7 @@ open import foundation-core.postcomposition-dependent-functions public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.implicit-function-types
 open import foundation.iterated-dependent-product-types
 open import foundation.universe-levels

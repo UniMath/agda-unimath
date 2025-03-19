@@ -11,6 +11,7 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.large-binary-relations
