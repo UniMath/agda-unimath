@@ -270,14 +270,14 @@ module _
   (d : ℚ⁺)
   where
 
-  bounded-ratio-succ-unitary-arithmetic-sequence-ℚ⁺ :
+  bounded-ratio-unitary-arithmetic-sequence-ℚ⁺ :
     (n : ℕ) →
     leq-ℚ⁺
       ( unitary-arithmetic-sequence-ℚ⁺ d (succ-ℕ n))
       ( mul-ℚ⁺
         ( unitary-arithmetic-sequence-ℚ⁺ d n)
         ( one-ℚ⁺ +ℚ⁺ d))
-  bounded-ratio-succ-unitary-arithmetic-sequence-ℚ⁺ n =
+  bounded-ratio-unitary-arithmetic-sequence-ℚ⁺ n =
     binary-tr
       ( leq-ℚ⁺)
       ( inv (eq-succ-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n))
