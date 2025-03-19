@@ -289,6 +289,17 @@ module _
       ( A)
       ( B)
       ( H)
+
+module _
+  {l1 l2 : Level} (R : Commutative-Ring l1)
+  (A : Finite-Type l2) (σ : Aut (type-Finite-Type A))
+  where
+
+  sum-aut-finite-Commutative-Ring :
+    (f : type-Finite-Type A → type-Commutative-Ring R) →
+    sum-finite-Commutative-Ring R A f ＝
+    sum-finite-Commutative-Ring R A (f ∘ map-equiv σ)
+  sum-aut-finite-Commutative-Ring = sum-equiv-finite-Commutative-Ring R A A σ
 ```
 
 ### Sums over finite types distribute over coproducts

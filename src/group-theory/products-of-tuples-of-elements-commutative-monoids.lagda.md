@@ -52,6 +52,7 @@ open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.double-counting
 ```
 
 </details>
@@ -360,25 +361,6 @@ module _
             ( n)
             ( inv-equiv equiv1 ∘e equiv2)
             ( f ∘ map-equiv equiv1)
-      ＝
-        mul-fin-Commutative-Monoid
-          ( M)
-          ( n)
-          ( f ∘ (map-equiv equiv1 ∘ (map-inv-equiv equiv1 ∘ map-equiv equiv2)))
-        by
-          ap
-            ( mul-fin-Commutative-Monoid M n)
-            ( associative-comp f (map-equiv equiv1) _)
-      ＝
-        mul-fin-Commutative-Monoid
-          ( M)
-          ( n)
-          ( f ∘ ((map-equiv equiv1 ∘ map-inv-equiv equiv1) ∘ map-equiv equiv2))
-        by
-          ap
-            ( λ g → mul-fin-Commutative-Monoid M n (f ∘ g))
-            ( inv
-              ( associative-comp (map-equiv equiv1) (map-inv-equiv equiv1) _))
       ＝ mul-fin-Commutative-Monoid M n (f ∘ map-equiv equiv2)
         by
           ap
@@ -390,7 +372,7 @@ module _
       mul-count-Commutative-Monoid M A c1 f ＝
       mul-count-Commutative-Monoid M A c2 f
     eq-mul-count-Commutative-Monoid f c1@(n , e1) c2@(_ , e2)
-      with eq-number-of-elements-count A c1 c2
+      with double-counting c1 c2
     ... | refl = eq-mul-count-equiv-Commutative-Monoid n e1 e2 f
 ```
 
@@ -427,7 +409,7 @@ module _
       mul-count-Commutative-Monoid M A cA (f ∘ map-equiv H)
     mul-equiv-count-Commutative-Monoid
       cA@(_ , Fin-nA≃A) cB@(nB , Fin-nB≃B) f
-      with eq-number-of-elements-count-equiv A B H cA cB
+      with double-counting-equiv cA cB H
     ... | refl =
       preserves-product-permutation-Commutative-Monoid
         ( M)
@@ -863,7 +845,7 @@ module _
             mul-finite-Commutative-Monoid
               ( M)
               ( A)
-              (λ a → mul-finite-Commutative-Monoid M (B a) (f a))
+              ( λ a → mul-finite-Commutative-Monoid M (B a) (f a))
             by inv (eq-mul-finite-count-Commutative-Monoid M A cA _)
       where
         open

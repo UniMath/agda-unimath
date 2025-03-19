@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
+open import foundation.automorphisms
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.equivalences
@@ -290,6 +291,18 @@ module _
     sum-finite-Commutative-Semiring R A (f ∘ map-equiv H)
   sum-equiv-finite-Commutative-Semiring =
     sum-equiv-finite-Semiring (semiring-Commutative-Semiring R) A B H
+
+module _
+  {l1 l2 : Level} (R : Commutative-Semiring l1)
+  (A : Finite-Type l2) (σ : Aut (type-Finite-Type A))
+  where
+
+  sum-aut-finite-Commutative-Semiring :
+    (f : type-Finite-Type A → type-Commutative-Semiring R) →
+    sum-finite-Commutative-Semiring R A f ＝
+    sum-finite-Commutative-Semiring R A (f ∘ map-equiv σ)
+  sum-aut-finite-Commutative-Semiring =
+    sum-equiv-finite-Commutative-Semiring R A A σ
 ```
 
 ### Sums over finite types distribute over coproducts
