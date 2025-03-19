@@ -21,7 +21,6 @@ open import foundation.cartesian-product-types
 open import foundation.category-of-sets
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.sections
 open import foundation.sets

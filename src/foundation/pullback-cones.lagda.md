@@ -13,7 +13,6 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
-open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction

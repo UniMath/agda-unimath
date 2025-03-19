@@ -10,7 +10,6 @@ module group-theory.monoid-actions where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.endomorphisms
-open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
 open import foundation.identity-types
 open import foundation.sets

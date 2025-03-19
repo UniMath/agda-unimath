@@ -15,7 +15,6 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types

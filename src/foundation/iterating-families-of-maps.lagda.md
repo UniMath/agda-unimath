@@ -19,7 +19,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-homotopies
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.iterating-functions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels

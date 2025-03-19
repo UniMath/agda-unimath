@@ -12,7 +12,6 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.evaluation-functions
-open import foundation.function-extensionality
 open import foundation.logical-equivalences
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-function-types

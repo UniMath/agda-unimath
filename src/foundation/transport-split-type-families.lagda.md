@@ -16,7 +16,6 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-injective-type-families
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.transport-along-identifications

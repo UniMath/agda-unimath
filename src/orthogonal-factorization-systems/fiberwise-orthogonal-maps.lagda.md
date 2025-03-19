@@ -20,7 +20,6 @@ open import foundation.dependent-sums-pullbacks
 open import foundation.equivalences
 open import foundation.fibered-maps
 open import foundation.fibers-of-maps
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types

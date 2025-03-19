@@ -9,7 +9,6 @@ module foundation.functoriality-propositional-truncation where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
