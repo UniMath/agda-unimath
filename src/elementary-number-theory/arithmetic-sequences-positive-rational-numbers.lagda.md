@@ -60,24 +60,25 @@ module _
   power-add-ℚ⁺ : sequence ℚ
   power-add-ℚ⁺ n = power-Monoid monoid-add-ℚ n (rational-ℚ⁺ d)
 
-  lemma-leq-power-add-ℚ⁺ :
-    (n : ℕ) → leq-ℚ zero-ℚ (power-add-ℚ⁺ n)
-  lemma-leq-power-add-ℚ⁺ zero-ℕ = refl-leq-ℚ zero-ℚ
-  lemma-leq-power-add-ℚ⁺ (succ-ℕ n) =
-      transitive-leq-ℚ
-        ( zero-ℚ)
-        ( power-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
-        ( power-Monoid monoid-add-ℚ (succ-ℕ n) (rational-ℚ⁺ d))
-        ( inv-tr
-            ( leq-ℚ (power-add-ℚ⁺ n))
-            ( power-succ-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
-            ( leq-le-ℚ
-              { power-add-ℚ⁺ n}
-              {add-ℚ (power-add-ℚ⁺ n) (rational-ℚ⁺ d)}
-              ( le-right-add-rational-ℚ⁺
-                ( power-add-ℚ⁺ n)
-                ( d))))
-        ( lemma-leq-power-add-ℚ⁺ n)
+  abstract
+    lemma-leq-power-add-ℚ⁺ :
+      (n : ℕ) → leq-ℚ zero-ℚ (power-add-ℚ⁺ n)
+    lemma-leq-power-add-ℚ⁺ zero-ℕ = refl-leq-ℚ zero-ℚ
+    lemma-leq-power-add-ℚ⁺ (succ-ℕ n) =
+        transitive-leq-ℚ
+          ( zero-ℚ)
+          ( power-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
+          ( power-Monoid monoid-add-ℚ (succ-ℕ n) (rational-ℚ⁺ d))
+          ( inv-tr
+              ( leq-ℚ (power-add-ℚ⁺ n))
+              ( power-succ-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
+              ( leq-le-ℚ
+                { power-add-ℚ⁺ n}
+                {add-ℚ (power-add-ℚ⁺ n) (rational-ℚ⁺ d)}
+                ( le-right-add-rational-ℚ⁺
+                  ( power-add-ℚ⁺ n)
+                  ( d))))
+          ( lemma-leq-power-add-ℚ⁺ n)
 ```
 
 ### Arithmetic sequences of positive rational numbers
@@ -90,19 +91,20 @@ module _
   rational-arithmetic-sequence-ℚ⁺ : sequence ℚ
   rational-arithmetic-sequence-ℚ⁺ = add-ℚ (rational-ℚ⁺ a) ∘ power-add-ℚ⁺ d
 
-  is-positive-rational-arithmetic-sequence-ℚ⁺ :
-    (n : ℕ) → is-positive-ℚ (rational-arithmetic-sequence-ℚ⁺ n)
-  is-positive-rational-arithmetic-sequence-ℚ⁺ n =
-    is-positive-le-zero-ℚ
-      ( (rational-ℚ⁺ a) +ℚ (power-add-ℚ⁺ d n))
-      ( concatenate-leq-le-ℚ
-        ( zero-ℚ)
-        ( power-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
-        ( rational-ℚ⁺ a +ℚ power-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
-        ( lemma-leq-power-add-ℚ⁺ d n)
-        ( le-left-add-rational-ℚ⁺
+  abstract
+    is-positive-rational-arithmetic-sequence-ℚ⁺ :
+      (n : ℕ) → is-positive-ℚ (rational-arithmetic-sequence-ℚ⁺ n)
+    is-positive-rational-arithmetic-sequence-ℚ⁺ n =
+      is-positive-le-zero-ℚ
+        ( (rational-ℚ⁺ a) +ℚ (power-add-ℚ⁺ d n))
+        ( concatenate-leq-le-ℚ
+          ( zero-ℚ)
           ( power-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
-          ( a)))
+          ( rational-ℚ⁺ a +ℚ power-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
+          ( lemma-leq-power-add-ℚ⁺ d n)
+          ( le-left-add-rational-ℚ⁺
+            ( power-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
+            ( a)))
 
   arithmetic-sequence-ℚ⁺ : sequence ℚ⁺
   arithmetic-sequence-ℚ⁺ n =
@@ -187,17 +189,18 @@ module _
   (a d : ℚ⁺) (n : ℕ)
   where
 
-  is-strictly-increasing-arithmetic-sequence-ℚ⁺ :
-    le-ℚ⁺
-      ( arithmetic-sequence-ℚ⁺ a d n)
-      ( arithmetic-sequence-ℚ⁺ a d (succ-ℕ n))
-  is-strictly-increasing-arithmetic-sequence-ℚ⁺ =
-    inv-tr
-      ( le-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d n))
-      ( eq-succ-arithmetic-sequence-ℚ⁺ a d n)
-      ( le-right-add-rational-ℚ⁺
-        ( rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d n))
-        ( d))
+  abstract
+    is-strictly-increasing-arithmetic-sequence-ℚ⁺ :
+      le-ℚ⁺
+        ( arithmetic-sequence-ℚ⁺ a d n)
+        ( arithmetic-sequence-ℚ⁺ a d (succ-ℕ n))
+    is-strictly-increasing-arithmetic-sequence-ℚ⁺ =
+      inv-tr
+        ( le-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d n))
+        ( eq-succ-arithmetic-sequence-ℚ⁺ a d n)
+        ( le-right-add-rational-ℚ⁺
+          ( rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d n))
+          ( d))
 ```
 
 ### The terms of an arithmetic sequence of positive rational numbers are greater than or equal to its initial term
@@ -207,23 +210,24 @@ module _
   (a d : ℚ⁺)
   where
 
-  leq-init-arithmetic-sequence-ℚ⁺ :
-    (n : ℕ) → leq-ℚ⁺ a (arithmetic-sequence-ℚ⁺ a d n)
-  leq-init-arithmetic-sequence-ℚ⁺ zero-ℕ =
-    inv-tr
-      ( leq-ℚ⁺ a)
-      ( eq-init-arithmetic-sequence-ℚ⁺ a d)
-      ( refl-leq-ℚ (rational-ℚ⁺ a))
-  leq-init-arithmetic-sequence-ℚ⁺ (succ-ℕ n) =
-    transitive-leq-ℚ
-      ( rational-ℚ⁺ a)
-      ( rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d n))
-      ( rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d (succ-ℕ n)))
-      ( leq-le-ℚ
-        { rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d n)}
-        { rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d (succ-ℕ n))}
-        ( is-strictly-increasing-arithmetic-sequence-ℚ⁺ a d n))
-      ( leq-init-arithmetic-sequence-ℚ⁺ n)
+  abstract
+    leq-init-arithmetic-sequence-ℚ⁺ :
+      (n : ℕ) → leq-ℚ⁺ a (arithmetic-sequence-ℚ⁺ a d n)
+    leq-init-arithmetic-sequence-ℚ⁺ zero-ℕ =
+      inv-tr
+        ( leq-ℚ⁺ a)
+        ( eq-init-arithmetic-sequence-ℚ⁺ a d)
+        ( refl-leq-ℚ (rational-ℚ⁺ a))
+    leq-init-arithmetic-sequence-ℚ⁺ (succ-ℕ n) =
+      transitive-leq-ℚ
+        ( rational-ℚ⁺ a)
+        ( rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d n))
+        ( rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d (succ-ℕ n)))
+        ( leq-le-ℚ
+          { rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d n)}
+          { rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d (succ-ℕ n))}
+          ( is-strictly-increasing-arithmetic-sequence-ℚ⁺ a d n))
+        ( leq-init-arithmetic-sequence-ℚ⁺ n)
 ```
 
 ### An arithmetic sequence of positive rational numbers has no upper bound
@@ -271,65 +275,66 @@ module _
   (d : ℚ⁺)
   where
 
-  bounded-ratio-unitary-arithmetic-sequence-ℚ⁺ :
-    (n : ℕ) →
-    leq-ℚ⁺
-      ( unitary-arithmetic-sequence-ℚ⁺ d (succ-ℕ n))
-      ( mul-ℚ⁺
-        ( unitary-arithmetic-sequence-ℚ⁺ d n)
-        ( one-ℚ⁺ +ℚ⁺ d))
-  bounded-ratio-unitary-arithmetic-sequence-ℚ⁺ n =
-    binary-tr
-      ( leq-ℚ⁺)
-      ( inv (eq-succ-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n))
-      ( inv rhs)
-      ( H)
-    where
-
-      rhs :
+  abstract
+    bounded-ratio-unitary-arithmetic-sequence-ℚ⁺ :
+      (n : ℕ) →
+      leq-ℚ⁺
+        ( unitary-arithmetic-sequence-ℚ⁺ d (succ-ℕ n))
         ( mul-ℚ⁺
           ( unitary-arithmetic-sequence-ℚ⁺ d n)
-          ( one-ℚ⁺ +ℚ⁺ d)) ＝
-        ( add-ℚ⁺
-          ( unitary-arithmetic-sequence-ℚ⁺ d n)
-          ( unitary-arithmetic-sequence-ℚ⁺ d n *ℚ⁺ d))
-      rhs =
-        eq-ℚ⁺
-          ( ( left-distributive-mul-add-ℚ
-              ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)
-              ( one-ℚ)
-              ( rational-ℚ⁺ d)) ∙
-            ( ap
-              ( λ x →
-                add-ℚ
-                  ( x)
-                  (rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n *ℚ rational-ℚ⁺ d))
-              ( right-unit-law-mul-ℚ
-                (rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n))))
-      H :
-        leq-ℚ⁺
+          ( one-ℚ⁺ +ℚ⁺ d))
+    bounded-ratio-unitary-arithmetic-sequence-ℚ⁺ n =
+      binary-tr
+        ( leq-ℚ⁺)
+        ( inv (eq-succ-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n))
+        ( inv rhs)
+        ( H)
+      where
+
+        rhs :
+          ( mul-ℚ⁺
+            ( unitary-arithmetic-sequence-ℚ⁺ d n)
+            ( one-ℚ⁺ +ℚ⁺ d)) ＝
           ( add-ℚ⁺
             ( unitary-arithmetic-sequence-ℚ⁺ d n)
-            ( d))
-        ( add-ℚ⁺
-          ( unitary-arithmetic-sequence-ℚ⁺ d n)
-          ( unitary-arithmetic-sequence-ℚ⁺ d n *ℚ⁺ d))
-      H =
-        preserves-leq-right-add-ℚ
-          ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)
-          ( rational-ℚ⁺ d)
-          ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n *ℚ rational-ℚ⁺ d)
-          ( tr
-            ( λ x →
-              leq-ℚ
-                ( x)
-                ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n *ℚ rational-ℚ⁺ d))
-            ( left-unit-law-mul-ℚ (rational-ℚ⁺ d))
-            ( preserves-leq-right-mul-ℚ⁺
-              ( d)
-              ( one-ℚ)
-              ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)
-              ( leq-init-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)))
+            ( unitary-arithmetic-sequence-ℚ⁺ d n *ℚ⁺ d))
+        rhs =
+          eq-ℚ⁺
+            ( ( left-distributive-mul-add-ℚ
+                ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)
+                ( one-ℚ)
+                ( rational-ℚ⁺ d)) ∙
+              ( ap
+                ( λ x →
+                  add-ℚ
+                    ( x)
+                    (rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n *ℚ rational-ℚ⁺ d))
+                ( right-unit-law-mul-ℚ
+                  (rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n))))
+        H :
+          leq-ℚ⁺
+            ( add-ℚ⁺
+              ( unitary-arithmetic-sequence-ℚ⁺ d n)
+              ( d))
+          ( add-ℚ⁺
+            ( unitary-arithmetic-sequence-ℚ⁺ d n)
+            ( unitary-arithmetic-sequence-ℚ⁺ d n *ℚ⁺ d))
+        H =
+          preserves-leq-right-add-ℚ
+            ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)
+            ( rational-ℚ⁺ d)
+            ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n *ℚ rational-ℚ⁺ d)
+            ( tr
+              ( λ x →
+                leq-ℚ
+                  ( x)
+                  ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n *ℚ rational-ℚ⁺ d))
+              ( left-unit-law-mul-ℚ (rational-ℚ⁺ d))
+              ( preserves-leq-right-mul-ℚ⁺
+                ( d)
+                ( one-ℚ)
+                ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)
+                ( leq-init-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)))
 ```
 
 ## References

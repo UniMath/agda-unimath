@@ -141,21 +141,22 @@ module _
   (r : ℚ⁺)
   where
 
-  eq-inv-unitary-geometric-sequence-ℚ⁺ :
-    (n : ℕ) →
-    unitary-geometric-sequence-ℚ⁺ (inv-ℚ⁺ r) n ＝
-    inv-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ r n)
-  eq-inv-unitary-geometric-sequence-ℚ⁺ zero-ℕ =
-    eq-init-geometric-sequence-ℚ⁺ one-ℚ⁺ (inv-ℚ⁺ r) ∙
-    inv-tr
-      ( Id one-ℚ⁺ ∘ inv-ℚ⁺)
-      ( eq-init-geometric-sequence-ℚ⁺ one-ℚ⁺ r)
-      ( inv inv-one-ℚ⁺)
-  eq-inv-unitary-geometric-sequence-ℚ⁺ (succ-ℕ n) =
-    ( eq-succ-geometric-sequence-ℚ⁺ one-ℚ⁺ (inv-ℚ⁺ r) n) ∙
-    ( ap (λ x → x *ℚ⁺ inv-ℚ⁺ r) (eq-inv-unitary-geometric-sequence-ℚ⁺ n)) ∙
-    ( inv (inv-mul-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ r n) r)) ∙
-    ( ap inv-ℚ⁺ (inv (eq-succ-geometric-sequence-ℚ⁺ one-ℚ⁺ r n)))
+  abstract
+    eq-inv-unitary-geometric-sequence-ℚ⁺ :
+      (n : ℕ) →
+      unitary-geometric-sequence-ℚ⁺ (inv-ℚ⁺ r) n ＝
+      inv-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ r n)
+    eq-inv-unitary-geometric-sequence-ℚ⁺ zero-ℕ =
+      eq-init-geometric-sequence-ℚ⁺ one-ℚ⁺ (inv-ℚ⁺ r) ∙
+      inv-tr
+        ( Id one-ℚ⁺ ∘ inv-ℚ⁺)
+        ( eq-init-geometric-sequence-ℚ⁺ one-ℚ⁺ r)
+        ( inv inv-one-ℚ⁺)
+    eq-inv-unitary-geometric-sequence-ℚ⁺ (succ-ℕ n) =
+      ( eq-succ-geometric-sequence-ℚ⁺ one-ℚ⁺ (inv-ℚ⁺ r) n) ∙
+      ( ap (λ x → x *ℚ⁺ inv-ℚ⁺ r) (eq-inv-unitary-geometric-sequence-ℚ⁺ n)) ∙
+      ( inv (inv-mul-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ r n) r)) ∙
+      ( ap inv-ℚ⁺ (inv (eq-succ-geometric-sequence-ℚ⁺ one-ℚ⁺ r n)))
 ```
 
 ### Linear-exponential inequality / Bernoulli's inequality
@@ -168,34 +169,35 @@ module _
   (d : ℚ⁺)
   where
 
-  linear-exponential-inequality-ℚ⁺ :
-    (n : ℕ) →
-    leq-ℚ⁺
-      ( unitary-arithmetic-sequence-ℚ⁺ d n)
-      ( unitary-geometric-sequence-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d) n)
-  linear-exponential-inequality-ℚ⁺ zero-ℕ =
-    binary-tr
-      ( leq-ℚ⁺)
-      ( inv (eq-init-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d))
-      ( inv (eq-init-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d)))
-      ( refl-leq-ℚ one-ℚ)
-  linear-exponential-inequality-ℚ⁺ (succ-ℕ n) =
-    transitive-leq-ℚ
-      ( rational-ℚ⁺ (unitary-arithmetic-sequence-ℚ⁺ d (succ-ℕ n)))
-      ( rational-ℚ⁺
-        ( mul-ℚ⁺
-          ( unitary-arithmetic-sequence-ℚ⁺ d n)
-          ( one-ℚ⁺ +ℚ⁺ d)))
-      ( rational-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d) (succ-ℕ n)))
-      ( inv-tr
-        ( leq-ℚ⁺ (unitary-arithmetic-sequence-ℚ⁺ d n *ℚ⁺ (one-ℚ⁺ +ℚ⁺ d)))
-        ( eq-succ-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d) n)
-        ( preserves-leq-right-mul-ℚ⁺
-          ( one-ℚ⁺ +ℚ⁺ d)
-          ( rational-ℚ⁺ (unitary-arithmetic-sequence-ℚ⁺ d n))
-          ( rational-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d) n))
-          ( linear-exponential-inequality-ℚ⁺ n)))
-      ( bounded-ratio-unitary-arithmetic-sequence-ℚ⁺ d n)
+  abstract
+    linear-exponential-inequality-ℚ⁺ :
+      (n : ℕ) →
+      leq-ℚ⁺
+        ( unitary-arithmetic-sequence-ℚ⁺ d n)
+        ( unitary-geometric-sequence-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d) n)
+    linear-exponential-inequality-ℚ⁺ zero-ℕ =
+      binary-tr
+        ( leq-ℚ⁺)
+        ( inv (eq-init-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d))
+        ( inv (eq-init-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d)))
+        ( refl-leq-ℚ one-ℚ)
+    linear-exponential-inequality-ℚ⁺ (succ-ℕ n) =
+      transitive-leq-ℚ
+        ( rational-ℚ⁺ (unitary-arithmetic-sequence-ℚ⁺ d (succ-ℕ n)))
+        ( rational-ℚ⁺
+          ( mul-ℚ⁺
+            ( unitary-arithmetic-sequence-ℚ⁺ d n)
+            ( one-ℚ⁺ +ℚ⁺ d)))
+        ( rational-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d) (succ-ℕ n)))
+        ( inv-tr
+          ( leq-ℚ⁺ (unitary-arithmetic-sequence-ℚ⁺ d n *ℚ⁺ (one-ℚ⁺ +ℚ⁺ d)))
+          ( eq-succ-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d) n)
+          ( preserves-leq-right-mul-ℚ⁺
+            ( one-ℚ⁺ +ℚ⁺ d)
+            ( rational-ℚ⁺ (unitary-arithmetic-sequence-ℚ⁺ d n))
+            ( rational-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d) n))
+            ( linear-exponential-inequality-ℚ⁺ n)))
+        ( bounded-ratio-unitary-arithmetic-sequence-ℚ⁺ d n)
 ```
 
 ### Asymptotical behaviour of unitary geometric sequences of positive rational numbers
@@ -239,14 +241,15 @@ module _
 #### A unitary geometric sequence with common ratio `r = 1` is constant
 
 ```agda
-is-constant-geometric-sequence-ℚ⁺ :
-  (n : ℕ) → unitary-geometric-sequence-ℚ⁺ one-ℚ⁺ n ＝ one-ℚ⁺
-is-constant-geometric-sequence-ℚ⁺ zero-ℕ =
-  eq-init-geometric-sequence-ℚ⁺ one-ℚ⁺ one-ℚ⁺
-is-constant-geometric-sequence-ℚ⁺ (succ-ℕ n) =
-  ( eq-succ-geometric-sequence-ℚ⁺ one-ℚ⁺ one-ℚ⁺ n) ∙
-  ( right-unit-law-mul-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ one-ℚ⁺ n)) ∙
-  ( is-constant-geometric-sequence-ℚ⁺ n)
+abstract
+  is-constant-geometric-sequence-ℚ⁺ :
+    (n : ℕ) → unitary-geometric-sequence-ℚ⁺ one-ℚ⁺ n ＝ one-ℚ⁺
+  is-constant-geometric-sequence-ℚ⁺ zero-ℕ =
+    eq-init-geometric-sequence-ℚ⁺ one-ℚ⁺ one-ℚ⁺
+  is-constant-geometric-sequence-ℚ⁺ (succ-ℕ n) =
+    ( eq-succ-geometric-sequence-ℚ⁺ one-ℚ⁺ one-ℚ⁺ n) ∙
+    ( right-unit-law-mul-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ one-ℚ⁺ n)) ∙
+    ( is-constant-geometric-sequence-ℚ⁺ n)
 ```
 
 #### A unitary geometric sequence with common ratio `r < 1` gets arbitrarily small
