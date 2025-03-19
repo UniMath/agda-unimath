@@ -198,6 +198,7 @@ open import foundation.finitely-coherently-invertible-maps public
 open import foundation.fixed-points-endofunctions public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
+open import foundation.function-extensionality-axiom public
 open import foundation.function-types public
 open import foundation.functional-correspondences public
 open import foundation.functoriality-action-on-identifications-functions public
