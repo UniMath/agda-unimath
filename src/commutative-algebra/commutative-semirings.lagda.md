@@ -10,6 +10,7 @@ module commutative-algebra.commutative-semirings where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
@@ -175,6 +176,11 @@ module _
   mul-Commutative-Semiring' :
     (x y : type-Commutative-Semiring) → type-Commutative-Semiring
   mul-Commutative-Semiring' = mul-Semiring' semiring-Commutative-Semiring
+
+  ap-mul-Commutative-Semiring :
+    {x x' y y' : type-Commutative-Semiring} (p : Id x x') (q : Id y y') →
+    Id (mul-Commutative-Semiring x y) (mul-Commutative-Semiring x' y')
+  ap-mul-Commutative-Semiring p q = ap-binary mul-Commutative-Semiring p q
 
   one-Commutative-Semiring : type-Commutative-Semiring
   one-Commutative-Semiring = one-Semiring semiring-Commutative-Semiring
