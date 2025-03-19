@@ -20,6 +20,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.dependent-identifications
 open import foundation.equality-dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.propositions
@@ -432,8 +433,9 @@ module _
   map-equiv-pair-with-sum-pr1-pr2 :
     Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1) →
     Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2)
-  map-equiv-pair-with-sum-pr1-pr2 ((p , c , c+p=n) , a , b , b+a=p) =
-    ((c , p , commutative-add-ℕ p c ∙ c+p=n) , a , b , b+a=p)
+  pr1 (map-equiv-pair-with-sum-pr1-pr2 ((p , c , c+p=n) , _)) =
+    (c , p , commutative-add-ℕ p c ∙ c+p=n)
+  pr2 (map-equiv-pair-with-sum-pr1-pr2 (_ , y)) = y
 
   map-inv-equiv-pair-with-sum-pr1-pr2 :
     Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2) →
@@ -443,8 +445,11 @@ module _
 
   is-section-map-inv-equiv-pair-with-sum-pr1-pr2 :
     is-section map-equiv-pair-with-sum-pr1-pr2 map-inv-equiv-pair-with-sum-pr1-pr2
-  is-section-map-inv-equiv-pair-with-sum-pr1-pr2 ((c , p , p+c=n) , a , b , b+a=p)
-    = eq-pair-Σ (eq-pair-Σ refl (eq-pair-Σ refl (eq-type-Prop (Id-Prop ℕ-Set _ _)))) (eq-pair-Σ {!  !} (eq-pair-Σ {!   !} {!   !}))
+  is-section-map-inv-equiv-pair-with-sum-pr1-pr2 x@(y@(c , p , p+c=n) , a , b , b+a=p) = {!   !}
+
+  is-retraction-map-inv-equiv-pair-with-sum-pr1-pr2 :
+    is-retraction map-equiv-pair-with-sum-pr1-pr2 map-inv-equiv-pair-with-sum-pr1-pr2
+  is-retraction-map-inv-equiv-pair-with-sum-pr1-pr2 ((p , c , c+p=n) , a , b , b+a=p) = {!   !}
 
 module _
   {l : Level} (R : Commutative-Semiring l)
