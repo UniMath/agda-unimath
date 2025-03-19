@@ -308,7 +308,9 @@ module _
                 ( λ x →
                   add-ℚ
                     ( x)
-                    (rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n *ℚ rational-ℚ⁺ d))
+                    ( mul-ℚ
+                      ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)
+                      ( rational-ℚ⁺ d)))
                 ( right-unit-law-mul-ℚ
                   (rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n))))
         H :
@@ -328,7 +330,9 @@ module _
               ( λ x →
                 leq-ℚ
                   ( x)
-                  ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n *ℚ rational-ℚ⁺ d))
+                  ( mul-ℚ
+                    ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)
+                    ( rational-ℚ⁺ d)))
               ( left-unit-law-mul-ℚ (rational-ℚ⁺ d))
               ( preserves-leq-right-mul-ℚ⁺
                 ( d)
