@@ -38,7 +38,7 @@ open import group-theory.powers-of-elements-monoids
 ## Idea
 
 The
-{{#concept "arithmetic sequence" Disambiguation="of positive rational numbers" Agda=arithmetic-sequence-ℚ⁺}}
+{{#concept "arithmetic sequence" Disambiguation="of positive rational numbers" Agda=arithmetic-sequence-ℚ⁺ WD="arithmetic progression" WDID=Q170008}}
 of positive rational numbers with initial term `(a : ℚ⁺)` and common difference
 `(d : ℚ⁺)` is the sequence `u : ℕ → ℚ⁺` characterized by
 
