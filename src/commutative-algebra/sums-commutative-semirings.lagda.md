@@ -235,16 +235,23 @@ module _
 
 ```agda
 module _
-  {l : Level} (A : Commutative-Semiring l)
+  {l : Level} (R : Commutative-Semiring l)
   where
 
   sum-zero-Commutative-Semiring :
     (n : ℕ) →
-    sum-Commutative-Semiring A n
-      ( zero-functional-vec-Commutative-Semiring A n) ＝
-    zero-Commutative-Semiring A
+    sum-Commutative-Semiring R n
+      ( zero-functional-vec-Commutative-Semiring R n) ＝
+    zero-Commutative-Semiring R
   sum-zero-Commutative-Semiring =
-    sum-zero-Semiring (semiring-Commutative-Semiring A)
+    sum-zero-Semiring (semiring-Commutative-Semiring R)
+
+  sum-zero-finite-Commutative-Semiring :
+    {l2 : Level} (A : Finite-Type l2) →
+    sum-finite-Commutative-Semiring R A (λ _ → zero-Commutative-Semiring R) ＝
+    zero-Commutative-Semiring R
+  sum-zero-finite-Commutative-Semiring =
+    sum-zero-finite-Semiring (semiring-Commutative-Semiring R)
 ```
 
 ### Splitting sums

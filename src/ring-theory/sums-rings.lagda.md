@@ -216,6 +216,11 @@ module _
   sum-zero-Ring :
     (n : ℕ) → sum-Ring R n (zero-functional-vec-Ring R n) ＝ zero-Ring R
   sum-zero-Ring = sum-zero-Semiring (semiring-Ring R)
+
+  sum-zero-finite-Ring :
+    {l2 : Level} (A : Finite-Type l2) →
+    sum-finite-Ring R A (λ _ → zero-Ring R) ＝ zero-Ring R
+  sum-zero-finite-Ring = sum-zero-finite-Semiring (semiring-Ring R)
 ```
 
 ### Splitting sums
