@@ -22,6 +22,7 @@ open import foundation.iterated-cartesian-product-types
 open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.truncated-types
 open import foundation.truncation-levels

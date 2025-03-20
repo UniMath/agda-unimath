@@ -16,6 +16,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.postcomposition-functions
 open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types

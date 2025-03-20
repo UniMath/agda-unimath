@@ -20,6 +20,7 @@ open import foundation.function-extensionality-axiom
 open import foundation.multivariable-operations
 open import foundation.products-equivalence-relations
 open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets

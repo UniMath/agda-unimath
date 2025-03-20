@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.propositional-extensionality
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels

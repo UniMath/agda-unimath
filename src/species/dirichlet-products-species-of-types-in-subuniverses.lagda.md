@@ -18,6 +18,7 @@ open import foundation.identity-types
 open import foundation.product-decompositions
 open import foundation.product-decompositions-subuniverse
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.subuniverses
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types

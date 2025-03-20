@@ -16,6 +16,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.unit-type

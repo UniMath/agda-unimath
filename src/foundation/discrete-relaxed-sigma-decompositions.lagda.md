@@ -12,6 +12,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.equivalences
+open import foundation.raising-universe-levels-unit-type
 open import foundation.relaxed-sigma-decompositions
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type

@@ -360,6 +360,7 @@ open import foundation.pullbacks public
 open import foundation.pullbacks-subtypes public
 open import foundation.quasicoherently-idempotent-maps public
 open import foundation.raising-universe-levels public
+open import foundation.raising-universe-levels-unit-type public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.reflexive-relations public
 open import foundation.regensburg-extension-fundamental-theorem-of-identity-types public

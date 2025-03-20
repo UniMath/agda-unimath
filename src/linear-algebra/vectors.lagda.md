@@ -23,6 +23,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.truncated-types

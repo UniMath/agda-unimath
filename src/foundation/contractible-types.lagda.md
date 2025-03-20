@@ -16,6 +16,7 @@ open import foundation.diagonal-maps-of-types
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
 open import foundation.logical-equivalences
+open import foundation.raising-universe-levels-unit-type
 open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels

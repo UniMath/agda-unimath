@@ -12,6 +12,7 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.faithful-maps
 open import foundation.fibers-of-maps
+open import foundation.raising-universe-levels-unit-type
 open import foundation.standard-pullbacks
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types

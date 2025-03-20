@@ -10,6 +10,7 @@ module foundation.full-subtypes where
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels

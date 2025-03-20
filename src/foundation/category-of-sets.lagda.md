@@ -28,6 +28,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.isomorphisms-of-sets
 open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.retractions
 open import foundation.sections
 open import foundation.sets

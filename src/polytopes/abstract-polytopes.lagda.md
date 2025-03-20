@@ -18,6 +18,7 @@ open import foundation.disjunction
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.unit-type

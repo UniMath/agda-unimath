@@ -19,6 +19,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.global-subuniverses
 open import foundation.homotopies
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.relaxed-sigma-decompositions
 open import foundation.sigma-closed-subuniverses
 open import foundation.sigma-decomposition-subuniverse

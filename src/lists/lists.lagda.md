@@ -25,6 +25,7 @@ open import foundation.identity-types
 open import foundation.maybe
 open import foundation.negation
 open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.torsorial-type-families
 open import foundation.truncated-types

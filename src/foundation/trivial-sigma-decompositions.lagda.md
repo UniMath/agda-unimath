@@ -11,6 +11,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sigma-decompositions
 open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-dependent-pair-types

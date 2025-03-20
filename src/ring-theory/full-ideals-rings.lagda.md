@@ -10,6 +10,7 @@ module ring-theory.full-ideals-rings where
 open import foundation.dependent-pair-types
 open import foundation.full-subtypes
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
