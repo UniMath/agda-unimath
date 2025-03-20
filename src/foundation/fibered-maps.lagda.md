@@ -10,6 +10,7 @@ module foundation.fibered-maps where
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-truncated-types
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction

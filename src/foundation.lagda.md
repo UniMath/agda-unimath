@@ -123,6 +123,7 @@ open import foundation.dependent-pair-types public
 open import foundation.dependent-products-contractible-types public
 open import foundation.dependent-products-propositions public
 open import foundation.dependent-products-pullbacks public
+open import foundation.dependent-products-truncated-types public
 open import foundation.dependent-sequences public
 open import foundation.dependent-sums-pullbacks public
 open import foundation.dependent-telescopes public

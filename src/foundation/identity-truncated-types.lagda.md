@@ -7,6 +7,7 @@ module foundation.identity-truncated-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-truncated-types
 open import foundation.univalence
 open import foundation.universe-levels
 

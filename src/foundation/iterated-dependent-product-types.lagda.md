@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-products-contractible-types
 open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.implicit-function-types
 open import foundation.universe-levels
 

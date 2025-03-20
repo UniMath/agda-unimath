@@ -8,6 +8,7 @@ module foundation-core.sets where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 

@@ -3,6 +3,7 @@
 ```agda
 module foundation.truncated-maps where
 
+open import foundation.dependent-products-truncated-types public
 open import foundation-core.truncated-maps public
 ```
 

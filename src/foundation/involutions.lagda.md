@@ -9,6 +9,7 @@ module foundation.involutions where
 ```agda
 open import foundation.automorphisms
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality
