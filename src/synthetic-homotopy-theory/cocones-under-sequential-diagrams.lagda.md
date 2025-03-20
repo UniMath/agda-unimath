@@ -1,7 +1,12 @@
 # Cocones under sequential diagrams
 
 ```agda
-module synthetic-homotopy-theory.cocones-under-sequential-diagrams where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.cocones-under-sequential-diagrams
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,25 +14,25 @@ module synthetic-homotopy-theory.cocones-under-sequential-diagrams where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-homotopies
-open import foundation.commuting-squares-of-homotopies
-open import foundation.commuting-triangles-of-maps
+open import foundation.binary-homotopies funext
+open import foundation.commuting-squares-of-homotopies funext
+open import foundation.commuting-triangles-of-maps funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.postcomposition-functions
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.postcomposition-functions funext
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import synthetic-homotopy-theory.dependent-sequential-diagrams
-open import synthetic-homotopy-theory.equifibered-sequential-diagrams
-open import synthetic-homotopy-theory.sequential-diagrams
+open import synthetic-homotopy-theory.dependent-sequential-diagrams funext
+open import synthetic-homotopy-theory.equifibered-sequential-diagrams funext
+open import synthetic-homotopy-theory.sequential-diagrams funext
 ```
 
 </details>

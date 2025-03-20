@@ -1,14 +1,19 @@
 # Commuting triangles of morphisms of arrows
 
 ```agda
-module foundation.commuting-triangles-of-morphisms-arrows where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.commuting-triangles-of-morphisms-arrows
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.homotopies-morphisms-arrows
-open import foundation.morphisms-arrows
+open import foundation.homotopies-morphisms-arrows funext
+open import foundation.morphisms-arrows funext
 open import foundation.universe-levels
 ```
 

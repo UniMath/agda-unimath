@@ -3,28 +3,33 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module elementary-number-theory.addition-rational-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.addition-rational-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integer-fractions
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.addition-integer-fractions funext
+open import elementary-number-theory.addition-integers funext
+open import elementary-number-theory.integer-fractions funext
 open import elementary-number-theory.integers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.reduced-integer-fractions
+open import elementary-number-theory.rational-numbers funext
+open import elementary-number-theory.reduced-integer-fractions funext
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.injective-maps
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
 open import foundation.interchange-law
-open import foundation.retractions
-open import foundation.sections
+open import foundation.retractions funext
+open import foundation.sections funext
 ```
 
 </details>

@@ -1,18 +1,23 @@
 # `Π`-types in precategories with attributes
 
 ```agda
-module type-theories.pi-types-precategories-with-attributes where
+open import foundation.function-extensionality-axiom
+
+module
+  type-theories.pi-types-precategories-with-attributes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import type-theories.precategories-with-attributes
+open import type-theories.precategories-with-attributes funext
 ```
 
 </details>

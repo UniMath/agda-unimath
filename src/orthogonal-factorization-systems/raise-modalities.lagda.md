@@ -1,19 +1,24 @@
 # The raise modalities
 
 ```agda
-module orthogonal-factorization-systems.raise-modalities where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.raise-modalities
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.function-types
-open import foundation.raising-universe-levels
+open import foundation.function-types funext
+open import foundation.raising-universe-levels funext
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.modal-operators
-open import orthogonal-factorization-systems.types-local-at-maps
-open import orthogonal-factorization-systems.uniquely-eliminating-modalities
+open import orthogonal-factorization-systems.modal-operators funext
+open import orthogonal-factorization-systems.types-local-at-maps funext
+open import orthogonal-factorization-systems.uniquely-eliminating-modalities funext
 ```
 
 </details>

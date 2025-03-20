@@ -1,7 +1,12 @@
 # Correspondence between cocones under sequential diagrams and certain coforks
 
 ```agda
-module synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,33 +14,33 @@ module synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.commuting-prisms-of-maps
-open import foundation.commuting-triangles-of-maps
+open import foundation.commuting-prisms-of-maps funext
+open import foundation.commuting-triangles-of-maps funext
 open import foundation.dependent-pair-types
 open import foundation.double-arrows
-open import foundation.equivalences
-open import foundation.equivalences-double-arrows
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.morphisms-double-arrows
-open import foundation.retractions
-open import foundation.sections
+open import foundation.equivalences funext
+open import foundation.equivalences funext-double-arrows
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.morphisms-double-arrows funext
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
-open import foundation.whiskering-homotopies-concatenation
+open import foundation.whiskering-homotopies-concatenation funext
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.coforks
-open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.dependent-coforks
-open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams
-open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows
-open import synthetic-homotopy-theory.equivalences-sequential-diagrams
-open import synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequential-diagrams
-open import synthetic-homotopy-theory.morphisms-coforks-under-morphisms-double-arrows
-open import synthetic-homotopy-theory.morphisms-sequential-diagrams
-open import synthetic-homotopy-theory.sequential-diagrams
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext
+open import synthetic-homotopy-theory.coforks funext
+open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams funext
+open import synthetic-homotopy-theory.dependent-coforks funext
+open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams funext
+open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows funext
+open import synthetic-homotopy-theory.equivalences-sequential-diagrams funext
+open import synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequential-diagrams funext
+open import synthetic-homotopy-theory.morphisms-coforks-under-morphisms-double-arrows funext
+open import synthetic-homotopy-theory.morphisms-sequential-diagrams funext
+open import synthetic-homotopy-theory.sequential-diagrams funext
 ```
 
 </details>

@@ -1,15 +1,20 @@
 # Upper bounds for type families over the natural numbers
 
 ```agda
-module elementary-number-theory.upper-bounds-natural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.upper-bounds-natural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers funext
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext
 
 open import foundation.universe-levels
 ```

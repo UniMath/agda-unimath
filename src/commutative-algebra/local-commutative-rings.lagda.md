@@ -1,21 +1,26 @@
 # Local commutative rings
 
 ```agda
-module commutative-algebra.local-commutative-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  commutative-algebra.local-commutative-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-rings funext
 
 open import foundation.dependent-pair-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import ring-theory.local-rings
-open import ring-theory.rings
+open import ring-theory.local-rings funext
+open import ring-theory.rings funext
 ```
 
 </details>

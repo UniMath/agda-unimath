@@ -1,23 +1,28 @@
 # Structured type duality
 
 ```agda
-module foundation.structured-type-duality where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.structured-type-duality
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.structure
+open import foundation.equivalences funext
+open import foundation.structure funext
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-duality
-open import foundation.univalence
+open import foundation.type-duality funext
+open import foundation.univalence funext
 open import foundation.universe-levels
 
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.type-theoretic-principle-of-choice
 ```

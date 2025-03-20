@@ -3,25 +3,30 @@
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-module modal-type-theory.crisp-dependent-pair-types where
+open import foundation.function-extensionality-axiom
+
+module
+  modal-type-theory.crisp-dependent-pair-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.retractions
-open import foundation.sections
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.universe-levels
 
-open import modal-type-theory.flat-discrete-crisp-types
-open import modal-type-theory.flat-modality
-open import modal-type-theory.functoriality-flat-modality
+open import modal-type-theory.flat-discrete-crisp-types funext
+open import modal-type-theory.flat-modality funext
+open import modal-type-theory.functoriality-flat-modality funext
 ```
 
 </details>

@@ -1,7 +1,12 @@
 # Multivariable operations
 
 ```agda
-module foundation.multivariable-operations where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.multivariable-operations
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,8 +17,8 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.raising-universe-levels
-open import foundation.raising-universe-levels-unit-type
+open import foundation.raising-universe-levels funext
+open import foundation.raising-universe-levels funext-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -24,7 +29,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 
-open import linear-algebra.vectors
+open import linear-algebra.vectors funext
 ```
 
 </details>

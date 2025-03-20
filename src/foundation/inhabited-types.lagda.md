@@ -1,20 +1,25 @@
 # Inhabited types
 
 ```agda
-module foundation.inhabited-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.inhabited-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.functoriality-propositional-truncation
+open import foundation.equality-dependent-function-types funext
+open import foundation.functoriality-propositional-truncation funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.propositional-truncations
+open import foundation.propositional-truncations funext
 open import foundation.subtype-identity-principle
-open import foundation.univalence
+open import foundation.univalence funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

@@ -1,7 +1,12 @@
 # Cantor's diagonal argument
 
 ```agda
-module set-theory.cantors-diagonal-argument where
+open import foundation.function-extensionality-axiom
+
+module
+  set-theory.cantors-diagonal-argument
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,25 +15,24 @@ module set-theory.cantors-diagonal-argument where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.coproduct-types funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.discrete-types
-open import foundation.function-extensionality-axiom
-open import foundation.identity-types
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.sets
-open import foundation.surjective-maps
+open import foundation.discrete-types funext
+open import foundation.identity-types funext
+open import foundation.negated-equality funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext
+open import foundation.sets funext
+open import foundation.surjective-maps funext
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
 
-open import set-theory.countable-sets
-open import set-theory.uncountable-sets
+open import set-theory.countable-sets funext
+open import set-theory.uncountable-sets funext
 ```
 
 </details>

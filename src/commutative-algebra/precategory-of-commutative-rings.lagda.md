@@ -1,21 +1,26 @@
 # The precategory of commutative rings
 
 ```agda
-module commutative-algebra.precategory-of-commutative-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  commutative-algebra.precategory-of-commutative-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.full-large-subprecategories
-open import category-theory.large-precategories
-open import category-theory.precategories
+open import category-theory.full-large-subprecategories funext
+open import category-theory.large-precategories funext
+open import category-theory.precategories funext
 
-open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-rings funext
 
 open import foundation.universe-levels
 
-open import ring-theory.precategory-of-rings
+open import ring-theory.precategory-of-rings funext
 ```
 
 </details>

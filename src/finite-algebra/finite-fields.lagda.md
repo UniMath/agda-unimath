@@ -1,47 +1,52 @@
 # Finite fields
 
 ```agda
-module finite-algebra.finite-fields where
+open import foundation.function-extensionality-axiom
+
+module
+  finite-algebra.finite-fields
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.commutative-semirings
+open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.commutative-semirings funext
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import finite-algebra.commutative-finite-rings
-open import finite-algebra.finite-rings
+open import finite-algebra.commutative-finite-rings funext
+open import finite-algebra.finite-rings funext
 
 open import foundation.action-on-identifications-binary-functions
-open import foundation.binary-embeddings
+open import foundation.binary-embeddings funext
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.involutions
-open import foundation.propositions
-open import foundation.sets
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.involutions funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.commutative-monoids
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.abelian-groups funext
+open import group-theory.commutative-monoids funext
+open import group-theory.groups funext
+open import group-theory.monoids funext
+open import group-theory.semigroups funext
 
-open import lists.concatenation-lists
+open import lists.concatenation-lists funext
 open import lists.lists
 
-open import ring-theory.division-rings
-open import ring-theory.rings
-open import ring-theory.semirings
+open import ring-theory.division-rings funext
+open import ring-theory.rings funext
+open import ring-theory.semirings funext
 ```
 
 </details>

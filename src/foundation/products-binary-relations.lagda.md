@@ -1,13 +1,18 @@
 # Products of binary relations
 
 ```agda
-module foundation.products-binary-relations where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.products-binary-relations
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 

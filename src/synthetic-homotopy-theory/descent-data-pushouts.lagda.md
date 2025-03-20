@@ -1,20 +1,25 @@
 # Descent data for pushouts
 
 ```agda
-module synthetic-homotopy-theory.descent-data-pushouts where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.descent-data-pushouts
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.span-diagrams
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.span-diagrams funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-spans funext
 ```
 
 </details>

@@ -1,19 +1,24 @@
 # Apartness relations
 
 ```agda
-module foundation.apartness-relations where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.apartness-relations
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.disjunction
-open import foundation.existential-quantification
-open import foundation.propositional-truncations
-open import foundation.universal-quantification
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext
+open import foundation.existential-quantification funext
+open import foundation.propositional-truncations funext
+open import foundation.universal-quantification funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

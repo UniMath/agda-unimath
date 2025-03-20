@@ -1,20 +1,25 @@
 # The multiplicative monoid of natural numbers
 
 ```agda
-module elementary-number-theory.multiplicative-monoid-of-natural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.multiplicative-monoid-of-natural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.equality-natural-numbers funext
 open import elementary-number-theory.multiplication-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.monoids funext
+open import group-theory.semigroups funext
 ```
 
 </details>

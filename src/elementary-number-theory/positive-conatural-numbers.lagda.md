@@ -3,19 +3,24 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module elementary-number-theory.positive-conatural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.positive-conatural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.conatural-numbers
-open import elementary-number-theory.zero-conatural-numbers
+open import elementary-number-theory.conatural-numbers funext
+open import elementary-number-theory.zero-conatural-numbers funext
 
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.coproduct-types funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.negation
+open import foundation.negation funext
 open import foundation.universe-levels
 
 open import foundation-core.empty-types

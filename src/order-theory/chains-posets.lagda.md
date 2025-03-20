@@ -1,29 +1,34 @@
 # Chains in posets
 
 ```agda
-module order-theory.chains-posets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.chains-posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.images
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.disjunction funext
+open import foundation.existential-quantification funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.images funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import order-theory.chains-preorders
-open import order-theory.order-preserving-maps-posets
-open import order-theory.posets
-open import order-theory.subposets
-open import order-theory.total-orders
+open import order-theory.chains-preorders funext
+open import order-theory.order-preserving-maps-posets funext
+open import order-theory.posets funext
+open import order-theory.subposets funext
+open import order-theory.total-orders funext
 ```
 
 </details>

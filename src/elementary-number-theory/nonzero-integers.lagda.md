@@ -1,7 +1,12 @@
 # Nonzero integers
 
 ```agda
-module elementary-number-theory.nonzero-integers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.nonzero-integers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,12 +15,12 @@ module elementary-number-theory.nonzero-integers where
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 ```
 

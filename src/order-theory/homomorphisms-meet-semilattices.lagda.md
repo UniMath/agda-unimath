@@ -1,7 +1,12 @@
 # Homomorphisms of meet-semilattices
 
 ```agda
-module order-theory.homomorphisms-meet-semilattices where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.homomorphisms-meet-semilattices
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,17 +14,17 @@ module order-theory.homomorphisms-meet-semilattices where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-semigroups
+open import group-theory.homomorphisms-semigroups funext
 
-open import order-theory.greatest-lower-bounds-posets
-open import order-theory.meet-semilattices
-open import order-theory.order-preserving-maps-posets
+open import order-theory.greatest-lower-bounds-posets funext
+open import order-theory.meet-semilattices funext
+open import order-theory.order-preserving-maps-posets funext
 ```
 
 </details>

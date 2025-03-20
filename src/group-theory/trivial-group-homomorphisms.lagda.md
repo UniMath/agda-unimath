@@ -1,20 +1,25 @@
 # Trivial group homomorphisms
 
 ```agda
-module group-theory.trivial-group-homomorphisms where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.trivial-group-homomorphisms
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
+open import group-theory.groups funext
+open import group-theory.homomorphisms-groups funext
 ```
 
 </details>

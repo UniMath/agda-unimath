@@ -1,7 +1,12 @@
 # Spectra
 
 ```agda
-module synthetic-homotopy-theory.spectra where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.spectra
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,20 +15,20 @@ module synthetic-homotopy-theory.spectra where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import structured-types.pointed-equivalences
-open import structured-types.pointed-maps
+open import structured-types.pointed-equivalences funext
+open import structured-types.pointed-maps funext
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.prespectra
-open import synthetic-homotopy-theory.suspensions-of-pointed-types
-open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.loop-spaces funext
+open import synthetic-homotopy-theory.prespectra funext
+open import synthetic-homotopy-theory.suspensions-of-pointed-types funext
+open import synthetic-homotopy-theory.suspensions-of-types funext
 ```
 
 </details>

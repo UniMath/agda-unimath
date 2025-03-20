@@ -1,27 +1,32 @@
 # Continuation modalities
 
 ```agda
-module orthogonal-factorization-systems.continuation-modalities where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.continuation-modalities
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.continuations
+open import foundation.cartesian-product-types funext
+open import foundation.continuations funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.logical-equivalences
-open import foundation.propositions
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.large-lawvere-tierney-topologies
-open import orthogonal-factorization-systems.modal-operators
-open import orthogonal-factorization-systems.types-local-at-maps
-open import orthogonal-factorization-systems.uniquely-eliminating-modalities
+open import orthogonal-factorization-systems.large-lawvere-tierney-topologies funext
+open import orthogonal-factorization-systems.modal-operators funext
+open import orthogonal-factorization-systems.types-local-at-maps funext
+open import orthogonal-factorization-systems.uniquely-eliminating-modalities funext
 ```
 
 </details>

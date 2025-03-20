@@ -1,7 +1,12 @@
 # Functoriality of the type of matrices
 
 ```agda
-module linear-algebra.functoriality-matrices where
+open import foundation.function-extensionality-axiom
+
+module
+  linear-algebra.functoriality-matrices
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,8 +16,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.matrices
+open import linear-algebra.functoriality-vectors funext
+open import linear-algebra.matrices funext
 ```
 
 </details>

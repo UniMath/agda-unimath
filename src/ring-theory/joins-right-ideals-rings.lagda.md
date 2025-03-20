@@ -1,26 +1,31 @@
 # Joins of right ideals of rings
 
 ```agda
-module ring-theory.joins-right-ideals-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.joins-right-ideals-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.unions-subtypes
+open import foundation.identity-types funext
+open import foundation.unions-subtypes funext
 open import foundation.universe-levels
 
-open import order-theory.large-suplattices
-open import order-theory.least-upper-bounds-large-posets
-open import order-theory.similarity-of-elements-large-posets
+open import order-theory.large-suplattices funext
+open import order-theory.least-upper-bounds-large-posets funext
+open import order-theory.similarity-of-elements-large-posets funext
 
-open import ring-theory.poset-of-right-ideals-rings
-open import ring-theory.right-ideals-generated-by-subsets-rings
-open import ring-theory.right-ideals-rings
-open import ring-theory.rings
-open import ring-theory.subsets-rings
+open import ring-theory.poset-of-right-ideals-rings funext
+open import ring-theory.right-ideals-generated-by-subsets-rings funext
+open import ring-theory.right-ideals-rings funext
+open import ring-theory.rings funext
+open import ring-theory.subsets-rings funext
 ```
 
 </details>

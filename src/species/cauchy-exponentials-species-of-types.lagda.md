@@ -1,36 +1,41 @@
 # Cauchy exponentials of species of types
 
 ```agda
-module species.cauchy-exponentials-species-of-types where
+open import foundation.function-extensionality-axiom
+
+module
+  species.cauchy-exponentials-species-of-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.arithmetic-law-coproduct-and-sigma-decompositions
-open import foundation.cartesian-product-types
-open import foundation.coproduct-decompositions
-open import foundation.dependent-binomial-theorem
+open import foundation.arithmetic-law-coproduct-and-sigma-decompositions funext
+open import foundation.cartesian-product-types funext
+open import foundation.coproduct-decompositions funext
+open import foundation.dependent-binomial-theorem funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.relaxed-sigma-decompositions
+open import foundation.equivalences funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.relaxed-sigma-decompositions funext
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.univalence
+open import foundation.univalence funext
 open import foundation.universe-levels
 
-open import species.cauchy-composition-species-of-types
-open import species.cauchy-products-species-of-types
-open import species.coproducts-species-of-types
-open import species.equivalences-species-of-types
-open import species.species-of-types
+open import species.cauchy-composition-species-of-types funext
+open import species.cauchy-products-species-of-types funext
+open import species.coproducts-species-of-types funext
+open import species.equivalences-species-of-types funext
+open import species.species-of-types funext
 ```
 
 </details>

@@ -1,58 +1,63 @@
 # `k`-acyclic maps
 
 ```agda
-module synthetic-homotopy-theory.truncated-acyclic-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.truncated-acyclic-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.cones-over-cospan-diagrams
-open import foundation.connected-maps
-open import foundation.connected-types
-open import foundation.constant-maps
-open import foundation.dependent-epimorphisms-with-respect-to-truncated-types
+open import foundation.cartesian-product-types funext
+open import foundation.cones-over-cospan-diagrams funext
+open import foundation.connected-maps funext
+open import foundation.connected-types funext
+open import foundation.constant-maps funext
+open import foundation.dependent-epimorphisms-with-respect-to-truncated-types funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.diagonal-maps-of-types
-open import foundation.embeddings
-open import foundation.epimorphisms-with-respect-to-truncated-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-fibers-of-maps
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.precomposition-dependent-functions
-open import foundation.precomposition-functions
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.pullbacks
-open import foundation.retracts-of-maps
-open import foundation.torsorial-type-families
-open import foundation.truncated-types
-open import foundation.truncation-equivalences
+open import foundation.dependent-universal-property-equivalences funext
+open import foundation.diagonal-maps-of-types funext
+open import foundation.embeddings funext
+open import foundation.epimorphisms-with-respect-to-truncated-types funext
+open import foundation.equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.functoriality-fibers-of-maps funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.inhabited-types funext
+open import foundation.precomposition-dependent-functions funext
+open import foundation.precomposition-functions funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.pullbacks funext
+open import foundation.retracts-of-maps funext
+open import foundation.torsorial-type-families funext
+open import foundation.truncated-types funext
+open import foundation.truncation-equivalences funext
 open import foundation.truncation-levels
-open import foundation.truncations
+open import foundation.truncations funext
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
-open import foundation.universal-property-cartesian-product-types
-open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-cartesian-product-types funext
+open import foundation.universal-property-dependent-pair-types funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.codiagonals-of-maps
-open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.truncated-acyclic-types
-open import synthetic-homotopy-theory.universal-property-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.codiagonals-of-maps funext
+open import synthetic-homotopy-theory.pushouts funext
+open import synthetic-homotopy-theory.truncated-acyclic-types funext
+open import synthetic-homotopy-theory.universal-property-pushouts funext
 ```
 
 </details>

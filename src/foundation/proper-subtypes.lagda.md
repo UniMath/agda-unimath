@@ -1,18 +1,23 @@
 # Proper subsets
 
 ```agda
-module foundation.proper-subtypes where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.proper-subtypes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.complements-subtypes
-open import foundation.inhabited-subtypes
+open import foundation.complements-subtypes funext
+open import foundation.inhabited-subtypes funext
 open import foundation.universe-levels
 
 open import foundation-core.propositions
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 ```
 
 </details>

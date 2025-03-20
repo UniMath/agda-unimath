@@ -1,30 +1,35 @@
 # Categories
 
 ```agda
-module category-theory.categories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.categories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.nonunital-precategories
-open import category-theory.precategories
-open import category-theory.preunivalent-categories
-open import category-theory.strongly-preunivalent-categories
+open import category-theory.composition-operations-on-binary-families-of-sets funext
+open import category-theory.isomorphisms-in-precategories funext
+open import category-theory.nonunital-precategories funext
+open import category-theory.precategories funext
+open import category-theory.preunivalent-categories funext
+open import category-theory.strongly-preunivalent-categories funext
 
-open import foundation.1-types
-open import foundation.cartesian-product-types
+open import foundation.1-types funext
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
-open import foundation.surjective-maps
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.strictly-involutive-identity-types funext
+open import foundation.surjective-maps funext
 open import foundation.universe-levels
 ```
 

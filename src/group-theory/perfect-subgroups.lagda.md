@@ -1,18 +1,23 @@
 # Perfect subgroups
 
 ```agda
-module group-theory.perfect-subgroups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.perfect-subgroups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.perfect-groups
-open import group-theory.subgroups
+open import group-theory.groups funext
+open import group-theory.perfect-groups funext
+open import group-theory.subgroups funext
 ```
 
 </details>

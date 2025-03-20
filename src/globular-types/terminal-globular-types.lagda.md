@@ -3,16 +3,21 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module globular-types.terminal-globular-types where
+open import foundation.function-extensionality-axiom
+
+module
+  globular-types.terminal-globular-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.universe-levels
 
-open import globular-types.globular-maps
+open import globular-types.globular-maps funext
 open import globular-types.globular-types
 ```
 

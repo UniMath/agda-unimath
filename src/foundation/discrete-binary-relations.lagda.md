@@ -1,16 +1,21 @@
 # Discrete binary relations
 
 ```agda
-module foundation.discrete-binary-relations where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.discrete-binary-relations
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.propositions
+open import foundation.binary-relations funext
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext
+open import foundation.propositions funext
 open import foundation.universe-levels
 ```
 

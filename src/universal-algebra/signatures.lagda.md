@@ -1,7 +1,12 @@
 # Signatures
 
 ```agda
-module universal-algebra.signatures where
+open import foundation.function-extensionality-axiom
+
+module
+  universal-algebra.signatures
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,10 +14,10 @@ module universal-algebra.signatures where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.identity-types
+open import foundation.embeddings funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

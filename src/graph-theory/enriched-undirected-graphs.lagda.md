@@ -1,26 +1,31 @@
 # Enriched undirected graphs
 
 ```agda
-module graph-theory.enriched-undirected-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.enriched-undirected-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.connected-components
+open import foundation.connected-components funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import graph-theory.neighbors-undirected-graphs
-open import graph-theory.undirected-graphs
+open import graph-theory.neighbors-undirected-graphs funext
+open import graph-theory.undirected-graphs funext
 
-open import higher-group-theory.higher-group-actions
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-group-actions funext
+open import higher-group-theory.higher-groups funext
 ```
 
 </details>

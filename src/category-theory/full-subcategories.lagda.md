@@ -1,28 +1,33 @@
 # Full subcategories
 
 ```agda
-module category-theory.full-subcategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.full-subcategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.composition-operations-on-binary-families-of-sets
-open import category-theory.embeddings-precategories
-open import category-theory.full-subprecategories
-open import category-theory.fully-faithful-functors-precategories
-open import category-theory.functors-categories
-open import category-theory.maps-categories
-open import category-theory.precategories
+open import category-theory.categories funext
+open import category-theory.composition-operations-on-binary-families-of-sets funext
+open import category-theory.embeddings-precategories funext
+open import category-theory.full-subprecategories funext
+open import category-theory.fully-faithful-functors-precategories funext
+open import category-theory.functors-categories funext
+open import category-theory.maps-categories funext
+open import category-theory.precategories funext
 
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
-open import foundation.subtypes
+open import foundation.embeddings funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.strictly-involutive-identity-types funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 ```
 

@@ -3,38 +3,43 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module foundation.binary-functoriality-set-quotients where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.binary-functoriality-set-quotients
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-homotopies
+open import foundation.binary-homotopies funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.exponents-set-quotients
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.functoriality-set-quotients
+open import foundation.dependent-products-propositions funext
+open import foundation.exponents-set-quotients funext
+open import foundation.function-extensionality funext
+
+open import foundation.functoriality-set-quotients funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.set-quotients
-open import foundation.sets
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.reflecting-maps-equivalence-relations funext
+open import foundation.set-quotients funext
+open import foundation.sets funext
 open import foundation.subtype-identity-principle
-open import foundation.surjective-maps
-open import foundation.universal-property-set-quotients
+open import foundation.surjective-maps funext
+open import foundation.universal-property-set-quotients funext
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.equivalence-relations
+open import foundation-core.equivalence-relations funext
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.propositions
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 open import foundation-core.torsorial-type-families
 ```
 

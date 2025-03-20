@@ -1,20 +1,25 @@
 # Subsets of semirings
 
 ```agda
-module ring-theory.subsets-semirings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.subsets-semirings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import foundation.propositional-extensionality
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.identity-types funext
+open import foundation.propositional-extensionality funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import ring-theory.semirings
+open import ring-theory.semirings funext
 ```
 
 </details>

@@ -1,7 +1,12 @@
 # Cantor space
 
 ```agda
-module set-theory.cantor-space where
+open import foundation.function-extensionality-axiom
+
+module
+  set-theory.cantor-space
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,24 +14,24 @@ module set-theory.cantor-space where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
-open import foundation.coproduct-types
+open import foundation.booleans funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.lawveres-fixed-point-theorem
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.sets
-open import foundation.tight-apartness-relations
+open import foundation.empty-types funext
+open import foundation.lawveres-fixed-point-theorem funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext
+open import foundation.sets funext
+open import foundation.tight-apartness-relations funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import set-theory.cantors-diagonal-argument
-open import set-theory.countable-sets
-open import set-theory.uncountable-sets
+open import set-theory.cantors-diagonal-argument funext
+open import set-theory.countable-sets funext
+open import set-theory.uncountable-sets funext
 
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.equality-standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

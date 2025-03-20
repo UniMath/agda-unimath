@@ -1,26 +1,31 @@
 # Double loop spaces
 
 ```agda
-module synthetic-homotopy-theory.double-loop-spaces where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.double-loop-spaces
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-identifications
+open import foundation.commuting-squares-of-identifications funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.path-algebra
+open import foundation.identity-types funext
+open import foundation.path-algebra funext
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
-open import structured-types.pointed-equivalences
+open import structured-types.pointed-equivalences funext
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.functoriality-loop-spaces
-open import synthetic-homotopy-theory.iterated-loop-spaces
-open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.functoriality-loop-spaces funext
+open import synthetic-homotopy-theory.iterated-loop-spaces funext
+open import synthetic-homotopy-theory.loop-spaces funext
 ```
 
 </details>

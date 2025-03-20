@@ -4,7 +4,12 @@ This file collects references to formalization of constructions and theorems
 from {{#cite Shu17}}.
 
 ```agda
-module literature.idempotents-in-intensional-type-theory where
+open import foundation.function-extensionality-axiom
+
+module
+  literature.idempotents-in-intensional-type-theory
+  (funext : function-extensionality)
+  where
 ```
 
 ## 1 Introduction
@@ -13,11 +18,11 @@ The introduction section gives an introduction to the problem at hand and
 motivates its study in univalent foundations.
 
 ```agda
-open import group-theory.groups using
+open import group-theory.groups funext using
   ( Group
   )
 
-open import higher-group-theory.higher-groups using
+open import higher-group-theory.higher-groups funext using
   ( ∞-Group
   )
 ```
@@ -27,11 +32,11 @@ open import higher-group-theory.higher-groups using
 The second section introduces basic notions from homotopy type theory.
 
 ```agda
-open import foundation.dependent-function-types -- "dependent products"
+open import foundation.dependent-function-types funext -- "dependent products"
 
 open import foundation.dependent-pair-types -- "dependent sums"
 
-open import foundation.identity-types using
+open import foundation.identity-types funext using
   ( _＝_ -- "identity type, its elements are paths"
   ; refl -- "the canonical elements of the identity types"
   ; concat -- "transitivity of paths"
@@ -67,7 +72,7 @@ open import foundation-core.sets using
   ; is-set -- all identity types are propositions
   )
 
-open import foundation.homotopies using
+open import foundation.homotopies funext using
   ( _~_ -- "homotopy"
   ; nat-htpy -- "naturality of homotopies"
   )
@@ -78,32 +83,33 @@ given in the article: an equivalence is a function equipped with a left inverse
 and a right inverse.
 
 ```agda
-open import foundation.equivalences using
+open import foundation.equivalences funext using
   ( is-equiv -- "type of equivalence proofs"
   ; equiv -- "type of equivalences"
   ; is-property-is-equiv -- "the type of equivalence proofs is a mere proposition"
   )
 
-open import foundation.function-extensionality using
+open import foundation.function-extensionality funext
+ using
   ( funext -- "the function extensionality axiom"
   )
 
-open import foundation.univalence using
+open import foundation.univalence funext using
   ( equiv-eq -- "the canonical map `(A ＝ B) → (A ≃ B)`"
   ; univalence -- "the univalence axiom"
   )
 
-open import foundation.propositional-truncations using
+open import foundation.propositional-truncations funext using
   ( ║_║₋₁ -- "propositional truncation"
   ; unit-trunc-Prop -- "the map `A → ║ A ║₋₁`"
   ; universal-property-trunc-Prop -- "the universal property of propositional truncation"
   )
 
-open import foundation.mere-equivalences using
+open import foundation.mere-equivalences funext using
   ( mere-equiv -- "merely equivalent"
   )
 
-open import foundation.univalence-implies-function-extensionality using
+open import foundation.univalence-implies-function-extensionality funext using
   ( funext-univalence -- "univalence implies function extensionality"
   )
 
@@ -127,11 +133,11 @@ We reserve the terminology "a coherent idempotent" for what in the article is
 referred to as "a (fully coherent) idempotent".
 
 ```agda
-open import foundation.endomorphisms using
+open import foundation.endomorphisms funext using
   ( endo -- "endofunction"
   )
 
-open import foundation.idempotent-maps using
+open import foundation.idempotent-maps funext using
   ( is-idempotent -- "idempotency witness"
   ; idempotent-map -- "pre-idempotent (map)"
   )
@@ -140,29 +146,27 @@ open import foundation.idempotent-maps using
 **Definition 3.2.** Retracts and splittings.
 
 ```agda
-open import foundation.retracts-of-types using
+open import foundation.retracts-of-types funext using
   ( retracts -- "retracts of a type"
   ; retract -- "type of retracts between two types"
   )
 
-open import foundation.split-idempotent-maps using
+open import foundation.split-idempotent-maps funext using
   ( is-split-idempotent -- "splitting of an endofunction"
   )
 ```
 
 **Lemma 3.3.** If $f$ has a splitting, then it is pre-idempotent.
 
-```agda
-open import foundation.split-idempotent-maps using
+`open import foundation.split-idempotent-maps funext using
+ using
   ( is-idempotent-is-split-idempotent
   )
 ```
 
 **Lemma 3.4.** The type associated to a splitting of a map is unique up to
-equivalence.
-
-```agda
-open import foundation.split-idempotent-maps using
+equivaleopen import foundation.split-idempotent-maps funext using
+nt-maps using
   ( essentially-unique-splitting-type-is-split-idempotent
   )
 ```
@@ -173,25 +177,20 @@ The library's preferred terminology for "a quasi-idempotent" is "a quasicoherent
 idempotent".
 
 ```agda
-open import foundation.quasicoherently-idempotent-maps using
+open import foundation.quasicoherently-idempotent-maps funext using
   ( is-quasicoherently-idempotent -- "the type of witnesses of quasi-idempotence"
   ; quasicoherently-idempotent-map -- "the type of quasi-idempotents"
   )
 ```
 
-**Lemma 3.6.** If $f$ has a splitting, then it is a quasi-idempotent.
-
-```agda
-open import foundation.split-idempotent-maps using
+**Lemma 3.6.** If $f$ has a splitting, then it is a quasi-open import foundation.split-idempotent-maps funext using
+dempotent-maps using
   ( is-quasicoherently-idempotent-is-split-idempotent
   )
 ```
 
-**Theorem 3.7.** If $X$ is a set, then any pre-idempotent on $X$ has a
-splitting.
-
-```agda
-open import foundation.split-idempotent-maps using
+**Theorem 3.7.** If $X$ is a set, then any pre-idempotent on $Xopen import foundation.split-idempotent-maps funext using
+split-idempotent-maps using
   ( is-split-idempotent-is-idempotent-is-set
   )
 ```
@@ -204,12 +203,10 @@ open import foundation.split-idempotent-maps using
 splitting.
 
 ```agda
-open import foundation.weakly-constant-maps using
+open import foundation.weakly-constant-maps funext using
   ( is-weakly-constant -- "the type of witnesses that a map is weakly constant"
-  ; weakly-constant-map -- "the type of weakly constant maps"
-  )
-
-open import foundation.split-idempotent-maps using
+  ; weakly-constant-map -- "the open import foundation.split-idempotent-maps funext using
+dation.split-idempotent-maps using
   ( is-split-idempotent-is-weakly-constant-is-idempotent
   )
 ```
@@ -219,12 +216,12 @@ is an embedding if and only if it is pre-idempotent and the type $f(x) = x$
 admits a weakly constant endofunction for all $x$.
 
 ```agda
-open import foundation.sections using
+open import foundation.sections funext using
   ( is-section -- "the type of witnesses that a map is a section to a map"
   ; section -- "the type of sections of a map"
   )
 
-open import foundation.embeddings using
+open import foundation.embeddings funext using
   ( is-emb -- "the type of witnesses that a map is an embedding"
   ; _↪_ -- "the type of embeddings between two types"
   )
@@ -254,7 +251,7 @@ a coherent system of idempotence data.
 **Definition 4.2.** The Cantor space.
 
 ```agda
-open import set-theory.cantor-space using
+open import set-theory.cantor-space funext using
   ( cantor-space -- "C"
   )
 ```
@@ -268,7 +265,7 @@ open import set-theory.cantor-space using
 **Definition 4.5.** $B\operatorname{Aut}({-})$.
 
 ```agda
-open import foundation.connected-components-universes using
+open import foundation.connected-components-universes funext using
   ( component-UU -- "BAut(-)"
   )
 ```
@@ -300,11 +297,11 @@ quasi-idempotent map splits.
 Sequential colimits of types.
 
 ```agda
-open import synthetic-homotopy-theory.sequential-diagrams using
+open import synthetic-homotopy-theory.sequential-diagrams funext using
   ( sequential-diagram
   )
 
-open import synthetic-homotopy-theory.sequential-colimits using
+open import synthetic-homotopy-theory.sequential-colimits funext using
   ( standard-sequential-colimit
   )
 ```
@@ -312,11 +309,11 @@ open import synthetic-homotopy-theory.sequential-colimits using
 Sequential limits of types.
 
 ```agda
-open import foundation.inverse-sequential-diagrams using
+open import foundation.inverse-sequential-diagrams funext using
   ( inverse-sequential-diagram
   )
 
-open import foundation.sequential-limits using
+open import foundation.sequential-limits funext using
   ( standard-sequential-limit
   )
 ```
@@ -328,25 +325,21 @@ The formalization generalizes the result of the paper by considering general
 inverse sequential diagrams rather than those that are constantly $f$. Also note
 that compared to the paper, the coherences in the formalization are transposed.
 
-```agda
-open import foundation.sequential-limits using
+`open import foundation.sequential-limits funext using
+ using
   ( Eq-standard-sequential-limit -- observational equality on standard sequential limits
   ; extensionality-standard-sequential-limit
   )
 ```
 
-**Theorem 5.3.** Assuming function extensionality, any quasi-idempotent splits.
-
-```agda
-open import foundation.split-idempotent-maps using
+**Theorem 5.3.** Assuming function extensionaliopen import foundation.split-idempotent-maps funext using
+rt foundation.split-idempotent-maps using
   ( is-split-idempotent-is-quasicoherently-idempotent
   )
 ```
 
-**Remark 5.4.** Components of the construction.
-
-```agda
-open import foundation.split-idempotent-maps using
+**Remarkopen import foundation.split-idempotent-maps funext using
+en import foundation.split-idempotent-maps using
   ( inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent'
   ; splitting-type-is-quasicoherently-idempotent'
   ; inclusion-splitting-type-is-quasicoherently-idempotent'
@@ -366,8 +359,8 @@ quasi-idempotence.
 
 **Lemma 6.3.** Characterization of the identity types of retract formation.
 
-```agda
-open import foundation.retracts-of-types using
+`open import foundation.retracts-of-types funext using
+ using
   ( equiv-retracts -- observational equality on retracts
   ; extensionality-retracts
   )
@@ -398,7 +391,7 @@ definition of coherently idempotent maps is given.
 **Definition 9.1.** (Fully coherent) idempotents.
 
 ```agda
-open import foundation.coherently-idempotent-maps using
+open import foundation.coherently-idempotent-maps funext using
   ( is-coherently-idempotent -- "type of (fully coherent) idempotence witnesses"
   )
 ```

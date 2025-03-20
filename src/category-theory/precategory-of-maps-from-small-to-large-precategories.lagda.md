@@ -1,19 +1,24 @@
 # The precategory of maps and natural transformations from a small to a large precategory
 
 ```agda
-module category-theory.precategory-of-maps-from-small-to-large-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.precategory-of-maps-from-small-to-large-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories
-open import category-theory.maps-from-small-to-large-precategories
-open import category-theory.natural-transformations-maps-from-small-to-large-precategories
-open import category-theory.precategories
+open import category-theory.large-precategories funext
+open import category-theory.maps-from-small-to-large-precategories funext
+open import category-theory.natural-transformations-maps-from-small-to-large-precategories funext
+open import category-theory.precategories funext
 
-open import foundation.identity-types
-open import foundation.strictly-involutive-identity-types
+open import foundation.identity-types funext
+open import foundation.strictly-involutive-identity-types funext
 open import foundation.universe-levels
 ```
 

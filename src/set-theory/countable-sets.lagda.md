@@ -1,41 +1,46 @@
 # Countable sets
 
 ```agda
-module set-theory.countable-sets where
+open import foundation.function-extensionality-axiom
+
+module
+  set-theory.countable-sets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-integers
-open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.equality-integers funext
+open import elementary-number-theory.equality-natural-numbers funext
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.type-arithmetic-natural-numbers
+open import elementary-number-theory.type-arithmetic-natural-numbers funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
-open import foundation.decidable-types
+open import foundation.coproduct-types funext
+open import foundation.decidable-propositions funext
+open import foundation.decidable-subtypes funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equality-coproduct-types
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-coproduct-types
-open import foundation.maybe
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.raising-universe-levels
-open import foundation.retracts-of-types
-open import foundation.sets
+open import foundation.empty-types funext
+open import foundation.equality-coproduct-types funext
+open import foundation.equivalences funext
+open import foundation.existential-quantification funext
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.maybe funext
+open import foundation.negated-equality funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.raising-universe-levels funext
+open import foundation.retracts-of-types funext
+open import foundation.sets funext
 open import foundation.shifting-sequences
-open import foundation.surjective-maps
+open import foundation.surjective-maps funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -43,7 +48,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

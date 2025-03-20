@@ -3,7 +3,12 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module finite-group-theory.cartier-delooping-sign-homomorphism where
+open import foundation.function-extensionality-axiom
+
+module
+  finite-group-theory.cartier-delooping-sign-homomorphism
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,36 +17,36 @@ module finite-group-theory.cartier-delooping-sign-homomorphism where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.delooping-sign-homomorphism
-open import finite-group-theory.finite-type-groups
-open import finite-group-theory.sign-homomorphism
-open import finite-group-theory.transpositions
+open import finite-group-theory.delooping-sign-homomorphism funext
+open import finite-group-theory.finite-type-groups funext
+open import finite-group-theory.sign-homomorphism funext
+open import finite-group-theory.transpositions funext
 
-open import foundation.action-on-equivalences-type-families-over-subuniverses
+open import foundation.action-on-equivalences-type-families-over-subuniverses funext
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.mere-equivalences
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.raising-universe-levels
+open import foundation.equivalence-relations funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.mere-equivalences funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext
+open import foundation.raising-universe-levels funext
 open import foundation.transport-along-identifications
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-concrete-groups
-open import group-theory.homomorphisms-groups
-open import group-theory.isomorphisms-groups
-open import group-theory.loop-groups-sets
-open import group-theory.symmetric-groups
+open import group-theory.homomorphisms-concrete-groups funext
+open import group-theory.homomorphisms-groups funext
+open import group-theory.isomorphisms-groups funext
+open import group-theory.loop-groups-sets funext
+open import group-theory.symmetric-groups funext
 
-open import univalent-combinatorics.2-element-decidable-subtypes
-open import univalent-combinatorics.orientations-complete-undirected-graph
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.2-element-decidable-subtypes funext
+open import univalent-combinatorics.orientations-complete-undirected-graph funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

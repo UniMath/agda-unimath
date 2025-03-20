@@ -1,23 +1,28 @@
 # Distributive lattices
 
 ```agda
-module order-theory.distributive-lattices where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.distributive-lattices
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import order-theory.join-semilattices
-open import order-theory.lattices
-open import order-theory.meet-semilattices
-open import order-theory.posets
+open import order-theory.join-semilattices funext
+open import order-theory.lattices funext
+open import order-theory.meet-semilattices funext
+open import order-theory.posets funext
 ```
 
 </details>

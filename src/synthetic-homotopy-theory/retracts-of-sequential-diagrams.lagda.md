@@ -1,7 +1,12 @@
 # Retracts of sequential diagrams
 
 ```agda
-module synthetic-homotopy-theory.retracts-of-sequential-diagrams where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.retracts-of-sequential-diagrams
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,20 +14,20 @@ module synthetic-homotopy-theory.retracts-of-sequential-diagrams where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.commuting-squares-of-maps
+open import foundation.commuting-squares-of-maps funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.retractions
-open import foundation.retracts-of-types
+open import foundation.equality-dependent-function-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.retractions funext
+open import foundation.retracts-of-types funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.morphisms-sequential-diagrams
-open import synthetic-homotopy-theory.sequential-diagrams
+open import synthetic-homotopy-theory.morphisms-sequential-diagrams funext
+open import synthetic-homotopy-theory.sequential-diagrams funext
 ```
 
 </details>

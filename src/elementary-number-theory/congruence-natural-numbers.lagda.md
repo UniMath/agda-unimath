@@ -1,28 +1,33 @@
 # The congruence relations on the natural numbers
 
 ```agda
-module elementary-number-theory.congruence-natural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.congruence-natural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.distance-natural-numbers funext
+open import elementary-number-theory.divisibility-natural-numbers funext
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
-open import foundation.coproduct-types
+open import foundation.binary-relations funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

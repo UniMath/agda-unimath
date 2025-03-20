@@ -1,23 +1,28 @@
 # The dependent binomial theorem for types (distributivity of dependent function types over coproduct types)
 
 ```agda
-module foundation.dependent-binomial-theorem where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.dependent-binomial-theorem
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
-open import foundation.coproduct-decompositions
+open import foundation.contractible-types funext
+open import foundation.coproduct-decompositions funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.raising-universe-levels
+open import foundation.equality-dependent-pair-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-function-types funext
+open import foundation.raising-universe-levels funext
 open import foundation.transport-along-identifications
-open import foundation.universal-property-coproduct-types
-open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-coproduct-types funext
+open import foundation.universal-property-dependent-pair-types funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -29,8 +34,8 @@ open import foundation-core.homotopies
 open import foundation-core.type-theoretic-principle-of-choice
 open import foundation-core.univalence
 
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.equality-standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

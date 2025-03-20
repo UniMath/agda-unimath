@@ -1,7 +1,12 @@
 # Higher directed graphs
 
 ```agda
-module graph-theory.higher-directed-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.higher-directed-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,15 +14,15 @@ module graph-theory.higher-directed-graphs where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-relations
-open import foundation.cartesian-product-types
+open import foundation.binary-relations funext
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs
+open import graph-theory.directed-graphs funext
 ```
 
 </details>

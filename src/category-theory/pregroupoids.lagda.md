@@ -1,22 +1,27 @@
 # Pregroupoids
 
 ```agda
-module category-theory.pregroupoids where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.pregroupoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
+open import category-theory.isomorphisms-in-precategories funext
+open import category-theory.precategories funext
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.strictly-involutive-identity-types funext
 open import foundation.telescopes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

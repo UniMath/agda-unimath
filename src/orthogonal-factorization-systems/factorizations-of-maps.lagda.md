@@ -1,24 +1,29 @@
 # Factorizations of maps
 
 ```agda
-module orthogonal-factorization-systems.factorizations-of-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.factorizations-of-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
+open import foundation.homotopies funext
 open import foundation.homotopy-algebra
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.retracts-of-types
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.retracts-of-types funext
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
-open import foundation.univalence
+open import foundation.torsorial-type-families funext
+open import foundation.univalence funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 ```

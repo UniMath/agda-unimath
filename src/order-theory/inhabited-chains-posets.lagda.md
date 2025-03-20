@@ -1,28 +1,33 @@
 # Inhabited chains in posets
 
 ```agda
-module order-theory.inhabited-chains-posets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.inhabited-chains-posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import domain-theory.directed-families-posets
+open import domain-theory.directed-families-posets funext
 
-open import foundation.conjunction
+open import foundation.conjunction funext
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.existential-quantification
-open import foundation.inhabited-subtypes
-open import foundation.inhabited-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.disjunction funext
+open import foundation.existential-quantification funext
+open import foundation.inhabited-subtypes funext
+open import foundation.inhabited-types funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import order-theory.chains-posets
-open import order-theory.posets
-open import order-theory.subposets
-open import order-theory.total-preorders
+open import order-theory.chains-posets funext
+open import order-theory.posets funext
+open import order-theory.subposets funext
+open import order-theory.total-preorders funext
 ```
 
 </details>

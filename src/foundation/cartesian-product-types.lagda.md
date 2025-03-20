@@ -1,7 +1,12 @@
 # Cartesian product types
 
 ```agda
-module foundation.cartesian-product-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.cartesian-product-types
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.cartesian-product-types public
 ```
@@ -10,7 +15,7 @@ open import foundation-core.cartesian-product-types public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.subuniverses
+open import foundation.subuniverses funext
 open import foundation.universe-levels
 
 open import foundation-core.identity-types

@@ -1,31 +1,36 @@
 # Pullbacks of subgroups
 
 ```agda
-module group-theory.pullbacks-subgroups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.pullbacks-subgroups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.powersets
-open import foundation.pullbacks-subtypes
+open import foundation.identity-types funext
+open import foundation.powersets funext
+open import foundation.pullbacks-subtypes funext
 open import foundation.universe-levels
 
-open import group-theory.conjugation
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.normal-subgroups
-open import group-theory.pullbacks-subsemigroups
-open import group-theory.subgroups
-open import group-theory.subsemigroups
-open import group-theory.subsets-groups
+open import group-theory.conjugation funext
+open import group-theory.groups funext
+open import group-theory.homomorphisms-groups funext
+open import group-theory.normal-subgroups funext
+open import group-theory.pullbacks-subsemigroups funext
+open import group-theory.subgroups funext
+open import group-theory.subsemigroups funext
+open import group-theory.subsets-groups funext
 
-open import order-theory.commuting-squares-of-order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.similarity-of-order-preserving-maps-large-posets
+open import order-theory.commuting-squares-of-order-preserving-maps-large-posets funext
+open import order-theory.order-preserving-maps-large-posets funext
+open import order-theory.order-preserving-maps-large-preorders funext
+open import order-theory.similarity-of-order-preserving-maps-large-posets funext
 ```
 
 </details>

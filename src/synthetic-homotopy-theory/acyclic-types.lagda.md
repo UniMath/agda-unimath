@@ -1,21 +1,26 @@
 # Acyclic types
 
 ```agda
-module synthetic-homotopy-theory.acyclic-types where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.acyclic-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.equivalences
-open import foundation.propositions
-open import foundation.retracts-of-types
+open import foundation.contractible-types funext
+open import foundation.equivalences funext
+open import foundation.propositions funext
+open import foundation.retracts-of-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.functoriality-suspensions
-open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.functoriality-suspensions funext
+open import synthetic-homotopy-theory.suspensions-of-types funext
 ```
 
 </details>

@@ -1,25 +1,30 @@
 # Functors between set-magmoids
 
 ```agda
-module category-theory.functors-set-magmoids where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.functors-set-magmoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.maps-set-magmoids
-open import category-theory.set-magmoids
+open import category-theory.maps-set-magmoids funext
+open import category-theory.set-magmoids funext
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.telescopes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

@@ -1,23 +1,28 @@
 # Algebras
 
 ```agda
-module universal-algebra.algebras-of-theories where
+open import foundation.function-extensionality-axiom
+
+module
+  universal-algebra.algebras-of-theories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import universal-algebra.abstract-equations-over-signatures
-open import universal-algebra.algebraic-theories
-open import universal-algebra.models-of-signatures
-open import universal-algebra.signatures
-open import universal-algebra.terms-over-signatures
+open import universal-algebra.abstract-equations-over-signatures funext
+open import universal-algebra.algebraic-theories funext
+open import universal-algebra.models-of-signatures funext
+open import universal-algebra.signatures funext
+open import universal-algebra.terms-over-signatures funext
 ```
 
 </details>

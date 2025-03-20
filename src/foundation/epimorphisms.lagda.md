@@ -1,19 +1,24 @@
 # Epimorphisms
 
 ```agda
-module foundation.epimorphisms where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.epimorphisms
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.precomposition-functions
-open import foundation.sections
+open import foundation.embeddings funext
+open import foundation.precomposition-functions funext
+open import foundation.sections funext
 open import foundation.universe-levels
 
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -21,10 +26,10 @@ open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.codiagonals-of-maps
-open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.universal-property-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.codiagonals-of-maps funext
+open import synthetic-homotopy-theory.pushouts funext
+open import synthetic-homotopy-theory.universal-property-pushouts funext
 ```
 
 </details>

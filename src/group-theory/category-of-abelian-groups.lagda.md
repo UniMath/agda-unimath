@@ -1,23 +1,28 @@
 # The category of abelian groups
 
 ```agda
-module group-theory.category-of-abelian-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.category-of-abelian-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.full-large-subcategories
-open import category-theory.functors-large-categories
-open import category-theory.large-categories
-open import category-theory.large-precategories
-open import category-theory.precategories
+open import category-theory.categories funext
+open import category-theory.full-large-subcategories funext
+open import category-theory.functors-large-categories funext
+open import category-theory.large-categories funext
+open import category-theory.large-precategories funext
+open import category-theory.precategories funext
 
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.category-of-groups
+open import group-theory.abelian-groups funext
+open import group-theory.category-of-groups funext
 ```
 
 </details>

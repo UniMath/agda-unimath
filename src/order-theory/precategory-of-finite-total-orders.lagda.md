@@ -1,20 +1,25 @@
 # The precategory of finite total orders
 
 ```agda
-module order-theory.precategory-of-finite-total-orders where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.precategory-of-finite-total-orders
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.full-large-subprecategories
-open import category-theory.large-precategories
-open import category-theory.precategories
+open import category-theory.full-large-subprecategories funext
+open import category-theory.large-precategories funext
+open import category-theory.precategories funext
 
 open import foundation.universe-levels
 
-open import order-theory.finite-total-orders
-open import order-theory.precategory-of-posets
+open import order-theory.finite-total-orders funext
+open import order-theory.precategory-of-posets funext
 ```
 
 </details>

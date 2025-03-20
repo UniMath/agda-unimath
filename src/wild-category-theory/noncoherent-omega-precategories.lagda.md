@@ -3,27 +3,32 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module wild-category-theory.noncoherent-omega-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  wild-category-theory.noncoherent-omega-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories
+open import category-theory.precategories funext
 
 open import foundation.action-on-identifications-binary-functions
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.sets funext
+open import foundation.strictly-involutive-identity-types funext
 open import foundation.universe-levels
 
 open import globular-types.globular-types
-open import globular-types.reflexive-globular-types
-open import globular-types.transitive-globular-types
+open import globular-types.reflexive-globular-types funext
+open import globular-types.transitive-globular-types funext
 ```
 
 </details>

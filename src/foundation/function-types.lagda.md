@@ -1,7 +1,12 @@
 # Function types
 
 ```agda
-module foundation.function-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.function-types
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.function-types public
 ```
@@ -13,8 +18,9 @@ open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-pentagons-of-identifications
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopy-induction
+open import foundation.function-extensionality funext
+
+open import foundation.homotopy-induction funext
 open import foundation.universe-levels
 
 open import foundation-core.dependent-identifications

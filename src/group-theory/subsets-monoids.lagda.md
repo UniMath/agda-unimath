@@ -1,19 +1,24 @@
 # Subsets of monoids
 
 ```agda
-module group-theory.subsets-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.subsets-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import group-theory.monoids
+open import group-theory.monoids funext
 ```
 
 </details>

@@ -1,7 +1,12 @@
 # De Morgan's law for finite families of propositions
 
 ```agda
-module univalent-combinatorics.de-morgans-law where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.de-morgans-law
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,24 +14,24 @@ module univalent-combinatorics.de-morgans-law where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
-open import foundation.decidable-dependent-pair-types
-open import foundation.decidable-types
+open import foundation.coproduct-types funext
+open import foundation.decidable-dependent-pair-types funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.negation
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.existential-quantification funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.negation funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import logic.de-morgan-propositions
-open import logic.de-morgan-types
+open import logic.de-morgan-propositions funext
+open import logic.de-morgan-types funext
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

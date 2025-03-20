@@ -1,7 +1,12 @@
 # Semisimple commutative finite rings
 
 ```agda
-module finite-algebra.semisimple-commutative-finite-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  finite-algebra.semisimple-commutative-finite-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,20 +14,20 @@ module finite-algebra.semisimple-commutative-finite-rings where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import finite-algebra.commutative-finite-rings
-open import finite-algebra.dependent-products-commutative-finite-rings
-open import finite-algebra.finite-fields
-open import finite-algebra.homomorphisms-commutative-finite-rings
+open import finite-algebra.commutative-finite-rings funext
+open import finite-algebra.dependent-products-commutative-finite-rings funext
+open import finite-algebra.finite-fields funext
+open import finite-algebra.homomorphisms-commutative-finite-rings funext
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.propositional-truncations
+open import foundation.existential-quantification funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.propositional-truncations funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

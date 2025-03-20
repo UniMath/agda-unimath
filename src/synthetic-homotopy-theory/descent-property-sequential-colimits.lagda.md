@@ -1,7 +1,12 @@
 # Descent property of sequential colimits
 
 ```agda
-module synthetic-homotopy-theory.descent-property-sequential-colimits where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.descent-property-sequential-colimits
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,21 +14,21 @@ module synthetic-homotopy-theory.descent-property-sequential-colimits where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-homotopies
-open import foundation.commuting-triangles-of-maps
+open import foundation.binary-homotopies funext
+open import foundation.commuting-triangles-of-maps funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.univalence
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.univalence funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.descent-data-sequential-colimits
-open import synthetic-homotopy-theory.sequential-diagrams
-open import synthetic-homotopy-theory.universal-property-sequential-colimits
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext
+open import synthetic-homotopy-theory.descent-data-sequential-colimits funext
+open import synthetic-homotopy-theory.sequential-diagrams funext
+open import synthetic-homotopy-theory.universal-property-sequential-colimits funext
 ```
 
 </details>

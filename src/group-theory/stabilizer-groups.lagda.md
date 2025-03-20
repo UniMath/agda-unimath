@@ -1,18 +1,23 @@
 # Stabilizer groups
 
 ```agda
-module group-theory.stabilizer-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.stabilizer-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import group-theory.group-actions
-open import group-theory.groups
+open import group-theory.group-actions funext
+open import group-theory.groups funext
 ```
 
 </details>

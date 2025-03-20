@@ -1,15 +1,20 @@
 # Equivalences between categories
 
 ```agda
-module category-theory.equivalences-of-categories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.equivalences-of-categories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.equivalences-of-precategories
-open import category-theory.functors-categories
+open import category-theory.categories funext
+open import category-theory.equivalences-of-precategories funext
+open import category-theory.functors-categories funext
 
 open import foundation.universe-levels
 ```

@@ -1,32 +1,37 @@
 # Iterating functions
 
 ```agda
-module foundation.iterating-functions where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.iterating-functions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.exponentiation-natural-numbers
+open import elementary-number-theory.exponentiation-natural-numbers funext
 open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.multiplicative-monoid-of-natural-numbers
+open import elementary-number-theory.multiplicative-monoid-of-natural-numbers funext
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-higher-identifications-functions
+open import foundation.action-on-higher-identifications-functions funext
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
+open import foundation.function-extensionality funext
+
 open import foundation.universe-levels
 
-open import foundation-core.commuting-squares-of-maps
-open import foundation-core.endomorphisms
+open import foundation-core.commuting-squares-of-maps funext
+open import foundation-core.endomorphisms funext
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.sets
 
-open import group-theory.monoid-actions
+open import group-theory.monoid-actions funext
 ```
 
 </details>

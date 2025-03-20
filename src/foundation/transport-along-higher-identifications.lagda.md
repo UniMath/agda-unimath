@@ -1,22 +1,27 @@
 # Transport along higher identifications
 
 ```agda
-module foundation.transport-along-higher-identifications where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.transport-along-higher-identifications
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies
-open import foundation.commuting-squares-of-identifications
-open import foundation.function-types
-open import foundation.homotopies
+open import foundation.commuting-squares-of-homotopies funext
+open import foundation.commuting-squares-of-identifications funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
 open import foundation.homotopy-algebra
-open import foundation.path-algebra
+open import foundation.path-algebra funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
 open import foundation-core.identity-types
 open import foundation-core.transport-along-identifications

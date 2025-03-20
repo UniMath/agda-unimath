@@ -1,25 +1,30 @@
 # Directed complete posets
 
 ```agda
-module domain-theory.directed-complete-posets where
+open import foundation.function-extensionality-axiom
+
+module
+  domain-theory.directed-complete-posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import domain-theory.directed-families-posets
+open import domain-theory.directed-families-posets funext
 
-open import foundation.binary-relations
+open import foundation.binary-relations funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import order-theory.least-upper-bounds-posets
-open import order-theory.posets
+open import order-theory.least-upper-bounds-posets funext
+open import order-theory.posets funext
 ```
 
 </details>

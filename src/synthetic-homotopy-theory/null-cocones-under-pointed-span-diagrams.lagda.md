@@ -1,28 +1,33 @@
 # Null cocones under pointed span diagrams
 
 ```agda
-module synthetic-homotopy-theory.null-cocones-under-pointed-span-diagrams where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.null-cocones-under-pointed-span-diagrams
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
+open import foundation.commuting-squares-of-maps funext
 open import foundation.dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
-open import structured-types.commuting-squares-of-pointed-maps
-open import structured-types.constant-pointed-maps
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
-open import structured-types.pointed-span-diagrams
+open import structured-types.commuting-squares-of-pointed-maps funext
+open import structured-types.constant-pointed-maps funext
+open import structured-types.pointed-homotopies funext
+open import structured-types.pointed-maps funext
+open import structured-types.pointed-span-diagrams funext
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams
+open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams funext
 ```
 
 </details>

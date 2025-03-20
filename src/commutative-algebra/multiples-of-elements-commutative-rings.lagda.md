@@ -1,22 +1,27 @@
 # Multiples of elements in commutative rings
 
 ```agda
-module commutative-algebra.multiples-of-elements-commutative-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  commutative-algebra.multiples-of-elements-commutative-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-rings funext
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import ring-theory.multiples-of-elements-rings
+open import ring-theory.multiples-of-elements-rings funext
 ```
 
 </details>

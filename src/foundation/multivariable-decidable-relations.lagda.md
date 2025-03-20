@@ -1,7 +1,12 @@
 # Multivariable decidable relations
 
 ```agda
-module foundation.multivariable-decidable-relations where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.multivariable-decidable-relations
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,12 +14,12 @@ module foundation.multivariable-decidable-relations where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-subtypes
-open import foundation.multivariable-correspondences
-open import foundation.multivariable-relations
+open import foundation.decidable-subtypes funext
+open import foundation.multivariable-correspondences funext
+open import foundation.multivariable-relations funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

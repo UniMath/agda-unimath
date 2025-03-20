@@ -1,20 +1,25 @@
 # Inverse semigroups
 
 ```agda
-module group-theory.inverse-semigroups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.inverse-semigroups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
+open import foundation.cartesian-product-types funext
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import group-theory.semigroups
+open import group-theory.semigroups funext
 ```
 
 </details>

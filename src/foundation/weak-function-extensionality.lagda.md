@@ -1,17 +1,21 @@
 # Weak function extensionality
 
 ```agda
-module foundation.weak-function-extensionality where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.weak-function-extensionality
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.decidable-equality
-open import foundation.decidable-types
+open import foundation.decidable-equality funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality-axiom
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 

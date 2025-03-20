@@ -1,21 +1,26 @@
 # Subpreorders
 
 ```agda
-module order-theory.subpreorders where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.subpreorders
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import order-theory.preorders
+open import order-theory.preorders funext
 ```
 
 </details>

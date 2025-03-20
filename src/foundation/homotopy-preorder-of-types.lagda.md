@@ -10,17 +10,17 @@ module
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.identity-types
-open import foundation.mere-functions
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
+open import foundation.empty-types funext
+open import foundation.identity-types funext
+open import foundation.mere-functions funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import order-theory.large-preorders
-open import order-theory.posets
-open import order-theory.preorders
+open import order-theory.large-preorders funext
+open import order-theory.posets funext
+open import order-theory.preorders funext
 ```
 
 </details>

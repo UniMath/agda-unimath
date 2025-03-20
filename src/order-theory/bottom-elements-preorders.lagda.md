@@ -1,17 +1,22 @@
 # Bottom elements in preorders
 
 ```agda
-module order-theory.bottom-elements-preorders where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.bottom-elements-preorders
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.propositions
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import order-theory.preorders
+open import order-theory.preorders funext
 ```
 
 </details>

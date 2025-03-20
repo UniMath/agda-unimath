@@ -1,14 +1,19 @@
 # Operations on spans
 
 ```agda
-module foundation-core.operations-spans where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation-core.operations-spans
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.morphisms-arrows
+open import foundation.morphisms-arrows funext
 open import foundation.spans
 open import foundation.universe-levels
 

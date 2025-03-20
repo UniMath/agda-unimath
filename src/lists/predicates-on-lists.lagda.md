@@ -1,14 +1,19 @@
 # Predicates on lists
 
 ```agda
-module lists.predicates-on-lists where
+open import foundation.function-extensionality-axiom
+
+module
+  lists.predicates-on-lists
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions
-open import foundation.raising-universe-levels-unit-type
+open import foundation.propositions funext
+open import foundation.raising-universe-levels-unit-type funext
 open import foundation.unit-type
 open import foundation.universe-levels
 

@@ -1,33 +1,38 @@
 # Complements of decidable subtypes
 
 ```agda
-module logic.complements-decidable-subtypes where
+open import foundation.function-extensionality-axiom
+
+module
+  logic.complements-decidable-subtypes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.complements-subtypes
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
-open import foundation.decidable-types
+open import foundation.complements-subtypes funext
+open import foundation.coproduct-types funext
+open import foundation.decidable-propositions funext
+open import foundation.decidable-subtypes funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.double-negation-stable-propositions
+open import foundation.double-negation-stable-propositions funext
 open import foundation.evaluation-functions
-open import foundation.full-subtypes
-open import foundation.involutions
-open import foundation.negation
-open import foundation.postcomposition-functions
-open import foundation.powersets
-open import foundation.propositional-truncations
-open import foundation.unions-subtypes
+open import foundation.full-subtypes funext
+open import foundation.involutions funext
+open import foundation.negation funext
+open import foundation.postcomposition-functions funext
+open import foundation.powersets funext
+open import foundation.propositional-truncations funext
+open import foundation.unions-subtypes funext
 open import foundation.universe-levels
 
 open import foundation-core.function-types
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 
-open import logic.double-negation-stable-subtypes
+open import logic.double-negation-stable-subtypes funext
 ```
 
 </details>

@@ -1,7 +1,12 @@
 # Kuratowski finite sets
 
 ```agda
-module univalent-combinatorics.kuratowski-finite-sets where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.kuratowski-finite-sets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,19 +14,19 @@ module univalent-combinatorics.kuratowski-finite-sets where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-equality
+open import foundation.decidable-equality funext
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
-open import foundation.surjective-maps
+open import foundation.existential-quantification funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.surjective-maps funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.image-of-maps
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.equality-finite-types funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.image-of-maps funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

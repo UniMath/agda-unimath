@@ -3,16 +3,21 @@
 ```agda
 {-# OPTIONS --guardedness --allow-unsolved-metas #-}
 
-module type-theories.simple-type-theories where
+open import foundation.function-extensionality-axiom
+
+module
+  type-theories.simple-type-theories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
@@ -539,8 +544,8 @@ We specialize the above definitions to nonhomogenous homotopies.
 module dependent-simple
   where
 
-  open import type-theories.dependent-type-theories
-  open import type-theories.fibered-dependent-type-theories
+  open import type-theories.dependent-type-theories funext
+  open import type-theories.fibered-dependent-type-theories funext
 
   system :
     {l1 l2 : Level} {T : UU l1} → simple.system l2 T → dependent.system l1 l2

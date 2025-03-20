@@ -1,17 +1,22 @@
 # Locally small modal-operators
 
 ```agda
-module orthogonal-factorization-systems.locally-small-modal-operators where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.locally-small-modal-operators
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.locally-small-types
+open import foundation.locally-small-types funext
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.modal-operators funext
 ```
 
 </details>

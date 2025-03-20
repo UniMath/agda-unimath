@@ -1,24 +1,29 @@
 # Order preserving maps between posets
 
 ```agda
-module order-theory.order-preserving-maps-posets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.order-preserving-maps-posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.strictly-involutive-identity-types funext
+open import foundation.subtypes funext
+open import foundation.torsorial-type-families funext
 open import foundation.universe-levels
 
-open import order-theory.order-preserving-maps-preorders
-open import order-theory.posets
+open import order-theory.order-preserving-maps-preorders funext
+open import order-theory.posets funext
 ```
 
 </details>

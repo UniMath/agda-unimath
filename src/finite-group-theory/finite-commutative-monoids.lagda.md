@@ -1,27 +1,32 @@
 # Finite Commutative monoids
 
 ```agda
-module finite-group-theory.finite-commutative-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  finite-group-theory.finite-commutative-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-group-theory.finite-monoids
+open import finite-group-theory.finite-monoids funext
 
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.sets funext
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.commutative-monoids funext
+open import group-theory.monoids funext
+open import group-theory.semigroups funext
 
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.dependent-function-types funext
+open import univalent-combinatorics.dependent-pair-types funext
+open import univalent-combinatorics.equality-finite-types funext
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

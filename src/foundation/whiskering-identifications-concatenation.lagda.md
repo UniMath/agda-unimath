@@ -1,7 +1,12 @@
 # Whiskering identifications with respect to concatenation
 
 ```agda
-module foundation.whiskering-identifications-concatenation where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.whiskering-identifications-concatenation
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.whiskering-identifications-concatenation public
 ```
@@ -10,7 +15,7 @@ open import foundation-core.whiskering-identifications-concatenation public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

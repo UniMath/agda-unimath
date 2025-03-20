@@ -1,7 +1,12 @@
 # Monoid actions
 
 ```agda
-module group-theory.monoid-actions where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.monoid-actions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,14 +14,13 @@ module group-theory.monoid-actions where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.endomorphisms
-open import foundation.function-extensionality-axiom
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.endomorphisms funext
+open import foundation.identity-types funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-monoids
-open import group-theory.monoids
+open import group-theory.homomorphisms-monoids funext
+open import group-theory.monoids funext
 ```
 
 </details>

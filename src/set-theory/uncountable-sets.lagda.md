@@ -1,18 +1,23 @@
 # Uncountable sets
 
 ```agda
-module set-theory.uncountable-sets where
+open import foundation.function-extensionality-axiom
+
+module
+  set-theory.uncountable-sets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.negation
-open import foundation.propositions
-open import foundation.sets
+open import foundation.negation funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import set-theory.countable-sets
+open import set-theory.countable-sets funext
 ```
 
 </details>

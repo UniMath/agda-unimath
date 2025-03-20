@@ -1,17 +1,22 @@
 # Σ-closed reflective subuniverses
 
 ```agda
-module orthogonal-factorization-systems.sigma-closed-reflective-subuniverses where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.sigma-closed-reflective-subuniverses
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.sigma-closed-subuniverses
+open import foundation.sigma-closed-subuniverses funext
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.reflective-subuniverses
+open import orthogonal-factorization-systems.reflective-subuniverses funext
 ```
 
 </details>

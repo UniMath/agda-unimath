@@ -3,16 +3,21 @@
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-module modal-type-theory.dependent-universal-property-flat-discrete-crisp-types where
+open import foundation.function-extensionality-axiom
+
+module
+  modal-type-theory.dependent-universal-property-flat-discrete-crisp-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.universe-levels
 
-open import modal-type-theory.flat-modality
+open import modal-type-theory.flat-modality funext
 ```
 
 </details>

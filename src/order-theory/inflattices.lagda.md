@@ -1,22 +1,27 @@
 # Inflattices
 
 ```agda
-module order-theory.inflattices where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.inflattices
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext
 open import foundation.dependent-pair-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import order-theory.greatest-lower-bounds-posets
-open import order-theory.lower-bounds-posets
-open import order-theory.posets
+open import order-theory.greatest-lower-bounds-posets funext
+open import order-theory.lower-bounds-posets funext
+open import order-theory.posets funext
 ```
 
 </details>

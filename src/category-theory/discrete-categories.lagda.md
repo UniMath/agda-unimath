@@ -1,18 +1,23 @@
 # Discrete categories
 
 ```agda
-module category-theory.discrete-categories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.discrete-categories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories
+open import category-theory.precategories funext
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
+open import foundation.identity-types funext
+open import foundation.sets funext
+open import foundation.strictly-involutive-identity-types funext
 open import foundation.universe-levels
 ```
 

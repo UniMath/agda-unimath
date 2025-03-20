@@ -1,21 +1,26 @@
 # Morphisms of wild monoids
 
 ```agda
-module structured-types.morphisms-wild-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.morphisms-wild-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-semigroups
+open import group-theory.homomorphisms-semigroups funext
 
-open import structured-types.morphisms-h-spaces
-open import structured-types.pointed-maps
-open import structured-types.wild-monoids
+open import structured-types.morphisms-h-spaces funext
+open import structured-types.pointed-maps funext
+open import structured-types.wild-monoids funext
 ```
 
 </details>

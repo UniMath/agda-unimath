@@ -1,31 +1,36 @@
 # Functoriality of the list operation
 
 ```agda
-module lists.functoriality-lists where
+open import foundation.function-extensionality-axiom
+
+module
+  lists.functoriality-lists
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.equality-natural-numbers funext
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.equality-dependent-pair-types funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.vectors
+open import linear-algebra.functoriality-vectors funext
+open import linear-algebra.vectors funext
 
-open import lists.arrays
-open import lists.concatenation-lists
-open import lists.equality-lists
+open import lists.arrays funext
+open import lists.concatenation-lists funext
+open import lists.equality-lists funext
 open import lists.lists
 ```
 

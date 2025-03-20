@@ -1,29 +1,34 @@
 # Zorn's lemma
 
 ```agda
-module order-theory.zorns-lemma where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.zorns-lemma
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.existential-quantification
-open import foundation.inhabited-types
-open import foundation.law-of-excluded-middle
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext
+open import foundation.existential-quantification funext
+open import foundation.inhabited-types funext
+open import foundation.law-of-excluded-middle funext
+open import foundation.logical-equivalences funext
+open import foundation.propositional-truncations funext
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.propositions
 
-open import order-theory.chains-posets
-open import order-theory.posets
-open import order-theory.top-elements-posets
-open import order-theory.upper-bounds-chains-posets
+open import order-theory.chains-posets funext
+open import order-theory.posets funext
+open import order-theory.top-elements-posets funext
+open import order-theory.upper-bounds-chains-posets funext
 ```
 
 </details>

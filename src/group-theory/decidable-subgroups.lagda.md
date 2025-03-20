@@ -1,31 +1,36 @@
 # Decidable subgroups of groups
 
 ```agda
-module group-theory.decidable-subgroups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.decidable-subgroups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.decidable-subtypes
+open import foundation.binary-relations funext
+open import foundation.decidable-subtypes funext
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.embeddings funext
+open import foundation.equivalence-relations funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.semigroups
-open import group-theory.subgroups
-open import group-theory.subsets-groups
+open import group-theory.groups funext
+open import group-theory.homomorphisms-groups funext
+open import group-theory.semigroups funext
+open import group-theory.subgroups funext
+open import group-theory.subsets-groups funext
 ```
 
 </details>

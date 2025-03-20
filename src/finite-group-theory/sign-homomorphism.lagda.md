@@ -1,45 +1,50 @@
 # The sign homomorphism
 
 ```agda
-module finite-group-theory.sign-homomorphism where
+open import foundation.function-extensionality-axiom
+
+module
+  finite-group-theory.sign-homomorphism
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.permutations
-open import finite-group-theory.transpositions
+open import finite-group-theory.permutations funext
+open import finite-group-theory.transpositions funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.automorphisms
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
+open import foundation.automorphisms funext
+open import foundation.contractible-types funext
+open import foundation.coproduct-types funext
+open import foundation.decidable-propositions funext
 open import foundation.dependent-pair-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.sets
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext
+open import foundation.sets funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-semigroups
-open import group-theory.symmetric-groups
+open import group-theory.homomorphisms-groups funext
+open import group-theory.homomorphisms-semigroups funext
+open import group-theory.symmetric-groups funext
 
-open import lists.concatenation-lists
-open import lists.functoriality-lists
+open import lists.concatenation-lists funext
+open import lists.functoriality-lists funext
 open import lists.lists
 
-open import univalent-combinatorics.2-element-decidable-subtypes
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.2-element-decidable-subtypes funext
+open import univalent-combinatorics.2-element-types funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

@@ -1,19 +1,24 @@
 # Bottom elements in posets
 
 ```agda
-module order-theory.bottom-elements-posets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.bottom-elements-posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import order-theory.bottom-elements-preorders
-open import order-theory.posets
+open import order-theory.bottom-elements-preorders funext
+open import order-theory.posets funext
 ```
 
 </details>

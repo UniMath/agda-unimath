@@ -1,15 +1,20 @@
 # Type arithmetic for coproduct types
 
 ```agda
-module foundation.type-arithmetic-coproduct-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.type-arithmetic-coproduct-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.equality-coproduct-types
+open import foundation.equality-coproduct-types funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

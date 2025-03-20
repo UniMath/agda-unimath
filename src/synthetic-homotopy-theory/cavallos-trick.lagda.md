@@ -1,7 +1,12 @@
 # Cavallo's trick
 
 ```agda
-module synthetic-homotopy-theory.cavallos-trick where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.cavallos-trick
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,15 +14,15 @@ module synthetic-homotopy-theory.cavallos-trick where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.sections
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.sections funext
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
+open import structured-types.pointed-homotopies funext
+open import structured-types.pointed-maps funext
 open import structured-types.pointed-types
 ```
 

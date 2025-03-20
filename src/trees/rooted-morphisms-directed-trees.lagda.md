@@ -1,7 +1,12 @@
 # Rooted morphisms of directed trees
 
 ```agda
-module trees.rooted-morphisms-directed-trees where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.rooted-morphisms-directed-trees
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,22 +14,22 @@ module trees.rooted-morphisms-directed-trees where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import trees.bases-directed-trees
-open import trees.directed-trees
-open import trees.morphisms-directed-trees
+open import trees.bases-directed-trees funext
+open import trees.directed-trees funext
+open import trees.morphisms-directed-trees funext
 ```
 
 </details>

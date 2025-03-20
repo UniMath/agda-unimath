@@ -1,18 +1,23 @@
 # Representable functors between categories
 
 ```agda
-module category-theory.representable-functors-categories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.representable-functors-categories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.functors-categories
-open import category-theory.natural-transformations-functors-categories
-open import category-theory.representable-functors-precategories
+open import category-theory.categories funext
+open import category-theory.functors-categories funext
+open import category-theory.natural-transformations-functors-categories funext
+open import category-theory.representable-functors-precategories funext
 
-open import foundation.category-of-sets
+open import foundation.category-of-sets funext
 open import foundation.universe-levels
 ```
 

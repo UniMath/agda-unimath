@@ -1,21 +1,26 @@
 # Wild representations of monoids
 
 ```agda
-module group-theory.wild-representations-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.wild-representations-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.endomorphisms
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.endomorphisms funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import group-theory.monoids
+open import group-theory.monoids funext
 
-open import structured-types.morphisms-wild-monoids
+open import structured-types.morphisms-wild-monoids funext
 ```
 
 </details>

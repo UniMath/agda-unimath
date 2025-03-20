@@ -3,35 +3,40 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.rational-real-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  real-numbers.rational-real-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.rational-numbers funext
+open import elementary-number-theory.strict-inequality-rational-numbers funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.conjunction
+open import foundation.conjunction funext
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
-open import foundation.subtypes
+open import foundation.disjunction funext
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositions funext
+open import foundation.retractions funext
+open import foundation.sections funext
+open import foundation.subtypes funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.rational-lower-dedekind-real-numbers
-open import real-numbers.rational-upper-dedekind-real-numbers
-open import real-numbers.similarity-real-numbers
+open import real-numbers.dedekind-real-numbers funext
+open import real-numbers.rational-lower-dedekind-real-numbers funext
+open import real-numbers.rational-upper-dedekind-real-numbers funext
+open import real-numbers.similarity-real-numbers funext
 ```
 
 </details>

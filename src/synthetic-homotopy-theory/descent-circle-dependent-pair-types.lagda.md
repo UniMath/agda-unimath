@@ -1,21 +1,26 @@
 # Descent data for families of dependent pair types over the circle
 
 ```agda
-module synthetic-homotopy-theory.descent-circle-dependent-pair-types where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.descent-circle-dependent-pair-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
+open import foundation.equality-dependent-pair-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.dependent-descent-circle
-open import synthetic-homotopy-theory.descent-circle
-open import synthetic-homotopy-theory.free-loops
+open import synthetic-homotopy-theory.dependent-descent-circle funext
+open import synthetic-homotopy-theory.descent-circle funext
+open import synthetic-homotopy-theory.free-loops funext
 ```
 
 </details>

@@ -1,7 +1,12 @@
 # Embeddings
 
 ```agda
-module foundation.embeddings where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.embeddings
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.embeddings public
 ```
@@ -10,20 +15,20 @@ open import foundation-core.embeddings public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospan-diagrams
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
-open import foundation.truncated-maps
+open import foundation.truncated-maps funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.fibers-of-maps
@@ -31,7 +36,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
-open import foundation-core.pullbacks
+open import foundation-core.pullbacks funext
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families

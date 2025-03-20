@@ -1,19 +1,24 @@
 # Edge-coloured undirected graphs
 
 ```agda
-module graph-theory.edge-coloured-undirected-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.edge-coloured-undirected-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings
+open import foundation.embeddings funext
 open import foundation.universe-levels
-open import foundation.unordered-pairs
+open import foundation.unordered-pairs funext
 
-open import graph-theory.neighbors-undirected-graphs
-open import graph-theory.undirected-graphs
+open import graph-theory.neighbors-undirected-graphs funext
+open import graph-theory.undirected-graphs funext
 ```
 
 </details>

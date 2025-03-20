@@ -1,7 +1,12 @@
 # Species of finite types
 
 ```agda
-module species.species-of-finite-types where
+open import foundation.function-extensionality-axiom
+
+module
+  species.species-of-finite-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,9 +14,9 @@ module species.species-of-finite-types where
 ```agda
 open import foundation.universe-levels
 
-open import species.species-of-types-in-subuniverses
+open import species.species-of-types-in-subuniverses funext
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

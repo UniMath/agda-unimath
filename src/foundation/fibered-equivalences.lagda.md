@@ -1,19 +1,24 @@
 # Fibered equivalences
 
 ```agda
-module foundation.fibered-equivalences where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.fibered-equivalences
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.fibered-maps
-open import foundation.logical-equivalences
-open import foundation.pullbacks
-open import foundation.slice
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.fibered-maps funext
+open import foundation.logical-equivalences funext
+open import foundation.pullbacks funext
+open import foundation.slice funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -23,7 +28,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 ```
 
 </details>

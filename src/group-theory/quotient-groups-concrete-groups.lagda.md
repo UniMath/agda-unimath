@@ -1,36 +1,41 @@
 # Quotient groups of concrete groups
 
 ```agda
-module group-theory.quotient-groups-concrete-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.quotient-groups-concrete-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
-open import foundation.0-images-of-maps
-open import foundation.1-types
+open import foundation.0-connected-types funext
+open import foundation.0-images-of-maps funext
+open import foundation.1-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.mere-equality
-open import foundation.propositional-truncations
-open import foundation.sets
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.mere-equality funext
+open import foundation.propositional-truncations funext
+open import foundation.sets funext
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
-open import group-theory.equivalences-concrete-group-actions
-open import group-theory.mere-equivalences-concrete-group-actions
-open import group-theory.normal-subgroups-concrete-groups
-open import group-theory.transitive-concrete-group-actions
+open import group-theory.concrete-groups funext
+open import group-theory.equivalences-concrete-group-actions funext
+open import group-theory.mere-equivalences-concrete-group-actions funext
+open import group-theory.normal-subgroups-concrete-groups funext
+open import group-theory.transitive-concrete-group-actions funext
 
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-groups funext
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.loop-spaces funext
 ```
 
 </details>

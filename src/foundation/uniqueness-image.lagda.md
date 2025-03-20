@@ -1,18 +1,23 @@
 # Uniqueness of the image of a map
 
 ```agda
-module foundation.uniqueness-image where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.uniqueness-image
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.images
-open import foundation.slice
+open import foundation.equivalences funext
+open import foundation.images funext
+open import foundation.slice funext
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.universal-property-image
+open import foundation.universal-property-image funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

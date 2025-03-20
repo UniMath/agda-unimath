@@ -1,23 +1,28 @@
 # Coequalizers
 
 ```agda
-module synthetic-homotopy-theory.coequalizers where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.coequalizers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.double-arrows
-open import foundation.equivalences
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.coforks
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
-open import synthetic-homotopy-theory.dependent-universal-property-coequalizers
-open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.universal-property-coequalizers
+open import synthetic-homotopy-theory.coforks funext
+open import synthetic-homotopy-theory.dependent-cocones-under-spans funext
+open import synthetic-homotopy-theory.dependent-universal-property-coequalizers funext
+open import synthetic-homotopy-theory.pushouts funext
+open import synthetic-homotopy-theory.universal-property-coequalizers funext
 ```
 
 </details>

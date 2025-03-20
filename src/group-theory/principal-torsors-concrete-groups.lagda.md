@@ -1,7 +1,12 @@
 # Principal torsors of concrete groups
 
 ```agda
-module group-theory.principal-torsors-concrete-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.principal-torsors-concrete-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,8 +14,8 @@ module group-theory.principal-torsors-concrete-groups where
 ```agda
 open import foundation.universe-levels
 
-open import group-theory.concrete-group-actions
-open import group-theory.concrete-groups
+open import group-theory.concrete-group-actions funext
+open import group-theory.concrete-groups funext
 ```
 
 </details>

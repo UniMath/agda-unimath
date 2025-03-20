@@ -1,7 +1,12 @@
 # Functoriality of set truncation
 
 ```agda
-module foundation.functoriality-set-truncation where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.functoriality-set-truncation
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,20 +14,20 @@ module foundation.functoriality-set-truncation where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.functoriality-truncation
-open import foundation.images
-open import foundation.injective-maps
-open import foundation.propositional-truncations
-open import foundation.retracts-of-types
-open import foundation.set-truncations
-open import foundation.sets
-open import foundation.slice
-open import foundation.surjective-maps
-open import foundation.uniqueness-image
-open import foundation.uniqueness-set-truncations
-open import foundation.universal-property-image
-open import foundation.universal-property-set-truncation
+open import foundation.dependent-products-propositions funext
+open import foundation.functoriality-truncation funext
+open import foundation.images funext
+open import foundation.injective-maps funext
+open import foundation.propositional-truncations funext
+open import foundation.retracts-of-types funext
+open import foundation.set-truncations funext
+open import foundation.sets funext
+open import foundation.slice funext
+open import foundation.surjective-maps funext
+open import foundation.uniqueness-image funext
+open import foundation.uniqueness-set-truncations funext
+open import foundation.universal-property-image funext
+open import foundation.universal-property-set-truncation funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

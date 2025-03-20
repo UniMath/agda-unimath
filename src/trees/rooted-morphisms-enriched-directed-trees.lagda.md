@@ -1,23 +1,28 @@
 # Rooted morphisms of enriched directed trees
 
 ```agda
-module trees.rooted-morphisms-enriched-directed-trees where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.rooted-morphisms-enriched-directed-trees
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import trees.enriched-directed-trees
-open import trees.morphisms-enriched-directed-trees
-open import trees.rooted-morphisms-directed-trees
+open import trees.enriched-directed-trees funext
+open import trees.morphisms-enriched-directed-trees funext
+open import trees.rooted-morphisms-directed-trees funext
 ```
 
 </details>

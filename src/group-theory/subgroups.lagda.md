@@ -1,7 +1,12 @@
 # Subgroups
 
 ```agda
-module group-theory.subgroups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.subgroups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,41 +15,41 @@ module group-theory.subgroups where
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-relations
-open import foundation.coproduct-types
+open import foundation.binary-relations funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.embeddings
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.large-binary-relations
-open import foundation.logical-equivalences
-open import foundation.powersets
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
+open import foundation.disjunction funext
+open import foundation.embeddings funext
+open import foundation.equivalence-relations funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.large-binary-relations funext
+open import foundation.logical-equivalences funext
+open import foundation.powersets funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
+open import foundation.subtypes funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.integer-powers-of-elements-groups
-open import group-theory.semigroups
-open import group-theory.subsemigroups
-open import group-theory.subsets-groups
+open import group-theory.groups funext
+open import group-theory.homomorphisms-groups funext
+open import group-theory.integer-powers-of-elements-groups funext
+open import group-theory.semigroups funext
+open import group-theory.subsemigroups funext
+open import group-theory.subsets-groups funext
 
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.posets
-open import order-theory.preorders
-open import order-theory.similarity-of-elements-large-posets
+open import order-theory.large-posets funext
+open import order-theory.large-preorders funext
+open import order-theory.order-preserving-maps-large-posets funext
+open import order-theory.order-preserving-maps-large-preorders funext
+open import order-theory.posets funext
+open import order-theory.preorders funext
+open import order-theory.similarity-of-elements-large-posets funext
 ```
 
 </details>

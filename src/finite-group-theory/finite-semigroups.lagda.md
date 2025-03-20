@@ -1,7 +1,12 @@
 # Finite semigroups
 
 ```agda
-module finite-group-theory.finite-semigroups where
+open import foundation.function-extensionality-axiom
+
+module
+  finite-group-theory.finite-semigroups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,31 +14,31 @@ module finite-group-theory.finite-semigroups where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.1-types
-open import foundation.decidable-propositions
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.mere-equivalences
-open import foundation.propositions
-open import foundation.set-truncations
-open import foundation.sets
+open import foundation.1-types funext
+open import foundation.decidable-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.mere-equivalences funext
+open import foundation.propositions funext
+open import foundation.set-truncations funext
+open import foundation.sets funext
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.category-of-semigroups
-open import group-theory.semigroups
+open import group-theory.category-of-semigroups funext
+open import group-theory.semigroups funext
 
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.finitely-many-connected-components
-open import univalent-combinatorics.function-types
-open import univalent-combinatorics.pi-finite-types
-open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.untruncated-pi-finite-types
+open import univalent-combinatorics.dependent-function-types funext
+open import univalent-combinatorics.dependent-pair-types funext
+open import univalent-combinatorics.equality-finite-types funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.finitely-many-connected-components funext
+open import univalent-combinatorics.function-types funext
+open import univalent-combinatorics.pi-finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.untruncated-pi-finite-types funext
 ```
 
 </details>

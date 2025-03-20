@@ -1,7 +1,12 @@
 # Infinite sets
 
 ```agda
-module set-theory.infinite-sets where
+open import foundation.function-extensionality-axiom
+
+module
+  set-theory.infinite-sets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,12 +15,12 @@ module set-theory.infinite-sets where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.mere-embeddings
-open import foundation.propositions
-open import foundation.sets
+open import foundation.mere-embeddings funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

@@ -1,28 +1,33 @@
 # Trivial groups
 
 ```agda
-module group-theory.trivial-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.trivial-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.raising-universe-levels
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.raising-universe-levels funext
 open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.full-subgroups
-open import group-theory.groups
-open import group-theory.subgroups
-open import group-theory.trivial-subgroups
+open import group-theory.abelian-groups funext
+open import group-theory.full-subgroups funext
+open import group-theory.groups funext
+open import group-theory.subgroups funext
+open import group-theory.trivial-subgroups funext
 ```
 
 </details>

@@ -1,50 +1,55 @@
 # Finite types
 
 ```agda
-module univalent-combinatorics.finite-types where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.finite-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.equality-natural-numbers funext
 open import elementary-number-theory.natural-numbers
 
-open import foundation.0-connected-types
-open import foundation.1-types
+open import foundation.0-connected-types funext
+open import foundation.1-types funext
 open import foundation.action-on-identifications-functions
-open import foundation.connected-components-universes
-open import foundation.contractible-types
-open import foundation.decidable-types
+open import foundation.connected-components-universes funext
+open import foundation.contractible-types funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.logical-equivalences
-open import foundation.mere-equivalences
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.raising-universe-levels
-open import foundation.raising-universe-levels-unit-type
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.subuniverses
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.functoriality-propositional-truncation funext
+open import foundation.identity-types funext
+open import foundation.inhabited-types funext
+open import foundation.logical-equivalences funext
+open import foundation.mere-equivalences funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.raising-universe-levels funext
+open import foundation.raising-universe-levels funext-unit-type
+open import foundation.sets funext
+open import foundation.subtypes funext
+open import foundation.subuniverses funext
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-empty-type funext
 open import foundation.unit-type
-open import foundation.univalence
+open import foundation.univalence funext
 open import foundation.universe-levels
 
 open import foundation-core.torsorial-type-families
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

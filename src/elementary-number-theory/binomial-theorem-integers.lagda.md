@@ -1,28 +1,33 @@
 # The binomial theorem for the integers
 
 ```agda
-module elementary-number-theory.binomial-theorem-integers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.binomial-theorem-integers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.binomial-theorem-commutative-rings
+open import commutative-algebra.binomial-theorem-commutative-rings funext
 
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.addition-integers funext
+open import elementary-number-theory.distance-natural-numbers funext
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-integers funext
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.powers-integers
-open import elementary-number-theory.ring-of-integers
+open import elementary-number-theory.powers-integers funext
+open import elementary-number-theory.ring-of-integers funext
 
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 
-open import linear-algebra.vectors
+open import linear-algebra.vectors funext
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

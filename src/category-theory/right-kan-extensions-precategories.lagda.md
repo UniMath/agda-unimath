@@ -1,20 +1,25 @@
 # Right Kan extensions in precategories
 
 ```agda
-module category-theory.right-kan-extensions-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.right-kan-extensions-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
-open import category-theory.natural-transformations-functors-precategories
-open import category-theory.precategories
-open import category-theory.right-extensions-precategories
+open import category-theory.functors-precategories funext
+open import category-theory.natural-transformations-functors-precategories funext
+open import category-theory.precategories funext
+open import category-theory.right-extensions-precategories funext
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

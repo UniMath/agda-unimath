@@ -1,34 +1,39 @@
 # Type duality of finite types
 
 ```agda
-module univalent-combinatorics.type-duality where
+open import foundation.function-extensionality-axiom
 
-open import foundation.type-duality public
+module
+  univalent-combinatorics.type-duality
+  (funext : function-extensionality)
+  where
+
+open import foundation.type-duality funext public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.full-subtypes
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.inhabited-types
-open import foundation.postcomposition-functions
-open import foundation.propositions
-open import foundation.structure
-open import foundation.structured-type-duality
-open import foundation.surjective-maps
+open import foundation.equivalences funext
+open import foundation.full-subtypes funext
+open import foundation.functoriality-dependent-function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.inhabited-types funext
+open import foundation.postcomposition-functions funext
+open import foundation.propositions funext
+open import foundation.structure funext
+open import foundation.structure funextd-type-duality
+open import foundation.surjective-maps funext
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.fibers-of-maps
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.inhabited-finite-types
+open import univalent-combinatorics.fibers-of-maps funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.inhabited-finite-types funext
 ```
 
 </details>

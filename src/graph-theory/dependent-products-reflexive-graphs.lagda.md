@@ -1,7 +1,12 @@
 # Dependent products of reflexive graphs
 
 ```agda
-module graph-theory.dependent-products-reflexive-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.dependent-products-reflexive-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,33 +14,33 @@ module graph-theory.dependent-products-reflexive-graphs where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.commuting-squares-of-identifications
-open import foundation.contractible-types
+open import foundation.commuting-squares-of-identifications funext
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.equality-dependent-function-types funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-function-types funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.retractions
-open import foundation.sections
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext
 open import foundation.universe-levels
 
-open import graph-theory.base-change-dependent-reflexive-graphs
-open import graph-theory.cartesian-products-reflexive-graphs
-open import graph-theory.dependent-reflexive-graphs
-open import graph-theory.directed-graphs
-open import graph-theory.morphisms-directed-graphs
-open import graph-theory.morphisms-reflexive-graphs
-open import graph-theory.reflexive-graphs
-open import graph-theory.sections-dependent-reflexive-graphs
+open import graph-theory.base-change-dependent-reflexive-graphs funext
+open import graph-theory.cartesian-products-reflexive-graphs funext
+open import graph-theory.dependent-reflexive-graphs funext
+open import graph-theory.directed-graphs funext
+open import graph-theory.morphisms-directed-graphs funext
+open import graph-theory.morphisms-reflexive-graphs funext
+open import graph-theory.reflexive-graphs funext
+open import graph-theory.sections-dependent-reflexive-graphs funext
 ```
 
 </details>

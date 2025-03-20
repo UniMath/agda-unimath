@@ -1,33 +1,37 @@
 # Isomorphisms of semigroups
 
 ```agda
-module group-theory.isomorphisms-semigroups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.isomorphisms-semigroups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-large-precategories
+open import category-theory.isomorphisms-in-large-precategories funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
+open import foundation.torsorial-type-families funext
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.equivalences-semigroups
-open import group-theory.homomorphisms-semigroups
-open import group-theory.precategory-of-semigroups
-open import group-theory.semigroups
+open import group-theory.equivalences-semigroups funext
+open import group-theory.homomorphisms-semigroups funext
+open import group-theory.precategory-of-semigroups funext
+open import group-theory.semigroups funext
 ```
 
 </details>

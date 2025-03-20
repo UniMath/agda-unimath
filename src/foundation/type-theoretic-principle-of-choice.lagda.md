@@ -1,7 +1,12 @@
 # The type theoretic principle of choice
 
 ```agda
-module foundation.type-theoretic-principle-of-choice where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.type-theoretic-principle-of-choice
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.type-theoretic-principle-of-choice public
 ```
@@ -10,7 +15,8 @@ open import foundation-core.type-theoretic-principle-of-choice public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.function-extensionality funext
+
 open import foundation.implicit-function-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels

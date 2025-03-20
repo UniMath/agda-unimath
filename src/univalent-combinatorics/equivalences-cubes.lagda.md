@@ -1,7 +1,12 @@
 # Equivalences of cubes
 
 ```agda
-module univalent-combinatorics.equivalences-cubes where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.equivalences-cubes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,20 +15,20 @@ module univalent-combinatorics.equivalences-cubes where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.equality-dependent-function-types funext
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cubes
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.cubes funext
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

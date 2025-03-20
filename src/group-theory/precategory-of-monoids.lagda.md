@@ -1,22 +1,27 @@
 # The precategory of monoids
 
 ```agda
-module group-theory.precategory-of-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.precategory-of-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories
-open import category-theory.large-subprecategories
-open import category-theory.precategories
+open import category-theory.large-precategories funext
+open import category-theory.large-subprecategories funext
+open import category-theory.precategories funext
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-monoids
-open import group-theory.monoids
-open import group-theory.precategory-of-semigroups
+open import group-theory.homomorphisms-monoids funext
+open import group-theory.monoids funext
+open import group-theory.precategory-of-semigroups funext
 ```
 
 </details>

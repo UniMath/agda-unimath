@@ -1,7 +1,12 @@
 # Empty types
 
 ```agda
-module foundation.empty-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.empty-types
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.empty-types public
 ```
@@ -10,13 +15,13 @@ open import foundation-core.empty-types public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.propositional-truncations
-open import foundation.raising-universe-levels
-open import foundation.subuniverses
-open import foundation.univalence
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.propositional-truncations funext
+open import foundation.raising-universe-levels funext
+open import foundation.subuniverses funext
+open import foundation.univalence funext
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

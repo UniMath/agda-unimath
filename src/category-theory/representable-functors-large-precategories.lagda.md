@@ -1,21 +1,27 @@
 # Representable functors between large precategories
 
 ```agda
-module category-theory.representable-functors-large-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.representable-functors-large-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-large-precategories
-open import category-theory.large-precategories
-open import category-theory.natural-transformations-functors-large-precategories
+open import category-theory.functors-large-precategories funext
+open import category-theory.large-precategories funext
+open import category-theory.natural-transformations-functors-large-precategories funext
 
-open import foundation.category-of-sets
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.category-of-sets funext
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.sets funext
 open import foundation.universe-levels
 ```
 

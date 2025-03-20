@@ -1,18 +1,23 @@
 # Cartesian products of types equipped with endomorphisms
 
 ```agda
-module structured-types.cartesian-products-types-equipped-with-endomorphisms where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.cartesian-products-types-equipped-with-endomorphisms
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-cartesian-product-types funext
 open import foundation.universe-levels
 
-open import structured-types.types-equipped-with-endomorphisms
+open import structured-types.types-equipped-with-endomorphisms funext
 ```
 
 </details>

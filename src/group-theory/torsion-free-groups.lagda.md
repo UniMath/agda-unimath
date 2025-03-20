@@ -1,34 +1,39 @@
 # Torsion-free groups
 
 ```agda
-module group-theory.torsion-free-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.torsion-free-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.group-of-integers
-open import elementary-number-theory.nonzero-integers
+open import elementary-number-theory.group-of-integers funext
+open import elementary-number-theory.nonzero-integers funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.existential-quantification
+open import foundation.equivalences funext
+open import foundation.existential-quantification funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
-open import foundation.singleton-subtypes
-open import foundation.standard-pullbacks
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.singleton-subtypes funext
+open import foundation.standard-pullbacks funext
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.integer-powers-of-elements-groups
-open import group-theory.orders-of-elements-groups
-open import group-theory.subgroups
-open import group-theory.torsion-elements-groups
+open import group-theory.groups funext
+open import group-theory.integer-powers-of-elements-groups funext
+open import group-theory.orders-of-elements-groups funext
+open import group-theory.subgroups funext
+open import group-theory.torsion-elements-groups funext
 ```
 
 </details>

@@ -1,7 +1,12 @@
 # The maybe monad on finite types
 
 ```agda
-module univalent-combinatorics.maybe where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.maybe
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.maybe public
 ```
@@ -13,8 +18,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.coproduct-types funext
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

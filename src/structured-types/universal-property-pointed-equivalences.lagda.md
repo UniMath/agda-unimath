@@ -1,18 +1,23 @@
 # The universal property of pointed equivalences
 
 ```agda
-module structured-types.universal-property-pointed-equivalences where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.universal-property-pointed-equivalences
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.universe-levels
 
-open import structured-types.pointed-maps
+open import structured-types.pointed-maps funext
 open import structured-types.pointed-types
-open import structured-types.precomposition-pointed-maps
+open import structured-types.precomposition-pointed-maps funext
 ```
 
 </details>

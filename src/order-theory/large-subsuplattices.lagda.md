@@ -1,18 +1,23 @@
 # Large subsuplattices
 
 ```agda
-module order-theory.large-subsuplattices where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.large-subsuplattices
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-binary-relations
+open import foundation.large-binary-relations funext
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.large-subposets
-open import order-theory.large-suplattices
+open import order-theory.large-posets funext
+open import order-theory.large-subposets funext
+open import order-theory.large-suplattices funext
 ```
 
 </details>

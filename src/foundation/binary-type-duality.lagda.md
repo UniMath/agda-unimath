@@ -1,22 +1,27 @@
 # Binary type duality
 
 ```agda
-module foundation.binary-type-duality where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.binary-type-duality
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.equivalences-spans
-open import foundation.function-types
-open import foundation.multivariable-homotopies
-open import foundation.retractions
-open import foundation.sections
+open import foundation.equivalences funext
+open import foundation.equivalences funext-spans
+open import foundation.function-types funext
+open import foundation.multivariable-homotopies funext
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.spans
 open import foundation.telescopes
-open import foundation.univalence
+open import foundation.univalence funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

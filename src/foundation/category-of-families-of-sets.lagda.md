@@ -1,20 +1,25 @@
 # The category of families of sets
 
 ```agda
-module foundation.category-of-families-of-sets where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.category-of-families-of-sets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.large-categories
-open import category-theory.large-function-categories
-open import category-theory.large-function-precategories
-open import category-theory.large-precategories
-open import category-theory.precategories
+open import category-theory.categories funext
+open import category-theory.large-categories funext
+open import category-theory.large-function-categories funext
+open import category-theory.large-function-precategories funext
+open import category-theory.large-precategories funext
+open import category-theory.precategories funext
 
-open import foundation.category-of-sets
+open import foundation.category-of-sets funext
 open import foundation.universe-levels
 ```
 

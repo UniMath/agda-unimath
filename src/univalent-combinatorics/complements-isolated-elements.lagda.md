@@ -1,7 +1,12 @@
 # Complements of isolated elements of finite types
 
 ```agda
-module univalent-combinatorics.complements-isolated-elements where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.complements-isolated-elements
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,16 +15,16 @@ module univalent-combinatorics.complements-isolated-elements where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.equivalences-maybe
-open import foundation.identity-types
-open import foundation.isolated-elements
-open import foundation.maybe
-open import foundation.propositional-truncations
+open import foundation.equivalences funext
+open import foundation.equivalences funext-maybe
+open import foundation.identity-types funext
+open import foundation.isolated-elements funext
+open import foundation.maybe funext
+open import foundation.propositional-truncations funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.equality-finite-types funext
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

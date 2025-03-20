@@ -1,36 +1,41 @@
 # Double negation stable embeddings
 
 ```agda
-module logic.double-negation-stable-embeddings where
+open import foundation.function-extensionality-axiom
+
+module
+  logic.double-negation-stable-embeddings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-morphisms-arrows
-open import foundation.decidable-embeddings
-open import foundation.decidable-maps
-open import foundation.decidable-propositions
-open import foundation.decidable-types
+open import foundation.cartesian-morphisms-arrows funext
+open import foundation.decidable-embeddings funext
+open import foundation.decidable-maps funext
+open import foundation.decidable-propositions funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.double-negation-stable-propositions
-open import foundation.embeddings
-open import foundation.fibers-of-maps
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-coproduct-types
+open import foundation.double-negation-stable-propositions funext
+open import foundation.embeddings funext
+open import foundation.fibers-of-maps funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-coproduct-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositional-maps
-open import foundation.propositions
-open import foundation.retracts-of-maps
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.propositional-maps funext
+open import foundation.propositions funext
+open import foundation.retracts-of-maps funext
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.universal-property-equivalences
+open import foundation.universal-property-equivalences funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -43,8 +48,8 @@ open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.torsorial-type-families
 
-open import logic.double-negation-eliminating-maps
-open import logic.double-negation-elimination
+open import logic.double-negation-eliminating-maps funext
+open import logic.double-negation-elimination funext
 ```
 
 </details>

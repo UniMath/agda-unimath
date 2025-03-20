@@ -1,22 +1,27 @@
 # Strictly preordered sets
 
 ```agda
-module order-theory.strictly-preordered-sets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.strictly-preordered-sets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.cartesian-product-types
+open import foundation.binary-relations funext
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.negation
-open import foundation.propositions
-open import foundation.sets
+open import foundation.empty-types funext
+open import foundation.negation funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import order-theory.strict-preorders
+open import order-theory.strict-preorders funext
 ```
 
 </details>

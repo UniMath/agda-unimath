@@ -3,20 +3,25 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module foundation.pi-decompositions where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.pi-decompositions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.functoriality-dependent-function-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-function-types funext
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.structure-identity-principle
-open import foundation.univalence
+open import foundation.univalence funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

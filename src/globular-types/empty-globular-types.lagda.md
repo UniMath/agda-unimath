@@ -3,13 +3,18 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module globular-types.empty-globular-types where
+open import foundation.function-extensionality-axiom
+
+module
+  globular-types.empty-globular-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.empty-types
+open import foundation.empty-types funext
 open import foundation.universe-levels
 
 open import globular-types.constant-globular-types

@@ -1,39 +1,45 @@
 # W-types
 
 ```agda
-module trees.w-types where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.w-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
+open import foundation.dependent-products-truncated-types funext
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.postcomposition-functions
-open import foundation.propositional-truncations
-open import foundation.sets
-open import foundation.torsorial-type-families
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.postcomposition-functions funext
+open import foundation.propositional-truncations funext
+open import foundation.sets funext
+open import foundation.torsorial-type-families funext
 open import foundation.transport-along-identifications
-open import foundation.truncated-types
+open import foundation.truncated-types funext
 open import foundation.truncation-levels
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import trees.algebras-polynomial-endofunctors
-open import trees.coalgebras-polynomial-endofunctors
-open import trees.morphisms-algebras-polynomial-endofunctors
-open import trees.polynomial-endofunctors
+open import trees.algebras-polynomial-endofunctors funext
+open import trees.coalgebras-polynomial-endofunctors funext
+open import trees.morphisms-algebras-polynomial-endofunctors funext
+open import trees.polynomial-endofunctors funext
 ```
 
 </details>

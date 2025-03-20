@@ -1,19 +1,25 @@
 # Dependent products of large posets
 
 ```agda
-module order-theory.dependent-products-large-posets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.dependent-products-large-posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.function-extensionality
-open import foundation.large-binary-relations
+open import foundation.function-extensionality funext
+
+open import foundation.large-binary-relations funext
 open import foundation.universe-levels
 
-open import order-theory.dependent-products-large-preorders
-open import order-theory.large-posets
-open import order-theory.large-preorders
+open import order-theory.dependent-products-large-preorders funext
+open import order-theory.large-posets funext
+open import order-theory.large-preorders funext
 ```
 
 </details>

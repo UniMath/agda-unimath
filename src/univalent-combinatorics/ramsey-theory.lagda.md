@@ -1,7 +1,12 @@
 # Ramsey theory
 
 ```agda
-module univalent-combinatorics.ramsey-theory where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.ramsey-theory
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,14 +15,14 @@ module univalent-combinatorics.ramsey-theory where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

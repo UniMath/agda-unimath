@@ -1,32 +1,37 @@
 # Split essentially surjective functors between precategories
 
 ```agda
-module category-theory.split-essentially-surjective-functors-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.split-essentially-surjective-functors-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.cores-precategories
-open import category-theory.essential-fibers-of-functors-precategories
-open import category-theory.essentially-surjective-functors-precategories
-open import category-theory.fully-faithful-functors-precategories
-open import category-theory.functors-precategories
-open import category-theory.isomorphisms-in-categories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
-open import category-theory.pseudomonic-functors-precategories
+open import category-theory.categories funext
+open import category-theory.cores-precategories funext
+open import category-theory.essential-fibers-of-functors-precategories funext
+open import category-theory.essentially-surjective-functors-precategories funext
+open import category-theory.fully-faithful-functors-precategories funext
+open import category-theory.functors-precategories funext
+open import category-theory.isomorphisms-in-categories funext
+open import category-theory.isomorphisms-in-precategories funext
+open import category-theory.precategories funext
+open import category-theory.pseudomonic-functors-precategories funext
 
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.retracts-of-types
-open import foundation.sections
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.retracts-of-types funext
+open import foundation.sections funext
 open import foundation.universe-levels
 ```
 

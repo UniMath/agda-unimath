@@ -1,7 +1,12 @@
 # Cycle partitions of finite types
 
 ```agda
-module univalent-combinatorics.cycle-partitions where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.cycle-partitions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,11 +15,11 @@ module univalent-combinatorics.cycle-partitions where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cyclic-finite-types
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.cyclic-finite-types funext
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

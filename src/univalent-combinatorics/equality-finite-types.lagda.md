@@ -1,7 +1,12 @@
 # Equality in finite types
 
 ```agda
-module univalent-combinatorics.equality-finite-types where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.equality-finite-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,16 +14,16 @@ module univalent-combinatorics.equality-finite-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-equality
+open import foundation.decidable-equality funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositional-truncations
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.decidable-propositions funext
+open import univalent-combinatorics.equality-standard-finite-types funext
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

@@ -1,7 +1,12 @@
 # Commuting squares of Galois connections between large posets
 
 ```agda
-module order-theory.commuting-squares-of-galois-connections-large-posets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.commuting-squares-of-galois-connections-large-posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,9 +14,9 @@ module order-theory.commuting-squares-of-galois-connections-large-posets where
 ```agda
 open import foundation.universe-levels
 
-open import order-theory.commuting-squares-of-order-preserving-maps-large-posets
-open import order-theory.galois-connections-large-posets
-open import order-theory.large-posets
+open import order-theory.commuting-squares-of-order-preserving-maps-large-posets funext
+open import order-theory.galois-connections-large-posets funext
+open import order-theory.large-posets funext
 ```
 
 </details>

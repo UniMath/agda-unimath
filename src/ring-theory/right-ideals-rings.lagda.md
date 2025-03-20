@@ -1,25 +1,30 @@
 # Right ideals of rings
 
 ```agda
-module ring-theory.right-ideals-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.right-ideals-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.identity-types funext
+open import foundation.propositions funext
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.subtypes funext
+open import foundation.torsorial-type-families funext
 open import foundation.universe-levels
 
-open import ring-theory.rings
-open import ring-theory.subsets-rings
+open import ring-theory.rings funext
+open import ring-theory.subsets-rings funext
 ```
 
 </details>

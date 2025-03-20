@@ -1,21 +1,26 @@
 # Pullbacks
 
 ```agda
-module foundation-core.pullbacks where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation-core.pullbacks
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospan-diagrams
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-fibers-of-maps
-open import foundation.identity-types
-open import foundation.morphisms-arrows
-open import foundation.standard-pullbacks
-open import foundation.type-arithmetic-standard-pullbacks
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-fibers-of-maps funext
+open import foundation.identity-types funext
+open import foundation.morphisms-arrows funext
+open import foundation.standard-pullbacks funext
+open import foundation.type-arithmetic-standard-pullbacks funext
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
@@ -27,7 +32,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.universal-property-pullbacks
+open import foundation-core.universal-property-pullbacks funext
 ```
 
 </details>

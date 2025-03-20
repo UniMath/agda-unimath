@@ -1,22 +1,27 @@
 # Equivalences of arrows
 
 ```agda
-module foundation.equivalences-arrows where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.equivalences-arrows
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-morphisms-arrows
-open import foundation.commuting-squares-of-maps
+open import foundation.cartesian-morphisms-arrows funext
+open import foundation.commuting-squares-of-maps funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.homotopies
-open import foundation.morphisms-arrows
-open import foundation.retractions
-open import foundation.retracts-of-maps
-open import foundation.sections
-open import foundation.span-diagrams
+open import foundation.equivalences funext
+open import foundation.homotopies funext
+open import foundation.morphisms-arrows funext
+open import foundation.retractions funext
+open import foundation.retracts-of-maps funext
+open import foundation.sections funext
+open import foundation.span-diagrams funext
 open import foundation.spans
 open import foundation.universe-levels
 

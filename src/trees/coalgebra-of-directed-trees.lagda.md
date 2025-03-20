@@ -1,7 +1,12 @@
 # The coalgebra of directed trees
 
 ```agda
-module trees.coalgebra-of-directed-trees where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.coalgebra-of-directed-trees
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,10 +15,10 @@ module trees.coalgebra-of-directed-trees where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import trees.bases-directed-trees
-open import trees.coalgebras-polynomial-endofunctors
-open import trees.directed-trees
-open import trees.fibers-directed-trees
+open import trees.bases-directed-trees funext
+open import trees.coalgebras-polynomial-endofunctors funext
+open import trees.directed-trees funext
+open import trees.fibers-directed-trees funext
 ```
 
 </details>

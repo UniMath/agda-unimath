@@ -1,23 +1,28 @@
 # Standard finite trees
 
 ```agda
-module univalent-combinatorics.standard-finite-trees where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.standard-finite-trees
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.maximum-natural-numbers
+open import elementary-number-theory.maximum-natural-numbers funext
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.sums-of-natural-numbers funext
 
-open import foundation.cartesian-product-types
-open import foundation.empty-types
-open import foundation.identity-types
+open import foundation.cartesian-product-types funext
+open import foundation.empty-types funext
+open import foundation.identity-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

@@ -1,30 +1,35 @@
 # The binomial theorem in commutative semirings
 
 ```agda
-module commutative-algebra.binomial-theorem-commutative-semirings where
+open import foundation.function-extensionality-axiom
+
+module
+  commutative-algebra.binomial-theorem-commutative-semirings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-semirings
-open import commutative-algebra.powers-of-elements-commutative-semirings
-open import commutative-algebra.sums-commutative-semirings
+open import commutative-algebra.commutative-semirings funext
+open import commutative-algebra.powers-of-elements-commutative-semirings funext
+open import commutative-algebra.sums-commutative-semirings funext
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.binomial-coefficients
-open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.binomial-coefficients funext
+open import elementary-number-theory.distance-natural-numbers funext
 open import elementary-number-theory.natural-numbers
 
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import linear-algebra.vectors-on-commutative-semirings
+open import linear-algebra.vectors-on-commutative-semirings funext
 
-open import ring-theory.binomial-theorem-semirings
+open import ring-theory.binomial-theorem-semirings funext
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

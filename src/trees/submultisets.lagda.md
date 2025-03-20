@@ -1,17 +1,22 @@
 # Submultisets
 
 ```agda
-module trees.submultisets where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.submultisets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.embeddings
-open import foundation.equivalences
+open import foundation.embeddings funext
+open import foundation.equivalences funext
 open import foundation.universe-levels
 
-open import trees.multisets
+open import trees.multisets funext
 ```
 
 </details>

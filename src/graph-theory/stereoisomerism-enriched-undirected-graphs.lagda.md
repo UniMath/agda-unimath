@@ -1,19 +1,24 @@
 # Stereoisomerism for enriched undirected graphs
 
 ```agda
-module graph-theory.stereoisomerism-enriched-undirected-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.stereoisomerism-enriched-undirected-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.homotopies
+open import foundation.function-types funext
+open import foundation.homotopies funext
 open import foundation.universe-levels
 
-open import graph-theory.enriched-undirected-graphs
-open import graph-theory.equivalences-undirected-graphs
+open import graph-theory.enriched-undirected-graphs funext
+open import graph-theory.equivalences-undirected-graphs funext
 ```
 
 </details>

@@ -1,47 +1,52 @@
 # Types local at maps
 
 ```agda
-module orthogonal-factorization-systems.types-local-at-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.types-local-at-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-maps
-open import foundation.contractible-maps
-open import foundation.contractible-types
+open import foundation.commuting-squares-of-maps funext
+open import foundation.commuting-triangles-of-maps funext
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.families-of-equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.postcomposition-functions
-open import foundation.precomposition-dependent-functions
-open import foundation.precomposition-functions
-open import foundation.propositions
-open import foundation.retractions
-open import foundation.retracts-of-maps
-open import foundation.retracts-of-types
-open import foundation.sections
-open import foundation.type-arithmetic-dependent-function-types
+open import foundation.dependent-universal-property-equivalences funext
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.families-of-equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.postcomposition-functions funext
+open import foundation.precomposition-dependent-functions funext
+open import foundation.precomposition-functions funext
+open import foundation.propositions funext
+open import foundation.retractions funext
+open import foundation.retracts-of-maps funext
+open import foundation.retracts-of-types funext
+open import foundation.sections funext
+open import foundation.type-arithmetic-dependent-function-types funext
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
-open import foundation.universal-property-empty-type
-open import foundation.universal-property-equivalences
+open import foundation.universal-property-empty-type funext
+open import foundation.universal-property-equivalences funext
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.extensions-maps
+open import orthogonal-factorization-systems.extensions-maps funext
 ```
 
 </details>

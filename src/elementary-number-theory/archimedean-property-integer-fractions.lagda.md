@@ -3,27 +3,32 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module elementary-number-theory.archimedean-property-integer-fractions where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.archimedean-property-integer-fractions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.archimedean-property-integers
-open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.archimedean-property-integers funext
+open import elementary-number-theory.integer-fractions funext
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integer-fractions
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.multiplication-positive-and-negative-integers
+open import elementary-number-theory.multiplication-integer-fractions funext
+open import elementary-number-theory.multiplication-integers funext
+open import elementary-number-theory.multiplication-positive-and-negative-integers funext
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.positive-integer-fractions
-open import elementary-number-theory.strict-inequality-integer-fractions
-open import elementary-number-theory.strict-inequality-integers
+open import elementary-number-theory.positive-integer-fractions funext
+open import elementary-number-theory.strict-inequality-integer-fractions funext
+open import elementary-number-theory.strict-inequality-integers funext
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.propositional-truncations
+open import foundation.existential-quantification funext
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext
 open import foundation.transport-along-identifications
 ```
 

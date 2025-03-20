@@ -1,24 +1,29 @@
 # The category of groups
 
 ```agda
-module group-theory.category-of-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.category-of-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.large-categories
+open import category-theory.categories funext
+open import category-theory.large-categories funext
 
-open import foundation.1-types
-open import foundation.equivalences
+open import foundation.1-types funext
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.isomorphisms-groups
-open import group-theory.precategory-of-groups
+open import group-theory.groups funext
+open import group-theory.isomorphisms-groups funext
+open import group-theory.precategory-of-groups funext
 ```
 
 </details>

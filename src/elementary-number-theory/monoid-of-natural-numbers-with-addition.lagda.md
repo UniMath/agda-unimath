@@ -1,21 +1,26 @@
 # The monoid of natural numbers with addition
 
 ```agda
-module elementary-number-theory.monoid-of-natural-numbers-with-addition where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.monoid-of-natural-numbers-with-addition
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.equality-natural-numbers funext
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.commutative-monoids funext
+open import group-theory.monoids funext
+open import group-theory.semigroups funext
 ```
 
 </details>

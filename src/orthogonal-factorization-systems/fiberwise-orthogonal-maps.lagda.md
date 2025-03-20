@@ -1,27 +1,32 @@
 # Fiberwise orthogonal maps
 
 ```agda
-module orthogonal-factorization-systems.fiberwise-orthogonal-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.fiberwise-orthogonal-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-morphisms-arrows
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.homotopies
-open import foundation.postcomposition-functions
-open import foundation.precomposition-functions
-open import foundation.pullbacks
+open import foundation.cartesian-morphisms-arrows funext
+open import foundation.equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.homotopies funext
+open import foundation.postcomposition-functions funext
+open import foundation.precomposition-functions funext
+open import foundation.pullbacks funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.null-maps
-open import orthogonal-factorization-systems.orthogonal-maps
-open import orthogonal-factorization-systems.pullback-hom
+open import orthogonal-factorization-systems.null-maps funext
+open import orthogonal-factorization-systems.orthogonal-maps funext
+open import orthogonal-factorization-systems.pullback-hom funext
 ```
 
 </details>

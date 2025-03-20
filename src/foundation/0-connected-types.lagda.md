@@ -1,28 +1,33 @@
 # `0`-Connected types
 
 ```agda
-module foundation.0-connected-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.0-connected-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.constant-maps
-open import foundation.contractible-types
+open import foundation.constant-maps funext
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.fiber-inclusions
-open import foundation.functoriality-set-truncation
-open import foundation.images
-open import foundation.inhabited-types
-open import foundation.mere-equality
-open import foundation.propositional-truncations
-open import foundation.set-truncations
-open import foundation.sets
-open import foundation.surjective-maps
+open import foundation.fiber-inclusions funext
+open import foundation.functoriality-set-truncation funext
+open import foundation.images funext
+open import foundation.inhabited-types funext
+open import foundation.mere-equality funext
+open import foundation.propositional-truncations funext
+open import foundation.set-truncations funext
+open import foundation.sets funext
+open import foundation.surjective-maps funext
 open import foundation.unit-type
-open import foundation.universal-property-contractible-types
-open import foundation.universal-property-unit-type
+open import foundation.universal-property-contractible-types funext
+open import foundation.universal-property-unit-type funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -32,7 +37,7 @@ open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.propositions
-open import foundation-core.truncated-maps
+open import foundation-core.truncated-maps funext
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

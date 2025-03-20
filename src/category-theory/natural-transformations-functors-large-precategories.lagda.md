@@ -1,18 +1,23 @@
 # Natural transformations between functors between large precategories
 
 ```agda
-module category-theory.natural-transformations-functors-large-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.natural-transformations-functors-large-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.commuting-squares-of-morphisms-in-large-precategories
-open import category-theory.functors-large-precategories
-open import category-theory.large-precategories
+open import category-theory.commuting-squares-of-morphisms-in-large-precategories funext
+open import category-theory.functors-large-precategories funext
+open import category-theory.large-precategories funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

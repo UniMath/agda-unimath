@@ -1,17 +1,22 @@
 # Inhabited subtypes
 
 ```agda
-module foundation.inhabited-subtypes where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.inhabited-subtypes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.inhabited-types
-open import foundation.propositional-truncations
+open import foundation.inhabited-types funext
+open import foundation.propositional-truncations funext
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

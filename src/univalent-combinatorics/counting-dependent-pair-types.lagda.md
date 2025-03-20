@@ -1,44 +1,49 @@
 # Counting the elements of dependent pair types
 
 ```agda
-module univalent-combinatorics.counting-dependent-pair-types where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.counting-dependent-pair-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.equality-natural-numbers funext
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.sums-of-natural-numbers funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
+open import foundation.contractible-types funext
+open import foundation.coproduct-types funext
+open import foundation.decidable-equality funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.sections
-open import foundation.torsorial-type-families
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.sections funext
+open import foundation.torsorial-type-families funext
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-coproduct-types funext
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.double-counting
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.coproduct-types funext
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.decidable-propositions funext
+open import univalent-combinatorics.double-counting funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

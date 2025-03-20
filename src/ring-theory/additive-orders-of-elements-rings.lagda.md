@@ -1,28 +1,33 @@
 # Additive orders of elements of rings
 
 ```agda
-module ring-theory.additive-orders-of-elements-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.additive-orders-of-elements-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.group-of-integers
+open import elementary-number-theory.group-of-integers funext
 open import elementary-number-theory.integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositional-truncations
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext
 open import foundation.universe-levels
 
-open import group-theory.normal-subgroups
-open import group-theory.orders-of-elements-groups
-open import group-theory.subgroups
-open import group-theory.subsets-groups
+open import group-theory.normal-subgroups funext
+open import group-theory.orders-of-elements-groups funext
+open import group-theory.subgroups funext
+open import group-theory.subsets-groups funext
 
-open import ring-theory.integer-multiples-of-elements-rings
-open import ring-theory.rings
+open import ring-theory.integer-multiples-of-elements-rings funext
+open import ring-theory.rings funext
 ```
 
 </details>

@@ -1,7 +1,12 @@
 # Coalgebras of polynomial endofunctors
 
 ```agda
-module trees.coalgebras-polynomial-endofunctors where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.coalgebras-polynomial-endofunctors
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +15,7 @@ module trees.coalgebras-polynomial-endofunctors where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import trees.polynomial-endofunctors
+open import trees.polynomial-endofunctors funext
 ```
 
 </details>

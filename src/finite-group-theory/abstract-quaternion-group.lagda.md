@@ -1,33 +1,38 @@
 # The abstract quaternion group of order `8`
 
 ```agda
-module finite-group-theory.abstract-quaternion-group where
+open import foundation.function-extensionality-axiom
+
+module
+  finite-group-theory.abstract-quaternion-group
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
+open import foundation.coproduct-types funext
+open import foundation.decidable-equality funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.sets
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext
+open import foundation.sets funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.semigroups
+open import group-theory.groups funext
+open import group-theory.semigroups funext
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

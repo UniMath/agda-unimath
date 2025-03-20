@@ -1,7 +1,12 @@
 # Quotients of finite types
 
 ```agda
-module univalent-combinatorics.quotients-finite-types where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.quotients-finite-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,10 +15,10 @@ module univalent-combinatorics.quotients-finite-types where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.decidable-equivalence-relations
-open import univalent-combinatorics.decidable-subtypes
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.image-of-maps
+open import univalent-combinatorics.decidable-equivalence-relations funext
+open import univalent-combinatorics.decidable-subtypes funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.image-of-maps funext
 ```
 
 </details>

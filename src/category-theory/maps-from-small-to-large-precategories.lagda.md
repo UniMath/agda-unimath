@@ -1,19 +1,24 @@
 # Maps from small to large precategories
 
 ```agda
-module category-theory.maps-from-small-to-large-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.maps-from-small-to-large-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories
-open import category-theory.maps-precategories
-open import category-theory.precategories
+open import category-theory.large-precategories funext
+open import category-theory.maps-precategories funext
+open import category-theory.precategories funext
 
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.torsorial-type-families
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.torsorial-type-families funext
 open import foundation.universe-levels
 ```
 

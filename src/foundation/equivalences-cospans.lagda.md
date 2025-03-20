@@ -1,7 +1,12 @@
 # Equivalences of cospans
 
 ```agda
-module foundation.equivalences-cospans where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.equivalences-cospans
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,10 +15,10 @@ module foundation.equivalences-cospans where
 open import foundation.cospans
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
+open import foundation.homotopy-induction funext
 open import foundation.morphisms-cospans
 open import foundation.structure-identity-principle
-open import foundation.univalence
+open import foundation.univalence funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

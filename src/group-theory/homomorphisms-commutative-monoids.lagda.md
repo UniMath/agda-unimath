@@ -1,21 +1,26 @@
 # Homomorphisms of commutative monoids
 
 ```agda
-module group-theory.homomorphisms-commutative-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.homomorphisms-commutative-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.sets
-open import foundation.torsorial-type-families
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.sets funext
+open import foundation.torsorial-type-families funext
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids
-open import group-theory.homomorphisms-monoids
-open import group-theory.homomorphisms-semigroups
+open import group-theory.commutative-monoids funext
+open import group-theory.homomorphisms-monoids funext
+open import group-theory.homomorphisms-semigroups funext
 ```
 
 </details>

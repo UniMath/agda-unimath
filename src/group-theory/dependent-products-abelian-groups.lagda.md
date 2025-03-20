@@ -1,23 +1,29 @@
 # Dependent products of abelian groups
 
 ```agda
-module group-theory.dependent-products-abelian-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.dependent-products-abelian-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.function-extensionality funext
+
+open import foundation.identity-types funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.dependent-products-groups
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.abelian-groups funext
+open import group-theory.dependent-products-groups funext
+open import group-theory.groups funext
+open import group-theory.monoids funext
+open import group-theory.semigroups funext
 ```
 
 </details>

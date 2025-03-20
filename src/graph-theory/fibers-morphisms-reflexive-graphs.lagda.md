@@ -1,7 +1,12 @@
 # Fibers of morphisms into reflexive graphs
 
 ```agda
-module graph-theory.fibers-morphisms-reflexive-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.fibers-morphisms-reflexive-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,25 +14,25 @@ module graph-theory.fibers-morphisms-reflexive-graphs where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.commuting-squares-of-identifications
-open import foundation.dependent-identifications
+open import foundation.commuting-squares-of-identifications funext
+open import foundation.dependent-identifications funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.families-of-equivalences
-open import foundation.fibers-of-maps
-open import foundation.identity-types
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.families-of-equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import graph-theory.dependent-directed-graphs
-open import graph-theory.dependent-reflexive-graphs
-open import graph-theory.dependent-sums-reflexive-graphs
-open import graph-theory.equivalences-dependent-directed-graphs
-open import graph-theory.equivalences-dependent-reflexive-graphs
-open import graph-theory.equivalences-reflexive-graphs
-open import graph-theory.fibers-morphisms-directed-graphs
-open import graph-theory.morphisms-reflexive-graphs
-open import graph-theory.reflexive-graphs
+open import graph-theory.dependent-directed-graphs funext
+open import graph-theory.dependent-reflexive-graphs funext
+open import graph-theory.dependent-sums-reflexive-graphs funext
+open import graph-theory.equivalences-dependent-directed-graphs funext
+open import graph-theory.equivalences-dependent-reflexive-graphs funext
+open import graph-theory.equivalences-reflexive-graphs funext
+open import graph-theory.fibers-morphisms-directed-graphs funext
+open import graph-theory.morphisms-reflexive-graphs funext
+open import graph-theory.reflexive-graphs funext
 ```
 
 </details>

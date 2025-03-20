@@ -1,26 +1,31 @@
 # Bases of enriched directed trees
 
 ```agda
-module trees.bases-enriched-directed-trees where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.bases-enriched-directed-trees
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.contractible-types funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.type-arithmetic-empty-type
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.type-arithmetic-empty-type funext
 open import foundation.universe-levels
 
-open import trees.bases-directed-trees
-open import trees.enriched-directed-trees
+open import trees.bases-directed-trees funext
+open import trees.enriched-directed-trees funext
 ```
 
 </details>

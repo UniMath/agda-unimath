@@ -1,7 +1,12 @@
 # Undirected trees
 
 ```agda
-module trees.undirected-trees where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.undirected-trees
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,23 +15,23 @@ module trees.undirected-trees where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
+open import foundation.contractible-types funext
+open import foundation.decidable-equality funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.identity-types
-open import foundation.mere-equality
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
+open import foundation.empty-types funext
+open import foundation.identity-types funext
+open import foundation.mere-equality funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import graph-theory.paths-undirected-graphs
-open import graph-theory.trails-undirected-graphs
-open import graph-theory.undirected-graphs
-open import graph-theory.walks-undirected-graphs
+open import graph-theory.paths-undirected-graphs funext
+open import graph-theory.trails-undirected-graphs funext
+open import graph-theory.undirected-graphs funext
+open import graph-theory.walks-undirected-graphs funext
 ```
 
 </details>

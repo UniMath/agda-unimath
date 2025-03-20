@@ -1,28 +1,33 @@
 # Strongly preunivalent categories
 
 ```agda
-module category-theory.strongly-preunivalent-categories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.strongly-preunivalent-categories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
-open import category-theory.preunivalent-categories
+open import category-theory.composition-operations-on-binary-families-of-sets funext
+open import category-theory.isomorphisms-in-precategories funext
+open import category-theory.precategories funext
+open import category-theory.preunivalent-categories funext
 
-open import foundation.1-types
-open import foundation.cartesian-product-types
+open import foundation.1-types funext
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositional-maps
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
-open import foundation.structured-equality-duality
+open import foundation.embeddings funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.propositional-maps funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.strictly-involutive-identity-types funext
+open import foundation.structured-equality-duality funext
 open import foundation.universe-levels
 ```
 

@@ -1,19 +1,24 @@
 # The precategory of semirings
 
 ```agda
-module ring-theory.precategory-of-semirings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.precategory-of-semirings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories
-open import category-theory.precategories
+open import category-theory.large-precategories funext
+open import category-theory.precategories funext
 
 open import foundation.universe-levels
 
-open import ring-theory.homomorphisms-semirings
-open import ring-theory.semirings
+open import ring-theory.homomorphisms-semirings funext
+open import ring-theory.semirings funext
 ```
 
 </details>

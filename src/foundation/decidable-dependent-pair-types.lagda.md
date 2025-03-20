@@ -1,17 +1,22 @@
 # Decidability of dependent pair types
 
 ```agda
-module foundation.decidable-dependent-pair-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.decidable-dependent-pair-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-types
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-coproduct-types funext
 open import foundation.type-arithmetic-unit-type
-open import foundation.uniformly-decidable-type-families
+open import foundation.uniformly-decidable-type-families funext
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types

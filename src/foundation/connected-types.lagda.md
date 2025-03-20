@@ -1,20 +1,24 @@
 # Connected types
 
 ```agda
-module foundation.connected-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.connected-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality-axiom
-open import foundation.functoriality-truncation
-open import foundation.inhabited-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.truncations
+open import foundation.functoriality-truncation funext
+open import foundation.inhabited-types funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.truncations funext
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 

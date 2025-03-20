@@ -1,7 +1,12 @@
 # Normal cores of subgroups
 
 ```agda
-module group-theory.normal-cores-subgroups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.normal-cores-subgroups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,24 +14,24 @@ module group-theory.normal-cores-subgroups where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.intersections-subtypes
-open import foundation.logical-equivalences
-open import foundation.propositional-maps
-open import foundation.subtypes
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.intersections-subtypes funext
+open import foundation.logical-equivalences funext
+open import foundation.propositional-maps funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import group-theory.conjugation
-open import group-theory.groups
-open import group-theory.normal-subgroups
-open import group-theory.subgroups
-open import group-theory.subsets-groups
+open import group-theory.conjugation funext
+open import group-theory.groups funext
+open import group-theory.normal-subgroups funext
+open import group-theory.subgroups funext
+open import group-theory.subsets-groups funext
 
-open import order-theory.galois-connections-large-posets
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.galois-connections-large-posets funext
+open import order-theory.order-preserving-maps-large-posets funext
+open import order-theory.order-preserving-maps-large-preorders funext
 ```
 
 </details>

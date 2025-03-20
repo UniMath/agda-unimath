@@ -1,29 +1,34 @@
 # Functorialty of pullbacks
 
 ```agda
-module foundation.functoriality-pullbacks where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.functoriality-pullbacks
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospan-diagrams
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.homotopies-morphisms-cospan-diagrams
+open import foundation.equality-dependent-pair-types funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.homotopies funext-morphisms-cospan-diagrams
 open import foundation.morphisms-cospan-diagrams
-open import foundation.pullback-cones
-open import foundation.standard-pullbacks
+open import foundation.pullback-cones funext
+open import foundation.standard-pullbacks funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalences
 open import foundation-core.identity-types
-open import foundation-core.pullbacks
+open import foundation-core.pullbacks funext
 ```
 
 </details>

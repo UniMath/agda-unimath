@@ -1,15 +1,20 @@
 # The universal property of the conatural numbers
 
 ```agda
-module elementary-number-theory.universal-property-conatural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.universal-property-conatural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coalgebras-maybe
-open import foundation.contractible-types
-open import foundation.morphisms-coalgebras-maybe
+open import foundation.coalgebras-maybe funext
+open import foundation.contractible-types funext
+open import foundation.morphisms-coalgebras-maybe funext
 open import foundation.universe-levels
 ```
 

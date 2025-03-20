@@ -1,7 +1,12 @@
 # Rational commutative monoids
 
 ```agda
-module group-theory.rational-commutative-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.rational-commutative-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,14 +15,14 @@ module group-theory.rational-commutative-monoids where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids
-open import group-theory.monoids
-open import group-theory.powers-of-elements-commutative-monoids
+open import group-theory.commutative-monoids funext
+open import group-theory.monoids funext
+open import group-theory.powers-of-elements-commutative-monoids funext
 ```
 
 </details>

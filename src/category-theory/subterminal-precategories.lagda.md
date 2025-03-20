@@ -1,32 +1,37 @@
 # Subterminal precategories
 
 ```agda
-module category-theory.subterminal-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.subterminal-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
-open import category-theory.fully-faithful-functors-precategories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
-open import category-theory.pregroupoids
-open import category-theory.strict-categories
-open import category-theory.terminal-category
+open import category-theory.composition-operations-on-binary-families-of-sets funext
+open import category-theory.fully-faithful-functors-precategories funext
+open import category-theory.isomorphisms-in-precategories funext
+open import category-theory.precategories funext
+open import category-theory.pregroupoids funext
+open import category-theory.strict-categories funext
+open import category-theory.terminal-category funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.subtype-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels

@@ -1,37 +1,42 @@
 # The positive integers
 
 ```agda
-module elementary-number-theory.positive-integers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.positive-integers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-integers
+open import elementary-number-theory.equality-integers funext
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-integers
-open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.nonzero-integers funext
+open import elementary-number-theory.nonzero-natural-numbers funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-subtypes
-open import foundation.decidable-types
+open import foundation.coproduct-types funext
+open import foundation.decidable-subtypes funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.surjective-maps
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.existential-quantification funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.subtypes funext
+open import foundation.surjective-maps funext
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import set-theory.countable-sets
+open import set-theory.countable-sets funext
 ```
 
 </details>

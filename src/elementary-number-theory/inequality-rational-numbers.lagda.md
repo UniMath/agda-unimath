@@ -1,41 +1,46 @@
 # Inequality on the rational numbers
 
 ```agda
-module elementary-number-theory.inequality-rational-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.inequality-rational-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integer-fractions
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.cross-multiplication-difference-integer-fractions
-open import elementary-number-theory.difference-integers
-open import elementary-number-theory.difference-rational-numbers
-open import elementary-number-theory.inequality-integer-fractions
-open import elementary-number-theory.inequality-integers
-open import elementary-number-theory.integer-fractions
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.nonnegative-integers
-open import elementary-number-theory.positive-and-negative-integers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.reduced-integer-fractions
+open import elementary-number-theory.addition-integer-fractions funext
+open import elementary-number-theory.addition-rational-numbers funext
+open import elementary-number-theory.cross-multiplication-difference-integer-fractions funext
+open import elementary-number-theory.difference-integers funext
+open import elementary-number-theory.difference-rational-numbers funext
+open import elementary-number-theory.inequality-integer-fractions funext
+open import elementary-number-theory.inequality-integers funext
+open import elementary-number-theory.integer-fractions funext
+open import elementary-number-theory.multiplication-integers funext
+open import elementary-number-theory.nonnegative-integers funext
+open import elementary-number-theory.positive-and-negative-integers funext
+open import elementary-number-theory.rational-numbers funext
+open import elementary-number-theory.reduced-integer-fractions funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
+open import foundation.coproduct-types funext
+open import foundation.decidable-propositions funext
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositions
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.propositions funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import order-theory.posets
-open import order-theory.preorders
+open import order-theory.posets funext
+open import order-theory.preorders funext
 ```
 
 </details>

@@ -3,18 +3,23 @@
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-module modal-type-theory.transport-along-crisp-identifications where
+open import foundation.function-extensionality-axiom
+
+module
+  modal-type-theory.transport-along-crisp-identifications
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import modal-type-theory.crisp-identity-types
+open import modal-type-theory.crisp-identity-types funext
 ```
 
 </details>

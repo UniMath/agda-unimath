@@ -3,22 +3,27 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module globular-types.base-change-dependent-reflexive-globular-types where
+open import foundation.function-extensionality-axiom
+
+module
+  globular-types.base-change-dependent-reflexive-globular-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import globular-types.base-change-dependent-globular-types
-open import globular-types.dependent-globular-types
-open import globular-types.dependent-reflexive-globular-types
+open import globular-types.base-change-dependent-globular-types funext
+open import globular-types.dependent-globular-types funext
+open import globular-types.dependent-reflexive-globular-types funext
 open import globular-types.globular-types
-open import globular-types.reflexive-globular-maps
-open import globular-types.reflexive-globular-types
+open import globular-types.reflexive-globular-maps funext
+open import globular-types.reflexive-globular-types funext
 ```
 
 </details>

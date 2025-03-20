@@ -1,7 +1,12 @@
 # Kernels of homomorphisms of groups
 
 ```agda
-module group-theory.kernels-homomorphisms-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.kernels-homomorphisms-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,17 +15,17 @@ module group-theory.kernels-homomorphisms-groups where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import group-theory.embeddings-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.normal-subgroups
-open import group-theory.subgroups
-open import group-theory.subsets-groups
+open import group-theory.embeddings-groups funext
+open import group-theory.groups funext
+open import group-theory.homomorphisms-groups funext
+open import group-theory.normal-subgroups funext
+open import group-theory.subgroups funext
+open import group-theory.subsets-groups funext
 ```
 
 </details>

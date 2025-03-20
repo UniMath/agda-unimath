@@ -1,27 +1,32 @@
 # The category of maps and natural transformations from small to large categories
 
 ```agda
-module category-theory.category-of-maps-from-small-to-large-categories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.category-of-maps-from-small-to-large-categories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.category-of-maps-categories
-open import category-theory.isomorphisms-in-large-precategories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.large-categories
-open import category-theory.large-precategories
-open import category-theory.maps-from-small-to-large-categories
-open import category-theory.maps-from-small-to-large-precategories
-open import category-theory.natural-isomorphisms-maps-categories
-open import category-theory.natural-isomorphisms-maps-precategories
-open import category-theory.precategories
-open import category-theory.precategory-of-maps-from-small-to-large-precategories
+open import category-theory.categories funext
+open import category-theory.category-of-maps-categories funext
+open import category-theory.isomorphisms-in-large-precategories funext
+open import category-theory.isomorphisms-in-precategories funext
+open import category-theory.large-categories funext
+open import category-theory.large-precategories funext
+open import category-theory.maps-from-small-to-large-categories funext
+open import category-theory.maps-from-small-to-large-precategories funext
+open import category-theory.natural-isomorphisms-maps-categories funext
+open import category-theory.natural-isomorphisms-maps-precategories funext
+open import category-theory.precategories funext
+open import category-theory.precategory-of-maps-from-small-to-large-precategories funext
 
-open import foundation.equivalences
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

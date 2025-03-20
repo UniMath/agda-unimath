@@ -1,27 +1,32 @@
 # Order preserving maps between preorders
 
 ```agda
-module order-theory.order-preserving-maps-preorders where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.order-preserving-maps-preorders
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.strictly-involutive-identity-types
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.strictly-involutive-identity-types funext
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import foundation-core.torsorial-type-families
 
-open import order-theory.preorders
+open import order-theory.preorders funext
 ```
 
 </details>

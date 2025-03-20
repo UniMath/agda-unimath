@@ -1,7 +1,12 @@
 # Eulerian circuits in undirected graphs
 
 ```agda
-module graph-theory.eulerian-circuits-undirected-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.eulerian-circuits-undirected-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,13 +15,13 @@ module graph-theory.eulerian-circuits-undirected-graphs where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.universe-levels
 
-open import graph-theory.morphisms-undirected-graphs
-open import graph-theory.polygons
-open import graph-theory.undirected-graphs
+open import graph-theory.morphisms-undirected-graphs funext
+open import graph-theory.polygons funext
+open import graph-theory.undirected-graphs funext
 ```
 
 </details>

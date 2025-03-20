@@ -1,25 +1,30 @@
 # The image of a map
 
 ```agda
-module univalent-combinatorics.image-of-maps where
+open import foundation.function-extensionality-axiom
 
-open import foundation.images public
+module
+  univalent-combinatorics.image-of-maps
+  (funext : function-extensionality)
+  where
+
+open import foundation.images funext public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-equality
-open import foundation.decidable-types
-open import foundation.fibers-of-maps
-open import foundation.propositional-truncations
-open import foundation.subtypes
-open import foundation.surjective-maps
+open import foundation.decidable-equality funext
+open import foundation.decidable-types funext
+open import foundation.fibers-of-maps funext
+open import foundation.propositional-truncations funext
+open import foundation.subtypes funext
+open import foundation.surjective-maps funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.dependent-pair-types funext
+open import univalent-combinatorics.equality-finite-types funext
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

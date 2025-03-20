@@ -1,37 +1,42 @@
 # Divisibility of integers
 
 ```agda
-module elementary-number-theory.divisibility-integers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.divisibility-integers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.absolute-value-integers
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.equality-integers
+open import elementary-number-theory.absolute-value-integers funext
+open import elementary-number-theory.addition-integers funext
+open import elementary-number-theory.divisibility-natural-numbers funext
+open import elementary-number-theory.equality-integers funext
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.multiplication-positive-and-negative-integers
+open import elementary-number-theory.multiplication-integers funext
+open import elementary-number-theory.multiplication-positive-and-negative-integers funext
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonnegative-integers
-open import elementary-number-theory.nonpositive-integers
-open import elementary-number-theory.nonzero-integers
-open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.nonnegative-integers funext
+open import elementary-number-theory.nonpositive-integers funext
+open import elementary-number-theory.nonzero-integers funext
+open import elementary-number-theory.positive-and-negative-integers funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.binary-relations funext
+open import foundation.cartesian-product-types funext
+open import foundation.coproduct-types funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositional-maps
-open import foundation.propositions
+open import foundation.empty-types funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositional-maps funext
+open import foundation.propositions funext
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels

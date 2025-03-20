@@ -1,21 +1,27 @@
 # Involutions
 
 ```agda
-module foundation.involutions where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.involutions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.automorphisms
+open import foundation.automorphisms funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.function-extensionality
+open import foundation.dependent-products-truncated-types funext
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-algebra
-open import foundation.homotopy-induction
+open import foundation.homotopy-induction funext
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition

@@ -1,16 +1,21 @@
 # Sieves in categories
 
 ```agda
-module category-theory.sieves-in-categories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.sieves-in-categories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
+open import category-theory.categories funext
 
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 ```
 

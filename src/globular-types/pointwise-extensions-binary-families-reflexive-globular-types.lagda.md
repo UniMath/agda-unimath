@@ -14,10 +14,10 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import globular-types.binary-dependent-reflexive-globular-types
-open import globular-types.points-reflexive-globular-types
-open import globular-types.reflexive-globular-equivalences
-open import globular-types.reflexive-globular-types
+open import globular-types.binary-dependent-reflexive-globular-types funext
+open import globular-types.points-reflexive-globular-types funext
+open import globular-types.reflexive-globular-equivalences funext
+open import globular-types.reflexive-globular-types funext
 ```
 
 </details>
@@ -49,7 +49,12 @@ of `K` if it comes equipped with a family of
 ### The predicate of being a pointwise extension of a binary family of reflexive globular types
 
 ```agda
-module _
+open import foundation.function-extensionality-axiom
+
+module
+  _
+  (funext : function-extensionality)
+  where
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
   {G : Reflexive-Globular-Type l1 l2} {H : Reflexive-Globular-Type l3 l4}
   (K :

@@ -1,22 +1,27 @@
 # Small maps
 
 ```agda
-module foundation.small-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.small-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.locally-small-types
-open import foundation.retracts-of-maps
-open import foundation.split-idempotent-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.locally-small-types funext
+open import foundation.retracts-of-maps funext
+open import foundation.split-idempotent-maps funext
 open import foundation.universe-levels
 
 open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
-open import foundation-core.small-types
+open import foundation-core.small-types funext
 ```
 
 </details>

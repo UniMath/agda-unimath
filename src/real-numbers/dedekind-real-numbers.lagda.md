@@ -1,44 +1,49 @@
 # Dedekind real numbers
 
 ```agda
-module real-numbers.dedekind-real-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  real-numbers.dedekind-real-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.inequality-rational-numbers funext
+open import elementary-number-theory.rational-numbers funext
+open import elementary-number-theory.strict-inequality-rational-numbers funext
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.conjunction
-open import foundation.coproduct-types
+open import foundation.conjunction funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.disjoint-subtypes
-open import foundation.disjunction
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.powersets
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.disjoint-subtypes funext
+open import foundation.disjunction funext
+open import foundation.embeddings funext
+open import foundation.empty-types funext
+open import foundation.existential-quantification funext
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.powersets funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.subtypes funext
 open import foundation.transport-along-identifications
-open import foundation.universal-quantification
+open import foundation.universal-quantification funext
 open import foundation.universe-levels
 
-open import logic.functoriality-existential-quantification
+open import logic.functoriality-existential-quantification funext
 
-open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.lower-dedekind-real-numbers funext
+open import real-numbers.upper-dedekind-real-numbers funext
 ```
 
 </details>

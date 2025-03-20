@@ -3,7 +3,12 @@
 ## Modules in the polytopes namespace
 
 ```agda
-module polytopes where
+open import foundation.function-extensionality-axiom
 
-open import polytopes.abstract-polytopes public
+module
+  polytopes
+  (funext : function-extensionality)
+  where
+
+open import polytopes.abstract-polytopes funext public
 ```

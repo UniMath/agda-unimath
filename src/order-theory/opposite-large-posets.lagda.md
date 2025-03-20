@@ -1,25 +1,30 @@
 # Opposite large posets
 
 ```agda
-module order-theory.opposite-large-posets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.opposite-large-posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.large-identity-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.opposite-large-preorders
-open import order-theory.order-preserving-maps-large-posets
+open import order-theory.large-posets funext
+open import order-theory.large-preorders funext
+open import order-theory.opposite-large-preorders funext
+open import order-theory.order-preserving-maps-large-posets funext
 ```
 
 </details>

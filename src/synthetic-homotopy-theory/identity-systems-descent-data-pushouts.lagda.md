@@ -3,43 +3,48 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module synthetic-homotopy-theory.identity-systems-descent-data-pushouts where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.identity-systems-descent-data-pushouts
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
+open import foundation.commuting-squares-of-maps funext
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
+open import foundation.homotopies funext
 open import foundation.identity-systems
-open import foundation.identity-types
-open import foundation.sections
+open import foundation.identity-types funext
+open import foundation.sections funext
 open import foundation.singleton-induction
-open import foundation.span-diagrams
-open import foundation.torsorial-type-families
-open import foundation.transposition-identifications-along-equivalences
-open import foundation.universal-property-dependent-pair-types
-open import foundation.universal-property-identity-types
+open import foundation.span-diagrams funext
+open import foundation.torsorial-type-families funext
+open import foundation.transposition-identifications-along-equivalences funext
+open import foundation.universal-property-dependent-pair-types funext
+open import foundation.universal-property-identity-types funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-universal-property-pushouts
-open import synthetic-homotopy-theory.descent-data-equivalence-types-over-pushouts
-open import synthetic-homotopy-theory.descent-data-identity-types-over-pushouts
-open import synthetic-homotopy-theory.descent-data-pushouts
-open import synthetic-homotopy-theory.descent-property-pushouts
-open import synthetic-homotopy-theory.equivalences-descent-data-pushouts
-open import synthetic-homotopy-theory.families-descent-data-pushouts
-open import synthetic-homotopy-theory.flattening-lemma-pushouts
-open import synthetic-homotopy-theory.morphisms-descent-data-pushouts
-open import synthetic-homotopy-theory.sections-descent-data-pushouts
-open import synthetic-homotopy-theory.universal-property-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.dependent-universal-property-pushouts funext
+open import synthetic-homotopy-theory.descent-data-equivalence-types-over-pushouts funext
+open import synthetic-homotopy-theory.descent-data-identity-types-over-pushouts funext
+open import synthetic-homotopy-theory.descent-data-pushouts funext
+open import synthetic-homotopy-theory.descent-property-pushouts funext
+open import synthetic-homotopy-theory.equivalences-descent-data-pushouts funext
+open import synthetic-homotopy-theory.families-descent-data-pushouts funext
+open import synthetic-homotopy-theory.flattening-lemma-pushouts funext
+open import synthetic-homotopy-theory.morphisms-descent-data-pushouts funext
+open import synthetic-homotopy-theory.sections-descent-data-pushouts funext
+open import synthetic-homotopy-theory.universal-property-pushouts funext
 ```
 
 </details>

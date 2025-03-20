@@ -1,18 +1,23 @@
 # Trails in directed graphs
 
 ```agda
-module graph-theory.trails-directed-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.trails-directed-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.injective-maps
+open import foundation.injective-maps funext
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs
-open import graph-theory.walks-directed-graphs
+open import graph-theory.directed-graphs funext
+open import graph-theory.walks-directed-graphs funext
 ```
 
 </details>

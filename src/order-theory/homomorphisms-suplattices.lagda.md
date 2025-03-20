@@ -1,20 +1,25 @@
 # Homomorphisms of suplattices
 
 ```agda
-module order-theory.homomorphisms-suplattices where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.homomorphisms-suplattices
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.function-types
+open import foundation.function-types funext
 open import foundation.universe-levels
 
-open import order-theory.least-upper-bounds-posets
-open import order-theory.order-preserving-maps-posets
-open import order-theory.suplattices
+open import order-theory.least-upper-bounds-posets funext
+open import order-theory.order-preserving-maps-posets funext
+open import order-theory.suplattices funext
 ```
 
 </details>

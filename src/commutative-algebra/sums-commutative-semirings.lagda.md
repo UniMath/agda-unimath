@@ -1,29 +1,34 @@
 # Sums in commutative semirings
 
 ```agda
-module commutative-algebra.sums-commutative-semirings where
+open import foundation.function-extensionality-axiom
+
+module
+  commutative-algebra.sums-commutative-semirings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-semirings
+open import commutative-algebra.commutative-semirings funext
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
-open import linear-algebra.vectors-on-commutative-semirings
+open import linear-algebra.vectors funext
+open import linear-algebra.vectors funext-on-commutative-semirings
 
-open import ring-theory.sums-semirings
+open import ring-theory.sums-semirings funext
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.coproduct-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

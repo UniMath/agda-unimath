@@ -1,21 +1,26 @@
 # Large subposets
 
 ```agda
-module order-theory.large-subposets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.large-subposets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.large-binary-relations
-open import foundation.logical-equivalences
-open import foundation.subtypes
+open import foundation.large-binary-relations funext
+open import foundation.logical-equivalences funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.large-subpreorders
+open import order-theory.large-posets funext
+open import order-theory.large-preorders funext
+open import order-theory.large-subpreorders funext
 ```
 
 </details>

@@ -1,29 +1,34 @@
 # Combinators of enriched directed trees
 
 ```agda
-module trees.combinator-enriched-directed-trees where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.combinator-enriched-directed-trees
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.maybe
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.maybe funext
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs
+open import graph-theory.directed-graphs funext
 
-open import trees.combinator-directed-trees
-open import trees.directed-trees
-open import trees.enriched-directed-trees
-open import trees.equivalences-directed-trees
-open import trees.equivalences-enriched-directed-trees
-open import trees.fibers-enriched-directed-trees
-open import trees.morphisms-directed-trees
+open import trees.combinator-directed-trees funext
+open import trees.directed-trees funext
+open import trees.enriched-directed-trees funext
+open import trees.equivalences-directed-trees funext
+open import trees.equivalences-enriched-directed-trees funext
+open import trees.fibers-enriched-directed-trees funext
+open import trees.morphisms-directed-trees funext
 ```
 
 </details>

@@ -1,18 +1,23 @@
 # Existential quantification
 
 ```agda
-module foundation.existential-quantification where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.existential-quantification
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
+open import foundation.conjunction funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.logical-equivalences
-open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
+open import foundation.dependent-products-propositions funext
+open import foundation.logical-equivalences funext
+open import foundation.propositional-extensionality funext
+open import foundation.propositional-truncations funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

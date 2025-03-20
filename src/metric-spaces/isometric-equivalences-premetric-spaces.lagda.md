@@ -1,31 +1,37 @@
 # Isometric equivalences between premetric spaces
 
 ```agda
-module metric-spaces.isometric-equivalences-premetric-spaces where
+open import foundation.function-extensionality-axiom
+
+module
+  metric-spaces.isometric-equivalences-premetric-spaces
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
+open import foundation.torsorial-type-families funext
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence
+open import foundation.univalence funext
 open import foundation.universe-levels
 
-open import metric-spaces.equality-of-premetric-spaces
-open import metric-spaces.isometries-premetric-spaces
-open import metric-spaces.premetric-spaces
+open import metric-spaces.equality-of-premetric-spaces funext
+open import metric-spaces.isometries-premetric-spaces funext
+open import metric-spaces.premetric-spaces funext
 ```
 
 </details>

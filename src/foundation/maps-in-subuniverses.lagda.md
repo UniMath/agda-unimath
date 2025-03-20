@@ -1,14 +1,19 @@
 # Maps in subuniverses
 
 ```agda
-module foundation.maps-in-subuniverses where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.maps-in-subuniverses
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.homotopies
-open import foundation.subuniverses
+open import foundation.homotopies funext
+open import foundation.subuniverses funext
 open import foundation.universe-levels
 
 open import foundation-core.fibers-of-maps

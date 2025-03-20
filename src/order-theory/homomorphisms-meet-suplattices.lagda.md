@@ -1,21 +1,26 @@
 # Homomorphisms of meet-suplattices
 
 ```agda
-module order-theory.homomorphisms-meet-suplattices where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.homomorphisms-meet-suplattices
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.function-types
+open import foundation.function-types funext
 open import foundation.universe-levels
 
-open import order-theory.homomorphisms-meet-semilattices
-open import order-theory.homomorphisms-suplattices
-open import order-theory.meet-suplattices
-open import order-theory.order-preserving-maps-posets
+open import order-theory.homomorphisms-meet-semilattices funext
+open import order-theory.homomorphisms-suplattices funext
+open import order-theory.meet-suplattices funext
+open import order-theory.order-preserving-maps-posets funext
 ```
 
 </details>

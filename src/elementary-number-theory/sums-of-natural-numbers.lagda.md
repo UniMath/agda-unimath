@@ -1,7 +1,12 @@
 # Sums of natural numbers
 
 ```agda
-module elementary-number-theory.sums-of-natural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.sums-of-natural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,24 +15,24 @@ module elementary-number-theory.sums-of-natural-numbers where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.constant-maps
-open import foundation.coproduct-types
+open import foundation.constant-maps funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import lists.lists
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

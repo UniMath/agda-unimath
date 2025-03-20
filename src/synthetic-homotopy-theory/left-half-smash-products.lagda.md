@@ -1,19 +1,24 @@
 # Left half-smash products
 
 ```agda
-module synthetic-homotopy-theory.left-half-smash-products where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.left-half-smash-products
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.cofibers-of-maps
+open import synthetic-homotopy-theory.cofibers-of-maps funext
 ```
 
 </details>

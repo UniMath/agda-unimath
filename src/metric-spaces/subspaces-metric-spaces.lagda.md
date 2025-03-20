@@ -1,28 +1,33 @@
 # Subspaces of metric spaces
 
 ```agda
-module metric-spaces.subspaces-metric-spaces where
+open import foundation.function-extensionality-axiom
+
+module
+  metric-spaces.subspaces-metric-spaces
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.logical-equivalences
-open import foundation.subtypes
+open import foundation.logical-equivalences funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import metric-spaces.extensional-premetric-structures
-open import metric-spaces.functions-metric-spaces
-open import metric-spaces.isometries-metric-spaces
-open import metric-spaces.metric-spaces
-open import metric-spaces.metric-structures
-open import metric-spaces.monotonic-premetric-structures
-open import metric-spaces.premetric-structures
-open import metric-spaces.pseudometric-structures
-open import metric-spaces.reflexive-premetric-structures
-open import metric-spaces.symmetric-premetric-structures
-open import metric-spaces.triangular-premetric-structures
+open import metric-spaces.extensional-premetric-structures funext
+open import metric-spaces.functions-metric-spaces funext
+open import metric-spaces.isometries-metric-spaces funext
+open import metric-spaces.metric-spaces funext
+open import metric-spaces.metric-structures funext
+open import metric-spaces.monotonic-premetric-structures funext
+open import metric-spaces.premetric-structures funext
+open import metric-spaces.pseudometric-structures funext
+open import metric-spaces.reflexive-premetric-structures funext
+open import metric-spaces.symmetric-premetric-structures funext
+open import metric-spaces.triangular-premetric-structures funext
 ```
 
 </details>

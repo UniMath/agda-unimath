@@ -1,7 +1,12 @@
 # Morphisms of inverse sequential diagrams of types
 
 ```agda
-module foundation.morphisms-inverse-sequential-diagrams where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.morphisms-inverse-sequential-diagrams
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,13 +15,13 @@ module foundation.morphisms-inverse-sequential-diagrams where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-homotopies
-open import foundation.dependent-inverse-sequential-diagrams
+open import foundation.binary-homotopies funext
+open import foundation.dependent-inverse-sequential-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
+open import foundation.equality-dependent-function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
-open import foundation.inverse-sequential-diagrams
+open import foundation.homotopy-induction funext
+open import foundation.inverse-sequential-diagrams funext
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition

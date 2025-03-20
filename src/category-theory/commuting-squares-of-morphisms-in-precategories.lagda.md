@@ -1,14 +1,19 @@
 # Commuting squares of morphisms in precategories
 
 ```agda
-module category-theory.commuting-squares-of-morphisms-in-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.commuting-squares-of-morphisms-in-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.commuting-squares-of-morphisms-in-set-magmoids
-open import category-theory.precategories
+open import category-theory.commuting-squares-of-morphisms-in-set-magmoids funext
+open import category-theory.precategories funext
 
 open import foundation.universe-levels
 ```

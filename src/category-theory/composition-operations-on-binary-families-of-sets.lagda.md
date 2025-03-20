@@ -1,21 +1,27 @@
 # Composition operations on binary families of sets
 
 ```agda
-module category-theory.composition-operations-on-binary-families-of-sets where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.composition-operations-on-binary-families-of-sets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
-open import foundation.subtypes
+open import foundation.function-extensionality funext
+
+open import foundation.identity-types funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.strictly-involutive-identity-types funext
+open import foundation.subtypes funext
 open import foundation.telescopes
 open import foundation.universe-levels
 ```

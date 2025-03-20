@@ -1,22 +1,27 @@
 # Function semirings
 
 ```agda
-module ring-theory.function-semirings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.function-semirings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids
-open import group-theory.monoids
+open import group-theory.commutative-monoids funext
+open import group-theory.monoids funext
 
-open import ring-theory.dependent-products-semirings
-open import ring-theory.semirings
+open import ring-theory.dependent-products-semirings funext
+open import ring-theory.semirings funext
 ```
 
 </details>

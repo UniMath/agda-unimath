@@ -1,7 +1,12 @@
 # Addition on the integers
 
 ```agda
-module elementary-number-theory.addition-integers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.addition-integers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,23 +15,23 @@ module elementary-number-theory.addition-integers where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonnegative-integers
-open import elementary-number-theory.positive-and-negative-integers
-open import elementary-number-theory.positive-integers
+open import elementary-number-theory.nonnegative-integers funext
+open import elementary-number-theory.positive-and-negative-integers funext
+open import elementary-number-theory.positive-integers funext
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.binary-embeddings
+open import foundation.binary-embeddings funext
 open import foundation.binary-equivalences
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.injective-maps
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
 open import foundation.interchange-law
-open import foundation.sets
+open import foundation.sets funext
 open import foundation.unit-type
 ```
 

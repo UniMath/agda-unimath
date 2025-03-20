@@ -1,38 +1,43 @@
 # Scott-continuous maps between posets
 
 ```agda
-module domain-theory.scott-continuous-maps-posets where
+open import foundation.function-extensionality-axiom
+
+module
+  domain-theory.scott-continuous-maps-posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import domain-theory.directed-families-posets
-open import domain-theory.reindexing-directed-families-posets
+open import domain-theory.directed-families-posets funext
+open import domain-theory.reindexing-directed-families-posets funext
 
-open import foundation.booleans
+open import foundation.booleans funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.evaluation-functions
-open import foundation.existential-quantification
-open import foundation.function-types
+open import foundation.existential-quantification funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.raising-universe-levels
-open import foundation.small-types
-open import foundation.strictly-involutive-identity-types
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.raising-universe-levels funext
+open import foundation.small-types funext
+open import foundation.strictly-involutive-identity-types funext
 open import foundation.subtype-identity-principle
-open import foundation.surjective-maps
-open import foundation.torsorial-type-families
+open import foundation.surjective-maps funext
+open import foundation.torsorial-type-families funext
 open import foundation.universe-levels
 
-open import order-theory.least-upper-bounds-posets
-open import order-theory.order-preserving-maps-posets
-open import order-theory.posets
+open import order-theory.least-upper-bounds-posets funext
+open import order-theory.order-preserving-maps-posets funext
+open import order-theory.posets funext
 ```
 
 </details>

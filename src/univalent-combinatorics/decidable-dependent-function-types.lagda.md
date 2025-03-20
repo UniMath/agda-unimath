@@ -1,9 +1,14 @@
 # Decidable dependent function types
 
 ```agda
-module univalent-combinatorics.decidable-dependent-function-types where
+open import foundation.function-extensionality-axiom
 
-open import elementary-number-theory.decidable-dependent-function-types public
+module
+  univalent-combinatorics.decidable-dependent-function-types
+  (funext : function-extensionality)
+  where
+
+open import elementary-number-theory.decidable-dependent-function-types funext public
 ```
 
 <details><summary>Imports</summary>
@@ -11,21 +16,21 @@ open import elementary-number-theory.decidable-dependent-function-types public
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.coproduct-types funext
+open import foundation.decidable-propositions funext
+open import foundation.decidable-types funext
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-choice
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.finite-choice funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

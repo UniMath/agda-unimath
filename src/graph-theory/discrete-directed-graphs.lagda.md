@@ -1,29 +1,34 @@
 # Discrete directed graphs
 
 ```agda
-module graph-theory.discrete-directed-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.discrete-directed-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.discrete-binary-relations
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.homotopies
-open import foundation.retractions
-open import foundation.sections
+open import foundation.discrete-binary-relations funext
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.homotopies funext
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 
-open import graph-theory.directed-graphs
-open import graph-theory.morphisms-directed-graphs
-open import graph-theory.reflexive-graphs
+open import graph-theory.directed-graphs funext
+open import graph-theory.morphisms-directed-graphs funext
+open import graph-theory.reflexive-graphs funext
 ```
 
 </details>

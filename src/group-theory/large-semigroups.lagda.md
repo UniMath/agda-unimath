@@ -1,18 +1,23 @@
 # Large semigroups
 
 ```agda
-module group-theory.large-semigroups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.large-semigroups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import group-theory.semigroups
+open import group-theory.semigroups funext
 ```
 
 </details>

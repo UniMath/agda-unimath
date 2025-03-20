@@ -1,31 +1,36 @@
 # The universal property of coequalizers
 
 ```agda
-module synthetic-homotopy-theory.universal-property-coequalizers where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.universal-property-coequalizers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-cubes-of-maps
-open import foundation.commuting-squares-of-maps
-open import foundation.contractible-maps
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.commuting-cubes-of-maps funext
+open import foundation.commuting-squares-of-maps funext
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
 open import foundation.double-arrows
-open import foundation.equivalences
-open import foundation.equivalences-double-arrows
-open import foundation.fibers-of-maps
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
+open import foundation.equivalences funext
+open import foundation.equivalences funext-double-arrows
+open import foundation.fibers-of-maps funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.coforks
-open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows
-open import synthetic-homotopy-theory.universal-property-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.coforks funext
+open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows funext
+open import synthetic-homotopy-theory.universal-property-pushouts funext
 ```
 
 </details>

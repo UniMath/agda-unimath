@@ -3,17 +3,22 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module elementary-number-theory.infinite-conatural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.infinite-conatural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.conatural-numbers
-open import elementary-number-theory.equality-conatural-numbers
+open import elementary-number-theory.conatural-numbers funext
+open import elementary-number-theory.equality-conatural-numbers funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext
 open import foundation.universe-levels
 
 open import foundation-core.identity-types

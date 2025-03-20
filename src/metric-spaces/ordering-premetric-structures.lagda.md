@@ -1,25 +1,30 @@
 # The poset of premetric structures on a type
 
 ```agda
-module metric-spaces.ordering-premetric-structures where
+open import foundation.function-extensionality-axiom
+
+module
+  metric-spaces.ordering-premetric-structures
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers funext
 
-open import foundation.binary-relations
+open import foundation.binary-relations funext
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import metric-spaces.premetric-structures
+open import metric-spaces.premetric-structures funext
 
-open import order-theory.posets
-open import order-theory.preorders
+open import order-theory.posets funext
+open import order-theory.preorders funext
 ```
 
 </details>

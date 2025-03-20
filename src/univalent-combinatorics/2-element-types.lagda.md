@@ -1,58 +1,63 @@
 # `2`-element types
 
 ```agda
-module univalent-combinatorics.2-element-types where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.2-element-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.equality-natural-numbers funext
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.automorphisms
-open import foundation.connected-components-universes
-open import foundation.contractible-maps
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.automorphisms funext
+open import foundation.connected-components-universes funext
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext
+open import foundation.coproduct-types funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.double-negation
-open import foundation.empty-types
-open import foundation.equivalence-extensionality
-open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.double-negation funext
+open import foundation.empty-types funext
+open import foundation.equivalence-extensionality funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
+open import foundation.homotopies funext
 open import foundation.identity-systems
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.involutions
-open import foundation.mere-equivalences
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.raising-universe-levels
-open import foundation.sets
-open import foundation.subuniverses
-open import foundation.torsorial-type-families
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.involutions funext
+open import foundation.mere-equivalences funext
+open import foundation.negated-equality funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.raising-universe-levels funext
+open import foundation.sets funext
+open import foundation.subuniverses funext
+open import foundation.torsorial-type-families funext
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-coproduct-types funext
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-empty-type funext
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
-open import foundation.universal-property-identity-systems
+open import foundation.universal-property-identity-systems funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.equivalences
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.equality-standard-finite-types funext
+open import univalent-combinatorics.equivalences funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

@@ -1,22 +1,27 @@
 # Inhabited finite total orders
 
 ```agda
-module order-theory.inhabited-finite-total-orders where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.inhabited-finite-total-orders
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.inhabited-types
-open import foundation.propositions
+open import foundation.inhabited-types funext
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import order-theory.finite-posets
-open import order-theory.finite-total-orders
-open import order-theory.posets
-open import order-theory.total-orders
+open import order-theory.finite-posets funext
+open import order-theory.finite-total-orders funext
+open import order-theory.posets funext
+open import order-theory.total-orders funext
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

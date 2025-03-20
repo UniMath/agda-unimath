@@ -1,23 +1,29 @@
 # The universal property of dependent function types
 
 ```agda
-module foundation.universal-property-dependent-function-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.universal-property-dependent-function-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.identity-types
+open import foundation.function-extensionality funext
+
+open import foundation.identity-types funext
 open import foundation.spans-families-of-types
-open import foundation.terminal-spans-families-of-types
+open import foundation.terminal-spans-families-of-types funext
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 open import foundation-core.functoriality-dependent-pair-types
 ```
 

@@ -1,31 +1,36 @@
 # Set presented types
 
 ```agda
-module foundation.set-presented-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.set-presented-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equality-coproduct-types
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.fibers-of-maps
-open import foundation.functoriality-coproduct-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.images
-open import foundation.injective-maps
-open import foundation.propositional-truncations
-open import foundation.set-truncations
-open import foundation.subtypes
-open import foundation.surjective-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.empty-types funext
+open import foundation.equality-coproduct-types funext
+open import foundation.equivalences funext
+open import foundation.existential-quantification funext
+open import foundation.fibers-of-maps funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.images funext
+open import foundation.injective-maps funext
+open import foundation.propositional-truncations funext
+open import foundation.set-truncations funext
+open import foundation.subtypes funext
+open import foundation.surjective-maps funext
 open import foundation.universe-levels
 
 open import foundation-core.function-types

@@ -1,27 +1,32 @@
 # Products of radical ideals of a commutative ring
 
 ```agda
-module commutative-algebra.products-radical-ideals-commutative-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  commutative-algebra.products-radical-ideals-commutative-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.ideals-commutative-rings
-open import commutative-algebra.poset-of-radical-ideals-commutative-rings
-open import commutative-algebra.powers-of-elements-commutative-rings
-open import commutative-algebra.products-ideals-commutative-rings
-open import commutative-algebra.radical-ideals-commutative-rings
-open import commutative-algebra.radicals-of-ideals-commutative-rings
-open import commutative-algebra.subsets-commutative-rings
+open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.ideals-commutative-rings funext
+open import commutative-algebra.poset-of-radical-ideals-commutative-rings funext
+open import commutative-algebra.powers-of-elements-commutative-rings funext
+open import commutative-algebra.products-ideals-commutative-rings funext
+open import commutative-algebra.radical-ideals-commutative-rings funext
+open import commutative-algebra.radicals-of-ideals-commutative-rings funext
+open import commutative-algebra.subsets-commutative-rings funext
 
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.propositional-truncations
+open import foundation.existential-quantification funext
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext
 open import foundation.universe-levels
 ```
 

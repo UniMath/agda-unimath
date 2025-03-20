@@ -1,7 +1,12 @@
 # Constant type families
 
 ```agda
-module foundation.constant-type-families where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.constant-type-families
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +15,7 @@ module foundation.constant-type-families where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-identifications

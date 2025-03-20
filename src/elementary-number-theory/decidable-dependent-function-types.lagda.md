@@ -1,9 +1,14 @@
 # Decidable dependent function types
 
 ```agda
-module elementary-number-theory.decidable-dependent-function-types where
+open import foundation.function-extensionality-axiom
 
-open import foundation.decidable-dependent-function-types public
+module
+  elementary-number-theory.decidable-dependent-function-types
+  (funext : function-extensionality)
+  where
+
+open import foundation.decidable-dependent-function-types funext public
 ```
 
 <details><summary>Imports</summary>

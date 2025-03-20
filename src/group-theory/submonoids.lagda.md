@@ -1,26 +1,31 @@
 # Submonoids
 
 ```agda
-module group-theory.submonoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.submonoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-monoids
-open import group-theory.monoids
-open import group-theory.semigroups
-open import group-theory.subsets-monoids
+open import group-theory.homomorphisms-monoids funext
+open import group-theory.monoids funext
+open import group-theory.semigroups funext
+open import group-theory.subsets-monoids funext
 ```
 
 </details>

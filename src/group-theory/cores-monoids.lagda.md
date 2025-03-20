@@ -1,29 +1,34 @@
 # Cores of monoids
 
 ```agda
-module group-theory.cores-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.cores-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-large-precategories
+open import category-theory.functors-large-precategories funext
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-monoids
-open import group-theory.invertible-elements-monoids
-open import group-theory.monoids
-open import group-theory.precategory-of-groups
-open import group-theory.precategory-of-monoids
-open import group-theory.semigroups
-open import group-theory.submonoids
+open import group-theory.groups funext
+open import group-theory.homomorphisms-groups funext
+open import group-theory.homomorphisms-monoids funext
+open import group-theory.invertible-elements-monoids funext
+open import group-theory.monoids funext
+open import group-theory.precategory-of-groups funext
+open import group-theory.precategory-of-monoids funext
+open import group-theory.semigroups funext
+open import group-theory.submonoids funext
 ```
 
 </details>

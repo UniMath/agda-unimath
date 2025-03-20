@@ -3,7 +3,12 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module type-theories.fibered-dependent-type-theories where
+open import foundation.function-extensionality-axiom
+
+module
+  type-theories.fibered-dependent-type-theories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,12 +16,12 @@ module type-theories.fibered-dependent-type-theories where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import type-theories.dependent-type-theories
+open import type-theories.dependent-type-theories funext
 ```
 
 </details>

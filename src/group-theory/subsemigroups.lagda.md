@@ -1,34 +1,39 @@
 # Subsemigroups
 
 ```agda
-module group-theory.subsemigroups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.subsemigroups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.large-binary-relations
-open import foundation.powersets
-open import foundation.propositions
-open import foundation.sets
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.large-binary-relations funext
+open import foundation.powersets funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-semigroups
-open import group-theory.semigroups
-open import group-theory.subsets-semigroups
+open import group-theory.homomorphisms-semigroups funext
+open import group-theory.semigroups funext
+open import group-theory.subsets-semigroups funext
 
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.posets
-open import order-theory.preorders
+open import order-theory.large-posets funext
+open import order-theory.large-preorders funext
+open import order-theory.order-preserving-maps-large-posets funext
+open import order-theory.order-preserving-maps-large-preorders funext
+open import order-theory.posets funext
+open import order-theory.preorders funext
 ```
 
 </details>

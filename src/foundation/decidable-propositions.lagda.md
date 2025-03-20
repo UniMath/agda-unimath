@@ -1,29 +1,34 @@
 # Decidable propositions
 
 ```agda
-module foundation.decidable-propositions where
+open import foundation.function-extensionality-axiom
 
-open import foundation-core.decidable-propositions public
+module
+  foundation.decidable-propositions
+  (funext : function-extensionality)
+  where
+
+open import foundation-core.decidable-propositions funext public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.booleans
-open import foundation.decidable-types
+open import foundation.booleans funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.raising-universe-levels
-open import foundation.raising-universe-levels-unit-type
-open import foundation.type-arithmetic-coproduct-types
+open import foundation.embeddings funext
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.propositional-extensionality funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.raising-universe-levels funext
+open import foundation.raising-universe-levels funext-unit-type
+open import foundation.type-arithmetic-coproduct-types funext
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -35,12 +40,12 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retracts-of-types
 open import foundation-core.sets
-open import foundation-core.small-types
-open import foundation-core.subtypes
+open import foundation-core.small-types funext
+open import foundation-core.subtypes funext
 open import foundation-core.transport-along-identifications
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

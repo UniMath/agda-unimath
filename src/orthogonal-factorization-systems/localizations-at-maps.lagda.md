@@ -1,18 +1,23 @@
 # Localizations at maps
 
 ```agda
-module orthogonal-factorization-systems.localizations-at-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.localizations-at-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.localizations-at-subuniverses
-open import orthogonal-factorization-systems.types-local-at-maps
+open import orthogonal-factorization-systems.localizations-at-subuniverses funext
+open import orthogonal-factorization-systems.types-local-at-maps funext
 ```
 
 </details>

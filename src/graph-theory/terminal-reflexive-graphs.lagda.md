@@ -1,22 +1,27 @@
 # Terminal reflexive graphs
 
 ```agda
-module graph-theory.terminal-reflexive-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.terminal-reflexive-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Idea</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.propositions
+open import foundation.propositions funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs
-open import graph-theory.reflexive-graphs
-open import graph-theory.morphisms-reflexive-graphs
-open import graph-theory.terminal-directed-graphs
+open import graph-theory.directed-graphs funext
+open import graph-theory.reflexive-graphs funext
+open import graph-theory.morphisms-reflexive-graphs funext
+open import graph-theory.terminal-directed-graphs funext
 ```
 
 </details>

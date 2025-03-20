@@ -1,16 +1,22 @@
 # Accessible elements with respect to relations
 
 ```agda
-module order-theory.accessible-elements-relations where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.accessible-elements-relations
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
+open import foundation.binary-relations funext
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.function-extensionality funext
+
 open import foundation.universe-levels
 
 open import foundation-core.negation

@@ -1,7 +1,12 @@
 # Homomorphisms of monoids
 
 ```agda
-module group-theory.homomorphisms-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.homomorphisms-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,20 +14,20 @@ module group-theory.homomorphisms-monoids where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.subtypes funext
+open import foundation.torsorial-type-families funext
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-semigroups
-open import group-theory.invertible-elements-monoids
-open import group-theory.monoids
+open import group-theory.homomorphisms-semigroups funext
+open import group-theory.invertible-elements-monoids funext
+open import group-theory.monoids funext
 ```
 
 </details>

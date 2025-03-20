@@ -1,26 +1,31 @@
 # Submonoids of commutative monoids
 
 ```agda
-module group-theory.submonoids-commutative-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.submonoids-commutative-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids
-open import group-theory.homomorphisms-commutative-monoids
-open import group-theory.monoids
-open import group-theory.semigroups
-open import group-theory.submonoids
-open import group-theory.subsets-commutative-monoids
+open import group-theory.commutative-monoids funext
+open import group-theory.homomorphisms-commutative-monoids funext
+open import group-theory.monoids funext
+open import group-theory.semigroups funext
+open import group-theory.submonoids funext
+open import group-theory.subsets-commutative-monoids funext
 ```
 
 </details>

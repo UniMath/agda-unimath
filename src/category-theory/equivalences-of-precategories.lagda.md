@@ -1,17 +1,22 @@
 # Equivalences between precategories
 
 ```agda
-module category-theory.equivalences-of-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.equivalences-of-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
-open import category-theory.natural-isomorphisms-functors-precategories
-open import category-theory.precategories
+open import category-theory.functors-precategories funext
+open import category-theory.natural-isomorphisms-functors-precategories funext
+open import category-theory.precategories funext
 
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```

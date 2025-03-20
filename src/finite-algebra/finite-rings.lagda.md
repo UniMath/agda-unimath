@@ -1,7 +1,12 @@
 # Finite rings
 
 ```agda
-module finite-algebra.finite-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  finite-algebra.finite-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,39 +15,39 @@ module finite-algebra.finite-rings where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.finite-abelian-groups
-open import finite-group-theory.finite-groups
-open import finite-group-theory.finite-monoids
+open import finite-group-theory.finite-abelian-groups funext
+open import finite-group-theory.finite-groups funext
+open import finite-group-theory.finite-monoids funext
 
-open import foundation.binary-embeddings
+open import foundation.binary-embeddings funext
 open import foundation.binary-equivalences
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.involutions
-open import foundation.propositions
-open import foundation.sets
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.involutions funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.commutative-monoids
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.abelian-groups funext
+open import group-theory.commutative-monoids funext
+open import group-theory.groups funext
+open import group-theory.monoids funext
+open import group-theory.semigroups funext
 
-open import lists.concatenation-lists
+open import lists.concatenation-lists funext
 open import lists.lists
 
-open import ring-theory.rings
-open import ring-theory.semirings
+open import ring-theory.rings funext
+open import ring-theory.semirings funext
 
-open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.cartesian-product-types funext
+open import univalent-combinatorics.dependent-function-types funext
+open import univalent-combinatorics.dependent-pair-types funext
+open import univalent-combinatorics.equality-finite-types funext
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

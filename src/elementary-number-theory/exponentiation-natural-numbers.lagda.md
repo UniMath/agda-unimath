@@ -1,22 +1,27 @@
 # Exponentiation of natural numbers
 
 ```agda
-module elementary-number-theory.exponentiation-natural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.exponentiation-natural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.powers-of-elements-commutative-semirings
+open import commutative-algebra.powers-of-elements-commutative-semirings funext
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.commutative-semiring-of-natural-numbers
+open import elementary-number-theory.commutative-semiring-of-natural-numbers funext
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.products-of-natural-numbers
+open import elementary-number-theory.products-of-natural-numbers funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types
+open import foundation.identity-types funext
 ```
 
 </details>

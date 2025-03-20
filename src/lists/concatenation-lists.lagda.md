@@ -1,7 +1,12 @@
 # Concatenation of lists
 
 ```agda
-module lists.concatenation-lists where
+open import foundation.function-extensionality-axiom
+
+module
+  lists.concatenation-lists
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,14 +17,14 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import group-theory.monoids
+open import group-theory.monoids funext
 
-open import lists.equality-lists
+open import lists.equality-lists funext
 open import lists.lists
 ```
 

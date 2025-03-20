@@ -1,7 +1,12 @@
 # The universal property of propositional truncations with respect to sets
 
 ```agda
-module foundation.universal-property-propositional-truncation-into-sets where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.universal-property-propositional-truncation-into-sets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,10 +14,11 @@ module foundation.universal-property-propositional-truncation-into-sets where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.propositional-truncations
+open import foundation.function-extensionality funext
+
+open import foundation.propositional-truncations funext
 open import foundation.universe-levels
-open import foundation.weakly-constant-maps
+open import foundation.weakly-constant-maps funext
 
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
@@ -21,7 +27,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 ```
 
 </details>

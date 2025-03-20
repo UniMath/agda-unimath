@@ -1,29 +1,34 @@
 # Squares in the integers
 
 ```agda
-module elementary-number-theory.squares-integers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.squares-integers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.absolute-value-integers
+open import elementary-number-theory.absolute-value-integers funext
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.multiplication-positive-and-negative-integers
+open import elementary-number-theory.multiplication-integers funext
+open import elementary-number-theory.multiplication-positive-and-negative-integers funext
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonnegative-integers
-open import elementary-number-theory.positive-and-negative-integers
-open import elementary-number-theory.positive-integers
-open import elementary-number-theory.squares-natural-numbers
+open import elementary-number-theory.nonnegative-integers funext
+open import elementary-number-theory.positive-and-negative-integers funext
+open import elementary-number-theory.positive-integers funext
+open import elementary-number-theory.squares-natural-numbers funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.coproduct-types funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.negation
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

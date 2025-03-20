@@ -1,9 +1,14 @@
 # Embeddings
 
 ```agda
-module univalent-combinatorics.embeddings where
+open import foundation.function-extensionality-axiom
 
-open import foundation.embeddings public
+module
+  univalent-combinatorics.embeddings
+  (funext : function-extensionality)
+  where
+
+open import foundation.embeddings funext public
 ```
 
 <details><summary>Imports</summary>
@@ -11,22 +16,22 @@ open import foundation.embeddings public
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
-open import foundation.decidable-embeddings
-open import foundation.decidable-types
+open import foundation.coproduct-types funext
+open import foundation.decidable-embeddings funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.injective-maps
-open import univalent-combinatorics.retracts-of-finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.injective-maps funext
+open import univalent-combinatorics.retracts-of-finite-types funext
 ```
 
 </details>

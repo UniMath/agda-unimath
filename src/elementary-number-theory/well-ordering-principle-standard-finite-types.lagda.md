@@ -1,46 +1,51 @@
 # The well-ordering principle of the standard finite types
 
 ```agda
-module elementary-number-theory.well-ordering-principle-standard-finite-types where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.well-ordering-principle-standard-finite-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-standard-finite-types
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.inequality-standard-finite-types funext
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers funext
 
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.decidable-subtypes
-open import foundation.decidable-types
+open import foundation.cartesian-product-types funext
+open import foundation.coproduct-types funext
+open import foundation.decidable-subtypes funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.hilberts-epsilon-operators
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.empty-types funext
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.existential-quantification funext
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.functoriality-propositional-truncation funext
+open import foundation.hilberts-epsilon-operators funext
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-coproduct-types
-open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-coproduct-types funext
+open import foundation.type-arithmetic-empty-type funext
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.decidable-dependent-pair-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.decidable-dependent-pair-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

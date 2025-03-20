@@ -1,7 +1,12 @@
 # Commuting triangles of identifications
 
 ```agda
-module foundation.commuting-triangles-of-identifications where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.commuting-triangles-of-identifications
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,9 +15,9 @@ module foundation.commuting-triangles-of-identifications where
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
 open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.equivalences

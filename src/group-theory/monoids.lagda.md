@@ -1,25 +1,30 @@
 # Monoids
 
 ```agda
-module group-theory.monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.subtypes funext
 open import foundation.unit-type
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.semigroups
+open import group-theory.semigroups funext
 
-open import structured-types.h-spaces
-open import structured-types.wild-monoids
+open import structured-types.h-spaces funext
+open import structured-types.wild-monoids funext
 ```
 
 </details>

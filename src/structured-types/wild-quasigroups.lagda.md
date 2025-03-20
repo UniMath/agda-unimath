@@ -1,19 +1,24 @@
 # Wild quasigroups
 
 ```agda
-module structured-types.wild-quasigroups where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.wild-quasigroups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.automorphisms
+open import foundation.automorphisms funext
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.universe-levels
 
-open import structured-types.magmas
+open import structured-types.magmas funext
 ```
 
 </details>

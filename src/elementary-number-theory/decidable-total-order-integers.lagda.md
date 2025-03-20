@@ -1,20 +1,25 @@
 # The decidable total order of integers
 
 ```agda
-module elementary-number-theory.decidable-total-order-integers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.decidable-total-order-integers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-integers funext
 
 open import foundation.dependent-pair-types
-open import foundation.propositional-truncations
+open import foundation.propositional-truncations funext
 open import foundation.universe-levels
 
-open import order-theory.decidable-total-orders
-open import order-theory.total-orders
+open import order-theory.decidable-total-orders funext
+open import order-theory.total-orders funext
 ```
 
 </details>

@@ -1,20 +1,25 @@
 # Terminal directed graphs
 
 ```agda
-module graph-theory.terminal-directed-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.terminal-directed-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Idea</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.propositions
+open import foundation.propositions funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs
-open import graph-theory.morphisms-directed-graphs
+open import graph-theory.directed-graphs funext
+open import graph-theory.morphisms-directed-graphs funext
 ```
 
 </details>

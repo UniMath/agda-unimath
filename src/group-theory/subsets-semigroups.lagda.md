@@ -1,24 +1,29 @@
 # Subsets of semigroups
 
 ```agda
-module group-theory.subsets-semigroups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.subsets-semigroups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import foundation.large-locale-of-subtypes
-open import foundation.powersets
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.identity-types funext
+open import foundation.large-locale-of-subtypes funext
+open import foundation.powersets funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import group-theory.semigroups
+open import group-theory.semigroups funext
 
-open import order-theory.large-locales
-open import order-theory.large-posets
+open import order-theory.large-locales funext
+open import order-theory.large-posets funext
 ```
 
 </details>

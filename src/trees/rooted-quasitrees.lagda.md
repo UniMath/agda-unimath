@@ -1,18 +1,23 @@
 # Rooted quasitrees
 
 ```agda
-module trees.rooted-quasitrees where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.rooted-quasitrees
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import graph-theory.trails-undirected-graphs
-open import graph-theory.undirected-graphs
+open import graph-theory.trails-undirected-graphs funext
+open import graph-theory.undirected-graphs funext
 ```
 
 </details>

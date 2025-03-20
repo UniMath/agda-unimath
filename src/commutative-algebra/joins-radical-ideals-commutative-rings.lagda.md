@@ -1,31 +1,36 @@
 # Joins of radical ideals of commutative rings
 
 ```agda
-module commutative-algebra.joins-radical-ideals-commutative-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  commutative-algebra.joins-radical-ideals-commutative-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.ideals-commutative-rings
-open import commutative-algebra.intersections-radical-ideals-commutative-rings
-open import commutative-algebra.joins-ideals-commutative-rings
-open import commutative-algebra.poset-of-radical-ideals-commutative-rings
-open import commutative-algebra.products-ideals-commutative-rings
-open import commutative-algebra.products-radical-ideals-commutative-rings
-open import commutative-algebra.radical-ideals-commutative-rings
-open import commutative-algebra.radical-ideals-generated-by-subsets-commutative-rings
-open import commutative-algebra.radicals-of-ideals-commutative-rings
-open import commutative-algebra.subsets-commutative-rings
+open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.ideals-commutative-rings funext
+open import commutative-algebra.intersections-radical-ideals-commutative-rings funext
+open import commutative-algebra.joins-ideals-commutative-rings funext
+open import commutative-algebra.poset-of-radical-ideals-commutative-rings funext
+open import commutative-algebra.products-ideals-commutative-rings funext
+open import commutative-algebra.products-radical-ideals-commutative-rings funext
+open import commutative-algebra.radical-ideals-commutative-rings funext
+open import commutative-algebra.radical-ideals-generated-by-subsets-commutative-rings funext
+open import commutative-algebra.radicals-of-ideals-commutative-rings funext
+open import commutative-algebra.subsets-commutative-rings funext
 
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import order-theory.large-suplattices
-open import order-theory.least-upper-bounds-large-posets
+open import order-theory.large-suplattices funext
+open import order-theory.least-upper-bounds-large-posets funext
 ```
 
 </details>

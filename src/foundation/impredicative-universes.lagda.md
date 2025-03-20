@@ -1,7 +1,12 @@
 # Impredicative universes
 
 ```agda
-module foundation.impredicative-universes where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.impredicative-universes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +15,7 @@ module foundation.impredicative-universes where
 open import foundation.universe-levels
 
 open import foundation-core.propositions
-open import foundation-core.small-types
+open import foundation-core.small-types funext
 ```
 
 </details>

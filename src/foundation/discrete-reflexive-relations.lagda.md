@@ -1,18 +1,23 @@
 # Discrete reflexive relations
 
 ```agda
-module foundation.discrete-reflexive-relations where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.discrete-reflexive-relations
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.contractible-types
+open import foundation.binary-relations funext
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.reflexive-relations
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-propositions funext
+open import foundation.reflexive-relations funext
+open import foundation.torsorial-type-families funext
 open import foundation.universe-levels
 
 open import foundation-core.identity-types

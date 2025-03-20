@@ -1,7 +1,12 @@
 # Alkanes
 
 ```agda
-module organic-chemistry.alkanes where
+open import foundation.function-extensionality-axiom
+
+module
+  organic-chemistry.alkanes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,8 +14,8 @@ module organic-chemistry.alkanes where
 ```agda
 open import foundation.universe-levels
 
-open import organic-chemistry.hydrocarbons
-open import organic-chemistry.saturated-carbons
+open import organic-chemistry.hydrocarbons funext
+open import organic-chemistry.saturated-carbons funext
 ```
 
 </details>

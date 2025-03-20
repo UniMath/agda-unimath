@@ -1,16 +1,21 @@
 # The half-integers
 
 ```agda
-module elementary-number-theory.half-integers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.half-integers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-integers funext
 open import elementary-number-theory.integers
 
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext
 open import foundation.universe-levels
 ```
 

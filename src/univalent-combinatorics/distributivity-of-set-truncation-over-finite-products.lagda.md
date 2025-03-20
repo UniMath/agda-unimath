@@ -1,7 +1,12 @@
 # Distributivity of set truncation over finite products
 
 ```agda
-module univalent-combinatorics.distributivity-of-set-truncation-over-finite-products where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,37 +15,38 @@ module univalent-combinatorics.distributivity-of-set-truncation-over-finite-prod
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.contractible-types funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
-open import foundation.functoriality-set-truncation
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.postcomposition-functions
-open import foundation.precomposition-dependent-functions
-open import foundation.precomposition-functions
-open import foundation.propositional-truncations
-open import foundation.set-truncations
-open import foundation.sets
+open import foundation.dependent-universal-property-equivalences funext
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.functoriality-function-types funext
+open import foundation.functoriality-set-truncation funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.postcomposition-functions funext
+open import foundation.precomposition-dependent-functions funext
+open import foundation.precomposition-functions funext
+open import foundation.propositional-truncations funext
+open import foundation.set-truncations funext
+open import foundation.sets funext
 open import foundation.unit-type
-open import foundation.universal-property-dependent-pair-types
-open import foundation.universal-property-empty-type
-open import foundation.universal-property-equivalences
-open import foundation.universal-property-maybe
+open import foundation.universal-property-dependent-pair-types funext
+open import foundation.universal-property-empty-type funext
+open import foundation.universal-property-equivalences funext
+open import foundation.universal-property-maybe funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

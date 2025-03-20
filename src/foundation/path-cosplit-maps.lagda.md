@@ -1,7 +1,12 @@
 # Path-cosplit maps
 
 ```agda
-module foundation.path-cosplit-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.path-cosplit-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,38 +15,39 @@ module foundation.path-cosplit-maps where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-triangles-of-maps
-open import foundation.coproduct-types
+open import foundation.commuting-triangles-of-maps funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.dependent-products-truncated-types
-open import foundation.empty-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.empty-types funext
 open import foundation.equality-cartesian-product-types
-open import foundation.equality-coproduct-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences-arrows
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-action-on-identifications-functions
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.iterated-dependent-product-types
-open import foundation.logical-equivalences
-open import foundation.mere-path-cosplit-maps
-open import foundation.morphisms-arrows
-open import foundation.negated-equality
-open import foundation.postcomposition-functions
-open import foundation.precomposition-functions
-open import foundation.propositional-truncations
-open import foundation.retractions
-open import foundation.retracts-of-maps
-open import foundation.truncated-maps
+open import foundation.equality-coproduct-types funext
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences-arrows funext
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
+open import foundation.functoriality-action-on-identifications-functions funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.functoriality-dependent-function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.inhabited-types funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.logical-equivalences funext
+open import foundation.mere-path-cosplit-maps funext
+open import foundation.morphisms-arrows funext
+open import foundation.negated-equality funext
+open import foundation.postcomposition-functions funext
+open import foundation.precomposition-functions funext
+open import foundation.propositional-truncations funext
+open import foundation.retractions funext
+open import foundation.retracts-of-maps funext
+open import foundation.truncated-maps funext
 open import foundation.truncation-levels
 open import foundation.universe-levels
 

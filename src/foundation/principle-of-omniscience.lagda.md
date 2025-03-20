@@ -1,18 +1,23 @@
 # The principle of omniscience
 
 ```agda
-module foundation.principle-of-omniscience where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.principle-of-omniscience
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-subtypes
-open import foundation.dependent-products-propositions
-open import foundation.propositional-truncations
+open import foundation.decidable-subtypes funext
+open import foundation.dependent-products-propositions funext
+open import foundation.propositional-truncations funext
 open import foundation.universe-levels
 
-open import foundation-core.decidable-propositions
+open import foundation-core.decidable-propositions funext
 open import foundation-core.propositions
 ```
 

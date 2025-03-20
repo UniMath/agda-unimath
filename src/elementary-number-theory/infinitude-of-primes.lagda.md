@@ -1,32 +1,37 @@
 # The infinitude of primes
 
 ```agda
-module elementary-number-theory.infinitude-of-primes where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.infinitude-of-primes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.factorials
-open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers funext
+open import elementary-number-theory.equality-natural-numbers funext
+open import elementary-number-theory.factorials funext
+open import elementary-number-theory.lower-bounds-natural-numbers funext
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.prime-numbers
-open import elementary-number-theory.proper-divisors-natural-numbers
-open import elementary-number-theory.sieve-of-eratosthenes
-open import elementary-number-theory.strict-inequality-natural-numbers
-open import elementary-number-theory.well-ordering-principle-natural-numbers
+open import elementary-number-theory.prime-numbers funext
+open import elementary-number-theory.proper-divisors-natural-numbers funext
+open import elementary-number-theory.sieve-of-eratosthenes funext
+open import elementary-number-theory.strict-inequality-natural-numbers funext
+open import elementary-number-theory.well-ordering-principle-natural-numbers funext
 
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.cartesian-product-types funext
+open import foundation.coproduct-types funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.identity-types
-open import foundation.iterating-functions
-open import foundation.negation
-open import foundation.type-arithmetic-empty-type
+open import foundation.empty-types funext
+open import foundation.identity-types funext
+open import foundation.iterating-functions funext
+open import foundation.negation funext
+open import foundation.type-arithmetic-empty-type funext
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

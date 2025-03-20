@@ -1,17 +1,22 @@
 # Species of inhabited types
 
 ```agda
-module species.species-of-inhabited-types where
+open import foundation.function-extensionality-axiom
+
+module
+  species.species-of-inhabited-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.inhabited-types
+open import foundation.inhabited-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import species.species-of-types-in-subuniverses
+open import species.species-of-types-in-subuniverses funext
 ```
 
 </details>

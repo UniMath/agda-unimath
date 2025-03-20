@@ -1,23 +1,28 @@
 # The cross-multiplication difference of two integer fractions
 
 ```agda
-module elementary-number-theory.cross-multiplication-difference-integer-fractions where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.cross-multiplication-difference-integer-fractions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.difference-integers
-open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.addition-integers funext
+open import elementary-number-theory.difference-integers funext
+open import elementary-number-theory.integer-fractions funext
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-integers funext
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositions
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositions funext
 ```
 
 </details>

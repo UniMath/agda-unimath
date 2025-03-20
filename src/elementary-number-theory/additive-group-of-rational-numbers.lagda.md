@@ -3,23 +3,28 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module elementary-number-theory.additive-group-of-rational-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.additive-group-of-rational-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.addition-rational-numbers funext
+open import elementary-number-theory.rational-numbers funext
 
 open import foundation.dependent-pair-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.abelian-groups funext
+open import group-theory.groups funext
+open import group-theory.monoids funext
+open import group-theory.semigroups funext
 ```
 
 </details>

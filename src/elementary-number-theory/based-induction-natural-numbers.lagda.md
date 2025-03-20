@@ -1,17 +1,22 @@
 # The based induction principle of the natural numbers
 
 ```agda
-module elementary-number-theory.based-induction-natural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.based-induction-natural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers funext
 open import elementary-number-theory.natural-numbers
 
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

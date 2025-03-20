@@ -1,7 +1,12 @@
 # Finite coverings in locales
 
 ```agda
-module order-theory.finite-coverings-locales where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.finite-coverings-locales
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,10 +15,10 @@ module order-theory.finite-coverings-locales where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import order-theory.coverings-locales
-open import order-theory.locales
+open import order-theory.coverings-locales funext
+open import order-theory.locales funext
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

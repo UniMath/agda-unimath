@@ -1,29 +1,34 @@
 # Repetitions of values
 
 ```agda
-module univalent-combinatorics.repetitions-of-values where
+open import foundation.function-extensionality-axiom
 
-open import foundation.repetitions-of-values public
+module
+  univalent-combinatorics.repetitions-of-values
+  (funext : function-extensionality)
+  where
+
+open import foundation.repetitions-of-values funext public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-standard-finite-types
+open import elementary-number-theory.well-ordering-principle-standard-finite-types funext
 
-open import foundation.cartesian-product-types
-open import foundation.decidable-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.negated-equality
-open import foundation.negation
+open import foundation.cartesian-product-types funext
+open import foundation.decidable-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.negated-equality funext
+open import foundation.negation funext
 
-open import univalent-combinatorics.decidable-dependent-function-types
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.decidable-dependent-function-types funext
+open import univalent-combinatorics.decidable-propositions funext
+open import univalent-combinatorics.dependent-pair-types funext
+open import univalent-combinatorics.equality-standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

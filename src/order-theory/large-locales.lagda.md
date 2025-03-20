@@ -1,30 +1,35 @@
 # Large locales
 
 ```agda
-module order-theory.large-locales where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.large-locales
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import foundation.large-binary-relations
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.large-binary-relations funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import order-theory.greatest-lower-bounds-large-posets
-open import order-theory.large-frames
-open import order-theory.large-meet-semilattices
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.large-suplattices
-open import order-theory.least-upper-bounds-large-posets
-open import order-theory.meet-semilattices
-open import order-theory.posets
-open import order-theory.preorders
-open import order-theory.suplattices
-open import order-theory.top-elements-large-posets
-open import order-theory.upper-bounds-large-posets
+open import order-theory.greatest-lower-bounds-large-posets funext
+open import order-theory.large-frames funext
+open import order-theory.large-meet-semilattices funext
+open import order-theory.large-posets funext
+open import order-theory.large-preorders funext
+open import order-theory.large-suplattices funext
+open import order-theory.least-upper-bounds-large-posets funext
+open import order-theory.meet-semilattices funext
+open import order-theory.posets funext
+open import order-theory.preorders funext
+open import order-theory.suplattices funext
+open import order-theory.top-elements-large-posets funext
+open import order-theory.upper-bounds-large-posets funext
 ```
 
 </details>

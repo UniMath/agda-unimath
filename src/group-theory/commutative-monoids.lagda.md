@@ -1,7 +1,12 @@
 # Commutative monoids
 
 ```agda
-module group-theory.commutative-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.commutative-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,17 +14,17 @@ module group-theory.commutative-monoids where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.interchange-law
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.iterated-dependent-product-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.telescopes
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.monoids funext
+open import group-theory.semigroups funext
 ```
 
 </details>

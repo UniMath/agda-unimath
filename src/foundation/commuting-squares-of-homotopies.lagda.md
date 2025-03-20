@@ -1,7 +1,12 @@
 # Commuting squares of homotopies
 
 ```agda
-module foundation.commuting-squares-of-homotopies where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.commuting-squares-of-homotopies
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.commuting-squares-of-homotopies public
 ```
@@ -9,13 +14,13 @@ open import foundation-core.commuting-squares-of-homotopies public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-identifications
+open import foundation.commuting-squares-of-identifications funext
 open import foundation.dependent-pair-types
-open import foundation.homotopies
+open import foundation.homotopies funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 ```
 
 </details>

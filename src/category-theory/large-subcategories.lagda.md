@@ -1,14 +1,19 @@
 # Large subcategories
 
 ```agda
-module category-theory.large-subcategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.large-subcategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-categories
-open import category-theory.large-subprecategories
+open import category-theory.large-categories funext
+open import category-theory.large-subprecategories funext
 
 open import foundation.universe-levels
 ```

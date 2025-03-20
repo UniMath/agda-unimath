@@ -1,24 +1,29 @@
 # The full subsemigroup of a semigroup
 
 ```agda
-module group-theory.full-subsemigroups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.full-subsemigroups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.full-subtypes
-open import foundation.propositions
+open import foundation.equivalences funext
+open import foundation.full-subtypes funext
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import group-theory.equivalences-semigroups
-open import group-theory.homomorphisms-semigroups
-open import group-theory.isomorphisms-semigroups
-open import group-theory.semigroups
-open import group-theory.subsemigroups
-open import group-theory.subsets-semigroups
+open import group-theory.equivalences-semigroups funext
+open import group-theory.homomorphisms-semigroups funext
+open import group-theory.isomorphisms-semigroups funext
+open import group-theory.semigroups funext
+open import group-theory.subsemigroups funext
+open import group-theory.subsets-semigroups funext
 ```
 
 </details>

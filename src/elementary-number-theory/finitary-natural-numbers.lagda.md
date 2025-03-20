@@ -1,30 +1,35 @@
 # The natural numbers base `k`
 
 ```agda
-module elementary-number-theory.finitary-natural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.finitary-natural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.congruence-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.congruence-natural-numbers funext
+open import elementary-number-theory.inequality-natural-numbers funext
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.sets
+open import foundation.empty-types funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

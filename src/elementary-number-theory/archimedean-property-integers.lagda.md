@@ -1,30 +1,35 @@
 # The Archimedean property of the integers
 
 ```agda
-module elementary-number-theory.archimedean-property-integers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.archimedean-property-integers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.archimedean-property-natural-numbers
+open import elementary-number-theory.archimedean-property-natural-numbers funext
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-integers funext
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonnegative-integers
-open import elementary-number-theory.positive-and-negative-integers
-open import elementary-number-theory.positive-integers
-open import elementary-number-theory.strict-inequality-integers
+open import elementary-number-theory.nonnegative-integers funext
+open import elementary-number-theory.positive-and-negative-integers funext
+open import elementary-number-theory.positive-integers funext
+open import elementary-number-theory.strict-inequality-integers funext
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
+open import foundation.cartesian-product-types funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.propositional-truncations
+open import foundation.existential-quantification funext
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext
 ```
 
 </details>

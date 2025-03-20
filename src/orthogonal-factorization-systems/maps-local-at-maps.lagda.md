@@ -1,22 +1,27 @@
 # Maps local at maps
 
 ```agda
-module orthogonal-factorization-systems.maps-local-at-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.maps-local-at-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-morphisms-arrows
-open import foundation.fibers-of-maps
-open import foundation.propositions
-open import foundation.retracts-of-maps
+open import foundation.cartesian-morphisms-arrows funext
+open import foundation.fibers-of-maps funext
+open import foundation.propositions funext
+open import foundation.retracts-of-maps funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.families-of-types-local-at-maps
-open import orthogonal-factorization-systems.orthogonal-maps
-open import orthogonal-factorization-systems.types-local-at-maps
+open import orthogonal-factorization-systems.families-of-types-local-at-maps funext
+open import orthogonal-factorization-systems.orthogonal-maps funext
+open import orthogonal-factorization-systems.types-local-at-maps funext
 ```
 
 </details>

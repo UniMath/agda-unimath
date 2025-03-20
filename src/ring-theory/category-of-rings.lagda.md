@@ -1,19 +1,24 @@
 # The category of rings
 
 ```agda
-module ring-theory.category-of-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.category-of-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.large-categories
+open import category-theory.categories funext
+open import category-theory.large-categories funext
 
 open import foundation.universe-levels
 
-open import ring-theory.isomorphisms-rings
-open import ring-theory.precategory-of-rings
+open import ring-theory.isomorphisms-rings funext
+open import ring-theory.precategory-of-rings funext
 ```
 
 </details>

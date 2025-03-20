@@ -1,21 +1,26 @@
 # Products of subsets of commutative rings
 
 ```agda
-module commutative-algebra.products-subsets-commutative-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  commutative-algebra.products-subsets-commutative-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.subsets-commutative-rings
+open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.subsets-commutative-rings funext
 
-open import foundation.identity-types
-open import foundation.subtypes
-open import foundation.unions-subtypes
+open import foundation.identity-types funext
+open import foundation.subtypes funext
+open import foundation.unions-subtypes funext
 open import foundation.universe-levels
 
-open import ring-theory.products-subsets-rings
+open import ring-theory.products-subsets-rings funext
 ```
 
 </details>

@@ -1,7 +1,12 @@
 # Whiskering of pointed homotopies with respect to composition of pointed maps
 
 ```agda
-module structured-types.whiskering-pointed-homotopies-composition where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.whiskering-pointed-homotopies-composition
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,19 +14,19 @@ module structured-types.whiskering-pointed-homotopies-composition where
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-identifications
-open import foundation.commuting-triangles-of-identifications
+open import foundation.commuting-squares-of-identifications funext
+open import foundation.commuting-triangles-of-identifications funext
 open import foundation.dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
-open import structured-types.pointed-2-homotopies
+open import structured-types.pointed-2-homotopies funext
 open import structured-types.pointed-families-of-types
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
+open import structured-types.pointed-homotopies funext
+open import structured-types.pointed-maps funext
 open import structured-types.pointed-types
 ```
 

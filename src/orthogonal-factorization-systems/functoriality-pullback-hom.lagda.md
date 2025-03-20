@@ -1,19 +1,24 @@
 # Functoriality of the pullback-hom
 
 ```agda
-module orthogonal-factorization-systems.functoriality-pullback-hom where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.functoriality-pullback-hom
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functoriality-morphisms-arrows
-open import foundation.functoriality-pullbacks
-open import foundation.morphisms-arrows
+open import foundation.functoriality-morphisms-arrows funext
+open import foundation.functoriality-pullbacks funext
+open import foundation.morphisms-arrows funext
 open import foundation.morphisms-cospan-diagrams
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.pullback-hom
+open import orthogonal-factorization-systems.pullback-hom funext
 ```
 
 </details>

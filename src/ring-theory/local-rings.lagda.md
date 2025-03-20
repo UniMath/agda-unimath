@@ -1,20 +1,25 @@
 # Local rings
 
 ```agda
-module ring-theory.local-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.local-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.propositions
-open import foundation.sets
+open import foundation.disjunction funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import ring-theory.invertible-elements-rings
-open import ring-theory.rings
+open import ring-theory.invertible-elements-rings funext
+open import ring-theory.rings funext
 ```
 
 </details>

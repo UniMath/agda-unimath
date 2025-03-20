@@ -1,19 +1,24 @@
 # Intersections of ideals of semirings
 
 ```agda
-module ring-theory.intersections-ideals-semirings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.intersections-ideals-semirings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.intersections-subtypes
+open import foundation.intersections-subtypes funext
 open import foundation.universe-levels
 
-open import ring-theory.ideals-semirings
-open import ring-theory.semirings
-open import ring-theory.subsets-semirings
+open import ring-theory.ideals-semirings funext
+open import ring-theory.semirings funext
+open import ring-theory.subsets-semirings funext
 ```
 
 </details>

@@ -1,15 +1,20 @@
 # Strict symmetrization of binary relations
 
 ```agda
-module foundation.strict-symmetrization-binary-relations where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.strict-symmetrization-binary-relations
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.binary-relations-with-extensions
-open import foundation.binary-relations-with-lifts
+open import foundation.binary-relations funext
+open import foundation.binary-relations funext-with-extensions
+open import foundation.binary-relations-with-lifts funext
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 

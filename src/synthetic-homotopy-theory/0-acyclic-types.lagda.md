@@ -1,25 +1,30 @@
 # `0`-acyclic types
 
 ```agda
-module synthetic-homotopy-theory.0-acyclic-types where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.0-acyclic-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.inhabited-types
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.functoriality-propositional-truncation funext
+open import foundation.inhabited-types funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.0-acyclic-maps
-open import synthetic-homotopy-theory.truncated-acyclic-maps
-open import synthetic-homotopy-theory.truncated-acyclic-types
+open import synthetic-homotopy-theory.0-acyclic-maps funext
+open import synthetic-homotopy-theory.truncated-acyclic-maps funext
+open import synthetic-homotopy-theory.truncated-acyclic-types funext
 ```
 
 </details>

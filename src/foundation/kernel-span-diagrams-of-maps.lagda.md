@@ -1,14 +1,19 @@
 # Kernel span diagrams of maps
 
 ```agda
-module foundation.kernel-span-diagrams-of-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.kernel-span-diagrams-of-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.span-diagrams
+open import foundation.span-diagrams funext
 open import foundation.spans
 open import foundation.universe-levels
 

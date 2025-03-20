@@ -1,7 +1,12 @@
 # Dependent function types
 
 ```agda
-module foundation.dependent-function-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.dependent-function-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,9 +14,9 @@ module foundation.dependent-function-types where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.spans-families-of-types
-open import foundation.terminal-spans-families-of-types
-open import foundation.type-arithmetic-dependent-function-types
-open import foundation.universal-property-dependent-function-types
+open import foundation.terminal-spans-families-of-types funext
+open import foundation.type-arithmetic-dependent-function-types funext
+open import foundation.universal-property-dependent-function-types funext
 open import foundation.universe-levels
 ```
 

@@ -1,22 +1,27 @@
 # Large meet-subsemilattices
 
 ```agda
-module order-theory.large-meet-subsemilattices where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.large-meet-subsemilattices
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.large-binary-relations
+open import foundation.large-binary-relations funext
 open import foundation.universe-levels
 
-open import order-theory.greatest-lower-bounds-large-posets
-open import order-theory.large-meet-semilattices
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.large-subposets
-open import order-theory.top-elements-large-posets
+open import order-theory.greatest-lower-bounds-large-posets funext
+open import order-theory.large-meet-semilattices funext
+open import order-theory.large-posets funext
+open import order-theory.large-preorders funext
+open import order-theory.large-subposets funext
+open import order-theory.top-elements-large-posets funext
 ```
 
 </details>

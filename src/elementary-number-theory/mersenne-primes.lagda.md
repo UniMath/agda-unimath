@@ -1,20 +1,25 @@
 # Mersenne primes
 
 ```agda
-module elementary-number-theory.mersenne-primes where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.mersenne-primes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.exponentiation-natural-numbers
+open import elementary-number-theory.distance-natural-numbers funext
+open import elementary-number-theory.exponentiation-natural-numbers funext
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.prime-numbers
+open import elementary-number-theory.prime-numbers funext
 
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

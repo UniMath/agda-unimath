@@ -1,7 +1,12 @@
 # The universal property of the standard finite types
 
 ```agda
-module univalent-combinatorics.universal-property-standard-finite-types where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.universal-property-standard-finite-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,24 +14,25 @@ module univalent-combinatorics.universal-property-standard-finite-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.cartesian-product-types funext
+open import foundation.contractible-types funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.raising-universe-levels-unit-type
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.raising-universe-levels-unit-type funext
 open import foundation.unit-type
-open import foundation.universal-property-contractible-types
-open import foundation.universal-property-empty-type
-open import foundation.universal-property-maybe
+open import foundation.universal-property-contractible-types funext
+open import foundation.universal-property-empty-type funext
+open import foundation.universal-property-maybe funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

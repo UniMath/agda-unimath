@@ -1,39 +1,44 @@
 # Finite choice
 
 ```agda
-module univalent-combinatorics.finite-choice where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.finite-choice
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-standard-finite-types
+open import elementary-number-theory.well-ordering-principle-standard-finite-types funext
 
-open import foundation.coproduct-types
-open import foundation.decidable-embeddings
+open import foundation.coproduct-types funext
+open import foundation.decidable-embeddings funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.fiber-inclusions
-open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.hilberts-epsilon-operators
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.sets
+open import foundation.dependent-universal-property-equivalences funext
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.fiber-inclusions funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.functoriality-propositional-truncation funext
+open import foundation.hilberts-epsilon-operators funext
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext
+open import foundation.sets funext
 open import foundation.unit-type
-open import foundation.universal-property-coproduct-types
-open import foundation.universal-property-unit-type
+open import foundation.universal-property-coproduct-types funext
+open import foundation.universal-property-unit-type funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-decidable-subtypes
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.counting funext-decidable-subtypes
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

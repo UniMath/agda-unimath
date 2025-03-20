@@ -1,29 +1,35 @@
 # Unordered pairs of elements in a type
 
 ```agda
-module foundation.unordered-pairs where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.unordered-pairs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-triangles-of-maps
-open import foundation.contractible-types
-open import foundation.decidable-equality
+open import foundation.commuting-triangles-of-maps funext
+open import foundation.contractible-types funext
+open import foundation.decidable-equality funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.existential-quantification
-open import foundation.function-extensionality
+open import foundation.dependent-universal-property-equivalences funext
+open import foundation.existential-quantification funext
+open import foundation.function-extensionality funext
+
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
-open import foundation.mere-equivalences
-open import foundation.postcomposition-functions
-open import foundation.propositional-truncations
+open import foundation.homotopy-induction funext
+open import foundation.mere-equivalences funext
+open import foundation.postcomposition-functions funext
+open import foundation.propositional-truncations funext
 open import foundation.structure-identity-principle
-open import foundation.type-arithmetic-dependent-function-types
-open import foundation.universal-property-contractible-types
-open import foundation.universal-property-dependent-pair-types
+open import foundation.type-arithmetic-dependent-function-types funext
+open import foundation.universal-property-contractible-types funext
+open import foundation.universal-property-dependent-pair-types funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -32,7 +38,7 @@ open import foundation-core.coproduct-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -41,11 +47,11 @@ open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
 
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.universal-property-standard-finite-types
+open import univalent-combinatorics.2-element-types funext
+open import univalent-combinatorics.equality-standard-finite-types funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.universal-property-standard-finite-types funext
 ```
 
 </details>

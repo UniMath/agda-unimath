@@ -1,7 +1,12 @@
 # Cofibers of pointed maps
 
 ```agda
-module synthetic-homotopy-theory.cofibers-of-pointed-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.cofibers-of-pointed-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,12 +14,12 @@ module synthetic-homotopy-theory.cofibers-of-pointed-maps where
 ```agda
 open import foundation.universe-levels
 
-open import structured-types.pointed-maps
+open import structured-types.pointed-maps funext
 open import structured-types.pointed-types
-open import structured-types.pointed-unit-type
+open import structured-types.pointed-unit-type funext
 
-open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams
-open import synthetic-homotopy-theory.pushouts-of-pointed-types
+open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams funext
+open import synthetic-homotopy-theory.pushouts-of-pointed-types funext
 ```
 
 </details>

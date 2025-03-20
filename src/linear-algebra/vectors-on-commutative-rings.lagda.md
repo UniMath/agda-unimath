@@ -1,25 +1,30 @@
 # Vectors on commutative rings
 
 ```agda
-module linear-algebra.vectors-on-commutative-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  linear-algebra.vectors-on-commutative-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-rings funext
 
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.commutative-monoids funext
+open import group-theory.monoids funext
+open import group-theory.semigroups funext
 
-open import linear-algebra.constant-vectors
-open import linear-algebra.vectors-on-rings
+open import linear-algebra.constant-vectors funext
+open import linear-algebra.vectors-on-rings funext
 ```
 
 </details>

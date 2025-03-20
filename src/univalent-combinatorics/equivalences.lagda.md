@@ -1,21 +1,26 @@
 # Equivalences between finite types
 
 ```agda
-module univalent-combinatorics.equivalences where
+open import foundation.function-extensionality-axiom
 
-open import foundation.equivalences public
+module
+  univalent-combinatorics.equivalences
+  (funext : function-extensionality)
+  where
+
+open import foundation.equivalences funext public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-types
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.embeddings
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.surjective-maps
+open import univalent-combinatorics.embeddings funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.surjective-maps funext
 ```
 
 </details>

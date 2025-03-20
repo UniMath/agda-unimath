@@ -1,7 +1,12 @@
 # The booleans
 
 ```agda
-module foundation.booleans where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.booleans
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.booleans public
 ```
@@ -9,11 +14,11 @@ open import foundation-core.booleans public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-equality
+open import foundation.decidable-equality funext
 open import foundation.dependent-pair-types
-open import foundation.discrete-types
-open import foundation.involutions
-open import foundation.negated-equality
+open import foundation.discrete-types funext
+open import foundation.involutions funext
+open import foundation.negated-equality funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -29,8 +34,8 @@ open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.sets
 
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

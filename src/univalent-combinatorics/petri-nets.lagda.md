@@ -1,17 +1,22 @@
 # Petri-nets
 
 ```agda
-module univalent-combinatorics.petri-nets where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.petri-nets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

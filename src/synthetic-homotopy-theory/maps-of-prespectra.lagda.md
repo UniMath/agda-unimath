@@ -3,7 +3,12 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module synthetic-homotopy-theory.maps-of-prespectra where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.maps-of-prespectra
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -13,17 +18,17 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.homotopies
+open import foundation.homotopies funext
 open import foundation.universe-levels
 
-open import structured-types.commuting-squares-of-pointed-maps
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
-open import structured-types.whiskering-pointed-homotopies-composition
-open import structured-types.wild-category-of-pointed-types
+open import structured-types.commuting-squares-of-pointed-maps funext
+open import structured-types.pointed-homotopies funext
+open import structured-types.pointed-maps funext
+open import structured-types.whiskering-pointed-homotopies-composition funext
+open import structured-types.wild-category-of-pointed-types funext
 
-open import synthetic-homotopy-theory.functoriality-loop-spaces
-open import synthetic-homotopy-theory.prespectra
+open import synthetic-homotopy-theory.functoriality-loop-spaces funext
+open import synthetic-homotopy-theory.prespectra funext
 ```
 
 </details>

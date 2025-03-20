@@ -1,13 +1,18 @@
 # Faithful maps
 
 ```agda
-module foundation.faithful-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.faithful-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-maps
+open import foundation.0-maps funext
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
@@ -20,7 +25,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.sets
-open import foundation-core.truncated-maps
+open import foundation-core.truncated-maps funext
 open import foundation-core.truncation-levels
 ```
 

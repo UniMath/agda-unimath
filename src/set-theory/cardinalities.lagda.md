@@ -1,25 +1,29 @@
 # Cardinalities of sets
 
 ```agda
-module set-theory.cardinalities where
+open import foundation.function-extensionality-axiom
+
+module
+  set-theory.cardinalities
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality-axiom
-open import foundation.functoriality-propositional-truncation
-open import foundation.identity-types
-open import foundation.large-binary-relations
-open import foundation.law-of-excluded-middle
-open import foundation.mere-embeddings
-open import foundation.mere-equivalences
-open import foundation.propositional-extensionality
-open import foundation.propositions
-open import foundation.set-truncations
-open import foundation.sets
+open import foundation.equivalences funext
+open import foundation.functoriality-propositional-truncation funext
+open import foundation.identity-types funext
+open import foundation.large-binary-relations funext
+open import foundation.law-of-excluded-middle funext
+open import foundation.mere-embeddings funext
+open import foundation.mere-equivalences funext
+open import foundation.propositional-extensionality funext
+open import foundation.propositions funext
+open import foundation.set-truncations funext
+open import foundation.sets funext
 open import foundation.universe-levels
 ```
 

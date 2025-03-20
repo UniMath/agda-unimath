@@ -1,29 +1,34 @@
 # Equivalences of span diagrams
 
 ```agda
-module foundation.equivalences-span-diagrams where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.equivalences-span-diagrams
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.equivalences-arrows
-open import foundation.equivalences-spans
+open import foundation.equivalences funext
+open import foundation.equivalences funext-arrows
+open import foundation.equivalences-spans funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.morphisms-span-diagrams
+open import foundation.morphisms-span-diagrams funext
 open import foundation.morphisms-spans
-open import foundation.operations-spans
-open import foundation.propositions
-open import foundation.span-diagrams
+open import foundation.operations-spans funext
+open import foundation.propositions funext
+open import foundation.span-diagrams funext
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence
+open import foundation.univalence funext
 open import foundation.universe-levels
 
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families

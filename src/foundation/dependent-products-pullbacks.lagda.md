@@ -1,28 +1,33 @@
 # Dependent products of pullbacks
 
 ```agda
-module foundation.dependent-products-pullbacks where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.dependent-products-pullbacks
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospan-diagrams
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.functoriality-dependent-function-types
-open import foundation.identity-types
-open import foundation.standard-pullbacks
+open import foundation.function-extensionality funext
+
+open import foundation.functoriality-dependent-function-types funext
+open import foundation.identity-types funext
+open import foundation.standard-pullbacks funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.pullbacks
+open import foundation-core.pullbacks funext
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.universal-property-pullbacks
+open import foundation-core.universal-property-pullbacks funext
 ```
 
 </details>

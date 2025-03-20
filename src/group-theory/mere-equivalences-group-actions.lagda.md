@@ -1,19 +1,24 @@
 # Mere equivalences of group actions
 
 ```agda
-module group-theory.mere-equivalences-group-actions where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.mere-equivalences-group-actions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import group-theory.equivalences-group-actions
-open import group-theory.group-actions
-open import group-theory.groups
+open import group-theory.equivalences-group-actions funext
+open import group-theory.group-actions funext
+open import group-theory.groups funext
 ```
 
 </details>

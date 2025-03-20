@@ -1,20 +1,25 @@
 # The elementhood relation on W-types
 
 ```agda
-module trees.elementhood-relation-w-types where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.elementhood-relation-w-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.identity-types
+open import foundation.empty-types funext
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import trees.elementhood-relation-coalgebras-polynomial-endofunctors
-open import trees.w-types
+open import trees.elementhood-relation-coalgebras-polynomial-endofunctors funext
+open import trees.w-types funext
 ```
 
 </details>

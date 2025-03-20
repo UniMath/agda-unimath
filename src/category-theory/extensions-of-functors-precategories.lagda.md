@@ -1,17 +1,22 @@
 # Extensions of functors between precategories
 
 ```agda
-module category-theory.extensions-of-functors-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.extensions-of-functors-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
-open import category-theory.precategories
+open import category-theory.functors-precategories funext
+open import category-theory.precategories funext
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

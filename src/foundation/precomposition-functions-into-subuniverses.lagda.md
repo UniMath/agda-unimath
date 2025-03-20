@@ -1,7 +1,12 @@
 # Precomposition of functions into subuniverses
 
 ```agda
-module foundation.precomposition-functions-into-subuniverses where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.precomposition-functions-into-subuniverses
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,8 +14,7 @@ module foundation.precomposition-functions-into-subuniverses where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality-axiom
-open import foundation.precomposition-functions
+open import foundation.precomposition-functions funext
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps

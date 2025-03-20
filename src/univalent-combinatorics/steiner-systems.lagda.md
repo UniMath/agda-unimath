@@ -1,7 +1,12 @@
 # Steiner systems
 
 ```agda
-module univalent-combinatorics.steiner-systems where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.steiner-systems
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,12 +14,12 @@ module univalent-combinatorics.steiner-systems where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types
-open import foundation.decidable-subtypes
+open import foundation.contractible-types funext
+open import foundation.decidable-subtypes funext
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

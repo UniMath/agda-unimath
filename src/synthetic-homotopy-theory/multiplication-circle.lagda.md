@@ -1,7 +1,12 @@
 # The multiplication operation on the circle
 
 ```agda
-module synthetic-homotopy-theory.multiplication-circle where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.multiplication-circle
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,17 +14,16 @@ module synthetic-homotopy-theory.multiplication-circle where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality-axiom
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
+open import structured-types.pointed-homotopies funext
+open import structured-types.pointed-maps funext
 
-open import synthetic-homotopy-theory.circle
-open import synthetic-homotopy-theory.loop-homotopy-circle
+open import synthetic-homotopy-theory.circle funext
+open import synthetic-homotopy-theory.loop-homotopy-circle funext
 ```
 
 </details>

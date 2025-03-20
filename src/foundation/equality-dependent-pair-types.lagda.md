@@ -1,7 +1,12 @@
 # Equality of dependent pair types
 
 ```agda
-module foundation.equality-dependent-pair-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.equality-dependent-pair-types
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.equality-dependent-pair-types public
 ```
@@ -11,7 +16,7 @@ open import foundation-core.equality-dependent-pair-types public
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.dependent-identifications
+open import foundation.dependent-identifications funext
 open import foundation.dependent-pair-types
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types

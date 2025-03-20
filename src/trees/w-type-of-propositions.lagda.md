@@ -1,24 +1,29 @@
 # The W-type of the type of propositions
 
 ```agda
-module trees.w-type-of-propositions where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.w-type-of-propositions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.propositional-extensionality
-open import foundation.propositions
-open import foundation.raising-universe-levels-unit-type
-open import foundation.sets
+open import foundation.empty-types funext
+open import foundation.propositional-extensionality funext
+open import foundation.propositions funext
+open import foundation.raising-universe-levels-unit-type funext
+open import foundation.sets funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import trees.extensional-w-types
-open import trees.w-types
+open import trees.extensional-w-types funext
+open import trees.w-types funext
 ```
 
 </details>

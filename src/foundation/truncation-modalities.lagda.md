@@ -1,20 +1,25 @@
 # The truncation modalities
 
 ```agda
-module foundation.truncation-modalities where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.truncation-modalities
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.truncations
+open import foundation.truncations funext
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.truncation-levels
 
-open import orthogonal-factorization-systems.modal-operators
-open import orthogonal-factorization-systems.uniquely-eliminating-modalities
+open import orthogonal-factorization-systems.modal-operators funext
+open import orthogonal-factorization-systems.uniquely-eliminating-modalities funext
 ```
 
 </details>

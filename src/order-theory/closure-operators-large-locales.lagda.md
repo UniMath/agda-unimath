@@ -1,7 +1,12 @@
 # Closure operators on large locales
 
 ```agda
-module order-theory.closure-operators-large-locales where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.closure-operators-large-locales
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,26 +14,26 @@ module order-theory.closure-operators-large-locales where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.large-binary-relations
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.large-binary-relations funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import order-theory.closure-operators-large-posets
-open import order-theory.large-frames
-open import order-theory.large-locales
-open import order-theory.large-meet-semilattices
-open import order-theory.large-meet-subsemilattices
-open import order-theory.large-posets
-open import order-theory.large-subposets
-open import order-theory.large-subpreorders
-open import order-theory.large-suplattices
-open import order-theory.least-upper-bounds-large-posets
-open import order-theory.order-preserving-maps-large-posets
+open import order-theory.closure-operators-large-posets funext
+open import order-theory.large-frames funext
+open import order-theory.large-locales funext
+open import order-theory.large-meet-semilattices funext
+open import order-theory.large-meet-subsemilattices funext
+open import order-theory.large-posets funext
+open import order-theory.large-subposets funext
+open import order-theory.large-subpreorders funext
+open import order-theory.large-suplattices funext
+open import order-theory.least-upper-bounds-large-posets funext
+open import order-theory.order-preserving-maps-large-posets funext
 ```
 
 </details>

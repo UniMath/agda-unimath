@@ -3,26 +3,31 @@
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-module modal-type-theory.flat-sharp-adjunction where
+open import foundation.function-extensionality-axiom
+
+module
+  modal-type-theory.flat-sharp-adjunction
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.retractions
-open import foundation.sections
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import modal-type-theory.action-on-identifications-flat-modality
-open import modal-type-theory.flat-modality
-open import modal-type-theory.functoriality-flat-modality
-open import modal-type-theory.sharp-codiscrete-types
-open import modal-type-theory.sharp-modality
+open import modal-type-theory.action-on-identifications-flat-modality funext
+open import modal-type-theory.flat-modality funext
+open import modal-type-theory.functoriality-flat-modality funext
+open import modal-type-theory.sharp-codiscrete-types funext
+open import modal-type-theory.sharp-modality funext
 ```
 
 </details>

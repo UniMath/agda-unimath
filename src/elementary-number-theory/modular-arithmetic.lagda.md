@@ -1,50 +1,55 @@
 # Modular arithmetic
 
 ```agda
-module elementary-number-theory.modular-arithmetic where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.modular-arithmetic
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.absolute-value-integers
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.congruence-integers
-open import elementary-number-theory.congruence-natural-numbers
-open import elementary-number-theory.divisibility-integers
-open import elementary-number-theory.equality-integers
-open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.absolute-value-integers funext
+open import elementary-number-theory.addition-integers funext
+open import elementary-number-theory.congruence-integers funext
+open import elementary-number-theory.congruence-natural-numbers funext
+open import elementary-number-theory.divisibility-integers funext
+open import elementary-number-theory.equality-integers funext
+open import elementary-number-theory.inequality-integers funext
 open import elementary-number-theory.integers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext
+open import elementary-number-theory.multiplication-integers funext
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.nonnegative-integers funext
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
+open import foundation.coproduct-types funext
+open import foundation.decidable-equality funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.discrete-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.sets
-open import foundation.surjective-maps
+open import foundation.discrete-types funext
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.negated-equality funext
+open import foundation.negation funext
+open import foundation.sets funext
+open import foundation.surjective-maps funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.types-equipped-with-endomorphisms
+open import structured-types.types-equipped-with-endomorphisms funext
 
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.equality-standard-finite-types funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

@@ -1,7 +1,12 @@
 # Coproduct types
 
 ```agda
-module foundation.coproduct-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.coproduct-types
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.coproduct-types public
 ```
@@ -11,9 +16,9 @@ open import foundation-core.coproduct-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.negated-equality
-open import foundation.noncontractible-types
-open import foundation.subuniverses
+open import foundation.negated-equality funext
+open import foundation.noncontractible-types funext
+open import foundation.subuniverses funext
 open import foundation.unit-type
 open import foundation.universe-levels
 

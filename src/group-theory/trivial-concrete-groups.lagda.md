@@ -1,23 +1,28 @@
 # Trivial concrete groups
 
 ```agda
-module group-theory.trivial-concrete-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.trivial-concrete-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.propositions
-open import foundation.raising-universe-levels-unit-type
+open import foundation.propositions funext
+open import foundation.raising-universe-levels-unit-type funext
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
+open import group-theory.concrete-groups funext
 
-open import higher-group-theory.trivial-higher-groups
+open import higher-group-theory.trivial-higher-groups funext
 ```
 
 </details>

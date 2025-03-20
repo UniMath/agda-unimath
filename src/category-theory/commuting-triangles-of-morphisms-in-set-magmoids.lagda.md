@@ -1,15 +1,20 @@
 # Commuting triangles of morphisms in set-magmoids
 
 ```agda
-module category-theory.commuting-triangles-of-morphisms-in-set-magmoids where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.commuting-triangles-of-morphisms-in-set-magmoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.set-magmoids
+open import category-theory.set-magmoids funext
 
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

@@ -1,17 +1,22 @@
 # Universal quantification
 
 ```agda
-module foundation.universal-quantification where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.universal-quantification
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
+open import foundation.dependent-products-propositions funext
 open import foundation.evaluation-functions
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
+open import foundation.logical-equivalences funext
+open import foundation.propositional-truncations funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

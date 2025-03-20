@@ -1,7 +1,12 @@
 # Path-split maps
 
 ```agda
-module foundation.path-split-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.path-split-maps
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.path-split-maps public
 ```
@@ -10,9 +15,9 @@ open import foundation-core.path-split-maps public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.iterated-dependent-product-types
-open import foundation.logical-equivalences
+open import foundation.equivalences funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.logical-equivalences funext
 open import foundation.telescopes
 open import foundation.universe-levels
 

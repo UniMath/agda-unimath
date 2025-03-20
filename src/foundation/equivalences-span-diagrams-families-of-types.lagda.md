@@ -1,17 +1,22 @@
 # Equivalences of span diagrams on families of types
 
 ```agda
-module foundation.equivalences-span-diagrams-families-of-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.equivalences-span-diagrams-families-of-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
+open import foundation.commuting-squares-of-maps funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.equivalences-spans-families-of-types
-open import foundation.homotopies
+open import foundation.equivalences funext
+open import foundation.equivalences funext-spans-families-of-types
+open import foundation.homotopies funext
 open import foundation.operations-spans-families-of-types
 open import foundation.span-diagrams-families-of-types
 open import foundation.universe-levels

@@ -7,14 +7,19 @@
 ## Modules in the literature namespace
 
 ```agda
-module literature where
+open import foundation.function-extensionality-axiom
 
-open import literature.100-theorems public
-open import literature.1000plus-theorems public
-open import literature.idempotents-in-intensional-type-theory public
-open import literature.introduction-to-homotopy-type-theory public
-open import literature.oeis public
-open import literature.sequential-colimits-in-homotopy-type-theory public
+module
+  literature
+  (funext : function-extensionality)
+  where
+
+open import literature.100-theorems funext public
+open import literature.1000plus-theorems funext public
+open import literature.idempotents-in-intensional-type-theory funext public
+open import literature.introduction-to-homotopy-type-theory funext public
+open import literature.oeis funext public
+open import literature.sequential-colimits-in-homotopy-type-theory funext public
 ```
 
 ## References

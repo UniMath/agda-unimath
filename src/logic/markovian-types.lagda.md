@@ -1,7 +1,12 @@
 # Markovian types
 
 ```agda
-module logic.markovian-types where
+open import foundation.function-extensionality-axiom
+
+module
+  logic.markovian-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,15 +14,15 @@ module logic.markovian-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-subtypes
+open import foundation.decidable-subtypes funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.disjunction
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.inhabited-types
-open import foundation.negation
-open import foundation.universal-quantification
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext
+open import foundation.existential-quantification funext
+open import foundation.function-types funext
+open import foundation.inhabited-types funext
+open import foundation.negation funext
+open import foundation.universal-quantification funext
 open import foundation.universe-levels
 
 open import foundation-core.booleans
@@ -25,7 +30,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

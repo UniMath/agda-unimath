@@ -1,32 +1,38 @@
 # Types colocal at maps
 
 ```agda
-module orthogonal-factorization-systems.types-colocal-at-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.types-colocal-at-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.contractible-maps
-open import foundation.contractible-types
+open import foundation.commuting-squares-of-maps funext
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.equivalences-arrows
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.postcomposition-dependent-functions
-open import foundation.postcomposition-functions
-open import foundation.propositions
-open import foundation.retracts-of-maps
-open import foundation.retracts-of-types
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.equivalences funext-arrows
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.postcomposition-dependent-functions funext
+open import foundation.postcomposition-functions funext
+open import foundation.propositions funext
+open import foundation.retracts-of-maps funext
+open import foundation.retracts-of-types funext
 open import foundation.unit-type
-open import foundation.universal-property-empty-type
-open import foundation.universal-property-equivalences
+open import foundation.universal-property-empty-type funext
+open import foundation.universal-property-equivalences funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

@@ -1,22 +1,27 @@
 # Concrete monoids
 
 ```agda
-module group-theory.concrete-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.concrete-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
+open import category-theory.categories funext
 
-open import foundation.0-connected-types
-open import foundation.cartesian-product-types
+open import foundation.0-connected-types funext
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.cores-monoids
-open import group-theory.monoids
-open import group-theory.torsors
+open import group-theory.cores-monoids funext
+open import group-theory.monoids funext
+open import group-theory.torsors funext
 ```
 
 </details>

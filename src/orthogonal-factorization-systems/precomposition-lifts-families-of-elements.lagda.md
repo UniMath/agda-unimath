@@ -1,33 +1,38 @@
 # Precomposition of lifts of families of elements by maps
 
 ```agda
-module orthogonal-factorization-systems.precomposition-lifts-families-of-elements where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.precomposition-lifts-families-of-elements
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-dependent-functions
-open import foundation.commuting-squares-of-homotopies
-open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-maps
+open import foundation.commuting-squares-of-homotopies funext
+open import foundation.commuting-squares-of-maps funext
+open import foundation.commuting-triangles-of-maps funext
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.precomposition-functions
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.precomposition-functions funext
 open import foundation.transport-along-identifications
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 open import foundation.whiskering-homotopies-composition
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
-open import orthogonal-factorization-systems.lifts-families-of-elements
+open import orthogonal-factorization-systems.lifts-families-of-elements funext
 ```
 
 </details>

@@ -1,18 +1,23 @@
 # Greatest lower bounds in large posets
 
 ```agda
-module order-theory.greatest-lower-bounds-large-posets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.greatest-lower-bounds-large-posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.logical-equivalences
+open import foundation.logical-equivalences funext
 open import foundation.universe-levels
 
-open import order-theory.dependent-products-large-posets
-open import order-theory.large-posets
-open import order-theory.lower-bounds-large-posets
+open import order-theory.dependent-products-large-posets funext
+open import order-theory.large-posets funext
+open import order-theory.lower-bounds-large-posets funext
 ```
 
 </details>

@@ -1,25 +1,30 @@
 # Ordinals
 
 ```agda
-module order-theory.ordinals where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.ordinals
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.cartesian-product-types
+open import foundation.binary-relations funext
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import order-theory.posets
-open import order-theory.preorders
-open import order-theory.transitive-well-founded-relations
-open import order-theory.well-founded-relations
+open import order-theory.posets funext
+open import order-theory.preorders funext
+open import order-theory.transitive-well-founded-relations funext
+open import order-theory.well-founded-relations funext
 ```
 
 </details>

@@ -1,7 +1,12 @@
 # Full binary trees
 
 ```agda
-module trees.full-binary-trees where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.full-binary-trees
+  (funext : function-extensionality)
+  where
 ```
 
 <details><sumary>Imports</summary>
@@ -9,10 +14,10 @@ module trees.full-binary-trees where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.empty-types
+open import foundation.empty-types funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

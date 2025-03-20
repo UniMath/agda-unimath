@@ -1,20 +1,25 @@
 # Commutators of elements in groups
 
 ```agda
-module group-theory.commutators-of-elements-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.commutators-of-elements-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import group-theory.commuting-elements-groups
-open import group-theory.conjugation
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
+open import group-theory.commuting-elements-groups funext
+open import group-theory.conjugation funext
+open import group-theory.groups funext
+open import group-theory.homomorphisms-groups funext
 ```
 
 </details>

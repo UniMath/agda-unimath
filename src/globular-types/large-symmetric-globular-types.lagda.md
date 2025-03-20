@@ -3,18 +3,23 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module globular-types.large-symmetric-globular-types where
+open import foundation.function-extensionality-axiom
+
+module
+  globular-types.large-symmetric-globular-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-binary-relations
+open import foundation.large-binary-relations funext
 open import foundation.universe-levels
 
 open import globular-types.globular-types
 open import globular-types.large-globular-types
-open import globular-types.symmetric-globular-types
+open import globular-types.symmetric-globular-types funext
 ```
 
 </details>

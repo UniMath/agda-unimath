@@ -1,31 +1,36 @@
 # Strict inequality on the natural numbers
 
 ```agda
-module elementary-number-theory.strict-inequality-natural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.strict-inequality-natural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers funext
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.cartesian-product-types funext
+open import foundation.coproduct-types funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.identity-types
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.propositions
+open import foundation.empty-types funext
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.identity-types funext
+open import foundation.negated-equality funext
+open import foundation.negation funext
+open import foundation.propositions funext
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels

@@ -1,20 +1,25 @@
 # Wide displayed large reflexive graphs
 
 ```agda
-module graph-theory.wide-displayed-large-reflexive-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.wide-displayed-large-reflexive-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
+open import foundation.cartesian-product-types funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import graph-theory.large-reflexive-graphs
-open import graph-theory.reflexive-graphs
+open import graph-theory.reflexive-graphs funext
 ```
 
 </details>

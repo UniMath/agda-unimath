@@ -1,7 +1,12 @@
 # Functoriality of sequential limits
 
 ```agda
-module foundation.functoriality-sequential-limits where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.functoriality-sequential-limits
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,11 +15,11 @@ module foundation.functoriality-sequential-limits where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-inverse-sequential-diagrams
+open import foundation.cones-over-inverse-sequential-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.inverse-sequential-diagrams
-open import foundation.morphisms-inverse-sequential-diagrams
-open import foundation.sequential-limits
+open import foundation.inverse-sequential-diagrams funext
+open import foundation.morphisms-inverse-sequential-diagrams funext
+open import foundation.sequential-limits funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

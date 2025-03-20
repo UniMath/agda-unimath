@@ -1,18 +1,23 @@
 # Monotonic premetric structures on types
 
 ```agda
-module metric-spaces.monotonic-premetric-structures where
+open import foundation.function-extensionality-axiom
+
+module
+  metric-spaces.monotonic-premetric-structures
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers funext
 
-open import foundation.propositions
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import metric-spaces.premetric-structures
+open import metric-spaces.premetric-structures funext
 ```
 
 </details>

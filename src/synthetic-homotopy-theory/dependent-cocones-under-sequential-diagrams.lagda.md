@@ -1,7 +1,12 @@
 # Dependent cocones under sequential diagrams
 
 ```agda
-module synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,27 +16,27 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.binary-homotopies
-open import foundation.commuting-triangles-of-maps
-open import foundation.constant-type-families
+open import foundation.binary-homotopies funext
+open import foundation.commuting-triangles-of-maps funext
+open import foundation.constant-type-families funext
 open import foundation.dependent-homotopies
-open import foundation.dependent-identifications
+open import foundation.dependent-identifications funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-function-types funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.dependent-coforks
-open import synthetic-homotopy-theory.sequential-diagrams
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext
+open import synthetic-homotopy-theory.dependent-coforks funext
+open import synthetic-homotopy-theory.sequential-diagrams funext
 ```
 
 </details>

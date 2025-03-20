@@ -1,17 +1,21 @@
 # Lawvere's fixed point theorem
 
 ```agda
-module foundation.lawveres-fixed-point-theorem where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.lawveres-fixed-point-theorem
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.function-extensionality-axiom
-open import foundation.propositional-truncations
-open import foundation.surjective-maps
+open import foundation.existential-quantification funext
+open import foundation.propositional-truncations funext
+open import foundation.surjective-maps funext
 open import foundation.universe-levels
 
 open import foundation-core.identity-types

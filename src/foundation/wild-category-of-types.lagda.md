@@ -3,7 +3,12 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module foundation.wild-category-of-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.wild-category-of-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,11 +16,11 @@ module foundation.wild-category-of-types where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.globular-type-of-functions
-open import foundation.homotopies
-open import foundation.isomorphisms-of-sets
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
+open import foundation.globular-type-of-functions funext
+open import foundation.homotopies funext
+open import foundation.isomorphisms-of-sets funext
+open import foundation.sets funext
+open import foundation.strictly-involutive-identity-types funext
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -26,13 +31,13 @@ open import foundation-core.identity-types
 
 open import globular-types.globular-types
 open import globular-types.large-globular-types
-open import globular-types.large-reflexive-globular-types
-open import globular-types.large-transitive-globular-types
-open import globular-types.reflexive-globular-types
-open import globular-types.transitive-globular-types
+open import globular-types.large-reflexive-globular-types funext
+open import globular-types.large-transitive-globular-types funext
+open import globular-types.reflexive-globular-types funext
+open import globular-types.transitive-globular-types funext
 
-open import wild-category-theory.noncoherent-large-omega-precategories
-open import wild-category-theory.noncoherent-omega-precategories
+open import wild-category-theory.noncoherent-large-omega-precategories funext
+open import wild-category-theory.noncoherent-omega-precategories funext
 ```
 
 </details>

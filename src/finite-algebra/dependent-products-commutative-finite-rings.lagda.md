@@ -1,32 +1,37 @@
 # Dependent products of commutative finit rings
 
 ```agda
-module finite-algebra.dependent-products-commutative-finite-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  finite-algebra.dependent-products-commutative-finite-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.dependent-products-commutative-rings
+open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.dependent-products-commutative-rings funext
 
-open import finite-algebra.commutative-finite-rings
-open import finite-algebra.dependent-products-finite-rings
-open import finite-algebra.finite-rings
+open import finite-algebra.commutative-finite-rings funext
+open import finite-algebra.dependent-products-finite-rings funext
+open import finite-algebra.finite-rings funext
 
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.commutative-monoids
+open import group-theory.abelian-groups funext
+open import group-theory.commutative-monoids funext
 
-open import ring-theory.dependent-products-rings
-open import ring-theory.rings
+open import ring-theory.dependent-products-rings funext
+open import ring-theory.rings funext
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

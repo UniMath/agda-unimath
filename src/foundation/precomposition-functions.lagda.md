@@ -1,7 +1,12 @@
 # Precomposition of functions
 
 ```agda
-module foundation.precomposition-functions where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.precomposition-functions
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.precomposition-functions public
 ```
@@ -11,14 +16,14 @@ open import foundation-core.precomposition-functions public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.precomposition-dependent-functions
-open import foundation.sections
+open import foundation.function-extensionality funext
+
+open import foundation.precomposition-dependent-functions funext
+open import foundation.sections funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps

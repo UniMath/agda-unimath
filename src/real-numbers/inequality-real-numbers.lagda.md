@@ -1,33 +1,38 @@
 # Inequality on the real numbers
 
 ```agda
-module real-numbers.inequality-real-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  real-numbers.inequality-real-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.inequality-rational-numbers funext
+open import elementary-number-theory.rational-numbers funext
 
-open import foundation.complements-subtypes
+open import foundation.complements-subtypes funext
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.existential-quantification funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.posets
-open import order-theory.preorders
+open import order-theory.large-posets funext
+open import order-theory.large-preorders funext
+open import order-theory.posets funext
+open import order-theory.preorders funext
 
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.inequality-lower-dedekind-real-numbers
-open import real-numbers.inequality-upper-dedekind-real-numbers
-open import real-numbers.rational-real-numbers
+open import real-numbers.dedekind-real-numbers funext
+open import real-numbers.inequality-lower-dedekind-real-numbers funext
+open import real-numbers.inequality-upper-dedekind-real-numbers funext
+open import real-numbers.rational-real-numbers funext
 ```
 
 </details>

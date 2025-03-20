@@ -3,7 +3,12 @@
 ```agda
 {-# OPTIONS --guardedness --allow-unsolved-metas #-}
 
-module type-theories.unityped-type-theories where
+open import foundation.function-extensionality-axiom
+
+module
+  type-theories.unityped-type-theories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,10 +17,10 @@ module type-theories.unityped-type-theories where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.sets funext
 open import foundation.universe-levels
 ```
 

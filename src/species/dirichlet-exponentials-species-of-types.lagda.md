@@ -1,34 +1,39 @@
 # Dirichlet exponentials of a species of types
 
 ```agda
-module species.dirichlet-exponentials-species-of-types where
+open import foundation.function-extensionality-axiom
+
+module
+  species.dirichlet-exponentials-species-of-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.arithmetic-law-product-and-pi-decompositions
-open import foundation.cartesian-product-types
-open import foundation.coproduct-decompositions
-open import foundation.dependent-binomial-theorem
+open import foundation.arithmetic-law-product-and-pi-decompositions funext
+open import foundation.cartesian-product-types funext
+open import foundation.coproduct-decompositions funext
+open import foundation.dependent-binomial-theorem funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.pi-decompositions
+open import foundation.equivalences funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.pi-decompositions funext
 open import foundation.product-decompositions
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence
+open import foundation.univalence funext
 open import foundation.universe-levels
 
-open import species.coproducts-species-of-types
-open import species.dirichlet-products-species-of-types
-open import species.equivalences-species-of-types
-open import species.species-of-types
+open import species.coproducts-species-of-types funext
+open import species.dirichlet-products-species-of-types funext
+open import species.equivalences-species-of-types funext
+open import species.species-of-types funext
 ```
 
 </details>

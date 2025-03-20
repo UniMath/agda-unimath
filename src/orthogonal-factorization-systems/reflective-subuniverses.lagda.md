@@ -1,23 +1,28 @@
 # Reflective subuniverses
 
 ```agda
-module orthogonal-factorization-systems.reflective-subuniverses where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.reflective-subuniverses
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.subuniverses
+open import foundation.equivalences funext
+open import foundation.subuniverses funext
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.localizations-at-subuniverses
-open import orthogonal-factorization-systems.modal-induction
-open import orthogonal-factorization-systems.modal-operators
-open import orthogonal-factorization-systems.modal-subuniverse-induction
-open import orthogonal-factorization-systems.types-local-at-maps
+open import orthogonal-factorization-systems.localizations-at-subuniverses funext
+open import orthogonal-factorization-systems.modal-induction funext
+open import orthogonal-factorization-systems.modal-operators funext
+open import orthogonal-factorization-systems.modal-subuniverse-induction funext
+open import orthogonal-factorization-systems.types-local-at-maps funext
 ```
 
 </details>

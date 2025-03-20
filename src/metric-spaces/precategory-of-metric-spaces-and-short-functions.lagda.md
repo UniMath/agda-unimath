@@ -1,32 +1,36 @@
 # The precategory of metric spaces and short functions
 
 ```agda
-module metric-spaces.precategory-of-metric-spaces-and-short-functions where
+open import foundation.function-extensionality-axiom
+
+module
+  metric-spaces.precategory-of-metric-spaces-and-short-functions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
+open import category-theory.isomorphisms-in-precategories funext
+open import category-theory.precategories funext
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality-axiom
-open import foundation.functoriality-dependent-pair-types
-open import foundation.logical-equivalences
-open import foundation.propositions
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import metric-spaces.equality-of-metric-spaces
-open import metric-spaces.functions-metric-spaces
-open import metric-spaces.isometric-equivalences-premetric-spaces
-open import metric-spaces.isometries-metric-spaces
-open import metric-spaces.metric-spaces
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.equality-of-metric-spaces funext
+open import metric-spaces.functions-metric-spaces funext
+open import metric-spaces.isometric-equivalences-premetric-spaces funext
+open import metric-spaces.isometries-metric-spaces funext
+open import metric-spaces.metric-spaces funext
+open import metric-spaces.short-functions-metric-spaces funext
 ```
 
 </details>

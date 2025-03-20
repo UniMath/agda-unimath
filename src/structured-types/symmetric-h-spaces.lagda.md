@@ -1,19 +1,24 @@
 # Symmetric H-spaces
 
 ```agda
-module structured-types.symmetric-h-spaces where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.symmetric-h-spaces
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.symmetric-operations
+open import foundation.symmetric-operations funext
 open import foundation.universe-levels
 
-open import structured-types.involutive-type-of-h-space-structures
+open import structured-types.involutive-type-of-h-space-structures funext
 open import structured-types.pointed-types
-open import structured-types.symmetric-elements-involutive-types
+open import structured-types.symmetric-elements-involutive-types funext
 ```
 
 </details>

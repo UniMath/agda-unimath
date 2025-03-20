@@ -1,7 +1,12 @@
 # Multiplication of the elements of a list of natural numbers
 
 ```agda
-module elementary-number-theory.multiplication-lists-of-natural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.multiplication-lists-of-natural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,14 +16,14 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.permutations-standard-finite-types
+open import finite-group-theory.permutations-standard-finite-types funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types
+open import foundation.identity-types funext
 
-open import lists.concatenation-lists
+open import lists.concatenation-lists funext
 open import lists.lists
-open import lists.permutation-lists
+open import lists.permutation-lists funext
 ```
 
 </details>

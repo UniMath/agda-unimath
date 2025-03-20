@@ -1,18 +1,23 @@
 # Commuting elements of groups
 
 ```agda
-module group-theory.commuting-elements-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.commuting-elements-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.identity-types funext
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import group-theory.commuting-elements-monoids
-open import group-theory.groups
+open import group-theory.commuting-elements-monoids funext
+open import group-theory.groups funext
 ```
 
 </details>

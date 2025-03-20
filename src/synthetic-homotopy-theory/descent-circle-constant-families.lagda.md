@@ -1,20 +1,25 @@
 # Descent data for constant type families over the circle
 
 ```agda
-module synthetic-homotopy-theory.descent-circle-constant-families where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.descent-circle-constant-families
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.constant-type-families
+open import foundation.constant-type-families funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.descent-circle
-open import synthetic-homotopy-theory.free-loops
+open import synthetic-homotopy-theory.descent-circle funext
+open import synthetic-homotopy-theory.free-loops funext
 ```
 
 </details>

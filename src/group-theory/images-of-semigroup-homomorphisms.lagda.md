@@ -1,30 +1,35 @@
 # Images of semigroup homomorphisms
 
 ```agda
-module group-theory.images-of-semigroup-homomorphisms where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.images-of-semigroup-homomorphisms
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.images
-open import foundation.images-subtypes
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
-open import foundation.universal-property-image
+open import foundation.identity-types funext
+open import foundation.images funext
+open import foundation.images funext-subtypes
+open import foundation.logical-equivalences funext
+open import foundation.propositional-truncations funext
+open import foundation.universal-property-image funext
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-semigroups
-open import group-theory.pullbacks-subsemigroups
-open import group-theory.semigroups
-open import group-theory.subsemigroups
-open import group-theory.subsets-semigroups
+open import group-theory.homomorphisms-semigroups funext
+open import group-theory.pullbacks-subsemigroups funext
+open import group-theory.semigroups funext
+open import group-theory.subsemigroups funext
+open import group-theory.subsets-semigroups funext
 
-open import order-theory.galois-connections-large-posets
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.galois-connections-large-posets funext
+open import order-theory.order-preserving-maps-large-posets funext
+open import order-theory.order-preserving-maps-large-preorders funext
 ```
 
 </details>

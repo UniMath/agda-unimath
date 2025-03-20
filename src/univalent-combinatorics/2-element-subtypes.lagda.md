@@ -1,37 +1,42 @@
 # `2`-element subtypes
 
 ```agda
-module univalent-combinatorics.2-element-subtypes where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.2-element-subtypes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.automorphisms
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.automorphisms funext
+open import foundation.contractible-types funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.logical-equivalences
-open import foundation.mere-equivalences
-open import foundation.negated-equality
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.logical-equivalences funext
+open import foundation.mere-equivalences funext
+open import foundation.negated-equality funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.subtypes funext
+open import foundation.torsorial-type-families funext
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-coproduct-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.2-element-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

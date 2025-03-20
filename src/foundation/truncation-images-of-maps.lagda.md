@@ -1,26 +1,31 @@
 # Truncation images of maps
 
 ```agda
-module foundation.truncation-images-of-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.truncation-images-of-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.connected-maps
+open import foundation.connected-maps funext
 open import foundation.dependent-pair-types
-open import foundation.fibers-of-maps
-open import foundation.functoriality-truncation
-open import foundation.identity-types
-open import foundation.truncations
+open import foundation.fibers-of-maps funext
+open import foundation.functoriality-truncation funext
+open import foundation.identity-types funext
+open import foundation.truncations funext
 open import foundation.universe-levels
 
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.transport-along-identifications
-open import foundation-core.truncated-maps
+open import foundation-core.truncated-maps funext
 open import foundation-core.truncation-levels
 ```
 

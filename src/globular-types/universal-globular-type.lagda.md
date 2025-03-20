@@ -3,7 +3,12 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module globular-types.universal-globular-type where
+open import foundation.function-extensionality-axiom
+
+module
+  globular-types.universal-globular-type
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -13,9 +18,9 @@ open import foundation.dependent-pair-types
 open import foundation.spans
 open import foundation.universe-levels
 
-open import globular-types.dependent-globular-types
-open import globular-types.exponentials-globular-types
-open import globular-types.globular-maps
+open import globular-types.dependent-globular-types funext
+open import globular-types.exponentials-globular-types funext
+open import globular-types.globular-maps funext
 open import globular-types.globular-types
 ```
 

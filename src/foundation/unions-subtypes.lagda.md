@@ -1,27 +1,32 @@
 # Unions of subtypes
 
 ```agda
-module foundation.unions-subtypes where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.unions-subtypes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-subtypes
+open import foundation.decidable-subtypes funext
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.large-locale-of-subtypes
-open import foundation.powersets
-open import foundation.propositional-truncations
+open import foundation.disjunction funext
+open import foundation.large-locale-of-subtypes funext
+open import foundation.powersets funext
+open import foundation.propositional-truncations funext
 open import foundation.universe-levels
 
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 
-open import logic.de-morgan-propositions
-open import logic.de-morgan-subtypes
-open import logic.double-negation-stable-subtypes
+open import logic.de-morgan-propositions funext
+open import logic.de-morgan-subtypes funext
+open import logic.double-negation-stable-subtypes funext
 
-open import order-theory.least-upper-bounds-large-posets
+open import order-theory.least-upper-bounds-large-posets funext
 ```
 
 </details>

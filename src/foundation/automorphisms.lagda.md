@@ -1,14 +1,19 @@
 # Automorphisms
 
 ```agda
-module foundation.automorphisms where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.automorphisms
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.sets
+open import foundation.sets funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

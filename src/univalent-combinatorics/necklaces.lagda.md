@@ -1,7 +1,12 @@
 # Necklaces
 
 ```agda
-module univalent-combinatorics.necklaces where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.necklaces
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,19 +15,20 @@ module univalent-combinatorics.necklaces where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
-open import structured-types.types-equipped-with-endomorphisms
+open import structured-types.types-equipped-with-endomorphisms funext
 
-open import univalent-combinatorics.cyclic-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.cyclic-finite-types funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

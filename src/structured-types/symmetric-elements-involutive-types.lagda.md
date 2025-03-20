@@ -1,7 +1,12 @@
 # Symmetric elements of involutive types
 
 ```agda
-module structured-types.symmetric-elements-involutive-types where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.symmetric-elements-involutive-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,9 +14,9 @@ module structured-types.symmetric-elements-involutive-types where
 ```agda
 open import foundation.universe-levels
 
-open import structured-types.involutive-types
+open import structured-types.involutive-types funext
 
-open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.2-element-types funext
 ```
 
 </details>

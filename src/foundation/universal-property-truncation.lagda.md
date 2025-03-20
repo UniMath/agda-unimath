@@ -1,31 +1,37 @@
 # The universal property of truncations
 
 ```agda
-module foundation.universal-property-truncation where
+open import foundation.function-extensionality-axiom
 
-open import foundation-core.universal-property-truncation public
+module
+  foundation.universal-property-truncation
+  (funext : function-extensionality)
+  where
+
+open import foundation-core.universal-property-truncation funext public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.surjective-maps
-open import foundation.type-arithmetic-dependent-function-types
-open import foundation.universal-property-dependent-pair-types
-open import foundation.universal-property-identity-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.function-extensionality funext
+
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext
+open import foundation.surjective-maps funext
+open import foundation.type-arithmetic-dependent-function-types funext
+open import foundation.universal-property-dependent-pair-types funext
+open import foundation.universal-property-identity-types funext
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types

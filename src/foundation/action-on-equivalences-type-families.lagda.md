@@ -1,20 +1,25 @@
 # Action on equivalences of type families
 
 ```agda
-module foundation.action-on-equivalences-type-families where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.action-on-equivalences-type-families
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-equivalences-functions
+open import foundation.action-on-equivalences-functions funext
 open import foundation.action-on-identifications-functions
-open import foundation.equivalence-induction
-open import foundation.univalence
+open import foundation.equivalence-induction funext
+open import foundation.univalence funext
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences

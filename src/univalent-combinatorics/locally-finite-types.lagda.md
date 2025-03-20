@@ -1,7 +1,12 @@
 # Locally finite types
 
 ```agda
-module univalent-combinatorics.locally-finite-types where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.locally-finite-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,33 +14,33 @@ module univalent-combinatorics.locally-finite-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.1-types
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.dependent-universal-property-equivalences
-open import foundation.empty-types
+open import foundation.1-types funext
+open import foundation.cartesian-product-types funext
+open import foundation.contractible-types funext
+open import foundation.coproduct-types funext
+open import foundation.decidable-equality funext
+open import foundation.dependent-universal-property-equivalences funext
+open import foundation.empty-types funext
 open import foundation.equality-cartesian-product-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
 open import foundation.transport-along-identifications
 open import foundation.unit-type
-open import foundation.universal-property-coproduct-types
-open import foundation.universal-property-empty-type
-open import foundation.universal-property-unit-type
+open import foundation.universal-property-coproduct-types funext
+open import foundation.universal-property-empty-type funext
+open import foundation.universal-property-unit-type funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.cartesian-product-types funext
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.dependent-pair-types funext
+open import univalent-combinatorics.equality-finite-types funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

@@ -1,27 +1,32 @@
 # Replete subprecategories
 
 ```agda
-module category-theory.replete-subprecategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.replete-subprecategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.isomorphism-induction-categories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.isomorphisms-in-subprecategories
-open import category-theory.precategories
-open import category-theory.subprecategories
+open import category-theory.categories funext
+open import category-theory.isomorphism-induction-categories funext
+open import category-theory.isomorphisms-in-precategories funext
+open import category-theory.isomorphisms-in-subprecategories funext
+open import category-theory.precategories funext
+open import category-theory.subprecategories funext
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.iterated-dependent-product-types
-open import foundation.logical-equivalences
-open import foundation.propositions
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext
 open import foundation.subsingleton-induction
-open import foundation.subtypes
+open import foundation.subtypes funext
 open import foundation.telescopes
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types

@@ -1,7 +1,12 @@
 # Equality of natural numbers
 
 ```agda
-module elementary-number-theory.equality-natural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.equality-natural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,23 +15,23 @@ module elementary-number-theory.equality-natural-numbers where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
+open import foundation.coproduct-types funext
+open import foundation.decidable-equality funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.set-truncations
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.set-truncations funext
+open import foundation.sets funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.decidable-propositions
-open import foundation-core.discrete-types
+open import foundation-core.decidable-propositions funext
+open import foundation-core.discrete-types funext
 open import foundation-core.torsorial-type-families
 ```
 

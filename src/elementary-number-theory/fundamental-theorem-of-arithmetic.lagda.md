@@ -1,54 +1,59 @@
 # The fundamental theorem of arithmetic
 
 ```agda
-module elementary-number-theory.fundamental-theorem-of-arithmetic where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.fundamental-theorem-of-arithmetic
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.based-strong-induction-natural-numbers
-open import elementary-number-theory.bezouts-lemma-integers
-open import elementary-number-theory.decidable-total-order-natural-numbers
-open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.lower-bounds-natural-numbers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.multiplication-lists-of-natural-numbers
+open import elementary-number-theory.based-strong-induction-natural-numbers funext
+open import elementary-number-theory.bezouts-lemma-integers funext
+open import elementary-number-theory.decidable-total-order-natural-numbers funext
+open import elementary-number-theory.divisibility-natural-numbers funext
+open import elementary-number-theory.equality-natural-numbers funext
+open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.lower-bounds-natural-numbers funext
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext
+open import elementary-number-theory.multiplication-lists-of-natural-numbers funext
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.prime-numbers
-open import elementary-number-theory.relatively-prime-natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
-open import elementary-number-theory.well-ordering-principle-natural-numbers
+open import elementary-number-theory.prime-numbers funext
+open import elementary-number-theory.relatively-prime-natural-numbers funext
+open import elementary-number-theory.strict-inequality-natural-numbers funext
+open import elementary-number-theory.well-ordering-principle-natural-numbers funext
 
-open import finite-group-theory.permutations-standard-finite-types
+open import finite-group-theory.permutations-standard-finite-types funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.cartesian-product-types funext
+open import foundation.contractible-types funext
+open import foundation.coproduct-types funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.raising-universe-levels-unit-type
-open import foundation.subtypes
+open import foundation.empty-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.raising-universe-levels-unit-type funext
+open import foundation.subtypes funext
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-empty-type funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import lists.concatenation-lists
-open import lists.equality-lists
-open import lists.functoriality-lists
+open import lists.concatenation-lists funext
+open import lists.equality-lists funext
+open import lists.functoriality-lists funext
 open import lists.lists
-open import lists.permutation-lists
-open import lists.predicates-on-lists
-open import lists.sort-by-insertion-lists
-open import lists.sorted-lists
+open import lists.permutation-lists funext
+open import lists.predicates-on-lists funext
+open import lists.sort-by-insertion-lists funext
+open import lists.sorted-lists funext
 ```
 
 </details>

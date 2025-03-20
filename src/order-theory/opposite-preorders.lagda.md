@@ -1,22 +1,27 @@
 # Opposite preorders
 
 ```agda
-module order-theory.opposite-preorders where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.opposite-preorders
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.equivalences funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import order-theory.order-preserving-maps-preorders
-open import order-theory.preorders
+open import order-theory.order-preserving-maps-preorders funext
+open import order-theory.preorders funext
 ```
 
 </details>

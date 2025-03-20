@@ -1,18 +1,23 @@
 # Locally finite posets
 
 ```agda
-module order-theory.locally-finite-posets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.locally-finite-posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import order-theory.finite-posets
-open import order-theory.interval-subposets
-open import order-theory.posets
+open import order-theory.finite-posets funext
+open import order-theory.interval-subposets funext
+open import order-theory.posets funext
 ```
 
 </details>

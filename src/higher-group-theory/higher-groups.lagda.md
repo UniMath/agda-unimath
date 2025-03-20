@@ -1,28 +1,33 @@
 # Higher groups
 
 ```agda
-module higher-group-theory.higher-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  higher-group-theory.higher-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
+open import foundation.0-connected-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.full-subtypes
-open import foundation.identity-types
-open import foundation.images
-open import foundation.mere-equality
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.equivalences funext
+open import foundation.full-subtypes funext
+open import foundation.identity-types funext
+open import foundation.images funext
+open import foundation.mere-equality funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.h-spaces
+open import structured-types.h-spaces funext
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.loop-spaces funext
 ```
 
 </details>

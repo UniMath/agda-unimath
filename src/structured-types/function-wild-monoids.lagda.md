@@ -1,19 +1,24 @@
 # Function wild monoids
 
 ```agda
-module structured-types.function-wild-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.function-wild-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import structured-types.dependent-products-wild-monoids
-open import structured-types.h-spaces
+open import structured-types.dependent-products-wild-monoids funext
+open import structured-types.h-spaces funext
 open import structured-types.pointed-types
-open import structured-types.wild-monoids
+open import structured-types.wild-monoids funext
 ```
 
 </details>

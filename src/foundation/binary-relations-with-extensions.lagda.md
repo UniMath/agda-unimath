@@ -1,15 +1,20 @@
 # Binary relations with extensions
 
 ```agda
-module foundation.binary-relations-with-extensions where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.binary-relations-with-extensions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext
 open import foundation.dependent-pair-types
-open import foundation.iterated-dependent-product-types
+open import foundation.iterated-dependent-product-types funext
 open import foundation.universe-levels
 
 open import foundation-core.propositions

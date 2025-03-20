@@ -1,18 +1,23 @@
 # Similarity of order preserving maps between large preorders
 
 ```agda
-module order-theory.similarity-of-order-preserving-maps-large-preorders where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.similarity-of-order-preserving-maps-large-preorders
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.universe-levels
 
-open import order-theory.large-preorders
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.similarity-of-elements-large-preorders
+open import order-theory.large-preorders funext
+open import order-theory.order-preserving-maps-large-preorders funext
+open import order-theory.similarity-of-elements-large-preorders funext
 ```
 
 </details>

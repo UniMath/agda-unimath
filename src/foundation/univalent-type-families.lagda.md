@@ -1,7 +1,12 @@
 # Univalent type families
 
 ```agda
-module foundation.univalent-type-families where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.univalent-type-families
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,17 +14,17 @@ module foundation.univalent-type-families where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-systems
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
-open import foundation.subuniverses
+open import foundation.iterated-dependent-product-types funext
+open import foundation.propositions funext
+open import foundation.subuniverses funext
 open import foundation.telescopes
 open import foundation.transport-along-identifications
-open import foundation.univalence
-open import foundation.universal-property-identity-systems
+open import foundation.univalence funext
+open import foundation.universal-property-identity-systems funext
 open import foundation.universe-levels
 
 open import foundation-core.embeddings

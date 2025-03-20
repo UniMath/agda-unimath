@@ -1,13 +1,18 @@
 # Bands
 
 ```agda
-module foundation.bands where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.bands
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.set-truncations
+open import foundation.set-truncations funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

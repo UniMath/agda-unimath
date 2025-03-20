@@ -1,16 +1,21 @@
 # Types separated at maps
 
 ```agda
-module orthogonal-factorization-systems.types-separated-at-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.types-separated-at-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.types-local-at-maps
+open import orthogonal-factorization-systems.types-local-at-maps funext
 ```
 
 </details>

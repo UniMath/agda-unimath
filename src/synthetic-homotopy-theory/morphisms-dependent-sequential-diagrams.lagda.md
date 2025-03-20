@@ -1,7 +1,12 @@
 # Morphisms of dependent sequential diagrams
 
 ```agda
-module synthetic-homotopy-theory.morphisms-dependent-sequential-diagrams where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.morphisms-dependent-sequential-diagrams
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,12 +14,12 @@ module synthetic-homotopy-theory.morphisms-dependent-sequential-diagrams where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.commuting-squares-of-maps
+open import foundation.commuting-squares-of-maps funext
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.dependent-sequential-diagrams
-open import synthetic-homotopy-theory.sequential-diagrams
+open import synthetic-homotopy-theory.dependent-sequential-diagrams funext
+open import synthetic-homotopy-theory.sequential-diagrams funext
 ```
 
 </details>

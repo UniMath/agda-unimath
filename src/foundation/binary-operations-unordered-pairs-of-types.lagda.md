@@ -1,15 +1,20 @@
 # Binary operations on unordered pairs of types
 
 ```agda
-module foundation.binary-operations-unordered-pairs-of-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.binary-operations-unordered-pairs-of-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.products-unordered-pairs-of-types
+open import foundation.products-unordered-pairs-of-types funext
 open import foundation.universe-levels
-open import foundation.unordered-pairs
+open import foundation.unordered-pairs funext
 ```
 
 </details>

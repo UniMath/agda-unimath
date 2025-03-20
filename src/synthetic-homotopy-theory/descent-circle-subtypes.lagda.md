@@ -1,29 +1,34 @@
 # Subtypes of descent data for the circle
 
 ```agda
-module synthetic-homotopy-theory.descent-circle-subtypes where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.descent-circle-subtypes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.dependent-descent-circle
-open import synthetic-homotopy-theory.descent-circle
-open import synthetic-homotopy-theory.descent-circle-dependent-pair-types
-open import synthetic-homotopy-theory.free-loops
-open import synthetic-homotopy-theory.sections-descent-circle
-open import synthetic-homotopy-theory.universal-property-circle
+open import synthetic-homotopy-theory.dependent-descent-circle funext
+open import synthetic-homotopy-theory.descent-circle funext
+open import synthetic-homotopy-theory.descent-circle funext-dependent-pair-types
+open import synthetic-homotopy-theory.free-loops funext
+open import synthetic-homotopy-theory.sections-descent-circle funext
+open import synthetic-homotopy-theory.universal-property-circle funext
 ```
 
 </details>

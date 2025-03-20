@@ -1,25 +1,30 @@
 # The universal multiset
 
 ```agda
-module trees.universal-multiset where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.universal-multiset
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.raising-universe-levels
-open import foundation.small-types
-open import foundation.small-universes
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.raising-universe-levels funext
+open import foundation.small-types funext
+open import foundation.small-universes funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import trees.functoriality-w-types
-open import trees.multisets
-open import trees.small-multisets
-open import trees.w-types
+open import trees.functoriality-w-types funext
+open import trees.multisets funext
+open import trees.small-multisets funext
+open import trees.w-types funext
 ```
 
 </details>

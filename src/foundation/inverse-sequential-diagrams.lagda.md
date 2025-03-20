@@ -1,7 +1,12 @@
 # Inverse sequential diagrams of types
 
 ```agda
-module foundation.inverse-sequential-diagrams where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.inverse-sequential-diagrams
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,8 +15,8 @@ module foundation.inverse-sequential-diagrams where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.iterating-functions
-open import foundation.raising-universe-levels-unit-type
+open import foundation.iterating-functions funext
+open import foundation.raising-universe-levels-unit-type funext
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

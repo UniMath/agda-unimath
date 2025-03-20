@@ -1,24 +1,29 @@
 # Equality of rational numbers
 
 ```agda
-module elementary-number-theory.equality-rational-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.equality-rational-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.integer-fractions
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.reduced-integer-fractions
+open import elementary-number-theory.integer-fractions funext
+open import elementary-number-theory.rational-numbers funext
+open import elementary-number-theory.reduced-integer-fractions funext
 
-open import foundation.decidable-equality
+open import foundation.decidable-equality funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.torsorial-type-families
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.torsorial-type-families funext
 open import foundation.universe-levels
 ```
 

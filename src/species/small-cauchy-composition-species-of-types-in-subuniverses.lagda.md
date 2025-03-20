@@ -1,39 +1,44 @@
 # Small Cauchy composition of species types in subuniverses
 
 ```agda
-module species.small-cauchy-composition-species-of-types-in-subuniverses where
+open import foundation.function-extensionality-axiom
+
+module
+  species.small-cauchy-composition-species-of-types-in-subuniverses
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
+open import foundation.cartesian-product-types funext
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.equivalences
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.raising-universe-levels-unit-type
-open import foundation.relaxed-sigma-decompositions
-open import foundation.sigma-closed-subuniverses
-open import foundation.sigma-decomposition-subuniverse
-open import foundation.small-types
-open import foundation.subuniverses
+open import foundation.equivalences funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.raising-universe-levels-unit-type funext
+open import foundation.relaxed-sigma-decompositions funext
+open import foundation.sigma-closed-subuniverses funext
+open import foundation.sigma-decomposition-subuniverse funext
+open import foundation.small-types funext
+open import foundation.subuniverses funext
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.unit-type
-open import foundation.univalence
+open import foundation.univalence funext
 open import foundation.universe-levels
 
-open import species.cauchy-composition-species-of-types
-open import species.species-of-types-in-subuniverses
-open import species.unit-cauchy-composition-species-of-types
+open import species.cauchy-composition-species-of-types funext
+open import species.species-of-types-in-subuniverses funext
+open import species.unit-cauchy-composition-species-of-types funext
 ```
 
 </details>

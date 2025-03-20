@@ -3,17 +3,22 @@
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-module modal-type-theory.sharp-codiscrete-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  modal-type-theory.sharp-codiscrete-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.fibers-of-maps
-open import foundation.propositions
+open import foundation.fibers-of-maps funext
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import modal-type-theory.sharp-codiscrete-types
+open import modal-type-theory.sharp-codiscrete-types funext
 ```
 
 </details>

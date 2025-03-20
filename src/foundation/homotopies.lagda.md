@@ -1,7 +1,12 @@
 # Homotopies
 
 ```agda
-module foundation.homotopies where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.homotopies
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.homotopies public
 ```
@@ -9,22 +14,23 @@ open import foundation-core.homotopies public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-higher-identifications-functions
+open import foundation.action-on-higher-identifications-functions funext
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.path-algebra
+open import foundation.function-extensionality funext
+
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.path-algebra funext
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.dependent-identifications
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 open import foundation-core.transport-along-identifications
 open import foundation-core.whiskering-homotopies-concatenation
 ```

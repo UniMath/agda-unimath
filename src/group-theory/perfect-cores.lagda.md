@@ -1,18 +1,23 @@
 # Perfect cores
 
 ```agda
-module group-theory.perfect-cores where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.perfect-cores
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.logical-equivalences
+open import foundation.logical-equivalences funext
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.perfect-subgroups
-open import group-theory.subgroups
+open import group-theory.groups funext
+open import group-theory.perfect-subgroups funext
+open import group-theory.subgroups funext
 ```
 
 </details>

@@ -1,32 +1,37 @@
 # Equality of integers
 
 ```agda
-module elementary-number-theory.equality-integers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.equality-integers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.equality-natural-numbers funext
 open import elementary-number-theory.integers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
+open import foundation.coproduct-types funext
+open import foundation.decidable-equality funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.discrete-types
-open import foundation.empty-types
-open import foundation.equality-coproduct-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.discrete-types funext
+open import foundation.empty-types funext
+open import foundation.equality-coproduct-types funext
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.set-truncations
-open import foundation.sets
-open import foundation.torsorial-type-families
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.set-truncations funext
+open import foundation.sets funext
+open import foundation.torsorial-type-families funext
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

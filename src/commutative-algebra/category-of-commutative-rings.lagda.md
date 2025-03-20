@@ -1,17 +1,22 @@
 # The category of commutative rings
 
 ```agda
-module commutative-algebra.category-of-commutative-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  commutative-algebra.category-of-commutative-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.large-categories
+open import category-theory.categories funext
+open import category-theory.large-categories funext
 
-open import commutative-algebra.isomorphisms-commutative-rings
-open import commutative-algebra.precategory-of-commutative-rings
+open import commutative-algebra.isomorphisms-commutative-rings funext
+open import commutative-algebra.precategory-of-commutative-rings funext
 
 open import foundation.universe-levels
 ```

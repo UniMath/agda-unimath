@@ -11,11 +11,11 @@ module
 ```agda
 open import foundation.universe-levels
 
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 
-open import order-theory.large-posets
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.similarity-of-order-preserving-maps-large-posets
+open import order-theory.large-posets funext
+open import order-theory.order-preserving-maps-large-posets funext
+open import order-theory.similarity-of-order-preserving-maps-large-posets funext
 ```
 
 </details>
@@ -51,7 +51,12 @@ words, we say that the square above commutes if the composites `j ∘ f` and
 ## Definitions
 
 ```agda
-module _
+open import foundation.function-extensionality-axiom
+
+module
+  _
+  (funext : function-extensionality)
+  where
   {αP αQ αU αV γi γf γg γj : Level → Level}
   {βP βQ βU βV : Level → Level → Level}
   (P : Large-Poset αP βP)

@@ -1,17 +1,22 @@
 # Dirichlet series of species of types
 
 ```agda
-module species.dirichlet-series-species-of-types where
+open import foundation.function-extensionality-axiom
+
+module
+  species.dirichlet-series-species-of-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import species.species-of-types
+open import species.species-of-types funext
 ```
 
 </details>

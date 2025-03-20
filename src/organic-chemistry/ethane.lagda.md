@@ -1,44 +1,49 @@
 # Ethane
 
 ```agda
-module organic-chemistry.ethane where
+open import foundation.function-extensionality-axiom
+
+module
+  organic-chemistry.ethane
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers funext
 
-open import finite-group-theory.tetrahedra-in-3-space
+open import finite-group-theory.tetrahedra-in-3-space funext
 
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-types
+open import foundation.coproduct-types funext
+open import foundation.decidable-propositions funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.torsorial-type-families
+open import foundation.embeddings funext
+open import foundation.empty-types funext
+open import foundation.equality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.torsorial-type-families funext
 open import foundation.transport-along-identifications
 open import foundation.unit-type
-open import foundation.univalence
+open import foundation.univalence funext
 open import foundation.universe-levels
-open import foundation.unordered-pairs
+open import foundation.unordered-pairs funext
 
-open import graph-theory.finite-graphs
-open import graph-theory.walks-undirected-graphs
+open import graph-theory.finite-graphs funext
+open import graph-theory.walks-undirected-graphs funext
 
-open import organic-chemistry.alkanes
-open import organic-chemistry.hydrocarbons
+open import organic-chemistry.alkanes funext
+open import organic-chemistry.hydrocarbons funext
 
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.2-element-types funext
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

@@ -1,22 +1,28 @@
 # Homomorphisms of higher group actions
 
 ```agda
-module higher-group-theory.homomorphisms-higher-group-actions where
+open import foundation.function-extensionality-axiom
+
+module
+  higher-group-theory.homomorphisms-higher-group-actions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equality-dependent-function-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.equality-dependent-function-types funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-group-actions
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-group-actions funext
+open import higher-group-theory.higher-groups funext
 ```
 
 </details>

@@ -1,31 +1,36 @@
 # Displayed precategories
 
 ```agda
-module category-theory.displayed-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.displayed-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
-open import category-theory.dependent-composition-operations-over-precategories
-open import category-theory.nonunital-precategories
-open import category-theory.precategories
-open import category-theory.set-magmoids
+open import category-theory.composition-operations-on-binary-families-of-sets funext
+open import category-theory.dependent-composition-operations-over-precategories funext
+open import category-theory.nonunital-precategories funext
+open import category-theory.precategories funext
+open import category-theory.set-magmoids funext
 
-open import foundation.cartesian-product-types
-open import foundation.dependent-identifications
+open import foundation.cartesian-product-types funext
+open import foundation.dependent-identifications funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
+open import foundation.equality-dependent-pair-types funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.strictly-involutive-identity-types funext
 open import foundation.subsingleton-induction
 open import foundation.transport-along-identifications
-open import foundation.truncated-types
+open import foundation.truncated-types funext
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```

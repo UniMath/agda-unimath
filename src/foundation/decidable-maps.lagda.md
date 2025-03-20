@@ -1,22 +1,27 @@
 # Decidable maps
 
 ```agda
-module foundation.decidable-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.decidable-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-morphisms-arrows
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
+open import foundation.cartesian-morphisms-arrows funext
+open import foundation.coproduct-types funext
+open import foundation.decidable-equality funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-coproduct-types
-open import foundation.identity-types
-open import foundation.retracts-of-maps
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.identity-types funext
+open import foundation.retracts-of-maps funext
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps

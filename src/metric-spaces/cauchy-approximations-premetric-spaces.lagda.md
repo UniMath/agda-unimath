@@ -1,23 +1,28 @@
 # Cauchy approximations in premetric spaces
 
 ```agda
-module metric-spaces.cauchy-approximations-premetric-spaces where
+open import foundation.function-extensionality-axiom
+
+module
+  metric-spaces.cauchy-approximations-premetric-spaces
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers funext
 
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import metric-spaces.premetric-spaces
-open import metric-spaces.short-functions-premetric-spaces
+open import metric-spaces.premetric-spaces funext
+open import metric-spaces.short-functions-premetric-spaces funext
 ```
 
 </details>

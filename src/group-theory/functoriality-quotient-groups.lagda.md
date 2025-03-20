@@ -3,27 +3,32 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module group-theory.functoriality-quotient-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.functoriality-quotient-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
+open import foundation.commuting-squares-of-maps funext
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import group-theory.commuting-squares-of-group-homomorphisms
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-groups-equipped-with-normal-subgroups
-open import group-theory.normal-subgroups
-open import group-theory.nullifying-group-homomorphisms
-open import group-theory.quotient-groups
+open import group-theory.commuting-squares-of-group-homomorphisms funext
+open import group-theory.groups funext
+open import group-theory.homomorphisms-groups funext
+open import group-theory.homomorphisms-groups funext-equipped-with-normal-subgroups
+open import group-theory.normal-subgroups funext
+open import group-theory.nullifying-group-homomorphisms funext
+open import group-theory.quotient-groups funext
 ```
 
 </details>

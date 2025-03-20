@@ -1,7 +1,12 @@
 # Identity types
 
 ```agda
-module foundation.identity-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.identity-types
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.identity-types public
 ```
@@ -13,8 +18,9 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
 open import foundation.commuting-pentagons-of-identifications
 open import foundation.dependent-pair-types
-open import foundation.equivalence-extensionality
-open import foundation.function-extensionality
+open import foundation.equivalence-extensionality funext
+open import foundation.function-extensionality funext
+
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

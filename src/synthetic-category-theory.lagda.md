@@ -23,13 +23,18 @@ Some core principles of higher category theory include:
 ## Modules in the synthetic category theory namespace
 
 ```agda
-module synthetic-category-theory where
+open import foundation.function-extensionality-axiom
 
-open import synthetic-category-theory.cone-diagrams-synthetic-categories public
-open import synthetic-category-theory.cospans-synthetic-categories public
-open import synthetic-category-theory.equivalences-synthetic-categories public
-open import synthetic-category-theory.invertible-functors-synthetic-categories public
-open import synthetic-category-theory.pullbacks-synthetic-categories public
+module
+  synthetic-category-theory
+  (funext : function-extensionality)
+  where
+
+open import synthetic-category-theory.cone-diagrams-synthetic-categories funext public
+open import synthetic-category-theory.cospans-synthetic-categories funext public
+open import synthetic-category-theory.equivalences-synthetic-categories funext public
+open import synthetic-category-theory.invertible-functors-synthetic-categories funext public
+open import synthetic-category-theory.pullbacks-synthetic-categories funext public
 open import synthetic-category-theory.retractions-synthetic-categories public
 open import synthetic-category-theory.sections-synthetic-categories public
 open import synthetic-category-theory.synthetic-categories public

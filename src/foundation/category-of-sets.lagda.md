@@ -1,38 +1,43 @@
 # The category of sets
 
 ```agda
-module foundation.category-of-sets where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.category-of-sets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.complete-precategories
-open import category-theory.cones-precategories
-open import category-theory.constant-functors
-open import category-theory.functors-precategories
-open import category-theory.isomorphisms-in-large-precategories
-open import category-theory.large-categories
-open import category-theory.large-precategories
-open import category-theory.limits-precategories
-open import category-theory.natural-transformations-functors-precategories
-open import category-theory.precategories
+open import category-theory.categories funext
+open import category-theory.complete-precategories funext
+open import category-theory.cones-precategories funext
+open import category-theory.constant-functors funext
+open import category-theory.functors-precategories funext
+open import category-theory.isomorphisms-in-large-precategories funext
+open import category-theory.large-categories funext
+open import category-theory.large-precategories funext
+open import category-theory.limits-precategories funext
+open import category-theory.natural-transformations-functors-precategories funext
+open import category-theory.precategories funext
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.isomorphisms-of-sets
-open import foundation.raising-universe-levels
-open import foundation.raising-universe-levels-unit-type
-open import foundation.retractions
-open import foundation.sections
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
+open import foundation.identity-types funext
+open import foundation.isomorphisms-of-sets funext
+open import foundation.raising-universe-levels funext
+open import foundation.raising-universe-levels funext-unit-type
+open import foundation.retractions funext
+open import foundation.sections funext
+open import foundation.sets funext
+open import foundation.strictly-involutive-identity-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 

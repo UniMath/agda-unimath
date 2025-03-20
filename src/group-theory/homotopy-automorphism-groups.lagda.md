@@ -1,20 +1,25 @@
 # Homotopy automorphism groups
 
 ```agda
-module group-theory.homotopy-automorphism-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.homotopy-automorphism-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.truncation-levels
-open import foundation.truncations
+open import foundation.truncations funext
 open import foundation.universe-levels
 
-open import group-theory.automorphism-groups
-open import group-theory.concrete-groups
+open import group-theory.automorphism-groups funext
+open import group-theory.concrete-groups funext
 
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-groups funext
 
 open import structured-types.pointed-types
 ```

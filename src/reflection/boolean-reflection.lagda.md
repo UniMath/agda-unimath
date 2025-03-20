@@ -1,13 +1,18 @@
 # Boolean reflection
 
 ```agda
-module reflection.boolean-reflection where
+open import foundation.function-extensionality-axiom
+
+module
+  reflection.boolean-reflection
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-types
+open import foundation.decidable-types funext
 open import foundation.universe-levels
 
 open import foundation-core.booleans

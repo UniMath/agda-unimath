@@ -1,7 +1,12 @@
 # Logical equivalences
 
 ```agda
-module foundation.logical-equivalences where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.logical-equivalences
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.logical-equivalences public
 ```
@@ -10,11 +15,12 @@ open import foundation-core.logical-equivalences public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
+open import foundation.dependent-products-propositions funext
 open import foundation.equality-cartesian-product-types
-open import foundation.equivalence-extensionality
-open import foundation.function-extensionality
-open import foundation.functoriality-cartesian-product-types
+open import foundation.equivalence-extensionality funext
+open import foundation.function-extensionality funext
+
+open import foundation.functoriality-cartesian-product-types funext
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 

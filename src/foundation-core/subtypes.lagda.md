@@ -1,7 +1,12 @@
 # Subtypes
 
 ```agda
-module foundation-core.subtypes where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation-core.subtypes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,8 +14,8 @@ module foundation-core.subtypes where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.logical-equivalences
+open import foundation.dependent-products-propositions funext
+open import foundation.logical-equivalences funext
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
@@ -24,7 +29,7 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.transport-along-identifications
-open import foundation-core.truncated-maps
+open import foundation-core.truncated-maps funext
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

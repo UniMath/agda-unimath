@@ -1,7 +1,12 @@
 # Abelian groups
 
 ```agda
-module group-theory.abelian-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.abelian-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,41 +14,41 @@ module group-theory.abelian-groups where
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.binary-embeddings
+open import foundation.binary-embeddings funext
 open import foundation.binary-equivalences
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.full-subtypes
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.full-subtypes funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
 open import foundation.interchange-law
-open import foundation.propositions
-open import foundation.sets
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import group-theory.central-elements-groups
-open import group-theory.commutative-monoids
-open import group-theory.commutator-subgroups
-open import group-theory.commutators-of-elements-groups
-open import group-theory.conjugation
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.monoids
-open import group-theory.nullifying-group-homomorphisms
-open import group-theory.pullbacks-subgroups
-open import group-theory.semigroups
-open import group-theory.subgroups
-open import group-theory.subgroups-generated-by-families-of-elements-groups
-open import group-theory.trivial-subgroups
+open import group-theory.central-elements-groups funext
+open import group-theory.commutative-monoids funext
+open import group-theory.commutator-subgroups funext
+open import group-theory.commutators-of-elements-groups funext
+open import group-theory.conjugation funext
+open import group-theory.groups funext
+open import group-theory.homomorphisms-groups funext
+open import group-theory.monoids funext
+open import group-theory.nullifying-group-homomorphisms funext
+open import group-theory.pullbacks-subgroups funext
+open import group-theory.semigroups funext
+open import group-theory.subgroups funext
+open import group-theory.subgroups funext-generated-by-families-of-elements-groups
+open import group-theory.trivial-subgroups funext
 
-open import lists.concatenation-lists
+open import lists.concatenation-lists funext
 open import lists.lists
 
-open import structured-types.pointed-types-equipped-with-automorphisms
+open import structured-types.pointed-types-equipped-with-automorphisms funext
 ```
 
 </details>

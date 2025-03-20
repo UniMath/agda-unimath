@@ -1,7 +1,12 @@
 # Multivariable sections
 
 ```agda
-module foundation.multivariable-sections where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.multivariable-sections
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,8 +15,8 @@ module foundation.multivariable-sections where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.iterated-dependent-product-types
-open import foundation.multivariable-homotopies
+open import foundation.iterated-dependent-product-types funext
+open import foundation.multivariable-homotopies funext
 open import foundation.telescopes
 open import foundation.universe-levels
 

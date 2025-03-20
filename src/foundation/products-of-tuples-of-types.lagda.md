@@ -1,7 +1,12 @@
 # Products of tuples of types
 
 ```agda
-module foundation.products-of-tuples-of-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.products-of-tuples-of-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,10 +14,10 @@ module foundation.products-of-tuples-of-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.tuples-of-types
+open import foundation.tuples-of-types funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

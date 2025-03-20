@@ -1,28 +1,33 @@
 # Full ideals of commutative rings
 
 ```agda
-module commutative-algebra.full-ideals-commutative-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  commutative-algebra.full-ideals-commutative-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.ideals-commutative-rings
-open import commutative-algebra.poset-of-ideals-commutative-rings
-open import commutative-algebra.poset-of-radical-ideals-commutative-rings
-open import commutative-algebra.radical-ideals-commutative-rings
-open import commutative-algebra.subsets-commutative-rings
+open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.ideals-commutative-rings funext
+open import commutative-algebra.poset-of-ideals-commutative-rings funext
+open import commutative-algebra.poset-of-radical-ideals-commutative-rings funext
+open import commutative-algebra.radical-ideals-commutative-rings funext
+open import commutative-algebra.subsets-commutative-rings funext
 
 open import foundation.dependent-pair-types
-open import foundation.propositions
-open import foundation.raising-universe-levels-unit-type
+open import foundation.propositions funext
+open import foundation.raising-universe-levels-unit-type funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import order-theory.top-elements-large-posets
+open import order-theory.top-elements-large-posets funext
 
-open import ring-theory.full-ideals-rings
+open import ring-theory.full-ideals-rings funext
 ```
 
 </details>

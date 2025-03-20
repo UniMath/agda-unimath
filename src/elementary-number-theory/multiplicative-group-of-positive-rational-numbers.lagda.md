@@ -3,26 +3,31 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module elementary-number-theory.multiplicative-group-of-positive-rational-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.multiplicative-group-of-positive-rational-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.multiplication-rational-numbers funext
+open import elementary-number-theory.multiplicative-monoid-of-rational-numbers funext
+open import elementary-number-theory.positive-rational-numbers funext
+open import elementary-number-theory.rational-numbers funext
 
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.submonoids
+open import group-theory.abelian-groups funext
+open import group-theory.groups funext
+open import group-theory.monoids funext
+open import group-theory.submonoids funext
 ```
 
 </details>

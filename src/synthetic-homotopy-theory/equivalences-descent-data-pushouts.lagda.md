@@ -1,29 +1,34 @@
 # Equivalences of descent data for pushouts
 
 ```agda
-module synthetic-homotopy-theory.equivalences-descent-data-pushouts where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.equivalences-descent-data-pushouts
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
+open import foundation.commuting-squares-of-maps funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
+open import foundation.equality-dependent-function-types funext
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.span-diagrams
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.span-diagrams funext
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
-open import foundation.univalence
+open import foundation.torsorial-type-families funext
+open import foundation.univalence funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.descent-data-pushouts
-open import synthetic-homotopy-theory.morphisms-descent-data-pushouts
+open import synthetic-homotopy-theory.descent-data-pushouts funext
+open import synthetic-homotopy-theory.morphisms-descent-data-pushouts funext
 ```
 
 </details>

@@ -1,26 +1,31 @@
 # Natural isomorphisms between functors between precategories
 
 ```agda
-module category-theory.natural-isomorphisms-functors-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.natural-isomorphisms-functors-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.natural-isomorphisms-maps-precategories
-open import category-theory.natural-transformations-functors-precategories
-open import category-theory.precategories
+open import category-theory.functors-precategories funext
+open import category-theory.isomorphisms-in-precategories funext
+open import category-theory.natural-isomorphisms-maps-precategories funext
+open import category-theory.natural-transformations-functors-precategories funext
+open import category-theory.precategories funext
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 ```
 

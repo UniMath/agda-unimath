@@ -1,7 +1,12 @@
 # Families of types over telescopes
 
 ```agda
-module foundation.families-over-telescopes where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.families-over-telescopes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,7 +14,7 @@ module foundation.families-over-telescopes where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels funext
 open import foundation.telescopes
 open import foundation.universe-levels
 ```

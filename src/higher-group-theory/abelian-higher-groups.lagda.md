@@ -1,26 +1,31 @@
 # Abelian higher groups
 
 ```agda
-module higher-group-theory.abelian-higher-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  higher-group-theory.abelian-higher-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.small-types
+open import foundation.equivalences funext
+open import foundation.small-types funext
 open import foundation.universe-levels
 
-open import higher-group-theory.equivalences-higher-groups
-open import higher-group-theory.higher-groups
-open import higher-group-theory.small-higher-groups
+open import higher-group-theory.equivalences-higher-groups funext
+open import higher-group-theory.higher-groups funext
+open import higher-group-theory.small-higher-groups funext
 
-open import structured-types.pointed-equivalences
+open import structured-types.pointed-equivalences funext
 open import structured-types.pointed-types
-open import structured-types.small-pointed-types
+open import structured-types.small-pointed-types funext
 
-open import synthetic-homotopy-theory.connective-spectra
+open import synthetic-homotopy-theory.connective-spectra funext
 ```
 
 </details>

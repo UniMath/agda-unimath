@@ -1,22 +1,27 @@
 # Cartesian products of reflexive graphs
 
 ```agda
-module graph-theory.cartesian-products-reflexive-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.cartesian-products-reflexive-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import graph-theory.cartesian-products-directed-graphs
-open import graph-theory.directed-graphs
-open import graph-theory.morphisms-directed-graphs
-open import graph-theory.morphisms-reflexive-graphs
-open import graph-theory.reflexive-graphs
+open import graph-theory.cartesian-products-directed-graphs funext
+open import graph-theory.directed-graphs funext
+open import graph-theory.morphisms-directed-graphs funext
+open import graph-theory.morphisms-reflexive-graphs funext
+open import graph-theory.reflexive-graphs funext
 ```
 
 </details>

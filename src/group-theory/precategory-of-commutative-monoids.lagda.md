@@ -1,20 +1,25 @@
 # The precategory of commutative monoids
 
 ```agda
-module group-theory.precategory-of-commutative-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.precategory-of-commutative-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.full-large-subprecategories
-open import category-theory.large-precategories
-open import category-theory.precategories
+open import category-theory.full-large-subprecategories funext
+open import category-theory.large-precategories funext
+open import category-theory.precategories funext
 
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids
-open import group-theory.precategory-of-monoids
+open import group-theory.commutative-monoids funext
+open import group-theory.precategory-of-monoids funext
 ```
 
 </details>

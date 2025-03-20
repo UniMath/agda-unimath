@@ -1,16 +1,22 @@
 # The universal property of truncations
 
 ```agda
-module foundation-core.universal-property-truncation where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation-core.universal-property-truncation
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types
-open import foundation.function-extensionality
-open import foundation.universal-property-equivalences
+open import foundation.dependent-products-truncated-types funext
+open import foundation.function-extensionality funext
+
+open import foundation.universal-property-equivalences funext
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps

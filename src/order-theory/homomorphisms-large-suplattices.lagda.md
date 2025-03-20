@@ -1,17 +1,22 @@
 # Homomorphisms of large suplattices
 
 ```agda
-module order-theory.homomorphisms-large-suplattices where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.homomorphisms-large-suplattices
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import order-theory.large-suplattices
-open import order-theory.order-preserving-maps-large-posets
+open import order-theory.large-suplattices funext
+open import order-theory.order-preserving-maps-large-posets funext
 ```
 
 </details>

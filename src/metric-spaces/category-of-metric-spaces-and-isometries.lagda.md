@@ -1,25 +1,30 @@
 # The category of metric spaces and isometries
 
 ```agda
-module metric-spaces.category-of-metric-spaces-and-isometries where
+open import foundation.function-extensionality-axiom
+
+module
+  metric-spaces.category-of-metric-spaces-and-isometries
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.isomorphisms-in-precategories
+open import category-theory.categories funext
+open import category-theory.isomorphisms-in-precategories funext
 
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext
 open import foundation.universe-levels
 
-open import metric-spaces.equality-of-metric-spaces
-open import metric-spaces.metric-spaces
-open import metric-spaces.precategory-of-metric-spaces-and-isometries
+open import metric-spaces.equality-of-metric-spaces funext
+open import metric-spaces.metric-spaces funext
+open import metric-spaces.precategory-of-metric-spaces-and-isometries funext
 ```
 
 </details>

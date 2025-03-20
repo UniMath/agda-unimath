@@ -1,7 +1,12 @@
 # Alternating groups
 
 ```agda
-module finite-group-theory.alternating-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  finite-group-theory.alternating-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,14 +14,14 @@ module finite-group-theory.alternating-groups where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.sign-homomorphism
+open import finite-group-theory.sign-homomorphism funext
 
-open import group-theory.groups
-open import group-theory.kernels-homomorphisms-groups
-open import group-theory.symmetric-groups
+open import group-theory.groups funext
+open import group-theory.kernels-homomorphisms-groups funext
+open import group-theory.symmetric-groups funext
 
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

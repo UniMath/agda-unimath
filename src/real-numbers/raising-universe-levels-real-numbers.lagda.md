@@ -1,36 +1,41 @@
 # Raising the universe levels of real numbers
 
 ```agda
-module real-numbers.raising-universe-levels-real-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  real-numbers.raising-universe-levels-real-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.rational-numbers funext
+open import elementary-number-theory.strict-inequality-rational-numbers funext
 
-open import foundation.cartesian-product-types
-open import foundation.conjunction
+open import foundation.cartesian-product-types funext
+open import foundation.conjunction funext
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.identity-types
-open import foundation.inhabited-subtypes
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.raising-universe-levels
-open import foundation.subtypes
+open import foundation.disjunction funext
+open import foundation.existential-quantification funext
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.identity-types funext
+open import foundation.inhabited-subtypes funext
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.raising-universe-levels funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import logic.functoriality-existential-quantification
+open import logic.functoriality-existential-quantification funext
 
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.similarity-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.dedekind-real-numbers funext
+open import real-numbers.lower-dedekind-real-numbers funext
+open import real-numbers.similarity-real-numbers funext
+open import real-numbers.upper-dedekind-real-numbers funext
 ```
 
 </details>

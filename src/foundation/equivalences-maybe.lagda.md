@@ -1,7 +1,12 @@
 # Equivalences on `Maybe`
 
 ```agda
-module foundation.equivalences-maybe where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.equivalences-maybe
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,13 +14,13 @@ module foundation.equivalences-maybe where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-coproduct-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.functoriality-coproduct-types
-open import foundation.maybe
+open import foundation.equality-coproduct-types funext
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.maybe funext
 open import foundation.unit-type
-open import foundation.universal-property-maybe
+open import foundation.universal-property-maybe funext
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types

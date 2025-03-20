@@ -1,26 +1,31 @@
 # The poset of radical ideals of a commutative ring
 
 ```agda
-module commutative-algebra.poset-of-radical-ideals-commutative-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  commutative-algebra.poset-of-radical-ideals-commutative-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.poset-of-ideals-commutative-rings
-open import commutative-algebra.radical-ideals-commutative-rings
+open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.poset-of-ideals-commutative-rings funext
+open import commutative-algebra.radical-ideals-commutative-rings funext
 
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.similarity-of-elements-large-posets
+open import order-theory.large-posets funext
+open import order-theory.large-preorders funext
+open import order-theory.order-preserving-maps-large-posets funext
+open import order-theory.order-preserving-maps-large-preorders funext
+open import order-theory.similarity-of-elements-large-posets funext
 ```
 
 </details>

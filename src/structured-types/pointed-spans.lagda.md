@@ -1,19 +1,24 @@
 # Pointed spans
 
 ```agda
-module structured-types.pointed-spans where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.pointed-spans
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.spans
 open import foundation.universe-levels
 
-open import structured-types.pointed-maps
+open import structured-types.pointed-maps funext
 open import structured-types.pointed-types
 ```
 

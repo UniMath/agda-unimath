@@ -1,23 +1,28 @@
 # Positive integer fractions
 
 ```agda
-module elementary-number-theory.positive-integer-fractions where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.positive-integer-fractions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integer-fractions
-open import elementary-number-theory.addition-positive-and-negative-integers
-open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.addition-integer-fractions funext
+open import elementary-number-theory.addition-positive-and-negative-integers funext
+open import elementary-number-theory.integer-fractions funext
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integer-fractions
-open import elementary-number-theory.multiplication-positive-and-negative-integers
-open import elementary-number-theory.positive-integers
-open import elementary-number-theory.reduced-integer-fractions
+open import elementary-number-theory.multiplication-integer-fractions funext
+open import elementary-number-theory.multiplication-positive-and-negative-integers funext
+open import elementary-number-theory.positive-integers funext
+open import elementary-number-theory.reduced-integer-fractions funext
 
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 ```
 

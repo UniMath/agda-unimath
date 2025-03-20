@@ -1,7 +1,12 @@
 # Iterated cartesian products of higher groups
 
 ```agda
-module higher-group-theory.iterated-cartesian-products-higher-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  higher-group-theory.iterated-cartesian-products-higher-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,31 +14,31 @@ module higher-group-theory.iterated-cartesian-products-higher-groups where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.0-connected-types
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.0-connected-types funext
+open import foundation.contractible-types funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.identity-types
-open import foundation.iterated-cartesian-product-types
-open import foundation.mere-equality
-open import foundation.propositions
-open import foundation.raising-universe-levels-unit-type
-open import foundation.sets
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.identity-types funext
+open import foundation.iterated-cartesian-product-types funext
+open import foundation.mere-equality funext
+open import foundation.propositions funext
+open import foundation.raising-universe-levels-unit-type funext
+open import foundation.sets funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import higher-group-theory.cartesian-products-higher-groups
-open import higher-group-theory.higher-groups
-open import higher-group-theory.trivial-higher-groups
+open import higher-group-theory.cartesian-products-higher-groups funext
+open import higher-group-theory.higher-groups funext
+open import higher-group-theory.trivial-higher-groups funext
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.loop-spaces funext
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

@@ -1,7 +1,12 @@
 # Lower sets in large posets
 
 ```agda
-module order-theory.lower-sets-large-posets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.lower-sets-large-posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,8 +14,8 @@ module order-theory.lower-sets-large-posets where
 ```agda
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.large-subposets
+open import order-theory.large-posets funext
+open import order-theory.large-subposets funext
 ```
 
 </details>

@@ -1,28 +1,33 @@
 # Cores of precategories
 
 ```agda
-module category-theory.cores-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.cores-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.isomorphisms-in-categories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
-open import category-theory.pregroupoids
-open import category-theory.replete-subprecategories
-open import category-theory.subprecategories
-open import category-theory.wide-subprecategories
+open import category-theory.categories funext
+open import category-theory.isomorphisms-in-categories funext
+open import category-theory.isomorphisms-in-precategories funext
+open import category-theory.precategories funext
+open import category-theory.pregroupoids funext
+open import category-theory.replete-subprecategories funext
+open import category-theory.subprecategories funext
+open import category-theory.wide-subprecategories funext
 
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.subtypes funext
+open import foundation.torsorial-type-families funext
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

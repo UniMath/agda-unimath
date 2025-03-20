@@ -3,29 +3,34 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.negation-real-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  real-numbers.negation-real-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.rational-numbers funext
+open import elementary-number-theory.strict-inequality-rational-numbers funext
 
 open import foundation.dependent-pair-types
-open import foundation.disjoint-subtypes
-open import foundation.disjunction
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.subtypes
+open import foundation.disjoint-subtypes funext
+open import foundation.disjunction funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.subtypes funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.negation-lower-upper-dedekind-real-numbers
-open import real-numbers.rational-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.dedekind-real-numbers funext
+open import real-numbers.lower-dedekind-real-numbers funext
+open import real-numbers.negation-lower-upper-dedekind-real-numbers funext
+open import real-numbers.rational-real-numbers funext
+open import real-numbers.upper-dedekind-real-numbers funext
 ```
 
 </details>

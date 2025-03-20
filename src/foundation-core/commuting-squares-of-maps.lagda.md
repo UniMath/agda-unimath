@@ -1,14 +1,19 @@
 # Commuting squares of maps
 
 ```agda
-module foundation-core.commuting-squares-of-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation-core.commuting-squares-of-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.transposition-identifications-along-equivalences
+open import foundation.transposition-identifications-along-equivalences funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

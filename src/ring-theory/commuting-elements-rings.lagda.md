@@ -1,20 +1,25 @@
 # Commuting elements of rings
 
 ```agda
-module ring-theory.commuting-elements-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.commuting-elements-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.identity-types funext
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import group-theory.commuting-elements-monoids
+open import group-theory.commuting-elements-monoids funext
 
-open import ring-theory.rings
+open import ring-theory.rings funext
 ```
 
 </details>

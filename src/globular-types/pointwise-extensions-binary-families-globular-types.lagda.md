@@ -14,10 +14,10 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import globular-types.binary-dependent-globular-types
-open import globular-types.globular-equivalences
+open import globular-types.binary-dependent-globular-types funext
+open import globular-types.globular-equivalences funext
 open import globular-types.globular-types
-open import globular-types.points-globular-types
+open import globular-types.points-globular-types funext
 ```
 
 </details>
@@ -48,7 +48,12 @@ of `K` if it comes equipped with a family of
 ### The predicate of being a pointwise extension of a binary family of globular types
 
 ```agda
-module _
+open import foundation.function-extensionality-axiom
+
+module
+  _
+  (funext : function-extensionality)
+  where
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
   {G : Globular-Type l1 l2} {H : Globular-Type l3 l4}
   (K : 0-cell-Globular-Type G → 0-cell-Globular-Type H → Globular-Type l5 l6)

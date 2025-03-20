@@ -1,27 +1,32 @@
 # Double negation stable subtypes
 
 ```agda
-module logic.double-negation-stable-subtypes where
+open import foundation.function-extensionality-axiom
+
+module
+  logic.double-negation-stable-subtypes
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.1-types
-open import foundation.coproduct-types
+open import foundation.1-types funext
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.double-negation-stable-propositions
-open import foundation.equality-dependent-function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.logical-equivalences
-open import foundation.propositional-maps
-open import foundation.sets
-open import foundation.structured-type-duality
-open import foundation.subtypes
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.dependent-products-propositions funext
+open import foundation.double-negation-stable-propositions funext
+open import foundation.equality-dependent-function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositional-maps funext
+open import foundation.sets funext
+open import foundation.structured-type-duality funext
+open import foundation.subtypes funext
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
@@ -35,9 +40,9 @@ open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 
-open import logic.double-negation-eliminating-maps
-open import logic.double-negation-elimination
-open import logic.double-negation-stable-embeddings
+open import logic.double-negation-eliminating-maps funext
+open import logic.double-negation-elimination funext
+open import logic.double-negation-stable-embeddings funext
 ```
 
 </details>

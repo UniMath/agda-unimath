@@ -1,7 +1,12 @@
 # Constant maps
 
 ```agda
-module foundation.constant-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.constant-maps
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.constant-maps public
 ```
@@ -9,28 +14,29 @@ open import foundation-core.constant-maps public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-maps
-open import foundation.action-on-homotopies-functions
+open import foundation.0-maps funext
+open import foundation.action-on-homotopies-functions funext
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.faithful-maps
-open import foundation.function-extensionality
-open import foundation.functoriality-dependent-pair-types
-open import foundation.images
-open import foundation.morphisms-arrows
-open import foundation.postcomposition-functions
-open import foundation.propositional-truncations
-open import foundation.retracts-of-maps
-open import foundation.retracts-of-types
-open import foundation.transposition-identifications-along-equivalences
+open import foundation.faithful-maps funext
+open import foundation.function-extensionality funext
+
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.images funext
+open import foundation.morphisms-arrows funext
+open import foundation.postcomposition-functions funext
+open import foundation.propositional-truncations funext
+open import foundation.retracts-of-maps funext
+open import foundation.retracts-of-types funext
+open import foundation.transposition-identifications-along-equivalences funext
 open import foundation.type-arithmetic-unit-type
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.1-types
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.1-types funext
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
@@ -43,7 +49,7 @@ open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.truncated-maps
+open import foundation-core.truncated-maps funext
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

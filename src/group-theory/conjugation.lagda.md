@@ -1,7 +1,12 @@
 # Conjugation in groups
 
 ```agda
-module group-theory.conjugation where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.conjugation
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,24 +16,24 @@ open import elementary-number-theory.integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.retractions
-open import foundation.sections
-open import foundation.subtypes
-open import foundation.transposition-identifications-along-retractions
-open import foundation.transposition-identifications-along-sections
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.retractions funext
+open import foundation.sections funext
+open import foundation.subtypes funext
+open import foundation.transposition-identifications-along-retractions funext
+open import foundation.transposition-identifications-along-sections funext
 open import foundation.universe-levels
 
-open import group-theory.group-actions
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.integer-powers-of-elements-groups
-open import group-theory.isomorphisms-groups
-open import group-theory.subsets-groups
+open import group-theory.group-actions funext
+open import group-theory.groups funext
+open import group-theory.homomorphisms-groups funext
+open import group-theory.integer-powers-of-elements-groups funext
+open import group-theory.isomorphisms-groups funext
+open import group-theory.subsets-groups funext
 ```
 
 </details>

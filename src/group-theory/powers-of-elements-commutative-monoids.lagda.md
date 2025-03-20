@@ -1,7 +1,12 @@
 # Powers of elements in commutative monoids
 
 ```agda
-module group-theory.powers-of-elements-commutative-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.powers-of-elements-commutative-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,13 +16,13 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.identity-types funext
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids
-open import group-theory.homomorphisms-commutative-monoids
-open import group-theory.powers-of-elements-monoids
+open import group-theory.commutative-monoids funext
+open import group-theory.homomorphisms-commutative-monoids funext
+open import group-theory.powers-of-elements-monoids funext
 ```
 
 </details>

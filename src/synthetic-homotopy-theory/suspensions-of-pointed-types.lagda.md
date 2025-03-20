@@ -1,22 +1,27 @@
 # Suspensions of pointed types
 
 ```agda
-module synthetic-homotopy-theory.suspensions-of-pointed-types where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.suspensions-of-pointed-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.constant-maps
+open import foundation.constant-maps funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.suspension-structures
-open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.loop-spaces funext
+open import synthetic-homotopy-theory.suspension-structures funext
+open import synthetic-homotopy-theory.suspensions-of-types funext
 ```
 
 </details>

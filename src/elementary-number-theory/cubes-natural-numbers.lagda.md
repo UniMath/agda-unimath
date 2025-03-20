@@ -1,7 +1,12 @@
 # Cubes of natural numbers
 
 ```agda
-module elementary-number-theory.cubes-natural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.cubes-natural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,10 +14,10 @@ module elementary-number-theory.cubes-natural-numbers where
 ```agda
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.squares-natural-numbers
+open import elementary-number-theory.squares-natural-numbers funext
 
 open import foundation.dependent-pair-types
-open import foundation.fibers-of-maps
+open import foundation.fibers-of-maps funext
 open import foundation.universe-levels
 ```
 

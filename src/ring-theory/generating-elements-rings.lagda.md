@@ -1,18 +1,23 @@
 # Generating elements of rings
 
 ```agda
-module ring-theory.generating-elements-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.generating-elements-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import group-theory.generating-elements-groups
+open import group-theory.generating-elements-groups funext
 
-open import ring-theory.rings
+open import ring-theory.rings funext
 ```
 
 </details>

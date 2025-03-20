@@ -1,7 +1,12 @@
 # Voltage graphs
 
 ```agda
-module graph-theory.voltage-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.voltage-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,9 +15,9 @@ module graph-theory.voltage-graphs where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs
+open import graph-theory.directed-graphs funext
 
-open import group-theory.groups
+open import group-theory.groups funext
 ```
 
 </details>

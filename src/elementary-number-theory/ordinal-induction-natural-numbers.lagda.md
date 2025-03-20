@@ -1,16 +1,21 @@
 # The ordinal induction principle for the natural numbers
 
 ```agda
-module elementary-number-theory.ordinal-induction-natural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.ordinal-induction-natural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext
 
-open import foundation.empty-types
+open import foundation.empty-types funext
 open import foundation.universe-levels
 ```
 

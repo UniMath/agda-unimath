@@ -1,29 +1,34 @@
 # Baire space
 
 ```agda
-module set-theory.baire-space where
+open import foundation.function-extensionality-axiom
+
+module
+  set-theory.baire-space
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.equality-natural-numbers funext
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.lawveres-fixed-point-theorem
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.sets
+open import foundation.function-types funext
+open import foundation.lawveres-fixed-point-theorem funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.identity-types
 
-open import set-theory.cantors-diagonal-argument
-open import set-theory.countable-sets
-open import set-theory.uncountable-sets
+open import set-theory.cantors-diagonal-argument funext
+open import set-theory.countable-sets funext
+open import set-theory.uncountable-sets funext
 ```
 
 </details>

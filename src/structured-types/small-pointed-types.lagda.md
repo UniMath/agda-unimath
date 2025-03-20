@@ -1,22 +1,27 @@
 # Small pointed types
 
 ```agda
-module structured-types.small-pointed-types where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.small-pointed-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.small-types
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.small-types funext
 open import foundation.universe-levels
 
-open import structured-types.pointed-equivalences
+open import structured-types.pointed-equivalences funext
 open import structured-types.pointed-types
 ```
 

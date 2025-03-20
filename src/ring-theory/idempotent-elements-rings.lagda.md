@@ -1,18 +1,23 @@
 # Idempotent elements in rings
 
 ```agda
-module ring-theory.idempotent-elements-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.idempotent-elements-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import ring-theory.rings
+open import ring-theory.rings funext
 ```
 
 </details>

@@ -1,9 +1,14 @@
 # Symmetric difference of finite subtypes
 
 ```agda
-module univalent-combinatorics.symmetric-difference where
+open import foundation.function-extensionality-axiom
 
-open import foundation.symmetric-difference public
+module
+  univalent-combinatorics.symmetric-difference
+  (funext : function-extensionality)
+  where
+
+open import foundation.symmetric-difference funext public
 ```
 
 <details><summary>Imports</summary>
@@ -14,18 +19,18 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.intersections-subtypes
-open import foundation.mere-equivalences
-open import foundation.propositional-truncations
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.intersections-subtypes funext
+open import foundation.mere-equivalences funext
+open import foundation.propositional-truncations funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.decidable-subtypes
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.coproduct-types funext
+open import univalent-combinatorics.decidable-subtypes funext
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

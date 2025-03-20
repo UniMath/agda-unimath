@@ -1,21 +1,26 @@
 # `0`-Maps
 
 ```agda
-module foundation.0-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.0-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.universe-levels
 
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.sets
-open import foundation-core.truncated-maps
+open import foundation-core.truncated-maps funext
 open import foundation-core.truncation-levels
 ```
 

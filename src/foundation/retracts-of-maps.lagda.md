@@ -1,29 +1,35 @@
 # Retracts of maps
 
 ```agda
-module foundation.retracts-of-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.retracts-of-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-prisms-of-maps
-open import foundation.commuting-triangles-of-morphisms-arrows
+open import foundation.commuting-prisms-of-maps funext
+open import foundation.commuting-triangles-of-morphisms-arrows funext
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types
-open import foundation.function-extensionality
-open import foundation.functoriality-fibers-of-maps
-open import foundation.homotopies-morphisms-arrows
+open import foundation.diagonal-maps-of-types funext
+open import foundation.function-extensionality funext
+
+open import foundation.functoriality-fibers-of-maps funext
+open import foundation.homotopies-morphisms-arrows funext
 open import foundation.homotopy-algebra
-open import foundation.morphisms-arrows
-open import foundation.postcomposition-functions
-open import foundation.precomposition-functions
-open import foundation.retracts-of-types
+open import foundation.morphisms-arrows funext
+open import foundation.postcomposition-functions funext
+open import foundation.precomposition-functions funext
+open import foundation.retracts-of-types funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.constant-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps

@@ -1,7 +1,12 @@
 # The concrete quaternion group
 
 ```agda
-module finite-group-theory.concrete-quaternion-group where
+open import foundation.function-extensionality-axiom
+
+module
+  finite-group-theory.concrete-quaternion-group
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,16 +15,16 @@ module finite-group-theory.concrete-quaternion-group where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.isolated-elements
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.isolated-elements funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import univalent-combinatorics.complements-isolated-elements
-open import univalent-combinatorics.cubes
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.equivalences-cubes
+open import univalent-combinatorics.complements-isolated-elements funext
+open import univalent-combinatorics.cubes funext
+open import univalent-combinatorics.equality-finite-types funext
+open import univalent-combinatorics.equivalences-cubes funext
 ```
 
 </details>

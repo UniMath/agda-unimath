@@ -1,7 +1,12 @@
 # Finite multiplication in magmas
 
 ```agda
-module structured-types.finite-multiplication-magmas where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.finite-multiplication-magmas
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,16 +14,16 @@ module structured-types.finite-multiplication-magmas where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.coproduct-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.magmas
+open import structured-types.magmas funext
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

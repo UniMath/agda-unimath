@@ -1,28 +1,33 @@
 # The well-ordering principle of the natural numbers
 
 ```agda
-module elementary-number-theory.well-ordering-principle-natural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.well-ordering-principle-natural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.lower-bounds-natural-numbers funext
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.cartesian-product-types funext
+open import foundation.coproduct-types funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.hilberts-epsilon-operators
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.empty-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.hilberts-epsilon-operators funext
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 ```
 

@@ -1,20 +1,25 @@
 # The category of connected set bundles over the circle
 
 ```agda
-module synthetic-homotopy-theory.category-of-connected-set-bundles-circle where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.category-of-connected-set-bundles-circle
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.full-large-subcategories
-open import category-theory.large-categories
+open import category-theory.full-large-subcategories funext
+open import category-theory.large-categories funext
 
-open import foundation.category-of-families-of-sets
+open import foundation.category-of-families-of-sets funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.circle
-open import synthetic-homotopy-theory.connected-set-bundles-circle
+open import synthetic-homotopy-theory.circle funext
+open import synthetic-homotopy-theory.connected-set-bundles-circle funext
 ```
 
 </details>

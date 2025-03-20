@@ -1,23 +1,28 @@
 # Inequality on types equipped with a counting
 
 ```agda
-module univalent-combinatorics.inequality-types-with-counting where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.inequality-types-with-counting
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.inequality-standard-finite-types funext
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.sets
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

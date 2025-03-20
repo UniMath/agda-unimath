@@ -1,7 +1,12 @@
 # Deloopable groups
 
 ```agda
-module higher-group-theory.deloopable-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  higher-group-theory.deloopable-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,9 +15,9 @@ module higher-group-theory.deloopable-groups where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.groups
+open import group-theory.groups funext
 
-open import higher-group-theory.deloopable-h-spaces
+open import higher-group-theory.deloopable-h-spaces funext
 ```
 
 </details>

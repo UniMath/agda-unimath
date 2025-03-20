@@ -1,20 +1,25 @@
 # The precategory of group actions
 
 ```agda
-module group-theory.precategory-of-group-actions where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.precategory-of-group-actions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories
-open import category-theory.precategories
+open import category-theory.large-precategories funext
+open import category-theory.precategories funext
 
 open import foundation.universe-levels
 
-open import group-theory.group-actions
-open import group-theory.groups
-open import group-theory.homomorphisms-group-actions
+open import group-theory.group-actions funext
+open import group-theory.groups funext
+open import group-theory.homomorphisms-group-actions funext
 ```
 
 </details>

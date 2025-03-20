@@ -1,31 +1,36 @@
 # Multiplication of integers
 
 ```agda
-module elementary-number-theory.multiplication-integers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.multiplication-integers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-integers funext
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.difference-integers
-open import elementary-number-theory.equality-integers
+open import elementary-number-theory.difference-integers funext
+open import elementary-number-theory.equality-integers funext
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-integers
+open import elementary-number-theory.nonzero-integers funext
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.injective-maps
+open import foundation.coproduct-types funext
+open import foundation.embeddings funext
+open import foundation.empty-types funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
 open import foundation.interchange-law
-open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-empty-type funext
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

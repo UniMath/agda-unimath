@@ -1,7 +1,12 @@
 # Pointed maps
 
 ```agda
-module structured-types.pointed-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.pointed-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,14 +14,14 @@ module structured-types.pointed-maps where
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.constant-maps
+open import foundation.constant-maps funext
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import structured-types.pointed-dependent-functions
+open import structured-types.pointed-dependent-functions funext
 open import structured-types.pointed-families-of-types
 open import structured-types.pointed-types
 ```

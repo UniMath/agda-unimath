@@ -1,7 +1,12 @@
 # The universal property of lists with respect to wild monoids
 
 ```agda
-module lists.universal-property-lists-wild-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  lists.universal-property-lists-wild-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,22 +14,22 @@ module lists.universal-property-lists-wild-monoids where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 
-open import group-theory.homomorphisms-semigroups
+open import group-theory.homomorphisms-semigroups funext
 
-open import lists.concatenation-lists
+open import lists.concatenation-lists funext
 open import lists.lists
 
-open import structured-types.h-spaces
-open import structured-types.morphisms-h-spaces
-open import structured-types.morphisms-wild-monoids
-open import structured-types.pointed-maps
+open import structured-types.h-spaces funext
+open import structured-types.morphisms-h-spaces funext
+open import structured-types.morphisms-wild-monoids funext
+open import structured-types.pointed-maps funext
 open import structured-types.pointed-types
-open import structured-types.wild-monoids
+open import structured-types.wild-monoids funext
 ```
 
 </details>

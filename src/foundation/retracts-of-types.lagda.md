@@ -1,7 +1,12 @@
 # Retracts of types
 
 ```agda
-module foundation.retracts-of-types where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.retracts-of-types
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.retracts-of-types public
 ```
@@ -10,15 +15,16 @@ open import foundation-core.retracts-of-types public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
+open import foundation.homotopies funext
 open import foundation.homotopy-algebra
-open import foundation.homotopy-induction
-open import foundation.logical-equivalences
+open import foundation.homotopy-induction funext
+open import foundation.logical-equivalences funext
 open import foundation.structure-identity-principle
-open import foundation.univalence
+open import foundation.univalence funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

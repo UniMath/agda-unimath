@@ -1,17 +1,22 @@
 # Involutive types
 
 ```agda
-module structured-types.involutive-types where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.involutive-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.2-element-types funext
 ```
 
 </details>

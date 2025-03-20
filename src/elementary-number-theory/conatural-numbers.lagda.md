@@ -3,20 +3,25 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module elementary-number-theory.conatural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.conatural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.homotopies
-open import foundation.injective-maps
-open import foundation.negated-equality
-open import foundation.retractions
-open import foundation.sections
+open import foundation.homotopies funext
+open import foundation.injective-maps funext
+open import foundation.negated-equality funext
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.unit-type
 open import foundation.universe-levels
 

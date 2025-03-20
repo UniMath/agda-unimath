@@ -1,28 +1,33 @@
 # Reflexive premetric structures on types
 
 ```agda
-module metric-spaces.reflexive-premetric-structures where
+open import foundation.function-extensionality-axiom
+
+module
+  metric-spaces.reflexive-premetric-structures
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers funext
 
-open import foundation.binary-relations
+open import foundation.binary-relations funext
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.empty-types funext
+open import foundation.equivalences funext
+open import foundation.existential-quantification funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import metric-spaces.premetric-structures
+open import metric-spaces.premetric-structures funext
 ```
 
 </details>

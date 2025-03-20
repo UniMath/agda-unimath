@@ -1,34 +1,39 @@
 # The large locale of propositions
 
 ```agda
-module foundation.large-locale-of-propositions where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.large-locale-of-propositions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.existential-quantification
-open import foundation.logical-equivalences
-open import foundation.propositional-extensionality
+open import foundation.conjunction funext
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext
+open import foundation.existential-quantification funext
+open import foundation.logical-equivalences funext
+open import foundation.propositional-extensionality funext
 open import foundation.unit-type
-open import foundation.universal-property-cartesian-product-types
+open import foundation.universal-property-cartesian-product-types funext
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.propositions
 
-open import order-theory.bottom-elements-large-posets
-open import order-theory.large-frames
-open import order-theory.large-locales
-open import order-theory.large-meet-semilattices
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.large-suplattices
-open import order-theory.least-upper-bounds-large-posets
-open import order-theory.top-elements-large-posets
+open import order-theory.bottom-elements-large-posets funext
+open import order-theory.large-frames funext
+open import order-theory.large-locales funext
+open import order-theory.large-meet-semilattices funext
+open import order-theory.large-posets funext
+open import order-theory.large-preorders funext
+open import order-theory.large-suplattices funext
+open import order-theory.least-upper-bounds-large-posets funext
+open import order-theory.top-elements-large-posets funext
 ```
 
 </details>

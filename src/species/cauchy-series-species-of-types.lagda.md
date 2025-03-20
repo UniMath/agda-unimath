@@ -1,21 +1,26 @@
 # Cauchy series of species of types
 
 ```agda
-module species.cauchy-series-species-of-types where
+open import foundation.function-extensionality-axiom
+
+module
+  species.cauchy-series-species-of-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.postcomposition-functions
+open import foundation.equivalences funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.postcomposition-functions funext
 open import foundation.universe-levels
 
-open import species.species-of-types
+open import species.species-of-types funext
 ```
 
 </details>

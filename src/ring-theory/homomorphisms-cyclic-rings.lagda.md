@@ -1,7 +1,12 @@
 # Homomorphisms of cyclic rings
 
 ```agda
-module ring-theory.homomorphisms-cyclic-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.homomorphisms-cyclic-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,16 +14,16 @@ module ring-theory.homomorphisms-cyclic-rings where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import ring-theory.cyclic-rings
-open import ring-theory.homomorphisms-rings
-open import ring-theory.integer-multiples-of-elements-rings
-open import ring-theory.rings
+open import ring-theory.cyclic-rings funext
+open import ring-theory.homomorphisms-rings funext
+open import ring-theory.integer-multiples-of-elements-rings funext
+open import ring-theory.rings funext
 ```
 
 </details>

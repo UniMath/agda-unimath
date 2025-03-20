@@ -3,20 +3,25 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module globular-types.discrete-reflexive-globular-types where
+open import foundation.function-extensionality-axiom
+
+module
+  globular-types.discrete-reflexive-globular-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import foundation.torsorial-type-families
+open import foundation.identity-types funext
+open import foundation.torsorial-type-families funext
 open import foundation.universe-levels
 
 open import globular-types.globular-types
-open import globular-types.reflexive-globular-types
-open import globular-types.symmetric-globular-types
-open import globular-types.transitive-globular-types
+open import globular-types.reflexive-globular-types funext
+open import globular-types.symmetric-globular-types funext
+open import globular-types.transitive-globular-types funext
 ```
 
 </details>

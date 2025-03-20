@@ -1,13 +1,18 @@
 # Functoriality of existential quantification
 
 ```agda
-module logic.functoriality-existential-quantification where
+open import foundation.function-extensionality-axiom
+
+module
+  logic.functoriality-existential-quantification
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.existential-quantification
+open import foundation.existential-quantification funext
 open import foundation.universe-levels
 
 open import foundation-core.function-types

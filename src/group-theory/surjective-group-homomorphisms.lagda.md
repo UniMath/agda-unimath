@@ -1,21 +1,26 @@
 # Surjective group homomorphisms
 
 ```agda
-module group-theory.surjective-group-homomorphisms where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.surjective-group-homomorphisms
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions
-open import foundation.surjective-maps
+open import foundation.propositions funext
+open import foundation.surjective-maps funext
 open import foundation.universe-levels
 
-open import group-theory.full-subgroups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.images-of-group-homomorphisms
-open import group-theory.surjective-semigroup-homomorphisms
+open import group-theory.full-subgroups funext
+open import group-theory.groups funext
+open import group-theory.homomorphisms-groups funext
+open import group-theory.images-of-group-homomorphisms funext
+open import group-theory.surjective-semigroup-homomorphisms funext
 ```
 
 </details>

@@ -1,7 +1,12 @@
 # Sorting algorithms for vectors
 
 ```agda
-module lists.sorting-algorithms-vectors where
+open import foundation.function-extensionality-axiom
+
+module
+  lists.sorting-algorithms-vectors
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,19 +14,19 @@ module lists.sorting-algorithms-vectors where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.permutations-standard-finite-types
+open import finite-group-theory.permutations-standard-finite-types funext
 
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
+open import linear-algebra.vectors funext
 
-open import lists.permutation-vectors
-open import lists.sorted-vectors
+open import lists.permutation-vectors funext
+open import lists.sorted-vectors funext
 
-open import order-theory.decidable-total-orders
+open import order-theory.decidable-total-orders funext
 ```
 
 </details>

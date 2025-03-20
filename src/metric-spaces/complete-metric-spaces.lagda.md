@@ -1,22 +1,27 @@
 # Complete metric spaces
 
 ```agda
-module metric-spaces.complete-metric-spaces where
+open import foundation.function-extensionality-axiom
+
+module
+  metric-spaces.complete-metric-spaces
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers funext
 
 open import foundation.dependent-pair-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.metric-spaces
+open import metric-spaces.cauchy-approximations-metric-spaces funext
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces funext
+open import metric-spaces.metric-spaces funext
 ```
 
 </details>

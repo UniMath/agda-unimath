@@ -3,7 +3,12 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module foundation.vectors-set-quotients where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.vectors-set-quotients
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,26 +17,26 @@ module foundation.vectors-set-quotients where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-products-set-quotients
+open import foundation.cartesian-products-set-quotients funext
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.multivariable-operations
-open import foundation.products-equivalence-relations
-open import foundation.raising-universe-levels
-open import foundation.raising-universe-levels-unit-type
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.set-quotients
-open import foundation.sets
+open import foundation.function-extensionality funext
+
+open import foundation.multivariable-operations funext
+open import foundation.products-equivalence-relations funext
+open import foundation.raising-universe-levels funext
+open import foundation.raising-universe-levels funext-unit-type
+open import foundation.reflecting-maps-equivalence-relations funext
+open import foundation.set-quotients funext
+open import foundation.sets funext
 open import foundation.unit-type
-open import foundation.universal-property-set-quotients
+open import foundation.universal-property-set-quotients funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.equivalence-relations
+open import foundation-core.equivalence-relations funext
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -40,9 +45,9 @@ open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
 
-open import linear-algebra.vectors
+open import linear-algebra.vectors funext
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

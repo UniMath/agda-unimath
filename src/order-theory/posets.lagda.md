@@ -1,28 +1,33 @@
 # Posets
 
 ```agda
-module order-theory.posets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
+open import category-theory.categories funext
+open import category-theory.isomorphisms-in-precategories funext
+open import category-theory.precategories funext
 
-open import foundation.binary-relations
-open import foundation.cartesian-product-types
+open import foundation.binary-relations funext
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import order-theory.preorders
+open import order-theory.preorders funext
 ```
 
 </details>

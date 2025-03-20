@@ -1,35 +1,40 @@
 # The rational numbers
 
 ```agda
-module elementary-number-theory.rational-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.rational-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-integers
-open import elementary-number-theory.greatest-common-divisor-integers
-open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.divisibility-integers funext
+open import elementary-number-theory.greatest-common-divisor-integers funext
+open import elementary-number-theory.integer-fractions funext
 open import elementary-number-theory.integers
-open import elementary-number-theory.mediant-integer-fractions
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.positive-integers
-open import elementary-number-theory.reduced-integer-fractions
+open import elementary-number-theory.mediant-integer-fractions funext
+open import elementary-number-theory.multiplication-integers funext
+open import elementary-number-theory.positive-integers funext
+open import elementary-number-theory.reduced-integer-fractions funext
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.equality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositions
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.retracts-of-types
-open import foundation.sections
-open import foundation.sets
+open import foundation.equality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositions funext
+open import foundation.reflecting-maps-equivalence-relations funext
+open import foundation.retracts-of-types funext
+open import foundation.sections funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import set-theory.countable-sets
+open import set-theory.countable-sets funext
 ```
 
 </details>

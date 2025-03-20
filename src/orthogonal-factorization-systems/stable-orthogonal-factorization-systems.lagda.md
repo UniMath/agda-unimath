@@ -1,7 +1,12 @@
 # Stable orthogonal factorization systems
 
 ```agda
-module orthogonal-factorization-systems.stable-orthogonal-factorization-systems where
+open import foundation.function-extensionality-axiom
+
+module
+  orthogonal-factorization-systems.stable-orthogonal-factorization-systems
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,8 +14,8 @@ module orthogonal-factorization-systems.stable-orthogonal-factorization-systems 
 ```agda
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.function-classes
-open import orthogonal-factorization-systems.orthogonal-factorization-systems
+open import orthogonal-factorization-systems.function-classes funext
+open import orthogonal-factorization-systems.orthogonal-factorization-systems funext
 ```
 
 </details>

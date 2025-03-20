@@ -1,19 +1,24 @@
 # Structured equality duality
 
 ```agda
-module foundation.structured-equality-duality where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.structured-equality-duality
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.maps-in-subuniverses
-open import foundation.separated-types-subuniverses
-open import foundation.structure
-open import foundation.subuniverses
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.maps-in-subuniverses funext
+open import foundation.separated-types-subuniverses funext
+open import foundation.structure funext
+open import foundation.subuniverses funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

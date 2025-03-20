@@ -1,24 +1,29 @@
 # The dihedral group construction
 
 ```agda
-module group-theory.dihedral-group-construction where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.dihedral-group-construction
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.equality-coproduct-types
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.equality-coproduct-types funext
+open import foundation.identity-types funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.abelian-groups funext
+open import group-theory.groups funext
+open import group-theory.monoids funext
+open import group-theory.semigroups funext
 ```
 
 </details>

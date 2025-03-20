@@ -1,24 +1,29 @@
 # Incidence in undirected graphs
 
 ```agda
-module graph-theory.neighbors-undirected-graphs where
+open import foundation.function-extensionality-axiom
+
+module
+  graph-theory.neighbors-undirected-graphs
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
-open import foundation.unordered-pairs
+open import foundation.unordered-pairs funext
 
-open import graph-theory.equivalences-undirected-graphs
-open import graph-theory.undirected-graphs
+open import graph-theory.equivalences-undirected-graphs funext
+open import graph-theory.undirected-graphs funext
 ```
 
 </details>

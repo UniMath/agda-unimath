@@ -1,18 +1,23 @@
 # The precategory of finite species
 
 ```agda
-module species.precategory-of-finite-species where
+open import foundation.function-extensionality-axiom
+
+module
+  species.precategory-of-finite-species
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories
+open import category-theory.large-precategories funext
 
 open import foundation.universe-levels
 
-open import species.morphisms-finite-species
-open import species.species-of-finite-types
+open import species.morphisms-finite-species funext
+open import species.species-of-finite-types funext
 ```
 
 </details>

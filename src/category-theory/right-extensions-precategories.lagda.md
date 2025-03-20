@@ -1,42 +1,48 @@
 # Right extensions in precategories
 
 ```agda
-module category-theory.right-extensions-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.right-extensions-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
-open import category-theory.natural-transformations-functors-precategories
-open import category-theory.precategories
+open import category-theory.functors-precategories funext
+open import category-theory.natural-transformations-functors-precategories funext
+open import category-theory.precategories funext
 
-open import foundation.action-on-equivalences-functions
+open import foundation.action-on-equivalences-functions funext
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
-open import foundation.dependent-identifications
+open import foundation.contractible-types funext
+open import foundation.dependent-identifications funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.equality-dependent-function-types funext
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.multivariable-homotopies
-open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
-open import foundation.sets
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.multivariable-homotopies funext
+open import foundation.propositions funext
+open import foundation.retractions funext
+open import foundation.sections funext
+open import foundation.sets funext
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 ```
 
 </details>

@@ -1,7 +1,12 @@
 # Pointed homotopies
 
 ```agda
-module structured-types.pointed-homotopies where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.pointed-homotopies
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,24 +14,24 @@ module structured-types.pointed-homotopies where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
-open import foundation.commuting-triangles-of-identifications
+open import foundation.commuting-triangles-of-identifications funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
 open import foundation-core.torsorial-type-families
 
-open import structured-types.pointed-dependent-functions
+open import structured-types.pointed-dependent-functions funext
 open import structured-types.pointed-families-of-types
-open import structured-types.pointed-maps
+open import structured-types.pointed-maps funext
 open import structured-types.pointed-types
 ```
 

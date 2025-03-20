@@ -1,7 +1,12 @@
 # Coproducts of finite types
 
 ```agda
-module univalent-combinatorics.coproduct-types where
+open import foundation.function-extensionality-axiom
+
+module
+  univalent-combinatorics.coproduct-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,27 +16,26 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.mere-equivalences
-open import foundation.propositional-truncations
-open import foundation.type-arithmetic-coproduct-types
-open import foundation.type-arithmetic-empty-type
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext
+open import foundation.functoriality-propositional-truncation funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.mere-equivalences funext
+open import foundation.propositional-truncations funext
+open import foundation.type-arithmetic-coproduct-types funext
+open import foundation.type-arithmetic-empty-type funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-decidable-subtypes
-open import univalent-combinatorics.double-counting
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.counting funext-decidable-subtypes
+open import univalent-combinatorics.double-counting funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

@@ -1,21 +1,26 @@
 # Least upper bounds in large posets
 
 ```agda
-module order-theory.least-upper-bounds-large-posets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.least-upper-bounds-large-posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.logical-equivalences
+open import foundation.logical-equivalences funext
 open import foundation.universe-levels
 
-open import order-theory.dependent-products-large-posets
-open import order-theory.large-posets
-open import order-theory.least-upper-bounds-posets
-open import order-theory.similarity-of-elements-large-posets
-open import order-theory.upper-bounds-large-posets
+open import order-theory.dependent-products-large-posets funext
+open import order-theory.large-posets funext
+open import order-theory.least-upper-bounds-posets funext
+open import order-theory.similarity-of-elements-large-posets funext
+open import order-theory.upper-bounds-large-posets funext
 ```
 
 </details>

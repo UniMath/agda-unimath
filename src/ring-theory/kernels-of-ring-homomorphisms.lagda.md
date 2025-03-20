@@ -1,7 +1,12 @@
 # Kernels of ring homomorphisms
 
 ```agda
-module ring-theory.kernels-of-ring-homomorphisms where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.kernels-of-ring-homomorphisms
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,16 +14,16 @@ module ring-theory.kernels-of-ring-homomorphisms where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import group-theory.kernels-homomorphisms-groups
-open import group-theory.subgroups-abelian-groups
+open import group-theory.kernels-homomorphisms-groups funext
+open import group-theory.subgroups-abelian-groups funext
 
-open import ring-theory.homomorphisms-rings
-open import ring-theory.ideals-rings
-open import ring-theory.rings
-open import ring-theory.subsets-rings
+open import ring-theory.homomorphisms-rings funext
+open import ring-theory.ideals-rings funext
+open import ring-theory.rings funext
+open import ring-theory.subsets-rings funext
 ```
 
 </details>

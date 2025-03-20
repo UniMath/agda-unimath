@@ -1,19 +1,24 @@
 # Maps between set-magmoids
 
 ```agda
-module category-theory.maps-set-magmoids where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.maps-set-magmoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.set-magmoids
+open import category-theory.set-magmoids funext
 
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-pentagons-of-identifications
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

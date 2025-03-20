@@ -1,7 +1,12 @@
 # Total sequential diagrams of dependent sequential diagrams
 
 ```agda
-module synthetic-homotopy-theory.total-sequential-diagrams where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.total-sequential-diagrams
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,19 +15,19 @@ module synthetic-homotopy-theory.total-sequential-diagrams where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.dependent-sequential-diagrams
-open import synthetic-homotopy-theory.equivalences-dependent-sequential-diagrams
-open import synthetic-homotopy-theory.equivalences-sequential-diagrams
-open import synthetic-homotopy-theory.functoriality-sequential-colimits
-open import synthetic-homotopy-theory.morphisms-sequential-diagrams
-open import synthetic-homotopy-theory.sequential-colimits
-open import synthetic-homotopy-theory.sequential-diagrams
-open import synthetic-homotopy-theory.universal-property-sequential-colimits
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext
+open import synthetic-homotopy-theory.dependent-sequential-diagrams funext
+open import synthetic-homotopy-theory.equivalences-dependent-sequential-diagrams funext
+open import synthetic-homotopy-theory.equivalences-sequential-diagrams funext
+open import synthetic-homotopy-theory.functoriality-sequential-colimits funext
+open import synthetic-homotopy-theory.morphisms-sequential-diagrams funext
+open import synthetic-homotopy-theory.sequential-colimits funext
+open import synthetic-homotopy-theory.sequential-diagrams funext
+open import synthetic-homotopy-theory.universal-property-sequential-colimits funext
 ```
 
 </details>

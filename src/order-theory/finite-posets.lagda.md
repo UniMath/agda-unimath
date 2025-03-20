@@ -1,23 +1,28 @@
 # Finite posets
 
 ```agda
-module order-theory.finite-posets where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.finite-posets
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-types
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.propositions
+open import foundation.function-types funext
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import order-theory.finite-preorders
-open import order-theory.posets
-open import order-theory.preorders
+open import order-theory.finite-preorders funext
+open import order-theory.posets funext
+open import order-theory.preorders funext
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext
 ```
 
 </details>

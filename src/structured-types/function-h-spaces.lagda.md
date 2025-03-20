@@ -1,18 +1,23 @@
 # Function H-spaces
 
 ```agda
-module structured-types.function-h-spaces where
+open import foundation.function-extensionality-axiom
+
+module
+  structured-types.function-h-spaces
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import structured-types.dependent-products-h-spaces
-open import structured-types.h-spaces
+open import structured-types.dependent-products-h-spaces funext
+open import structured-types.h-spaces funext
 open import structured-types.pointed-types
 ```
 

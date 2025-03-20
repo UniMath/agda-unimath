@@ -1,20 +1,25 @@
 # Dependent products of large suplattices
 
 ```agda
-module order-theory.dependent-products-large-suplattices where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.dependent-products-large-suplattices
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-binary-relations
-open import foundation.sets
+open import foundation.large-binary-relations funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import order-theory.dependent-products-large-posets
-open import order-theory.large-posets
-open import order-theory.large-suplattices
-open import order-theory.least-upper-bounds-large-posets
+open import order-theory.dependent-products-large-posets funext
+open import order-theory.large-posets funext
+open import order-theory.large-suplattices funext
+open import order-theory.least-upper-bounds-large-posets funext
 ```
 
 </details>

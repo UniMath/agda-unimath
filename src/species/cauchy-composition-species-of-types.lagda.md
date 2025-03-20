@@ -1,35 +1,41 @@
 # Cauchy composition of species of types
 
 ```agda
-module species.cauchy-composition-species-of-types where
+open import foundation.function-extensionality-axiom
+
+module
+  species.cauchy-composition-species-of-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
+open import foundation.cartesian-product-types funext
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.discrete-relaxed-sigma-decompositions
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.relaxed-sigma-decompositions
-open import foundation.trivial-relaxed-sigma-decompositions
+open import foundation.dependent-universal-property-equivalences funext
+open import foundation.discrete-relaxed-sigma-decompositions funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.relaxed-sigma-decompositions funext
+open import foundation.trivial-relaxed-sigma-decompositions funext
 open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-dependent-function-types
+open import foundation.type-arithmetic-dependent-function-types funext
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
-open import foundation.univalence
-open import foundation.universal-property-dependent-pair-types
+open import foundation.type-theoretic-principle-of-choice funext
+open import foundation.univalence funext
+open import foundation.universal-property-dependent-pair-types funext
 open import foundation.universe-levels
 
-open import species.species-of-types
-open import species.unit-cauchy-composition-species-of-types
+open import species.species-of-types funext
+open import species.unit-cauchy-composition-species-of-types funext
 ```
 
 </details>

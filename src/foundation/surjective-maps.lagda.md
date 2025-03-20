@@ -1,33 +1,38 @@
 # Surjective maps
 
 ```agda
-module foundation.surjective-maps where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.surjective-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.connected-maps
-open import foundation.contractible-types
+open import foundation.connected-maps funext
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.embeddings
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
 open import foundation.equality-cartesian-product-types
-open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-cartesian-product-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.postcomposition-dependent-functions
-open import foundation.propositional-truncations
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.inhabited-types funext
+open import foundation.postcomposition-dependent-functions funext
+open import foundation.propositional-truncations funext
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
-open import foundation.truncated-types
-open import foundation.univalence
-open import foundation.universal-property-family-of-fibers-of-maps
-open import foundation.universal-property-propositional-truncation
+open import foundation.truncated-types funext
+open import foundation.univalence funext
+open import foundation.universal-property-family-of-fibers-of-maps funext
+open import foundation.universal-property-propositional-truncation funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -37,19 +42,19 @@ open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 open import foundation-core.homotopies
 open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.sets
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 open import foundation-core.torsorial-type-families
-open import foundation-core.truncated-maps
+open import foundation-core.truncated-maps funext
 open import foundation-core.truncation-levels
 
-open import orthogonal-factorization-systems.extensions-maps
+open import orthogonal-factorization-systems.extensions-maps funext
 ```
 
 </details>

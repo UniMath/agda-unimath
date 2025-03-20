@@ -1,18 +1,23 @@
 # Maximal chains in preorders
 
 ```agda
-module order-theory.maximal-chains-preorders where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.maximal-chains-preorders
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.propositions
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import order-theory.chains-preorders
-open import order-theory.preorders
+open import order-theory.chains-preorders funext
+open import order-theory.preorders funext
 ```
 
 </details>

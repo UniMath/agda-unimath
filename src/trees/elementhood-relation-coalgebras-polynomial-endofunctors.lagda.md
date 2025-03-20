@@ -1,20 +1,25 @@
 # The elementhood relation on coalgebras of polynomial endofunctors
 
 ```agda
-module trees.elementhood-relation-coalgebras-polynomial-endofunctors where
+open import foundation.function-extensionality-axiom
+
+module
+  trees.elementhood-relation-coalgebras-polynomial-endofunctors
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.fibers-of-maps
+open import foundation.fibers-of-maps funext
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs
-open import graph-theory.walks-directed-graphs
+open import graph-theory.directed-graphs funext
+open import graph-theory.walks-directed-graphs funext
 
-open import trees.coalgebras-polynomial-endofunctors
+open import trees.coalgebras-polynomial-endofunctors funext
 ```
 
 </details>

@@ -1,13 +1,18 @@
 # Commuting triangles of homotopies
 
 ```agda
-module foundation.commuting-triangles-of-homotopies where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.commuting-triangles-of-homotopies
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-triangles-of-identifications
+open import foundation.commuting-triangles-of-identifications funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

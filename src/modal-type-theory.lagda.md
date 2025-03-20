@@ -20,29 +20,34 @@ _cohesive_ structure.
 ## Modules in the modal type theory namespace
 
 ```agda
-module modal-type-theory where
+open import foundation.function-extensionality-axiom
 
-open import modal-type-theory.action-on-homotopies-flat-modality public
-open import modal-type-theory.action-on-identifications-crisp-functions public
-open import modal-type-theory.action-on-identifications-flat-modality public
-open import modal-type-theory.crisp-cartesian-product-types public
-open import modal-type-theory.crisp-coproduct-types public
-open import modal-type-theory.crisp-dependent-function-types public
-open import modal-type-theory.crisp-dependent-pair-types public
-open import modal-type-theory.crisp-function-types public
-open import modal-type-theory.crisp-identity-types public
-open import modal-type-theory.crisp-law-of-excluded-middle public
-open import modal-type-theory.crisp-pullbacks public
+module
+  modal-type-theory
+  (funext : function-extensionality)
+  where
+
+open import modal-type-theory.action-on-homotopies-flat-modality funext public
+open import modal-type-theory.action-on-identifications-crisp-functions funext public
+open import modal-type-theory.action-on-identifications-flat-modality funext public
+open import modal-type-theory.crisp-cartesian-product-types funext public
+open import modal-type-theory.crisp-coproduct-types funext public
+open import modal-type-theory.crisp-dependent-function-types funext public
+open import modal-type-theory.crisp-dependent-pair-types funext public
+open import modal-type-theory.crisp-function-types funext public
+open import modal-type-theory.crisp-identity-types funext public
+open import modal-type-theory.crisp-law-of-excluded-middle funext public
+open import modal-type-theory.crisp-pullbacks funext public
 open import modal-type-theory.crisp-types public
-open import modal-type-theory.dependent-universal-property-flat-discrete-crisp-types public
-open import modal-type-theory.flat-discrete-crisp-types public
-open import modal-type-theory.flat-modality public
-open import modal-type-theory.flat-sharp-adjunction public
-open import modal-type-theory.functoriality-flat-modality public
-open import modal-type-theory.functoriality-sharp-modality public
-open import modal-type-theory.sharp-codiscrete-maps public
-open import modal-type-theory.sharp-codiscrete-types public
-open import modal-type-theory.sharp-modality public
-open import modal-type-theory.transport-along-crisp-identifications public
-open import modal-type-theory.universal-property-flat-discrete-crisp-types public
+open import modal-type-theory.dependent-universal-property-flat-discrete-crisp-types funext public
+open import modal-type-theory.flat-discrete-crisp-types funext public
+open import modal-type-theory.flat-modality funext public
+open import modal-type-theory.flat-sharp-adjunction funext public
+open import modal-type-theory.functoriality-flat-modality funext public
+open import modal-type-theory.functoriality-sharp-modality funext public
+open import modal-type-theory.sharp-codiscrete-maps funext public
+open import modal-type-theory.sharp-codiscrete-types funext public
+open import modal-type-theory.sharp-modality funext public
+open import modal-type-theory.transport-along-crisp-identifications funext public
+open import modal-type-theory.universal-property-flat-discrete-crisp-types funext public
 ```

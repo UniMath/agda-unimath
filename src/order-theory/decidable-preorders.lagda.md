@@ -1,19 +1,24 @@
 # Decidable preorders
 
 ```agda
-module order-theory.decidable-preorders where
+open import foundation.function-extensionality-axiom
+
+module
+  order-theory.decidable-preorders
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.decidable-propositions
+open import foundation.binary-relations funext
+open import foundation.decidable-propositions funext
 open import foundation.dependent-pair-types
-open import foundation.propositions
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import order-theory.preorders
+open import order-theory.preorders funext
 ```
 
 </details>

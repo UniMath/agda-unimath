@@ -1,21 +1,27 @@
 # Dependent products of monoids
 
 ```agda
-module group-theory.dependent-products-monoids where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.dependent-products-monoids
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.function-extensionality funext
+
+open import foundation.identity-types funext
+open import foundation.sets funext
 open import foundation.universe-levels
 
-open import group-theory.dependent-products-semigroups
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.dependent-products-semigroups funext
+open import group-theory.monoids funext
+open import group-theory.semigroups funext
 ```
 
 </details>

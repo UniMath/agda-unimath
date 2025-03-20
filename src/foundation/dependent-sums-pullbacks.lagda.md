@@ -1,17 +1,22 @@
 # Dependent sums of pullbacks
 
 ```agda
-module foundation.dependent-sums-pullbacks where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.dependent-sums-pullbacks
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospan-diagrams
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.standard-pullbacks
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.standard-pullbacks funext
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -21,10 +26,10 @@ open import foundation-core.families-of-equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.pullbacks
+open import foundation-core.pullbacks funext
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.universal-property-pullbacks
+open import foundation-core.universal-property-pullbacks funext
 ```
 
 </details>

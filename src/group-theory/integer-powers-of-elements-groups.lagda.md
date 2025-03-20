@@ -1,31 +1,36 @@
 # Integer powers of elements of groups
 
 ```agda
-module group-theory.integer-powers-of-elements-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.integer-powers-of-elements-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-integers funext
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-integers funext
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.iterating-automorphisms
-open import foundation.propositions
+open import foundation.coproduct-types funext
+open import foundation.existential-quantification funext
+open import foundation.identity-types funext
+open import foundation.iterating-automorphisms funext
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import group-theory.commuting-elements-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.powers-of-elements-groups
+open import group-theory.commuting-elements-groups funext
+open import group-theory.groups funext
+open import group-theory.homomorphisms-groups funext
+open import group-theory.powers-of-elements-groups funext
 
-open import structured-types.initial-pointed-type-equipped-with-automorphism
+open import structured-types.initial-pointed-type-equipped-with-automorphism funext
 ```
 
 </details>

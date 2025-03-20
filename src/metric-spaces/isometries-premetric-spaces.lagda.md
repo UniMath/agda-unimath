@@ -1,30 +1,36 @@
 # Isometries between premetric spaces
 
 ```agda
-module metric-spaces.isometries-premetric-spaces where
+open import foundation.function-extensionality-axiom
+
+module
+  metric-spaces.isometries-premetric-spaces
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers funext
 
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext
+open import foundation.subtypes funext
 open import foundation.universe-levels
 
-open import metric-spaces.extensional-premetric-structures
-open import metric-spaces.premetric-spaces
+open import metric-spaces.extensional-premetric-structures funext
+open import metric-spaces.premetric-spaces funext
 ```
 
 </details>

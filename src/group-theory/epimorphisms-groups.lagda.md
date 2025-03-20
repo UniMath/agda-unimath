@@ -1,21 +1,26 @@
 # Epimorphisms in groups
 
 ```agda
-module group-theory.epimorphisms-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.epimorphisms-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.epimorphisms-in-large-precategories
+open import category-theory.epimorphisms-in-large-precategories funext
 
-open import foundation.propositions
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.isomorphisms-groups
-open import group-theory.precategory-of-groups
+open import group-theory.groups funext
+open import group-theory.homomorphisms-groups funext
+open import group-theory.isomorphisms-groups funext
+open import group-theory.precategory-of-groups funext
 ```
 
 </details>

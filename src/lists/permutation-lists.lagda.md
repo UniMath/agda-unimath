@@ -1,32 +1,37 @@
 # Permutations of lists
 
 ```agda
-module lists.permutation-lists where
+open import foundation.function-extensionality-axiom
+
+module
+  lists.permutation-lists
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.equality-natural-numbers funext
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.permutations-standard-finite-types
+open import finite-group-theory.permutations-standard-finite-types funext
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.equality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.vectors
+open import linear-algebra.functoriality-vectors funext
+open import linear-algebra.vectors funext
 
-open import lists.arrays
-open import lists.functoriality-lists
+open import lists.arrays funext
+open import lists.functoriality-lists funext
 open import lists.lists
-open import lists.permutation-vectors
+open import lists.permutation-vectors funext
 ```
 
 </details>

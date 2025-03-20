@@ -1,7 +1,12 @@
 # Generating sets of groups
 
 ```agda
-module group-theory.generating-sets-groups where
+open import foundation.function-extensionality-axiom
+
+module
+  group-theory.generating-sets-groups
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,10 +14,10 @@ module group-theory.generating-sets-groups where
 ```agda
 open import foundation.universe-levels
 
-open import group-theory.full-subgroups
-open import group-theory.groups
-open import group-theory.subgroups-generated-by-subsets-groups
-open import group-theory.subsets-groups
+open import group-theory.full-subgroups funext
+open import group-theory.groups funext
+open import group-theory.subgroups-generated-by-subsets-groups funext
+open import group-theory.subsets-groups funext
 ```
 
 </details>

@@ -1,9 +1,14 @@
 # Decidable propositions
 
 ```agda
-module univalent-combinatorics.decidable-propositions where
+open import foundation.function-extensionality-axiom
 
-open import foundation.decidable-propositions public
+module
+  univalent-combinatorics.decidable-propositions
+  (funext : function-extensionality)
+  where
+
+open import foundation.decidable-propositions funext public
 ```
 
 <details><summary>Imports</summary>
@@ -11,17 +16,17 @@ open import foundation.decidable-propositions public
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
+open import foundation.coproduct-types funext
+open import foundation.decidable-equality funext
+open import foundation.decidable-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

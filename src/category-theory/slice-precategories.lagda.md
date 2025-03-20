@@ -1,34 +1,39 @@
 # Slice precategories
 
 ```agda
-module category-theory.slice-precategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.slice-precategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
-open import category-theory.precategories
-open import category-theory.products-in-precategories
-open import category-theory.pullbacks-in-precategories
-open import category-theory.terminal-objects-precategories
+open import category-theory.functors-precategories funext
+open import category-theory.precategories funext
+open import category-theory.products-in-precategories funext
+open import category-theory.pullbacks-in-precategories funext
+open import category-theory.terminal-objects-precategories funext
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
+open import foundation.cartesian-product-types funext
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.strictly-involutive-identity-types funext
+open import foundation.subtypes funext
+open import foundation.torsorial-type-families funext
 open import foundation.universe-levels
 ```
 

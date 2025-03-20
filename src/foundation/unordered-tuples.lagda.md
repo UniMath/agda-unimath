@@ -1,7 +1,12 @@
 # Unordered `n`-tuples of elements in a type
 
 ```agda
-module foundation.unordered-tuples where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation.unordered-tuples
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,15 +14,15 @@ module foundation.unordered-tuples where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.1-types
-open import foundation.decidable-equality
+open import foundation.1-types funext
+open import foundation.decidable-equality funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types
+open import foundation.dependent-products-truncated-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
-open import foundation.postcomposition-functions
+open import foundation.homotopy-induction funext
+open import foundation.postcomposition-functions funext
 open import foundation.structure-identity-principle
-open import foundation.truncated-types
+open import foundation.truncated-types funext
 open import foundation.truncation-levels
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -30,10 +35,10 @@ open import foundation-core.identity-types
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
 
-open import univalent-combinatorics.complements-isolated-elements
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.complements-isolated-elements funext
+open import univalent-combinatorics.equality-finite-types funext
+open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

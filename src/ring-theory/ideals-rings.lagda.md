@@ -1,37 +1,42 @@
 # Ideals of rings
 
 ```agda
-module ring-theory.ideals-rings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.ideals-rings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
+open import foundation.binary-relations funext
 open import foundation.binary-transport
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.equivalence-relations funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.identity-types funext
+open import foundation.propositions funext
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.subtypes funext
+open import foundation.torsorial-type-families funext
 open import foundation.universe-levels
 
-open import group-theory.congruence-relations-abelian-groups
-open import group-theory.congruence-relations-monoids
-open import group-theory.subgroups-abelian-groups
+open import group-theory.congruence-relations-abelian-groups funext
+open import group-theory.congruence-relations-monoids funext
+open import group-theory.subgroups-abelian-groups funext
 
-open import ring-theory.congruence-relations-rings
-open import ring-theory.left-ideals-rings
-open import ring-theory.right-ideals-rings
-open import ring-theory.rings
-open import ring-theory.subsets-rings
+open import ring-theory.congruence-relations-rings funext
+open import ring-theory.left-ideals-rings funext
+open import ring-theory.right-ideals-rings funext
+open import ring-theory.rings funext
+open import ring-theory.subsets-rings funext
 ```
 
 </details>

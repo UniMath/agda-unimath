@@ -1,27 +1,32 @@
 # Descent data for families of equivalence types over the circle
 
 ```agda
-module synthetic-homotopy-theory.descent-circle-equivalence-types where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.descent-circle-equivalence-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.dependent-descent-circle
-open import synthetic-homotopy-theory.descent-circle
-open import synthetic-homotopy-theory.descent-circle-dependent-pair-types
-open import synthetic-homotopy-theory.descent-circle-function-types
-open import synthetic-homotopy-theory.descent-circle-subtypes
-open import synthetic-homotopy-theory.free-loops
-open import synthetic-homotopy-theory.morphisms-descent-data-circle
-open import synthetic-homotopy-theory.sections-descent-circle
-open import synthetic-homotopy-theory.universal-property-circle
+open import synthetic-homotopy-theory.dependent-descent-circle funext
+open import synthetic-homotopy-theory.descent-circle funext
+open import synthetic-homotopy-theory.descent-circle funext-dependent-pair-types
+open import synthetic-homotopy-theory.descent-circle-function-types funext
+open import synthetic-homotopy-theory.descent-circle-subtypes funext
+open import synthetic-homotopy-theory.free-loops funext
+open import synthetic-homotopy-theory.morphisms-descent-data-circle funext
+open import synthetic-homotopy-theory.sections-descent-circle funext
+open import synthetic-homotopy-theory.universal-property-circle funext
 ```
 
 </details>

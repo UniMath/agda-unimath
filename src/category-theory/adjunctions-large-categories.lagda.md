@@ -1,20 +1,25 @@
 # Adjunctions between large categories
 
 ```agda
-module category-theory.adjunctions-large-categories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.adjunctions-large-categories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.adjunctions-large-precategories
-open import category-theory.functors-large-categories
-open import category-theory.large-categories
-open import category-theory.natural-transformations-functors-large-categories
+open import category-theory.adjunctions-large-precategories funext
+open import category-theory.functors-large-categories funext
+open import category-theory.large-categories funext
+open import category-theory.natural-transformations-functors-large-categories funext
 
-open import foundation.commuting-squares-of-maps
-open import foundation.equivalences
-open import foundation.identity-types
+open import foundation.commuting-squares-of-maps funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

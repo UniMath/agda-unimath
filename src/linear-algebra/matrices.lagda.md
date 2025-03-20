@@ -1,7 +1,12 @@
 # Matrices
 
 ```agda
-module linear-algebra.matrices where
+open import foundation.function-extensionality-axiom
+
+module
+  linear-algebra.matrices
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,13 +15,13 @@ module linear-algebra.matrices where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
-open import foundation.contractible-types
+open import foundation.contractible-types funext
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.vectors
+open import linear-algebra.functoriality-vectors funext
+open import linear-algebra.vectors funext
 ```
 
 </details>

@@ -3,7 +3,12 @@
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-module modal-type-theory.sharp-codiscrete-types where
+open import foundation.function-extensionality-axiom
+
+module
+  modal-type-theory.sharp-codiscrete-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,19 +16,18 @@ module modal-type-theory.sharp-codiscrete-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.transport-along-equivalences
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.transport-along-equivalences funext
 open import foundation.universe-levels
 
-open import modal-type-theory.sharp-modality
+open import modal-type-theory.sharp-modality funext
 
-open import orthogonal-factorization-systems.higher-modalities
-open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.higher-modalities funext
+open import orthogonal-factorization-systems.modal-operators funext
 ```
 
 </details>

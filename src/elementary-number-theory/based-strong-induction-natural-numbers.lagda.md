@@ -1,27 +1,32 @@
 # Based strong induction for the natural numbers
 
 ```agda
-module elementary-number-theory.based-strong-induction-natural-numbers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.based-strong-induction-natural-numbers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.based-induction-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.based-induction-natural-numbers funext
+open import elementary-number-theory.equality-natural-numbers funext
+open import elementary-number-theory.inequality-natural-numbers funext
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.empty-types
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.universal-property-contractible-types
+open import foundation.coproduct-types funext
+open import foundation.empty-types funext
+open import foundation.function-extensionality funext
+
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.universal-property-contractible-types funext
 open import foundation.universe-levels
 ```
 

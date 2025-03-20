@@ -1,26 +1,31 @@
 # Full large subprecategories
 
 ```agda
-module category-theory.full-large-subprecategories where
+open import foundation.function-extensionality-axiom
+
+module
+  category-theory.full-large-subprecategories
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-large-precategories
-open import category-theory.isomorphisms-in-large-categories
-open import category-theory.isomorphisms-in-large-precategories
-open import category-theory.large-categories
-open import category-theory.large-precategories
+open import category-theory.functors-large-precategories funext
+open import category-theory.isomorphisms-in-large-categories funext
+open import category-theory.isomorphisms-in-large-precategories funext
+open import category-theory.large-categories funext
+open import category-theory.large-precategories funext
 
-open import foundation.function-types
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
+open import foundation.identity-types funext
+open import foundation.propositions funext
+open import foundation.sets funext
+open import foundation.strictly-involutive-identity-types funext
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
+open import foundation.subtypes funext
 open import foundation.universe-levels
 ```
 

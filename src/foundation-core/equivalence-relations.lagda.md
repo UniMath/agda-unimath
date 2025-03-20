@@ -1,19 +1,24 @@
 # Equivalence relations
 
 ```agda
-module foundation-core.equivalence-relations where
+open import foundation.function-extensionality-axiom
+
+module
+  foundation-core.equivalence-relations
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.inhabited-subtypes
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
-open import foundation.raising-universe-levels-unit-type
+open import foundation.inhabited-subtypes funext
+open import foundation.logical-equivalences funext
+open import foundation.propositional-truncations funext
+open import foundation.raising-universe-levels-unit-type funext
 open import foundation.subtype-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels

@@ -1,32 +1,37 @@
 # The binomial theorem for semirings
 
 ```agda
-module ring-theory.binomial-theorem-semirings where
+open import foundation.function-extensionality-axiom
+
+module
+  ring-theory.binomial-theorem-semirings
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.binomial-coefficients
-open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.binomial-coefficients funext
+open import elementary-number-theory.distance-natural-numbers funext
+open import elementary-number-theory.inequality-natural-numbers funext
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import linear-algebra.vectors-on-semirings
+open import linear-algebra.vectors-on-semirings funext
 
-open import ring-theory.powers-of-elements-semirings
-open import ring-theory.semirings
-open import ring-theory.sums-semirings
+open import ring-theory.powers-of-elements-semirings funext
+open import ring-theory.semirings funext
+open import ring-theory.sums-semirings funext
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.coproduct-types funext
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>

@@ -1,25 +1,30 @@
 # The distance between integers
 
 ```agda
-module elementary-number-theory.distance-integers where
+open import foundation.function-extensionality-axiom
+
+module
+  elementary-number-theory.distance-integers
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.absolute-value-integers
-open import elementary-number-theory.difference-integers
-open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.absolute-value-integers funext
+open import elementary-number-theory.difference-integers funext
+open import elementary-number-theory.distance-natural-numbers funext
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonnegative-integers
-open import elementary-number-theory.positive-and-negative-integers
-open import elementary-number-theory.positive-integers
+open import elementary-number-theory.nonnegative-integers funext
+open import elementary-number-theory.positive-and-negative-integers funext
+open import elementary-number-theory.positive-integers funext
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.identity-types
+open import foundation.coproduct-types funext
+open import foundation.identity-types funext
 ```
 
 </details>

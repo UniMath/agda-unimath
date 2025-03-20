@@ -1,7 +1,12 @@
 # Spheres
 
 ```agda
-module synthetic-homotopy-theory.spheres where
+open import foundation.function-extensionality-axiom
+
+module
+  synthetic-homotopy-theory.spheres
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,16 +15,16 @@ module synthetic-homotopy-theory.spheres where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.iterated-suspensions-of-pointed-types
-open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.iterated-suspensions-of-pointed-types funext
+open import synthetic-homotopy-theory.suspensions-of-types funext
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext
 ```
 
 </details>
