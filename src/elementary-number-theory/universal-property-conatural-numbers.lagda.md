@@ -23,7 +23,7 @@ enjoys many universal properties, among others:
 1. It is the one-point compactification of the
    [natural numbers](elementary-number-theory.natural-numbers.md).
 2. It classifies downward-stable subsets of the natural numbers.
-3. It is the final coalgebra of the [maybe monad](foundation.maybe.md).
+3. It is the final coalgebra of the [maybe monad](foundation-core.maybe.md).
 
 On this page we consider the last of these. Thus, a
 `Maybe`-[coalgebra](foundation.coalgebras-maybe.md) `η : X → Maybe X` satisfies

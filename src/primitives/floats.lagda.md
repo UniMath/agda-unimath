@@ -10,8 +10,9 @@ module primitives.floats where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.booleans
-open import foundation.maybe
 open import foundation.universe-levels
+
+open import foundation-core.maybe
 
 open import primitives.machine-integers
 open import primitives.strings

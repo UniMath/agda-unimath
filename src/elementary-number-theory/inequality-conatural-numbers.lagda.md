@@ -21,11 +21,12 @@ open import foundation.empty-types
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
-open import foundation.maybe
 open import foundation.negation
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.maybe
 
 open import order-theory.posets
 open import order-theory.preorders

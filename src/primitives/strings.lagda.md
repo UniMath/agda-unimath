@@ -11,8 +11,9 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.booleans
 open import foundation.dependent-pair-types
-open import foundation.maybe
 open import foundation.universe-levels
+
+open import foundation-core.maybe
 
 open import lists.lists
 
