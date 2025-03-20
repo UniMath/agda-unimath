@@ -379,7 +379,7 @@ module _
           ( coefficient-formal-power-series-Commutative-Semiring R p a)
           ( coefficient-formal-power-series-Commutative-Semiring R q b))
 
-  abstract
+  opaque
     mul-formal-power-series-Commutative-Semiring :
       formal-power-series-Commutative-Semiring R
     mul-formal-power-series-Commutative-Semiring =
@@ -578,4 +578,42 @@ module _
         coeff :
           formal-power-series-Commutative-Semiring R → ℕ → type-Commutative-Semiring R
         coeff = coefficient-formal-power-series-Commutative-Semiring R
+```
+
+#### Unit laws
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  (p : formal-power-series-Commutative-Semiring R)
+  where
+
+  opaque
+    unfolding mul-formal-power-series-Commutative-Semiring
+    unfolding constant-formal-power-series-Commutative-Semiring
+
+    left-unit-law-mul-formal-power-series-Commutative-Semiring :
+      mul-formal-power-series-Commutative-Semiring
+        ( R)
+        ( one-formal-power-series-Commutative-Semiring R)
+        ( p) ＝ p
+    left-unit-law-mul-formal-power-series-Commutative-Semiring =
+      eq-htpy-coefficients-formal-power-series-Commutative-Semiring
+        ( R)
+        ( _)
+        ( _)
+        ( λ n →
+          equational-reasoning
+            sum-finite-Commutative-Semiring
+              ( R)
+              ( finite-type-pair-with-sum-ℕ n)
+              ( λ (a , b , _) →
+                mul-Commutative-Semiring
+                  ( R)
+                  ( coefficient-constant-formal-power-series-Commutative-Semiring
+                    ( R)
+                    ( one-Commutative-Semiring R)
+                    ( a))
+                  ( coefficient-formal-power-series-Commutative-Semiring R p b))
+            ＝ {!   !} by {!   !})
 ```
