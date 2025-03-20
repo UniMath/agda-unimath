@@ -8,6 +8,7 @@ module foundation.universal-quantification where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.evaluation-functions
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations

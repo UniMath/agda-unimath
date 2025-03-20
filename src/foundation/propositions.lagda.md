@@ -4,6 +4,7 @@
 module foundation.propositions where
 
 open import foundation-core.propositions public
+open import foundation.dependent-products-propositions public
 ```
 
 <details><summary>Imports</summary>

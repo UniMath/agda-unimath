@@ -12,6 +12,7 @@ open import foundation-core.universal-property-truncation public
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositional-truncations

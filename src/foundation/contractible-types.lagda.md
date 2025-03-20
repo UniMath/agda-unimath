@@ -4,6 +4,7 @@
 module foundation.contractible-types where
 
 open import foundation-core.contractible-types public
+open import foundation.dependent-products-contractible-types public
 ```
 
 <details><summary>Imports</summary>
@@ -19,7 +20,6 @@ open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types

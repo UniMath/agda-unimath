@@ -14,6 +14,7 @@ open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types

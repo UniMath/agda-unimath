@@ -10,6 +10,7 @@ open import foundation-core.empty-types public
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.propositional-truncations

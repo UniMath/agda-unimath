@@ -8,6 +8,7 @@ module foundation.principle-of-omniscience where
 
 ```agda
 open import foundation.decidable-subtypes
+open import foundation.dependent-products-propositions
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 

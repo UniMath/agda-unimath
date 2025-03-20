@@ -9,6 +9,8 @@ module foundation.product-decompositions-subuniverse where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types

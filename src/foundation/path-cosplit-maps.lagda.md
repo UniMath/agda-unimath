@@ -13,6 +13,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types

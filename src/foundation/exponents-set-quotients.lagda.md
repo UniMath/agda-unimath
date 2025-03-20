@@ -11,6 +11,7 @@ module foundation.exponents-set-quotients where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
 open import foundation.functoriality-set-quotients

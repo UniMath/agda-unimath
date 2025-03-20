@@ -11,6 +11,7 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.symmetric-operations

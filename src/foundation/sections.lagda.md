@@ -12,6 +12,7 @@ open import foundation-core.sections public
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.function-extensionality
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types

@@ -9,6 +9,7 @@ module foundation.functoriality-set-truncation where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.functoriality-truncation
 open import foundation.images
 open import foundation.injective-maps

@@ -120,6 +120,8 @@ open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
 open import foundation.dependent-pair-types public
+open import foundation.dependent-products-contractible-types public
+open import foundation.dependent-products-propositions public
 open import foundation.dependent-products-pullbacks public
 open import foundation.dependent-sequences public
 open import foundation.dependent-sums-pullbacks public

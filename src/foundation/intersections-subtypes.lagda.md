@@ -10,6 +10,7 @@ module foundation.intersections-subtypes where
 open import foundation.conjunction
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.large-locale-of-subtypes
 open import foundation.powersets
 open import foundation.universe-levels

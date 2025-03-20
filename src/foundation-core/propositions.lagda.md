@@ -16,7 +16,6 @@ open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.transport-along-identifications
 ```
@@ -236,141 +235,7 @@ module _
   product-Prop = (type-product-Prop , is-prop-product-Prop)
 ```
 
-### Products of families of propositions are propositions
-
-```agda
-abstract
-  is-prop-Π :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-    ((x : A) → is-prop (B x)) → is-prop ((x : A) → B x)
-  is-prop-Π H =
-    is-prop-is-proof-irrelevant
-      ( λ f → is-contr-Π (λ x → is-proof-irrelevant-is-prop (H x) (f x)))
-
-module _
-  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
-  where
-
-  type-Π-Prop : UU (l1 ⊔ l2)
-  type-Π-Prop = (x : A) → type-Prop (P x)
-
-  is-prop-Π-Prop : is-prop type-Π-Prop
-  is-prop-Π-Prop = is-prop-Π (λ x → is-prop-type-Prop (P x))
-
-  Π-Prop : Prop (l1 ⊔ l2)
-  pr1 Π-Prop = type-Π-Prop
-  pr2 Π-Prop = is-prop-Π-Prop
-```
-
-We now repeat the above for implicit Π-types.
-
-```agda
-abstract
-  is-prop-implicit-Π :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-    ((x : A) → is-prop (B x)) → is-prop ({x : A} → B x)
-  is-prop-implicit-Π H =
-    is-prop-equiv
-      ( ( λ f x → f {x}) ,
-        ( is-equiv-is-invertible (λ g {x} → g x) (refl-htpy) (refl-htpy)))
-      ( is-prop-Π H)
-
-module _
-  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
-  where
-
-  type-implicit-Π-Prop : UU (l1 ⊔ l2)
-  type-implicit-Π-Prop = {x : A} → type-Prop (P x)
-
-  is-prop-implicit-Π-Prop : is-prop type-implicit-Π-Prop
-  is-prop-implicit-Π-Prop =
-    is-prop-implicit-Π (λ x → is-prop-type-Prop (P x))
-
-  implicit-Π-Prop : Prop (l1 ⊔ l2)
-  pr1 implicit-Π-Prop = type-implicit-Π-Prop
-  pr2 implicit-Π-Prop = is-prop-implicit-Π-Prop
-```
-
-### The type of functions into a proposition is a proposition
-
-```agda
-abstract
-  is-prop-function-type :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-    is-prop B → is-prop (A → B)
-  is-prop-function-type H = is-prop-Π (λ _ → H)
-
-type-function-Prop :
-  {l1 l2 : Level} → UU l1 → Prop l2 → UU (l1 ⊔ l2)
-type-function-Prop A P = A → type-Prop P
-
-is-prop-function-Prop :
-  {l1 l2 : Level} {A : UU l1} (P : Prop l2) →
-  is-prop (type-function-Prop A P)
-is-prop-function-Prop P =
-  is-prop-function-type (is-prop-type-Prop P)
-
-function-Prop :
-  {l1 l2 : Level} → UU l1 → Prop l2 → Prop (l1 ⊔ l2)
-pr1 (function-Prop A P) = type-function-Prop A P
-pr2 (function-Prop A P) = is-prop-function-Prop P
-
-type-hom-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
-type-hom-Prop P = type-function-Prop (type-Prop P)
-
-is-prop-hom-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  is-prop (type-hom-Prop P Q)
-is-prop-hom-Prop P = is-prop-function-Prop
-
-hom-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-pr1 (hom-Prop P Q) = type-hom-Prop P Q
-pr2 (hom-Prop P Q) = is-prop-hom-Prop P Q
-
-infixr 5 _⇒_
-_⇒_ = hom-Prop
-```
-
-### The type of equivalences between two propositions is a proposition
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-prop-equiv-is-prop : is-prop A → is-prop B → is-prop (A ≃ B)
-  is-prop-equiv-is-prop H K =
-    is-prop-Σ
-      ( is-prop-function-type K)
-      ( λ f →
-        is-prop-product
-          ( is-prop-Σ
-            ( is-prop-function-type H)
-            ( λ g → is-prop-is-contr (is-contr-Π (λ y → K (f (g y)) y))))
-          ( is-prop-Σ
-            ( is-prop-function-type H)
-            ( λ h → is-prop-is-contr (is-contr-Π (λ x → H (h (f x)) x)))))
-
-type-equiv-Prop :
-  { l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
-type-equiv-Prop P Q = (type-Prop P) ≃ (type-Prop Q)
-
-abstract
-  is-prop-type-equiv-Prop :
-    {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-    is-prop (type-equiv-Prop P Q)
-  is-prop-type-equiv-Prop P Q =
-    is-prop-equiv-is-prop (is-prop-type-Prop P) (is-prop-type-Prop Q)
-
-equiv-Prop :
-  { l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-pr1 (equiv-Prop P Q) = type-equiv-Prop P Q
-pr2 (equiv-Prop P Q) = is-prop-type-equiv-Prop P Q
-```
-
-### A type is a proposition if and only if the type of its endomaps is contractible
+### A type is a proposition if the type of its endomaps is contractible
 
 ```agda
 abstract
@@ -378,25 +243,6 @@ abstract
     {l : Level} (P : UU l) → is-contr (P → P) → is-prop P
   is-prop-is-contr-endomaps P H =
     is-prop-all-elements-equal (λ x → htpy-eq (eq-is-contr H))
-
-abstract
-  is-contr-endomaps-is-prop :
-    {l : Level} (P : UU l) → is-prop P → is-contr (P → P)
-  is-contr-endomaps-is-prop P is-prop-P =
-    is-proof-irrelevant-is-prop (is-prop-function-type is-prop-P) id
-```
-
-### Being a proposition is a proposition
-
-```agda
-abstract
-  is-prop-is-prop :
-    {l : Level} (A : UU l) → is-prop (is-prop A)
-  is-prop-is-prop A = is-prop-Π (λ x → is-prop-Π (λ y → is-property-is-contr))
-
-is-prop-Prop : {l : Level} (A : UU l) → Prop l
-pr1 (is-prop-Prop A) = is-prop A
-pr2 (is-prop-Prop A) = is-prop-is-prop A
 ```
 
 ## See also

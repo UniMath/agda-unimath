@@ -8,6 +8,7 @@ module foundation.continuations where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.evaluation-functions
 open import foundation.type-arithmetic-dependent-function-types

@@ -9,6 +9,7 @@ module foundation.existential-quantification where
 ```agda
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
