@@ -42,6 +42,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.concatenation-lists
+open import lists.equality-lists
 open import lists.functoriality-lists
 open import lists.lists
 open import lists.permutation-lists

@@ -25,6 +25,7 @@ open import linear-algebra.vectors
 
 open import lists.arrays
 open import lists.concatenation-lists
+open import lists.equality-lists
 open import lists.lists
 ```
 

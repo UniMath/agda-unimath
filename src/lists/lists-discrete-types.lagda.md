@@ -21,6 +21,7 @@ open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import lists.equality-lists
 open import lists.lists
 ```
 
