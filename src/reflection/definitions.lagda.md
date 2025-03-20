@@ -10,7 +10,6 @@ module reflection.definitions where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
@@ -83,15 +82,15 @@ _ :
       ( visible-Argument-Agda (constructor-Term-Agda (quote zero-ℕ) nil)))
 _ = refl
 
-_ :
-  {l : Level} {A : UU l} →
-  quoteTerm (type-trunc-Prop A) ＝
-  definition-Term-Agda
-    ( quote type-trunc-Prop)
-    ( cons
-      ( hidden-Argument-Agda (variable-Term-Agda 1 nil))
-      ( unit-list (visible-Argument-Agda (variable-Term-Agda 0 nil))))
-_ = refl
+-- _ :
+--   {l : Level} {A : UU l} →
+--   quoteTerm (type-trunc-Prop A) ＝
+--   definition-Term-Agda
+--     ( quote type-trunc-Prop)
+--     ( cons
+--       ( hidden-Argument-Agda (variable-Term-Agda 1 nil))
+--       ( unit-list (visible-Argument-Agda (variable-Term-Agda 0 nil))))
+-- _ = refl
 ```
 
 ### Lambda abstractions

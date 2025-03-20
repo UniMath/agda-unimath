@@ -7,11 +7,11 @@ module reflection.names where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.booleans
+open import foundation-core.cartesian-product-types
 open import foundation-core.identity-types
 
 open import primitives.machine-integers
