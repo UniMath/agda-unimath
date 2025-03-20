@@ -22,6 +22,7 @@ open import foundation.iterated-dependent-product-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.surjective-maps
+open import foundation.telescopes
 open import foundation.universe-levels
 ```
 

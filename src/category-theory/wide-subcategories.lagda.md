@@ -30,6 +30,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
+open import foundation.telescopes
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

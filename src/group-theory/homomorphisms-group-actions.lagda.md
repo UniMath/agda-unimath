@@ -19,6 +19,7 @@ open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.telescopes
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 

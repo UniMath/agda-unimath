@@ -2,8 +2,6 @@
 
 ```agda
 module foundation.iterated-dependent-product-types where
-
-open import foundation.telescopes public
 ```
 
 <details><summary>Imports</summary>
@@ -15,6 +13,7 @@ open import foundation.dependent-products-contractible-types
 open import foundation.dependent-products-propositions
 open import foundation.dependent-products-truncated-types
 open import foundation.implicit-function-types
+open import foundation.telescopes
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

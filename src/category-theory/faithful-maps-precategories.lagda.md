@@ -19,6 +19,7 @@ open import foundation.iterated-dependent-product-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
+open import foundation.telescopes
 open import foundation.universe-levels
 ```
 

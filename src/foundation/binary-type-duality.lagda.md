@@ -15,6 +15,7 @@ open import foundation.multivariable-homotopies
 open import foundation.retractions
 open import foundation.sections
 open import foundation.spans
+open import foundation.telescopes
 open import foundation.univalence
 open import foundation.universe-levels
 

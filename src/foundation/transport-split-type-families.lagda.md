@@ -11,6 +11,7 @@ open import foundation.equivalence-injective-type-families
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.iterated-dependent-product-types
+open import foundation.telescopes
 open import foundation.transport-along-identifications
 open import foundation.univalent-type-families
 open import foundation.universal-property-identity-systems

@@ -13,6 +13,7 @@ open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
 open import foundation.multivariable-homotopies
 open import foundation.strictly-right-unital-concatenation-identifications
+open import foundation.telescopes
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universal-property-identity-systems

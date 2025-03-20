@@ -20,6 +20,7 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.subtypes
+open import foundation.telescopes
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels

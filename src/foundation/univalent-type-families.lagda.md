@@ -16,6 +16,7 @@ open import foundation.identity-systems
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.subuniverses
+open import foundation.telescopes
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universal-property-identity-systems

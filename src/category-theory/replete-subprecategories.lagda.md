@@ -22,6 +22,7 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subsingleton-induction
 open import foundation.subtypes
+open import foundation.telescopes
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

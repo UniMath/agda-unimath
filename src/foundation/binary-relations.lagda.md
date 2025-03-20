@@ -13,6 +13,7 @@ open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.subtypes
+open import foundation.telescopes
 open import foundation.univalence
 open import foundation.universe-levels
 
