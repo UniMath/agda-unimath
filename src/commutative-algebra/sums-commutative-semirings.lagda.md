@@ -159,22 +159,22 @@ module _
   right-distributive-mul-sum-Commutative-Semiring =
     right-distributive-mul-sum-Semiring (semiring-Commutative-Semiring R)
 
-  left-distributive-mul-finite-Commutative-Semiring :
+  left-distributive-mul-sum-finite-Commutative-Semiring :
     {l2 : Level} (A : Finite-Type l2) (x : type-Commutative-Semiring R) →
     (f : type-Finite-Type A → type-Commutative-Semiring R) →
     mul-Commutative-Semiring R x (sum-finite-Commutative-Semiring R A f) ＝
     sum-finite-Commutative-Semiring R A (mul-Commutative-Semiring R x ∘ f)
-  left-distributive-mul-finite-Commutative-Semiring =
-    left-distributive-mul-finite-Semiring (semiring-Commutative-Semiring R)
+  left-distributive-mul-sum-finite-Commutative-Semiring =
+    left-distributive-mul-sum-finite-Semiring (semiring-Commutative-Semiring R)
 
-  right-distributive-mul-finite-Commutative-Semiring :
+  right-distributive-mul-sum-finite-Commutative-Semiring :
     {l2 : Level} (A : Finite-Type l2) →
     (f : type-Finite-Type A → type-Commutative-Semiring R) →
     (x : type-Commutative-Semiring R) →
     mul-Commutative-Semiring R (sum-finite-Commutative-Semiring R A f) x ＝
     sum-finite-Commutative-Semiring R A (mul-Commutative-Semiring' R x ∘ f)
-  right-distributive-mul-finite-Commutative-Semiring =
-    right-distributive-mul-finite-Semiring (semiring-Commutative-Semiring R)
+  right-distributive-mul-sum-finite-Commutative-Semiring =
+    right-distributive-mul-sum-finite-Semiring (semiring-Commutative-Semiring R)
 ```
 
 ### Interchange law of sums and addition in a commutative semiring

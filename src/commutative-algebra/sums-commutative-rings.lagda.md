@@ -153,22 +153,22 @@ module _
   right-distributive-mul-sum-Commutative-Ring =
     right-distributive-mul-sum-Ring (ring-Commutative-Ring R)
 
-  left-distributive-mul-finite-Commutative-Ring :
+  left-distributive-mul-sum-finite-Commutative-Ring :
     {l2 : Level} (A : Finite-Type l2) (x : type-Commutative-Ring R) →
     (f : type-Finite-Type A → type-Commutative-Ring R) →
     mul-Commutative-Ring R x (sum-finite-Commutative-Ring R A f) ＝
     sum-finite-Commutative-Ring R A (mul-Commutative-Ring R x ∘ f)
-  left-distributive-mul-finite-Commutative-Ring =
-    left-distributive-mul-finite-Ring (ring-Commutative-Ring R)
+  left-distributive-mul-sum-finite-Commutative-Ring =
+    left-distributive-mul-sum-finite-Ring (ring-Commutative-Ring R)
 
-  right-distributive-mul-finite-Commutative-Ring :
+  right-distributive-mul-sum-finite-Commutative-Ring :
     {l2 : Level} (A : Finite-Type l2) →
     (f : type-Finite-Type A → type-Commutative-Ring R) →
     (x : type-Commutative-Ring R) →
     mul-Commutative-Ring R (sum-finite-Commutative-Ring R A f) x ＝
     sum-finite-Commutative-Ring R A (mul-Commutative-Ring' R x ∘ f)
-  right-distributive-mul-finite-Commutative-Ring =
-    right-distributive-mul-finite-Ring (ring-Commutative-Ring R)
+  right-distributive-mul-sum-finite-Commutative-Ring =
+    right-distributive-mul-sum-finite-Ring (ring-Commutative-Ring R)
 ```
 
 ### Interchange law of sums and addition in a commutative ring
