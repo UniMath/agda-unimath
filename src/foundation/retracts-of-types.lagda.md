@@ -11,6 +11,7 @@ open import foundation-core.retracts-of-types public
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-algebra
@@ -25,6 +26,8 @@ open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
+open import foundation-core.postcomposition-functions
+open import foundation-core.precomposition-functions
 open import foundation-core.torsorial-type-families
 ```
 
@@ -178,6 +181,40 @@ iff-retract R = inclusion-retract R , map-retraction-retract R
 iff-retract' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → A retract-of B → B ↔ A
 iff-retract' = inv-iff ∘ iff-retract
+```
+
+### If `A` is a retract of `B` then `A → S` is a retract of `B → S` via precomposition
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (R : A retract-of B) (S : UU l3)
+  where
+
+  retract-precomp :
+    (A → S) retract-of (B → S)
+  pr1 retract-precomp =
+    precomp (map-retraction-retract R) S
+  pr1 (pr2 retract-precomp) =
+    precomp (inclusion-retract R) S
+  pr2 (pr2 retract-precomp) h =
+    eq-htpy (h ·l is-retraction-map-retraction-retract R)
+```
+
+### If `A` is a retract of `B` then `S → A` is a retract of `S → B` via postcomposition
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (S : UU l3) (R : A retract-of B)
+  where
+
+  retract-postcomp :
+    (S → A) retract-of (S → B)
+  pr1 retract-postcomp =
+    postcomp S (inclusion-retract R)
+  pr1 (pr2 retract-postcomp) =
+    postcomp S (map-retraction-retract R)
+  pr2 (pr2 retract-postcomp) h =
+    eq-htpy (is-retraction-map-retraction-retract R ·r h)
 ```
 
 ## See also
