@@ -48,7 +48,7 @@ open import orthogonal-factorization-systems.types-local-at-maps
 A type `A` is said to be
 {{#concept "null at" Disambiguation="type" Agda=is-null}} `Y`, or
 {{#concept "`Y`-null" Disambiguation="type" Agda=is-null}}, if the
-[diagonal map](foundation.diagonal-maps-of-types.md)
+[diagonal map](foundation-core.diagonal-maps-of-types.md)
 
 ```text
   Δ : A → (Y → A)

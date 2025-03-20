@@ -9,7 +9,6 @@ module orthogonal-factorization-systems.null-maps where
 ```agda
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.families-of-equivalences
@@ -29,6 +28,8 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
+
+open import foundation-core.diagonal-maps-of-types
 
 open import orthogonal-factorization-systems.maps-local-at-maps
 open import orthogonal-factorization-systems.null-families-of-types

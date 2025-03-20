@@ -9,7 +9,6 @@ module foundation.connected-types where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types
 open import foundation.function-extensionality-axiom
 open import foundation.functoriality-truncation
 open import foundation.inhabited-types
@@ -20,6 +19,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
+open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types

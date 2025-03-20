@@ -12,7 +12,6 @@ open import foundation.connected-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
-open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
 open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
@@ -34,6 +33,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
+open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
