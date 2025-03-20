@@ -12,7 +12,6 @@ open import foundation.dependent-pair-types
 open import foundation.discrete-types
 open import foundation.involutions
 open import foundation.negated-equality
-open import foundation.raising-universe-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -86,22 +85,6 @@ module _
 
   if_then_else_ : bool → A → A → A
   if b then x else y = rec-bool x y b
-```
-
-### Raising universe levels of the booleans
-
-```agda
-raise-bool : (l : Level) → UU l
-raise-bool l = raise l bool
-
-raise-true : (l : Level) → raise-bool l
-raise-true l = map-raise true
-
-raise-false : (l : Level) → raise-bool l
-raise-false l = map-raise false
-
-compute-raise-bool : (l : Level) → bool ≃ raise-bool l
-compute-raise-bool l = compute-raise l bool
 ```
 
 ### The standard propositions associated to the constructors of bool

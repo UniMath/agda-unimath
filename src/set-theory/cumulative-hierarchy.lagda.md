@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
+open import foundation.raising-universe-levels-booleans
 open import foundation.cartesian-product-types
 open import foundation.constant-type-families
 open import foundation.coproduct-types
