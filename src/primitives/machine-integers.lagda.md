@@ -9,7 +9,7 @@ module primitives.machine-integers where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types
+open import foundation-core.identity-types
 open import foundation.universe-levels
 ```
 

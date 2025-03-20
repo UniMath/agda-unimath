@@ -12,7 +12,7 @@ module reflection.type-checking-monad where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
+open import foundation-core.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels

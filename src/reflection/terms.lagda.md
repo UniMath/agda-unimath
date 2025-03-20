@@ -9,7 +9,7 @@ module reflection.terms where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
+open import foundation-core.cartesian-product-types
 open import foundation.universe-levels
 
 open import lists.lists
