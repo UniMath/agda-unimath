@@ -17,6 +17,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.discrete-types
 open import foundation.empty-types
+open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -24,6 +25,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.set-truncations
+open import foundation.sets
 open import foundation.torsorial-type-families
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -90,6 +92,18 @@ is-decidable-is-neg-one-ℤ x = has-decidable-equality-ℤ x neg-one-ℤ
 ℤ-Discrete-Type : Discrete-Type lzero
 pr1 ℤ-Discrete-Type = ℤ
 pr2 ℤ-Discrete-Type = has-decidable-equality-ℤ
+```
+
+### The type of integers is a set
+
+```agda
+abstract
+  is-set-ℤ : is-set ℤ
+  is-set-ℤ = is-set-coproduct is-set-ℕ (is-set-coproduct is-set-unit is-set-ℕ)
+
+ℤ-Set : Set lzero
+pr1 ℤ-Set = ℤ
+pr2 ℤ-Set = is-set-ℤ
 ```
 
 ### The type of integers is its own set truncation

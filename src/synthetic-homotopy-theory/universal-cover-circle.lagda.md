@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.universal-cover-circle where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.nonzero-integers
 open import elementary-number-theory.universal-property-integers

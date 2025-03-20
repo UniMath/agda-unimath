@@ -8,6 +8,7 @@ module synthetic-homotopy-theory.infinite-cyclic-types where
 
 ```agda
 open import elementary-number-theory.addition-integers
+open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 

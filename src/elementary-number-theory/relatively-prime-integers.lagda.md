@@ -8,6 +8,7 @@ module elementary-number-theory.relatively-prime-integers where
 
 ```agda
 open import elementary-number-theory.absolute-value-integers
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.relatively-prime-natural-numbers

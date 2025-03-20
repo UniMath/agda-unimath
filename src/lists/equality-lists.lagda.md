@@ -33,6 +33,8 @@ open import foundation.universe-levels
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.maybe
+
+open import lists.lists
 ```
 
 </details>

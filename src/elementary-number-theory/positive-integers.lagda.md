@@ -7,6 +7,7 @@ module elementary-number-theory.positive-integers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-integers
