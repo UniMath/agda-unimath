@@ -26,6 +26,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.type-arithmetic-empty-type
+open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
@@ -46,7 +47,7 @@ and derive its basic properties with respect to `succ-ℤ`, `pred-ℤ`, `neg-ℤ
 mul-ℤ : ℤ → ℤ → ℤ
 mul-ℤ (inl zero-ℕ) l = neg-ℤ l
 mul-ℤ (inl (succ-ℕ x)) l = (neg-ℤ l) +ℤ (mul-ℤ (inl x) l)
-mul-ℤ (inr (inl star)) l = zero-ℤ
+mul-ℤ (inr (inl _)) l = zero-ℤ
 mul-ℤ (inr (inr zero-ℕ)) l = l
 mul-ℤ (inr (inr (succ-ℕ x))) l = l +ℤ (mul-ℤ (inr (inr x)) l)
 
@@ -66,13 +67,13 @@ ap-mul-ℤ p q = ap-binary mul-ℤ p q
 ```agda
 explicit-mul-ℤ : ℤ → ℤ → ℤ
 explicit-mul-ℤ (inl x) (inl y) = int-ℕ ((succ-ℕ x) *ℕ (succ-ℕ y))
-explicit-mul-ℤ (inl x) (inr (inl star)) = zero-ℤ
+explicit-mul-ℤ (inl x) (inr (inl _)) = zero-ℤ
 explicit-mul-ℤ (inl x) (inr (inr y)) = neg-ℤ (int-ℕ ((succ-ℕ x) *ℕ (succ-ℕ y)))
-explicit-mul-ℤ (inr (inl star)) (inl y) = zero-ℤ
+explicit-mul-ℤ (inr (inl _)) (inl y) = zero-ℤ
 explicit-mul-ℤ (inr (inr x)) (inl y) = neg-ℤ (int-ℕ ((succ-ℕ x) *ℕ (succ-ℕ y)))
-explicit-mul-ℤ (inr (inl star)) (inr (inl star)) = zero-ℤ
-explicit-mul-ℤ (inr (inl star)) (inr (inr y)) = zero-ℤ
-explicit-mul-ℤ (inr (inr x)) (inr (inl star)) = zero-ℤ
+explicit-mul-ℤ (inr (inl _)) (inr (inl _)) = zero-ℤ
+explicit-mul-ℤ (inr (inl _)) (inr (inr y)) = zero-ℤ
+explicit-mul-ℤ (inr (inr x)) (inr (inl _)) = zero-ℤ
 explicit-mul-ℤ (inr (inr x)) (inr (inr y)) = int-ℕ ((succ-ℕ x) *ℕ (succ-ℕ y))
 
 explicit-mul-ℤ' : ℤ → ℤ → ℤ
@@ -98,7 +99,7 @@ right-zero-law-mul-ℤ : (k : ℤ) → k *ℤ zero-ℤ ＝ zero-ℤ
 right-zero-law-mul-ℤ (inl zero-ℕ) = refl
 right-zero-law-mul-ℤ (inl (succ-ℕ n)) =
   right-zero-law-mul-ℤ (inl n)
-right-zero-law-mul-ℤ (inr (inl star)) = refl
+right-zero-law-mul-ℤ (inr (inl _)) = refl
 right-zero-law-mul-ℤ (inr (inr zero-ℕ)) = refl
 right-zero-law-mul-ℤ (inr (inr (succ-ℕ n))) =
   right-zero-law-mul-ℤ (inr (inr n))
@@ -114,7 +115,7 @@ right-unit-law-mul-ℤ : (k : ℤ) → k *ℤ one-ℤ ＝ k
 right-unit-law-mul-ℤ (inl zero-ℕ) = refl
 right-unit-law-mul-ℤ (inl (succ-ℕ n)) =
   ap ((neg-one-ℤ) +ℤ_) (right-unit-law-mul-ℤ (inl n))
-right-unit-law-mul-ℤ (inr (inl star)) = refl
+right-unit-law-mul-ℤ (inr (inl _)) = refl
 right-unit-law-mul-ℤ (inr (inr zero-ℕ)) = refl
 right-unit-law-mul-ℤ (inr (inr (succ-ℕ n))) =
   ap (one-ℤ +ℤ_) (right-unit-law-mul-ℤ (inr (inr n)))
@@ -130,7 +131,7 @@ right-neg-unit-law-mul-ℤ : (k : ℤ) → k *ℤ neg-one-ℤ ＝ neg-ℤ k
 right-neg-unit-law-mul-ℤ (inl zero-ℕ) = refl
 right-neg-unit-law-mul-ℤ (inl (succ-ℕ n)) =
   ap (one-ℤ +ℤ_) (right-neg-unit-law-mul-ℤ (inl n))
-right-neg-unit-law-mul-ℤ (inr (inl star)) = refl
+right-neg-unit-law-mul-ℤ (inr (inl _)) = refl
 right-neg-unit-law-mul-ℤ (inr (inr zero-ℕ)) = refl
 right-neg-unit-law-mul-ℤ (inr (inr (succ-ℕ n))) =
   ap (neg-one-ℤ +ℤ_) (right-neg-unit-law-mul-ℤ (inr (inr n)))
@@ -149,7 +150,7 @@ left-successor-law-mul-ℤ (inl (succ-ℕ n)) l =
       ( _+ℤ ((inl n) *ℤ l))
       ( inv (right-inverse-law-add-ℤ l)))) ∙
   ( associative-add-ℤ l (neg-ℤ l) ((inl n) *ℤ l))
-left-successor-law-mul-ℤ (inr (inl star)) l =
+left-successor-law-mul-ℤ (inr (inl _)) l =
   inv (right-unit-law-add-ℤ l)
 left-successor-law-mul-ℤ (inr (inr n)) l = refl
 
@@ -162,7 +163,7 @@ left-successor-law-mul-ℤ' k l =
 left-predecessor-law-mul-ℤ :
   (k l : ℤ) → (pred-ℤ k) *ℤ l ＝ (neg-ℤ l) +ℤ (k *ℤ l)
 left-predecessor-law-mul-ℤ (inl n) l = refl
-left-predecessor-law-mul-ℤ (inr (inl star)) l =
+left-predecessor-law-mul-ℤ (inr (inl _)) l =
   ( left-neg-unit-law-mul-ℤ l) ∙
   ( inv (right-unit-law-add-ℤ (neg-ℤ l)))
 left-predecessor-law-mul-ℤ (inr (inr zero-ℕ)) l =
@@ -202,7 +203,7 @@ right-successor-law-mul-ℤ (inl (succ-ℕ n)) l =
                   ( ( ap succ-ℤ (inv (pred-neg-ℤ l))) ∙
                     ( is-section-pred-ℤ (neg-ℤ l)))))))) ∙
         ( associative-add-ℤ (inl (succ-ℕ n)) (neg-ℤ l) ((inl n) *ℤ l)))))
-right-successor-law-mul-ℤ (inr (inl star)) l = refl
+right-successor-law-mul-ℤ (inr (inl _)) l = refl
 right-successor-law-mul-ℤ (inr (inr zero-ℕ)) l = refl
 right-successor-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
   ( left-successor-law-mul-ℤ (in-pos-ℤ n) (succ-ℤ l)) ∙
@@ -242,7 +243,7 @@ right-predecessor-law-mul-ℤ (inl (succ-ℕ n)) l =
               ( ( ap succ-ℤ (commutative-add-ℤ (neg-ℤ l) (in-pos-ℤ n))) ∙
                 ( inv (left-successor-law-add-ℤ (in-pos-ℤ n) (neg-ℤ l))))))) ∙
         ( associative-add-ℤ (in-pos-ℤ (succ-ℕ n)) (neg-ℤ l) ((inl n) *ℤ l)))))
-right-predecessor-law-mul-ℤ (inr (inl star)) l = refl
+right-predecessor-law-mul-ℤ (inr (inl _)) l = refl
 right-predecessor-law-mul-ℤ (inr (inr zero-ℕ)) l = refl
 right-predecessor-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
   ( left-successor-law-mul-ℤ (in-pos-ℤ n) (pred-ℤ l)) ∙
@@ -280,7 +281,7 @@ right-distributive-mul-add-ℤ (inl (succ-ℕ x)) l m =
   ( left-predecessor-law-mul-ℤ ((inl x) +ℤ l) m) ∙
   ( ( ap ((neg-ℤ m) +ℤ_) (right-distributive-mul-add-ℤ (inl x) l m)) ∙
     ( inv (associative-add-ℤ (neg-ℤ m) ((inl x) *ℤ m) (l *ℤ m))))
-right-distributive-mul-add-ℤ (inr (inl star)) l m = refl
+right-distributive-mul-add-ℤ (inr (inl _)) l m = refl
 right-distributive-mul-add-ℤ (inr (inr zero-ℕ)) l m =
   left-successor-law-mul-ℤ l m
 right-distributive-mul-add-ℤ (inr (inr (succ-ℕ n))) l m =
@@ -302,7 +303,7 @@ left-negative-law-mul-ℤ (inl (succ-ℕ n)) l =
   ( ( left-successor-law-mul-ℤ (neg-ℤ (inl n)) l) ∙
     ( ( ap (l +ℤ_) (left-negative-law-mul-ℤ (inl n) l)) ∙
       ( right-negative-law-add-ℤ l ((inl n) *ℤ l))))
-left-negative-law-mul-ℤ (inr (inl star)) l = refl
+left-negative-law-mul-ℤ (inr (inl _)) l = refl
 left-negative-law-mul-ℤ (inr (inr zero-ℕ)) l = refl
 left-negative-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
   ( left-predecessor-law-mul-ℤ (inl n) l) ∙
@@ -323,7 +324,7 @@ associative-mul-ℤ (inl (succ-ℕ n)) l m =
     ( ap
       ( _+ℤ ((inl n) *ℤ (l *ℤ m)))
       ( left-negative-law-mul-ℤ l m)))
-associative-mul-ℤ (inr (inl star)) l m = refl
+associative-mul-ℤ (inr (inl _)) l m = refl
 associative-mul-ℤ (inr (inr zero-ℕ)) l m = refl
 associative-mul-ℤ (inr (inr (succ-ℕ n))) l m =
   ( right-distributive-mul-add-ℤ l ((in-pos-ℤ n) *ℤ l) m) ∙
@@ -339,7 +340,7 @@ commutative-mul-ℤ (inl zero-ℕ) l = inv (right-neg-unit-law-mul-ℤ l)
 commutative-mul-ℤ (inl (succ-ℕ n)) l =
   ( ap ((neg-ℤ l) +ℤ_) (commutative-mul-ℤ (inl n) l)) ∙
   ( inv (right-predecessor-law-mul-ℤ l (inl n)))
-commutative-mul-ℤ (inr (inl star)) l = inv (right-zero-law-mul-ℤ l)
+commutative-mul-ℤ (inr (inl _)) l = inv (right-zero-law-mul-ℤ l)
 commutative-mul-ℤ (inr (inr zero-ℕ)) l = inv (right-unit-law-mul-ℤ l)
 commutative-mul-ℤ (inr (inr (succ-ℕ n))) l =
   ( ap (l +ℤ_) (commutative-mul-ℤ (inr (inr n)) l)) ∙
@@ -416,9 +417,9 @@ compute-mul-ℤ (inl (succ-ℕ x)) (inl y) =
       ( int-ℕ (succ-ℕ y))
       ( int-ℕ ((succ-ℕ x) *ℕ (succ-ℕ y))))) ∙
   ( add-int-ℕ ((succ-ℕ x) *ℕ (succ-ℕ y)) (succ-ℕ y))
-compute-mul-ℤ (inl zero-ℕ) (inr (inl star)) = refl
+compute-mul-ℤ (inl zero-ℕ) (inr (inl _)) = refl
 compute-mul-ℤ (inl zero-ℕ) (inr (inr x)) = ap inl (inv (left-unit-law-add-ℕ x))
-compute-mul-ℤ (inl (succ-ℕ x)) (inr (inl star)) = right-zero-law-mul-ℤ (inl x)
+compute-mul-ℤ (inl (succ-ℕ x)) (inr (inl _)) = right-zero-law-mul-ℤ (inl x)
 compute-mul-ℤ (inl (succ-ℕ x)) (inr (inr y)) =
   ( ( ( ap ((inl y) +ℤ_) (compute-mul-ℤ (inl x) (inr (inr y)))) ∙
       ( inv
@@ -431,7 +432,7 @@ compute-mul-ℤ (inl (succ-ℕ x)) (inr (inr y)) =
         ( int-ℕ (succ-ℕ y))
         ( int-ℕ ((succ-ℕ x) *ℕ (succ-ℕ y)))))) ∙
   ( ap neg-ℤ (add-int-ℕ ((succ-ℕ x) *ℕ (succ-ℕ y)) (succ-ℕ y)))
-compute-mul-ℤ (inr (inl star)) (inl y) = refl
+compute-mul-ℤ (inr (inl _)) (inl y) = refl
 compute-mul-ℤ (inr (inr zero-ℕ)) (inl y) = ap inl (inv (left-unit-law-add-ℕ y))
 compute-mul-ℤ (inr (inr (succ-ℕ x))) (inl y) =
   ( ap ((inl y) +ℤ_) (compute-mul-ℤ (inr (inr x)) (inl y))) ∙
@@ -446,10 +447,10 @@ compute-mul-ℤ (inr (inr (succ-ℕ x))) (inl y) =
             ( inr ∘ inr)
             ( left-successor-law-add-ℕ y ((x *ℕ (succ-ℕ y)) +ℕ y)))))) ∙
     ( ap inl (commutative-add-ℕ y ((succ-ℕ x) *ℕ (succ-ℕ y)))))
-compute-mul-ℤ (inr (inl star)) (inr (inl star)) = refl
-compute-mul-ℤ (inr (inl star)) (inr (inr y)) = refl
-compute-mul-ℤ (inr (inr zero-ℕ)) (inr (inl star)) = refl
-compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inl star)) =
+compute-mul-ℤ (inr (inl _)) (inr (inl _)) = refl
+compute-mul-ℤ (inr (inl _)) (inr (inr y)) = refl
+compute-mul-ℤ (inr (inr zero-ℕ)) (inr (inl _)) = refl
+compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inl _)) =
   right-zero-law-mul-ℤ (inr (inr (succ-ℕ x)))
 compute-mul-ℤ (inr (inr zero-ℕ)) (inr (inr y)) =
   ap
@@ -486,13 +487,13 @@ is-zero-is-zero-mul-ℤ :
   (x y : ℤ) → is-zero-ℤ (x *ℤ y) → (is-zero-ℤ x) + (is-zero-ℤ y)
 is-zero-is-zero-mul-ℤ (inl x) (inl y) H =
   ex-falso (Eq-eq-ℤ (inv (compute-mul-ℤ (inl x) (inl y)) ∙ H))
-is-zero-is-zero-mul-ℤ (inl x) (inr (inl star)) H = inr refl
+is-zero-is-zero-mul-ℤ (inl x) (inr (inl _)) H = inr refl
 is-zero-is-zero-mul-ℤ (inl x) (inr (inr y)) H =
   ex-falso (Eq-eq-ℤ (inv (compute-mul-ℤ (inl x) (inr (inr y))) ∙ H))
-is-zero-is-zero-mul-ℤ (inr (inl star)) y H = inl refl
+is-zero-is-zero-mul-ℤ (inr (inl _)) y H = inl refl
 is-zero-is-zero-mul-ℤ (inr (inr x)) (inl y) H =
   ex-falso (Eq-eq-ℤ (inv (compute-mul-ℤ (inr (inr x)) (inl y)) ∙ H))
-is-zero-is-zero-mul-ℤ (inr (inr x)) (inr (inl star)) H = inr refl
+is-zero-is-zero-mul-ℤ (inr (inr x)) (inr (inl _)) H = inr refl
 is-zero-is-zero-mul-ℤ (inr (inr x)) (inr (inr y)) H =
   ex-falso (Eq-eq-ℤ (inv (compute-mul-ℤ (inr (inr x)) (inr (inr y))) ∙ H))
 ```
