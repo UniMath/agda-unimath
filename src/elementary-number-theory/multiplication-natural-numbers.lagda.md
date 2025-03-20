@@ -8,18 +8,17 @@ module elementary-number-theory.multiplication-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.interchange-law
-open import foundation.negated-equality
+
+open import foundation-core.coproduct-types
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.negation
 ```
 
 </details>
@@ -193,14 +192,6 @@ is-injective-left-mul-ℕ k H p with
   is-successor-is-nonzero-ℕ H
 ... | pair l refl = is-injective-left-mul-succ-ℕ l p
 
-is-emb-left-mul-ℕ : (x : ℕ) → is-nonzero-ℕ x → is-emb (x *ℕ_)
-is-emb-left-mul-ℕ x H =
-  is-emb-is-injective is-set-ℕ (is-injective-left-mul-ℕ x H)
-
-is-emb-right-mul-ℕ : (x : ℕ) → is-nonzero-ℕ x → is-emb (_*ℕ x)
-is-emb-right-mul-ℕ x H =
-  is-emb-is-injective is-set-ℕ (is-injective-right-mul-ℕ x H)
-
 is-nonzero-mul-ℕ :
   (x y : ℕ) → is-nonzero-ℕ x → is-nonzero-ℕ y → is-nonzero-ℕ (x *ℕ y)
 is-nonzero-mul-ℕ x y H K p =
@@ -250,7 +241,7 @@ is-one-mul-ℕ :
 is-one-mul-ℕ .1 .1 refl refl = refl
 
 neq-mul-ℕ :
-  (m n : ℕ) → succ-ℕ m ≠ (succ-ℕ m *ℕ (succ-ℕ (succ-ℕ n)))
+  (m n : ℕ) → ¬ (succ-ℕ m ＝ succ-ℕ m *ℕ (succ-ℕ (succ-ℕ n)))
 neq-mul-ℕ m n p =
   neq-add-ℕ
     ( succ-ℕ m)

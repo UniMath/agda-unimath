@@ -9,6 +9,7 @@ module elementary-number-theory.divisibility-natural-numbers where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -19,6 +20,7 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
@@ -114,7 +116,8 @@ eq-quotient-div-eq-div-ℕ x y z n e H I =
 
 ```agda
 is-prop-div-ℕ : (k x : ℕ) → is-nonzero-ℕ k → is-prop (div-ℕ k x)
-is-prop-div-ℕ k x f = is-prop-map-is-emb (is-emb-right-mul-ℕ k f) x
+is-prop-div-ℕ k x f =
+  is-prop-map-is-emb (is-emb-is-injective is-set-ℕ (is-injective-right-mul-ℕ k f)) x
 ```
 
 ### The divisibility relation is a partial order on the natural numbers
