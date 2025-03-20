@@ -1,6 +1,8 @@
 # Function extensionality
 
 ```agda
+open import foundation.function-extensionality-axiom
+
 module foundation.function-extensionality where
 ```
 
@@ -63,74 +65,7 @@ It follows from this definition that `htpy-eq refl ≐ refl-htpy`, as expected.
 
 ## Definitions
 
-### Equalities induce homotopies
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  htpy-eq : {f g : (x : A) → B x} → f ＝ g → f ~ g
-  htpy-eq p a = ap (ev a) p
-
-  compute-htpy-eq-refl : {f : (x : A) → B x} → htpy-eq refl ＝ refl-htpy' f
-  compute-htpy-eq-refl = refl
-```
-
-### An instance of function extensionality
-
-This property asserts that, _given_ two functions `f` and `g`, the map
-
-```text
-  htpy-eq : f ＝ g → f ~ g
-```
-
-is an equivalence.
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  instance-function-extensionality : (f g : (x : A) → B x) → UU (l1 ⊔ l2)
-  instance-function-extensionality f g = is-equiv (htpy-eq {f = f} {g})
-```
-
-### Based function extensionality
-
-This property asserts that, _given_ a function `f`, the map
-
-```text
-  htpy-eq : f ＝ g → f ~ g
-```
-
-is an equivalence for any function `g` of the same type.
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  based-function-extensionality : (f : (x : A) → B x) → UU (l1 ⊔ l2)
-  based-function-extensionality f =
-    (g : (x : A) → B x) → instance-function-extensionality f g
-```
-
-### The function extensionality principle with respect to a universe level
-
-```agda
-function-extensionality-Level : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-function-extensionality-Level l1 l2 =
-  {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) → based-function-extensionality f
-```
-
 ### The function extensionality axiom
-
-```agda
-function-extensionality : UUω
-function-extensionality = {l1 l2 : Level} → function-extensionality-Level l1 l2
-```
 
 Rather than postulating a witness of `function-extensionality` directly, we
 postulate the constituents of a coherent two-sided inverse to `htpy-eq`. The
@@ -242,33 +177,6 @@ module _
         ( inv (ap-binary _∙h_ (is-section-eq-htpy H) (is-section-eq-htpy K)) ∙
           inv (htpy-eq-concat (eq-htpy H) (eq-htpy K)))) ∙
       ( is-retraction-eq-htpy (eq-htpy H ∙ eq-htpy K))
-```
-
-### `htpy-eq` preserves inverses
-
-For any two functions `f g : (x : A) → B x` we have a
-[commuting square](foundation-core.commuting-squares-of-maps.md)
-
-```text
-                  inv
-       (f = g) ---------> (g = f)
-          |                  |
-  htpy-eq |                  | htpy-eq
-          ∨                  ∨
-       (f ~ g) ---------> (g ~ f).
-                inv-htpy
-```
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
-  where
-
-  compute-htpy-eq-inv : inv-htpy {f = f} {g} ∘ htpy-eq ~ htpy-eq ∘ inv
-  compute-htpy-eq-inv refl = refl
-
-  compute-inv-htpy-htpy-eq : htpy-eq ∘ inv ~ inv-htpy {f = f} {g} ∘ htpy-eq
-  compute-inv-htpy-htpy-eq = inv-htpy compute-htpy-eq-inv
 ```
 
 ### `eq-htpy` preserves inverses
