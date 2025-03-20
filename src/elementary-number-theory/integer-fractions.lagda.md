@@ -12,7 +12,6 @@ open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.nonzero-integers
-open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions

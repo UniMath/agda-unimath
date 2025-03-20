@@ -10,11 +10,8 @@ module metric-spaces.cauchy-approximations-premetric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.function-types
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels

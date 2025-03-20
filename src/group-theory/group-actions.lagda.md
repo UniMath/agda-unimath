@@ -19,7 +19,6 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
-open import group-theory.subgroups
 open import group-theory.symmetric-groups
 open import group-theory.trivial-group-homomorphisms
 ```

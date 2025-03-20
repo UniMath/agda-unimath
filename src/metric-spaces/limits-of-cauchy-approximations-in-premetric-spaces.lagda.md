@@ -9,21 +9,14 @@ module metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.propositions
-open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-premetric-spaces
 open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.premetric-spaces
-open import metric-spaces.short-functions-premetric-spaces
 open import metric-spaces.symmetric-premetric-structures
 open import metric-spaces.triangular-premetric-structures
 ```

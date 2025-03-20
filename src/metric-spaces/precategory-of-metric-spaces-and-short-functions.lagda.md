@@ -12,17 +12,12 @@ open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
-open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
-open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -31,7 +26,6 @@ open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometric-equivalences-premetric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.precategory-of-metric-spaces-and-isometries
 open import metric-spaces.short-functions-metric-spaces
 ```
 

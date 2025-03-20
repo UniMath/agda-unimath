@@ -21,7 +21,6 @@ open import foundation.function-extensionality-axiom
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.propositions
 open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```

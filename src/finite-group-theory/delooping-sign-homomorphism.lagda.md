@@ -60,7 +60,6 @@ open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 open import foundation.whiskering-identifications-concatenation
 
-open import group-theory.concrete-groups
 open import group-theory.generating-sets-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-concrete-groups

@@ -9,16 +9,12 @@ module elementary-number-theory.multiplication-integers where
 ```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.addition-positive-and-negative-integers
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.equality-integers
-open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonzero-integers
-open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -29,10 +25,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
-open import foundation.sets
-open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
-open import foundation.unit-type
 open import foundation.universe-levels
 ```
 

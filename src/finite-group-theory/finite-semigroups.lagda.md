@@ -19,7 +19,6 @@ open import foundation.mere-equivalences
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 

@@ -15,7 +15,6 @@ open import foundation.equivalences
 open import foundation.full-subtypes
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.inhabited-types
 open import foundation.postcomposition-functions
 open import foundation.propositions

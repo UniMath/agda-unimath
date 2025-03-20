@@ -13,7 +13,6 @@ open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.postcomposition-functions
 open import foundation.projective-types
-open import foundation.propositional-truncations
 open import foundation.sections
 open import foundation.split-surjective-maps
 open import foundation.surjective-maps

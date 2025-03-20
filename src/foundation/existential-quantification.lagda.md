@@ -9,7 +9,6 @@ module foundation.existential-quantification where
 ```agda
 open import foundation.conjunction
 open import foundation.dependent-pair-types
-open import foundation.functoriality-propositional-truncation
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
@@ -18,7 +17,6 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 ```

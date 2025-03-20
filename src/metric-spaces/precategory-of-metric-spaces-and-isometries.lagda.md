@@ -11,18 +11,12 @@ open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.subtypes
-open import foundation.torsorial-type-families
-open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

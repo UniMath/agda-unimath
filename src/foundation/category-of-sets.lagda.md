@@ -18,13 +18,8 @@ open import category-theory.large-precategories
 open import category-theory.limits-precategories
 open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
-open import category-theory.right-extensions-precategories
-open import category-theory.right-kan-extensions-precategories
-open import category-theory.terminal-category
 
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
@@ -32,7 +27,6 @@ open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.isomorphisms-of-sets
-open import foundation.multivariable-homotopies
 open import foundation.raising-universe-levels
 open import foundation.retractions
 open import foundation.sections

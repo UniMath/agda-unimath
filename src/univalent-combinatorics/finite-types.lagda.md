@@ -43,7 +43,6 @@ open import foundation.universe-levels
 open import foundation-core.torsorial-type-families
 
 open import univalent-combinatorics.counting
-open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.standard-finite-types
 ```
 

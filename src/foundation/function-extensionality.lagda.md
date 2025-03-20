@@ -12,7 +12,6 @@ module foundation.function-extensionality where
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.evaluation-functions
 open import foundation.implicit-function-types
 open import foundation.universe-levels
 

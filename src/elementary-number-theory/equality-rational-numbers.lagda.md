@@ -7,9 +7,7 @@ module elementary-number-theory.equality-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integer-fractions
-open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 

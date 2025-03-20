@@ -18,7 +18,6 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
-open import foundation.sets
 
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.decidable-propositions

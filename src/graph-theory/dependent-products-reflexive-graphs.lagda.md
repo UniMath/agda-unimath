@@ -8,7 +8,6 @@ module graph-theory.dependent-products-reflexive-graphs where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-dependent-identifications
 open import foundation.binary-transport
 open import foundation.commuting-squares-of-identifications
 open import foundation.contractible-types
@@ -22,19 +21,15 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.reflexive-relations
 open import foundation.retractions
 open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import graph-theory.base-change-dependent-reflexive-graphs
 open import graph-theory.cartesian-products-reflexive-graphs
-open import graph-theory.dependent-products-directed-graphs
 open import graph-theory.dependent-reflexive-graphs
 open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs

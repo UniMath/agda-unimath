@@ -7,7 +7,6 @@ module foundation.uniqueness-truncation where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.function-extensionality-axiom
 open import foundation.universe-levels
 
 open import foundation-core.function-types

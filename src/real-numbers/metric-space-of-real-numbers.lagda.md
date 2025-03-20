@@ -11,17 +11,12 @@ module real-numbers.metric-space-of-real-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
-open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-cartesian-products-of-types
-open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -37,7 +32,6 @@ open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
-open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.premetric-spaces
 open import metric-spaces.premetric-structures
 open import metric-spaces.pseudometric-structures

@@ -9,14 +9,12 @@ module foundation.transposition-identifications-along-equivalences where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-identifications
-open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
-open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.equivalences
 open import foundation-core.homotopies
+open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>

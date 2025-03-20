@@ -17,7 +17,6 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.powersets
-open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels

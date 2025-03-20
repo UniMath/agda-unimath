@@ -9,27 +9,19 @@ module foundation.diagonal-maps-of-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
-open import foundation.functoriality-dependent-pair-types
-open import foundation.morphisms-arrows
-open import foundation.postcomposition-functions
-open import foundation.retracts-of-types
 open import foundation.transposition-identifications-along-equivalences
 open import foundation.universe-levels
 
-open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.propositions
-open import foundation-core.retractions
-open import foundation-core.sections
 ```
 
 </details>

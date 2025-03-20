@@ -7,36 +7,22 @@ module foundation.continuations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equality-cartesian-product-types
 open import foundation.evaluation-functions
-open import foundation.logical-equivalences
-open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-function-types
-open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
-open import foundation.universal-property-cartesian-product-types
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
-open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.retractions
-open import foundation-core.sections
-open import foundation-core.transport-along-identifications
 
 open import orthogonal-factorization-systems.extensions-maps
-open import orthogonal-factorization-systems.modal-operators
-open import orthogonal-factorization-systems.types-local-at-maps
-open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 
 </details>

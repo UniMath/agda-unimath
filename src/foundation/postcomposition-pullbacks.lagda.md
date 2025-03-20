@@ -21,7 +21,6 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.homotopies
 open import foundation-core.postcomposition-functions
 open import foundation-core.pullbacks
 open import foundation-core.universal-property-pullbacks

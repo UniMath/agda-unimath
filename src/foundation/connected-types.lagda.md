@@ -19,7 +19,6 @@ open import foundation.truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types

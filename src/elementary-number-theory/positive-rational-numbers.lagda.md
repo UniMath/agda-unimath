@@ -9,7 +9,6 @@ module elementary-number-theory.positive-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
@@ -30,7 +29,6 @@ open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integer-fractions
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.reduced-integer-fractions
 open import elementary-number-theory.strict-inequality-integers
 open import elementary-number-theory.strict-inequality-rational-numbers
 

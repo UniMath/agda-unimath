@@ -12,7 +12,6 @@ module finite-group-theory.finite-type-groups where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.0-connected-types
-open import foundation.1-types
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types

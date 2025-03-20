@@ -33,7 +33,6 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
 open import group-theory.homomorphisms-concrete-groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups

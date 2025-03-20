@@ -10,7 +10,6 @@ module foundation.disjoint-subtypes where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.intersections-subtypes
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels

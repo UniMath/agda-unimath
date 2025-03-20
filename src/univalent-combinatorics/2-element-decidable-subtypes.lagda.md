@@ -13,7 +13,6 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 
 open import foundation.automorphisms
 open import foundation.booleans
-open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-types
@@ -34,7 +33,6 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types

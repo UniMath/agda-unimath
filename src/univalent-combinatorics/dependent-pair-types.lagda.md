@@ -10,7 +10,6 @@ open import foundation.dependent-pair-types public
 
 ```agda
 open import foundation.complements
-open import foundation.contractible-types
 open import foundation.decidable-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types

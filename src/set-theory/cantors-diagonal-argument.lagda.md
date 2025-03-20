@@ -11,19 +11,13 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.discrete-types
-open import foundation.double-negation
 open import foundation.function-extensionality-axiom
 open import foundation.identity-types
-open import foundation.isolated-elements
-open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
-open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.surjective-maps
@@ -34,7 +28,6 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
 
 open import set-theory.countable-sets
-open import set-theory.infinite-sets
 open import set-theory.uncountable-sets
 ```
 

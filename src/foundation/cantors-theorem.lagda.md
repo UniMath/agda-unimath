@@ -22,7 +22,6 @@ open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.propositions
 
 open import logic.de-morgan-propositions
 open import logic.de-morgan-subtypes

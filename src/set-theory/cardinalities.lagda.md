@@ -7,7 +7,6 @@ module set-theory.cardinalities where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality-axiom

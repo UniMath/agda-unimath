@@ -7,7 +7,6 @@ module group-theory.minkowski-multiplication-commutative-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
@@ -19,10 +18,7 @@ open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
 open import group-theory.minkowski-multiplication-monoids
-open import group-theory.monoids
 open import group-theory.subsets-commutative-monoids
-
-open import logic.functoriality-existential-quantification
 ```
 
 </details>

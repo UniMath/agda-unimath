@@ -23,8 +23,6 @@ open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.surjective-maps

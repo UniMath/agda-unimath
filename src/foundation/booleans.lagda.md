@@ -8,7 +8,6 @@ module foundation.booleans where
 
 ```agda
 open import foundation.decidable-equality
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.discrete-types
 open import foundation.involutions
@@ -24,7 +23,6 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
 open import foundation-core.sections

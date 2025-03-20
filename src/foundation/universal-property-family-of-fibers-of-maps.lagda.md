@@ -16,7 +16,6 @@ open import foundation.function-extensionality-axiom
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
-open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
