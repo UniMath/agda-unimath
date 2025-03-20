@@ -11,7 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.sets
+open import foundation.sets
 
 open import structured-types.pointed-types
 ```

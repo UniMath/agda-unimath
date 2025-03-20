@@ -8,12 +8,10 @@ module foundation-core.sets where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
@@ -195,24 +193,6 @@ abstract
     {l1 l2 : Level} (A : UU l1) {B : UU l2} (e : A ≃ B) →
     is-set A → is-set B
   is-set-equiv' = is-trunc-equiv' zero-𝕋
-
-abstract
-  is-set-equiv-is-set :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-    is-set A → is-set B → is-set (A ≃ B)
-  is-set-equiv-is-set = is-trunc-equiv-is-trunc zero-𝕋
-
-module _
-  {l1 l2 : Level} (A : Set l1) (B : Set l2)
-  where
-
-  equiv-Set : UU (l1 ⊔ l2)
-  equiv-Set = type-Set A ≃ type-Set B
-
-  equiv-set-Set : Set (l1 ⊔ l2)
-  pr1 equiv-set-Set = equiv-Set
-  pr2 equiv-set-Set =
-    is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
 ```
 
 ### If a type injects into a set, then it is a set

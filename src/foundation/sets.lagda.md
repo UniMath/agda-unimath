@@ -178,6 +178,28 @@ precomp-Set :
 precomp-Set f C = precomp f (type-Set C)
 ```
 
+### The type of equivalences between sets is a set
+
+```agda
+abstract
+  is-set-equiv-is-set :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    is-set A → is-set B → is-set (A ≃ B)
+  is-set-equiv-is-set = is-trunc-equiv-is-trunc zero-𝕋
+
+module _
+  {l1 l2 : Level} (A : Set l1) (B : Set l2)
+  where
+
+  equiv-Set : UU (l1 ⊔ l2)
+  equiv-Set = type-Set A ≃ type-Set B
+
+  equiv-set-Set : Set (l1 ⊔ l2)
+  pr1 equiv-set-Set = equiv-Set
+  pr2 equiv-set-Set =
+    is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
+```
+
 ### Extensionality of sets
 
 ```agda
