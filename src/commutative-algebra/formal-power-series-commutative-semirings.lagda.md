@@ -15,6 +15,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.pairs-with-natural-sums
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -359,35 +360,7 @@ module _
 ### Multiplication
 
 ```agda
-pair-with-sum-ℕ : ℕ → UU lzero
-pair-with-sum-ℕ n = Σ ℕ ( λ a → Σ ℕ (λ b → b +ℕ a ＝ n))
 
-abstract
-  equiv-pair-with-sum-leq-ℕ :
-    (n : ℕ) → Σ ℕ (λ k → leq-ℕ k n) ≃ pair-with-sum-ℕ n
-  equiv-pair-with-sum-leq-ℕ n =
-    ( λ (k , k≤n) → k , subtraction-leq-ℕ k n k≤n) ,
-    ((λ (k , l , l+k=n) → k , leq-subtraction-ℕ k n l l+k=n) ,
-      λ (k , l , l+k=n) →
-        let
-          (l' , l'+k=n) = subtraction-leq-ℕ k n (leq-subtraction-ℕ k n l l+k=n)
-        in
-          eq-pair-Σ
-            ( refl)
-            ( eq-pair-Σ
-              (is-injective-right-add-ℕ k (l'+k=n ∙ inv l+k=n))
-              (eq-type-Prop (Id-Prop ℕ-Set (l +ℕ k) n)))) ,
-    ((λ (k , l , l+k=n) → k , leq-subtraction-ℕ k n l l+k=n) ,
-    (λ (k , k≤n) → eq-pair-Σ refl (eq-type-Prop (leq-ℕ-Prop k n))))
-
-  count-pair-with-sum-ℕ : (n : ℕ) → count (pair-with-sum-ℕ n)
-  count-pair-with-sum-ℕ n =
-    succ-ℕ n , equiv-pair-with-sum-leq-ℕ n ∘e equiv-fin-succ-leq-ℕ n
-
-finite-type-pair-with-sum-ℕ : ℕ → Finite-Type lzero
-finite-type-pair-with-sum-ℕ n =
-  pair-with-sum-ℕ n ,
-  is-finite-count (count-pair-with-sum-ℕ n)
 
 module _
   {l : Level} (R : Commutative-Semiring l)
@@ -426,31 +399,6 @@ module _
 #### Associativity
 
 ```agda
-module _
-  (n : ℕ)
-  where
-
-  map-equiv-pair-with-sum-pr1-pr2 :
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1) →
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2)
-  pr1 (map-equiv-pair-with-sum-pr1-pr2 ((p , c , c+p=n) , _)) =
-    (c , p , commutative-add-ℕ p c ∙ c+p=n)
-  pr2 (map-equiv-pair-with-sum-pr1-pr2 (_ , y)) = y
-
-  map-inv-equiv-pair-with-sum-pr1-pr2 :
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2) →
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1)
-  map-inv-equiv-pair-with-sum-pr1-pr2 ((c , p , p+c=n) , a , b , b+a=p) =
-    ((p , c , commutative-add-ℕ c p ∙ p+c=n) , a , b , b+a=p)
-
-  is-section-map-inv-equiv-pair-with-sum-pr1-pr2 :
-    is-section map-equiv-pair-with-sum-pr1-pr2 map-inv-equiv-pair-with-sum-pr1-pr2
-  is-section-map-inv-equiv-pair-with-sum-pr1-pr2 x@(y@(c , p , p+c=n) , a , b , b+a=p) = {!   !}
-
-  is-retraction-map-inv-equiv-pair-with-sum-pr1-pr2 :
-    is-retraction map-equiv-pair-with-sum-pr1-pr2 map-inv-equiv-pair-with-sum-pr1-pr2
-  is-retraction-map-inv-equiv-pair-with-sum-pr1-pr2 ((p , c , c+p=n) , a , b , b+a=p) = {!   !}
-
 module _
   {l : Level} (R : Commutative-Semiring l)
   (p q r : formal-power-series-Commutative-Semiring R)
@@ -526,6 +474,80 @@ module _
                   ( finite-type-pair-with-sum-ℕ n)
                   ( finite-type-pair-with-sum-ℕ ∘ pr1)
                   ( _))
+          ＝
+            sum-finite-Commutative-Semiring
+              ( R)
+              ( Σ-Finite-Type
+                ( finite-type-pair-with-sum-ℕ n)
+                ( finite-type-pair-with-sum-ℕ ∘ pr1 ∘ pr2))
+              ( λ ((a , b , _) , c , d , _) →
+                (coeff p c *R coeff q d) *R coeff r a)
+            by
+              sum-equiv-finite-Commutative-Semiring R _ _
+                ( inv-equiv (equiv-pair-with-sum-pr1-pr2 n))
+                ( _)
+          ＝
+            sum-finite-Commutative-Semiring
+              ( R)
+              ( Σ-Finite-Type
+                ( finite-type-pair-with-sum-ℕ n)
+                ( finite-type-pair-with-sum-ℕ ∘ pr1 ∘ pr2))
+              ( λ ((a , b , _) , c , d , _) →
+                coeff p c *R (coeff q d *R coeff r a))
+            by
+              ap
+                ( sum-finite-Commutative-Semiring R _)
+                ( eq-htpy (λ _ → associative-mul-Commutative-Semiring R _ _ _))
+          ＝
+            sum-finite-Commutative-Semiring
+              ( R)
+              ( Σ-Finite-Type
+                ( finite-type-pair-with-sum-ℕ n)
+                ( finite-type-pair-with-sum-ℕ ∘ pr1 ∘ pr2))
+              ( λ ((a , b , _) , c , d , _) →
+                coeff p a *R (coeff q c *R coeff r d))
+            by
+              sum-aut-finite-Commutative-Semiring
+                ( R)
+                ( Σ-Finite-Type
+                  ( finite-type-pair-with-sum-ℕ n)
+                  ( finite-type-pair-with-sum-ℕ ∘ pr1 ∘ pr2))
+                ( equiv-permute-components-triple-with-sum-pr2 n)
+                ( _)
+          ＝
+            sum-finite-Commutative-Semiring
+              ( R)
+              ( finite-type-pair-with-sum-ℕ n)
+              ( λ (a , b , _) →
+                sum-finite-Commutative-Semiring
+                ( R)
+                ( finite-type-pair-with-sum-ℕ b)
+                ( λ (c , d , _) → coeff p a *R (coeff q c *R coeff r d)))
+            by
+              sum-Σ-finite-Commutative-Semiring
+                ( R)
+                ( finite-type-pair-with-sum-ℕ n)
+                ( finite-type-pair-with-sum-ℕ ∘ pr1 ∘ pr2)
+                ( λ (a , b , _) (c , d , _) →
+                  coeff p a *R (coeff q c *R coeff r d))
+          ＝
+            sum-finite-Commutative-Semiring
+              ( R)
+              ( finite-type-pair-with-sum-ℕ n)
+              ( λ (a , b , _) →
+                coeff p a *R
+                sum-finite-Commutative-Semiring
+                  ( R)
+                  ( finite-type-pair-with-sum-ℕ b)
+                  ( λ (c , d , _) → coeff q c *R coeff r d))
+            by
+              ap
+                ( sum-finite-Commutative-Semiring
+                  ( R)
+                  ( finite-type-pair-with-sum-ℕ n))
+              ( eq-htpy
+                ( λ (a , b , _) →
+                  inv {! left-distributive-mul-sum-Commutative-Semiring R  !}))
           ＝ {!   !} by {!   !})
       where
         _*R_ :
