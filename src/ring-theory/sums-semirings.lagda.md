@@ -61,7 +61,7 @@ sum-finite-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (A : Finite-Type l2) →
   (type-Finite-Type A → type-Semiring R) → type-Semiring R
 sum-finite-Semiring R =
-  sum-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+  mul-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ## Properties
