@@ -28,7 +28,7 @@ open import foundation.universe-levels
 Monotic endompas of natural numbers are functions `f : ℕ → ℕ` that preserves or
 inverse (strict) inequality of natural numbers.
 
-## Definition
+## Definitions
 
 ### Increasing endomaps of natural numbers
 
@@ -126,7 +126,7 @@ module _
 
 ## Properties
 
-### There exist no strictly decreasing endomaps of natural numbers
+### There exist no strictly decreasing endomap of natural numbers
 
 ```agda
 no-strictly-decreasing-endomap-leq-ℕ :
