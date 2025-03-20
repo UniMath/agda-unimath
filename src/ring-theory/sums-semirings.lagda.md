@@ -61,7 +61,7 @@ sum-finite-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (A : Finite-Type l2) →
   (type-Finite-Type A → type-Semiring R) → type-Semiring R
 sum-finite-Semiring R =
-  mul-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+  mul-sum-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ## Properties
@@ -106,7 +106,7 @@ module _
     {f g : type-Finite-Type A → type-Semiring R} → (f ~ g) →
     sum-finite-Semiring R A f ＝ sum-finite-Semiring R A g
   htpy-sum-finite-Semiring =
-    htpy-mul-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    htpy-mul-sum-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Sums are equal to the zero-th term plus the rest
@@ -173,12 +173,12 @@ module _
         ( add-Semiring' R (mul-Semiring R (f (inr star)) x))
         ( right-distributive-mul-sum-Semiring n (f ∘ inl-Fin n) x))
 
-    left-distributive-mul-finite-Semiring :
+    left-distributive-mul-sum-finite-Semiring :
       {l2 : Level} (A : Finite-Type l2) (x : type-Semiring R) →
       (f : type-Finite-Type A → type-Semiring R) →
       mul-Semiring R x (sum-finite-Semiring R A f) ＝
       sum-finite-Semiring R A (mul-Semiring R x ∘ f)
-    left-distributive-mul-finite-Semiring A x f =
+    left-distributive-mul-sum-finite-Semiring A x f =
       do
         cA ← is-finite-type-Finite-Type A
         equational-reasoning
@@ -195,7 +195,7 @@ module _
             by
               ap
                 ( mul-Semiring R x)
-                ( eq-mul-finite-count-Commutative-Monoid _ A cA f)
+                ( eq-mul-sum-finite-count-Commutative-Monoid _ A cA f)
           ＝
             mul-count-Commutative-Monoid
               ( additive-commutative-monoid-Semiring R)
@@ -208,7 +208,7 @@ module _
                 ( x)
                 ( f ∘ map-equiv-count cA)
           ＝ sum-finite-Semiring R A (mul-Semiring R x ∘ f)
-            by inv (eq-mul-finite-count-Commutative-Monoid _ A cA _)
+            by inv (eq-mul-sum-finite-count-Commutative-Monoid _ A cA _)
       where
         open
           do-syntax-trunc-Prop
@@ -217,12 +217,12 @@ module _
               ( mul-Semiring R x (sum-finite-Semiring R A f))
               ( sum-finite-Semiring R A (mul-Semiring R x ∘ f)))
 
-    right-distributive-mul-finite-Semiring :
+    right-distributive-mul-sum-finite-Semiring :
       {l2 : Level} (A : Finite-Type l2) →
       (f : type-Finite-Type A → type-Semiring R) (x : type-Semiring R) →
       mul-Semiring R (sum-finite-Semiring R A f) x ＝
       sum-finite-Semiring R A (mul-Semiring' R x ∘ f)
-    right-distributive-mul-finite-Semiring A f x =
+    right-distributive-mul-sum-finite-Semiring A f x =
       do
         cA ← is-finite-type-Finite-Type A
         equational-reasoning
@@ -239,7 +239,7 @@ module _
             by
               ap
                 ( mul-Semiring' R x)
-                ( eq-mul-finite-count-Commutative-Monoid _ A cA f)
+                ( eq-mul-sum-finite-count-Commutative-Monoid _ A cA f)
           ＝
             mul-count-Commutative-Monoid
               ( additive-commutative-monoid-Semiring R)
@@ -252,7 +252,7 @@ module _
                 ( f ∘ map-equiv-count cA)
                 ( x)
           ＝ sum-finite-Semiring R A (mul-Semiring' R x ∘ f)
-            by inv (eq-mul-finite-count-Commutative-Monoid _ A cA _)
+            by inv (eq-mul-sum-finite-count-Commutative-Monoid _ A cA _)
       where
         open
           do-syntax-trunc-Prop
