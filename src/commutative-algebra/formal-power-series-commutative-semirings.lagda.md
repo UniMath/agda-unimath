@@ -454,7 +454,7 @@ module _
                         ( q)
                         ( a))
                       ( refl) ∙
-                    right-distributive-mul-finite-Commutative-Semiring
+                    right-distributive-mul-sum-finite-Commutative-Semiring
                       ( R)
                       ( _)
                       ( _)
@@ -535,11 +535,7 @@ module _
               ( R)
               ( finite-type-pair-with-sum-ℕ n)
               ( λ (a , b , _) →
-                coeff p a *R
-                sum-finite-Commutative-Semiring
-                  ( R)
-                  ( finite-type-pair-with-sum-ℕ b)
-                  ( λ (c , d , _) → coeff q c *R coeff r d))
+                coeff p a *R coeff (q *fps r) b)
             by
               ap
                 ( sum-finite-Commutative-Semiring
@@ -547,8 +543,28 @@ module _
                   ( finite-type-pair-with-sum-ℕ n))
               ( eq-htpy
                 ( λ (a , b , _) →
-                  inv {! left-distributive-mul-sum-Commutative-Semiring R  !}))
-          ＝ {!   !} by {!   !})
+                  inv
+                    ( left-distributive-mul-sum-finite-Commutative-Semiring
+                      ( R)
+                      ( finite-type-pair-with-sum-ℕ b)
+                      ( coeff p a)
+                      ( _)) ∙
+                  ap
+                    ( coeff p a *R_)
+                    ( inv
+                      ( eq-coefficient-mul-formal-power-series-Commutative-Semiring
+                        ( R)
+                        ( q)
+                        ( r)
+                        ( b)))))
+          ＝ coeff (p *fps (q *fps r)) n
+            by
+              inv
+                ( eq-coefficient-mul-formal-power-series-Commutative-Semiring
+                  ( R)
+                  ( p)
+                  ( q *fps r)
+                  ( n)))
       where
         _*R_ :
           type-Commutative-Semiring R → type-Commutative-Semiring R →
