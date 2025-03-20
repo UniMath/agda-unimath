@@ -246,15 +246,22 @@ split-sum-Commutative-Ring A n (succ-ℕ m) f =
 
 ```agda
 module _
-  {l : Level} (A : Commutative-Ring l)
+  {l : Level} (R : Commutative-Ring l)
   where
 
   sum-zero-Commutative-Ring :
     (n : ℕ) →
-    sum-Commutative-Ring A n
-      ( zero-functional-vec-Commutative-Ring A n) ＝
-    zero-Commutative-Ring A
-  sum-zero-Commutative-Ring = sum-zero-Ring (ring-Commutative-Ring A)
+    sum-Commutative-Ring R n
+      ( zero-functional-vec-Commutative-Ring R n) ＝
+    zero-Commutative-Ring R
+  sum-zero-Commutative-Ring = sum-zero-Ring (ring-Commutative-Ring R)
+
+  sum-zero-finite-Commutative-Ring :
+    {l2 : Level} (A : Finite-Type l2) →
+    sum-finite-Commutative-Ring R A (λ _ → zero-Commutative-Ring R) ＝
+    zero-Commutative-Ring R
+  sum-zero-finite-Commutative-Ring =
+    sum-zero-finite-Ring (ring-Commutative-Ring R)
 ```
 
 ### Permutations preserve sums

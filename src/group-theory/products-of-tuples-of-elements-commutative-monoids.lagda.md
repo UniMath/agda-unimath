@@ -186,15 +186,15 @@ module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  product-unit-Commutative-Monoid :
+  mul-unit-Commutative-Monoid :
     (n : ℕ) →
     mul-fin-Commutative-Monoid
       ( M)
       ( n)
       ( unit-functional-vec-Commutative-Monoid M n) ＝
     unit-Commutative-Monoid M
-  product-unit-Commutative-Monoid =
-    product-unit-Monoid (monoid-Commutative-Monoid M)
+  mul-unit-Commutative-Monoid =
+    mul-unit-Monoid (monoid-Commutative-Monoid M)
 ```
 
 ### Splitting products
@@ -476,6 +476,44 @@ module _
       is-unit-Commutative-Monoid M (mul-finite-Commutative-Monoid M A f)
     mul-is-empty-finite-Commutative-Monoid =
       eq-mul-finite-count-Commutative-Monoid M A (count-is-empty H)
+```
+
+### The product of units is the unit
+
+```agda
+module _
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (A : Finite-Type l2)
+  where
+
+  mul-unit-finite-Commutative-Monoid :
+    is-unit-Commutative-Monoid
+      ( M)
+      ( mul-finite-Commutative-Monoid
+        ( M)
+        ( A)
+        ( λ _ → unit-Commutative-Monoid M))
+  mul-unit-finite-Commutative-Monoid =
+    do
+      cA ← is-finite-type-Finite-Type A
+      equational-reasoning
+        mul-finite-Commutative-Monoid M A (λ _ → unit-Commutative-Monoid M)
+        ＝
+          mul-count-Commutative-Monoid
+            ( M)
+            ( type-Finite-Type A)
+            ( cA)
+            ( λ _ → unit-Commutative-Monoid M)
+          by eq-mul-finite-count-Commutative-Monoid M A cA _
+        ＝ unit-Commutative-Monoid M by mul-unit-Commutative-Monoid M _
+    where
+      open
+        do-syntax-trunc-Prop
+          (is-unit-prop-Commutative-Monoid
+            ( M)
+            ( mul-finite-Commutative-Monoid
+              ( M)
+              ( A)
+              ( λ _ → unit-Commutative-Monoid M)))
 ```
 
 ### Products over a finite type are homotopy invariant

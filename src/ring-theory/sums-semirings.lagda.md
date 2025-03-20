@@ -338,7 +338,13 @@ module _
     (n : ℕ) →
     sum-Semiring R n (zero-functional-vec-Semiring R n) ＝ zero-Semiring R
   sum-zero-Semiring =
-    product-unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    mul-unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+
+  sum-zero-finite-Semiring :
+    {l2 : Level} (A : Finite-Type l2) →
+    sum-finite-Semiring R A (λ _ → zero-Semiring R) ＝ zero-Semiring R
+  sum-zero-finite-Semiring =
+    mul-unit-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Splitting sums
