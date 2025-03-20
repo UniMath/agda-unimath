@@ -9,7 +9,6 @@ module logic.markovs-principle where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -20,6 +19,7 @@ open import foundation.negation
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
+open import foundation-core.booleans
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets

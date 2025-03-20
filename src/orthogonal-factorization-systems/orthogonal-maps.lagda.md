@@ -997,7 +997,7 @@ under products.
 
 **Note:** This result can also be obtained as a special case of the previous one
 by taking the indexing type to be the
-[two-element type](foundation.booleans.md).
+[two-element type](foundation-core.booleans.md).
 
 ```agda
 module _

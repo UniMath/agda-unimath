@@ -7,10 +7,10 @@ module foundation.raising-universe-levels-booleans where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.booleans
 open import foundation.raising-universe-levels
 open import foundation.universe-levels
 
+open import foundation-core.booleans
 open import foundation-core.equivalences
 ```
 

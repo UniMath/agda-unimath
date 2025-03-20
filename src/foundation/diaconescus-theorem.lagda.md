@@ -44,8 +44,8 @@ We follow the proof given under Theorem 10.1.14 in {{#cite UF13}}.
 [suspension](synthetic-homotopy-theory.suspensions-of-propositions.md) `ΣP` is a
 [set](foundation-core.sets.md) with the property that `(N ＝ S) ≃ ΣP`, where `N`
 and `S` are the _poles_ of `ΣP`. There is a surjection from the
-[booleans](foundation.booleans.md) onto the suspension `f : bool ↠ ΣP` such that
-`f true ≐ N` and `f false ≐ S`. Its
+[booleans](foundation-core.booleans.md) onto the suspension `f : bool ↠ ΣP` such
+that `f true ≐ N` and `f false ≐ S`. Its
 [fiber family](foundation-core.fibers-of-maps.md) is in other words an
 [inhabited](foundation.inhabited-types.md) family over `ΣP`. Applying the axiom
 of choice to this family, we obtain a

@@ -9,9 +9,9 @@ module primitives.floats where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
 open import foundation.universe-levels
 
+open import foundation-core.booleans
 open import foundation-core.maybe
 
 open import primitives.machine-integers

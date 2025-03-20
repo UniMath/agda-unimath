@@ -6,6 +6,7 @@
 module foundation-core where
 
 open import foundation-core.1-types public
+open import foundation-core.booleans public
 open import foundation-core.cartesian-product-types public
 open import foundation-core.coherently-invertible-maps public
 open import foundation-core.commuting-prisms-of-maps public
