@@ -124,9 +124,7 @@ module _
   where
 
   equiv-coproduct-decomposition-decidable-subtype :
-    A ≃
-    type-decidable-subtype P +
-    type-decidable-subtype (complement-decidable-subtype P)
+    A ≃ type-decidable-subtype P + type-complement-decidable-subtype P
   equiv-coproduct-decomposition-decidable-subtype =
     equivalence-reasoning
     A
@@ -137,8 +135,7 @@ module _
             is-proof-irrelevant-is-prop
               ( is-prop-is-decidable (is-prop-is-in-decidable-subtype P x))
               ( is-decidable-decidable-subtype P x))
-    ≃ type-decidable-subtype P +
-      type-decidable-subtype (complement-decidable-subtype P)
+    ≃ type-decidable-subtype P + type-complement-decidable-subtype P
       by
         left-distributive-Σ-coproduct A
           ( is-in-decidable-subtype P)
