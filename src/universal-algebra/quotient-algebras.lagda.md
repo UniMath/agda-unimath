@@ -10,6 +10,7 @@ module universal-algebra.quotient-algebras where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations
 open import foundation.equivalences

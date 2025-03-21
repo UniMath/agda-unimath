@@ -10,6 +10,7 @@ module foundation.singleton-subtypes where
 open import foundation.connected-components
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.images-subtypes
 open import foundation.inhabited-subtypes

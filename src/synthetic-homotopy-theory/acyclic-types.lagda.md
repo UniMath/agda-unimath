@@ -8,6 +8,8 @@ module synthetic-homotopy-theory.acyclic-types where
 
 ```agda
 open import foundation.contractible-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.propositions
 open import foundation.retracts-of-types

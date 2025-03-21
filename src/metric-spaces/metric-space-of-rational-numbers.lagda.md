@@ -20,6 +20,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.diagonal-maps-cartesian-products-of-types
 open import foundation.empty-types
 open import foundation.equivalences

@@ -48,7 +48,8 @@ open import foundation.transport-along-identifications using
 open import foundation.action-on-identifications-dependent-functions using
   ( apd -- "dependent functions respect paths"
   )
-open import foundation.truncated-types using
+open import foundation.truncated-types
+open import foundation.dependent-products-truncated-types using
   ( is-trunc -- "`n`-truncated types"
   )
 open import foundation.truncations using

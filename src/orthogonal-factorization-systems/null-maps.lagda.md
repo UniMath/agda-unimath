@@ -9,6 +9,7 @@ module orthogonal-factorization-systems.null-maps where
 ```agda
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.families-of-equivalences

@@ -8,6 +8,7 @@ module foundation.powersets where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.large-locale-of-propositions

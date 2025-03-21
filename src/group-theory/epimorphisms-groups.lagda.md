@@ -9,6 +9,7 @@ module group-theory.epimorphisms-groups where
 ```agda
 open import category-theory.epimorphisms-in-large-precategories
 
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.universe-levels
 

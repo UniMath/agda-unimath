@@ -9,6 +9,8 @@ module foundation.connected-types where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.function-extensionality-axiom
 open import foundation.functoriality-truncation
 open import foundation.inhabited-types

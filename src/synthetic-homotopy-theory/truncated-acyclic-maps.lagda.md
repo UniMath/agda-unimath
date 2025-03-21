@@ -15,6 +15,8 @@ open import foundation.connected-types
 open import foundation.constant-maps
 open import foundation.dependent-epimorphisms-with-respect-to-truncated-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.diagonal-maps-of-types
 open import foundation.embeddings

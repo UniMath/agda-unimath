@@ -9,6 +9,7 @@ module category-theory.sieves-in-categories where
 ```agda
 open import category-theory.categories
 
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels

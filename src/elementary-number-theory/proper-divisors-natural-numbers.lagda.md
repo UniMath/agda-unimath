@@ -18,6 +18,7 @@ open import elementary-number-theory.strict-inequality-natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.negated-equality

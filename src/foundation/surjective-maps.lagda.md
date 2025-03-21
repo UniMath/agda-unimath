@@ -11,7 +11,9 @@ open import foundation.action-on-identifications-functions
 open import foundation.connected-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.embeddings
 open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types

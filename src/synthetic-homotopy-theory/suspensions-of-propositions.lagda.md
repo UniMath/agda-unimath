@@ -10,6 +10,8 @@ module synthetic-homotopy-theory.suspensions-of-propositions where
 open import foundation.booleans
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality

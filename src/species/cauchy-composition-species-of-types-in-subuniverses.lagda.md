@@ -10,6 +10,8 @@ module species.cauchy-composition-species-of-types-in-subuniverses where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
 open import foundation.function-types

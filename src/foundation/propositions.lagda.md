@@ -4,7 +4,6 @@
 module foundation.propositions where
 
 open import foundation-core.propositions public
-open import foundation.dependent-products-propositions public
 ```
 
 <details><summary>Imports</summary>
@@ -12,6 +11,8 @@ open import foundation.dependent-products-propositions public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.fibers-of-maps
 open import foundation.logical-equivalences
 open import foundation.retracts-of-types

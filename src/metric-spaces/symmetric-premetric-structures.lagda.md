@@ -10,6 +10,7 @@ module metric-spaces.symmetric-premetric-structures where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-relations
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types

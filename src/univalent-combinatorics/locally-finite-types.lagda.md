@@ -14,6 +14,8 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.dependent-universal-property-equivalences
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types

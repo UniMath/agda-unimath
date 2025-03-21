@@ -4,7 +4,6 @@
 module foundation.contractible-types where
 
 open import foundation-core.contractible-types public
-open import foundation.dependent-products-contractible-types public
 ```
 
 <details><summary>Imports</summary>
@@ -12,6 +11,7 @@ open import foundation.dependent-products-contractible-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
 open import foundation.logical-equivalences

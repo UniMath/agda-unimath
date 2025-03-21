@@ -8,6 +8,8 @@ module structured-types.contractible-pointed-types where
 
 ```agda
 open import foundation.contractible-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.universe-levels
 

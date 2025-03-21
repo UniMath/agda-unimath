@@ -16,6 +16,7 @@ open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.diagonal-maps-cartesian-products-of-types
 open import foundation.existential-quantification
 open import foundation.function-types

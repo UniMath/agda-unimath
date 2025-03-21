@@ -15,6 +15,8 @@ open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-epimorphisms
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.dependent-universal-property-equivalences
 open import foundation.diagonal-maps-of-types
 open import foundation.embeddings

@@ -8,6 +8,7 @@ module set-theory.cardinalities where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-extensionality-axiom
 open import foundation.functoriality-propositional-truncation

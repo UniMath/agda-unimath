@@ -7,6 +7,7 @@ module lists.predicates-on-lists where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type

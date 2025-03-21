@@ -14,6 +14,7 @@ open import category-theory.precategories
 open import foundation.1-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.identity-types
 open import foundation.propositions

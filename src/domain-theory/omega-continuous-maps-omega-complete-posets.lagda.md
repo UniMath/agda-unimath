@@ -17,6 +17,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.booleans
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.evaluation-functions
 open import foundation.existential-quantification

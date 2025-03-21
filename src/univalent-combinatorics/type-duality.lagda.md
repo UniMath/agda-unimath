@@ -11,6 +11,7 @@ open import foundation.type-duality public
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.full-subtypes
 open import foundation.functoriality-dependent-function-types

@@ -556,7 +556,8 @@ open import foundation.action-on-identifications-dependent-functions using
 ```agda
 open import foundation.torsorial-type-families using
   ( is-torsorial-Id)
-open import foundation.contractible-types using
+open import foundation.contractible-types
+open import foundation.dependent-products-contractible-types using
   ( eq-is-contr')
 
 _ : {l : Level} {A : UU l} (a : A) (y : Σ A (λ x → a ＝ x)) → (a , refl) ＝ y

@@ -9,6 +9,7 @@ module orthogonal-factorization-systems.double-negation-sheaves where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.dependent-products-propositions
 open import foundation.double-negation-stable-propositions
 open import foundation.empty-types

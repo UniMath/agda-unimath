@@ -13,6 +13,7 @@ open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.inhabited-types
 open import foundation.mere-equivalences
 open import foundation.products-unordered-tuples-of-types

@@ -12,6 +12,7 @@ open import category-theory.maps-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.propositions
 open import foundation.universe-levels

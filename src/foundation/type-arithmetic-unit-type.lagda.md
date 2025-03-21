@@ -8,6 +8,7 @@ module foundation.type-arithmetic-unit-type where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.unit-type
 open import foundation.universe-levels
 

@@ -21,6 +21,7 @@ open import foundation.action-on-equivalences-type-families-over-subuniverses
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types

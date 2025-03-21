@@ -9,6 +9,7 @@ module metric-spaces.monotonic-premetric-structures where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.universe-levels
 

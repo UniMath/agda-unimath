@@ -9,6 +9,7 @@ module trees.raising-universe-levels-directed-trees where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
 open import foundation.raising-universe-levels
 open import foundation.universe-levels

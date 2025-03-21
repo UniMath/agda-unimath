@@ -15,6 +15,8 @@ open import foundation.cartesian-product-types
 open import foundation.constant-type-families
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types

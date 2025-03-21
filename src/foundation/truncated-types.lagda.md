@@ -4,7 +4,6 @@
 module foundation.truncated-types where
 
 open import foundation-core.truncated-types public
-open import foundation.dependent-products-truncated-types public
 ```
 
 <details><summary>Imports</summary>
@@ -13,6 +12,7 @@ open import foundation.dependent-products-truncated-types public
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.equivalences
 open import foundation.logical-equivalences
 open import foundation.subtype-identity-principle

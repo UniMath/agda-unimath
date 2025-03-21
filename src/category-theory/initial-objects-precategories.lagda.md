@@ -11,6 +11,8 @@ open import category-theory.precategories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.propositions
 open import foundation.universe-levels

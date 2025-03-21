@@ -9,6 +9,7 @@ module order-theory.supremum-preserving-maps-posets where
 ```agda
 open import foundation.booleans
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.evaluation-functions
 open import foundation.function-types

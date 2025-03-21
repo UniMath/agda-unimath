@@ -8,6 +8,7 @@ module orthogonal-factorization-systems.maps-local-at-maps where
 
 ```agda
 open import foundation.cartesian-morphisms-arrows
+open import foundation.dependent-products-propositions
 open import foundation.fibers-of-maps
 open import foundation.propositions
 open import foundation.retracts-of-maps

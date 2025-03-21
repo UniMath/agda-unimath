@@ -24,6 +24,7 @@ open import category-theory.terminal-objects-precategories
 open import foundation.category-of-sets
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality

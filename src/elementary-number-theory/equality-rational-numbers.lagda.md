@@ -13,6 +13,7 @@ open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types

@@ -9,6 +9,7 @@ module elementary-number-theory.universal-property-conatural-numbers where
 ```agda
 open import foundation.coalgebras-maybe
 open import foundation.contractible-types
+open import foundation.dependent-products-contractible-types
 open import foundation.morphisms-coalgebras-maybe
 open import foundation.universe-levels
 ```

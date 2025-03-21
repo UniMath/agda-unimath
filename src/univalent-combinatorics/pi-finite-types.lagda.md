@@ -10,6 +10,8 @@ module univalent-combinatorics.pi-finite-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.set-truncations

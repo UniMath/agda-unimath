@@ -10,6 +10,8 @@ module orthogonal-factorization-systems.reflective-global-subuniverses where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.cospan-diagrams
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.extensions-types-global-subuniverses
 open import foundation.global-subuniverses

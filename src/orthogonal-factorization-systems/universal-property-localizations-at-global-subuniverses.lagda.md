@@ -10,6 +10,8 @@ module orthogonal-factorization-systems.universal-property-localizations-at-glob
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.extensions-types
 open import foundation.extensions-types-global-subuniverses

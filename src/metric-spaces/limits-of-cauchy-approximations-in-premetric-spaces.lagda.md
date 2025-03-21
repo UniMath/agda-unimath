@@ -9,6 +9,7 @@ module metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.transport-along-identifications

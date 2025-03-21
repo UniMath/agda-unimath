@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.fiber-inclusions
 open import foundation.functoriality-set-truncation
 open import foundation.images

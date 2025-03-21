@@ -19,6 +19,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences

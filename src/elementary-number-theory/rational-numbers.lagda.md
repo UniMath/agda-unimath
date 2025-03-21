@@ -18,6 +18,7 @@ open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.identity-types

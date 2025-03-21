@@ -28,6 +28,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-equivalence-relations
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.empty-types
 open import foundation.equivalence-classes
 open import foundation.equivalence-extensionality

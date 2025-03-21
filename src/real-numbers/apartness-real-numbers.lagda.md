@@ -7,6 +7,7 @@ module real-numbers.apartness-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types

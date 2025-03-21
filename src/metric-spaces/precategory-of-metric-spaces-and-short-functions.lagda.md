@@ -13,6 +13,7 @@ open import category-theory.precategories
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-extensionality-axiom
 open import foundation.functoriality-dependent-pair-types

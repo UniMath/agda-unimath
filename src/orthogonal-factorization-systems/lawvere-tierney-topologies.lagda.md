@@ -10,6 +10,7 @@ module orthogonal-factorization-systems.lawvere-tierney-topologies where
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality

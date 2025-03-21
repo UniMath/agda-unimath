@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations

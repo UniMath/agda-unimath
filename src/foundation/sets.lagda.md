@@ -11,6 +11,7 @@ open import foundation-core.sets public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.dependent-products-truncated-types
 open import foundation.logical-equivalences
 open import foundation.subuniverses

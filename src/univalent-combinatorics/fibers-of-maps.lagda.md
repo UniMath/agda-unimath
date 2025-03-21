@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
 
 open import foundation.decidable-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
