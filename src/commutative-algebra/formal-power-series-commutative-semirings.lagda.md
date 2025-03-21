@@ -430,30 +430,14 @@ module _
         ( R)
         ( _)
         ( _)
-        ( λ n → equational-reasoning
-          sum-finite-Commutative-Semiring
+        ( λ n →
+          htpy-sum-finite-Commutative-Semiring R _
+            ( λ _ → commutative-mul-Commutative-Semiring R _ _) ∙
+          sum-aut-finite-Commutative-Semiring
             ( R)
-            ( finite-type-pair-with-sum-ℕ n)
-            ( λ (a , b , _) → mul-Commutative-Semiring R (p a) (q b))
-          ＝
-            sum-finite-Commutative-Semiring
-              ( R)
-              ( finite-type-pair-with-sum-ℕ n)
-              ( λ (a , b , _) → mul-Commutative-Semiring R (q b) (p a))
-            by
-              htpy-sum-finite-Commutative-Semiring R _
-                ( λ _ → commutative-mul-Commutative-Semiring R _ _)
-          ＝
-            sum-finite-Commutative-Semiring
-              ( R)
-              ( finite-type-pair-with-sum-ℕ n)
-              ( λ (a , b , _) → mul-Commutative-Semiring R (q a) (p b))
-            by
-              sum-aut-finite-Commutative-Semiring
-                ( R)
-                ( _)
-                ( aut-swap-pair-with-sum-ℕ n)
-                ( _))
+            ( _)
+            ( aut-swap-pair-with-sum-ℕ n)
+            ( _))
 ```
 
 #### Associativity
