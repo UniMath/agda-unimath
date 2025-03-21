@@ -79,6 +79,12 @@ module _
   sum-one-element-Commutative-Semiring =
     sum-one-element-Semiring (semiring-Commutative-Semiring A)
 
+  sum-unit-Commutative-Semiring :
+    (f : unit → type-Commutative-Semiring A) →
+    sum-finite-Commutative-Semiring A unit-Finite-Type f ＝ f star
+  sum-unit-Commutative-Semiring =
+    sum-unit-Semiring (semiring-Commutative-Semiring A)
+
   sum-two-elements-Commutative-Semiring :
     (f : functional-vec-Commutative-Semiring A 2) →
     sum-Commutative-Semiring A 2 f ＝

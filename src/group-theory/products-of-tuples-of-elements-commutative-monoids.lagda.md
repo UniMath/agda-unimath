@@ -84,19 +84,19 @@ module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  product-one-element-Commutative-Monoid :
+  mul-one-element-Commutative-Monoid :
     (f : functional-vec-Commutative-Monoid M 1) →
     mul-fin-Commutative-Monoid M 1 f ＝
     head-functional-vec-Commutative-Monoid M 0 f
-  product-one-element-Commutative-Monoid =
-    product-one-element-Monoid (monoid-Commutative-Monoid M)
+  mul-one-element-Commutative-Monoid =
+    mul-one-element-Monoid (monoid-Commutative-Monoid M)
 
-  product-two-elements-Commutative-Monoid :
+  mul-two-elements-Commutative-Monoid :
     (f : functional-vec-Commutative-Monoid M 2) →
     mul-fin-Commutative-Monoid M 2 f ＝
     mul-Commutative-Monoid M (f (zero-Fin 1)) (f (one-Fin 1))
-  product-two-elements-Commutative-Monoid =
-    product-two-elements-Monoid (monoid-Commutative-Monoid M)
+  mul-two-elements-Commutative-Monoid =
+    mul-two-elements-Monoid (monoid-Commutative-Monoid M)
 ```
 
 ### Products are homotopy invariant
@@ -895,4 +895,33 @@ module _
                 ( M)
                 ( A)
                 ( λ a → mul-finite-Commutative-Monoid M (B a) (f a))))
+```
+
+### Products over the unit type
+
+```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
+
+  abstract
+    mul-finite-unit-Commutative-Monoid :
+      (f : unit → type-Commutative-Monoid M) →
+      mul-finite-Commutative-Monoid M unit-Finite-Type f ＝ f star
+    mul-finite-unit-Commutative-Monoid f =
+      equational-reasoning
+        mul-finite-Commutative-Monoid M unit-Finite-Type f
+        ＝
+          mul-count-Commutative-Monoid
+            ( M)
+            ( unit)
+            ( count-unit)
+            ( f)
+          by
+            eq-mul-finite-count-Commutative-Monoid
+              ( M)
+              ( unit-Finite-Type)
+              ( count-unit)
+              ( f)
+        ＝ f star by mul-one-element-Commutative-Monoid M _
 ```
