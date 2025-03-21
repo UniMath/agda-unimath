@@ -148,7 +148,7 @@ module _
       coefficient-formal-power-series-Commutative-Semiring
         ( R)
         ( zero-formal-power-series-Commutative-Semiring) ~
-      (λ _ → zero-Commutative-Semiring R)
+      ( λ _ → zero-Commutative-Semiring R)
     htpy-coefficient-zero-formal-power-series-Commutative-Semiring _ = refl
 ```
 
