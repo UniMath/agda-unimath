@@ -641,6 +641,27 @@ module _
     eq-add-split-ℚ⁺
 ```
 
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {P : ℚ⁺ → UU l1}
+  {Q : ℚ⁺ → UU l2}
+  (R : ℚ⁺ → UU l3)
+  (merge-add-family-ℚ⁺ : (d₁ d₂ : ℚ⁺) → P d₁ → Q d₂ → R (d₁ +ℚ⁺ d₂))
+  where
+
+  Π-split-family-ℚ⁺ :
+    ((d : ℚ⁺) → P d) → ((d : ℚ⁺) → Q d) → ((d : ℚ⁺) → R d)
+  Π-split-family-ℚ⁺ H K d =
+    tr R
+      ( eq-add-split-ℚ⁺ d)
+      ( merge-add-family-ℚ⁺
+        ( left-summand-split-ℚ⁺ d)
+        ( right-summand-split-ℚ⁺ d)
+        ( H (left-summand-split-ℚ⁺ d))
+        ( K (right-summand-split-ℚ⁺ d)))
+```
+
 ### Any two positive rational numbers have a positive rational number strictly less than both
 
 ```agda

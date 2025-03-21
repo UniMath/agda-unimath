@@ -54,6 +54,14 @@ module _
   (l : type-Pseudometric-Space M)
   where
 
+  is-modulus-limit-sequence-Pseudometric-Space :
+    (d : ℚ⁺) (N : ℕ) → UU l2
+  is-modulus-limit-sequence-Pseudometric-Space =
+    is-modulus-limit-sequence-Premetric-Space
+      ( premetric-Pseudometric-Space M)
+      ( u)
+      ( l)
+
   is-limit-sequence-Pseudometric-Space : UU l2
   is-limit-sequence-Pseudometric-Space =
     is-limit-sequence-Premetric-Space
@@ -131,36 +139,28 @@ module _
     is-limit-sequence-Pseudometric-Space M u x →
     is-limit-sequence-Pseudometric-Space M u y →
     is-indistinguishable-Pseudometric-Space M x y
-  indistinguishable-limit-sequence-Pseudometric-Space Lx Ly d =
-    tr
+  indistinguishable-limit-sequence-Pseudometric-Space =
+    Π-split-family-ℚ⁺
       ( is-upper-bound-dist-Pseudometric-Space M x y)
-      ( eq-add-split-ℚ⁺ d)
-      ( is-triangular-structure-Pseudometric-Space M
-        ( x)
-        ( u N)
-        ( y)
-        ( d₁)
-        ( d₂)
-        ( is-modulus-modulus-limit-sequence-Pseudometric-Space M u y Ly d₂ N
-          ( right-leq-max-ℕ Nx Ny))
-        ( is-symmetric-structure-Pseudometric-Space M d₁ (u N) x
-          ( is-modulus-modulus-limit-sequence-Pseudometric-Space M u x Lx d₁ N
-            ( left-leq-max-ℕ Nx Ny))))
+      ( tr-modulus-indistinguishable)
     where
-      d₁ : ℚ⁺
-      d₁ = left-summand-split-ℚ⁺ d
-
-      d₂ : ℚ⁺
-      d₂ = right-summand-split-ℚ⁺ d
-
-      Nx : ℕ
-      Nx = modulus-limit-sequence-Pseudometric-Space M u x Lx d₁
-
-      Ny : ℕ
-      Ny = modulus-limit-sequence-Pseudometric-Space M u y Ly d₂
-
-      N : ℕ
-      N = max-ℕ Nx Ny
+      tr-modulus-indistinguishable :
+        (d₁ d₂ : ℚ⁺) →
+        Σ ℕ (is-modulus-limit-sequence-Pseudometric-Space M u x d₁) →
+        Σ ℕ (is-modulus-limit-sequence-Pseudometric-Space M u y d₂) →
+        neighborhood-Pseudometric-Space M (d₁ +ℚ⁺ d₂) x y
+      tr-modulus-indistinguishable d₁ d₂ (Nx , Mx) (Ny , My) =
+        ( is-triangular-structure-Pseudometric-Space M
+          ( x)
+          ( u (max-ℕ Nx Ny))
+          ( y)
+          ( d₁)
+          ( d₂)
+          ( My (max-ℕ Nx Ny) (right-leq-max-ℕ Nx Ny))
+          ( is-symmetric-structure-Pseudometric-Space M d₁
+            ( u (max-ℕ Nx Ny))
+            ( x)
+            ( Mx (max-ℕ Nx Ny) (left-leq-max-ℕ Nx Ny))))
 ```
 
 ### Subsequences preserve limits in pseudometric spaces
