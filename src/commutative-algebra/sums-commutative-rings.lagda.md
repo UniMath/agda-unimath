@@ -293,9 +293,9 @@ module _
   where
 
   sum-equiv-finite-Commutative-Ring :
-    (f : type-Finite-Type B → type-Commutative-Ring R) →
-    sum-finite-Commutative-Ring R B f ＝
-    sum-finite-Commutative-Ring R A (f ∘ map-equiv H)
+    (f : type-Finite-Type A → type-Commutative-Ring R) →
+    sum-finite-Commutative-Ring R A f ＝
+    sum-finite-Commutative-Ring R B (f ∘ map-inv-equiv H)
   sum-equiv-finite-Commutative-Ring =
     sum-equiv-finite-Commutative-Semiring
       ( commutative-semiring-Commutative-Ring R)
@@ -312,7 +312,8 @@ module _
     (f : type-Finite-Type A → type-Commutative-Ring R) →
     sum-finite-Commutative-Ring R A f ＝
     sum-finite-Commutative-Ring R A (f ∘ map-equiv σ)
-  sum-aut-finite-Commutative-Ring = sum-equiv-finite-Commutative-Ring R A A σ
+  sum-aut-finite-Commutative-Ring =
+    sum-equiv-finite-Commutative-Ring R A A (inv-equiv σ)
 ```
 
 ### Sums over finite types distribute over coproducts

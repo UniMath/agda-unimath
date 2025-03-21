@@ -265,9 +265,9 @@ module _
   where
 
   sum-equiv-finite-Ring :
-    (f : type-Finite-Type B → type-Ring R) →
-    sum-finite-Ring R B f ＝
-    sum-finite-Ring R A (f ∘ map-equiv H)
+    (f : type-Finite-Type A → type-Ring R) →
+    sum-finite-Ring R A f ＝
+    sum-finite-Ring R B (f ∘ map-inv-equiv H)
   sum-equiv-finite-Ring = sum-equiv-finite-Semiring (semiring-Ring R) A B H
 ```
 

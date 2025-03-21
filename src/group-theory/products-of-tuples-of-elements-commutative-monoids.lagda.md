@@ -404,25 +404,22 @@ module _
 
   abstract
     mul-equiv-count-Commutative-Monoid :
-      (cA : count A) (cB : count B) (f : B → type-Commutative-Monoid M) →
-      mul-count-Commutative-Monoid M B cB f ＝
-      mul-count-Commutative-Monoid M A cA (f ∘ map-equiv H)
+      (cA : count A) (cB : count B) (f : A → type-Commutative-Monoid M) →
+      mul-count-Commutative-Monoid M A cA f ＝
+      mul-count-Commutative-Monoid M B cB (f ∘ map-inv-equiv H)
     mul-equiv-count-Commutative-Monoid
-      cA@(_ , Fin-nA≃A) cB@(nB , Fin-nB≃B) f
+      cA@(nA , Fin-nA≃A) cB@(_ , Fin-nB≃B) f
       with double-counting-equiv cA cB H
     ... | refl =
       preserves-product-permutation-Commutative-Monoid
         ( M)
-        ( nB)
-        ( inv-equiv Fin-nB≃B ∘e H ∘e Fin-nA≃A)
-        ( f ∘ map-equiv Fin-nB≃B) ∙
-      ap
-        ( λ g →
-          mul-fin-Commutative-Monoid
-            ( M)
-            ( nB)
-            ((f ∘ g) ∘ (map-equiv (H ∘e Fin-nA≃A))))
-        ( eq-htpy (is-section-map-inv-equiv Fin-nB≃B))
+        ( nA)
+        ( inv-equiv Fin-nA≃A ∘e inv-equiv H ∘e Fin-nB≃B)
+        ( _) ∙
+      htpy-mul-fin-Commutative-Monoid
+        ( M)
+        ( nA)
+        ( λ i → ap f (is-section-map-inv-equiv Fin-nA≃A _))
 
 module _
   {l1 l2 : Level} (M : Commutative-Monoid l1)
@@ -559,23 +556,24 @@ module _
 
   abstract
     mul-equiv-finite-Commutative-Monoid :
-      (f : type-Finite-Type B → type-Commutative-Monoid M) →
-      mul-finite-Commutative-Monoid M B f ＝
-      mul-finite-Commutative-Monoid M A (f ∘ map-equiv H)
+      (f : type-Finite-Type A → type-Commutative-Monoid M) →
+      mul-finite-Commutative-Monoid M A f ＝
+      mul-finite-Commutative-Monoid M B (f ∘ map-inv-equiv H)
     mul-equiv-finite-Commutative-Monoid f =
       do
         cA ← is-finite-type-Finite-Type A
         cB ← is-finite-type-Finite-Type B
         equational-reasoning
-          mul-finite-Commutative-Monoid M B f
-          ＝ mul-count-Commutative-Monoid M (type-Finite-Type B) cB f
-            by eq-mul-finite-count-Commutative-Monoid M B cB f
+          mul-finite-Commutative-Monoid M A f
+          ＝
+            mul-count-Commutative-Monoid M (type-Finite-Type A) cA f
+            by eq-mul-finite-count-Commutative-Monoid M A cA f
           ＝
             mul-count-Commutative-Monoid
               ( M)
-              ( type-Finite-Type A)
-              ( cA)
-              ( f ∘ map-equiv H)
+              ( type-Finite-Type B)
+              ( cB)
+              ( f ∘ map-inv-equiv H)
             by
               mul-equiv-count-Commutative-Monoid
                 ( M)
@@ -585,21 +583,15 @@ module _
                 ( cA)
                 ( cB)
                 ( f)
-          ＝ mul-finite-Commutative-Monoid M A (f ∘ map-equiv H)
-            by
-              inv
-                ( eq-mul-finite-count-Commutative-Monoid
-                  ( M)
-                  ( A)
-                  ( cA)
-                  ( f ∘ map-equiv H))
+          ＝ mul-finite-Commutative-Monoid M B (f ∘ map-inv-equiv H)
+            by inv (eq-mul-finite-count-Commutative-Monoid M B cB _)
       where
         open
           do-syntax-trunc-Prop
             ( Id-Prop
               ( set-Commutative-Monoid M)
-              ( mul-finite-Commutative-Monoid M B f)
-              ( mul-finite-Commutative-Monoid M A (f ∘ map-equiv H)))
+              ( mul-finite-Commutative-Monoid M A f)
+              ( mul-finite-Commutative-Monoid M B (f ∘ map-inv-equiv H)))
 ```
 
 ### Products over finite types distribute over coproducts
@@ -810,18 +802,19 @@ module _
         by
           mul-equiv-finite-Commutative-Monoid
             ( M)
-            ( Σ-Finite-Type (Fin-Finite-Type (succ-ℕ n)) B)
             ( coproduct-Finite-Type
-              ( Σ-Finite-Type ( Fin-Finite-Type n) (B ∘ inl))
+              ( Σ-Finite-Type (Fin-Finite-Type n) (B ∘ inl))
               ( B (inr star)))
-            ( equiv-coproduct
+            (Σ-Finite-Type (Fin-Finite-Type (succ-ℕ n)) B)
+            ( inv-equiv
+              ( equiv-coproduct
                 ( id-equiv)
                 ( left-unit-law-Σ (type-Finite-Type ∘ B ∘ inr)) ∘e
-              right-distributive-Σ-coproduct
-                ( Fin n)
-                ( unit)
-                ( type-Finite-Type ∘ B))
-            ( rec-coproduct (ind-Σ (f ∘ inl)) (f (inr star)))
+                right-distributive-Σ-coproduct
+                  ( Fin n)
+                  ( unit)
+                  ( type-Finite-Type ∘ B)))
+            _
       ＝
         mul-finite-Commutative-Monoid
           ( M)
@@ -862,10 +855,11 @@ module _
             by
               mul-equiv-finite-Commutative-Monoid
                 ( M)
-                ( Σ-Finite-Type (Fin-Finite-Type nA) (B ∘ map-equiv Fin-nA≃A))
                 ( Σ-Finite-Type A B)
-                ( equiv-Σ-equiv-base (type-Finite-Type ∘ B) Fin-nA≃A)
-                ( ind-Σ f)
+                ( Σ-Finite-Type (Fin-Finite-Type nA) (B ∘ map-equiv Fin-nA≃A))
+                ( inv-equiv
+                  ( equiv-Σ-equiv-base (type-Finite-Type ∘ B) Fin-nA≃A))
+                ( _)
           ＝
             mul-count-Commutative-Monoid
               ( M)
