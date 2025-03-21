@@ -392,8 +392,8 @@ module _
   where
 
   sum-equiv-finite-Semiring :
-    (f : type-Finite-Type B → type-Semiring R) →
-    sum-finite-Semiring R B f ＝ sum-finite-Semiring R A (f ∘ map-equiv H)
+    (f : type-Finite-Type A → type-Semiring R) →
+    sum-finite-Semiring R A f ＝ sum-finite-Semiring R B (f ∘ map-inv-equiv H)
   sum-equiv-finite-Semiring =
     mul-equiv-finite-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
