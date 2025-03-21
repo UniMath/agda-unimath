@@ -8,7 +8,7 @@ module foundation.asymptotically-constant-sequences where
 
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.monotonic-endomaps-natural-numbers
+open import elementary-number-theory.monotonic-sequences-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.asymptotically-equal-sequences
@@ -124,20 +124,20 @@ module _
   is-asymptotically-constant-subsequence =
     map-Σ
       ( is-modulus-asymptotically-constant-sequence (sequence-subsequence u v))
-      ( modulus-is-unbounded-is-strictly-increasing-endomap-ℕ
+      ( modulus-is-unbounded-is-strictly-increasing-sequence-ℕ
         ( extract-subsequence u v)
         ( is-strictly-increasing-extract-subsequence u v))
       ( λ N K p q I J →
         K
           ( extract-subsequence u v p)
           ( extract-subsequence u v q)
-          ( leq-bound-is-strictly-increasing-endomap-ℕ
+          ( leq-bound-is-strictly-increasing-sequence-ℕ
             ( extract-subsequence u v)
             ( is-strictly-increasing-extract-subsequence u v)
             ( N)
             ( p)
             ( I))
-          ( leq-bound-is-strictly-increasing-endomap-ℕ
+          ( leq-bound-is-strictly-increasing-sequence-ℕ
             ( extract-subsequence u v)
             ( is-strictly-increasing-extract-subsequence u v)
             ( N)

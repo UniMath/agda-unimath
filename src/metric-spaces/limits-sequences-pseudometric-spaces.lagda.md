@@ -9,7 +9,7 @@ module metric-spaces.limits-sequences-pseudometric-spaces where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
-open import elementary-number-theory.monotonic-endomaps-natural-numbers
+open import elementary-number-theory.monotonic-sequences-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 
@@ -142,10 +142,10 @@ module _
         ( d₁)
         ( d₂)
         ( is-modulus-modulus-limit-sequence-Pseudometric-Space M u y Ly d₂ N
-          (right-leq-max-ℕ Nx Ny))
+          ( right-leq-max-ℕ Nx Ny))
         ( is-symmetric-structure-Pseudometric-Space M d₁ (u N) x
           ( is-modulus-modulus-limit-sequence-Pseudometric-Space M u x Lx d₁ N
-            (left-leq-max-ℕ Nx Ny))))
+            ( left-leq-max-ℕ Nx Ny))))
     where
       d₁ : ℚ⁺
       d₁ = left-summand-split-ℚ⁺ d
@@ -183,13 +183,13 @@ module _
         ( sequence-subsequence u v)
         ( l)
         ( d))
-      ( modulus-is-unbounded-is-strictly-increasing-endomap-ℕ
+      ( modulus-is-unbounded-is-strictly-increasing-sequence-ℕ
         ( extract-subsequence u v)
         ( is-strictly-increasing-extract-subsequence u v))
       ( λ N is-modulus-N p I →
         is-modulus-N
           ( extract-subsequence u v p)
-          ( leq-bound-is-strictly-increasing-endomap-ℕ
+          ( leq-bound-is-strictly-increasing-sequence-ℕ
             ( extract-subsequence u v)
             ( is-strictly-increasing-extract-subsequence u v)
             ( N)
