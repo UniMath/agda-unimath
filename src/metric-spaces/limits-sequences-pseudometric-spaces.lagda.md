@@ -25,10 +25,8 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.limits-sequences-premetric-spaces
-open import metric-spaces.premetric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.sequences-pseudometric-spaces
-open import metric-spaces.short-functions-premetric-spaces
 ```
 
 </details>
@@ -39,6 +37,11 @@ open import metric-spaces.short-functions-premetric-spaces
 of sequences in pseudometric spaces are
 [limits](metric-spaces.limits-sequences-premetric-spaces.md) in the underlying
 [premetric space](metric-spaces.premetric-spaces.md).
+
+Constant and asymptotically constant sequences in a pseudometric space have a
+limit: their (asymptotical) value.
+
+Limits of a sequence in a pseudometric space are indistinguishable.
 
 ## Definition
 
