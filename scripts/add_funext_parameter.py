@@ -34,6 +34,9 @@ def modify_file_content(file_path, module_name, dependent_modules):
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
+    # Check if this is a literate Agda Markdown file
+    is_markdown = file_path.endswith('.lagda.md')
+
     # Find module declaration
     module_decl, module_id = find_module_declaration(content)
     if not module_decl:
@@ -83,46 +86,81 @@ def modify_file_content(file_path, module_name, dependent_modules):
     modified_content = '\n'.join(updated_lines)
 
     # Modify imports of modules that depend on funext
-    for dep_module in dependent_modules:
-        # Find imports of this module
-        import_pattern = rf'open\s+import\s+{re.escape(dep_module)}(?:\s+[^\n]*)?(?:\n|$)'
-        for match in re.finditer(import_pattern, modified_content):
+    # If it's a Markdown file, we need to handle code blocks correctly
+    if is_markdown:
+        # Handle imports in code blocks properly
+        code_block_pattern = r'```agda\n(.*?)\n```'
+        def process_code_block(match):
+            code_content = match.group(1)
+            # Process imports within the code block
+            for dep_module in dependent_modules:
+                import_pattern = rf'open\s+import\s+{re.escape(dep_module)}(?:\s+[^\n]*)?(?:\n|$)'
+                for import_match in re.finditer(import_pattern, code_content):
+                    import_stmt = import_match.group(0)
+                    # Skip if already has funext
+                    if "funext" in import_stmt:
+                        continue
+
+                    # Ensure we don't duplicate "using" keyword
+                    if "using" in import_stmt:
+                        new_import = import_stmt.replace(dep_module, f"{dep_module} funext")
+                    else:
+                        # No existing parameters
+                        new_import = import_stmt.rstrip() + " funext\n"
+
+                    code_content = code_content[:import_match.start()] + new_import + code_content[import_match.end():]
+
+            # Also handle direct imports of function-extensionality
+            funext_direct_import_pattern = r'open\s+import\s+foundation\.function-extensionality\b(?!-axiom)'
+            for import_match in re.finditer(funext_direct_import_pattern, code_content, re.MULTILINE):
+                import_stmt = import_match.group(0)
+                if "funext" in import_stmt:
+                    continue
+
+                if "using" in import_stmt:
+                    new_import = re.sub(r'(foundation\.function-extensionality)\b(?!-axiom)', r'\1 funext', import_stmt)
+                else:
+                    new_import = import_stmt.rstrip() + " funext\n"
+
+                code_content = code_content[:import_match.start()] + new_import + code_content[import_match.end():]
+
+            return f"```agda\n{code_content}\n```"
+
+        modified_content = re.sub(code_block_pattern, process_code_block, modified_content, flags=re.DOTALL)
+    else:
+        # Handle regular Agda files as before
+        for dep_module in dependent_modules:
+            # Find imports of this module
+            import_pattern = rf'open\s+import\s+{re.escape(dep_module)}(?:\s+[^\n]*)?(?:\n|$)'
+            for match in re.finditer(import_pattern, modified_content):
+                import_stmt = match.group(0)
+                # Skip if already has funext
+                if "funext" in import_stmt:
+                    continue
+
+                # Add funext parameter to the import
+                if import_stmt.strip().endswith(dep_module):
+                    # No existing parameters
+                    new_import = import_stmt.rstrip() + " funext\n"
+                else:
+                    # Has other parameters, add funext
+                    new_import = import_stmt.replace(dep_module, f"{dep_module} funext")
+
+                modified_content = modified_content[:match.start()] + new_import + modified_content[match.end():]
+
+        # Additionally, handle direct imports of foundation.function-extensionality
+        funext_direct_import_pattern = r'open\s+import\s+foundation\.function-extensionality\b(?!-axiom)'
+        for match in re.finditer(funext_direct_import_pattern, modified_content, re.MULTILINE):
             import_stmt = match.group(0)
-            # Skip if already has funext
             if "funext" in import_stmt:
                 continue
 
-            # Add funext parameter to the import
-            if import_stmt.strip().endswith(dep_module):
-                # No existing parameters
+            if import_stmt.strip().endswith("foundation.function-extensionality"):
                 new_import = import_stmt.rstrip() + " funext\n"
             else:
-                # Has other parameters, add funext
-                new_import = import_stmt.replace(dep_module, f"{dep_module} funext")
+                new_import = re.sub(r'(foundation\.function-extensionality)\b(?!-axiom)', r'\1 funext', import_stmt)
 
             modified_content = modified_content[:match.start()] + new_import + modified_content[match.end():]
-
-    # Additionally, handle direct imports of foundation.function-extensionality
-    # Make sure we only match the exact module name, not ones that start with it
-    funext_direct_import_pattern = r'open\s+import\s+foundation\.function-extensionality\b(?!-axiom)'
-
-    # Use finditer with the MULTILINE flag to ensure we catch all instances
-    for match in re.finditer(funext_direct_import_pattern, modified_content, re.MULTILINE):
-        import_stmt = match.group(0)
-        # Skip if already has funext
-        if "funext" in import_stmt:
-            continue
-
-        # Add funext parameter to the import
-        if import_stmt.strip().endswith("foundation.function-extensionality"):
-            # No existing parameters
-            new_import = import_stmt.rstrip() + " funext\n"
-        else:
-            # Has other parameters, add funext appropriately
-            # Use a more specific pattern to ensure we only replace the exact module name
-            new_import = re.sub(r'(foundation\.function-extensionality)\b(?!-axiom)', r'\1 funext', import_stmt)
-
-        modified_content = modified_content[:match.start()] + new_import + modified_content[match.end():]
 
     # Only return modified content if changes were made
     if modified_content != content:
