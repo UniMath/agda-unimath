@@ -60,8 +60,8 @@ open import set-theory.increasing-binary-sequences
 
 An [increasing binary sequence](set-theory.increasing-binary-sequences.md) `x`
 is a
-{{#concept "finite" Disambiguation="element of the type of increasing binary sequences" Agda=is-finite-ℕ∞↑}}
-element if there [exists](foundation.existential-quantification.md) a
+{{#concept "finite element" Disambiguation="element of the type of increasing binary sequences" Agda=is-finite-ℕ∞↑}}
+if there [exists](foundation.existential-quantification.md) a
 [natural number](elementary-number-theory.natural-numbers.md) `n : ℕ` such that
 `xₙ` is true.
 
@@ -224,13 +224,7 @@ module _
 
 ### If an increasing binary sequence has an upper bound there exists a unique least upper bound
 
-```agda
--- least-upper-bound-upper-bound-ℕ∞↑ :
---   (x : ℕ∞↑) →
---   upper-bound-ℕ∞↑ x →
---   least-upper-bound-ℕ∞↑ x
--- least-upper-bound-upper-bound-ℕ∞↑ x H = {!   !}
-```
+> This remains to be formalized.
 
 ### If an increasing binary sequence is strictly bounded below by a natural number, then it is positive
 

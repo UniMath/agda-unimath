@@ -56,7 +56,8 @@ is the [subset](foundation-core.subtypes.md) of the
 binary numbers. This type is equivalent to the
 [conatural numbers](elementary-number-theory.conatural-numbers.md).
 
-We follow formalizations from the TypeTopology library. {{#cite TypeTopology}}
+Many of these formalizations mirror work from the TypeTopology library.
+{{#cite TypeTopology}}
 
 ## Definitions
 
@@ -332,6 +333,10 @@ abstract
 
 - [The conatural numbers](elementary-number-theory.conatural-numbers.md)
 - [Initial segments of the natural numbers](elementary-number-theory.initial-segments-natural-numbers.md)
+
+## References
+
+{{#bibliography}}
 
 ## External links
 

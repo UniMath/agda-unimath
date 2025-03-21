@@ -37,11 +37,13 @@ open import logic.propositionally-decidable-types
 
 We say a type `A` satisfies
 {{#concept "propositional double negation elimination" Disambiguation="on a type" Agda=has-prop-double-negation-elim}}
-if there is a map
+if the implication
 
 ```text
-  ¬¬A → ║A║₋₁.
+  ¬¬A ⇒ ║A║₋₁
 ```
+
+holds.
 
 ## Definitions
 

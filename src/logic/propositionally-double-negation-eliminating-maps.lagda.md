@@ -30,9 +30,9 @@ A [map](foundation-core.function-types.md) is said to be
 if its [fibers](foundation-core.fibers-of-maps.md) satisfy
 [propositional double negation elimination](logic.propositional-double-negation-elimination.md).
 I.e., for every `y : B`, if `fiber f y` is
-[irrefutable](foundation.irrefutable-propositions.md), then we do in fact have
-then the fiber is in fact inhabited. In other words, double negation eliminating
-maps come [equipped](foundation.structure.md) with a map
+[irrefutable](foundation.irrefutable-propositions.md), then we have then the
+fiber is in fact inhabited. In other words, double negation eliminating maps
+come [equipped](foundation.structure.md) with a map
 
 ```text
   (y : B) → ¬¬ (fiber f y) → ║ fiber f y ║₋₁.

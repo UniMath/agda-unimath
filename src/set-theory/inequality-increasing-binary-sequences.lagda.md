@@ -85,30 +85,20 @@ leq-prop-ℕ∞↑ x y = (leq-ℕ∞↑ x y , is-prop-leq-ℕ∞↑ x y)
 
 ```agda
 abstract
-  refl-leq-ℕ∞↑ :
-    (x : ℕ∞↑) → leq-ℕ∞↑ x x
-  refl-leq-ℕ∞↑ x n =
-    refl-leq-bool {sequence-ℕ∞↑ x n}
+  refl-leq-ℕ∞↑ : (x : ℕ∞↑) → leq-ℕ∞↑ x x
+  refl-leq-ℕ∞↑ x n = refl-leq-bool {sequence-ℕ∞↑ x n}
 
 abstract
-  leq-Eq-ℕ∞↑' :
-    (x y : ℕ∞↑) →
-    Eq-ℕ∞↑ y x → leq-ℕ∞↑ x y
+  leq-Eq-ℕ∞↑' : (x y : ℕ∞↑) → Eq-ℕ∞↑ y x → leq-ℕ∞↑ x y
   leq-Eq-ℕ∞↑' x y H = leq-eq-bool ∘ H
 
 abstract
-  leq-Eq-ℕ∞↑ :
-    (x y : ℕ∞↑) →
-    Eq-ℕ∞↑ x y → leq-ℕ∞↑ x y
-  leq-Eq-ℕ∞↑ x y H =
-    leq-Eq-ℕ∞↑' x y (inv-htpy H)
+  leq-Eq-ℕ∞↑ : (x y : ℕ∞↑) → Eq-ℕ∞↑ x y → leq-ℕ∞↑ x y
+  leq-Eq-ℕ∞↑ x y H = leq-Eq-ℕ∞↑' x y (inv-htpy H)
 
 abstract
-  leq-eq-ℕ∞↑ :
-    (x y : ℕ∞↑) →
-    x ＝ y → leq-ℕ∞↑ x y
-  leq-eq-ℕ∞↑ x .x refl =
-    refl-leq-ℕ∞↑ x
+  leq-eq-ℕ∞↑ : (x y : ℕ∞↑) → x ＝ y → leq-ℕ∞↑ x y
+  leq-eq-ℕ∞↑ x .x refl = refl-leq-ℕ∞↑ x
 ```
 
 ### Inequality of increasing binary sequences is transitive
@@ -145,20 +135,13 @@ antisymmetric-leq-ℕ∞↑ x y p q =
 ```agda
 is-preorder-leq-ℕ∞↑ :
   is-preorder-Relation-Prop leq-prop-ℕ∞↑
-is-preorder-leq-ℕ∞↑ =
-  ( refl-leq-ℕ∞↑ ,
-    transitive-leq-ℕ∞↑)
+is-preorder-leq-ℕ∞↑ = (refl-leq-ℕ∞↑ , transitive-leq-ℕ∞↑)
 
 ℕ∞↑-Preorder : Preorder lzero lzero
-ℕ∞↑-Preorder =
-  ( ℕ∞↑ ,
-    leq-prop-ℕ∞↑ ,
-    is-preorder-leq-ℕ∞↑)
+ℕ∞↑-Preorder = (ℕ∞↑ , leq-prop-ℕ∞↑ , is-preorder-leq-ℕ∞↑)
 
 ℕ∞↑-Poset : Poset lzero lzero
-ℕ∞↑-Poset =
-  ( ℕ∞↑-Preorder ,
-    antisymmetric-leq-ℕ∞↑)
+ℕ∞↑-Poset = (ℕ∞↑-Preorder , antisymmetric-leq-ℕ∞↑)
 ```
 
 ### The successor function preserves order

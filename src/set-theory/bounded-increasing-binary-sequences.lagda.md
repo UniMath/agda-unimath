@@ -62,7 +62,7 @@ open import set-theory.inequality-increasing-binary-sequences
 Given an [increasing binary sequence](set-theory.increasing-binary-sequences.md)
 `n`, then another increasing binary sequence `x` is
 {{#concept "bounded" Disambiguation="increasing binary sequence by increasing binary sequence" Agda=bounded-ℕ∞↑}}
-if `x ≤ n`.
+by `n` if `x ≤ n`.
 
 ## Definitions
 
