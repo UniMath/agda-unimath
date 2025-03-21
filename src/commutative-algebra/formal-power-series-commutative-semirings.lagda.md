@@ -20,6 +20,7 @@ open import elementary-number-theory.pairs-with-natural-sums
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.complements-decidable-subtypes
 open import foundation.dependent-identifications
@@ -160,6 +161,15 @@ module _
   coefficient-constant-formal-power-series-Commutative-Semiring c zero-ℕ = c
   coefficient-constant-formal-power-series-Commutative-Semiring c (succ-ℕ _) =
     zero-Commutative-Semiring R
+
+  coefficient-nonzero-constant-formal-power-series-Commutative-Semiring :
+    (c : type-Commutative-Semiring R) → (n : ℕ) → is-nonzero-ℕ n →
+    is-zero-Commutative-Semiring R
+      ( coefficient-constant-formal-power-series-Commutative-Semiring c n)
+  coefficient-nonzero-constant-formal-power-series-Commutative-Semiring
+    c zero-ℕ H = ex-falso (H refl)
+  coefficient-nonzero-constant-formal-power-series-Commutative-Semiring
+    c (succ-ℕ _) _ = refl
 
   opaque
     unfolding formal-power-series-Commutative-Semiring
@@ -487,7 +497,7 @@ module _
                 (coeff p c *R coeff q d) *R coeff r a)
             by
               sum-equiv-finite-Commutative-Semiring R _ _
-                ( inv-equiv (equiv-pair-with-sum-pr1-pr2 n))
+                ( equiv-pair-with-sum-pr1-pr2 n)
                 ( _)
           ＝
             sum-finite-Commutative-Semiring
@@ -600,11 +610,11 @@ module _
         ( λ (a , b , _) →
           mul-Commutative-Semiring
             ( R)
-            ( p a)
             ( coefficient-constant-formal-power-series-Commutative-Semiring
               ( R)
               ( one-Commutative-Semiring R)
-              ( b))) ＝
+              ( a))
+            ( p b)) ＝
       p n
     htpy-left-unit-law-mul-formal-power-series-Commutative-Semiring p n =
       equational-reasoning
@@ -614,22 +624,21 @@ module _
           ( λ (a , b , _) →
             mul-Commutative-Semiring
               ( R)
-              ( p a)
               ( coefficient-constant-formal-power-series-Commutative-Semiring
                 ( R)
                 ( one-Commutative-Semiring R)
-                ( b)))
+                ( a))
+              ( p b))
         ＝
-          sum-finite-Commutative-Semiring
+          sum-Commutative-Semiring
             ( R)
-            ( coproduct-Finite-Type
-              ( unit-Finite-Type)
-              ( finite-type-subset-Finite-Type
-                ( finite-type-pair-with-sum-ℕ n)
-                ( complement-decidable-subtype
-                  ( decidable-subtype-zero-pair-with-sum-ℕ n))))
-            {!   !}
-          by inv (sum-equiv-finite-Commutative-Semiring R _ _  (equiv-pair-with-sum-coproduct-zero-nonzero n) {! _  !})
+            ( succ-ℕ n)
+            ( λ k →
+              mul-Commutative-Ring
+                ( R)
+                ?
+                ?)
+          by
         ＝ {!   !} by {!   !}
 
   opaque
