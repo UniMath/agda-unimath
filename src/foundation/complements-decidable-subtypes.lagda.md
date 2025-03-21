@@ -7,20 +7,20 @@ module foundation.complements-decidable-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
+open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
-open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.negation
-open import foundation.empty-types
 open import foundation.propositions
-open import foundation.equality-dependent-pair-types
-open import foundation.action-on-identifications-functions
-open import foundation.sections
 open import foundation.retractions
-open import foundation.equivalences
-open import foundation.dependent-pair-types
+open import foundation.sections
+open import foundation.universe-levels
 ```
 
 </details>
@@ -29,8 +29,8 @@ open import foundation.dependent-pair-types
 
 The
 {{#concept "complement" Disambiguation="of a decidable subtype" Agda=complement-decidable-subtype}}
-of a [decidable subtype](foundation.decidable-subtypes.md) `P ⊆ A` consists of the elements
-that are [not](foundation-core.negation.md) in `P`.
+of a [decidable subtype](foundation.decidable-subtypes.md) `P ⊆ A` consists of
+the elements that are [not](foundation-core.negation.md) in `P`.
 
 ### The complement of a decidable subtype is decidable
 
@@ -83,7 +83,7 @@ module _
   ... | inl pa' = ex-falso (¬pa pa')
   ... | inr ¬pa' =
     ap
-      ( inr )
+      ( inr)
       ( eq-pair-eq-fiber (eq-type-Prop (neg-Prop (prop-Decidable-Prop (P a)))))
 
   is-retraction-map-inv-equiv-coproduct-decidable-subtype-complement :

@@ -9,34 +9,34 @@ module elementary-number-theory.pairs-with-natural-sums where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
 
-open import foundation.negation
-open import foundation.type-arithmetic-coproduct-types
-open import foundation.contractible-types
 open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
-open import foundation.decidable-subtypes
-open import foundation.subtypes
+open import foundation.cartesian-product-types
+open import foundation.complements-decidable-subtypes
 open import foundation.complements-subtypes
+open import foundation.conjunction
+open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
-open import foundation.functoriality-coproduct-types
 open import foundation.equivalences
-open import foundation.involutions
 open import foundation.function-types
+open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.involutions
+open import foundation.negation
 open import foundation.propositions
-open import foundation.cartesian-product-types
 open import foundation.retractions
 open import foundation.sections
-open import foundation.complements-decidable-subtypes
 open import foundation.sets
-open import foundation.conjunction
-open import foundation.universe-levels
+open import foundation.subtypes
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
@@ -255,7 +255,7 @@ module _
         map-equiv-permute-components-triple-with-sum-pr2
         map-inv-equiv-permute-components-triple-with-sum-pr2
     is-section-map-inv-equiv-permute-components-triple-with-sum-pr2
-      x@((c , .(b +ℕ a), p+c=n) , a , b , refl) =
+      x@((c , .(b +ℕ a) , p+c=n) , a , b , refl) =
         inv
           ( ind-Id
             ( p+c=n)
@@ -269,7 +269,7 @@ module _
         map-equiv-permute-components-triple-with-sum-pr2
         map-inv-equiv-permute-components-triple-with-sum-pr2
     is-retraction-map-inv-equiv-permute-components-triple-with-sum-pr2
-      x@((c , .(b +ℕ a), p+c=n) , a , b , refl) =
+      x@((c , .(b +ℕ a) , p+c=n) , a , b , refl) =
         inv
           ( ind-Id
             ( p+c=n)

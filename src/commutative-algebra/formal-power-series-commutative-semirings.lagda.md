@@ -11,52 +11,51 @@ open import commutative-algebra.commutative-semirings
 open import commutative-algebra.sums-commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.pairs-with-natural-sums
+open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
+open import foundation.complements-decidable-subtypes
 open import foundation.coproduct-types
+open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.complements-decidable-subtypes
-open import foundation.dependent-identifications
 open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.propositions
-open import foundation.cartesian-product-types
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.involutions
-open import foundation.sets
-open import foundation.equivalences
-open import foundation.action-on-identifications-binary-functions
-open import foundation.unit-type
-open import foundation.unital-binary-operations
-open import foundation.sections
+open import foundation.propositions
 open import foundation.retractions
+open import foundation.sections
+open import foundation.sets
 open import foundation.transport-along-identifications
+open import foundation.unit-type
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.commutative-monoids
+open import group-theory.function-commutative-monoids
 open import group-theory.groups
 open import group-theory.monoids
-open import group-theory.commutative-monoids
 open import group-theory.semigroups
-open import group-theory.function-commutative-monoids
 
-open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.decidable-subtypes
 open import ring-theory.semirings
+
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-subtypes
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -65,8 +64,8 @@ open import ring-theory.semirings
 
 A
 {{#concept "formal power series" Agda=formal-power-series-Commutative-Semiring WDID=Q1003025 WD="formal power series"}}
-in a [commutative semiring](commutative-algebra.commutative-semirings.md) `R` is a
-symbolic infinite sum over all `n : ℕ` of `cₙ xⁿ`, where `cₙ : R`. Convergence
+in a [commutative semiring](commutative-algebra.commutative-semirings.md) `R` is
+a symbolic infinite sum over all `n : ℕ` of `cₙ xⁿ`, where `cₙ : R`. Convergence
 of this sum is not relevant, but with the standard definitions of addition and
 multiplication for power series, this forms a new commutative semiring.
 
@@ -82,7 +81,8 @@ module _
     formal-power-series-Commutative-Semiring = ℕ → type-Commutative-Semiring R
 
     formal-power-series-coefficients-Commutative-Semiring :
-      (ℕ → type-Commutative-Semiring R) → formal-power-series-Commutative-Semiring
+      (ℕ → type-Commutative-Semiring R) →
+      formal-power-series-Commutative-Semiring
     formal-power-series-coefficients-Commutative-Semiring = id
 
     coefficient-formal-power-series-Commutative-Semiring :
@@ -503,7 +503,9 @@ module _
                   ( λ (c , d , _) → (coeff p c *R coeff q d) *R coeff r b))
             by
               ap
-                ( sum-finite-Commutative-Semiring R (finite-type-pair-with-sum-ℕ n))
+                ( sum-finite-Commutative-Semiring
+                  ( R)
+                  ( finite-type-pair-with-sum-ℕ n))
                 ( eq-htpy
                   ( λ (a , b , _) →
                     ap-mul-Commutative-Semiring
@@ -636,7 +638,8 @@ module _
           formal-power-series-Commutative-Semiring R
         _*fps_ = mul-formal-power-series-Commutative-Semiring R
         coeff :
-          formal-power-series-Commutative-Semiring R → ℕ → type-Commutative-Semiring R
+          formal-power-series-Commutative-Semiring R → ℕ →
+          type-Commutative-Semiring R
         coeff = coefficient-formal-power-series-Commutative-Semiring R
 ```
 

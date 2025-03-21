@@ -17,22 +17,22 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.equivalences
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.sections
-open import foundation.retractions
 ```
 
 </details>
@@ -314,7 +314,7 @@ le-succ-leq-ℕ (succ-ℕ x) (succ-ℕ y) H = le-succ-leq-ℕ x y H
 
 ### There is an equivalence between natural numbers less than `succ-ℕ n` and natural numbers less than or equal to `n`
 
-```
+```agda
 equiv-le-succ-ℕ-leq-ℕ :
   (n : ℕ) → Σ ℕ (λ k → le-ℕ k (succ-ℕ n)) ≃ Σ ℕ (λ k → leq-ℕ k n)
 equiv-le-succ-ℕ-leq-ℕ n =
