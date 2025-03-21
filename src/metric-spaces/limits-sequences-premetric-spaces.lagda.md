@@ -81,7 +81,7 @@ module _
 
 ## Properties
 
-### Asymptotical equality preserves limits
+### Asymptotical equality of sequences preserves limits
 
 ```agda
 module _
