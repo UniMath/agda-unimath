@@ -198,8 +198,7 @@ module _
     pr1 (is-unbounded-is-strictly-increasing-endomap-ℕ M)
 
   leq-bound-is-strictly-increasing-endomap-ℕ :
-    (M : ℕ) →
-    (p : ℕ) →
+    (M p : ℕ) →
     leq-ℕ (modulus-is-unbounded-is-strictly-increasing-endomap-ℕ M) p →
     leq-ℕ M (f p)
   leq-bound-is-strictly-increasing-endomap-ℕ M =

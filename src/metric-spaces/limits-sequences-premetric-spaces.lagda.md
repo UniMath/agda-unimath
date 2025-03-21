@@ -17,6 +17,7 @@ open import foundation.dependent-pair-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.propositions
 open import foundation.sequences
+open import foundation.subsequences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -149,4 +150,22 @@ module _
           ( u p)
           ( l)
           ( I p H)
+```
+
+### A sequence in a premetric space has a limit if all its subsequences have this limit
+
+```agda
+module _
+  {l1 l2 : Level} (M : Premetric-Space l1 l2)
+  (u : sequence-Premetric-Space M)
+  (x : type-Premetric-Space M)
+  where
+
+  reflects-limit-subsequence-Premetric-Space :
+    ( ( v : subsequence u) →
+      is-limit-sequence-Premetric-Space M
+        ( sequence-subsequence u v)
+        ( x)) →
+    is-limit-sequence-Premetric-Space M u x
+  reflects-limit-subsequence-Premetric-Space H = H (refl-subsequence u)
 ```
