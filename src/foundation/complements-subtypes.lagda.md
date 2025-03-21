@@ -7,15 +7,6 @@ module foundation.complements-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
-open import foundation.sections
-open import foundation.equality-dependent-pair-types
-open import foundation.empty-types
-open import foundation.identity-types
-open import foundation.retractions
-open import foundation.propositions
-open import foundation.equivalences
-open import foundation.dependent-pair-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.double-negation-stable-propositions
@@ -26,10 +17,7 @@ open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.unions-subtypes
 open import foundation.universe-levels
-open import foundation.functoriality-coproduct-types
-open import foundation.type-arithmetic-coproduct-types
 
-open import foundation.action-on-identifications-functions
 open import foundation-core.function-types
 open import foundation-core.subtypes
 
@@ -104,79 +92,4 @@ module _
     B ⊆ C →
     complement-subtype C ⊆ complement-subtype B
   reverses-order-complement-subtype B⊆C x x∉C x∈B = x∉C (B⊆C x x∈B)
-```
-
-### The complement of a decidable subtype is decidable
-
-```agda
-module _
-  {l1 l2 : Level}
-  {A : UU l1}
-  (P : decidable-subtype l2 A)
-  where
-
-  complement-decidable-subtype : decidable-subtype l2 A
-  complement-decidable-subtype a = neg-Decidable-Prop (P a)
-```
-
-### For a decidable subtype `P`, a type is equivalent to the coproduct of `P` and its complement
-
-```agda
-module _
-  {l1 l2 : Level}
-  {A : UU l1}
-  (P : decidable-subtype l2 A)
-  where
-
-  map-equiv-coproduct-decidable-subtype-complement :
-    A →
-    type-decidable-subtype P +
-    type-decidable-subtype (complement-decidable-subtype P)
-  map-equiv-coproduct-decidable-subtype-complement a with
-    is-decidable-Decidable-Prop (P a)
-  ... | inl pa = inl (a , pa)
-  ... | inr ¬pa = inr (a , ¬pa)
-
-  map-inv-equiv-coproduct-decidable-subtype-complement :
-    type-decidable-subtype P +
-    type-decidable-subtype (complement-decidable-subtype P) → A
-  map-inv-equiv-coproduct-decidable-subtype-complement (inl (a , _)) = a
-  map-inv-equiv-coproduct-decidable-subtype-complement (inr (a , _)) = a
-
-  is-section-map-inv-equiv-coproduct-decidable-subtype-complement :
-    is-section
-      map-equiv-coproduct-decidable-subtype-complement
-      map-inv-equiv-coproduct-decidable-subtype-complement
-  is-section-map-inv-equiv-coproduct-decidable-subtype-complement (inl (a , pa))
-    with is-decidable-Decidable-Prop (P a)
-  ... | inl pa' =
-    ap inl (eq-pair-eq-fiber (eq-type-Prop (prop-Decidable-Prop (P a))))
-  ... | inr ¬pa' = ex-falso (¬pa' pa)
-  is-section-map-inv-equiv-coproduct-decidable-subtype-complement
-    (inr (a , ¬pa)) with is-decidable-Decidable-Prop (P a)
-  ... | inl pa' = ex-falso (¬pa pa')
-  ... | inr ¬pa' =
-    ap
-      ( inr )
-      ( eq-pair-eq-fiber (eq-type-Prop (neg-Prop (prop-Decidable-Prop (P a)))))
-
-  is-retraction-map-inv-equiv-coproduct-decidable-subtype-complement :
-    is-retraction
-      map-equiv-coproduct-decidable-subtype-complement
-      map-inv-equiv-coproduct-decidable-subtype-complement
-  is-retraction-map-inv-equiv-coproduct-decidable-subtype-complement a
-    with is-decidable-Decidable-Prop (P a)
-  ... | inl _ = refl
-  ... | inr _ = refl
-
-  equiv-coproduct-decidable-subtype-complement :
-    A ≃
-    type-decidable-subtype P +
-    type-decidable-subtype (complement-decidable-subtype P)
-  equiv-coproduct-decidable-subtype-complement =
-    map-equiv-coproduct-decidable-subtype-complement ,
-    ( map-inv-equiv-coproduct-decidable-subtype-complement ,
-      is-section-map-inv-equiv-coproduct-decidable-subtype-complement) ,
-    ( map-inv-equiv-coproduct-decidable-subtype-complement ,
-      is-retraction-map-inv-equiv-coproduct-decidable-subtype-complement)
 ```

@@ -21,6 +21,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.complements-decidable-subtypes
 open import foundation.dependent-identifications
 open import foundation.equality-dependent-pair-types
 open import foundation.function-extensionality
@@ -50,6 +51,8 @@ open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.decidable-subtypes
 ```
 
 </details>
@@ -588,10 +591,7 @@ module _
   (p : formal-power-series-Commutative-Semiring R)
   where
 
-  opaque
-    unfolding mul-formal-power-series-Commutative-Semiring
-    unfolding constant-formal-power-series-Commutative-Semiring
-
+  abstract
     htpy-left-unit-law-mul-formal-power-series-Commutative-Semiring :
       (p : ℕ → type-Commutative-Semiring R) (n : ℕ) →
       sum-finite-Commutative-Semiring
@@ -619,7 +619,22 @@ module _
                 ( R)
                 ( one-Commutative-Semiring R)
                 ( b)))
+        ＝
+          sum-finite-Commutative-Semiring
+            ( R)
+            ( coproduct-Finite-Type
+              ( unit-Finite-Type)
+              ( finite-type-subset-Finite-Type
+                ( finite-type-pair-with-sum-ℕ n)
+                ( complement-decidable-subtype
+                  ( decidable-subtype-zero-pair-with-sum-ℕ n))))
+            {!   !}
+          by inv (sum-equiv-finite-Commutative-Semiring R _ _  (equiv-pair-with-sum-coproduct-zero-nonzero n) {! _  !})
         ＝ {!   !} by {!   !}
+
+  opaque
+    unfolding mul-formal-power-series-Commutative-Semiring
+    unfolding constant-formal-power-series-Commutative-Semiring
 
     left-unit-law-mul-formal-power-series-Commutative-Semiring :
       mul-formal-power-series-Commutative-Semiring

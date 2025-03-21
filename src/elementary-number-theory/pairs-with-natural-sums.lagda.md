@@ -31,6 +31,7 @@ open import foundation.propositions
 open import foundation.cartesian-product-types
 open import foundation.retractions
 open import foundation.sections
+open import foundation.complements-decidable-subtypes
 open import foundation.sets
 open import foundation.conjunction
 open import foundation.universe-levels
