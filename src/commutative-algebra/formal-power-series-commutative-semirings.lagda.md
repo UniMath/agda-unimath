@@ -592,6 +592,35 @@ module _
     unfolding mul-formal-power-series-Commutative-Semiring
     unfolding constant-formal-power-series-Commutative-Semiring
 
+    htpy-left-unit-law-mul-formal-power-series-Commutative-Semiring :
+      (p : ℕ → type-Commutative-Semiring R) (n : ℕ) →
+      sum-finite-Commutative-Semiring
+        ( R)
+        ( finite-type-pair-with-sum-ℕ n)
+        ( λ (a , b , _) →
+          mul-Commutative-Semiring
+            ( R)
+            ( p a)
+            ( coefficient-constant-formal-power-series-Commutative-Semiring
+              ( R)
+              ( one-Commutative-Semiring R)
+              ( b))) ＝
+      p n
+    htpy-left-unit-law-mul-formal-power-series-Commutative-Semiring p n =
+      equational-reasoning
+        sum-finite-Commutative-Semiring
+          ( R)
+          ( finite-type-pair-with-sum-ℕ n)
+          ( λ (a , b , _) →
+            mul-Commutative-Semiring
+              ( R)
+              ( p a)
+              ( coefficient-constant-formal-power-series-Commutative-Semiring
+                ( R)
+                ( one-Commutative-Semiring R)
+                ( b)))
+        ＝ {!   !} by {!   !}
+
     left-unit-law-mul-formal-power-series-Commutative-Semiring :
       mul-formal-power-series-Commutative-Semiring
         ( R)
@@ -615,5 +644,30 @@ module _
                     ( one-Commutative-Semiring R)
                     ( a))
                   ( coefficient-formal-power-series-Commutative-Semiring R p b))
+            ＝
+              sum-finite-Commutative-Semiring
+                ( R)
+                ( finite-type-pair-with-sum-ℕ n)
+                ( λ {
+                  (zero-ℕ , _ , _) →
+                    coefficient-formal-power-series-Commutative-Semiring R p n ;
+                  (succ-ℕ _ , _ , _) →
+                    zero-Commutative-Semiring R})
+              by
+                ap
+                  ( sum-finite-Commutative-Semiring
+                    ( R)
+                    ( finite-type-pair-with-sum-ℕ n))
+                  ( eq-htpy
+                    λ {
+                      (zero-ℕ , b , b+0=n) →
+                        left-unit-law-mul-Commutative-Semiring R _ ∙
+                        ap
+                          ( coefficient-formal-power-series-Commutative-Semiring
+                            ( R)
+                            ( p))
+                          ( inv (right-unit-law-add-ℕ b) ∙ b+0=n) ;
+                      (succ-ℕ _ , _ , _) →
+                        left-zero-law-mul-Commutative-Semiring R _ })
             ＝ {!   !} by {!   !})
 ```
