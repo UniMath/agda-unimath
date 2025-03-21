@@ -34,11 +34,13 @@ open import foundation.identity-types
 open import foundation.involutions
 open import foundation.sets
 open import foundation.equivalences
+open import foundation.action-on-identifications-binary-functions
 open import foundation.unit-type
 open import foundation.unital-binary-operations
 open import foundation.sections
 open import foundation.retractions
 open import foundation.transport-along-identifications
+open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -808,26 +810,51 @@ module _
 #### Distributivity of multiplication over addition
 
 ```agda
-module _
-  {l : Level} (R : Commutative-Semiring l)
-  (p q r : formal-power-series-Commutative-Semiring R)
-  where
+opaque
+  unfolding formal-power-series-Commutative-Semiring
+  unfolding add-formal-power-series-Commutative-Semiring
+  unfolding mul-formal-power-series-Commutative-Semiring
 
-  opaque
-    unfolding formal-power-series-Commutative-Semiring
-    unfolding add-formal-power-series-Commutative-Semiring
-    unfolding mul-formal-power-series-Commutative-Semiring
+  left-distributive-mul-add-formal-power-series-Commutative-Semiring :
+    {l : Level} (R : Commutative-Semiring l) →
+    (p q r : formal-power-series-Commutative-Semiring R) →
+    mul-formal-power-series-Commutative-Semiring
+      ( R)
+      ( p)
+      ( add-formal-power-series-Commutative-Semiring R q r) ＝
+    add-formal-power-series-Commutative-Semiring
+      ( R)
+      ( mul-formal-power-series-Commutative-Semiring R p q)
+      ( mul-formal-power-series-Commutative-Semiring R p r)
+  left-distributive-mul-add-formal-power-series-Commutative-Semiring R p q r =
+    eq-htpy-coefficients-formal-power-series-Commutative-Semiring
+      ( R)
+      ( _)
+      ( _)
+      ( λ n →
+        htpy-sum-finite-Commutative-Semiring R _
+          ( λ _ → left-distributive-mul-add-Commutative-Semiring R _ _ _) ∙
+        commute-sum-two-finite-Commutative-Semiring R _ _ _)
 
-    left-distributive-mul-add-formal-power-series-Commutative-Semiring :
-      mul-formal-power-series-Commutative-Semiring
-        ( R)
-        ( p)
-        ( add-formal-power-series-Commutative-Semiring R q r) ＝
-      add-formal-power-series-Commutative-Semiring
-        ( R)
-        ( mul-formal-power-series-Commutative-Semiring R p q)
-        ( mul-formal-power-series-Commutative-Semiring R p r)
-    left-distributive-mul-add-formal-power-series-Commutative-Semiring = {!   !}
+abstract
+  right-distributive-mul-add-formal-power-series-Commutative-Semiring :
+    {l : Level} (R : Commutative-Semiring l) →
+    (p q r : formal-power-series-Commutative-Semiring R) →
+    mul-formal-power-series-Commutative-Semiring
+      ( R)
+      ( add-formal-power-series-Commutative-Semiring R p q)
+      ( r) ＝
+    add-formal-power-series-Commutative-Semiring
+      ( R)
+      ( mul-formal-power-series-Commutative-Semiring R p r)
+      ( mul-formal-power-series-Commutative-Semiring R q r)
+  right-distributive-mul-add-formal-power-series-Commutative-Semiring R p q r =
+    commutative-mul-formal-power-series-Commutative-Semiring R _ _ ∙
+    left-distributive-mul-add-formal-power-series-Commutative-Semiring R r p q ∙
+    ap-binary
+      ( add-formal-power-series-Commutative-Semiring R)
+      ( commutative-mul-formal-power-series-Commutative-Semiring R r p)
+      ( commutative-mul-formal-power-series-Commutative-Semiring R r q)
 ```
 
 ### The commutative semiring of formal power series
@@ -837,8 +864,39 @@ module _
   {l : Level} (R : Commutative-Semiring l)
   where
 
+  has-associative-mul-formal-power-series-Commutative-Semiring :
+    has-associative-mul (formal-power-series-Commutative-Semiring R)
+  has-associative-mul-formal-power-series-Commutative-Semiring =
+    mul-formal-power-series-Commutative-Semiring R ,
+    associative-mul-formal-power-series-Commutative-Semiring R
+
+  unit-laws-mul-formal-power-series-Commutative-Semiring :
+    unit-laws
+      ( mul-formal-power-series-Commutative-Semiring R)
+      ( one-formal-power-series-Commutative-Semiring R)
+  unit-laws-mul-formal-power-series-Commutative-Semiring =
+    left-unit-law-mul-formal-power-series-Commutative-Semiring R ,
+    right-unit-law-mul-formal-power-series-Commutative-Semiring R
+
+  is-unital-mul-formal-power-series-Commutative-Semiring :
+    is-unital (mul-formal-power-series-Commutative-Semiring R)
+  is-unital-mul-formal-power-series-Commutative-Semiring =
+    one-formal-power-series-Commutative-Semiring R ,
+    unit-laws-mul-formal-power-series-Commutative-Semiring
+
   semiring-formal-power-series-Commutative-Semiring : Semiring l
   semiring-formal-power-series-Commutative-Semiring =
     commutative-monoid-add-formal-power-series-Commutative-Semiring R ,
-    {!   !} , {!   !}
+    ( has-associative-mul-formal-power-series-Commutative-Semiring ,
+      is-unital-mul-formal-power-series-Commutative-Semiring ,
+      left-distributive-mul-add-formal-power-series-Commutative-Semiring R ,
+      right-distributive-mul-add-formal-power-series-Commutative-Semiring R) ,
+    left-zero-law-mul-formal-power-series-Commutative-Semiring R ,
+    right-zero-law-mul-formal-power-series-Commutative-Semiring R
+
+  commutative-semiring-formal-power-series-Commutative-Semiring :
+    Commutative-Semiring l
+  commutative-semiring-formal-power-series-Commutative-Semiring =
+    semiring-formal-power-series-Commutative-Semiring ,
+    commutative-mul-formal-power-series-Commutative-Semiring R
 ```
