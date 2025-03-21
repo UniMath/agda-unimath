@@ -42,6 +42,16 @@ module _
 
   asymptotically-eq-sequence : UU l
   asymptotically-eq-sequence = Σ ℕ is-modulus-asymptotically-eq-sequence
+
+  modulus-asymptotically-eq-sequence :
+    asymptotically-eq-sequence → ℕ
+  modulus-asymptotically-eq-sequence H = pr1 H
+
+  eq-leq-modulus-asymptotically-eq-sequence :
+    (H : asymptotically-eq-sequence) →
+    is-modulus-asymptotically-eq-sequence
+      (modulus-asymptotically-eq-sequence H)
+  eq-leq-modulus-asymptotically-eq-sequence H = pr2 H
 ```
 
 ## Properties
