@@ -427,11 +427,11 @@ module _
   where
 
   abstract
-    eq-mul-finite-count-Commutative-Monoid :
+    mul-finite-count-Commutative-Monoid :
       (f : type-Finite-Type A → type-Commutative-Monoid M) →
       mul-finite-Commutative-Monoid M A f ＝
       mul-count-Commutative-Monoid M (type-Finite-Type A) cA f
-    eq-mul-finite-count-Commutative-Monoid f =
+    mul-finite-count-Commutative-Monoid f =
       equational-reasoning
         mul-finite-Commutative-Monoid M A f
         ＝
@@ -472,7 +472,7 @@ module _
       (f : type-Finite-Type A → type-Commutative-Monoid M) →
       is-unit-Commutative-Monoid M (mul-finite-Commutative-Monoid M A f)
     mul-is-empty-finite-Commutative-Monoid =
-      eq-mul-finite-count-Commutative-Monoid M A (count-is-empty H)
+      mul-finite-count-Commutative-Monoid M A (count-is-empty H)
 ```
 
 ### The product of units is the unit
@@ -500,7 +500,7 @@ module _
             ( type-Finite-Type A)
             ( cA)
             ( λ _ → unit-Commutative-Monoid M)
-          by eq-mul-finite-count-Commutative-Monoid M A cA _
+          by mul-finite-count-Commutative-Monoid M A cA _
         ＝ unit-Commutative-Monoid M by mul-unit-Commutative-Monoid M _
     where
       open
@@ -531,11 +531,11 @@ module _
         equational-reasoning
           mul-finite-Commutative-Monoid M A f
           ＝ mul-count-Commutative-Monoid M (type-Finite-Type A) cA f
-            by eq-mul-finite-count-Commutative-Monoid M A cA f
+            by mul-finite-count-Commutative-Monoid M A cA f
           ＝ mul-count-Commutative-Monoid M (type-Finite-Type A) cA g
             by htpy-mul-count-Commutative-Monoid M (type-Finite-Type A) cA H
           ＝ mul-finite-Commutative-Monoid M A g
-            by inv (eq-mul-finite-count-Commutative-Monoid M A cA g)
+            by inv (mul-finite-count-Commutative-Monoid M A cA g)
       where
         open
           do-syntax-trunc-Prop
@@ -567,7 +567,7 @@ module _
           mul-finite-Commutative-Monoid M A f
           ＝
             mul-count-Commutative-Monoid M (type-Finite-Type A) cA f
-            by eq-mul-finite-count-Commutative-Monoid M A cA f
+            by mul-finite-count-Commutative-Monoid M A cA f
           ＝
             mul-count-Commutative-Monoid
               ( M)
@@ -584,7 +584,7 @@ module _
                 ( cB)
                 ( f)
           ＝ mul-finite-Commutative-Monoid M B (f ∘ map-inv-equiv H)
-            by inv (eq-mul-finite-count-Commutative-Monoid M B cB _)
+            by inv (mul-finite-count-Commutative-Monoid M B cB _)
       where
         open
           do-syntax-trunc-Prop
@@ -623,7 +623,7 @@ module _
               ( nA +ℕ nB)
               ( f ∘ map-equiv-count (count-coproduct cA cB))
             by
-              eq-mul-finite-count-Commutative-Monoid
+              mul-finite-count-Commutative-Monoid
                 ( M)
                 ( coproduct-Finite-Type A B)
                 ( count-coproduct cA cB)
@@ -679,12 +679,12 @@ module _
               inv
                 ( ap-mul-Commutative-Monoid
                   ( M)
-                  ( eq-mul-finite-count-Commutative-Monoid
+                  ( mul-finite-count-Commutative-Monoid
                     ( M)
                     ( A)
                     ( cA)
                     ( f ∘ inl))
-                  ( eq-mul-finite-count-Commutative-Monoid
+                  ( mul-finite-count-Commutative-Monoid
                     ( M)
                     ( B)
                     ( cB)
@@ -878,7 +878,7 @@ module _
               ( M)
               ( A)
               ( λ a → mul-finite-Commutative-Monoid M (B a) (f a))
-            by inv (eq-mul-finite-count-Commutative-Monoid M A cA _)
+            by inv (mul-finite-count-Commutative-Monoid M A cA _)
       where
         open
           do-syntax-trunc-Prop
@@ -912,7 +912,7 @@ module _
             ( count-unit)
             ( f)
           by
-            eq-mul-finite-count-Commutative-Monoid
+            mul-finite-count-Commutative-Monoid
               ( M)
               ( unit-Finite-Type)
               ( count-unit)

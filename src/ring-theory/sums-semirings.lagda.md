@@ -57,6 +57,12 @@ sum-Semiring :
 sum-Semiring R =
   mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
+sum-count-Semiring :
+  {l1 l2 : Level} (R : Semiring l1) (A : UU l2) (cA : count A) →
+  (A → type-Semiring R) → type-Semiring R
+sum-count-Semiring R =
+  mul-count-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+
 sum-finite-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (A : Finite-Type l2) →
   (type-Finite-Type A → type-Semiring R) → type-Semiring R
@@ -201,7 +207,7 @@ module _
             by
               ap
                 ( mul-Semiring R x)
-                ( eq-mul-finite-count-Commutative-Monoid _ A cA f)
+                ( mul-finite-count-Commutative-Monoid _ A cA f)
           ＝
             mul-count-Commutative-Monoid
               ( additive-commutative-monoid-Semiring R)
@@ -214,7 +220,7 @@ module _
                 ( x)
                 ( f ∘ map-equiv-count cA)
           ＝ sum-finite-Semiring R A (mul-Semiring R x ∘ f)
-            by inv (eq-mul-finite-count-Commutative-Monoid _ A cA _)
+            by inv (mul-finite-count-Commutative-Monoid _ A cA _)
       where
         open
           do-syntax-trunc-Prop
@@ -245,7 +251,7 @@ module _
             by
               ap
                 ( mul-Semiring' R x)
-                ( eq-mul-finite-count-Commutative-Monoid _ A cA f)
+                ( mul-finite-count-Commutative-Monoid _ A cA f)
           ＝
             mul-count-Commutative-Monoid
               ( additive-commutative-monoid-Semiring R)
@@ -258,7 +264,7 @@ module _
                 ( f ∘ map-equiv-count cA)
                 ( x)
           ＝ sum-finite-Semiring R A (mul-Semiring' R x ∘ f)
-            by inv (eq-mul-finite-count-Commutative-Monoid _ A cA _)
+            by inv (mul-finite-count-Commutative-Monoid _ A cA _)
       where
         open
           do-syntax-trunc-Prop
@@ -456,4 +462,17 @@ module _
       ( additive-commutative-monoid-Semiring R)
       ( A)
       ( H)
+```
+
+### The sum over a finite type is the sum over any count for that type
+
+```agda
+sum-finite-count-Semiring :
+  {l1 l2 : Level} (R : Semiring l1) (A : Finite-Type l2)
+  (cA : count (type-Finite-Type A))
+  (f : type-Finite-Type A → type-Semiring R) →
+  sum-finite-Semiring R A f ＝
+  sum-count-Semiring R (type-Finite-Type A) cA f
+sum-finite-count-Semiring R =
+  mul-finite-count-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```

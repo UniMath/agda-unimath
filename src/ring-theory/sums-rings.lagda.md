@@ -28,6 +28,7 @@ open import ring-theory.rings
 open import ring-theory.sums-semirings
 
 open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -48,6 +49,11 @@ a [finite type](univalent-combinatorics.finite-types.md).
 sum-Ring :
   {l : Level} (R : Ring l) (n : ℕ) → functional-vec-Ring R n → type-Ring R
 sum-Ring R = sum-Semiring (semiring-Ring R)
+
+sum-count-Ring :
+  {l1 l2 : Level} (R : Ring l1) (A : UU l2) → count A → (A → type-Ring R) →
+  type-Ring R
+sum-count-Ring R = sum-count-Semiring (semiring-Ring R)
 
 sum-finite-Ring :
   {l1 l2 : Level} (R : Ring l1) (A : Finite-Type l2) →
@@ -318,4 +324,14 @@ module _
     (f : type-Finite-Type A → type-Ring R) →
     is-zero-Ring R (sum-finite-Ring R A f)
   sum-is-empty-finite-Ring = sum-is-empty-finite-Semiring (semiring-Ring R) A H
+```
+
+### The sum over a finite type is the sum over any count for that type
+
+```agda
+sum-finite-count-Ring :
+  {l1 l2 : Level} (R : Ring l1) (A : Finite-Type l2)
+  (cA : count (type-Finite-Type A)) (f : type-Finite-Type A → type-Ring R) →
+  sum-finite-Ring R A f ＝ sum-count-Ring R (type-Finite-Type A) cA f
+sum-finite-count-Ring R = sum-finite-count-Semiring (semiring-Ring R)
 ```

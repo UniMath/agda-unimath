@@ -33,6 +33,7 @@ open import lists.lists
 open import ring-theory.sums-semirings
 
 open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -55,6 +56,12 @@ sum-Commutative-Semiring :
   {l : Level} (A : Commutative-Semiring l) (n : ℕ) →
   (functional-vec-Commutative-Semiring A n) → type-Commutative-Semiring A
 sum-Commutative-Semiring A = sum-Semiring (semiring-Commutative-Semiring A)
+
+sum-count-Commutative-Semiring :
+  {l1 l2 : Level} (R : Commutative-Semiring l1) (A : UU l2) → count A →
+  (A → type-Commutative-Semiring R) → type-Commutative-Semiring R
+sum-count-Commutative-Semiring R =
+  sum-count-Semiring (semiring-Commutative-Semiring R)
 
 sum-finite-Commutative-Semiring :
   {l1 l2 : Level} (R : Commutative-Semiring l1) (A : Finite-Type l2) →
@@ -371,4 +378,17 @@ module _
     is-zero-Commutative-Semiring R (sum-finite-Commutative-Semiring R A f)
   sum-is-empty-finite-Commutative-Semiring =
     sum-is-empty-finite-Semiring (semiring-Commutative-Semiring R) A H
+```
+
+### The sum over a finite type is the sum over any count for that type
+
+```agda
+sum-finite-count-Commutative-Semiring :
+  {l1 l2 : Level} (R : Commutative-Semiring l1) (A : Finite-Type l2)
+  (cA : count (type-Finite-Type A))
+  (f : type-Finite-Type A → type-Commutative-Semiring R) →
+  sum-finite-Commutative-Semiring R A f ＝
+  sum-count-Commutative-Semiring R (type-Finite-Type A) cA f
+sum-finite-count-Commutative-Semiring R =
+  sum-finite-count-Semiring (semiring-Commutative-Semiring R)
 ```
