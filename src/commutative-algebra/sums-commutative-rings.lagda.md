@@ -32,6 +32,7 @@ open import linear-algebra.vectors-on-commutative-rings
 open import ring-theory.sums-rings
 
 open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -54,6 +55,11 @@ sum-Commutative-Ring :
   {l : Level} (A : Commutative-Ring l) (n : ℕ) →
   (functional-vec-Commutative-Ring A n) → type-Commutative-Ring A
 sum-Commutative-Ring A = sum-Ring (ring-Commutative-Ring A)
+
+sum-count-Commutative-Ring :
+  {l1 l2 : Level} (R : Commutative-Ring l1) (A : UU l2) → count A →
+  (A → type-Commutative-Ring R) → type-Commutative-Ring R
+sum-count-Commutative-Ring R = sum-count-Ring (ring-Commutative-Ring R)
 
 sum-finite-Commutative-Ring :
   {l1 l2 : Level} (R : Commutative-Ring l1) (A : Finite-Type l2) →
@@ -369,4 +375,17 @@ module _
     is-zero-Commutative-Ring R (sum-finite-Commutative-Ring R A f)
   sum-is-empty-finite-Commutative-Ring =
     sum-is-empty-finite-Ring (ring-Commutative-Ring R) A H
+```
+
+### The sum over a finite type is the sum over any count for that type
+
+```agda
+sum-finite-count-Commutative-Ring :
+  {l1 l2 : Level} (R : Commutative-Ring l1) (A : Finite-Type l2)
+  (cA : count (type-Finite-Type A))
+  (f : type-Finite-Type A → type-Commutative-Ring R) →
+  sum-finite-Commutative-Ring R A f ＝
+  sum-count-Commutative-Ring R (type-Finite-Type A) cA f
+sum-finite-count-Commutative-Ring R =
+  sum-finite-count-Ring (ring-Commutative-Ring R)
 ```
