@@ -1,12 +1,7 @@
 # Quotient algebras
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  universal-algebra.quotient-algebras
-  (funext : function-extensionality)
-  where
+module universal-algebra.quotient-algebras where
 ```
 
 <details><summary>Imports</summary>
@@ -15,28 +10,28 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalence-classes funext
-open import foundation.equivalence-relations funext
-open import foundation.equivalences funext
-open import foundation.functoriality-propositional-truncation funext
-open import foundation.multivariable-functoriality-set-quotients funext
-open import foundation.multivariable-operations funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.raising-universe-levels-unit-type funext
-open import foundation.set-quotients funext
-open import foundation.sets funext
+open import foundation.equivalence-classes
+open import foundation.equivalence-relations
+open import foundation.equivalences
+open import foundation.functoriality-propositional-truncation
+open import foundation.multivariable-functoriality-set-quotients
+open import foundation.multivariable-operations
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
+open import foundation.set-quotients
+open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.vectors-set-quotients funext
+open import foundation.vectors-set-quotients
 
-open import linear-algebra.vectors funext
+open import linear-algebra.vectors
 
-open import universal-algebra.algebraic-theories funext
-open import universal-algebra.algebras-of-theories funext
-open import universal-algebra.congruences funext
-open import universal-algebra.models-of-signatures funext
-open import universal-algebra.signatures funext
+open import universal-algebra.algebraic-theories
+open import universal-algebra.algebras-of-theories
+open import universal-algebra.congruences
+open import universal-algebra.models-of-signatures
+open import universal-algebra.signatures
 ```
 
 </details>

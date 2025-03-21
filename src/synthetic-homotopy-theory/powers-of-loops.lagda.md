@@ -1,12 +1,7 @@
 # Powers of loops
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.powers-of-loops
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.powers-of-loops where
 ```
 
 <details><summary>Imports</summary>
@@ -18,18 +13,18 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.iterating-automorphisms funext
-open import foundation.iterating-functions funext
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.iterating-automorphisms
+open import foundation.iterating-functions
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation funext
+open import foundation.whiskering-identifications-concatenation
 
-open import structured-types.pointed-maps funext
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.functoriality-loop-spaces funext
-open import synthetic-homotopy-theory.loop-spaces funext
+open import synthetic-homotopy-theory.functoriality-loop-spaces
+open import synthetic-homotopy-theory.loop-spaces
 ```
 
 </details>

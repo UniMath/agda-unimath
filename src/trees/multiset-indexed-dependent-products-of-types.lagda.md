@@ -1,12 +1,7 @@
 # Multiset-indexed dependent products of types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.multiset-indexed-dependent-products-of-types
-  (funext : function-extensionality)
-  where
+module trees.multiset-indexed-dependent-products-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -16,8 +11,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import trees.multisets funext
-open import trees.w-types funext
+open import trees.multisets
+open import trees.w-types
 ```
 
 </details>

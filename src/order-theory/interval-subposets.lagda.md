@@ -1,26 +1,21 @@
 # Interval subposets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.interval-subposets
-  (funext : function-extensionality)
-  where
+module order-theory.interval-subposets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.inhabited-types funext
-open import foundation.propositions funext
+open import foundation.inhabited-types
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 
-open import order-theory.posets funext
-open import order-theory.subposets funext
+open import order-theory.posets
+open import order-theory.subposets
 ```
 
 </details>

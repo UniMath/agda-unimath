@@ -1,12 +1,7 @@
 # Diagonal maps into cartesian products of types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.diagonal-maps-cartesian-products-of-types
-  (funext : function-extensionality)
-  where
+module foundation.diagonal-maps-cartesian-products-of-types where
 
 open import foundation-core.diagonal-maps-cartesian-products-of-types public
 ```
@@ -14,12 +9,12 @@ open import foundation-core.diagonal-maps-cartesian-products-of-types public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-maps funext
+open import foundation.0-maps
 open import foundation.dependent-pair-types
-open import foundation.faithful-maps funext
+open import foundation.faithful-maps
 open import foundation.universe-levels
 
-open import foundation-core.1-types funext
+open import foundation-core.1-types
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.embeddings
@@ -28,7 +23,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.truncated-maps funext
+open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

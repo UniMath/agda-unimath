@@ -1,26 +1,21 @@
 # Center of a semigroup
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.centers-semigroups
-  (funext : function-extensionality)
-  where
+module group-theory.centers-semigroups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import group-theory.central-elements-semigroups funext
-open import group-theory.homomorphisms-semigroups funext
-open import group-theory.semigroups funext
-open import group-theory.subsemigroups funext
+open import group-theory.central-elements-semigroups
+open import group-theory.homomorphisms-semigroups
+open import group-theory.semigroups
+open import group-theory.subsemigroups
 ```
 
 </details>

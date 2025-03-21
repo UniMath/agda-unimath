@@ -1,12 +1,7 @@
 # Diagonal maps of types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.diagonal-maps-of-types
-  (funext : function-extensionality)
-  where
+module foundation.diagonal-maps-of-types where
 
 open import foundation-core.diagonal-maps-of-types public
 ```
@@ -16,9 +11,9 @@ open import foundation-core.diagonal-maps-of-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality funext
-
-open import foundation.transposition-identifications-along-equivalences funext
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps

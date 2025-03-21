@@ -1,12 +1,7 @@
 # Dependent products of wild monoids
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.dependent-products-wild-monoids
-  (funext : function-extensionality)
-  where
+module structured-types.dependent-products-wild-monoids where
 ```
 
 <details><summary>Imports</summary>
@@ -14,17 +9,16 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality funext
-
-open import foundation.homotopies funext
-open import foundation.identity-types funext
+open import foundation.function-extensionality
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.dependent-products-h-spaces funext
-open import structured-types.h-spaces funext
+open import structured-types.dependent-products-h-spaces
+open import structured-types.h-spaces
 open import structured-types.pointed-types
-open import structured-types.wild-monoids funext
+open import structured-types.wild-monoids
 ```
 
 </details>

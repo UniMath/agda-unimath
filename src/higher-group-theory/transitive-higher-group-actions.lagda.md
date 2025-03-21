@@ -1,31 +1,26 @@
 # Transitive higher group actions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  higher-group-theory.transitive-higher-group-actions
-  (funext : function-extensionality)
-  where
+module higher-group-theory.transitive-higher-group-actions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types funext
+open import foundation.0-connected-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.inhabited-types funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.regensburg-extension-fundamental-theorem-of-identity-types funext
-open import foundation.surjective-maps funext
+open import foundation.identity-types
+open import foundation.inhabited-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.regensburg-extension-fundamental-theorem-of-identity-types
+open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-group-actions funext
-open import higher-group-theory.higher-groups funext
-open import higher-group-theory.orbits-higher-group-actions funext
+open import higher-group-theory.higher-group-actions
+open import higher-group-theory.higher-groups
+open import higher-group-theory.orbits-higher-group-actions
 ```
 
 </details>

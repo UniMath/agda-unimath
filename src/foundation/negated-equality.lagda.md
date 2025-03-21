@@ -1,21 +1,17 @@
 # Negated equality
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.negated-equality
-  (funext : function-extensionality)
-  where
+module foundation.negated-equality where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.negation funext
+open import foundation.function-extensionality-axiom
+open import foundation.negation
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

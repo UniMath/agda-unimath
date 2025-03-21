@@ -1,27 +1,22 @@
 # Homomorphisms of algebras
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  universal-algebra.homomorphisms-of-algebras
-  (funext : function-extensionality)
-  where
+module universal-algebra.homomorphisms-of-algebras where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors funext
-open import linear-algebra.vectors funext
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.vectors
 
-open import universal-algebra.algebraic-theories funext
-open import universal-algebra.algebras-of-theories funext
-open import universal-algebra.signatures funext
+open import universal-algebra.algebraic-theories
+open import universal-algebra.algebras-of-theories
+open import universal-algebra.signatures
 ```
 
 </details>

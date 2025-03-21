@@ -1,12 +1,7 @@
 # The universal directed graph
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.universal-directed-graph
-  (funext : function-extensionality)
-  where
+module graph-theory.universal-directed-graph where
 ```
 
 <details><summary>Imports</summary>
@@ -15,11 +10,11 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import graph-theory.base-change-dependent-directed-graphs funext
-open import graph-theory.dependent-directed-graphs funext
-open import graph-theory.directed-graphs funext
-open import graph-theory.equivalences-dependent-directed-graphs funext
-open import graph-theory.morphisms-directed-graphs funext
+open import graph-theory.base-change-dependent-directed-graphs
+open import graph-theory.dependent-directed-graphs
+open import graph-theory.directed-graphs
+open import graph-theory.equivalences-dependent-directed-graphs
+open import graph-theory.morphisms-directed-graphs
 ```
 
 </details>

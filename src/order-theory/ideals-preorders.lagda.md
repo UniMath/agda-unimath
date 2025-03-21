@@ -1,24 +1,19 @@
 # Ideals in preorders
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.ideals-preorders
-  (funext : function-extensionality)
-  where
+module order-theory.ideals-preorders where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.inhabited-types funext
+open import foundation.inhabited-types
 open import foundation.universe-levels
 
-open import order-theory.lower-types-preorders funext
-open import order-theory.preorders funext
+open import order-theory.lower-types-preorders
+open import order-theory.preorders
 ```
 
 </details>

@@ -1,34 +1,29 @@
 # Proper divisors of natural numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.proper-divisors-natural-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.proper-divisors-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers funext
-open import elementary-number-theory.equality-natural-numbers funext
-open import elementary-number-theory.inequality-natural-numbers funext
-open import elementary-number-theory.modular-arithmetic-standard-finite-types funext
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers funext
+open import elementary-number-theory.strict-inequality-natural-numbers
 
-open import foundation.cartesian-product-types funext
-open import foundation.decidable-types funext
+open import foundation.cartesian-product-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.identity-types funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
-open import foundation.propositions funext
-open import foundation.type-arithmetic-empty-type funext
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.negated-equality
+open import foundation.negation
+open import foundation.propositions
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 ```
 

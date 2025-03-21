@@ -1,24 +1,19 @@
 # The precategory of posets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.precategory-of-posets
-  (funext : function-extensionality)
-  where
+module order-theory.precategory-of-posets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories funext
-open import category-theory.precategories funext
+open import category-theory.large-precategories
+open import category-theory.precategories
 
 open import foundation.universe-levels
 
-open import order-theory.order-preserving-maps-posets funext
-open import order-theory.posets funext
+open import order-theory.order-preserving-maps-posets
+open import order-theory.posets
 ```
 
 </details>

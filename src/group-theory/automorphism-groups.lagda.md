@@ -1,32 +1,27 @@
 # Automorphism groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.automorphism-groups
-  (funext : function-extensionality)
-  where
+module group-theory.automorphism-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.1-types funext
-open import foundation.connected-components funext
+open import foundation.1-types
+open import foundation.connected-components
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types funext
-open import foundation.mere-equality funext
-open import foundation.torsorial-type-families funext
+open import foundation.identity-types
+open import foundation.mere-equality
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups funext
-open import group-theory.equivalences-concrete-groups funext
+open import group-theory.concrete-groups
+open import group-theory.equivalences-concrete-groups
 
-open import higher-group-theory.automorphism-groups funext
-open import higher-group-theory.higher-groups funext
+open import higher-group-theory.automorphism-groups
+open import higher-group-theory.higher-groups
 ```
 
 </details>

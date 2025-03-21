@@ -1,25 +1,20 @@
 # The metric space of cauchy approximations in a metric space
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space
-  (funext : function-extensionality)
-  where
+module metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers funext
+open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.universe-levels
 
-open import metric-spaces.cauchy-approximations-metric-spaces funext
-open import metric-spaces.dependent-products-metric-spaces funext
-open import metric-spaces.metric-spaces funext
-open import metric-spaces.subspaces-metric-spaces funext
+open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.dependent-products-metric-spaces
+open import metric-spaces.metric-spaces
+open import metric-spaces.subspaces-metric-spaces
 ```
 
 </details>

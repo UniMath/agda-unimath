@@ -1,12 +1,7 @@
 # Transitive multisets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.transitive-multisets
-  (funext : function-extensionality)
-  where
+module trees.transitive-multisets where
 ```
 
 <details><summary>Imports</summary>
@@ -14,8 +9,8 @@ module
 ```agda
 open import foundation.universe-levels
 
-open import trees.multisets funext
-open import trees.submultisets funext
+open import trees.multisets
+open import trees.submultisets
 ```
 
 </details>

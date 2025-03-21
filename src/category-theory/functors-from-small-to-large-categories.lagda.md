@@ -1,26 +1,21 @@
 # Functors from small to large categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.functors-from-small-to-large-categories
-  (funext : function-extensionality)
-  where
+module category-theory.functors-from-small-to-large-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories funext
-open import category-theory.functors-from-small-to-large-precategories funext
-open import category-theory.large-categories funext
-open import category-theory.maps-from-small-to-large-categories funext
+open import category-theory.categories
+open import category-theory.functors-from-small-to-large-precategories
+open import category-theory.large-categories
+open import category-theory.maps-from-small-to-large-categories
 
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.universe-levels
 ```
 

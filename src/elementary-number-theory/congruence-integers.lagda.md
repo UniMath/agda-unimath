@@ -1,32 +1,27 @@
 # The congruence relations on the integers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.congruence-integers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.congruence-integers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.absolute-value-integers funext
-open import elementary-number-theory.addition-integers funext
-open import elementary-number-theory.congruence-natural-numbers funext
-open import elementary-number-theory.difference-integers funext
-open import elementary-number-theory.distance-integers funext
-open import elementary-number-theory.divisibility-integers funext
+open import elementary-number-theory.absolute-value-integers
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.difference-integers
+open import elementary-number-theory.distance-integers
+open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers funext
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.identity-types funext
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```

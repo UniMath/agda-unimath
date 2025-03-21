@@ -1,28 +1,23 @@
 # The poset of ideals of a commutative ring
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.poset-of-ideals-commutative-rings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.poset-of-ideals-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
-open import commutative-algebra.ideals-commutative-rings funext
+open import commutative-algebra.commutative-rings
+open import commutative-algebra.ideals-commutative-rings
 
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.large-posets funext
-open import order-theory.large-preorders funext
+open import order-theory.large-posets
+open import order-theory.large-preorders
 
-open import ring-theory.poset-of-ideals-rings funext
+open import ring-theory.poset-of-ideals-rings
 ```
 
 </details>

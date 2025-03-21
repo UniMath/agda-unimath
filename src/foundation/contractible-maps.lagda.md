@@ -1,12 +1,7 @@
 # Contractible maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.contractible-maps
-  (funext : function-extensionality)
-  where
+module foundation.contractible-maps where
 
 open import foundation-core.contractible-maps public
 ```
@@ -15,9 +10,9 @@ open import foundation-core.contractible-maps public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.logical-equivalences funext
-open import foundation.truncated-maps funext
+open import foundation.equivalences
+open import foundation.logical-equivalences
+open import foundation.truncated-maps
 open import foundation.universe-levels
 
 open import foundation-core.function-types

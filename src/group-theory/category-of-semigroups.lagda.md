@@ -1,30 +1,25 @@
 # The category of semigroups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.category-of-semigroups
-  (funext : function-extensionality)
-  where
+module group-theory.category-of-semigroups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories funext
-open import category-theory.large-categories funext
+open import category-theory.categories
+open import category-theory.large-categories
 
-open import foundation.1-types funext
+open import foundation.1-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.isomorphisms-semigroups funext
-open import group-theory.precategory-of-semigroups funext
-open import group-theory.semigroups funext
+open import group-theory.isomorphisms-semigroups
+open import group-theory.precategory-of-semigroups
+open import group-theory.semigroups
 ```
 
 </details>

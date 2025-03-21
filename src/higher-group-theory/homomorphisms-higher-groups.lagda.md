@@ -1,27 +1,22 @@
 # Homomorphisms of higher groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  higher-group-theory.homomorphisms-higher-groups
-  (funext : function-extensionality)
-  where
+module higher-group-theory.homomorphisms-higher-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences funext
-open import foundation.identity-types funext
+open import foundation.equivalences
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups funext
+open import higher-group-theory.higher-groups
 
-open import structured-types.pointed-homotopies funext
-open import structured-types.pointed-maps funext
+open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
 
-open import synthetic-homotopy-theory.functoriality-loop-spaces funext
+open import synthetic-homotopy-theory.functoriality-loop-spaces
 ```
 
 </details>

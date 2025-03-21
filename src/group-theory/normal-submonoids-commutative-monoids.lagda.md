@@ -1,38 +1,33 @@
 # Normal submonoids of commutative monoids
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.normal-submonoids-commutative-monoids
-  (funext : function-extensionality)
-  where
+module group-theory.normal-submonoids-commutative-monoids where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.equivalence-relations funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
-open import foundation.retracts-of-types funext
-open import foundation.sets funext
+open import foundation.equivalence-relations
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.retracts-of-types
+open import foundation.sets
 open import foundation.subtype-identity-principle
-open import foundation.subtypes funext
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids funext
-open import group-theory.congruence-relations-commutative-monoids funext
-open import group-theory.monoids funext
-open import group-theory.saturated-congruence-relations-commutative-monoids funext
-open import group-theory.semigroups funext
-open import group-theory.submonoids-commutative-monoids funext
-open import group-theory.subsets-commutative-monoids funext
+open import group-theory.commutative-monoids
+open import group-theory.congruence-relations-commutative-monoids
+open import group-theory.monoids
+open import group-theory.saturated-congruence-relations-commutative-monoids
+open import group-theory.semigroups
+open import group-theory.submonoids-commutative-monoids
+open import group-theory.subsets-commutative-monoids
 ```
 
 </details>

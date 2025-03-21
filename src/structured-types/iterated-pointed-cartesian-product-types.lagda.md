@@ -1,25 +1,20 @@
 # Iterated cartesian products of pointed types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.iterated-pointed-cartesian-product-types
-  (funext : function-extensionality)
-  where
+module structured-types.iterated-pointed-cartesian-product-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.raising-universe-levels-unit-type funext
+open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.lists
 
-open import structured-types.pointed-cartesian-product-types funext
+open import structured-types.pointed-cartesian-product-types
 open import structured-types.pointed-types
 ```
 

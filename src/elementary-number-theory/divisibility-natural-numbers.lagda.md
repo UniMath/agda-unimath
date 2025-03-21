@@ -1,38 +1,33 @@
 # Divisibility of natural numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.divisibility-natural-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.divisibility-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.distance-natural-numbers funext
-open import elementary-number-theory.equality-natural-numbers funext
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers funext
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.logical-equivalences funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
-open import foundation.propositional-maps funext
-open import foundation.propositions funext
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.logical-equivalences
+open import foundation.negated-equality
+open import foundation.negation
+open import foundation.propositional-maps
+open import foundation.propositions
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-empty-type funext
+open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

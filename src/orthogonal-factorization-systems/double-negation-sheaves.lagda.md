@@ -1,34 +1,29 @@
 # Double negation sheaves
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.double-negation-sheaves
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.double-negation-sheaves where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.double-negation-stable-propositions funext
-open import foundation.empty-types funext
-open import foundation.irrefutable-propositions funext
-open import foundation.logical-equivalences funext
-open import foundation.negation funext
+open import foundation.dependent-products-propositions
+open import foundation.double-negation-stable-propositions
+open import foundation.empty-types
+open import foundation.irrefutable-propositions
+open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.universal-property-coproduct-types funext
+open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
 
-open import orthogonal-factorization-systems.null-types funext
+open import orthogonal-factorization-systems.null-types
 ```
 
 </details>

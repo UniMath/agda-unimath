@@ -1,12 +1,7 @@
 # Extensions of maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.extensions-maps
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.extensions-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -14,25 +9,25 @@ module
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types funext
-open import foundation.embeddings funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-function-types funext
-open import foundation.functoriality-dependent-pair-types funext
+open import foundation.dependent-products-truncated-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
-open import foundation.monomorphisms funext
-open import foundation.postcomposition-functions funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
+open import foundation.monomorphisms
+open import foundation.postcomposition-functions
+open import foundation.propositions
+open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
-open import foundation.truncated-types funext
+open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

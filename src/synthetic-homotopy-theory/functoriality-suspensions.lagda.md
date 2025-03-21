@@ -1,33 +1,28 @@
 # Functoriality of suspensions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.functoriality-suspensions
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.functoriality-suspensions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-identifications funext
+open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.retractions funext
-open import foundation.retracts-of-types funext
-open import foundation.sections funext
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.retractions
+open import foundation.retracts-of-types
+open import foundation.sections
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.suspension-structures funext
-open import synthetic-homotopy-theory.suspensions-of-types funext
+open import synthetic-homotopy-theory.suspension-structures
+open import synthetic-homotopy-theory.suspensions-of-types
 ```
 
 </details>

@@ -1,29 +1,24 @@
 # Deloopable types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  higher-group-theory.deloopable-types
-  (funext : function-extensionality)
-  where
+module higher-group-theory.deloopable-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.small-types funext
+open import foundation.equivalences
+open import foundation.small-types
 open import foundation.universe-levels
 
-open import higher-group-theory.equivalences-higher-groups funext
-open import higher-group-theory.higher-groups funext
-open import higher-group-theory.small-higher-groups funext
+open import higher-group-theory.equivalences-higher-groups
+open import higher-group-theory.higher-groups
+open import higher-group-theory.small-higher-groups
 
-open import structured-types.pointed-equivalences funext
+open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
-open import structured-types.small-pointed-types funext
+open import structured-types.small-pointed-types
 ```
 
 </details>

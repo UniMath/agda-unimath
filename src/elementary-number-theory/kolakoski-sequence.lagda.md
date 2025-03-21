@@ -1,23 +1,18 @@
 # The Kolakoski sequence
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.kolakoski-sequence
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.kolakoski-sequence where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strong-induction-natural-numbers funext
+open import elementary-number-theory.strong-induction-natural-numbers
 
-open import foundation.booleans funext
-open import foundation.cartesian-product-types funext
+open import foundation.booleans
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 ```
 

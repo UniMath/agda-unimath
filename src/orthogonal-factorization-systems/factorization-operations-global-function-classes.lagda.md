@@ -1,23 +1,18 @@
 # Factorization operations into global function classes
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.factorization-operations-global-function-classes
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.factorization-operations-global-function-classes where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions funext
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.factorization-operations-function-classes funext
-open import orthogonal-factorization-systems.factorizations-of-maps-global-function-classes funext
-open import orthogonal-factorization-systems.global-function-classes funext
+open import orthogonal-factorization-systems.factorization-operations-function-classes
+open import orthogonal-factorization-systems.factorizations-of-maps-global-function-classes
+open import orthogonal-factorization-systems.global-function-classes
 ```
 
 </details>

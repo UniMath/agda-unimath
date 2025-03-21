@@ -3,66 +3,61 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.positive-rational-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.positive-rational-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers funext
-open import elementary-number-theory.additive-group-of-rational-numbers funext
-open import elementary-number-theory.cross-multiplication-difference-integer-fractions funext
-open import elementary-number-theory.difference-rational-numbers funext
-open import elementary-number-theory.inequality-rational-numbers funext
-open import elementary-number-theory.integer-fractions funext
+open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.cross-multiplication-difference-integer-fractions
+open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integer-fractions funext
-open import elementary-number-theory.multiplication-integers funext
-open import elementary-number-theory.multiplication-positive-and-negative-integers funext
-open import elementary-number-theory.multiplication-rational-numbers funext
-open import elementary-number-theory.multiplicative-inverses-positive-integer-fractions funext
-open import elementary-number-theory.multiplicative-monoid-of-rational-numbers funext
-open import elementary-number-theory.negative-integers funext
-open import elementary-number-theory.nonzero-natural-numbers funext
-open import elementary-number-theory.nonzero-rational-numbers funext
-open import elementary-number-theory.positive-and-negative-integers funext
-open import elementary-number-theory.positive-integer-fractions funext
-open import elementary-number-theory.positive-integers funext
-open import elementary-number-theory.rational-numbers funext
-open import elementary-number-theory.strict-inequality-integers funext
-open import elementary-number-theory.strict-inequality-rational-numbers funext
+open import elementary-number-theory.multiplication-integer-fractions
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-positive-and-negative-integers
+open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-inverses-positive-integer-fractions
+open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
+open import elementary-number-theory.negative-integers
+open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.nonzero-rational-numbers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integer-fractions
+open import elementary-number-theory.positive-integers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-integers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.cartesian-product-types funext
-open import foundation.coproduct-types funext
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.equivalences funext
-open import foundation.existential-quantification funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.negation funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.subtypes funext
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids funext
-open import group-theory.invertible-elements-monoids funext
-open import group-theory.monoids funext
-open import group-theory.semigroups funext
-open import group-theory.submonoids funext
-open import group-theory.submonoids funext-commutative-monoids
-open import group-theory.subsemigroups funext
+open import group-theory.commutative-monoids
+open import group-theory.invertible-elements-monoids
+open import group-theory.monoids
+open import group-theory.semigroups
+open import group-theory.submonoids
+open import group-theory.submonoids-commutative-monoids
+open import group-theory.subsemigroups
 ```
 
 </details>

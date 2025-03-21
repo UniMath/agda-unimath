@@ -1,25 +1,20 @@
 # Relatively prime integers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.relatively-prime-integers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.relatively-prime-integers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.absolute-value-integers funext
-open import elementary-number-theory.equality-integers funext
-open import elementary-number-theory.greatest-common-divisor-integers funext
+open import elementary-number-theory.absolute-value-integers
+open import elementary-number-theory.equality-integers
+open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integers
-open import elementary-number-theory.relatively-prime-natural-numbers funext
+open import elementary-number-theory.relatively-prime-natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.propositions funext
+open import foundation.propositions
 open import foundation.universe-levels
 ```
 

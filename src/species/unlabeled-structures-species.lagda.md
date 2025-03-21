@@ -1,12 +1,7 @@
 # Unlabeled structures of finite species
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  species.unlabeled-structures-species
-  (funext : function-extensionality)
-  where
+module species.unlabeled-structures-species where
 ```
 
 <details><summary>Imports</summary>
@@ -17,9 +12,9 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import species.species-of-types funext
+open import species.species-of-types
 
-open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

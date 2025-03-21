@@ -1,25 +1,20 @@
 # The Archimedean property of the natural numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.archimedean-property-natural-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.archimedean-property-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.euclidean-division-natural-numbers funext
+open import elementary-number-theory.euclidean-division-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers funext
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification funext
-open import foundation.propositional-truncations funext
+open import foundation.existential-quantification
+open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 ```
 

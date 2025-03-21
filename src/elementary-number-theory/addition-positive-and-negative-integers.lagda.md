@@ -1,31 +1,26 @@
 # Addition of positive, negative, nonnegative and nonpositive integers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.addition-positive-and-negative-integers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.addition-positive-and-negative-integers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers funext
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.negative-integers funext
-open import elementary-number-theory.nonnegative-integers funext
-open import elementary-number-theory.nonpositive-integers funext
-open import elementary-number-theory.positive-and-negative-integers funext
-open import elementary-number-theory.positive-integers funext
+open import elementary-number-theory.negative-integers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.nonpositive-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.unit-type
 ```
 

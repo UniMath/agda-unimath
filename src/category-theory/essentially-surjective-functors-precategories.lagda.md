@@ -1,24 +1,19 @@
 # Essentially surjective functors between precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.essentially-surjective-functors-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.essentially-surjective-functors-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories funext
-open import category-theory.isomorphisms-in-precategories funext
-open import category-theory.precategories funext
+open import category-theory.functors-precategories
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.precategories
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification funext
-open import foundation.propositions funext
+open import foundation.existential-quantification
+open import foundation.propositions
 open import foundation.universe-levels
 ```
 

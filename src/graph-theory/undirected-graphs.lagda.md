@@ -1,25 +1,20 @@
 # Undirected graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.undirected-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import foundation.unordered-pairs funext
+open import foundation.unordered-pairs
 
-open import graph-theory.directed-graphs funext
+open import graph-theory.directed-graphs
 ```
 
 </details>

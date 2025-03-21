@@ -1,12 +1,7 @@
 # The opposite of a group
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.opposite-groups
-  (funext : function-extensionality)
-  where
+module group-theory.opposite-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -15,10 +10,10 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.groups funext
-open import group-theory.isomorphisms-groups funext
-open import group-theory.monoids funext
-open import group-theory.opposite-semigroups funext
+open import group-theory.groups
+open import group-theory.isomorphisms-groups
+open import group-theory.monoids
+open import group-theory.opposite-semigroups
 ```
 
 </details>

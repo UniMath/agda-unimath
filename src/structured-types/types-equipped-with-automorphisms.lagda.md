@@ -1,23 +1,18 @@
 # Types equipped with automorphisms
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.types-equipped-with-automorphisms
-  (funext : function-extensionality)
-  where
+module structured-types.types-equipped-with-automorphisms where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.automorphisms funext
+open import foundation.automorphisms
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.universe-levels
 
-open import structured-types.types-equipped-with-endomorphisms funext
+open import structured-types.types-equipped-with-endomorphisms
 ```
 
 </details>

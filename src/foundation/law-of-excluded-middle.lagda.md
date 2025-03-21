@@ -1,27 +1,22 @@
 # The law of excluded middle
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.law-of-excluded-middle
-  (funext : function-extensionality)
-  where
+module foundation.law-of-excluded-middle where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-types funext
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-propositions
 open import foundation.universe-levels
 
-open import foundation-core.decidable-propositions funext
+open import foundation-core.decidable-propositions
 open import foundation-core.negation
 open import foundation-core.propositions
 
-open import univalent-combinatorics.2-element-types funext
+open import univalent-combinatorics.2-element-types
 ```
 
 </details>

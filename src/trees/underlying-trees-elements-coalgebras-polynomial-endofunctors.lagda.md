@@ -1,12 +1,7 @@
 # The underlying trees of elements of coalgebras of polynomial endofunctors
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.underlying-trees-elements-coalgebras-polynomial-endofunctors
-  (funext : function-extensionality)
-  where
+module trees.underlying-trees-elements-coalgebras-polynomial-endofunctors where
 ```
 
 <details><summary>Imports</summary>
@@ -14,37 +9,37 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.contractible-types funext
-open import foundation.coproduct-types funext
+open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.equivalence-extensionality funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
+open import foundation.empty-types
+open import foundation.equivalence-extensionality
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.isolated-elements funext
-open import foundation.negated-equality funext
-open import foundation.propositions funext
-open import foundation.torsorial-type-families funext
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.isolated-elements
+open import foundation.negated-equality
+open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-empty-type funext
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs funext
-open import graph-theory.morphisms-directed-graphs funext
-open import graph-theory.walks-directed-graphs funext
+open import graph-theory.directed-graphs
+open import graph-theory.morphisms-directed-graphs
+open import graph-theory.walks-directed-graphs
 
-open import trees.coalgebras-polynomial-endofunctors funext
-open import trees.combinator-directed-trees funext
-open import trees.combinator-enriched-directed-trees funext
-open import trees.directed-trees funext
-open import trees.elementhood-relation-coalgebras-polynomial-endofunctors funext
-open import trees.enriched-directed-trees funext
-open import trees.equivalences-directed-trees funext
-open import trees.equivalences-enriched-directed-trees funext
+open import trees.coalgebras-polynomial-endofunctors
+open import trees.combinator-directed-trees
+open import trees.combinator-enriched-directed-trees
+open import trees.directed-trees
+open import trees.elementhood-relation-coalgebras-polynomial-endofunctors
+open import trees.enriched-directed-trees
+open import trees.equivalences-directed-trees
+open import trees.equivalences-enriched-directed-trees
 ```
 
 </details>

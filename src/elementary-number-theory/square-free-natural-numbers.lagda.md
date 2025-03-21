@@ -1,20 +1,15 @@
 # Square-free natural numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.square-free-natural-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.square-free-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers funext
+open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.squares-natural-numbers funext
+open import elementary-number-theory.squares-natural-numbers
 
 open import foundation.universe-levels
 ```

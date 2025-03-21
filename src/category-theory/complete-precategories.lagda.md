@@ -1,22 +1,17 @@
 # Complete precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.complete-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.complete-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.cones-precategories funext
-open import category-theory.functors-precategories funext
-open import category-theory.limits-precategories funext
-open import category-theory.precategories funext
-open import category-theory.terminal-objects-precategories funext
+open import category-theory.cones-precategories
+open import category-theory.functors-precategories
+open import category-theory.limits-precategories
+open import category-theory.precategories
+open import category-theory.terminal-objects-precategories
 
 open import foundation.universe-levels
 ```

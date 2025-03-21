@@ -1,27 +1,22 @@
 # Inhabited chains in preorders
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.inhabited-chains-preorders
-  (funext : function-extensionality)
-  where
+module order-theory.inhabited-chains-preorders where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.inhabited-subtypes funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
+open import foundation.inhabited-subtypes
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import order-theory.chains-preorders funext
-open import order-theory.preorders funext
-open import order-theory.subpreorders funext
-open import order-theory.total-preorders funext
+open import order-theory.chains-preorders
+open import order-theory.preorders
+open import order-theory.subpreorders
+open import order-theory.total-preorders
 ```
 
 </details>

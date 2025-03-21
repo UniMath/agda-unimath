@@ -1,36 +1,31 @@
 # Concrete groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.concrete-groups
-  (funext : function-extensionality)
-  where
+module group-theory.concrete-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types funext
-open import foundation.1-types funext
+open import foundation.0-connected-types
+open import foundation.1-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.mere-equality funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.truncated-types funext
+open import foundation.identity-types
+open import foundation.mere-equality
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import group-theory.groups funext
-open import group-theory.monoids funext
-open import group-theory.opposite-groups funext
-open import group-theory.opposite-semigroups funext
-open import group-theory.semigroups funext
+open import group-theory.groups
+open import group-theory.monoids
+open import group-theory.opposite-groups
+open import group-theory.opposite-semigroups
+open import group-theory.semigroups
 
-open import higher-group-theory.higher-groups funext
+open import higher-group-theory.higher-groups
 
 open import structured-types.pointed-types
 ```

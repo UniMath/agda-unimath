@@ -3,22 +3,17 @@
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  modal-type-theory.crisp-law-of-excluded-middle
-  (funext : function-extensionality)
-  where
+module modal-type-theory.crisp-law-of-excluded-middle where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-types funext
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation-core.decidable-propositions funext
+open import foundation-core.decidable-propositions
 open import foundation-core.propositions
 ```
 

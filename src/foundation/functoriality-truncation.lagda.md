@@ -1,12 +1,7 @@
 # Functoriality of truncations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.functoriality-truncation
-  (funext : function-extensionality)
-  where
+module foundation.functoriality-truncation where
 ```
 
 <details><summary>Imports</summary>
@@ -14,13 +9,13 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality funext
-
-open import foundation.truncations funext
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
+open import foundation.truncations
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.commuting-squares-of-maps funext
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types

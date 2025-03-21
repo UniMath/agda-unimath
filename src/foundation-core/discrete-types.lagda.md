@@ -1,18 +1,13 @@
 # Discrete types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation-core.discrete-types
-  (funext : function-extensionality)
-  where
+module foundation-core.discrete-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-equality funext
+open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 

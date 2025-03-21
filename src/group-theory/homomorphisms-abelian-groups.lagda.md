@@ -1,32 +1,27 @@
 # Homomorphisms of abelian groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.homomorphisms-abelian-groups
-  (funext : function-extensionality)
-  where
+module group-theory.homomorphisms-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-categories funext
+open import category-theory.large-categories
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.sets funext
-open import foundation.torsorial-type-families funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.category-of-abelian-groups funext
-open import group-theory.homomorphisms-commutative-monoids funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.homomorphisms-semigroups funext
+open import group-theory.abelian-groups
+open import group-theory.category-of-abelian-groups
+open import group-theory.homomorphisms-commutative-monoids
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-semigroups
 ```
 
 </details>

@@ -3,12 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  globular-types.equality-globular-types
-  (funext : function-extensionality)
-  where
+module globular-types.equality-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -16,13 +11,13 @@ module
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.binary-homotopies funext
-open import foundation.cartesian-product-types funext
+open import foundation.binary-homotopies
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types funext
-open import foundation.torsorial-type-families funext
-open import foundation.univalence funext
+open import foundation.identity-types
+open import foundation.torsorial-type-families
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.coherently-invertible-maps

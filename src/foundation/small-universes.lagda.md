@@ -1,12 +1,7 @@
 # Small universes
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.small-universes
-  (funext : function-extensionality)
-  where
+module foundation.small-universes where
 ```
 
 <details><summary>Imports</summary>
@@ -15,7 +10,7 @@ module
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.small-types funext
+open import foundation-core.small-types
 ```
 
 </details>

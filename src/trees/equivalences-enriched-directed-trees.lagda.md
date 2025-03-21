@@ -1,40 +1,34 @@
 # Equivalences of enriched directed trees
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.equivalences-enriched-directed-trees
-  (funext : function-extensionality)
-  where
+module trees.equivalences-enriched-directed-trees where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps funext
-open import foundation.commuting-triangles-of-maps funext
-open import foundation.contractible-types funext
+open import foundation.commuting-squares-of-maps
+open import foundation.commuting-triangles-of-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types funext
-open import foundation.equivalence-extensionality funext
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
+open import foundation.equality-dependent-function-types
+open import foundation.equivalence-extensionality
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import trees.enriched-directed-trees funext
-open import trees.equivalences-directed-trees funext
-open import trees.morphisms-directed-trees funext
-open import trees.morphisms-enriched-directed-trees funext
-open import trees.rooted-morphisms-enriched-directed-trees funext
+open import trees.enriched-directed-trees
+open import trees.equivalences-directed-trees
+open import trees.morphisms-directed-trees
+open import trees.morphisms-enriched-directed-trees
+open import trees.rooted-morphisms-enriched-directed-trees
 ```
 
 </details>

@@ -1,26 +1,21 @@
 # Powers of elements in commutative semirings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.powers-of-elements-commutative-semirings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.powers-of-elements-commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-semirings funext
+open import commutative-algebra.commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import ring-theory.powers-of-elements-semirings funext
+open import ring-theory.powers-of-elements-semirings
 ```
 
 </details>

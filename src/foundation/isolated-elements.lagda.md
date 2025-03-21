@@ -1,39 +1,34 @@
 # Isolated elements
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.isolated-elements
-  (funext : function-extensionality)
-  where
+module foundation.isolated-elements where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.constant-maps funext
-open import foundation.decidable-embeddings funext
-open import foundation.decidable-equality funext
-open import foundation.decidable-maps funext
-open import foundation.decidable-types funext
+open import foundation.constant-maps
+open import foundation.decidable-embeddings
+open import foundation.decidable-equality
+open import foundation.decidable-maps
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.embeddings funext
+open import foundation.dependent-products-propositions
+open import foundation.embeddings
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negated-equality
+open import foundation.negation
+open import foundation.sets
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.decidable-propositions funext
+open import foundation-core.decidable-propositions
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -41,7 +36,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.maybe
 open import foundation-core.propositions
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 ```

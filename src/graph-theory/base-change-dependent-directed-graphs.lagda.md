@@ -1,12 +1,7 @@
 # Base change of dependent directed graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.base-change-dependent-directed-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.base-change-dependent-directed-graphs where
 ```
 
 <details><summary>Imports</summary>
@@ -15,9 +10,9 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import graph-theory.dependent-directed-graphs funext
-open import graph-theory.directed-graphs funext
-open import graph-theory.morphisms-directed-graphs funext
+open import graph-theory.dependent-directed-graphs
+open import graph-theory.directed-graphs
+open import graph-theory.morphisms-directed-graphs
 ```
 
 </details>

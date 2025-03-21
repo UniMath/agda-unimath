@@ -3,27 +3,22 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.multiplicative-monoid-of-rational-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.multiplicative-monoid-of-rational-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.multiplication-rational-numbers funext
-open import elementary-number-theory.rational-numbers funext
+open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids funext
-open import group-theory.monoids funext
-open import group-theory.semigroups funext
+open import group-theory.commutative-monoids
+open import group-theory.monoids
+open import group-theory.semigroups
 ```
 
 </details>

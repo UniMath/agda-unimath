@@ -1,12 +1,7 @@
 # Propositional truncations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.propositional-truncations
-  (funext : function-extensionality)
-  where
+module foundation.propositional-truncations where
 ```
 
 <details><summary>Imports</summary>
@@ -14,12 +9,12 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.functoriality-cartesian-product-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
-open import foundation.truncations funext
-open import foundation.universal-property-propositional-truncation funext
+open import foundation.dependent-products-propositions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.truncations
+open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

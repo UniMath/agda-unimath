@@ -1,12 +1,7 @@
 # Fibers of maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.fibers-of-maps
-  (funext : function-extensionality)
-  where
+module foundation.fibers-of-maps where
 
 open import foundation-core.fibers-of-maps public
 ```
@@ -15,9 +10,9 @@ open import foundation-core.fibers-of-maps public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospan-diagrams funext
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.postcomposition-functions funext
+open import foundation.postcomposition-functions
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
@@ -26,13 +21,13 @@ open import foundation.universe-levels
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types funext
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.pullbacks funext
+open import foundation-core.pullbacks
 open import foundation-core.transport-along-identifications
-open import foundation-core.universal-property-pullbacks funext
+open import foundation-core.universal-property-pullbacks
 ```
 
 </details>

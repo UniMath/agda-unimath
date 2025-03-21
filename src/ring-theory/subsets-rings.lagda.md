@@ -1,27 +1,22 @@
 # Subsets of rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.subsets-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.subsets-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types funext
-open import foundation.propositional-extensionality funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.subtypes funext
+open import foundation.identity-types
+open import foundation.propositional-extensionality
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.subgroups-abelian-groups funext
+open import group-theory.subgroups-abelian-groups
 
-open import ring-theory.rings funext
+open import ring-theory.rings
 ```
 
 </details>

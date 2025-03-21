@@ -1,28 +1,23 @@
 # The full subgroup of a group
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.full-subgroups
-  (funext : function-extensionality)
-  where
+module group-theory.full-subgroups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.full-subtypes funext
-open import foundation.propositions funext
+open import foundation.equivalences
+open import foundation.full-subtypes
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import group-theory.groups funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.isomorphisms-groups funext
-open import group-theory.subgroups funext
-open import group-theory.subsets-groups funext
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.isomorphisms-groups
+open import group-theory.subgroups
+open import group-theory.subsets-groups
 ```
 
 </details>

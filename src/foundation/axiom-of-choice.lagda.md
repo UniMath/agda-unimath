@@ -1,25 +1,21 @@
 # The axiom of choice
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.axiom-of-choice
-  (funext : function-extensionality)
-  where
+module foundation.axiom-of-choice where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functoriality-propositional-truncation funext
-open import foundation.inhabited-types funext
-open import foundation.postcomposition-functions funext
-open import foundation.projective-types funext
-open import foundation.sections funext
+open import foundation.function-extensionality-axiom
+open import foundation.functoriality-propositional-truncation
+open import foundation.inhabited-types
+open import foundation.postcomposition-functions
+open import foundation.projective-types
+open import foundation.sections
 open import foundation.split-surjective-maps
-open import foundation.surjective-maps funext
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

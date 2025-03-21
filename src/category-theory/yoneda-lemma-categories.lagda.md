@@ -1,25 +1,20 @@
 # The Yoneda lemma for categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.yoneda-lemma-categories
-  (funext : function-extensionality)
-  where
+module category-theory.yoneda-lemma-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories funext
-open import category-theory.copresheaf-categories funext
-open import category-theory.natural-transformations-functors-from-small-to-large-categories funext
-open import category-theory.representable-functors-categories funext
-open import category-theory.yoneda-lemma-precategories funext
+open import category-theory.categories
+open import category-theory.copresheaf-categories
+open import category-theory.natural-transformations-functors-from-small-to-large-categories
+open import category-theory.representable-functors-categories
+open import category-theory.yoneda-lemma-precategories
 
-open import foundation.category-of-sets funext
-open import foundation.equivalences funext
+open import foundation.category-of-sets
+open import foundation.equivalences
 open import foundation.universe-levels
 ```
 

@@ -1,26 +1,21 @@
 # Trivial higher groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  higher-group-theory.trivial-higher-groups
-  (funext : function-extensionality)
-  where
+module higher-group-theory.trivial-higher-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types funext
-open import foundation.contractible-types funext
+open import foundation.0-connected-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.propositions funext
-open import foundation.raising-universe-levels-unit-type funext
+open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups funext
+open import higher-group-theory.higher-groups
 ```
 
 </details>

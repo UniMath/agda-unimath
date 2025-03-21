@@ -1,24 +1,19 @@
 # Decidable propositions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation-core.decidable-propositions
-  (funext : function-extensionality)
-  where
+module foundation-core.decidable-propositions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types funext
-open import foundation.decidable-types funext
+open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.double-negation funext
-open import foundation.negation funext
-open import foundation.propositional-truncations funext
+open import foundation.dependent-products-propositions
+open import foundation.double-negation
+open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -29,7 +24,7 @@ open import foundation-core.empty-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.propositions
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 ```
 
 </details>

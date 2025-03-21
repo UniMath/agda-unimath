@@ -1,49 +1,44 @@
 # Cartesian morphisms of arrows
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.cartesian-morphisms-arrows
-  (funext : function-extensionality)
-  where
+module foundation.cartesian-morphisms-arrows where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-triangles-of-maps funext
-open import foundation.commuting-triangles-of-morphisms-arrows funext
-open import foundation.cones-over-cospan-diagrams funext
-open import foundation.coproducts-pullbacks funext
+open import foundation.commuting-triangles-of-maps
+open import foundation.commuting-triangles-of-morphisms-arrows
+open import foundation.cones-over-cospan-diagrams
+open import foundation.coproducts-pullbacks
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-pullbacks funext
-open import foundation.dependent-sums-pullbacks funext
-open import foundation.diagonal-maps-cartesian-products-of-types funext
-open import foundation.equivalences funext
-open import foundation.fibers-of-maps funext
-open import foundation.function-types funext
-open import foundation.functoriality-cartesian-product-types funext
-open import foundation.functoriality-coproduct-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.functoriality-fibers-of-maps funext
-open import foundation.homotopies-morphisms-arrows funext
-open import foundation.identity-types funext
-open import foundation.morphisms-arrows funext
-open import foundation.postcomposition-functions funext
-open import foundation.postcomposition-pullbacks funext
-open import foundation.products-pullbacks funext
-open import foundation.pullbacks funext
-open import foundation.standard-pullbacks funext
+open import foundation.dependent-products-pullbacks
+open import foundation.dependent-sums-pullbacks
+open import foundation.diagonal-maps-cartesian-products-of-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-fibers-of-maps
+open import foundation.homotopies-morphisms-arrows
+open import foundation.identity-types
+open import foundation.morphisms-arrows
+open import foundation.postcomposition-functions
+open import foundation.postcomposition-pullbacks
+open import foundation.products-pullbacks
+open import foundation.pullbacks
+open import foundation.standard-pullbacks
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.commuting-squares-of-maps funext
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.homotopies
 open import foundation-core.propositions
-open import foundation-core.universal-property-pullbacks funext
+open import foundation-core.universal-property-pullbacks
 ```
 
 </details>

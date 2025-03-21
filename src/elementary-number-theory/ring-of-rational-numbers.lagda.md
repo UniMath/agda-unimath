@@ -3,31 +3,26 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.ring-of-rational-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.ring-of-rational-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.commutative-rings
 
-open import elementary-number-theory.additive-group-of-rational-numbers funext
-open import elementary-number-theory.multiplication-rational-numbers funext
-open import elementary-number-theory.multiplicative-monoid-of-rational-numbers funext
+open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.semigroups funext
+open import group-theory.semigroups
 
-open import ring-theory.rings funext
+open import ring-theory.rings
 ```
 
 </details>

@@ -3,12 +3,7 @@
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  modal-type-theory.flat-discrete-crisp-types
-  (funext : function-extensionality)
-  where
+module modal-type-theory.flat-discrete-crisp-types where
 ```
 
 <details><summary>Imports</summary>
@@ -17,24 +12,24 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.booleans funext
+open import foundation.booleans
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.empty-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.retractions funext
-open import foundation.sections funext
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import modal-type-theory.action-on-homotopies-flat-modality funext
-open import modal-type-theory.crisp-identity-types funext
-open import modal-type-theory.flat-modality funext
-open import modal-type-theory.functoriality-flat-modality funext
+open import modal-type-theory.action-on-homotopies-flat-modality
+open import modal-type-theory.crisp-identity-types
+open import modal-type-theory.flat-modality
+open import modal-type-theory.functoriality-flat-modality
 ```
 
 </details>

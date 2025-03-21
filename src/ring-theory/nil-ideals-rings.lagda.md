@@ -1,25 +1,20 @@
 # Nil ideals of rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.nil-ideals-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.nil-ideals-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions funext
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import ring-theory.ideals-rings funext
-open import ring-theory.left-ideals-rings funext
-open import ring-theory.nilpotent-elements-rings funext
-open import ring-theory.right-ideals-rings funext
-open import ring-theory.rings funext
+open import ring-theory.ideals-rings
+open import ring-theory.left-ideals-rings
+open import ring-theory.nilpotent-elements-rings
+open import ring-theory.right-ideals-rings
+open import ring-theory.rings
 ```
 
 </details>

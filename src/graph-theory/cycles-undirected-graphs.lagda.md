@@ -1,12 +1,7 @@
 # Cycles in undirected graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.cycles-undirected-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.cycles-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
@@ -17,9 +12,9 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import graph-theory.embeddings-undirected-graphs funext
-open import graph-theory.polygons funext
-open import graph-theory.undirected-graphs funext
+open import graph-theory.embeddings-undirected-graphs
+open import graph-theory.polygons
+open import graph-theory.undirected-graphs
 ```
 
 </details>

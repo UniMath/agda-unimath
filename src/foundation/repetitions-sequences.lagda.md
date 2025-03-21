@@ -1,25 +1,20 @@
 # Repetitions in sequences
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.repetitions-sequences
-  (funext : function-extensionality)
-  where
+module foundation.repetitions-sequences where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers funext
+open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.negated-equality funext
-open import foundation.pairs-of-distinct-elements funext
-open import foundation.repetitions-of-values funext
+open import foundation.negated-equality
+open import foundation.pairs-of-distinct-elements
+open import foundation.repetitions-of-values
 open import foundation.sequences
 open import foundation.unit-type
 open import foundation.universe-levels

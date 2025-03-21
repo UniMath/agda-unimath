@@ -1,34 +1,28 @@
 # Natural transformations between maps between precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.natural-transformations-maps-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.natural-transformations-maps-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.commuting-squares-of-morphisms-in-precategories funext
-open import category-theory.maps-precategories funext
-open import category-theory.precategories funext
+open import category-theory.commuting-squares-of-morphisms-in-precategories
+open import category-theory.maps-precategories
+open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.strictly-involutive-identity-types funext
-open import foundation.subtypes funext
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.strictly-involutive-identity-types
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 

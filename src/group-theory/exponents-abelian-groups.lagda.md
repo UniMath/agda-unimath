@@ -1,24 +1,19 @@
 # Exponents of abelian groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.exponents-abelian-groups
-  (funext : function-extensionality)
-  where
+module group-theory.exponents-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.group-of-integers funext
+open import elementary-number-theory.group-of-integers
 
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.exponents-groups funext
-open import group-theory.subgroups-abelian-groups funext
+open import group-theory.abelian-groups
+open import group-theory.exponents-groups
+open import group-theory.subgroups-abelian-groups
 ```
 
 </details>

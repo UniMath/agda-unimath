@@ -1,32 +1,27 @@
 # Equality of metric spaces
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  metric-spaces.equality-of-metric-spaces
-  (funext : function-extensionality)
-  where
+module metric-spaces.equality-of-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
-open import foundation.torsorial-type-families funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import metric-spaces.equality-of-premetric-spaces funext
-open import metric-spaces.isometric-equivalences-premetric-spaces funext
-open import metric-spaces.metric-spaces funext
-open import metric-spaces.premetric-spaces funext
+open import metric-spaces.equality-of-premetric-spaces
+open import metric-spaces.isometric-equivalences-premetric-spaces
+open import metric-spaces.metric-spaces
+open import metric-spaces.premetric-spaces
 ```
 
 </details>

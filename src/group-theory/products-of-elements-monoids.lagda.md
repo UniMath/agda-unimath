@@ -1,24 +1,19 @@
 # Products of elements in a monoid
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.products-of-elements-monoids
-  (funext : function-extensionality)
-  where
+module group-theory.products-of-elements-monoids where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.monoids funext
+open import group-theory.monoids
 
-open import lists.concatenation-lists funext
+open import lists.concatenation-lists
 open import lists.lists
 ```
 

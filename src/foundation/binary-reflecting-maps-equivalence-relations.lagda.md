@@ -1,26 +1,21 @@
 # Binary reflecting maps of equivalence relations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.binary-reflecting-maps-equivalence-relations
-  (funext : function-extensionality)
-  where
+module foundation.binary-reflecting-maps-equivalence-relations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.equality-dependent-function-types funext
+open import foundation.dependent-products-propositions
+open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction funext
+open import foundation.homotopy-induction
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
-open import foundation-core.equivalence-relations funext
+open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types

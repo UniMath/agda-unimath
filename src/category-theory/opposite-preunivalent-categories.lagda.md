@@ -1,30 +1,25 @@
 # Opposite preunivalent categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.opposite-preunivalent-categories
-  (funext : function-extensionality)
-  where
+module category-theory.opposite-preunivalent-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-precategories funext
-open import category-theory.opposite-precategories funext
-open import category-theory.precategories funext
-open import category-theory.preunivalent-categories funext
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.opposite-precategories
+open import category-theory.precategories
+open import category-theory.preunivalent-categories
 
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.involutions funext
-open import foundation.sets funext
-open import foundation.strictly-involutive-identity-types funext
-open import foundation.subtypes funext
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.involutions
+open import foundation.sets
+open import foundation.strictly-involutive-identity-types
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 

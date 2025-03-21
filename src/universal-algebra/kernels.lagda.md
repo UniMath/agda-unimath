@@ -1,12 +1,7 @@
 # Kernels of homomorphisms of algebras
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  universal-algebra.kernels
-  (funext : function-extensionality)
-  where
+module universal-algebra.kernels where
 ```
 
 <details><summary>Imports</summary>
@@ -16,20 +11,20 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.equivalence-relations funext
-open import foundation.identity-types funext
+open import foundation.equivalence-relations
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors funext
-open import linear-algebra.vectors funext
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.vectors
 
-open import universal-algebra.algebraic-theories funext
-open import universal-algebra.algebras-of-theories funext
-open import universal-algebra.congruences funext
-open import universal-algebra.homomorphisms-of-algebras funext
-open import universal-algebra.signatures funext
+open import universal-algebra.algebraic-theories
+open import universal-algebra.algebras-of-theories
+open import universal-algebra.congruences
+open import universal-algebra.homomorphisms-of-algebras
+open import universal-algebra.signatures
 ```
 
 </details>

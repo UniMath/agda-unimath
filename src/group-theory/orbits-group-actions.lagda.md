@@ -1,23 +1,18 @@
 # Orbits of group actions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.orbits-group-actions
-  (funext : function-extensionality)
-  where
+module group-theory.orbits-group-actions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.group-actions funext
-open import group-theory.groups funext
+open import group-theory.group-actions
+open import group-theory.groups
 ```
 
 </details>

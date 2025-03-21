@@ -3,12 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.unbounded-pi-finite-types
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.unbounded-pi-finite-types where
 ```
 
 <details><summary>Imports</summary>
@@ -16,30 +11,30 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types funext
-open import foundation.contractible-types funext
-open import foundation.coproduct-types funext
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.equality-coproduct-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.maybe funext
-open import foundation.retracts-of-types funext
-open import foundation.set-truncations funext
-open import foundation.sets funext
+open import foundation.empty-types
+open import foundation.equality-coproduct-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.maybe
+open import foundation.retracts-of-types
+open import foundation.set-truncations
+open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.equality-finite-types funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.finitely-many-connected-components funext
-open import univalent-combinatorics.function-types funext
-open import univalent-combinatorics.pi-finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
-open import univalent-combinatorics.untruncated-pi-finite-types funext
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-many-connected-components
+open import univalent-combinatorics.function-types
+open import univalent-combinatorics.pi-finite-types
+open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
 </details>

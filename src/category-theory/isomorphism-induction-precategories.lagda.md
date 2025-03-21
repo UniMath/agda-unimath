@@ -1,27 +1,22 @@
 # Isomorphism induction in precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.isomorphism-induction-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.isomorphism-induction-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-precategories funext
-open import category-theory.precategories funext
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.precategories
 
-open import foundation.commuting-triangles-of-maps funext
+open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
+open import foundation.function-types
 open import foundation.identity-systems
-open import foundation.identity-types funext
-open import foundation.sections funext
-open import foundation.torsorial-type-families funext
+open import foundation.identity-types
+open import foundation.sections
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 

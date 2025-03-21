@@ -1,23 +1,18 @@
 # Disjoint subtypes
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.disjoint-subtypes
-  (funext : function-extensionality)
-  where
+module foundation.disjoint-subtypes where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.empty-types funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
+open import foundation.dependent-products-propositions
+open import foundation.empty-types
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 

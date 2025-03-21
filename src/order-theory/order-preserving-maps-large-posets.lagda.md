@@ -1,12 +1,7 @@
 # Order preserving maps between large posets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.order-preserving-maps-large-posets
-  (funext : function-extensionality)
-  where
+module order-theory.order-preserving-maps-large-posets where
 ```
 
 <details><summary>Imports</summary>
@@ -14,10 +9,10 @@ module
 ```agda
 open import foundation.universe-levels
 
-open import order-theory.large-posets funext
-open import order-theory.order-preserving-maps-large-preorders funext
-open import order-theory.order-preserving-maps-posets funext
-open import order-theory.similarity-of-elements-large-posets funext
+open import order-theory.large-posets
+open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.order-preserving-maps-posets
+open import order-theory.similarity-of-elements-large-posets
 ```
 
 </details>

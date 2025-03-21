@@ -1,32 +1,27 @@
 # The functor from the precategory of metric spaces and isometries to the precategory of sets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  metric-spaces.functor-category-set-functions-isometry-metric-spaces
-  (funext : function-extensionality)
-  where
+module metric-spaces.functor-category-set-functions-isometry-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.conservative-functors-precategories funext
-open import category-theory.faithful-functors-precategories funext
-open import category-theory.functors-precategories funext
+open import category-theory.conservative-functors-precategories
+open import category-theory.faithful-functors-precategories
+open import category-theory.functors-precategories
 
-open import foundation.category-of-sets funext
+open import foundation.category-of-sets
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.isomorphisms-of-sets funext
-open import foundation.subtypes funext
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.isomorphisms-of-sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.isometries-metric-spaces funext
-open import metric-spaces.metric-spaces funext
-open import metric-spaces.precategory-of-metric-spaces-and-isometries funext
+open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.metric-spaces
+open import metric-spaces.precategory-of-metric-spaces-and-isometries
 ```
 
 </details>

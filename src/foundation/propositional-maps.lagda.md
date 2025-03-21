@@ -1,12 +1,7 @@
 # Propositional maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.propositional-maps
-  (funext : function-extensionality)
-  where
+module foundation.propositional-maps where
 
 open import foundation-core.propositional-maps public
 ```
@@ -15,10 +10,10 @@ open import foundation-core.propositional-maps public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.embeddings funext
-open import foundation.logical-equivalences funext
-open import foundation.truncated-maps funext
+open import foundation.dependent-products-propositions
+open import foundation.embeddings
+open import foundation.logical-equivalences
+open import foundation.truncated-maps
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

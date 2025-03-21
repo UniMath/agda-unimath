@@ -1,38 +1,33 @@
 # Isomorphisms of commutative rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.isomorphisms-commutative-rings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.isomorphisms-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-large-precategories funext
+open import category-theory.isomorphisms-in-large-precategories
 
-open import commutative-algebra.commutative-rings funext
-open import commutative-algebra.homomorphisms-commutative-rings funext
-open import commutative-algebra.invertible-elements-commutative-rings funext
-open import commutative-algebra.precategory-of-commutative-rings funext
+open import commutative-algebra.commutative-rings
+open import commutative-algebra.homomorphisms-commutative-rings
+open import commutative-algebra.invertible-elements-commutative-rings
+open import commutative-algebra.precategory-of-commutative-rings
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import group-theory.isomorphisms-abelian-groups funext
+open import group-theory.isomorphisms-abelian-groups
 
-open import ring-theory.isomorphisms-rings funext
+open import ring-theory.isomorphisms-rings
 ```
 
 </details>

@@ -1,27 +1,22 @@
 # The Fibonacci sequence
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.fibonacci-sequence
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.fibonacci-sequence where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.divisibility-natural-numbers funext
-open import elementary-number-theory.greatest-common-divisor-natural-numbers funext
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.relatively-prime-natural-numbers funext
+open import elementary-number-theory.relatively-prime-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.transport-along-identifications
 ```
 

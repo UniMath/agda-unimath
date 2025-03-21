@@ -1,12 +1,7 @@
 # Epimorphisms with respect to maps into sets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.epimorphisms-with-respect-to-sets
-  (funext : function-extensionality)
-  where
+module foundation.epimorphisms-with-respect-to-sets where
 ```
 
 <details><summary>Imports</summary>
@@ -14,16 +9,16 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification funext
-open import foundation.function-extensionality funext
-
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.propositional-extensionality funext
-open import foundation.propositional-truncations funext
-open import foundation.raising-universe-levels-unit-type funext
-open import foundation.sets funext
-open import foundation.surjective-maps funext
+open import foundation.existential-quantification
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
+open import foundation.raising-universe-levels-unit-type
+open import foundation.sets
+open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
 

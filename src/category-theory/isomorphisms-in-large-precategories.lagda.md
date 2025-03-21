@@ -1,33 +1,28 @@
 # Isomorphisms in large precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.isomorphisms-in-large-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.isomorphisms-in-large-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-precategories funext
-open import category-theory.large-precategories funext
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.large-precategories
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.propositions funext
-open import foundation.retractions funext
-open import foundation.sections funext
-open import foundation.sets funext
-open import foundation.subtypes funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 

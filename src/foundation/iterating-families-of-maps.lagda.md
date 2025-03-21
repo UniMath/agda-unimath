@@ -1,12 +1,7 @@
 # Iterating families of maps over a map
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.iterating-families-of-maps
-  (funext : function-extensionality)
-  where
+module foundation.iterating-families-of-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -15,8 +10,8 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.dependent-identifications funext
-open import foundation.iterating-functions funext
+open import foundation.dependent-identifications
+open import foundation.iterating-functions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 

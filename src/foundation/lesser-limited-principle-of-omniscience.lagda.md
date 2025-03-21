@@ -1,24 +1,19 @@
 # The lesser limited principle of omniscience
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.lesser-limited-principle-of-omniscience
-  (funext : function-extensionality)
-  where
+module foundation.lesser-limited-principle-of-omniscience where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.parity-natural-numbers funext
+open import elementary-number-theory.parity-natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.disjunction funext
-open import foundation.universal-quantification funext
+open import foundation.dependent-products-propositions
+open import foundation.disjunction
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.booleans

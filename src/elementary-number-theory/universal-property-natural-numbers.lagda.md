@@ -1,12 +1,7 @@
 # The universal property of the natural numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.universal-property-natural-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.universal-property-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -15,19 +10,19 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
-open import foundation.contractible-types funext
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation funext
+open import foundation.whiskering-identifications-concatenation
 ```
 
 </details>

@@ -1,18 +1,13 @@
 # Diagonal span diagrams
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.diagonal-span-diagrams
-  (funext : function-extensionality)
-  where
+module foundation.diagonal-span-diagrams where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.span-diagrams funext
+open import foundation.span-diagrams
 open import foundation.universe-levels
 ```
 

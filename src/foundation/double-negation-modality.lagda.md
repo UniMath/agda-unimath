@@ -1,37 +1,32 @@
 # The double negation modality
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.double-negation-modality
-  (funext : function-extensionality)
-  where
+module foundation.double-negation-modality where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.double-negation funext
-open import foundation.empty-types funext
-open import foundation.logical-equivalences funext
-open import foundation.negation funext
-open import foundation.propositions funext
+open import foundation.double-negation
+open import foundation.empty-types
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.transport-along-identifications
 
-open import logic.double-negation-elimination funext
+open import logic.double-negation-elimination
 
-open import orthogonal-factorization-systems.continuation-modalities funext
-open import orthogonal-factorization-systems.large-lawvere-tierney-topologies funext
-open import orthogonal-factorization-systems.lawvere-tierney-topologies funext
-open import orthogonal-factorization-systems.modal-operators funext
-open import orthogonal-factorization-systems.types-local-at-maps funext
-open import orthogonal-factorization-systems.uniquely-eliminating-modalities funext
+open import orthogonal-factorization-systems.continuation-modalities
+open import orthogonal-factorization-systems.large-lawvere-tierney-topologies
+open import orthogonal-factorization-systems.lawvere-tierney-topologies
+open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.types-local-at-maps
+open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 
 </details>

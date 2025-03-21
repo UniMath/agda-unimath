@@ -1,26 +1,21 @@
 # Trivial Σ-decompositions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.trivial-sigma-decompositions
-  (funext : function-extensionality)
-  where
+module foundation.trivial-sigma-decompositions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.functoriality-propositional-truncation funext
-open import foundation.inhabited-types funext
-open import foundation.raising-universe-levels-unit-type funext
-open import foundation.sigma-decompositions funext
-open import foundation.transposition-identifications-along-equivalences funext
+open import foundation.functoriality-propositional-truncation
+open import foundation.inhabited-types
+open import foundation.raising-universe-levels-unit-type
+open import foundation.sigma-decompositions
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-empty-type funext
+open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -30,7 +25,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 ```
 
 </details>

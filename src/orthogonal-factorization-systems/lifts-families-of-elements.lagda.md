@@ -1,12 +1,7 @@
 # Lifts of families of elements
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.lifts-families-of-elements
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.lifts-families-of-elements where
 ```
 
 <details><summary>Imports</summary>
@@ -14,12 +9,12 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
-open import foundation.precomposition-functions funext
-open import foundation.precomposition-type-families funext
-open import foundation.transport-along-homotopies funext
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
+open import foundation.precomposition-functions
+open import foundation.precomposition-type-families
+open import foundation.transport-along-homotopies
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```

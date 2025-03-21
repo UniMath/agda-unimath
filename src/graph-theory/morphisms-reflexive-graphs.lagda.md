@@ -1,12 +1,7 @@
 # Morphisms of reflexive graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.morphisms-reflexive-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.morphisms-reflexive-graphs where
 ```
 
 <details><summary>Imports</summary>
@@ -15,22 +10,22 @@ module
 open import foundation.action-on-identifications-binary-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.commuting-squares-of-identifications funext
+open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import graph-theory.morphisms-directed-graphs funext
-open import graph-theory.reflexive-graphs funext
+open import graph-theory.morphisms-directed-graphs
+open import graph-theory.reflexive-graphs
 ```
 
 </details>

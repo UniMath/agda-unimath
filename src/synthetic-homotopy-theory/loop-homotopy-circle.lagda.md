@@ -1,24 +1,19 @@
 # The loop homotopy on the circle
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.loop-homotopy-circle
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.loop-homotopy-circle where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.negated-equality
+open import foundation.negation
 
-open import synthetic-homotopy-theory.circle funext
+open import synthetic-homotopy-theory.circle
 ```
 
 </details>

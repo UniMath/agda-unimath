@@ -1,29 +1,24 @@
 # Preunivalent categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.preunivalent-categories
-  (funext : function-extensionality)
-  where
+module category-theory.preunivalent-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets funext
-open import category-theory.isomorphisms-in-precategories funext
-open import category-theory.precategories funext
+open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.precategories
 
-open import foundation.1-types funext
-open import foundation.cartesian-product-types funext
+open import foundation.1-types
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.strictly-involutive-identity-types funext
+open import foundation.embeddings
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 

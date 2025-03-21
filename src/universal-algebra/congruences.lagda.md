@@ -1,12 +1,7 @@
 # Congruences
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  universal-algebra.congruences
-  (funext : function-extensionality)
-  where
+module universal-algebra.congruences where
 ```
 
 <details><summary>Imports</summary>
@@ -14,19 +9,19 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalence-relations funext
-open import foundation.propositions funext
-open import foundation.raising-universe-levels-unit-type funext
+open import foundation.equivalence-relations
+open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.vectors funext
+open import linear-algebra.vectors
 
-open import universal-algebra.algebraic-theories funext
-open import universal-algebra.algebras-of-theories funext
-open import universal-algebra.signatures funext
+open import universal-algebra.algebraic-theories
+open import universal-algebra.algebras-of-theories
+open import universal-algebra.signatures
 ```
 
 </details>

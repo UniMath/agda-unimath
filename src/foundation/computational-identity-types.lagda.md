@@ -1,12 +1,7 @@
 # Computational identity types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.computational-identity-types
-  (funext : function-extensionality)
-  where
+module foundation.computational-identity-types where
 ```
 
 <details><summary>Imports</summary>
@@ -16,14 +11,14 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.function-extensionality funext
-
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.strictly-right-unital-concatenation-identifications
 open import foundation.transport-along-identifications
-open import foundation.univalence funext
-open import foundation.universal-property-identity-systems funext
+open import foundation.univalence
+open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
-open import foundation.yoneda-identity-types funext
+open import foundation.yoneda-identity-types
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types

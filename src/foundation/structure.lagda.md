@@ -1,19 +1,14 @@
 # Structure
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.structure
-  (funext : function-extensionality)
-  where
+module foundation.structure where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

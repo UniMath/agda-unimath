@@ -1,28 +1,23 @@
 # Incidence algebras
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.incidence-algebras
-  (funext : function-extensionality)
-  where
+module order-theory.incidence-algebras where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.commutative-rings
 
 open import foundation.dependent-pair-types
-open import foundation.inhabited-types funext
+open import foundation.inhabited-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 
-open import order-theory.interval-subposets funext
-open import order-theory.locally-finite-posets funext
-open import order-theory.posets funext
+open import order-theory.interval-subposets
+open import order-theory.locally-finite-posets
+open import order-theory.posets
 ```
 
 </details>

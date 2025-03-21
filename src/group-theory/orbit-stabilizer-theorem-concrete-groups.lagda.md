@@ -1,12 +1,7 @@
 # The orbit-stabilizer theorem for concrete groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.orbit-stabilizer-theorem-concrete-groups
-  (funext : function-extensionality)
-  where
+module group-theory.orbit-stabilizer-theorem-concrete-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -15,10 +10,10 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.concrete-group-actions funext
-open import group-theory.concrete-groups funext
-open import group-theory.mere-equivalences-concrete-group-actions funext
-open import group-theory.stabilizer-groups-concrete-group-actions funext
+open import group-theory.concrete-group-actions
+open import group-theory.concrete-groups
+open import group-theory.mere-equivalences-concrete-group-actions
+open import group-theory.stabilizer-groups-concrete-group-actions
 
 open import structured-types.pointed-types
 ```

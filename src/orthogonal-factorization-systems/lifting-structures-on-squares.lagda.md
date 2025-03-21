@@ -1,46 +1,41 @@
 # Lifting structures on commuting squares of maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.lifting-structures-on-squares
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.lifting-structures-on-squares where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies funext
-open import foundation.commuting-squares-of-maps funext
-open import foundation.commuting-tetrahedra-of-homotopies funext
-open import foundation.commuting-triangles-of-homotopies funext
-open import foundation.commuting-triangles-of-identifications funext
+open import foundation.commuting-squares-of-homotopies
+open import foundation.commuting-squares-of-maps
+open import foundation.commuting-tetrahedra-of-homotopies
+open import foundation.commuting-triangles-of-homotopies
+open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.fibers-of-maps funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.higher-homotopies-morphisms-arrows funext
-open import foundation.homotopies funext
-open import foundation.homotopies funext-morphisms-arrows
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
-open import foundation.morphisms-arrows funext
-open import foundation.path-algebra funext
+open import foundation.higher-homotopies-morphisms-arrows
+open import foundation.homotopies
+open import foundation.homotopies-morphisms-arrows
+open import foundation.homotopy-induction
+open import foundation.identity-types
+open import foundation.morphisms-arrows
+open import foundation.path-algebra
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
-open import foundation.whiskering-identifications-concatenation funext
+open import foundation.whiskering-identifications-concatenation
 
-open import orthogonal-factorization-systems.extensions-maps funext
-open import orthogonal-factorization-systems.lifts-maps funext
-open import orthogonal-factorization-systems.pullback-hom funext
+open import orthogonal-factorization-systems.extensions-maps
+open import orthogonal-factorization-systems.lifts-maps
+open import orthogonal-factorization-systems.pullback-hom
 ```
 
 </details>

@@ -1,36 +1,31 @@
 # Trivial commutative rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.trivial-commutative-rings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.trivial-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
-open import commutative-algebra.isomorphisms-commutative-rings funext
+open import commutative-algebra.commutative-rings
+open import commutative-algebra.isomorphisms-commutative-rings
 
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.negation funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
 
-open import group-theory.abelian-groups funext
-open import group-theory.trivial-groups funext
+open import group-theory.abelian-groups
+open import group-theory.trivial-groups
 
-open import ring-theory.rings funext
-open import ring-theory.trivial-rings funext
+open import ring-theory.rings
+open import ring-theory.trivial-rings
 ```
 
 </details>

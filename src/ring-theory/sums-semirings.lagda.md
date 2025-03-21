@@ -1,12 +1,7 @@
 # Sums of elements in semirings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.sums-semirings
-  (funext : function-extensionality)
-  where
+module ring-theory.sums-semirings where
 ```
 
 <details><summary>Imports</summary>
@@ -16,21 +11,21 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
+open import foundation.coproduct-types
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import linear-algebra.vectors funext
-open import linear-algebra.vectors funext-on-semirings
+open import linear-algebra.vectors
+open import linear-algebra.vectors-on-semirings
 
-open import ring-theory.semirings funext
+open import ring-theory.semirings
 
-open import univalent-combinatorics.coproduct-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

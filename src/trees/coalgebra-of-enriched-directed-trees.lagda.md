@@ -3,12 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  trees.coalgebra-of-enriched-directed-trees
-  (funext : function-extensionality)
-  where
+module trees.coalgebra-of-enriched-directed-trees where
 ```
 
 <details><summary>Imports</summary>
@@ -17,10 +12,10 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import trees.coalgebras-polynomial-endofunctors funext
-open import trees.enriched-directed-trees funext
-open import trees.fibers-enriched-directed-trees funext
-open import trees.polynomial-endofunctors funext
+open import trees.coalgebras-polynomial-endofunctors
+open import trees.enriched-directed-trees
+open import trees.fibers-enriched-directed-trees
+open import trees.polynomial-endofunctors
 ```
 
 </details>

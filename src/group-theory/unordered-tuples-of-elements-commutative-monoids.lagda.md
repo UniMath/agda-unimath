@@ -1,12 +1,7 @@
 # Unordered tuples of elements in commutative monoids
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.unordered-tuples-of-elements-commutative-monoids
-  (funext : function-extensionality)
-  where
+module group-theory.unordered-tuples-of-elements-commutative-monoids where
 ```
 
 <details><summary>Imports</summary>
@@ -15,9 +10,9 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
-open import foundation.unordered-tuples funext
+open import foundation.unordered-tuples
 
-open import group-theory.commutative-monoids funext
+open import group-theory.commutative-monoids
 ```
 
 </details>

@@ -1,19 +1,14 @@
 # Morphisms of binary relations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.morphisms-binary-relations
-  (funext : function-extensionality)
-  where
+module foundation.morphisms-binary-relations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-homotopies funext
-open import foundation.binary-relations funext
+open import foundation.binary-homotopies
+open import foundation.binary-relations
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

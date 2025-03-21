@@ -1,34 +1,29 @@
 # Polygons
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.polygons
-  (funext : function-extensionality)
-  where
+module graph-theory.polygons where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.modular-arithmetic funext
+open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-equality funext
+open import foundation.decidable-equality
 open import foundation.dependent-pair-types
-open import foundation.fibers-of-maps funext
-open import foundation.functoriality-propositional-truncation funext
-open import foundation.mere-equivalences funext
-open import foundation.sets funext
+open import foundation.fibers-of-maps
+open import foundation.functoriality-propositional-truncation
+open import foundation.mere-equivalences
+open import foundation.sets
 open import foundation.universe-levels
-open import foundation.unordered-pairs funext
+open import foundation.unordered-pairs
 
-open import graph-theory.equivalences-undirected-graphs funext
-open import graph-theory.mere-equivalences-undirected-graphs funext
-open import graph-theory.undirected-graphs funext
+open import graph-theory.equivalences-undirected-graphs
+open import graph-theory.mere-equivalences-undirected-graphs
+open import graph-theory.undirected-graphs
 
-open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

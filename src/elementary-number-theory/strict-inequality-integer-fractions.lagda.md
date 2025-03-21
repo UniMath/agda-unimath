@@ -1,50 +1,45 @@
 # Strict inequality on the integer fractions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.strict-inequality-integer-fractions
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.strict-inequality-integer-fractions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integer-fractions funext
-open import elementary-number-theory.addition-integers funext
-open import elementary-number-theory.addition-positive-and-negative-integers funext
-open import elementary-number-theory.cross-multiplication-difference-integer-fractions funext
-open import elementary-number-theory.difference-integers funext
-open import elementary-number-theory.inequality-integer-fractions funext
-open import elementary-number-theory.inequality-integers funext
-open import elementary-number-theory.integer-fractions funext
+open import elementary-number-theory.addition-integer-fractions
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-positive-and-negative-integers
+open import elementary-number-theory.cross-multiplication-difference-integer-fractions
+open import elementary-number-theory.difference-integers
+open import elementary-number-theory.inequality-integer-fractions
+open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
-open import elementary-number-theory.mediant-integer-fractions funext
-open import elementary-number-theory.multiplication-integers funext
-open import elementary-number-theory.multiplication-positive-and-negative-integers funext
-open import elementary-number-theory.nonnegative-integers funext
-open import elementary-number-theory.nonpositive-integers funext
-open import elementary-number-theory.positive-and-negative-integers funext
-open import elementary-number-theory.positive-integers funext
-open import elementary-number-theory.strict-inequality-integers funext
+open import elementary-number-theory.mediant-integer-fractions
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-positive-and-negative-integers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.nonpositive-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
+open import elementary-number-theory.strict-inequality-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.cartesian-product-types funext
-open import foundation.conjunction funext
-open import foundation.coproduct-types funext
-open import foundation.decidable-propositions funext
+open import foundation.cartesian-product-types
+open import foundation.conjunction
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
-open import foundation.disjunction funext
-open import foundation.existential-quantification funext
-open import foundation.function-types funext
-open import foundation.functoriality-coproduct-types funext
-open import foundation.identity-types funext
-open import foundation.negation funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
+open import foundation.disjunction
+open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```

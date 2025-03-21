@@ -1,26 +1,21 @@
 # Polynomial endofunctors
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.polynomial-endofunctors
-  (funext : function-extensionality)
-  where
+module trees.polynomial-endofunctors where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.universe-levels

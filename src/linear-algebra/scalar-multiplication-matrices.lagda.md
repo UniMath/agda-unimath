@@ -1,12 +1,7 @@
 # Scalar multiplication on matrices
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  linear-algebra.scalar-multiplication-matrices
-  (funext : function-extensionality)
-  where
+module linear-algebra.scalar-multiplication-matrices where
 ```
 
 <details><summary>Imports</summary>
@@ -16,8 +11,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.matrices funext
-open import linear-algebra.scalar-multiplication-vectors funext
+open import linear-algebra.matrices
+open import linear-algebra.scalar-multiplication-vectors
 ```
 
 </details>

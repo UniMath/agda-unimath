@@ -1,19 +1,14 @@
 # Equality on dependent function types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.equality-dependent-function-types
-  (funext : function-extensionality)
-  where
+module foundation.equality-dependent-function-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-contractible-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.implicit-function-types
 open import foundation.universe-levels

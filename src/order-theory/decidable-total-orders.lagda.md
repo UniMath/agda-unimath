@@ -1,36 +1,31 @@
 # Decidable total orders
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.decidable-total-orders
-  (funext : function-extensionality)
-  where
+module order-theory.decidable-total-orders where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations funext
-open import foundation.coproduct-types funext
-open import foundation.decidable-propositions funext
+open import foundation.binary-relations
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 
-open import order-theory.decidable-posets funext
-open import order-theory.decidable-total-preorders funext
-open import order-theory.greatest-lower-bounds-posets funext
-open import order-theory.join-semilattices funext
-open import order-theory.least-upper-bounds-posets funext
-open import order-theory.meet-semilattices funext
-open import order-theory.posets funext
-open import order-theory.preorders funext
-open import order-theory.total-orders funext
+open import order-theory.decidable-posets
+open import order-theory.decidable-total-preorders
+open import order-theory.greatest-lower-bounds-posets
+open import order-theory.join-semilattices
+open import order-theory.least-upper-bounds-posets
+open import order-theory.meet-semilattices
+open import order-theory.posets
+open import order-theory.preorders
+open import order-theory.total-orders
 ```
 
 </details>

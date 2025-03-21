@@ -1,24 +1,19 @@
 # Pointed endofunctors on categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.pointed-endofunctors-categories
-  (funext : function-extensionality)
-  where
+module category-theory.pointed-endofunctors-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories funext
-open import category-theory.functors-categories funext
-open import category-theory.natural-transformations-functors-categories funext
-open import category-theory.pointed-endofunctors-precategories funext
+open import category-theory.categories
+open import category-theory.functors-categories
+open import category-theory.natural-transformations-functors-categories
+open import category-theory.pointed-endofunctors-precategories
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 ```
 

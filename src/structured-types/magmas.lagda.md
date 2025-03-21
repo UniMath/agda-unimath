@@ -1,20 +1,15 @@
 # Magmas
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.magmas
-  (funext : function-extensionality)
-  where
+module structured-types.magmas where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 ```

@@ -1,26 +1,21 @@
 # Function precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.function-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.function-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets funext
-open import category-theory.dependent-products-of-precategories funext
-open import category-theory.isomorphisms-in-precategories funext
-open import category-theory.precategories funext
+open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.dependent-products-of-precategories
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.precategories
 
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.sets funext
-open import foundation.strictly-involutive-identity-types funext
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 

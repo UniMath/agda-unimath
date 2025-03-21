@@ -1,36 +1,31 @@
 # Complements of De Morgan subtypes
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  logic.complements-de-morgan-subtypes
-  (funext : function-extensionality)
-  where
+module logic.complements-de-morgan-subtypes where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.complements-subtypes funext
-open import foundation.decidable-subtypes funext
+open import foundation.complements-subtypes
+open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
-open import foundation.double-negation funext
-open import foundation.full-subtypes funext
-open import foundation.involutions funext
-open import foundation.negation funext
-open import foundation.postcomposition-functions funext
-open import foundation.powersets funext
-open import foundation.propositional-truncations funext
-open import foundation.subtypes funext
-open import foundation.unions-subtypes funext
+open import foundation.double-negation
+open import foundation.full-subtypes
+open import foundation.involutions
+open import foundation.negation
+open import foundation.postcomposition-functions
+open import foundation.powersets
+open import foundation.propositional-truncations
+open import foundation.subtypes
+open import foundation.unions-subtypes
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 
-open import logic.complements-decidable-subtypes funext
-open import logic.de-morgan-propositions funext
-open import logic.de-morgan-subtypes funext
+open import logic.complements-decidable-subtypes
+open import logic.de-morgan-propositions
+open import logic.de-morgan-subtypes
 ```
 
 </details>

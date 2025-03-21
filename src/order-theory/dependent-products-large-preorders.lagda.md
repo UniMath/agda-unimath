@@ -1,22 +1,17 @@
 # Dependent products of large preorders
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.dependent-products-large-preorders
-  (funext : function-extensionality)
-  where
+module order-theory.dependent-products-large-preorders where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-binary-relations funext
-open import foundation.propositions funext
+open import foundation.large-binary-relations
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.large-preorders funext
+open import order-theory.large-preorders
 ```
 
 </details>

@@ -9,21 +9,21 @@ module
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers funext
-open import elementary-number-theory.equality-natural-numbers funext
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.identity-types funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 
-open import order-theory.posets funext
-open import order-theory.preorders funext
+open import order-theory.posets
+open import order-theory.preorders
 ```
 
 </details>

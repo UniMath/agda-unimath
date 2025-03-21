@@ -1,12 +1,7 @@
 # Bounded multisets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.bounded-multisets
-  (funext : function-extensionality)
-  where
+module trees.bounded-multisets where
 ```
 
 <details><summary>Imports</summary>
@@ -15,14 +10,14 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.existential-quantification funext
-open import foundation.propositions funext
+open import foundation.empty-types
+open import foundation.existential-quantification
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import trees.empty-multisets funext
-open import trees.multisets funext
-open import trees.w-types funext
+open import trees.empty-multisets
+open import trees.multisets
+open import trees.w-types
 ```
 
 </details>

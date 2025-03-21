@@ -1,12 +1,7 @@
 # Dependent coforks
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.dependent-coforks
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.dependent-coforks where
 ```
 
 <details><summary>Imports</summary>
@@ -14,29 +9,29 @@ module
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-triangles-of-maps funext
-open import foundation.constant-type-families funext
-open import foundation.coproduct-types funext
-open import foundation.dependent-identifications funext
+open import foundation.commuting-triangles-of-maps
+open import foundation.constant-type-families
+open import foundation.coproduct-types
+open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.double-arrows
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-function-types funext
-open import foundation.functoriality-dependent-pair-types funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
-open import foundation.whiskering-identifications-concatenation funext
+open import foundation.whiskering-identifications-concatenation
 
-open import synthetic-homotopy-theory.coforks funext
-open import synthetic-homotopy-theory.dependent-cocones-under-spans funext
+open import synthetic-homotopy-theory.coforks
+open import synthetic-homotopy-theory.dependent-cocones-under-spans
 ```
 
 </details>

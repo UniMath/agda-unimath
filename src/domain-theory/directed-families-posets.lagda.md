@@ -1,34 +1,29 @@
 # Directed families in posets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  domain-theory.directed-families-posets
-  (funext : function-extensionality)
-  where
+module domain-theory.directed-families-posets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
-open import foundation.conjunction funext
+open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.existential-quantification funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.inhabited-types funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.surjective-maps funext
-open import foundation.universal-quantification funext
+open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.inhabited-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.surjective-maps
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
-open import order-theory.order-preserving-maps-posets funext
-open import order-theory.posets funext
+open import order-theory.order-preserving-maps-posets
+open import order-theory.posets
 ```
 
 </details>

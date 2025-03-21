@@ -1,29 +1,24 @@
 # Vertex covers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.vertex-covers
-  (funext : function-extensionality)
-  where
+module graph-theory.vertex-covers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
-open import foundation.coproduct-types funext
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.propositional-truncations funext
+open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.unordered-pairs funext
+open import foundation.unordered-pairs
 
-open import graph-theory.undirected-graphs funext
+open import graph-theory.undirected-graphs
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

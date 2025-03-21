@@ -1,12 +1,7 @@
 # Suspensions of types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.suspensions-of-types
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.suspensions-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -14,47 +9,46 @@ module
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.booleans funext
-open import foundation.commuting-squares-of-identifications funext
-open import foundation.connected-types funext
-open import foundation.constant-maps funext
-open import foundation.contractible-types funext
-open import foundation.dependent-identifications funext
+open import foundation.booleans
+open import foundation.commuting-squares-of-identifications
+open import foundation.connected-types
+open import foundation.constant-maps
+open import foundation.contractible-types
+open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types funext
-open import foundation.equivalence-extensionality funext
-open import foundation.equivalences funext
-open import foundation.fibers-of-maps funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.path-algebra funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.retractions funext
-open import foundation.sections funext
-open import foundation.surjective-maps funext
-open import foundation.torsorial-type-families funext
+open import foundation.diagonal-maps-of-types
+open import foundation.equivalence-extensionality
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.path-algebra
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
+open import foundation.surjective-maps
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
-open import foundation.truncated-types funext
+open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import synthetic-homotopy-theory.cocones-under-spans funext
-open import synthetic-homotopy-theory.dependent-cocones-under-spans funext
-open import synthetic-homotopy-theory.dependent-suspension-structures funext
-open import synthetic-homotopy-theory.dependent-universal-property-suspensions funext
-open import synthetic-homotopy-theory.pushouts funext
-open import synthetic-homotopy-theory.suspension-structures funext
-open import synthetic-homotopy-theory.universal-property-pushouts funext
-open import synthetic-homotopy-theory.universal-property-suspensions funext
+open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.dependent-suspension-structures
+open import synthetic-homotopy-theory.dependent-universal-property-suspensions
+open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.suspension-structures
+open import synthetic-homotopy-theory.universal-property-pushouts
+open import synthetic-homotopy-theory.universal-property-suspensions
 ```
 
 </details>

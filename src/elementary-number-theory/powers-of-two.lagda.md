@@ -1,30 +1,25 @@
 # Powers of two
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.powers-of-two
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.powers-of-two where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.divisibility-natural-numbers funext
-open import elementary-number-theory.exponentiation-natural-numbers funext
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.exponentiation-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.parity-natural-numbers funext
-open import elementary-number-theory.strong-induction-natural-numbers funext
+open import elementary-number-theory.parity-natural-numbers
+open import elementary-number-theory.strong-induction-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.function-types funext
+open import foundation.function-types
 open import foundation.split-surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.universe-levels

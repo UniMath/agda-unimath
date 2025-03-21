@@ -1,28 +1,23 @@
 # The universal property of pullbacks
 
 ```agda
-open import foundation.function-extensionality-axiom
+module foundation.universal-property-pullbacks where
 
-module
-  foundation.universal-property-pullbacks
-  (funext : function-extensionality)
-  where
-
-open import foundation-core.universal-property-pullbacks funext public
+open import foundation-core.universal-property-pullbacks public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospan-diagrams funext
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.function-types
-open import foundation-core.pullbacks funext
+open import foundation-core.pullbacks
 ```
 
 </details>

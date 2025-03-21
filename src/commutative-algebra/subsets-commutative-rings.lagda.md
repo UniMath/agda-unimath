@@ -1,29 +1,24 @@
 # Subsets of commutative rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.subsets-commutative-rings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.subsets-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.commutative-rings
 
-open import foundation.identity-types funext
-open import foundation.propositional-extensionality funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.subtypes funext
+open import foundation.identity-types
+open import foundation.propositional-extensionality
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.subgroups-abelian-groups funext
+open import group-theory.subgroups-abelian-groups
 
-open import ring-theory.subsets-rings funext
+open import ring-theory.subsets-rings
 ```
 
 </details>

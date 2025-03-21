@@ -1,12 +1,7 @@
 # Set quotients
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.set-quotients
-  (funext : function-extensionality)
-  where
+module foundation.set-quotients where
 ```
 
 <details><summary>Imports</summary>
@@ -14,30 +9,31 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.effective-maps-equivalence-relations funext
-open import foundation.embeddings funext
-open import foundation.equivalence-classes funext
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.inhabited-subtypes funext
-open import foundation.reflecting-maps-equivalence-relations funext
-open import foundation.sets funext
-open import foundation.slice funext
-open import foundation.surjective-maps funext
-open import foundation.uniqueness-set-quotients funext
-open import foundation.universal-property-image funext
-open import foundation.universal-property-set-quotients funext
+open import foundation.dependent-products-propositions
+open import foundation.effective-maps-equivalence-relations
+open import foundation.embeddings
+open import foundation.equivalence-classes
+open import foundation.equivalences
+open import foundation.function-extensionality-axiom
+open import foundation.identity-types
+open import foundation.inhabited-subtypes
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
+open import foundation.slice
+open import foundation.surjective-maps
+open import foundation.uniqueness-set-quotients
+open import foundation.universal-property-image
+open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.equivalence-relations funext
+open import foundation-core.equivalence-relations
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types funext
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
-open import foundation-core.small-types funext
-open import foundation-core.subtypes funext
+open import foundation-core.small-types
+open import foundation-core.subtypes
 ```
 
 </details>

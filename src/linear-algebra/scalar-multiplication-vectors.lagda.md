@@ -1,12 +1,7 @@
 # Scalar multiplication of vectors
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  linear-algebra.scalar-multiplication-vectors
-  (funext : function-extensionality)
-  where
+module linear-algebra.scalar-multiplication-vectors where
 ```
 
 <details><summary>Imports</summary>
@@ -16,8 +11,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors funext
-open import linear-algebra.vectors funext
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.vectors
 ```
 
 </details>

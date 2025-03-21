@@ -1,28 +1,23 @@
 # Rational lower Dedekind real numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  real-numbers.rational-lower-dedekind-real-numbers
-  (funext : function-extensionality)
-  where
+module real-numbers.rational-lower-dedekind-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.rational-numbers funext
-open import elementary-number-theory.strict-inequality-rational-numbers funext
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.conjunction funext
+open import foundation.conjunction
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification funext
-open import foundation.logical-equivalences funext
-open import foundation.subtypes funext
+open import foundation.existential-quantification
+open import foundation.logical-equivalences
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import real-numbers.lower-dedekind-real-numbers funext
+open import real-numbers.lower-dedekind-real-numbers
 ```
 
 </details>

@@ -1,12 +1,7 @@
 # Complete undirected graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.complete-undirected-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.complete-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
@@ -14,10 +9,10 @@ module
 ```agda
 open import foundation.universe-levels
 
-open import graph-theory.complete-multipartite-graphs funext
-open import graph-theory.finite-graphs funext
+open import graph-theory.complete-multipartite-graphs
+open import graph-theory.finite-graphs
 
-open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

@@ -1,24 +1,19 @@
 # Embeddings of abelian groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.embeddings-abelian-groups
-  (funext : function-extensionality)
-  where
+module group-theory.embeddings-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.embeddings funext
+open import foundation.embeddings
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.embeddings-groups funext
-open import group-theory.homomorphisms-abelian-groups funext
-open import group-theory.subgroups-abelian-groups funext
+open import group-theory.abelian-groups
+open import group-theory.embeddings-groups
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.subgroups-abelian-groups
 ```
 
 </details>

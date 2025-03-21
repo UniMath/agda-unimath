@@ -1,12 +1,7 @@
 # Permutations of vectors
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  lists.permutation-vectors
-  (funext : function-extensionality)
-  where
+module lists.permutation-vectors where
 ```
 
 <details><summary>Imports</summary>
@@ -14,29 +9,29 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.permutations-standard-finite-types funext
-open import finite-group-theory.transpositions-standard-finite-types funext
+open import finite-group-theory.permutations-standard-finite-types
+open import finite-group-theory.transpositions-standard-finite-types
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
-open import foundation.coproduct-types funext
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.equivalence-extensionality funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-coproduct-types funext
-open import foundation.identity-types funext
-open import foundation.negated-equality funext
+open import foundation.equivalence-extensionality
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors funext
-open import linear-algebra.vectors funext
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.vectors
 
-open import lists.arrays funext
+open import lists.arrays
 open import lists.lists
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

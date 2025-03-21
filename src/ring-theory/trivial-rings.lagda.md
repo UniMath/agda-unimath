@@ -1,12 +1,7 @@
 # Trivial rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.trivial-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.trivial-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -14,17 +9,17 @@ module
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.negated-equality
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 
-open import ring-theory.invertible-elements-rings funext
-open import ring-theory.rings funext
+open import ring-theory.invertible-elements-rings
+open import ring-theory.rings
 ```
 
 </details>

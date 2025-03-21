@@ -1,34 +1,29 @@
 # Prime ideals of commutative rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.prime-ideals-commutative-rings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.prime-ideals-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
-open import commutative-algebra.full-ideals-commutative-rings funext
-open import commutative-algebra.ideals-commutative-rings funext
-open import commutative-algebra.powers-of-elements-commutative-rings funext
-open import commutative-algebra.radical-ideals-commutative-rings funext
-open import commutative-algebra.subsets-commutative-rings funext
+open import commutative-algebra.commutative-rings
+open import commutative-algebra.full-ideals-commutative-rings
+open import commutative-algebra.ideals-commutative-rings
+open import commutative-algebra.powers-of-elements-commutative-rings
+open import commutative-algebra.radical-ideals-commutative-rings
+open import commutative-algebra.subsets-commutative-rings
 
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.disjunction funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.disjunction
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import ring-theory.subsets-rings funext
+open import ring-theory.subsets-rings
 ```
 
 </details>

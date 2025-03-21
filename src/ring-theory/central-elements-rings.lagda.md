@@ -1,24 +1,19 @@
 # Central elements of rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.central-elements-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.central-elements-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import ring-theory.central-elements-semirings funext
-open import ring-theory.rings funext
+open import ring-theory.central-elements-semirings
+open import ring-theory.rings
 ```
 
 </details>

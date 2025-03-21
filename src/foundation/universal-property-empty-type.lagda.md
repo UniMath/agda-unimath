@@ -1,21 +1,15 @@
 # The universal property of the empty type
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.universal-property-empty-type
-  (funext : function-extensionality)
-  where
+module foundation.universal-property-empty-type where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality funext
-
-open import foundation.universal-property-equivalences funext
+open import foundation.function-extensionality
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

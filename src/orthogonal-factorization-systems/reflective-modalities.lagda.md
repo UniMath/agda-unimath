@@ -1,12 +1,7 @@
 # Reflective modalities
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.reflective-modalities
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.reflective-modalities where
 ```
 
 <details><summary>Imports</summary>
@@ -15,8 +10,8 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.modal-operators funext
-open import orthogonal-factorization-systems.reflective-subuniverses funext
+open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.reflective-subuniverses
 ```
 
 </details>

@@ -1,12 +1,7 @@
 # Pointwise addition of morphisms of abelian groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.addition-homomorphisms-abelian-groups
-  (funext : function-extensionality)
-  where
+module group-theory.addition-homomorphisms-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -14,13 +9,13 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-abelian-groups funext
-open import group-theory.semigroups funext
+open import group-theory.abelian-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.semigroups
 ```
 
 </details>

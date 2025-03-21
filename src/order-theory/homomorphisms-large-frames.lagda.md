@@ -1,23 +1,18 @@
 # Homomorphisms of large frames
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.homomorphisms-large-frames
-  (funext : function-extensionality)
-  where
+module order-theory.homomorphisms-large-frames where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import order-theory.homomorphisms-large-meet-semilattices funext
-open import order-theory.homomorphisms-large-suplattices funext
-open import order-theory.large-frames funext
+open import order-theory.homomorphisms-large-meet-semilattices
+open import order-theory.homomorphisms-large-suplattices
+open import order-theory.large-frames
 ```
 
 </details>

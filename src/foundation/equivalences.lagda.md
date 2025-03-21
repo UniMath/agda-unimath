@@ -1,12 +1,7 @@
 # Equivalences
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.equivalences
-  (funext : function-extensionality)
-  where
+module foundation.equivalences where
 
 open import foundation-core.equivalences public
 ```
@@ -15,18 +10,17 @@ open import foundation-core.equivalences public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospan-diagrams funext
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types funext
-open import foundation.equivalence-extensionality funext
-open import foundation.function-extensionality funext
-
-open import foundation.functoriality-fibers-of-maps funext
-open import foundation.logical-equivalences funext
+open import foundation.dependent-products-contractible-types
+open import foundation.equivalence-extensionality
+open import foundation.function-extensionality
+open import foundation.functoriality-fibers-of-maps
+open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
-open import foundation.transposition-identifications-along-equivalences funext
-open import foundation.truncated-maps funext
-open import foundation.universal-property-equivalences funext
+open import foundation.transposition-identifications-along-equivalences
+open import foundation.truncated-maps
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
@@ -40,11 +34,11 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
-open import foundation-core.pullbacks funext
+open import foundation-core.pullbacks
 open import foundation-core.retractions
 open import foundation-core.retracts-of-types
 open import foundation-core.sections
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 open import foundation-core.truncation-levels
 open import foundation-core.type-theoretic-principle-of-choice
 ```

@@ -1,12 +1,7 @@
 # Cartesian exponents of species
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  species.cartesian-exponents-species-of-types
-  (funext : function-extensionality)
-  where
+module species.cartesian-exponents-species-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +9,7 @@ module
 ```agda
 open import foundation.universe-levels
 
-open import species.species-of-types funext
+open import species.species-of-types
 ```
 
 </details>

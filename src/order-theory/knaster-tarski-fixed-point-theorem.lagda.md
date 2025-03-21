@@ -1,12 +1,7 @@
 # The Knaster–Tarski fixed point theorem
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.knaster-tarski-fixed-point-theorem
-  (funext : function-extensionality)
-  where
+module order-theory.knaster-tarski-fixed-point-theorem where
 ```
 
 <details><summary>Imports</summary>
@@ -14,14 +9,14 @@ module
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.fixed-points-endofunctions
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
+open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.universe-levels
 
-open import order-theory.inflattices funext
-open import order-theory.order-preserving-maps-posets funext
-open import order-theory.posets funext
-open import order-theory.suplattices funext
+open import order-theory.inflattices
+open import order-theory.order-preserving-maps-posets
+open import order-theory.posets
+open import order-theory.suplattices
 ```
 
 </details>

@@ -1,28 +1,23 @@
 # Cores of categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.cores-categories
-  (funext : function-extensionality)
-  where
+module category-theory.cores-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories funext
-open import category-theory.cores-precategories funext
-open import category-theory.groupoids funext
-open import category-theory.isomorphisms-in-categories funext
-open import category-theory.precategories funext
-open import category-theory.pregroupoids funext
-open import category-theory.subcategories funext
-open import category-theory.wide-subcategories funext
+open import category-theory.categories
+open import category-theory.cores-precategories
+open import category-theory.groupoids
+open import category-theory.isomorphisms-in-categories
+open import category-theory.precategories
+open import category-theory.pregroupoids
+open import category-theory.subcategories
+open import category-theory.wide-subcategories
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.universe-levels
 ```
 

@@ -3,38 +3,33 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.multiplicative-group-of-rational-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.multiplicative-group-of-rational-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.multiplicative-monoid-of-rational-numbers funext
-open import elementary-number-theory.nonzero-rational-numbers funext
-open import elementary-number-theory.positive-rational-numbers funext
-open import elementary-number-theory.rational-numbers funext
-open import elementary-number-theory.ring-of-rational-numbers funext
+open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
+open import elementary-number-theory.nonzero-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.ring-of-rational-numbers
 
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.subtypes funext
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.cores-monoids funext
-open import group-theory.groups funext
-open import group-theory.submonoids-commutative-monoids funext
+open import group-theory.abelian-groups
+open import group-theory.cores-monoids
+open import group-theory.groups
+open import group-theory.submonoids-commutative-monoids
 
-open import ring-theory.groups-of-units-rings funext
-open import ring-theory.invertible-elements-rings funext
-open import ring-theory.trivial-rings funext
+open import ring-theory.groups-of-units-rings
+open import ring-theory.invertible-elements-rings
+open import ring-theory.trivial-rings
 ```
 
 </details>

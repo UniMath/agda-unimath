@@ -1,29 +1,24 @@
 # Preunivalent type families
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.preunivalent-type-families
-  (funext : function-extensionality)
-  where
+module foundation.preunivalent-type-families where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-maps funext
+open import foundation.0-maps
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.equivalence-injective-type-families funext
-open import foundation.faithful-maps funext
-open import foundation.function-types funext
-open import foundation.injective-maps funext
-open import foundation.preunivalence funext
-open import foundation.retractions funext
-open import foundation.sets funext
-open import foundation.subuniverses funext
+open import foundation.embeddings
+open import foundation.equivalence-injective-type-families
+open import foundation.faithful-maps
+open import foundation.function-types
+open import foundation.injective-maps
+open import foundation.preunivalence
+open import foundation.retractions
+open import foundation.sets
+open import foundation.subuniverses
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 

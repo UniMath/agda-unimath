@@ -1,31 +1,26 @@
 # Stabilizers of concrete group actions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.stabilizer-groups-concrete-group-actions
-  (funext : function-extensionality)
-  where
+module group-theory.stabilizer-groups-concrete-group-actions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types funext
+open import foundation.0-connected-types
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.mere-equality funext
-open import foundation.propositional-truncations funext
-open import foundation.sets funext
-open import foundation.subtypes funext
+open import foundation.function-types
+open import foundation.mere-equality
+open import foundation.propositional-truncations
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.concrete-group-actions funext
-open import group-theory.concrete-groups funext
-open import group-theory.subgroups-concrete-groups funext
-open import group-theory.transitive-concrete-group-actions funext
+open import group-theory.concrete-group-actions
+open import group-theory.concrete-groups
+open import group-theory.subgroups-concrete-groups
+open import group-theory.transitive-concrete-group-actions
 ```
 
 </details>

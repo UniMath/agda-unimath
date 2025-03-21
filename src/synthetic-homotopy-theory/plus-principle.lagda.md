@@ -1,23 +1,18 @@
 # The plus-principle
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.plus-principle
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.plus-principle where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.connected-types funext
-open import foundation.contractible-types funext
+open import foundation.connected-types
+open import foundation.contractible-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.acyclic-types funext
+open import synthetic-homotopy-theory.acyclic-types
 ```
 
 </details>

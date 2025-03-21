@@ -3,46 +3,41 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.abelianization-groups
-  (funext : function-extensionality)
-  where
+module group-theory.abelianization-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.adjunctions-large-categories funext
-open import category-theory.adjunctions-large-precategories funext
-open import category-theory.functors-large-categories funext
-open import category-theory.functors-large-precategories funext
-open import category-theory.natural-transformations-functors-large-categories funext
-open import category-theory.natural-transformations-functors-large-precategories funext
+open import category-theory.adjunctions-large-categories
+open import category-theory.adjunctions-large-precategories
+open import category-theory.functors-large-categories
+open import category-theory.functors-large-precategories
+open import category-theory.natural-transformations-functors-large-categories
+open import category-theory.natural-transformations-functors-large-precategories
 
-open import foundation.commuting-squares-of-maps funext
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.set-quotients funext
-open import foundation.sets funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.set-quotients
+open import foundation.sets
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import group-theory.abelian-groups funext
-open import group-theory.category-of-abelian-groups funext
-open import group-theory.category-of-groups funext
-open import group-theory.commutator-subgroups funext
-open import group-theory.commuting-squares-of-group-homomorphisms funext
-open import group-theory.functoriality-quotient-groups funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-abelian-groups funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.normal-subgroups funext
-open import group-theory.nullifying-group-homomorphisms funext
-open import group-theory.quotient-groups funext
+open import group-theory.abelian-groups
+open import group-theory.category-of-abelian-groups
+open import group-theory.category-of-groups
+open import group-theory.commutator-subgroups
+open import group-theory.commuting-squares-of-group-homomorphisms
+open import group-theory.functoriality-quotient-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.homomorphisms-groups
+open import group-theory.normal-subgroups
+open import group-theory.nullifying-group-homomorphisms
+open import group-theory.quotient-groups
 ```
 
 </details>

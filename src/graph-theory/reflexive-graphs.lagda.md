@@ -1,12 +1,7 @@
 # Reflexive graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.reflexive-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.reflexive-graphs where
 ```
 
 <details><summary>Imports</summary>
@@ -14,11 +9,11 @@ module
 ```agda
 open import foundation.binary-dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.reflexive-relations funext
+open import foundation.identity-types
+open import foundation.reflexive-relations
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs funext
+open import graph-theory.directed-graphs
 ```
 
 </details>

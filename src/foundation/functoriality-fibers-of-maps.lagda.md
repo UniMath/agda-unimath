@@ -1,28 +1,23 @@
 # Functoriality of fibers of maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.functoriality-fibers-of-maps
-  (funext : function-extensionality)
-  where
+module foundation.functoriality-fibers-of-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-higher-identifications-functions funext
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospan-diagrams funext
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.homotopies-morphisms-arrows funext
-open import foundation.morphisms-arrows funext
+open import foundation.homotopies-morphisms-arrows
+open import foundation.morphisms-arrows
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-homotopies
-open import foundation-core.commuting-squares-of-maps funext
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types

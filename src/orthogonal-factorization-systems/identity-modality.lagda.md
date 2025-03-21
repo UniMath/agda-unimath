@@ -1,24 +1,19 @@
 # The identity modality
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.identity-modality
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.identity-modality where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences funext
-open import foundation.function-types funext
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.modal-operators funext
-open import orthogonal-factorization-systems.types-local-at-maps funext
-open import orthogonal-factorization-systems.uniquely-eliminating-modalities funext
+open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.types-local-at-maps
+open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 
 </details>

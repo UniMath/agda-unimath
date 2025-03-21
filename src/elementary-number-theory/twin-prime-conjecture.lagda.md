@@ -1,22 +1,17 @@
 # The Twin Prime conjecture
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.twin-prime-conjecture
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.twin-prime-conjecture where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.prime-numbers funext
+open import elementary-number-theory.prime-numbers
 
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```

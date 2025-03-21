@@ -1,29 +1,24 @@
 # Dirichlet convolution
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.dirichlet-convolution
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.dirichlet-convolution where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.arithmetic-functions funext
-open import elementary-number-theory.bounded-sums-arithmetic-functions funext
-open import elementary-number-theory.modular-arithmetic-standard-finite-types funext
+open import elementary-number-theory.arithmetic-functions
+open import elementary-number-theory.bounded-sums-arithmetic-functions
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers funext
+open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.identity-types funext
+open import foundation.empty-types
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import ring-theory.rings funext
+open import ring-theory.rings
 ```
 
 </details>

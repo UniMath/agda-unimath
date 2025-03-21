@@ -1,18 +1,13 @@
 # Dependent epimorphisms
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.dependent-epimorphisms
-  (funext : function-extensionality)
-  where
+module foundation.dependent-epimorphisms where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.epimorphisms funext
+open import foundation.epimorphisms
 open import foundation.universe-levels
 
 open import foundation-core.embeddings

@@ -1,14 +1,9 @@
 # Combinatorial identities of sums of natural numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
+module univalent-combinatorics.sums-of-natural-numbers where
 
-module
-  univalent-combinatorics.sums-of-natural-numbers
-  (funext : function-extensionality)
-  where
-
-open import elementary-number-theory.sums-of-natural-numbers funext public
+open import elementary-number-theory.sums-of-natural-numbers public
 ```
 
 <details><summary>Imports</summary>
@@ -17,14 +12,14 @@ open import elementary-number-theory.sums-of-natural-numbers funext public
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.counting funext-dependent-pair-types
-open import univalent-combinatorics.double-counting funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.double-counting
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

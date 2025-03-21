@@ -1,21 +1,16 @@
 # Commuting triangles of morphisms in precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.commuting-triangles-of-morphisms-in-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.commuting-triangles-of-morphisms-in-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.commuting-triangles-of-morphisms-in-set-magmoids funext
-open import category-theory.precategories funext
+open import category-theory.commuting-triangles-of-morphisms-in-set-magmoids
+open import category-theory.precategories
 
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 ```
 

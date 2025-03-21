@@ -1,12 +1,7 @@
 # Products of natural numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.products-of-natural-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.products-of-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -14,16 +9,16 @@ module
 ```agda
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers funext
+open import elementary-number-theory.strict-inequality-natural-numbers
 
-open import foundation.coproduct-types funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
+open import foundation.coproduct-types
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.unit-type
 
 open import lists.lists
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

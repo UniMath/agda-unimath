@@ -1,36 +1,31 @@
 # Large subframes
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.large-subframes
-  (funext : function-extensionality)
-  where
+module order-theory.large-subframes where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.large-binary-relations funext
-open import foundation.subtypes funext
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.large-binary-relations
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import order-theory.greatest-lower-bounds-large-posets funext
-open import order-theory.large-frames funext
-open import order-theory.large-meet-semilattices funext
-open import order-theory.large-meet-subsemilattices funext
-open import order-theory.large-posets funext
-open import order-theory.large-preorders funext
-open import order-theory.large-subposets funext
-open import order-theory.large-subpreorders funext
-open import order-theory.large-subsuplattices funext
-open import order-theory.large-suplattices funext
-open import order-theory.least-upper-bounds-large-posets funext
-open import order-theory.top-elements-large-posets funext
+open import order-theory.greatest-lower-bounds-large-posets
+open import order-theory.large-frames
+open import order-theory.large-meet-semilattices
+open import order-theory.large-meet-subsemilattices
+open import order-theory.large-posets
+open import order-theory.large-preorders
+open import order-theory.large-subposets
+open import order-theory.large-subpreorders
+open import order-theory.large-subsuplattices
+open import order-theory.large-suplattices
+open import order-theory.least-upper-bounds-large-posets
+open import order-theory.top-elements-large-posets
 ```
 
 </details>

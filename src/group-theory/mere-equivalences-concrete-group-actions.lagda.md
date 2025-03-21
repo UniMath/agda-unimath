@@ -1,26 +1,21 @@
 # Mere equivalences of concrete group actions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.mere-equivalences-concrete-group-actions
-  (funext : function-extensionality)
-  where
+module group-theory.mere-equivalences-concrete-group-actions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functoriality-propositional-truncation funext
-open import foundation.mere-equality funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
+open import foundation.functoriality-propositional-truncation
+open import foundation.mere-equality
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import group-theory.concrete-group-actions funext
-open import group-theory.concrete-groups funext
-open import group-theory.equivalences-concrete-group-actions funext
+open import group-theory.concrete-group-actions
+open import group-theory.concrete-groups
+open import group-theory.equivalences-concrete-group-actions
 ```
 
 </details>

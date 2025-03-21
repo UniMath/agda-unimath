@@ -1,24 +1,19 @@
 # Double counting
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.double-counting
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.double-counting where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.identity-types funext
+open import foundation.equivalences
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

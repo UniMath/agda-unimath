@@ -1,19 +1,14 @@
 # Identity types of truncated types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.identity-truncated-types
-  (funext : function-extensionality)
-  where
+module foundation.identity-truncated-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-products-truncated-types funext
-open import foundation.univalence funext
+open import foundation.dependent-products-truncated-types
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

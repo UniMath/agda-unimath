@@ -1,30 +1,25 @@
 # Frames
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.frames
-  (funext : function-extensionality)
-  where
+module order-theory.frames where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 
-open import order-theory.greatest-lower-bounds-posets funext
-open import order-theory.least-upper-bounds-posets funext
-open import order-theory.meet-semilattices funext
-open import order-theory.meet-suplattices funext
-open import order-theory.posets funext
-open import order-theory.suplattices funext
+open import order-theory.greatest-lower-bounds-posets
+open import order-theory.least-upper-bounds-posets
+open import order-theory.meet-semilattices
+open import order-theory.meet-suplattices
+open import order-theory.posets
+open import order-theory.suplattices
 ```
 
 </details>

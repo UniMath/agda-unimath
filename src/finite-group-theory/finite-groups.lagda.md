@@ -1,12 +1,7 @@
 # Finite groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  finite-group-theory.finite-groups
-  (funext : function-extensionality)
-  where
+module finite-group-theory.finite-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -14,51 +9,51 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.finite-monoids funext
-open import finite-group-theory.finite-semigroups funext
+open import finite-group-theory.finite-monoids
+open import finite-group-theory.finite-semigroups
 
-open import foundation.1-types funext
-open import foundation.binary-embeddings funext
+open import foundation.1-types
+open import foundation.binary-embeddings
 open import foundation.binary-equivalences
-open import foundation.decidable-equality funext
-open import foundation.decidable-types funext
-open import foundation.embeddings funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.mere-equivalences funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.set-truncations funext
-open import foundation.sets funext
+open import foundation.decidable-equality
+open import foundation.decidable-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.mere-equivalences
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.set-truncations
+open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.category-of-groups funext
-open import group-theory.commuting-elements-groups funext
-open import group-theory.groups funext
-open import group-theory.monoids funext
-open import group-theory.semigroups funext
+open import group-theory.category-of-groups
+open import group-theory.commuting-elements-groups
+open import group-theory.groups
+open import group-theory.monoids
+open import group-theory.semigroups
 
 open import structured-types.pointed-types
 
-open import univalent-combinatorics.cartesian-product-types funext
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.counting funext-dependent-pair-types
-open import univalent-combinatorics.decidable-dependent-function-types funext
-open import univalent-combinatorics.decidable-dependent-pair-types funext
-open import univalent-combinatorics.decidable-propositions funext
-open import univalent-combinatorics.dependent-function-types funext
-open import univalent-combinatorics.dependent-pair-types funext
-open import univalent-combinatorics.equality-finite-types funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.finitely-many-connected-components funext
-open import univalent-combinatorics.function-types funext
-open import univalent-combinatorics.pi-finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
-open import univalent-combinatorics.untruncated-pi-finite-types funext
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.decidable-dependent-function-types
+open import univalent-combinatorics.decidable-dependent-pair-types
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-many-connected-components
+open import univalent-combinatorics.function-types
+open import univalent-combinatorics.pi-finite-types
+open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
 </details>

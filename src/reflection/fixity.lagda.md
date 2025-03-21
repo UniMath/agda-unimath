@@ -1,18 +1,13 @@
 # Fixity
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  reflection.fixity
-  (funext : function-extensionality)
-  where
+module reflection.fixity where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers funext
+open import elementary-number-theory.addition-integers
 
 open import foundation.universe-levels
 

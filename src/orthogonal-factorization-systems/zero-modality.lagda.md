@@ -1,24 +1,19 @@
 # The zero modality
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.zero-modality
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.zero-modality where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.raising-universe-levels-unit-type funext
+open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.modal-operators funext
-open import orthogonal-factorization-systems.types-local-at-maps funext
-open import orthogonal-factorization-systems.uniquely-eliminating-modalities funext
+open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.types-local-at-maps
+open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 
 </details>

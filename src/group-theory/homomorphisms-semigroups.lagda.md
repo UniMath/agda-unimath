@@ -1,12 +1,7 @@
 # Homomorphisms of semigroups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.homomorphisms-semigroups
-  (funext : function-extensionality)
-  where
+module group-theory.homomorphisms-semigroups where
 ```
 
 <details><summary>Imports</summary>
@@ -14,19 +9,19 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import group-theory.semigroups funext
+open import group-theory.semigroups
 ```
 
 </details>

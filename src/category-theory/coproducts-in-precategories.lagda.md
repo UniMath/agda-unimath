@@ -1,28 +1,23 @@
 # Coproducts in precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.coproducts-in-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.coproducts-in-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories funext
+open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
-open import foundation.contractible-types funext
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.iterated-dependent-product-types funext
-open import foundation.propositions funext
+open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
+open import foundation.propositions
 open import foundation.telescopes
-open import foundation.uniqueness-quantification funext
+open import foundation.uniqueness-quantification
 open import foundation.universe-levels
 ```
 

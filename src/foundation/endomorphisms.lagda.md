@@ -1,14 +1,9 @@
 # Endomorphisms
 
 ```agda
-open import foundation.function-extensionality-axiom
+module foundation.endomorphisms where
 
-module
-  foundation.endomorphisms
-  (funext : function-extensionality)
-  where
-
-open import foundation-core.endomorphisms funext public
+open import foundation-core.endomorphisms public
 ```
 
 <details><summary>Imports</summary>
@@ -22,10 +17,10 @@ open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.sets
 
-open import group-theory.monoids funext
-open import group-theory.semigroups funext
+open import group-theory.monoids
+open import group-theory.semigroups
 
-open import structured-types.wild-monoids funext
+open import structured-types.wild-monoids
 ```
 
 </details>

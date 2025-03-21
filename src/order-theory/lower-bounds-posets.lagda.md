@@ -1,22 +1,17 @@
 # Lower bounds in posets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.lower-bounds-posets
-  (funext : function-extensionality)
-  where
+module order-theory.lower-bounds-posets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.propositions funext
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.posets funext
+open import order-theory.posets
 ```
 
 </details>

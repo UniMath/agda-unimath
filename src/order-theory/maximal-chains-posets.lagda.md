@@ -1,23 +1,18 @@
 # Maximal chains in posets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.maximal-chains-posets
-  (funext : function-extensionality)
-  where
+module order-theory.maximal-chains-posets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions funext
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.chains-posets funext
-open import order-theory.maximal-chains-preorders funext
-open import order-theory.posets funext
+open import order-theory.chains-posets
+open import order-theory.maximal-chains-preorders
+open import order-theory.posets
 ```
 
 </details>

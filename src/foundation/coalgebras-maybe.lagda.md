@@ -1,12 +1,7 @@
 # Coalgebras of the maybe monad
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.coalgebras-maybe
-  (funext : function-extensionality)
-  where
+module foundation.coalgebras-maybe where
 ```
 
 <details><summary>Imports</summary>
@@ -17,7 +12,7 @@ open import foundation.universe-levels
 
 open import foundation-core.maybe
 
-open import trees.polynomial-endofunctors funext
+open import trees.polynomial-endofunctors
 ```
 
 </details>

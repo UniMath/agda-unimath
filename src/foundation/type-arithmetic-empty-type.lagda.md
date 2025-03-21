@@ -1,18 +1,13 @@
 # Type arithmetic with the empty type
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.type-arithmetic-empty-type
-  (funext : function-extensionality)
-  where
+module foundation.type-arithmetic-empty-type where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 

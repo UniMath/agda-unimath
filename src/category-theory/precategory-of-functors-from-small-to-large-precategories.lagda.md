@@ -1,24 +1,19 @@
 # The precategory of functors and natural transformations from small to large precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.precategory-of-functors-from-small-to-large-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.precategory-of-functors-from-small-to-large-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-from-small-to-large-precategories funext
-open import category-theory.large-precategories funext
-open import category-theory.natural-transformations-functors-from-small-to-large-precategories funext
-open import category-theory.precategories funext
+open import category-theory.functors-from-small-to-large-precategories
+open import category-theory.large-precategories
+open import category-theory.natural-transformations-functors-from-small-to-large-precategories
+open import category-theory.precategories
 
-open import foundation.identity-types funext
-open import foundation.strictly-involutive-identity-types funext
+open import foundation.identity-types
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 

@@ -1,30 +1,25 @@
 # Quicksort for lists
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  lists.quicksort-lists
-  (funext : function-extensionality)
-  where
+module lists.quicksort-lists where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strong-induction-natural-numbers funext
+open import elementary-number-theory.strong-induction-natural-numbers
 
-open import foundation.coproduct-types funext
-open import foundation.identity-types funext
+open import foundation.coproduct-types
+open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import lists.concatenation-lists funext
+open import lists.concatenation-lists
 open import lists.lists
 
-open import order-theory.decidable-total-orders funext
+open import order-theory.decidable-total-orders
 ```
 
 </details>

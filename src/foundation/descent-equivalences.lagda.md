@@ -1,25 +1,20 @@
 # Descent for equivalences
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.descent-equivalences
-  (funext : function-extensionality)
-  where
+module foundation.descent-equivalences where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospan-diagrams funext
-open import foundation.dependent-universal-property-equivalences funext
-open import foundation.equivalences funext
-open import foundation.functoriality-fibers-of-maps funext
+open import foundation.cones-over-cospan-diagrams
+open import foundation.dependent-universal-property-equivalences
+open import foundation.equivalences
+open import foundation.functoriality-fibers-of-maps
 open import foundation.universe-levels
 
 open import foundation-core.function-types
-open import foundation-core.pullbacks funext
+open import foundation-core.pullbacks
 ```
 
 </details>

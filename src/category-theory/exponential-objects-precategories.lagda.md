@@ -1,24 +1,19 @@
 # Exponential objects in precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.exponential-objects-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.exponential-objects-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories funext
-open import category-theory.products-in-precategories funext
+open import category-theory.precategories
+open import category-theory.products-in-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.uniqueness-quantification funext
+open import foundation.identity-types
+open import foundation.uniqueness-quantification
 open import foundation.universe-levels
 ```
 

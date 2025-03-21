@@ -1,26 +1,20 @@
 # Locally small types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.locally-small-types
-  (funext : function-extensionality)
-  where
+module foundation.locally-small-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.dependent-products-truncated-types funext
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.inhabited-subtypes funext
-open import foundation.subuniverses funext
-open import foundation.univalence funext
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.inhabited-subtypes
+open import foundation.subuniverses
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
@@ -29,8 +23,8 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.small-types funext
-open import foundation-core.subtypes funext
+open import foundation-core.small-types
+open import foundation-core.subtypes
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels

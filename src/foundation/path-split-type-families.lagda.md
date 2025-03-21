@@ -1,12 +1,7 @@
 # Path-split type families
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.path-split-type-families
-  (funext : function-extensionality)
-  where
+module foundation.path-split-type-families where
 ```
 
 <details><summary>Imports</summary>
@@ -14,8 +9,8 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types funext
-open import foundation.embeddings funext
+open import foundation.dependent-products-contractible-types
+open import foundation.embeddings
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -26,7 +21,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sections
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 ```
 
 </details>

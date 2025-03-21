@@ -1,20 +1,15 @@
 # Cd-structures
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.cd-structures
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.cd-structures where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.morphisms-arrows funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
+open import foundation.morphisms-arrows
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 

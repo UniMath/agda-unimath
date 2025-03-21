@@ -1,31 +1,26 @@
 # Sort by insertion for lists
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  lists.sort-by-insertion-lists
-  (funext : function-extensionality)
-  where
+module lists.sort-by-insertion-lists where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-group-theory.permutations-standard-finite-types funext
+open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import lists.arrays funext
+open import lists.arrays
 open import lists.lists
-open import lists.permutation-lists funext
-open import lists.sort-by-insertion-vectors funext
-open import lists.sorted-lists funext
-open import lists.sorting-algorithms-lists funext
+open import lists.permutation-lists
+open import lists.sort-by-insertion-vectors
+open import lists.sorted-lists
+open import lists.sorting-algorithms-lists
 
-open import order-theory.decidable-total-orders funext
+open import order-theory.decidable-total-orders
 ```
 
 </details>

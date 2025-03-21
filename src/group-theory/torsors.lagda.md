@@ -1,47 +1,42 @@
 # Torsors of abstract groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.torsors
-  (funext : function-extensionality)
-  where
+module group-theory.torsors where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types funext
+open import foundation.0-connected-types
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.mere-equality funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.retractions funext
-open import foundation.sections funext
-open import foundation.sets funext
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.mere-equality
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
+open import foundation.sets
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups funext
-open import group-theory.equivalences-group-actions funext
-open import group-theory.group-actions funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.isomorphisms-groups funext
-open import group-theory.mere-equivalences-group-actions funext
-open import group-theory.principal-group-actions funext
-open import group-theory.symmetric-groups funext
+open import group-theory.concrete-groups
+open import group-theory.equivalences-group-actions
+open import group-theory.group-actions
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.isomorphisms-groups
+open import group-theory.mere-equivalences-group-actions
+open import group-theory.principal-group-actions
+open import group-theory.symmetric-groups
 
-open import higher-group-theory.higher-groups funext
+open import higher-group-theory.higher-groups
 ```
 
 </details>

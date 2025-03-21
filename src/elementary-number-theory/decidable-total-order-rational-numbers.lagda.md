@@ -1,25 +1,20 @@
 # The decidable total order of rational numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.decidable-total-order-rational-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.decidable-total-order-rational-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-rational-numbers funext
+open import elementary-number-theory.inequality-rational-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.propositional-truncations funext
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
-open import order-theory.decidable-total-orders funext
-open import order-theory.total-orders funext
+open import order-theory.decidable-total-orders
+open import order-theory.total-orders
 ```
 
 </details>

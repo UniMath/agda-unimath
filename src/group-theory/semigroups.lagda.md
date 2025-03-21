@@ -1,12 +1,7 @@
 # Semigroups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.semigroups
-  (funext : function-extensionality)
-  where
+module group-theory.semigroups where
 ```
 
 <details><summary>Imports</summary>
@@ -15,8 +10,8 @@ module
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 ```
 

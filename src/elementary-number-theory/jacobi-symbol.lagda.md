@@ -1,27 +1,22 @@
 # The Jacobi symbol
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.jacobi-symbol
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.jacobi-symbol where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.fundamental-theorem-of-arithmetic funext
+open import elementary-number-theory.fundamental-theorem-of-arithmetic
 open import elementary-number-theory.integers
-open import elementary-number-theory.legendre-symbol funext
-open import elementary-number-theory.multiplication-integers funext
+open import elementary-number-theory.legendre-symbol
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.type-arithmetic-dependent-function-types funext
+open import foundation.type-arithmetic-dependent-function-types
 open import foundation.unit-type
 
-open import lists.functoriality-lists funext
+open import lists.functoriality-lists
 open import lists.lists
 ```
 

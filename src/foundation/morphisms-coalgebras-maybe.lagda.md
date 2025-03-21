@@ -1,25 +1,20 @@
 # Morphisms of coalgebras of the maybe monad
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.morphisms-coalgebras-maybe
-  (funext : function-extensionality)
-  where
+module foundation.morphisms-coalgebras-maybe where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coalgebras-maybe funext
-open import foundation.commuting-squares-of-maps funext
+open import foundation.coalgebras-maybe
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.maybe
 
-open import trees.polynomial-endofunctors funext
+open import trees.polynomial-endofunctors
 ```
 
 </details>

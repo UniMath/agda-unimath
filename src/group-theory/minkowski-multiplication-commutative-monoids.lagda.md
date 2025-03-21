@@ -1,29 +1,24 @@
 # Minkowski multiplication of subsets of a commutative monoid
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.minkowski-multiplication-commutative-monoids
-  (funext : function-extensionality)
-  where
+module group-theory.minkowski-multiplication-commutative-monoids where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification funext
-open import foundation.identity-types funext
-open import foundation.inhabited-subtypes funext
-open import foundation.powersets funext
-open import foundation.subtypes funext
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.inhabited-subtypes
+open import foundation.powersets
+open import foundation.subtypes
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids funext
-open import group-theory.minkowski-multiplication-monoids funext
-open import group-theory.subsets-commutative-monoids funext
+open import group-theory.commutative-monoids
+open import group-theory.minkowski-multiplication-monoids
+open import group-theory.subsets-commutative-monoids
 ```
 
 </details>

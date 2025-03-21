@@ -1,20 +1,15 @@
 # Equivalences between large precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.equivalences-of-large-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.equivalences-of-large-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-large-precategories funext
-open import category-theory.large-precategories funext
-open import category-theory.natural-isomorphisms-functors-large-precategories funext
+open import category-theory.functors-large-precategories
+open import category-theory.large-precategories
+open import category-theory.natural-isomorphisms-functors-large-precategories
 
 open import foundation.universe-levels
 ```

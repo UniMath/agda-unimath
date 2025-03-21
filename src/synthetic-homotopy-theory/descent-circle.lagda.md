@@ -1,38 +1,34 @@
 # The descent property of the circle
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.descent-circle
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.descent-circle where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.automorphisms funext
-open import foundation.commuting-squares-of-maps funext
-open import foundation.commuting-triangles-of-maps funext
-open import foundation.contractible-maps funext
-open import foundation.contractible-types funext
+open import foundation.automorphisms
+open import foundation.commuting-squares-of-maps
+open import foundation.commuting-triangles-of-maps
+open import foundation.contractible-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.fibers-of-maps funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.torsorial-type-families funext
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.function-extensionality-axiom
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import structured-types.equivalences-types-equipped-with-automorphisms funext
-open import structured-types.types-equipped-with-automorphisms funext
+open import structured-types.equivalences-types-equipped-with-automorphisms
+open import structured-types.types-equipped-with-automorphisms
 
-open import synthetic-homotopy-theory.free-loops funext
-open import synthetic-homotopy-theory.universal-property-circle funext
+open import synthetic-homotopy-theory.free-loops
+open import synthetic-homotopy-theory.universal-property-circle
 ```
 
 </details>

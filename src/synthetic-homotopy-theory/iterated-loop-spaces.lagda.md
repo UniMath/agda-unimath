@@ -1,12 +1,7 @@
 # Iterated loop spaces
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.iterated-loop-spaces
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.iterated-loop-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -14,13 +9,13 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.iterating-functions funext
+open import foundation.iterating-functions
 open import foundation.universe-levels
 
-open import structured-types.h-spaces funext
+open import structured-types.h-spaces
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces funext
+open import synthetic-homotopy-theory.loop-spaces
 ```
 
 </details>

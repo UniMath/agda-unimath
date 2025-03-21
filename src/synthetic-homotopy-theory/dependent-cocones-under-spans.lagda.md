@@ -1,12 +1,7 @@
 # Dependent cocones under spans
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.dependent-cocones-under-spans
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.dependent-cocones-under-spans where
 ```
 
 <details><summary>Imports</summary>
@@ -14,36 +9,35 @@ module
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-identifications funext
-open import foundation.commuting-squares-of-maps funext
-open import foundation.constant-type-families funext
-open import foundation.contractible-types funext
+open import foundation.commuting-squares-of-identifications
+open import foundation.commuting-squares-of-maps
+open import foundation.constant-type-families
+open import foundation.contractible-types
 open import foundation.dependent-homotopies
-open import foundation.dependent-identifications funext
+open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types funext
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
-open import foundation.retractions funext
-open import foundation.sections funext
-open import foundation.span-diagrams funext
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
+open import foundation.retractions
+open import foundation.sections
+open import foundation.span-diagrams
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
-open import foundation.transport-along-higher-identifications funext
+open import foundation.torsorial-type-families
+open import foundation.transport-along-higher-identifications
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.injective-maps
 
-open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.cocones-under-spans
 ```
 
 </details>

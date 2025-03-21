@@ -1,12 +1,7 @@
 # Monomorphisms
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.monomorphisms
-  (funext : function-extensionality)
-  where
+module foundation.monomorphisms where
 ```
 
 <details><summary>Imports</summary>
@@ -14,12 +9,11 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.embeddings funext
-open import foundation.function-extensionality funext
-
-open import foundation.functoriality-function-types funext
-open import foundation.postcomposition-functions funext
+open import foundation.dependent-products-propositions
+open import foundation.embeddings
+open import foundation.function-extensionality
+open import foundation.functoriality-function-types
+open import foundation.postcomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

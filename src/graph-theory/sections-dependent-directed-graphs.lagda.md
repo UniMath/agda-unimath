@@ -1,31 +1,26 @@
 # Sections of dependent directed graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.sections-dependent-directed-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.sections-dependent-directed-graphs where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types funext
-open import foundation.equivalences funext
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import graph-theory.dependent-directed-graphs funext
-open import graph-theory.directed-graphs funext
+open import graph-theory.dependent-directed-graphs
+open import graph-theory.directed-graphs
 ```
 
 </details>

@@ -1,33 +1,28 @@
 # Joins of ideals of commutative rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.joins-ideals-commutative-rings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.joins-ideals-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
-open import commutative-algebra.ideals-commutative-rings funext
-open import commutative-algebra.ideals-generated-by-subsets-commutative-rings funext
-open import commutative-algebra.poset-of-ideals-commutative-rings funext
-open import commutative-algebra.products-ideals-commutative-rings funext
-open import commutative-algebra.products-subsets-commutative-rings funext
-open import commutative-algebra.subsets-commutative-rings funext
+open import commutative-algebra.commutative-rings
+open import commutative-algebra.ideals-commutative-rings
+open import commutative-algebra.ideals-generated-by-subsets-commutative-rings
+open import commutative-algebra.poset-of-ideals-commutative-rings
+open import commutative-algebra.products-ideals-commutative-rings
+open import commutative-algebra.products-subsets-commutative-rings
+open import commutative-algebra.subsets-commutative-rings
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.subtypes funext
-open import foundation.unions-subtypes funext
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.subtypes
+open import foundation.unions-subtypes
 open import foundation.universe-levels
 
-open import ring-theory.joins-ideals-rings funext
+open import ring-theory.joins-ideals-rings
 ```
 
 </details>

@@ -1,12 +1,7 @@
 # Dependent products of H-spaces
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.dependent-products-h-spaces
-  (funext : function-extensionality)
-  where
+module structured-types.dependent-products-h-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -14,14 +9,13 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality funext
-
-open import foundation.identity-types funext
+open import foundation.function-extensionality
+open import foundation.identity-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import structured-types.dependent-products-pointed-types
-open import structured-types.h-spaces funext
+open import structured-types.h-spaces
 open import structured-types.pointed-types
 ```
 

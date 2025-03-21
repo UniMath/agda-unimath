@@ -1,34 +1,28 @@
 # Functional correspondences
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.functional-correspondences
-  (funext : function-extensionality)
-  where
+module foundation.functional-correspondences where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.equality-dependent-function-types funext
-open import foundation.function-extensionality funext
-
+open import foundation.dependent-products-propositions
+open import foundation.equality-dependent-function-types
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families funext
-open import foundation.univalence funext
+open import foundation.torsorial-type-families
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 ```
 
 </details>

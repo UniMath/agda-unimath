@@ -1,27 +1,22 @@
 # Coproducts of species of types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  species.coproducts-species-of-types
-  (funext : function-extensionality)
-  where
+module species.coproducts-species-of-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
-open import foundation.coproduct-types funext
-open import foundation.equivalences funext
-open import foundation.functoriality-dependent-function-types funext
-open import foundation.type-theoretic-principle-of-choice funext
-open import foundation.universal-property-coproduct-types funext
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.equivalences
+open import foundation.functoriality-dependent-function-types
+open import foundation.type-theoretic-principle-of-choice
+open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
-open import species.morphisms-species-of-types funext
-open import species.species-of-types funext
+open import species.morphisms-species-of-types
+open import species.species-of-types
 ```
 
 </details>

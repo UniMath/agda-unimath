@@ -1,12 +1,7 @@
 # Transposition of pointed span diagrams
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.transposition-pointed-span-diagrams
-  (funext : function-extensionality)
-  where
+module structured-types.transposition-pointed-span-diagrams where
 ```
 
 <details><summary>Imports</summary>
@@ -15,8 +10,8 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.opposite-pointed-spans funext
-open import structured-types.pointed-span-diagrams funext
+open import structured-types.opposite-pointed-spans
+open import structured-types.pointed-span-diagrams
 ```
 
 </details>

@@ -1,24 +1,19 @@
 # Products of precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.products-of-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.products-of-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories funext
+open import category-theory.precategories
 
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.identity-types funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 ```
 

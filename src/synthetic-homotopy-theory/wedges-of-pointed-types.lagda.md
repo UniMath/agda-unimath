@@ -1,31 +1,26 @@
 # Wedges of pointed types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.wedges-of-pointed-types
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.wedges-of-pointed-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.homotopies funext
-open import foundation.identity-types funext
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.pointed-cartesian-product-types funext
-open import structured-types.pointed-maps funext
+open import structured-types.pointed-cartesian-product-types
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
-open import structured-types.pointed-unit-type funext
+open import structured-types.pointed-unit-type
 
-open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams funext
-open import synthetic-homotopy-theory.cofibers-of-maps funext
-open import synthetic-homotopy-theory.pushouts funext
-open import synthetic-homotopy-theory.pushouts funext-of-pointed-types
+open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams
+open import synthetic-homotopy-theory.cofibers-of-maps
+open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.pushouts-of-pointed-types
 ```
 
 </details>

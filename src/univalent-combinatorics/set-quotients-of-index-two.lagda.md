@@ -3,37 +3,32 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.set-quotients-of-index-two
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.set-quotients-of-index-two where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps funext
-open import foundation.contractible-types funext
-open import foundation.coproduct-types funext
+open import foundation.commuting-squares-of-maps
+open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.empty-types funext
-open import foundation.equivalence-relations funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-set-quotients funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.logical-equivalences funext
-open import foundation.reflecting-maps-equivalence-relations funext
-open import foundation.sets funext
-open import foundation.universal-property-set-quotients funext
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equivalence-relations
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-set-quotients
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.logical-equivalences
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
+open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

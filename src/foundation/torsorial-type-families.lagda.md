@@ -1,12 +1,7 @@
 # Torsorial type families
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.torsorial-type-families
-  (funext : function-extensionality)
-  where
+module foundation.torsorial-type-families where
 
 open import foundation-core.torsorial-type-families public
 ```
@@ -14,11 +9,11 @@ open import foundation-core.torsorial-type-families public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.logical-equivalences funext
-open import foundation.universal-property-identity-types funext
+open import foundation.logical-equivalences
+open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

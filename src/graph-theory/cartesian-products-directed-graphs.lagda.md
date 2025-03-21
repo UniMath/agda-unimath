@@ -1,23 +1,18 @@
 # Cartesian products of directed graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.cartesian-products-directed-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.cartesian-products-directed-graphs where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs funext
-open import graph-theory.morphisms-directed-graphs funext
+open import graph-theory.directed-graphs
+open import graph-theory.morphisms-directed-graphs
 ```
 
 </details>

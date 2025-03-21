@@ -1,28 +1,22 @@
 # Transport along equivalences
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.transport-along-equivalences
-  (funext : function-extensionality)
-  where
+module foundation.transport-along-equivalences where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-equivalences-functions funext
-open import foundation.action-on-equivalences-type-families funext
+open import foundation.action-on-equivalences-functions
+open import foundation.action-on-equivalences-type-families
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalence-extensionality funext
-open import foundation.equivalence-induction funext
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
+open import foundation.equivalence-extensionality
+open import foundation.equivalence-induction
+open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.transport-along-identifications
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps

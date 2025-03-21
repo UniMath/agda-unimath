@@ -1,56 +1,50 @@
 # Localizations at global subuniverses
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.localizations-at-global-subuniverses
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.localizations-at-global-subuniverses where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
-open import foundation.cones-over-cospan-diagrams funext
-open import foundation.constant-maps funext
-open import foundation.contractible-types funext
+open import foundation.cartesian-product-types
+open import foundation.cones-over-cospan-diagrams
+open import foundation.constant-maps
+open import foundation.contractible-types
 open import foundation.cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.equivalences funext-arrows
-open import foundation.extensions-types funext
-open import foundation.extensions-types funext-global-subuniverses
-open import foundation.fibers-of-maps funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.functoriality-cartesian-product-types funext
-open import foundation.functoriality-dependent-function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.global-subuniverses funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.postcomposition-functions funext
-open import foundation.precomposition-dependent-functions funext
-open import foundation.precomposition-functions funext
-open import foundation.pullback-cones funext
-open import foundation.pullbacks funext
-open import foundation.sequential-limits funext
+open import foundation.equivalences
+open import foundation.equivalences-arrows
+open import foundation.extensions-types
+open import foundation.extensions-types-global-subuniverses
+open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.global-subuniverses
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.postcomposition-functions
+open import foundation.precomposition-dependent-functions
+open import foundation.precomposition-functions
+open import foundation.pullback-cones
+open import foundation.pullbacks
+open import foundation.sequential-limits
 open import foundation.singleton-induction
-open import foundation.subuniverses funext
-open import foundation.type-theoretic-principle-of-choice funext
+open import foundation.subuniverses
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
-open import foundation.universal-property-dependent-pair-types funext
+open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import orthogonal-factorization-systems.orthogonal-maps funext
-open import orthogonal-factorization-systems.pullback-hom funext
-open import orthogonal-factorization-systems.types-local-at-maps funext
-open import orthogonal-factorization-systems.universal-property-localizations-at-global-subuniverses funext
+open import orthogonal-factorization-systems.orthogonal-maps
+open import orthogonal-factorization-systems.pullback-hom
+open import orthogonal-factorization-systems.types-local-at-maps
+open import orthogonal-factorization-systems.universal-property-localizations-at-global-subuniverses
 ```
 
 </details>

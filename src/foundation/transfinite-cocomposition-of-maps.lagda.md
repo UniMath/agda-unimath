@@ -1,19 +1,14 @@
 # Transfinite cocomposition of maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.transfinite-cocomposition-of-maps
-  (funext : function-extensionality)
-  where
+module foundation.transfinite-cocomposition-of-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.inverse-sequential-diagrams funext
-open import foundation.sequential-limits funext
+open import foundation.inverse-sequential-diagrams
+open import foundation.sequential-limits
 open import foundation.universe-levels
 ```
 

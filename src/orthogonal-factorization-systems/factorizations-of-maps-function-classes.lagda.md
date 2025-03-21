@@ -1,39 +1,34 @@
 # Factorizations of maps into function classes
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.factorizations-of-maps-function-classes
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.factorizations-of-maps-function-classes where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.retractions funext
-open import foundation.sections funext
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families funext
-open import foundation.univalence funext
+open import foundation.torsorial-type-families
+open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import orthogonal-factorization-systems.factorizations-of-maps funext
-open import orthogonal-factorization-systems.function-classes funext
-open import orthogonal-factorization-systems.global-function-classes funext
+open import orthogonal-factorization-systems.factorizations-of-maps
+open import orthogonal-factorization-systems.function-classes
+open import orthogonal-factorization-systems.global-function-classes
 ```
 
 </details>

@@ -1,23 +1,18 @@
 # Regular undirected graph
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.regular-undirected-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.regular-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.mere-equivalences funext
-open import foundation.propositions funext
+open import foundation.mere-equivalences
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import graph-theory.neighbors-undirected-graphs funext
-open import graph-theory.undirected-graphs funext
+open import graph-theory.neighbors-undirected-graphs
+open import graph-theory.undirected-graphs
 ```
 
 </details>

@@ -1,26 +1,21 @@
 # Function rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.function-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.function-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.monoids funext
+open import group-theory.abelian-groups
+open import group-theory.monoids
 
-open import ring-theory.dependent-products-rings funext
-open import ring-theory.rings funext
+open import ring-theory.dependent-products-rings
+open import ring-theory.rings
 ```
 
 </details>

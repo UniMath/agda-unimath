@@ -1,23 +1,18 @@
 # Epimorphism in large precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.epimorphisms-in-large-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.epimorphisms-in-large-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-large-precategories funext
-open import category-theory.large-precategories funext
+open import category-theory.isomorphisms-in-large-precategories
+open import category-theory.large-precategories
 
-open import foundation.embeddings funext
-open import foundation.equivalences funext
-open import foundation.propositions funext
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.propositions
 open import foundation.universe-levels
 ```
 

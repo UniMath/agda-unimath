@@ -1,46 +1,41 @@
 # Powersets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.powersets
-  (funext : function-extensionality)
-  where
+module foundation.powersets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.identity-types funext
-open import foundation.large-locale-of-propositions funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
-open import foundation.raising-universe-levels-unit-type funext
-open import foundation.subtypes funext
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.large-locale-of-propositions
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
+open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.sets
 
-open import order-theory.bottom-elements-large-posets funext
-open import order-theory.bottom-elements-posets funext
-open import order-theory.dependent-products-large-meet-semilattices funext
-open import order-theory.dependent-products-large-posets funext
-open import order-theory.dependent-products-large-preorders funext
-open import order-theory.dependent-products-large-suplattices funext
-open import order-theory.large-meet-semilattices funext
-open import order-theory.large-posets funext
-open import order-theory.large-preorders funext
-open import order-theory.large-suplattices funext
-open import order-theory.posets funext
-open import order-theory.preorders funext
-open import order-theory.similarity-of-elements-large-posets funext
-open import order-theory.suplattices funext
-open import order-theory.top-elements-large-posets funext
-open import order-theory.top-elements-posets funext
+open import order-theory.bottom-elements-large-posets
+open import order-theory.bottom-elements-posets
+open import order-theory.dependent-products-large-meet-semilattices
+open import order-theory.dependent-products-large-posets
+open import order-theory.dependent-products-large-preorders
+open import order-theory.dependent-products-large-suplattices
+open import order-theory.large-meet-semilattices
+open import order-theory.large-posets
+open import order-theory.large-preorders
+open import order-theory.large-suplattices
+open import order-theory.posets
+open import order-theory.preorders
+open import order-theory.similarity-of-elements-large-posets
+open import order-theory.suplattices
+open import order-theory.top-elements-large-posets
+open import order-theory.top-elements-posets
 ```
 
 </details>

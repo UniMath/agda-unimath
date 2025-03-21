@@ -1,30 +1,25 @@
 # Parity of the natural numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.parity-natural-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.parity-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers funext
-open import elementary-number-theory.equality-natural-numbers funext
-open import elementary-number-theory.modular-arithmetic-standard-finite-types funext
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.decidable-types funext
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.negation funext
+open import foundation.empty-types
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.negation
 open import foundation.universe-levels
 ```
 

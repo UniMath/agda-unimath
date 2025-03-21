@@ -1,22 +1,17 @@
 # Discrete fields
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.discrete-fields
-  (funext : function-extensionality)
-  where
+module commutative-algebra.discrete-fields where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.commutative-rings
 
 open import foundation.universe-levels
 
-open import ring-theory.division-rings funext
+open import ring-theory.division-rings
 ```
 
 </details>

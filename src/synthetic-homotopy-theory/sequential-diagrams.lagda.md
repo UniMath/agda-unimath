@@ -1,12 +1,7 @@
 # Sequential diagrams
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.sequential-diagrams
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.sequential-diagrams where
 ```
 
 <details><summary>Imports</summary>
@@ -14,9 +9,9 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.universe-levels
 ```
 

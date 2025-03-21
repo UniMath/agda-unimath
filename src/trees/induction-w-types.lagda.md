@@ -1,12 +1,7 @@
 # Induction principles on W-types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.induction-w-types
-  (funext : function-extensionality)
-  where
+module trees.induction-w-types where
 ```
 
 <details><summary>Imports</summary>
@@ -16,17 +11,16 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.negation funext
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.negation
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import trees.elementhood-relation-w-types funext
-open import trees.inequality-w-types funext
-open import trees.w-types funext
+open import trees.elementhood-relation-w-types
+open import trees.inequality-w-types
+open import trees.w-types
 ```
 
 </details>

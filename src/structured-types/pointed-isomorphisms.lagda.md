@@ -1,35 +1,30 @@
 # Pointed isomorphisms
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.pointed-isomorphisms
-  (funext : function-extensionality)
-  where
+module structured-types.pointed-isomorphisms where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
-open import foundation.contractible-maps funext
-open import foundation.contractible-types funext
+open import foundation.cartesian-product-types
+open import foundation.contractible-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
-open import foundation.retractions funext
-open import foundation.sections funext
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
-open import structured-types.pointed-equivalences funext
-open import structured-types.pointed-homotopies funext
-open import structured-types.pointed-maps funext
-open import structured-types.pointed-retractions funext
-open import structured-types.pointed-sections funext
+open import structured-types.pointed-equivalences
+open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
+open import structured-types.pointed-retractions
+open import structured-types.pointed-sections
 open import structured-types.pointed-types
 ```
 

@@ -1,23 +1,18 @@
 # Pairs of distinct elements
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.pairs-of-distinct-elements
-  (funext : function-extensionality)
-  where
+module foundation.pairs-of-distinct-elements where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.equivalences funext
+open import foundation.embeddings
+open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.negated-equality funext
-open import foundation.negation funext
+open import foundation.negated-equality
+open import foundation.negation
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels

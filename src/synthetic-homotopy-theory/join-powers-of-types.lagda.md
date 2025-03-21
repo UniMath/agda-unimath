@@ -1,12 +1,7 @@
 # Join powers of types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.join-powers-of-types
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.join-powers-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -14,11 +9,11 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.empty-types funext
-open import foundation.iterating-functions funext
+open import foundation.empty-types
+open import foundation.iterating-functions
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.joins-of-types funext
+open import synthetic-homotopy-theory.joins-of-types
 ```
 
 </details>

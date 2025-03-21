@@ -1,37 +1,31 @@
 # Short functions between premetric spaces
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  metric-spaces.short-functions-premetric-spaces
-  (funext : function-extensionality)
-  where
+module metric-spaces.short-functions-premetric-spaces where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers funext
+open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.existential-quantification funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
+open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.sequences
-open import foundation.sets funext
-open import foundation.subtypes funext
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.isometries-premetric-spaces funext
-open import metric-spaces.premetric-spaces funext
+open import metric-spaces.isometries-premetric-spaces
+open import metric-spaces.premetric-spaces
 ```
 
 </details>

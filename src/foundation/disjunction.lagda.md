@@ -1,28 +1,23 @@
 # Disjunction
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.disjunction
-  (funext : function-extensionality)
-  where
+module foundation.disjunction where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-types funext
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.functoriality-coproduct-types funext
-open import foundation.inhabited-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositional-truncations funext
+open import foundation.functoriality-coproduct-types
+open import foundation.inhabited-types
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation-core.decidable-propositions funext
+open import foundation-core.decidable-propositions
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types

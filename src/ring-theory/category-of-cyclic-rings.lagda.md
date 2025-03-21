@@ -1,30 +1,25 @@
 # The category of cyclic rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.category-of-cyclic-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.category-of-cyclic-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories funext
-open import category-theory.full-large-subprecategories funext
-open import category-theory.large-categories funext
-open import category-theory.large-precategories funext
+open import category-theory.categories
+open import category-theory.full-large-subprecategories
+open import category-theory.large-categories
+open import category-theory.large-precategories
 
 open import foundation.universe-levels
 
-open import order-theory.large-posets funext
+open import order-theory.large-posets
 
-open import ring-theory.category-of-rings funext
-open import ring-theory.cyclic-rings funext
-open import ring-theory.homomorphisms-cyclic-rings funext
-open import ring-theory.precategory-of-rings funext
+open import ring-theory.category-of-rings
+open import ring-theory.cyclic-rings
+open import ring-theory.homomorphisms-cyclic-rings
+open import ring-theory.precategory-of-rings
 ```
 
 </details>

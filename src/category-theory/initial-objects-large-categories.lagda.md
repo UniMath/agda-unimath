@@ -1,19 +1,14 @@
 # Initial objects of large categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.initial-objects-large-categories
-  (funext : function-extensionality)
-  where
+module category-theory.initial-objects-large-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.initial-objects-large-precategories funext
-open import category-theory.large-categories funext
+open import category-theory.initial-objects-large-precategories
+open import category-theory.large-categories
 
 open import foundation.universe-levels
 ```

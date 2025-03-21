@@ -1,12 +1,7 @@
 # The metric space of convergent cauchy approximations in a metric space
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  metric-spaces.metric-space-of-convergent-cauchy-approximations-in-a-metric-space
-  (funext : function-extensionality)
-  where
+module metric-spaces.metric-space-of-convergent-cauchy-approximations-in-a-metric-space where
 ```
 
 <details><summary>Imports</summary>
@@ -14,10 +9,10 @@ module
 ```agda
 open import foundation.universe-levels
 
-open import metric-spaces.convergent-cauchy-approximations-metric-spaces funext
-open import metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space funext
-open import metric-spaces.metric-spaces funext
-open import metric-spaces.subspaces-metric-spaces funext
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space
+open import metric-spaces.metric-spaces
+open import metric-spaces.subspaces-metric-spaces
 ```
 
 </details>

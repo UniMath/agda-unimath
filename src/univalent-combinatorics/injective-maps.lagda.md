@@ -1,26 +1,21 @@
 # Injective maps between finite types
 
 ```agda
-open import foundation.function-extensionality-axiom
+module univalent-combinatorics.injective-maps where
 
-module
-  univalent-combinatorics.injective-maps
-  (funext : function-extensionality)
-  where
-
-open import foundation.injective-maps funext public
+open import foundation.injective-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-types funext
-open import foundation.identity-types funext
+open import foundation.decidable-types
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.decidable-dependent-function-types funext
-open import univalent-combinatorics.equality-finite-types funext
-open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.decidable-dependent-function-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

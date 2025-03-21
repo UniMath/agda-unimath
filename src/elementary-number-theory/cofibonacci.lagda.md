@@ -1,32 +1,27 @@
 # The cofibonacci sequence
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.cofibonacci
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.cofibonacci where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers funext
-open import elementary-number-theory.equality-natural-numbers funext
-open import elementary-number-theory.fibonacci-sequence funext
-open import elementary-number-theory.inequality-natural-numbers funext
-open import elementary-number-theory.modular-arithmetic-standard-finite-types funext
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.fibonacci-sequence
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.pisano-periods funext
-open import elementary-number-theory.well-ordering-principle-natural-numbers funext
+open import elementary-number-theory.pisano-periods
+open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
-open import foundation.decidable-types funext
+open import foundation.cartesian-product-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.identity-types funext
+open import foundation.empty-types
+open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```

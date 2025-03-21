@@ -1,33 +1,28 @@
 # Localizations of rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.localizations-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.localizations-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-maps funext
-open import foundation.contractible-types funext
+open import foundation.contractible-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.fibers-of-maps funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import ring-theory.homomorphisms-rings funext
-open import ring-theory.invertible-elements-rings funext
-open import ring-theory.rings funext
-open import ring-theory.subsets-rings funext
+open import ring-theory.homomorphisms-rings
+open import ring-theory.invertible-elements-rings
+open import ring-theory.rings
+open import ring-theory.subsets-rings
 ```
 
 </details>

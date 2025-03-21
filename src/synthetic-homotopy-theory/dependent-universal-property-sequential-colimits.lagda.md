@@ -1,43 +1,38 @@
 # The dependent universal property of sequential colimits
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.dependent-universal-property-sequential-colimits
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.dependent-universal-property-sequential-colimits where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-triangles-of-maps funext
-open import foundation.contractible-maps funext
-open import foundation.contractible-types funext
+open import foundation.commuting-triangles-of-maps
+open import foundation.contractible-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.fibers-of-maps funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.precomposition-dependent-functions funext
-open import foundation.precomposition-functions funext
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.precomposition-dependent-functions
+open import foundation.precomposition-functions
 open import foundation.subtype-identity-principle
-open import foundation.universal-property-equivalences funext
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext
-open import synthetic-homotopy-theory.coforks funext
-open import synthetic-homotopy-theory.coforks funext-cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams funext
-open import synthetic-homotopy-theory.dependent-coforks funext
-open import synthetic-homotopy-theory.dependent-universal-property-coequalizers funext
-open import synthetic-homotopy-theory.sequential-diagrams funext
-open import synthetic-homotopy-theory.universal-property-coequalizers funext
-open import synthetic-homotopy-theory.universal-property-sequential-colimits funext
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
+open import synthetic-homotopy-theory.coforks
+open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams
+open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams
+open import synthetic-homotopy-theory.dependent-coforks
+open import synthetic-homotopy-theory.dependent-universal-property-coequalizers
+open import synthetic-homotopy-theory.sequential-diagrams
+open import synthetic-homotopy-theory.universal-property-coequalizers
+open import synthetic-homotopy-theory.universal-property-sequential-colimits
 ```
 
 </details>

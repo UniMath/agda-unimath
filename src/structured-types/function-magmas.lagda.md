@@ -1,12 +1,7 @@
 # Function magmas
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.function-magmas
-  (funext : function-extensionality)
-  where
+module structured-types.function-magmas where
 ```
 
 <details><summary>Imports</summary>
@@ -15,7 +10,7 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.magmas funext
+open import structured-types.magmas
 ```
 
 </details>

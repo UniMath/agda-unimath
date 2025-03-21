@@ -1,32 +1,27 @@
 # Connected components of types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.connected-components
-  (funext : function-extensionality)
-  where
+module foundation.connected-components where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types funext
+open import foundation.0-connected-types
 open import foundation.dependent-pair-types
-open import foundation.logical-equivalences funext
-open import foundation.mere-equality funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
+open import foundation.logical-equivalences
+open import foundation.mere-equality
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.identity-types
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 
-open import higher-group-theory.higher-groups funext
+open import higher-group-theory.higher-groups
 
 open import structured-types.pointed-types
 ```

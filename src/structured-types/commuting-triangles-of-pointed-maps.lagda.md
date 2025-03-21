@@ -1,12 +1,7 @@
 # Commuting triangles of pointed maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.commuting-triangles-of-pointed-maps
-  (funext : function-extensionality)
-  where
+module structured-types.commuting-triangles-of-pointed-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -14,10 +9,10 @@ module
 ```agda
 open import foundation.universe-levels
 
-open import structured-types.pointed-homotopies funext
-open import structured-types.pointed-maps funext
+open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
-open import structured-types.whiskering-pointed-homotopies-composition funext
+open import structured-types.whiskering-pointed-homotopies-composition
 ```
 
 </details>

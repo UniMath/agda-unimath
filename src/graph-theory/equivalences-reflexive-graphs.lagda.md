@@ -1,25 +1,20 @@
 # Equivalences of reflexive graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.equivalences-reflexive-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.equivalences-reflexive-graphs where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.identity-types funext
+open import foundation.equivalences
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import graph-theory.equivalences-directed-graphs funext
-open import graph-theory.morphisms-reflexive-graphs funext
-open import graph-theory.reflexive-graphs funext
+open import graph-theory.equivalences-directed-graphs
+open import graph-theory.morphisms-reflexive-graphs
+open import graph-theory.reflexive-graphs
 ```
 
 </details>

@@ -1,41 +1,36 @@
 # Sequences of elements in finite types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.sequences-finite-types
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.sequences-finite-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.decidable-types funext
+open import elementary-number-theory.decidable-types
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers funext
-open import elementary-number-theory.well-ordering-principle-natural-numbers funext
+open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.negated-equality funext
-open import foundation.pairs-of-distinct-elements funext
-open import foundation.repetitions-of-values funext
-open import foundation.repetitions-sequences funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negated-equality
+open import foundation.pairs-of-distinct-elements
+open import foundation.repetitions-of-values
+open import foundation.repetitions-sequences
 open import foundation.sequences
-open import foundation.sets funext
+open import foundation.sets
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.equality-standard-finite-types funext
-open import univalent-combinatorics.pigeonhole-principle funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.pigeonhole-principle
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

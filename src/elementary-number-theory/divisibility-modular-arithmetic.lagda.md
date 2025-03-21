@@ -1,29 +1,24 @@
 # Divisibility in modular arithmetic
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.divisibility-modular-arithmetic
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.divisibility-modular-arithmetic where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-integers funext
-open import elementary-number-theory.divisibility-standard-finite-types funext
-open import elementary-number-theory.modular-arithmetic funext
+open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.divisibility-standard-finite-types
+open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-relations funext
-open import foundation.decidable-types funext
+open import foundation.binary-relations
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.fibers-of-maps funext
+open import univalent-combinatorics.fibers-of-maps
 ```
 
 </details>

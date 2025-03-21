@@ -1,12 +1,7 @@
 # Repeating an element in a standard finite type
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.repeating-element-standard-finite-type
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.repeating-element-standard-finite-type where
 ```
 
 <details><summary>Imports</summary>
@@ -15,14 +10,14 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
-open import foundation.empty-types funext
-open import foundation.identity-types funext
-open import foundation.negated-equality funext
+open import foundation.coproduct-types
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.unit-type
 
-open import univalent-combinatorics.equality-standard-finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

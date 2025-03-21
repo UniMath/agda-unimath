@@ -1,33 +1,28 @@
 # Lifts of maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.lifts-maps
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.lifts-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
+open import foundation.dependent-products-truncated-types
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.small-types funext
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.small-types
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
-open import foundation.truncated-types funext
+open import foundation.torsorial-type-families
+open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

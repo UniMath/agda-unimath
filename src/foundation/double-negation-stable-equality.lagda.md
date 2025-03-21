@@ -1,12 +1,7 @@
 # Double negation stable equality
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.double-negation-stable-equality
-  (funext : function-extensionality)
-  where
+module foundation.double-negation-stable-equality where
 ```
 
 <details><summary>Imports</summary>
@@ -14,17 +9,17 @@ module
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.double-negation funext
+open import foundation.dependent-products-propositions
+open import foundation.double-negation
 open import foundation.equality-cartesian-product-types
-open import foundation.equality-dependent-pair-types funext
-open import foundation.equivalences funext
-open import foundation.injective-maps funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
-open import foundation.sets funext
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.injective-maps
+open import foundation.negated-equality
+open import foundation.negation
+open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -36,7 +31,7 @@ open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.retracts-of-types
 
-open import logic.double-negation-elimination funext
+open import logic.double-negation-elimination
 ```
 
 </details>

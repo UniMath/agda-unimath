@@ -3,86 +3,80 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  finite-group-theory.delooping-sign-homomorphism
-  (funext : function-extensionality)
-  where
+module finite-group-theory.delooping-sign-homomorphism where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.finite-type-groups funext
-open import finite-group-theory.permutations funext
-open import finite-group-theory.sign-homomorphism funext
-open import finite-group-theory.transpositions funext
+open import finite-group-theory.finite-type-groups
+open import finite-group-theory.permutations
+open import finite-group-theory.sign-homomorphism
+open import finite-group-theory.transpositions
 
-open import foundation.action-on-equivalences-type-families-over-subuniverses funext
+open import foundation.action-on-equivalences-type-families-over-subuniverses
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.commuting-squares-of-maps funext
-open import foundation.contractible-types funext
-open import foundation.coproduct-types funext
-open import foundation.decidable-propositions funext
-open import foundation.decidable-types funext
+open import foundation.commuting-squares-of-maps
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.empty-types funext
-open import foundation.equality-dependent-pair-types funext
-open import foundation.equivalence-classes funext
-open import foundation.equivalence-extensionality funext
-open import foundation.equivalence-induction funext
-open import foundation.equivalence-relations funext
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.functoriality-propositional-truncation funext
-open import foundation.functoriality-set-quotients funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.involutions funext
-open import foundation.logical-equivalences funext
-open import foundation.mere-equivalences funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.raising-universe-levels funext
-open import foundation.reflecting-maps-equivalence-relations funext
-open import foundation.sets funext
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalence-classes
+open import foundation.equivalence-extensionality
+open import foundation.equivalence-induction
+open import foundation.equivalence-relations
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.functoriality-set-quotients
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.involutions
+open import foundation.logical-equivalences
+open import foundation.mere-equivalences
+open import foundation.negated-equality
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
 open import foundation.transport-along-identifications
-open import foundation.truncated-types funext
-open import foundation.uniqueness-set-quotients funext
+open import foundation.truncated-types
+open import foundation.uniqueness-set-quotients
 open import foundation.unit-type
-open import foundation.univalence funext
-open import foundation.universal-property-set-quotients funext
+open import foundation.univalence
+open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation funext
+open import foundation.whiskering-identifications-concatenation
 
-open import group-theory.generating-sets-groups funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-concrete-groups funext
-open import group-theory.homomorphisms-generated-subgroups funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.homomorphisms-semigroups funext
-open import group-theory.isomorphisms-groups funext
-open import group-theory.loop-groups-sets funext
-open import group-theory.symmetric-groups funext
+open import group-theory.generating-sets-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-concrete-groups
+open import group-theory.homomorphisms-generated-subgroups
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-semigroups
+open import group-theory.isomorphisms-groups
+open import group-theory.loop-groups-sets
+open import group-theory.symmetric-groups
 
-open import synthetic-homotopy-theory.loop-spaces funext
+open import synthetic-homotopy-theory.loop-spaces
 
-open import univalent-combinatorics.2-element-decidable-subtypes funext
-open import univalent-combinatorics.equality-finite-types funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.set-quotients-of-index-two funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.2-element-decidable-subtypes
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.set-quotients-of-index-two
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

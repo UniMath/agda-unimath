@@ -1,24 +1,19 @@
 # Products of equivalence relataions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.products-equivalence-relations
-  (funext : function-extensionality)
-  where
+module foundation.products-equivalence-relations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.products-binary-relations funext
+open import foundation.products-binary-relations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.equivalence-relations funext
+open import foundation-core.equivalence-relations
 ```
 
 </details>

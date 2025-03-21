@@ -9,23 +9,23 @@ module
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
-open import commutative-algebra.homomorphisms-commutative-rings funext
-open import commutative-algebra.isomorphisms-commutative-rings funext
+open import commutative-algebra.commutative-rings
+open import commutative-algebra.homomorphisms-commutative-rings
+open import commutative-algebra.isomorphisms-commutative-rings
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.isomorphisms-abelian-groups funext
-open import group-theory.semigroups funext
+open import group-theory.abelian-groups
+open import group-theory.isomorphisms-abelian-groups
+open import group-theory.semigroups
 
-open import ring-theory.homomorphisms-rings funext
-open import ring-theory.rings funext
-open import ring-theory.transporting-ring-structure-along-isomorphisms-abelian-groups funext
+open import ring-theory.homomorphisms-rings
+open import ring-theory.rings
+open import ring-theory.transporting-ring-structure-along-isomorphisms-abelian-groups
 ```
 
 </details>
@@ -48,12 +48,7 @@ transported ring structure.
 ### Transporting the multiplicative structure of a commutative ring along an isomorphism of abelian groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  _
-  (funext : function-extensionality)
-  where
+module _
   {l1 l2 : Level} (A : Commutative-Ring l1) (B : Ab l2)
   (f : iso-Ab (ab-Commutative-Ring A) B)
   where

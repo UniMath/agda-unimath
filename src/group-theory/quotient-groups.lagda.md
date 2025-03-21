@@ -1,45 +1,40 @@
 # Quotient groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.quotient-groups
-  (funext : function-extensionality)
-  where
+module group-theory.quotient-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-functoriality-set-quotients funext
-open import foundation.commuting-triangles-of-maps funext
-open import foundation.contractible-maps funext
-open import foundation.contractible-types funext
+open import foundation.binary-functoriality-set-quotients
+open import foundation.commuting-triangles-of-maps
+open import foundation.contractible-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.effective-maps-equivalence-relations funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.functoriality-set-quotients funext
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
-open import foundation.reflecting-maps-equivalence-relations funext
-open import foundation.set-quotients funext
-open import foundation.sets funext
-open import foundation.subtypes funext
-open import foundation.surjective-maps funext
-open import foundation.universal-property-set-quotients funext
+open import foundation.effective-maps-equivalence-relations
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-set-quotients
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.set-quotients
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.surjective-maps
+open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
-open import group-theory.groups funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.kernels-homomorphisms-groups funext
-open import group-theory.normal-subgroups funext
-open import group-theory.nullifying-group-homomorphisms funext
-open import group-theory.semigroups funext
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.kernels-homomorphisms-groups
+open import group-theory.normal-subgroups
+open import group-theory.nullifying-group-homomorphisms
+open import group-theory.semigroups
 ```
 
 </details>

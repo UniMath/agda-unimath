@@ -1,30 +1,25 @@
 # Induced premetric structures on preimages
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  metric-spaces.induced-premetric-structures-on-preimages
-  (funext : function-extensionality)
-  where
+module metric-spaces.induced-premetric-structures-on-preimages where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers funext
+open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.universe-levels
 
-open import metric-spaces.extensional-premetric-structures funext
-open import metric-spaces.monotonic-premetric-structures funext
-open import metric-spaces.premetric-structures funext
-open import metric-spaces.reflexive-premetric-structures funext
-open import metric-spaces.symmetric-premetric-structures funext
-open import metric-spaces.triangular-premetric-structures funext
+open import metric-spaces.extensional-premetric-structures
+open import metric-spaces.monotonic-premetric-structures
+open import metric-spaces.premetric-structures
+open import metric-spaces.reflexive-premetric-structures
+open import metric-spaces.symmetric-premetric-structures
+open import metric-spaces.triangular-premetric-structures
 ```
 
 </details>

@@ -1,31 +1,26 @@
 # Equivalences between standard finite types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.equivalences-standard-finite-types
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.equivalences-standard-finite-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.exponentiation-natural-numbers funext
+open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types funext
-open import foundation.equivalences funext
-open import foundation.functoriality-cartesian-product-types funext
-open import foundation.type-arithmetic-empty-type funext
+open import foundation.contractible-types
+open import foundation.equivalences
+open import foundation.functoriality-cartesian-product-types
+open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
-open import foundation.universal-property-coproduct-types funext
-open import foundation.universal-property-empty-type funext
-open import foundation.universal-property-unit-type funext
+open import foundation.universal-property-coproduct-types
+open import foundation.universal-property-empty-type
+open import foundation.universal-property-unit-type
 
-open import univalent-combinatorics.cartesian-product-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

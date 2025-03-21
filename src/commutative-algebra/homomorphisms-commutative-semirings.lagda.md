@@ -1,29 +1,24 @@
 # Homomorphisms of commutative semirings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.homomorphisms-commutative-semirings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.homomorphisms-commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-semirings funext
+open import commutative-algebra.commutative-semirings
 
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.sets funext
-open import foundation.torsorial-type-families funext
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-commutative-monoids funext
-open import group-theory.homomorphisms-monoids funext
+open import group-theory.homomorphisms-commutative-monoids
+open import group-theory.homomorphisms-monoids
 
-open import ring-theory.homomorphisms-semirings funext
+open import ring-theory.homomorphisms-semirings
 ```
 
 </details>

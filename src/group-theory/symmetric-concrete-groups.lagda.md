@@ -1,27 +1,22 @@
 # Symmetric concrete groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.symmetric-concrete-groups
-  (funext : function-extensionality)
-  where
+module group-theory.symmetric-concrete-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.mere-equality funext
-open import foundation.sets funext
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.mere-equality
+open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
-open import group-theory.automorphism-groups funext
-open import group-theory.concrete-groups funext
+open import group-theory.automorphism-groups
+open import group-theory.concrete-groups
 ```
 
 </details>

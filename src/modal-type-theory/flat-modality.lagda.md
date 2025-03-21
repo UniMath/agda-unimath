@@ -3,22 +3,17 @@
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  modal-type-theory.flat-modality
-  (funext : function-extensionality)
-  where
+module modal-type-theory.flat-modality where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.retractions funext
-open import foundation.sections funext
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.retractions
+open import foundation.sections
 open import foundation.universe-levels
 ```
 

@@ -1,32 +1,27 @@
 # Hydrocarbons
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  organic-chemistry.hydrocarbons
-  (funext : function-extensionality)
-  where
+module organic-chemistry.hydrocarbons where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.inequality-natural-numbers
 
-open import finite-group-theory.tetrahedra-in-3-space funext
+open import finite-group-theory.tetrahedra-in-3-space
 
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.negation funext
+open import foundation.embeddings
+open import foundation.negation
 open import foundation.universe-levels
-open import foundation.unordered-pairs funext
+open import foundation.unordered-pairs
 
-open import graph-theory.connected-undirected-graphs funext
-open import graph-theory.finite-graphs funext
+open import graph-theory.connected-undirected-graphs
+open import graph-theory.finite-graphs
 
-open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

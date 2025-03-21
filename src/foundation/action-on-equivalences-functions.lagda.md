@@ -1,22 +1,17 @@
 # Action on equivalences of functions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.action-on-equivalences-functions
-  (funext : function-extensionality)
-  where
+module foundation.action-on-equivalences-functions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-higher-identifications-functions funext
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalence-induction funext
-open import foundation.univalence funext
+open import foundation.equivalence-induction
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps

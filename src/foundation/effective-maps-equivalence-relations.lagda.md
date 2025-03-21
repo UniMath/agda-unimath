@@ -1,22 +1,17 @@
 # Effective maps for equivalence relations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.effective-maps-equivalence-relations
-  (funext : function-extensionality)
-  where
+module foundation.effective-maps-equivalence-relations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.surjective-maps funext
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.equivalence-relations funext
+open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 ```

@@ -1,19 +1,14 @@
 # Idempotent maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.idempotent-maps
-  (funext : function-extensionality)
-  where
+module foundation.idempotent-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-propositions
 open import foundation.homotopy-algebra
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition

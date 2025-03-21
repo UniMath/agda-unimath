@@ -1,12 +1,7 @@
 # Noncontractible types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.noncontractible-types
-  (funext : function-extensionality)
-  where
+module foundation.noncontractible-types where
 ```
 
 <details><summary>Imports</summary>
@@ -15,8 +10,8 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.inhabited-types funext
+open import foundation.empty-types
+open import foundation.inhabited-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

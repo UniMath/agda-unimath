@@ -1,12 +1,7 @@
 # The sphere prespectrum
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.sphere-prespectrum
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.sphere-prespectrum where
 ```
 
 <details><summary>Imports</summary>
@@ -15,10 +10,10 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.prespectra funext
-open import synthetic-homotopy-theory.suspension-prespectra funext
+open import synthetic-homotopy-theory.prespectra
+open import synthetic-homotopy-theory.suspension-prespectra
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

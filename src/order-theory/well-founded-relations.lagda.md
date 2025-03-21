@@ -1,26 +1,21 @@
 # Well-founded relations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.well-founded-relations
-  (funext : function-extensionality)
-  where
+module order-theory.well-founded-relations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.accessible-elements-relations funext
-open import order-theory.preorders funext
+open import order-theory.accessible-elements-relations
+open import order-theory.preorders
 ```
 
 </details>

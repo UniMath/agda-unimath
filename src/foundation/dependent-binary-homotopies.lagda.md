@@ -1,18 +1,13 @@
 # Dependent binary homotopies
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.dependent-binary-homotopies
-  (funext : function-extensionality)
-  where
+module foundation.dependent-binary-homotopies where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-homotopies funext
+open import foundation.binary-homotopies
 open import foundation.universe-levels
 
 open import foundation-core.dependent-identifications

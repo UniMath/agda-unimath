@@ -3,23 +3,18 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  globular-types.discrete-globular-types
-  (funext : function-extensionality)
-  where
+module globular-types.discrete-globular-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.discrete-binary-relations funext
-open import foundation.propositions funext
+open import foundation.discrete-binary-relations
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import globular-types.empty-globular-types funext
+open import globular-types.empty-globular-types
 open import globular-types.globular-types
 ```
 

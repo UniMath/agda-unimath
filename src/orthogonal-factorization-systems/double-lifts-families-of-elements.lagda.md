@@ -1,12 +1,7 @@
 # Double lifts of families of elements
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.double-lifts-families-of-elements
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.double-lifts-families-of-elements where
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +9,7 @@ module
 ```agda
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.lifts-families-of-elements funext
+open import orthogonal-factorization-systems.lifts-families-of-elements
 ```
 
 </details>

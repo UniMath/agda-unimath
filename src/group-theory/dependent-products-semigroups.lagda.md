@@ -1,25 +1,19 @@
 # Dependent products of semigroups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.dependent-products-semigroups
-  (funext : function-extensionality)
-  where
+module group-theory.dependent-products-semigroups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality funext
-
-open import foundation.identity-types funext
-open import foundation.sets funext
+open import foundation.function-extensionality
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.semigroups funext
+open import group-theory.semigroups
 ```
 
 </details>

@@ -1,33 +1,28 @@
 # Homomorphisms of commutative finite rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  finite-algebra.homomorphisms-commutative-finite-rings
-  (funext : function-extensionality)
-  where
+module finite-algebra.homomorphisms-commutative-finite-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.homomorphisms-commutative-rings funext
-open import commutative-algebra.homomorphisms-commutative-semirings funext
+open import commutative-algebra.homomorphisms-commutative-rings
+open import commutative-algebra.homomorphisms-commutative-semirings
 
-open import finite-algebra.commutative-finite-rings funext
+open import finite-algebra.commutative-finite-rings
 
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.torsorial-type-families funext
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-abelian-groups funext
-open import group-theory.homomorphisms-monoids funext
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.homomorphisms-monoids
 
-open import ring-theory.homomorphisms-rings funext
+open import ring-theory.homomorphisms-rings
 ```
 
 </details>

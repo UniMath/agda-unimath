@@ -1,12 +1,7 @@
 # Partitions of finite types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.partitions
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.partitions where
 ```
 
 <details><summary>Imports</summary>
@@ -14,25 +9,25 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-relations funext
-open import foundation.cartesian-product-types funext
+open import foundation.binary-relations
+open import foundation.cartesian-product-types
 open import foundation.equality-cartesian-product-types
-open import foundation.equivalence-extensionality funext
-open import foundation.equivalence-relations funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.equivalence-extensionality
+open import foundation.equivalence-relations
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.dependent-pair-types funext
-open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

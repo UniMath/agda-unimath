@@ -1,12 +1,7 @@
 # Isomorphisms of sets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.isomorphisms-of-sets
-  (funext : function-extensionality)
-  where
+module foundation.isomorphisms-of-sets where
 ```
 
 <details><summary>Imports</summary>
@@ -14,17 +9,17 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.sets funext
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
+open import foundation.sets
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 ```
 
 </details>

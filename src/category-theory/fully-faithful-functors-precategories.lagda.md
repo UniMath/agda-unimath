@@ -1,37 +1,32 @@
 # Fully faithful functors between precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.fully-faithful-functors-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.fully-faithful-functors-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.conservative-functors-precategories funext
-open import category-theory.essentially-injective-functors-precategories funext
-open import category-theory.faithful-functors-precategories funext
-open import category-theory.full-functors-precategories funext
-open import category-theory.fully-faithful-maps-precategories funext
-open import category-theory.functors-precategories funext
-open import category-theory.isomorphisms-in-precategories funext
-open import category-theory.precategories funext
-open import category-theory.pseudomonic-functors-precategories funext
+open import category-theory.conservative-functors-precategories
+open import category-theory.essentially-injective-functors-precategories
+open import category-theory.faithful-functors-precategories
+open import category-theory.full-functors-precategories
+open import category-theory.fully-faithful-maps-precategories
+open import category-theory.functors-precategories
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.precategories
+open import category-theory.pseudomonic-functors-precategories
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
-open import foundation.surjective-maps funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
 

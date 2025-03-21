@@ -1,25 +1,20 @@
 # Propositional resizing
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.propositional-resizing
-  (funext : function-extensionality)
-  where
+module foundation.propositional-resizing where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-propositions
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.propositions
-open import foundation-core.small-types funext
-open import foundation-core.subtypes funext
+open import foundation-core.small-types
+open import foundation-core.subtypes
 ```
 
 </details>

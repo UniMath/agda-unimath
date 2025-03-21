@@ -1,19 +1,14 @@
 # Precomposition of type families
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.precomposition-type-families
-  (funext : function-extensionality)
-  where
+module foundation.precomposition-type-families where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.homotopy-induction funext
-open import foundation.transport-along-homotopies funext
+open import foundation.homotopy-induction
+open import foundation.transport-along-homotopies
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

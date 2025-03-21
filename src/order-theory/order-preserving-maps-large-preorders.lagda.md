@@ -1,12 +1,7 @@
 # Order preserving maps between large preorders
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.order-preserving-maps-large-preorders
-  (funext : function-extensionality)
-  where
+module order-theory.order-preserving-maps-large-preorders where
 ```
 
 <details><summary>Imports</summary>
@@ -18,9 +13,9 @@ open import foundation.universe-levels
 open import foundation-core.function-types
 open import foundation-core.homotopies
 
-open import order-theory.large-preorders funext
-open import order-theory.order-preserving-maps-preorders funext
-open import order-theory.similarity-of-elements-large-preorders funext
+open import order-theory.large-preorders
+open import order-theory.order-preserving-maps-preorders
+open import order-theory.similarity-of-elements-large-preorders
 ```
 
 </details>

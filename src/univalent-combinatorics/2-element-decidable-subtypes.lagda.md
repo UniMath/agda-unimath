@@ -1,56 +1,50 @@
 # `2`-element decidable subtypes
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.2-element-decidable-subtypes
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.2-element-decidable-subtypes where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers funext
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-standard-finite-types funext
+open import elementary-number-theory.well-ordering-principle-standard-finite-types
 
-open import foundation.automorphisms funext
-open import foundation.booleans funext
-open import foundation.decidable-equality funext
-open import foundation.decidable-propositions funext
-open import foundation.decidable-types funext
+open import foundation.automorphisms
+open import foundation.booleans
+open import foundation.decidable-equality
+open import foundation.decidable-propositions
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.equality-dependent-pair-types funext
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.functoriality-coproduct-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.functoriality-propositional-truncation funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.logical-equivalences funext
-open import foundation.mere-equivalences funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
+open import foundation.embeddings
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.logical-equivalences
+open import foundation.mere-equivalences
+open import foundation.negated-equality
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-coproduct-types funext
-open import foundation.univalence funext
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import univalent-combinatorics.2-element-subtypes funext
-open import univalent-combinatorics.2-element-types funext
-open import univalent-combinatorics.decidable-subtypes funext
-open import univalent-combinatorics.dependent-function-types funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.2-element-subtypes
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.decidable-subtypes
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

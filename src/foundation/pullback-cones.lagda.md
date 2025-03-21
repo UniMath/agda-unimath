@@ -1,34 +1,29 @@
 # Pullback cones
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.pullback-cones
-  (funext : function-extensionality)
-  where
+module foundation.pullback-cones where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
-open import foundation.cones-over-cospan-diagrams funext
+open import foundation.cartesian-product-types
+open import foundation.cones-over-cospan-diagrams
 open import foundation.cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.pullbacks funext
-open import foundation.standard-pullbacks funext
+open import foundation.identity-types
+open import foundation.pullbacks
+open import foundation.standard-pullbacks
 open import foundation.unit-type
-open import foundation.universal-property-cartesian-product-types funext
+open import foundation.universal-property-cartesian-product-types
 open import foundation.universe-levels
 
-open import foundation-core.commuting-squares-of-maps funext
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.universal-property-pullbacks funext
+open import foundation-core.universal-property-pullbacks
 ```
 
 </details>

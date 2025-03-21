@@ -1,27 +1,22 @@
 # Large Lawvere–Tierney topologies
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.large-lawvere-tierney-topologies
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.large-lawvere-tierney-topologies where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
-open import foundation.conjunction funext
+open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
+open import foundation.function-types
+open import foundation.logical-equivalences
+open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.lawvere-tierney-topologies funext
+open import orthogonal-factorization-systems.lawvere-tierney-topologies
 ```
 
 </details>

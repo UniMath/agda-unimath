@@ -1,36 +1,30 @@
 # Limits in precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.limits-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.limits-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.cones-precategories funext
-open import category-theory.constant-functors funext
-open import category-theory.functors-precategories funext
-open import category-theory.natural-transformations-functors-precategories funext
-open import category-theory.precategories funext
-open import category-theory.right-extensions-precategories funext
-open import category-theory.right-kan-extensions-precategories funext
-open import category-theory.terminal-category funext
+open import category-theory.cones-precategories
+open import category-theory.constant-functors
+open import category-theory.functors-precategories
+open import category-theory.natural-transformations-functors-precategories
+open import category-theory.precategories
+open import category-theory.right-extensions-precategories
+open import category-theory.right-kan-extensions-precategories
+open import category-theory.terminal-category
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels

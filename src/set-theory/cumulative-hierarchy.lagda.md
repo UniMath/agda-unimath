@@ -1,12 +1,7 @@
 # Cumulative hierarchy
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  set-theory.cumulative-hierarchy
-  (funext : function-extensionality)
-  where
+module set-theory.cumulative-hierarchy where
 ```
 
 <details><summary>Imports</summary>
@@ -15,27 +10,27 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.booleans funext
-open import foundation.cartesian-product-types funext
-open import foundation.constant-type-families funext
-open import foundation.coproduct-types funext
+open import foundation.booleans
+open import foundation.cartesian-product-types
+open import foundation.constant-type-families
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.existential-quantification funext
-open import foundation.function-types funext
-open import foundation.functoriality-propositional-truncation funext
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.negation funext
-open import foundation.propositional-extensionality funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.raising-universe-levels funext
-open import foundation.raising-universe-levels funext-booleans
-open import foundation.raising-universe-levels-unit-type funext
-open import foundation.sets funext
+open import foundation.empty-types
+open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-booleans
+open import foundation.raising-universe-levels-unit-type
+open import foundation.sets
 open import foundation.transport-along-identifications
-open import foundation.truncated-types funext
+open import foundation.truncated-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

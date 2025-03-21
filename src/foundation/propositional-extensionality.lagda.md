@@ -1,35 +1,30 @@
 # Propositional extensionality
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.propositional-extensionality
-  (funext : function-extensionality)
-  where
+module foundation.propositional-extensionality where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types funext
-open import foundation.dependent-products-propositions funext
-open import foundation.empty-types funext
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
+open import foundation.empty-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.logical-equivalences funext
-open import foundation.negation funext
-open import foundation.postcomposition-functions funext
-open import foundation.raising-universe-levels funext
-open import foundation.raising-universe-levels funext-unit-type
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.postcomposition-functions
+open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
-open import foundation.univalence funext
-open import foundation.univalent-type-families funext
-open import foundation.universal-property-contractible-types funext
-open import foundation.universal-property-empty-type funext
+open import foundation.univalence
+open import foundation.univalent-type-families
+open import foundation.universal-property-contractible-types
+open import foundation.universal-property-empty-type
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

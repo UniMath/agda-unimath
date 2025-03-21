@@ -1,12 +1,7 @@
 # Displayed large reflexive graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.displayed-large-reflexive-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.displayed-large-reflexive-graphs where
 ```
 
 <details><summary>Imports</summary>
@@ -16,7 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import graph-theory.large-reflexive-graphs
-open import graph-theory.reflexive-graphs funext
+open import graph-theory.reflexive-graphs
 ```
 
 </details>

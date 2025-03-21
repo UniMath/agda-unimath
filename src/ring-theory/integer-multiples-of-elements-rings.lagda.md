@@ -1,36 +1,31 @@
 # Integer multiples of elements of rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.integer-multiples-of-elements-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.integer-multiples-of-elements-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers funext
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers funext
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.coproduct-types
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-abelian-groups funext
-open import group-theory.integer-multiples-of-elements-abelian-groups funext
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.integer-multiples-of-elements-abelian-groups
 
-open import ring-theory.commuting-elements-rings funext
-open import ring-theory.homomorphisms-rings funext
-open import ring-theory.multiples-of-elements-rings funext
-open import ring-theory.rings funext
+open import ring-theory.commuting-elements-rings
+open import ring-theory.homomorphisms-rings
+open import ring-theory.multiples-of-elements-rings
+open import ring-theory.rings
 ```
 
 </details>

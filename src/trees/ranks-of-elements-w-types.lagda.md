@@ -1,31 +1,26 @@
 # Ranks of elements in W-types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.ranks-of-elements-w-types
-  (funext : function-extensionality)
-  where
+module trees.ranks-of-elements-w-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.existential-quantification funext
-open import foundation.identity-types funext
-open import foundation.negation funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
+open import foundation.empty-types
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import trees.elementhood-relation-w-types funext
-open import trees.inequality-w-types funext
-open import trees.w-types funext
+open import trees.elementhood-relation-w-types
+open import trees.inequality-w-types
+open import trees.w-types
 ```
 
 </details>

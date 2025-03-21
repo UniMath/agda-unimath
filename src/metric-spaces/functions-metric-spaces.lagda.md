@@ -1,24 +1,19 @@
 # Functions between metric spaces
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  metric-spaces.functions-metric-spaces
-  (funext : function-extensionality)
-  where
+module metric-spaces.functions-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.sets funext
+open import foundation.function-types
+open import foundation.sets
 open import foundation.universe-levels
 
-open import metric-spaces.metric-spaces funext
-open import metric-spaces.premetric-spaces funext
+open import metric-spaces.metric-spaces
+open import metric-spaces.premetric-spaces
 ```
 
 </details>

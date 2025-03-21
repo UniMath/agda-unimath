@@ -1,12 +1,7 @@
 # Factorization operations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.factorization-operations
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.factorization-operations where
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +9,7 @@ module
 ```agda
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.factorizations-of-maps funext
+open import orthogonal-factorization-systems.factorizations-of-maps
 ```
 
 </details>

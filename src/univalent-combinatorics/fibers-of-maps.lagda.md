@@ -1,44 +1,39 @@
 # Fibers of maps between finite types
 
 ```agda
-open import foundation.function-extensionality-axiom
+module univalent-combinatorics.fibers-of-maps where
 
-module
-  univalent-combinatorics.fibers-of-maps
-  (funext : function-extensionality)
-  where
-
-open import foundation.fibers-of-maps funext public
+open import foundation.fibers-of-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers funext
+open import elementary-number-theory.sums-of-natural-numbers
 
-open import foundation.decidable-types funext
-open import foundation.equality-dependent-pair-types funext
-open import foundation.equivalences funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.sections funext
-open import foundation.torsorial-type-families funext
+open import foundation.decidable-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sections
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.counting funext-dependent-pair-types
-open import univalent-combinatorics.decidable-propositions funext
-open import univalent-combinatorics.dependent-pair-types funext
-open import univalent-combinatorics.double-counting funext
-open import univalent-combinatorics.equality-finite-types funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.double-counting
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

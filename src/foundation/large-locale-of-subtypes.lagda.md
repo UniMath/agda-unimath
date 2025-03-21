@@ -1,34 +1,29 @@
 # The large locale of subtypes
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.large-locale-of-subtypes
-  (funext : function-extensionality)
-  where
+module foundation.large-locale-of-subtypes where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-binary-relations funext
-open import foundation.large-locale-of-propositions funext
+open import foundation.large-binary-relations
+open import foundation.large-locale-of-propositions
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
 open import foundation-core.sets
 
-open import order-theory.bottom-elements-large-posets funext
-open import order-theory.greatest-lower-bounds-large-posets funext
-open import order-theory.large-locales funext
-open import order-theory.large-meet-semilattices funext
-open import order-theory.large-posets funext
-open import order-theory.large-preorders funext
-open import order-theory.large-suplattices funext
-open import order-theory.least-upper-bounds-large-posets funext
-open import order-theory.powers-of-large-locales funext
-open import order-theory.top-elements-large-posets funext
+open import order-theory.bottom-elements-large-posets
+open import order-theory.greatest-lower-bounds-large-posets
+open import order-theory.large-locales
+open import order-theory.large-meet-semilattices
+open import order-theory.large-posets
+open import order-theory.large-preorders
+open import order-theory.large-suplattices
+open import order-theory.least-upper-bounds-large-posets
+open import order-theory.powers-of-large-locales
+open import order-theory.top-elements-large-posets
 ```
 
 </details>

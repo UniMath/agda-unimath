@@ -1,31 +1,26 @@
 # Coproduct decompositions in a subuniverse
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.coproduct-decompositions-subuniverse
-  (funext : function-extensionality)
-  where
+module foundation.coproduct-decompositions-subuniverse where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.equivalence-extensionality funext
-open import foundation.equivalences funext
-open import foundation.functoriality-coproduct-types funext
+open import foundation.empty-types
+open import foundation.equivalence-extensionality
+open import foundation.equivalences
+open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.structure-identity-principle
-open import foundation.subuniverses funext
+open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-coproduct-types funext
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-empty-type funext
-open import foundation.univalence funext
+open import foundation.type-arithmetic-empty-type
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

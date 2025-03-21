@@ -1,29 +1,24 @@
 # Universal property of contractible types with respect to pointed types and maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.pointed-universal-property-contractible-types
-  (funext : function-extensionality)
-  where
+module structured-types.pointed-universal-property-contractible-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.torsorial-type-families funext
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.universal-property-contractible-types funext
+open import foundation.universal-property-contractible-types
 open import foundation.universe-levels
 
-open import structured-types.pointed-maps funext
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 ```
 

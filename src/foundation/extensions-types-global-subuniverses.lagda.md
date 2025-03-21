@@ -1,37 +1,32 @@
 # Extensions of types in a global subuniverse
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.extensions-types-global-subuniverses
-  (funext : function-extensionality)
-  where
+module foundation.extensions-types-global-subuniverses where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-triangles-of-maps funext
-open import foundation.contractible-types funext
+open import foundation.commuting-triangles-of-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.equivalences funext
-open import foundation.extensions-types funext
-open import foundation.fibers-of-maps funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.extensions-types
+open import foundation.fibers-of-maps
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.global-subuniverses funext
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
-open import foundation.propositional-maps funext
-open import foundation.propositions funext
-open import foundation.torsorial-type-families funext
+open import foundation.global-subuniverses
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
+open import foundation.propositional-maps
+open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 ```
 

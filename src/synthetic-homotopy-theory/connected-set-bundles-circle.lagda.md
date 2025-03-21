@@ -1,37 +1,32 @@
 # Connected set bundles over the circle
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.connected-set-bundles-circle
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.connected-set-bundles-circle where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types funext
-open import foundation.automorphisms funext
+open import foundation.0-connected-types
+open import foundation.automorphisms
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.inhabited-types funext
-open import foundation.mere-equality funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.subtypes funext
-open import foundation.surjective-maps funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.inhabited-types
+open import foundation.mere-equality
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import higher-group-theory.transitive-higher-group-actions funext
+open import higher-group-theory.transitive-higher-group-actions
 
-open import structured-types.sets-equipped-with-automorphisms funext
+open import structured-types.sets-equipped-with-automorphisms
 
-open import synthetic-homotopy-theory.circle funext
+open import synthetic-homotopy-theory.circle
 ```
 
 </details>

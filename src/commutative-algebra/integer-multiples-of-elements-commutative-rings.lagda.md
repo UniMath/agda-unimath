@@ -1,32 +1,27 @@
 # Integer multiples of elements of commutative rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.integer-multiples-of-elements-commutative-rings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.integer-multiples-of-elements-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
-open import commutative-algebra.homomorphisms-commutative-rings funext
-open import commutative-algebra.multiples-of-elements-commutative-rings funext
+open import commutative-algebra.commutative-rings
+open import commutative-algebra.homomorphisms-commutative-rings
+open import commutative-algebra.multiples-of-elements-commutative-rings
 
-open import elementary-number-theory.addition-integers funext
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers funext
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-abelian-groups funext
+open import group-theory.homomorphisms-abelian-groups
 
-open import ring-theory.integer-multiples-of-elements-rings funext
+open import ring-theory.integer-multiples-of-elements-rings
 ```
 
 </details>

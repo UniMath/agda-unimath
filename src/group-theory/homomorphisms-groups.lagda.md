@@ -1,30 +1,25 @@
 # Homomorphisms of groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.homomorphisms-groups
-  (funext : function-extensionality)
-  where
+module group-theory.homomorphisms-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.torsorial-type-families funext
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import group-theory.groups funext
-open import group-theory.homomorphisms-monoids funext
-open import group-theory.homomorphisms-semigroups funext
+open import group-theory.groups
+open import group-theory.homomorphisms-monoids
+open import group-theory.homomorphisms-semigroups
 ```
 
 </details>

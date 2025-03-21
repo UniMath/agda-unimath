@@ -1,12 +1,7 @@
 # Group solver
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  reflection.group-solver
-  (funext : function-extensionality)
-  where
+module reflection.group-solver where
 ```
 
 <details><summary>Imports</summary>
@@ -15,21 +10,21 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.decidable-types funext
+open import foundation.decidable-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.identity-types
 
-open import group-theory.groups funext
+open import group-theory.groups
 
-open import linear-algebra.vectors funext
+open import linear-algebra.vectors
 
-open import lists.concatenation-lists funext
-open import lists.functoriality-lists funext
+open import lists.concatenation-lists
+open import lists.functoriality-lists
 open import lists.lists
-open import lists.reversing-lists funext
+open import lists.reversing-lists
 ```
 
 </details>

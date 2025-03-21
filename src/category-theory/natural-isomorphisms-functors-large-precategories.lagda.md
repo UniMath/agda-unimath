@@ -1,22 +1,17 @@
 # Natural isomorphisms between functors between large precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.natural-isomorphisms-functors-large-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.natural-isomorphisms-functors-large-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.commuting-squares-of-morphisms-in-large-precategories funext
-open import category-theory.functors-large-precategories funext
-open import category-theory.isomorphisms-in-large-precategories funext
-open import category-theory.large-precategories funext
-open import category-theory.natural-transformations-functors-large-precategories funext
+open import category-theory.commuting-squares-of-morphisms-in-large-precategories
+open import category-theory.functors-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
+open import category-theory.large-precategories
+open import category-theory.natural-transformations-functors-large-precategories
 
 open import foundation.universe-levels
 ```

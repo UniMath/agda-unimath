@@ -3,12 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  globular-types.large-transitive-globular-types
-  (funext : function-extensionality)
-  where
+module globular-types.large-transitive-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -17,9 +12,9 @@ module
 open import foundation.universe-levels
 
 open import globular-types.globular-types
-open import globular-types.large-globular-maps funext
+open import globular-types.large-globular-maps
 open import globular-types.large-globular-types
-open import globular-types.transitive-globular-types funext
+open import globular-types.transitive-globular-types
 ```
 
 </details>

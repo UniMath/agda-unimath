@@ -1,26 +1,21 @@
 # Upper bounds of chains in posets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.upper-bounds-chains-posets
-  (funext : function-extensionality)
-  where
+module order-theory.upper-bounds-chains-posets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.existential-quantification funext
+open import foundation.existential-quantification
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.propositions
 
-open import order-theory.chains-posets funext
-open import order-theory.posets funext
-open import order-theory.upper-bounds-posets funext
+open import order-theory.chains-posets
+open import order-theory.posets
+open import order-theory.upper-bounds-posets
 ```
 
 </details>

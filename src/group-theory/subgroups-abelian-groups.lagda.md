@@ -1,42 +1,37 @@
 # Subgroups of abelian groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.subgroups-abelian-groups
-  (funext : function-extensionality)
-  where
+module group-theory.subgroups-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.equivalence-relations funext
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.large-binary-relations funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.embeddings
+open import foundation.equivalence-relations
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.large-binary-relations
+open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.congruence-relations-abelian-groups funext
-open import group-theory.congruence-relations-groups funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-abelian-groups funext
-open import group-theory.normal-subgroups funext
-open import group-theory.semigroups funext
-open import group-theory.subgroups funext
-open import group-theory.subsets-abelian-groups funext
+open import group-theory.abelian-groups
+open import group-theory.congruence-relations-abelian-groups
+open import group-theory.congruence-relations-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.normal-subgroups
+open import group-theory.semigroups
+open import group-theory.subgroups
+open import group-theory.subsets-abelian-groups
 
-open import order-theory.large-posets funext
-open import order-theory.large-preorders funext
-open import order-theory.posets funext
-open import order-theory.preorders funext
+open import order-theory.large-posets
+open import order-theory.large-preorders
+open import order-theory.posets
+open import order-theory.preorders
 ```
 
 </details>

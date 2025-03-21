@@ -1,12 +1,7 @@
 # Steiner triple systems
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.steiner-triple-systems
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.steiner-triple-systems where
 ```
 
 <details><summary>Imports</summary>
@@ -16,7 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import univalent-combinatorics.steiner-systems funext
+open import univalent-combinatorics.steiner-systems
 ```
 
 </details>

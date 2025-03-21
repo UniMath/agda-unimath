@@ -1,30 +1,25 @@
 # The divisibility relation on the standard finite types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.divisibility-standard-finite-types
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.divisibility-standard-finite-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types funext
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations funext
-open import foundation.decidable-types funext
+open import foundation.binary-relations
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.decidable-dependent-pair-types funext
-open import univalent-combinatorics.equality-standard-finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.decidable-dependent-pair-types
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

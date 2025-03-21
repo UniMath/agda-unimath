@@ -1,30 +1,24 @@
 # Morphisms in the slice category of types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.slice
-  (funext : function-extensionality)
-  where
+module foundation.slice where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-triangles-of-homotopies funext
+open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
+open import foundation.dependent-products-propositions
+open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.logical-equivalences funext
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.logical-equivalences
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -41,7 +35,7 @@ open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 open import foundation-core.type-theoretic-principle-of-choice
 
-open import trees.polynomial-endofunctors funext
+open import trees.polynomial-endofunctors
 ```
 
 </details>

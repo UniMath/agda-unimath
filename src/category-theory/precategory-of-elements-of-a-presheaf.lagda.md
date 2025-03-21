@@ -1,28 +1,23 @@
 # Precategory of elements of a presheaf
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.precategory-of-elements-of-a-presheaf
-  (funext : function-extensionality)
-  where
+module category-theory.precategory-of-elements-of-a-presheaf where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories funext
-open import category-theory.opposite-precategories funext
-open import category-theory.precategories funext
-open import category-theory.presheaf-categories funext
+open import category-theory.functors-precategories
+open import category-theory.opposite-precategories
+open import category-theory.precategories
+open import category-theory.presheaf-categories
 
 open import foundation.action-on-identifications-functions
-open import foundation.category-of-sets funext
+open import foundation.category-of-sets
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.sets funext
-open import foundation.subtypes funext
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 

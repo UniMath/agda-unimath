@@ -3,31 +3,26 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.archimedean-property-positive-rational-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.archimedean-property-positive-rational-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.archimedean-property-rational-numbers funext
+open import elementary-number-theory.archimedean-property-rational-numbers
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-rational-numbers funext
+open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers funext
-open import elementary-number-theory.positive-rational-numbers funext
-open import elementary-number-theory.rational-numbers funext
-open import elementary-number-theory.strict-inequality-rational-numbers funext
+open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification funext
-open import foundation.identity-types funext
-open import foundation.propositional-truncations funext
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 ```
 

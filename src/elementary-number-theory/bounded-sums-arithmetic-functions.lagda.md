@@ -1,28 +1,23 @@
 # Bounded sums of arithmetic functions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.bounded-sums-arithmetic-functions
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.bounded-sums-arithmetic-functions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.arithmetic-functions funext
+open import elementary-number-theory.arithmetic-functions
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers funext
+open import elementary-number-theory.nonzero-natural-numbers
 
-open import foundation.coproduct-types funext
-open import foundation.decidable-propositions funext
-open import foundation.decidable-types funext
-open import foundation.function-types funext
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.decidable-types
+open import foundation.function-types
 open import foundation.universe-levels
 
-open import ring-theory.rings funext
+open import ring-theory.rings
 ```
 
 </details>

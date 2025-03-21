@@ -1,12 +1,7 @@
 # The invariant basis property of rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.invariant-basis-property-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.invariant-basis-property-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -14,14 +9,14 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import ring-theory.dependent-products-rings funext
-open import ring-theory.isomorphisms-rings funext
-open import ring-theory.rings funext
+open import ring-theory.dependent-products-rings
+open import ring-theory.isomorphisms-rings
+open import ring-theory.rings
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

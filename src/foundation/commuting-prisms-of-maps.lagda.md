@@ -1,35 +1,29 @@
 # Commuting prisms of maps
 
 ```agda
-open import foundation.function-extensionality-axiom
+module foundation.commuting-prisms-of-maps where
 
-module
-  foundation.commuting-prisms-of-maps
-  (funext : function-extensionality)
-  where
-
-open import foundation-core.commuting-prisms-of-maps funext public
+open import foundation-core.commuting-prisms-of-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps funext
-open import foundation.commuting-triangles-of-maps funext
-open import foundation.composition-algebra funext
-open import foundation.function-extensionality funext
-
-open import foundation.identity-types funext
-open import foundation.postcomposition-functions funext
-open import foundation.precomposition-functions funext
+open import foundation.commuting-squares-of-maps
+open import foundation.commuting-triangles-of-maps
+open import foundation.composition-algebra
+open import foundation.function-extensionality
+open import foundation.identity-types
+open import foundation.postcomposition-functions
+open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-homotopies
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types funext
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
 ```
 

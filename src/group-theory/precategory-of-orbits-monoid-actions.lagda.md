@@ -1,32 +1,27 @@
 # The precategory of orbits of a monoid action
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.precategory-of-orbits-monoid-actions
-  (funext : function-extensionality)
-  where
+module group-theory.precategory-of-orbits-monoid-actions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories funext
+open import category-theory.precategories
 
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import group-theory.monoid-actions funext
-open import group-theory.monoids funext
+open import group-theory.monoid-actions
+open import group-theory.monoids
 ```
 
 </details>

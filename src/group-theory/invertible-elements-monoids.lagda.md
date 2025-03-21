@@ -1,32 +1,27 @@
 # Invertible elements in monoids
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.invertible-elements-monoids
-  (funext : function-extensionality)
-  where
+module group-theory.invertible-elements-monoids where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
-open import foundation.contractible-types funext
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.subtypes funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.monoids funext
+open import group-theory.monoids
 ```
 
 </details>

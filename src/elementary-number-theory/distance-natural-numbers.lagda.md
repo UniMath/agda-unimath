@@ -1,29 +1,24 @@
 # The distance between natural numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.distance-natural-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.distance-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers funext
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.identity-types funext
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels

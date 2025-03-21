@@ -3,18 +3,13 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-category-theory.equivalences-synthetic-categories
-  (funext : function-extensionality)
-  where
+module synthetic-category-theory.equivalences-synthetic-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 

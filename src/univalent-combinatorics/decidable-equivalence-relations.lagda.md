@@ -1,12 +1,7 @@
 # Decidable equivalence relations on finite types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.decidable-equivalence-relations
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.decidable-equivalence-relations where
 ```
 
 <details><summary>Imports</summary>
@@ -14,32 +9,32 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-relations funext
-open import foundation.cartesian-product-types funext
-open import foundation.decidable-equality funext
-open import foundation.decidable-equivalence-relations funext
-open import foundation.decidable-relations funext
-open import foundation.decidable-types funext
-open import foundation.equivalence-relations funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-cartesian-product-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
+open import foundation.binary-relations
+open import foundation.cartesian-product-types
+open import foundation.decidable-equality
+open import foundation.decidable-equivalence-relations
+open import foundation.decidable-relations
+open import foundation.decidable-types
+open import foundation.equivalence-relations
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cartesian-product-types funext
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.decidable-propositions funext
-open import univalent-combinatorics.dependent-function-types funext
-open import univalent-combinatorics.dependent-pair-types funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.function-types funext
-open import univalent-combinatorics.standard-finite-types funext
-open import univalent-combinatorics.surjective-maps funext
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.function-types
+open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.surjective-maps
 ```
 
 </details>

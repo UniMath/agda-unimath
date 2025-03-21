@@ -1,18 +1,13 @@
 # `0`-Images of maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.0-images-of-maps
-  (funext : function-extensionality)
-  where
+module foundation.0-images-of-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.truncation-images-of-maps funext
+open import foundation.truncation-images-of-maps
 open import foundation.universe-levels
 
 open import foundation-core.truncation-levels

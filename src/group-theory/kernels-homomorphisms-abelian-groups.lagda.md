@@ -1,12 +1,7 @@
 # Kernels of homomorphisms between abelian groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.kernels-homomorphisms-abelian-groups
-  (funext : function-extensionality)
-  where
+module group-theory.kernels-homomorphisms-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -14,12 +9,12 @@ module
 ```agda
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.embeddings-abelian-groups funext
-open import group-theory.homomorphisms-abelian-groups funext
-open import group-theory.kernels-homomorphisms-groups funext
-open import group-theory.subgroups-abelian-groups funext
-open import group-theory.subsets-abelian-groups funext
+open import group-theory.abelian-groups
+open import group-theory.embeddings-abelian-groups
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.kernels-homomorphisms-groups
+open import group-theory.subgroups-abelian-groups
+open import group-theory.subsets-abelian-groups
 ```
 
 </details>

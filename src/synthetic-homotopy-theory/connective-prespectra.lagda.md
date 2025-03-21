@@ -1,12 +1,7 @@
 # Connective prespectra
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.connective-prespectra
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.connective-prespectra where
 ```
 
 <details><summary>Imports</summary>
@@ -14,23 +9,23 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.connected-types funext
+open import foundation.connected-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import structured-types.pointed-equivalences funext
-open import structured-types.pointed-maps funext
+open import structured-types.pointed-equivalences
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces funext
-open import synthetic-homotopy-theory.prespectra funext
-open import synthetic-homotopy-theory.suspensions-of-pointed-types funext
-open import synthetic-homotopy-theory.suspensions-of-types funext
+open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.prespectra
+open import synthetic-homotopy-theory.suspensions-of-pointed-types
+open import synthetic-homotopy-theory.suspensions-of-types
 ```
 
 </details>

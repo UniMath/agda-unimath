@@ -1,12 +1,7 @@
 # The higher group of integers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  higher-group-theory.integers-higher-group
-  (funext : function-extensionality)
-  where
+module higher-group-theory.integers-higher-group where
 ```
 
 <details><summary>Imports</summary>
@@ -15,11 +10,11 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups funext
+open import higher-group-theory.higher-groups
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.circle funext
+open import synthetic-homotopy-theory.circle
 ```
 
 </details>

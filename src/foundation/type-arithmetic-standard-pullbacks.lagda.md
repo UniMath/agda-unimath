@@ -1,22 +1,17 @@
 # Type arithmetic with standard pullbacks
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.type-arithmetic-standard-pullbacks
-  (funext : function-extensionality)
-  where
+module foundation.type-arithmetic-standard-pullbacks where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospan-diagrams funext
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types funext
-open import foundation.standard-pullbacks funext
-open import foundation.standard-ternary-pullbacks funext
+open import foundation.equality-dependent-pair-types
+open import foundation.standard-pullbacks
+open import foundation.standard-ternary-pullbacks
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 

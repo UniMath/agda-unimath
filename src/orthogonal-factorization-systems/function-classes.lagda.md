@@ -1,33 +1,28 @@
 # Function classes
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.function-classes
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.function-classes where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospan-diagrams funext
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.equivalence-induction funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.iterated-dependent-product-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
-open import foundation.pullbacks funext
-open import foundation.subtypes funext
+open import foundation.embeddings
+open import foundation.equivalence-induction
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.pullbacks
+open import foundation.subtypes
 open import foundation.telescopes
 open import foundation.transport-along-identifications
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 ```
 

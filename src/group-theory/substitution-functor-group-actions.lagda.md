@@ -1,36 +1,31 @@
 # The substitution functor of group actions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.substitution-functor-group-actions
-  (funext : function-extensionality)
-  where
+module group-theory.substitution-functor-group-actions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-large-precategories funext
+open import category-theory.functors-large-precategories
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalence-classes funext
-open import foundation.equivalence-relations funext
-open import foundation.existential-quantification funext
-open import foundation.identity-types funext
-open import foundation.propositional-truncations funext
-open import foundation.sets funext
+open import foundation.equivalence-classes
+open import foundation.equivalence-relations
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.group-actions funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-group-actions funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.precategory-of-group-actions funext
-open import group-theory.symmetric-groups funext
+open import group-theory.group-actions
+open import group-theory.groups
+open import group-theory.homomorphisms-group-actions
+open import group-theory.homomorphisms-groups
+open import group-theory.precategory-of-group-actions
+open import group-theory.symmetric-groups
 ```
 
 </details>

@@ -1,41 +1,36 @@
 # Walks in undirected graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.walks-undirected-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.walks-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers funext
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
-open import foundation.coproduct-types funext
-open import foundation.decidable-types funext
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-coproduct-types funext
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.torsorial-type-families funext
-open import foundation.type-arithmetic-coproduct-types funext
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.torsorial-type-families
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.unordered-pairs funext
+open import foundation.unordered-pairs
 
-open import graph-theory.undirected-graphs funext
+open import graph-theory.undirected-graphs
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

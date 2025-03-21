@@ -1,22 +1,17 @@
 # Homotopy induction
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.homotopy-induction
-  (funext : function-extensionality)
-  where
+module foundation.homotopy-induction where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality funext
-
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.identity-systems
-open import foundation.universal-property-identity-systems funext
+open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps

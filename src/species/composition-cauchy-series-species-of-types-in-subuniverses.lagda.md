@@ -1,29 +1,24 @@
 # Composition of Cauchy series of species of types in subuniverses
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  species.composition-cauchy-series-species-of-types-in-subuniverses
-  (funext : function-extensionality)
-  where
+module species.composition-cauchy-series-species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences funext
-open import foundation.global-subuniverses funext
-open import foundation.sigma-closed-subuniverses funext
-open import foundation.subuniverses funext
+open import foundation.equivalences
+open import foundation.global-subuniverses
+open import foundation.sigma-closed-subuniverses
+open import foundation.subuniverses
 open import foundation.universe-levels
 
-open import species.cauchy-composition-species-of-types funext
-open import species.cauchy-composition-species-of-types funext-in-subuniverses
-open import species.cauchy-series-species-of-types funext
-open import species.cauchy-series-species-of-types funext-in-subuniverses
-open import species.composition-cauchy-series-species-of-types funext
-open import species.species-of-types-in-subuniverses funext
+open import species.cauchy-composition-species-of-types
+open import species.cauchy-composition-species-of-types-in-subuniverses
+open import species.cauchy-series-species-of-types
+open import species.cauchy-series-species-of-types-in-subuniverses
+open import species.composition-cauchy-series-species-of-types
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>

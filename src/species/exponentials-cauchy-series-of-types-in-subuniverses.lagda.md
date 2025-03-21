@@ -1,33 +1,28 @@
 # Exponential of Cauchy series of species of types in subuniverses
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  species.exponentials-cauchy-series-of-types-in-subuniverses
-  (funext : function-extensionality)
-  where
+module species.exponentials-cauchy-series-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.global-subuniverses funext
-open import foundation.sigma-closed-subuniverses funext
-open import foundation.subuniverses funext
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.global-subuniverses
+open import foundation.sigma-closed-subuniverses
+open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import species.cauchy-composition-species-of-types-in-subuniverses funext
-open import species.cauchy-exponentials-species-of-types-in-subuniverses funext
-open import species.cauchy-series-species-of-types-in-subuniverses funext
-open import species.composition-cauchy-series-species-of-types-in-subuniverses funext
-open import species.species-of-types-in-subuniverses funext
+open import species.cauchy-composition-species-of-types-in-subuniverses
+open import species.cauchy-exponentials-species-of-types-in-subuniverses
+open import species.cauchy-series-species-of-types-in-subuniverses
+open import species.composition-cauchy-series-species-of-types-in-subuniverses
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>

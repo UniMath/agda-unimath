@@ -1,23 +1,18 @@
 # Types equipped with endomorphisms
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.types-equipped-with-endomorphisms
-  (funext : function-extensionality)
-  where
+module structured-types.types-equipped-with-endomorphisms where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.raising-universe-levels-unit-type funext
+open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.endomorphisms funext
+open import foundation-core.endomorphisms
 open import foundation-core.function-types
 ```
 

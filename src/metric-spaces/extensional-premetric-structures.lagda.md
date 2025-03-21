@@ -1,33 +1,28 @@
 # Extensional premetric structures on types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  metric-spaces.extensional-premetric-structures
-  (funext : function-extensionality)
-  where
+module metric-spaces.extensional-premetric-structures where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers funext
+open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.subtypes funext
-open import foundation.torsorial-type-families funext
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.premetric-structures funext
-open import metric-spaces.reflexive-premetric-structures funext
+open import metric-spaces.premetric-structures
+open import metric-spaces.reflexive-premetric-structures
 ```
 
 </details>

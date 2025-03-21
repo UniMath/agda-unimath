@@ -1,46 +1,41 @@
 # Copresheaf categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.copresheaf-categories
-  (funext : function-extensionality)
-  where
+module category-theory.copresheaf-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories funext
-open import category-theory.category-of-functors-from-small-to-large-categories funext
-open import category-theory.constant-functors funext
-open import category-theory.functors-from-small-to-large-precategories funext
-open import category-theory.functors-precategories funext
-open import category-theory.initial-objects-precategories funext
-open import category-theory.large-categories funext
-open import category-theory.large-precategories funext
-open import category-theory.natural-transformations-functors-from-small-to-large-precategories funext
-open import category-theory.natural-transformations-functors-precategories funext
-open import category-theory.precategories funext
-open import category-theory.precategory-of-functors-from-small-to-large-precategories funext
-open import category-theory.terminal-objects-precategories funext
+open import category-theory.categories
+open import category-theory.category-of-functors-from-small-to-large-categories
+open import category-theory.constant-functors
+open import category-theory.functors-from-small-to-large-precategories
+open import category-theory.functors-precategories
+open import category-theory.initial-objects-precategories
+open import category-theory.large-categories
+open import category-theory.large-precategories
+open import category-theory.natural-transformations-functors-from-small-to-large-precategories
+open import category-theory.natural-transformations-functors-precategories
+open import category-theory.precategories
+open import category-theory.precategory-of-functors-from-small-to-large-precategories
+open import category-theory.terminal-objects-precategories
 
-open import foundation.category-of-sets funext
-open import foundation.commuting-squares-of-maps funext
+open import foundation.category-of-sets
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
+open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.functoriality-cartesian-product-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.raising-universe-levels funext
-open import foundation.raising-universe-levels funext-unit-type
-open import foundation.sets funext
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
+open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
+open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

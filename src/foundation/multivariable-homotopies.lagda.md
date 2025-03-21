@@ -1,12 +1,7 @@
 # Multivariable homotopies
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.multivariable-homotopies
-  (funext : function-extensionality)
-  where
+module foundation.multivariable-homotopies where
 ```
 
 <details><summary>Imports</summary>
@@ -15,17 +10,17 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types funext
-open import foundation.function-extensionality funext
-
+open import foundation.equality-dependent-function-types
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.implicit-function-types
-open import foundation.iterated-dependent-product-types funext
+open import foundation.iterated-dependent-product-types
 open import foundation.telescopes
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.functoriality-dependent-function-types funext
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families

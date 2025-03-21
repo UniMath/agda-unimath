@@ -1,12 +1,7 @@
 # Hereditary W-types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.hereditary-w-types
-  (funext : function-extensionality)
-  where
+module trees.hereditary-w-types where
 ```
 
 <details><summary>Imports</summary>
@@ -15,13 +10,12 @@ module
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.retractions funext
-open import foundation.sections funext
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.retractions
+open import foundation.sections
 open import foundation.universe-levels
 
 open import trees.binary-w-types

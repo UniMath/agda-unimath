@@ -1,30 +1,25 @@
 # Symmetric cores of binary relations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.symmetric-cores-binary-relations
-  (funext : function-extensionality)
-  where
+module foundation.symmetric-cores-binary-relations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations funext
-open import foundation.morphisms-binary-relations funext
-open import foundation.postcomposition-functions funext
-open import foundation.symmetric-binary-relations funext
+open import foundation.binary-relations
+open import foundation.morphisms-binary-relations
+open import foundation.postcomposition-functions
+open import foundation.symmetric-binary-relations
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-dependent-function-types funext
+open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universe-levels
-open import foundation.unordered-pairs funext
+open import foundation.unordered-pairs
 
 open import foundation-core.equivalences
-open import foundation-core.functoriality-dependent-function-types funext
+open import foundation-core.functoriality-dependent-function-types
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

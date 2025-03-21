@@ -1,12 +1,7 @@
 # Sums of elements in rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.sums-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.sums-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -15,19 +10,19 @@ module
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.vectors funext
-open import linear-algebra.vectors funext-on-rings
+open import linear-algebra.vectors
+open import linear-algebra.vectors-on-rings
 
-open import ring-theory.rings funext
-open import ring-theory.sums-semirings funext
+open import ring-theory.rings
+open import ring-theory.sums-semirings
 
-open import univalent-combinatorics.coproduct-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

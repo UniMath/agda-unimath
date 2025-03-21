@@ -1,40 +1,35 @@
 # Reduced integer fractions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.reduced-integer-fractions
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.reduced-integer-fractions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.bezouts-lemma-integers funext
-open import elementary-number-theory.divisibility-integers funext
-open import elementary-number-theory.equality-integers funext
-open import elementary-number-theory.greatest-common-divisor-integers funext
-open import elementary-number-theory.integer-fractions funext
+open import elementary-number-theory.bezouts-lemma-integers
+open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.equality-integers
+open import elementary-number-theory.greatest-common-divisor-integers
+open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers funext
-open import elementary-number-theory.multiplication-positive-and-negative-integers funext
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-positive-and-negative-integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.positive-and-negative-integers funext
-open import elementary-number-theory.positive-integers funext
-open import elementary-number-theory.relatively-prime-integers funext
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
+open import elementary-number-theory.relatively-prime-integers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
+open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
-open import foundation.equality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.negation funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
+open import foundation.equality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```

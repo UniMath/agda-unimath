@@ -1,37 +1,33 @@
 # `1`-acyclic types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.1-acyclic-types
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.1-acyclic-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types funext
+open import foundation.0-connected-types
 open import foundation.binary-transport
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types funext
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.inhabited-types funext
-open import foundation.injective-maps funext
-open import foundation.propositions funext
-open import foundation.set-truncations funext
-open import foundation.sets funext
-open import foundation.truncated-types funext
+open import foundation.diagonal-maps-of-types
+open import foundation.equivalences
+open import foundation.function-extensionality-axiom
+open import foundation.identity-types
+open import foundation.inhabited-types
+open import foundation.injective-maps
+open import foundation.propositions
+open import foundation.set-truncations
+open import foundation.sets
+open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.0-acyclic-types funext
-open import synthetic-homotopy-theory.loop-spaces funext
-open import synthetic-homotopy-theory.truncated-acyclic-maps funext
-open import synthetic-homotopy-theory.truncated-acyclic-types funext
+open import synthetic-homotopy-theory.0-acyclic-types
+open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.truncated-acyclic-maps
+open import synthetic-homotopy-theory.truncated-acyclic-types
 ```
 
 </details>

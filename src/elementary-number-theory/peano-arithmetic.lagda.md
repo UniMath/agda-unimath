@@ -1,12 +1,7 @@
 # Peano arithmetic
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.peano-arithmetic
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.peano-arithmetic where
 ```
 
 <details><summary>Imports</summary>
@@ -15,11 +10,11 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.negated-equality funext
-open import foundation.propositions funext
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.negated-equality
+open import foundation.propositions
 open import foundation.universe-levels
 ```
 

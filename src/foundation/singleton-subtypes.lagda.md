@@ -1,29 +1,24 @@
 # Singleton subtypes
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.singleton-subtypes
-  (funext : function-extensionality)
-  where
+module foundation.singleton-subtypes where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.connected-components funext
-open import foundation.contractible-types funext
+open import foundation.connected-components
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.functoriality-propositional-truncation funext
-open import foundation.images-subtypes funext
-open import foundation.inhabited-subtypes funext
-open import foundation.logical-equivalences funext
-open import foundation.propositional-truncations funext
-open import foundation.sets funext
+open import foundation.functoriality-propositional-truncation
+open import foundation.images-subtypes
+open import foundation.inhabited-subtypes
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
+open import foundation.sets
 open import foundation.singleton-induction
-open import foundation.subtypes funext
-open import foundation.torsorial-type-families funext
+open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 

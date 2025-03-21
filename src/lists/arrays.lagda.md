@@ -1,12 +1,7 @@
 # Arrays
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  lists.arrays
-  (funext : function-extensionality)
-  where
+module lists.arrays where
 ```
 
 <details><summary>Imports</summary>
@@ -15,24 +10,24 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.equality-dependent-pair-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.vectors funext
+open import linear-algebra.vectors
 
 open import lists.lists
 
-open import univalent-combinatorics.involution-standard-finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.involution-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

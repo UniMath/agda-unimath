@@ -1,12 +1,7 @@
 # Bases of directed trees
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.bases-directed-trees
-  (funext : function-extensionality)
-  where
+module trees.bases-directed-trees where
 ```
 
 <details><summary>Imports</summary>
@@ -15,26 +10,26 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
-open import foundation.coproduct-types funext
+open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.equality-dependent-pair-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.negation funext
-open import foundation.propositions funext
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-empty-type funext
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
-open import graph-theory.walks-directed-graphs funext
+open import graph-theory.walks-directed-graphs
 
-open import trees.directed-trees funext
+open import trees.directed-trees
 ```
 
 </details>

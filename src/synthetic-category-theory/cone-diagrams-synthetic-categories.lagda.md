@@ -3,24 +3,19 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-category-theory.cone-diagrams-synthetic-categories
-  (funext : function-extensionality)
-  where
+module synthetic-category-theory.cone-diagrams-synthetic-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import globular-types.globular-types
 
-open import synthetic-category-theory.cospans-synthetic-categories funext
+open import synthetic-category-theory.cospans-synthetic-categories
 open import synthetic-category-theory.synthetic-categories
 ```
 

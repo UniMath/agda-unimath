@@ -3,12 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  globular-types.universal-reflexive-globular-type
-  (funext : function-extensionality)
-  where
+module globular-types.universal-reflexive-globular-type where
 ```
 
 <details><summary>Imports</summary>
@@ -17,7 +12,7 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import globular-types.reflexive-globular-types funext
+open import globular-types.reflexive-globular-types
 ```
 
 </details>

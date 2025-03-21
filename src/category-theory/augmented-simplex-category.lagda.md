@@ -1,30 +1,25 @@
 # The augmented simplex category
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.augmented-simplex-category
-  (funext : function-extensionality)
-  where
+module category-theory.augmented-simplex-category where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets funext
-open import category-theory.precategories funext
+open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.precategories
 
-open import elementary-number-theory.inequality-standard-finite-types funext
+open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.sets funext
-open import foundation.strictly-involutive-identity-types funext
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
-open import order-theory.order-preserving-maps-posets funext
+open import order-theory.order-preserving-maps-posets
 ```
 
 </details>

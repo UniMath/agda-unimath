@@ -1,12 +1,7 @@
 # Mere spheres
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.mere-spheres
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.mere-spheres where
 ```
 
 <details></summary>Imports</summary>
@@ -15,11 +10,11 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.mere-equivalences funext
-open import foundation.propositions funext
+open import foundation.mere-equivalences
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.spheres funext
+open import synthetic-homotopy-theory.spheres
 ```
 
 </details>

@@ -1,26 +1,21 @@
 # The commutative semiring of natural numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.commutative-semiring-of-natural-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.commutative-semiring-of-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-semirings funext
+open import commutative-algebra.commutative-semirings
 
-open import elementary-number-theory.monoid-of-natural-numbers-with-addition funext
+open import elementary-number-theory.monoid-of-natural-numbers-with-addition
 open import elementary-number-theory.multiplication-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import ring-theory.semirings funext
+open import ring-theory.semirings
 ```
 
 </details>

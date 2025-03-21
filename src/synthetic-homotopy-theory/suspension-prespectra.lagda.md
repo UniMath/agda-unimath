@@ -1,12 +1,7 @@
 # Suspension prespectra
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.suspension-prespectra
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.suspension-prespectra where
 ```
 
 <details><summary>Imports</summary>
@@ -17,14 +12,14 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.pointed-maps funext
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.iterated-suspensions-of-pointed-types funext
-open import synthetic-homotopy-theory.loop-spaces funext
-open import synthetic-homotopy-theory.prespectra funext
-open import synthetic-homotopy-theory.suspensions-of-pointed-types funext
-open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types funext
+open import synthetic-homotopy-theory.iterated-suspensions-of-pointed-types
+open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.prespectra
+open import synthetic-homotopy-theory.suspensions-of-pointed-types
+open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types
 ```
 
 </details>

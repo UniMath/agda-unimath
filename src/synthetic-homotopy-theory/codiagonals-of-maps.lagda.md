@@ -1,32 +1,27 @@
 # Codiagonals of maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.codiagonals-of-maps
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.codiagonals-of-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.fibers-of-maps funext
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.torsorial-type-families funext
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.torsorial-type-families
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans funext
-open import synthetic-homotopy-theory.pushouts funext
-open import synthetic-homotopy-theory.suspension-structures funext
-open import synthetic-homotopy-theory.suspensions-of-types funext
-open import synthetic-homotopy-theory.universal-property-pushouts funext
+open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.suspension-structures
+open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>

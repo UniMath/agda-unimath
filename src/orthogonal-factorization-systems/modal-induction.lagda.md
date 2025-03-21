@@ -1,12 +1,7 @@
 # Modal induction
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.modal-induction
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.modal-induction where
 ```
 
 <details><summary>Imports</summary>
@@ -14,25 +9,24 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.multivariable-sections funext
-open import foundation.precomposition-dependent-functions funext
-open import foundation.precomposition-functions funext
-open import foundation.retractions funext
-open import foundation.sections funext
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.multivariable-sections
+open import foundation.precomposition-dependent-functions
+open import foundation.precomposition-functions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.telescopes
-open import foundation.type-theoretic-principle-of-choice funext
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.modal-operators funext
+open import orthogonal-factorization-systems.modal-operators
 ```
 
 </details>

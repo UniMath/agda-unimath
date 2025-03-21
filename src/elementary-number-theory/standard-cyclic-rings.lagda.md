@@ -1,42 +1,37 @@
 # The standard cyclic rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.standard-cyclic-rings
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.standard-cyclic-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.commutative-rings
 
-open import elementary-number-theory.addition-integers funext
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
-open import elementary-number-theory.modular-arithmetic funext
-open import elementary-number-theory.modular-arithmetic funext-standard-finite-types
+open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.ring-of-integers funext
-open import elementary-number-theory.standard-cyclic-groups funext
+open import elementary-number-theory.ring-of-integers
+open import elementary-number-theory.standard-cyclic-groups
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.surjective-maps funext
+open import foundation.existential-quantification
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
-open import group-theory.cyclic-groups funext
-open import group-theory.generating-elements-groups funext
+open import group-theory.cyclic-groups
+open import group-theory.generating-elements-groups
 
-open import ring-theory.cyclic-rings funext
-open import ring-theory.integer-multiples-of-elements-rings funext
-open import ring-theory.rings funext
+open import ring-theory.cyclic-rings
+open import ring-theory.integer-multiples-of-elements-rings
+open import ring-theory.rings
 ```
 
 </details>

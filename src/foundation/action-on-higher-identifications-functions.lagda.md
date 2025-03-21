@@ -1,19 +1,14 @@
 # The action of functions on higher identifications
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.action-on-higher-identifications-functions
-  (funext : function-extensionality)
-  where
+module foundation.action-on-higher-identifications-functions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.path-algebra funext
+open import foundation.path-algebra
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-identifications

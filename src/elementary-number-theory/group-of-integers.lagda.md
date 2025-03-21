@@ -1,29 +1,24 @@
 # The group of integers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.group-of-integers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.group-of-integers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers funext
-open import elementary-number-theory.equality-integers funext
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.groups funext
-open import group-theory.semigroups funext
+open import group-theory.abelian-groups
+open import group-theory.groups
+open import group-theory.semigroups
 
-open import structured-types.types-equipped-with-endomorphisms funext
+open import structured-types.types-equipped-with-endomorphisms
 ```
 
 </details>

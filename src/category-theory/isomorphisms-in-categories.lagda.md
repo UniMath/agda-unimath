@@ -1,30 +1,25 @@
 # Isomorphisms in categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.isomorphisms-in-categories
-  (funext : function-extensionality)
-  where
+module category-theory.isomorphisms-in-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories funext
-open import category-theory.isomorphisms-in-precategories funext
+open import category-theory.categories
+open import category-theory.isomorphisms-in-precategories
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.torsorial-type-families funext
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 

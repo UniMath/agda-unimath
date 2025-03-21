@@ -1,23 +1,18 @@
 # Concrete group actions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.concrete-group-actions
-  (funext : function-extensionality)
-  where
+module group-theory.concrete-group-actions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.function-types funext
-open import foundation.sets funext
+open import foundation.function-types
+open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups funext
+open import group-theory.concrete-groups
 ```
 
 </details>

@@ -1,12 +1,7 @@
 # Powers of elements in semirings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.powers-of-elements-semirings
-  (funext : function-extensionality)
-  where
+module ring-theory.powers-of-elements-semirings where
 ```
 
 <details><summary>Imports</summary>
@@ -16,12 +11,12 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.powers-of-elements-monoids funext
+open import group-theory.powers-of-elements-monoids
 
-open import ring-theory.semirings funext
+open import ring-theory.semirings
 ```
 
 </details>

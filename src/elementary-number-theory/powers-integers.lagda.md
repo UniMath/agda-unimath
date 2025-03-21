@@ -1,25 +1,20 @@
 # Powers of integers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.powers-integers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.powers-integers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.powers-of-elements-commutative-rings funext
+open import commutative-algebra.powers-of-elements-commutative-rings
 
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers funext
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.ring-of-integers funext
+open import elementary-number-theory.ring-of-integers
 
-open import foundation.identity-types funext
+open import foundation.identity-types
 ```
 
 </details>

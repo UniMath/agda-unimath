@@ -1,22 +1,17 @@
 # Cellular maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.cellular-maps
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.cellular-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.connected-maps funext
+open import foundation.connected-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.mere-lifting-properties funext
+open import orthogonal-factorization-systems.mere-lifting-properties
 ```
 
 </details>

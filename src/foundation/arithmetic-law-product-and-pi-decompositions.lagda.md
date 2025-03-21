@@ -1,26 +1,21 @@
 # Arithmetic law for product decomposition and Π-decomposition
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.arithmetic-law-product-and-pi-decompositions
-  (funext : function-extensionality)
-  where
+module foundation.arithmetic-law-product-and-pi-decompositions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-decompositions funext
+open import foundation.coproduct-decompositions
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.functoriality-cartesian-product-types funext
-open import foundation.pi-decompositions funext
+open import foundation.equivalences
+open import foundation.functoriality-cartesian-product-types
+open import foundation.pi-decompositions
 open import foundation.product-decompositions
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence funext
-open import foundation.universal-property-coproduct-types funext
+open import foundation.univalence
+open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

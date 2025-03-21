@@ -1,31 +1,26 @@
 # Products of commutative rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.products-commutative-rings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.products-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.commutative-rings
 
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.identity-types funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.groups funext
-open import group-theory.semigroups funext
+open import group-theory.abelian-groups
+open import group-theory.groups
+open import group-theory.semigroups
 
-open import ring-theory.products-rings funext
-open import ring-theory.rings funext
+open import ring-theory.products-rings
+open import ring-theory.rings
 ```
 
 </details>

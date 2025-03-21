@@ -1,23 +1,18 @@
 # The difference between integers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.difference-integers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.difference-integers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers funext
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.interchange-law
 ```
 

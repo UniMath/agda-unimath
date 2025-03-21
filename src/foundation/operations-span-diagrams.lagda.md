@@ -1,23 +1,18 @@
 # Operations on span diagrams
 
 ```agda
-open import foundation.function-extensionality-axiom
+module foundation.operations-span-diagrams where
 
-module
-  foundation.operations-span-diagrams
-  (funext : function-extensionality)
-  where
-
-open import foundation-core.operations-span-diagrams funext public
+open import foundation-core.operations-span-diagrams public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences-arrows funext
-open import foundation.operations-spans funext
-open import foundation.span-diagrams funext
+open import foundation.equivalences-arrows
+open import foundation.operations-spans
+open import foundation.span-diagrams
 open import foundation.spans
 open import foundation.universe-levels
 ```

@@ -11,19 +11,14 @@
 ## Modules in the wild category theory namespace
 
 ```agda
-open import foundation.function-extensionality-axiom
+module wild-category-theory where
 
-module
-  wild-category-theory
-  (funext : function-extensionality)
-  where
-
-open import wild-category-theory.coinductive-isomorphisms-in-noncoherent-large-omega-precategories funext public
-open import wild-category-theory.coinductive-isomorphisms-in-noncoherent-omega-precategories funext public
-open import wild-category-theory.colax-functors-noncoherent-large-omega-precategories funext public
-open import wild-category-theory.colax-functors-noncoherent-omega-precategories funext public
-open import wild-category-theory.maps-noncoherent-large-omega-precategories funext public
-open import wild-category-theory.maps-noncoherent-omega-precategories funext public
-open import wild-category-theory.noncoherent-large-omega-precategories funext public
-open import wild-category-theory.noncoherent-omega-precategories funext public
+open import wild-category-theory.coinductive-isomorphisms-in-noncoherent-large-omega-precategories public
+open import wild-category-theory.coinductive-isomorphisms-in-noncoherent-omega-precategories public
+open import wild-category-theory.colax-functors-noncoherent-large-omega-precategories public
+open import wild-category-theory.colax-functors-noncoherent-omega-precategories public
+open import wild-category-theory.maps-noncoherent-large-omega-precategories public
+open import wild-category-theory.maps-noncoherent-omega-precategories public
+open import wild-category-theory.noncoherent-large-omega-precategories public
+open import wild-category-theory.noncoherent-omega-precategories public
 ```

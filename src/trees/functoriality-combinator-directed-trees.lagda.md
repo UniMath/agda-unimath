@@ -1,12 +1,7 @@
 # Functoriality of the combinator of directed trees
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.functoriality-combinator-directed-trees
-  (funext : function-extensionality)
-  where
+module trees.functoriality-combinator-directed-trees where
 ```
 
 <details><summary>Imports</summary>
@@ -14,19 +9,19 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import trees.combinator-directed-trees funext
-open import trees.directed-trees funext
-open import trees.equivalences-directed-trees funext
-open import trees.morphisms-directed-trees funext
-open import trees.rooted-morphisms-directed-trees funext
+open import trees.combinator-directed-trees
+open import trees.directed-trees
+open import trees.equivalences-directed-trees
+open import trees.morphisms-directed-trees
+open import trees.rooted-morphisms-directed-trees
 ```
 
 </details>

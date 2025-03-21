@@ -1,35 +1,30 @@
 # Diaconescu's theorem
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.diaconescus-theorem
-  (funext : function-extensionality)
-  where
+module foundation.diaconescus-theorem where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.axiom-of-choice funext
-open import foundation.booleans funext
-open import foundation.decidable-propositions funext
-open import foundation.decidable-types funext
+open import foundation.axiom-of-choice
+open import foundation.booleans
+open import foundation.decidable-propositions
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.law-of-excluded-middle funext
-open import foundation.logical-equivalences funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
+open import foundation.law-of-excluded-middle
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
 
-open import synthetic-homotopy-theory.suspensions-of-propositions funext
-open import synthetic-homotopy-theory.suspensions-of-types funext
+open import synthetic-homotopy-theory.suspensions-of-propositions
+open import synthetic-homotopy-theory.suspensions-of-types
 ```
 
 </details>

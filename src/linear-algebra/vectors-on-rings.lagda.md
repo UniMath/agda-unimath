@@ -1,12 +1,7 @@
 # Vectors on rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  linear-algebra.vectors-on-rings
-  (funext : function-extensionality)
-  where
+module linear-algebra.vectors-on-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -16,23 +11,22 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality funext
-
-open import foundation.identity-types funext
+open import foundation.function-extensionality
+open import foundation.identity-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.commutative-monoids funext
-open import group-theory.groups funext
-open import group-theory.monoids funext
-open import group-theory.semigroups funext
+open import group-theory.abelian-groups
+open import group-theory.commutative-monoids
+open import group-theory.groups
+open import group-theory.monoids
+open import group-theory.semigroups
 
-open import linear-algebra.constant-vectors funext
-open import linear-algebra.functoriality-vectors funext
-open import linear-algebra.vectors funext
+open import linear-algebra.constant-vectors
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.vectors
 
-open import ring-theory.rings funext
+open import ring-theory.rings
 ```
 
 </details>

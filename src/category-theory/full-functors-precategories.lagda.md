@@ -1,24 +1,19 @@
 # Full functors between precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.full-functors-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.full-functors-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.full-maps-precategories funext
-open import category-theory.functors-precategories funext
-open import category-theory.precategories funext
+open import category-theory.full-maps-precategories
+open import category-theory.functors-precategories
+open import category-theory.precategories
 
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.propositions funext
+open import foundation.function-types
+open import foundation.propositions
 open import foundation.universe-levels
 ```
 

@@ -1,12 +1,7 @@
 # Plane trees
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.plane-trees
-  (funext : function-extensionality)
-  where
+module trees.plane-trees where
 ```
 
 <details><sumary>Imports</summary>
@@ -17,20 +12,20 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.maybe funext
-open import foundation.retractions funext
-open import foundation.sections funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.maybe
+open import foundation.retractions
+open import foundation.sections
 open import foundation.universe-levels
 
 open import lists.lists
 
-open import trees.full-binary-trees funext
-open import trees.w-types funext
+open import trees.full-binary-trees
+open import trees.w-types
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

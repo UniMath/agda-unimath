@@ -1,12 +1,7 @@
 # π-finite types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.pi-finite-types
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.pi-finite-types where
 ```
 
 <details><summary>Imports</summary>
@@ -15,16 +10,16 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.set-truncations funext
-open import foundation.truncated-types funext
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.set-truncations
+open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.finitely-many-connected-components funext
-open import univalent-combinatorics.untruncated-pi-finite-types funext
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-many-connected-components
+open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
 </details>

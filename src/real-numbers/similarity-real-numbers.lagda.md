@@ -1,26 +1,21 @@
 # Similarity of real numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  real-numbers.similarity-real-numbers
-  (funext : function-extensionality)
-  where
+module real-numbers.similarity-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.powersets funext
-open import foundation.propositions funext
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.powersets
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import real-numbers.dedekind-real-numbers funext
+open import real-numbers.dedekind-real-numbers
 ```
 
 </details>

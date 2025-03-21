@@ -1,30 +1,25 @@
 # Decidable types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.decidable-types
-  (funext : function-extensionality)
-  where
+module foundation.decidable-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.double-negation funext
-open import foundation.empty-types funext
-open import foundation.equivalences funext
-open import foundation.hilberts-epsilon-operators funext
-open import foundation.logical-equivalences funext
-open import foundation.negation funext
-open import foundation.propositional-truncations funext
-open import foundation.raising-universe-levels funext
-open import foundation.retracts-of-types funext
-open import foundation.type-arithmetic-empty-type funext
+open import foundation.double-negation
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.hilberts-epsilon-operators
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.raising-universe-levels
+open import foundation.retracts-of-types
+open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 

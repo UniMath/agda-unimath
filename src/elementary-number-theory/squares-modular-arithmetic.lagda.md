@@ -1,27 +1,22 @@
 # Squares in ℤₚ
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.squares-modular-arithmetic
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.squares-modular-arithmetic where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.modular-arithmetic funext
+open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.squares-integers funext
+open import elementary-number-theory.squares-integers
 
-open import foundation.decidable-types funext
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.fibers-of-maps funext
+open import univalent-combinatorics.fibers-of-maps
 ```
 
 </details>

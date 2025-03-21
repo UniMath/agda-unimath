@@ -1,12 +1,7 @@
 # Wild groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.wild-groups
-  (funext : function-extensionality)
-  where
+module structured-types.wild-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -16,7 +11,7 @@ open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.wild-monoids funext
+open import structured-types.wild-monoids
 ```
 
 </details>

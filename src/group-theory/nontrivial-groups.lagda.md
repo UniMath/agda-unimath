@@ -1,39 +1,34 @@
 # Nontrivial groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.nontrivial-groups
-  (funext : function-extensionality)
-  where
+module group-theory.nontrivial-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.disjunction funext
-open import foundation.embeddings funext
-open import foundation.empty-types funext
-open import foundation.existential-quantification funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.logical-equivalences funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
-open import foundation.propositional-extensionality funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.disjunction
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.logical-equivalences
+open import foundation.negated-equality
+open import foundation.negation
+open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.groups funext
-open import group-theory.subgroups funext
-open import group-theory.trivial-groups funext
+open import group-theory.groups
+open import group-theory.subgroups
+open import group-theory.trivial-groups
 ```
 
 </details>

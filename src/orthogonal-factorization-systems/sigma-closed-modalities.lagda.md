@@ -1,23 +1,18 @@
 # Σ-closed modalities
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.sigma-closed-modalities
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.sigma-closed-modalities where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.sigma-closed-subuniverses funext
+open import foundation.function-types
+open import foundation.sigma-closed-subuniverses
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.modal-operators funext
+open import orthogonal-factorization-systems.modal-operators
 ```
 
 </details>

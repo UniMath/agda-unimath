@@ -1,12 +1,7 @@
 # Hypergraphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.hypergraphs
-  (funext : function-extensionality)
-  where
+module graph-theory.hypergraphs where
 ```
 
 <details><summary>Imports</summary>
@@ -16,7 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-open import foundation.unordered-tuples funext
+open import foundation.unordered-tuples
 ```
 
 </details>

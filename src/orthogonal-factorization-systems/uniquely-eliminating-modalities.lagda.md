@@ -1,33 +1,28 @@
 # Uniquely eliminating modalities
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.uniquely-eliminating-modalities
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.uniquely-eliminating-modalities where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-maps funext
-open import foundation.contractible-types funext
+open import foundation.contractible-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.univalence funext
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.modal-operators funext
-open import orthogonal-factorization-systems.types-local-at-maps funext
+open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>

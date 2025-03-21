@@ -1,12 +1,7 @@
 # Finiteness of the type of connected components
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.finitely-many-connected-components
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.finitely-many-connected-components where
 ```
 
 <details><summary>Imports</summary>
@@ -14,28 +9,28 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.0-connected-types funext
-open import foundation.contractible-types funext
-open import foundation.coproduct-types funext
+open import foundation.0-connected-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-set-truncation funext
-open import foundation.mere-equivalences funext
-open import foundation.propositions funext
-open import foundation.retracts-of-types funext
-open import foundation.set-truncations funext
-open import foundation.sets funext
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-set-truncation
+open import foundation.mere-equivalences
+open import foundation.propositions
+open import foundation.retracts-of-types
+open import foundation.set-truncations
+open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types funext
-open import univalent-combinatorics.dependent-function-types funext
-open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.retracts-of-finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.retracts-of-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

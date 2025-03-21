@@ -1,27 +1,22 @@
 # Function commutative semirings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.function-commutative-semirings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.function-commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-semirings funext
-open import commutative-algebra.dependent-products-commutative-semirings funext
+open import commutative-algebra.commutative-semirings
+open import commutative-algebra.dependent-products-commutative-semirings
 
-open import foundation.identity-types funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids funext
+open import group-theory.commutative-monoids
 
-open import ring-theory.semirings funext
+open import ring-theory.semirings
 ```
 
 </details>

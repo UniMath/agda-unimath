@@ -1,12 +1,7 @@
 # Coherently idempotent maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.coherently-idempotent-maps
-  (funext : function-extensionality)
-  where
+module foundation.coherently-idempotent-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -16,8 +11,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.homotopy-algebra
-open import foundation.quasicoherently-idempotent-maps funext
-open import foundation.split-idempotent-maps funext
+open import foundation.quasicoherently-idempotent-maps
+open import foundation.split-idempotent-maps
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

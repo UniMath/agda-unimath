@@ -1,22 +1,17 @@
 # The type theoretic replacement axiom
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.replacement
-  (funext : function-extensionality)
-  where
+module foundation.replacement where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.images funext
-open import foundation.locally-small-types funext
+open import foundation.images
+open import foundation.locally-small-types
 open import foundation.universe-levels
 
-open import foundation-core.small-types funext
+open import foundation-core.small-types
 ```
 
 </details>

@@ -1,20 +1,15 @@
 # Essentially injective functors between precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.essentially-injective-functors-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.essentially-injective-functors-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories funext
-open import category-theory.isomorphisms-in-precategories funext
-open import category-theory.precategories funext
+open import category-theory.functors-precategories
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels

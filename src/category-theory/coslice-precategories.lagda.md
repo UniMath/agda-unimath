@@ -1,21 +1,16 @@
 # Coslice precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.coslice-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.coslice-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories funext
-open import category-theory.opposite-precategories funext
-open import category-theory.precategories funext
-open import category-theory.slice-precategories funext
+open import category-theory.functors-precategories
+open import category-theory.opposite-precategories
+open import category-theory.precategories
+open import category-theory.slice-precategories
 
 open import foundation.universe-levels
 ```

@@ -1,31 +1,26 @@
 # Saturated congruence relations on monoids
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.saturated-congruence-relations-monoids
-  (funext : function-extensionality)
-  where
+module group-theory.saturated-congruence-relations-monoids where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.equivalence-relations funext
-open import foundation.equivalences funext
+open import foundation.equivalence-relations
+open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositions
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import group-theory.congruence-relations-monoids funext
-open import group-theory.monoids funext
+open import group-theory.congruence-relations-monoids
+open import group-theory.monoids
 ```
 
 </details>

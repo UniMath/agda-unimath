@@ -1,20 +1,15 @@
 # Natural transformations between functors between large categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.natural-transformations-functors-large-categories
-  (funext : function-extensionality)
-  where
+module category-theory.natural-transformations-functors-large-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-large-categories funext
-open import category-theory.large-categories funext
-open import category-theory.natural-transformations-functors-large-precategories funext
+open import category-theory.functors-large-categories
+open import category-theory.large-categories
+open import category-theory.natural-transformations-functors-large-precategories
 
 open import foundation.universe-levels
 ```

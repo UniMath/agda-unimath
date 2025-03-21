@@ -1,21 +1,15 @@
 # Morphisms in the coslice category of types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.coslice
-  (funext : function-extensionality)
-  where
+module foundation.coslice where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-triangles-of-homotopies funext
+open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality funext
-
+open import foundation.function-extensionality
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition

@@ -1,23 +1,18 @@
 # Central elements of monoids
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.central-elements-monoids
-  (funext : function-extensionality)
-  where
+module group-theory.central-elements-monoids where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import group-theory.central-elements-semigroups funext
-open import group-theory.monoids funext
+open import group-theory.central-elements-semigroups
+open import group-theory.monoids
 ```
 
 </details>

@@ -1,32 +1,27 @@
 # Quasicoherently idempotent maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.quasicoherently-idempotent-maps
-  (funext : function-extensionality)
-  where
+module foundation.quasicoherently-idempotent-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.1-types funext
+open import foundation.1-types
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies funext
+open import foundation.commuting-squares-of-homotopies
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.equality-dependent-pair-types funext
+open import foundation.dependent-products-propositions
+open import foundation.equality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-algebra
-open import foundation.homotopy-induction funext
-open import foundation.idempotent-maps funext
-open import foundation.identity-types funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
+open import foundation.homotopy-induction
+open import foundation.idempotent-maps
+open import foundation.identity-types
+open import foundation.negated-equality
+open import foundation.negation
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
@@ -39,8 +34,8 @@ open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sets
 
-open import synthetic-homotopy-theory.circle funext
-open import synthetic-homotopy-theory.loop-homotopy-circle funext
+open import synthetic-homotopy-theory.circle
+open import synthetic-homotopy-theory.loop-homotopy-circle
 ```
 
 </details>

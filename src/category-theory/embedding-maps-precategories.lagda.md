@@ -1,24 +1,19 @@
 # Embedding maps between precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.embedding-maps-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.embedding-maps-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.fully-faithful-maps-precategories funext
-open import category-theory.maps-precategories funext
-open import category-theory.precategories funext
+open import category-theory.fully-faithful-maps-precategories
+open import category-theory.maps-precategories
+open import category-theory.precategories
 
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.propositions funext
+open import foundation.embeddings
+open import foundation.propositions
 open import foundation.universe-levels
 ```
 

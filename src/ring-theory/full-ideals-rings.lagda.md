@@ -1,33 +1,28 @@
 # Full ideals of rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.full-ideals-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.full-ideals-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.full-subtypes funext
-open import foundation.propositions funext
-open import foundation.raising-universe-levels-unit-type funext
-open import foundation.subtypes funext
+open import foundation.full-subtypes
+open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
+open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import order-theory.top-elements-large-posets funext
+open import order-theory.top-elements-large-posets
 
-open import ring-theory.ideals-rings funext
-open import ring-theory.left-ideals-rings funext
-open import ring-theory.poset-of-ideals-rings funext
-open import ring-theory.right-ideals-rings funext
-open import ring-theory.rings funext
-open import ring-theory.subsets-rings funext
+open import ring-theory.ideals-rings
+open import ring-theory.left-ideals-rings
+open import ring-theory.poset-of-ideals-rings
+open import ring-theory.right-ideals-rings
+open import ring-theory.rings
+open import ring-theory.subsets-rings
 ```
 
 </details>

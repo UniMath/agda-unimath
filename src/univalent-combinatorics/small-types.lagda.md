@@ -1,14 +1,9 @@
 # Small types
 
 ```agda
-open import foundation.function-extensionality-axiom
+module univalent-combinatorics.small-types where
 
-module
-  univalent-combinatorics.small-types
-  (funext : function-extensionality)
-  where
-
-open import foundation.small-types funext public
+open import foundation.small-types public
 ```
 
 <details><summary>Imports</summary>
@@ -17,11 +12,11 @@ open import foundation.small-types funext public
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.propositional-truncations funext
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

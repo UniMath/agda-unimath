@@ -1,28 +1,23 @@
 # Restrictions of functors to cores of precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.restrictions-functors-cores-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.restrictions-functors-cores-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.cores-precategories funext
-open import category-theory.faithful-functors-precategories funext
-open import category-theory.fully-faithful-functors-precategories funext
-open import category-theory.functors-precategories funext
-open import category-theory.isomorphisms-in-precategories funext
-open import category-theory.maps-precategories funext
-open import category-theory.precategories funext
-open import category-theory.pseudomonic-functors-precategories funext
+open import category-theory.cores-precategories
+open import category-theory.faithful-functors-precategories
+open import category-theory.fully-faithful-functors-precategories
+open import category-theory.functors-precategories
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.maps-precategories
+open import category-theory.precategories
+open import category-theory.pseudomonic-functors-precategories
 
 open import foundation.dependent-pair-types
-open import foundation.subtypes funext
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 

@@ -1,27 +1,22 @@
 # Base change of dependent reflexive graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.base-change-dependent-reflexive-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.base-change-dependent-reflexive-graphs where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import graph-theory.base-change-dependent-directed-graphs funext
-open import graph-theory.dependent-directed-graphs funext
-open import graph-theory.dependent-reflexive-graphs funext
-open import graph-theory.morphisms-reflexive-graphs funext
-open import graph-theory.reflexive-graphs funext
+open import graph-theory.base-change-dependent-directed-graphs
+open import graph-theory.dependent-directed-graphs
+open import graph-theory.dependent-reflexive-graphs
+open import graph-theory.morphisms-reflexive-graphs
+open import graph-theory.reflexive-graphs
 ```
 
 </details>

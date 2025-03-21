@@ -1,12 +1,7 @@
 # Equality of lists
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  lists.equality-lists
-  (funext : function-extensionality)
-  where
+module lists.equality-lists where
 ```
 
 <details><summary>Imports</summary>
@@ -14,23 +9,23 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-higher-identifications-functions funext
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
-open import foundation.contractible-types funext
-open import foundation.coproduct-types funext
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.equality-dependent-pair-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.negation funext
-open import foundation.raising-universe-levels funext
-open import foundation.raising-universe-levels funext-unit-type
-open import foundation.sets funext
-open import foundation.torsorial-type-families funext
-open import foundation.truncated-types funext
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.negation
+open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
+open import foundation.sets
+open import foundation.torsorial-type-families
+open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels

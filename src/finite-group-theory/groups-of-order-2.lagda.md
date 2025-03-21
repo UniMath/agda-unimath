@@ -3,39 +3,34 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  finite-group-theory.groups-of-order-2
-  (funext : function-extensionality)
-  where
+module finite-group-theory.groups-of-order-2 where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.standard-cyclic-groups funext
+open import elementary-number-theory.standard-cyclic-groups
 
-open import finite-group-theory.finite-groups funext
+open import finite-group-theory.finite-groups
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types funext
-open import foundation.mere-equivalences funext
-open import foundation.propositional-truncations funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.mere-equivalences
+open import foundation.propositional-truncations
+open import foundation.sets
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import group-theory.groups funext
-open import group-theory.isomorphisms-groups funext
-open import group-theory.symmetric-groups funext
+open import group-theory.groups
+open import group-theory.isomorphisms-groups
+open import group-theory.symmetric-groups
 
-open import univalent-combinatorics.2-element-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

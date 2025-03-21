@@ -1,45 +1,40 @@
 # Inequality on the integers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.inequality-integers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.inequality-integers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers funext
-open import elementary-number-theory.addition-positive-and-negative-integers funext
-open import elementary-number-theory.difference-integers funext
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-positive-and-negative-integers
+open import elementary-number-theory.difference-integers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.negative-integers funext
-open import elementary-number-theory.nonnegative-integers funext
-open import elementary-number-theory.nonpositive-integers funext
-open import elementary-number-theory.positive-and-negative-integers funext
-open import elementary-number-theory.positive-integers funext
+open import elementary-number-theory.negative-integers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.nonpositive-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
-open import foundation.decidable-propositions funext
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.functoriality-coproduct-types funext
-open import foundation.identity-types funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
-open import foundation.propositions funext
+open import foundation.function-types
+open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
+open import foundation.negated-equality
+open import foundation.negation
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import order-theory.posets funext
-open import order-theory.preorders funext
+open import order-theory.posets
+open import order-theory.preorders
 ```
 
 </details>

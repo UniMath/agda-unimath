@@ -1,25 +1,20 @@
 # Subsets of groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.subsets-groups
-  (funext : function-extensionality)
-  where
+module group-theory.subsets-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-locale-of-subtypes funext
-open import foundation.sets funext
+open import foundation.large-locale-of-subtypes
+open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.groups funext
+open import group-theory.groups
 
-open import order-theory.large-locales funext
-open import order-theory.large-posets funext
+open import order-theory.large-locales
+open import order-theory.large-posets
 ```
 
 </details>

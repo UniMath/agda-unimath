@@ -1,12 +1,7 @@
 # Binary embeddings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.binary-embeddings
-  (funext : function-extensionality)
-  where
+module foundation.binary-embeddings where
 ```
 
 <details><summary>Imports</summary>
@@ -16,7 +11,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import foundation-core.embeddings

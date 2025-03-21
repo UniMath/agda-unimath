@@ -1,35 +1,30 @@
 # The flattening lemma for coequalizers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.flattening-lemma-coequalizers
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.flattening-lemma-coequalizers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.double-arrows
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-coproduct-types funext
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.coforks funext
-open import synthetic-homotopy-theory.dependent-universal-property-coequalizers funext
-open import synthetic-homotopy-theory.flattening-lemma-pushouts funext
-open import synthetic-homotopy-theory.universal-property-coequalizers funext
-open import synthetic-homotopy-theory.universal-property-pushouts funext
+open import synthetic-homotopy-theory.coforks
+open import synthetic-homotopy-theory.dependent-universal-property-coequalizers
+open import synthetic-homotopy-theory.flattening-lemma-pushouts
+open import synthetic-homotopy-theory.universal-property-coequalizers
+open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>

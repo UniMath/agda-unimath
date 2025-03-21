@@ -1,44 +1,39 @@
 # The combinator of directed trees
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.combinator-directed-trees
-  (funext : function-extensionality)
-  where
+module trees.combinator-directed-trees where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
-open import foundation.coproduct-types funext
-open import foundation.decidable-types funext
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.equality-dependent-pair-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.isolated-elements funext
-open import foundation.maybe funext
-open import foundation.negation funext
-open import foundation.propositions funext
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.isolated-elements
+open import foundation.maybe
+open import foundation.negation
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs funext
-open import graph-theory.morphisms-directed-graphs funext
-open import graph-theory.walks-directed-graphs funext
+open import graph-theory.directed-graphs
+open import graph-theory.morphisms-directed-graphs
+open import graph-theory.walks-directed-graphs
 
-open import trees.bases-directed-trees funext
-open import trees.directed-trees funext
-open import trees.equivalences-directed-trees funext
-open import trees.fibers-directed-trees funext
-open import trees.morphisms-directed-trees funext
+open import trees.bases-directed-trees
+open import trees.directed-trees
+open import trees.equivalences-directed-trees
+open import trees.fibers-directed-trees
+open import trees.morphisms-directed-trees
 ```
 
 </details>

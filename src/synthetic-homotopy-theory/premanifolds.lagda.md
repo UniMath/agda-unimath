@@ -1,12 +1,7 @@
 # Premanifolds
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.premanifolds
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.premanifolds where
 ```
 
 <details><summary>Imports</summary>
@@ -14,17 +9,17 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.commuting-squares-of-maps funext
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.mere-equivalences funext
+open import foundation.mere-equivalences
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans funext
-open import synthetic-homotopy-theory.mere-spheres funext
-open import synthetic-homotopy-theory.pushouts funext
-open import synthetic-homotopy-theory.spheres funext
-open import synthetic-homotopy-theory.tangent-spheres funext
+open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.mere-spheres
+open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.spheres
+open import synthetic-homotopy-theory.tangent-spheres
 ```
 
 </details>

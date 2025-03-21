@@ -1,24 +1,19 @@
 # Iterating automorphisms
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.iterating-automorphisms
-  (funext : function-extensionality)
-  where
+module foundation.iterating-automorphisms where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers funext
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.automorphisms funext
-open import foundation.equivalence-extensionality funext
-open import foundation.iterating-functions funext
+open import foundation.automorphisms
+open import foundation.equivalence-extensionality
+open import foundation.iterating-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

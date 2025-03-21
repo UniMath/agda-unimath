@@ -1,22 +1,17 @@
 # Retracts of the type of natural numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.retracts-of-natural-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.retracts-of-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers funext
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-maps funext
-open import foundation.retractions funext
+open import foundation.decidable-maps
+open import foundation.retractions
 open import foundation.universe-levels
 ```
 

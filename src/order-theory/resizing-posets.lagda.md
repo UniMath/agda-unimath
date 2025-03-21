@@ -1,38 +1,33 @@
 # Resizing posets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.resizing-posets
-  (funext : function-extensionality)
-  where
+module order-theory.resizing-posets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-large-precategories funext
+open import category-theory.isomorphisms-in-large-precategories
 
-open import foundation.binary-relations funext
-open import foundation.cartesian-product-types funext
+open import foundation.binary-relations
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.small-types funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negated-equality
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
+open import foundation.small-types
 open import foundation.universe-levels
 
-open import order-theory.order-preserving-maps-posets funext
-open import order-theory.posets funext
-open import order-theory.precategory-of-posets funext
-open import order-theory.preorders funext
-open import order-theory.resizing-preorders funext
+open import order-theory.order-preserving-maps-posets
+open import order-theory.posets
+open import order-theory.precategory-of-posets
+open import order-theory.preorders
+open import order-theory.resizing-preorders
 ```
 
 </details>

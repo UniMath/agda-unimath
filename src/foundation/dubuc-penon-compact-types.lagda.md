@@ -1,24 +1,19 @@
 # Dubuc-Penon compact types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.dubuc-penon-compact-types
-  (funext : function-extensionality)
-  where
+module foundation.dubuc-penon-compact-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-products-propositions funext
-open import foundation.disjunction funext
-open import foundation.universal-quantification funext
+open import foundation.dependent-products-propositions
+open import foundation.disjunction
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.propositions
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 ```
 
 </details>

@@ -3,27 +3,22 @@
 ```agda
 {-# OPTIONS --guardedness --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.infinitely-coherent-equivalences
-  (funext : function-extensionality)
-  where
+module foundation.infinitely-coherent-equivalences where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-triangles-of-maps funext
+open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.retractions funext
-open import foundation.sections funext
-open import foundation.transposition-identifications-along-equivalences funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.universe-levels
 ```
 

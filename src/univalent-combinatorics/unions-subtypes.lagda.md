@@ -1,30 +1,25 @@
 # Unions of finite subtypes
 
 ```agda
-open import foundation.function-extensionality-axiom
+module univalent-combinatorics.unions-subtypes where
 
-module
-  univalent-combinatorics.unions-subtypes
-  (funext : function-extensionality)
-  where
-
-open import foundation.unions-subtypes funext public
+open import foundation.unions-subtypes public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-equality funext
-open import foundation.propositional-truncations funext
-open import foundation.subtypes funext
+open import foundation.decidable-equality
+open import foundation.propositional-truncations
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types funext
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.counting funext-decidable-subtypes
-open import univalent-combinatorics.counting-dependent-pair-types funext
-open import univalent-combinatorics.embeddings funext
-open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-decidable-subtypes
+open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.embeddings
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

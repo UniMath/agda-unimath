@@ -1,26 +1,21 @@
 # The standard cyclic groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.standard-cyclic-groups
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.standard-cyclic-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.modular-arithmetic funext
+open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.groups funext
-open import group-theory.semigroups funext
+open import group-theory.abelian-groups
+open import group-theory.groups
+open import group-theory.semigroups
 ```
 
 </details>

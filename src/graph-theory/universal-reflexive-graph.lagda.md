@@ -1,12 +1,7 @@
 # The universal reflexive graph
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.universal-reflexive-graph
-  (funext : function-extensionality)
-  where
+module graph-theory.universal-reflexive-graph where
 ```
 
 <details><summary>Imports</summary>
@@ -15,10 +10,10 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import graph-theory.dependent-directed-graphs funext
-open import graph-theory.dependent-reflexive-graphs funext
-open import graph-theory.directed-graphs funext
-open import graph-theory.reflexive-graphs funext
+open import graph-theory.dependent-directed-graphs
+open import graph-theory.dependent-reflexive-graphs
+open import graph-theory.directed-graphs
+open import graph-theory.reflexive-graphs
 ```
 
 </details>

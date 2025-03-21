@@ -1,12 +1,7 @@
 # Equality of premetric spaces
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  metric-spaces.equality-of-premetric-spaces
-  (funext : function-extensionality)
-  where
+module metric-spaces.equality-of-premetric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -14,23 +9,23 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types funext
-open import foundation.equivalences funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
-open import foundation.torsorial-type-families funext
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import metric-spaces.isometries-premetric-spaces funext
-open import metric-spaces.premetric-spaces funext
-open import metric-spaces.premetric-structures funext
+open import metric-spaces.isometries-premetric-spaces
+open import metric-spaces.premetric-spaces
+open import metric-spaces.premetric-structures
 ```
 
 </details>

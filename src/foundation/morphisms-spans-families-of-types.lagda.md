@@ -1,22 +1,17 @@
 # Morphisms of spans on families of types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.morphisms-spans-families-of-types
-  (funext : function-extensionality)
-  where
+module foundation.morphisms-spans-families-of-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-triangles-of-homotopies funext
+open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types funext
+open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction funext
+open import foundation.homotopy-induction
 open import foundation.spans-families-of-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels

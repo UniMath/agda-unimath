@@ -1,12 +1,7 @@
 # The weak limited principle of omniscience
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.weak-limited-principle-of-omniscience
-  (funext : function-extensionality)
-  where
+module foundation.weak-limited-principle-of-omniscience where
 ```
 
 <details><summary>Imports</summary>
@@ -14,13 +9,13 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.disjunction funext
-open import foundation.negation funext
-open import foundation.universal-quantification funext
+open import foundation.disjunction
+open import foundation.negation
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.booleans
-open import foundation-core.decidable-propositions funext
+open import foundation-core.decidable-propositions
 open import foundation-core.propositions
 open import foundation-core.sets
 ```

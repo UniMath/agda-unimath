@@ -1,22 +1,17 @@
 # The free ring with one generator
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.free-rings-with-one-generator
-  (funext : function-extensionality)
-  where
+module ring-theory.free-rings-with-one-generator where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.universe-levels
 
-open import ring-theory.homomorphisms-rings funext
-open import ring-theory.rings funext
+open import ring-theory.homomorphisms-rings
+open import ring-theory.rings
 ```
 
 </details>

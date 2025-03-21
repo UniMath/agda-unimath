@@ -3,12 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.relaxed-sigma-decompositions
-  (funext : function-extensionality)
-  where
+module foundation.relaxed-sigma-decompositions where
 ```
 
 <details><summary>Imports</summary>
@@ -16,14 +11,14 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types funext
-open import foundation.equivalence-extensionality funext
-open import foundation.equivalences funext
+open import foundation.dependent-products-contractible-types
+open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.structure-identity-principle
-open import foundation.transposition-identifications-along-equivalences funext
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

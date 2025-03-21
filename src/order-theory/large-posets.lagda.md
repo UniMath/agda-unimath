@@ -1,34 +1,29 @@
 # Large posets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.large-posets
-  (funext : function-extensionality)
-  where
+module order-theory.large-posets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-large-categories funext
-open import category-theory.isomorphisms-in-precategories funext
-open import category-theory.large-categories funext
-open import category-theory.large-precategories funext
-open import category-theory.precategories funext
+open import category-theory.isomorphisms-in-large-categories
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.large-categories
+open import category-theory.large-precategories
+open import category-theory.precategories
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.large-binary-relations funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.large-binary-relations
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 
-open import order-theory.large-preorders funext
-open import order-theory.posets funext
-open import order-theory.preorders funext
+open import order-theory.large-preorders
+open import order-theory.posets
+open import order-theory.preorders
 ```
 
 </details>

@@ -68,18 +68,13 @@ def modify_file_content(file_path, module_name, dependent_modules):
 
             # Add funext parameter to module declaration if needed
             if not has_funext_param:
-                # Extract module name and any existing parameters/declarations
-                module_name_match = re.match(r'^module\s+([^\s\(]+)', line)
-                if module_name_match:
-                    module_name = module_name_match.group(1)
-                    # Create multi-line declaration with indentation
-                    updated_lines.append("module")
-                    updated_lines.append("  " + module_name)
-                    updated_lines.append("  " + FUNEXT_PARAM)
-                    updated_lines.append("  where")
+                if "where" in line:
+                    # If there's a 'where' clause, put parameters before it
+                    updated_line = re.sub(r'(\s+where)', f" {FUNEXT_PARAM}\\1", line)
                 else:
-                    # Fallback if we can't parse the module name correctly
-                    updated_lines.append(line)
+                    # Otherwise, add at the end
+                    updated_line = line.rstrip() + f" {FUNEXT_PARAM} where"
+                updated_lines.append(updated_line)
             else:
                 updated_lines.append(line)
         else:

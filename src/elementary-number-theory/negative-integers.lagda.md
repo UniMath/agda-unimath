@@ -1,36 +1,31 @@
 # The negative integers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.negative-integers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.negative-integers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-integers funext
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-integers funext
+open import elementary-number-theory.nonzero-integers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
-open import foundation.decidable-subtypes funext
-open import foundation.decidable-types funext
+open import foundation.coproduct-types
+open import foundation.decidable-subtypes
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.retractions funext
-open import foundation.sections funext
-open import foundation.sets funext
-open import foundation.subtypes funext
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels

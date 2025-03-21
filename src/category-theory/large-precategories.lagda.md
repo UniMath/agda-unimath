@@ -1,26 +1,21 @@
 # Large precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.large-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.large-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories funext
+open import category-theory.precategories
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.sets funext
-open import foundation.strictly-involutive-identity-types funext
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 

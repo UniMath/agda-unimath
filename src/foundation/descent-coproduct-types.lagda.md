@@ -3,24 +3,19 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.descent-coproduct-types
-  (funext : function-extensionality)
-  where
+module foundation.descent-coproduct-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospan-diagrams funext
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.functoriality-coproduct-types funext
-open import foundation.functoriality-fibers-of-maps funext
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-fibers-of-maps
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation funext
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.coproduct-types
 open import foundation-core.equality-dependent-pair-types
@@ -29,7 +24,7 @@ open import foundation-core.families-of-equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.pullbacks funext
+open import foundation-core.pullbacks
 ```
 
 </details>

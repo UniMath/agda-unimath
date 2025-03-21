@@ -1,27 +1,22 @@
 # Extensions of types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.extensions-types
-  (funext : function-extensionality)
-  where
+module foundation.extensions-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-triangles-of-maps funext
+open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
-open import foundation.univalence funext
+open import foundation.torsorial-type-families
+open import foundation.univalence
 open import foundation.universe-levels
 ```
 

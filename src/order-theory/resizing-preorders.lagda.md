@@ -1,32 +1,27 @@
 # Resizing preorders
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.resizing-preorders
-  (funext : function-extensionality)
-  where
+module order-theory.resizing-preorders where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations funext
-open import foundation.cartesian-product-types funext
+open import foundation.binary-relations
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.small-types funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.negated-equality
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
+open import foundation.small-types
 open import foundation.universe-levels
 
-open import order-theory.order-preserving-maps-preorders funext
-open import order-theory.preorders funext
+open import order-theory.order-preserving-maps-preorders
+open import order-theory.preorders
 ```
 
 </details>

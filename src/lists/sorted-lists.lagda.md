@@ -1,12 +1,7 @@
 # Sorted lists
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  lists.sorted-lists
-  (funext : function-extensionality)
-  where
+module lists.sorted-lists where
 ```
 
 <details><summary>Imports</summary>
@@ -15,18 +10,18 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.propositions funext
-open import foundation.raising-universe-levels-unit-type funext
+open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.vectors funext
+open import linear-algebra.vectors
 
-open import lists.arrays funext
+open import lists.arrays
 open import lists.lists
-open import lists.sorted-vectors funext
+open import lists.sorted-vectors
 
-open import order-theory.decidable-total-orders funext
+open import order-theory.decidable-total-orders
 ```
 
 </details>

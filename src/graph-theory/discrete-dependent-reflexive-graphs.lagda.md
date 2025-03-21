@@ -1,23 +1,18 @@
 # Discrete dependent reflexive graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.discrete-dependent-reflexive-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.discrete-dependent-reflexive-graphs where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions funext
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import graph-theory.dependent-reflexive-graphs funext
-open import graph-theory.discrete-reflexive-graphs funext
-open import graph-theory.reflexive-graphs funext
+open import graph-theory.dependent-reflexive-graphs
+open import graph-theory.discrete-reflexive-graphs
+open import graph-theory.reflexive-graphs
 ```
 
 </details>

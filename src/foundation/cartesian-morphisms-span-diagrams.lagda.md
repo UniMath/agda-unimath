@@ -1,24 +1,19 @@
 # Cartesian morphisms of span diagrams
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.cartesian-morphisms-span-diagrams
-  (funext : function-extensionality)
-  where
+module foundation.cartesian-morphisms-span-diagrams where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-morphisms-arrows funext
-open import foundation.cartesian-product-types funext
-open import foundation.commuting-squares-of-maps funext
+open import foundation.cartesian-morphisms-arrows
+open import foundation.cartesian-product-types
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.morphisms-arrows funext
-open import foundation.morphisms-span-diagrams funext
-open import foundation.span-diagrams funext
+open import foundation.morphisms-arrows
+open import foundation.morphisms-span-diagrams
+open import foundation.span-diagrams
 open import foundation.universe-levels
 ```
 

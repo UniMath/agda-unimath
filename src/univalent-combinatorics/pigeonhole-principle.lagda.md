@@ -1,44 +1,39 @@
 # The pigeonhole principle
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.pigeonhole-principle
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.pigeonhole-principle where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers funext
+open import elementary-number-theory.strict-inequality-natural-numbers
 
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.empty-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
-open import foundation.pairs-of-distinct-elements funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negated-equality
+open import foundation.negation
+open import foundation.pairs-of-distinct-elements
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.embeddings-standard-finite-types funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.repetitions-of-values funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.embeddings-standard-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.repetitions-of-values
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

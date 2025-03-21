@@ -1,12 +1,7 @@
 # Rooted undirected trees
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.rooted-undirected-trees
-  (funext : function-extensionality)
-  where
+module trees.rooted-undirected-trees where
 ```
 
 <details><summary>Imports</summary>
@@ -14,16 +9,16 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.unordered-pairs funext
+open import foundation.unordered-pairs
 
-open import graph-theory.trails-undirected-graphs funext
-open import graph-theory.undirected-graphs funext
+open import graph-theory.trails-undirected-graphs
+open import graph-theory.undirected-graphs
 
-open import trees.undirected-trees funext
+open import trees.undirected-trees
 ```
 
 </details>

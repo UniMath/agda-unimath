@@ -1,12 +1,7 @@
 # De Morgan maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  logic.de-morgan-maps
-  (funext : function-extensionality)
-  where
+module logic.de-morgan-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -15,28 +10,28 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-morphisms-arrows funext
-open import foundation.coproduct-types funext
-open import foundation.decidable-equality funext
-open import foundation.decidable-maps funext
-open import foundation.decidable-types funext
+open import foundation.cartesian-morphisms-arrows
+open import foundation.coproduct-types
+open import foundation.decidable-equality
+open import foundation.decidable-maps
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.double-negation funext
-open import foundation.embeddings funext
-open import foundation.empty-types funext
-open import foundation.existential-quantification funext
-open import foundation.functoriality-cartesian-product-types funext
-open import foundation.functoriality-coproduct-types funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.negation funext
-open import foundation.propositions funext
-open import foundation.retractions funext
-open import foundation.retracts-of-maps funext
-open import foundation.retracts-of-types funext
+open import foundation.double-negation
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.existential-quantification
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negation
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.retracts-of-maps
+open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.unit-type
-open import foundation.universal-property-equivalences funext
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
@@ -46,10 +41,10 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 
-open import logic.de-morgan-types funext
-open import logic.de-morgans-law funext
-open import logic.double-negation-eliminating-maps funext
-open import logic.double-negation-elimination funext
+open import logic.de-morgan-types
+open import logic.de-morgans-law
+open import logic.double-negation-eliminating-maps
+open import logic.double-negation-elimination
 ```
 
 </details>

@@ -1,26 +1,21 @@
 # Exponents of groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.exponents-groups
-  (funext : function-extensionality)
-  where
+module group-theory.exponents-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.group-of-integers funext
+open import elementary-number-theory.group-of-integers
 
 open import foundation.universe-levels
 
-open import group-theory.free-groups-with-one-generator funext
-open import group-theory.groups funext
-open import group-theory.intersections-subgroups-groups funext
-open import group-theory.kernels-homomorphisms-groups funext
-open import group-theory.subgroups funext
+open import group-theory.free-groups-with-one-generator
+open import group-theory.groups
+open import group-theory.intersections-subgroups-groups
+open import group-theory.kernels-homomorphisms-groups
+open import group-theory.subgroups
 ```
 
 </details>

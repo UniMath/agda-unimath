@@ -1,42 +1,37 @@
 # Pisano periods
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.pisano-periods
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.pisano-periods where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers funext
-open import elementary-number-theory.fibonacci-sequence funext
-open import elementary-number-theory.inequality-natural-numbers funext
-open import elementary-number-theory.lower-bounds-natural-numbers funext
-open import elementary-number-theory.modular-arithmetic-standard-finite-types funext
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.fibonacci-sequence
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers funext
-open import elementary-number-theory.well-ordering-principle-natural-numbers funext
+open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.repetitions-sequences funext
-open import foundation.sets funext
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.repetitions-sequences
+open import foundation.sets
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cartesian-product-types funext
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.sequences-finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.sequences-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

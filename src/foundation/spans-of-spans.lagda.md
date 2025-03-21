@@ -1,20 +1,15 @@
 # Spans of spans
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.spans-of-spans
-  (funext : function-extensionality)
-  where
+module foundation.spans-of-spans where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps funext
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.homotopies funext
+open import foundation.homotopies
 open import foundation.spans
 open import foundation.universe-levels
 

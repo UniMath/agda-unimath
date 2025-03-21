@@ -3,36 +3,31 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.set-truncations
-  (funext : function-extensionality)
-  where
+module foundation.set-truncations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.effective-maps-equivalence-relations funext
-open import foundation.equality-coproduct-types funext
-open import foundation.functoriality-cartesian-product-types funext
-open import foundation.functoriality-coproduct-types funext
-open import foundation.mere-equality funext
-open import foundation.postcomposition-functions funext
-open import foundation.reflecting-maps-equivalence-relations funext
-open import foundation.sets funext
-open import foundation.slice funext
-open import foundation.surjective-maps funext
-open import foundation.truncations funext
-open import foundation.uniqueness-set-truncations funext
+open import foundation.effective-maps-equivalence-relations
+open import foundation.equality-coproduct-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
+open import foundation.mere-equality
+open import foundation.postcomposition-functions
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
+open import foundation.slice
+open import foundation.surjective-maps
+open import foundation.truncations
+open import foundation.uniqueness-set-truncations
 open import foundation.unit-type
-open import foundation.universal-property-coproduct-types funext
-open import foundation.universal-property-dependent-pair-types funext
-open import foundation.universal-property-image funext
-open import foundation.universal-property-set-quotients funext
-open import foundation.universal-property-set-truncation funext
+open import foundation.universal-property-coproduct-types
+open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-image
+open import foundation.universal-property-set-quotients
+open import foundation.universal-property-set-truncation
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -42,7 +37,7 @@ open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types funext
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

@@ -3,24 +3,19 @@
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  modal-type-theory.action-on-homotopies-flat-modality
-  (funext : function-extensionality)
-  where
+module modal-type-theory.action-on-homotopies-flat-modality where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.homotopies funext
-open import foundation.identity-types funext
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import modal-type-theory.action-on-identifications-flat-modality funext
-open import modal-type-theory.flat-modality funext
-open import modal-type-theory.functoriality-flat-modality funext
+open import modal-type-theory.action-on-identifications-flat-modality
+open import modal-type-theory.flat-modality
+open import modal-type-theory.functoriality-flat-modality
 ```
 
 </details>

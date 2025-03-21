@@ -1,23 +1,18 @@
 # Anafunctors between categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.anafunctors-categories
-  (funext : function-extensionality)
-  where
+module category-theory.anafunctors-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.anafunctors-precategories funext
-open import category-theory.categories funext
-open import category-theory.functors-categories funext
+open import category-theory.anafunctors-precategories
+open import category-theory.categories
+open import category-theory.functors-categories
 
 open import foundation.dependent-pair-types
-open import foundation.propositional-truncations funext
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 ```
 

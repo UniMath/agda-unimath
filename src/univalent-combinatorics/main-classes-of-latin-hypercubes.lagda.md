@@ -1,12 +1,7 @@
 # The groupoid of main classes of Latin hypercubes
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.main-classes-of-latin-hypercubes
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.main-classes-of-latin-hypercubes where
 ```
 
 <details><summary>Imports</summary>
@@ -14,24 +9,24 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.1-types funext
-open import foundation.contractible-types funext
-open import foundation.decidable-propositions funext
+open import foundation.1-types
+open import foundation.contractible-types
+open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
-open import foundation.inhabited-types funext
-open import foundation.mere-equivalences funext
-open import foundation.products-unordered-tuples-of-types funext
-open import foundation.set-truncations funext
+open import foundation.inhabited-types
+open import foundation.mere-equivalences
+open import foundation.products-unordered-tuples-of-types
+open import foundation.set-truncations
 open import foundation.universe-levels
-open import foundation.unordered-tuples funext
+open import foundation.unordered-tuples
 
-open import univalent-combinatorics.complements-isolated-elements funext
-open import univalent-combinatorics.decidable-subtypes funext
-open import univalent-combinatorics.dependent-function-types funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.pi-finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
-open import univalent-combinatorics.untruncated-pi-finite-types funext
+open import univalent-combinatorics.complements-isolated-elements
+open import univalent-combinatorics.decidable-subtypes
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.pi-finite-types
+open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
 </details>

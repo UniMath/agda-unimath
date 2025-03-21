@@ -1,12 +1,7 @@
 # Functoriality of dependent pair types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.functoriality-dependent-pair-types
-  (funext : function-extensionality)
-  where
+module foundation.functoriality-dependent-pair-types where
 
 open import foundation-core.functoriality-dependent-pair-types public
 ```
@@ -17,10 +12,10 @@ open import foundation-core.functoriality-dependent-pair-types public
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-homotopies
 open import foundation.dependent-pair-types
-open import foundation.morphisms-arrows funext
+open import foundation.morphisms-arrows
 open import foundation.universe-levels
 
-open import foundation-core.commuting-squares-of-maps funext
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-identifications
@@ -33,7 +28,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.transport-along-identifications
-open import foundation-core.truncated-maps funext
+open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

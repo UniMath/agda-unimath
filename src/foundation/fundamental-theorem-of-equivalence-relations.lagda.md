@@ -1,33 +1,28 @@
 # Fundamental theorem of equivalence relations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.fundamental-theorem-of-equivalence-relations
-  (funext : function-extensionality)
-  where
+module foundation.fundamental-theorem-of-equivalence-relations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.equivalence-classes funext
-open import foundation.full-subtypes funext
-open import foundation.inhabited-subtypes funext
-open import foundation.logical-equivalences funext
-open import foundation.partitions funext
-open import foundation.propositional-truncations funext
-open import foundation.subtypes funext
+open import foundation.equivalence-classes
+open import foundation.full-subtypes
+open import foundation.inhabited-subtypes
+open import foundation.logical-equivalences
+open import foundation.partitions
+open import foundation.propositional-truncations
+open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.equivalence-relations funext
+open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types

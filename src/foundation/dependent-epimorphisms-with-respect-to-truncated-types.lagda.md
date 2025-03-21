@@ -1,18 +1,13 @@
 # Dependent epimorphisms with respect to truncated types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.dependent-epimorphisms-with-respect-to-truncated-types
-  (funext : function-extensionality)
-  where
+module foundation.dependent-epimorphisms-with-respect-to-truncated-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.epimorphisms-with-respect-to-truncated-types funext
+open import foundation.epimorphisms-with-respect-to-truncated-types
 open import foundation.universe-levels
 
 open import foundation-core.embeddings

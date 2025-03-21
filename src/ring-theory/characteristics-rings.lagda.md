@@ -1,24 +1,19 @@
 # Characteristics of rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.characteristics-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.characteristics-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.ring-of-integers funext
+open import elementary-number-theory.ring-of-integers
 
 open import foundation.universe-levels
 
-open import ring-theory.ideals-rings funext
-open import ring-theory.kernels-of-ring-homomorphisms funext
-open import ring-theory.rings funext
+open import ring-theory.ideals-rings
+open import ring-theory.kernels-of-ring-homomorphisms
+open import ring-theory.rings
 ```
 
 </details>

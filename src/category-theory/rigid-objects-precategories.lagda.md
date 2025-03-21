@@ -1,23 +1,18 @@
 # Rigid objects in a precategory
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.rigid-objects-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.rigid-objects-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-precategories funext
-open import category-theory.precategories funext
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.precategories
 
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.propositions funext
+open import foundation.propositions
 open import foundation.universe-levels
 ```
 

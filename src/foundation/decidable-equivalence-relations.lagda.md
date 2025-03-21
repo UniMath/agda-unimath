@@ -1,43 +1,37 @@
 # Decidable equivalence relations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.decidable-equivalence-relations
-  (funext : function-extensionality)
-  where
+module foundation.decidable-equivalence-relations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations funext
-open import foundation.decidable-equality funext
-open import foundation.decidable-propositions funext
-open import foundation.decidable-relations funext
-open import foundation.decidable-subtypes funext
-open import foundation.decidable-types funext
+open import foundation.binary-relations
+open import foundation.decidable-equality
+open import foundation.decidable-propositions
+open import foundation.decidable-relations
+open import foundation.decidable-subtypes
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.effective-maps-equivalence-relations funext
-open import foundation.equivalence-classes funext
-open import foundation.equivalence-relations funext
-open import foundation.existential-quantification funext
-open import foundation.function-extensionality funext
-
-open import foundation.functoriality-cartesian-product-types funext
+open import foundation.dependent-products-propositions
+open import foundation.effective-maps-equivalence-relations
+open import foundation.equivalence-classes
+open import foundation.equivalence-relations
+open import foundation.existential-quantification
+open import foundation.function-extensionality
+open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.images funext
-open import foundation.logical-equivalences funext
-open import foundation.propositional-truncations funext
-open import foundation.reflecting-maps-equivalence-relations funext
-open import foundation.sets funext
-open import foundation.slice funext
-open import foundation.surjective-maps funext
+open import foundation.images
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
+open import foundation.slice
+open import foundation.surjective-maps
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.universal-property-image funext
+open import foundation.universal-property-image
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -50,7 +44,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 ```

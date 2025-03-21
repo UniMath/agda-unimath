@@ -1,31 +1,26 @@
 # Strict inequality on the standard finite types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.strict-inequality-standard-finite-types
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.strict-inequality-standard-finite-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
-open import foundation.empty-types funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.coproduct-types
+open import foundation.empty-types
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

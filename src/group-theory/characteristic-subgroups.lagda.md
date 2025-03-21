@@ -1,24 +1,19 @@
 # Characteristic subgroups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.characteristic-subgroups
-  (funext : function-extensionality)
-  where
+module group-theory.characteristic-subgroups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions funext
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import group-theory.groups funext
-open import group-theory.images-of-group-homomorphisms funext
-open import group-theory.isomorphisms-groups funext
-open import group-theory.subgroups funext
+open import group-theory.groups
+open import group-theory.images-of-group-homomorphisms
+open import group-theory.isomorphisms-groups
+open import group-theory.subgroups
 ```
 
 </details>

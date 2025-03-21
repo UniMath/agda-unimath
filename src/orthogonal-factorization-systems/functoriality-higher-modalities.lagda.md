@@ -1,12 +1,7 @@
 # Functoriality of higher modalities
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.functoriality-higher-modalities
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.functoriality-higher-modalities where
 ```
 
 <details><summary>Imports</summary>
@@ -14,22 +9,21 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.path-algebra funext
-open import foundation.small-types funext
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.path-algebra
+open import foundation.small-types
 open import foundation.transport-along-identifications
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation funext
+open import foundation.whiskering-identifications-concatenation
 
-open import orthogonal-factorization-systems.higher-modalities funext
-open import orthogonal-factorization-systems.modal-induction funext
-open import orthogonal-factorization-systems.modal-operators funext
-open import orthogonal-factorization-systems.modal-subuniverse-induction funext
+open import orthogonal-factorization-systems.higher-modalities
+open import orthogonal-factorization-systems.modal-induction
+open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.modal-subuniverse-induction
 ```
 
 </details>

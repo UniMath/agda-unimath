@@ -1,23 +1,18 @@
 # Morphisms of dependent directed graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.morphisms-dependent-directed-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.morphisms-dependent-directed-graphs where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
+open import foundation.function-types
 open import foundation.universe-levels
 
-open import graph-theory.dependent-directed-graphs funext
-open import graph-theory.directed-graphs funext
+open import graph-theory.dependent-directed-graphs
+open import graph-theory.directed-graphs
 ```
 
 </details>

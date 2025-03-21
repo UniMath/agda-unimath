@@ -1,29 +1,24 @@
 # Groups of loops in `1`-types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.groups-of-loops-in-1-types
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.groups-of-loops-in-1-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.1-types funext
+open import foundation.1-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.groups funext
-open import group-theory.semigroups funext
+open import group-theory.groups
+open import group-theory.semigroups
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces funext
+open import synthetic-homotopy-theory.loop-spaces
 ```
 
 </details>

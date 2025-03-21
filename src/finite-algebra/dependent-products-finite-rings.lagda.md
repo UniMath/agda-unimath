@@ -1,36 +1,31 @@
 # Dependent products of finite rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  finite-algebra.dependent-products-finite-rings
-  (funext : function-extensionality)
-  where
+module finite-algebra.dependent-products-finite-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-algebra.finite-rings funext
+open import finite-algebra.finite-rings
 
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.sets funext
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.groups funext
-open import group-theory.monoids funext
-open import group-theory.semigroups funext
+open import group-theory.abelian-groups
+open import group-theory.groups
+open import group-theory.monoids
+open import group-theory.semigroups
 
-open import ring-theory.dependent-products-rings funext
-open import ring-theory.rings funext
-open import ring-theory.semirings funext
+open import ring-theory.dependent-products-rings
+open import ring-theory.rings
+open import ring-theory.semirings
 
-open import univalent-combinatorics.dependent-function-types funext
-open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

@@ -1,23 +1,18 @@
 # Sequentially compact types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.sequentially-compact-types
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.sequentially-compact-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions funext
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext
-open import synthetic-homotopy-theory.sequential-diagrams funext
-open import synthetic-homotopy-theory.universal-property-sequential-colimits funext
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
+open import synthetic-homotopy-theory.sequential-diagrams
+open import synthetic-homotopy-theory.universal-property-sequential-colimits
 ```
 
 </details>

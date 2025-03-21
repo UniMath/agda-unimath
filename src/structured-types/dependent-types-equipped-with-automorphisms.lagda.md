@@ -1,32 +1,27 @@
 # Dependent types equipped with automorphisms
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.dependent-types-equipped-with-automorphisms
-  (funext : function-extensionality)
-  where
+module structured-types.dependent-types-equipped-with-automorphisms where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps funext
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types funext
-open import foundation.equivalence-extensionality funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
+open import foundation.equality-dependent-function-types
+open import foundation.equivalence-extensionality
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.identity-types funext
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
-open import foundation.univalence funext
+open import foundation.torsorial-type-families
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import structured-types.types-equipped-with-automorphisms funext
+open import structured-types.types-equipped-with-automorphisms
 ```
 
 </details>

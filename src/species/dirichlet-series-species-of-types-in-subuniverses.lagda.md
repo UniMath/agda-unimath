@@ -1,23 +1,18 @@
 # Dirichlet series of species of types in subuniverses
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  species.dirichlet-series-species-of-types-in-subuniverses
-  (funext : function-extensionality)
-  where
+module species.dirichlet-series-species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.subuniverses funext
+open import foundation.subuniverses
 open import foundation.universe-levels
 
-open import species.species-of-types-in-subuniverses funext
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>

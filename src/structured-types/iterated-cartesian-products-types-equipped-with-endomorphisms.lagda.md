@@ -13,8 +13,8 @@ open import foundation.universe-levels
 
 open import lists.lists
 
-open import structured-types.cartesian-products-types-equipped-with-endomorphisms funext
-open import structured-types.types-equipped-with-endomorphisms funext
+open import structured-types.cartesian-products-types-equipped-with-endomorphisms
+open import structured-types.types-equipped-with-endomorphisms
 ```
 
 </details>

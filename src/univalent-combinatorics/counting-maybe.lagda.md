@@ -1,12 +1,7 @@
 # Counting the elements in Maybe
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.counting-maybe
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.counting-maybe where
 ```
 
 <details><summary>Imports</summary>
@@ -15,14 +10,14 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences-maybe funext
+open import foundation.equivalences-maybe
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
 open import foundation-core.maybe
 
-open import univalent-combinatorics.coproduct-types funext
-open import univalent-combinatorics.counting funext
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
 ```
 
 </details>

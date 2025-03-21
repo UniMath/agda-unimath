@@ -1,23 +1,18 @@
 # Terminal objects in a precategory
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.terminal-objects-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.terminal-objects-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories funext
+open import category-theory.precategories
 
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.identity-types funext
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.universe-levels
 ```
 

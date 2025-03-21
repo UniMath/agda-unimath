@@ -1,12 +1,7 @@
 # Repetitions of values of maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.repetitions-of-values
-  (funext : function-extensionality)
-  where
+module foundation.repetitions-of-values where
 ```
 
 <details><summary>Imports</summary>
@@ -14,14 +9,14 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.negated-equality funext
-open import foundation.pairs-of-distinct-elements funext
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.negated-equality
+open import foundation.pairs-of-distinct-elements
 open import foundation.universe-levels
 
-open import foundation-core.commuting-squares-of-maps funext
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies

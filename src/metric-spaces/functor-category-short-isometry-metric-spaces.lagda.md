@@ -1,29 +1,24 @@
 # The inclusion of isometries into the category of metric spaces and short maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  metric-spaces.functor-category-short-isometry-metric-spaces
-  (funext : function-extensionality)
-  where
+module metric-spaces.functor-category-short-isometry-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.conservative-functors-precategories funext
-open import category-theory.faithful-functors-precategories funext
-open import category-theory.functors-precategories funext
+open import category-theory.conservative-functors-precategories
+open import category-theory.faithful-functors-precategories
+open import category-theory.functors-precategories
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.identity-types funext
+open import foundation.equivalences
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import metric-spaces.precategory-of-metric-spaces-and-isometries funext
-open import metric-spaces.precategory-of-metric-spaces-and-short-functions funext
-open import metric-spaces.short-functions-metric-spaces funext
+open import metric-spaces.precategory-of-metric-spaces-and-isometries
+open import metric-spaces.precategory-of-metric-spaces-and-short-functions
+open import metric-spaces.short-functions-metric-spaces
 ```
 
 </details>

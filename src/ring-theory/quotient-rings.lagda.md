@@ -1,12 +1,7 @@
 # Quotient rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.quotient-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.quotient-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -14,13 +9,13 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.identity-types funext
+open import foundation.equivalences
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import ring-theory.homomorphisms-rings funext
-open import ring-theory.ideals-rings funext
-open import ring-theory.rings funext
+open import ring-theory.homomorphisms-rings
+open import ring-theory.ideals-rings
+open import ring-theory.rings
 ```
 
 </details>

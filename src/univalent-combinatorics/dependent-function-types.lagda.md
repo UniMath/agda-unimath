@@ -1,12 +1,7 @@
 # Counting the elements of dependent function types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.dependent-function-types
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.dependent-function-types where
 ```
 
 <details><summary>Imports</summary>
@@ -14,28 +9,28 @@ module
 ```agda
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.products-of-natural-numbers funext
+open import elementary-number-theory.products-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositional-truncations funext
+open import foundation.dependent-universal-property-equivalences
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.unit-type
-open import foundation.universal-property-coproduct-types funext
-open import foundation.universal-property-empty-type funext
-open import foundation.universal-property-unit-type funext
+open import foundation.universal-property-coproduct-types
+open import foundation.universal-property-empty-type
+open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cartesian-product-types funext
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.finite-choice funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-choice
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

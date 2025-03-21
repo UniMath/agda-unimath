@@ -1,26 +1,21 @@
 # Null families of types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.null-families-of-types
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.null-families-of-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.precomposition-functions funext
-open import foundation.propositions funext
-open import foundation.retracts-of-types funext
+open import foundation.equivalences
+open import foundation.precomposition-functions
+open import foundation.propositions
+open import foundation.retracts-of-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.null-types funext
-open import orthogonal-factorization-systems.orthogonal-maps funext
+open import orthogonal-factorization-systems.null-types
+open import orthogonal-factorization-systems.orthogonal-maps
 ```
 
 </details>

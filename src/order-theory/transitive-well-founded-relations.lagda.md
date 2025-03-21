@@ -1,23 +1,18 @@
 # Transitive well-founded relations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.transitive-well-founded-relations
-  (funext : function-extensionality)
-  where
+module order-theory.transitive-well-founded-relations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations funext
-open import foundation.cartesian-product-types funext
+open import foundation.binary-relations
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import order-theory.well-founded-relations funext
+open import order-theory.well-founded-relations
 ```
 
 </details>

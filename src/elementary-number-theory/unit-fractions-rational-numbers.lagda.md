@@ -3,36 +3,31 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.unit-fractions-rational-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.unit-fractions-rational-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.archimedean-property-positive-rational-numbers funext
-open import elementary-number-theory.inequality-integers funext
-open import elementary-number-theory.inequality-rational-numbers funext
+open import elementary-number-theory.archimedean-property-positive-rational-numbers
+open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers funext
-open import elementary-number-theory.multiplication-rational-numbers funext
-open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers funext
-open import elementary-number-theory.nonzero-natural-numbers funext
-open import elementary-number-theory.positive-rational-numbers funext
-open import elementary-number-theory.rational-numbers funext
-open import elementary-number-theory.strict-inequality-integers funext
-open import elementary-number-theory.strict-inequality-rational-numbers funext
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
+open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-integers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-pair-types funext
+open import foundation.functoriality-dependent-pair-types
 
-open import group-theory.groups funext
+open import group-theory.groups
 ```
 
 </details>

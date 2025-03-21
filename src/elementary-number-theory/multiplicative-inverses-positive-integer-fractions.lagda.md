@@ -1,27 +1,22 @@
 # Multiplicative inverses of positive integer fractions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.multiplicative-inverses-positive-integer-fractions
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.multiplicative-inverses-positive-integer-fractions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.greatest-common-divisor-integers funext
-open import elementary-number-theory.integer-fractions funext
+open import elementary-number-theory.greatest-common-divisor-integers
+open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integer-fractions funext
-open import elementary-number-theory.multiplication-integers funext
-open import elementary-number-theory.positive-integer-fractions funext
-open import elementary-number-theory.reduced-integer-fractions funext
+open import elementary-number-theory.multiplication-integer-fractions
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.positive-integer-fractions
+open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.transport-along-identifications
 ```
 

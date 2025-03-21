@@ -1,20 +1,15 @@
 # Commuting squares of morphisms in set-magmoids
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.commuting-squares-of-morphisms-in-set-magmoids
-  (funext : function-extensionality)
-  where
+module category-theory.commuting-squares-of-morphisms-in-set-magmoids where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.set-magmoids funext
+open import category-theory.set-magmoids
 
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 ```
 

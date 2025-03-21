@@ -1,38 +1,32 @@
 # Dependent suspension structures
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.dependent-suspension-structures
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.dependent-suspension-structures where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-identifications funext
-open import foundation.constant-maps funext
-open import foundation.dependent-identifications funext
+open import foundation.commuting-squares-of-identifications
+open import foundation.constant-maps
+open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.unit-type
-open import foundation.universal-property-unit-type funext
+open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.dependent-cocones-under-spans funext
-open import synthetic-homotopy-theory.suspension-structures funext
+open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.suspension-structures
 ```
 
 </details>

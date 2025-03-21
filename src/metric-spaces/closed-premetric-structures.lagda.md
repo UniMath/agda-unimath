@@ -1,47 +1,41 @@
 # Closed premetric structures
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  metric-spaces.closed-premetric-structures
-  (funext : function-extensionality)
-  where
+module metric-spaces.closed-premetric-structures where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers funext
-open import elementary-number-theory.positive-rational-numbers funext
-open import elementary-number-theory.strict-inequality-rational-numbers funext
+open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositional-extensionality funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.subtypes funext
-open import foundation.torsorial-type-families funext
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositional-extensionality
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import metric-spaces.extensional-premetric-structures funext
-open import metric-spaces.monotonic-premetric-structures funext
-open import metric-spaces.ordering-premetric-structures funext
-open import metric-spaces.premetric-structures funext
-open import metric-spaces.reflexive-premetric-structures funext
-open import metric-spaces.symmetric-premetric-structures funext
-open import metric-spaces.triangular-premetric-structures funext
+open import metric-spaces.extensional-premetric-structures
+open import metric-spaces.monotonic-premetric-structures
+open import metric-spaces.ordering-premetric-structures
+open import metric-spaces.premetric-structures
+open import metric-spaces.reflexive-premetric-structures
+open import metric-spaces.symmetric-premetric-structures
+open import metric-spaces.triangular-premetric-structures
 ```
 
 </details>

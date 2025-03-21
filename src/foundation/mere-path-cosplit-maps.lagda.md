@@ -1,12 +1,7 @@
 # Mere path-cosplit maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.mere-path-cosplit-maps
-  (funext : function-extensionality)
-  where
+module foundation.mere-path-cosplit-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -14,13 +9,13 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.equivalences-arrows funext
-open import foundation.inhabited-types funext
-open import foundation.iterated-dependent-product-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositional-truncations funext
-open import foundation.truncated-maps funext
+open import foundation.dependent-products-propositions
+open import foundation.equivalences-arrows
+open import foundation.inhabited-types
+open import foundation.iterated-dependent-product-types
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
+open import foundation.truncated-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
 

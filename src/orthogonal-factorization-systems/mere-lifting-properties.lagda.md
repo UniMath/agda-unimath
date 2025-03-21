@@ -1,22 +1,17 @@
 # Mere lifting properties
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.mere-lifting-properties
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.mere-lifting-properties where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions funext
-open import foundation.surjective-maps funext
+open import foundation.propositions
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.pullback-hom funext
+open import orthogonal-factorization-systems.pullback-hom
 ```
 
 </details>

@@ -1,28 +1,23 @@
 # Powers of elements in commutative rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.powers-of-elements-commutative-rings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.powers-of-elements-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.parity-natural-numbers funext
+open import elementary-number-theory.parity-natural-numbers
 
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import ring-theory.powers-of-elements-rings funext
+open import ring-theory.powers-of-elements-rings
 ```
 
 </details>

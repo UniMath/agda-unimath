@@ -1,23 +1,18 @@
 # Radical ideals of rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.radical-ideals-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.radical-ideals-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions funext
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import ring-theory.ideals-rings funext
-open import ring-theory.invertible-elements-rings funext
-open import ring-theory.rings funext
+open import ring-theory.ideals-rings
+open import ring-theory.invertible-elements-rings
+open import ring-theory.rings
 ```
 
 </details>

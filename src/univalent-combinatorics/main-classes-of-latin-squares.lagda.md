@@ -1,12 +1,7 @@
 # The groupoid of main classes of Latin squares
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.main-classes-of-latin-squares
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.main-classes-of-latin-squares where
 ```
 
 <details><summary>Imports</summary>
@@ -14,15 +9,15 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.1-types funext
-open import foundation.mere-equivalences funext
-open import foundation.set-truncations funext
+open import foundation.1-types
+open import foundation.mere-equivalences
+open import foundation.set-truncations
 open import foundation.universe-levels
 
-open import univalent-combinatorics.main-classes-of-latin-hypercubes funext
-open import univalent-combinatorics.pi-finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
-open import univalent-combinatorics.untruncated-pi-finite-types funext
+open import univalent-combinatorics.main-classes-of-latin-hypercubes
+open import univalent-combinatorics.pi-finite-types
+open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
 </details>

@@ -3,39 +3,34 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.quotients-abelian-groups
-  (funext : function-extensionality)
-  where
+module group-theory.quotients-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-functoriality-set-quotients funext
+open import foundation.binary-functoriality-set-quotients
 open import foundation.dependent-pair-types
-open import foundation.effective-maps-equivalence-relations funext
-open import foundation.equivalences funext
-open import foundation.functoriality-set-quotients funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.reflecting-maps-equivalence-relations funext
-open import foundation.set-quotients funext
-open import foundation.sets funext
-open import foundation.surjective-maps funext
-open import foundation.universal-property-set-quotients funext
+open import foundation.effective-maps-equivalence-relations
+open import foundation.equivalences
+open import foundation.functoriality-set-quotients
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.set-quotients
+open import foundation.sets
+open import foundation.surjective-maps
+open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-abelian-groups funext
-open import group-theory.nullifying-group-homomorphisms funext
-open import group-theory.quotient-groups funext
-open import group-theory.semigroups funext
-open import group-theory.subgroups-abelian-groups funext
+open import group-theory.abelian-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.nullifying-group-homomorphisms
+open import group-theory.quotient-groups
+open import group-theory.semigroups
+open import group-theory.subgroups-abelian-groups
 ```
 
 </details>

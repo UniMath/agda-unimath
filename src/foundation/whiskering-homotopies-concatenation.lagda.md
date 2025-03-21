@@ -1,12 +1,7 @@
 # Whiskering homotopies with respect to concatenation
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.whiskering-homotopies-concatenation
-  (funext : function-extensionality)
-  where
+module foundation.whiskering-homotopies-concatenation where
 
 open import foundation-core.whiskering-homotopies-concatenation public
 ```
@@ -15,10 +10,10 @@ open import foundation-core.whiskering-homotopies-concatenation public
 
 ```agda
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation funext
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.equivalences
-open import foundation-core.functoriality-dependent-function-types funext
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
 ```
 

@@ -1,26 +1,21 @@
 # Principal upper sets of large posets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.principal-upper-sets-large-posets
-  (funext : function-extensionality)
-  where
+module order-theory.principal-upper-sets-large-posets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
+open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.universe-levels
 
-open import order-theory.large-posets funext
-open import order-theory.large-subposets funext
-open import order-theory.large-subpreorders funext
-open import order-theory.similarity-of-elements-large-posets funext
+open import order-theory.large-posets
+open import order-theory.large-subposets
+open import order-theory.large-subpreorders
+open import order-theory.similarity-of-elements-large-posets
 ```
 
 </details>

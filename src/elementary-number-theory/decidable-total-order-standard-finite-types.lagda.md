@@ -1,26 +1,21 @@
 # The decidable total order of a standard finite type
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.decidable-total-order-standard-finite-types
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.decidable-total-order-standard-finite-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-standard-finite-types funext
+open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.propositional-truncations funext
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
-open import order-theory.decidable-total-orders funext
-open import order-theory.total-orders funext
+open import order-theory.decidable-total-orders
+open import order-theory.total-orders
 ```
 
 </details>

@@ -1,28 +1,23 @@
 # Species of types in subuniverses
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  species.species-of-types-in-subuniverses
-  (funext : function-extensionality)
-  where
+module species.species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.propositions funext
-open import foundation.subuniverses funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.propositions
+open import foundation.subuniverses
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import species.species-of-types funext
+open import species.species-of-types
 ```
 
 </details>

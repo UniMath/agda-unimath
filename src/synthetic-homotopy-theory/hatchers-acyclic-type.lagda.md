@@ -1,12 +1,7 @@
 # Hatcher's acyclic type
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.hatchers-acyclic-type
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.hatchers-acyclic-type where
 ```
 
 <details><summary>Imports</summary>
@@ -14,33 +9,33 @@ module
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
-open import foundation.commuting-squares-of-identifications funext
-open import foundation.contractible-types funext
+open import foundation.cartesian-product-types
+open import foundation.commuting-squares-of-identifications
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.functoriality-cartesian-product-types funext
-open import foundation.functoriality-dependent-pair-types funext
+open import foundation.equivalences
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types funext
-open import foundation.path-algebra funext
+open import foundation.identity-types
+open import foundation.path-algebra
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.pointed-maps funext
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
-open import structured-types.pointed-universal-property-contractible-types funext
+open import structured-types.pointed-universal-property-contractible-types
 
-open import synthetic-homotopy-theory.acyclic-types funext
-open import synthetic-homotopy-theory.eckmann-hilton-argument funext
-open import synthetic-homotopy-theory.functoriality-loop-spaces funext
-open import synthetic-homotopy-theory.loop-spaces funext
-open import synthetic-homotopy-theory.powers-of-loops funext
-open import synthetic-homotopy-theory.suspensions-of-pointed-types funext
-open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types funext
+open import synthetic-homotopy-theory.acyclic-types
+open import synthetic-homotopy-theory.eckmann-hilton-argument
+open import synthetic-homotopy-theory.functoriality-loop-spaces
+open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.powers-of-loops
+open import synthetic-homotopy-theory.suspensions-of-pointed-types
+open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types
 ```
 
 </details>

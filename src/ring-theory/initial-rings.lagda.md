@@ -1,23 +1,18 @@
 # Initial rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.initial-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.initial-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.initial-objects-large-categories funext
+open import category-theory.initial-objects-large-categories
 
 open import foundation.universe-levels
 
-open import ring-theory.category-of-rings funext
-open import ring-theory.rings funext
+open import ring-theory.category-of-rings
+open import ring-theory.rings
 ```
 
 </details>

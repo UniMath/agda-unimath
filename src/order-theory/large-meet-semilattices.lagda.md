@@ -1,12 +1,7 @@
 # Large meet-semilattices
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.large-meet-semilattices
-  (funext : function-extensionality)
-  where
+module order-theory.large-meet-semilattices where
 ```
 
 <details><summary>Imports</summary>
@@ -14,16 +9,16 @@ module
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.large-binary-relations funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.large-binary-relations
+open import foundation.sets
 open import foundation.universe-levels
 
-open import order-theory.greatest-lower-bounds-large-posets funext
-open import order-theory.large-posets funext
-open import order-theory.meet-semilattices funext
-open import order-theory.posets funext
-open import order-theory.top-elements-large-posets funext
+open import order-theory.greatest-lower-bounds-large-posets
+open import order-theory.large-posets
+open import order-theory.meet-semilattices
+open import order-theory.posets
+open import order-theory.top-elements-large-posets
 ```
 
 </details>

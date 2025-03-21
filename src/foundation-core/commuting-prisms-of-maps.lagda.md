@@ -1,12 +1,7 @@
 # Commuting prisms of maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation-core.commuting-prisms-of-maps
-  (funext : function-extensionality)
-  where
+module foundation-core.commuting-prisms-of-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -17,7 +12,7 @@ open import foundation.commuting-pentagons-of-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.commuting-squares-of-maps funext
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.homotopies
 open import foundation-core.identity-types

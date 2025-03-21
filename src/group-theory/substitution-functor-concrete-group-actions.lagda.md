@@ -1,12 +1,7 @@
 # The substitution functor of concrete group actions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.substitution-functor-concrete-group-actions
-  (funext : function-extensionality)
-  where
+module group-theory.substitution-functor-concrete-group-actions where
 ```
 
 <details><summary>Imports</summary>
@@ -14,9 +9,9 @@ module
 ```agda
 open import foundation.universe-levels
 
-open import group-theory.concrete-group-actions funext
-open import group-theory.concrete-groups funext
-open import group-theory.homomorphisms-concrete-groups funext
+open import group-theory.concrete-group-actions
+open import group-theory.concrete-groups
+open import group-theory.homomorphisms-concrete-groups
 ```
 
 </details>

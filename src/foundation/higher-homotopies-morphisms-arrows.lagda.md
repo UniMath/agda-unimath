@@ -1,32 +1,27 @@
 # Higher homotopies of morphisms of arrows
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.higher-homotopies-morphisms-arrows
-  (funext : function-extensionality)
-  where
+module foundation.higher-homotopies-morphisms-arrows where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies funext
-open import foundation.commuting-squares-of-identifications funext
+open import foundation.commuting-squares-of-homotopies
+open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies-morphisms-arrows funext
-open import foundation.homotopy-induction funext
-open import foundation.morphisms-arrows funext
-open import foundation.path-algebra funext
+open import foundation.homotopies-morphisms-arrows
+open import foundation.homotopy-induction
+open import foundation.morphisms-arrows
+open import foundation.path-algebra
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
-open import foundation.whiskering-homotopies-concatenation funext
-open import foundation.whiskering-identifications-concatenation funext
+open import foundation.whiskering-homotopies-concatenation
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.equivalences
 open import foundation-core.homotopies

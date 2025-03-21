@@ -1,31 +1,26 @@
 # Products of Cauchy series of species of types in subuniverses
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  species.products-cauchy-series-species-of-types-in-subuniverses
-  (funext : function-extensionality)
-  where
+module species.products-cauchy-series-species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
-open import foundation.coproduct-types funext
-open import foundation.equivalences funext
-open import foundation.functoriality-cartesian-product-types funext
-open import foundation.global-subuniverses funext
-open import foundation.subuniverses funext
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.equivalences
+open import foundation.functoriality-cartesian-product-types
+open import foundation.global-subuniverses
+open import foundation.subuniverses
 open import foundation.universe-levels
 
-open import species.cauchy-products-species-of-types funext
-open import species.cauchy-products-species-of-types funext-in-subuniverses
-open import species.cauchy-series-species-of-types funext
-open import species.cauchy-series-species-of-types funext-in-subuniverses
-open import species.products-cauchy-series-species-of-types funext
-open import species.species-of-types-in-subuniverses funext
+open import species.cauchy-products-species-of-types
+open import species.cauchy-products-species-of-types-in-subuniverses
+open import species.cauchy-series-species-of-types
+open import species.cauchy-series-species-of-types-in-subuniverses
+open import species.products-cauchy-series-species-of-types
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>

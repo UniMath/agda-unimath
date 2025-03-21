@@ -1,32 +1,27 @@
 # Lists of elements in discrete types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  lists.lists-discrete-types
-  (funext : function-extensionality)
-  where
+module lists.lists-discrete-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.booleans funext
-open import foundation.cartesian-product-types funext
-open import foundation.coproduct-types funext
-open import foundation.decidable-equality funext
-open import foundation.decidable-types funext
+open import foundation.booleans
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.decidable-equality
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.raising-universe-levels funext
-open import foundation.raising-universe-levels funext-unit-type
+open import foundation.empty-types
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import lists.equality-lists funext
+open import lists.equality-lists
 open import lists.lists
 ```
 

@@ -1,12 +1,7 @@
 # Iterated suspensions of pointed types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.iterated-suspensions-of-pointed-types
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.iterated-suspensions-of-pointed-types where
 ```
 
 <details><summary>Imports</summary>
@@ -14,12 +9,12 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.iterating-functions funext
+open import foundation.iterating-functions
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.suspensions-of-pointed-types funext
+open import synthetic-homotopy-theory.suspensions-of-pointed-types
 ```
 
 </details>

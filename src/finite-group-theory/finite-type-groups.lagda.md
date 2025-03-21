@@ -3,12 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  finite-group-theory.finite-type-groups
-  (funext : function-extensionality)
-  where
+module finite-group-theory.finite-type-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -16,36 +11,35 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.0-connected-types funext
+open import foundation.0-connected-types
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.raising-universe-levels funext
-open import foundation.sets funext
-open import foundation.truncated-types funext
+open import foundation.equality-dependent-pair-types
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.sets
+open import foundation.truncated-types
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.homomorphisms-semigroups funext
-open import group-theory.isomorphisms-groups funext
-open import group-theory.loop-groups-sets funext
-open import group-theory.monoids funext
-open import group-theory.semigroups funext
+open import group-theory.concrete-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-semigroups
+open import group-theory.isomorphisms-groups
+open import group-theory.loop-groups-sets
+open import group-theory.monoids
+open import group-theory.semigroups
 
-open import higher-group-theory.higher-groups funext
+open import higher-group-theory.higher-groups
 
 open import structured-types.pointed-types
 
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

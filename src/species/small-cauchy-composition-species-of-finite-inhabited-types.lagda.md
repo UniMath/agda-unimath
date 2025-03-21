@@ -3,46 +3,41 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  species.small-cauchy-composition-species-of-finite-inhabited-types
-  (funext : function-extensionality)
-  where
+module species.small-cauchy-composition-species-of-finite-inhabited-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types funext
-open import foundation.decidable-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-cartesian-product-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.inhabited-types funext
-open import foundation.propositions funext
-open import foundation.raising-universe-levels-unit-type funext
-open import foundation.relaxed-sigma-decompositions funext
-open import foundation.sigma-closed-subuniverses funext
-open import foundation.sigma-decomposition-subuniverse funext
-open import foundation.subuniverses funext
+open import foundation.contractible-types
+open import foundation.decidable-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.inhabited-types
+open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
+open import foundation.relaxed-sigma-decompositions
+open import foundation.sigma-closed-subuniverses
+open import foundation.sigma-decomposition-subuniverse
+open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import species.small-cauchy-composition-species-of-types-in-subuniverses funext
-open import species.species-of-finite-inhabited-types funext
+open import species.small-cauchy-composition-species-of-types-in-subuniverses
+open import species.species-of-finite-inhabited-types
 
-open import univalent-combinatorics.cartesian-product-types funext
-open import univalent-combinatorics.decidable-propositions funext
-open import univalent-combinatorics.dependent-function-types funext
-open import univalent-combinatorics.dependent-pair-types funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.inhabited-finite-types funext
-open import univalent-combinatorics.sigma-decompositions funext
-open import univalent-combinatorics.small-types funext
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.inhabited-finite-types
+open import univalent-combinatorics.sigma-decompositions
+open import univalent-combinatorics.small-types
 ```
 
 </details>

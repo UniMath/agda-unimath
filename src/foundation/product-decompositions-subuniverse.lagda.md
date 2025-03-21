@@ -1,28 +1,23 @@
 # Product decompositions of types in a subuniverse
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.product-decompositions-subuniverse
-  (funext : function-extensionality)
-  where
+module foundation.product-decompositions-subuniverse where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types funext
-open import foundation.dependent-products-propositions funext
-open import foundation.equivalences funext
-open import foundation.raising-universe-levels-unit-type funext
-open import foundation.subuniverses funext
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
+open import foundation.equivalences
+open import foundation.raising-universe-levels-unit-type
+open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

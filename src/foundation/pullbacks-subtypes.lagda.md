@@ -1,27 +1,22 @@
 # Pullbacks of subtypes
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.pullbacks-subtypes
-  (funext : function-extensionality)
-  where
+module foundation.pullbacks-subtypes where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.logical-equivalences funext
-open import foundation.powersets funext
+open import foundation.logical-equivalences
+open import foundation.powersets
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.propositions
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 
-open import order-theory.order-preserving-maps-large-posets funext
-open import order-theory.order-preserving-maps-large-preorders funext
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
 ```
 
 </details>

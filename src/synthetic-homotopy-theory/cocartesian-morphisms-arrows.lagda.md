@@ -1,26 +1,21 @@
 # Cocartesian morphisms of arrows
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.cocartesian-morphisms-arrows
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.cocartesian-morphisms-arrows where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps funext
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.morphisms-arrows funext
-open import foundation.propositions funext
+open import foundation.morphisms-arrows
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans funext
-open import synthetic-homotopy-theory.pushouts funext
-open import synthetic-homotopy-theory.universal-property-pushouts funext
+open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>

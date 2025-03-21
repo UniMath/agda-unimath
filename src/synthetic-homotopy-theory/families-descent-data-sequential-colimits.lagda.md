@@ -1,12 +1,7 @@
 # Families with descent data for sequential colimits
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.families-descent-data-sequential-colimits
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.families-descent-data-sequential-colimits where
 ```
 
 <details><summary>Imports</summary>
@@ -14,16 +9,16 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.commuting-squares-of-maps funext
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext
-open import synthetic-homotopy-theory.dependent-sequential-diagrams funext
-open import synthetic-homotopy-theory.descent-data-sequential-colimits funext
-open import synthetic-homotopy-theory.sequential-diagrams funext
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
+open import synthetic-homotopy-theory.dependent-sequential-diagrams
+open import synthetic-homotopy-theory.descent-data-sequential-colimits
+open import synthetic-homotopy-theory.sequential-diagrams
 ```
 
 </details>

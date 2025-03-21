@@ -1,27 +1,22 @@
 # Maximum on the standard finite types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.maximum-standard-finite-types
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.maximum-standard-finite-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-standard-finite-types funext
+open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.unit-type
 
-open import order-theory.least-upper-bounds-posets funext
+open import order-theory.least-upper-bounds-posets
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

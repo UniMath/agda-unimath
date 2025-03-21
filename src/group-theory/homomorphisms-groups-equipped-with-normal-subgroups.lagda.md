@@ -1,28 +1,23 @@
 # Homomorphisms of groups equipped with normal subgroups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.homomorphisms-groups-equipped-with-normal-subgroups
-  (funext : function-extensionality)
-  where
+module group-theory.homomorphisms-groups-equipped-with-normal-subgroups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.subtypes funext
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.groups funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.normal-subgroups funext
-open import group-theory.pullbacks-subgroups funext
-open import group-theory.subgroups funext
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.normal-subgroups
+open import group-theory.pullbacks-subgroups
+open import group-theory.subgroups
 ```
 
 </details>

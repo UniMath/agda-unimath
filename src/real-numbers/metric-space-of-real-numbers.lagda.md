@@ -3,50 +3,45 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  real-numbers.metric-space-of-real-numbers
-  (funext : function-extensionality)
-  where
+module real-numbers.metric-space-of-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers funext
-open import elementary-number-theory.difference-rational-numbers funext
-open import elementary-number-theory.positive-rational-numbers funext
-open import elementary-number-theory.rational-numbers funext
+open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-cartesian-products-of-types funext
-open import foundation.existential-quantification funext
-open import foundation.function-types funext
-open import foundation.functoriality-cartesian-product-types funext
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
+open import foundation.diagonal-maps-cartesian-products-of-types
+open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.extensional-premetric-structures funext
-open import metric-spaces.isometries-metric-spaces funext
-open import metric-spaces.metric-space-of-rational-numbers funext
-open import metric-spaces.metric-spaces funext
-open import metric-spaces.metric-structures funext
-open import metric-spaces.premetric-spaces funext
-open import metric-spaces.premetric-structures funext
-open import metric-spaces.pseudometric-structures funext
-open import metric-spaces.reflexive-premetric-structures funext
-open import metric-spaces.saturated-metric-spaces funext
-open import metric-spaces.symmetric-premetric-structures funext
-open import metric-spaces.triangular-premetric-structures funext
+open import metric-spaces.extensional-premetric-structures
+open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.metric-space-of-rational-numbers
+open import metric-spaces.metric-spaces
+open import metric-spaces.metric-structures
+open import metric-spaces.premetric-spaces
+open import metric-spaces.premetric-structures
+open import metric-spaces.pseudometric-structures
+open import metric-spaces.reflexive-premetric-structures
+open import metric-spaces.saturated-metric-spaces
+open import metric-spaces.symmetric-premetric-structures
+open import metric-spaces.triangular-premetric-structures
 
-open import real-numbers.dedekind-real-numbers funext
-open import real-numbers.rational-real-numbers funext
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.rational-real-numbers
 ```
 
 </details>

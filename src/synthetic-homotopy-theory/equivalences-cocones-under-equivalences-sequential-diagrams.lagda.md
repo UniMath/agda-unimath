@@ -1,12 +1,7 @@
 # Equivalences of cocones under sequential diagrams
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams where
 ```
 
 <details><summary>Imports</summary>
@@ -14,16 +9,16 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.commuting-prisms-of-maps funext
-open import foundation.commuting-squares-of-maps funext
+open import foundation.commuting-prisms-of-maps
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext
-open import synthetic-homotopy-theory.equivalences-sequential-diagrams funext
-open import synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequential-diagrams funext
-open import synthetic-homotopy-theory.sequential-diagrams funext
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
+open import synthetic-homotopy-theory.equivalences-sequential-diagrams
+open import synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequential-diagrams
+open import synthetic-homotopy-theory.sequential-diagrams
 ```
 
 </details>

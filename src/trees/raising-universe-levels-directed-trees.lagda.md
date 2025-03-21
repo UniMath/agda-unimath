@@ -1,29 +1,24 @@
 # Raising universe levels of directed trees
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.raising-universe-levels-directed-trees
-  (funext : function-extensionality)
-  where
+module trees.raising-universe-levels-directed-trees where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.raising-universe-levels funext
+open import foundation.equivalences
+open import foundation.raising-universe-levels
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs funext
-open import graph-theory.raising-universe-levels-directed-graphs funext
-open import graph-theory.walks-directed-graphs funext
+open import graph-theory.directed-graphs
+open import graph-theory.raising-universe-levels-directed-graphs
+open import graph-theory.walks-directed-graphs
 
-open import trees.directed-trees funext
-open import trees.equivalences-directed-trees funext
+open import trees.directed-trees
+open import trees.equivalences-directed-trees
 ```
 
 </details>

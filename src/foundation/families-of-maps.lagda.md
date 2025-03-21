@@ -1,33 +1,28 @@
 # Families of maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.families-of-maps
-  (funext : function-extensionality)
-  where
+module foundation.families-of-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.equivalences funext
+open import foundation.dependent-products-propositions
+open import foundation.equivalences
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.universal-property-dependent-pair-types funext
+open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.families-of-equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types funext
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.type-theoretic-principle-of-choice
 ```

@@ -1,12 +1,7 @@
 # Top elements in large posets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.top-elements-large-posets
-  (funext : function-extensionality)
-  where
+module order-theory.top-elements-large-posets where
 ```
 
 <details><summary>Imports</summary>
@@ -14,8 +9,8 @@ module
 ```agda
 open import foundation.universe-levels
 
-open import order-theory.dependent-products-large-posets funext
-open import order-theory.large-posets funext
+open import order-theory.dependent-products-large-posets
+open import order-theory.large-posets
 ```
 
 </details>

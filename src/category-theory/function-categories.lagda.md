@@ -1,27 +1,22 @@
 # Function categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.function-categories
-  (funext : function-extensionality)
-  where
+module category-theory.function-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories funext
-open import category-theory.composition-operations-on-binary-families-of-sets funext
-open import category-theory.dependent-products-of-categories funext
-open import category-theory.isomorphisms-in-categories funext
-open import category-theory.precategories funext
+open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.dependent-products-of-categories
+open import category-theory.isomorphisms-in-categories
+open import category-theory.precategories
 
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.sets funext
-open import foundation.strictly-involutive-identity-types funext
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 

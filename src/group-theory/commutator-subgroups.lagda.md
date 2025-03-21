@@ -1,36 +1,31 @@
 # Commutator subgroups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.commutator-subgroups
-  (funext : function-extensionality)
-  where
+module group-theory.commutator-subgroups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.propositional-truncations funext
+open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
-open import group-theory.commutators-of-elements-groups funext
-open import group-theory.conjugation funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.images-of-group-homomorphisms funext
-open import group-theory.normal-subgroups funext
-open import group-theory.pullbacks-subgroups funext
-open import group-theory.subgroups funext
-open import group-theory.subgroups funext-generated-by-families-of-elements-groups
-open import group-theory.subgroups-generated-by-subsets-groups funext
-open import group-theory.subsets-groups funext
+open import group-theory.commutators-of-elements-groups
+open import group-theory.conjugation
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.images-of-group-homomorphisms
+open import group-theory.normal-subgroups
+open import group-theory.pullbacks-subgroups
+open import group-theory.subgroups
+open import group-theory.subgroups-generated-by-families-of-elements-groups
+open import group-theory.subgroups-generated-by-subsets-groups
+open import group-theory.subsets-groups
 ```
 
 </details>

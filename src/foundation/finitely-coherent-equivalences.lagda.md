@@ -1,12 +1,7 @@
 # Finitely coherent equivalences
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.finitely-coherent-equivalences
-  (funext : function-extensionality)
-  where
+module foundation.finitely-coherent-equivalences where
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +9,7 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

@@ -1,26 +1,21 @@
 # Endomorphisms in precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.endomorphisms-in-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.endomorphisms-in-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories funext
+open import category-theory.precategories
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.monoids funext
-open import group-theory.semigroups funext
+open import group-theory.monoids
+open import group-theory.semigroups
 ```
 
 </details>

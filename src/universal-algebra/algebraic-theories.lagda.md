@@ -1,12 +1,7 @@
 # Algebraic theories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  universal-algebra.algebraic-theories
-  (funext : function-extensionality)
-  where
+module universal-algebra.algebraic-theories where
 ```
 
 <details><summary>Imports</summary>
@@ -15,8 +10,8 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import universal-algebra.abstract-equations-over-signatures funext
-open import universal-algebra.signatures funext
+open import universal-algebra.abstract-equations-over-signatures
+open import universal-algebra.signatures
 ```
 
 </details>

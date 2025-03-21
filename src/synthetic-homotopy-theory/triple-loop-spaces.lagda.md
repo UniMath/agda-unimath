@@ -1,12 +1,7 @@
 # Triple loop spaces
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.triple-loop-spaces
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.triple-loop-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -14,15 +9,15 @@ module
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.path-algebra funext
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.path-algebra
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.double-loop-spaces funext
-open import synthetic-homotopy-theory.iterated-loop-spaces funext
+open import synthetic-homotopy-theory.double-loop-spaces
+open import synthetic-homotopy-theory.iterated-loop-spaces
 ```
 
 </details>

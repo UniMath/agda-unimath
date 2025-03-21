@@ -1,12 +1,7 @@
 # Markov's principle
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  logic.markovs-principle
-  (funext : function-extensionality)
-  where
+module logic.markovs-principle where
 ```
 
 <details><summary>Imports</summary>
@@ -14,14 +9,14 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-subtypes funext
+open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
-open import foundation.disjunction funext
-open import foundation.existential-quantification funext
-open import foundation.function-types funext
-open import foundation.inhabited-types funext
-open import foundation.negation funext
-open import foundation.universal-quantification funext
+open import foundation.disjunction
+open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.inhabited-types
+open import foundation.negation
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.booleans
@@ -29,9 +24,9 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
 
-open import logic.markovian-types funext
+open import logic.markovian-types
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

@@ -1,29 +1,24 @@
 # Torsion elements of groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.torsion-elements-groups
-  (funext : function-extensionality)
-  where
+module group-theory.torsion-elements-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.integers
-open import elementary-number-theory.nonzero-integers funext
+open import elementary-number-theory.nonzero-integers
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.groups funext
-open import group-theory.integer-powers-of-elements-groups funext
+open import group-theory.groups
+open import group-theory.integer-powers-of-elements-groups
 ```
 
 </details>

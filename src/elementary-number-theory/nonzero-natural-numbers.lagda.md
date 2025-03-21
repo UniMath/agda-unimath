@@ -1,28 +1,23 @@
 # Nonzero natural numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.nonzero-natural-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.nonzero-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.divisibility-natural-numbers funext
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers funext
+open import elementary-number-theory.strict-inequality-natural-numbers
 
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.identity-types funext
+open import foundation.empty-types
+open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```

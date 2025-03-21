@@ -1,32 +1,27 @@
 # Integer multiples of elements in abelian groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.integer-multiples-of-elements-abelian-groups
-  (funext : function-extensionality)
-  where
+module group-theory.integer-multiples-of-elements-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers funext
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers funext
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.homomorphisms-abelian-groups funext
-open import group-theory.integer-powers-of-elements-groups funext
-open import group-theory.multiples-of-elements-abelian-groups funext
+open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.integer-powers-of-elements-groups
+open import group-theory.multiples-of-elements-abelian-groups
 ```
 
 </details>

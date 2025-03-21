@@ -1,25 +1,20 @@
 # Raising universe levels of directed graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.raising-universe-levels-directed-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.raising-universe-levels-directed-graphs where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.raising-universe-levels funext
+open import foundation.equivalences
+open import foundation.raising-universe-levels
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs funext
-open import graph-theory.equivalences-directed-graphs funext
-open import graph-theory.walks-directed-graphs funext
+open import graph-theory.directed-graphs
+open import graph-theory.equivalences-directed-graphs
+open import graph-theory.walks-directed-graphs
 ```
 
 </details>

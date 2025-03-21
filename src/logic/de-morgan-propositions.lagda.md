@@ -1,48 +1,43 @@
 # De Morgan propositions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  logic.de-morgan-propositions
-  (funext : function-extensionality)
-  where
+module logic.de-morgan-propositions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
-open import foundation.conjunction funext
-open import foundation.contractible-types funext
-open import foundation.coproduct-types funext
-open import foundation.decidable-types funext
+open import foundation.cartesian-product-types
+open import foundation.conjunction
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.disjunction funext
-open import foundation.double-negation funext
-open import foundation.embeddings funext
-open import foundation.empty-types funext
-open import foundation.equivalences funext
+open import foundation.disjunction
+open import foundation.double-negation
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.evaluation-functions
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.irrefutable-propositions funext
-open import foundation.logical-equivalences funext
-open import foundation.negation funext
-open import foundation.propositional-extensionality funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.retracts-of-types funext
-open import foundation.sets funext
-open import foundation.subtypes funext
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.irrefutable-propositions
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.retracts-of-types
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import foundation-core.decidable-propositions funext
+open import foundation-core.decidable-propositions
 
-open import logic.de-morgan-types funext
-open import logic.de-morgans-law funext
+open import logic.de-morgan-types
+open import logic.de-morgans-law
 ```
 
 </details>

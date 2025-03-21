@@ -1,12 +1,7 @@
 # Diagonal vectors
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  linear-algebra.constant-vectors
-  (funext : function-extensionality)
-  where
+module linear-algebra.constant-vectors where
 ```
 
 <details><summary>Imports</summary>
@@ -16,7 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.vectors funext
+open import linear-algebra.vectors
 ```
 
 </details>

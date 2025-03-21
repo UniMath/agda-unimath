@@ -1,39 +1,33 @@
 # Isomorphisms of group actions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.isomorphisms-group-actions
-  (funext : function-extensionality)
-  where
+module group-theory.isomorphisms-group-actions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-large-precategories funext
+open import category-theory.isomorphisms-in-large-precategories
 
-open import foundation.commuting-squares-of-maps funext
-open import foundation.contractible-types funext
+open import foundation.commuting-squares-of-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
-open import foundation.torsorial-type-families funext
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.equivalences-group-actions funext
-open import group-theory.group-actions funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-group-actions funext
-open import group-theory.precategory-of-group-actions funext
+open import group-theory.equivalences-group-actions
+open import group-theory.group-actions
+open import group-theory.groups
+open import group-theory.homomorphisms-group-actions
+open import group-theory.precategory-of-group-actions
 ```
 
 </details>

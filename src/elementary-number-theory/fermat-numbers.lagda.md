@@ -1,24 +1,19 @@
 # Fermat numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.fermat-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.fermat-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.exponentiation-natural-numbers funext
+open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.products-of-natural-numbers funext
-open import elementary-number-theory.strong-induction-natural-numbers funext
+open import elementary-number-theory.products-of-natural-numbers
+open import elementary-number-theory.strong-induction-natural-numbers
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

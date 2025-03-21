@@ -1,22 +1,17 @@
 # Products of Dirichlet series of species of finite inhabited types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  species.products-dirichlet-series-species-of-finite-inhabited-types
-  (funext : function-extensionality)
-  where
+module species.products-dirichlet-series-species-of-finite-inhabited-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.universe-levels
 
-open import species.dirichlet-series-species-of-finite-inhabited-types funext
-open import species.species-of-finite-inhabited-types funext
+open import species.dirichlet-series-species-of-finite-inhabited-types
+open import species.species-of-finite-inhabited-types
 ```
 
 </details>

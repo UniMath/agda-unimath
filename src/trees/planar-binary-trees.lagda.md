@@ -1,23 +1,18 @@
 # Planar binary trees
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.planar-binary-trees
-  (funext : function-extensionality)
-  where
+module trees.planar-binary-trees where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.booleans funext
-open import foundation.empty-types funext
-open import foundation.function-types funext
+open import foundation.booleans
+open import foundation.empty-types
+open import foundation.function-types
 open import foundation.universe-levels
 
-open import trees.w-types funext
+open import trees.w-types
 ```
 
 </details>

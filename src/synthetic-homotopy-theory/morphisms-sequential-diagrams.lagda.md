@@ -1,12 +1,7 @@
 # Morphisms of sequential diagrams
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.morphisms-sequential-diagrams
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.morphisms-sequential-diagrams where
 ```
 
 <details><summary>Imports</summary>
@@ -14,24 +9,24 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-homotopies funext
-open import foundation.commuting-squares-of-homotopies funext
-open import foundation.commuting-squares-of-maps funext
+open import foundation.binary-homotopies
+open import foundation.commuting-squares-of-homotopies
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import synthetic-homotopy-theory.dependent-sequential-diagrams funext
-open import synthetic-homotopy-theory.sequential-diagrams funext
+open import synthetic-homotopy-theory.dependent-sequential-diagrams
+open import synthetic-homotopy-theory.sequential-diagrams
 ```
 
 </details>

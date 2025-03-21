@@ -1,12 +1,7 @@
 # The symmetric identity types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.symmetric-identity-types
-  (funext : function-extensionality)
-  where
+module foundation.symmetric-identity-types where
 ```
 
 <details><summary>Imports</summary>
@@ -14,15 +9,14 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality funext
-
-open import foundation.functoriality-dependent-function-types funext
+open import foundation.function-extensionality
+open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
+open import foundation.homotopy-induction
+open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-open import foundation.unordered-pairs funext
+open import foundation.unordered-pairs
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
@@ -33,7 +27,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.torsorial-type-families
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

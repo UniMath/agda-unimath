@@ -1,27 +1,22 @@
 # Functors between categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.functors-categories
-  (funext : function-extensionality)
-  where
+module category-theory.functors-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories funext
-open import category-theory.functors-precategories funext
-open import category-theory.isomorphisms-in-categories funext
-open import category-theory.maps-categories funext
+open import category-theory.categories
+open import category-theory.functors-precategories
+open import category-theory.isomorphisms-in-categories
+open import category-theory.maps-categories
 
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 ```
 

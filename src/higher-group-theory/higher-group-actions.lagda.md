@@ -1,22 +1,17 @@
 # Higher group actions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  higher-group-theory.higher-group-actions
-  (funext : function-extensionality)
-  where
+module higher-group-theory.higher-group-actions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups funext
+open import higher-group-theory.higher-groups
 ```
 
 </details>

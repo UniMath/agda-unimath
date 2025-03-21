@@ -1,20 +1,15 @@
 # Copartial functions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.copartial-functions
-  (funext : function-extensionality)
-  where
+module foundation.copartial-functions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.copartial-elements funext
+open import foundation.copartial-elements
 open import foundation.partial-functions
-open import foundation.propositions funext
+open import foundation.propositions
 open import foundation.universe-levels
 ```
 

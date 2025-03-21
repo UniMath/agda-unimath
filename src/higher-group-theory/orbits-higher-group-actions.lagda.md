@@ -1,12 +1,7 @@
 # Orbits of higher group actions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  higher-group-theory.orbits-higher-group-actions
-  (funext : function-extensionality)
-  where
+module higher-group-theory.orbits-higher-group-actions where
 ```
 
 <details><summary>Imports</summary>
@@ -15,8 +10,8 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-group-actions funext
-open import higher-group-theory.higher-groups funext
+open import higher-group-theory.higher-group-actions
+open import higher-group-theory.higher-groups
 ```
 
 </details>

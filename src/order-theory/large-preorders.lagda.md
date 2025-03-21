@@ -1,28 +1,23 @@
 # Large preorders
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.large-preorders
-  (funext : function-extensionality)
-  where
+module order-theory.large-preorders where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories funext
+open import category-theory.large-precategories
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.large-binary-relations funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.strictly-involutive-identity-types funext
+open import foundation.identity-types
+open import foundation.large-binary-relations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
-open import order-theory.preorders funext
+open import order-theory.preorders
 ```
 
 </details>

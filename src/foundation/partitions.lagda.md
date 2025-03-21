@@ -1,37 +1,32 @@
 # Partitions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.partitions
-  (funext : function-extensionality)
-  where
+module foundation.partitions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.conjunction funext
-open import foundation.contractible-types funext
+open import foundation.conjunction
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.embeddings funext
-open import foundation.equivalences funext
-open import foundation.existential-quantification funext
-open import foundation.fiber-inclusions funext
+open import foundation.dependent-products-propositions
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.fiber-inclusions
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.inhabited-subtypes funext
-open import foundation.inhabited-types funext
-open import foundation.locally-small-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositional-truncations funext
-open import foundation.sigma-decompositions funext
-open import foundation.small-types funext
+open import foundation.inhabited-subtypes
+open import foundation.inhabited-types
+open import foundation.locally-small-types
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
+open import foundation.sigma-decompositions
+open import foundation.small-types
 open import foundation.subtype-identity-principle
-open import foundation.subtypes funext
-open import foundation.surjective-maps funext
+open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -39,7 +34,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types funext
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

@@ -1,27 +1,22 @@
 # Closure operators on large posets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.closure-operators-large-posets
-  (funext : function-extensionality)
-  where
+module order-theory.closure-operators-large-posets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types funext
-open import foundation.large-binary-relations funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.large-binary-relations
+open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 
-open import order-theory.large-posets funext
-open import order-theory.large-subposets funext
-open import order-theory.large-subpreorders funext
-open import order-theory.order-preserving-maps-large-posets funext
+open import order-theory.large-posets
+open import order-theory.large-subposets
+open import order-theory.large-subpreorders
+open import order-theory.order-preserving-maps-large-posets
 ```
 
 </details>

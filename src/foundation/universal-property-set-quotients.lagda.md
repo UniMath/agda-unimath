@@ -3,12 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.universal-property-set-quotients
-  (funext : function-extensionality)
-  where
+module foundation.universal-property-set-quotients where
 ```
 
 <details><summary>Imports</summary>
@@ -16,28 +11,28 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.dependent-universal-property-equivalences funext
-open import foundation.effective-maps-equivalence-relations funext
-open import foundation.epimorphisms-with-respect-to-sets funext
-open import foundation.equivalence-classes funext
-open import foundation.existential-quantification funext
-open import foundation.function-extensionality funext
-
+open import foundation.dependent-products-propositions
+open import foundation.dependent-universal-property-equivalences
+open import foundation.effective-maps-equivalence-relations
+open import foundation.epimorphisms-with-respect-to-sets
+open import foundation.equivalence-classes
+open import foundation.existential-quantification
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types funext
-open import foundation.images funext
-open import foundation.injective-maps funext
-open import foundation.locally-small-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositional-extensionality funext
-open import foundation.propositional-truncations funext
-open import foundation.reflecting-maps-equivalence-relations funext
-open import foundation.sets funext
-open import foundation.surjective-maps funext
+open import foundation.identity-types
+open import foundation.images
+open import foundation.injective-maps
+open import foundation.locally-small-types
+open import foundation.logical-equivalences
+open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
+open import foundation.surjective-maps
 open import foundation.transport-along-identifications
-open import foundation.universal-property-dependent-pair-types funext
-open import foundation.universal-property-image funext
+open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-image
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -46,7 +41,7 @@ open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
-open import foundation-core.equivalence-relations funext
+open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -54,8 +49,8 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
-open import foundation-core.small-types funext
-open import foundation-core.subtypes funext
+open import foundation-core.small-types
+open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.type-theoretic-principle-of-choice
 open import foundation-core.univalence

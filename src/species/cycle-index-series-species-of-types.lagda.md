@@ -1,12 +1,7 @@
 # Cycle index series of species
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  species.cycle-index-series-species-of-types
-  (funext : function-extensionality)
-  where
+module species.cycle-index-series-species-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -17,7 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cyclic-finite-types funext
+open import univalent-combinatorics.cyclic-finite-types
 ```
 
 </details>

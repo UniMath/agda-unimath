@@ -1,39 +1,34 @@
 # Functoriality of W-types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.functoriality-w-types
-  (funext : function-extensionality)
-  where
+module trees.functoriality-w-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
-open import foundation.contractible-maps funext
+open import foundation.cartesian-product-types
+open import foundation.contractible-maps
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types funext
-open import foundation.embeddings funext
-open import foundation.equivalences funext
-open import foundation.fibers-of-maps funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.propositional-maps funext
+open import foundation.dependent-products-truncated-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositional-maps
 open import foundation.transport-along-identifications
-open import foundation.truncated-maps funext
-open import foundation.truncated-types funext
+open import foundation.truncated-maps
+open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice funext
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
-open import trees.w-types funext
+open import trees.w-types
 ```
 
 </details>

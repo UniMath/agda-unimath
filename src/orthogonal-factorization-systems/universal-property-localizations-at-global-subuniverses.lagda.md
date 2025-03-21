@@ -1,35 +1,31 @@
 # The universal property of localizations at global subuniverses
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.universal-property-localizations-at-global-subuniverses
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.universal-property-localizations-at-global-subuniverses where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.extensions-types funext
-open import foundation.extensions-types funext-global-subuniverses
-open import foundation.function-types funext
-open import foundation.global-subuniverses funext
-open import foundation.identity-types funext
-open import foundation.precomposition-functions funext
-open import foundation.propositions funext
-open import foundation.retractions funext
-open import foundation.sections funext
-open import foundation.univalence funext
+open import foundation.equivalences
+open import foundation.extensions-types
+open import foundation.extensions-types-global-subuniverses
+open import foundation.function-extensionality-axiom
+open import foundation.function-types
+open import foundation.global-subuniverses
+open import foundation.identity-types
+open import foundation.precomposition-functions
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.extensions-maps funext
-open import orthogonal-factorization-systems.types-local-at-maps funext
+open import orthogonal-factorization-systems.extensions-maps
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>

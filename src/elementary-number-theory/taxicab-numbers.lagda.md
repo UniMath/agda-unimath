@@ -1,30 +1,25 @@
 # Taxicab numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.taxicab-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.taxicab-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.cubes-natural-numbers funext
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.cubes-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers funext
+open import elementary-number-theory.nonzero-natural-numbers
 
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.identity-types funext
+open import foundation.equivalences
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

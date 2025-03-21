@@ -1,12 +1,7 @@
 # Raising universe levels for the unit type
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.raising-universe-levels-unit-type
-  (funext : function-extensionality)
-  where
+module foundation.raising-universe-levels-unit-type where
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +9,7 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.raising-universe-levels funext
+open import foundation.raising-universe-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 

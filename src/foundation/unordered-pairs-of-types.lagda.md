@@ -1,12 +1,7 @@
 # Unordered pairs of types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.unordered-pairs-of-types
-  (funext : function-extensionality)
-  where
+module foundation.unordered-pairs-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -15,15 +10,15 @@ module
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.structure-identity-principle
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.unordered-pairs funext
+open import foundation.unordered-pairs
 
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
 
-open import univalent-combinatorics.2-element-types funext
+open import univalent-combinatorics.2-element-types
 ```
 
 </details>

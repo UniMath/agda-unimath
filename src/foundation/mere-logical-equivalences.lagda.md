@@ -1,23 +1,18 @@
 # Mere logical equivalences
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.mere-logical-equivalences
-  (funext : function-extensionality)
-  where
+module foundation.mere-logical-equivalences where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction funext
+open import foundation.conjunction
 open import foundation.dependent-pair-types
-open import foundation.inhabited-types funext
-open import foundation.logical-equivalences funext
-open import foundation.mere-functions funext
-open import foundation.propositional-truncations funext
+open import foundation.inhabited-types
+open import foundation.logical-equivalences
+open import foundation.mere-functions
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

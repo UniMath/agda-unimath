@@ -1,12 +1,7 @@
 # Multiples of elements in abelian groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.multiples-of-elements-abelian-groups
-  (funext : function-extensionality)
-  where
+module group-theory.multiples-of-elements-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -16,12 +11,12 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.powers-of-elements-groups funext
+open import group-theory.abelian-groups
+open import group-theory.powers-of-elements-groups
 ```
 
 </details>

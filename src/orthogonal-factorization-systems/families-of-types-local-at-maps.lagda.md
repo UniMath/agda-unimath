@@ -1,25 +1,20 @@
 # Families of types local at a map
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.families-of-types-local-at-maps
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.families-of-types-local-at-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.precomposition-functions funext
-open import foundation.propositions funext
+open import foundation.equivalences
+open import foundation.precomposition-functions
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.orthogonal-maps funext
-open import orthogonal-factorization-systems.types-local-at-maps funext
+open import orthogonal-factorization-systems.orthogonal-maps
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>

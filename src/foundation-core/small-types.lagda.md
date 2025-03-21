@@ -1,30 +1,25 @@
 # Small types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation-core.small-types
-  (funext : function-extensionality)
-  where
+module foundation-core.small-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.functoriality-coproduct-types funext
-open import foundation.functoriality-dependent-function-types funext
-open import foundation.logical-equivalences funext
-open import foundation.mere-equivalences funext
-open import foundation.propositional-truncations funext
-open import foundation.raising-universe-levels funext
-open import foundation.raising-universe-levels funext-unit-type
+open import foundation.equivalences
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.logical-equivalences
+open import foundation.mere-equivalences
+open import foundation.propositional-truncations
+open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

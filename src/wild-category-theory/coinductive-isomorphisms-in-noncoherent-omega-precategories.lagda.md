@@ -3,12 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  wild-category-theory.coinductive-isomorphisms-in-noncoherent-omega-precategories
-  (funext : function-extensionality)
-  where
+module wild-category-theory.coinductive-isomorphisms-in-noncoherent-omega-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -17,7 +12,7 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import wild-category-theory.noncoherent-omega-precategories funext
+open import wild-category-theory.noncoherent-omega-precategories
 ```
 
 </details>

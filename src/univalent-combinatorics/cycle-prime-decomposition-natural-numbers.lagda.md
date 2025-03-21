@@ -1,46 +1,41 @@
 # Cycle prime decompositions of natural numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.cycle-prime-decomposition-natural-numbers
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.cycle-prime-decomposition-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.decidable-total-order-natural-numbers funext
-open import elementary-number-theory.fundamental-theorem-of-arithmetic funext
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.decidable-total-order-natural-numbers
+open import elementary-number-theory.fundamental-theorem-of-arithmetic
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.permutations-standard-finite-types funext
+open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
-open import foundation.contractible-types funext
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.iterated-cartesian-product-types funext
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.iterated-cartesian-product-types
 open import foundation.transport-along-identifications
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups funext
-open import group-theory.iterated-cartesian-products-concrete-groups funext
+open import group-theory.concrete-groups
+open import group-theory.iterated-cartesian-products-concrete-groups
 
-open import lists.arrays funext
-open import lists.concatenation-lists funext
-open import lists.functoriality-lists funext
-open import lists.permutation-lists funext
-open import lists.sort-by-insertion-lists funext
+open import lists.arrays
+open import lists.concatenation-lists
+open import lists.functoriality-lists
+open import lists.permutation-lists
+open import lists.sort-by-insertion-lists
 
-open import univalent-combinatorics.cyclic-finite-types funext
+open import univalent-combinatorics.cyclic-finite-types
 ```
 
 </details>

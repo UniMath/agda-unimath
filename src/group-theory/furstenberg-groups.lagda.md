@@ -1,22 +1,17 @@
 # Furstenberg groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.furstenberg-groups
-  (funext : function-extensionality)
-  where
+module group-theory.furstenberg-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.propositional-truncations funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.sets
 open import foundation.universe-levels
 ```
 

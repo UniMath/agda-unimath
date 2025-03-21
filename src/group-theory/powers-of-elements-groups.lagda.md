@@ -1,12 +1,7 @@
 # Powers of elements in groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.powers-of-elements-groups
-  (funext : function-extensionality)
-  where
+module group-theory.powers-of-elements-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -16,14 +11,14 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import group-theory.commuting-elements-groups funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.powers-of-elements-monoids funext
+open import group-theory.commuting-elements-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.powers-of-elements-monoids
 ```
 
 </details>

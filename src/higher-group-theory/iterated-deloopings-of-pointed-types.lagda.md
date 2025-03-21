@@ -1,12 +1,7 @@
 # Iterated deloopings of pointed types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  higher-group-theory.iterated-deloopings-of-pointed-types
-  (funext : function-extensionality)
-  where
+module higher-group-theory.iterated-deloopings-of-pointed-types where
 ```
 
 <details><summary>Imports</summary>
@@ -14,16 +9,16 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types funext
-open import foundation.connected-types funext
+open import foundation.cartesian-product-types
+open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import structured-types.pointed-equivalences funext
+open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.iterated-loop-spaces funext
+open import synthetic-homotopy-theory.iterated-loop-spaces
 ```
 
 </details>

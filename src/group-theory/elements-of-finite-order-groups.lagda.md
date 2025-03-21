@@ -1,28 +1,23 @@
 # Elements of finite order
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.elements-of-finite-order-groups
-  (funext : function-extensionality)
-  where
+module group-theory.elements-of-finite-order-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.group-of-integers funext
-open import elementary-number-theory.nonzero-integers funext
+open import elementary-number-theory.group-of-integers
+open import elementary-number-theory.nonzero-integers
 
-open import foundation.existential-quantification funext
-open import foundation.propositions funext
+open import foundation.existential-quantification
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import group-theory.groups funext
-open import group-theory.orders-of-elements-groups funext
-open import group-theory.subgroups funext
-open import group-theory.subgroups funext-generated-by-elements-groups
+open import group-theory.groups
+open import group-theory.orders-of-elements-groups
+open import group-theory.subgroups
+open import group-theory.subgroups-generated-by-elements-groups
 ```
 
 </details>

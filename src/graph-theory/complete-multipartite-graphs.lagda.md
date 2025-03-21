@@ -1,28 +1,23 @@
 # Complete multipartite graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.complete-multipartite-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.complete-multipartite-graphs where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.universe-levels
-open import foundation.unordered-pairs funext
+open import foundation.unordered-pairs
 
-open import graph-theory.finite-graphs funext
+open import graph-theory.finite-graphs
 
-open import univalent-combinatorics.2-element-types funext
-open import univalent-combinatorics.dependent-function-types funext
-open import univalent-combinatorics.dependent-pair-types funext
-open import univalent-combinatorics.equality-finite-types funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.function-types funext
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.function-types
 ```
 
 </details>

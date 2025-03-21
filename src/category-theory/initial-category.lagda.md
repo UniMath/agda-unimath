@@ -1,30 +1,25 @@
 # The initial category
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.initial-category
-  (funext : function-extensionality)
-  where
+module category-theory.initial-category where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories funext
-open import category-theory.functors-precategories funext
-open import category-theory.gaunt-categories funext
-open import category-theory.indiscrete-precategories funext
-open import category-theory.precategories funext
-open import category-theory.strict-categories funext
-open import category-theory.strongly-preunivalent-categories funext
+open import category-theory.categories
+open import category-theory.functors-precategories
+open import category-theory.gaunt-categories
+open import category-theory.indiscrete-precategories
+open import category-theory.precategories
+open import category-theory.strict-categories
+open import category-theory.strongly-preunivalent-categories
 
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.identity-types funext
-open import foundation.sets funext
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

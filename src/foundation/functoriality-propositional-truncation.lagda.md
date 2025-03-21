@@ -1,12 +1,7 @@
 # Functoriality of propositional truncations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.functoriality-propositional-truncation
-  (funext : function-extensionality)
-  where
+module foundation.functoriality-propositional-truncation where
 ```
 
 <details><summary>Imports</summary>
@@ -14,9 +9,10 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.logical-equivalences funext
-open import foundation.propositional-truncations funext
+open import foundation.dependent-products-propositions
+open import foundation.function-extensionality-axiom
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

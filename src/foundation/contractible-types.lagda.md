@@ -1,15 +1,10 @@
 # Contractible types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.contractible-types
-  (funext : function-extensionality)
-  where
+module foundation.contractible-types where
 
 open import foundation-core.contractible-types public
-open import foundation.dependent-products-contractible-types funext public
+open import foundation.dependent-products-contractible-types public
 ```
 
 <details><summary>Imports</summary>
@@ -17,11 +12,11 @@ open import foundation.dependent-products-contractible-types funext public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality funext
-
-open import foundation.logical-equivalences funext
-open import foundation.raising-universe-levels-unit-type funext
-open import foundation.subuniverses funext
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
+open import foundation.logical-equivalences
+open import foundation.raising-universe-levels-unit-type
+open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -32,7 +27,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

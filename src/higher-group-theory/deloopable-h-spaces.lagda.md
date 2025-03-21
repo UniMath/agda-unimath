@@ -1,12 +1,7 @@
 # Deloopable H-spaces
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  higher-group-theory.deloopable-h-spaces
-  (funext : function-extensionality)
-  where
+module higher-group-theory.deloopable-h-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -15,10 +10,10 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups funext
+open import higher-group-theory.higher-groups
 
-open import structured-types.equivalences-h-spaces funext
-open import structured-types.h-spaces funext
+open import structured-types.equivalences-h-spaces
+open import structured-types.h-spaces
 ```
 
 </details>

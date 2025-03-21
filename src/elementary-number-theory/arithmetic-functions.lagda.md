@@ -1,22 +1,17 @@
 # Arithmetic functions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.arithmetic-functions
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.arithmetic-functions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.nonzero-natural-numbers funext
+open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.universe-levels
 
-open import ring-theory.rings funext
+open import ring-theory.rings
 ```
 
 </details>

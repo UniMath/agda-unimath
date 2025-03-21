@@ -1,24 +1,19 @@
 # Discrete relaxed Σ-decompositions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.discrete-relaxed-sigma-decompositions
-  (funext : function-extensionality)
-  where
+module foundation.discrete-relaxed-sigma-decompositions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.equivalences funext
-open import foundation.raising-universe-levels-unit-type funext
-open import foundation.relaxed-sigma-decompositions funext
+open import foundation.dependent-products-propositions
+open import foundation.equivalences
+open import foundation.raising-universe-levels-unit-type
+open import foundation.relaxed-sigma-decompositions
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -27,7 +22,7 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 ```
 
 </details>

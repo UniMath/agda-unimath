@@ -1,12 +1,7 @@
 # Sequential limits
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.sequential-limits
-  (funext : function-extensionality)
-  where
+module foundation.sequential-limits where
 ```
 
 <details><summary>Imports</summary>
@@ -15,15 +10,15 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-inverse-sequential-diagrams funext
+open import foundation.cones-over-inverse-sequential-diagrams
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types funext
-open import foundation.equivalences funext
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction funext
-open import foundation.inverse-sequential-diagrams funext
+open import foundation.homotopy-induction
+open import foundation.inverse-sequential-diagrams
 open import foundation.structure-identity-principle
-open import foundation.universal-property-sequential-limits funext
+open import foundation.universal-property-sequential-limits
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-homotopies

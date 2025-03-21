@@ -1,31 +1,26 @@
 # Congruence relations on rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.congruence-relations-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.congruence-relations-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.equivalence-relations funext
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.torsorial-type-families funext
+open import foundation.equivalence-relations
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import group-theory.congruence-relations-abelian-groups funext
-open import group-theory.congruence-relations-monoids funext
+open import group-theory.congruence-relations-abelian-groups
+open import group-theory.congruence-relations-monoids
 
-open import ring-theory.congruence-relations-semirings funext
-open import ring-theory.rings funext
+open import ring-theory.congruence-relations-semirings
+open import ring-theory.rings
 ```
 
 </details>

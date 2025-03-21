@@ -1,12 +1,7 @@
 # Standard finite pruned trees
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.standard-finite-pruned-trees
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.standard-finite-pruned-trees where
 ```
 
 <details><summary>Imports</summary>
@@ -16,7 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

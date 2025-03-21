@@ -1,12 +1,7 @@
 # The endomorphism rings of abelian groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.endomorphism-rings-abelian-groups
-  (funext : function-extensionality)
-  where
+module group-theory.endomorphism-rings-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -15,11 +10,11 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.addition-homomorphisms-abelian-groups funext
-open import group-theory.homomorphisms-abelian-groups funext
+open import group-theory.abelian-groups
+open import group-theory.addition-homomorphisms-abelian-groups
+open import group-theory.homomorphisms-abelian-groups
 
-open import ring-theory.rings funext
+open import ring-theory.rings
 ```
 
 </details>

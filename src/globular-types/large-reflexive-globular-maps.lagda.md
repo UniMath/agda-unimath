@@ -3,24 +3,19 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  globular-types.large-reflexive-globular-maps
-  (funext : function-extensionality)
-  where
+module globular-types.large-reflexive-globular-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import globular-types.large-globular-maps funext
-open import globular-types.large-reflexive-globular-types funext
-open import globular-types.reflexive-globular-maps funext
-open import globular-types.reflexive-globular-types funext
+open import globular-types.large-globular-maps
+open import globular-types.large-reflexive-globular-types
+open import globular-types.reflexive-globular-maps
+open import globular-types.reflexive-globular-types
 ```
 
 </details>

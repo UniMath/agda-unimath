@@ -1,38 +1,33 @@
 # The Gaussian integers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.gaussian-integers
-  (funext : function-extensionality)
-  where
+module commutative-algebra.gaussian-integers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.commutative-rings
 
-open import elementary-number-theory.addition-integers funext
-open import elementary-number-theory.difference-integers funext
-open import elementary-number-theory.equality-integers funext
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.difference-integers
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers funext
+open import elementary-number-theory.multiplication-integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.groups funext
-open import group-theory.semigroups funext
+open import group-theory.abelian-groups
+open import group-theory.groups
+open import group-theory.semigroups
 
-open import ring-theory.rings funext
+open import ring-theory.rings
 ```
 
 </details>

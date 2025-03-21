@@ -1,25 +1,20 @@
 # Subgroups of higher groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  higher-group-theory.subgroups-higher-groups
-  (funext : function-extensionality)
-  where
+module higher-group-theory.subgroups-higher-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types funext
-open import foundation.cartesian-product-types funext
+open import foundation.0-connected-types
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.sets funext
+open import foundation.function-types
+open import foundation.sets
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups funext
+open import higher-group-theory.higher-groups
 
 open import structured-types.pointed-types
 ```

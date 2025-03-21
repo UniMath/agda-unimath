@@ -1,12 +1,7 @@
 # Powers of elements in rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.powers-of-elements-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.powers-of-elements-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -15,17 +10,17 @@ module
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.parity-natural-numbers funext
+open import elementary-number-theory.parity-natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.empty-types funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
+open import foundation.empty-types
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import ring-theory.central-elements-rings funext
-open import ring-theory.powers-of-elements-semirings funext
-open import ring-theory.rings funext
+open import ring-theory.central-elements-rings
+open import ring-theory.powers-of-elements-semirings
+open import ring-theory.rings
 ```
 
 </details>

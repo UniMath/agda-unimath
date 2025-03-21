@@ -1,28 +1,23 @@
 # Least upper bounds in posets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.least-upper-bounds-posets
-  (funext : function-extensionality)
-  where
+module order-theory.least-upper-bounds-posets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.booleans funext
+open import foundation.booleans
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import order-theory.posets funext
-open import order-theory.upper-bounds-posets funext
+open import order-theory.posets
+open import order-theory.upper-bounds-posets
 ```
 
 </details>

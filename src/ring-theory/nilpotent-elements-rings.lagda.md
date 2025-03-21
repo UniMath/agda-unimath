@@ -1,12 +1,7 @@
 # Nilpotent elements in rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.nilpotent-elements-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.nilpotent-elements-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -14,16 +9,16 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification funext
-open import foundation.identity-types funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import ring-theory.nilpotent-elements-semirings funext
-open import ring-theory.powers-of-elements-rings funext
-open import ring-theory.rings funext
-open import ring-theory.subsets-rings funext
+open import ring-theory.nilpotent-elements-semirings
+open import ring-theory.powers-of-elements-rings
+open import ring-theory.rings
+open import ring-theory.subsets-rings
 ```
 
 </details>

@@ -6,12 +6,7 @@ This file records formalized results from
 {{#cite 100theorems}}
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  literature.100-theorems
-  (funext : function-extensionality)
-  where
+module literature.100-theorems where
 ```
 
 ## The list
@@ -21,7 +16,7 @@ module
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 
 ```agda
-open import elementary-number-theory.rational-numbers funext using
+open import elementary-number-theory.rational-numbers using
   ( is-countable-ℚ)
 ```
 
@@ -30,7 +25,7 @@ open import elementary-number-theory.rational-numbers funext using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import elementary-number-theory.infinitude-of-primes funext using
+open import elementary-number-theory.infinitude-of-primes using
   ( infinitude-of-primes-ℕ)
 ```
 
@@ -45,7 +40,7 @@ hence we refer to the generalization as the Cantor-Schröder-Bernstein-Escardó
 theorem.
 
 ```agda
-open import foundation.cantor-schroder-bernstein-escardo funext using
+open import foundation.cantor-schroder-bernstein-escardo using
   ( Cantor-Schröder-Bernstein-Escardó ;
     Cantor-Schröder-Bernstein)
 ```
@@ -55,17 +50,17 @@ open import foundation.cantor-schroder-bernstein-escardo funext using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import commutative-algebra.binomial-theorem-commutative-rings funext using
+open import commutative-algebra.binomial-theorem-commutative-rings using
   ( binomial-theorem-Commutative-Ring)
-open import commutative-algebra.binomial-theorem-commutative-semirings funext using
+open import commutative-algebra.binomial-theorem-commutative-semirings using
   ( binomial-theorem-Commutative-Semiring)
-open import ring-theory.binomial-theorem-rings funext using
+open import ring-theory.binomial-theorem-rings using
   ( binomial-theorem-Ring)
-open import ring-theory.binomial-theorem-semirings funext using
+open import ring-theory.binomial-theorem-semirings using
   ( binomial-theorem-Semiring)
-open import elementary-number-theory.binomial-theorem-integers funext using
+open import elementary-number-theory.binomial-theorem-integers using
   ( binomial-theorem-ℤ)
-open import elementary-number-theory.binomial-theorem-natural-numbers funext using
+open import elementary-number-theory.binomial-theorem-natural-numbers using
   ( binomial-theorem-ℕ)
 ```
 
@@ -74,7 +69,7 @@ open import elementary-number-theory.binomial-theorem-natural-numbers funext usi
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import univalent-combinatorics.decidable-subtypes funext using
+open import univalent-combinatorics.decidable-subtypes using
   ( number-of-elements-decidable-subtype-is-finite)
 ```
 
@@ -83,7 +78,7 @@ open import univalent-combinatorics.decidable-subtypes funext using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import univalent-combinatorics.binomial-types funext using
+open import univalent-combinatorics.binomial-types using
   ( has-cardinality-binomial-type)
 ```
 
@@ -96,9 +91,9 @@ while the linked theorems are formalizations of Bezout's lemma, even though
 these are different statements.
 
 ```agda
-open import elementary-number-theory.bezouts-lemma-integers funext using
+open import elementary-number-theory.bezouts-lemma-integers using
   ( bezouts-lemma-ℤ)
-open import elementary-number-theory.bezouts-lemma-natural-numbers funext using
+open import elementary-number-theory.bezouts-lemma-natural-numbers using
   ( bezouts-lemma-ℕ)
 ```
 
@@ -107,7 +102,7 @@ open import elementary-number-theory.bezouts-lemma-natural-numbers funext using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import foundation.cantors-theorem funext using
+open import foundation.cantors-theorem using
   ( theorem-Cantor)
 ```
 
@@ -117,7 +112,7 @@ open import foundation.cantors-theorem funext using
 
 ```agda
 open import
-  elementary-number-theory.greatest-common-divisor-natural-numbers funext using
+  elementary-number-theory.greatest-common-divisor-natural-numbers using
   ( GCD-ℕ)
 ```
 
@@ -135,7 +130,7 @@ open import elementary-number-theory.natural-numbers using
 **Author:** [Victor Blanchi](https://github.com/VictorBlanchi)
 
 ```agda
-open import elementary-number-theory.fundamental-theorem-of-arithmetic funext using
+open import elementary-number-theory.fundamental-theorem-of-arithmetic using
   ( fundamental-theorem-arithmetic-list-ℕ)
 ```
 
@@ -144,7 +139,7 @@ open import elementary-number-theory.fundamental-theorem-of-arithmetic funext us
 **Author:** [malarbol](https://github.com/malarbol)
 
 ```agda
-open import real-numbers.metric-space-of-real-numbers funext using
+open import real-numbers.metric-space-of-real-numbers using
   ( is-triangular-premetric-leq-ℝ)
 ```
 

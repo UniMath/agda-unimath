@@ -1,26 +1,21 @@
 # Subsets of commutative semirings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.subsets-commutative-semirings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.subsets-commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-semirings funext
+open import commutative-algebra.commutative-semirings
 
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.subtypes funext
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import ring-theory.subsets-semirings funext
+open import ring-theory.subsets-semirings
 ```
 
 </details>

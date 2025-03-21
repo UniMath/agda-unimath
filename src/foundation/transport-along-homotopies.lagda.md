@@ -1,22 +1,17 @@
 # Transport along homotopies
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.transport-along-homotopies
-  (funext : function-extensionality)
-  where
+module foundation.transport-along-homotopies where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.function-extensionality funext
-
-open import foundation.homotopy-induction funext
-open import foundation.transport-along-higher-identifications funext
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
+open import foundation.homotopy-induction
+open import foundation.transport-along-higher-identifications
 open import foundation.universe-levels
 
 open import foundation-core.homotopies

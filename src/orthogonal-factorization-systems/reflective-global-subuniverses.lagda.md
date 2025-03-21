@@ -1,33 +1,28 @@
 # Reflective global subuniverses
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.reflective-global-subuniverses
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.reflective-global-subuniverses where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
-open import foundation.contractible-types funext
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.cospan-diagrams
-open import foundation.equivalences funext
-open import foundation.extensions-types-global-subuniverses funext
-open import foundation.global-subuniverses funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.pullback-cones funext
-open import foundation.subuniverses funext
+open import foundation.equivalences
+open import foundation.extensions-types-global-subuniverses
+open import foundation.global-subuniverses
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.pullback-cones
+open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.localizations-at-global-subuniverses funext
-open import orthogonal-factorization-systems.types-local-at-maps funext
-open import orthogonal-factorization-systems.universal-property-localizations-at-global-subuniverses funext
+open import orthogonal-factorization-systems.localizations-at-global-subuniverses
+open import orthogonal-factorization-systems.types-local-at-maps
+open import orthogonal-factorization-systems.universal-property-localizations-at-global-subuniverses
 ```
 
 </details>

@@ -3,45 +3,40 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.descent-data-function-types-over-pushouts
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.descent-data-function-types-over-pushouts where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps funext
-open import foundation.commuting-triangles-of-maps funext
-open import foundation.contractible-maps funext
-open import foundation.contractible-types funext
+open import foundation.commuting-squares-of-maps
+open import foundation.commuting-triangles-of-maps
+open import foundation.contractible-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.fibers-of-maps funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.homotopies funext
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
+open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.homotopy-algebra
-open import foundation.postcomposition-functions funext
-open import foundation.span-diagrams funext
+open import foundation.postcomposition-functions
+open import foundation.span-diagrams
 open import foundation.transport-along-identifications
-open import foundation.universal-property-equivalences funext
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import synthetic-homotopy-theory.cocones-under-spans funext
-open import synthetic-homotopy-theory.descent-data-pushouts funext
-open import synthetic-homotopy-theory.equivalences-descent-data-pushouts funext
-open import synthetic-homotopy-theory.families-descent-data-pushouts funext
-open import synthetic-homotopy-theory.morphisms-descent-data-pushouts funext
-open import synthetic-homotopy-theory.sections-descent-data-pushouts funext
-open import synthetic-homotopy-theory.universal-property-pushouts funext
+open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.descent-data-pushouts
+open import synthetic-homotopy-theory.equivalences-descent-data-pushouts
+open import synthetic-homotopy-theory.families-descent-data-pushouts
+open import synthetic-homotopy-theory.morphisms-descent-data-pushouts
+open import synthetic-homotopy-theory.sections-descent-data-pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>

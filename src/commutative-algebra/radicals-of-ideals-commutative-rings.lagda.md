@@ -1,42 +1,37 @@
 # Radicals of ideals of commutative rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.radicals-of-ideals-commutative-rings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.radicals-of-ideals-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.binomial-theorem-commutative-rings funext
-open import commutative-algebra.commutative-rings funext
-open import commutative-algebra.ideals-commutative-rings funext
-open import commutative-algebra.poset-of-ideals-commutative-rings funext
-open import commutative-algebra.poset-of-radical-ideals-commutative-rings funext
-open import commutative-algebra.powers-of-elements-commutative-rings funext
-open import commutative-algebra.radical-ideals-commutative-rings funext
-open import commutative-algebra.subsets-commutative-rings funext
+open import commutative-algebra.binomial-theorem-commutative-rings
+open import commutative-algebra.commutative-rings
+open import commutative-algebra.ideals-commutative-rings
+open import commutative-algebra.poset-of-ideals-commutative-rings
+open import commutative-algebra.poset-of-radical-ideals-commutative-rings
+open import commutative-algebra.powers-of-elements-commutative-rings
+open import commutative-algebra.radical-ideals-commutative-rings
+open import commutative-algebra.subsets-commutative-rings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification funext
-open import foundation.logical-equivalences funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
+open import foundation.existential-quantification
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import order-theory.galois-connections-large-posets funext
-open import order-theory.order-preserving-maps-large-posets funext
-open import order-theory.order-preserving-maps-large-preorders funext
-open import order-theory.reflective-galois-connections-large-posets funext
+open import order-theory.galois-connections-large-posets
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.reflective-galois-connections-large-posets
 ```
 
 </details>

@@ -1,12 +1,7 @@
 # Algebraic theory of groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  universal-algebra.algebraic-theory-of-groups
-  (funext : function-extensionality)
-  where
+module universal-algebra.algebraic-theory-of-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -15,22 +10,21 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types funext
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import group-theory.groups funext
+open import group-theory.groups
 
-open import linear-algebra.vectors funext
+open import linear-algebra.vectors
 
-open import universal-algebra.algebraic-theories funext
-open import universal-algebra.algebras-of-theories funext
-open import universal-algebra.signatures funext
-open import universal-algebra.terms-over-signatures funext
+open import universal-algebra.algebraic-theories
+open import universal-algebra.algebras-of-theories
+open import universal-algebra.signatures
+open import universal-algebra.terms-over-signatures
 ```
 
 </details>

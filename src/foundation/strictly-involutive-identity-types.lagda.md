@@ -1,12 +1,7 @@
 # Strictly involutive identity types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.strictly-involutive-identity-types
-  (funext : function-extensionality)
-  where
+module foundation.strictly-involutive-identity-types where
 ```
 
 <details><summary>Imports</summary>
@@ -16,13 +11,13 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.function-extensionality funext
-
-open import foundation.multivariable-homotopies funext
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
+open import foundation.multivariable-homotopies
 open import foundation.strictly-right-unital-concatenation-identifications
 open import foundation.telescopes
-open import foundation.univalence funext
-open import foundation.universal-property-identity-systems funext
+open import foundation.univalence
+open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

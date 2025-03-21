@@ -1,12 +1,7 @@
 # Dependent identifications
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.dependent-identifications
-  (funext : function-extensionality)
-  where
+module foundation.dependent-identifications where
 
 open import foundation-core.dependent-identifications public
 ```
@@ -18,7 +13,7 @@ open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.strictly-right-unital-concatenation-identifications
-open import foundation.transport-along-higher-identifications funext
+open import foundation.transport-along-higher-identifications
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

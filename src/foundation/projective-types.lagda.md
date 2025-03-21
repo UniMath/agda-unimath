@@ -1,12 +1,7 @@
 # Projective types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.projective-types
-  (funext : function-extensionality)
-  where
+module foundation.projective-types where
 ```
 
 <details><summary>Imports</summary>
@@ -14,9 +9,9 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.connected-maps funext
-open import foundation.postcomposition-functions funext
-open import foundation.surjective-maps funext
+open import foundation.connected-maps
+open import foundation.postcomposition-functions
+open import foundation.surjective-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
 

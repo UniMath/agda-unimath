@@ -1,23 +1,18 @@
 # Abstract equations over signatures
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  universal-algebra.abstract-equations-over-signatures
-  (funext : function-extensionality)
-  where
+module universal-algebra.abstract-equations-over-signatures where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import universal-algebra.signatures funext
-open import universal-algebra.terms-over-signatures funext
+open import universal-algebra.signatures
+open import universal-algebra.terms-over-signatures
 ```
 
 </details>

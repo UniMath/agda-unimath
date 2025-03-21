@@ -1,25 +1,20 @@
 # Large function categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.large-function-categories
-  (funext : function-extensionality)
-  where
+module category-theory.large-function-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.dependent-products-of-large-categories funext
-open import category-theory.isomorphisms-in-large-categories funext
-open import category-theory.large-categories funext
+open import category-theory.dependent-products-of-large-categories
+open import category-theory.isomorphisms-in-large-categories
+open import category-theory.large-categories
 
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.sets funext
-open import foundation.strictly-involutive-identity-types funext
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 

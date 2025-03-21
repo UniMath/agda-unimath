@@ -1,32 +1,27 @@
 # Invertible elements in rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.invertible-elements-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.invertible-elements-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-cartesian-product-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.contractible-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.invertible-elements-monoids funext
+open import group-theory.invertible-elements-monoids
 
-open import ring-theory.rings funext
+open import ring-theory.rings
 ```
 
 </details>

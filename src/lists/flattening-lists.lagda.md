@@ -1,26 +1,21 @@
 # Flattening of lists
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  lists.flattening-lists
-  (funext : function-extensionality)
-  where
+module lists.flattening-lists where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers funext
+open import elementary-number-theory.sums-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import lists.concatenation-lists funext
-open import lists.functoriality-lists funext
+open import lists.concatenation-lists
+open import lists.functoriality-lists
 open import lists.lists
 ```
 

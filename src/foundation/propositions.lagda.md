@@ -1,25 +1,20 @@
 # Propositions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.propositions
-  (funext : function-extensionality)
-  where
+module foundation.propositions where
 
 open import foundation-core.propositions public
-open import foundation.dependent-products-propositions funext public
+open import foundation.dependent-products-propositions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.fibers-of-maps funext
-open import foundation.logical-equivalences funext
-open import foundation.retracts-of-types funext
+open import foundation.fibers-of-maps
+open import foundation.logical-equivalences
+open import foundation.retracts-of-types
 open import foundation.unit-type
 open import foundation.universe-levels
 

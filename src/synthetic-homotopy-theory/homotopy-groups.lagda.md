@@ -1,12 +1,7 @@
 # Homotopy groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.homotopy-groups
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.homotopy-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -15,16 +10,16 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.set-truncations funext
-open import foundation.sets funext
+open import foundation.set-truncations
+open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups funext
-open import group-theory.homotopy-automorphism-groups funext
+open import group-theory.concrete-groups
+open import group-theory.homotopy-automorphism-groups
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.iterated-loop-spaces funext
+open import synthetic-homotopy-theory.iterated-loop-spaces
 ```
 
 </details>

@@ -1,40 +1,35 @@
 # Double negation stable propositions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.double-negation-stable-propositions
-  (funext : function-extensionality)
-  where
+module foundation.double-negation-stable-propositions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
-open import foundation.conjunction funext
-open import foundation.coproduct-types funext
-open import foundation.decidable-propositions funext
-open import foundation.decidable-types funext
+open import foundation.cartesian-product-types
+open import foundation.conjunction
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.disjunction funext
-open import foundation.double-negation funext
-open import foundation.embeddings funext
-open import foundation.empty-types funext
-open import foundation.equivalences funext
-open import foundation.existential-quantification funext
-open import foundation.logical-equivalences funext
-open import foundation.negation funext
-open import foundation.propositional-extensionality funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.subtypes funext
+open import foundation.dependent-products-propositions
+open import foundation.disjunction
+open import foundation.double-negation
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositional-extensionality
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.universal-quantification funext
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -42,7 +37,7 @@ open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.retracts-of-types
 
-open import logic.double-negation-elimination funext
+open import logic.double-negation-elimination
 ```
 
 </details>

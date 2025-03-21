@@ -1,28 +1,23 @@
 # Fully faithful maps between precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.fully-faithful-maps-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.fully-faithful-maps-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.faithful-maps-precategories funext
-open import category-theory.full-maps-precategories funext
-open import category-theory.maps-precategories funext
-open import category-theory.precategories funext
+open import category-theory.faithful-maps-precategories
+open import category-theory.full-maps-precategories
+open import category-theory.maps-precategories
+open import category-theory.precategories
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.iterated-dependent-product-types funext
-open import foundation.propositions funext
-open import foundation.surjective-maps funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.iterated-dependent-product-types
+open import foundation.propositions
+open import foundation.surjective-maps
 open import foundation.telescopes
 open import foundation.universe-levels
 ```

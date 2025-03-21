@@ -1,12 +1,7 @@
 # The poset of cyclic rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.poset-of-cyclic-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.poset-of-cyclic-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -14,9 +9,9 @@ module
 ```agda
 open import foundation.universe-levels
 
-open import order-theory.large-posets funext
+open import order-theory.large-posets
 
-open import ring-theory.category-of-cyclic-rings funext
+open import ring-theory.category-of-cyclic-rings
 ```
 
 </details>

@@ -1,28 +1,23 @@
 # The Legendre symbol
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.legendre-symbol
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.legendre-symbol where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.integers
-open import elementary-number-theory.modular-arithmetic funext
+open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.prime-numbers funext
-open import elementary-number-theory.squares-modular-arithmetic funext
+open import elementary-number-theory.prime-numbers
+open import elementary-number-theory.squares-modular-arithmetic
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
-open import foundation.decidable-types funext
+open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 ```
 
 </details>

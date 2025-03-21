@@ -1,28 +1,23 @@
 # The strong preunivalence axiom
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.strong-preunivalence
-  (funext : function-extensionality)
-  where
+module foundation.strong-preunivalence where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.preunivalence funext
-open import foundation.propositional-maps funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.small-types funext
-open import foundation.structured-equality-duality funext
-open import foundation.univalence funext
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.preunivalence
+open import foundation.propositional-maps
+open import foundation.propositions
+open import foundation.sets
+open import foundation.small-types
+open import foundation.structured-equality-duality
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.function-types

@@ -1,31 +1,26 @@
 # Congruence relations on groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.congruence-relations-groups
-  (funext : function-extensionality)
-  where
+module group-theory.congruence-relations-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
-open import foundation.equivalence-relations funext
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.torsorial-type-families funext
+open import foundation.equivalence-relations
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import group-theory.congruence-relations-semigroups funext
-open import group-theory.conjugation funext
-open import group-theory.groups funext
+open import group-theory.congruence-relations-semigroups
+open import group-theory.conjugation
+open import group-theory.groups
 ```
 
 </details>

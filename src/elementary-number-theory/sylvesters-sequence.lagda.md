@@ -1,22 +1,17 @@
 # Sylvester's sequence
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.sylvesters-sequence
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.sylvesters-sequence where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.ordinal-induction-natural-numbers funext
-open import elementary-number-theory.products-of-natural-numbers funext
+open import elementary-number-theory.ordinal-induction-natural-numbers
+open import elementary-number-theory.products-of-natural-numbers
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

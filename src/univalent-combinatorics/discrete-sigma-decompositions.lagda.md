@@ -1,29 +1,24 @@
 # Finite discrete Σ-decompositions
 
 ```agda
-open import foundation.function-extensionality-axiom
+module univalent-combinatorics.discrete-sigma-decompositions where
 
-module
-  univalent-combinatorics.discrete-sigma-decompositions
-  (funext : function-extensionality)
-  where
-
-open import foundation.discrete-sigma-decompositions funext public
+open import foundation.discrete-sigma-decompositions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.raising-universe-levels-unit-type funext
-open import foundation.subtypes funext
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.sigma-decompositions funext
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.sigma-decompositions
 ```
 
 </details>

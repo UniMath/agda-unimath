@@ -1,24 +1,19 @@
 # Models of signatures
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  universal-algebra.models-of-signatures
-  (funext : function-extensionality)
-  where
+module universal-algebra.models-of-signatures where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.sets funext
+open import foundation.sets
 open import foundation.universe-levels
 
-open import linear-algebra.vectors funext
+open import linear-algebra.vectors
 
-open import universal-algebra.signatures funext
+open import universal-algebra.signatures
 ```
 
 </details>

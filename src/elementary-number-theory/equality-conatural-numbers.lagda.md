@@ -3,46 +3,41 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.equality-conatural-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.equality-conatural-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.conatural-numbers funext
+open import elementary-number-theory.conatural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coherently-invertible-maps funext
-open import foundation.coproduct-types funext
+open import foundation.coherently-invertible-maps
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.double-negation funext
-open import foundation.double-negation funext-stable-equality
-open import foundation.empty-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-coproduct-types funext
+open import foundation.double-negation
+open import foundation.double-negation-stable-equality
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.negation funext
-open import foundation.retractions funext
-open import foundation.retracts-of-types funext
-open import foundation.sections funext
-open import foundation.sets funext
-open import foundation.tight-apartness-relations funext
-open import foundation.torsorial-type-families funext
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negation
+open import foundation.retractions
+open import foundation.retracts-of-types
+open import foundation.sections
+open import foundation.sets
+open import foundation.tight-apartness-relations
+open import foundation.torsorial-type-families
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.maybe
 
-open import logic.double-negation-elimination funext
+open import logic.double-negation-elimination
 ```
 
 </details>

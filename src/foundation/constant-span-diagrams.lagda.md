@@ -1,20 +1,15 @@
 # Constant span diagrams
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.constant-span-diagrams
-  (funext : function-extensionality)
-  where
+module foundation.constant-span-diagrams where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.span-diagrams funext
+open import foundation.span-diagrams
 open import foundation.spans
 open import foundation.universe-levels
 

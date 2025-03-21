@@ -1,25 +1,20 @@
 # Coproducts of pullbacks
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.coproducts-pullbacks
-  (funext : function-extensionality)
-  where
+module foundation.coproducts-pullbacks where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospan-diagrams funext
-open import foundation.coproduct-types funext
+open import foundation.cones-over-cospan-diagrams
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.equality-coproduct-types funext
-open import foundation.functoriality-coproduct-types funext
-open import foundation.identity-types funext
-open import foundation.standard-pullbacks funext
+open import foundation.equality-coproduct-types
+open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
+open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
@@ -27,10 +22,10 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.pullbacks funext
+open import foundation-core.pullbacks
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.universal-property-pullbacks funext
+open import foundation-core.universal-property-pullbacks
 ```
 
 </details>

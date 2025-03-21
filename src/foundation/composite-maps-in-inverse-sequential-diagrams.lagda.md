@@ -1,12 +1,7 @@
 # Composite maps in inverse sequential diagrams
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.composite-maps-in-inverse-sequential-diagrams
-  (funext : function-extensionality)
-  where
+module foundation.composite-maps-in-inverse-sequential-diagrams where
 ```
 
 <details><summary>Imports</summary>
@@ -15,8 +10,8 @@ module
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-inverse-sequential-diagrams funext
-open import foundation.inverse-sequential-diagrams funext
+open import foundation.dependent-inverse-sequential-diagrams
+open import foundation.inverse-sequential-diagrams
 open import foundation.universe-levels
 
 open import foundation-core.function-types

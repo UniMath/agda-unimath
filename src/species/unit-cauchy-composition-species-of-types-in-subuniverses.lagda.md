@@ -1,24 +1,19 @@
 # The unit of Cauchy composition of species of types in subuniverses
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  species.unit-cauchy-composition-species-of-types-in-subuniverses
-  (funext : function-extensionality)
-  where
+module species.unit-cauchy-composition-species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.global-subuniverses funext
-open import foundation.subuniverses funext
+open import foundation.global-subuniverses
+open import foundation.subuniverses
 open import foundation.universe-levels
 
-open import species.species-of-types-in-subuniverses funext
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>

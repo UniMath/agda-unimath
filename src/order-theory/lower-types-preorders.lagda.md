@@ -1,22 +1,17 @@
 # Lower types in preorders
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.lower-types-preorders
-  (funext : function-extensionality)
-  where
+module order-theory.lower-types-preorders where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.subtypes funext
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import order-theory.preorders funext
+open import order-theory.preorders
 ```
 
 </details>

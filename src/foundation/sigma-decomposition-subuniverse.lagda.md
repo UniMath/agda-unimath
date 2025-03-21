@@ -1,20 +1,15 @@
 # Σ-decompositions of types into types in a subuniverse
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.sigma-decomposition-subuniverse
-  (funext : function-extensionality)
-  where
+module foundation.sigma-decomposition-subuniverse where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.relaxed-sigma-decompositions funext
-open import foundation.subuniverses funext
+open import foundation.relaxed-sigma-decompositions
+open import foundation.subuniverses
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

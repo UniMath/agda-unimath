@@ -1,12 +1,7 @@
 # Diagonal matrices on rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  linear-algebra.diagonal-matrices-on-rings
-  (funext : function-extensionality)
-  where
+module linear-algebra.diagonal-matrices-on-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -16,13 +11,13 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.constant-vectors funext
-open import linear-algebra.functoriality-vectors funext
-open import linear-algebra.matrices-on-rings funext
-open import linear-algebra.vectors funext
-open import linear-algebra.vectors funext-on-rings
+open import linear-algebra.constant-vectors
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.matrices-on-rings
+open import linear-algebra.vectors
+open import linear-algebra.vectors-on-rings
 
-open import ring-theory.rings funext
+open import ring-theory.rings
 ```
 
 </details>

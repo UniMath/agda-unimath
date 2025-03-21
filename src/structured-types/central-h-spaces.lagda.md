@@ -1,18 +1,13 @@
 # Central H-spaces
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.central-h-spaces
-  (funext : function-extensionality)
-  where
+module structured-types.central-h-spaces where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.universe-levels
 
 open import structured-types.pointed-types

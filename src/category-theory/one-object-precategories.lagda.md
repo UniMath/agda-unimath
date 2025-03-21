@@ -1,29 +1,24 @@
 # One object precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.one-object-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.one-object-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.endomorphisms-in-precategories funext
-open import category-theory.precategories funext
+open import category-theory.endomorphisms-in-precategories
+open import category-theory.precategories
 
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.monoids funext
+open import group-theory.monoids
 ```
 
 </details>

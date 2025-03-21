@@ -1,12 +1,7 @@
 # Untruncated π-finite types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.untruncated-pi-finite-types
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.untruncated-pi-finite-types where
 ```
 
 <details><summary>Imports</summary>
@@ -14,55 +9,54 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.0-connected-types funext
+open import foundation.0-connected-types
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
-open import foundation.coproduct-types funext
-open import foundation.decidable-propositions funext
-open import foundation.decidable-types funext
-open import foundation.dependent-identifications funext
-open import foundation.embeddings funext
-open import foundation.empty-types funext
-open import foundation.equality-coproduct-types funext
-open import foundation.equality-dependent-pair-types funext
-open import foundation.equivalences funext
-open import foundation.fiber-inclusions funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.functoriality-set-truncation funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.maybe funext
-open import foundation.mere-equality funext
-open import foundation.propositional-extensionality funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.retracts-of-types funext
-open import foundation.set-presented-types funext
-open import foundation.set-truncations funext
-open import foundation.sets funext
-open import foundation.subtypes funext
-open import foundation.surjective-maps funext
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.decidable-types
+open import foundation.dependent-identifications
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equality-coproduct-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.fiber-inclusions
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-set-truncation
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.maybe
+open import foundation.mere-equality
+open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.retracts-of-types
+open import foundation.set-presented-types
+open import foundation.set-truncations
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-coproduct-types funext
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import univalent-combinatorics.coproduct-types funext
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.dependent-pair-types funext
-open import univalent-combinatorics.equality-finite-types funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.finitely-many-connected-components funext
-open import univalent-combinatorics.finitely-presented-types funext
-open import univalent-combinatorics.function-types funext
-open import univalent-combinatorics.image-of-maps funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-many-connected-components
+open import univalent-combinatorics.finitely-presented-types
+open import univalent-combinatorics.function-types
+open import univalent-combinatorics.image-of-maps
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

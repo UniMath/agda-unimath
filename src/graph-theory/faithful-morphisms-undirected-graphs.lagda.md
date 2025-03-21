@@ -1,24 +1,19 @@
 # Faithful morphisms of undirected graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.faithful-morphisms-undirected-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.faithful-morphisms-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.propositions funext
+open import foundation.embeddings
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import graph-theory.morphisms-undirected-graphs funext
-open import graph-theory.undirected-graphs funext
+open import graph-theory.morphisms-undirected-graphs
+open import graph-theory.undirected-graphs
 ```
 
 </details>

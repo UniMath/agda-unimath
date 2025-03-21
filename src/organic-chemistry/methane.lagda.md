@@ -1,35 +1,30 @@
 # Methane
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  organic-chemistry.methane
-  (funext : function-extensionality)
-  where
+module organic-chemistry.methane where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers funext
+open import elementary-number-theory.inequality-natural-numbers
 
-open import finite-group-theory.tetrahedra-in-3-space funext
+open import finite-group-theory.tetrahedra-in-3-space
 
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.identity-types funext
-open import foundation.propositional-truncations funext
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import graph-theory.walks-undirected-graphs funext
+open import graph-theory.walks-undirected-graphs
 
-open import organic-chemistry.alkanes funext
-open import organic-chemistry.hydrocarbons funext
+open import organic-chemistry.alkanes
+open import organic-chemistry.hydrocarbons
 
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

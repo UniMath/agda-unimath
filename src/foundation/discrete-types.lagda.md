@@ -1,26 +1,21 @@
 # Discrete types
 
 ```agda
-open import foundation.function-extensionality-axiom
+module foundation.discrete-types where
 
-module
-  foundation.discrete-types
-  (funext : function-extensionality)
-  where
-
-open import foundation-core.discrete-types funext public
+open import foundation-core.discrete-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.apartness-relations funext
-open import foundation.binary-relations funext
-open import foundation.decidable-types funext
+open import foundation.apartness-relations
+open import foundation.binary-relations
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.negation funext
-open import foundation.propositional-truncations funext
-open import foundation.tight-apartness-relations funext
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types

@@ -1,12 +1,7 @@
 # Perfect images
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.perfect-images
-  (funext : function-extensionality)
-  where
+module foundation.perfect-images where
 ```
 
 <details><summary>Imports</summary>
@@ -15,14 +10,14 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.decidable-types funext
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.double-negation funext
-open import foundation.iterated-dependent-product-types funext
-open import foundation.iterating-functions funext
-open import foundation.law-of-excluded-middle funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
+open import foundation.double-negation
+open import foundation.iterated-dependent-product-types
+open import foundation.iterating-functions
+open import foundation.law-of-excluded-middle
+open import foundation.negated-equality
+open import foundation.negation
 open import foundation.telescopes
 open import foundation.universe-levels
 

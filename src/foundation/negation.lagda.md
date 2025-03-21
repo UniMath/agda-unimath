@@ -1,12 +1,7 @@
 # Negation
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.negation
-  (funext : function-extensionality)
-  where
+module foundation.negation where
 
 open import foundation-core.negation public
 ```
@@ -15,8 +10,8 @@ open import foundation-core.negation public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.logical-equivalences funext
+open import foundation.dependent-products-propositions
+open import foundation.logical-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.empty-types

@@ -1,12 +1,7 @@
 # Directed trees
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.directed-trees
-  (funext : function-extensionality)
-  where
+module trees.directed-trees where
 ```
 
 <details><summary>Imports</summary>
@@ -15,31 +10,31 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
-open import foundation.contractible-types funext
-open import foundation.coproduct-types funext
-open import foundation.decidable-types funext
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.equality-dependent-pair-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-coproduct-types funext
-open import foundation.identity-types funext
-open import foundation.isolated-elements funext
-open import foundation.negated-equality funext
-open import foundation.negation funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
-open import foundation.torsorial-type-families funext
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
+open import foundation.isolated-elements
+open import foundation.negated-equality
+open import foundation.negation
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-coproduct-types funext
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-empty-type funext
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs funext
-open import graph-theory.walks-directed-graphs funext
+open import graph-theory.directed-graphs
+open import graph-theory.walks-directed-graphs
 ```
 
 </details>

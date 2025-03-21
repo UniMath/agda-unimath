@@ -1,20 +1,15 @@
 # Coinhabited pairs of types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.coinhabited-pairs-of-types
-  (funext : function-extensionality)
-  where
+module foundation.coinhabited-pairs-of-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.inhabited-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositional-truncations funext
+open import foundation.inhabited-types
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.propositions

@@ -1,26 +1,21 @@
 # Ideals of commutative semirings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.ideals-commutative-semirings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.ideals-commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-semirings funext
-open import commutative-algebra.subsets-commutative-semirings funext
+open import commutative-algebra.commutative-semirings
+open import commutative-algebra.subsets-commutative-semirings
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import ring-theory.ideals-semirings funext
+open import ring-theory.ideals-semirings
 ```
 
 </details>

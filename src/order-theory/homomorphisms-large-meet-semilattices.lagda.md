@@ -1,22 +1,17 @@
 # Homomorphisms of large meet-semilattices
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.homomorphisms-large-meet-semilattices
-  (funext : function-extensionality)
-  where
+module order-theory.homomorphisms-large-meet-semilattices where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import order-theory.large-meet-semilattices funext
-open import order-theory.order-preserving-maps-large-posets funext
+open import order-theory.large-meet-semilattices
+open import order-theory.order-preserving-maps-large-posets
 ```
 
 </details>

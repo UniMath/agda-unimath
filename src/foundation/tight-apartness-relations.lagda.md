@@ -1,23 +1,17 @@
 # Tight apartness relations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.tight-apartness-relations
-  (funext : function-extensionality)
-  where
+module foundation.tight-apartness-relations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.apartness-relations funext
-open import foundation.binary-relations funext
+open import foundation.apartness-relations
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality funext
-
-open import foundation.propositional-truncations funext
+open import foundation.function-extensionality
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

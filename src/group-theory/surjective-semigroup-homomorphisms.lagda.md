@@ -1,25 +1,20 @@
 # Surjective semigroup homomorphisms
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.surjective-semigroup-homomorphisms
-  (funext : function-extensionality)
-  where
+module group-theory.surjective-semigroup-homomorphisms where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions funext
-open import foundation.surjective-maps funext
+open import foundation.propositions
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
-open import group-theory.full-subsemigroups funext
-open import group-theory.homomorphisms-semigroups funext
-open import group-theory.images-of-semigroup-homomorphisms funext
-open import group-theory.semigroups funext
+open import group-theory.full-subsemigroups
+open import group-theory.homomorphisms-semigroups
+open import group-theory.images-of-semigroup-homomorphisms
+open import group-theory.semigroups
 ```
 
 </details>

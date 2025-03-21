@@ -1,20 +1,15 @@
 # Fibered involutions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.fibered-involutions
-  (funext : function-extensionality)
-  where
+module foundation.fibered-involutions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.fibered-maps funext
-open import foundation.involutions funext
+open import foundation.fibered-maps
+open import foundation.involutions
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

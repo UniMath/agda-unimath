@@ -1,27 +1,22 @@
 # Cyclic types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.cyclic-types
-  (funext : function-extensionality)
-  where
+module structured-types.cyclic-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.automorphisms funext
+open import foundation.automorphisms
 open import foundation.dependent-pair-types
-open import foundation.iterating-automorphisms funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.surjective-maps funext
+open import foundation.iterating-automorphisms
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
-open import structured-types.sets-equipped-with-automorphisms funext
+open import structured-types.sets-equipped-with-automorphisms
 ```
 
 </details>

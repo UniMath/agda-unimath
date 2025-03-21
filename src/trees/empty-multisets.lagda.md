@@ -1,26 +1,21 @@
 # Empty multisets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.empty-multisets
-  (funext : function-extensionality)
-  where
+module trees.empty-multisets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import trees.elementhood-relation-w-types funext
-open import trees.multisets funext
-open import trees.w-types funext
+open import trees.elementhood-relation-w-types
+open import trees.multisets
+open import trees.w-types
 ```
 
 </details>

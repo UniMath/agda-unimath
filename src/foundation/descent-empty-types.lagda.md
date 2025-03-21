@@ -1,23 +1,18 @@
 # Descent for the empty type
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.descent-empty-types
-  (funext : function-extensionality)
-  where
+module foundation.descent-empty-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospan-diagrams funext
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
-open import foundation-core.pullbacks funext
+open import foundation-core.pullbacks
 ```
 
 </details>

@@ -3,12 +3,7 @@
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  modal-type-theory.universal-property-flat-discrete-crisp-types
-  (funext : function-extensionality)
-  where
+module modal-type-theory.universal-property-flat-discrete-crisp-types where
 ```
 
 <details><summary>Imports</summary>
@@ -16,20 +11,19 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.postcomposition-functions funext
-open import foundation.universal-property-equivalences funext
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.postcomposition-functions
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
-open import modal-type-theory.action-on-identifications-crisp-functions funext
-open import modal-type-theory.crisp-function-types funext
-open import modal-type-theory.flat-discrete-crisp-types funext
-open import modal-type-theory.flat-modality funext
-open import modal-type-theory.functoriality-flat-modality funext
+open import modal-type-theory.action-on-identifications-crisp-functions
+open import modal-type-theory.crisp-function-types
+open import modal-type-theory.flat-discrete-crisp-types
+open import modal-type-theory.flat-modality
+open import modal-type-theory.functoriality-flat-modality
 ```
 
 </details>

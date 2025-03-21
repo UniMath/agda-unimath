@@ -1,25 +1,20 @@
 # Deflationary maps on a poset
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.deflationary-maps-posets
-  (funext : function-extensionality)
-  where
+module order-theory.deflationary-maps-posets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.propositions funext
-open import foundation.subtypes funext
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import order-theory.deflationary-maps-preorders funext
-open import order-theory.order-preserving-maps-posets funext
-open import order-theory.posets funext
+open import order-theory.deflationary-maps-preorders
+open import order-theory.order-preserving-maps-posets
+open import order-theory.posets
 ```
 
 </details>

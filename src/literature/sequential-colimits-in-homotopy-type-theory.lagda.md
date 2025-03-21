@@ -4,12 +4,7 @@ This file collects references to formalization of constructions and theorems
 from {{#cite SvDR20}}.
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  literature.sequential-colimits-in-homotopy-type-theory
-  (funext : function-extensionality)
-  where
+module literature.sequential-colimits-in-homotopy-type-theory where
 ```
 
 ## 2 Homotopy Type Theory
@@ -21,7 +16,7 @@ import below for completeness.
 open import foundation.universe-levels using
   ( UU
   )
-open import foundation.identity-types funext using
+open import foundation.identity-types using
   ( Id -- "path"
   ; refl -- "constant path"
   ; inv -- "inverse path"
@@ -31,21 +26,20 @@ open import foundation.identity-types funext using
 open import foundation.action-on-identifications-functions using
   ( ap -- "functions respect paths"
   )
-open import foundation.homotopies funext using
+open import foundation.homotopies using
   ( _~_ -- "homotopy"
   )
-open import foundation.equivalences funext using
+open import foundation.equivalences using
   ( equiv -- "equivalence"
   )
-open import foundation.univalence funext using
+open import foundation.univalence using
   ( univalence -- "the univalence axiom"
   ; map-eq -- "function p̅ associated to a path"
   )
-open import foundation.function-extensionality funext
- using
+open import foundation.function-extensionality using
   ( funext -- "the function extensionality axiom"
   )
-open import foundation.fibers-of-maps funext using
+open import foundation.fibers-of-maps using
   ( fiber -- "the homotopy fiber of a function"
   )
 open import foundation.transport-along-identifications using
@@ -54,21 +48,21 @@ open import foundation.transport-along-identifications using
 open import foundation.action-on-identifications-dependent-functions using
   ( apd -- "dependent functions respect paths"
   )
-open import foundation.truncated-types funext using
+open import foundation.truncated-types using
   ( is-trunc -- "`n`-truncated types"
   )
-open import foundation.truncations funext using
+open import foundation.truncations using
   ( trunc -- "the `n`-truncation of a type"
   ; unit-trunc -- "the unit map into a type's `n`-truncation"
   ; is-truncation-trunc -- "precomposing by the unit is an equivalence"
   )
-open import foundation.connected-types funext using
+open import foundation.connected-types using
   ( is-connected -- "`n`-connected types"
   )
-open import foundation.truncated-maps funext using
+open import foundation.truncated-maps using
   ( is-trunc-map -- "`n`-truncated functions"
   )
-open import foundation.connected-maps funext using
+open import foundation.connected-maps using
   ( is-connected-map -- "`n`-connected functions"
   )
 ```
@@ -83,7 +77,7 @@ sequential colimits, and defines lifts of elements in a sequential diagram.
 **Definition 3.1.** Sequences.
 
 ```agda
-open import synthetic-homotopy-theory.sequential-diagrams funext using
+open import synthetic-homotopy-theory.sequential-diagrams using
   ( sequential-diagram
   )
 ```
@@ -102,7 +96,7 @@ universal property, and results about the standard construction of colimits are
 obtained by specialization to the canonical cocone.
 
 ```agda
-open import synthetic-homotopy-theory.sequential-colimits funext using
+open import synthetic-homotopy-theory.sequential-colimits using
   ( standard-sequential-colimit -- the canonical colimit type
   ; map-cocone-standard-sequential-colimit -- "the canonical injection"
   ; coherence-cocone-standard-sequential-colimit -- "the glue"
@@ -117,8 +111,8 @@ The data of a homotopy between two functions out of the standard sequential
 colimit is specified by the type `htpy-out-of-standard-sequential-colimit`,
 which we can then turn into a proper homotopy.
 
-`open import synthetic-homotopy-theory.sequential-colimits funext using
- using
+```agda
+open import synthetic-homotopy-theory.sequential-colimits using
   ( htpy-out-of-standard-sequential-colimit -- data of a homotopy
   ; htpy-htpy-out-of-standard-sequential-colimit -- "data of a homotopy induces a homotopy"
   )
@@ -131,12 +125,12 @@ We call natural transformations _morphisms of sequential diagrams_, and natural
 equivalences _equivalences of sequential diagrams_.
 
 ```agda
-open import synthetic-homotopy-theory.morphisms-sequential-diagrams funext using
+open import synthetic-homotopy-theory.morphisms-sequential-diagrams using
   ( hom-sequential-diagram -- "natural transformation"
   ; id-hom-sequential-diagram -- "identity natural transformation"
   ; comp-hom-sequential-diagram -- "composition of natural transformations"
   )
-open import synthetic-homotopy-theory.equivalences-sequential-diagrams funext using
+open import synthetic-homotopy-theory.equivalences-sequential-diagrams using
   ( equiv-sequential-diagram -- "natural equivalence"
   )
 ```
@@ -144,7 +138,7 @@ open import synthetic-homotopy-theory.equivalences-sequential-diagrams funext us
 **Lemma 3.5.** Functoriality of the Sequential Colimit.
 
 ```agda
-open import synthetic-homotopy-theory.functoriality-sequential-colimits funext using
+open import synthetic-homotopy-theory.functoriality-sequential-colimits using
   ( map-hom-standard-sequential-colimit -- "a natural transformation induces a map"
   ; preserves-id-map-hom-standard-sequential-colimit -- "1∞ ~ id(A∞)"
   ; preserves-comp-map-hom-standard-sequential-colimit -- "(σ ∘ τ)∞ ~ σ∞ ∘ τ∞"
@@ -166,7 +160,7 @@ property of a colimit of `A`. Specializing to the standard sequential colimit,
 we get and equivalence `A[k]∞ ≃ A∞`.
 
 ```agda
-open import synthetic-homotopy-theory.shifts-sequential-diagrams funext using
+open import synthetic-homotopy-theory.shifts-sequential-diagrams using
   ( compute-sequential-colimit-shift-sequential-diagram -- "A[k]∞ ≃ A∞"
   )
 compute-sequential-colimit-shift-sequential-diagram-once =
@@ -187,7 +181,7 @@ The paper defines fibered sequences as a family over the total space
 **Definition 4.1.** Fibered sequences. Equifibered sequences.
 
 ```agda
-open import synthetic-homotopy-theory.dependent-sequential-diagrams funext using
+open import synthetic-homotopy-theory.dependent-sequential-diagrams using
   ( dependent-sequential-diagram -- "A sequence (B, b) fibered over (A, a)"
   )
 ```
@@ -205,7 +199,7 @@ because it characterizes families over a sequential colimit.
 **Definition 4.3.** Σ of a fibered sequence.
 
 ```agda
-open import synthetic-homotopy-theory.total-sequential-diagrams funext using
+open import synthetic-homotopy-theory.total-sequential-diagrams using
   ( total-sequential-diagram -- "Σ (A, a) (B, b)"
   ; pr1-total-sequential-diagram -- "the canonical projection"
   )

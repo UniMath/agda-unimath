@@ -1,25 +1,20 @@
 # Morphisms of twisted pointed arrows
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.morphisms-twisted-pointed-arrows
-  (funext : function-extensionality)
-  where
+module structured-types.morphisms-twisted-pointed-arrows where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.identity-types funext
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.morphisms-twisted-arrows
 open import foundation.universe-levels
 
-open import structured-types.pointed-homotopies funext
-open import structured-types.pointed-maps funext
+open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 ```
 

@@ -1,35 +1,30 @@
 # The orbit category of a group
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.category-of-orbits-groups
-  (funext : function-extensionality)
-  where
+module group-theory.category-of-orbits-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories funext
-open import category-theory.full-large-subcategories funext
-open import category-theory.isomorphisms-in-large-precategories funext
-open import category-theory.large-categories funext
-open import category-theory.large-precategories funext
-open import category-theory.precategories funext
+open import category-theory.categories
+open import category-theory.full-large-subcategories
+open import category-theory.isomorphisms-in-large-precategories
+open import category-theory.large-categories
+open import category-theory.large-precategories
+open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
-open import group-theory.category-of-group-actions funext
-open import group-theory.group-actions funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-group-actions funext
-open import group-theory.isomorphisms-group-actions funext
-open import group-theory.precategory-of-group-actions funext
-open import group-theory.transitive-group-actions funext
+open import group-theory.category-of-group-actions
+open import group-theory.group-actions
+open import group-theory.groups
+open import group-theory.homomorphisms-group-actions
+open import group-theory.isomorphisms-group-actions
+open import group-theory.precategory-of-group-actions
+open import group-theory.transitive-group-actions
 ```
 
 </details>

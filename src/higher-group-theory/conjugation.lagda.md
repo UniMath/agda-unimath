@@ -1,27 +1,22 @@
 # Conjugation in higher groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  higher-group-theory.conjugation
-  (funext : function-extensionality)
-  where
+module higher-group-theory.conjugation where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.homotopies funext
-open import foundation.identity-types funext
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups funext
-open import higher-group-theory.homomorphisms-higher-groups funext
+open import higher-group-theory.higher-groups
+open import higher-group-theory.homomorphisms-higher-groups
 
-open import structured-types.conjugation-pointed-types funext
+open import structured-types.conjugation-pointed-types
 
-open import synthetic-homotopy-theory.conjugation-loops funext
+open import synthetic-homotopy-theory.conjugation-loops
 ```
 
 </details>

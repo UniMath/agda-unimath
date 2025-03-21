@@ -1,29 +1,24 @@
 # Pointed retractions of pointed maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.pointed-retractions
-  (funext : function-extensionality)
-  where
+module structured-types.pointed-retractions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-identifications funext
+open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.retractions
 
-open import structured-types.pointed-homotopies funext
-open import structured-types.pointed-maps funext
+open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 ```
 

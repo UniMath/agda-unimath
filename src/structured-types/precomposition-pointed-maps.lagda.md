@@ -1,12 +1,7 @@
 # Precomposition of pointed maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.precomposition-pointed-maps
-  (funext : function-extensionality)
-  where
+module structured-types.precomposition-pointed-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +9,7 @@ module
 ```agda
 open import foundation.universe-levels
 
-open import structured-types.pointed-maps funext
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 ```
 

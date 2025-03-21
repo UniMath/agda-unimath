@@ -17,8 +17,8 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 
-open import orthogonal-factorization-systems.double-lifts-families-of-elements funext
-open import orthogonal-factorization-systems.lifts-families-of-elements funext
+open import orthogonal-factorization-systems.double-lifts-families-of-elements
+open import orthogonal-factorization-systems.lifts-families-of-elements
 ```
 
 </details>
@@ -60,12 +60,7 @@ elements `a : (i : I) → A i` induces an evaluation map
 given by `c ↦ (λ i → c i (a i) (b i))`.
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  _
-  (funext : function-extensionality)
-  where
+module _
   {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : (i : I) → A i → UU l3}
   {C : (i : I) (x : A i) → B i x → UU l4}
   {a : (i : I) → A i} (b : dependent-lift-family-of-elements B a)

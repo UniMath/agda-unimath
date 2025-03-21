@@ -1,19 +1,14 @@
 # Hilbert's `ε`-operators
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.hilberts-epsilon-operators
-  (funext : function-extensionality)
-  where
+module foundation.hilberts-epsilon-operators where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functoriality-propositional-truncation funext
-open import foundation.propositional-truncations funext
+open import foundation.functoriality-propositional-truncation
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

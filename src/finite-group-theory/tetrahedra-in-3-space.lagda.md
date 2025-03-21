@@ -1,24 +1,19 @@
 # Tetrahedra in `3`-dimensional space
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  finite-group-theory.tetrahedra-in-3-space
-  (funext : function-extensionality)
-  where
+module finite-group-theory.tetrahedra-in-3-space where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
+open import foundation.empty-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.2-element-decidable-subtypes funext
-open import univalent-combinatorics.cyclic-finite-types funext
-open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.2-element-decidable-subtypes
+open import univalent-combinatorics.cyclic-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

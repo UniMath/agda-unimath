@@ -1,22 +1,17 @@
 # The Hardy-Ramanujan number
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.hardy-ramanujan-number
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.hardy-ramanujan-number where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.taxicab-numbers funext
+open import elementary-number-theory.taxicab-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.unit-type
 ```
 

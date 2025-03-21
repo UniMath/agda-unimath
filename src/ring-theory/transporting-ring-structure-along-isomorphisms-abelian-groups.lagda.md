@@ -11,17 +11,17 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.isomorphisms-abelian-groups funext
-open import group-theory.semigroups funext
+open import group-theory.abelian-groups
+open import group-theory.isomorphisms-abelian-groups
+open import group-theory.semigroups
 
-open import ring-theory.homomorphisms-rings funext
-open import ring-theory.isomorphisms-rings funext
-open import ring-theory.rings funext
+open import ring-theory.homomorphisms-rings
+open import ring-theory.isomorphisms-rings
+open import ring-theory.rings
 ```
 
 </details>
@@ -44,12 +44,7 @@ transported ring structure.
 ### Transporting the multiplicative structure of a ring along an isomorphism of abelian groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  _
-  (funext : function-extensionality)
-  where
+module _
   {l1 l2 : Level} (R : Ring l1) (A : Ab l2)
   (f : iso-Ab (ab-Ring R) A)
   where

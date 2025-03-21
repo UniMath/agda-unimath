@@ -1,38 +1,33 @@
 # Null-homotopic maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.null-homotopic-maps
-  (funext : function-extensionality)
-  where
+module foundation.null-homotopic-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-triangles-of-identifications funext
-open import foundation.constant-maps funext
+open import foundation.commuting-triangles-of-identifications
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.functoriality-dependent-pair-types funext
+open import foundation.empty-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction funext
-open import foundation.identity-types funext
-open import foundation.images funext
-open import foundation.inhabited-types funext
-open import foundation.negation funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.homotopy-induction
+open import foundation.identity-types
+open import foundation.images
+open import foundation.inhabited-types
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.universal-property-empty-type funext
+open import foundation.universal-property-empty-type
 open import foundation.universe-levels
-open import foundation.weakly-constant-maps funext
+open import foundation.weakly-constant-maps
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences

@@ -1,25 +1,20 @@
 # Natural numbers object in a precategory
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.natural-numbers-object-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.natural-numbers-object-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories funext
-open import category-theory.terminal-objects-precategories funext
+open import category-theory.precategories
+open import category-theory.terminal-objects-precategories
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.uniqueness-quantification funext
+open import foundation.identity-types
+open import foundation.uniqueness-quantification
 open import foundation.universe-levels
 ```
 

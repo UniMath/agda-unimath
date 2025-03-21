@@ -1,24 +1,19 @@
 # Cyclic higher groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  higher-group-theory.cyclic-higher-groups
-  (funext : function-extensionality)
-  where
+module higher-group-theory.cyclic-higher-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.embeddings funext
-open import foundation.existential-quantification funext
-open import foundation.propositions funext
+open import foundation.embeddings
+open import foundation.existential-quantification
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups funext
-open import higher-group-theory.homomorphisms-higher-groups funext
+open import higher-group-theory.higher-groups
+open import higher-group-theory.homomorphisms-higher-groups
 ```
 
 </details>

@@ -1,12 +1,7 @@
 # Rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.rings
-  (funext : function-extensionality)
-  where
+module ring-theory.rings where
 ```
 
 <details><summary>Imports</summary>
@@ -17,33 +12,33 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.binary-embeddings funext
+open import foundation.binary-embeddings
 open import foundation.binary-equivalences
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.involutions funext
-open import foundation.negation funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.involutions
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.commutative-monoids funext
-open import group-theory.groups funext
-open import group-theory.monoids funext
-open import group-theory.semigroups funext
+open import group-theory.abelian-groups
+open import group-theory.commutative-monoids
+open import group-theory.groups
+open import group-theory.monoids
+open import group-theory.semigroups
 
-open import lists.concatenation-lists funext
+open import lists.concatenation-lists
 open import lists.lists
 
-open import ring-theory.semirings funext
+open import ring-theory.semirings
 ```
 
 </details>

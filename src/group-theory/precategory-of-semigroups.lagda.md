@@ -1,23 +1,18 @@
 # The precategory of semigroups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.precategory-of-semigroups
-  (funext : function-extensionality)
-  where
+module group-theory.precategory-of-semigroups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories funext
+open import category-theory.large-precategories
 
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-semigroups funext
-open import group-theory.semigroups funext
+open import group-theory.homomorphisms-semigroups
+open import group-theory.semigroups
 ```
 
 </details>

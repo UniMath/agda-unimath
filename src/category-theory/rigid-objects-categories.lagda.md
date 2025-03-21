@@ -1,21 +1,16 @@
 # Rigid objects in a category
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.rigid-objects-categories
-  (funext : function-extensionality)
-  where
+module category-theory.rigid-objects-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories funext
-open import category-theory.rigid-objects-precategories funext
+open import category-theory.categories
+open import category-theory.rigid-objects-precategories
 
-open import foundation.propositions funext
+open import foundation.propositions
 open import foundation.universe-levels
 ```
 

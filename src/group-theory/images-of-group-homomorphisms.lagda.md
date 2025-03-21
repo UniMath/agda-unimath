@@ -1,36 +1,31 @@
 # Images of group homomorphisms
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.images-of-group-homomorphisms
-  (funext : function-extensionality)
-  where
+module group-theory.images-of-group-homomorphisms where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.images funext
-open import foundation.images funext-subtypes
-open import foundation.logical-equivalences funext
-open import foundation.propositional-truncations funext
-open import foundation.subtypes funext
-open import foundation.universal-property-image funext
+open import foundation.identity-types
+open import foundation.images
+open import foundation.images-subtypes
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
+open import foundation.subtypes
+open import foundation.universal-property-image
 open import foundation.universe-levels
 
-open import group-theory.groups funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.pullbacks-subgroups funext
-open import group-theory.subgroups funext
-open import group-theory.subsets-groups funext
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.pullbacks-subgroups
+open import group-theory.subgroups
+open import group-theory.subsets-groups
 
-open import order-theory.galois-connections-large-posets funext
-open import order-theory.order-preserving-maps-large-posets funext
-open import order-theory.order-preserving-maps-large-preorders funext
+open import order-theory.galois-connections-large-posets
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
 ```
 
 </details>

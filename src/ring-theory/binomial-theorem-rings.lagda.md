@@ -1,34 +1,29 @@
 # The binomial theorem for rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.binomial-theorem-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.binomial-theorem-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.binomial-coefficients funext
-open import elementary-number-theory.distance-natural-numbers funext
+open import elementary-number-theory.binomial-coefficients
+open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.homotopies funext
-open import foundation.identity-types funext
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.vectors-on-rings funext
+open import linear-algebra.vectors-on-rings
 
-open import ring-theory.binomial-theorem-semirings funext
-open import ring-theory.powers-of-elements-rings funext
-open import ring-theory.rings funext
-open import ring-theory.sums-rings funext
+open import ring-theory.binomial-theorem-semirings
+open import ring-theory.powers-of-elements-rings
+open import ring-theory.rings
+open import ring-theory.sums-rings
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

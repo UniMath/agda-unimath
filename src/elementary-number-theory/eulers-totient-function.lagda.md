@@ -1,23 +1,18 @@
 # Euler's totient function
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.eulers-totient-function
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.eulers-totient-function where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.relatively-prime-natural-numbers funext
+open import elementary-number-theory.relatively-prime-natural-numbers
 
-open import univalent-combinatorics.decidable-subtypes funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.decidable-subtypes
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

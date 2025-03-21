@@ -1,26 +1,21 @@
 # Center of a monoid
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.centers-monoids
-  (funext : function-extensionality)
-  where
+module group-theory.centers-monoids where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import group-theory.central-elements-monoids funext
-open import group-theory.homomorphisms-monoids funext
-open import group-theory.monoids funext
-open import group-theory.submonoids funext
+open import group-theory.central-elements-monoids
+open import group-theory.homomorphisms-monoids
+open import group-theory.monoids
+open import group-theory.submonoids
 ```
 
 </details>

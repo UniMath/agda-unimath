@@ -1,12 +1,7 @@
 # Multivariable functoriality of set quotients
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.multivariable-functoriality-set-quotients
-  (funext : function-extensionality)
-  where
+module foundation.multivariable-functoriality-set-quotients where
 ```
 
 <details><summary>Imports</summary>
@@ -14,18 +9,18 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.functoriality-set-quotients funext
-open import foundation.set-quotients funext
+open import foundation.functoriality-set-quotients
+open import foundation.set-quotients
 open import foundation.universe-levels
-open import foundation.vectors-set-quotients funext
+open import foundation.vectors-set-quotients
 
-open import foundation-core.equivalence-relations funext
+open import foundation-core.equivalence-relations
 open import foundation-core.function-types
 open import foundation-core.homotopies
 
-open import linear-algebra.vectors funext
+open import linear-algebra.vectors
 
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

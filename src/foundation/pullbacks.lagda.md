@@ -1,14 +1,9 @@
 # Pullbacks
 
 ```agda
-open import foundation.function-extensionality-axiom
+module foundation.pullbacks where
 
-module
-  foundation.pullbacks
-  (funext : function-extensionality)
-  where
-
-open import foundation-core.pullbacks funext public
+open import foundation-core.pullbacks public
 ```
 
 <details><summary>Imports</summary>
@@ -16,17 +11,17 @@ open import foundation-core.pullbacks funext public
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-cubes-of-maps funext
-open import foundation.cones-over-cospan-diagrams funext
+open import foundation.commuting-cubes-of-maps
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.dependent-sums-pullbacks funext
-open import foundation.descent-equivalences funext
+open import foundation.dependent-sums-pullbacks
+open import foundation.descent-equivalences
 open import foundation.equality-cartesian-product-types
-open import foundation.equivalences funext
-open import foundation.function-extensionality funext
-
-open import foundation.standard-pullbacks funext
-open import foundation.subtypes funext
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
+open import foundation.standard-pullbacks
+open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition

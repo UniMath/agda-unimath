@@ -1,29 +1,24 @@
 # Opposite posets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.opposite-posets
-  (funext : function-extensionality)
-  where
+module order-theory.opposite-posets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.equivalences
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 
-open import order-theory.opposite-preorders funext
-open import order-theory.order-preserving-maps-posets funext
-open import order-theory.posets funext
-open import order-theory.preorders funext
+open import order-theory.opposite-preorders
+open import order-theory.order-preserving-maps-posets
+open import order-theory.posets
+open import order-theory.preorders
 ```
 
 </details>

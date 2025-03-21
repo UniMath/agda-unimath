@@ -1,27 +1,22 @@
 # Mere embeddings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.mere-embeddings
-  (funext : function-extensionality)
-  where
+module foundation.mere-embeddings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cantor-schroder-bernstein-escardo funext
-open import foundation.embeddings funext
-open import foundation.law-of-excluded-middle funext
-open import foundation.mere-equivalences funext
-open import foundation.propositional-truncations funext
+open import foundation.cantor-schroder-bernstein-escardo
+open import foundation.embeddings
+open import foundation.law-of-excluded-middle
+open import foundation.mere-equivalences
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.propositions
 
-open import order-theory.large-preorders funext
+open import order-theory.large-preorders
 ```
 
 </details>

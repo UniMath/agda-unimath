@@ -1,12 +1,7 @@
 # Transposition of span diagrams
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.transposition-span-diagrams
-  (funext : function-extensionality)
-  where
+module foundation.transposition-span-diagrams where
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +9,7 @@ module
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.opposite-spans
-open import foundation.span-diagrams funext
+open import foundation.span-diagrams
 open import foundation.spans
 open import foundation.universe-levels
 ```

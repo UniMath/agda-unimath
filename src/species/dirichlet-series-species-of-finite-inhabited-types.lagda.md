@@ -1,12 +1,7 @@
 # Dirichlet series of species of finite inhabited types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  species.dirichlet-series-species-of-finite-inhabited-types
-  (funext : function-extensionality)
-  where
+module species.dirichlet-series-species-of-finite-inhabited-types where
 ```
 
 <details><summary>Imports</summary>
@@ -14,15 +9,15 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import species.species-of-finite-inhabited-types funext
+open import species.species-of-finite-inhabited-types
 
-open import univalent-combinatorics.cycle-prime-decomposition-natural-numbers funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.inhabited-finite-types funext
+open import univalent-combinatorics.cycle-prime-decomposition-natural-numbers
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.inhabited-finite-types
 ```
 
 </details>

@@ -1,28 +1,23 @@
 # The field of rational numbers
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.field-of-rational-numbers
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.field-of-rational-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.discrete-fields funext
+open import commutative-algebra.discrete-fields
 
-open import elementary-number-theory.multiplicative-group-of-rational-numbers funext
-open import elementary-number-theory.nonzero-rational-numbers funext
-open import elementary-number-theory.ring-of-rational-numbers funext
+open import elementary-number-theory.multiplicative-group-of-rational-numbers
+open import elementary-number-theory.nonzero-rational-numbers
+open import elementary-number-theory.ring-of-rational-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.identity-types funext
+open import foundation.function-types
+open import foundation.identity-types
 
-open import ring-theory.division-rings funext
+open import ring-theory.division-rings
 ```
 
 </details>

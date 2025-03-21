@@ -1,32 +1,27 @@
 # Vertical composition of spans of spans
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.vertical-composition-spans-of-spans
-  (funext : function-extensionality)
-  where
+module foundation.vertical-composition-spans-of-spans where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-triangles-of-maps funext
-open import foundation.composition-spans funext
+open import foundation.commuting-triangles-of-maps
+open import foundation.composition-spans
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.equivalences funext-arrows
-open import foundation.equivalences-spans funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.morphisms-arrows funext
+open import foundation.equivalences
+open import foundation.equivalences-arrows
+open import foundation.equivalences-spans
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.morphisms-arrows
 open import foundation.morphisms-spans
-open import foundation.pullbacks funext
+open import foundation.pullbacks
 open import foundation.spans
-open import foundation.spans-of-spans funext
-open import foundation.standard-pullbacks funext
-open import foundation.type-arithmetic-standard-pullbacks funext
+open import foundation.spans-of-spans
+open import foundation.standard-pullbacks
+open import foundation.type-arithmetic-standard-pullbacks
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

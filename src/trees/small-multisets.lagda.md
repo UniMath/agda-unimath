@@ -1,12 +1,7 @@
 # Small multisets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.small-multisets
-  (funext : function-extensionality)
-  where
+module trees.small-multisets where
 ```
 
 <details><summary>Imports</summary>
@@ -14,22 +9,22 @@ module
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.empty-types funext
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.raising-universe-levels funext
-open import foundation.small-types funext
-open import foundation.subtypes funext
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.small-types
+open import foundation.subtypes
 open import foundation.transport-along-identifications
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import trees.multisets funext
-open import trees.w-types funext
+open import trees.multisets
+open import trees.w-types
 ```
 
 </details>

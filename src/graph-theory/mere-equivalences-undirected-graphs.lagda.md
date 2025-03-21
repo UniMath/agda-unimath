@@ -1,23 +1,18 @@
 # Mere equivalences of undirected graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.mere-equivalences-undirected-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.mere-equivalences-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import graph-theory.equivalences-undirected-graphs funext
-open import graph-theory.undirected-graphs funext
+open import graph-theory.equivalences-undirected-graphs
+open import graph-theory.undirected-graphs
 ```
 
 </details>

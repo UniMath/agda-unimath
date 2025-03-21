@@ -1,25 +1,20 @@
 # The Collatz bijection
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  elementary-number-theory.collatz-bijection
-  (funext : function-extensionality)
-  where
+module elementary-number-theory.collatz-bijection where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.distance-natural-numbers funext
-open import elementary-number-theory.euclidean-division-natural-numbers funext
-open import elementary-number-theory.modular-arithmetic funext
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.euclidean-division-natural-numbers
+open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types funext
-open import foundation.identity-types funext
+open import foundation.coproduct-types
+open import foundation.identity-types
 ```
 
 </details>

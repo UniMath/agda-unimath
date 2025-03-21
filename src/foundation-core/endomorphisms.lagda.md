@@ -1,20 +1,15 @@
 # Endomorphisms
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation-core.endomorphisms
-  (funext : function-extensionality)
-  where
+module foundation-core.endomorphisms where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types funext
-open import foundation.sets funext
+open import foundation.dependent-products-truncated-types
+open import foundation.sets
 open import foundation.universe-levels
 
 open import foundation-core.function-types

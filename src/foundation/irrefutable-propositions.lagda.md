@@ -1,34 +1,29 @@
 # Irrefutable propositions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.irrefutable-propositions
-  (funext : function-extensionality)
-  where
+module foundation.irrefutable-propositions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
-open import foundation.contractible-types funext
-open import foundation.coproduct-types funext
-open import foundation.decidable-propositions funext
-open import foundation.decidable-types funext
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.double-negation funext
-open import foundation.empty-types funext
-open import foundation.function-types funext
-open import foundation.negation funext
-open import foundation.propositions funext
-open import foundation.subuniverses funext
+open import foundation.dependent-products-propositions
+open import foundation.double-negation
+open import foundation.empty-types
+open import foundation.function-types
+open import foundation.negation
+open import foundation.propositions
+open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import logic.double-negation-elimination funext
+open import logic.double-negation-elimination
 ```
 
 </details>

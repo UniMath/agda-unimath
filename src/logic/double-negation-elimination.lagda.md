@@ -1,33 +1,28 @@
 # Double negation elimination
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  logic.double-negation-elimination
-  (funext : function-extensionality)
-  where
+module logic.double-negation-elimination where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
-open import foundation.coproduct-types funext
-open import foundation.decidable-types funext
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.double-negation funext
+open import foundation.dependent-products-propositions
+open import foundation.double-negation
 open import foundation.evaluation-functions
-open import foundation.hilberts-epsilon-operators funext
-open import foundation.logical-equivalences funext
-open import foundation.retracts-of-types funext
+open import foundation.hilberts-epsilon-operators
+open import foundation.logical-equivalences
+open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.decidable-propositions funext
+open import foundation-core.decidable-propositions
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types

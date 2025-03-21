@@ -1,22 +1,17 @@
 # Lower types of elements in W-types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.lower-types-w-types
-  (funext : function-extensionality)
-  where
+module trees.lower-types-w-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.existential-quantification funext
+open import foundation.existential-quantification
 open import foundation.universe-levels
 
-open import trees.ranks-of-elements-w-types funext
-open import trees.w-types funext
+open import trees.ranks-of-elements-w-types
+open import trees.w-types
 ```
 
 </details>

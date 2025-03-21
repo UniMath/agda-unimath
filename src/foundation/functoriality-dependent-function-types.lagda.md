@@ -1,14 +1,9 @@
 # Functoriality of dependent function types
 
 ```agda
-open import foundation.function-extensionality-axiom
+module foundation.functoriality-dependent-function-types where
 
-module
-  foundation.functoriality-dependent-function-types
-  (funext : function-extensionality)
-  where
-
-open import foundation-core.functoriality-dependent-function-types funext public
+open import foundation-core.functoriality-dependent-function-types public
 ```
 
 <details><summary>Imports</summary>
@@ -16,15 +11,14 @@ open import foundation-core.functoriality-dependent-function-types funext public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types funext
-open import foundation.dependent-universal-property-equivalences funext
-open import foundation.equivalence-extensionality funext
-open import foundation.function-extensionality funext
-
-open import foundation.retracts-of-types funext
+open import foundation.dependent-products-truncated-types
+open import foundation.dependent-universal-property-equivalences
+open import foundation.equivalence-extensionality
+open import foundation.function-extensionality
+open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.unit-type
-open import foundation.universal-property-unit-type funext
+open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -38,7 +32,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositional-maps
-open import foundation-core.truncated-maps funext
+open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

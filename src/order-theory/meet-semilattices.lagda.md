@@ -1,34 +1,29 @@
 # Meet-semilattices
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.meet-semilattices
-  (funext : function-extensionality)
-  where
+module order-theory.meet-semilattices where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.subtypes funext
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.isomorphisms-semigroups funext
-open import group-theory.semigroups funext
+open import group-theory.isomorphisms-semigroups
+open import group-theory.semigroups
 
-open import order-theory.greatest-lower-bounds-posets funext
-open import order-theory.lower-bounds-posets funext
-open import order-theory.posets funext
-open import order-theory.preorders funext
+open import order-theory.greatest-lower-bounds-posets
+open import order-theory.lower-bounds-posets
+open import order-theory.posets
+open import order-theory.preorders
 ```
 
 </details>

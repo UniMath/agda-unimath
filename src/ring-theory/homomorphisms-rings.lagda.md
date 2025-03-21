@@ -1,37 +1,32 @@
 # Homomorphisms of rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.homomorphisms-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.homomorphisms-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
 open import foundation.subtype-identity-principle
-open import foundation.subtypes funext
-open import foundation.torsorial-type-families funext
+open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-abelian-groups funext
-open import group-theory.homomorphisms-commutative-monoids funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.homomorphisms-monoids funext
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.homomorphisms-commutative-monoids
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-monoids
 
-open import ring-theory.homomorphisms-semirings funext
-open import ring-theory.invertible-elements-rings funext
-open import ring-theory.rings funext
+open import ring-theory.homomorphisms-semirings
+open import ring-theory.invertible-elements-rings
+open import ring-theory.rings
 ```
 
 </details>

@@ -1,12 +1,7 @@
 # Path algebra
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.path-algebra
-  (funext : function-extensionality)
-  where
+module foundation.path-algebra where
 ```
 
 <details><summary>Imports</summary>
@@ -14,9 +9,9 @@ module
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.binary-embeddings funext
+open import foundation.binary-embeddings
 open import foundation.binary-equivalences
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-identifications

@@ -1,31 +1,26 @@
 # Premetric spaces
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  metric-spaces.premetric-spaces
-  (funext : function-extensionality)
-  where
+module metric-spaces.premetric-spaces where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers funext
+open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
-open import foundation.propositions funext
+open import foundation.function-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import metric-spaces.discrete-premetric-structures funext
-open import metric-spaces.extensional-premetric-structures funext
-open import metric-spaces.monotonic-premetric-structures funext
-open import metric-spaces.premetric-structures funext
-open import metric-spaces.reflexive-premetric-structures funext
-open import metric-spaces.symmetric-premetric-structures funext
-open import metric-spaces.triangular-premetric-structures funext
+open import metric-spaces.discrete-premetric-structures
+open import metric-spaces.extensional-premetric-structures
+open import metric-spaces.monotonic-premetric-structures
+open import metric-spaces.premetric-structures
+open import metric-spaces.reflexive-premetric-structures
+open import metric-spaces.symmetric-premetric-structures
+open import metric-spaces.triangular-premetric-structures
 ```
 
 </details>

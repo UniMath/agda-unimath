@@ -1,27 +1,22 @@
 # Functoriality of reflective global subuniverses
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.functoriality-reflective-global-subuniverses
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.functoriality-reflective-global-subuniverses where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps funext
-open import foundation.function-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.retractions funext
-open import foundation.retracts-of-types funext
+open import foundation.commuting-squares-of-maps
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.functoriality-localizations-at-global-subuniverses funext
-open import orthogonal-factorization-systems.reflective-global-subuniverses funext
+open import orthogonal-factorization-systems.functoriality-localizations-at-global-subuniverses
+open import orthogonal-factorization-systems.reflective-global-subuniverses
 ```
 
 </details>

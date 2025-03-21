@@ -1,12 +1,7 @@
 # Multiples of elements in rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.multiples-of-elements-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.multiples-of-elements-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -16,13 +11,13 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import group-theory.multiples-of-elements-abelian-groups funext
+open import group-theory.multiples-of-elements-abelian-groups
 
-open import ring-theory.rings funext
+open import ring-theory.rings
 ```
 
 </details>

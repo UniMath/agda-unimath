@@ -1,39 +1,34 @@
 # The group of multiplicative units of a commutative ring
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.groups-of-units-commutative-rings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.groups-of-units-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-large-precategories funext
+open import category-theory.functors-large-precategories
 
-open import commutative-algebra.commutative-rings funext
-open import commutative-algebra.homomorphisms-commutative-rings funext
-open import commutative-algebra.precategory-of-commutative-rings funext
+open import commutative-algebra.commutative-rings
+open import commutative-algebra.homomorphisms-commutative-rings
+open import commutative-algebra.precategory-of-commutative-rings
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.category-of-abelian-groups funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.homomorphisms-monoids funext
-open import group-theory.monoids funext
-open import group-theory.semigroups funext
-open import group-theory.submonoids funext
+open import group-theory.abelian-groups
+open import group-theory.category-of-abelian-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-monoids
+open import group-theory.monoids
+open import group-theory.semigroups
+open import group-theory.submonoids
 
-open import ring-theory.groups-of-units-rings funext
+open import ring-theory.groups-of-units-rings
 ```
 
 </details>

@@ -1,18 +1,13 @@
 # Strongly extensional maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.strongly-extensional-maps
-  (funext : function-extensionality)
-  where
+module foundation.strongly-extensional-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.apartness-relations funext
+open import foundation.apartness-relations
 open import foundation.universe-levels
 ```
 

@@ -1,59 +1,54 @@
 # Generating elements of groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.generating-elements-groups
-  (funext : function-extensionality)
-  where
+module group-theory.generating-elements-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings funext
+open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.images funext
-open import foundation.injective-maps funext
-open import foundation.propositional-maps funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.raising-universe-levels-unit-type funext
-open import foundation.sets funext
-open import foundation.subtypes funext
-open import foundation.surjective-maps funext
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.images
+open import foundation.injective-maps
+open import foundation.propositional-maps
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.addition-homomorphisms-abelian-groups funext
-open import group-theory.commuting-elements-groups funext
-open import group-theory.conjugation funext
-open import group-theory.endomorphism-rings-abelian-groups funext
-open import group-theory.free-groups-with-one-generator funext
-open import group-theory.full-subgroups funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.integer-multiples-of-elements-abelian-groups funext
-open import group-theory.integer-powers-of-elements-groups funext
-open import group-theory.isomorphisms-abelian-groups funext
-open import group-theory.normal-subgroups funext
-open import group-theory.quotient-groups funext
-open import group-theory.subgroups-generated-by-elements-groups funext
-open import group-theory.subsets-groups funext
-open import group-theory.trivial-group-homomorphisms funext
+open import group-theory.abelian-groups
+open import group-theory.addition-homomorphisms-abelian-groups
+open import group-theory.commuting-elements-groups
+open import group-theory.conjugation
+open import group-theory.endomorphism-rings-abelian-groups
+open import group-theory.free-groups-with-one-generator
+open import group-theory.full-subgroups
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.integer-multiples-of-elements-abelian-groups
+open import group-theory.integer-powers-of-elements-groups
+open import group-theory.isomorphisms-abelian-groups
+open import group-theory.normal-subgroups
+open import group-theory.quotient-groups
+open import group-theory.subgroups-generated-by-elements-groups
+open import group-theory.subsets-groups
+open import group-theory.trivial-group-homomorphisms
 
-open import ring-theory.integer-multiples-of-elements-rings funext
-open import ring-theory.rings funext
-open import ring-theory.transporting-ring-structure-along-isomorphisms-abelian-groups funext
+open import ring-theory.integer-multiples-of-elements-rings
+open import ring-theory.rings
+open import ring-theory.transporting-ring-structure-along-isomorphisms-abelian-groups
 ```
 
 </details>

@@ -3,28 +3,23 @@
 ```agda
 {-# OPTIONS --no-exact-split #-}
 
-open import foundation.function-extensionality-axiom
-
-module
-  reflection.precategory-solver
-  (funext : function-extensionality)
-  where
+module reflection.precategory-solver where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories funext
+open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-types funext
+open import foundation.function-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
 
-open import lists.concatenation-lists funext
+open import lists.concatenation-lists
 open import lists.lists
 
 open import reflection.arguments

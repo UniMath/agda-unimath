@@ -1,24 +1,19 @@
 # The dihedral groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.dihedral-groups
-  (funext : function-extensionality)
-  where
+module group-theory.dihedral-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.standard-cyclic-groups funext
+open import elementary-number-theory.standard-cyclic-groups
 
 open import foundation.universe-levels
 
-open import group-theory.dihedral-group-construction funext
-open import group-theory.groups funext
+open import group-theory.dihedral-group-construction
+open import group-theory.groups
 ```
 
 </details>

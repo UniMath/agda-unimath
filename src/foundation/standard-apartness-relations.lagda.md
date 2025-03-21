@@ -1,24 +1,19 @@
 # Standard apartness relations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.standard-apartness-relations
-  (funext : function-extensionality)
-  where
+module foundation.standard-apartness-relations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.apartness-relations funext
-open import foundation.decidable-types funext
+open import foundation.apartness-relations
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.law-of-excluded-middle funext
-open import foundation.logical-equivalences funext
-open import foundation.negated-equality funext
-open import foundation.tight-apartness-relations funext
+open import foundation.law-of-excluded-middle
+open import foundation.logical-equivalences
+open import foundation.negated-equality
+open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 
 open import foundation-core.identity-types

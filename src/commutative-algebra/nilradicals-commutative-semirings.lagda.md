@@ -1,25 +1,20 @@
 # The nilradical of a commutative semiring
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.nilradicals-commutative-semirings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.nilradicals-commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-semirings funext
-open import commutative-algebra.subsets-commutative-semirings funext
+open import commutative-algebra.commutative-semirings
+open import commutative-algebra.subsets-commutative-semirings
 
-open import foundation.existential-quantification funext
-open import foundation.identity-types funext
+open import foundation.existential-quantification
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import ring-theory.nilpotent-elements-semirings funext
+open import ring-theory.nilpotent-elements-semirings
 ```
 
 </details>

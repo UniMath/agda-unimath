@@ -1,12 +1,7 @@
 # Cartesian products of abelian groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.cartesian-products-abelian-groups
-  (funext : function-extensionality)
-  where
+module group-theory.cartesian-products-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -14,15 +9,15 @@ module
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.identity-types funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.cartesian-products-groups funext
-open import group-theory.groups funext
-open import group-theory.monoids funext
-open import group-theory.semigroups funext
+open import group-theory.abelian-groups
+open import group-theory.cartesian-products-groups
+open import group-theory.groups
+open import group-theory.monoids
+open import group-theory.semigroups
 ```
 
 </details>

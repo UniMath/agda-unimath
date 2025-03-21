@@ -1,23 +1,18 @@
 # The precategory of concrete groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.precategory-of-concrete-groups
-  (funext : function-extensionality)
-  where
+module group-theory.precategory-of-concrete-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories funext
+open import category-theory.large-precategories
 
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups funext
-open import group-theory.homomorphisms-concrete-groups funext
+open import group-theory.concrete-groups
+open import group-theory.homomorphisms-concrete-groups
 ```
 
 </details>

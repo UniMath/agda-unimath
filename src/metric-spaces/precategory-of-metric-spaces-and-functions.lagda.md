@@ -1,25 +1,20 @@
 # The precategory of metric spaces and functions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  metric-spaces.precategory-of-metric-spaces-and-functions
-  (funext : function-extensionality)
-  where
+module metric-spaces.precategory-of-metric-spaces-and-functions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories funext
+open import category-theory.precategories
 
-open import foundation.function-types funext
-open import foundation.identity-types funext
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import metric-spaces.functions-metric-spaces funext
-open import metric-spaces.metric-spaces funext
+open import metric-spaces.functions-metric-spaces
+open import metric-spaces.metric-spaces
 ```
 
 </details>

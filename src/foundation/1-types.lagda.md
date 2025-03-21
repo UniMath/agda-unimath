@@ -1,30 +1,25 @@
 # `1`-Types
 
 ```agda
-open import foundation.function-extensionality-axiom
+module foundation.1-types where
 
-module
-  foundation.1-types
-  (funext : function-extensionality)
-  where
-
-open import foundation-core.1-types funext public
+open import foundation-core.1-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types funext
-open import foundation.subuniverses funext
-open import foundation.truncated-types funext
+open import foundation.dependent-products-truncated-types
+open import foundation.subuniverses
+open import foundation.truncated-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncation-levels
 ```

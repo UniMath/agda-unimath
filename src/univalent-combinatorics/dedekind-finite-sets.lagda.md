@@ -1,22 +1,17 @@
 # Dedekind finite sets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.dedekind-finite-sets
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.dedekind-finite-sets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.equivalences funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 ```
 

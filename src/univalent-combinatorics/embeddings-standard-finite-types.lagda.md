@@ -1,34 +1,29 @@
 # Embeddings between standard finite types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.embeddings-standard-finite-types
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.embeddings-standard-finite-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.repeating-element-standard-finite-type funext
+open import elementary-number-theory.repeating-element-standard-finite-type
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
-open import foundation.decidable-types funext
+open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.empty-types funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
-open import foundation.sets funext
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.equality-standard-finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

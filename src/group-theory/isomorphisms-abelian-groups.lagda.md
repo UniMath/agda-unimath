@@ -1,34 +1,29 @@
 # Isomorphisms of abelian groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.isomorphisms-abelian-groups
-  (funext : function-extensionality)
-  where
+module group-theory.isomorphisms-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
-open import foundation.torsorial-type-families funext
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups funext
-open import group-theory.homomorphisms-abelian-groups funext
-open import group-theory.isomorphisms-groups funext
+open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.isomorphisms-groups
 ```
 
 </details>

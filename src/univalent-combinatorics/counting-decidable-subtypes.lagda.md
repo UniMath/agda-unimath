@@ -1,14 +1,9 @@
 # Counting the elements of decidable subtypes
 
 ```agda
-open import foundation.function-extensionality-axiom
+module univalent-combinatorics.counting-decidable-subtypes where
 
-module
-  univalent-combinatorics.counting-decidable-subtypes
-  (funext : function-extensionality)
-  where
-
-open import foundation.decidable-subtypes funext public
+open import foundation.decidable-subtypes public
 ```
 
 <details><summary>Imports</summary>
@@ -16,31 +11,31 @@ open import foundation.decidable-subtypes funext public
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types funext
-open import foundation.coproduct-types funext
-open import foundation.decidable-embeddings funext
-open import foundation.decidable-types funext
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-embeddings
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.equivalences funext
-open import foundation.fibers-of-maps funext
-open import foundation.function-types funext
-open import foundation.functoriality-coproduct-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.propositional-maps funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.subtypes funext
-open import foundation.type-arithmetic-coproduct-types funext
-open import foundation.type-arithmetic-empty-type funext
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.function-types
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositional-maps
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.decidable-propositions funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.standard-finite-types funext
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

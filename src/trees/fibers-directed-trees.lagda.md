@@ -1,30 +1,25 @@
 # Fibers of directed trees
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  trees.fibers-directed-trees
-  (funext : function-extensionality)
-  where
+module trees.fibers-directed-trees where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
+open import foundation.equivalences
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs funext
-open import graph-theory.fibers-directed-graphs funext
+open import graph-theory.directed-graphs
+open import graph-theory.fibers-directed-graphs
 
-open import trees.bases-directed-trees funext
-open import trees.directed-trees funext
-open import trees.morphisms-directed-trees funext
+open import trees.bases-directed-trees
+open import trees.directed-trees
+open import trees.morphisms-directed-trees
 ```
 
 </details>

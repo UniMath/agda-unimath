@@ -1,28 +1,23 @@
 # Cayley's theorem
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.cayleys-theorem
-  (funext : function-extensionality)
-  where
+module group-theory.cayleys-theorem where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.equivalence-extensionality funext
-open import foundation.identity-types funext
-open import foundation.injective-maps funext
+open import foundation.embeddings
+open import foundation.equivalence-extensionality
+open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.universe-levels
 
-open import group-theory.embeddings-groups funext
-open import group-theory.groups funext
-open import group-theory.homomorphisms-groups funext
-open import group-theory.symmetric-groups funext
+open import group-theory.embeddings-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.symmetric-groups
 ```
 
 </details>

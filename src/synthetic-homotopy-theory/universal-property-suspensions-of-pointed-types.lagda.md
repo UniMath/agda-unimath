@@ -1,35 +1,30 @@
 # Universal Property of suspensions of pointed types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types
-  (funext : function-extensionality)
-  where
+module synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types funext
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.identity-types funext
-open import foundation.torsorial-type-families funext
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.pointed-equivalences funext
-open import structured-types.pointed-maps funext
+open import structured-types.pointed-equivalences
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.functoriality-loop-spaces funext
-open import synthetic-homotopy-theory.loop-spaces funext
-open import synthetic-homotopy-theory.suspensions-of-pointed-types funext
-open import synthetic-homotopy-theory.suspensions-of-types funext
+open import synthetic-homotopy-theory.functoriality-loop-spaces
+open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.suspensions-of-pointed-types
+open import synthetic-homotopy-theory.suspensions-of-types
 ```
 
 </details>

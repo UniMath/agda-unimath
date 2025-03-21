@@ -1,29 +1,24 @@
 # Double powersets
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.double-powersets
-  (funext : function-extensionality)
-  where
+module foundation.double-powersets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.existential-quantification funext
-open import foundation.powersets funext
-open import foundation.propositional-truncations funext
+open import foundation.dependent-products-propositions
+open import foundation.existential-quantification
+open import foundation.powersets
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.propositions
-open import foundation-core.subtypes funext
+open import foundation-core.subtypes
 
-open import order-theory.large-posets funext
-open import order-theory.posets funext
+open import order-theory.large-posets
+open import order-theory.posets
 ```
 
 </details>

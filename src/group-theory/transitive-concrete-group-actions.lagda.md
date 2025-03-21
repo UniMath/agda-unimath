@@ -1,37 +1,32 @@
 # Transitive concrete group actions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.transitive-concrete-group-actions
-  (funext : function-extensionality)
-  where
+module group-theory.transitive-concrete-group-actions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.1-types funext
+open import foundation.1-types
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.existential-quantification funext
-open import foundation.function-types funext
-open import foundation.identity-types funext
-open import foundation.inhabited-types funext
-open import foundation.propositional-truncations funext
-open import foundation.propositions funext
-open import foundation.sets funext
-open import foundation.subtypes funext
-open import foundation.surjective-maps funext
+open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.inhabited-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
-open import group-theory.concrete-group-actions funext
-open import group-theory.concrete-groups funext
-open import group-theory.equivalences-concrete-group-actions funext
+open import group-theory.concrete-group-actions
+open import group-theory.concrete-groups
+open import group-theory.equivalences-concrete-group-actions
 
-open import higher-group-theory.transitive-higher-group-actions funext
+open import higher-group-theory.transitive-higher-group-actions
 ```
 
 </details>

@@ -1,12 +1,7 @@
 # Paths in undirected graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.paths-undirected-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.paths-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
@@ -15,11 +10,11 @@ module
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.injective-maps funext
+open import foundation.injective-maps
 open import foundation.universe-levels
 
-open import graph-theory.undirected-graphs funext
-open import graph-theory.walks-undirected-graphs funext
+open import graph-theory.undirected-graphs
+open import graph-theory.walks-undirected-graphs
 ```
 
 </details>

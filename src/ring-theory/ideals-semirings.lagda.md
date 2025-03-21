@@ -1,27 +1,22 @@
 # Ideals of semirings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.ideals-semirings
-  (funext : function-extensionality)
-  where
+module ring-theory.ideals-semirings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.propositions funext
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import group-theory.submonoids funext
+open import group-theory.submonoids
 
-open import ring-theory.semirings funext
-open import ring-theory.subsets-semirings funext
+open import ring-theory.semirings
+open import ring-theory.subsets-semirings
 ```
 
 </details>

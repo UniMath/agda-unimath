@@ -1,22 +1,17 @@
 # Homomorphisms of large locales
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  order-theory.homomorphisms-large-locales
-  (funext : function-extensionality)
-  where
+module order-theory.homomorphisms-large-locales where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import order-theory.homomorphisms-large-frames funext
-open import order-theory.large-locales funext
+open import order-theory.homomorphisms-large-frames
+open import order-theory.large-locales
 ```
 
 </details>

@@ -1,26 +1,21 @@
 # Wide global function classes
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  orthogonal-factorization-systems.wide-global-function-classes
-  (funext : function-extensionality)
-  where
+module orthogonal-factorization-systems.wide-global-function-classes where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings funext
-open import foundation.function-types funext
-open import foundation.propositions funext
+open import foundation.embeddings
+open import foundation.function-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.function-classes funext
-open import orthogonal-factorization-systems.global-function-classes funext
+open import orthogonal-factorization-systems.function-classes
+open import orthogonal-factorization-systems.global-function-classes
 ```
 
 </details>

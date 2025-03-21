@@ -1,12 +1,7 @@
 # Families of equivalences
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.families-of-equivalences
-  (funext : function-extensionality)
-  where
+module foundation.families-of-equivalences where
 
 open import foundation-core.families-of-equivalences public
 ```
@@ -14,8 +9,8 @@ open import foundation-core.families-of-equivalences public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-products-propositions funext
-open import foundation.equivalences funext
+open import foundation.dependent-products-propositions
+open import foundation.equivalences
 open import foundation.universe-levels
 
 open import foundation-core.propositions

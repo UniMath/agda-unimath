@@ -1,20 +1,15 @@
 # Commuting squares of morphisms in large precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.commuting-squares-of-morphisms-in-large-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.commuting-squares-of-morphisms-in-large-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories funext
+open import category-theory.large-precategories
 
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 ```
 

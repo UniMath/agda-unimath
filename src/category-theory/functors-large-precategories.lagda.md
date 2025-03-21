@@ -1,22 +1,17 @@
 # Functors between large precategories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.functors-large-precategories
-  (funext : function-extensionality)
-  where
+module category-theory.functors-large-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories funext
+open import category-theory.large-precategories
 
 open import foundation.action-on-identifications-functions
-open import foundation.function-types funext
-open import foundation.identity-types funext
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.universe-levels
 ```
 

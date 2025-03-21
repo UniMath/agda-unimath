@@ -1,39 +1,34 @@
 # Dirichlet products of species of types in subuniverses
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  species.dirichlet-products-species-of-types-in-subuniverses
-  (funext : function-extensionality)
-  where
+module species.dirichlet-products-species-of-types-in-subuniverses where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
-open import foundation.contractible-types funext
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.global-subuniverses funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.global-subuniverses
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.product-decompositions
-open import foundation.product-decompositions-subuniverse funext
-open import foundation.propositions funext
-open import foundation.raising-universe-levels-unit-type funext
-open import foundation.subuniverses funext
+open import foundation.product-decompositions-subuniverse
+open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
+open import foundation.subuniverses
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import species.dirichlet-products-species-of-types funext
-open import species.species-of-types-in-subuniverses funext
+open import species.dirichlet-products-species-of-types
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>

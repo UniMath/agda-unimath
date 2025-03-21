@@ -1,42 +1,37 @@
 # Subgroups of concrete groups
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  group-theory.subgroups-concrete-groups
-  (funext : function-extensionality)
-  where
+module group-theory.subgroups-concrete-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types funext
-open import foundation.0-maps funext
+open import foundation.0-connected-types
+open import foundation.0-maps
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
-open import foundation.existential-quantification funext
-open import foundation.faithful-maps funext
-open import foundation.identity-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.faithful-maps
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
 open import foundation.structure-identity-principle
-open import foundation.subtypes funext
+open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.concrete-group-actions funext
-open import group-theory.concrete-groups funext
-open import group-theory.equivalences-concrete-group-actions funext
-open import group-theory.homomorphisms-concrete-groups funext
-open import group-theory.orbits-concrete-group-actions funext
-open import group-theory.transitive-concrete-group-actions funext
+open import group-theory.concrete-group-actions
+open import group-theory.concrete-groups
+open import group-theory.equivalences-concrete-group-actions
+open import group-theory.homomorphisms-concrete-groups
+open import group-theory.orbits-concrete-group-actions
+open import group-theory.transitive-concrete-group-actions
 
-open import structured-types.pointed-maps funext
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.functoriality-loop-spaces funext
-open import synthetic-homotopy-theory.loop-spaces funext
+open import synthetic-homotopy-theory.functoriality-loop-spaces
+open import synthetic-homotopy-theory.loop-spaces
 ```
 
 </details>

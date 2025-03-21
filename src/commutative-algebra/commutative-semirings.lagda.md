@@ -1,12 +1,7 @@
 # Commutative semirings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.commutative-semirings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
@@ -16,17 +11,17 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.iterated-dependent-product-types funext
-open import foundation.propositions funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
+open import foundation.propositions
+open import foundation.sets
 open import foundation.telescopes
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids funext
-open import group-theory.monoids funext
+open import group-theory.commutative-monoids
+open import group-theory.monoids
 
-open import ring-theory.semirings funext
+open import ring-theory.semirings
 ```
 
 </details>

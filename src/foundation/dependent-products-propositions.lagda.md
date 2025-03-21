@@ -1,19 +1,14 @@
 # Dependent products of propositions
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.dependent-products-propositions
-  (funext : function-extensionality)
-  where
+module foundation.dependent-products-propositions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-contractible-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

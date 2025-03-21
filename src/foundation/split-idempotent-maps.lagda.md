@@ -1,12 +1,7 @@
 # Split idempotent maps
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.split-idempotent-maps
-  (funext : function-extensionality)
-  where
+module foundation.split-idempotent-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -14,29 +9,29 @@ module
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-higher-identifications-functions funext
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences funext
+open import foundation.equivalences
 open import foundation.fixed-points-endofunctions
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies funext
+open import foundation.homotopies
 open import foundation.homotopy-algebra
-open import foundation.homotopy-induction funext
-open import foundation.idempotent-maps funext
-open import foundation.inverse-sequential-diagrams funext
-open import foundation.locally-small-types funext
-open import foundation.path-cosplit-maps funext
-open import foundation.quasicoherently-idempotent-maps funext
-open import foundation.retracts-of-types funext
-open import foundation.sequential-limits funext
+open import foundation.homotopy-induction
+open import foundation.idempotent-maps
+open import foundation.inverse-sequential-diagrams
+open import foundation.locally-small-types
+open import foundation.path-cosplit-maps
+open import foundation.quasicoherently-idempotent-maps
+open import foundation.retracts-of-types
+open import foundation.sequential-limits
 open import foundation.structure-identity-principle
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence funext
+open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.weakly-constant-maps funext
+open import foundation.weakly-constant-maps
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-homotopies
@@ -49,7 +44,7 @@ open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.sets
-open import foundation-core.small-types funext
+open import foundation-core.small-types
 open import foundation-core.torsorial-type-families
 ```
 

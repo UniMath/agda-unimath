@@ -1,37 +1,32 @@
 # Terms over signatures
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  universal-algebra.terms-over-signatures
-  (funext : function-extensionality)
-  where
+module universal-algebra.terms-over-signatures where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers funext
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types funext
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.raising-universe-levels-unit-type funext
+open import foundation.identity-types
+open import foundation.raising-universe-levels-unit-type
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors funext
-open import linear-algebra.vectors funext
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.vectors
 
 open import lists.lists
-open import lists.lists-discrete-types funext
+open import lists.lists-discrete-types
 
-open import universal-algebra.models-of-signatures funext
-open import universal-algebra.signatures funext
+open import universal-algebra.models-of-signatures
+open import universal-algebra.signatures
 ```
 
 </details>

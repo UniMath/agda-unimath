@@ -1,25 +1,20 @@
 # Morphisms of types equipped with automorphisms
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  structured-types.morphisms-types-equipped-with-automorphisms
-  (funext : function-extensionality)
-  where
+module structured-types.morphisms-types-equipped-with-automorphisms where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps funext
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.torsorial-type-families funext
+open import foundation.commuting-squares-of-maps
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import structured-types.morphisms-types-equipped-with-endomorphisms funext
-open import structured-types.types-equipped-with-automorphisms funext
+open import structured-types.morphisms-types-equipped-with-endomorphisms
+open import structured-types.types-equipped-with-automorphisms
 ```
 
 </details>

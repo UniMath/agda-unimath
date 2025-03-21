@@ -1,42 +1,37 @@
 # Finite Σ-decompositions of finite types
 
 ```agda
-open import foundation.function-extensionality-axiom
+module univalent-combinatorics.sigma-decompositions where
 
-module
-  univalent-combinatorics.sigma-decompositions
-  (funext : function-extensionality)
-  where
-
-open import foundation.sigma-decompositions funext public
+open import foundation.sigma-decompositions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types funext
-open import foundation.dependent-universal-property-equivalences funext
-open import foundation.embeddings funext
-open import foundation.equivalences funext
-open import foundation.functoriality-dependent-function-types funext
-open import foundation.functoriality-dependent-pair-types funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.inhabited-types funext
-open import foundation.logical-equivalences funext
-open import foundation.propositions funext
-open import foundation.relaxed-sigma-decompositions funext
-open import foundation.subtypes funext
-open import foundation.surjective-maps funext
+open import foundation.cartesian-product-types
+open import foundation.dependent-universal-property-equivalences
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.inhabited-types
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.relaxed-sigma-decompositions
+open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice funext
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
-open import univalent-combinatorics.decidable-equivalence-relations funext
-open import univalent-combinatorics.dependent-pair-types funext
-open import univalent-combinatorics.finite-types funext
-open import univalent-combinatorics.inhabited-finite-types funext
-open import univalent-combinatorics.type-duality funext
+open import univalent-combinatorics.decidable-equivalence-relations
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.inhabited-finite-types
+open import univalent-combinatorics.type-duality
 ```
 
 </details>

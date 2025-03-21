@@ -1,32 +1,27 @@
 # Equivalence relations
 
 ```agda
-open import foundation.function-extensionality-axiom
+module foundation.equivalence-relations where
 
-module
-  foundation.equivalence-relations
-  (funext : function-extensionality)
-  where
-
-open import foundation-core.equivalence-relations funext public
+open import foundation-core.equivalence-relations public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.effective-maps-equivalence-relations funext
-open import foundation.fundamental-theorem-of-equivalence-relations funext
-open import foundation.logical-equivalences funext
-open import foundation.partitions funext
-open import foundation.propositional-truncations funext
-open import foundation.reflecting-maps-equivalence-relations funext
-open import foundation.set-quotients funext
-open import foundation.sigma-decompositions funext
-open import foundation.surjective-maps funext
-open import foundation.uniqueness-set-quotients funext
-open import foundation.universal-property-set-quotients funext
+open import foundation.effective-maps-equivalence-relations
+open import foundation.fundamental-theorem-of-equivalence-relations
+open import foundation.logical-equivalences
+open import foundation.partitions
+open import foundation.propositional-truncations
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.set-quotients
+open import foundation.sigma-decompositions
+open import foundation.surjective-maps
+open import foundation.uniqueness-set-quotients
+open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

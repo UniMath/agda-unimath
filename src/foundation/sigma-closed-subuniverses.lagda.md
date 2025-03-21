@@ -1,19 +1,14 @@
 # Σ-closed subuniverses
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.sigma-closed-subuniverses
-  (funext : function-extensionality)
-  where
+module foundation.sigma-closed-subuniverses where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.subuniverses funext
+open import foundation.subuniverses
 open import foundation.universe-levels
 
 open import foundation-core.function-types

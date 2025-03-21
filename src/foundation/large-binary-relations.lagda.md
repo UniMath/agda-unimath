@@ -1,20 +1,15 @@
 # Large binary relations
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.large-binary-relations
-  (funext : function-extensionality)
-  where
+module foundation.large-binary-relations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations funext
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.disjunction funext
+open import foundation.disjunction
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

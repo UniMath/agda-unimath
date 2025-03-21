@@ -1,12 +1,7 @@
 # Orientations of undirected graphs
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  graph-theory.orientations-undirected-graphs
-  (funext : function-extensionality)
-  where
+module graph-theory.orientations-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
@@ -15,9 +10,9 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import graph-theory.undirected-graphs funext
+open import graph-theory.undirected-graphs
 
-open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

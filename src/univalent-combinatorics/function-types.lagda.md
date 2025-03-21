@@ -1,33 +1,28 @@
 # Finite function types
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  univalent-combinatorics.function-types
-  (funext : function-extensionality)
-  where
+module univalent-combinatorics.function-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers funext
-open import elementary-number-theory.exponentiation-natural-numbers funext
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.exponentiation-natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
-open import foundation.equivalences funext
-open import foundation.identity-types funext
-open import foundation.propositional-truncations funext
-open import foundation.sets funext
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.sets
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cartesian-product-types funext
-open import univalent-combinatorics.counting funext
-open import univalent-combinatorics.dependent-function-types funext
-open import univalent-combinatorics.dependent-pair-types funext
-open import univalent-combinatorics.equality-finite-types funext
-open import univalent-combinatorics.finite-types funext
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

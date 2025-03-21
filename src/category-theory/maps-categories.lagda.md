@@ -1,24 +1,19 @@
 # Maps between categories
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  category-theory.maps-categories
-  (funext : function-extensionality)
-  where
+module category-theory.maps-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories funext
-open import category-theory.maps-precategories funext
+open import category-theory.categories
+open import category-theory.maps-precategories
 
-open import foundation.equivalences funext
-open import foundation.homotopies funext
-open import foundation.identity-types funext
-open import foundation.torsorial-type-families funext
+open import foundation.equivalences
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 

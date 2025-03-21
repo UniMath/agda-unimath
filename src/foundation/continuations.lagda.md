@@ -1,26 +1,21 @@
 # The continuation monad
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.continuations
-  (funext : function-extensionality)
-  where
+module foundation.continuations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions funext
-open import foundation.empty-types funext
+open import foundation.dependent-products-propositions
+open import foundation.empty-types
 open import foundation.evaluation-functions
-open import foundation.type-arithmetic-dependent-function-types funext
+open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
-open import foundation.universal-property-empty-type funext
-open import foundation.universal-property-equivalences funext
+open import foundation.universal-property-empty-type
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -28,7 +23,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
 
-open import orthogonal-factorization-systems.extensions-maps funext
+open import orthogonal-factorization-systems.extensions-maps
 ```
 
 </details>

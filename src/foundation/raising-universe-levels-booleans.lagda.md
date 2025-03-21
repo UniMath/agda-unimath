@@ -1,18 +1,13 @@
 # Raising universe levels of the booleans
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.raising-universe-levels-booleans
-  (funext : function-extensionality)
-  where
+module foundation.raising-universe-levels-booleans where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.raising-universe-levels funext
+open import foundation.raising-universe-levels
 open import foundation.universe-levels
 
 open import foundation-core.booleans

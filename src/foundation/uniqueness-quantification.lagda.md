@@ -1,19 +1,14 @@
 # Uniqueness quantification
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  foundation.uniqueness-quantification
-  (funext : function-extensionality)
-  where
+module foundation.uniqueness-quantification where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.torsorial-type-families funext
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

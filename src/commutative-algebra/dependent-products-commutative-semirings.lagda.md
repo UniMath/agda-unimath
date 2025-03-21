@@ -1,29 +1,24 @@
 # Dependent products of commutative semirings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  commutative-algebra.dependent-products-commutative-semirings
-  (funext : function-extensionality)
-  where
+module commutative-algebra.dependent-products-commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-semirings funext
+open import commutative-algebra.commutative-semirings
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
-open import foundation.sets funext
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids funext
-open import group-theory.dependent-products-commutative-monoids funext
+open import group-theory.commutative-monoids
+open import group-theory.dependent-products-commutative-monoids
 
-open import ring-theory.dependent-products-semirings funext
-open import ring-theory.semirings funext
+open import ring-theory.dependent-products-semirings
+open import ring-theory.semirings
 ```
 
 </details>

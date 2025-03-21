@@ -1,22 +1,17 @@
 # Opposite rings
 
 ```agda
-open import foundation.function-extensionality-axiom
-
-module
-  ring-theory.opposite-rings
-  (funext : function-extensionality)
-  where
+module ring-theory.opposite-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types funext
+open import foundation.identity-types
 open import foundation.universe-levels
 
-open import ring-theory.rings funext
+open import ring-theory.rings
 ```
 
 </details>
