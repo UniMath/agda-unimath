@@ -18,6 +18,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import linear-algebra.vectors
@@ -66,6 +67,10 @@ module _
   sum-one-element-Ring :
     (f : functional-vec-Ring R 1) → sum-Ring R 1 f ＝ head-functional-vec 0 f
   sum-one-element-Ring = sum-one-element-Semiring (semiring-Ring R)
+
+  sum-unit-Ring :
+    (f : unit → type-Ring R) → sum-finite-Ring R unit-Finite-Type f ＝ f star
+  sum-unit-Ring = sum-unit-Semiring (semiring-Ring R)
 
   sum-two-elements-Ring :
     (f : functional-vec-Ring R 2) →

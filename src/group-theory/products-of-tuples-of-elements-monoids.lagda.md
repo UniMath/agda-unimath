@@ -57,16 +57,16 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  product-one-element-Monoid :
+  mul-one-element-Monoid :
     (f : functional-vec-Monoid M 1) →
     mul-fin-Monoid M 1 f ＝ head-functional-vec-Monoid M 0 f
-  product-one-element-Monoid f =
+  mul-one-element-Monoid f =
     left-unit-law-mul-Monoid M (f (inr star))
 
-  product-two-elements-Monoid :
+  mul-two-elements-Monoid :
     (f : functional-vec-Monoid M 2) →
     mul-fin-Monoid M 2 f ＝ mul-Monoid M (f (zero-Fin 1)) (f (one-Fin 1))
-  product-two-elements-Monoid f =
+  mul-two-elements-Monoid f =
     ( associative-mul-Monoid M
       (unit-Monoid M) (f (zero-Fin 1)) (f (one-Fin 1))) ∙
     ( left-unit-law-mul-Monoid M
@@ -112,7 +112,7 @@ module _
       ( x)
       ( mul-fin-Monoid M n (f ∘ inr-Fin n))
   snoc-mul-fin-Monoid zero-ℕ f refl =
-    ( product-one-element-Monoid M f) ∙
+    ( mul-one-element-Monoid M f) ∙
     ( inv (right-unit-law-mul-Monoid M (f (zero-Fin 0))))
   snoc-mul-fin-Monoid (succ-ℕ n) f refl =
     ( ap

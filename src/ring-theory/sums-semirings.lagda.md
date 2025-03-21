@@ -77,14 +77,20 @@ module _
     (f : functional-vec-Semiring R 1) →
     sum-Semiring R 1 f ＝ head-functional-vec 0 f
   sum-one-element-Semiring =
-    product-one-element-Commutative-Monoid
+    mul-one-element-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
+
+  sum-unit-Semiring :
+    (f : unit → type-Semiring R) →
+    sum-finite-Semiring R unit-Finite-Type f ＝ f star
+  sum-unit-Semiring =
+    mul-finite-unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   sum-two-elements-Semiring :
     (f : functional-vec-Semiring R 2) →
     sum-Semiring R 2 f ＝ add-Semiring R (f (zero-Fin 1)) (f (one-Fin 1))
   sum-two-elements-Semiring =
-    product-two-elements-Commutative-Monoid
+    mul-two-elements-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 ```
 
