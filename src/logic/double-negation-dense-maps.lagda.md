@@ -69,6 +69,15 @@ of its [fibers](foundation-core.fibers-of-maps.md) are
 [irrefutable](foundation.irrefutable-propositions.md). I.e., for every `y : B`,
 it is not not true that `y` has a preimage under `f`.
 
+Double negation dense maps are a close cousin of
+[surjective maps](foundation.surjective-maps.md), but don't require the
+existence of
+[propositional truncations](foundation.propositional-truncations.md). In
+particular, every map factors essentially uniquely as a double negation dense
+map followed by a
+[double negation stable embedding](logic.double-negation-stable-embeddings.md),
+through its [double negation image](foundation.double-negation-images.md).
+
 ## Definitions
 
 ### The predicate on maps of being double negation dense
@@ -517,6 +526,10 @@ module _
     is-irrefutable-is-double-negation-dense-map
       ( is-double-negation-dense-map-double-negation-dense-map f)
 ```
+
+## See also
+
+- [Double negation modality](foundation.double-negation-modality.md)
 
 ## External links
 

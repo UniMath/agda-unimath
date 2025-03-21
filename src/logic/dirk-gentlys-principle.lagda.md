@@ -29,6 +29,10 @@ The proof strength of this principle lies strictly between the
 [law of excluded middle](foundation.law-of-excluded-middle.md) and
 [De Morgan's law](logic.de-morgans-law.md), Section 8.5 {{#cite Diener18}}.
 
+> The name is based on the guiding principle of the protagonist of Douglas
+> Adam’s novel Dirk Gently’s Holistic Detective Agency who believes in the
+> “fundamental interconnectedness of all things.” {{#cite Diener18}}
+
 ## Statement
 
 ```agda

@@ -293,3 +293,7 @@ module _
             is-injective-inclusion-double-negation-im f
               ( pr2 (K (pr1 x) (pr2 x))))))
 ```
+
+## See also
+
+- [Double negation modality](foundation.double-negation-modality.md)

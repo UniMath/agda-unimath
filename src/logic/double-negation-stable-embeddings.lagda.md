@@ -62,6 +62,12 @@ Equivalently, a double negation stable embedding is a map whose fibers are
 We refer to this condition as being a
 {{#concept "double negation stable propositional map" Disambiguation="of types" Agda=is-double-negation-stable-prop-map}}.
 
+Double negation stable embeddings form the right class of an orthogonal
+factorization system on types whose left class is
+[double negation dense maps](logic.double-negation-dense-maps.md). This
+orthogonal factorization system is determined by the
+[double negation modality](foundation.double-negation-modality.md).
+
 ## Definitions
 
 ### The condition on a map of being a double negation stable embedding
@@ -729,3 +735,7 @@ module _
           ( is-emb-terminal-map-is-prop (is-prop-type-Prop P)))
           ( p))
 ```
+
+## See also
+
+- [Double negation images](foundation.double-negation-images.md)
