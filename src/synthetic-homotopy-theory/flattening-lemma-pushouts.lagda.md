@@ -46,13 +46,13 @@ commute with [dependent pair types](foundation.dependent-pair-types.md). More
 precisely, given a pushout square
 
 ```text
-      g
-  S -----> B
-  |        |
- f|        | j
-  ∨      ⌜ ∨
-  A -----> X
-      i
+       g
+  S ------> B
+  |         |
+ f|         | j
+  ∨       ⌜ ∨
+  A ------> X
+       i
 ```
 
 with homotopy `H : i ∘ f ~ j ∘ g`, and for any type family `P` over `X`, the
@@ -326,6 +326,61 @@ module _
         ( P)
         ( equifibered-dependent-span-diagram-family-cocone-span-diagram c Q)
         ( e))
+
+  -- coherence-square-cocone-flattening-equifibered-dependent-span-diagram :
+  --   coherence-square-maps
+  --     ( horizontal-map-span-flattening-equifibered-dependent-span-diagram P)
+  --     ( vertical-map-span-flattening-equifibered-dependent-span-diagram P)
+  --     ( vertical-map-cocone-flattening-equifibered-dependent-span-diagram)
+  --     ( horizontal-map-cocone-flattening-equifibered-dependent-span-diagram)
+  -- coherence-square-cocone-flattening-equifibered-dependent-span-diagram =
+  --   htpy-map-Σ Q
+  --     ( coherence-square-cocone f g c)
+  --     (λ s t →
+  --       left-map-equiv-equifibered-dependent-span-diagram
+  --         ( P)
+  --         ( equifibered-dependent-span-diagram-family-cocone-span-diagram c Q)
+  --         ( e)
+  --         ( f s)
+  --         ( map-left-family-equifibered-dependent-span-diagram P s t))
+  --     λ s t →
+  --     equational-reasoning
+  --       {! (tr Q (pr2 (pr2 c) s) ∘ (λ t₁ → pr1 (pr1 e (f s)) (map-left-family-equifibered-dependent-span-diagram P s t₁))) t !}
+  --       ＝ {!   !} by {!   !}
+  --       ＝ {!   !} by {!   !}
+  --       ＝ {!   !} by {!   !}
+  --   htpy-map-Σ Q
+  --     ( coherence-square-cocone f g c)
+  --     ( ( left-map-equiv-equifibered-dependent-span-diagram
+  --         ( P)
+  --         ( equifibered-dependent-span-diagram-family-cocone-span-diagram c Q)
+  --         ( e)) ∘
+  --       ( f))
+  --     ( inv-htpy ∘
+  --       coherence-equiv-equifibered-dependent-span-diagram
+  --         ( P)
+  --         ( equifibered-dependent-span-diagram-family-cocone-span-diagram c Q)
+  --         ( e))
+
+--   cocone-flattening-equifibered-dependent-span-diagram :
+--     cocone
+--       ( vertical-map-span-flattening-equifibered-dependent-span-diagram P)
+--       ( horizontal-map-span-flattening-equifibered-dependent-span-diagram P)
+--       ( Σ X Q)
+--   pr1 cocone-flattening-equifibered-dependent-span-diagram =
+--     horizontal-map-cocone-flattening-equifibered-dependent-span-diagram
+--   pr1 (pr2 cocone-flattening-equifibered-dependent-span-diagram) =
+--     vertical-map-cocone-flattening-equifibered-dependent-span-diagram
+--   pr2 (pr2 cocone-flattening-equifibered-dependent-span-diagram) =
+--     coherence-square-cocone-flattening-equifibered-dependent-span-diagram
+
+--   flattening-lemma-equifibered-dependent-span-diagram-statement : UUω
+--   flattening-lemma-equifibered-dependent-span-diagram-statement =
+--     universal-property-pushout f g c →
+--     universal-property-pushout
+--       ( vertical-map-span-flattening-equifibered-dependent-span-diagram P)
+--       ( horizontal-map-span-flattening-equifibered-dependent-span-diagram P)
+--       ( cocone-flattening-equifibered-dependent-span-diagram)
 ```
 
 ## Properties

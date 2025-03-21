@@ -92,6 +92,7 @@ open import synthetic-homotopy-theory.left-half-smash-products public
 open import synthetic-homotopy-theory.loop-homotopy-circle public
 open import synthetic-homotopy-theory.loop-spaces public
 open import synthetic-homotopy-theory.maps-of-prespectra public
+open import synthetic-homotopy-theory.mathers-second-cube-theorem public
 open import synthetic-homotopy-theory.mere-spheres public
 open import synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequential-diagrams public
 open import synthetic-homotopy-theory.morphisms-coforks-under-morphisms-double-arrows public
