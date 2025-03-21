@@ -13,7 +13,6 @@ open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.constant-maps
 open import foundation.coproduct-types
-open import foundation.decidability-search-untruncated-existential-quantification
 open import foundation.decidable-dependent-function-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-maps
@@ -48,6 +47,7 @@ open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
+open import foundation.types-with-decidable-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-equivalences
@@ -347,11 +347,11 @@ has-Π-decidability-search-bool =
 ### Types with decidability search have Π-decidability search
 
 ```agda
-has-Π-decidability-search-has-Σ-decidability-search :
+has-Π-decidability-search-has-decidable-Σ :
   {l : Level} {X : UU l} →
-  has-Σ-decidability-search X →
+  has-decidable-Σ X →
   has-Π-decidability-search X
-has-Π-decidability-search-has-Σ-decidability-search f P =
+has-Π-decidability-search-has-decidable-Σ f P =
   rec-coproduct
     ( λ xnp → inr (λ p → pr2 xnp (p (pr1 xnp))))
     ( λ nxnp →
@@ -375,8 +375,8 @@ abstract
     has-Π-decidability-search X
   has-Π-decidability-search-is-decidable-has-double-negation-dense-equality
     H d =
-    has-Π-decidability-search-has-Σ-decidability-search
-      ( has-Σ-decidability-search-is-decidable-has-double-negation-dense-equality
+    has-Π-decidability-search-has-decidable-Σ
+      ( has-decidable-Σ-is-decidable-has-double-negation-dense-equality
         ( H)
         ( d))
 ```
@@ -434,5 +434,5 @@ has-Π-decidability-search-decidable-emb h f =
 
 ## See also
 
-- [Σ-decidability search](foundation.decidability-search-untruncated-existential-quantification.md)
+- [Types with decidable Σ-types](foundation.types-with-decidable-dependent-pair-types.md)
 - [∀-decidability search](foundation.decidability-search-universal-quantification.md)

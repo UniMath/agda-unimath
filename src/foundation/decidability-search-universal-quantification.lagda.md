@@ -13,7 +13,6 @@ open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.constant-maps
 open import foundation.coproduct-types
-open import foundation.decidability-search-untruncated-existential-quantification
 open import foundation.decidability-search-untruncated-universal-quantification
 open import foundation.decidable-dependent-function-types
 open import foundation.decidable-embeddings
@@ -49,6 +48,7 @@ open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
+open import foundation.types-with-decidable-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-equivalences
@@ -191,5 +191,5 @@ abstract
 
 ## See also
 
-- [Σ-decidability search](foundation.decidability-search-untruncated-existential-quantification.md)
+- [Types with decidable Σ-types](foundation.types-with-decidable-dependent-pair-types.md)
 - [Π-decidability search](foundation.decidability-search-untruncated-universal-quantification.md)
