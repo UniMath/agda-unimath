@@ -22,6 +22,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.negated-equality
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -32,6 +33,7 @@ open import lists.lists
 
 open import ring-theory.sums-semirings
 
+open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.dependent-pair-types
@@ -391,4 +393,93 @@ sum-finite-count-Commutative-Semiring :
   sum-count-Commutative-Semiring R (type-Finite-Type A) cA f
 sum-finite-count-Commutative-Semiring R =
   sum-finite-count-Semiring (semiring-Commutative-Semiring R)
+```
+
+### Commuting sums
+
+```agda
+module _
+  {l1 l2 : Level} (R : Commutative-Semiring l1) (A : Finite-Type l2)
+  where
+
+  commute-sum-two-finite-Commutative-Semiring :
+    (f g : type-Finite-Type A → type-Commutative-Semiring R) →
+    sum-finite-Commutative-Semiring R A
+      (λ a → add-Commutative-Semiring R (f a) (g a)) ＝
+    add-Commutative-Semiring R
+      (sum-finite-Commutative-Semiring R A f)
+      (sum-finite-Commutative-Semiring R A g)
+  commute-sum-two-finite-Commutative-Semiring f g = equational-reasoning
+    sum-finite-Commutative-Semiring R A
+      ( λ a → add-Commutative-Semiring R (f a) (g a))
+    ＝
+      sum-finite-Commutative-Semiring
+        ( R)
+        ( A)
+        ( λ a → sum-Commutative-Semiring R 2 (h a))
+        by
+          htpy-sum-finite-Commutative-Semiring
+            ( R)
+            ( A)
+            ( λ a → inv (sum-two-elements-Commutative-Semiring R (h a)))
+    ＝
+      sum-finite-Commutative-Semiring
+        ( R)
+        ( A)
+        ( λ a →
+          sum-finite-Commutative-Semiring R (Fin-Finite-Type 2) (h a))
+      by
+        htpy-sum-finite-Commutative-Semiring R A
+          ( λ a →
+            inv
+              ( sum-finite-count-Commutative-Semiring
+                ( R)
+                ( Fin-Finite-Type 2)
+                ( count-Fin 2)
+                ( h a)))
+    ＝
+      sum-finite-Commutative-Semiring
+        ( R)
+        ( Σ-Finite-Type A (λ _ → Fin-Finite-Type 2))
+        ( ind-Σ h)
+      by inv (sum-Σ-finite-Commutative-Semiring R A (λ _ → Fin-Finite-Type 2) h)
+    ＝
+      sum-finite-Commutative-Semiring
+        ( R)
+        ( Σ-Finite-Type (Fin-Finite-Type 2) (λ _ → A))
+        ( λ (i , a) → h a i)
+      by
+        sum-equiv-finite-Commutative-Semiring R _ _
+          ( commutative-product)
+          ( ind-Σ h)
+    ＝
+      sum-finite-Commutative-Semiring
+        ( R)
+        ( Fin-Finite-Type 2)
+        ( λ i → sum-finite-Commutative-Semiring R A (λ a → h a i))
+      by sum-Σ-finite-Commutative-Semiring R _ _ _
+    ＝
+      sum-Commutative-Semiring
+        ( R)
+        ( 2)
+        ( λ i → sum-finite-Commutative-Semiring R A (λ a → h a i))
+      by
+        sum-finite-count-Commutative-Semiring
+          ( R)
+          ( Fin-Finite-Type 2)
+          ( count-Fin 2)
+          ( _)
+    ＝
+      add-Commutative-Semiring
+        ( R)
+        ( sum-finite-Commutative-Semiring R A f)
+        ( sum-finite-Commutative-Semiring R A g)
+      by
+        sum-two-elements-Commutative-Semiring
+          ( R)
+          ( λ i → sum-finite-Commutative-Semiring R A (λ a → h a i))
+    where
+      h : type-Finite-Type A → Fin 2 → type-Commutative-Semiring R
+      h a (inl (inr star)) = f a
+      h a (inr star) = g a
 ```
