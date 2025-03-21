@@ -25,6 +25,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.functoriality-coproduct-types
 open import foundation.equivalences
+open import foundation.involutions
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -98,6 +99,26 @@ module _
   set-pair-with-sum-ℕ = pair-with-sum-ℕ n , is-set-pair-with-sum-ℕ
 ```
 
+### Involution of swapping the components
+
+```agda
+module _
+  (n : ℕ)
+  where
+
+  swap-pair-with-sum-ℕ : pair-with-sum-ℕ n → pair-with-sum-ℕ n
+  swap-pair-with-sum-ℕ (a , b , b+a=n) =
+    (b , a , commutative-add-ℕ a b ∙ b+a=n)
+
+  is-involution-swap-pair-with-sum-ℕ : is-involution swap-pair-with-sum-ℕ
+  is-involution-swap-pair-with-sum-ℕ _ = eq-Eq-pair-with-sum-ℕ n _ _ refl
+
+  aut-swap-pair-with-sum-ℕ : Aut (pair-with-sum-ℕ n)
+  aut-swap-pair-with-sum-ℕ =
+    swap-pair-with-sum-ℕ ,
+    is-equiv-is-involution is-involution-swap-pair-with-sum-ℕ
+```
+
 ### Equivalence of dependent pairs further partitioning a component
 
 ```agda
@@ -166,27 +187,26 @@ module _
   (n : ℕ)
   where
 
-  abstract
-    equiv-pair-with-sum-leq-ℕ :
-      Σ ℕ (λ k → leq-ℕ k n) ≃ pair-with-sum-ℕ n
-    equiv-pair-with-sum-leq-ℕ =
-      ( λ (k , k≤n) → k , subtraction-leq-ℕ k n k≤n) ,
-      ((λ (k , l , l+k=n) → k , leq-subtraction-ℕ k n l l+k=n) ,
-        λ (k , l , l+k=n) →
-          let
-            (l' , l'+k=n) =
-              subtraction-leq-ℕ k n (leq-subtraction-ℕ k n l l+k=n)
-          in
-            eq-pair-eq-fiber
-              ( eq-pair-Σ
-                ( is-injective-right-add-ℕ k (l'+k=n ∙ inv l+k=n))
-                ( eq-type-Prop (Id-Prop ℕ-Set (l +ℕ k) n)))) ,
-      (( λ (k , l , l+k=n) → k , leq-subtraction-ℕ k n l l+k=n) ,
-        (λ (k , k≤n) → eq-pair-eq-fiber (eq-type-Prop (leq-ℕ-Prop k n))))
+  equiv-pair-with-sum-leq-ℕ :
+    Σ ℕ (λ k → leq-ℕ k n) ≃ pair-with-sum-ℕ n
+  equiv-pair-with-sum-leq-ℕ =
+    ( λ (k , k≤n) → k , subtraction-leq-ℕ k n k≤n) ,
+    ((λ (k , l , l+k=n) → k , leq-subtraction-ℕ k n l l+k=n) ,
+      λ (k , l , l+k=n) →
+        let
+          (l' , l'+k=n) =
+            subtraction-leq-ℕ k n (leq-subtraction-ℕ k n l l+k=n)
+        in
+          eq-pair-eq-fiber
+            ( eq-pair-Σ
+              ( is-injective-right-add-ℕ k (l'+k=n ∙ inv l+k=n))
+              ( eq-type-Prop (Id-Prop ℕ-Set (l +ℕ k) n)))) ,
+    (( λ (k , l , l+k=n) → k , leq-subtraction-ℕ k n l l+k=n) ,
+      (λ (k , k≤n) → eq-pair-eq-fiber (eq-type-Prop (leq-ℕ-Prop k n))))
 
-    count-pair-with-sum-ℕ : count (pair-with-sum-ℕ n)
-    count-pair-with-sum-ℕ =
-      succ-ℕ n , equiv-pair-with-sum-leq-ℕ ∘e equiv-fin-succ-leq-ℕ n
+  count-pair-with-sum-ℕ : count (pair-with-sum-ℕ n)
+  count-pair-with-sum-ℕ =
+    succ-ℕ n , equiv-pair-with-sum-leq-ℕ ∘e equiv-fin-succ-leq-ℕ n
 
   finite-type-pair-with-sum-ℕ : Finite-Type lzero
   finite-type-pair-with-sum-ℕ =

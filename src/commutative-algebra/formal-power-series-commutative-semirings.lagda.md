@@ -54,6 +54,7 @@ open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.decidable-subtypes
+open import ring-theory.semirings
 ```
 
 </details>
@@ -373,8 +374,6 @@ module _
 ### Multiplication
 
 ```agda
-
-
 module _
   {l : Level} (R : Commutative-Semiring l)
   (p q : formal-power-series-Commutative-Semiring R)
@@ -407,6 +406,52 @@ module _
       coefficient-mul-formal-power-series-Commutative-Semiring
     eq-coefficient-mul-formal-power-series-Commutative-Semiring =
       coefficient-formal-power-series-coefficients-Commutative-Semiring R _
+```
+
+#### Commutativity
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  (p q : formal-power-series-Commutative-Semiring R)
+  where
+
+  opaque
+    unfolding mul-formal-power-series-Commutative-Semiring
+    unfolding formal-power-series-Commutative-Semiring
+
+    commutative-mul-formal-power-series-Commutative-Semiring :
+      mul-formal-power-series-Commutative-Semiring R p q ＝
+      mul-formal-power-series-Commutative-Semiring R q p
+    commutative-mul-formal-power-series-Commutative-Semiring =
+      eq-htpy-coefficients-formal-power-series-Commutative-Semiring
+        ( R)
+        ( _)
+        ( _)
+        ( λ n → equational-reasoning
+          sum-finite-Commutative-Semiring
+            ( R)
+            ( finite-type-pair-with-sum-ℕ n)
+            ( λ (a , b , _) → mul-Commutative-Semiring R (p a) (q b))
+          ＝
+            sum-finite-Commutative-Semiring
+              ( R)
+              ( finite-type-pair-with-sum-ℕ n)
+              ( λ (a , b , _) → mul-Commutative-Semiring R (q b) (p a))
+            by
+              htpy-sum-finite-Commutative-Semiring R _
+                ( λ _ → commutative-mul-Commutative-Semiring R _ _)
+          ＝
+            sum-finite-Commutative-Semiring
+              ( R)
+              ( finite-type-pair-with-sum-ℕ n)
+              ( λ (a , b , _) → mul-Commutative-Semiring R (q a) (p b))
+            by
+              sum-aut-finite-Commutative-Semiring
+                ( R)
+                ( _)
+                ( aut-swap-pair-with-sum-ℕ n)
+                ( _))
 ```
 
 #### Associativity
@@ -633,13 +678,64 @@ module _
           sum-Commutative-Semiring
             ( R)
             ( succ-ℕ n)
-            ( λ k →
-              mul-Commutative-Ring
-                ( R)
-                ?
-                ?)
+            ( λ {
+              (inr star) →
+                mul-Commutative-Semiring R (one-Commutative-Semiring R) (p n) ;
+              (inl k) →
+                mul-Commutative-Semiring R (zero-Commutative-Semiring R) _})
           by
-        ＝ {!   !} by {!   !}
+            sum-finite-count-Commutative-Semiring
+              ( R)
+              ( finite-type-pair-with-sum-ℕ n)
+              ( count-pair-with-sum-ℕ n)
+              ( _)
+        ＝
+          add-Commutative-Semiring
+            ( R)
+            ( sum-Commutative-Semiring
+              ( R)
+              ( n)
+              ( λ k →
+                mul-Commutative-Semiring R (zero-Commutative-Semiring R) _))
+            ( mul-Commutative-Semiring R (one-Commutative-Semiring R) (p n))
+          by
+            cons-sum-Commutative-Semiring R n
+              ( λ {
+                (inr star) →
+                  mul-Commutative-Semiring
+                    ( R)
+                    ( one-Commutative-Semiring R)
+                    ( p n) ;
+                (inl k) →
+                  mul-Commutative-Semiring R (zero-Commutative-Semiring R) _})
+              ( refl)
+        ＝
+          add-Commutative-Semiring
+            ( R)
+            ( sum-Commutative-Semiring
+              ( R)
+              ( n)
+              ( λ k → zero-Commutative-Semiring R))
+            ( p n)
+          by
+            ap-add-Commutative-Semiring
+              ( R)
+              ( htpy-sum-Commutative-Semiring
+                ( R)
+                ( n)
+                ( λ k → left-zero-law-mul-Commutative-Semiring R _))
+              ( left-unit-law-mul-Commutative-Semiring R _)
+        ＝
+          add-Commutative-Semiring
+            ( R)
+            ( zero-Commutative-Semiring R)
+            ( p n)
+          by
+            ap-add-Commutative-Semiring
+              ( R)
+              ( sum-zero-Commutative-Semiring R n)
+              ( refl)
+        ＝ p n by left-unit-law-add-Commutative-Semiring R _
 
   opaque
     unfolding mul-formal-power-series-Commutative-Semiring
@@ -655,43 +751,94 @@ module _
         ( R)
         ( _)
         ( _)
+        ( htpy-left-unit-law-mul-formal-power-series-Commutative-Semiring p)
+
+    right-unit-law-mul-formal-power-series-Commutative-Semiring :
+      mul-formal-power-series-Commutative-Semiring
+        ( R)
+        ( p)
+        ( one-formal-power-series-Commutative-Semiring R) ＝ p
+    right-unit-law-mul-formal-power-series-Commutative-Semiring =
+      commutative-mul-formal-power-series-Commutative-Semiring
+        ( R)
+        ( p)
+        ( one-formal-power-series-Commutative-Semiring R) ∙
+      left-unit-law-mul-formal-power-series-Commutative-Semiring
+```
+
+#### Zero laws of multiplication
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  (p : formal-power-series-Commutative-Semiring R)
+  where
+
+  opaque
+    unfolding mul-formal-power-series-Commutative-Semiring
+    unfolding zero-formal-power-series-Commutative-Semiring
+
+    left-zero-law-mul-formal-power-series-Commutative-Semiring :
+      mul-formal-power-series-Commutative-Semiring
+        ( R)
+        ( zero-formal-power-series-Commutative-Semiring R)
+        ( p) ＝
+      zero-formal-power-series-Commutative-Semiring R
+    left-zero-law-mul-formal-power-series-Commutative-Semiring =
+      eq-htpy-coefficients-formal-power-series-Commutative-Semiring
+        ( R)
+        ( _)
+        ( _)
         ( λ n →
-          equational-reasoning
-            sum-finite-Commutative-Semiring
-              ( R)
-              ( finite-type-pair-with-sum-ℕ n)
-              ( λ (a , b , _) →
-                mul-Commutative-Semiring
-                  ( R)
-                  ( coefficient-constant-formal-power-series-Commutative-Semiring
-                    ( R)
-                    ( one-Commutative-Semiring R)
-                    ( a))
-                  ( coefficient-formal-power-series-Commutative-Semiring R p b))
-            ＝
-              sum-finite-Commutative-Semiring
-                ( R)
-                ( finite-type-pair-with-sum-ℕ n)
-                ( λ {
-                  (zero-ℕ , _ , _) →
-                    coefficient-formal-power-series-Commutative-Semiring R p n ;
-                  (succ-ℕ _ , _ , _) →
-                    zero-Commutative-Semiring R})
-              by
-                ap
-                  ( sum-finite-Commutative-Semiring
-                    ( R)
-                    ( finite-type-pair-with-sum-ℕ n))
-                  ( eq-htpy
-                    λ {
-                      (zero-ℕ , b , b+0=n) →
-                        left-unit-law-mul-Commutative-Semiring R _ ∙
-                        ap
-                          ( coefficient-formal-power-series-Commutative-Semiring
-                            ( R)
-                            ( p))
-                          ( inv (right-unit-law-add-ℕ b) ∙ b+0=n) ;
-                      (succ-ℕ _ , _ , _) →
-                        left-zero-law-mul-Commutative-Semiring R _ })
-            ＝ {!   !} by {!   !})
+          htpy-sum-finite-Commutative-Semiring R _
+            ( λ _ → left-zero-law-mul-Commutative-Semiring R _) ∙
+          sum-zero-finite-Commutative-Semiring R _)
+
+    right-zero-law-mul-formal-power-series-Commutative-Semiring :
+      mul-formal-power-series-Commutative-Semiring
+        ( R)
+        ( p)
+        ( zero-formal-power-series-Commutative-Semiring R) ＝
+      zero-formal-power-series-Commutative-Semiring R
+    right-zero-law-mul-formal-power-series-Commutative-Semiring =
+      commutative-mul-formal-power-series-Commutative-Semiring R _ _ ∙
+      left-zero-law-mul-formal-power-series-Commutative-Semiring
+```
+
+#### Distributivity of multiplication over addition
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  (p q r : formal-power-series-Commutative-Semiring R)
+  where
+
+  opaque
+    unfolding formal-power-series-Commutative-Semiring
+    unfolding add-formal-power-series-Commutative-Semiring
+    unfolding mul-formal-power-series-Commutative-Semiring
+
+    left-distributive-mul-add-formal-power-series-Commutative-Semiring :
+      mul-formal-power-series-Commutative-Semiring
+        ( R)
+        ( p)
+        ( add-formal-power-series-Commutative-Semiring R q r) ＝
+      add-formal-power-series-Commutative-Semiring
+        ( R)
+        ( mul-formal-power-series-Commutative-Semiring R p q)
+        ( mul-formal-power-series-Commutative-Semiring R p r)
+    left-distributive-mul-add-formal-power-series-Commutative-Semiring = {!   !}
+```
+
+### The commutative semiring of formal power series
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  semiring-formal-power-series-Commutative-Semiring : Semiring l
+  semiring-formal-power-series-Commutative-Semiring =
+    commutative-monoid-add-formal-power-series-Commutative-Semiring R ,
+    {!   !} , {!   !}
 ```

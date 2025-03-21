@@ -522,13 +522,12 @@ is-retraction-fin-reverse-le-ℕ (succ-ℕ n) (inl x) =
   ap inl (is-retraction-fin-reverse-le-ℕ n x)
 is-retraction-fin-reverse-le-ℕ (succ-ℕ n) (inr star) = refl
 
-abstract
-  equiv-fin-le-ℕ : (n : ℕ) → Fin n ≃ Σ ℕ (λ m → le-ℕ m n)
-  equiv-fin-le-ℕ n =
-    nat-le-Fin-reverse n ,
-    ( fin-reverse-le-ℕ n , is-section-fin-reverse-le-ℕ n) ,
-    ( fin-reverse-le-ℕ n , is-retraction-fin-reverse-le-ℕ n)
+equiv-fin-le-ℕ : (n : ℕ) → Fin n ≃ Σ ℕ (λ m → le-ℕ m n)
+equiv-fin-le-ℕ n =
+  nat-le-Fin-reverse n ,
+  ( fin-reverse-le-ℕ n , is-section-fin-reverse-le-ℕ n) ,
+  ( fin-reverse-le-ℕ n , is-retraction-fin-reverse-le-ℕ n)
 
-  equiv-fin-succ-leq-ℕ : (n : ℕ) → Fin (succ-ℕ n) ≃ Σ ℕ (λ m → leq-ℕ m n)
-  equiv-fin-succ-leq-ℕ n = equiv-le-succ-ℕ-leq-ℕ n ∘e equiv-fin-le-ℕ (succ-ℕ n)
+equiv-fin-succ-leq-ℕ : (n : ℕ) → Fin (succ-ℕ n) ≃ Σ ℕ (λ m → leq-ℕ m n)
+equiv-fin-succ-leq-ℕ n = equiv-le-succ-ℕ-leq-ℕ n ∘e equiv-fin-le-ℕ (succ-ℕ n)
 ```
