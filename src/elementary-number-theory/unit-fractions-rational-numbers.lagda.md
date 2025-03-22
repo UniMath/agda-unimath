@@ -39,7 +39,7 @@ The {{#concept "unit fractions" WDID=Q255388 WD="unit fraction"}} are
 is 1 and whose denominator is a positive integer (or, equivalently, a positive
 natural number).
 
-## Definition
+## Definitions
 
 ### Reciprocals of nonzero natural numbers
 

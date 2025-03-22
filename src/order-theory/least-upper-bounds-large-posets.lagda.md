@@ -22,9 +22,22 @@ open import order-theory.upper-bounds-large-posets
 
 ## Idea
 
-A **binary least upper bound** on a pair of elements `a`, `b` in a
-[large poset](order-theory.large-posets.md) `P` is an element `x` in `P` such
-that the [logical equivalence](foundation.logical-equivalences.md)
+A
+{{#concept "binary least upper bound" Disambiguation="in a large poset" Agda=is-least-binary-upper-bound-Large-Poset}}
+on a pair of elements `a`, `b` in a [large poset](order-theory.large-posets.md)
+`P` is an element `x` in `P` such that the
+[logical equivalence](foundation.logical-equivalences.md)
+
+```text
+  is-binary-upper-bound-Large-Poset P a b y ↔ (x ≤ y)
+```
+
+holds for every `y` in `P`.
+
+Similarly, a
+{{#concept "least upper bound" Disambiguation="in a large poset" WD="supremum" WDID=Q215071 Agda=is-least-upper-bound-family-of-elements-Large-Poset}}
+of a family of elements `a : I → P` in a large poset `P` is an element `x` in
+`P` such that the logical equivalence
 
 ```text
   is-binary-upper-bound-Large-Poset P a b y ↔ (x ≤ y)
