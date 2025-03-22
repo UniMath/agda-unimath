@@ -16,7 +16,6 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sequences
 open import foundation.sets
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.semigroups
