@@ -46,6 +46,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.pi-decompositions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
@@ -650,9 +651,8 @@ module _
   (merge-add-family-ℚ⁺ : (d₁ d₂ : ℚ⁺) → P d₁ → Q d₂ → R (d₁ +ℚ⁺ d₂))
   where
 
-  Π-split-family-ℚ⁺ :
-    ((d : ℚ⁺) → P d) → ((d : ℚ⁺) → Q d) → ((d : ℚ⁺) → R d)
-  Π-split-family-ℚ⁺ H K d =
+  Π-merge-family-ℚ⁺ : Π ℚ⁺ P → Π ℚ⁺ Q → Π ℚ⁺ R
+  Π-merge-family-ℚ⁺ H K d =
     tr R
       ( eq-add-split-ℚ⁺ d)
       ( merge-add-family-ℚ⁺

@@ -122,7 +122,7 @@ module _
     is-asymptotically-indistinguishable-sequence-Pseudometric-Space M u v →
     is-asymptotically-indistinguishable-sequence-Pseudometric-Space M u w
   transitive-asymptotically-indistinguishable-sequence-Pseudometric-Space I J =
-    Π-split-family-ℚ⁺
+    Π-merge-family-ℚ⁺
       ( has-modulus-asymptotically-indistinguishable-sequence-Pseudometric-Space
         ( M)
         ( u)

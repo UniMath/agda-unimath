@@ -144,7 +144,7 @@ module _
     is-limit-sequence-Pseudometric-Space M u y →
     is-indistinguishable-Pseudometric-Space M x y
   indistinguishable-limit-sequence-Pseudometric-Space =
-    Π-split-family-ℚ⁺
+    Π-merge-family-ℚ⁺
       ( is-upper-bound-dist-Pseudometric-Space M x y)
       ( tr-modulus-indistinguishable)
     where
