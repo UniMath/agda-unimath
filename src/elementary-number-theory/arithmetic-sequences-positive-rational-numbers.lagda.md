@@ -112,7 +112,7 @@ module _
     ( is-positive-rational-arithmetic-sequence-ℚ⁺ n)
 ```
 
-### Unitary arithmetic sequences of rational numbers
+### Unitary arithmetic sequences of positive rational numbers
 
 An arithmetic sequence with initial term equal to `1` is called unitary
 
