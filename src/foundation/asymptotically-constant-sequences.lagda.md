@@ -61,22 +61,13 @@ module _
       u
       modulus-asymptotically-constant-sequence
   is-modulus-modulus-asymptotically-constant-sequence = pr2 H
-```
-
-## Properties
-
-### The asymptotical value of an asymptotically constant sequence
-
-```agda
-module _
-  {l : Level} {A : UU l} (u : sequence A)
-  (H : is-asymptotically-constant-sequence u)
-  where
 
   value-asymptotically-constant-sequence : A
   value-asymptotically-constant-sequence =
-    u (modulus-asymptotically-constant-sequence u H)
+    u modulus-asymptotically-constant-sequence
 ```
+
+## Properties
 
 ### An asymptotically constant sequence is asymptotically equal to the constant sequence of its asymptotical value
 
