@@ -25,15 +25,15 @@ open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
-open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.commutative-monoids
 open import group-theory.groups
 open import group-theory.minkowski-multiplication-commutative-monoids
-open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 

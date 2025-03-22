@@ -30,11 +30,11 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
-open import group-theory.groups
-open import group-theory.semigroups
-open import group-theory.monoids
 open import group-theory.commutative-monoids
+open import group-theory.groups
 open import group-theory.minkowski-multiplication-commutative-monoids
+open import group-theory.monoids
+open import group-theory.semigroups
 
 open import real-numbers.rational-upper-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
@@ -232,7 +232,9 @@ module _
                 intro-exists
                   ( r , q -ℚ r)
                   ( x<r ,
-                    backward-implication (iff-translate-diff-le-zero-ℚ r q) r<q ,
+                    backward-implication
+                      ( iff-translate-diff-le-zero-ℚ r q)
+                      ( r<q) ,
                     inv (is-identity-right-conjugation-add-ℚ r q)))
               ( forward-implication (is-rounded-cut-upper-ℝ x q) x<q)))
 
