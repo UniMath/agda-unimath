@@ -23,10 +23,7 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-We define the operation of
-{{#concept "maximum" Disambiguation="of pairs of rational numbers" Agda=max-ℚ}}
-([least upper bound](order-theory.least-upper-bounds-posets.md)) for the
-[rational numbers](elementary-number-theory.rational-numbers.md).
+The {{#concept "maximum" Disambiguation="of pairs of rational numbers" Agda=max-ℚ}} of two [rational numbers](elementary-number-theory.rational-numbers.md) is the [greatest](elementary-number-theory.inequality-rational-numbers.md) rational number of the two. This is the [binary least upper bound](order-theory.least-upper-bounds-posets.md) in the [total order of rational numbers](elementary-number-theory.decidable-total-order-rational-numbers.md).
 
 ## Definition
 

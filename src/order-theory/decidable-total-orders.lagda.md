@@ -477,7 +477,7 @@ module _
   ... | inr y<x = refl
 ```
 
-### If `a ≤ b` and `c ≤ d`, `min a c ≤ min b d`
+### If `a ≤ b` and `c ≤ d`, then `min a c ≤ min b d`
 
 ```agda
   min-leq-leq-Decidable-Total-Order :
@@ -492,7 +492,7 @@ module _
       ( order-theoretic-meet-semilattice-Decidable-Total-Order)
 ```
 
-### If `a ≤ b` and `c ≤ d`, `max a c ≤ max b d`
+### If `a ≤ b` and `c ≤ d`, then `max a c ≤ max b d`
 
 ```agda
   max-leq-leq-Decidable-Total-Order :
