@@ -26,14 +26,12 @@ open import metric-spaces.pseudometric-spaces
 
 A
 {{#concept "sequence" Disambiguation="in a pseudometric space" Agda=sequence-Pseudometric-Space}}
-in a [pseudometric space](metric-spaces.pseudometricc-spaces.md) is a
-[sequence](metric-spaces.sequences-premetric-spaces.md) in its underlying
-[premetric space](metric-spaces.premetric-spaces.md).
+in a [pseudometric space](metric-spaces.pseudometric-spaces.md) is a
+[sequence in its underlying premetric space](metric-spaces.sequences-premetric-spaces.md).
 
 Two sequences `u v : sequence-Pseudometric-Space M` are
 {{#concept "asymptotically indistinguishable" Disambiguation="sequences in a pseudometric space" Agda=is-asymptotically-indistinguishable-sequence-Pseudometric-Space}}
-if they are as [sequences](metric-spaces.sequences-premetric-spaces.md) in the
-underlying [premetric space](metric-spaces.premetric-spaces.md).
+if they are as sequences in the underlying premetric space.
 
 Asymptotical indistinguishability of sequences in a pseudometric space is
 reflexive, symmetric and transitive.

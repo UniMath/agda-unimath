@@ -13,6 +13,7 @@ open import foundation.sequences
 open import foundation.universe-levels
 
 open import metric-spaces.limits-sequences-metric-spaces
+open import metric-spaces.limits-sequences-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.sequences-metric-spaces
 ```
@@ -26,9 +27,12 @@ A [sequence](metric-spaces.sequences-metric-spaces.md) in a
 {{# concept "convergent" Disambiguation="sequence in a metric space" Agda=convergent-sequence-Metric-Space}}
 if it has a [limit](metric-spaces.limits-sequences-metric-spaces.md).
 
+Asymptotically indistinguishable convergent sequences in a metric space have the
+same limit.
+
 ## Definitions
 
-### The property of having a limit
+### Existence of limits of sequences in a metric space
 
 ```agda
 module _
@@ -75,4 +79,34 @@ module _
       limit-convergent-sequence-Metric-Space
   is-limit-convergent-sequence-Metric-Space =
     pr2 has-limit-convergent-sequence-Metric-Space
+```
+
+### Asymptotically indistinguishable convergent sequences in a metric space have the same limit
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (u v : convergent-sequence-Metric-Space M)
+  (H :
+    is-asymptotically-indistinguishable-sequence-Metric-Space M
+      ( sequence-convergent-sequence-Metric-Space M u)
+      ( sequence-convergent-sequence-Metric-Space M v))
+  where
+
+  preserves-limit-asymptotically-indistinguishable-convergent-sequence-Metric-Space :
+    limit-convergent-sequence-Metric-Space M u ＝
+    limit-convergent-sequence-Metric-Space M v
+  preserves-limit-asymptotically-indistinguishable-convergent-sequence-Metric-Space =
+    eq-limit-sequence-Metric-Space M
+      ( sequence-convergent-sequence-Metric-Space M v)
+      ( limit-convergent-sequence-Metric-Space M u)
+      ( limit-convergent-sequence-Metric-Space M v)
+      ( preserves-limit-asymptotically-indistinguishable-sequence-Pseudometric-Space
+        ( pseudometric-Metric-Space M)
+        ( sequence-convergent-sequence-Metric-Space M u)
+        ( sequence-convergent-sequence-Metric-Space M v)
+        ( H)
+        ( limit-convergent-sequence-Metric-Space M u)
+        ( is-limit-convergent-sequence-Metric-Space M u))
+      (is-limit-convergent-sequence-Metric-Space M v)
 ```
