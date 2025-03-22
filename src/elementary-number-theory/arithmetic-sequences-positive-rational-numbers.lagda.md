@@ -81,7 +81,7 @@ module _
           ( lemma-leq-power-add-ℚ⁺ n)
 ```
 
-### Arithmetic sequences of positive rational numbers
+### The arithmetic sequences associated to an initial term and a common difference
 
 ```agda
 module _
