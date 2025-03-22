@@ -25,7 +25,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A sequence `u` is
+A [sequence](foundation.sequences.md) `u` is
 {{#concept "asymptotically constant" Agda=is-asymptotically-constant-sequence}}
 if `u p ＝ u q` for sufficiently large `p` and `q`.
 

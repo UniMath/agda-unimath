@@ -25,7 +25,7 @@ open import metric-spaces.sequences-metric-spaces
 ## Ideas
 
 {{#concept "Limits" Disambiguation="of sequences in metric spaces" Agda=is-limit-sequence-Metric-Space}}
-of sequences in metric spaces are
+of [sequences in metric spaces](metric-spaces.sequences-metric-spaces.md) are
 [limits](metric-spaces.limits-sequences-premetric-spaces.md) in the underlying
 [premetric space](metric-spaces.premetric-spaces.md).
 

@@ -24,7 +24,7 @@ open import foundation-core.function-types
 
 ## Idea
 
-Two sequences `u` and `v` are
+Two [sequences](foundation.sequences.md) `u` and `v` are
 {{#concept "asymptotically equal" Agda=asymptotically-eq-sequence}} if
 `u n ＝ v n` for any sufficiently large natural number `n`.
 
