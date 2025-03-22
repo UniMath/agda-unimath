@@ -39,12 +39,12 @@ open import real-numbers.lower-dedekind-real-numbers
 The
 {{#concept "minimum" Disambiguation="binary, lower Dedekind real numbers" Agda=binary-min-lower-ℝ WD="minimum" WDID=Q10585806}}
 of two
-[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md) `x` and
-`y` is a lower Dedekind real number with cut equal to the intersection of the
-cuts of `x` and `y`.
+[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md) `x`
+and `y` is a lower Dedekind real number with cut equal to the intersection of
+the cuts of `x` and `y`.
 
 The minimum of a family of lower Dedekind real numbers is not always a lower
-Dedekind real number.  For example, the minimum of all lower Dedekind real
+Dedekind real number. For example, the minimum of all lower Dedekind real
 numbers would have an empty cut and would fail to be inhabited.
 
 ## Definition

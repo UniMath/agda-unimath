@@ -43,9 +43,9 @@ open import real-numbers.lower-dedekind-real-numbers
 The
 {{#concept "maximum" Disambiguation="binary, lower Dedekind real numbers" Agda=binary-max-lower-ℝ WD="maximum" WDID=Q10578722}}
 of two
-[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md) `x` and
-`y` is a lower Dedekind real number with cut equal to the union of the cuts of
-`x` and `y`.
+[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md) `x`
+and `y` is a lower Dedekind real number with cut equal to the union of the cuts
+of `x` and `y`.
 
 Unlike the case for the
 [minimum of lower Dedekind real numbers](real-numbers.minimum-lower-dedekind-real-numbers.md)

@@ -103,7 +103,8 @@ module _
 
 ### The greatest lower Dedekind real
 
-There is a largest lower Dedekind real whose cut is all rational numbers. We call this element **infinity**.
+There is a largest lower Dedekind real whose cut is all rational numbers. We
+call this element **infinity**.
 
 ```agda
 infinity-lower-ℝ : lower-ℝ lzero
