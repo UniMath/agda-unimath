@@ -27,8 +27,8 @@ open import metric-spaces.metric-spaces
 
 A [function](metric-spaces.functions-metric-spaces.md) `f` between
 [metric spaces](metric-spaces.metric-spaces.md) `X` and `Y` is
-{{#concept continuous WDID=Q170058 WD="continuous function"}} at a point `x` if
-there exists a function `m : ℚ⁺ → ℚ⁺` such that whenever `x'` is in an
+{{#concept "continuous" WDID=Q170058 WD="continuous function"}} at a point `x`
+if there exists a function `m : ℚ⁺ → ℚ⁺` such that whenever `x'` is in an
 `m ε`-neighborhood of `x`, `f x'` is in an `ε`-neighborhood of `f x`. `m` is
 called the modulus of continuity of `f` at `x`.
 
