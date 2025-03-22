@@ -41,10 +41,12 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Idea
 
-The maximum of two
-[upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md) `x` and
-`y` is a upper Dedekind real number with cut equal to the intersection of the
-cuts of `x` and `y`.
+The
+{{#concept "maximum" Disambiguation="binary, upper Dedekind real numbers" Agda=binary-max-upper-ℝ WD="maximum" WDID=Q10578722}}
+of two
+[upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md) `x`
+and `y` is an upper Dedekind real number with cut equal to the intersection of
+the cuts of `x` and `y`.
 
 ## Definition
 
@@ -58,45 +60,59 @@ module _
   cut-binary-max-upper-ℝ : subtype (l1 ⊔ l2) ℚ
   cut-binary-max-upper-ℝ = intersection-subtype (cut-upper-ℝ x) (cut-upper-ℝ y)
 
-  max-inhabitants-in-binary-max-upper-ℝ :
-    (p q : ℚ) → (is-in-cut-upper-ℝ x p) → (is-in-cut-upper-ℝ y q) →
-    is-in-subtype cut-binary-max-upper-ℝ (max-ℚ p q)
-  max-inhabitants-in-binary-max-upper-ℝ p q x<p y<q =
-    is-in-cut-leq-ℚ-upper-ℝ x p (max-ℚ p q) (leq-left-max-ℚ p q) x<p ,
-    is-in-cut-leq-ℚ-upper-ℝ y q (max-ℚ p q) (leq-right-max-ℚ p q) y<q
+  abstract
+    max-inhabitants-in-binary-max-upper-ℝ :
+      (p q : ℚ) → (is-in-cut-upper-ℝ x p) → (is-in-cut-upper-ℝ y q) →
+      is-in-subtype cut-binary-max-upper-ℝ (max-ℚ p q)
+    max-inhabitants-in-binary-max-upper-ℝ p q x<p y<q =
+      is-in-cut-leq-ℚ-upper-ℝ x p (max-ℚ p q) (leq-left-max-ℚ p q) x<p ,
+      is-in-cut-leq-ℚ-upper-ℝ y q (max-ℚ p q) (leq-right-max-ℚ p q) y<q
 
-  is-inhabited-cut-binary-max-upper-ℝ : exists ℚ cut-binary-max-upper-ℝ
-  is-inhabited-cut-binary-max-upper-ℝ =
-    map-binary-exists
-      ( is-in-subtype cut-binary-max-upper-ℝ)
-      ( max-ℚ)
-      ( max-inhabitants-in-binary-max-upper-ℝ)
-      ( is-inhabited-cut-upper-ℝ x)
-      ( is-inhabited-cut-upper-ℝ y)
+    is-inhabited-cut-binary-max-upper-ℝ : exists ℚ cut-binary-max-upper-ℝ
+    is-inhabited-cut-binary-max-upper-ℝ =
+      map-binary-exists
+        ( is-in-subtype cut-binary-max-upper-ℝ)
+        ( max-ℚ)
+        ( max-inhabitants-in-binary-max-upper-ℝ)
+        ( is-inhabited-cut-upper-ℝ x)
+        ( is-inhabited-cut-upper-ℝ y)
 
-  is-rounded-cut-binary-max-upper-ℝ :
-    (q : ℚ) →
-    is-in-subtype cut-binary-max-upper-ℝ q ↔
-    exists ℚ (λ p → le-ℚ-Prop p q ∧ cut-binary-max-upper-ℝ p)
-  pr1 (is-rounded-cut-binary-max-upper-ℝ q) (x<q , y<q) =
-    map-binary-exists
-      ( λ p → le-ℚ p q × is-in-subtype cut-binary-max-upper-ℝ p)
-      ( max-ℚ)
-      (λ px py (px<q , x<px) (py<q , y<py) →
-        le-max-le-both-ℚ q px py px<q py<q ,
-        max-inhabitants-in-binary-max-upper-ℝ px py x<px y<py)
-      ( forward-implication (is-rounded-cut-upper-ℝ x q) x<q)
-      ( forward-implication (is-rounded-cut-upper-ℝ y q) y<q)
-  pr2 (is-rounded-cut-binary-max-upper-ℝ q) =
-    elim-exists
-      ( cut-binary-max-upper-ℝ q)
-      ( λ p (p<q , x<p , y<p) →
-        backward-implication
-          ( is-rounded-cut-upper-ℝ x q)
-          ( intro-exists p (p<q , x<p)) ,
-        backward-implication
-          ( is-rounded-cut-upper-ℝ y q)
-          ( intro-exists p (p<q , y<p)))
+    forward-implication-is-rounded-cut-binary-max-upper-ℝ :
+      (q : ℚ) →
+      is-in-subtype cut-binary-max-upper-ℝ q →
+      exists ℚ (λ p → le-ℚ-Prop p q ∧ cut-binary-max-upper-ℝ p)
+    forward-implication-is-rounded-cut-binary-max-upper-ℝ q (x<q , y<q) =
+      map-binary-exists
+        ( λ p → le-ℚ p q × is-in-subtype cut-binary-max-upper-ℝ p)
+        ( max-ℚ)
+        ( λ px py (px<q , x<px) (py<q , y<py) →
+          le-max-le-both-ℚ q px py px<q py<q ,
+          max-inhabitants-in-binary-max-upper-ℝ px py x<px y<py)
+        ( forward-implication (is-rounded-cut-upper-ℝ x q) x<q)
+        ( forward-implication (is-rounded-cut-upper-ℝ y q) y<q)
+
+    backward-implication-is-rounded-cut-binary-max-upper-ℝ :
+      (q : ℚ) →
+      exists ℚ (λ p → le-ℚ-Prop p q ∧ cut-binary-max-upper-ℝ p) →
+      is-in-subtype cut-binary-max-upper-ℝ q
+    backward-implication-is-rounded-cut-binary-max-upper-ℝ q =
+      elim-exists
+        ( cut-binary-max-upper-ℝ q)
+        ( λ p (p<q , x<p , y<p) →
+          backward-implication
+            ( is-rounded-cut-upper-ℝ x q)
+            ( intro-exists p (p<q , x<p)) ,
+          backward-implication
+            ( is-rounded-cut-upper-ℝ y q)
+            ( intro-exists p (p<q , y<p)))
+
+    is-rounded-cut-binary-max-upper-ℝ :
+      (q : ℚ) →
+      is-in-subtype cut-binary-max-upper-ℝ q ↔
+      exists ℚ (λ p → le-ℚ-Prop p q ∧ cut-binary-max-upper-ℝ p)
+    is-rounded-cut-binary-max-upper-ℝ q =
+      forward-implication-is-rounded-cut-binary-max-upper-ℝ q ,
+      backward-implication-is-rounded-cut-binary-max-upper-ℝ q
 
   binary-max-upper-ℝ : upper-ℝ (l1 ⊔ l2)
   binary-max-upper-ℝ =

@@ -106,12 +106,12 @@ module _
 There is a largest lower Dedekind real whose cut is all rational numbers. We call this element **infinity**.
 
 ```agda
-∞-lower-ℝ : lower-ℝ lzero
-pr1 ∞-lower-ℝ _ = unit-Prop
-pr1 (pr2 ∞-lower-ℝ) = intro-exists zero-ℚ star
-pr1 (pr2 (pr2 ∞-lower-ℝ) q) _ =
+infinity-lower-ℝ : lower-ℝ lzero
+pr1 infinity-lower-ℝ _ = unit-Prop
+pr1 (pr2 infinity-lower-ℝ) = intro-exists zero-ℚ star
+pr1 (pr2 (pr2 infinity-lower-ℝ) q) _ =
   intro-exists (q +ℚ one-ℚ) (le-right-add-rational-ℚ⁺ q one-ℚ⁺ , star)
-pr2 (pr2 (pr2 ∞-lower-ℝ) q) _ = star
+pr2 (pr2 (pr2 infinity-lower-ℝ) q) _ = star
 ```
 
 ### The lower Dedekind reals form a set

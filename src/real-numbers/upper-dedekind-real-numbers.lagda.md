@@ -106,12 +106,12 @@ module _
 There is a least upper Dedekind real whose cut is all rational numbers. We call this element **negative infinity**.
 
 ```agda
-neg-∞-upper-ℝ : upper-ℝ lzero
-pr1 neg-∞-upper-ℝ _ = unit-Prop
-pr1 (pr2 neg-∞-upper-ℝ) = intro-exists zero-ℚ star
-pr1 (pr2 (pr2 neg-∞-upper-ℝ) q) _ =
+neg-infinity-upper-ℝ : upper-ℝ lzero
+pr1 neg-infinity-upper-ℝ _ = unit-Prop
+pr1 (pr2 neg-infinity-upper-ℝ) = intro-exists zero-ℚ star
+pr1 (pr2 (pr2 neg-infinity-upper-ℝ) q) _ =
   intro-exists (q -ℚ one-ℚ) (le-diff-rational-ℚ⁺ q one-ℚ⁺ , star)
-pr2 (pr2 (pr2 neg-∞-upper-ℝ) q) _ = star
+pr2 (pr2 (pr2 neg-infinity-upper-ℝ) q) _ = star
 ```
 
 ### The upper Dedekind reals form a set

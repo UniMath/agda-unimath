@@ -118,13 +118,14 @@ pr2 (iff-leq-upper-real-ℚ p q) = reflects-leq-upper-real-ℚ p q
 ### Negative infinity is the bottom element of the large poset of upper reals
 
 ```agda
-is-bottom-element-neg-∞-upper-ℝ :
-  is-bottom-element-Large-Poset upper-ℝ-Large-Poset neg-∞-upper-ℝ
-is-bottom-element-neg-∞-upper-ℝ x q _ = star
+is-bottom-element-neg-infinity-upper-ℝ :
+  is-bottom-element-Large-Poset upper-ℝ-Large-Poset neg-infinity-upper-ℝ
+is-bottom-element-neg-infinity-upper-ℝ x q _ = star
 
 has-bottom-element-upper-ℝ :
   has-bottom-element-Large-Poset upper-ℝ-Large-Poset
-bottom-has-bottom-element-Large-Poset has-bottom-element-upper-ℝ = neg-∞-upper-ℝ
+bottom-has-bottom-element-Large-Poset has-bottom-element-upper-ℝ =
+  neg-infinity-upper-ℝ
 is-bottom-element-bottom-has-bottom-element-Large-Poset
-  has-bottom-element-upper-ℝ = is-bottom-element-neg-∞-upper-ℝ
+  has-bottom-element-upper-ℝ = is-bottom-element-neg-infinity-upper-ℝ
 ```
