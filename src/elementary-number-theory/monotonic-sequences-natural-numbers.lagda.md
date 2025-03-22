@@ -37,7 +37,7 @@ inverse (strict) inequality of natural numbers:
 - {{#concept "strictly decreasing" Disambiguation="sequences of natural numbers" Agda=is-strictly-decreasing-seqeunce-ℕ}}
   sequences.
 
-There exist no strictly decreasing sequence of natural numbers and striclty
+There exist no strictly decreasing sequence of natural numbers and strictly
 increasing sequences of natural numbers are unbounded.
 
 ## Definitions
