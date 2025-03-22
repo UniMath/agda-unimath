@@ -13,8 +13,10 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.asymptotically-equal-sequences
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sequences
 open import foundation.subsequences
@@ -32,9 +34,11 @@ open import metric-spaces.short-functions-premetric-spaces
 
 An element `l : type-Premetric-Space M` is the
 {{#concept "limit" Disambiguation="of a sequence in a premetric space" Agda=is-limit-sequence-Premetric-Space}}
-of a sequence `u` in a premetric space `M` if
-[`d`-neighborhoods](metric-spaces.premetric-structures.md) contain all the terms
-`u n` for sufficiently large `n : ℕ`.
+of a [sequence](metric-spaces.sequences-premetric-spaces.md) `u` in a
+[premetric space](metric-spaces.premetric-spaces.md) `M` if
+[`d`-neighborhoods](metric-spaces.premetric-structures.md) of `l` contain all
+the terms `u n` for sufficiently large `n : ℕ`; i.e. if `u` is asymptotically
+indistinguishable from the constant sequence `l`.
 
 [Short maps](metric-spaces.short-functions-premetric-spaces.md) between
 premetric spaces and
@@ -66,6 +70,14 @@ module _
   is-limit-sequence-Premetric-Space : UU l2
   is-limit-sequence-Premetric-Space =
     (d : ℚ⁺) → Σ ℕ (is-modulus-limit-sequence-Premetric-Space d)
+
+  eq-const-is-limit-sequence-Premetric-Space :
+    is-limit-sequence-Premetric-Space ＝
+    is-asymptotically-indistinguishable-sequence-Premetric-Space
+      ( M)
+      ( u)
+      ( const ℕ l)
+  eq-const-is-limit-sequence-Premetric-Space = refl
 
   modulus-limit-sequence-Premetric-Space :
     is-limit-sequence-Premetric-Space → ℚ⁺ → ℕ

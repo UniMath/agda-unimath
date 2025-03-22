@@ -77,11 +77,7 @@ module _
 
   symmetric-asymptotically-eq-sequence :
     asymptotically-eq-sequence u v → asymptotically-eq-sequence v u
-  symmetric-asymptotically-eq-sequence =
-    map-Σ
-      ( is-modulus-asymptotically-eq-sequence v u)
-      ( id)
-      ( λ N H m K → inv (H m K))
+  symmetric-asymptotically-eq-sequence = tot (λ N H m K → inv (H m K))
 ```
 
 ### Asymptotically equality equal is a transitive relation

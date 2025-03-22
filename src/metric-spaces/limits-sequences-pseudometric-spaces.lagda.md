@@ -34,14 +34,18 @@ open import metric-spaces.sequences-pseudometric-spaces
 ## Ideas
 
 {{#concept "Limits" Disambiguation="of sequences in pseudometric spaces" Agda=is-limit-sequence-Pseudometric-Space}}
-of sequences in pseudometric spaces are
-[limits](metric-spaces.limits-sequences-premetric-spaces.md) in the underlying
-[premetric space](metric-spaces.premetric-spaces.md).
+of
+[sequences in pseudometric spaces](metric-spaces.sequences-pseudometric-spaces.md)
+are [limits](metric-spaces.limits-sequences-premetric-spaces.md) in the
+underlying [premetric space](metric-spaces.premetric-spaces.md).
 
-Constant and asymptotically constant sequences in a pseudometric space have a
-limit: their (asymptotical) value.
+Limits of a sequence in a pseudometric space are indistinguishable. The
+(asymptotical) value of an
+([asymptotically](foundation.asymptotically-constant-sequences.md)) constant
+sequence in a pseudometric is a limit of the sequence.
 
-Limits of a sequence in a pseudometric space are indistinguishable.
+Asymptotical indistinguishability of sequences in pseudometric spaces preserves
+limits.
 
 ## Definition
 
@@ -196,4 +200,31 @@ module _
             ( p)
             ( I)))
       ( L d)
+```
+
+### Asymptotical indistinguishability of sequences in a pseudometric space preserves limits
+
+```agda
+module _
+  {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
+  (u v : sequence-Pseudometric-Space M)
+  (K : is-asymptotically-indistinguishable-sequence-Pseudometric-Space M u v)
+  (l : type-Pseudometric-Space M)
+  (L : is-limit-sequence-Pseudometric-Space M u l)
+  where
+
+  preserves-limit-asymptotically-indistinguishable-sequence-Pseudometric-Space :
+    is-limit-sequence-Pseudometric-Space M v l
+  preserves-limit-asymptotically-indistinguishable-sequence-Pseudometric-Space =
+    transitive-asymptotically-indistinguishable-sequence-Pseudometric-Space
+      ( M)
+      ( v)
+      ( u)
+      ( const ℕ l)
+      ( L)
+      ( symmetric-asymptotically-indistinguishable-sequence-Pseudometric-Space
+        ( M)
+        ( u)
+        ( v)
+        ( K))
 ```
