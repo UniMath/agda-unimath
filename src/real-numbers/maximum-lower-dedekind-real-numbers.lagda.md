@@ -41,7 +41,7 @@ open import real-numbers.lower-dedekind-real-numbers
 ## Idea
 
 The maximum of two
-[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md) `x`,
+[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md) `x` and
 `y` is a lower Dedekind real number with cut equal to the union of the cuts of
 `x` and `y`. Unlike the case for the
 [minimum of lower Dedekind real numbers](real-numbers.minimum-lower-dedekind-real-numbers.md),
@@ -201,10 +201,10 @@ module _
       ( binary-max-lower-ℝ x y)
   is-binary-upper-bound-binary-max-lower-ℝ =
     is-binary-upper-bound-is-least-binary-upper-bound-Large-Poset
-      lower-ℝ-Large-Poset
-      x
-      y
-      is-least-binary-upper-bound-binary-max-lower-ℝ
+      ( lower-ℝ-Large-Poset)
+      ( x)
+      ( y)
+      ( is-least-binary-upper-bound-binary-max-lower-ℝ)
 ```
 
 ### The maximum of an inhabited family is a least upper bound
@@ -219,9 +219,9 @@ module _
 
   is-least-upper-bound-max-lower-ℝ :
     is-least-upper-bound-family-of-elements-Large-Poset
-      lower-ℝ-Large-Poset
-      F
-      (max-lower-ℝ A H F)
+      ( lower-ℝ-Large-Poset)
+      ( F)
+      ( max-lower-ℝ A H F)
   is-least-upper-bound-max-lower-ℝ z =
     is-least-upper-bound-sup-Large-Suplattice
       ( powerset-Large-Suplattice ℚ)

@@ -101,7 +101,9 @@ module _
 
 ## Properties
 
-### There is a least upper Dedekind real, whose cut is all rational numbers
+### The least upper Dedekind real
+
+There is a least upper Dedekind real whose cut is all rational numbers. We call this element **negative infinity**.
 
 ```agda
 neg-∞-upper-ℝ : upper-ℝ lzero

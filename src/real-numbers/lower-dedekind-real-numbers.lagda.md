@@ -101,7 +101,9 @@ module _
 
 ## Properties
 
-### There is a largest lower Dedekind real, whose cut is all rational numbers
+### The greatest lower Dedekind real
+
+There is a largest lower Dedekind real whose cut is all rational numbers. We call this element **infinity**.
 
 ```agda
 ∞-lower-ℝ : lower-ℝ lzero

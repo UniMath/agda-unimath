@@ -41,13 +41,11 @@ open import real-numbers.upper-dedekind-real-numbers
 ## Idea
 
 The minimum of two
-[upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md) `x`,
+[upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md) `x` and
 `y` is a upper Dedekind real number with cut equal to the union of the cuts of
 `x` and `y`. Unlike the case for the
 [maximum of upper Dedekind real numbers](real-numbers.maximum-upper-dedekind-real-numbers.md),
-the minimum of any inhabited family of upper Dedekind real numbers, the upper
-Dedekind real number whose cut is union of the cuts of every element of the
-family, is also a upper Dedekind real number.
+the minimum of any inhabited family of upper Dedekind real numbers is also an upper Dedekind real number.
 
 ## Definition
 

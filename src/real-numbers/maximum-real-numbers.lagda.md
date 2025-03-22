@@ -109,7 +109,7 @@ module _
       ( lower-real-ℝ z)
 ```
 
-### The large poset of the real numbers has joins
+### The large poset of real numbers has joins
 
 ```agda
 has-joins-ℝ-Large-Poset : has-joins-Large-Poset ℝ-Large-Poset

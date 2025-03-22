@@ -31,7 +31,7 @@ open import real-numbers.upper-dedekind-real-numbers
 ## Idea
 
 The **binary minimum** of two
-[Dedekind real numbers](real-numbers.dedekind-real-numbers.md) `x`, `y` is a
+[Dedekind real numbers](real-numbers.dedekind-real-numbers.md) `x` and `y` is a
 Dedekind real number with lower cut equal to the intersection of `x` and `y`'s
 lower cuts, and upper cut equal to the union of their upper cuts.
 
@@ -109,7 +109,7 @@ module _
       ( lower-real-ℝ z)
 ```
 
-### The large poset of the real numbers has meets
+### The large poset of real numbers has meets
 
 ```agda
 has-meets-ℝ-Large-Poset : has-meets-Large-Poset ℝ-Large-Poset
