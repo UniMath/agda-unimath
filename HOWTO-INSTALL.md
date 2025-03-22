@@ -21,8 +21,8 @@ In order to contribute to the agda-unimath library you will additionally need:
 1. `git`
 2. `make`
 3. `python` version 3.8 or newer
-4. The python libraries `pre-commit`, `pybtex`, `requests` and `tomli`. Those
-   can be installed by running
+4. The python libraries `pre-commit`, `pybtex`, `requests`, `tomli`, and
+   `graphviz`. These can be installed by running
    ```shell
    python3 -m pip install -r scripts/requirements.txt
    ```
@@ -33,6 +33,7 @@ In order to contribute to the agda-unimath library you will additionally need:
    ```shell
    make install-website-dev
    ```
+7. `graphviz`
 
 All of these can also be installed in one go by using `nix`. In the section
 [Creating a setup for contributors](#contributor-setup) we will walk you through

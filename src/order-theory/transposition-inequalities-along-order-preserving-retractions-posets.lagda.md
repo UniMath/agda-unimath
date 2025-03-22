@@ -10,6 +10,10 @@ module order-theory.transposition-inequalities-along-order-preserving-retraction
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+<<<<<<< HEAD
+=======
+open import foundation.retractions
+>>>>>>> master
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -29,7 +33,11 @@ Given a pair of posets `P` and `Q`, consider a map
 transposition maps
 
 ```text
+<<<<<<< HEAD
 f x ≤ y → x ≤ g y
+=======
+  f x ≤ y → x ≤ g y
+>>>>>>> master
 ```
 
 indexed by `x : type-Poset P` and `y : type-Poset Q`.
@@ -44,8 +52,14 @@ module _
   where
 
   leq-transpose-is-retraction-hom-Poset :
+<<<<<<< HEAD
     (map-hom-Poset Q P g ∘ f ~ id) → (x : type-Poset P) (y : type-Poset Q) →
     leq-Poset Q (f x) y → leq-Poset P x (map-hom-Poset Q P g y)
+=======
+    is-retraction f (map-hom-Poset Q P g) →
+    (x : type-Poset P) (y : type-Poset Q) → leq-Poset Q (f x) y →
+    leq-Poset P x (map-hom-Poset Q P g y)
+>>>>>>> master
   leq-transpose-is-retraction-hom-Poset f-retraction-g x y fx≤y =
     tr
       ( λ z → leq-Poset P z (map-hom-Poset Q P g y))
