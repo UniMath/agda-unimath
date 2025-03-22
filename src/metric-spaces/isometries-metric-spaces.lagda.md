@@ -27,6 +27,7 @@ open import foundation.subtypes
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import metric-spaces.continuity-functions-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-premetric-spaces
 open import metric-spaces.metric-spaces
@@ -344,11 +345,31 @@ module _
   where
 
   is-emb-map-isometry-Metric-Space :
-      (f : isometry-Metric-Space A B) → is-emb (map-isometry-Metric-Space A B f)
+    (f : isometry-Metric-Space A B) → is-emb (map-isometry-Metric-Space A B f)
   is-emb-map-isometry-Metric-Space =
     is-emb-map-isometry-is-extensional-Premetric-Space
       ( premetric-Metric-Space A)
       ( premetric-Metric-Space B)
       ( is-extensional-structure-Metric-Space A)
       ( is-extensional-structure-Metric-Space B)
+```
+
+### Any isometry between metric spaces is uniformly continuous
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
+  where
+
+  is-uniformly-continuous-map-isometry-Metric-Space :
+    (f : isometry-Metric-Space A B) →
+    is-uniformly-continuous-map-Metric-Space A B
+      (map-isometry-Metric-Space A B f)
+  is-uniformly-continuous-map-isometry-Metric-Space f =
+    intro-exists
+      ( id)
+      ( λ x ε x' →
+        forward-implication
+          ( is-isometry-map-isometry-Metric-Space A B f ε x x'))
 ```
