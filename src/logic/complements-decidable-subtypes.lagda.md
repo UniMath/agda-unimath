@@ -11,14 +11,14 @@ open import foundation.complements-subtypes
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
-open import foundation.equivalences
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.disjoint-subtypes
 open import foundation.double-negation-stable-propositions
+open import foundation.equivalences
 open import foundation.evaluation-functions
 open import foundation.full-subtypes
 open import foundation.involutions
-open import foundation.disjoint-subtypes
 open import foundation.negation
 open import foundation.postcomposition-functions
 open import foundation.powersets

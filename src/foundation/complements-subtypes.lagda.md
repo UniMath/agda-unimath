@@ -9,14 +9,14 @@ module foundation.complements-subtypes where
 ```agda
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
-open import foundation.double-negation-stable-propositions
 open import foundation.dependent-pair-types
+open import foundation.disjoint-subtypes
+open import foundation.double-negation-stable-propositions
 open import foundation.full-subtypes
 open import foundation.negation
 open import foundation.postcomposition-functions
 open import foundation.powersets
 open import foundation.propositional-truncations
-open import foundation.disjoint-subtypes
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
