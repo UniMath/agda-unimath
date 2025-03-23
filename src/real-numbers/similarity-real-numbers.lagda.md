@@ -128,12 +128,10 @@ opaque
 
 ```agda
 opaque
-
   unfolding sim-ℝ
 
   eq-sim-ℝ : {l : Level} → {x y : ℝ l} → x ~ℝ y → x ＝ y
-  eq-sim-ℝ {x = x} {y = y} H =
-    eq-eq-lower-cut-ℝ x y (antisymmetric-sim-subtype _ _ H)
+  eq-sim-ℝ {x = x} {y = y} H = eq-eq-lower-cut-ℝ x y (eq-sim-subtype _ _ H)
 ```
 
 ### Similarity reasoning

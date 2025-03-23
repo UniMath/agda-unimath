@@ -30,8 +30,11 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.commutative-monoids
 open import group-theory.groups
 open import group-theory.minkowski-multiplication-commutative-monoids
+open import group-theory.monoids
+open import group-theory.semigroups
 
 open import real-numbers.rational-upper-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
@@ -66,21 +69,21 @@ module _
   is-in-cut-add-upper-ℝ : ℚ → UU (l1 ⊔ l2)
   is-in-cut-add-upper-ℝ = is-in-subtype cut-add-upper-ℝ
 
-  is-inhabited-cut-add-upper-ℝ : exists ℚ cut-add-upper-ℝ
-  is-inhabited-cut-add-upper-ℝ =
-    minkowski-mul-inhabited-is-inhabited-Commutative-Monoid
-      ( commutative-monoid-add-ℚ)
-      ( cut-upper-ℝ x)
-      ( cut-upper-ℝ y)
-      ( is-inhabited-cut-upper-ℝ x)
-      ( is-inhabited-cut-upper-ℝ y)
-
   abstract
-    is-rounded-cut-add-upper-ℝ :
+    is-inhabited-cut-add-upper-ℝ : exists ℚ cut-add-upper-ℝ
+    is-inhabited-cut-add-upper-ℝ =
+      minkowski-mul-inhabited-is-inhabited-Commutative-Monoid
+        ( commutative-monoid-add-ℚ)
+        ( cut-upper-ℝ x)
+        ( cut-upper-ℝ y)
+        ( is-inhabited-cut-upper-ℝ x)
+        ( is-inhabited-cut-upper-ℝ y)
+
+    forward-implication-is-rounded-cut-add-upper-ℝ :
       (q : ℚ) →
-      is-in-cut-add-upper-ℝ q ↔
+      is-in-cut-add-upper-ℝ q →
       exists ℚ (λ p → le-ℚ-Prop p q ∧ cut-add-upper-ℝ p)
-    pr1 (is-rounded-cut-add-upper-ℝ q) q<x+y =
+    forward-implication-is-rounded-cut-add-upper-ℝ q q<x+y =
       do
         ((ux , uy) , (x<ux , y<uy , q=ux+uy)) ← q<x+y
         (ux' , ux'<ux , x<ux') ←
@@ -89,23 +92,26 @@ module _
           forward-implication (is-rounded-cut-upper-ℝ y uy) y<uy
         intro-exists
           ( ux' +ℚ uy')
-          ( tr
-              ( le-ℚ (ux' +ℚ uy'))
-              ( inv (q=ux+uy))
-              ( preserves-le-add-ℚ {ux'} {ux} {uy'} {uy} ux'<ux uy'<uy) ,
+          ( inv-tr
+            ( le-ℚ (ux' +ℚ uy'))
+            ( q=ux+uy)
+            ( preserves-le-add-ℚ {ux'} {ux} {uy'} {uy} ux'<ux uy'<uy) ,
             intro-exists (ux' , uy') (x<ux' , y<uy' , refl))
       where
         open
           do-syntax-trunc-Prop (∃ ℚ (λ p → le-ℚ-Prop p q ∧ cut-add-upper-ℝ p))
-    pr2 (is-rounded-cut-add-upper-ℝ q) exists-p =
+
+    backward-implication-is-rounded-cut-add-upper-ℝ :
+      (q : ℚ) →
+      exists ℚ (λ p → le-ℚ-Prop p q ∧ cut-add-upper-ℝ p) →
+      is-in-cut-add-upper-ℝ q
+    backward-implication-is-rounded-cut-add-upper-ℝ q ∃p =
       do
-        (p , p<q , x+y<p) ← exists-p
+        (p , p<q , x+y<p) ← ∃p
         ((px , py) , (x<px , y<py , p=px+py)) ← x+y<p
         let
           q-p⁺ = positive-diff-le-ℚ p q p<q
-          ε⁺ = mediant-zero-ℚ⁺ q-p⁺
-          ε = rational-ℚ⁺ ε⁺
-          ε<q-p = le-mediant-zero-ℚ⁺ q-p⁺
+          ε⁺@(ε , _) = mediant-zero-ℚ⁺ q-p⁺
         intro-exists
           ( px +ℚ ε , q -ℚ (px +ℚ ε))
           ( is-in-cut-add-rational-ℚ⁺-upper-ℝ x px ε⁺ x<px ,
@@ -133,10 +139,18 @@ module _
                   ( q -ℚ px)
                   ( neg-ℚ (q -ℚ p))
                   ( neg-ℚ ε)
-                  ( neg-le-ℚ ε (q -ℚ p) ε<q-p)))
+                  ( neg-le-ℚ ε (q -ℚ p) (le-mediant-zero-ℚ⁺ q-p⁺))))
               ( y<py) ,
             inv ( is-identity-right-conjugation-add-ℚ (px +ℚ ε) q))
       where open do-syntax-trunc-Prop (cut-add-upper-ℝ q)
+
+    is-rounded-cut-add-upper-ℝ :
+      (q : ℚ) →
+      is-in-cut-add-upper-ℝ q ↔
+      exists ℚ (λ p → le-ℚ-Prop p q ∧ cut-add-upper-ℝ p)
+    is-rounded-cut-add-upper-ℝ q =
+      forward-implication-is-rounded-cut-add-upper-ℝ q ,
+      backward-implication-is-rounded-cut-add-upper-ℝ q
 
   add-upper-ℝ : upper-ℝ (l1 ⊔ l2)
   pr1 add-upper-ℝ = cut-add-upper-ℝ
@@ -153,15 +167,16 @@ module _
   {l1 l2 : Level} (x : upper-ℝ l1) (y : upper-ℝ l2)
   where
 
-  commutative-add-upper-ℝ : add-upper-ℝ x y ＝ add-upper-ℝ y x
-  commutative-add-upper-ℝ =
-    eq-eq-cut-upper-ℝ
-      ( add-upper-ℝ x y)
-      ( add-upper-ℝ y x)
-      ( commutative-minkowski-mul-Commutative-Monoid
-        ( commutative-monoid-add-ℚ)
-        ( cut-upper-ℝ x)
-        ( cut-upper-ℝ y))
+  abstract
+    commutative-add-upper-ℝ : add-upper-ℝ x y ＝ add-upper-ℝ y x
+    commutative-add-upper-ℝ =
+      eq-eq-cut-upper-ℝ
+        ( add-upper-ℝ x y)
+        ( add-upper-ℝ y x)
+        ( commutative-minkowski-mul-Commutative-Monoid
+          ( commutative-monoid-add-ℚ)
+          ( cut-upper-ℝ x)
+          ( cut-upper-ℝ y))
 ```
 
 ### Addition of upper Dedekind real numbers is associative
@@ -171,17 +186,18 @@ module _
   {l1 l2 l3 : Level} (x : upper-ℝ l1) (y : upper-ℝ l2) (z : upper-ℝ l3)
   where
 
-  associative-add-upper-ℝ :
-    add-upper-ℝ (add-upper-ℝ x y) z ＝ add-upper-ℝ x (add-upper-ℝ y z)
-  associative-add-upper-ℝ =
-    eq-eq-cut-upper-ℝ
-      ( add-upper-ℝ (add-upper-ℝ x y) z)
-      ( add-upper-ℝ x (add-upper-ℝ y z))
-      ( associative-minkowski-mul-Commutative-Monoid
-        ( commutative-monoid-add-ℚ)
-        ( cut-upper-ℝ x)
-        ( cut-upper-ℝ y)
-        ( cut-upper-ℝ z))
+  abstract
+    associative-add-upper-ℝ :
+      add-upper-ℝ (add-upper-ℝ x y) z ＝ add-upper-ℝ x (add-upper-ℝ y z)
+    associative-add-upper-ℝ =
+      eq-eq-cut-upper-ℝ
+        ( add-upper-ℝ (add-upper-ℝ x y) z)
+        ( add-upper-ℝ x (add-upper-ℝ y z))
+        ( associative-minkowski-mul-Commutative-Monoid
+          ( commutative-monoid-add-ℚ)
+          ( cut-upper-ℝ x)
+          ( cut-upper-ℝ y)
+          ( cut-upper-ℝ z))
 ```
 
 ### Unit laws for addition of upper Dedekind real numbers
@@ -191,31 +207,62 @@ module _
   {l : Level} (x : upper-ℝ l)
   where
 
-  right-unit-law-add-upper-ℝ : add-upper-ℝ x (upper-real-ℚ zero-ℚ) ＝ x
-  right-unit-law-add-upper-ℝ =
-    eq-sim-cut-upper-ℝ
-      ( add-upper-ℝ x (upper-real-ℚ zero-ℚ))
-      ( x)
-      ( (λ r →
-          elim-exists
-            ( cut-upper-ℝ x r)
-            ( λ (p , q) (x<p , 0<q , r=p+q) →
-              inv-tr
-                ( is-in-cut-upper-ℝ x)
-                ( r=p+q)
-                ( is-in-cut-add-rational-ℚ⁺-upper-ℝ
-                  ( x)
-                  ( p)
-                  ( q , is-positive-le-zero-ℚ q 0<q)
-                  ( x<p)))) ,
-        ( λ q x<q →
-          elim-exists
-            ( cut-add-upper-ℝ x (upper-real-ℚ zero-ℚ) q)
-            ( λ r (r<q , x<r) →
-              intro-exists
-                ( r , q -ℚ r)
-                ( x<r ,
-                  backward-implication (iff-translate-diff-le-zero-ℚ r q) r<q ,
-                  inv (is-identity-right-conjugation-add-ℚ r q)))
-            ( forward-implication (is-rounded-cut-upper-ℝ x q) x<q)))
+  abstract
+    right-unit-law-add-upper-ℝ : add-upper-ℝ x (upper-real-ℚ zero-ℚ) ＝ x
+    right-unit-law-add-upper-ℝ =
+      eq-sim-cut-upper-ℝ
+        ( add-upper-ℝ x (upper-real-ℚ zero-ℚ))
+        ( x)
+        ( (λ r →
+            elim-exists
+              ( cut-upper-ℝ x r)
+              ( λ (p , q) (x<p , 0<q , r=p+q) →
+                inv-tr
+                  ( is-in-cut-upper-ℝ x)
+                  ( r=p+q)
+                  ( is-in-cut-add-rational-ℚ⁺-upper-ℝ
+                    ( x)
+                    ( p)
+                    ( q , is-positive-le-zero-ℚ q 0<q)
+                    ( x<p)))) ,
+          ( λ q x<q →
+            elim-exists
+              ( cut-add-upper-ℝ x (upper-real-ℚ zero-ℚ) q)
+              ( λ r (r<q , x<r) →
+                intro-exists
+                  ( r , q -ℚ r)
+                  ( x<r ,
+                    backward-implication
+                      ( iff-translate-diff-le-zero-ℚ r q)
+                      ( r<q) ,
+                    inv (is-identity-right-conjugation-add-ℚ r q)))
+              ( forward-implication (is-rounded-cut-upper-ℝ x q) x<q)))
+
+    left-unit-law-add-upper-ℝ : add-upper-ℝ (upper-real-ℚ zero-ℚ) x ＝ x
+    left-unit-law-add-upper-ℝ =
+      commutative-add-upper-ℝ (upper-real-ℚ zero-ℚ) x ∙
+      right-unit-law-add-upper-ℝ
+```
+
+### The commutative monoid of upper Dedekind real numbers
+
+```agda
+semigroup-add-upper-ℝ-lzero : Semigroup (lsuc lzero)
+semigroup-add-upper-ℝ-lzero =
+  (upper-ℝ lzero , is-set-upper-ℝ lzero) ,
+  add-upper-ℝ ,
+  associative-add-upper-ℝ
+
+monoid-upper-ℝ-lzero : Monoid (lsuc lzero)
+monoid-upper-ℝ-lzero =
+  semigroup-add-upper-ℝ-lzero ,
+  upper-real-ℚ zero-ℚ ,
+  left-unit-law-add-upper-ℝ ,
+  right-unit-law-add-upper-ℝ
+
+commutative-monoid-add-upper-ℝ-lzero :
+  Commutative-Monoid (lsuc lzero)
+commutative-monoid-add-upper-ℝ-lzero =
+  monoid-upper-ℝ-lzero ,
+  commutative-add-upper-ℝ
 ```

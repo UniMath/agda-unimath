@@ -248,12 +248,12 @@ module _
 #### Similarity is antisymmetric at the same universe level
 
 ```agda
-  antisymmetric-sim-subtype :
+  eq-sim-subtype :
     {l2 : Level} →
     (P Q : subtype l2 A) →
     sim-subtype P Q →
     P ＝ Q
-  antisymmetric-sim-subtype = eq-sim-Large-Poset (powerset-Large-Poset A)
+  eq-sim-subtype = eq-sim-Large-Poset (powerset-Large-Poset A)
 ```
 
 ## See also
