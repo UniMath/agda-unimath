@@ -254,44 +254,46 @@ module _
   (u : arithmetic-sequence-ℚ⁺)
   where
 
-  is-unbounded-arithmetic-sequence-ℚ⁺ :
-    (M : ℚ⁺) → Σ ℕ (le-ℚ⁺ M ∘ seq-arithmetic-sequence-ℚ⁺ u)
-  is-unbounded-arithmetic-sequence-ℚ⁺ M =
-    tot
-      ( tr-archimidean-bound)
-      ( bound-archimedean-property-ℚ
-        ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u))
-        ( rational-ℚ⁺ M)
-        ( is-positive-rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))
-    where
+  opaque
+    is-unbounded-arithmetic-sequence-ℚ⁺ :
+      (M : ℚ⁺) → Σ ℕ (le-ℚ⁺ M ∘ seq-arithmetic-sequence-ℚ⁺ u)
+    is-unbounded-arithmetic-sequence-ℚ⁺ M =
+      tot
+        ( tr-archimidean-bound)
+        ( bound-archimedean-property-ℚ
+          ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u))
+          ( rational-ℚ⁺ M)
+          ( is-positive-rational-ℚ⁺
+            ( common-difference-arithmetic-sequence-ℚ⁺ u)))
+      where
 
-      tr-archimidean-bound :
-        (n : ℕ) →
-        (I :
-          le-ℚ
+        tr-archimidean-bound :
+          (n : ℕ) →
+          (I :
+            le-ℚ
+              ( rational-ℚ⁺ M)
+              ( mul-ℚ
+                ( rational-ℕ n)
+                ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))) →
+          le-ℚ⁺ M (seq-arithmetic-sequence-ℚ⁺ u n)
+        tr-archimidean-bound n =
+          transitive-le-ℚ
             ( rational-ℚ⁺ M)
             ( mul-ℚ
               ( rational-ℕ n)
-              ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))) →
-        le-ℚ⁺ M (seq-arithmetic-sequence-ℚ⁺ u n)
-      tr-archimidean-bound n =
-        transitive-le-ℚ
-          ( rational-ℚ⁺ M)
-          ( mul-ℚ
-            ( rational-ℕ n)
-            ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))
-          ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
-          ( tr
-            ( le-ℚ
-              ( mul-ℚ
-                ( rational-ℕ n)
-                ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u))))
-            ( compute-arithmetic-sequence-ℚ⁺ u n)
-            ( le-left-add-rational-ℚ⁺
-              ( mul-ℚ
-                ( rational-ℕ n)
-                ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))
-              ( init-term-arithmetic-sequence-ℚ⁺ u)))
+              ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))
+            ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
+            ( tr
+              ( le-ℚ
+                ( mul-ℚ
+                  ( rational-ℕ n)
+                  ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u))))
+              ( compute-arithmetic-sequence-ℚ⁺ u n)
+              ( le-left-add-rational-ℚ⁺
+                ( mul-ℚ
+                  ( rational-ℕ n)
+                  ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))
+                ( init-term-arithmetic-sequence-ℚ⁺ u)))
 ```
 
 ## References
