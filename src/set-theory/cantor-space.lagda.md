@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.booleans
 open import foundation.coproduct-types
+open import foundation.function-types-apartness-relations
 open import foundation.dependent-pair-types
 open import foundation.double-negation-stable-equality
 open import foundation.empty-types
