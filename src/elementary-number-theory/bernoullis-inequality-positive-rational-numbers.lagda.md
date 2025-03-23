@@ -106,6 +106,10 @@ module _
 
 ## Bernouilli's inequality on the positive rational numbers
 
+```text
+∀ (h : ℚ⁺) (n : ℕ) → 1 + n h ≤ (1 + h)ⁿ
+```
+
 ```agda
 module _
   (h : ℚ⁺)
