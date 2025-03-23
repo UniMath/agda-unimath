@@ -287,4 +287,4 @@ set-Type-With-Tight-Apartness A =
 
 - Every tight apartness relation is
   [standard](foundation.standard-apartness-relations.md).
-- [Dependent function types with apartness relations](foundation.dependent-function-types-apartness-relations.md)
+- [Dependent function types with apartness relations](foundation.dependent-function-types-with-apartness-relations.md)

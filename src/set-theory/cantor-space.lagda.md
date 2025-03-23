@@ -14,7 +14,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation-stable-equality
 open import foundation.empty-types
-open import foundation.function-types-apartness-relations
+open import foundation.function-types-with-apartness-relations
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.negation
 open import foundation.propositional-truncations

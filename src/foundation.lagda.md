@@ -119,7 +119,7 @@ open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-epimorphisms public
 open import foundation.dependent-epimorphisms-with-respect-to-truncated-types public
 open import foundation.dependent-function-types public
-open import foundation.dependent-function-types-apartness-relations public
+open import foundation.dependent-function-types-with-apartness-relations public
 open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
@@ -205,7 +205,7 @@ open import foundation.fixed-points-endofunctions public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
 open import foundation.function-types public
-open import foundation.function-types-apartness-relations public
+open import foundation.function-types-with-apartness-relations public
 open import foundation.functional-correspondences public
 open import foundation.functoriality-action-on-identifications-functions public
 open import foundation.functoriality-cartesian-product-types public

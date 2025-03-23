@@ -221,5 +221,5 @@ apartness-relation-restriction-Type-With-Apartness Y f =
 
 - [Large apartness relations](foundation.large-apartness-relations.md)
 - [Tight apartness relations](foundation.tight-apartness-relations.md)
-- [Dependent function types with apartness relations](foundation.dependent-function-types-apartness-relations.md)
-- [Function types with apartness relations](foundation.function-types-apartness-relations.md)
+- [Dependent function types with apartness relations](foundation.dependent-function-types-with-apartness-relations.md)
+- [Function types with apartness relations](foundation.function-types-with-apartness-relations.md)

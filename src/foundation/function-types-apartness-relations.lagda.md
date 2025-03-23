@@ -1,7 +1,7 @@
 # Apartness relations on function types
 
 ```agda
-module foundation.function-types-apartness-relations where
+module foundation.function-types-with-apartness-relations where
 ```
 
 <details><summary>Imports</summary>
@@ -9,7 +9,7 @@ module foundation.function-types-apartness-relations where
 ```agda
 open import foundation.apartness-relations
 open import foundation.binary-relations
-open import foundation.dependent-function-types-apartness-relations
+open import foundation.dependent-function-types-with-apartness-relations
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
@@ -166,4 +166,4 @@ module _
 
 ## See also
 
-- [Dependent function types with apartness relations](foundation.dependent-function-types-apartness-relations.md)
+- [Dependent function types with apartness relations](foundation.dependent-function-types-with-apartness-relations.md)
