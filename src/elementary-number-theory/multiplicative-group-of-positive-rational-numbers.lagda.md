@@ -79,29 +79,12 @@ right-inverse-law-mul-ℚ⁺ = right-inverse-law-mul-Group group-mul-ℚ⁺
 
 ## Properties
 
-### `one-ℚ⁺` is its own inverse
-
-```agda
-abstract
-  inv-one-ℚ⁺ : inv-ℚ⁺ one-ℚ⁺ ＝ one-ℚ⁺
-  inv-one-ℚ⁺ =
-    inv-unit-Group group-mul-ℚ⁺
-```
-
 ### The multiplicative group of positive rational numbers is commutative
 
 ```agda
 abelian-group-mul-ℚ⁺ : Ab lzero
 pr1 abelian-group-mul-ℚ⁺ = group-mul-ℚ⁺
 pr2 abelian-group-mul-ℚ⁺ = commutative-mul-ℚ⁺
-```
-
-### Inversion on the positive rational numbers is an involution
-
-```agda
-abstract
-  inv-inv-ℚ⁺ : (x : ℚ⁺) → inv-ℚ⁺ (inv-ℚ⁺ x) ＝ x
-  inv-inv-ℚ⁺ = inv-inv-Group group-mul-ℚ⁺
 ```
 
 ### Inversion reverses strict inequality on the positive rational numbers
