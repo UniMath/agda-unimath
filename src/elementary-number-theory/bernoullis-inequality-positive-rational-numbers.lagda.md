@@ -31,9 +31,8 @@ open import foundation.universe-levels
 
 {{#concept "Bernoulli's inequality" Disambiguation="on the positive rational numbers" WD="Bernoulli's inequality" WDID=Q728662}}
 on the
-[positive rational numbers](elementary-number-theory.positive-rational-numbers.md).
-
-For any `h : ℚ⁺`, the arithmetic sequence with initial term `1` and common
+[positive rational numbers](elementary-number-theory.positive-rational-numbers.md);
+for any `h : ℚ⁺`, the arithmetic sequence with initial term `1` and common
 difference `h` is lesser than or equal to the geometric sequence with initial
 term `1` and common ratio `1 + h`:
 
