@@ -45,7 +45,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The **sum operation** extends the binary addition operation on a
+The {{#concept "sum operation" Disambiguation="in a commutative semiring" WD="sum" WDID=Q218005 Agda=sum-Commutative-Semiring}} extends the binary addition operation on a
 [commutative semiring](commutative-algebra.commutative-semirings.md) `R` to any
 family of elements of `R` indexed by a
 [standard finite type](univalent-combinatorics.standard-finite-types.md), or by

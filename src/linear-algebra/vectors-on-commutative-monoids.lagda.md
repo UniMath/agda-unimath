@@ -30,11 +30,11 @@ open import linear-algebra.vectors-on-monoids
 ## Idea
 
 Given a [commutative monoid](group-theory.commutative-monoids.md) `M`, the type
-`vec n M` of `M`-[vectors](linear-algebra.vectors.md) is a commutative monoid.
+`vec n M` of `n`-dimensional `M`-[vectors](linear-algebra.vectors.md) is a commutative monoid given by componentwise addition.
 
 ## Definitions
 
-### Listed vectors on commutative rings
+### Listed vectors on commutative monoids
 
 ```agda
 module _
@@ -58,7 +58,7 @@ module _
   snoc-vec-Commutative-Monoid = snoc-vec-Monoid (monoid-Commutative-Monoid M)
 ```
 
-### Functional vectors on commutative rings
+### Functional vectors on commutative monoids
 
 ```agda
 module _
