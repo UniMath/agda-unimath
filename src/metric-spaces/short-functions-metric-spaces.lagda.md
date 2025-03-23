@@ -12,6 +12,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -22,13 +23,12 @@ open import foundation.sequences
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
-open import foundation.existential-quantification
 
+open import metric-spaces.continuity-functions-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-premetric-spaces
-open import metric-spaces.continuity-functions-metric-spaces
 ```
 
 </details>
