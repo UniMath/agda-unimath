@@ -60,7 +60,7 @@ common ratio.
 ### Geometric sequences of positive rational numbers
 
 ```agda
-is-common-ratio-sequence-ℚ⁺ : sequence ℚ⁺ → (r : ℚ⁺) → UU lzero
+is-common-ratio-sequence-ℚ⁺ : sequence ℚ⁺ → ℚ⁺ → UU lzero
 is-common-ratio-sequence-ℚ⁺ =
   is-common-difference-sequence-Semigroup semigroup-mul-ℚ⁺
 

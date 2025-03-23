@@ -55,6 +55,14 @@ strictly increasing and unbounded.
 ### Arithmetic sequences of positive rational numbers
 
 ```agda
+is-common-difference-sequence-ℚ⁺ : sequence ℚ⁺ → ℚ⁺ → UU lzero
+is-common-difference-sequence-ℚ⁺ =
+  is-common-difference-sequence-Semigroup semigroup-add-ℚ⁺
+
+is-arithmetic-sequence-ℚ⁺ : sequence ℚ⁺ → UU lzero
+is-arithmetic-sequence-ℚ⁺ =
+  is-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺
+
 arithmetic-sequence-ℚ⁺ : UU lzero
 arithmetic-sequence-ℚ⁺ = arithmetic-sequence-Semigroup semigroup-add-ℚ⁺
 
