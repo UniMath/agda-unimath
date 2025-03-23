@@ -9,7 +9,9 @@ module group-theory.arithmetic-sequences-semigroups where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -127,6 +129,35 @@ module _
 
 ## Properties
 
+### Two arithmetic sequences in a semigroup with the same initial term and the same common difference are homotopic
+
+```agda
+module _
+  { l : Level} (G : Semigroup l)
+  ( u v : arithmetic-sequence-Semigroup G)
+  ( eq-init :
+    init-term-arithmetic-sequence-Semigroup G u ＝
+    init-term-arithmetic-sequence-Semigroup G v)
+  ( eq-common-difference :
+    common-difference-arithmetic-sequence-Semigroup G u ＝
+    common-difference-arithmetic-sequence-Semigroup G v)
+  where
+
+  htpy-seq-arithmetic-sequence-Semigroup :
+    seq-arithmetic-sequence-Semigroup G u ~
+    seq-arithmetic-sequence-Semigroup G v
+  htpy-seq-arithmetic-sequence-Semigroup zero-ℕ = eq-init
+  htpy-seq-arithmetic-sequence-Semigroup (succ-ℕ n) =
+    binary-tr
+      ( Id)
+      ( inv (is-common-difference-arithmetic-sequence-Semigroup G u n))
+      ( inv (is-common-difference-arithmetic-sequence-Semigroup G v n))
+      ( ap-binary
+        ( mul-Semigroup G)
+        ( htpy-seq-arithmetic-sequence-Semigroup n)
+        ( eq-common-difference))
+```
+
 ### Any arithmetic sequence in a semigroup is standard
 
 ```agda
@@ -141,12 +172,14 @@ module _
         ( init-term-arithmetic-sequence-Semigroup G u)
         ( common-difference-arithmetic-sequence-Semigroup G u))) ~
     ( seq-arithmetic-sequence-Semigroup G u)
-  htpy-seq-standard-arithmetic-sequence-Semigroup zero-ℕ = refl
-  htpy-seq-standard-arithmetic-sequence-Semigroup (succ-ℕ n) =
-    ( ap
-      ( mul-Semigroup' G (common-difference-arithmetic-sequence-Semigroup G u))
-      ( htpy-seq-standard-arithmetic-sequence-Semigroup n)) ∙
-    ( inv (is-common-difference-arithmetic-sequence-Semigroup G u n))
+  htpy-seq-standard-arithmetic-sequence-Semigroup =
+    htpy-seq-arithmetic-sequence-Semigroup G
+      ( standard-arithmetic-sequence-Semigroup G
+        ( init-term-arithmetic-sequence-Semigroup G u)
+        ( common-difference-arithmetic-sequence-Semigroup G u))
+      ( u)
+      ( refl)
+      ( refl)
 ```
 
 ## References
