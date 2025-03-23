@@ -200,7 +200,6 @@ module _
       ε'⁺@(ε' , pos-ε') , 2ε'<ε ← double-le-ℚ⁺ ε⁺
       p , p<x ← is-inhabited-lower-cut-ℝ x
       q , x<q ← is-inhabited-upper-cut-ℝ x
-      let p<q = le-lower-upper-cut-ℝ x p q p<x x<q
       n , q-p<nε' ← archimedean-property-ℚ ε' (q -ℚ p) pos-ε'
       let nℚ = rational-ℤ (int-ℕ n)
       r , r<x , x<r+2ε' ←
@@ -212,7 +211,7 @@ module _
           ( le-upper-cut-ℝ
             ( x)
             ( q)
-            ( p +ℚ (rational-ℤ (int-ℕ n) *ℚ ε'))
+            ( p +ℚ (nℚ *ℚ ε'))
             ( tr
               ( le-ℚ q)
               ( commutative-add-ℚ (nℚ *ℚ ε') p)
