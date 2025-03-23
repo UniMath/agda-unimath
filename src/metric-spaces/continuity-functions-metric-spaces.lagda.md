@@ -33,7 +33,7 @@ if there exists a function `m : ℚ⁺ → ℚ⁺` such that whenever `x'` is in
 called the modulus of continuity of `f` at `x`.
 
 `f` is called
-{{#concept uniformly continuous WD="uniformly continuous function" WDID=Q91256217}}
+{{#concept "uniformly continuous" WD="uniformly continuous function" WDID=Q91256217}}
 if there is a single `m : ℚ⁺ → ℚ⁺` such that `f` is pointwise continuous with
 modulus of continuity `m` at every `x : X`.
 
