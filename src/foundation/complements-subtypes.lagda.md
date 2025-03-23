@@ -10,11 +10,13 @@ module foundation.complements-subtypes where
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.double-negation-stable-propositions
+open import foundation.dependent-pair-types
 open import foundation.full-subtypes
 open import foundation.negation
 open import foundation.postcomposition-functions
 open import foundation.powersets
 open import foundation.propositional-truncations
+open import foundation.disjoint-subtypes
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
@@ -92,4 +94,13 @@ module _
     B ⊆ C →
     complement-subtype C ⊆ complement-subtype B
   reverses-order-complement-subtype B⊆C x x∉C x∈B = x∉C (B⊆C x x∈B)
+```
+
+### A subtype and its complement are disjoint
+
+```agda
+disjoint-complement-subtype :
+  {l1 l2 : Level} {A : UU l1} →
+  (B : subtype l2 A) → disjoint-subtype B (complement-subtype B)
+disjoint-complement-subtype _ _ (bx , ¬bx) = ¬bx bx
 ```

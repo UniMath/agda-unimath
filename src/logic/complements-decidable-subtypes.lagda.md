@@ -11,12 +11,14 @@ open import foundation.complements-subtypes
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
+open import foundation.equivalences
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation-stable-propositions
 open import foundation.evaluation-functions
 open import foundation.full-subtypes
 open import foundation.involutions
+open import foundation.disjoint-subtypes
 open import foundation.negation
 open import foundation.postcomposition-functions
 open import foundation.powersets
@@ -50,6 +52,16 @@ complement-decidable-subtype P x = neg-Decidable-Prop (P x)
 ```
 
 ## Properties
+
+### The complement of a decidable subtype is disjoint from the subtype
+
+```agda
+disjoint-complement-decidable-subtype :
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A) →
+  disjoint-decidable-subtype P (complement-decidable-subtype P)
+disjoint-complement-decidable-subtype P =
+  disjoint-complement-subtype (subtype-decidable-subtype P)
+```
 
 ### Taking complements is an involution on decidable subtypes
 
@@ -97,4 +109,27 @@ module _
     is-full-union-subtype-complement-subtype
       ( subtype-decidable-subtype P)
       ( is-decidable-decidable-subtype P)
+```
+
+### `A` is equivalent to the coproduct of a decidable subtype and its complement
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
+  where
+
+  equiv-coproduct-subtype-complement-decidable-subtype :
+    A ≃
+    type-decidable-subtype P +
+    type-decidable-subtype (complement-decidable-subtype P)
+  equiv-coproduct-subtype-complement-decidable-subtype =
+    equiv-union-coproduct-disjoint-subtype
+      ( subtype-decidable-subtype P)
+      ( subtype-decidable-subtype (complement-decidable-subtype P))
+      ( disjoint-complement-decidable-subtype P) ∘e
+    inv-equiv
+      ( equiv-inclusion-is-full-subtype
+        ( subtype-decidable-subtype
+          ( union-decidable-subtype P (complement-decidable-subtype P)))
+        ( is-full-union-subtype-complement-decidable-subtype P))
 ```

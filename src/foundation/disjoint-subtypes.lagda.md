@@ -14,6 +14,7 @@ open import foundation.intersections-subtypes
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+open import foundation.decidable-subtypes
 ```
 
 </details>
@@ -38,6 +39,20 @@ module _
 
   disjoint-subtype : UU (l1 ⊔ l2 ⊔ l3)
   disjoint-subtype = type-Prop disjoint-subtype-Prop
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1}
+  (B : decidable-subtype l2 A) (C : decidable-subtype l3 A)
+  where
+
+  disjoint-decidable-subtype-Prop : Prop (l1 ⊔ l2 ⊔ l3)
+  disjoint-decidable-subtype-Prop =
+    disjoint-subtype-Prop
+      ( subtype-decidable-subtype B)
+      ( subtype-decidable-subtype C)
+
+  disjoint-decidable-subtype : UU (l1 ⊔ l2 ⊔ l3)
+  disjoint-decidable-subtype = type-Prop disjoint-decidable-subtype-Prop
 ```
 
 ## Properties
@@ -52,4 +67,15 @@ module _
   is-empty-disjoint-subtype-self :
     disjoint-subtype B B → is-empty (type-subtype B)
   is-empty-disjoint-subtype-self H (b , b∈B) = H b (b∈B , b∈B)
+```
+
+### Disjointness is symmetric
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (B : subtype l2 A) (C : subtype l3 A)
+  where
+
+  symmetric-disjoint-subtype : disjoint-subtype B C → disjoint-subtype C B
+  symmetric-disjoint-subtype H x (cx , bx) = H x (bx , cx)
 ```
