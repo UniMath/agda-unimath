@@ -71,8 +71,7 @@ module _
   (u : convergent-sequence-Metric-Space M)
   where
 
-  seq-convergent-sequence-Metric-Space :
-    sequence-Metric-Space M
+  seq-convergent-sequence-Metric-Space : sequence-Metric-Space M
   seq-convergent-sequence-Metric-Space = pr1 u
 
   has-limit-convergent-sequence-Metric-Space :
