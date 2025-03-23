@@ -1,6 +1,8 @@
 # Formal power series on commutative semirings
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module commutative-algebra.formal-power-series-commutative-semirings where
 ```
 
@@ -19,24 +21,15 @@ open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.complements-decidable-subtypes
 open import foundation.coproduct-types
-open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.involutions
 open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
 open import foundation.sets
-open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
@@ -50,12 +43,7 @@ open import group-theory.semigroups
 
 open import ring-theory.semirings
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
