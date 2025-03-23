@@ -71,13 +71,14 @@ module _
   is-limit-sequence-Premetric-Space =
     (d : ℚ⁺) → Σ ℕ (is-modulus-limit-sequence-Premetric-Space d)
 
-  eq-const-is-limit-sequence-Premetric-Space :
+  is-asymptotically-indistinguishable-const-is-limit-sequence-Premetric-Space :
     is-limit-sequence-Premetric-Space ＝
     is-asymptotically-indistinguishable-sequence-Premetric-Space
       ( M)
       ( u)
       ( const ℕ l)
-  eq-const-is-limit-sequence-Premetric-Space = refl
+  is-asymptotically-indistinguishable-const-is-limit-sequence-Premetric-Space =
+    refl
 
   modulus-limit-sequence-Premetric-Space :
     is-limit-sequence-Premetric-Space → ℚ⁺ → ℕ
