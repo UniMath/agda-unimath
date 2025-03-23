@@ -46,8 +46,9 @@ of positive rational numbers is an
 additive [semigroup](group-theory.semigroups.md) of
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md).
 
-The terms of an arithmetic sequence of positive rational numbers have no greater
-element.
+The values of an arithmetic sequence are determined by its initial value and its
+common difference; an arithmetic sequence of positive rational numbers is
+strictly increasing and unbounded.
 
 ## Definitions
 

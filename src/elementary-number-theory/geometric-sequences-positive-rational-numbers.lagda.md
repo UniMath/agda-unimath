@@ -46,9 +46,14 @@ A
 of [positive rational numbers]
 (elementary-number-theory.positive-rational-numbers.md) is an
 [arithmetic sequence](group-theory.arithmetic-sequences-semigroups.md) in the
-multiplicative semigroup of positive rational numbers.
+multiplicative semigroup of positive rational numbers. The multplicative common
+difference in `ℚ⁺` is called the _common ratio_ of the sequence.
 
-The common difference in `ℚ⁺` is called the _common ratio_ of the sequence.
+Constant sequences are the geometric sequences with common ratio equal to `1`;
+multiplication and
+[inversion](elementary-number-theory.multiplicative-group-of-positive-rational-numbers.md)
+preserve geometric sequences of positive natural numbers and transport their
+common ratio.
 
 ## Definitions
 

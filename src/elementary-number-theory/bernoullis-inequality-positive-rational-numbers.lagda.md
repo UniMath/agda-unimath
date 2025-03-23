@@ -44,7 +44,7 @@ term `1` and common ratio `1 + h`:
 ## Lemma
 
 The ratio of two consecutive terms of a unitary arithmetic sequence of positive
-rational numbers is bounded
+rational numbers is bounded:
 
 ```text
 ∀ (h : ℚ⁺) (n  : ℕ) → 1 + (n + 1)h ≤ (1 + n h)(1 + h)
