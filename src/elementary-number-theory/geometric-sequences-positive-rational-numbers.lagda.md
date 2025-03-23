@@ -148,7 +148,7 @@ htpy-seq-geometric-sequence-ℚ⁺ =
 
 ```agda
 htpy-seq-standard-geometric-sequence-ℚ⁺ :
-  (u : geometric-sequence-ℚ⁺) →
+  ( u : geometric-sequence-ℚ⁺) →
   ( seq-standard-geometric-sequence-ℚ⁺
     ( init-term-geometric-sequence-ℚ⁺ u)
     ( common-ratio-geometric-sequence-ℚ⁺ u)) ~
