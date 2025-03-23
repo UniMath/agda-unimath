@@ -126,7 +126,9 @@ open import elementary-number-theory.natural-numbers public
 open import elementary-number-theory.negative-integer-fractions public
 open import elementary-number-theory.negative-integers public
 open import elementary-number-theory.negative-rational-numbers public
+open import elementary-number-theory.nonnegative-integer-fractions public
 open import elementary-number-theory.nonnegative-integers public
+open import elementary-number-theory.nonnegative-rational-numbers public
 open import elementary-number-theory.nonpositive-integers public
 open import elementary-number-theory.nonzero-integers public
 open import elementary-number-theory.nonzero-natural-numbers public
