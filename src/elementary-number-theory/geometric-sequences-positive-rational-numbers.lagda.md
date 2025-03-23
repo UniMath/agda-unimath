@@ -236,7 +236,7 @@ module _
     ( is-constant-seq-geometric-sequence-ℚ⁺ n)
 ```
 
-### The pointwise product of to geometric sequences of positive rational numbers is geometric
+### The pointwise product of geometric sequences of positive rational numbers is geometric
 
 Moreover, the common ratio of the product of geometric seqeuences is the product
 of the common ratios of the sequences.
