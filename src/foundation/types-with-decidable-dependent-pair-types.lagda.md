@@ -67,11 +67,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A type `X` has
-{{#concept "decidable Σ-types" Disambiguation="on type" Agda=has-decidable-Σ}}
+A type `X`
+{{#concept "has decidable Σ-types" Disambiguation="on type" Agda=has-decidable-Σ}}
 if for every [decidable type family](foundation.decidable-type-families.md) `P`,
-we can construct an element in `P` or determine that `P` is the empty family. In
-other words, we have a witness of the type
+we can construct an element in some fiber of `P` or determine that `P` is the
+empty family. In other words, we have a witness of type
 
 ```text
   (P : decidable-family X) → is-decidable (Σ x. P x).
@@ -664,5 +664,5 @@ has-decidable-Σ-bool' =
 
 ## See also
 
-- [Π-decidability search](foundation.decidability-search-untruncated-universal-quantification.md)
+- [Π-decidability search](foundation.types-with-decidable-dependent-product-types.md)
 - [∀-decidability search](foundation.decidability-search-universal-quantification.md)
