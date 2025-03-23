@@ -174,7 +174,7 @@ module _
 
   mul-unit-Monoid :
     (n : ℕ) →
-    mul-fin-Monoid M n (unit-functional-vec-Monoid M n) ＝ unit-Monoid M
+    mul-fin-Monoid M n (mul-unit-functional-vec-Monoid M n) ＝ unit-Monoid M
   mul-unit-Monoid zero-ℕ = refl
   mul-unit-Monoid (succ-ℕ n) =
     right-unit-law-mul-Monoid M _ ∙ mul-unit-Monoid n
