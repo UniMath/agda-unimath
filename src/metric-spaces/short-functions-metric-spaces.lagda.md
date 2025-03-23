@@ -22,11 +22,13 @@ open import foundation.sequences
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
+open import foundation.existential-quantification
 
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-premetric-spaces
+open import metric-spaces.continuity-functions-metric-spaces
 ```
 
 </details>
@@ -321,6 +323,20 @@ module _
       ( is-emb-htpy
         ( λ f → refl)
         ( is-emb-inclusion-subtype (is-isometry-prop-Metric-Space A B)))
+```
+
+### Short maps are uniformly continuous
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
+  where
+
+  is-uniformly-continuous-is-short-function-Metric-Space :
+    (f : map-type-Metric-Space A B) → is-short-function-Metric-Space A B f →
+    is-uniformly-continuous-map-Metric-Space A B f
+  is-uniformly-continuous-is-short-function-Metric-Space f H =
+    intro-exists id (λ x ε → H ε x)
 ```
 
 ## See also
