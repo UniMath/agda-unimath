@@ -105,9 +105,7 @@ module _
 
   seq-standard-arithmetic-sequence-ℚ⁺ : sequence ℚ⁺
   seq-standard-arithmetic-sequence-ℚ⁺ =
-    seq-arithmetic-sequence-Semigroup
-      semigroup-add-ℚ⁺
-      standard-arithmetic-sequence-ℚ⁺
+    seq-arithmetic-sequence-ℚ⁺ standard-arithmetic-sequence-ℚ⁺
 ```
 
 ## Properties

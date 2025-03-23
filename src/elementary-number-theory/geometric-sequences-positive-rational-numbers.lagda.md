@@ -122,9 +122,7 @@ module _
 
   seq-standard-geometric-sequence-ℚ⁺ : sequence ℚ⁺
   seq-standard-geometric-sequence-ℚ⁺ =
-    seq-arithmetic-sequence-Semigroup
-      semigroup-mul-ℚ⁺
-      standard-geometric-sequence-ℚ⁺
+    seq-geometric-sequence-ℚ⁺ standard-geometric-sequence-ℚ⁺
 ```
 
 ## Properties
