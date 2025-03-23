@@ -15,7 +15,6 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.cartesian-product-types
-open import foundation.complements-decidable-subtypes
 open import foundation.complements-subtypes
 open import foundation.conjunction
 open import foundation.contractible-types
@@ -37,6 +36,8 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import logic.complements-decidable-subtypes
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
