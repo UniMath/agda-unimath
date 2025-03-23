@@ -17,11 +17,15 @@ open import real-numbers.lower-dedekind-real-numbers public
 open import real-numbers.metric-space-of-real-numbers public
 open import real-numbers.negation-lower-upper-dedekind-real-numbers public
 open import real-numbers.negation-real-numbers public
+open import real-numbers.raising-universe-levels-lower-dedekind-real-numbers public
 open import real-numbers.raising-universe-levels-real-numbers public
+open import real-numbers.raising-universe-levels-upper-dedekind-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public
 open import real-numbers.rational-real-numbers public
 open import real-numbers.rational-upper-dedekind-real-numbers public
+open import real-numbers.similarity-lower-dedekind-real-numbers public
 open import real-numbers.similarity-real-numbers public
+open import real-numbers.similarity-upper-dedekind-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
 ```

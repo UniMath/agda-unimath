@@ -24,6 +24,7 @@ open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.subtypes
@@ -40,7 +41,9 @@ open import group-theory.semigroups
 open import logic.functoriality-existential-quantification
 
 open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.raising-universe-levels-lower-dedekind-real-numbers
 open import real-numbers.rational-lower-dedekind-real-numbers
+open import real-numbers.similarity-lower-dedekind-real-numbers
 ```
 
 </details>
@@ -165,6 +168,46 @@ module _
 
 ## Properties
 
+### Addition preserves similarity of lower Dedekind real numbers
+
+```agda
+opaque
+  unfolding sim-lower-ℝ
+
+  sim-add-left-sim-lower-ℝ :
+    {l1 l2 l3 : Level} → (y : lower-ℝ l1) (x : lower-ℝ l2) (x' : lower-ℝ l3) →
+    sim-lower-ℝ x x' → sim-lower-ℝ (add-lower-ℝ x y) (add-lower-ℝ x' y)
+  sim-add-left-sim-lower-ℝ y x x' =
+    preserves-sim-left-minkowski-mul-Commutative-Monoid
+      ( commutative-monoid-add-ℚ)
+      ( cut-lower-ℝ y)
+      ( cut-lower-ℝ x)
+      ( cut-lower-ℝ x')
+
+  sim-add-right-sim-lower-ℝ :
+    {l1 l2 l3 : Level} → (x : lower-ℝ l1) (y : lower-ℝ l2) (y' : lower-ℝ l3) →
+    sim-lower-ℝ y y' → sim-lower-ℝ (add-lower-ℝ x y) (add-lower-ℝ x y')
+  sim-add-right-sim-lower-ℝ x y y' =
+    preserves-sim-right-minkowski-mul-Commutative-Monoid
+      ( commutative-monoid-add-ℚ)
+      ( cut-lower-ℝ x)
+      ( cut-lower-ℝ y)
+      ( cut-lower-ℝ y')
+
+  sim-add-sim-lower-ℝ :
+    {l1 l2 l3 l4 : Level} →
+    (x : lower-ℝ l1) (x' : lower-ℝ l2) (y : lower-ℝ l3) (y' : lower-ℝ l4) →
+    sim-lower-ℝ x x' → sim-lower-ℝ y y' →
+    sim-lower-ℝ (add-lower-ℝ x y) (add-lower-ℝ x' y')
+  sim-add-sim-lower-ℝ x x' y y' x~x' y~y' =
+    transitive-sim-lower-ℝ
+      ( add-lower-ℝ x y)
+      ( add-lower-ℝ x y')
+      ( add-lower-ℝ x' y')
+      ( sim-add-left-sim-lower-ℝ y' x x' x~x')
+      ( sim-add-right-sim-lower-ℝ x y y' y~y')
+```
+
 ### Addition of lower Dedekind real numbers is commutative
 
 ```agda
@@ -258,22 +301,54 @@ module _
 ### The commutative monoid of lower Dedekind real numbers
 
 ```agda
-semigroup-add-lower-ℝ-lzero : Semigroup (lsuc lzero)
-semigroup-add-lower-ℝ-lzero =
-  (lower-ℝ lzero , is-set-lower-ℝ lzero) ,
+semigroup-add-lower-ℝ : (l : Level) → Semigroup (lsuc l)
+semigroup-add-lower-ℝ l =
+  (lower-ℝ l , is-set-lower-ℝ l) ,
   add-lower-ℝ ,
   associative-add-lower-ℝ
 
-monoid-lower-ℝ-lzero : Monoid (lsuc lzero)
-monoid-lower-ℝ-lzero =
-  semigroup-add-lower-ℝ-lzero ,
-  lower-real-ℚ zero-ℚ ,
-  left-unit-law-add-lower-ℝ ,
-  right-unit-law-add-lower-ℝ
+zero-lower-ℝ : (l : Level) → lower-ℝ l
+zero-lower-ℝ l = raise-lower-ℝ l (lower-real-ℚ zero-ℚ)
 
-commutative-monoid-add-lower-ℝ-lzero :
-  Commutative-Monoid (lsuc lzero)
-commutative-monoid-add-lower-ℝ-lzero =
-  monoid-lower-ℝ-lzero ,
+left-unit-law-add-lower-ℝ-at-level :
+  (l : Level) (a : lower-ℝ l) → add-lower-ℝ (zero-lower-ℝ l) a ＝ a
+left-unit-law-add-lower-ℝ-at-level l a =
+  eq-sim-lower-ℝ
+    ( transitive-sim-lower-ℝ
+      ( add-lower-ℝ (zero-lower-ℝ l) a)
+      ( add-lower-ℝ (lower-real-ℚ zero-ℚ) a)
+      ( a)
+      ( sim-eq-lower-ℝ (left-unit-law-add-lower-ℝ a))
+      ( sim-add-left-sim-lower-ℝ
+        ( a)
+        ( zero-lower-ℝ l)
+        ( lower-real-ℚ zero-ℚ)
+        ( symmetric-sim-lower-ℝ (sim-raise-lower-ℝ l _))))
+
+right-unit-law-add-lower-ℝ-at-level :
+  (l : Level) (a : lower-ℝ l) → add-lower-ℝ a (zero-lower-ℝ l) ＝ a
+right-unit-law-add-lower-ℝ-at-level l a =
+  eq-sim-lower-ℝ
+    ( transitive-sim-lower-ℝ
+      ( add-lower-ℝ a (zero-lower-ℝ l))
+      ( add-lower-ℝ a (lower-real-ℚ zero-ℚ))
+      ( a)
+      ( sim-eq-lower-ℝ (right-unit-law-add-lower-ℝ a))
+      ( sim-add-right-sim-lower-ℝ
+        ( a)
+        ( zero-lower-ℝ l)
+        ( lower-real-ℚ zero-ℚ)
+        ( symmetric-sim-lower-ℝ (sim-raise-lower-ℝ l _))))
+
+monoid-lower-ℝ : (l : Level) → Monoid (lsuc l)
+monoid-lower-ℝ l =
+  semigroup-add-lower-ℝ l ,
+  zero-lower-ℝ l ,
+  left-unit-law-add-lower-ℝ-at-level l ,
+  right-unit-law-add-lower-ℝ-at-level l
+
+commutative-monoid-add-lower-ℝ : (l : Level) → Commutative-Monoid (lsuc l)
+commutative-monoid-add-lower-ℝ l =
+  monoid-lower-ℝ l ,
   commutative-add-lower-ℝ
 ```

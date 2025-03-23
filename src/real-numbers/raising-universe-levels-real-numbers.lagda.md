@@ -29,6 +29,8 @@ open import logic.functoriality-existential-quantification
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.raising-universe-levels-lower-dedekind-real-numbers
+open import real-numbers.similarity-lower-dedekind-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
@@ -46,42 +48,6 @@ number `x` from the universe `𝒰` to a
 `𝒱`.
 
 ## Definition
-
-### Raising lower Dedekind real numbers
-
-```agda
-module _
-  {l0 : Level} (l : Level) (x : lower-ℝ l0)
-  where
-
-  cut-raise-lower-ℝ : subtype (l0 ⊔ l) ℚ
-  cut-raise-lower-ℝ = raise-subtype l (cut-lower-ℝ x)
-
-  abstract
-    is-inhabited-cut-raise-lower-ℝ : is-inhabited-subtype cut-raise-lower-ℝ
-    is-inhabited-cut-raise-lower-ℝ =
-      map-tot-exists (λ _ → map-raise) (is-inhabited-cut-lower-ℝ x)
-
-    is-rounded-cut-raise-lower-ℝ :
-      (q : ℚ) →
-      is-in-subtype cut-raise-lower-ℝ q ↔
-      exists ℚ (λ r → le-ℚ-Prop q r ∧ cut-raise-lower-ℝ r)
-    pr1 (is-rounded-cut-raise-lower-ℝ q) (map-raise q<x) =
-      map-tot-exists
-        ( λ _ → map-product id map-raise)
-        ( forward-implication (is-rounded-cut-lower-ℝ x q) q<x)
-    pr2 (is-rounded-cut-raise-lower-ℝ q) ∃r =
-      map-raise
-        ( backward-implication
-          ( is-rounded-cut-lower-ℝ x q)
-          ( map-tot-exists (λ _ → map-product id map-inv-raise) ∃r))
-
-  raise-lower-ℝ : lower-ℝ (l0 ⊔ l)
-  raise-lower-ℝ =
-    cut-raise-lower-ℝ ,
-    is-inhabited-cut-raise-lower-ℝ ,
-    is-rounded-cut-raise-lower-ℝ
-```
 
 ### Raising upper Dedekind real numbers
 
@@ -169,10 +135,10 @@ module _
 ```agda
 opaque
   unfolding sim-ℝ
+  unfolding sim-lower-ℝ
 
   sim-raise-ℝ : {l0 : Level} → (l : Level) → (x : ℝ l0) → sim-ℝ x (raise-ℝ l x)
-  pr1 (sim-raise-ℝ l x) _ = map-raise
-  pr2 (sim-raise-ℝ l x) _ = map-inv-raise
+  sim-raise-ℝ l x = sim-raise-lower-ℝ l (lower-real-ℝ x)
 ```
 
 ### Raising a real to its own level is the identity
