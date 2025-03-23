@@ -43,6 +43,16 @@ module _
   has-limit-sequence-Metric-Space : UU (l1 ⊔ l2)
   has-limit-sequence-Metric-Space =
     Σ (type-Metric-Space M) (is-limit-sequence-Metric-Space M u)
+
+  limit-has-limit-sequence-Metric-Space :
+    has-limit-sequence-Metric-Space → type-Metric-Space M
+  limit-has-limit-sequence-Metric-Space H = pr1 H
+
+  is-limit-limit-has-limit-sequence-Metric-Space :
+    (H : has-limit-sequence-Metric-Space) →
+    is-limit-sequence-Metric-Space M u
+      (limit-has-limit-sequence-Metric-Space H)
+  is-limit-limit-has-limit-sequence-Metric-Space H = pr2 H
 ```
 
 ### Convergent sequences in metric spaces
@@ -61,23 +71,23 @@ module _
   (u : convergent-sequence-Metric-Space M)
   where
 
-  sequence-convergent-sequence-Metric-Space :
+  seq-convergent-sequence-Metric-Space :
     sequence-Metric-Space M
-  sequence-convergent-sequence-Metric-Space = pr1 u
+  seq-convergent-sequence-Metric-Space = pr1 u
 
   has-limit-convergent-sequence-Metric-Space :
-    has-limit-sequence-Metric-Space M sequence-convergent-sequence-Metric-Space
+    has-limit-sequence-Metric-Space M seq-convergent-sequence-Metric-Space
   has-limit-convergent-sequence-Metric-Space = pr2 u
 
   limit-convergent-sequence-Metric-Space : type-Metric-Space M
   limit-convergent-sequence-Metric-Space =
     pr1 has-limit-convergent-sequence-Metric-Space
 
-  is-limit-convergent-sequence-Metric-Space :
+  is-limit-limit-convergent-sequence-Metric-Space :
     is-limit-sequence-Metric-Space M
-      sequence-convergent-sequence-Metric-Space
+      seq-convergent-sequence-Metric-Space
       limit-convergent-sequence-Metric-Space
-  is-limit-convergent-sequence-Metric-Space =
+  is-limit-limit-convergent-sequence-Metric-Space =
     pr2 has-limit-convergent-sequence-Metric-Space
 ```
 
@@ -89,8 +99,8 @@ module _
   (u v : convergent-sequence-Metric-Space M)
   (H :
     is-asymptotically-indistinguishable-sequence-Metric-Space M
-      ( sequence-convergent-sequence-Metric-Space M u)
-      ( sequence-convergent-sequence-Metric-Space M v))
+      ( seq-convergent-sequence-Metric-Space M u)
+      ( seq-convergent-sequence-Metric-Space M v))
   where
 
   preserves-limit-asymptotically-indistinguishable-convergent-sequence-Metric-Space :
@@ -98,15 +108,15 @@ module _
     limit-convergent-sequence-Metric-Space M v
   preserves-limit-asymptotically-indistinguishable-convergent-sequence-Metric-Space =
     eq-limit-sequence-Metric-Space M
-      ( sequence-convergent-sequence-Metric-Space M v)
+      ( seq-convergent-sequence-Metric-Space M v)
       ( limit-convergent-sequence-Metric-Space M u)
       ( limit-convergent-sequence-Metric-Space M v)
       ( preserves-limit-asymptotically-indistinguishable-sequence-Pseudometric-Space
         ( pseudometric-Metric-Space M)
-        ( sequence-convergent-sequence-Metric-Space M u)
-        ( sequence-convergent-sequence-Metric-Space M v)
+        ( seq-convergent-sequence-Metric-Space M u)
+        ( seq-convergent-sequence-Metric-Space M v)
         ( H)
         ( limit-convergent-sequence-Metric-Space M u)
-        ( is-limit-convergent-sequence-Metric-Space M u))
-      (is-limit-convergent-sequence-Metric-Space M v)
+        ( is-limit-limit-convergent-sequence-Metric-Space M u))
+      (is-limit-limit-convergent-sequence-Metric-Space M v)
 ```

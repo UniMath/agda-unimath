@@ -31,7 +31,9 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.convergent-sequences-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
+open import metric-spaces.limits-sequences-metric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -136,47 +138,6 @@ module _
         ( n≤m)
 ```
 
-### Limits of arbitrary sequences
-
-```agda
-module _
-  {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : ℕ → type-Metric-Space M)
-  (l : type-Metric-Space M)
-  where
-
-  is-limit-sequence-Metric-Space : UU l2
-  is-limit-sequence-Metric-Space =
-    (ε : ℚ⁺) →
-    Σ
-      ( ℕ)
-      ( λ n →
-        (m : ℕ) → leq-ℕ n m →
-        neighborhood-Metric-Space
-          ( M)
-          ( ε)
-          ( x m)
-          ( l))
-
-module _
-  {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : ℕ → type-Metric-Space M)
-  where
-
-  has-limit-sequence-Metric-Space : UU (l1 ⊔ l2)
-  has-limit-sequence-Metric-Space =
-    Σ (type-Metric-Space M) (is-limit-sequence-Metric-Space M x)
-
-  limit-has-limit-sequence-Metric-Space :
-    has-limit-sequence-Metric-Space → type-Metric-Space M
-  limit-has-limit-sequence-Metric-Space = pr1
-
-  is-limit-limit-has-limit-sequence-Metric-Space :
-    (H : has-limit-sequence-Metric-Space) →
-    is-limit-sequence-Metric-Space M x (limit-has-limit-sequence-Metric-Space H)
-  is-limit-limit-has-limit-sequence-Metric-Space = pr2
-```
-
 ### Limits of Cauchy sequences
 
 ```agda
@@ -207,45 +168,45 @@ module _
 
 ## Properties
 
-### If a sequence has a limit, it is Cauchy
+### A convergent sequence is Cauchy
 
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : ℕ → type-Metric-Space M)
-  (H : has-limit-sequence-Metric-Space M x)
+  (x : convergent-sequence-Metric-Space M)
   where
 
   abstract
-    is-cauchy-sequence-has-limit-Metric-Space :
-      is-cauchy-sequence-Metric-Space M x
-    is-cauchy-sequence-has-limit-Metric-Space ε⁺@(ε , _) =
+    is-cauchy-seq-convergent-sequence-Metric-Space :
+      is-cauchy-sequence-Metric-Space M
+        (seq-convergent-sequence-Metric-Space M x)
+    is-cauchy-seq-convergent-sequence-Metric-Space ε⁺@(ε , _) =
       let
-        lim = limit-has-limit-sequence-Metric-Space M x H
+        lim = limit-convergent-sequence-Metric-Space M x
         (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
         (n , n≤m⇒|xm-l|<ε') =
-          is-limit-limit-has-limit-sequence-Metric-Space M x H ε'⁺
+          is-limit-limit-convergent-sequence-Metric-Space M x ε'⁺
       in
         n ,
         λ m k n≤m n≤k →
         is-monotonic-structure-Metric-Space
           ( M)
-          ( x m)
-          ( x k)
+          ( seq-convergent-sequence-Metric-Space M x m)
+          ( seq-convergent-sequence-Metric-Space M x k)
           ( ε'⁺ +ℚ⁺ ε'⁺)
           ( ε⁺)
           ( 2ε'<ε)
           ( is-triangular-structure-Metric-Space
             ( M)
-            ( x m)
+            ( seq-convergent-sequence-Metric-Space M x m)
             ( lim)
-            ( x k)
+            ( seq-convergent-sequence-Metric-Space M x k)
             ( ε'⁺)
             ( ε'⁺)
             ( is-symmetric-structure-Metric-Space
               ( M)
               ( ε'⁺)
-              ( x k)
+              ( seq-convergent-sequence-Metric-Space M x k)
               ( lim)
               ( n≤m⇒|xm-l|<ε' k n≤k))
             ( n≤m⇒|xm-l|<ε' m n≤m))
