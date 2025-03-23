@@ -664,5 +664,5 @@ has-decidable-Σ-bool' =
 
 ## See also
 
-- [Π-decidability search](foundation.types-with-decidable-dependent-product-types.md)
-- [∀-decidability search](foundation.decidability-search-universal-quantification.md)
+- [Types with decidable Π-types](foundation.types-with-decidable-dependent-product-types.md)
+- [Types with decidable universal quantifications](foundation.types-with-decidable-universal-quantification.md)
