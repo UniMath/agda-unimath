@@ -11,14 +11,12 @@ module elementary-number-theory.multiplication-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
