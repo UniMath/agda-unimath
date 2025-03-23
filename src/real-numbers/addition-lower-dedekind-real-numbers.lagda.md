@@ -24,7 +24,6 @@ open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.subtypes
