@@ -27,8 +27,8 @@ open import linear-algebra.vectors
 
 ## Idea
 
-Given a [monoid](group-theory.monoids.md) `M`, the type `vec n M` of
-`M`-[vectors](linear-algebra.vectors.md) is a monoid.
+Given a [monoid](group-theory.monoids.md) `M`, the type `vec n M` of `n`-dimensional
+`M`-[vectors](linear-algebra.vectors.md) is a monoid given by componentwise multiplication.
 
 ## Definitions
 
@@ -53,7 +53,7 @@ module _
   snoc-vec-Monoid v r = snoc-vec v r
 ```
 
-### Functional vectors on rings
+### Functional vectors on monoids
 
 ```agda
 module _
@@ -82,28 +82,28 @@ module _
   snoc-functional-vec-Monoid = snoc-functional-vec
 ```
 
-### Zero vector on a ring
+### The vector of the multiplicative unit of a monoid
 
-#### The unit listed vector
+#### The listed vector of the multiplicative unit
 
 ```agda
 module _
   {l : Level} (M : Monoid l)
   where
 
-  unit-vec-Monoid : {n : ℕ} → vec-Monoid M n
-  unit-vec-Monoid = constant-vec (unit-Monoid M)
+  mul-unit-vec-Monoid : {n : ℕ} → vec-Monoid M n
+  mul-unit-vec-Monoid = constant-vec (unit-Monoid M)
 ```
 
-#### The unit functional vector
+#### The functional vector of the multiplicative unit
 
 ```agda
 module _
   {l : Level} (M : Monoid l)
   where
 
-  unit-functional-vec-Monoid : (n : ℕ) → functional-vec-Monoid M n
-  unit-functional-vec-Monoid n i = unit-Monoid M
+  mul-unit-functional-vec-Monoid : (n : ℕ) → functional-vec-Monoid M n
+  mul-unit-functional-vec-Monoid n i = unit-Monoid M
 ```
 
 ### Pointwise multiplication of vectors on a monoid
@@ -159,7 +159,7 @@ module _
   pr2 (pr2 (pr2 (vec-Monoid-Monoid n))) = right-unit-law-mul-vec-Monoid
 ```
 
-#### Pointwise addition of functional vectors on a ring
+#### Pointwise addition of functional vectors on a monoid
 
 ```agda
 module _

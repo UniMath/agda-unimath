@@ -38,7 +38,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The sum operation extends the binary addition operation on a
+The {{#concept "sum operation" Disambiguation="in a ring" WD="sum" WDID=Q218005 Agda=sum-Ring}} extends the binary addition operation on a
 [ring](ring-theory.rings.md) `R` to any family of elements of `R` indexed by a
 [standard finite type](univalent-combinatorics.standard-finite-types.md), or by
 a [finite type](univalent-combinatorics.finite-types.md).
