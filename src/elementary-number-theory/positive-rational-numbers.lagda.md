@@ -147,6 +147,9 @@ abstract
 ```agda
 is-set-ℚ⁺ : is-set ℚ⁺
 is-set-ℚ⁺ = is-set-type-subtype is-positive-prop-ℚ is-set-ℚ
+
+set-ℚ⁺ : Set lzero
+set-ℚ⁺ = ℚ⁺ , is-set-ℚ⁺
 ```
 
 ### The rational image of a positive integer is positive
@@ -371,6 +374,9 @@ pr2 submonoid-mul-ℚ⁺ = is-submonoid-mul-ℚ⁺
 monoid-mul-ℚ⁺ : Monoid lzero
 monoid-mul-ℚ⁺ = monoid-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
 
+semigroup-mul-ℚ⁺ : Semigroup lzero
+semigroup-mul-ℚ⁺ = semigroup-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
+
 commutative-monoid-mul-ℚ⁺ : Commutative-Monoid lzero
 commutative-monoid-mul-ℚ⁺ =
   commutative-monoid-Commutative-Submonoid
@@ -456,17 +462,28 @@ module _
     left-inverse-law-mul-is-positive-ℚ
 ```
 
-### Inequality on positive rational numbers
+### Multiplication on the positive rational numbers distributes over addition
 
 ```agda
-leq-prop-ℚ⁺ : ℚ⁺ → ℚ⁺ → Prop lzero
-leq-prop-ℚ⁺ x y = leq-ℚ-Prop (rational-ℚ⁺ x) (rational-ℚ⁺ y)
+module _
+  (x y z : ℚ⁺)
+  where
 
-leq-ℚ⁺ : ℚ⁺ → ℚ⁺ → UU lzero
-leq-ℚ⁺ x y = type-Prop (leq-prop-ℚ⁺ x y)
+  left-distributive-mul-add-ℚ⁺ : x *ℚ⁺ (y +ℚ⁺ z) ＝ (x *ℚ⁺ y) +ℚ⁺ (x *ℚ⁺ z)
+  left-distributive-mul-add-ℚ⁺ =
+    eq-ℚ⁺
+      ( left-distributive-mul-add-ℚ
+        ( rational-ℚ⁺ x)
+        ( rational-ℚ⁺ y)
+        ( rational-ℚ⁺ z))
 
-is-prop-leq-ℚ⁺ : (x y : ℚ⁺) → is-prop (leq-ℚ⁺ x y)
-is-prop-leq-ℚ⁺ x y = is-prop-type-Prop (leq-prop-ℚ⁺ x y)
+  right-distributive-mul-add-ℚ⁺ : (x +ℚ⁺ y) *ℚ⁺ z ＝ (x *ℚ⁺ z) +ℚ⁺ (y *ℚ⁺ z)
+  right-distributive-mul-add-ℚ⁺ =
+    eq-ℚ⁺
+      ( right-distributive-mul-add-ℚ
+        ( rational-ℚ⁺ x)
+        ( rational-ℚ⁺ y)
+        ( rational-ℚ⁺ z))
 ```
 
 ### The strict inequality on positive rational numbers

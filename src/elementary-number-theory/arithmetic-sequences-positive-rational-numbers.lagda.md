@@ -25,11 +25,13 @@ open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sequences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.arithmetic-sequences-semigroups
 open import group-theory.powers-of-elements-monoids
 ```
 
@@ -37,111 +39,95 @@ open import group-theory.powers-of-elements-monoids
 
 ## Idea
 
-The
+An
 {{#concept "arithmetic sequence" Disambiguation="of positive rational numbers" Agda=arithmetic-sequence-ℚ⁺ WD="arithmetic progression" WDID=Q170008}}
-of positive rational numbers with initial term `(a : ℚ⁺)` and common difference
-`(d : ℚ⁺)` is the sequence `u : ℕ → ℚ⁺` characterized by
-
-- `u₀ = a`
-- `∀ (n : ℕ) uₙ₊₁ = uₙ + d`.
+of positive rational numbers is an
+[arithmetic sequence](group-theory.arithmetic-sequences-semigroups.md) in the
+additive [semigroup](group-theory.semigroups.md) of
+[positive rational numbers](elementary-number-theory.positive-rational-numbers.md).
 
 The terms of an arithmetic sequence of positive rational numbers have no greater
 element.
 
 ## Definitions
 
-### Preliminary definition
+### Arithmetic sequences of positive rational numbers
 
 ```agda
+arithmetic-sequence-ℚ⁺ : UU lzero
+arithmetic-sequence-ℚ⁺ = arithmetic-sequence-Semigroup semigroup-add-ℚ⁺
+
 module _
-  (d : ℚ⁺)
+  (u : arithmetic-sequence-ℚ⁺)
   where
 
-  power-add-ℚ⁺ : sequence ℚ
-  power-add-ℚ⁺ n = power-Monoid monoid-add-ℚ n (rational-ℚ⁺ d)
+  seq-arithmetic-sequence-ℚ⁺ : sequence ℚ⁺
+  seq-arithmetic-sequence-ℚ⁺ =
+    seq-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺ u
 
-  abstract
-    lemma-leq-power-add-ℚ⁺ :
-      (n : ℕ) → leq-ℚ zero-ℚ (power-add-ℚ⁺ n)
-    lemma-leq-power-add-ℚ⁺ zero-ℕ = refl-leq-ℚ zero-ℚ
-    lemma-leq-power-add-ℚ⁺ (succ-ℕ n) =
-        transitive-leq-ℚ
-          ( zero-ℚ)
-          ( power-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
-          ( power-Monoid monoid-add-ℚ (succ-ℕ n) (rational-ℚ⁺ d))
-          ( inv-tr
-              ( leq-ℚ (power-add-ℚ⁺ n))
-              ( power-succ-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
-              ( leq-le-ℚ
-                { power-add-ℚ⁺ n}
-                {add-ℚ (power-add-ℚ⁺ n) (rational-ℚ⁺ d)}
-                ( le-right-add-rational-ℚ⁺
-                  ( power-add-ℚ⁺ n)
-                  ( d))))
-          ( lemma-leq-power-add-ℚ⁺ n)
+  is-arithmetic-seq-arithmetic-sequence-ℚ⁺ :
+    is-arithmetic-sequence-Semigroup
+      semigroup-add-ℚ⁺
+      seq-arithmetic-sequence-ℚ⁺
+  is-arithmetic-seq-arithmetic-sequence-ℚ⁺ =
+    is-arithmetic-seq-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺ u
+
+  common-difference-arithmetic-sequence-ℚ⁺ : ℚ⁺
+  common-difference-arithmetic-sequence-ℚ⁺ =
+    common-difference-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺ u
+
+  is-common-difference-arithmetic-sequence-ℚ⁺ :
+    is-common-difference-sequence-Semigroup
+      semigroup-add-ℚ⁺
+      seq-arithmetic-sequence-ℚ⁺
+      common-difference-arithmetic-sequence-ℚ⁺
+  is-common-difference-arithmetic-sequence-ℚ⁺ =
+    is-common-difference-arithmetic-sequence-Semigroup
+      semigroup-add-ℚ⁺
+      u
+
+  init-term-arithmetic-sequence-ℚ⁺ : ℚ⁺
+  init-term-arithmetic-sequence-ℚ⁺ =
+    init-term-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺ u
 ```
 
-### The arithmetic sequences associated to an initial term and a common difference
+### The standard arithmetic sequence of positive rational numbers with initial term `a` and common difference `d`
 
 ```agda
 module _
   (a d : ℚ⁺)
   where
 
-  rational-arithmetic-sequence-ℚ⁺ : sequence ℚ
-  rational-arithmetic-sequence-ℚ⁺ = add-ℚ (rational-ℚ⁺ a) ∘ power-add-ℚ⁺ d
+  standard-arithmetic-sequence-ℚ⁺ : arithmetic-sequence-ℚ⁺
+  standard-arithmetic-sequence-ℚ⁺ =
+    standard-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺ a d
 
-  abstract
-    is-positive-rational-arithmetic-sequence-ℚ⁺ :
-      (n : ℕ) → is-positive-ℚ (rational-arithmetic-sequence-ℚ⁺ n)
-    is-positive-rational-arithmetic-sequence-ℚ⁺ n =
-      is-positive-le-zero-ℚ
-        ( (rational-ℚ⁺ a) +ℚ (power-add-ℚ⁺ d n))
-        ( concatenate-leq-le-ℚ
-          ( zero-ℚ)
-          ( power-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
-          ( rational-ℚ⁺ a +ℚ power-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
-          ( lemma-leq-power-add-ℚ⁺ d n)
-          ( le-left-add-rational-ℚ⁺
-            ( power-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))
-            ( a)))
-
-  arithmetic-sequence-ℚ⁺ : sequence ℚ⁺
-  arithmetic-sequence-ℚ⁺ n =
-    ( rational-arithmetic-sequence-ℚ⁺ n) ,
-    ( is-positive-rational-arithmetic-sequence-ℚ⁺ n)
-```
-
-### Unitary arithmetic sequences of positive rational numbers
-
-An arithmetic sequence with initial term equal to `1` is called unitary
-
-```agda
-module _
-  (d : ℚ⁺)
-  where
-
-  unitary-arithmetic-sequence-ℚ⁺ : sequence ℚ⁺
-  unitary-arithmetic-sequence-ℚ⁺ = arithmetic-sequence-ℚ⁺ one-ℚ⁺ d
+  seq-standard-arithmetic-sequence-ℚ⁺ : sequence ℚ⁺
+  seq-standard-arithmetic-sequence-ℚ⁺ =
+    seq-arithmetic-sequence-Semigroup
+      semigroup-add-ℚ⁺
+      standard-arithmetic-sequence-ℚ⁺
 ```
 
 ## Properties
 
-### `u₀ = a`
+### Two arithmetic sequences of positive rational numbers with the same initial term an common difference are homotopic
 
 ```agda
-module _
-  (a d : ℚ⁺)
-  where
-
-  abstract
-    eq-init-arithmetic-sequence-ℚ⁺ :
-      arithmetic-sequence-ℚ⁺ a d zero-ℕ ＝ a
-    eq-init-arithmetic-sequence-ℚ⁺ =
-      eq-ℚ⁺ (right-unit-law-add-ℚ (rational-ℚ⁺ a))
+htpy-seq-arithmetic-sequence-ℚ⁺ :
+  ( u v : arithmetic-sequence-ℚ⁺) →
+  ( eq-init :
+    init-term-arithmetic-sequence-ℚ⁺ u ＝
+    init-term-arithmetic-sequence-ℚ⁺ v) →
+  ( eq-common-difference :
+    common-difference-arithmetic-sequence-ℚ⁺ u ＝
+    common-difference-arithmetic-sequence-ℚ⁺ v) →
+  seq-arithmetic-sequence-ℚ⁺ u ~ seq-arithmetic-sequence-ℚ⁺ v
+htpy-seq-arithmetic-sequence-ℚ⁺ =
+  htpy-seq-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺
 ```
 
-### `uₙ₊₁ = uₙ + d`
+### The nth term of the arithmetic sequence with initial term `a` and common difference `d` is `a + n d`
 
 ```agda
 module _
@@ -149,196 +135,163 @@ module _
   where
 
   abstract
-    eq-succ-arithmetic-sequence-ℚ⁺ :
+    compute-standard-arithmetic-sequence-ℚ⁺ :
       ( n : ℕ) →
-      ( arithmetic-sequence-ℚ⁺ a d (succ-ℕ n)) ＝
-      ( arithmetic-sequence-ℚ⁺ a d n +ℚ⁺ d)
-    eq-succ-arithmetic-sequence-ℚ⁺ n =
-      eq-ℚ⁺
-        ( ( ap
-            ( add-ℚ (rational-ℚ⁺ a))
-            ( power-succ-Monoid monoid-add-ℚ n (rational-ℚ⁺ d))) ∙
+      ( rational-ℚ⁺ a +ℚ rational-ℕ n *ℚ rational-ℚ⁺ d) ＝
+      ( rational-ℚ⁺ (seq-standard-arithmetic-sequence-ℚ⁺ a d n))
+    compute-standard-arithmetic-sequence-ℚ⁺ zero-ℕ =
+      ( ap (add-ℚ (rational-ℚ⁺ a)) (left-zero-law-mul-ℚ (rational-ℚ⁺ d))) ∙
+      ( right-unit-law-add-ℚ (rational-ℚ⁺ a))
+    compute-standard-arithmetic-sequence-ℚ⁺ (succ-ℕ n) =
+      ( ap
+        ( add-ℚ (rational-ℚ⁺ a))
+        ( ( α n (rational-ℚ⁺ d))) ∙
           ( inv
-            (associative-add-ℚ
+            ( associative-add-ℚ
               ( rational-ℚ⁺ a)
-              ( power-add-ℚ⁺ d n)
-              ( rational-ℚ⁺ d))))
-```
+              ( rational-ℕ n *ℚ rational-ℚ⁺ d)
+              ( rational-ℚ⁺ d))) ∙
+          ( ap
+            ( add-ℚ' (rational-ℚ⁺ d))
+            ( compute-standard-arithmetic-sequence-ℚ⁺ n)))
+      where
 
-### The nth term of an arithmetic sequence with initial term `a` and common difference `d` is `a + n d`
+        α :
+          (m : ℕ) (q : ℚ) →
+          (rational-ℕ (succ-ℕ m) *ℚ q) ＝ (rational-ℕ m) *ℚ q +ℚ q
+        α m q =
+          ( ap
+            ( mul-ℚ' q)
+            ( ( inv (succ-rational-ℕ m)) ∙
+              ( commutative-add-ℚ one-ℚ (rational-ℕ m)))) ∙
+          ( right-distributive-mul-add-ℚ
+            ( rational-ℕ m)
+            ( one-ℚ)
+            ( q)) ∙
+          ( ap
+            ( add-ℚ (rational-ℕ m *ℚ q))
+            ( left-unit-law-mul-ℚ q))
 
-```agda
 module _
-  (a d : ℚ⁺) (n : ℕ)
+  (u : arithmetic-sequence-ℚ⁺)
   where
 
   abstract
     compute-arithmetic-sequence-ℚ⁺ :
-      ( rational-ℚ⁺ a +ℚ rational-ℕ n *ℚ rational-ℚ⁺ d) ＝
-      ( rational-arithmetic-sequence-ℚ⁺ a d n)
-    compute-arithmetic-sequence-ℚ⁺ =
-      ap
-        ( add-ℚ (rational-ℚ⁺ a))
-        ( compute-power-monoid-add-ℚ n (rational-ℚ⁺ d))
+      ( n : ℕ) →
+      Id
+        ( add-ℚ
+          ( rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
+          ( mul-ℚ
+            ( rational-ℕ n)
+            ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u))))
+        ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
+    compute-arithmetic-sequence-ℚ⁺ n =
+      ( compute-standard-arithmetic-sequence-ℚ⁺
+        ( init-term-arithmetic-sequence-ℚ⁺ u)
+        ( common-difference-arithmetic-sequence-ℚ⁺ u)
+        ( n)) ∙
+      ( ap
+        ( rational-ℚ⁺)
+        ( htpy-seq-standard-arithmetic-sequence-Semigroup
+          semigroup-add-ℚ⁺
+          u
+          n))
 ```
 
 ### An arithmetic sequence of positive rational numbers is strictly increasing
 
 ```agda
 module _
-  (a d : ℚ⁺) (n : ℕ)
+  (u : arithmetic-sequence-ℚ⁺) (n : ℕ)
   where
 
   abstract
     is-strictly-increasing-arithmetic-sequence-ℚ⁺ :
       le-ℚ⁺
-        ( arithmetic-sequence-ℚ⁺ a d n)
-        ( arithmetic-sequence-ℚ⁺ a d (succ-ℕ n))
+        ( seq-arithmetic-sequence-ℚ⁺ u n)
+        ( seq-arithmetic-sequence-ℚ⁺ u (succ-ℕ n))
     is-strictly-increasing-arithmetic-sequence-ℚ⁺ =
       inv-tr
-        ( le-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d n))
-        ( eq-succ-arithmetic-sequence-ℚ⁺ a d n)
+        ( le-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
+        ( is-common-difference-arithmetic-sequence-ℚ⁺ u n)
         ( le-right-add-rational-ℚ⁺
-          ( rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d n))
-          ( d))
+          ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
+          ( common-difference-arithmetic-sequence-ℚ⁺ u))
 ```
 
 ### The terms of an arithmetic sequence of positive rational numbers are greater than or equal to its initial term
 
 ```agda
 module _
-  (a d : ℚ⁺)
+  (u : arithmetic-sequence-ℚ⁺)
   where
 
   abstract
     leq-init-arithmetic-sequence-ℚ⁺ :
-      (n : ℕ) → leq-ℚ⁺ a (arithmetic-sequence-ℚ⁺ a d n)
+      (n : ℕ) →
+      leq-ℚ⁺
+        ( init-term-arithmetic-sequence-ℚ⁺ u)
+        ( seq-arithmetic-sequence-ℚ⁺ u n)
     leq-init-arithmetic-sequence-ℚ⁺ zero-ℕ =
-      inv-tr
-        ( leq-ℚ⁺ a)
-        ( eq-init-arithmetic-sequence-ℚ⁺ a d)
-        ( refl-leq-ℚ (rational-ℚ⁺ a))
+      refl-leq-ℚ ( rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
     leq-init-arithmetic-sequence-ℚ⁺ (succ-ℕ n) =
-      transitive-leq-ℚ
-        ( rational-ℚ⁺ a)
-        ( rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d n))
-        ( rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d (succ-ℕ n)))
-        ( leq-le-ℚ
-          { rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d n)}
-          { rational-ℚ⁺ (arithmetic-sequence-ℚ⁺ a d (succ-ℕ n))}
-          ( is-strictly-increasing-arithmetic-sequence-ℚ⁺ a d n))
+      leq-le-ℚ
+      { rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u)}
+      { rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u (succ-ℕ n))}
+      ( concatenate-leq-le-ℚ
+        ( rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
+        ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
+        ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u (succ-ℕ n)))
         ( leq-init-arithmetic-sequence-ℚ⁺ n)
+        ( is-strictly-increasing-arithmetic-sequence-ℚ⁺ u n))
 ```
 
 ### An arithmetic sequence of positive rational numbers has no upper bound
 
 ```agda
 module _
-  (a d : ℚ⁺)
+  (u : arithmetic-sequence-ℚ⁺)
   where
 
   is-unbounded-arithmetic-sequence-ℚ⁺ :
-    (M : ℚ⁺) → Σ ℕ (le-ℚ⁺ M ∘ arithmetic-sequence-ℚ⁺ a d)
+    (M : ℚ⁺) → Σ ℕ (le-ℚ⁺ M ∘ seq-arithmetic-sequence-ℚ⁺ u)
   is-unbounded-arithmetic-sequence-ℚ⁺ M =
     tot
       ( tr-archimidean-bound)
       ( bound-archimedean-property-ℚ
-        ( rational-ℚ⁺ d)
+        ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u))
         ( rational-ℚ⁺ M)
-        ( is-positive-rational-ℚ⁺ d))
+        ( is-positive-rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))
     where
 
       tr-archimidean-bound :
-        (n : ℕ) (I : le-ℚ (rational-ℚ⁺ M) (rational-ℕ n *ℚ (rational-ℚ⁺ d))) →
-        le-ℚ⁺ M (arithmetic-sequence-ℚ⁺ a d n)
-      tr-archimidean-bound n I =
-        tr
-          ( le-ℚ (rational-ℚ⁺ M))
-          ( compute-arithmetic-sequence-ℚ⁺ a d n)
-          ( transitive-le-ℚ
+        (n : ℕ) →
+        (I :
+          le-ℚ
             ( rational-ℚ⁺ M)
-            ( rational-ℕ n *ℚ rational-ℚ⁺ d)
-            ( (rational-ℚ⁺ a) +ℚ rational-ℕ n *ℚ rational-ℚ⁺ d)
+            ( mul-ℚ
+              ( rational-ℕ n)
+              ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))) →
+        le-ℚ⁺ M (seq-arithmetic-sequence-ℚ⁺ u n)
+      tr-archimidean-bound n =
+        transitive-le-ℚ
+          ( rational-ℚ⁺ M)
+          ( mul-ℚ
+            ( rational-ℕ n)
+            ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))
+          ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
+          ( tr
+            ( le-ℚ
+              ( mul-ℚ
+                ( rational-ℕ n)
+                ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u))))
+            ( compute-arithmetic-sequence-ℚ⁺ u n)
             ( le-left-add-rational-ℚ⁺
-              ( rational-ℕ n *ℚ rational-ℚ⁺ d)
-              ( a))
-            ( I))
-```
-
-### The ratio of two consecutive terms of a unitary arithmetic sequence is bounded
-
-The terms of a unitary arithmetic sequence with common difference `d` satisfy
-`uₙ₊₁/uₙ ≤ 1 + d`; we prove the equivalent inequality `uₙ₊₁ ≤ uₙ (1 + d)`.
-
-```agda
-module _
-  (d : ℚ⁺)
-  where
-
-  abstract
-    bounded-ratio-unitary-arithmetic-sequence-ℚ⁺ :
-      (n : ℕ) →
-      leq-ℚ⁺
-        ( unitary-arithmetic-sequence-ℚ⁺ d (succ-ℕ n))
-        ( mul-ℚ⁺
-          ( unitary-arithmetic-sequence-ℚ⁺ d n)
-          ( one-ℚ⁺ +ℚ⁺ d))
-    bounded-ratio-unitary-arithmetic-sequence-ℚ⁺ n =
-      binary-tr
-        ( leq-ℚ⁺)
-        ( inv (eq-succ-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n))
-        ( inv rhs)
-        ( H)
-      where
-
-        rhs :
-          ( mul-ℚ⁺
-            ( unitary-arithmetic-sequence-ℚ⁺ d n)
-            ( one-ℚ⁺ +ℚ⁺ d)) ＝
-          ( add-ℚ⁺
-            ( unitary-arithmetic-sequence-ℚ⁺ d n)
-            ( unitary-arithmetic-sequence-ℚ⁺ d n *ℚ⁺ d))
-        rhs =
-          eq-ℚ⁺
-            ( ( left-distributive-mul-add-ℚ
-                ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)
-                ( one-ℚ)
-                ( rational-ℚ⁺ d)) ∙
-              ( ap
-                ( λ x →
-                  add-ℚ
-                    ( x)
-                    ( mul-ℚ
-                      ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)
-                      ( rational-ℚ⁺ d)))
-                ( right-unit-law-mul-ℚ
-                  (rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n))))
-        H :
-          leq-ℚ⁺
-            ( add-ℚ⁺
-              ( unitary-arithmetic-sequence-ℚ⁺ d n)
-              ( d))
-          ( add-ℚ⁺
-            ( unitary-arithmetic-sequence-ℚ⁺ d n)
-            ( unitary-arithmetic-sequence-ℚ⁺ d n *ℚ⁺ d))
-        H =
-          preserves-leq-right-add-ℚ
-            ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)
-            ( rational-ℚ⁺ d)
-            ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n *ℚ rational-ℚ⁺ d)
-            ( tr
-              ( λ x →
-                leq-ℚ
-                  ( x)
-                  ( mul-ℚ
-                    ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)
-                    ( rational-ℚ⁺ d)))
-              ( left-unit-law-mul-ℚ (rational-ℚ⁺ d))
-              ( preserves-leq-right-mul-ℚ⁺
-                ( d)
-                ( one-ℚ)
-                ( rational-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)
-                ( leq-init-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d n)))
+              ( mul-ℚ
+                ( rational-ℕ n)
+                ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))
+              ( init-term-arithmetic-sequence-ℚ⁺ u)))
 ```
 
 ## References

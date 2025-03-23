@@ -20,16 +20,20 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sequences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.arithmetic-sequences-semigroups
 open import group-theory.powers-of-elements-monoids
 ```
 
@@ -37,263 +41,306 @@ open import group-theory.powers-of-elements-monoids
 
 ## Idea
 
-The
+A
 {{#concept "geometric sequence" Disambiguation="of positive rational numbers" Agda=geometric-sequence-ℚ⁺ WD="geometric progression" WDID=Q173523}}
-of positive rational numbers with initial term `(a : ℚ⁺)` and common ratio
-`(r : ℚ⁺)` is the sequence `u : ℕ → ℚ⁺` characterized by
+of [positive rational numbers]
+(elementary-number-theory.positive-rational-numbers.md) is an
+[arithmetic sequence](group-theory.arithmetic-sequences-semigroups.md) in the
+multiplicative semigroup of positive rational numbers.
 
-- `u₀ = a`
-- `∀ (n : ℕ) uₙ₊₁ = uₙ r`.
+The common difference in `ℚ⁺` is called the _common ratio_ of the sequence.
 
 ## Definitions
-
-### Preliminary definition
-
-```agda
-module _
-  (r : ℚ⁺)
-  where
-
-  power-mul-ℚ⁺ : sequence ℚ⁺
-  power-mul-ℚ⁺ n = power-Monoid monoid-mul-ℚ⁺ n r
-```
 
 ### Geometric sequences of positive rational numbers
 
 ```agda
+is-common-ratio-sequence-ℚ⁺ : sequence ℚ⁺ → (r : ℚ⁺) → UU lzero
+is-common-ratio-sequence-ℚ⁺ =
+  is-common-difference-sequence-Semigroup semigroup-mul-ℚ⁺
+
+is-geometric-sequence-ℚ⁺ : sequence ℚ⁺ → UU lzero
+is-geometric-sequence-ℚ⁺ =
+  is-arithmetic-sequence-Semigroup semigroup-mul-ℚ⁺
+
+geometric-sequence-ℚ⁺ : UU lzero
+geometric-sequence-ℚ⁺ = arithmetic-sequence-Semigroup semigroup-mul-ℚ⁺
+
+module _
+  (u : geometric-sequence-ℚ⁺)
+  where
+
+  seq-geometric-sequence-ℚ⁺ : sequence ℚ⁺
+  seq-geometric-sequence-ℚ⁺ =
+    seq-arithmetic-sequence-Semigroup semigroup-mul-ℚ⁺ u
+
+  is-geometric-seq-geometric-sequence-ℚ⁺ :
+    is-geometric-sequence-ℚ⁺
+      seq-geometric-sequence-ℚ⁺
+  is-geometric-seq-geometric-sequence-ℚ⁺ =
+    is-arithmetic-seq-arithmetic-sequence-Semigroup
+      semigroup-mul-ℚ⁺
+      u
+
+  common-ratio-geometric-sequence-ℚ⁺ : ℚ⁺
+  common-ratio-geometric-sequence-ℚ⁺ =
+    common-difference-arithmetic-sequence-Semigroup
+      semigroup-mul-ℚ⁺
+      u
+
+  is-common-ratio-geometric-sequence-ℚ⁺ :
+    ( n : ℕ) →
+    ( seq-geometric-sequence-ℚ⁺ (succ-ℕ n)) ＝
+    ( seq-geometric-sequence-ℚ⁺ n *ℚ⁺ common-ratio-geometric-sequence-ℚ⁺)
+  is-common-ratio-geometric-sequence-ℚ⁺ =
+    is-common-difference-arithmetic-sequence-Semigroup
+      semigroup-mul-ℚ⁺
+      u
+
+  init-term-geometric-sequence-ℚ⁺ : ℚ⁺
+  init-term-geometric-sequence-ℚ⁺ =
+    init-term-arithmetic-sequence-Semigroup
+      semigroup-mul-ℚ⁺
+      u
+```
+
+### The standard geometric sequence of positive rational numbers with initial term `a` and common ratio `r`
+
+```agda
 module _
   (a r : ℚ⁺)
   where
 
-  geometric-sequence-ℚ⁺ : sequence ℚ⁺
-  geometric-sequence-ℚ⁺ = mul-ℚ⁺ a ∘ power-mul-ℚ⁺ r
-```
+  standard-geometric-sequence-ℚ⁺ : geometric-sequence-ℚ⁺
+  standard-geometric-sequence-ℚ⁺ =
+    standard-arithmetic-sequence-Semigroup semigroup-mul-ℚ⁺ a r
 
-### Unitary arithmetic sequences of rational numbers
-
-A geometric sequence with initial term equal to `1` is called unitary
-
-```agda
-module _
-  (r : ℚ⁺)
-  where
-
-  unitary-geometric-sequence-ℚ⁺ : sequence ℚ⁺
-  unitary-geometric-sequence-ℚ⁺ = geometric-sequence-ℚ⁺ one-ℚ⁺ r
+  seq-standard-geometric-sequence-ℚ⁺ : sequence ℚ⁺
+  seq-standard-geometric-sequence-ℚ⁺ =
+    seq-arithmetic-sequence-Semigroup
+      semigroup-mul-ℚ⁺
+      standard-geometric-sequence-ℚ⁺
 ```
 
 ## Properties
 
-### `u₀ = a`
+### Two geometric sequences with the same initial term and the same common ratio are homotopic
 
 ```agda
-module _
-  (a d : ℚ⁺)
-  where
-
-  abstract
-    eq-init-geometric-sequence-ℚ⁺ :
-      geometric-sequence-ℚ⁺ a d zero-ℕ ＝ a
-    eq-init-geometric-sequence-ℚ⁺ = right-unit-law-mul-ℚ⁺ a
+htpy-seq-geometric-sequence-ℚ⁺ :
+  ( u v : geometric-sequence-ℚ⁺) →
+  ( eq-init :
+    init-term-geometric-sequence-ℚ⁺ u ＝
+    init-term-geometric-sequence-ℚ⁺ v) →
+  ( eq-common-ratio :
+    common-ratio-geometric-sequence-ℚ⁺ u ＝
+    common-ratio-geometric-sequence-ℚ⁺ v) →
+  seq-geometric-sequence-ℚ⁺ u ~
+  seq-geometric-sequence-ℚ⁺ v
+htpy-seq-geometric-sequence-ℚ⁺ =
+  htpy-seq-arithmetic-sequence-Semigroup semigroup-mul-ℚ⁺
 ```
 
-### `uₙ₊₁ = uₙ r`
+### Any geometric sequence of positive rational numbers is standard
 
 ```agda
-module _
-  (a r : ℚ⁺)
-  where
-
-  abstract
-    eq-succ-geometric-sequence-ℚ⁺ :
-      ( n : ℕ) →
-      ( geometric-sequence-ℚ⁺ a r (succ-ℕ n)) ＝
-      ( geometric-sequence-ℚ⁺ a r n *ℚ⁺ r)
-    eq-succ-geometric-sequence-ℚ⁺ n =
-      ( ap
-        ( mul-ℚ⁺ a)
-        ( power-succ-Monoid monoid-mul-ℚ⁺ n r)) ∙
-      ( inv
-        (associative-mul-ℚ⁺
-          ( a)
-          ( power-mul-ℚ⁺ r n)
-          ( r)))
+htpy-seq-standard-geometric-sequence-ℚ⁺ :
+  (u : geometric-sequence-ℚ⁺) →
+  ( seq-standard-geometric-sequence-ℚ⁺
+    ( init-term-geometric-sequence-ℚ⁺ u)
+    ( common-ratio-geometric-sequence-ℚ⁺ u)) ~
+  ( seq-geometric-sequence-ℚ⁺ u)
+htpy-seq-standard-geometric-sequence-ℚ⁺ =
+  htpy-seq-standard-arithmetic-sequence-Semigroup semigroup-mul-ℚ⁺
 ```
 
 ### The nth term of a geometric sequence with initial term `a` and common ratio `r` is `a rⁿ`
 
 ```agda
 module _
-  (a r : ℚ⁺) (n : ℕ)
+  (a r : ℚ⁺)
+  where
+
+  abstract
+    compute-standard-geometric-sequence-ℚ⁺ :
+      ( n : ℕ) →
+      ( a *ℚ⁺ power-Monoid monoid-mul-ℚ⁺ n r) ＝
+      ( seq-standard-geometric-sequence-ℚ⁺ a r n)
+    compute-standard-geometric-sequence-ℚ⁺ zero-ℕ =
+      right-unit-law-mul-ℚ⁺ a
+    compute-standard-geometric-sequence-ℚ⁺ (succ-ℕ n) =
+      ( ap
+        ( mul-ℚ⁺ a)
+        ( power-succ-Monoid monoid-mul-ℚ⁺ n r)) ∙
+      ( inv
+        ( associative-mul-ℚ⁺
+          ( a)
+          ( power-Monoid monoid-mul-ℚ⁺ n r)
+          ( r))) ∙
+      ( ap (λ p → p *ℚ⁺ r) (compute-standard-geometric-sequence-ℚ⁺ n))
+
+module _
+  (u : geometric-sequence-ℚ⁺)
   where
 
   abstract
     compute-geometric-sequence-ℚ⁺ :
-      ( a *ℚ⁺ power-mul-ℚ⁺ r n) ＝
-      ( geometric-sequence-ℚ⁺ a r n)
-    compute-geometric-sequence-ℚ⁺ = refl
-```
-
-### The pointwise inverse of the unitary geometric sequence with common ratio `r` is the unitary geometric sequence with common ratio `1/r`
-
-```agda
-module _
-  (r : ℚ⁺)
-  where
-
-  abstract
-    eq-inv-unitary-geometric-sequence-ℚ⁺ :
       (n : ℕ) →
-      unitary-geometric-sequence-ℚ⁺ (inv-ℚ⁺ r) n ＝
-      inv-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ r n)
-    eq-inv-unitary-geometric-sequence-ℚ⁺ zero-ℕ =
-      eq-init-geometric-sequence-ℚ⁺ one-ℚ⁺ (inv-ℚ⁺ r) ∙
-      inv-tr
-        ( Id one-ℚ⁺ ∘ inv-ℚ⁺)
-        ( eq-init-geometric-sequence-ℚ⁺ one-ℚ⁺ r)
-        ( inv inv-one-ℚ⁺)
-    eq-inv-unitary-geometric-sequence-ℚ⁺ (succ-ℕ n) =
-      ( eq-succ-geometric-sequence-ℚ⁺ one-ℚ⁺ (inv-ℚ⁺ r) n) ∙
-      ( ap (λ x → x *ℚ⁺ inv-ℚ⁺ r) (eq-inv-unitary-geometric-sequence-ℚ⁺ n)) ∙
-      ( inv (inv-mul-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ r n) r)) ∙
-      ( ap inv-ℚ⁺ (inv (eq-succ-geometric-sequence-ℚ⁺ one-ℚ⁺ r n)))
+      Id
+        ( mul-ℚ⁺
+          ( init-term-geometric-sequence-ℚ⁺ u)
+          ( power-Monoid monoid-mul-ℚ⁺
+            ( n)
+            ( common-ratio-geometric-sequence-ℚ⁺ u)))
+        ( seq-geometric-sequence-ℚ⁺ u n)
+    compute-geometric-sequence-ℚ⁺ n =
+      ( compute-standard-geometric-sequence-ℚ⁺
+        ( init-term-geometric-sequence-ℚ⁺ u)
+        ( common-ratio-geometric-sequence-ℚ⁺ u)
+        ( n)) ∙
+      ( htpy-seq-standard-geometric-sequence-ℚ⁺ u n)
 ```
 
-### Linear-exponential inequality / Bernoulli's inequality
-
-The unitary arithmetic sequence with common difference `d` is lesser than the
-unitary geometric sequence with common ratio `1 + d`: `1 + n d ≤ (1 + d)ⁿ`.
+### A constant sequence of positive rational numbers is geometric with common ratio equal to `1`
 
 ```agda
 module _
-  (d : ℚ⁺)
+  (a : ℚ⁺)
   where
 
-  abstract
-    linear-exponential-inequality-ℚ⁺ :
-      (n : ℕ) →
-      leq-ℚ⁺
-        ( unitary-arithmetic-sequence-ℚ⁺ d n)
-        ( unitary-geometric-sequence-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d) n)
-    linear-exponential-inequality-ℚ⁺ zero-ℕ =
-      binary-tr
-        ( leq-ℚ⁺)
-        ( inv (eq-init-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d))
-        ( inv (eq-init-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d)))
-        ( refl-leq-ℚ one-ℚ)
-    linear-exponential-inequality-ℚ⁺ (succ-ℕ n) =
-      transitive-leq-ℚ
-        ( rational-ℚ⁺ (unitary-arithmetic-sequence-ℚ⁺ d (succ-ℕ n)))
-        ( rational-ℚ⁺
-          ( mul-ℚ⁺
-            ( unitary-arithmetic-sequence-ℚ⁺ d n)
-            ( one-ℚ⁺ +ℚ⁺ d)))
-        ( rational-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d) (succ-ℕ n)))
-        ( inv-tr
-          ( leq-ℚ⁺ (unitary-arithmetic-sequence-ℚ⁺ d n *ℚ⁺ (one-ℚ⁺ +ℚ⁺ d)))
-          ( eq-succ-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d) n)
-          ( preserves-leq-right-mul-ℚ⁺
-            ( one-ℚ⁺ +ℚ⁺ d)
-            ( rational-ℚ⁺ (unitary-arithmetic-sequence-ℚ⁺ d n))
-            ( rational-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ (one-ℚ⁺ +ℚ⁺ d) n))
-            ( linear-exponential-inequality-ℚ⁺ n)))
-        ( bounded-ratio-unitary-arithmetic-sequence-ℚ⁺ d n)
+  is-geometric-const-sequence-ℚ⁺ : is-geometric-sequence-ℚ⁺ (const ℕ a)
+  is-geometric-const-sequence-ℚ⁺ = one-ℚ⁺ , λ _ → inv (right-unit-law-mul-ℚ⁺ a)
+
+  const-geometric-sequence-ℚ⁺ : geometric-sequence-ℚ⁺
+  const-geometric-sequence-ℚ⁺ =
+    const ℕ a , is-geometric-const-sequence-ℚ⁺
 ```
 
-### Asymptotical behaviour of unitary geometric sequences of positive rational numbers
-
-#### A unitary geometric sequence with common ratio `r > 1` is unbounded
+### A geometric sequence of positive rational numbers with common ratio equal to `1` is constant
 
 ```agda
 module _
-  (r : ℚ⁺) (H : le-ℚ⁺ one-ℚ⁺ r)
+  (u : geometric-sequence-ℚ⁺)
+  (is-one-common-ratio : common-ratio-geometric-sequence-ℚ⁺ u ＝ one-ℚ⁺)
   where
 
-  is-unbounded-geometric-sequence-ℚ⁺ :
-    (M : ℚ⁺) → Σ ℕ (le-ℚ⁺ M ∘ unitary-geometric-sequence-ℚ⁺ r)
-  is-unbounded-geometric-sequence-ℚ⁺ M =
-    tot
-      ( tr-linear-exponential-bound)
-      ( is-unbounded-arithmetic-sequence-ℚ⁺ one-ℚ⁺ d M)
-    where
-
-      d : ℚ⁺
-      d = le-diff-ℚ⁺ one-ℚ⁺ r H
-
-      tr-linear-exponential-bound :
-        (n : ℕ) (I : le-ℚ⁺ M (unitary-arithmetic-sequence-ℚ⁺ d n)) →
-        le-ℚ⁺ M (unitary-geometric-sequence-ℚ⁺ r n)
-      tr-linear-exponential-bound n I =
-        concatenate-le-leq-ℚ
-          ( rational-ℚ⁺ M)
-          ( rational-ℚ⁺ (unitary-arithmetic-sequence-ℚ⁺ d n))
-          ( rational-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ r n))
-          ( I)
-          ( tr
-            ( λ x →
-              leq-ℚ⁺
-                ( unitary-arithmetic-sequence-ℚ⁺ d n)
-                ( unitary-geometric-sequence-ℚ⁺ x n))
-            ( right-diff-law-add-ℚ⁺ one-ℚ⁺ r H)
-            ( linear-exponential-inequality-ℚ⁺ d n))
+  is-constant-seq-geometric-sequence-ℚ⁺ :
+    (n : ℕ) →
+    ( seq-geometric-sequence-ℚ⁺ u n) ＝
+    ( init-term-geometric-sequence-ℚ⁺ u)
+  is-constant-seq-geometric-sequence-ℚ⁺ zero-ℕ = refl
+  is-constant-seq-geometric-sequence-ℚ⁺ (succ-ℕ n) =
+    ( is-common-ratio-geometric-sequence-ℚ⁺ u n) ∙
+    ( ap (mul-ℚ⁺ (seq-geometric-sequence-ℚ⁺ u n)) is-one-common-ratio) ∙
+    ( right-unit-law-mul-ℚ⁺ (seq-geometric-sequence-ℚ⁺ u n)) ∙
+    ( is-constant-seq-geometric-sequence-ℚ⁺ n)
 ```
 
-#### A unitary geometric sequence with common ratio `r = 1` is constant
+### The pointwise product of to geometric sequences of positive rational numbers is geometric
 
-```agda
-abstract
-  is-constant-geometric-sequence-ℚ⁺ :
-    (n : ℕ) → unitary-geometric-sequence-ℚ⁺ one-ℚ⁺ n ＝ one-ℚ⁺
-  is-constant-geometric-sequence-ℚ⁺ zero-ℕ =
-    eq-init-geometric-sequence-ℚ⁺ one-ℚ⁺ one-ℚ⁺
-  is-constant-geometric-sequence-ℚ⁺ (succ-ℕ n) =
-    ( eq-succ-geometric-sequence-ℚ⁺ one-ℚ⁺ one-ℚ⁺ n) ∙
-    ( right-unit-law-mul-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ one-ℚ⁺ n)) ∙
-    ( is-constant-geometric-sequence-ℚ⁺ n)
-```
-
-#### A unitary geometric sequence with common ratio `r < 1` gets arbitrarily small
+Moreover, the common ratio of the product of geometric seqeuences is the product
+of the common ratios of the sequences.
 
 ```agda
 module _
-  (r : ℚ⁺) (H : le-ℚ⁺ r one-ℚ⁺)
+  (u v : geometric-sequence-ℚ⁺)
   where
 
-  is-arbitrarily-small-geometric-sequence-ℚ⁺ :
-    (ε : ℚ⁺) → Σ ℕ (λ n → le-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ r n) ε)
-  is-arbitrarily-small-geometric-sequence-ℚ⁺ ε =
-    tot
-      ( inv-bound)
-      ( is-unbounded-geometric-sequence-ℚ⁺
-        ( inv-ℚ⁺ r)
-        ( inv-le-ℚ⁺
-          ( inv-ℚ⁺ r)
-          ( one-ℚ⁺)
-            ( binary-tr
-              ( le-ℚ⁺)
-              ( inv (inv-inv-ℚ⁺ r))
-              ( inv (inv-one-ℚ⁺))
-              ( H)))
-        ( inv-ℚ⁺ ε))
-    where
+  mul-common-ratio-geometric-sequence-ℚ⁺ : ℚ⁺
+  mul-common-ratio-geometric-sequence-ℚ⁺ =
+    mul-ℚ⁺
+      ( common-ratio-geometric-sequence-ℚ⁺ u)
+      ( common-ratio-geometric-sequence-ℚ⁺ v)
 
-      inv-bound :
-        (n : ℕ)
-        (I : le-ℚ⁺ (inv-ℚ⁺ ε) (unitary-geometric-sequence-ℚ⁺ (inv-ℚ⁺ r) n)) →
-        le-ℚ⁺ (unitary-geometric-sequence-ℚ⁺ r n) ε
-      inv-bound n I =
-        inv-le-ℚ⁺
-          ( ε)
-          ( unitary-geometric-sequence-ℚ⁺ r n)
-          ( tr
-            ( le-ℚ⁺ (inv-ℚ⁺ ε))
-            ( eq-inv-unitary-geometric-sequence-ℚ⁺ r n)
-            ( I))
+  seq-mul-geometric-sequence-ℚ⁺ : sequence ℚ⁺
+  seq-mul-geometric-sequence-ℚ⁺ n =
+    mul-ℚ⁺
+      ( seq-geometric-sequence-ℚ⁺ u n)
+      ( seq-geometric-sequence-ℚ⁺ v n)
+
+  is-common-ratio-mul-geometric-sequence-ℚ⁺ :
+    is-common-ratio-sequence-ℚ⁺
+      seq-mul-geometric-sequence-ℚ⁺
+      mul-common-ratio-geometric-sequence-ℚ⁺
+  is-common-ratio-mul-geometric-sequence-ℚ⁺ n =
+    ( ap-binary
+      ( mul-ℚ⁺)
+      ( is-common-ratio-geometric-sequence-ℚ⁺ u n)
+      ( is-common-ratio-geometric-sequence-ℚ⁺ v n)) ∙
+    ( eq-ℚ⁺
+      ( interchange-law-mul-mul-ℚ
+        ( rational-ℚ⁺ (seq-geometric-sequence-ℚ⁺ u n))
+        ( rational-ℚ⁺ (common-ratio-geometric-sequence-ℚ⁺ u))
+        ( rational-ℚ⁺ (seq-geometric-sequence-ℚ⁺ v n))
+        ( rational-ℚ⁺ (common-ratio-geometric-sequence-ℚ⁺ v))))
+
+  is-geometric-seq-mul-geometric-sequence-ℚ⁺ :
+    is-geometric-sequence-ℚ⁺ seq-mul-geometric-sequence-ℚ⁺
+  is-geometric-seq-mul-geometric-sequence-ℚ⁺ =
+    mul-common-ratio-geometric-sequence-ℚ⁺ ,
+    is-common-ratio-mul-geometric-sequence-ℚ⁺
+
+  mul-geometric-sequence-ℚ⁺ : geometric-sequence-ℚ⁺
+  mul-geometric-sequence-ℚ⁺ =
+    seq-mul-geometric-sequence-ℚ⁺ ,
+    is-geometric-seq-mul-geometric-sequence-ℚ⁺
+
+  eq-common-ratio-mul-geometric-sequence-ℚ⁺ :
+    ( mul-ℚ⁺
+      ( common-ratio-geometric-sequence-ℚ⁺ u)
+      ( common-ratio-geometric-sequence-ℚ⁺ v)) ＝
+    ( common-ratio-geometric-sequence-ℚ⁺ mul-geometric-sequence-ℚ⁺)
+  eq-common-ratio-mul-geometric-sequence-ℚ⁺ = refl
+```
+
+### The pointwise inverse of a geometric sequence of positive rational numbers is geometric
+
+Moreover, the common ratio of the inverse of a geometric sequence is the inverse
+of the common ratio of the sequence.
+
+```agda
+module _
+  (u : geometric-sequence-ℚ⁺)
+  where
+
+  inv-common-ratio-geometric-sequence-ℚ⁺ : ℚ⁺
+  inv-common-ratio-geometric-sequence-ℚ⁺ =
+    inv-ℚ⁺ (common-ratio-geometric-sequence-ℚ⁺ u)
+
+  seq-inv-geometric-sequence-ℚ⁺ : sequence ℚ⁺
+  seq-inv-geometric-sequence-ℚ⁺ =
+    map-sequence inv-ℚ⁺ (seq-geometric-sequence-ℚ⁺ u)
+
+  is-common-ratio-inv-geometric-sequence-ℚ⁺ :
+    is-common-ratio-sequence-ℚ⁺
+      seq-inv-geometric-sequence-ℚ⁺
+      inv-common-ratio-geometric-sequence-ℚ⁺
+  is-common-ratio-inv-geometric-sequence-ℚ⁺ n =
+    ( ap
+      ( inv-ℚ⁺)
+      ( is-common-ratio-geometric-sequence-ℚ⁺ u n)) ∙
+    ( inv-mul-ℚ⁺
+      ( seq-geometric-sequence-ℚ⁺ u n)
+      ( common-ratio-geometric-sequence-ℚ⁺ u))
+
+  is-geometric-seq-inv-geometric-sequence-ℚ⁺ :
+    is-geometric-sequence-ℚ⁺ seq-inv-geometric-sequence-ℚ⁺
+  is-geometric-seq-inv-geometric-sequence-ℚ⁺ =
+    inv-common-ratio-geometric-sequence-ℚ⁺ ,
+    is-common-ratio-inv-geometric-sequence-ℚ⁺
+
+  inv-geometric-sequence-ℚ⁺ : geometric-sequence-ℚ⁺
+  inv-geometric-sequence-ℚ⁺ =
+    seq-inv-geometric-sequence-ℚ⁺ ,
+    is-geometric-seq-inv-geometric-sequence-ℚ⁺
+
+  eq-common-ratio-inv-geometric-sequence-ℚ⁺ :
+    ( inv-ℚ⁺ (common-ratio-geometric-sequence-ℚ⁺ u)) ＝
+    ( common-ratio-geometric-sequence-ℚ⁺ inv-geometric-sequence-ℚ⁺)
+  eq-common-ratio-inv-geometric-sequence-ℚ⁺ = refl
 ```
 
 ## References
 
 - [Geometric progressions](https://en.wikipedia.org/wiki/Geometric_progression)
-  at Wikipedia
-- [Bernoulli's inequality](https://en.wikipedia.org/wiki/Bernoulli%27s_inequality)
   at Wikipedia

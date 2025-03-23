@@ -52,7 +52,7 @@ pr2 (inv-ℚ⁺ (x , P)) = is-positive-denominator-ℚ x
 
 ```agda
 group-mul-ℚ⁺ : Group lzero
-pr1 group-mul-ℚ⁺ = semigroup-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
+pr1 group-mul-ℚ⁺ = semigroup-mul-ℚ⁺
 pr1 (pr2 group-mul-ℚ⁺) = is-unital-Monoid monoid-mul-ℚ⁺
 pr1 (pr2 (pr2 group-mul-ℚ⁺)) = inv-ℚ⁺
 pr1 (pr2 (pr2 (pr2 group-mul-ℚ⁺))) x =
