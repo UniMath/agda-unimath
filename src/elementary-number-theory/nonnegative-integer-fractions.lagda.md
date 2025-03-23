@@ -116,5 +116,5 @@ is-nonnegative-mul-nonnegative-fraction-ℤ :
   is-nonnegative-fraction-ℤ x →
   is-nonnegative-fraction-ℤ y →
   is-nonnegative-fraction-ℤ (mul-fraction-ℤ x y)
-is-nonnegative-mul-nonnegative-fraction-ℤ H K = is-nonnegative-mul-ℤ H K
+is-nonnegative-mul-nonnegative-fraction-ℤ = is-nonnegative-mul-ℤ
 ```
