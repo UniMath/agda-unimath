@@ -28,8 +28,6 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.interchange-law
-
-open import group-theory.powers-of-elements-monoids
 ```
 
 </details>
