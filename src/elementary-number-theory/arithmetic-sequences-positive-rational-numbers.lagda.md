@@ -110,7 +110,7 @@ module _
 
 ## Properties
 
-### Two arithmetic sequences of positive rational numbers with the same initial term an common difference are homotopic
+### Two arithmetic sequences of positive rational numbers with the same initial term and common difference are homotopic
 
 ```agda
 htpy-seq-arithmetic-sequence-ℚ⁺ :
