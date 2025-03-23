@@ -90,6 +90,8 @@ module _
     pr2 has-limit-convergent-sequence-Metric-Space
 ```
 
+## Properties
+
 ### Asymptotically indistinguishable convergent sequences in a metric space have the same limit
 
 ```agda
