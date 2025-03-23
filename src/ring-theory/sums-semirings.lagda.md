@@ -42,9 +42,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The {{#concept "sum operation" Disambiguation="in a semiring" WD="sum" WDID=Q218005 Agda=sum-Semiring}} extends the binary addition operation on a
-[semiring](ring-theory.semirings.md) `R` to any family of elements of `R`
-indexed by a
+The
+{{#concept "sum operation" Disambiguation="in a semiring" WD="sum" WDID=Q218005 Agda=sum-Semiring}}
+extends the binary addition operation on a [semiring](ring-theory.semirings.md)
+`R` to any family of elements of `R` indexed by a
 [standard finite type](univalent-combinatorics.standard-finite-types.md), or by
 a [finite type](univalent-combinatorics.finite-types.md).
 

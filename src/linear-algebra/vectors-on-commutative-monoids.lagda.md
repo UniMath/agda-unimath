@@ -30,7 +30,8 @@ open import linear-algebra.vectors-on-monoids
 ## Idea
 
 Given a [commutative monoid](group-theory.commutative-monoids.md) `M`, the type
-`vec n M` of `n`-dimensional `M`-[vectors](linear-algebra.vectors.md) is a commutative monoid given by componentwise addition.
+`vec n M` of `n`-dimensional `M`-[vectors](linear-algebra.vectors.md) is a
+commutative monoid given by componentwise addition.
 
 ## Definitions
 
