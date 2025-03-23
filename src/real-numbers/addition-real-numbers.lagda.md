@@ -106,21 +106,21 @@ module _
         intro-exists
           ( px +ℚ py , qx +ℚ qy)
           ( tr
-              ( le-ℚ (qx +ℚ qy))
-              ( equational-reasoning
-                  (px +ℚ εx) +ℚ (py +ℚ εy)
-                  ＝ (px +ℚ py) +ℚ (εx +ℚ εy)
-                    by interchange-law-add-add-ℚ px εx py εy
-                  ＝ (px +ℚ py) +ℚ ε
-                    by
-                      ap ((px +ℚ py) +ℚ_) (ap rational-ℚ⁺ (eq-add-split-ℚ⁺ ε⁺)))
-              ( preserves-le-add-ℚ
-                { qx}
-                { px +ℚ εx}
-                { qy}
-                { py +ℚ εy}
-                ( qx<px+εx)
-                ( qy<py+εy)) ,
+            ( le-ℚ (qx +ℚ qy))
+            ( equational-reasoning
+                (px +ℚ εx) +ℚ (py +ℚ εy)
+                ＝ (px +ℚ py) +ℚ (εx +ℚ εy)
+                  by interchange-law-add-add-ℚ px εx py εy
+                ＝ (px +ℚ py) +ℚ ε
+                  by
+                    ap ((px +ℚ py) +ℚ_) (ap rational-ℚ⁺ (eq-add-split-ℚ⁺ ε⁺)))
+            ( preserves-le-add-ℚ
+              { qx}
+              { px +ℚ εx}
+              { qy}
+              { py +ℚ εy}
+              ( qx<px+εx)
+              ( qy<py+εy)) ,
             intro-exists (px , py) (px<x , py<y , refl) ,
             intro-exists (qx , qy) (x<qx , y<qy , refl))
       where
