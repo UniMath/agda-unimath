@@ -7,43 +7,24 @@ module foundation.inequality-booleans where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.apartness-relations
 open import foundation.booleans
-open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.discrete-types
 open import foundation.disjunction
-open import foundation.empty-types
-open import foundation.involutions
 open import foundation.logical-operations-booleans
-open import foundation.negated-equality
 open import foundation.propositional-truncations
-open import foundation.raising-universe-levels
-open import foundation.tight-apartness-relations
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.constant-maps
 open import foundation-core.coproduct-types
-open import foundation-core.equivalences
-open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
-open import foundation-core.negation
 open import foundation-core.propositions
-open import foundation-core.sections
-open import foundation-core.sets
 
 open import order-theory.decidable-total-orders
 open import order-theory.posets
 open import order-theory.preorders
 open import order-theory.total-orders
-
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

@@ -7,37 +7,19 @@ module foundation.decidable-type-families where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
 open import foundation.coproduct-types
-open import foundation.decidable-maps
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.hilberts-epsilon-operators
-open import foundation.injective-maps
 open import foundation.irrefutable-equality
-open import foundation.logical-equivalences
 open import foundation.negation
-open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
-open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-empty-type
-open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.cartesian-product-types
-open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.retractions
-open import foundation-core.sections
 ```
 
 </details>

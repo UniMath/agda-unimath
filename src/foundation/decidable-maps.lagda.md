@@ -18,7 +18,6 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.hilbert-epsilon-operators-maps
 open import foundation.identity-types
-open import foundation.images
 open import foundation.retracts-of-maps
 open import foundation.universe-levels
 
@@ -294,7 +293,7 @@ module _
 ### Decidable injective maps are embeddings
 
 **Proof.** Given a decidable map `f : A → B` then `f` decomposes
-`B ≃ im f + B∖im f`. Restricting to `im f` we have a section given by the
+`B ≃ (im f) + B∖(im f)`. Restricting to `im f` we have a section given by the
 Hilbert ε-operator on `f`. Now, by injectivity of `f` we know this restriction
 map is an equivalence. Hence, by 3-for-2 `f` is also an embedding.
 

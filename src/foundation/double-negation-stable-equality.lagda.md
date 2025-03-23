@@ -9,12 +9,9 @@ open import foundation-core.double-negation-stable-equality public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.double-negation
-open import foundation.function-types
 open import foundation.identity-types
-open import foundation.negation
 open import foundation.universe-levels
 
 open import foundation-core.homotopies

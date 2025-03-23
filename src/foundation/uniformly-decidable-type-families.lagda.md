@@ -9,11 +9,9 @@ module foundation.uniformly-decidable-type-families where
 ```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.decidable-propositions
 open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.double-negation
 open import foundation.equality-coproduct-types
 open import foundation.functoriality-coproduct-types
 open import foundation.inhabited-types
@@ -29,13 +27,8 @@ open import foundation.truncation-levels
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
-open import foundation-core.cartesian-product-types
-open import foundation-core.contractible-maps
 open import foundation-core.empty-types
-open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.homotopies
-open import foundation-core.identity-types
 
 open import logic.propositionally-decidable-types
 ```

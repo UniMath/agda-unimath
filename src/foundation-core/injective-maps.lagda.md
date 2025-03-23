@@ -27,7 +27,7 @@ open import foundation-core.sections
 ## Idea
 
 A map `f : A → B` is
-{{#concept "injective" Disambiguation="map of types" Agda=is-injective Agda=injection}},
+{{#concept "injective" Disambiguation="map of types" WD="injective function" WDID=Q12047217 Agda=is-injective Agda=injection}},
 also called _left cancellable_, if `f x ＝ f y` implies `x ＝ y`.
 
 ## Warning

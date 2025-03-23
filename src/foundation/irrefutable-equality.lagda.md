@@ -13,8 +13,6 @@ open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.functoriality-propositional-truncation
-open import foundation.reflecting-maps-equivalence-relations
 open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels

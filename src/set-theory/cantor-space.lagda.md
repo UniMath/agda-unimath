@@ -10,25 +10,15 @@ module set-theory.cantor-space where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.booleans
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation-stable-equality
-open import foundation.empty-types
 open import foundation.function-types-with-apartness-relations
-open import foundation.lawveres-fixed-point-theorem
-open import foundation.negation
-open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.tight-apartness-relations
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import set-theory.cantors-diagonal-argument
-open import set-theory.countable-sets
 open import set-theory.uncountable-sets
-
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

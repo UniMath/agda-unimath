@@ -8,27 +8,20 @@ module foundation.double-negation-stable-propositions where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.conjunction
-open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.double-negation
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.existential-quantification
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

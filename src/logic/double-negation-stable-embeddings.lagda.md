@@ -10,9 +10,6 @@ module logic.double-negation-stable-embeddings where
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
 open import foundation.decidable-embeddings
-open import foundation.decidable-maps
-open import foundation.decidable-propositions
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation-stable-propositions
 open import foundation.embeddings
@@ -23,18 +20,15 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.retracts-of-maps
 open import foundation.subtype-identity-principle
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types

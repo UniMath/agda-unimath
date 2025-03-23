@@ -10,8 +10,6 @@ module order-theory.strictly-preordered-sets where
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels

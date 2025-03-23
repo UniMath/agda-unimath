@@ -29,7 +29,6 @@ open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.function-types
-open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
 ```

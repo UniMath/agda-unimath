@@ -12,19 +12,15 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.embeddings
-open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
-open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.double-negation-stable-equality
-open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.sets
 open import foundation-core.subtypes

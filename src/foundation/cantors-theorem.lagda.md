@@ -16,13 +16,10 @@ open import foundation.function-extensionality
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.powersets
-open import foundation.propositional-truncations
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
-open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.propositions
 
 open import logic.de-morgan-propositions
 open import logic.de-morgan-subtypes

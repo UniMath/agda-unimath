@@ -13,13 +13,9 @@ open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.double-negation-stable-propositions
 open import foundation.evaluation-functions
 open import foundation.full-subtypes
 open import foundation.involutions
-open import foundation.negation
-open import foundation.postcomposition-functions
-open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.type-arithmetic-coproduct-types
@@ -30,8 +26,6 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.subtypes
-
-open import logic.double-negation-stable-subtypes
 ```
 
 </details>

@@ -11,10 +11,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
-open import foundation.functoriality-coproduct-types
-open import foundation.irrefutable-equality
 open import foundation.negation
-open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
@@ -25,7 +22,6 @@ open import foundation-core.contractible-types
 open import foundation-core.empty-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes

@@ -11,11 +11,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.booleans
 open import foundation.cartesian-product-types
-open import foundation.constant-maps
 open import foundation.coproduct-types
-open import foundation.decidable-dependent-pair-types
 open import foundation.decidable-embeddings
-open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-type-families
@@ -24,40 +21,22 @@ open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.fibers-of-maps
-open import foundation.full-subtypes
 open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.irrefutable-equality
-open import foundation.locally-small-types
 open import foundation.logical-operations-booleans
-open import foundation.mere-equality
 open import foundation.negation
-open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.retracts-of-types
-open import foundation.small-types
 open import foundation.surjective-maps
-open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
-open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
-
-open import logic.complements-decidable-subtypes
-open import logic.de-morgan-subtypes
 open import logic.double-negation-dense-maps
-open import logic.propositionally-decidable-types
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
@@ -88,22 +67,19 @@ _Σ-compact_. {{#cite Esc08}} {{#cite TypeTopology}}
 ### The predicate of having decidable Σ-types
 
 ```agda
-has-decidable-Σ-Level :
-  {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
+has-decidable-Σ-Level : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
 has-decidable-Σ-Level l2 X =
   (P : decidable-family l2 X) → is-decidable (Σ X (family-decidable-family P))
 
 has-decidable-Σ : {l1 : Level} → UU l1 → UUω
-has-decidable-Σ X =
-  {l2 : Level} → has-decidable-Σ-Level l2 X
+has-decidable-Σ X = {l2 : Level} → has-decidable-Σ-Level l2 X
 ```
 
 ### The predicate of having small decidable Σ-types
 
 ```agda
 has-decidable-Σ-bool : {l1 : Level} → UU l1 → UU l1
-has-decidable-Σ-bool X =
-  (b : X → bool) → is-decidable (Σ X (is-true ∘ b))
+has-decidable-Σ-bool X = (b : X → bool) → is-decidable (Σ X (is-true ∘ b))
 ```
 
 ### The type of types with decidable Σ-types
@@ -112,7 +88,6 @@ has-decidable-Σ-bool X =
 record Type-With-Decidable-Σ (l : Level) : UUω
   where
   field
-
     type-Type-With-Decidable-Σ : UU l
 
     has-decidable-Σ-type-Type-With-Decidable-Σ :
@@ -146,8 +121,7 @@ has-decidable-Σ-pointed-Level l2 X =
       family-decidable-family P x₀ → (x : X) → family-decidable-family P x)
 
 has-decidable-Σ-pointed : {l1 : Level} → UU l1 → UUω
-has-decidable-Σ-pointed X =
-  {l2 : Level} → has-decidable-Σ-pointed-Level l2 X
+has-decidable-Σ-pointed X = {l2 : Level} → has-decidable-Σ-pointed-Level l2 X
 ```
 
 ### The predicate of pointedly having decidable Σ-types on subtypes
@@ -221,8 +195,7 @@ module _
   where
 
   has-decidable-type-subtype-has-decidable-Σ-bool :
-    has-decidable-Σ-bool X →
-    has-decidable-type-subtype X
+    has-decidable-Σ-bool X → has-decidable-type-subtype X
   has-decidable-type-subtype-has-decidable-Σ-bool f P =
     is-decidable-equiv
       ( equiv-tot (compute-equiv-bool-Decidable-Prop ∘ P))
@@ -582,9 +555,7 @@ module _
 ```agda
 has-decidable-Σ-product :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  has-decidable-Σ A →
-  has-decidable-Σ B →
-  has-decidable-Σ (A × B)
+  has-decidable-Σ A → has-decidable-Σ B → has-decidable-Σ (A × B)
 has-decidable-Σ-product f g = has-decidable-Σ-Σ f (λ _ → g)
 ```
 
@@ -596,14 +567,12 @@ module _
   where
 
   has-decidable-Σ-left-factor-product :
-    has-decidable-Σ (X × Y) →
-    Y → has-decidable-Σ X
+    has-decidable-Σ (X × Y) → Y → has-decidable-Σ X
   has-decidable-Σ-left-factor-product f y =
     has-decidable-Σ-retract (retract-left-factor-product y) f
 
   has-decidable-Σ-right-factor-product :
-    has-decidable-Σ (X × Y) →
-    X → has-decidable-Σ Y
+    has-decidable-Σ (X × Y) → X → has-decidable-Σ Y
   has-decidable-Σ-right-factor-product f x =
     has-decidable-Σ-retract (retract-right-factor-product x) f
 ```
@@ -635,9 +604,7 @@ has-decidable-Σ-count f =
 ```agda
 has-decidable-Σ-bool' : has-decidable-Σ bool
 has-decidable-Σ-bool' =
-  has-decidable-Σ-equiv'
-    ( equiv-bool-Fin-2)
-    ( has-decidable-Σ-Fin 2)
+  has-decidable-Σ-equiv' (equiv-bool-Fin-2) (has-decidable-Σ-Fin 2)
 ```
 
 ### The subuniverse of propositions has decidable Σ-types
@@ -650,7 +617,7 @@ has-decidable-Σ-bool' =
 --     ( λ np →
 --       rec-coproduct
 --         ( λ q → inl (raise-empty-Prop l , q))
---         (λ nq → inr {!   !})
+--         ( λ nq → inr {!   !})
 --         ( is-decidable-decidable-family P (raise-empty-Prop l)))
 --     ( is-decidable-decidable-family P (raise-unit-Prop l))
 ```

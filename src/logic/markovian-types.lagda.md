@@ -7,24 +7,15 @@ module logic.markovian-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
 open import foundation.booleans
 open import foundation.decidable-subtypes
-open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.function-types
-open import foundation.inhabited-types
 open import foundation.negation
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
-open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.sets
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

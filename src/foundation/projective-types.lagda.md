@@ -15,7 +15,6 @@ open import foundation.surjective-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import foundation-core.function-types
 open import foundation-core.sets
 open import foundation-core.truncated-types
 ```

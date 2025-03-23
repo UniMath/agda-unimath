@@ -296,4 +296,4 @@ module _
 
 ## See also
 
-- [Double negation modality](foundation.double-negation-modality.md)
+- [The double negation modality](foundation.double-negation-modality.md)

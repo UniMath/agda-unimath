@@ -7,50 +7,26 @@ module set-theory.finite-elements-increasing-binary-sequences where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.constant-maps
-open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.double-negation-stable-equality
-open import foundation.embeddings
-open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.inequality-booleans
 open import foundation.inhabited-types
-open import foundation.injective-maps
-open import foundation.logical-operations-booleans
-open import foundation.maybe
-open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.retractions
-open import foundation.retracts-of-types
-open import foundation.sections
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.tight-apartness-relations
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
 
-open import order-theory.order-preserving-maps-posets
-
-open import set-theory.cantor-space
 open import set-theory.increasing-binary-sequences
 ```
 

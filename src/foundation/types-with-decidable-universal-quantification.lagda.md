@@ -7,63 +7,26 @@ module foundation.types-with-decidable-universal-quantification where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
-open import foundation.booleans
-open import foundation.cartesian-product-types
-open import foundation.constant-maps
 open import foundation.coproduct-types
-open import foundation.decidable-dependent-function-types
-open import foundation.decidable-embeddings
-open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-type-families
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
-open import foundation.equivalences
 open import foundation.evaluation-functions
-open import foundation.fibers-of-maps
 open import foundation.full-subtypes
 open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.irrefutable-equality
-open import foundation.locally-small-types
 open import foundation.mere-equality
 open import foundation.negation
-open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.retracts-of-types
-open import foundation.small-types
-open import foundation.surjective-maps
-open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-unit-type
-open import foundation.types-with-decidable-dependent-pair-types
 open import foundation.types-with-decidable-dependent-product-types
-open import foundation.unit-type
-open import foundation.universal-property-dependent-pair-types
-open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
-
-open import logic.complements-decidable-subtypes
-open import logic.de-morgan-subtypes
-open import logic.de-morgan-types
-open import logic.double-negation-dense-maps
 open import logic.propositionally-decidable-types
-
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
