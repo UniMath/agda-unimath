@@ -44,7 +44,7 @@ The
 {{#concept "minimum" Disambiguation="binary, upper Dedekind real numbers" Agda=binary-min-upper-ℝ WD="minimum" WDID=Q10585806}}
 of two
 [upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md) `x`
-and `y` is a upper Dedekind real number with cut equal to the union of the cuts
+and `y` is an upper Dedekind real number with cut equal to the union of the cuts
 of `x` and `y`.
 
 Unlike the case for the
