@@ -18,10 +18,9 @@ open import foundation-core.equivalences
 
 ## Idea
 
-The type of **booleans** is a
-[2-element type](univalent-combinatorics.2-element-types.md) with elements
-`true false : bool`, which is used for reasoning with
-[decidable propositions](foundation-core.decidable-propositions.md).
+We can [raise](foundation.raising-universe-levels.md) the type of
+[booleans](foundation-core.booleans.md) to any
+[universe](foundation.universe-levels.md).
 
 ## Definition
 

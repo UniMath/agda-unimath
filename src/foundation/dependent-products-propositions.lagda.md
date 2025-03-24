@@ -22,11 +22,8 @@ open import foundation-core.propositions
 
 ## Idea
 
-A type is a {{#concept "proposition" Agda=is-prop}} if its
-[identity types](foundation-core.identity-types.md) are
-[contractible](foundation-core.contractible-types.md). This condition is
-[equivalent](foundation-core.equivalences.md) to the condition that it has up to
-identification at most one element.
+Given a family of [propositions](foundation-core.propositions.md) `B : A → 𝒰`,
+then the dependent product `Π A B` is again a proposition.
 
 ## Definitions
 

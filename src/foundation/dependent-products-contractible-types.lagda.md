@@ -21,8 +21,8 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Contractible types are types that have, up to identification, exactly one
-element.
+Given a family of [contractible types](foundation-core.contractible-types.md)
+`B : A → 𝒰`, then the dependent product `Π A B` is again contractible.
 
 ## Properties
 
