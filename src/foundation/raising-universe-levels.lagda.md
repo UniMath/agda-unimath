@@ -37,6 +37,15 @@ overlap. Using `data` types we can construct for any type `A` of universe level
 
 ## Properties
 
+### Raising universe levels of subtypes
+
+```agda
+raise-subtype :
+  (l : Level) {l1 l2 : Level} {A : UU l1} →
+  subtype l2 A → subtype (l2 ⊔ l) A
+raise-subtype l B x = raise-Prop l (B x)
+```
+
 ### Raising universe levels from `l1` to `l ⊔ l1` is an embedding from `UU l1` to `UU (l ⊔ l1)`
 
 ```agda

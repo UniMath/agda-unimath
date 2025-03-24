@@ -21,10 +21,9 @@ open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.universe-levels
-
-open import foundation-core.raising-universe-levels
 
 open import logic.functoriality-existential-quantification
 
