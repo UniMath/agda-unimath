@@ -9,8 +9,8 @@ module real-numbers.upper-dedekind-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
