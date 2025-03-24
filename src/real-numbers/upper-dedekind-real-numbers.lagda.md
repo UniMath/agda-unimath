@@ -1,6 +1,8 @@
 # Upper Dedekind real numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.upper-dedekind-real-numbers where
 ```
 
@@ -8,6 +10,7 @@ module real-numbers.upper-dedekind-real-numbers where
 
 ```agda
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -27,6 +30,7 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
+open import foundation.unit-type
 open import foundation.universal-quantification
 open import foundation.universe-levels
 ```
@@ -97,6 +101,20 @@ module _
 ```
 
 ## Properties
+
+### The least upper Dedekind real
+
+There is a least upper Dedekind real whose cut is all rational numbers. We call
+this element **negative infinity**.
+
+```agda
+neg-infinity-upper-ℝ : upper-ℝ lzero
+pr1 neg-infinity-upper-ℝ _ = unit-Prop
+pr1 (pr2 neg-infinity-upper-ℝ) = intro-exists zero-ℚ star
+pr1 (pr2 (pr2 neg-infinity-upper-ℝ) q) _ =
+  intro-exists (q -ℚ one-ℚ) (le-diff-rational-ℚ⁺ q one-ℚ⁺ , star)
+pr2 (pr2 (pr2 neg-infinity-upper-ℝ) q) _ = star
+```
 
 ### The upper Dedekind reals form a set
 
