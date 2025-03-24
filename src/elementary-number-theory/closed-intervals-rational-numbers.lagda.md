@@ -49,7 +49,7 @@ module _
   where
 
   closed-interval-ℚ : subtype lzero ℚ
-  closed-interval-ℚ r = leq-ℚ-Prop p r ∧ leq-ℚ-Prop r q
+  closed-interval-ℚ r = (leq-ℚ-Prop p r) ∧ (leq-ℚ-Prop r q)
 
   is-in-closed-interval-ℚ : ℚ → UU lzero
   is-in-closed-interval-ℚ r = type-Prop (closed-interval-ℚ r)
@@ -68,7 +68,9 @@ is-in-unordered-closed-interval-ℚ p q =
 
 ```agda
 abstract
-  left-mul-closed-interval-ℚ : (p q r s : ℚ) → is-in-closed-interval-ℚ p q r →
+  left-mul-closed-interval-ℚ :
+    (p q r s : ℚ) →
+    is-in-closed-interval-ℚ p q r →
     is-in-unordered-closed-interval-ℚ (p *ℚ s) (q *ℚ s) (r *ℚ s)
   left-mul-closed-interval-ℚ p q r s (p≤r , r≤q) =
     let
@@ -118,8 +120,10 @@ abstract
               ( left-leq-right-max-ℚ (p *ℚ s) (q *ℚ s) ps≤qs)
               ( preserves-leq-right-mul-ℚ⁺ s⁺ r q r≤q))
 
+abstract
   right-mul-closed-interval-ℚ :
-    (p q r s : ℚ) → is-in-closed-interval-ℚ p q r →
+    (p q r s : ℚ) →
+    is-in-closed-interval-ℚ p q r →
     is-in-unordered-closed-interval-ℚ (s *ℚ p) (s *ℚ q) (s *ℚ r)
   right-mul-closed-interval-ℚ p q r s r∈[p,q] =
     tr
@@ -131,9 +135,11 @@ abstract
         ( commutative-mul-ℚ q s)
         ( left-mul-closed-interval-ℚ p q r s r∈[p,q]))
 
+abstract
   mul-closed-interval-closed-interval-ℚ :
     (p q r s t u : ℚ) →
-    is-in-closed-interval-ℚ p q r → is-in-closed-interval-ℚ s t u →
+    is-in-closed-interval-ℚ p q r →
+    is-in-closed-interval-ℚ s t u →
     is-in-closed-interval-ℚ
       (min-ℚ (min-ℚ (p *ℚ s) (p *ℚ t)) (min-ℚ (q *ℚ s) (q *ℚ t)))
       (max-ℚ (max-ℚ (p *ℚ s) (p *ℚ t)) (max-ℚ (q *ℚ s) (q *ℚ t)))
