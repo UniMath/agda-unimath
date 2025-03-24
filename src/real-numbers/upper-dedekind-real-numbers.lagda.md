@@ -10,6 +10,7 @@ module real-numbers.upper-dedekind-real-numbers where
 
 ```agda
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -136,6 +137,23 @@ module _
     backward-implication
       ( is-rounded-cut-upper-ℝ x q)
       ( intro-exists p (p<q , p<x))
+```
+
+### Upper Dedekind cuts are closed under the addition of positive rational numbers
+
+```agda
+module _
+  {l : Level} (x : upper-ℝ l) (p : ℚ) (d : ℚ⁺)
+  where
+
+  is-in-cut-add-rational-ℚ⁺-upper-ℝ :
+    is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x (p +ℚ rational-ℚ⁺ d)
+  is-in-cut-add-rational-ℚ⁺-upper-ℝ =
+    is-in-cut-le-ℚ-upper-ℝ
+      ( x)
+      ( p)
+      ( p +ℚ rational-ℚ⁺ d)
+      ( le-right-add-rational-ℚ⁺ p d)
 ```
 
 ### Upper Dedekind cuts are closed under inequality on the rationals
