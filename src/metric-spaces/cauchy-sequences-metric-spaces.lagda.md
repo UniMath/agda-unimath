@@ -70,14 +70,14 @@ module _
   (x : sequence-Metric-Space M)
   where
 
+  is-cauchy-modulus-sequence-Metric-Space : ℚ⁺ → ℕ → UU l2
+  is-cauchy-modulus-sequence-Metric-Space ε N =
+    (m k : ℕ) → leq-ℕ N m → leq-ℕ N k →
+    neighborhood-Metric-Space M ε (x m) (x k)
+
   is-cauchy-sequence-Metric-Space : UU l2
   is-cauchy-sequence-Metric-Space =
-    (ε : ℚ⁺) →
-    Σ
-      ( ℕ)
-      ( λ n →
-        (m k : ℕ) → leq-ℕ n m → leq-ℕ n k →
-        neighborhood-Metric-Space M ε (x m) (x k))
+    (ε : ℚ⁺) → Σ ℕ (is-cauchy-modulus-sequence-Metric-Space ε)
 
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)

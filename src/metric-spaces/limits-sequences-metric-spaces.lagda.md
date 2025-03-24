@@ -42,6 +42,13 @@ module _
   (l : type-Metric-Space M)
   where
 
+  is-modulus-limit-sequence-Metric-Space : ℚ⁺ → ℕ → UU l2
+  is-modulus-limit-sequence-Metric-Space =
+    is-modulus-limit-sequence-Premetric-Space
+      ( premetric-Metric-Space M)
+      ( u)
+      ( l)
+
   is-limit-sequence-Metric-Space : UU l2
   is-limit-sequence-Metric-Space =
     is-limit-sequence-Premetric-Space
