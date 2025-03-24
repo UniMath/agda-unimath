@@ -13,9 +13,11 @@ open import foundation.sequences
 open import foundation.universe-levels
 
 open import metric-spaces.limits-sequences-metric-spaces
+open import metric-spaces.limits-sequences-premetric-spaces
 open import metric-spaces.limits-sequences-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.sequences-metric-spaces
+open import metric-spaces.short-functions-metric-spaces
 ```
 
 </details>
@@ -120,4 +122,48 @@ module _
         ( limit-convergent-sequence-Metric-Space M u)
         ( is-limit-limit-convergent-sequence-Metric-Space M u))
       (is-limit-limit-convergent-sequence-Metric-Space M v)
+```
+
+### Short maps between metric spaces transport convergent sequences
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : short-function-Metric-Space A B)
+  (u : convergent-sequence-Metric-Space A)
+  where
+
+  seq-short-map-convergent-sequence-Metric-Space : sequence-Metric-Space B
+  seq-short-map-convergent-sequence-Metric-Space =
+    map-sequence
+      ( map-short-function-Metric-Space A B f)
+      ( seq-convergent-sequence-Metric-Space A u)
+
+  has-limit-seq-short-map-convergent-sequence-Metric-Space :
+    has-limit-sequence-Metric-Space B
+      seq-short-map-convergent-sequence-Metric-Space
+  has-limit-seq-short-map-convergent-sequence-Metric-Space =
+    ( map-short-function-Metric-Space A B f
+      ( limit-convergent-sequence-Metric-Space A u)) ,
+    ( short-map-limit-sequence-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( f)
+      ( seq-convergent-sequence-Metric-Space A u)
+      ( limit-convergent-sequence-Metric-Space A u)
+      ( is-limit-limit-convergent-sequence-Metric-Space A u))
+
+  short-map-convergent-sequence-Metric-Space :
+    convergent-sequence-Metric-Space B
+  short-map-convergent-sequence-Metric-Space =
+    seq-short-map-convergent-sequence-Metric-Space ,
+    has-limit-seq-short-map-convergent-sequence-Metric-Space
+
+  eq-limit-short-map-convergent-sequence-Metric-Space :
+    ( map-short-function-Metric-Space A B f
+      ( limit-convergent-sequence-Metric-Space A u)) ＝
+    ( limit-convergent-sequence-Metric-Space B
+      ( short-map-convergent-sequence-Metric-Space))
+  eq-limit-short-map-convergent-sequence-Metric-Space = refl
 ```
