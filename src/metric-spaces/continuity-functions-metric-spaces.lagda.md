@@ -1,4 +1,4 @@
-# Continuity of functions between metric spaces
+# Continuous functions between metric spaces
 
 ```agda
 module metric-spaces.continuity-functions-metric-spaces where
@@ -29,12 +29,12 @@ A [function](metric-spaces.functions-metric-spaces.md) `f` between
 [metric spaces](metric-spaces.metric-spaces.md) `X` and `Y` is
 {{#concept "continuous" WDID=Q170058 WD="continuous function"}} at a point `x`
 if there exists a function `m : ℚ⁺ → ℚ⁺` such that whenever `x'` is in an
-`m ε`-neighborhood of `x`, `f x'` is in an `ε`-neighborhood of `f x`. `m` is
+`m ε`-neighborhood of `x`, `f x'` is in an `ε`-neighborhood of `f x`. The function `m` is
 called the modulus of continuity of `f` at `x`.
 
-`f` is called
+The function `f` is called
 {{#concept "uniformly continuous" WD="uniformly continuous function" WDID=Q91256217}}
-if there is a single `m : ℚ⁺ → ℚ⁺` such that `f` is pointwise continuous with
+if there is a single function `m : ℚ⁺ → ℚ⁺` such that `f` is pointwise continuous with
 modulus of continuity `m` at every `x : X`.
 
 ## Definitions
