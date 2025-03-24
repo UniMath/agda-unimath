@@ -9,6 +9,7 @@ module elementary-number-theory.nonnegative-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-integers
@@ -114,6 +115,9 @@ module _
 abstract
   eq-ℚ⁰⁺ : {x y : ℚ⁰⁺} → rational-ℚ⁰⁺ x ＝ rational-ℚ⁰⁺ y → x ＝ y
   eq-ℚ⁰⁺ {x} {y} = eq-type-subtype is-nonnegative-prop-ℚ
+
+zero-ℚ⁰⁺ : ℚ⁰⁺
+zero-ℚ⁰⁺ = zero-ℚ , _
 ```
 
 ## Properties
@@ -241,4 +245,37 @@ abstract
       ( commutative-mul-ℚ q (rational-ℚ⁰⁺ p))
       ( commutative-mul-ℚ r (rational-ℚ⁰⁺ p))
       ( preserves-leq-right-mul-ℚ⁰⁺ p q r q≤r)
+```
+
+### Addition on nonnegative rational numbers
+
+```agda
+abstract
+  is-nonnegative-add-ℚ :
+    (p q : ℚ) → is-nonnegative-ℚ p → is-nonnegative-ℚ q →
+    is-nonnegative-ℚ (p +ℚ q)
+  is-nonnegative-add-ℚ p q nonneg-p nonneg-q =
+    is-nonnegative-rational-fraction-ℤ
+      ( is-nonnegative-add-fraction-ℤ
+        { fraction-ℚ p}
+        { fraction-ℚ q}
+        ( nonneg-p)
+        ( nonneg-q))
+
+add-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
+add-ℚ⁰⁺ (p , nonneg-p) (q , nonneg-q) =
+  p +ℚ q , is-nonnegative-add-ℚ p q nonneg-p nonneg-q
+
+infixl 35 _+ℚ⁰⁺_
+_+ℚ⁰⁺_ = add-ℚ⁰⁺
+```
+
+### Inequality on nonnegative rational numbers
+
+```agda
+leq-ℚ⁰⁺-Prop : ℚ⁰⁺ → ℚ⁰⁺ → Prop lzero
+leq-ℚ⁰⁺-Prop (p , _) (q , _) = leq-ℚ-Prop p q
+
+leq-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → UU lzero
+leq-ℚ⁰⁺ (p , _) (q , _) = leq-ℚ p q
 ```

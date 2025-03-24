@@ -12,8 +12,10 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.dependent-pair-types
 open import foundation.coproduct-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
 
 open import order-theory.decidable-total-orders
@@ -105,6 +107,21 @@ le-max-le-both-ℚ z x y x<z y<z with decide-le-leq-ℚ x y
     ( λ w → le-ℚ w z)
     ( right-leq-left-max-Decidable-Total-Order ℚ-Decidable-Total-Order x y y≤x)
     ( x<z)
+```
+
+### If both `x` and `y` are less than or equal to `z`, so is their maximum
+
+```agda
+abstract
+  leq-max-leq-both-ℚ : (z x y : ℚ) → leq-ℚ x z → leq-ℚ y z → leq-ℚ (max-ℚ x y) z
+  leq-max-leq-both-ℚ z x y x≤z y≤z =
+    forward-implication
+      ( max-is-least-binary-upper-bound-Decidable-Total-Order
+        ( ℚ-Decidable-Total-Order)
+        ( x)
+        ( y)
+        ( z))
+        ( x≤z , y≤z)
 ```
 
 ### If `a ≤ b` and `c ≤ d`, then `max a c ≤ max b d`
