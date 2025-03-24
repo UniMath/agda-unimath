@@ -40,15 +40,6 @@ of a family of elements `a : I → P` in a large poset `P` is an element `x` in
 `P` such that the logical equivalence
 
 ```text
-  is-binary-upper-bound-Large-Poset P a b y ↔ (x ≤ y)
-```
-
-holds for every `y` in `P`.
-
-Similarly, a least upper bound of a family of elements `a : I → P` in a large
-poset `P` is an element `x` in `P` such that the logical equivalence
-
-```text
   is-upper-bound-family-of-elements-Large-Poset P a y ↔ (x ≤ y)
 ```
 
