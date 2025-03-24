@@ -14,8 +14,10 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import order-theory.decidable-posets
@@ -473,4 +475,34 @@ module _
     with is-leq-or-strict-greater-Decidable-Total-Order T x y
   ... | inl x≤y = antisymmetric-leq-Decidable-Total-Order T y x H x≤y
   ... | inr y<x = refl
+```
+
+### If `a ≤ b` and `c ≤ d`, then `min a c ≤ min b d`
+
+```agda
+  min-leq-leq-Decidable-Total-Order :
+    (a b c d : type-Decidable-Total-Order T) →
+    leq-Decidable-Total-Order T a b → leq-Decidable-Total-Order T c d →
+    leq-Decidable-Total-Order
+      ( T)
+      ( min-Decidable-Total-Order T a c)
+      ( min-Decidable-Total-Order T b d)
+  min-leq-leq-Decidable-Total-Order =
+    meet-leq-leq-Order-Theoretic-Meet-Semilattice
+      ( order-theoretic-meet-semilattice-Decidable-Total-Order)
+```
+
+### If `a ≤ b` and `c ≤ d`, then `max a c ≤ max b d`
+
+```agda
+  max-leq-leq-Decidable-Total-Order :
+    (a b c d : type-Decidable-Total-Order T) →
+    leq-Decidable-Total-Order T a b → leq-Decidable-Total-Order T c d →
+    leq-Decidable-Total-Order
+      ( T)
+      ( max-Decidable-Total-Order T a c)
+      ( max-Decidable-Total-Order T b d)
+  max-leq-leq-Decidable-Total-Order =
+    join-leq-leq-Order-Theoretic-Join-Semilattice
+      ( order-theoretic-join-semilattice-Decidable-Total-Order)
 ```

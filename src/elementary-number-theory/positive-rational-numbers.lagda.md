@@ -467,6 +467,19 @@ is-prop-le-ℚ⁺ : (x y : ℚ⁺) → is-prop (le-ℚ⁺ x y)
 is-prop-le-ℚ⁺ x y = is-prop-type-Prop (le-prop-ℚ⁺ x y)
 ```
 
+### The inequality on positive rational numbers
+
+```agda
+leq-prop-ℚ⁺ : ℚ⁺ → ℚ⁺ → Prop lzero
+leq-prop-ℚ⁺ x y = leq-ℚ-Prop (rational-ℚ⁺ x) (rational-ℚ⁺ y)
+
+leq-ℚ⁺ : ℚ⁺ → ℚ⁺ → UU lzero
+leq-ℚ⁺ x y = type-Prop (leq-prop-ℚ⁺ x y)
+
+is-prop-leq-ℚ⁺ : (x y : ℚ⁺) → is-prop (leq-ℚ⁺ x y)
+is-prop-leq-ℚ⁺ x y = is-prop-type-Prop (leq-prop-ℚ⁺ x y)
+```
+
 ### The sum of two positive rational numbers is greater than each of them
 
 ```agda
@@ -684,10 +697,10 @@ module _
 
 ```agda
 abstract
-  double-le-ℚ⁺ :
+  bound-double-le-ℚ⁺ :
     (p : ℚ⁺) →
-    exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
-  double-le-ℚ⁺ p = unit-trunc-Prop dependent-pair-result
+    Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
+  bound-double-le-ℚ⁺ p = dependent-pair-result
     where
     q : ℚ⁺
     q = left-summand-split-ℚ⁺ p
@@ -709,6 +722,11 @@ abstract
           { rational-ℚ⁺ r}
           ( le-left-min-ℚ⁺ q r)
           ( le-right-min-ℚ⁺ q r))
+
+  double-le-ℚ⁺ :
+    (p : ℚ⁺) →
+    exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
+  double-le-ℚ⁺ p = unit-trunc-Prop (bound-double-le-ℚ⁺ p)
 ```
 
 ### Addition with a positive rational number is an increasing map
