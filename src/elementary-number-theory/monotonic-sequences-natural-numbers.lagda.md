@@ -28,13 +28,13 @@ open import foundation.universe-levels
 Monotic sequences of natural numbers are sequences `f : ℕ → ℕ` that preserve or
 reverse (strict) inequality of natural numbers:
 
-- {{#concept "increasing" Disambiguation="sequences of natural numbers" Agda=is-increasing-seqeunce-ℕ}}
+- {{#concept "increasing" Disambiguation="sequences of natural numbers" Agda=is-increasing-sequence-ℕ}}
   sequences;
-- {{#concept "strictly increasing" Disambiguation="sequences of natural numbers" Agda=is-strictly-increasing-seqeunce-ℕ}}
+- {{#concept "strictly increasing" Disambiguation="sequences of natural numbers" Agda=is-strictly-increasing-sequence-ℕ}}
   sequences;
-- {{#concept "decreasing" Disambiguation="sequences of natural numbers" Agda=is-decreasing-seqeunce-ℕ}}
+- {{#concept "decreasing" Disambiguation="sequences of natural numbers" Agda=is-decreasing-sequence-ℕ}}
   sequences;
-- {{#concept "strictly decreasing" Disambiguation="sequences of natural numbers" Agda=is-strictly-decreasing-seqeunce-ℕ}}
+- {{#concept "strictly decreasing" Disambiguation="sequences of natural numbers" Agda=is-strictly-decreasing-sequence-ℕ}}
   sequences.
 
 There exist no strictly decreasing sequence of natural numbers and strictly
