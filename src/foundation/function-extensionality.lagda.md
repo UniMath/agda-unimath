@@ -3,10 +3,7 @@
 ```agda
 open import foundation.function-extensionality-axiom
 
-module
-  foundation.function-extensionality
-  (funext : function-extensionality)
-  where
+module foundation.function-extensionality where
 ```
 
 <details><summary>Imports</summary>
@@ -15,7 +12,6 @@ module
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.evaluation-functions
 open import foundation.implicit-function-types
 open import foundation.universe-levels
 
@@ -82,23 +78,23 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
   where
 
-  eq-htpy : f ~ g → f ＝ g
-  eq-htpy = map-inv-is-equiv (funext f g)
+  postulate
+    eq-htpy : f ~ g → f ＝ g
 
-  opaque
     is-section-eq-htpy : is-section htpy-eq eq-htpy
-    is-section-eq-htpy = is-section-map-inv-is-equiv (funext f g)
 
-    is-retraction-eq-htpy : is-retraction htpy-eq eq-htpy
-    is-retraction-eq-htpy = is-retraction-map-inv-is-equiv (funext f g)
+    is-retraction-eq-htpy' : is-retraction htpy-eq eq-htpy
 
-    coh-eq-htpy :
+    coh-eq-htpy' :
       coherence-is-coherently-invertible
         ( htpy-eq)
         ( eq-htpy)
         ( is-section-eq-htpy)
-        ( is-retraction-eq-htpy)
-    coh-eq-htpy = coherence-map-inv-is-equiv (funext f g)
+        ( is-retraction-eq-htpy')
+
+funext : function-extensionality
+funext f g =
+  is-equiv-is-invertible eq-htpy is-section-eq-htpy is-retraction-eq-htpy'
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
@@ -111,7 +107,12 @@ module _
   is-equiv-eq-htpy :
     (f g : (x : A) → B x) → is-equiv (eq-htpy {f = f} {g})
   is-equiv-eq-htpy f g =
-    is-equiv-is-invertible htpy-eq is-retraction-eq-htpy is-section-eq-htpy
+    is-equiv-is-invertible htpy-eq is-retraction-eq-htpy' is-section-eq-htpy
+
+  abstract
+    is-retraction-eq-htpy :
+      {f g : (x : A) → B x} → is-retraction (htpy-eq {f = f} {g}) eq-htpy
+    is-retraction-eq-htpy {f} {g} = is-retraction-map-inv-is-equiv (funext f g)
 
   eq-htpy-refl-htpy :
     (f : (x : A) → B x) → eq-htpy (refl-htpy {f = f}) ＝ refl
