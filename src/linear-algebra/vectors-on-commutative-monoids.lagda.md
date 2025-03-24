@@ -96,7 +96,7 @@ module _
     snoc-functional-vec-Monoid (monoid-Commutative-Monoid M)
 ```
 
-### Unit vector on a commutative monoid
+### Vectors of the multiplicative unit of a commutative monoid
 
 #### The unit listed vector
 
@@ -105,20 +105,20 @@ module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  unit-vec-Commutative-Monoid : {n : ℕ} → vec-Commutative-Monoid M n
-  unit-vec-Commutative-Monoid = constant-vec (unit-Commutative-Monoid M)
+  one-vec-Commutative-Monoid : {n : ℕ} → vec-Commutative-Monoid M n
+  one-vec-Commutative-Monoid = constant-vec (unit-Commutative-Monoid M)
 ```
 
-#### The unit functional vector
+#### The functional vector of the multiplicative unit
 
 ```agda
 module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  unit-functional-vec-Commutative-Monoid :
+  one-functional-vec-Commutative-Monoid :
     (n : ℕ) → functional-vec-Commutative-Monoid M n
-  unit-functional-vec-Commutative-Monoid n i = unit-Commutative-Monoid M
+  one-functional-vec-Commutative-Monoid n i = unit-Commutative-Monoid M
 ```
 
 ### Pointwise addition of vectors on a commutative monoid
@@ -149,13 +149,13 @@ module _
 
   left-unit-law-mul-vec-Commutative-Monoid :
     {n : ℕ} (v : vec-Commutative-Monoid M n) →
-    mul-vec-Commutative-Monoid (unit-vec-Commutative-Monoid M) v ＝ v
+    mul-vec-Commutative-Monoid (one-vec-Commutative-Monoid M) v ＝ v
   left-unit-law-mul-vec-Commutative-Monoid =
     left-unit-law-mul-vec-Monoid (monoid-Commutative-Monoid M)
 
   right-unit-law-mul-vec-Commutative-Monoid :
     {n : ℕ} (v : vec-Commutative-Monoid M n) →
-    mul-vec-Commutative-Monoid v (unit-vec-Commutative-Monoid M) ＝ v
+    mul-vec-Commutative-Monoid v (one-vec-Commutative-Monoid M) ＝ v
   right-unit-law-mul-vec-Commutative-Monoid =
     right-unit-law-mul-vec-Monoid (monoid-Commutative-Monoid M)
 
@@ -207,14 +207,14 @@ module _
   left-unit-law-mul-functional-vec-Commutative-Monoid :
     (n : ℕ) (v : functional-vec-Commutative-Monoid M n) →
     mul-functional-vec-Commutative-Monoid n
-      ( unit-functional-vec-Commutative-Monoid M n) v ＝ v
+      ( one-functional-vec-Commutative-Monoid M n) v ＝ v
   left-unit-law-mul-functional-vec-Commutative-Monoid =
     left-unit-law-mul-functional-vec-Monoid (monoid-Commutative-Monoid M)
 
   right-unit-law-mul-functional-vec-Commutative-Monoid :
     (n : ℕ) (v : functional-vec-Commutative-Monoid M n) →
     mul-functional-vec-Commutative-Monoid n v
-      ( unit-functional-vec-Commutative-Monoid M n) ＝ v
+      ( one-functional-vec-Commutative-Monoid M n) ＝ v
   right-unit-law-mul-functional-vec-Commutative-Monoid =
     right-unit-law-mul-functional-vec-Monoid (monoid-Commutative-Monoid M)
 

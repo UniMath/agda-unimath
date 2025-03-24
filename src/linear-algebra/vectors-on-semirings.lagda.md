@@ -97,7 +97,7 @@ module _
 
   zero-vec-Semiring : {n : ℕ} → vec-Semiring R n
   zero-vec-Semiring =
-    unit-vec-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    one-vec-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 #### The zero functional vector

@@ -92,8 +92,8 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  mul-unit-vec-Monoid : {n : ℕ} → vec-Monoid M n
-  mul-unit-vec-Monoid = constant-vec (unit-Monoid M)
+  one-vec-Monoid : {n : ℕ} → vec-Monoid M n
+  one-vec-Monoid = constant-vec (unit-Monoid M)
 ```
 
 #### The functional vector of the multiplicative unit
@@ -103,8 +103,8 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  mul-unit-functional-vec-Monoid : (n : ℕ) → functional-vec-Monoid M n
-  mul-unit-functional-vec-Monoid n i = unit-Monoid M
+  one-functional-vec-Monoid : (n : ℕ) → functional-vec-Monoid M n
+  one-functional-vec-Monoid n i = unit-Monoid M
 ```
 
 ### Pointwise multiplication of vectors on a monoid
@@ -137,7 +137,7 @@ module _
 
   left-unit-law-mul-vec-Monoid :
     {n : ℕ} (v : vec-Monoid M n) →
-    mul-vec-Monoid (mul-unit-vec-Monoid M) v ＝ v
+    mul-vec-Monoid (one-vec-Monoid M) v ＝ v
   left-unit-law-mul-vec-Monoid empty-vec = refl
   left-unit-law-mul-vec-Monoid (x ∷ v) =
     ap-binary _∷_
@@ -146,7 +146,7 @@ module _
 
   right-unit-law-mul-vec-Monoid :
     {n : ℕ} (v : vec-Monoid M n) →
-    mul-vec-Monoid v (mul-unit-vec-Monoid M) ＝ v
+    mul-vec-Monoid v (one-vec-Monoid M) ＝ v
   right-unit-law-mul-vec-Monoid empty-vec = refl
   right-unit-law-mul-vec-Monoid (x ∷ v) =
     ap-binary _∷_
@@ -155,7 +155,7 @@ module _
 
   vec-Monoid-Monoid : ℕ → Monoid l
   pr1 (vec-Monoid-Monoid n) = vec-Monoid-Semigroup n
-  pr1 (pr2 (vec-Monoid-Monoid n)) = mul-unit-vec-Monoid M
+  pr1 (pr2 (vec-Monoid-Monoid n)) = one-vec-Monoid M
   pr1 (pr2 (pr2 (vec-Monoid-Monoid n))) = left-unit-law-mul-vec-Monoid
   pr2 (pr2 (pr2 (vec-Monoid-Monoid n))) = right-unit-law-mul-vec-Monoid
 ```
@@ -188,13 +188,13 @@ module _
 
   left-unit-law-mul-functional-vec-Monoid :
     (n : ℕ) (v : functional-vec-Monoid M n) →
-    mul-functional-vec-Monoid n (mul-unit-functional-vec-Monoid M n) v ＝ v
+    mul-functional-vec-Monoid n (one-functional-vec-Monoid M n) v ＝ v
   left-unit-law-mul-functional-vec-Monoid n v =
     eq-htpy (λ i → left-unit-law-mul-Monoid M (v i))
 
   right-unit-law-mul-functional-vec-Monoid :
     (n : ℕ) (v : functional-vec-Monoid M n) →
-    mul-functional-vec-Monoid n v (mul-unit-functional-vec-Monoid M n) ＝ v
+    mul-functional-vec-Monoid n v (one-functional-vec-Monoid M n) ＝ v
   right-unit-law-mul-functional-vec-Monoid n v =
     eq-htpy (λ i → right-unit-law-mul-Monoid M (v i))
 
@@ -202,7 +202,7 @@ module _
   pr1 (functional-vec-Monoid-Monoid n) =
     functional-vec-Monoid-Semigroup n
   pr1 (pr2 (functional-vec-Monoid-Monoid n)) =
-    mul-unit-functional-vec-Monoid M n
+    one-functional-vec-Monoid M n
   pr1 (pr2 (pr2 (functional-vec-Monoid-Monoid n))) =
     left-unit-law-mul-functional-vec-Monoid n
   pr2 (pr2 (pr2 (functional-vec-Monoid-Monoid n))) =
