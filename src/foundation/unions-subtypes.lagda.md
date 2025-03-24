@@ -140,7 +140,7 @@ module _
     type-Prop (A x) + type-Prop (B x) , is-prop-coproduct-disjoint-prop x
 
   iff-disjunction-coproduct-disjoint-subtype :
-    (x : X) → type-iff-Prop (A x ∨ B x) (subtype-coproduct-disjoint-subtype x)
+    (x : X) → type-iff-Prop ((A x) ∨ (B x)) (subtype-coproduct-disjoint-subtype x)
   pr1 (iff-disjunction-coproduct-disjoint-subtype x) =
     elim-disjunction (subtype-coproduct-disjoint-subtype x) inl inr
   pr2 (iff-disjunction-coproduct-disjoint-subtype x) =
@@ -153,7 +153,7 @@ module _
     equiv-tot
       ( λ x →
         equiv-iff'
-          ( A x ∨ B x)
+          ( (A x) ∨ (B x))
           ( subtype-coproduct-disjoint-subtype x)
           ( iff-disjunction-coproduct-disjoint-subtype x))
 
