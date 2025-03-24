@@ -28,7 +28,6 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.unital-binary-operations

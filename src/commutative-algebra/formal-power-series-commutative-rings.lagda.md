@@ -10,7 +10,6 @@ module commutative-algebra.formal-power-series-commutative-rings where
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.commutative-semirings
 open import commutative-algebra.formal-power-series-commutative-semirings
-open import commutative-algebra.sums-commutative-rings
 
 open import elementary-number-theory.natural-numbers
 
