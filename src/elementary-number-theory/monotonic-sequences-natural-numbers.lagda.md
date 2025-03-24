@@ -112,7 +112,7 @@ module _
     is-prop-type-Prop is-decreasing-sequence-prop-ℕ
 ```
 
-### Stritcly decreasing sequences of natural numbers
+### Strictly decreasing sequences of natural numbers
 
 ```agda
 module _
