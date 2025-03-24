@@ -10,6 +10,7 @@ module real-numbers.lower-dedekind-real-numbers where
 
 ```agda
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -139,6 +140,19 @@ module _
     backward-implication
       ( is-rounded-cut-lower-ℝ x p)
       ( intro-exists q (p<q , q<x))
+```
+
+### Lower Dedekind cuts are closed under subtraction by positive rational numbers
+
+```agda
+module _
+  {l : Level} (x : lower-ℝ l) (p : ℚ) (d : ℚ⁺)
+  where
+
+  is-in-cut-diff-rational-ℚ⁺-lower-ℝ :
+    is-in-cut-lower-ℝ x p → is-in-cut-lower-ℝ x (p -ℚ rational-ℚ⁺ d)
+  is-in-cut-diff-rational-ℚ⁺-lower-ℝ =
+    is-in-cut-le-ℚ-lower-ℝ x (p -ℚ rational-ℚ⁺ d) p (le-diff-rational-ℚ⁺ p d)
 ```
 
 ### Lower Dedekind cuts are closed under inequality on the rationals
