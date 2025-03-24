@@ -109,7 +109,10 @@ abstract
   ... | inr y≤x =
     inv-tr
       ( λ w → le-ℚ w z)
-      ( right-leq-left-max-Decidable-Total-Order ℚ-Decidable-Total-Order x y y≤x)
+      ( right-leq-left-max-Decidable-Total-Order ℚ-Decidable-Total-Order
+        ( x)
+        ( y)
+        ( y≤x))
       ( x<z)
 ```
 
