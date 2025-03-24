@@ -24,10 +24,11 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
-open import foundation.raising-universe-levels
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import graph-theory.directed-graphs
 open import graph-theory.equivalences-directed-graphs

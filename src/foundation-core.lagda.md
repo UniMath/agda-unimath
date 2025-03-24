@@ -51,6 +51,7 @@ open import foundation-core.precomposition-functions public
 open import foundation-core.propositional-maps public
 open import foundation-core.propositions public
 open import foundation-core.pullbacks public
+open import foundation-core.raising-universe-levels public
 open import foundation-core.retractions public
 open import foundation-core.retracts-of-types public
 open import foundation-core.sections public

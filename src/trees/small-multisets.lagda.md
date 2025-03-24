@@ -17,12 +17,13 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.small-types
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import trees.multisets
 open import trees.w-types

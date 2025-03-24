@@ -23,13 +23,14 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.small-types
 open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.surjective-maps
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import order-theory.least-upper-bounds-posets
 open import order-theory.order-preserving-maps-posets

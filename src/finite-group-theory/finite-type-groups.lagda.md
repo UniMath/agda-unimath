@@ -22,10 +22,11 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.truncated-types
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import group-theory.concrete-groups
 open import group-theory.groups

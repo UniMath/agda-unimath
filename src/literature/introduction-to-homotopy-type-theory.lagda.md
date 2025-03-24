@@ -787,7 +787,7 @@ open import foundation.universe-levels using
 **Remark 6.2.4.** Inclusions into the successor universe.
 
 ```agda
-open import foundation.raising-universe-levels using
+open import foundation-core.raising-universe-levels using
   ( raise)
 
 _ : (l : Level) → UU l → UU (lsuc l)

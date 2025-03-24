@@ -27,7 +27,6 @@ open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.isomorphisms-of-sets
-open import foundation.raising-universe-levels
 open import foundation.raising-universe-levels-unit-type
 open import foundation.retractions
 open import foundation.sections
@@ -38,6 +37,7 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.raising-universe-levels
 ```
 
 </details>

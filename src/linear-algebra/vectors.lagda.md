@@ -23,7 +23,6 @@ open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.raising-universe-levels
 open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.transport-along-identifications
@@ -32,6 +31,8 @@ open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
+
+open import foundation-core.raising-universe-levels
 
 open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types

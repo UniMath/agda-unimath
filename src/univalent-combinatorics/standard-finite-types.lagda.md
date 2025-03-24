@@ -33,12 +33,13 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
 open import foundation.preunivalent-type-families
-open import foundation.raising-universe-levels
 open import foundation.retractions
 open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import structured-types.types-equipped-with-endomorphisms
 ```

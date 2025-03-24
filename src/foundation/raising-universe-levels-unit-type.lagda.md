@@ -9,7 +9,6 @@ module foundation.raising-universe-levels-unit-type where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.raising-universe-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -18,6 +17,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.raising-universe-levels
 open import foundation-core.retractions
 open import foundation-core.sets
 open import foundation-core.truncated-types

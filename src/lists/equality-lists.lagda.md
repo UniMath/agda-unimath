@@ -23,7 +23,6 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.negation
-open import foundation.raising-universe-levels
 open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.torsorial-type-families
@@ -35,6 +34,7 @@ open import foundation.universe-levels
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.maybe
+open import foundation-core.raising-universe-levels
 
 open import lists.lists
 ```

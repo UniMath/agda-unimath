@@ -32,7 +32,6 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.retracts-of-types
 open import foundation.sets
 open import foundation.shifting-sequences
@@ -43,6 +42,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
+open import foundation-core.raising-universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```

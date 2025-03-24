@@ -27,10 +27,11 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.initial-pointed-type-equipped-with-automorphism

@@ -15,7 +15,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.postcomposition-functions
-open import foundation.raising-universe-levels
 open import foundation.raising-universe-levels-unit-type
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
@@ -32,6 +31,7 @@ open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.raising-universe-levels
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
 ```
