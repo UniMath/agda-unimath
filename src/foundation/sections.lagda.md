@@ -1,7 +1,11 @@
 # Sections
 
 ```agda
-module foundation.sections where
+open import foundation.function-extensionality-axiom
+
+module foundation.sections
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.sections public
 ```
@@ -10,10 +14,10 @@ open import foundation-core.sections public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-triangles-of-homotopies
+open import foundation.commuting-triangles-of-homotopies funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.function-extensionality
+open import foundation.dependent-products-contractible-types funext
+open import foundation.function-extensionality funext
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

@@ -1,7 +1,11 @@
 # Universal property of contractible types
 
 ```agda
-module foundation.universal-property-contractible-types where
+open import foundation.function-extensionality-axiom
+
+module foundation.universal-property-contractible-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,8 +13,7 @@ module foundation.universal-property-contractible-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
+open import foundation.function-extensionality funext
 open import foundation.singleton-induction
 open import foundation.universe-levels
 

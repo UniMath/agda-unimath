@@ -1,14 +1,18 @@
 # Type arithmetic with the unit type
 
 ```agda
-module foundation.type-arithmetic-unit-type where
+open import foundation.function-extensionality-axiom
+
+module foundation.type-arithmetic-unit-type
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-contractible-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 

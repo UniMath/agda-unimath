@@ -1,17 +1,21 @@
 # Composition algebra
 
 ```agda
-module foundation.composition-algebra where
+open import foundation.function-extensionality-axiom
+
+module foundation.composition-algebra
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.function-extensionality
-open import foundation.homotopy-induction
-open import foundation.postcomposition-functions
-open import foundation.precomposition-functions
+open import foundation.function-extensionality funext
+open import foundation.homotopy-induction funext
+open import foundation.postcomposition-functions funext
+open import foundation.precomposition-functions funext
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 open import foundation.whiskering-homotopies-composition

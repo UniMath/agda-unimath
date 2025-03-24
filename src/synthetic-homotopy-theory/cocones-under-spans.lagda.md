@@ -1,7 +1,11 @@
 # Cocones under spans
 
 ```agda
-module synthetic-homotopy-theory.cocones-under-spans where
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.cocones-under-spans
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,17 +13,17 @@ module synthetic-homotopy-theory.cocones-under-spans where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.function-extensionality funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.morphisms-arrows
-open import foundation.span-diagrams
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.morphisms-arrows funext
+open import foundation.span-diagrams funext
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences

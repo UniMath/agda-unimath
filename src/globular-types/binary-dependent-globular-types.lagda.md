@@ -2,8 +2,11 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation.function-extensionality-axiom
 
-module globular-types.binary-dependent-globular-types where
+module globular-types.binary-dependent-globular-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,7 +15,7 @@ module globular-types.binary-dependent-globular-types where
 open import foundation.universe-levels
 
 open import globular-types.globular-types
-open import globular-types.points-globular-types
+open import globular-types.points-globular-types funext
 ```
 
 </details>

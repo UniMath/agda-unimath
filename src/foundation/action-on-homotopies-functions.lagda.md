@@ -1,17 +1,21 @@
 # The action on homotopies of functions
 
 ```agda
-module foundation.action-on-homotopies-functions where
+open import foundation.function-extensionality-axiom
+
+module foundation.action-on-homotopies-functions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-higher-identifications-functions
+open import foundation.action-on-higher-identifications-functions funext
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopy-induction
+open import foundation.function-extensionality funext
+open import foundation.homotopy-induction funext
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

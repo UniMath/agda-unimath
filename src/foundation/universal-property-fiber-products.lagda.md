@@ -1,16 +1,20 @@
 # The universal property of fiber products
 
 ```agda
-module foundation.universal-property-fiber-products where
+open import foundation.function-extensionality-axiom
+
+module foundation.universal-property-fiber-products
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospan-diagrams
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.standard-pullbacks
+open import foundation.standard-pullbacks funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -21,8 +25,8 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.pullbacks
-open import foundation-core.universal-property-pullbacks
+open import foundation-core.pullbacks funext
+open import foundation-core.universal-property-pullbacks funext
 ```
 
 </details>

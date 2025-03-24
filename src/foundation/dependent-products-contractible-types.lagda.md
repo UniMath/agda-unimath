@@ -1,14 +1,18 @@
 # Dependent products of contractible types
 
 ```agda
-module foundation.dependent-products-contractible-types where
+open import foundation.function-extensionality-axiom
+
+module foundation.dependent-products-contractible-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.function-extensionality funext
 open import foundation.implicit-function-types
 open import foundation.universe-levels
 

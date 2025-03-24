@@ -1,7 +1,11 @@
 # Dependent products truncated types
 
 ```agda
-module foundation.dependent-products-truncated-types where
+open import foundation.function-extensionality-axiom
+
+module foundation.dependent-products-truncated-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,10 +14,9 @@ module foundation.dependent-products-truncated-types where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-contractible-types funext
 open import foundation.equality-cartesian-product-types
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
+open import foundation.function-extensionality funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

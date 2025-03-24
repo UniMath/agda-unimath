@@ -1,14 +1,18 @@
 # The universal property of the maybe monad
 
 ```agda
-module foundation.universal-property-maybe where
+open import foundation.function-extensionality-axiom
+
+module foundation.universal-property-maybe
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.function-extensionality funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

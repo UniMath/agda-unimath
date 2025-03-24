@@ -1,7 +1,11 @@
 # Commuting squares of identifications
 
 ```agda
-module foundation.commuting-squares-of-identifications where
+open import foundation.function-extensionality-axiom
+
+module foundation.commuting-squares-of-identifications
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.commuting-squares-of-identifications public
 ```
@@ -10,7 +14,7 @@ open import foundation-core.commuting-squares-of-identifications public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.path-algebra
+open import foundation.path-algebra funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

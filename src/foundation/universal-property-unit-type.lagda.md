@@ -1,7 +1,11 @@
 # The universal property of the unit type
 
 ```agda
-module foundation.universal-property-unit-type where
+open import foundation.function-extensionality-axiom
+
+module foundation.universal-property-unit-type
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,8 +13,8 @@ module foundation.universal-property-unit-type where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.unit-type
-open import foundation.universal-property-contractible-types
-open import foundation.universal-property-equivalences
+open import foundation.universal-property-contractible-types funext
+open import foundation.universal-property-equivalences funext
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps

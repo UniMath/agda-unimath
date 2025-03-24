@@ -1,7 +1,11 @@
 # Finitely coherently invertible maps
 
 ```agda
-module foundation.finitely-coherently-invertible-maps where
+open import foundation.function-extensionality-axiom
+
+module foundation.finitely-coherently-invertible-maps
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,7 +13,7 @@ module foundation.finitely-coherently-invertible-maps where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

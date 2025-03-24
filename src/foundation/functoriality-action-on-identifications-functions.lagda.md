@@ -1,26 +1,30 @@
 # Functoriality of the action on identifications of functions
 
 ```agda
-module foundation.functoriality-action-on-identifications-functions where
+open import foundation.function-extensionality-axiom
+
+module foundation.functoriality-action-on-identifications-functions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-higher-identifications-functions
+open import foundation.action-on-higher-identifications-functions funext
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-triangles-of-morphisms-arrows
-open import foundation.cones-over-cospan-diagrams
+open import foundation.commuting-triangles-of-morphisms-arrows funext
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.homotopies-morphisms-arrows
-open import foundation.morphisms-arrows
-open import foundation.path-algebra
+open import foundation.homotopies-morphisms-arrows funext
+open import foundation.morphisms-arrows funext
+open import foundation.path-algebra funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-homotopies
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types

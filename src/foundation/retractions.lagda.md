@@ -1,7 +1,11 @@
 # Retractions
 
 ```agda
-module foundation.retractions where
+open import foundation.function-extensionality-axiom
+
+module foundation.retractions
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.retractions public
 ```
@@ -10,9 +14,9 @@ open import foundation-core.retractions public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coslice
+open import foundation.coslice funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types
+open import foundation.dependent-products-truncated-types funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

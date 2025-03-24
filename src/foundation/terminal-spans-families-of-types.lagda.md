@@ -1,13 +1,17 @@
 # Terminal spans on families of types
 
 ```agda
-module foundation.terminal-spans-families-of-types where
+open import foundation.function-extensionality-axiom
+
+module foundation.terminal-spans-families-of-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.morphisms-spans-families-of-types
+open import foundation.morphisms-spans-families-of-types funext
 open import foundation.spans-families-of-types
 open import foundation.universe-levels
 

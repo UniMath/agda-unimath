@@ -1,13 +1,17 @@
 # Commuting tetrahedra of homotopies
 
 ```agda
-module foundation.commuting-tetrahedra-of-homotopies where
+open import foundation.function-extensionality-axiom
+
+module foundation.commuting-tetrahedra-of-homotopies
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-triangles-of-homotopies
+open import foundation.commuting-triangles-of-homotopies funext
 open import foundation.universe-levels
 
 open import foundation-core.homotopies

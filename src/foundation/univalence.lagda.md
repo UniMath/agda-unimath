@@ -1,7 +1,11 @@
 # The univalence axiom
 
 ```agda
-module foundation.univalence where
+open import foundation.function-extensionality-axiom
+
+module foundation.univalence
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.univalence public
 ```
@@ -11,8 +15,8 @@ open import foundation-core.univalence public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.equivalences
+open import foundation.equality-dependent-function-types funext
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
