@@ -1,17 +1,25 @@
 # Decidability of dependent function types
 
 ```agda
-module foundation.decidable-dependent-function-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.decidable-dependent-function-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.uniformly-decidable-type-families
-open import foundation.universal-property-coproduct-types
-open import foundation.universal-property-maybe
+open import foundation.decidable-types funext univalence truncations
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.uniformly-decidable-type-families funext univalence truncations
+open import foundation.universal-property-coproduct-types funext
+open import foundation.universal-property-maybe funext
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types

@@ -1,7 +1,13 @@
 # Equivalence induction
 
 ```agda
-module foundation.equivalence-induction where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.equivalence-induction
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,9 +15,9 @@ module foundation.equivalence-induction where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-systems
-open import foundation.subuniverses
-open import foundation.univalence
-open import foundation.universal-property-identity-systems
+open import foundation.subuniverses funext univalence
+open import foundation.univalence funext univalence
+open import foundation.universal-property-identity-systems funext
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps

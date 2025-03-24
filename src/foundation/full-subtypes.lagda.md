@@ -1,15 +1,23 @@
 # Full subtypes of types
 
 ```agda
-module foundation.full-subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.full-subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-subtypes
+open import foundation.decidable-subtypes funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
+open import foundation.dependent-products-propositions funext
 open import foundation.raising-universe-levels-unit-type
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
@@ -17,7 +25,7 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.propositions
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 open import foundation-core.transport-along-identifications
 ```
 

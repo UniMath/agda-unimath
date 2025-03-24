@@ -1,16 +1,22 @@
 # Species of types
 
 ```agda
-module species.species-of-types where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.species-of-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.equivalences
+open import foundation.cartesian-product-types funext univalence
+open import foundation.equivalences funext
 open import foundation.transport-along-identifications
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 ```
 

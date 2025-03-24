@@ -1,25 +1,33 @@
 # Commuting squares of pointed maps
 
 ```agda
-module structured-types.commuting-squares-of-pointed-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.commuting-squares-of-pointed-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-identifications
-open import foundation.commuting-squares-of-maps
+open import foundation.commuting-squares-of-identifications funext
+open import foundation.commuting-squares-of-maps funext univalence
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
+open import structured-types.pointed-homotopies funext univalence truncations
+open import structured-types.pointed-maps funext univalence truncations
 open import structured-types.pointed-types
-open import structured-types.whiskering-pointed-homotopies-composition
+open import structured-types.whiskering-pointed-homotopies-composition funext univalence truncations
 ```
 
 </details>

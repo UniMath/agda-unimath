@@ -1,31 +1,39 @@
 # Diaconescu's theorem
 
 ```agda
-module foundation.diaconescus-theorem where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.diaconescus-theorem
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.axiom-of-choice
-open import foundation.booleans
-open import foundation.decidable-propositions
-open import foundation.decidable-types
+open import foundation.axiom-of-choice funext univalence truncations
+open import foundation.booleans funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.law-of-excluded-middle
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.law-of-excluded-middle funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
 
-open import synthetic-homotopy-theory.suspensions-of-propositions
-open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.suspensions-of-propositions funext univalence truncations
+open import synthetic-homotopy-theory.suspensions-of-types funext univalence truncations
 ```
 
 </details>

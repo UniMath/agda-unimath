@@ -1,21 +1,29 @@
 # Catalan numbers
 
 ```agda
-module elementary-number-theory.catalan-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.catalan-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.binomial-coefficients
-open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.binomial-coefficients funext univalence truncations
+open import elementary-number-theory.distance-natural-numbers funext univalence truncations
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
-open import elementary-number-theory.strong-induction-natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations
+open import elementary-number-theory.strong-induction-natural-numbers funext univalence truncations
+open import elementary-number-theory.sums-of-natural-numbers funext univalence truncations
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

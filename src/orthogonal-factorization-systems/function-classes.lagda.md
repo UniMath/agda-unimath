@@ -1,29 +1,37 @@
 # Function classes
 
 ```agda
-module orthogonal-factorization-systems.function-classes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.function-classes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospan-diagrams
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.embeddings
-open import foundation.equivalence-induction
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.pullbacks
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.equivalence-induction funext univalence
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.pullbacks funext univalence truncations
+open import foundation.subtypes funext univalence truncations
 open import foundation.telescopes
 open import foundation.transport-along-identifications
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 ```
 

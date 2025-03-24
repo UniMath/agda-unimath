@@ -1,7 +1,15 @@
 # Multiset-indexed dependent products of types
 
 ```agda
-module trees.multiset-indexed-dependent-products-of-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.multiset-indexed-dependent-products-of-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,8 +19,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import trees.multisets
-open import trees.w-types
+open import trees.multisets funext univalence truncations
+open import trees.w-types funext univalence truncations
 ```
 
 </details>

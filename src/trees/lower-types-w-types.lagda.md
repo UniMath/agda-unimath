@@ -1,17 +1,25 @@
 # Lower types of elements in W-types
 
 ```agda
-module trees.lower-types-w-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.lower-types-w-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.existential-quantification
+open import foundation.existential-quantification funext univalence truncations
 open import foundation.universe-levels
 
-open import trees.ranks-of-elements-w-types
-open import trees.w-types
+open import trees.ranks-of-elements-w-types funext univalence truncations
+open import trees.w-types funext univalence truncations
 ```
 
 </details>

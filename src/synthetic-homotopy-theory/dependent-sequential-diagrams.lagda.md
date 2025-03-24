@@ -1,7 +1,13 @@
 # Dependent sequential diagrams
 
 ```agda
-module synthetic-homotopy-theory.dependent-sequential-diagrams where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.dependent-sequential-diagrams
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,11 +16,11 @@ module synthetic-homotopy-theory.dependent-sequential-diagrams where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.homotopies
+open import foundation.function-types funext
+open import foundation.homotopies funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.sequential-diagrams
+open import synthetic-homotopy-theory.sequential-diagrams funext univalence
 ```
 
 </details>

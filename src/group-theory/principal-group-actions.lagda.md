@@ -1,18 +1,26 @@
 # Principal group actions
 
 ```agda
-module group-theory.principal-group-actions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.principal-group-actions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalence-extensionality
+open import foundation.equivalence-extensionality funext
 open import foundation.universe-levels
 
-open import group-theory.group-actions
-open import group-theory.groups
+open import group-theory.group-actions funext univalence truncations
+open import group-theory.groups funext univalence truncations
 ```
 
 </details>

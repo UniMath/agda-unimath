@@ -1,7 +1,15 @@
 # Total cocones of type families over cocones under sequential diagrams
 
 ```agda
-module synthetic-homotopy-theory.total-cocones-families-sequential-diagrams where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.total-cocones-families-sequential-diagrams
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,20 +19,20 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams
-open import synthetic-homotopy-theory.equivalences-sequential-diagrams
-open import synthetic-homotopy-theory.families-descent-data-sequential-colimits
-open import synthetic-homotopy-theory.sequential-diagrams
-open import synthetic-homotopy-theory.total-sequential-diagrams
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.equivalences-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.families-descent-data-sequential-colimits funext univalence truncations
+open import synthetic-homotopy-theory.sequential-diagrams funext univalence
+open import synthetic-homotopy-theory.total-sequential-diagrams funext univalence truncations
 ```
 
 </details>

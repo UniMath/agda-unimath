@@ -1,26 +1,34 @@
 # Stabilizers of concrete group actions
 
 ```agda
-module group-theory.stabilizer-groups-concrete-group-actions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.stabilizer-groups-concrete-group-actions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
+open import foundation.0-connected-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.mere-equality
-open import foundation.propositional-truncations
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.function-types funext
+open import foundation.mere-equality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.concrete-group-actions
-open import group-theory.concrete-groups
-open import group-theory.subgroups-concrete-groups
-open import group-theory.transitive-concrete-group-actions
+open import group-theory.concrete-group-actions funext univalence truncations
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.subgroups-concrete-groups funext univalence truncations
+open import group-theory.transitive-concrete-group-actions funext univalence truncations
 ```
 
 </details>

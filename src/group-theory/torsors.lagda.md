@@ -1,43 +1,51 @@
 # Torsors of abstract groups
 
 ```agda
-module group-theory.torsors where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.torsors
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
+open import foundation.0-connected-types funext univalence truncations
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.mere-equality
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
-open import foundation.sets
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.mere-equality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.retractions funext
+open import foundation.sections funext
+open import foundation.sets funext univalence
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
-open import group-theory.equivalences-group-actions
-open import group-theory.group-actions
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.isomorphisms-groups
-open import group-theory.mere-equivalences-group-actions
-open import group-theory.principal-group-actions
-open import group-theory.symmetric-groups
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.equivalences-group-actions funext univalence truncations
+open import group-theory.group-actions funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.isomorphisms-groups funext univalence truncations
+open import group-theory.mere-equivalences-group-actions funext univalence truncations
+open import group-theory.principal-group-actions funext univalence truncations
+open import group-theory.symmetric-groups funext univalence truncations
 
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-groups funext univalence truncations
 ```
 
 </details>

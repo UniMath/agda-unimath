@@ -1,55 +1,63 @@
 # Generating elements of groups
 
 ```agda
-module group-theory.generating-elements-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.generating-elements-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-rings funext univalence truncations
 
 open import elementary-number-theory.integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.images
-open import foundation.injective-maps
-open import foundation.propositional-maps
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.images funext univalence truncations
+open import foundation.injective-maps funext
+open import foundation.propositional-maps funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
 open import foundation.raising-universe-levels-unit-type
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.surjective-maps
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.addition-homomorphisms-abelian-groups
-open import group-theory.commuting-elements-groups
-open import group-theory.conjugation
-open import group-theory.endomorphism-rings-abelian-groups
-open import group-theory.free-groups-with-one-generator
-open import group-theory.full-subgroups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.integer-multiples-of-elements-abelian-groups
-open import group-theory.integer-powers-of-elements-groups
-open import group-theory.isomorphisms-abelian-groups
-open import group-theory.normal-subgroups
-open import group-theory.quotient-groups
-open import group-theory.subgroups-generated-by-elements-groups
-open import group-theory.subsets-groups
-open import group-theory.trivial-group-homomorphisms
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.addition-homomorphisms-abelian-groups funext univalence truncations
+open import group-theory.commuting-elements-groups funext univalence truncations
+open import group-theory.conjugation funext univalence truncations
+open import group-theory.endomorphism-rings-abelian-groups funext univalence truncations
+open import group-theory.free-groups-with-one-generator funext univalence truncations
+open import group-theory.full-subgroups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.integer-multiples-of-elements-abelian-groups funext univalence truncations
+open import group-theory.integer-powers-of-elements-groups funext univalence truncations
+open import group-theory.isomorphisms-abelian-groups funext univalence truncations
+open import group-theory.normal-subgroups funext univalence truncations
+open import group-theory.quotient-groups funext univalence truncations
+open import group-theory.subgroups-generated-by-elements-groups funext univalence truncations
+open import group-theory.subsets-groups funext univalence truncations
+open import group-theory.trivial-group-homomorphisms funext univalence truncations
 
-open import ring-theory.integer-multiples-of-elements-rings
-open import ring-theory.rings
-open import ring-theory.transporting-ring-structure-along-isomorphisms-abelian-groups
+open import ring-theory.integer-multiples-of-elements-rings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
+open import ring-theory.transporting-ring-structure-along-isomorphisms-abelian-groups funext univalence truncations
 ```
 
 </details>

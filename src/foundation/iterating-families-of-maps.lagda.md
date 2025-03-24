@@ -1,7 +1,15 @@
 # Iterating families of maps over a map
 
 ```agda
-module foundation.iterating-families-of-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.iterating-families-of-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,8 +18,8 @@ module foundation.iterating-families-of-maps where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.dependent-identifications
-open import foundation.iterating-functions
+open import foundation.dependent-identifications funext
+open import foundation.iterating-functions funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 

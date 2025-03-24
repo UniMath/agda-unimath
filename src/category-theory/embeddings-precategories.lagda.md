@@ -1,20 +1,28 @@
 # Embeddings between precategories
 
 ```agda
-module category-theory.embeddings-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.embeddings-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.embedding-maps-precategories
-open import category-theory.functors-precategories
-open import category-theory.maps-precategories
-open import category-theory.precategories
+open import category-theory.embedding-maps-precategories funext univalence truncations
+open import category-theory.functors-precategories funext univalence truncations
+open import category-theory.maps-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 ```
 

@@ -1,18 +1,26 @@
 # Morphisms of descent data of the circle
 
 ```agda
-module synthetic-homotopy-theory.morphisms-descent-data-circle where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.morphisms-descent-data-circle
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
+open import foundation.commuting-squares-of-maps funext univalence
 open import foundation.universe-levels
 
-open import structured-types.morphisms-types-equipped-with-automorphisms
+open import structured-types.morphisms-types-equipped-with-automorphisms funext univalence truncations
 
-open import synthetic-homotopy-theory.descent-circle
+open import synthetic-homotopy-theory.descent-circle funext univalence truncations
 ```
 
 </details>

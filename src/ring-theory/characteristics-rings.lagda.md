@@ -1,19 +1,27 @@
 # Characteristics of rings
 
 ```agda
-module ring-theory.characteristics-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.characteristics-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.ring-of-integers
+open import elementary-number-theory.ring-of-integers funext univalence truncations
 
 open import foundation.universe-levels
 
-open import ring-theory.ideals-rings
-open import ring-theory.kernels-of-ring-homomorphisms
-open import ring-theory.rings
+open import ring-theory.ideals-rings funext univalence truncations
+open import ring-theory.kernels-of-ring-homomorphisms funext univalence truncations
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

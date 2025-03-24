@@ -1,28 +1,36 @@
 # Metric structures
 
 ```agda
-module metric-spaces.metric-structures where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module metric-spaces.metric-structures
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.function-types
-open import foundation.logical-equivalences
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.function-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import metric-spaces.closed-premetric-structures
-open import metric-spaces.extensional-premetric-structures
-open import metric-spaces.monotonic-premetric-structures
-open import metric-spaces.ordering-premetric-structures
-open import metric-spaces.premetric-structures
-open import metric-spaces.pseudometric-structures
-open import metric-spaces.reflexive-premetric-structures
-open import metric-spaces.symmetric-premetric-structures
-open import metric-spaces.triangular-premetric-structures
+open import metric-spaces.closed-premetric-structures funext univalence truncations
+open import metric-spaces.extensional-premetric-structures funext univalence truncations
+open import metric-spaces.monotonic-premetric-structures funext univalence truncations
+open import metric-spaces.ordering-premetric-structures funext univalence truncations
+open import metric-spaces.premetric-structures funext univalence truncations
+open import metric-spaces.pseudometric-structures funext univalence truncations
+open import metric-spaces.reflexive-premetric-structures funext univalence truncations
+open import metric-spaces.symmetric-premetric-structures funext univalence truncations
+open import metric-spaces.triangular-premetric-structures funext univalence truncations
 ```
 
 </details>

@@ -1,21 +1,29 @@
 # Conjugation of loops
 
 ```agda
-module synthetic-homotopy-theory.conjugation-loops where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.conjugation-loops
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
+open import structured-types.pointed-homotopies funext univalence truncations
+open import structured-types.pointed-maps funext univalence truncations
 
-open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.loop-spaces funext univalence truncations
 ```
 
 </details>

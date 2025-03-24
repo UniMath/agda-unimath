@@ -1,19 +1,27 @@
 # The precategory of semirings
 
 ```agda
-module ring-theory.precategory-of-semirings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.precategory-of-semirings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories
-open import category-theory.precategories
+open import category-theory.large-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.universe-levels
 
-open import ring-theory.homomorphisms-semirings
-open import ring-theory.semirings
+open import ring-theory.homomorphisms-semirings funext univalence truncations
+open import ring-theory.semirings funext univalence truncations
 ```
 
 </details>

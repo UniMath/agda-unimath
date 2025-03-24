@@ -1,25 +1,33 @@
 # Exponential of Cauchy series of species of types
 
 ```agda
-module species.exponentials-cauchy-series-of-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.exponentials-cauchy-series-of-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import species.cauchy-composition-species-of-types
-open import species.cauchy-exponentials-species-of-types
-open import species.cauchy-series-species-of-types
-open import species.composition-cauchy-series-species-of-types
-open import species.species-of-types
+open import species.cauchy-composition-species-of-types funext univalence
+open import species.cauchy-exponentials-species-of-types funext univalence truncations
+open import species.cauchy-series-species-of-types funext univalence
+open import species.composition-cauchy-series-species-of-types funext univalence
+open import species.species-of-types funext univalence
 ```
 
 </details>

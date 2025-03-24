@@ -2,35 +2,42 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module real-numbers.arithmetically-located-dedekind-cuts where
+module real-numbers.arithmetically-located-dedekind-cuts
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.additive-group-of-rational-numbers
-open import elementary-number-theory.difference-rational-numbers
-open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.addition-rational-numbers funext univalence truncations
+open import elementary-number-theory.additive-group-of-rational-numbers funext univalence truncations
+open import elementary-number-theory.difference-rational-numbers funext univalence truncations
+open import elementary-number-theory.inequality-rational-numbers funext univalence truncations
+open import elementary-number-theory.positive-rational-numbers funext univalence truncations
+open import elementary-number-theory.rational-numbers funext univalence truncations
+open import elementary-number-theory.strict-inequality-rational-numbers funext univalence truncations
 
-open import foundation.cartesian-product-types
-open import foundation.conjunction
-open import foundation.coproduct-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.conjunction funext univalence truncations
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.existential-quantification
+open import foundation.disjunction funext univalence truncations
+open import foundation.existential-quantification funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
+open import group-theory.abelian-groups funext univalence truncations
 
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.dedekind-real-numbers funext univalence truncations
+open import real-numbers.lower-dedekind-real-numbers funext univalence truncations
+open import real-numbers.upper-dedekind-real-numbers funext univalence truncations
 ```
 
 </details>

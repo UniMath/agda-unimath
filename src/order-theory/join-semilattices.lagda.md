@@ -1,29 +1,37 @@
 # Join-semilattices
 
 ```agda
-module order-theory.join-semilattices where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.join-semilattices
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.semigroups
+open import group-theory.semigroups funext univalence
 
-open import order-theory.least-upper-bounds-posets
-open import order-theory.posets
-open import order-theory.preorders
-open import order-theory.upper-bounds-posets
+open import order-theory.least-upper-bounds-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.preorders funext univalence truncations
+open import order-theory.upper-bounds-posets funext univalence truncations
 ```
 
 </details>

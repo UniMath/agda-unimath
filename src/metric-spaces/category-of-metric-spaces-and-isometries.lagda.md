@@ -1,26 +1,34 @@
 # The category of metric spaces and isometries
 
 ```agda
-module metric-spaces.category-of-metric-spaces-and-isometries where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module metric-spaces.category-of-metric-spaces-and-isometries
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.isomorphisms-in-precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.isomorphisms-in-precategories funext univalence truncations
 
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import metric-spaces.equality-of-metric-spaces
-open import metric-spaces.metric-spaces
-open import metric-spaces.precategory-of-metric-spaces-and-isometries
+open import metric-spaces.equality-of-metric-spaces funext univalence truncations
+open import metric-spaces.metric-spaces funext univalence truncations
+open import metric-spaces.precategory-of-metric-spaces-and-isometries funext univalence truncations
 ```
 
 </details>

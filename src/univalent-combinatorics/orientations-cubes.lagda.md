@@ -1,7 +1,15 @@
 # Orientations of cubes
 
 ```agda
-module univalent-combinatorics.orientations-cubes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.orientations-cubes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,16 +17,16 @@ module univalent-combinatorics.orientations-cubes where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types
-open import foundation.iterating-functions
+open import foundation.identity-types funext
+open import foundation.iterating-functions funext univalence truncations
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cubes
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.function-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.cubes funext univalence truncations
+open import univalent-combinatorics.dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.equality-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.function-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

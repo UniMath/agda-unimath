@@ -1,7 +1,15 @@
 # Stable orthogonal factorization systems
 
 ```agda
-module orthogonal-factorization-systems.stable-orthogonal-factorization-systems where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.stable-orthogonal-factorization-systems
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,8 +17,8 @@ module orthogonal-factorization-systems.stable-orthogonal-factorization-systems 
 ```agda
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.function-classes
-open import orthogonal-factorization-systems.orthogonal-factorization-systems
+open import orthogonal-factorization-systems.function-classes funext univalence truncations
+open import orthogonal-factorization-systems.orthogonal-factorization-systems funext univalence truncations
 ```
 
 </details>

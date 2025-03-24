@@ -1,17 +1,25 @@
 # The Twin Prime conjecture
 
 ```agda
-module elementary-number-theory.twin-prime-conjecture where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.twin-prime-conjecture
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.prime-numbers
+open import elementary-number-theory.prime-numbers funext univalence truncations
 
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```

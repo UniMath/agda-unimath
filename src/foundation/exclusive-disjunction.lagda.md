@@ -1,28 +1,36 @@
 # Exclusive disjunctions
 
 ```agda
-module foundation.exclusive-disjunction where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.exclusive-disjunction
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.equality-coproduct-types
-open import foundation.exclusive-sum
-open import foundation.functoriality-coproduct-types
-open import foundation.propositional-truncations
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equality-coproduct-types funext univalence truncations
+open import foundation.exclusive-sum funext univalence truncations
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.propositional-truncations funext univalence
 open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-coproduct-types
-open import foundation.universal-property-coproduct-types
+open import foundation.type-arithmetic-coproduct-types funext univalence truncations
+open import foundation.universal-property-coproduct-types funext
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.equivalences
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions

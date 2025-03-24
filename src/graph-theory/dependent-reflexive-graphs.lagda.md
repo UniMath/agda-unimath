@@ -1,18 +1,26 @@
 # Dependent reflexive graphs
 
 ```agda
-module graph-theory.dependent-reflexive-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.dependent-reflexive-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.universe-levels
 
-open import graph-theory.dependent-directed-graphs
-open import graph-theory.reflexive-graphs
+open import graph-theory.dependent-directed-graphs funext univalence
+open import graph-theory.reflexive-graphs funext univalence truncations
 ```
 
 </details>

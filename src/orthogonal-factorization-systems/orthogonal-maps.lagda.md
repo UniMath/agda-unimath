@@ -1,58 +1,66 @@
 # Orthogonal maps
 
 ```agda
-module orthogonal-factorization-systems.orthogonal-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.orthogonal-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-morphisms-arrows
-open import foundation.cartesian-product-types
-open import foundation.composition-algebra
-open import foundation.contractible-maps
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.coproducts-pullbacks
+open import foundation.cartesian-morphisms-arrows funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
+open import foundation.composition-algebra funext
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.coproducts-pullbacks funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.dependent-products-pullbacks
-open import foundation.dependent-sums-pullbacks
-open import foundation.equivalences
-open import foundation.equivalences-arrows
-open import foundation.fibered-maps
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-fibers-of-maps
-open import foundation.homotopies
-open import foundation.morphisms-arrows
-open import foundation.postcomposition-functions
-open import foundation.postcomposition-pullbacks
-open import foundation.precomposition-dependent-functions
-open import foundation.precomposition-functions
-open import foundation.products-pullbacks
-open import foundation.propositions
-open import foundation.pullbacks
-open import foundation.type-arithmetic-dependent-function-types
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-pullbacks funext univalence
+open import foundation.dependent-sums-pullbacks funext
+open import foundation.equivalences funext
+open import foundation.equivalences-arrows funext univalence truncations
+open import foundation.fibered-maps funext univalence truncations
+open import foundation.fibers-of-maps funext
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.functoriality-fibers-of-maps funext
+open import foundation.homotopies funext
+open import foundation.morphisms-arrows funext
+open import foundation.postcomposition-functions funext
+open import foundation.postcomposition-pullbacks funext
+open import foundation.precomposition-dependent-functions funext
+open import foundation.precomposition-functions funext
+open import foundation.products-pullbacks funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.pullbacks funext univalence truncations
+open import foundation.type-arithmetic-dependent-function-types funext univalence
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.unit-type
-open import foundation.universal-property-cartesian-product-types
-open import foundation.universal-property-coproduct-types
-open import foundation.universal-property-dependent-pair-types
-open import foundation.universal-property-equivalences
-open import foundation.universal-property-pullbacks
+open import foundation.universal-property-cartesian-product-types funext
+open import foundation.universal-property-coproduct-types funext
+open import foundation.universal-property-dependent-pair-types funext
+open import foundation.universal-property-equivalences funext
+open import foundation.universal-property-pullbacks funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import orthogonal-factorization-systems.lifting-structures-on-squares
-open import orthogonal-factorization-systems.pullback-hom
-open import orthogonal-factorization-systems.types-local-at-maps
+open import orthogonal-factorization-systems.lifting-structures-on-squares funext univalence truncations
+open import orthogonal-factorization-systems.pullback-hom funext univalence truncations
+open import orthogonal-factorization-systems.types-local-at-maps funext univalence truncations
 ```
 
 </details>

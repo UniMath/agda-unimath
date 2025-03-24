@@ -1,25 +1,33 @@
 # The W-type of the type of propositions
 
 ```agda
-module trees.w-type-of-propositions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.w-type-of-propositions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.propositional-extensionality
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.propositional-extensionality funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.raising-universe-levels-unit-type
-open import foundation.sets
+open import foundation.sets funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import trees.extensional-w-types
-open import trees.w-types
+open import trees.extensional-w-types funext univalence truncations
+open import trees.w-types funext univalence truncations
 ```
 
 </details>

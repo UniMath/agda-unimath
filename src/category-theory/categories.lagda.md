@@ -1,31 +1,39 @@
 # Categories
 
 ```agda
-module category-theory.categories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.nonunital-precategories
-open import category-theory.precategories
-open import category-theory.preunivalent-categories
-open import category-theory.strongly-preunivalent-categories
+open import category-theory.composition-operations-on-binary-families-of-sets funext univalence truncations
+open import category-theory.isomorphisms-in-precategories funext univalence truncations
+open import category-theory.nonunital-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
+open import category-theory.preunivalent-categories funext univalence truncations
+open import category-theory.strongly-preunivalent-categories funext univalence truncations
 
-open import foundation.1-types
-open import foundation.cartesian-product-types
+open import foundation.1-types funext univalence
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
-open import foundation.surjective-maps
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.strictly-involutive-identity-types funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 ```
 

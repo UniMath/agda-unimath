@@ -1,23 +1,29 @@
 # Equivalences of spans
 
 ```agda
-module foundation.equivalences-spans where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.equivalences-spans
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.commuting-squares-of-maps
+open import foundation.cartesian-product-types funext univalence
+open import foundation.commuting-squares-of-maps funext univalence
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
+open import foundation.homotopy-induction funext
 open import foundation.morphisms-spans
 open import foundation.spans
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
@@ -25,7 +31,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.operations-spans
+open import foundation-core.operations-spans funext
 open import foundation-core.torsorial-type-families
 ```
 

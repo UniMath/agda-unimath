@@ -1,27 +1,33 @@
 # Cauchy series of species of types in a subuniverse
 
 ```agda
-module species.cauchy-series-species-of-types-in-subuniverses where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.cauchy-series-species-of-types-in-subuniverses
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.global-subuniverses
-open import foundation.postcomposition-functions
-open import foundation.propositions
-open import foundation.subuniverses
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.global-subuniverses funext univalence
+open import foundation.postcomposition-functions funext
+open import foundation.propositions funext univalence
+open import foundation.subuniverses funext univalence
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import species.cauchy-series-species-of-types
-open import species.species-of-types-in-subuniverses
+open import species.cauchy-series-species-of-types funext univalence
+open import species.species-of-types-in-subuniverses funext univalence
 ```
 
 </details>

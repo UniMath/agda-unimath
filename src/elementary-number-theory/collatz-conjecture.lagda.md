@@ -1,17 +1,25 @@
 # The Collatz conjecture
 
 ```agda
-module elementary-number-theory.collatz-conjecture where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.collatz-conjecture
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```

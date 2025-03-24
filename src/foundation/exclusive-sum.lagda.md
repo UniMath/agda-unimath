@@ -1,35 +1,43 @@
 # Exclusive sums
 
 ```agda
-module foundation.exclusive-sum where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.exclusive-sum
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.conjunction funext univalence truncations
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.negation
-open import foundation.propositional-extensionality
-open import foundation.symmetric-operations
+open import foundation.dependent-products-propositions funext
+open import foundation.negation funext
+open import foundation.propositional-extensionality funext univalence truncations
+open import foundation.symmetric-operations funext univalence truncations
 open import foundation.universe-levels
-open import foundation.unordered-pairs
+open import foundation.unordered-pairs funext univalence truncations
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.decidable-propositions
+open import foundation-core.decidable-propositions funext univalence truncations
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.transport-along-identifications
 
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.2-element-types funext univalence truncations
+open import univalent-combinatorics.equality-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

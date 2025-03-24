@@ -1,25 +1,33 @@
 # Fibers of morphisms into directed graphs
 
 ```agda
-module graph-theory.fibers-morphisms-directed-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.fibers-morphisms-directed-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.families-of-equivalences
-open import foundation.fibers-of-maps
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.families-of-equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import graph-theory.dependent-directed-graphs
-open import graph-theory.dependent-sums-directed-graphs
-open import graph-theory.directed-graphs
-open import graph-theory.equivalences-dependent-directed-graphs
-open import graph-theory.equivalences-directed-graphs
-open import graph-theory.morphisms-directed-graphs
+open import graph-theory.dependent-directed-graphs funext univalence
+open import graph-theory.dependent-sums-directed-graphs funext univalence truncations
+open import graph-theory.directed-graphs funext univalence
+open import graph-theory.equivalences-dependent-directed-graphs funext univalence truncations
+open import graph-theory.equivalences-directed-graphs funext univalence truncations
+open import graph-theory.morphisms-directed-graphs funext univalence truncations
 ```
 
 </details>

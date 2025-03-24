@@ -1,24 +1,32 @@
 # Positive integer fractions
 
 ```agda
-module elementary-number-theory.positive-integer-fractions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.positive-integer-fractions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integer-fractions
-open import elementary-number-theory.addition-positive-and-negative-integers
-open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.addition-integer-fractions funext univalence truncations
+open import elementary-number-theory.addition-positive-and-negative-integers funext univalence truncations
+open import elementary-number-theory.integer-fractions funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integer-fractions
-open import elementary-number-theory.multiplication-positive-and-negative-integers
-open import elementary-number-theory.positive-integers
-open import elementary-number-theory.reduced-integer-fractions
+open import elementary-number-theory.multiplication-integer-fractions funext univalence truncations
+open import elementary-number-theory.multiplication-positive-and-negative-integers funext univalence truncations
+open import elementary-number-theory.positive-integers funext univalence truncations
+open import elementary-number-theory.reduced-integer-fractions funext univalence truncations
 
-open import foundation.dependent-products-propositions
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 ```
 

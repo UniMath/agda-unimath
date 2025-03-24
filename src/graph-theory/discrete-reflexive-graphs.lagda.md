@@ -1,24 +1,32 @@
 # Discrete reflexive graphs
 
 ```agda
-module graph-theory.discrete-reflexive-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.discrete-reflexive-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.discrete-reflexive-relations
+open import foundation.dependent-products-contractible-types funext
+open import foundation.discrete-reflexive-relations funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 
-open import graph-theory.directed-graphs
-open import graph-theory.reflexive-graphs
+open import graph-theory.directed-graphs funext univalence
+open import graph-theory.reflexive-graphs funext univalence truncations
 ```
 
 </details>

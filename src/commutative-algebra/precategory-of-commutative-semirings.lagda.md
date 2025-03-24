@@ -1,21 +1,29 @@
 # The precategory of commutative semirings
 
 ```agda
-module commutative-algebra.precategory-of-commutative-semirings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.precategory-of-commutative-semirings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.full-large-subprecategories
-open import category-theory.large-precategories
-open import category-theory.precategories
+open import category-theory.full-large-subprecategories funext univalence truncations
+open import category-theory.large-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
-open import commutative-algebra.commutative-semirings
+open import commutative-algebra.commutative-semirings funext univalence truncations
 
 open import foundation.universe-levels
 
-open import ring-theory.precategory-of-semirings
+open import ring-theory.precategory-of-semirings funext univalence truncations
 ```
 
 </details>

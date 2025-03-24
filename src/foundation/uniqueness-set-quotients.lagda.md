@@ -1,7 +1,15 @@
 # The uniqueness of set quotients
 
 ```agda
-module foundation.uniqueness-set-quotients where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.uniqueness-set-quotients
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,18 +17,17 @@ module foundation.uniqueness-set-quotients where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality-axiom
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.sets
+open import foundation.equivalences funext
+open import foundation.reflecting-maps-equivalence-relations funext univalence truncations
+open import foundation.sets funext univalence
 open import foundation.subtype-identity-principle
-open import foundation.universal-property-equivalences
-open import foundation.universal-property-set-quotients
+open import foundation.universal-property-equivalences funext
+open import foundation.universal-property-set-quotients funext univalence truncations
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-types
-open import foundation-core.equivalence-relations
+open import foundation-core.equivalence-relations funext univalence truncations
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

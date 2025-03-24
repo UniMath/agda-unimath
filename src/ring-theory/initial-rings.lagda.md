@@ -1,18 +1,26 @@
 # Initial rings
 
 ```agda
-module ring-theory.initial-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.initial-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.initial-objects-large-categories
+open import category-theory.initial-objects-large-categories funext univalence truncations
 
 open import foundation.universe-levels
 
-open import ring-theory.category-of-rings
-open import ring-theory.rings
+open import ring-theory.category-of-rings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

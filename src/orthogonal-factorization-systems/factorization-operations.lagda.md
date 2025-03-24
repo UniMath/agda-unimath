@@ -1,7 +1,15 @@
 # Factorization operations
 
 ```agda
-module orthogonal-factorization-systems.factorization-operations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.factorization-operations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,7 +17,7 @@ module orthogonal-factorization-systems.factorization-operations where
 ```agda
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.factorizations-of-maps
+open import orthogonal-factorization-systems.factorizations-of-maps funext univalence truncations
 ```
 
 </details>

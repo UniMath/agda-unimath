@@ -1,22 +1,30 @@
 # Factorials of natural numbers
 
 ```agda
-module elementary-number-theory.factorials where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.factorials
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers funext univalence truncations
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.identity-types
+open import foundation.empty-types funext univalence truncations
+open import foundation.identity-types funext
 ```
 
 </details>

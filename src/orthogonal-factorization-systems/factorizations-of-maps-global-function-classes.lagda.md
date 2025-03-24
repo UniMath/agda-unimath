@@ -1,36 +1,44 @@
 # Factorizations of maps into global function classes
 
 ```agda
-module orthogonal-factorization-systems.factorizations-of-maps-global-function-classes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.factorizations-of-maps-global-function-classes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
-open import foundation.univalence
+open import foundation.torsorial-type-families funext univalence truncations
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import orthogonal-factorization-systems.factorizations-of-maps
-open import orthogonal-factorization-systems.factorizations-of-maps-function-classes
-open import orthogonal-factorization-systems.function-classes
-open import orthogonal-factorization-systems.global-function-classes
+open import orthogonal-factorization-systems.factorizations-of-maps funext univalence truncations
+open import orthogonal-factorization-systems.factorizations-of-maps-function-classes funext univalence truncations
+open import orthogonal-factorization-systems.function-classes funext univalence truncations
+open import orthogonal-factorization-systems.global-function-classes funext univalence truncations
 ```
 
 </details>

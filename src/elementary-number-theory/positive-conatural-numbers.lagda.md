@@ -2,20 +2,27 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module elementary-number-theory.positive-conatural-numbers where
+module elementary-number-theory.positive-conatural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.conatural-numbers
-open import elementary-number-theory.zero-conatural-numbers
+open import elementary-number-theory.conatural-numbers funext univalence truncations
+open import elementary-number-theory.zero-conatural-numbers funext univalence truncations
 
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.negation
+open import foundation.negation funext
 open import foundation.universe-levels
 
 open import foundation-core.empty-types

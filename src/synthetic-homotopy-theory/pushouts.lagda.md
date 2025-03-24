@@ -1,7 +1,15 @@
 # Pushouts
 
 ```agda
-module synthetic-homotopy-theory.pushouts where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.pushouts
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,32 +17,32 @@ module synthetic-homotopy-theory.pushouts where
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.constant-type-families
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.constant-type-families funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
-open import foundation.transport-along-homotopies
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.retractions funext
+open import foundation.sections funext
+open import foundation.transport-along-homotopies funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import reflection.erasing-equality
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
-open import synthetic-homotopy-theory.dependent-universal-property-pushouts
-open import synthetic-homotopy-theory.flattening-lemma-pushouts
-open import synthetic-homotopy-theory.induction-principle-pushouts
-open import synthetic-homotopy-theory.universal-property-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.dependent-cocones-under-spans funext univalence truncations
+open import synthetic-homotopy-theory.dependent-universal-property-pushouts funext univalence truncations
+open import synthetic-homotopy-theory.flattening-lemma-pushouts funext univalence truncations
+open import synthetic-homotopy-theory.induction-principle-pushouts funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-pushouts funext univalence truncations
 ```
 
 </details>

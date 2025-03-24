@@ -1,19 +1,27 @@
 # Rooted quasitrees
 
 ```agda
-module trees.rooted-quasitrees where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.rooted-quasitrees
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-contractible-types funext
 open import foundation.universe-levels
 
-open import graph-theory.trails-undirected-graphs
-open import graph-theory.undirected-graphs
+open import graph-theory.trails-undirected-graphs funext univalence truncations
+open import graph-theory.undirected-graphs funext univalence truncations
 ```
 
 </details>

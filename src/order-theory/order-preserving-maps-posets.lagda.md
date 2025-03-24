@@ -1,25 +1,33 @@
 # Order preserving maps between posets
 
 ```agda
-module order-theory.order-preserving-maps-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.order-preserving-maps-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.strictly-involutive-identity-types funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import order-theory.order-preserving-maps-preorders
-open import order-theory.posets
+open import order-theory.order-preserving-maps-preorders funext univalence truncations
+open import order-theory.posets funext univalence truncations
 ```
 
 </details>

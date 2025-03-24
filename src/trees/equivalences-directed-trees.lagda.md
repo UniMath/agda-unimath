@@ -1,7 +1,15 @@
 # Equivalences of directed trees
 
 ```agda
-module trees.equivalences-directed-trees where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.equivalences-directed-trees
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,27 +17,27 @@ module trees.equivalences-directed-trees where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import graph-theory.equivalences-directed-graphs
-open import graph-theory.walks-directed-graphs
+open import graph-theory.equivalences-directed-graphs funext univalence truncations
+open import graph-theory.walks-directed-graphs funext univalence truncations
 
-open import trees.directed-trees
-open import trees.morphisms-directed-trees
-open import trees.rooted-morphisms-directed-trees
+open import trees.directed-trees funext univalence truncations
+open import trees.morphisms-directed-trees funext univalence truncations
+open import trees.rooted-morphisms-directed-trees funext univalence truncations
 ```
 
 </details>

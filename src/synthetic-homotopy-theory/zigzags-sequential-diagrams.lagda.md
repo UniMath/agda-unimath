@@ -1,7 +1,15 @@
 # Zigzags between sequential diagrams
 
 ```agda
-module synthetic-homotopy-theory.zigzags-sequential-diagrams where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.zigzags-sequential-diagrams
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,24 +17,24 @@ module synthetic-homotopy-theory.zigzags-sequential-diagrams where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
-open import foundation.commuting-squares-of-homotopies
-open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-maps
+open import foundation.cartesian-product-types funext univalence
+open import foundation.commuting-squares-of-homotopies funext
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.commuting-triangles-of-maps funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.retractions
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.retractions funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.functoriality-sequential-colimits
-open import synthetic-homotopy-theory.morphisms-sequential-diagrams
-open import synthetic-homotopy-theory.sequential-diagrams
-open import synthetic-homotopy-theory.shifts-sequential-diagrams
-open import synthetic-homotopy-theory.universal-property-sequential-colimits
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.functoriality-sequential-colimits funext univalence truncations
+open import synthetic-homotopy-theory.morphisms-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.sequential-diagrams funext univalence
+open import synthetic-homotopy-theory.shifts-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-sequential-colimits funext univalence truncations
 ```
 
 </details>

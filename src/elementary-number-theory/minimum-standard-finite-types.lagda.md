@@ -1,22 +1,30 @@
 # Minimum on the standard finite types
 
 ```agda
-module elementary-number-theory.minimum-standard-finite-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.minimum-standard-finite-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.inequality-standard-finite-types funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
 open import foundation.unit-type
 
-open import order-theory.greatest-lower-bounds-posets
+open import order-theory.greatest-lower-bounds-posets funext univalence truncations
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

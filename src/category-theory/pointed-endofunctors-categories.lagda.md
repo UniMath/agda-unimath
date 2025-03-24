@@ -1,19 +1,27 @@
 # Pointed endofunctors on categories
 
 ```agda
-module category-theory.pointed-endofunctors-categories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.pointed-endofunctors-categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.functors-categories
-open import category-theory.natural-transformations-functors-categories
-open import category-theory.pointed-endofunctors-precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.functors-categories funext univalence truncations
+open import category-theory.natural-transformations-functors-categories funext univalence truncations
+open import category-theory.pointed-endofunctors-precategories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

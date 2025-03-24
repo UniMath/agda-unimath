@@ -1,7 +1,15 @@
 # Decidable equivalence relations on finite types
 
 ```agda
-module univalent-combinatorics.decidable-equivalence-relations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.decidable-equivalence-relations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,33 +17,33 @@ module univalent-combinatorics.decidable-equivalence-relations where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-relations
-open import foundation.cartesian-product-types
-open import foundation.decidable-equality
-open import foundation.decidable-equivalence-relations
-open import foundation.decidable-relations
-open import foundation.decidable-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.binary-relations funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
+open import foundation.decidable-equality funext univalence truncations
+open import foundation.decidable-equivalence-relations funext univalence truncations
+open import foundation.decidable-relations funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalence-relations funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.function-types
-open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.surjective-maps
+open import univalent-combinatorics.cartesian-product-types funext univalence truncations
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.decidable-propositions funext univalence truncations
+open import univalent-combinatorics.dependent-function-types funext univalence truncations
+open import univalent-combinatorics.dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.function-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
+open import univalent-combinatorics.surjective-maps funext univalence truncations
 ```
 
 </details>

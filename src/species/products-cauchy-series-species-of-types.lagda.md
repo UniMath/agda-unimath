@@ -1,27 +1,35 @@
 # Products of Cauchy series of species of types
 
 ```agda
-module species.products-cauchy-series-species-of-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.products-cauchy-series-species-of-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
+open import foundation.equivalences funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence
-open import foundation.universal-property-coproduct-types
+open import foundation.univalence funext univalence
+open import foundation.universal-property-coproduct-types funext
 open import foundation.universe-levels
 
-open import species.cauchy-products-species-of-types
-open import species.cauchy-series-species-of-types
-open import species.species-of-types
+open import species.cauchy-products-species-of-types funext univalence truncations
+open import species.cauchy-series-species-of-types funext univalence
+open import species.species-of-types funext univalence
 ```
 
 </details>

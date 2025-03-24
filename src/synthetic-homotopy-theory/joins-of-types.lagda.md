@@ -1,38 +1,46 @@
 # Joins of types
 
 ```agda
-module synthetic-homotopy-theory.joins-of-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.joins-of-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.disjunction
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext univalence truncations
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-empty-type
-open import foundation.type-arithmetic-unit-type
+open import foundation.type-arithmetic-empty-type funext univalence truncations
+open import foundation.type-arithmetic-unit-type funext
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
-open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.universal-property-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.dependent-cocones-under-spans funext univalence truncations
+open import synthetic-homotopy-theory.pushouts funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-pushouts funext univalence truncations
 ```
 
 </details>

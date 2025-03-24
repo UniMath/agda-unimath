@@ -1,7 +1,15 @@
 # Kuratowski finite sets
 
 ```agda
-module univalent-combinatorics.kuratowski-finite-sets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.kuratowski-finite-sets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,20 +17,20 @@ module univalent-combinatorics.kuratowski-finite-sets where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-equality
+open import foundation.decidable-equality funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.existential-quantification
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
-open import foundation.surjective-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.image-of-maps
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.equality-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.image-of-maps funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

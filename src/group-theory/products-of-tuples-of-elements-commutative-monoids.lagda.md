@@ -1,7 +1,15 @@
 # Products of tuples of elements in commutative monoids
 
 ```agda
-module group-theory.products-of-tuples-of-elements-commutative-monoids where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.products-of-tuples-of-elements-commutative-monoids
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,15 +17,15 @@ module group-theory.products-of-tuples-of-elements-commutative-monoids where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
-open import foundation.function-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.function-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids
+open import group-theory.commutative-monoids funext univalence truncations
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

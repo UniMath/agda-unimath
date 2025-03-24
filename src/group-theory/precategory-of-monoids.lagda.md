@@ -1,22 +1,30 @@
 # The precategory of monoids
 
 ```agda
-module group-theory.precategory-of-monoids where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.precategory-of-monoids
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories
-open import category-theory.large-subprecategories
-open import category-theory.precategories
+open import category-theory.large-precategories funext univalence truncations
+open import category-theory.large-subprecategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-monoids
-open import group-theory.monoids
-open import group-theory.precategory-of-semigroups
+open import group-theory.homomorphisms-monoids funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.precategory-of-semigroups funext univalence truncations
 ```
 
 </details>

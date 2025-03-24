@@ -1,28 +1,36 @@
 # Replete subprecategories
 
 ```agda
-module category-theory.replete-subprecategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.replete-subprecategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.isomorphism-induction-categories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.isomorphisms-in-subprecategories
-open import category-theory.precategories
-open import category-theory.subprecategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.isomorphism-induction-categories funext univalence truncations
+open import category-theory.isomorphisms-in-precategories funext univalence truncations
+open import category-theory.isomorphisms-in-subprecategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
+open import category-theory.subprecategories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.iterated-dependent-product-types
-open import foundation.logical-equivalences
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
 open import foundation.subsingleton-induction
-open import foundation.subtypes
+open import foundation.subtypes funext univalence truncations
 open import foundation.telescopes
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types

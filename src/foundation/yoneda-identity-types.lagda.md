@@ -1,7 +1,13 @@
 # Yoneda identity types
 
 ```agda
-module foundation.yoneda-identity-types where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.yoneda-identity-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,14 +15,13 @@ module foundation.yoneda-identity-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.multivariable-homotopies
+open import foundation.function-extensionality funext
+open import foundation.multivariable-homotopies funext
 open import foundation.strictly-right-unital-concatenation-identifications
 open import foundation.telescopes
 open import foundation.transport-along-identifications
-open import foundation.univalence
-open import foundation.universal-property-identity-systems
+open import foundation.univalence funext univalence
+open import foundation.universal-property-identity-systems funext
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

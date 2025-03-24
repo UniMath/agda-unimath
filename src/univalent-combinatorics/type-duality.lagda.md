@@ -1,35 +1,43 @@
 # Type duality of finite types
 
 ```agda
-module univalent-combinatorics.type-duality where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation.type-duality public
+module univalent-combinatorics.type-duality
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation.type-duality funext univalence truncations public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.full-subtypes
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.inhabited-types
-open import foundation.postcomposition-functions
-open import foundation.propositions
-open import foundation.structure
-open import foundation.structured-type-duality
-open import foundation.surjective-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.full-subtypes funext univalence truncations
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.postcomposition-functions funext
+open import foundation.propositions funext univalence
+open import foundation.structure funext univalence
+open import foundation.structured-type-duality funext univalence truncations
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.fibers-of-maps
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.inhabited-finite-types
+open import univalent-combinatorics.fibers-of-maps funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.inhabited-finite-types funext univalence truncations
 ```
 
 </details>

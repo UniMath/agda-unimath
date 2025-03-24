@@ -1,21 +1,29 @@
 # Arithmetic law for coproduct decomposition and Σ-decomposition
 
 ```agda
-module foundation.arithmetic-law-coproduct-and-sigma-decompositions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.arithmetic-law-coproduct-and-sigma-decompositions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-decompositions
+open import foundation.coproduct-decompositions funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-coproduct-types
-open import foundation.relaxed-sigma-decompositions
-open import foundation.type-arithmetic-coproduct-types
+open import foundation.equivalences funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.relaxed-sigma-decompositions funext univalence
+open import foundation.type-arithmetic-coproduct-types funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence
-open import foundation.universal-property-coproduct-types
+open import foundation.univalence funext univalence
+open import foundation.universal-property-coproduct-types funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

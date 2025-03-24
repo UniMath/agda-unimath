@@ -1,7 +1,15 @@
 # Equality of natural numbers
 
 ```agda
-module elementary-number-theory.equality-natural-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.equality-natural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,24 +18,24 @@ module elementary-number-theory.equality-natural-numbers where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-equality funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.set-truncations
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.set-truncations funext univalence
+open import foundation.sets funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.decidable-propositions
-open import foundation-core.discrete-types
+open import foundation-core.decidable-propositions funext univalence truncations
+open import foundation-core.discrete-types funext univalence truncations
 open import foundation-core.torsorial-type-families
 ```
 

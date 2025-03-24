@@ -1,7 +1,15 @@
 # The opposite of a group
 
 ```agda
-module group-theory.opposite-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.opposite-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,10 +18,10 @@ module group-theory.opposite-groups where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.isomorphisms-groups
-open import group-theory.monoids
-open import group-theory.opposite-semigroups
+open import group-theory.groups funext univalence truncations
+open import group-theory.isomorphisms-groups funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.opposite-semigroups funext univalence
 ```
 
 </details>

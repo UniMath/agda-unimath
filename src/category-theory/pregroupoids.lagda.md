@@ -1,23 +1,31 @@
 # Pregroupoids
 
 ```agda
-module category-theory.pregroupoids where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.pregroupoids
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
+open import category-theory.isomorphisms-in-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.strictly-involutive-identity-types funext univalence
 open import foundation.telescopes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

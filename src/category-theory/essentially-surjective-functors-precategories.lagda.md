@@ -1,20 +1,28 @@
 # Essentially surjective functors between precategories
 
 ```agda
-module category-theory.essentially-surjective-functors-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.essentially-surjective-functors-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
+open import category-theory.functors-precategories funext univalence truncations
+open import category-theory.isomorphisms-in-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.existential-quantification
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 ```
 

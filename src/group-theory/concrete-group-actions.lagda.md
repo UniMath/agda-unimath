@@ -1,18 +1,26 @@
 # Concrete group actions
 
 ```agda
-module group-theory.concrete-group-actions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.concrete-group-actions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.function-types
-open import foundation.sets
+open import foundation.function-types funext
+open import foundation.sets funext univalence
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
+open import group-theory.concrete-groups funext univalence truncations
 ```
 
 </details>

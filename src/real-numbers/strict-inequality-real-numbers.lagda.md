@@ -2,40 +2,47 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module real-numbers.strict-inequality-real-numbers where
+module real-numbers.strict-inequality-real-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.rational-numbers funext univalence truncations
+open import elementary-number-theory.strict-inequality-rational-numbers funext univalence truncations
 
-open import foundation.conjunction
-open import foundation.coproduct-types
+open import foundation.conjunction funext univalence truncations
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.disjunction
-open import foundation.empty-types
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.identity-types
-open import foundation.large-binary-relations
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext univalence truncations
+open import foundation.empty-types funext univalence truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.identity-types funext
+open import foundation.large-binary-relations funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import logic.functoriality-existential-quantification
+open import logic.functoriality-existential-quantification funext univalence truncations
 
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.inequality-real-numbers
-open import real-numbers.negation-real-numbers
-open import real-numbers.rational-real-numbers
+open import real-numbers.dedekind-real-numbers funext univalence truncations
+open import real-numbers.inequality-real-numbers funext univalence truncations
+open import real-numbers.negation-real-numbers funext univalence truncations
+open import real-numbers.rational-real-numbers funext univalence truncations
 ```
 
 </details>

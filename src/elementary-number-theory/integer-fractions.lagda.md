@@ -1,33 +1,41 @@
 # Integer fractions
 
 ```agda
-module elementary-number-theory.integer-fractions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.integer-fractions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-integers
-open import elementary-number-theory.greatest-common-divisor-integers
+open import elementary-number-theory.equality-integers funext univalence truncations
+open import elementary-number-theory.greatest-common-divisor-integers funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.nonzero-integers
-open import elementary-number-theory.positive-integers
+open import elementary-number-theory.multiplication-integers funext univalence truncations
+open import elementary-number-theory.nonzero-integers funext univalence truncations
+open import elementary-number-theory.positive-integers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
-open import foundation.cartesian-product-types
-open import foundation.decidable-equality
+open import foundation.binary-relations funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
+open import foundation.decidable-equality funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalence-relations
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalence-relations funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import set-theory.countable-sets
+open import set-theory.countable-sets funext univalence truncations
 ```
 
 </details>

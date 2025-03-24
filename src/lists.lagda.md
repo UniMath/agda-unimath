@@ -3,25 +3,33 @@
 ## Modules in the lists namespace
 
 ```agda
-module lists where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import lists.arrays public
-open import lists.concatenation-lists public
-open import lists.equality-lists public
-open import lists.flattening-lists public
-open import lists.functoriality-lists public
+module lists
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import lists.arrays funext univalence truncations public
+open import lists.concatenation-lists funext univalence truncations public
+open import lists.equality-lists funext univalence truncations public
+open import lists.flattening-lists funext univalence truncations public
+open import lists.functoriality-lists funext univalence truncations public
 open import lists.lists public
-open import lists.lists-discrete-types public
-open import lists.permutation-lists public
-open import lists.permutation-vectors public
-open import lists.predicates-on-lists public
-open import lists.quicksort-lists public
-open import lists.reversing-lists public
-open import lists.sort-by-insertion-lists public
-open import lists.sort-by-insertion-vectors public
-open import lists.sorted-lists public
-open import lists.sorted-vectors public
-open import lists.sorting-algorithms-lists public
-open import lists.sorting-algorithms-vectors public
-open import lists.universal-property-lists-wild-monoids public
+open import lists.lists-discrete-types funext univalence truncations public
+open import lists.permutation-lists funext univalence truncations public
+open import lists.permutation-vectors funext univalence truncations public
+open import lists.predicates-on-lists funext univalence public
+open import lists.quicksort-lists funext univalence truncations public
+open import lists.reversing-lists funext univalence truncations public
+open import lists.sort-by-insertion-lists funext univalence truncations public
+open import lists.sort-by-insertion-vectors funext univalence truncations public
+open import lists.sorted-lists funext univalence truncations public
+open import lists.sorted-vectors funext univalence truncations public
+open import lists.sorting-algorithms-lists funext univalence truncations public
+open import lists.sorting-algorithms-vectors funext univalence truncations public
+open import lists.universal-property-lists-wild-monoids funext univalence truncations public
 ```

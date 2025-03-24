@@ -1,21 +1,29 @@
 # Dependent products of large meet-semilattices
 
 ```agda
-module order-theory.dependent-products-large-meet-semilattices where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.dependent-products-large-meet-semilattices
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-binary-relations
-open import foundation.sets
+open import foundation.large-binary-relations funext univalence truncations
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import order-theory.dependent-products-large-posets
-open import order-theory.greatest-lower-bounds-large-posets
-open import order-theory.large-meet-semilattices
-open import order-theory.large-posets
-open import order-theory.top-elements-large-posets
+open import order-theory.dependent-products-large-posets funext univalence truncations
+open import order-theory.greatest-lower-bounds-large-posets funext univalence truncations
+open import order-theory.large-meet-semilattices funext univalence truncations
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.top-elements-large-posets funext univalence truncations
 ```
 
 </details>

@@ -1,19 +1,27 @@
 # Regular undirected graph
 
 ```agda
-module graph-theory.regular-undirected-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.regular-undirected-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-products-propositions
-open import foundation.mere-equivalences
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.mere-equivalences funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import graph-theory.neighbors-undirected-graphs
-open import graph-theory.undirected-graphs
+open import graph-theory.neighbors-undirected-graphs funext univalence truncations
+open import graph-theory.undirected-graphs funext univalence truncations
 ```
 
 </details>

@@ -1,19 +1,25 @@
 # Dependent products of semigroups
 
 ```agda
-module group-theory.dependent-products-semigroups where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.dependent-products-semigroups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.function-extensionality funext
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import group-theory.semigroups
+open import group-theory.semigroups funext univalence
 ```
 
 </details>

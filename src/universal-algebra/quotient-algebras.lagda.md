@@ -1,7 +1,15 @@
 # Quotient algebras
 
 ```agda
-module universal-algebra.quotient-algebras where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module universal-algebra.quotient-algebras
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,29 +18,29 @@ module universal-algebra.quotient-algebras where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalence-classes
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.functoriality-propositional-truncation
-open import foundation.multivariable-functoriality-set-quotients
-open import foundation.multivariable-operations
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalence-classes funext univalence truncations
+open import foundation.equivalence-relations funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.functoriality-propositional-truncation funext univalence truncations
+open import foundation.multivariable-functoriality-set-quotients funext univalence truncations
+open import foundation.multivariable-operations funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
 open import foundation.raising-universe-levels-unit-type
-open import foundation.set-quotients
-open import foundation.sets
+open import foundation.set-quotients funext univalence truncations
+open import foundation.sets funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.vectors-set-quotients
+open import foundation.vectors-set-quotients funext univalence truncations
 
-open import linear-algebra.vectors
+open import linear-algebra.vectors funext univalence truncations
 
-open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-theories
-open import universal-algebra.congruences
-open import universal-algebra.models-of-signatures
-open import universal-algebra.signatures
+open import universal-algebra.algebraic-theories funext univalence truncations
+open import universal-algebra.algebras-of-theories funext univalence truncations
+open import universal-algebra.congruences funext univalence truncations
+open import universal-algebra.models-of-signatures funext univalence truncations
+open import universal-algebra.signatures funext univalence
 ```
 
 </details>

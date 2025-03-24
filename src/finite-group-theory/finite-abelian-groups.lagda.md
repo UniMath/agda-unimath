@@ -1,32 +1,40 @@
 # Abelian groups
 
 ```agda
-module finite-group-theory.finite-abelian-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module finite-group-theory.finite-abelian-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-group-theory.finite-groups
+open import finite-group-theory.finite-groups funext univalence truncations
 
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.identity-types
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
 open import foundation.interchange-law
-open import foundation.propositions
-open import foundation.sets
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.conjugation
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.conjugation funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.semigroups funext univalence
 
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.dependent-function-types funext univalence truncations
+open import univalent-combinatorics.dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.equality-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

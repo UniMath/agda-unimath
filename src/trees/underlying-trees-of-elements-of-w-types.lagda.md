@@ -1,43 +1,51 @@
 # The underlying trees of elements of W-types
 
 ```agda
-module trees.underlying-trees-of-elements-of-w-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.underlying-trees-of-elements-of-w-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.isolated-elements
-open import foundation.negated-equality
-open import foundation.propositions
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.isolated-elements funext univalence truncations
+open import foundation.negated-equality funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs
-open import graph-theory.morphisms-directed-graphs
-open import graph-theory.walks-directed-graphs
+open import graph-theory.directed-graphs funext univalence
+open import graph-theory.morphisms-directed-graphs funext univalence truncations
+open import graph-theory.walks-directed-graphs funext univalence truncations
 
-open import trees.combinator-directed-trees
-open import trees.combinator-enriched-directed-trees
-open import trees.directed-trees
-open import trees.elementhood-relation-w-types
-open import trees.enriched-directed-trees
-open import trees.equivalences-directed-trees
-open import trees.equivalences-enriched-directed-trees
-open import trees.underlying-trees-elements-coalgebras-polynomial-endofunctors
-open import trees.w-types
+open import trees.combinator-directed-trees funext univalence truncations
+open import trees.combinator-enriched-directed-trees funext univalence truncations
+open import trees.directed-trees funext univalence truncations
+open import trees.elementhood-relation-w-types funext univalence truncations
+open import trees.enriched-directed-trees funext univalence truncations
+open import trees.equivalences-directed-trees funext univalence truncations
+open import trees.equivalences-enriched-directed-trees funext univalence truncations
+open import trees.underlying-trees-elements-coalgebras-polynomial-endofunctors funext univalence truncations
+open import trees.w-types funext univalence truncations
 ```
 
 </details>

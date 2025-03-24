@@ -2,14 +2,21 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module globular-types.empty-globular-types where
+module globular-types.empty-globular-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.empty-types
+open import foundation.empty-types funext univalence truncations
 open import foundation.universe-levels
 
 open import globular-types.constant-globular-types

@@ -1,28 +1,36 @@
 # Pullbacks of subsemigroups
 
 ```agda
-module group-theory.pullbacks-subsemigroups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.pullbacks-subsemigroups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.powersets
-open import foundation.pullbacks-subtypes
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.powersets funext univalence truncations
+open import foundation.pullbacks-subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-semigroups
-open import group-theory.semigroups
-open import group-theory.subsemigroups
-open import group-theory.subsets-semigroups
+open import group-theory.homomorphisms-semigroups funext univalence truncations
+open import group-theory.semigroups funext univalence
+open import group-theory.subsemigroups funext univalence truncations
+open import group-theory.subsets-semigroups funext univalence truncations
 
-open import order-theory.commuting-squares-of-order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.similarity-of-order-preserving-maps-large-posets
+open import order-theory.commuting-squares-of-order-preserving-maps-large-posets funext univalence truncations
+open import order-theory.order-preserving-maps-large-posets funext univalence truncations
+open import order-theory.order-preserving-maps-large-preorders funext univalence truncations
+open import order-theory.similarity-of-order-preserving-maps-large-posets funext univalence truncations
 ```
 
 </details>

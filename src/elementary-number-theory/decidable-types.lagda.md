@@ -1,23 +1,31 @@
 # Decidable types in elementary number theory
 
 ```agda
-module elementary-number-theory.decidable-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.decidable-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
-open import elementary-number-theory.upper-bounds-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations
+open import elementary-number-theory.upper-bounds-natural-numbers funext univalence truncations
 
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.function-types
+open import foundation.empty-types funext univalence truncations
+open import foundation.function-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

@@ -1,7 +1,15 @@
 # Reflective modalities
 
 ```agda
-module orthogonal-factorization-systems.reflective-modalities where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.reflective-modalities
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,8 +18,8 @@ module orthogonal-factorization-systems.reflective-modalities where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.modal-operators
-open import orthogonal-factorization-systems.reflective-subuniverses
+open import orthogonal-factorization-systems.modal-operators funext univalence truncations
+open import orthogonal-factorization-systems.reflective-subuniverses funext univalence truncations
 ```
 
 </details>

@@ -1,30 +1,38 @@
 # The flattening lemma for coequalizers
 
 ```agda
-module synthetic-homotopy-theory.flattening-lemma-coequalizers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.flattening-lemma-coequalizers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
 open import foundation.double-arrows
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-coproduct-types funext univalence truncations
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.coforks
-open import synthetic-homotopy-theory.dependent-universal-property-coequalizers
-open import synthetic-homotopy-theory.flattening-lemma-pushouts
-open import synthetic-homotopy-theory.universal-property-coequalizers
-open import synthetic-homotopy-theory.universal-property-pushouts
+open import synthetic-homotopy-theory.coforks funext univalence truncations
+open import synthetic-homotopy-theory.dependent-universal-property-coequalizers funext univalence truncations
+open import synthetic-homotopy-theory.flattening-lemma-pushouts funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-coequalizers funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-pushouts funext univalence truncations
 ```
 
 </details>

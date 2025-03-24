@@ -2,44 +2,51 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module species.small-cauchy-composition-species-of-finite-inhabited-types where
+module species.small-cauchy-composition-species-of-finite-inhabited-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.decidable-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.propositions
+open import foundation.contractible-types funext univalence
+open import foundation.decidable-types funext univalence truncations
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.raising-universe-levels-unit-type
-open import foundation.relaxed-sigma-decompositions
-open import foundation.sigma-closed-subuniverses
-open import foundation.sigma-decomposition-subuniverse
-open import foundation.subuniverses
+open import foundation.relaxed-sigma-decompositions funext univalence
+open import foundation.sigma-closed-subuniverses funext univalence
+open import foundation.sigma-decomposition-subuniverse funext univalence
+open import foundation.subuniverses funext univalence
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import species.small-cauchy-composition-species-of-types-in-subuniverses
-open import species.species-of-finite-inhabited-types
+open import species.small-cauchy-composition-species-of-types-in-subuniverses funext univalence truncations
+open import species.species-of-finite-inhabited-types funext univalence truncations
 
-open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.inhabited-finite-types
-open import univalent-combinatorics.sigma-decompositions
-open import univalent-combinatorics.small-types
+open import univalent-combinatorics.cartesian-product-types funext univalence truncations
+open import univalent-combinatorics.decidable-propositions funext univalence truncations
+open import univalent-combinatorics.dependent-function-types funext univalence truncations
+open import univalent-combinatorics.dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.inhabited-finite-types funext univalence truncations
+open import univalent-combinatorics.sigma-decompositions funext univalence truncations
+open import univalent-combinatorics.small-types funext univalence truncations
 ```
 
 </details>

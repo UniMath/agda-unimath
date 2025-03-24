@@ -1,7 +1,15 @@
 # Cartesian products of set quotients
 
 ```agda
-module foundation.cartesian-products-set-quotients where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.cartesian-products-set-quotients
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,19 +18,18 @@ module foundation.cartesian-products-set-quotients where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.products-equivalence-relations
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.set-quotients
-open import foundation.sets
-open import foundation.uniqueness-set-quotients
-open import foundation.universal-property-set-quotients
+open import foundation.function-extensionality funext
+open import foundation.products-equivalence-relations funext univalence truncations
+open import foundation.reflecting-maps-equivalence-relations funext univalence truncations
+open import foundation.set-quotients funext univalence truncations
+open import foundation.sets funext univalence
+open import foundation.uniqueness-set-quotients funext univalence truncations
+open import foundation.universal-property-set-quotients funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.equivalence-relations
+open import foundation-core.equivalence-relations funext univalence truncations
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies

@@ -1,20 +1,28 @@
 # The metric space of cauchy approximations in a metric space
 
 ```agda
-module metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers funext univalence truncations
 
 open import foundation.universe-levels
 
-open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.dependent-products-metric-spaces
-open import metric-spaces.metric-spaces
-open import metric-spaces.subspaces-metric-spaces
+open import metric-spaces.cauchy-approximations-metric-spaces funext univalence truncations
+open import metric-spaces.dependent-products-metric-spaces funext univalence truncations
+open import metric-spaces.metric-spaces funext univalence truncations
+open import metric-spaces.subspaces-metric-spaces funext univalence truncations
 ```
 
 </details>

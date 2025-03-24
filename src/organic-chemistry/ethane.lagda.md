@@ -1,45 +1,53 @@
 # Ethane
 
 ```agda
-module organic-chemistry.ethane where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module organic-chemistry.ethane
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 
-open import finite-group-theory.tetrahedra-in-3-space
+open import finite-group-theory.tetrahedra-in-3-space funext univalence truncations
 
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.unit-type
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
-open import foundation.unordered-pairs
+open import foundation.unordered-pairs funext univalence truncations
 
-open import graph-theory.finite-graphs
-open import graph-theory.walks-undirected-graphs
+open import graph-theory.finite-graphs funext univalence truncations
+open import graph-theory.walks-undirected-graphs funext univalence truncations
 
-open import organic-chemistry.alkanes
-open import organic-chemistry.hydrocarbons
+open import organic-chemistry.alkanes funext univalence truncations
+open import organic-chemistry.hydrocarbons funext univalence truncations
 
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.2-element-types funext univalence truncations
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

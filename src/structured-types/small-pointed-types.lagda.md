@@ -1,24 +1,32 @@
 # Small pointed types
 
 ```agda
-module structured-types.small-pointed-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.small-pointed-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.small-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.small-types funext univalence truncations
 open import foundation.universe-levels
 
-open import structured-types.pointed-equivalences
+open import structured-types.pointed-equivalences funext univalence truncations
 open import structured-types.pointed-types
 ```
 

@@ -1,7 +1,15 @@
 # The Goldbach conjecture
 
 ```agda
-module elementary-number-theory.goldbach-conjecture where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.goldbach-conjecture
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,13 +17,13 @@ module elementary-number-theory.goldbach-conjecture where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.parity-natural-numbers
-open import elementary-number-theory.prime-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.parity-natural-numbers funext univalence truncations
+open import elementary-number-theory.prime-numbers funext univalence truncations
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations
 
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

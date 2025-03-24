@@ -1,28 +1,36 @@
 # Products of ideals of commutative rings
 
 ```agda
-module commutative-algebra.products-ideals-commutative-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.products-ideals-commutative-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.ideals-commutative-rings
-open import commutative-algebra.ideals-generated-by-subsets-commutative-rings
-open import commutative-algebra.poset-of-ideals-commutative-rings
-open import commutative-algebra.products-subsets-commutative-rings
-open import commutative-algebra.subsets-commutative-rings
+open import commutative-algebra.commutative-rings funext univalence truncations
+open import commutative-algebra.ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.ideals-generated-by-subsets-commutative-rings funext univalence truncations
+open import commutative-algebra.poset-of-ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.products-subsets-commutative-rings funext univalence truncations
+open import commutative-algebra.subsets-commutative-rings funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositional-truncations
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
 open import foundation.universe-levels
 
 open import lists.lists
 
-open import ring-theory.products-ideals-rings
+open import ring-theory.products-ideals-rings funext univalence truncations
 ```
 
 </details>

@@ -1,26 +1,34 @@
 # Precategories with attributes
 
 ```agda
-module type-theories.precategories-with-attributes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module type-theories.precategories-with-attributes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.commuting-squares-of-morphisms-in-precategories
-open import category-theory.functors-precategories
-open import category-theory.natural-transformations-functors-precategories
-open import category-theory.precategories
-open import category-theory.precategory-of-elements-of-a-presheaf
-open import category-theory.presheaf-categories
-open import category-theory.pullbacks-in-precategories
+open import category-theory.commuting-squares-of-morphisms-in-precategories funext univalence truncations
+open import category-theory.functors-precategories funext univalence truncations
+open import category-theory.natural-transformations-functors-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
+open import category-theory.precategory-of-elements-of-a-presheaf funext univalence truncations
+open import category-theory.presheaf-categories funext univalence truncations
+open import category-theory.pullbacks-in-precategories funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 ```
 

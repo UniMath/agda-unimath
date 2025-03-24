@@ -1,14 +1,22 @@
 # Transfinite cocomposition of maps
 
 ```agda
-module foundation.transfinite-cocomposition-of-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.transfinite-cocomposition-of-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.inverse-sequential-diagrams
-open import foundation.sequential-limits
+open import foundation.inverse-sequential-diagrams funext univalence truncations
+open import foundation.sequential-limits funext univalence truncations
 open import foundation.universe-levels
 ```
 

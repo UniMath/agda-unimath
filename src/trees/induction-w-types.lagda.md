@@ -1,7 +1,15 @@
 # Induction principles on W-types
 
 ```agda
-module trees.induction-w-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.induction-w-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,16 +19,16 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.negation
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.negation funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import trees.elementhood-relation-w-types
-open import trees.inequality-w-types
-open import trees.w-types
+open import trees.elementhood-relation-w-types funext univalence truncations
+open import trees.inequality-w-types funext univalence truncations
+open import trees.w-types funext univalence truncations
 ```
 
 </details>

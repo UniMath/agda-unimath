@@ -1,7 +1,13 @@
 # Sets
 
 ```agda
-module foundation.sets where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.sets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 
 open import foundation-core.sets public
 ```
@@ -9,17 +15,17 @@ open import foundation-core.sets public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-truncated-types
-open import foundation.logical-equivalences
-open import foundation.subuniverses
-open import foundation.truncated-types
-open import foundation.univalent-type-families
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.logical-equivalences funext
+open import foundation.subuniverses funext univalence
+open import foundation.truncated-types funext univalence
+open import foundation.univalent-type-families funext univalence
 open import foundation.universe-levels
 
-open import foundation-core.1-types
+open import foundation-core.1-types funext univalence
 open import foundation-core.cartesian-product-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
@@ -28,7 +34,7 @@ open import foundation-core.injective-maps
 open import foundation-core.precomposition-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncation-levels
 ```

@@ -1,32 +1,40 @@
 # Vectors on euclidean domains
 
 ```agda
-module linear-algebra.vectors-on-euclidean-domains where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module linear-algebra.vectors-on-euclidean-domains
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.euclidean-domains
+open import commutative-algebra.euclidean-domains funext univalence truncations
 
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.identity-types
+open import foundation.function-extensionality funext
+open import foundation.identity-types funext
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.commutative-monoids
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.commutative-monoids funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.semigroups funext univalence
 
-open import linear-algebra.constant-vectors
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.vectors
+open import linear-algebra.constant-vectors funext univalence truncations
+open import linear-algebra.functoriality-vectors funext univalence truncations
+open import linear-algebra.vectors funext univalence truncations
 ```
 
 </details>

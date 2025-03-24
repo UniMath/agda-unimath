@@ -1,14 +1,22 @@
 # Reflexive relations
 
 ```agda
-module foundation.reflexive-relations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.reflexive-relations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.binary-dependent-identifications
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 

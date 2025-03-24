@@ -1,23 +1,31 @@
 # The order of an element in a group
 
 ```agda
-module group-theory.orders-of-elements-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.orders-of-elements-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.group-of-integers
+open import elementary-number-theory.group-of-integers funext univalence truncations
 open import elementary-number-theory.integers
 
 open import foundation.universe-levels
 
-open import group-theory.free-groups-with-one-generator
-open import group-theory.groups
-open import group-theory.kernels-homomorphisms-groups
-open import group-theory.normal-subgroups
-open import group-theory.subgroups
-open import group-theory.subsets-groups
+open import group-theory.free-groups-with-one-generator funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.kernels-homomorphisms-groups funext univalence truncations
+open import group-theory.normal-subgroups funext univalence truncations
+open import group-theory.subgroups funext univalence truncations
+open import group-theory.subsets-groups funext univalence truncations
 ```
 
 </details>

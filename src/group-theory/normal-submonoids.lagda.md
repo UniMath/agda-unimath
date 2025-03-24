@@ -1,34 +1,42 @@
 # Normal submonoids
 
 ```agda
-module group-theory.normal-submonoids where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.normal-submonoids
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.retracts-of-types
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalence-relations funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.retracts-of-types funext univalence
+open import foundation.sets funext univalence
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.congruence-relations-monoids
-open import group-theory.monoids
-open import group-theory.saturated-congruence-relations-monoids
-open import group-theory.semigroups
-open import group-theory.submonoids
-open import group-theory.subsets-monoids
+open import group-theory.congruence-relations-monoids funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.saturated-congruence-relations-monoids funext univalence truncations
+open import group-theory.semigroups funext univalence
+open import group-theory.submonoids funext univalence truncations
+open import group-theory.subsets-monoids funext univalence truncations
 ```
 
 </details>

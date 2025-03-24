@@ -1,21 +1,29 @@
 # Conjugation on concrete groups
 
 ```agda
-module group-theory.conjugation-concrete-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.conjugation-concrete-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
-open import group-theory.conjugation
-open import group-theory.homomorphisms-concrete-groups
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.conjugation funext univalence truncations
+open import group-theory.homomorphisms-concrete-groups funext univalence truncations
 
-open import higher-group-theory.conjugation
+open import higher-group-theory.conjugation funext univalence truncations
 ```
 
 </details>

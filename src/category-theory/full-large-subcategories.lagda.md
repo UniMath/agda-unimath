@@ -1,22 +1,30 @@
 # Full large subcategories
 
 ```agda
-module category-theory.full-large-subcategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.full-large-subcategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.full-large-subprecategories
-open import category-theory.functors-large-categories
-open import category-theory.large-categories
-open import category-theory.large-precategories
+open import category-theory.full-large-subprecategories funext univalence truncations
+open import category-theory.functors-large-categories funext univalence truncations
+open import category-theory.large-categories funext univalence truncations
+open import category-theory.large-precategories funext univalence truncations
 
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.strictly-involutive-identity-types funext univalence
 open import foundation.universe-levels
 ```
 

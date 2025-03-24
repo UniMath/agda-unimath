@@ -1,28 +1,36 @@
 # Horizontal composition of spans of spans
 
 ```agda
-module foundation.horizontal-composition-spans-of-spans where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.horizontal-composition-spans-of-spans
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-triangles-of-maps
-open import foundation.composition-spans
-open import foundation.cones-over-cospan-diagrams
+open import foundation.commuting-triangles-of-maps funext univalence
+open import foundation.composition-spans funext univalence truncations
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.equivalences-arrows
-open import foundation.equivalences-spans
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.morphisms-arrows
+open import foundation.equivalences funext
+open import foundation.equivalences-arrows funext univalence truncations
+open import foundation.equivalences-spans funext univalence
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.morphisms-arrows funext
 open import foundation.morphisms-spans
-open import foundation.pullbacks
+open import foundation.pullbacks funext univalence truncations
 open import foundation.spans
-open import foundation.spans-of-spans
-open import foundation.standard-pullbacks
-open import foundation.type-arithmetic-standard-pullbacks
+open import foundation.spans-of-spans funext univalence
+open import foundation.standard-pullbacks funext
+open import foundation.type-arithmetic-standard-pullbacks funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

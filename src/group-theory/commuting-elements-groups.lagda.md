@@ -1,19 +1,27 @@
 # Commuting elements of groups
 
 ```agda
-module group-theory.commuting-elements-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.commuting-elements-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import group-theory.commuting-elements-monoids
-open import group-theory.groups
+open import group-theory.commuting-elements-monoids funext univalence truncations
+open import group-theory.groups funext univalence truncations
 ```
 
 </details>

@@ -1,17 +1,25 @@
 # Lower types in preorders
 
 ```agda
-module order-theory.lower-types-preorders where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.lower-types-preorders
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.subtypes
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import order-theory.preorders
+open import order-theory.preorders funext univalence truncations
 ```
 
 </details>

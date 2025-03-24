@@ -1,41 +1,49 @@
 # Finitely graded posets
 
 ```agda
-module order-theory.finitely-graded-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.finitely-graded-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-standard-finite-types
-open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.inequality-standard-finite-types funext univalence truncations
+open import elementary-number-theory.modular-arithmetic funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-relations
-open import foundation.coproduct-types
+open import foundation.binary-relations funext univalence truncations
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equality-dependent-pair-types funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import order-theory.bottom-elements-posets
-open import order-theory.posets
-open import order-theory.preorders
-open import order-theory.top-elements-posets
-open import order-theory.total-orders
+open import order-theory.bottom-elements-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.preorders funext univalence truncations
+open import order-theory.top-elements-posets funext univalence truncations
+open import order-theory.total-orders funext univalence truncations
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

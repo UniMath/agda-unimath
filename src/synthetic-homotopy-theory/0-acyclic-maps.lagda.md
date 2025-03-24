@@ -1,20 +1,28 @@
 # `0`-acyclic maps
 
 ```agda
-module synthetic-homotopy-theory.0-acyclic-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.0-acyclic-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-products-propositions
-open import foundation.epimorphisms-with-respect-to-sets
-open import foundation.propositions
-open import foundation.surjective-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.epimorphisms-with-respect-to-sets funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.truncated-acyclic-maps
+open import synthetic-homotopy-theory.truncated-acyclic-maps funext univalence truncations
 ```
 
 </details>

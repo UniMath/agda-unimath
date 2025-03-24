@@ -1,20 +1,28 @@
 # Commutators of elements in groups
 
 ```agda
-module group-theory.commutators-of-elements-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.commutators-of-elements-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import group-theory.commuting-elements-groups
-open import group-theory.conjugation
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
+open import group-theory.commuting-elements-groups funext univalence truncations
+open import group-theory.conjugation funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
 ```
 
 </details>

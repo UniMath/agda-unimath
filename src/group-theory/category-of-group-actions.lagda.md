@@ -1,27 +1,35 @@
 # The category of group actions
 
 ```agda
-module group-theory.category-of-group-actions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.category-of-group-actions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.isomorphisms-in-large-precategories
-open import category-theory.large-categories
-open import category-theory.large-precategories
-open import category-theory.precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.isomorphisms-in-large-precategories funext univalence truncations
+open import category-theory.large-categories funext univalence truncations
+open import category-theory.large-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
-open import group-theory.group-actions
-open import group-theory.groups
-open import group-theory.homomorphisms-group-actions
-open import group-theory.isomorphisms-group-actions
-open import group-theory.precategory-of-group-actions
+open import group-theory.group-actions funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-group-actions funext univalence truncations
+open import group-theory.isomorphisms-group-actions funext univalence truncations
+open import group-theory.precategory-of-group-actions funext univalence truncations
 ```
 
 </details>

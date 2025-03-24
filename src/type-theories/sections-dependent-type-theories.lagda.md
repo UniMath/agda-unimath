@@ -2,19 +2,24 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module type-theories.sections-dependent-type-theories where
+module type-theories.sections-dependent-type-theories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import type-theories.dependent-type-theories
-open import type-theories.fibered-dependent-type-theories
+open import type-theories.dependent-type-theories funext univalence
+open import type-theories.fibered-dependent-type-theories funext univalence
 ```
 
 </details>

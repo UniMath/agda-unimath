@@ -1,15 +1,23 @@
 # Fibered involutions
 
 ```agda
-module foundation.fibered-involutions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.fibered-involutions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.fibered-maps
-open import foundation.involutions
+open import foundation.fibered-maps funext univalence truncations
+open import foundation.involutions funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

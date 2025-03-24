@@ -1,29 +1,37 @@
 # Invertible elements in rings
 
 ```agda
-module ring-theory.invertible-elements-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.invertible-elements-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.contractible-types funext univalence
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.invertible-elements-monoids
+open import group-theory.invertible-elements-monoids funext univalence truncations
 
-open import ring-theory.rings
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

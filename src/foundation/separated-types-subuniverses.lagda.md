@@ -1,14 +1,20 @@
 # Types separated at subuniverses
 
 ```agda
-module foundation.separated-types-subuniverses where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.separated-types-subuniverses
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-products-propositions
-open import foundation.subuniverses
+open import foundation.dependent-products-propositions funext
+open import foundation.subuniverses funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.identity-types

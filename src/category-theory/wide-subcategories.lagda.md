@@ -1,37 +1,45 @@
 # Wide subcategories
 
 ```agda
-module category-theory.wide-subcategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.wide-subcategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.composition-operations-on-binary-families-of-sets
-open import category-theory.faithful-functors-precategories
-open import category-theory.functors-categories
-open import category-theory.isomorphisms-in-categories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.maps-categories
-open import category-theory.precategories
-open import category-theory.subcategories
-open import category-theory.wide-subprecategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.composition-operations-on-binary-families-of-sets funext univalence truncations
+open import category-theory.faithful-functors-precategories funext univalence truncations
+open import category-theory.functors-categories funext univalence truncations
+open import category-theory.isomorphisms-in-categories funext univalence truncations
+open import category-theory.isomorphisms-in-precategories funext univalence truncations
+open import category-theory.maps-categories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
+open import category-theory.subcategories funext univalence truncations
+open import category-theory.wide-subprecategories funext univalence truncations
 
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
-open import foundation.subtypes
+open import foundation.identity-types funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.strictly-involutive-identity-types funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.telescopes
 open import foundation.unit-type
 open import foundation.universe-levels

@@ -1,40 +1,48 @@
 # Cyclic rings
 
 ```agda
-module ring-theory.cyclic-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.cyclic-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-rings funext univalence truncations
 
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.ring-of-integers
+open import elementary-number-theory.multiplication-integers funext univalence truncations
+open import elementary-number-theory.ring-of-integers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.surjective-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.cyclic-groups
-open import group-theory.free-groups-with-one-generator
-open import group-theory.generating-elements-groups
-open import group-theory.groups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.cyclic-groups funext univalence truncations
+open import group-theory.free-groups-with-one-generator funext univalence truncations
+open import group-theory.generating-elements-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
 
-open import ring-theory.integer-multiples-of-elements-rings
-open import ring-theory.invertible-elements-rings
-open import ring-theory.rings
+open import ring-theory.integer-multiples-of-elements-rings funext univalence truncations
+open import ring-theory.invertible-elements-rings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

@@ -1,27 +1,35 @@
 # Automorphism groups
 
 ```agda
-module group-theory.automorphism-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.automorphism-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.1-types
-open import foundation.connected-components
+open import foundation.1-types funext univalence
+open import foundation.connected-components funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.mere-equality
-open import foundation.torsorial-type-families
+open import foundation.identity-types funext
+open import foundation.mere-equality funext univalence truncations
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
-open import group-theory.equivalences-concrete-groups
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.equivalences-concrete-groups funext univalence truncations
 
-open import higher-group-theory.automorphism-groups
-open import higher-group-theory.higher-groups
+open import higher-group-theory.automorphism-groups funext univalence truncations
+open import higher-group-theory.higher-groups funext univalence truncations
 ```
 
 </details>

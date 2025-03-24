@@ -1,21 +1,29 @@
 # Subtypes
 
 ```agda
-module foundation.subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation-core.subtypes public
+module foundation.subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation-core.subtypes funext public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.embeddings
-open import foundation.equality-dependent-function-types
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.equality-dependent-function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.logical-equivalences
-open import foundation.propositional-extensionality
+open import foundation.logical-equivalences funext
+open import foundation.propositional-extensionality funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

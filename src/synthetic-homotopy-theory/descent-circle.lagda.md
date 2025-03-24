@@ -1,35 +1,42 @@
 # The descent property of the circle
 
 ```agda
-module synthetic-homotopy-theory.descent-circle where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.descent-circle
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.automorphisms
-open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-maps
-open import foundation.contractible-maps
-open import foundation.contractible-types
+open import foundation.automorphisms funext univalence
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.commuting-triangles-of-maps funext univalence
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.transport-along-identifications
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
-open import structured-types.equivalences-types-equipped-with-automorphisms
-open import structured-types.types-equipped-with-automorphisms
+open import structured-types.equivalences-types-equipped-with-automorphisms funext univalence truncations
+open import structured-types.types-equipped-with-automorphisms funext univalence
 
-open import synthetic-homotopy-theory.free-loops
-open import synthetic-homotopy-theory.universal-property-circle
+open import synthetic-homotopy-theory.free-loops funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-circle funext univalence truncations
 ```
 
 </details>

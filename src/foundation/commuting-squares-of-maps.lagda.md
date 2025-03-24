@@ -1,9 +1,15 @@
 # Commuting squares of maps
 
 ```agda
-module foundation.commuting-squares-of-maps where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation-core.commuting-squares-of-maps public
+module foundation.commuting-squares-of-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
+
+open import foundation-core.commuting-squares-of-maps funext public
 ```
 
 <details><summary>Imports</summary>
@@ -11,18 +17,18 @@ open import foundation-core.commuting-squares-of-maps public
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-triangles-of-homotopies
-open import foundation.commuting-triangles-of-maps
-open import foundation.function-extensionality
+open import foundation.commuting-triangles-of-homotopies funext
+open import foundation.commuting-triangles-of-maps funext univalence
+open import foundation.function-extensionality funext
 open import foundation.homotopy-algebra
-open import foundation.postcomposition-functions
-open import foundation.precomposition-functions
-open import foundation.transposition-identifications-along-equivalences
+open import foundation.postcomposition-functions funext
+open import foundation.precomposition-functions funext
+open import foundation.transposition-identifications-along-equivalences funext
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.commuting-prisms-of-maps
+open import foundation-core.commuting-prisms-of-maps funext
 open import foundation-core.commuting-squares-of-homotopies
 open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.equivalences

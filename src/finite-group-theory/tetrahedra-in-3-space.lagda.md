@@ -1,19 +1,27 @@
 # Tetrahedra in `3`-dimensional space
 
 ```agda
-module finite-group-theory.tetrahedra-in-3-space where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module finite-group-theory.tetrahedra-in-3-space
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.empty-types
+open import foundation.empty-types funext univalence truncations
 open import foundation.universe-levels
 
-open import univalent-combinatorics.2-element-decidable-subtypes
-open import univalent-combinatorics.cyclic-finite-types
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.2-element-decidable-subtypes funext univalence truncations
+open import univalent-combinatorics.cyclic-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

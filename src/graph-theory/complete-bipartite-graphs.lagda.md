@@ -1,24 +1,32 @@
 # Complete bipartite graphs
 
 ```agda
-module graph-theory.complete-bipartite-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.complete-bipartite-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.universe-levels
-open import foundation.unordered-pairs
+open import foundation.unordered-pairs funext univalence truncations
 
-open import graph-theory.finite-graphs
+open import graph-theory.finite-graphs funext univalence truncations
 
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.fibers-of-maps
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.2-element-types funext univalence truncations
+open import univalent-combinatorics.cartesian-product-types funext univalence truncations
+open import univalent-combinatorics.coproduct-types funext univalence truncations
+open import univalent-combinatorics.dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.fibers-of-maps funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

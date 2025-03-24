@@ -1,17 +1,25 @@
 # Cellular maps
 
 ```agda
-module orthogonal-factorization-systems.cellular-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.cellular-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.connected-maps
+open import foundation.connected-maps funext univalence truncations
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.mere-lifting-properties
+open import orthogonal-factorization-systems.mere-lifting-properties funext univalence truncations
 ```
 
 </details>

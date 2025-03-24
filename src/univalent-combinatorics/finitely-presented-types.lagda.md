@@ -1,7 +1,15 @@
 # Finitely presented types
 
 ```agda
-module univalent-combinatorics.finitely-presented-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.finitely-presented-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,21 +18,21 @@ module univalent-combinatorics.finitely-presented-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.set-presented-types
-open import foundation.set-truncations
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-types funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.set-presented-types funext univalence truncations
+open import foundation.set-truncations funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-choice
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.finitely-many-connected-components
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.finite-choice funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.finitely-many-connected-components funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

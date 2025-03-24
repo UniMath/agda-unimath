@@ -1,29 +1,37 @@
 # The poset of right ideals of a ring
 
 ```agda
-module ring-theory.poset-of-right-ideals-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.poset-of-right-ideals-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
-open import foundation.powersets
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.powersets funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.similarity-of-elements-large-posets
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.large-preorders funext univalence truncations
+open import order-theory.order-preserving-maps-large-posets funext univalence truncations
+open import order-theory.order-preserving-maps-large-preorders funext univalence truncations
+open import order-theory.similarity-of-elements-large-posets funext univalence truncations
 
-open import ring-theory.right-ideals-rings
-open import ring-theory.rings
+open import ring-theory.right-ideals-rings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

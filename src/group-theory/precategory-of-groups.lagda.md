@@ -1,20 +1,28 @@
 # The precategory of groups
 
 ```agda
-module group-theory.precategory-of-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.precategory-of-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.full-large-subprecategories
-open import category-theory.large-precategories
-open import category-theory.precategories
+open import category-theory.full-large-subprecategories funext univalence truncations
+open import category-theory.large-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.precategory-of-semigroups
+open import group-theory.groups funext univalence truncations
+open import group-theory.precategory-of-semigroups funext univalence truncations
 ```
 
 </details>

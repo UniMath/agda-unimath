@@ -1,25 +1,33 @@
 # Subsets of commutative rings
 
 ```agda
-module commutative-algebra.subsets-commutative-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.subsets-commutative-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-rings funext univalence truncations
 
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
-open import foundation.propositional-extensionality
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.propositional-extensionality funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.subgroups-abelian-groups
+open import group-theory.subgroups-abelian-groups funext univalence truncations
 
-open import ring-theory.subsets-rings
+open import ring-theory.subsets-rings funext univalence truncations
 ```
 
 </details>

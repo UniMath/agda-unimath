@@ -1,23 +1,31 @@
 # Precategory of elements of a presheaf
 
 ```agda
-module category-theory.precategory-of-elements-of-a-presheaf where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.precategory-of-elements-of-a-presheaf
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
-open import category-theory.opposite-precategories
-open import category-theory.precategories
-open import category-theory.presheaf-categories
+open import category-theory.functors-precategories funext univalence truncations
+open import category-theory.opposite-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
+open import category-theory.presheaf-categories funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.category-of-sets
+open import foundation.category-of-sets funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 ```
 

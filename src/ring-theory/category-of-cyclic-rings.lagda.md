@@ -1,25 +1,33 @@
 # The category of cyclic rings
 
 ```agda
-module ring-theory.category-of-cyclic-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.category-of-cyclic-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.full-large-subprecategories
-open import category-theory.large-categories
-open import category-theory.large-precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.full-large-subprecategories funext univalence truncations
+open import category-theory.large-categories funext univalence truncations
+open import category-theory.large-precategories funext univalence truncations
 
 open import foundation.universe-levels
 
-open import order-theory.large-posets
+open import order-theory.large-posets funext univalence truncations
 
-open import ring-theory.category-of-rings
-open import ring-theory.cyclic-rings
-open import ring-theory.homomorphisms-cyclic-rings
-open import ring-theory.precategory-of-rings
+open import ring-theory.category-of-rings funext univalence truncations
+open import ring-theory.cyclic-rings funext univalence truncations
+open import ring-theory.homomorphisms-cyclic-rings funext univalence truncations
+open import ring-theory.precategory-of-rings funext univalence truncations
 ```
 
 </details>

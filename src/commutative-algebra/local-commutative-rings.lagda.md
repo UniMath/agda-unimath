@@ -1,22 +1,30 @@
 # Local commutative rings
 
 ```agda
-module commutative-algebra.local-commutative-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.local-commutative-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-rings funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import ring-theory.local-rings
-open import ring-theory.rings
+open import ring-theory.local-rings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

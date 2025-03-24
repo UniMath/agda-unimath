@@ -1,36 +1,44 @@
 # Slice precategories
 
 ```agda
-module category-theory.slice-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.slice-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
-open import category-theory.precategories
-open import category-theory.products-in-precategories
-open import category-theory.pullbacks-in-precategories
-open import category-theory.terminal-objects-precategories
+open import category-theory.functors-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
+open import category-theory.products-in-precategories funext univalence truncations
+open import category-theory.pullbacks-in-precategories funext univalence truncations
+open import category-theory.terminal-objects-precategories funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.strictly-involutive-identity-types funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 ```
 

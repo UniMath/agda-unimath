@@ -1,7 +1,15 @@
 # Congruences
 
 ```agda
-module universal-algebra.congruences where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module universal-algebra.congruences
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,20 +17,20 @@ module universal-algebra.congruences where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalence-relations
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalence-relations funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
+open import linear-algebra.vectors funext univalence truncations
 
-open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-theories
-open import universal-algebra.signatures
+open import universal-algebra.algebraic-theories funext univalence truncations
+open import universal-algebra.algebras-of-theories funext univalence truncations
+open import universal-algebra.signatures funext univalence
 ```
 
 </details>

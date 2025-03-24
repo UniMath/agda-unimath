@@ -1,27 +1,35 @@
 # Equivalence relations
 
 ```agda
-module foundation.equivalence-relations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation-core.equivalence-relations public
+module foundation.equivalence-relations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation-core.equivalence-relations funext univalence truncations public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.effective-maps-equivalence-relations
-open import foundation.fundamental-theorem-of-equivalence-relations
-open import foundation.logical-equivalences
-open import foundation.partitions
-open import foundation.propositional-truncations
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.set-quotients
-open import foundation.sigma-decompositions
-open import foundation.surjective-maps
-open import foundation.uniqueness-set-quotients
-open import foundation.universal-property-set-quotients
+open import foundation.effective-maps-equivalence-relations funext univalence truncations
+open import foundation.fundamental-theorem-of-equivalence-relations funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.partitions funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.reflecting-maps-equivalence-relations funext univalence truncations
+open import foundation.set-quotients funext univalence truncations
+open import foundation.sigma-decompositions funext univalence truncations
+open import foundation.surjective-maps funext univalence truncations
+open import foundation.uniqueness-set-quotients funext univalence truncations
+open import foundation.universal-property-set-quotients funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

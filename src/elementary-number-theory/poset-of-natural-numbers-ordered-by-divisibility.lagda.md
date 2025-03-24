@@ -9,22 +9,22 @@ module
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers funext univalence truncations
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import order-theory.posets
-open import order-theory.preorders
+open import order-theory.posets funext univalence truncations
+open import order-theory.preorders funext univalence truncations
 ```
 
 </details>

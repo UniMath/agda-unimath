@@ -1,22 +1,30 @@
 # Maximum on the rational numbers
 
 ```agda
-module elementary-number-theory.maximum-rational-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.maximum-rational-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.decidable-total-order-rational-numbers
-open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.decidable-total-order-rational-numbers funext univalence truncations
+open import elementary-number-theory.inequality-rational-numbers funext univalence truncations
+open import elementary-number-theory.rational-numbers funext univalence truncations
+open import elementary-number-theory.strict-inequality-rational-numbers funext univalence truncations
 
-open import foundation.coproduct-types
-open import foundation.identity-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 
-open import order-theory.decidable-total-orders
+open import order-theory.decidable-total-orders funext univalence truncations
 ```
 
 </details>

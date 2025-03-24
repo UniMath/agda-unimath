@@ -1,26 +1,34 @@
 # Homomorphisms of groups
 
 ```agda
-module group-theory.homomorphisms-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.homomorphisms-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.homomorphisms-monoids
-open import group-theory.homomorphisms-semigroups
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-monoids funext univalence truncations
+open import group-theory.homomorphisms-semigroups funext univalence truncations
 ```
 
 </details>

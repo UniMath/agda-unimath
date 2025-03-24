@@ -1,7 +1,15 @@
 # Powers of elements in monoids
 
 ```agda
-module group-theory.powers-of-elements-monoids where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.powers-of-elements-monoids
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,14 +20,14 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.dependent-products-propositions
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-monoids
-open import group-theory.monoids
+open import group-theory.homomorphisms-monoids funext univalence truncations
+open import group-theory.monoids funext univalence truncations
 ```
 
 </details>

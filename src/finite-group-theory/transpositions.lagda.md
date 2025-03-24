@@ -1,64 +1,71 @@
 # Transpositions
 
 ```agda
-module finite-group-theory.transpositions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module finite-group-theory.transpositions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-standard-finite-types
+open import elementary-number-theory.well-ordering-principle-standard-finite-types funext univalence truncations
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.automorphisms
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
-open import foundation.decidable-types
+open import foundation.automorphisms funext univalence
+open import foundation.cartesian-product-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-equality funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-subtypes funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.equivalences-maybe
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.involutions
-open import foundation.logical-equivalences
-open import foundation.negated-equality
-open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.equivalences-maybe funext univalence truncations
+open import foundation.fibers-of-maps funext
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.involutions funext univalence
+open import foundation.logical-equivalences funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.propositional-extensionality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-empty-type funext univalence truncations
 open import foundation.unit-type
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.raising-universe-levels
 
-open import lists.concatenation-lists
-open import lists.functoriality-lists
+open import lists.concatenation-lists funext univalence truncations
+open import lists.functoriality-lists funext univalence truncations
 open import lists.lists
 
-open import univalent-combinatorics.2-element-decidable-subtypes
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.2-element-decidable-subtypes funext univalence truncations
+open import univalent-combinatorics.2-element-types funext univalence truncations
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.equality-standard-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

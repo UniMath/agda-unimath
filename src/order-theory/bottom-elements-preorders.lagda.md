@@ -1,18 +1,26 @@
 # Bottom elements in preorders
 
 ```agda
-module order-theory.bottom-elements-preorders where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.bottom-elements-preorders
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import order-theory.preorders
+open import order-theory.preorders funext univalence truncations
 ```
 
 </details>

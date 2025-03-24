@@ -1,23 +1,31 @@
 # Dependent pushout-products
 
 ```agda
-module synthetic-homotopy-theory.dependent-pushout-products where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.dependent-pushout-products
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
+open import foundation.dependent-products-contractible-types funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.universal-property-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.pushouts funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-pushouts funext univalence truncations
 ```
 
 </details>

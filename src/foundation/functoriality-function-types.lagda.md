@@ -1,7 +1,13 @@
 # Functoriality of function types
 
 ```agda
-module foundation.functoriality-function-types where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.functoriality-function-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,10 +15,10 @@ module foundation.functoriality-function-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.postcomposition-functions
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.postcomposition-functions funext
 open import foundation.unit-type
-open import foundation.universal-property-equivalences
+open import foundation.universal-property-equivalences funext
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
@@ -21,7 +27,7 @@ open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.propositional-maps
-open import foundation-core.truncated-maps
+open import foundation-core.truncated-maps funext
 open import foundation-core.truncation-levels
 ```
 

@@ -1,7 +1,15 @@
 # Group solver
 
 ```agda
-module reflection.group-solver where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module reflection.group-solver
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,21 +18,21 @@ module reflection.group-solver where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.decidable-types
+open import foundation.decidable-types funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.identity-types
 
-open import group-theory.groups
+open import group-theory.groups funext univalence truncations
 
-open import linear-algebra.vectors
+open import linear-algebra.vectors funext univalence truncations
 
-open import lists.concatenation-lists
-open import lists.functoriality-lists
+open import lists.concatenation-lists funext univalence truncations
+open import lists.functoriality-lists funext univalence truncations
 open import lists.lists
-open import lists.reversing-lists
+open import lists.reversing-lists funext univalence truncations
 ```
 
 </details>

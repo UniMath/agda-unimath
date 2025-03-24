@@ -1,34 +1,42 @@
 # Divisibility of natural numbers
 
 ```agda
-module elementary-number-theory.divisibility-natural-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.divisibility-natural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.distance-natural-numbers funext univalence truncations
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.logical-equivalences
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.propositional-maps
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.logical-equivalences funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.negation funext
+open import foundation.propositional-maps funext
+open import foundation.propositions funext univalence
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-empty-type funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

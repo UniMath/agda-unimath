@@ -1,7 +1,15 @@
 # Transposition of pointed span diagrams
 
 ```agda
-module structured-types.transposition-pointed-span-diagrams where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.transposition-pointed-span-diagrams
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,8 +18,8 @@ module structured-types.transposition-pointed-span-diagrams where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.opposite-pointed-spans
-open import structured-types.pointed-span-diagrams
+open import structured-types.opposite-pointed-spans funext univalence truncations
+open import structured-types.pointed-span-diagrams funext univalence truncations
 ```
 
 </details>

@@ -1,19 +1,27 @@
 # Embeddings of abelian groups
 
 ```agda
-module group-theory.embeddings-abelian-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.embeddings-abelian-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.embeddings
+open import foundation.embeddings funext
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.embeddings-groups
-open import group-theory.homomorphisms-abelian-groups
-open import group-theory.subgroups-abelian-groups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.embeddings-groups funext univalence truncations
+open import group-theory.homomorphisms-abelian-groups funext univalence truncations
+open import group-theory.subgroups-abelian-groups funext univalence truncations
 ```
 
 </details>

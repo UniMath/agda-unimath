@@ -1,25 +1,33 @@
 # Intersections of subtypes
 
 ```agda
-module foundation.intersections-subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.intersections-subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
-open import foundation.decidable-subtypes
+open import foundation.conjunction funext univalence truncations
+open import foundation.decidable-subtypes funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.large-locale-of-subtypes
-open import foundation.powersets
+open import foundation.dependent-products-propositions funext
+open import foundation.large-locale-of-subtypes funext univalence truncations
+open import foundation.powersets funext univalence truncations
 open import foundation.universe-levels
 
-open import foundation-core.decidable-propositions
+open import foundation-core.decidable-propositions funext univalence truncations
 open import foundation-core.propositions
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 
-open import order-theory.greatest-lower-bounds-large-posets
+open import order-theory.greatest-lower-bounds-large-posets funext univalence truncations
 ```
 
 </details>

@@ -1,22 +1,30 @@
 # Homomorphisms of frames
 
 ```agda
-module order-theory.homomorphisms-frames where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.homomorphisms-frames
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.function-types
+open import foundation.function-types funext
 open import foundation.universe-levels
 
-open import order-theory.frames
-open import order-theory.homomorphisms-meet-semilattices
-open import order-theory.homomorphisms-meet-suplattices
-open import order-theory.homomorphisms-suplattices
-open import order-theory.order-preserving-maps-posets
+open import order-theory.frames funext univalence truncations
+open import order-theory.homomorphisms-meet-semilattices funext univalence truncations
+open import order-theory.homomorphisms-meet-suplattices funext univalence truncations
+open import order-theory.homomorphisms-suplattices funext univalence truncations
+open import order-theory.order-preserving-maps-posets funext univalence truncations
 ```
 
 </details>

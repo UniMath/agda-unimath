@@ -1,7 +1,15 @@
 # Iterated cartesian products of pointed types
 
 ```agda
-module structured-types.iterated-pointed-cartesian-product-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.iterated-pointed-cartesian-product-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +22,7 @@ open import foundation.universe-levels
 
 open import lists.lists
 
-open import structured-types.pointed-cartesian-product-types
+open import structured-types.pointed-cartesian-product-types funext univalence truncations
 open import structured-types.pointed-types
 ```
 

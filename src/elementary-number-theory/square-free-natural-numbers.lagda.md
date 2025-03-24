@@ -1,15 +1,23 @@
 # Square-free natural numbers
 
 ```agda
-module elementary-number-theory.square-free-natural-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.square-free-natural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.squares-natural-numbers
+open import elementary-number-theory.squares-natural-numbers funext univalence truncations
 
 open import foundation.universe-levels
 ```

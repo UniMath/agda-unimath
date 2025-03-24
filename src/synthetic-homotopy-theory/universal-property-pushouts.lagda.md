@@ -2,41 +2,47 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module synthetic-homotopy-theory.universal-property-pushouts where
+module synthetic-homotopy-theory.universal-property-pushouts
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-cubes-of-maps
-open import foundation.commuting-squares-of-maps
-open import foundation.cones-over-cospan-diagrams
-open import foundation.contractible-maps
-open import foundation.contractible-types
+open import foundation.commuting-cubes-of-maps funext univalence
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.cones-over-cospan-diagrams funext
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.precomposition-functions
-open import foundation.pullbacks
-open import foundation.standard-pullbacks
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.precomposition-functions funext
+open import foundation.pullbacks funext univalence truncations
+open import foundation.standard-pullbacks funext
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
-open import foundation.universal-property-equivalences
+open import foundation.universal-property-equivalences funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.pullback-property-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.pullback-property-pushouts funext univalence truncations
 ```
 
 </details>

@@ -1,16 +1,22 @@
 # Sheargroups
 
 ```agda
-module group-theory.sheargroups where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.sheargroups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 ```
 

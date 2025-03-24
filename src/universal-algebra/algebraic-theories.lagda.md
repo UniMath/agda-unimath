@@ -1,7 +1,15 @@
 # Algebraic theories
 
 ```agda
-module universal-algebra.algebraic-theories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module universal-algebra.algebraic-theories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,8 +18,8 @@ module universal-algebra.algebraic-theories where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import universal-algebra.abstract-equations-over-signatures
-open import universal-algebra.signatures
+open import universal-algebra.abstract-equations-over-signatures funext univalence truncations
+open import universal-algebra.signatures funext univalence
 ```
 
 </details>

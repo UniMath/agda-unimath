@@ -1,34 +1,42 @@
 # Equivalence classes
 
 ```agda
-module foundation.equivalence-classes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.equivalence-classes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
+open import foundation.conjunction funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.effective-maps-equivalence-relations
-open import foundation.existential-quantification
-open import foundation.functoriality-propositional-truncation
+open import foundation.effective-maps-equivalence-relations funext univalence truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.functoriality-propositional-truncation funext univalence truncations
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.inhabited-subtypes
-open import foundation.locally-small-types
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.slice
-open import foundation.small-types
+open import foundation.inhabited-subtypes funext univalence truncations
+open import foundation.locally-small-types funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.reflecting-maps-equivalence-relations funext univalence truncations
+open import foundation.slice funext univalence
+open import foundation.small-types funext univalence truncations
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
-open import foundation.surjective-maps
-open import foundation.universal-property-image
+open import foundation.subtypes funext univalence truncations
+open import foundation.surjective-maps funext univalence truncations
+open import foundation.universal-property-image funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.embeddings
-open import foundation-core.equivalence-relations
+open import foundation-core.equivalence-relations funext univalence truncations
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types

@@ -1,7 +1,15 @@
 # Projective types
 
 ```agda
-module foundation.projective-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.projective-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,9 +17,9 @@ module foundation.projective-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.connected-maps
-open import foundation.postcomposition-functions
-open import foundation.surjective-maps
+open import foundation.connected-maps funext univalence truncations
+open import foundation.postcomposition-functions funext
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.truncation-levels
 open import foundation.universe-levels
 

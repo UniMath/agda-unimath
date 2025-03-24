@@ -1,23 +1,31 @@
 # Impredicative encodings of the logical operations
 
 ```agda
-module foundation.impredicative-encodings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.impredicative-encodings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
+open import foundation.conjunction funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.disjunction
-open import foundation.empty-types
-open import foundation.existential-quantification
-open import foundation.homotopies
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.universal-quantification
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext univalence truncations
+open import foundation.empty-types funext univalence truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.homotopies funext
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.universal-quantification funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types

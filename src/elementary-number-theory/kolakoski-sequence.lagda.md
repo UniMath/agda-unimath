@@ -1,18 +1,26 @@
 # The Kolakoski sequence
 
 ```agda
-module elementary-number-theory.kolakoski-sequence where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.kolakoski-sequence
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strong-induction-natural-numbers
+open import elementary-number-theory.strong-induction-natural-numbers funext univalence truncations
 
-open import foundation.booleans
-open import foundation.cartesian-product-types
+open import foundation.booleans funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
 ```
 

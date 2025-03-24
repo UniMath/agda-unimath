@@ -1,19 +1,27 @@
 # The precategory of posets
 
 ```agda
-module order-theory.precategory-of-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.precategory-of-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories
-open import category-theory.precategories
+open import category-theory.large-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.universe-levels
 
-open import order-theory.order-preserving-maps-posets
-open import order-theory.posets
+open import order-theory.order-preserving-maps-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
 ```
 
 </details>

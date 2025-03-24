@@ -1,9 +1,17 @@
 # Embeddings
 
 ```agda
-module univalent-combinatorics.embeddings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation.embeddings public
+module univalent-combinatorics.embeddings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation.embeddings funext public
 ```
 
 <details><summary>Imports</summary>
@@ -11,23 +19,23 @@ open import foundation.embeddings public
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
-open import foundation.decidable-embeddings
-open import foundation.decidable-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-embeddings funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.injective-maps
-open import univalent-combinatorics.retracts-of-finite-types
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.injective-maps funext univalence truncations
+open import univalent-combinatorics.retracts-of-finite-types funext univalence truncations
 ```
 
 </details>

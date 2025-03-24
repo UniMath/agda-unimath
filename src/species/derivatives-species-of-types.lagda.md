@@ -1,17 +1,25 @@
 # Derivatives of species
 
 ```agda
-module species.derivatives-species-of-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.derivatives-species-of-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import species.species-of-types
+open import species.species-of-types funext univalence
 ```
 
 </details>

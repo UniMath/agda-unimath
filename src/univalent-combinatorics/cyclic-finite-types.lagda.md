@@ -1,53 +1,61 @@
 # Cyclic finite types
 
 ```agda
-module univalent-combinatorics.cyclic-finite-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.cyclic-finite-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-integers funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.modular-arithmetic
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.modular-arithmetic funext univalence truncations
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.standard-cyclic-groups
+open import elementary-number-theory.standard-cyclic-groups funext univalence truncations
 
-open import foundation.0-connected-types
+open import foundation.0-connected-types funext univalence truncations
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.mere-equality
-open import foundation.propositional-truncations
-open import foundation.sets
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.mere-equality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.sets funext univalence
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
-open import group-theory.groups
-open import group-theory.isomorphisms-groups
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.isomorphisms-groups funext univalence truncations
 
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-groups funext univalence truncations
 
-open import structured-types.equivalences-types-equipped-with-endomorphisms
-open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
+open import structured-types.equivalences-types-equipped-with-endomorphisms funext univalence truncations
+open import structured-types.mere-equivalences-types-equipped-with-endomorphisms funext univalence truncations
 open import structured-types.pointed-types
-open import structured-types.types-equipped-with-endomorphisms
+open import structured-types.types-equipped-with-endomorphisms funext univalence
 
-open import synthetic-homotopy-theory.groups-of-loops-in-1-types
-open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.groups-of-loops-in-1-types funext univalence truncations
+open import synthetic-homotopy-theory.loop-spaces funext univalence truncations
 ```
 
 </details>

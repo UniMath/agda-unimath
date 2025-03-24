@@ -1,38 +1,46 @@
 # Kleene's fixed point theorem for posets
 
 ```agda
-module domain-theory.kleenes-fixed-point-theorem-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module domain-theory.kleenes-fixed-point-theorem-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import domain-theory.directed-families-posets
-open import domain-theory.omega-continuous-maps-posets
+open import domain-theory.directed-families-posets funext univalence truncations
+open import domain-theory.omega-continuous-maps-posets funext univalence truncations
 
-open import elementary-number-theory.decidable-total-order-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.decidable-total-order-natural-numbers funext univalence truncations
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.fixed-points-endofunctions
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.iterating-functions
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.iterating-functions funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.propositional-truncations funext univalence
 open import foundation.universe-levels
 
-open import order-theory.bottom-elements-posets
-open import order-theory.chains-posets
-open import order-theory.inflattices
-open import order-theory.inhabited-chains-posets
-open import order-theory.least-upper-bounds-posets
-open import order-theory.order-preserving-maps-posets
-open import order-theory.posets
-open import order-theory.suplattices
-open import order-theory.upper-bounds-posets
+open import order-theory.bottom-elements-posets funext univalence truncations
+open import order-theory.chains-posets funext univalence truncations
+open import order-theory.inflattices funext univalence truncations
+open import order-theory.inhabited-chains-posets funext univalence truncations
+open import order-theory.least-upper-bounds-posets funext univalence truncations
+open import order-theory.order-preserving-maps-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.suplattices funext univalence truncations
+open import order-theory.upper-bounds-posets funext univalence truncations
 ```
 
 </details>

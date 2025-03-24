@@ -9,31 +9,31 @@ module
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
-open import foundation.connected-maps
-open import foundation.connected-types
+open import foundation.0-connected-types funext univalence truncations
+open import foundation.connected-maps funext univalence truncations
+open import foundation.connected-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types
-open import foundation.equivalences
-open import foundation.fiber-inclusions
-open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.functoriality-truncation
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.logical-equivalences
-open import foundation.maps-in-subuniverses
-open import foundation.mere-equality
-open import foundation.propositional-truncations
-open import foundation.separated-types-subuniverses
-open import foundation.structured-equality-duality
-open import foundation.subuniverses
-open import foundation.surjective-maps
-open import foundation.truncated-maps
-open import foundation.truncated-types
+open import foundation.dependent-products-truncated-types funext
+open import foundation.equivalences funext
+open import foundation.fiber-inclusions funext univalence
+open import foundation.fibers-of-maps funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.functoriality-propositional-truncation funext univalence truncations
+open import foundation.functoriality-truncation funext univalence truncations
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.maps-in-subuniverses funext univalence
+open import foundation.mere-equality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.separated-types-subuniverses funext univalence
+open import foundation.structured-equality-duality funext univalence
+open import foundation.subuniverses funext univalence
+open import foundation.surjective-maps funext univalence truncations
+open import foundation.truncated-maps funext
+open import foundation.truncated-types funext univalence
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
@@ -90,7 +90,14 @@ agda-unimath.
 ### The extended fundamental theorem of identity types
 
 ```agda
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
 module _
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
   {l1 l2 l3 : Level} (𝒫 : subuniverse (l1 ⊔ l2) l3)
   {A : UU l1} (a : A) {B : A → UU l2}
   where

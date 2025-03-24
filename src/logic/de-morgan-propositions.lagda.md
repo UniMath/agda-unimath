@@ -1,45 +1,53 @@
 # De Morgan propositions
 
 ```agda
-module logic.de-morgan-propositions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module logic.de-morgan-propositions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.conjunction
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.conjunction funext univalence truncations
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.disjunction
-open import foundation.double-negation
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equivalences
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext univalence truncations
+open import foundation.double-negation funext univalence truncations
+open import foundation.embeddings funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
 open import foundation.evaluation-functions
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.irrefutable-propositions
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.retracts-of-types
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.irrefutable-propositions funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.propositional-extensionality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.retracts-of-types funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import foundation-core.decidable-propositions
+open import foundation-core.decidable-propositions funext univalence truncations
 
-open import logic.de-morgan-types
-open import logic.de-morgans-law
+open import logic.de-morgan-types funext univalence truncations
+open import logic.de-morgans-law funext univalence truncations
 ```
 
 </details>

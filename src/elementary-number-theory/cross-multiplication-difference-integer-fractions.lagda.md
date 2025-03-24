@@ -1,24 +1,32 @@
 # The cross-multiplication difference of two integer fractions
 
 ```agda
-module elementary-number-theory.cross-multiplication-difference-integer-fractions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.cross-multiplication-difference-integer-fractions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.difference-integers
-open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.addition-integers funext univalence truncations
+open import elementary-number-theory.difference-integers funext univalence truncations
+open import elementary-number-theory.integer-fractions funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-integers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositions funext univalence
 ```
 
 </details>

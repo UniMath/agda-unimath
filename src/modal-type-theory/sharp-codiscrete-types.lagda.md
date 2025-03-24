@@ -2,8 +2,15 @@
 
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module modal-type-theory.sharp-codiscrete-types where
+module modal-type-theory.sharp-codiscrete-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,20 +18,19 @@ module modal-type-theory.sharp-codiscrete-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.transport-along-equivalences
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.transport-along-equivalences funext univalence
 open import foundation.universe-levels
 
-open import modal-type-theory.sharp-modality
+open import modal-type-theory.sharp-modality funext univalence truncations
 
-open import orthogonal-factorization-systems.higher-modalities
-open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.higher-modalities funext univalence truncations
+open import orthogonal-factorization-systems.modal-operators funext univalence truncations
 ```
 
 </details>

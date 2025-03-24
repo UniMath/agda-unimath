@@ -1,30 +1,38 @@
 # Decidable subtypes
 
 ```agda
-module foundation.decidable-subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.decidable-subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.1-types
-open import foundation.coproduct-types
-open import foundation.decidable-embeddings
-open import foundation.decidable-maps
-open import foundation.decidable-propositions
-open import foundation.decidable-types
+open import foundation.1-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-embeddings funext univalence truncations
+open import foundation.decidable-maps funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equality-dependent-function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.logical-equivalences
-open import foundation.propositional-maps
-open import foundation.sets
-open import foundation.structured-type-duality
-open import foundation.subtypes
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.dependent-products-propositions funext
+open import foundation.equality-dependent-function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositional-maps funext
+open import foundation.sets funext univalence
+open import foundation.structured-type-duality funext univalence truncations
+open import foundation.subtypes funext univalence truncations
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
@@ -38,7 +46,7 @@ open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 
-open import logic.double-negation-stable-subtypes
+open import logic.double-negation-stable-subtypes funext univalence truncations
 ```
 
 </details>

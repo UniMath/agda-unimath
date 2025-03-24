@@ -1,7 +1,15 @@
 # Multivariable functoriality of set quotients
 
 ```agda
-module foundation.multivariable-functoriality-set-quotients where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.multivariable-functoriality-set-quotients
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,18 +17,18 @@ module foundation.multivariable-functoriality-set-quotients where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.functoriality-set-quotients
-open import foundation.set-quotients
+open import foundation.functoriality-set-quotients funext univalence truncations
+open import foundation.set-quotients funext univalence truncations
 open import foundation.universe-levels
-open import foundation.vectors-set-quotients
+open import foundation.vectors-set-quotients funext univalence truncations
 
-open import foundation-core.equivalence-relations
+open import foundation-core.equivalence-relations funext univalence truncations
 open import foundation-core.function-types
 open import foundation-core.homotopies
 
-open import linear-algebra.vectors
+open import linear-algebra.vectors funext univalence truncations
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

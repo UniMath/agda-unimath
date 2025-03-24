@@ -4,7 +4,15 @@ This file collects references to formalization of constructions, propositions,
 theorems and exercises from {{#cite Rij22}}.
 
 ```agda
-module literature.introduction-to-homotopy-type-theory where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module literature.introduction-to-homotopy-type-theory
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 
 open import foundation.universe-levels
 ```
@@ -37,7 +45,7 @@ open import elementary-number-theory.addition-natural-numbers using
 ### 3.3 Pattern matching
 
 ```agda
-open import elementary-number-theory.fibonacci-sequence using
+open import elementary-number-theory.fibonacci-sequence funext univalence truncations using
   ( Fibonacci-ℕ)
 ```
 
@@ -51,16 +59,16 @@ open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ ; _*ℕ_)
 
 -- (b)
-open import elementary-number-theory.exponentiation-natural-numbers using
+open import elementary-number-theory.exponentiation-natural-numbers funext univalence truncations using
   ( exp-ℕ)
 ```
 
 **Exercise 3.2.** Minimum and maximum.
 
 ```agda
-open import elementary-number-theory.minimum-natural-numbers using
+open import elementary-number-theory.minimum-natural-numbers funext univalence truncations using
   ( min-ℕ)
-open import elementary-number-theory.maximum-natural-numbers using
+open import elementary-number-theory.maximum-natural-numbers funext univalence truncations using
   ( max-ℕ)
 ```
 
@@ -72,14 +80,14 @@ open import elementary-number-theory.triangular-numbers using
   ( triangular-number-ℕ)
 
 -- (b)
-open import elementary-number-theory.factorials using
+open import elementary-number-theory.factorials funext univalence truncations using
   ( factorial-ℕ)
 ```
 
 **Exercise 3.4.** Binomial coefficients.
 
 ```agda
-open import elementary-number-theory.binomial-coefficients using
+open import elementary-number-theory.binomial-coefficients funext univalence truncations using
   ( binomial-coefficient-ℕ
   ; is-zero-binomial-coefficient-ℕ)
 ```
@@ -88,7 +96,7 @@ open import elementary-number-theory.binomial-coefficients using
 numbers.
 
 ```agda
-open import elementary-number-theory.fibonacci-sequence using
+open import elementary-number-theory.fibonacci-sequence funext univalence truncations using
   ( Fibo)
 ```
 
@@ -106,7 +114,7 @@ swapping operation `(m, 0) ↦ (m, 1) ; (m, 1) ↦ (m + 1, 0)`, using the same
 encoding of pairs with functions as the definition of the Fibonacci sequence.
 
 ```agda
-open import elementary-number-theory.fibonacci-sequence using
+open import elementary-number-theory.fibonacci-sequence funext univalence truncations using
   ( shift-one ; shift-two)
 
 div-two-induction-step : (ℕ → ℕ) → (ℕ → ℕ)
@@ -154,7 +162,7 @@ open import foundation.unit-type using
 **Definition 4.3.1.** The empty type.
 
 ```agda
-open import foundation.empty-types using
+open import foundation.empty-types funext univalence truncations using
   ( empty -- ∅
   ; ind-empty
   ; ex-falso)
@@ -163,16 +171,16 @@ open import foundation.empty-types using
 **Definition 4.3.2.** Negation of types.
 
 ```agda
-open import foundation.negation using
+open import foundation.negation funext using
   ( ¬_)
-open import foundation.empty-types using
+open import foundation.empty-types funext univalence truncations using
   ( is-empty)
 ```
 
 **Proposition 4.3.4** Contrapositives.
 
 ```agda
-open import foundation.negation using
+open import foundation.negation funext using
   ( map-neg)
 ```
 
@@ -181,7 +189,7 @@ open import foundation.negation using
 **Definition 4.4.1.** Coproducts of types.
 
 ```agda
-open import foundation.coproduct-types using
+open import foundation.coproduct-types funext univalence truncations using
   ( _+_
   ; inl
   ; inr
@@ -192,7 +200,7 @@ open import foundation.coproduct-types using
 **Remark 4.4.2.** Coproducts of functions.
 
 ```agda
-open import foundation.functoriality-coproduct-types using
+open import foundation.functoriality-coproduct-types funext univalence truncations using
   ( map-coproduct -- f + g : A + B → A' + B'
   )
 ```
@@ -200,7 +208,7 @@ open import foundation.functoriality-coproduct-types using
 **Proposition 4.4.3.** Projections from coproducts with an empty type.
 
 ```agda
-open import foundation.type-arithmetic-empty-type using
+open import foundation.type-arithmetic-empty-type funext univalence truncations using
   ( map-right-unit-law-coproduct-is-empty -- is-empty B → (A + B) → A
   )
 ```
@@ -266,7 +274,7 @@ open import foundation.dependent-pair-types using
 **Definition 4.6.4.** The cartesian product.
 
 ```agda
-open import foundation.cartesian-product-types using
+open import foundation.cartesian-product-types funext univalence using
   ( _×_
   ; ind-product)
 ```
@@ -282,35 +290,35 @@ open import elementary-number-theory.integers using
   ( pred-ℤ)
 
 -- (b)
-open import elementary-number-theory.addition-integers using
+open import elementary-number-theory.addition-integers funext univalence truncations using
   ( add-ℤ)
 open import elementary-number-theory.integers using
   ( neg-ℤ)
 
 -- (c)
-open import elementary-number-theory.multiplication-integers using
+open import elementary-number-theory.multiplication-integers funext univalence truncations using
   ( mul-ℤ)
 ```
 
 **Exercise 4.2.** Boolean negation, conjunction and disjunction.
 
 ```agda
-open import foundation.booleans using
+open import foundation.booleans funext univalence truncations using
   ( bool
   ; false
   ; true
   ; ind-bool)
 
 -- (a)
-open import foundation.booleans using
+open import foundation.booleans funext univalence truncations using
   ( neg-bool)
 
 -- (b)
-open import foundation.booleans using
+open import foundation.booleans funext univalence truncations using
   ( conjunction-bool)
 
 -- (c)
-open import foundation.booleans using
+open import foundation.booleans funext univalence truncations using
   ( disjunction-bool)
 ```
 
@@ -321,18 +329,18 @@ Note that we call bi-implications _logical equivalences_ in the library.
 A type `X` for which we can show `¬¬X` is called _irrefutable_.
 
 ```agda
-open import foundation.logical-equivalences using
+open import foundation.logical-equivalences funext using
   ( _↔_)
 
 -- (a)
 _ : {l : Level} (P : UU l) → ¬ (P × ¬ P)
 _ = λ P (p , np) → np p
-open import foundation.negation using
+open import foundation.negation funext using
   ( no-fixed-points-neg -- ¬(P ↔ ¬P)
   )
 
 -- (b)
-open import foundation.double-negation using
+open import foundation.double-negation funext univalence truncations using
   ( ¬¬_
   ; intro-double-negation -- P → ¬¬P
   ; map-double-negation -- (P → Q) → (¬¬P → ¬¬Q)
@@ -340,17 +348,17 @@ open import foundation.double-negation using
   )
 
 -- (c)
-open import foundation.double-negation using
+open import foundation.double-negation funext univalence truncations using
   ( double-negation-double-negation-elim -- ¬¬(¬¬P → P)
   ; double-negation-Peirces-law -- ¬¬(((P → Q) → P) → P)
   ; double-negation-linearity-implication -- ¬¬((P → Q) + (Q → P))
   )
-open import foundation.irrefutable-propositions using
+open import foundation.irrefutable-propositions funext univalence truncations using
   ( is-irrefutable-is-decidable -- ¬¬(P + ¬P)
   )
 
 -- (d)
-open import foundation.decidable-types using
+open import foundation.decidable-types funext univalence truncations using
   ( double-negation-elim-is-decidable -- (P + ¬P) → (¬¬P → P)
   )
 
@@ -366,7 +374,7 @@ _ =
     ( λ (p : P) → nqp (λ _ → p))
 
 -- (e)
-open import logic.double-negation-elimination using
+open import logic.double-negation-elimination funext univalence truncations using
   ( double-negation-elim-neg -- ¬¬(¬ P) → P
   ; double-negation-elim-exp-neg-neg -- ¬¬(P → ¬¬Q) → (P → ¬¬Q)
   ; double-negation-elim-product
@@ -382,7 +390,7 @@ _ =
       ( double-negation-elim-neg (¬ Q))
 
 -- (f)
-open import foundation.irrefutable-propositions using
+open import foundation.irrefutable-propositions funext univalence truncations using
   ( is-irrefutable-product -- ¬¬A → ¬¬B → ¬¬(A × B)
   )
 
@@ -427,7 +435,7 @@ open import lists.lists using
   ( fold-list)
 
 -- (c)
-open import lists.functoriality-lists using
+open import lists.functoriality-lists funext univalence truncations using
   ( map-list)
 
 -- (d)
@@ -435,21 +443,21 @@ open import lists.lists using
   ( length-list)
 
 -- (e)
-open import elementary-number-theory.sums-of-natural-numbers using
+open import elementary-number-theory.sums-of-natural-numbers funext univalence truncations using
   ( sum-list-ℕ)
-open import elementary-number-theory.products-of-natural-numbers using
+open import elementary-number-theory.products-of-natural-numbers funext univalence truncations using
   ( product-list-ℕ)
 
 -- (f)
-open import lists.concatenation-lists using
+open import lists.concatenation-lists funext univalence truncations using
   ( concat-list)
 
 -- (g)
-open import lists.flattening-lists using
+open import lists.flattening-lists funext univalence truncations using
   ( flatten-list)
 
 -- (h)
-open import lists.reversing-lists using
+open import lists.reversing-lists funext univalence truncations using
   ( reverse-list)
 ```
 
@@ -460,7 +468,7 @@ open import lists.reversing-lists using
 **Definition 5.1.1.** The identity type.
 
 ```agda
-open import foundation.identity-types using
+open import foundation.identity-types funext using
   ( _＝_ ; Id
   ; refl
   ; ind-Id)
@@ -471,21 +479,21 @@ open import foundation.identity-types using
 **Definition 5.2.1.** Concatenation of identifications.
 
 ```agda
-open import foundation.identity-types using
+open import foundation.identity-types funext using
   ( concat ; _∙_)
 ```
 
 **Definition 5.2.2.** Inverse operation.
 
 ```agda
-open import foundation.identity-types using
+open import foundation.identity-types funext using
   ( inv)
 ```
 
 **Definition 5.2.4.** Associator.
 
 ```agda
-open import foundation.identity-types using
+open import foundation.identity-types funext using
   ( assoc -- (p ∙ q) ∙ r = p ∙ (q ∙ r)
   )
 ```
@@ -493,7 +501,7 @@ open import foundation.identity-types using
 **Definition 5.2.5.** Unit law operations.
 
 ```agda
-open import foundation.identity-types using
+open import foundation.identity-types funext using
   ( left-unit -- refl ∙ p = p
   ; right-unit -- p ∙ refl = p
   )
@@ -502,7 +510,7 @@ open import foundation.identity-types using
 **Definition 5.2.5.** Inverse law operations.
 
 ```agda
-open import foundation.identity-types using
+open import foundation.identity-types funext using
   ( left-inv -- inv p ∙ p = refl
   ; right-inv -- p ∙ inv p = refl
   )
@@ -554,10 +562,10 @@ open import foundation.action-on-identifications-dependent-functions using
 **Proposition 5.5.1.** Contractibility of singletons.
 
 ```agda
-open import foundation.torsorial-type-families using
+open import foundation.torsorial-type-families funext univalence truncations using
   ( is-torsorial-Id)
-open import foundation.contractible-types
-open import foundation.dependent-products-contractible-types using
+open import foundation.contractible-types funext univalence
+open import foundation.dependent-products-contractible-types funext using
   ( eq-is-contr')
 
 _ : {l : Level} {A : UU l} (a : A) (y : Σ A (λ x → a ＝ x)) → (a , refl) ＝ y
@@ -605,7 +613,7 @@ open import elementary-number-theory.addition-natural-numbers using
 **Exercise 5.1.** Distributivity of inversion over concatenation.
 
 ```agda
-open import foundation.identity-types using
+open import foundation.identity-types funext using
   ( distributive-inv-concat -- inv (p ∙ q) = inv q ∙ inv p
   )
 ```
@@ -613,7 +621,7 @@ open import foundation.identity-types using
 **Exercise 5.2.** Transposing concatenation.
 
 ```agda
-open import foundation.identity-types using
+open import foundation.identity-types funext using
   ( left-transpose-eq-concat -- (p ∙ q = r) → (q = inv p ∙ r)
   ; right-transpose-eq-concat -- (p ∙ q = r) → (p = r ∙ inv q)
   )
@@ -622,14 +630,14 @@ open import foundation.identity-types using
 **Exercise 5.3.** Path lifting.
 
 ```agda
-open import foundation.equality-dependent-pair-types using
+open import foundation.equality-dependent-pair-types funext using
   ( eq-pair-eq-base)
 ```
 
 **Exercise 5.4.** Mac Lane pentagon.
 
 ```agda
-open import foundation.identity-types using
+open import foundation.identity-types funext using
   ( mac-lane-pentagon)
 ```
 
@@ -678,13 +686,13 @@ open import elementary-number-theory.integers using
 
 ```agda
 -- (a)
-open import elementary-number-theory.addition-integers using
+open import elementary-number-theory.addition-integers funext univalence truncations using
   ( left-unit-law-add-ℤ -- 0 + x = x
   ; right-unit-law-add-ℤ -- x + 0 = x
   )
 
 -- (b)
-open import elementary-number-theory.addition-integers using
+open import elementary-number-theory.addition-integers funext univalence truncations using
   ( left-predecessor-law-add-ℤ -- pred x + y = pred (x + y)
   ; right-predecessor-law-add-ℤ -- x + pred y = pred (x + y)
   ; left-successor-law-add-ℤ -- succ x + y = succ (x + y)
@@ -692,13 +700,13 @@ open import elementary-number-theory.addition-integers using
   )
 
 -- (c)
-open import elementary-number-theory.addition-integers using
+open import elementary-number-theory.addition-integers funext univalence truncations using
   ( associative-add-ℤ -- (x + y) + z = x + (y + z)
   ; commutative-add-ℤ -- x + y = y + x
   )
 
 -- (d)
-open import elementary-number-theory.addition-integers using
+open import elementary-number-theory.addition-integers funext univalence truncations using
   ( left-inverse-law-add-ℤ -- (-x) + x = 0
   ; right-inverse-law-add-ℤ -- x + (-x) = 0
   )
@@ -708,7 +716,7 @@ open import elementary-number-theory.addition-integers using
 
 ```agda
 -- (a)
-open import elementary-number-theory.multiplication-integers using
+open import elementary-number-theory.multiplication-integers funext univalence truncations using
   ( left-zero-law-mul-ℤ -- 0 * x = x
   ; right-zero-law-mul-ℤ -- x * 0 = x
   ; left-unit-law-mul-ℤ -- 1 * x = x
@@ -716,7 +724,7 @@ open import elementary-number-theory.multiplication-integers using
   )
 
 -- (b)
-open import elementary-number-theory.multiplication-integers using
+open import elementary-number-theory.multiplication-integers funext univalence truncations using
   ( left-predecessor-law-mul-ℤ' -- pred x * y = x * y - y
   ; right-predecessor-law-mul-ℤ' -- x * pred y = x * y - x
   ; left-successor-law-mul-ℤ' -- succ x * y = x * y + y
@@ -724,13 +732,13 @@ open import elementary-number-theory.multiplication-integers using
   )
 
 -- (c)
-open import elementary-number-theory.multiplication-integers using
+open import elementary-number-theory.multiplication-integers funext univalence truncations using
   ( left-distributive-mul-add-ℤ -- x * (y + z) = x * y + x * z
   ; right-distributive-mul-add-ℤ -- (x + y) * z = x * z + y * z
   )
 
 -- (d)
-open import elementary-number-theory.multiplication-integers using
+open import elementary-number-theory.multiplication-integers funext univalence truncations using
   ( associative-mul-ℤ -- (x * y) * z = x * (y * z)
   ; commutative-mul-ℤ -- x * y = y * x
   )
@@ -812,14 +820,14 @@ unrelated, Agda considers them equal. Other universe equalities may be found in
 **Definition 6.3.1.** Observational equality of ℕ.
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers using
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations using
   ( Eq-ℕ)
 ```
 
 **Lemma 6.3.2.** Observational equality of ℕ is reflexive.
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers using
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations using
   ( refl-Eq-ℕ)
 ```
 
@@ -827,7 +835,7 @@ open import elementary-number-theory.equality-natural-numbers using
 identifications.
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers using
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations using
   ( Eq-eq-ℕ
   ; eq-Eq-ℕ)
 
@@ -924,11 +932,11 @@ open import elementary-number-theory.multiplication-natural-numbers using
 
 ```agda
 -- (a)
-open import foundation.booleans using
+open import foundation.booleans funext univalence truncations using
   ( Eq-bool)
 
 -- (b)
-open import foundation.booleans using
+open import foundation.booleans funext univalence truncations using
   ( Eq-eq-bool
   ; eq-Eq-bool)
 
@@ -936,7 +944,7 @@ _ : (x y : bool) → (x ＝ y) ↔ Eq-bool x y
 _ = λ x y → (Eq-eq-bool , eq-Eq-bool)
 
 -- (c)
-open import foundation.booleans using
+open import foundation.booleans funext univalence truncations using
   ( neq-neg-bool -- b ≠ neg-bool b
   )
 _ : ¬ (false ＝ true)
@@ -946,22 +954,22 @@ _ = neq-neg-bool false
 **Exercise 6.3.** Standard linear order on ℕ.
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers using
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations using
   ( _≤-ℕ_)
 
 -- (a)
-open import elementary-number-theory.inequality-natural-numbers using
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations using
   ( refl-leq-ℕ
   ; antisymmetric-leq-ℕ
   ; transitive-leq-ℕ)
 
 -- (b)
-open import elementary-number-theory.inequality-natural-numbers using
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations using
   ( linear-leq-ℕ -- (m ≤ n) + (n ≤ m)
   )
 
 -- (c)
-open import elementary-number-theory.inequality-natural-numbers using
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations using
   ( preserves-leq-left-add-ℕ
   ; reflects-leq-left-add-ℕ)
 
@@ -970,7 +978,7 @@ _ =
   λ m n k → (preserves-leq-left-add-ℕ k m n , reflects-leq-left-add-ℕ k m n)
 
 -- (d)
-open import elementary-number-theory.inequality-natural-numbers using
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations using
   ( preserves-leq-left-mul-ℕ
   ; reflects-order-mul-ℕ)
 
@@ -980,10 +988,10 @@ _ =
     (preserves-leq-left-mul-ℕ (succ-ℕ k) m n , reflects-order-mul-ℕ k m n)
 
 -- (e)
-open import elementary-number-theory.minimum-natural-numbers using
+open import elementary-number-theory.minimum-natural-numbers funext univalence truncations using
   ( is-greatest-lower-bound-min-ℕ -- (k ≤ min m n) ↔ (k ≤ m) × (k ≤ n)
   )
-open import elementary-number-theory.maximum-natural-numbers using
+open import elementary-number-theory.maximum-natural-numbers funext univalence truncations using
   ( is-least-upper-bound-max-ℕ -- (max m n ≤ k) ↔ (m ≤ k) × (n ≤ k)
   )
 ```
@@ -991,23 +999,23 @@ open import elementary-number-theory.maximum-natural-numbers using
 **Exercise 6.4.** Standard strict order on ℕ.
 
 ```agda
-open import elementary-number-theory.strict-inequality-natural-numbers using
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations using
   ( _<-ℕ_)
 
 -- (a)
-open import elementary-number-theory.strict-inequality-natural-numbers using
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations using
   ( anti-reflexive-le-ℕ
   ; antisymmetric-le-ℕ
   ; transitive-le-ℕ)
 
 -- (b)
-open import elementary-number-theory.strict-inequality-natural-numbers using
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations using
   ( succ-le-ℕ -- n < n + 1
   ; preserves-le-succ-ℕ -- m < n → m < n + 1
   )
 
 -- (c)
-open import elementary-number-theory.strict-inequality-natural-numbers using
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations using
   ( leq-succ-le-ℕ
   ; le-leq-succ-ℕ
   ; contradiction-le-ℕ
@@ -1023,11 +1031,11 @@ _ = λ m n → contradiction-le-ℕ m n , le-not-leq-ℕ m n
 **Exercise 6.5.** Distance function on ℕ.
 
 ```agda
-open import elementary-number-theory.distance-natural-numbers using
+open import elementary-number-theory.distance-natural-numbers funext univalence truncations using
   ( dist-ℕ)
 
 -- (a)
-open import elementary-number-theory.distance-natural-numbers using
+open import elementary-number-theory.distance-natural-numbers funext univalence truncations using
   ( dist-eq-ℕ
   ; eq-dist-ℕ
   ; symmetric-dist-ℕ -- dist m n = dist n m
@@ -1040,13 +1048,13 @@ _ = λ m n → (dist-eq-ℕ m n , eq-dist-ℕ m n)
 -- TODO: b
 
 -- (c)
-open import elementary-number-theory.distance-natural-numbers using
+open import elementary-number-theory.distance-natural-numbers funext univalence truncations using
   ( translation-invariant-dist-ℕ -- dist (a + m) (a + n) = dist m n
   ; left-distributive-mul-dist-ℕ' -- dist (k * m) (k * n) = k * (dist m n)
   )
 
 -- (d)
-open import elementary-number-theory.distance-natural-numbers using
+open import elementary-number-theory.distance-natural-numbers funext univalence truncations using
   ( is-additive-right-inverse-dist-ℕ -- x + dist x y = y for x ≤ y
   )
 ```
@@ -1054,7 +1062,7 @@ open import elementary-number-theory.distance-natural-numbers using
 **Exercise 6.6.** The absolute value function.
 
 ```agda
-open import elementary-number-theory.absolute-value-integers using
+open import elementary-number-theory.absolute-value-integers funext univalence truncations using
   ( abs-ℤ
   ; eq-abs-ℤ
   ; abs-eq-ℤ
@@ -1076,14 +1084,14 @@ Note that the library's division relation uses the property `k * d = n`, as
 opposed to the book's `d * k = n`.
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers using
+open import elementary-number-theory.divisibility-natural-numbers funext univalence truncations using
   ( div-ℕ)
 ```
 
 **Example 7.1.4.** Divisibility by one.
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers using
+open import elementary-number-theory.divisibility-natural-numbers funext univalence truncations using
   ( div-one-ℕ -- 1 | x
   )
 ```
@@ -1092,7 +1100,7 @@ open import elementary-number-theory.divisibility-natural-numbers using
 <a id="proposition-7.1.5"></a>
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers using
+open import elementary-number-theory.divisibility-natural-numbers funext univalence truncations using
   ( div-add-ℕ -- d | x → d | y → d | (x + y)
   )
 ```
@@ -1104,7 +1112,7 @@ The other other two claims are shown in Exercise [7.1](#exercise-7.1).
 **Definition 7.2.1.** Typal binary relations.
 
 ```agda
-open import foundation.binary-relations using
+open import foundation.binary-relations funext univalence truncations using
   ( Relation
   ; is-reflexive
   ; is-symmetric
@@ -1115,14 +1123,14 @@ open import foundation.binary-relations using
 **Definition 7.2.2.** Congruence relations on ℕ.
 
 ```agda
-open import elementary-number-theory.congruence-natural-numbers using
+open import elementary-number-theory.congruence-natural-numbers funext univalence truncations using
   ( _≡_mod_)
 ```
 
 **Example 7.2.3.** The modulus is congruent to zero.
 
 ```agda
-open import elementary-number-theory.congruence-natural-numbers using
+open import elementary-number-theory.congruence-natural-numbers funext univalence truncations using
   ( cong-zero-ℕ -- k ≡ 0 mod k
   )
 ```
@@ -1130,7 +1138,7 @@ open import elementary-number-theory.congruence-natural-numbers using
 **Proposition 7.2.4.** Congruence modulo `k` is an equivalence relation.
 
 ```agda
-open import elementary-number-theory.congruence-natural-numbers using
+open import elementary-number-theory.congruence-natural-numbers funext univalence truncations using
   ( refl-cong-ℕ
   ; symmetric-cong-ℕ
   ; transitive-cong-ℕ)
@@ -1144,7 +1152,7 @@ The point `⋆` is called `neg-one-Fin` because it represents the element `k - 1
 under the inclusion into ℕ.
 
 ```agda
-open import univalent-combinatorics.standard-finite-types using
+open import univalent-combinatorics.standard-finite-types funext univalence truncations using
   ( Fin
   ; inl-Fin -- inclusion Fin k → Fin (k + 1)
   ; neg-one-Fin -- point Fin (k + 1)
@@ -1154,14 +1162,14 @@ open import univalent-combinatorics.standard-finite-types using
 **Definition 7.3.4.** Inclusion into ℕ.
 
 ```agda
-open import univalent-combinatorics.standard-finite-types using
+open import univalent-combinatorics.standard-finite-types funext univalence truncations using
   ( nat-Fin)
 ```
 
 **Lemma 7.3.5.** The inclusion into ℕ is bounded.
 
 ```agda
-open import univalent-combinatorics.standard-finite-types using
+open import univalent-combinatorics.standard-finite-types funext univalence truncations using
   ( strict-upper-bound-nat-Fin -- ι x < k
   )
 ```
@@ -1169,7 +1177,7 @@ open import univalent-combinatorics.standard-finite-types using
 **Proposition 7.3.6.** The inclusion into ℕ is injective.
 
 ```agda
-open import univalent-combinatorics.standard-finite-types using
+open import univalent-combinatorics.standard-finite-types funext univalence truncations using
   ( is-injective-nat-Fin)
 ```
 
@@ -1185,7 +1193,7 @@ open import foundation.split-surjective-maps using
 **Definition 7.4.2.** Zero and successor on standard finite types.
 
 ```agda
-open import univalent-combinatorics.standard-finite-types using
+open import univalent-combinatorics.standard-finite-types funext univalence truncations using
   ( zero-Fin
   ; skip-zero-Fin
   ; succ-Fin)
@@ -1194,7 +1202,7 @@ open import univalent-combinatorics.standard-finite-types using
 **Definition 7.4.3.** The surjection from ℕ into standard finite types.
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations using
   ( mod-succ-ℕ -- [-]ₖ₊₁
   )
 ```
@@ -1202,11 +1210,11 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 **Lemma 7.4.4.** Preservation of zero and successor `mod k`.
 
 ```agda
-open import univalent-combinatorics.standard-finite-types using
+open import univalent-combinatorics.standard-finite-types funext univalence truncations using
   ( is-zero-nat-zero-Fin -- ι(zero) = 0
   ; nat-skip-zero-Fin -- ι(skip-zero x) = ι(x) + 1
   )
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations using
   ( cong-nat-succ-Fin -- ι(succ x) ≡ ι(x) + 1 mod k
   )
 ```
@@ -1214,7 +1222,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 **Proposition 7.4.5.**
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations using
   ( cong-nat-mod-succ-ℕ -- ι[x]ₖ₊₁ ≡ x mod (k + 1)
   )
 ```
@@ -1222,14 +1230,14 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 **Proposition 7.4.6.**
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers using
+open import elementary-number-theory.divisibility-natural-numbers funext univalence truncations using
   ( is-zero-div-ℕ
   ; div-is-zero-ℕ)
 
 _ : (d x : ℕ) → x <-ℕ d → div-ℕ d x ↔ (x ＝ 0)
 _ = λ d x x<d → (is-zero-div-ℕ d x x<d , div-is-zero-ℕ d x)
 
-open import elementary-number-theory.congruence-natural-numbers using
+open import elementary-number-theory.congruence-natural-numbers funext univalence truncations using
   ( eq-cong-le-dist-ℕ
   ; cong-identification-ℕ)
 
@@ -1241,7 +1249,7 @@ _ = λ k x y dist<d → (eq-cong-le-dist-ℕ k x y dist<d , cong-identification-
 inclusion to `Fin (k + 1)`.
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations using
   ( cong-eq-mod-succ-ℕ
   ; eq-mod-succ-cong-ℕ)
 
@@ -1252,7 +1260,7 @@ _ = λ k x y → (cong-eq-mod-succ-ℕ k x y , eq-mod-succ-cong-ℕ k x y)
 **Theorem 7.4.8.** The map from natural numbers is split surjective.
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations using
   ( is-split-surjective-mod-succ-ℕ)
 ```
 
@@ -1261,7 +1269,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 **Definition 7.5.1.** The cyclic groups.
 
 ```agda
-open import elementary-number-theory.modular-arithmetic using
+open import elementary-number-theory.modular-arithmetic funext univalence truncations using
   ( ℤ-Mod -- ℤ/k
   )
 ```
@@ -1269,7 +1277,7 @@ open import elementary-number-theory.modular-arithmetic using
 **Definition 7.5.2.** Addition on `ℤ/(k + 1)` and additive inverse.
 
 ```agda
-open import elementary-number-theory.modular-arithmetic using
+open import elementary-number-theory.modular-arithmetic funext univalence truncations using
   ( add-ℤ-Mod
   ; neg-ℤ-Mod)
 ```
@@ -1279,10 +1287,10 @@ open import elementary-number-theory.modular-arithmetic using
 The lemmas are proven for all natural numbers `k`, not just positive ones.
 
 ```agda
-open import elementary-number-theory.congruence-natural-numbers using
+open import elementary-number-theory.congruence-natural-numbers funext univalence truncations using
   ( cong-is-zero-nat-zero-Fin -- ι(0) ≡ 0 mod (k + 1)
   )
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations using
   ( cong-add-Fin -- ι(x + y) ≡ ι(x) + ι(y) mod (k + 1)
   ; cong-neg-Fin -- ι(-x) ≡ dist(ι(x), k + 1) mod (k + 1)
   )
@@ -1291,7 +1299,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 **Proposition 7.5.4.** A 3-for-2 property of congruences.
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations using
   ( congruence-add-ℕ -- x ≡ x' → y ≡ y' → (x + y ≡ x' + y')
   ; cong-right-summand-ℕ -- x ≡ x' → (x + y ≡ x' + y') → y ≡ y'
   ; cong-left-summand-ℕ -- y ≡ y' → (x + y ≡ x' + y') → x ≡ x'
@@ -1301,7 +1309,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 **Theorem 7.5.5.** ℤ/k with addition and negation form an Abelian group.
 
 ```agda
-open import elementary-number-theory.modular-arithmetic using
+open import elementary-number-theory.modular-arithmetic funext univalence truncations using
   ( left-unit-law-add-ℤ-Mod -- 0 + x = x
   ; right-unit-law-add-ℤ-Mod -- x + 0 = x
   ; left-inverse-law-add-ℤ-Mod -- (-x) + x = 0
@@ -1317,7 +1325,7 @@ open import elementary-number-theory.modular-arithmetic using
 <a id="exercise-7.1"></a>
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers using
+open import elementary-number-theory.divisibility-natural-numbers funext univalence truncations using
   ( div-right-summand-ℕ -- d | x → d | x + y → d | y
   ; div-left-summand-ℕ -- d | y → d | x + y → d | x
   )
@@ -1326,7 +1334,7 @@ open import elementary-number-theory.divisibility-natural-numbers using
 **Exercise 7.2.** Divisibility is a partial order.
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers using
+open import elementary-number-theory.divisibility-natural-numbers funext univalence truncations using
   ( refl-div-ℕ
   ; antisymmetric-div-ℕ
   ; transitive-div-ℕ)
@@ -1335,25 +1343,25 @@ open import elementary-number-theory.divisibility-natural-numbers using
 **Exercise 7.3.** `n!` is divisible by all `0 < x ≤ n`
 
 ```agda
-open import elementary-number-theory.factorials using
+open import elementary-number-theory.factorials funext univalence truncations using
   ( div-factorial-ℕ)
 ```
 
 **Exercise 7.4.** The successor on `Fin (k + 1)` adds one.
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations using
   ( is-add-one-succ-Fin')
 ```
 
 **Exercise 7.5.** Observational equality of `Fin k`.
 
 ```agda
-open import univalent-combinatorics.equality-standard-finite-types using
+open import univalent-combinatorics.equality-standard-finite-types funext univalence truncations using
   ( Eq-Fin)
 
 -- (a)
-open import univalent-combinatorics.equality-standard-finite-types using
+open import univalent-combinatorics.equality-standard-finite-types funext univalence truncations using
   ( Eq-Fin-eq
   ; eq-Eq-Fin)
 
@@ -1361,22 +1369,22 @@ _ : (k : ℕ) → {x y : Fin k} → (x ＝ y) ↔ Eq-Fin k x y
 _ = λ k → (Eq-Fin-eq k , eq-Eq-Fin k)
 
 -- (b)
-open import univalent-combinatorics.standard-finite-types using
+open import univalent-combinatorics.standard-finite-types funext univalence truncations using
   ( is-injective-inl-Fin)
 
 -- (c)
-open import univalent-combinatorics.standard-finite-types using
+open import univalent-combinatorics.standard-finite-types funext univalence truncations using
   ( neq-zero-succ-Fin)
 
 -- (d)
-open import univalent-combinatorics.standard-finite-types using
+open import univalent-combinatorics.standard-finite-types funext univalence truncations using
   ( is-injective-succ-Fin)
 ```
 
 **Exercise 7.6.** The predecessor function on `Fin k`.
 
 ```agda
-open import univalent-combinatorics.standard-finite-types using
+open import univalent-combinatorics.standard-finite-types funext univalence truncations using
   ( neg-two-Fin
   ; skip-neg-two-Fin
   ; pred-Fin
@@ -1388,11 +1396,11 @@ open import univalent-combinatorics.standard-finite-types using
 **Exercise 7.7.** Classical finite types.
 
 ```agda
-open import univalent-combinatorics.classical-finite-types using
+open import univalent-combinatorics.classical-finite-types funext univalence truncations using
   ( classical-Fin)
 
 -- (a)
-open import univalent-combinatorics.classical-finite-types using
+open import univalent-combinatorics.classical-finite-types funext univalence truncations using
   ( Eq-classical-Fin
   ; Eq-eq-classical-Fin
   ; eq-Eq-classical-Fin)
@@ -1401,7 +1409,7 @@ _ : (k : ℕ) → (x y : classical-Fin k) → (x ＝ y) ↔ Eq-classical-Fin k x
 _ = λ k x y → (Eq-eq-classical-Fin k x y , eq-Eq-classical-Fin k x y)
 
 -- (b)
-open import univalent-combinatorics.classical-finite-types using
+open import univalent-combinatorics.classical-finite-types funext univalence truncations using
   ( classical-standard-Fin -- ι
   ; standard-classical-Fin -- α
   ; is-section-classical-standard-Fin -- α (ι x) = x
@@ -1412,21 +1420,21 @@ open import univalent-combinatorics.classical-finite-types using
 **Exercise 7.8.** Multiplication on `ℤ/(k + 1)`.
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations using
   ( mul-Fin)
 
 -- (a)
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations using
   ( cong-mul-Fin -- ι(x * y) ≡ ι x * ι y mod (k + 1)
   )
 
 -- (b)
-open import elementary-number-theory.congruence-natural-numbers using
+open import elementary-number-theory.congruence-natural-numbers funext univalence truncations using
   ( congruence-mul-ℕ -- x ≡ x' → y ≡ y' → (x * y) ≡ (x' * y')
   )
 
 -- (c)
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations using
   ( associative-mul-Fin -- (x * y) * z = x * (y * z)
   ; commutative-mul-Fin -- x * y = y * x
   ; left-unit-law-mul-Fin -- 1 * x = x
@@ -1440,7 +1448,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 
 ```agda
 -- (a)
-open import elementary-number-theory.euclidean-division-natural-numbers using
+open import elementary-number-theory.euclidean-division-natural-numbers funext univalence truncations using
   ( euclidean-division-ℕ)
 
 -- TODO: b
@@ -1449,21 +1457,21 @@ open import elementary-number-theory.euclidean-division-natural-numbers using
 **Exercise 7.10.** `k`-ary natural numbers.
 
 ```agda
-open import elementary-number-theory.finitary-natural-numbers using
+open import elementary-number-theory.finitary-natural-numbers funext univalence truncations using
   ( based-ℕ -- ℕₖ
   ; convert-based-ℕ -- fₖ
   )
 
 -- (a)
-open import elementary-number-theory.finitary-natural-numbers using
+open import elementary-number-theory.finitary-natural-numbers funext univalence truncations using
   ( is-empty-based-zero-ℕ)
 
 -- (b)
-open import elementary-number-theory.finitary-natural-numbers using
+open import elementary-number-theory.finitary-natural-numbers funext univalence truncations using
   ( is-injective-convert-based-ℕ)
 
 -- (c)
-open import elementary-number-theory.finitary-natural-numbers using
+open import elementary-number-theory.finitary-natural-numbers funext univalence truncations using
   ( inv-convert-based-ℕ -- gₖ
   ; is-section-inv-convert-based-ℕ -- fₖ₊₁ (gₖ n) = n
   ; is-retraction-inv-convert-based-ℕ -- gₖ (fₖ₊₁ x) = x
@@ -1477,14 +1485,14 @@ open import elementary-number-theory.finitary-natural-numbers using
 **Definition 8.1.1.** Decidable types.
 
 ```agda
-open import foundation.decidable-types using
+open import foundation.decidable-types funext univalence truncations using
   ( is-decidable)
 ```
 
 **Example 8.1.2.** The unit type and the empty type are decidable
 
 ```agda
-open import foundation.decidable-types using
+open import foundation.decidable-types funext univalence truncations using
   ( is-decidable-unit
   ; is-decidable-empty)
 ```
@@ -1492,7 +1500,7 @@ open import foundation.decidable-types using
 **Example 8.1.3.** Decidability of coproducts, products and functions.
 
 ```agda
-open import foundation.decidable-types using
+open import foundation.decidable-types funext univalence truncations using
   ( is-decidable-coproduct -- if A and B are decidable, then A + B is decidable
   ; is-decidable-product -- if A and B are decidable, then A × B is decidable
   ; is-decidable-function-type -- if A and B are decidable, then A → B is decidable
@@ -1503,18 +1511,18 @@ open import foundation.decidable-types using
 **Example 8.1.4.** Decidability of observational equality and inequality on ℕ.
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers using
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations using
   ( is-decidable-Eq-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations using
   ( is-decidable-leq-ℕ)
-open import elementary-number-theory.strict-inequality-natural-numbers using
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations using
   ( is-decidable-le-ℕ)
 ```
 
 **Definition 8.1.5.** Decidable equality.
 
 ```agda
-open import foundation.decidable-equality using
+open import foundation.decidable-equality funext univalence truncations using
   ( has-decidable-equality)
 ```
 
@@ -1522,21 +1530,21 @@ open import foundation.decidable-equality using
 equivalent.
 
 ```agda
-open import foundation.decidable-types using
+open import foundation.decidable-types funext univalence truncations using
   ( is-decidable-iff')
 ```
 
 **Proposition 8.1.7.** Equality on ℕ is decidable.
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers using
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations using
   ( has-decidable-equality-ℕ)
 ```
 
 **Proposition 8.1.8.** Equality on `Fin k` is decidable.
 
 ```agda
-open import univalent-combinatorics.equality-standard-finite-types using
+open import univalent-combinatorics.equality-standard-finite-types funext univalence truncations using
   ( is-decidable-Eq-Fin
   ; has-decidable-equality-Fin)
 ```
@@ -1544,7 +1552,7 @@ open import univalent-combinatorics.equality-standard-finite-types using
 **Theorem 8.1.9.** Divisibility is decidable.
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations using
   ( is-decidable-div-ℕ)
 ```
 
@@ -1557,7 +1565,7 @@ Instead we use Agda's `with` abstraction to do case analysis on the result of
 `is-decidable-div-ℕ 2 n`, as explained in Remark 8.2.2.
 
 ```agda
-open import elementary-number-theory.collatz-conjecture using
+open import elementary-number-theory.collatz-conjecture funext univalence truncations using
   ( collatz)
 ```
 
@@ -1565,7 +1573,7 @@ open import elementary-number-theory.collatz-conjecture using
 assumptions.
 
 ```agda
-open import foundation.decidable-types using
+open import foundation.decidable-types funext univalence truncations using
   ( is-decidable-product'
   ; is-decidable-function-type')
 ```
@@ -1573,14 +1581,14 @@ open import foundation.decidable-types using
 **Proposition 8.2.4.**
 
 ```agda
-open import elementary-number-theory.decidable-types using
+open import elementary-number-theory.decidable-types funext univalence truncations using
   ( is-decidable-Π-ℕ)
 ```
 
 **Corollary 8.2.5.**
 
 ```agda
-open import elementary-number-theory.decidable-types using
+open import elementary-number-theory.decidable-types funext univalence truncations using
   ( is-decidable-bounded-Π-ℕ)
 ```
 
@@ -1589,18 +1597,18 @@ open import elementary-number-theory.decidable-types using
 **Definition 8.3.1.** Bounds for families over ℕ.
 
 ```agda
-open import elementary-number-theory.lower-bounds-natural-numbers using
+open import elementary-number-theory.lower-bounds-natural-numbers funext univalence truncations using
   ( is-lower-bound-ℕ)
-open import elementary-number-theory.upper-bounds-natural-numbers using
+open import elementary-number-theory.upper-bounds-natural-numbers funext univalence truncations using
   ( is-upper-bound-ℕ)
-open import elementary-number-theory.well-ordering-principle-natural-numbers using
+open import elementary-number-theory.well-ordering-principle-natural-numbers funext univalence truncations using
   ( minimal-element-ℕ)
 ```
 
 **Theorem 8.3.2.** Well-ordering principle of ℕ.
 
 ```agda
-open import elementary-number-theory.well-ordering-principle-natural-numbers using
+open import elementary-number-theory.well-ordering-principle-natural-numbers funext univalence truncations using
   ( well-ordering-principle-ℕ)
 ```
 
@@ -1609,49 +1617,49 @@ open import elementary-number-theory.well-ordering-principle-natural-numbers usi
 **Definition 8.4.1.** The type of greatest common divisors.
 
 ```agda
-open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+open import elementary-number-theory.greatest-common-divisor-natural-numbers funext univalence truncations using
   ( is-gcd-ℕ)
 ```
 
 **Proposition 8.4.2.** Uniqueness of the greatest common divisor.
 
 ```agda
-open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+open import elementary-number-theory.greatest-common-divisor-natural-numbers funext univalence truncations using
   ( uniqueness-is-gcd-ℕ)
 ```
 
 **Definition 8.4.3.** Multiples of the greatest common divisor.
 
 ```agda
-open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+open import elementary-number-theory.greatest-common-divisor-natural-numbers funext univalence truncations using
   ( is-multiple-of-gcd-ℕ)
 ```
 
 **Proposition 8.4.4.** Decidability of multiples of the greatest common divisor.
 
 ```agda
-open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+open import elementary-number-theory.greatest-common-divisor-natural-numbers funext univalence truncations using
   ( is-decidable-is-multiple-of-gcd-ℕ)
 ```
 
 **Lemma 8.4.5.** `a + b` is a multiple of `gcd(a, b)`.
 
 ```agda
-open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+open import elementary-number-theory.greatest-common-divisor-natural-numbers funext univalence truncations using
   ( sum-is-multiple-of-gcd-ℕ)
 ```
 
 **Definition 8.4.6.** The greatest common divisor.
 
 ```agda
-open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+open import elementary-number-theory.greatest-common-divisor-natural-numbers funext univalence truncations using
   ( gcd-ℕ)
 ```
 
 **Lemma 8.4.7.** `gcd(a, b)` is zero if and only if `a + b` = 0.
 
 ```agda
-open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+open import elementary-number-theory.greatest-common-divisor-natural-numbers funext univalence truncations using
   ( is-zero-gcd-ℕ
   ; is-zero-add-is-zero-gcd-ℕ)
 
@@ -1662,7 +1670,7 @@ _ = λ a b → (is-zero-add-is-zero-gcd-ℕ a b , is-zero-gcd-ℕ a b)
 **Theorem 8.4.8.** `gcd(a, b)` is a greatest common divisor.
 
 ```agda
-open import elementary-number-theory.greatest-common-divisor-natural-numbers using
+open import elementary-number-theory.greatest-common-divisor-natural-numbers funext univalence truncations using
   ( is-gcd-gcd-ℕ)
 ```
 
@@ -1671,44 +1679,44 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers usi
 **Definition 8.5.1.** Proper divisors and primes.
 
 ```agda
-open import elementary-number-theory.proper-divisors-natural-numbers using
+open import elementary-number-theory.proper-divisors-natural-numbers funext univalence truncations using
   ( is-proper-divisor-ℕ)
-open import elementary-number-theory.prime-numbers using
+open import elementary-number-theory.prime-numbers funext univalence truncations using
   ( is-prime-ℕ)
 ```
 
 **Proposition 8.5.2.** Being a prime is decidable.
 
 ```agda
-open import elementary-number-theory.prime-numbers using
+open import elementary-number-theory.prime-numbers funext univalence truncations using
   ( is-decidable-is-prime-ℕ)
 ```
 
 **Definition 8.5.3.** Sieve of Erathostenes.
 
 ```agda
-open import elementary-number-theory.sieve-of-eratosthenes using
+open import elementary-number-theory.sieve-of-eratosthenes funext univalence truncations using
   ( in-sieve-of-eratosthenes-ℕ)
 ```
 
 **Lemma 8.5.4.** Being in the sieve of Erathostenes is decidable.
 
 ```agda
-open import elementary-number-theory.sieve-of-eratosthenes using
+open import elementary-number-theory.sieve-of-eratosthenes funext univalence truncations using
   ( is-decidable-in-sieve-of-eratosthenes-ℕ)
 ```
 
 **Lemma 8.5.5.** `n! + 1` is above `n` in the sieve.
 
 ```agda
-open import elementary-number-theory.sieve-of-eratosthenes using
+open import elementary-number-theory.sieve-of-eratosthenes funext univalence truncations using
   ( in-sieve-of-eratosthenes-succ-factorial-ℕ)
 ```
 
 **Theorem 8.5.6.** Infinitude of primes.
 
 ```agda
-open import elementary-number-theory.infinitude-of-primes using
+open import elementary-number-theory.infinitude-of-primes funext univalence truncations using
   ( infinitude-of-primes-ℕ)
 ```
 
@@ -1717,14 +1725,14 @@ open import elementary-number-theory.infinitude-of-primes using
 **Definition 8.6.1.** Booleanization.
 
 ```agda
-open import reflection.boolean-reflection using
+open import reflection.boolean-reflection funext univalence truncations using
   ( booleanization)
 ```
 
 **Theorem 8.6.2.** Boolean reflection principle.
 
 ```agda
-open import reflection.boolean-reflection using
+open import reflection.boolean-reflection funext univalence truncations using
   ( boolean-reflection -- reflect
   )
 
@@ -1738,22 +1746,22 @@ _ = boolean-reflection (is-decidable-is-prime-ℕ 37) refl
 
 ```agda
 -- (a)
-open import elementary-number-theory.goldbach-conjecture using
+open import elementary-number-theory.goldbach-conjecture funext univalence truncations using
   ( Goldbach-conjecture)
 
 -- (b)
-open import elementary-number-theory.twin-prime-conjecture using
+open import elementary-number-theory.twin-prime-conjecture funext univalence truncations using
   ( twin-prime-conjecture)
 
 -- (c)
-open import elementary-number-theory.collatz-conjecture using
+open import elementary-number-theory.collatz-conjecture funext univalence truncations using
   ( Collatz-conjecture)
 ```
 
 **Exercise 8.2.** `is-decidable` is idempotent.
 
 ```agda
-open import foundation.decidable-types using
+open import foundation.decidable-types funext univalence truncations using
   ( idempotent-is-decidable -- is-decidable (is-decidable P) → is-decidable P
   )
 ```
@@ -1761,7 +1769,7 @@ open import foundation.decidable-types using
 **Exercise 8.3.** Markov's principle over finite types.
 
 ```agda
-open import elementary-number-theory.well-ordering-principle-standard-finite-types using
+open import elementary-number-theory.well-ordering-principle-standard-finite-types funext univalence truncations using
   ( exists-not-not-for-all-Fin -- ¬((x : Fin k) → P x) → Σ (x : Fin k) ¬(P x)
   )
 ```
@@ -1769,7 +1777,7 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 **Exercise 8.4.** Prime functions.
 
 ```agda
-open import elementary-number-theory.infinitude-of-primes using
+open import elementary-number-theory.infinitude-of-primes funext univalence truncations using
   ( prime-ℕ -- n-th prime
   ; prime-counting-ℕ -- number of primes less than or equal `n`
   )
@@ -1783,7 +1791,7 @@ TODO
 decidable equality, assuming the other factor is pointed.
 
 ```agda
-open import foundation.decidable-equality using
+open import foundation.decidable-equality funext univalence truncations using
   ( has-decidable-equality-product'
   ; has-decidable-equality-left-factor
   ; has-decidable-equality-right-factor)
@@ -1798,7 +1806,7 @@ _ =
     has-decidable-equality-left-factor eqAB ,
     has-decidable-equality-right-factor eqAB)
 
-open import foundation.decidable-equality using
+open import foundation.decidable-equality funext univalence truncations using
   ( has-decidable-equality-product)
 ```
 
@@ -1810,11 +1818,11 @@ and `B : 𝒱` aren't assumed to be in the same universe, then we need to raise 
 identity type of `A`, the identity type of `B`, and the empty type to `𝒰 ⊔ 𝒱`.
 
 ```agda
-open import foundation.equality-coproduct-types using
+open import foundation.equality-coproduct-types funext univalence truncations using
   ( Eq-coproduct)
 
 -- (a)
-open import foundation.equality-coproduct-types using
+open import foundation.equality-coproduct-types funext univalence truncations using
   ( Eq-eq-coproduct
   ; eq-Eq-coproduct)
 
@@ -1824,7 +1832,7 @@ _ :
 _ = λ x y → (Eq-eq-coproduct x y , eq-Eq-coproduct x y)
 
 -- (b)
-open import foundation.decidable-equality using
+open import foundation.decidable-equality funext univalence truncations using
   ( has-decidable-equality-coproduct
   ; has-decidable-equality-left-summand
   ; has-decidable-equality-right-summand)
@@ -1839,14 +1847,14 @@ _ =
     has-decidable-equality-left-summand eqAB ,
     has-decidable-equality-right-summand eqAB)
 
-open import elementary-number-theory.equality-integers using
+open import elementary-number-theory.equality-integers funext univalence truncations using
   ( has-decidable-equality-ℤ)
 ```
 
 **Exercise 8.8.** Decidable equality in dependent pair types.
 
 ```agda
-open import foundation.decidable-equality using
+open import foundation.decidable-equality funext univalence truncations using
   ( has-decidable-equality-Σ
   ; has-decidable-equality-fiber-has-decidable-equality-Σ)
 
@@ -1859,7 +1867,7 @@ _ =
     has-decidable-equality-Σ eqA ,
     has-decidable-equality-fiber-has-decidable-equality-Σ eqA
 
-open import foundation.decidable-equality using
+open import foundation.decidable-equality funext univalence truncations using
   ( has-decidable-equality-base-has-decidable-equality-Σ)
 ```
 
@@ -1867,7 +1875,7 @@ open import foundation.decidable-equality using
 of `Fin k`
 
 ```agda
-open import univalent-combinatorics.decidable-dependent-function-types using
+open import univalent-combinatorics.decidable-dependent-function-types funext univalence truncations using
   ( is-decidable-Π-Fin)
 
 -- TODO: b
@@ -1881,7 +1889,7 @@ TODO
 **Exercise 8.11.** Bézout's identity.
 
 ```agda
-open import elementary-number-theory.bezouts-lemma-natural-numbers using
+open import elementary-number-theory.bezouts-lemma-natural-numbers funext univalence truncations using
   ( is-decidable-is-distance-between-multiples-ℕ
     --^ Σ (k : ℕ) Σ (l : ℕ) dist(k*x, l*x) = z is decidable
   ; minimal-positive-distance-x-coeff
@@ -1902,18 +1910,18 @@ _ =
 **Exercise 8.12.** Prime factor decomposition.
 
 ```agda
-open import elementary-number-theory.fundamental-theorem-of-arithmetic using
+open import elementary-number-theory.fundamental-theorem-of-arithmetic funext univalence truncations using
   ( nat-least-nontrivial-divisor-ℕ -- for every 1 < n a number...
   ; is-prime-least-nontrivial-divisor-ℕ -- which is a prime...
   ; div-least-nontrivial-divisor-ℕ -- and divides n
   )
-open import elementary-number-theory.fundamental-theorem-of-arithmetic using
+open import elementary-number-theory.fundamental-theorem-of-arithmetic funext univalence truncations using
   ( list-fundamental-theorem-arithmetic-ℕ -- for every 1 < n a list of numbers...
   ; is-sorted-list-fundamental-theorem-arithmetic-ℕ -- which is sorted...
   ; is-prime-list-fundamental-theorem-arithmetic-ℕ -- only contains primes...
   ; is-decomposition-list-fundamental-theorem-arithmetic-ℕ -- and multiplies up to n
   )
-open import elementary-number-theory.fundamental-theorem-of-arithmetic using
+open import elementary-number-theory.fundamental-theorem-of-arithmetic funext univalence truncations using
   ( eq-prime-decomposition-list-ℕ -- prime decompositions of a fixed number are equal
   )
 ```
@@ -1929,7 +1937,7 @@ TODO.
 **Exercise 8.15.** The cofibonacci sequenece.
 
 ```agda
-open import elementary-number-theory.cofibonacci using
+open import elementary-number-theory.cofibonacci funext univalence truncations using
   ( cofibonacci
   ; forward-is-left-adjoint-cofibonacci)
 

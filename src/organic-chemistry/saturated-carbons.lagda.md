@@ -1,22 +1,30 @@
 # Saturated carbons
 
 ```agda
-module organic-chemistry.saturated-carbons where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module organic-chemistry.saturated-carbons
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
-open import foundation.unordered-pairs
+open import foundation.unordered-pairs funext univalence truncations
 
-open import organic-chemistry.hydrocarbons
+open import organic-chemistry.hydrocarbons funext univalence truncations
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

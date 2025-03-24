@@ -1,34 +1,42 @@
 # Isomorphisms of groups
 
 ```agda
-module group-theory.isomorphisms-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.isomorphisms-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-large-precategories
+open import category-theory.isomorphisms-in-large-precategories funext univalence truncations
 
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.category-of-semigroups
-open import group-theory.equivalences-semigroups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.isomorphisms-semigroups
-open import group-theory.precategory-of-groups
+open import group-theory.category-of-semigroups funext univalence truncations
+open import group-theory.equivalences-semigroups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.isomorphisms-semigroups funext univalence truncations
+open import group-theory.precategory-of-groups funext univalence truncations
 ```
 
 </details>

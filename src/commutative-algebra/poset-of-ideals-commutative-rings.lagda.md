@@ -1,24 +1,32 @@
 # The poset of ideals of a commutative ring
 
 ```agda
-module commutative-algebra.poset-of-ideals-commutative-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.poset-of-ideals-commutative-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.ideals-commutative-rings
+open import commutative-algebra.commutative-rings funext univalence truncations
+open import commutative-algebra.ideals-commutative-rings funext univalence truncations
 
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.large-preorders
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.large-preorders funext univalence truncations
 
-open import ring-theory.poset-of-ideals-rings
+open import ring-theory.poset-of-ideals-rings funext univalence truncations
 ```
 
 </details>

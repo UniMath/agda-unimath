@@ -1,26 +1,34 @@
 # Relatively prime natural numbers
 
 ```agda
-module elementary-number-theory.relatively-prime-natural-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.relatively-prime-natural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.greatest-common-divisor-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers funext univalence truncations
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations
+open import elementary-number-theory.greatest-common-divisor-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.prime-numbers
+open import elementary-number-theory.prime-numbers funext univalence truncations
 
-open import foundation.decidable-propositions
-open import foundation.decidable-types
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
-open import foundation.negated-equality
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```

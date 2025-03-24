@@ -1,26 +1,34 @@
 # Matchings
 
 ```agda
-module graph-theory.matchings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.matchings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.unordered-pairs
+open import foundation.unordered-pairs funext univalence truncations
 
-open import graph-theory.undirected-graphs
+open import graph-theory.undirected-graphs funext univalence truncations
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

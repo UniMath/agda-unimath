@@ -2,34 +2,41 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module elementary-number-theory.multiplicative-group-of-rational-numbers where
+module elementary-number-theory.multiplicative-group-of-rational-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
-open import elementary-number-theory.nonzero-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.ring-of-rational-numbers
+open import elementary-number-theory.multiplicative-monoid-of-rational-numbers funext univalence truncations
+open import elementary-number-theory.nonzero-rational-numbers funext univalence truncations
+open import elementary-number-theory.positive-rational-numbers funext univalence truncations
+open import elementary-number-theory.rational-numbers funext univalence truncations
+open import elementary-number-theory.ring-of-rational-numbers funext univalence truncations
 
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.subtypes
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.cores-monoids
-open import group-theory.groups
-open import group-theory.submonoids-commutative-monoids
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.cores-monoids funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.submonoids-commutative-monoids funext univalence truncations
 
-open import ring-theory.groups-of-units-rings
-open import ring-theory.invertible-elements-rings
-open import ring-theory.trivial-rings
+open import ring-theory.groups-of-units-rings funext univalence truncations
+open import ring-theory.invertible-elements-rings funext univalence truncations
+open import ring-theory.trivial-rings funext univalence truncations
 ```
 
 </details>

@@ -1,25 +1,33 @@
 # Opposite posets
 
 ```agda
-module order-theory.opposite-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.opposite-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import order-theory.opposite-preorders
-open import order-theory.order-preserving-maps-posets
-open import order-theory.posets
-open import order-theory.preorders
+open import order-theory.opposite-preorders funext univalence truncations
+open import order-theory.order-preserving-maps-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.preorders funext univalence truncations
 ```
 
 </details>

@@ -1,7 +1,15 @@
 # Functoriality of the combinator of directed trees
 
 ```agda
-module trees.functoriality-combinator-directed-trees where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.functoriality-combinator-directed-trees
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,20 +17,20 @@ module trees.functoriality-combinator-directed-trees where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import trees.combinator-directed-trees
-open import trees.directed-trees
-open import trees.equivalences-directed-trees
-open import trees.morphisms-directed-trees
-open import trees.rooted-morphisms-directed-trees
+open import trees.combinator-directed-trees funext univalence truncations
+open import trees.directed-trees funext univalence truncations
+open import trees.equivalences-directed-trees funext univalence truncations
+open import trees.morphisms-directed-trees funext univalence truncations
+open import trees.rooted-morphisms-directed-trees funext univalence truncations
 ```
 
 </details>

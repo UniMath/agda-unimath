@@ -1,7 +1,15 @@
 # Retracts of finite types
 
 ```agda
-module univalent-combinatorics.retracts-of-finite-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.retracts-of-finite-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,23 +17,23 @@ module univalent-combinatorics.retracts-of-finite-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-embeddings
-open import foundation.decidable-maps
+open import foundation.decidable-embeddings funext univalence truncations
+open import foundation.decidable-maps funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.fibers-of-maps
-open import foundation.functoriality-propositional-truncation
-open import foundation.injective-maps
-open import foundation.retractions
-open import foundation.retracts-of-types
+open import foundation.embeddings funext
+open import foundation.fibers-of-maps funext
+open import foundation.functoriality-propositional-truncation funext univalence truncations
+open import foundation.injective-maps funext
+open import foundation.retractions funext
+open import foundation.retracts-of-types funext univalence
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-decidable-subtypes
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.counting-decidable-subtypes funext univalence truncations
+open import univalent-combinatorics.equality-finite-types funext univalence truncations
+open import univalent-combinatorics.equality-standard-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

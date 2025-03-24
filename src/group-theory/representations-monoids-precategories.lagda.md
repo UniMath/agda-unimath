@@ -1,23 +1,31 @@
 # Representations of monoids in precategories
 
 ```agda
-module group-theory.representations-monoids-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.representations-monoids-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.endomorphisms-in-precategories
-open import category-theory.functors-precategories
-open import category-theory.one-object-precategories
-open import category-theory.precategories
+open import category-theory.endomorphisms-in-precategories funext univalence truncations
+open import category-theory.functors-precategories funext univalence truncations
+open import category-theory.one-object-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.monoids
+open import group-theory.monoids funext univalence truncations
 ```
 
 </details>

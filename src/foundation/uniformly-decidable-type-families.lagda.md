@@ -1,27 +1,35 @@
 # Uniformly decidable type families
 
 ```agda
-module foundation.uniformly-decidable-type-families where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.uniformly-decidable-type-families
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.dependent-products-truncated-types
-open import foundation.equality-coproduct-types
-open import foundation.inhabited-types
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.truncated-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.equality-coproduct-types funext univalence truncations
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.negation funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.truncated-types funext univalence
 open import foundation.truncation-levels
-open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-empty-type funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

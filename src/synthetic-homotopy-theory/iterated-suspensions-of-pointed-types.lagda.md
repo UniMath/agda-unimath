@@ -1,7 +1,15 @@
 # Iterated suspensions of pointed types
 
 ```agda
-module synthetic-homotopy-theory.iterated-suspensions-of-pointed-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.iterated-suspensions-of-pointed-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,12 +17,12 @@ module synthetic-homotopy-theory.iterated-suspensions-of-pointed-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.iterating-functions
+open import foundation.iterating-functions funext univalence truncations
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.suspensions-of-pointed-types
+open import synthetic-homotopy-theory.suspensions-of-pointed-types funext univalence truncations
 ```
 
 </details>

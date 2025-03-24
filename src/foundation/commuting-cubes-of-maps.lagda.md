@@ -1,7 +1,13 @@
 # Commuting cubes of maps
 
 ```agda
-module foundation.commuting-cubes-of-maps where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.commuting-cubes-of-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,15 +15,15 @@ module foundation.commuting-cubes-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-hexagons-of-identifications
-open import foundation.commuting-squares-of-homotopies
-open import foundation.commuting-squares-of-maps
-open import foundation.cones-over-cospan-diagrams
+open import foundation.commuting-squares-of-homotopies funext
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopies
+open import foundation.function-extensionality funext
+open import foundation.homotopies funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
-open import foundation.whiskering-homotopies-concatenation
+open import foundation.whiskering-homotopies-concatenation funext
 
 open import foundation-core.function-types
 open import foundation-core.identity-types

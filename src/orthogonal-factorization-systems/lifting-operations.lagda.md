@@ -1,20 +1,28 @@
 # Lifting operations
 
 ```agda
-module orthogonal-factorization-systems.lifting-operations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.lifting-operations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.morphisms-arrows
-open import foundation.sections
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.morphisms-arrows funext
+open import foundation.sections funext
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.pullback-hom
+open import orthogonal-factorization-systems.pullback-hom funext univalence truncations
 ```
 
 </details>

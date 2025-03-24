@@ -1,7 +1,15 @@
 # Nilpotent elements in semirings
 
 ```agda
-module ring-theory.nilpotent-elements-semirings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.nilpotent-elements-semirings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,17 +20,17 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import ring-theory.binomial-theorem-semirings
-open import ring-theory.powers-of-elements-semirings
-open import ring-theory.semirings
+open import ring-theory.binomial-theorem-semirings funext univalence truncations
+open import ring-theory.powers-of-elements-semirings funext univalence truncations
+open import ring-theory.semirings funext univalence truncations
 ```
 
 </details>

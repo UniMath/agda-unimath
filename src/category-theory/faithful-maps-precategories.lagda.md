@@ -1,25 +1,33 @@
 # Faithful maps between precategories
 
 ```agda
-module category-theory.faithful-maps-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.faithful-maps-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.maps-precategories
-open import category-theory.precategories
+open import category-theory.maps-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.injective-maps
-open import foundation.iterated-dependent-product-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.injective-maps funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.telescopes
 open import foundation.universe-levels
 ```

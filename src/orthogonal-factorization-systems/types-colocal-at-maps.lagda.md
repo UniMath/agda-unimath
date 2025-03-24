@@ -1,34 +1,42 @@
 # Types colocal at maps
 
 ```agda
-module orthogonal-factorization-systems.types-colocal-at-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.types-colocal-at-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.contractible-maps
-open import foundation.contractible-types
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.equivalences-arrows
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.postcomposition-dependent-functions
-open import foundation.postcomposition-functions
-open import foundation.propositions
-open import foundation.retracts-of-maps
-open import foundation.retracts-of-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.equivalences-arrows funext univalence truncations
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.postcomposition-dependent-functions funext
+open import foundation.postcomposition-functions funext
+open import foundation.propositions funext univalence
+open import foundation.retracts-of-maps funext univalence
+open import foundation.retracts-of-types funext univalence
 open import foundation.unit-type
-open import foundation.universal-property-empty-type
-open import foundation.universal-property-equivalences
+open import foundation.universal-property-empty-type funext
+open import foundation.universal-property-equivalences funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

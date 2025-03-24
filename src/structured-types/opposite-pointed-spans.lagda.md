@@ -1,7 +1,15 @@
 # Opposite pointed spans
 
 ```agda
-module structured-types.opposite-pointed-spans where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.opposite-pointed-spans
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +18,7 @@ module structured-types.opposite-pointed-spans where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.pointed-spans
+open import structured-types.pointed-spans funext univalence truncations
 open import structured-types.pointed-types
 ```
 

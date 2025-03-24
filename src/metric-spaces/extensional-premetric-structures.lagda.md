@@ -1,29 +1,37 @@
 # Extensional premetric structures on types
 
 ```agda
-module metric-spaces.extensional-premetric-structures where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module metric-spaces.extensional-premetric-structures
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.premetric-structures
-open import metric-spaces.reflexive-premetric-structures
+open import metric-spaces.premetric-structures funext univalence truncations
+open import metric-spaces.reflexive-premetric-structures funext univalence truncations
 ```
 
 </details>

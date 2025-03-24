@@ -1,7 +1,15 @@
 # Small multisets
 
 ```agda
-module trees.small-multisets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.small-multisets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,24 +17,24 @@ module trees.small-multisets where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.small-types
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.small-types funext univalence truncations
+open import foundation.subtypes funext univalence truncations
 open import foundation.transport-along-identifications
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.raising-universe-levels
 
-open import trees.multisets
-open import trees.w-types
+open import trees.multisets funext univalence truncations
+open import trees.w-types funext univalence truncations
 ```
 
 </details>

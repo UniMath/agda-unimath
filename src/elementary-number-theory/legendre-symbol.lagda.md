@@ -1,23 +1,31 @@
 # The Legendre symbol
 
 ```agda
-module elementary-number-theory.legendre-symbol where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.legendre-symbol
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.integers
-open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.modular-arithmetic funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.prime-numbers
-open import elementary-number-theory.squares-modular-arithmetic
+open import elementary-number-theory.prime-numbers funext univalence truncations
+open import elementary-number-theory.squares-modular-arithmetic funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 ```
 
 </details>

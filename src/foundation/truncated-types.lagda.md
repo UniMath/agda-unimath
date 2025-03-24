@@ -1,7 +1,13 @@
 # Truncated types
 
 ```agda
-module foundation.truncated-types where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.truncated-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 
 open import foundation-core.truncated-types public
 ```
@@ -12,18 +18,18 @@ open import foundation-core.truncated-types public
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types
-open import foundation.equivalences
-open import foundation.logical-equivalences
+open import foundation.dependent-products-truncated-types funext
+open import foundation.equivalences funext
+open import foundation.logical-equivalences funext
 open import foundation.subtype-identity-principle
 open import foundation.truncation-levels
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 open import foundation-core.torsorial-type-families
 ```
 

@@ -1,23 +1,31 @@
 # Ideals of semirings
 
 ```agda
-module ring-theory.ideals-semirings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.ideals-semirings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import group-theory.submonoids
+open import group-theory.submonoids funext univalence truncations
 
-open import ring-theory.semirings
-open import ring-theory.subsets-semirings
+open import ring-theory.semirings funext univalence truncations
+open import ring-theory.subsets-semirings funext univalence truncations
 ```
 
 </details>

@@ -1,14 +1,22 @@
 # Double negation
 
 ```agda
-module foundation.double-negation where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.double-negation
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.negation
-open import foundation.propositional-truncations
+open import foundation.negation funext
+open import foundation.propositional-truncations funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types

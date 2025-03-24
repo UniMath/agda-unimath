@@ -1,20 +1,26 @@
 # Transport-split type families
 
 ```agda
-module foundation.transport-split-type-families where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.transport-split-type-families
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalence-injective-type-families
-open import foundation.equivalences
+open import foundation.equivalence-injective-type-families funext univalence
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.iterated-dependent-product-types
+open import foundation.iterated-dependent-product-types funext
 open import foundation.telescopes
 open import foundation.transport-along-identifications
-open import foundation.univalent-type-families
-open import foundation.universal-property-identity-systems
+open import foundation.univalent-type-families funext univalence
+open import foundation.universal-property-identity-systems funext
 open import foundation.universe-levels
 
 open import foundation-core.embeddings

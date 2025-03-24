@@ -1,33 +1,41 @@
 # Small ∞-groups
 
 ```agda
-module higher-group-theory.small-higher-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.small-higher-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
+open import foundation.0-connected-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.images
-open import foundation.locally-small-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.replacement
-open import foundation.small-types
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.images funext univalence truncations
+open import foundation.locally-small-types funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.replacement funext univalence truncations
+open import foundation.small-types funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import higher-group-theory.equivalences-higher-groups
-open import higher-group-theory.higher-groups
+open import higher-group-theory.equivalences-higher-groups funext univalence truncations
+open import higher-group-theory.higher-groups funext univalence truncations
 
-open import structured-types.pointed-equivalences
+open import structured-types.pointed-equivalences funext univalence truncations
 open import structured-types.pointed-types
-open import structured-types.small-pointed-types
+open import structured-types.small-pointed-types funext univalence truncations
 ```
 
 </details>

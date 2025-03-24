@@ -1,38 +1,46 @@
 # Radicals of ideals of commutative rings
 
 ```agda
-module commutative-algebra.radicals-of-ideals-commutative-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.radicals-of-ideals-commutative-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.binomial-theorem-commutative-rings
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.ideals-commutative-rings
-open import commutative-algebra.poset-of-ideals-commutative-rings
-open import commutative-algebra.poset-of-radical-ideals-commutative-rings
-open import commutative-algebra.powers-of-elements-commutative-rings
-open import commutative-algebra.radical-ideals-commutative-rings
-open import commutative-algebra.subsets-commutative-rings
+open import commutative-algebra.binomial-theorem-commutative-rings funext univalence truncations
+open import commutative-algebra.commutative-rings funext univalence truncations
+open import commutative-algebra.ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.poset-of-ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.poset-of-radical-ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.powers-of-elements-commutative-rings funext univalence truncations
+open import commutative-algebra.radical-ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.subsets-commutative-rings funext univalence truncations
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.existential-quantification
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import order-theory.galois-connections-large-posets
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.reflective-galois-connections-large-posets
+open import order-theory.galois-connections-large-posets funext univalence truncations
+open import order-theory.order-preserving-maps-large-posets funext univalence truncations
+open import order-theory.order-preserving-maps-large-preorders funext univalence truncations
+open import order-theory.reflective-galois-connections-large-posets funext univalence truncations
 ```
 
 </details>

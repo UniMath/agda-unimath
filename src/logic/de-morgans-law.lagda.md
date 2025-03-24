@@ -1,31 +1,39 @@
 # De Morgan's law
 
 ```agda
-module logic.de-morgans-law where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module logic.de-morgans-law
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.conjunction
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.conjunction funext univalence truncations
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.disjunction
-open import foundation.double-negation
-open import foundation.empty-types
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext univalence truncations
+open import foundation.double-negation funext univalence truncations
+open import foundation.empty-types funext univalence truncations
 open import foundation.evaluation-functions
-open import foundation.function-types
-open import foundation.logical-equivalences
-open import foundation.negation
+open import foundation.function-types funext
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
 open import foundation.universe-levels
 
-open import foundation-core.decidable-propositions
+open import foundation-core.decidable-propositions funext univalence truncations
 open import foundation-core.propositions
 
-open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.2-element-types funext univalence truncations
 ```
 
 </details>

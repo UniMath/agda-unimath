@@ -1,31 +1,39 @@
 # Set presented types
 
 ```agda
-module foundation.set-presented-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.set-presented-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equality-coproduct-types
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.fibers-of-maps
-open import foundation.functoriality-coproduct-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.images
-open import foundation.injective-maps
-open import foundation.propositional-truncations
-open import foundation.set-truncations
-open import foundation.subtypes
-open import foundation.surjective-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equality-coproduct-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.fibers-of-maps funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.images funext univalence truncations
+open import foundation.injective-maps funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.set-truncations funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.function-types

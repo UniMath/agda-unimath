@@ -1,23 +1,31 @@
 # Complete metric spaces
 
 ```agda
-module metric-spaces.complete-metric-spaces where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module metric-spaces.complete-metric-spaces
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.metric-spaces
+open import metric-spaces.cauchy-approximations-metric-spaces funext univalence truncations
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces funext univalence truncations
+open import metric-spaces.metric-spaces funext univalence truncations
 ```
 
 </details>

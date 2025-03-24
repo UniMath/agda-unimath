@@ -1,30 +1,38 @@
 # Type arithmetic with natural numbers
 
 ```agda
-module elementary-number-theory.type-arithmetic-natural-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.type-arithmetic-natural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers funext univalence truncations
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.parity-natural-numbers
-open import elementary-number-theory.powers-of-two
+open import elementary-number-theory.parity-natural-numbers funext univalence truncations
+open import elementary-number-theory.powers-of-two funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-coproduct-types
-open import foundation.iterating-functions
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.iterating-functions funext univalence truncations
 open import foundation.split-surjective-maps
-open import foundation.type-arithmetic-coproduct-types
-open import foundation.type-arithmetic-empty-type
-open import foundation.type-arithmetic-unit-type
+open import foundation.type-arithmetic-coproduct-types funext univalence truncations
+open import foundation.type-arithmetic-empty-type funext univalence truncations
+open import foundation.type-arithmetic-unit-type funext
 open import foundation.unit-type
 
 open import foundation-core.cartesian-product-types
@@ -36,7 +44,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

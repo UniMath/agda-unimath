@@ -1,25 +1,33 @@
 # Apartness of real numbers
 
 ```agda
-module real-numbers.apartness-real-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module real-numbers.apartness-real-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-products-propositions
-open import foundation.disjunction
-open import foundation.empty-types
-open import foundation.function-types
-open import foundation.large-apartness-relations
-open import foundation.large-binary-relations
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext univalence truncations
+open import foundation.empty-types funext univalence truncations
+open import foundation.function-types funext
+open import foundation.large-apartness-relations funext univalence truncations
+open import foundation.large-binary-relations funext univalence truncations
+open import foundation.negated-equality funext univalence truncations
+open import foundation.negation funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.dedekind-real-numbers funext univalence truncations
+open import real-numbers.strict-inequality-real-numbers funext univalence truncations
 ```
 
 </details>

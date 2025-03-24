@@ -1,24 +1,29 @@
 # Truncations
 
 ```agda
-module foundation.truncations where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.truncations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-truncated-types
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.functoriality-dependent-function-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.function-extensionality funext
+open import foundation.functoriality-dependent-function-types funext univalence
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.truncated-types
-open import foundation.universal-property-dependent-pair-types
+open import foundation.identity-types funext
+open import foundation.truncated-types funext univalence
+open import foundation.universal-property-dependent-pair-types funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -32,7 +37,7 @@ open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncation-levels
-open import foundation-core.universal-property-truncation
+open import foundation-core.universal-property-truncation funext
 ```
 
 </details>

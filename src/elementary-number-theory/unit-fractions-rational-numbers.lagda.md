@@ -2,32 +2,39 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module elementary-number-theory.unit-fractions-rational-numbers where
+module elementary-number-theory.unit-fractions-rational-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.archimedean-property-positive-rational-numbers
-open import elementary-number-theory.inequality-integers
-open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.archimedean-property-positive-rational-numbers funext univalence truncations
+open import elementary-number-theory.inequality-integers funext univalence truncations
+open import elementary-number-theory.inequality-rational-numbers funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
-open import elementary-number-theory.nonzero-natural-numbers
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-integers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.multiplication-integers funext univalence truncations
+open import elementary-number-theory.multiplication-rational-numbers funext univalence truncations
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers funext univalence truncations
+open import elementary-number-theory.nonzero-natural-numbers funext univalence truncations
+open import elementary-number-theory.positive-rational-numbers funext univalence truncations
+open import elementary-number-theory.rational-numbers funext univalence truncations
+open import elementary-number-theory.strict-inequality-integers funext univalence truncations
+open import elementary-number-theory.strict-inequality-rational-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-dependent-pair-types funext
 
-open import group-theory.groups
+open import group-theory.groups funext univalence truncations
 ```
 
 </details>

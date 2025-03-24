@@ -1,9 +1,17 @@
 # Decidable dependent function types
 
 ```agda
-module univalent-combinatorics.decidable-dependent-function-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import elementary-number-theory.decidable-dependent-function-types public
+module univalent-combinatorics.decidable-dependent-function-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import elementary-number-theory.decidable-dependent-function-types funext univalence truncations public
 ```
 
 <details><summary>Imports</summary>
@@ -11,22 +19,22 @@ open import elementary-number-theory.decidable-dependent-function-types public
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-types
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-choice
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.finite-choice funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

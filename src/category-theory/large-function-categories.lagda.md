@@ -1,20 +1,28 @@
 # Large function categories
 
 ```agda
-module category-theory.large-function-categories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.large-function-categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.dependent-products-of-large-categories
-open import category-theory.isomorphisms-in-large-categories
-open import category-theory.large-categories
+open import category-theory.dependent-products-of-large-categories funext univalence truncations
+open import category-theory.isomorphisms-in-large-categories funext univalence truncations
+open import category-theory.large-categories funext univalence truncations
 
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
+open import foundation.strictly-involutive-identity-types funext univalence
 open import foundation.universe-levels
 ```
 

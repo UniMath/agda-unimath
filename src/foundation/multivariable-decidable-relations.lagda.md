@@ -1,7 +1,15 @@
 # Multivariable decidable relations
 
 ```agda
-module foundation.multivariable-decidable-relations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.multivariable-decidable-relations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,12 +17,12 @@ module foundation.multivariable-decidable-relations where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-subtypes
-open import foundation.multivariable-correspondences
-open import foundation.multivariable-relations
+open import foundation.decidable-subtypes funext univalence truncations
+open import foundation.multivariable-correspondences funext univalence truncations
+open import foundation.multivariable-relations funext univalence truncations
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

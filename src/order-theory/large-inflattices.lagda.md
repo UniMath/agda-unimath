@@ -1,23 +1,31 @@
 # Large inflattices
 
 ```agda
-module order-theory.large-inflattices where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.large-inflattices
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.large-binary-relations
-open import foundation.logical-equivalences
-open import foundation.sets
+open import foundation.large-binary-relations funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import order-theory.greatest-lower-bounds-large-posets
-open import order-theory.inflattices
-open import order-theory.large-posets
-open import order-theory.lower-bounds-large-posets
-open import order-theory.posets
+open import order-theory.greatest-lower-bounds-large-posets funext univalence truncations
+open import order-theory.inflattices funext univalence truncations
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.lower-bounds-large-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
 ```
 
 </details>

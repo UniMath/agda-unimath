@@ -1,27 +1,35 @@
 # Finite trivial Σ-decompositions
 
 ```agda
-module univalent-combinatorics.trivial-sigma-decompositions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation.trivial-sigma-decompositions public
+module univalent-combinatorics.trivial-sigma-decompositions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation.trivial-sigma-decompositions funext univalence truncations public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.propositions
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.raising-universe-levels-unit-type
-open import foundation.subtypes
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.sigma-decompositions
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.sigma-decompositions funext univalence truncations
 ```
 
 </details>

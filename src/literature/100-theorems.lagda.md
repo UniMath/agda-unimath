@@ -6,7 +6,15 @@ This file records formalized results from
 {{#cite 100theorems}}
 
 ```agda
-module literature.100-theorems where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module literature.100-theorems
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 ## The list
@@ -16,7 +24,7 @@ module literature.100-theorems where
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 
 ```agda
-open import elementary-number-theory.rational-numbers using
+open import elementary-number-theory.rational-numbers funext univalence truncations using
   ( is-countable-ℚ)
 ```
 
@@ -25,7 +33,7 @@ open import elementary-number-theory.rational-numbers using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import elementary-number-theory.infinitude-of-primes using
+open import elementary-number-theory.infinitude-of-primes funext univalence truncations using
   ( infinitude-of-primes-ℕ)
 ```
 
@@ -40,7 +48,7 @@ hence we refer to the generalization as the Cantor-Schröder-Bernstein-Escardó
 theorem.
 
 ```agda
-open import foundation.cantor-schroder-bernstein-escardo using
+open import foundation.cantor-schroder-bernstein-escardo funext univalence truncations using
   ( Cantor-Schröder-Bernstein-Escardó ;
     Cantor-Schröder-Bernstein)
 ```
@@ -50,17 +58,17 @@ open import foundation.cantor-schroder-bernstein-escardo using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import commutative-algebra.binomial-theorem-commutative-rings using
+open import commutative-algebra.binomial-theorem-commutative-rings funext univalence truncations using
   ( binomial-theorem-Commutative-Ring)
-open import commutative-algebra.binomial-theorem-commutative-semirings using
+open import commutative-algebra.binomial-theorem-commutative-semirings funext univalence truncations using
   ( binomial-theorem-Commutative-Semiring)
-open import ring-theory.binomial-theorem-rings using
+open import ring-theory.binomial-theorem-rings funext univalence truncations using
   ( binomial-theorem-Ring)
-open import ring-theory.binomial-theorem-semirings using
+open import ring-theory.binomial-theorem-semirings funext univalence truncations using
   ( binomial-theorem-Semiring)
-open import elementary-number-theory.binomial-theorem-integers using
+open import elementary-number-theory.binomial-theorem-integers funext univalence truncations using
   ( binomial-theorem-ℤ)
-open import elementary-number-theory.binomial-theorem-natural-numbers using
+open import elementary-number-theory.binomial-theorem-natural-numbers funext univalence truncations using
   ( binomial-theorem-ℕ)
 ```
 
@@ -69,7 +77,7 @@ open import elementary-number-theory.binomial-theorem-natural-numbers using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import univalent-combinatorics.decidable-subtypes using
+open import univalent-combinatorics.decidable-subtypes funext univalence truncations using
   ( number-of-elements-decidable-subtype-is-finite)
 ```
 
@@ -78,7 +86,7 @@ open import univalent-combinatorics.decidable-subtypes using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import univalent-combinatorics.binomial-types using
+open import univalent-combinatorics.binomial-types funext univalence truncations using
   ( has-cardinality-binomial-type)
 ```
 
@@ -91,9 +99,9 @@ while the linked theorems are formalizations of Bezout's lemma, even though
 these are different statements.
 
 ```agda
-open import elementary-number-theory.bezouts-lemma-integers using
+open import elementary-number-theory.bezouts-lemma-integers funext univalence truncations using
   ( bezouts-lemma-ℤ)
-open import elementary-number-theory.bezouts-lemma-natural-numbers using
+open import elementary-number-theory.bezouts-lemma-natural-numbers funext univalence truncations using
   ( bezouts-lemma-ℕ)
 ```
 
@@ -102,7 +110,7 @@ open import elementary-number-theory.bezouts-lemma-natural-numbers using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import foundation.cantors-theorem using
+open import foundation.cantors-theorem funext univalence truncations using
   ( theorem-Cantor)
 ```
 
@@ -130,7 +138,7 @@ open import elementary-number-theory.natural-numbers using
 **Author:** [Victor Blanchi](https://github.com/VictorBlanchi)
 
 ```agda
-open import elementary-number-theory.fundamental-theorem-of-arithmetic using
+open import elementary-number-theory.fundamental-theorem-of-arithmetic funext univalence truncations using
   ( fundamental-theorem-arithmetic-list-ℕ)
 ```
 
@@ -139,7 +147,7 @@ open import elementary-number-theory.fundamental-theorem-of-arithmetic using
 **Author:** [malarbol](https://github.com/malarbol)
 
 ```agda
-open import real-numbers.metric-space-of-real-numbers using
+open import real-numbers.metric-space-of-real-numbers funext univalence truncations using
   ( is-triangular-premetric-leq-ℝ)
 ```
 

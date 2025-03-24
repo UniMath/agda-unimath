@@ -1,32 +1,40 @@
 # The group of multiplicative units of a ring
 
 ```agda
-module ring-theory.groups-of-units-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.groups-of-units-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-large-precategories
+open import category-theory.functors-large-precategories funext univalence truncations
 
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import group-theory.cores-monoids
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-monoids
-open import group-theory.monoids
-open import group-theory.precategory-of-groups
-open import group-theory.semigroups
-open import group-theory.submonoids
+open import group-theory.cores-monoids funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.homomorphisms-monoids funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.precategory-of-groups funext univalence truncations
+open import group-theory.semigroups funext univalence
+open import group-theory.submonoids funext univalence truncations
 
-open import ring-theory.homomorphisms-rings
-open import ring-theory.invertible-elements-rings
-open import ring-theory.precategory-of-rings
-open import ring-theory.rings
+open import ring-theory.homomorphisms-rings funext univalence truncations
+open import ring-theory.invertible-elements-rings funext univalence truncations
+open import ring-theory.precategory-of-rings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

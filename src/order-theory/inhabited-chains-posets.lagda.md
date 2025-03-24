@@ -1,29 +1,37 @@
 # Inhabited chains in posets
 
 ```agda
-module order-theory.inhabited-chains-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.inhabited-chains-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import domain-theory.directed-families-posets
+open import domain-theory.directed-families-posets funext univalence truncations
 
-open import foundation.conjunction
+open import foundation.conjunction funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.disjunction
-open import foundation.existential-quantification
-open import foundation.inhabited-subtypes
-open import foundation.inhabited-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext univalence truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.inhabited-subtypes funext univalence truncations
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import order-theory.chains-posets
-open import order-theory.posets
-open import order-theory.subposets
-open import order-theory.total-preorders
+open import order-theory.chains-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.subposets funext univalence truncations
+open import order-theory.total-preorders funext univalence truncations
 ```
 
 </details>

@@ -1,50 +1,58 @@
 # The circle
 
 ```agda
-module synthetic-homotopy-theory.circle where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.circle
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
+open import foundation.0-connected-types funext univalence truncations
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-identifications
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.dependent-identifications
+open import foundation.commuting-squares-of-identifications funext
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.dependent-identifications funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.mere-equality
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.mere-equality funext univalence truncations
+open import foundation.negated-equality funext univalence truncations
+open import foundation.negation funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-groups funext univalence truncations
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.dependent-suspension-structures
-open import synthetic-homotopy-theory.free-loops
-open import synthetic-homotopy-theory.spheres
-open import synthetic-homotopy-theory.suspension-structures
-open import synthetic-homotopy-theory.suspensions-of-types
-open import synthetic-homotopy-theory.universal-cover-circle
-open import synthetic-homotopy-theory.universal-property-circle
+open import synthetic-homotopy-theory.dependent-suspension-structures funext univalence truncations
+open import synthetic-homotopy-theory.free-loops funext univalence truncations
+open import synthetic-homotopy-theory.spheres funext univalence truncations
+open import synthetic-homotopy-theory.suspension-structures funext univalence truncations
+open import synthetic-homotopy-theory.suspensions-of-types funext univalence truncations
+open import synthetic-homotopy-theory.universal-cover-circle funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-circle funext univalence truncations
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

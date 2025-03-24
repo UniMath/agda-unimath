@@ -1,22 +1,30 @@
 # Global choice
 
 ```agda
-module foundation.global-choice where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.global-choice
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.hilberts-epsilon-operators
+open import foundation.functoriality-propositional-truncation funext univalence truncations
+open import foundation.hilberts-epsilon-operators funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.negation
 
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.2-element-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

@@ -1,41 +1,48 @@
 # Copresheaf categories
 
 ```agda
-module category-theory.copresheaf-categories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.copresheaf-categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.category-of-functors-from-small-to-large-categories
-open import category-theory.constant-functors
-open import category-theory.functors-from-small-to-large-precategories
-open import category-theory.functors-precategories
-open import category-theory.initial-objects-precategories
-open import category-theory.large-categories
-open import category-theory.large-precategories
-open import category-theory.natural-transformations-functors-from-small-to-large-precategories
-open import category-theory.natural-transformations-functors-precategories
-open import category-theory.precategories
-open import category-theory.precategory-of-functors-from-small-to-large-precategories
-open import category-theory.terminal-objects-precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.category-of-functors-from-small-to-large-categories funext univalence truncations
+open import category-theory.constant-functors funext univalence truncations
+open import category-theory.functors-from-small-to-large-precategories funext univalence truncations
+open import category-theory.functors-precategories funext univalence truncations
+open import category-theory.initial-objects-precategories funext univalence truncations
+open import category-theory.large-categories funext univalence truncations
+open import category-theory.large-precategories funext univalence truncations
+open import category-theory.natural-transformations-functors-from-small-to-large-precategories funext univalence truncations
+open import category-theory.natural-transformations-functors-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
+open import category-theory.precategory-of-functors-from-small-to-large-precategories funext univalence truncations
+open import category-theory.terminal-objects-precategories funext univalence truncations
 
-open import foundation.category-of-sets
-open import foundation.commuting-squares-of-maps
+open import foundation.category-of-sets funext univalence truncations
+open import foundation.commuting-squares-of-maps funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
 open import foundation.equality-cartesian-product-types
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.raising-universe-levels-unit-type
-open import foundation.sets
+open import foundation.sets funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
 

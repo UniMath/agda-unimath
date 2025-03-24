@@ -1,21 +1,29 @@
 # The monoid of natural numbers with addition
 
 ```agda
-module elementary-number-theory.monoid-of-natural-numbers-with-addition where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.monoid-of-natural-numbers-with-addition
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.commutative-monoids funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.semigroups funext univalence
 ```
 
 </details>

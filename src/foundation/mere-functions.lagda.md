@@ -1,13 +1,21 @@
 # Mere functions
 
 ```agda
-module foundation.mere-functions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.mere-functions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositional-truncations
+open import foundation.propositional-truncations funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.function-types

@@ -2,51 +2,58 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module synthetic-homotopy-theory.universal-cover-circle where
+module synthetic-homotopy-theory.universal-cover-circle
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-integers
+open import elementary-number-theory.equality-integers funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.nonzero-integers
-open import elementary-number-theory.universal-property-integers
+open import elementary-number-theory.nonzero-integers funext univalence truncations
+open import elementary-number-theory.universal-property-integers funext univalence truncations
 
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.dependent-identifications
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.dependent-identifications funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.dependent-products-truncated-types funext
+open import foundation.dependent-universal-property-equivalences funext
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.precomposition-dependent-functions
-open import foundation.sets
-open import foundation.torsorial-type-families
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.negation funext
+open import foundation.precomposition-dependent-functions funext
+open import foundation.sets funext univalence
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.transport-along-identifications
-open import foundation.truncated-types
+open import foundation.truncated-types funext univalence
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import foundation-core.raising-universe-levels
 
-open import synthetic-homotopy-theory.descent-circle
-open import synthetic-homotopy-theory.free-loops
-open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.universal-property-circle
+open import synthetic-homotopy-theory.descent-circle funext univalence truncations
+open import synthetic-homotopy-theory.free-loops funext univalence truncations
+open import synthetic-homotopy-theory.loop-spaces funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-circle funext univalence truncations
 ```
 
 </details>

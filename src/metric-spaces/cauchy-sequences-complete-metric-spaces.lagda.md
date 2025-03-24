@@ -2,22 +2,29 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module metric-spaces.cauchy-sequences-complete-metric-spaces where
+module metric-spaces.cauchy-sequences-complete-metric-spaces
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.universe-levels
 
-open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.cauchy-sequences-metric-spaces
-open import metric-spaces.complete-metric-spaces
-open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.metric-spaces
+open import metric-spaces.cauchy-approximations-metric-spaces funext univalence truncations
+open import metric-spaces.cauchy-sequences-metric-spaces funext univalence truncations
+open import metric-spaces.complete-metric-spaces funext univalence truncations
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces funext univalence truncations
+open import metric-spaces.metric-spaces funext univalence truncations
 ```
 
 </details>

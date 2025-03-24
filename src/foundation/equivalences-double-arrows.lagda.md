@@ -1,20 +1,28 @@
 # Equivalences of double arrows
 
 ```agda
-module foundation.equivalences-double-arrows where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.equivalences-double-arrows
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.commuting-squares-of-maps
+open import foundation.cartesian-product-types funext univalence
+open import foundation.commuting-squares-of-maps funext univalence
 open import foundation.dependent-pair-types
 open import foundation.double-arrows
-open import foundation.equivalences
-open import foundation.equivalences-arrows
-open import foundation.homotopies
-open import foundation.morphisms-double-arrows
+open import foundation.equivalences funext
+open import foundation.equivalences-arrows funext univalence truncations
+open import foundation.homotopies funext
+open import foundation.morphisms-double-arrows funext univalence
 open import foundation.universe-levels
 ```
 

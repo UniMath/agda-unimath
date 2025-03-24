@@ -1,40 +1,47 @@
 # The pullback-hom
 
 ```agda
-module orthogonal-factorization-systems.pullback-hom where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.pullback-hom
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-maps
-open import foundation.cones-over-cospan-diagrams
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.commuting-triangles-of-maps funext univalence
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.equivalences-arrows
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.functoriality-fibers-of-maps
-open import foundation.functoriality-morphisms-arrows
-open import foundation.higher-homotopies-morphisms-arrows
-open import foundation.homotopies
-open import foundation.homotopies-morphisms-arrows
-open import foundation.identity-types
-open import foundation.morphisms-arrows
-open import foundation.postcomposition-functions
-open import foundation.precomposition-dependent-functions
-open import foundation.precomposition-functions
-open import foundation.pullback-cones
-open import foundation.pullbacks
-open import foundation.retractions
-open import foundation.sections
-open import foundation.standard-pullbacks
-open import foundation.type-theoretic-principle-of-choice
-open import foundation.universal-property-pullbacks
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.equivalences-arrows funext univalence truncations
+open import foundation.fibers-of-maps funext
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.functoriality-fibers-of-maps funext
+open import foundation.functoriality-morphisms-arrows funext univalence truncations
+open import foundation.higher-homotopies-morphisms-arrows funext univalence truncations
+open import foundation.homotopies funext
+open import foundation.homotopies-morphisms-arrows funext
+open import foundation.identity-types funext
+open import foundation.morphisms-arrows funext
+open import foundation.postcomposition-functions funext
+open import foundation.precomposition-dependent-functions funext
+open import foundation.precomposition-functions funext
+open import foundation.pullback-cones funext univalence truncations
+open import foundation.pullbacks funext univalence truncations
+open import foundation.retractions funext
+open import foundation.sections funext
+open import foundation.standard-pullbacks funext
+open import foundation.type-theoretic-principle-of-choice funext
+open import foundation.universal-property-pullbacks funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 ```

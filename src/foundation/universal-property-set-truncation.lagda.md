@@ -1,20 +1,28 @@
 # The universal property of set truncations
 
 ```agda
-module foundation.universal-property-set-truncation where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.universal-property-set-truncation
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.mere-equality
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.sets
+open import foundation.function-extensionality funext
+open import foundation.mere-equality funext univalence truncations
+open import foundation.reflecting-maps-equivalence-relations funext univalence truncations
+open import foundation.sets funext univalence
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.universal-property-equivalences
-open import foundation.universal-property-set-quotients
+open import foundation.universal-property-equivalences funext
+open import foundation.universal-property-set-quotients funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps

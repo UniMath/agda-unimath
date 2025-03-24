@@ -1,7 +1,13 @@
 # Types equipped with endomorphisms
 
 ```agda
-module structured-types.types-equipped-with-endomorphisms where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.types-equipped-with-endomorphisms
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,7 +18,7 @@ open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.endomorphisms
+open import foundation-core.endomorphisms funext univalence
 open import foundation-core.function-types
 ```
 

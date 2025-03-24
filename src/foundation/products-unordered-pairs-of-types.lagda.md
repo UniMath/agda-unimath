@@ -1,28 +1,36 @@
 # Products of unordered pairs of types
 
 ```agda
-module foundation.products-unordered-pairs-of-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.products-unordered-pairs-of-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.symmetric-operations
+open import foundation.dependent-universal-property-equivalences funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.symmetric-operations funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import foundation.unordered-pairs
-open import foundation.unordered-pairs-of-types
+open import foundation.unordered-pairs funext univalence truncations
+open import foundation.unordered-pairs-of-types funext univalence truncations
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.universal-property-standard-finite-types
+open import univalent-combinatorics.2-element-types funext univalence truncations
+open import univalent-combinatorics.universal-property-standard-finite-types funext univalence truncations
 ```
 
 </details>

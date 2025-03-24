@@ -1,28 +1,36 @@
 # Exponential of Cauchy series of species of types in subuniverses
 
 ```agda
-module species.exponentials-cauchy-series-of-types-in-subuniverses where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.exponentials-cauchy-series-of-types-in-subuniverses
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.global-subuniverses
-open import foundation.sigma-closed-subuniverses
-open import foundation.subuniverses
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.global-subuniverses funext univalence
+open import foundation.sigma-closed-subuniverses funext univalence
+open import foundation.subuniverses funext univalence
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import species.cauchy-composition-species-of-types-in-subuniverses
-open import species.cauchy-exponentials-species-of-types-in-subuniverses
-open import species.cauchy-series-species-of-types-in-subuniverses
-open import species.composition-cauchy-series-species-of-types-in-subuniverses
-open import species.species-of-types-in-subuniverses
+open import species.cauchy-composition-species-of-types-in-subuniverses funext univalence
+open import species.cauchy-exponentials-species-of-types-in-subuniverses funext univalence truncations
+open import species.cauchy-series-species-of-types-in-subuniverses funext univalence
+open import species.composition-cauchy-series-species-of-types-in-subuniverses funext univalence
+open import species.species-of-types-in-subuniverses funext univalence
 ```
 
 </details>

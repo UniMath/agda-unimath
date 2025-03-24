@@ -1,26 +1,34 @@
 # Symmetric difference of subtypes
 
 ```agda
-module foundation.symmetric-difference where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.symmetric-difference
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-subtypes
-open import foundation.decidable-types
+open import foundation.decidable-subtypes funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.exclusive-sum
-open import foundation.intersections-subtypes
+open import foundation.exclusive-sum funext univalence truncations
+open import foundation.intersections-subtypes funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
-open import foundation-core.decidable-propositions
+open import foundation-core.decidable-propositions funext univalence truncations
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 open import foundation-core.transport-along-identifications
 ```
 

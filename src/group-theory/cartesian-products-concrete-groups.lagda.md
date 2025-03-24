@@ -1,33 +1,41 @@
 # Cartesian products of concrete groups
 
 ```agda
-module group-theory.cartesian-products-concrete-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.cartesian-products-concrete-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
-open import foundation.1-types
-open import foundation.cartesian-product-types
+open import foundation.0-connected-types funext univalence truncations
+open import foundation.1-types funext univalence
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.dependent-products-truncated-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.mere-equality
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
-open import foundation.truncated-types
+open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.mere-equality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.truncated-types funext univalence
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
-open import group-theory.groups
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
 
-open import higher-group-theory.cartesian-products-higher-groups
-open import higher-group-theory.higher-groups
+open import higher-group-theory.cartesian-products-higher-groups funext univalence truncations
+open import higher-group-theory.higher-groups funext univalence truncations
 
 open import structured-types.pointed-types
 ```

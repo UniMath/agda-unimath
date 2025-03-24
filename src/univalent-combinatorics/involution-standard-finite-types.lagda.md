@@ -1,20 +1,28 @@
 # An involution on the standard finite types
 
 ```agda
-module univalent-combinatorics.involution-standard-finite-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.involution-standard-finite-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types
-open import foundation.involutions
+open import foundation.identity-types funext
+open import foundation.involutions funext univalence
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

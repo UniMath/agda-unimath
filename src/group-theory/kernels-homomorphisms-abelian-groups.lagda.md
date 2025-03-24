@@ -1,7 +1,15 @@
 # Kernels of homomorphisms between abelian groups
 
 ```agda
-module group-theory.kernels-homomorphisms-abelian-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.kernels-homomorphisms-abelian-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,12 +17,12 @@ module group-theory.kernels-homomorphisms-abelian-groups where
 ```agda
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.embeddings-abelian-groups
-open import group-theory.homomorphisms-abelian-groups
-open import group-theory.kernels-homomorphisms-groups
-open import group-theory.subgroups-abelian-groups
-open import group-theory.subsets-abelian-groups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.embeddings-abelian-groups funext univalence truncations
+open import group-theory.homomorphisms-abelian-groups funext univalence truncations
+open import group-theory.kernels-homomorphisms-groups funext univalence truncations
+open import group-theory.subgroups-abelian-groups funext univalence truncations
+open import group-theory.subsets-abelian-groups funext univalence truncations
 ```
 
 </details>

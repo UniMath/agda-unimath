@@ -1,23 +1,31 @@
 # Pointed torsorial type families
 
 ```agda
-module foundation.pointed-torsorial-type-families where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.pointed-torsorial-type-families
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
+open import foundation.0-connected-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.locally-small-types
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
+open import foundation.locally-small-types funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.propositional-truncations funext univalence
 open import foundation.sorial-type-families
 open import foundation.transport-along-identifications
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -25,7 +33,7 @@ open import foundation-core.contractible-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.small-types
+open import foundation-core.small-types funext univalence truncations
 open import foundation-core.torsorial-type-families
 
 open import structured-types.pointed-types

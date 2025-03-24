@@ -1,7 +1,15 @@
 # Commutative monoids
 
 ```agda
-module group-theory.commutative-monoids where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.commutative-monoids
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,18 +17,18 @@ module group-theory.commutative-monoids where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
 open import foundation.interchange-law
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.iterated-dependent-product-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.telescopes
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.monoids funext univalence truncations
+open import group-theory.semigroups funext univalence
 ```
 
 </details>

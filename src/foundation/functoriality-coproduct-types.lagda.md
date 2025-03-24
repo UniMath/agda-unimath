@@ -1,30 +1,38 @@
 # Functoriality of coproduct types
 
 ```agda
-module foundation.functoriality-coproduct-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.functoriality-coproduct-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.equality-coproduct-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functoriality-cartesian-product-types
-open import foundation.homotopy-induction
-open import foundation.morphisms-arrows
-open import foundation.negated-equality
-open import foundation.propositional-truncations
-open import foundation.retractions
+open import foundation.equality-coproduct-types funext univalence truncations
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.homotopy-induction funext
+open import foundation.morphisms-arrows funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.retractions funext
 open import foundation.structure-identity-principle
-open import foundation.surjective-maps
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.unit-type
-open import foundation.universal-property-coproduct-types
+open import foundation.universal-property-coproduct-types funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -33,7 +41,7 @@ open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

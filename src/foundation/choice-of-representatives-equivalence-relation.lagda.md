@@ -1,7 +1,15 @@
 # Choice of representatives for an equivalence relation
 
 ```agda
-module foundation.choice-of-representatives-equivalence-relation where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.choice-of-representatives-equivalence-relation
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,18 +17,18 @@ module foundation.choice-of-representatives-equivalence-relation where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalence-classes
+open import foundation.equivalence-classes funext univalence truncations
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
-open import foundation.surjective-maps
+open import foundation.logical-equivalences funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
-open import foundation-core.equivalence-relations
+open import foundation-core.equivalence-relations funext univalence truncations
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functoriality-dependent-pair-types

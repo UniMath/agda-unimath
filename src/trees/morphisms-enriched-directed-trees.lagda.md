@@ -1,25 +1,33 @@
 # Morphisms of enriched directed trees
 
 ```agda
-module trees.morphisms-enriched-directed-trees where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.morphisms-enriched-directed-trees
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-maps
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.commuting-triangles-of-maps funext univalence
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import trees.enriched-directed-trees
-open import trees.morphisms-directed-trees
+open import trees.enriched-directed-trees funext univalence truncations
+open import trees.morphisms-directed-trees funext univalence truncations
 ```
 
 </details>

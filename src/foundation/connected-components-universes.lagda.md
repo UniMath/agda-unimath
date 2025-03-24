@@ -1,29 +1,37 @@
 # Connected components of universes
 
 ```agda
-module foundation.connected-components-universes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.connected-components-universes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
+open import foundation.0-connected-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.functoriality-propositional-truncation
+open import foundation.empty-types funext univalence truncations
+open import foundation.functoriality-propositional-truncation funext univalence truncations
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.mere-equivalences
-open import foundation.propositional-truncations
+open import foundation.mere-equivalences funext univalence truncations
+open import foundation.propositional-truncations funext univalence
 open import foundation.subtype-identity-principle
-open import foundation.subuniverses
-open import foundation.univalence
+open import foundation.subuniverses funext univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.raising-universe-levels
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 open import foundation-core.torsorial-type-families
 ```
 

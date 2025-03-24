@@ -1,7 +1,15 @@
 # The zero modality
 
 ```agda
-module orthogonal-factorization-systems.zero-modality where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.zero-modality
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,9 +19,9 @@ open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.modal-operators
-open import orthogonal-factorization-systems.types-local-at-maps
-open import orthogonal-factorization-systems.uniquely-eliminating-modalities
+open import orthogonal-factorization-systems.modal-operators funext univalence truncations
+open import orthogonal-factorization-systems.types-local-at-maps funext univalence truncations
+open import orthogonal-factorization-systems.uniquely-eliminating-modalities funext univalence truncations
 ```
 
 </details>

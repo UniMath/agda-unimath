@@ -1,7 +1,15 @@
 # Steiner systems
 
 ```agda
-module univalent-combinatorics.steiner-systems where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.steiner-systems
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,13 +17,13 @@ module univalent-combinatorics.steiner-systems where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types
-open import foundation.decidable-subtypes
+open import foundation.contractible-types funext univalence
+open import foundation.decidable-subtypes funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-contractible-types funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

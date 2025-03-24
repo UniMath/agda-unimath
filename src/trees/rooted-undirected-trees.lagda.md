@@ -1,7 +1,15 @@
 # Rooted undirected trees
 
 ```agda
-module trees.rooted-undirected-trees where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.rooted-undirected-trees
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,16 +17,16 @@ module trees.rooted-undirected-trees where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.unordered-pairs
+open import foundation.unordered-pairs funext univalence truncations
 
-open import graph-theory.trails-undirected-graphs
-open import graph-theory.undirected-graphs
+open import graph-theory.trails-undirected-graphs funext univalence truncations
+open import graph-theory.undirected-graphs funext univalence truncations
 
-open import trees.undirected-trees
+open import trees.undirected-trees funext univalence truncations
 ```
 
 </details>

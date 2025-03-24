@@ -1,32 +1,40 @@
 # Decidable subgroups of groups
 
 ```agda
-module group-theory.decidable-subgroups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.decidable-subgroups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.decidable-subtypes
+open import foundation.binary-relations funext univalence truncations
+open import foundation.decidable-subtypes funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.embeddings
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.equivalence-relations funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.semigroups
-open import group-theory.subgroups
-open import group-theory.subsets-groups
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.semigroups funext univalence
+open import group-theory.subgroups funext univalence truncations
+open import group-theory.subsets-groups funext univalence truncations
 ```
 
 </details>

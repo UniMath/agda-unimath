@@ -1,7 +1,15 @@
 # Order preserving maps between large posets
 
 ```agda
-module order-theory.order-preserving-maps-large-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.order-preserving-maps-large-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,10 +17,10 @@ module order-theory.order-preserving-maps-large-posets where
 ```agda
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.order-preserving-maps-posets
-open import order-theory.similarity-of-elements-large-posets
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.order-preserving-maps-large-preorders funext univalence truncations
+open import order-theory.order-preserving-maps-posets funext univalence truncations
+open import order-theory.similarity-of-elements-large-posets funext univalence truncations
 ```
 
 </details>

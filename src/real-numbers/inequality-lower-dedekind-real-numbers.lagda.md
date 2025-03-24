@@ -2,34 +2,41 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module real-numbers.inequality-lower-dedekind-real-numbers where
+module real-numbers.inequality-lower-dedekind-real-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.inequality-rational-numbers funext univalence truncations
+open import elementary-number-theory.rational-numbers funext univalence truncations
+open import elementary-number-theory.strict-inequality-rational-numbers funext univalence truncations
 
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.existential-quantification
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.top-elements-large-posets
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.large-preorders funext univalence truncations
+open import order-theory.top-elements-large-posets funext univalence truncations
 
-open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.rational-lower-dedekind-real-numbers
+open import real-numbers.lower-dedekind-real-numbers funext univalence truncations
+open import real-numbers.rational-lower-dedekind-real-numbers funext univalence truncations
 ```
 
 </details>

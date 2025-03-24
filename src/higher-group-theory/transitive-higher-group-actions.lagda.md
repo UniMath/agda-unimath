@@ -1,27 +1,35 @@
 # Transitive higher group actions
 
 ```agda
-module higher-group-theory.transitive-higher-group-actions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.transitive-higher-group-actions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
+open import foundation.0-connected-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.regensburg-extension-fundamental-theorem-of-identity-types
-open import foundation.surjective-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.regensburg-extension-fundamental-theorem-of-identity-types funext univalence truncations
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-group-actions
-open import higher-group-theory.higher-groups
-open import higher-group-theory.orbits-higher-group-actions
+open import higher-group-theory.higher-group-actions funext univalence truncations
+open import higher-group-theory.higher-groups funext univalence truncations
+open import higher-group-theory.orbits-higher-group-actions funext univalence truncations
 ```
 
 </details>

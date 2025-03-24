@@ -1,18 +1,26 @@
 # The universal property of sequential limits
 
 ```agda
-module foundation.universal-property-sequential-limits where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.universal-property-sequential-limits
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-inverse-sequential-diagrams
+open import foundation.cones-over-inverse-sequential-diagrams funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.inverse-sequential-diagrams
-open import foundation.postcomposition-functions
+open import foundation.equivalences funext
+open import foundation.inverse-sequential-diagrams funext univalence truncations
+open import foundation.postcomposition-functions funext
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 

@@ -2,34 +2,41 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module univalent-combinatorics.set-quotients-of-index-two where
+module univalent-combinatorics.set-quotients-of-index-two
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-set-quotients
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.logical-equivalences
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.sets
-open import foundation.universal-property-set-quotients
+open import foundation.dependent-products-contractible-types funext
+open import foundation.embeddings funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalence-relations funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-set-quotients funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.logical-equivalences funext
+open import foundation.reflecting-maps-equivalence-relations funext univalence truncations
+open import foundation.sets funext univalence
+open import foundation.universal-property-set-quotients funext univalence truncations
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

@@ -1,22 +1,30 @@
 # Homotopies of morphisms of cospan diagrams
 
 ```agda
-module foundation.homotopies-morphisms-cospan-diagrams where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.homotopies-morphisms-cospan-diagrams
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-homotopies
+open import foundation.commuting-squares-of-homotopies funext
 open import foundation.cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.function-extensionality funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
-open import foundation.identity-types
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
 open import foundation.morphisms-cospan-diagrams
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

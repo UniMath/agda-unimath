@@ -1,28 +1,36 @@
 # Fundamental theorem of equivalence relations
 
 ```agda
-module foundation.fundamental-theorem-of-equivalence-relations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.fundamental-theorem-of-equivalence-relations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalence-classes
-open import foundation.full-subtypes
-open import foundation.inhabited-subtypes
-open import foundation.logical-equivalences
-open import foundation.partitions
-open import foundation.propositional-truncations
-open import foundation.subtypes
+open import foundation.equivalence-classes funext univalence truncations
+open import foundation.full-subtypes funext univalence truncations
+open import foundation.inhabited-subtypes funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.partitions funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.equivalence-relations
+open import foundation-core.equivalence-relations funext univalence truncations
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types

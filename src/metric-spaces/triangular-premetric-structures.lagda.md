@@ -1,25 +1,33 @@
 # Triangular premetric structures on types
 
 ```agda
-module metric-spaces.triangular-premetric-structures where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module metric-spaces.triangular-premetric-structures
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers funext univalence truncations
 
-open import foundation.binary-relations
-open import foundation.dependent-products-propositions
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.binary-relations funext univalence truncations
+open import foundation.dependent-products-propositions funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.monotonic-premetric-structures
-open import metric-spaces.premetric-structures
-open import metric-spaces.reflexive-premetric-structures
+open import metric-spaces.monotonic-premetric-structures funext univalence truncations
+open import metric-spaces.premetric-structures funext univalence truncations
+open import metric-spaces.reflexive-premetric-structures funext univalence truncations
 ```
 
 </details>

@@ -1,7 +1,15 @@
 # Products of unordered tuples of types
 
 ```agda
-module foundation.products-unordered-tuples-of-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.products-unordered-tuples-of-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,16 +18,16 @@ module foundation.products-unordered-tuples-of-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.universal-property-maybe
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.universal-property-maybe funext
 open import foundation.universe-levels
-open import foundation.unordered-tuples
-open import foundation.unordered-tuples-of-types
+open import foundation.unordered-tuples funext univalence truncations
+open import foundation.unordered-tuples-of-types funext univalence truncations
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 
-open import univalent-combinatorics.complements-isolated-elements
+open import univalent-combinatorics.complements-isolated-elements funext univalence truncations
 ```
 
 </details>

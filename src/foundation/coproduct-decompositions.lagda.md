@@ -1,26 +1,34 @@
 # Coproduct decompositions
 
 ```agda
-module foundation.coproduct-decompositions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.coproduct-decompositions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-decompositions-subuniverse
+open import foundation.coproduct-decompositions-subuniverse funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalence-extensionality
-open import foundation.function-extensionality
-open import foundation.functoriality-coproduct-types
+open import foundation.equivalence-extensionality funext
+open import foundation.function-extensionality funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.structure-identity-principle
-open import foundation.transposition-identifications-along-equivalences
-open import foundation.type-arithmetic-coproduct-types
+open import foundation.transposition-identifications-along-equivalences funext
+open import foundation.type-arithmetic-coproduct-types funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-empty-type funext univalence truncations
 open import foundation.unit-type
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -37,8 +45,8 @@ open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.equality-standard-finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

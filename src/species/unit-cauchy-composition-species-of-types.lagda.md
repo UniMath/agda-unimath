@@ -1,17 +1,23 @@
 # The unit of Cauchy composition of types
 
 ```agda
-module species.unit-cauchy-composition-species-of-types where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.unit-cauchy-composition-species-of-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-products-contractible-types
+open import foundation.contractible-types funext univalence
+open import foundation.dependent-products-contractible-types funext
 open import foundation.universe-levels
 
-open import species.species-of-types
+open import species.species-of-types funext univalence
 ```
 
 </details>

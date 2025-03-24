@@ -1,19 +1,27 @@
 # Strict preorders
 
 ```agda
-module order-theory.strict-preorders where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.strict-preorders
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.cartesian-product-types
+open import foundation.binary-relations funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.empty-types
-open import foundation.negation
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.negation funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 ```
 

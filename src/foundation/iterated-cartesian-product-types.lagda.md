@@ -1,7 +1,15 @@
 # Iterated cartesian product types
 
 ```agda
-module foundation.iterated-cartesian-product-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.iterated-cartesian-product-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,19 +17,19 @@ module foundation.iterated-cartesian-product-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.permutations-standard-finite-types
+open import finite-group-theory.permutations-standard-finite-types funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-function-types funext univalence
 open import foundation.raising-universe-levels-unit-type
 open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-dependent-function-types
+open import foundation.type-arithmetic-dependent-function-types funext univalence
 open import foundation.unit-type
-open import foundation.univalence
-open import foundation.universal-property-coproduct-types
-open import foundation.universal-property-empty-type
+open import foundation.univalence funext univalence
+open import foundation.universal-property-coproduct-types funext
+open import foundation.universal-property-empty-type funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -31,12 +39,12 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
 
-open import lists.arrays
-open import lists.concatenation-lists
+open import lists.arrays funext univalence truncations
+open import lists.concatenation-lists funext univalence truncations
 open import lists.lists
-open import lists.permutation-lists
+open import lists.permutation-lists funext univalence truncations
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

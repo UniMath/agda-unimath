@@ -1,7 +1,15 @@
 # The orbit-stabilizer theorem for concrete groups
 
 ```agda
-module group-theory.orbit-stabilizer-theorem-concrete-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.orbit-stabilizer-theorem-concrete-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,10 +18,10 @@ module group-theory.orbit-stabilizer-theorem-concrete-groups where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.concrete-group-actions
-open import group-theory.concrete-groups
-open import group-theory.mere-equivalences-concrete-group-actions
-open import group-theory.stabilizer-groups-concrete-group-actions
+open import group-theory.concrete-group-actions funext univalence truncations
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.mere-equivalences-concrete-group-actions funext univalence truncations
+open import group-theory.stabilizer-groups-concrete-group-actions funext univalence truncations
 
 open import structured-types.pointed-types
 ```

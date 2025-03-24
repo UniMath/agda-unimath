@@ -2,8 +2,15 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module foundation.sigma-decompositions where
+module foundation.sigma-decompositions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,17 +18,17 @@ module foundation.sigma-decompositions where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.inhabited-types
-open import foundation.propositional-truncations
-open import foundation.sets
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.sets funext univalence
 open import foundation.structure-identity-principle
-open import foundation.transposition-identifications-along-equivalences
+open import foundation.transposition-identifications-along-equivalences funext
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

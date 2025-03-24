@@ -1,23 +1,31 @@
 # Functors between categories
 
 ```agda
-module category-theory.functors-categories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.functors-categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.functors-precategories
-open import category-theory.isomorphisms-in-categories
-open import category-theory.maps-categories
+open import category-theory.categories funext univalence truncations
+open import category-theory.functors-precategories funext univalence truncations
+open import category-theory.isomorphisms-in-categories funext univalence truncations
+open import category-theory.maps-categories funext univalence truncations
 
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 ```
 

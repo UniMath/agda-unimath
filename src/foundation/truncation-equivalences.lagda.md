@@ -1,28 +1,36 @@
 # `k`-Equivalences
 
 ```agda
-module foundation.truncation-equivalences where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.truncation-equivalences
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
-open import foundation.connected-maps
-open import foundation.connected-types
-open import foundation.contractible-types
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.connected-maps funext univalence truncations
+open import foundation.connected-types funext univalence truncations
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-truncated-types
-open import foundation.functoriality-truncation
-open import foundation.identity-types
-open import foundation.precomposition-functions-into-subuniverses
-open import foundation.propositional-truncations
-open import foundation.truncations
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.functoriality-truncation funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.precomposition-functions-into-subuniverses funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.truncations funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.universal-property-dependent-pair-types
-open import foundation.universal-property-equivalences
-open import foundation.universal-property-truncation
+open import foundation.universal-property-dependent-pair-types funext
+open import foundation.universal-property-equivalences funext
+open import foundation.universal-property-truncation funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps

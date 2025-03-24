@@ -1,20 +1,28 @@
 # Pointed span diagrams
 
 ```agda
-module structured-types.pointed-span-diagrams where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.pointed-span-diagrams
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.morphisms-arrows
+open import foundation.identity-types funext
+open import foundation.morphisms-arrows funext
 open import foundation.universe-levels
 
-open import structured-types.morphisms-pointed-arrows
-open import structured-types.pointed-maps
-open import structured-types.pointed-spans
+open import structured-types.morphisms-pointed-arrows funext univalence truncations
+open import structured-types.pointed-maps funext univalence truncations
+open import structured-types.pointed-spans funext univalence truncations
 open import structured-types.pointed-types
 ```
 

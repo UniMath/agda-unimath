@@ -1,7 +1,15 @@
 # Sorted lists
 
 ```agda
-module lists.sorted-lists where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module lists.sorted-lists
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,19 +18,19 @@ module lists.sorted-lists where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
 open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
+open import linear-algebra.vectors funext univalence truncations
 
-open import lists.arrays
+open import lists.arrays funext univalence truncations
 open import lists.lists
-open import lists.sorted-vectors
+open import lists.sorted-vectors funext univalence truncations
 
-open import order-theory.decidable-total-orders
+open import order-theory.decidable-total-orders funext univalence truncations
 ```
 
 </details>

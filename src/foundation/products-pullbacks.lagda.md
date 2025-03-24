@@ -1,20 +1,28 @@
 # Products of pullbacks
 
 ```agda
-module foundation.products-pullbacks where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.products-pullbacks
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospan-diagrams
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.inhabited-types
-open import foundation.propositional-truncations
-open import foundation.pullbacks
-open import foundation.standard-pullbacks
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.pullbacks funext univalence truncations
+open import foundation.standard-pullbacks funext
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -24,7 +32,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universal-property-pullbacks
+open import foundation-core.universal-property-pullbacks funext
 ```
 
 </details>

@@ -1,25 +1,31 @@
 # Fiber inclusions
 
 ```agda
-module foundation.fiber-inclusions where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.fiber-inclusions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-maps
-open import foundation.cones-over-cospan-diagrams
+open import foundation.0-maps funext
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.faithful-maps
-open import foundation.fibers-of-maps
+open import foundation.faithful-maps funext
+open import foundation.fibers-of-maps funext
 open import foundation.raising-universe-levels-unit-type
-open import foundation.standard-pullbacks
+open import foundation.standard-pullbacks funext
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.1-types
+open import foundation-core.1-types funext univalence
 open import foundation-core.contractible-maps
 open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
@@ -29,9 +35,9 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
-open import foundation-core.pullbacks
+open import foundation-core.pullbacks funext
 open import foundation-core.sets
-open import foundation-core.truncated-maps
+open import foundation-core.truncated-maps funext
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

@@ -1,25 +1,33 @@
 # Dependent products of semirings
 
 ```agda
-module ring-theory.dependent-products-semirings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.dependent-products-semirings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.function-extensionality funext
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids
-open import group-theory.dependent-products-commutative-monoids
-open import group-theory.dependent-products-monoids
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.commutative-monoids funext univalence truncations
+open import group-theory.dependent-products-commutative-monoids funext univalence truncations
+open import group-theory.dependent-products-monoids funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.semigroups funext univalence
 
-open import ring-theory.semirings
+open import ring-theory.semirings funext univalence truncations
 ```
 
 </details>

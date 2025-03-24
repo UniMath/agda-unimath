@@ -1,7 +1,15 @@
 # Powers of elements in rings
 
 ```agda
-module ring-theory.powers-of-elements-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.powers-of-elements-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,17 +18,17 @@ module ring-theory.powers-of-elements-rings where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.parity-natural-numbers
+open import elementary-number-theory.parity-natural-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.empty-types
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.empty-types funext univalence truncations
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import ring-theory.central-elements-rings
-open import ring-theory.powers-of-elements-semirings
-open import ring-theory.rings
+open import ring-theory.central-elements-rings funext univalence truncations
+open import ring-theory.powers-of-elements-semirings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

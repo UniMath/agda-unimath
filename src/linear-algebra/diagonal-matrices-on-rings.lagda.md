@@ -1,7 +1,15 @@
 # Diagonal matrices on rings
 
 ```agda
-module linear-algebra.diagonal-matrices-on-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module linear-algebra.diagonal-matrices-on-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,13 +19,13 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.constant-vectors
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.matrices-on-rings
-open import linear-algebra.vectors
-open import linear-algebra.vectors-on-rings
+open import linear-algebra.constant-vectors funext univalence truncations
+open import linear-algebra.functoriality-vectors funext univalence truncations
+open import linear-algebra.matrices-on-rings funext univalence truncations
+open import linear-algebra.vectors funext univalence truncations
+open import linear-algebra.vectors-on-rings funext univalence truncations
 
-open import ring-theory.rings
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

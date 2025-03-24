@@ -1,7 +1,15 @@
 # Vectors
 
 ```agda
-module linear-algebra.vectors where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module linear-algebra.vectors
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,23 +18,22 @@ module linear-algebra.vectors where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-truncated-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.raising-universe-levels-unit-type
-open import foundation.sets
+open import foundation.sets funext univalence
 open import foundation.transport-along-identifications
-open import foundation.truncated-types
+open import foundation.truncated-types funext univalence
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -34,8 +41,8 @@ open import foundation.whiskering-higher-homotopies-composition
 
 open import foundation-core.raising-universe-levels
 
-open import univalent-combinatorics.involution-standard-finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.involution-standard-finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

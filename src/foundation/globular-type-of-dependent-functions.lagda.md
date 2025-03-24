@@ -2,8 +2,15 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module foundation.globular-type-of-dependent-functions where
+module foundation.globular-type-of-dependent-functions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -14,8 +21,8 @@ open import foundation.universe-levels
 open import foundation-core.homotopies
 
 open import globular-types.globular-types
-open import globular-types.reflexive-globular-types
-open import globular-types.transitive-globular-types
+open import globular-types.reflexive-globular-types funext univalence truncations
+open import globular-types.transitive-globular-types funext univalence truncations
 ```
 
 </details>

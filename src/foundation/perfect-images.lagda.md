@@ -1,7 +1,15 @@
 # Perfect images
 
 ```agda
-module foundation.perfect-images where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.perfect-images
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,14 +18,14 @@ module foundation.perfect-images where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.decidable-types
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.double-negation
-open import foundation.iterated-dependent-product-types
-open import foundation.iterating-functions
-open import foundation.law-of-excluded-middle
-open import foundation.negated-equality
-open import foundation.negation
+open import foundation.double-negation funext univalence truncations
+open import foundation.iterated-dependent-product-types funext
+open import foundation.iterating-functions funext univalence truncations
+open import foundation.law-of-excluded-middle funext univalence truncations
+open import foundation.negated-equality funext univalence truncations
+open import foundation.negation funext
 open import foundation.telescopes
 open import foundation.universe-levels
 

@@ -1,18 +1,26 @@
 # Transitive well-founded relations
 
 ```agda
-module order-theory.transitive-well-founded-relations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.transitive-well-founded-relations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.cartesian-product-types
+open import foundation.binary-relations funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import order-theory.well-founded-relations
+open import order-theory.well-founded-relations funext univalence truncations
 ```
 
 </details>

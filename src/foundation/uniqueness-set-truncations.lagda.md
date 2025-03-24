@@ -1,17 +1,24 @@
 # Uniqueness of set truncations
 
 ```agda
-module foundation.uniqueness-set-truncations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.uniqueness-set-truncations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.mere-equality
-open import foundation.sets
-open import foundation.uniqueness-set-quotients
-open import foundation.universal-property-set-truncation
+open import foundation.mere-equality funext univalence truncations
+open import foundation.sets funext univalence
+open import foundation.uniqueness-set-quotients funext univalence truncations
+open import foundation.universal-property-set-truncation funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

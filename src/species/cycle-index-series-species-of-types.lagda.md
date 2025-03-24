@@ -1,7 +1,15 @@
 # Cycle index series of species
 
 ```agda
-module species.cycle-index-series-species-of-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.cycle-index-series-species-of-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,7 +20,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cyclic-finite-types
+open import univalent-combinatorics.cyclic-finite-types funext univalence truncations
 ```
 
 </details>

@@ -43,52 +43,60 @@ property of **indistinguishability of identicals**
 ## Modules in the metric spaces namespace
 
 ```agda
-module metric-spaces where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import metric-spaces.category-of-metric-spaces-and-isometries public
-open import metric-spaces.category-of-metric-spaces-and-short-functions public
-open import metric-spaces.cauchy-approximations-metric-spaces public
-open import metric-spaces.cauchy-approximations-premetric-spaces public
-open import metric-spaces.cauchy-sequences-complete-metric-spaces public
-open import metric-spaces.cauchy-sequences-metric-spaces public
-open import metric-spaces.closed-premetric-structures public
-open import metric-spaces.complete-metric-spaces public
-open import metric-spaces.convergent-cauchy-approximations-metric-spaces public
-open import metric-spaces.dependent-products-metric-spaces public
-open import metric-spaces.discrete-premetric-structures public
-open import metric-spaces.equality-of-metric-spaces public
-open import metric-spaces.equality-of-premetric-spaces public
-open import metric-spaces.extensional-premetric-structures public
-open import metric-spaces.functions-metric-spaces public
-open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
-open import metric-spaces.functor-category-short-isometry-metric-spaces public
-open import metric-spaces.induced-premetric-structures-on-preimages public
-open import metric-spaces.isometric-equivalences-premetric-spaces public
-open import metric-spaces.isometries-metric-spaces public
-open import metric-spaces.isometries-premetric-spaces public
-open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces public
-open import metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space public
-open import metric-spaces.metric-space-of-convergent-cauchy-approximations-in-a-metric-space public
-open import metric-spaces.metric-space-of-rational-numbers public
-open import metric-spaces.metric-space-of-rational-numbers-with-open-neighborhoods public
-open import metric-spaces.metric-spaces public
-open import metric-spaces.metric-structures public
-open import metric-spaces.monotonic-premetric-structures public
-open import metric-spaces.ordering-premetric-structures public
-open import metric-spaces.precategory-of-metric-spaces-and-functions public
-open import metric-spaces.precategory-of-metric-spaces-and-isometries public
-open import metric-spaces.precategory-of-metric-spaces-and-short-functions public
-open import metric-spaces.premetric-spaces public
-open import metric-spaces.premetric-structures public
-open import metric-spaces.pseudometric-spaces public
-open import metric-spaces.pseudometric-structures public
-open import metric-spaces.reflexive-premetric-structures public
-open import metric-spaces.saturated-metric-spaces public
-open import metric-spaces.short-functions-metric-spaces public
-open import metric-spaces.short-functions-premetric-spaces public
-open import metric-spaces.subspaces-metric-spaces public
-open import metric-spaces.symmetric-premetric-structures public
-open import metric-spaces.triangular-premetric-structures public
+module metric-spaces
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import metric-spaces.category-of-metric-spaces-and-isometries funext univalence truncations public
+open import metric-spaces.category-of-metric-spaces-and-short-functions funext univalence truncations public
+open import metric-spaces.cauchy-approximations-metric-spaces funext univalence truncations public
+open import metric-spaces.cauchy-approximations-premetric-spaces funext univalence truncations public
+open import metric-spaces.cauchy-sequences-complete-metric-spaces funext univalence truncations public
+open import metric-spaces.cauchy-sequences-metric-spaces funext univalence truncations public
+open import metric-spaces.closed-premetric-structures funext univalence truncations public
+open import metric-spaces.complete-metric-spaces funext univalence truncations public
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces funext univalence truncations public
+open import metric-spaces.dependent-products-metric-spaces funext univalence truncations public
+open import metric-spaces.discrete-premetric-structures funext univalence truncations public
+open import metric-spaces.equality-of-metric-spaces funext univalence truncations public
+open import metric-spaces.equality-of-premetric-spaces funext univalence truncations public
+open import metric-spaces.extensional-premetric-structures funext univalence truncations public
+open import metric-spaces.functions-metric-spaces funext univalence truncations public
+open import metric-spaces.functor-category-set-functions-isometry-metric-spaces funext univalence truncations public
+open import metric-spaces.functor-category-short-isometry-metric-spaces funext univalence truncations public
+open import metric-spaces.induced-premetric-structures-on-preimages funext univalence truncations public
+open import metric-spaces.isometric-equivalences-premetric-spaces funext univalence truncations public
+open import metric-spaces.isometries-metric-spaces funext univalence truncations public
+open import metric-spaces.isometries-premetric-spaces funext univalence truncations public
+open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces funext univalence truncations public
+open import metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space funext univalence truncations public
+open import metric-spaces.metric-space-of-convergent-cauchy-approximations-in-a-metric-space funext univalence truncations public
+open import metric-spaces.metric-space-of-rational-numbers funext univalence truncations public
+open import metric-spaces.metric-space-of-rational-numbers-with-open-neighborhoods funext univalence truncations public
+open import metric-spaces.metric-spaces funext univalence truncations public
+open import metric-spaces.metric-structures funext univalence truncations public
+open import metric-spaces.monotonic-premetric-structures funext univalence truncations public
+open import metric-spaces.ordering-premetric-structures funext univalence truncations public
+open import metric-spaces.precategory-of-metric-spaces-and-functions funext univalence truncations public
+open import metric-spaces.precategory-of-metric-spaces-and-isometries funext univalence truncations public
+open import metric-spaces.precategory-of-metric-spaces-and-short-functions funext univalence truncations public
+open import metric-spaces.premetric-spaces funext univalence truncations public
+open import metric-spaces.premetric-structures funext univalence truncations public
+open import metric-spaces.pseudometric-spaces funext univalence truncations public
+open import metric-spaces.pseudometric-structures funext univalence truncations public
+open import metric-spaces.reflexive-premetric-structures funext univalence truncations public
+open import metric-spaces.saturated-metric-spaces funext univalence truncations public
+open import metric-spaces.short-functions-metric-spaces funext univalence truncations public
+open import metric-spaces.short-functions-premetric-spaces funext univalence truncations public
+open import metric-spaces.subspaces-metric-spaces funext univalence truncations public
+open import metric-spaces.symmetric-premetric-structures funext univalence truncations public
+open import metric-spaces.triangular-premetric-structures funext univalence truncations public
 ```
 
 ## References

@@ -1,7 +1,15 @@
 # Multivariable operations
 
 ```agda
-module foundation.multivariable-operations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.multivariable-operations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -24,7 +32,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.raising-universe-levels
 
-open import linear-algebra.vectors
+open import linear-algebra.vectors funext univalence truncations
 ```
 
 </details>

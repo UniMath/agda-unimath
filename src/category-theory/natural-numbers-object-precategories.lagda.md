@@ -1,20 +1,28 @@
 # Natural numbers object in a precategory
 
 ```agda
-module category-theory.natural-numbers-object-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.natural-numbers-object-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories
-open import category-theory.terminal-objects-precategories
+open import category-theory.precategories funext univalence truncations
+open import category-theory.terminal-objects-precategories funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.uniqueness-quantification
+open import foundation.identity-types funext
+open import foundation.uniqueness-quantification funext univalence truncations
 open import foundation.universe-levels
 ```
 

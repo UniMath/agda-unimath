@@ -1,7 +1,15 @@
 # H-spaces
 
 ```agda
-module structured-types.h-spaces where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.h-spaces
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,24 +18,24 @@ module structured-types.h-spaces where
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.evaluation-functions
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
-open import foundation-core.endomorphisms
+open import foundation-core.endomorphisms funext univalence
 
-open import structured-types.magmas
-open import structured-types.noncoherent-h-spaces
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
-open import structured-types.pointed-sections
+open import structured-types.magmas funext univalence
+open import structured-types.noncoherent-h-spaces funext
+open import structured-types.pointed-homotopies funext univalence truncations
+open import structured-types.pointed-maps funext univalence truncations
+open import structured-types.pointed-sections funext univalence truncations
 open import structured-types.pointed-types
 ```
 

@@ -1,7 +1,15 @@
 # Permutations of vectors
 
 ```agda
-module lists.permutation-vectors where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module lists.permutation-vectors
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,29 +17,29 @@ module lists.permutation-vectors where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.permutations-standard-finite-types
-open import finite-group-theory.transpositions-standard-finite-types
+open import finite-group-theory.permutations-standard-finite-types funext univalence truncations
+open import finite-group-theory.transpositions-standard-finite-types funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.identity-types
-open import foundation.negated-equality
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.negated-equality funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.vectors
+open import linear-algebra.functoriality-vectors funext univalence truncations
+open import linear-algebra.vectors funext univalence truncations
 
-open import lists.arrays
+open import lists.arrays funext univalence truncations
 open import lists.lists
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

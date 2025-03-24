@@ -1,17 +1,25 @@
 # Subtype duality
 
 ```agda
-module foundation.subtype-duality where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.subtype-duality
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.inhabited-types
-open import foundation.propositional-maps
-open import foundation.structured-type-duality
-open import foundation.surjective-maps
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.propositional-maps funext
+open import foundation.structured-type-duality funext univalence truncations
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.embeddings

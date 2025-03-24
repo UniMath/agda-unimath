@@ -1,30 +1,38 @@
 # Chains in posets
 
 ```agda
-module order-theory.chains-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.chains-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.disjunction
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.images
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext univalence truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.images funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import order-theory.chains-preorders
-open import order-theory.order-preserving-maps-posets
-open import order-theory.posets
-open import order-theory.subposets
-open import order-theory.total-orders
+open import order-theory.chains-preorders funext univalence truncations
+open import order-theory.order-preserving-maps-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.subposets funext univalence truncations
+open import order-theory.total-orders funext univalence truncations
 ```
 
 </details>

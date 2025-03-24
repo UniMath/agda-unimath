@@ -1,17 +1,25 @@
 # The category of commutative rings
 
 ```agda
-module commutative-algebra.category-of-commutative-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.category-of-commutative-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.large-categories
+open import category-theory.categories funext univalence truncations
+open import category-theory.large-categories funext univalence truncations
 
-open import commutative-algebra.isomorphisms-commutative-rings
-open import commutative-algebra.precategory-of-commutative-rings
+open import commutative-algebra.isomorphisms-commutative-rings funext univalence truncations
+open import commutative-algebra.precategory-of-commutative-rings funext univalence truncations
 
 open import foundation.universe-levels
 ```

@@ -1,22 +1,30 @@
 # Coproducts of species of types
 
 ```agda
-module species.coproducts-species-of-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.coproducts-species-of-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-function-types
-open import foundation.type-theoretic-principle-of-choice
-open import foundation.universal-property-coproduct-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.type-theoretic-principle-of-choice funext
+open import foundation.universal-property-coproduct-types funext
 open import foundation.universe-levels
 
-open import species.morphisms-species-of-types
-open import species.species-of-types
+open import species.morphisms-species-of-types funext univalence truncations
+open import species.species-of-types funext univalence
 ```
 
 </details>

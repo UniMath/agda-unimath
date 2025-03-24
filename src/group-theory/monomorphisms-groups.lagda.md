@@ -1,22 +1,30 @@
 # Monomorphisms in the category of groups
 
 ```agda
-module group-theory.monomorphisms-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.monomorphisms-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.monomorphisms-in-large-precategories
+open import category-theory.monomorphisms-in-large-precategories funext univalence truncations
 
-open import foundation.dependent-products-propositions
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.isomorphisms-groups
-open import group-theory.precategory-of-groups
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.isomorphisms-groups funext univalence truncations
+open import group-theory.precategory-of-groups funext univalence truncations
 ```
 
 </details>

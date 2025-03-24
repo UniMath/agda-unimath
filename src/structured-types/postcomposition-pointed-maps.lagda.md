@@ -1,7 +1,15 @@
 # Postcomposition of pointed maps
 
 ```agda
-module structured-types.postcomposition-pointed-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.postcomposition-pointed-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,7 +17,7 @@ module structured-types.postcomposition-pointed-maps where
 ```agda
 open import foundation.universe-levels
 
-open import structured-types.pointed-maps
+open import structured-types.pointed-maps funext univalence truncations
 open import structured-types.pointed-types
 ```
 

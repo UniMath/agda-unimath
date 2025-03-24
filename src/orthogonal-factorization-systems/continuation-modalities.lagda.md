@@ -1,28 +1,36 @@
 # Continuation modalities
 
 ```agda
-module orthogonal-factorization-systems.continuation-modalities where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.continuation-modalities
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.continuations
+open import foundation.cartesian-product-types funext univalence
+open import foundation.continuations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.logical-equivalences
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.large-lawvere-tierney-topologies
-open import orthogonal-factorization-systems.modal-operators
-open import orthogonal-factorization-systems.types-local-at-maps
-open import orthogonal-factorization-systems.uniquely-eliminating-modalities
+open import orthogonal-factorization-systems.large-lawvere-tierney-topologies funext univalence truncations
+open import orthogonal-factorization-systems.modal-operators funext univalence truncations
+open import orthogonal-factorization-systems.types-local-at-maps funext univalence truncations
+open import orthogonal-factorization-systems.uniquely-eliminating-modalities funext univalence truncations
 ```
 
 </details>

@@ -1,7 +1,15 @@
 # Pointed equivalences
 
 ```agda
-module structured-types.pointed-equivalences where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.pointed-equivalences
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,33 +18,33 @@ module structured-types.pointed-equivalences where
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.path-algebra
-open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.path-algebra funext
+open import foundation.propositions funext univalence
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
-open import structured-types.pointed-retractions
-open import structured-types.pointed-sections
+open import structured-types.pointed-homotopies funext univalence truncations
+open import structured-types.pointed-maps funext univalence truncations
+open import structured-types.pointed-retractions funext univalence truncations
+open import structured-types.pointed-sections funext univalence truncations
 open import structured-types.pointed-types
-open import structured-types.postcomposition-pointed-maps
-open import structured-types.precomposition-pointed-maps
-open import structured-types.universal-property-pointed-equivalences
-open import structured-types.whiskering-pointed-homotopies-composition
+open import structured-types.postcomposition-pointed-maps funext univalence truncations
+open import structured-types.precomposition-pointed-maps funext univalence truncations
+open import structured-types.universal-property-pointed-equivalences funext univalence truncations
+open import structured-types.whiskering-pointed-homotopies-composition funext univalence truncations
 ```
 
 </details>

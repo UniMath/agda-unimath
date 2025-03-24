@@ -2,8 +2,15 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module wild-category-theory.coinductive-isomorphisms-in-noncoherent-omega-precategories where
+module wild-category-theory.coinductive-isomorphisms-in-noncoherent-omega-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,7 +19,7 @@ module wild-category-theory.coinductive-isomorphisms-in-noncoherent-omega-precat
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import wild-category-theory.noncoherent-omega-precategories
+open import wild-category-theory.noncoherent-omega-precategories funext univalence truncations
 ```
 
 </details>

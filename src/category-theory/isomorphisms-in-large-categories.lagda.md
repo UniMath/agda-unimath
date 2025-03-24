@@ -1,27 +1,35 @@
 # Isomorphisms in large categories
 
 ```agda
-module category-theory.isomorphisms-in-large-categories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.isomorphisms-in-large-categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-categories
-open import category-theory.isomorphisms-in-large-precategories
-open import category-theory.large-categories
+open import category-theory.isomorphisms-in-categories funext univalence truncations
+open import category-theory.isomorphisms-in-large-precategories funext univalence truncations
+open import category-theory.large-categories funext univalence truncations
 
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 ```
 

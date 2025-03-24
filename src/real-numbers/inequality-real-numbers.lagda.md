@@ -1,34 +1,42 @@
 # Inequality on the real numbers
 
 ```agda
-module real-numbers.inequality-real-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module real-numbers.inequality-real-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.inequality-rational-numbers funext univalence truncations
+open import elementary-number-theory.rational-numbers funext univalence truncations
 
-open import foundation.complements-subtypes
+open import foundation.complements-subtypes funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.posets
-open import order-theory.preorders
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.large-preorders funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.preorders funext univalence truncations
 
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.inequality-lower-dedekind-real-numbers
-open import real-numbers.inequality-upper-dedekind-real-numbers
-open import real-numbers.rational-real-numbers
+open import real-numbers.dedekind-real-numbers funext univalence truncations
+open import real-numbers.inequality-lower-dedekind-real-numbers funext univalence truncations
+open import real-numbers.inequality-upper-dedekind-real-numbers funext univalence truncations
+open import real-numbers.rational-real-numbers funext univalence truncations
 ```
 
 </details>

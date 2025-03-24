@@ -1,7 +1,15 @@
 # Coproducts of finite types
 
 ```agda
-module univalent-combinatorics.coproduct-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.coproduct-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,27 +19,26 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.mere-equivalences
-open import foundation.propositional-truncations
-open import foundation.type-arithmetic-coproduct-types
-open import foundation.type-arithmetic-empty-type
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.functoriality-propositional-truncation funext univalence truncations
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.mere-equivalences funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.type-arithmetic-coproduct-types funext univalence truncations
+open import foundation.type-arithmetic-empty-type funext univalence truncations
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-decidable-subtypes
-open import univalent-combinatorics.double-counting
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.counting-decidable-subtypes funext univalence truncations
+open import univalent-combinatorics.double-counting funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

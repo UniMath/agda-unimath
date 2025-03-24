@@ -1,7 +1,15 @@
 # Reversing lists
 
 ```agda
-module lists.reversing-lists where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module lists.reversing-lists
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,13 +18,13 @@ module lists.reversing-lists where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import lists.concatenation-lists
-open import lists.flattening-lists
-open import lists.functoriality-lists
+open import lists.concatenation-lists funext univalence truncations
+open import lists.flattening-lists funext univalence truncations
+open import lists.functoriality-lists funext univalence truncations
 open import lists.lists
 ```
 

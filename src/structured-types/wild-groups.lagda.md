@@ -1,7 +1,15 @@
 # Wild groups
 
 ```agda
-module structured-types.wild-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.wild-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,7 +19,7 @@ open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.wild-monoids
+open import structured-types.wild-monoids funext univalence truncations
 ```
 
 </details>

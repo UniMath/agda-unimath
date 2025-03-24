@@ -1,7 +1,15 @@
 # Multisubsets
 
 ```agda
-module foundation.multisubsets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.multisubsets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,14 +18,14 @@ module foundation.multisubsets where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.images
-open import foundation.negated-equality
+open import foundation.images funext univalence truncations
+open import foundation.negated-equality funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.fibers-of-maps
 open import foundation-core.sets
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

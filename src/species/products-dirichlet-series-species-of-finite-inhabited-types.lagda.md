@@ -1,17 +1,25 @@
 # Products of Dirichlet series of species of finite inhabited types
 
 ```agda
-module species.products-dirichlet-series-species-of-finite-inhabited-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.products-dirichlet-series-species-of-finite-inhabited-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.universe-levels
 
-open import species.dirichlet-series-species-of-finite-inhabited-types
-open import species.species-of-finite-inhabited-types
+open import species.dirichlet-series-species-of-finite-inhabited-types funext univalence truncations
+open import species.species-of-finite-inhabited-types funext univalence truncations
 ```
 
 </details>

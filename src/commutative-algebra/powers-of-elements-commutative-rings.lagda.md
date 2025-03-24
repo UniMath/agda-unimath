@@ -1,23 +1,31 @@
 # Powers of elements in commutative rings
 
 ```agda
-module commutative-algebra.powers-of-elements-commutative-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.powers-of-elements-commutative-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-rings funext univalence truncations
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.parity-natural-numbers
+open import elementary-number-theory.parity-natural-numbers funext univalence truncations
 
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import ring-theory.powers-of-elements-rings
+open import ring-theory.powers-of-elements-rings funext univalence truncations
 ```
 
 </details>

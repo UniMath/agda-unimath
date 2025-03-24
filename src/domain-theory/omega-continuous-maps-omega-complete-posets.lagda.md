@@ -1,45 +1,53 @@
 # ω-Continuous maps between ω-complete posets
 
 ```agda
-module domain-theory.omega-continuous-maps-omega-complete-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module domain-theory.omega-continuous-maps-omega-complete-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import domain-theory.directed-families-posets
-open import domain-theory.omega-complete-posets
-open import domain-theory.omega-continuous-maps-posets
+open import domain-theory.directed-families-posets funext univalence truncations
+open import domain-theory.omega-complete-posets funext univalence truncations
+open import domain-theory.omega-continuous-maps-posets funext univalence truncations
 
-open import elementary-number-theory.decidable-total-order-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.decidable-total-order-natural-numbers funext univalence truncations
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
+open import foundation.booleans funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
 open import foundation.evaluation-functions
-open import foundation.existential-quantification
-open import foundation.function-types
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.strictly-involutive-identity-types
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.strictly-involutive-identity-types funext univalence
 open import foundation.subtype-identity-principle
-open import foundation.surjective-maps
-open import foundation.torsorial-type-families
+open import foundation.surjective-maps funext univalence truncations
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.raising-universe-levels
 
-open import order-theory.join-preserving-maps-posets
-open import order-theory.least-upper-bounds-posets
-open import order-theory.order-preserving-maps-posets
-open import order-theory.posets
+open import order-theory.join-preserving-maps-posets funext univalence truncations
+open import order-theory.least-upper-bounds-posets funext univalence truncations
+open import order-theory.order-preserving-maps-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
 ```
 
 </details>

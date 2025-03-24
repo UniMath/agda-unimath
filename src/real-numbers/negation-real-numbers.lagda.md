@@ -2,30 +2,37 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module real-numbers.negation-real-numbers where
+module real-numbers.negation-real-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.rational-numbers funext univalence truncations
+open import elementary-number-theory.strict-inequality-rational-numbers funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.disjoint-subtypes
-open import foundation.disjunction
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.subtypes
+open import foundation.disjoint-subtypes funext univalence truncations
+open import foundation.disjunction funext univalence truncations
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.subtypes funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.negation-lower-upper-dedekind-real-numbers
-open import real-numbers.rational-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.dedekind-real-numbers funext univalence truncations
+open import real-numbers.lower-dedekind-real-numbers funext univalence truncations
+open import real-numbers.negation-lower-upper-dedekind-real-numbers funext univalence truncations
+open import real-numbers.rational-real-numbers funext univalence truncations
+open import real-numbers.upper-dedekind-real-numbers funext univalence truncations
 ```
 
 </details>

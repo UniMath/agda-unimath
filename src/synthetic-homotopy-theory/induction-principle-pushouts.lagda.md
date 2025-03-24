@@ -1,19 +1,27 @@
 # The induction principle of pushouts
 
 ```agda
-module synthetic-homotopy-theory.induction-principle-pushouts where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.induction-principle-pushouts
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.sections
+open import foundation.identity-types funext
+open import foundation.sections funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.dependent-cocones-under-spans funext univalence truncations
 ```
 
 </details>

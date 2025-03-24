@@ -1,9 +1,17 @@
 # Endomorphisms
 
 ```agda
-module foundation.endomorphisms where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation-core.endomorphisms public
+module foundation.endomorphisms
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation-core.endomorphisms funext univalence public
 ```
 
 <details><summary>Imports</summary>
@@ -17,10 +25,10 @@ open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.sets
 
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.monoids funext univalence truncations
+open import group-theory.semigroups funext univalence
 
-open import structured-types.wild-monoids
+open import structured-types.wild-monoids funext univalence truncations
 ```
 
 </details>

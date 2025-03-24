@@ -1,19 +1,27 @@
 # Monads on precategories
 
 ```agda
-module category-theory.monads-on-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.monads-on-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
-open import category-theory.natural-transformations-functors-precategories
-open import category-theory.pointed-endofunctors-precategories
-open import category-theory.precategories
+open import category-theory.functors-precategories funext univalence truncations
+open import category-theory.natural-transformations-functors-precategories funext univalence truncations
+open import category-theory.pointed-endofunctors-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

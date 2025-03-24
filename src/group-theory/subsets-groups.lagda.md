@@ -1,20 +1,28 @@
 # Subsets of groups
 
 ```agda
-module group-theory.subsets-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.subsets-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-locale-of-subtypes
-open import foundation.sets
+open import foundation.large-locale-of-subtypes funext univalence truncations
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import group-theory.groups
+open import group-theory.groups funext univalence truncations
 
-open import order-theory.large-locales
-open import order-theory.large-posets
+open import order-theory.large-locales funext univalence truncations
+open import order-theory.large-posets funext univalence truncations
 ```
 
 </details>

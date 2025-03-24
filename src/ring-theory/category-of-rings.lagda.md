@@ -1,19 +1,27 @@
 # The category of rings
 
 ```agda
-module ring-theory.category-of-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.category-of-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.large-categories
+open import category-theory.categories funext univalence truncations
+open import category-theory.large-categories funext univalence truncations
 
 open import foundation.universe-levels
 
-open import ring-theory.isomorphisms-rings
-open import ring-theory.precategory-of-rings
+open import ring-theory.isomorphisms-rings funext univalence truncations
+open import ring-theory.precategory-of-rings funext univalence truncations
 ```
 
 </details>

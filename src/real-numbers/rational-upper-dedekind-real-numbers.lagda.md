@@ -1,23 +1,31 @@
 # Rational upper Dedekind real numbers
 
 ```agda
-module real-numbers.rational-upper-dedekind-real-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module real-numbers.rational-upper-dedekind-real-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.rational-numbers funext univalence truncations
+open import elementary-number-theory.strict-inequality-rational-numbers funext univalence truncations
 
-open import foundation.conjunction
+open import foundation.conjunction funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.logical-equivalences
-open import foundation.subtypes
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.upper-dedekind-real-numbers funext univalence truncations
 ```
 
 </details>

@@ -1,21 +1,29 @@
 # Mere equality
 
 ```agda
-module foundation.mere-equality where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.mere-equality
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.propositional-truncations
-open import foundation.reflecting-maps-equivalence-relations
+open import foundation.functoriality-propositional-truncation funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.reflecting-maps-equivalence-relations funext univalence truncations
 open import foundation.universe-levels
 
-open import foundation-core.equivalence-relations
+open import foundation-core.equivalence-relations funext univalence truncations
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets

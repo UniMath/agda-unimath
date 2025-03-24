@@ -1,7 +1,15 @@
 # Finite groups
 
 ```agda
-module finite-group-theory.finite-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module finite-group-theory.finite-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,52 +17,52 @@ module finite-group-theory.finite-groups where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.finite-monoids
-open import finite-group-theory.finite-semigroups
+open import finite-group-theory.finite-monoids funext univalence truncations
+open import finite-group-theory.finite-semigroups funext univalence truncations
 
-open import foundation.1-types
-open import foundation.binary-embeddings
+open import foundation.1-types funext univalence
+open import foundation.binary-embeddings funext
 open import foundation.binary-equivalences
-open import foundation.decidable-equality
-open import foundation.decidable-types
-open import foundation.dependent-products-propositions
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.mere-equivalences
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.set-truncations
-open import foundation.sets
+open import foundation.decidable-equality funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.mere-equivalences funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.set-truncations funext univalence
+open import foundation.sets funext univalence
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.category-of-groups
-open import group-theory.commuting-elements-groups
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.category-of-groups funext univalence truncations
+open import group-theory.commuting-elements-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.semigroups funext univalence
 
 open import structured-types.pointed-types
 
-open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-dependent-pair-types
-open import univalent-combinatorics.decidable-dependent-function-types
-open import univalent-combinatorics.decidable-dependent-pair-types
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.finitely-many-connected-components
-open import univalent-combinatorics.function-types
-open import univalent-combinatorics.pi-finite-types
-open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.untruncated-pi-finite-types
+open import univalent-combinatorics.cartesian-product-types funext univalence truncations
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.counting-dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.decidable-dependent-function-types funext univalence truncations
+open import univalent-combinatorics.decidable-dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.decidable-propositions funext univalence truncations
+open import univalent-combinatorics.dependent-function-types funext univalence truncations
+open import univalent-combinatorics.dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.equality-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.finitely-many-connected-components funext univalence truncations
+open import univalent-combinatorics.function-types funext univalence truncations
+open import univalent-combinatorics.pi-finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
+open import univalent-combinatorics.untruncated-pi-finite-types funext univalence truncations
 ```
 
 </details>

@@ -1,24 +1,32 @@
 # Elements of finite order
 
 ```agda
-module group-theory.elements-of-finite-order-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.elements-of-finite-order-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.group-of-integers
-open import elementary-number-theory.nonzero-integers
+open import elementary-number-theory.group-of-integers funext univalence truncations
+open import elementary-number-theory.nonzero-integers funext univalence truncations
 
-open import foundation.dependent-products-propositions
-open import foundation.existential-quantification
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.orders-of-elements-groups
-open import group-theory.subgroups
-open import group-theory.subgroups-generated-by-elements-groups
+open import group-theory.groups funext univalence truncations
+open import group-theory.orders-of-elements-groups funext univalence truncations
+open import group-theory.subgroups funext univalence truncations
+open import group-theory.subgroups-generated-by-elements-groups funext univalence truncations
 ```
 
 </details>

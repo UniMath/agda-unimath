@@ -1,25 +1,33 @@
 # Fibers of directed trees
 
 ```agda
-module trees.fibers-directed-trees where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.fibers-directed-trees
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs
-open import graph-theory.fibers-directed-graphs
+open import graph-theory.directed-graphs funext univalence
+open import graph-theory.fibers-directed-graphs funext univalence truncations
 
-open import trees.bases-directed-trees
-open import trees.directed-trees
-open import trees.morphisms-directed-trees
+open import trees.bases-directed-trees funext univalence truncations
+open import trees.directed-trees funext univalence truncations
+open import trees.morphisms-directed-trees funext univalence truncations
 ```
 
 </details>

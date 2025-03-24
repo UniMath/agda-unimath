@@ -1,33 +1,40 @@
 # Higher modalities
 
 ```agda
-module orthogonal-factorization-systems.higher-modalities where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.higher-modalities
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.precomposition-dependent-functions
-open import foundation.retractions
-open import foundation.small-types
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.precomposition-dependent-functions funext
+open import foundation.retractions funext
+open import foundation.small-types funext univalence truncations
 open import foundation.transport-along-identifications
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.locally-small-modal-operators
-open import orthogonal-factorization-systems.modal-induction
-open import orthogonal-factorization-systems.modal-operators
-open import orthogonal-factorization-systems.modal-subuniverse-induction
-open import orthogonal-factorization-systems.uniquely-eliminating-modalities
+open import orthogonal-factorization-systems.locally-small-modal-operators funext univalence truncations
+open import orthogonal-factorization-systems.modal-induction funext univalence truncations
+open import orthogonal-factorization-systems.modal-operators funext univalence truncations
+open import orthogonal-factorization-systems.modal-subuniverse-induction funext univalence truncations
+open import orthogonal-factorization-systems.uniquely-eliminating-modalities funext univalence truncations
 ```
 
 </details>

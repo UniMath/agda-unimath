@@ -2,34 +2,41 @@
 
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module modal-type-theory.crisp-pullbacks where
+module modal-type-theory.crisp-pullbacks
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospan-diagrams
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-pullbacks
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-pullbacks funext univalence truncations
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.morphisms-cospan-diagrams
-open import foundation.pullbacks
-open import foundation.standard-pullbacks
+open import foundation.pullbacks funext univalence truncations
+open import foundation.standard-pullbacks funext
 open import foundation.universe-levels
 
-open import modal-type-theory.action-on-identifications-crisp-functions
-open import modal-type-theory.action-on-identifications-flat-modality
-open import modal-type-theory.crisp-dependent-pair-types
-open import modal-type-theory.crisp-identity-types
-open import modal-type-theory.flat-discrete-crisp-types
-open import modal-type-theory.flat-modality
-open import modal-type-theory.functoriality-flat-modality
+open import modal-type-theory.action-on-identifications-crisp-functions funext univalence
+open import modal-type-theory.action-on-identifications-flat-modality funext univalence
+open import modal-type-theory.crisp-dependent-pair-types funext univalence truncations
+open import modal-type-theory.crisp-identity-types funext univalence
+open import modal-type-theory.flat-discrete-crisp-types funext univalence truncations
+open import modal-type-theory.flat-modality funext
+open import modal-type-theory.functoriality-flat-modality funext univalence
 ```
 
 </details>

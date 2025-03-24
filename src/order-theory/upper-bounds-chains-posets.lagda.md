@@ -1,21 +1,29 @@
 # Upper bounds of chains in posets
 
 ```agda
-module order-theory.upper-bounds-chains-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.upper-bounds-chains-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.existential-quantification
+open import foundation.existential-quantification funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.propositions
 
-open import order-theory.chains-posets
-open import order-theory.posets
-open import order-theory.upper-bounds-posets
+open import order-theory.chains-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.upper-bounds-posets funext univalence truncations
 ```
 
 </details>

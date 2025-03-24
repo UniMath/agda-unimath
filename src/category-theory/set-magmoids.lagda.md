@@ -1,21 +1,29 @@
 # Set-magmoids
 
 ```agda
-module category-theory.set-magmoids where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.set-magmoids
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.composition-operations-on-binary-families-of-sets funext univalence truncations
 
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.dependent-products-truncated-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.truncated-types
+open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.truncated-types funext univalence
 open import foundation.truncation-levels
 open import foundation.universe-levels
 ```

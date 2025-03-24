@@ -1,28 +1,36 @@
 # Lists of elements in discrete types
 
 ```agda
-module lists.lists-discrete-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module lists.lists-discrete-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.booleans
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
+open import foundation.booleans funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-equality funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.empty-types funext univalence truncations
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.raising-universe-levels
 
-open import lists.equality-lists
+open import lists.equality-lists funext univalence truncations
 open import lists.lists
 ```
 

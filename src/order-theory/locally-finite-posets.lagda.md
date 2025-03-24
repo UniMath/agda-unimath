@@ -1,19 +1,27 @@
 # Locally finite posets
 
 ```agda
-module order-theory.locally-finite-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.locally-finite-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-products-propositions
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import order-theory.finite-posets
-open import order-theory.interval-subposets
-open import order-theory.posets
+open import order-theory.finite-posets funext univalence truncations
+open import order-theory.interval-subposets funext univalence truncations
+open import order-theory.posets funext univalence truncations
 ```
 
 </details>

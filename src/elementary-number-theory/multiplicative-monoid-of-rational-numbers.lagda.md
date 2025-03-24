@@ -2,23 +2,30 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module elementary-number-theory.multiplicative-monoid-of-rational-numbers where
+module elementary-number-theory.multiplicative-monoid-of-rational-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.multiplication-rational-numbers funext univalence truncations
+open import elementary-number-theory.rational-numbers funext univalence truncations
 
 open import foundation.dependent-pair-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.commutative-monoids funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.semigroups funext univalence
 ```
 
 </details>

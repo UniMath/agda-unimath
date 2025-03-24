@@ -1,23 +1,31 @@
 # Acyclic types
 
 ```agda
-module synthetic-homotopy-theory.acyclic-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.acyclic-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.equivalences
-open import foundation.propositions
-open import foundation.retracts-of-types
+open import foundation.contractible-types funext univalence
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.retracts-of-types funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.functoriality-suspensions
-open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.functoriality-suspensions funext univalence truncations
+open import synthetic-homotopy-theory.suspensions-of-types funext univalence truncations
 ```
 
 </details>

@@ -1,7 +1,15 @@
 # Eilenberg-Mac Lane spaces
 
 ```agda
-module higher-group-theory.eilenberg-mac-lane-spaces where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.eilenberg-mac-lane-spaces
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,23 +17,23 @@ module higher-group-theory.eilenberg-mac-lane-spaces where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.0-connected-types
-open import foundation.cartesian-product-types
-open import foundation.connected-types
-open import foundation.dependent-products-truncated-types
-open import foundation.truncated-types
+open import foundation.0-connected-types funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
+open import foundation.connected-types funext univalence truncations
+open import foundation.dependent-products-truncated-types funext
+open import foundation.truncated-types funext univalence
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.groups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
 
-open import structured-types.equivalences-h-spaces
-open import structured-types.pointed-equivalences
+open import structured-types.equivalences-h-spaces funext univalence truncations
+open import structured-types.pointed-equivalences funext univalence truncations
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.iterated-loop-spaces
-open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.iterated-loop-spaces funext univalence truncations
+open import synthetic-homotopy-theory.loop-spaces funext univalence truncations
 ```
 
 </details>

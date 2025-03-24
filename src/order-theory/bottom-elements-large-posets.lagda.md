@@ -1,7 +1,15 @@
 # Bottom elements in large posets
 
 ```agda
-module order-theory.bottom-elements-large-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.bottom-elements-large-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,8 +17,8 @@ module order-theory.bottom-elements-large-posets where
 ```agda
 open import foundation.universe-levels
 
-open import order-theory.dependent-products-large-posets
-open import order-theory.large-posets
+open import order-theory.dependent-products-large-posets funext univalence truncations
+open import order-theory.large-posets funext univalence truncations
 ```
 
 </details>

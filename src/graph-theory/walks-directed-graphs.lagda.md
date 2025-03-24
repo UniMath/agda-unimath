@@ -1,7 +1,15 @@
 # Walks in directed graphs
 
 ```agda
-module graph-theory.walks-directed-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.walks-directed-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,29 +18,29 @@ module graph-theory.walks-directed-graphs where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.negated-equality
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.raising-universe-levels
 
-open import graph-theory.directed-graphs
-open import graph-theory.equivalences-directed-graphs
-open import graph-theory.morphisms-directed-graphs
+open import graph-theory.directed-graphs funext univalence
+open import graph-theory.equivalences-directed-graphs funext univalence truncations
+open import graph-theory.morphisms-directed-graphs funext univalence truncations
 ```
 
 </details>

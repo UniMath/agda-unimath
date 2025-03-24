@@ -1,29 +1,37 @@
 # `0`-Connected types
 
 ```agda
-module foundation.0-connected-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.0-connected-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.constant-maps
-open import foundation.contractible-types
+open import foundation.constant-maps funext univalence truncations
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.fiber-inclusions
-open import foundation.functoriality-set-truncation
-open import foundation.images
-open import foundation.inhabited-types
-open import foundation.mere-equality
-open import foundation.propositional-truncations
-open import foundation.set-truncations
-open import foundation.sets
-open import foundation.surjective-maps
+open import foundation.dependent-products-contractible-types funext
+open import foundation.fiber-inclusions funext univalence
+open import foundation.functoriality-set-truncation funext univalence truncations
+open import foundation.images funext univalence truncations
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.mere-equality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.set-truncations funext univalence
+open import foundation.sets funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.unit-type
-open import foundation.universal-property-contractible-types
-open import foundation.universal-property-unit-type
+open import foundation.universal-property-contractible-types funext
+open import foundation.universal-property-unit-type funext
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -33,7 +41,7 @@ open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.propositions
-open import foundation-core.truncated-maps
+open import foundation-core.truncated-maps funext
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

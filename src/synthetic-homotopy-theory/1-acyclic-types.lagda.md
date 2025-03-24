@@ -1,36 +1,43 @@
 # `1`-acyclic types
 
 ```agda
-module synthetic-homotopy-theory.1-acyclic-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.1-acyclic-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
+open import foundation.0-connected-types funext univalence truncations
 open import foundation.binary-transport
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.dependent-products-truncated-types
-open import foundation.diagonal-maps-of-types
-open import foundation.equivalences
-open import foundation.function-extensionality-axiom
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.injective-maps
-open import foundation.propositions
-open import foundation.set-truncations
-open import foundation.sets
-open import foundation.truncated-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.diagonal-maps-of-types funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.injective-maps funext
+open import foundation.propositions funext univalence
+open import foundation.set-truncations funext univalence
+open import foundation.sets funext univalence
+open import foundation.truncated-types funext univalence
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.0-acyclic-types
-open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.truncated-acyclic-maps
-open import synthetic-homotopy-theory.truncated-acyclic-types
+open import synthetic-homotopy-theory.0-acyclic-types funext univalence truncations
+open import synthetic-homotopy-theory.loop-spaces funext univalence truncations
+open import synthetic-homotopy-theory.truncated-acyclic-maps funext univalence truncations
+open import synthetic-homotopy-theory.truncated-acyclic-types funext univalence truncations
 ```
 
 </details>

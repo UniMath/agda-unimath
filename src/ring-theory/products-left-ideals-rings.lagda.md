@@ -1,23 +1,31 @@
 # Products of left ideals of rings
 
 ```agda
-module ring-theory.products-left-ideals-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.products-left-ideals-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositional-truncations
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
 open import foundation.universe-levels
 
-open import ring-theory.left-ideals-generated-by-subsets-rings
-open import ring-theory.left-ideals-rings
-open import ring-theory.poset-of-left-ideals-rings
-open import ring-theory.products-subsets-rings
-open import ring-theory.rings
-open import ring-theory.subsets-rings
+open import ring-theory.left-ideals-generated-by-subsets-rings funext univalence truncations
+open import ring-theory.left-ideals-rings funext univalence truncations
+open import ring-theory.poset-of-left-ideals-rings funext univalence truncations
+open import ring-theory.products-subsets-rings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
+open import ring-theory.subsets-rings funext univalence truncations
 ```
 
 </details>

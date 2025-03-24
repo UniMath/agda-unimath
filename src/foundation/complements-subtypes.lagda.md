@@ -1,35 +1,43 @@
 # Complements of subtypes
 
 ```agda
-module foundation.complements-subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.complements-subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
-open import foundation.double-negation-stable-propositions
-open import foundation.full-subtypes
-open import foundation.negation
-open import foundation.postcomposition-functions
-open import foundation.powersets
-open import foundation.propositional-truncations
-open import foundation.unions-subtypes
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-subtypes funext univalence truncations
+open import foundation.double-negation-stable-propositions funext univalence truncations
+open import foundation.full-subtypes funext univalence truncations
+open import foundation.negation funext
+open import foundation.postcomposition-functions funext
+open import foundation.powersets funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.unions-subtypes funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.function-types
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 
-open import logic.double-negation-stable-subtypes
+open import logic.double-negation-stable-subtypes funext univalence truncations
 
-open import order-theory.large-posets
-open import order-theory.opposite-large-posets
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.order-preserving-maps-posets
-open import order-theory.order-preserving-maps-preorders
-open import order-theory.posets
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.opposite-large-posets funext univalence truncations
+open import order-theory.order-preserving-maps-large-posets funext univalence truncations
+open import order-theory.order-preserving-maps-large-preorders funext univalence truncations
+open import order-theory.order-preserving-maps-posets funext univalence truncations
+open import order-theory.order-preserving-maps-preorders funext univalence truncations
+open import order-theory.posets funext univalence truncations
 ```
 
 </details>

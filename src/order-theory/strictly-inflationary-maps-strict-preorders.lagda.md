@@ -1,20 +1,28 @@
 # Strictly inflationary maps on a strictly preordered type
 
 ```agda
-module order-theory.strictly-inflationary-maps-strict-preorders where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.strictly-inflationary-maps-strict-preorders
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import order-theory.strict-order-preserving-maps
-open import order-theory.strict-preorders
+open import order-theory.strict-order-preserving-maps funext univalence truncations
+open import order-theory.strict-preorders funext univalence truncations
 ```
 
 </details>

@@ -1,33 +1,41 @@
 # The double negation modality
 
 ```agda
-module foundation.double-negation-modality where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.double-negation-modality
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.double-negation
-open import foundation.empty-types
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.double-negation funext univalence truncations
+open import foundation.empty-types funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.propositions funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.transport-along-identifications
 
-open import logic.double-negation-elimination
+open import logic.double-negation-elimination funext univalence truncations
 
-open import orthogonal-factorization-systems.continuation-modalities
-open import orthogonal-factorization-systems.large-lawvere-tierney-topologies
-open import orthogonal-factorization-systems.lawvere-tierney-topologies
-open import orthogonal-factorization-systems.modal-operators
-open import orthogonal-factorization-systems.types-local-at-maps
-open import orthogonal-factorization-systems.uniquely-eliminating-modalities
+open import orthogonal-factorization-systems.continuation-modalities funext univalence truncations
+open import orthogonal-factorization-systems.large-lawvere-tierney-topologies funext univalence truncations
+open import orthogonal-factorization-systems.lawvere-tierney-topologies funext univalence truncations
+open import orthogonal-factorization-systems.modal-operators funext univalence truncations
+open import orthogonal-factorization-systems.types-local-at-maps funext univalence truncations
+open import orthogonal-factorization-systems.uniquely-eliminating-modalities funext univalence truncations
 ```
 
 </details>

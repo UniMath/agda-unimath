@@ -1,29 +1,37 @@
 # Ferrers diagrams (unlabeled partitions)
 
 ```agda
-module univalent-combinatorics.ferrers-diagrams where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.ferrers-diagrams
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.equality-dependent-function-types
-open import foundation.equivalences
+open import foundation.dependent-products-propositions funext
+open import foundation.equality-dependent-function-types funext
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.mere-equivalences
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.identity-types funext
+open import foundation.mere-equivalences funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families
-open import foundation.univalence
+open import foundation.torsorial-type-families funext univalence truncations
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

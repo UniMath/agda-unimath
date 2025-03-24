@@ -1,33 +1,41 @@
 # Trivial commutative rings
 
 ```agda
-module commutative-algebra.trivial-commutative-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.trivial-commutative-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.isomorphisms-commutative-rings
+open import commutative-algebra.commutative-rings funext univalence truncations
+open import commutative-algebra.isomorphisms-commutative-rings funext univalence truncations
 
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.negation
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.negation funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
 
-open import group-theory.abelian-groups
-open import group-theory.trivial-groups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.trivial-groups funext univalence truncations
 
-open import ring-theory.rings
-open import ring-theory.trivial-rings
+open import ring-theory.rings funext univalence truncations
+open import ring-theory.trivial-rings funext univalence truncations
 ```
 
 </details>

@@ -1,7 +1,15 @@
 # Contravariant pushforwards of concrete group actions
 
 ```agda
-module group-theory.contravariant-pushforward-concrete-group-actions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.contravariant-pushforward-concrete-group-actions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,8 +17,8 @@ module group-theory.contravariant-pushforward-concrete-group-actions where
 ```agda
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
-open import group-theory.homomorphisms-concrete-groups
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.homomorphisms-concrete-groups funext univalence truncations
 ```
 
 </details>

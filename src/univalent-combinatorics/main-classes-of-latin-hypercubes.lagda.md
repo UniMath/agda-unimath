@@ -1,7 +1,15 @@
 # The groupoid of main classes of Latin hypercubes
 
 ```agda
-module univalent-combinatorics.main-classes-of-latin-hypercubes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.main-classes-of-latin-hypercubes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,25 +17,25 @@ module univalent-combinatorics.main-classes-of-latin-hypercubes where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.1-types
-open import foundation.contractible-types
-open import foundation.decidable-propositions
+open import foundation.1-types funext univalence
+open import foundation.contractible-types funext univalence
+open import foundation.decidable-propositions funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.inhabited-types
-open import foundation.mere-equivalences
-open import foundation.products-unordered-tuples-of-types
-open import foundation.set-truncations
+open import foundation.dependent-products-contractible-types funext
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.mere-equivalences funext univalence truncations
+open import foundation.products-unordered-tuples-of-types funext univalence truncations
+open import foundation.set-truncations funext univalence
 open import foundation.universe-levels
-open import foundation.unordered-tuples
+open import foundation.unordered-tuples funext univalence truncations
 
-open import univalent-combinatorics.complements-isolated-elements
-open import univalent-combinatorics.decidable-subtypes
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.pi-finite-types
-open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.untruncated-pi-finite-types
+open import univalent-combinatorics.complements-isolated-elements funext univalence truncations
+open import univalent-combinatorics.decidable-subtypes funext univalence truncations
+open import univalent-combinatorics.dependent-function-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.pi-finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
+open import univalent-combinatorics.untruncated-pi-finite-types funext univalence truncations
 ```
 
 </details>

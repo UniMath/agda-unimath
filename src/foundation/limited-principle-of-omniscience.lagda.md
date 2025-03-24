@@ -1,7 +1,15 @@
 # The limited principle of omniscience
 
 ```agda
-module foundation.limited-principle-of-omniscience where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.limited-principle-of-omniscience
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,13 +17,13 @@ module foundation.limited-principle-of-omniscience where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.disjunction
-open import foundation.existential-quantification
-open import foundation.negation
-open import foundation.universal-quantification
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext univalence truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.negation funext
+open import foundation.universal-quantification funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.booleans
@@ -23,7 +31,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

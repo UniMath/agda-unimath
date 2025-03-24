@@ -1,7 +1,15 @@
 # The maybe monad
 
 ```agda
-module foundation.maybe where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.maybe
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 
 open import foundation-core.maybe public
 ```
@@ -10,14 +18,14 @@ open import foundation-core.maybe public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equality-coproduct-types
-open import foundation.existential-quantification
-open import foundation.propositional-truncations
-open import foundation.surjective-maps
-open import foundation.type-arithmetic-empty-type
+open import foundation.equality-coproduct-types funext univalence truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.surjective-maps funext univalence truncations
+open import foundation.type-arithmetic-empty-type funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 

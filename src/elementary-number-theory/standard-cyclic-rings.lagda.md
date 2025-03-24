@@ -1,37 +1,45 @@
 # The standard cyclic rings
 
 ```agda
-module elementary-number-theory.standard-cyclic-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.standard-cyclic-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-rings funext univalence truncations
 
-open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-integers funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.modular-arithmetic
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.modular-arithmetic funext univalence truncations
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.ring-of-integers
-open import elementary-number-theory.standard-cyclic-groups
+open import elementary-number-theory.ring-of-integers funext univalence truncations
+open import elementary-number-theory.standard-cyclic-groups funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.surjective-maps
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.cyclic-groups
-open import group-theory.generating-elements-groups
+open import group-theory.cyclic-groups funext univalence truncations
+open import group-theory.generating-elements-groups funext univalence truncations
 
-open import ring-theory.cyclic-rings
-open import ring-theory.integer-multiples-of-elements-rings
-open import ring-theory.rings
+open import ring-theory.cyclic-rings funext univalence truncations
+open import ring-theory.integer-multiples-of-elements-rings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

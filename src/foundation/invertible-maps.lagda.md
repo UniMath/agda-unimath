@@ -1,7 +1,15 @@
 # Invertible maps
 
 ```agda
-module foundation.invertible-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.invertible-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 
 open import foundation-core.invertible-maps public
 ```
@@ -10,22 +18,22 @@ open import foundation-core.invertible-maps public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-triangles-of-homotopies
+open import foundation.commuting-triangles-of-homotopies funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-truncated-types
+open import foundation.dependent-products-truncated-types funext
 open import foundation.equality-cartesian-product-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.full-subtypes
-open import foundation.function-extensionality
-open import foundation.functoriality-cartesian-product-types
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.full-subtypes funext univalence truncations
+open import foundation.function-extensionality funext
+open import foundation.functoriality-cartesian-product-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
+open import foundation.homotopies funext
 open import foundation.homotopy-algebra
-open import foundation.homotopy-induction
-open import foundation.postcomposition-functions
-open import foundation.retractions
-open import foundation.sections
+open import foundation.homotopy-induction funext
+open import foundation.postcomposition-functions funext
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -41,7 +49,7 @@ open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 
-open import synthetic-homotopy-theory.free-loops
+open import synthetic-homotopy-theory.free-loops funext univalence truncations
 ```
 
 </details>

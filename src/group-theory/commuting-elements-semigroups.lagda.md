@@ -1,20 +1,26 @@
 # Commuting elements of semigroups
 
 ```agda
-module group-theory.commuting-elements-semigroups where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.commuting-elements-semigroups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.dependent-products-propositions
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import group-theory.semigroups
+open import group-theory.semigroups funext univalence
 ```
 
 </details>

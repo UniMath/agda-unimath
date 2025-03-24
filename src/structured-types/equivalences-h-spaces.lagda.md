@@ -1,31 +1,39 @@
 # Equivalences of H-spaces
 
 ```agda
-module structured-types.equivalences-h-spaces where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.equivalences-h-spaces
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-higher-identifications-functions
+open import foundation.action-on-higher-identifications-functions funext
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-identifications
-open import foundation.commuting-triangles-of-identifications
+open import foundation.commuting-squares-of-identifications funext
+open import foundation.commuting-triangles-of-identifications funext
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.path-algebra
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.path-algebra funext
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
-open import group-theory.homomorphisms-semigroups
+open import group-theory.homomorphisms-semigroups funext univalence truncations
 
-open import structured-types.h-spaces
-open import structured-types.morphisms-h-spaces
-open import structured-types.pointed-equivalences
-open import structured-types.pointed-maps
+open import structured-types.h-spaces funext univalence truncations
+open import structured-types.morphisms-h-spaces funext univalence truncations
+open import structured-types.pointed-equivalences funext univalence truncations
+open import structured-types.pointed-maps funext univalence truncations
 open import structured-types.pointed-types
 ```
 

@@ -1,31 +1,39 @@
 # Free groups with one generator
 
 ```agda
-module group-theory.free-groups-with-one-generator where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.free-groups-with-one-generator
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.group-of-integers
+open import elementary-number-theory.addition-integers funext univalence truncations
+open import elementary-number-theory.group-of-integers funext univalence truncations
 open import elementary-number-theory.integers
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-maps
+open import foundation.contractible-maps funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.integer-powers-of-elements-groups
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.integer-powers-of-elements-groups funext univalence truncations
 
-open import structured-types.initial-pointed-type-equipped-with-automorphism
+open import structured-types.initial-pointed-type-equipped-with-automorphism funext univalence truncations
 ```
 
 </details>

@@ -1,22 +1,29 @@
 # Connected types
 
 ```agda
-module foundation.connected-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.connected-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.function-extensionality-axiom
-open import foundation.functoriality-truncation
-open import foundation.inhabited-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.truncations
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.functoriality-truncation funext univalence truncations
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.truncations funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 

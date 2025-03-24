@@ -1,42 +1,50 @@
 # Quotient groups
 
 ```agda
-module group-theory.quotient-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.quotient-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-functoriality-set-quotients
-open import foundation.commuting-triangles-of-maps
-open import foundation.contractible-maps
-open import foundation.contractible-types
+open import foundation.binary-functoriality-set-quotients funext univalence truncations
+open import foundation.commuting-triangles-of-maps funext univalence
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
-open import foundation.effective-maps-equivalence-relations
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-set-quotients
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.set-quotients
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.surjective-maps
-open import foundation.universal-property-set-quotients
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.effective-maps-equivalence-relations funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.functoriality-set-quotients funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.reflecting-maps-equivalence-relations funext univalence truncations
+open import foundation.set-quotients funext univalence truncations
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.surjective-maps funext univalence truncations
+open import foundation.universal-property-set-quotients funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.kernels-homomorphisms-groups
-open import group-theory.normal-subgroups
-open import group-theory.nullifying-group-homomorphisms
-open import group-theory.semigroups
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.kernels-homomorphisms-groups funext univalence truncations
+open import group-theory.normal-subgroups funext univalence truncations
+open import group-theory.nullifying-group-homomorphisms funext univalence truncations
+open import group-theory.semigroups funext univalence
 ```
 
 </details>

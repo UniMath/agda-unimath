@@ -2,32 +2,39 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module wild-category-theory.noncoherent-large-omega-precategories where
+module wild-category-theory.noncoherent-large-omega-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
+open import foundation.strictly-involutive-identity-types funext univalence
 open import foundation.universe-levels
 
 open import globular-types.globular-types
 open import globular-types.large-globular-types
-open import globular-types.large-reflexive-globular-types
-open import globular-types.large-transitive-globular-types
-open import globular-types.reflexive-globular-types
-open import globular-types.transitive-globular-types
+open import globular-types.large-reflexive-globular-types funext univalence truncations
+open import globular-types.large-transitive-globular-types funext univalence truncations
+open import globular-types.reflexive-globular-types funext univalence truncations
+open import globular-types.transitive-globular-types funext univalence truncations
 
-open import wild-category-theory.noncoherent-omega-precategories
+open import wild-category-theory.noncoherent-omega-precategories funext univalence truncations
 ```
 
 </details>

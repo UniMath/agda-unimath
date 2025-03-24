@@ -1,17 +1,23 @@
 # `1`-Types
 
 ```agda
-module foundation-core.1-types where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation-core.1-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-truncated-types
-open import foundation.truncated-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.truncated-types funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

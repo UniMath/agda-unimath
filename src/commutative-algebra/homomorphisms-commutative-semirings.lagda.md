@@ -1,24 +1,32 @@
 # Homomorphisms of commutative semirings
 
 ```agda
-module commutative-algebra.homomorphisms-commutative-semirings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.homomorphisms-commutative-semirings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-semirings
+open import commutative-algebra.commutative-semirings funext univalence truncations
 
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.sets
-open import foundation.torsorial-type-families
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-commutative-monoids
-open import group-theory.homomorphisms-monoids
+open import group-theory.homomorphisms-commutative-monoids funext univalence truncations
+open import group-theory.homomorphisms-monoids funext univalence truncations
 
-open import ring-theory.homomorphisms-semirings
+open import ring-theory.homomorphisms-semirings funext univalence truncations
 ```
 
 </details>

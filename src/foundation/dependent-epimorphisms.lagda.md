@@ -1,13 +1,21 @@
 # Dependent epimorphisms
 
 ```agda
-module foundation.dependent-epimorphisms where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.dependent-epimorphisms
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.epimorphisms
+open import foundation.epimorphisms funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
