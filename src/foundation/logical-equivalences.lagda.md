@@ -35,9 +35,9 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-{{#concept "Logical equivalences" Disambiguation="of types" Agda=iff}} between
-two types `A` and `B` consist of a map `A → B` and a map `B → A`. The type of
-logical equivalences between types is the
+{{#concept "Logical equivalences" Disambiguation="of types"}} between two types
+`A` and `B` consist of a map `A → B` and a map `B → A`. The type of logical
+equivalences between types is the
 [Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
 of logical equivalences between [propositions](foundation-core.propositions.md).
 
