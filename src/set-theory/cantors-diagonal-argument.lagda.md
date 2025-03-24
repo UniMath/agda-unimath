@@ -1,7 +1,15 @@
 # Cantor's diagonal argument
 
 ```agda
-module set-theory.cantors-diagonal-argument where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module set-theory.cantors-diagonal-argument
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,32 +18,24 @@ module set-theory.cantors-diagonal-argument where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
-open import foundation.decidable-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.discrete-types
-open import foundation.double-negation
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.isolated-elements
-open import foundation.logical-equivalences
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.powersets
-open import foundation.propositional-truncations
-open import foundation.sets
-open import foundation.surjective-maps
+open import foundation.discrete-types funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.negation funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.sets funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
 
-open import set-theory.countable-sets
-open import set-theory.infinite-sets
-open import set-theory.uncountable-sets
+open import set-theory.countable-sets funext univalence truncations
+open import set-theory.uncountable-sets funext univalence truncations
 ```
 
 </details>

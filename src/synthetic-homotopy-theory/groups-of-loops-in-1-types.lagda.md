@@ -1,24 +1,32 @@
 # Groups of loops in `1`-types
 
 ```agda
-module synthetic-homotopy-theory.groups-of-loops-in-1-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.groups-of-loops-in-1-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.1-types
+open import foundation.1-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.semigroups
+open import group-theory.groups funext univalence truncations
+open import group-theory.semigroups funext univalence
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.loop-spaces funext univalence truncations
 ```
 
 </details>

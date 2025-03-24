@@ -1,7 +1,15 @@
 # Bases of directed trees
 
 ```agda
-module trees.bases-directed-trees where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.bases-directed-trees
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,26 +18,28 @@ module trees.bases-directed-trees where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositions
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.propositions funext univalence
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-empty-type funext univalence truncations
 open import foundation.universe-levels
 
-open import graph-theory.walks-directed-graphs
+open import graph-theory.walks-directed-graphs funext univalence truncations
 
-open import trees.directed-trees
+open import trees.directed-trees funext univalence truncations
 ```
 
 </details>

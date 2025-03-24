@@ -1,23 +1,31 @@
 # The Euclid–Mullin sequence
 
 ```agda
-module elementary-number-theory.euclid-mullin-sequence where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.euclid-mullin-sequence
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.fundamental-theorem-of-arithmetic
+open import elementary-number-theory.fundamental-theorem-of-arithmetic funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.products-of-natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
-open import elementary-number-theory.strong-induction-natural-numbers
+open import elementary-number-theory.products-of-natural-numbers funext univalence truncations
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations
+open import elementary-number-theory.strong-induction-natural-numbers funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.unit-type
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

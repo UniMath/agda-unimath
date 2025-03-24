@@ -1,15 +1,21 @@
 # Π-decompositions of types into types in a subuniverse
 
 ```agda
-module foundation.pi-decompositions-subuniverse where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.pi-decompositions-subuniverse
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.pi-decompositions
-open import foundation.subuniverses
+open import foundation.pi-decompositions funext univalence
+open import foundation.subuniverses funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

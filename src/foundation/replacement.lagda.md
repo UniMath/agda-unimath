@@ -1,17 +1,25 @@
 # The type theoretic replacement axiom
 
 ```agda
-module foundation.replacement where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.replacement
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.images
-open import foundation.locally-small-types
+open import foundation.images funext univalence truncations
+open import foundation.locally-small-types funext univalence truncations
 open import foundation.universe-levels
 
-open import foundation-core.small-types
+open import foundation-core.small-types funext univalence truncations
 ```
 
 </details>

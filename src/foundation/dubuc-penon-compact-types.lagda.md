@@ -1,18 +1,27 @@
 # Dubuc-Penon compact types
 
 ```agda
-module foundation.dubuc-penon-compact-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.dubuc-penon-compact-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.disjunction
-open import foundation.universal-quantification
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext univalence truncations
+open import foundation.universal-quantification funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.propositions
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 ```
 
 </details>

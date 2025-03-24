@@ -2,17 +2,20 @@
 
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
+open import foundation.function-extensionality-axiom
 
-module modal-type-theory.dependent-universal-property-flat-discrete-crisp-types where
+module modal-type-theory.dependent-universal-property-flat-discrete-crisp-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.universe-levels
 
-open import modal-type-theory.flat-modality
+open import modal-type-theory.flat-modality funext
 ```
 
 </details>

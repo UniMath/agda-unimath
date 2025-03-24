@@ -1,25 +1,33 @@
 # Modules over rings
 
 ```agda
-module ring-theory.modules-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.modules-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.addition-homomorphisms-abelian-groups
-open import group-theory.endomorphism-rings-abelian-groups
-open import group-theory.homomorphisms-abelian-groups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.addition-homomorphisms-abelian-groups funext univalence truncations
+open import group-theory.endomorphism-rings-abelian-groups funext univalence truncations
+open import group-theory.homomorphisms-abelian-groups funext univalence truncations
 
-open import ring-theory.homomorphisms-rings
-open import ring-theory.opposite-rings
-open import ring-theory.rings
+open import ring-theory.homomorphisms-rings funext univalence truncations
+open import ring-theory.opposite-rings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

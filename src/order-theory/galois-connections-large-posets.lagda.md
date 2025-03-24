@@ -1,7 +1,15 @@
 # Galois connections between large posets
 
 ```agda
-module order-theory.galois-connections-large-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.galois-connections-large-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,18 +17,18 @@ module order-theory.galois-connections-large-posets where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.logical-equivalences
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.logical-equivalences funext
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.least-upper-bounds-large-posets
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.principal-lower-sets-large-posets
-open import order-theory.principal-upper-sets-large-posets
-open import order-theory.similarity-of-elements-large-posets
-open import order-theory.similarity-of-order-preserving-maps-large-posets
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.least-upper-bounds-large-posets funext univalence truncations
+open import order-theory.order-preserving-maps-large-posets funext univalence truncations
+open import order-theory.principal-lower-sets-large-posets funext univalence truncations
+open import order-theory.principal-upper-sets-large-posets funext univalence truncations
+open import order-theory.similarity-of-elements-large-posets funext univalence truncations
+open import order-theory.similarity-of-order-preserving-maps-large-posets funext univalence truncations
 ```
 
 </details>

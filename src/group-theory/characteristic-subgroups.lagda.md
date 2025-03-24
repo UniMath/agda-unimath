@@ -1,19 +1,28 @@
 # Characteristic subgroups
 
 ```agda
-module group-theory.characteristic-subgroups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.characteristic-subgroups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.images-of-group-homomorphisms
-open import group-theory.isomorphisms-groups
-open import group-theory.subgroups
+open import group-theory.groups funext univalence truncations
+open import group-theory.images-of-group-homomorphisms funext univalence truncations
+open import group-theory.isomorphisms-groups funext univalence truncations
+open import group-theory.subgroups funext univalence truncations
 ```
 
 </details>

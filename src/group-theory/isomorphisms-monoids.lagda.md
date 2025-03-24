@@ -1,26 +1,35 @@
 # Isomorphisms of monoids
 
 ```agda
-module group-theory.isomorphisms-monoids where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.isomorphisms-monoids
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-large-precategories
+open import category-theory.isomorphisms-in-large-precategories funext univalence truncations
 
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-monoids
-open import group-theory.invertible-elements-monoids
-open import group-theory.monoids
-open import group-theory.precategory-of-monoids
+open import group-theory.homomorphisms-monoids funext univalence truncations
+open import group-theory.invertible-elements-monoids funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.precategory-of-monoids funext univalence truncations
 ```
 
 </details>

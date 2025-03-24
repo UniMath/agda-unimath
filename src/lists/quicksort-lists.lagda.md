@@ -1,25 +1,33 @@
 # Quicksort for lists
 
 ```agda
-module lists.quicksort-lists where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module lists.quicksort-lists
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strong-induction-natural-numbers
+open import elementary-number-theory.strong-induction-natural-numbers funext univalence truncations
 
-open import foundation.coproduct-types
-open import foundation.identity-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.identity-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import lists.concatenation-lists
+open import lists.concatenation-lists funext univalence truncations
 open import lists.lists
 
-open import order-theory.decidable-total-orders
+open import order-theory.decidable-total-orders funext univalence truncations
 ```
 
 </details>

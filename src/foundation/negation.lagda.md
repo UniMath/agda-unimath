@@ -1,7 +1,11 @@
 # Negation
 
 ```agda
-module foundation.negation where
+open import foundation.function-extensionality-axiom
+
+module foundation.negation
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.negation public
 ```
@@ -10,7 +14,8 @@ open import foundation-core.negation public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.logical-equivalences
+open import foundation.dependent-products-propositions funext
+open import foundation.logical-equivalences funext
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
@@ -55,13 +60,6 @@ eq-neg : {l : Level} {A : UU l} {p q : ¬ A} → p ＝ q
 eq-neg = eq-is-prop is-prop-neg
 ```
 
-### Reductio ad absurdum
-
-```agda
-reductio-ad-absurdum : {l1 l2 : Level} {P : UU l1} {Q : UU l2} → P → ¬ P → Q
-reductio-ad-absurdum p np = ex-falso (np p)
-```
-
 ### Logically equivalent types have logically equivalent negations
 
 ```agda
@@ -91,11 +89,6 @@ module _
 ### Negation has no fixed points
 
 ```agda
-no-fixed-points-neg :
-  {l : Level} (A : UU l) → ¬ (A ↔ ¬ A)
-no-fixed-points-neg A (f , g) =
-  ( λ (h : ¬ A) → h (g h)) (λ (a : A) → f a a)
-
 abstract
   no-fixed-points-neg-Prop :
     {l : Level} (P : Prop l) → ¬ (type-Prop P ↔ ¬ (type-Prop P))

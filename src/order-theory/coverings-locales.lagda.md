@@ -1,17 +1,25 @@
 # Coverings in locales
 
 ```agda
-module order-theory.coverings-locales where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.coverings-locales
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import order-theory.locales
+open import order-theory.locales funext univalence truncations
 ```
 
 </details>

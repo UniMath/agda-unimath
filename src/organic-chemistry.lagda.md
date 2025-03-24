@@ -3,14 +3,22 @@
 ## Modules in the organic chemistry namespace
 
 ```agda
-module organic-chemistry where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import organic-chemistry.alcohols public
-open import organic-chemistry.alkanes public
-open import organic-chemistry.alkenes public
-open import organic-chemistry.alkynes public
-open import organic-chemistry.ethane public
-open import organic-chemistry.hydrocarbons public
-open import organic-chemistry.methane public
-open import organic-chemistry.saturated-carbons public
+module organic-chemistry
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import organic-chemistry.alcohols funext univalence truncations public
+open import organic-chemistry.alkanes funext univalence truncations public
+open import organic-chemistry.alkenes funext univalence truncations public
+open import organic-chemistry.alkynes funext univalence truncations public
+open import organic-chemistry.ethane funext univalence truncations public
+open import organic-chemistry.hydrocarbons funext univalence truncations public
+open import organic-chemistry.methane funext univalence truncations public
+open import organic-chemistry.saturated-carbons funext univalence truncations public
 ```

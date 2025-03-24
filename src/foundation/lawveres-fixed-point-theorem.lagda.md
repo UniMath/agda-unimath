@@ -1,17 +1,24 @@
 # Lawvere's fixed point theorem
 
 ```agda
-module foundation.lawveres-fixed-point-theorem where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.lawveres-fixed-point-theorem
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.function-extensionality
-open import foundation.propositional-truncations
-open import foundation.surjective-maps
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.identity-types

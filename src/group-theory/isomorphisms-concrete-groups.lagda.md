@@ -1,18 +1,26 @@
 # Isomorphisms of concrete groups
 
 ```agda
-module group-theory.isomorphisms-concrete-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.isomorphisms-concrete-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-large-precategories
+open import category-theory.isomorphisms-in-large-precategories funext univalence truncations
 
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
-open import group-theory.precategory-of-concrete-groups
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.precategory-of-concrete-groups funext univalence truncations
 ```
 
 </details>

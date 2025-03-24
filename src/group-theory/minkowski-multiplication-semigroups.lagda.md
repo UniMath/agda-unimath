@@ -1,31 +1,38 @@
 # Minkowski multiplication on subsets of a semigroup
 
 ```agda
-module group-theory.minkowski-multiplication-semigroups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.minkowski-multiplication-semigroups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.conjunction
+open import foundation.cartesian-product-types funext univalence
+open import foundation.conjunction funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.identity-types
-open import foundation.inhabited-subtypes
-open import foundation.powersets
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.identity-types funext
+open import foundation.inhabited-subtypes funext univalence truncations
+open import foundation.powersets funext univalence truncations
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.semigroups
-open import group-theory.subsets-semigroups
+open import group-theory.semigroups funext univalence
+open import group-theory.subsets-semigroups funext univalence truncations
 
-open import logic.functoriality-existential-quantification
+open import logic.functoriality-existential-quantification funext univalence truncations
 ```
 
 </details>

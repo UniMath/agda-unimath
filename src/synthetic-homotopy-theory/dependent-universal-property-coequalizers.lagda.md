@@ -1,26 +1,35 @@
 # The dependent universal property of coequalizers
 
 ```agda
-module synthetic-homotopy-theory.dependent-universal-property-coequalizers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.dependent-universal-property-coequalizers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-maps
-open import foundation.contractible-types
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types funext
 open import foundation.double-arrows
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.functoriality-dependent-pair-types
+open import foundation.equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.coforks
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
-open import synthetic-homotopy-theory.dependent-coforks
-open import synthetic-homotopy-theory.dependent-universal-property-pushouts
-open import synthetic-homotopy-theory.universal-property-coequalizers
+open import synthetic-homotopy-theory.coforks funext univalence truncations
+open import synthetic-homotopy-theory.dependent-cocones-under-spans funext univalence truncations
+open import synthetic-homotopy-theory.dependent-coforks funext univalence truncations
+open import synthetic-homotopy-theory.dependent-universal-property-pushouts funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-coequalizers funext univalence truncations
 ```
 
 </details>

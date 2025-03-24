@@ -2,8 +2,13 @@
 
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module modal-type-theory.action-on-identifications-crisp-functions where
+module modal-type-theory.action-on-identifications-crisp-functions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -13,7 +18,7 @@ open import foundation.universe-levels
 
 open import foundation-core.identity-types
 
-open import modal-type-theory.crisp-identity-types
+open import modal-type-theory.crisp-identity-types funext univalence
 ```
 
 </details>

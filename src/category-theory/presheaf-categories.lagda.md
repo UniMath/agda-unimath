@@ -1,29 +1,36 @@
 # Presheaf categories
 
 ```agda
-module category-theory.presheaf-categories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.presheaf-categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.copresheaf-categories
-open import category-theory.functors-from-small-to-large-precategories
-open import category-theory.large-categories
-open import category-theory.large-precategories
-open import category-theory.natural-transformations-functors-from-small-to-large-precategories
-open import category-theory.opposite-precategories
-open import category-theory.precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.copresheaf-categories funext univalence truncations
+open import category-theory.functors-from-small-to-large-precategories funext univalence truncations
+open import category-theory.large-categories funext univalence truncations
+open import category-theory.large-precategories funext univalence truncations
+open import category-theory.natural-transformations-functors-from-small-to-large-precategories funext univalence truncations
+open import category-theory.opposite-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
-open import foundation.category-of-sets
-open import foundation.commuting-squares-of-maps
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
+open import foundation.category-of-sets funext univalence truncations
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
+open import foundation.strictly-involutive-identity-types funext univalence
 open import foundation.universe-levels
 ```
 

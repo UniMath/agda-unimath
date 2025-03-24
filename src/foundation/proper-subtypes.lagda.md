@@ -1,18 +1,26 @@
 # Proper subsets
 
 ```agda
-module foundation.proper-subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.proper-subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.complements-subtypes
-open import foundation.inhabited-subtypes
+open import foundation.complements-subtypes funext univalence truncations
+open import foundation.inhabited-subtypes funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.propositions
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 ```
 
 </details>

@@ -1,22 +1,30 @@
 # Homomorphisms of higher groups
 
 ```agda
-module higher-group-theory.homomorphisms-higher-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.homomorphisms-higher-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-groups funext univalence truncations
 
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
+open import structured-types.pointed-homotopies funext univalence truncations
+open import structured-types.pointed-maps funext univalence truncations
 
-open import synthetic-homotopy-theory.functoriality-loop-spaces
+open import synthetic-homotopy-theory.functoriality-loop-spaces funext univalence truncations
 ```
 
 </details>

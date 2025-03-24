@@ -1,27 +1,36 @@
 # Equivalences of concrete group actions
 
 ```agda
-module group-theory.equivalences-concrete-group-actions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.equivalences-concrete-group-actions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.1-types
+open import foundation.1-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equality-dependent-function-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.equality-dependent-function-types funext
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.concrete-group-actions
-open import group-theory.concrete-groups
-open import group-theory.homomorphisms-concrete-group-actions
+open import group-theory.concrete-group-actions funext univalence truncations
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.homomorphisms-concrete-group-actions funext univalence truncations
 ```
 
 </details>

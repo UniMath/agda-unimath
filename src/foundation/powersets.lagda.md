@@ -1,44 +1,50 @@
 # Powersets
 
 ```agda
-module foundation.powersets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.powersets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.identity-types
-open import foundation.large-locale-of-propositions
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.large-locale-of-propositions funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.raising-universe-levels-unit-type
+open import foundation.subtypes funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.sets
 
-open import order-theory.bottom-elements-large-posets
-open import order-theory.bottom-elements-posets
-open import order-theory.dependent-products-large-meet-semilattices
-open import order-theory.dependent-products-large-posets
-open import order-theory.dependent-products-large-preorders
-open import order-theory.dependent-products-large-suplattices
-open import order-theory.large-meet-semilattices
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.large-suplattices
-open import order-theory.meet-semilattices
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.posets
-open import order-theory.preorders
-open import order-theory.similarity-of-elements-large-posets
-open import order-theory.suplattices
-open import order-theory.top-elements-large-posets
-open import order-theory.top-elements-posets
+open import order-theory.bottom-elements-large-posets funext univalence truncations
+open import order-theory.bottom-elements-posets funext univalence truncations
+open import order-theory.dependent-products-large-meet-semilattices funext univalence truncations
+open import order-theory.dependent-products-large-posets funext univalence truncations
+open import order-theory.dependent-products-large-preorders funext univalence truncations
+open import order-theory.dependent-products-large-suplattices funext univalence truncations
+open import order-theory.large-meet-semilattices funext univalence truncations
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.large-preorders funext univalence truncations
+open import order-theory.large-suplattices funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.preorders funext univalence truncations
+open import order-theory.similarity-of-elements-large-posets funext univalence truncations
+open import order-theory.suplattices funext univalence truncations
+open import order-theory.top-elements-large-posets funext univalence truncations
+open import order-theory.top-elements-posets funext univalence truncations
 ```
 
 </details>

@@ -1,27 +1,35 @@
 # The cofibonacci sequence
 
 ```agda
-module elementary-number-theory.cofibonacci where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.cofibonacci
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.fibonacci-sequence
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.divisibility-natural-numbers funext univalence truncations
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations
+open import elementary-number-theory.fibonacci-sequence funext univalence truncations
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.pisano-periods
-open import elementary-number-theory.well-ordering-principle-natural-numbers
+open import elementary-number-theory.pisano-periods funext univalence truncations
+open import elementary-number-theory.well-ordering-principle-natural-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.decidable-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.identity-types
+open import foundation.empty-types funext univalence truncations
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```

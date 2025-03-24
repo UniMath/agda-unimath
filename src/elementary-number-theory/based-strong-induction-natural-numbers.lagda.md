@@ -1,26 +1,35 @@
 # Based strong induction for the natural numbers
 
 ```agda
-module elementary-number-theory.based-strong-induction-natural-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.based-strong-induction-natural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.based-induction-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.based-induction-natural-numbers funext univalence truncations
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.empty-types
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.universal-property-contractible-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.universal-property-contractible-types funext
 open import foundation.universe-levels
 ```
 

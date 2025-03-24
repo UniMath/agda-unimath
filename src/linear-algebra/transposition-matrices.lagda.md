@@ -1,7 +1,15 @@
 # Transposition of matrices
 
 ```agda
-module linear-algebra.transposition-matrices where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module linear-algebra.transposition-matrices
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,12 +19,12 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.matrices
-open import linear-algebra.vectors
+open import linear-algebra.functoriality-vectors funext univalence truncations
+open import linear-algebra.matrices funext univalence truncations
+open import linear-algebra.vectors funext univalence truncations
 ```
 
 </details>

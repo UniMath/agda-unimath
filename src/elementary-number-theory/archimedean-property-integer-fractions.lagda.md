@@ -2,28 +2,35 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module elementary-number-theory.archimedean-property-integer-fractions where
+module elementary-number-theory.archimedean-property-integer-fractions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.archimedean-property-integers
-open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.archimedean-property-integers funext univalence truncations
+open import elementary-number-theory.integer-fractions funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integer-fractions
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.multiplication-positive-and-negative-integers
+open import elementary-number-theory.multiplication-integer-fractions funext univalence truncations
+open import elementary-number-theory.multiplication-integers funext univalence truncations
+open import elementary-number-theory.multiplication-positive-and-negative-integers funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.positive-integer-fractions
-open import elementary-number-theory.strict-inequality-integer-fractions
-open import elementary-number-theory.strict-inequality-integers
+open import elementary-number-theory.positive-integer-fractions funext univalence truncations
+open import elementary-number-theory.strict-inequality-integer-fractions funext univalence truncations
+open import elementary-number-theory.strict-inequality-integers funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.propositional-truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
 open import foundation.transport-along-identifications
 ```
 

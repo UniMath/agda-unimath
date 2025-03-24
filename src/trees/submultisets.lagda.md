@@ -1,17 +1,25 @@
 # Submultisets
 
 ```agda
-module trees.submultisets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.submultisets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.embeddings
-open import foundation.equivalences
+open import foundation.embeddings funext
+open import foundation.equivalences funext
 open import foundation.universe-levels
 
-open import trees.multisets
+open import trees.multisets funext univalence truncations
 ```
 
 </details>

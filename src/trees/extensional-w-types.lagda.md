@@ -1,36 +1,46 @@
 # Extensional W-types
 
 ```agda
-module trees.extensional-w-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.extensional-w-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equality-dependent-function-types funext
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.slice
-open import foundation.torsorial-type-families
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.slice funext univalence
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalent-type-families
+open import foundation.univalent-type-families funext univalence
 open import foundation.universe-levels
 
-open import trees.elementhood-relation-w-types
-open import trees.w-types
+open import trees.elementhood-relation-w-types funext univalence truncations
+open import trees.w-types funext univalence truncations
 ```
 
 </details>

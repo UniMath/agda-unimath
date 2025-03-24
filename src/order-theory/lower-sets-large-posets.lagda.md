@@ -1,7 +1,15 @@
 # Lower sets in large posets
 
 ```agda
-module order-theory.lower-sets-large-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.lower-sets-large-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,8 +17,8 @@ module order-theory.lower-sets-large-posets where
 ```agda
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.large-subposets
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.large-subposets funext univalence truncations
 ```
 
 </details>

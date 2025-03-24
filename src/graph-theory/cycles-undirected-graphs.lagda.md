@@ -1,7 +1,15 @@
 # Cycles in undirected graphs
 
 ```agda
-module graph-theory.cycles-undirected-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.cycles-undirected-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,9 +20,9 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import graph-theory.embeddings-undirected-graphs
-open import graph-theory.polygons
-open import graph-theory.undirected-graphs
+open import graph-theory.embeddings-undirected-graphs funext univalence truncations
+open import graph-theory.polygons funext univalence truncations
+open import graph-theory.undirected-graphs funext univalence truncations
 ```
 
 </details>

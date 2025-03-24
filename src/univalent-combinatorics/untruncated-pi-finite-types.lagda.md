@@ -1,7 +1,15 @@
 # Untruncated π-finite types
 
 ```agda
-module univalent-combinatorics.untruncated-pi-finite-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.untruncated-pi-finite-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,54 +17,56 @@ module univalent-combinatorics.untruncated-pi-finite-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.0-connected-types
+open import foundation.0-connected-types funext univalence truncations
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-types
-open import foundation.dependent-identifications
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equality-coproduct-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.fiber-inclusions
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-set-truncation
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.maybe
-open import foundation.mere-equality
-open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.retracts-of-types
-open import foundation.set-presented-types
-open import foundation.set-truncations
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.surjective-maps
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
+open import foundation.dependent-identifications funext
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equality-coproduct-types funext univalence truncations
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.fiber-inclusions funext univalence
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.functoriality-set-truncation funext univalence truncations
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.maybe funext univalence truncations
+open import foundation.mere-equality funext univalence truncations
+open import foundation.propositional-extensionality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.retracts-of-types funext univalence
+open import foundation.set-presented-types funext univalence truncations
+open import foundation.set-truncations funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-coproduct-types funext univalence truncations
 open import foundation.unit-type
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.finitely-many-connected-components
-open import univalent-combinatorics.finitely-presented-types
-open import univalent-combinatorics.function-types
-open import univalent-combinatorics.image-of-maps
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.coproduct-types funext univalence truncations
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.equality-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.finitely-many-connected-components funext univalence truncations
+open import univalent-combinatorics.finitely-presented-types funext univalence truncations
+open import univalent-combinatorics.function-types funext univalence truncations
+open import univalent-combinatorics.image-of-maps funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

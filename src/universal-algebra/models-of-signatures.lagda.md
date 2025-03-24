@@ -1,19 +1,27 @@
 # Models of signatures
 
 ```agda
-module universal-algebra.models-of-signatures where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module universal-algebra.models-of-signatures
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.sets
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
+open import linear-algebra.vectors funext univalence truncations
 
-open import universal-algebra.signatures
+open import universal-algebra.signatures funext univalence
 ```
 
 </details>

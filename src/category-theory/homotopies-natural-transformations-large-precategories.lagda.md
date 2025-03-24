@@ -1,18 +1,26 @@
 # Homotopies of natural transformations in large precategories
 
 ```agda
-module category-theory.homotopies-natural-transformations-large-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.homotopies-natural-transformations-large-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-large-precategories
-open import category-theory.large-precategories
-open import category-theory.natural-transformations-functors-large-precategories
+open import category-theory.functors-large-precategories funext univalence truncations
+open import category-theory.large-precategories funext univalence truncations
+open import category-theory.natural-transformations-functors-large-precategories funext univalence truncations
 
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

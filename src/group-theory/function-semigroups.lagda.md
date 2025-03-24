@@ -1,18 +1,24 @@
 # Function semigroups
 
 ```agda
-module group-theory.function-semigroups where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.function-semigroups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import group-theory.dependent-products-semigroups
-open import group-theory.semigroups
+open import group-theory.dependent-products-semigroups funext univalence
+open import group-theory.semigroups funext univalence
 ```
 
 </details>

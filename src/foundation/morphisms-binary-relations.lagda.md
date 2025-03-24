@@ -1,14 +1,22 @@
 # Morphisms of binary relations
 
 ```agda
-module foundation.morphisms-binary-relations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.morphisms-binary-relations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-homotopies
-open import foundation.binary-relations
+open import foundation.binary-homotopies funext
+open import foundation.binary-relations funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

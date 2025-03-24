@@ -2,22 +2,29 @@
 
 ```agda
 {-# OPTIONS --rewriting #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module synthetic-homotopy-theory.rewriting-pushouts where
+module synthetic-homotopy-theory.rewriting-pushouts
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
 open import reflection.rewriting
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
-open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.dependent-cocones-under-spans funext univalence truncations
+open import synthetic-homotopy-theory.pushouts funext univalence truncations
 ```
 
 </details>

@@ -1,17 +1,25 @@
 # Equality of coproduct types
 
 ```agda
-module foundation.equality-coproduct-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.equality-coproduct-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.negated-equality
+open import foundation.negated-equality funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

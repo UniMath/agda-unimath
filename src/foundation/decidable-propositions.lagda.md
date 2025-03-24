@@ -1,28 +1,37 @@
 # Decidable propositions
 
 ```agda
-module foundation.decidable-propositions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation-core.decidable-propositions public
+module foundation.decidable-propositions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation-core.decidable-propositions funext univalence truncations public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.booleans
-open import foundation.decidable-types
+open import foundation.booleans funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.raising-universe-levels
-open import foundation.type-arithmetic-coproduct-types
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.propositional-extensionality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.raising-universe-levels-unit-type
+open import foundation.type-arithmetic-coproduct-types funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -32,14 +41,15 @@ open import foundation-core.coproduct-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.raising-universe-levels
 open import foundation-core.retracts-of-types
 open import foundation-core.sets
-open import foundation-core.small-types
-open import foundation-core.subtypes
+open import foundation-core.small-types funext univalence truncations
+open import foundation-core.subtypes funext
 open import foundation-core.transport-along-identifications
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

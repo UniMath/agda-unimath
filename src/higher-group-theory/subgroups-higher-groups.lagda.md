@@ -1,20 +1,28 @@
 # Subgroups of higher groups
 
 ```agda
-module higher-group-theory.subgroups-higher-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.subgroups-higher-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
-open import foundation.cartesian-product-types
+open import foundation.0-connected-types funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.sets
+open import foundation.function-types funext
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-groups funext univalence truncations
 
 open import structured-types.pointed-types
 ```

@@ -1,33 +1,41 @@
 # Complements of decidable subtypes
 
 ```agda
-module logic.complements-decidable-subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module logic.complements-decidable-subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.complements-subtypes
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
-open import foundation.decidable-types
+open import foundation.complements-subtypes funext univalence truncations
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-subtypes funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.double-negation-stable-propositions
+open import foundation.double-negation-stable-propositions funext univalence truncations
 open import foundation.evaluation-functions
-open import foundation.full-subtypes
-open import foundation.involutions
-open import foundation.negation
-open import foundation.postcomposition-functions
-open import foundation.powersets
-open import foundation.propositional-truncations
-open import foundation.unions-subtypes
+open import foundation.full-subtypes funext univalence truncations
+open import foundation.involutions funext univalence
+open import foundation.negation funext
+open import foundation.postcomposition-functions funext
+open import foundation.powersets funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.unions-subtypes funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.function-types
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 
-open import logic.double-negation-stable-subtypes
+open import logic.double-negation-stable-subtypes funext univalence truncations
 ```
 
 </details>

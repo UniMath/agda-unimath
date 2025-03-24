@@ -1,28 +1,36 @@
 # Additive orders of elements of rings
 
 ```agda
-module ring-theory.additive-orders-of-elements-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.additive-orders-of-elements-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.group-of-integers
+open import elementary-number-theory.group-of-integers funext univalence truncations
 open import elementary-number-theory.integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositional-truncations
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
 open import foundation.universe-levels
 
-open import group-theory.normal-subgroups
-open import group-theory.orders-of-elements-groups
-open import group-theory.subgroups
-open import group-theory.subsets-groups
+open import group-theory.normal-subgroups funext univalence truncations
+open import group-theory.orders-of-elements-groups funext univalence truncations
+open import group-theory.subgroups funext univalence truncations
+open import group-theory.subsets-groups funext univalence truncations
 
-open import ring-theory.integer-multiples-of-elements-rings
-open import ring-theory.rings
+open import ring-theory.integer-multiples-of-elements-rings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

@@ -1,18 +1,26 @@
 # Localizations at maps
 
 ```agda
-module orthogonal-factorization-systems.localizations-at-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.localizations-at-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.localizations-at-subuniverses
-open import orthogonal-factorization-systems.types-local-at-maps
+open import orthogonal-factorization-systems.localizations-at-subuniverses funext univalence truncations
+open import orthogonal-factorization-systems.types-local-at-maps funext univalence truncations
 ```
 
 </details>

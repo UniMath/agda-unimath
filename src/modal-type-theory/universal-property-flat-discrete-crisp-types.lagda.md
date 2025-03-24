@@ -2,8 +2,15 @@
 
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module modal-type-theory.universal-property-flat-discrete-crisp-types where
+module modal-type-theory.universal-property-flat-discrete-crisp-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,19 +18,19 @@ module modal-type-theory.universal-property-flat-discrete-crisp-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.postcomposition-functions
-open import foundation.universal-property-equivalences
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.postcomposition-functions funext
+open import foundation.universal-property-equivalences funext
 open import foundation.universe-levels
 
-open import modal-type-theory.action-on-identifications-crisp-functions
-open import modal-type-theory.crisp-function-types
-open import modal-type-theory.flat-discrete-crisp-types
-open import modal-type-theory.flat-modality
-open import modal-type-theory.functoriality-flat-modality
+open import modal-type-theory.action-on-identifications-crisp-functions funext univalence
+open import modal-type-theory.crisp-function-types funext univalence
+open import modal-type-theory.flat-discrete-crisp-types funext univalence truncations
+open import modal-type-theory.flat-modality funext
+open import modal-type-theory.functoriality-flat-modality funext univalence
 ```
 
 </details>

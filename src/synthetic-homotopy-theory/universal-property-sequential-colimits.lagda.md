@@ -1,7 +1,15 @@
 # The universal property of sequential colimits
 
 ```agda
-module synthetic-homotopy-theory.universal-property-sequential-colimits where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.universal-property-sequential-colimits
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,34 +18,34 @@ module synthetic-homotopy-theory.universal-property-sequential-colimits where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies
-open import foundation.commuting-triangles-of-maps
-open import foundation.contractible-maps
-open import foundation.contractible-types
+open import foundation.commuting-squares-of-homotopies funext
+open import foundation.commuting-triangles-of-maps funext univalence
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.precomposition-functions
-open import foundation.retractions
-open import foundation.sections
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.precomposition-functions funext
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.subtype-identity-principle
-open import foundation.universal-property-equivalences
+open import foundation.universal-property-equivalences funext
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 open import foundation.whiskering-homotopies-composition
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.coforks
-open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams
-open import synthetic-homotopy-theory.equivalences-sequential-diagrams
-open import synthetic-homotopy-theory.sequential-diagrams
-open import synthetic-homotopy-theory.universal-property-coequalizers
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.coforks funext univalence truncations
+open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.equivalences-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.sequential-diagrams funext univalence
+open import synthetic-homotopy-theory.universal-property-coequalizers funext univalence truncations
 ```
 
 </details>

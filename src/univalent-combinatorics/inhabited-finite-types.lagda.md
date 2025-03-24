@@ -1,7 +1,15 @@
 # Inhabited finite types
 
 ```agda
-module univalent-combinatorics.inhabited-finite-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.inhabited-finite-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,20 +17,21 @@ module univalent-combinatorics.inhabited-finite-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.propositions
-open import foundation.subtypes
-open import foundation.subuniverses
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.identity-types funext
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.subuniverses funext univalence
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

@@ -1,42 +1,52 @@
 # Homomorphisms of generated subgroups
 
 ```agda
-module group-theory.homomorphisms-generated-subgroups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.homomorphisms-generated-subgroups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.truncated-types
+open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.embeddings funext
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.truncated-types funext univalence
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.epimorphisms-groups
-open import group-theory.full-subgroups
-open import group-theory.generating-sets-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.subgroups
-open import group-theory.subgroups-generated-by-subsets-groups
-open import group-theory.subsets-groups
+open import group-theory.epimorphisms-groups funext univalence truncations
+open import group-theory.full-subgroups funext univalence truncations
+open import group-theory.generating-sets-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.subgroups funext univalence truncations
+open import group-theory.subgroups-generated-by-subsets-groups funext univalence truncations
+open import group-theory.subsets-groups funext univalence truncations
 
 open import lists.lists
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

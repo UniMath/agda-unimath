@@ -2,42 +2,49 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module group-theory.abelianization-groups where
+module group-theory.abelianization-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.adjunctions-large-categories
-open import category-theory.adjunctions-large-precategories
-open import category-theory.functors-large-categories
-open import category-theory.functors-large-precategories
-open import category-theory.natural-transformations-functors-large-categories
-open import category-theory.natural-transformations-functors-large-precategories
+open import category-theory.adjunctions-large-categories funext univalence truncations
+open import category-theory.adjunctions-large-precategories funext univalence truncations
+open import category-theory.functors-large-categories funext univalence truncations
+open import category-theory.functors-large-precategories funext univalence truncations
+open import category-theory.natural-transformations-functors-large-categories funext univalence truncations
+open import category-theory.natural-transformations-functors-large-precategories funext univalence truncations
 
-open import foundation.commuting-squares-of-maps
+open import foundation.commuting-squares-of-maps funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.set-quotients
-open import foundation.sets
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.set-quotients funext univalence truncations
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import group-theory.abelian-groups
-open import group-theory.category-of-abelian-groups
-open import group-theory.category-of-groups
-open import group-theory.commutator-subgroups
-open import group-theory.commuting-squares-of-group-homomorphisms
-open import group-theory.functoriality-quotient-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-abelian-groups
-open import group-theory.homomorphisms-groups
-open import group-theory.normal-subgroups
-open import group-theory.nullifying-group-homomorphisms
-open import group-theory.quotient-groups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.category-of-abelian-groups funext univalence truncations
+open import group-theory.category-of-groups funext univalence truncations
+open import group-theory.commutator-subgroups funext univalence truncations
+open import group-theory.commuting-squares-of-group-homomorphisms funext univalence truncations
+open import group-theory.functoriality-quotient-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-abelian-groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.normal-subgroups funext univalence truncations
+open import group-theory.nullifying-group-homomorphisms funext univalence truncations
+open import group-theory.quotient-groups funext univalence truncations
 ```
 
 </details>

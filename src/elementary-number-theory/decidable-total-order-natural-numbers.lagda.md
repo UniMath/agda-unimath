@@ -1,27 +1,35 @@
 # The decidable total order of natural numbers
 
 ```agda
-module elementary-number-theory.decidable-total-order-natural-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.decidable-total-order-natural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.propositional-truncations
+open import foundation.function-types funext
+open import foundation.propositional-truncations funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import order-theory.decidable-total-orders
-open import order-theory.order-preserving-maps-posets
-open import order-theory.order-preserving-maps-preorders
-open import order-theory.posets
-open import order-theory.preorders
-open import order-theory.total-orders
+open import order-theory.decidable-total-orders funext univalence truncations
+open import order-theory.order-preserving-maps-posets funext univalence truncations
+open import order-theory.order-preserving-maps-preorders funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.preorders funext univalence truncations
+open import order-theory.total-orders funext univalence truncations
 ```
 
 </details>

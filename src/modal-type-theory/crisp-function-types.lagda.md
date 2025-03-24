@@ -2,26 +2,31 @@
 
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module modal-type-theory.crisp-function-types where
+module modal-type-theory.crisp-function-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.postcomposition-functions
-open import foundation.retractions
-open import foundation.sections
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.identity-types funext
+open import foundation.postcomposition-functions funext
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.universe-levels
 
-open import modal-type-theory.action-on-identifications-flat-modality
-open import modal-type-theory.crisp-dependent-function-types
-open import modal-type-theory.flat-modality
-open import modal-type-theory.functoriality-flat-modality
+open import modal-type-theory.action-on-identifications-flat-modality funext univalence
+open import modal-type-theory.crisp-dependent-function-types funext univalence
+open import modal-type-theory.flat-modality funext
+open import modal-type-theory.functoriality-flat-modality funext univalence
 ```
 
 </details>

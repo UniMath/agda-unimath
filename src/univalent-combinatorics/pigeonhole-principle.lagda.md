@@ -1,39 +1,48 @@
 # The pigeonhole principle
 
 ```agda
-module univalent-combinatorics.pigeonhole-principle where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.pigeonhole-principle
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations
 
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.pairs-of-distinct-elements
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.negation funext
+open import foundation.pairs-of-distinct-elements funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.embeddings-standard-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.repetitions-of-values
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.embeddings-standard-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.repetitions-of-values funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

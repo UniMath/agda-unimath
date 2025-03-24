@@ -1,18 +1,26 @@
 # Anafunctors between categories
 
 ```agda
-module category-theory.anafunctors-categories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.anafunctors-categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.anafunctors-precategories
-open import category-theory.categories
-open import category-theory.functors-categories
+open import category-theory.anafunctors-precategories funext univalence truncations
+open import category-theory.categories funext univalence truncations
+open import category-theory.functors-categories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.propositional-truncations
+open import foundation.propositional-truncations funext univalence
 open import foundation.universe-levels
 ```
 

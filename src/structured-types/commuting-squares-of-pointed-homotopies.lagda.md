@@ -1,7 +1,15 @@
 # Commuting squares of pointed homotopies
 
 ```agda
-module structured-types.commuting-squares-of-pointed-homotopies where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.commuting-squares-of-pointed-homotopies
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,10 +17,10 @@ module structured-types.commuting-squares-of-pointed-homotopies where
 ```agda
 open import foundation.universe-levels
 
-open import structured-types.pointed-2-homotopies
-open import structured-types.pointed-dependent-functions
+open import structured-types.pointed-2-homotopies funext univalence truncations
+open import structured-types.pointed-dependent-functions funext
 open import structured-types.pointed-families-of-types
-open import structured-types.pointed-homotopies
+open import structured-types.pointed-homotopies funext univalence truncations
 open import structured-types.pointed-types
 ```
 

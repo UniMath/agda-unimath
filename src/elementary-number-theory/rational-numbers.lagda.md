@@ -1,38 +1,44 @@
 # The rational numbers
 
 ```agda
-module elementary-number-theory.rational-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.rational-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.divisibility-integers
-open import elementary-number-theory.greatest-common-divisor-integers
-open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.divisibility-integers funext univalence truncations
+open import elementary-number-theory.greatest-common-divisor-integers funext univalence truncations
+open import elementary-number-theory.integer-fractions funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.mediant-integer-fractions
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.positive-and-negative-integers
-open import elementary-number-theory.positive-integers
-open import elementary-number-theory.reduced-integer-fractions
+open import elementary-number-theory.mediant-integer-fractions funext univalence truncations
+open import elementary-number-theory.multiplication-integers funext univalence truncations
+open import elementary-number-theory.positive-integers funext univalence truncations
+open import elementary-number-theory.reduced-integer-fractions funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions funext
 open import foundation.equality-cartesian-product-types
-open import foundation.equality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositions
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.retracts-of-types
-open import foundation.sections
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.surjective-maps
+open import foundation.equality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositions funext univalence
+open import foundation.reflecting-maps-equivalence-relations funext univalence truncations
+open import foundation.retracts-of-types funext univalence
+open import foundation.sections funext
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import set-theory.countable-sets
+open import set-theory.countable-sets funext univalence truncations
 ```
 
 </details>

@@ -1,34 +1,42 @@
 # Intersections of radical ideals of commutative rings
 
 ```agda
-module commutative-algebra.intersections-radical-ideals-commutative-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.intersections-radical-ideals-commutative-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.full-ideals-commutative-rings
-open import commutative-algebra.ideals-commutative-rings
-open import commutative-algebra.intersections-ideals-commutative-rings
-open import commutative-algebra.poset-of-ideals-commutative-rings
-open import commutative-algebra.poset-of-radical-ideals-commutative-rings
-open import commutative-algebra.powers-of-elements-commutative-rings
-open import commutative-algebra.products-ideals-commutative-rings
-open import commutative-algebra.products-radical-ideals-commutative-rings
-open import commutative-algebra.radical-ideals-commutative-rings
-open import commutative-algebra.radicals-of-ideals-commutative-rings
+open import commutative-algebra.commutative-rings funext univalence truncations
+open import commutative-algebra.full-ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.intersections-ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.poset-of-ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.poset-of-radical-ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.powers-of-elements-commutative-rings funext univalence truncations
+open import commutative-algebra.products-ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.products-radical-ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.radical-ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.radicals-of-ideals-commutative-rings funext univalence truncations
 
 open import elementary-number-theory.addition-natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.propositional-truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
 open import foundation.universe-levels
 
-open import order-theory.greatest-lower-bounds-large-posets
-open import order-theory.large-meet-semilattices
+open import order-theory.greatest-lower-bounds-large-posets funext univalence truncations
+open import order-theory.large-meet-semilattices funext univalence truncations
 ```
 
 </details>

@@ -1,23 +1,31 @@
 # Cores of categories
 
 ```agda
-module category-theory.cores-categories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.cores-categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.cores-precategories
-open import category-theory.groupoids
-open import category-theory.isomorphisms-in-categories
-open import category-theory.precategories
-open import category-theory.pregroupoids
-open import category-theory.subcategories
-open import category-theory.wide-subcategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.cores-precategories funext univalence truncations
+open import category-theory.groupoids funext univalence truncations
+open import category-theory.isomorphisms-in-categories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
+open import category-theory.pregroupoids funext univalence truncations
+open import category-theory.subcategories funext univalence truncations
+open import category-theory.wide-subcategories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.universe-levels
 ```
 

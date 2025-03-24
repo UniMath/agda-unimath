@@ -1,7 +1,15 @@
 # Dirichlet series of species of finite inhabited types
 
 ```agda
-module species.dirichlet-series-species-of-finite-inhabited-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.dirichlet-series-species-of-finite-inhabited-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,15 +17,15 @@ module species.dirichlet-series-species-of-finite-inhabited-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import species.species-of-finite-inhabited-types
+open import species.species-of-finite-inhabited-types funext univalence truncations
 
-open import univalent-combinatorics.cycle-prime-decomposition-natural-numbers
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.inhabited-finite-types
+open import univalent-combinatorics.cycle-prime-decomposition-natural-numbers funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.inhabited-finite-types funext univalence truncations
 ```
 
 </details>

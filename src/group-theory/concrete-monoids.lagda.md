@@ -1,22 +1,30 @@
 # Concrete monoids
 
 ```agda
-module group-theory.concrete-monoids where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.concrete-monoids
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
+open import category-theory.categories funext univalence truncations
 
-open import foundation.0-connected-types
-open import foundation.cartesian-product-types
+open import foundation.0-connected-types funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.cores-monoids
-open import group-theory.monoids
-open import group-theory.torsors
+open import group-theory.cores-monoids funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.torsors funext univalence truncations
 ```
 
 </details>

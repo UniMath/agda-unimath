@@ -1,15 +1,23 @@
 # Upper bounds for type families over the natural numbers
 
 ```agda
-module elementary-number-theory.upper-bounds-natural-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.upper-bounds-natural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations
 
 open import foundation.universe-levels
 ```

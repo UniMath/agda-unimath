@@ -1,7 +1,15 @@
 # Morphisms of cocones under morphisms of sequential diagrams
 
 ```agda
-module synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequential-diagrams where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequential-diagrams
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,14 +17,14 @@ module synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequential-di
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.commuting-prisms-of-maps
-open import foundation.commuting-squares-of-maps
+open import foundation.commuting-prisms-of-maps funext univalence
+open import foundation.commuting-squares-of-maps funext univalence
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.morphisms-sequential-diagrams
-open import synthetic-homotopy-theory.sequential-diagrams
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.morphisms-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.sequential-diagrams funext univalence
 ```
 
 </details>

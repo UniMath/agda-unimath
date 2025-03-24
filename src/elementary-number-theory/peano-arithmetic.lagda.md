@@ -1,7 +1,15 @@
 # Peano arithmetic
 
 ```agda
-module elementary-number-theory.peano-arithmetic where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.peano-arithmetic
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,11 +18,12 @@ module elementary-number-theory.peano-arithmetic where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.negated-equality
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 ```
 

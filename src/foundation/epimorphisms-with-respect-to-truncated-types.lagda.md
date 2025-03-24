@@ -1,23 +1,32 @@
 # Epimorphisms with respect to truncated types
 
 ```agda
-module foundation.epimorphisms-with-respect-to-truncated-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.epimorphisms-with-respect-to-truncated-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.connected-maps
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.connected-maps funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.function-extensionality
-open import foundation.functoriality-truncation
-open import foundation.precomposition-functions
-open import foundation.sections
-open import foundation.truncation-equivalences
-open import foundation.truncations
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.function-extensionality funext
+open import foundation.functoriality-truncation funext univalence truncations
+open import foundation.precomposition-functions funext
+open import foundation.sections funext
+open import foundation.truncation-equivalences funext univalence truncations
+open import foundation.truncations funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -31,9 +40,9 @@ open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.codiagonals-of-maps
-open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.codiagonals-of-maps funext univalence truncations
+open import synthetic-homotopy-theory.pushouts funext univalence truncations
 ```
 
 </details>

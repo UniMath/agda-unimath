@@ -1,18 +1,26 @@
 # Intersections of subgroups of abelian groups
 
 ```agda
-module group-theory.intersections-subgroups-abelian-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.intersections-subgroups-abelian-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.subtypes
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.intersections-subgroups-groups
-open import group-theory.subgroups-abelian-groups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.intersections-subgroups-groups funext univalence truncations
+open import group-theory.subgroups-abelian-groups funext univalence truncations
 ```
 
 </details>

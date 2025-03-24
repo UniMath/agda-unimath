@@ -1,7 +1,15 @@
 # Functoriality of the loop space operation
 
 ```agda
-module synthetic-homotopy-theory.functoriality-loop-spaces where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.functoriality-loop-spaces
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,21 +17,21 @@ module synthetic-homotopy-theory.functoriality-loop-spaces where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.faithful-maps
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.faithful-maps funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import structured-types.faithful-pointed-maps
-open import structured-types.pointed-equivalences
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
+open import structured-types.faithful-pointed-maps funext univalence truncations
+open import structured-types.pointed-equivalences funext univalence truncations
+open import structured-types.pointed-homotopies funext univalence truncations
+open import structured-types.pointed-maps funext univalence truncations
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.loop-spaces funext univalence truncations
 ```
 
 </details>

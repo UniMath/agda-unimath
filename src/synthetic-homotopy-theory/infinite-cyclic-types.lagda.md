@@ -1,44 +1,55 @@
 # Infinite cyclic types
 
 ```agda
-module synthetic-homotopy-theory.infinite-cyclic-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.infinite-cyclic-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-integers funext univalence truncations
+open import elementary-number-theory.group-of-integers funext univalence truncations
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-maps
-open import foundation.contractible-types
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.raising-universe-levels
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.equivalences-types-equipped-with-endomorphisms
-open import structured-types.initial-pointed-type-equipped-with-automorphism
-open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
+open import foundation-core.raising-universe-levels
+
+open import structured-types.equivalences-types-equipped-with-endomorphisms funext univalence truncations
+open import structured-types.initial-pointed-type-equipped-with-automorphism funext univalence truncations
+open import structured-types.mere-equivalences-types-equipped-with-endomorphisms funext univalence truncations
 open import structured-types.pointed-types
-open import structured-types.pointed-types-equipped-with-automorphisms
-open import structured-types.types-equipped-with-endomorphisms
+open import structured-types.pointed-types-equipped-with-automorphisms funext univalence truncations
+open import structured-types.types-equipped-with-endomorphisms funext univalence
 
-open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.loop-spaces funext univalence truncations
 
-open import univalent-combinatorics.cyclic-finite-types
+open import univalent-combinatorics.cyclic-finite-types funext univalence truncations
 ```
 
 </details>

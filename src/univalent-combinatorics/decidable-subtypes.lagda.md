@@ -1,37 +1,46 @@
 # Decidable subtypes of finite types
 
 ```agda
-module univalent-combinatorics.decidable-subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation.decidable-subtypes public
+module univalent-combinatorics.decidable-subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation.decidable-subtypes funext univalence truncations public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.exponentiation-natural-numbers
+open import elementary-number-theory.exponentiation-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-propositions
-open import foundation.embeddings
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-equality funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import univalent-combinatorics.decidable-dependent-pair-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.function-types
+open import univalent-combinatorics.decidable-dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.equality-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.function-types funext univalence truncations
 ```
 
 </details>

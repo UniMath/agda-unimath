@@ -1,15 +1,24 @@
 # Copartial functions
 
 ```agda
-module foundation.copartial-functions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.copartial-functions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.copartial-elements
+open import foundation.copartial-elements funext univalence truncations
+open import foundation.dependent-products-propositions funext
 open import foundation.partial-functions
-open import foundation.propositions
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 ```
 

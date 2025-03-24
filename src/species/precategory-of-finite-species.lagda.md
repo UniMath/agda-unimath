@@ -1,18 +1,26 @@
 # The precategory of finite species
 
 ```agda
-module species.precategory-of-finite-species where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.precategory-of-finite-species
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories
+open import category-theory.large-precategories funext univalence truncations
 
 open import foundation.universe-levels
 
-open import species.morphisms-finite-species
-open import species.species-of-finite-types
+open import species.morphisms-finite-species funext univalence truncations
+open import species.species-of-finite-types funext univalence truncations
 ```
 
 </details>

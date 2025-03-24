@@ -1,7 +1,15 @@
 # Alkynes
 
 ```agda
-module organic-chemistry.alkynes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module organic-chemistry.alkynes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,13 +18,13 @@ module organic-chemistry.alkynes where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.embeddings
+open import foundation.embeddings funext
 open import foundation.universe-levels
 
-open import organic-chemistry.hydrocarbons
-open import organic-chemistry.saturated-carbons
+open import organic-chemistry.hydrocarbons funext univalence truncations
+open import organic-chemistry.saturated-carbons funext univalence truncations
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

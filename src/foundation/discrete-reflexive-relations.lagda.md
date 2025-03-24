@@ -1,17 +1,27 @@
 # Discrete reflexive relations
 
 ```agda
-module foundation.discrete-reflexive-relations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.discrete-reflexive-relations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.contractible-types
+open import foundation.binary-relations funext univalence truncations
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.reflexive-relations
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.reflexive-relations funext univalence truncations
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.identity-types

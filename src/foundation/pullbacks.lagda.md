@@ -1,9 +1,17 @@
 # Pullbacks
 
 ```agda
-module foundation.pullbacks where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation-core.pullbacks public
+module foundation.pullbacks
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation-core.pullbacks funext public
 ```
 
 <details><summary>Imports</summary>
@@ -11,37 +19,27 @@ open import foundation-core.pullbacks public
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-cubes-of-maps
-open import foundation.cones-over-cospan-diagrams
+open import foundation.commuting-cubes-of-maps funext univalence
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-sums-pullbacks
-open import foundation.descent-equivalences
+open import foundation.dependent-sums-pullbacks funext
+open import foundation.descent-equivalences funext
 open import foundation.equality-cartesian-product-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-function-types
-open import foundation.standard-pullbacks
-open import foundation.subtypes
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.standard-pullbacks funext
+open import foundation.subtypes funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.cartesian-product-types
-open import foundation-core.constant-maps
 open import foundation-core.contractible-types
-open import foundation-core.diagonal-maps-cartesian-products-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.postcomposition-functions
 open import foundation-core.propositions
-open import foundation-core.retractions
-open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 open import foundation-core.whiskering-identifications-concatenation

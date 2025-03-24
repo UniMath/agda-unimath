@@ -1,7 +1,15 @@
 # Deloopable groups
 
 ```agda
-module higher-group-theory.deloopable-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.deloopable-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,9 +18,9 @@ module higher-group-theory.deloopable-groups where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.groups
+open import group-theory.groups funext univalence truncations
 
-open import higher-group-theory.deloopable-h-spaces
+open import higher-group-theory.deloopable-h-spaces funext univalence truncations
 ```
 
 </details>

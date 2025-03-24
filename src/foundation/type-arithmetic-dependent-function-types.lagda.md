@@ -1,7 +1,13 @@
 # Type arithmetic with dependent function types
 
 ```agda
-module foundation.type-arithmetic-dependent-function-types where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.type-arithmetic-dependent-function-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,15 +15,15 @@ module foundation.type-arithmetic-dependent-function-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.type-arithmetic-unit-type
+open import foundation.dependent-products-contractible-types funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.type-arithmetic-unit-type funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
-open import foundation-core.univalence
 ```
 
 </details>

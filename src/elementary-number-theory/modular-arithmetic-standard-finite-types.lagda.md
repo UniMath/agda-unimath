@@ -1,38 +1,45 @@
 # Modular arithmetic on the standard finite types
 
 ```agda
-module elementary-number-theory.modular-arithmetic-standard-finite-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.modular-arithmetic-standard-finite-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.congruence-natural-numbers
-open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.congruence-natural-numbers funext univalence truncations
+open import elementary-number-theory.distance-natural-numbers funext univalence truncations
+open import elementary-number-theory.divisibility-natural-numbers funext univalence truncations
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.sets
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
 open import foundation.split-surjective-maps
-open import foundation.surjective-maps
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.equality-standard-finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

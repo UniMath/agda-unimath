@@ -1,20 +1,29 @@
 # Surjective semigroup homomorphisms
 
 ```agda
-module group-theory.surjective-semigroup-homomorphisms where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.surjective-semigroup-homomorphisms
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions
-open import foundation.surjective-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.full-subsemigroups
-open import group-theory.homomorphisms-semigroups
-open import group-theory.images-of-semigroup-homomorphisms
-open import group-theory.semigroups
+open import group-theory.full-subsemigroups funext univalence truncations
+open import group-theory.homomorphisms-semigroups funext univalence truncations
+open import group-theory.images-of-semigroup-homomorphisms funext univalence truncations
+open import group-theory.semigroups funext univalence
 ```
 
 </details>

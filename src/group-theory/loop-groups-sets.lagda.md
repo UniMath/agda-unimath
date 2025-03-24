@@ -1,7 +1,15 @@
 # Concrete automorphism groups on sets
 
 ```agda
-module group-theory.loop-groups-sets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.loop-groups-sets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,29 +17,31 @@ module group-theory.loop-groups-sets where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.identity-truncated-types
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
-open import foundation.truncated-types
+open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.identity-truncated-types funext univalence
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.truncated-types funext univalence
 open import foundation.truncation-levels
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
-open import group-theory.automorphism-groups
-open import group-theory.concrete-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-semigroups
-open import group-theory.isomorphisms-groups
-open import group-theory.monoids
-open import group-theory.semigroups
-open import group-theory.symmetric-groups
+open import group-theory.automorphism-groups funext univalence truncations
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.homomorphisms-semigroups funext univalence truncations
+open import group-theory.isomorphisms-groups funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.semigroups funext univalence
+open import group-theory.symmetric-groups funext univalence truncations
 ```
 
 </details>

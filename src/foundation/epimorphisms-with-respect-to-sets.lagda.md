@@ -1,7 +1,15 @@
 # Epimorphisms with respect to maps into sets
 
 ```agda
-module foundation.epimorphisms-with-respect-to-sets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.epimorphisms-with-respect-to-sets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,14 +17,15 @@ module foundation.epimorphisms-with-respect-to-sets where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
-open import foundation.sets
-open import foundation.surjective-maps
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.function-extensionality funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.propositional-extensionality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.raising-universe-levels-unit-type
+open import foundation.sets funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -28,7 +37,6 @@ open import foundation-core.homotopies
 open import foundation-core.precomposition-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
-open import foundation-core.univalence
 ```
 
 </details>

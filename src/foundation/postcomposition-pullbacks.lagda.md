@@ -1,17 +1,21 @@
 # Postcomposition of pullbacks
 
 ```agda
-module foundation.postcomposition-pullbacks where
+open import foundation.function-extensionality-axiom
+
+module foundation.postcomposition-pullbacks
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospan-diagrams
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.standard-pullbacks
+open import foundation.function-extensionality funext
+open import foundation.identity-types funext
+open import foundation.standard-pullbacks funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -20,10 +24,9 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.homotopies
 open import foundation-core.postcomposition-functions
-open import foundation-core.pullbacks
-open import foundation-core.universal-property-pullbacks
+open import foundation-core.pullbacks funext
+open import foundation-core.universal-property-pullbacks funext
 ```
 
 </details>

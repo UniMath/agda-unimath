@@ -1,21 +1,30 @@
 # Surjective group homomorphisms
 
 ```agda
-module group-theory.surjective-group-homomorphisms where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.surjective-group-homomorphisms
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions
-open import foundation.surjective-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.full-subgroups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.images-of-group-homomorphisms
-open import group-theory.surjective-semigroup-homomorphisms
+open import group-theory.full-subgroups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.images-of-group-homomorphisms funext univalence truncations
+open import group-theory.surjective-semigroup-homomorphisms funext univalence truncations
 ```
 
 </details>

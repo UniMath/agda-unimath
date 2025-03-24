@@ -2,18 +2,25 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module elementary-number-theory.infinite-conatural-numbers where
+module elementary-number-theory.infinite-conatural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.conatural-numbers
-open import elementary-number-theory.equality-conatural-numbers
+open import elementary-number-theory.conatural-numbers funext univalence truncations
+open import elementary-number-theory.equality-conatural-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.identity-types

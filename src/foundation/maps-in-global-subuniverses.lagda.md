@@ -1,17 +1,26 @@
 # Maps in global subuniverses
 
 ```agda
-module foundation.maps-in-global-subuniverses where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.maps-in-global-subuniverses
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-morphisms-arrows
+open import foundation.cartesian-morphisms-arrows funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.fibers-of-maps
-open import foundation.functoriality-fibers-of-maps
-open import foundation.global-subuniverses
+open import foundation.dependent-products-propositions funext
+open import foundation.fibers-of-maps funext
+open import foundation.functoriality-fibers-of-maps funext
+open import foundation.global-subuniverses funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
 

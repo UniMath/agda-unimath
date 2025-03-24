@@ -1,18 +1,22 @@
 # The universal property of booleans
 
 ```agda
-module foundation.universal-property-booleans where
+open import foundation.function-extensionality-axiom
+
+module foundation.universal-property-booleans
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.booleans
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.function-extensionality
+open import foundation.function-extensionality funext
 open import foundation.universe-levels
 
+open import foundation-core.booleans
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types

@@ -1,17 +1,26 @@
 # Mere lifting properties
 
 ```agda
-module orthogonal-factorization-systems.mere-lifting-properties where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.mere-lifting-properties
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions
-open import foundation.surjective-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.pullback-hom
+open import orthogonal-factorization-systems.pullback-hom funext univalence truncations
 ```
 
 </details>

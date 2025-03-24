@@ -1,24 +1,31 @@
 # Cayley's theorem
 
 ```agda
-module group-theory.cayleys-theorem where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.cayleys-theorem
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalence-extensionality
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.sets
+open import foundation.embeddings funext
+open import foundation.equivalence-extensionality funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
 open import foundation.universe-levels
 
-open import group-theory.embeddings-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.symmetric-groups
+open import group-theory.embeddings-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.symmetric-groups funext univalence truncations
 ```
 
 </details>

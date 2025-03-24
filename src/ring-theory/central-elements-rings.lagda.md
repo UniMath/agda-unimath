@@ -1,19 +1,28 @@
 # Central elements of rings
 
 ```agda
-module ring-theory.central-elements-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.central-elements-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import ring-theory.central-elements-semirings
-open import ring-theory.rings
+open import ring-theory.central-elements-semirings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

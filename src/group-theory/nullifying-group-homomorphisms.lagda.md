@@ -1,26 +1,35 @@
 # Nullifying group homomorphisms
 
 ```agda
-module group-theory.nullifying-group-homomorphisms where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.nullifying-group-homomorphisms
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.reflecting-maps-equivalence-relations funext univalence truncations
+open import foundation.subtypes funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-groups-equipped-with-normal-subgroups
-open import group-theory.kernels-homomorphisms-groups
-open import group-theory.normal-subgroups
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.homomorphisms-groups-equipped-with-normal-subgroups funext univalence truncations
+open import group-theory.kernels-homomorphisms-groups funext univalence truncations
+open import group-theory.normal-subgroups funext univalence truncations
 ```
 
 </details>

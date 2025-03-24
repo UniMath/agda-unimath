@@ -1,22 +1,30 @@
 # Function commutative semirings
 
 ```agda
-module commutative-algebra.function-commutative-semirings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.function-commutative-semirings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-semirings
-open import commutative-algebra.dependent-products-commutative-semirings
+open import commutative-algebra.commutative-semirings funext univalence truncations
+open import commutative-algebra.dependent-products-commutative-semirings funext univalence truncations
 
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import group-theory.commutative-monoids
+open import group-theory.commutative-monoids funext univalence truncations
 
-open import ring-theory.semirings
+open import ring-theory.semirings funext univalence truncations
 ```
 
 </details>

@@ -1,23 +1,31 @@
 # Equivalences of pointed arrows
 
 ```agda
-module structured-types.equivalences-pointed-arrows where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.equivalences-pointed-arrows
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.equivalences-arrows
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.equivalences-arrows funext univalence truncations
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import structured-types.commuting-squares-of-pointed-maps
-open import structured-types.pointed-equivalences
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
+open import structured-types.commuting-squares-of-pointed-maps funext univalence truncations
+open import structured-types.pointed-equivalences funext univalence truncations
+open import structured-types.pointed-homotopies funext univalence truncations
+open import structured-types.pointed-maps funext univalence truncations
 open import structured-types.pointed-types
 ```
 

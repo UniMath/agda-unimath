@@ -1,22 +1,30 @@
 # Intersections of ideals of rings
 
 ```agda
-module ring-theory.intersections-ideals-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.intersections-ideals-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.intersections-subtypes
+open import foundation.intersections-subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import order-theory.greatest-lower-bounds-large-posets
+open import order-theory.greatest-lower-bounds-large-posets funext univalence truncations
 
-open import ring-theory.ideals-rings
-open import ring-theory.poset-of-ideals-rings
-open import ring-theory.rings
-open import ring-theory.subsets-rings
+open import ring-theory.ideals-rings funext univalence truncations
+open import ring-theory.poset-of-ideals-rings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
+open import ring-theory.subsets-rings funext univalence truncations
 ```
 
 </details>

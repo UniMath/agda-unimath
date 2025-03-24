@@ -1,22 +1,31 @@
 # Simple undirected graphs
 
 ```agda
-module graph-theory.simple-undirected-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.simple-undirected-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.negation
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.negation funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
-open import foundation.unordered-pairs
+open import foundation.unordered-pairs funext univalence truncations
 
-open import graph-theory.undirected-graphs
+open import graph-theory.undirected-graphs funext univalence truncations
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

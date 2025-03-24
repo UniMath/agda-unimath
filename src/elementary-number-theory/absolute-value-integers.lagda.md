@@ -1,26 +1,34 @@
 # The absolute value function on the integers
 
 ```agda
-module elementary-number-theory.absolute-value-integers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.absolute-value-integers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-integers funext univalence truncations
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-integers funext univalence truncations
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonnegative-integers
-open import elementary-number-theory.positive-integers
+open import elementary-number-theory.nonnegative-integers funext univalence truncations
+open import elementary-number-theory.positive-integers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.unit-type
 ```
 

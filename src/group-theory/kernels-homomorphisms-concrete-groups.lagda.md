@@ -1,26 +1,34 @@
 # Kernels of homomorphisms of concrete groups
 
 ```agda
-module group-theory.kernels-homomorphisms-concrete-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.kernels-homomorphisms-concrete-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
-open import foundation.1-types
-open import foundation.connected-components
+open import foundation.0-connected-types funext univalence truncations
+open import foundation.1-types funext univalence
+open import foundation.connected-components funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.fibers-of-maps
-open import foundation.sets
-open import foundation.truncated-maps
+open import foundation.fibers-of-maps funext
+open import foundation.sets funext univalence
+open import foundation.truncated-maps funext
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
-open import group-theory.homomorphisms-concrete-groups
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.homomorphisms-concrete-groups funext univalence truncations
 
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-groups funext univalence truncations
 
 open import structured-types.pointed-types
 ```

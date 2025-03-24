@@ -1,34 +1,42 @@
 # The category of maps and natural transformations between two categories
 
 ```agda
-module category-theory.category-of-maps-categories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.category-of-maps-categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.commuting-squares-of-morphisms-in-precategories
-open import category-theory.isomorphisms-in-categories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.maps-categories
-open import category-theory.maps-precategories
-open import category-theory.natural-isomorphisms-maps-categories
-open import category-theory.natural-isomorphisms-maps-precategories
-open import category-theory.natural-transformations-maps-precategories
-open import category-theory.precategories
-open import category-theory.precategory-of-maps-precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.commuting-squares-of-morphisms-in-precategories funext univalence truncations
+open import category-theory.isomorphisms-in-categories funext univalence truncations
+open import category-theory.isomorphisms-in-precategories funext univalence truncations
+open import category-theory.maps-categories funext univalence truncations
+open import category-theory.maps-precategories funext univalence truncations
+open import category-theory.natural-isomorphisms-maps-categories funext univalence truncations
+open import category-theory.natural-isomorphisms-maps-precategories funext univalence truncations
+open import category-theory.natural-transformations-maps-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
+open import category-theory.precategory-of-maps-precategories funext univalence truncations
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
-open import foundation.univalence
+open import foundation.type-theoretic-principle-of-choice funext
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 ```
 

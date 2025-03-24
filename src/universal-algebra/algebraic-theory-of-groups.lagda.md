@@ -1,7 +1,15 @@
 # Algebraic theory of groups
 
 ```agda
-module universal-algebra.algebraic-theory-of-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module universal-algebra.algebraic-theory-of-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,21 +18,22 @@ module universal-algebra.algebraic-theory-of-groups where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import group-theory.groups
+open import group-theory.groups funext univalence truncations
 
-open import linear-algebra.vectors
+open import linear-algebra.vectors funext univalence truncations
 
-open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-theories
-open import universal-algebra.signatures
-open import universal-algebra.terms-over-signatures
+open import universal-algebra.algebraic-theories funext univalence truncations
+open import universal-algebra.algebras-of-theories funext univalence truncations
+open import universal-algebra.signatures funext univalence
+open import universal-algebra.terms-over-signatures funext univalence truncations
 ```
 
 </details>

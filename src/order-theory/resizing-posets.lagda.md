@@ -1,33 +1,42 @@
 # Resizing posets
 
 ```agda
-module order-theory.resizing-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.resizing-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-large-precategories
+open import category-theory.isomorphisms-in-large-precategories funext univalence truncations
 
-open import foundation.binary-relations
-open import foundation.cartesian-product-types
+open import foundation.binary-relations funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.propositions
-open import foundation.sets
-open import foundation.small-types
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.negation funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.small-types funext univalence truncations
 open import foundation.universe-levels
 
-open import order-theory.order-preserving-maps-posets
-open import order-theory.posets
-open import order-theory.precategory-of-posets
-open import order-theory.preorders
-open import order-theory.resizing-preorders
+open import order-theory.order-preserving-maps-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.precategory-of-posets funext univalence truncations
+open import order-theory.preorders funext univalence truncations
+open import order-theory.resizing-preorders funext univalence truncations
 ```
 
 </details>

@@ -1,19 +1,28 @@
 # Cyclic higher groups
 
 ```agda
-module higher-group-theory.cyclic-higher-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.cyclic-higher-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.embeddings
-open import foundation.existential-quantification
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups
-open import higher-group-theory.homomorphisms-higher-groups
+open import higher-group-theory.higher-groups funext univalence truncations
+open import higher-group-theory.homomorphisms-higher-groups funext univalence truncations
 ```
 
 </details>

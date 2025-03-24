@@ -1,7 +1,15 @@
 # Sequential colimits
 
 ```agda
-module synthetic-homotopy-theory.sequential-colimits where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.sequential-colimits
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,23 +17,24 @@ module synthetic-homotopy-theory.sequential-colimits where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.commuting-triangles-of-maps
+open import foundation.commuting-triangles-of-maps funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.coequalizers
-open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.dependent-universal-property-sequential-colimits
-open import synthetic-homotopy-theory.sequential-diagrams
-open import synthetic-homotopy-theory.universal-property-sequential-colimits
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.coequalizers funext univalence truncations
+open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.dependent-universal-property-sequential-colimits funext univalence truncations
+open import synthetic-homotopy-theory.sequential-diagrams funext univalence
+open import synthetic-homotopy-theory.universal-property-sequential-colimits funext univalence truncations
 ```
 
 </details>

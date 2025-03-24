@@ -2,55 +2,63 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module elementary-number-theory.strict-inequality-rational-numbers where
+module elementary-number-theory.strict-inequality-rational-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integer-fractions
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.additive-group-of-rational-numbers
-open import elementary-number-theory.cross-multiplication-difference-integer-fractions
-open import elementary-number-theory.difference-integers
-open import elementary-number-theory.difference-rational-numbers
-open import elementary-number-theory.inequality-integer-fractions
-open import elementary-number-theory.inequality-integers
-open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.addition-integer-fractions funext univalence truncations
+open import elementary-number-theory.addition-rational-numbers funext univalence truncations
+open import elementary-number-theory.additive-group-of-rational-numbers funext univalence truncations
+open import elementary-number-theory.cross-multiplication-difference-integer-fractions funext univalence truncations
+open import elementary-number-theory.difference-integers funext univalence truncations
+open import elementary-number-theory.difference-rational-numbers funext univalence truncations
+open import elementary-number-theory.inequality-integer-fractions funext univalence truncations
+open import elementary-number-theory.inequality-integers funext univalence truncations
+open import elementary-number-theory.inequality-rational-numbers funext univalence truncations
+open import elementary-number-theory.integer-fractions funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.mediant-integer-fractions
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.nonnegative-integers
-open import elementary-number-theory.nonpositive-integers
-open import elementary-number-theory.positive-and-negative-integers
-open import elementary-number-theory.positive-integers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.reduced-integer-fractions
-open import elementary-number-theory.strict-inequality-integer-fractions
-open import elementary-number-theory.strict-inequality-integers
+open import elementary-number-theory.mediant-integer-fractions funext univalence truncations
+open import elementary-number-theory.multiplication-integers funext univalence truncations
+open import elementary-number-theory.nonnegative-integers funext univalence truncations
+open import elementary-number-theory.nonpositive-integers funext univalence truncations
+open import elementary-number-theory.positive-and-negative-integers funext univalence truncations
+open import elementary-number-theory.positive-integers funext univalence truncations
+open import elementary-number-theory.rational-numbers funext univalence truncations
+open import elementary-number-theory.reduced-integer-fractions funext univalence truncations
+open import elementary-number-theory.strict-inequality-integer-fractions funext univalence truncations
+open import elementary-number-theory.strict-inequality-integers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
-open import foundation.cartesian-product-types
-open import foundation.conjunction
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
+open import foundation.binary-relations funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
+open import foundation.conjunction funext univalence truncations
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext univalence truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.groups
+open import group-theory.groups funext univalence truncations
 ```
 
 </details>

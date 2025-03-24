@@ -1,18 +1,26 @@
 # The infinite complex projective space
 
 ```agda
-module synthetic-homotopy-theory.infinite-complex-projective-space where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.infinite-complex-projective-space
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.set-truncations
+open import foundation.equivalences funext
+open import foundation.set-truncations funext univalence
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.circle
+open import synthetic-homotopy-theory.circle funext univalence truncations
 ```
 
 </details>

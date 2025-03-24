@@ -1,19 +1,26 @@
 # The univalence axiom implies function extensionality
 
 ```agda
-module foundation.univalence-implies-function-extensionality where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.univalence-implies-function-extensionality
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalence-induction
-open import foundation.function-extensionality
-open import foundation.postcomposition-functions
+open import foundation.equivalence-induction funext univalence
+open import foundation.postcomposition-functions funext
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-open import foundation.weak-function-extensionality
+open import foundation.weak-function-extensionality funext univalence truncations
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types

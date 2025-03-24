@@ -1,45 +1,55 @@
 # The standard finite types
 
 ```agda
-module univalent-combinatorics.standard-finite-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.standard-finite-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations
 
-open import foundation.action-on-higher-identifications-functions
+open import foundation.action-on-higher-identifications-functions funext
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equality-coproduct-types
-open import foundation.equivalence-injective-type-families
-open import foundation.equivalences
-open import foundation.equivalences-maybe
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.noncontractible-types
-open import foundation.preunivalent-type-families
-open import foundation.raising-universe-levels
-open import foundation.retractions
-open import foundation.sets
+open import foundation.dependent-products-contractible-types funext
+open import foundation.embeddings funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equality-coproduct-types funext univalence truncations
+open import foundation.equivalence-injective-type-families funext univalence
+open import foundation.equivalences funext
+open import foundation.equivalences-maybe funext univalence truncations
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.negation funext
+open import foundation.noncontractible-types funext univalence truncations
+open import foundation.preunivalent-type-families funext univalence
+open import foundation.retractions funext
+open import foundation.sets funext univalence
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.types-equipped-with-endomorphisms
+open import foundation-core.raising-universe-levels
+
+open import structured-types.types-equipped-with-endomorphisms funext univalence
 ```
 
 </details>

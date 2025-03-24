@@ -1,19 +1,27 @@
 # Products of equivalence relataions
 
 ```agda
-module foundation.products-equivalence-relations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.products-equivalence-relations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.products-binary-relations
+open import foundation.products-binary-relations funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.equivalence-relations
+open import foundation-core.equivalence-relations funext univalence truncations
 ```
 
 </details>

@@ -1,21 +1,29 @@
 # Images of subtypes
 
 ```agda
-module foundation.images-subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.images-subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.full-subtypes
-open import foundation.functoriality-propositional-truncation
-open import foundation.images
-open import foundation.logical-equivalences
-open import foundation.powersets
-open import foundation.propositional-truncations
-open import foundation.pullbacks-subtypes
-open import foundation.subtypes
+open import foundation.full-subtypes funext univalence truncations
+open import foundation.functoriality-propositional-truncation funext univalence truncations
+open import foundation.images funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.powersets funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.pullbacks-subtypes funext univalence truncations
+open import foundation.subtypes funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -25,10 +33,10 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
 
-open import order-theory.galois-connections-large-posets
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.similarity-of-order-preserving-maps-large-posets
+open import order-theory.galois-connections-large-posets funext univalence truncations
+open import order-theory.order-preserving-maps-large-posets funext univalence truncations
+open import order-theory.order-preserving-maps-large-preorders funext univalence truncations
+open import order-theory.similarity-of-order-preserving-maps-large-posets funext univalence truncations
 ```
 
 </details>

@@ -1,18 +1,24 @@
 # Equivalences of species of types in subuniverses
 
 ```agda
-module species.equivalences-species-of-types-in-subuniverses where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.equivalences-species-of-types-in-subuniverses
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.subuniverses
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.subuniverses funext univalence
 open import foundation.universe-levels
 
-open import species.species-of-types-in-subuniverses
+open import species.species-of-types-in-subuniverses funext univalence
 ```
 
 </details>

@@ -2,8 +2,15 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module foundation.wild-category-of-types where
+module foundation.wild-category-of-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,11 +18,11 @@ module foundation.wild-category-of-types where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.globular-type-of-functions
-open import foundation.homotopies
-open import foundation.isomorphisms-of-sets
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
+open import foundation.globular-type-of-functions funext univalence truncations
+open import foundation.homotopies funext
+open import foundation.isomorphisms-of-sets funext univalence
+open import foundation.sets funext univalence
+open import foundation.strictly-involutive-identity-types funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -26,13 +33,13 @@ open import foundation-core.identity-types
 
 open import globular-types.globular-types
 open import globular-types.large-globular-types
-open import globular-types.large-reflexive-globular-types
-open import globular-types.large-transitive-globular-types
-open import globular-types.reflexive-globular-types
-open import globular-types.transitive-globular-types
+open import globular-types.large-reflexive-globular-types funext univalence truncations
+open import globular-types.large-transitive-globular-types funext univalence truncations
+open import globular-types.reflexive-globular-types funext univalence truncations
+open import globular-types.transitive-globular-types funext univalence truncations
 
-open import wild-category-theory.noncoherent-large-omega-precategories
-open import wild-category-theory.noncoherent-omega-precategories
+open import wild-category-theory.noncoherent-large-omega-precategories funext univalence truncations
+open import wild-category-theory.noncoherent-omega-precategories funext univalence truncations
 ```
 
 </details>

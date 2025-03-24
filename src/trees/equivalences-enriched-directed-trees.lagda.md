@@ -1,34 +1,43 @@
 # Equivalences of enriched directed trees
 
 ```agda
-module trees.equivalences-enriched-directed-trees where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.equivalences-enriched-directed-trees
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-maps
-open import foundation.contractible-types
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.commuting-triangles-of-maps funext univalence
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equality-dependent-function-types funext
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import trees.enriched-directed-trees
-open import trees.equivalences-directed-trees
-open import trees.morphisms-directed-trees
-open import trees.morphisms-enriched-directed-trees
-open import trees.rooted-morphisms-enriched-directed-trees
+open import trees.enriched-directed-trees funext univalence truncations
+open import trees.equivalences-directed-trees funext univalence truncations
+open import trees.morphisms-directed-trees funext univalence truncations
+open import trees.morphisms-enriched-directed-trees funext univalence truncations
+open import trees.rooted-morphisms-enriched-directed-trees funext univalence truncations
 ```
 
 </details>

@@ -1,7 +1,15 @@
 # Displayed large reflexive graphs
 
 ```agda
-module graph-theory.displayed-large-reflexive-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.displayed-large-reflexive-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,7 +19,7 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import graph-theory.large-reflexive-graphs
-open import graph-theory.reflexive-graphs
+open import graph-theory.reflexive-graphs funext univalence truncations
 ```
 
 </details>

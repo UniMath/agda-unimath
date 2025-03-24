@@ -1,22 +1,30 @@
 # Symmetric concrete groups
 
 ```agda
-module group-theory.symmetric-concrete-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.symmetric-concrete-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.mere-equality
-open import foundation.sets
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.mere-equality funext univalence truncations
+open import foundation.sets funext univalence
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
-open import group-theory.automorphism-groups
-open import group-theory.concrete-groups
+open import group-theory.automorphism-groups funext univalence truncations
+open import group-theory.concrete-groups funext univalence truncations
 ```
 
 </details>

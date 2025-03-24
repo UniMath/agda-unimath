@@ -1,7 +1,15 @@
 # Composite maps in inverse sequential diagrams
 
 ```agda
-module foundation.composite-maps-in-inverse-sequential-diagrams where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.composite-maps-in-inverse-sequential-diagrams
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,8 +18,8 @@ module foundation.composite-maps-in-inverse-sequential-diagrams where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-inverse-sequential-diagrams
-open import foundation.inverse-sequential-diagrams
+open import foundation.dependent-inverse-sequential-diagrams funext univalence truncations
+open import foundation.inverse-sequential-diagrams funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.function-types

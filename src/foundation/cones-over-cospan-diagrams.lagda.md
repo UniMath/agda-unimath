@@ -1,7 +1,11 @@
 # Cones over cospan diagrams
 
 ```agda
-module foundation.cones-over-cospan-diagrams where
+open import foundation.function-extensionality-axiom
+
+module foundation.cones-over-cospan-diagrams
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,18 +13,19 @@ module foundation.cones-over-cospan-diagrams where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.function-extensionality
+open import foundation.dependent-universal-property-equivalences funext
+open import foundation.function-extensionality funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.multivariable-homotopies
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.multivariable-homotopies funext
 open import foundation.structure-identity-principle
+open import foundation.telescopes
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types

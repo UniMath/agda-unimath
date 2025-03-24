@@ -1,22 +1,30 @@
 # Subsets of abelian groups
 
 ```agda
-module group-theory.subsets-abelian-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.subsets-abelian-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-locale-of-subtypes
-open import foundation.powersets
-open import foundation.sets
+open import foundation.large-locale-of-subtypes funext univalence truncations
+open import foundation.powersets funext univalence truncations
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.subsets-groups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.subsets-groups funext univalence truncations
 
-open import order-theory.large-locales
-open import order-theory.large-posets
+open import order-theory.large-locales funext univalence truncations
+open import order-theory.large-posets funext univalence truncations
 ```
 
 </details>

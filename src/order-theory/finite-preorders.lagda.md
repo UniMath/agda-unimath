@@ -1,7 +1,15 @@
 # Finite preorders
 
 ```agda
-module order-theory.finite-preorders where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.finite-preorders
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,26 +17,27 @@ module order-theory.finite-preorders where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-relations
-open import foundation.cartesian-product-types
-open import foundation.decidable-equality
-open import foundation.decidable-propositions
-open import foundation.decidable-types
+open import foundation.binary-relations funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
+open import foundation.decidable-equality funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.mere-equivalences
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.mere-equivalences funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import order-theory.decidable-preorders
-open import order-theory.decidable-subpreorders
-open import order-theory.preorders
+open import order-theory.decidable-preorders funext univalence truncations
+open import order-theory.decidable-subpreorders funext univalence truncations
+open import order-theory.preorders funext univalence truncations
 
-open import univalent-combinatorics.decidable-subtypes
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.decidable-subtypes funext univalence truncations
+open import univalent-combinatorics.equality-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

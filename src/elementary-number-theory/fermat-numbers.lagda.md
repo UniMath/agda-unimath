@@ -1,19 +1,27 @@
 # Fermat numbers
 
 ```agda
-module elementary-number-theory.fermat-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.fermat-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.exponentiation-natural-numbers
+open import elementary-number-theory.exponentiation-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.products-of-natural-numbers
-open import elementary-number-theory.strong-induction-natural-numbers
+open import elementary-number-theory.products-of-natural-numbers funext univalence truncations
+open import elementary-number-theory.strong-induction-natural-numbers funext univalence truncations
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

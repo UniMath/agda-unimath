@@ -1,32 +1,41 @@
 # Descent property of pushouts
 
 ```agda
-module synthetic-homotopy-theory.descent-property-pushouts where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.descent-property-pushouts
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-triangles-of-maps
-open import foundation.contractible-maps
-open import foundation.contractible-types
+open import foundation.commuting-triangles-of-maps funext univalence
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.span-diagrams
-open import foundation.univalence
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-extensionality funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.span-diagrams funext
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.descent-data-pushouts
-open import synthetic-homotopy-theory.equivalences-descent-data-pushouts
-open import synthetic-homotopy-theory.families-descent-data-pushouts
-open import synthetic-homotopy-theory.universal-property-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.descent-data-pushouts funext
+open import synthetic-homotopy-theory.equivalences-descent-data-pushouts funext univalence truncations
+open import synthetic-homotopy-theory.families-descent-data-pushouts funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-pushouts funext univalence truncations
 ```
 
 </details>

@@ -1,27 +1,35 @@
 # Homomorphisms of abelian groups
 
 ```agda
-module group-theory.homomorphisms-abelian-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.homomorphisms-abelian-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-categories
+open import category-theory.large-categories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.sets
-open import foundation.torsorial-type-families
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.category-of-abelian-groups
-open import group-theory.homomorphisms-commutative-monoids
-open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-semigroups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.category-of-abelian-groups funext univalence truncations
+open import group-theory.homomorphisms-commutative-monoids funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.homomorphisms-semigroups funext univalence truncations
 ```
 
 </details>

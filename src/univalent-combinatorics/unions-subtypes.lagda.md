@@ -1,25 +1,33 @@
 # Unions of finite subtypes
 
 ```agda
-module univalent-combinatorics.unions-subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation.unions-subtypes public
+module univalent-combinatorics.unions-subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation.unions-subtypes funext univalence truncations public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-equality
-open import foundation.propositional-truncations
-open import foundation.subtypes
+open import foundation.decidable-equality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-decidable-subtypes
-open import univalent-combinatorics.counting-dependent-pair-types
-open import univalent-combinatorics.embeddings
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.coproduct-types funext univalence truncations
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.counting-decidable-subtypes funext univalence truncations
+open import univalent-combinatorics.counting-dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.embeddings funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

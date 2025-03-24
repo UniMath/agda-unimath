@@ -1,21 +1,30 @@
 # Central elements of groups
 
 ```agda
-module group-theory.central-elements-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.central-elements-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.central-elements-monoids
-open import group-theory.conjugation
-open import group-theory.groups
+open import group-theory.central-elements-monoids funext univalence truncations
+open import group-theory.conjugation funext univalence truncations
+open import group-theory.groups funext univalence truncations
 ```
 
 </details>

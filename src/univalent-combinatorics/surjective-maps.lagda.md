@@ -1,9 +1,17 @@
 # Surjective maps between finite types
 
 ```agda
-module univalent-combinatorics.surjective-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation.surjective-maps public
+module univalent-combinatorics.surjective-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation.surjective-maps funext univalence truncations public
 ```
 
 <details><summary>Imports</summary>
@@ -11,26 +19,27 @@ open import foundation.surjective-maps public
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
-open import foundation.decidable-embeddings
-open import foundation.decidable-equality
-open import foundation.decidable-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.decidable-embeddings funext univalence truncations
+open import foundation.decidable-equality funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.logical-equivalences funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-decidable-subtypes
-open import univalent-combinatorics.counting-dependent-pair-types
-open import univalent-combinatorics.decidable-dependent-function-types
-open import univalent-combinatorics.embeddings
-open import univalent-combinatorics.fibers-of-maps
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.counting-decidable-subtypes funext univalence truncations
+open import univalent-combinatorics.counting-dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.decidable-dependent-function-types funext univalence truncations
+open import univalent-combinatorics.embeddings funext univalence truncations
+open import univalent-combinatorics.fibers-of-maps funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

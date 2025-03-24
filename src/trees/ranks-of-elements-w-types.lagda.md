@@ -1,26 +1,35 @@
 # Ranks of elements in W-types
 
 ```agda
-module trees.ranks-of-elements-w-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.ranks-of-elements-w-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import trees.elementhood-relation-w-types
-open import trees.inequality-w-types
-open import trees.w-types
+open import trees.elementhood-relation-w-types funext univalence truncations
+open import trees.inequality-w-types funext univalence truncations
+open import trees.w-types funext univalence truncations
 ```
 
 </details>

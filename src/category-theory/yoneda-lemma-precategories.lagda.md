@@ -1,27 +1,35 @@
 # The Yoneda lemma for precategories
 
 ```agda
-module category-theory.yoneda-lemma-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.yoneda-lemma-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.copresheaf-categories
-open import category-theory.functors-from-small-to-large-precategories
-open import category-theory.natural-transformations-functors-from-small-to-large-precategories
-open import category-theory.precategories
-open import category-theory.representable-functors-precategories
+open import category-theory.copresheaf-categories funext univalence truncations
+open import category-theory.functors-from-small-to-large-precategories funext univalence truncations
+open import category-theory.natural-transformations-functors-from-small-to-large-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
+open import category-theory.representable-functors-precategories funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.category-of-sets
+open import foundation.category-of-sets funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.subtypes
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 ```
 

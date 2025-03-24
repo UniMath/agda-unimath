@@ -2,8 +2,15 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module trees.coalgebra-of-enriched-directed-trees where
+module trees.coalgebra-of-enriched-directed-trees
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,10 +19,10 @@ module trees.coalgebra-of-enriched-directed-trees where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import trees.coalgebras-polynomial-endofunctors
-open import trees.enriched-directed-trees
-open import trees.fibers-enriched-directed-trees
-open import trees.polynomial-endofunctors
+open import trees.coalgebras-polynomial-endofunctors funext univalence
+open import trees.enriched-directed-trees funext univalence truncations
+open import trees.fibers-enriched-directed-trees funext univalence truncations
+open import trees.polynomial-endofunctors funext univalence
 ```
 
 </details>

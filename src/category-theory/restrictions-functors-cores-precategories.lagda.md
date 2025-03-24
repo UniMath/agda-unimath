@@ -1,23 +1,31 @@
 # Restrictions of functors to cores of precategories
 
 ```agda
-module category-theory.restrictions-functors-cores-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.restrictions-functors-cores-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.cores-precategories
-open import category-theory.faithful-functors-precategories
-open import category-theory.fully-faithful-functors-precategories
-open import category-theory.functors-precategories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.maps-precategories
-open import category-theory.precategories
-open import category-theory.pseudomonic-functors-precategories
+open import category-theory.cores-precategories funext univalence truncations
+open import category-theory.faithful-functors-precategories funext univalence truncations
+open import category-theory.fully-faithful-functors-precategories funext univalence truncations
+open import category-theory.functors-precategories funext univalence truncations
+open import category-theory.isomorphisms-in-precategories funext univalence truncations
+open import category-theory.maps-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
+open import category-theory.pseudomonic-functors-precategories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.subtypes
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 ```
 

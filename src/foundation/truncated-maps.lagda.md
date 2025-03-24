@@ -1,22 +1,28 @@
 # Truncated maps
 
 ```agda
-module foundation.truncated-maps where
+open import foundation.function-extensionality-axiom
 
-open import foundation-core.truncated-maps public
+module foundation.truncated-maps
+  (funext : function-extensionality)
+  where
+
+open import foundation.dependent-products-truncated-types funext public
+open import foundation-core.truncated-maps funext public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospan-diagrams
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.functoriality-fibers-of-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.functoriality-fibers-of-maps funext
 open import foundation.universe-levels
 
 open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
-open import foundation-core.pullbacks
+open import foundation-core.pullbacks funext
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

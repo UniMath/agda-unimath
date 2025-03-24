@@ -1,28 +1,33 @@
 # The universal property of propositional truncations
 
 ```agda
-module foundation.universal-property-propositional-truncation where
+open import foundation.function-extensionality-axiom
+
+module foundation.universal-property-propositional-truncation
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functoriality-cartesian-product-types
-open import foundation.logical-equivalences
-open import foundation.precomposition-functions-into-subuniverses
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.logical-equivalences funext
+open import foundation.precomposition-functions-into-subuniverses funext
 open import foundation.subtype-identity-principle
 open import foundation.unit-type
-open import foundation.universal-property-dependent-pair-types
-open import foundation.universal-property-equivalences
+open import foundation.universal-property-dependent-pair-types funext
+open import foundation.universal-property-equivalences funext
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

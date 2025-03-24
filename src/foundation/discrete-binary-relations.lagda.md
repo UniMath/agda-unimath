@@ -1,15 +1,24 @@
 # Discrete binary relations
 
 ```agda
-module foundation.discrete-binary-relations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.discrete-binary-relations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.empty-types
-open import foundation.propositions
+open import foundation.binary-relations funext univalence truncations
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 ```
 

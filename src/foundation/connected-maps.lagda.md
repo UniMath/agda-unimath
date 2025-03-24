@@ -1,25 +1,34 @@
 # Connected maps
 
 ```agda
-module foundation.connected-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.connected-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.connected-types
+open import foundation.connected-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-truncated-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
-open import foundation.precomposition-dependent-functions
+open import foundation.homotopy-induction funext
+open import foundation.precomposition-dependent-functions funext
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
-open import foundation.truncated-types
+open import foundation.truncated-types funext univalence
 open import foundation.truncation-levels
-open import foundation.truncations
-open import foundation.univalence
-open import foundation.universal-property-family-of-fibers-of-maps
+open import foundation.truncations funext univalence truncations
+open import foundation.univalence funext univalence
+open import foundation.universal-property-family-of-fibers-of-maps funext
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
@@ -31,9 +40,9 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 open import foundation-core.torsorial-type-families
-open import foundation-core.truncated-maps
+open import foundation-core.truncated-maps funext
 ```
 
 </details>

@@ -1,22 +1,31 @@
 # Cyclic types
 
 ```agda
-module structured-types.cyclic-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.cyclic-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.automorphisms
+open import foundation.automorphisms funext univalence
 open import foundation.dependent-pair-types
-open import foundation.iterating-automorphisms
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
-open import foundation.surjective-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.iterating-automorphisms funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
-open import structured-types.sets-equipped-with-automorphisms
+open import structured-types.sets-equipped-with-automorphisms funext univalence
 ```
 
 </details>

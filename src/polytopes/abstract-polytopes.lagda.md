@@ -1,33 +1,44 @@
 # Abstract polytopes
 
 ```agda
-module polytopes.abstract-polytopes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module polytopes.abstract-polytopes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.inequality-standard-finite-types funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-relations
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
+open import foundation.binary-relations funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.raising-universe-levels-unit-type
+open import foundation.sets funext univalence
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import order-theory.finitely-graded-posets
-open import order-theory.posets
+open import order-theory.finitely-graded-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
 
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

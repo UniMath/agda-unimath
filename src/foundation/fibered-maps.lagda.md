@@ -1,26 +1,36 @@
 # Maps fibered over a map
 
 ```agda
-module foundation.fibered-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.fibered-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospan-diagrams
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.function-extensionality funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
-open import foundation.slice
+open import foundation.homotopy-induction funext
+open import foundation.slice funext univalence
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.universal-property-empty-type
+open import foundation.universal-property-empty-type funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.contractible-types
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
@@ -29,7 +39,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.small-types
+open import foundation-core.small-types funext univalence truncations
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels

@@ -1,15 +1,23 @@
 # Essential fibers of functors between precategories
 
 ```agda
-module category-theory.essential-fibers-of-functors-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.essential-fibers-of-functors-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
+open import category-theory.functors-precategories funext univalence truncations
+open import category-theory.isomorphisms-in-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels

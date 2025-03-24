@@ -1,22 +1,24 @@
 # The universal property of dependent pair types
 
 ```agda
-module foundation.universal-property-dependent-pair-types where
+open import foundation.function-extensionality-axiom
+
+module foundation.universal-property-dependent-pair-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.function-extensionality funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.retractions
-open import foundation-core.sections
 ```
 
 </details>

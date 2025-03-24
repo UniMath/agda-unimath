@@ -1,7 +1,15 @@
 # Small universes
 
 ```agda
-module foundation.small-universes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.small-universes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +18,7 @@ module foundation.small-universes where
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.small-types
+open import foundation-core.small-types funext univalence truncations
 ```
 
 </details>

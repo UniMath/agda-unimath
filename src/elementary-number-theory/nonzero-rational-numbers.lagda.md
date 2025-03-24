@@ -2,35 +2,43 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module elementary-number-theory.nonzero-rational-numbers where
+module elementary-number-theory.nonzero-rational-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.integer-fractions funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
-open import elementary-number-theory.nonzero-integers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.reduced-integer-fractions
+open import elementary-number-theory.multiplication-integers funext univalence truncations
+open import elementary-number-theory.multiplication-rational-numbers funext univalence truncations
+open import elementary-number-theory.multiplicative-monoid-of-rational-numbers funext univalence truncations
+open import elementary-number-theory.nonzero-integers funext univalence truncations
+open import elementary-number-theory.rational-numbers funext univalence truncations
+open import elementary-number-theory.reduced-integer-fractions funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.submonoids
+open import group-theory.submonoids funext univalence truncations
 ```
 
 </details>

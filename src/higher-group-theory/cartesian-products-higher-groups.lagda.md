@@ -1,28 +1,37 @@
 # Cartesian products of higher groups
 
 ```agda
-module higher-group-theory.cartesian-products-higher-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.cartesian-products-higher-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
-open import foundation.cartesian-product-types
+open import foundation.0-connected-types funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions funext
 open import foundation.equality-cartesian-product-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.mere-equality
-open import foundation.propositions
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.mere-equality funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-groups funext univalence truncations
 
-open import structured-types.pointed-cartesian-product-types
+open import structured-types.pointed-cartesian-product-types funext univalence truncations
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.loop-spaces funext univalence truncations
 ```
 
 </details>

@@ -1,21 +1,30 @@
 # Isomorphisms in subprecategories
 
 ```agda
-module category-theory.isomorphisms-in-subprecategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.isomorphisms-in-subprecategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
-open import category-theory.subprecategories
+open import category-theory.isomorphisms-in-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
+open import category-theory.subprecategories funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 ```
 

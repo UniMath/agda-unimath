@@ -1,38 +1,46 @@
 # The positive integers
 
 ```agda
-module elementary-number-theory.positive-integers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.positive-integers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-integers funext univalence truncations
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-integers
-open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.nonzero-integers funext univalence truncations
+open import elementary-number-theory.nonzero-natural-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-subtypes
-open import foundation.decidable-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-subtypes funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.surjective-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import set-theory.countable-sets
+open import set-theory.countable-sets funext univalence truncations
 ```
 
 </details>

@@ -1,23 +1,31 @@
 # Bounded sums of arithmetic functions
 
 ```agda
-module elementary-number-theory.bounded-sums-arithmetic-functions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.bounded-sums-arithmetic-functions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.arithmetic-functions
+open import elementary-number-theory.arithmetic-functions funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers funext univalence truncations
 
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-types
-open import foundation.function-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
+open import foundation.function-types funext
 open import foundation.universe-levels
 
-open import ring-theory.rings
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

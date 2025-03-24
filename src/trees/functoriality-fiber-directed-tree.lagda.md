@@ -1,7 +1,15 @@
 # Functoriality of the fiber operation on directed trees
 
 ```agda
-module trees.functoriality-fiber-directed-tree where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.functoriality-fiber-directed-tree
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,17 +17,17 @@ module trees.functoriality-fiber-directed-tree where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import graph-theory.walks-directed-graphs
+open import graph-theory.walks-directed-graphs funext univalence truncations
 
-open import trees.directed-trees
-open import trees.equivalences-directed-trees
-open import trees.fibers-directed-trees
-open import trees.morphisms-directed-trees
+open import trees.directed-trees funext univalence truncations
+open import trees.equivalences-directed-trees funext univalence truncations
+open import trees.fibers-directed-trees funext univalence truncations
+open import trees.morphisms-directed-trees funext univalence truncations
 ```
 
 </details>

@@ -1,21 +1,30 @@
 # Well-founded relations
 
 ```agda
-module order-theory.well-founded-relations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.well-founded-relations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import order-theory.accessible-elements-relations
-open import order-theory.preorders
+open import order-theory.accessible-elements-relations funext univalence truncations
+open import order-theory.preorders funext univalence truncations
 ```
 
 </details>

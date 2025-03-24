@@ -1,7 +1,15 @@
 # Orbits of higher group actions
 
 ```agda
-module higher-group-theory.orbits-higher-group-actions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.orbits-higher-group-actions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,8 +18,8 @@ module higher-group-theory.orbits-higher-group-actions where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-group-actions
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-group-actions funext univalence truncations
+open import higher-group-theory.higher-groups funext univalence truncations
 ```
 
 </details>

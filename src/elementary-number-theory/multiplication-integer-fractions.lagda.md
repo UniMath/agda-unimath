@@ -1,23 +1,31 @@
 # Multiplication on integer fractions
 
 ```agda
-module elementary-number-theory.multiplication-integer-fractions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.multiplication-integer-fractions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integer-fractions
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.addition-integer-fractions funext univalence truncations
+open import elementary-number-theory.addition-integers funext univalence truncations
+open import elementary-number-theory.integer-fractions funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.multiplication-positive-and-negative-integers
+open import elementary-number-theory.multiplication-integers funext univalence truncations
+open import elementary-number-theory.multiplication-positive-and-negative-integers funext univalence truncations
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 ```
 
 </details>

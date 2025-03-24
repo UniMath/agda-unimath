@@ -1,7 +1,15 @@
 # Powers of loops
 
 ```agda
-module synthetic-homotopy-theory.powers-of-loops where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.powers-of-loops
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -13,18 +21,18 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.iterating-automorphisms
-open import foundation.iterating-functions
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.iterating-automorphisms funext univalence truncations
+open import foundation.iterating-functions funext univalence truncations
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
-open import structured-types.pointed-maps
+open import structured-types.pointed-maps funext univalence truncations
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.functoriality-loop-spaces
-open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.functoriality-loop-spaces funext univalence truncations
+open import synthetic-homotopy-theory.loop-spaces funext univalence truncations
 ```
 
 </details>

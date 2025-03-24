@@ -1,18 +1,26 @@
 # Isotopies of Latin squares
 
 ```agda
-module univalent-combinatorics.isotopies-latin-squares where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.isotopies-latin-squares
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.latin-squares
+open import univalent-combinatorics.latin-squares funext univalence truncations
 ```
 
 </details>

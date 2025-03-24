@@ -1,46 +1,55 @@
 # The well-ordering principle of the standard finite types
 
 ```agda
-module elementary-number-theory.well-ordering-principle-standard-finite-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.well-ordering-principle-standard-finite-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-standard-finite-types
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.inequality-standard-finite-types funext univalence truncations
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers funext univalence truncations
 
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
-open import foundation.decidable-subtypes
-open import foundation.decidable-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-subtypes funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.hilberts-epsilon-operators
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.functoriality-propositional-truncation funext univalence truncations
+open import foundation.hilberts-epsilon-operators funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-coproduct-types
-open import foundation.type-arithmetic-empty-type
-open import foundation.type-arithmetic-unit-type
+open import foundation.type-arithmetic-coproduct-types funext univalence truncations
+open import foundation.type-arithmetic-empty-type funext univalence truncations
+open import foundation.type-arithmetic-unit-type funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.decidable-dependent-pair-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.decidable-dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

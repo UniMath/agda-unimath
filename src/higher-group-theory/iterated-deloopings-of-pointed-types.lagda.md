@@ -1,7 +1,15 @@
 # Iterated deloopings of pointed types
 
 ```agda
-module higher-group-theory.iterated-deloopings-of-pointed-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.iterated-deloopings-of-pointed-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,16 +17,16 @@ module higher-group-theory.iterated-deloopings-of-pointed-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
-open import foundation.connected-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.connected-types funext univalence truncations
 open import foundation.dependent-pair-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import structured-types.pointed-equivalences
+open import structured-types.pointed-equivalences funext univalence truncations
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.iterated-loop-spaces
+open import synthetic-homotopy-theory.iterated-loop-spaces funext univalence truncations
 ```
 
 </details>

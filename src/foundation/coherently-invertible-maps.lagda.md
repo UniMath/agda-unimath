@@ -1,7 +1,11 @@
 # Coherently invertible maps
 
 ```agda
-module foundation.coherently-invertible-maps where
+open import foundation.function-extensionality-axiom
+
+module foundation.coherently-invertible-maps
+  (funext : function-extensionality)
+  where
 
 open import foundation-core.coherently-invertible-maps public
 ```
@@ -10,9 +14,10 @@ open import foundation-core.coherently-invertible-maps public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.logical-equivalences
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 

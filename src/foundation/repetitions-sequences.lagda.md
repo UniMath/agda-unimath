@@ -1,20 +1,28 @@
 # Repetitions in sequences
 
 ```agda
-module foundation.repetitions-sequences where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.repetitions-sequences
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers
+open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.negated-equality
-open import foundation.pairs-of-distinct-elements
-open import foundation.repetitions-of-values
+open import foundation.negated-equality funext univalence truncations
+open import foundation.pairs-of-distinct-elements funext univalence truncations
+open import foundation.repetitions-of-values funext univalence truncations
 open import foundation.sequences
 open import foundation.unit-type
 open import foundation.universe-levels

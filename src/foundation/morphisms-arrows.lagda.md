@@ -1,21 +1,25 @@
 # Morphisms of arrows
 
 ```agda
-module foundation.morphisms-arrows where
+open import foundation.function-extensionality-axiom
+
+module foundation.morphisms-arrows
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospan-diagrams
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.function-extensionality funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

@@ -1,7 +1,15 @@
 # Cumulative hierarchy
 
 ```agda
-module set-theory.cumulative-hierarchy where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module set-theory.cumulative-hierarchy
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,27 +18,32 @@ module set-theory.cumulative-hierarchy where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.booleans
-open import foundation.cartesian-product-types
-open import foundation.constant-type-families
-open import foundation.coproduct-types
+open import foundation.booleans funext univalence truncations
+open import foundation.cartesian-product-types funext univalence
+open import foundation.constant-type-families funext
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.raising-universe-levels
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.function-types funext
+open import foundation.functoriality-propositional-truncation funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.propositional-extensionality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.raising-universe-levels-booleans
+open import foundation.raising-universe-levels-unit-type
+open import foundation.sets funext univalence
 open import foundation.transport-along-identifications
-open import foundation.truncated-types
+open import foundation.truncated-types funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 ```
 
 </details>

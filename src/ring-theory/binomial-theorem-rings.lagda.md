@@ -1,29 +1,37 @@
 # The binomial theorem for rings
 
 ```agda
-module ring-theory.binomial-theorem-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.binomial-theorem-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.binomial-coefficients
-open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.binomial-coefficients funext univalence truncations
+open import elementary-number-theory.distance-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import linear-algebra.vectors-on-rings
+open import linear-algebra.vectors-on-rings funext univalence truncations
 
-open import ring-theory.binomial-theorem-semirings
-open import ring-theory.powers-of-elements-rings
-open import ring-theory.rings
-open import ring-theory.sums-rings
+open import ring-theory.binomial-theorem-semirings funext univalence truncations
+open import ring-theory.powers-of-elements-rings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
+open import ring-theory.sums-rings funext univalence truncations
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

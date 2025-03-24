@@ -1,17 +1,25 @@
 # Commuting squares of group homomorphisms
 
 ```agda
-module group-theory.commuting-squares-of-group-homomorphisms where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.commuting-squares-of-group-homomorphisms
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
+open import foundation.commuting-squares-of-maps funext univalence
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
 ```
 
 </details>

@@ -1,19 +1,27 @@
 # Symmetric higher groups
 
 ```agda
-module higher-group-theory.symmetric-higher-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.symmetric-higher-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
-open import foundation.connected-components-universes
+open import foundation.0-connected-types funext univalence truncations
+open import foundation.connected-components-universes funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.mere-equivalences
+open import foundation.mere-equivalences funext univalence truncations
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-groups funext univalence truncations
 
 open import structured-types.pointed-types
 ```

@@ -1,9 +1,11 @@
 # Iterated dependent product types
 
 ```agda
-module foundation.iterated-dependent-product-types where
+open import foundation.function-extensionality-axiom
 
-open import foundation.telescopes public
+module foundation.iterated-dependent-product-types
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,12 +13,16 @@ open import foundation.telescopes public
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-truncated-types funext
 open import foundation.implicit-function-types
+open import foundation.telescopes
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels

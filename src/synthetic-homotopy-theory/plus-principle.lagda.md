@@ -1,18 +1,27 @@
 # The plus-principle
 
 ```agda
-module synthetic-homotopy-theory.plus-principle where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.plus-principle
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.connected-types
-open import foundation.contractible-types
+open import foundation.connected-types funext univalence truncations
+open import foundation.contractible-types funext univalence
+open import foundation.dependent-products-contractible-types funext
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.acyclic-types
+open import synthetic-homotopy-theory.acyclic-types funext univalence truncations
 ```
 
 </details>

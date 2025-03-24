@@ -1,38 +1,47 @@
 # Coforks
 
 ```agda
-module synthetic-homotopy-theory.coforks where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.coforks
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.codiagonal-maps-of-types
-open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-maps
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.commuting-triangles-of-maps funext univalence
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types funext
 open import foundation.double-arrows
-open import foundation.equivalences
-open import foundation.equivalences-double-arrows
-open import foundation.equivalences-span-diagrams
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.equivalences funext
+open import foundation.equivalences-double-arrows funext univalence truncations
+open import foundation.equivalences-span-diagrams funext univalence truncations
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.morphisms-double-arrows
-open import foundation.morphisms-span-diagrams
-open import foundation.span-diagrams
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.morphisms-double-arrows funext univalence
+open import foundation.morphisms-span-diagrams funext univalence truncations
+open import foundation.span-diagrams funext
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-spans funext
 ```
 
 </details>

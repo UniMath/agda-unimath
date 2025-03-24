@@ -1,26 +1,36 @@
 # The representing arrow category
 
 ```agda
-module category-theory.representing-arrow-category where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.representing-arrow-category
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.isomorphisms-in-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
-open import foundation.booleans
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.booleans
 ```
 
 </details>
@@ -30,7 +40,7 @@ open import foundation.universe-levels
 The **representing arrow** is the [category](category-theory.categories.md) that
 [represents](category-theory.representable-functors-categories.md) arrows in a
 ([pre-](category-theory.precategories.md))category. We model it after
-implication on the [booleans](foundation.booleans.md).
+implication on the [booleans](foundation-core.booleans.md).
 
 ## Definition
 

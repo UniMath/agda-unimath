@@ -2,36 +2,45 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module real-numbers.lower-dedekind-real-numbers where
+module real-numbers.lower-dedekind-real-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.difference-rational-numbers
-open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.addition-rational-numbers funext univalence truncations
+open import elementary-number-theory.difference-rational-numbers funext univalence truncations
+open import elementary-number-theory.inequality-rational-numbers funext univalence truncations
+open import elementary-number-theory.positive-rational-numbers funext univalence truncations
+open import elementary-number-theory.rational-numbers funext univalence truncations
+open import elementary-number-theory.strict-inequality-rational-numbers funext univalence truncations
 
-open import foundation.conjunction
-open import foundation.coproduct-types
+open import foundation.conjunction funext univalence truncations
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.powersets
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.dependent-products-truncated-types funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.powersets funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.transport-along-identifications
-open import foundation.truncated-types
+open import foundation.truncated-types funext univalence
 open import foundation.truncation-levels
 open import foundation.unit-type
-open import foundation.universal-quantification
+open import foundation.universal-quantification funext univalence truncations
 open import foundation.universe-levels
 ```
 

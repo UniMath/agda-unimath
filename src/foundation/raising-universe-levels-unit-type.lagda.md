@@ -1,0 +1,123 @@
+# Raising universe levels for the unit type
+
+```agda
+module foundation.raising-universe-levels-unit-type where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.unit-type
+open import foundation.universe-levels
+
+open import foundation-core.constant-maps
+open import foundation-core.contractible-types
+open import foundation-core.equivalences
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.raising-universe-levels
+open import foundation-core.retractions
+open import foundation-core.sets
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+```
+
+</details>
+
+## Idea
+
+We can [raise](foundation.raising-universe-levels.md) the type of
+[booleans](foundation-core.booleans.md) to any
+[universe](foundation.universe-levels.md).
+
+## Definition
+
+### Raising the universe level of the unit type
+
+```agda
+raise-unit : (l : Level) → UU l
+raise-unit l = raise l unit
+
+raise-star : {l : Level} → raise l unit
+raise-star = map-raise star
+
+raise-terminal-map : {l1 l2 : Level} (A : UU l1) → A → raise-unit l2
+raise-terminal-map {l2 = l2} A = const A raise-star
+
+compute-raise-unit : (l : Level) → unit ≃ raise-unit l
+compute-raise-unit l = compute-raise l unit
+
+inv-compute-raise-unit : (l : Level) → raise-unit l ≃ unit
+inv-compute-raise-unit l = inv-compute-raise l unit
+```
+
+## Properties
+
+### The raised unit type is contractible
+
+```agda
+abstract
+  is-contr-raise-unit : {l1 : Level} → is-contr (raise-unit l1)
+  is-contr-raise-unit {l1} =
+    is-contr-equiv' unit (compute-raise l1 unit) is-contr-unit
+```
+
+### Any contractible type is equivalent to the raised unit type
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
+
+  is-equiv-raise-terminal-map-is-contr :
+    is-contr A → is-equiv (raise-terminal-map {l2 = l2} A)
+  is-equiv-raise-terminal-map-is-contr H =
+    is-equiv-is-invertible
+      ( λ _ → center H)
+      ( λ where (map-raise x) → refl)
+      ( contraction H)
+
+  equiv-raise-unit-is-contr : is-contr A → A ≃ raise-unit l2
+  equiv-raise-unit-is-contr H =
+    raise-terminal-map A , is-equiv-raise-terminal-map-is-contr H
+
+  is-contr-retraction-raise-terminal-map :
+    retraction (raise-terminal-map {l2 = l2} A) → is-contr A
+  is-contr-retraction-raise-terminal-map (h , H) = h raise-star , H
+
+  is-contr-is-equiv-raise-terminal-map :
+    is-equiv (raise-terminal-map {l2 = l2} A) → is-contr A
+  is-contr-is-equiv-raise-terminal-map H =
+    is-contr-retraction-raise-terminal-map (retraction-is-equiv H)
+
+  is-contr-equiv-raise-unit : A ≃ raise-unit l2 → is-contr A
+  is-contr-equiv-raise-unit e =
+    ( map-inv-equiv e raise-star) ,
+    ( λ x →
+      ap (map-inv-equiv e) (eq-is-contr is-contr-raise-unit) ∙
+      is-retraction-map-inv-equiv e x)
+```
+
+### The raised unit type is a proposition
+
+```agda
+abstract
+  is-prop-raise-unit : {l1 : Level} → is-prop (raise-unit l1)
+  is-prop-raise-unit {l1} = is-prop-equiv' (compute-raise l1 unit) is-prop-unit
+
+raise-unit-Prop : (l1 : Level) → Prop l1
+raise-unit-Prop l1 = raise-unit l1 , is-prop-raise-unit
+```
+
+### The raised unit type is a set
+
+```agda
+abstract
+  is-set-raise-unit : {l1 : Level} → is-set (raise-unit l1)
+  is-set-raise-unit = is-trunc-succ-is-trunc neg-one-𝕋 is-prop-raise-unit
+
+raise-unit-Set : (l1 : Level) → Set l1
+raise-unit-Set l1 = raise-unit l1 , is-set-raise-unit
+```

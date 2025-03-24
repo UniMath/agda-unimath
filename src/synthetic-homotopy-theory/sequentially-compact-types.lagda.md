@@ -1,18 +1,27 @@
 # Sequentially compact types
 
 ```agda
-module synthetic-homotopy-theory.sequentially-compact-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.sequentially-compact-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.sequential-diagrams
-open import synthetic-homotopy-theory.universal-property-sequential-colimits
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.sequential-diagrams funext univalence
+open import synthetic-homotopy-theory.universal-property-sequential-colimits funext univalence truncations
 ```
 
 </details>

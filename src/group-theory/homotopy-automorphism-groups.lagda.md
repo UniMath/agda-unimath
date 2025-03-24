@@ -1,33 +1,28 @@
 # Homotopy automorphism groups
 
 ```agda
-module group-theory.homotopy-automorphism-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.homotopy-automorphism-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.1-types
-open import foundation.connected-components
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.mere-equality
-open import foundation.propositional-truncations
-open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families
 open import foundation.truncation-levels
-open import foundation.truncations
+open import foundation.truncations funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.automorphism-groups
-open import group-theory.concrete-groups
-open import group-theory.equivalences-concrete-groups
+open import group-theory.automorphism-groups funext univalence truncations
+open import group-theory.concrete-groups funext univalence truncations
 
-open import higher-group-theory.automorphism-groups
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-groups funext univalence truncations
 
 open import structured-types.pointed-types
 ```

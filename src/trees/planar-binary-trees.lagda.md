@@ -1,18 +1,26 @@
 # Planar binary trees
 
 ```agda
-module trees.planar-binary-trees where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.planar-binary-trees
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.booleans
-open import foundation.empty-types
-open import foundation.function-types
+open import foundation.booleans funext univalence truncations
+open import foundation.empty-types funext univalence truncations
+open import foundation.function-types funext
 open import foundation.universe-levels
 
-open import trees.w-types
+open import trees.w-types funext univalence truncations
 ```
 
 </details>

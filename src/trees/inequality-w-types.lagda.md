@@ -1,7 +1,15 @@
 # Inequality on W-types
 
 ```agda
-module trees.inequality-w-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.inequality-w-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,13 +18,13 @@ module trees.inequality-w-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.identity-types
-open import foundation.negation
+open import foundation.empty-types funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.negation funext
 open import foundation.universe-levels
 
-open import trees.elementhood-relation-w-types
-open import trees.w-types
+open import trees.elementhood-relation-w-types funext univalence truncations
+open import trees.w-types funext univalence truncations
 ```
 
 </details>

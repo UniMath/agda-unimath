@@ -1,21 +1,28 @@
 # The Archimedean property of the natural numbers
 
 ```agda
-module elementary-number-theory.archimedean-property-natural-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.archimedean-property-natural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.euclidean-division-natural-numbers
+open import elementary-number-theory.euclidean-division-natural-numbers funext univalence truncations
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.propositional-truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.propositional-truncations funext univalence
 open import foundation.transport-along-identifications
 ```
 

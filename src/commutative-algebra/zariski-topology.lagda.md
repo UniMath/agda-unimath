@@ -1,19 +1,28 @@
 # The Zariski topology on the set of prime ideals of a commutative ring
 
 ```agda
-module commutative-algebra.zariski-topology where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.zariski-topology
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.prime-ideals-commutative-rings
+open import commutative-algebra.commutative-rings funext univalence truncations
+open import commutative-algebra.prime-ideals-commutative-rings funext univalence truncations
 
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 ```
 

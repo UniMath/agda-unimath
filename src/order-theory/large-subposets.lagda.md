@@ -1,21 +1,29 @@
 # Large subposets
 
 ```agda
-module order-theory.large-subposets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.large-subposets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.large-binary-relations
-open import foundation.logical-equivalences
-open import foundation.subtypes
+open import foundation.large-binary-relations funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.large-subpreorders
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.large-preorders funext univalence truncations
+open import order-theory.large-subpreorders funext univalence truncations
 ```
 
 </details>

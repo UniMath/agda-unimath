@@ -1,7 +1,15 @@
 # Generating sets of groups
 
 ```agda
-module group-theory.generating-sets-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.generating-sets-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,10 +17,10 @@ module group-theory.generating-sets-groups where
 ```agda
 open import foundation.universe-levels
 
-open import group-theory.full-subgroups
-open import group-theory.groups
-open import group-theory.subgroups-generated-by-subsets-groups
-open import group-theory.subsets-groups
+open import group-theory.full-subgroups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.subgroups-generated-by-subsets-groups funext univalence truncations
+open import group-theory.subsets-groups funext univalence truncations
 ```
 
 </details>

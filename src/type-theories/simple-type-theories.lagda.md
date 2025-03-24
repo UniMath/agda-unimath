@@ -2,17 +2,22 @@
 
 ```agda
 {-# OPTIONS --guardedness --allow-unsolved-metas #-}
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module type-theories.simple-type-theories where
+module type-theories.simple-type-theories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```

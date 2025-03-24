@@ -1,26 +1,35 @@
 # Cauchy approximations in metric spaces
 
 ```agda
-module metric-spaces.cauchy-approximations-metric-spaces where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module metric-spaces.cauchy-approximations-metric-spaces
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers funext univalence truncations
 
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.cauchy-approximations-premetric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
-open import metric-spaces.metric-spaces
+open import metric-spaces.cauchy-approximations-premetric-spaces funext univalence truncations
+open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces funext univalence truncations
+open import metric-spaces.metric-spaces funext univalence truncations
 ```
 
 </details>

@@ -1,33 +1,42 @@
 # Dirichlet products of species of types in subuniverses
 
 ```agda
-module species.dirichlet-products-species-of-types-in-subuniverses where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.dirichlet-products-species-of-types-in-subuniverses
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.global-subuniverses
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.global-subuniverses funext univalence
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.product-decompositions
-open import foundation.product-decompositions-subuniverse
-open import foundation.propositions
-open import foundation.subuniverses
+open import foundation.product-decompositions-subuniverse funext univalence
+open import foundation.propositions funext univalence
+open import foundation.raising-universe-levels-unit-type
+open import foundation.subuniverses funext univalence
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
-open import species.dirichlet-products-species-of-types
-open import species.species-of-types-in-subuniverses
+open import species.dirichlet-products-species-of-types funext univalence
+open import species.species-of-types-in-subuniverses funext univalence
 ```
 
 </details>

@@ -1,7 +1,15 @@
 # Sort by insertion for vectors
 
 ```agda
-module lists.sort-by-insertion-vectors where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module lists.sort-by-insertion-vectors
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,26 +17,27 @@ module lists.sort-by-insertion-vectors where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.permutations-standard-finite-types
-open import finite-group-theory.transpositions-standard-finite-types
+open import finite-group-theory.permutations-standard-finite-types funext univalence truncations
+open import finite-group-theory.transpositions-standard-finite-types funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-coproduct-types
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.raising-universe-levels-unit-type
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
+open import linear-algebra.vectors funext univalence truncations
 
-open import lists.permutation-vectors
-open import lists.sorted-vectors
-open import lists.sorting-algorithms-vectors
+open import lists.permutation-vectors funext univalence truncations
+open import lists.sorted-vectors funext univalence truncations
+open import lists.sorting-algorithms-vectors funext univalence truncations
 
-open import order-theory.decidable-total-orders
+open import order-theory.decidable-total-orders funext univalence truncations
 ```
 
 </details>

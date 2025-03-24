@@ -1,7 +1,15 @@
 # The flattening lemma for sequential colimits
 
 ```agda
-module synthetic-homotopy-theory.flattening-lemma-sequential-colimits where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.flattening-lemma-sequential-colimits
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,26 +18,26 @@ module synthetic-homotopy-theory.flattening-lemma-sequential-colimits where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.equivalences-double-arrows
-open import foundation.function-types
-open import foundation.homotopies
+open import foundation.equivalences funext
+open import foundation.equivalences-double-arrows funext univalence truncations
+open import foundation.function-types funext
+open import foundation.homotopies funext
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.coforks
-open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.dependent-universal-property-sequential-colimits
-open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows
-open import synthetic-homotopy-theory.families-descent-data-sequential-colimits
-open import synthetic-homotopy-theory.flattening-lemma-coequalizers
-open import synthetic-homotopy-theory.sequential-diagrams
-open import synthetic-homotopy-theory.total-cocones-families-sequential-diagrams
-open import synthetic-homotopy-theory.total-sequential-diagrams
-open import synthetic-homotopy-theory.universal-property-coequalizers
-open import synthetic-homotopy-theory.universal-property-sequential-colimits
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.coforks funext univalence truncations
+open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.dependent-universal-property-sequential-colimits funext univalence truncations
+open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows funext univalence truncations
+open import synthetic-homotopy-theory.families-descent-data-sequential-colimits funext univalence truncations
+open import synthetic-homotopy-theory.flattening-lemma-coequalizers funext univalence truncations
+open import synthetic-homotopy-theory.sequential-diagrams funext univalence
+open import synthetic-homotopy-theory.total-cocones-families-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.total-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-coequalizers funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-sequential-colimits funext univalence truncations
 ```
 
 </details>

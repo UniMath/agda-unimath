@@ -1,40 +1,49 @@
 # Cauchy composition of species of types in a subuniverse
 
 ```agda
-module species.cauchy-composition-species-of-types-in-subuniverses where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.cauchy-composition-species-of-types-in-subuniverses
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
 open import foundation.equality-cartesian-product-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.global-subuniverses
-open import foundation.homotopies
-open import foundation.propositions
-open import foundation.relaxed-sigma-decompositions
-open import foundation.sigma-closed-subuniverses
-open import foundation.sigma-decomposition-subuniverse
-open import foundation.subuniverses
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.global-subuniverses funext univalence
+open import foundation.homotopies funext
+open import foundation.propositions funext univalence
+open import foundation.raising-universe-levels-unit-type
+open import foundation.relaxed-sigma-decompositions funext univalence
+open import foundation.sigma-closed-subuniverses funext univalence
+open import foundation.sigma-decomposition-subuniverse funext univalence
+open import foundation.subuniverses funext univalence
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.unit-type
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
-open import species.cauchy-composition-species-of-types
-open import species.species-of-types-in-subuniverses
-open import species.unit-cauchy-composition-species-of-types
-open import species.unit-cauchy-composition-species-of-types-in-subuniverses
+open import species.cauchy-composition-species-of-types funext univalence
+open import species.species-of-types-in-subuniverses funext univalence
+open import species.unit-cauchy-composition-species-of-types funext univalence
+open import species.unit-cauchy-composition-species-of-types-in-subuniverses funext univalence
 ```
 
 </details>

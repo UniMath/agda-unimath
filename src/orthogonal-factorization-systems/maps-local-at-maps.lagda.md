@@ -1,40 +1,31 @@
 # Maps local at maps
 
 ```agda
-module orthogonal-factorization-systems.maps-local-at-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.maps-local-at-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.cartesian-morphisms-arrows
-open import foundation.cones-over-cospan-diagrams
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.equivalences-arrows
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-fibers-of-maps
-open import foundation.global-subuniverses
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.postcomposition-functions
-open import foundation.precomposition-functions
-open import foundation.propositions
-open import foundation.pullbacks
-open import foundation.retracts-of-maps
+open import foundation.cartesian-morphisms-arrows funext univalence truncations
+open import foundation.dependent-products-propositions funext
+open import foundation.fibers-of-maps funext
+open import foundation.propositions funext univalence
+open import foundation.retracts-of-maps funext univalence
 open import foundation.unit-type
-open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.families-of-types-local-at-maps
-open import orthogonal-factorization-systems.orthogonal-maps
-open import orthogonal-factorization-systems.pullback-hom
-open import orthogonal-factorization-systems.types-local-at-maps
+open import orthogonal-factorization-systems.families-of-types-local-at-maps funext univalence truncations
+open import orthogonal-factorization-systems.orthogonal-maps funext univalence truncations
+open import orthogonal-factorization-systems.types-local-at-maps funext univalence truncations
 ```
 
 </details>

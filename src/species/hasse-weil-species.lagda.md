@@ -1,20 +1,28 @@
 # Hasse-Weil species
 
 ```agda
-module species.hasse-weil-species where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.hasse-weil-species
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-algebra.commutative-finite-rings
-open import finite-algebra.products-commutative-finite-rings
+open import finite-algebra.commutative-finite-rings funext univalence truncations
+open import finite-algebra.products-commutative-finite-rings funext univalence truncations
 
-open import foundation.cartesian-product-types
-open import foundation.equivalences
+open import foundation.cartesian-product-types funext univalence
+open import foundation.equivalences funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

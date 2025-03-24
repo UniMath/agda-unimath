@@ -1,17 +1,25 @@
 # Equivalence injective type families
 
 ```agda
-module foundation.equivalence-injective-type-families where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.equivalence-injective-type-families
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.iterated-dependent-product-types
-open import foundation.univalence
-open import foundation.universal-property-equivalences
+open import foundation.dependent-products-propositions funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.iterated-dependent-product-types funext
+open import foundation.telescopes
+open import foundation.univalence funext univalence
+open import foundation.universal-property-equivalences funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

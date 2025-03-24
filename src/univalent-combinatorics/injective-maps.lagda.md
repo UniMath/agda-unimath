@@ -1,21 +1,29 @@
 # Injective maps between finite types
 
 ```agda
-module univalent-combinatorics.injective-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation.injective-maps public
+module univalent-combinatorics.injective-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation.injective-maps funext public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-types
-open import foundation.identity-types
+open import foundation.decidable-types funext univalence truncations
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.decidable-dependent-function-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.decidable-dependent-function-types funext univalence truncations
+open import univalent-combinatorics.equality-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

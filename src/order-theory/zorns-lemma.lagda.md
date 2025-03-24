@@ -1,28 +1,37 @@
 # Zorn's lemma
 
 ```agda
-module order-theory.zorns-lemma where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.zorns-lemma
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.existential-quantification
-open import foundation.inhabited-types
-open import foundation.law-of-excluded-middle
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.law-of-excluded-middle funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.propositional-truncations funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.propositions
 
-open import order-theory.chains-posets
-open import order-theory.posets
-open import order-theory.top-elements-posets
-open import order-theory.upper-bounds-chains-posets
+open import order-theory.chains-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.top-elements-posets funext univalence truncations
+open import order-theory.upper-bounds-chains-posets funext univalence truncations
 ```
 
 </details>

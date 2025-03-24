@@ -1,22 +1,31 @@
 # Natural transformations between functors between categories
 
 ```agda
-module category-theory.natural-transformations-functors-categories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.natural-transformations-functors-categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.functors-categories
-open import category-theory.natural-transformations-functors-precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.functors-categories funext univalence truncations
+open import category-theory.natural-transformations-functors-precategories funext univalence truncations
 
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 ```
 

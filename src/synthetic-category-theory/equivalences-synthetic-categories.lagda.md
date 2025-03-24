@@ -2,14 +2,19 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module synthetic-category-theory.equivalences-synthetic-categories where
+module synthetic-category-theory.equivalences-synthetic-categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 

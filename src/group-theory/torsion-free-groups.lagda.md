@@ -1,34 +1,44 @@
 # Torsion-free groups
 
 ```agda
-module group-theory.torsion-free-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.torsion-free-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.group-of-integers
-open import elementary-number-theory.nonzero-integers
+open import elementary-number-theory.group-of-integers funext univalence truncations
+open import elementary-number-theory.nonzero-integers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.existential-quantification
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.existential-quantification funext univalence truncations
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
-open import foundation.singleton-subtypes
-open import foundation.standard-pullbacks
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.singleton-subtypes funext univalence truncations
+open import foundation.standard-pullbacks funext
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.integer-powers-of-elements-groups
-open import group-theory.orders-of-elements-groups
-open import group-theory.subgroups
-open import group-theory.torsion-elements-groups
+open import group-theory.groups funext univalence truncations
+open import group-theory.integer-powers-of-elements-groups funext univalence truncations
+open import group-theory.orders-of-elements-groups funext univalence truncations
+open import group-theory.subgroups funext univalence truncations
+open import group-theory.torsion-elements-groups funext univalence truncations
 ```
 
 </details>

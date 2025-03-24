@@ -1,22 +1,28 @@
 # Equivalences of spans of families of types
 
 ```agda
-module foundation.equivalences-spans-families-of-types where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.equivalences-spans-families-of-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
+open import foundation.equality-dependent-function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.morphisms-spans-families-of-types
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.morphisms-spans-families-of-types funext
 open import foundation.spans-families-of-types
 open import foundation.structure-identity-principle
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps

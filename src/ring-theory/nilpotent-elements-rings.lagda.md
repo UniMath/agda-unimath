@@ -1,7 +1,15 @@
 # Nilpotent elements in rings
 
 ```agda
-module ring-theory.nilpotent-elements-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.nilpotent-elements-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,16 +17,17 @@ module ring-theory.nilpotent-elements-rings where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import ring-theory.nilpotent-elements-semirings
-open import ring-theory.powers-of-elements-rings
-open import ring-theory.rings
-open import ring-theory.subsets-rings
+open import ring-theory.nilpotent-elements-semirings funext univalence truncations
+open import ring-theory.powers-of-elements-rings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
+open import ring-theory.subsets-rings funext univalence truncations
 ```
 
 </details>

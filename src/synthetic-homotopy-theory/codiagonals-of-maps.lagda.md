@@ -1,27 +1,36 @@
 # Codiagonals of maps
 
 ```agda
-module synthetic-homotopy-theory.codiagonals-of-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.codiagonals-of-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.suspension-structures
-open import synthetic-homotopy-theory.suspensions-of-types
-open import synthetic-homotopy-theory.universal-property-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.pushouts funext univalence truncations
+open import synthetic-homotopy-theory.suspension-structures funext univalence truncations
+open import synthetic-homotopy-theory.suspensions-of-types funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-pushouts funext univalence truncations
 ```
 
 </details>

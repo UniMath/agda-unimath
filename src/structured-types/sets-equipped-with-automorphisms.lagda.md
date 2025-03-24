@@ -1,17 +1,23 @@
 # Sets equipped with automorphisms
 
 ```agda
-module structured-types.sets-equipped-with-automorphisms where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.sets-equipped-with-automorphisms
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.automorphisms
+open import foundation.automorphisms funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.sets
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 ```
 

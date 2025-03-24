@@ -14,13 +14,13 @@ module
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import globular-types.dependent-globular-types
-open import globular-types.dependent-reflexive-globular-types
+open import globular-types.dependent-globular-types funext
+open import globular-types.dependent-reflexive-globular-types funext univalence truncations
 open import globular-types.globular-types
-open import globular-types.points-globular-types
-open import globular-types.points-reflexive-globular-types
-open import globular-types.reflexive-globular-equivalences
-open import globular-types.reflexive-globular-types
+open import globular-types.points-globular-types funext
+open import globular-types.points-reflexive-globular-types funext univalence truncations
+open import globular-types.reflexive-globular-equivalences funext univalence truncations
+open import globular-types.reflexive-globular-types funext univalence truncations
 ```
 
 </details>
@@ -49,7 +49,14 @@ indexed by the [points](globular-types.points-reflexive-globular-types.md) of
 ### The predicate of being a pointwise extension of a family of reflexive globular types
 
 ```agda
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
 module _
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
   {l1 l2 l3 l4 l5 l6 : Level} {G : Reflexive-Globular-Type l1 l2}
   (H : 0-cell-Reflexive-Globular-Type G → Reflexive-Globular-Type l3 l4)
   (K : Dependent-Reflexive-Globular-Type l5 l6 G)

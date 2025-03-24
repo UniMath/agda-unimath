@@ -1,20 +1,29 @@
 # Nil ideals of rings
 
 ```agda
-module ring-theory.nil-ideals-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.nil-ideals-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import ring-theory.ideals-rings
-open import ring-theory.left-ideals-rings
-open import ring-theory.nilpotent-elements-rings
-open import ring-theory.right-ideals-rings
-open import ring-theory.rings
+open import ring-theory.ideals-rings funext univalence truncations
+open import ring-theory.left-ideals-rings funext univalence truncations
+open import ring-theory.nilpotent-elements-rings funext univalence truncations
+open import ring-theory.right-ideals-rings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

@@ -1,7 +1,15 @@
 # The universal property of identity types
 
 ```agda
-module foundation.universal-property-identity-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.universal-property-identity-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,17 +17,18 @@ module foundation.universal-property-identity-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.full-subtypes
-open import foundation.function-extensionality
-open import foundation.functoriality-dependent-function-types
+open import foundation.dependent-products-propositions funext
+open import foundation.dependent-universal-property-equivalences funext
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.full-subtypes funext univalence truncations
+open import foundation.function-extensionality funext
+open import foundation.functoriality-dependent-function-types funext univalence
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.preunivalence
-open import foundation.univalence
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.preunivalence funext univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps

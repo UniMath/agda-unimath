@@ -1,41 +1,50 @@
 # Cycle prime decompositions of natural numbers
 
 ```agda
-module univalent-combinatorics.cycle-prime-decomposition-natural-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.cycle-prime-decomposition-natural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.decidable-total-order-natural-numbers
-open import elementary-number-theory.fundamental-theorem-of-arithmetic
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.decidable-total-order-natural-numbers funext univalence truncations
+open import elementary-number-theory.fundamental-theorem-of-arithmetic funext univalence truncations
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.permutations-standard-finite-types
+open import finite-group-theory.permutations-standard-finite-types funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.iterated-cartesian-product-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.iterated-cartesian-product-types funext univalence truncations
 open import foundation.transport-along-identifications
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
-open import group-theory.iterated-cartesian-products-concrete-groups
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.iterated-cartesian-products-concrete-groups funext univalence truncations
 
-open import lists.arrays
-open import lists.concatenation-lists
-open import lists.functoriality-lists
-open import lists.permutation-lists
-open import lists.sort-by-insertion-lists
+open import lists.arrays funext univalence truncations
+open import lists.concatenation-lists funext univalence truncations
+open import lists.functoriality-lists funext univalence truncations
+open import lists.permutation-lists funext univalence truncations
+open import lists.sort-by-insertion-lists funext univalence truncations
 
-open import univalent-combinatorics.cyclic-finite-types
+open import univalent-combinatorics.cyclic-finite-types funext univalence truncations
 ```
 
 </details>

@@ -2,8 +2,15 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module finite-group-theory.cartier-delooping-sign-homomorphism where
+module finite-group-theory.cartier-delooping-sign-homomorphism
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,37 +19,38 @@ module finite-group-theory.cartier-delooping-sign-homomorphism where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.delooping-sign-homomorphism
-open import finite-group-theory.finite-type-groups
-open import finite-group-theory.sign-homomorphism
-open import finite-group-theory.transpositions
+open import finite-group-theory.delooping-sign-homomorphism funext univalence truncations
+open import finite-group-theory.finite-type-groups funext univalence truncations
+open import finite-group-theory.sign-homomorphism funext univalence truncations
+open import finite-group-theory.transpositions funext univalence truncations
 
-open import foundation.action-on-equivalences-type-families-over-subuniverses
+open import foundation.action-on-equivalences-type-families-over-subuniverses funext univalence
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.mere-equivalences
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.raising-universe-levels
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equivalence-relations funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.mere-equivalences funext univalence truncations
+open import foundation.negation funext
+open import foundation.propositional-truncations funext univalence
 open import foundation.transport-along-identifications
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
-open import group-theory.homomorphisms-concrete-groups
-open import group-theory.homomorphisms-groups
-open import group-theory.isomorphisms-groups
-open import group-theory.loop-groups-sets
-open import group-theory.symmetric-groups
+open import foundation-core.raising-universe-levels
 
-open import univalent-combinatorics.2-element-decidable-subtypes
-open import univalent-combinatorics.orientations-complete-undirected-graph
-open import univalent-combinatorics.standard-finite-types
+open import group-theory.homomorphisms-concrete-groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.isomorphisms-groups funext univalence truncations
+open import group-theory.loop-groups-sets funext univalence truncations
+open import group-theory.symmetric-groups funext univalence truncations
+
+open import univalent-combinatorics.2-element-decidable-subtypes funext univalence truncations
+open import univalent-combinatorics.orientations-complete-undirected-graph funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

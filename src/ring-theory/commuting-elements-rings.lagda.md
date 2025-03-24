@@ -1,20 +1,29 @@
 # Commuting elements of rings
 
 ```agda
-module ring-theory.commuting-elements-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.commuting-elements-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import group-theory.commuting-elements-monoids
+open import group-theory.commuting-elements-monoids funext univalence truncations
 
-open import ring-theory.rings
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

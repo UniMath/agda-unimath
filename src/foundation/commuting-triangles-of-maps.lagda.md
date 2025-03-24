@@ -1,7 +1,13 @@
 # Commuting triangles of maps
 
 ```agda
-module foundation.commuting-triangles-of-maps where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.commuting-triangles-of-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 
 open import foundation-core.commuting-triangles-of-maps public
 ```
@@ -10,16 +16,16 @@ open import foundation-core.commuting-triangles-of-maps public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.functoriality-dependent-function-types
-open import foundation.homotopies
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.homotopies funext
 open import foundation.homotopy-algebra
-open import foundation.identity-types
-open import foundation.postcomposition-functions
-open import foundation.precomposition-functions
+open import foundation.identity-types funext
+open import foundation.postcomposition-functions funext
+open import foundation.precomposition-functions funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.whiskering-identifications-concatenation

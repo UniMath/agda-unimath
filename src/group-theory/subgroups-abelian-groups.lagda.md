@@ -1,37 +1,46 @@
 # Subgroups of abelian groups
 
 ```agda
-module group-theory.subgroups-abelian-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.subgroups-abelian-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.large-binary-relations
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.equivalence-relations funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.large-binary-relations funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.congruence-relations-abelian-groups
-open import group-theory.congruence-relations-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-abelian-groups
-open import group-theory.normal-subgroups
-open import group-theory.semigroups
-open import group-theory.subgroups
-open import group-theory.subsets-abelian-groups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.congruence-relations-abelian-groups funext univalence truncations
+open import group-theory.congruence-relations-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-abelian-groups funext univalence truncations
+open import group-theory.normal-subgroups funext univalence truncations
+open import group-theory.semigroups funext univalence
+open import group-theory.subgroups funext univalence truncations
+open import group-theory.subsets-abelian-groups funext univalence truncations
 
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.posets
-open import order-theory.preorders
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.large-preorders funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.preorders funext univalence truncations
 ```
 
 </details>

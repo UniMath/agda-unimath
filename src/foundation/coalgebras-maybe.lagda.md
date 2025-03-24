@@ -1,17 +1,24 @@
 # Coalgebras of the maybe monad
 
 ```agda
-module foundation.coalgebras-maybe where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.coalgebras-maybe
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.maybe
 open import foundation.universe-levels
 
-open import trees.polynomial-endofunctors
+open import foundation-core.maybe
+
+open import trees.polynomial-endofunctors funext univalence
 ```
 
 </details>

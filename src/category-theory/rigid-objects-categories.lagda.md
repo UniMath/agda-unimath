@@ -1,16 +1,25 @@
 # Rigid objects in a category
 
 ```agda
-module category-theory.rigid-objects-categories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.rigid-objects-categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.rigid-objects-precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.rigid-objects-precategories funext univalence truncations
 
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 ```
 

@@ -1,38 +1,46 @@
 # Finite Σ-decompositions of finite types
 
 ```agda
-module univalent-combinatorics.sigma-decompositions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation.sigma-decompositions public
+module univalent-combinatorics.sigma-decompositions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation.sigma-decompositions funext univalence truncations public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.logical-equivalences
-open import foundation.precomposition-functions
-open import foundation.propositions
-open import foundation.relaxed-sigma-decompositions
-open import foundation.subtypes
-open import foundation.surjective-maps
+open import foundation.cartesian-product-types funext univalence
+open import foundation.dependent-products-propositions funext
+open import foundation.dependent-universal-property-equivalences funext
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.relaxed-sigma-decompositions funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.decidable-equivalence-relations
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.inhabited-finite-types
-open import univalent-combinatorics.type-duality
+open import univalent-combinatorics.decidable-equivalence-relations funext univalence truncations
+open import univalent-combinatorics.dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.inhabited-finite-types funext univalence truncations
+open import univalent-combinatorics.type-duality funext univalence truncations
 ```
 
 </details>

@@ -1,7 +1,15 @@
 # Multivariable relations
 
 ```agda
-module foundation.multivariable-relations where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.multivariable-relations
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,12 +17,12 @@ module foundation.multivariable-relations where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.multivariable-correspondences
+open import foundation.multivariable-correspondences funext univalence truncations
 open import foundation.universe-levels
 
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

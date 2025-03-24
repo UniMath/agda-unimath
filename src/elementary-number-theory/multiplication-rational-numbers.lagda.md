@@ -2,29 +2,36 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module elementary-number-theory.multiplication-rational-numbers where
+module elementary-number-theory.multiplication-rational-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integer-fractions
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.difference-rational-numbers
-open import elementary-number-theory.greatest-common-divisor-integers
-open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.addition-integer-fractions funext univalence truncations
+open import elementary-number-theory.addition-rational-numbers funext univalence truncations
+open import elementary-number-theory.difference-rational-numbers funext univalence truncations
+open import elementary-number-theory.greatest-common-divisor-integers funext univalence truncations
+open import elementary-number-theory.integer-fractions funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integer-fractions
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.reduced-integer-fractions
+open import elementary-number-theory.multiplication-integer-fractions funext univalence truncations
+open import elementary-number-theory.multiplication-integers funext univalence truncations
+open import elementary-number-theory.rational-numbers funext univalence truncations
+open import elementary-number-theory.reduced-integer-fractions funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.function-types funext
+open import foundation.identity-types funext
 open import foundation.interchange-law
 ```
 

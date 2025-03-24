@@ -1,23 +1,31 @@
 # Copartial elements
 
 ```agda
-module foundation.copartial-elements where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.copartial-elements
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.negation
+open import foundation.empty-types funext univalence truncations
+open import foundation.negation funext
 open import foundation.partial-elements
 open import foundation.universe-levels
 
 open import foundation-core.propositions
 
-open import orthogonal-factorization-systems.closed-modalities
+open import orthogonal-factorization-systems.closed-modalities funext univalence truncations
 
-open import synthetic-homotopy-theory.joins-of-types
+open import synthetic-homotopy-theory.joins-of-types funext univalence truncations
 ```
 
 </details>

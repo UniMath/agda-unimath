@@ -1,22 +1,30 @@
 # Opposite large precategories
 
 ```agda
-module category-theory.opposite-large-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.opposite-large-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-large-precategories
-open import category-theory.large-precategories
+open import category-theory.isomorphisms-in-large-precategories funext univalence truncations
+open import category-theory.large-precategories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.large-identity-types
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
+open import foundation.sets funext univalence
+open import foundation.strictly-involutive-identity-types funext univalence
 open import foundation.universe-levels
 ```
 

@@ -1,7 +1,11 @@
 # The universal property of identity systems
 
 ```agda
-module foundation.universal-property-identity-systems where
+open import foundation.function-extensionality-axiom
+
+module foundation.universal-property-identity-systems
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,11 +13,10 @@ module foundation.universal-property-identity-systems where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-systems
-open import foundation.universal-property-contractible-types
-open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-contractible-types funext
+open import foundation.universal-property-dependent-pair-types funext
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families

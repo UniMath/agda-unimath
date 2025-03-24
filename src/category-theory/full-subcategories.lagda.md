@@ -1,28 +1,37 @@
 # Full subcategories
 
 ```agda
-module category-theory.full-subcategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.full-subcategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.composition-operations-on-binary-families-of-sets
-open import category-theory.embeddings-precategories
-open import category-theory.full-subprecategories
-open import category-theory.fully-faithful-functors-precategories
-open import category-theory.functors-categories
-open import category-theory.maps-categories
-open import category-theory.precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.composition-operations-on-binary-families-of-sets funext univalence truncations
+open import category-theory.embeddings-precategories funext univalence truncations
+open import category-theory.full-subprecategories funext univalence truncations
+open import category-theory.fully-faithful-functors-precategories funext univalence truncations
+open import category-theory.functors-categories funext univalence truncations
+open import category-theory.maps-categories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.strictly-involutive-identity-types
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.strictly-involutive-identity-types funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 ```
 

@@ -1,13 +1,21 @@
 # Strongly extensional maps
 
 ```agda
-module foundation.strongly-extensional-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.strongly-extensional-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.apartness-relations
+open import foundation.apartness-relations funext univalence truncations
 open import foundation.universe-levels
 ```
 

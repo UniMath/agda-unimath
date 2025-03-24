@@ -1,17 +1,25 @@
 # Species of inhabited types
 
 ```agda
-module species.species-of-inhabited-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.species-of-inhabited-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.inhabited-types
+open import foundation.inhabited-types funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import species.species-of-types-in-subuniverses
+open import species.species-of-types-in-subuniverses funext univalence
 ```
 
 </details>

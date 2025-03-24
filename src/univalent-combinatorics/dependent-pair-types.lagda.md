@@ -1,7 +1,15 @@
 # Dependent pair types of finite types
 
 ```agda
-module univalent-combinatorics.dependent-pair-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.dependent-pair-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 
 open import foundation.dependent-pair-types public
 ```
@@ -10,34 +18,34 @@ open import foundation.dependent-pair-types public
 
 ```agda
 open import foundation.complements
-open import foundation.contractible-types
-open import foundation.decidable-types
-open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sections
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.decidable-types funext univalence truncations
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.functoriality-propositional-truncation funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sections funext
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-coproduct-types funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.counting-dependent-pair-types
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-choice
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.coproduct-types funext univalence truncations
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.counting-dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.decidable-propositions funext univalence truncations
+open import univalent-combinatorics.equality-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-choice funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

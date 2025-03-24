@@ -1,21 +1,29 @@
 # The standard cyclic groups
 
 ```agda
-module elementary-number-theory.standard-cyclic-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.standard-cyclic-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.modular-arithmetic funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.groups
-open import group-theory.semigroups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.semigroups funext univalence
 ```
 
 </details>

@@ -1,14 +1,22 @@
 # Contractible pointed types
 
 ```agda
-module structured-types.contractible-pointed-types where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.contractible-pointed-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.propositions
+open import foundation.contractible-types funext univalence
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
 open import structured-types.pointed-types

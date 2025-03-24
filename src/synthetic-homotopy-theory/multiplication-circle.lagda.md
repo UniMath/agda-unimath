@@ -1,7 +1,15 @@
 # The multiplication operation on the circle
 
 ```agda
-module synthetic-homotopy-theory.multiplication-circle where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.multiplication-circle
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,20 +17,16 @@ module synthetic-homotopy-theory.multiplication-circle where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.negated-equality
-open import foundation.negation
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
+open import structured-types.pointed-homotopies funext univalence truncations
+open import structured-types.pointed-maps funext univalence truncations
 
-open import synthetic-homotopy-theory.circle
-open import synthetic-homotopy-theory.loop-homotopy-circle
+open import synthetic-homotopy-theory.circle funext univalence truncations
+open import synthetic-homotopy-theory.loop-homotopy-circle funext univalence truncations
 ```
 
 </details>

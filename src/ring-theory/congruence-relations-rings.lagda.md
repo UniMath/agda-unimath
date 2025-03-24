@@ -1,26 +1,35 @@
 # Congruence relations on rings
 
 ```agda
-module ring-theory.congruence-relations-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.congruence-relations-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalence-relations funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.congruence-relations-abelian-groups
-open import group-theory.congruence-relations-monoids
+open import group-theory.congruence-relations-abelian-groups funext univalence truncations
+open import group-theory.congruence-relations-monoids funext univalence truncations
 
-open import ring-theory.congruence-relations-semirings
-open import ring-theory.rings
+open import ring-theory.congruence-relations-semirings funext univalence truncations
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

@@ -1,20 +1,28 @@
 # The Collatz bijection
 
 ```agda
-module elementary-number-theory.collatz-bijection where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.collatz-bijection
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.euclidean-division-natural-numbers
-open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.distance-natural-numbers funext univalence truncations
+open import elementary-number-theory.euclidean-division-natural-numbers funext univalence truncations
+open import elementary-number-theory.modular-arithmetic funext univalence truncations
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
-open import foundation.identity-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.identity-types funext
 ```
 
 </details>

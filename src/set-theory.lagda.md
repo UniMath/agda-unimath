@@ -42,17 +42,25 @@ theory, and [Russell's paradox](set-theory.russells-paradox.md).
 ## Modules in the set theory namespace
 
 ```agda
-module set-theory where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import set-theory.baire-space public
-open import set-theory.cantor-space public
-open import set-theory.cantors-diagonal-argument public
-open import set-theory.cardinalities public
-open import set-theory.countable-sets public
-open import set-theory.cumulative-hierarchy public
-open import set-theory.infinite-sets public
-open import set-theory.russells-paradox public
-open import set-theory.uncountable-sets public
+module set-theory
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import set-theory.baire-space funext univalence truncations public
+open import set-theory.cantor-space funext univalence truncations public
+open import set-theory.cantors-diagonal-argument funext univalence truncations public
+open import set-theory.cardinalities funext univalence truncations public
+open import set-theory.countable-sets funext univalence truncations public
+open import set-theory.cumulative-hierarchy funext univalence truncations public
+open import set-theory.infinite-sets funext univalence truncations public
+open import set-theory.russells-paradox funext univalence truncations public
+open import set-theory.uncountable-sets funext univalence truncations public
 ```
 
 ## References

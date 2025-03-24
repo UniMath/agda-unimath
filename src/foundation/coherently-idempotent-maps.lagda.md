@@ -1,7 +1,15 @@
 # Coherently idempotent maps
 
 ```agda
-module foundation.coherently-idempotent-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.coherently-idempotent-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,8 +19,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.homotopy-algebra
-open import foundation.quasicoherently-idempotent-maps
-open import foundation.split-idempotent-maps
+open import foundation.quasicoherently-idempotent-maps funext univalence truncations
+open import foundation.split-idempotent-maps funext univalence truncations
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

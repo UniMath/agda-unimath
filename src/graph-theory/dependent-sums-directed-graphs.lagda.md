@@ -1,7 +1,15 @@
 # Dependent sums directed graphs
 
 ```agda
-module graph-theory.dependent-sums-directed-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.dependent-sums-directed-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,11 +18,11 @@ module graph-theory.dependent-sums-directed-graphs where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import graph-theory.base-change-dependent-directed-graphs
-open import graph-theory.dependent-directed-graphs
-open import graph-theory.directed-graphs
-open import graph-theory.morphisms-directed-graphs
-open import graph-theory.sections-dependent-directed-graphs
+open import graph-theory.base-change-dependent-directed-graphs funext univalence truncations
+open import graph-theory.dependent-directed-graphs funext univalence
+open import graph-theory.directed-graphs funext univalence
+open import graph-theory.morphisms-directed-graphs funext univalence truncations
+open import graph-theory.sections-dependent-directed-graphs funext univalence truncations
 ```
 
 </details>

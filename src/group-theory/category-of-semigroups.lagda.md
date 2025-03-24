@@ -1,25 +1,33 @@
 # The category of semigroups
 
 ```agda
-module group-theory.category-of-semigroups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.category-of-semigroups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.large-categories
+open import category-theory.categories funext univalence truncations
+open import category-theory.large-categories funext univalence truncations
 
-open import foundation.1-types
+open import foundation.1-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import group-theory.isomorphisms-semigroups
-open import group-theory.precategory-of-semigroups
-open import group-theory.semigroups
+open import group-theory.isomorphisms-semigroups funext univalence truncations
+open import group-theory.precategory-of-semigroups funext univalence truncations
+open import group-theory.semigroups funext univalence
 ```
 
 </details>

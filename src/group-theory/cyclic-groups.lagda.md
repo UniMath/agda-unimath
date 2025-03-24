@@ -1,25 +1,34 @@
 # Cyclic groups
 
 ```agda
-module group-theory.cyclic-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.cyclic-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.inhabited-subtypes
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.inhabited-subtypes funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.generating-elements-groups
-open import group-theory.groups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.generating-elements-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
 ```
 
 </details>

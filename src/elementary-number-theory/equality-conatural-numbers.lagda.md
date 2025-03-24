@@ -2,41 +2,49 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module elementary-number-theory.equality-conatural-numbers where
+module elementary-number-theory.equality-conatural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.conatural-numbers
+open import elementary-number-theory.conatural-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.coherently-invertible-maps
-open import foundation.coproduct-types
+open import foundation.coherently-invertible-maps funext
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.double-negation
-open import foundation.double-negation-stable-equality
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
+open import foundation.double-negation funext univalence truncations
+open import foundation.double-negation-stable-equality funext univalence truncations
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.maybe
-open import foundation.negation
-open import foundation.retractions
-open import foundation.retracts-of-types
-open import foundation.sections
-open import foundation.sets
-open import foundation.tight-apartness-relations
-open import foundation.torsorial-type-families
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.negation funext
+open import foundation.retractions funext
+open import foundation.retracts-of-types funext univalence
+open import foundation.sections funext
+open import foundation.sets funext univalence
+open import foundation.tight-apartness-relations funext univalence truncations
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import logic.double-negation-elimination
+open import foundation-core.maybe
+
+open import logic.double-negation-elimination funext univalence truncations
 ```
 
 </details>

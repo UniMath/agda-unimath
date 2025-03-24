@@ -1,15 +1,22 @@
 # The universal property of the conatural numbers
 
 ```agda
-module elementary-number-theory.universal-property-conatural-numbers where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.universal-property-conatural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coalgebras-maybe
-open import foundation.contractible-types
-open import foundation.morphisms-coalgebras-maybe
+open import foundation.coalgebras-maybe funext univalence
+open import foundation.contractible-types funext univalence
+open import foundation.dependent-products-contractible-types funext
+open import foundation.morphisms-coalgebras-maybe funext univalence
 open import foundation.universe-levels
 ```
 
@@ -23,7 +30,7 @@ enjoys many universal properties, among others:
 1. It is the one-point compactification of the
    [natural numbers](elementary-number-theory.natural-numbers.md).
 2. It classifies downward-stable subsets of the natural numbers.
-3. It is the final coalgebra of the [maybe monad](foundation.maybe.md).
+3. It is the final coalgebra of the [maybe monad](foundation-core.maybe.md).
 
 On this page we consider the last of these. Thus, a
 `Maybe`-[coalgebra](foundation.coalgebras-maybe.md) `η : X → Maybe X` satisfies

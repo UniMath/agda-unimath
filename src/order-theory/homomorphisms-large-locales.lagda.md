@@ -1,17 +1,25 @@
 # Homomorphisms of large locales
 
 ```agda
-module order-theory.homomorphisms-large-locales where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.homomorphisms-large-locales
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import order-theory.homomorphisms-large-frames
-open import order-theory.large-locales
+open import order-theory.homomorphisms-large-frames funext univalence truncations
+open import order-theory.large-locales funext univalence truncations
 ```
 
 </details>

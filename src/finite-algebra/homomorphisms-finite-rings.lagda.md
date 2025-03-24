@@ -1,25 +1,34 @@
 # Homomorphisms of finite rings
 
 ```agda
-module finite-algebra.homomorphisms-finite-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module finite-algebra.homomorphisms-finite-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-algebra.finite-rings
+open import finite-algebra.finite-rings funext univalence truncations
 
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-abelian-groups
-open import group-theory.homomorphisms-monoids
+open import group-theory.homomorphisms-abelian-groups funext univalence truncations
+open import group-theory.homomorphisms-monoids funext univalence truncations
 
-open import ring-theory.homomorphisms-rings
+open import ring-theory.homomorphisms-rings funext univalence truncations
 ```
 
 </details>

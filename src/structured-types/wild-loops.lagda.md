@@ -1,23 +1,31 @@
 # Wild loops
 
 ```agda
-module structured-types.wild-loops where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.wild-loops
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.automorphisms
+open import foundation.automorphisms funext univalence
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import structured-types.h-spaces
-open import structured-types.magmas
+open import structured-types.h-spaces funext univalence truncations
+open import structured-types.magmas funext univalence
 open import structured-types.pointed-types
-open import structured-types.wild-quasigroups
+open import structured-types.wild-quasigroups funext univalence
 ```
 
 </details>

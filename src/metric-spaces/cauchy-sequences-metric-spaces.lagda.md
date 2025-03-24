@@ -2,37 +2,44 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module metric-spaces.cauchy-sequences-metric-spaces where
+module metric-spaces.cauchy-sequences-metric-spaces
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.archimedean-property-positive-rational-numbers
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.maximum-natural-numbers
-open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
+open import elementary-number-theory.addition-rational-numbers funext univalence truncations
+open import elementary-number-theory.archimedean-property-positive-rational-numbers funext univalence truncations
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
+open import elementary-number-theory.inequality-rational-numbers funext univalence truncations
+open import elementary-number-theory.maximum-natural-numbers funext univalence truncations
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
-open import elementary-number-theory.unit-fractions-rational-numbers
+open import elementary-number-theory.nonzero-natural-numbers funext univalence truncations
+open import elementary-number-theory.positive-rational-numbers funext univalence truncations
+open import elementary-number-theory.strict-inequality-rational-numbers funext univalence truncations
+open import elementary-number-theory.unit-fractions-rational-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
-open import metric-spaces.metric-spaces
+open import metric-spaces.cauchy-approximations-metric-spaces funext univalence truncations
+open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces funext univalence truncations
+open import metric-spaces.metric-spaces funext univalence truncations
 ```
 
 </details>

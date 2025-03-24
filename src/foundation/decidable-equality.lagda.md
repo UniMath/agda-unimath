@@ -1,21 +1,30 @@
 # Decidable equality
 
 ```agda
-module foundation.decidable-equality where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.decidable-equality
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.double-negation
-open import foundation.injective-maps
-open import foundation.negation
-open import foundation.sections
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.double-negation funext univalence truncations
+open import foundation.injective-maps funext
+open import foundation.negation funext
+open import foundation.sections funext
+open import foundation.sets funext univalence
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels

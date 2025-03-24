@@ -1,7 +1,15 @@
 # The poset of cyclic rings
 
 ```agda
-module ring-theory.poset-of-cyclic-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module ring-theory.poset-of-cyclic-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,9 +17,9 @@ module ring-theory.poset-of-cyclic-rings where
 ```agda
 open import foundation.universe-levels
 
-open import order-theory.large-posets
+open import order-theory.large-posets funext univalence truncations
 
-open import ring-theory.category-of-cyclic-rings
+open import ring-theory.category-of-cyclic-rings funext univalence truncations
 ```
 
 </details>

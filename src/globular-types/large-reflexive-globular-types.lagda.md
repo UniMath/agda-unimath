@@ -2,21 +2,28 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module globular-types.large-reflexive-globular-types where
+module globular-types.large-reflexive-globular-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.large-binary-relations
+open import foundation.binary-relations funext univalence truncations
+open import foundation.large-binary-relations funext univalence truncations
 open import foundation.universe-levels
 
 open import globular-types.globular-types
-open import globular-types.large-globular-maps
+open import globular-types.large-globular-maps funext
 open import globular-types.large-globular-types
-open import globular-types.reflexive-globular-types
+open import globular-types.reflexive-globular-types funext univalence truncations
 ```
 
 </details>

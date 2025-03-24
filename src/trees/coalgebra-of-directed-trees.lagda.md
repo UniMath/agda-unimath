@@ -1,7 +1,15 @@
 # The coalgebra of directed trees
 
 ```agda
-module trees.coalgebra-of-directed-trees where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.coalgebra-of-directed-trees
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,10 +18,10 @@ module trees.coalgebra-of-directed-trees where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import trees.bases-directed-trees
-open import trees.coalgebras-polynomial-endofunctors
-open import trees.directed-trees
-open import trees.fibers-directed-trees
+open import trees.bases-directed-trees funext univalence truncations
+open import trees.coalgebras-polynomial-endofunctors funext univalence
+open import trees.directed-trees funext univalence truncations
+open import trees.fibers-directed-trees funext univalence truncations
 ```
 
 </details>

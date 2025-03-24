@@ -1,22 +1,33 @@
 # Trivial concrete groups
 
 ```agda
-module group-theory.trivial-concrete-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.trivial-concrete-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.propositions
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
+open import foundation.raising-universe-levels-unit-type
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
+open import group-theory.concrete-groups funext univalence truncations
 
-open import higher-group-theory.trivial-higher-groups
+open import higher-group-theory.trivial-higher-groups funext univalence truncations
 ```
 
 </details>

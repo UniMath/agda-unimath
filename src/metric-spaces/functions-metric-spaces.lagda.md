@@ -1,19 +1,27 @@
 # Functions between metric spaces
 
 ```agda
-module metric-spaces.functions-metric-spaces where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module metric-spaces.functions-metric-spaces
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.sets
+open import foundation.function-types funext
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import metric-spaces.metric-spaces
-open import metric-spaces.premetric-spaces
+open import metric-spaces.metric-spaces funext univalence truncations
+open import metric-spaces.premetric-spaces funext univalence truncations
 ```
 
 </details>

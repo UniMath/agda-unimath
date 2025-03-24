@@ -1,27 +1,37 @@
 # Propositional extensionality
 
 ```agda
-module foundation.propositional-extensionality where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.propositional-extensionality
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.empty-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.postcomposition-functions
-open import foundation.raising-universe-levels
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.postcomposition-functions funext
+open import foundation.raising-universe-levels-unit-type
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
-open import foundation.univalence
-open import foundation.univalent-type-families
-open import foundation.universal-property-contractible-types
-open import foundation.universal-property-empty-type
+open import foundation.univalence funext univalence
+open import foundation.univalent-type-families funext univalence
+open import foundation.universal-property-contractible-types funext
+open import foundation.universal-property-empty-type funext
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -29,6 +39,7 @@ open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.raising-universe-levels
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
 ```

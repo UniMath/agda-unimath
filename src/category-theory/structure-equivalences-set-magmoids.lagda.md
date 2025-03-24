@@ -1,25 +1,35 @@
 # Structure equivalences between set-magmoids
 
 ```agda
-module category-theory.structure-equivalences-set-magmoids where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.structure-equivalences-set-magmoids
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-set-magmoids
-open import category-theory.set-magmoids
+open import category-theory.functors-set-magmoids funext univalence truncations
+open import category-theory.set-magmoids funext univalence truncations
 
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.propositions funext univalence
+open import foundation.telescopes
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.universe-levels
 ```
 

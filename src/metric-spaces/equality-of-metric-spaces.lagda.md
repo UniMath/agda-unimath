@@ -1,27 +1,37 @@
 # Equality of metric spaces
 
 ```agda
-module metric-spaces.equality-of-metric-spaces where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module metric-spaces.equality-of-metric-spaces
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import metric-spaces.equality-of-premetric-spaces
-open import metric-spaces.isometric-equivalences-premetric-spaces
-open import metric-spaces.metric-spaces
-open import metric-spaces.premetric-spaces
+open import metric-spaces.equality-of-premetric-spaces funext univalence truncations
+open import metric-spaces.isometric-equivalences-premetric-spaces funext univalence truncations
+open import metric-spaces.metric-spaces funext univalence truncations
+open import metric-spaces.premetric-spaces funext univalence truncations
 ```
 
 </details>

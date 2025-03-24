@@ -1,19 +1,27 @@
 # Totally faithful morphisms of undirected graphs
 
 ```agda
-module graph-theory.totally-faithful-morphisms-undirected-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.totally-faithful-morphisms-undirected-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.functoriality-dependent-pair-types
+open import foundation.embeddings funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.universe-levels
 
-open import graph-theory.morphisms-undirected-graphs
-open import graph-theory.undirected-graphs
+open import graph-theory.morphisms-undirected-graphs funext univalence truncations
+open import graph-theory.undirected-graphs funext univalence truncations
 ```
 
 </details>

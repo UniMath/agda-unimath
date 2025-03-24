@@ -1,44 +1,53 @@
 # Strict inequality on the integers
 
 ```agda
-module elementary-number-theory.strict-inequality-integers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.strict-inequality-integers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.addition-positive-and-negative-integers
-open import elementary-number-theory.difference-integers
-open import elementary-number-theory.inequality-integers
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.addition-integers funext univalence truncations
+open import elementary-number-theory.addition-positive-and-negative-integers funext univalence truncations
+open import elementary-number-theory.difference-integers funext univalence truncations
+open import elementary-number-theory.inequality-integers funext univalence truncations
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.negative-integers
-open import elementary-number-theory.nonnegative-integers
-open import elementary-number-theory.nonpositive-integers
-open import elementary-number-theory.positive-and-negative-integers
-open import elementary-number-theory.positive-integers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.negative-integers funext univalence truncations
+open import elementary-number-theory.nonnegative-integers funext univalence truncations
+open import elementary-number-theory.nonpositive-integers funext univalence truncations
+open import elementary-number-theory.positive-and-negative-integers funext univalence truncations
+open import elementary-number-theory.positive-integers funext univalence truncations
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.negation funext
+open import foundation.propositions funext univalence
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import order-theory.posets
-open import order-theory.preorders
+open import order-theory.posets funext univalence truncations
+open import order-theory.preorders funext univalence truncations
 ```
 
 </details>

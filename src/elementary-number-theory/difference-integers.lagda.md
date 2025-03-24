@@ -1,18 +1,26 @@
 # The difference between integers
 
 ```agda
-module elementary-number-theory.difference-integers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.difference-integers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-integers funext univalence truncations
 open import elementary-number-theory.integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.interchange-law
 ```
 

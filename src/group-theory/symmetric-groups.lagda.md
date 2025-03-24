@@ -1,31 +1,39 @@
 # Symmetric groups
 
 ```agda
-module group-theory.symmetric-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.symmetric-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.automorphisms
+open import foundation.automorphisms funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-semigroups
-open import group-theory.isomorphisms-groups
-open import group-theory.monoids
-open import group-theory.opposite-groups
-open import group-theory.semigroups
-open import group-theory.symmetric-concrete-groups
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.homomorphisms-semigroups funext univalence truncations
+open import group-theory.isomorphisms-groups funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.opposite-groups funext univalence truncations
+open import group-theory.semigroups funext univalence
+open import group-theory.symmetric-concrete-groups funext univalence truncations
 ```
 
 </details>

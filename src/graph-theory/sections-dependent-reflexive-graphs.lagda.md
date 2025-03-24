@@ -1,7 +1,15 @@
 # Sections of dependent reflexive graphs
 
 ```agda
-module graph-theory.sections-dependent-reflexive-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.sections-dependent-reflexive-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,24 +19,24 @@ open import foundation.action-on-identifications-binary-dependent-functions
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.commuting-squares-of-identifications
+open import foundation.commuting-squares-of-identifications funext
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.equality-dependent-function-types funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.reflexive-relations
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.reflexive-relations funext univalence truncations
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import graph-theory.dependent-reflexive-graphs
-open import graph-theory.reflexive-graphs
-open import graph-theory.sections-dependent-directed-graphs
+open import graph-theory.dependent-reflexive-graphs funext univalence truncations
+open import graph-theory.reflexive-graphs funext univalence truncations
+open import graph-theory.sections-dependent-directed-graphs funext univalence truncations
 ```
 
 </details>

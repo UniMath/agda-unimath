@@ -1,20 +1,28 @@
 # Morphisms of types equipped with automorphisms
 
 ```agda
-module structured-types.morphisms-types-equipped-with-automorphisms where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.morphisms-types-equipped-with-automorphisms
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.torsorial-type-families
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import structured-types.morphisms-types-equipped-with-endomorphisms
-open import structured-types.types-equipped-with-automorphisms
+open import structured-types.morphisms-types-equipped-with-endomorphisms funext univalence truncations
+open import structured-types.types-equipped-with-automorphisms funext univalence
 ```
 
 </details>

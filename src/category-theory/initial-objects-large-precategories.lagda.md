@@ -1,15 +1,24 @@
 # Initial objects of large precategories
 
 ```agda
-module category-theory.initial-objects-large-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.initial-objects-large-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories
+open import category-theory.large-precategories funext univalence truncations
 
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
+open import foundation.dependent-products-contractible-types funext
 open import foundation.universe-levels
 ```
 

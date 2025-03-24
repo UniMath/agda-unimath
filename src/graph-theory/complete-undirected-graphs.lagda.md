@@ -1,7 +1,15 @@
 # Complete undirected graphs
 
 ```agda
-module graph-theory.complete-undirected-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.complete-undirected-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,10 +17,10 @@ module graph-theory.complete-undirected-graphs where
 ```agda
 open import foundation.universe-levels
 
-open import graph-theory.complete-multipartite-graphs
-open import graph-theory.finite-graphs
+open import graph-theory.complete-multipartite-graphs funext univalence truncations
+open import graph-theory.finite-graphs funext univalence truncations
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

@@ -1,7 +1,15 @@
 # Acyclic undirected graphs
 
 ```agda
-module graph-theory.acyclic-undirected-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.acyclic-undirected-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,9 +17,9 @@ module graph-theory.acyclic-undirected-graphs where
 ```agda
 open import foundation.universe-levels
 
-open import graph-theory.geometric-realizations-undirected-graphs
-open import graph-theory.reflecting-maps-undirected-graphs
-open import graph-theory.undirected-graphs
+open import graph-theory.geometric-realizations-undirected-graphs funext univalence truncations
+open import graph-theory.reflecting-maps-undirected-graphs funext univalence truncations
+open import graph-theory.undirected-graphs funext univalence truncations
 ```
 
 </details>

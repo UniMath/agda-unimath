@@ -9,7 +9,15 @@ theorems in mathematics that have their own Wikipedia entry. We welcome any
 contribution to this list!
 
 ```agda
-module literature.1000plus-theorems where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module literature.1000plus-theorems
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 ## Formalized theorems
@@ -21,9 +29,9 @@ The theorems are ordered alphabetically, omitting definite articles ("the").
 **Author:** [Bryan Lu](https://blu-bird.github.io)
 
 ```agda
-open import elementary-number-theory.bezouts-lemma-integers using
+open import elementary-number-theory.bezouts-lemma-integers funext univalence truncations using
   ( bezouts-lemma-ℤ)
-open import elementary-number-theory.bezouts-lemma-natural-numbers using
+open import elementary-number-theory.bezouts-lemma-natural-numbers funext univalence truncations using
   ( bezouts-lemma-ℕ)
 ```
 
@@ -32,17 +40,17 @@ open import elementary-number-theory.bezouts-lemma-natural-numbers using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import commutative-algebra.binomial-theorem-commutative-rings using
+open import commutative-algebra.binomial-theorem-commutative-rings funext univalence truncations using
   ( binomial-theorem-Commutative-Ring)
-open import commutative-algebra.binomial-theorem-commutative-semirings using
+open import commutative-algebra.binomial-theorem-commutative-semirings funext univalence truncations using
   ( binomial-theorem-Commutative-Semiring)
-open import ring-theory.binomial-theorem-rings using
+open import ring-theory.binomial-theorem-rings funext univalence truncations using
   ( binomial-theorem-Ring)
-open import ring-theory.binomial-theorem-semirings using
+open import ring-theory.binomial-theorem-semirings funext univalence truncations using
   ( binomial-theorem-Semiring)
-open import elementary-number-theory.binomial-theorem-integers using
+open import elementary-number-theory.binomial-theorem-integers funext univalence truncations using
   ( binomial-theorem-ℤ)
-open import elementary-number-theory.binomial-theorem-natural-numbers using
+open import elementary-number-theory.binomial-theorem-natural-numbers funext univalence truncations using
   ( binomial-theorem-ℕ)
 ```
 
@@ -57,7 +65,7 @@ hence we refer to the generalization as the Cantor-Schröder-Bernstein-Escardó
 theorem.
 
 ```agda
-open import foundation.cantor-schroder-bernstein-escardo using
+open import foundation.cantor-schroder-bernstein-escardo funext univalence truncations using
   ( Cantor-Schröder-Bernstein-Escardó ;
     Cantor-Schröder-Bernstein)
 ```
@@ -67,7 +75,7 @@ open import foundation.cantor-schroder-bernstein-escardo using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import foundation.cantors-theorem using
+open import foundation.cantors-theorem funext univalence truncations using
   ( theorem-Cantor)
 ```
 
@@ -76,7 +84,7 @@ open import foundation.cantors-theorem using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import group-theory.cayleys-theorem using
+open import group-theory.cayleys-theorem funext univalence truncations using
   ( Cayleys-theorem)
 ```
 
@@ -85,7 +93,7 @@ open import group-theory.cayleys-theorem using
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 
 ```agda
-open import foundation.diaconescus-theorem using
+open import foundation.diaconescus-theorem funext univalence truncations using
   ( theorem-Diaconescu)
 ```
 
@@ -94,7 +102,7 @@ open import foundation.diaconescus-theorem using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import elementary-number-theory.infinitude-of-primes using
+open import elementary-number-theory.infinitude-of-primes funext univalence truncations using
   ( infinitude-of-primes-ℕ)
 ```
 
@@ -103,7 +111,7 @@ open import elementary-number-theory.infinitude-of-primes using
 **Author:** [Victor Blanchi](https://github.com/VictorBlanchi)
 
 ```agda
-open import elementary-number-theory.fundamental-theorem-of-arithmetic using
+open import elementary-number-theory.fundamental-theorem-of-arithmetic funext univalence truncations using
   ( fundamental-theorem-arithmetic-list-ℕ)
 ```
 
@@ -112,7 +120,7 @@ open import elementary-number-theory.fundamental-theorem-of-arithmetic using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import foundation.fundamental-theorem-of-equivalence-relations using
+open import foundation.fundamental-theorem-of-equivalence-relations funext univalence truncations using
   ( equiv-equivalence-relation-partition)
 ```
 
@@ -121,10 +129,10 @@ open import foundation.fundamental-theorem-of-equivalence-relations using
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 
 ```agda
-open import domain-theory.kleenes-fixed-point-theorem-posets using
+open import domain-theory.kleenes-fixed-point-theorem-posets funext univalence truncations using
   ( is-least-fixed-point-theorem-kleene-hom-Poset ;
     is-least-fixed-point-theorem-kleene-Poset)
-open import domain-theory.kleenes-fixed-point-theorem-omega-complete-posets using
+open import domain-theory.kleenes-fixed-point-theorem-omega-complete-posets funext univalence truncations using
   ( is-least-fixed-point-theorem-kleene-hom-ω-Complete-Poset ;
     is-least-fixed-point-theorem-kleene-ω-Complete-Poset)
 ```
@@ -134,7 +142,7 @@ open import domain-theory.kleenes-fixed-point-theorem-omega-complete-posets usin
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 
 ```agda
-open import order-theory.knaster-tarski-fixed-point-theorem using
+open import order-theory.knaster-tarski-fixed-point-theorem funext univalence truncations using
   ( least-fixed-point-knaster-tarski-Inflattice ;
     greatest-fixed-point-knaster-tarski-Suplattice)
 ```
@@ -144,7 +152,7 @@ open import order-theory.knaster-tarski-fixed-point-theorem using
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
 
 ```agda
-open import foundation.lawveres-fixed-point-theorem using
+open import foundation.lawveres-fixed-point-theorem funext univalence truncations using
   ( fixed-point-theorem-Lawvere)
 ```
 
@@ -153,9 +161,9 @@ open import foundation.lawveres-fixed-point-theorem using
 **Author:** [Emily Riehl](https://emilyriehl.github.io/)
 
 ```agda
-open import category-theory.yoneda-lemma-categories using
+open import category-theory.yoneda-lemma-categories funext univalence truncations using
   ( lemma-yoneda-Category)
-open import category-theory.yoneda-lemma-precategories using
+open import category-theory.yoneda-lemma-precategories funext univalence truncations using
   ( lemma-yoneda-Precategory)
 ```
 

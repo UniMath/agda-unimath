@@ -1,32 +1,41 @@
 # Premetric structures on types
 
 ```agda
-module metric-spaces.premetric-structures where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module metric-spaces.premetric-structures
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers funext univalence truncations
 
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.function-extensionality
-open import foundation.function-types
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositional-extensionality
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.torsorial-type-families
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.propositional-extensionality funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.transport-along-identifications
-open import foundation.univalence
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 ```
 

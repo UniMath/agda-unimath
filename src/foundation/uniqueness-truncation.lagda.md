@@ -1,12 +1,17 @@
 # Uniqueness of the truncations
 
 ```agda
-module foundation.uniqueness-truncation where
+open import foundation.function-extensionality-axiom
+
+module foundation.uniqueness-truncation
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-truncated-types funext
 open import foundation.universe-levels
 
 open import foundation-core.function-types

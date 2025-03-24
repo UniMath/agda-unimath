@@ -1,31 +1,40 @@
 # Integer powers of elements of groups
 
 ```agda
-module group-theory.integer-powers-of-elements-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.integer-powers-of-elements-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-integers funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-integers funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.iterating-automorphisms
-open import foundation.propositions
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.dependent-products-propositions funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.iterating-automorphisms funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import group-theory.commuting-elements-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.powers-of-elements-groups
+open import group-theory.commuting-elements-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.powers-of-elements-groups funext univalence truncations
 
-open import structured-types.initial-pointed-type-equipped-with-automorphism
+open import structured-types.initial-pointed-type-equipped-with-automorphism funext univalence truncations
 ```
 
 </details>

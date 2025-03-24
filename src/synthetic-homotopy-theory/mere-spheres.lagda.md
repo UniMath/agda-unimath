@@ -1,7 +1,15 @@
 # Mere spheres
 
 ```agda
-module synthetic-homotopy-theory.mere-spheres where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.mere-spheres
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details></summary>Imports</summary>
@@ -10,11 +18,12 @@ module synthetic-homotopy-theory.mere-spheres where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.mere-equivalences
-open import foundation.propositions
+open import foundation.mere-equivalences funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.dependent-products-propositions funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.spheres
+open import synthetic-homotopy-theory.spheres funext univalence truncations
 ```
 
 </details>

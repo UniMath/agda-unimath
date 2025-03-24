@@ -2,42 +2,49 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module real-numbers.addition-upper-dedekind-real-numbers where
+module real-numbers.addition-upper-dedekind-real-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.additive-group-of-rational-numbers
-open import elementary-number-theory.difference-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.addition-rational-numbers funext univalence truncations
+open import elementary-number-theory.additive-group-of-rational-numbers funext univalence truncations
+open import elementary-number-theory.difference-rational-numbers funext univalence truncations
+open import elementary-number-theory.positive-rational-numbers funext univalence truncations
+open import elementary-number-theory.rational-numbers funext univalence truncations
+open import elementary-number-theory.strict-inequality-rational-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.cartesian-product-types
-open import foundation.conjunction
+open import foundation.cartesian-product-types funext univalence
+open import foundation.conjunction funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
-open import foundation.subtypes
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.commutative-monoids
-open import group-theory.groups
-open import group-theory.minkowski-multiplication-commutative-monoids
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.commutative-monoids funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.minkowski-multiplication-commutative-monoids funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.semigroups funext univalence
 
-open import real-numbers.rational-upper-dedekind-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.rational-upper-dedekind-real-numbers funext univalence truncations
+open import real-numbers.upper-dedekind-real-numbers funext univalence truncations
 ```
 
 </details>

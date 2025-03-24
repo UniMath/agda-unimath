@@ -2,25 +2,32 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module set-theory.russells-paradox where
+module set-theory.russells-paradox
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.identity-types
-open import foundation.locally-small-types
-open import foundation.negation
-open import foundation.small-types
-open import foundation.small-universes
-open import foundation.surjective-maps
-open import foundation.torsorial-type-families
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.identity-types funext
+open import foundation.locally-small-types funext univalence truncations
+open import foundation.negation funext
+open import foundation.small-types funext univalence truncations
+open import foundation.small-universes funext univalence truncations
+open import foundation.surjective-maps funext univalence truncations
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.universal-property-equivalences
+open import foundation.universal-property-equivalences funext
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -28,9 +35,9 @@ open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 
-open import trees.multisets
-open import trees.small-multisets
-open import trees.universal-multiset
+open import trees.multisets funext univalence truncations
+open import trees.small-multisets funext univalence truncations
+open import trees.universal-multiset funext univalence truncations
 ```
 
 </details>

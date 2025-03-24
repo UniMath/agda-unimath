@@ -2,19 +2,26 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module elementary-number-theory.difference-rational-numbers where
+module elementary-number-theory.difference-rational-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.addition-rational-numbers funext univalence truncations
+open import elementary-number-theory.rational-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.interchange-law
 ```
 

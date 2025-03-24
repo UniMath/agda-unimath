@@ -2,18 +2,26 @@
 
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module modal-type-theory.sharp-codiscrete-maps where
+module modal-type-theory.sharp-codiscrete-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.fibers-of-maps
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.fibers-of-maps funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import modal-type-theory.sharp-codiscrete-types
+open import modal-type-theory.sharp-codiscrete-types funext univalence truncations
 ```
 
 </details>

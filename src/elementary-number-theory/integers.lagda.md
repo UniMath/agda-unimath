@@ -7,30 +7,26 @@ module elementary-number-theory.integers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equality-coproduct-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
-open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.types-equipped-with-endomorphisms
+open import foundation-core.coproduct-types
+open import foundation-core.embeddings
+open import foundation-core.empty-types
+open import foundation-core.equivalences
+open import foundation-core.function-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.negation
+open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
+open import foundation-core.sets
 ```
 
 </details>
@@ -136,10 +132,6 @@ pred-ℤ (inl x) = inl (succ-ℕ x)
 pred-ℤ (inr (inl star)) = inl zero-ℕ
 pred-ℤ (inr (inr zero-ℕ)) = inr (inl star)
 pred-ℤ (inr (inr (succ-ℕ x))) = inr (inr x)
-
-ℤ-Type-With-Endomorphism : Type-With-Endomorphism lzero
-pr1 ℤ-Type-With-Endomorphism = ℤ
-pr2 ℤ-Type-With-Endomorphism = succ-ℤ
 ```
 
 ### The negative of an integer
@@ -152,18 +144,6 @@ neg-ℤ (inr (inr x)) = inl x
 ```
 
 ## Properties
-
-### The type of integers is a set
-
-```agda
-abstract
-  is-set-ℤ : is-set ℤ
-  is-set-ℤ = is-set-coproduct is-set-ℕ (is-set-coproduct is-set-unit is-set-ℕ)
-
-ℤ-Set : Set lzero
-pr1 ℤ-Set = ℤ
-pr2 ℤ-Set = is-set-ℤ
-```
 
 ### The successor and predecessor functions on ℤ are mutual inverses
 
@@ -214,7 +194,7 @@ abstract
   is-injective-succ-ℤ {x} {y} p =
     inv (is-retraction-pred-ℤ x) ∙ ap pred-ℤ p ∙ is-retraction-pred-ℤ y
 
-  has-no-fixed-points-succ-ℤ : (x : ℤ) → succ-ℤ x ≠ x
+  has-no-fixed-points-succ-ℤ : (x : ℤ) → ¬ (succ-ℤ x ＝ x)
   has-no-fixed-points-succ-ℤ (inl zero-ℕ) ()
   has-no-fixed-points-succ-ℤ (inl (succ-ℕ x)) ()
   has-no-fixed-points-succ-ℤ (inr (inl star)) ()

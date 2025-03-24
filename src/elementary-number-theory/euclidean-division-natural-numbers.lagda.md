@@ -1,27 +1,35 @@
 # Euclidean division on the natural numbers
 
 ```agda
-module elementary-number-theory.euclidean-division-natural-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.euclidean-division-natural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.congruence-natural-numbers
-open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.congruence-natural-numbers funext univalence truncations
+open import elementary-number-theory.distance-natural-numbers funext univalence truncations
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.identity-types
+open import foundation.empty-types funext univalence truncations
+open import foundation.identity-types funext
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

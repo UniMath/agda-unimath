@@ -1,20 +1,28 @@
 # The category of families of sets
 
 ```agda
-module foundation.category-of-families-of-sets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.category-of-families-of-sets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.large-categories
-open import category-theory.large-function-categories
-open import category-theory.large-function-precategories
-open import category-theory.large-precategories
-open import category-theory.precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.large-categories funext univalence truncations
+open import category-theory.large-function-categories funext univalence truncations
+open import category-theory.large-function-precategories funext univalence truncations
+open import category-theory.large-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
-open import foundation.category-of-sets
+open import foundation.category-of-sets funext univalence truncations
 open import foundation.universe-levels
 ```
 

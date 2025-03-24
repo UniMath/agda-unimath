@@ -1,26 +1,35 @@
 # Large suplattices
 
 ```agda
-module order-theory.large-suplattices where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.large-suplattices
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.large-binary-relations
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.large-binary-relations funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.least-upper-bounds-large-posets
-open import order-theory.posets
-open import order-theory.suplattices
-open import order-theory.upper-bounds-large-posets
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.least-upper-bounds-large-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.suplattices funext univalence truncations
+open import order-theory.upper-bounds-large-posets funext univalence truncations
 ```
 
 </details>

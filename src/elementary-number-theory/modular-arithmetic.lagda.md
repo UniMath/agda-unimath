@@ -1,50 +1,58 @@
 # Modular arithmetic
 
 ```agda
-module elementary-number-theory.modular-arithmetic where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.modular-arithmetic
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.absolute-value-integers
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.congruence-integers
-open import elementary-number-theory.congruence-natural-numbers
-open import elementary-number-theory.divisibility-integers
-open import elementary-number-theory.equality-integers
-open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.absolute-value-integers funext univalence truncations
+open import elementary-number-theory.addition-integers funext univalence truncations
+open import elementary-number-theory.congruence-integers funext univalence truncations
+open import elementary-number-theory.congruence-natural-numbers funext univalence truncations
+open import elementary-number-theory.divisibility-integers funext univalence truncations
+open import elementary-number-theory.equality-integers funext univalence truncations
+open import elementary-number-theory.inequality-integers funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations
+open import elementary-number-theory.multiplication-integers funext univalence truncations
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.nonnegative-integers funext univalence truncations
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-equality funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.discrete-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.sets
-open import foundation.surjective-maps
+open import foundation.discrete-types funext univalence truncations
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.negation funext
+open import foundation.sets funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.types-equipped-with-endomorphisms
+open import structured-types.types-equipped-with-endomorphisms funext univalence
 
-open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.equality-standard-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

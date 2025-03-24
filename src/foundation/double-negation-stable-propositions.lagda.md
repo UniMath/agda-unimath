@@ -1,34 +1,43 @@
 # Double negation stable propositions
 
 ```agda
-module foundation.double-negation-stable-propositions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.double-negation-stable-propositions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.conjunction
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.conjunction funext univalence truncations
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.double-negation
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.propositional-extensionality
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext univalence truncations
+open import foundation.double-negation funext univalence truncations
+open import foundation.embeddings funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.propositional-extensionality funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.universal-quantification
+open import foundation.universal-quantification funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -36,7 +45,7 @@ open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.retracts-of-types
 
-open import logic.double-negation-elimination
+open import logic.double-negation-elimination funext univalence truncations
 ```
 
 </details>

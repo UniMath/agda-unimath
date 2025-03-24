@@ -1,23 +1,31 @@
 # Strictly ordered pairs of natural numbers
 
 ```agda
-module elementary-number-theory.strictly-ordered-pairs-of-natural-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.strictly-ordered-pairs-of-natural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.negated-equality
-open import foundation.pairs-of-distinct-elements
+open import foundation.empty-types funext univalence truncations
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.pairs-of-distinct-elements funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

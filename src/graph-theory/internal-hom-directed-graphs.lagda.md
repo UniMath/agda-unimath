@@ -1,22 +1,30 @@
 # Internal homs of directed graphs
 
 ```agda
-module graph-theory.internal-hom-directed-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.internal-hom-directed-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.homotopies
-open import foundation.retractions
-open import foundation.sections
+open import foundation.equivalences funext
+open import foundation.homotopies funext
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.universe-levels
 
-open import graph-theory.cartesian-products-directed-graphs
-open import graph-theory.directed-graphs
-open import graph-theory.morphisms-directed-graphs
+open import graph-theory.cartesian-products-directed-graphs funext univalence truncations
+open import graph-theory.directed-graphs funext univalence
+open import graph-theory.morphisms-directed-graphs funext univalence truncations
 ```
 
 </details>

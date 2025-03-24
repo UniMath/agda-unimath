@@ -1,13 +1,21 @@
 # Truncated equality
 
 ```agda
-module foundation.truncated-equality where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.truncated-equality
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.truncations
+open import foundation.truncations funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.identity-types

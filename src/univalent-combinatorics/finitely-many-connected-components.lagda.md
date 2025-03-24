@@ -1,7 +1,15 @@
 # Finiteness of the type of connected components
 
 ```agda
-module univalent-combinatorics.finitely-many-connected-components where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.finitely-many-connected-components
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,28 +17,30 @@ module univalent-combinatorics.finitely-many-connected-components where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.0-connected-types
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.0-connected-types funext univalence truncations
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-set-truncation
-open import foundation.mere-equivalences
-open import foundation.propositions
-open import foundation.retracts-of-types
-open import foundation.set-truncations
-open import foundation.sets
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-set-truncation funext univalence truncations
+open import foundation.mere-equivalences funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.retracts-of-types funext univalence
+open import foundation.set-truncations funext univalence
+open import foundation.sets funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.retracts-of-finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.coproduct-types funext univalence truncations
+open import univalent-combinatorics.dependent-function-types funext univalence truncations
+open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.retracts-of-finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

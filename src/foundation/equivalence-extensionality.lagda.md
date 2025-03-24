@@ -1,15 +1,20 @@
 # Equivalence extensionality
 
 ```agda
-module foundation.equivalence-extensionality where
+open import foundation.function-extensionality-axiom
+
+module foundation.equivalence-extensionality
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.function-extensionality
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-universal-property-equivalences funext
+open import foundation.function-extensionality funext
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-systems
 open import foundation.subtype-identity-principle

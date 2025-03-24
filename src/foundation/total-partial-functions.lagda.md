@@ -1,13 +1,18 @@
 # Total partial functions
 
 ```agda
-module foundation.total-partial-functions where
+open import foundation.function-extensionality-axiom
+
+module foundation.total-partial-functions
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions funext
 open import foundation.partial-functions
 open import foundation.universe-levels
 

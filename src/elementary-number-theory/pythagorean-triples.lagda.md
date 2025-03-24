@@ -1,7 +1,15 @@
 # Pythagorean triples
 
 ```agda
-module elementary-number-theory.pythagorean-triples where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.pythagorean-triples
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,9 +17,9 @@ module elementary-number-theory.pythagorean-triples where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.squares-natural-numbers
+open import elementary-number-theory.squares-natural-numbers funext univalence truncations
 
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

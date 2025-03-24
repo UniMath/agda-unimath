@@ -9,11 +9,8 @@ module synthetic-category-theory.sections-synthetic-categories where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-
-open import globular-types.globular-types
 
 open import synthetic-category-theory.synthetic-categories
 ```

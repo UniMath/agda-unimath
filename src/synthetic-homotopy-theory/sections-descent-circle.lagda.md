@@ -1,7 +1,15 @@
 # Sections of families over the circle
 
 ```agda
-module synthetic-homotopy-theory.sections-descent-circle where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.sections-descent-circle
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,27 +17,28 @@ module synthetic-homotopy-theory.sections-descent-circle where
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-identifications
-open import foundation.commuting-triangles-of-maps
-open import foundation.contractible-maps
-open import foundation.contractible-types
-open import foundation.dependent-identifications
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.commuting-triangles-of-identifications funext
+open import foundation.commuting-triangles-of-maps funext univalence
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext univalence
+open import foundation.dependent-identifications funext
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.path-algebra
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.path-algebra funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.descent-circle
-open import synthetic-homotopy-theory.free-loops
-open import synthetic-homotopy-theory.universal-property-circle
+open import synthetic-homotopy-theory.descent-circle funext univalence truncations
+open import synthetic-homotopy-theory.free-loops funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-circle funext univalence truncations
 ```
 
 </details>

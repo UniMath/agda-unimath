@@ -1,57 +1,68 @@
 # The binomial types
 
 ```agda
-module univalent-combinatorics.binomial-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.binomial-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.binomial-coefficients
+open import elementary-number-theory.binomial-coefficients funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
-open import foundation.connected-components-universes
-open import foundation.contractible-maps
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-embeddings
-open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
+open import foundation.booleans funext univalence truncations
+open import foundation.connected-components-universes funext univalence truncations
+open import foundation.contractible-maps funext
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-embeddings funext univalence truncations
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-subtypes funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.equivalences-maybe
-open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.logical-equivalences
-open import foundation.maybe
-open import foundation.mere-equivalences
-open import foundation.negation
-open import foundation.postcomposition-functions
-open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.raising-universe-levels
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.equivalences-maybe funext univalence truncations
+open import foundation.fibers-of-maps funext
+open import foundation.function-types funext
+open import foundation.functoriality-coproduct-types funext univalence truncations
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.functoriality-propositional-truncation funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.maybe funext univalence truncations
+open import foundation.mere-equivalences funext univalence truncations
+open import foundation.negation funext
+open import foundation.postcomposition-functions funext
+open import foundation.propositional-extensionality funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.raising-universe-levels-unit-type
 open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-coproduct-types funext univalence truncations
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-empty-type
-open import foundation.type-arithmetic-unit-type
+open import foundation.type-arithmetic-empty-type funext univalence truncations
+open import foundation.type-arithmetic-unit-type funext
 open import foundation.unit-type
-open import foundation.universal-property-empty-type
-open import foundation.universal-property-equivalences
-open import foundation.universal-property-maybe
+open import foundation.universal-property-empty-type funext
+open import foundation.universal-property-equivalences funext
+open import foundation.universal-property-maybe funext
 open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import foundation-core.raising-universe-levels
+
+open import univalent-combinatorics.coproduct-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

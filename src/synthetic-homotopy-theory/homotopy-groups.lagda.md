@@ -1,7 +1,15 @@
 # Homotopy groups
 
 ```agda
-module synthetic-homotopy-theory.homotopy-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.homotopy-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,20 +17,17 @@ module synthetic-homotopy-theory.homotopy-groups where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.connected-components
 open import foundation.dependent-pair-types
-open import foundation.set-truncations
-open import foundation.sets
-open import foundation.truncation-levels
-open import foundation.truncations
+open import foundation.set-truncations funext univalence
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
-open import group-theory.homotopy-automorphism-groups
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.homotopy-automorphism-groups funext univalence truncations
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.iterated-loop-spaces
+open import synthetic-homotopy-theory.iterated-loop-spaces funext univalence truncations
 ```
 
 </details>

@@ -1,32 +1,40 @@
 # The greatest common divisor of integers
 
 ```agda
-module elementary-number-theory.greatest-common-divisor-integers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.greatest-common-divisor-integers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.absolute-value-integers
+open import elementary-number-theory.absolute-value-integers funext univalence truncations
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.divisibility-integers
-open import elementary-number-theory.equality-integers
-open import elementary-number-theory.greatest-common-divisor-natural-numbers
+open import elementary-number-theory.divisibility-integers funext univalence truncations
+open import elementary-number-theory.equality-integers funext univalence truncations
+open import elementary-number-theory.greatest-common-divisor-natural-numbers funext univalence truncations
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonnegative-integers
-open import elementary-number-theory.positive-and-negative-integers
-open import elementary-number-theory.positive-integers
+open import elementary-number-theory.nonnegative-integers funext univalence truncations
+open import elementary-number-theory.positive-and-negative-integers funext univalence truncations
+open import elementary-number-theory.positive-integers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
+open import foundation.empty-types funext univalence truncations
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels

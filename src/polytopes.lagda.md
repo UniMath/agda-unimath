@@ -3,7 +3,15 @@
 ## Modules in the polytopes namespace
 
 ```agda
-module polytopes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import polytopes.abstract-polytopes public
+module polytopes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import polytopes.abstract-polytopes funext univalence truncations public
 ```

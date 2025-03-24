@@ -1,24 +1,34 @@
 # Raising universe levels of directed trees
 
 ```agda
-module trees.raising-universe-levels-directed-trees where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module trees.raising-universe-levels-directed-trees
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.raising-universe-levels
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equivalences funext
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs
-open import graph-theory.raising-universe-levels-directed-graphs
-open import graph-theory.walks-directed-graphs
+open import foundation-core.raising-universe-levels
 
-open import trees.directed-trees
-open import trees.equivalences-directed-trees
+open import graph-theory.directed-graphs funext univalence
+open import graph-theory.raising-universe-levels-directed-graphs funext univalence truncations
+open import graph-theory.walks-directed-graphs funext univalence truncations
+
+open import trees.directed-trees funext univalence truncations
+open import trees.equivalences-directed-trees funext univalence truncations
 ```
 
 </details>

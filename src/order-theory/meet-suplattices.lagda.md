@@ -1,21 +1,30 @@
 # Meet-suplattices
 
 ```agda
-module order-theory.meet-suplattices where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.meet-suplattices
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import order-theory.meet-semilattices
-open import order-theory.posets
-open import order-theory.suplattices
+open import order-theory.meet-semilattices funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.suplattices funext univalence truncations
 ```
 
 </details>

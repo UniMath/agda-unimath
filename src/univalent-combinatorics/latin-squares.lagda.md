@@ -1,7 +1,15 @@
 # Latin squares
 
 ```agda
-module univalent-combinatorics.latin-squares where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.latin-squares
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,7 +17,7 @@ module univalent-combinatorics.latin-squares where
 ```agda
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
-open import foundation.inhabited-types
+open import foundation.inhabited-types funext univalence truncations
 open import foundation.universe-levels
 ```
 

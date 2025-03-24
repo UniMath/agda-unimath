@@ -1,33 +1,41 @@
 # The abstract quaternion group of order `8`
 
 ```agda
-module finite-group-theory.abstract-quaternion-group where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module finite-group-theory.abstract-quaternion-group
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
+open import foundation.coproduct-types funext univalence truncations
+open import foundation.decidable-equality funext univalence truncations
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.negation
-open import foundation.propositional-truncations
-open import foundation.sets
+open import foundation.empty-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.negation funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.sets funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.semigroups
+open import group-theory.groups funext univalence truncations
+open import group-theory.semigroups funext univalence
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

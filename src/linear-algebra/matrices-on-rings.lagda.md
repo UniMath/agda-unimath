@@ -1,7 +1,15 @@
 # Matrices on rings
 
 ```agda
-module linear-algebra.matrices-on-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module linear-algebra.matrices-on-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,16 +18,16 @@ module linear-algebra.matrices-on-rings where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import linear-algebra.constant-matrices
-open import linear-algebra.functoriality-matrices
-open import linear-algebra.matrices
-open import linear-algebra.vectors
-open import linear-algebra.vectors-on-rings
+open import linear-algebra.constant-matrices funext univalence truncations
+open import linear-algebra.functoriality-matrices funext univalence truncations
+open import linear-algebra.matrices funext univalence truncations
+open import linear-algebra.vectors funext univalence truncations
+open import linear-algebra.vectors-on-rings funext univalence truncations
 
-open import ring-theory.rings
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

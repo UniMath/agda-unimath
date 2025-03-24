@@ -1,23 +1,32 @@
 # Finite total orders
 
 ```agda
-module order-theory.finite-total-orders where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.finite-total-orders
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-types
+open import foundation.decidable-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.function-types funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import order-theory.finite-posets
-open import order-theory.posets
-open import order-theory.total-orders
+open import order-theory.finite-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.total-orders funext univalence truncations
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

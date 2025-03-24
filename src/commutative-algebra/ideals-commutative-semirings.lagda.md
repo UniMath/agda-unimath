@@ -1,21 +1,30 @@
 # Ideals of commutative semirings
 
 ```agda
-module commutative-algebra.ideals-commutative-semirings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.ideals-commutative-semirings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-semirings
-open import commutative-algebra.subsets-commutative-semirings
+open import commutative-algebra.commutative-semirings funext univalence truncations
+open import commutative-algebra.subsets-commutative-semirings funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import ring-theory.ideals-semirings
+open import ring-theory.ideals-semirings funext univalence truncations
 ```
 
 </details>

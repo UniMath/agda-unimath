@@ -1,24 +1,33 @@
 # De Morgan subtypes
 
 ```agda
-module logic.de-morgan-subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module logic.de-morgan-subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.1-types
-open import foundation.coproduct-types
+open import foundation.1-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.logical-equivalences
-open import foundation.propositional-maps
-open import foundation.sets
-open import foundation.structured-type-duality
-open import foundation.subtypes
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.dependent-products-propositions funext
+open import foundation.equality-dependent-function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositional-maps funext
+open import foundation.sets funext univalence
+open import foundation.structured-type-duality funext univalence truncations
+open import foundation.subtypes funext univalence truncations
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
@@ -31,10 +40,10 @@ open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 
-open import logic.de-morgan-embeddings
-open import logic.de-morgan-maps
-open import logic.de-morgan-propositions
-open import logic.de-morgan-types
+open import logic.de-morgan-embeddings funext univalence truncations
+open import logic.de-morgan-maps funext univalence truncations
+open import logic.de-morgan-propositions funext univalence truncations
+open import logic.de-morgan-types funext univalence truncations
 ```
 
 </details>

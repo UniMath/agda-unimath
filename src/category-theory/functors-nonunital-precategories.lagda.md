@@ -1,21 +1,29 @@
 # Functors between nonunital precategories
 
 ```agda
-module category-theory.functors-nonunital-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.functors-nonunital-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-set-magmoids
-open import category-theory.maps-set-magmoids
-open import category-theory.nonunital-precategories
+open import category-theory.functors-set-magmoids funext univalence truncations
+open import category-theory.maps-set-magmoids funext univalence truncations
+open import category-theory.nonunital-precategories funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 ```
 

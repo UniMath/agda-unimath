@@ -1,18 +1,26 @@
 # Homomorphisms of large frames
 
 ```agda
-module order-theory.homomorphisms-large-frames where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.homomorphisms-large-frames
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import order-theory.homomorphisms-large-meet-semilattices
-open import order-theory.homomorphisms-large-suplattices
-open import order-theory.large-frames
+open import order-theory.homomorphisms-large-meet-semilattices funext univalence truncations
+open import order-theory.homomorphisms-large-suplattices funext univalence truncations
+open import order-theory.large-frames funext univalence truncations
 ```
 
 </details>

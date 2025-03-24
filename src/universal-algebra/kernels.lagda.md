@@ -1,7 +1,15 @@
 # Kernels of homomorphisms of algebras
 
 ```agda
-module universal-algebra.kernels where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module universal-algebra.kernels
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,20 +19,20 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalence-relations
-open import foundation.identity-types
+open import foundation.equivalence-relations funext univalence truncations
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.vectors
+open import linear-algebra.functoriality-vectors funext univalence truncations
+open import linear-algebra.vectors funext univalence truncations
 
-open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-theories
-open import universal-algebra.congruences
-open import universal-algebra.homomorphisms-of-algebras
-open import universal-algebra.signatures
+open import universal-algebra.algebraic-theories funext univalence truncations
+open import universal-algebra.algebras-of-theories funext univalence truncations
+open import universal-algebra.congruences funext univalence truncations
+open import universal-algebra.homomorphisms-of-algebras funext univalence truncations
+open import universal-algebra.signatures funext univalence
 ```
 
 </details>

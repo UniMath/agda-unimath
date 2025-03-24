@@ -1,24 +1,32 @@
 # Deloopable types
 
 ```agda
-module higher-group-theory.deloopable-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.deloopable-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.small-types
+open import foundation.equivalences funext
+open import foundation.small-types funext univalence truncations
 open import foundation.universe-levels
 
-open import higher-group-theory.equivalences-higher-groups
-open import higher-group-theory.higher-groups
-open import higher-group-theory.small-higher-groups
+open import higher-group-theory.equivalences-higher-groups funext univalence truncations
+open import higher-group-theory.higher-groups funext univalence truncations
+open import higher-group-theory.small-higher-groups funext univalence truncations
 
-open import structured-types.pointed-equivalences
+open import structured-types.pointed-equivalences funext univalence truncations
 open import structured-types.pointed-types
-open import structured-types.small-pointed-types
+open import structured-types.small-pointed-types funext univalence truncations
 ```
 
 </details>

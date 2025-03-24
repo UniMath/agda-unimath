@@ -1,31 +1,39 @@
 # Commutator subgroups
 
 ```agda
-module group-theory.commutator-subgroups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.commutator-subgroups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositional-truncations
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.propositional-truncations funext univalence
 open import foundation.universe-levels
 
-open import group-theory.commutators-of-elements-groups
-open import group-theory.conjugation
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.images-of-group-homomorphisms
-open import group-theory.normal-subgroups
-open import group-theory.pullbacks-subgroups
-open import group-theory.subgroups
-open import group-theory.subgroups-generated-by-families-of-elements-groups
-open import group-theory.subgroups-generated-by-subsets-groups
-open import group-theory.subsets-groups
+open import group-theory.commutators-of-elements-groups funext univalence truncations
+open import group-theory.conjugation funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.images-of-group-homomorphisms funext univalence truncations
+open import group-theory.normal-subgroups funext univalence truncations
+open import group-theory.pullbacks-subgroups funext univalence truncations
+open import group-theory.subgroups funext univalence truncations
+open import group-theory.subgroups-generated-by-families-of-elements-groups funext univalence truncations
+open import group-theory.subgroups-generated-by-subsets-groups funext univalence truncations
+open import group-theory.subsets-groups funext univalence truncations
 ```
 
 </details>

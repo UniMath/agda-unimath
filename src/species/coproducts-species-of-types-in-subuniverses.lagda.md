@@ -1,24 +1,32 @@
 # Coproducts of species of types in subuniverses
 
 ```agda
-module species.coproducts-species-of-types-in-subuniverses where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module species.coproducts-species-of-types-in-subuniverses
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.global-subuniverses
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.subuniverses
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.global-subuniverses funext univalence
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.subuniverses funext univalence
 open import foundation.universe-levels
 
-open import species.coproducts-species-of-types
-open import species.species-of-types-in-subuniverses
+open import species.coproducts-species-of-types funext univalence truncations
+open import species.species-of-types-in-subuniverses funext univalence
 ```
 
 </details>

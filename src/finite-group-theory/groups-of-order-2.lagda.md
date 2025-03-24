@@ -2,35 +2,42 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module finite-group-theory.groups-of-order-2 where
+module finite-group-theory.groups-of-order-2
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.standard-cyclic-groups
+open import elementary-number-theory.standard-cyclic-groups funext univalence truncations
 
-open import finite-group-theory.finite-groups
+open import finite-group-theory.finite-groups funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.mere-equivalences
-open import foundation.propositional-truncations
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.mere-equivalences funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.sets funext univalence
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.isomorphisms-groups
-open import group-theory.symmetric-groups
+open import group-theory.groups funext univalence truncations
+open import group-theory.isomorphisms-groups funext univalence truncations
+open import group-theory.symmetric-groups funext univalence truncations
 
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.2-element-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

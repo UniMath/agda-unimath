@@ -1,15 +1,22 @@
 # Global subuniverses
 
 ```agda
-module foundation.global-subuniverses where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.global-subuniverses
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.iterated-dependent-product-types
-open import foundation.subuniverses
+open import foundation.iterated-dependent-product-types funext
+open import foundation.subuniverses funext univalence
+open import foundation.telescopes
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

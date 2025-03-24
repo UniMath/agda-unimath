@@ -1,7 +1,15 @@
 # Subgroups
 
 ```agda
-module group-theory.subgroups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.subgroups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,41 +18,42 @@ module group-theory.subgroups where
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-relations
-open import foundation.coproduct-types
+open import foundation.binary-relations funext univalence truncations
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.embeddings
-open import foundation.equivalence-relations
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.large-binary-relations
-open import foundation.logical-equivalences
-open import foundation.powersets
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.disjunction funext univalence truncations
+open import foundation.embeddings funext
+open import foundation.equivalence-relations funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.large-binary-relations funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.powersets funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
+open import foundation.subtypes funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.integer-powers-of-elements-groups
-open import group-theory.semigroups
-open import group-theory.subsemigroups
-open import group-theory.subsets-groups
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.integer-powers-of-elements-groups funext univalence truncations
+open import group-theory.semigroups funext univalence
+open import group-theory.subsemigroups funext univalence truncations
+open import group-theory.subsets-groups funext univalence truncations
 
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.posets
-open import order-theory.preorders
-open import order-theory.similarity-of-elements-large-posets
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.large-preorders funext univalence truncations
+open import order-theory.order-preserving-maps-large-posets funext univalence truncations
+open import order-theory.order-preserving-maps-large-preorders funext univalence truncations
+open import order-theory.posets funext univalence truncations
+open import order-theory.preorders funext univalence truncations
+open import order-theory.similarity-of-elements-large-posets funext univalence truncations
 ```
 
 </details>

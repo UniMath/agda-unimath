@@ -1,21 +1,29 @@
 # The Zariski locale
 
 ```agda
-module commutative-algebra.zariski-locale where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.zariski-locale
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.intersections-radical-ideals-commutative-rings
-open import commutative-algebra.joins-radical-ideals-commutative-rings
-open import commutative-algebra.poset-of-radical-ideals-commutative-rings
+open import commutative-algebra.commutative-rings funext univalence truncations
+open import commutative-algebra.intersections-radical-ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.joins-radical-ideals-commutative-rings funext univalence truncations
+open import commutative-algebra.poset-of-radical-ideals-commutative-rings funext univalence truncations
 
 open import foundation.universe-levels
 
-open import order-theory.large-frames
-open import order-theory.large-locales
+open import order-theory.large-frames funext univalence truncations
+open import order-theory.large-locales funext univalence truncations
 ```
 
 </details>

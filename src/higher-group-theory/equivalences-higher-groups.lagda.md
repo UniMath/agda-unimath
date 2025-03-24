@@ -1,30 +1,38 @@
 # Equivalences of higher groups
 
 ```agda
-module higher-group-theory.equivalences-higher-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.equivalences-higher-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
+open import foundation.0-connected-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups
-open import higher-group-theory.homomorphisms-higher-groups
+open import higher-group-theory.higher-groups funext univalence truncations
+open import higher-group-theory.homomorphisms-higher-groups funext univalence truncations
 
-open import structured-types.pointed-equivalences
-open import structured-types.pointed-isomorphisms
+open import structured-types.pointed-equivalences funext univalence truncations
+open import structured-types.pointed-isomorphisms funext univalence truncations
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.functoriality-loop-spaces
+open import synthetic-homotopy-theory.functoriality-loop-spaces funext univalence truncations
 ```
 
 </details>

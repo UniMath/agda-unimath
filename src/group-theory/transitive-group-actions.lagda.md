@@ -1,20 +1,29 @@
 # Transitive group actions
 
 ```agda
-module group-theory.transitive-group-actions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.transitive-group-actions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.surjective-maps
+open import foundation.dependent-products-propositions funext
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.group-actions
-open import group-theory.groups
+open import group-theory.group-actions funext univalence truncations
+open import group-theory.groups funext univalence truncations
 ```
 
 </details>

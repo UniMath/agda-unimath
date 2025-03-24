@@ -1,28 +1,38 @@
 # Double negation sheaves
 
 ```agda
-module orthogonal-factorization-systems.double-negation-sheaves where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.double-negation-sheaves
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.double-negation-stable-propositions
-open import foundation.empty-types
-open import foundation.irrefutable-propositions
-open import foundation.logical-equivalences
-open import foundation.negation
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.double-negation-stable-propositions funext univalence truncations
+open import foundation.empty-types funext univalence truncations
+open import foundation.irrefutable-propositions funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
 open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.universal-property-coproduct-types
+open import foundation.universal-property-coproduct-types funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
 
-open import orthogonal-factorization-systems.null-types
+open import orthogonal-factorization-systems.null-types funext univalence truncations
 ```
 
 </details>

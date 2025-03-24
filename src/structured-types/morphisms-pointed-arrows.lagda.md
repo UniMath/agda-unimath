@@ -1,42 +1,51 @@
 # Morphisms of pointed arrows
 
 ```agda
-module structured-types.morphisms-pointed-arrows where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.morphisms-pointed-arrows
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies
-open import foundation.commuting-squares-of-identifications
-open import foundation.commuting-triangles-of-identifications
-open import foundation.contractible-types
+open import foundation.commuting-squares-of-homotopies funext
+open import foundation.commuting-squares-of-identifications funext
+open import foundation.commuting-triangles-of-identifications funext
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
-open import foundation.morphisms-arrows
-open import foundation.path-algebra
+open import foundation.homotopy-induction funext
+open import foundation.morphisms-arrows funext
+open import foundation.path-algebra funext
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
 
-open import structured-types.commuting-squares-of-pointed-homotopies
-open import structured-types.commuting-squares-of-pointed-maps
-open import structured-types.pointed-2-homotopies
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
+open import structured-types.commuting-squares-of-pointed-homotopies funext univalence truncations
+open import structured-types.commuting-squares-of-pointed-maps funext univalence truncations
+open import structured-types.pointed-2-homotopies funext univalence truncations
+open import structured-types.pointed-homotopies funext univalence truncations
+open import structured-types.pointed-maps funext univalence truncations
 open import structured-types.pointed-types
-open import structured-types.whiskering-pointed-2-homotopies-concatenation
-open import structured-types.whiskering-pointed-homotopies-composition
+open import structured-types.whiskering-pointed-2-homotopies-concatenation funext univalence truncations
+open import structured-types.whiskering-pointed-homotopies-composition funext univalence truncations
 ```
 
 </details>

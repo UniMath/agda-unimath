@@ -2,8 +2,15 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module univalent-combinatorics.unbounded-pi-finite-types where
+module univalent-combinatorics.unbounded-pi-finite-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,30 +18,31 @@ module univalent-combinatorics.unbounded-pi-finite-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equality-coproduct-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.maybe
-open import foundation.retracts-of-types
-open import foundation.set-truncations
-open import foundation.sets
+open import foundation.dependent-products-contractible-types funext
+open import foundation.empty-types funext univalence truncations
+open import foundation.equality-coproduct-types funext univalence truncations
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.maybe funext univalence truncations
+open import foundation.retracts-of-types funext univalence
+open import foundation.set-truncations funext univalence
+open import foundation.sets funext univalence
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.finitely-many-connected-components
-open import univalent-combinatorics.function-types
-open import univalent-combinatorics.pi-finite-types
-open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.untruncated-pi-finite-types
+open import univalent-combinatorics.counting funext univalence truncations
+open import univalent-combinatorics.equality-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
+open import univalent-combinatorics.finitely-many-connected-components funext univalence truncations
+open import univalent-combinatorics.function-types funext univalence truncations
+open import univalent-combinatorics.pi-finite-types funext univalence truncations
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
+open import univalent-combinatorics.untruncated-pi-finite-types funext univalence truncations
 ```
 
 </details>

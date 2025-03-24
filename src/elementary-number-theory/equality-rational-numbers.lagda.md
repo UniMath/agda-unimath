@@ -1,26 +1,33 @@
 # Equality of rational numbers
 
 ```agda
-module elementary-number-theory.equality-rational-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.equality-rational-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-integers
-open import elementary-number-theory.integer-fractions
-open import elementary-number-theory.positive-integers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.reduced-integer-fractions
+open import elementary-number-theory.integer-fractions funext univalence truncations
+open import elementary-number-theory.rational-numbers funext univalence truncations
+open import elementary-number-theory.reduced-integer-fractions funext univalence truncations
 
-open import foundation.decidable-equality
+open import foundation.decidable-equality funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
+open import foundation.dependent-products-propositions funext
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.torsorial-type-families
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 ```
 

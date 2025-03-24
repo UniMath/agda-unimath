@@ -1,23 +1,31 @@
 # The category of abelian groups
 
 ```agda
-module group-theory.category-of-abelian-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.category-of-abelian-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.full-large-subcategories
-open import category-theory.functors-large-categories
-open import category-theory.large-categories
-open import category-theory.large-precategories
-open import category-theory.precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.full-large-subcategories funext univalence truncations
+open import category-theory.functors-large-categories funext univalence truncations
+open import category-theory.large-categories funext univalence truncations
+open import category-theory.large-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.category-of-groups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.category-of-groups funext univalence truncations
 ```
 
 </details>

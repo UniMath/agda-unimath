@@ -1,29 +1,37 @@
 # The large locale of subtypes
 
 ```agda
-module foundation.large-locale-of-subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.large-locale-of-subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-binary-relations
-open import foundation.large-locale-of-propositions
+open import foundation.large-binary-relations funext univalence truncations
+open import foundation.large-locale-of-propositions funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
 open import foundation-core.sets
 
-open import order-theory.bottom-elements-large-posets
-open import order-theory.greatest-lower-bounds-large-posets
-open import order-theory.large-locales
-open import order-theory.large-meet-semilattices
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.large-suplattices
-open import order-theory.least-upper-bounds-large-posets
-open import order-theory.powers-of-large-locales
-open import order-theory.top-elements-large-posets
+open import order-theory.bottom-elements-large-posets funext univalence truncations
+open import order-theory.greatest-lower-bounds-large-posets funext univalence truncations
+open import order-theory.large-locales funext univalence truncations
+open import order-theory.large-meet-semilattices funext univalence truncations
+open import order-theory.large-posets funext univalence truncations
+open import order-theory.large-preorders funext univalence truncations
+open import order-theory.large-suplattices funext univalence truncations
+open import order-theory.least-upper-bounds-large-posets funext univalence truncations
+open import order-theory.powers-of-large-locales funext univalence truncations
+open import order-theory.top-elements-large-posets funext univalence truncations
 ```
 
 </details>

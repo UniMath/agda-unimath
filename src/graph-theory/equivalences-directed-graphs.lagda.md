@@ -1,7 +1,15 @@
 # Equivalences of directed graphs
 
 ```agda
-module graph-theory.equivalences-directed-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.equivalences-directed-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,28 +18,29 @@ module graph-theory.equivalences-directed-graphs where
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.equivalence-extensionality
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equality-dependent-function-types funext
+open import foundation.equivalence-extensionality funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
-open import foundation.transposition-identifications-along-equivalences
+open import foundation.torsorial-type-families funext univalence truncations
+open import foundation.transposition-identifications-along-equivalences funext
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
-open import foundation.univalence
+open import foundation.type-theoretic-principle-of-choice funext
+open import foundation.univalence funext univalence
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs
-open import graph-theory.morphisms-directed-graphs
+open import graph-theory.directed-graphs funext univalence
+open import graph-theory.morphisms-directed-graphs funext univalence truncations
 ```
 
 </details>

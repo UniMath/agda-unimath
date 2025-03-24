@@ -1,17 +1,21 @@
 # Homotopies of binary operations
 
 ```agda
-module foundation.binary-homotopies where
+open import foundation.function-extensionality-axiom
+
+module foundation.binary-homotopies
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.function-extensionality
+open import foundation.equality-dependent-function-types funext
+open import foundation.function-extensionality funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
+open import foundation.homotopy-induction funext
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

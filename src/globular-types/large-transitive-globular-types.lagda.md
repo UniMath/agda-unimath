@@ -2,8 +2,15 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module globular-types.large-transitive-globular-types where
+module globular-types.large-transitive-globular-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,9 +19,9 @@ module globular-types.large-transitive-globular-types where
 open import foundation.universe-levels
 
 open import globular-types.globular-types
-open import globular-types.large-globular-maps
+open import globular-types.large-globular-maps funext
 open import globular-types.large-globular-types
-open import globular-types.transitive-globular-types
+open import globular-types.transitive-globular-types funext univalence truncations
 ```
 
 </details>

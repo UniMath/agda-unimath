@@ -1,7 +1,15 @@
 # Pointed `2`-homotopies
 
 ```agda
-module structured-types.pointed-2-homotopies where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.pointed-2-homotopies
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,27 +17,28 @@ module structured-types.pointed-2-homotopies where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
-open import foundation.commuting-triangles-of-identifications
-open import foundation.contractible-types
+open import foundation.commuting-triangles-of-identifications funext
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.path-algebra
+open import foundation.homotopies funext
+open import foundation.homotopy-induction funext
+open import foundation.identity-types funext
+open import foundation.path-algebra funext
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
+open import foundation.whiskering-identifications-concatenation funext
 
-open import structured-types.pointed-dependent-functions
+open import structured-types.pointed-dependent-functions funext
 open import structured-types.pointed-families-of-types
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
+open import structured-types.pointed-homotopies funext univalence truncations
+open import structured-types.pointed-maps funext univalence truncations
 open import structured-types.pointed-types
-open import structured-types.uniform-pointed-homotopies
+open import structured-types.uniform-pointed-homotopies funext univalence truncations
 ```
 
 </details>

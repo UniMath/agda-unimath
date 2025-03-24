@@ -1,21 +1,32 @@
 # The group of integers
 
 ```agda
-module elementary-number-theory.group-of-integers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.group-of-integers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-integers funext univalence truncations
+open import elementary-number-theory.equality-integers funext univalence truncations
 open import elementary-number-theory.integers
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.groups
-open import group-theory.semigroups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.semigroups funext univalence
+
+open import structured-types.types-equipped-with-endomorphisms funext univalence
 ```
 
 </details>
@@ -28,6 +39,10 @@ forms a group.
 ## Definition
 
 ```agda
+ℤ-Type-With-Endomorphism : Type-With-Endomorphism lzero
+pr1 ℤ-Type-With-Endomorphism = ℤ
+pr2 ℤ-Type-With-Endomorphism = succ-ℤ
+
 ℤ-Semigroup : Semigroup lzero
 pr1 ℤ-Semigroup = ℤ-Set
 pr1 (pr2 ℤ-Semigroup) = add-ℤ

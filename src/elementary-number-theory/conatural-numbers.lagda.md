@@ -2,26 +2,33 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module elementary-number-theory.conatural-numbers where
+module elementary-number-theory.conatural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.homotopies
-open import foundation.injective-maps
-open import foundation.maybe
-open import foundation.negated-equality
-open import foundation.retractions
-open import foundation.sections
+open import foundation.homotopies funext
+open import foundation.injective-maps funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.retractions funext
+open import foundation.sections funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
+open import foundation-core.maybe
 ```
 
 </details>

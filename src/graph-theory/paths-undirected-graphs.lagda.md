@@ -1,7 +1,15 @@
 # Paths in undirected graphs
 
 ```agda
-module graph-theory.paths-undirected-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.paths-undirected-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,11 +18,11 @@ module graph-theory.paths-undirected-graphs where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.injective-maps
+open import foundation.injective-maps funext
 open import foundation.universe-levels
 
-open import graph-theory.undirected-graphs
-open import graph-theory.walks-undirected-graphs
+open import graph-theory.undirected-graphs funext univalence truncations
+open import graph-theory.walks-undirected-graphs funext univalence truncations
 ```
 
 </details>

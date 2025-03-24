@@ -1,7 +1,15 @@
 # The image of a map
 
 ```agda
-module foundation.images where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.images
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,13 +17,13 @@ module foundation.images where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.propositional-truncations
-open import foundation.slice
+open import foundation.propositional-truncations funext univalence
+open import foundation.slice funext univalence
 open import foundation.subtype-identity-principle
-open import foundation.surjective-maps
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
-open import foundation-core.1-types
+open import foundation-core.1-types funext univalence
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
@@ -26,7 +34,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels

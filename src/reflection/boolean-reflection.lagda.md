@@ -1,16 +1,24 @@
 # Boolean reflection
 
 ```agda
-module reflection.boolean-reflection where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module reflection.boolean-reflection
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.booleans
-open import foundation.decidable-types
+open import foundation.decidable-types funext univalence truncations
 open import foundation.universe-levels
 
+open import foundation-core.booleans
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.identity-types

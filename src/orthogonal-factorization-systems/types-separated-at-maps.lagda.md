@@ -1,16 +1,24 @@
 # Types separated at maps
 
 ```agda
-module orthogonal-factorization-systems.types-separated-at-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.types-separated-at-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.types-local-at-maps
+open import orthogonal-factorization-systems.types-local-at-maps funext univalence truncations
 ```
 
 </details>

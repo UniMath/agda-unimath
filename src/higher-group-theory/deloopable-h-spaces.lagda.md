@@ -1,7 +1,15 @@
 # Deloopable H-spaces
 
 ```agda
-module higher-group-theory.deloopable-h-spaces where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.deloopable-h-spaces
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,10 +18,10 @@ module higher-group-theory.deloopable-h-spaces where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups
+open import higher-group-theory.higher-groups funext univalence truncations
 
-open import structured-types.equivalences-h-spaces
-open import structured-types.h-spaces
+open import structured-types.equivalences-h-spaces funext univalence truncations
+open import structured-types.h-spaces funext univalence truncations
 ```
 
 </details>

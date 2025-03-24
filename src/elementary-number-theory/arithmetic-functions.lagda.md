@@ -1,17 +1,25 @@
 # Arithmetic functions
 
 ```agda
-module elementary-number-theory.arithmetic-functions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.arithmetic-functions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers funext univalence truncations
 
 open import foundation.universe-levels
 
-open import ring-theory.rings
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

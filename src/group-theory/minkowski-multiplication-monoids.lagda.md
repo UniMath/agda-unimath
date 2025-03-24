@@ -1,7 +1,15 @@
 # Minkowski multiplication on subsets of a monoid
 
 ```agda
-module group-theory.minkowski-multiplication-monoids where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.minkowski-multiplication-monoids
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,19 +17,18 @@ module group-theory.minkowski-multiplication-monoids where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.inhabited-subtypes
-open import foundation.powersets
-open import foundation.subtypes
+open import foundation.existential-quantification funext univalence truncations
+open import foundation.identity-types funext
+open import foundation.inhabited-subtypes funext univalence truncations
+open import foundation.powersets funext univalence truncations
+open import foundation.subtypes funext univalence truncations
 open import foundation.transport-along-identifications
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.minkowski-multiplication-semigroups
-open import group-theory.monoids
-open import group-theory.semigroups
-open import group-theory.subsets-monoids
+open import group-theory.minkowski-multiplication-semigroups funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.subsets-monoids funext univalence truncations
 ```
 
 </details>

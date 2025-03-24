@@ -1,7 +1,15 @@
 # Prespectra
 
 ```agda
-module synthetic-homotopy-theory.prespectra where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.prespectra
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,16 +18,16 @@ module synthetic-homotopy-theory.prespectra where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.identity-types
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import structured-types.pointed-maps
+open import structured-types.pointed-maps funext univalence truncations
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.suspensions-of-pointed-types
-open import synthetic-homotopy-theory.suspensions-of-types
-open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types
+open import synthetic-homotopy-theory.loop-spaces funext univalence truncations
+open import synthetic-homotopy-theory.suspensions-of-pointed-types funext univalence truncations
+open import synthetic-homotopy-theory.suspensions-of-types funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types funext univalence truncations
 ```
 
 </details>

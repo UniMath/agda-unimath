@@ -2,37 +2,45 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module foundation.binary-functoriality-set-quotients where
+module foundation.binary-functoriality-set-quotients
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-homotopies
+open import foundation.binary-homotopies funext
 open import foundation.dependent-pair-types
-open import foundation.exponents-set-quotients
-open import foundation.function-extensionality
-open import foundation.functoriality-set-quotients
+open import foundation.dependent-products-propositions funext
+open import foundation.exponents-set-quotients funext univalence truncations
+open import foundation.function-extensionality funext
+open import foundation.functoriality-set-quotients funext univalence truncations
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.set-quotients
-open import foundation.sets
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.reflecting-maps-equivalence-relations funext univalence truncations
+open import foundation.set-quotients funext univalence truncations
+open import foundation.sets funext univalence
 open import foundation.subtype-identity-principle
-open import foundation.surjective-maps
-open import foundation.universal-property-set-quotients
+open import foundation.surjective-maps funext univalence truncations
+open import foundation.universal-property-set-quotients funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.equivalence-relations
+open import foundation-core.equivalence-relations funext univalence truncations
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-function-types funext
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.propositions
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 open import foundation-core.torsorial-type-families
 ```
 

@@ -1,9 +1,17 @@
 # Decidable dependent function types
 
 ```agda
-module elementary-number-theory.decidable-dependent-function-types where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation.decidable-dependent-function-types public
+module elementary-number-theory.decidable-dependent-function-types
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation.decidable-dependent-function-types funext univalence truncations public
 ```
 
 <details><summary>Imports</summary>

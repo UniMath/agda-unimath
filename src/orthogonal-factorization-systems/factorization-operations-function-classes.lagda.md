@@ -1,36 +1,47 @@
 # Factorization operations into function classes
 
 ```agda
-module orthogonal-factorization-systems.factorization-operations-function-classes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.factorization-operations-function-classes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
+open import foundation.cartesian-product-types funext univalence
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-cartesian-product-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.iterated-dependent-product-types funext
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.telescopes
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import orthogonal-factorization-systems.factorizations-of-maps
-open import orthogonal-factorization-systems.factorizations-of-maps-function-classes
-open import orthogonal-factorization-systems.function-classes
-open import orthogonal-factorization-systems.lifting-structures-on-squares
+open import orthogonal-factorization-systems.factorizations-of-maps funext univalence truncations
+open import orthogonal-factorization-systems.factorizations-of-maps-function-classes funext univalence truncations
+open import orthogonal-factorization-systems.function-classes funext univalence truncations
+open import orthogonal-factorization-systems.lifting-structures-on-squares funext univalence truncations
 ```
 
 </details>

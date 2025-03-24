@@ -1,7 +1,15 @@
 # Families with descent data for sequential colimits
 
 ```agda
-module synthetic-homotopy-theory.families-descent-data-sequential-colimits where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.families-descent-data-sequential-colimits
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,16 +17,16 @@ module synthetic-homotopy-theory.families-descent-data-sequential-colimits where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.commuting-squares-of-maps
+open import foundation.commuting-squares-of-maps funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.dependent-sequential-diagrams
-open import synthetic-homotopy-theory.descent-data-sequential-colimits
-open import synthetic-homotopy-theory.sequential-diagrams
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams funext univalence truncations
+open import synthetic-homotopy-theory.dependent-sequential-diagrams funext univalence
+open import synthetic-homotopy-theory.descent-data-sequential-colimits funext univalence truncations
+open import synthetic-homotopy-theory.sequential-diagrams funext univalence
 ```
 
 </details>

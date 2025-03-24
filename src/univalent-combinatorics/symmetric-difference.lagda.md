@@ -1,9 +1,17 @@
 # Symmetric difference of finite subtypes
 
 ```agda
-module univalent-combinatorics.symmetric-difference where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-open import foundation.symmetric-difference public
+module univalent-combinatorics.symmetric-difference
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
+
+open import foundation.symmetric-difference funext univalence truncations public
 ```
 
 <details><summary>Imports</summary>
@@ -14,18 +22,18 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.intersections-subtypes
-open import foundation.mere-equivalences
-open import foundation.propositional-truncations
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.intersections-subtypes funext univalence truncations
+open import foundation.mere-equivalences funext univalence truncations
+open import foundation.propositional-truncations funext univalence
 open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.decidable-subtypes
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.coproduct-types funext univalence truncations
+open import univalent-combinatorics.decidable-subtypes funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

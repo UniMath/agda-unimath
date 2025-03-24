@@ -1,17 +1,25 @@
 # Inhabited subtypes
 
 ```agda
-module foundation.inhabited-subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.inhabited-subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.inhabited-types
-open import foundation.propositional-truncations
+open import foundation.inhabited-types funext univalence truncations
+open import foundation.propositional-truncations funext univalence
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

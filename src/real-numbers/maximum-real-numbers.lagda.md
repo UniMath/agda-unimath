@@ -2,28 +2,35 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module real-numbers.maximum-real-numbers where
+module real-numbers.maximum-real-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.empty-types
-open import foundation.propositions
+open import foundation.disjunction funext univalence truncations
+open import foundation.empty-types funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import order-theory.large-join-semilattices
-open import order-theory.least-upper-bounds-large-posets
+open import order-theory.large-join-semilattices funext univalence truncations
+open import order-theory.least-upper-bounds-large-posets funext univalence truncations
 
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.inequality-real-numbers
-open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.maximum-lower-dedekind-real-numbers
-open import real-numbers.maximum-upper-dedekind-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.dedekind-real-numbers funext univalence truncations
+open import real-numbers.inequality-real-numbers funext univalence truncations
+open import real-numbers.lower-dedekind-real-numbers funext univalence truncations
+open import real-numbers.maximum-lower-dedekind-real-numbers funext univalence truncations
+open import real-numbers.maximum-upper-dedekind-real-numbers funext univalence truncations
+open import real-numbers.upper-dedekind-real-numbers funext univalence truncations
 ```
 
 </details>

@@ -1,21 +1,29 @@
 # Exponents of groups
 
 ```agda
-module group-theory.exponents-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.exponents-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.group-of-integers
+open import elementary-number-theory.group-of-integers funext univalence truncations
 
 open import foundation.universe-levels
 
-open import group-theory.free-groups-with-one-generator
-open import group-theory.groups
-open import group-theory.intersections-subgroups-groups
-open import group-theory.kernels-homomorphisms-groups
-open import group-theory.subgroups
+open import group-theory.free-groups-with-one-generator funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.intersections-subgroups-groups funext univalence truncations
+open import group-theory.kernels-homomorphisms-groups funext univalence truncations
+open import group-theory.subgroups funext univalence truncations
 ```
 
 </details>

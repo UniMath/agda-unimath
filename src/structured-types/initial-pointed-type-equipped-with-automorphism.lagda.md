@@ -1,7 +1,15 @@
 # The initial pointed type equipped with an automorphism
 
 ```agda
-module structured-types.initial-pointed-type-equipped-with-automorphism where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.initial-pointed-type-equipped-with-automorphism
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,18 +19,19 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
-open import foundation.coproduct-types
+open import foundation.contractible-types funext univalence
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.iterating-automorphisms
-open import foundation.transposition-identifications-along-equivalences
+open import foundation.dependent-products-contractible-types funext
+open import foundation.equivalences funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.iterating-automorphisms funext univalence truncations
+open import foundation.transposition-identifications-along-equivalences funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.pointed-types-equipped-with-automorphisms
+open import structured-types.pointed-types-equipped-with-automorphisms funext univalence truncations
 ```
 
 </details>

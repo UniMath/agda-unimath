@@ -1,32 +1,41 @@
 # The Gaussian integers
 
 ```agda
-module commutative-algebra.gaussian-integers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.gaussian-integers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-rings funext univalence truncations
 
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.difference-integers
+open import elementary-number-theory.addition-integers funext univalence truncations
+open import elementary-number-theory.difference-integers funext univalence truncations
+open import elementary-number-theory.equality-integers funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-integers funext univalence truncations
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.groups
-open import group-theory.semigroups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.semigroups funext univalence
 
-open import ring-theory.rings
+open import ring-theory.rings funext univalence truncations
 ```
 
 </details>

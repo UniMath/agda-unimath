@@ -1,28 +1,34 @@
 # The precategory of functors and natural transformations between two precategories
 
 ```agda
-module category-theory.precategory-of-functors where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.precategory-of-functors
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
-open import category-theory.functors-precategories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.natural-isomorphisms-functors-precategories
-open import category-theory.natural-transformations-functors-precategories
-open import category-theory.precategories
+open import category-theory.composition-operations-on-binary-families-of-sets funext univalence truncations
+open import category-theory.functors-precategories funext univalence truncations
+open import category-theory.isomorphisms-in-precategories funext univalence truncations
+open import category-theory.natural-isomorphisms-functors-precategories funext univalence truncations
+open import category-theory.natural-transformations-functors-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.strictly-involutive-identity-types
+open import foundation.equivalences funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.strictly-involutive-identity-types funext univalence
 open import foundation.universe-levels
 ```
 

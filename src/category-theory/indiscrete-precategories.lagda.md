@@ -1,28 +1,39 @@
 # Indiscrete precategories
 
 ```agda
-module category-theory.indiscrete-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.indiscrete-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
-open import category-theory.pregroupoids
-open import category-theory.preunivalent-categories
-open import category-theory.strict-categories
-open import category-theory.subterminal-precategories
+open import category-theory.isomorphisms-in-precategories funext univalence truncations
+open import category-theory.precategories funext univalence truncations
+open import category-theory.pregroupoids funext univalence truncations
+open import category-theory.preunivalent-categories funext univalence truncations
+open import category-theory.strict-categories funext univalence truncations
+open import category-theory.subterminal-precategories funext univalence truncations
 
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-contractible-types funext
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.iterated-dependent-product-types funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.telescopes
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

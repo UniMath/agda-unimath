@@ -1,22 +1,30 @@
 # Conjugation in higher groups
 
 ```agda
-module higher-group-theory.conjugation where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module higher-group-theory.conjugation
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups
-open import higher-group-theory.homomorphisms-higher-groups
+open import higher-group-theory.higher-groups funext univalence truncations
+open import higher-group-theory.homomorphisms-higher-groups funext univalence truncations
 
-open import structured-types.conjugation-pointed-types
+open import structured-types.conjugation-pointed-types funext univalence truncations
 
-open import synthetic-homotopy-theory.conjugation-loops
+open import synthetic-homotopy-theory.conjugation-loops funext univalence truncations
 ```
 
 </details>

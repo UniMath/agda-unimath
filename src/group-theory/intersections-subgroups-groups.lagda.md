@@ -1,22 +1,30 @@
 # Intersections of subgroups of groups
 
 ```agda
-module group-theory.intersections-subgroups-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.intersections-subgroups-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.intersections-subtypes
-open import foundation.subtypes
+open import foundation.intersections-subtypes funext univalence truncations
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.subgroups
-open import group-theory.subsets-groups
+open import group-theory.groups funext univalence truncations
+open import group-theory.subgroups funext univalence truncations
+open import group-theory.subsets-groups funext univalence truncations
 
-open import order-theory.greatest-lower-bounds-large-posets
+open import order-theory.greatest-lower-bounds-large-posets funext univalence truncations
 ```
 
 </details>

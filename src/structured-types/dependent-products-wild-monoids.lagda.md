@@ -1,7 +1,15 @@
 # Dependent products of wild monoids
 
 ```agda
-module structured-types.dependent-products-wild-monoids where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module structured-types.dependent-products-wild-monoids
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,16 +17,16 @@ module structured-types.dependent-products-wild-monoids where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.function-extensionality funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.dependent-products-h-spaces
-open import structured-types.h-spaces
+open import structured-types.dependent-products-h-spaces funext univalence truncations
+open import structured-types.h-spaces funext univalence truncations
 open import structured-types.pointed-types
-open import structured-types.wild-monoids
+open import structured-types.wild-monoids funext univalence truncations
 ```
 
 </details>

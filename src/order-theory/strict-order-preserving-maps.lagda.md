@@ -1,20 +1,29 @@
 # Strict order preserving maps
 
 ```agda
-module order-theory.strict-order-preserving-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.strict-order-preserving-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.propositions
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import order-theory.strict-preorders
-open import order-theory.strictly-preordered-sets
+open import order-theory.strict-preorders funext univalence truncations
+open import order-theory.strictly-preordered-sets funext univalence truncations
 ```
 
 </details>

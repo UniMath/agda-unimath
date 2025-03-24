@@ -1,24 +1,32 @@
 # Iterating involutions
 
 ```agda
-module foundation.iterating-involutions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.iterating-involutions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.modular-arithmetic-standard-finite-types funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.involutions
-open import foundation.iterating-functions
+open import foundation.involutions funext univalence
+open import foundation.iterating-functions funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.identity-types
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

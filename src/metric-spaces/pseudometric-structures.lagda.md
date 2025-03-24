@@ -1,25 +1,34 @@
 # Pseudometric structures on a type
 
 ```agda
-module metric-spaces.pseudometric-structures where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module metric-spaces.pseudometric-structures
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import metric-spaces.closed-premetric-structures
-open import metric-spaces.discrete-premetric-structures
-open import metric-spaces.extensional-premetric-structures
-open import metric-spaces.monotonic-premetric-structures
-open import metric-spaces.premetric-structures
-open import metric-spaces.reflexive-premetric-structures
-open import metric-spaces.symmetric-premetric-structures
-open import metric-spaces.triangular-premetric-structures
+open import metric-spaces.closed-premetric-structures funext univalence truncations
+open import metric-spaces.discrete-premetric-structures funext univalence truncations
+open import metric-spaces.extensional-premetric-structures funext univalence truncations
+open import metric-spaces.monotonic-premetric-structures funext univalence truncations
+open import metric-spaces.premetric-structures funext univalence truncations
+open import metric-spaces.reflexive-premetric-structures funext univalence truncations
+open import metric-spaces.symmetric-premetric-structures funext univalence truncations
+open import metric-spaces.triangular-premetric-structures funext univalence truncations
 ```
 
 </details>

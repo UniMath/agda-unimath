@@ -2,8 +2,15 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
 
-module foundation.vectors-set-quotients where
+module foundation.vectors-set-quotients
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -12,35 +19,36 @@ module foundation.vectors-set-quotients where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-products-set-quotients
+open import foundation.cartesian-products-set-quotients funext univalence truncations
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.function-extensionality
-open import foundation.multivariable-operations
-open import foundation.products-equivalence-relations
-open import foundation.raising-universe-levels
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.set-quotients
-open import foundation.sets
+open import foundation.function-extensionality funext
+open import foundation.multivariable-operations funext univalence truncations
+open import foundation.products-equivalence-relations funext univalence truncations
+open import foundation.raising-universe-levels-unit-type
+open import foundation.reflecting-maps-equivalence-relations funext univalence truncations
+open import foundation.set-quotients funext univalence truncations
+open import foundation.sets funext univalence
 open import foundation.unit-type
-open import foundation.universal-property-set-quotients
+open import foundation.universal-property-set-quotients funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.equivalence-relations
+open import foundation-core.equivalence-relations funext univalence truncations
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.raising-universe-levels
 open import foundation-core.retractions
 open import foundation-core.sections
 
-open import linear-algebra.vectors
+open import linear-algebra.vectors funext univalence truncations
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

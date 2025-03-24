@@ -1,23 +1,31 @@
 # Homomorphisms of groups equipped with normal subgroups
 
 ```agda
-module group-theory.homomorphisms-groups-equipped-with-normal-subgroups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.homomorphisms-groups-equipped-with-normal-subgroups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.subtypes
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.groups
-open import group-theory.homomorphisms-groups
-open import group-theory.normal-subgroups
-open import group-theory.pullbacks-subgroups
-open import group-theory.subgroups
+open import group-theory.groups funext univalence truncations
+open import group-theory.homomorphisms-groups funext univalence truncations
+open import group-theory.normal-subgroups funext univalence truncations
+open import group-theory.pullbacks-subgroups funext univalence truncations
+open import group-theory.subgroups funext univalence truncations
 ```
 
 </details>

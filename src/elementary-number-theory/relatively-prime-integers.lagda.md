@@ -1,19 +1,29 @@
 # Relatively prime integers
 
 ```agda
-module elementary-number-theory.relatively-prime-integers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.relatively-prime-integers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.absolute-value-integers
-open import elementary-number-theory.greatest-common-divisor-integers
+open import elementary-number-theory.absolute-value-integers funext univalence truncations
+open import elementary-number-theory.equality-integers funext univalence truncations
+open import elementary-number-theory.greatest-common-divisor-integers funext univalence truncations
 open import elementary-number-theory.integers
-open import elementary-number-theory.relatively-prime-natural-numbers
+open import elementary-number-theory.relatively-prime-natural-numbers funext univalence truncations
 
 open import foundation.action-on-identifications-functions
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 ```
 

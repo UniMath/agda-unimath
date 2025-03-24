@@ -1,7 +1,15 @@
 # Double negation stable equality
 
 ```agda
-module foundation.double-negation-stable-equality where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.double-negation-stable-equality
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,16 +17,17 @@ module foundation.double-negation-stable-equality where
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.double-negation
+open import foundation.dependent-products-propositions funext
+open import foundation.double-negation funext univalence truncations
 open import foundation.equality-cartesian-product-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.injective-maps
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.sets
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.injective-maps funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.negation funext
+open import foundation.sets funext univalence
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -30,7 +39,7 @@ open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.retracts-of-types
 
-open import logic.double-negation-elimination
+open import logic.double-negation-elimination funext univalence truncations
 ```
 
 </details>

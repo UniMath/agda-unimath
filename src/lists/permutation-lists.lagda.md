@@ -1,32 +1,41 @@
 # Permutations of lists
 
 ```agda
-module lists.permutation-lists where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module lists.permutation-lists
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.equality-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.permutations-standard-finite-types
+open import finite-group-theory.permutations-standard-finite-types funext univalence truncations
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.equality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.propositions funext univalence
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.vectors
+open import linear-algebra.functoriality-vectors funext univalence truncations
+open import linear-algebra.vectors funext univalence truncations
 
-open import lists.arrays
-open import lists.functoriality-lists
+open import lists.arrays funext univalence truncations
+open import lists.functoriality-lists funext univalence truncations
 open import lists.lists
-open import lists.permutation-vectors
+open import lists.permutation-vectors funext univalence truncations
 ```
 
 </details>

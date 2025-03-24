@@ -1,7 +1,15 @@
 # Finite rings
 
 ```agda
-module finite-algebra.finite-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module finite-algebra.finite-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,39 +18,40 @@ module finite-algebra.finite-rings where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.finite-abelian-groups
-open import finite-group-theory.finite-groups
-open import finite-group-theory.finite-monoids
+open import finite-group-theory.finite-abelian-groups funext univalence truncations
+open import finite-group-theory.finite-groups funext univalence truncations
+open import finite-group-theory.finite-monoids funext univalence truncations
 
-open import foundation.binary-embeddings
+open import foundation.binary-embeddings funext
 open import foundation.binary-equivalences
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.involutions
-open import foundation.propositions
-open import foundation.sets
+open import foundation.dependent-products-propositions funext
+open import foundation.embeddings funext
+open import foundation.equivalences funext
+open import foundation.identity-types funext
+open import foundation.injective-maps funext
+open import foundation.involutions funext univalence
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.commutative-monoids
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.abelian-groups funext univalence truncations
+open import group-theory.commutative-monoids funext univalence truncations
+open import group-theory.groups funext univalence truncations
+open import group-theory.monoids funext univalence truncations
+open import group-theory.semigroups funext univalence
 
-open import lists.concatenation-lists
+open import lists.concatenation-lists funext univalence truncations
 open import lists.lists
 
-open import ring-theory.rings
-open import ring-theory.semirings
+open import ring-theory.rings funext univalence truncations
+open import ring-theory.semirings funext univalence truncations
 
-open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.cartesian-product-types funext univalence truncations
+open import univalent-combinatorics.dependent-function-types funext univalence truncations
+open import univalent-combinatorics.dependent-pair-types funext univalence truncations
+open import univalent-combinatorics.equality-finite-types funext univalence truncations
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

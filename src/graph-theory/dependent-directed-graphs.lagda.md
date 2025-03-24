@@ -1,7 +1,13 @@
 # Dependent directed graphs
 
 ```agda
-module graph-theory.dependent-directed-graphs where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.dependent-directed-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +16,7 @@ module graph-theory.dependent-directed-graphs where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs
+open import graph-theory.directed-graphs funext univalence
 ```
 
 </details>

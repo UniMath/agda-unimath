@@ -1,23 +1,31 @@
 # Incidence algebras
 
 ```agda
-module order-theory.incidence-algebras where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.incidence-algebras
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-rings funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.inhabited-types
+open import foundation.inhabited-types funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 
-open import order-theory.interval-subposets
-open import order-theory.locally-finite-posets
-open import order-theory.posets
+open import order-theory.interval-subposets funext univalence truncations
+open import order-theory.locally-finite-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
 ```
 
 </details>

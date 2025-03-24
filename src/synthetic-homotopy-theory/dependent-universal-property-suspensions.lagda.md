@@ -1,24 +1,32 @@
 # Dependent universal property of suspensions
 
 ```agda
-module synthetic-homotopy-theory.dependent-universal-property-suspensions where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.dependent-universal-property-suspensions
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-dependent-functions
-open import foundation.constant-maps
+open import foundation.constant-maps funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
-open import synthetic-homotopy-theory.dependent-suspension-structures
-open import synthetic-homotopy-theory.suspension-structures
+open import synthetic-homotopy-theory.dependent-cocones-under-spans funext univalence truncations
+open import synthetic-homotopy-theory.dependent-suspension-structures funext univalence truncations
+open import synthetic-homotopy-theory.suspension-structures funext univalence truncations
 ```
 
 </details>

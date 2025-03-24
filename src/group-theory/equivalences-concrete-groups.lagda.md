@@ -1,25 +1,33 @@
 # Equivalences of concrete groups
 
 ```agda
-module group-theory.equivalences-concrete-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.equivalences-concrete-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalences funext
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
-open import foundation.sets
+open import foundation.identity-types funext
+open import foundation.sets funext univalence
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
+open import group-theory.concrete-groups funext univalence truncations
 
-open import higher-group-theory.equivalences-higher-groups
-open import higher-group-theory.higher-groups
+open import higher-group-theory.equivalences-higher-groups funext univalence truncations
+open import higher-group-theory.higher-groups funext univalence truncations
 ```
 
 </details>

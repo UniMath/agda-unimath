@@ -1,30 +1,38 @@
 # Riffle shuffles
 
 ```agda
-module univalent-combinatorics.riffle-shuffles where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.riffle-shuffles
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.inequality-standard-finite-types funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
-open import foundation.automorphisms
-open import foundation.conjunction
+open import foundation.automorphisms funext univalence
+open import foundation.conjunction funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
+open import foundation.equivalences funext
+open import foundation.function-types funext
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.propositions
 
-open import order-theory.order-preserving-maps-posets
-open import order-theory.posets
+open import order-theory.order-preserving-maps-posets funext univalence truncations
+open import order-theory.posets funext univalence truncations
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

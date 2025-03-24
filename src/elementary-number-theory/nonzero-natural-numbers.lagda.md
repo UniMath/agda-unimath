@@ -1,27 +1,35 @@
 # Nonzero natural numbers
 
 ```agda
-module elementary-number-theory.nonzero-natural-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.nonzero-natural-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers funext univalence truncations
+open import elementary-number-theory.inequality-natural-numbers funext univalence truncations
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers funext univalence truncations
 
-open import foundation.coproduct-types
+open import foundation.coproduct-types funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.negated-equality
-open import foundation.propositions
-open import foundation.sections
+open import foundation.empty-types funext univalence truncations
+open import foundation.equality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.negated-equality funext univalence truncations
+open import foundation.propositions funext univalence
+open import foundation.sections funext
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```

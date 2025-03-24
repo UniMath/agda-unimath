@@ -1,7 +1,15 @@
 # Hypergraphs
 
 ```agda
-module graph-theory.hypergraphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.hypergraphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -11,7 +19,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-open import foundation.unordered-tuples
+open import foundation.unordered-tuples funext univalence truncations
 ```
 
 </details>

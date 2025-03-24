@@ -1,20 +1,28 @@
 # The decidable total order of rational numbers
 
 ```agda
-module elementary-number-theory.decidable-total-order-rational-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module elementary-number-theory.decidable-total-order-rational-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.inequality-rational-numbers funext univalence truncations
 
 open import foundation.dependent-pair-types
-open import foundation.propositional-truncations
+open import foundation.propositional-truncations funext univalence
 open import foundation.universe-levels
 
-open import order-theory.decidable-total-orders
-open import order-theory.total-orders
+open import order-theory.decidable-total-orders funext univalence truncations
+open import order-theory.total-orders funext univalence truncations
 ```
 
 </details>

@@ -1,32 +1,38 @@
 # Cantor's theorem
 
 ```agda
-module foundation.cantors-theorem where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.cantors-theorem
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
+open import foundation.decidable-propositions funext univalence truncations
+open import foundation.decidable-subtypes funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.double-negation-stable-propositions
-open import foundation.function-extensionality
-open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.powersets
-open import foundation.propositional-truncations
-open import foundation.surjective-maps
+open import foundation.double-negation-stable-propositions funext univalence truncations
+open import foundation.logical-equivalences funext
+open import foundation.negation funext
+open import foundation.powersets funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.surjective-maps funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.propositions
 
-open import logic.de-morgan-propositions
-open import logic.de-morgan-subtypes
-open import logic.double-negation-stable-subtypes
+open import logic.de-morgan-propositions funext univalence truncations
+open import logic.de-morgan-subtypes funext univalence truncations
+open import logic.double-negation-stable-subtypes funext univalence truncations
 ```
 
 </details>

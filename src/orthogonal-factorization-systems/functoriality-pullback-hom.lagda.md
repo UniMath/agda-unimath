@@ -1,36 +1,27 @@
 # Functoriality of the pullback-hom
 
 ```agda
-module orthogonal-factorization-systems.functoriality-pullback-hom where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.functoriality-pullback-hom
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-binary-functions
-open import foundation.action-on-identifications-functions
-open import foundation.bicomposition-functions
-open import foundation.composition-algebra
-open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-morphisms-arrows
-open import foundation.functoriality-pullbacks
-open import foundation.homotopies
-open import foundation.homotopies-morphisms-arrows
-open import foundation.homotopies-morphisms-cospan-diagrams
-open import foundation.identity-types
-open import foundation.morphisms-arrows
+open import foundation.functoriality-morphisms-arrows funext univalence truncations
+open import foundation.functoriality-pullbacks funext univalence truncations
+open import foundation.morphisms-arrows funext
 open import foundation.morphisms-cospan-diagrams
-open import foundation.postcomposition-functions
-open import foundation.precomposition-functions
-open import foundation.retracts-of-maps
 open import foundation.universe-levels
-open import foundation.whiskering-higher-homotopies-composition
-open import foundation.whiskering-homotopies-composition
 
-open import orthogonal-factorization-systems.pullback-hom
+open import orthogonal-factorization-systems.pullback-hom funext univalence truncations
 ```
 
 </details>

@@ -1,18 +1,27 @@
 # Connected graphs
 
 ```agda
-module graph-theory.connected-undirected-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.connected-undirected-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.propositional-truncations funext univalence
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import graph-theory.undirected-graphs
-open import graph-theory.walks-undirected-graphs
+open import graph-theory.undirected-graphs funext univalence truncations
+open import graph-theory.walks-undirected-graphs funext univalence truncations
 ```
 
 </details>

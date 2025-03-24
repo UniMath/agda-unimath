@@ -1,18 +1,26 @@
 # Representable functors between categories
 
 ```agda
-module category-theory.representable-functors-categories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.representable-functors-categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.functors-categories
-open import category-theory.natural-transformations-functors-categories
-open import category-theory.representable-functors-precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.functors-categories funext univalence truncations
+open import category-theory.natural-transformations-functors-categories funext univalence truncations
+open import category-theory.representable-functors-precategories funext univalence truncations
 
-open import foundation.category-of-sets
+open import foundation.category-of-sets funext univalence truncations
 open import foundation.universe-levels
 ```
 

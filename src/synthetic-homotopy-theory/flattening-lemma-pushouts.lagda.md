@@ -1,36 +1,44 @@
 # The flattening lemma for pushouts
 
 ```agda
-module synthetic-homotopy-theory.flattening-lemma-pushouts where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.flattening-lemma-pushouts
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-cubes-of-maps
-open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-maps
+open import foundation.commuting-cubes-of-maps funext univalence
+open import foundation.commuting-squares-of-maps funext univalence
+open import foundation.commuting-triangles-of-maps funext univalence
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.span-diagrams
+open import foundation.equality-dependent-pair-types funext
+open import foundation.equivalences funext
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-function-types funext univalence
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.span-diagrams funext
 open import foundation.transport-along-identifications
-open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-dependent-pair-types funext
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
-open import synthetic-homotopy-theory.dependent-universal-property-pushouts
-open import synthetic-homotopy-theory.descent-data-pushouts
-open import synthetic-homotopy-theory.equivalences-descent-data-pushouts
-open import synthetic-homotopy-theory.universal-property-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.dependent-cocones-under-spans funext univalence truncations
+open import synthetic-homotopy-theory.dependent-universal-property-pushouts funext univalence truncations
+open import synthetic-homotopy-theory.descent-data-pushouts funext
+open import synthetic-homotopy-theory.equivalences-descent-data-pushouts funext univalence truncations
+open import synthetic-homotopy-theory.universal-property-pushouts funext univalence truncations
 ```
 
 </details>

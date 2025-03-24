@@ -1,20 +1,29 @@
 # Reflecting maps of undirected graphs
 
 ```agda
-module graph-theory.reflecting-maps-undirected-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.reflecting-maps-undirected-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
+open import foundation.contractible-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.symmetric-identity-types
+open import foundation.dependent-products-contractible-types funext
+open import foundation.symmetric-identity-types funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.unordered-pairs
+open import foundation.unordered-pairs funext univalence truncations
 
-open import graph-theory.undirected-graphs
+open import graph-theory.undirected-graphs funext univalence truncations
 ```
 
 </details>

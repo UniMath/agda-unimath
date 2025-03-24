@@ -1,17 +1,25 @@
 # Natural isomorphisms between functors between large precategories
 
 ```agda
-module category-theory.natural-isomorphisms-functors-large-precategories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.natural-isomorphisms-functors-large-precategories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.commuting-squares-of-morphisms-in-large-precategories
-open import category-theory.functors-large-precategories
-open import category-theory.isomorphisms-in-large-precategories
-open import category-theory.large-precategories
-open import category-theory.natural-transformations-functors-large-precategories
+open import category-theory.commuting-squares-of-morphisms-in-large-precategories funext univalence truncations
+open import category-theory.functors-large-precategories funext univalence truncations
+open import category-theory.isomorphisms-in-large-precategories funext univalence truncations
+open import category-theory.large-precategories funext univalence truncations
+open import category-theory.natural-transformations-functors-large-precategories funext univalence truncations
 
 open import foundation.universe-levels
 ```

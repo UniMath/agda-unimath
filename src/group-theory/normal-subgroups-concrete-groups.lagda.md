@@ -1,7 +1,15 @@
 # Normal subgroups of concrete groups
 
 ```agda
-module group-theory.normal-subgroups-concrete-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.normal-subgroups-concrete-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,10 +17,10 @@ module group-theory.normal-subgroups-concrete-groups where
 ```agda
 open import foundation.universe-levels
 
-open import group-theory.concrete-group-actions
-open import group-theory.concrete-groups
-open import group-theory.subgroups-concrete-groups
-open import group-theory.transitive-concrete-group-actions
+open import group-theory.concrete-group-actions funext univalence truncations
+open import group-theory.concrete-groups funext univalence truncations
+open import group-theory.subgroups-concrete-groups funext univalence truncations
+open import group-theory.transitive-concrete-group-actions funext univalence truncations
 ```
 
 </details>

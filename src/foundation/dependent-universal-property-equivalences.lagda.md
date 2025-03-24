@@ -1,7 +1,11 @@
 # The dependent universal property of equivalences
 
 ```agda
-module foundation.dependent-universal-property-equivalences where
+open import foundation.function-extensionality-axiom
+
+module foundation.dependent-universal-property-equivalences
+  (funext : function-extensionality)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +14,7 @@ module foundation.dependent-universal-property-equivalences where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.function-extensionality funext
 open import foundation.universe-levels
 
 open import foundation-core.coherently-invertible-maps

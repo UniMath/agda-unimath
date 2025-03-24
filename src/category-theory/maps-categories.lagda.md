@@ -1,19 +1,27 @@
 # Maps between categories
 
 ```agda
-module category-theory.maps-categories where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module category-theory.maps-categories
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.maps-precategories
+open import category-theory.categories funext univalence truncations
+open import category-theory.maps-precategories funext univalence truncations
 
-open import foundation.equivalences
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.torsorial-type-families
+open import foundation.equivalences funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.torsorial-type-families funext univalence truncations
 open import foundation.universe-levels
 ```
 

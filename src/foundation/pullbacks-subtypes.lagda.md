@@ -1,22 +1,30 @@
 # Pullbacks of subtypes
 
 ```agda
-module foundation.pullbacks-subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.pullbacks-subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.logical-equivalences
-open import foundation.powersets
+open import foundation.logical-equivalences funext
+open import foundation.powersets funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.propositions
-open import foundation-core.subtypes
+open import foundation-core.subtypes funext
 
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.order-preserving-maps-large-posets funext univalence truncations
+open import order-theory.order-preserving-maps-large-preorders funext univalence truncations
 ```
 
 </details>

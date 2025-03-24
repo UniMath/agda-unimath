@@ -1,31 +1,39 @@
 # The binomial theorem in commutative rings
 
 ```agda
-module commutative-algebra.binomial-theorem-commutative-rings where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module commutative-algebra.binomial-theorem-commutative-rings
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.binomial-theorem-commutative-semirings
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.powers-of-elements-commutative-rings
-open import commutative-algebra.sums-commutative-rings
+open import commutative-algebra.binomial-theorem-commutative-semirings funext univalence truncations
+open import commutative-algebra.commutative-rings funext univalence truncations
+open import commutative-algebra.powers-of-elements-commutative-rings funext univalence truncations
+open import commutative-algebra.sums-commutative-rings funext univalence truncations
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.binomial-coefficients
-open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.binomial-coefficients funext univalence truncations
+open import elementary-number-theory.distance-natural-numbers funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies funext
+open import foundation.identity-types funext
 open import foundation.universe-levels
 
-open import linear-algebra.vectors-on-commutative-rings
+open import linear-algebra.vectors-on-commutative-rings funext univalence truncations
 
-open import ring-theory.binomial-theorem-rings
+open import ring-theory.binomial-theorem-rings funext univalence truncations
 
-open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.standard-finite-types funext univalence truncations
 ```
 
 </details>

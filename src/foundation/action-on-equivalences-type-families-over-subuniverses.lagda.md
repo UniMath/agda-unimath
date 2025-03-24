@@ -1,7 +1,13 @@
 # Action on equivalences in type families over subuniverses
 
 ```agda
-module foundation.action-on-equivalences-type-families-over-subuniverses where
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module foundation.action-on-equivalences-type-families-over-subuniverses
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,17 +15,16 @@ module foundation.action-on-equivalences-type-families-over-subuniverses where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalence-induction
-open import foundation.subuniverses
+open import foundation.equivalence-induction funext univalence
+open import foundation.subuniverses funext univalence
 open import foundation.universe-levels
 
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-squares-of-maps funext
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.univalence
 ```
 
 </details>

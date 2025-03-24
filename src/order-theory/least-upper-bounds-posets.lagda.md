@@ -1,25 +1,32 @@
 # Least upper bounds in posets
 
 ```agda
-module order-theory.least-upper-bounds-posets where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module order-theory.least-upper-bounds-posets
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.booleans
+open import foundation.booleans funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.raising-universe-levels
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import order-theory.posets
-open import order-theory.upper-bounds-posets
+open import order-theory.posets funext univalence truncations
+open import order-theory.upper-bounds-posets funext univalence truncations
 ```
 
 </details>

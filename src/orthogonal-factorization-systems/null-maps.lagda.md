@@ -1,40 +1,50 @@
 # Null maps
 
 ```agda
-module orthogonal-factorization-systems.null-maps where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module orthogonal-factorization-systems.null-maps
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospan-diagrams
+open import foundation.cones-over-cospan-diagrams funext
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types
-open import foundation.equivalences
-open import foundation.equivalences-arrows
-open import foundation.families-of-equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.functoriality-fibers-of-maps
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.morphisms-arrows
-open import foundation.postcomposition-functions
-open import foundation.precomposition-functions
-open import foundation.propositions
-open import foundation.pullbacks
-open import foundation.type-arithmetic-unit-type
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.equivalences-arrows funext univalence truncations
+open import foundation.families-of-equivalences funext
+open import foundation.fibers-of-maps funext
+open import foundation.function-types funext
+open import foundation.functoriality-fibers-of-maps funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.morphisms-arrows funext
+open import foundation.postcomposition-functions funext
+open import foundation.precomposition-functions funext
+open import foundation.propositions funext univalence
+open import foundation.pullbacks funext univalence truncations
+open import foundation.type-arithmetic-unit-type funext
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.unit-type
-open import foundation.universal-property-family-of-fibers-of-maps
+open import foundation.universal-property-family-of-fibers-of-maps funext
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.maps-local-at-maps
-open import orthogonal-factorization-systems.null-families-of-types
-open import orthogonal-factorization-systems.null-types
-open import orthogonal-factorization-systems.orthogonal-maps
-open import orthogonal-factorization-systems.types-local-at-maps
+open import foundation-core.diagonal-maps-of-types
+
+open import orthogonal-factorization-systems.maps-local-at-maps funext univalence truncations
+open import orthogonal-factorization-systems.null-families-of-types funext univalence truncations
+open import orthogonal-factorization-systems.null-types funext univalence truncations
+open import orthogonal-factorization-systems.orthogonal-maps funext univalence truncations
+open import orthogonal-factorization-systems.types-local-at-maps funext univalence truncations
 ```
 
 </details>

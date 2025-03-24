@@ -1,31 +1,39 @@
 # Complements of De Morgan subtypes
 
 ```agda
-module logic.complements-de-morgan-subtypes where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module logic.complements-de-morgan-subtypes
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.complements-subtypes
-open import foundation.decidable-subtypes
+open import foundation.complements-subtypes funext univalence truncations
+open import foundation.decidable-subtypes funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.double-negation
-open import foundation.full-subtypes
-open import foundation.involutions
-open import foundation.negation
-open import foundation.postcomposition-functions
-open import foundation.powersets
-open import foundation.propositional-truncations
-open import foundation.subtypes
-open import foundation.unions-subtypes
+open import foundation.double-negation funext univalence truncations
+open import foundation.full-subtypes funext univalence truncations
+open import foundation.involutions funext univalence
+open import foundation.negation funext
+open import foundation.postcomposition-functions funext
+open import foundation.powersets funext univalence truncations
+open import foundation.propositional-truncations funext univalence
+open import foundation.subtypes funext univalence truncations
+open import foundation.unions-subtypes funext univalence truncations
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 
-open import logic.complements-decidable-subtypes
-open import logic.de-morgan-propositions
-open import logic.de-morgan-subtypes
+open import logic.complements-decidable-subtypes funext univalence truncations
+open import logic.de-morgan-propositions funext univalence truncations
+open import logic.de-morgan-subtypes funext univalence truncations
 ```
 
 </details>

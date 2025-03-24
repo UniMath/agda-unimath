@@ -1,7 +1,15 @@
 # The dependent pullback property of pushouts
 
 ```agda
-module synthetic-homotopy-theory.dependent-pullback-property-pushouts where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module synthetic-homotopy-theory.dependent-pullback-property-pushouts
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,26 +17,26 @@ module synthetic-homotopy-theory.dependent-pullback-property-pushouts where
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospan-diagrams
-open import foundation.constant-type-families
+open import foundation.cones-over-cospan-diagrams funext
+open import foundation.constant-type-families funext
 open import foundation.dependent-pair-types
-open import foundation.dependent-sums-pullbacks
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.precomposition-functions
-open import foundation.pullbacks
+open import foundation.dependent-sums-pullbacks funext
+open import foundation.function-extensionality funext
+open import foundation.function-types funext
+open import foundation.homotopies funext
+open import foundation.identity-types funext
+open import foundation.precomposition-functions funext
+open import foundation.pullbacks funext univalence truncations
 open import foundation.transport-along-identifications
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-theoretic-principle-of-choice funext
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import orthogonal-factorization-systems.lifts-families-of-elements
-open import orthogonal-factorization-systems.precomposition-lifts-families-of-elements
+open import orthogonal-factorization-systems.lifts-families-of-elements funext
+open import orthogonal-factorization-systems.precomposition-lifts-families-of-elements funext univalence
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.pullback-property-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans funext
+open import synthetic-homotopy-theory.pullback-property-pushouts funext univalence truncations
 ```
 
 </details>

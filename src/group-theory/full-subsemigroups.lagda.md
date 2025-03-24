@@ -1,24 +1,33 @@
 # The full subsemigroup of a semigroup
 
 ```agda
-module group-theory.full-subsemigroups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.full-subsemigroups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.full-subtypes
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.full-subtypes funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.universe-levels
 
-open import group-theory.equivalences-semigroups
-open import group-theory.homomorphisms-semigroups
-open import group-theory.isomorphisms-semigroups
-open import group-theory.semigroups
-open import group-theory.subsemigroups
-open import group-theory.subsets-semigroups
+open import group-theory.equivalences-semigroups funext univalence truncations
+open import group-theory.homomorphisms-semigroups funext univalence truncations
+open import group-theory.isomorphisms-semigroups funext univalence truncations
+open import group-theory.semigroups funext univalence
+open import group-theory.subsemigroups funext univalence truncations
+open import group-theory.subsets-semigroups funext univalence truncations
 ```
 
 </details>

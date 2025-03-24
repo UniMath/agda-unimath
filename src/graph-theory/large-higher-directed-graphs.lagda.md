@@ -1,7 +1,15 @@
 # Large higher directed graphs
 
 ```agda
-module graph-theory.large-higher-directed-graphs where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.large-higher-directed-graphs
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -9,17 +17,18 @@ module graph-theory.large-higher-directed-graphs where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types
+open import foundation.cartesian-product-types funext univalence
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.large-binary-relations
-open import foundation.raising-universe-levels
+open import foundation.function-types funext
+open import foundation.identity-types funext
+open import foundation.large-binary-relations funext univalence truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs
-open import graph-theory.higher-directed-graphs
+open import foundation-core.raising-universe-levels
+
+open import graph-theory.directed-graphs funext univalence
+open import graph-theory.higher-directed-graphs funext univalence truncations
 ```
 
 </details>

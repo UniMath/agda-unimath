@@ -1,19 +1,27 @@
 # The dihedral groups
 
 ```agda
-module group-theory.dihedral-groups where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module group-theory.dihedral-groups
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.standard-cyclic-groups
+open import elementary-number-theory.standard-cyclic-groups funext univalence truncations
 
 open import foundation.universe-levels
 
-open import group-theory.dihedral-group-construction
-open import group-theory.groups
+open import group-theory.dihedral-group-construction funext univalence truncations
+open import group-theory.groups funext univalence truncations
 ```
 
 </details>

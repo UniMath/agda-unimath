@@ -1,29 +1,37 @@
 # Polygons
 
 ```agda
-module graph-theory.polygons where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module graph-theory.polygons
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.modular-arithmetic funext univalence truncations
 open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-equality
+open import foundation.decidable-equality funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.fibers-of-maps
-open import foundation.functoriality-propositional-truncation
-open import foundation.mere-equivalences
-open import foundation.sets
+open import foundation.fibers-of-maps funext
+open import foundation.functoriality-propositional-truncation funext univalence truncations
+open import foundation.mere-equivalences funext univalence truncations
+open import foundation.sets funext univalence
 open import foundation.universe-levels
-open import foundation.unordered-pairs
+open import foundation.unordered-pairs funext univalence truncations
 
-open import graph-theory.equivalences-undirected-graphs
-open import graph-theory.mere-equivalences-undirected-graphs
-open import graph-theory.undirected-graphs
+open import graph-theory.equivalences-undirected-graphs funext univalence truncations
+open import graph-theory.mere-equivalences-undirected-graphs funext univalence truncations
+open import graph-theory.undirected-graphs funext univalence truncations
 
-open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-types funext univalence truncations
 ```
 
 </details>

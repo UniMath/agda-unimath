@@ -1,33 +1,42 @@
 # Saturated metric spaces
 
 ```agda
-module metric-spaces.saturated-metric-spaces where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module metric-spaces.saturated-metric-spaces
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers funext univalence truncations
 
-open import foundation.binary-relations
+open import foundation.binary-relations funext univalence truncations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtypes
+open import foundation.dependent-products-propositions funext
+open import foundation.equivalences funext
+open import foundation.function-types funext
+open import foundation.functoriality-dependent-pair-types funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.propositions funext univalence
+open import foundation.sets funext univalence
+open import foundation.subtypes funext univalence truncations
 open import foundation.universe-levels
 
-open import metric-spaces.closed-premetric-structures
-open import metric-spaces.functions-metric-spaces
-open import metric-spaces.metric-spaces
-open import metric-spaces.metric-structures
-open import metric-spaces.premetric-spaces
-open import metric-spaces.premetric-structures
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.closed-premetric-structures funext univalence truncations
+open import metric-spaces.functions-metric-spaces funext univalence truncations
+open import metric-spaces.metric-spaces funext univalence truncations
+open import metric-spaces.metric-structures funext univalence truncations
+open import metric-spaces.premetric-spaces funext univalence truncations
+open import metric-spaces.premetric-structures funext univalence truncations
+open import metric-spaces.short-functions-metric-spaces funext univalence truncations
 ```
 
 </details>

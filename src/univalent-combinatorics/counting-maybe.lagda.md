@@ -1,7 +1,15 @@
 # Counting the elements in Maybe
 
 ```agda
-module univalent-combinatorics.counting-maybe where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module univalent-combinatorics.counting-maybe
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -10,13 +18,14 @@ module univalent-combinatorics.counting-maybe where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences-maybe
-open import foundation.identity-types
-open import foundation.maybe
+open import foundation.equivalences-maybe funext univalence truncations
 open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.counting
+open import foundation-core.identity-types
+open import foundation-core.maybe
+
+open import univalent-combinatorics.coproduct-types funext univalence truncations
+open import univalent-combinatorics.counting funext univalence truncations
 ```
 
 </details>

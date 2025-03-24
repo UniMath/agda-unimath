@@ -1,29 +1,30 @@
 # Similarity of real numbers
 
 ```agda
-module real-numbers.similarity-real-numbers where
+open import foundation.truncations-exist
+open import foundation-core.univalence
+open import foundation.function-extensionality-axiom
+
+module real-numbers.similarity-real-numbers
+  (funext : function-extensionality)
+  (univalence : univalence-axiom)
+  (truncations : truncations-exist)
+  where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.strict-inequality-rational-numbers
-
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.empty-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.powersets
-open import foundation.propositions
+open import foundation.dependent-products-propositions funext
+open import foundation.identity-types funext
+open import foundation.logical-equivalences funext
+open import foundation.powersets funext univalence truncations
+open import foundation.propositions funext univalence
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import order-theory.similarity-of-elements-large-posets
-
-open import real-numbers.dedekind-real-numbers
+open import real-numbers.dedekind-real-numbers funext univalence truncations
 ```
 
 </details>
