@@ -154,9 +154,9 @@ module _
       ( limit-convergent-sequence-Metric-Space A u)
       ( is-limit-limit-convergent-sequence-Metric-Space A u))
 
-  short-map-convergent-sequence-Metric-Space :
+  map-short-map-convergent-sequence-Metric-Space :
     convergent-sequence-Metric-Space B
-  short-map-convergent-sequence-Metric-Space =
+  map-short-map-convergent-sequence-Metric-Space =
     seq-short-map-convergent-sequence-Metric-Space ,
     has-limit-seq-short-map-convergent-sequence-Metric-Space
 
@@ -164,6 +164,6 @@ module _
     ( map-short-function-Metric-Space A B f
       ( limit-convergent-sequence-Metric-Space A u)) ＝
     ( limit-convergent-sequence-Metric-Space B
-      ( short-map-convergent-sequence-Metric-Space))
+      ( map-short-map-convergent-sequence-Metric-Space))
   eq-limit-short-map-convergent-sequence-Metric-Space = refl
 ```

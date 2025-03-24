@@ -25,8 +25,10 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.sequences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -35,6 +37,8 @@ open import metric-spaces.convergent-sequences-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
 open import metric-spaces.limits-sequences-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.sequences-metric-spaces
+open import metric-spaces.short-functions-metric-spaces
 ```
 
 </details>
@@ -63,7 +67,7 @@ approximation, with the same limit if either exists, and vice versa.
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : ℕ → type-Metric-Space M)
+  (x : sequence-Metric-Space M)
   where
 
   is-cauchy-sequence-Metric-Space : UU l2
@@ -81,7 +85,7 @@ module _
 
   cauchy-sequence-Metric-Space : UU (l1 ⊔ l2)
   cauchy-sequence-Metric-Space =
-    Σ (ℕ → type-Metric-Space M) (is-cauchy-sequence-Metric-Space M)
+    Σ (sequence-Metric-Space M) (is-cauchy-sequence-Metric-Space M)
 
   modulus-of-convergence-cauchy-sequence-Metric-Space :
     cauchy-sequence-Metric-Space → ℚ⁺ → ℕ
@@ -89,7 +93,7 @@ module _
     pr1 (is-cauchy-x ε⁺)
 
   map-cauchy-sequence-Metric-Space :
-    cauchy-sequence-Metric-Space → ℕ → type-Metric-Space M
+    cauchy-sequence-Metric-Space → sequence-Metric-Space M
   map-cauchy-sequence-Metric-Space = pr1
 
   is-cauchy-sequence-cauchy-sequence-Metric-Space :
@@ -540,6 +544,38 @@ module _
                 ( x)
                 ( ε⁺)
                 ( 1/n'))))
+```
+
+### Short maps between metric spaces transport Cauchy sequences
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level} (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : short-function-Metric-Space A B)
+  (u : cauchy-sequence-Metric-Space A)
+  where
+
+  seq-short-map-cauchy-sequence-Metric-Space : sequence-Metric-Space B
+  seq-short-map-cauchy-sequence-Metric-Space =
+    map-sequence
+      ( map-short-function-Metric-Space A B f)
+      ( map-cauchy-sequence-Metric-Space A u)
+
+  is-cauchy-seq-short-map-cauchy-sequence-Metric-Space :
+    is-cauchy-sequence-Metric-Space B seq-short-map-cauchy-sequence-Metric-Space
+  is-cauchy-seq-short-map-cauchy-sequence-Metric-Space ε =
+    tot
+      ( λ n H m k I J →
+        is-short-map-short-function-Metric-Space A B f ε
+          ( map-cauchy-sequence-Metric-Space A u m)
+          ( map-cauchy-sequence-Metric-Space A u k)
+          ( H m k I J))
+      ( is-cauchy-sequence-cauchy-sequence-Metric-Space A u ε)
+
+  map-short-map-cauchy-sequence-Metric-Space : cauchy-sequence-Metric-Space B
+  map-short-map-cauchy-sequence-Metric-Space =
+    seq-short-map-cauchy-sequence-Metric-Space ,
+    is-cauchy-seq-short-map-cauchy-sequence-Metric-Space
 ```
 
 ## References
