@@ -210,6 +210,11 @@ module _
               ( lim)
               ( n≤m⇒|xm-l|<ε' k n≤k))
             ( n≤m⇒|xm-l|<ε' m n≤m))
+
+  cauchy-convergent-sequence-Metric-Space : cauchy-sequence-Metric-Space M
+  cauchy-convergent-sequence-Metric-Space =
+    seq-convergent-sequence-Metric-Space M x ,
+    is-cauchy-seq-convergent-sequence-Metric-Space
 ```
 
 ### Correspondence to Cauchy approximations
