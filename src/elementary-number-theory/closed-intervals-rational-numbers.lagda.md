@@ -62,7 +62,8 @@ is-in-unordered-closed-interval-ℚ p q =
   is-in-closed-interval-ℚ (min-ℚ p q) (max-ℚ p q)
 
 is-in-unordered-closed-interval-is-in-closed-interval-ℚ :
-  (p q r : ℚ) → is-in-closed-interval-ℚ p q r →
+  (p q r : ℚ) →
+  is-in-closed-interval-ℚ p q r →
   is-in-unordered-closed-interval-ℚ p q r
 is-in-unordered-closed-interval-is-in-closed-interval-ℚ p q r (p≤r , q≤r) =
   transitive-leq-ℚ
@@ -103,7 +104,8 @@ is-in-reversed-unordered-closed-interval-is-in-closed-interval-ℚ
 
 ```agda
 abstract
-  left-mul-negative-closed-interval-ℚ : (p q r s : ℚ) →
+  left-mul-negative-closed-interval-ℚ :
+    (p q r s : ℚ) →
     is-in-closed-interval-ℚ p q r → is-negative-ℚ s →
     is-in-closed-interval-ℚ (q *ℚ s) (p *ℚ s) (r *ℚ s)
   left-mul-negative-closed-interval-ℚ p q r s (p≤r , r≤q) neg-s =
@@ -113,7 +115,8 @@ abstract
       reverses-leq-right-mul-ℚ⁻ s⁻ r q r≤q ,
       reverses-leq-right-mul-ℚ⁻ s⁻ p r p≤r
 
-  left-mul-positive-closed-interval-ℚ : (p q r s : ℚ) →
+  left-mul-positive-closed-interval-ℚ :
+    (p q r s : ℚ) →
     is-in-closed-interval-ℚ p q r → is-positive-ℚ s →
     is-in-closed-interval-ℚ (p *ℚ s) (q *ℚ s) (r *ℚ s)
   left-mul-positive-closed-interval-ℚ p q r s (p≤r , r≤q) pos-s =
