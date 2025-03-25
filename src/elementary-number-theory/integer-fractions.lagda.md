@@ -110,6 +110,14 @@ neg-fraction-ℤ (d , n) = (neg-ℤ d , n)
 
 ## Properties
 
+### The double negation of an integer fraction is the original fraction
+
+```agda
+abstract
+  neg-neg-fraction-ℤ : (x : fraction-ℤ) → neg-fraction-ℤ (neg-fraction-ℤ x) ＝ x
+  neg-neg-fraction-ℤ (n , d) = ap (_, d) (neg-neg-ℤ n)
+```
+
 ### Denominators are nonzero
 
 ```agda

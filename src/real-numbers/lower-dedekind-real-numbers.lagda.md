@@ -1,13 +1,18 @@
 # Lower Dedekind real numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.lower-dedekind-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -25,6 +30,7 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
+open import foundation.unit-type
 open import foundation.universal-quantification
 open import foundation.universe-levels
 ```
@@ -96,6 +102,20 @@ module _
 
 ## Properties
 
+### The greatest lower Dedekind real
+
+There is a largest lower Dedekind real whose cut is all rational numbers. We
+call this element **infinity**.
+
+```agda
+infinity-lower-ℝ : lower-ℝ lzero
+pr1 infinity-lower-ℝ _ = unit-Prop
+pr1 (pr2 infinity-lower-ℝ) = intro-exists zero-ℚ star
+pr1 (pr2 (pr2 infinity-lower-ℝ) q) _ =
+  intro-exists (q +ℚ one-ℚ) (le-right-add-rational-ℚ⁺ q one-ℚ⁺ , star)
+pr2 (pr2 (pr2 infinity-lower-ℝ) q) _ = star
+```
+
 ### The lower Dedekind reals form a set
 
 ```agda
@@ -120,6 +140,19 @@ module _
     backward-implication
       ( is-rounded-cut-lower-ℝ x p)
       ( intro-exists q (p<q , q<x))
+```
+
+### Lower Dedekind cuts are closed under subtraction by positive rational numbers
+
+```agda
+module _
+  {l : Level} (x : lower-ℝ l) (p : ℚ) (d : ℚ⁺)
+  where
+
+  is-in-cut-diff-rational-ℚ⁺-lower-ℝ :
+    is-in-cut-lower-ℝ x p → is-in-cut-lower-ℝ x (p -ℚ rational-ℚ⁺ d)
+  is-in-cut-diff-rational-ℚ⁺-lower-ℝ =
+    is-in-cut-le-ℚ-lower-ℝ x (p -ℚ rational-ℚ⁺ d) p (le-diff-rational-ℚ⁺ p d)
 ```
 
 ### Lower Dedekind cuts are closed under inequality on the rationals
