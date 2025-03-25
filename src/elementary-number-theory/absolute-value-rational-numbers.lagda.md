@@ -9,20 +9,20 @@ module elementary-number-theory.absolute-value-rational-numbers where
 
 ```agda
 open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.rational-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.action-on-identifications-binary-functions
-open import foundation.function-types
+open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
-open import foundation.binary-transport
 ```
 
 </details>
@@ -146,7 +146,10 @@ abstract
             ( neg-leq-ℚ
               ( neg-ℚ q)
               ( zero-ℚ)
-              ( tr (leq-ℚ (neg-ℚ q)) (ap rational-ℚ⁰⁺ abs=0) (leq-neg-abs-ℚ q)))))
+              ( tr
+                ( leq-ℚ (neg-ℚ q))
+                ( ap rational-ℚ⁰⁺ abs=0)
+                ( leq-neg-abs-ℚ q)))))
       (linear-leq-ℚ zero-ℚ q)
 
   abs-zero-ℚ : abs-ℚ zero-ℚ ＝ zero-ℚ⁰⁺

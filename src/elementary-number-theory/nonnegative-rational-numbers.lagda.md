@@ -11,6 +11,7 @@ module elementary-number-theory.nonnegative-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
+open import elementary-number-theory.decidable-total-order-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
@@ -19,7 +20,6 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-positive-and-negative-integers
-open import order-theory.inflationary-maps-posets
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.nonnegative-integer-fractions
 open import elementary-number-theory.nonnegative-integers
@@ -31,7 +31,6 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 open import elementary-number-theory.strict-inequality-rational-numbers
-open import elementary-number-theory.decidable-total-order-rational-numbers
 
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
@@ -42,6 +41,8 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import order-theory.inflationary-maps-posets
 ```
 
 </details>
@@ -202,7 +203,8 @@ module _
 
 ```agda
   is-nonnegative-mul-nonnegative-ℚ :
-    {x y : ℚ} → is-nonnegative-ℚ x → is-nonnegative-ℚ y → is-nonnegative-ℚ (x *ℚ y)
+    {x y : ℚ} → is-nonnegative-ℚ x → is-nonnegative-ℚ y →
+    is-nonnegative-ℚ (x *ℚ y)
   is-nonnegative-mul-nonnegative-ℚ {x} {y} P Q =
     is-nonnegative-rational-fraction-ℤ
       ( is-nonnegative-mul-nonnegative-fraction-ℤ
@@ -294,7 +296,6 @@ mul-ℚ⁰⁺ (p , nonneg-p) (q , nonneg-q) =
 infixl 35 _*ℚ⁰⁺_
 _*ℚ⁰⁺_ = mul-ℚ⁰⁺
 ```
-
 
 ### Inequality on nonnegative rational numbers
 

@@ -12,8 +12,8 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.dependent-pair-types
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
