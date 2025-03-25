@@ -49,65 +49,66 @@ module _
             le-ℚ-Prop q (b *ℚ c) ∧
             le-ℚ-Prop q (b *ℚ d)))
 
-  is-inhabited-lower-cut-mul-ℝ : exists ℚ lower-cut-mul-ℝ
-  is-inhabited-lower-cut-mul-ℝ =
-    do
-      ((a , b) , a<x , x<b) ← is-inhabited-rational-bounds-ℝ x
-      ((c , d) , c<y , y<d) ← is-inhabited-rational-bounds-ℝ y
-      let
-        min-ac-ad = min-ℚ (a *ℚ c) (a *ℚ d)
-        min-bc-bd = min-ℚ (b *ℚ c) (b *ℚ d)
-        min = min-ℚ min-ac-ad min-bc-bd
-      (q , q<min) ← exists-lesser-ℚ min
-      intro-exists
-        ( q)
-        ( intro-exists
-          ( (a , b) , a<x , x<b)
+  abstract
+    is-inhabited-lower-cut-mul-ℝ : exists ℚ lower-cut-mul-ℝ
+    is-inhabited-lower-cut-mul-ℝ =
+      do
+        ((a , b) , a<x , x<b) ← is-inhabited-rational-bounds-ℝ x
+        ((c , d) , c<y , y<d) ← is-inhabited-rational-bounds-ℝ y
+        let
+          min-ac-ad = min-ℚ (a *ℚ c) (a *ℚ d)
+          min-bc-bd = min-ℚ (b *ℚ c) (b *ℚ d)
+          min = min-ℚ min-ac-ad min-bc-bd
+        (q , q<min) ← exists-lesser-ℚ min
+        intro-exists
+          ( q)
           ( intro-exists
-            ( (c , d) , c<y , y<d)
-            ( concatenate-le-leq-ℚ
-                ( q)
-                ( min)
-                ( a *ℚ c)
-                ( q<min)
-                ( transitive-leq-ℚ
+            ( (a , b) , a<x , x<b)
+            ( intro-exists
+              ( (c , d) , c<y , y<d)
+              ( concatenate-le-leq-ℚ
+                  ( q)
                   ( min)
-                  ( min-ac-ad)
                   ( a *ℚ c)
-                  ( leq-left-min-ℚ (a *ℚ c) (a *ℚ d))
-                  ( leq-left-min-ℚ min-ac-ad min-bc-bd)) ,
-              concatenate-le-leq-ℚ
-                ( q)
-                ( min)
-                ( a *ℚ d)
-                ( q<min)
-                ( transitive-leq-ℚ
+                  ( q<min)
+                  ( transitive-leq-ℚ
+                    ( min)
+                    ( min-ac-ad)
+                    ( a *ℚ c)
+                    ( leq-left-min-ℚ (a *ℚ c) (a *ℚ d))
+                    ( leq-left-min-ℚ min-ac-ad min-bc-bd)) ,
+                concatenate-le-leq-ℚ
+                  ( q)
                   ( min)
-                  ( min-ac-ad)
                   ( a *ℚ d)
-                  ( leq-right-min-ℚ (a *ℚ c) (a *ℚ d))
-                  ( leq-left-min-ℚ min-ac-ad min-bc-bd)) ,
-              concatenate-le-leq-ℚ
-                ( q)
-                ( min)
-                ( b *ℚ c)
-                ( q<min)
-                ( transitive-leq-ℚ
+                  ( q<min)
+                  ( transitive-leq-ℚ
+                    ( min)
+                    ( min-ac-ad)
+                    ( a *ℚ d)
+                    ( leq-right-min-ℚ (a *ℚ c) (a *ℚ d))
+                    ( leq-left-min-ℚ min-ac-ad min-bc-bd)) ,
+                concatenate-le-leq-ℚ
+                  ( q)
                   ( min)
-                  ( min-bc-bd)
                   ( b *ℚ c)
-                  ( leq-left-min-ℚ (b *ℚ c) (b *ℚ d))
-                  ( leq-right-min-ℚ min-ac-ad min-bc-bd)) ,
-              concatenate-le-leq-ℚ
-                ( q)
-                ( min)
-                ( b *ℚ d)
-                ( q<min)
-                ( transitive-leq-ℚ
+                  ( q<min)
+                  ( transitive-leq-ℚ
+                    ( min)
+                    ( min-bc-bd)
+                    ( b *ℚ c)
+                    ( leq-left-min-ℚ (b *ℚ c) (b *ℚ d))
+                    ( leq-right-min-ℚ min-ac-ad min-bc-bd)) ,
+                concatenate-le-leq-ℚ
+                  ( q)
                   ( min)
-                  ( min-bc-bd)
                   ( b *ℚ d)
-                  ( leq-right-min-ℚ (b *ℚ c) (b *ℚ d))
-                  ( leq-right-min-ℚ min-ac-ad min-bc-bd)))))
-    where open do-syntax-trunc-Prop (∃ ℚ lower-cut-mul-ℝ)
+                  ( q<min)
+                  ( transitive-leq-ℚ
+                    ( min)
+                    ( min-bc-bd)
+                    ( b *ℚ d)
+                    ( leq-right-min-ℚ (b *ℚ c) (b *ℚ d))
+                    ( leq-right-min-ℚ min-ac-ad min-bc-bd)))))
+      where open do-syntax-trunc-Prop (∃ ℚ lower-cut-mul-ℝ)
 ```
