@@ -161,15 +161,14 @@ positive-rational-positive-ℤ : positive-ℤ → ℚ⁺
 positive-rational-positive-ℤ (z , pos-z) = rational-ℤ z , pos-z
 
 one-ℚ⁺ : ℚ⁺
-one-ℚ⁺ = positive-rational-positive-ℤ one-positive-ℤ
+one-ℚ⁺ = (one-ℚ , is-positive-int-positive-ℤ one-positive-ℤ)
 ```
 
-### Embedding of nonzero natural numbers in the positive rational numbers
+### The rational image of a positive natural number is positive
 
 ```agda
 positive-rational-ℕ⁺ : ℕ⁺ → ℚ⁺
-positive-rational-ℕ⁺ n =
-  positive-rational-positive-ℤ (positive-int-ℕ⁺ n)
+positive-rational-ℕ⁺ n = positive-rational-positive-ℤ (positive-int-ℕ⁺ n)
 ```
 
 ### The rational image of a positive integer fraction is positive
