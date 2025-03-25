@@ -19,6 +19,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-positive-and-negative-integers
+open import order-theory.inflationary-maps-posets
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.nonnegative-integer-fractions
 open import elementary-number-theory.nonnegative-integers
@@ -30,6 +31,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.decidable-total-order-rational-numbers
 
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
@@ -270,6 +272,30 @@ infixl 35 _+ℚ⁰⁺_
 _+ℚ⁰⁺_ = add-ℚ⁰⁺
 ```
 
+### Multiplication on nonnegative rational numbers
+
+```agda
+abstract
+  is-nonnegative-mul-ℚ :
+    (p q : ℚ) → is-nonnegative-ℚ p → is-nonnegative-ℚ q →
+    is-nonnegative-ℚ (p *ℚ q)
+  is-nonnegative-mul-ℚ p q nonneg-p nonneg-q =
+    is-nonnegative-rational-fraction-ℤ
+      ( is-nonnegative-mul-nonnegative-fraction-ℤ
+        { fraction-ℚ p}
+        { fraction-ℚ q}
+        ( nonneg-p)
+        ( nonneg-q))
+
+mul-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
+mul-ℚ⁰⁺ (p , nonneg-p) (q , nonneg-q) =
+  p *ℚ q , is-nonnegative-mul-ℚ p q nonneg-p nonneg-q
+
+infixl 35 _*ℚ⁰⁺_
+_*ℚ⁰⁺_ = mul-ℚ⁰⁺
+```
+
+
 ### Inequality on nonnegative rational numbers
 
 ```agda
@@ -278,4 +304,29 @@ leq-ℚ⁰⁺-Prop (p , _) (q , _) = leq-ℚ-Prop p q
 
 leq-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → UU lzero
 leq-ℚ⁰⁺ (p , _) (q , _) = leq-ℚ p q
+```
+
+### Addition of a nonnegative rational number is an increasing map
+
+```agda
+abstract
+  is-inflationary-map-left-add-rational-ℚ⁰⁺ :
+    (p : ℚ⁰⁺) → is-inflationary-map-Poset ℚ-Poset (rational-ℚ⁰⁺ p +ℚ_)
+  is-inflationary-map-left-add-rational-ℚ⁰⁺ (p , nonneg-p) q =
+    tr
+      ( λ r → leq-ℚ r (p +ℚ q))
+      ( left-unit-law-add-ℚ q)
+      ( preserves-leq-left-add-ℚ
+        ( q)
+        ( zero-ℚ)
+        ( p)
+        ( leq-zero-is-nonnegative-ℚ p nonneg-p))
+
+  is-inflationary-map-right-add-rational-ℚ⁰⁺ :
+    (p : ℚ⁰⁺) → is-inflationary-map-Poset ℚ-Poset (_+ℚ rational-ℚ⁰⁺ p)
+  is-inflationary-map-right-add-rational-ℚ⁰⁺ p q =
+    tr
+      ( leq-ℚ q)
+      ( commutative-add-ℚ (rational-ℚ⁰⁺ p) q)
+      ( is-inflationary-map-left-add-rational-ℚ⁰⁺ p q)
 ```
