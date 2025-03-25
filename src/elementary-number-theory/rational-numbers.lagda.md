@@ -13,6 +13,7 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.mediant-integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.reduced-integer-fractions
@@ -104,6 +105,13 @@ rational-ℤ : ℤ → ℚ
 pr1 (pr1 (rational-ℤ x)) = x
 pr2 (pr1 (rational-ℤ x)) = one-positive-ℤ
 pr2 (rational-ℤ x) = is-one-gcd-one-ℤ' x
+```
+
+### Inclusion of the natural numbers
+
+```agda
+rational-ℕ : ℕ → ℚ
+rational-ℕ n = rational-ℤ (int-ℕ n)
 ```
 
 ### Negative one, zero and one
