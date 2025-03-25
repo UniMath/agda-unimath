@@ -60,6 +60,41 @@ unordered-closed-interval-ℚ p q = closed-interval-ℚ (min-ℚ p q) (max-ℚ p
 is-in-unordered-closed-interval-ℚ : ℚ → ℚ → ℚ → UU lzero
 is-in-unordered-closed-interval-ℚ p q =
   is-in-closed-interval-ℚ (min-ℚ p q) (max-ℚ p q)
+
+is-in-unordered-closed-interval-is-in-closed-interval-ℚ :
+  (p q r : ℚ) → is-in-closed-interval-ℚ p q r →
+  is-in-unordered-closed-interval-ℚ p q r
+is-in-unordered-closed-interval-is-in-closed-interval-ℚ p q r (p≤r , q≤r) =
+  transitive-leq-ℚ
+    ( min-ℚ p q)
+    ( p)
+    ( r)
+    ( p≤r)
+    ( leq-left-min-ℚ p q) ,
+  transitive-leq-ℚ
+    ( r)
+    ( q)
+    ( max-ℚ p q)
+    ( leq-right-max-ℚ p q)
+    ( q≤r)
+
+is-in-reversed-unordered-closed-interval-is-in-closed-interval-ℚ :
+  (p q r : ℚ) → is-in-closed-interval-ℚ p q r →
+  is-in-unordered-closed-interval-ℚ q p r
+is-in-reversed-unordered-closed-interval-is-in-closed-interval-ℚ
+  p q r (p≤r , q≤r) =
+  transitive-leq-ℚ
+    ( min-ℚ q p)
+    ( p)
+    ( r)
+    ( p≤r)
+    ( leq-right-min-ℚ q p) ,
+  transitive-leq-ℚ
+    ( r)
+    ( q)
+    ( max-ℚ q p)
+    ( leq-left-max-ℚ q p)
+    ( q≤r)
 ```
 
 ## Properties
@@ -68,9 +103,29 @@ is-in-unordered-closed-interval-ℚ p q =
 
 ```agda
 abstract
+  left-mul-negative-closed-interval-ℚ : (p q r s : ℚ) →
+    is-in-closed-interval-ℚ p q r → is-negative-ℚ s →
+    is-in-closed-interval-ℚ (q *ℚ s) (p *ℚ s) (r *ℚ s)
+  left-mul-negative-closed-interval-ℚ p q r s (p≤r , r≤q) neg-s =
+    let
+      s⁻ = s , neg-s
+    in
+      reverses-leq-right-mul-ℚ⁻ s⁻ r q r≤q ,
+      reverses-leq-right-mul-ℚ⁻ s⁻ p r p≤r
+
+  left-mul-positive-closed-interval-ℚ : (p q r s : ℚ) →
+    is-in-closed-interval-ℚ p q r → is-positive-ℚ s →
+    is-in-closed-interval-ℚ (p *ℚ s) (q *ℚ s) (r *ℚ s)
+  left-mul-positive-closed-interval-ℚ p q r s (p≤r , r≤q) pos-s =
+    let
+      s⁺ = s , pos-s
+    in
+      preserves-leq-right-mul-ℚ⁺ s⁺ p r p≤r ,
+      preserves-leq-right-mul-ℚ⁺ s⁺ r q r≤q
+
   left-mul-closed-interval-ℚ : (p q r s : ℚ) → is-in-closed-interval-ℚ p q r →
     is-in-unordered-closed-interval-ℚ (p *ℚ s) (q *ℚ s) (r *ℚ s)
-  left-mul-closed-interval-ℚ p q r s (p≤r , r≤q) =
+  left-mul-closed-interval-ℚ p q r s H@(p≤r , r≤q) =
     let
       p≤q = transitive-leq-ℚ p r q r≤q p≤r
     in
@@ -78,18 +133,12 @@ abstract
         ( s)
         ( zero-ℚ)
         ( λ s<0 →
-          let
-            s⁻ = s , is-negative-le-zero-ℚ s s<0
-            qs≤ps = reverses-leq-right-mul-ℚ⁻ s⁻ p q p≤q
-          in
-            inv-tr
-              ( λ t → leq-ℚ t (r *ℚ s))
-              ( right-leq-left-min-ℚ (p *ℚ s) (q *ℚ s) qs≤ps)
-              ( reverses-leq-right-mul-ℚ⁻ s⁻ r q r≤q) ,
-            inv-tr
-              ( leq-ℚ (r *ℚ s))
-              ( right-leq-left-max-ℚ (p *ℚ s) (q *ℚ s) qs≤ps)
-              ( reverses-leq-right-mul-ℚ⁻ s⁻ p r p≤r))
+          is-in-reversed-unordered-closed-interval-is-in-closed-interval-ℚ
+            (q *ℚ s)
+            (p *ℚ s)
+            (r *ℚ s)
+            ( left-mul-negative-closed-interval-ℚ p q r s H
+              ( is-negative-le-zero-ℚ s s<0)))
         ( λ s=0 →
           let
             ps=0 = ap (p *ℚ_) s=0 ∙ right-zero-law-mul-ℚ p
@@ -101,22 +150,18 @@ abstract
               ( _)
               ( ap-binary min-ℚ ps=0 qs=0 ∙
                 idempotent-min-ℚ zero-ℚ ∙ inv rs=0) ,
-                leq-eq-ℚ _ _
-                  ( rs=0 ∙
-                    inv (ap-binary max-ℚ ps=0 qs=0 ∙ idempotent-max-ℚ zero-ℚ)))
+            leq-eq-ℚ
+              ( _)
+              ( _)
+              ( rs=0 ∙
+                inv (ap-binary max-ℚ ps=0 qs=0 ∙ idempotent-max-ℚ zero-ℚ)))
         ( λ 0<s →
-          let
-            s⁺ = s , is-positive-le-zero-ℚ s 0<s
-            ps≤qs = preserves-leq-right-mul-ℚ⁺ s⁺ p q p≤q
-          in
-            inv-tr
-              ( λ t → leq-ℚ t (r *ℚ s))
-              ( left-leq-right-min-ℚ (p *ℚ s) (q *ℚ s) ps≤qs)
-              ( preserves-leq-right-mul-ℚ⁺ s⁺ p r p≤r) ,
-            inv-tr
-              ( leq-ℚ (r *ℚ s))
-              ( left-leq-right-max-ℚ (p *ℚ s) (q *ℚ s) ps≤qs)
-              ( preserves-leq-right-mul-ℚ⁺ s⁺ r q r≤q))
+          is-in-unordered-closed-interval-is-in-closed-interval-ℚ
+            ( p *ℚ s)
+            ( q *ℚ s)
+            ( r *ℚ s)
+            ( left-mul-positive-closed-interval-ℚ p q r s H
+              ( is-positive-le-zero-ℚ s 0<s)))
 
   right-mul-closed-interval-ℚ :
     (p q r s : ℚ) → is-in-closed-interval-ℚ p q r →
