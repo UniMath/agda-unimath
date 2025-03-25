@@ -38,6 +38,8 @@ open import group-theory.semigroups
 
 open import real-numbers.rational-upper-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.similarity-upper-dedekind-real-numbers
+open import real-numbers.raising-universe-levels-upper-dedekind-real-numbers
 ```
 
 </details>
@@ -160,6 +162,46 @@ module _
 
 ## Properties
 
+### Addition preserves similarity of upper Dedekind real numbers
+
+```agda
+opaque
+  unfolding sim-upper-ℝ
+
+  sim-add-left-sim-upper-ℝ :
+    {l1 l2 l3 : Level} → (y : upper-ℝ l1) (x : upper-ℝ l2) (x' : upper-ℝ l3) →
+    sim-upper-ℝ x x' → sim-upper-ℝ (add-upper-ℝ x y) (add-upper-ℝ x' y)
+  sim-add-left-sim-upper-ℝ y x x' =
+    preserves-sim-left-minkowski-mul-Commutative-Monoid
+      ( commutative-monoid-add-ℚ)
+      ( cut-upper-ℝ y)
+      ( cut-upper-ℝ x)
+      ( cut-upper-ℝ x')
+
+  sim-add-right-sim-upper-ℝ :
+    {l1 l2 l3 : Level} → (x : upper-ℝ l1) (y : upper-ℝ l2) (y' : upper-ℝ l3) →
+    sim-upper-ℝ y y' → sim-upper-ℝ (add-upper-ℝ x y) (add-upper-ℝ x y')
+  sim-add-right-sim-upper-ℝ x y y' =
+    preserves-sim-right-minkowski-mul-Commutative-Monoid
+      ( commutative-monoid-add-ℚ)
+      ( cut-upper-ℝ x)
+      ( cut-upper-ℝ y)
+      ( cut-upper-ℝ y')
+
+  sim-add-sim-upper-ℝ :
+    {l1 l2 l3 l4 : Level} →
+    (x : upper-ℝ l1) (x' : upper-ℝ l2) (y : upper-ℝ l3) (y' : upper-ℝ l4) →
+    sim-upper-ℝ x x' → sim-upper-ℝ y y' →
+    sim-upper-ℝ (add-upper-ℝ x y) (add-upper-ℝ x' y')
+  sim-add-sim-upper-ℝ x x' y y' x~x' y~y' =
+    transitive-sim-upper-ℝ
+      ( add-upper-ℝ x y)
+      ( add-upper-ℝ x y')
+      ( add-upper-ℝ x' y')
+      ( sim-add-left-sim-upper-ℝ y' x x' x~x')
+      ( sim-add-right-sim-upper-ℝ x y y' y~y')
+```
+
 ### Addition of upper Dedekind real numbers is commutative
 
 ```agda
@@ -247,22 +289,54 @@ module _
 ### The commutative monoid of upper Dedekind real numbers
 
 ```agda
-semigroup-add-upper-ℝ-lzero : Semigroup (lsuc lzero)
-semigroup-add-upper-ℝ-lzero =
-  (upper-ℝ lzero , is-set-upper-ℝ lzero) ,
+semigroup-add-upper-ℝ : (l : Level) → Semigroup (lsuc l)
+semigroup-add-upper-ℝ l =
+  (upper-ℝ l , is-set-upper-ℝ l) ,
   add-upper-ℝ ,
   associative-add-upper-ℝ
 
-monoid-upper-ℝ-lzero : Monoid (lsuc lzero)
-monoid-upper-ℝ-lzero =
-  semigroup-add-upper-ℝ-lzero ,
-  upper-real-ℚ zero-ℚ ,
-  left-unit-law-add-upper-ℝ ,
-  right-unit-law-add-upper-ℝ
+zero-upper-ℝ : (l : Level) → upper-ℝ l
+zero-upper-ℝ l = raise-upper-ℝ l (upper-real-ℚ zero-ℚ)
 
-commutative-monoid-add-upper-ℝ-lzero :
-  Commutative-Monoid (lsuc lzero)
-commutative-monoid-add-upper-ℝ-lzero =
-  monoid-upper-ℝ-lzero ,
+left-unit-law-add-upper-ℝ-at-level :
+  (l : Level) (a : upper-ℝ l) → add-upper-ℝ (zero-upper-ℝ l) a ＝ a
+left-unit-law-add-upper-ℝ-at-level l a =
+  eq-sim-upper-ℝ
+    ( transitive-sim-upper-ℝ
+      ( add-upper-ℝ (zero-upper-ℝ l) a)
+      ( add-upper-ℝ (upper-real-ℚ zero-ℚ) a)
+      ( a)
+      ( sim-eq-upper-ℝ (left-unit-law-add-upper-ℝ a))
+      ( sim-add-left-sim-upper-ℝ
+        ( a)
+        ( zero-upper-ℝ l)
+        ( upper-real-ℚ zero-ℚ)
+        ( symmetric-sim-upper-ℝ (sim-raise-upper-ℝ l _))))
+
+right-unit-law-add-upper-ℝ-at-level :
+  (l : Level) (a : upper-ℝ l) → add-upper-ℝ a (zero-upper-ℝ l) ＝ a
+right-unit-law-add-upper-ℝ-at-level l a =
+  eq-sim-upper-ℝ
+    ( transitive-sim-upper-ℝ
+      ( add-upper-ℝ a (zero-upper-ℝ l))
+      ( add-upper-ℝ a (upper-real-ℚ zero-ℚ))
+      ( a)
+      ( sim-eq-upper-ℝ (right-unit-law-add-upper-ℝ a))
+      ( sim-add-right-sim-upper-ℝ
+        ( a)
+        ( zero-upper-ℝ l)
+        ( upper-real-ℚ zero-ℚ)
+        ( symmetric-sim-upper-ℝ (sim-raise-upper-ℝ l _))))
+
+monoid-upper-ℝ : (l : Level) → Monoid (lsuc l)
+monoid-upper-ℝ l =
+  semigroup-add-upper-ℝ l ,
+  zero-upper-ℝ l ,
+  left-unit-law-add-upper-ℝ-at-level l ,
+  right-unit-law-add-upper-ℝ-at-level l
+
+commutative-monoid-add-upper-ℝ : (l : Level) → Commutative-Monoid (lsuc l)
+commutative-monoid-add-upper-ℝ l =
+  monoid-upper-ℝ l ,
   commutative-add-upper-ℝ
 ```
