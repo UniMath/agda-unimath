@@ -107,7 +107,7 @@ module _
     zero-ℕ , λ _ _ → is-reflexive-structure-Pseudometric-Space M d x
 ```
 
-### Eventually values of eventually constant sequences in pseudometric spaces are limits
+### Eventual values of eventually constant sequences in pseudometric spaces are limits
 
 ```agda
 module _
