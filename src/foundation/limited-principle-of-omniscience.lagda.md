@@ -9,15 +9,16 @@ module foundation.limited-principle-of-omniscience where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.negation
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
+open import foundation-core.booleans
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets

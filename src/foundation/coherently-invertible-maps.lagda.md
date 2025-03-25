@@ -10,6 +10,7 @@ open import foundation-core.coherently-invertible-maps public
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.logical-equivalences

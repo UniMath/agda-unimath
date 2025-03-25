@@ -7,21 +7,19 @@ module elementary-number-theory.addition-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.interchange-law
-open import foundation.negated-equality
-open import foundation.sets
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.empty-types
+open import foundation-core.function-types
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.negation
 ```
 
 </details>
@@ -154,19 +152,6 @@ abstract
       ( commutative-add-ℕ x k ∙ (p ∙ commutative-add-ℕ k y))
 ```
 
-### Addition by a fixed element on either side is an embedding
-
-```agda
-abstract
-  is-emb-left-add-ℕ : (x : ℕ) → is-emb (x +ℕ_)
-  is-emb-left-add-ℕ x =
-    is-emb-is-injective is-set-ℕ (is-injective-left-add-ℕ x)
-
-  is-emb-right-add-ℕ : (x : ℕ) → is-emb (_+ℕ x)
-  is-emb-right-add-ℕ x =
-    is-emb-is-injective is-set-ℕ (is-injective-right-add-ℕ x)
-```
-
 ### `x + y ＝ 0` if and only if both `x` and `y` are `0`
 
 ```agda
@@ -197,7 +182,7 @@ abstract
 ```agda
 abstract
   neq-add-ℕ :
-    (m n : ℕ) → m ≠ m +ℕ (succ-ℕ n)
+    (m n : ℕ) → ¬ (m ＝ m +ℕ (succ-ℕ n))
   neq-add-ℕ (succ-ℕ m) n p =
     neq-add-ℕ m n
       ( ( is-injective-succ-ℕ p) ∙

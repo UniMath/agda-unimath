@@ -19,6 +19,8 @@ open import foundation.decidable-embeddings
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
@@ -27,7 +29,6 @@ open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.logical-equivalences
 open import foundation.maybe
@@ -37,7 +38,7 @@ open import foundation.postcomposition-functions
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -48,6 +49,8 @@ open import foundation.universal-property-empty-type
 open import foundation.universal-property-equivalences
 open import foundation.universal-property-maybe
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.finite-types

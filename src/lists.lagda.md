@@ -7,6 +7,7 @@ module lists where
 
 open import lists.arrays public
 open import lists.concatenation-lists public
+open import lists.equality-lists public
 open import lists.flattening-lists public
 open import lists.functoriality-lists public
 open import lists.lists public

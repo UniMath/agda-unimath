@@ -11,15 +11,17 @@ open import foundation-core.contractible-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types
+open import foundation.dependent-products-contractible-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.logical-equivalences
+open import foundation.raising-universe-levels-unit-type
 open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
+open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types

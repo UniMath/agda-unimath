@@ -9,6 +9,7 @@ module higher-group-theory.transitive-higher-group-actions where
 ```agda
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations

@@ -556,7 +556,8 @@ open import foundation.action-on-identifications-dependent-functions using
 ```agda
 open import foundation.torsorial-type-families using
   ( is-torsorial-Id)
-open import foundation.contractible-types using
+open import foundation.contractible-types
+open import foundation.dependent-products-contractible-types using
   ( eq-is-contr')
 
 _ : {l : Level} {A : UU l} (a : A) (y : Σ A (λ x → a ＝ x)) → (a , refl) ＝ y
@@ -786,7 +787,7 @@ open import foundation.universe-levels using
 **Remark 6.2.4.** Inclusions into the successor universe.
 
 ```agda
-open import foundation.raising-universe-levels using
+open import foundation-core.raising-universe-levels using
   ( raise)
 
 _ : (l : Level) → UU l → UU (lsuc l)

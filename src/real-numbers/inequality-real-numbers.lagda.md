@@ -9,12 +9,10 @@ module real-numbers.inequality-real-numbers where
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.complements-subtypes
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -30,11 +28,7 @@ open import order-theory.preorders
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-lower-dedekind-real-numbers
 open import real-numbers.inequality-upper-dedekind-real-numbers
-open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.negation-lower-upper-dedekind-real-numbers
-open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>

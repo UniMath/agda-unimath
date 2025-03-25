@@ -20,6 +20,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
@@ -27,6 +28,7 @@ open import foundation.equivalences
 open import foundation.equivalences-maybe
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.homotopies
@@ -38,13 +40,14 @@ open import foundation.negated-equality
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import lists.concatenation-lists
 open import lists.functoriality-lists

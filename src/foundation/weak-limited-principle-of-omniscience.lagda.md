@@ -9,12 +9,12 @@ module foundation.weak-limited-principle-of-omniscience where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
 open import foundation.disjunction
 open import foundation.negation
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
+open import foundation-core.booleans
 open import foundation-core.decidable-propositions
 open import foundation-core.propositions
 open import foundation-core.sets

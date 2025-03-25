@@ -20,7 +20,6 @@ open import foundation.universe-levels
 
 open import group-theory.minkowski-multiplication-semigroups
 open import group-theory.monoids
-open import group-theory.semigroups
 open import group-theory.subsets-monoids
 ```
 

@@ -7,11 +7,10 @@ module foundation.inhabited-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equality-dependent-function-types
-open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.propositional-truncations
@@ -20,7 +19,6 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families

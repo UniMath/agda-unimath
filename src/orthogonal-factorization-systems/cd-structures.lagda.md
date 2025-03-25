@@ -7,6 +7,7 @@ module orthogonal-factorization-systems.cd-structures where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.morphisms-arrows
 open import foundation.propositions
 open import foundation.subtypes

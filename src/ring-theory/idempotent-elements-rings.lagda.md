@@ -7,6 +7,7 @@ module ring-theory.idempotent-elements-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes

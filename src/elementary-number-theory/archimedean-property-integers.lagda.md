@@ -25,7 +25,6 @@ open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
-open import foundation.transport-along-identifications
 ```
 
 </details>

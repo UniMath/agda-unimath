@@ -7,20 +7,12 @@ module foundation.transport-split-type-families where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
-open import foundation.action-on-equivalences-functions
-open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
-open import foundation.equivalence-extensionality
 open import foundation.equivalence-injective-type-families
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.iterated-dependent-product-types
+open import foundation.telescopes
 open import foundation.transport-along-identifications
-open import foundation.unit-type
 open import foundation.univalent-type-families
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels

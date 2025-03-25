@@ -7,19 +7,11 @@ module synthetic-homotopy-theory.loop-homotopy-circle where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.negation
-open import foundation.transport-along-identifications
-open import foundation.universe-levels
-
-open import structured-types.pointed-homotopies
-open import structured-types.pointed-maps
 
 open import synthetic-homotopy-theory.circle
 ```

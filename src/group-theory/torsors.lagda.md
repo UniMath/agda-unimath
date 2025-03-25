@@ -10,6 +10,7 @@ module group-theory.torsors where
 open import foundation.0-connected-types
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types

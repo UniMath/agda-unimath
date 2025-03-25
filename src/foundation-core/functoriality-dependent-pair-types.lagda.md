@@ -7,7 +7,6 @@ module foundation-core.functoriality-dependent-pair-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.transport-along-identifications

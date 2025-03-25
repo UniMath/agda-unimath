@@ -10,6 +10,7 @@ open import foundation-core.1-types public
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.subuniverses
 open import foundation.truncated-types
 open import foundation.universe-levels

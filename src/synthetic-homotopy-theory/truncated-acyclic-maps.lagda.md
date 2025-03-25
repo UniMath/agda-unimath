@@ -13,9 +13,10 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.connected-maps
 open import foundation.connected-types
 open import foundation.constant-maps
-open import foundation.contractible-types
 open import foundation.dependent-epimorphisms-with-respect-to-truncated-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
@@ -23,6 +24,7 @@ open import foundation.epimorphisms-with-respect-to-truncated-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -51,7 +53,6 @@ open import foundation.universe-levels
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.codiagonals-of-maps
 open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.truncated-acyclic-types
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```

@@ -7,10 +7,10 @@ module set-theory.cardinalities where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
-open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.large-binary-relations

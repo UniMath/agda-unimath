@@ -7,10 +7,11 @@ module foundation.terminal-spans-families-of-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.morphisms-spans-families-of-types
 open import foundation.spans-families-of-types
 open import foundation.universe-levels
+
+open import foundation-core.contractible-types
 ```
 
 </details>

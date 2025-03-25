@@ -9,6 +9,7 @@ module finite-group-theory.finite-abelian-groups where
 ```agda
 open import finite-group-theory.finite-groups
 
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.interchange-law

@@ -11,6 +11,7 @@ open import domain-theory.directed-families-posets
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.inhabited-subtypes

@@ -13,6 +13,7 @@ open import elementary-number-theory.integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.identity-types
@@ -21,6 +22,7 @@ open import foundation.injective-maps
 open import foundation.propositional-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.surjective-maps

@@ -9,6 +9,7 @@ module foundation.mere-path-cosplit-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences-arrows
 open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types

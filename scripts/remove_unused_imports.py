@@ -115,7 +115,7 @@ if __name__ == '__main__':
 
     temp_dir = 'temp'
     status = 0
-    agda_options = '--without-K --exact-split --no-import-sorts --auto-inline --no-caching'
+    agda_options = '--without-K --exact-split --no-import-sorts --auto-inline --no-caching -WnoPatternShadowsConstructor'
 
     temp_root = os.path.join(root, temp_dir)
     shutil.rmtree(temp_root, ignore_errors=True)

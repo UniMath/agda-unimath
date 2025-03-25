@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.iterated-dependent-product-types
 open import foundation.logical-equivalences
+open import foundation.telescopes
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

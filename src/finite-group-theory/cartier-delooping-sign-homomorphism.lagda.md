@@ -21,19 +21,20 @@ open import foundation.action-on-equivalences-type-families-over-subuniverses
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.mere-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
-open import foundation.raising-universe-levels
 open import foundation.transport-along-identifications
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
+open import foundation-core.raising-universe-levels
+
 open import group-theory.homomorphisms-concrete-groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups

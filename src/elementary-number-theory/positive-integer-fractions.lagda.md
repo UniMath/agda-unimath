@@ -16,6 +16,7 @@ open import elementary-number-theory.multiplication-positive-and-negative-intege
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.reduced-integer-fractions
 
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels

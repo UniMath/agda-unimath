@@ -13,6 +13,7 @@ open import foundation.0-connected-types
 open import foundation.connected-maps
 open import foundation.connected-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.equivalences
 open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps

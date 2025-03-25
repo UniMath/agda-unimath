@@ -17,6 +17,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.multivariable-homotopies
 open import foundation.structure-identity-principle
+open import foundation.telescopes
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

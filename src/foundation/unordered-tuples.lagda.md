@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.1-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.postcomposition-functions

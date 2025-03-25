@@ -10,8 +10,10 @@ module foundation.yoneda-identity-types where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.multivariable-homotopies
 open import foundation.strictly-right-unital-concatenation-identifications
+open import foundation.telescopes
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universal-property-identity-systems

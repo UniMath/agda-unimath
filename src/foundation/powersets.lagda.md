@@ -8,12 +8,13 @@ module foundation.powersets where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.large-locale-of-propositions
 open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -30,9 +31,6 @@ open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.large-suplattices
-open import order-theory.meet-semilattices
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 open import order-theory.similarity-of-elements-large-posets

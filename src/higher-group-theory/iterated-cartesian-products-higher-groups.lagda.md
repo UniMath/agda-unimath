@@ -13,6 +13,8 @@ open import foundation.0-connected-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -20,6 +22,7 @@ open import foundation.identity-types
 open import foundation.iterated-cartesian-product-types
 open import foundation.mere-equality
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels

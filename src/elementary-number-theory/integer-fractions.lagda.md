@@ -12,7 +12,6 @@ open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.nonzero-integers
-open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
@@ -20,6 +19,7 @@ open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-relations
 open import foundation.identity-types
 open import foundation.negation

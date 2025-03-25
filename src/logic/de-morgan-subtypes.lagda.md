@@ -10,6 +10,7 @@ module logic.de-morgan-subtypes where
 open import foundation.1-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-dependent-function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types

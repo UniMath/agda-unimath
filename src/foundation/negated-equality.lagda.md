@@ -10,7 +10,7 @@ module foundation.negated-equality where
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.negation
 open import foundation.universe-levels
 

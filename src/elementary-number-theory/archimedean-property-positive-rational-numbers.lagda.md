@@ -12,7 +12,6 @@ module elementary-number-theory.archimedean-property-positive-rational-numbers w
 open import elementary-number-theory.archimedean-property-rational-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
@@ -20,7 +19,6 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types

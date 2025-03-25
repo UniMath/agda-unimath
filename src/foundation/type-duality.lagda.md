@@ -13,6 +13,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.locally-small-types
+open import foundation.raising-universe-levels-unit-type
 open import foundation.slice
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type

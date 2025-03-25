@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types

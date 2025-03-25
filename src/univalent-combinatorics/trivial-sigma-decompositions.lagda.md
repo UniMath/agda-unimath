@@ -11,9 +11,12 @@ open import foundation.trivial-sigma-decompositions public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.subtypes
 open import foundation.universe-levels
 

@@ -9,6 +9,7 @@ module category-theory.composition-operations-on-binary-families-of-sets where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
@@ -16,6 +17,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
+open import foundation.telescopes
 open import foundation.universe-levels
 ```
 

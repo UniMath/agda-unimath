@@ -120,7 +120,10 @@ open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
 open import foundation.dependent-pair-types public
+open import foundation.dependent-products-contractible-types public
+open import foundation.dependent-products-propositions public
 open import foundation.dependent-products-pullbacks public
+open import foundation.dependent-products-truncated-types public
 open import foundation.dependent-sequences public
 open import foundation.dependent-sums-pullbacks public
 open import foundation.dependent-telescopes public
@@ -198,6 +201,7 @@ open import foundation.finitely-coherently-invertible-maps public
 open import foundation.fixed-points-endofunctions public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
+open import foundation.function-extensionality-axiom public
 open import foundation.function-types public
 open import foundation.functional-correspondences public
 open import foundation.functoriality-action-on-identifications-functions public
@@ -356,6 +360,8 @@ open import foundation.pullbacks public
 open import foundation.pullbacks-subtypes public
 open import foundation.quasicoherently-idempotent-maps public
 open import foundation.raising-universe-levels public
+open import foundation.raising-universe-levels-booleans public
+open import foundation.raising-universe-levels-unit-type public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.reflexive-relations public
 open import foundation.regensburg-extension-fundamental-theorem-of-identity-types public

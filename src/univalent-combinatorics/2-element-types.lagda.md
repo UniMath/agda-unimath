@@ -18,6 +18,8 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.equivalence-extensionality
@@ -36,7 +38,6 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subuniverses
 open import foundation.torsorial-type-families
@@ -48,6 +49,8 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.equivalences

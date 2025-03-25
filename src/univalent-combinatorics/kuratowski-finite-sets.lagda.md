@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.propositional-truncations
 open import foundation.propositions

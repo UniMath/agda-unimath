@@ -10,6 +10,7 @@ module foundation.pi-decompositions where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.functoriality-dependent-function-types

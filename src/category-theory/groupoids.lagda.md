@@ -17,6 +17,8 @@ open import category-theory.pregroupoids
 open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -26,6 +28,7 @@ open import foundation.iterated-dependent-pair-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
+open import foundation.telescopes
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

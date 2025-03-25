@@ -9,6 +9,7 @@ module ring-theory.homomorphisms-cyclic-rings where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions

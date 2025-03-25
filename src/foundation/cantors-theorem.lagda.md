@@ -12,7 +12,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.double-negation-stable-propositions
-open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.powersets
@@ -22,7 +22,6 @@ open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.propositions
 
 open import logic.de-morgan-propositions
 open import logic.de-morgan-subtypes

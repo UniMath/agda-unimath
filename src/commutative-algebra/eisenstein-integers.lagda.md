@@ -10,6 +10,7 @@ module commutative-algebra.eisenstein-integers where
 open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.addition-integers
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 

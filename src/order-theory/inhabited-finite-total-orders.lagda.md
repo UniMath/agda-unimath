@@ -7,6 +7,7 @@ module order-theory.inhabited-finite-total-orders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.universe-levels

@@ -9,6 +9,7 @@ module foundation.law-of-excluded-middle where
 ```agda
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions

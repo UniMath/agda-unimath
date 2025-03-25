@@ -7,30 +7,15 @@ module foundation.iterating-families-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.exponentiation-natural-numbers
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.multiplicative-monoid-of-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-higher-identifications-functions
-open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.dependent-homotopies
 open import foundation.dependent-identifications
-open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.iterating-functions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import foundation-core.commuting-squares-of-maps
-open import foundation-core.endomorphisms
-open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.sets
-
-open import group-theory.monoid-actions
 ```
 
 </details>

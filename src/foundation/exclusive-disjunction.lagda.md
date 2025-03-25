@@ -10,6 +10,7 @@ module foundation.exclusive-disjunction where
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equality-coproduct-types
 open import foundation.exclusive-sum
 open import foundation.functoriality-coproduct-types

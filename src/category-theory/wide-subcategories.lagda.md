@@ -20,6 +20,8 @@ open import category-theory.wide-subprecategories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -30,6 +32,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
+open import foundation.telescopes
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

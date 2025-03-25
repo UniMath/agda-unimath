@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.plus-principle where
 ```agda
 open import foundation.connected-types
 open import foundation.contractible-types
+open import foundation.dependent-products-contractible-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 

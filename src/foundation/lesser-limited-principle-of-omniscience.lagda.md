@@ -10,12 +10,13 @@ module foundation.lesser-limited-principle-of-omniscience where
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 
-open import foundation.booleans
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
+open import foundation-core.booleans
 open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
 open import foundation-core.sets
@@ -27,9 +28,9 @@ open import foundation-core.sets
 
 The {{#concept "lesser limited principle of omniscience" Agda=LLPO}} (LLPO)
 asserts that for any [sequence](foundation.sequences.md) of
-[booleans](foundation.booleans.md) `f : ℕ → bool` such that `f n` is true for
-[at most one](foundation-core.propositions.md) `n`, then either `f n` is false
-for all even `n` or `f n` is false for all odd `n`.
+[booleans](foundation-core.booleans.md) `f : ℕ → bool` such that `f n` is true
+for [at most one](foundation-core.propositions.md) `n`, then either `f n` is
+false for all even `n` or `f n` is false for all odd `n`.
 
 ```agda
 prop-LLPO : Prop lzero

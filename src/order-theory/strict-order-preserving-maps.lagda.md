@@ -9,6 +9,7 @@ module order-theory.strict-order-preserving-maps where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels

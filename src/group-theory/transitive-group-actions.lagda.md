@@ -7,6 +7,7 @@ module group-theory.transitive-group-actions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositions

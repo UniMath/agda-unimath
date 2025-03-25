@@ -9,8 +9,9 @@ module graph-theory.raising-universe-levels-directed-graphs where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.raising-universe-levels
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import graph-theory.directed-graphs
 open import graph-theory.equivalences-directed-graphs

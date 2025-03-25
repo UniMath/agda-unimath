@@ -3,6 +3,7 @@
 ```agda
 module foundation.truncated-maps where
 
+open import foundation.dependent-products-truncated-types public
 open import foundation-core.truncated-maps public
 ```
 
@@ -11,6 +12,7 @@ open import foundation-core.truncated-maps public
 ```agda
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.functoriality-fibers-of-maps
 open import foundation.universe-levels
 

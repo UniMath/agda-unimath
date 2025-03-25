@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.fixed-points-endofunctions
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
+open import foundation.telescopes
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

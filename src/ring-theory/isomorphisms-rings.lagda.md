@@ -12,6 +12,8 @@ open import category-theory.isomorphisms-in-large-precategories
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -28,6 +30,7 @@ open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.telescopes
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types

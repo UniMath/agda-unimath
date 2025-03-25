@@ -12,6 +12,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.constant-type-families
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-types

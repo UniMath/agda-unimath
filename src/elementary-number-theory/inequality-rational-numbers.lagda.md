@@ -18,21 +18,17 @@ open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-integer-fractions
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.integer-fractions
-open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.nonnegative-integers
-open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.positive-and-negative-integers
-open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types

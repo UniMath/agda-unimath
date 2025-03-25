@@ -11,6 +11,7 @@ module foundation.sigma-decompositions where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
