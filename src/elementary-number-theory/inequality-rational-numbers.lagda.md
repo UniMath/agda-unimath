@@ -422,13 +422,6 @@ pr1 (leq-iff-transpose-left-diff-ℚ x y z) = leq-transpose-left-diff-ℚ x y z
 pr2 (leq-iff-transpose-left-diff-ℚ x y z) = leq-transpose-right-add-ℚ x z y
 ```
 
-### Negation of rational numbers reverses inequality
-
-```agda
-neg-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ (neg-ℚ y) (neg-ℚ x)
-neg-leq-ℚ x y = neg-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
-```
-
 ## See also
 
 - The decidable total order on the rational numbers is defined in
