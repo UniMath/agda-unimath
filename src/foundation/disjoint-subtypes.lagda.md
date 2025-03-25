@@ -56,4 +56,4 @@ module _
 
 ## See also
 
-- [Exclusive sums](foundation.exclusive-sums.md)
+- [Exclusive sums](foundation.exclusive-sum.md)
