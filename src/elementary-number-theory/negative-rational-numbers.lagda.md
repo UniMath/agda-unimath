@@ -213,6 +213,7 @@ abstract
 ### The product of two negative rational numbers is positive
 
 ```agda
+abstract
   is-positive-mul-negative-ℚ :
     {x y : ℚ} → is-negative-ℚ x → is-negative-ℚ y → is-positive-ℚ (x *ℚ y)
   is-positive-mul-negative-ℚ {x} {y} P Q =
@@ -233,17 +234,18 @@ module _
   (H : leq-ℚ q r)
   where
 
-  reverses-leq-right-mul-ℚ⁻ : leq-ℚ (r *ℚ rational-ℚ⁻ p) (q *ℚ rational-ℚ⁻ p)
-  reverses-leq-right-mul-ℚ⁻ =
-    binary-tr
-      ( leq-ℚ)
-      ( negative-law-mul-ℚ r (rational-ℚ⁻ p))
-      ( negative-law-mul-ℚ q (rational-ℚ⁻ p))
-      ( preserves-leq-right-mul-ℚ⁺
-        ( neg-ℚ⁻ p)
-        ( neg-ℚ r)
-        ( neg-ℚ q)
-        ( neg-leq-ℚ q r H))
+  abstract
+    reverses-leq-right-mul-ℚ⁻ : leq-ℚ (r *ℚ rational-ℚ⁻ p) (q *ℚ rational-ℚ⁻ p)
+    reverses-leq-right-mul-ℚ⁻ =
+      binary-tr
+        ( leq-ℚ)
+        ( negative-law-mul-ℚ r (rational-ℚ⁻ p))
+        ( negative-law-mul-ℚ q (rational-ℚ⁻ p))
+        ( preserves-leq-right-mul-ℚ⁺
+          ( neg-ℚ⁻ p)
+          ( neg-ℚ r)
+          ( neg-ℚ q)
+          ( neg-leq-ℚ q r H))
 ```
 
 ### Multiplication by a negative rational number reverses strict inequality
@@ -255,15 +257,16 @@ module _
   (H : le-ℚ q r)
   where
 
-  reverses-le-right-mul-ℚ⁻ : le-ℚ (r *ℚ rational-ℚ⁻ p) (q *ℚ rational-ℚ⁻ p)
-  reverses-le-right-mul-ℚ⁻ =
-    binary-tr
-      ( le-ℚ)
-      ( negative-law-mul-ℚ r (rational-ℚ⁻ p))
-      ( negative-law-mul-ℚ q (rational-ℚ⁻ p))
-      ( preserves-le-right-mul-ℚ⁺
-        ( neg-ℚ⁻ p)
-        ( neg-ℚ r)
-        ( neg-ℚ q)
-        ( neg-le-ℚ q r H))
+  abstract
+    reverses-le-right-mul-ℚ⁻ : le-ℚ (r *ℚ rational-ℚ⁻ p) (q *ℚ rational-ℚ⁻ p)
+    reverses-le-right-mul-ℚ⁻ =
+      binary-tr
+        ( le-ℚ)
+        ( negative-law-mul-ℚ r (rational-ℚ⁻ p))
+        ( negative-law-mul-ℚ q (rational-ℚ⁻ p))
+        ( preserves-le-right-mul-ℚ⁺
+          ( neg-ℚ⁻ p)
+          ( neg-ℚ r)
+          ( neg-ℚ q)
+          ( neg-le-ℚ q r H))
 ```
