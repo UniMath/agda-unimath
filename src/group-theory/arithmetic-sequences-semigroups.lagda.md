@@ -42,14 +42,19 @@ module _
   {l : Level} (G : Semigroup l) (u : ℕ → type-Semigroup G)
   where
 
-  is-common-difference-prop-sequence-Semigroup :
-    (d : type-Semigroup G) → Prop l
-  is-common-difference-prop-sequence-Semigroup d =
-    Π-Prop ℕ
-      (λ n → Id-Prop (set-Semigroup G) (u (succ-ℕ n)) (mul-Semigroup G (u n) d))
+  is-difference-term-prop-sequence-Semigroup : type-Semigroup G → ℕ → Prop l
+  is-difference-term-prop-sequence-Semigroup d n =
+    Id-Prop (set-Semigroup G) (u (succ-ℕ n)) (mul-Semigroup G (u n) d)
 
-  is-common-difference-sequence-Semigroup :
-    (d : type-Semigroup G) → UU l
+  is-difference-term-sequence-Semigroup : type-Semigroup G → ℕ → UU l
+  is-difference-term-sequence-Semigroup d n =
+    type-Prop (is-difference-term-prop-sequence-Semigroup d n)
+
+  is-common-difference-prop-sequence-Semigroup : type-Semigroup G → Prop l
+  is-common-difference-prop-sequence-Semigroup d =
+    Π-Prop ℕ (is-difference-term-prop-sequence-Semigroup d)
+
+  is-common-difference-sequence-Semigroup : type-Semigroup G → UU l
   is-common-difference-sequence-Semigroup d =
     type-Prop (is-common-difference-prop-sequence-Semigroup d)
 
