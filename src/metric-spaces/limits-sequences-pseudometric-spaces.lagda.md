@@ -13,10 +13,10 @@ open import elementary-number-theory.monotonic-sequences-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.asymptotically-constant-sequences
-open import foundation.asymptotically-equal-sequences
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
+open import foundation.eventually-constant-sequences
+open import foundation.eventually-equal-sequences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.propositions
 open import foundation.sequences
@@ -40,9 +40,9 @@ are [limits](metric-spaces.limits-sequences-premetric-spaces.md) in the
 underlying [premetric space](metric-spaces.premetric-spaces.md).
 
 Limits of a sequence in a pseudometric space are indistinguishable. The value of
-a constant sequence in a pseudometric space is its limit; the asymptotic values
-of an [asymptotically constant](foundation.asymptotically-constant-sequences.md)
-sequence in a pseudometric are limits of the sequence.
+a constant sequence in a pseudometric space is its limit; the eventual values of
+an [eventually constant](foundation.eventually-constant-sequences.md) sequence
+in a pseudometric are limits of the sequence.
 
 Asymptotic indistinguishability of sequences in pseudometric spaces preserves
 limits.
@@ -107,27 +107,27 @@ module _
     zero-ℕ , λ _ _ → is-reflexive-structure-Pseudometric-Space M d x
 ```
 
-### Asymptotic values of asymptotically constant sequences in pseudometric spaces are limits
+### Eventually values of eventually constant sequences in pseudometric spaces are limits
 
 ```agda
 module _
   {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
   (u : sequence-Pseudometric-Space M)
-  (H : is-asymptotically-constant-sequence u)
+  (H : is-eventually-constant-sequence u)
   where
 
   limit-value-asymtpotically-constant-sequence-Pseudometric-Space :
     is-limit-sequence-Pseudometric-Space M u
-      (value-asymptotically-constant-sequence u H)
+      (value-eventually-constant-sequence u H)
   limit-value-asymtpotically-constant-sequence-Pseudometric-Space =
-    preserves-limit-asymptotically-eq-sequence-Premetric-Space
+    preserves-limit-eventually-eq-sequence-Premetric-Space
       ( premetric-Pseudometric-Space M)
-      ( const ℕ (value-asymptotically-constant-sequence u H))
+      ( const ℕ (value-eventually-constant-sequence u H))
       ( u)
-      ( asymptotically-eq-constant-sequence u H)
-      ( value-asymptotically-constant-sequence u H)
+      ( eventually-eq-constant-sequence u H)
+      ( value-eventually-constant-sequence u H)
       ( limit-constant-sequence-Pseudometric-Space M
-        ( value-asymptotically-constant-sequence u H))
+        ( value-eventually-constant-sequence u H))
 ```
 
 ### Two limits of a sequence in a pseudometric space are indistinguishable

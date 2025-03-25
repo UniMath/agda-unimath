@@ -12,9 +12,9 @@ open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.asymptotically-equal-sequences
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
+open import foundation.eventually-equal-sequences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -42,8 +42,8 @@ indistinguishable from the constant sequence `l`.
 
 [Short maps](metric-spaces.short-functions-premetric-spaces.md) between
 premetric spaces and
-[asymptotical equality](foundation.asymptotically-equal-sequences.md) of
-sequences preserve limits.
+[eventual equality](foundation.eventually-equal-sequences.md) of sequences
+preserve limits.
 
 ## Definition
 
@@ -94,34 +94,34 @@ module _
 
 ## Properties
 
-### Asymptotical equality of sequences preserves limits
+### Eventual equality of sequences preserves limits
 
 ```agda
 module _
   {l1 l2 : Level} (M : Premetric-Space l1 l2)
   (u v : sequence-Premetric-Space M)
-  (E : asymptotically-eq-sequence u v)
+  (E : eventually-eq-sequence u v)
   (l : type-Premetric-Space M)
   (L : is-limit-sequence-Premetric-Space M u l)
   where
 
-  preserves-limit-asymptotically-eq-sequence-Premetric-Space :
+  preserves-limit-eventually-eq-sequence-Premetric-Space :
     is-limit-sequence-Premetric-Space M v l
-  pr1 (preserves-limit-asymptotically-eq-sequence-Premetric-Space d) =
+  pr1 (preserves-limit-eventually-eq-sequence-Premetric-Space d) =
     max-ℕ
-      ( modulus-asymptotically-eq-sequence u v E)
+      ( modulus-eventually-eq-sequence u v E)
       ( modulus-limit-sequence-Premetric-Space M u l L d)
-  pr2 (preserves-limit-asymptotically-eq-sequence-Premetric-Space d) n I =
+  pr2 (preserves-limit-eventually-eq-sequence-Premetric-Space d) n I =
     tr
       ( λ x → neighborhood-Premetric-Space M d x l)
-      ( eq-leq-modulus-asymptotically-eq-sequence u v E n
+      ( eq-leq-modulus-eventually-eq-sequence u v E n
         ( leq-left-leq-max-ℕ n
-          ( modulus-asymptotically-eq-sequence u v E)
+          ( modulus-eventually-eq-sequence u v E)
           ( modulus-limit-sequence-Premetric-Space M u l L d)
           ( I)))
       ( is-modulus-modulus-limit-sequence-Premetric-Space M u l L d n
         ( leq-right-leq-max-ℕ n
-          ( modulus-asymptotically-eq-sequence u v E)
+          ( modulus-eventually-eq-sequence u v E)
           ( modulus-limit-sequence-Premetric-Space M u l L d)
           ( I)))
 ```
