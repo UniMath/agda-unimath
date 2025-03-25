@@ -119,13 +119,13 @@ pr2 (iff-leq-lower-real-ℚ p q) = reflects-leq-lower-real-ℚ p q
 ### Infinity is the top element of the large poset of lower reals
 
 ```agda
-is-top-element-∞-lower-ℝ :
-  is-top-element-Large-Poset lower-ℝ-Large-Poset ∞-lower-ℝ
-is-top-element-∞-lower-ℝ x q _ = star
+is-top-element-infinity-lower-ℝ :
+  is-top-element-Large-Poset lower-ℝ-Large-Poset infinity-lower-ℝ
+is-top-element-infinity-lower-ℝ x q _ = star
 
 has-top-element-lower-ℝ :
   has-top-element-Large-Poset lower-ℝ-Large-Poset
-top-has-top-element-Large-Poset has-top-element-lower-ℝ = ∞-lower-ℝ
+top-has-top-element-Large-Poset has-top-element-lower-ℝ = infinity-lower-ℝ
 is-top-element-top-has-top-element-Large-Poset has-top-element-lower-ℝ =
-  is-top-element-∞-lower-ℝ
+  is-top-element-infinity-lower-ℝ
 ```

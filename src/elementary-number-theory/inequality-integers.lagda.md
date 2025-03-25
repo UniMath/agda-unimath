@@ -285,6 +285,17 @@ module _
           ( I))
 ```
 
+### Negation of integers reverses inequality
+
+```agda
+neg-leq-ℤ : (x y : ℤ) → leq-ℤ x y → leq-ℤ (neg-ℤ y) (neg-ℤ x)
+neg-leq-ℤ x y =
+  tr
+    ( is-nonnegative-ℤ)
+    ( ap (_+ℤ neg-ℤ x) (inv (neg-neg-ℤ y)) ∙
+      commutative-add-ℤ (neg-ℤ (neg-ℤ y)) (neg-ℤ x))
+```
+
 ## See also
 
 - The decidable total order on the integers is defined in

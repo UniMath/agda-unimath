@@ -24,6 +24,7 @@ open import elementary-number-theory.positive-integers
 open import elementary-number-theory.strict-inequality-integers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
@@ -193,4 +194,19 @@ module _
           ( left-negative-law-mul-ℤ
             ( numerator-fraction-ℤ x)
             ( denominator-fraction-ℤ y))))
+```
+
+### Negation reverses the order of inequality on integer fractions
+
+```agda
+neg-leq-fraction-ℤ :
+  (x y : fraction-ℤ) →
+  leq-fraction-ℤ x y →
+  leq-fraction-ℤ (neg-fraction-ℤ y) (neg-fraction-ℤ x)
+neg-leq-fraction-ℤ (m , n , p) (m' , n' , p') H =
+  binary-tr
+    ( leq-ℤ)
+    ( inv (left-negative-law-mul-ℤ m' n))
+    ( inv (left-negative-law-mul-ℤ m n'))
+    ( neg-leq-ℤ (m *ℤ n') (m' *ℤ n) H)
 ```

@@ -46,7 +46,7 @@ module _
     is-binary-lower-bound-Large-Poset P a b y ↔ leq-Large-Poset P y x
 ```
 
-### The predicate on large posets of being a greatest lower bound of a family of elements
+### The predicate of being a greatest lower bound of a family of elements in a large poset
 
 ```agda
 module _
@@ -140,7 +140,7 @@ module _
           by iff-Π-iff-family (λ i → H i (u i))
 ```
 
-### A family of greatest lower bounds of families of elements in a family of large poset is a greatest lower bound in their dependent product
+### Pointwise greatest lower bounds are greatest lower bounds in the dependent product
 
 ```agda
 module _

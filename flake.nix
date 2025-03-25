@@ -32,6 +32,7 @@
             pybtex
             requests
             tomli
+            graphviz
           ]);
 
           agda-unimath-package = { lib, mkDerivation, time }: mkDerivation {
