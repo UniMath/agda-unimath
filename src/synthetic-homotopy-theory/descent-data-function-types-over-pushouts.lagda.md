@@ -102,18 +102,19 @@ which we can massage into a coherence of the morphism as
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} {𝒮 : span-diagram l1 l2 l3}
+  {l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 : Level} {𝒮 : span-diagram l1 l2 l3}
   {X : UU l4} {c : cocone-span-diagram 𝒮 X}
-  (P : family-with-descent-data-pushout c l5)
-  (R : family-with-descent-data-pushout c l6)
+  (P : family-with-descent-data-pushout c l5 l6 l7)
+  (R : family-with-descent-data-pushout c l8 l9 l10)
   where
 
-  family-cocone-function-type-pushout : X → UU (l5 ⊔ l6)
+  family-cocone-function-type-pushout : X → UU (l7 ⊔ l10)
   family-cocone-function-type-pushout x =
     family-cocone-family-with-descent-data-pushout P x →
     family-cocone-family-with-descent-data-pushout R x
 
-  descent-data-function-type-pushout : descent-data-pushout 𝒮 (l5 ⊔ l6)
+  descent-data-function-type-pushout :
+    descent-data-pushout 𝒮 (l5 ⊔ l8) (l6 ⊔ l9)
   pr1 descent-data-function-type-pushout a =
     left-family-family-with-descent-data-pushout P a →
     left-family-family-with-descent-data-pushout R a
@@ -208,7 +209,7 @@ module _
     coherence-equiv-descent-data-function-type-pushout
 
   family-with-descent-data-function-type-pushout :
-    family-with-descent-data-pushout c (l5 ⊔ l6)
+    family-with-descent-data-pushout c (l5 ⊔ l8) (l6 ⊔ l9) (l7 ⊔ l10)
   pr1 family-with-descent-data-function-type-pushout =
     family-cocone-function-type-pushout
   pr1 (pr2 family-with-descent-data-function-type-pushout) =
@@ -223,10 +224,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} {𝒮 : span-diagram l1 l2 l3}
+  {l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 : Level} {𝒮 : span-diagram l1 l2 l3}
   {X : UU l4} {c : cocone-span-diagram 𝒮 X}
-  (P : family-with-descent-data-pushout c l5)
-  (R : family-with-descent-data-pushout c l6)
+  (P : family-with-descent-data-pushout c l5 l6 l7)
+  (R : family-with-descent-data-pushout c l8 l9 l10)
   where
 
   hom-section-descent-data-function-type-pushout :
@@ -250,8 +251,7 @@ module _
 
   abstract
     is-equiv-hom-section-descent-data-function-type-pushout :
-      is-equiv
-        ( hom-section-descent-data-function-type-pushout)
+      is-equiv hom-section-descent-data-function-type-pushout
     is-equiv-hom-section-descent-data-function-type-pushout =
       is-equiv-tot-is-fiberwise-equiv
         ( λ tA →
@@ -326,11 +326,11 @@ by inverting the inverted equivalences.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} {𝒮 : span-diagram l1 l2 l3}
+  {l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 : Level} {𝒮 : span-diagram l1 l2 l3}
   {X : UU l4} {c : cocone-span-diagram 𝒮 X}
   (up-c : universal-property-pushout _ _ c)
-  (P : family-with-descent-data-pushout c l5)
-  (R : family-with-descent-data-pushout c l6)
+  (P : family-with-descent-data-pushout c l5 l6 l7)
+  (R : family-with-descent-data-pushout c l8 l9 l10)
   (m :
     hom-descent-data-pushout
       ( descent-data-family-with-descent-data-pushout P)
