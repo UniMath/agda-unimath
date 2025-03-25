@@ -68,7 +68,7 @@ module _
   pr2 refl-asymptotically-eq-sequence m H = refl
 ```
 
-### Asymptotically equality is a symmetric relation
+### Asymptotic equality is a symmetric relation
 
 ```agda
 module _
@@ -80,7 +80,7 @@ module _
   symmetric-asymptotically-eq-sequence = tot (λ N H m K → inv (H m K))
 ```
 
-### Asymptotically equality equal is a transitive relation
+### Asymptotic equality is a transitive relation
 
 ```agda
 module _

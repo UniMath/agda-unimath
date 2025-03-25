@@ -25,7 +25,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-Monotic sequences of
+Monotonic sequences of
 [natural numbers](elementary-number-theory.natural-numbers.md) are sequences
 `f : ℕ → ℕ` that preserve or reverse
 ([strict](elementary-number-theory.strict-inequality-natural-numbers.md))

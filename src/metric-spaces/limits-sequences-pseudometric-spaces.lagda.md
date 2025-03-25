@@ -39,12 +39,12 @@ of
 are [limits](metric-spaces.limits-sequences-premetric-spaces.md) in the
 underlying [premetric space](metric-spaces.premetric-spaces.md).
 
-Limits of a sequence in a pseudometric space are indistinguishable. The
-(asymptotical) value of an
-([asymptotically](foundation.asymptotically-constant-sequences.md)) constant
-sequence in a pseudometric is a limit of the sequence.
+Limits of a sequence in a pseudometric space are indistinguishable. The value of
+a constant sequence in a pseudometric space is its limit; the asymptotic values
+of an [asymptotically constant](foundation.asymptotically-constant-sequences.md)
+sequence in a pseudometric are limits of the sequence.
 
-Asymptotical indistinguishability of sequences in pseudometric spaces preserves
+Asymptotic indistinguishability of sequences in pseudometric spaces preserves
 limits.
 
 ## Definition
@@ -107,7 +107,7 @@ module _
     zero-ℕ , λ _ _ → is-reflexive-structure-Pseudometric-Space M d x
 ```
 
-### Asymptotical values of asymptotically constant sequences in pseudometric spaces are limits
+### Asymptotic values of asymptotically constant sequences in pseudometric spaces are limits
 
 ```agda
 module _
