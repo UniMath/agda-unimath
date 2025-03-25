@@ -25,8 +25,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-Monotic sequences of natural numbers are sequences `f : ℕ → ℕ` that preserve or
-reverse (strict) inequality of natural numbers:
+Monotic sequences of
+[natural numbers](elementary-number-theory.natural-numbers.md) are sequences
+`f : ℕ → ℕ` that preserve or reverse
+([strict](elementary-number-theory.strict-inequality-natural-numbers.md))
+[inequality](elementary-number-theory.inequality-natural-numbers.md) on the
+natural numbers:
 
 - {{#concept "increasing" Disambiguation="sequences of natural numbers" Agda=is-increasing-sequence-ℕ}}
   sequences;
