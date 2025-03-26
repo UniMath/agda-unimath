@@ -13,8 +13,8 @@ open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
-open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.action-on-identifications-binary-functions

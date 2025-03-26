@@ -76,7 +76,7 @@ module _
       ( ℚ⁺)
       ( λ ε⁺ →
         ∃ ( ℚ × ℚ)
-          ( λ (p , q) → 
+          ( λ (p , q) →
             le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
             cut-lower-ℝ x p ∧
             cut-upper-ℝ y q))
@@ -124,7 +124,10 @@ module _
                     ( q'<p'+q-p)
                     ( tr
                       ( leq-ℚ (p' +ℚ (q -ℚ p)))
-                      ( is-identity-right-conjugation-Ab abelian-group-add-ℚ p q)
+                      ( is-identity-right-conjugation-Ab
+                        ( abelian-group-add-ℚ)
+                        ( p)
+                        ( q))
                       ( preserves-leq-left-add-ℚ (q -ℚ p) p' p p'≤p)))
                   ( q'∈U)))
             ( decide-le-leq-ℚ p p'))
