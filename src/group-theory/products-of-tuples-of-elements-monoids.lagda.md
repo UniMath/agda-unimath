@@ -172,12 +172,13 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  mul-unit-Monoid :
-    (n : ℕ) →
-    mul-fin-Monoid M n (zero-functional-vec-Monoid M n) ＝ unit-Monoid M
-  mul-unit-Monoid zero-ℕ = refl
-  mul-unit-Monoid (succ-ℕ n) =
-    right-unit-law-mul-Monoid M _ ∙ mul-unit-Monoid n
+  abstract
+    mul-fin-unit-Monoid :
+      (n : ℕ) →
+      mul-fin-Monoid M n (zero-functional-vec-Monoid M n) ＝ unit-Monoid M
+    mul-fin-unit-Monoid zero-ℕ = refl
+    mul-fin-unit-Monoid (succ-ℕ n) =
+      right-unit-law-mul-Monoid M _ ∙ mul-fin-unit-Monoid n
 ```
 
 ### Splitting products

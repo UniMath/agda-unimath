@@ -186,15 +186,15 @@ module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  mul-unit-Commutative-Monoid :
+  mul-fin-unit-Commutative-Monoid :
     (n : ℕ) →
     mul-fin-Commutative-Monoid
       ( M)
       ( n)
       ( zero-functional-vec-Commutative-Monoid M n) ＝
     unit-Commutative-Monoid M
-  mul-unit-Commutative-Monoid =
-    mul-unit-Monoid (monoid-Commutative-Monoid M)
+  mul-fin-unit-Commutative-Monoid =
+    mul-fin-unit-Monoid (monoid-Commutative-Monoid M)
 ```
 
 ### Splitting products
@@ -482,26 +482,18 @@ module _
   {l1 l2 : Level} (M : Commutative-Monoid l1) (A : Finite-Type l2)
   where
 
-  mul-unit-finite-Commutative-Monoid :
+  mul-finite-unit-Commutative-Monoid :
     is-unit-Commutative-Monoid
       ( M)
       ( mul-finite-Commutative-Monoid
         ( M)
         ( A)
         ( λ _ → unit-Commutative-Monoid M))
-  mul-unit-finite-Commutative-Monoid =
+  mul-finite-unit-Commutative-Monoid =
     do
       cA ← is-finite-type-Finite-Type A
-      equational-reasoning
-        mul-finite-Commutative-Monoid M A (λ _ → unit-Commutative-Monoid M)
-        ＝
-          mul-count-Commutative-Monoid
-            ( M)
-            ( type-Finite-Type A)
-            ( cA)
-            ( λ _ → unit-Commutative-Monoid M)
-          by mul-finite-count-Commutative-Monoid M A cA _
-        ＝ unit-Commutative-Monoid M by mul-unit-Commutative-Monoid M _
+      mul-finite-count-Commutative-Monoid M A cA _ ∙
+        mul-fin-unit-Commutative-Monoid M _
     where
       open
         do-syntax-trunc-Prop
@@ -899,10 +891,10 @@ module _
   where
 
   abstract
-    mul-finite-unit-Commutative-Monoid :
+    mul-unit-finite-Commutative-Monoid :
       (f : unit → type-Commutative-Monoid M) →
       mul-finite-Commutative-Monoid M unit-Finite-Type f ＝ f star
-    mul-finite-unit-Commutative-Monoid f =
+    mul-unit-finite-Commutative-Monoid f =
       equational-reasoning
         mul-finite-Commutative-Monoid M unit-Finite-Type f
         ＝

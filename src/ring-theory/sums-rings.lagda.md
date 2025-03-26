@@ -76,9 +76,9 @@ module _
     (f : functional-vec-Ring R 1) → sum-Ring R 1 f ＝ head-functional-vec 0 f
   sum-one-element-Ring = sum-one-element-Semiring (semiring-Ring R)
 
-  sum-unit-Ring :
+  sum-unit-finite-Ring :
     (f : unit → type-Ring R) → sum-finite-Ring R unit-Finite-Type f ＝ f star
-  sum-unit-Ring = sum-unit-Semiring (semiring-Ring R)
+  sum-unit-finite-Ring = sum-unit-finite-Semiring (semiring-Ring R)
 
   sum-two-elements-Ring :
     (f : functional-vec-Ring R 2) →

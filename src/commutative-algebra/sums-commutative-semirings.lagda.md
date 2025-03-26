@@ -21,7 +21,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.negated-equality
+-- open import foundation.negated-equality
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -90,11 +90,11 @@ module _
   sum-one-element-Commutative-Semiring =
     sum-one-element-Semiring (semiring-Commutative-Semiring A)
 
-  sum-unit-Commutative-Semiring :
+  sum-unit-finite-Commutative-Semiring :
     (f : unit → type-Commutative-Semiring A) →
     sum-finite-Commutative-Semiring A unit-Finite-Type f ＝ f star
-  sum-unit-Commutative-Semiring =
-    sum-unit-Semiring (semiring-Commutative-Semiring A)
+  sum-unit-finite-Commutative-Semiring =
+    sum-unit-finite-Semiring (semiring-Commutative-Semiring A)
 
   sum-two-elements-Commutative-Semiring :
     (f : functional-vec-Commutative-Semiring A 2) →

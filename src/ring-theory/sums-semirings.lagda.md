@@ -87,11 +87,11 @@ module _
     mul-one-element-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 
-  sum-unit-Semiring :
+  sum-unit-finite-Semiring :
     (f : unit → type-Semiring R) →
     sum-finite-Semiring R unit-Finite-Type f ＝ f star
-  sum-unit-Semiring =
-    mul-finite-unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+  sum-unit-finite-Semiring =
+    mul-unit-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   sum-two-elements-Semiring :
     (f : functional-vec-Semiring R 2) →
@@ -351,13 +351,13 @@ module _
     (n : ℕ) →
     sum-Semiring R n (zero-functional-vec-Semiring R n) ＝ zero-Semiring R
   sum-zero-Semiring =
-    mul-unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    mul-fin-unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   sum-zero-finite-Semiring :
     {l2 : Level} (A : Finite-Type l2) →
     sum-finite-Semiring R A (λ _ → zero-Semiring R) ＝ zero-Semiring R
   sum-zero-finite-Semiring =
-    mul-unit-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    mul-finite-unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Splitting sums
