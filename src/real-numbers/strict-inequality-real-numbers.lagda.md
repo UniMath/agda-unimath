@@ -128,13 +128,13 @@ module _
         ( q , y<q , q<x) ← y<x
         rec-coproduct
           ( asymmetric-le-ℚ
-              ( q)
-              ( p)
-              ( le-lower-upper-cut-ℝ x q p q<x x<p))
+            ( q)
+            ( p)
+            ( le-lower-upper-cut-ℝ x q p q<x x<p))
           ( not-leq-le-ℚ
-              ( p)
-              ( q)
-              ( le-lower-upper-cut-ℝ y p q p<y y<q))
+            ( p)
+            ( q)
+            ( le-lower-upper-cut-ℝ y p q p<y y<q))
           ( decide-le-leq-ℚ p q)
       where open do-syntax-trunc-Prop empty-Prop
 ```
@@ -435,7 +435,7 @@ module _
       ( preserves-le-right-sim-ℝ x1 y1 y2 y1~y2 x1<y1)
 ```
 
-### Strict inequality on the real numbers is invariant by translation
+### Strict inequality on the real numbers is translation invariant
 
 ```agda
 module _
