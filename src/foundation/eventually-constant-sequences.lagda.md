@@ -28,7 +28,7 @@ open import foundation.universe-levels
 ## Idea
 
 A [sequence](foundation.sequences.md) `u` is
-{{#concept "eventually constant" Disambiguation="sequence" Agda=is-eventually-constant-sequence}}
+{{#concept "eventually constant" Disambiguation="sequence" Agda=has-modulus-eventually-constant-sequence}}
 if `u p ＝ u q` for sufficiently large `p` and `q`.
 
 ## Definitions

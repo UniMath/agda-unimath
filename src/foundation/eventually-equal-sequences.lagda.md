@@ -27,7 +27,7 @@ open import foundation-core.function-types
 ## Idea
 
 Two [sequences](foundation.sequences.md) `u` and `v` are
-{{#concept "eventually equal" Disambiguation="sequences" Agda=eventually-eq-sequence}}
+{{#concept "eventually equal" Disambiguation="sequences" Agda=has-modulus-eventually-eq-sequence}}
 if `u n ＝ v n` for sufficiently large
 [natural numbers](elementary-number-theory.natural-numbers.md) `n : ℕ`.
 
