@@ -23,6 +23,7 @@ open import real-numbers.metric-space-of-real-numbers public
 open import real-numbers.minimum-lower-dedekind-real-numbers public
 open import real-numbers.minimum-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
+open import real-numbers.multiplication-real-numbers public
 open import real-numbers.negation-lower-upper-dedekind-real-numbers public
 open import real-numbers.negation-real-numbers public
 open import real-numbers.raising-universe-levels-real-numbers public

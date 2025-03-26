@@ -9,25 +9,32 @@ module real-numbers.multiplication-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.decidable-total-order-rational-numbers
+open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.closed-intervals-rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.decidable-total-order-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.multiplication-rational-numbers
-open import foundation.disjoint-subtypes
-open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
-open import foundation.conjunction
-open import foundation.logical-equivalences
-open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.empty-types
-open import foundation.propositional-truncations
-open import foundation.universe-levels
-open import foundation.subtypes
+open import elementary-number-theory.minimum-rational-numbers
+open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.cartesian-product-types
+open import foundation.conjunction
+open import foundation.dependent-pair-types
+open import foundation.disjoint-subtypes
+open import foundation.empty-types
+open import foundation.existential-quantification
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
+open import foundation.subtypes
+open import foundation.universe-levels
+
+open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
@@ -35,7 +42,6 @@ open import real-numbers.dedekind-real-numbers
 ## Definition
 
 ```agda
-
 module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
@@ -215,4 +221,31 @@ module _
                 ( leq-lower-upper-y c d' c<y y<c')
                 ( leq-lower-upper-y c' d c'<y y<d))))
       where open do-syntax-trunc-Prop empty-Prop
+
+  lower-real-mul-ℝ : lower-ℝ (l1 ⊔ l2)
+  lower-real-mul-ℝ =
+    lower-cut-mul-ℝ ,
+    is-inhabited-lower-cut-mul-ℝ ,
+    is-rounded-lower-cut-mul-ℝ
+
+  upper-real-mul-ℝ : upper-ℝ (l1 ⊔ l2)
+  upper-real-mul-ℝ =
+    upper-cut-mul-ℝ ,
+    is-inhabited-upper-cut-mul-ℝ ,
+    is-rounded-upper-cut-mul-ℝ
+
+  abstract
+    is-arithmetically-located-lower-upper-mul-ℝ :
+      is-arithmetically-located-lower-upper-ℝ lower-real-mul-ℝ upper-real-mul-ℝ
+    is-arithmetically-located-lower-upper-mul-ℝ ε⁺ =
+      do
+        {!   !}
+      where
+        open
+          do-syntax-trunc-Prop
+            (∃
+              ( ℚ × ℚ)
+              ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
+                cut-lower-ℝ lower-real-mul-ℝ p ∧
+                cut-upper-ℝ upper-real-mul-ℝ q))
 ```

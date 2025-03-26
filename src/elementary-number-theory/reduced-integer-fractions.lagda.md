@@ -246,7 +246,8 @@ abstract
             ( is-positive-gcd-ℤ
               ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
               ( denominator-fraction-ℤ (reduce-fraction-ℤ x))
-              ( inr (is-positive-denominator-fraction-ℤ (reduce-fraction-ℤ x))))))
+              ( inr
+                ( is-positive-denominator-fraction-ℤ (reduce-fraction-ℤ x))))))
 
 sim-reduced-fraction-ℤ :
   (x : fraction-ℤ) → (sim-fraction-ℤ x (reduce-fraction-ℤ x))
