@@ -123,7 +123,9 @@ module _
 
   coherence-htpy-is-constant :
     (H K : is-constant f)
-    (p : center-partial-element-is-constant H ~ center-partial-element-is-constant K) →
+    (p :
+      center-partial-element-is-constant H ~
+      center-partial-element-is-constant K) →
     UU (l1 ⊔ l2)
   coherence-htpy-is-constant H K p =
     (x : A) →
@@ -134,7 +136,8 @@ module _
 
   htpy-is-constant : (H K : is-constant f) → UU (l1 ⊔ l2)
   htpy-is-constant H K =
-    Σ ( center-partial-element-is-constant H ~ center-partial-element-is-constant K)
+    Σ ( center-partial-element-is-constant H ~
+        center-partial-element-is-constant K)
       ( coherence-htpy-is-constant H K)
 
   refl-htpy-is-constant :
