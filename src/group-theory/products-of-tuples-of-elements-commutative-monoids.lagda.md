@@ -191,7 +191,7 @@ module _
     mul-fin-Commutative-Monoid
       ( M)
       ( n)
-      ( one-functional-vec-Commutative-Monoid M n) ＝
+      ( zero-functional-vec-Commutative-Monoid M n) ＝
     unit-Commutative-Monoid M
   mul-unit-Commutative-Monoid =
     mul-unit-Monoid (monoid-Commutative-Monoid M)
