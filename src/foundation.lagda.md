@@ -205,6 +205,7 @@ open import foundation.functoriality-cartesian-product-types public
 open import foundation.functoriality-coproduct-types public
 open import foundation.functoriality-dependent-function-types public
 open import foundation.functoriality-dependent-pair-types public
+open import foundation.functoriality-disjunction public
 open import foundation.functoriality-fibers-of-maps public
 open import foundation.functoriality-function-types public
 open import foundation.functoriality-morphisms-arrows public

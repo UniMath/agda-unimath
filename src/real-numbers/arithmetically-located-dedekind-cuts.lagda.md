@@ -70,20 +70,19 @@ module _
   {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
   where
 
-  arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
-  arithmetically-located-prop-lower-upper-ℝ =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ ε⁺ →
-        ∃
-          ( ℚ × ℚ)
-          ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
-            cut-lower-ℝ x p ∧
-            cut-upper-ℝ y q))
+  close-bounds-lower-upper-ℝ : ℚ⁺ → subtype (l1 ⊔ l2) (ℚ × ℚ)
+  close-bounds-lower-upper-ℝ ε⁺ (p , q) =
+    le-ℚ-Prop q (p +ℚ (rational-ℚ⁺ ε⁺)) ∧
+    cut-lower-ℝ x p ∧
+    cut-upper-ℝ y q
+
+  is-arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
+  is-arithmetically-located-prop-lower-upper-ℝ =
+    Π-Prop ℚ⁺ (λ ε⁺ → ∃ (ℚ × ℚ) (close-bounds-lower-upper-ℝ ε⁺))
 
   is-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
   is-arithmetically-located-lower-upper-ℝ =
-    type-Prop arithmetically-located-prop-lower-upper-ℝ
+    type-Prop is-arithmetically-located-prop-lower-upper-ℝ
 ```
 
 ## Properties
@@ -124,7 +123,10 @@ module _
                     ( q'<p'+q-p)
                     ( tr
                       ( leq-ℚ (p' +ℚ (q -ℚ p)))
-                      ( is-identity-right-conjugation-Ab abelian-group-add-ℚ p q)
+                      ( is-identity-right-conjugation-Ab
+                        ( abelian-group-add-ℚ)
+                        ( p)
+                        ( q))
                       ( preserves-leq-left-add-ℚ (q -ℚ p) p' p p'≤p)))
                   ( q'∈U)))
             ( decide-le-leq-ℚ p p'))
@@ -159,9 +161,7 @@ module _
     location-in-arithmetic-sequence-located-ℝ
       ε⁺@(ε , _) (succ-ℕ n) p p<x x<p+nε =
       elim-disjunction
-        ( ∃
-          ( ℚ)
-          ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ (ε +ℚ ε))))
+        ( ∃ ℚ (λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ (ε +ℚ ε))))
         ( λ p+ε<x →
           location-in-arithmetic-sequence-located-ℝ
             ( ε⁺)
@@ -172,10 +172,8 @@ module _
               ( is-in-upper-cut-ℝ x)
               ( equational-reasoning
                 p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)
-                ＝ p +ℚ (rational-ℤ (succ-ℤ (int-ℕ n)) *ℚ ε)
-                  by ap (λ m → p +ℚ (rational-ℤ m *ℚ ε)) (inv (succ-int-ℕ n))
                 ＝ p +ℚ (succ-ℚ (rational-ℤ (int-ℕ n)) *ℚ ε)
-                  by ap (λ m → p +ℚ (m *ℚ ε)) (inv (succ-rational-ℤ _))
+                  by ap (p +ℚ_) (ap (_*ℚ ε) (inv (succ-rational-int-ℕ n)))
                 ＝ p +ℚ (ε +ℚ (rational-ℤ (int-ℕ n) *ℚ ε))
                   by ap (p +ℚ_) (mul-left-succ-ℚ _ _)
                 ＝ (p +ℚ ε) +ℚ rational-ℤ (int-ℕ n) *ℚ ε
@@ -229,10 +227,10 @@ module _
           do-syntax-trunc-Prop
             (∃
               ( ℚ × ℚ)
-              ( λ (p , q) →
-                le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
-                lower-cut-ℝ x p ∧
-                upper-cut-ℝ x q))
+              ( close-bounds-lower-upper-ℝ
+                ( lower-real-ℝ x)
+                ( upper-real-ℝ x)
+                ( ε⁺)))
 ```
 
 ## References

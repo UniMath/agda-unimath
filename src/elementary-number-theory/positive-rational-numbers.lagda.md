@@ -680,16 +680,40 @@ module _
   right-summand-split-ℚ⁺ =
     le-diff-ℚ⁺ (mediant-zero-ℚ⁺ x) x (le-mediant-zero-ℚ⁺ x)
 
-  eq-add-split-ℚ⁺ :
-    left-summand-split-ℚ⁺ +ℚ⁺ right-summand-split-ℚ⁺ ＝ x
-  eq-add-split-ℚ⁺ =
-    right-diff-law-add-ℚ⁺ (mediant-zero-ℚ⁺ x) x (le-mediant-zero-ℚ⁺ x)
+  abstract
+    eq-add-split-ℚ⁺ :
+      left-summand-split-ℚ⁺ +ℚ⁺ right-summand-split-ℚ⁺ ＝ x
+    eq-add-split-ℚ⁺ =
+      right-diff-law-add-ℚ⁺ (mediant-zero-ℚ⁺ x) x (le-mediant-zero-ℚ⁺ x)
 
   split-ℚ⁺ : Σ ℚ⁺ (λ u → Σ ℚ⁺ (λ v → u +ℚ⁺ v ＝ x))
   split-ℚ⁺ =
     left-summand-split-ℚ⁺ ,
     right-summand-split-ℚ⁺ ,
     eq-add-split-ℚ⁺
+
+  abstract
+    le-add-split-ℚ⁺ :
+      (p q r s : ℚ) →
+      le-ℚ p (q +ℚ rational-ℚ⁺ left-summand-split-ℚ⁺) →
+      le-ℚ r (s +ℚ rational-ℚ⁺ right-summand-split-ℚ⁺) →
+      le-ℚ (p +ℚ r) ((q +ℚ s) +ℚ rational-ℚ⁺ x)
+    le-add-split-ℚ⁺ p q r s p<q+left r<s+right =
+      tr
+        ( le-ℚ (p +ℚ r))
+        ( interchange-law-add-add-ℚ
+          ( q)
+          ( rational-ℚ⁺ left-summand-split-ℚ⁺)
+          ( s)
+          ( rational-ℚ⁺ right-summand-split-ℚ⁺) ∙
+          ap ((q +ℚ s) +ℚ_) (ap rational-ℚ⁺ eq-add-split-ℚ⁺))
+        ( preserves-le-add-ℚ
+          { p}
+          { q +ℚ rational-ℚ⁺ left-summand-split-ℚ⁺}
+          { r}
+          { s +ℚ rational-ℚ⁺ right-summand-split-ℚ⁺}
+          ( p<q+left)
+          ( r<s+right))
 ```
 
 ### Any two positive rational numbers have a positive rational number strictly less than both
