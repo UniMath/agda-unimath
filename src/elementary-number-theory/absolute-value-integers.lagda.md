@@ -28,8 +28,9 @@ open import foundation.unit-type
 
 ## Idea
 
-The {{#concept "absolute value" Disambiguation="of an integer" Agda=abs-ℤ}} of
-an integer is the natural number with the same distance from `0`.
+The
+{{#concept "absolute value" Disambiguation="of an integer" Agda=abs-ℤ WD="absolute value" WDID=Q120812}}
+of an integer is the natural number with the same distance from `0`.
 
 ## Definition
 

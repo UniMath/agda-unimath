@@ -141,7 +141,7 @@ module _
     backward-implication (H _) (refl-leq-Large-Poset P _)
 ```
 
-### The binary least upper bound of `x` and `y` is the least upper bound of `y` and `x`
+### The least upper bound of `x` and `y` is the least upper bound of `y` and `x`
 
 ```agda
 module _
@@ -151,11 +151,11 @@ module _
   where
 
   abstract
-    is-commutative-is-binary-least-upper-bound-Large-Poset :
+    is-binary-least-upper-bound-swap-Large-Poset :
       {l3 : Level} (y : type-Large-Poset P l3) →
       is-least-binary-upper-bound-Large-Poset P a b y →
       is-least-binary-upper-bound-Large-Poset P b a y
-    is-commutative-is-binary-least-upper-bound-Large-Poset _ H z =
+    is-binary-least-upper-bound-swap-Large-Poset _ H z =
       H z ∘iff iff-equiv commutative-product
 ```
 

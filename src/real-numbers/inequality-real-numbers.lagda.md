@@ -86,8 +86,8 @@ module _
   leq-ℝ' = type-Prop leq-ℝ-Prop'
 
   abstract
-    leq-iff-ℝ' : leq-ℝ x y ↔ leq-ℝ'
-    pr1 leq-iff-ℝ' x≤y q y<q =
+    leq'-leq-ℝ : leq-ℝ x y → leq-ℝ'
+    leq'-leq-ℝ lx⊆ly q y<q =
       elim-exists
         ( upper-cut-ℝ x q)
         ( λ p (p<q , p≮y) →
@@ -104,7 +104,9 @@ module _
                   ( p)
                   ( p≮y))))
         ( subset-upper-complement-lower-cut-upper-cut-ℝ y q y<q)
-    pr2 leq-iff-ℝ' uy⊆ux p p<x =
+
+    leq-leq'-ℝ : leq-ℝ' → leq-ℝ x y
+    leq-leq'-ℝ uy⊆ux p p<x =
       elim-exists
         ( lower-cut-ℝ y p)
         ( λ q (p<q , x≮q) →
@@ -121,6 +123,9 @@ module _
                   ( q)
                   ( x≮q))))
         ( subset-lower-complement-upper-cut-lower-cut-ℝ x p p<x)
+
+    leq-iff-ℝ' : leq-ℝ x y ↔ leq-ℝ'
+    leq-iff-ℝ' = (leq'-leq-ℝ , leq-leq'-ℝ)
 ```
 
 ### Inequality on the real numbers is reflexive
