@@ -328,24 +328,37 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   is-constant-map-is-null-homotopic-map :
-    is-null-homotopic-map f → is-constant-map f
+    {f : A → B} → is-null-homotopic-map f → is-constant-map f
   is-constant-map-is-null-homotopic-map (b , H) = ((λ _ → b) , H)
+
+  is-constant-null-homotopic-map :
+    (f : null-homotopic-map A B) → is-constant-map (map-null-homotopic-map f)
+  is-constant-null-homotopic-map f =
+    is-constant-map-is-null-homotopic-map
+      ( is-null-homotopic-null-homotopic-map f)
 ```
 
 ### Null-homotopic maps are weakly constant
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   is-weakly-constant-map-is-null-homotopic-map :
-    is-null-homotopic-map f → is-weakly-constant-map f
+    {f : A → B} → is-null-homotopic-map f → is-weakly-constant-map f
   is-weakly-constant-map-is-null-homotopic-map (b , H) x y = H x ∙ inv (H y)
+
+  is-weakly-constant-null-homotopic-map :
+    (f : null-homotopic-map A B) →
+    is-weakly-constant-map (map-null-homotopic-map f)
+  is-weakly-constant-null-homotopic-map f =
+    is-weakly-constant-map-is-null-homotopic-map
+      ( is-null-homotopic-null-homotopic-map f)
 ```
 
 ## See also

@@ -302,13 +302,18 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   is-weakly-constant-map-is-constant-map :
-    is-constant-map f → is-weakly-constant-map f
+    {f : A → B} → is-constant-map f → is-weakly-constant-map f
   is-weakly-constant-map-is-constant-map H x y =
     contraction-is-constant-map' H x ∙ inv (contraction-is-constant-map H y)
+
+  is-weakly-constant-constant-map :
+    (f : constant-map A B) → is-weakly-constant-map (map-constant-map f)
+  is-weakly-constant-constant-map f =
+    is-weakly-constant-map-is-constant-map (is-constant-constant-map f)
 ```
 
 ## References
