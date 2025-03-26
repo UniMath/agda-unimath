@@ -462,9 +462,9 @@ module _
 ```agda
 semigroup-add-ℝ-lzero : Semigroup (lsuc lzero)
 semigroup-add-ℝ-lzero =
-  ℝ-Set lzero ,
-  add-ℝ ,
-  associative-add-ℝ
+  ( ℝ-Set lzero ,
+    add-ℝ ,
+    associative-add-ℝ)
 
 monoid-add-ℝ-lzero : Monoid (lsuc lzero)
 monoid-add-ℝ-lzero =

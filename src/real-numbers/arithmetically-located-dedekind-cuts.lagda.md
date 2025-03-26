@@ -76,13 +76,13 @@ module _
     cut-lower-ℝ x p ∧
     cut-upper-ℝ y q
 
-  arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
-  arithmetically-located-prop-lower-upper-ℝ =
+  is-arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
+  is-arithmetically-located-prop-lower-upper-ℝ =
     Π-Prop ℚ⁺ (λ ε⁺ → ∃ (ℚ × ℚ) (close-bounds-lower-upper-ℝ ε⁺))
 
   is-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
   is-arithmetically-located-lower-upper-ℝ =
-    type-Prop arithmetically-located-prop-lower-upper-ℝ
+    type-Prop is-arithmetically-located-prop-lower-upper-ℝ
 ```
 
 ## Properties
@@ -229,10 +229,10 @@ module _
           do-syntax-trunc-Prop
             (∃
               ( ℚ × ℚ)
-              ( λ (p , q) →
-                le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
-                lower-cut-ℝ x p ∧
-                upper-cut-ℝ x q))
+              ( close-bounds-lower-upper-ℝ
+                ( lower-real-ℝ x)
+                ( upper-real-ℝ x)
+                ( ε⁺)))
 ```
 
 ## References
