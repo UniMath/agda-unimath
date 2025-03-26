@@ -79,10 +79,15 @@ module _
   opaque
     unfolding sim-ℝ
 
-    sim-upper-cut-iff-sim-ℝ :
-      sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) ↔ (x ~ℝ y)
-    pr1 sim-upper-cut-iff-sim-ℝ = sim-lower-cut-sim-upper-cut-ℝ x y
-    pr2 sim-upper-cut-iff-sim-ℝ = sim-upper-cut-sim-lower-cut-ℝ x y
+    sim-sim-upper-cut-ℝ : sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) → (x ~ℝ y)
+    sim-sim-upper-cut-ℝ = sim-lower-cut-sim-upper-cut-ℝ x y
+
+    sim-upper-cut-sim-ℝ : (x ~ℝ y) → sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y)
+    sim-upper-cut-sim-ℝ = sim-upper-cut-sim-lower-cut-ℝ x y
+
+  sim-upper-cut-iff-sim-ℝ :
+    sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) ↔ (x ~ℝ y)
+  sim-upper-cut-iff-sim-ℝ = (sim-sim-upper-cut-ℝ , sim-upper-cut-sim-ℝ)
 ```
 
 ### Reflexivity
@@ -128,12 +133,10 @@ opaque
 
 ```agda
 opaque
-
   unfolding sim-ℝ
 
   eq-sim-ℝ : {l : Level} → {x y : ℝ l} → x ~ℝ y → x ＝ y
-  eq-sim-ℝ {x = x} {y = y} H =
-    eq-eq-lower-cut-ℝ x y (antisymmetric-sim-subtype _ _ H)
+  eq-sim-ℝ {x = x} {y = y} H = eq-eq-lower-cut-ℝ x y (eq-sim-subtype _ _ H)
 ```
 
 ### Similarity reasoning

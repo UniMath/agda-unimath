@@ -31,7 +31,11 @@ open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.abelian-groups
+open import group-theory.commutative-monoids
 open import group-theory.groups
+open import group-theory.monoids
+open import group-theory.semigroups
 
 open import logic.functoriality-existential-quantification
 
@@ -51,8 +55,12 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Idea
 
-The sum of two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) is
-is a Dedekind real number whose lower cut (upper cut) is the the
+We introduce {{#concept "addition" Disambiguation="real numbers" Agda=add-ℝ}} on
+the [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) and derive
+its basic properties.
+
+The sum of two Dedekind real numbers is is a Dedekind real number whose lower
+cut (upper cut) is the the
 [Minkowski sum](group-theory.minkowski-multiplication-commutative-monoids.md) of
 their lower (upper) cuts.
 
@@ -79,8 +87,8 @@ module _
           ( p)
           ( binary-tr
             ( le-ℚ)
-            ( inv (p=px+py))
-            ( inv (p=qx+qy))
+            ( inv p=px+py)
+            ( inv p=qx+qy)
             ( preserves-le-add-ℚ
               { px}
               { qx}
@@ -92,31 +100,15 @@ module _
 
     is-arithmetically-located-lower-upper-add-ℝ :
       is-arithmetically-located-lower-upper-ℝ lower-real-add-ℝ upper-real-add-ℝ
-    is-arithmetically-located-lower-upper-add-ℝ ε⁺@(ε , _) =
+    is-arithmetically-located-lower-upper-add-ℝ ε⁺ =
       do
-        let
-          εx⁺@(εx , _) = left-summand-split-ℚ⁺ ε⁺
-          εy⁺@(εy , _) = right-summand-split-ℚ⁺ ε⁺
-        (px , qx) , qx<px+εx , px<x , x<qx ← is-arithmetically-located-ℝ x εx⁺
-        (py , qy) , qy<py+εy , py<y , y<qy ← is-arithmetically-located-ℝ y εy⁺
+        (px , qx) , qx<px+εx , px<x , x<qx ←
+          is-arithmetically-located-ℝ x (left-summand-split-ℚ⁺ ε⁺)
+        (py , qy) , qy<py+εy , py<y , y<qy ←
+          is-arithmetically-located-ℝ y (right-summand-split-ℚ⁺ ε⁺)
         intro-exists
           ( px +ℚ py , qx +ℚ qy)
-          ( tr
-              ( le-ℚ (qx +ℚ qy))
-              ( equational-reasoning
-                  (px +ℚ εx) +ℚ (py +ℚ εy)
-                  ＝ (px +ℚ py) +ℚ (εx +ℚ εy)
-                    by interchange-law-add-add-ℚ px εx py εy
-                  ＝ (px +ℚ py) +ℚ ε
-                    by
-                      ap ((px +ℚ py) +ℚ_) (ap rational-ℚ⁺ (eq-add-split-ℚ⁺ ε⁺)))
-              ( preserves-le-add-ℚ
-                { qx}
-                { px +ℚ εx}
-                { qy}
-                { py +ℚ εy}
-                ( qx<px+εx)
-                ( qy<py+εy)) ,
+          ( le-add-split-ℚ⁺ ε⁺ qx px qy py qx<px+εx qy<py+εy ,
             intro-exists (px , py) (px<x , py<y , refl) ,
             intro-exists (qx , qy) (x<qx , y<qy , refl))
       where
@@ -124,10 +116,10 @@ module _
           do-syntax-trunc-Prop
             (∃
               ( ℚ × ℚ)
-              ( λ (p , q) →
-                le-ℚ-Prop q (p +ℚ ε) ∧
-                cut-lower-ℝ lower-real-add-ℝ p ∧
-                cut-upper-ℝ upper-real-add-ℝ q))
+              ( close-bounds-lower-upper-ℝ
+                ( lower-real-add-ℝ)
+                ( upper-real-add-ℝ)
+                ( ε⁺)))
 
     is-located-lower-upper-add-ℝ :
       is-located-lower-upper-ℝ lower-real-add-ℝ upper-real-add-ℝ
@@ -159,12 +151,13 @@ module _
   (x : ℝ l1) (y : ℝ l2)
   where
 
-  commutative-add-ℝ : x +ℝ y ＝ y +ℝ x
-  commutative-add-ℝ =
-    eq-eq-lower-real-ℝ
-      ( x +ℝ y)
-      ( y +ℝ x)
-      ( commutative-add-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y))
+  abstract
+    commutative-add-ℝ : x +ℝ y ＝ y +ℝ x
+    commutative-add-ℝ =
+      eq-eq-lower-real-ℝ
+        ( x +ℝ y)
+        ( y +ℝ x)
+        ( commutative-add-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y))
 ```
 
 ### Addition is associative
@@ -175,72 +168,76 @@ module _
   (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
-  associative-add-ℝ : (x +ℝ y) +ℝ z ＝ x +ℝ (y +ℝ z)
-  associative-add-ℝ =
-    eq-eq-lower-real-ℝ
-      ( (x +ℝ y) +ℝ z)
-      ( x +ℝ (y +ℝ z))
-      ( associative-add-lower-ℝ
-        ( lower-real-ℝ x)
-        ( lower-real-ℝ y)
-        ( lower-real-ℝ z))
+  abstract
+    associative-add-ℝ : (x +ℝ y) +ℝ z ＝ x +ℝ (y +ℝ z)
+    associative-add-ℝ =
+      eq-eq-lower-real-ℝ
+        ( (x +ℝ y) +ℝ z)
+        ( x +ℝ (y +ℝ z))
+        ( associative-add-lower-ℝ
+          ( lower-real-ℝ x)
+          ( lower-real-ℝ y)
+          ( lower-real-ℝ z))
 ```
 
 ### Unit laws for addition
 
 ```agda
-left-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → zero-ℝ +ℝ x ＝ x
-left-unit-law-add-ℝ x =
-  eq-eq-lower-real-ℝ
-    ( zero-ℝ +ℝ x)
-    ( x)
-    ( left-unit-law-add-lower-ℝ (lower-real-ℝ x))
+abstract
+  left-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → zero-ℝ +ℝ x ＝ x
+  left-unit-law-add-ℝ x =
+    eq-eq-lower-real-ℝ
+      ( zero-ℝ +ℝ x)
+      ( x)
+      ( left-unit-law-add-lower-ℝ (lower-real-ℝ x))
 
-right-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → x +ℝ zero-ℝ ＝ x
-right-unit-law-add-ℝ x =
-  eq-eq-lower-real-ℝ
-    ( x +ℝ zero-ℝ)
-    ( x)
-    ( right-unit-law-add-lower-ℝ (lower-real-ℝ x))
+  right-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → x +ℝ zero-ℝ ＝ x
+  right-unit-law-add-ℝ x =
+    eq-eq-lower-real-ℝ
+      ( x +ℝ zero-ℝ)
+      ( x)
+      ( right-unit-law-add-lower-ℝ (lower-real-ℝ x))
 ```
 
 ### Inverse laws for addition
 
 ```agda
-right-inverse-law-add-ℝ : {l : Level} → (x : ℝ l) → sim-ℝ (x +ℝ neg-ℝ x) zero-ℝ
-right-inverse-law-add-ℝ x =
-  sim-rational-ℝ
-    ( x +ℝ neg-ℝ x ,
-      zero-ℚ ,
-      elim-exists
-        ( empty-Prop)
-        ( λ (p , q) (p<x , x<-q , 0=p+q) →
-          is-disjoint-cut-ℝ
-            ( x)
-            ( p)
-            ( p<x ,
-              inv-tr
+abstract
+  right-inverse-law-add-ℝ :
+    {l : Level} → (x : ℝ l) → sim-ℝ (x +ℝ neg-ℝ x) zero-ℝ
+  right-inverse-law-add-ℝ x =
+    sim-rational-ℝ
+      ( x +ℝ neg-ℝ x ,
+        zero-ℚ ,
+        elim-exists
+          ( empty-Prop)
+          ( λ (p , q) (p<x , x<-q , 0=p+q) →
+            is-disjoint-cut-ℝ
+              ( x)
+              ( p)
+              ( p<x ,
+                inv-tr
                 ( is-in-upper-cut-ℝ x)
-                ( unique-left-inv-Group group-add-ℚ p q (inv 0=p+q))
+                ( unique-left-neg-ℚ p q (inv 0=p+q))
                 ( x<-q))) ,
-      elim-exists
-        ( empty-Prop)
-        ( λ (p , q) (x<p , -q<x , 0=p+q) →
-          is-disjoint-cut-ℝ
-            ( x)
-            ( p)
-            ( inv-tr
+        elim-exists
+          ( empty-Prop)
+          ( λ (p , q) (x<p , -q<x , 0=p+q) →
+            is-disjoint-cut-ℝ
+              ( x)
+              ( p)
+              ( inv-tr
                 ( is-in-lower-cut-ℝ x)
-                ( unique-left-inv-Group group-add-ℚ p q (inv (0=p+q)))
+                ( unique-left-neg-ℚ p q (inv 0=p+q))
                 ( -q<x) ,
-              x<p)))
+                x<p)))
 
-left-inverse-law-add-ℝ : {l : Level} (x : ℝ l) → sim-ℝ (neg-ℝ x +ℝ x) zero-ℝ
-left-inverse-law-add-ℝ x =
-  tr
-    ( λ y → sim-ℝ y zero-ℝ)
-    ( commutative-add-ℝ x (neg-ℝ x))
-    ( right-inverse-law-add-ℝ x)
+  left-inverse-law-add-ℝ : {l : Level} (x : ℝ l) → sim-ℝ (neg-ℝ x +ℝ x) zero-ℝ
+  left-inverse-law-add-ℝ x =
+    tr
+      ( λ y → sim-ℝ y zero-ℝ)
+      ( commutative-add-ℝ x (neg-ℝ x))
+      ( right-inverse-law-add-ℝ x)
 ```
 
 ### Addition on the real numbers preserves similarity
@@ -328,20 +325,25 @@ module _
   (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
   where
 
-  reflects-sim-right-add-ℝ : sim-ℝ (x +ℝ z) (y +ℝ z) → sim-ℝ x y
-  reflects-sim-right-add-ℝ x+z≈y+z =
-    similarity-reasoning-ℝ
-      x
-      ~ℝ (x +ℝ z) +ℝ neg-ℝ z
-        by symmetric-sim-ℝ (cancel-right-add-diff-ℝ x z)
-      ~ℝ (y +ℝ z) +ℝ neg-ℝ z
-        by preserves-sim-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≈y+z
-      ~ℝ y by cancel-right-add-diff-ℝ y z
+  abstract
+    reflects-sim-right-add-ℝ : sim-ℝ (x +ℝ z) (y +ℝ z) → sim-ℝ x y
+    reflects-sim-right-add-ℝ x+z≈y+z =
+      similarity-reasoning-ℝ
+        x
+        ~ℝ (x +ℝ z) +ℝ neg-ℝ z
+          by symmetric-sim-ℝ (cancel-right-add-diff-ℝ x z)
+        ~ℝ (y +ℝ z) +ℝ neg-ℝ z
+          by preserves-sim-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≈y+z
+        ~ℝ y by cancel-right-add-diff-ℝ y z
 
-  reflects-sim-left-add-ℝ : sim-ℝ (z +ℝ x) (z +ℝ y) → sim-ℝ x y
-  reflects-sim-left-add-ℝ z+x≈z+y =
-    reflects-sim-right-add-ℝ
-      ( binary-tr sim-ℝ (commutative-add-ℝ z x) (commutative-add-ℝ z y) z+x≈z+y)
+    reflects-sim-left-add-ℝ : sim-ℝ (z +ℝ x) (z +ℝ y) → sim-ℝ x y
+    reflects-sim-left-add-ℝ z+x≈z+y =
+      reflects-sim-right-add-ℝ
+        ( binary-tr
+          ( sim-ℝ)
+          ( commutative-add-ℝ z x)
+          ( commutative-add-ℝ z y)
+          ( z+x≈z+y))
 
 module _
   {l1 l2 l3 : Level}
@@ -404,13 +406,14 @@ module _
   {l1 l2 l3 l4 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) (w : ℝ l4)
   where
 
-  interchange-law-add-add-ℝ : (x +ℝ y) +ℝ (z +ℝ w) ＝ (x +ℝ z) +ℝ (y +ℝ w)
-  interchange-law-add-add-ℝ =
-    equational-reasoning
-      (x +ℝ y) +ℝ (z +ℝ w)
-      ＝ x +ℝ (y +ℝ (z +ℝ w)) by associative-add-ℝ _ _ _
-      ＝ x +ℝ (z +ℝ (y +ℝ w)) by ap (x +ℝ_) (left-swap-add-ℝ y z w)
-      ＝ (x +ℝ z) +ℝ (y +ℝ w) by inv (associative-add-ℝ x z (y +ℝ w))
+  abstract
+    interchange-law-add-add-ℝ : (x +ℝ y) +ℝ (z +ℝ w) ＝ (x +ℝ z) +ℝ (y +ℝ w)
+    interchange-law-add-add-ℝ =
+      equational-reasoning
+        (x +ℝ y) +ℝ (z +ℝ w)
+        ＝ x +ℝ (y +ℝ (z +ℝ w)) by associative-add-ℝ _ _ _
+        ＝ x +ℝ (z +ℝ (y +ℝ w)) by ap (x +ℝ_) (left-swap-add-ℝ y z w)
+        ＝ (x +ℝ z) +ℝ (y +ℝ w) by inv (associative-add-ℝ x z (y +ℝ w))
 ```
 
 ### Negation is distributive across addition
@@ -451,4 +454,39 @@ module _
                   ( left-inverse-law-add-ℝ _))
           ~ℝ neg-ℝ x +ℝ neg-ℝ y
             by sim-eq-ℝ (ap (_+ℝ neg-ℝ y) (left-unit-law-add-ℝ _)))
+```
+
+### The Abelian group of real numbers at `lzero` under addition
+
+```agda
+semigroup-add-ℝ-lzero : Semigroup (lsuc lzero)
+semigroup-add-ℝ-lzero =
+  ( ℝ-Set lzero ,
+    add-ℝ ,
+    associative-add-ℝ)
+
+monoid-add-ℝ-lzero : Monoid (lsuc lzero)
+monoid-add-ℝ-lzero =
+  semigroup-add-ℝ-lzero ,
+  zero-ℝ ,
+  left-unit-law-add-ℝ ,
+  right-unit-law-add-ℝ
+
+commutative-monoid-add-ℝ-lzero : Commutative-Monoid (lsuc lzero)
+commutative-monoid-add-ℝ-lzero =
+  monoid-add-ℝ-lzero ,
+  commutative-add-ℝ
+
+group-add-ℝ-lzero : Group (lsuc lzero)
+group-add-ℝ-lzero =
+  semigroup-add-ℝ-lzero ,
+  ( zero-ℝ , left-unit-law-add-ℝ , right-unit-law-add-ℝ) ,
+  ( neg-ℝ ,
+    eq-sim-ℝ ∘ left-inverse-law-add-ℝ ,
+    eq-sim-ℝ ∘ right-inverse-law-add-ℝ)
+
+abelian-group-add-ℝ-lzero : Ab (lsuc lzero)
+abelian-group-add-ℝ-lzero =
+  group-add-ℝ-lzero ,
+  commutative-add-ℝ
 ```

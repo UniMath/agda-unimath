@@ -70,20 +70,19 @@ module _
   {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
   where
 
-  arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
-  arithmetically-located-prop-lower-upper-ℝ =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ ε⁺ →
-        ∃
-          ( ℚ × ℚ)
-          ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
-            cut-lower-ℝ x p ∧
-            cut-upper-ℝ y q))
+  close-bounds-lower-upper-ℝ : ℚ⁺ → subtype (l1 ⊔ l2) (ℚ × ℚ)
+  close-bounds-lower-upper-ℝ ε⁺ (p , q) =
+    le-ℚ-Prop q (p +ℚ (rational-ℚ⁺ ε⁺)) ∧
+    cut-lower-ℝ x p ∧
+    cut-upper-ℝ y q
+
+  is-arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
+  is-arithmetically-located-prop-lower-upper-ℝ =
+    Π-Prop ℚ⁺ (λ ε⁺ → ∃ (ℚ × ℚ) (close-bounds-lower-upper-ℝ ε⁺))
 
   is-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
   is-arithmetically-located-lower-upper-ℝ =
-    type-Prop arithmetically-located-prop-lower-upper-ℝ
+    type-Prop is-arithmetically-located-prop-lower-upper-ℝ
 ```
 
 ## Properties
@@ -122,10 +121,13 @@ module _
                     ( p' +ℚ (q -ℚ p))
                     ( q)
                     ( q'<p'+q-p)
-                  ( tr
-                    ( leq-ℚ (p' +ℚ (q -ℚ p)))
-                    ( is-identity-right-conjugation-Ab abelian-group-add-ℚ p q)
-                    ( preserves-leq-left-add-ℚ (q -ℚ p) p' p p'≤p)))
+                    ( tr
+                      ( leq-ℚ (p' +ℚ (q -ℚ p)))
+                      ( is-identity-right-conjugation-Ab
+                        ( abelian-group-add-ℚ)
+                        ( p)
+                        ( q))
+                      ( preserves-leq-left-add-ℚ (q -ℚ p) p' p p'≤p)))
                   ( q'∈U)))
             ( decide-le-leq-ℚ p p'))
         ( arithmetically-located (positive-diff-le-ℚ p q p<q))
@@ -138,100 +140,97 @@ module _
   {l : Level} (x : ℝ l)
   where
 
-  location-in-arithmetic-sequence-located-ℝ :
-    (ε : ℚ⁺) (n : ℕ) (p : ℚ) →
-    is-in-lower-cut-ℝ x p →
-    is-in-upper-cut-ℝ x (p +ℚ (rational-ℤ (int-ℕ n) *ℚ rational-ℚ⁺ ε)) →
-    exists
-      ( ℚ)
-      ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ rational-ℚ⁺ (ε +ℚ⁺ ε)))
-  location-in-arithmetic-sequence-located-ℝ ε⁺@(ε , _) zero-ℕ p p<x x<p+0ε =
-    ex-falso
-      ( is-disjoint-cut-ℝ
-        ( x)
-        ( p)
-        ( p<x ,
-          tr
-            ( is-in-upper-cut-ℝ x)
-            ( ap (p +ℚ_) (left-zero-law-mul-ℚ ε) ∙ right-unit-law-add-ℚ p)
-            ( x<p+0ε)))
-  location-in-arithmetic-sequence-located-ℝ ε⁺@(ε , _) (succ-ℕ n) p p<x x<p+nε =
-    elim-disjunction
-      ( ∃
+  abstract
+    location-in-arithmetic-sequence-located-ℝ :
+      (ε : ℚ⁺) (n : ℕ) (p : ℚ) →
+      is-in-lower-cut-ℝ x p →
+      is-in-upper-cut-ℝ x (p +ℚ (rational-ℤ (int-ℕ n) *ℚ rational-ℚ⁺ ε)) →
+      exists
         ( ℚ)
-        ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ (ε +ℚ ε))))
-      ( λ p+ε<x →
-        location-in-arithmetic-sequence-located-ℝ
-          ( ε⁺)
-          ( n)
-          ( p +ℚ ε)
-          ( p+ε<x)
-          ( tr
-            ( is-in-upper-cut-ℝ x)
-            ( equational-reasoning
-              p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)
-              ＝ p +ℚ (rational-ℤ (succ-ℤ (int-ℕ n)) *ℚ ε)
-                by ap (λ m → p +ℚ (rational-ℤ m *ℚ ε)) (inv (succ-int-ℕ n))
-              ＝ p +ℚ (succ-ℚ (rational-ℤ (int-ℕ n)) *ℚ ε)
-                by ap (λ m → p +ℚ (m *ℚ ε)) (inv (succ-rational-ℤ _))
-              ＝ p +ℚ (ε +ℚ (rational-ℤ (int-ℕ n) *ℚ ε))
-                by ap (p +ℚ_) (mul-left-succ-ℚ _ _)
-              ＝ (p +ℚ ε) +ℚ rational-ℤ (int-ℕ n) *ℚ ε
-                by inv (associative-add-ℚ _ _ _))
-            ( x<p+nε)))
-      ( λ x<p+2ε →
-        intro-exists
+        ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ rational-ℚ⁺ (ε +ℚ⁺ ε)))
+    location-in-arithmetic-sequence-located-ℝ ε⁺@(ε , _) zero-ℕ p p<x x<p+0ε =
+      ex-falso
+        ( is-disjoint-cut-ℝ
+          ( x)
           ( p)
           ( p<x ,
             tr
               ( is-in-upper-cut-ℝ x)
-              ( associative-add-ℚ p ε ε)
-              ( x<p+2ε)))
-      ( is-located-lower-upper-cut-ℝ
-        ( x)
-        ( p +ℚ ε)
-        ( (p +ℚ ε) +ℚ ε)
-        ( le-right-add-rational-ℚ⁺ (p +ℚ ε) ε⁺))
-
-  is-arithmetically-located-ℝ :
-    is-arithmetically-located-lower-upper-ℝ (lower-real-ℝ x) (upper-real-ℝ x)
-  is-arithmetically-located-ℝ ε⁺@(ε , _) =
-    do
-      ε'⁺@(ε' , pos-ε') , 2ε'<ε ← double-le-ℚ⁺ ε⁺
-      p , p<x ← is-inhabited-lower-cut-ℝ x
-      q , x<q ← is-inhabited-upper-cut-ℝ x
-      let p<q = le-lower-upper-cut-ℝ x p q p<x x<q
-      n , q-p<nε' ← archimedean-property-ℚ ε' (q -ℚ p) pos-ε'
-      let nℚ = rational-ℤ (int-ℕ n)
-      r , r<x , x<r+2ε' ←
-        location-in-arithmetic-sequence-located-ℝ
-          ( ε'⁺)
-          ( n)
-          ( p)
-          ( p<x)
-          ( le-upper-cut-ℝ
-            ( x)
-            ( q)
-            ( p +ℚ (rational-ℤ (int-ℕ n) *ℚ ε'))
+              ( ap (p +ℚ_) (left-zero-law-mul-ℚ ε) ∙ right-unit-law-add-ℚ p)
+              ( x<p+0ε)))
+    location-in-arithmetic-sequence-located-ℝ
+      ε⁺@(ε , _) (succ-ℕ n) p p<x x<p+nε =
+      elim-disjunction
+        ( ∃ ℚ (λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ (ε +ℚ ε))))
+        ( λ p+ε<x →
+          location-in-arithmetic-sequence-located-ℝ
+            ( ε⁺)
+            ( n)
+            ( p +ℚ ε)
+            ( p+ε<x)
             ( tr
-              ( le-ℚ q)
-              ( commutative-add-ℚ (nℚ *ℚ ε') p)
-              ( le-transpose-left-diff-ℚ q p (nℚ *ℚ ε') ( q-p<nε')))
-            ( x<q))
-      intro-exists
-        ( r , r +ℚ (ε' +ℚ ε'))
-        ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε ,
-          r<x ,
-          x<r+2ε')
-    where
-      open
-        do-syntax-trunc-Prop
-          (∃
-            ( ℚ × ℚ)
-            ( λ (p , q) →
-              le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
-              lower-cut-ℝ x p ∧
-              upper-cut-ℝ x q))
+              ( is-in-upper-cut-ℝ x)
+              ( equational-reasoning
+                p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)
+                ＝ p +ℚ (succ-ℚ (rational-ℤ (int-ℕ n)) *ℚ ε)
+                  by ap (p +ℚ_) (ap (_*ℚ ε) (inv (succ-rational-int-ℕ n)))
+                ＝ p +ℚ (ε +ℚ (rational-ℤ (int-ℕ n) *ℚ ε))
+                  by ap (p +ℚ_) (mul-left-succ-ℚ _ _)
+                ＝ (p +ℚ ε) +ℚ rational-ℤ (int-ℕ n) *ℚ ε
+                  by inv (associative-add-ℚ _ _ _))
+              ( x<p+nε)))
+        ( λ x<p+2ε →
+          intro-exists
+            ( p)
+            ( p<x ,
+              tr
+                ( is-in-upper-cut-ℝ x)
+                ( associative-add-ℚ p ε ε)
+                ( x<p+2ε)))
+        ( is-located-lower-upper-cut-ℝ
+          ( x)
+          ( p +ℚ ε)
+          ( (p +ℚ ε) +ℚ ε)
+          ( le-right-add-rational-ℚ⁺ (p +ℚ ε) ε⁺))
+
+    is-arithmetically-located-ℝ :
+      is-arithmetically-located-lower-upper-ℝ (lower-real-ℝ x) (upper-real-ℝ x)
+    is-arithmetically-located-ℝ ε⁺@(ε , _) =
+      do
+        ε'⁺@(ε' , pos-ε') , 2ε'<ε ← double-le-ℚ⁺ ε⁺
+        p , p<x ← is-inhabited-lower-cut-ℝ x
+        q , x<q ← is-inhabited-upper-cut-ℝ x
+        n , q-p<nε' ← archimedean-property-ℚ ε' (q -ℚ p) pos-ε'
+        let nℚ = rational-ℤ (int-ℕ n)
+        r , r<x , x<r+2ε' ←
+          location-in-arithmetic-sequence-located-ℝ
+            ( ε'⁺)
+            ( n)
+            ( p)
+            ( p<x)
+            ( le-upper-cut-ℝ
+              ( x)
+              ( q)
+              ( p +ℚ (nℚ *ℚ ε'))
+              ( tr
+                ( le-ℚ q)
+                ( commutative-add-ℚ (nℚ *ℚ ε') p)
+                ( le-transpose-left-diff-ℚ q p (nℚ *ℚ ε') ( q-p<nε')))
+              ( x<q))
+        intro-exists
+          ( r , r +ℚ (ε' +ℚ ε'))
+          ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε ,
+            r<x ,
+            x<r+2ε')
+      where
+        open
+          do-syntax-trunc-Prop
+            (∃
+              ( ℚ × ℚ)
+              ( close-bounds-lower-upper-ℝ
+                ( lower-real-ℝ x)
+                ( upper-real-ℝ x)
+                ( ε⁺)))
 ```
 
 ## References

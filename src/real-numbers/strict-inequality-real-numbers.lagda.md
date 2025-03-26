@@ -27,6 +27,7 @@ open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.logical-equivalences
@@ -35,6 +36,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -87,12 +89,7 @@ module _
       elim-exists
         ( lower-cut-ℝ y p)
         ( λ q (x<q , q<y) →
-          backward-implication
-            ( is-rounded-lower-cut-ℝ y p)
-            ( intro-exists
-              ( q)
-              ( le-lower-upper-cut-ℝ x p q p<x x<q ,
-                q<y)))
+          le-lower-cut-ℝ y p q (le-lower-upper-cut-ℝ x p q p<x x<q) q<y)
         ( x<y)
 ```
 
@@ -128,13 +125,13 @@ module _
         ( q , y<q , q<x) ← y<x
         rec-coproduct
           ( asymmetric-le-ℚ
-              ( q)
-              ( p)
-              ( le-lower-upper-cut-ℝ x q p q<x x<p))
+            ( q)
+            ( p)
+            ( le-lower-upper-cut-ℝ x q p q<x x<p))
           ( not-leq-le-ℚ
-              ( p)
-              ( q)
-              ( le-lower-upper-cut-ℝ y p q p<y y<q))
+            ( p)
+            ( q)
+            ( le-lower-upper-cut-ℝ y p q p<y y<q))
           ( decide-le-leq-ℚ p q)
       where open do-syntax-trunc-Prop empty-Prop
 ```
@@ -215,14 +212,14 @@ module _
   {l : Level} (q : ℚ) (x : ℝ l)
   where
 
-  le-iff-lower-cut-real-ℚ : is-in-lower-cut-ℝ x q ↔ le-ℝ (real-ℚ q) x
-  le-iff-lower-cut-real-ℚ = is-rounded-lower-cut-ℝ x q
+  le-real-iff-lower-cut-ℚ : is-in-lower-cut-ℝ x q ↔ le-ℝ (real-ℚ q) x
+  le-real-iff-lower-cut-ℚ = is-rounded-lower-cut-ℝ x q
 
-  le-lower-cut-real-ℚ : is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
-  le-lower-cut-real-ℚ = forward-implication le-iff-lower-cut-real-ℚ
+  le-real-is-in-lower-cut-ℚ : is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
+  le-real-is-in-lower-cut-ℚ = forward-implication le-real-iff-lower-cut-ℚ
 
-  lower-cut-real-le-ℚ : le-ℝ (real-ℚ q) x → is-in-lower-cut-ℝ x q
-  lower-cut-real-le-ℚ = backward-implication le-iff-lower-cut-real-ℚ
+  is-in-lower-cut-le-real-ℚ : le-ℝ (real-ℚ q) x → is-in-lower-cut-ℝ x q
+  is-in-lower-cut-le-real-ℚ = backward-implication le-real-iff-lower-cut-ℚ
 ```
 
 ### A rational is in the upper cut of `x` iff its real projection is greater than `x`
@@ -232,21 +229,17 @@ module _
   {l : Level} (q : ℚ) (x : ℝ l)
   where
 
-  le-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
-  le-upper-cut-real-ℚ H =
-    map-tot-exists
-      ( λ p (p<q , p∈ux) → (p∈ux , p<q))
-      ( forward-implication (is-rounded-upper-cut-ℝ x q) H)
+  abstract
+    le-iff-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q ↔ le-ℝ x (real-ℚ q)
+    le-iff-upper-cut-real-ℚ =
+      iff-tot-exists (λ _ → iff-equiv commutative-product) ∘iff
+      is-rounded-upper-cut-ℝ x q
 
-  upper-cut-real-le-ℚ : le-ℝ x (real-ℚ q) → is-in-upper-cut-ℝ x q
-  upper-cut-real-le-ℚ H =
-    backward-implication
-      ( is-rounded-upper-cut-ℝ x q)
-      ( map-tot-exists (λ _ (p>x , p<q) → (p<q , p>x)) H)
+  le-real-is-in-upper-cut-ℚ : is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
+  le-real-is-in-upper-cut-ℚ = forward-implication le-iff-upper-cut-real-ℚ
 
-  le-iff-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q ↔ le-ℝ x (real-ℚ q)
-  pr1 le-iff-upper-cut-real-ℚ = le-upper-cut-real-ℚ
-  pr2 le-iff-upper-cut-real-ℚ = upper-cut-real-le-ℚ
+  is-in-upper-cut-le-real-ℚ : le-ℝ x (real-ℚ q) → is-in-upper-cut-ℝ x q
+  is-in-upper-cut-le-real-ℚ = backward-implication le-iff-upper-cut-real-ℚ
 ```
 
 ### The reals have no lower or upper bound
@@ -262,14 +255,14 @@ module _
     exists-lesser-ℝ =
       do
         ( q , q<x) ← is-inhabited-lower-cut-ℝ x
-        intro-exists (real-ℚ q) (le-lower-cut-real-ℚ q x q<x)
+        intro-exists (real-ℚ q) (le-real-is-in-lower-cut-ℚ q x q<x)
       where open do-syntax-trunc-Prop (∃ (ℝ lzero) (λ y → le-ℝ-Prop y x))
 
     exists-greater-ℝ : exists (ℝ lzero) (λ y → le-ℝ-Prop x y)
     exists-greater-ℝ =
       do
         ( q , x<q) ← is-inhabited-upper-cut-ℝ x
-        intro-exists (real-ℚ q) (le-upper-cut-real-ℚ q x x<q)
+        intro-exists (real-ℚ q) (le-real-is-in-upper-cut-ℚ q x x<q)
       where open do-syntax-trunc-Prop (∃ (ℝ lzero) (le-ℝ-Prop x))
 ```
 
@@ -389,10 +382,13 @@ abstract
     do
       ( q , x<q , q<y) ← x<y
       ( p , p<q , x<p) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
-      elim-disjunction
-        ( le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
-        ( λ p<z → inl-disjunction (intro-exists p (x<p , p<z)))
-        ( λ z<q → inr-disjunction (intro-exists q (z<q , q<y)))
+      map-disjunction
+        ( lower-cut-ℝ z p)
+        ( le-ℝ-Prop x z)
+        ( upper-cut-ℝ z q)
+        ( le-ℝ-Prop z y)
+        ( λ p<z → intro-exists p (x<p , p<z))
+        ( λ z<q → intro-exists q (z<q , q<y))
         ( is-located-lower-upper-cut-ℝ z p q p<q)
     where open do-syntax-trunc-Prop (le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
 ```
@@ -412,7 +408,7 @@ module _
       map-tot-exists
         ( λ q →
           map-product
-            ( pr1 (backward-implication (sim-upper-cut-iff-sim-ℝ x y) x~y) q)
+            ( pr1 (sim-upper-cut-sim-ℝ x y x~y) q)
             ( id))
 
     preserves-le-right-sim-ℝ : le-ℝ z x → le-ℝ z y
@@ -435,7 +431,7 @@ module _
       ( preserves-le-right-sim-ℝ x1 y1 y2 y1~y2 x1<y1)
 ```
 
-### Strict inequality on the real numbers is invariant by translation
+### Strict inequality on the real numbers is translation invariant
 
 ```agda
 module _
@@ -532,39 +528,67 @@ module _
   pr2 iff-translate-left-le-ℝ = reflects-le-left-add-ℝ z x y
 ```
 
-### `x + y < z` if and only if `x < y - z`
+### `x + y < z` if and only if `x < z - y`
 
 ```agda
 module _
   {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
-  iff-diff-right-le-ℝ : le-ℝ (x +ℝ y) z ↔ le-ℝ x (z -ℝ y)
-  pr1 iff-diff-right-le-ℝ x+y<z =
-    preserves-le-left-sim-ℝ
-      ( z -ℝ y)
-      ( (x +ℝ y) -ℝ y)
-      ( x)
-      ( cancel-right-add-diff-ℝ x y)
-      ( preserves-le-right-add-ℝ (neg-ℝ y) (x +ℝ y) z x+y<z)
-  pr2 iff-diff-right-le-ℝ x<z-y =
-    preserves-le-right-sim-ℝ
-      ( x +ℝ y)
-      ( (z -ℝ y) +ℝ y)
-      ( z)
-      ( cancel-right-diff-add-ℝ z y)
-      ( preserves-le-right-add-ℝ y x (z -ℝ y) x<z-y)
+  abstract
+    le-transpose-left-add-ℝ : le-ℝ (x +ℝ y) z → le-ℝ x (z -ℝ y)
+    le-transpose-left-add-ℝ x+y<z =
+      preserves-le-left-sim-ℝ
+        ( z -ℝ y)
+        ( (x +ℝ y) -ℝ y)
+        ( x)
+        ( cancel-right-add-diff-ℝ x y)
+        ( preserves-le-right-add-ℝ (neg-ℝ y) (x +ℝ y) z x+y<z)
 
 module _
   {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
-  iff-add-right-le-ℝ : le-ℝ (x -ℝ y) z ↔ le-ℝ x (z +ℝ y)
-  iff-add-right-le-ℝ =
-    tr
-      ( λ w → le-ℝ (x -ℝ y) z ↔ le-ℝ x (z +ℝ w))
-      ( neg-neg-ℝ y)
-      ( iff-diff-right-le-ℝ x (neg-ℝ y) z)
+  abstract
+    le-transpose-right-diff-ℝ : le-ℝ x (y -ℝ z) → le-ℝ (x +ℝ z) y
+    le-transpose-right-diff-ℝ x<y-z =
+      preserves-le-right-sim-ℝ
+        ( x +ℝ z)
+        ( (y -ℝ z) +ℝ z)
+        ( y)
+        ( cancel-right-diff-add-ℝ y z)
+        ( preserves-le-right-add-ℝ z x (y -ℝ z) x<y-z)
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  iff-diff-right-le-ℝ : le-ℝ (x +ℝ y) z ↔ le-ℝ x (z -ℝ y)
+  iff-diff-right-le-ℝ =
+    (le-transpose-left-add-ℝ x y z , le-transpose-right-diff-ℝ x z y)
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  abstract
+    iff-add-right-le-ℝ : le-ℝ (x -ℝ y) z ↔ le-ℝ x (z +ℝ y)
+    iff-add-right-le-ℝ =
+      tr
+        ( λ w → le-ℝ (x -ℝ y) z ↔ le-ℝ x (z +ℝ w))
+        ( neg-neg-ℝ y)
+        ( iff-diff-right-le-ℝ x (neg-ℝ y) z)
+
+    le-transpose-left-diff-ℝ : le-ℝ (x -ℝ y) z → le-ℝ x (z +ℝ y)
+    le-transpose-left-diff-ℝ = forward-implication iff-add-right-le-ℝ
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  abstract
+    le-transpose-right-add-ℝ : le-ℝ x (y +ℝ z) → le-ℝ (x -ℝ z) y
+    le-transpose-right-add-ℝ = backward-implication (iff-add-right-le-ℝ x z y)
 ```
 
 ## References

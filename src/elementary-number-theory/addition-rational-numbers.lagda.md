@@ -13,6 +13,7 @@ open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
@@ -161,6 +162,21 @@ abstract
     commutative-add-ℚ x (neg-ℚ x) ∙ left-inverse-law-add-ℚ x
 ```
 
+### If `p + q = 0`, then `p = -q`
+
+```agda
+abstract
+  unique-left-neg-ℚ : (p q : ℚ) → p +ℚ q ＝ zero-ℚ → p ＝ neg-ℚ q
+  unique-left-neg-ℚ p q p+q=0 =
+    equational-reasoning
+      p
+      ＝ p +ℚ zero-ℚ by inv (right-unit-law-add-ℚ p)
+      ＝ p +ℚ (q +ℚ neg-ℚ q) by ap (p +ℚ_) (inv (right-inverse-law-add-ℚ q))
+      ＝ (p +ℚ q) +ℚ neg-ℚ q by inv (associative-add-ℚ _ _ _)
+      ＝ zero-ℚ +ℚ neg-ℚ q by ap (_+ℚ neg-ℚ q) p+q=0
+      ＝ neg-ℚ q by left-unit-law-add-ℚ _
+```
+
 ### The negatives of rational numbers distribute over addition
 
 ```agda
@@ -274,6 +290,15 @@ abstract
 abstract
   succ-rational-ℤ : (x : ℤ) → succ-ℚ (rational-ℤ x) ＝ rational-ℤ (succ-ℤ x)
   succ-rational-ℤ = add-rational-ℤ one-ℤ
+```
+
+### The embedding of the successor of a natural number is the successor of its embedding
+
+```agda
+abstract
+  succ-rational-int-ℕ :
+    (n : ℕ) → succ-ℚ (rational-ℤ (int-ℕ n)) ＝ rational-ℤ (int-ℕ (succ-ℕ n))
+  succ-rational-int-ℕ n = succ-rational-ℤ _ ∙ ap rational-ℤ (succ-int-ℕ n)
 ```
 
 ## See also
