@@ -23,8 +23,8 @@ open import foundation.universe-levels
 ## Idea
 
 A [sequence](foundation.sequences.md) `u` is
-{{#concept "constant" Disambiguation="sequence" Agda=is-constant-sequence}}
-if `u p ＝ u q` for all `p` and `q`.
+{{#concept "constant" Disambiguation="sequence" Agda=is-constant-sequence}} if
+`u p ＝ u q` for all `p` and `q`.
 
 ## Definitions
 

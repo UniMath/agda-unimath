@@ -87,6 +87,7 @@ open import foundation.connected-components-universes public
 open import foundation.connected-maps public
 open import foundation.connected-types public
 open import foundation.constant-maps public
+open import foundation.constant-sequences public
 open import foundation.constant-span-diagrams public
 open import foundation.constant-type-families public
 open import foundation.continuations public
@@ -177,6 +178,9 @@ open import foundation.equivalences-span-diagrams-families-of-types public
 open import foundation.equivalences-spans public
 open import foundation.equivalences-spans-families-of-types public
 open import foundation.evaluation-functions public
+open import foundation.eventually-constant-sequences public
+open import foundation.eventually-equal-sequences public
+open import foundation.eventually-pointed-sequences-types public
 open import foundation.exclusive-disjunction public
 open import foundation.exclusive-sum public
 open import foundation.existential-quantification public

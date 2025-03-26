@@ -23,8 +23,8 @@ open import foundation.universe-levels
 ## Idea
 
 A sequence of types `A : ℕ → UU l` is
-{{# concept "eventually pointed" Disambiguation="sequence of types"}}
-if `A n` is pointed for sufficiently
+{{# concept "eventually pointed" Disambiguation="sequence of types"}} if `A n`
+is pointed for sufficiently
 [large](elementary-number-theory.inequality-natural-numbers.md)
 [natural numbers](elementary-number-theory.natural-numbers.md) `n`.
 
@@ -59,9 +59,9 @@ module _
       modulus-is-eventually-pointed-sequence
   is-modulus-modulus-is-eventually-pointed-sequence = pr2 H
 
-  value-is-eventually-pointed-sequence :
+  value-at-modulus-is-eventually-pointed-sequence :
     A modulus-is-eventually-pointed-sequence
-  value-is-eventually-pointed-sequence =
+  value-at-modulus-is-eventually-pointed-sequence =
     is-modulus-modulus-is-eventually-pointed-sequence
       ( modulus-is-eventually-pointed-sequence)
       ( refl-leq-ℕ modulus-is-eventually-pointed-sequence)

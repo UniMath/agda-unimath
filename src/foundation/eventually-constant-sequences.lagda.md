@@ -1,0 +1,98 @@
+# Eventually constant sequences
+
+```agda
+module foundation.eventually-constant-sequences where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import elementary-number-theory.based-induction-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.maximum-natural-numbers
+open import elementary-number-theory.natural-numbers
+
+open import foundation.constant-maps
+open import foundation.constant-sequences
+open import foundation.dependent-pair-types
+open import foundation.eventually-equal-sequences
+open import foundation.eventually-pointed-sequences-types
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.sequences
+open import foundation.universe-levels
+```
+
+</details>
+
+## Idea
+
+A [sequence](foundation.sequences.md) `u` is
+{{#concept "eventually constant" Disambiguation="sequence" Agda=is-eventually-constant-sequence}}
+if `u p ＝ u q` for sufficiently large `p` and `q`.
+
+## Definitions
+
+### Eventually constant sequences
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A)
+  where
+
+  is-eventually-constant-sequence : UU l
+  is-eventually-constant-sequence =
+    is-eventually-pointed-sequence
+      (λ p → is-eventually-pointed-sequence (λ q → u p ＝ u q))
+```
+
+### The eventual value of an eventually constant sequence
+
+```agda
+module _
+  {l : Level} {A : UU l} {u : sequence A}
+  (H : is-eventually-constant-sequence u)
+  where
+
+  value-is-eventually-constant-sequence : A
+  value-is-eventually-constant-sequence =
+    u (modulus-is-eventually-pointed-sequence H)
+
+  is-eventual-value-is-eventually-constant-sequence :
+    is-eventually-pointed-sequence
+      (λ n → value-is-eventually-constant-sequence ＝ u n)
+  is-eventual-value-is-eventually-constant-sequence =
+    value-at-modulus-is-eventually-pointed-sequence H
+```
+
+## Properties
+
+### Constant sequences are eventually constant
+
+```agda
+module _
+  {l : Level} {A : UU l} {u : sequence A} (H : is-constant-sequence u)
+  where
+
+  is-eventually-constant-is-constant-sequence :
+    is-eventually-constant-sequence u
+  pr1 is-eventually-constant-is-constant-sequence = zero-ℕ
+  pr2 is-eventually-constant-is-constant-sequence p I = (zero-ℕ , λ q J → H p q)
+```
+
+### An eventually constant sequence is eventually equal to the constant sequence of its eventual value
+
+```agda
+module _
+  {l : Level} {A : UU l} {u : sequence A}
+  (H : is-eventually-constant-sequence u)
+  where
+
+  eventually-eq-value-is-eventually-constant-sequence :
+    eventually-eq-sequence
+      ( const ℕ (value-is-eventually-constant-sequence H))
+      ( u)
+  eventually-eq-value-is-eventually-constant-sequence =
+    is-eventual-value-is-eventually-constant-sequence H
+```
