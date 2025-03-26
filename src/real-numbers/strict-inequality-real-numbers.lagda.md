@@ -532,39 +532,67 @@ module _
   pr2 iff-translate-left-le-ℝ = reflects-le-left-add-ℝ z x y
 ```
 
-### `x + y < z` if and only if `x < y - z`
+### `x + y < z` if and only if `x < z - y`
 
 ```agda
 module _
   {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
-  iff-diff-right-le-ℝ : le-ℝ (x +ℝ y) z ↔ le-ℝ x (z -ℝ y)
-  pr1 iff-diff-right-le-ℝ x+y<z =
-    preserves-le-left-sim-ℝ
-      ( z -ℝ y)
-      ( (x +ℝ y) -ℝ y)
-      ( x)
-      ( cancel-right-add-diff-ℝ x y)
-      ( preserves-le-right-add-ℝ (neg-ℝ y) (x +ℝ y) z x+y<z)
-  pr2 iff-diff-right-le-ℝ x<z-y =
-    preserves-le-right-sim-ℝ
-      ( x +ℝ y)
-      ( (z -ℝ y) +ℝ y)
-      ( z)
-      ( cancel-right-diff-add-ℝ z y)
-      ( preserves-le-right-add-ℝ y x (z -ℝ y) x<z-y)
+  abstract
+    le-transpose-left-add-ℝ : le-ℝ (x +ℝ y) z → le-ℝ x (z -ℝ y)
+    le-transpose-left-add-ℝ x+y<z =
+      preserves-le-left-sim-ℝ
+        ( z -ℝ y)
+        ( (x +ℝ y) -ℝ y)
+        ( x)
+        ( cancel-right-add-diff-ℝ x y)
+        ( preserves-le-right-add-ℝ (neg-ℝ y) (x +ℝ y) z x+y<z)
 
 module _
   {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
-  iff-add-right-le-ℝ : le-ℝ (x -ℝ y) z ↔ le-ℝ x (z +ℝ y)
-  iff-add-right-le-ℝ =
-    tr
-      ( λ w → le-ℝ (x -ℝ y) z ↔ le-ℝ x (z +ℝ w))
-      ( neg-neg-ℝ y)
-      ( iff-diff-right-le-ℝ x (neg-ℝ y) z)
+  abstract
+    le-transpose-right-diff-ℝ : le-ℝ x (y -ℝ z) → le-ℝ (x +ℝ z) y
+    le-transpose-right-diff-ℝ x<y-z =
+      preserves-le-right-sim-ℝ
+        ( x +ℝ z)
+        ( (y -ℝ z) +ℝ z)
+        ( y)
+        ( cancel-right-diff-add-ℝ y z)
+        ( preserves-le-right-add-ℝ z x (y -ℝ z) x<y-z)
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  iff-diff-right-le-ℝ : le-ℝ (x +ℝ y) z ↔ le-ℝ x (z -ℝ y)
+  iff-diff-right-le-ℝ =
+    (le-transpose-left-add-ℝ x y z , le-transpose-right-diff-ℝ x z y)
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  abstract
+    iff-add-right-le-ℝ : le-ℝ (x -ℝ y) z ↔ le-ℝ x (z +ℝ y)
+    iff-add-right-le-ℝ =
+      tr
+        ( λ w → le-ℝ (x -ℝ y) z ↔ le-ℝ x (z +ℝ w))
+        ( neg-neg-ℝ y)
+        ( iff-diff-right-le-ℝ x (neg-ℝ y) z)
+
+    le-transpose-left-diff-ℝ : le-ℝ (x -ℝ y) z → le-ℝ x (z +ℝ y)
+    le-transpose-left-diff-ℝ = forward-implication iff-add-right-le-ℝ
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  abstract
+    le-transpose-right-add-ℝ : le-ℝ x (y +ℝ z) → le-ℝ (x -ℝ z) y
+    le-transpose-right-add-ℝ = backward-implication (iff-add-right-le-ℝ x z y)
 ```
 
 ## References

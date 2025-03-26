@@ -14,6 +14,7 @@ open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.action-on-identifications-binary-functions
@@ -274,6 +275,15 @@ abstract
 abstract
   succ-rational-ℤ : (x : ℤ) → succ-ℚ (rational-ℤ x) ＝ rational-ℤ (succ-ℤ x)
   succ-rational-ℤ = add-rational-ℤ one-ℤ
+```
+
+### The embedding of the successor of a natural number is the successor of its embedding
+
+```agda
+abstract
+  succ-rational-int-ℕ :
+    (n : ℕ) → succ-ℚ (rational-ℤ (int-ℕ n)) ＝ rational-ℤ (int-ℕ (succ-ℕ n))
+  succ-rational-int-ℕ n = succ-rational-ℤ _ ∙ ap rational-ℤ (succ-int-ℕ n)
 ```
 
 ## See also
