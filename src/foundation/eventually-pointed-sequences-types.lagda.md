@@ -40,31 +40,32 @@ module _
   is-modulus-eventually-pointed-sequence : ℕ → UU l
   is-modulus-eventually-pointed-sequence N = (n : ℕ) → leq-ℕ N n → A n
 
-  is-eventually-pointed-sequence : UU l
-  is-eventually-pointed-sequence = Σ ℕ is-modulus-eventually-pointed-sequence
+  has-modulus-eventually-pointed-sequence : UU l
+  has-modulus-eventually-pointed-sequence =
+    Σ ℕ is-modulus-eventually-pointed-sequence
 ```
 
 ### Modulus of an eventually pointed sequence of types
 
 ```agda
 module _
-  {l : Level} {A : ℕ → UU l} (H : is-eventually-pointed-sequence A)
+  {l : Level} {A : ℕ → UU l} (H : has-modulus-eventually-pointed-sequence A)
   where
 
-  modulus-is-eventually-pointed-sequence : ℕ
-  modulus-is-eventually-pointed-sequence = pr1 H
+  modulus-has-modulus-eventually-pointed-sequence : ℕ
+  modulus-has-modulus-eventually-pointed-sequence = pr1 H
 
-  is-modulus-modulus-is-eventually-pointed-sequence :
+  is-modulus-modulus-has-modulus-eventually-pointed-sequence :
     is-modulus-eventually-pointed-sequence A
-      modulus-is-eventually-pointed-sequence
-  is-modulus-modulus-is-eventually-pointed-sequence = pr2 H
+      modulus-has-modulus-eventually-pointed-sequence
+  is-modulus-modulus-has-modulus-eventually-pointed-sequence = pr2 H
 
-  value-at-modulus-is-eventually-pointed-sequence :
-    A modulus-is-eventually-pointed-sequence
-  value-at-modulus-is-eventually-pointed-sequence =
-    is-modulus-modulus-is-eventually-pointed-sequence
-      ( modulus-is-eventually-pointed-sequence)
-      ( refl-leq-ℕ modulus-is-eventually-pointed-sequence)
+  value-at-modulus-has-modulus-eventually-pointed-sequence :
+    A modulus-has-modulus-eventually-pointed-sequence
+  value-at-modulus-has-modulus-eventually-pointed-sequence =
+    is-modulus-modulus-has-modulus-eventually-pointed-sequence
+      ( modulus-has-modulus-eventually-pointed-sequence)
+      ( refl-leq-ℕ modulus-has-modulus-eventually-pointed-sequence)
 ```
 
 ## Properties
@@ -76,8 +77,9 @@ module _
   {l : Level} {A : ℕ → UU l}
   where
 
-  is-eventually-pointed-Π : Π ℕ A → is-eventually-pointed-sequence A
-  is-eventually-pointed-Π u = zero-ℕ , λ p _ → u p
+  has-modulus-eventually-pointed-Π :
+    Π ℕ A → has-modulus-eventually-pointed-sequence A
+  has-modulus-eventually-pointed-Π u = zero-ℕ , λ p _ → u p
 ```
 
 ### Any natural number greater than an eventual modulus is an eventual modulus
@@ -87,10 +89,10 @@ module _
   {l : Level} (A : ℕ → UU l) (i j : ℕ) (I : leq-ℕ i j)
   where
 
-  is-modulus-leq-modulus-is-eventually-pointed-seqence :
+  is-modulus-leq-modulus-has-modulus-eventually-pointed-seqence :
     is-modulus-eventually-pointed-sequence A i →
     is-modulus-eventually-pointed-sequence A j
-  is-modulus-leq-modulus-is-eventually-pointed-seqence H k K =
+  is-modulus-leq-modulus-has-modulus-eventually-pointed-seqence H k K =
     H k (transitive-leq-ℕ i j k K I)
 ```
 
@@ -101,10 +103,11 @@ module _
   {l : Level} (A : ℕ → UU l)
   where
 
-  is-eventually-pointed-is-eventually-modulus-eventually-pointed-sequence :
-    is-eventually-pointed-sequence (is-modulus-eventually-pointed-sequence A) →
-    is-eventually-pointed-sequence A
-  is-eventually-pointed-is-eventually-modulus-eventually-pointed-sequence
+  has-modulus-eventually-pointed-is-eventually-modulus-eventually-pointed-sequence :
+    has-modulus-eventually-pointed-sequence
+      (is-modulus-eventually-pointed-sequence A) →
+    has-modulus-eventually-pointed-sequence A
+  has-modulus-eventually-pointed-is-eventually-modulus-eventually-pointed-sequence
     (N , H) = N , λ n K → H n K n (refl-leq-ℕ n)
 ```
 
@@ -115,32 +118,33 @@ module _
   {l1 l2 : Level} {A : ℕ → UU l1} {B : ℕ → UU l2}
   where
 
-  map-is-eventually-pointed-sequence :
-    is-eventually-pointed-sequence (λ n → A n → B n) →
-    is-eventually-pointed-sequence A →
-    is-eventually-pointed-sequence B
-  map-is-eventually-pointed-sequence H K =
+  map-has-modulus-eventually-pointed-sequence :
+    has-modulus-eventually-pointed-sequence (λ n → A n → B n) →
+    has-modulus-eventually-pointed-sequence A →
+    has-modulus-eventually-pointed-sequence B
+  map-has-modulus-eventually-pointed-sequence H K =
     ( max-ℕ
-      ( modulus-is-eventually-pointed-sequence H)
-      ( modulus-is-eventually-pointed-sequence K)) ,
+      ( modulus-has-modulus-eventually-pointed-sequence H)
+      ( modulus-has-modulus-eventually-pointed-sequence K)) ,
     ( λ m I →
-      is-modulus-modulus-is-eventually-pointed-sequence H m
+      is-modulus-modulus-has-modulus-eventually-pointed-sequence H m
         ( leq-left-leq-max-ℕ m
-          ( modulus-is-eventually-pointed-sequence H)
-          ( modulus-is-eventually-pointed-sequence K)
+          ( modulus-has-modulus-eventually-pointed-sequence H)
+          ( modulus-has-modulus-eventually-pointed-sequence K)
           ( I))
-        ( is-modulus-modulus-is-eventually-pointed-sequence K m
+        ( is-modulus-modulus-has-modulus-eventually-pointed-sequence K m
           ( leq-right-leq-max-ℕ m
-            ( modulus-is-eventually-pointed-sequence H)
-            ( modulus-is-eventually-pointed-sequence K)
+            ( modulus-has-modulus-eventually-pointed-sequence H)
+            ( modulus-has-modulus-eventually-pointed-sequence K)
             ( I))))
 
-  map-Π-is-eventually-pointed-sequence :
+  map-Π-has-modulus-eventually-pointed-sequence :
     ((n : ℕ) → A n → B n) →
-    is-eventually-pointed-sequence A →
-    is-eventually-pointed-sequence B
-  map-Π-is-eventually-pointed-sequence =
-    map-is-eventually-pointed-sequence ∘ is-eventually-pointed-Π
+    has-modulus-eventually-pointed-sequence A →
+    has-modulus-eventually-pointed-sequence B
+  map-Π-has-modulus-eventually-pointed-sequence =
+    map-has-modulus-eventually-pointed-sequence ∘
+    has-modulus-eventually-pointed-Π
 ```
 
 ### Eventual binary functorial action on eventually pointed sequences
@@ -150,20 +154,21 @@ module _
   {l1 l2 l3 : Level} {A : ℕ → UU l1} {B : ℕ → UU l2} {C : ℕ → UU l3}
   where
 
-  map-binary-is-eventually-pointed-sequence :
-    is-eventually-pointed-sequence (λ n → A n → B n → C n) →
-    is-eventually-pointed-sequence A →
-    is-eventually-pointed-sequence B →
-    is-eventually-pointed-sequence C
-  map-binary-is-eventually-pointed-sequence I =
-    map-is-eventually-pointed-sequence ∘
-    map-is-eventually-pointed-sequence I
+  map-binary-has-modulus-eventually-pointed-sequence :
+    has-modulus-eventually-pointed-sequence (λ n → A n → B n → C n) →
+    has-modulus-eventually-pointed-sequence A →
+    has-modulus-eventually-pointed-sequence B →
+    has-modulus-eventually-pointed-sequence C
+  map-binary-has-modulus-eventually-pointed-sequence I =
+    map-has-modulus-eventually-pointed-sequence ∘
+    map-has-modulus-eventually-pointed-sequence I
 
-  map-binary-Π-is-eventually-pointed-sequence :
+  map-binary-Π-has-modulus-eventually-pointed-sequence :
     ((n : ℕ) → A n → B n → C n) →
-    is-eventually-pointed-sequence A →
-    is-eventually-pointed-sequence B →
-    is-eventually-pointed-sequence C
-  map-binary-Π-is-eventually-pointed-sequence =
-    map-binary-is-eventually-pointed-sequence ∘ is-eventually-pointed-Π
+    has-modulus-eventually-pointed-sequence A →
+    has-modulus-eventually-pointed-sequence B →
+    has-modulus-eventually-pointed-sequence C
+  map-binary-Π-has-modulus-eventually-pointed-sequence =
+    map-binary-has-modulus-eventually-pointed-sequence ∘
+    has-modulus-eventually-pointed-Π
 ```

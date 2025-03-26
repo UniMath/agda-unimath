@@ -40,10 +40,10 @@ module _
   {l : Level} {A : UU l} (u : sequence A)
   where
 
-  is-eventually-constant-sequence : UU l
-  is-eventually-constant-sequence =
-    is-eventually-pointed-sequence
-      (λ p → is-eventually-pointed-sequence (λ q → u p ＝ u q))
+  has-modulus-eventually-constant-sequence : UU l
+  has-modulus-eventually-constant-sequence =
+    has-modulus-eventually-pointed-sequence
+      (λ p → has-modulus-eventually-pointed-sequence (λ q → u p ＝ u q))
 ```
 
 ### The eventual value of an eventually constant sequence
@@ -51,18 +51,18 @@ module _
 ```agda
 module _
   {l : Level} {A : UU l} {u : sequence A}
-  (H : is-eventually-constant-sequence u)
+  (H : has-modulus-eventually-constant-sequence u)
   where
 
-  value-is-eventually-constant-sequence : A
-  value-is-eventually-constant-sequence =
-    u (modulus-is-eventually-pointed-sequence H)
+  value-has-modulus-eventually-constant-sequence : A
+  value-has-modulus-eventually-constant-sequence =
+    u (modulus-has-modulus-eventually-pointed-sequence H)
 
-  is-eventual-value-is-eventually-constant-sequence :
-    is-eventually-pointed-sequence
-      (λ n → value-is-eventually-constant-sequence ＝ u n)
-  is-eventual-value-is-eventually-constant-sequence =
-    value-at-modulus-is-eventually-pointed-sequence H
+  is-eventual-value-has-modulus-eventually-constant-sequence :
+    has-modulus-eventually-pointed-sequence
+      (λ n → value-has-modulus-eventually-constant-sequence ＝ u n)
+  is-eventual-value-has-modulus-eventually-constant-sequence =
+    value-at-modulus-has-modulus-eventually-pointed-sequence H
 ```
 
 ## Properties
@@ -74,10 +74,11 @@ module _
   {l : Level} {A : UU l} (x : A)
   where
 
-  is-eventually-constant-const-sequence :
-    is-eventually-constant-sequence (const ℕ x)
-  pr1 is-eventually-constant-const-sequence = zero-ℕ
-  pr2 is-eventually-constant-const-sequence p I = (zero-ℕ , λ _ _ → refl)
+  has-modulus-eventually-constant-const-sequence :
+    has-modulus-eventually-constant-sequence (const ℕ x)
+  pr1 has-modulus-eventually-constant-const-sequence = zero-ℕ
+  pr2 has-modulus-eventually-constant-const-sequence p I =
+    (zero-ℕ , λ _ _ → refl)
 ```
 
 ### An eventually constant sequence is eventually equal to the constant sequence of its eventual value
@@ -85,13 +86,13 @@ module _
 ```agda
 module _
   {l : Level} {A : UU l} {u : sequence A}
-  (H : is-eventually-constant-sequence u)
+  (H : has-modulus-eventually-constant-sequence u)
   where
 
-  eventually-eq-value-is-eventually-constant-sequence :
-    eventually-eq-sequence
-      ( const ℕ (value-is-eventually-constant-sequence H))
+  has-modulus-eventually-eq-value-has-modulus-eventually-constant-sequence :
+    has-modulus-eventually-eq-sequence
+      ( const ℕ (value-has-modulus-eventually-constant-sequence H))
       ( u)
-  eventually-eq-value-is-eventually-constant-sequence =
-    is-eventual-value-is-eventually-constant-sequence H
+  has-modulus-eventually-eq-value-has-modulus-eventually-constant-sequence =
+    is-eventual-value-has-modulus-eventually-constant-sequence H
 ```

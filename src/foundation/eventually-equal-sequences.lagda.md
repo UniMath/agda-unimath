@@ -40,23 +40,25 @@ module _
   {l : Level} {A : UU l} (u v : sequence A)
   where
 
-  eventually-eq-sequence : UU l
-  eventually-eq-sequence = is-eventually-pointed-sequence (λ n → u n ＝ v n)
+  has-modulus-eventually-eq-sequence : UU l
+  has-modulus-eventually-eq-sequence =
+    has-modulus-eventually-pointed-sequence (λ n → u n ＝ v n)
 ```
 
 ### Modulus of eventual equality
 
 ```agda
 module _
-  {l : Level} {A : UU l} {u v : sequence A} (H : eventually-eq-sequence u v)
+  {l : Level} {A : UU l} {u v : sequence A}
+  (H : has-modulus-eventually-eq-sequence u v)
   where
 
-  modulus-eventually-eq-sequence : ℕ
-  modulus-eventually-eq-sequence = pr1 H
+  modulus-has-modulus-eventually-eq-sequence : ℕ
+  modulus-has-modulus-eventually-eq-sequence = pr1 H
 
-  is-modulus-eventually-eq-sequence :
-    (n : ℕ) → leq-ℕ modulus-eventually-eq-sequence n → u n ＝ v n
-  is-modulus-eventually-eq-sequence = pr2 H
+  is-modulus-has-modulus-eventually-eq-sequence :
+    (n : ℕ) → leq-ℕ modulus-has-modulus-eventually-eq-sequence n → u n ＝ v n
+  is-modulus-has-modulus-eventually-eq-sequence = pr2 H
 ```
 
 ## Properties
@@ -65,20 +67,21 @@ module _
 
 ```agda
 module _
-  {l : Level} {A : UU l}
+  {l : Level} {A : UU l} (u : sequence A)
   where
 
-  refl-eventually-eq-sequence : (u : sequence A) → eventually-eq-sequence u u
-  pr1 (refl-eventually-eq-sequence u) = zero-ℕ
-  pr2 (refl-eventually-eq-sequence u) m H = refl
+  refl-has-modulus-eventually-eq-sequence :
+    has-modulus-eventually-eq-sequence u u
+  pr1 refl-has-modulus-eventually-eq-sequence = zero-ℕ
+  pr2 refl-has-modulus-eventually-eq-sequence m H = refl
 ```
 
 ### Homotopic sequences are eventually equal
 
 ```agda
-  eventually-eq-htpy-sequence :
-    {u v : sequence A} → (u ~ v) → eventually-eq-sequence u v
-  eventually-eq-htpy-sequence {u} {v} I = (zero-ℕ , λ n H → I n)
+  has-modulus-eventually-eq-htpy-sequence :
+    {u v : sequence A} → (u ~ v) → has-modulus-eventually-eq-sequence u v
+  has-modulus-eventually-eq-htpy-sequence {u} {v} I = (zero-ℕ , λ n H → I n)
 ```
 
 ### Eventual equality is a symmetric relation
@@ -88,18 +91,21 @@ module _
   {l : Level} {A : UU l} (u v : sequence A)
   where
 
-  symmetric-eventually-eq-sequence :
-    eventually-eq-sequence u v → eventually-eq-sequence v u
-  symmetric-eventually-eq-sequence =
-    map-Π-is-eventually-pointed-sequence (λ n → inv)
+  symmetric-has-modulus-eventually-eq-sequence :
+    has-modulus-eventually-eq-sequence u v →
+    has-modulus-eventually-eq-sequence v u
+  symmetric-has-modulus-eventually-eq-sequence =
+    map-Π-has-modulus-eventually-pointed-sequence (λ n → inv)
 
 module _
   {l : Level} {A : UU l} {u v : sequence A}
   where
 
-  inv-eventually-eq-sequence :
-    eventually-eq-sequence u v → eventually-eq-sequence v u
-  inv-eventually-eq-sequence = symmetric-eventually-eq-sequence u v
+  inv-has-modulus-eventually-eq-sequence :
+    has-modulus-eventually-eq-sequence u v →
+    has-modulus-eventually-eq-sequence v u
+  inv-has-modulus-eventually-eq-sequence =
+    symmetric-has-modulus-eventually-eq-sequence u v
 ```
 
 ### Eventual equality is a transitive relation
@@ -109,12 +115,12 @@ module _
   {l : Level} {A : UU l} (u v w : sequence A)
   where
 
-  transitive-eventually-eq-sequence :
-    eventually-eq-sequence v w →
-    eventually-eq-sequence u v →
-    eventually-eq-sequence u w
-  transitive-eventually-eq-sequence =
-    map-binary-Π-is-eventually-pointed-sequence (λ n I J → J ∙ I)
+  transitive-has-modulus-eventually-eq-sequence :
+    has-modulus-eventually-eq-sequence v w →
+    has-modulus-eventually-eq-sequence u v →
+    has-modulus-eventually-eq-sequence u w
+  transitive-has-modulus-eventually-eq-sequence =
+    map-binary-Π-has-modulus-eventually-pointed-sequence (λ n I J → J ∙ I)
 ```
 
 ### Conjugation of asymptotical equality
@@ -124,24 +130,24 @@ module _
   {l : Level} {A : UU l} {u u' v v' : sequence A}
   where
 
-  conjugate-eventually-eq-sequence :
-    eventually-eq-sequence u u' →
-    eventually-eq-sequence v v' →
-    eventually-eq-sequence u v →
-    eventually-eq-sequence u' v'
-  conjugate-eventually-eq-sequence H K I =
-    transitive-eventually-eq-sequence u' u v'
-      ( transitive-eventually-eq-sequence u v v' K I)
-      ( inv-eventually-eq-sequence H)
+  conjugate-has-modulus-eventually-eq-sequence :
+    has-modulus-eventually-eq-sequence u u' →
+    has-modulus-eventually-eq-sequence v v' →
+    has-modulus-eventually-eq-sequence u v →
+    has-modulus-eventually-eq-sequence u' v'
+  conjugate-has-modulus-eventually-eq-sequence H K I =
+    transitive-has-modulus-eventually-eq-sequence u' u v'
+      ( transitive-has-modulus-eventually-eq-sequence u v v' K I)
+      ( inv-has-modulus-eventually-eq-sequence H)
 
-  conjugate-eventually-eq-sequence' :
-    eventually-eq-sequence u u' →
-    eventually-eq-sequence v v' →
-    eventually-eq-sequence u' v' →
-    eventually-eq-sequence u v
-  conjugate-eventually-eq-sequence' H K I =
-    transitive-eventually-eq-sequence u u' v
-      ( transitive-eventually-eq-sequence u' v' v
-        (inv-eventually-eq-sequence K) I)
+  conjugate-has-modulus-eventually-eq-sequence' :
+    has-modulus-eventually-eq-sequence u u' →
+    has-modulus-eventually-eq-sequence v v' →
+    has-modulus-eventually-eq-sequence u' v' →
+    has-modulus-eventually-eq-sequence u v
+  conjugate-has-modulus-eventually-eq-sequence' H K I =
+    transitive-has-modulus-eventually-eq-sequence u u' v
+      ( transitive-has-modulus-eventually-eq-sequence u' v' v
+        (inv-has-modulus-eventually-eq-sequence K) I)
       ( H)
 ```
