@@ -10,6 +10,7 @@ module real-numbers.absolute-value-real-numbers where
 
 ```agda
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -25,6 +26,9 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.maximum-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.inequality-real-numbers
+open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.rational-real-numbers
 ```
 
 </details>
@@ -86,4 +90,25 @@ module _
 
     neg-leq-neg-abs-ℝ : leq-ℝ (neg-ℝ (abs-ℝ x)) (neg-ℝ x)
     neg-leq-neg-abs-ℝ = neg-leq-ℝ x (abs-ℝ x) leq-abs-ℝ
+```
+
+### Any rational number in the upper cut of an absolute value is positive
+
+```agda
+abstract
+  is-positive-upper-cut-abs-ℝ :
+    {l : Level} (p : ℚ) (x : ℝ l) → is-in-upper-cut-ℝ (abs-ℝ x) p →
+    is-positive-ℚ p
+  is-positive-upper-cut-abs-ℝ p x |x|<p =
+    is-positive-le-zero-ℚ
+      ( p)
+      ( reflects-le-real-ℚ
+        ( zero-ℚ)
+        ( p)
+        (concatenate-leq-le-ℝ
+          ( zero-ℝ)
+          ( abs-ℝ x)
+          ( real-ℚ p)
+          ( is-nonnegative-abs-ℝ x)
+          ( le-upper-cut-real-ℚ p (abs-ℝ x) |x|<p)))
 ```

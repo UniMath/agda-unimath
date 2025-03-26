@@ -19,6 +19,7 @@ open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.conjunction
@@ -31,10 +32,14 @@ open import foundation.propositional-truncations
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.inequality-real-numbers
 ```
 
 </details>
@@ -237,8 +242,22 @@ module _
   abstract
     is-arithmetically-located-lower-upper-mul-ℝ :
       is-arithmetically-located-lower-upper-ℝ lower-real-mul-ℝ upper-real-mul-ℝ
-    is-arithmetically-located-lower-upper-mul-ℝ ε⁺ =
+    is-arithmetically-located-lower-upper-mul-ℝ ε⁺@(ε , _) =
       do
+        p , |x|<p ← is-inhabited-upper-cut-ℝ (abs-ℝ x)
+        q , |y|<q ← is-inhabited-upper-cut-ℝ (abs-ℝ y)
+        let
+          p⁺ : ℚ⁺
+          p⁺ = p , is-positive-upper-cut-abs-ℝ p x |x|<p
+          q⁺ : ℚ⁺
+          q⁺ = q , is-positive-upper-cut-abs-ℝ q y |y|<q
+          (ε₁⁺@(ε₁ , _) , ε₂⁺@(ε₂ , _) , ε₁+ε₂=ε) = split-ℚ⁺ ε⁺
+          (δ⁺@(δ , _) , δ<1 , δ<ε₁/⟨q+1⟩) =
+            strict-min-law-ℚ⁺ one-ℚ⁺ (ε₁⁺ *ℚ⁺ inv-ℚ⁺ (q⁺ +ℚ⁺ one-ℚ⁺))
+          (θ⁺@(θ , _) , θ<1 , θ<ε₂/⟨p+1⟩) =
+            strict-min-law-ℚ⁺ one-ℚ⁺ (ε₂⁺ *ℚ⁺ inv-ℚ⁺ (p⁺ +ℚ⁺ one-ℚ⁺))
+        ((a , b) , b<a+δ , a<x , x<b) ← is-arithmetically-located-ℝ x δ⁺
+        ((c , d) , d<c+θ , c<y , y<d) ← is-arithmetically-located-ℝ y θ⁺
         {!   !}
       where
         open
