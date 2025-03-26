@@ -324,6 +324,25 @@ module _
       ( max-is-least-binary-upper-bound-Decidable-Total-Order)
 ```
 
+### A binary minimum of two values is less than or equal to the binary maximum
+
+```agda
+  abstract
+    min-leq-max-Decidable-Total-Order :
+      leq-Decidable-Total-Order
+        ( T)
+        ( min-Decidable-Total-Order T x y)
+        ( max-Decidable-Total-Order T x y)
+    min-leq-max-Decidable-Total-Order =
+      transitive-leq-Decidable-Total-Order
+        ( T)
+        ( min-Decidable-Total-Order T x y)
+        ( x)
+        ( max-Decidable-Total-Order T x y)
+        ( leq-left-max-Decidable-Total-Order)
+        ( leq-left-min-Decidable-Total-Order)
+```
+
 ### Decidable total orders are meet semilattices
 
 ```agda

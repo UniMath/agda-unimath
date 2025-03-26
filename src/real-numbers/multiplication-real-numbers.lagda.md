@@ -258,7 +258,10 @@ module _
             strict-min-law-ℚ⁺ one-ℚ⁺ (ε₂⁺ *ℚ⁺ inv-ℚ⁺ (p⁺ +ℚ⁺ one-ℚ⁺))
         ((a , b) , b<a+δ , a<x , x<b) ← is-arithmetically-located-ℝ x δ⁺
         ((c , d) , d<c+θ , c<y , y<d) ← is-arithmetically-located-ℝ y θ⁺
-        {!   !}
+        let
+          min = min-ℚ (min-ℚ (a *ℚ c) (a *ℚ d)) (min-ℚ (b *ℚ c) (b *ℚ d))
+          max = max-ℚ (max-ℚ (a *ℚ c) (a *ℚ d)) (max-ℚ (b *ℚ c) (b *ℚ d))
+        intro-exists (min , max) {!   !}
       where
         open
           do-syntax-trunc-Prop
