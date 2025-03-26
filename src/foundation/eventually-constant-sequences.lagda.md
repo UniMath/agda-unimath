@@ -58,10 +58,10 @@ module _
   value-has-modulus-eventually-constant-sequence =
     u (modulus-has-modulus-eventually-pointed-sequence H)
 
-  is-eventual-value-has-modulus-eventually-constant-sequence :
+  has-modulus-eventual-value-has-modulus-eventually-constant-sequence :
     has-modulus-eventually-pointed-sequence
       (λ n → value-has-modulus-eventually-constant-sequence ＝ u n)
-  is-eventual-value-has-modulus-eventually-constant-sequence =
+  has-modulus-eventual-value-has-modulus-eventually-constant-sequence =
     value-at-modulus-has-modulus-eventually-pointed-sequence H
 ```
 
@@ -94,5 +94,5 @@ module _
       ( const ℕ (value-has-modulus-eventually-constant-sequence H))
       ( u)
   has-modulus-eventually-eq-value-has-modulus-eventually-constant-sequence =
-    is-eventual-value-has-modulus-eventually-constant-sequence H
+    has-modulus-eventual-value-has-modulus-eventually-constant-sequence H
 ```
