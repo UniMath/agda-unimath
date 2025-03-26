@@ -160,7 +160,7 @@ module _
           ( x)
           ( y)
           ( is-least-binary-upper-bound-binary-max-ℝ x y)
-          ( is-commutative-is-binary-least-upper-bound-Large-Poset
+          ( is-binary-least-upper-bound-swap-Large-Poset
             ( ℝ-Large-Poset)
             ( y)
             ( x)
