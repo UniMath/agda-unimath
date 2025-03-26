@@ -36,13 +36,16 @@ open import real-numbers.lower-dedekind-real-numbers
 
 ## Idea
 
-The minimum of two
-[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers) `x`, `y`
-is a lower Dedekind real number with cut equal to the intersection of the cuts
-of `x` and `y`.
+The
+{{#concept "minimum" Disambiguation="binary, lower Dedekind real numbers" Agda=binary-min-lower-ℝ WD="minimum" WDID=Q10585806}}
+of two
+[lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md) `x`
+and `y` is a lower Dedekind real number with cut equal to the intersection of
+the cuts of `x` and `y`.
 
 The minimum of a family of lower Dedekind real numbers is not always a lower
-Dedekind real number.
+Dedekind real number. For example, the minimum of all lower Dedekind real
+numbers would have an empty cut and would fail to be inhabited.
 
 ## Definition
 
@@ -56,55 +59,70 @@ module _
   cut-binary-min-lower-ℝ : subtype (l1 ⊔ l2) ℚ
   cut-binary-min-lower-ℝ = intersection-subtype (cut-lower-ℝ x) (cut-lower-ℝ y)
 
-  min-inhabitants-in-binary-min-lower-ℝ :
-    (p q : ℚ) → (is-in-cut-lower-ℝ x p) → (is-in-cut-lower-ℝ y q) →
-    is-in-subtype cut-binary-min-lower-ℝ (min-ℚ p q)
-  min-inhabitants-in-binary-min-lower-ℝ p q p<x q<y =
-    is-in-cut-leq-ℚ-lower-ℝ x (min-ℚ p q) p (leq-left-min-ℚ p q) p<x ,
-        is-in-cut-leq-ℚ-lower-ℝ y (min-ℚ p q) q (leq-right-min-ℚ p q) q<y
+  abstract
+    min-inhabitants-in-binary-min-lower-ℝ :
+      (p q : ℚ) → (is-in-cut-lower-ℝ x p) → (is-in-cut-lower-ℝ y q) →
+      is-in-subtype cut-binary-min-lower-ℝ (min-ℚ p q)
+    min-inhabitants-in-binary-min-lower-ℝ p q p<x q<y =
+      is-in-cut-leq-ℚ-lower-ℝ x (min-ℚ p q) p (leq-left-min-ℚ p q) p<x ,
+          is-in-cut-leq-ℚ-lower-ℝ y (min-ℚ p q) q (leq-right-min-ℚ p q) q<y
 
-  is-inhabited-cut-binary-min-lower-ℝ : exists ℚ cut-binary-min-lower-ℝ
-  is-inhabited-cut-binary-min-lower-ℝ =
-    map-binary-exists
-      ( is-in-subtype cut-binary-min-lower-ℝ)
-      ( min-ℚ)
-      ( min-inhabitants-in-binary-min-lower-ℝ)
-      ( is-inhabited-cut-lower-ℝ x)
-      ( is-inhabited-cut-lower-ℝ y)
+    is-inhabited-cut-binary-min-lower-ℝ : exists ℚ cut-binary-min-lower-ℝ
+    is-inhabited-cut-binary-min-lower-ℝ =
+      map-binary-exists
+        ( is-in-subtype cut-binary-min-lower-ℝ)
+        ( min-ℚ)
+        ( min-inhabitants-in-binary-min-lower-ℝ)
+        ( is-inhabited-cut-lower-ℝ x)
+        ( is-inhabited-cut-lower-ℝ y)
 
-  is-rounded-cut-binary-min-lower-ℝ :
-    (q : ℚ) →
-    is-in-subtype cut-binary-min-lower-ℝ q ↔
-    exists ℚ (λ r → le-ℚ-Prop q r ∧ cut-binary-min-lower-ℝ r)
-  pr1 (is-rounded-cut-binary-min-lower-ℝ q) (q<x , q<y) =
-    map-binary-exists
-      ( λ r → le-ℚ q r × is-in-subtype cut-binary-min-lower-ℝ r)
-      ( min-ℚ)
-      ( λ rx ry (q<rx , rx<x) (q<ry , ry<y) →
-        le-min-le-both-ℚ q rx ry q<rx q<ry ,
-        min-inhabitants-in-binary-min-lower-ℝ rx ry rx<x ry<y)
-      ( forward-implication (is-rounded-cut-lower-ℝ x q) q<x)
-      ( forward-implication (is-rounded-cut-lower-ℝ y q) q<y)
-  pr2 (is-rounded-cut-binary-min-lower-ℝ q) =
-    elim-exists
-      ( cut-binary-min-lower-ℝ q)
-      ( λ r (q<r , q<x , q<y) →
-        backward-implication
-          ( is-rounded-cut-lower-ℝ x q)
-          ( intro-exists r (q<r , q<x)) ,
-        backward-implication
-          ( is-rounded-cut-lower-ℝ y q)
-          ( intro-exists r (q<r , q<y)))
+    forward-implication-is-rounded-cut-binary-min-lower-ℝ :
+      (q : ℚ) →
+      is-in-subtype cut-binary-min-lower-ℝ q →
+      exists ℚ (λ r → le-ℚ-Prop q r ∧ cut-binary-min-lower-ℝ r)
+    forward-implication-is-rounded-cut-binary-min-lower-ℝ q (q<x , q<y) =
+      map-binary-exists
+        ( λ r → le-ℚ q r × is-in-subtype cut-binary-min-lower-ℝ r)
+        ( min-ℚ)
+        ( λ rx ry (q<rx , rx<x) (q<ry , ry<y) →
+          le-min-le-both-ℚ q rx ry q<rx q<ry ,
+          min-inhabitants-in-binary-min-lower-ℝ rx ry rx<x ry<y)
+        ( forward-implication (is-rounded-cut-lower-ℝ x q) q<x)
+        ( forward-implication (is-rounded-cut-lower-ℝ y q) q<y)
+
+    backward-implication-is-rounded-cut-binary-min-lower-ℝ :
+      (q : ℚ) →
+      exists ℚ (λ r → le-ℚ-Prop q r ∧ cut-binary-min-lower-ℝ r) →
+      is-in-subtype cut-binary-min-lower-ℝ q
+    backward-implication-is-rounded-cut-binary-min-lower-ℝ q =
+      elim-exists
+        ( cut-binary-min-lower-ℝ q)
+        ( λ r (q<r , q<x , q<y) →
+          backward-implication
+            ( is-rounded-cut-lower-ℝ x q)
+            ( intro-exists r (q<r , q<x)) ,
+          backward-implication
+            ( is-rounded-cut-lower-ℝ y q)
+            ( intro-exists r (q<r , q<y)))
+
+    is-rounded-cut-binary-min-lower-ℝ :
+      (q : ℚ) →
+      is-in-subtype cut-binary-min-lower-ℝ q ↔
+      exists ℚ (λ r → le-ℚ-Prop q r ∧ cut-binary-min-lower-ℝ r)
+    is-rounded-cut-binary-min-lower-ℝ q =
+      forward-implication-is-rounded-cut-binary-min-lower-ℝ q ,
+      backward-implication-is-rounded-cut-binary-min-lower-ℝ q
 
   binary-min-lower-ℝ : lower-ℝ (l1 ⊔ l2)
-  pr1 binary-min-lower-ℝ = cut-binary-min-lower-ℝ
-  pr1 (pr2 binary-min-lower-ℝ) = is-inhabited-cut-binary-min-lower-ℝ
-  pr2 (pr2 binary-min-lower-ℝ) = is-rounded-cut-binary-min-lower-ℝ
+  binary-min-lower-ℝ =
+    cut-binary-min-lower-ℝ ,
+    is-inhabited-cut-binary-min-lower-ℝ ,
+    is-rounded-cut-binary-min-lower-ℝ
 ```
 
 ## Properties
 
-### The binary minimum is a greatest lower bound
+### The binary minimum of lower Dedekind real numbers is a greatest lower bound
 
 ```agda
   is-greatest-binary-lower-bound-binary-min-lower-ℝ :
@@ -120,7 +138,7 @@ module _
       ( cut-lower-ℝ z)
 ```
 
-### The lower Dedekind reals form a large meet-semilattice
+### The lower Dedekind real numbers form a large meet-semilattice
 
 ```agda
 has-meets-lower-ℝ : has-meets-Large-Poset lower-ℝ-Large-Poset

@@ -27,18 +27,18 @@ open import order-theory.posets
 
 ## Idea
 
-A **large inflattice** is a [large poset](order-theory.large-posets.md) `P` such
-that for every family
+A {{#concept "large inflattice" Agda=Large-Inflattice}} is a
+[large poset](order-theory.large-posets.md) `P` such that for every family
 
 ```text
   x : I → type-Large-Poset P l1
 ```
 
 indexed by `I : UU l2` there is an element `⋀ x : type-Large-Poset P (l1 ⊔ l2)`
-such that the logical equivalence
+such that the [logical equivalence](foundation.logical-equivalences.md)
 
 ```text
-  (∀ᵢ y ≤ xᵢ ) ↔ (y ≤ ⋀ x)
+  (∀ᵢ y ≤ xᵢ) ↔ (y ≤ ⋀ x)
 ```
 
 holds for every element `y : type-Large-Poset P l3`.
@@ -178,7 +178,7 @@ module _
 
 ## Properties
 
-### The operation `inf` is order preserving
+### The infimum operation is order preserving
 
 ```agda
 module _

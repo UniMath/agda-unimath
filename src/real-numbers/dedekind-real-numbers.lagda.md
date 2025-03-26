@@ -18,6 +18,7 @@ open import foundation.complements-subtypes
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjoint-subtypes
 open import foundation.disjunction
 open import foundation.embeddings
 open import foundation.empty-types
@@ -29,6 +30,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
@@ -90,7 +92,7 @@ module _
 
   is-disjoint-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
   is-disjoint-prop-lower-upper-ℝ =
-    ∀' ℚ (λ q → ¬' (cut-lower-ℝ lx q ∧ cut-upper-ℝ uy q))
+    disjoint-subtype-Prop (cut-lower-ℝ lx) (cut-upper-ℝ uy)
 
   is-disjoint-lower-upper-ℝ : UU (l1 ⊔ l2)
   is-disjoint-lower-upper-ℝ = type-Prop is-disjoint-prop-lower-upper-ℝ
@@ -169,7 +171,7 @@ module _
     exists ℚ (λ q → (le-ℚ-Prop q r) ∧ (upper-cut-ℝ q))
   is-rounded-upper-cut-ℝ = is-rounded-cut-upper-ℝ upper-real-ℝ
 
-  is-disjoint-cut-ℝ : (q : ℚ) → ¬ (is-in-lower-cut-ℝ q × is-in-upper-cut-ℝ q)
+  is-disjoint-cut-ℝ : disjoint-subtype lower-cut-ℝ upper-cut-ℝ
   is-disjoint-cut-ℝ = pr1 (pr2 (pr2 x))
 
   is-located-lower-upper-cut-ℝ :
@@ -371,7 +373,7 @@ module _
 
 ```agda
 module _
-  {l : Level} (x y : ℝ l)
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
   subset-lower-cut-upper-cut-ℝ :
@@ -393,25 +395,42 @@ module _
       ( λ q → map-tot-exists (λ p → tot (λ _ K → K ∘ H p)))
 
 module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  sim-lower-cut-sim-upper-cut-ℝ :
+    sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) →
+    sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
+  pr1 (sim-lower-cut-sim-upper-cut-ℝ (_ , uy⊆ux)) =
+    subset-lower-cut-upper-cut-ℝ x y uy⊆ux
+  pr2 (sim-lower-cut-sim-upper-cut-ℝ (ux⊆uy , _)) =
+    subset-lower-cut-upper-cut-ℝ y x ux⊆uy
+
+  sim-upper-cut-sim-lower-cut-ℝ :
+    sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) →
+    sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y)
+  pr1 (sim-upper-cut-sim-lower-cut-ℝ (_ , ly⊆lx)) =
+    subset-upper-cut-lower-cut-ℝ y x ly⊆lx
+  pr2 (sim-upper-cut-sim-lower-cut-ℝ (lx⊆ly , _)) =
+    subset-upper-cut-lower-cut-ℝ x y lx⊆ly
+
+module _
   {l : Level} (x y : ℝ l)
   where
 
   eq-lower-cut-eq-upper-cut-ℝ :
     upper-cut-ℝ x ＝ upper-cut-ℝ y → lower-cut-ℝ x ＝ lower-cut-ℝ y
   eq-lower-cut-eq-upper-cut-ℝ H =
-    antisymmetric-leq-subtype
+    eq-sim-subtype
       ( lower-cut-ℝ x)
       ( lower-cut-ℝ y)
-      ( subset-lower-cut-upper-cut-ℝ x y
-        ( pr2 ∘ has-same-elements-eq-subtype
-          ( upper-cut-ℝ x)
-          ( upper-cut-ℝ y)
-          ( H)))
-      ( subset-lower-cut-upper-cut-ℝ y x
-        ( pr1 ∘ has-same-elements-eq-subtype
-          ( upper-cut-ℝ x)
-          ( upper-cut-ℝ y)
-          ( H)))
+      ( sim-lower-cut-sim-upper-cut-ℝ
+        ( x)
+        ( y)
+        ( tr
+          ( sim-subtype (upper-cut-ℝ x))
+          ( H)
+          ( refl-sim-subtype (upper-cut-ℝ x))))
 
   eq-lower-real-eq-upper-real-ℝ :
     upper-real-ℝ x ＝ upper-real-ℝ y → lower-real-ℝ x ＝ lower-real-ℝ y

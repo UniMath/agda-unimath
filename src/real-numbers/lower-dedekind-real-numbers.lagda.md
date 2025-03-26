@@ -10,6 +10,7 @@ module real-numbers.lower-dedekind-real-numbers where
 
 ```agda
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -101,15 +102,18 @@ module _
 
 ## Properties
 
-### There is a largest lower Dedekind real, whose cut is all rational numbers
+### The greatest lower Dedekind real
+
+There is a largest lower Dedekind real whose cut is all rational numbers. We
+call this element **infinity**.
 
 ```agda
-∞-lower-ℝ : lower-ℝ lzero
-pr1 ∞-lower-ℝ _ = unit-Prop
-pr1 (pr2 ∞-lower-ℝ) = intro-exists zero-ℚ star
-pr1 (pr2 (pr2 ∞-lower-ℝ) q) _ =
+infinity-lower-ℝ : lower-ℝ lzero
+pr1 infinity-lower-ℝ _ = unit-Prop
+pr1 (pr2 infinity-lower-ℝ) = intro-exists zero-ℚ star
+pr1 (pr2 (pr2 infinity-lower-ℝ) q) _ =
   intro-exists (q +ℚ one-ℚ) (le-right-add-rational-ℚ⁺ q one-ℚ⁺ , star)
-pr2 (pr2 (pr2 ∞-lower-ℝ) q) _ = star
+pr2 (pr2 (pr2 infinity-lower-ℝ) q) _ = star
 ```
 
 ### The lower Dedekind reals form a set
@@ -138,6 +142,19 @@ module _
       ( intro-exists q (p<q , q<x))
 ```
 
+### Lower Dedekind cuts are closed under subtraction by positive rational numbers
+
+```agda
+module _
+  {l : Level} (x : lower-ℝ l) (p : ℚ) (d : ℚ⁺)
+  where
+
+  is-in-cut-diff-rational-ℚ⁺-lower-ℝ :
+    is-in-cut-lower-ℝ x p → is-in-cut-lower-ℝ x (p -ℚ rational-ℚ⁺ d)
+  is-in-cut-diff-rational-ℚ⁺-lower-ℝ =
+    is-in-cut-le-ℚ-lower-ℝ x (p -ℚ rational-ℚ⁺ d) p (le-diff-rational-ℚ⁺ p d)
+```
+
 ### Lower Dedekind cuts are closed under inequality on the rationals
 
 ```agda
@@ -164,8 +181,7 @@ module _
 
   eq-sim-cut-lower-ℝ : sim-subtype (cut-lower-ℝ x) (cut-lower-ℝ y) → x ＝ y
   eq-sim-cut-lower-ℝ =
-    eq-eq-cut-lower-ℝ ∘
-    antisymmetric-sim-subtype (cut-lower-ℝ x) (cut-lower-ℝ y)
+    eq-eq-cut-lower-ℝ ∘ eq-sim-subtype (cut-lower-ℝ x) (cut-lower-ℝ y)
 ```
 
 ## See also

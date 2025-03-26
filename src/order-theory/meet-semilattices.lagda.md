@@ -245,6 +245,46 @@ module _
     meet-Meet-Semilattice x y
   pr2 (has-greatest-binary-lower-bound-Meet-Semilattice x y) =
     is-greatest-binary-lower-bound-meet-Meet-Semilattice x y
+
+  leq-left-meet-Meet-Semilattice :
+    (x y : type-Meet-Semilattice) → leq-Meet-Semilattice (x ∧ y) x
+  leq-left-meet-Meet-Semilattice x y =
+    equational-reasoning
+      (x ∧ y) ∧ x
+      ＝ x ∧ (x ∧ y) by commutative-meet-Meet-Semilattice _ _
+      ＝ (x ∧ x) ∧ y by inv (associative-meet-Meet-Semilattice x x y)
+      ＝ x ∧ y by ap (_∧ y) (idempotent-meet-Meet-Semilattice x)
+
+  leq-right-meet-Meet-Semilattice :
+    (x y : type-Meet-Semilattice) → leq-Meet-Semilattice (x ∧ y) y
+  leq-right-meet-Meet-Semilattice x y =
+    equational-reasoning
+      (x ∧ y) ∧ y
+      ＝ x ∧ (y ∧ y) by associative-meet-Meet-Semilattice x y y
+      ＝ x ∧ y by ap (x ∧_) (idempotent-meet-Meet-Semilattice y)
+
+  meet-leq-leq-Meet-Semilattice :
+    (a b c d : type-Meet-Semilattice) →
+    leq-Meet-Semilattice a b → leq-Meet-Semilattice c d →
+    leq-Meet-Semilattice (meet-Meet-Semilattice a c) (meet-Meet-Semilattice b d)
+  meet-leq-leq-Meet-Semilattice a b c d a≤b c≤d =
+    forward-implication
+      ( is-greatest-binary-lower-bound-meet-Meet-Semilattice
+        ( b)
+        ( d)
+        ( meet-Meet-Semilattice a c))
+      ( transitive-leq-Meet-Semilattice
+        ( a ∧ c)
+        ( a)
+        ( b)
+        ( a≤b)
+        ( leq-left-meet-Meet-Semilattice a c) ,
+        transitive-leq-Meet-Semilattice
+          ( a ∧ c)
+          ( c)
+          ( d)
+          ( c≤d)
+          ( leq-right-meet-Meet-Semilattice a c))
 ```
 
 ### The predicate on posets of being a meet-semilattice
@@ -421,6 +461,32 @@ module _
         ( y)
         ( z))
       ( H , K)
+
+  meet-leq-leq-Order-Theoretic-Meet-Semilattice :
+    (a b c d : type-Order-Theoretic-Meet-Semilattice) →
+    leq-Order-Theoretic-Meet-Semilattice a b →
+    leq-Order-Theoretic-Meet-Semilattice c d →
+    leq-Order-Theoretic-Meet-Semilattice
+      (meet-Order-Theoretic-Meet-Semilattice a c)
+      (meet-Order-Theoretic-Meet-Semilattice b d)
+  meet-leq-leq-Order-Theoretic-Meet-Semilattice a b c d a≤b c≤d =
+    forward-implication
+      ( is-greatest-binary-lower-bound-meet-Order-Theoretic-Meet-Semilattice
+        ( b)
+        ( d)
+        ( meet-Order-Theoretic-Meet-Semilattice a c))
+      ( transitive-leq-Order-Theoretic-Meet-Semilattice
+          ( a ∧ c)
+          ( a)
+          ( b)
+          ( a≤b)
+          ( leq-left-meet-Order-Theoretic-Meet-Semilattice a c) ,
+        transitive-leq-Order-Theoretic-Meet-Semilattice
+          ( a ∧ c)
+          ( c)
+          ( d)
+          ( c≤d)
+          ( leq-right-meet-Order-Theoretic-Meet-Semilattice a c))
 ```
 
 ## Properties

@@ -1,6 +1,8 @@
 # Inequality on the rational numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.inequality-rational-numbers where
 ```
 
@@ -9,6 +11,7 @@ module elementary-number-theory.inequality-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.difference-rational-numbers
@@ -39,8 +42,11 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.transposition-inequalities-along-order-preserving-retractions-posets
+open import order-theory.transposition-inequalities-along-sections-of-order-preserving-maps-posets
 ```
 
 </details>
@@ -98,6 +104,9 @@ leq-ℚ-Decidable-Prop x y =
 refl-leq-ℚ : (x : ℚ) → leq-ℚ x x
 refl-leq-ℚ x =
   refl-leq-ℤ (numerator-ℚ x *ℤ denominator-ℚ x)
+
+leq-eq-ℚ : (x y : ℚ) → x ＝ y → leq-ℚ x y
+leq-eq-ℚ x y x=y = tr (leq-ℚ x) x=y (refl-leq-ℚ x)
 ```
 
 ### Inequality on the rational numbers is antisymmetric
@@ -322,6 +331,14 @@ module _
 
   reflects-leq-right-add-ℚ : leq-ℚ (z +ℚ x) (z +ℚ y) → leq-ℚ x y
   reflects-leq-right-add-ℚ = forward-implication iff-translate-left-leq-ℚ
+
+right-add-hom-leq-ℚ : (z : ℚ) → hom-Poset ℚ-Poset ℚ-Poset
+pr1 (right-add-hom-leq-ℚ z) x = x +ℚ z
+pr2 (right-add-hom-leq-ℚ z) = preserves-leq-left-add-ℚ z
+
+left-add-hom-leq-ℚ : (z : ℚ) → hom-Poset ℚ-Poset ℚ-Poset
+pr1 (left-add-hom-leq-ℚ z) x = z +ℚ x
+pr2 (left-add-hom-leq-ℚ z) = preserves-leq-right-add-ℚ z
 ```
 
 ### Addition on the rational numbers preserves inequality
@@ -336,6 +353,73 @@ preserves-leq-add-ℚ {a} {b} {c} {d} H K =
     ( b +ℚ d)
     ( preserves-leq-right-add-ℚ b c d K)
     ( preserves-leq-left-add-ℚ c a b H)
+```
+
+### Transposing additions on inequalities of rational numbers
+
+```agda
+leq-transpose-right-diff-ℚ : (x y z : ℚ) → x ≤-ℚ (y -ℚ z) → x +ℚ z ≤-ℚ y
+leq-transpose-right-diff-ℚ x y z x≤y-z =
+  leq-transpose-is-section-hom-Poset
+    ( ℚ-Poset)
+    ( ℚ-Poset)
+    ( right-add-hom-leq-ℚ z)
+    ( _-ℚ z)
+    ( is-section-diff-ℚ z)
+    ( x)
+    ( y)
+    ( x≤y-z)
+
+leq-transpose-right-add-ℚ : (x y z : ℚ) → x ≤-ℚ y +ℚ z → x -ℚ z ≤-ℚ y
+leq-transpose-right-add-ℚ x y z x≤y+z =
+  leq-transpose-is-section-hom-Poset
+    ( ℚ-Poset)
+    ( ℚ-Poset)
+    ( right-add-hom-leq-ℚ (neg-ℚ z))
+    ( _+ℚ z)
+    ( is-retraction-diff-ℚ z)
+    ( x)
+    ( y)
+    ( x≤y+z)
+
+leq-transpose-left-add-ℚ : (x y z : ℚ) → x +ℚ y ≤-ℚ z → x ≤-ℚ z -ℚ y
+leq-transpose-left-add-ℚ x y z x+y≤z =
+  leq-transpose-is-retraction-hom-Poset
+    ( ℚ-Poset)
+    ( ℚ-Poset)
+    ( _+ℚ y)
+    ( right-add-hom-leq-ℚ (neg-ℚ y))
+    ( is-retraction-diff-ℚ y)
+    ( x)
+    ( z)
+    ( x+y≤z)
+
+leq-transpose-left-diff-ℚ : (x y z : ℚ) → x -ℚ y ≤-ℚ z → x ≤-ℚ z +ℚ y
+leq-transpose-left-diff-ℚ x y z x-y≤z =
+  leq-transpose-is-retraction-hom-Poset
+    ( ℚ-Poset)
+    ( ℚ-Poset)
+    ( _-ℚ y)
+    ( right-add-hom-leq-ℚ y)
+    ( is-section-diff-ℚ y)
+    ( x)
+    ( z)
+    ( x-y≤z)
+
+leq-iff-transpose-left-add-ℚ : (x y z : ℚ) → x +ℚ y ≤-ℚ z ↔ x ≤-ℚ z -ℚ y
+pr1 (leq-iff-transpose-left-add-ℚ x y z) = leq-transpose-left-add-ℚ x y z
+pr2 (leq-iff-transpose-left-add-ℚ x y z) = leq-transpose-right-diff-ℚ x z y
+
+leq-iff-transpose-left-diff-ℚ : (x y z : ℚ) → x -ℚ y ≤-ℚ z ↔ x ≤-ℚ z +ℚ y
+pr1 (leq-iff-transpose-left-diff-ℚ x y z) = leq-transpose-left-diff-ℚ x y z
+pr2 (leq-iff-transpose-left-diff-ℚ x y z) = leq-transpose-right-add-ℚ x z y
+```
+
+### Negation of rational numbers reverses inequality
+
+```agda
+neg-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ (neg-ℚ y) (neg-ℚ x)
+neg-leq-ℚ x y = neg-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
 ```
 
 ## See also

@@ -9,6 +9,7 @@ module real-numbers.upper-dedekind-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
@@ -101,15 +102,18 @@ module _
 
 ## Properties
 
-### There is a least upper Dedekind real, whose cut is all rational numbers
+### The least upper Dedekind real
+
+There is a least upper Dedekind real whose cut is all rational numbers. We call
+this element **negative infinity**.
 
 ```agda
-neg-∞-upper-ℝ : upper-ℝ lzero
-pr1 neg-∞-upper-ℝ _ = unit-Prop
-pr1 (pr2 neg-∞-upper-ℝ) = intro-exists zero-ℚ star
-pr1 (pr2 (pr2 neg-∞-upper-ℝ) q) _ =
+neg-infinity-upper-ℝ : upper-ℝ lzero
+pr1 neg-infinity-upper-ℝ _ = unit-Prop
+pr1 (pr2 neg-infinity-upper-ℝ) = intro-exists zero-ℚ star
+pr1 (pr2 (pr2 neg-infinity-upper-ℝ) q) _ =
   intro-exists (q -ℚ one-ℚ) (le-diff-rational-ℚ⁺ q one-ℚ⁺ , star)
-pr2 (pr2 (pr2 neg-∞-upper-ℝ) q) _ = star
+pr2 (pr2 (pr2 neg-infinity-upper-ℝ) q) _ = star
 ```
 
 ### The upper Dedekind reals form a set
@@ -138,6 +142,23 @@ module _
       ( intro-exists p (p<q , p<x))
 ```
 
+### Upper Dedekind cuts are closed under the addition of positive rational numbers
+
+```agda
+module _
+  {l : Level} (x : upper-ℝ l) (p : ℚ) (d : ℚ⁺)
+  where
+
+  is-in-cut-add-rational-ℚ⁺-upper-ℝ :
+    is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x (p +ℚ rational-ℚ⁺ d)
+  is-in-cut-add-rational-ℚ⁺-upper-ℝ =
+    is-in-cut-le-ℚ-upper-ℝ
+      ( x)
+      ( p)
+      ( p +ℚ rational-ℚ⁺ d)
+      ( le-right-add-rational-ℚ⁺ p d)
+```
+
 ### Upper Dedekind cuts are closed under inequality on the rationals
 
 ```agda
@@ -164,8 +185,7 @@ module _
 
   eq-sim-cut-upper-ℝ : sim-subtype (cut-upper-ℝ x) (cut-upper-ℝ y) → x ＝ y
   eq-sim-cut-upper-ℝ =
-    eq-eq-cut-upper-ℝ ∘
-    antisymmetric-sim-subtype (cut-upper-ℝ x) (cut-upper-ℝ y)
+    eq-eq-cut-upper-ℝ ∘ eq-sim-subtype (cut-upper-ℝ x) (cut-upper-ℝ y)
 ```
 
 ## See also
