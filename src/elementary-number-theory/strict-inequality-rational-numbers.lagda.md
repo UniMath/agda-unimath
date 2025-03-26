@@ -109,15 +109,16 @@ leq-le-ℚ {x} {y} = leq-le-fraction-ℤ {fraction-ℚ x} {fraction-ℚ y}
 ### Strict inequality on the rationals is asymmetric
 
 ```agda
-asymmetric-le-ℚ : (x y : ℚ) → le-ℚ x y → ¬ (le-ℚ y x)
-asymmetric-le-ℚ x y =
-  asymmetric-le-fraction-ℤ
-    ( fraction-ℚ x)
-    ( fraction-ℚ y)
+abstract
+  asymmetric-le-ℚ : (x y : ℚ) → le-ℚ x y → ¬ (le-ℚ y x)
+  asymmetric-le-ℚ x y =
+    asymmetric-le-fraction-ℤ
+      ( fraction-ℚ x)
+      ( fraction-ℚ y)
 
-irreflexive-le-ℚ : (x : ℚ) → ¬ (le-ℚ x x)
-irreflexive-le-ℚ =
-  is-irreflexive-is-asymmetric le-ℚ asymmetric-le-ℚ
+  irreflexive-le-ℚ : (x : ℚ) → ¬ (le-ℚ x x)
+  irreflexive-le-ℚ =
+    is-irreflexive-is-asymmetric le-ℚ asymmetric-le-ℚ
 ```
 
 ### Strict inequality on the rationals is transitive
@@ -127,12 +128,13 @@ module _
   (x y z : ℚ)
   where
 
-  transitive-le-ℚ : le-ℚ y z → le-ℚ x y → le-ℚ x z
-  transitive-le-ℚ =
-    transitive-le-fraction-ℤ
-      ( fraction-ℚ x)
-      ( fraction-ℚ y)
-      ( fraction-ℚ z)
+  abstract
+    transitive-le-ℚ : le-ℚ y z → le-ℚ x y → le-ℚ x z
+    transitive-le-ℚ =
+      transitive-le-fraction-ℤ
+        ( fraction-ℚ x)
+        ( fraction-ℚ y)
+        ( fraction-ℚ z)
 ```
 
 ### Concatenation rules for inequality and strict inequality on the rational numbers
@@ -142,19 +144,20 @@ module _
   (x y z : ℚ)
   where
 
-  concatenate-le-leq-ℚ : le-ℚ x y → leq-ℚ y z → le-ℚ x z
-  concatenate-le-leq-ℚ =
-    concatenate-le-leq-fraction-ℤ
-      ( fraction-ℚ x)
-      ( fraction-ℚ y)
-      ( fraction-ℚ z)
+  abstract
+    concatenate-le-leq-ℚ : le-ℚ x y → leq-ℚ y z → le-ℚ x z
+    concatenate-le-leq-ℚ =
+      concatenate-le-leq-fraction-ℤ
+        ( fraction-ℚ x)
+        ( fraction-ℚ y)
+        ( fraction-ℚ z)
 
-  concatenate-leq-le-ℚ : leq-ℚ x y → le-ℚ y z → le-ℚ x z
-  concatenate-leq-le-ℚ =
-    concatenate-leq-le-fraction-ℤ
-      ( fraction-ℚ x)
-      ( fraction-ℚ y)
-      ( fraction-ℚ z)
+    concatenate-leq-le-ℚ : leq-ℚ x y → le-ℚ y z → le-ℚ x z
+    concatenate-leq-le-ℚ =
+      concatenate-leq-le-fraction-ℤ
+        ( fraction-ℚ x)
+        ( fraction-ℚ y)
+        ( fraction-ℚ z)
 ```
 
 ### The canonical map from integer fractions to the rational numbers preserves strict inequality
@@ -180,59 +183,61 @@ module _
   (x : ℚ) (p : fraction-ℤ)
   where
 
-  preserves-le-right-rational-fraction-ℤ :
-    le-fraction-ℤ (fraction-ℚ x) p → le-ℚ x (rational-fraction-ℤ p)
-  preserves-le-right-rational-fraction-ℤ H =
-    concatenate-le-sim-fraction-ℤ
-      ( fraction-ℚ x)
-      ( p)
-      ( fraction-ℚ ( rational-fraction-ℤ p))
-      ( H)
-      ( sim-reduced-fraction-ℤ p)
-
-  reflects-le-right-rational-fraction-ℤ :
-    le-ℚ x (rational-fraction-ℤ p) → le-fraction-ℤ (fraction-ℚ x) p
-  reflects-le-right-rational-fraction-ℤ H =
-    concatenate-le-sim-fraction-ℤ
-      ( fraction-ℚ x)
-      ( reduce-fraction-ℤ p)
-      ( p)
-      ( H)
-      ( symmetric-sim-fraction-ℤ
-        ( p)
-        ( reduce-fraction-ℤ p)
-        ( sim-reduced-fraction-ℤ p))
-
-  iff-le-right-rational-fraction-ℤ :
-    le-fraction-ℤ (fraction-ℚ x) p ↔ le-ℚ x (rational-fraction-ℤ p)
-  pr1 iff-le-right-rational-fraction-ℤ = preserves-le-right-rational-fraction-ℤ
-  pr2 iff-le-right-rational-fraction-ℤ = reflects-le-right-rational-fraction-ℤ
-
-  preserves-le-left-rational-fraction-ℤ :
-    le-fraction-ℤ p (fraction-ℚ x) → le-ℚ (rational-fraction-ℤ p) x
-  preserves-le-left-rational-fraction-ℤ =
-    concatenate-sim-le-fraction-ℤ
-      ( fraction-ℚ ( rational-fraction-ℤ p))
-      ( p)
-      ( fraction-ℚ x)
-      ( symmetric-sim-fraction-ℤ
+  abstract
+    preserves-le-right-rational-fraction-ℤ :
+      le-fraction-ℤ (fraction-ℚ x) p → le-ℚ x (rational-fraction-ℤ p)
+    preserves-le-right-rational-fraction-ℤ H =
+      concatenate-le-sim-fraction-ℤ
+        ( fraction-ℚ x)
         ( p)
         ( fraction-ℚ ( rational-fraction-ℤ p))
-        ( sim-reduced-fraction-ℤ p))
+        ( H)
+        ( sim-reduced-fraction-ℤ p)
 
-  reflects-le-left-rational-fraction-ℤ :
-    le-ℚ (rational-fraction-ℤ p) x → le-fraction-ℤ p (fraction-ℚ x)
-  reflects-le-left-rational-fraction-ℤ =
-    concatenate-sim-le-fraction-ℤ
-      ( p)
-      ( reduce-fraction-ℤ p)
-      ( fraction-ℚ x)
-      ( sim-reduced-fraction-ℤ p)
+    reflects-le-right-rational-fraction-ℤ :
+      le-ℚ x (rational-fraction-ℤ p) → le-fraction-ℤ (fraction-ℚ x) p
+    reflects-le-right-rational-fraction-ℤ H =
+      concatenate-le-sim-fraction-ℤ
+        ( fraction-ℚ x)
+        ( reduce-fraction-ℤ p)
+        ( p)
+        ( H)
+        ( symmetric-sim-fraction-ℤ
+          ( p)
+          ( reduce-fraction-ℤ p)
+          ( sim-reduced-fraction-ℤ p))
 
-  iff-le-left-rational-fraction-ℤ :
-    le-fraction-ℤ p (fraction-ℚ x) ↔ le-ℚ (rational-fraction-ℤ p) x
-  pr1 iff-le-left-rational-fraction-ℤ = preserves-le-left-rational-fraction-ℤ
-  pr2 iff-le-left-rational-fraction-ℤ = reflects-le-left-rational-fraction-ℤ
+    iff-le-right-rational-fraction-ℤ :
+      le-fraction-ℤ (fraction-ℚ x) p ↔ le-ℚ x (rational-fraction-ℤ p)
+    pr1 iff-le-right-rational-fraction-ℤ =
+      preserves-le-right-rational-fraction-ℤ
+    pr2 iff-le-right-rational-fraction-ℤ = reflects-le-right-rational-fraction-ℤ
+
+    preserves-le-left-rational-fraction-ℤ :
+      le-fraction-ℤ p (fraction-ℚ x) → le-ℚ (rational-fraction-ℤ p) x
+    preserves-le-left-rational-fraction-ℤ =
+      concatenate-sim-le-fraction-ℤ
+        ( fraction-ℚ ( rational-fraction-ℤ p))
+        ( p)
+        ( fraction-ℚ x)
+        ( symmetric-sim-fraction-ℤ
+          ( p)
+          ( fraction-ℚ ( rational-fraction-ℤ p))
+          ( sim-reduced-fraction-ℤ p))
+
+    reflects-le-left-rational-fraction-ℤ :
+      le-ℚ (rational-fraction-ℤ p) x → le-fraction-ℤ p (fraction-ℚ x)
+    reflects-le-left-rational-fraction-ℤ =
+      concatenate-sim-le-fraction-ℤ
+        ( p)
+        ( reduce-fraction-ℤ p)
+        ( fraction-ℚ x)
+        ( sim-reduced-fraction-ℤ p)
+
+    iff-le-left-rational-fraction-ℤ :
+      le-fraction-ℤ p (fraction-ℚ x) ↔ le-ℚ (rational-fraction-ℤ p) x
+    pr1 iff-le-left-rational-fraction-ℤ = preserves-le-left-rational-fraction-ℤ
+    pr2 iff-le-left-rational-fraction-ℤ = reflects-le-left-rational-fraction-ℤ
 ```
 
 ### `x < y` if and only if `0 < y - x`
@@ -320,15 +325,16 @@ module _
 ### Addition on the rational numbers preserves strict inequality
 
 ```agda
-preserves-le-add-ℚ :
-  {a b c d : ℚ} → le-ℚ a b → le-ℚ c d → le-ℚ (a +ℚ c) (b +ℚ d)
-preserves-le-add-ℚ {a} {b} {c} {d} H K =
-  transitive-le-ℚ
-    ( a +ℚ c)
-    ( b +ℚ c)
-    ( b +ℚ d)
-    ( preserves-le-right-add-ℚ b c d K)
-    ( preserves-le-left-add-ℚ c a b H)
+abstract
+  preserves-le-add-ℚ :
+    {a b c d : ℚ} → le-ℚ a b → le-ℚ c d → le-ℚ (a +ℚ c) (b +ℚ d)
+  preserves-le-add-ℚ {a} {b} {c} {d} H K =
+    transitive-le-ℚ
+      ( a +ℚ c)
+      ( b +ℚ c)
+      ( b +ℚ d)
+      ( preserves-le-right-add-ℚ b c d K)
+      ( preserves-le-left-add-ℚ c a b H)
 ```
 
 ### The rational numbers have no lower or upper bound
@@ -338,60 +344,62 @@ module _
   (x : ℚ)
   where
 
-  exists-lesser-ℚ : exists ℚ (λ q → le-ℚ-Prop q x)
-  exists-lesser-ℚ =
-    intro-exists
-      ( rational-fraction-ℤ frac)
-      ( preserves-le-left-rational-fraction-ℤ x frac
-        ( le-fraction-le-numerator-fraction-ℤ
-          ( frac)
-          ( fraction-ℚ x)
-          ( refl)
-          ( le-pred-ℤ (numerator-ℚ x))))
-    where
-    frac : fraction-ℤ
-    frac = (pred-ℤ (numerator-ℚ x) , positive-denominator-ℚ x)
+  abstract
+    exists-lesser-ℚ : exists ℚ (λ q → le-ℚ-Prop q x)
+    exists-lesser-ℚ =
+      intro-exists
+        ( rational-fraction-ℤ frac)
+        ( preserves-le-left-rational-fraction-ℤ x frac
+          ( le-fraction-le-numerator-fraction-ℤ
+            ( frac)
+            ( fraction-ℚ x)
+            ( refl)
+            ( le-pred-ℤ (numerator-ℚ x))))
+      where
+      frac : fraction-ℤ
+      frac = (pred-ℤ (numerator-ℚ x) , positive-denominator-ℚ x)
 
-  exists-greater-ℚ : exists ℚ (λ r → le-ℚ-Prop x r)
-  exists-greater-ℚ =
-    intro-exists
-      ( rational-fraction-ℤ frac)
-      ( preserves-le-right-rational-fraction-ℤ x frac
-        ( le-fraction-le-numerator-fraction-ℤ
-          ( fraction-ℚ x)
-          ( frac)
-          ( refl)
-          ( le-succ-ℤ (numerator-ℚ x))))
-    where
-    frac : fraction-ℤ
-    frac = (succ-ℤ (numerator-ℚ x) , positive-denominator-ℚ x)
+    exists-greater-ℚ : exists ℚ (λ r → le-ℚ-Prop x r)
+    exists-greater-ℚ =
+      intro-exists
+        ( rational-fraction-ℤ frac)
+        ( preserves-le-right-rational-fraction-ℤ x frac
+          ( le-fraction-le-numerator-fraction-ℤ
+            ( fraction-ℚ x)
+            ( frac)
+            ( refl)
+            ( le-succ-ℤ (numerator-ℚ x))))
+      where
+      frac : fraction-ℤ
+      frac = (succ-ℤ (numerator-ℚ x) , positive-denominator-ℚ x)
 ```
 
 ### For any two rational numbers `x` and `y`, either `x < y` or `y ≤ x`
 
 ```agda
-decide-le-leq-ℚ : (x y : ℚ) → le-ℚ x y + leq-ℚ y x
-decide-le-leq-ℚ x y =
-  map-coproduct
-    ( id)
-    ( λ H →
-      is-nonnegative-eq-ℤ
-        ( skew-commutative-cross-mul-diff-fraction-ℤ
-          ( fraction-ℚ x)
-          ( fraction-ℚ y))
-        ( is-nonnegative-neg-is-nonpositive-ℤ H))
-    ( decide-is-positive-is-nonpositive-ℤ)
+abstract
+  decide-le-leq-ℚ : (x y : ℚ) → le-ℚ x y + leq-ℚ y x
+  decide-le-leq-ℚ x y =
+    map-coproduct
+      ( id)
+      ( λ H →
+        is-nonnegative-eq-ℤ
+          ( skew-commutative-cross-mul-diff-fraction-ℤ
+            ( fraction-ℚ x)
+            ( fraction-ℚ y))
+          ( is-nonnegative-neg-is-nonpositive-ℤ H))
+      ( decide-is-positive-is-nonpositive-ℤ)
 
-not-leq-le-ℚ : (x y : ℚ) → le-ℚ x y → ¬ leq-ℚ y x
-not-leq-le-ℚ x y H K =
-  is-not-positive-is-nonpositive-ℤ
-    ( tr
-      ( is-nonpositive-ℤ)
-      ( skew-commutative-cross-mul-diff-fraction-ℤ
-        ( fraction-ℚ y)
-        ( fraction-ℚ x))
-      ( is-nonpositive-neg-is-nonnegative-ℤ K))
-    ( H)
+  not-leq-le-ℚ : (x y : ℚ) → le-ℚ x y → ¬ leq-ℚ y x
+  not-leq-le-ℚ x y H K =
+    is-not-positive-is-nonpositive-ℤ
+      ( tr
+        ( is-nonpositive-ℤ)
+        ( skew-commutative-cross-mul-diff-fraction-ℤ
+          ( fraction-ℚ y)
+          ( fraction-ℚ x))
+        ( is-nonpositive-neg-is-nonnegative-ℤ K))
+      ( H)
 ```
 
 ### Trichotomy on the rationals
@@ -416,17 +424,18 @@ module _
   (x y : ℚ) (H : le-ℚ x y)
   where
 
-  le-left-mediant-ℚ : le-ℚ x (mediant-ℚ x y)
-  le-left-mediant-ℚ =
-    preserves-le-right-rational-fraction-ℤ x
-      ( mediant-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
-      ( le-left-mediant-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y) H)
+  abstract
+    le-left-mediant-ℚ : le-ℚ x (mediant-ℚ x y)
+    le-left-mediant-ℚ =
+      preserves-le-right-rational-fraction-ℤ x
+        ( mediant-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
+        ( le-left-mediant-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y) H)
 
-  le-right-mediant-ℚ : le-ℚ (mediant-ℚ x y) y
-  le-right-mediant-ℚ =
-    preserves-le-left-rational-fraction-ℤ y
-      ( mediant-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
-      ( le-right-mediant-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y) H)
+    le-right-mediant-ℚ : le-ℚ (mediant-ℚ x y) y
+    le-right-mediant-ℚ =
+      preserves-le-left-rational-fraction-ℤ y
+        ( mediant-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
+        ( le-right-mediant-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y) H)
 ```
 
 ### Strict inequality on the rational numbers is dense
@@ -436,24 +445,27 @@ module _
   (x y : ℚ) (H : le-ℚ x y)
   where
 
-  dense-le-ℚ : exists ℚ (λ r → le-ℚ-Prop x r ∧ le-ℚ-Prop r y)
-  dense-le-ℚ =
-    intro-exists
-      ( mediant-ℚ x y)
-      ( le-left-mediant-ℚ x y H , le-right-mediant-ℚ x y H)
+  abstract
+    dense-le-ℚ : exists ℚ (λ r → le-ℚ-Prop x r ∧ le-ℚ-Prop r y)
+    dense-le-ℚ =
+      intro-exists
+        ( mediant-ℚ x y)
+        ( le-left-mediant-ℚ x y H , le-right-mediant-ℚ x y H)
 ```
 
 ### Strict inequality on the rational numbers is located
 
 ```agda
-located-le-ℚ :
-  (x y z : ℚ) → le-ℚ y z → type-disjunction-Prop (le-ℚ-Prop y x) (le-ℚ-Prop x z)
-located-le-ℚ x y z H =
-  unit-trunc-Prop
-    ( map-coproduct
-      ( id)
-      ( λ p → concatenate-leq-le-ℚ x y z p H)
-      ( decide-le-leq-ℚ y x))
+abstract
+  located-le-ℚ :
+    (x y z : ℚ) → le-ℚ y z →
+    type-disjunction-Prop (le-ℚ-Prop y x) (le-ℚ-Prop x z)
+  located-le-ℚ x y z H =
+    unit-trunc-Prop
+      ( map-coproduct
+        ( id)
+        ( λ p → concatenate-leq-le-ℚ x y z p H)
+        ( decide-le-leq-ℚ y x))
 ```
 
 ### Negation reverses the ordering of strict inequality on the rational numbers
@@ -466,39 +478,40 @@ neg-le-ℚ x y = neg-le-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
 ### Transposing additions on strict inequalities of rational numbers
 
 ```agda
-le-transpose-right-diff-ℚ : (x y z : ℚ) → le-ℚ x (y -ℚ z) → le-ℚ (x +ℚ z) y
-le-transpose-right-diff-ℚ x y z x<y-z =
-  tr
-    ( le-ℚ (x +ℚ z))
-    ( is-section-right-div-Group group-add-ℚ z y)
-    ( preserves-le-left-add-ℚ z x (y -ℚ z) x<y-z)
+abstract
+  le-transpose-right-diff-ℚ : (x y z : ℚ) → le-ℚ x (y -ℚ z) → le-ℚ (x +ℚ z) y
+  le-transpose-right-diff-ℚ x y z x<y-z =
+    tr
+      ( le-ℚ (x +ℚ z))
+      ( is-section-right-div-Group group-add-ℚ z y)
+      ( preserves-le-left-add-ℚ z x (y -ℚ z) x<y-z)
 
-le-transpose-right-add-ℚ : (x y z : ℚ) → le-ℚ x (y +ℚ z) → le-ℚ (x -ℚ z) y
-le-transpose-right-add-ℚ x y z x<y+z =
-  tr
-    ( le-ℚ (x -ℚ z))
-    ( is-retraction-right-div-Group group-add-ℚ z y)
-    ( preserves-le-left-add-ℚ (neg-ℚ z) x (y +ℚ z) x<y+z)
+  le-transpose-right-add-ℚ : (x y z : ℚ) → le-ℚ x (y +ℚ z) → le-ℚ (x -ℚ z) y
+  le-transpose-right-add-ℚ x y z x<y+z =
+    tr
+      ( le-ℚ (x -ℚ z))
+      ( is-retraction-right-div-Group group-add-ℚ z y)
+      ( preserves-le-left-add-ℚ (neg-ℚ z) x (y +ℚ z) x<y+z)
 
-le-transpose-left-diff-ℚ : (x y z : ℚ) → le-ℚ (x -ℚ y) z → le-ℚ x (z +ℚ y)
-le-transpose-left-diff-ℚ x y z x-y<z =
-  tr
-    ( λ w → le-ℚ w (z +ℚ y))
-    ( is-section-right-div-Group group-add-ℚ y x)
-    ( preserves-le-left-add-ℚ y (x -ℚ y) z x-y<z)
+  le-transpose-left-diff-ℚ : (x y z : ℚ) → le-ℚ (x -ℚ y) z → le-ℚ x (z +ℚ y)
+  le-transpose-left-diff-ℚ x y z x-y<z =
+    tr
+      ( λ w → le-ℚ w (z +ℚ y))
+      ( is-section-right-div-Group group-add-ℚ y x)
+      ( preserves-le-left-add-ℚ y (x -ℚ y) z x-y<z)
 
-le-transpose-left-add-ℚ : (x y z : ℚ) → le-ℚ (x +ℚ y) z → le-ℚ x (z -ℚ y)
-le-transpose-left-add-ℚ x y z x+y<z =
-  tr
-    ( λ w → le-ℚ w (z -ℚ y))
-    ( is-retraction-right-div-Group group-add-ℚ y x)
-    ( preserves-le-left-add-ℚ (neg-ℚ y) (x +ℚ y) z x+y<z)
+  le-transpose-left-add-ℚ : (x y z : ℚ) → le-ℚ (x +ℚ y) z → le-ℚ x (z -ℚ y)
+  le-transpose-left-add-ℚ x y z x+y<z =
+    tr
+      ( λ w → le-ℚ w (z -ℚ y))
+      ( is-retraction-right-div-Group group-add-ℚ y x)
+      ( preserves-le-left-add-ℚ (neg-ℚ y) (x +ℚ y) z x+y<z)
 
-le-iff-transpose-left-add-ℚ : (x y z : ℚ) → le-ℚ (x +ℚ y) z ↔ le-ℚ x (z -ℚ y)
-pr1 (le-iff-transpose-left-add-ℚ x y z) = le-transpose-left-add-ℚ x y z
-pr2 (le-iff-transpose-left-add-ℚ x y z) = le-transpose-right-diff-ℚ x z y
+  le-iff-transpose-left-add-ℚ : (x y z : ℚ) → le-ℚ (x +ℚ y) z ↔ le-ℚ x (z -ℚ y)
+  pr1 (le-iff-transpose-left-add-ℚ x y z) = le-transpose-left-add-ℚ x y z
+  pr2 (le-iff-transpose-left-add-ℚ x y z) = le-transpose-right-diff-ℚ x z y
 
-le-iff-transpose-left-diff-ℚ : (x y z : ℚ) → le-ℚ (x -ℚ y) z ↔ le-ℚ x (z +ℚ y)
-pr1 (le-iff-transpose-left-diff-ℚ x y z) = le-transpose-left-diff-ℚ x y z
-pr2 (le-iff-transpose-left-diff-ℚ x y z) = le-transpose-right-add-ℚ x z y
+  le-iff-transpose-left-diff-ℚ : (x y z : ℚ) → le-ℚ (x -ℚ y) z ↔ le-ℚ x (z +ℚ y)
+  pr1 (le-iff-transpose-left-diff-ℚ x y z) = le-transpose-left-diff-ℚ x y z
+  pr2 (le-iff-transpose-left-diff-ℚ x y z) = le-transpose-right-add-ℚ x z y
 ```
