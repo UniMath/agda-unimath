@@ -13,7 +13,6 @@ open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.constant-maps
-open import foundation.constant-sequences
 open import foundation.dependent-pair-types
 open import foundation.eventually-equal-sequences
 open import foundation.eventually-pointed-sequences-types
@@ -72,13 +71,13 @@ module _
 
 ```agda
 module _
-  {l : Level} {A : UU l} {u : sequence A} (H : is-constant-sequence u)
+  {l : Level} {A : UU l} (x : A)
   where
 
-  is-eventually-constant-is-constant-sequence :
-    is-eventually-constant-sequence u
-  pr1 is-eventually-constant-is-constant-sequence = zero-ℕ
-  pr2 is-eventually-constant-is-constant-sequence p I = (zero-ℕ , λ q J → H p q)
+  is-eventually-constant-const-sequence :
+    is-eventually-constant-sequence (const ℕ x)
+  pr1 is-eventually-constant-const-sequence = zero-ℕ
+  pr2 is-eventually-constant-const-sequence p I = (zero-ℕ , λ _ _ → refl)
 ```
 
 ### An eventually constant sequence is eventually equal to the constant sequence of its eventual value
