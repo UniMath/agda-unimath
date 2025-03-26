@@ -70,8 +70,8 @@ module _
   {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
   where
 
-  arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
-  arithmetically-located-prop-lower-upper-ℝ =
+  is-arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
+  is-arithmetically-located-prop-lower-upper-ℝ =
     Π-Prop
       ( ℚ⁺)
       ( λ ε⁺ →
@@ -83,7 +83,7 @@ module _
 
   is-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
   is-arithmetically-located-lower-upper-ℝ =
-    type-Prop arithmetically-located-prop-lower-upper-ℝ
+    type-Prop is-arithmetically-located-prop-lower-upper-ℝ
 ```
 
 ## Properties
