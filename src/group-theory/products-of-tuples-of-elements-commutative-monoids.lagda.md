@@ -584,7 +584,6 @@ module _
                 ( f)
           ＝ mul-finite-Commutative-Monoid M B (f ∘ map-inv-equiv H)
             by inv (mul-finite-count-Commutative-Monoid M B cB _)
-
 ```
 
 ### Products over finite types distribute over coproducts
