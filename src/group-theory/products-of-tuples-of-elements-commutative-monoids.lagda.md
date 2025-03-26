@@ -720,7 +720,8 @@ module _
           ( Σ-Finite-Type (Fin-Finite-Type zero-ℕ) B)
           ( λ ())
           ( ind-Σ f))
-    mul-fin-finite-Σ-Commutative-Monoid (succ-ℕ n) B f = equational-reasoning
+    mul-fin-finite-Σ-Commutative-Monoid (succ-ℕ n) B f =
+      equational-reasoning
       mul-fin-Commutative-Monoid
         ( M)
         ( succ-ℕ n)

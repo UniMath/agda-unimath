@@ -482,6 +482,6 @@ module _
           ( λ i → sum-finite-Commutative-Semiring R A (λ a → h a i))
     where
       h : type-Finite-Type A → Fin 2 → type-Commutative-Semiring R
-      h a (inl (inr star)) = f a
-      h a (inr star) = g a
+      h a (inl (inr _)) = f a
+      h a (inr _) = g a
 ```
