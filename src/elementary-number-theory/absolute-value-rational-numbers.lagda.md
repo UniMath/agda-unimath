@@ -29,7 +29,8 @@ open import foundation.transport-along-identifications
 
 ## Idea
 
-The {{#concept "absolute value" Disambiguation="of a rational number" Agda=abs-ℚ WD="absolute value" WDID=Q120812}}
+The
+{{#concept "absolute value" Disambiguation="of a rational number" Agda=abs-ℚ WD="absolute value" WDID=Q120812}}
 a rational number is the greater of itself and its negation.
 
 ## Definition
