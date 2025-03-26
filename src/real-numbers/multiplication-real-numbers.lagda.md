@@ -11,15 +11,18 @@ module real-numbers.multiplication-real-numbers where
 ```agda
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.decidable-total-order-rational-numbers
+open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
+open import foundation.disjoint-subtypes
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import foundation.conjunction
 open import foundation.logical-equivalences
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.empty-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 open import foundation.subtypes
@@ -165,4 +168,51 @@ module _
     is-rounded-upper-cut-mul-ℝ q =
       forward-implication-is-rounded-upper-cut-mul-ℝ q ,
       backward-implication-is-rounded-upper-cut-mul-ℝ q
+
+    is-disjoint-lower-upper-cut-mul-ℝ :
+      disjoint-subtype lower-cut-mul-ℝ upper-cut-mul-ℝ
+    is-disjoint-lower-upper-cut-mul-ℝ q (q<mul , mul<q) =
+      do
+        (abx@((a , b) , a<x , x<b) , q<mul') ← q<mul
+        (cdy@((c , d) , c<y , y<d) , q<min) ← q<mul'
+        (abx'@((a' , b') , a'<x , x<b') , mul<q') ← mul<q
+        (cdy'@((c' , d') , c'<y , y<c') , max<q) ← mul<q'
+        let
+          min = min-ℚ (min-ℚ (a *ℚ c) (a *ℚ d)) (min-ℚ (b *ℚ c) (b *ℚ d))
+          max =
+            max-ℚ (max-ℚ (a' *ℚ c') (a' *ℚ d')) (max-ℚ (b' *ℚ c') (b' *ℚ d'))
+          leq-lower-upper-x p q p<x x<q =
+            leq-le-ℚ {p} {q} (le-lower-upper-cut-ℝ x p q p<x x<q)
+          leq-lower-upper-y p q p<y y<q =
+            leq-le-ℚ {p} {q} (le-lower-upper-cut-ℝ y p q p<y y<q)
+        irreflexive-le-ℚ
+          ( q)
+          ( transitive-le-ℚ
+            ( q)
+            ( max)
+            ( q)
+            ( max<q)
+            ( concatenate-le-leq-ℚ
+              ( q)
+              ( min)
+              ( max)
+              ( q<min)
+              ( leq-lower-upper-bounds-mul-closed-interval-ℚ
+                ( a)
+                ( b)
+                ( c)
+                ( d)
+                ( a')
+                ( b')
+                ( c')
+                ( d')
+                ( leq-lower-upper-x a b a<x x<b)
+                ( leq-lower-upper-y c d c<y y<d)
+                ( leq-lower-upper-x a' b' a'<x x<b')
+                ( leq-lower-upper-y c' d' c'<y y<c')
+                ( leq-lower-upper-x a b' a<x x<b')
+                ( leq-lower-upper-x a' b a'<x x<b)
+                ( leq-lower-upper-y c d' c<y y<c')
+                ( leq-lower-upper-y c' d c'<y y<d))))
+      where open do-syntax-trunc-Prop empty-Prop
 ```
