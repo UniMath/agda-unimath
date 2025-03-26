@@ -70,16 +70,15 @@ module _
   {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
   where
 
+  close-bounds-lower-upper-ℝ : ℚ⁺ → subtype (l1 ⊔ l2) (ℚ × ℚ)
+  close-bounds-lower-upper-ℝ ε⁺ (p , q) =
+    le-ℚ-Prop q (p +ℚ (rational-ℚ⁺ ε⁺)) ∧
+    cut-lower-ℝ x p ∧
+    cut-upper-ℝ y q
+
   arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
   arithmetically-located-prop-lower-upper-ℝ =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ ε⁺ →
-        ∃ ( ℚ × ℚ)
-          ( λ (p , q) →
-            le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
-            cut-lower-ℝ x p ∧
-            cut-upper-ℝ y q))
+    Π-Prop ℚ⁺ (λ ε⁺ → ∃ (ℚ × ℚ) (close-bounds-lower-upper-ℝ ε⁺))
 
   is-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
   is-arithmetically-located-lower-upper-ℝ =

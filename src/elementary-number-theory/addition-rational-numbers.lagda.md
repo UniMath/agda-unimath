@@ -162,6 +162,21 @@ abstract
     commutative-add-ℚ x (neg-ℚ x) ∙ left-inverse-law-add-ℚ x
 ```
 
+### If `p + q = 0`, then `p = -q`
+
+```agda
+abstract
+  unique-left-neg-ℚ : (p q : ℚ) → p +ℚ q ＝ zero-ℚ → p ＝ neg-ℚ q
+  unique-left-neg-ℚ p q p+q=0 =
+    equational-reasoning
+      p
+      ＝ p +ℚ zero-ℚ by inv (right-unit-law-add-ℚ p)
+      ＝ p +ℚ (q +ℚ neg-ℚ q) by ap (p +ℚ_) (inv (right-inverse-law-add-ℚ q))
+      ＝ (p +ℚ q) +ℚ neg-ℚ q by inv (associative-add-ℚ _ _ _)
+      ＝ zero-ℚ +ℚ neg-ℚ q by ap (_+ℚ neg-ℚ q) p+q=0
+      ＝ neg-ℚ q by left-unit-law-add-ℚ _
+```
+
 ### The negatives of rational numbers distribute over addition
 
 ```agda

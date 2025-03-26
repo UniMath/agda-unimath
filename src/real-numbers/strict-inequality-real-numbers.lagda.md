@@ -34,6 +34,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -88,12 +89,7 @@ module _
       elim-exists
         ( lower-cut-ℝ y p)
         ( λ q (x<q , q<y) →
-          backward-implication
-            ( is-rounded-lower-cut-ℝ y p)
-            ( intro-exists
-              ( q)
-              ( le-lower-upper-cut-ℝ x p q p<x x<q ,
-                q<y)))
+          le-lower-cut-ℝ y p q (le-lower-upper-cut-ℝ x p q p<x x<q) q<y)
         ( x<y)
 ```
 
@@ -233,21 +229,17 @@ module _
   {l : Level} (q : ℚ) (x : ℝ l)
   where
 
+  abstract
+    le-iff-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q ↔ le-ℝ x (real-ℚ q)
+    le-iff-upper-cut-real-ℚ =
+      iff-tot-exists (λ _ → iff-equiv commutative-product) ∘iff
+      is-rounded-upper-cut-ℝ x q
+
   le-real-is-in-upper-cut-ℚ : is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
-  le-real-is-in-upper-cut-ℚ H =
-    map-tot-exists
-      ( λ p (p<q , p∈ux) → (p∈ux , p<q))
-      ( forward-implication (is-rounded-upper-cut-ℝ x q) H)
+  le-real-is-in-upper-cut-ℚ = forward-implication le-iff-upper-cut-real-ℚ
 
   is-in-upper-cut-le-real-ℚ : le-ℝ x (real-ℚ q) → is-in-upper-cut-ℝ x q
-  is-in-upper-cut-le-real-ℚ H =
-    backward-implication
-      ( is-rounded-upper-cut-ℝ x q)
-      ( map-tot-exists (λ _ (p>x , p<q) → (p<q , p>x)) H)
-
-  le-iff-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q ↔ le-ℝ x (real-ℚ q)
-  pr1 le-iff-upper-cut-real-ℚ = le-real-is-in-upper-cut-ℚ
-  pr2 le-iff-upper-cut-real-ℚ = is-in-upper-cut-le-real-ℚ
+  is-in-upper-cut-le-real-ℚ = backward-implication le-iff-upper-cut-real-ℚ
 ```
 
 ### The reals have no lower or upper bound
