@@ -102,9 +102,8 @@ module _
 
 ### Characterizing equality of coherent constancy witnesses
 
-Two constancy witnesses `H` and `K` are equal if there is a homotopy
-[equality](foundation-core.identity-types.md) of partial base points
-`p : H₀ ~ K₀` such that for every `x : A` we have a
+Two constancy witnesses `H` and `K` are equal if there is a homotopy of partial
+base points `p : H₀ ~ K₀` such that for every `x : A` we have a
 [commuting triangle of identifications](foundation.commuting-triangles-of-identifications.md)
 
 ```text
