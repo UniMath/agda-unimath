@@ -75,41 +75,42 @@ module _
   leq-ℝ' : UU (l1 ⊔ l2)
   leq-ℝ' = type-Prop leq-ℝ-Prop'
 
-  leq-iff-ℝ' : leq-ℝ x y ↔ leq-ℝ'
-  pr1 (leq-iff-ℝ') lx⊆ly q q-in-uy =
-    elim-exists
-      ( upper-cut-ℝ x q)
-      ( λ p (p<q , p≮y) →
-        subset-upper-cut-upper-complement-lower-cut-ℝ
-          ( x)
-          ( q)
-          ( intro-exists
-            ( p)
-            ( p<q ,
-              reverses-order-complement-subtype
-                ( lower-cut-ℝ x)
-                ( lower-cut-ℝ y)
-                ( lx⊆ly)
-                ( p)
-                ( p≮y))))
-      ( subset-upper-complement-lower-cut-upper-cut-ℝ y q q-in-uy)
-  pr2 leq-iff-ℝ' uy⊆ux p p-in-lx =
-    elim-exists
-      ( lower-cut-ℝ y p)
-      ( λ q (p<q , x≮q) →
-        subset-lower-cut-lower-complement-upper-cut-ℝ
-          ( y)
-          ( p)
-          ( intro-exists
+  abstract
+    leq-iff-ℝ' : leq-ℝ x y ↔ leq-ℝ'
+    pr1 leq-iff-ℝ' lx⊆ly q q-in-uy =
+      elim-exists
+        ( upper-cut-ℝ x q)
+        ( λ p (p<q , p≮y) →
+          subset-upper-cut-upper-complement-lower-cut-ℝ
+            ( x)
             ( q)
-            ( p<q ,
-              reverses-order-complement-subtype
-                ( upper-cut-ℝ y)
-                ( upper-cut-ℝ x)
-                ( uy⊆ux)
-                ( q)
-                ( x≮q))))
-      ( subset-lower-complement-upper-cut-lower-cut-ℝ x p p-in-lx)
+            ( intro-exists
+              ( p)
+              ( p<q ,
+                reverses-order-complement-subtype
+                  ( lower-cut-ℝ x)
+                  ( lower-cut-ℝ y)
+                  ( lx⊆ly)
+                  ( p)
+                  ( p≮y))))
+        ( subset-upper-complement-lower-cut-upper-cut-ℝ y q q-in-uy)
+    pr2 leq-iff-ℝ' uy⊆ux p p-in-lx =
+      elim-exists
+        ( lower-cut-ℝ y p)
+        ( λ q (p<q , x≮q) →
+          subset-lower-cut-lower-complement-upper-cut-ℝ
+            ( y)
+            ( p)
+            ( intro-exists
+              ( q)
+              ( p<q ,
+                reverses-order-complement-subtype
+                  ( upper-cut-ℝ y)
+                  ( upper-cut-ℝ x)
+                  ( uy⊆ux)
+                  ( q)
+                  ( x≮q))))
+        ( subset-lower-complement-upper-cut-lower-cut-ℝ x p p-in-lx)
 ```
 
 ### Inequality on the real numbers is reflexive
@@ -184,6 +185,20 @@ reflects-leq-real-ℚ = reflects-leq-lower-real-ℚ
 
 iff-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y ↔ leq-ℝ (real-ℚ x) (real-ℚ y)
 iff-leq-real-ℚ = iff-leq-lower-real-ℚ
+```
+
+### Negation reverses inequality on the real numbers
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  neg-leq-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ y) (neg-ℝ x)
+  neg-leq-ℝ x≤y =
+    backward-implication
+      ( leq-iff-ℝ' (neg-ℝ y) (neg-ℝ x))
+      ( λ q → x≤y (neg-ℚ q))
 ```
 
 ## References

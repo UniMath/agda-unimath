@@ -16,6 +16,8 @@ open import order-theory.large-posets
 open import order-theory.least-upper-bounds-posets
 open import order-theory.similarity-of-elements-large-posets
 open import order-theory.upper-bounds-large-posets
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.function-types
 ```
 
 </details>
@@ -137,6 +139,24 @@ module _
     is-binary-upper-bound-Large-Poset P a b y
   is-binary-upper-bound-is-least-binary-upper-bound-Large-Poset H =
     backward-implication (H _) (refl-leq-Large-Poset P _)
+```
+
+### The binary least upper bound of `x` and `y` is the least upper bound of `y` and `x`
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (P : Large-Poset α β)
+  {l1 l2 : Level} (a : type-Large-Poset P l1) (b : type-Large-Poset P l2)
+  where
+
+  abstract
+    is-commutative-is-binary-least-upper-bound-Large-Poset :
+      {l3 : Level} (y : type-Large-Poset P l3) →
+      is-least-binary-upper-bound-Large-Poset P a b y →
+      is-least-binary-upper-bound-Large-Poset P b a y
+    is-commutative-is-binary-least-upper-bound-Large-Poset _ H z =
+      H z ∘iff iff-equiv commutative-product
 ```
 
 ### Binary least upper bounds are unique up to similarity of elements

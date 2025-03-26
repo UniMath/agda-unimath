@@ -11,6 +11,7 @@ module real-numbers.maximum-real-numbers where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.identity-types
 open import foundation.empty-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -24,6 +25,7 @@ open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.maximum-lower-dedekind-real-numbers
 open import real-numbers.maximum-upper-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.similarity-real-numbers
 ```
 
 </details>
@@ -109,6 +111,61 @@ module _
       ( lower-real-ℝ x)
       ( lower-real-ℝ y)
       ( lower-real-ℝ z)
+```
+
+### The binary maximum is a binary upper bound
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1) (y : ℝ l2)
+  where
+
+  abstract
+    leq-left-binary-max-ℝ : leq-ℝ x (binary-max-ℝ x y)
+    leq-left-binary-max-ℝ =
+      pr1
+        ( is-binary-upper-bound-is-least-binary-upper-bound-Large-Poset
+          ( ℝ-Large-Poset)
+          ( x)
+          ( y)
+          ( is-least-binary-upper-bound-binary-max-ℝ x y))
+
+    leq-right-binary-max-ℝ : leq-ℝ y (binary-max-ℝ x y)
+    leq-right-binary-max-ℝ =
+      pr2
+        ( is-binary-upper-bound-is-least-binary-upper-bound-Large-Poset
+          ( ℝ-Large-Poset)
+          ( x)
+          ( y)
+          ( is-least-binary-upper-bound-binary-max-ℝ x y))
+```
+
+### The binary maximum is commutative
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1) (y : ℝ l2)
+  where
+
+  opaque
+    unfolding sim-ℝ
+
+    commutative-binary-max-ℝ : binary-max-ℝ x y ＝ binary-max-ℝ y x
+    commutative-binary-max-ℝ =
+      eq-sim-ℝ
+        ( sim-is-least-binary-upper-bound-Large-Poset
+          ( ℝ-Large-Poset)
+          ( x)
+          ( y)
+          ( is-least-binary-upper-bound-binary-max-ℝ x y)
+          ( is-commutative-is-binary-least-upper-bound-Large-Poset
+            ( ℝ-Large-Poset)
+            ( y)
+            ( x)
+            ( binary-max-ℝ y x)
+            ( is-least-binary-upper-bound-binary-max-ℝ y x)))
 ```
 
 ### The large poset of real numbers has joins
