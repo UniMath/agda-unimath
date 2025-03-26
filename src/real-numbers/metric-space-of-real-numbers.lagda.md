@@ -712,7 +712,10 @@ module _
               ( add-real-ℚ _ _)
               ( backward-implication
                 ( iff-diff-right-le-ℝ (real-ℚ q) (real-ℚ (ε +ℚ θ')) xε)
-                ( le-real-is-in-lower-cut-ℚ q (xε -ℝ real-ℚ (ε +ℚ θ')) q<xε-ε-θ')))
+                ( le-real-is-in-lower-cut-ℚ
+                  ( q)
+                  ( xε -ℝ real-ℚ (ε +ℚ θ'))
+                  ( q<xε-ε-θ'))))
         q<lim : is-in-lower-cut-ℝ lim q
         q<lim = intro-exists (ε⁺ , θ'⁺) q+ε+θ'<xε
       neighborhood-±-bound-leq-ℝ
