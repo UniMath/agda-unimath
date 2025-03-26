@@ -90,7 +90,7 @@ module _
       ( H (inr star))
 ```
 
-### Products are equal to the zero-th term plus the rest
+### Products are equal to the zero-th term times the rest
 
 ```agda
 module _
