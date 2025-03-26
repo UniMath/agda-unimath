@@ -192,7 +192,14 @@ module _
       mul-Semiring R x (sum-finite-Semiring R A f) ＝
       sum-finite-Semiring R A (mul-Semiring R x ∘ f)
     left-distributive-mul-sum-finite-Semiring A x f =
-      do
+      let
+        open
+          do-syntax-trunc-Prop
+            ( Id-Prop
+              ( set-Semiring R)
+              ( mul-Semiring R x (sum-finite-Semiring R A f))
+              ( sum-finite-Semiring R A (mul-Semiring R x ∘ f)))
+      in do
         cA ← is-finite-type-Finite-Type A
         equational-reasoning
           mul-Semiring R x (sum-finite-Semiring R A f)
@@ -222,13 +229,6 @@ module _
                 ( f ∘ map-equiv-count cA)
           ＝ sum-finite-Semiring R A (mul-Semiring R x ∘ f)
             by inv (mul-finite-count-Commutative-Monoid _ A cA _)
-      where
-        open
-          do-syntax-trunc-Prop
-            ( Id-Prop
-              ( set-Semiring R)
-              ( mul-Semiring R x (sum-finite-Semiring R A f))
-              ( sum-finite-Semiring R A (mul-Semiring R x ∘ f)))
 
     right-distributive-mul-sum-finite-Semiring :
       {l2 : Level} (A : Finite-Type l2) →
@@ -236,7 +236,14 @@ module _
       mul-Semiring R (sum-finite-Semiring R A f) x ＝
       sum-finite-Semiring R A (mul-Semiring' R x ∘ f)
     right-distributive-mul-sum-finite-Semiring A f x =
-      do
+      let
+        open
+          do-syntax-trunc-Prop
+            ( Id-Prop
+              ( set-Semiring R)
+              ( mul-Semiring R (sum-finite-Semiring R A f) x)
+              ( sum-finite-Semiring R A (mul-Semiring' R x ∘ f)))
+      in do
         cA ← is-finite-type-Finite-Type A
         equational-reasoning
           mul-Semiring R (sum-finite-Semiring R A f) x
@@ -266,13 +273,6 @@ module _
                 ( x)
           ＝ sum-finite-Semiring R A (mul-Semiring' R x ∘ f)
             by inv (mul-finite-count-Commutative-Monoid _ A cA _)
-      where
-        open
-          do-syntax-trunc-Prop
-            ( Id-Prop
-              ( set-Semiring R)
-              ( mul-Semiring R (sum-finite-Semiring R A f) x)
-              ( sum-finite-Semiring R A (mul-Semiring' R x ∘ f)))
 ```
 
 ### Interchange law of sums and addition in a semiring

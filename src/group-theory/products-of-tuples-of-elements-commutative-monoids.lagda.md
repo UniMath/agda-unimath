@@ -490,11 +490,7 @@ module _
         ( A)
         ( λ _ → unit-Commutative-Monoid M))
   mul-finite-unit-Commutative-Monoid =
-    do
-      cA ← is-finite-type-Finite-Type A
-      mul-finite-count-Commutative-Monoid M A cA _ ∙
-        mul-fin-unit-Commutative-Monoid M _
-    where
+    let
       open
         do-syntax-trunc-Prop
           (is-unit-prop-Commutative-Monoid
@@ -503,6 +499,10 @@ module _
               ( M)
               ( A)
               ( λ _ → unit-Commutative-Monoid M)))
+    in do
+      cA ← is-finite-type-Finite-Type A
+      mul-finite-count-Commutative-Monoid M A cA _ ∙
+        mul-fin-unit-Commutative-Monoid M _
 ```
 
 ### Products over a finite type are homotopy invariant
@@ -518,7 +518,14 @@ module _
       f ~ g →
       mul-finite-Commutative-Monoid M A f ＝ mul-finite-Commutative-Monoid M A g
     htpy-mul-finite-Commutative-Monoid {f} {g} H =
-      do
+      let
+        open
+          do-syntax-trunc-Prop
+            ( Id-Prop
+              ( set-Commutative-Monoid M)
+              ( mul-finite-Commutative-Monoid M A f)
+              ( mul-finite-Commutative-Monoid M A g))
+      in do
         cA ← is-finite-type-Finite-Type A
         equational-reasoning
           mul-finite-Commutative-Monoid M A f
@@ -528,13 +535,6 @@ module _
             by htpy-mul-count-Commutative-Monoid M (type-Finite-Type A) cA H
           ＝ mul-finite-Commutative-Monoid M A g
             by inv (mul-finite-count-Commutative-Monoid M A cA g)
-      where
-        open
-          do-syntax-trunc-Prop
-            ( Id-Prop
-              ( set-Commutative-Monoid M)
-              ( mul-finite-Commutative-Monoid M A f)
-              ( mul-finite-Commutative-Monoid M A g))
 ```
 
 ### Products over finite types are preserved by equivalences
@@ -552,7 +552,14 @@ module _
       mul-finite-Commutative-Monoid M A f ＝
       mul-finite-Commutative-Monoid M B (f ∘ map-inv-equiv H)
     mul-equiv-finite-Commutative-Monoid f =
-      do
+      let
+        open
+          do-syntax-trunc-Prop
+            ( Id-Prop
+              ( set-Commutative-Monoid M)
+              ( mul-finite-Commutative-Monoid M A f)
+              ( mul-finite-Commutative-Monoid M B (f ∘ map-inv-equiv H)))
+      in do
         cA ← is-finite-type-Finite-Type A
         cB ← is-finite-type-Finite-Type B
         equational-reasoning
@@ -577,13 +584,7 @@ module _
                 ( f)
           ＝ mul-finite-Commutative-Monoid M B (f ∘ map-inv-equiv H)
             by inv (mul-finite-count-Commutative-Monoid M B cB _)
-      where
-        open
-          do-syntax-trunc-Prop
-            ( Id-Prop
-              ( set-Commutative-Monoid M)
-              ( mul-finite-Commutative-Monoid M A f)
-              ( mul-finite-Commutative-Monoid M B (f ∘ map-inv-equiv H)))
+
 ```
 
 ### Products over finite types distribute over coproducts
@@ -604,7 +605,20 @@ module _
         ( mul-finite-Commutative-Monoid M A (f ∘ inl))
         ( mul-finite-Commutative-Monoid M B (f ∘ inr))
     mul-coproduct-finite-Commutative-Monoid f =
-      do
+      let
+        open
+          do-syntax-trunc-Prop
+            ( Id-Prop
+              ( set-Commutative-Monoid M)
+              ( mul-finite-Commutative-Monoid
+                ( M)
+                ( coproduct-Finite-Type A B)
+                ( f))
+              ( mul-Commutative-Monoid
+                ( M)
+                ( mul-finite-Commutative-Monoid M A (f ∘ inl))
+                ( mul-finite-Commutative-Monoid M B (f ∘ inr))))
+      in do
         cA@(nA , Fin-nA≃A) ← is-finite-type-Finite-Type A
         cB@(nB , Fin-nB≃B) ← is-finite-type-Finite-Type B
         equational-reasoning
@@ -681,19 +695,6 @@ module _
                     ( B)
                     ( cB)
                     ( f ∘ inr)))
-      where
-        open
-          do-syntax-trunc-Prop
-            ( Id-Prop
-              ( set-Commutative-Monoid M)
-              ( mul-finite-Commutative-Monoid
-                ( M)
-                ( coproduct-Finite-Type A B)
-                ( f))
-              ( mul-Commutative-Monoid
-                ( M)
-                ( mul-finite-Commutative-Monoid M A (f ∘ inl))
-                ( mul-finite-Commutative-Monoid M B (f ∘ inr))))
 ```
 
 ### Products distribute over dependent pair types
@@ -836,7 +837,17 @@ module _
         ( A)
         ( λ a → mul-finite-Commutative-Monoid M (B a) (f a))
     mul-Σ-finite-Commutative-Monoid f =
-      do
+      let
+        open
+          do-syntax-trunc-Prop
+            ( Id-Prop
+              ( set-Commutative-Monoid M)
+              ( mul-finite-Commutative-Monoid M (Σ-Finite-Type A B) (ind-Σ f))
+              ( mul-finite-Commutative-Monoid
+                ( M)
+                ( A)
+                ( λ a → mul-finite-Commutative-Monoid M (B a) (f a))))
+      in do
         cA@(nA , Fin-nA≃A) ← is-finite-type-Finite-Type A
         equational-reasoning
           mul-finite-Commutative-Monoid M (Σ-Finite-Type A B) (ind-Σ f)
@@ -872,16 +883,6 @@ module _
               ( A)
               ( λ a → mul-finite-Commutative-Monoid M (B a) (f a))
             by inv (mul-finite-count-Commutative-Monoid M A cA _)
-      where
-        open
-          do-syntax-trunc-Prop
-            ( Id-Prop
-              ( set-Commutative-Monoid M)
-              ( mul-finite-Commutative-Monoid M (Σ-Finite-Type A B) (ind-Σ f))
-              ( mul-finite-Commutative-Monoid
-                ( M)
-                ( A)
-                ( λ a → mul-finite-Commutative-Monoid M (B a) (f a))))
 ```
 
 ### Products over the unit type
