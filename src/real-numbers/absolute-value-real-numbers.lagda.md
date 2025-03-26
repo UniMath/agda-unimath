@@ -14,11 +14,11 @@ open import elementary-number-theory.rational-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.universe-levels
-open import foundation.function-types
 open import foundation.empty-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
+open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers

@@ -11,8 +11,8 @@ module real-numbers.maximum-real-numbers where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.identity-types
 open import foundation.empty-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -24,8 +24,8 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.maximum-lower-dedekind-real-numbers
 open import real-numbers.maximum-upper-dedekind-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
