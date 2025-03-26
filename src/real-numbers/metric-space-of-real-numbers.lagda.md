@@ -126,7 +126,7 @@ is-in-lower-neighborhood-real-bound-leq-ℝ :
   leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
   is-in-lower-neighborhood-leq-ℝ d x y
 is-in-lower-neighborhood-real-bound-leq-ℝ d⁺@(d , _) x y y≤x+d q q+d<y =
-  lower-cut-real-le-ℚ
+  is-in-lower-cut-le-real-ℚ
     ( q)
     ( x)
     ( concatenate-le-leq-ℝ
@@ -141,7 +141,7 @@ is-in-lower-neighborhood-real-bound-leq-ℝ d⁺@(d , _) x y y≤x+d q q+d<y =
         ( inv-tr
           ( λ z → le-ℝ z y)
           ( add-real-ℚ q d)
-          ( le-lower-cut-real-ℚ (q +ℚ d) y q+d<y)))
+          ( le-real-is-in-lower-cut-ℚ (q +ℚ d) y q+d<y)))
       ( backward-implication (iff-add-right-leq-ℝ y (real-ℚ d) x) y≤x+d))
 
 neighborhood-±-bound-leq-ℝ :
@@ -688,7 +688,7 @@ module _
       let
         xε<r-ε-θ' : is-in-upper-cut-ℝ xε (r -ℚ (ε +ℚ θ'))
         xε<r-ε-θ' =
-          upper-cut-real-le-ℚ
+          is-in-upper-cut-le-real-ℚ
             ( r -ℚ (ε +ℚ θ'))
             ( xε)
             ( tr
@@ -696,12 +696,15 @@ module _
               ( ap (real-ℚ r +ℝ_) (neg-real-ℚ _) ∙ add-real-ℚ _ _)
               ( forward-implication
                 ( iff-diff-right-le-ℝ xε (real-ℚ (ε +ℚ θ')) (real-ℚ r))
-                ( le-upper-cut-real-ℚ r (xε +ℝ real-ℚ (ε +ℚ θ')) xε+ε+θ'<r)))
+                ( le-real-is-in-upper-cut-ℚ
+                  ( r)
+                  ( xε +ℝ real-ℚ (ε +ℚ θ'))
+                  ( xε+ε+θ'<r))))
         lim<r : is-in-upper-cut-ℝ lim r
         lim<r = intro-exists (ε⁺ , θ'⁺) xε<r-ε-θ'
         q+ε+θ'<xε : is-in-lower-cut-ℝ xε (q +ℚ (ε +ℚ θ'))
         q+ε+θ'<xε =
-          lower-cut-real-le-ℚ
+          is-in-lower-cut-le-real-ℚ
             ( q +ℚ (ε +ℚ θ'))
             ( xε)
             ( tr
@@ -709,7 +712,7 @@ module _
               ( add-real-ℚ _ _)
               ( backward-implication
                 ( iff-diff-right-le-ℝ (real-ℚ q) (real-ℚ (ε +ℚ θ')) xε)
-                ( le-lower-cut-real-ℚ q (xε -ℝ real-ℚ (ε +ℚ θ')) q<xε-ε-θ')))
+                ( le-real-is-in-lower-cut-ℚ q (xε -ℝ real-ℚ (ε +ℚ θ')) q<xε-ε-θ')))
         q<lim : is-in-lower-cut-ℝ lim q
         q<lim = intro-exists (ε⁺ , θ'⁺) q+ε+θ'<xε
       neighborhood-±-bound-leq-ℝ
@@ -728,8 +731,8 @@ module _
               ( xε -ℝ real-ℚ (ε +ℚ θ))
               ( real-ℚ q)
               ( lim)
-              ( le-lower-cut-real-ℚ q lim q<lim)
-              ( le-upper-cut-real-ℚ q (xε -ℝ real-ℚ (ε +ℚ θ)) xε-ε-θ<q))))
+              ( le-real-is-in-lower-cut-ℚ q lim q<lim)
+              ( le-real-is-in-upper-cut-ℚ q (xε -ℝ real-ℚ (ε +ℚ θ)) xε-ε-θ<q))))
         ( leq-le-ℝ
           ( lim)
           ( xε +ℝ real-ℚ (ε +ℚ θ))
@@ -737,8 +740,8 @@ module _
             ( lim)
             ( real-ℚ r)
             ( xε +ℝ real-ℚ (ε +ℚ θ))
-            ( le-lower-cut-real-ℚ r (xε +ℝ real-ℚ (ε +ℚ θ)) r<xε+ε+θ)
-            ( le-upper-cut-real-ℚ r lim lim<r)))
+            ( le-real-is-in-lower-cut-ℚ r (xε +ℝ real-ℚ (ε +ℚ θ)) r<xε+ε+θ)
+            ( le-real-is-in-upper-cut-ℚ r lim lim<r)))
     where
       open
         do-syntax-trunc-Prop

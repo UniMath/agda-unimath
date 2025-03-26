@@ -81,7 +81,7 @@ module _
   is-positive-iff-zero-in-lower-cut-ℝ :
     is-positive-ℝ x ↔ is-in-lower-cut-ℝ x zero-ℚ
   is-positive-iff-zero-in-lower-cut-ℝ =
-    inv-iff (le-iff-lower-cut-real-ℚ zero-ℚ x)
+    inv-iff (le-real-iff-lower-cut-ℚ zero-ℚ x)
 ```
 
 ### A real number is positive if and only if there is a positive rational number in its lower cut
