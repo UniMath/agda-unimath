@@ -141,7 +141,7 @@ module _
     backward-implication (H _) (refl-leq-Large-Poset P _)
 ```
 
-### The binary least upper bound of `x` and `y` is the least upper bound of `y` and `x`
+### The least upper bound of `x` and `y` is the least upper bound of `y` and `x`
 
 ```agda
 module _
