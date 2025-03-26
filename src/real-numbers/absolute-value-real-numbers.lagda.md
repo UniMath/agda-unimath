@@ -31,8 +31,11 @@ open import real-numbers.nonnegative-real-numbers
 
 ## Idea
 
-The absolute value of a [real number](real-numbers.dedekind-real-numbers.md) is
-the [maximum](real-numbers.maximum-real-numbers.md) of it and its negation.
+The
+{{#concept "absolute value" Disambiguation="of a real number" Agda=abs-ℝ WD="absolute value" WDID=Q120812}}
+of a [real number](real-numbers.dedekind-real-numbers.md) is the
+[maximum](real-numbers.maximum-real-numbers.md) of it and its
+[negation](real-numbers.negation-real-numbers.md).
 
 ```agda
 abs-ℝ : {l : Level} → ℝ l → ℝ l
