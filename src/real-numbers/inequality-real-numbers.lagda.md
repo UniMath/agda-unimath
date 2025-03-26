@@ -85,41 +85,42 @@ module _
   leq-ℝ' : UU (l1 ⊔ l2)
   leq-ℝ' = type-Prop leq-ℝ-Prop'
 
-  leq-iff-ℝ' : leq-ℝ x y ↔ leq-ℝ'
-  pr1 leq-iff-ℝ' x≤y q y<q =
-    elim-exists
-      ( upper-cut-ℝ x q)
-      ( λ p (p<q , p≮y) →
-        subset-upper-cut-upper-complement-lower-cut-ℝ
-          ( x)
-          ( q)
-          ( intro-exists
-            ( p)
-            ( p<q ,
-              reverses-order-complement-subtype
-                ( lower-cut-ℝ x)
-                ( lower-cut-ℝ y)
-                ( x≤y)
-                ( p)
-                ( p≮y))))
-      ( subset-upper-complement-lower-cut-upper-cut-ℝ y q y<q)
-  pr2 leq-iff-ℝ' uy⊆ux p p<x =
-    elim-exists
-      ( lower-cut-ℝ y p)
-      ( λ q (p<q , x≮q) →
-        subset-lower-cut-lower-complement-upper-cut-ℝ
-          ( y)
-          ( p)
-          ( intro-exists
+  abstract
+    leq-iff-ℝ' : leq-ℝ x y ↔ leq-ℝ'
+    pr1 leq-iff-ℝ' x≤y q y<q =
+      elim-exists
+        ( upper-cut-ℝ x q)
+        ( λ p (p<q , p≮y) →
+          subset-upper-cut-upper-complement-lower-cut-ℝ
+            ( x)
             ( q)
-            ( p<q ,
-              reverses-order-complement-subtype
-                ( upper-cut-ℝ y)
-                ( upper-cut-ℝ x)
-                ( uy⊆ux)
-                ( q)
-                ( x≮q))))
-      ( subset-lower-complement-upper-cut-lower-cut-ℝ x p p<x)
+            ( intro-exists
+              ( p)
+              ( p<q ,
+                reverses-order-complement-subtype
+                  ( lower-cut-ℝ x)
+                  ( lower-cut-ℝ y)
+                  ( x≤y)
+                  ( p)
+                  ( p≮y))))
+        ( subset-upper-complement-lower-cut-upper-cut-ℝ y q y<q)
+    pr2 leq-iff-ℝ' uy⊆ux p p<x =
+      elim-exists
+        ( lower-cut-ℝ y p)
+        ( λ q (p<q , x≮q) →
+          subset-lower-cut-lower-complement-upper-cut-ℝ
+            ( y)
+            ( p)
+            ( intro-exists
+              ( q)
+              ( p<q ,
+                reverses-order-complement-subtype
+                  ( upper-cut-ℝ y)
+                  ( upper-cut-ℝ x)
+                  ( uy⊆ux)
+                  ( q)
+                  ( x≮q))))
+        ( subset-lower-complement-upper-cut-lower-cut-ℝ x p p<x)
 ```
 
 ### Inequality on the real numbers is reflexive
