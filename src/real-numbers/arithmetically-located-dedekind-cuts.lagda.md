@@ -161,9 +161,7 @@ module _
     location-in-arithmetic-sequence-located-ℝ
       ε⁺@(ε , _) (succ-ℕ n) p p<x x<p+nε =
       elim-disjunction
-        ( ∃
-          ( ℚ)
-          ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ (ε +ℚ ε))))
+        ( ∃ ℚ (λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ (ε +ℚ ε))))
         ( λ p+ε<x →
           location-in-arithmetic-sequence-located-ℝ
             ( ε⁺)
