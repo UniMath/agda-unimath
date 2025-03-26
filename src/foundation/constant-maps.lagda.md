@@ -202,5 +202,6 @@ abstract
 
 ## See also
 
+- [Coherently constant maps](foundation.coherently-constant-maps.md) for the
+  condition on a map of being constant
 - [Constant pointed maps](structured-types.constant-pointed-maps.md)
-- [Coherently constant maps](foundation.coherently-constant-maps.md)
