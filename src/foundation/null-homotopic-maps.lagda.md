@@ -366,7 +366,7 @@ module _
 - Null-homotopic maps are
   [coherently constant](foundation.coherently-constant-maps.md), and if the
   domain is pointed the two notions coincide
-- [Constant pointed maps](structured-types.constant-pointed-types.md)
+- [Constant pointed maps](structured-types.constant-pointed-maps.md)
 
 ## External links
 
