@@ -203,3 +203,4 @@ abstract
 ## See also
 
 - [Constant pointed maps](structured-types.constant-pointed-maps.md)
+- [Coherently constant maps](foundation.coherently-constant-maps.md)

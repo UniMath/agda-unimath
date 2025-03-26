@@ -138,3 +138,7 @@ module _
 ## References
 
 {{#bibliography}} {{#reference KECA17}}
+
+## See also
+
+- [Coherently constant maps](foundation.coherently-constant-maps.md)

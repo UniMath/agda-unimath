@@ -40,9 +40,9 @@ open import foundation-core.homotopies
 ## Idea
 
 A map `f : A → B` is said to be
-{{#concept "null-homotopic" Disambiguation="map of types" Agda=is-null-homotopic}},
-or _constant_, if there is an element `y : B` such for every `x : A` we have
-`f x ＝ y`. In other words, `f` is null-homotopic if it is
+{{#concept "null-homotopic" Disambiguation="map of types" Agda=is-null-homotopic}}
+if there is an element `y : B` such for every `x : A` we have `f x ＝ y`. In
+other words, `f` is null-homotopic if it is
 [homotopic](foundation-core.homotopies.md) to a
 [constant](foundation-core.constant-maps.md) function.
 
@@ -254,7 +254,9 @@ module _
 
 ## See also
 
-- [Weakly constant maps](foundation.weakly-constant-maps.md)
+- Null-homotopic maps are
+  [coherently constant](foundation.coherently-constant-maps.md), and if the
+  domain is pointed the two notions coincide.
 
 ## External links
 
