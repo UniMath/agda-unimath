@@ -229,7 +229,7 @@ module _
       ( preserves-leq-right-sim-ℝ x1 y1 y2 y1~y2 x1≤y1)
 ```
 
-### Inequality on the real numbers is invariant by translation
+### Inequality on the real numbers is invariant under translation
 
 ```agda
 module _
@@ -293,7 +293,7 @@ module _
   neg-leq-ℝ x≤y p = forward-implication (leq-iff-ℝ' x y) x≤y (neg-ℚ p)
 ```
 
-### `x + y ≤ z` if and only if `x ≤ y - z`
+### `x + y ≤ z` if and only if `x ≤ z - y`
 
 ```agda
 module _

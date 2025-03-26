@@ -75,9 +75,9 @@ module _
     Π-Prop
       ( ℚ⁺)
       ( λ ε⁺ →
-        ∃
-          ( ℚ × ℚ)
-          ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
+        ∃ ( ℚ × ℚ)
+          ( λ (p , q) → 
+            le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε⁺) ∧
             cut-lower-ℝ x p ∧
             cut-upper-ℝ y q))
 
