@@ -224,4 +224,39 @@ abstract
           ( pu≤max-ps-pt)
           ( qu≤max-qs-qt))
         ( ru≤max-pu-qu)
+
+  leq-lower-upper-bounds-mul-closed-interval-ℚ :
+    (p q r s p' q' r' s' : ℚ) →
+    (p ≤-ℚ q) → (r ≤-ℚ s) → (p' ≤-ℚ q') → (r' ≤-ℚ s') →
+    (p ≤-ℚ q') → (p' ≤-ℚ q) → (r ≤-ℚ s') → (r' ≤-ℚ s) →
+    min-ℚ (min-ℚ (p *ℚ r) (p *ℚ s)) (min-ℚ (q *ℚ r) (q *ℚ s)) ≤-ℚ
+    max-ℚ (max-ℚ (p' *ℚ r') (p' *ℚ s')) (max-ℚ (q' *ℚ r') (q' *ℚ s'))
+  leq-lower-upper-bounds-mul-closed-interval-ℚ
+    p q r s p' q' r' s' p≤q r≤s p'≤q' r'≤s' p≤q' p'≤q r≤s' r'≤s =
+      let
+        p'' = max-ℚ p p'
+        r'' = max-ℚ r r'
+        min = min-ℚ (min-ℚ (p *ℚ r) (p *ℚ s)) (min-ℚ (q *ℚ r) (q *ℚ s))
+        max = max-ℚ (max-ℚ (p' *ℚ r') (p' *ℚ s')) (max-ℚ (q' *ℚ r') (q' *ℚ s'))
+        (min≤p''r'' , _) =
+          mul-closed-interval-closed-interval-ℚ
+            ( p)
+            ( q)
+            ( p'')
+            ( r)
+            ( s)
+            ( r'')
+            ( leq-left-max-ℚ p p' , leq-max-leq-both-ℚ q p p' p≤q p'≤q)
+            ( leq-left-max-ℚ r r' , leq-max-leq-both-ℚ s r r' r≤s r'≤s)
+        (_ , p''r''≤max) =
+          mul-closed-interval-closed-interval-ℚ
+            ( p')
+            ( q')
+            ( p'')
+            ( r')
+            ( s')
+            ( r'')
+            ( leq-right-max-ℚ p p' , leq-max-leq-both-ℚ q' p p' p≤q' p'≤q')
+            ( leq-right-max-ℚ r r' , leq-max-leq-both-ℚ s' r r' r≤s' r'≤s')
+      in transitive-leq-ℚ min (p'' *ℚ r'') max p''r''≤max min≤p''r''
 ```

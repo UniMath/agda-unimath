@@ -59,22 +59,23 @@ ap-mul-fraction-ℤ p q = ap-binary mul-fraction-ℤ p q
 ### Multiplication on integer fractions respects the similarity relation
 
 ```agda
-sim-fraction-mul-fraction-ℤ :
-  {x x' y y' : fraction-ℤ} →
-  sim-fraction-ℤ x x' →
-  sim-fraction-ℤ y y' →
-  sim-fraction-ℤ (x *fraction-ℤ y) (x' *fraction-ℤ y')
-sim-fraction-mul-fraction-ℤ
-  {(nx , dx , dxp)} {(nx' , dx' , dx'p)}
-  {(ny , dy , dyp)} {(ny' , dy' , dy'p)} p q =
-  equational-reasoning
-    (nx *ℤ ny) *ℤ (dx' *ℤ dy')
-    ＝ (nx *ℤ dx') *ℤ (ny *ℤ dy')
-      by interchange-law-mul-mul-ℤ nx ny dx' dy'
-    ＝ (nx' *ℤ dx) *ℤ (ny' *ℤ dy)
-      by ap-mul-ℤ p q
-    ＝ (nx' *ℤ ny') *ℤ (dx *ℤ dy)
-      by interchange-law-mul-mul-ℤ nx' dx ny' dy
+abstract
+  sim-fraction-mul-fraction-ℤ :
+    {x x' y y' : fraction-ℤ} →
+    sim-fraction-ℤ x x' →
+    sim-fraction-ℤ y y' →
+    sim-fraction-ℤ (x *fraction-ℤ y) (x' *fraction-ℤ y')
+  sim-fraction-mul-fraction-ℤ
+    {(nx , dx , dxp)} {(nx' , dx' , dx'p)}
+    {(ny , dy , dyp)} {(ny' , dy' , dy'p)} p q =
+    equational-reasoning
+      (nx *ℤ ny) *ℤ (dx' *ℤ dy')
+      ＝ (nx *ℤ dx') *ℤ (ny *ℤ dy')
+        by interchange-law-mul-mul-ℤ nx ny dx' dy'
+      ＝ (nx' *ℤ dx) *ℤ (ny' *ℤ dy)
+        by ap-mul-ℤ p q
+      ＝ (nx' *ℤ ny') *ℤ (dx *ℤ dy)
+        by interchange-law-mul-mul-ℤ nx' dx ny' dy
 ```
 
 ### Unit laws for multiplication on integer fractions
@@ -116,34 +117,35 @@ commutative-mul-fraction-ℤ (nx , dx , dxp) (ny , dy , dyp) =
 ### Multiplication on integer fractions distributes on the left over addition
 
 ```agda
-left-distributive-mul-add-fraction-ℤ :
-  (x y z : fraction-ℤ) →
-  sim-fraction-ℤ
-    (mul-fraction-ℤ x (add-fraction-ℤ y z))
-    (add-fraction-ℤ (mul-fraction-ℤ x y) (mul-fraction-ℤ x z))
-left-distributive-mul-add-fraction-ℤ
-  (nx , dx , dxp) (ny , dy , dyp) (nz , dz , dzp) =
-    ( ap
-      ( ( nx *ℤ (ny *ℤ dz +ℤ nz *ℤ dy)) *ℤ_)
-      ( ( interchange-law-mul-mul-ℤ dx dy dx dz) ∙
-        ( associative-mul-ℤ dx dx (dy *ℤ dz)))) ∙
-    ( interchange-law-mul-mul-ℤ
-      ( nx)
-      ( ny *ℤ dz +ℤ nz *ℤ dy)
-      ( dx)
-      ( dx *ℤ (dy *ℤ dz))) ∙
-    ( inv
-      ( associative-mul-ℤ
-        ( nx *ℤ dx)
+abstract
+  left-distributive-mul-add-fraction-ℤ :
+    (x y z : fraction-ℤ) →
+    sim-fraction-ℤ
+      (mul-fraction-ℤ x (add-fraction-ℤ y z))
+      (add-fraction-ℤ (mul-fraction-ℤ x y) (mul-fraction-ℤ x z))
+  left-distributive-mul-add-fraction-ℤ
+    (nx , dx , dxp) (ny , dy , dyp) (nz , dz , dzp) =
+      ( ap
+        ( ( nx *ℤ (ny *ℤ dz +ℤ nz *ℤ dy)) *ℤ_)
+        ( ( interchange-law-mul-mul-ℤ dx dy dx dz) ∙
+          ( associative-mul-ℤ dx dx (dy *ℤ dz)))) ∙
+      ( interchange-law-mul-mul-ℤ
+        ( nx)
         ( ny *ℤ dz +ℤ nz *ℤ dy)
-        ( dx *ℤ (dy *ℤ dz)))) ∙
-    ( ap
-      ( _*ℤ (dx *ℤ (dy *ℤ dz)))
-      ( ( left-distributive-mul-add-ℤ
+        ( dx)
+        ( dx *ℤ (dy *ℤ dz))) ∙
+      ( inv
+        ( associative-mul-ℤ
           ( nx *ℤ dx)
-          ( ny *ℤ dz)
-          ( nz *ℤ dy)) ∙
-        ( ap-add-ℤ
-          ( interchange-law-mul-mul-ℤ nx dx ny dz))
-          ( interchange-law-mul-mul-ℤ nx dx nz dy)))
+          ( ny *ℤ dz +ℤ nz *ℤ dy)
+          ( dx *ℤ (dy *ℤ dz)))) ∙
+      ( ap
+        ( _*ℤ (dx *ℤ (dy *ℤ dz)))
+        ( ( left-distributive-mul-add-ℤ
+            ( nx *ℤ dx)
+            ( ny *ℤ dz)
+            ( nz *ℤ dy)) ∙
+          ( ap-add-ℤ
+            ( interchange-law-mul-mul-ℤ nx dx ny dz))
+            ( interchange-law-mul-mul-ℤ nx dx nz dy)))
 ```

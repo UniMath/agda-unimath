@@ -64,11 +64,12 @@ inequality.
 ### The product of two positive integers is positive
 
 ```agda
-is-positive-mul-ℤ :
-  {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (x *ℤ y)
-is-positive-mul-ℤ {inr (inr zero-ℕ)} {y} H K = K
-is-positive-mul-ℤ {inr (inr (succ-ℕ x))} {y} H K =
-  is-positive-add-ℤ K (is-positive-mul-ℤ {inr (inr x)} H K)
+abstract
+  is-positive-mul-ℤ :
+    {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (x *ℤ y)
+  is-positive-mul-ℤ {inr (inr zero-ℕ)} {y} H K = K
+  is-positive-mul-ℤ {inr (inr (succ-ℕ x))} {y} H K =
+    is-positive-add-ℤ K (is-positive-mul-ℤ {inr (inr x)} H K)
 ```
 
 ### The product of a positive and a nonnegative integer is nonnegative

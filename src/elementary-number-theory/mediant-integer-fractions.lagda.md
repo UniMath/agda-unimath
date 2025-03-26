@@ -41,43 +41,44 @@ mediant-fraction-ℤ (a , b) (c , d) = (add-ℤ a c , add-positive-ℤ b d)
 ### The mediant preserves the cross-multiplication difference
 
 ```agda
-cross-mul-diff-left-mediant-fraction-ℤ :
-  (x y : fraction-ℤ) →
-  Id
-    ( cross-mul-diff-fraction-ℤ x y)
-    ( cross-mul-diff-fraction-ℤ x ( mediant-fraction-ℤ x y))
-cross-mul-diff-left-mediant-fraction-ℤ (nx , dx , px) (ny , dy , py) =
-  equational-reasoning
-  (ny *ℤ dx -ℤ nx *ℤ dy)
-  ＝ (nx *ℤ dx +ℤ ny *ℤ dx) -ℤ (nx *ℤ dx +ℤ nx *ℤ dy)
-    by inv
-      ( left-translation-diff-ℤ
-        ( mul-ℤ ny dx)
-        ( mul-ℤ nx dy)
-        ( mul-ℤ nx dx))
-  ＝ (nx +ℤ ny) *ℤ dx -ℤ nx *ℤ (dx +ℤ dy)
-    by ap-diff-ℤ
-      ( inv (right-distributive-mul-add-ℤ nx ny dx))
-      ( inv (left-distributive-mul-add-ℤ nx dx dy))
+abstract
+  cross-mul-diff-left-mediant-fraction-ℤ :
+    (x y : fraction-ℤ) →
+    Id
+      ( cross-mul-diff-fraction-ℤ x y)
+      ( cross-mul-diff-fraction-ℤ x ( mediant-fraction-ℤ x y))
+  cross-mul-diff-left-mediant-fraction-ℤ (nx , dx , px) (ny , dy , py) =
+    equational-reasoning
+    (ny *ℤ dx -ℤ nx *ℤ dy)
+    ＝ (nx *ℤ dx +ℤ ny *ℤ dx) -ℤ (nx *ℤ dx +ℤ nx *ℤ dy)
+      by inv
+        ( left-translation-diff-ℤ
+          ( mul-ℤ ny dx)
+          ( mul-ℤ nx dy)
+          ( mul-ℤ nx dx))
+    ＝ (nx +ℤ ny) *ℤ dx -ℤ nx *ℤ (dx +ℤ dy)
+      by ap-diff-ℤ
+        ( inv (right-distributive-mul-add-ℤ nx ny dx))
+        ( inv (left-distributive-mul-add-ℤ nx dx dy))
 
-cross-mul-diff-right-mediant-fraction-ℤ :
-  (x y : fraction-ℤ) →
-  Id
-    ( cross-mul-diff-fraction-ℤ x y)
-    ( cross-mul-diff-fraction-ℤ (mediant-fraction-ℤ x y) y)
-cross-mul-diff-right-mediant-fraction-ℤ (nx , dx , px) (ny , dy , py) =
-  equational-reasoning
-  (ny *ℤ dx -ℤ nx *ℤ dy)
-  ＝ (ny *ℤ dx +ℤ ny *ℤ dy) -ℤ (nx *ℤ dy +ℤ ny *ℤ dy)
-    by inv
-      ( right-translation-diff-ℤ
-        ( mul-ℤ ny dx)
-        ( mul-ℤ nx dy)
-        ( mul-ℤ ny dy))
-  ＝ ny *ℤ (dx +ℤ dy) -ℤ (nx +ℤ ny) *ℤ dy
-    by ap-diff-ℤ
-      ( inv (left-distributive-mul-add-ℤ ny dx dy))
-      ( inv (right-distributive-mul-add-ℤ nx ny dy))
+  cross-mul-diff-right-mediant-fraction-ℤ :
+    (x y : fraction-ℤ) →
+    Id
+      ( cross-mul-diff-fraction-ℤ x y)
+      ( cross-mul-diff-fraction-ℤ (mediant-fraction-ℤ x y) y)
+  cross-mul-diff-right-mediant-fraction-ℤ (nx , dx , px) (ny , dy , py) =
+    equational-reasoning
+    (ny *ℤ dx -ℤ nx *ℤ dy)
+    ＝ (ny *ℤ dx +ℤ ny *ℤ dy) -ℤ (nx *ℤ dy +ℤ ny *ℤ dy)
+      by inv
+        ( right-translation-diff-ℤ
+          ( mul-ℤ ny dx)
+          ( mul-ℤ nx dy)
+          ( mul-ℤ ny dy))
+    ＝ ny *ℤ (dx +ℤ dy) -ℤ (nx +ℤ ny) *ℤ dy
+      by ap-diff-ℤ
+        ( inv (left-distributive-mul-add-ℤ ny dx dy))
+        ( inv (right-distributive-mul-add-ℤ nx ny dy))
 ```
 
 ## External links

@@ -188,6 +188,17 @@ module _
 
   is-in-cut-ℝ : ℚ → UU l
   is-in-cut-ℝ = is-in-subtype cut-ℝ
+
+  rational-bounds-ℝ : subtype l (ℚ × ℚ)
+  rational-bounds-ℝ (p , q) = lower-cut-ℝ p ∧ upper-cut-ℝ q
+
+  is-inhabited-rational-bounds-ℝ : exists (ℚ × ℚ) rational-bounds-ℝ
+  is-inhabited-rational-bounds-ℝ =
+    do
+      p , p<x ← is-inhabited-lower-cut-ℝ
+      q , x<q ← is-inhabited-upper-cut-ℝ
+      intro-exists (p , q) (p<x , x<q)
+    where open do-syntax-trunc-Prop (∃ (ℚ × ℚ) rational-bounds-ℝ)
 ```
 
 ## Properties
@@ -253,18 +264,19 @@ module _
   {l : Level} (x : ℝ l) (p q : ℚ)
   where
 
-  le-lower-upper-cut-ℝ :
-    is-in-lower-cut-ℝ x p →
-    is-in-upper-cut-ℝ x q →
-    le-ℚ p q
-  le-lower-upper-cut-ℝ H H' =
-    rec-coproduct
-      ( id)
-      ( λ I →
-        ex-falso
-          ( is-disjoint-cut-ℝ x p
-              ( H , leq-upper-cut-ℝ x q p I H')))
-      ( decide-le-leq-ℚ p q)
+  abstract
+    le-lower-upper-cut-ℝ :
+      is-in-lower-cut-ℝ x p →
+      is-in-upper-cut-ℝ x q →
+      le-ℚ p q
+    le-lower-upper-cut-ℝ H H' =
+      rec-coproduct
+        ( id)
+        ( λ I →
+          ex-falso
+            ( is-disjoint-cut-ℝ x p
+                ( H , leq-upper-cut-ℝ x q p I H')))
+        ( decide-le-leq-ℚ p q)
 ```
 
 ### Characterisation of each cut by the other

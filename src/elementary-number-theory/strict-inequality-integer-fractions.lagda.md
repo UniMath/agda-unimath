@@ -132,23 +132,24 @@ module _
 ### Strict inequality on the integer fractions is transitive
 
 ```agda
-transitive-le-fraction-ℤ :
-  (p q r : fraction-ℤ) →
-  le-fraction-ℤ q r →
-  le-fraction-ℤ p q →
-  le-fraction-ℤ p r
-transitive-le-fraction-ℤ p q r H H' =
-  is-positive-right-factor-mul-ℤ
-    ( is-positive-eq-ℤ
-      ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
-      ( is-positive-add-ℤ
-        ( is-positive-mul-ℤ
-          ( is-positive-denominator-fraction-ℤ p)
-          ( H))
-        ( is-positive-mul-ℤ
-          ( is-positive-denominator-fraction-ℤ r)
-          ( H'))))
-      ( is-positive-denominator-fraction-ℤ q)
+abstract
+  transitive-le-fraction-ℤ :
+    (p q r : fraction-ℤ) →
+    le-fraction-ℤ q r →
+    le-fraction-ℤ p q →
+    le-fraction-ℤ p r
+  transitive-le-fraction-ℤ p q r H H' =
+    is-positive-right-factor-mul-ℤ
+      ( is-positive-eq-ℤ
+        ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
+        ( is-positive-add-ℤ
+          ( is-positive-mul-ℤ
+            ( is-positive-denominator-fraction-ℤ p)
+            ( H))
+          ( is-positive-mul-ℤ
+            ( is-positive-denominator-fraction-ℤ r)
+            ( H'))))
+        ( is-positive-denominator-fraction-ℤ q)
 ```
 
 ### Chaining rules for inequality and strict inequality on the integer fractions
