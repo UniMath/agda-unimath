@@ -300,21 +300,38 @@ module _
   {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
+  abstract
+    leq-transpose-left-add-ℝ : leq-ℝ (x +ℝ y) z → leq-ℝ x (z -ℝ y)
+    leq-transpose-left-add-ℝ x+y<z =
+      preserves-leq-left-sim-ℝ
+        ( z -ℝ y)
+        ( (x +ℝ y) -ℝ y)
+        ( x)
+        ( cancel-right-add-diff-ℝ x y)
+        ( preserves-leq-right-add-ℝ (neg-ℝ y) (x +ℝ y) z x+y<z)
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  abstract
+    leq-transpose-right-diff-ℝ : leq-ℝ x (y -ℝ z) → leq-ℝ (x +ℝ z) y
+    leq-transpose-right-diff-ℝ x<y-z =
+      preserves-leq-right-sim-ℝ
+        ( x +ℝ z)
+        ( (y -ℝ z) +ℝ z)
+        ( y)
+        ( cancel-right-diff-add-ℝ y z)
+        ( preserves-leq-right-add-ℝ z x (y -ℝ z) x<y-z)
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
   iff-diff-right-leq-ℝ : leq-ℝ (x +ℝ y) z ↔ leq-ℝ x (z -ℝ y)
-  pr1 iff-diff-right-leq-ℝ x+y<z =
-    preserves-leq-left-sim-ℝ
-      ( z -ℝ y)
-      ( (x +ℝ y) -ℝ y)
-      ( x)
-      ( cancel-right-add-diff-ℝ x y)
-      ( preserves-leq-right-add-ℝ (neg-ℝ y) (x +ℝ y) z x+y<z)
-  pr2 iff-diff-right-leq-ℝ x<z-y =
-    preserves-leq-right-sim-ℝ
-      ( x +ℝ y)
-      ( (z -ℝ y) +ℝ y)
-      ( z)
-      ( cancel-right-diff-add-ℝ z y)
-      ( preserves-leq-right-add-ℝ y x (z -ℝ y) x<z-y)
+  iff-diff-right-leq-ℝ =
+    ( leq-transpose-left-add-ℝ x y z ,
+      leq-transpose-right-diff-ℝ x z y)
 
 module _
   {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
@@ -326,6 +343,16 @@ module _
       ( λ w → leq-ℝ (x -ℝ y) z ↔ leq-ℝ x (z +ℝ w))
       ( neg-neg-ℝ y)
       ( iff-diff-right-leq-ℝ x (neg-ℝ y) z)
+
+  leq-transpose-left-diff-ℝ : leq-ℝ (x -ℝ y) z → leq-ℝ x (z +ℝ y)
+  leq-transpose-left-diff-ℝ = forward-implication iff-add-right-leq-ℝ
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  leq-transpose-right-add-ℝ : leq-ℝ x (y +ℝ z) → leq-ℝ (x -ℝ z) y
+  leq-transpose-right-add-ℝ = backward-implication (iff-add-right-leq-ℝ x z y)
 ```
 
 ## References
