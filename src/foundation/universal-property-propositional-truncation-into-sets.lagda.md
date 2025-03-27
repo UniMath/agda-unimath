@@ -38,21 +38,21 @@ universal property of the propositional truncations with respect to sets.
 ### The precomposition map that is used to state the universal property
 
 ```agda
-is-weakly-constant-precomp-unit-trunc-Prop :
+is-weakly-constant-map-precomp-unit-trunc-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (g : type-trunc-Prop A → B) →
-  is-weakly-constant (g ∘ unit-trunc-Prop)
-is-weakly-constant-precomp-unit-trunc-Prop g x y =
+  is-weakly-constant-map (g ∘ unit-trunc-Prop)
+is-weakly-constant-map-precomp-unit-trunc-Prop g x y =
   ap
     ( g)
     ( eq-is-prop (is-prop-type-trunc-Prop))
 
 precomp-universal-property-set-quotient-trunc-Prop :
   {l1 l2 : Level} {A : UU l1} (B : Set l2) →
-  (type-trunc-Prop A → type-Set B) → Σ (A → type-Set B) is-weakly-constant
+  (type-trunc-Prop A → type-Set B) → Σ (A → type-Set B) is-weakly-constant-map
 pr1 (precomp-universal-property-set-quotient-trunc-Prop B g) =
   g ∘ unit-trunc-Prop
 pr2 (precomp-universal-property-set-quotient-trunc-Prop B g) =
-  is-weakly-constant-precomp-unit-trunc-Prop g
+  is-weakly-constant-map-precomp-unit-trunc-Prop g
 ```
 
 ## Properties
@@ -61,11 +61,11 @@ pr2 (precomp-universal-property-set-quotient-trunc-Prop B g) =
 
 ```agda
 abstract
-  all-elements-equal-image-is-weakly-constant :
+  all-elements-equal-image-is-weakly-constant-map :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
-    is-weakly-constant f →
+    is-weakly-constant-map f →
     all-elements-equal (Σ (type-Set B) (λ b → type-trunc-Prop (fiber f b)))
-  all-elements-equal-image-is-weakly-constant B f H (x , s) (y , t) =
+  all-elements-equal-image-is-weakly-constant-map B f H (x , s) (y , t) =
     eq-type-subtype
       ( λ b → trunc-Prop (fiber f b))
       ( apply-universal-property-trunc-Prop s
@@ -76,21 +76,21 @@ abstract
             ( λ v → inv (pr2 u) ∙ H (pr1 u) (pr1 v) ∙ pr2 v)))
 
 abstract
-  is-prop-image-is-weakly-constant :
+  is-prop-image-is-weakly-constant-map :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
-    is-weakly-constant f →
+    is-weakly-constant-map f →
     is-prop (Σ (type-Set B) (λ b → type-trunc-Prop (fiber f b)))
-  is-prop-image-is-weakly-constant B f H =
+  is-prop-image-is-weakly-constant-map B f H =
     is-prop-all-elements-equal
-      ( all-elements-equal-image-is-weakly-constant B f H)
+      ( all-elements-equal-image-is-weakly-constant-map B f H)
 
 image-weakly-constant-map-Prop :
   {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
-  is-weakly-constant f → Prop (l1 ⊔ l2)
+  is-weakly-constant-map f → Prop (l1 ⊔ l2)
 pr1 (image-weakly-constant-map-Prop B f H) =
   Σ (type-Set B) (λ b → type-trunc-Prop (fiber f b))
 pr2 (image-weakly-constant-map-Prop B f H) =
-  is-prop-image-is-weakly-constant B f H
+  is-prop-image-is-weakly-constant-map B f H
 ```
 
 ### The universal property
@@ -98,7 +98,7 @@ pr2 (image-weakly-constant-map-Prop B f H) =
 ```agda
 map-universal-property-set-quotient-trunc-Prop :
   {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
-  is-weakly-constant f → type-trunc-Prop A → type-Set B
+  is-weakly-constant-map f → type-trunc-Prop A → type-Set B
 map-universal-property-set-quotient-trunc-Prop B f H =
   ( pr1) ∘
   ( map-universal-property-trunc-Prop
@@ -107,20 +107,20 @@ map-universal-property-set-quotient-trunc-Prop B f H =
 
 map-universal-property-set-quotient-trunc-Prop' :
   {l1 l2 : Level} {A : UU l1} (B : Set l2) →
-  Σ (A → type-Set B) is-weakly-constant → type-trunc-Prop A → type-Set B
+  Σ (A → type-Set B) is-weakly-constant-map → type-trunc-Prop A → type-Set B
 map-universal-property-set-quotient-trunc-Prop' B (f , H) =
   map-universal-property-set-quotient-trunc-Prop B f H
 
 abstract
   htpy-universal-property-set-quotient-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
-    (H : is-weakly-constant f) →
+    (H : is-weakly-constant-map f) →
     map-universal-property-set-quotient-trunc-Prop B f H ∘ unit-trunc-Prop ~ f
   htpy-universal-property-set-quotient-trunc-Prop B f H a =
     ap
       ( pr1)
       ( eq-is-prop'
-        ( is-prop-image-is-weakly-constant B f H)
+        ( is-prop-image-is-weakly-constant-map B f H)
         ( map-universal-property-trunc-Prop
           ( image-weakly-constant-map-Prop B f H)
           ( λ x → (f x , unit-trunc-Prop (x , refl)))
@@ -133,7 +133,7 @@ abstract
       ( map-universal-property-set-quotient-trunc-Prop' B)) ~ id
   is-section-map-universal-property-set-quotient-trunc-Prop B (f , H) =
     eq-type-subtype
-      ( is-weakly-constant-prop-Set B)
+      ( is-weakly-constant-map-prop-Set B)
       ( eq-htpy (htpy-universal-property-set-quotient-trunc-Prop B f H))
 
   is-retraction-map-universal-property-set-quotient-trunc-Prop :
@@ -151,7 +151,7 @@ abstract
             ( g x))
         ( htpy-universal-property-set-quotient-trunc-Prop B
           ( g ∘ unit-trunc-Prop)
-          ( is-weakly-constant-precomp-unit-trunc-Prop g)))
+          ( is-weakly-constant-map-precomp-unit-trunc-Prop g)))
 
   universal-property-set-quotient-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) →
