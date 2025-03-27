@@ -80,7 +80,8 @@ module _
     is-disjoint-lower-upper-add-ℝ :
       is-disjoint-lower-upper-ℝ lower-real-add-ℝ upper-real-add-ℝ
     is-disjoint-lower-upper-add-ℝ p (p<x+y , x+y<p) =
-      do
+      let open do-syntax-trunc-Prop empty-Prop
+      in do
         ((px , py) , px<x , py<y , p=px+py) ← p<x+y
         ((qx , qy) , x<qx , y<qy , p=qx+qy) ← x+y<p
         irreflexive-le-ℚ
@@ -96,12 +97,20 @@ module _
               { qy}
               ( le-lower-upper-cut-ℝ x px qx px<x x<qx)
               ( le-lower-upper-cut-ℝ y py qy py<y y<qy)))
-      where open do-syntax-trunc-Prop empty-Prop
 
     is-arithmetically-located-lower-upper-add-ℝ :
       is-arithmetically-located-lower-upper-ℝ lower-real-add-ℝ upper-real-add-ℝ
     is-arithmetically-located-lower-upper-add-ℝ ε⁺ =
-      do
+      let
+        open
+          do-syntax-trunc-Prop
+            (∃
+              ( ℚ × ℚ)
+              ( close-bounds-lower-upper-ℝ
+                ( lower-real-add-ℝ)
+                ( upper-real-add-ℝ)
+                ( ε⁺)))
+      in do
         (px , qx) , qx<px+εx , px<x , x<qx ←
           is-arithmetically-located-ℝ x (left-summand-split-ℚ⁺ ε⁺)
         (py , qy) , qy<py+εy , py<y , y<qy ←
@@ -111,15 +120,6 @@ module _
           ( le-add-split-ℚ⁺ ε⁺ qx px qy py qx<px+εx qy<py+εy ,
             intro-exists (px , py) (px<x , py<y , refl) ,
             intro-exists (qx , qy) (x<qx , y<qy , refl))
-      where
-        open
-          do-syntax-trunc-Prop
-            (∃
-              ( ℚ × ℚ)
-              ( close-bounds-lower-upper-ℝ
-                ( lower-real-add-ℝ)
-                ( upper-real-add-ℝ)
-                ( ε⁺)))
 
     is-located-lower-upper-add-ℝ :
       is-located-lower-upper-ℝ lower-real-add-ℝ upper-real-add-ℝ
