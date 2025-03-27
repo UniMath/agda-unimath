@@ -161,43 +161,40 @@ abstract
 
 ```agda
 abstract
-  triangle-inequality-abs-ℚ :
-    (p q : ℚ) → leq-ℚ⁰⁺ (abs-ℚ (p +ℚ q)) (abs-ℚ p +ℚ⁰⁺ abs-ℚ q)
-  triangle-inequality-abs-ℚ p q
-    with linear-leq-ℚ zero-ℚ p | linear-leq-ℚ zero-ℚ q
-  ... | inl 0≤p | inl 0≤q =
+  triangle-inequality-nonneg-abs-ℚ :
+    (p : ℚ⁰⁺) → (q : ℚ) →
+    leq-ℚ⁰⁺ (abs-ℚ (rational-ℚ⁰⁺ p +ℚ q)) (p +ℚ⁰⁺ abs-ℚ q)
+  triangle-inequality-nonneg-abs-ℚ p⁰⁺@(p , nonneg-p) q
+    with linear-leq-ℚ zero-ℚ q
+  ... | inl 0≤q =
     leq-eq-ℚ
       ( rational-abs-ℚ (p +ℚ q))
-      ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
-      ( equational-reasoning
-        rational-abs-ℚ (p +ℚ q)
-        ＝ p +ℚ q
-          by
-            rational-abs-zero-leq-ℚ
-              ( p +ℚ q)
-              ( tr
-                ( λ r → leq-ℚ r (p +ℚ q))
-                ( left-unit-law-add-ℚ zero-ℚ)
-                ( preserves-leq-add-ℚ {zero-ℚ} {p} {zero-ℚ} {q} 0≤p 0≤q))
-        ＝ rational-abs-ℚ p +ℚ rational-abs-ℚ q
-          by
-            ap-binary
-              ( add-ℚ)
-              ( inv (rational-abs-zero-leq-ℚ p 0≤p))
-              ( inv (rational-abs-zero-leq-ℚ q 0≤q)))
-  ... | inl 0≤p | inr q≤0 =
+      ( p +ℚ rational-abs-ℚ q)
+      ( rational-abs-zero-leq-ℚ
+        ( p +ℚ q)
+        ( tr
+          ( λ r → leq-ℚ r (p +ℚ q))
+          ( left-unit-law-add-ℚ zero-ℚ)
+          ( preserves-leq-add-ℚ
+            { zero-ℚ}
+            { p}
+            { zero-ℚ}
+            { q}
+            ( leq-zero-is-nonnegative-ℚ p nonneg-p)
+            ( 0≤q))) ∙
+          ap-add-ℚ
+            ( refl)
+            ( inv (rational-abs-zero-leq-ℚ q 0≤q)))
+  ... | inr q≤0 =
     leq-max-leq-both-ℚ
-      ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
+      ( p +ℚ rational-abs-ℚ q)
       ( p +ℚ q)
       ( neg-ℚ (p +ℚ q))
       ( transitive-leq-ℚ
         ( p +ℚ q)
         ( p)
-        ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
-        ( inv-tr
-          ( leq-ℚ p)
-          ( ap (_+ℚ rational-abs-ℚ q) (rational-abs-zero-leq-ℚ p 0≤p))
-          ( is-inflationary-map-right-add-rational-ℚ⁰⁺ (abs-ℚ q) p))
+        ( p +ℚ rational-abs-ℚ q)
+        ( is-inflationary-map-right-add-rational-ℚ⁰⁺ (abs-ℚ q) p)
         ( tr
           ( leq-ℚ (p +ℚ q))
           ( right-unit-law-add-ℚ p)
@@ -205,11 +202,11 @@ abstract
       ( transitive-leq-ℚ
         ( neg-ℚ (p +ℚ q))
         ( neg-ℚ q)
-        ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
+        ( p +ℚ rational-abs-ℚ q)
         ( inv-tr
-          ( λ r → leq-ℚ (neg-ℚ q) (rational-abs-ℚ p +ℚ r))
+          ( λ r → leq-ℚ (neg-ℚ q) (p +ℚ r))
           ( rational-abs-leq-zero-ℚ q q≤0)
-          ( is-inflationary-map-left-add-rational-ℚ⁰⁺ (abs-ℚ p) (neg-ℚ q)))
+          ( is-inflationary-map-left-add-rational-ℚ⁰⁺ p⁰⁺ (neg-ℚ q)))
         ( binary-tr
           ( leq-ℚ)
           ( inv (distributive-neg-add-ℚ p q))
@@ -218,64 +215,34 @@ abstract
             ( neg-ℚ q)
             ( neg-ℚ p)
             ( zero-ℚ)
-            ( neg-leq-ℚ zero-ℚ p 0≤p))))
-  ... | inr p≤0 | inl 0≤q =
-    leq-max-leq-both-ℚ
-      ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
-      ( p +ℚ q)
-      ( neg-ℚ (p +ℚ q))
-      ( transitive-leq-ℚ
-        ( p +ℚ q)
-        ( q)
-        ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
-        ( tr
-          ( λ r → leq-ℚ r (rational-abs-ℚ p +ℚ rational-abs-ℚ q))
-          ( rational-abs-zero-leq-ℚ q 0≤q)
-          ( is-inflationary-map-left-add-rational-ℚ⁰⁺
-            ( abs-ℚ p)
-            ( rational-abs-ℚ q)))
-        ( tr
-          ( leq-ℚ (p +ℚ q))
-          ( left-unit-law-add-ℚ q)
-          ( preserves-leq-left-add-ℚ q p zero-ℚ p≤0)))
-      ( transitive-leq-ℚ
-        ( neg-ℚ (p +ℚ q))
-        ( neg-ℚ p)
-        ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
-        ( inv-tr
-          ( leq-ℚ (neg-ℚ p))
-          ( ap (_+ℚ rational-abs-ℚ q) (rational-abs-leq-zero-ℚ p p≤0))
-          ( is-inflationary-map-right-add-rational-ℚ⁰⁺ (abs-ℚ q) (neg-ℚ p)))
-        ( binary-tr
-          ( leq-ℚ)
-          ( inv (distributive-neg-add-ℚ p q))
-          ( right-unit-law-add-ℚ (neg-ℚ p))
-          ( preserves-leq-right-add-ℚ
-            ( neg-ℚ p)
-            ( neg-ℚ q)
-            ( zero-ℚ)
-            ( neg-leq-ℚ zero-ℚ q 0≤q))))
-  ... | inr p≤0 | inr q≤0 =
-    leq-eq-ℚ
-      ( rational-abs-ℚ (p +ℚ q))
-      ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
-      ( equational-reasoning
-        rational-abs-ℚ (p +ℚ q)
-        ＝ neg-ℚ (p +ℚ q)
-          by
-            rational-abs-leq-zero-ℚ
-              ( p +ℚ q)
-              ( tr
-                ( λ r → leq-ℚ (p +ℚ q) r)
-                ( left-unit-law-add-ℚ zero-ℚ)
-                ( preserves-leq-add-ℚ {p} {zero-ℚ} {q} {zero-ℚ} p≤0 q≤0))
-        ＝ neg-ℚ p +ℚ neg-ℚ q by distributive-neg-add-ℚ p q
-        ＝ rational-abs-ℚ p +ℚ rational-abs-ℚ q
-          by
-            inv
-              ( ap-add-ℚ
-                ( rational-abs-leq-zero-ℚ p p≤0)
-                ( rational-abs-leq-zero-ℚ q q≤0)))
+            ( neg-leq-ℚ zero-ℚ p (leq-zero-is-nonnegative-ℚ p nonneg-p)))))
+
+  triangle-inequality-abs-ℚ :
+    (p q : ℚ) → leq-ℚ⁰⁺ (abs-ℚ (p +ℚ q)) (abs-ℚ p +ℚ⁰⁺ abs-ℚ q)
+  triangle-inequality-abs-ℚ p q
+    with linear-leq-ℚ zero-ℚ p
+  ... | inl 0≤p =
+    let
+      p⁰⁺ = p , is-nonnegative-leq-zero-ℚ p 0≤p
+    in
+      inv-tr
+        ( λ r → leq-ℚ⁰⁺ (abs-ℚ (p +ℚ q)) (r +ℚ⁰⁺ abs-ℚ q))
+        ( abs-rational-ℚ⁰⁺ p⁰⁺)
+        ( triangle-inequality-nonneg-abs-ℚ p⁰⁺ q)
+  ... | inr p≤0 =
+    binary-tr
+      ( leq-ℚ)
+      ( ap
+        ( rational-ℚ⁰⁺)
+        ( ap abs-ℚ (inv (distributive-neg-add-ℚ p q)) ∙
+          abs-neg-ℚ (p +ℚ q)))
+      ( ap-add-ℚ
+        ( inv (rational-abs-leq-zero-ℚ p p≤0))
+        ( ap rational-ℚ⁰⁺ (abs-neg-ℚ q)))
+      ( triangle-inequality-nonneg-abs-ℚ
+        ( neg-ℚ p ,
+          is-nonnegative-leq-zero-ℚ (neg-ℚ p) (neg-leq-ℚ p zero-ℚ p≤0))
+        ( neg-ℚ q))
 ```
 
 ### `|ab| = |a||b|`

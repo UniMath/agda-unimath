@@ -116,6 +116,16 @@ abstract
         ( y)
         ( y≤x))
       ( x<z)
+
+  leq-max-leq-both-ℚ : (z x y : ℚ) → leq-ℚ x z → leq-ℚ y z → leq-ℚ (max-ℚ x y) z
+  leq-max-leq-both-ℚ z x y x≤z y≤z =
+    forward-implication
+      ( max-is-least-binary-upper-bound-Decidable-Total-Order
+        ( ℚ-Decidable-Total-Order)
+        ( x)
+        ( y)
+        ( z))
+      ( x≤z , y≤z)
 ```
 
 ### If `a ≤ b` and `c ≤ d`, then `max a c ≤ max b d`
