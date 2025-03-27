@@ -26,7 +26,6 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.maximum-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
-open import real-numbers.inequality-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.rational-real-numbers
 ```
@@ -95,23 +94,26 @@ module _
     neg-leq-neg-abs-ℝ = neg-leq-ℝ x (abs-ℝ x) leq-abs-ℝ
 ```
 
-### Any rational number in the upper cut of an absolute value is positive
+### A rational number in the upper cut of an absolute value is positive
 
 ```agda
-abstract
-  is-positive-upper-cut-abs-ℝ :
-    {l : Level} (p : ℚ) (x : ℝ l) → is-in-upper-cut-ℝ (abs-ℝ x) p →
-    is-positive-ℚ p
-  is-positive-upper-cut-abs-ℝ p x |x|<p =
-    is-positive-le-zero-ℚ
-      ( p)
-      ( reflects-le-real-ℚ
-        ( zero-ℚ)
-        ( p)
-        (concatenate-leq-le-ℝ
-          ( zero-ℝ)
-          ( abs-ℝ x)
-          ( real-ℚ p)
-          ( is-nonnegative-abs-ℝ x)
-          ( le-upper-cut-real-ℚ p (abs-ℝ x) |x|<p)))
+module _
+  {l : Level} (q : ℚ) (x : ℝ l)
+  where
+
+  abstract
+    is-positive-upper-cut-abs-ℝ :
+      is-in-upper-cut-ℝ (abs-ℝ x) q → is-positive-ℚ q
+    is-positive-upper-cut-abs-ℝ |x|<q =
+      is-positive-le-zero-ℚ
+        ( q)
+        ( reflects-le-real-ℚ
+          ( zero-ℚ)
+          ( q)
+          ( concatenate-leq-le-ℝ
+            ( zero-ℝ)
+            ( abs-ℝ x)
+            ( real-ℚ q)
+            ( is-nonnegative-abs-ℝ x)
+            ( le-real-is-in-upper-cut-ℚ q (abs-ℝ x) |x|<q)))
 ```

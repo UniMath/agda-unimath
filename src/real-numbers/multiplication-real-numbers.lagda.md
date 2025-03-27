@@ -261,6 +261,9 @@ module _
         let
           min = min-ℚ (min-ℚ (a *ℚ c) (a *ℚ d)) (min-ℚ (b *ℚ c) (b *ℚ d))
           max = max-ℚ (max-ℚ (a *ℚ c) (a *ℚ d)) (max-ℚ (b *ℚ c) (b *ℚ d))
+          ⟨a+δ⟩⟨c+θ⟩-ac≤ε : leq-ℚ (abs-ℚ ((a +ℚ δ) *ℚ (c +ℚ θ) -ℚ (a *ℚ c))) ε
+          ⟨a+δ⟩⟨c+θ⟩-ac≤ε =
+            {! transitive-leq-ℚ !}
         intro-exists (min , max) {!   !}
       where
         open
