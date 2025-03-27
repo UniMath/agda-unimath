@@ -133,16 +133,14 @@ is-in-lower-neighborhood-real-bound-leq-ℝ d⁺@(d , _) x y y≤x+d q q+d<y =
       ( real-ℚ q)
       ( y -ℝ real-ℚ d)
       ( x)
-      ( forward-implication
-        ( iff-diff-right-le-ℝ
-          ( real-ℚ q)
-          ( real-ℚ d)
-          ( y))
+      ( le-transpose-left-add-ℝ
+        ( real-ℚ q)
+        ( real-ℚ d) y
         ( inv-tr
           ( λ z → le-ℝ z y)
           ( add-real-ℚ q d)
           ( le-real-is-in-lower-cut-ℚ (q +ℚ d) y q+d<y)))
-      ( backward-implication (iff-add-right-leq-ℝ y (real-ℚ d) x) y≤x+d))
+      ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
 
 neighborhood-±-bound-leq-ℝ :
   {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
