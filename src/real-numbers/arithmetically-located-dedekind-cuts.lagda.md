@@ -196,7 +196,16 @@ module _
     is-arithmetically-located-ℝ :
       is-arithmetically-located-lower-upper-ℝ (lower-real-ℝ x) (upper-real-ℝ x)
     is-arithmetically-located-ℝ ε⁺@(ε , _) =
-      do
+      let
+        open
+          do-syntax-trunc-Prop
+            ( ∃
+              ( ℚ × ℚ)
+              ( close-bounds-lower-upper-ℝ
+                ( lower-real-ℝ x)
+                ( upper-real-ℝ x)
+                ( ε⁺)))
+      in do
         ε'⁺@(ε' , pos-ε') , 2ε'<ε ← double-le-ℚ⁺ ε⁺
         p , p<x ← is-inhabited-lower-cut-ℝ x
         q , x<q ← is-inhabited-upper-cut-ℝ x
@@ -222,15 +231,6 @@ module _
           ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε ,
             r<x ,
             x<r+2ε')
-      where
-        open
-          do-syntax-trunc-Prop
-            (∃
-              ( ℚ × ℚ)
-              ( close-bounds-lower-upper-ℝ
-                ( lower-real-ℝ x)
-                ( upper-real-ℝ x)
-                ( ε⁺)))
 ```
 
 ## References
