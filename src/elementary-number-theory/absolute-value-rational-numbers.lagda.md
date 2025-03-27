@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.absolute-value-rational-numbers where
 ```
 
@@ -31,7 +32,9 @@ open import foundation.transport-along-identifications
 
 The
 {{#concept "absolute value" Disambiguation="of a rational number" Agda=abs-ℚ WD="absolute value" WDID=Q120812}}
-a rational number is the greater of itself and its negation.
+of a [rational number](elementary-number-theory.rational-numbers.md) is the
+[greater](elementary-number-theory.maximum-rational-numbers.md) of itself and
+its negation.
 
 ## Definition
 
