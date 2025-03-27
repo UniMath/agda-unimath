@@ -16,6 +16,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
@@ -200,7 +201,7 @@ module _
   where
 
   neg-leq-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ y) (neg-ℝ x)
-  neg-leq-ℝ x≤y = leq-leq-ℝ' (neg-ℝ y) (neg-ℝ x) (x≤y ∘ neg-ℚ)
+  neg-leq-ℝ x≤y = leq-leq'-ℝ (neg-ℝ y) (neg-ℝ x) (x≤y ∘ neg-ℚ)
 ```
 
 ## References
