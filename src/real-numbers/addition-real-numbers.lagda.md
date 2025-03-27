@@ -80,7 +80,8 @@ module _
     is-disjoint-lower-upper-add-ℝ :
       is-disjoint-lower-upper-ℝ lower-real-add-ℝ upper-real-add-ℝ
     is-disjoint-lower-upper-add-ℝ p (p<x+y , x+y<p) =
-      do
+      let open do-syntax-trunc-Prop empty-Prop
+      in do
         ((px , py) , px<x , py<y , p=px+py) ← p<x+y
         ((qx , qy) , x<qx , y<qy , p=qx+qy) ← x+y<p
         irreflexive-le-ℚ
@@ -96,12 +97,20 @@ module _
               { qy}
               ( le-lower-upper-cut-ℝ x px qx px<x x<qx)
               ( le-lower-upper-cut-ℝ y py qy py<y y<qy)))
-      where open do-syntax-trunc-Prop empty-Prop
 
     is-arithmetically-located-lower-upper-add-ℝ :
       is-arithmetically-located-lower-upper-ℝ lower-real-add-ℝ upper-real-add-ℝ
     is-arithmetically-located-lower-upper-add-ℝ ε⁺ =
-      do
+      let
+        open
+          do-syntax-trunc-Prop
+            (∃
+              ( ℚ × ℚ)
+              ( close-bounds-lower-upper-ℝ
+                ( lower-real-add-ℝ)
+                ( upper-real-add-ℝ)
+                ( ε⁺)))
+      in do
         (px , qx) , qx<px+εx , px<x , x<qx ←
           is-arithmetically-located-ℝ x (left-summand-split-ℚ⁺ ε⁺)
         (py , qy) , qy<py+εy , py<y , y<qy ←
@@ -111,15 +120,6 @@ module _
           ( le-add-split-ℚ⁺ ε⁺ qx px qy py qx<px+εx qy<py+εy ,
             intro-exists (px , py) (px<x , py<y , refl) ,
             intro-exists (qx , qy) (x<qx , y<qy , refl))
-      where
-        open
-          do-syntax-trunc-Prop
-            (∃
-              ( ℚ × ℚ)
-              ( close-bounds-lower-upper-ℝ
-                ( lower-real-add-ℝ)
-                ( upper-real-add-ℝ)
-                ( ε⁺)))
 
     is-located-lower-upper-add-ℝ :
       is-located-lower-upper-ℝ lower-real-add-ℝ upper-real-add-ℝ
@@ -467,26 +467,26 @@ semigroup-add-ℝ-lzero =
 
 monoid-add-ℝ-lzero : Monoid (lsuc lzero)
 monoid-add-ℝ-lzero =
-  semigroup-add-ℝ-lzero ,
-  zero-ℝ ,
-  left-unit-law-add-ℝ ,
-  right-unit-law-add-ℝ
+  ( semigroup-add-ℝ-lzero ,
+    zero-ℝ ,
+    left-unit-law-add-ℝ ,
+    right-unit-law-add-ℝ)
 
 commutative-monoid-add-ℝ-lzero : Commutative-Monoid (lsuc lzero)
 commutative-monoid-add-ℝ-lzero =
-  monoid-add-ℝ-lzero ,
-  commutative-add-ℝ
+  ( monoid-add-ℝ-lzero ,
+    commutative-add-ℝ)
 
 group-add-ℝ-lzero : Group (lsuc lzero)
 group-add-ℝ-lzero =
-  semigroup-add-ℝ-lzero ,
-  ( zero-ℝ , left-unit-law-add-ℝ , right-unit-law-add-ℝ) ,
-  ( neg-ℝ ,
-    eq-sim-ℝ ∘ left-inverse-law-add-ℝ ,
-    eq-sim-ℝ ∘ right-inverse-law-add-ℝ)
+  ( ( semigroup-add-ℝ-lzero) ,
+    ( zero-ℝ , left-unit-law-add-ℝ , right-unit-law-add-ℝ) ,
+    ( neg-ℝ ,
+      eq-sim-ℝ ∘ left-inverse-law-add-ℝ ,
+      eq-sim-ℝ ∘ right-inverse-law-add-ℝ))
 
 abelian-group-add-ℝ-lzero : Ab (lsuc lzero)
 abelian-group-add-ℝ-lzero =
-  group-add-ℝ-lzero ,
-  commutative-add-ℝ
+  ( group-add-ℝ-lzero ,
+    commutative-add-ℝ)
 ```

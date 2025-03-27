@@ -120,7 +120,9 @@ module _
   abstract
     asymmetric-le-ℝ : le-ℝ x y → ¬ (le-ℝ y x)
     asymmetric-le-ℝ x<y y<x =
-      do
+      let
+        open do-syntax-trunc-Prop empty-Prop
+      in do
         ( p , x<p , p<y) ← x<y
         ( q , y<q , q<x) ← y<x
         rec-coproduct
@@ -133,7 +135,6 @@ module _
             ( q)
             ( le-lower-upper-cut-ℝ y p q p<y y<q))
           ( decide-le-leq-ℚ p q)
-      where open do-syntax-trunc-Prop empty-Prop
 ```
 
 ### Strict inequality on the reals is transitive
@@ -149,14 +150,15 @@ module _
   abstract
     transitive-le-ℝ : le-ℝ y z → le-ℝ x y → le-ℝ x z
     transitive-le-ℝ y<z x<y =
-      do
+      let
+        open do-syntax-trunc-Prop (le-ℝ-Prop x z)
+      in do
         ( p , x<p , p<y) ← x<y
         ( q , y<q , q<z) ← y<z
         intro-exists
           ( p)
           ( x<p ,
             le-lower-cut-ℝ z p q (le-lower-upper-cut-ℝ y p q p<y y<q) q<z)
-      where open do-syntax-trunc-Prop (le-ℝ-Prop x z)
 ```
 
 ### The canonical map from rationals to reals preserves and reflects strict inequality
@@ -253,17 +255,19 @@ module _
   abstract
     exists-lesser-ℝ : exists (ℝ lzero) (λ y → le-ℝ-Prop y x)
     exists-lesser-ℝ =
-      do
+      let
+        open do-syntax-trunc-Prop (∃ (ℝ lzero) (λ y → le-ℝ-Prop y x))
+      in do
         ( q , q<x) ← is-inhabited-lower-cut-ℝ x
         intro-exists (real-ℚ q) (le-real-is-in-lower-cut-ℚ q x q<x)
-      where open do-syntax-trunc-Prop (∃ (ℝ lzero) (λ y → le-ℝ-Prop y x))
 
     exists-greater-ℝ : exists (ℝ lzero) (λ y → le-ℝ-Prop x y)
     exists-greater-ℝ =
-      do
+      let
+        open do-syntax-trunc-Prop (∃ (ℝ lzero) (le-ℝ-Prop x))
+      in do
         ( q , x<q) ← is-inhabited-upper-cut-ℝ x
         intro-exists (real-ℚ q) (le-real-is-in-upper-cut-ℚ q x x<q)
-      where open do-syntax-trunc-Prop (∃ (ℝ lzero) (le-ℝ-Prop x))
 ```
 
 ### Negation reverses the strict ordering of real numbers
@@ -278,13 +282,14 @@ module _
   abstract
     neg-le-ℝ : le-ℝ x y → le-ℝ (neg-ℝ y) (neg-ℝ x)
     neg-le-ℝ x<y =
-      do
+      let
+        open do-syntax-trunc-Prop (le-ℝ-Prop (neg-ℝ y) (neg-ℝ x))
+      in do
         (p , x<p , p<y) ← x<y
         intro-exists
           ( neg-ℚ p)
           ( inv-tr (is-in-lower-cut-ℝ y) (neg-neg-ℚ p) p<y ,
             inv-tr (is-in-upper-cut-ℝ x) (neg-neg-ℚ p) x<p)
-      where open do-syntax-trunc-Prop (le-ℝ-Prop (neg-ℝ y) (neg-ℝ x))
 ```
 
 ### If `x` is less than `y`, then `y` is not less than or equal to `x`
@@ -313,7 +318,9 @@ module _
   abstract
     leq-not-le-ℝ : ¬ (le-ℝ x y) → leq-ℝ y x
     leq-not-le-ℝ x≮y p p<y =
-      do
+      let
+        open do-syntax-trunc-Prop (lower-cut-ℝ x p)
+      in do
         ( q , p<q , q<y) ←
           forward-implication (is-rounded-lower-cut-ℝ y p) p<y
         elim-disjunction
@@ -321,7 +328,6 @@ module _
           ( id)
           ( λ x<q → reductio-ad-absurdum (intro-exists q (x<q , q<y)) x≮y)
           ( is-located-lower-upper-cut-ℝ x p q p<q)
-      where open do-syntax-trunc-Prop (lower-cut-ℝ x p)
 ```
 
 ### If `x` is less than or equal to `y`, then `y` is not less than `x`
@@ -360,17 +366,17 @@ module _
     dense-le-ℝ :
       le-ℝ x y → exists (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y)
     dense-le-ℝ x<y =
-      do
+      let
+        open
+          do-syntax-trunc-Prop
+            ( ∃ (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y))
+      in do
         ( q , x<q , q<y) ← x<y
         ( p , p<q , x<p) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
         ( r , q<r , r<y) ← forward-implication (is-rounded-lower-cut-ℝ y q) q<y
         intro-exists
           ( real-ℚ q)
           ( intro-exists p (x<p , p<q) , intro-exists r (q<r , r<y))
-      where
-        open
-          do-syntax-trunc-Prop
-            ( ∃ (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y))
 ```
 
 ### Strict inequality on the real numbers is cotransitive
@@ -379,7 +385,9 @@ module _
 abstract
   cotransitive-le-ℝ : is-cotransitive-Large-Relation-Prop ℝ le-ℝ-Prop
   cotransitive-le-ℝ x y z x<y =
-    do
+    let
+      open do-syntax-trunc-Prop (le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
+    in do
       ( q , x<q , q<y) ← x<y
       ( p , p<q , x<p) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
       map-disjunction
@@ -390,7 +398,6 @@ abstract
         ( λ p<z → intro-exists p (x<p , p<z))
         ( λ z<q → intro-exists q (z<q , q<y))
         ( is-located-lower-upper-cut-ℝ z p q p<q)
-    where open do-syntax-trunc-Prop (le-ℝ-Prop x z ∨ le-ℝ-Prop z y)
 ```
 
 ### Strict inequality on the real numbers is invariant under similarity
@@ -441,7 +448,11 @@ module _
   abstract
     preserves-le-right-add-ℝ : le-ℝ x y → le-ℝ (x +ℝ z) (y +ℝ z)
     preserves-le-right-add-ℝ x<y =
-      do
+      let
+        open
+          do-syntax-trunc-Prop
+            ( ∃ ℚ (λ r → upper-cut-ℝ (x +ℝ z) r ∧ lower-cut-ℝ (y +ℝ z) r))
+      in do
         ( p , x<p , p<y) ← x<y
         ( q , p<q , q<y) ← forward-implication (is-rounded-lower-cut-ℝ y p) p<y
         ( (r , s) , s<r+q-p , r<z , z<s) ←
@@ -477,10 +488,6 @@ module _
                           ( _+ℚ s)
                           ( inv (is-identity-right-conjugation-add-ℚ q p))
                     ＝ q +ℚ ((p -ℚ q) +ℚ s) by associative-add-ℚ _ _ _)))
-      where
-        open
-          do-syntax-trunc-Prop
-            ( ∃ ℚ (λ r → upper-cut-ℝ (x +ℝ z) r ∧ lower-cut-ℝ (y +ℝ z) r))
 
     preserves-le-left-add-ℝ : le-ℝ x y → le-ℝ (z +ℝ x) (z +ℝ y)
     preserves-le-left-add-ℝ x<y =
