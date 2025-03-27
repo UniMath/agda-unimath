@@ -71,6 +71,7 @@ open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.transposition-cuts-dedekind-real-numbers
 ```
 
 </details>
@@ -567,7 +568,9 @@ module _
         ( is-in-subtype lower-cut-lim-cauchy-approximation-leq-ℝ q ×
           is-in-subtype upper-cut-lim-cauchy-approximation-leq-ℝ q)
     is-disjoint-cut-lim-cauchy-approximation-leq-ℝ q (q<lim , lim<q) =
-      do
+      let
+        open do-syntax-trunc-Prop empty-Prop
+      in do
         (εl⁺@(εl , _) , θl⁺@(θl , _)) , q+εl+θl<xεl ← q<lim
         (εu⁺@(εu , _) , θu⁺@(θu , _)) , xεu<q-εu-θu ← lim<q
         let xεl = map-cauchy-approximation-leq-ℝ x εl⁺
@@ -592,33 +595,30 @@ module _
                       ＝ q +ℚ (θl +ℚ εl) by associative-add-ℚ _ _ _
                       ＝ q +ℚ (εl +ℚ θl) by ap (q +ℚ_) (commutative-add-ℚ _ _))
                   ( q+εl+θl<xεl))
-            q-εu<xεu : is-in-lower-cut-ℝ xεu (q -ℚ εu)
-            q-εu<xεu =
-              le-lower-cut-ℝ
+        is-disjoint-cut-ℝ
+          ( xεu)
+          ( q -ℚ εu)
+          ( le-lower-cut-ℝ
+              ( xεu)
+              ( q -ℚ εu)
+              ( (q -ℚ εu) +ℚ θl)
+              ( le-right-add-rational-ℚ⁺ (q -ℚ εu) θl⁺)
+              ( q-εu+θl<xεu) ,
+            tr
+              ( is-in-upper-cut-ℝ xεu)
+              ( equational-reasoning
+                (q -ℚ (εu +ℚ θu)) +ℚ θu
+                ＝ (q +ℚ (neg-ℚ εu +ℚ neg-ℚ θu)) +ℚ θu
+                  by ap (λ r → (q +ℚ r) +ℚ θu) (distributive-neg-add-ℚ εu θu)
+                ＝ ((q -ℚ εu) -ℚ θu) +ℚ θu
+                  by ap (_+ℚ θu) (inv (associative-add-ℚ _ _ _))
+                ＝ q -ℚ εu by is-section-diff-ℚ θu _)
+              ( le-upper-cut-ℝ
                 ( xεu)
-                ( q -ℚ εu)
-                ( (q -ℚ εu) +ℚ θl)
-                ( le-right-add-rational-ℚ⁺ (q -ℚ εu) θl⁺)
-                ( q-εu+θl<xεu)
-            xεu<q-εu : is-in-upper-cut-ℝ xεu (q -ℚ εu)
-            xεu<q-εu =
-              tr
-                ( is-in-upper-cut-ℝ xεu)
-                ( equational-reasoning
-                  (q -ℚ (εu +ℚ θu)) +ℚ θu
-                  ＝ (q +ℚ (neg-ℚ εu +ℚ neg-ℚ θu)) +ℚ θu
-                    by ap (λ r → (q +ℚ r) +ℚ θu) (distributive-neg-add-ℚ εu θu)
-                  ＝ ((q -ℚ εu) -ℚ θu) +ℚ θu
-                    by ap (_+ℚ θu) (inv (associative-add-ℚ _ _ _))
-                  ＝ q -ℚ εu by is-section-diff-ℚ θu _)
-                ( le-upper-cut-ℝ
-                  ( xεu)
-                  ( q -ℚ (εu +ℚ θu))
-                  ( (q -ℚ (εu +ℚ θu)) +ℚ θu)
-                  ( le-right-add-rational-ℚ⁺ (q -ℚ (εu +ℚ θu)) θu⁺)
-                  ( xεu<q-εu-θu))
-        is-disjoint-cut-ℝ xεu (q -ℚ εu) (q-εu<xεu , xεu<q-εu)
-      where open do-syntax-trunc-Prop empty-Prop
+                ( q -ℚ (εu +ℚ θu))
+                ( (q -ℚ (εu +ℚ θu)) +ℚ θu)
+                ( le-right-add-rational-ℚ⁺ (q -ℚ (εu +ℚ θu)) θu⁺)
+                ( xεu<q-εu-θu)))
 
     is-located-lower-upper-cut-lim-cauchy-approximation-leq-ℝ :
       is-located-lower-upper-ℝ
@@ -643,8 +643,8 @@ module _
           ( lower-cut-lim-cauchy-approximation-leq-ℝ p)
           ( upper-cut-ℝ xε (q -ℚ 2ε))
           ( upper-cut-lim-cauchy-approximation-leq-ℝ q)
-          ( λ p+2ε<xε → intro-exists (ε⁺ , ε⁺) p+2ε<xε)
-          ( λ xε<q-2ε → intro-exists (ε⁺ , ε⁺) xε<q-2ε)
+          ( intro-exists (ε⁺ , ε⁺))
+          ( intro-exists (ε⁺ , ε⁺))
           ( is-located-lower-upper-cut-ℝ
             ( map-cauchy-approximation-leq-ℝ x ε⁺)
             ( p +ℚ 2ε)
@@ -724,39 +724,6 @@ module _
               ( inv (distributive-neg-add-ℝ _ _) ∙
                 ap neg-ℝ (add-real-ℚ _ _ ∙ ap real-ℚ ε+θ'+θ''=ε+θ)))
           ( le-diff-real-ℝ⁺ (xε -ℝ real-ℚ (ε +ℚ θ')) (positive-real-ℚ⁺ θ''⁺))
-      let
-        xε<r-ε-θ' : is-in-upper-cut-ℝ xε (r -ℚ (ε +ℚ θ'))
-        xε<r-ε-θ' =
-          is-in-upper-cut-le-real-ℚ
-            ( r -ℚ (ε +ℚ θ'))
-            ( xε)
-            ( tr
-              ( le-ℝ xε)
-              ( ap (real-ℚ r +ℝ_) (neg-real-ℚ _) ∙ add-real-ℚ _ _)
-              ( le-transpose-left-add-ℝ
-                ( xε)
-                ( real-ℚ (ε +ℚ θ'))
-                ( real-ℚ r)
-                ( le-real-is-in-upper-cut-ℚ
-                  ( r)
-                  ( xε +ℝ real-ℚ (ε +ℚ θ'))
-                  ( xε+ε+θ'<r))))
-        q+ε+θ'<xε : is-in-lower-cut-ℝ xε (q +ℚ (ε +ℚ θ'))
-        q+ε+θ'<xε =
-          is-in-lower-cut-le-real-ℚ
-            ( q +ℚ (ε +ℚ θ'))
-            ( xε)
-            ( tr
-              ( λ y → le-ℝ y xε)
-              ( add-real-ℚ _ _)
-              ( le-transpose-right-diff-ℝ
-                ( real-ℚ q)
-                ( xε)
-                ( real-ℚ (ε +ℚ θ'))
-                ( le-real-is-in-lower-cut-ℚ
-                  ( q)
-                  ( xε -ℝ real-ℚ (ε +ℚ θ'))
-                  ( q<xε-ε-θ'))))
       neighborhood-±-bound-leq-ℝ
         ( ε⁺ +ℚ⁺ θ⁺)
         ( xε)
@@ -775,7 +742,9 @@ module _
               ( le-real-is-in-lower-cut-ℚ
                 ( q)
                 ( lim)
-                ( intro-exists (ε⁺ , θ'⁺) q+ε+θ'<xε))
+                ( intro-exists
+                  ( ε⁺ , θ'⁺)
+                  ( transpose-is-in-lower-cut-diff-ℝ xε (ε +ℚ θ') q q<xε-ε-θ')))
               ( le-real-is-in-upper-cut-ℚ q (xε -ℝ real-ℚ (ε +ℚ θ)) xε-ε-θ<q))))
         ( leq-le-ℝ
           ( lim)
@@ -788,7 +757,9 @@ module _
             ( le-real-is-in-upper-cut-ℚ
               ( r)
               ( lim)
-              ( intro-exists (ε⁺ , θ'⁺) xε<r-ε-θ'))))
+              ( intro-exists
+                ( ε⁺ , θ'⁺)
+                ( transpose-is-in-upper-cut-add-ℝ xε (ε +ℚ θ') r xε+ε+θ'<r)))))
 
   is-convergent-cauchy-approximation-leq-ℝ :
     is-convergent-cauchy-approximation-Metric-Space
