@@ -22,7 +22,11 @@ open import real-numbers.rational-real-numbers
 
 ## Idea
 
-A real number `x` is nonnegative if `0 ≤ x`.
+A real number `x` is
+{{#concept "nonnegative" Disambiguation="real number" Agda=is-nonnegative-ℝ}} if
+`0 ≤ x`.
+
+## Definitions
 
 ```agda
 is-nonnegative-ℝ : {l : Level} → ℝ l → UU l
