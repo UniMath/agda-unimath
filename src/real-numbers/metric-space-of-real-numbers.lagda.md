@@ -687,15 +687,22 @@ module _
       ( x)
       ( lim-cauchy-approximation-leq-ℝ x)
   is-limit-lim-cauchy-approximation-leq-ℝ ε⁺@(ε , _) θ⁺@(θ , _) =
-    do
-      let
-        lim = lim-cauchy-approximation-leq-ℝ x
-        xε = map-cauchy-approximation-leq-ℝ x ε⁺
-        θ'⁺@(θ' , _) = left-summand-split-ℚ⁺ θ⁺
-        θ''⁺@(θ'' , _) = right-summand-split-ℚ⁺ θ⁺
-        ε+θ'+θ''=ε+θ =
-          associative-add-ℚ _ _ _ ∙
-          ap (ε +ℚ_) (ap rational-ℚ⁺ (eq-add-split-ℚ⁺ θ⁺))
+    let
+      open
+        do-syntax-trunc-Prop
+          ( premetric-leq-ℝ
+            ( l)
+            ( ε⁺ +ℚ⁺ θ⁺)
+            ( map-cauchy-approximation-leq-ℝ x ε⁺)
+            ( lim-cauchy-approximation-leq-ℝ x))
+      lim = lim-cauchy-approximation-leq-ℝ x
+      xε = map-cauchy-approximation-leq-ℝ x ε⁺
+      θ'⁺@(θ' , _) = left-summand-split-ℚ⁺ θ⁺
+      θ''⁺@(θ'' , _) = right-summand-split-ℚ⁺ θ⁺
+      ε+θ'+θ''=ε+θ =
+        associative-add-ℚ _ _ _ ∙
+        ap (ε +ℚ_) (ap rational-ℚ⁺ (eq-add-split-ℚ⁺ θ⁺))
+    in do
       ( r , xε+ε+θ'<r , r<xε+ε+θ) ←
         tr
           ( le-ℝ (xε +ℝ real-ℚ (ε +ℚ θ')))
@@ -722,8 +729,10 @@ module _
             ( tr
               ( le-ℝ xε)
               ( ap (real-ℚ r +ℝ_) (neg-real-ℚ _) ∙ add-real-ℚ _ _)
-              ( forward-implication
-                ( iff-diff-right-le-ℝ xε (real-ℚ (ε +ℚ θ')) (real-ℚ r))
+              ( le-transpose-left-add-ℝ
+                ( xε)
+                ( real-ℚ (ε +ℚ θ'))
+                ( real-ℚ r)
                 ( le-real-is-in-upper-cut-ℚ
                   ( r)
                   ( xε +ℝ real-ℚ (ε +ℚ θ'))
@@ -736,8 +745,10 @@ module _
             ( tr
               ( λ y → le-ℝ y xε)
               ( add-real-ℚ _ _)
-              ( backward-implication
-                ( iff-diff-right-le-ℝ (real-ℚ q) (real-ℚ (ε +ℚ θ')) xε)
+              ( le-transpose-right-diff-ℝ
+                ( real-ℚ q)
+                ( xε)
+                ( real-ℚ (ε +ℚ θ'))
                 ( le-real-is-in-lower-cut-ℚ
                   ( q)
                   ( xε -ℝ real-ℚ (ε +ℚ θ'))
@@ -749,11 +760,10 @@ module _
         ( leq-le-ℝ
           ( xε)
           ( lim +ℝ real-ℚ (ε +ℚ θ))
-          ( forward-implication
-            ( iff-add-right-le-ℝ
-              ( xε)
-              ( real-ℚ (ε +ℚ θ))
-              ( lim))
+          ( le-transpose-left-diff-ℝ
+            ( xε)
+            ( real-ℚ (ε +ℚ θ))
+            ( lim)
             ( transitive-le-ℝ
               ( xε -ℝ real-ℚ (ε +ℚ θ))
               ( real-ℚ q)
@@ -775,14 +785,6 @@ module _
               ( r)
               ( lim)
               ( intro-exists (ε⁺ , θ'⁺) xε<r-ε-θ'))))
-    where
-      open
-        do-syntax-trunc-Prop
-          ( premetric-leq-ℝ
-            ( l)
-            ( ε⁺ +ℚ⁺ θ⁺)
-            ( map-cauchy-approximation-leq-ℝ x ε⁺)
-            ( lim-cauchy-approximation-leq-ℝ x))
 
   is-convergent-cauchy-approximation-leq-ℝ :
     is-convergent-cauchy-approximation-Metric-Space
