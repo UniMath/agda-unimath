@@ -47,6 +47,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.pi-decompositions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
@@ -714,6 +715,26 @@ module _
           { s +ℚ rational-ℚ⁺ right-summand-split-ℚ⁺}
           ( p<q+left)
           ( r<s+right))
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {P : ℚ⁺ → UU l1}
+  {Q : ℚ⁺ → UU l2}
+  (R : ℚ⁺ → UU l3)
+  (merge-add-family-ℚ⁺ : (d₁ d₂ : ℚ⁺) → P d₁ → Q d₂ → R (d₁ +ℚ⁺ d₂))
+  where
+
+  Π-merge-family-ℚ⁺ : Π ℚ⁺ P → Π ℚ⁺ Q → Π ℚ⁺ R
+  Π-merge-family-ℚ⁺ H K d =
+    tr R
+      ( eq-add-split-ℚ⁺ d)
+      ( merge-add-family-ℚ⁺
+        ( left-summand-split-ℚ⁺ d)
+        ( right-summand-split-ℚ⁺ d)
+        ( H (left-summand-split-ℚ⁺ d))
+        ( K (right-summand-split-ℚ⁺ d)))
 ```
 
 ### Any two positive rational numbers have a positive rational number strictly less than both

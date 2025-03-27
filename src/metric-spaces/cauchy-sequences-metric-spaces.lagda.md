@@ -25,14 +25,20 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.sequences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.convergent-sequences-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
+open import metric-spaces.limits-sequences-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.sequences-metric-spaces
+open import metric-spaces.short-functions-metric-spaces
 ```
 
 </details>
@@ -61,17 +67,17 @@ approximation, with the same limit if either exists, and vice versa.
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : ℕ → type-Metric-Space M)
+  (x : sequence-Metric-Space M)
   where
+
+  is-cauchy-modulus-sequence-Metric-Space : ℚ⁺ → ℕ → UU l2
+  is-cauchy-modulus-sequence-Metric-Space ε N =
+    (m k : ℕ) → leq-ℕ N m → leq-ℕ N k →
+    neighborhood-Metric-Space M ε (x m) (x k)
 
   is-cauchy-sequence-Metric-Space : UU l2
   is-cauchy-sequence-Metric-Space =
-    (ε : ℚ⁺) →
-    Σ
-      ( ℕ)
-      ( λ n →
-        (m k : ℕ) → leq-ℕ n m → leq-ℕ n k →
-        neighborhood-Metric-Space M ε (x m) (x k))
+    (ε : ℚ⁺) → Σ ℕ (is-cauchy-modulus-sequence-Metric-Space ε)
 
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
@@ -79,7 +85,7 @@ module _
 
   cauchy-sequence-Metric-Space : UU (l1 ⊔ l2)
   cauchy-sequence-Metric-Space =
-    Σ (ℕ → type-Metric-Space M) (is-cauchy-sequence-Metric-Space M)
+    Σ (sequence-Metric-Space M) (is-cauchy-sequence-Metric-Space M)
 
   modulus-of-convergence-cauchy-sequence-Metric-Space :
     cauchy-sequence-Metric-Space → ℚ⁺ → ℕ
@@ -87,7 +93,7 @@ module _
     pr1 (is-cauchy-x ε⁺)
 
   map-cauchy-sequence-Metric-Space :
-    cauchy-sequence-Metric-Space → ℕ → type-Metric-Space M
+    cauchy-sequence-Metric-Space → sequence-Metric-Space M
   map-cauchy-sequence-Metric-Space = pr1
 
   is-cauchy-sequence-cauchy-sequence-Metric-Space :
@@ -136,47 +142,6 @@ module _
         ( n≤m)
 ```
 
-### Limits of arbitrary sequences
-
-```agda
-module _
-  {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : ℕ → type-Metric-Space M)
-  (l : type-Metric-Space M)
-  where
-
-  is-limit-sequence-Metric-Space : UU l2
-  is-limit-sequence-Metric-Space =
-    (ε : ℚ⁺) →
-    Σ
-      ( ℕ)
-      ( λ n →
-        (m : ℕ) → leq-ℕ n m →
-        neighborhood-Metric-Space
-          ( M)
-          ( ε)
-          ( x m)
-          ( l))
-
-module _
-  {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : ℕ → type-Metric-Space M)
-  where
-
-  has-limit-sequence-Metric-Space : UU (l1 ⊔ l2)
-  has-limit-sequence-Metric-Space =
-    Σ (type-Metric-Space M) (is-limit-sequence-Metric-Space M x)
-
-  limit-has-limit-sequence-Metric-Space :
-    has-limit-sequence-Metric-Space → type-Metric-Space M
-  limit-has-limit-sequence-Metric-Space = pr1
-
-  is-limit-limit-has-limit-sequence-Metric-Space :
-    (H : has-limit-sequence-Metric-Space) →
-    is-limit-sequence-Metric-Space M x (limit-has-limit-sequence-Metric-Space H)
-  is-limit-limit-has-limit-sequence-Metric-Space = pr2
-```
-
 ### Limits of Cauchy sequences
 
 ```agda
@@ -207,48 +172,53 @@ module _
 
 ## Properties
 
-### If a sequence has a limit, it is Cauchy
+### A convergent sequence is Cauchy
 
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : ℕ → type-Metric-Space M)
-  (H : has-limit-sequence-Metric-Space M x)
+  (x : convergent-sequence-Metric-Space M)
   where
 
   abstract
-    is-cauchy-sequence-has-limit-Metric-Space :
-      is-cauchy-sequence-Metric-Space M x
-    is-cauchy-sequence-has-limit-Metric-Space ε⁺@(ε , _) =
+    is-cauchy-seq-convergent-sequence-Metric-Space :
+      is-cauchy-sequence-Metric-Space M
+        (seq-convergent-sequence-Metric-Space M x)
+    is-cauchy-seq-convergent-sequence-Metric-Space ε⁺@(ε , _) =
       let
-        lim = limit-has-limit-sequence-Metric-Space M x H
+        lim = limit-convergent-sequence-Metric-Space M x
         (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
         (n , n≤m⇒|xm-l|<ε') =
-          is-limit-limit-has-limit-sequence-Metric-Space M x H ε'⁺
+          is-limit-limit-convergent-sequence-Metric-Space M x ε'⁺
       in
         n ,
         λ m k n≤m n≤k →
         is-monotonic-structure-Metric-Space
           ( M)
-          ( x m)
-          ( x k)
+          ( seq-convergent-sequence-Metric-Space M x m)
+          ( seq-convergent-sequence-Metric-Space M x k)
           ( ε'⁺ +ℚ⁺ ε'⁺)
           ( ε⁺)
           ( 2ε'<ε)
           ( is-triangular-structure-Metric-Space
             ( M)
-            ( x m)
+            ( seq-convergent-sequence-Metric-Space M x m)
             ( lim)
-            ( x k)
+            ( seq-convergent-sequence-Metric-Space M x k)
             ( ε'⁺)
             ( ε'⁺)
             ( is-symmetric-structure-Metric-Space
               ( M)
               ( ε'⁺)
-              ( x k)
+              ( seq-convergent-sequence-Metric-Space M x k)
               ( lim)
               ( n≤m⇒|xm-l|<ε' k n≤k))
             ( n≤m⇒|xm-l|<ε' m n≤m))
+
+  cauchy-convergent-sequence-Metric-Space : cauchy-sequence-Metric-Space M
+  cauchy-convergent-sequence-Metric-Space =
+    seq-convergent-sequence-Metric-Space M x ,
+    is-cauchy-seq-convergent-sequence-Metric-Space
 ```
 
 ### Correspondence to Cauchy approximations
@@ -574,6 +544,38 @@ module _
                 ( x)
                 ( ε⁺)
                 ( 1/n'))))
+```
+
+### Short maps between metric spaces transport Cauchy sequences
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level} (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : short-function-Metric-Space A B)
+  (u : cauchy-sequence-Metric-Space A)
+  where
+
+  seq-short-map-cauchy-sequence-Metric-Space : sequence-Metric-Space B
+  seq-short-map-cauchy-sequence-Metric-Space =
+    map-sequence
+      ( map-short-function-Metric-Space A B f)
+      ( map-cauchy-sequence-Metric-Space A u)
+
+  is-cauchy-seq-short-map-cauchy-sequence-Metric-Space :
+    is-cauchy-sequence-Metric-Space B seq-short-map-cauchy-sequence-Metric-Space
+  is-cauchy-seq-short-map-cauchy-sequence-Metric-Space ε =
+    tot
+      ( λ n H m k I J →
+        is-short-map-short-function-Metric-Space A B f ε
+          ( map-cauchy-sequence-Metric-Space A u m)
+          ( map-cauchy-sequence-Metric-Space A u k)
+          ( H m k I J))
+      ( is-cauchy-sequence-cauchy-sequence-Metric-Space A u ε)
+
+  map-short-map-cauchy-sequence-Metric-Space : cauchy-sequence-Metric-Space B
+  map-short-map-cauchy-sequence-Metric-Space =
+    seq-short-map-cauchy-sequence-Metric-Space ,
+    is-cauchy-seq-short-map-cauchy-sequence-Metric-Space
 ```
 
 ## References
