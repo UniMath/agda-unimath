@@ -378,10 +378,11 @@ module _
     is-inhabited-lower-cut-lim-cauchy-approximation-leq-ℝ :
       exists ℚ lower-cut-lim-cauchy-approximation-leq-ℝ
     is-inhabited-lower-cut-lim-cauchy-approximation-leq-ℝ =
-      do
-        let
-          x1 = map-cauchy-approximation-leq-ℝ x one-ℚ⁺
-          two-ℚ = one-ℚ +ℚ one-ℚ
+      let
+        open do-syntax-trunc-Prop (∃ ℚ lower-cut-lim-cauchy-approximation-leq-ℝ)
+        x1 = map-cauchy-approximation-leq-ℝ x one-ℚ⁺
+        two-ℚ = one-ℚ +ℚ one-ℚ
+      in do
         p , p<x1 ← is-inhabited-lower-cut-ℝ x1
         intro-exists
           ( p -ℚ two-ℚ)
@@ -391,16 +392,15 @@ module _
               ( is-in-lower-cut-ℝ x1)
               ( is-section-right-div-Group group-add-ℚ two-ℚ p)
               ( p<x1)))
-      where
-        open do-syntax-trunc-Prop (∃ ℚ lower-cut-lim-cauchy-approximation-leq-ℝ)
 
     is-inhabited-upper-cut-lim-cauchy-approximation-leq-ℝ :
       exists ℚ upper-cut-lim-cauchy-approximation-leq-ℝ
     is-inhabited-upper-cut-lim-cauchy-approximation-leq-ℝ =
-      do
-        let
-          x1 = map-cauchy-approximation-leq-ℝ x one-ℚ⁺
-          two-ℚ = one-ℚ +ℚ one-ℚ
+      let
+        open do-syntax-trunc-Prop (∃ ℚ upper-cut-lim-cauchy-approximation-leq-ℝ)
+        x1 = map-cauchy-approximation-leq-ℝ x one-ℚ⁺
+        two-ℚ = one-ℚ +ℚ one-ℚ
+      in do
         q , x1<q ← is-inhabited-upper-cut-ℝ x1
         intro-exists
           ( q +ℚ two-ℚ)
@@ -410,8 +410,63 @@ module _
               ( is-in-upper-cut-ℝ x1)
               ( is-retraction-right-div-Group group-add-ℚ two-ℚ q)
               ( x1<q)))
-      where
-        open do-syntax-trunc-Prop (∃ ℚ upper-cut-lim-cauchy-approximation-leq-ℝ)
+
+    forward-implication-is-rounded-lower-cut-lim-cauchy-approximation-leq-ℝ :
+      (q : ℚ) →
+      is-in-subtype lower-cut-lim-cauchy-approximation-leq-ℝ q →
+      exists
+        ( ℚ)
+        ( λ r → le-ℚ-Prop q r ∧ lower-cut-lim-cauchy-approximation-leq-ℝ r)
+    forward-implication-is-rounded-lower-cut-lim-cauchy-approximation-leq-ℝ
+      q q<lim =
+        let
+          open
+            do-syntax-trunc-Prop
+              ( ∃
+                ( ℚ)
+                ( λ r →
+                  le-ℚ-Prop q r ∧ lower-cut-lim-cauchy-approximation-leq-ℝ r))
+        in do
+          (ε⁺@(ε , _) , θ⁺@(θ , _)) , q+ε+θ<xε ← q<lim
+          let xε = map-cauchy-approximation-leq-ℝ x ε⁺
+          r , q+ε+θ<r , r<xε ←
+            forward-implication
+              ( is-rounded-lower-cut-ℝ
+                ( map-cauchy-approximation-leq-ℝ x ε⁺)
+                ( q +ℚ (ε +ℚ θ)))
+              ( q+ε+θ<xε)
+          intro-exists
+            ( r -ℚ (ε +ℚ θ))
+            ( le-transpose-left-add-ℚ q (ε +ℚ θ) r q+ε+θ<r ,
+              intro-exists
+                ( ε⁺ , θ⁺)
+                ( inv-tr
+                  ( is-in-lower-cut-ℝ xε)
+                  ( is-section-diff-ℚ (ε +ℚ θ) r)
+                  ( r<xε)))
+
+    backward-implication-is-rounded-lower-cut-lim-cauchy-approximation-leq-ℝ :
+      (q : ℚ) →
+      exists
+        ( ℚ)
+        ( λ r → le-ℚ-Prop q r ∧ lower-cut-lim-cauchy-approximation-leq-ℝ r) →
+      is-in-subtype lower-cut-lim-cauchy-approximation-leq-ℝ q
+    backward-implication-is-rounded-lower-cut-lim-cauchy-approximation-leq-ℝ
+      q ∃r =
+        let
+          open do-syntax-trunc-Prop (lower-cut-lim-cauchy-approximation-leq-ℝ q)
+        in do
+          r , q<r , r<lim ← ∃r
+          (ε⁺@(ε , _) , θ⁺@(θ , _)) , r+ε+θ<xε ← r<lim
+          let xε = map-cauchy-approximation-leq-ℝ x ε⁺
+          intro-exists
+            ( ε⁺ , θ⁺)
+            ( le-lower-cut-ℝ
+              ( xε)
+              ( q +ℚ (ε +ℚ θ))
+              ( r +ℚ (ε +ℚ θ))
+              ( preserves-le-left-add-ℚ (ε +ℚ θ) q r q<r)
+              ( r+ε+θ<xε))
 
     is-rounded-lower-cut-lim-cauchy-approximation-leq-ℝ :
       (q : ℚ) →
@@ -419,54 +474,66 @@ module _
       exists
         ( ℚ)
         ( λ r → le-ℚ-Prop q r ∧ lower-cut-lim-cauchy-approximation-leq-ℝ r)
-    pr1 (is-rounded-lower-cut-lim-cauchy-approximation-leq-ℝ q) q<lim =
-      do
-        (ε⁺@(ε , _) , θ⁺@(θ , _)) , q+ε+θ<xε ← q<lim
-        let xε = map-cauchy-approximation-leq-ℝ x ε⁺
-        r , q+ε+θ<r , r<xε ←
-          forward-implication
-            ( is-rounded-lower-cut-ℝ
-              ( map-cauchy-approximation-leq-ℝ x ε⁺)
-              ( q +ℚ (ε +ℚ θ)))
-            ( q+ε+θ<xε)
-        intro-exists
-          ( r -ℚ (ε +ℚ θ))
-          ( tr
-            ( λ s → le-ℚ s (r -ℚ (ε +ℚ θ)))
-            ( is-retraction-right-div-Group group-add-ℚ (ε +ℚ θ) q)
-            ( preserves-le-left-add-ℚ
-              ( neg-ℚ (ε +ℚ θ))
-              ( q +ℚ (ε +ℚ θ))
-              ( r)
-              ( q+ε+θ<r)) ,
-            intro-exists
-              ( ε⁺ , θ⁺)
-              ( inv-tr
-                ( is-in-lower-cut-ℝ xε)
-                ( is-section-right-div-Group group-add-ℚ (ε +ℚ θ) r)
-                ( r<xε)))
-      where
-        open
-          do-syntax-trunc-Prop
-            ( ∃
-              ( ℚ)
-              ( λ r →
-                le-ℚ-Prop q r ∧ lower-cut-lim-cauchy-approximation-leq-ℝ r))
-    pr2 (is-rounded-lower-cut-lim-cauchy-approximation-leq-ℝ q) ∃r =
-      do
-        r , q<r , r<lim ← ∃r
-        (ε⁺@(ε , _) , θ⁺@(θ , _)) , r+ε+θ<xε ← r<lim
-        let xε = map-cauchy-approximation-leq-ℝ x ε⁺
-        intro-exists
-          ( ε⁺ , θ⁺)
-          ( le-lower-cut-ℝ
-            ( xε)
-            ( q +ℚ (ε +ℚ θ))
-            ( r +ℚ (ε +ℚ θ))
-            ( preserves-le-left-add-ℚ (ε +ℚ θ) q r q<r)
-            ( r+ε+θ<xε))
-      where
-        open do-syntax-trunc-Prop (lower-cut-lim-cauchy-approximation-leq-ℝ q)
+    is-rounded-lower-cut-lim-cauchy-approximation-leq-ℝ q =
+      ( forward-implication-is-rounded-lower-cut-lim-cauchy-approximation-leq-ℝ
+          ( q) ,
+        backward-implication-is-rounded-lower-cut-lim-cauchy-approximation-leq-ℝ
+          ( q))
+
+    forward-implication-is-rounded-upper-cut-lim-cauchy-approximation-leq-ℝ :
+      (q : ℚ) →
+      is-in-subtype upper-cut-lim-cauchy-approximation-leq-ℝ q →
+      exists
+        ( ℚ)
+        ( λ p → le-ℚ-Prop p q ∧ upper-cut-lim-cauchy-approximation-leq-ℝ p)
+    forward-implication-is-rounded-upper-cut-lim-cauchy-approximation-leq-ℝ
+      q lim<q =
+        let
+          open
+            do-syntax-trunc-Prop
+              ( ∃
+                ( ℚ)
+                ( λ p →
+                  le-ℚ-Prop p q ∧ upper-cut-lim-cauchy-approximation-leq-ℝ p))
+        in do
+          (ε⁺@(ε , _) , θ⁺@(θ , _)) , xε<q-ε-θ ← lim<q
+          let xε = map-cauchy-approximation-leq-ℝ x ε⁺
+          p , p<q-ε-θ , xε<p ←
+            forward-implication
+              ( is-rounded-upper-cut-ℝ xε (q -ℚ (ε +ℚ θ)))
+              ( xε<q-ε-θ)
+          intro-exists
+            ( p +ℚ (ε +ℚ θ))
+            ( le-transpose-right-diff-ℚ p q (ε +ℚ θ) p<q-ε-θ ,
+              intro-exists
+                ( ε⁺ , θ⁺)
+                ( inv-tr
+                  ( is-in-upper-cut-ℝ xε)
+                  ( is-retraction-diff-ℚ (ε +ℚ θ) p)
+                  ( xε<p)))
+
+    backward-implication-is-rounded-upper-cut-lim-cauchy-approximation-leq-ℝ :
+      (q : ℚ) →
+      exists
+        ( ℚ)
+        ( λ p → le-ℚ-Prop p q ∧ upper-cut-lim-cauchy-approximation-leq-ℝ p) →
+      is-in-subtype upper-cut-lim-cauchy-approximation-leq-ℝ q
+    backward-implication-is-rounded-upper-cut-lim-cauchy-approximation-leq-ℝ
+      q ∃p =
+        let
+          open do-syntax-trunc-Prop (upper-cut-lim-cauchy-approximation-leq-ℝ q)
+        in do
+          p , p<q , lim<p ← ∃p
+          (ε⁺@(ε , _) , θ⁺@(θ , _)) , xε<p-ε-θ ← lim<p
+          let xε = map-cauchy-approximation-leq-ℝ x ε⁺
+          intro-exists
+            ( ε⁺ , θ⁺)
+            ( le-upper-cut-ℝ
+              ( xε)
+              ( p -ℚ (ε +ℚ θ))
+              ( q -ℚ (ε +ℚ θ))
+              ( preserves-le-left-add-ℚ (neg-ℚ (ε +ℚ θ)) p q p<q)
+              ( xε<p-ε-θ))
 
     is-rounded-upper-cut-lim-cauchy-approximation-leq-ℝ :
       (q : ℚ) →
@@ -474,48 +541,11 @@ module _
       exists
         ( ℚ)
         ( λ p → le-ℚ-Prop p q ∧ upper-cut-lim-cauchy-approximation-leq-ℝ p)
-    pr1 (is-rounded-upper-cut-lim-cauchy-approximation-leq-ℝ q) lim<q =
-      do
-        (ε⁺@(ε , _) , θ⁺@(θ , _)) , xε<q-ε-θ ← lim<q
-        let xε = map-cauchy-approximation-leq-ℝ x ε⁺
-        p , p<q-ε-θ , xε<p ←
-          forward-implication
-            ( is-rounded-upper-cut-ℝ xε (q -ℚ (ε +ℚ θ)))
-            ( xε<q-ε-θ)
-        intro-exists
-          ( p +ℚ (ε +ℚ θ))
-          ( tr
-              ( le-ℚ (p +ℚ (ε +ℚ θ)))
-              ( is-section-right-div-Group group-add-ℚ (ε +ℚ θ) q)
-              ( preserves-le-left-add-ℚ (ε +ℚ θ) p (q -ℚ (ε +ℚ θ)) p<q-ε-θ) ,
-            intro-exists
-              ( ε⁺ , θ⁺)
-              ( inv-tr
-                ( is-in-upper-cut-ℝ xε)
-                ( is-retraction-right-div-Group group-add-ℚ (ε +ℚ θ) p)
-                ( xε<p)))
-      where
-        open
-          do-syntax-trunc-Prop
-            ( ∃
-              ( ℚ)
-              ( λ p →
-                le-ℚ-Prop p q ∧ upper-cut-lim-cauchy-approximation-leq-ℝ p))
-    pr2 (is-rounded-upper-cut-lim-cauchy-approximation-leq-ℝ q) ∃p =
-      do
-        p , p<q , lim<p ← ∃p
-        (ε⁺@(ε , _) , θ⁺@(θ , _)) , xε<p-ε-θ ← lim<p
-        let xε = map-cauchy-approximation-leq-ℝ x ε⁺
-        intro-exists
-          ( ε⁺ , θ⁺)
-          ( le-upper-cut-ℝ
-            ( xε)
-            ( p -ℚ (ε +ℚ θ))
-            ( q -ℚ (ε +ℚ θ))
-            ( preserves-le-left-add-ℚ (neg-ℚ (ε +ℚ θ)) p q p<q)
-            ( xε<p-ε-θ))
-      where
-        open do-syntax-trunc-Prop (upper-cut-lim-cauchy-approximation-leq-ℝ q)
+    is-rounded-upper-cut-lim-cauchy-approximation-leq-ℝ q =
+      ( forward-implication-is-rounded-upper-cut-lim-cauchy-approximation-leq-ℝ
+        ( q) ,
+        backward-implication-is-rounded-upper-cut-lim-cauchy-approximation-leq-ℝ
+        ( q))
 
   lower-real-lim-cauchy-approximation-leq-ℝ : lower-ℝ l
   lower-real-lim-cauchy-approximation-leq-ℝ =
