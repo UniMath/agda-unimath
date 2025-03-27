@@ -31,6 +31,9 @@ Given a [monoid](group-theory.monoids.md) `M`, the type `vec n M` of
 `n`-dimensional `M`-[vectors](linear-algebra.vectors.md) is a monoid given by
 componentwise multiplication.
 
+We use additive terminology for vectors, as is standard in linear algebra
+contexts, despite using multiplicative terminology for monoids.
+
 ## Definitions
 
 ### Listed vectors on monoids
@@ -83,81 +86,81 @@ module _
   snoc-functional-vec-Monoid = snoc-functional-vec
 ```
 
-### The vector of the multiplicative unit of a monoid
+### The zero vector
 
-#### The listed vector of the multiplicative unit
+#### The listed zero vector
 
 ```agda
 module _
   {l : Level} (M : Monoid l)
   where
 
-  mul-unit-vec-Monoid : {n : ℕ} → vec-Monoid M n
-  mul-unit-vec-Monoid = constant-vec (unit-Monoid M)
+  zero-vec-Monoid : {n : ℕ} → vec-Monoid M n
+  zero-vec-Monoid = constant-vec (unit-Monoid M)
 ```
 
-#### The functional vector of the multiplicative unit
+#### The functional zero vector
 
 ```agda
 module _
   {l : Level} (M : Monoid l)
   where
 
-  mul-unit-functional-vec-Monoid : (n : ℕ) → functional-vec-Monoid M n
-  mul-unit-functional-vec-Monoid n i = unit-Monoid M
+  zero-functional-vec-Monoid : (n : ℕ) → functional-vec-Monoid M n
+  zero-functional-vec-Monoid n i = unit-Monoid M
 ```
 
-### Pointwise multiplication of vectors on a monoid
+### Pointwise addition of vectors on a monoid
 
-#### Pointwise multiplication of listed vectors on a monoid
+#### Pointwise addition of listed vectors on a monoid
 
 ```agda
 module _
   {l : Level} (M : Monoid l)
   where
 
-  mul-vec-Monoid :
+  add-vec-Monoid :
     {n : ℕ} → vec-Monoid M n → vec-Monoid M n → vec-Monoid M n
-  mul-vec-Monoid = binary-map-vec (mul-Monoid M)
+  add-vec-Monoid = binary-map-vec (mul-Monoid M)
 
-  associative-mul-vec-Monoid :
+  associative-add-vec-Monoid :
     {n : ℕ} (v1 v2 v3 : vec-Monoid M n) →
-    mul-vec-Monoid (mul-vec-Monoid v1 v2) v3 ＝
-    mul-vec-Monoid v1 (mul-vec-Monoid v2 v3)
-  associative-mul-vec-Monoid empty-vec empty-vec empty-vec = refl
-  associative-mul-vec-Monoid (x ∷ v1) (y ∷ v2) (z ∷ v3) =
+    add-vec-Monoid (add-vec-Monoid v1 v2) v3 ＝
+    add-vec-Monoid v1 (add-vec-Monoid v2 v3)
+  associative-add-vec-Monoid empty-vec empty-vec empty-vec = refl
+  associative-add-vec-Monoid (x ∷ v1) (y ∷ v2) (z ∷ v3) =
     ap-binary _∷_
       ( associative-mul-Monoid M x y z)
-      ( associative-mul-vec-Monoid v1 v2 v3)
+      ( associative-add-vec-Monoid v1 v2 v3)
 
   vec-Monoid-Semigroup : ℕ → Semigroup l
   pr1 (vec-Monoid-Semigroup n) = vec-Set (set-Monoid M) n
-  pr1 (pr2 (vec-Monoid-Semigroup n)) = mul-vec-Monoid
-  pr2 (pr2 (vec-Monoid-Semigroup n)) = associative-mul-vec-Monoid
+  pr1 (pr2 (vec-Monoid-Semigroup n)) = add-vec-Monoid
+  pr2 (pr2 (vec-Monoid-Semigroup n)) = associative-add-vec-Monoid
 
-  left-unit-law-mul-vec-Monoid :
+  left-unit-law-add-vec-Monoid :
     {n : ℕ} (v : vec-Monoid M n) →
-    mul-vec-Monoid (mul-unit-vec-Monoid M) v ＝ v
-  left-unit-law-mul-vec-Monoid empty-vec = refl
-  left-unit-law-mul-vec-Monoid (x ∷ v) =
+    add-vec-Monoid (zero-vec-Monoid M) v ＝ v
+  left-unit-law-add-vec-Monoid empty-vec = refl
+  left-unit-law-add-vec-Monoid (x ∷ v) =
     ap-binary _∷_
       ( left-unit-law-mul-Monoid M x)
-      ( left-unit-law-mul-vec-Monoid v)
+      ( left-unit-law-add-vec-Monoid v)
 
-  right-unit-law-mul-vec-Monoid :
+  right-unit-law-add-vec-Monoid :
     {n : ℕ} (v : vec-Monoid M n) →
-    mul-vec-Monoid v (mul-unit-vec-Monoid M) ＝ v
-  right-unit-law-mul-vec-Monoid empty-vec = refl
-  right-unit-law-mul-vec-Monoid (x ∷ v) =
+    add-vec-Monoid v (zero-vec-Monoid M) ＝ v
+  right-unit-law-add-vec-Monoid empty-vec = refl
+  right-unit-law-add-vec-Monoid (x ∷ v) =
     ap-binary _∷_
       ( right-unit-law-mul-Monoid M x)
-      ( right-unit-law-mul-vec-Monoid v)
+      ( right-unit-law-add-vec-Monoid v)
 
   vec-Monoid-Monoid : ℕ → Monoid l
   pr1 (vec-Monoid-Monoid n) = vec-Monoid-Semigroup n
-  pr1 (pr2 (vec-Monoid-Monoid n)) = mul-unit-vec-Monoid M
-  pr1 (pr2 (pr2 (vec-Monoid-Monoid n))) = left-unit-law-mul-vec-Monoid
-  pr2 (pr2 (pr2 (vec-Monoid-Monoid n))) = right-unit-law-mul-vec-Monoid
+  pr1 (pr2 (vec-Monoid-Monoid n)) = zero-vec-Monoid M
+  pr1 (pr2 (pr2 (vec-Monoid-Monoid n))) = left-unit-law-add-vec-Monoid
+  pr2 (pr2 (pr2 (vec-Monoid-Monoid n))) = right-unit-law-add-vec-Monoid
 ```
 
 #### Pointwise addition of functional vectors on a monoid
@@ -167,44 +170,44 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  mul-functional-vec-Monoid :
+  add-functional-vec-Monoid :
     (n : ℕ) (v w : functional-vec-Monoid M n) → functional-vec-Monoid M n
-  mul-functional-vec-Monoid n = binary-map-functional-vec n (mul-Monoid M)
+  add-functional-vec-Monoid n = binary-map-functional-vec n (mul-Monoid M)
 
-  associative-mul-functional-vec-Monoid :
+  associative-add-functional-vec-Monoid :
     (n : ℕ) (v1 v2 v3 : functional-vec-Monoid M n) →
-    ( mul-functional-vec-Monoid n (mul-functional-vec-Monoid n v1 v2) v3) ＝
-    ( mul-functional-vec-Monoid n v1 (mul-functional-vec-Monoid n v2 v3))
-  associative-mul-functional-vec-Monoid n v1 v2 v3 =
+    ( add-functional-vec-Monoid n (add-functional-vec-Monoid n v1 v2) v3) ＝
+    ( add-functional-vec-Monoid n v1 (add-functional-vec-Monoid n v2 v3))
+  associative-add-functional-vec-Monoid n v1 v2 v3 =
     eq-htpy (λ i → associative-mul-Monoid M (v1 i) (v2 i) (v3 i))
 
   functional-vec-Monoid-Semigroup : ℕ → Semigroup l
   pr1 (functional-vec-Monoid-Semigroup n) =
     functional-vec-Set (set-Monoid M) n
   pr1 (pr2 (functional-vec-Monoid-Semigroup n)) =
-    mul-functional-vec-Monoid n
+    add-functional-vec-Monoid n
   pr2 (pr2 (functional-vec-Monoid-Semigroup n)) =
-    associative-mul-functional-vec-Monoid n
+    associative-add-functional-vec-Monoid n
 
-  left-unit-law-mul-functional-vec-Monoid :
+  left-unit-law-add-functional-vec-Monoid :
     (n : ℕ) (v : functional-vec-Monoid M n) →
-    mul-functional-vec-Monoid n (mul-unit-functional-vec-Monoid M n) v ＝ v
-  left-unit-law-mul-functional-vec-Monoid n v =
+    add-functional-vec-Monoid n (zero-functional-vec-Monoid M n) v ＝ v
+  left-unit-law-add-functional-vec-Monoid n v =
     eq-htpy (λ i → left-unit-law-mul-Monoid M (v i))
 
-  right-unit-law-mul-functional-vec-Monoid :
+  right-unit-law-add-functional-vec-Monoid :
     (n : ℕ) (v : functional-vec-Monoid M n) →
-    mul-functional-vec-Monoid n v (mul-unit-functional-vec-Monoid M n) ＝ v
-  right-unit-law-mul-functional-vec-Monoid n v =
+    add-functional-vec-Monoid n v (zero-functional-vec-Monoid M n) ＝ v
+  right-unit-law-add-functional-vec-Monoid n v =
     eq-htpy (λ i → right-unit-law-mul-Monoid M (v i))
 
   functional-vec-Monoid-Monoid : ℕ → Monoid l
   pr1 (functional-vec-Monoid-Monoid n) =
     functional-vec-Monoid-Semigroup n
   pr1 (pr2 (functional-vec-Monoid-Monoid n)) =
-    mul-unit-functional-vec-Monoid M n
+    zero-functional-vec-Monoid M n
   pr1 (pr2 (pr2 (functional-vec-Monoid-Monoid n))) =
-    left-unit-law-mul-functional-vec-Monoid n
+    left-unit-law-add-functional-vec-Monoid n
   pr2 (pr2 (pr2 (functional-vec-Monoid-Monoid n))) =
-    right-unit-law-mul-functional-vec-Monoid n
+    right-unit-law-add-functional-vec-Monoid n
 ```

@@ -33,6 +33,9 @@ Given a [commutative monoid](group-theory.commutative-monoids.md) `M`, the type
 `vec n M` of `n`-dimensional `M`-[vectors](linear-algebra.vectors.md) is a
 commutative monoid given by componentwise addition.
 
+We use additive terminology for vectors, as is standard in linear algebra
+contexts, despite using multiplicative terminology for monoids.
+
 ## Definitions
 
 ### Listed vectors on commutative monoids
@@ -96,29 +99,29 @@ module _
     snoc-functional-vec-Monoid (monoid-Commutative-Monoid M)
 ```
 
-### Unit vector on a commutative monoid
+### Zero vectors of a commutative monoid
 
-#### The unit listed vector
+#### The zero listed vector
 
 ```agda
 module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  unit-vec-Commutative-Monoid : {n : ℕ} → vec-Commutative-Monoid M n
-  unit-vec-Commutative-Monoid = constant-vec (unit-Commutative-Monoid M)
+  zero-vec-Commutative-Monoid : {n : ℕ} → vec-Commutative-Monoid M n
+  zero-vec-Commutative-Monoid = constant-vec (unit-Commutative-Monoid M)
 ```
 
-#### The unit functional vector
+#### The zero functional vector
 
 ```agda
 module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  unit-functional-vec-Commutative-Monoid :
+  zero-functional-vec-Commutative-Monoid :
     (n : ℕ) → functional-vec-Commutative-Monoid M n
-  unit-functional-vec-Commutative-Monoid n i = unit-Commutative-Monoid M
+  zero-functional-vec-Commutative-Monoid n i = unit-Commutative-Monoid M
 ```
 
 ### Pointwise addition of vectors on a commutative monoid
@@ -130,52 +133,52 @@ module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  mul-vec-Commutative-Monoid :
+  add-vec-Commutative-Monoid :
     {n : ℕ} → vec-Commutative-Monoid M n → vec-Commutative-Monoid M n →
     vec-Commutative-Monoid M n
-  mul-vec-Commutative-Monoid =
-    mul-vec-Monoid (monoid-Commutative-Monoid M)
+  add-vec-Commutative-Monoid =
+    add-vec-Monoid (monoid-Commutative-Monoid M)
 
-  associative-mul-vec-Commutative-Monoid :
+  associative-add-vec-Commutative-Monoid :
     {n : ℕ} (v1 v2 v3 : vec-Commutative-Monoid M n) →
-    mul-vec-Commutative-Monoid (mul-vec-Commutative-Monoid v1 v2) v3 ＝
-    mul-vec-Commutative-Monoid v1 (mul-vec-Commutative-Monoid v2 v3)
-  associative-mul-vec-Commutative-Monoid =
-    associative-mul-vec-Monoid (monoid-Commutative-Monoid M)
+    add-vec-Commutative-Monoid (add-vec-Commutative-Monoid v1 v2) v3 ＝
+    add-vec-Commutative-Monoid v1 (add-vec-Commutative-Monoid v2 v3)
+  associative-add-vec-Commutative-Monoid =
+    associative-add-vec-Monoid (monoid-Commutative-Monoid M)
 
   vec-Commutative-Monoid-Semigroup : ℕ → Semigroup l
   vec-Commutative-Monoid-Semigroup =
     vec-Monoid-Semigroup (monoid-Commutative-Monoid M)
 
-  left-unit-law-mul-vec-Commutative-Monoid :
+  left-unit-law-add-vec-Commutative-Monoid :
     {n : ℕ} (v : vec-Commutative-Monoid M n) →
-    mul-vec-Commutative-Monoid (unit-vec-Commutative-Monoid M) v ＝ v
-  left-unit-law-mul-vec-Commutative-Monoid =
-    left-unit-law-mul-vec-Monoid (monoid-Commutative-Monoid M)
+    add-vec-Commutative-Monoid (zero-vec-Commutative-Monoid M) v ＝ v
+  left-unit-law-add-vec-Commutative-Monoid =
+    left-unit-law-add-vec-Monoid (monoid-Commutative-Monoid M)
 
-  right-unit-law-mul-vec-Commutative-Monoid :
+  right-unit-law-add-vec-Commutative-Monoid :
     {n : ℕ} (v : vec-Commutative-Monoid M n) →
-    mul-vec-Commutative-Monoid v (unit-vec-Commutative-Monoid M) ＝ v
-  right-unit-law-mul-vec-Commutative-Monoid =
-    right-unit-law-mul-vec-Monoid (monoid-Commutative-Monoid M)
+    add-vec-Commutative-Monoid v (zero-vec-Commutative-Monoid M) ＝ v
+  right-unit-law-add-vec-Commutative-Monoid =
+    right-unit-law-add-vec-Monoid (monoid-Commutative-Monoid M)
 
   vec-Commutative-Monoid-Monoid : ℕ → Monoid l
   vec-Commutative-Monoid-Monoid =
     vec-Monoid-Monoid (monoid-Commutative-Monoid M)
 
-  commutative-mul-vec-Commutative-Monoid :
+  commutative-add-vec-Commutative-Monoid :
     {n : ℕ} (v w : vec-Commutative-Monoid M n) →
-    mul-vec-Commutative-Monoid v w ＝ mul-vec-Commutative-Monoid w v
-  commutative-mul-vec-Commutative-Monoid empty-vec empty-vec = refl
-  commutative-mul-vec-Commutative-Monoid (x ∷ v1) (y ∷ v2) =
+    add-vec-Commutative-Monoid v w ＝ add-vec-Commutative-Monoid w v
+  commutative-add-vec-Commutative-Monoid empty-vec empty-vec = refl
+  commutative-add-vec-Commutative-Monoid (x ∷ v1) (y ∷ v2) =
     ap-binary _∷_
       (commutative-mul-Commutative-Monoid M x y)
-      (commutative-mul-vec-Commutative-Monoid v1 v2)
+      (commutative-add-vec-Commutative-Monoid v1 v2)
 
   vec-Commutative-Monoid-Commutative-Monoid : ℕ → Commutative-Monoid l
   vec-Commutative-Monoid-Commutative-Monoid n =
     vec-Commutative-Monoid-Monoid n ,
-    commutative-mul-vec-Commutative-Monoid
+    commutative-add-vec-Commutative-Monoid
 ```
 
 #### Pointwise addition of functional vectors on a commutative monoid
@@ -185,53 +188,53 @@ module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  mul-functional-vec-Commutative-Monoid :
+  add-functional-vec-Commutative-Monoid :
     (n : ℕ) (v w : functional-vec-Commutative-Monoid M n) →
     functional-vec-Commutative-Monoid M n
-  mul-functional-vec-Commutative-Monoid =
-    mul-functional-vec-Monoid (monoid-Commutative-Monoid M)
+  add-functional-vec-Commutative-Monoid =
+    add-functional-vec-Monoid (monoid-Commutative-Monoid M)
 
-  associative-mul-functional-vec-Commutative-Monoid :
+  associative-add-functional-vec-Commutative-Monoid :
     (n : ℕ) (v1 v2 v3 : functional-vec-Commutative-Monoid M n) →
-    ( mul-functional-vec-Commutative-Monoid n
-      ( mul-functional-vec-Commutative-Monoid n v1 v2) v3) ＝
-    ( mul-functional-vec-Commutative-Monoid n v1
-      ( mul-functional-vec-Commutative-Monoid n v2 v3))
-  associative-mul-functional-vec-Commutative-Monoid =
-    associative-mul-functional-vec-Monoid (monoid-Commutative-Monoid M)
+    ( add-functional-vec-Commutative-Monoid n
+      ( add-functional-vec-Commutative-Monoid n v1 v2) v3) ＝
+    ( add-functional-vec-Commutative-Monoid n v1
+      ( add-functional-vec-Commutative-Monoid n v2 v3))
+  associative-add-functional-vec-Commutative-Monoid =
+    associative-add-functional-vec-Monoid (monoid-Commutative-Monoid M)
 
   functional-vec-Commutative-Monoid-Semigroup : ℕ → Semigroup l
   functional-vec-Commutative-Monoid-Semigroup =
     functional-vec-Monoid-Semigroup (monoid-Commutative-Monoid M)
 
-  left-unit-law-mul-functional-vec-Commutative-Monoid :
+  left-unit-law-add-functional-vec-Commutative-Monoid :
     (n : ℕ) (v : functional-vec-Commutative-Monoid M n) →
-    mul-functional-vec-Commutative-Monoid n
-      ( unit-functional-vec-Commutative-Monoid M n) v ＝ v
-  left-unit-law-mul-functional-vec-Commutative-Monoid =
-    left-unit-law-mul-functional-vec-Monoid (monoid-Commutative-Monoid M)
+    add-functional-vec-Commutative-Monoid n
+      ( zero-functional-vec-Commutative-Monoid M n) v ＝ v
+  left-unit-law-add-functional-vec-Commutative-Monoid =
+    left-unit-law-add-functional-vec-Monoid (monoid-Commutative-Monoid M)
 
-  right-unit-law-mul-functional-vec-Commutative-Monoid :
+  right-unit-law-add-functional-vec-Commutative-Monoid :
     (n : ℕ) (v : functional-vec-Commutative-Monoid M n) →
-    mul-functional-vec-Commutative-Monoid n v
-      ( unit-functional-vec-Commutative-Monoid M n) ＝ v
-  right-unit-law-mul-functional-vec-Commutative-Monoid =
-    right-unit-law-mul-functional-vec-Monoid (monoid-Commutative-Monoid M)
+    add-functional-vec-Commutative-Monoid n v
+      ( zero-functional-vec-Commutative-Monoid M n) ＝ v
+  right-unit-law-add-functional-vec-Commutative-Monoid =
+    right-unit-law-add-functional-vec-Monoid (monoid-Commutative-Monoid M)
 
   functional-vec-Commutative-Monoid-Monoid : ℕ → Monoid l
   functional-vec-Commutative-Monoid-Monoid =
     functional-vec-Monoid-Monoid (monoid-Commutative-Monoid M)
 
-  commutative-mul-functional-vec-Commutative-Monoid :
+  commutative-add-functional-vec-Commutative-Monoid :
     (n : ℕ) (v w : functional-vec-Commutative-Monoid M n) →
-    mul-functional-vec-Commutative-Monoid n v w ＝
-    mul-functional-vec-Commutative-Monoid n w v
-  commutative-mul-functional-vec-Commutative-Monoid _ _ _ =
+    add-functional-vec-Commutative-Monoid n v w ＝
+    add-functional-vec-Commutative-Monoid n w v
+  commutative-add-functional-vec-Commutative-Monoid _ _ _ =
     eq-htpy (λ k → commutative-mul-Commutative-Monoid M _ _)
 
   functional-vec-Commutative-Monoid-Commutative-Monoid :
     ℕ → Commutative-Monoid l
   functional-vec-Commutative-Monoid-Commutative-Monoid n =
     functional-vec-Commutative-Monoid-Monoid n ,
-    commutative-mul-functional-vec-Commutative-Monoid n
+    commutative-add-functional-vec-Commutative-Monoid n
 ```

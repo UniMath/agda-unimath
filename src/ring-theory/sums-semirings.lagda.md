@@ -87,11 +87,11 @@ module _
     mul-one-element-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 
-  sum-unit-Semiring :
+  sum-unit-finite-Semiring :
     (f : unit → type-Semiring R) →
     sum-finite-Semiring R unit-Finite-Type f ＝ f star
-  sum-unit-Semiring =
-    mul-finite-unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+  sum-unit-finite-Semiring =
+    mul-unit-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   sum-two-elements-Semiring :
     (f : functional-vec-Semiring R 2) →
@@ -192,7 +192,14 @@ module _
       mul-Semiring R x (sum-finite-Semiring R A f) ＝
       sum-finite-Semiring R A (mul-Semiring R x ∘ f)
     left-distributive-mul-sum-finite-Semiring A x f =
-      do
+      let
+        open
+          do-syntax-trunc-Prop
+            ( Id-Prop
+              ( set-Semiring R)
+              ( mul-Semiring R x (sum-finite-Semiring R A f))
+              ( sum-finite-Semiring R A (mul-Semiring R x ∘ f)))
+      in do
         cA ← is-finite-type-Finite-Type A
         equational-reasoning
           mul-Semiring R x (sum-finite-Semiring R A f)
@@ -222,13 +229,6 @@ module _
                 ( f ∘ map-equiv-count cA)
           ＝ sum-finite-Semiring R A (mul-Semiring R x ∘ f)
             by inv (mul-finite-count-Commutative-Monoid _ A cA _)
-      where
-        open
-          do-syntax-trunc-Prop
-            ( Id-Prop
-              ( set-Semiring R)
-              ( mul-Semiring R x (sum-finite-Semiring R A f))
-              ( sum-finite-Semiring R A (mul-Semiring R x ∘ f)))
 
     right-distributive-mul-sum-finite-Semiring :
       {l2 : Level} (A : Finite-Type l2) →
@@ -236,7 +236,14 @@ module _
       mul-Semiring R (sum-finite-Semiring R A f) x ＝
       sum-finite-Semiring R A (mul-Semiring' R x ∘ f)
     right-distributive-mul-sum-finite-Semiring A f x =
-      do
+      let
+        open
+          do-syntax-trunc-Prop
+            ( Id-Prop
+              ( set-Semiring R)
+              ( mul-Semiring R (sum-finite-Semiring R A f) x)
+              ( sum-finite-Semiring R A (mul-Semiring' R x ∘ f)))
+      in do
         cA ← is-finite-type-Finite-Type A
         equational-reasoning
           mul-Semiring R (sum-finite-Semiring R A f) x
@@ -266,13 +273,6 @@ module _
                 ( x)
           ＝ sum-finite-Semiring R A (mul-Semiring' R x ∘ f)
             by inv (mul-finite-count-Commutative-Monoid _ A cA _)
-      where
-        open
-          do-syntax-trunc-Prop
-            ( Id-Prop
-              ( set-Semiring R)
-              ( mul-Semiring R (sum-finite-Semiring R A f) x)
-              ( sum-finite-Semiring R A (mul-Semiring' R x ∘ f)))
 ```
 
 ### Interchange law of sums and addition in a semiring
@@ -351,13 +351,13 @@ module _
     (n : ℕ) →
     sum-Semiring R n (zero-functional-vec-Semiring R n) ＝ zero-Semiring R
   sum-zero-Semiring =
-    mul-unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    mul-fin-unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   sum-zero-finite-Semiring :
     {l2 : Level} (A : Finite-Type l2) →
     sum-finite-Semiring R A (λ _ → zero-Semiring R) ＝ zero-Semiring R
   sum-zero-finite-Semiring =
-    mul-unit-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    mul-finite-unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Splitting sums
