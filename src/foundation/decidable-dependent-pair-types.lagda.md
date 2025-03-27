@@ -118,3 +118,6 @@ module _
       ( λ na → inr (map-neg pr1 na))
       ( dA)
 ```
+
+See [`foundation.decidable-types`](foundation.decidable-types.md) for the
+untruncated version.

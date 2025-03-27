@@ -127,7 +127,7 @@ module _
   eq-Eq-double-negation-im :
     (x y : double-negation-im f) → Eq-double-negation-im x y → x ＝ y
   eq-Eq-double-negation-im x y =
-    map-inv-is-equiv (is-equiv-Eq-eq-double-negation-im x y)
+    map-inv-equiv (equiv-Eq-eq-double-negation-im x y)
 ```
 
 ### The unit map of the double negation image is double negation dense

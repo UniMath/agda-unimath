@@ -211,7 +211,7 @@ module _
         ( dB a)
     is-uniformly-decidable-family-has-double-negation-dense-equality-base
       (inr na) =
-      inr (ex-falso ∘ na)
+      inr (λ x _ → na x)
 
   abstract
     is-uniformly-decidable-family-has-double-negation-dense-equality-base' :
