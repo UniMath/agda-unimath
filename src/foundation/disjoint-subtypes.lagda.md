@@ -51,7 +51,7 @@ module _
       ( subtype-decidable-subtype B)
       ( subtype-decidable-subtype C)
 
-  disjoint-decidable-subtype : UU (l1 ⊔ l2 ⊔ l3)
+  is-disjoint-decidable-subtype : UU (l1 ⊔ l2 ⊔ l3)
   disjoint-decidable-subtype = type-Prop disjoint-decidable-subtype-Prop
 ```
 
