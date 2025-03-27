@@ -200,10 +200,7 @@ module _
   where
 
   neg-leq-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ y) (neg-ℝ x)
-  neg-leq-ℝ x≤y =
-    backward-implication
-      ( leq-iff-ℝ' (neg-ℝ y) (neg-ℝ x))
-      ( λ q → x≤y (neg-ℚ q))
+  neg-leq-ℝ x≤y = leq-leq-ℝ' (neg-ℝ y) (neg-ℝ x) (x≤y ∘ neg-ℚ)
 ```
 
 ## References

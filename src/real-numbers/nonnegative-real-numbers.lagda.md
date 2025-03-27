@@ -24,6 +24,8 @@ open import real-numbers.rational-real-numbers
 
 A real number `x` is nonnegative if `0 ≤ x`.
 
+## Definitions
+
 ```agda
 is-nonnegative-ℝ : {l : Level} → ℝ l → UU l
 is-nonnegative-ℝ = leq-ℝ zero-ℝ
