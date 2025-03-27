@@ -29,6 +29,7 @@ open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -624,46 +625,49 @@ module _
         ( lower-real-lim-cauchy-approximation-leq-ℝ)
         ( upper-real-lim-cauchy-approximation-leq-ℝ)
     is-located-lower-upper-cut-lim-cauchy-approximation-leq-ℝ p q p<q =
-      do
+      let
+        open
+          do-syntax-trunc-Prop
+            ( lower-cut-lim-cauchy-approximation-leq-ℝ p ∨
+              upper-cut-lim-cauchy-approximation-leq-ℝ q)
+      in do
         ε'⁺@(ε' , _) , 2ε'⁺<q-p ← double-le-ℚ⁺ (positive-diff-le-ℚ p q p<q)
         ε⁺@(ε , _) , 2ε⁺<ε'⁺ ← double-le-ℚ⁺ ε'⁺
         let
           2ε' = ε' +ℚ ε'
           2ε = ε +ℚ ε
           4ε = 2ε +ℚ 2ε
-          4ε<q-p : le-ℚ ((ε +ℚ ε) +ℚ (ε +ℚ ε)) (q -ℚ p)
-          4ε<q-p =
-            transitive-le-ℚ
-              ( 4ε)
-              ( 2ε')
-              ( q -ℚ p)
-              ( 2ε'⁺<q-p)
-              ( preserves-le-add-ℚ {2ε} {ε'} {2ε} {ε'} 2ε⁺<ε'⁺ 2ε⁺<ε'⁺)
-          p+2ε<q-2ε : le-ℚ (p +ℚ 2ε) (q -ℚ 2ε)
-          p+2ε<q-2ε =
-            le-transpose-left-add-ℚ
+          xε = map-cauchy-approximation-leq-ℝ x ε⁺
+        map-disjunction
+          ( lower-cut-ℝ xε (p +ℚ 2ε))
+          ( lower-cut-lim-cauchy-approximation-leq-ℝ p)
+          ( upper-cut-ℝ xε (q -ℚ 2ε))
+          ( upper-cut-lim-cauchy-approximation-leq-ℝ q)
+          ( λ p+2ε<xε → intro-exists (ε⁺ , ε⁺) p+2ε<xε)
+          ( λ xε<q-2ε → intro-exists (ε⁺ , ε⁺) xε<q-2ε)
+          ( is-located-lower-upper-cut-ℝ
+            ( map-cauchy-approximation-leq-ℝ x ε⁺)
+            ( p +ℚ 2ε)
+            ( q -ℚ 2ε)
+            ( le-transpose-left-add-ℚ
               ( p +ℚ 2ε)
               ( 2ε)
               ( q)
               ( inv-tr
                 ( λ r → le-ℚ r q)
                 ( associative-add-ℚ p 2ε 2ε ∙ commutative-add-ℚ p 4ε)
-                ( le-transpose-right-diff-ℚ 4ε q p 4ε<q-p))
-        elim-disjunction
-          claim
-          ( λ p+2ε<xε → inl-disjunction (intro-exists (ε⁺ , ε⁺) p+2ε<xε))
-          ( λ xε<q-2ε → inr-disjunction (intro-exists (ε⁺ , ε⁺) xε<q-2ε))
-          ( is-located-lower-upper-cut-ℝ
-            ( map-cauchy-approximation-leq-ℝ x ε⁺)
-            ( p +ℚ 2ε)
-            ( q -ℚ 2ε)
-            ( p+2ε<q-2ε))
-      where
-        claim : Prop l
-        claim =
-          lower-cut-lim-cauchy-approximation-leq-ℝ p ∨
-          upper-cut-lim-cauchy-approximation-leq-ℝ q
-        open do-syntax-trunc-Prop claim
+                ( le-transpose-right-diff-ℚ
+                  ( 4ε)
+                  ( q)
+                  ( p)
+                  ( transitive-le-ℚ
+                    ( 4ε)
+                    ( 2ε')
+                    ( q -ℚ p)
+                    ( 2ε'⁺<q-p)
+                    ( preserves-le-add-ℚ {2ε} {ε'} {2ε} {ε'}
+                      ( 2ε⁺<ε'⁺)
+                      ( 2ε⁺<ε'⁺)))))))
 
   lim-cauchy-approximation-leq-ℝ : ℝ l
   lim-cauchy-approximation-leq-ℝ =

@@ -22,12 +22,12 @@ open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import foundation.propositional-truncations
-open import foundation.binary-transport
+
 open import logic.functoriality-existential-quantification
 
 open import order-theory.large-posets
@@ -245,7 +245,6 @@ module _
       ( x1~x2)
       ( preserves-leq-right-sim-ℝ x1 y1 y2 y1~y2 x1≤y1)
 ```
-
 
 ### Inequality on the real numbers is translation invariant
 

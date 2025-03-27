@@ -26,13 +26,14 @@ open import real-numbers.minimum-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
 open import real-numbers.negation-lower-upper-dedekind-real-numbers public
 open import real-numbers.negation-real-numbers public
-open import real-numbers.positive-real-numbers public
 open import real-numbers.nonnegative-real-numbers public
+open import real-numbers.positive-real-numbers public
 open import real-numbers.raising-universe-levels-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public
 open import real-numbers.rational-real-numbers public
 open import real-numbers.rational-upper-dedekind-real-numbers public
 open import real-numbers.similarity-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
+open import real-numbers.transposition-cuts-dedekind-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
 ```
