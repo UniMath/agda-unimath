@@ -467,26 +467,26 @@ semigroup-add-ℝ-lzero =
 
 monoid-add-ℝ-lzero : Monoid (lsuc lzero)
 monoid-add-ℝ-lzero =
-  semigroup-add-ℝ-lzero ,
-  zero-ℝ ,
-  left-unit-law-add-ℝ ,
-  right-unit-law-add-ℝ
+  ( semigroup-add-ℝ-lzero ,
+    zero-ℝ ,
+    left-unit-law-add-ℝ ,
+    right-unit-law-add-ℝ)
 
 commutative-monoid-add-ℝ-lzero : Commutative-Monoid (lsuc lzero)
 commutative-monoid-add-ℝ-lzero =
-  monoid-add-ℝ-lzero ,
-  commutative-add-ℝ
+  ( monoid-add-ℝ-lzero ,
+    commutative-add-ℝ)
 
 group-add-ℝ-lzero : Group (lsuc lzero)
 group-add-ℝ-lzero =
-  semigroup-add-ℝ-lzero ,
-  ( zero-ℝ , left-unit-law-add-ℝ , right-unit-law-add-ℝ) ,
-  ( neg-ℝ ,
-    eq-sim-ℝ ∘ left-inverse-law-add-ℝ ,
-    eq-sim-ℝ ∘ right-inverse-law-add-ℝ)
+  ( ( semigroup-add-ℝ-lzero) ,
+    ( zero-ℝ , left-unit-law-add-ℝ , right-unit-law-add-ℝ) ,
+    ( neg-ℝ ,
+      eq-sim-ℝ ∘ left-inverse-law-add-ℝ ,
+      eq-sim-ℝ ∘ right-inverse-law-add-ℝ))
 
 abelian-group-add-ℝ-lzero : Ab (lsuc lzero)
 abelian-group-add-ℝ-lzero =
-  group-add-ℝ-lzero ,
-  commutative-add-ℝ
+  ( group-add-ℝ-lzero ,
+    commutative-add-ℝ)
 ```
