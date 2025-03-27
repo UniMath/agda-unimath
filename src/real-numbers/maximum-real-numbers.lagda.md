@@ -149,7 +149,9 @@ module _
   (x : ℝ l1) (y : ℝ l2)
   where
 
-  abstract
+  opaque
+    unfolding sim-ℝ
+
     commutative-binary-max-ℝ : binary-max-ℝ x y ＝ binary-max-ℝ y x
     commutative-binary-max-ℝ =
       eq-sim-ℝ
