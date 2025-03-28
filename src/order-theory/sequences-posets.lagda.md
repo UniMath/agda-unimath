@@ -41,8 +41,6 @@ module _
   sequence-Poset = sequence (type-Poset P)
 ```
 
-## Properties
-
 ### Pointwise comparison on sequences in partially ordered sets
 
 ```agda
@@ -66,7 +64,9 @@ module _
   is-prop-leq-sequence-Poset = is-prop-type-Prop leq-prop-sequence-Poset
 ```
 
-### The partially ordered set of sequences in a partially ordered set
+## Properties
+
+### The type of sequences in a poset is a poset ordered by pointwise comparison
 
 ```agda
 module _
