@@ -96,6 +96,10 @@ is-decidable-Σ-Maybe {A = A} {B} dA de =
 
 ### Decidability of dependent sums over bases with double negation dense equality
 
+This is a special case of the more general fact that a type has decidable sums
+if and only if its totally separated reflection does, and totally separated
+types have double negation stable equality. {{#cite TypeTopology}}
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}

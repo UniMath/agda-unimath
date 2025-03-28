@@ -296,6 +296,10 @@ is-fixed-point-is-decidable-is-inhabited {l} {X} t =
 
 ### The dependent sum of a family of decidable propositions over a decidable base with double negation dense equality is decidable
 
+This is a special case of the more general fact that a type has decidable sums
+if and only if its totally separated reflection does, and totally separated
+types have double negation stable equality. {{#cite TypeTopology}}
+
 ```agda
 is-decidable-Σ-has-double-negation-dense-equality-base :
   {l1 l2 : Level} {P : UU l1} {Q : P → UU l2} →
