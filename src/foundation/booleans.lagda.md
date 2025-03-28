@@ -22,7 +22,6 @@ open import foundation.universe-levels
 open import foundation-core.constant-maps
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
-open import foundation-core.double-negation-stable-equality
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -200,11 +199,6 @@ has-decidable-equality-bool false false = inl refl
 
 bool-Discrete-Type : Discrete-Type lzero
 bool-Discrete-Type = bool , has-decidable-equality-bool
-
-has-double-negation-stable-equality-bool :
-  has-double-negation-stable-equality bool
-has-double-negation-stable-equality-bool x y =
-  double-negation-elim-is-decidable (has-decidable-equality-bool x y)
 ```
 
 ### The booleans have a tight apartness relation
