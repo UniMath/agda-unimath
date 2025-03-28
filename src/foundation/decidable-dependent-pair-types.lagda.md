@@ -94,30 +94,5 @@ is-decidable-Σ-Maybe {A = A} {B} dA de =
     ( is-decidable-equiv (left-unit-law-Σ (B ∘ inr)) de)
 ```
 
-### Decidability of dependent sums over bases with double negation dense equality
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (H : has-double-negation-dense-equality A)
-  where
-
-  is-inhabited-or-empty-Σ-has-double-negation-dense-equality-base :
-    is-inhabited-or-empty A →
-    ((x : A) → is-inhabited-or-empty (B x)) →
-    is-inhabited-or-empty (Σ A B)
-  is-inhabited-or-empty-Σ-has-double-negation-dense-equality-base dA dB =
-    elim-is-inhabited-or-empty-Prop
-      ( is-inhabited-or-empty-Prop (Σ A B))
-      ( λ a →
-        elim-is-inhabited-or-empty-Prop
-          ( is-inhabited-or-empty-Prop (Σ A B))
-          ( λ b → inl (unit-trunc-Prop (a , b)))
-          ( λ nb → inr (λ x → H (pr1 x) a (λ p → nb (tr B p (pr2 x)))))
-          ( dB a))
-      ( λ na → inr (map-neg pr1 na))
-      ( dA)
-```
-
 See [`foundation.decidable-types`](foundation.decidable-types.md) for the
 untruncated version.
