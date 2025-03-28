@@ -35,7 +35,7 @@ or, equivalently, if `uₙ ≤ uₙ₊₁` for all `n : ℕ`.
 
 ## Definitions
 
-### Increasing sequences in partially ordered sets
+### The predicate of being an increasing sequence in a partially ordered set
 
 ```agda
 module _
@@ -51,7 +51,7 @@ module _
     type-Prop is-increasing-prop-sequence-Poset
 ```
 
-### Increasing values of a sequence in partially ordered sets
+### The predicate of being an increasing value of a sequence in a partially ordered set
 
 ```agda
 module _
