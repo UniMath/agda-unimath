@@ -9,7 +9,9 @@ module real-numbers.multiplication-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.decidable-total-order-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
@@ -18,18 +20,23 @@ open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 
 open import foundation.cartesian-product-types
+open import order-theory.posets
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjoint-subtypes
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.logical-equivalences
+open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.subtypes
+open import foundation.transport-along-identifications
+open import foundation.action-on-identifications-functions
 open import foundation.universe-levels
 
 open import real-numbers.absolute-value-real-numbers
@@ -261,9 +268,60 @@ module _
         let
           min = min-ℚ (min-ℚ (a *ℚ c) (a *ℚ d)) (min-ℚ (b *ℚ c) (b *ℚ d))
           max = max-ℚ (max-ℚ (a *ℚ c) (a *ℚ d)) (max-ℚ (b *ℚ c) (b *ℚ d))
-          ⟨a+δ⟩⟨c+θ⟩-ac≤ε : leq-ℚ (abs-ℚ ((a +ℚ δ) *ℚ (c +ℚ θ) -ℚ (a *ℚ c))) ε
-          ⟨a+δ⟩⟨c+θ⟩-ac≤ε =
-            {! transitive-leq-ℚ !}
+          |⟨a+δ⟩⟨c+θ⟩-ac|≤ε :
+            leq-ℚ (rational-abs-ℚ ((a +ℚ δ) *ℚ (c +ℚ θ) -ℚ (a *ℚ c))) ε
+          |⟨a+δ⟩⟨c+θ⟩-ac|≤ε =
+            calculate-in-Poset ℚ-Poset
+              chain-of-inequalities
+                rational-abs-ℚ ((a +ℚ δ) *ℚ (c +ℚ θ) -ℚ (a *ℚ c))
+                ≤ rational-abs-ℚ (a *ℚ θ +ℚ δ *ℚ (c +ℚ θ))
+                  by
+                  leq-eq-ℚ
+                    ( rational-abs-ℚ ((a +ℚ δ) *ℚ (c +ℚ θ) -ℚ (a *ℚ c)))
+                    ( rational-abs-ℚ (a *ℚ θ +ℚ δ *ℚ (c +ℚ θ)))
+                    ( ?)
+                  in-Poset ℚ-Poset
+                ≤ rational-abs-ℚ (a *ℚ θ) +ℚ rational-abs-ℚ (δ *ℚ (c +ℚ θ))
+                  by
+                    ap
+                      ( rational-ℚ⁰⁺)
+                      ( triangle-inequality-abs-ℚ
+                        ( a *ℚ θ)
+                        ( δ *ℚ (c +ℚ θ)))
+                  in-Poset ℚ-Poset
+                ≤ (rational-abs-ℚ a *ℚ rational-abs-ℚ θ) +ℚ
+                  (rational-abs-ℚ δ *ℚ rational-abs-ℚ (c +ℚ θ))
+                  by
+                    leq-eq-ℚ
+                      ( rational-abs-ℚ (a *ℚ θ) +ℚ
+                        rational-abs-ℚ (δ *ℚ (c +ℚ θ)))
+                      ( (rational-abs-ℚ a *ℚ rational-abs-ℚ θ) +ℚ
+                        (rational-abs-ℚ δ *ℚ rational-abs-ℚ (c +ℚ θ)))
+                      ( ap-add-ℚ
+                        ( ap rational-ℚ⁰⁺ (abs-mul-ℚ a θ))
+                        ( ap rational-ℚ⁰⁺ (abs-mul-ℚ δ (c +ℚ θ))))
+                ≤ ε
+                  by ?
+                  in-Poset ℚ-Poset
+            {- inv-tr
+              ( λ q → leq-ℚ q ε)
+              ( ap rational-abs-ℚ
+                ( equational-reasoning
+                  (a +ℚ δ) *ℚ (c +ℚ θ) -ℚ (a *ℚ c)
+                  ＝ (a *ℚ (c +ℚ θ) +ℚ δ *ℚ (c +ℚ θ)) -ℚ (a *ℚ c)
+                    by ap (_-ℚ (a *ℚ c)) (right-distributive-mul-add-ℚ a δ (c +ℚ θ))
+                  ＝ ((a *ℚ c +ℚ a *ℚ θ) +ℚ (δ *ℚ c +ℚ δ *ℚ θ)) -ℚ (a *ℚ c)
+                    by ap (_-ℚ (a *ℚ c)) (ap-add-ℚ (left-distributive-mul-add-ℚ a c θ) (left-distributive-mul-add-ℚ δ c θ))
+                  ＝ (a *ℚ c +ℚ (a *ℚ θ +ℚ δ *ℚ c +ℚ δ *ℚ θ)) -ℚ (a *ℚ c)
+                    by ap (_-ℚ (a *ℚ c)) (associative-add-ℚ (a *ℚ c) (a *ℚ θ) (δ *ℚ c +ℚ δ *ℚ θ))
+                  ＝ a *ℚ θ +ℚ δ *ℚ c +ℚ δ *ℚ θ
+                    by is-identity-left-conjugation-add-ℚ (a *ℚ c) (a *ℚ θ +ℚ δ *ℚ c +ℚ δ *ℚ θ)))
+              ( transitive-leq-ℚ
+                (rational-abs-ℚ (a *ℚ θ +ℚ δ *ℚ c +ℚ δ *ℚ θ))
+                (rational-abs-ℚ (a +ℚ θ +ℚ δ *ℚ c) +ℚ rational-abs-ℚ (δ *ℚ θ)
+                ( ε)
+
+              )-}
         intro-exists (min , max) {!   !}
       where
         open
