@@ -12,17 +12,12 @@ open import elementary-number-theory.natural-numbers
 open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.negation
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
-open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.sets
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -55,7 +50,7 @@ is-prop-LPO =
       is-prop-coproduct
         ( elim-exists
           ( ¬' ∀' ℕ (λ n → is-false-Prop (f n)))
-          ( λ n t h → not-is-false-is-true (f n) t (h n)))
+          ( λ n t h → is-not-false-is-true (f n) t (h n)))
         ( is-prop-exists ℕ (λ n → is-true-Prop (f n)))
         ( is-prop-for-all-Prop ℕ (λ n → is-false-Prop (f n))))
 

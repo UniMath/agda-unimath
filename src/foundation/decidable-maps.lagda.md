@@ -13,8 +13,10 @@ open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
+open import foundation.hilbert-epsilon-operators-maps
 open import foundation.identity-types
 open import foundation.retracts-of-maps
 open import foundation.universe-levels
@@ -81,14 +83,13 @@ module _
 ### Decidable maps are closed under homotopy
 
 ```agda
-abstract
-  is-decidable-map-htpy :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
-    f ~ g → is-decidable-map g → is-decidable-map f
-  is-decidable-map-htpy H K b =
-    is-decidable-equiv
-      ( equiv-tot (λ a → equiv-concat (inv (H a)) b))
-      ( K b)
+is-decidable-map-htpy :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
+  f ~ g → is-decidable-map g → is-decidable-map f
+is-decidable-map-htpy H K b =
+  is-decidable-equiv
+    ( equiv-tot (λ a → equiv-concat (inv (H a)) b))
+    ( K b)
 ```
 
 ### Composition of decidable maps
@@ -279,3 +280,32 @@ module _
       ( retract-fiber-retract-map f g R x)
       ( G (map-codomain-inclusion-retract-map f g R x))
 ```
+
+### Decidable maps have Hilbert ε-operators
+
+```agda
+ε-operator-map-is-decidable-map :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-decidable-map f → ε-operator-map f
+ε-operator-map-is-decidable-map F = ε-operator-is-decidable ∘ F
+```
+
+### Decidable injective maps are embeddings
+
+**Proof.** Given a decidable map `f : A → B` then `f` decomposes
+`B ≃ (im f) + B∖(im f)`. Restricting to `im f` we have a section given by the
+Hilbert ε-operator on `f`. Now, by injectivity of `f` we know this restriction
+map is an equivalence. Hence, by 3-for-2 `f` is also an embedding.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-emb-is-injective-is-decidable-map :
+    is-decidable-map f → is-injective f → is-emb f
+  is-emb-is-injective-is-decidable-map H K =
+    is-emb-is-injective-ε-operator-map (ε-operator-map-is-decidable-map H) K
+```
+
+There is also an analogous proof using the double negation image.

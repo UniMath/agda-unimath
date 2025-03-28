@@ -8,27 +8,20 @@ module foundation.double-negation-stable-propositions where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.conjunction
-open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.double-negation
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.existential-quantification
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -283,6 +276,20 @@ neg-Double-Negation-Stable-Prop P =
   neg-type-Double-Negation-Stable-Prop (type-Double-Negation-Stable-Prop P)
 ```
 
+### Double negations of types are double negation stable propositions
+
+```agda
+double-negation-type-Double-Negation-Stable-Prop :
+  {l : Level} → UU l → Double-Negation-Stable-Prop l
+double-negation-type-Double-Negation-Stable-Prop A =
+  neg-Double-Negation-Stable-Prop (neg-type-Double-Negation-Stable-Prop A)
+
+double-negation-Double-Negation-Stable-Prop :
+  {l : Level} → Double-Negation-Stable-Prop l → Double-Negation-Stable-Prop l
+double-negation-Double-Negation-Stable-Prop P =
+  neg-Double-Negation-Stable-Prop (neg-Double-Negation-Stable-Prop P)
+```
+
 ### Universal quantification over double negation stable propositions is double negation stable
 
 ```agda
@@ -292,7 +299,7 @@ is-double-negation-stable-prop-Π :
   is-double-negation-stable-prop ((a : A) → B a)
 is-double-negation-stable-prop-Π b =
   ( is-prop-Π (is-prop-type-is-double-negation-stable-prop ∘ b)) ,
-  ( double-negation-elim-for-all
+  ( double-negation-elim-Π
     ( has-double-negation-elim-is-double-negation-stable-prop ∘ b))
 
 Π-Double-Negation-Stable-Prop :
