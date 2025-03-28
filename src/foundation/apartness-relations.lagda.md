@@ -10,14 +10,10 @@ module foundation.apartness-relations where
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.existential-quantification
-open import foundation.propositional-truncations
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.coproduct-types
-open import foundation-core.empty-types
 open import foundation-core.identity-types
 open import foundation-core.negation
 open import foundation-core.propositions
@@ -27,8 +23,9 @@ open import foundation-core.propositions
 
 ## Idea
 
-An **apartness relation** on a type `A` is a
-[relation](foundation.binary-relations.md) `R` which is
+An
+{{#concept "apartness relation" Disambiguation="types" WD="apartness relation" WDID=Q4779193 Agda=Apartness-Relation Agda=is-apartness-relation}}
+on a type `A` is a [relation](foundation.binary-relations.md) `R` which is
 
 - **Antireflexive:** For any `a : A` we have `¬ (R a a)`
 - **Symmetric:** For any `a b : A` we have `R a b → R b a`
@@ -56,7 +53,7 @@ module _
 
   is-cotransitive-Prop : Prop (l1 ⊔ l2)
   is-cotransitive-Prop =
-    ∀' A (λ a → ∀' A (λ b → ∀' A (λ c → R a b ⇒ (R a c ∨ R b c))))
+    ∀' A (λ a → ∀' A (λ b → ∀' A (λ c → R a b ⇒ (R a c) ∨ (R b c))))
 
   is-cotransitive : UU (l1 ⊔ l2)
   is-cotransitive = type-Prop is-cotransitive-Prop
@@ -80,6 +77,9 @@ module _
 
   apart-Apartness-Relation : A → A → UU l2
   apart-Apartness-Relation x y = type-Prop (rel-Apartness-Relation x y)
+
+  is-apartness-Apartness-Relation : is-apartness-relation rel-Apartness-Relation
+  is-apartness-Apartness-Relation = pr2 R
 
   antirefl-Apartness-Relation : is-antireflexive rel-Apartness-Relation
   antirefl-Apartness-Relation = pr1 (pr2 R)
@@ -123,6 +123,11 @@ module _
   apart-Type-With-Apartness =
     apart-Apartness-Relation apartness-relation-Type-With-Apartness
 
+  is-apartness-rel-apart-Type-With-Apartness :
+    is-apartness-relation rel-apart-Type-With-Apartness
+  is-apartness-rel-apart-Type-With-Apartness =
+    is-apartness-Apartness-Relation apartness-relation-Type-With-Apartness
+
   antirefl-apart-Type-With-Apartness :
     is-antireflexive rel-apart-Type-With-Apartness
   antirefl-apart-Type-With-Apartness =
@@ -144,83 +149,72 @@ module _
     cotransitive-Apartness-Relation apartness-relation-Type-With-Apartness
 ```
 
-### Apartness on the type of functions into a type with an apartness relation
-
-```agda
-module _
-  {l1 l2 l3 : Level} (X : UU l1) (Y : Type-With-Apartness l2 l3)
-  where
-
-  rel-apart-function-into-Type-With-Apartness :
-    Relation-Prop (l1 ⊔ l3) (X → type-Type-With-Apartness Y)
-  rel-apart-function-into-Type-With-Apartness f g =
-    ∃ X (λ x → rel-apart-Type-With-Apartness Y (f x) (g x))
-
-  apart-function-into-Type-With-Apartness :
-    Relation (l1 ⊔ l3) (X → type-Type-With-Apartness Y)
-  apart-function-into-Type-With-Apartness f g =
-    type-Prop (rel-apart-function-into-Type-With-Apartness f g)
-
-  is-prop-apart-function-into-Type-With-Apartness :
-    (f g : X → type-Type-With-Apartness Y) →
-    is-prop (apart-function-into-Type-With-Apartness f g)
-  is-prop-apart-function-into-Type-With-Apartness f g =
-    is-prop-type-Prop (rel-apart-function-into-Type-With-Apartness f g)
-```
-
 ## Properties
 
+### Restricting apartness along maps
+
 ```agda
 module _
-  {l1 l2 l3 : Level} (X : UU l1) (Y : Type-With-Apartness l2 l3)
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
+  (f : X → Y)
   where
 
-  is-antireflexive-apart-function-into-Type-With-Apartness :
-    is-antireflexive (rel-apart-function-into-Type-With-Apartness X Y)
-  is-antireflexive-apart-function-into-Type-With-Apartness f H =
-    apply-universal-property-trunc-Prop H
-      ( empty-Prop)
-      ( λ (x , a) → antirefl-apart-Type-With-Apartness Y (f x) a)
+  restriction-Relation-Prop : Relation-Prop l3 Y → Relation-Prop l3 X
+  restriction-Relation-Prop R x x' = R (f x) (f x')
 
-  is-symmetric-apart-function-into-Type-With-Apartness :
-    is-symmetric (apart-function-into-Type-With-Apartness X Y)
-  is-symmetric-apart-function-into-Type-With-Apartness f g H =
-    apply-universal-property-trunc-Prop H
-      ( rel-apart-function-into-Type-With-Apartness X Y g f)
-      ( λ (x , a) →
-        unit-trunc-Prop
-          ( x , symmetric-apart-Type-With-Apartness Y (f x) (g x) a))
+  restriction-Relation : Relation l3 Y → Relation l3 X
+  restriction-Relation R x x' =
+    R (f x) (f x')
 
-  abstract
-    is-cotransitive-apart-function-into-Type-With-Apartness :
-      is-cotransitive (rel-apart-function-into-Type-With-Apartness X Y)
-    is-cotransitive-apart-function-into-Type-With-Apartness f g h H =
-      apply-universal-property-trunc-Prop H
-        ( disjunction-Prop
-          ( rel-apart-function-into-Type-With-Apartness X Y f h)
-          ( rel-apart-function-into-Type-With-Apartness X Y g h))
-        ( λ (x , a) →
-          apply-universal-property-trunc-Prop
-            ( cotransitive-apart-Type-With-Apartness Y (f x) (g x) (h x) a)
-            ( disjunction-Prop
-              ( rel-apart-function-into-Type-With-Apartness X Y f h)
-              ( rel-apart-function-into-Type-With-Apartness X Y g h))
-            ( λ where
-              ( inl b) → inl-disjunction (intro-exists x b)
-              ( inr b) → inr-disjunction (intro-exists x b)))
+  is-antireflexive-restriction-Relation-Prop :
+    (R : Relation-Prop l3 Y) →
+    is-antireflexive R → is-antireflexive (restriction-Relation-Prop R)
+  is-antireflexive-restriction-Relation-Prop R H x =
+    H (f x)
 
-  exp-Type-With-Apartness : Type-With-Apartness (l1 ⊔ l2) (l1 ⊔ l3)
-  pr1 exp-Type-With-Apartness = X → type-Type-With-Apartness Y
-  pr1 (pr2 exp-Type-With-Apartness) =
-    rel-apart-function-into-Type-With-Apartness X Y
-  pr1 (pr2 (pr2 exp-Type-With-Apartness)) =
-    is-antireflexive-apart-function-into-Type-With-Apartness
-  pr1 (pr2 (pr2 (pr2 exp-Type-With-Apartness))) =
-    is-symmetric-apart-function-into-Type-With-Apartness
-  pr2 (pr2 (pr2 (pr2 exp-Type-With-Apartness))) =
-    is-cotransitive-apart-function-into-Type-With-Apartness
+  is-symmetric-restriction-Relation :
+    (R : Relation l3 Y) →
+    is-symmetric R → is-symmetric (restriction-Relation R)
+  is-symmetric-restriction-Relation R H x x' =
+    H (f x) (f x')
+
+  is-cotransitive-restriction-Relation-Prop :
+    (R : Relation-Prop l3 Y) →
+    is-cotransitive R → is-cotransitive (restriction-Relation-Prop R)
+  is-cotransitive-restriction-Relation-Prop R H x x' x'' =
+    H (f x) (f x') (f x'')
+
+  is-apartness-restriction-Relation-Prop :
+    (R : Relation-Prop l3 Y) →
+    is-apartness-relation R →
+    is-apartness-relation (restriction-Relation-Prop R)
+  is-apartness-restriction-Relation-Prop R (a , s , c) =
+    is-antireflexive-restriction-Relation-Prop R a ,
+    is-symmetric-restriction-Relation (λ y y' → type-Prop (R y y')) s ,
+    is-cotransitive-restriction-Relation-Prop R c
+
+  restriction-Apartness-Relation :
+    Apartness-Relation l3 Y → Apartness-Relation l3 X
+  restriction-Apartness-Relation R =
+    restriction-Relation-Prop (rel-Apartness-Relation R) ,
+    is-apartness-restriction-Relation-Prop
+      ( rel-Apartness-Relation R)
+      ( is-apartness-Apartness-Relation R)
+
+apartness-relation-restriction-Type-With-Apartness :
+  {l1 l2 l3 : Level} {X : UU l1} (Y : Type-With-Apartness l2 l3) →
+  (X → type-Type-With-Apartness Y) → Apartness-Relation l3 X
+apartness-relation-restriction-Type-With-Apartness Y f =
+  restriction-Apartness-Relation f (apartness-relation-Type-With-Apartness Y)
 ```
 
 ## References
 
 {{#bibliography}} {{#reference MRR88}}
+
+## See also
+
+- [Large apartness relations](foundation.large-apartness-relations.md)
+- [Tight apartness relations](foundation.tight-apartness-relations.md)
+- [Dependent function types with apartness relations](foundation.dependent-function-types-with-apartness-relations.md)
+- [Function types with apartness relations](foundation.function-types-with-apartness-relations.md)
