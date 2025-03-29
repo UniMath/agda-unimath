@@ -196,35 +196,36 @@ module _
   ( c : cocone-sequential-diagram A X)
   where
 
-  universal-property-dependent-universal-property-sequential-colimit :
-    dependent-universal-property-sequential-colimit c →
-    universal-property-sequential-colimit c
-  universal-property-dependent-universal-property-sequential-colimit
-    ( dup-c)
-    ( Y) =
-    is-equiv-left-map-triangle
-      ( cocone-map-sequential-diagram c)
-      ( map-compute-dependent-cocone-sequential-diagram-constant-family Y)
-      ( dependent-cocone-map-sequential-diagram c (λ _ → Y))
-      ( triangle-compute-dependent-cocone-sequential-diagram-constant-family
-        ( Y))
-      ( dup-c (λ _ → Y))
-      ( is-equiv-map-equiv
-        ( compute-dependent-cocone-sequential-diagram-constant-family Y))
+  abstract
+    universal-property-dependent-universal-property-sequential-colimit :
+      dependent-universal-property-sequential-colimit c →
+      universal-property-sequential-colimit c
+    universal-property-dependent-universal-property-sequential-colimit
+      ( dup-c)
+      ( Y) =
+      is-equiv-left-map-triangle
+        ( cocone-map-sequential-diagram c)
+        ( map-compute-dependent-cocone-sequential-diagram-constant-family Y)
+        ( dependent-cocone-map-sequential-diagram c (λ _ → Y))
+        ( triangle-compute-dependent-cocone-sequential-diagram-constant-family
+          ( Y))
+        ( dup-c (λ _ → Y))
+        ( is-equiv-map-equiv
+          ( compute-dependent-cocone-sequential-diagram-constant-family Y))
 
-  dependent-universal-property-universal-property-sequential-colimit :
-    universal-property-sequential-colimit c →
-    dependent-universal-property-sequential-colimit c
-  dependent-universal-property-universal-property-sequential-colimit
-    ( up-sequential-diagram) =
-    dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
-      ( c)
-      ( dependent-universal-property-universal-property-coequalizer
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c)
-        ( universal-property-coequalizer-universal-property-sequential-colimit
-          ( c)
-          ( up-sequential-diagram)))
+    dependent-universal-property-universal-property-sequential-colimit :
+      universal-property-sequential-colimit c →
+      dependent-universal-property-sequential-colimit c
+    dependent-universal-property-universal-property-sequential-colimit
+      ( up-sequential-diagram) =
+      dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
+        ( c)
+        ( dependent-universal-property-universal-property-coequalizer
+          ( double-arrow-sequential-diagram A)
+          ( cofork-cocone-sequential-diagram c)
+          ( universal-property-coequalizer-universal-property-sequential-colimit
+            ( c)
+            ( up-sequential-diagram)))
 ```
 
 ### The 3-for-2 property of the dependent universal property of sequential colimits
