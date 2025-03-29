@@ -22,6 +22,7 @@ open import foundation-core.1-types
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
+open import foundation-core.sections
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
@@ -275,6 +276,37 @@ module _
   {l1 l2 : Level} {X : UU l1} {A : UU l2} {f : A → X}
   where
 
+  map-section-map-unit-double-negation-im :
+    is-double-negation-eliminating-map f → double-negation-im f → A
+  map-section-map-unit-double-negation-im K (y , p) = pr1 (K y p)
+
+  is-section-map-section-map-unit-double-negation-im :
+    (K : is-double-negation-eliminating-map f) →
+    is-section
+      ( map-unit-double-negation-im f)
+      ( map-section-map-unit-double-negation-im K)
+  is-section-map-section-map-unit-double-negation-im K (y , p) =
+    is-injective-inclusion-double-negation-im f (pr2 (K y p))
+
+  section-map-unit-double-negation-im :
+    is-double-negation-eliminating-map f →
+    section (map-unit-double-negation-im f)
+  section-map-unit-double-negation-im K =
+    ( map-section-map-unit-double-negation-im K ,
+      is-section-map-section-map-unit-double-negation-im K)
+
+  is-equiv-map-unit-double-negation-im :
+     is-double-negation-eliminating-map f →
+     is-injective f →
+     is-equiv (map-unit-double-negation-im f)
+  is-equiv-map-unit-double-negation-im K H =
+    is-equiv-is-injective
+      ( section-map-unit-double-negation-im K)
+      ( is-injective-right-factor
+        ( inclusion-double-negation-im f)
+        ( map-unit-double-negation-im f)
+        ( H))
+
   is-emb-is-injective-is-double-negation-eliminating-map :
     is-double-negation-eliminating-map f → is-injective f → is-emb f
   is-emb-is-injective-is-double-negation-eliminating-map K H =
@@ -282,16 +314,7 @@ module _
       ( inclusion-double-negation-im f)
       ( map-unit-double-negation-im f)
       ( is-emb-inclusion-double-negation-im f)
-      ( is-emb-is-equiv
-        ( is-equiv-is-split-surjective-is-injective
-          ( map-unit-double-negation-im f)
-          ( is-injective-right-factor
-            ( inclusion-double-negation-im f)
-            ( map-unit-double-negation-im f) H)
-          ( λ x →
-            pr1 (K (pr1 x) (pr2 x)) ,
-            is-injective-inclusion-double-negation-im f
-              ( pr2 (K (pr1 x) (pr2 x))))))
+      ( is-emb-is-equiv (is-equiv-map-unit-double-negation-im K H))
 ```
 
 ## See also
