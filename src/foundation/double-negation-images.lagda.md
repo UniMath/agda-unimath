@@ -22,10 +22,10 @@ open import foundation-core.1-types
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.sections
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
+open import foundation-core.sections
 open import foundation-core.sets
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
@@ -296,9 +296,9 @@ module _
       is-section-map-section-map-unit-double-negation-im K)
 
   is-equiv-map-unit-double-negation-im :
-     is-double-negation-eliminating-map f →
-     is-injective f →
-     is-equiv (map-unit-double-negation-im f)
+    is-double-negation-eliminating-map f →
+    is-injective f →
+    is-equiv (map-unit-double-negation-im f)
   is-equiv-map-unit-double-negation-im K H =
     is-equiv-is-injective
       ( section-map-unit-double-negation-im K)
