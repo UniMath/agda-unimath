@@ -142,7 +142,7 @@ abstract
 
 nonnegative-rational-nonnegative-ℤ : nonnegative-ℤ → ℚ⁰⁺
 nonnegative-rational-nonnegative-ℤ (x , x-is-neg) =
-  rational-ℤ x , is-nonnegative-rational-ℤ x x-is-neg
+  ( rational-ℤ x , is-nonnegative-rational-ℤ x x-is-neg)
 ```
 
 ### The rational image of a nonnegative integer fraction is nonnegative
@@ -177,8 +177,8 @@ module _
 
     is-nonnegative-iff-leq-zero-ℚ : is-nonnegative-ℚ x ↔ leq-ℚ zero-ℚ x
     is-nonnegative-iff-leq-zero-ℚ =
-      leq-zero-is-nonnegative-ℚ ,
-      is-nonnegative-leq-zero-ℚ
+      ( leq-zero-is-nonnegative-ℚ ,
+        is-nonnegative-leq-zero-ℚ)
 ```
 
 ### The difference of a rational number with a rational number less than or equal to the first is nonnegative
@@ -196,7 +196,7 @@ module _
         ( backward-implication (iff-translate-diff-leq-zero-ℚ x y) H)
 
   nonnegative-diff-le-ℚ : ℚ⁰⁺
-  nonnegative-diff-le-ℚ = y -ℚ x , is-nonnegative-diff-leq-ℚ
+  nonnegative-diff-le-ℚ = (y -ℚ x , is-nonnegative-diff-leq-ℚ)
 ```
 
 ### The product of two nonnegative rational numbers is nonnegative
@@ -268,7 +268,7 @@ abstract
 
 add-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
 add-ℚ⁰⁺ (p , nonneg-p) (q , nonneg-q) =
-  p +ℚ q , is-nonnegative-add-ℚ p q nonneg-p nonneg-q
+  ( p +ℚ q , is-nonnegative-add-ℚ p q nonneg-p nonneg-q)
 
 infixl 35 _+ℚ⁰⁺_
 _+ℚ⁰⁺_ = add-ℚ⁰⁺
@@ -291,9 +291,10 @@ abstract
 
 mul-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
 mul-ℚ⁰⁺ (p , nonneg-p) (q , nonneg-q) =
-  p *ℚ q , is-nonnegative-mul-ℚ p q nonneg-p nonneg-q
+  ( p *ℚ q , is-nonnegative-mul-ℚ p q nonneg-p nonneg-q)
 
 infixl 35 _*ℚ⁰⁺_
+_*ℚ⁰⁺_ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
 _*ℚ⁰⁺_ = mul-ℚ⁰⁺
 ```
 
