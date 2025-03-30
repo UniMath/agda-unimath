@@ -13,12 +13,12 @@ open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.existential-quantification
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtypes
