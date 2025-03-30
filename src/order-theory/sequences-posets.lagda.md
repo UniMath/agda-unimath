@@ -37,7 +37,7 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  sequence-Poset : UU l1
+  type-sequence-Poset : UU l1
   sequence-Poset = sequence (type-Poset P)
 ```
 
