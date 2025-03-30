@@ -9,18 +9,14 @@ module metric-spaces.uniformly-continuous-functions-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.dependent-pair-types
-open import foundation.existential-quantification
 open import foundation.function-types
-open import foundation.inhabited-subtypes
-open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.continuous-functions-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.uniformly-continuous-functions-premetric-spaces
 ```
 
 </details>
@@ -44,28 +40,34 @@ module _
 
   is-modulus-of-uniform-continuity-prop-Metric-Space :
     (ℚ⁺ → ℚ⁺) → Prop (l1 ⊔ l2 ⊔ l4)
-  modulus-of-uniform-continuity-Metric-Space-Prop m =
-    Π-Prop
-      ( type-Metric-Space X)
-      ( λ x → modulus-of-continuity-at-point-Metric-Space-Prop X Y f x m)
+  is-modulus-of-uniform-continuity-prop-Metric-Space =
+    is-modulus-of-uniform-continuity-prop-Premetric-Space
+      ( premetric-Metric-Space X)
+      ( premetric-Metric-Space Y)
+      ( f)
 
-  uniformly-continuous-Metric-Space-Prop : Prop (l1 ⊔ l2 ⊔ l4)
-  uniformly-continuous-Metric-Space-Prop =
-    is-inhabited-subtype-Prop modulus-of-uniform-continuity-Metric-Space-Prop
+  is-uniformly-continuous-map-prop-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
+  is-uniformly-continuous-map-prop-Metric-Space =
+    is-uniformly-continuous-map-prop-Premetric-Space
+      ( premetric-Metric-Space X)
+      ( premetric-Metric-Space Y)
+      ( f)
 
   is-uniformly-continuous-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
   is-uniformly-continuous-map-Metric-Space =
-    type-Prop uniformly-continuous-Metric-Space-Prop
+    is-uniformly-continuous-map-Premetric-Space
+      ( premetric-Metric-Space X)
+      ( premetric-Metric-Space Y)
+      ( f)
 
   is-continuous-at-point-is-uniformly-continuous-map-Metric-Space :
     is-uniformly-continuous-map-Metric-Space → (x : type-Metric-Space X) →
     is-continuous-at-point-Metric-Space X Y f x
-  is-continuous-at-point-is-uniformly-continuous-map-Metric-Space H x =
-    do
-      m , is-modulus-uniform-m ← H
-      intro-exists m (is-modulus-uniform-m x)
-    where
-      open do-syntax-trunc-Prop (continuous-at-point-Metric-Space-Prop X Y f x)
+  is-continuous-at-point-is-uniformly-continuous-map-Metric-Space =
+    is-continuous-at-point-is-uniformly-continuous-map-Premetric-Space
+      ( premetric-Metric-Space X)
+      ( premetric-Metric-Space Y)
+      ( f)
 ```
 
 ## Properties
@@ -79,7 +81,9 @@ module _
 
   is-uniformly-continuous-map-id-Metric-Space :
     is-uniformly-continuous-map-Metric-Space X X id
-  uniformly-continuous-id-Metric-Space = intro-exists id (λ _ _ _ → id)
+  is-uniformly-continuous-map-id-Metric-Space =
+    is-uniformly-continuous-map-id-Premetric-Space
+      ( premetric-Metric-Space X)
 ```
 
 ### The composition of uniformly continuous functions is uniformly continuous
@@ -95,17 +99,11 @@ module _
     is-uniformly-continuous-map-Metric-Space Y Z f →
     is-uniformly-continuous-map-Metric-Space X Y g →
     is-uniformly-continuous-map-Metric-Space X Z (f ∘ g)
-  uniformly-continuous-comp-uniformly-continuous-Metric-Space H K =
-    do
-      mf , is-modulus-uniform-mf ← H
-      mg , is-modulus-uniform-mg ← K
-      intro-exists
-        ( mg ∘ mf)
-        ( λ x ε x' →
-          is-modulus-uniform-mf (g x) ε (g x') ∘
-          is-modulus-uniform-mg x (mf ε) x')
-    where
-      open
-        do-syntax-trunc-Prop
-          ( uniformly-continuous-Metric-Space-Prop X Z (f ∘ g))
+  is-uniformly-continuous-map-comp-Metric-Space =
+    is-uniformly-continuous-map-comp-Premetric-Space
+      ( premetric-Metric-Space X)
+      ( premetric-Metric-Space Y)
+      ( premetric-Metric-Space Z)
+      ( f)
+      ( g)
 ```

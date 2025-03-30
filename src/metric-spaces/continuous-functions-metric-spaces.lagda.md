@@ -17,6 +17,7 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.continuous-functions-premetric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.metric-spaces
 ```
@@ -42,29 +43,33 @@ module _
 
   is-modulus-of-continuity-at-point-prop-Metric-Space :
     (x : type-Metric-Space X) → (ℚ⁺ → ℚ⁺) → Prop (l1 ⊔ l2 ⊔ l4)
-  modulus-of-continuity-at-point-Metric-Space-Prop x m =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ ε →
-        Π-Prop
-          ( type-Metric-Space X)
-          ( λ x' →
-            structure-Metric-Space X (m ε) x x' ⇒
-            structure-Metric-Space Y ε (f x) (f x')))
+  is-modulus-of-continuity-at-point-prop-Metric-Space =
+    is-modulus-of-continuity-at-point-prop-Premetric-Space
+      ( premetric-Metric-Space X)
+      ( premetric-Metric-Space Y)
+      ( f)
 
   is-modulus-of-continuity-at-point-Metric-Space :
     (x : type-Metric-Space X) → UU (l1 ⊔ l2 ⊔ l4)
-  modulus-of-continuity-at-point-Metric-Space x =
-    type-subtype (modulus-of-continuity-at-point-Metric-Space-Prop x)
+  is-modulus-of-continuity-at-point-Metric-Space =
+    is-modulus-of-continuity-at-point-Premetric-Space
+      ( premetric-Metric-Space X)
+      ( premetric-Metric-Space Y)
+      ( f)
 
   is-continuous-at-point-prop-Metric-Space :
     (x : type-Metric-Space X) → Prop (l1 ⊔ l2 ⊔ l4)
-  continuous-at-point-Metric-Space-Prop x =
-    is-inhabited-subtype-Prop
-      (modulus-of-continuity-at-point-Metric-Space-Prop x)
+  is-continuous-at-point-prop-Metric-Space =
+    is-continuous-at-point-prop-Premetric-Space
+      ( premetric-Metric-Space X)
+      ( premetric-Metric-Space Y)
+      ( f)
 
   is-continuous-at-point-Metric-Space :
     (x : type-Metric-Space X) → UU (l1 ⊔ l2 ⊔ l4)
-  is-continuous-at-point-Metric-Space x =
-    type-Prop (continuous-at-point-Metric-Space-Prop x)
+  is-continuous-at-point-Metric-Space =
+    is-continuous-at-point-Premetric-Space
+      ( premetric-Metric-Space X)
+      ( premetric-Metric-Space Y)
+      ( f)
 ```

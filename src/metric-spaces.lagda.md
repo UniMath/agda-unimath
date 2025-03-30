@@ -54,6 +54,7 @@ open import metric-spaces.cauchy-sequences-metric-spaces public
 open import metric-spaces.closed-premetric-structures public
 open import metric-spaces.complete-metric-spaces public
 open import metric-spaces.continuous-functions-metric-spaces public
+open import metric-spaces.continuous-functions-premetric-spaces public
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces public
 open import metric-spaces.dependent-products-metric-spaces public
 open import metric-spaces.discrete-premetric-structures public
@@ -91,6 +92,7 @@ open import metric-spaces.subspaces-metric-spaces public
 open import metric-spaces.symmetric-premetric-structures public
 open import metric-spaces.triangular-premetric-structures public
 open import metric-spaces.uniformly-continuous-functions-metric-spaces public
+open import metric-spaces.uniformly-continuous-functions-premetric-spaces public
 ```
 
 ## References
