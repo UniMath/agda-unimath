@@ -101,6 +101,20 @@ module _
     type-Premetric-Space A → type-Premetric-Space B
 ```
 
+### The type of binary functions between premetric spaces
+
+```agda
+module _
+  {l1 l2 l1' l2' l1'' l2'' : Level}
+  (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
+  (C : Premetric-Space l1'' l2'')
+  where
+
+  binary-map-type-Premetric-Space : UU (l1 ⊔ l1' ⊔ l1'')
+  binary-map-type-Premetric-Space =
+    type-Premetric-Space A → type-Premetric-Space B → type-Premetric-Space C
+```
+
 ### The identity map on a premetric space
 
 ```agda

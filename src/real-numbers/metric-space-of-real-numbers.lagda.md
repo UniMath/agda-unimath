@@ -245,7 +245,7 @@ module _
     ( is-closed-lower-neighborhood-leq-ℝ y x ε (pr2 ∘ H))
 ```
 
-### Tha canonical embedding from rational to real numbers is an isometry between metric spaces
+### The canonical embedding from rational to real numbers is an isometry between metric spaces
 
 ```agda
 is-isometry-metric-space-leq-real-ℚ :

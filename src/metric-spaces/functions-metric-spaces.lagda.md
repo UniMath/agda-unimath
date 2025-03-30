@@ -41,6 +41,22 @@ module _
       ( premetric-Metric-Space B)
 ```
 
+### Binary functions between metric spaces
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l3 l4) (C : Metric-Space l5 l6)
+  where
+
+  binary-map-type-Metric-Space : UU (l1 ⊔ l3 ⊔ l5)
+  binary-map-type-Metric-Space =
+    binary-map-type-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( premetric-Metric-Space C)
+```
+
 ### The identity function on a metric space
 
 ```agda

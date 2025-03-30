@@ -219,12 +219,13 @@ module _
   {l1 l2 l3 l4 : Level} (A : Premetric-Space l1 l2) (B : Premetric-Space l3 l4)
   where
 
-  is-uniformly-continuous-is-short-function-Premetric-Space :
-    (f : map-type-Premetric-Space A B) →
-    is-short-function-Premetric-Space A B f →
-    is-uniformly-continuous-map-Premetric-Space A B f
-  is-uniformly-continuous-is-short-function-Premetric-Space f H =
-    intro-exists id (λ x ε → H ε x)
+  abstract
+    is-uniformly-continuous-is-short-function-Premetric-Space :
+      (f : map-type-Premetric-Space A B) →
+      is-short-function-Premetric-Space A B f →
+      is-uniformly-continuous-map-Premetric-Space A B f
+    is-uniformly-continuous-is-short-function-Premetric-Space f H =
+      intro-exists id (λ x ε → H ε x)
 ```
 
 ## External links

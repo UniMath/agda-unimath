@@ -30,6 +30,12 @@ if there exists a function `m : ℚ⁺ → ℚ⁺` such that for any `x : X`, wh
 `x'` is in an `m ε`-neighborhood of `x`, `f x'` is in an `ε`-neighborhood of
 `f x`. The function `m` is called a modulus of uniform continuity of `f`.
 
+A binary function `f` from metric spaces `X` and `Y` to `Z` is uniformly
+continuous if the induced map `ind-product f : X × Y → Z` is a uniformly
+continuous map from the
+[product metric space](metric-spaces.products-metric-spaces.md) of `X` and `Y`
+to `Z`.
+
 ## Definitions
 
 ```agda
@@ -42,6 +48,14 @@ module _
     (ℚ⁺ → ℚ⁺) → Prop (l1 ⊔ l2 ⊔ l4)
   is-modulus-of-uniform-continuity-prop-Metric-Space =
     is-modulus-of-uniform-continuity-prop-Premetric-Space
+      ( premetric-Metric-Space X)
+      ( premetric-Metric-Space Y)
+      ( f)
+
+  is-modulus-of-uniform-continuity-Metric-Space :
+    (ℚ⁺ → ℚ⁺) → UU (l1 ⊔ l2 ⊔ l4)
+  is-modulus-of-uniform-continuity-Metric-Space =
+    is-modulus-of-uniform-continuity-Premetric-Space
       ( premetric-Metric-Space X)
       ( premetric-Metric-Space Y)
       ( f)
