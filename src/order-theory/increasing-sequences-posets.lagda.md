@@ -84,13 +84,8 @@ module _
   is-increasing-sequence-all-increasing-value-sequence-Poset :
     ((n : ℕ) → is-increasing-value-sequence-Poset P u n) →
     is-increasing-sequence-Poset P u
-  is-increasing-sequence-all-increasing-value-sequence-Poset H p =
-    based-ind-ℕ
-      ( p)
-      ( λ q → leq-Poset P (u p) (u q))
-      ( refl-leq-Poset P (u p))
-      ( λ q I →
-        transitive-leq-Poset P (u p) (u q) (u (succ-ℕ q)) (H q))
+  is-increasing-sequence-all-increasing-value-sequence-Poset =
+    preserves-order-ind-ℕ-Poset P u
 
   all-increasing-value-is-increasing-sequence-Poset :
     is-increasing-sequence-Poset P u →
