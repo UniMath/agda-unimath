@@ -73,7 +73,7 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  poset-sequence-Poset : Poset l1 l2
+  sequence-Poset : Poset l1 l2
   pr1 (pr1 poset-sequence-Poset) = sequence-Poset P
   pr1 (pr2 (pr1 poset-sequence-Poset)) = leq-prop-sequence-Poset P
   pr1 (pr2 (pr2 (pr1 poset-sequence-Poset))) u n = refl-leq-Poset P (u n)
