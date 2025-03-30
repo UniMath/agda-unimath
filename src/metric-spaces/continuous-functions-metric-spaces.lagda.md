@@ -40,7 +40,7 @@ module _
   (f : map-type-Metric-Space X Y)
   where
 
-  modulus-of-continuity-at-point-Metric-Space-Prop :
+  is-modulus-of-continuity-at-point-prop-Metric-Space :
     (x : type-Metric-Space X) → (ℚ⁺ → ℚ⁺) → Prop (l1 ⊔ l2 ⊔ l4)
   modulus-of-continuity-at-point-Metric-Space-Prop x m =
     Π-Prop
@@ -52,12 +52,12 @@ module _
             structure-Metric-Space X (m ε) x x' ⇒
             structure-Metric-Space Y ε (f x) (f x')))
 
-  modulus-of-continuity-at-point-Metric-Space :
+  is-modulus-of-continuity-at-point-Metric-Space :
     (x : type-Metric-Space X) → UU (l1 ⊔ l2 ⊔ l4)
   modulus-of-continuity-at-point-Metric-Space x =
     type-subtype (modulus-of-continuity-at-point-Metric-Space-Prop x)
 
-  continuous-at-point-Metric-Space-Prop :
+  is-continuous-at-point-prop-Metric-Space :
     (x : type-Metric-Space X) → Prop (l1 ⊔ l2 ⊔ l4)
   continuous-at-point-Metric-Space-Prop x =
     is-inhabited-subtype-Prop

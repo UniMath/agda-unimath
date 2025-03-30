@@ -29,10 +29,10 @@ open import metric-spaces.metric-spaces
 
 A [function](metric-spaces.functions-metric-spaces.md) `f` between
 [metric spaces](metric-spaces.metric-spaces.md) `X` and `Y` is
-{{#concept "uniformly continuous" WDID=Q170058 WD="continuous function"}} if
-there exists a function `m : ℚ⁺ → ℚ⁺` such that for any `x : X`, whenever `x'`
-is in an `m ε`-neighborhood of `x`, `f x'` is in an `ε`-neighborhood of `f x`.
-The function `m` is called a modulus of uniform continuity of `f`.
+{{#concept "uniformly continuous" Disambiguation="function between metric spaces" WDID=Q741865 WD="uniform continuity" Agda=is-uniformly-continuous-map-Metric-Space}}
+if there exists a function `m : ℚ⁺ → ℚ⁺` such that for any `x : X`, whenever
+`x'` is in an `m ε`-neighborhood of `x`, `f x'` is in an `ε`-neighborhood of
+`f x`. The function `m` is called a modulus of uniform continuity of `f`.
 
 ## Definitions
 
@@ -42,7 +42,7 @@ module _
   (f : map-type-Metric-Space X Y)
   where
 
-  modulus-of-uniform-continuity-Metric-Space-Prop :
+  is-modulus-of-uniform-continuity-prop-Metric-Space :
     (ℚ⁺ → ℚ⁺) → Prop (l1 ⊔ l2 ⊔ l4)
   modulus-of-uniform-continuity-Metric-Space-Prop m =
     Π-Prop
@@ -77,7 +77,7 @@ module _
   {l1 l2 : Level} (X : Metric-Space l1 l2)
   where
 
-  uniformly-continuous-id-Metric-Space :
+  is-uniformly-continuous-map-id-Metric-Space :
     is-uniformly-continuous-map-Metric-Space X X id
   uniformly-continuous-id-Metric-Space = intro-exists id (λ _ _ _ → id)
 ```
@@ -91,7 +91,7 @@ module _
   (f : map-type-Metric-Space Y Z) (g : map-type-Metric-Space X Y)
   where
 
-  uniformly-continuous-comp-uniformly-continuous-Metric-Space :
+  is-uniformly-continuous-map-comp-Metric-Space :
     is-uniformly-continuous-map-Metric-Space Y Z f →
     is-uniformly-continuous-map-Metric-Space X Y g →
     is-uniformly-continuous-map-Metric-Space X Z (f ∘ g)
