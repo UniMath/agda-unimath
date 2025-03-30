@@ -271,6 +271,7 @@ add-ℚ⁰⁺ (p , nonneg-p) (q , nonneg-q) =
   ( p +ℚ q , is-nonnegative-add-ℚ p q nonneg-p nonneg-q)
 
 infixl 35 _+ℚ⁰⁺_
+_+ℚ⁰⁺_ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
 _+ℚ⁰⁺_ = add-ℚ⁰⁺
 ```
 
