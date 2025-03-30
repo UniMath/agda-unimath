@@ -13,7 +13,6 @@ open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -366,10 +365,8 @@ module _
     (f : isometry-Metric-Space A B) →
     is-uniformly-continuous-map-Metric-Space A B
       (map-isometry-Metric-Space A B f)
-  is-uniformly-continuous-map-isometry-Metric-Space f =
-    intro-exists
-      ( id)
-      ( λ x ε x' →
-        forward-implication
-          ( is-isometry-map-isometry-Metric-Space A B f ε x x'))
+  is-uniformly-continuous-map-isometry-Metric-Space =
+    is-uniformly-continuous-map-isometry-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
 ```

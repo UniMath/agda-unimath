@@ -335,8 +335,10 @@ module _
   is-uniformly-continuous-is-short-function-Metric-Space :
     (f : map-type-Metric-Space A B) → is-short-function-Metric-Space A B f →
     is-uniformly-continuous-map-Metric-Space A B f
-  is-uniformly-continuous-is-short-function-Metric-Space f H =
-    intro-exists id (λ x ε → H ε x)
+  is-uniformly-continuous-is-short-function-Metric-Space =
+    is-uniformly-continuous-is-short-function-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
 ```
 
 ## See also
