@@ -47,7 +47,9 @@ open import real-numbers.strict-inequality-real-numbers
 A [real number](real-numbers.dedekind-real-numbers.md) is **positive** if zero
 is [strictly less than](real-numbers.strict-inequality-real-numbers.md) it.
 
-## Definition
+## Definitions
+
+### The positivity predicate on real numbers
 
 ```agda
 is-positive-prop-ℝ : {l : Level} → ℝ l → Prop l
@@ -55,7 +57,11 @@ is-positive-prop-ℝ = le-ℝ-Prop zero-ℝ
 
 is-positive-ℝ : {l : Level} → ℝ l → UU l
 is-positive-ℝ x = type-Prop (is-positive-prop-ℝ x)
+```
 
+### The type of positive real numbers
+
+```agda
 subtype-positive-ℝ : (l : Level) → subtype l (ℝ l)
 subtype-positive-ℝ l = is-positive-prop-ℝ {l}
 
@@ -181,10 +187,10 @@ module _
       ( preserves-le-right-add-ℝ (neg-ℝ x) x y H)
 
   positive-diff-le-ℝ : ℝ⁺ (l1 ⊔ l2)
-  positive-diff-le-ℝ = y -ℝ x , is-positive-diff-le-ℝ
+  positive-diff-le-ℝ = (y -ℝ x , is-positive-diff-le-ℝ)
 ```
 
-### The real embedding of a positive rational number is positive
+### Positive rational numbers are positive real numbers
 
 ```agda
 is-positive-real-positive-ℚ :

@@ -120,7 +120,7 @@ premetric-leq-ℝ l d x y =
 
 ## Properties
 
-### `x` is in a neighborhood `d` of `y` if `x - d ≤ y ≤ x + d`
+### `x` is in a `d`-neighborhood of `y` if `x - d ≤ y ≤ x + d`
 
 ```agda
 is-in-lower-neighborhood-real-bound-leq-ℝ :
@@ -150,8 +150,8 @@ neighborhood-±-bound-leq-ℝ :
   leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
   type-Prop (premetric-leq-ℝ l d x y)
 neighborhood-±-bound-leq-ℝ d x y x≤y+d y≤x+d =
-  is-in-lower-neighborhood-real-bound-leq-ℝ d x y y≤x+d ,
-  is-in-lower-neighborhood-real-bound-leq-ℝ d y x x≤y+d
+  ( is-in-lower-neighborhood-real-bound-leq-ℝ d x y y≤x+d ,
+    is-in-lower-neighborhood-real-bound-leq-ℝ d y x x≤y+d)
 ```
 
 ### The standard premetric on the real numbers is a metric structure
@@ -360,8 +360,7 @@ module _
 
   lower-cut-lim-cauchy-approximation-leq-ℝ : subtype l ℚ
   lower-cut-lim-cauchy-approximation-leq-ℝ q =
-    ∃
-      ( ℚ⁺ × ℚ⁺)
+    ∃ ( ℚ⁺ × ℚ⁺)
       ( λ (ε , θ) →
         lower-cut-ℝ
           ( map-cauchy-approximation-leq-ℝ x ε)
@@ -369,8 +368,7 @@ module _
 
   upper-cut-lim-cauchy-approximation-leq-ℝ : subtype l ℚ
   upper-cut-lim-cauchy-approximation-leq-ℝ q =
-    ∃
-      ( ℚ⁺ × ℚ⁺)
+    ∃ ( ℚ⁺ × ℚ⁺)
       ( λ (ε , θ) →
         upper-cut-ℝ
           ( map-cauchy-approximation-leq-ℝ x ε)
@@ -564,8 +562,7 @@ module _
   abstract
     is-disjoint-cut-lim-cauchy-approximation-leq-ℝ :
       (q : ℚ) →
-      ¬
-        ( is-in-subtype lower-cut-lim-cauchy-approximation-leq-ℝ q ×
+      ¬ ( is-in-subtype lower-cut-lim-cauchy-approximation-leq-ℝ q ×
           is-in-subtype upper-cut-lim-cauchy-approximation-leq-ℝ q)
     is-disjoint-cut-lim-cauchy-approximation-leq-ℝ q (q<lim , lim<q) =
       let
@@ -766,8 +763,8 @@ module _
       ( metric-space-leq-ℝ l)
       ( x)
   is-convergent-cauchy-approximation-leq-ℝ =
-    lim-cauchy-approximation-leq-ℝ x ,
-    is-limit-lim-cauchy-approximation-leq-ℝ
+    ( lim-cauchy-approximation-leq-ℝ x ,
+      is-limit-lim-cauchy-approximation-leq-ℝ)
 ```
 
 ### The standard metric space of real numbers is complete
