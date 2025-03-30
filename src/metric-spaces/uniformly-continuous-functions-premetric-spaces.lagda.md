@@ -26,7 +26,7 @@ open import metric-spaces.premetric-spaces
 
 ## Idea
 
-A function `f` between [premetric spaces](premetric-spaces.metric-spaces.md) `X`
+A function `f` between [premetric spaces](metric-spaces.premetric-spaces.md) `X`
 and `Y` is
 {{#concept "uniformly continuous" Disambiguation="function between metric spaces" WDID=Q741865 WD="uniform continuity" Agda=is-uniformly-continuous-map-Premetric-Space}}
 if there exists a function `m : ℚ⁺ → ℚ⁺` such that for any `x : X`, whenever
