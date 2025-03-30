@@ -44,7 +44,8 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-A [real number](real-numbers.dedekind-real-numbers.md) is **positive** if zero
+A [real number](real-numbers.dedekind-real-numbers.md) is
+{{#concept "positive" Disambiguation="real number" Agda=is-positive-ℝ}} if zero
 is [strictly less than](real-numbers.strict-inequality-real-numbers.md) it.
 
 ## Definitions
@@ -97,23 +98,32 @@ module _
   {l : Level} (x : ℝ l)
   where
 
-  is-positive-iff-exists-ℚ⁺-in-lower-cut-ℝ :
-    is-positive-ℝ x ↔ exists ℚ⁺ (λ p → lower-cut-ℝ x (rational-ℚ⁺ p))
-  pr1 is-positive-iff-exists-ℚ⁺-in-lower-cut-ℝ =
+  exists-ℚ⁺-in-lower-cut-is-positive-ℝ :
+    is-positive-ℝ x → exists ℚ⁺ (λ p → lower-cut-ℝ x (rational-ℚ⁺ p))
+  exists-ℚ⁺-in-lower-cut-is-positive-ℝ =
     elim-exists
       ( ∃ ℚ⁺ (λ p → lower-cut-ℝ x (rational-ℚ⁺ p)))
       ( λ p (0<p , p<x) → intro-exists (p , is-positive-le-zero-ℚ p 0<p) p<x)
-  pr2 is-positive-iff-exists-ℚ⁺-in-lower-cut-ℝ =
+
+  is-positive-exists-ℚ⁺-in-lower-cut-ℝ :
+    exists ℚ⁺ (λ p → lower-cut-ℝ x (rational-ℚ⁺ p)) →
+    is-positive-ℝ x
+  is-positive-exists-ℚ⁺-in-lower-cut-ℝ =
     elim-exists
       ( is-positive-prop-ℝ x)
       ( λ (p , pos-p) p<x →
         intro-exists p (le-zero-is-positive-ℚ p pos-p , p<x))
 
+  is-positive-iff-exists-ℚ⁺-in-lower-cut-ℝ :
+    is-positive-ℝ x ↔ exists ℚ⁺ (λ p → lower-cut-ℝ x (rational-ℚ⁺ p))
+  is-positive-iff-exists-ℚ⁺-in-lower-cut-ℝ =
+    ( exists-ℚ⁺-in-lower-cut-is-positive-ℝ ,
+      is-positive-exists-ℚ⁺-in-lower-cut-ℝ)
+
 exists-ℚ⁺-in-lower-cut-ℝ⁺ :
   {l : Level} → (x : ℝ⁺ l) →
   exists ℚ⁺ (λ p → lower-cut-ℝ (real-ℝ⁺ x) (rational-ℚ⁺ p))
-exists-ℚ⁺-in-lower-cut-ℝ⁺ (x , pos-x) =
-  forward-implication (is-positive-iff-exists-ℚ⁺-in-lower-cut-ℝ x) pos-x
+exists-ℚ⁺-in-lower-cut-ℝ⁺ = ind-Σ exists-ℚ⁺-in-lower-cut-is-positive-ℝ
 ```
 
 ### Addition with a positive real number is a strictly inflationary map
@@ -123,7 +133,9 @@ abstract
   le-left-add-real-ℝ⁺ :
     {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (x +ℝ real-ℝ⁺ d)
   le-left-add-real-ℝ⁺ x d⁺@(d , pos-d) =
-    do
+    let
+      open do-syntax-trunc-Prop (le-ℝ-Prop x (x +ℝ d))
+    in do
       r⁺@(r , _) , r<d ← exists-ℚ⁺-in-lower-cut-ℝ⁺ d⁺
       (p , q) , (q<p+r , p<x , x<q) ←
         is-arithmetically-located-ℝ x r⁺
@@ -144,7 +156,6 @@ abstract
                   ( tr (le-ℚ q) (commutative-add-ℚ p r) q<p+r))
                 ( r<d) ,
               inv (is-identity-right-conjugation-add-ℚ p q)))
-    where open do-syntax-trunc-Prop (le-ℝ-Prop x (x +ℝ d))
 
 le-right-add-real-ℝ⁺ :
   {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (real-ℝ⁺ d +ℝ x)

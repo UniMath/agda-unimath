@@ -32,8 +32,10 @@ open import real-numbers.strict-inequality-real-numbers
 ## Idea
 
 We derive transposition laws from those for
-[strict inequality](real-numbers.strict-inequality-real-numbers.md) to apply to
-rational numbers in the lower and upper cuts of
+[strict inequality](real-numbers.strict-inequality-real-numbers.md), that
+`x < y + z ⇔ x - z < y` and `x < y - z ⇔ x + z < y`, to apply to
+[rational numbers](elementary-number-theory.rational-numbers.md) in the lower
+and upper cuts of
 [Dedekind real numbers](real-numbers.dedekind-real-numbers.md).
 
 ### Transposition laws for lower cuts
