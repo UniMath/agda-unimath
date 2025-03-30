@@ -13,6 +13,7 @@ open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -25,6 +26,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.premetric-spaces
+open import metric-spaces.uniformly-continuous-functions-premetric-spaces
 ```
 
 </details>
@@ -255,4 +257,24 @@ module _
     is-emb-is-injective
       ( is-set-has-extensional-Premetric (structure-Premetric-Space B) J)
       ( is-injective-map-isometry-is-extensional-Premetric-Space)
+```
+
+### Any isometry between premetric spaces is uniformly continuous
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (A : Premetric-Space l1 l2) (B : Premetric-Space l3 l4)
+  where
+
+  is-uniformly-continuous-map-isometry-Premetric-Space :
+    (f : isometry-Premetric-Space A B) →
+    is-uniformly-continuous-map-Premetric-Space A B
+      (map-isometry-Premetric-Space A B f)
+  is-uniformly-continuous-map-isometry-Premetric-Space f =
+    intro-exists
+      ( id)
+      ( λ x ε x' →
+        forward-implication
+          ( is-isometry-map-isometry-Premetric-Space A B f ε x x'))
 ```
