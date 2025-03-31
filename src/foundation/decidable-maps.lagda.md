@@ -83,13 +83,14 @@ module _
 ### Decidable maps are closed under homotopy
 
 ```agda
-is-decidable-map-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
-  f ~ g → is-decidable-map g → is-decidable-map f
-is-decidable-map-htpy H K b =
-  is-decidable-equiv
-    ( equiv-tot (λ a → equiv-concat (inv (H a)) b))
-    ( K b)
+opaque
+  is-decidable-map-htpy :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
+    f ~ g → is-decidable-map g → is-decidable-map f
+  is-decidable-map-htpy H K b =
+    is-decidable-equiv
+      ( equiv-tot (λ a → equiv-concat (inv (H a)) b))
+      ( K b)
 ```
 
 ### Composition of decidable maps

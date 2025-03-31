@@ -1,4 +1,4 @@
-# Decidable families
+# Decidable type families
 
 ```agda
 module foundation.decidable-type-families where
@@ -28,9 +28,9 @@ open import foundation-core.identity-types
 
 A type family `B : A → 𝒰` is said to be
 {{#concept "decidable" Disambiguation="type family" Agda=is-decidable-family}}
-if we, for every `x : A`, can either construct an element of `B x`, or we can
-prove that it is [empty](foundation-core.empty-types.md). In other words, we
-interpret decidability via the
+if we can for every `x : A` either construct an element of `B x` or we can prove
+that it is [empty](foundation-core.empty-types.md). In other words, we interpret
+decidability via the
 [Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
 of logic into type theory. A related concept is that a type family is either
 [inhabited](foundation.inhabited-types.md) or empty, where inhabitedness of a
@@ -70,15 +70,15 @@ decidable-family-decidable-subtype P =
 
 ## Properties
 
-### Reindexing decidable type families
+### Base change of decidable type families
 
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (P : decidable-family l3 B)
   where
 
-  reindex-decidable-family : (f : A → B) → decidable-family l3 A
-  reindex-decidable-family f =
+  base-change-decidable-family : (f : A → B) → decidable-family l3 A
+  base-change-decidable-family f =
     ( family-decidable-family P ∘ f , is-decidable-decidable-family P ∘ f)
 ```
 
@@ -103,7 +103,7 @@ module _
 
 Given a decidable family of types with double negation dense equality
 `P : A → 𝒰` and a decidable type family `Q : (x : A) → P x → 𝒰` then we may
-_compose_ `Q` after `P` and obtain a decidabe type family `Q ∘ P : A → 𝒰`.
+_compose_ `Q` after `P` and obtain a decidable type family `Q ∘ P : A → 𝒰`.
 
 ```agda
 module _
@@ -131,7 +131,7 @@ module _
                   ( λ r →
                     nq (tr (family-decidable-family (Q x)) (inv r) (pr2 q)))))
           ( is-decidable-decidable-family (Q x) p))
-      (λ np → inr (map-neg pr1 np))
+      ( λ np → inr (map-neg pr1 np))
       ( is-decidable-decidable-family P x)
 
   comp-decidable-family-decidable-subtype' :

@@ -263,29 +263,33 @@ module _
   {l1 l2 : Level} {P : UU l1} {Q : UU l2}
   where
 
-  is-decidable-prop-function-type' :
-    is-decidable P → (P → is-decidable-prop Q) → is-decidable-prop (P → Q)
-  is-decidable-prop-function-type' H K =
-    ( rec-coproduct
-      ( λ p → is-prop-function-type (is-prop-type-is-decidable-prop (K p)))
-      ( λ np → is-prop-is-contr (universal-property-empty-is-empty P np Q))
-      ( H)) ,
-    ( is-decidable-function-type' H (is-decidable-type-is-decidable-prop ∘ K))
+  abstract
+    is-decidable-prop-function-type' :
+      is-decidable P → (P → is-decidable-prop Q) → is-decidable-prop (P → Q)
+    pr1 (is-decidable-prop-function-type' H K) =
+      rec-coproduct
+        ( λ p → is-prop-function-type (is-prop-type-is-decidable-prop (K p)))
+        ( λ np → is-prop-is-contr (universal-property-empty-is-empty P np Q))
+        ( H)
+    pr2 (is-decidable-prop-function-type' H K) =
+      is-decidable-function-type' H (is-decidable-type-is-decidable-prop ∘ K)
 
-  is-decidable-prop-function-type :
-    is-decidable P → is-decidable-prop Q → is-decidable-prop (P → Q)
-  is-decidable-prop-function-type H K =
-    ( is-prop-function-type (is-prop-type-is-decidable-prop K)) ,
-    ( is-decidable-function-type H (is-decidable-type-is-decidable-prop K))
+  abstract
+    is-decidable-prop-function-type :
+      is-decidable P → is-decidable-prop Q → is-decidable-prop (P → Q)
+    pr1 (is-decidable-prop-function-type H K) =
+      is-prop-function-type (is-prop-type-is-decidable-prop K)
+    pr2 (is-decidable-prop-function-type H K) =
+      is-decidable-function-type H (is-decidable-type-is-decidable-prop K)
 
 hom-Decidable-Prop :
   {l1 l2 : Level} →
   Decidable-Prop l1 → Decidable-Prop l2 → Decidable-Prop (l1 ⊔ l2)
-hom-Decidable-Prop P Q =
-  ( type-Decidable-Prop P → type-Decidable-Prop Q) ,
-  ( is-decidable-prop-function-type
+pr1 (hom-Decidable-Prop P Q) = type-Decidable-Prop P → type-Decidable-Prop Q
+pr2 (hom-Decidable-Prop P Q) =
+  is-decidable-prop-function-type
     ( is-decidable-Decidable-Prop P)
-    ( is-decidable-prop-type-Decidable-Prop Q))
+    ( is-decidable-prop-type-Decidable-Prop Q)
 ```
 
 ### Dependent products of decidable propositions

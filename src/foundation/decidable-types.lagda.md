@@ -315,7 +315,7 @@ is-decidable-Σ-has-double-negation-dense-equality-base hP (inr np) _ =
   inr (map-neg pr1 np)
 ```
 
-### Raising universe level conserves decidability
+### Raising universe level preserves decidability
 
 ```agda
 module _

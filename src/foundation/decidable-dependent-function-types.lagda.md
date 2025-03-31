@@ -53,14 +53,15 @@ is-decidable-Π-uniformly-decidable-family (inl a) (inr b) =
 is-decidable-Π-uniformly-decidable-family (inr na) _ =
   inl (ex-falso ∘ na)
 
-is-decidable-prop-Π-uniformly-decidable-family :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-decidable A →
-  is-uniformly-decidable-family B →
-  ((x : A) → is-prop (B x)) →
-  is-decidable-prop ((a : A) → (B a))
-is-decidable-prop-Π-uniformly-decidable-family dA dB H =
-  ( is-prop-Π H , is-decidable-Π-uniformly-decidable-family dA dB)
+abstract
+  is-decidable-prop-Π-uniformly-decidable-family :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    is-decidable A →
+    is-uniformly-decidable-family B →
+    ((x : A) → is-prop (B x)) →
+    is-decidable-prop ((a : A) → (B a))
+  is-decidable-prop-Π-uniformly-decidable-family dA dB H =
+    ( is-prop-Π H , is-decidable-Π-uniformly-decidable-family dA dB)
 
 abstract
   is-decidable-prop-Π-uniformly-decidable-family' :
@@ -122,7 +123,7 @@ module _
     is-decidable-Π-uniformly-decidable-family dA
       ( is-uniformly-decidable-family-all-elements-merely-equal-base
         ( H)
-        ( is-decidable-Decidable-Prop ∘ B)
+        ( λ x → is-decidable-Decidable-Prop (B x))
         ( dA))
 
   is-decidable-prop-Π-all-elements-merely-equal-base :
@@ -133,9 +134,9 @@ module _
     is-decidable-prop-Π-uniformly-decidable-family dA
       ( is-uniformly-decidable-family-all-elements-merely-equal-base
         ( H)
-        ( is-decidable-Decidable-Prop ∘ B)
+        ( λ x → is-decidable-Decidable-Prop (B x))
         ( dA))
-      ( is-prop-type-Decidable-Prop ∘ B)
+      ( λ x → is-prop-type-Decidable-Prop (B x))
 
   is-decidable-prop-Π-all-elements-merely-equal-base' :
     all-elements-merely-equal A →
@@ -145,10 +146,10 @@ module _
     is-decidable-prop-Π-uniformly-decidable-family' dA
       ( is-uniformly-decidable-family-all-elements-merely-equal-base'
         ( H)
-        ( is-decidable-Decidable-Prop ∘ B)
+        ( λ x → is-decidable-Decidable-Prop (B x))
         ( dA)
-        ( is-prop-type-Decidable-Prop ∘ B))
-      ( is-prop-type-Decidable-Prop ∘ B)
+        ( λ x → is-prop-type-Decidable-Prop (B x)))
+      ( λ x → is-prop-type-Decidable-Prop (B x))
 ```
 
 ### Decidability of dependent products over an equivalence

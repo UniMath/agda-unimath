@@ -251,7 +251,7 @@ abstract
 double-negation-im-Set :
   {l1 l2 : Level} (X : Set l1) {A : UU l2}
   (f : A → type-Set X) → Set (l1 ⊔ l2)
-double-negation-im-Set = double-negation-im-Truncated-Type (neg-one-𝕋)
+double-negation-im-Set = double-negation-im-Truncated-Type neg-one-𝕋
 ```
 
 ### The double negation image of a map into a 1-type is a 1-type
