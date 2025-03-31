@@ -37,6 +37,7 @@ open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.cauchy-sequences-complete-metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -517,4 +518,16 @@ complete-metric-space-leq-ℝ :
   (l : Level) → Complete-Metric-Space (lsuc l) l
 pr1 (complete-metric-space-leq-ℝ l) = metric-space-leq-ℝ l
 pr2 (complete-metric-space-leq-ℝ l) = is-complete-metric-space-leq-ℝ l
+```
+
+### Limits of Cauchy sequences in `ℝ`
+
+```agda
+cauchy-sequence-ℝ : (l : Level) → UU (lsuc l)
+cauchy-sequence-ℝ l =
+  cauchy-sequence-Complete-Metric-Space (complete-metric-space-leq-ℝ l)
+
+lim-cauchy-sequence-ℝ : {l : Level} → cauchy-sequence-ℝ l → ℝ l
+lim-cauchy-sequence-ℝ {l} =
+  limit-cauchy-sequence-Complete-Metric-Space (complete-metric-space-leq-ℝ l)
 ```
