@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.cauchy-completeness-metric-space-of-real-numbers where
+module real-numbers.cauchy-completeness-dedekind-real-numbers where
 ```
 
 <details><summary>Imports</summary>
