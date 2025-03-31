@@ -10,15 +10,12 @@ module real-numbers.absolute-value-real-numbers where
 
 ```agda
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.logical-equivalences
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
-open import foundation.propositions
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -28,11 +25,6 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.maximum-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
-open import real-numbers.addition-real-numbers
-open import real-numbers.difference-real-numbers
-open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.rational-real-numbers
-open import real-numbers.metric-space-of-real-numbers
 ```
 
 </details>
@@ -97,19 +89,4 @@ module _
 
     neg-leq-neg-abs-ℝ : leq-ℝ (neg-ℝ (abs-ℝ x)) (neg-ℝ x)
     neg-leq-neg-abs-ℝ = neg-leq-ℝ x (abs-ℝ x) leq-abs-ℝ
-```
-
-### Two real numbers `x` and `y` are in a `d`-neighborhood of each other if and only if `|x-y| ≤ d`
-
-```agda
-abs-diff-bound-neighborhood-leq-ℝ :
-  {l : Level} → (d : ℚ⁺) → (x y : ℝ l) → type-Prop (premetric-leq-ℝ l d x y) →
-  leq-ℝ (abs-ℝ (x -ℝ y)) (real-ℚ (rational-ℚ⁺ d))
-abs-diff-bound-neighborhood-leq-ℝ d⁺@(d , _) x y (H , K) =
-  forward-implication
-    ( is-least-binary-upper-bound-binary-max-ℝ
-      ( x -ℝ y)
-      ( neg-ℝ (x -ℝ y))
-      ( real-ℚ d))
-    ((λ q q<x-y → reflects-le-real-ℚ q d {! le-transpose-right-diff-ℝ (real-ℚ q) x y ?  !}) , {!   !})
 ```

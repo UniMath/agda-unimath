@@ -51,3 +51,9 @@ abstract
   diff-real-ℚ : (p q : ℚ) → (real-ℚ p) -ℝ (real-ℚ q) ＝ real-ℚ (p -ℚ q)
   diff-real-ℚ p q = ap (real-ℚ p +ℝ_) (neg-real-ℚ q) ∙ add-real-ℚ p (neg-ℚ q)
 ```
+
+### The negative of the difference of `x` and `y` is the difference of `y` and `x`
+
+```agda
+
+```
