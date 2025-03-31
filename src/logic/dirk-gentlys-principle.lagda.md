@@ -66,3 +66,9 @@ true or false, so since false ≤ true, we are done.
 ## References
 
 {{#bibliography}}
+
+## External links
+
+- This principle is studied under the name _Dummett's linearity axiom_ in
+  [`Various.DummettDisjunction`](https://martinescardo.github.io/TypeTopology/Various.DummettDisjunction.html)
+  at TypeTopology
