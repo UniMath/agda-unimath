@@ -7,13 +7,15 @@ module metric-spaces.products-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.function-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.conjunction
 open import foundation.universe-levels
-open import foundation.cartesian-product-types
+
 open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
@@ -23,7 +25,6 @@ open import metric-spaces.pseudometric-structures
 open import metric-spaces.reflexive-premetric-structures
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.symmetric-premetric-structures
-open import foundation.equality-cartesian-product-types
 open import metric-spaces.triangular-premetric-structures
 ```
 
@@ -70,7 +71,6 @@ module _
     (a1 , b1) (a2 , b2) (a3 , b3) d12 d23 (a1~a2 , b1~b2) (a2~a3 , b2~b3) =
       ( is-triangular-structure-Metric-Space A a1 a2 a3 d12 d23 a1~a2 a2~a3 ,
         is-triangular-structure-Metric-Space B b1 b2 b3 d12 d23 b1~b2 b2~b3)
-
 
   is-local-structure-product-Metric-Space :
     is-local-Premetric structure-product-Metric-Space

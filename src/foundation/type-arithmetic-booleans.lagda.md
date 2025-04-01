@@ -10,9 +10,7 @@ module foundation.type-arithmetic-booleans where
 open import foundation.booleans
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-open import foundation.function-extensionality
 
-open import foundation.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -74,36 +72,4 @@ module _
   inv-equiv-Σ-bool-coproduct : (A true + A false) ≃ Σ bool A
   pr1 inv-equiv-Σ-bool-coproduct = map-inv-Σ-bool-coproduct
   pr2 inv-equiv-Σ-bool-coproduct = is-equiv-map-inv-Σ-bool-coproduct
-```
-
-### Dependent products over booleans are equivalent to products
-
-```agda
-module _
-  {l : Level} (A : bool → UU l)
-  where
-
-  map-Π-bool-product : ((b : bool) → A b) → A true × A false
-  map-Π-bool-product f = (f true , f false)
-
-  map-inv-Π-bool-product : A true × A false → (b : bool) → A b
-  map-inv-Π-bool-product = ind-Σ (ind-bool A)
-
-  abstract
-    is-section-map-inv-Π-bool-product :
-      map-Π-bool-product ∘ map-inv-Π-bool-product ~ id
-    is-section-map-inv-Π-bool-product (f , t) = refl
-
-    is-retraction-map-inv-Π-bool-product :
-      map-inv-Π-bool-product ∘ map-Π-bool-product ~ id
-    is-retraction-map-inv-Π-bool-product f =
-      eq-htpy (λ { true → refl ; false → refl })
-
-  is-equiv-map-Π-bool-product : is-equiv map-Π-bool-product
-  is-equiv-map-Π-bool-product =
-    ( map-inv-Π-bool-product , is-section-map-inv-Π-bool-product) ,
-    ( map-inv-Π-bool-product , is-retraction-map-inv-Π-bool-product)
-
-  equiv-Π-bool-product : ((b : bool) → A b) ≃ (A true × A false)
-  equiv-Π-bool-product = map-Π-bool-product , is-equiv-map-Π-bool-product
 ```

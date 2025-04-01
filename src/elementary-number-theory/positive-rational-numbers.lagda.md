@@ -18,6 +18,7 @@ open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
+open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-positive-and-negative-integers
@@ -940,4 +941,24 @@ module _
       ( ex-falso ∘ (irreflexive-le-ℚ x) ∘ L x)
       ( id)
       ( decide-le-leq-ℚ (x +ℚ rational-ℚ⁺ d) y)
+```
+
+### The minimum of positive rational numbers
+
+```agda
+abstract
+  is-positive-min-ℚ⁺ :
+    (p q : ℚ⁺) → is-positive-ℚ (min-ℚ (rational-ℚ⁺ p) (rational-ℚ⁺ q))
+  is-positive-min-ℚ⁺ p⁺@(p , pos-p) q⁺@(q , pos-q) =
+    is-positive-le-zero-ℚ
+      ( min-ℚ p q)
+      ( le-min-le-both-ℚ
+        ( zero-ℚ)
+        ( p)
+        ( q)
+        ( le-zero-is-positive-ℚ p pos-p)
+        ( le-zero-is-positive-ℚ q pos-q))
+
+min-ℚ⁺ : ℚ⁺ → ℚ⁺ → ℚ⁺
+min-ℚ⁺ p⁺@(p , _) q⁺@(q , _) = (min-ℚ p q , is-positive-min-ℚ⁺ p⁺ q⁺)
 ```

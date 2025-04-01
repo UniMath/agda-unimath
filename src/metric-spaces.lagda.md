@@ -82,6 +82,7 @@ open import metric-spaces.precategory-of-metric-spaces-and-isometries public
 open import metric-spaces.precategory-of-metric-spaces-and-short-functions public
 open import metric-spaces.premetric-spaces public
 open import metric-spaces.premetric-structures public
+open import metric-spaces.products-metric-spaces public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.pseudometric-structures public
 open import metric-spaces.reflexive-premetric-structures public
@@ -91,6 +92,7 @@ open import metric-spaces.short-functions-premetric-spaces public
 open import metric-spaces.subspaces-metric-spaces public
 open import metric-spaces.symmetric-premetric-structures public
 open import metric-spaces.triangular-premetric-structures public
+open import metric-spaces.uniformly-continuous-binary-functions-metric-spaces public
 open import metric-spaces.uniformly-continuous-functions-metric-spaces public
 open import metric-spaces.uniformly-continuous-functions-premetric-spaces public
 ```

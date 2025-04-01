@@ -10,10 +10,10 @@ module real-numbers.metric-space-of-real-numbers where
 
 ```agda
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.additive-group-of-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
@@ -42,16 +42,16 @@ open import metric-spaces.saturated-metric-spaces
 open import metric-spaces.symmetric-premetric-structures
 open import metric-spaces.triangular-premetric-structures
 
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.maximum-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.transposition-cuts-dedekind-real-numbers
-open import real-numbers.maximum-real-numbers
-open import real-numbers.absolute-value-real-numbers
-open import real-numbers.negation-real-numbers
 ```
 
 </details>

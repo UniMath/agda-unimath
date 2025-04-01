@@ -196,6 +196,13 @@ module _
       is-reflexive-structure-Metric-Space
       is-triangular-structure-Metric-Space
 
+  is-weakly-monotonic-structure-Metric-Space :
+    is-weakly-monotonic-Premetric structure-Metric-Space
+  is-weakly-monotonic-structure-Metric-Space =
+    is-weakly-monotonic-is-monotonic-Premetric
+      ( structure-Metric-Space)
+      ( is-monotonic-structure-Metric-Space)
+
   is-set-type-Metric-Space : is-set type-Metric-Space
   is-set-type-Metric-Space =
     is-set-has-extensional-Premetric

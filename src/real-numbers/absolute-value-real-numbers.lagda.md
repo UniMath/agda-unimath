@@ -14,10 +14,10 @@ open import elementary-number-theory.rational-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.logical-equivalences
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 

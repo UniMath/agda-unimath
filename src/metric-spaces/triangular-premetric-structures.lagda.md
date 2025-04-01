@@ -8,6 +8,7 @@ module metric-spaces.triangular-premetric-structures where
 
 ```agda
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.binary-relations
 open import foundation.function-types

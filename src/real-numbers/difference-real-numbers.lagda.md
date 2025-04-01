@@ -68,3 +68,18 @@ module _
         ＝ neg-ℝ x +ℝ y by ap (neg-ℝ x +ℝ_) (neg-neg-ℝ y)
         ＝ y -ℝ x by commutative-add-ℝ _ _
 ```
+
+### Interchange laws for addition and difference on real numbers
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (a : ℝ l1) (b : ℝ l2) (c : ℝ l3) (d : ℝ l4)
+  where
+
+  abstract
+    interchange-law-diff-add-ℝ :
+      (a +ℝ b) -ℝ (c +ℝ d) ＝ (a -ℝ c) +ℝ (b -ℝ d)
+    interchange-law-diff-add-ℝ =
+      ap ((a +ℝ b) +ℝ_) (distributive-neg-add-ℝ c d) ∙
+      interchange-law-add-add-ℝ _ _ _ _
+```

@@ -7,9 +7,14 @@ module metric-spaces.monotonic-premetric-structures where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.premetric-structures
@@ -57,4 +62,29 @@ module _
 
   is-prop-is-monotonic-Premetric : is-prop is-monotonic-Premetric
   is-prop-is-monotonic-Premetric = is-prop-type-Prop is-monotonic-prop-Premetric
+
+  is-weakly-monotonic-Premetric : UU (l1 ⊔ l2)
+  is-weakly-monotonic-Premetric =
+    (x y : A) (d₁ d₂ : ℚ⁺) → leq-ℚ⁺ d₁ d₂ →
+    type-Prop (B d₁ x y) → type-Prop (B d₂ x y)
+
+  abstract
+    is-weakly-monotonic-is-monotonic-Premetric :
+      is-monotonic-Premetric → is-weakly-monotonic-Premetric
+    is-weakly-monotonic-is-monotonic-Premetric H x y d₁ d₂ d₁≤d₂ x~y =
+      rec-coproduct
+        ( λ d₁<d₂ → H x y d₁ d₂ d₁<d₂ x~y)
+        ( λ d₂≤d₁ →
+          tr
+            ( λ d → type-Prop (B d x y))
+            ( eq-ℚ⁺
+              { d₁}
+              { d₂}
+              ( antisymmetric-leq-ℚ
+                ( rational-ℚ⁺ d₁)
+                ( rational-ℚ⁺ d₂)
+                ( d₁≤d₂)
+                ( d₂≤d₁)))
+            ( x~y))
+        ( decide-le-leq-ℚ (rational-ℚ⁺ d₁) (rational-ℚ⁺ d₂))
 ```
