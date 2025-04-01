@@ -501,8 +501,8 @@ module _
               ( λ _ → unit-Commutative-Monoid M)))
     in do
       cA ← is-finite-type-Finite-Type A
-      mul-finite-count-Commutative-Monoid M A cA _ ∙
-        mul-fin-unit-Commutative-Monoid M _
+      ( mul-finite-count-Commutative-Monoid M A cA _ ∙
+        mul-fin-unit-Commutative-Monoid M _)
 ```
 
 ### Products over a finite type are homotopy invariant
