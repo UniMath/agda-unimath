@@ -122,6 +122,7 @@ open import order-theory.similarity-of-order-preserving-maps-large-posets public
 open import order-theory.similarity-of-order-preserving-maps-large-preorders public
 open import order-theory.strict-order-preserving-maps public
 open import order-theory.strict-preorders public
+open import order-theory.strictly-increasing-sequences-strictly-preordered-sets public
 open import order-theory.strictly-inflationary-maps-strict-preorders public
 open import order-theory.strictly-preordered-sets public
 open import order-theory.subposets public
