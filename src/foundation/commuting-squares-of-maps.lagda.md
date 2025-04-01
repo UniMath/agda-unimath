@@ -13,7 +13,11 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.commuting-triangles-of-maps
+open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.function-extensionality
+open import foundation.functoriality-dependent-function-types
+open import foundation.homotopies
 open import foundation.homotopy-algebra
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
@@ -27,7 +31,6 @@ open import foundation-core.commuting-squares-of-homotopies
 open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.whiskering-identifications-concatenation
 ```
@@ -595,6 +598,58 @@ module _
             ( right-bottom)
             ( mid-right ·l sq-left-top)
             ( sq-right-top ·r top-left))))
+```
+
+### Vertical pasting of a square with the right leg an equivalence is an equivalence
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  (top : A → X) (top-left : A → B) (top-right : X → Y) (mid : B → Y)
+  (bottom-left : B → C) (bottom-right : Y → Z) (bottom : C → Z)
+  (K : coherence-square-maps mid bottom-left bottom-right bottom)
+  (is-emb-bottom-right : is-emb bottom-right)
+  where
+
+  is-equiv-pasting-vertical-coherence-square-maps :
+    is-equiv
+      ( λ H →
+        pasting-vertical-coherence-square-maps
+          ( top)
+          ( top-left)
+          ( top-right)
+          ( mid)
+          ( bottom-left)
+          ( bottom-right)
+          ( bottom)
+          ( H)
+          ( K))
+  is-equiv-pasting-vertical-coherence-square-maps =
+    is-equiv-comp _ _
+      ( is-equiv-map-Π-is-fiberwise-equiv (λ _ → is-emb-bottom-right _ _))
+      ( is-equiv-concat-htpy (K ·r top-left) _)
+
+  equiv-pasting-vertical-coherence-square-maps :
+    coherence-square-maps top top-left top-right mid ≃
+    coherence-square-maps
+      ( top)
+      ( bottom-left ∘ top-left)
+      ( bottom-right ∘ top-right)
+      ( bottom)
+  pr1 equiv-pasting-vertical-coherence-square-maps H =
+    pasting-vertical-coherence-square-maps
+      ( top)
+      ( top-left)
+      ( top-right)
+      ( mid)
+      ( bottom-left)
+      ( bottom-right)
+      ( bottom)
+      ( H)
+      ( K)
+  pr2 equiv-pasting-vertical-coherence-square-maps =
+    is-equiv-pasting-vertical-coherence-square-maps
 ```
 
 ### Distributivity of pasting squares and transposing by precomposition

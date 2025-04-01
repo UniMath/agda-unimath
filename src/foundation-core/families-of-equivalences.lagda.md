@@ -84,6 +84,24 @@ module _
   is-equiv-map-fam-equiv x = is-equiv-map-equiv (e x)
 ```
 
+### Inverses of families of equivalences
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {P : A → UU l2} {Q : A → UU l3}
+  (e : fam-equiv P Q)
+  where
+
+  inv-fam-equiv : fam-equiv Q P
+  inv-fam-equiv a = inv-equiv (e a)
+
+  map-inv-fam-equiv : (a : A) → Q a → P a
+  map-inv-fam-equiv = map-fam-equiv inv-fam-equiv
+
+  is-equiv-map-inv-fam-equiv : is-fiberwise-equiv map-inv-fam-equiv
+  is-equiv-map-inv-fam-equiv = is-equiv-map-fam-equiv inv-fam-equiv
+```
+
 ## Properties
 
 ### Families of equivalences are equivalent to fiberwise equivalences
