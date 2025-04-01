@@ -24,6 +24,7 @@ open import elementary-number-theory.unit-fractions-rational-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.coproduct-types
+open import foundation.sequences
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -40,9 +41,9 @@ open import metric-spaces.metric-spaces
 ## Idea
 
 A
-{{#concept "Cauchy sequence" Disambiguation="in a metric space" Agda=is-cauchy-approximation-Metric-Space}}
-`x` in a [metric space](metric-spaces.metric-spaces.md) is a mapping from the
-[natural numbers](elementary-number-theory.natural-numbers.md) to the underlying
+{{#concept "Cauchy sequence" Disambiguation="in a metric space" Agda=cauchy-sequence-Metric-Space}}
+`x` in a [metric space](metric-spaces.metric-spaces.md) is a
+[sequence](foundation.sequences.md) of elements of the underlying
 type of the metric space such that for any
 [positive rational](elementary-number-theory.positive-rational-numbers.md) `ε`,
 there is a concrete `n : ℕ` such that for any `m, k ≥ n`, `x m` and `x k` are in
@@ -51,8 +52,9 @@ an `ε`-neighborhood of each other.
 Importantly, this is a structure, not a proposition, allowing us to explicitly
 calculate rates of convergence. This follows Section 11.2.2 in {{#cite UF13}}.
 
-In a metric space, every Cauchy sequence has a (non-unique) corresponding Cauchy
-approximation, with the same limit if either exists, and vice versa.
+In a metric space, every Cauchy sequence has a (non-unique) corresponding
+[Cauchy approximation](metric-spaces.cauchy-approximations-metric-spaces.md),
+with the same limit if either exists, and vice versa.
 
 ## Definition
 
@@ -61,7 +63,7 @@ approximation, with the same limit if either exists, and vice versa.
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : ℕ → type-Metric-Space M)
+  (x : sequence (type-Metric-Space M))
   where
 
   is-cauchy-sequence-Metric-Space : UU l2
@@ -79,7 +81,7 @@ module _
 
   cauchy-sequence-Metric-Space : UU (l1 ⊔ l2)
   cauchy-sequence-Metric-Space =
-    Σ (ℕ → type-Metric-Space M) (is-cauchy-sequence-Metric-Space M)
+    Σ (sequence (type-Metric-Space M)) (is-cauchy-sequence-Metric-Space M)
 
   modulus-of-convergence-cauchy-sequence-Metric-Space :
     cauchy-sequence-Metric-Space → ℚ⁺ → ℕ
@@ -87,7 +89,7 @@ module _
     pr1 (is-cauchy-x ε⁺)
 
   map-cauchy-sequence-Metric-Space :
-    cauchy-sequence-Metric-Space → ℕ → type-Metric-Space M
+    cauchy-sequence-Metric-Space → sequence (type-Metric-Space M)
   map-cauchy-sequence-Metric-Space = pr1
 
   is-cauchy-sequence-cauchy-sequence-Metric-Space :
@@ -141,7 +143,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : ℕ → type-Metric-Space M)
+  (x : sequence (type-Metric-Space M))
   (l : type-Metric-Space M)
   where
 
@@ -160,7 +162,7 @@ module _
 
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : ℕ → type-Metric-Space M)
+  (x : sequence (type-Metric-Space M))
   where
 
   has-limit-sequence-Metric-Space : UU (l1 ⊔ l2)
@@ -212,7 +214,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : ℕ → type-Metric-Space M)
+  (x : sequence (type-Metric-Space M))
   (H : has-limit-sequence-Metric-Space M x)
   where
 
@@ -249,6 +251,11 @@ module _
               ( lim)
               ( n≤m⇒|xm-l|<ε' k n≤k))
             ( n≤m⇒|xm-l|<ε' m n≤m))
+
+  cauchy-sequence-has-limit-Metric-Space : cauchy-sequence-Metric-Space M
+  cauchy-sequence-has-limit-Metric-Space =
+    ( x ,
+      is-cauchy-sequence-has-limit-Metric-Space)
 ```
 
 ### Correspondence to Cauchy approximations
@@ -400,7 +407,7 @@ module _
   where
 
   map-cauchy-sequence-cauchy-approximation-Metric-Space :
-    ℕ → type-Metric-Space M
+    sequence (type-Metric-Space M)
   map-cauchy-sequence-cauchy-approximation-Metric-Space n =
     map-cauchy-approximation-Metric-Space
       ( M)
@@ -574,6 +581,76 @@ module _
                 ( x)
                 ( ε⁺)
                 ( 1/n'))))
+```
+
+### All limits of a Cauchy sequence are equal
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (x : cauchy-sequence-Metric-Space M)
+  where
+
+  abstract
+    all-elements-equal-is-limit-cauchy-sequence-Metric-Space :
+      (lim1 lim2 : type-Metric-Space M) →
+      is-limit-cauchy-sequence-Metric-Space M x lim1 →
+      is-limit-cauchy-sequence-Metric-Space M x lim2 →
+      lim1 ＝ lim2
+    all-elements-equal-is-limit-cauchy-sequence-Metric-Space
+      lim₁ lim₂ islim₁ islim₂ =
+        is-tight-structure-Metric-Space
+          ( M)
+          ( lim₁)
+          ( lim₂)
+          ( λ ε →
+            let
+              (ε₁ , ε₂ , ε₁+ε₂=ε) = split-ℚ⁺ ε
+              (n₁ , H₁) = islim₁ ε₁
+              (n₂ , H₂) = islim₂ ε₂
+              n = max-ℕ n₁ n₂
+            in
+              tr
+                ( λ d → neighborhood-Metric-Space M d lim₁ lim₂)
+                ( ε₁+ε₂=ε)
+                ( is-triangular-structure-Metric-Space
+                  ( M)
+                  ( lim₁)
+                  ( map-cauchy-sequence-Metric-Space M x n)
+                  ( lim₂)
+                  ( ε₁)
+                  ( ε₂)
+                  ( H₂ n (right-leq-max-ℕ n₁ n₂))
+                  ( is-symmetric-structure-Metric-Space
+                    ( M)
+                    ( _)
+                    ( _)
+                    ( _)
+                    ( H₁ n (left-leq-max-ℕ n₁ n₂)))))
+```
+
+### All limits of a sequence are equal
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (x : sequence (type-Metric-Space M))
+  where
+
+  abstract
+    all-elements-equal-is-limit-sequence-Metric-Space :
+      (lim1 lim2 : type-Metric-Space M) →
+      is-limit-sequence-Metric-Space M x lim1 →
+      is-limit-sequence-Metric-Space M x lim2 →
+      lim1 ＝ lim2
+    all-elements-equal-is-limit-sequence-Metric-Space lim₁ lim₂ islim₁ islim₂ =
+      all-elements-equal-is-limit-cauchy-sequence-Metric-Space
+        ( M)
+        ( x , is-cauchy-sequence-has-limit-Metric-Space M x (lim₁ , islim₁))
+        ( lim₁)
+        ( lim₂)
+        ( islim₁)
+        ( islim₂)
 ```
 
 ## References
