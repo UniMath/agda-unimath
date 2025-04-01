@@ -73,22 +73,21 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
+  refl-leq-sequence-Poset : is-reflexive (leq-sequence-Poset P)
+  refl-leq-sequence-Poset u n = refl-leq-Poset P (u n)
+
+  transitive-leq-sequence-Poset : is-transitive (leq-sequence-Poset P)
+  transitive-leq-sequence-Poset u v w J I n =
+    transitive-leq-Poset P (u n) (v n) (w n) (J n) (I n)
+
+  antisymmetric-leq-sequence-Poset : is-antisymmetric (leq-sequence-Poset P)
+  antisymmetric-leq-sequence-Poset u v I J =
+    eq-htpy (λ n → antisymmetric-leq-Poset P (u n) (v n) (I n) (J n))
+
   sequence-Poset : Poset l1 l2
   pr1 (pr1 sequence-Poset) = type-sequence-Poset P
   pr1 (pr2 (pr1 sequence-Poset)) = leq-prop-sequence-Poset P
-  pr1 (pr2 (pr2 (pr1 sequence-Poset))) u n = refl-leq-Poset P (u n)
-  pr2 (pr2 (pr2 (pr1 sequence-Poset))) u v w J I n =
-    transitive-leq-Poset P (u n) (v n) (w n) (J n) (I n)
-  pr2 sequence-Poset u v I J =
-    eq-htpy (λ n → antisymmetric-leq-Poset P (u n) (v n) (I n) (J n))
-
-  refl-leq-sequence-Poset : is-reflexive (leq-sequence-Poset P)
-  refl-leq-sequence-Poset = refl-leq-Poset sequence-Poset
-
-  transitive-leq-sequence-Poset : is-transitive (leq-sequence-Poset P)
-  transitive-leq-sequence-Poset = transitive-leq-Poset sequence-Poset
-
-  antisymmetric-leq-sequence-Poset : is-antisymmetric (leq-sequence-Poset P)
-  antisymmetric-leq-sequence-Poset =
-    antisymmetric-leq-Poset sequence-Poset
+  pr1 (pr2 (pr2 (pr1 sequence-Poset))) = refl-leq-sequence-Poset
+  pr2 (pr2 (pr2 (pr1 sequence-Poset))) = transitive-leq-sequence-Poset
+  pr2 sequence-Poset = antisymmetric-leq-sequence-Poset
 ```
