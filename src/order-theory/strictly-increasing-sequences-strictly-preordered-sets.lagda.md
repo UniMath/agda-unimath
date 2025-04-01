@@ -32,7 +32,7 @@ A
 [sequence in a strictly preordered set](order-theory.sequences-strictly-preordered-sets.md)
 is called
 {{#concept "strictly increasing" Disambiguation="sequence in a strictly preordered set}}
-if it [preserves](order-theory.strict-order-preserving-maps) the
+if it [preserves](order-theory.strict-order-preserving-maps.md) the
 [strict ordering on the natural numbers](elementary-number-theory.strict-inequality-natural-numbers.md)
 
 ## Definitions
