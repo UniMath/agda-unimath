@@ -24,9 +24,9 @@ open import order-theory.posets
 
 ## Idea
 
-A {{#concept "sequence" Disambiguation="in a poset" Agda=sequence-Poset}} in a
-[poset](order-theory.posets.md) is a [sequence](foundation.sequences.md) in its
-underlying type.
+A {{#concept "sequence" Disambiguation="in a poset" Agda=type-sequence-Poset}}
+in a [poset](order-theory.posets.md) is a [sequence](foundation.sequences.md) in
+its underlying type.
 
 ## Definitions
 
