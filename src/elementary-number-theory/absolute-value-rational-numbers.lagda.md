@@ -123,8 +123,8 @@ abstract
   leq-abs-ℚ : (q : ℚ) → leq-ℚ q (rational-abs-ℚ q)
   leq-abs-ℚ q = leq-left-max-ℚ q (neg-ℚ q)
 
-  leq-neg-abs-ℚ : (q : ℚ) → leq-ℚ (neg-ℚ q) (rational-abs-ℚ q)
-  leq-neg-abs-ℚ q = leq-right-max-ℚ q (neg-ℚ q)
+  neg-leq-abs-ℚ : (q : ℚ) → leq-ℚ (neg-ℚ q) (rational-abs-ℚ q)
+  neg-leq-abs-ℚ q = leq-right-max-ℚ q (neg-ℚ q)
 ```
 
 ### The absolute value of `q` is zero iff `q` is zero
@@ -153,8 +153,8 @@ abstract
               ( tr
                 ( leq-ℚ (neg-ℚ q))
                 ( ap rational-ℚ⁰⁺ abs=0)
-                ( leq-neg-abs-ℚ q)))))
-      (linear-leq-ℚ zero-ℚ q)
+                ( neg-leq-abs-ℚ q)))))
+      ( linear-leq-ℚ zero-ℚ q)
 
   abs-zero-ℚ : abs-ℚ zero-ℚ ＝ zero-ℚ⁰⁺
   abs-zero-ℚ = eq-ℚ⁰⁺ (left-leq-right-max-ℚ _ _ (refl-leq-ℚ zero-ℚ))
@@ -164,88 +164,30 @@ abstract
 
 ```agda
 abstract
-  triangle-inequality-nonneg-abs-ℚ :
-    (p : ℚ⁰⁺) → (q : ℚ) →
-    leq-ℚ⁰⁺ (abs-ℚ (rational-ℚ⁰⁺ p +ℚ q)) (p +ℚ⁰⁺ abs-ℚ q)
-  triangle-inequality-nonneg-abs-ℚ p⁰⁺@(p , nonneg-p) q
-    with linear-leq-ℚ zero-ℚ q
-  ... | inl 0≤q =
-    leq-eq-ℚ
-      ( rational-abs-ℚ (p +ℚ q))
-      ( p +ℚ rational-abs-ℚ q)
-      ( rational-abs-zero-leq-ℚ
-        ( p +ℚ q)
-        ( tr
-          ( λ r → leq-ℚ r (p +ℚ q))
-          ( left-unit-law-add-ℚ zero-ℚ)
-          ( preserves-leq-add-ℚ
-            { zero-ℚ}
-            { p}
-            { zero-ℚ}
-            { q}
-            ( leq-zero-is-nonnegative-ℚ p nonneg-p)
-            ( 0≤q))) ∙
-          ap-add-ℚ
-            ( refl)
-            ( inv (rational-abs-zero-leq-ℚ q 0≤q)))
-  ... | inr q≤0 =
-    leq-max-leq-both-ℚ
-      ( p +ℚ rational-abs-ℚ q)
-      ( p +ℚ q)
-      ( neg-ℚ (p +ℚ q))
-      ( transitive-leq-ℚ
-        ( p +ℚ q)
-        ( p)
-        ( p +ℚ rational-abs-ℚ q)
-        ( is-inflationary-map-right-add-rational-ℚ⁰⁺ (abs-ℚ q) p)
-        ( tr
-          ( leq-ℚ (p +ℚ q))
-          ( right-unit-law-add-ℚ p)
-          ( preserves-leq-right-add-ℚ p q zero-ℚ q≤0)))
-      ( transitive-leq-ℚ
-        ( neg-ℚ (p +ℚ q))
-        ( neg-ℚ q)
-        ( p +ℚ rational-abs-ℚ q)
-        ( inv-tr
-          ( λ r → leq-ℚ (neg-ℚ q) (p +ℚ r))
-          ( rational-abs-leq-zero-ℚ q q≤0)
-          ( is-inflationary-map-left-add-rational-ℚ⁰⁺ p⁰⁺ (neg-ℚ q)))
-        ( binary-tr
-          ( leq-ℚ)
-          ( inv (distributive-neg-add-ℚ p q))
-          ( left-unit-law-add-ℚ (neg-ℚ q))
-          ( preserves-leq-left-add-ℚ
-            ( neg-ℚ q)
-            ( neg-ℚ p)
-            ( zero-ℚ)
-            ( neg-leq-ℚ zero-ℚ p (leq-zero-is-nonnegative-ℚ p nonneg-p)))))
-
   triangle-inequality-abs-ℚ :
     (p q : ℚ) → leq-ℚ⁰⁺ (abs-ℚ (p +ℚ q)) (abs-ℚ p +ℚ⁰⁺ abs-ℚ q)
-  triangle-inequality-abs-ℚ p q
-    with linear-leq-ℚ zero-ℚ p
-  ... | inl 0≤p =
-    let
-      p⁰⁺ = p , is-nonnegative-leq-zero-ℚ p 0≤p
-    in
-      inv-tr
-        ( λ r → leq-ℚ⁰⁺ (abs-ℚ (p +ℚ q)) (r +ℚ⁰⁺ abs-ℚ q))
-        ( abs-rational-ℚ⁰⁺ p⁰⁺)
-        ( triangle-inequality-nonneg-abs-ℚ p⁰⁺ q)
-  ... | inr p≤0 =
-    binary-tr
-      ( leq-ℚ)
-      ( ap
-        ( rational-ℚ⁰⁺)
-        ( ap abs-ℚ (inv (distributive-neg-add-ℚ p q)) ∙
-          abs-neg-ℚ (p +ℚ q)))
-      ( ap-add-ℚ
-        ( inv (rational-abs-leq-zero-ℚ p p≤0))
-        ( ap rational-ℚ⁰⁺ (abs-neg-ℚ q)))
-      ( triangle-inequality-nonneg-abs-ℚ
-        ( neg-ℚ p ,
-          is-nonnegative-leq-zero-ℚ (neg-ℚ p) (neg-leq-ℚ p zero-ℚ p≤0))
-        ( neg-ℚ q))
+  triangle-inequality-abs-ℚ p q =
+    leq-max-leq-both-ℚ
+      ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
+      ( _)
+      ( _)
+      ( preserves-leq-add-ℚ
+        { p}
+        { rational-abs-ℚ p}
+        { q}
+        { rational-abs-ℚ q}
+        ( leq-abs-ℚ p)
+        ( leq-abs-ℚ q))
+      ( inv-tr
+        ( λ r → leq-ℚ r (rational-abs-ℚ p +ℚ rational-abs-ℚ q))
+        ( distributive-neg-add-ℚ p q)
+        ( preserves-leq-add-ℚ
+          { neg-ℚ p}
+          { rational-abs-ℚ p}
+          { neg-ℚ q}
+          { rational-abs-ℚ q}
+          ( neg-leq-abs-ℚ p)
+          ( neg-leq-abs-ℚ q)))
 ```
 
 ### `|ab| = |a||b|`
