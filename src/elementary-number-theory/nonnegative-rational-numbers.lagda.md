@@ -52,7 +52,8 @@ open import order-theory.inflationary-maps-posets
 A [rational number](elementary-number-theory.rational-numbers.md) `x` is said to
 be
 {{#concept "nonnegative" Disambiguation="rational number" Agda=is-nonnegative-ℚ}}
-if its negation is positive.
+if its numerator is a
+[nonnegative integer](elementary-number-theory.nonnegative-integers.md).
 
 Nonnegative rational numbers are a [subsemigroup](group-theory.subsemigroups.md)
 of the
