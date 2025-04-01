@@ -298,6 +298,18 @@ module _
   iff-translate-left-leq-ℝ : leq-ℝ x y ↔ leq-ℝ (z +ℝ x) (z +ℝ y)
   pr1 iff-translate-left-leq-ℝ = preserves-leq-left-add-ℝ z x y
   pr2 iff-translate-left-leq-ℝ = reflects-leq-left-add-ℝ z x y
+
+abstract
+  preserves-leq-add-ℝ :
+    {l1 l2 l3 l4 : Level} (a : ℝ l1) (b : ℝ l2) (c : ℝ l3) (d : ℝ l4) →
+    leq-ℝ a b → leq-ℝ c d → leq-ℝ (a +ℝ c) (b +ℝ d)
+  preserves-leq-add-ℝ a b c d a≤b c≤d =
+    transitive-leq-ℝ
+      ( a +ℝ c)
+      ( a +ℝ d)
+      ( b +ℝ d)
+      ( preserves-leq-right-add-ℝ d a b a≤b)
+      ( preserves-leq-left-add-ℝ a c d c≤d)
 ```
 
 ### Transposition laws

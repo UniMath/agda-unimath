@@ -55,5 +55,16 @@ abstract
 ### The negative of the difference of `x` and `y` is the difference of `y` and `x`
 
 ```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
 
+  abstract
+    distributive-neg-diff-ℝ : neg-ℝ (x -ℝ y) ＝ y -ℝ x
+    distributive-neg-diff-ℝ =
+      equational-reasoning
+        neg-ℝ (x -ℝ y)
+        ＝ neg-ℝ x +ℝ neg-ℝ (neg-ℝ y) by distributive-neg-add-ℝ _ _
+        ＝ neg-ℝ x +ℝ y by ap (neg-ℝ x +ℝ_) (neg-neg-ℝ y)
+        ＝ y -ℝ x by commutative-add-ℝ _ _
 ```
