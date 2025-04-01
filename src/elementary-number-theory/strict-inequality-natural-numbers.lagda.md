@@ -8,6 +8,7 @@ module elementary-number-theory.strict-inequality-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -29,6 +30,8 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import order-theory.strictly-preordered-sets
 ```
 
 </details>
@@ -146,6 +149,15 @@ transitive-le-ℕ : (n m l : ℕ) → (le-ℕ n m) → (le-ℕ m l) → (le-ℕ 
 transitive-le-ℕ zero-ℕ (succ-ℕ m) (succ-ℕ l) p q = star
 transitive-le-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
   transitive-le-ℕ n m l p q
+```
+
+### The strictly preordered set of natural numbers orderd by strict inequality
+
+```agda
+ℕ-Strict-Preordered-Set : Strictly-Preordered-Set lzero lzero
+pr1 ℕ-Strict-Preordered-Set = ℕ-Set
+pr2 ℕ-Strict-Preordered-Set =
+  le-ℕ-Prop , anti-reflexive-le-ℕ , λ n m l I J → transitive-le-ℕ n m l J I
 ```
 
 ### A sharper variant of transitivity
