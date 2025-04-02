@@ -37,6 +37,7 @@ open import elementary-number-theory.strict-inequality-integers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -48,7 +49,6 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
-open import foundation.binary-relations
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
@@ -597,7 +597,8 @@ abstract
             ( q<r)))
 
   preserves-le-right-mul-ℚ⁺ :
-    (p : ℚ⁺) (q r : ℚ) → le-ℚ q r → le-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
+    (p : ℚ⁺) (q r : ℚ) → le-ℚ q r →
+    le-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
   preserves-le-right-mul-ℚ⁺ p⁺@(p , _) q r q<r =
     binary-tr
       ( le-ℚ)
