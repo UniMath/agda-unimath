@@ -93,10 +93,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 : Level}
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
   (C : Metric-Space l5 l6) (D : Metric-Space l5 l6)
-  (E : Metric-Space l9 l10)
+  (E : Metric-Space l8 l9)
   (f : binary-map-type-Metric-Space B D E)
   (ucf : is-uniformly-continuous-binary-map-Metric-Space B D E f)
   (g : map-type-Metric-Space A B)
