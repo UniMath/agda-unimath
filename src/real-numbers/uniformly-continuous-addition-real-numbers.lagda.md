@@ -44,57 +44,55 @@ open import real-numbers.rational-real-numbers
 ## Proof
 
 ```agda
-modulus-of-continuity-add-ℝ : ℚ⁺ → ℚ⁺
-modulus-of-continuity-add-ℝ = pr1 ∘ bound-double-le-ℚ⁺
+abstract
+  modulus-of-continuity-add-ℝ : ℚ⁺ → ℚ⁺
+  modulus-of-continuity-add-ℝ = pr1 ∘ bound-double-le-ℚ⁺
 
-module _
-  {l1 l2 : Level}
-  where
-
-  abstract
-    is-modulus-of-uniform-continuity-modulus-of-continuity-add-ℝ :
-      is-modulus-of-uniform-continuity-Metric-Space
-        ( product-Metric-Space (metric-space-leq-ℝ l1) (metric-space-leq-ℝ l2))
-        ( metric-space-leq-ℝ (l1 ⊔ l2))
-        ( ind-product add-ℝ)
-        ( modulus-of-continuity-add-ℝ)
-    is-modulus-of-uniform-continuity-modulus-of-continuity-add-ℝ
-      (a , b) ε⁺@(ε , _) (a' , b') (a~a' , b~b') =
-        let
-          (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
-        in
-          neighborhood-abs-diff-bound-leq-ℝ
-            ( ε⁺)
-            ( a +ℝ b)
-            ( a' +ℝ b')
-            ( inv-tr
-              ( λ z → leq-ℝ z (real-ℚ ε))
-              ( ap abs-ℝ (interchange-law-diff-add-ℝ a b a' b'))
+  is-modulus-of-uniform-continuity-modulus-of-continuity-add-ℝ :
+    {l1 l2 : Level} →
+    is-modulus-of-uniform-continuity-Metric-Space
+      ( product-Metric-Space (metric-space-leq-ℝ l1) (metric-space-leq-ℝ l2))
+      ( metric-space-leq-ℝ (l1 ⊔ l2))
+      ( ind-product add-ℝ)
+      ( modulus-of-continuity-add-ℝ)
+  is-modulus-of-uniform-continuity-modulus-of-continuity-add-ℝ
+    (a , b) ε⁺@(ε , _) (a' , b') (a~a' , b~b') =
+      let
+        (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
+      in
+        neighborhood-abs-diff-bound-leq-ℝ
+          ( ε⁺)
+          ( a +ℝ b)
+          ( a' +ℝ b')
+          ( inv-tr
+            ( λ z → leq-ℝ z (real-ℚ ε))
+            ( ap abs-ℝ (interchange-law-diff-add-ℝ a b a' b'))
+            ( transitive-leq-ℝ
+              ( abs-ℝ ((a -ℝ a') +ℝ (b -ℝ b')))
+              ( abs-ℝ (a -ℝ a') +ℝ abs-ℝ (b -ℝ b'))
+              ( real-ℚ ε)
               ( transitive-leq-ℝ
-                ( abs-ℝ ((a -ℝ a') +ℝ (b -ℝ b')))
                 ( abs-ℝ (a -ℝ a') +ℝ abs-ℝ (b -ℝ b'))
+                ( real-ℚ ε' +ℝ real-ℚ ε')
                 ( real-ℚ ε)
-                ( transitive-leq-ℝ
-                  ( abs-ℝ (a -ℝ a') +ℝ abs-ℝ (b -ℝ b'))
-                  ( real-ℚ ε' +ℝ real-ℚ ε')
-                  ( real-ℚ ε)
-                  ( inv-tr
-                    ( λ p → leq-ℝ p (real-ℚ ε))
-                    ( add-real-ℚ ε' ε')
-                    ( preserves-leq-real-ℚ _ _ (leq-le-ℚ {ε' +ℚ ε'} {ε} 2ε'<ε)))
-                  ( preserves-leq-add-ℝ _ _ _ _
-                    ( abs-diff-bound-neighborhood-leq-ℝ ε'⁺ a a' a~a')
-                    ( abs-diff-bound-neighborhood-leq-ℝ ε'⁺ b b' b~b')))
-                ( triangle-inequality-abs-ℝ _ _)))
+                ( inv-tr
+                  ( λ p → leq-ℝ p (real-ℚ ε))
+                  ( add-real-ℚ ε' ε')
+                  ( preserves-leq-real-ℚ _ _ (leq-le-ℚ {ε' +ℚ ε'} {ε} 2ε'<ε)))
+                ( preserves-leq-add-ℝ _ _ _ _
+                  ( abs-diff-bound-neighborhood-leq-ℝ ε'⁺ a a' a~a')
+                  ( abs-diff-bound-neighborhood-leq-ℝ ε'⁺ b b' b~b')))
+              ( triangle-inequality-abs-ℝ _ _)))
 
-    is-uniformly-continuous-add-ℝ :
-      is-uniformly-continuous-binary-map-Metric-Space
-        ( metric-space-leq-ℝ l1)
-        ( metric-space-leq-ℝ l2)
-        ( metric-space-leq-ℝ (l1 ⊔ l2))
-        ( add-ℝ)
-    is-uniformly-continuous-add-ℝ =
-      intro-exists
-        ( modulus-of-continuity-add-ℝ)
-        ( is-modulus-of-uniform-continuity-modulus-of-continuity-add-ℝ)
+  is-uniformly-continuous-add-ℝ :
+    {l1 l2 : Level} →
+    is-uniformly-continuous-binary-map-Metric-Space
+      ( metric-space-leq-ℝ l1)
+      ( metric-space-leq-ℝ l2)
+      ( metric-space-leq-ℝ (l1 ⊔ l2))
+      ( add-ℝ)
+  is-uniformly-continuous-add-ℝ =
+    intro-exists
+      ( modulus-of-continuity-add-ℝ)
+      ( is-modulus-of-uniform-continuity-modulus-of-continuity-add-ℝ)
 ```
