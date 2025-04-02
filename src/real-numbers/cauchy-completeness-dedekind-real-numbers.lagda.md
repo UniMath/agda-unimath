@@ -57,7 +57,7 @@ open import real-numbers.upper-dedekind-real-numbers
 ## Idea
 
 The
-[metric space of the real numbers](real-numbers.metric-space-of-real-numbers.md)
+[metric space of the Dedekind real numbers](real-numbers.metric-space-of-real-numbers.md)
 is [complete](metric-spaces.complete-metric-spaces.md).
 
 ## Definitions
