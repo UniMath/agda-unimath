@@ -1,4 +1,4 @@
-# Cauchy completeness of the metric space of real numbers
+# Cauchy completeness of the Dedekind real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -48,7 +48,7 @@ open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.transposition-cuts-dedekind-real-numbers
+open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
@@ -57,7 +57,7 @@ open import real-numbers.upper-dedekind-real-numbers
 ## Idea
 
 The
-[metric space of the real numbers](real-numbers.metric-space-of-real-numbers.md)
+[metric space of the Dedekind real numbers](real-numbers.metric-space-of-real-numbers.md)
 is [complete](metric-spaces.complete-metric-spaces.md).
 
 ## Definitions

@@ -77,14 +77,7 @@ module _
         ( λ d₂≤d₁ →
           tr
             ( λ d → type-Prop (B d x y))
-            ( eq-ℚ⁺
-              { d₁}
-              { d₂}
-              ( antisymmetric-leq-ℚ
-                ( rational-ℚ⁺ d₁)
-                ( rational-ℚ⁺ d₂)
-                ( d₁≤d₂)
-                ( d₂≤d₁)))
+            ( antisymmetric-leq-ℚ⁺ d₁ d₂ d₁≤d₂ d₂≤d₁)
             ( x~y))
-        ( decide-le-leq-ℚ (rational-ℚ⁺ d₁) (rational-ℚ⁺ d₂))
+        ( decide-le-leq-ℚ⁺ d₁ d₂)
 ```

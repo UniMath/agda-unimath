@@ -47,11 +47,9 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.maximum-real-numbers
-open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.transposition-cuts-dedekind-real-numbers
+open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers
 ```
 
 </details>
@@ -103,7 +101,7 @@ is-in-neighborhood-leq-ℝ l d x y = type-Prop (premetric-leq-ℝ l d x y)
 
 ## Properties
 
-### `x` is in a `d`-neighborhood of `y` iff `x - d ≤ y ≤ x + d`
+### `x` is in a `d`-neighborhood of `y` if `x - d ≤ y ≤ x + d`
 
 ```agda
 abstract
@@ -217,14 +215,6 @@ abstract
         ( λ z → leq-ℝ z (real-ℚ d))
         ( distributive-neg-diff-ℝ _ _)
         ( reversed-diff-bound-neighborhood-leq-ℝ d⁺ x y x~y))
-
-neighborhood-iff-abs-diff-bound-ℝ :
-  {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
-  is-in-neighborhood-leq-ℝ l d x y ↔
-  leq-ℝ (abs-ℝ (x -ℝ y)) (real-ℚ (rational-ℚ⁺ d))
-neighborhood-iff-abs-diff-bound-ℝ d x y =
-  ( abs-diff-bound-neighborhood-leq-ℝ d x y ,
-    neighborhood-abs-diff-bound-leq-ℝ d x y)
 ```
 
 ### The standard premetric on the real numbers is a metric structure
