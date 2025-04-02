@@ -93,6 +93,40 @@ module _
 
 ```agda
 module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
+  (C : Metric-Space l5 l6) (D : Metric-Space l7 l8)
+  (f : map-type-Metric-Space C D)
+  (ucf : is-uniformly-continuous-map-Metric-Space C D f)
+  (g : binary-map-type-Metric-Space A B C)
+  (ucg : is-uniformly-continuous-binary-map-Metric-Space A B C g)
+  where
+
+  abstract
+    left-comp-uniformly-continuous-binary-map-Metric-Space :
+      is-uniformly-continuous-binary-map-Metric-Space A B D ( λ a b → f (g a b))
+    left-comp-uniformly-continuous-binary-map-Metric-Space =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( is-uniformly-continuous-binary-map-prop-Metric-Space
+              ( A)
+              ( B)
+              ( D)
+              ( λ a b → f (g a b)))
+      in do
+        (mf , is-muc-mf) ← ucf
+        (mg , is-muc-mg) ← ucg
+        intro-exists
+          ( mg ∘ mf)
+          ( λ (a , b) ε (a' , b') (a~a' , b~b') →
+            is-muc-mf
+              ( g a b)
+              ( ε)
+              ( g a' b')
+              ( is-muc-mg (a , b) (mf ε) (a' , b') (a~a' , b~b')))
+
+module _
   {l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
   (C : Metric-Space l5 l6) (D : Metric-Space l7 l8)
@@ -119,9 +153,9 @@ module _
               ( E)
               ( λ a c → f (g a) (h c)))
       in do
-        mf , is-muc-mf ← ucf
-        mg , is-muc-mg ← ucg
-        mh , is-muc-mh ← uch
+        (mf , is-muc-mf) ← ucf
+        (mg , is-muc-mg) ← ucg
+        (mh , is-muc-mh) ← uch
         intro-exists
           ( λ ε → min-ℚ⁺ (mg (mf ε)) (mh (mf ε)))
           ( λ (a , c) ε (a' , c') (a~a' , c~c') →
