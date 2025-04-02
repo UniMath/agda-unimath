@@ -176,33 +176,47 @@ abstract
               ( distributive-neg-diff-ℝ x y)
               ( neg-leq-abs-ℝ _)))))
 
+  diff-bound-neighborhood-leq-ℝ :
+    {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
+    is-in-neighborhood-leq-ℝ l d x y →
+    leq-ℝ (x -ℝ y) (real-ℚ (rational-ℚ⁺ d))
+  diff-bound-neighborhood-leq-ℝ d⁺@(d , _) x y (H , K) =
+    leq-transpose-right-add-ℝ
+      ( x)
+      ( real-ℚ d)
+      ( y)
+      ( tr
+        ( leq-ℝ x)
+        ( commutative-add-ℝ _ _)
+        ( real-bound-is-in-lower-neighborhood-leq-ℝ d⁺ y x K))
+
+  reversed-diff-bound-neighborhood-leq-ℝ :
+    {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
+    is-in-neighborhood-leq-ℝ l d x y →
+    leq-ℝ (y -ℝ x) (real-ℚ (rational-ℚ⁺ d))
+  reversed-diff-bound-neighborhood-leq-ℝ d⁺@(d , _) x y (H , K) =
+    leq-transpose-right-add-ℝ
+      ( y)
+      ( real-ℚ d)
+      ( x)
+      ( tr
+        ( leq-ℝ y)
+        ( commutative-add-ℝ _ _)
+        ( real-bound-is-in-lower-neighborhood-leq-ℝ d⁺ x y H))
+
   abs-diff-bound-neighborhood-leq-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
     is-in-neighborhood-leq-ℝ l d x y →
     leq-ℝ (abs-ℝ (x -ℝ y)) (real-ℚ (rational-ℚ⁺ d))
-  abs-diff-bound-neighborhood-leq-ℝ d⁺@(d , _) x y (H , K) =
+  abs-diff-bound-neighborhood-leq-ℝ d⁺@(d , _) x y x~y =
     leq-abs-leq-leq-neg-ℝ
       ( x -ℝ y)
       ( real-ℚ d)
-      ( leq-transpose-right-add-ℝ
-        ( x)
-        ( real-ℚ d)
-        ( y)
-        ( tr
-          ( leq-ℝ x)
-          ( commutative-add-ℝ _ _)
-          ( real-bound-is-in-lower-neighborhood-leq-ℝ d⁺ y x K)))
+      ( diff-bound-neighborhood-leq-ℝ d⁺ x y x~y)
       ( inv-tr
         ( λ z → leq-ℝ z (real-ℚ d))
         ( distributive-neg-diff-ℝ _ _)
-        ( leq-transpose-right-add-ℝ
-          ( y)
-          ( real-ℚ d)
-          ( x)
-          ( tr
-            ( leq-ℝ y)
-            ( commutative-add-ℝ _ _)
-            ( real-bound-is-in-lower-neighborhood-leq-ℝ d⁺ x y H))))
+        ( reversed-diff-bound-neighborhood-leq-ℝ d⁺ x y x~y))
 
 neighborhood-iff-abs-diff-bound-ℝ :
   {l : Level} → (d : ℚ⁺) (x y : ℝ l) →

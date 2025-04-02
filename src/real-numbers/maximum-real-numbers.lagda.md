@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -116,6 +117,12 @@ module _
       ( lower-real-ℝ x)
       ( lower-real-ℝ y)
       ( lower-real-ℝ z)
+
+  abstract
+    leq-max-leq-ℝ :
+      {l3 : Level} → (z : ℝ l3) → leq-ℝ x z → leq-ℝ y z → leq-ℝ (max-ℝ x y) z
+    leq-max-leq-ℝ z x≤z y≤z =
+      forward-implication (is-least-binary-upper-bound-max-ℝ z) (x≤z , y≤z)
 ```
 
 ### The binary maximum is a binary upper bound
@@ -128,22 +135,10 @@ module _
 
   abstract
     leq-left-max-ℝ : leq-ℝ x (max-ℝ x y)
-    leq-left-max-ℝ =
-      pr1
-        ( is-binary-upper-bound-is-least-binary-upper-bound-Large-Poset
-          ( ℝ-Large-Poset)
-          ( x)
-          ( y)
-          ( is-least-binary-upper-bound-max-ℝ x y))
+    leq-left-max-ℝ _ = inl-disjunction
 
     leq-right-max-ℝ : leq-ℝ y (max-ℝ x y)
-    leq-right-max-ℝ =
-      pr2
-        ( is-binary-upper-bound-is-least-binary-upper-bound-Large-Poset
-          ( ℝ-Large-Poset)
-          ( x)
-          ( y)
-          ( is-least-binary-upper-bound-max-ℝ x y))
+    leq-right-max-ℝ _ = inr-disjunction
 ```
 
 ### The binary maximum is commutative
@@ -196,14 +191,15 @@ module _
         open do-syntax-trunc-Prop claim
       in do
         ((qx , qmaxyz) , qx<x , qmaxyz<maxyz , q=qx+qmaxyz) ← q<x+maxyz
-        elim-disjunction
-          ( claim)
+        map-disjunction
+          ( lower-cut-ℝ y qmaxyz)
+          ( lower-cut-ℝ (x +ℝ y) q)
+          ( lower-cut-ℝ z qmaxyz)
+          ( lower-cut-ℝ (x +ℝ z) q)
           ( λ qmaxyz<y →
-            inl-disjunction
-              ( intro-exists (qx , qmaxyz) (qx<x , qmaxyz<y , q=qx+qmaxyz)))
+            intro-exists (qx , qmaxyz) (qx<x , qmaxyz<y , q=qx+qmaxyz))
           ( λ qmaxyz<z →
-            inr-disjunction
-              ( intro-exists (qx , qmaxyz) (qx<x , qmaxyz<z , q=qx+qmaxyz)))
+            intro-exists (qx , qmaxyz) (qx<x , qmaxyz<z , q=qx+qmaxyz))
           ( qmaxyz<maxyz)
 
     leq-right-add-max-ℝ : leq-ℝ (max-ℝ (x +ℝ y) (x +ℝ z)) (x +ℝ max-ℝ y z)
@@ -215,8 +211,7 @@ module _
 
     left-distributive-add-max-ℝ : x +ℝ max-ℝ y z ＝ max-ℝ (x +ℝ y) (x +ℝ z)
     left-distributive-add-max-ℝ =
-      eq-sim-ℝ
-        ( sim-sim-large-poset-ℝ _ _ (leq-left-add-max-ℝ , leq-right-add-max-ℝ))
+      antisymmetric-leq-ℝ _ _ leq-left-add-max-ℝ leq-right-add-max-ℝ
 
 module _
   {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) where
@@ -230,4 +225,20 @@ module _
         ＝ max-ℝ (z +ℝ x) (z +ℝ y) by left-distributive-add-max-ℝ z x y
         ＝ max-ℝ (x +ℝ z) (y +ℝ z)
           by ap-binary max-ℝ (commutative-add-ℝ z x) (commutative-add-ℝ z y)
+```
+
+### Functoriality of the maximum operation
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (a : ℝ l1) (b : ℝ l2) (c : ℝ l3) (d : ℝ l4)
+  where
+
+  abstract
+    max-leq-leq-ℝ : leq-ℝ a b → leq-ℝ c d → leq-ℝ (max-ℝ a c) (max-ℝ b d)
+    max-leq-leq-ℝ a≤b c≤d =
+      forward-implication
+        ( is-least-binary-upper-bound-max-ℝ a c (max-ℝ b d))
+        ( transitive-leq-ℝ a b (max-ℝ b d) (leq-left-max-ℝ b d) a≤b ,
+          transitive-leq-ℝ c d (max-ℝ b d) (leq-right-max-ℝ b d) c≤d)
 ```
