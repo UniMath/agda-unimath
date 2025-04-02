@@ -29,8 +29,8 @@ open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
-open import real-numbers.maximum-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.maximum-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.rational-real-numbers
 ```
