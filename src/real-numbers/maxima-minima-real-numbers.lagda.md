@@ -19,12 +19,12 @@ open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.maximum-real-numbers
 open import real-numbers.minimum-real-numbers
-open import real-numbers.addition-real-numbers
-open import real-numbers.difference-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.similarity-real-numbers
 ```

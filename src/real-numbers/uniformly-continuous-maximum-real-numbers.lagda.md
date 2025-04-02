@@ -12,13 +12,11 @@ module real-numbers.uniformly-continuous-maximum-real-numbers where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
-open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -27,7 +25,6 @@ open import metric-spaces.uniformly-continuous-binary-functions-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import real-numbers.absolute-value-real-numbers
-open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
@@ -35,7 +32,6 @@ open import real-numbers.maxima-minima-real-numbers
 open import real-numbers.maximum-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.minimum-real-numbers
-open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 ```
 
