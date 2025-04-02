@@ -23,6 +23,8 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.maximum-real-numbers
 open import real-numbers.minimum-real-numbers
+open import real-numbers.addition-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.similarity-real-numbers
 ```
@@ -99,4 +101,33 @@ module _
         ＝ neg-ℝ (neg-ℝ (max-ℝ (neg-ℝ a) (neg-ℝ b)))
           by inv (ap neg-ℝ (neg-max-ℝ _ _))
         ＝ max-ℝ (neg-ℝ a) (neg-ℝ b) by neg-neg-ℝ _
+```
+
+### `max a b - max c d = max (min (a - c) (a - d)) (min (b - c) (b - d))`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (a : ℝ l1) (b : ℝ l2) (c : ℝ l3) (d : ℝ l4)
+  where
+
+  abstract
+    diff-max-max-ℝ :
+      max-ℝ a b -ℝ max-ℝ c d ＝
+      max-ℝ (min-ℝ (a -ℝ c) (a -ℝ d)) (min-ℝ (b -ℝ c) (b -ℝ d))
+    diff-max-max-ℝ =
+      equational-reasoning
+        max-ℝ a b -ℝ max-ℝ c d
+        ＝ max-ℝ a b +ℝ min-ℝ (neg-ℝ c) (neg-ℝ d)
+          by ap (max-ℝ a b +ℝ_) (neg-max-ℝ c d)
+        ＝
+          max-ℝ
+            ( a +ℝ min-ℝ (neg-ℝ c) (neg-ℝ d))
+            ( b +ℝ min-ℝ (neg-ℝ c) (neg-ℝ d))
+          by right-distributive-add-max-ℝ _ _ _
+        ＝ max-ℝ (min-ℝ (a -ℝ c) (a -ℝ d)) (min-ℝ (b -ℝ c) (b -ℝ d))
+          by
+            ap-binary
+              ( max-ℝ)
+              ( left-distributive-add-min-ℝ a (neg-ℝ c) (neg-ℝ d))
+              ( left-distributive-add-min-ℝ b (neg-ℝ c) (neg-ℝ d))
 ```

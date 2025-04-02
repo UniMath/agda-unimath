@@ -66,100 +66,6 @@ abstract
       let
         εℝ : ℝ lzero
         εℝ = real-ℚ ε
-        maxab-maxa'b'=max-min-a-a'-a-b'-min-b-a'-b-b' :
-          max-ℝ a b -ℝ max-ℝ a' b' ＝
-          max-ℝ (min-ℝ (a -ℝ a') (a -ℝ b')) (min-ℝ (b -ℝ a') (b -ℝ b'))
-        maxab-maxa'b'=max-min-a-a'-a-b'-min-b-a'-b-b' =
-          equational-reasoning
-            max-ℝ a b -ℝ max-ℝ a' b'
-            ＝ max-ℝ a b +ℝ min-ℝ (neg-ℝ a') (neg-ℝ b')
-              by ap (max-ℝ a b +ℝ_) (neg-max-ℝ _ _)
-            ＝
-              max-ℝ
-                ( a +ℝ min-ℝ (neg-ℝ a') (neg-ℝ b'))
-                ( b +ℝ min-ℝ (neg-ℝ a') (neg-ℝ b'))
-              by right-distributive-add-max-ℝ a b _
-            ＝
-              max-ℝ
-                ( min-ℝ (a -ℝ a') (a -ℝ b'))
-                ( min-ℝ (b -ℝ a') (b -ℝ b'))
-              by
-                ap-binary
-                  ( max-ℝ)
-                  ( left-distributive-add-min-ℝ _ _ _)
-                  ( left-distributive-add-min-ℝ _ _ _)
-        a-a'≤ε : leq-ℝ (a -ℝ a') εℝ
-        a-a'≤ε = diff-bound-neighborhood-leq-ℝ ε⁺ a a' a~a'
-        min-a-a'-a-b'≤ε : leq-ℝ (min-ℝ (a -ℝ a') (a -ℝ b')) εℝ
-        min-a-a'-a-b'≤ε =
-          transitive-leq-ℝ
-            ( min-ℝ (a -ℝ a') (a -ℝ b'))
-            ( a -ℝ a')
-            ( εℝ)
-            ( a-a'≤ε)
-            ( leq-left-min-ℝ _ _)
-        b-b'≤ε : leq-ℝ (b -ℝ b') εℝ
-        b-b'≤ε = diff-bound-neighborhood-leq-ℝ ε⁺ b b' b~b'
-        min-b-a'-b-b'≤ε : leq-ℝ (min-ℝ (b -ℝ a') (b -ℝ b')) εℝ
-        min-b-a'-b-b'≤ε =
-          transitive-leq-ℝ
-            ( min-ℝ (b -ℝ a') (b -ℝ b'))
-            ( b -ℝ b')
-            ( εℝ)
-            ( b-b'≤ε)
-            ( leq-right-min-ℝ _ _)
-        max-min-a-a'-a-b'-min-b-a'-b-b'≤ε :
-          leq-ℝ
-            ( max-ℝ (min-ℝ (a -ℝ a') (a -ℝ b')) (min-ℝ (b -ℝ a') (b -ℝ b')))
-            ( εℝ)
-        max-min-a-a'-a-b'-min-b-a'-b-b'≤ε =
-          leq-max-leq-ℝ _ _ εℝ min-a-a'-a-b'≤ε min-b-a'-b-b'≤ε
-        -⟨maxab-maxa'b'⟩=max-min-a'-a-a'-b-min-b'-a-b'-b :
-          neg-ℝ (max-ℝ a b -ℝ max-ℝ a' b') ＝
-          max-ℝ (min-ℝ (a' -ℝ a) (a' -ℝ b)) (min-ℝ (b' -ℝ a) (b' -ℝ b))
-        -⟨maxab-maxa'b'⟩=max-min-a'-a-a'-b-min-b'-a-b'-b =
-          equational-reasoning
-            neg-ℝ (max-ℝ a b -ℝ max-ℝ a' b')
-            ＝ max-ℝ a' b' -ℝ max-ℝ a b by distributive-neg-diff-ℝ _ _
-            ＝ max-ℝ a' b' +ℝ min-ℝ (neg-ℝ a) (neg-ℝ b)
-              by ap (max-ℝ a' b' +ℝ_) (neg-max-ℝ _ _)
-            ＝
-              max-ℝ
-                ( a' +ℝ min-ℝ (neg-ℝ a) (neg-ℝ b))
-                ( b' +ℝ min-ℝ (neg-ℝ a) (neg-ℝ b))
-              by right-distributive-add-max-ℝ _ _ _
-            ＝
-              max-ℝ
-                ( min-ℝ (a' -ℝ a) (a' -ℝ b))
-                ( min-ℝ (b' -ℝ a) (b' -ℝ b))
-              by
-                ap-binary
-                  ( max-ℝ)
-                  ( left-distributive-add-min-ℝ _ _ _)
-                  ( left-distributive-add-min-ℝ _ _ _)
-        a'-a≤ε = reversed-diff-bound-neighborhood-leq-ℝ ε⁺ a a' a~a'
-        b'-b≤ε = reversed-diff-bound-neighborhood-leq-ℝ ε⁺ b b' b~b'
-        min-a'-a-a'-b≤ε =
-          transitive-leq-ℝ
-            ( min-ℝ (a' -ℝ a) (a' -ℝ b))
-            ( a' -ℝ a)
-            ( εℝ)
-            ( a'-a≤ε)
-            ( leq-left-min-ℝ _ _)
-        min-b'-a-b'-b≤ε =
-          transitive-leq-ℝ
-            ( min-ℝ (b' -ℝ a) (b' -ℝ b))
-            ( b' -ℝ b)
-            ( εℝ)
-            ( b'-b≤ε)
-            ( leq-right-min-ℝ _ _)
-        max-min-a'-a-a'-b-min-b'-a-b'-b≤ε =
-          leq-max-leq-ℝ
-            ( min-ℝ (a' -ℝ a) (a' -ℝ b))
-            ( min-ℝ (b' -ℝ a) (b' -ℝ b))
-            ( εℝ)
-            ( min-a'-a-a'-b≤ε)
-            ( min-b'-a-b'-b≤ε)
       in
         neighborhood-abs-diff-bound-leq-ℝ
           ( ε⁺)
@@ -170,12 +76,40 @@ abstract
             ( εℝ)
             ( inv-tr
               ( λ x → leq-ℝ x εℝ)
-              ( maxab-maxa'b'=max-min-a-a'-a-b'-min-b-a'-b-b')
-              ( max-min-a-a'-a-b'-min-b-a'-b-b'≤ε))
+              ( diff-max-max-ℝ _ _ _ _)
+              ( leq-max-leq-ℝ _ _
+                ( εℝ)
+                ( transitive-leq-ℝ
+                  ( min-ℝ (a -ℝ a') (a -ℝ b'))
+                  ( a -ℝ a')
+                  ( εℝ)
+                  ( diff-bound-neighborhood-leq-ℝ ε⁺ a a' a~a')
+                  ( leq-left-min-ℝ _ _))
+                ( transitive-leq-ℝ
+                  ( min-ℝ (b -ℝ a') (b -ℝ b'))
+                  ( b -ℝ b')
+                  ( εℝ)
+                  ( diff-bound-neighborhood-leq-ℝ ε⁺ b b' b~b')
+                  ( leq-right-min-ℝ _ _))))
             ( inv-tr
               ( λ x → leq-ℝ x εℝ)
-              ( -⟨maxab-maxa'b'⟩=max-min-a'-a-a'-b-min-b'-a-b'-b)
-              ( max-min-a'-a-a'-b-min-b'-a-b'-b≤ε)))
+              ( distributive-neg-diff-ℝ _ _ ∙ diff-max-max-ℝ _ _ _ _)
+              ( leq-max-leq-ℝ
+                ( min-ℝ (a' -ℝ a) (a' -ℝ b))
+                ( min-ℝ (b' -ℝ a) (b' -ℝ b))
+                ( εℝ)
+                ( transitive-leq-ℝ
+                  ( min-ℝ (a' -ℝ a) (a' -ℝ b))
+                  ( a' -ℝ a)
+                  ( εℝ)
+                  ( reversed-diff-bound-neighborhood-leq-ℝ ε⁺ a a' a~a')
+                  ( leq-left-min-ℝ _ _))
+                ( transitive-leq-ℝ
+                  ( min-ℝ (b' -ℝ a) (b' -ℝ b))
+                  ( b' -ℝ b)
+                  ( εℝ)
+                  ( reversed-diff-bound-neighborhood-leq-ℝ ε⁺ b b' b~b')
+                  ( leq-right-min-ℝ _ _)))))
 
   is-uniformly-continuous-max-ℝ :
     {l1 l2 : Level} →
