@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.transposition-cuts-dedekind-real-numbers where
+module real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -31,12 +31,16 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-We derive transposition laws from those for
-[strict inequality](real-numbers.strict-inequality-real-numbers.md), that
-`x < y + z ⇔ x - z < y` and `x < y - z ⇔ x + z < y`, to apply to
-[rational numbers](elementary-number-theory.rational-numbers.md) in the lower
-and upper cuts of
-[Dedekind real numbers](real-numbers.dedekind-real-numbers.md).
+Transposition laws for [addition](real-numbers.addition-real-numbers.md) and
+[subtraction](real-numbers.difference-real-numbers.md) on the cuts of
+[Dedekind real numbers](real-numbers.dedekind-real-numbers.md) include:
+
+* `p + q` is in the lower cut of `x` [iff](foundation.logical-equivalences.md) `p` is in the lower cut of `x - q`
+* `p - q` is in the lower cut of `x` iff `p` is in the lower cut of `x + q`
+
+These laws follow from the more general transposition laws for addition and
+subtraction on real numbers with respect to
+[strict inequality](real-numbers.strict-inequality-real-numbers.md).
 
 ### Transposition laws for lower cuts
 
