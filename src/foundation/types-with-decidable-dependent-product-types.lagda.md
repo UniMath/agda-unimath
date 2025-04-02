@@ -310,7 +310,7 @@ has-decidable-Π-bool =
     ( has-decidable-Π-Fin 2)
 ```
 
-### Types with decidable Π-types have decidable Π-types
+### Types with decidable Σ-types have decidable Π-types
 
 ```agda
 has-decidable-Π-has-decidable-Σ :
