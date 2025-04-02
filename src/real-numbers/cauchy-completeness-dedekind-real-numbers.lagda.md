@@ -1,4 +1,4 @@
-# Cauchy completeness of the metric space of real numbers
+# Cauchy completeness of the Dedekind real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
