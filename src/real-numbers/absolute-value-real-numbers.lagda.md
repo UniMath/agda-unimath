@@ -42,7 +42,7 @@ of a [real number](real-numbers.dedekind-real-numbers.md) is the
 ```agda
 opaque
   abs-ℝ : {l : Level} → ℝ l → ℝ l
-  abs-ℝ x = binary-max-ℝ x (neg-ℝ x)
+  abs-ℝ x = max-ℝ x (neg-ℝ x)
 ```
 
 ## Properties
@@ -70,7 +70,7 @@ opaque
 
   abs-neg-ℝ : {l : Level} → (x : ℝ l) → abs-ℝ (neg-ℝ x) ＝ abs-ℝ x
   abs-neg-ℝ x =
-    ap (binary-max-ℝ (neg-ℝ x)) (neg-neg-ℝ x) ∙ commutative-binary-max-ℝ _ _
+    ap (max-ℝ (neg-ℝ x)) (neg-neg-ℝ x) ∙ commutative-max-ℝ _ _
 ```
 
 ### `x` is between `-|x|` and `|x|`
@@ -84,10 +84,10 @@ module _
     unfolding abs-ℝ
 
     leq-abs-ℝ : leq-ℝ x (abs-ℝ x)
-    leq-abs-ℝ = leq-left-binary-max-ℝ x (neg-ℝ x)
+    leq-abs-ℝ = leq-left-max-ℝ x (neg-ℝ x)
 
     neg-leq-abs-ℝ : leq-ℝ (neg-ℝ x) (abs-ℝ x)
-    neg-leq-abs-ℝ = leq-right-binary-max-ℝ x (neg-ℝ x)
+    neg-leq-abs-ℝ = leq-right-max-ℝ x (neg-ℝ x)
 
     leq-neg-abs-ℝ : leq-ℝ (neg-ℝ (abs-ℝ x)) x
     leq-neg-abs-ℝ =
@@ -113,7 +113,7 @@ module _
     leq-abs-leq-leq-neg-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ x) y → leq-ℝ (abs-ℝ x) y
     leq-abs-leq-leq-neg-ℝ H K =
       forward-implication
-        ( is-least-binary-upper-bound-binary-max-ℝ x (neg-ℝ x) y)
+        ( is-least-binary-upper-bound-max-ℝ x (neg-ℝ x) y)
         ( H , K)
 ```
 

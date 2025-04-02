@@ -34,6 +34,7 @@ open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.similarity-of-elements-large-posets
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -178,6 +179,28 @@ transitive-leq-Large-Preorder ℝ-Large-Preorder = transitive-leq-ℝ
 ℝ-Large-Poset : Large-Poset lsuc _⊔_
 large-preorder-Large-Poset ℝ-Large-Poset = ℝ-Large-Preorder
 antisymmetric-leq-Large-Poset ℝ-Large-Poset = antisymmetric-leq-ℝ
+```
+
+### Similarity of real numbers coincides with similarity in the large poset of real numbers
+
+```agda
+opaque
+  unfolding sim-ℝ
+
+  sim-iff-sim-large-poset-ℝ :
+    {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) →
+    sim-Large-Poset ℝ-Large-Poset x y ↔ sim-ℝ x y
+  sim-iff-sim-large-poset-ℝ _ _ = id-iff
+
+  sim-sim-large-poset-ℝ :
+    {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) →
+    sim-Large-Poset ℝ-Large-Poset x y → sim-ℝ x y
+  sim-sim-large-poset-ℝ _ _ = id
+
+  sim-large-poset-sim-ℝ :
+    {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) →
+    sim-ℝ x y → sim-Large-Poset ℝ-Large-Poset x y
+  sim-large-poset-sim-ℝ _ _ = id
 ```
 
 ### The partially ordered set of reals at a specific level

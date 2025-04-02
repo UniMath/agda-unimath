@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.uniformly-continuous-addition-real-numbers where
+module real-numbers.uniformly-continuous-maximum-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -29,6 +29,7 @@ open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.maximum-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.rational-real-numbers
@@ -45,4 +46,22 @@ is a
 ## Proof
 
 ```agda
+abstract
+  modulus-of-continuity-max-ℝ : ℚ⁺ → ℚ⁺
+  modulus-of-continuity-max-ℝ = id
+
+  is-modulus-of-uniform-continuity-modulus-of-continuity-max-ℝ :
+    {l1 l2 : Level} →
+    is-modulus-of-uniform-continuity-Metric-Space
+      ( product-Metric-Space (metric-space-leq-ℝ l1) (metric-space-leq-ℝ l2))
+      ( metric-space-leq-ℝ (l1 ⊔ l2))
+      ( ind-product max-ℝ)
+      ( modulus-of-continuity-max-ℝ)
+  is-modulus-of-uniform-continuity-modulus-of-continuity-max-ℝ
+    (a , b) ε (a' , b') (a~a' , b~b') =
+      neighborhood-abs-diff-bound-leq-ℝ
+        ( ε)
+        ( max-ℝ a b)
+        ( max-ℝ a' b')
+        {!   !}
 ```
