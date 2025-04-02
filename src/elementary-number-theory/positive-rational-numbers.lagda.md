@@ -48,6 +48,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.binary-relations
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
@@ -481,6 +482,18 @@ leq-ℚ⁺ x y = type-Prop (leq-prop-ℚ⁺ x y)
 
 is-prop-leq-ℚ⁺ : (x y : ℚ⁺) → is-prop (leq-ℚ⁺ x y)
 is-prop-leq-ℚ⁺ x y = is-prop-type-Prop (leq-prop-ℚ⁺ x y)
+
+abstract
+  antisymmetric-leq-ℚ⁺ : is-antisymmetric leq-ℚ⁺
+  antisymmetric-leq-ℚ⁺ (p , _) (q , _) p≤q q≤p =
+    eq-ℚ⁺ (antisymmetric-leq-ℚ p q p≤q q≤p)
+```
+
+### For any two positive rational numbers `x` and `y`, `x < y` or `y ≤ x`
+
+```agda
+decide-le-leq-ℚ⁺ : (x y : ℚ⁺) → le-ℚ⁺ x y + leq-ℚ⁺ y x
+decide-le-leq-ℚ⁺ (x , _) (y , _) = decide-le-leq-ℚ x y
 ```
 
 ### The sum of two positive rational numbers is greater than each of them
@@ -490,31 +503,32 @@ module _
   (x y : ℚ⁺)
   where
 
-  le-left-add-ℚ⁺ : le-ℚ⁺ x (x +ℚ⁺ y)
-  le-left-add-ℚ⁺ =
-    tr
-      ( λ z → le-ℚ z ((rational-ℚ⁺ x) +ℚ (rational-ℚ⁺ y)))
-      ( right-unit-law-add-ℚ (rational-ℚ⁺ x))
-      ( preserves-le-right-add-ℚ
-        ( rational-ℚ⁺ x)
-        ( zero-ℚ)
-        ( rational-ℚ⁺ y)
-        ( le-zero-is-positive-ℚ
-          ( rational-ℚ⁺ y)
-          ( is-positive-rational-ℚ⁺ y)))
-
-  le-right-add-ℚ⁺ : le-ℚ⁺ y (x +ℚ⁺ y)
-  le-right-add-ℚ⁺ =
-    tr
-      ( λ z → le-ℚ z ((rational-ℚ⁺ x) +ℚ (rational-ℚ⁺ y)))
-      ( left-unit-law-add-ℚ (rational-ℚ⁺ y))
-      ( preserves-le-left-add-ℚ
-        ( rational-ℚ⁺ y)
-        ( zero-ℚ)
-        ( rational-ℚ⁺ x)
-        ( le-zero-is-positive-ℚ
+  abstract
+    le-left-add-ℚ⁺ : le-ℚ⁺ x (x +ℚ⁺ y)
+    le-left-add-ℚ⁺ =
+      tr
+        ( λ z → le-ℚ z ((rational-ℚ⁺ x) +ℚ (rational-ℚ⁺ y)))
+        ( right-unit-law-add-ℚ (rational-ℚ⁺ x))
+        ( preserves-le-right-add-ℚ
           ( rational-ℚ⁺ x)
-          ( is-positive-rational-ℚ⁺ x)))
+          ( zero-ℚ)
+          ( rational-ℚ⁺ y)
+          ( le-zero-is-positive-ℚ
+            ( rational-ℚ⁺ y)
+            ( is-positive-rational-ℚ⁺ y)))
+
+    le-right-add-ℚ⁺ : le-ℚ⁺ y (x +ℚ⁺ y)
+    le-right-add-ℚ⁺ =
+      tr
+        ( λ z → le-ℚ z ((rational-ℚ⁺ x) +ℚ (rational-ℚ⁺ y)))
+        ( left-unit-law-add-ℚ (rational-ℚ⁺ y))
+        ( preserves-le-left-add-ℚ
+          ( rational-ℚ⁺ y)
+          ( zero-ℚ)
+          ( rational-ℚ⁺ x)
+          ( le-zero-is-positive-ℚ
+            ( rational-ℚ⁺ x)
+            ( is-positive-rational-ℚ⁺ x)))
 ```
 
 ### The positive difference of strictly inequal positive rational numbers
@@ -535,114 +549,119 @@ module _
           ( rational-ℚ⁺ y))
         ( ( H)))
 
-  left-diff-law-add-ℚ⁺ : le-diff-ℚ⁺ +ℚ⁺ x ＝ y
-  left-diff-law-add-ℚ⁺ =
-    eq-ℚ⁺
-      ( ( associative-add-ℚ
-          ( rational-ℚ⁺ y)
-          ( neg-ℚ (rational-ℚ⁺ x))
-          ( rational-ℚ⁺ x)) ∙
-        ( ( ap
-            ( (rational-ℚ⁺ y) +ℚ_)
-            ( left-inverse-law-add-ℚ (rational-ℚ⁺ x))) ∙
-        ( right-unit-law-add-ℚ (rational-ℚ⁺ y))))
+  abstract
+    left-diff-law-add-ℚ⁺ : le-diff-ℚ⁺ +ℚ⁺ x ＝ y
+    left-diff-law-add-ℚ⁺ =
+      eq-ℚ⁺
+        ( ( associative-add-ℚ
+            ( rational-ℚ⁺ y)
+            ( neg-ℚ (rational-ℚ⁺ x))
+            ( rational-ℚ⁺ x)) ∙
+          ( ( ap
+              ( (rational-ℚ⁺ y) +ℚ_)
+              ( left-inverse-law-add-ℚ (rational-ℚ⁺ x))) ∙
+          ( right-unit-law-add-ℚ (rational-ℚ⁺ y))))
 
-  right-diff-law-add-ℚ⁺ : x +ℚ⁺ le-diff-ℚ⁺ ＝ y
-  right-diff-law-add-ℚ⁺ =
-    ( eq-ℚ⁺
-      ( commutative-add-ℚ
-        ( rational-ℚ⁺ x)
-        ( rational-ℚ⁺ le-diff-ℚ⁺))) ∙
-    ( left-diff-law-add-ℚ⁺)
+    right-diff-law-add-ℚ⁺ : x +ℚ⁺ le-diff-ℚ⁺ ＝ y
+    right-diff-law-add-ℚ⁺ =
+      ( eq-ℚ⁺
+        ( commutative-add-ℚ
+          ( rational-ℚ⁺ x)
+          ( rational-ℚ⁺ le-diff-ℚ⁺))) ∙
+      ( left-diff-law-add-ℚ⁺)
 ```
 
 ### Multiplication by a positive rational number preserves strict inequality
 
 ```agda
-preserves-le-left-mul-ℚ⁺ :
-  (p : ℚ⁺) (q r : ℚ) → le-ℚ q r → le-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
-preserves-le-left-mul-ℚ⁺
-  p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
-  q@((q-num , q-denom , _) , _)
-  r@((r-num , r-denom , _) , _)
-  q<r =
-    preserves-le-rational-fraction-ℤ
-      ( mul-fraction-ℤ p (fraction-ℚ q))
-      ( mul-fraction-ℤ p (fraction-ℚ r))
-      ( binary-tr
-        ( le-ℤ)
-        ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( preserves-le-right-mul-positive-ℤ
-          ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos))
-          ( q-num *ℤ r-denom)
-          ( r-num *ℤ q-denom)
-          ( q<r)))
+abstract
+  preserves-le-left-mul-ℚ⁺ :
+    (p : ℚ⁺) (q r : ℚ) → le-ℚ q r →
+    le-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
+  preserves-le-left-mul-ℚ⁺
+    p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
+    q@((q-num , q-denom , _) , _)
+    r@((r-num , r-denom , _) , _)
+    q<r =
+      preserves-le-rational-fraction-ℤ
+        ( mul-fraction-ℤ p (fraction-ℚ q))
+        ( mul-fraction-ℤ p (fraction-ℚ r))
+        ( binary-tr
+          ( le-ℤ)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( preserves-le-right-mul-positive-ℤ
+            ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos))
+            ( q-num *ℤ r-denom)
+            ( r-num *ℤ q-denom)
+            ( q<r)))
 
-preserves-le-right-mul-ℚ⁺ :
-  (p : ℚ⁺) (q r : ℚ) → le-ℚ q r → le-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
-preserves-le-right-mul-ℚ⁺ p⁺@(p , _) q r q<r =
-  binary-tr
-    ( le-ℚ)
-    ( commutative-mul-ℚ p q)
-    ( commutative-mul-ℚ p r)
-    ( preserves-le-left-mul-ℚ⁺ p⁺ q r q<r)
+  preserves-le-right-mul-ℚ⁺ :
+    (p : ℚ⁺) (q r : ℚ) → le-ℚ q r → le-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
+  preserves-le-right-mul-ℚ⁺ p⁺@(p , _) q r q<r =
+    binary-tr
+      ( le-ℚ)
+      ( commutative-mul-ℚ p q)
+      ( commutative-mul-ℚ p r)
+      ( preserves-le-left-mul-ℚ⁺ p⁺ q r q<r)
 ```
 
 ### Multiplication by a positive rational number preserves inequality
 
 ```agda
-preserves-leq-left-mul-ℚ⁺ :
-  (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
-  leq-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
-preserves-leq-left-mul-ℚ⁺
-  p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
-  q@((q-num , q-denom , _) , _)
-  r@((r-num , r-denom , _) , _)
-  q≤r =
-    preserves-leq-rational-fraction-ℤ
-      ( mul-fraction-ℤ p (fraction-ℚ q))
-      ( mul-fraction-ℤ p (fraction-ℚ r))
-      ( binary-tr
-        ( leq-ℤ)
-        ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( preserves-leq-right-mul-nonnegative-ℤ
-          ( nonnegative-positive-ℤ
-            ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos)))
-          ( q-num *ℤ r-denom)
-          ( r-num *ℤ q-denom)
-          ( q≤r)))
+abstract
+  preserves-leq-left-mul-ℚ⁺ :
+    (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
+    leq-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
+  preserves-leq-left-mul-ℚ⁺
+    p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
+    q@((q-num , q-denom , _) , _)
+    r@((r-num , r-denom , _) , _)
+    q≤r =
+      preserves-leq-rational-fraction-ℤ
+        ( mul-fraction-ℤ p (fraction-ℚ q))
+        ( mul-fraction-ℤ p (fraction-ℚ r))
+        ( binary-tr
+          ( leq-ℤ)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( preserves-leq-right-mul-nonnegative-ℤ
+            ( nonnegative-positive-ℤ
+              ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos)))
+            ( q-num *ℤ r-denom)
+            ( r-num *ℤ q-denom)
+            ( q≤r)))
 
-preserves-leq-right-mul-ℚ⁺ :
-  (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
-  leq-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
-preserves-leq-right-mul-ℚ⁺ p q r q≤r =
-  binary-tr
-    ( leq-ℚ)
-    ( commutative-mul-ℚ (rational-ℚ⁺ p) q)
-    ( commutative-mul-ℚ (rational-ℚ⁺ p) r)
-    ( preserves-leq-left-mul-ℚ⁺ p q r q≤r)
+  preserves-leq-right-mul-ℚ⁺ :
+    (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
+    leq-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
+  preserves-leq-right-mul-ℚ⁺ p q r q≤r =
+    binary-tr
+      ( leq-ℚ)
+      ( commutative-mul-ℚ (rational-ℚ⁺ p) q)
+      ( commutative-mul-ℚ (rational-ℚ⁺ p) r)
+      ( preserves-leq-left-mul-ℚ⁺ p q r q≤r)
 ```
 
 ### Multiplication of a positive rational by another positive rational less than 1 is a strictly deflationary map
 
 ```agda
-le-left-mul-less-than-one-ℚ⁺ :
-  (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (p *ℚ⁺ q) q
-le-left-mul-less-than-one-ℚ⁺ p p<1 q =
-  tr
-    ( le-ℚ⁺ ( p *ℚ⁺ q))
-    ( left-unit-law-mul-ℚ⁺ q)
-    ( preserves-le-right-mul-ℚ⁺ q (rational-ℚ⁺ p) one-ℚ p<1)
+abstract
+  le-left-mul-less-than-one-ℚ⁺ :
+    (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (p *ℚ⁺ q) q
+  le-left-mul-less-than-one-ℚ⁺ p p<1 q =
+    tr
+      ( le-ℚ⁺ ( p *ℚ⁺ q))
+      ( left-unit-law-mul-ℚ⁺ q)
+      ( preserves-le-right-mul-ℚ⁺ q (rational-ℚ⁺ p) one-ℚ p<1)
 
-le-right-mul-less-than-one-ℚ⁺ :
-  (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (q *ℚ⁺ p) q
-le-right-mul-less-than-one-ℚ⁺ p p<1 q =
-  tr
-    ( λ r → le-ℚ⁺ r q)
-    ( commutative-mul-ℚ⁺ p q)
-    ( le-left-mul-less-than-one-ℚ⁺ p p<1 q)
+  le-right-mul-less-than-one-ℚ⁺ :
+    (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (q *ℚ⁺ p) q
+  le-right-mul-less-than-one-ℚ⁺ p p<1 q =
+    tr
+      ( λ r → le-ℚ⁺ r q)
+      ( commutative-mul-ℚ⁺ p q)
+      ( le-left-mul-less-than-one-ℚ⁺ p p<1 q)
 ```
 
 ### The positive mediant between zero and a positive rational number
@@ -796,44 +815,46 @@ abstract
 ### Addition with a positive rational number is an increasing map
 
 ```agda
-le-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x ((rational-ℚ⁺ d) +ℚ x)
-le-left-add-rational-ℚ⁺ x d =
-  concatenate-leq-le-ℚ
-    ( x)
-    ( zero-ℚ +ℚ x)
-    ( (rational-ℚ⁺ d) +ℚ x)
-    ( inv-tr (leq-ℚ x) (left-unit-law-add-ℚ x) (refl-leq-ℚ x))
-    ( preserves-le-left-add-ℚ
+abstract
+  le-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x ((rational-ℚ⁺ d) +ℚ x)
+  le-left-add-rational-ℚ⁺ x d =
+    concatenate-leq-le-ℚ
       ( x)
-      ( zero-ℚ)
-      ( rational-ℚ⁺ d)
-      ( le-zero-is-positive-ℚ
+      ( zero-ℚ +ℚ x)
+      ( (rational-ℚ⁺ d) +ℚ x)
+      ( inv-tr (leq-ℚ x) (left-unit-law-add-ℚ x) (refl-leq-ℚ x))
+      ( preserves-le-left-add-ℚ
+        ( x)
+        ( zero-ℚ)
         ( rational-ℚ⁺ d)
-        ( is-positive-rational-ℚ⁺ d)))
+        ( le-zero-is-positive-ℚ
+          ( rational-ℚ⁺ d)
+          ( is-positive-rational-ℚ⁺ d)))
 
-le-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x (x +ℚ (rational-ℚ⁺ d))
-le-right-add-rational-ℚ⁺ x d =
-  inv-tr
-    ( le-ℚ x)
-    ( commutative-add-ℚ x (rational-ℚ⁺ d))
-    ( le-left-add-rational-ℚ⁺ x d)
+  le-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x (x +ℚ (rational-ℚ⁺ d))
+  le-right-add-rational-ℚ⁺ x d =
+    inv-tr
+      ( le-ℚ x)
+      ( commutative-add-ℚ x (rational-ℚ⁺ d))
+      ( le-left-add-rational-ℚ⁺ x d)
 ```
 
 ### Subtraction by a positive rational number is a strictly deflationary map
 
 ```agda
-le-diff-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ (x -ℚ rational-ℚ⁺ d) x
-le-diff-rational-ℚ⁺ x d =
-  tr
-    ( le-ℚ (x -ℚ rational-ℚ⁺ d))
-    ( equational-reasoning
-      (x -ℚ rational-ℚ⁺ d) +ℚ rational-ℚ⁺ d
-      ＝ x +ℚ (neg-ℚ (rational-ℚ⁺ d) +ℚ rational-ℚ⁺ d)
-        by associative-add-ℚ x (neg-ℚ (rational-ℚ⁺ d)) (rational-ℚ⁺ d)
-      ＝ x +ℚ zero-ℚ
-        by ap (x +ℚ_) (left-inverse-law-add-ℚ (rational-ℚ⁺ d))
-      ＝ x by right-unit-law-add-ℚ x)
-    ( le-right-add-rational-ℚ⁺ (x -ℚ rational-ℚ⁺ d) d)
+abstract
+  le-diff-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ (x -ℚ rational-ℚ⁺ d) x
+  le-diff-rational-ℚ⁺ x d =
+    tr
+      ( le-ℚ (x -ℚ rational-ℚ⁺ d))
+      ( equational-reasoning
+        (x -ℚ rational-ℚ⁺ d) +ℚ rational-ℚ⁺ d
+        ＝ x +ℚ (neg-ℚ (rational-ℚ⁺ d) +ℚ rational-ℚ⁺ d)
+          by associative-add-ℚ x (neg-ℚ (rational-ℚ⁺ d)) (rational-ℚ⁺ d)
+        ＝ x +ℚ zero-ℚ
+          by ap (x +ℚ_) (left-inverse-law-add-ℚ (rational-ℚ⁺ d))
+        ＝ x by right-unit-law-add-ℚ x)
+      ( le-right-add-rational-ℚ⁺ (x -ℚ rational-ℚ⁺ d) d)
 ```
 
 ### Characterization of inequality on the rational numbers by the additive action of `ℚ⁺`
