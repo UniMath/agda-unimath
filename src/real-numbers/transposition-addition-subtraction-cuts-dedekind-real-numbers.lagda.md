@@ -35,8 +35,9 @@ Transposition laws for [addition](real-numbers.addition-real-numbers.md) and
 [subtraction](real-numbers.difference-real-numbers.md) on the cuts of
 [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) include:
 
-* `p + q` is in the lower cut of `x` [iff](foundation.logical-equivalences.md) `p` is in the lower cut of `x - q`
-* `p - q` is in the lower cut of `x` iff `p` is in the lower cut of `x + q`
+- `p + q` is in the lower cut of `x` [iff](foundation.logical-equivalences.md)
+  `p` is in the lower cut of `x - q`
+- `p - q` is in the lower cut of `x` iff `p` is in the lower cut of `x + q`
 
 These laws follow from the more general transposition laws for addition and
 subtraction on real numbers with respect to
