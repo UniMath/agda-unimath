@@ -9,34 +9,30 @@ module real-numbers.distance-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.propositional-truncations
-open import foundation.empty-types
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.rational-real-numbers
-open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
-open import real-numbers.difference-real-numbers
-open import real-numbers.metric-space-of-real-numbers
-open import real-numbers.absolute-value-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers
 ```
 
@@ -63,6 +59,15 @@ abstract
     {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → dist-ℝ x y ＝ dist-ℝ y x
   commutative-dist-ℝ x y =
     inv (abs-neg-ℝ _) ∙ ap abs-ℝ (distributive-neg-diff-ℝ x y)
+```
+
+### Distances are nonnegative
+
+```agda
+abstract
+  is-nonnegative-dist-ℝ :
+    {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → is-nonnegative-ℝ (dist-ℝ x y)
+  is-nonnegative-dist-ℝ _ _ = is-nonnegative-abs-ℝ _
 ```
 
 ### Relationship to the metric space of real numbers
@@ -92,6 +97,7 @@ opaque
               ( q -ℚ d)
               ( inv-tr (is-in-lower-cut-ℝ x) (is-section-diff-ℚ d q) q<x))))
 
+abstract
   reversed-diff-bound-neighborhood-leq-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
     is-in-neighborhood-leq-ℝ l d x y →
@@ -99,11 +105,11 @@ opaque
   reversed-diff-bound-neighborhood-leq-ℝ d x y H =
     diff-bound-neighborhood-leq-ℝ d y x (is-symmetric-premetric-leq-ℝ d x y H)
 
-  leq-dist-neighborhood-leq-ℝ :
+  leq-dist-neighborhood-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
     is-in-neighborhood-leq-ℝ l d x y →
     leq-ℝ (dist-ℝ x y) (real-ℚ (rational-ℚ⁺ d))
-  leq-dist-neighborhood-leq-ℝ d⁺@(d , _) x y H =
+  leq-dist-neighborhood-ℝ d⁺@(d , _) x y H =
     leq-abs-leq-leq-neg-ℝ
       ( x -ℝ y)
       ( real-ℚ d)
@@ -113,11 +119,11 @@ opaque
         ( distributive-neg-diff-ℝ _ _)
         ( reversed-diff-bound-neighborhood-leq-ℝ d⁺ x y H))
 
-  lower-neighborhood-leq-diff-bound-ℝ :
+  lower-neighborhood-leq-diff-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
     leq-ℝ (x -ℝ y) (real-ℚ (rational-ℚ⁺ d)) →
     is-in-lower-neighborhood-leq-ℝ d y x
-  lower-neighborhood-leq-diff-bound-ℝ d⁺@(d , _) x y x-y≤d q q+d<x =
+  lower-neighborhood-leq-diff-ℝ d⁺@(d , _) x y x-y≤d q q+d<x =
     is-in-lower-cut-le-real-ℚ
       ( q)
       ( y)
@@ -131,12 +137,12 @@ opaque
           ( transpose-add-is-in-lower-cut-ℝ x q d q+d<x))
         ( swap-right-diff-leq-ℝ x y (real-ℚ d) x-y≤d))
 
-  neighborhood-dist-bound-ℝ :
+  neighborhood-leq-dist-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
     leq-ℝ (dist-ℝ x y) (real-ℚ (rational-ℚ⁺ d)) →
     is-in-neighborhood-leq-ℝ l d x y
-  neighborhood-dist-bound-ℝ d⁺@(d , _) x y |x-y|≤d =
-    ( lower-neighborhood-leq-diff-bound-ℝ
+  neighborhood-leq-dist-ℝ d⁺@(d , _) x y |x-y|≤d =
+    ( lower-neighborhood-leq-diff-ℝ
       ( d⁺)
       ( y)
       ( x)
@@ -149,7 +155,7 @@ opaque
           ( real-ℚ d)
           ( |x-y|≤d)
           ( neg-leq-abs-ℝ _))) ,
-      lower-neighborhood-leq-diff-bound-ℝ
+      lower-neighborhood-leq-diff-ℝ
       ( d⁺)
       ( x)
       ( y)
@@ -159,6 +165,14 @@ opaque
         ( real-ℚ d)
         ( |x-y|≤d)
         ( leq-abs-ℝ _)))
+
+  neighborhood-iff-leq-dist-ℝ :
+    {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
+    is-in-neighborhood-leq-ℝ l d x y ↔
+    leq-ℝ (dist-ℝ x y) (real-ℚ (rational-ℚ⁺ d))
+  neighborhood-iff-leq-dist-ℝ d x y =
+    ( leq-dist-neighborhood-ℝ d x y ,
+      neighborhood-leq-dist-ℝ d x y)
 ```
 
 ### Triangle inequality

@@ -34,6 +34,7 @@ open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.similarity-of-elements-large-posets
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -45,7 +46,6 @@ open import real-numbers.negation-lower-upper-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
-open import order-theory.similarity-of-elements-large-posets
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
@@ -157,7 +157,8 @@ opaque
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → leq-ℝ x y → leq-ℝ y x → sim-ℝ x y
   sim-antisymmetric-leq-ℝ _ _ = pair
 
-  antisymmetric-leq-ℝ : {l : Level} → (x y : ℝ l) → leq-ℝ x y → leq-ℝ y x → x ＝ y
+  antisymmetric-leq-ℝ :
+    {l : Level} → (x y : ℝ l) → leq-ℝ x y → leq-ℝ y x → x ＝ y
   antisymmetric-leq-ℝ x y x≤y y≤x =
     eq-sim-ℝ (sim-antisymmetric-leq-ℝ x y x≤y y≤x)
 ```
