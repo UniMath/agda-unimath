@@ -39,20 +39,20 @@ open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
 open import metric-spaces.metric-spaces
 
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.distance-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
-open import real-numbers.absolute-value-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.distance-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
-open import real-numbers.inequality-real-numbers
 ```
 
 </details>
