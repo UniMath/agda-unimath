@@ -23,7 +23,7 @@ open import foundation.universe-levels
 A {{concept "subsequence" Agda=subsequence}} of a
 [sequence](foundation.sequences.md) `u : ℕ → A` is a sequence `u ∘ f` for some
 [strictly increasing](elementary-number-theory.strictly-increasing-sequences-natural-numbers.md)
-map `f : ℕ → ℕ`.
+sequence `f : ℕ → ℕ`.
 
 ## Definitions
 
