@@ -45,11 +45,14 @@ open import real-numbers.difference-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.distance-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.inequality-real-numbers
 ```
 
 </details>
@@ -443,60 +446,72 @@ module _
       ε+θ'+θ''=ε+θ =
         associative-add-ℚ _ _ _ ∙
         ap (ε +ℚ_) (ap rational-ℚ⁺ (eq-add-split-ℚ⁺ θ⁺))
+      ε+θ = real-ℚ (ε +ℚ θ)
+      ε+θ' = real-ℚ (ε +ℚ θ')
     in do
       ( r , xε+ε+θ'<r , r<xε+ε+θ) ←
         tr
-          ( le-ℝ (xε +ℝ real-ℚ (ε +ℚ θ')))
+          ( le-ℝ (xε +ℝ ε+θ'))
           ( associative-add-ℝ _ _ _ ∙
             ap ( xε +ℝ_) (add-real-ℚ _ _ ∙ ap real-ℚ ε+θ'+θ''=ε+θ))
           ( le-left-add-real-ℝ⁺
-            ( xε +ℝ (real-ℚ (ε +ℚ θ')))
+            ( xε +ℝ ε+θ')
             ( positive-real-ℚ⁺ θ''⁺))
       ( q , xε-ε-θ<q , q<xε-ε-θ') ←
         tr
-          ( λ y → le-ℝ y (xε -ℝ real-ℚ (ε +ℚ θ')))
+          ( λ y → le-ℝ y (xε -ℝ ε+θ'))
           ( associative-add-ℝ _ _ _ ∙
             ap
               ( xε +ℝ_)
               ( inv (distributive-neg-add-ℝ _ _) ∙
                 ap neg-ℝ (add-real-ℚ _ _ ∙ ap real-ℚ ε+θ'+θ''=ε+θ)))
-          ( le-diff-real-ℝ⁺ (xε -ℝ real-ℚ (ε +ℚ θ')) (positive-real-ℚ⁺ θ''⁺))
-      neighborhood-real-bound-each-leq-ℝ
+          ( le-diff-real-ℝ⁺ (xε -ℝ ε+θ') (positive-real-ℚ⁺ θ''⁺))
+      neighborhood-leq-dist-ℝ
         ( ε⁺ +ℚ⁺ θ⁺)
         ( xε)
         ( lim)
-        ( leq-le-ℝ
-          ( xε)
-          ( lim +ℝ real-ℚ (ε +ℚ θ))
-          ( le-transpose-left-diff-ℝ
+        ( leq-dist-leq-diff-ℝ
+          ( _)
+          ( _)
+          ( ε+θ)
+          ( swap-right-diff-leq-ℝ
             ( xε)
-            ( real-ℚ (ε +ℚ θ))
+            ( ε+θ)
             ( lim)
-            ( transitive-le-ℝ
-              ( xε -ℝ real-ℚ (ε +ℚ θ))
-              ( real-ℚ q)
-              ( lim)
-              ( le-real-is-in-lower-cut-ℚ
-                ( q)
-                ( lim)
-                ( intro-exists
-                  ( ε⁺ , θ'⁺)
-                  ( transpose-is-in-lower-cut-diff-ℝ xε (ε +ℚ θ') q q<xε-ε-θ')))
-              ( le-real-is-in-upper-cut-ℚ q (xε -ℝ real-ℚ (ε +ℚ θ)) xε-ε-θ<q))))
-        ( leq-le-ℝ
-          ( lim)
-          ( xε +ℝ real-ℚ (ε +ℚ θ))
-          ( transitive-le-ℝ
-            ( lim)
-            ( real-ℚ r)
-            ( xε +ℝ real-ℚ (ε +ℚ θ))
-            ( le-real-is-in-lower-cut-ℚ r (xε +ℝ real-ℚ (ε +ℚ θ)) r<xε+ε+θ)
-            ( le-real-is-in-upper-cut-ℚ
-              ( r)
+            ( leq-le-ℝ
+              ( xε -ℝ ε+θ)
               ( lim)
               ( intro-exists
-                ( ε⁺ , θ'⁺)
-                ( transpose-is-in-upper-cut-add-ℝ xε (ε +ℚ θ') r xε+ε+θ'<r)))))
+                ( q)
+                ( xε-ε-θ<q ,
+                  intro-exists
+                    ( ε⁺ , θ'⁺)
+                    ( transpose-is-in-lower-cut-diff-ℝ
+                      ( xε)
+                      ( ε +ℚ θ')
+                      ( q)
+                      ( q<xε-ε-θ'))))))
+          ( swap-right-diff-leq-ℝ
+            ( lim)
+            ( real-ℚ (ε +ℚ θ))
+            ( xε)
+            ( leq-transpose-right-add-ℝ
+              ( lim)
+              ( xε)
+              ( ε+θ)
+              ( leq-le-ℝ
+                ( lim)
+                ( xε +ℝ ε+θ)
+                ( intro-exists
+                  ( r)
+                  ( intro-exists
+                    ( ε⁺ , θ'⁺)
+                    ( transpose-is-in-upper-cut-add-ℝ
+                      ( xε)
+                      ( ε +ℚ θ')
+                      ( r)
+                      ( xε+ε+θ'<r)) ,
+                    r<xε+ε+θ))))))
 
   is-convergent-cauchy-approximation-leq-ℝ :
     is-convergent-cauchy-approximation-Metric-Space

@@ -196,3 +196,20 @@ abstract
               ( cancel-right-diff-add-ℝ x y)))
       ( triangle-inequality-abs-ℝ (x -ℝ y) (y -ℝ z))
 ```
+
+### Bounding distances
+
+```agda
+abstract
+  leq-dist-leq-diff-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    leq-ℝ (x -ℝ y) z →
+    leq-ℝ (y -ℝ x) z →
+    leq-ℝ (dist-ℝ x y) z
+  leq-dist-leq-diff-ℝ x y z x-y≤z y-x≤z =
+    leq-abs-leq-leq-neg-ℝ
+      ( _)
+      ( z)
+      ( x-y≤z)
+      ( inv-tr (λ w → leq-ℝ w z) (distributive-neg-diff-ℝ _ _) y-x≤z)
+```
