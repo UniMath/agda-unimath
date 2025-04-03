@@ -355,6 +355,13 @@ preserves-leq-add-ℚ {a} {b} {c} {d} H K =
     ( preserves-leq-left-add-ℚ c a b H)
 ```
 
+### Negation of rational numbers reverses inequality
+
+```agda
+neg-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ (neg-ℚ y) (neg-ℚ x)
+neg-leq-ℚ x y = neg-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
+```
+
 ### Transposing additions on inequalities of rational numbers
 
 ```agda
@@ -413,13 +420,6 @@ pr2 (leq-iff-transpose-left-add-ℚ x y z) = leq-transpose-right-diff-ℚ x z y
 leq-iff-transpose-left-diff-ℚ : (x y z : ℚ) → x -ℚ y ≤-ℚ z ↔ x ≤-ℚ z +ℚ y
 pr1 (leq-iff-transpose-left-diff-ℚ x y z) = leq-transpose-left-diff-ℚ x y z
 pr2 (leq-iff-transpose-left-diff-ℚ x y z) = leq-transpose-right-add-ℚ x z y
-```
-
-### Negation of rational numbers reverses inequality
-
-```agda
-neg-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ (neg-ℚ y) (neg-ℚ x)
-neg-leq-ℚ x y = neg-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
 ```
 
 ## See also
