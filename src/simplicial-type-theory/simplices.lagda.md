@@ -29,6 +29,7 @@ open import order-theory.bounded-total-orders
 Goals
 
 Formalize
+
 - is-segal
 - comp-is-segal
 - witness-comp-is-segal
@@ -49,6 +50,7 @@ module simplex
 
   Δ : ℕ → UU l1
   last : (n : ℕ) → Δ (n +ℕ 1) → type-Bounded-Total-Order I
+  initial : (n : ℕ) → Δ (n +ℕ 2) → Δ (n +ℕ 1)
 
   Δ zero-ℕ = raise-unit l1
   Δ (succ-ℕ zero-ℕ) = type-Bounded-Total-Order I
@@ -59,6 +61,8 @@ module simplex
 
   last zero-ℕ i = i
   last (succ-ℕ n) ((x , j) , H) = j
+
+  initial n ((x , j) , H) = x
 
   eq-Δ-succ-ℕ :
     {n : ℕ} (u v : Δ (succ-ℕ (succ-ℕ n))) →
@@ -104,4 +108,18 @@ module simplex
     (i : Δ 0) → d11 (d01 i) ＝ d12 (d01 i)
   identity-d11-d01 (map-raise star) =
     eq-Δ-succ-ℕ _ _ refl refl
+
+  s00 : Δ 1 → Δ 0
+  s00 i = map-raise star
+
+  s10 : Δ 2 → Δ 1
+  s10 ((x , j) , H) = j
+
+  s11 : Δ 2 → Δ 1
+  s11 p = initial _ p
+
+  identity-s00-s10 :
+    (p : Δ 2) → s00 (s10 p) ＝ s00 (s11 p)
+  identity-s00-s10 ((_ , _) , _) = refl
+
 ```
