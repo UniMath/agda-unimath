@@ -73,9 +73,7 @@ abstract
 ### Relationship to the metric space of real numbers
 
 ```agda
-opaque
-  unfolding add-ℝ
-
+abstract
   diff-bound-neighborhood-leq-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
     is-in-neighborhood-leq-ℝ l d x y →
@@ -97,7 +95,6 @@ opaque
               ( q -ℚ d)
               ( inv-tr (is-in-lower-cut-ℝ x) (is-section-diff-ℚ d q) q<x))))
 
-abstract
   reversed-diff-bound-neighborhood-leq-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
     is-in-neighborhood-leq-ℝ l d x y →
