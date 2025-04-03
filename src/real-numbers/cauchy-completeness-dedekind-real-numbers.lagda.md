@@ -366,18 +366,15 @@ module _
         ( upper-real-lim-cauchy-approximation-leq-ℝ)
     is-located-lower-upper-cut-lim-cauchy-approximation-leq-ℝ p q p<q =
       let
-        open
-          do-syntax-trunc-Prop
-            ( lower-cut-lim-cauchy-approximation-leq-ℝ p ∨
-              upper-cut-lim-cauchy-approximation-leq-ℝ q)
-      in do
-        ε'⁺@(ε' , _) , 2ε'⁺<q-p ← double-le-ℚ⁺ (positive-diff-le-ℚ p q p<q)
-        ε⁺@(ε , _) , 2ε⁺<ε'⁺ ← double-le-ℚ⁺ ε'⁺
-        let
-          2ε' = ε' +ℚ ε'
-          2ε = ε +ℚ ε
-          4ε = 2ε +ℚ 2ε
-          xε = map-cauchy-approximation-leq-ℝ x ε⁺
+        ε'⁺@(ε' , _) , 2ε'⁺<q-p =
+          bound-double-le-ℚ⁺ (positive-diff-le-ℚ p q p<q)
+        ε⁺@(ε , _) , 2ε⁺<ε'⁺ =
+          bound-double-le-ℚ⁺ ε'⁺
+        2ε' = ε' +ℚ ε'
+        2ε = ε +ℚ ε
+        4ε = 2ε +ℚ 2ε
+        xε = map-cauchy-approximation-leq-ℝ x ε⁺
+      in
         map-disjunction
           ( lower-cut-ℝ xε (p +ℚ 2ε))
           ( lower-cut-lim-cauchy-approximation-leq-ℝ p)
