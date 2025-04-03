@@ -83,6 +83,13 @@ module _
 
 ## Properties
 
+### The identity is strictly increasing
+
+```agda
+strictly-increasing-id-ℕ : strictly-increasing-sequence-ℕ
+strictly-increasing-id-ℕ = id , λ i j H → H
+```
+
 ### Composition of strictly increasing sequences of natural numbers
 
 ```agda
