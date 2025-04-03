@@ -143,7 +143,7 @@ opaque
       ( tr
         ( λ z → leq-ℝ z (real-ℚ d))
         ( distributive-neg-diff-ℝ _ _)
-        ( transitive-leq-ℝ -- TODO : lemma this
+        ( transitive-leq-ℝ
           ( neg-ℝ (x -ℝ y))
           ( abs-ℝ (x -ℝ y))
           ( real-ℚ d)
@@ -153,7 +153,7 @@ opaque
       ( d⁺)
       ( x)
       ( y)
-      ( transitive-leq-ℝ -- TODO: lemma this
+      ( transitive-leq-ℝ
         ( x -ℝ y)
         ( abs-ℝ (x -ℝ y))
         ( real-ℚ d)
