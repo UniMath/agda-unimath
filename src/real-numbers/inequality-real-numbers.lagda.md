@@ -34,6 +34,7 @@ open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.similarity-of-elements-large-posets
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -132,19 +133,34 @@ module _
 ### Inequality on the real numbers is reflexive
 
 ```agda
-refl-leq-ℝ : {l : Level} → (x : ℝ l) → leq-ℝ x x
-refl-leq-ℝ x = refl-leq-Large-Preorder lower-ℝ-Large-Preorder (lower-real-ℝ x)
+abstract
+  refl-leq-ℝ : {l : Level} → (x : ℝ l) → leq-ℝ x x
+  refl-leq-ℝ x = refl-leq-Large-Preorder lower-ℝ-Large-Preorder (lower-real-ℝ x)
+
+  leq-eq-ℝ : {l : Level} → (x y : ℝ l) → x ＝ y → leq-ℝ x y
+  leq-eq-ℝ x y x=y = tr (leq-ℝ x) x=y (refl-leq-ℝ x)
+
+opaque
+  unfolding sim-ℝ
+
+  leq-sim-ℝ : {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → sim-ℝ x y → leq-ℝ x y
+  leq-sim-ℝ _ _ = pr1
 ```
 
 ### Inequality on the real numbers is antisymmetric
 
 ```agda
-antisymmetric-leq-ℝ : {l : Level} → (x y : ℝ l) → leq-ℝ x y → leq-ℝ y x → x ＝ y
-antisymmetric-leq-ℝ x y x≤y y≤x =
-  eq-eq-lower-cut-ℝ
-    ( x)
-    ( y)
-    ( antisymmetric-leq-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) x≤y y≤x)
+opaque
+  unfolding sim-ℝ
+
+  sim-antisymmetric-leq-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → leq-ℝ x y → leq-ℝ y x → sim-ℝ x y
+  sim-antisymmetric-leq-ℝ _ _ = pair
+
+  antisymmetric-leq-ℝ :
+    {l : Level} → (x y : ℝ l) → leq-ℝ x y → leq-ℝ y x → x ＝ y
+  antisymmetric-leq-ℝ x y x≤y y≤x =
+    eq-sim-ℝ (sim-antisymmetric-leq-ℝ x y x≤y y≤x)
 ```
 
 ### Inequality on the real numbers is transitive
@@ -178,6 +194,28 @@ transitive-leq-Large-Preorder ℝ-Large-Preorder = transitive-leq-ℝ
 ℝ-Large-Poset : Large-Poset lsuc _⊔_
 large-preorder-Large-Poset ℝ-Large-Poset = ℝ-Large-Preorder
 antisymmetric-leq-Large-Poset ℝ-Large-Poset = antisymmetric-leq-ℝ
+```
+
+### Similarity in the large poset of real numbers is equivalent to similarity
+
+```agda
+opaque
+  unfolding sim-ℝ
+
+  sim-sim-leq-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+    sim-Large-Poset ℝ-Large-Poset x y → sim-ℝ x y
+  sim-sim-leq-ℝ = id
+
+  sim-leq-sim-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+    sim-ℝ x y → sim-Large-Poset ℝ-Large-Poset x y
+  sim-leq-sim-ℝ = id
+
+  sim-iff-sim-leq-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+    sim-ℝ x y ↔ sim-Large-Poset ℝ-Large-Poset x y
+  sim-iff-sim-leq-ℝ = id-iff
 ```
 
 ### The partially ordered set of reals at a specific level
@@ -253,7 +291,9 @@ module _
   {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
   where
 
-  abstract
+  opaque
+    unfolding add-ℝ
+
     preserves-leq-right-add-ℝ : leq-ℝ x y → leq-ℝ (x +ℝ z) (y +ℝ z)
     preserves-leq-right-add-ℝ x≤y _ =
       map-tot-exists (λ (qx , _) → map-product (x≤y qx) id)
@@ -298,6 +338,18 @@ module _
   iff-translate-left-leq-ℝ : leq-ℝ x y ↔ leq-ℝ (z +ℝ x) (z +ℝ y)
   pr1 iff-translate-left-leq-ℝ = preserves-leq-left-add-ℝ z x y
   pr2 iff-translate-left-leq-ℝ = reflects-leq-left-add-ℝ z x y
+
+abstract
+  preserves-leq-add-ℝ :
+    {l1 l2 l3 l4 : Level} (a : ℝ l1) (b : ℝ l2) (c : ℝ l3) (d : ℝ l4) →
+    leq-ℝ a b → leq-ℝ c d → leq-ℝ (a +ℝ c) (b +ℝ d)
+  preserves-leq-add-ℝ a b c d a≤b c≤d =
+    transitive-leq-ℝ
+      ( a +ℝ c)
+      ( a +ℝ d)
+      ( b +ℝ d)
+      ( preserves-leq-right-add-ℝ d a b a≤b)
+      ( preserves-leq-left-add-ℝ a c d c≤d)
 ```
 
 ### Transposition laws
@@ -343,6 +395,24 @@ module _
         ( y)
         ( cancel-right-diff-add-ℝ y z)
         ( preserves-leq-right-add-ℝ z x (y -ℝ z) x≤y-z)
+```
+
+### Swapping laws
+
+```agda
+abstract
+  swap-right-diff-leq-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    leq-ℝ (x -ℝ y) z → leq-ℝ (x -ℝ z) y
+  swap-right-diff-leq-ℝ x y z x-y≤z =
+    leq-transpose-right-add-ℝ
+      ( x)
+      ( y)
+      ( z)
+      ( tr
+        ( leq-ℝ x)
+        ( commutative-add-ℝ _ _)
+        ( leq-transpose-left-diff-ℝ x y z x-y≤z))
 ```
 
 ## References
