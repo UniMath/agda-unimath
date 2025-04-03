@@ -10,8 +10,8 @@ module ring-theory.linear-maps-modules-rings where
 open import foundation.action-on-identifications-functions
 open import foundation.conjunction
 open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -25,6 +25,14 @@ open import ring-theory.rings
 </details>
 
 ## Idea
+
+A
+{{#concept "linear map" Agda=is-linear-map-left-module-Ring Disambiguation="over modules" WD="linear map" WDID=Q207643 }}
+between [modules](ring-theory.modules-rings.md) is a map `f` with the following
+properties:
+
+- Additivity: `f (a + b) = f a + f b`
+- Homogeneity: `f (c * a) = c * f a`
 
 ## Definition
 
