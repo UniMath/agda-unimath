@@ -53,3 +53,7 @@ module _
     disjoint-subtype B B → is-empty (type-subtype B)
   is-empty-disjoint-subtype-self H (b , b∈B) = H b (b∈B , b∈B)
 ```
+
+## See also
+
+- [Exclusive sums](foundation.exclusive-sum.md)
