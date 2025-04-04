@@ -162,6 +162,21 @@ abstract
     commutative-add-ℚ x (neg-ℚ x) ∙ left-inverse-law-add-ℚ x
 ```
 
+### If `p + q = 0`, then `p = -q`
+
+```agda
+abstract
+  unique-left-neg-ℚ : (p q : ℚ) → p +ℚ q ＝ zero-ℚ → p ＝ neg-ℚ q
+  unique-left-neg-ℚ p q p+q=0 =
+    equational-reasoning
+      p
+      ＝ p +ℚ zero-ℚ by inv (right-unit-law-add-ℚ p)
+      ＝ p +ℚ (q +ℚ neg-ℚ q) by ap (p +ℚ_) (inv (right-inverse-law-add-ℚ q))
+      ＝ (p +ℚ q) +ℚ neg-ℚ q by inv (associative-add-ℚ _ _ _)
+      ＝ zero-ℚ +ℚ neg-ℚ q by ap (_+ℚ neg-ℚ q) p+q=0
+      ＝ neg-ℚ q by left-unit-law-add-ℚ _
+```
+
 ### The negatives of rational numbers distribute over addition
 
 ```agda
@@ -277,13 +292,13 @@ abstract
   succ-rational-ℤ = add-rational-ℤ one-ℤ
 ```
 
-### The rational successor of a natural number is the successor of the natural number
+### The embedding of the successor of a natural number is the successor of its embedding
 
 ```agda
 abstract
-  succ-rational-ℕ : (x : ℕ) → succ-ℚ (rational-ℕ x) ＝ rational-ℕ (succ-ℕ x)
-  succ-rational-ℕ x =
-    succ-rational-ℤ (int-ℕ x) ∙ ap rational-ℤ (succ-int-ℕ x)
+  succ-rational-int-ℕ :
+    (n : ℕ) → succ-ℚ (rational-ℤ (int-ℕ n)) ＝ rational-ℤ (int-ℕ (succ-ℕ n))
+  succ-rational-int-ℕ n = succ-rational-ℤ _ ∙ ap rational-ℤ (succ-int-ℕ n)
 ```
 
 ## See also
