@@ -117,10 +117,7 @@ module _
 ```agda
 module _
   ( f : ℕ → ℕ)
-  ( H :
-    is-strictly-increasing-sequence-Strictly-Preordered-Set
-      ℕ-Strict-Preordered-Set
-      f)
+  ( H : is-strictly-increasing-sequence-ℕ f)
   where
 
   is-unbounded-is-strictly-increasing-sequence-ℕ :
