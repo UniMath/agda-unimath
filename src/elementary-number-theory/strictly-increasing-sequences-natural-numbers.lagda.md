@@ -31,12 +31,11 @@ open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 
 ## Idea
 
-A [sequence](foundation.sequences.md) of
-[natural numbers](elementary-number-theory.natural-numbers.md) is
-{{#concept "strictly increasing" Disambiguation="sequence of natural numbers" Agda=is-strictly-increasing-sequence-ℕ}}
-if it preserves
-[strict inequality](elementary-number-theory.strict-inequality-natural-numbers.md)
-on the natural numbers.
+A
+{{#concept "strictly increasing sequence of natural numbers" Agda=strictly-increasing-sequence-ℕ}}
+is a [sequence](foundation.sequences.md) of
+[natural numbers](elementary-number-theory.natural-numbers.md) that preserves
+[strict inequality](elementary-number-theory.strict-inequality-natural-numbers.md).
 
 Strictly increasing sequences of natural numbers are unbounded.
 
