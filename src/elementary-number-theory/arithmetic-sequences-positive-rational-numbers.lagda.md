@@ -33,6 +33,8 @@ open import foundation.universe-levels
 
 open import group-theory.arithmetic-sequences-semigroups
 open import group-theory.powers-of-elements-monoids
+
+open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 ```
 
 </details>
@@ -210,21 +212,32 @@ module _
 
 ```agda
 module _
-  (u : arithmetic-sequence-ℚ⁺) (n : ℕ)
+  (u : arithmetic-sequence-ℚ⁺)
   where
 
   abstract
-    is-strictly-increasing-arithmetic-sequence-ℚ⁺ :
+    le-succ-seq-arithmetic-sequence-ℚ⁺ :
+      (n : ℕ) →
       le-ℚ⁺
         ( seq-arithmetic-sequence-ℚ⁺ u n)
         ( seq-arithmetic-sequence-ℚ⁺ u (succ-ℕ n))
-    is-strictly-increasing-arithmetic-sequence-ℚ⁺ =
+    le-succ-seq-arithmetic-sequence-ℚ⁺ n =
       inv-tr
         ( le-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
         ( is-common-difference-arithmetic-sequence-ℚ⁺ u n)
         ( le-right-add-rational-ℚ⁺
           ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
           ( common-difference-arithmetic-sequence-ℚ⁺ u))
+
+    is-strictly-increasing-seq-arithmetic-sequence-ℚ⁺ :
+      is-strictly-increasing-sequence-Strictly-Preordered-Set
+        ( ℚ⁺-Strict-Preordered-Set)
+        ( seq-arithmetic-sequence-ℚ⁺ u)
+    is-strictly-increasing-seq-arithmetic-sequence-ℚ⁺ =
+      is-strictly-increasing-is-everywhere-strictly-increasing-sequence-Strictly-Preordered-Set
+        ( ℚ⁺-Strict-Preordered-Set)
+        ( seq-arithmetic-sequence-ℚ⁺ u)
+        ( le-succ-seq-arithmetic-sequence-ℚ⁺)
 ```
 
 ### The terms of an arithmetic sequence of positive rational numbers are greater than or equal to its initial term
@@ -241,7 +254,7 @@ module _
         ( init-term-arithmetic-sequence-ℚ⁺ u)
         ( seq-arithmetic-sequence-ℚ⁺ u n)
     leq-init-arithmetic-sequence-ℚ⁺ zero-ℕ =
-      refl-leq-ℚ ( rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
+      refl-leq-ℚ (rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
     leq-init-arithmetic-sequence-ℚ⁺ (succ-ℕ n) =
       leq-le-ℚ
       { rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u)}
@@ -251,7 +264,7 @@ module _
         ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
         ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u (succ-ℕ n)))
         ( leq-init-arithmetic-sequence-ℚ⁺ n)
-        ( is-strictly-increasing-arithmetic-sequence-ℚ⁺ u n))
+        ( le-succ-seq-arithmetic-sequence-ℚ⁺ u n))
 ```
 
 ### An arithmetic sequence of positive rational numbers has no upper bound
