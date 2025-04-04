@@ -51,6 +51,8 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.groups
+
+open import order-theory.strictly-preordered-sets
 ```
 
 </details>
@@ -134,6 +136,14 @@ module _
         ( fraction-ℚ x)
         ( fraction-ℚ y)
         ( fraction-ℚ z)
+```
+
+### The strictly preordered set of rational numbers ordered by strict inequality
+
+```agda
+ℚ-Strict-Preordered-Set : Strictly-Preordered-Set lzero lzero
+pr1 ℚ-Strict-Preordered-Set = ℚ-Set
+pr2 ℚ-Strict-Preordered-Set = le-ℚ-Prop , irreflexive-le-ℚ , transitive-le-ℚ
 ```
 
 ### Concatenation rules for inequality and strict inequality on the rational numbers

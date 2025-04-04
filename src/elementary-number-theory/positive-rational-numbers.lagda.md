@@ -61,6 +61,8 @@ open import group-theory.semigroups
 open import group-theory.submonoids
 open import group-theory.submonoids-commutative-monoids
 open import group-theory.subsemigroups
+
+open import order-theory.strictly-preordered-sets
 ```
 
 </details>
@@ -147,6 +149,9 @@ abstract
 ```agda
 is-set-ℚ⁺ : is-set ℚ⁺
 is-set-ℚ⁺ = is-set-type-subtype is-positive-prop-ℚ is-set-ℚ
+
+set-ℚ⁺ : Set lzero
+set-ℚ⁺ = ℚ⁺ , is-set-ℚ⁺
 ```
 
 ### The rational image of a positive integer is positive
@@ -371,6 +376,9 @@ pr2 submonoid-mul-ℚ⁺ = is-submonoid-mul-ℚ⁺
 monoid-mul-ℚ⁺ : Monoid lzero
 monoid-mul-ℚ⁺ = monoid-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
 
+semigroup-mul-ℚ⁺ : Semigroup lzero
+semigroup-mul-ℚ⁺ = semigroup-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
+
 commutative-monoid-mul-ℚ⁺ : Commutative-Monoid lzero
 commutative-monoid-mul-ℚ⁺ =
   commutative-monoid-Commutative-Submonoid
@@ -456,6 +464,30 @@ module _
     left-inverse-law-mul-is-positive-ℚ
 ```
 
+### Multiplication on the positive rational numbers distributes over addition
+
+```agda
+module _
+  (x y z : ℚ⁺)
+  where
+
+  left-distributive-mul-add-ℚ⁺ : x *ℚ⁺ (y +ℚ⁺ z) ＝ (x *ℚ⁺ y) +ℚ⁺ (x *ℚ⁺ z)
+  left-distributive-mul-add-ℚ⁺ =
+    eq-ℚ⁺
+      ( left-distributive-mul-add-ℚ
+        ( rational-ℚ⁺ x)
+        ( rational-ℚ⁺ y)
+        ( rational-ℚ⁺ z))
+
+  right-distributive-mul-add-ℚ⁺ : (x +ℚ⁺ y) *ℚ⁺ z ＝ (x *ℚ⁺ z) +ℚ⁺ (y *ℚ⁺ z)
+  right-distributive-mul-add-ℚ⁺ =
+    eq-ℚ⁺
+      ( right-distributive-mul-add-ℚ
+        ( rational-ℚ⁺ x)
+        ( rational-ℚ⁺ y)
+        ( rational-ℚ⁺ z))
+```
+
 ### The strict inequality on positive rational numbers
 
 ```agda
@@ -467,6 +499,13 @@ le-ℚ⁺ x y = type-Prop (le-prop-ℚ⁺ x y)
 
 is-prop-le-ℚ⁺ : (x y : ℚ⁺) → is-prop (le-ℚ⁺ x y)
 is-prop-le-ℚ⁺ x y = is-prop-type-Prop (le-prop-ℚ⁺ x y)
+
+ℚ⁺-Strict-Preordered-Set : Strictly-Preordered-Set lzero lzero
+pr1 ℚ⁺-Strict-Preordered-Set = set-ℚ⁺
+pr2 ℚ⁺-Strict-Preordered-Set =
+  ( le-prop-ℚ⁺) ,
+  ( irreflexive-le-ℚ ∘ rational-ℚ⁺) ,
+  ( λ x y z → transitive-le-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) ( rational-ℚ⁺ z))
 ```
 
 ### The inequality on positive rational numbers
@@ -558,34 +597,39 @@ module _
 ### Multiplication by a positive rational number preserves strict inequality
 
 ```agda
-preserves-le-left-mul-ℚ⁺ :
-  (p : ℚ⁺) (q r : ℚ) → le-ℚ q r → le-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
-preserves-le-left-mul-ℚ⁺
-  p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
-  q@((q-num , q-denom , _) , _)
-  r@((r-num , r-denom , _) , _)
-  q<r =
-    preserves-le-rational-fraction-ℤ
-      ( mul-fraction-ℤ p (fraction-ℚ q))
-      ( mul-fraction-ℤ p (fraction-ℚ r))
-      ( binary-tr
-        ( le-ℤ)
-        ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( preserves-le-right-mul-positive-ℤ
-          ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos))
-          ( q-num *ℤ r-denom)
-          ( r-num *ℤ q-denom)
-          ( q<r)))
+abstract
+  preserves-le-left-mul-ℚ⁺ :
+    (p : ℚ⁺) (q r : ℚ) →
+    le-ℚ q r →
+    le-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
+  preserves-le-left-mul-ℚ⁺
+    p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
+    q@((q-num , q-denom , _) , _)
+    r@((r-num , r-denom , _) , _)
+    q<r =
+      preserves-le-rational-fraction-ℤ
+        ( mul-fraction-ℤ p (fraction-ℚ q))
+        ( mul-fraction-ℤ p (fraction-ℚ r))
+        ( binary-tr
+          ( le-ℤ)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( preserves-le-right-mul-positive-ℤ
+            ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos))
+            ( q-num *ℤ r-denom)
+            ( r-num *ℤ q-denom)
+            ( q<r)))
 
-preserves-le-right-mul-ℚ⁺ :
-  (p : ℚ⁺) (q r : ℚ) → le-ℚ q r → le-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
-preserves-le-right-mul-ℚ⁺ p⁺@(p , _) q r q<r =
-  binary-tr
-    ( le-ℚ)
-    ( commutative-mul-ℚ p q)
-    ( commutative-mul-ℚ p r)
-    ( preserves-le-left-mul-ℚ⁺ p⁺ q r q<r)
+  preserves-le-right-mul-ℚ⁺ :
+    (p : ℚ⁺) (q r : ℚ) →
+    le-ℚ q r →
+    le-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
+  preserves-le-right-mul-ℚ⁺ p⁺@(p , _) q r q<r =
+    binary-tr
+      ( le-ℚ)
+      ( commutative-mul-ℚ p q)
+      ( commutative-mul-ℚ p r)
+      ( preserves-le-left-mul-ℚ⁺ p⁺ q r q<r)
 ```
 
 ### Multiplication by a positive rational number preserves inequality

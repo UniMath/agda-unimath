@@ -9,11 +9,14 @@ module elementary-number-theory.multiplicative-group-of-positive-rational-number
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-integers
 
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -49,7 +52,7 @@ pr2 (inv-ℚ⁺ (x , P)) = is-positive-denominator-ℚ x
 
 ```agda
 group-mul-ℚ⁺ : Group lzero
-pr1 group-mul-ℚ⁺ = semigroup-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
+pr1 group-mul-ℚ⁺ = semigroup-mul-ℚ⁺
 pr1 (pr2 group-mul-ℚ⁺) = is-unital-Monoid monoid-mul-ℚ⁺
 pr1 (pr2 (pr2 group-mul-ℚ⁺)) = inv-ℚ⁺
 pr1 (pr2 (pr2 (pr2 group-mul-ℚ⁺))) x =
@@ -82,4 +85,33 @@ right-inverse-law-mul-ℚ⁺ = right-inverse-law-mul-Group group-mul-ℚ⁺
 abelian-group-mul-ℚ⁺ : Ab lzero
 pr1 abelian-group-mul-ℚ⁺ = group-mul-ℚ⁺
 pr2 abelian-group-mul-ℚ⁺ = commutative-mul-ℚ⁺
+```
+
+### Inversion reverses strict inequality on the positive rational numbers
+
+```agda
+abstract
+  inv-le-ℚ⁺ : (x y : ℚ⁺) → le-ℚ⁺ (inv-ℚ⁺ x) (inv-ℚ⁺ y) → le-ℚ⁺ y x
+  inv-le-ℚ⁺ x y =
+    binary-tr
+      ( le-ℤ)
+      ( commutative-mul-ℤ
+        ( denominator-ℚ⁺ x)
+        ( numerator-ℚ⁺ y))
+      ( commutative-mul-ℤ
+        ( denominator-ℚ⁺ y)
+        ( numerator-ℚ⁺ x))
+```
+
+### Inversion of positive rational numbers commutes with multiplication
+
+```agda
+abstract
+  inv-mul-ℚ⁺ : (x y : ℚ⁺) → inv-ℚ⁺ (x *ℚ⁺ y) ＝ inv-ℚ⁺ x *ℚ⁺ inv-ℚ⁺ y
+  inv-mul-ℚ⁺ x y =
+    distributive-inv-mul-Group'
+      ( group-mul-ℚ⁺)
+      ( x)
+      ( y)
+      ( commutative-mul-ℚ⁺ x y)
 ```
