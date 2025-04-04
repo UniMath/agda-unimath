@@ -110,12 +110,14 @@ open import foundation.decidable-maps public
 open import foundation.decidable-propositions public
 open import foundation.decidable-relations public
 open import foundation.decidable-subtypes public
+open import foundation.decidable-type-families public
 open import foundation.decidable-types public
 open import foundation.dependent-binary-homotopies public
 open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-epimorphisms public
 open import foundation.dependent-epimorphisms-with-respect-to-truncated-types public
 open import foundation.dependent-function-types public
+open import foundation.dependent-function-types-with-apartness-relations public
 open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
@@ -144,6 +146,8 @@ open import foundation.disjoint-subtypes public
 open import foundation.disjunction public
 open import foundation.double-arrows public
 open import foundation.double-negation public
+open import foundation.double-negation-dense-equality-maps public
+open import foundation.double-negation-images public
 open import foundation.double-negation-modality public
 open import foundation.double-negation-stable-equality public
 open import foundation.double-negation-stable-propositions public
@@ -199,6 +203,7 @@ open import foundation.fixed-points-endofunctions public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
 open import foundation.function-types public
+open import foundation.function-types-with-apartness-relations public
 open import foundation.functional-correspondences public
 open import foundation.functoriality-action-on-identifications-functions public
 open import foundation.functoriality-cartesian-product-types public
@@ -222,6 +227,7 @@ open import foundation.global-subuniverses public
 open import foundation.globular-type-of-dependent-functions public
 open import foundation.globular-type-of-functions public
 open import foundation.higher-homotopies-morphisms-arrows public
+open import foundation.hilbert-epsilon-operators-maps public
 open import foundation.hilberts-epsilon-operators public
 open import foundation.homotopies public
 open import foundation.homotopies-morphisms-arrows public
@@ -240,6 +246,7 @@ open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.induction-principle-propositional-truncation public
+open import foundation.inequality-booleans public
 open import foundation.infinitely-coherent-equivalences public
 open import foundation.inhabited-subtypes public
 open import foundation.inhabited-types public
@@ -249,6 +256,7 @@ open import foundation.intersections-subtypes public
 open import foundation.inverse-sequential-diagrams public
 open import foundation.invertible-maps public
 open import foundation.involutions public
+open import foundation.irrefutable-equality public
 open import foundation.irrefutable-propositions public
 open import foundation.isolated-elements public
 open import foundation.isomorphisms-of-sets public
@@ -275,6 +283,7 @@ open import foundation.limited-principle-of-omniscience public
 open import foundation.locale-of-propositions public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
+open import foundation.logical-operations-booleans public
 open import foundation.maps-in-global-subuniverses public
 open import foundation.maps-in-subuniverses public
 open import foundation.maybe public
@@ -454,6 +463,9 @@ open import foundation.type-arithmetic-standard-pullbacks public
 open import foundation.type-arithmetic-unit-type public
 open import foundation.type-duality public
 open import foundation.type-theoretic-principle-of-choice public
+open import foundation.types-with-decidable-dependent-pair-types public
+open import foundation.types-with-decidable-dependent-product-types public
+open import foundation.types-with-decidable-universal-quantification public
 open import foundation.uniformly-decidable-type-families public
 open import foundation.unions-subtypes public
 open import foundation.uniqueness-image public
