@@ -61,6 +61,8 @@ open import group-theory.semigroups
 open import group-theory.submonoids
 open import group-theory.submonoids-commutative-monoids
 open import group-theory.subsemigroups
+
+open import order-theory.strictly-preordered-sets
 ```
 
 </details>
@@ -497,6 +499,13 @@ le-ℚ⁺ x y = type-Prop (le-prop-ℚ⁺ x y)
 
 is-prop-le-ℚ⁺ : (x y : ℚ⁺) → is-prop (le-ℚ⁺ x y)
 is-prop-le-ℚ⁺ x y = is-prop-type-Prop (le-prop-ℚ⁺ x y)
+
+ℚ⁺-Strict-Preordered-Set : Strictly-Preordered-Set lzero lzero
+pr1 ℚ⁺-Strict-Preordered-Set = set-ℚ⁺
+pr2 ℚ⁺-Strict-Preordered-Set =
+  ( le-prop-ℚ⁺) ,
+  ( irreflexive-le-ℚ ∘ rational-ℚ⁺) ,
+  ( λ x y z → transitive-le-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) ( rational-ℚ⁺ z))
 ```
 
 ### The inequality on positive rational numbers
