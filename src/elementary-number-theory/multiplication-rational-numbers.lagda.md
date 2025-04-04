@@ -389,7 +389,7 @@ compute-power-monoid-add-ℚ (succ-ℕ n) p =
   rational-ℕ (succ-ℕ n) *ℚ p
   ＝ (one-ℚ +ℚ (rational-ℕ n)) *ℚ p
     by
-      ap (λ x → x *ℚ p) (inv (succ-rational-ℕ n))
+      ap (λ x → x *ℚ p) (inv (succ-rational-int-ℕ n))
   ＝ (one-ℚ *ℚ p) +ℚ (rational-ℕ n *ℚ p)
     by
       right-distributive-mul-add-ℚ

@@ -169,7 +169,7 @@ module _
         α m q =
           ( ap
             ( mul-ℚ' q)
-            ( ( inv (succ-rational-ℕ m)) ∙
+            ( ( inv (succ-rational-int-ℕ m)) ∙
               ( commutative-add-ℚ one-ℚ (rational-ℕ m)))) ∙
           ( right-distributive-mul-add-ℚ
             ( rational-ℕ m)
