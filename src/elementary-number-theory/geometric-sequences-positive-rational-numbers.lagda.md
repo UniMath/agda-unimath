@@ -35,6 +35,8 @@ open import foundation.universe-levels
 
 open import group-theory.arithmetic-sequences-semigroups
 open import group-theory.powers-of-elements-monoids
+
+open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 ```
 
 </details>
@@ -237,6 +239,41 @@ module _
     ( ap (mul-ℚ⁺ (seq-geometric-sequence-ℚ⁺ u n)) is-one-common-ratio) ∙
     ( right-unit-law-mul-ℚ⁺ (seq-geometric-sequence-ℚ⁺ u n)) ∙
     ( is-constant-seq-geometric-sequence-ℚ⁺ n)
+```
+
+### A geometric sequence of positive rational numbers with common ratio `r > 1` is strictly increasing
+
+```agda
+module _
+  (u : geometric-sequence-ℚ⁺)
+  (1<r : le-ℚ⁺ one-ℚ⁺ (common-ratio-geometric-sequence-ℚ⁺ u))
+  where
+
+  le-succ-seq-geometric-sequence-ℚ⁺ :
+    (n : ℕ) →
+    le-ℚ⁺
+      ( seq-geometric-sequence-ℚ⁺ u n)
+      ( seq-geometric-sequence-ℚ⁺ u (succ-ℕ n))
+  le-succ-seq-geometric-sequence-ℚ⁺ n =
+    binary-tr
+      ( le-ℚ⁺)
+      ( right-unit-law-mul-ℚ⁺ (seq-geometric-sequence-ℚ⁺ u n))
+      ( inv (is-common-ratio-geometric-sequence-ℚ⁺ u n))
+      ( preserves-le-left-mul-ℚ⁺
+        ( seq-geometric-sequence-ℚ⁺ u n)
+        ( one-ℚ)
+        ( rational-ℚ⁺ (common-ratio-geometric-sequence-ℚ⁺ u))
+        ( 1<r))
+
+  is-strictly-increasing-seq-geometric-sequence-ℚ⁺ :
+    is-strictly-increasing-sequence-Strictly-Preordered-Set
+      ( ℚ⁺-Strict-Preordered-Set)
+      ( seq-geometric-sequence-ℚ⁺ u)
+  is-strictly-increasing-seq-geometric-sequence-ℚ⁺ =
+    is-strictly-increasing-is-everywhere-strictly-increasing-sequence-Strictly-Preordered-Set
+      ( ℚ⁺-Strict-Preordered-Set)
+      ( seq-geometric-sequence-ℚ⁺ u)
+      ( le-succ-seq-geometric-sequence-ℚ⁺)
 ```
 
 ### The pointwise product of geometric sequences of positive rational numbers is geometric
