@@ -181,45 +181,45 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (u : sequence-Metric-Space M)
+  (x : sequence-Metric-Space M)
   (lim : type-Metric-Space M)
-  (H : modulus-limit-sequence-Metric-Space M u lim)
+  (H : modulus-limit-sequence-Metric-Space M x lim)
   where
 
   is-cauchy-has-modulus-limit-sequence-Metric-Space :
-    is-cauchy-sequence-Metric-Space M u
+    is-cauchy-sequence-Metric-Space M x
   is-cauchy-has-modulus-limit-sequence-Metric-Space ε⁺@(ε , _) =
       let
         (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
       in
-        modulus-modulus-limit-sequence-Metric-Space M u lim H ε'⁺ ,
+        modulus-modulus-limit-sequence-Metric-Space M x lim H ε'⁺ ,
         λ m k n≤m n≤k →
         is-monotonic-structure-Metric-Space
           ( M)
-          ( u m)
-          ( u k)
+          ( x m)
+          ( x k)
           ( ε'⁺ +ℚ⁺ ε'⁺)
           ( ε⁺)
           ( 2ε'<ε)
           ( is-triangular-structure-Metric-Space
             ( M)
-            ( u m)
+            ( x m)
             ( lim)
-            ( u k)
+            ( x k)
             ( ε'⁺)
             ( ε'⁺)
             ( is-symmetric-structure-Metric-Space
               ( M)
               ( ε'⁺)
-              ( u k)
+              ( x k)
               ( lim)
-              ( is-modulus-modulus-limit-sequence-Metric-Space M u
+              ( is-modulus-modulus-limit-sequence-Metric-Space M x
                 ( lim)
                 ( H)
                 ( ε'⁺)
                 ( k)
                 ( n≤k)))
-            ( is-modulus-modulus-limit-sequence-Metric-Space M u
+            ( is-modulus-modulus-limit-sequence-Metric-Space M x
               ( lim)
               ( H)
               ( ε'⁺)
