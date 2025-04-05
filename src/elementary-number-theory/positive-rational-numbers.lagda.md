@@ -720,8 +720,8 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level}
-  {P : ℚ⁺ → UU l1}
-  {Q : ℚ⁺ → UU l2}
+  (P : ℚ⁺ → UU l1)
+  (Q : ℚ⁺ → UU l2)
   (R : ℚ⁺ → UU l3)
   (merge-add-family-ℚ⁺ : (d₁ d₂ : ℚ⁺) → P d₁ → Q d₂ → R (d₁ +ℚ⁺ d₂))
   where

@@ -153,10 +153,16 @@ module _
 
   is-limit-cauchy-sequence-Metric-Space : UU l2
   is-limit-cauchy-sequence-Metric-Space =
-    is-limit-sequence-Metric-Space
-      ( M)
-      ( map-cauchy-sequence-Metric-Space M x)
-      ( l)
+    (ε : ℚ⁺) →
+    Σ
+      ( ℕ)
+      ( λ n →
+        (m : ℕ) → leq-ℕ n m →
+        neighborhood-Metric-Space
+          ( M)
+          ( ε)
+          ( map-cauchy-sequence-Metric-Space M x m)
+          ( l))
 
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
@@ -165,9 +171,7 @@ module _
 
   has-limit-cauchy-sequence-Metric-Space : UU (l1 ⊔ l2)
   has-limit-cauchy-sequence-Metric-Space =
-    has-limit-sequence-Metric-Space
-      ( M)
-      ( map-cauchy-sequence-Metric-Space M x)
+    Σ (type-Metric-Space M) (is-limit-cauchy-sequence-Metric-Space M x)
 ```
 
 ## Properties
@@ -175,50 +179,50 @@ module _
 ### A convergent sequence is Cauchy
 
 ```agda
-module _
-  {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : convergent-sequence-Metric-Space M)
-  where
+-- module _
+--   {l1 l2 : Level} (M : Metric-Space l1 l2)
+--   (x : convergent-sequence-Metric-Space M)
+--   where
 
-  abstract
-    is-cauchy-seq-convergent-sequence-Metric-Space :
-      is-cauchy-sequence-Metric-Space M
-        (seq-convergent-sequence-Metric-Space M x)
-    is-cauchy-seq-convergent-sequence-Metric-Space ε⁺@(ε , _) =
-      let
-        lim = limit-convergent-sequence-Metric-Space M x
-        (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
-        (n , n≤m⇒|xm-l|<ε') =
-          is-limit-limit-convergent-sequence-Metric-Space M x ε'⁺
-      in
-        n ,
-        λ m k n≤m n≤k →
-        is-monotonic-structure-Metric-Space
-          ( M)
-          ( seq-convergent-sequence-Metric-Space M x m)
-          ( seq-convergent-sequence-Metric-Space M x k)
-          ( ε'⁺ +ℚ⁺ ε'⁺)
-          ( ε⁺)
-          ( 2ε'<ε)
-          ( is-triangular-structure-Metric-Space
-            ( M)
-            ( seq-convergent-sequence-Metric-Space M x m)
-            ( lim)
-            ( seq-convergent-sequence-Metric-Space M x k)
-            ( ε'⁺)
-            ( ε'⁺)
-            ( is-symmetric-structure-Metric-Space
-              ( M)
-              ( ε'⁺)
-              ( seq-convergent-sequence-Metric-Space M x k)
-              ( lim)
-              ( n≤m⇒|xm-l|<ε' k n≤k))
-            ( n≤m⇒|xm-l|<ε' m n≤m))
+--   abstract
+--     is-cauchy-seq-convergent-sequence-Metric-Space :
+--       is-cauchy-sequence-Metric-Space M
+--         (seq-convergent-sequence-Metric-Space M x)
+--     is-cauchy-seq-convergent-sequence-Metric-Space ε⁺@(ε , _) =
+--       let
+--         lim = limit-convergent-sequence-Metric-Space M x
+--         (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
+--         (n , n≤m⇒|xm-l|<ε') =
+--           is-limit-limit-convergent-sequence-Metric-Space M x ε'⁺
+--       in
+--         n ,
+--         λ m k n≤m n≤k →
+--         is-monotonic-structure-Metric-Space
+--           ( M)
+--           ( seq-convergent-sequence-Metric-Space M x m)
+--           ( seq-convergent-sequence-Metric-Space M x k)
+--           ( ε'⁺ +ℚ⁺ ε'⁺)
+--           ( ε⁺)
+--           ( 2ε'<ε)
+--           ( is-triangular-structure-Metric-Space
+--             ( M)
+--             ( seq-convergent-sequence-Metric-Space M x m)
+--             ( lim)
+--             ( seq-convergent-sequence-Metric-Space M x k)
+--             ( ε'⁺)
+--             ( ε'⁺)
+--             ( is-symmetric-structure-Metric-Space
+--               ( M)
+--               ( ε'⁺)
+--               ( seq-convergent-sequence-Metric-Space M x k)
+--               ( lim)
+--               ( n≤m⇒|xm-l|<ε' k n≤k))
+--             ( n≤m⇒|xm-l|<ε' m n≤m))
 
-  cauchy-convergent-sequence-Metric-Space : cauchy-sequence-Metric-Space M
-  cauchy-convergent-sequence-Metric-Space =
-    seq-convergent-sequence-Metric-Space M x ,
-    is-cauchy-seq-convergent-sequence-Metric-Space
+--   cauchy-convergent-sequence-Metric-Space : cauchy-sequence-Metric-Space M
+--   cauchy-convergent-sequence-Metric-Space =
+--     seq-convergent-sequence-Metric-Space M x ,
+--     is-cauchy-seq-convergent-sequence-Metric-Space
 ```
 
 ### Correspondence to Cauchy approximations
@@ -580,4 +584,4 @@ module _
 
 ## References
 
-{­{#bibliography}}
+{{#bibliography}}
