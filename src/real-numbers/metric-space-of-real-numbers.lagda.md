@@ -11,17 +11,13 @@ module real-numbers.metric-space-of-real-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
-open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-cartesian-products-of-types
-open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -37,7 +33,6 @@ open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
-open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.premetric-spaces
 open import metric-spaces.premetric-structures
 open import metric-spaces.pseudometric-structures
@@ -46,8 +41,12 @@ open import metric-spaces.saturated-metric-spaces
 open import metric-spaces.symmetric-premetric-structures
 open import metric-spaces.triangular-premetric-structures
 
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>
@@ -92,9 +91,46 @@ premetric-leq-ℝ l d x y =
   product-Prop
     ( is-in-lower-neighborhood-leq-prop-ℝ d x y)
     ( is-in-lower-neighborhood-leq-prop-ℝ d y x)
+
+is-in-neighborhood-leq-ℝ : (l : Level) → ℚ⁺ → Relation l (ℝ l)
+is-in-neighborhood-leq-ℝ l d x y = type-Prop (premetric-leq-ℝ l d x y)
 ```
 
 ## Properties
+
+### `x` is in a `d`-neighborhood of `y` if `x - d ≤ y ≤ x + d`
+
+```agda
+is-in-lower-neighborhood-real-bound-leq-ℝ :
+  {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
+  leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
+  is-in-lower-neighborhood-leq-ℝ d x y
+is-in-lower-neighborhood-real-bound-leq-ℝ d⁺@(d , _) x y y≤x+d q q+d<y =
+  is-in-lower-cut-le-real-ℚ
+    ( q)
+    ( x)
+    ( concatenate-le-leq-ℝ
+      ( real-ℚ q)
+      ( y -ℝ real-ℚ d)
+      ( x)
+      ( le-transpose-left-add-ℝ
+        ( real-ℚ q)
+        ( real-ℚ d) y
+        ( inv-tr
+          ( λ z → le-ℝ z y)
+          ( add-real-ℚ q d)
+          ( le-real-is-in-lower-cut-ℚ (q +ℚ d) y q+d<y)))
+      ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
+
+neighborhood-real-bound-each-leq-ℝ :
+  {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
+  leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d)) →
+  leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
+  is-in-neighborhood-leq-ℝ l d x y
+neighborhood-real-bound-each-leq-ℝ d x y x≤y+d y≤x+d =
+  ( is-in-lower-neighborhood-real-bound-leq-ℝ d x y y≤x+d ,
+    is-in-lower-neighborhood-real-bound-leq-ℝ d y x x≤y+d)
+```
 
 ### The standard premetric on the real numbers is a metric structure
 
@@ -245,7 +281,7 @@ module _
     ( is-closed-lower-neighborhood-leq-ℝ y x ε (pr2 ∘ H))
 ```
 
-### Tha canonical embedding from rational to real numbers is an isometry between metric spaces
+### The canonical embedding from rational to real numbers is an isometry between metric spaces
 
 ```agda
 is-isometry-metric-space-leq-real-ℚ :
