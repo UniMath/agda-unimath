@@ -19,6 +19,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.sets
@@ -91,6 +92,17 @@ is-prop-is-zero-ℕ n = is-set-ℕ n zero-ℕ
 is-zero-ℕ-Prop : ℕ → Prop lzero
 pr1 (is-zero-ℕ-Prop n) = is-zero-ℕ n
 pr2 (is-zero-ℕ-Prop n) = is-prop-is-zero-ℕ n
+```
+
+### The property of being nonzero
+
+```agda
+is-prop-is-nonzero-ℕ : (n : ℕ) → is-prop (is-nonzero-ℕ n)
+is-prop-is-nonzero-ℕ n = is-prop-neg
+
+is-nonzero-ℕ-Prop : ℕ → Prop lzero
+pr1 (is-nonzero-ℕ-Prop n) = is-nonzero-ℕ n
+pr2 (is-nonzero-ℕ-Prop n) = is-prop-is-nonzero-ℕ n
 ```
 
 ### The property of being one
