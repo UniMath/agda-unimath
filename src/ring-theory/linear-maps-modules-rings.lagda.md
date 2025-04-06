@@ -146,19 +146,20 @@ module _
   (M : left-module-Ring l2 R) (N : left-module-Ring l3 R)
   where
 
-  is-zero-map-zero-linear-map-left-module-Ring :
-    (f : linear-map-left-module-Ring R M N) →
-    map-linear-map-left-module-Ring R M N f (zero-left-module-Ring R M) ＝
-    zero-left-module-Ring R N
-  is-zero-map-zero-linear-map-left-module-Ring (f , H , K) =
-    equational-reasoning
-      f (zero-left-module-Ring R M)
-      ＝ f (mul-left-module-Ring R M (zero-Ring R) (zero-left-module-Ring R M))
-        by ap f (inv (left-zero-law-mul-left-module-Ring R M _))
-      ＝ mul-left-module-Ring R N (zero-Ring R) (f (zero-left-module-Ring R M))
-        by K _ _
-      ＝ zero-left-module-Ring R N
-        by left-zero-law-mul-left-module-Ring R N _
+  abstract
+    is-zero-map-zero-linear-map-left-module-Ring :
+      (f : linear-map-left-module-Ring R M N) →
+      map-linear-map-left-module-Ring R M N f (zero-left-module-Ring R M) ＝
+      zero-left-module-Ring R N
+    is-zero-map-zero-linear-map-left-module-Ring (f , H , K) =
+      equational-reasoning
+        f (zero-left-module-Ring R M)
+        ＝ f (mul-left-module-Ring R M (zero-Ring R) (zero-left-module-Ring R M))
+          by ap f (inv (left-zero-law-mul-left-module-Ring R M _))
+        ＝ mul-left-module-Ring R N (zero-Ring R) (f (zero-left-module-Ring R M))
+          by K _ _
+        ＝ zero-left-module-Ring R N
+          by left-zero-law-mul-left-module-Ring R N _
 ```
 
 ### A linear map maps `-x` to the negation of the map of `x`
@@ -169,20 +170,21 @@ module _
   (M : left-module-Ring l2 R) (N : left-module-Ring l3 R)
   where
 
-  map-neg-linear-map-left-module-Ring :
-    (f : linear-map-left-module-Ring R M N) →
-    (x : type-left-module-Ring R M) →
-    map-linear-map-left-module-Ring R M N f (neg-left-module-Ring R M x) ＝
-    neg-left-module-Ring R N (map-linear-map-left-module-Ring R M N f x)
-  map-neg-linear-map-left-module-Ring (f , H , K) x =
-    equational-reasoning
-      f (neg-left-module-Ring R M x)
-      ＝ f (mul-left-module-Ring R M (neg-Ring R (one-Ring R)) x)
-        by ap f (inv (mul-neg-one-left-module-Ring R M x))
-      ＝ mul-left-module-Ring R N (neg-Ring R (one-Ring R)) (f x)
-        by K _ _
-      ＝ neg-left-module-Ring R N (f x)
-        by mul-neg-one-left-module-Ring R N (f x)
+  abstract
+    map-neg-linear-map-left-module-Ring :
+      (f : linear-map-left-module-Ring R M N) →
+      (x : type-left-module-Ring R M) →
+      map-linear-map-left-module-Ring R M N f (neg-left-module-Ring R M x) ＝
+      neg-left-module-Ring R N (map-linear-map-left-module-Ring R M N f x)
+    map-neg-linear-map-left-module-Ring (f , H , K) x =
+      equational-reasoning
+        f (neg-left-module-Ring R M x)
+        ＝ f (mul-left-module-Ring R M (neg-Ring R (one-Ring R)) x)
+          by ap f (inv (mul-neg-one-left-module-Ring R M x))
+        ＝ mul-left-module-Ring R N (neg-Ring R (one-Ring R)) (f x)
+          by K _ _
+        ＝ neg-left-module-Ring R N (f x)
+          by mul-neg-one-left-module-Ring R N (f x)
 ```
 
 ### The identity is a linear map
