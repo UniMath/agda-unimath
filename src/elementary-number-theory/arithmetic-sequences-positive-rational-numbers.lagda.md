@@ -400,6 +400,11 @@ module _
       ( seq-arithmetic-sequence-ℚ⁺ u)
   is-limit-∞-arithmetic-sequence-ℚ⁺ =
     unit-trunc-Prop modulus-limit-∞-arithmetic-sequence-ℚ⁺
+
+  limit-∞-arithmetic-sequence-ℚ⁺ :
+    limit-∞-sequence-Preorder preorder-ℚ⁺
+  limit-∞-arithmetic-sequence-ℚ⁺ =
+    seq-arithmetic-sequence-ℚ⁺ u , is-limit-∞-arithmetic-sequence-ℚ⁺
 ```
 
 ## References
