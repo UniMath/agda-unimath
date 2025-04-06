@@ -31,8 +31,8 @@ open import ring-theory.rings
 
 For [tuples on rings](linear-algebra.tuples-on-rings.md),
 {{#concept "scalar multiplication" disambiguation="Of tuples on rings" WD="scalar multiplication" WDID=Q126736}}
-is an operation taking an element `c` of a [ring](ring-theory.rings.md) and a tuple
-of elements of that ring and multiplying each element of the tuple by `c`.
+is an operation taking an element `c` of a [ring](ring-theory.rings.md) and a
+tuple of elements of that ring and multiplying each element of the tuple by `c`.
 With addition of tuples on rings, this forms a
 [left module](ring-theory.modules-rings.md).
 

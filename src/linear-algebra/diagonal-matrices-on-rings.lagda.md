@@ -24,9 +24,10 @@ open import ring-theory.rings
 
 ## Definitions
 
-A {{#concept "diagonal matrix" Agda=diagonal-matrix-Ring WD="diagonal matrix" WDID=Q332791}}
-is a [matrix](linear-algebra.matrices.md) whose only nonzero elements are
-on the diagonal of the matrix.
+A
+{{#concept "diagonal matrix" Agda=diagonal-matrix-Ring WD="diagonal matrix" WDID=Q332791}}
+is a [matrix](linear-algebra.matrices.md) whose only nonzero elements are on the
+diagonal of the matrix.
 
 ### Diagonal matrices
 

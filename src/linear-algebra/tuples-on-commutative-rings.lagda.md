@@ -26,8 +26,8 @@ open import linear-algebra.tuples-on-rings
 
 ## Idea
 
-Tuples on a [commutative ring](commutative-algebra.commutative-rings.md) `R`
-are [tuples](linear-algebra.tuples.md) on the underlying type of `R`. The
+Tuples on a [commutative ring](commutative-algebra.commutative-rings.md) `R` are
+[tuples](linear-algebra.tuples.md) on the underlying type of `R`. The
 commutative ring structure on `R` induces further structure on the type of
 tuples on `R`.
 

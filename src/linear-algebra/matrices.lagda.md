@@ -23,11 +23,10 @@ open import linear-algebra.tuples
 
 ## Idea
 
-An `m × n`
-{{#concept "matrix" Agda=matrix WD="matrix" WDID=Q44337}} of elements in `A` is
-an arrangement of elements of A with `m` rows and `n` columns. In other words,
-a matrix is a [tuple](linear-algebra.tuples.md) of length `m` of tuples of
-length `n` of elements of `A`.
+An `m × n` {{#concept "matrix" Agda=matrix WD="matrix" WDID=Q44337}} of elements
+in `A` is an arrangement of elements of A with `m` rows and `n` columns. In
+other words, a matrix is a [tuple](linear-algebra.tuples.md) of length `m` of
+tuples of length `n` of elements of `A`.
 
 ## Definitions
 

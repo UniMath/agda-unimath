@@ -285,5 +285,5 @@ module _
 
 ## See also
 
-* For the [module](ring-theory.modules-rings.md) of tuples on rings, see
+- For the [module](ring-theory.modules-rings.md) of tuples on rings, see
   [`linear-algebra.scalar-multiplication-tuples-on-rings`](
