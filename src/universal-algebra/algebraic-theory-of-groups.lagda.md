@@ -61,7 +61,9 @@ pr2 group-Theory =
   λ where
   associative-l-group-laws →
     ( op mul-group-op
-      ( ( op mul-group-op (var 0 ∷ var 1 ∷ empty-tuple)) ∷ var 2 ∷ empty-tuple)) ,
+      ( ( op mul-group-op (var 0 ∷ var 1 ∷ empty-tuple)) ∷
+        var 2 ∷
+        empty-tuple)) ,
     ( op mul-group-op
       ( var 0 ∷ (op mul-group-op (var 1 ∷ var 2 ∷ empty-tuple)) ∷ empty-tuple))
   invl-l-group-laws →

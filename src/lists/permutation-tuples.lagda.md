@@ -332,7 +332,8 @@ module _
       ( fold-tuple b μ)
       ( inv ( compute-permute-tuple-id-equiv n v))
   invariant-list-transpositions-fold-tuple {0} v (cons _ _) = refl
-  invariant-list-transpositions-fold-tuple {succ-ℕ n} v (cons ((i , j) , neq) l) =
+  invariant-list-transpositions-fold-tuple
+    {succ-ℕ n} v (cons ((i , j) , neq) l) =
     ( invariant-transposition-fold-tuple v i j neq ∙
       ( ( invariant-list-transpositions-fold-tuple
           ( permute-tuple (succ-ℕ n) v (transposition-Fin (succ-ℕ n) i j neq))

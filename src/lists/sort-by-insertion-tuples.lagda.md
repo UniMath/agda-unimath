@@ -207,7 +207,8 @@ module _
   eq-permute-tuple-permutation-insertion-sort-tuple :
     {n : ℕ}
     (v : tuple (type-Decidable-Total-Order X) n) →
-    insertion-sort-tuple v ＝ permute-tuple n v (permutation-insertion-sort-tuple v)
+    insertion-sort-tuple v ＝
+    permute-tuple n v (permutation-insertion-sort-tuple v)
   eq-permute-tuple-permutation-insertion-sort-tuple {0} empty-tuple = refl
   eq-permute-tuple-permutation-insertion-sort-tuple {1} (x ∷ empty-tuple) = refl
   eq-permute-tuple-permutation-insertion-sort-tuple

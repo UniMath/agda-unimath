@@ -72,7 +72,9 @@ module _
   map-list-map-tuple-list nil = refl
   map-list-map-tuple-list (cons x l) =
     eq-Eq-list
-      ( list-tuple (length-list (cons x l)) (map-tuple f (tuple-list (cons x l))))
+      ( list-tuple
+        ( length-list (cons x l))
+        ( map-tuple f (tuple-list (cons x l))))
       ( map-list f (cons x l))
       ( refl ,
         Eq-eq-list

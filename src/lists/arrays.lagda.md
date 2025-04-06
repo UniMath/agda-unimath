@@ -189,7 +189,8 @@ module _
     x ∈-tuple (tuple-list l) → x ∈-list l
   is-in-list-is-in-tuple-list (cons y l) .y (is-head .y .(tuple-list l)) =
     is-head y l
-  is-in-list-is-in-tuple-list (cons y l) x (is-in-tail .x .y .(tuple-list l) I) =
+  is-in-list-is-in-tuple-list
+    (cons y l) x (is-in-tail .x .y .(tuple-list l) I) =
     is-in-tail x y l (is-in-list-is-in-tuple-list l x I)
 
   is-in-tuple-list-is-in-list :
