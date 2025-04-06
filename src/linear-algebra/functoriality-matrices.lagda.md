@@ -11,7 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors
+open import linear-algebra.functoriality-tuples
 open import linear-algebra.matrices
 ```
 
@@ -19,7 +19,8 @@ open import linear-algebra.matrices
 
 ## Idea
 
-Any map `f : A → B` induces a map `matrix A m n → matrix B m n`.
+Any map `f : A → B` induces a map between [matrices](linear-algebra.matrices.md)
+`matrix A m n → matrix B m n`.
 
 ## Definition
 
@@ -29,7 +30,7 @@ module _
   where
 
   map-matrix : {m n : ℕ} → matrix A m n → matrix B m n
-  map-matrix = map-vec (map-vec f)
+  map-matrix = map-tuple (map-tuple f)
 ```
 
 ### Binar maps
@@ -41,5 +42,5 @@ module _
 
   binary-map-matrix :
     {m n : ℕ} → matrix A m n → matrix B m n → matrix C m n
-  binary-map-matrix = binary-map-vec (binary-map-vec f)
+  binary-map-matrix = binary-map-tuple (binary-map-tuple f)
 ```

@@ -444,6 +444,7 @@ open import foundation.truncation-levels public
 open import foundation.truncation-modalities public
 open import foundation.truncations public
 open import foundation.tuples-of-types public
+open import foundation.tuples-set-quotients public
 open import foundation.type-arithmetic-booleans public
 open import foundation.type-arithmetic-cartesian-product-types public
 open import foundation.type-arithmetic-coproduct-types public
@@ -494,7 +495,6 @@ open import foundation.unordered-pairs public
 open import foundation.unordered-pairs-of-types public
 open import foundation.unordered-tuples public
 open import foundation.unordered-tuples-of-types public
-open import foundation.vectors-set-quotients public
 open import foundation.vertical-composition-spans-of-spans public
 open import foundation.weak-function-extensionality public
 open import foundation.weak-limited-principle-of-omniscience public
