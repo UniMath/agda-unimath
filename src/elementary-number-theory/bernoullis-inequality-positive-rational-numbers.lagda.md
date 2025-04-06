@@ -20,9 +20,13 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import order-theory.infinite-limit-sequences-preorders
 ```
 
 </details>
@@ -39,6 +43,9 @@ term `1` and common ratio `1 + h`:
 ```text
 ∀ (h : ℚ⁺) (n : ℕ) → 1 + n h ≤ (1 + h)ⁿ
 ```
+
+It follows that the geometric sequences `(1 + h)ⁿ`
+[tend to infinity](order-theory.infinite-limit-sequences-preorders.md) in ℚ⁺.
 
 ## Lemma
 
@@ -143,6 +150,88 @@ module _
             ( seq-standard-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ h) n))
           ( bernoullis-inequality-ℚ⁺ n))
         ( bounded-ratio-unitary-arithmetic-sequence-ℚ⁺ h n)
+```
+
+## Applications
+
+### The standard geometric sequence with inital term `1` and common ratio `1 + h` tends to infinity
+
+```agda
+module _
+  (h : ℚ⁺)
+  where
+
+  modulus-limit-∞-standard-unitary-onep-geometric-sequence-ℚ⁺ :
+    modulus-limit-∞-sequence-Preorder
+      ( preorder-ℚ⁺)
+      ( seq-standard-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ h))
+  modulus-limit-∞-standard-unitary-onep-geometric-sequence-ℚ⁺ =
+    modulus-leq-modulus-limit-∞-sequence-Preorder
+      ( preorder-ℚ⁺)
+      ( seq-standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h)
+      ( seq-standard-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ h))
+      ( bernoullis-inequality-ℚ⁺ h)
+      ( modulus-limit-∞-arithmetic-sequence-ℚ⁺
+        ( standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h))
+
+  is-limit-∞-standard-unitary-onep-geometric-sequence-ℚ⁺ :
+    is-limit-∞-sequence-Preorder
+      ( preorder-ℚ⁺)
+      ( seq-standard-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ h))
+  is-limit-∞-standard-unitary-onep-geometric-sequence-ℚ⁺ =
+    is-upward-closed-limit-∞-sequence-Preorder
+      ( preorder-ℚ⁺)
+      ( seq-standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h)
+      ( seq-standard-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ h))
+      ( bernoullis-inequality-ℚ⁺ h)
+      ( is-limit-∞-arithmetic-sequence-ℚ⁺
+        ( standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h))
+```
+
+### A geometric sequence of positive rational numbers with initial term `1` and common ratio `r > 1` tends to infinity
+
+```agda
+module _
+  ( u : geometric-sequence-ℚ⁺)
+  ( is-one-init : one-ℚ⁺ ＝ init-term-geometric-sequence-ℚ⁺ u)
+  ( 1<r : le-ℚ⁺ one-ℚ⁺ (common-ratio-geometric-sequence-ℚ⁺ u))
+  where
+
+  modulus-limit-∞-unitary-geometric-sequence-ℚ⁺ :
+    modulus-limit-∞-sequence-Preorder
+      ( preorder-ℚ⁺)
+      ( seq-geometric-sequence-ℚ⁺ u)
+  modulus-limit-∞-unitary-geometric-sequence-ℚ⁺ =
+    tr
+      ( modulus-limit-∞-sequence-Preorder preorder-ℚ⁺)
+      ( eq-htpy
+        ( htpy-seq-geometric-sequence-ℚ⁺
+          ( standard-geometric-sequence-ℚ⁺
+            ( one-ℚ⁺)
+            ( add-ℚ⁺
+              ( one-ℚ⁺)
+              ( le-diff-ℚ⁺
+                ( one-ℚ⁺)
+                ( common-ratio-geometric-sequence-ℚ⁺ u)
+                ( 1<r))))
+          ( u)
+          ( is-one-init)
+          ( right-diff-law-add-ℚ⁺
+            ( one-ℚ⁺)
+            ( common-ratio-geometric-sequence-ℚ⁺ u)
+            ( 1<r))))
+      ( modulus-limit-∞-standard-unitary-onep-geometric-sequence-ℚ⁺
+        ( le-diff-ℚ⁺
+          ( one-ℚ⁺)
+          ( common-ratio-geometric-sequence-ℚ⁺ u)
+          ( 1<r)))
+
+  is-limit-∞-unitary-geometric-sequence-ℚ⁺ :
+    is-limit-∞-sequence-Preorder
+      ( preorder-ℚ⁺)
+      ( seq-geometric-sequence-ℚ⁺ u)
+  is-limit-∞-unitary-geometric-sequence-ℚ⁺ =
+    unit-trunc-Prop modulus-limit-∞-unitary-geometric-sequence-ℚ⁺
 ```
 
 ## References
