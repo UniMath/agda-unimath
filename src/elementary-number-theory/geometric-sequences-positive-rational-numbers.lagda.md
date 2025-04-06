@@ -267,11 +267,11 @@ module _
 
   is-strictly-increasing-seq-geometric-sequence-ℚ⁺ :
     is-strictly-increasing-sequence-Strictly-Preordered-Set
-      ( ℚ⁺-Strict-Preordered-Set)
+      ( strictly-preordered-set-ℚ⁺)
       ( seq-geometric-sequence-ℚ⁺ u)
   is-strictly-increasing-seq-geometric-sequence-ℚ⁺ =
     is-strictly-increasing-is-everywhere-strictly-increasing-sequence-Strictly-Preordered-Set
-      ( ℚ⁺-Strict-Preordered-Set)
+      ( strictly-preordered-set-ℚ⁺)
       ( seq-geometric-sequence-ℚ⁺ u)
       ( le-succ-seq-geometric-sequence-ℚ⁺)
 ```

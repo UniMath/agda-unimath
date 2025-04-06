@@ -36,6 +36,7 @@ open import elementary-number-theory.strict-inequality-integers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -62,6 +63,9 @@ open import group-theory.submonoids
 open import group-theory.submonoids-commutative-monoids
 open import group-theory.subsemigroups
 
+open import order-theory.posets
+open import order-theory.preorders
+open import order-theory.strict-preorders
 open import order-theory.strictly-preordered-sets
 ```
 
@@ -500,12 +504,16 @@ le-ℚ⁺ x y = type-Prop (le-prop-ℚ⁺ x y)
 is-prop-le-ℚ⁺ : (x y : ℚ⁺) → is-prop (le-ℚ⁺ x y)
 is-prop-le-ℚ⁺ x y = is-prop-type-Prop (le-prop-ℚ⁺ x y)
 
-ℚ⁺-Strict-Preordered-Set : Strictly-Preordered-Set lzero lzero
-pr1 ℚ⁺-Strict-Preordered-Set = set-ℚ⁺
-pr2 ℚ⁺-Strict-Preordered-Set =
+strictly-preordered-set-ℚ⁺ : Strictly-Preordered-Set lzero lzero
+pr1 strictly-preordered-set-ℚ⁺ = set-ℚ⁺
+pr2 strictly-preordered-set-ℚ⁺ =
   ( le-prop-ℚ⁺) ,
   ( irreflexive-le-ℚ ∘ rational-ℚ⁺) ,
   ( λ x y z → transitive-le-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) ( rational-ℚ⁺ z))
+
+strict-preorder-ℚ⁺ : Strict-Preorder lzero lzero
+strict-preorder-ℚ⁺ =
+  strict-preorder-Strictly-Preordered-Set strictly-preordered-set-ℚ⁺
 ```
 
 ### The inequality on positive rational numbers
@@ -519,6 +527,28 @@ leq-ℚ⁺ x y = type-Prop (leq-prop-ℚ⁺ x y)
 
 is-prop-leq-ℚ⁺ : (x y : ℚ⁺) → is-prop (leq-ℚ⁺ x y)
 is-prop-leq-ℚ⁺ x y = is-prop-type-Prop (leq-prop-ℚ⁺ x y)
+
+leq-le-ℚ⁺ : {x y : ℚ⁺} → le-ℚ⁺ x y → leq-ℚ⁺ x y
+leq-le-ℚ⁺ {x} {y} = leq-le-ℚ {rational-ℚ⁺ x} {rational-ℚ⁺ y}
+
+refl-leq-ℚ⁺ : is-reflexive leq-ℚ⁺
+refl-leq-ℚ⁺ x = refl-leq-ℚ (rational-ℚ⁺ x)
+
+transitive-leq-ℚ⁺ : is-transitive leq-ℚ⁺
+transitive-leq-ℚ⁺ x y z =
+  transitive-leq-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) ( rational-ℚ⁺ z)
+
+preorder-ℚ⁺ : Preorder lzero lzero
+pr1 preorder-ℚ⁺ = ℚ⁺
+pr2 preorder-ℚ⁺ = leq-prop-ℚ⁺ , refl-leq-ℚ⁺ , transitive-leq-ℚ⁺
+
+antisymmetric-leq-ℚ⁺ : is-antisymmetric leq-ℚ⁺
+antisymmetric-leq-ℚ⁺ x y I J =
+  eq-ℚ⁺ (antisymmetric-leq-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) I J)
+
+poset-ℚ⁺ : Poset lzero lzero
+pr1 poset-ℚ⁺ = preorder-ℚ⁺
+pr2 poset-ℚ⁺ = antisymmetric-leq-ℚ⁺
 ```
 
 ### The sum of two positive rational numbers is greater than each of them
