@@ -1,7 +1,7 @@
-# Scalar multiplication of vectors on rings
+# Scalar multiplication of tuples on rings
 
 ```agda
-module linear-algebra.scalar-multiplication-vectors-on-rings where
+module linear-algebra.scalar-multiplication-tuples-on-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -17,8 +17,8 @@ open import foundation.universe-levels
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
 
-open import linear-algebra.vectors
-open import linear-algebra.vectors-on-rings
+open import linear-algebra.tuples
+open import linear-algebra.tuples-on-rings
 
 open import ring-theory.homomorphisms-rings
 open import ring-theory.modules-rings
@@ -29,84 +29,87 @@ open import ring-theory.rings
 
 ## Definition
 
-### Scalar multiplication of vectors on rings
+### Scalar multiplication of tuples on rings
 
 ```agda
 module _
   {l : Level} (R : Ring l)
   where
 
-  scalar-mul-vec-Ring : {n : ℕ} (r : type-Ring R) → vec-Ring R n → vec-Ring R n
-  scalar-mul-vec-Ring r empty-vec = empty-vec
-  scalar-mul-vec-Ring r (x ∷ v) = mul-Ring R r x ∷ scalar-mul-vec-Ring r v
+  scalar-mul-tuple-Ring :
+    {n : ℕ} (r : type-Ring R) → tuple-Ring R n → tuple-Ring R n
+  scalar-mul-tuple-Ring r empty-tuple = empty-tuple
+  scalar-mul-tuple-Ring r (x ∷ v) = mul-Ring R r x ∷ scalar-mul-tuple-Ring r v
 
-  associative-scalar-mul-vec-Ring :
-    {n : ℕ} (r s : type-Ring R) (v : vec-Ring R n) →
-    scalar-mul-vec-Ring (mul-Ring R r s) v ＝
-    scalar-mul-vec-Ring r (scalar-mul-vec-Ring s v)
-  associative-scalar-mul-vec-Ring r s empty-vec = refl
-  associative-scalar-mul-vec-Ring r s (x ∷ v) =
+  associative-scalar-mul-tuple-Ring :
+    {n : ℕ} (r s : type-Ring R) (v : tuple-Ring R n) →
+    scalar-mul-tuple-Ring (mul-Ring R r s) v ＝
+    scalar-mul-tuple-Ring r (scalar-mul-tuple-Ring s v)
+  associative-scalar-mul-tuple-Ring r s empty-tuple = refl
+  associative-scalar-mul-tuple-Ring r s (x ∷ v) =
     ap-binary _∷_
       ( associative-mul-Ring R r s x)
-      ( associative-scalar-mul-vec-Ring r s v)
+      ( associative-scalar-mul-tuple-Ring r s v)
 
-  unit-law-scalar-mul-vec-Ring :
-    {n : ℕ} (v : vec-Ring R n) → scalar-mul-vec-Ring (one-Ring R) v ＝ v
-  unit-law-scalar-mul-vec-Ring empty-vec = refl
-  unit-law-scalar-mul-vec-Ring (x ∷ v) =
-    ap-binary _∷_ (left-unit-law-mul-Ring R x) (unit-law-scalar-mul-vec-Ring v)
+  unit-law-scalar-mul-tuple-Ring :
+    {n : ℕ} (v : tuple-Ring R n) → scalar-mul-tuple-Ring (one-Ring R) v ＝ v
+  unit-law-scalar-mul-tuple-Ring empty-tuple = refl
+  unit-law-scalar-mul-tuple-Ring (x ∷ v) =
+    ap-binary _∷_
+      ( left-unit-law-mul-Ring R x)
+      ( unit-law-scalar-mul-tuple-Ring v)
 
-  left-distributive-scalar-mul-add-vec-Ring :
-    {n : ℕ} (r : type-Ring R) (v1 v2 : vec-Ring R n) →
-    scalar-mul-vec-Ring r (add-vec-Ring R v1 v2) ＝
-    add-vec-Ring R (scalar-mul-vec-Ring r v1) (scalar-mul-vec-Ring r v2)
-  left-distributive-scalar-mul-add-vec-Ring r empty-vec empty-vec = refl
-  left-distributive-scalar-mul-add-vec-Ring r (x ∷ v1) (y ∷ v2) =
+  left-distributive-scalar-mul-add-tuple-Ring :
+    {n : ℕ} (r : type-Ring R) (v1 v2 : tuple-Ring R n) →
+    scalar-mul-tuple-Ring r (add-tuple-Ring R v1 v2) ＝
+    add-tuple-Ring R (scalar-mul-tuple-Ring r v1) (scalar-mul-tuple-Ring r v2)
+  left-distributive-scalar-mul-add-tuple-Ring r empty-tuple empty-tuple = refl
+  left-distributive-scalar-mul-add-tuple-Ring r (x ∷ v1) (y ∷ v2) =
     ap-binary _∷_
       ( left-distributive-mul-add-Ring R r x y)
-      ( left-distributive-scalar-mul-add-vec-Ring r v1 v2)
+      ( left-distributive-scalar-mul-add-tuple-Ring r v1 v2)
 
-  right-distributive-scalar-mul-add-vec-Ring :
-    {n : ℕ} (r s : type-Ring R) (v : vec-Ring R n) →
-    scalar-mul-vec-Ring (add-Ring R r s) v ＝
-    add-vec-Ring R (scalar-mul-vec-Ring r v) (scalar-mul-vec-Ring s v)
-  right-distributive-scalar-mul-add-vec-Ring r s empty-vec = refl
-  right-distributive-scalar-mul-add-vec-Ring r s (x ∷ v) =
+  right-distributive-scalar-mul-add-tuple-Ring :
+    {n : ℕ} (r s : type-Ring R) (v : tuple-Ring R n) →
+    scalar-mul-tuple-Ring (add-Ring R r s) v ＝
+    add-tuple-Ring R (scalar-mul-tuple-Ring r v) (scalar-mul-tuple-Ring s v)
+  right-distributive-scalar-mul-add-tuple-Ring r s empty-tuple = refl
+  right-distributive-scalar-mul-add-tuple-Ring r s (x ∷ v) =
     ap-binary _∷_
       ( right-distributive-mul-add-Ring R r s x)
-      ( right-distributive-scalar-mul-add-vec-Ring r s v)
+      ( right-distributive-scalar-mul-add-tuple-Ring r s v)
 ```
 
 ## Properties
 
-### Scalar multiplication defines an `Ab`-endomorphism of `vec-Ring`s, and this mapping is a ring homomorphism `R → End(vec R n)`
+### Scalar multiplication defines an `Ab`-endomorphism of `tuple-Ring`s, and this mapping is a ring homomorphism `R → End(tuple R n)`
 
 ```agda
-  scalar-mul-vec-Ring-endomorphism :
-    (n : ℕ) (r : type-Ring R) → hom-Ab (vec-Ring-Ab R n) (vec-Ring-Ab R n)
-  pr1 (scalar-mul-vec-Ring-endomorphism n r) = scalar-mul-vec-Ring r
-  pr2 (scalar-mul-vec-Ring-endomorphism n r) {x} {y} =
-    left-distributive-scalar-mul-add-vec-Ring r x y
+  scalar-mul-tuple-Ring-endomorphism :
+    (n : ℕ) (r : type-Ring R) → hom-Ab (tuple-Ring-Ab R n) (tuple-Ring-Ab R n)
+  pr1 (scalar-mul-tuple-Ring-endomorphism n r) = scalar-mul-tuple-Ring r
+  pr2 (scalar-mul-tuple-Ring-endomorphism n r) {x} {y} =
+    left-distributive-scalar-mul-add-tuple-Ring r x y
 
   scalar-mul-hom-Ring :
-    (n : ℕ) → hom-Ring R (endomorphism-ring-Ab (vec-Ring-Ab R n))
-  pr1 (pr1 (scalar-mul-hom-Ring n)) = scalar-mul-vec-Ring-endomorphism n
+    (n : ℕ) → hom-Ring R (endomorphism-ring-Ab (tuple-Ring-Ab R n))
+  pr1 (pr1 (scalar-mul-hom-Ring n)) = scalar-mul-tuple-Ring-endomorphism n
   pr2 (pr1 (scalar-mul-hom-Ring n)) {k1} {k2} =
     eq-htpy-hom-Ab
-      ( vec-Ring-Ab R n)
-      ( vec-Ring-Ab R n)
-      ( right-distributive-scalar-mul-add-vec-Ring k1 k2)
+      ( tuple-Ring-Ab R n)
+      ( tuple-Ring-Ab R n)
+      ( right-distributive-scalar-mul-add-tuple-Ring k1 k2)
   pr1 (pr2 (scalar-mul-hom-Ring n)) {k1} {k2} =
     eq-htpy-hom-Ab
-      ( vec-Ring-Ab R n)
-      ( vec-Ring-Ab R n)
-      ( associative-scalar-mul-vec-Ring k1 k2)
+      ( tuple-Ring-Ab R n)
+      ( tuple-Ring-Ab R n)
+      ( associative-scalar-mul-tuple-Ring k1 k2)
   pr2 (pr2 (scalar-mul-hom-Ring n)) =
     eq-htpy-hom-Ab
-      ( vec-Ring-Ab R n)
-      ( vec-Ring-Ab R n)
-      ( unit-law-scalar-mul-vec-Ring)
+      ( tuple-Ring-Ab R n)
+      ( tuple-Ring-Ab R n)
+      ( unit-law-scalar-mul-tuple-Ring)
 
-  vec-left-module-Ring : (n : ℕ) → left-module-Ring l R
-  vec-left-module-Ring n = vec-Ring-Ab R n , scalar-mul-hom-Ring n
+  tuple-left-module-Ring : (n : ℕ) → left-module-Ring l R
+  tuple-left-module-Ring n = tuple-Ring-Ab R n , scalar-mul-hom-Ring n
 ```

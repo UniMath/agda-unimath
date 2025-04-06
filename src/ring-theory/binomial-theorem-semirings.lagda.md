@@ -19,7 +19,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.vectors-on-semirings
+open import linear-algebra.tuples-on-semirings
 
 open import ring-theory.powers-of-elements-semirings
 open import ring-theory.semirings
@@ -52,7 +52,7 @@ The binomial theorem is the [44th](literature.100-theorems.md#44) theorem on
 ```agda
 binomial-sum-Semiring :
   {l : Level} (R : Semiring l)
-  (n : ℕ) (f : functional-vec-Semiring R (succ-ℕ n)) →
+  (n : ℕ) (f : functional-tuple-Semiring R (succ-ℕ n)) →
   type-Semiring R
 binomial-sum-Semiring R n f =
   sum-Semiring R (succ-ℕ n)
@@ -72,9 +72,9 @@ module _
   where
 
   binomial-sum-one-element-Semiring :
-    (f : functional-vec-Semiring R 1) →
+    (f : functional-tuple-Semiring R 1) →
     binomial-sum-Semiring R 0 f ＝
-    head-functional-vec-Semiring R 0 f
+    head-functional-tuple-Semiring R 0 f
   binomial-sum-one-element-Semiring f =
     ( sum-one-element-Semiring R
       ( λ i →
@@ -82,10 +82,10 @@ module _
           ( binomial-coefficient-Fin 0 i)
           ( f i))) ∙
     ( left-unit-law-mul-nat-scalar-Semiring R
-      ( head-functional-vec-Semiring R 0 f))
+      ( head-functional-tuple-Semiring R 0 f))
 
   binomial-sum-two-elements-Semiring :
-    (f : functional-vec-Semiring R 2) →
+    (f : functional-tuple-Semiring R 2) →
     binomial-sum-Semiring R 1 f ＝
     add-Semiring R (f (zero-Fin 1)) (f (one-Fin 1))
   binomial-sum-two-elements-Semiring f =
@@ -105,7 +105,7 @@ module _
   where
 
   htpy-binomial-sum-Semiring :
-    (n : ℕ) {f g : functional-vec-Semiring R (succ-ℕ n)} →
+    (n : ℕ) {f g : functional-tuple-Semiring R (succ-ℕ n)} →
     (f ~ g) →
     binomial-sum-Semiring R n f ＝ binomial-sum-Semiring R n g
   htpy-binomial-sum-Semiring n H =
@@ -126,7 +126,7 @@ module _
 
   left-distributive-mul-binomial-sum-Semiring :
     (n : ℕ) (x : type-Semiring R)
-    (f : functional-vec-Semiring R (succ-ℕ n)) →
+    (f : functional-tuple-Semiring R (succ-ℕ n)) →
     mul-Semiring R x (binomial-sum-Semiring R n f) ＝
     binomial-sum-Semiring R n (λ i → mul-Semiring R x (f i))
   left-distributive-mul-binomial-sum-Semiring n x f =
@@ -144,7 +144,7 @@ module _
           ( f i)))
 
   right-distributive-mul-binomial-sum-Semiring :
-    (n : ℕ) (f : functional-vec-Semiring R (succ-ℕ n)) →
+    (n : ℕ) (f : functional-tuple-Semiring R (succ-ℕ n)) →
     (x : type-Semiring R) →
     mul-Semiring R (binomial-sum-Semiring R n f) x ＝
     binomial-sum-Semiring R n (λ i → mul-Semiring R (f i) x)

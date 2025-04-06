@@ -1,7 +1,7 @@
-# Sorted vectors
+# Sorted tuples
 
 ```agda
-module lists.sorted-vectors where
+module lists.sorted-tuples where
 ```
 
 <details><summary>Imports</summary>
@@ -19,9 +19,9 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
+open import linear-algebra.tuples
 
-open import lists.permutation-vectors
+open import lists.permutation-tuples
 
 open import order-theory.decidable-total-orders
 
@@ -32,210 +32,210 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We define a sorted vector to be a vector such that for every pair of consecutive
+We define a sorted tuple to be a tuple such that for every pair of consecutive
 elements `x` and `y`, the inequality `x ≤ y` holds.
 
 ## Definitions
 
-### The proposition that a vector is sorted
+### The proposition that a tuple is sorted
 
 ```agda
 module _
   {l1 l2 : Level} (X : Decidable-Total-Order l1 l2)
   where
 
-  is-sorted-vec-Prop :
-    {n : ℕ} → vec (type-Decidable-Total-Order X) n → Prop l2
-  is-sorted-vec-Prop {0} v = raise-unit-Prop l2
-  is-sorted-vec-Prop {1} v = raise-unit-Prop l2
-  is-sorted-vec-Prop {succ-ℕ (succ-ℕ n)} (x ∷ y ∷ v) =
+  is-sorted-tuple-Prop :
+    {n : ℕ} → tuple (type-Decidable-Total-Order X) n → Prop l2
+  is-sorted-tuple-Prop {0} v = raise-unit-Prop l2
+  is-sorted-tuple-Prop {1} v = raise-unit-Prop l2
+  is-sorted-tuple-Prop {succ-ℕ (succ-ℕ n)} (x ∷ y ∷ v) =
     product-Prop
       ( leq-Decidable-Total-Order-Prop X x y)
-      ( is-sorted-vec-Prop (y ∷ v))
+      ( is-sorted-tuple-Prop (y ∷ v))
 
-  is-sorted-vec :
-    {n : ℕ} → vec (type-Decidable-Total-Order X) n → UU l2
-  is-sorted-vec l = type-Prop (is-sorted-vec-Prop l)
+  is-sorted-tuple :
+    {n : ℕ} → tuple (type-Decidable-Total-Order X) n → UU l2
+  is-sorted-tuple l = type-Prop (is-sorted-tuple-Prop l)
 ```
 
-### The proposition that an element is less than or equal to every element in a vector
+### The proposition that an element is less than or equal to every element in a tuple
 
 ```agda
-  is-least-element-vec-Prop :
+  is-least-element-tuple-Prop :
     {n : ℕ} → type-Decidable-Total-Order X →
-    vec (type-Decidable-Total-Order X) n → Prop l2
-  is-least-element-vec-Prop {0} x v = raise-unit-Prop l2
-  is-least-element-vec-Prop {succ-ℕ n} x (y ∷ v) =
+    tuple (type-Decidable-Total-Order X) n → Prop l2
+  is-least-element-tuple-Prop {0} x v = raise-unit-Prop l2
+  is-least-element-tuple-Prop {succ-ℕ n} x (y ∷ v) =
     product-Prop
       ( leq-Decidable-Total-Order-Prop X x y)
-      ( is-least-element-vec-Prop x v)
+      ( is-least-element-tuple-Prop x v)
 
-  is-least-element-vec :
+  is-least-element-tuple :
     {n : ℕ} → type-Decidable-Total-Order X →
-    vec (type-Decidable-Total-Order X) n → UU l2
-  is-least-element-vec x v = type-Prop (is-least-element-vec-Prop x v)
+    tuple (type-Decidable-Total-Order X) n → UU l2
+  is-least-element-tuple x v = type-Prop (is-least-element-tuple-Prop x v)
 ```
 
 ## Properties
 
-### If a vector is sorted, then its tail is also sorted
+### If a tuple is sorted, then its tail is also sorted
 
 ```agda
-  is-sorted-tail-is-sorted-vec :
+  is-sorted-tail-is-sorted-tuple :
     {n : ℕ} →
-    (v : vec (type-Decidable-Total-Order X) (succ-ℕ n)) →
-    is-sorted-vec v → is-sorted-vec (tail-vec v)
-  is-sorted-tail-is-sorted-vec {zero-ℕ} (x ∷ empty-vec) s = raise-star
-  is-sorted-tail-is-sorted-vec {succ-ℕ n} (x ∷ y ∷ v) s = pr2 s
+    (v : tuple (type-Decidable-Total-Order X) (succ-ℕ n)) →
+    is-sorted-tuple v → is-sorted-tuple (tail-tuple v)
+  is-sorted-tail-is-sorted-tuple {zero-ℕ} (x ∷ empty-tuple) s = raise-star
+  is-sorted-tail-is-sorted-tuple {succ-ℕ n} (x ∷ y ∷ v) s = pr2 s
 
-  is-leq-head-head-tail-is-sorted-vec :
-    {n : ℕ} → (v : vec (type-Decidable-Total-Order X) (succ-ℕ (succ-ℕ n))) →
-    is-sorted-vec v →
-    leq-Decidable-Total-Order X (head-vec v) (head-vec (tail-vec v))
-  is-leq-head-head-tail-is-sorted-vec (x ∷ y ∷ v) s = pr1 s
+  is-leq-head-head-tail-is-sorted-tuple :
+    {n : ℕ} → (v : tuple (type-Decidable-Total-Order X) (succ-ℕ (succ-ℕ n))) →
+    is-sorted-tuple v →
+    leq-Decidable-Total-Order X (head-tuple v) (head-tuple (tail-tuple v))
+  is-leq-head-head-tail-is-sorted-tuple (x ∷ y ∷ v) s = pr1 s
 ```
 
-### If a vector `v' ＝ y ∷ v` is sorted then for all elements `x` less than or equal to `y`, `x` is less than or equal to every element in the vector
+### If a tuple `v' ＝ y ∷ v` is sorted then for all elements `x` less than or equal to `y`, `x` is less than or equal to every element in the tuple
 
 ```agda
-  is-least-element-vec-is-leq-head-sorted-vec :
+  is-least-element-tuple-is-leq-head-sorted-tuple :
     {n : ℕ}
     (x : type-Decidable-Total-Order X)
-    (v : vec (type-Decidable-Total-Order X) (succ-ℕ n)) →
-    is-sorted-vec v → leq-Decidable-Total-Order X x (head-vec v) →
-    is-least-element-vec x v
-  is-least-element-vec-is-leq-head-sorted-vec {zero-ℕ} x (y ∷ v) s p =
+    (v : tuple (type-Decidable-Total-Order X) (succ-ℕ n)) →
+    is-sorted-tuple v → leq-Decidable-Total-Order X x (head-tuple v) →
+    is-least-element-tuple x v
+  is-least-element-tuple-is-leq-head-sorted-tuple {zero-ℕ} x (y ∷ v) s p =
     p , raise-star
-  is-least-element-vec-is-leq-head-sorted-vec {succ-ℕ n} x (y ∷ v) s p =
+  is-least-element-tuple-is-leq-head-sorted-tuple {succ-ℕ n} x (y ∷ v) s p =
     p ,
-    ( is-least-element-vec-is-leq-head-sorted-vec
+    ( is-least-element-tuple-is-leq-head-sorted-tuple
       ( x)
       ( v)
-      ( is-sorted-tail-is-sorted-vec (y ∷ v) s)
+      ( is-sorted-tail-is-sorted-tuple (y ∷ v) s)
       ( transitive-leq-Decidable-Total-Order
         ( X)
         ( x)
         ( y)
-        ( head-vec v)
-        ( is-leq-head-head-tail-is-sorted-vec (y ∷ v) s)
+        ( head-tuple v)
+        ( is-leq-head-head-tail-is-sorted-tuple (y ∷ v) s)
         ( p)))
 ```
 
 ### An equivalent definition of being sorted
 
 ```agda
-  is-sorted-least-element-vec-Prop :
-    {n : ℕ} → vec (type-Decidable-Total-Order X) n → Prop l2
-  is-sorted-least-element-vec-Prop {0} v = raise-unit-Prop l2
-  is-sorted-least-element-vec-Prop {1} v = raise-unit-Prop l2
-  is-sorted-least-element-vec-Prop {succ-ℕ (succ-ℕ n)} (x ∷ v) =
+  is-sorted-least-element-tuple-Prop :
+    {n : ℕ} → tuple (type-Decidable-Total-Order X) n → Prop l2
+  is-sorted-least-element-tuple-Prop {0} v = raise-unit-Prop l2
+  is-sorted-least-element-tuple-Prop {1} v = raise-unit-Prop l2
+  is-sorted-least-element-tuple-Prop {succ-ℕ (succ-ℕ n)} (x ∷ v) =
     product-Prop
-      ( is-least-element-vec-Prop x v)
-      ( is-sorted-least-element-vec-Prop v)
+      ( is-least-element-tuple-Prop x v)
+      ( is-sorted-least-element-tuple-Prop v)
 
-  is-sorted-least-element-vec :
-    {n : ℕ} → vec (type-Decidable-Total-Order X) n → UU l2
-  is-sorted-least-element-vec v =
-    type-Prop (is-sorted-least-element-vec-Prop v)
+  is-sorted-least-element-tuple :
+    {n : ℕ} → tuple (type-Decidable-Total-Order X) n → UU l2
+  is-sorted-least-element-tuple v =
+    type-Prop (is-sorted-least-element-tuple-Prop v)
 
-  is-sorted-least-element-vec-is-sorted-vec :
+  is-sorted-least-element-tuple-is-sorted-tuple :
     {n : ℕ}
-    (v : vec (type-Decidable-Total-Order X) n) →
-    is-sorted-vec v → is-sorted-least-element-vec v
-  is-sorted-least-element-vec-is-sorted-vec {0} v x = raise-star
-  is-sorted-least-element-vec-is-sorted-vec {1} v x = raise-star
-  is-sorted-least-element-vec-is-sorted-vec
+    (v : tuple (type-Decidable-Total-Order X) n) →
+    is-sorted-tuple v → is-sorted-least-element-tuple v
+  is-sorted-least-element-tuple-is-sorted-tuple {0} v x = raise-star
+  is-sorted-least-element-tuple-is-sorted-tuple {1} v x = raise-star
+  is-sorted-least-element-tuple-is-sorted-tuple
     {succ-ℕ (succ-ℕ n)}
     ( x ∷ y ∷ v)
     ( p , q) =
-    is-least-element-vec-is-leq-head-sorted-vec x (y ∷ v) q p ,
-    is-sorted-least-element-vec-is-sorted-vec (y ∷ v) q
+    is-least-element-tuple-is-leq-head-sorted-tuple x (y ∷ v) q p ,
+    is-sorted-least-element-tuple-is-sorted-tuple (y ∷ v) q
 
-  is-sorted-vec-is-sorted-least-element-vec :
+  is-sorted-tuple-is-sorted-least-element-tuple :
     {n : ℕ}
-    (v : vec (type-Decidable-Total-Order X) n) →
-    is-sorted-least-element-vec v →
-    is-sorted-vec v
-  is-sorted-vec-is-sorted-least-element-vec {0} v x = raise-star
-  is-sorted-vec-is-sorted-least-element-vec {1} v x = raise-star
-  is-sorted-vec-is-sorted-least-element-vec
+    (v : tuple (type-Decidable-Total-Order X) n) →
+    is-sorted-least-element-tuple v →
+    is-sorted-tuple v
+  is-sorted-tuple-is-sorted-least-element-tuple {0} v x = raise-star
+  is-sorted-tuple-is-sorted-least-element-tuple {1} v x = raise-star
+  is-sorted-tuple-is-sorted-least-element-tuple
     {succ-ℕ (succ-ℕ n)}
     (x ∷ y ∷ v)
     (p , q) =
     ( pr1 p) ,
-    ( is-sorted-vec-is-sorted-least-element-vec (y ∷ v) q)
+    ( is-sorted-tuple-is-sorted-least-element-tuple (y ∷ v) q)
 ```
 
-### If the tail of a vector `v` is sorted and `x ≤ head-vec v`, then `v` is sorted
+### If the tail of a tuple `v` is sorted and `x ≤ head-tuple v`, then `v` is sorted
 
 ```agda
-  is-sorted-vec-is-sorted-tail-is-leq-head-vec :
+  is-sorted-tuple-is-sorted-tail-is-leq-head-tuple :
     {n : ℕ}
-    (v : vec (type-Decidable-Total-Order X) (succ-ℕ (succ-ℕ n))) →
-    is-sorted-vec (tail-vec v) →
-    (leq-Decidable-Total-Order X (head-vec v) (head-vec (tail-vec v))) →
-    is-sorted-vec v
-  is-sorted-vec-is-sorted-tail-is-leq-head-vec (x ∷ y ∷ v) s p = p , s
+    (v : tuple (type-Decidable-Total-Order X) (succ-ℕ (succ-ℕ n))) →
+    is-sorted-tuple (tail-tuple v) →
+    (leq-Decidable-Total-Order X (head-tuple v) (head-tuple (tail-tuple v))) →
+    is-sorted-tuple v
+  is-sorted-tuple-is-sorted-tail-is-leq-head-tuple (x ∷ y ∷ v) s p = p , s
 ```
 
-### If an element `x` is less than or equal to every element of a vector `v`, then it is less than or equal to every element of every permutation of `v`
+### If an element `x` is less than or equal to every element of a tuple `v`, then it is less than or equal to every element of every permutation of `v`
 
 ```agda
-  is-least-element-functional-vec-Prop :
+  is-least-element-functional-tuple-Prop :
     (n : ℕ)
     (x : type-Decidable-Total-Order X)
-    (fv : functional-vec (type-Decidable-Total-Order X) n) →
+    (fv : functional-tuple (type-Decidable-Total-Order X) n) →
     Prop l2
-  is-least-element-functional-vec-Prop n x fv =
+  is-least-element-functional-tuple-Prop n x fv =
     Π-Prop (Fin n) (λ k → leq-Decidable-Total-Order-Prop X x (fv k))
 
-  is-least-element-functional-vec :
+  is-least-element-functional-tuple :
     (n : ℕ)
     (x : type-Decidable-Total-Order X)
-    (fv : functional-vec (type-Decidable-Total-Order X) n) →
+    (fv : functional-tuple (type-Decidable-Total-Order X) n) →
     UU l2
-  is-least-element-functional-vec n x fv =
-    type-Prop (is-least-element-functional-vec-Prop n x fv)
+  is-least-element-functional-tuple n x fv =
+    type-Prop (is-least-element-functional-tuple-Prop n x fv)
 
-  is-least-element-permute-functional-vec :
+  is-least-element-permute-functional-tuple :
     (n : ℕ)
     (x : type-Decidable-Total-Order X)
-    (fv : functional-vec (type-Decidable-Total-Order X) n)
+    (fv : functional-tuple (type-Decidable-Total-Order X) n)
     (a : Permutation n) →
-    is-least-element-functional-vec n x fv →
-    is-least-element-functional-vec n x (fv ∘ map-equiv a)
-  is-least-element-permute-functional-vec n x fv a p k =
+    is-least-element-functional-tuple n x fv →
+    is-least-element-functional-tuple n x (fv ∘ map-equiv a)
+  is-least-element-permute-functional-tuple n x fv a p k =
     p (map-equiv a k)
 
-  is-least-element-vec-is-least-element-functional-vec :
+  is-least-element-tuple-is-least-element-functional-tuple :
     (n : ℕ)
     (x : type-Decidable-Total-Order X)
-    (fv : functional-vec (type-Decidable-Total-Order X) n) →
-    is-least-element-functional-vec n x fv →
-    is-least-element-vec x (listed-vec-functional-vec n fv)
-  is-least-element-vec-is-least-element-functional-vec 0 x fv p = raise-star
-  is-least-element-vec-is-least-element-functional-vec (succ-ℕ n) x fv p =
+    (fv : functional-tuple (type-Decidable-Total-Order X) n) →
+    is-least-element-functional-tuple n x fv →
+    is-least-element-tuple x (listed-tuple-functional-tuple n fv)
+  is-least-element-tuple-is-least-element-functional-tuple 0 x fv p = raise-star
+  is-least-element-tuple-is-least-element-functional-tuple (succ-ℕ n) x fv p =
     (p (inr star)) ,
-    ( is-least-element-vec-is-least-element-functional-vec
+    ( is-least-element-tuple-is-least-element-functional-tuple
       ( n)
       ( x)
-      ( tail-functional-vec n fv)
+      ( tail-functional-tuple n fv)
       ( p ∘ inl))
 
-  is-least-element-functional-vec-is-least-element-vec :
+  is-least-element-functional-tuple-is-least-element-tuple :
     (n : ℕ)
     (x : type-Decidable-Total-Order X)
-    (v : vec (type-Decidable-Total-Order X) n) →
-    is-least-element-vec x v →
-    is-least-element-functional-vec n x (functional-vec-vec n v)
-  is-least-element-functional-vec-is-least-element-vec
+    (v : tuple (type-Decidable-Total-Order X) n) →
+    is-least-element-tuple x v →
+    is-least-element-functional-tuple n x (functional-tuple-tuple n v)
+  is-least-element-functional-tuple-is-least-element-tuple
     ( succ-ℕ n)
     ( x)
     ( y ∷ v)
     ( p , q)
     ( inl k) =
-    is-least-element-functional-vec-is-least-element-vec n x v q k
-  is-least-element-functional-vec-is-least-element-vec
+    is-least-element-functional-tuple-is-least-element-tuple n x v q k
+  is-least-element-functional-tuple-is-least-element-tuple
     ( succ-ℕ n)
     ( x)
     ( y ∷ v)
@@ -243,22 +243,22 @@ module _
     ( inr star) =
     p
 
-  is-least-element-permute-vec :
+  is-least-element-permute-tuple :
     {n : ℕ}
     (x : type-Decidable-Total-Order X)
-    (v : vec (type-Decidable-Total-Order X) n)
+    (v : tuple (type-Decidable-Total-Order X) n)
     (a : Permutation n) →
-    is-least-element-vec x v →
-    is-least-element-vec x (permute-vec n v a)
-  is-least-element-permute-vec {n} x v a p =
-    is-least-element-vec-is-least-element-functional-vec
+    is-least-element-tuple x v →
+    is-least-element-tuple x (permute-tuple n v a)
+  is-least-element-permute-tuple {n} x v a p =
+    is-least-element-tuple-is-least-element-functional-tuple
       ( n)
       ( x)
-      ( functional-vec-vec n v ∘ map-equiv a)
-      ( is-least-element-permute-functional-vec
+      ( functional-tuple-tuple n v ∘ map-equiv a)
+      ( is-least-element-permute-functional-tuple
         ( n)
         ( x)
-        ( functional-vec-vec n v)
+        ( functional-tuple-tuple n v)
         ( a)
-        ( is-least-element-functional-vec-is-least-element-vec n x v p))
+        ( is-least-element-functional-tuple-is-least-element-tuple n x v p))
 ```

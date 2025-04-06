@@ -1,7 +1,7 @@
-# Vectors
+# Tuples
 
 ```agda
-module linear-algebra.vectors where
+module linear-algebra.tuples where
 ```
 
 <details><summary>Imports</summary>
@@ -37,402 +37,409 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-There are two equivalent definitions of vectors of length `n`. First, a **listed
-vector** of length `n` is a list of `n` elements of type `A`. Secondly, a
-**functional vector** of length `n` is a map `Fin n → A`. We define both types
-of vectors and show that they are equivalent.
+There are two equivalent definitions of tuples of length `n`. First, a **listed
+tuple** of length `n` is a list of `n` elements of type `A`. Secondly, a
+**functional tuple** of length `n` is a map `Fin n → A`. We define both types of
+tuples and show that they are equivalent.
 
 ## Definitions
 
-### The type of listed vectors
+### The type of listed tuples
 
 ```agda
 infixr 10 _∷_
 
-data vec {l : Level} (A : UU l) : ℕ → UU l where
-  empty-vec : vec A zero-ℕ
-  _∷_ : {n : ℕ} → A → vec A n → vec A (succ-ℕ n)
+data tuple {l : Level} (A : UU l) : ℕ → UU l where
+  empty-tuple : tuple A zero-ℕ
+  _∷_ : {n : ℕ} → A → tuple A n → tuple A (succ-ℕ n)
 
 module _
   {l : Level} {A : UU l}
   where
 
-  head-vec : {n : ℕ} → vec A (succ-ℕ n) → A
-  head-vec (x ∷ v) = x
+  head-tuple : {n : ℕ} → tuple A (succ-ℕ n) → A
+  head-tuple (x ∷ v) = x
 
-  tail-vec : {n : ℕ} → vec A (succ-ℕ n) → vec A n
-  tail-vec (x ∷ v) = v
+  tail-tuple : {n : ℕ} → tuple A (succ-ℕ n) → tuple A n
+  tail-tuple (x ∷ v) = v
 
-  snoc-vec : {n : ℕ} → vec A n → A → vec A (succ-ℕ n)
-  snoc-vec empty-vec a = a ∷ empty-vec
-  snoc-vec (x ∷ v) a = x ∷ (snoc-vec v a)
+  snoc-tuple : {n : ℕ} → tuple A n → A → tuple A (succ-ℕ n)
+  snoc-tuple empty-tuple a = a ∷ empty-tuple
+  snoc-tuple (x ∷ v) a = x ∷ (snoc-tuple v a)
 
-  revert-vec : {n : ℕ} → vec A n → vec A n
-  revert-vec empty-vec = empty-vec
-  revert-vec (x ∷ v) = snoc-vec (revert-vec v) x
+  revert-tuple : {n : ℕ} → tuple A n → tuple A n
+  revert-tuple empty-tuple = empty-tuple
+  revert-tuple (x ∷ v) = snoc-tuple (revert-tuple v) x
 
-  all-vec : {l2 : Level} {n : ℕ} → (P : A → UU l2) → vec A n → UU l2
-  all-vec P empty-vec = raise-unit _
-  all-vec P (x ∷ v) = P x × all-vec P v
+  all-tuple : {l2 : Level} {n : ℕ} → (P : A → UU l2) → tuple A n → UU l2
+  all-tuple P empty-tuple = raise-unit _
+  all-tuple P (x ∷ v) = P x × all-tuple P v
 
-  component-vec :
-    (n : ℕ) → vec A n → Fin n → A
-  component-vec (succ-ℕ n) (a ∷ v) (inl k) = component-vec n v k
-  component-vec (succ-ℕ n) (a ∷ v) (inr k) = a
+  component-tuple :
+    (n : ℕ) → tuple A n → Fin n → A
+  component-tuple (succ-ℕ n) (a ∷ v) (inl k) = component-tuple n v k
+  component-tuple (succ-ℕ n) (a ∷ v) (inr k) = a
 
-  infix 6 _∈-vec_
-  data _∈-vec_ : {n : ℕ} → A → vec A n → UU l where
-    is-head : {n : ℕ} (a : A) (l : vec A n) → a ∈-vec (a ∷ l)
-    is-in-tail : {n : ℕ} (a x : A) (l : vec A n) → a ∈-vec l → a ∈-vec (x ∷ l)
+  infix 6 _∈-tuple_
+  data _∈-tuple_ : {n : ℕ} → A → tuple A n → UU l where
+    is-head : {n : ℕ} (a : A) (l : tuple A n) → a ∈-tuple (a ∷ l)
+    is-in-tail :
+      {n : ℕ} (a x : A) (l : tuple A n) → a ∈-tuple l → a ∈-tuple (x ∷ l)
 
-  index-in-vec : (n : ℕ) → (a : A) → (v : vec A n) → a ∈-vec v → Fin n
-  index-in-vec (succ-ℕ n) a (.a ∷ v) (is-head .a .v) =
+  index-in-tuple : (n : ℕ) → (a : A) → (v : tuple A n) → a ∈-tuple v → Fin n
+  index-in-tuple (succ-ℕ n) a (.a ∷ v) (is-head .a .v) =
     inr star
-  index-in-vec (succ-ℕ n) a (x ∷ v) (is-in-tail .a .x .v I) =
-    inl (index-in-vec n a v I)
+  index-in-tuple (succ-ℕ n) a (x ∷ v) (is-in-tail .a .x .v I) =
+    inl (index-in-tuple n a v I)
 
-  eq-component-vec-index-in-vec :
-    (n : ℕ) (a : A) (v : vec A n) (I : a ∈-vec v) →
-    a ＝ component-vec n v (index-in-vec n a v I)
-  eq-component-vec-index-in-vec (succ-ℕ n) a (.a ∷ v) (is-head .a .v) = refl
-  eq-component-vec-index-in-vec (succ-ℕ n) a (x ∷ v) (is-in-tail .a .x .v I) =
-    eq-component-vec-index-in-vec n a v I
+  eq-component-tuple-index-in-tuple :
+    (n : ℕ) (a : A) (v : tuple A n) (I : a ∈-tuple v) →
+    a ＝ component-tuple n v (index-in-tuple n a v I)
+  eq-component-tuple-index-in-tuple (succ-ℕ n) a (.a ∷ v) (is-head .a .v) = refl
+  eq-component-tuple-index-in-tuple
+    (succ-ℕ n) a (x ∷ v) (is-in-tail .a .x .v I) =
+    eq-component-tuple-index-in-tuple n a v I
 ```
 
-### The functional type of vectors
+### The functional type of tuples
 
 ```agda
-functional-vec : {l : Level} → UU l → ℕ → UU l
-functional-vec A n = Fin n → A
+functional-tuple : {l : Level} → UU l → ℕ → UU l
+functional-tuple A n = Fin n → A
 
 module _
   {l : Level} {A : UU l}
   where
 
-  empty-functional-vec : functional-vec A 0
-  empty-functional-vec ()
+  empty-functional-tuple : functional-tuple A 0
+  empty-functional-tuple ()
 
-  head-functional-vec : (n : ℕ) → functional-vec A (succ-ℕ n) → A
-  head-functional-vec n v = v (inr star)
+  head-functional-tuple : (n : ℕ) → functional-tuple A (succ-ℕ n) → A
+  head-functional-tuple n v = v (inr star)
 
-  tail-functional-vec :
-    (n : ℕ) → functional-vec A (succ-ℕ n) → functional-vec A n
-  tail-functional-vec n v = v ∘ (inl-Fin n)
+  tail-functional-tuple :
+    (n : ℕ) → functional-tuple A (succ-ℕ n) → functional-tuple A n
+  tail-functional-tuple n v = v ∘ (inl-Fin n)
 
-  cons-functional-vec :
-    (n : ℕ) → A → functional-vec A n → functional-vec A (succ-ℕ n)
-  cons-functional-vec n a v (inl x) = v x
-  cons-functional-vec n a v (inr x) = a
+  cons-functional-tuple :
+    (n : ℕ) → A → functional-tuple A n → functional-tuple A (succ-ℕ n)
+  cons-functional-tuple n a v (inl x) = v x
+  cons-functional-tuple n a v (inr x) = a
 
-  snoc-functional-vec :
-    (n : ℕ) → functional-vec A n → A → functional-vec A (succ-ℕ n)
-  snoc-functional-vec zero-ℕ v a i = a
-  snoc-functional-vec (succ-ℕ n) v a (inl x) =
-    snoc-functional-vec n (tail-functional-vec n v) a x
-  snoc-functional-vec (succ-ℕ n) v a (inr x) = head-functional-vec n v
+  snoc-functional-tuple :
+    (n : ℕ) → functional-tuple A n → A → functional-tuple A (succ-ℕ n)
+  snoc-functional-tuple zero-ℕ v a i = a
+  snoc-functional-tuple (succ-ℕ n) v a (inl x) =
+    snoc-functional-tuple n (tail-functional-tuple n v) a x
+  snoc-functional-tuple (succ-ℕ n) v a (inr x) = head-functional-tuple n v
 
-  revert-functional-vec :
-    (n : ℕ) → functional-vec A n → functional-vec A n
-  revert-functional-vec n v i = v (opposite-Fin n i)
+  revert-functional-tuple :
+    (n : ℕ) → functional-tuple A n → functional-tuple A n
+  revert-functional-tuple n v i = v (opposite-Fin n i)
 
-  in-functional-vec : (n : ℕ) → A → functional-vec A n → UU l
-  in-functional-vec n a v = Σ (Fin n) (λ k → a ＝ v k)
+  in-functional-tuple : (n : ℕ) → A → functional-tuple A n → UU l
+  in-functional-tuple n a v = Σ (Fin n) (λ k → a ＝ v k)
 
-  index-in-functional-vec :
-    (n : ℕ) (x : A) (v : functional-vec A n) →
-    in-functional-vec n x v → Fin n
-  index-in-functional-vec n x v I = pr1 I
+  index-in-functional-tuple :
+    (n : ℕ) (x : A) (v : functional-tuple A n) →
+    in-functional-tuple n x v → Fin n
+  index-in-functional-tuple n x v I = pr1 I
 
-  eq-component-functional-vec-index-in-functional-vec :
-    (n : ℕ) (x : A) (v : functional-vec A n) (I : in-functional-vec n x v) →
-    x ＝ v (index-in-functional-vec n x v I)
-  eq-component-functional-vec-index-in-functional-vec n x v I = pr2 I
+  eq-component-functional-tuple-index-in-functional-tuple :
+    (n : ℕ) (x : A) (v : functional-tuple A n) (I : in-functional-tuple n x v) →
+    x ＝ v (index-in-functional-tuple n x v I)
+  eq-component-functional-tuple-index-in-functional-tuple n x v I = pr2 I
 ```
 
 ## Properties
 
-### Characterizing equality of listed vectors
+### Characterizing equality of listed tuples
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  Eq-vec : (n : ℕ) → vec A n → vec A n → UU l
-  Eq-vec zero-ℕ empty-vec empty-vec = raise-unit l
-  Eq-vec (succ-ℕ n) (x ∷ xs) (y ∷ ys) = (Id x y) × (Eq-vec n xs ys)
+  Eq-tuple : (n : ℕ) → tuple A n → tuple A n → UU l
+  Eq-tuple zero-ℕ empty-tuple empty-tuple = raise-unit l
+  Eq-tuple (succ-ℕ n) (x ∷ xs) (y ∷ ys) = (Id x y) × (Eq-tuple n xs ys)
 
-  refl-Eq-vec : (n : ℕ) → (u : vec A n) → Eq-vec n u u
-  refl-Eq-vec zero-ℕ empty-vec = map-raise star
-  pr1 (refl-Eq-vec (succ-ℕ n) (x ∷ xs)) = refl
-  pr2 (refl-Eq-vec (succ-ℕ n) (x ∷ xs)) = refl-Eq-vec n xs
+  refl-Eq-tuple : (n : ℕ) → (u : tuple A n) → Eq-tuple n u u
+  refl-Eq-tuple zero-ℕ empty-tuple = map-raise star
+  pr1 (refl-Eq-tuple (succ-ℕ n) (x ∷ xs)) = refl
+  pr2 (refl-Eq-tuple (succ-ℕ n) (x ∷ xs)) = refl-Eq-tuple n xs
 
-  Eq-eq-vec : (n : ℕ) → (u v : vec A n) → Id u v → Eq-vec n u v
-  Eq-eq-vec n u .u refl = refl-Eq-vec n u
+  Eq-eq-tuple : (n : ℕ) → (u v : tuple A n) → Id u v → Eq-tuple n u v
+  Eq-eq-tuple n u .u refl = refl-Eq-tuple n u
 
-  eq-Eq-vec : (n : ℕ) → (u v : vec A n) → Eq-vec n u v → Id u v
-  eq-Eq-vec zero-ℕ empty-vec empty-vec eq-vec = refl
-  eq-Eq-vec (succ-ℕ n) (x ∷ xs) (.x ∷ ys) (refl , eqs) =
-    ap (x ∷_) (eq-Eq-vec n xs ys eqs)
+  eq-Eq-tuple : (n : ℕ) → (u v : tuple A n) → Eq-tuple n u v → Id u v
+  eq-Eq-tuple zero-ℕ empty-tuple empty-tuple eq-tuple = refl
+  eq-Eq-tuple (succ-ℕ n) (x ∷ xs) (.x ∷ ys) (refl , eqs) =
+    ap (x ∷_) (eq-Eq-tuple n xs ys eqs)
 
-  is-retraction-eq-Eq-vec :
-    (n : ℕ) → (u v : vec A n) →
-    (p : u ＝ v) → eq-Eq-vec n u v (Eq-eq-vec n u v p) ＝ p
-  is-retraction-eq-Eq-vec zero-ℕ empty-vec empty-vec refl = refl
-  is-retraction-eq-Eq-vec (succ-ℕ n) (x ∷ xs) .(x ∷ xs) refl =
-    left-whisker-comp² (x ∷_) (is-retraction-eq-Eq-vec n xs xs) refl
+  is-retraction-eq-Eq-tuple :
+    (n : ℕ) → (u v : tuple A n) →
+    (p : u ＝ v) → eq-Eq-tuple n u v (Eq-eq-tuple n u v p) ＝ p
+  is-retraction-eq-Eq-tuple zero-ℕ empty-tuple empty-tuple refl = refl
+  is-retraction-eq-Eq-tuple (succ-ℕ n) (x ∷ xs) .(x ∷ xs) refl =
+    left-whisker-comp² (x ∷_) (is-retraction-eq-Eq-tuple n xs xs) refl
 
-  square-Eq-eq-vec :
-    (n : ℕ) (x : A) (u v : vec A n) (p : Id u v) →
-    (Eq-eq-vec _ (x ∷ u) (x ∷ v) (ap (x ∷_) p)) ＝ (refl , (Eq-eq-vec n u v p))
-  square-Eq-eq-vec zero-ℕ x empty-vec empty-vec refl = refl
-  square-Eq-eq-vec (succ-ℕ n) a (x ∷ xs) (.x ∷ .xs) refl = refl
+  square-Eq-eq-tuple :
+    (n : ℕ) (x : A) (u v : tuple A n) (p : Id u v) →
+    (Eq-eq-tuple _ (x ∷ u) (x ∷ v) (ap (x ∷_) p)) ＝
+    (refl , (Eq-eq-tuple n u v p))
+  square-Eq-eq-tuple zero-ℕ x empty-tuple empty-tuple refl = refl
+  square-Eq-eq-tuple (succ-ℕ n) a (x ∷ xs) (.x ∷ .xs) refl = refl
 
-  is-section-eq-Eq-vec :
-    (n : ℕ) (u v : vec A n) →
-    (p : Eq-vec n u v) → Eq-eq-vec n u v (eq-Eq-vec n u v p) ＝ p
-  is-section-eq-Eq-vec zero-ℕ empty-vec empty-vec (map-raise star) = refl
-  is-section-eq-Eq-vec (succ-ℕ n) (x ∷ xs) (.x ∷ ys) (refl , ps) =
-    ( square-Eq-eq-vec n x xs ys (eq-Eq-vec n xs ys ps)) ∙
-    ( eq-pair-eq-fiber (is-section-eq-Eq-vec n xs ys ps))
+  is-section-eq-Eq-tuple :
+    (n : ℕ) (u v : tuple A n) →
+    (p : Eq-tuple n u v) → Eq-eq-tuple n u v (eq-Eq-tuple n u v p) ＝ p
+  is-section-eq-Eq-tuple zero-ℕ empty-tuple empty-tuple (map-raise star) = refl
+  is-section-eq-Eq-tuple (succ-ℕ n) (x ∷ xs) (.x ∷ ys) (refl , ps) =
+    ( square-Eq-eq-tuple n x xs ys (eq-Eq-tuple n xs ys ps)) ∙
+    ( eq-pair-eq-fiber (is-section-eq-Eq-tuple n xs ys ps))
 
-  is-equiv-Eq-eq-vec :
-    (n : ℕ) → (u v : vec A n) → is-equiv (Eq-eq-vec n u v)
-  is-equiv-Eq-eq-vec n u v =
+  is-equiv-Eq-eq-tuple :
+    (n : ℕ) → (u v : tuple A n) → is-equiv (Eq-eq-tuple n u v)
+  is-equiv-Eq-eq-tuple n u v =
     is-equiv-is-invertible
-      ( eq-Eq-vec n u v)
-      ( is-section-eq-Eq-vec n u v)
-      ( is-retraction-eq-Eq-vec n u v)
+      ( eq-Eq-tuple n u v)
+      ( is-section-eq-Eq-tuple n u v)
+      ( is-retraction-eq-Eq-tuple n u v)
 
-  extensionality-vec : (n : ℕ) → (u v : vec A n) → Id u v ≃ Eq-vec n u v
-  extensionality-vec n u v = (Eq-eq-vec n u v , is-equiv-Eq-eq-vec n u v)
+  extensionality-tuple : (n : ℕ) → (u v : tuple A n) → Id u v ≃ Eq-tuple n u v
+  extensionality-tuple n u v = (Eq-eq-tuple n u v , is-equiv-Eq-eq-tuple n u v)
 ```
 
-### The types of listed vectors and functional vectors are equivalent
+### The types of listed tuples and functional tuples are equivalent
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  listed-vec-functional-vec : (n : ℕ) → functional-vec A n → vec A n
-  listed-vec-functional-vec zero-ℕ v = empty-vec
-  listed-vec-functional-vec (succ-ℕ n) v =
-    head-functional-vec n v ∷
-    listed-vec-functional-vec n (tail-functional-vec n v)
+  listed-tuple-functional-tuple : (n : ℕ) → functional-tuple A n → tuple A n
+  listed-tuple-functional-tuple zero-ℕ v = empty-tuple
+  listed-tuple-functional-tuple (succ-ℕ n) v =
+    head-functional-tuple n v ∷
+    listed-tuple-functional-tuple n (tail-functional-tuple n v)
 
-  functional-vec-vec : (n : ℕ) → vec A n → functional-vec A n
-  functional-vec-vec zero-ℕ v = empty-functional-vec
-  functional-vec-vec (succ-ℕ n) (a ∷ v) =
-    cons-functional-vec n a (functional-vec-vec n v)
+  functional-tuple-tuple : (n : ℕ) → tuple A n → functional-tuple A n
+  functional-tuple-tuple zero-ℕ v = empty-functional-tuple
+  functional-tuple-tuple (succ-ℕ n) (a ∷ v) =
+    cons-functional-tuple n a (functional-tuple-tuple n v)
 
-  is-section-functional-vec-vec :
-    (n : ℕ) → (listed-vec-functional-vec n ∘ functional-vec-vec n) ~ id
-  is-section-functional-vec-vec .zero-ℕ empty-vec = refl
-  is-section-functional-vec-vec .(succ-ℕ _) (a ∷ v) =
-    ap (λ u → a ∷ u) (is-section-functional-vec-vec _ v)
+  is-section-functional-tuple-tuple :
+    (n : ℕ) → (listed-tuple-functional-tuple n ∘ functional-tuple-tuple n) ~ id
+  is-section-functional-tuple-tuple .zero-ℕ empty-tuple = refl
+  is-section-functional-tuple-tuple .(succ-ℕ _) (a ∷ v) =
+    ap (λ u → a ∷ u) (is-section-functional-tuple-tuple _ v)
 
   abstract
-    is-retraction-functional-vec-vec :
-      (n : ℕ) → (functional-vec-vec n ∘ listed-vec-functional-vec n) ~ id
-    is-retraction-functional-vec-vec zero-ℕ v = eq-htpy (λ ())
-    is-retraction-functional-vec-vec (succ-ℕ n) v =
+    is-retraction-functional-tuple-tuple :
+      (n : ℕ) →
+      (functional-tuple-tuple n ∘ listed-tuple-functional-tuple n) ~ id
+    is-retraction-functional-tuple-tuple zero-ℕ v = eq-htpy (λ ())
+    is-retraction-functional-tuple-tuple (succ-ℕ n) v =
       eq-htpy
         ( λ where
           ( inl x) →
             htpy-eq
-              ( is-retraction-functional-vec-vec n (tail-functional-vec n v))
+              ( is-retraction-functional-tuple-tuple
+                ( n)
+                ( tail-functional-tuple n v))
               ( x)
           ( inr star) → refl)
 
-  is-equiv-listed-vec-functional-vec :
-    (n : ℕ) → is-equiv (listed-vec-functional-vec n)
-  is-equiv-listed-vec-functional-vec n =
+  is-equiv-listed-tuple-functional-tuple :
+    (n : ℕ) → is-equiv (listed-tuple-functional-tuple n)
+  is-equiv-listed-tuple-functional-tuple n =
     is-equiv-is-invertible
-      ( functional-vec-vec n)
-      ( is-section-functional-vec-vec n)
-      ( is-retraction-functional-vec-vec n)
+      ( functional-tuple-tuple n)
+      ( is-section-functional-tuple-tuple n)
+      ( is-retraction-functional-tuple-tuple n)
 
-  is-equiv-functional-vec-vec :
-    (n : ℕ) → is-equiv (functional-vec-vec n)
-  is-equiv-functional-vec-vec n =
+  is-equiv-functional-tuple-tuple :
+    (n : ℕ) → is-equiv (functional-tuple-tuple n)
+  is-equiv-functional-tuple-tuple n =
     is-equiv-is-invertible
-      ( listed-vec-functional-vec n)
-      ( is-retraction-functional-vec-vec n)
-      ( is-section-functional-vec-vec n)
+      ( listed-tuple-functional-tuple n)
+      ( is-retraction-functional-tuple-tuple n)
+      ( is-section-functional-tuple-tuple n)
 
-  compute-vec : (n : ℕ) → functional-vec A n ≃ vec A n
-  pr1 (compute-vec n) = listed-vec-functional-vec n
-  pr2 (compute-vec n) = is-equiv-listed-vec-functional-vec n
+  compute-tuple : (n : ℕ) → functional-tuple A n ≃ tuple A n
+  pr1 (compute-tuple n) = listed-tuple-functional-tuple n
+  pr2 (compute-tuple n) = is-equiv-listed-tuple-functional-tuple n
 ```
 
 ### Characterizing the elementhood predicate
 
 ```agda
-  is-in-functional-vec-is-in-vec :
-    (n : ℕ) (v : vec A n) (x : A) →
-    (x ∈-vec v) → (in-functional-vec n x (functional-vec-vec n v))
-  is-in-functional-vec-is-in-vec (succ-ℕ n) (y ∷ l) x (is-head .x l) =
+  is-in-functional-tuple-is-in-tuple :
+    (n : ℕ) (v : tuple A n) (x : A) →
+    (x ∈-tuple v) → (in-functional-tuple n x (functional-tuple-tuple n v))
+  is-in-functional-tuple-is-in-tuple (succ-ℕ n) (y ∷ l) x (is-head .x l) =
     (inr star) , refl
-  is-in-functional-vec-is-in-vec (succ-ℕ n) (y ∷ l) x (is-in-tail .x x₁ l I) =
-    inl (pr1 (is-in-functional-vec-is-in-vec n l x I)) ,
-    pr2 (is-in-functional-vec-is-in-vec n l x I)
+  is-in-functional-tuple-is-in-tuple
+    (succ-ℕ n) (y ∷ l) x (is-in-tail .x x₁ l I) =
+    inl (pr1 (is-in-functional-tuple-is-in-tuple n l x I)) ,
+    pr2 (is-in-functional-tuple-is-in-tuple n l x I)
 
-  is-in-vec-is-in-functional-vec :
-    (n : ℕ) (v : vec A n) (x : A) →
-    (in-functional-vec n x (functional-vec-vec n v)) → (x ∈-vec v)
-  is-in-vec-is-in-functional-vec (succ-ℕ n) (y ∷ v) x (inl k , p) =
-    is-in-tail x y v (is-in-vec-is-in-functional-vec n v x (k , p))
-  is-in-vec-is-in-functional-vec (succ-ℕ n) (y ∷ v) _ (inr k , refl) =
-    is-head (functional-vec-vec (succ-ℕ n) (y ∷ v) (inr k)) v
+  is-in-tuple-is-in-functional-tuple :
+    (n : ℕ) (v : tuple A n) (x : A) →
+    (in-functional-tuple n x (functional-tuple-tuple n v)) → (x ∈-tuple v)
+  is-in-tuple-is-in-functional-tuple (succ-ℕ n) (y ∷ v) x (inl k , p) =
+    is-in-tail x y v (is-in-tuple-is-in-functional-tuple n v x (k , p))
+  is-in-tuple-is-in-functional-tuple (succ-ℕ n) (y ∷ v) _ (inr k , refl) =
+    is-head (functional-tuple-tuple (succ-ℕ n) (y ∷ v) (inr k)) v
 ```
 
-### The type of vectors of elements in a truncated type is truncated
+### The type of tuples of elements in a truncated type is truncated
 
-#### The type of listed vectors of elements in a truncated type is truncated
+#### The type of listed tuples of elements in a truncated type is truncated
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  is-trunc-Eq-vec :
+  is-trunc-Eq-tuple :
     (k : 𝕋) (n : ℕ) → is-trunc (succ-𝕋 k) A →
-    (u v : vec A n) → is-trunc (k) (Eq-vec n u v)
-  is-trunc-Eq-vec k zero-ℕ A-trunc empty-vec empty-vec =
+    (u v : tuple A n) → is-trunc (k) (Eq-tuple n u v)
+  is-trunc-Eq-tuple k zero-ℕ A-trunc empty-tuple empty-tuple =
     is-trunc-is-contr k is-contr-raise-unit
-  is-trunc-Eq-vec k (succ-ℕ n) A-trunc (x ∷ xs) (y ∷ ys) =
-    is-trunc-product k (A-trunc x y) (is-trunc-Eq-vec k n A-trunc xs ys)
+  is-trunc-Eq-tuple k (succ-ℕ n) A-trunc (x ∷ xs) (y ∷ ys) =
+    is-trunc-product k (A-trunc x y) (is-trunc-Eq-tuple k n A-trunc xs ys)
 
-  center-is-contr-vec :
-    {n : ℕ} → is-contr A → vec A n
-  center-is-contr-vec {zero-ℕ} H = empty-vec
-  center-is-contr-vec {succ-ℕ n} H = center H ∷ center-is-contr-vec {n} H
+  center-is-contr-tuple :
+    {n : ℕ} → is-contr A → tuple A n
+  center-is-contr-tuple {zero-ℕ} H = empty-tuple
+  center-is-contr-tuple {succ-ℕ n} H = center H ∷ center-is-contr-tuple {n} H
 
-  contraction-is-contr-vec' :
-    {n : ℕ} (H : is-contr A) → (v : vec A n) →
-    Eq-vec n (center-is-contr-vec H) v
-  contraction-is-contr-vec' {zero-ℕ} H empty-vec =
-    refl-Eq-vec {l} {A} 0 empty-vec
-  pr1 (contraction-is-contr-vec' {succ-ℕ n} H (x ∷ v)) =
+  contraction-is-contr-tuple' :
+    {n : ℕ} (H : is-contr A) → (v : tuple A n) →
+    Eq-tuple n (center-is-contr-tuple H) v
+  contraction-is-contr-tuple' {zero-ℕ} H empty-tuple =
+    refl-Eq-tuple {l} {A} 0 empty-tuple
+  pr1 (contraction-is-contr-tuple' {succ-ℕ n} H (x ∷ v)) =
     eq-is-contr H
-  pr2 (contraction-is-contr-vec' {succ-ℕ n} H (x ∷ v)) =
-    contraction-is-contr-vec' {n} H v
+  pr2 (contraction-is-contr-tuple' {succ-ℕ n} H (x ∷ v)) =
+    contraction-is-contr-tuple' {n} H v
 
-  contraction-is-contr-vec :
-    {n : ℕ} (H : is-contr A) → (v : vec A n) → (center-is-contr-vec H) ＝ v
-  contraction-is-contr-vec {n} H v =
-    eq-Eq-vec n (center-is-contr-vec H) v (contraction-is-contr-vec' H v)
+  contraction-is-contr-tuple :
+    {n : ℕ} (H : is-contr A) → (v : tuple A n) → (center-is-contr-tuple H) ＝ v
+  contraction-is-contr-tuple {n} H v =
+    eq-Eq-tuple n (center-is-contr-tuple H) v (contraction-is-contr-tuple' H v)
 
-  is-contr-vec :
-    {n : ℕ} → is-contr A → is-contr (vec A n)
-  pr1 (is-contr-vec H) = center-is-contr-vec H
-  pr2 (is-contr-vec H) = contraction-is-contr-vec H
+  is-contr-tuple :
+    {n : ℕ} → is-contr A → is-contr (tuple A n)
+  pr1 (is-contr-tuple H) = center-is-contr-tuple H
+  pr2 (is-contr-tuple H) = contraction-is-contr-tuple H
 
-  is-trunc-vec :
-    (k : 𝕋) → (n : ℕ) → is-trunc k A → is-trunc k (vec A n)
-  is-trunc-vec neg-two-𝕋 n H = is-contr-vec H
-  is-trunc-vec (succ-𝕋 k) n H x y =
+  is-trunc-tuple :
+    (k : 𝕋) → (n : ℕ) → is-trunc k A → is-trunc k (tuple A n)
+  is-trunc-tuple neg-two-𝕋 n H = is-contr-tuple H
+  is-trunc-tuple (succ-𝕋 k) n H x y =
     is-trunc-equiv k
-      ( Eq-vec n x y)
-      ( extensionality-vec n x y)
-      ( is-trunc-Eq-vec k n H x y)
+      ( Eq-tuple n x y)
+      ( extensionality-tuple n x y)
+      ( is-trunc-Eq-tuple k n H x y)
 ```
 
-#### The type of functional vectors of elements in a truncated type is truncated
+#### The type of functional tuples of elements in a truncated type is truncated
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  is-trunc-functional-vec :
-    (k : 𝕋) (n : ℕ) → is-trunc k A → is-trunc k (functional-vec A n)
-  is-trunc-functional-vec k n H = is-trunc-function-type k H
+  is-trunc-functional-tuple :
+    (k : 𝕋) (n : ℕ) → is-trunc k A → is-trunc k (functional-tuple A n)
+  is-trunc-functional-tuple k n H = is-trunc-function-type k H
 ```
 
-### The type of vectors of elements in a set is a set
+### The type of tuples of elements in a set is a set
 
-#### The type of listed vectors of elements in a set is a set
+#### The type of listed tuples of elements in a set is a set
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  is-set-vec : (n : ℕ) → is-set A -> is-set (vec A n)
-  is-set-vec = is-trunc-vec zero-𝕋
+  is-set-tuple : (n : ℕ) → is-set A -> is-set (tuple A n)
+  is-set-tuple = is-trunc-tuple zero-𝕋
 
-vec-Set : {l : Level} → Set l → ℕ → Set l
-pr1 (vec-Set A n) = vec (type-Set A) n
-pr2 (vec-Set A n) = is-set-vec n (is-set-type-Set A)
+tuple-Set : {l : Level} → Set l → ℕ → Set l
+pr1 (tuple-Set A n) = tuple (type-Set A) n
+pr2 (tuple-Set A n) = is-set-tuple n (is-set-type-Set A)
 ```
 
-#### The type of functional vectors of elements in a set is a set
+#### The type of functional tuples of elements in a set is a set
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  is-set-functional-vec : (n : ℕ) → is-set A → is-set (functional-vec A n)
-  is-set-functional-vec = is-trunc-functional-vec zero-𝕋
+  is-set-functional-tuple : (n : ℕ) → is-set A → is-set (functional-tuple A n)
+  is-set-functional-tuple = is-trunc-functional-tuple zero-𝕋
 
-functional-vec-Set : {l : Level} → Set l → ℕ → Set l
-pr1 (functional-vec-Set A n) = functional-vec (type-Set A) n
-pr2 (functional-vec-Set A n) = is-set-functional-vec n (is-set-type-Set A)
+functional-tuple-Set : {l : Level} → Set l → ℕ → Set l
+pr1 (functional-tuple-Set A n) = functional-tuple (type-Set A) n
+pr2 (functional-tuple-Set A n) = is-set-functional-tuple n (is-set-type-Set A)
 ```
 
-### Adding the tail to the head gives the same vector
+### Adding the tail to the head gives the same tuple
 
-#### Adding the tail to the head gives the same listed vector
+#### Adding the tail to the head gives the same listed tuple
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  cons-head-tail-vec :
+  cons-head-tail-tuple :
     (n : ℕ) →
-    (v : vec A (succ-ℕ n)) →
-    ((head-vec v) ∷ (tail-vec v)) ＝ v
-  cons-head-tail-vec n (x ∷ v) = refl
+    (v : tuple A (succ-ℕ n)) →
+    ((head-tuple v) ∷ (tail-tuple v)) ＝ v
+  cons-head-tail-tuple n (x ∷ v) = refl
 ```
 
-#### Adding the tail to the head gives the same functional vector
+#### Adding the tail to the head gives the same functional tuple
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
-  htpy-cons-head-tail-functional-vec :
+  htpy-cons-head-tail-functional-tuple :
     ( n : ℕ) →
-    ( v : functional-vec A (succ-ℕ n)) →
-    ( cons-functional-vec n
-      ( head-functional-vec n v)
-      ( tail-functional-vec n v)) ~
+    ( v : functional-tuple A (succ-ℕ n)) →
+    ( cons-functional-tuple n
+      ( head-functional-tuple n v)
+      ( tail-functional-tuple n v)) ~
       ( v)
-  htpy-cons-head-tail-functional-vec n v (inl x) = refl
-  htpy-cons-head-tail-functional-vec n v (inr star) = refl
+  htpy-cons-head-tail-functional-tuple n v (inl x) = refl
+  htpy-cons-head-tail-functional-tuple n v (inr star) = refl
 
-  cons-head-tail-functional-vec :
+  cons-head-tail-functional-tuple :
     ( n : ℕ) →
-    ( v : functional-vec A (succ-ℕ n)) →
-    ( cons-functional-vec n
-      ( head-functional-vec n v)
-      ( tail-functional-vec n v)) ＝
+    ( v : functional-tuple A (succ-ℕ n)) →
+    ( cons-functional-tuple n
+      ( head-functional-tuple n v)
+      ( tail-functional-tuple n v)) ＝
       ( v)
-  cons-head-tail-functional-vec n v =
-    eq-htpy (htpy-cons-head-tail-functional-vec n v)
+  cons-head-tail-functional-tuple n v =
+    eq-htpy (htpy-cons-head-tail-functional-tuple n v)
 ```
 
-### Computing the transport of a vector over its size
+### Computing the transport of a tuple over its size
 
 ```agda
-compute-tr-vec :
+compute-tr-tuple :
   {l : Level} {A : UU l}
-  {n m : ℕ} (p : succ-ℕ n ＝ succ-ℕ m) (v : vec A n) (x : A) →
-  tr (vec A) p (x ∷ v) ＝
-  (x ∷ tr (vec A) (is-injective-succ-ℕ p) v)
-compute-tr-vec refl v x = refl
+  {n m : ℕ} (p : succ-ℕ n ＝ succ-ℕ m) (v : tuple A n) (x : A) →
+  tr (tuple A) p (x ∷ v) ＝
+  (x ∷ tr (tuple A) (is-injective-succ-ℕ p) v)
+compute-tr-tuple refl v x = refl
 ```

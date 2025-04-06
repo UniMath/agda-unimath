@@ -114,7 +114,7 @@ equiv-iterated-product-Fin-recursive-lists :
   {l : Level} (l : list (UU l)) →
   iterated-product-Fin-recursive
     ( length-array (array-list l))
-    ( functional-vec-array (array-list l)) ≃
+    ( functional-tuple-array (array-list l)) ≃
   iterated-product-lists l
 equiv-iterated-product-Fin-recursive-lists nil = id-equiv
 equiv-iterated-product-Fin-recursive-lists (cons x l) =
@@ -194,17 +194,17 @@ equiv-permutation-iterated-product-lists L t =
   ( equiv-iterated-product-Fin-recursive-lists L ∘e
     ( ( equiv-permutation-iterated-product-Fin-recursive
         ( length-list L)
-        ( functional-vec-array (array-list L))
+        ( functional-tuple-array (array-list L))
         ( t)) ∘e
       ( equiv-eq
         ( ap
           ( λ p →
             iterated-product-Fin-recursive
               ( length-array p)
-              ( functional-vec-array p))
+              ( functional-tuple-array p))
           ( is-retraction-array-list
             ( length-list L ,
-              ( functional-vec-array (array-list L) ∘ map-equiv t)))) ∘e
+              ( functional-tuple-array (array-list L) ∘ map-equiv t)))) ∘e
         ( inv-equiv
           ( equiv-iterated-product-Fin-recursive-lists (permute-list L t))))))
 

@@ -58,7 +58,7 @@ concrete-group-cycle-prime-decomposition-ℕ n H =
         ( map-list
           ( concrete-group-Cyclic-Type)
           ( list-fundamental-theorem-arithmetic-ℕ n H))))
-    ( functional-vec-array
+    ( functional-tuple-array
       ( array-list
         ( map-list
           ( concrete-group-Cyclic-Type)
