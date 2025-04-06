@@ -184,3 +184,32 @@ module _
       ＝ neg-left-module-Ring R N (f x)
         by mul-neg-one-left-module-Ring R N (f x)
 ```
+
+### The identity is a linear map
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (M : left-module-Ring l2 R)
+  where
+
+  id-linear-map-left-module-Ring : linear-map-left-module-Ring R M M
+  id-linear-map-left-module-Ring = (id , (λ _ _ → refl) , (λ _ _ → refl))
+```
+
+### The composition of linear maps is a linear map
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (R : Ring l1)
+  (M : left-module-Ring l2 R) (N : left-module-Ring l3 R)
+  (O : left-module-Ring l4 R)
+  where
+
+  comp-linear-map-left-module-Ring :
+    linear-map-left-module-Ring R N O → linear-map-left-module-Ring R M N →
+    linear-map-left-module-Ring R M O
+  comp-linear-map-left-module-Ring (f , add-f , homo-f) (g , add-g , homo-g) =
+    ( f ∘ g ,
+      ( λ x y → ap f (add-g x y) ∙ add-f (g x) (g y)) ,
+      ( λ c x → ap f (homo-g c x) ∙ homo-f c (g x)))
+```
