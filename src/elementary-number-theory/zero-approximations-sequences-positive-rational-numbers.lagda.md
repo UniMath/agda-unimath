@@ -44,6 +44,7 @@ open import foundation.universe-levels
 open import group-theory.arithmetic-sequences-semigroups
 open import group-theory.powers-of-elements-monoids
 
+open import order-theory.infinite-limit-sequences-preorders
 open import order-theory.sequences-preorders
 open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 ```
@@ -56,7 +57,7 @@ A [sequence](foundation.sequences.md) `u` of
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 is a
 {{#concept "zero approximation" Disambiguation="sequence of positive rational numbers" Agda=zero-approximation-sequence-ℚ⁺}}
-if there exists a map `m : ℚ⁺ → ℕ` such that `u n < ε` in ℚ⁺ whenever `m ε ≤ n`
+if there exists a map `m : ℚ⁺ → ℕ` such that `u n ≤ ε` in ℚ⁺ whenever `m ε ≤ n`
 in ℕ.
 
 ## Definitions
@@ -77,7 +78,7 @@ module _
           ( ℕ)
           ( λ n →
             leq-ℕ-Prop (m ε) n ⇒
-            le-prop-ℚ⁺ (u n) ε))
+            leq-prop-ℚ⁺ (u n) ε))
 
   is-modulus-zero-approximation-sequence-ℚ⁺ : (ℚ⁺ → ℕ) → UU lzero
   is-modulus-zero-approximation-sequence-ℚ⁺ m =
@@ -159,12 +160,12 @@ module _
   modulus-leq-modulus-zero-approximation-sequence-ℚ⁺ =
     tot
       ( λ N Mu ε n J →
-        concatenate-leq-le-ℚ
+        transitive-leq-ℚ
           ( rational-ℚ⁺ (u n))
           ( rational-ℚ⁺ (v n))
           ( rational-ℚ⁺ ε)
-          ( I n)
-          ( Mu ε n J))
+          ( Mu ε n J)
+          ( I n))
 
   is-downward-closed-zero-approximation-sequence-ℚ⁺ :
     is-zero-approximation-sequence-ℚ⁺ v →
@@ -213,9 +214,9 @@ module _
       ( modulus-modulus-add-modulus-zero-approximations-sequence-ℚ⁺ Mu Mv))
   is-modulus-modulus-add-modulus-zero-approximations-sequence-ℚ⁺ Mu Mv ε n I =
     tr
-      ( le-ℚ⁺ (seq-add-zero-approximations-sequence-ℚ⁺ n))
+      ( leq-ℚ⁺ (seq-add-zero-approximations-sequence-ℚ⁺ n))
       ( eq-add-split-ℚ⁺ ε)
-      ( preserves-le-add-ℚ
+      ( preserves-leq-add-ℚ
         { rational-ℚ⁺ (seq-zero-approximation-sequence-ℚ⁺ u n)}
         { rational-ℚ⁺ (left-summand-split-ℚ⁺ ε)}
         { rational-ℚ⁺ (seq-zero-approximation-sequence-ℚ⁺ v n)}
@@ -310,4 +311,44 @@ associative-add-zero-approximation-sequence-ℚ⁺ u v w =
         ( seq-zero-approximation-sequence-ℚ⁺ u n)
         ( seq-zero-approximation-sequence-ℚ⁺ v n)
         ( seq-zero-approximation-sequence-ℚ⁺ w n))
+```
+
+### Addition of zero approximations is commutative
+
+```agda
+commutative-add-zero-approximation-sequence-ℚ⁺ :
+  (u v : zero-approximation-sequence-ℚ⁺) →
+  add-zero-approximation-sequence-ℚ⁺ u v ＝
+  add-zero-approximation-sequence-ℚ⁺ v u
+commutative-add-zero-approximation-sequence-ℚ⁺ u v =
+  eq-htpy-seq-zero-approximation-sequence-ℚ⁺
+    ( add-zero-approximation-sequence-ℚ⁺ u v)
+    ( add-zero-approximation-sequence-ℚ⁺ v u)
+    ( λ n →
+      commutative-add-ℚ⁺
+        ( seq-zero-approximation-sequence-ℚ⁺ u n)
+        ( seq-zero-approximation-sequence-ℚ⁺ v n))
+```
+
+### The inverse of a sequence of positive rational numbers tending to infinity is a zero approximation
+
+```agda
+module _
+  (u : sequence ℚ⁺)
+  where
+
+  modulus-inv-modulus-limit-∞-sequence-ℚ⁺ :
+    modulus-limit-∞-sequence-Preorder preorder-ℚ⁺ (inv-ℚ⁺ ∘ u) →
+    modulus-zero-approximation-sequence-ℚ⁺ u
+  modulus-inv-modulus-limit-∞-sequence-ℚ⁺ =
+    map-Σ
+      ( is-modulus-zero-approximation-sequence-ℚ⁺ u)
+      ( λ m → m ∘ inv-ℚ⁺)
+      ( λ m Mu ε n I → inv-leq-ℚ⁺ ε (u n) (Mu (inv-ℚ⁺ ε) n I))
+
+  is-zero-approximation-inv-is-limit-∞-sequence-ℚ⁺ :
+    is-limit-∞-sequence-Preorder preorder-ℚ⁺ (inv-ℚ⁺ ∘ u) →
+    is-zero-approximation-sequence-ℚ⁺ u
+  is-zero-approximation-inv-is-limit-∞-sequence-ℚ⁺ =
+    map-is-inhabited modulus-inv-modulus-limit-∞-sequence-ℚ⁺
 ```

@@ -9,6 +9,7 @@ module elementary-number-theory.multiplicative-group-of-positive-rational-number
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
@@ -87,6 +88,22 @@ pr1 abelian-group-mul-ℚ⁺ = group-mul-ℚ⁺
 pr2 abelian-group-mul-ℚ⁺ = commutative-mul-ℚ⁺
 ```
 
+### Inversion reverses inequality on the positive rational numbers
+
+```agda
+abstract
+  inv-leq-ℚ⁺ : (x y : ℚ⁺) → leq-ℚ⁺ (inv-ℚ⁺ x) (inv-ℚ⁺ y) → leq-ℚ⁺ y x
+  inv-leq-ℚ⁺ x y =
+    binary-tr
+      ( leq-ℤ)
+      ( commutative-mul-ℤ
+        ( denominator-ℚ⁺ x)
+        ( numerator-ℚ⁺ y))
+      ( commutative-mul-ℤ
+        ( denominator-ℚ⁺ y)
+        ( numerator-ℚ⁺ x))
+```
+
 ### Inversion reverses strict inequality on the positive rational numbers
 
 ```agda
@@ -101,6 +118,19 @@ abstract
       ( commutative-mul-ℤ
         ( denominator-ℚ⁺ y)
         ( numerator-ℚ⁺ x))
+
+  inv-le-ℚ⁺' : (x y : ℚ⁺) → le-ℚ⁺ x y → le-ℚ⁺ (inv-ℚ⁺ y) (inv-ℚ⁺ x)
+  inv-le-ℚ⁺' x y =
+    binary-tr
+      ( le-ℤ)
+      ( inv
+        ( commutative-mul-ℤ
+          ( denominator-ℚ⁺ y)
+          ( numerator-ℚ⁺ x)))
+      ( inv
+        ( commutative-mul-ℤ
+          ( denominator-ℚ⁺ x)
+          ( numerator-ℚ⁺ y)))
 ```
 
 ### Inversion of positive rational numbers commutes with multiplication
