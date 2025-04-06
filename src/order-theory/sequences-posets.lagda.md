@@ -18,6 +18,7 @@ open import foundation.sequences
 open import foundation.universe-levels
 
 open import order-theory.posets
+open import order-theory.sequences-preorders
 ```
 
 </details>
@@ -38,30 +39,39 @@ module _
   where
 
   type-sequence-Poset : UU l1
-  type-sequence-Poset = sequence (type-Poset P)
+  type-sequence-Poset = type-sequence-Preorder (preorder-Poset P)
 ```
 
 ### Pointwise comparison on sequences in partially ordered sets
 
 ```agda
 module _
-  {l1 l2 : Level} (P : Poset l1 l2) (u v : type-sequence-Poset P)
+  {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  leq-value-prop-sequence-Poset : ℕ → Prop l2
-  leq-value-prop-sequence-Poset n = leq-prop-Poset P (u n) (v n)
+  leq-value-prop-sequence-Poset :
+    (u v : type-sequence-Poset P) → ℕ → Prop l2
+  leq-value-prop-sequence-Poset =
+    leq-value-prop-sequence-Preorder (preorder-Poset P)
 
-  leq-value-sequence-Poset : ℕ → UU l2
-  leq-value-sequence-Poset = type-Prop ∘ leq-value-prop-sequence-Poset
+  leq-value-sequence-Poset :
+    (u v : type-sequence-Poset P) → ℕ → UU l2
+  leq-value-sequence-Poset =
+    leq-value-sequence-Preorder (preorder-Poset P)
 
-  leq-prop-sequence-Poset : Prop l2
-  leq-prop-sequence-Poset = Π-Prop ℕ leq-value-prop-sequence-Poset
+  leq-prop-sequence-Poset : (u v : type-sequence-Poset P) → Prop l2
+  leq-prop-sequence-Poset =
+    leq-prop-sequence-Preorder (preorder-Poset P)
 
-  leq-sequence-Poset : UU l2
-  leq-sequence-Poset = type-Prop leq-prop-sequence-Poset
+  leq-sequence-Poset : (u v : type-sequence-Poset P) → UU l2
+  leq-sequence-Poset =
+    leq-sequence-Preorder (preorder-Poset P)
 
-  is-prop-leq-sequence-Poset : is-prop leq-sequence-Poset
-  is-prop-leq-sequence-Poset = is-prop-type-Prop leq-prop-sequence-Poset
+  is-prop-leq-sequence-Poset :
+    (u v : type-sequence-Poset P) →
+    is-prop (leq-sequence-Poset u v)
+  is-prop-leq-sequence-Poset =
+    is-prop-leq-sequence-Preorder (preorder-Poset P)
 ```
 
 ## Properties
@@ -73,21 +83,19 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  refl-leq-sequence-Poset : is-reflexive (leq-sequence-Poset P)
-  refl-leq-sequence-Poset u n = refl-leq-Poset P (u n)
-
-  transitive-leq-sequence-Poset : is-transitive (leq-sequence-Poset P)
-  transitive-leq-sequence-Poset u v w J I n =
-    transitive-leq-Poset P (u n) (v n) (w n) (J n) (I n)
-
   antisymmetric-leq-sequence-Poset : is-antisymmetric (leq-sequence-Poset P)
   antisymmetric-leq-sequence-Poset u v I J =
     eq-htpy (λ n → antisymmetric-leq-Poset P (u n) (v n) (I n) (J n))
 
   sequence-Poset : Poset l1 l2
-  pr1 (pr1 sequence-Poset) = type-sequence-Poset P
-  pr1 (pr2 (pr1 sequence-Poset)) = leq-prop-sequence-Poset P
-  pr1 (pr2 (pr2 (pr1 sequence-Poset))) = refl-leq-sequence-Poset
-  pr2 (pr2 (pr2 (pr1 sequence-Poset))) = transitive-leq-sequence-Poset
+  pr1 sequence-Poset = sequence-Preorder (preorder-Poset P)
   pr2 sequence-Poset = antisymmetric-leq-sequence-Poset
+
+  refl-leq-sequence-Poset : is-reflexive (leq-sequence-Poset P)
+  refl-leq-sequence-Poset =
+    refl-leq-Poset sequence-Poset
+
+  transitive-leq-sequence-Poset : is-transitive (leq-sequence-Poset P)
+  transitive-leq-sequence-Poset =
+    transitive-leq-Poset sequence-Poset
 ```
