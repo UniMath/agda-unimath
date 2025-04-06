@@ -14,7 +14,9 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.inhabited-subtypes
+open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.sequences
 open import foundation.subtypes
@@ -100,4 +102,35 @@ module _
     (u : limit-∞-sequence-Preorder) →
     is-limit-∞-sequence-Preorder P (seq-limit-∞-sequence-Preorder u)
   is-limit-∞-seq-limit-∞-sequence-Preorder = pr2
+```
+
+## Properties
+
+### The subtype of sequences tending to infinity is upward closed
+
+Given to sequences `u ≤ v`, if `u` tends to infinity, so does `v`.
+
+```agda
+module _
+  {l1 l2 : Level} (P : Preorder l1 l2)
+  (u v : type-sequence-Preorder P) (I : leq-sequence-Preorder P u v)
+  where
+
+  modulus-leq-modulus-limit-∞-sequence-Preorder :
+    modulus-limit-∞-sequence-Preorder P u →
+    modulus-limit-∞-sequence-Preorder P v
+  modulus-leq-modulus-limit-∞-sequence-Preorder =
+    tot
+      ( λ N Mu x n J →
+        transitive-leq-Preorder P
+          ( x)
+          ( u n)
+          ( v n)
+          ( I n)
+          ( Mu x n J))
+
+  is-upward-closed-limit-∞-sequence-Preorder :
+    is-limit-∞-sequence-Preorder P u → is-limit-∞-sequence-Preorder P v
+  is-upward-closed-limit-∞-sequence-Preorder =
+    map-is-inhabited modulus-leq-modulus-limit-∞-sequence-Preorder
 ```
