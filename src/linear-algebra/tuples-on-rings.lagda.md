@@ -33,7 +33,9 @@ open import ring-theory.rings
 
 ## Idea
 
-Given a ring `R`, the type `tuple n R` of `R`-tuples is an `R`-module.
+Given a [ring](ring-theory.rings.md) `R`, the type `tuple n R` of
+`R`-[tuples](linear-algebra.tuples.md) is an
+[Abelian group](group-theory.abelian-groups.md).
 
 ## Definitions
 
@@ -280,3 +282,8 @@ module _
   pr1 (tuple-Ring-Ab n) = tuple-Ring-Group n
   pr2 (tuple-Ring-Ab n) = commutative-add-tuple-Ring R
 ```
+
+## See also
+
+* For the [module](ring-theory.modules-rings.md) of tuples on rings, see
+  [`linear-algebra.scalar-multiplication-tuples-on-rings`](

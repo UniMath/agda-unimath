@@ -20,7 +20,7 @@ open import linear-algebra.tuples
 ## Idea
 
 Any operation `B → A → A` for some type `B` of formal scalars induces an
-operation `B → tuple n A → tuple n A`.
+operation on [tuples](linear-algebra.tuples.md) `B → tuple n A → tuple n A`.
 
 ## Definition
 

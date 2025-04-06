@@ -19,7 +19,8 @@ open import linear-algebra.matrices
 
 ## Idea
 
-Any map `f : A → B` induces a map `matrix A m n → matrix B m n`.
+Any map `f : A → B` induces a map between [matrices](linear-algebra.matrices.md)
+`matrix A m n → matrix B m n`.
 
 ## Definition
 

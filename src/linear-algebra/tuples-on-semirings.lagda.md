@@ -30,7 +30,9 @@ open import ring-theory.semirings
 
 ## Idea
 
-Given a ring `R`, the type `tuple n R` of `R`-tuples is an `R`-module
+Given a [semiring](ring-theory.semirings.md) `R`, the type `tuple n R` of
+`R`-[tuples](linear-algebra.tuples.md) is a
+[commutative monoid](group-theory.commutative-monoids.md) under addition.
 
 ## Definitions
 

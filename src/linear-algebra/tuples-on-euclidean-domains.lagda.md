@@ -33,8 +33,8 @@ open import linear-algebra.tuples
 
 ## Idea
 
-Given an euclidean domain `R`, the type `tuple n R` of `R`-tuples is an
-`R`-module.
+Given an [Euclidean domain](commutative-algebra.euclidean-domains.md) `R`, the
+type `tuple n R` of `R`-[tuples](linear-algebra.tuples.md) is an `R`-module.
 
 ## Definitions
 

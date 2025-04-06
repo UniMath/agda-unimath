@@ -26,7 +26,8 @@ open import linear-algebra.tuples-on-semirings
 
 ## Idea
 
-Tuples on a commutative semiring `R` are tuples on the underlying type of `R`.
+Tuples on a [commutative semiring](commutative-algebra.commutative-semirings.md)
+`R` are [tuples](linear-algebra.tuples.md) on the underlying type of `R`.
 The commutative semiring structure on `R` induces further structure on the type
 of tuples on `R`.
 

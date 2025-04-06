@@ -28,7 +28,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Any map `f : A → B` determines a map `tuple A n → tuple B n` for every `n`.
+Any map `f : A → B` determines a map between [tuples](linear-algebra.tuples.md)
+`tuple A n → tuple B n` for every `n`.
 
 ## Definition
 

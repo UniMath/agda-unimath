@@ -26,6 +26,9 @@ open import ring-theory.rings
 
 ## Definitions
 
+A [matrix](linear-algebra.matrices.md) on a [ring](ring-theory.rings.md)
+is a matrix whose elements are elements of the ring.
+
 ### Matrices
 
 ```agda

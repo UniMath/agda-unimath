@@ -19,7 +19,8 @@ open import lists.reversing-lists public
 open import lists.sort-by-insertion-lists public
 open import lists.sort-by-insertion-tuples public
 open import lists.sorted-lists public
+open import lists.sorted-tuples public
 open import lists.sorting-algorithms-lists public
-open import lists.sorting-algorithms-vectors public
+open import lists.sorting-algorithms-tuples public
 open import lists.universal-property-lists-wild-monoids public
 ```

@@ -37,10 +37,15 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-There are two equivalent definitions of tuples of length `n`. First, a **listed
-tuple** of length `n` is a list of `n` elements of type `A`. Secondly, a
-**functional tuple** of length `n` is a map `Fin n → A`. We define both types of
-tuples and show that they are equivalent.
+There are two equivalent definitions of
+{{#concept "tuples" WD="n-tuple" WDID=Q600590}} of length `n`. First, a
+{{#concept "listed tuple" Agda=tuple}} of length `n` is a list of `n` elements
+of type `A`. Secondly, a
+{{#concept "functional tuple" Agda=functional-tuple}} of length `n` is a map
+from the
+[standard finite type](univalent-combinatorics.standard-finite-types.md) of
+cardinality `n` `Fin n` to `A`. We define both types of tuples and show that
+they are equivalent.
 
 ## Definitions
 

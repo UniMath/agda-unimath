@@ -18,8 +18,8 @@ open import linear-algebra.tuples
 
 ## Idea
 
-Diagonal tuples are tuples on the diagonal, i.e., they are tuples of which all
-coefficients are equal.
+Diagonal tuples are [tuples](linear-algebra.tuples.md) on the diagonal, i.e.,
+they are tuples of which all coefficients are equal.
 
 ## Definition
 

@@ -19,7 +19,8 @@ open import linear-algebra.matrices
 
 ## Idea
 
-Constant matrices are matrices in which all elements are the same.
+Constant matrices are [matrices](linear-algebra.matrices.md) in which all
+elements are the same.
 
 ## Definition
 

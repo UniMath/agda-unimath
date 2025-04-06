@@ -23,8 +23,10 @@ open import linear-algebra.tuples
 
 ## Idea
 
-The transposition of a matrix is the operation that turns rows into columns and
-columns into rows.
+The
+{{#concept "transposition of a matrix" WD="matrix transposition" WDID=Q77961711 Agda=transpose-matrix}}
+is the operation on [matrices](linear-algebra.matrices.md) that turns rows into
+columns and columns into rows.
 
 ## Definition
 
