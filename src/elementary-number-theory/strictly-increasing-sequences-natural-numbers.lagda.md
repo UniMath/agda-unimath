@@ -18,11 +18,13 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sequences
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import order-theory.infinite-limit-sequences-preorders
 open import order-theory.strict-order-preserving-maps
 open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 ```
@@ -112,7 +114,7 @@ module _
   compute-comp-strictly-increasing-sequence-ℕ = refl
 ```
 
-### Strictly increasing sequences of natural numbers are unbounded
+### Strictly increasing sequences of natural numbers tend to infinity
 
 ```agda
 module _
@@ -120,56 +122,61 @@ module _
   ( H : is-strictly-increasing-sequence-ℕ f)
   where
 
-  is-unbounded-is-strictly-increasing-sequence-ℕ :
-    (M : ℕ) → Σ ℕ (λ N → (p : ℕ) → leq-ℕ N p → leq-ℕ M (f p))
-  is-unbounded-is-strictly-increasing-sequence-ℕ zero-ℕ =
-    ( zero-ℕ , λ p K → leq-zero-ℕ (f p))
-  is-unbounded-is-strictly-increasing-sequence-ℕ (succ-ℕ M) =
-    map-Σ
-      ( λ N → (p : ℕ) → leq-ℕ N p → leq-ℕ (succ-ℕ M) (f p))
-      ( succ-ℕ)
-      ( λ N K p I →
-        leq-succ-le-ℕ M (f p)
-          ( concatenate-leq-le-ℕ
-            { M}
-            { f N}
-            { f p}
-            ( K N (refl-leq-ℕ N))
-            ( H N p
-              ( concatenate-le-leq-ℕ
-                { N}
-                { succ-ℕ N}
-                { p}
-                ( succ-le-ℕ N)
-                ( I)))))
-      ( is-unbounded-is-strictly-increasing-sequence-ℕ M)
+  opaque
+    is-unbounded-is-strictly-increasing-sequence-ℕ :
+      (M : ℕ) → Σ ℕ (λ N → (p : ℕ) → leq-ℕ N p → leq-ℕ M (f p))
+    is-unbounded-is-strictly-increasing-sequence-ℕ zero-ℕ =
+      ( zero-ℕ , λ p K → leq-zero-ℕ (f p))
+    is-unbounded-is-strictly-increasing-sequence-ℕ (succ-ℕ M) =
+      map-Σ
+        ( λ N → (p : ℕ) → leq-ℕ N p → leq-ℕ (succ-ℕ M) (f p))
+        ( succ-ℕ)
+        ( λ N K p I →
+          leq-succ-le-ℕ M (f p)
+            ( concatenate-leq-le-ℕ
+              { M}
+              { f N}
+              { f p}
+              ( K N (refl-leq-ℕ N))
+              ( H N p
+                ( concatenate-le-leq-ℕ
+                  { N}
+                  { succ-ℕ N}
+                  { p}
+                  ( succ-le-ℕ N)
+                  ( I)))))
+        ( is-unbounded-is-strictly-increasing-sequence-ℕ M)
 
-  modulus-is-unbounded-is-strictly-increasing-sequence-ℕ : ℕ → ℕ
-  modulus-is-unbounded-is-strictly-increasing-sequence-ℕ M =
+  modulus-modulus-limit-∞-is-strictly-increasing-sequence-ℕ : ℕ → ℕ
+  modulus-modulus-limit-∞-is-strictly-increasing-sequence-ℕ M =
     pr1 (is-unbounded-is-strictly-increasing-sequence-ℕ M)
 
-  leq-bound-is-strictly-increasing-sequence-ℕ :
-    (M p : ℕ) →
-    leq-ℕ (modulus-is-unbounded-is-strictly-increasing-sequence-ℕ M) p →
-    leq-ℕ M (f p)
-  leq-bound-is-strictly-increasing-sequence-ℕ M =
+  is-modulus-modulus-limit-∞-is-strictly-increasing-sequence-ℕ :
+    is-modulus-limit-∞-sequence-Preorder
+      ℕ-Preorder
+      f
+      modulus-modulus-limit-∞-is-strictly-increasing-sequence-ℕ
+  is-modulus-modulus-limit-∞-is-strictly-increasing-sequence-ℕ M =
     pr2 (is-unbounded-is-strictly-increasing-sequence-ℕ M)
+
+  modulus-limit-∞-is-strictly-increasing-sequence-ℕ :
+    modulus-limit-∞-sequence-Preorder ℕ-Preorder f
+  modulus-limit-∞-is-strictly-increasing-sequence-ℕ =
+    modulus-modulus-limit-∞-is-strictly-increasing-sequence-ℕ ,
+    is-modulus-modulus-limit-∞-is-strictly-increasing-sequence-ℕ
+
+  is-limit-∞-is-strictly-increasing-sequence-ℕ :
+    is-limit-∞-sequence-Preorder ℕ-Preorder f
+  is-limit-∞-is-strictly-increasing-sequence-ℕ =
+    unit-trunc-Prop modulus-limit-∞-is-strictly-increasing-sequence-ℕ
 ```
 
 ```agda
-module _
-  (f : strictly-increasing-sequence-ℕ)
-  where
-
-  is-unbounded-strictly-increasing-sequence-ℕ :
-    (M : ℕ) →
-    Σ ℕ
-      ( λ N →
-        (p : ℕ) →
-        leq-ℕ N p →
-        leq-ℕ M (seq-strictly-increasing-sequence-ℕ f p))
-  is-unbounded-strictly-increasing-sequence-ℕ =
-    is-unbounded-is-strictly-increasing-sequence-ℕ
-      ( seq-strictly-increasing-sequence-ℕ f)
-      ( is-strictly-increasing-seq-strictly-increasing-sequence-ℕ f)
+limit-∞-strictly-increasing-sequence-ℕ :
+  strictly-increasing-sequence-ℕ → limit-∞-sequence-Preorder ℕ-Preorder
+limit-∞-strictly-increasing-sequence-ℕ f =
+  seq-strictly-increasing-sequence-ℕ f ,
+  is-limit-∞-is-strictly-increasing-sequence-ℕ
+    ( seq-strictly-increasing-sequence-ℕ f)
+    ( is-strictly-increasing-seq-strictly-increasing-sequence-ℕ f)
 ```
