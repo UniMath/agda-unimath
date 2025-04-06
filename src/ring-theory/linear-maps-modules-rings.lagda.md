@@ -233,9 +233,9 @@ module _
     ( is-additive-comp-is-additive-map-left-module-Ring
       ( is-additive-is-linear-map-left-module-Ring R N K g Hg)
       ( is-additive-is-linear-map-left-module-Ring R M N f Hf)) ,
-   ( is-homogeneous-comp-is-homogeneous-map-left-module-Ring
-     ( is-homogeneous-is-linear-map-left-module-Ring R N K g Hg)
-     ( is-homogeneous-is-linear-map-left-module-Ring R M N f Hf))
+    ( is-homogeneous-comp-is-homogeneous-map-left-module-Ring
+      ( is-homogeneous-is-linear-map-left-module-Ring R N K g Hg)
+      ( is-homogeneous-is-linear-map-left-module-Ring R M N f Hf))
 ```
 
 ### The linear composition of linear maps between left modules
