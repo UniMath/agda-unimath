@@ -228,7 +228,7 @@ open import foundation.coproduct-types using
   ( _+_
   ; inl
   ; inr
-  ; ind-coproduct
+  ; ind-coproduct -- [f, g]
   ; rec-coproduct)
 ```
 
@@ -2842,6 +2842,8 @@ open import foundation.functoriality-dependent-pair-types using
 equivalence.
 
 ```agda
+open import foundation.families-of-equivalences using
+  ( is-fiberwise-equiv)
 open import foundation.functoriality-dependent-pair-types using
   ( is-equiv-tot-is-fiberwise-equiv
   ; is-fiberwise-equiv-is-equiv-tot)
@@ -2963,14 +2965,14 @@ is-torsorial-Eq-copr {A} {B} (inl x) =
     ( Σ A (λ x' → x ＝ x'))
     ( right-unit-law-coproduct (Σ A (λ x' → x ＝ x')) ∘e
       equiv-coproduct id-equiv (right-zero-law-product B) ∘e
-      right-distributive-Σ-coproduct A B (Eq-copr (inl x)) )
+      right-distributive-Σ-coproduct (Eq-copr (inl x)))
     ( is-torsorial-Id x)
 is-torsorial-Eq-copr {A} {B} (inr y) =
   is-contr-equiv
     ( Σ B (λ y' → y ＝ y'))
     ( left-unit-law-coproduct (Σ B (λ y' → y ＝ y')) ∘e
       equiv-coproduct (right-zero-law-product A) id-equiv ∘e
-      right-distributive-Σ-coproduct A B (Eq-copr (inr y)))
+      right-distributive-Σ-coproduct (Eq-copr (inr y)))
     ( is-torsorial-Id y)
 ```
 
@@ -3053,3 +3055,556 @@ module _
 ```
 
 ### Exercises
+
+**Exercise 11.1.**
+
+```agda
+-- (a)
+open import foundation.empty-types using
+  ( is-emb-ex-falso)
+
+-- (b)
+open import foundation.equality-coproduct-types using
+  ( is-emb-inl
+  ; is-emb-inr)
+
+-- (c)
+open import foundation.type-arithmetic-empty-type using
+  ( is-equiv-inl-is-empty
+  ; is-equiv-inr-is-empty)
+```
+
+**Exercise 11.2.** Transposing identifications along equivalences.
+
+```agda
+open import foundation.transposition-identifications-along-equivalences using
+  ( eq-transpose-equiv -- (e(x) = y) ≃ (x = e⁻¹(y))
+  ; triangle-eq-transpose-equiv
+  )
+```
+
+**Exercise 11.3.** Being an embedding is preserved by homotopies.
+
+```agda
+open import foundation.embeddings using
+  ( is-emb-htpy
+  ; is-emb-htpy')
+
+_ :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g) →
+  is-emb f ↔ is-emb g
+_ = λ H → is-emb-htpy' H , is-emb-htpy H
+```
+
+**Exercise 11.4.** Triangles of embeddings.
+
+```agda
+-- (a)
+open import foundation.embeddings using
+  ( is-emb-top-map-triangle
+  ; is-emb-left-map-triangle)
+
+_ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  {f : A → X} {g : B → X} {h : A → B} (H : coherence-triangle-maps f g h) →
+  is-emb g → (is-emb f ↔ is-emb h)
+_ =
+  λ H is-emb-g →
+    is-emb-top-map-triangle _ _ _ H is-emb-g ,
+    is-emb-left-map-triangle _ _ _ H is-emb-g
+
+-- (b)
+open import foundation.embeddings using
+  ( is-emb-triangle-is-equiv
+  ; is-emb-triangle-is-equiv')
+
+_ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  {f : A → X} {g : B → X} {h : A → B} (H : coherence-triangle-maps f g h) →
+  is-equiv h → (is-emb f ↔ is-emb g)
+_ =
+  λ H is-equiv-h →
+    is-emb-triangle-is-equiv' _ _ _ H is-equiv-h ,
+    is-emb-triangle-is-equiv _ _ _ H is-equiv-h
+```
+
+**Exercise 11.5.** Composition of embeddings being equivalences.
+
+TODO I think.
+
+**Exercise 11.6.** `map-coproduct f g` being an embedding.
+
+```agda
+open import foundation.equality-coproduct-types using
+  ( is-emb-coproduct -- f, g embeddings and f(a) ≠ g(a) → is-emb [f, g]
+  )
+
+-- TODO: reverse implication
+```
+
+**Exercise 11.7.** Equivalences and embeddings with `map-coproduct`.
+
+```agda
+-- TODO: a
+
+-- (b)
+open import foundation.functoriality-coproduct-types using
+  ( is-emb-map-coproduct)
+
+-- TODO: reverse implication
+```
+
+**Exercirse 11.8.** Functoriality of `tot`.
+
+```agda
+-- (a)
+open import foundation.functoriality-dependent-pair-types using
+  ( tot-htpy -- f ~ g → tot f ~ tot g
+  )
+
+-- (b)
+open import foundation.functoriality-dependent-pair-types using
+  ( preserves-comp-tot -- tot (g ∘ f) ~ tot g ∘ tot f
+  )
+
+-- (c)
+open import foundation.functoriality-dependent-pair-types using
+  ( tot-id -- tot id ~ id
+  )
+
+-- (d)
+open import foundation.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id-retract)
+
+-- (e)
+open import foundation.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id-section)
+```
+
+**Exercise 11.9.** Relaxing the condition of `ap(f)` being an equivalence.
+
+```agda
+open import foundation.embeddings using
+  ( is-emb-section-ap)
+```
+
+**Exercise 11.10.** Path-split maps.
+
+TODO: this and other exercises ask the reader to "show that the following are
+equivalent"; this can mean to show inverse implications, but it's also possible
+to interpret it as showing a literal equivalence. That's also possible, but
+would require some understanding of hProps and proofs of being one, which only
+comes up in the next section. What's the intention here?
+
+```agda
+open import foundation.path-split-maps using
+  ( is-path-split
+  ; is-path-split-is-equiv
+  ; is-equiv-is-path-split)
+
+_ :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-equiv f ↔ is-path-split f
+_ = λ f → is-path-split-is-equiv f , is-equiv-is-path-split f
+
+-- TODO: see above if this should be included
+open import foundation.path-split-maps using
+  ( equiv-is-path-split-is-equiv)
+```
+
+**Exercise 11.11.** Straightening fiberwise maps.
+
+```agda
+-- (a)
+open import foundation.functoriality-dependent-pair-types using
+  ( fiber-triangle
+  ; square-tot-fiber-triangle)
+
+-- (b)
+open import foundation.functoriality-dependent-pair-types using
+  ( is-fiberwise-equiv-is-equiv-triangle
+  ; is-equiv-triangle-is-fiberwise-equiv)
+
+_ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  {f : A → X} {g : B → X} {h : A → B} (H : coherence-triangle-maps f g h) →
+  is-equiv h ↔ is-fiberwise-equiv (fiber-triangle f g h H)
+_ =
+  λ H →
+    is-fiberwise-equiv-is-equiv-triangle _ _ _ H ,
+    is-equiv-triangle-is-fiberwise-equiv _ _ _ H
+```
+
+## 12 Propositions, sets, and the higher truncation levels
+
+### 12.1 Propositions
+
+**Definition 12.1.1.** Propositions.
+
+```agda
+open import foundation.propositions using
+  ( is-prop
+  ; Prop
+  ; type-Prop)
+```
+
+**Example 12.1.2.** The unit type and the empty types are propositions.
+
+```agda
+open import foundation.unit-type using
+  ( is-prop-unit)
+
+open import foundation.empty-types using
+  ( is-prop-empty)
+```
+
+**Proposition 12.1.3.** Characterizations of propositions.
+
+Note that the library doesn't show the (iii) → (iv) step (TODO: importing the
+unit type to foundation-core.propositions creates a cycle, and it feels out of
+place in foundation.propositions; do we want to shuffle things around to have it
+formalized?). Instead we show (i) → (ii) → (iii) → (i) and (i) ↔ (iv)
+
+```agda
+open import foundation.propositions using
+  ( eq-is-prop' -- (i) → (ii)
+  ; is-proof-irrelevant-all-elements-equal -- (ii) → (iii)
+  ; is-prop-is-emb-terminal-map -- (iv) → (i)
+  )
+
+-- (iii) → (iv)
+open import foundation.embeddings
+_ :
+  {l1 : Level} {A : UU l1} →
+  (A → is-contr A) → is-emb (terminal-map A)
+_ =
+  λ PI →
+    is-emb-is-emb
+      ( λ a → is-emb-is-equiv (is-equiv-terminal-map-is-contr (PI a)))
+```
+
+**Proposition 12.1.4.** Two propositions are logically equivalent if and only if
+they are equivalent.
+
+```agda
+open import foundation.logical-equivalences using
+  ( iff-equiv
+  ; equiv-iff-is-prop)
+
+_ :
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2} → is-prop P → is-prop Q →
+  (P ≃ Q) ↔ (P ↔ Q)
+_ =
+  λ H K → iff-equiv , λ (f , g) → equiv-iff-is-prop H K f g
+```
+
+### 12.2 Subtypes
+
+**Definition 12.2.1.** Subtypes.
+
+Note that rather than defining `subtype` to be a type family `B` equipped with a
+witness of `is-subtype B`, we define subtypes to be a family of `Prop`s. The two
+definitions are equivalent.
+
+```agda
+open import foundation.subtypes using
+  ( is-subtype
+  ; is-property
+  ; subtype-is-subtype -- conversion from book subtypes to library subtypes
+  )
+```
+
+**Lemma 12.2.2.** Being a proposition is closed under equivalences.
+
+```agda
+open import foundation.propositions using
+  ( is-prop-equiv
+  ; is-prop-equiv')
+
+_ : {l1 l2 : Level} {A : UU l1} {B : UU l2} → A ≃ B → is-prop A ↔ is-prop B
+_ = λ e → is-prop-equiv' e , is-prop-equiv e
+```
+
+**Theorem 12.2.3.** Embeddings are propositional maps.
+
+```agda
+open import foundation.propositional-maps using
+  ( is-prop-map
+  ; is-prop-map-is-emb
+  ; is-emb-is-prop-map
+  )
+
+_ :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} → is-prop-map f ↔ is-emb f
+_ = is-emb-is-prop-map , is-prop-map-is-emb
+```
+
+**Corollary 12.2.4.** First projection being an embedding.
+
+```agda
+open import foundation.subtypes using
+  ( is-subtype-is-emb-pr1
+  ; is-emb-inclusion-subtype
+  )
+
+_ :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  (is-emb (pr1 {B = B})) ↔ is-subtype B
+_ =
+  is-subtype-is-emb-pr1 , λ H → is-emb-inclusion-subtype (subtype-is-subtype H)
+```
+
+### 12.3 Sets
+
+**Definition 12.3.1.** Sets.
+
+```agda
+open import foundation.sets using
+  ( is-set)
+```
+
+**Example 12.3.2.** ℕ is a set.
+
+```agda
+open import elementary-number-theory.equality-natural-numbers using
+  ( is-set-ℕ)
+```
+
+**Proposition 12.3.3.** Sets are exactly types satisfying axiom K.
+
+```agda
+open import foundation.sets using
+  ( instance-axiom-K
+  ; axiom-K-is-set
+  ; is-set-axiom-K)
+
+_ : {l1 : Level} {A : UU l1} → is-set A ↔ instance-axiom-K A
+_ = axiom-K-is-set , is-set-axiom-K
+```
+
+**Proposition 12.3.4.** A type with a reflexive relation mapping into its
+identity types is a set.
+
+```agda
+open import foundation.sets using
+  ( is-set-prop-in-id)
+```
+
+**Theorem 12.3.5.** Hedberg's theorem: any type with decidable equality is a
+set.
+
+```agda
+open import foundation.decidable-equality using
+  ( is-set-has-decidable-equality)
+```
+
+### 12.4 General truncation levels
+
+```agda
+open import foundation.truncation-levels using
+  ( 𝕋 -- the indexing type of truncation levels
+  ; neg-two-𝕋 -- -2_𝕋, -2
+  ; succ-𝕋 -- succ_𝕋, k + 1
+  ; truncation-level-ℕ -- inclusion mapping 0 to -2+1+1
+  )
+```
+
+**Definition 12.4.1.** `k`-truncated types and maps.
+
+TODO: we don't have _proper_ `(k+1)` types; are they not useful?
+
+```agda
+open import foundation.truncated-types using
+  ( is-trunc
+  ; Truncated-Type -- 𝒰≤ᵏ
+  )
+
+open import foundation.truncated-maps using
+  ( is-trunc-map)
+```
+
+**Proposition 12.4.3.** Truncation levels are cumulative.
+
+```agda
+open import foundation.truncated-types using
+  ( is-trunc-succ-is-trunc -- is-trunc k A → is-trunc (k+1) A
+  )
+```
+
+**Corollary 12.4.4.** `k`-types have `k`-truncated identity types.
+
+```agda
+open import foundation.truncated-types using
+  ( is-trunc-Id)
+```
+
+**Proposition 12.4.5.** Being a `k`-type is preserved by equivalences.
+
+```agda
+open import foundation.truncated-types using
+  ( is-trunc-equiv -- A ≃ B → is-trunc k B → is-trunc k A
+  )
+```
+
+**Corollary 12.4.6.** Being a `k+1`-type is reflected by embeddings.
+
+```agda
+open import foundation.truncated-types using
+  ( is-trunc-emb -- A ↪ B → is-trunc (k+1) B → is-trunc (k+1) A
+  )
+```
+
+**Theorem 12.4.7.** Recursive characterization of `(k+1)`-truncated maps.
+
+TODO: report that the last line of equivalence reasoning is on the next page.
+
+```agda
+open import foundation.truncated-maps using
+  ( is-trunc-map-ap-is-trunc-map-succ
+  ; is-trunc-map-succ-is-trunc-map-ap)
+
+_ :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
+  (is-trunc-map (succ-𝕋 k) f) ↔ ((x y : A) → is-trunc-map k (ap f {x} {y}))
+_ =
+  λ k f →
+    is-trunc-map-ap-is-trunc-map-succ k f ,
+    is-trunc-map-succ-is-trunc-map-ap k f
+```
+
+### Exercises
+
+**Exercise 12.1.** The type of booleans is a set.
+
+```agda
+open import foundation.booleans using
+  ( is-set-bool)
+```
+
+**Exercise 12.2.** The underlying type of a poset is a set.
+
+```agda
+open import order-theory.posets using
+  ( is-set-type-Poset)
+```
+
+**Exercise 12.3.** Embeddings of natural numbers.
+
+Note that in (a), the library has a direct proof of the second part, and uses it
+in the proof of the first part, rather than the other way around.
+
+TODO: "injective maps" isn't actually ever properly defined AFAICT.
+
+```agda
+-- (a)
+open import foundation.injective-maps using
+  ( is-emb-is-injective)
+
+open import foundation.sets using
+  ( is-set-is-injective)
+
+-- Proof of the conclusion following the book
+open import foundation.injective-maps using
+  ( is-injective)
+
+_ :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-set B → is-injective f → is-set A
+_ = λ H K → is-trunc-emb (succ-𝕋 neg-two-𝕋) (_ , is-emb-is-injective H K) H
+
+-- (b)
+open import elementary-number-theory.addition-natural-numbers using
+  ( is-emb-left-add-ℕ -- λ n → m + n is an embedding
+  )
+
+-- Note: the library uses (k + m = n) rather than (m + k = n)
+open import elementary-number-theory.difference-natural-numbers using
+  ( subtraction-leq-ℕ
+  ; leq-subtraction-ℕ)
+
+-- TODO: conclude equivalence
+_ :
+  (m n : ℕ) → (m ≤-ℕ n) ↔ Σ ℕ (λ k → k +ℕ m ＝ n)
+_ =
+  λ m n → subtraction-leq-ℕ m n , λ (k , H) → leq-subtraction-ℕ m n k H
+
+-- (c)
+open import elementary-number-theory.multiplication-natural-numbers using
+  ( is-emb-left-mul-ℕ -- λ n → mn is an embedding for m ≠ 0
+  )
+
+open import elementary-number-theory.divisibility-natural-numbers using
+  ( is-prop-div-ℕ)
+```
+
+**Exercise 12.4.** Coproducts of truncated types.
+
+```agda
+-- (a)
+open import foundation.coproduct-types using
+  ( is-not-contractible-coproduct-is-contr)
+
+-- Note: the library calls the book's exclusive disjunction "exclusive sums",
+-- and the name "exclusive disjunction" is used for the type is-contr (P + Q)
+-- (b)
+open import foundation.exclusive-disjunction using
+  ( equiv-exclusive-sum-xor-Prop)
+
+_ :
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
+  is-contr (type-Prop P + type-Prop Q) ↔
+  (type-Prop P × ¬ (type-Prop Q)) + type-Prop Q × ¬ (type-Prop P)
+_ = λ P Q → iff-equiv (equiv-exclusive-sum-xor-Prop P Q)
+
+-- (c)
+open import foundation.coproduct-types using
+  ( is-prop-coproduct -- (P -> ¬ Q) → is-prop (P + Q)
+  )
+-- TODO: other direction
+
+-- (d)
+open import foundation.equality-coproduct-types using
+  ( is-trunc-coproduct -- is-trunc (k+2) A → is-trunc (k+2) B → is-trunc (k+2) (A + B)
+  )
+
+open import elementary-number-theory.integers using
+  ( is-set-ℤ)
+```
+
+**Exercise 12.5.** Diagonals of maps.
+
+Note that the library calls "diagonals" the maps into the appropriate standard
+pullback, i.e. it furthermore equips the pair with `refl : f x = f x`. The
+book's diagonal is formalized as the "diagonal into the cartesian product".
+
+```agda
+open import foundation.diagonal-maps-cartesian-products-of-types using
+  ( diagonal-product -- δ
+  )
+
+-- (a)
+open import foundation.diagonal-maps-cartesian-products-of-types using
+  ( is-prop-is-equiv-diagonal-product)
+
+-- TODO: other direction; we have is-contr-map-diagonal-product-is-prop for
+-- contractible maps
+
+-- (b)
+open import foundation.diagonal-maps-cartesian-products-of-types using
+  ( is-equiv-eq-fiber-diagonal-product)
+
+-- TODO: bundle it into an equivalence
+
+-- (c)
+open import foundation.diagonal-maps-cartesian-products-of-types using
+  ( is-trunc-map-diagonal-product-is-trunc
+  ; is-trunc-is-trunc-map-diagonal-product)
+
+_ :
+  {l1 : Level} {A : UU l1} (k : 𝕋) →
+  is-trunc (succ-𝕋 k) A ↔ is-trunc-map k (diagonal-product A)
+_ =
+  λ k →
+    is-trunc-map-diagonal-product-is-trunc k ,
+    is-trunc-is-trunc-map-diagonal-product k
+```
