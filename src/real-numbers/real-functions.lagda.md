@@ -25,6 +25,7 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.dependent-products-abelian-groups
 
+open import metric-spaces.complete-metric-spaces
 open import metric-spaces.dependent-products-metric-spaces
 open import metric-spaces.metric-spaces
 
@@ -33,6 +34,7 @@ open import order-theory.large-preorders
 open import order-theory.posets
 
 open import real-numbers.addition-real-numbers
+open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
@@ -46,7 +48,7 @@ The space of {{#concept "real functions" Agda=function-ℝ}} over a type `X` is
 the type of functions `X → ℝ`. It inherits the following structures from the
 [real numbers](real-numbers.dedekind-real-numbers.md):
 
-- [metric space](metric-spaces.metric-spaces.md);
+- [complete metric space](metric-spaces.complete-metric-spaces.md);
 - [additive](real-numbers.addition-real-numbers.md) structure;
 - [large poset](order-theory.large-posets.md);
 
@@ -72,9 +74,14 @@ module _
   {l1 : Level} (l2 : Level) (X : UU l1)
   where
 
+  complete-metric-space-function-ℝ :
+    Complete-Metric-Space (l1 ⊔ lsuc l2) (l1 ⊔ l2)
+  complete-metric-space-function-ℝ =
+    Π-Complete-Metric-Space X (λ _ → complete-metric-space-leq-ℝ l2)
+
   metric-space-function-ℝ : Metric-Space (l1 ⊔ lsuc l2) (l1 ⊔ l2)
   metric-space-function-ℝ =
-    Π-Metric-Space X (λ _ → metric-space-leq-ℝ l2)
+    metric-space-Complete-Metric-Space complete-metric-space-function-ℝ
 
   set-function-ℝ : Set (l1 ⊔ lsuc l2)
   set-function-ℝ = set-Metric-Space metric-space-function-ℝ
