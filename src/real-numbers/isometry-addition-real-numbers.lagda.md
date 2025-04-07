@@ -40,7 +40,6 @@ open import metric-spaces.premetric-structures
 open import metric-spaces.pseudometric-structures
 open import metric-spaces.reflexive-premetric-structures
 open import metric-spaces.saturated-metric-spaces
-open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.symmetric-premetric-structures
 open import metric-spaces.triangular-premetric-structures
 
@@ -49,6 +48,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
@@ -57,8 +57,8 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-For any `a : ℝ l`, `add-ℝ a` is an isometry `ℝ → ℝ`. The map `x → add-ℝ x` is a
-short function from `ℝ` to the metric space of isometries `ℝ → ℝ`.
+For any `a : ℝ l`, `add-ℝ a` is an isometry `ℝ → ℝ`. The map `x → add-ℝ x` is an
+isometry `ℝ → (ℝ → ℝ)` (with the dependent product metric structure).
 
 ## Definitions
 
@@ -98,27 +98,58 @@ module _
   isometry-left-add-ℝ = add-ℝ x , is-isometry-left-add-ℝ
 ```
 
-### Addition is a short function from `ℝ` to the metric space of isometries `ℝ → ℝ`
+### Addition is an isometry from `ℝ` to the metric space of isometries `ℝ → ℝ`
 
 ```agda
 module _
   {l1 l2 : Level}
   where
 
-  is-short-function-isometry-left-add-ℝ :
-    is-short-function-Metric-Space
+  is-isometry-isometry-left-add-ℝ :
+    is-isometry-Metric-Space
       ( metric-space-leq-ℝ l1)
       ( metric-space-isometry-Metric-Space
         ( metric-space-leq-ℝ l2)
         ( metric-space-leq-ℝ (l1 ⊔ l2)))
       ( isometry-left-add-ℝ)
-  is-short-function-isometry-left-add-ℝ d x y Nxy z =
-    neighborhood-real-bound-each-leq-ℝ
-      ( d)
-      ( add-ℝ x z)
-      ( add-ℝ y z)
-      ( preserves-lower-neighborhood-leq-right-add-ℝ d z x y
-        ( left-real-bound-neighborhood-leq-ℝ d x y Nxy))
-      ( preserves-lower-neighborhood-leq-right-add-ℝ d z y x
-        ( right-real-bound-neighborhood-leq-ℝ d x y Nxy))
+  is-isometry-isometry-left-add-ℝ d x y =
+    ( λ Nxy z →
+      neighborhood-real-bound-each-leq-ℝ
+        ( d)
+        ( add-ℝ x z)
+        ( add-ℝ y z)
+        ( preserves-lower-neighborhood-leq-right-add-ℝ d z x y
+          ( left-real-bound-neighborhood-leq-ℝ d x y Nxy))
+        ( preserves-lower-neighborhood-leq-right-add-ℝ d z y x
+          ( right-real-bound-neighborhood-leq-ℝ d x y Nxy))) ,
+    ( λ Nxyz →
+      neighborhood-real-bound-each-leq-ℝ d x y
+        ( reflects-lower-neighborhood-leq-right-add-ℝ
+          ( d)
+          ( raise-ℝ l2 zero-ℝ)
+          ( x)
+          ( y)
+          ( left-real-bound-neighborhood-leq-ℝ
+            ( d)
+            ( x +ℝ raise-ℝ l2 zero-ℝ)
+            ( y +ℝ raise-ℝ l2 zero-ℝ)
+            ( Nxyz (raise-ℝ l2 zero-ℝ))))
+        ( reflects-lower-neighborhood-leq-right-add-ℝ
+          ( d)
+          ( raise-ℝ l2 zero-ℝ)
+          ( y)
+          ( x)
+          ( right-real-bound-neighborhood-leq-ℝ
+            ( d)
+            ( x +ℝ raise-ℝ l2 zero-ℝ)
+            ( y +ℝ raise-ℝ l2 zero-ℝ)
+            ( Nxyz (raise-ℝ l2 zero-ℝ)))))
+
+  isometry-add-ℝ :
+    isometry-Metric-Space
+      ( metric-space-leq-ℝ l1)
+      ( metric-space-isometry-Metric-Space
+        ( metric-space-leq-ℝ l2)
+        ( metric-space-leq-ℝ (l1 ⊔ l2)))
+  isometry-add-ℝ = isometry-left-add-ℝ , is-isometry-isometry-left-add-ℝ
 ```
