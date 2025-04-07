@@ -30,8 +30,8 @@ open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 
 A {{concept "subsequence" Agda=subsequence}} of a
 [sequence](foundation.sequences.md) `u : ℕ → A` is a sequence `u ∘ f` for some
-[strictly increasing](order-theory.strictly-increasing-sequences-natural-numbers.md)
-sequence `f : ℕ → ℕ`.
+[strictly increasing](order-theory.strict-order-preserving-maps.md) sequence
+`f : ℕ → ℕ`.
 
 ## Definitions
 
