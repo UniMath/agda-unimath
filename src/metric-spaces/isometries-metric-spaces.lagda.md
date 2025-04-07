@@ -237,7 +237,7 @@ module _
       ( λ x → refl)
 ```
 
-### Associatity of composition of isometries between metric spaces
+### Associativity of composition of isometries between metric spaces
 
 ```agda
 module _
