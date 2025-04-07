@@ -215,3 +215,79 @@ module _
       ( λ x y → ap f (add-g x y) ∙ add-f (g x) (g y)) ,
       ( λ c x → ap f (homo-g c x) ∙ homo-f c (g x)))
 ```
+
+### The identity map is linear
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (M : left-module-Ring l2 R)
+  where
+
+  is-linear-id-left-module-Ring : is-linear-map-left-module-Ring R M M id
+  is-linear-id-left-module-Ring = (λ _ _ → refl) , (λ _ _ → refl)
+
+  id-linear-map-left-module-Ring : linear-map-left-module-Ring R M M
+  id-linear-map-left-module-Ring = id , is-linear-id-left-module-Ring
+```
+
+### The composition of linear maps is linear
+
+```agda
+module _
+  {lr l1 l2 l3 : Level} (R : Ring lr)
+  (M : left-module-Ring l1 R)
+  (N : left-module-Ring l2 R)
+  (K : left-module-Ring l3 R)
+  (g : type-left-module-Ring R N → type-left-module-Ring R K)
+  (f : type-left-module-Ring R M → type-left-module-Ring R N)
+  where
+
+  is-additive-comp-is-additive-map-left-module-Ring :
+    is-additive-map-left-module-Ring R N K g →
+    is-additive-map-left-module-Ring R M N f →
+    is-additive-map-left-module-Ring R M K (g ∘ f)
+  is-additive-comp-is-additive-map-left-module-Ring Hg Hf x y =
+    ap g (Hf x y) ∙ Hg (f x) (f y)
+
+  is-homogeneous-comp-is-homogeneous-map-left-module-Ring :
+    is-homogeneous-map-left-module-Ring R N K g →
+    is-homogeneous-map-left-module-Ring R M N f →
+    is-homogeneous-map-left-module-Ring R M K (g ∘ f)
+  is-homogeneous-comp-is-homogeneous-map-left-module-Ring Hg Hf c x =
+    ap g (Hf c x) ∙ Hg c (f x)
+
+  is-linear-comp-is-linear-map-left-module-Ring :
+    is-linear-map-left-module-Ring R N K g →
+    is-linear-map-left-module-Ring R M N f →
+    is-linear-map-left-module-Ring R M K (g ∘ f)
+  is-linear-comp-is-linear-map-left-module-Ring Hg Hf =
+    ( is-additive-comp-is-additive-map-left-module-Ring
+      ( is-additive-is-linear-map-left-module-Ring R N K g Hg)
+      ( is-additive-is-linear-map-left-module-Ring R M N f Hf)) ,
+    ( is-homogeneous-comp-is-homogeneous-map-left-module-Ring
+      ( is-homogeneous-is-linear-map-left-module-Ring R N K g Hg)
+      ( is-homogeneous-is-linear-map-left-module-Ring R M N f Hf))
+```
+
+### The linear composition of linear maps between left modules
+
+```agda
+module _
+  {lr l1 l2 l3 : Level} (R : Ring lr)
+  (M : left-module-Ring l1 R)
+  (N : left-module-Ring l2 R)
+  (K : left-module-Ring l3 R)
+  (g : linear-map-left-module-Ring R N K)
+  (f : linear-map-left-module-Ring R M N)
+  where
+
+  comp-linear-map-left-module-Ring : linear-map-left-module-Ring R M K
+  comp-linear-map-left-module-Ring =
+    ( map-linear-map-left-module-Ring R N K g ∘
+      map-linear-map-left-module-Ring R M N f) ,
+    ( is-linear-comp-is-linear-map-left-module-Ring R M N K
+      ( map-linear-map-left-module-Ring R N K g)
+      ( map-linear-map-left-module-Ring R M N f)
+      ( is-linear-map-linear-map-left-module-Ring R N K g)
+      ( is-linear-map-linear-map-left-module-Ring R M N f))
+```
