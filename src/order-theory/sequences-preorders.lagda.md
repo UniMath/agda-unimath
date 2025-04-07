@@ -25,7 +25,7 @@ open import order-theory.preorders
 ## Idea
 
 A
-{{#concept "sequence" Disambiguation="in a poset" Agda=type-sequence-Preorder}}
+{{#concept "sequence" Disambiguation="in a preorder" Agda=type-sequence-Preorder}}
 in a [preorder](order-theory.preorders.md) is a
 [sequence](foundation.sequences.md) in its underlying type.
 
