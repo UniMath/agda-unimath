@@ -8,6 +8,7 @@ module real-numbers.inequality-real-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -343,6 +344,74 @@ module _
         ( y)
         ( cancel-right-diff-add-ℝ y z)
         ( preserves-leq-right-add-ℝ z x (y -ℝ z) x≤y-z)
+```
+
+### Addition of real numbers preserves lower neighborhoods
+
+```agda
+module _
+  {l1 l2 l3 : Level} (d : ℚ⁺)
+  (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  preserves-lower-neighborhood-leq-left-add-ℝ :
+    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d)) →
+    leq-ℝ
+      ( add-ℝ x y)
+      ( (add-ℝ x z) +ℝ real-ℚ (rational-ℚ⁺ d))
+  preserves-lower-neighborhood-leq-left-add-ℝ z≤y+d =
+    inv-tr
+      ( leq-ℝ (x +ℝ y))
+      ( associative-add-ℝ x z (real-ℚ (rational-ℚ⁺ d)))
+      ( preserves-leq-left-add-ℝ
+        ( x)
+        ( y)
+        ( z +ℝ real-ℚ (rational-ℚ⁺ d))
+        ( z≤y+d))
+
+  preserves-lower-neighborhood-leq-right-add-ℝ :
+    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d)) →
+    leq-ℝ
+      ( add-ℝ y x)
+      ( (add-ℝ z x) +ℝ real-ℚ (rational-ℚ⁺ d))
+  preserves-lower-neighborhood-leq-right-add-ℝ z≤y+d =
+    binary-tr
+      ( λ u v → leq-ℝ u (v +ℝ real-ℚ (rational-ℚ⁺ d)))
+      ( commutative-add-ℝ x y)
+      ( commutative-add-ℝ x z)
+      ( preserves-lower-neighborhood-leq-left-add-ℝ z≤y+d)
+```
+
+### Addition of real numbers reflects lower neighborhoods
+
+```agda
+  reflects-lower-neighborhood-leq-left-add-ℝ :
+    leq-ℝ
+      ( add-ℝ x y)
+      ( (add-ℝ x z) +ℝ real-ℚ (rational-ℚ⁺ d)) →
+    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d))
+  reflects-lower-neighborhood-leq-left-add-ℝ x+y≤x+z+d =
+    reflects-leq-left-add-ℝ
+      ( x)
+      ( y)
+      ( z +ℝ real-ℚ (rational-ℚ⁺ d))
+      (tr
+        ( leq-ℝ (x +ℝ y))
+        ( associative-add-ℝ x z (real-ℚ (rational-ℚ⁺ d)))
+        ( x+y≤x+z+d))
+
+  reflects-lower-neighborhood-leq-right-add-ℝ :
+    leq-ℝ
+      ( add-ℝ y x)
+      ( (add-ℝ z x) +ℝ real-ℚ (rational-ℚ⁺ d)) →
+    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d))
+  reflects-lower-neighborhood-leq-right-add-ℝ y+x≤z+y+d =
+    reflects-lower-neighborhood-leq-left-add-ℝ
+      ( binary-tr
+        ( λ u v → leq-ℝ u (v +ℝ real-ℚ (rational-ℚ⁺ d)))
+        ( commutative-add-ℝ y x)
+        ( commutative-add-ℝ z x)
+        ( y+x≤z+y+d))
 ```
 
 ## References
