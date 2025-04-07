@@ -77,7 +77,7 @@ module _
   complete-metric-space-function-ℝ :
     Complete-Metric-Space (l1 ⊔ lsuc l2) (l1 ⊔ l2)
   complete-metric-space-function-ℝ =
-    Π-Complete-Metric-Space X (λ _ → complete-metric-space-leq-ℝ l2)
+    Π-Complete-Metric-Space' X (λ _ → complete-metric-space-leq-ℝ l2)
 
   metric-space-function-ℝ : Metric-Space (l1 ⊔ lsuc l2) (l1 ⊔ l2)
   metric-space-function-ℝ =
