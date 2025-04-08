@@ -9,6 +9,9 @@ module real-numbers.maximum-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.positive-rational-numbers
+
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
@@ -16,15 +19,23 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import metric-spaces.metric-space-functions-metric-spaces
+open import metric-spaces.short-functions-metric-spaces
+
 open import order-theory.large-join-semilattices
 open import order-theory.least-upper-bounds-large-posets
 
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.maximum-lower-dedekind-real-numbers
 open import real-numbers.maximum-upper-dedekind-real-numbers
+open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.positive-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
@@ -175,4 +186,123 @@ has-joins-ℝ-Large-Poset : has-joins-Large-Poset ℝ-Large-Poset
 join-has-joins-Large-Poset has-joins-ℝ-Large-Poset = binary-max-ℝ
 is-least-binary-upper-bound-join-has-joins-Large-Poset
   has-joins-ℝ-Large-Poset = is-least-binary-upper-bound-binary-max-ℝ
+```
+
+### The binary maximum preserves lower neighborhoods
+
+```agda
+module _
+  {l1 l2 l3 : Level} (d : ℚ⁺)
+  (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  preserves-lower-neighborhood-leq-left-binary-max-ℝ :
+    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d)) →
+    leq-ℝ
+      ( binary-max-ℝ x y)
+      ( (binary-max-ℝ x z) +ℝ real-ℚ (rational-ℚ⁺ d))
+  preserves-lower-neighborhood-leq-left-binary-max-ℝ z≤y+d =
+    leq-is-least-binary-upper-bound-Large-Poset
+      ( ℝ-Large-Poset)
+      ( x)
+      ( y)
+      ( is-least-binary-upper-bound-binary-max-ℝ x y)
+      ( (binary-max-ℝ x z) +ℝ real-ℚ (rational-ℚ⁺ d))
+      ( ( transitive-leq-ℝ
+          ( x)
+          ( binary-max-ℝ x z)
+          ( binary-max-ℝ x z +ℝ real-ℚ (rational-ℚ⁺ d))
+          ( leq-le-ℝ
+            ( binary-max-ℝ x z)
+            ( binary-max-ℝ x z +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( le-left-add-real-ℝ⁺
+              ( binary-max-ℝ x z)
+              ( positive-real-ℚ⁺ d)))
+          ( leq-left-binary-max-ℝ x z)) ,
+        ( transitive-leq-ℝ
+          ( y)
+          ( z +ℝ real-ℚ (rational-ℚ⁺ d))
+          ( binary-max-ℝ x z +ℝ real-ℚ (rational-ℚ⁺ d))
+          ( preserves-leq-right-add-ℝ
+            ( real-ℚ (rational-ℚ⁺ d))
+            ( z)
+            ( binary-max-ℝ x z)
+            ( leq-right-binary-max-ℝ x z))
+          ( z≤y+d)))
+
+  preserves-lower-neighborhood-leq-right-binary-max-ℝ :
+    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d)) →
+    leq-ℝ
+      ( binary-max-ℝ y x)
+      ( (binary-max-ℝ z x) +ℝ real-ℚ (rational-ℚ⁺ d))
+  preserves-lower-neighborhood-leq-right-binary-max-ℝ z≤y+d =
+    binary-tr
+      ( λ u v → leq-ℝ u (v +ℝ real-ℚ (rational-ℚ⁺ d)))
+      ( commutative-binary-max-ℝ x y)
+      ( commutative-binary-max-ℝ x z)
+      ( preserves-lower-neighborhood-leq-left-binary-max-ℝ z≤y+d)
+```
+
+### The maximum with a real number is a short function `ℝ → ℝ`
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1)
+  where
+
+  is-short-function-left-binary-max-ℝ :
+    is-short-function-Metric-Space
+      ( metric-space-leq-ℝ l2)
+      ( metric-space-leq-ℝ (l1 ⊔ l2))
+      ( binary-max-ℝ x)
+  is-short-function-left-binary-max-ℝ d y z Nyz =
+    neighborhood-real-bound-each-leq-ℝ
+      ( d)
+      ( binary-max-ℝ x y)
+      ( binary-max-ℝ x z)
+      ( preserves-lower-neighborhood-leq-left-binary-max-ℝ d x y z
+        ( left-real-bound-neighborhood-leq-ℝ d y z Nyz))
+      ( preserves-lower-neighborhood-leq-left-binary-max-ℝ d x z y
+        ( right-real-bound-neighborhood-leq-ℝ d y z Nyz))
+
+  short-left-binary-max-ℝ :
+    short-function-Metric-Space
+      ( metric-space-leq-ℝ l2)
+      ( metric-space-leq-ℝ (l1 ⊔ l2))
+  short-left-binary-max-ℝ =
+    binary-max-ℝ x , is-short-function-left-binary-max-ℝ
+```
+
+### The binary maximum is a short function from `ℝ` to the metric space of short functions `ℝ → ℝ`
+
+```agda
+module _
+  {l1 l2 : Level}
+  where
+
+  is-short-function-short-left-binary-max-ℝ :
+    is-short-function-Metric-Space
+      ( metric-space-leq-ℝ l1)
+      ( metric-space-short-function-Metric-Space
+        ( metric-space-leq-ℝ l2)
+        ( metric-space-leq-ℝ (l1 ⊔ l2)))
+      ( short-left-binary-max-ℝ)
+  is-short-function-short-left-binary-max-ℝ d x y Nxy z =
+    neighborhood-real-bound-each-leq-ℝ
+      ( d)
+      ( binary-max-ℝ x z)
+      ( binary-max-ℝ y z)
+      ( preserves-lower-neighborhood-leq-right-binary-max-ℝ d z x y
+        ( left-real-bound-neighborhood-leq-ℝ d x y Nxy))
+      ( preserves-lower-neighborhood-leq-right-binary-max-ℝ d z y x
+        ( right-real-bound-neighborhood-leq-ℝ d x y Nxy))
+
+  short-binary-max-ℝ :
+    short-function-Metric-Space
+      ( metric-space-leq-ℝ l1)
+      ( metric-space-short-function-Metric-Space
+        ( metric-space-leq-ℝ l2)
+        ( metric-space-leq-ℝ (l1 ⊔ l2)))
+  short-binary-max-ℝ =
+    short-left-binary-max-ℝ , is-short-function-short-left-binary-max-ℝ
 ```

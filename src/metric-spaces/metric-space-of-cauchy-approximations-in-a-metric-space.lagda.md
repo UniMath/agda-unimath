@@ -43,6 +43,6 @@ module _
   metric-space-cauchy-approximations-Metric-Space : Metric-Space (l1 ⊔ l2) l2
   metric-space-cauchy-approximations-Metric-Space =
     subspace-Metric-Space
-      ( Π-Metric-Space ℚ⁺ (λ _ → A))
+      ( Π-Metric-Space' ℚ⁺ (λ _ → A))
       ( is-cauchy-approximation-prop-Metric-Space A)
 ```

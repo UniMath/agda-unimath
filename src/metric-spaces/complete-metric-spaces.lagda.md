@@ -16,6 +16,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -81,6 +82,47 @@ module _
   is-complete-metric-space-Complete-Metric-Space :
     is-complete-Metric-Space metric-space-Complete-Metric-Space
   is-complete-metric-space-Complete-Metric-Space = pr2 A
+```
+
+### Limit of Cauchy approximations in complete metric spaces
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A : Complete-Metric-Space l1 l2)
+  (u : cauchy-approximation-Metric-Space (metric-space-Complete-Metric-Space A))
+  where
+
+  is-convergent-cauchy-approximation-Complete-Metric-Space :
+    is-convergent-cauchy-approximation-Metric-Space
+      ( metric-space-Complete-Metric-Space A)
+      ( u)
+  is-convergent-cauchy-approximation-Complete-Metric-Space =
+    is-complete-metric-space-Complete-Metric-Space A u
+
+  convergent-cauchy-approximation-Complete-Metric-Space :
+    convergent-cauchy-approximation-Metric-Space
+      ( metric-space-Complete-Metric-Space A)
+  convergent-cauchy-approximation-Complete-Metric-Space =
+    u , is-convergent-cauchy-approximation-Complete-Metric-Space
+
+  limit-cauchy-approximation-Complete-Metric-Space :
+    type-Complete-Metric-Space A
+  limit-cauchy-approximation-Complete-Metric-Space =
+    limit-convergent-cauchy-approximation-Metric-Space
+      ( metric-space-Complete-Metric-Space A)
+      ( convergent-cauchy-approximation-Complete-Metric-Space)
+
+  is-limit-limit-cauchy-approximation-Complete-Metric-Space :
+    is-limit-cauchy-approximation-Premetric-Space
+      ( premetric-Metric-Space
+        ( metric-space-Complete-Metric-Space A))
+      ( u)
+      ( limit-cauchy-approximation-Complete-Metric-Space)
+  is-limit-limit-cauchy-approximation-Complete-Metric-Space =
+    is-limit-limit-convergent-cauchy-approximation-Metric-Space
+      ( metric-space-Complete-Metric-Space A)
+      ( convergent-cauchy-approximation-Complete-Metric-Space)
 ```
 
 ## External links

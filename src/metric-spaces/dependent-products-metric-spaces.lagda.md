@@ -9,11 +9,16 @@ module metric-spaces.dependent-products-metric-spaces where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.complete-metric-spaces
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.extensional-premetric-structures
+open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.monotonic-premetric-structures
@@ -107,9 +112,19 @@ module _
     is-pseudometric-structure-Π-Metric-Space ,
     is-local-structure-Π-Metric-Space
 
-  Π-Metric-Space : Metric-Space (l ⊔ l1) (l ⊔ l2)
-  pr1 Π-Metric-Space = type-Π-Metric-Space , structure-Π-Metric-Space
-  pr2 Π-Metric-Space = is-metric-structure-Π-Metric-Space
+  Π-Metric-Space' : Metric-Space (l ⊔ l1) (l ⊔ l2)
+  pr1 Π-Metric-Space' = type-Π-Metric-Space , structure-Π-Metric-Space
+  pr2 Π-Metric-Space' = is-metric-structure-Π-Metric-Space
+```
+
+```agda
+module _
+  {l1 l1' l2 l2' : Level} (A : Metric-Space l1 l1')
+  (P : type-Metric-Space A → Metric-Space l2 l2')
+  where
+
+  Π-Metric-Space : Metric-Space (l1 ⊔ l2) (l1 ⊔ l2')
+  Π-Metric-Space = Π-Metric-Space' (type-Metric-Space A) P
 ```
 
 ## Properties
@@ -123,8 +138,87 @@ module _
 
   is-short-ev-Π-Metric-Space :
     is-short-function-Metric-Space
-      ( Π-Metric-Space A P)
+      ( Π-Metric-Space' A P)
       ( P a)
       ( λ f → f a)
   is-short-ev-Π-Metric-Space ε x y H = H a
+
+  short-ev-Π-Metric-Space :
+    short-function-Metric-Space
+      ( Π-Metric-Space' A P)
+      ( P a)
+  short-ev-Π-Metric-Space =
+    (λ f → f a) , (is-short-ev-Π-Metric-Space)
+```
+
+### A product of complete metric spaces is complete
+
+```agda
+module _
+  {l l1 l2 : Level} (A : UU l) (P : A → Metric-Space l1 l2)
+  (Π-complete : (x : A) → is-complete-Metric-Space (P x))
+  where
+
+  limit-cauchy-approximation-Π-is-complete-Metric-Space :
+    cauchy-approximation-Metric-Space (Π-Metric-Space' A P) →
+    type-Π-Metric-Space A P
+  limit-cauchy-approximation-Π-is-complete-Metric-Space u x =
+    limit-cauchy-approximation-Complete-Metric-Space
+      ( P x , Π-complete x)
+      ( map-short-function-cauchy-approximation-Metric-Space
+        ( Π-Metric-Space' A P)
+        ( P x)
+        ( short-ev-Π-Metric-Space A P x)
+        ( u))
+
+  is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space :
+    (u : cauchy-approximation-Metric-Space (Π-Metric-Space' A P)) →
+    is-limit-cauchy-approximation-Premetric-Space
+      ( premetric-Metric-Space (Π-Metric-Space' A P))
+      ( u)
+      ( limit-cauchy-approximation-Π-is-complete-Metric-Space u)
+  is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space u ε δ x =
+    is-limit-limit-cauchy-approximation-Complete-Metric-Space
+      ( P x , Π-complete x)
+      ( map-short-function-cauchy-approximation-Metric-Space
+        ( Π-Metric-Space' A P)
+        ( P x)
+        ( short-ev-Π-Metric-Space A P x)
+        ( u))
+      ( ε)
+      ( δ)
+
+  is-complete-Π-is-complete-Metric-Space :
+    is-complete-Metric-Space (Π-Metric-Space' A P)
+  is-complete-Π-is-complete-Metric-Space u =
+    limit-cauchy-approximation-Π-is-complete-Metric-Space u ,
+    is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space u
+```
+
+### The complete product of complete metric spaces
+
+```agda
+module _
+  {l l1 l2 : Level} (A : UU l) (C : A → Complete-Metric-Space l1 l2)
+  where
+
+  Π-Complete-Metric-Space' : Complete-Metric-Space (l ⊔ l1) (l ⊔ l2)
+  pr1 Π-Complete-Metric-Space' =
+    Π-Metric-Space' A (metric-space-Complete-Metric-Space ∘ C)
+  pr2 Π-Complete-Metric-Space' =
+    is-complete-Π-is-complete-Metric-Space
+      ( A)
+      ( metric-space-Complete-Metric-Space ∘ C)
+      ( is-complete-metric-space-Complete-Metric-Space ∘ C)
+```
+
+```agda
+module _
+  {l1 l1' l2 l2' : Level} (A : Complete-Metric-Space l1 l2)
+  (P : type-Complete-Metric-Space A → Complete-Metric-Space l1' l2')
+  where
+
+  Π-Complete-Metric-Space : Complete-Metric-Space (l1 ⊔ l1') (l1 ⊔ l2')
+  Π-Complete-Metric-Space =
+    Π-Complete-Metric-Space' (type-Complete-Metric-Space A) P
 ```

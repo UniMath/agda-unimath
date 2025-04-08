@@ -98,7 +98,7 @@ is-in-neighborhood-leq-ℝ l d x y = type-Prop (premetric-leq-ℝ l d x y)
 
 ## Properties
 
-### `x` is in a `d`-neighborhood of `y` if `x - d ≤ y ≤ x + d`
+### `x` is in a `d`-neighborhood of `y` if and only if `x - d ≤ y ≤ x + d`
 
 ```agda
 is-in-lower-neighborhood-real-bound-leq-ℝ :
@@ -122,14 +122,61 @@ is-in-lower-neighborhood-real-bound-leq-ℝ d⁺@(d , _) x y y≤x+d q q+d<y =
           ( le-real-is-in-lower-cut-ℚ (q +ℚ d) y q+d<y)))
       ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
 
-neighborhood-real-bound-each-leq-ℝ :
+real-bound-is-in-lower-neighborhhod-leq-ℝ :
   {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
-  leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d)) →
-  leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
-  is-in-neighborhood-leq-ℝ l d x y
-neighborhood-real-bound-each-leq-ℝ d x y x≤y+d y≤x+d =
-  ( is-in-lower-neighborhood-real-bound-leq-ℝ d x y y≤x+d ,
-    is-in-lower-neighborhood-real-bound-leq-ℝ d y x x≤y+d)
+  is-in-lower-neighborhood-leq-ℝ d x y →
+  leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d))
+real-bound-is-in-lower-neighborhhod-leq-ℝ d⁺@(d , _) x y H r I =
+  is-in-lower-cut-le-real-ℚ
+    ( r)
+    ( x +ℝ real-ℚ d)
+    ( le-transpose-left-diff-ℝ
+      ( real-ℚ r)
+      ( real-ℚ d)
+      ( x)
+      ( inv-tr
+        ( λ z → le-ℝ z x)
+        ( diff-real-ℚ r d)
+        ( le-real-is-in-lower-cut-ℚ
+          ( r -ℚ d)
+          ( x)
+          ( H
+            ( r -ℚ d)
+            ( inv-tr
+              ( is-in-lower-cut-ℝ y)
+              ( ( associative-add-ℚ
+                  ( r)
+                  ( neg-ℚ d)
+                  ( d)) ∙
+                ( ap
+                  ( add-ℚ r)
+                  ( left-inverse-law-add-ℚ d)) ∙
+                ( right-unit-law-add-ℚ r))
+            ( I))))))
+
+module _
+  {l : Level} (d : ℚ⁺) (x y : ℝ l)
+  where
+
+  neighborhood-real-bound-each-leq-ℝ :
+    leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d)) →
+    leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
+    is-in-neighborhood-leq-ℝ l d x y
+  neighborhood-real-bound-each-leq-ℝ x≤y+d y≤x+d =
+    ( is-in-lower-neighborhood-real-bound-leq-ℝ d x y y≤x+d ,
+      is-in-lower-neighborhood-real-bound-leq-ℝ d y x x≤y+d)
+
+  left-real-bound-neighborhood-leq-ℝ :
+    is-in-neighborhood-leq-ℝ l d x y →
+    leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d))
+  left-real-bound-neighborhood-leq-ℝ (_ , K) =
+    real-bound-is-in-lower-neighborhhod-leq-ℝ d y x K
+
+  right-real-bound-neighborhood-leq-ℝ :
+    is-in-neighborhood-leq-ℝ l d x y →
+    leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d))
+  right-real-bound-neighborhood-leq-ℝ (H , _) =
+    real-bound-is-in-lower-neighborhhod-leq-ℝ d x y H
 ```
 
 ### The standard premetric on the real numbers is a metric structure

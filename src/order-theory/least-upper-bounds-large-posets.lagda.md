@@ -141,6 +141,25 @@ module _
     backward-implication (H _) (refl-leq-Large-Poset P _)
 ```
 
+### Binary least upper bounds are lesser than all binary upper bounds
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (P : Large-Poset α β)
+  {l1 l2 : Level} (a : type-Large-Poset P l1) (b : type-Large-Poset P l2)
+  where
+
+  leq-is-least-binary-upper-bound-Large-Poset :
+    {l3 : Level} {y : type-Large-Poset P l3} →
+    is-least-binary-upper-bound-Large-Poset P a b y →
+    {l4 : Level} (z : type-Large-Poset P l4) →
+    is-binary-upper-bound-Large-Poset P a b z →
+    leq-Large-Poset P y z
+  leq-is-least-binary-upper-bound-Large-Poset H z =
+    forward-implication (H z)
+```
+
 ### The least upper bound of `x` and `y` is the least upper bound of `y` and `x`
 
 ```agda
