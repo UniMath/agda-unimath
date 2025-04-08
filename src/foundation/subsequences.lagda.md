@@ -55,14 +55,22 @@ module _
   where
 
   extract-subsequence : ℕ → ℕ
-  extract-subsequence = pr1 v
+  extract-subsequence =
+    map-hom-Strictly-Preordered-Set
+      ℕ-Strict-Preordered-Set
+      ℕ-Strict-Preordered-Set
+      v
 
   is-strictly-increasing-extract-subsequence :
     preserves-strict-order-map-Strictly-Preordered-Set
       ℕ-Strict-Preordered-Set
       ℕ-Strict-Preordered-Set
       extract-subsequence
-  is-strictly-increasing-extract-subsequence = pr2 v
+  is-strictly-increasing-extract-subsequence =
+    preserves-strict-order-hom-Strictly-Preordered-Set
+      ℕ-Strict-Preordered-Set
+      ℕ-Strict-Preordered-Set
+      v
 
   seq-subsequence : sequence A
   seq-subsequence n = u (extract-subsequence n)
@@ -78,7 +86,7 @@ module _
   where
 
   refl-subsequence : subsequence u
-  refl-subsequence = (λ x → x) , (λ i j H → H)
+  refl-subsequence = id-hom-Strictly-Preordered-Set ℕ-Strict-Preordered-Set
 
   compute-refl-subsequence : u ＝ seq-subsequence u refl-subsequence
   compute-refl-subsequence = refl
