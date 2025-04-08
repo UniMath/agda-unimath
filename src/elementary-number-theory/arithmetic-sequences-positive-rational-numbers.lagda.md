@@ -62,14 +62,6 @@ and [tends to infinity](order-theory.infinite-limit-sequences-preorders.md).
 ### Arithmetic sequences of positive rational numbers
 
 ```agda
-is-common-difference-sequence-ℚ⁺ : sequence ℚ⁺ → ℚ⁺ → UU lzero
-is-common-difference-sequence-ℚ⁺ =
-  is-common-difference-sequence-Semigroup semigroup-add-ℚ⁺
-
-is-arithmetic-sequence-ℚ⁺ : sequence ℚ⁺ → UU lzero
-is-arithmetic-sequence-ℚ⁺ =
-  is-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺
-
 arithmetic-sequence-ℚ⁺ : UU lzero
 arithmetic-sequence-ℚ⁺ = arithmetic-sequence-Semigroup semigroup-add-ℚ⁺
 
@@ -98,9 +90,7 @@ module _
       seq-arithmetic-sequence-ℚ⁺
       common-difference-arithmetic-sequence-ℚ⁺
   is-common-difference-arithmetic-sequence-ℚ⁺ =
-    is-common-difference-arithmetic-sequence-Semigroup
-      semigroup-add-ℚ⁺
-      u
+    is-common-difference-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺ u
 
   init-term-arithmetic-sequence-ℚ⁺ : ℚ⁺
   init-term-arithmetic-sequence-ℚ⁺ =
