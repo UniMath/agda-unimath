@@ -21,6 +21,7 @@ open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.sequences
+open import foundation.subsequences
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -135,17 +136,17 @@ module _
 ### A sequence in a premetric space has a limit if all its subsequences have this limit
 
 ```agda
--- module _
---   {l1 l2 : Level} (M : Premetric-Space l1 l2)
---   (u : sequence-Premetric-Space M)
---   (x : type-Premetric-Space M)
---   where
+module _
+  {l1 l2 : Level} (M : Premetric-Space l1 l2)
+  (u : sequence-Premetric-Space M)
+  (x : type-Premetric-Space M)
+  where
 
---   reflects-limit-subsequence-Premetric-Space :
---     ( ( v : subsequence u) →
---       is-limit-sequence-Premetric-Space M
---         ( sequence-subsequence u v)
---         ( x)) →
---     is-limit-sequence-Premetric-Space M u x
---   reflects-limit-subsequence-Premetric-Space H = H (refl-subsequence u)
+  reflects-limit-subsequence-Premetric-Space :
+    ( ( v : subsequence u) →
+      is-limit-sequence-Premetric-Space M
+        ( seq-subsequence u v)
+        ( x)) →
+    is-limit-sequence-Premetric-Space M u x
+  reflects-limit-subsequence-Premetric-Space H = H (refl-subsequence u)
 ```

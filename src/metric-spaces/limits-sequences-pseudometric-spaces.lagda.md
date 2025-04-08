@@ -21,6 +21,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sequences
 open import foundation.subtypes
+open import foundation.subsequences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -189,6 +190,25 @@ module _
 ```
 
 ### Subsequences preserve limits in pseudometric spaces
+
+```agda
+module _
+  {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
+  (u : sequence-Pseudometric-Space M)
+  (v : subsequence u)
+  (l : type-Pseudometric-Space M)
+  where
+
+  -- modulus-subsequence-modulus-limit-sequence-Premetric-Space :
+  --   modulus-limit-sequence-Pseudometric-Space M u l →
+  --   modulus-limit-sequence-Pseudometric-Space
+  --     ( M)
+  --     ( seq-subsequence u v)
+  --     ( l)
+  -- modulus-subsequence-modulus-limit-sequence-Premetric-Space =
+  --   tot (λ N modulus d n H → {!!})
+
+```
 
 ```agda
 -- module _
