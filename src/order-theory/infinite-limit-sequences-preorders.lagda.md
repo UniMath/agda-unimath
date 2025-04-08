@@ -30,7 +30,7 @@ open import order-theory.sequences-preorders
 
 ## Idea
 
-A [sequence ](order-theory.sequences-preorders.md) `u` in a
+A [sequence](order-theory.sequences-preorders.md) `u` in a
 [preorder](order-theory.preorders.md) `P`
 {{#concept "tends to infinity" Disambiguation="sequence in a preorder" Agda=is-limit-∞-sequence-Preorder}}
 if there exists a map `m : P → ℕ` such that whenever `m x ≤ n` in `ℕ`, `x ≤ u n`
