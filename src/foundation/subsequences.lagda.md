@@ -100,6 +100,34 @@ module _
       strictly-preordered-set-ℕ
 ```
 
+### The extraction sequence of a subsequence is sup-linear
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A) (v : subsequence u)
+  where
+
+  abstract
+    is-sup-linear-extract-subsequence :
+      (n : ℕ) → leq-ℕ n (extract-subsequence u v n)
+    is-sup-linear-extract-subsequence zero-ℕ =
+      leq-zero-ℕ (extract-subsequence u v zero-ℕ)
+    is-sup-linear-extract-subsequence (succ-ℕ n) =
+      leq-succ-le-ℕ
+        ( n)
+        ( extract-subsequence u v (succ-ℕ n))
+        ( concatenate-leq-le-ℕ
+          { n}
+          { extract-subsequence u v n}
+          { extract-subsequence u v (succ-ℕ n)}
+          ( is-sup-linear-extract-subsequence n)
+          ( le-succ-is-strictly-increasing-sequence-Strictly-Preordered-Set
+            ( strictly-preordered-set-ℕ)
+            ( extract-subsequence u v)
+            ( is-strictly-increasing-extract-subsequence u v)
+            ( n)))
+```
+
 ### The extraction sequence of a subsequence tends to infinity
 
 ```agda
@@ -107,58 +135,15 @@ module _
   {l : Level} {A : UU l} (u : sequence A) (v : subsequence u)
   where
 
-  opaque
-    is-unbounded-extract-subsequence :
-      (M : ℕ) →
-      Σ ( ℕ)
-        ( λ N →
-          (p : ℕ) →
-          leq-ℕ N p →
-          leq-ℕ M (extract-subsequence u v p))
-    is-unbounded-extract-subsequence zero-ℕ =
-      ( zero-ℕ , λ p K → leq-zero-ℕ (extract-subsequence u v p))
-    is-unbounded-extract-subsequence (succ-ℕ M) =
-      map-Σ
-        ( λ N →
-          (p : ℕ) →
-          leq-ℕ N p →
-          leq-ℕ
-            ( succ-ℕ M)
-            ( extract-subsequence u v p))
-        ( succ-ℕ)
-        ( λ N K p I →
-          leq-succ-le-ℕ M (extract-subsequence u v p)
-            ( concatenate-leq-le-ℕ
-              { M}
-              { extract-subsequence u v N}
-              { extract-subsequence u v p}
-              ( K N (refl-leq-ℕ N))
-              ( is-strictly-increasing-extract-subsequence u v N p
-                ( concatenate-le-leq-ℕ
-                  { N}
-                  { succ-ℕ N}
-                  { p}
-                  ( succ-le-ℕ N)
-                  ( I)))))
-        ( is-unbounded-extract-subsequence M)
-
-  modulus-modulus-limit-∞-extract-subsequence : ℕ → ℕ
-  modulus-modulus-limit-∞-extract-subsequence M =
-    pr1 (is-unbounded-extract-subsequence M)
-
-  is-modulus-modulus-limit-∞-extract-subsequence :
-    is-modulus-limit-∞-sequence-Preorder
-      ( ℕ-Preorder)
-      ( extract-subsequence u v)
-      ( modulus-modulus-limit-∞-extract-subsequence)
-  is-modulus-modulus-limit-∞-extract-subsequence M =
-    pr2 (is-unbounded-extract-subsequence M)
-
   modulus-limit-∞-extract-subsequence :
     modulus-limit-∞-sequence-Preorder ℕ-Preorder (extract-subsequence u v)
   modulus-limit-∞-extract-subsequence =
-    modulus-modulus-limit-∞-extract-subsequence ,
-    is-modulus-modulus-limit-∞-extract-subsequence
+    modulus-leq-modulus-limit-∞-sequence-Preorder
+      ( ℕ-Preorder)
+      ( id)
+      ( extract-subsequence u v)
+      ( is-sup-linear-extract-subsequence u v)
+      ( id , λ i j → id)
 
   is-limit-∞-extract-subsequence :
     is-limit-∞-sequence-Preorder ℕ-Preorder (extract-subsequence u v)
