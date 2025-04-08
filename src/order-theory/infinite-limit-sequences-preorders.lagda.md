@@ -108,7 +108,7 @@ module _
 
 ### The subtype of sequences tending to infinity is upward closed
 
-Given to sequences `u ≤ v`, if `u` tends to infinity, so does `v`.
+Given two sequences `u ≤ v`, if `u` tends to infinity, so does `v`.
 
 ```agda
 module _

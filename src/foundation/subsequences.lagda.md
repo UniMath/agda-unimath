@@ -100,24 +100,6 @@ module _
       strictly-preordered-set-ℕ
 ```
 
-### Transport of subsequences
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  (u : sequence A) (v : sequence B)
-  where
-
-  tr-subsequence : subsequence u → subsequence v
-  tr-subsequence f = f
-
-  compute-seq-tr-subsequence :
-    (f : subsequence u) →
-    seq-subsequence v f ＝
-    seq-subsequence v (tr-subsequence f)
-  compute-seq-tr-subsequence f = refl
-```
-
 ### The extraction sequence of a subsequence tends to infinity
 
 ```agda
