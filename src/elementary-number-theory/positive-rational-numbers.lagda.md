@@ -377,11 +377,11 @@ submonoid-mul-ℚ⁺ : Submonoid lzero monoid-mul-ℚ
 pr1 submonoid-mul-ℚ⁺ = is-positive-prop-ℚ
 pr2 submonoid-mul-ℚ⁺ = is-submonoid-mul-ℚ⁺
 
-monoid-mul-ℚ⁺ : Monoid lzero
-monoid-mul-ℚ⁺ = monoid-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
-
 semigroup-mul-ℚ⁺ : Semigroup lzero
 semigroup-mul-ℚ⁺ = semigroup-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
+
+monoid-mul-ℚ⁺ : Monoid lzero
+monoid-mul-ℚ⁺ = monoid-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
 
 commutative-monoid-mul-ℚ⁺ : Commutative-Monoid lzero
 commutative-monoid-mul-ℚ⁺ =
