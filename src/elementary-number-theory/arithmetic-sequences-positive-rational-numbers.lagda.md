@@ -398,6 +398,13 @@ module _
     seq-arithmetic-sequence-ℚ⁺ u , is-limit-∞-arithmetic-sequence-ℚ⁺
 ```
 
+## See also
+
+- [Geometric sequences in ℚ⁺](elementary-number-theory.geometric-sequences-positive-rational-numbers.md):
+  arithmetic sequences in the **multiplicative** semigroup of ℚ⁺;
+- [Bernoulli's inequality in ℚ⁺](elementary-number-theory.bernoullis-inequality-positive-rational-numbers.md):
+  comparison between arithmetic and geometric sequences in ℚ⁺.
+
 ## References
 
 - [Arithmetic progressions](https://en.wikipedia.org/wiki/Arithmetic_progression)

@@ -380,6 +380,13 @@ module _
   eq-common-ratio-inv-geometric-sequence-ℚ⁺ = refl
 ```
 
+## See also
+
+- [Arithmetic sequences in ℚ⁺](elementary-number-theory.arithmetic-sequences-positive-rational-numbers.md):
+  arithmetic sequences in the **additive** semigroup of ℚ⁺;
+- [Bernoulli's inequality in ℚ⁺](elementary-number-theory.bernoullis-inequality-positive-rational-numbers.md):
+  comparison between arithmetic and geometric sequences in ℚ⁺.
+
 ## References
 
 - [Geometric progressions](https://en.wikipedia.org/wiki/Geometric_progression)
