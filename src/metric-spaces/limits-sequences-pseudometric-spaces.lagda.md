@@ -20,8 +20,8 @@ open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sequences
-open import foundation.subtypes
 open import foundation.subsequences
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -199,46 +199,28 @@ module _
   (l : type-Pseudometric-Space M)
   where
 
-  -- modulus-subsequence-modulus-limit-sequence-Premetric-Space :
-  --   modulus-limit-sequence-Pseudometric-Space M u l →
-  --   modulus-limit-sequence-Pseudometric-Space
-  --     ( M)
-  --     ( seq-subsequence u v)
-  --     ( l)
-  -- modulus-subsequence-modulus-limit-sequence-Premetric-Space =
-  --   tot (λ N modulus d n H → {!!})
+  modulus-subsequence-modulus-limit-sequence-Premetric-Space :
+    modulus-limit-sequence-Pseudometric-Space M u l →
+    modulus-limit-sequence-Pseudometric-Space
+      ( M)
+      ( seq-subsequence u v)
+      ( l)
+  modulus-subsequence-modulus-limit-sequence-Premetric-Space =
+    tot
+      ( λ m is-modulus d n H →
+        is-modulus
+          ( d)
+          ( extract-subsequence u v n)
+          ( transitive-leq-ℕ
+            ( m d)
+            ( n)
+            ( extract-subsequence u v n)
+            ( is-sup-linear-extract-subsequence u v n)
+            ( H)))
 
-```
-
-```agda
--- module _
---   {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
---   (u : sequence-Pseudometric-Space M)
---   (l : type-Pseudometric-Space M)
---   (L : is-limit-sequence-Pseudometric-Space M u l)
---   (v : subsequence u)
---   where
-
---   preserves-limit-subsequence-Pseudometric-Space :
---     is-limit-sequence-Pseudometric-Space M (sequence-subsequence u v) l
---   preserves-limit-subsequence-Pseudometric-Space d =
---     map-Σ
---       ( is-modulus-limit-sequence-Premetric-Space
---         ( premetric-Pseudometric-Space M)
---         ( sequence-subsequence u v)
---         ( l)
---         ( d))
---       ( modulus-is-unbounded-is-strictly-increasing-sequence-ℕ
---         ( extract-subsequence u v)
---         ( is-strictly-increasing-extract-subsequence u v))
---       ( λ N is-modulus-N p I →
---         is-modulus-N
---           ( extract-subsequence u v p)
---           ( leq-bound-is-strictly-increasing-sequence-ℕ
---             ( extract-subsequence u v)
---             ( is-strictly-increasing-extract-subsequence u v)
---             ( N)
---             ( p)
---             ( I)))
---       ( L d)
+  preserves-limit-subsequence-Pseudometric-Space :
+    is-limit-sequence-Pseudometric-Space M u l →
+    is-limit-sequence-Pseudometric-Space M (seq-subsequence u v) l
+  preserves-limit-subsequence-Pseudometric-Space =
+    map-is-inhabited modulus-subsequence-modulus-limit-sequence-Premetric-Space
 ```
