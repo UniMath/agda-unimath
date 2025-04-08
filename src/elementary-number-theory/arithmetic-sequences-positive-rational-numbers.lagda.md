@@ -304,7 +304,7 @@ module _
       (M : ℚ⁺) → Σ ℕ (leq-ℚ⁺ M ∘ seq-arithmetic-sequence-ℚ⁺ u)
     is-unbounded-arithmetic-sequence-ℚ⁺ M =
       tot
-        ( tr-archimidean-bound)
+        ( tr-archimedean-bound)
         ( bound-archimedean-property-ℚ
           ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u))
           ( rational-ℚ⁺ M)
@@ -312,7 +312,7 @@ module _
             ( common-difference-arithmetic-sequence-ℚ⁺ u)))
       where
 
-        tr-archimidean-bound :
+        tr-archimedean-bound :
           (n : ℕ) →
           (I :
             le-ℚ
@@ -321,7 +321,7 @@ module _
                 ( rational-ℕ n)
                 ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))) →
           leq-ℚ⁺ M (seq-arithmetic-sequence-ℚ⁺ u n)
-        tr-archimidean-bound n I =
+        tr-archimedean-bound n I =
           transitive-leq-ℚ
             ( rational-ℚ⁺ M)
             ( mul-ℚ

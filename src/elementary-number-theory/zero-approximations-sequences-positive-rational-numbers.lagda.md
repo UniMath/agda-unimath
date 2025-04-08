@@ -147,7 +147,7 @@ module _
 
 ### The suptype of zero approximations is downward closed
 
-Given to sequences `0 < u ≤ v`, if `v` is a zero-approximation, so is `u`.
+Given two sequences `0 < u ≤ v`, if `v` is a zero-approximation, so is `u`.
 
 ```agda
 module _
