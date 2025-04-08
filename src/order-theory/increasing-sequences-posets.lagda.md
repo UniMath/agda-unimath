@@ -60,15 +60,15 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2) (u : type-sequence-Poset P)
   where
 
-  is-increasing-is-everywhere-increasing-sequence-Poset :
+  is-increasing-leq-succ-sequence-Poset :
     ((n : ℕ) → leq-Poset P (u n) (u (succ-ℕ n))) →
     is-increasing-sequence-Poset P u
-  is-increasing-is-everywhere-increasing-sequence-Poset =
+  is-increasing-leq-succ-sequence-Poset =
     preserves-order-ind-ℕ-Poset P u
 
-  is-everywhere-increasing-is-increasing-sequence-Poset :
+  leq-succ-is-increasing-sequence-Poset :
     is-increasing-sequence-Poset P u →
     ((n : ℕ) → leq-Poset P (u n) (u (succ-ℕ n)))
-  is-everywhere-increasing-is-increasing-sequence-Poset H n =
+  leq-succ-is-increasing-sequence-Poset H n =
     H n (succ-ℕ n) (succ-leq-ℕ n)
 ```

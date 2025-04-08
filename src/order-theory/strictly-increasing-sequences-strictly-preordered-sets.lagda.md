@@ -77,38 +77,38 @@ module _
   {l1 l2 : Level} (A : Strictly-Preordered-Set l1 l2)
   where
 
-  is-strictly-increasing-is-everywhere-strictly-increasing-sequence-Strictly-Preordered-Set :
+  is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set :
     (u : type-sequence-Strictly-Preordered-Set A) →
     ((n : ℕ) → le-Strictly-Preordered-Set A (u n) (u (succ-ℕ n))) →
     is-strictly-increasing-sequence-Strictly-Preordered-Set A u
-  is-strictly-increasing-is-everywhere-strictly-increasing-sequence-Strictly-Preordered-Set
+  is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set
     u H zero-ℕ (succ-ℕ zero-ℕ) I = H zero-ℕ
-  is-strictly-increasing-is-everywhere-strictly-increasing-sequence-Strictly-Preordered-Set
+  is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set
     u H zero-ℕ (succ-ℕ (succ-ℕ n)) I =
       is-transitive-le-Strictly-Preordered-Set A
         ( u zero-ℕ)
         ( u (succ-ℕ n))
         ( u (succ-ℕ (succ-ℕ n)))
         ( H (succ-ℕ n))
-        ( is-strictly-increasing-is-everywhere-strictly-increasing-sequence-Strictly-Preordered-Set
+        ( is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set
           ( u)
           ( H)
           ( zero-ℕ)
           ( succ-ℕ n)
           ( I))
-  is-strictly-increasing-is-everywhere-strictly-increasing-sequence-Strictly-Preordered-Set
+  is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set
     u H (succ-ℕ m) (succ-ℕ n) I =
-      is-strictly-increasing-is-everywhere-strictly-increasing-sequence-Strictly-Preordered-Set
+      is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set
         ( u ∘ succ-ℕ)
         ( H ∘ succ-ℕ)
         ( m)
         ( n)
         ( I)
 
-  is-everywhere-strictly-increasing-is-strictly-increasing-sequence-Strictly-Preordered-Set :
+  le-succ-is-strictly-increasing-sequence-Strictly-Preordered-Set :
     (u : type-sequence-Strictly-Preordered-Set A) →
     is-strictly-increasing-sequence-Strictly-Preordered-Set A u →
     ((n : ℕ) → le-Strictly-Preordered-Set A (u n) (u (succ-ℕ n)))
-  is-everywhere-strictly-increasing-is-strictly-increasing-sequence-Strictly-Preordered-Set
+  le-succ-is-strictly-increasing-sequence-Strictly-Preordered-Set
     u H n = H n (succ-ℕ n) (succ-le-ℕ n)
 ```
