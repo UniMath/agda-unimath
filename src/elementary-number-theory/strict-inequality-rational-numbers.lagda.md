@@ -51,8 +51,6 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.groups
-
-open import order-theory.strictly-preordered-sets
 ```
 
 </details>
