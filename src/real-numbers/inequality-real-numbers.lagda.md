@@ -385,6 +385,11 @@ module _
 ### Addition of real numbers reflects lower neighborhoods
 
 ```agda
+module _
+  {l1 l2 l3 : Level} (d : ℚ⁺)
+  (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
   reflects-lower-neighborhood-leq-left-add-ℝ :
     leq-ℝ
       ( add-ℝ x y)
@@ -412,6 +417,32 @@ module _
         ( commutative-add-ℝ y x)
         ( commutative-add-ℝ z x)
         ( y+x≤z+y+d))
+```
+
+### Negation of real numbers reverses lower neighborhoods
+
+```agda
+module _
+  {l1 l2 : Level} (d : ℚ⁺)
+  (x : ℝ l1) (y : ℝ l2)
+  where
+
+  reverses-lower-neighborhood-leq-neg-ℝ :
+    leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d)) →
+    leq-ℝ (neg-ℝ y) (neg-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
+  reverses-lower-neighborhood-leq-neg-ℝ x≤y+d =
+    tr
+      ( leq-ℝ (neg-ℝ y))
+      ( ( distributive-neg-add-ℝ x ((neg-ℝ ∘ real-ℚ ∘ rational-ℚ⁺) d)) ∙
+        ( ap (add-ℝ (neg-ℝ x)) (neg-neg-ℝ (real-ℚ (rational-ℚ⁺ d)))))
+      ( neg-leq-ℝ
+        ( x -ℝ real-ℚ (rational-ℚ⁺ d))
+        ( y)
+        ( leq-transpose-right-add-ℝ
+          ( x)
+          ( y)
+          ( real-ℚ (rational-ℚ⁺ d))
+          ( x≤y+d)))
 ```
 
 ## References
