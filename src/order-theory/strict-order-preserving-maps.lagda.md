@@ -159,7 +159,7 @@ module _
 
 ## Properties
 
-### The identity homomorphism of stricly preordered sets
+### The identity homomorphism of strictly preordered sets
 
 ```agda
 module _

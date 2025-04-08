@@ -44,7 +44,9 @@ module _
 
   subsequence : UU lzero
   subsequence =
-    hom-Strictly-Preordered-Set ℕ-Strict-Preordered-Set ℕ-Strict-Preordered-Set
+    hom-Strictly-Preordered-Set
+      strictly-preordered-set-ℕ
+      strictly-preordered-set-ℕ
 ```
 
 ### The extracted sequence of a subsequence
@@ -57,19 +59,19 @@ module _
   extract-subsequence : ℕ → ℕ
   extract-subsequence =
     map-hom-Strictly-Preordered-Set
-      ℕ-Strict-Preordered-Set
-      ℕ-Strict-Preordered-Set
+      strictly-preordered-set-ℕ
+      strictly-preordered-set-ℕ
       v
 
   is-strictly-increasing-extract-subsequence :
     preserves-strict-order-map-Strictly-Preordered-Set
-      ℕ-Strict-Preordered-Set
-      ℕ-Strict-Preordered-Set
+      strictly-preordered-set-ℕ
+      strictly-preordered-set-ℕ
       extract-subsequence
   is-strictly-increasing-extract-subsequence =
     preserves-strict-order-hom-Strictly-Preordered-Set
-      ℕ-Strict-Preordered-Set
-      ℕ-Strict-Preordered-Set
+      strictly-preordered-set-ℕ
+      strictly-preordered-set-ℕ
       v
 
   seq-subsequence : sequence A
@@ -86,7 +88,7 @@ module _
   where
 
   refl-subsequence : subsequence u
-  refl-subsequence = id-hom-Strictly-Preordered-Set ℕ-Strict-Preordered-Set
+  refl-subsequence = id-hom-Strictly-Preordered-Set strictly-preordered-set-ℕ
 
   compute-refl-subsequence : u ＝ seq-subsequence u refl-subsequence
   compute-refl-subsequence = refl
@@ -103,9 +105,9 @@ module _
   sub-subsequence : subsequence u
   sub-subsequence =
     comp-hom-Strictly-Preordered-Set
-      ℕ-Strict-Preordered-Set
-      ℕ-Strict-Preordered-Set
-      ℕ-Strict-Preordered-Set
+      strictly-preordered-set-ℕ
+      strictly-preordered-set-ℕ
+      strictly-preordered-set-ℕ
       v
       w
 
