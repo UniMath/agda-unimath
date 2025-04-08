@@ -133,12 +133,12 @@ abstract
           ( numerator-ℚ⁺ y)))
 ```
 
-### Inversion of positive rational numbers commutes with multiplication
+### Inversion of positive rational numbers distributes over multiplication
 
 ```agda
 abstract
-  inv-mul-ℚ⁺ : (x y : ℚ⁺) → inv-ℚ⁺ (x *ℚ⁺ y) ＝ inv-ℚ⁺ x *ℚ⁺ inv-ℚ⁺ y
-  inv-mul-ℚ⁺ x y =
+  distributive-inv-mul-ℚ⁺ : (x y : ℚ⁺) → inv-ℚ⁺ (x *ℚ⁺ y) ＝ inv-ℚ⁺ x *ℚ⁺ inv-ℚ⁺ y
+  distributive-inv-mul-ℚ⁺ x y =
     distributive-inv-mul-Group'
       ( group-mul-ℚ⁺)
       ( x)
