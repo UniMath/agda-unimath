@@ -9,6 +9,7 @@ module order-theory.strict-order-preserving-maps where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -154,4 +155,81 @@ module _
       ( map-hom-Strictly-Preordered-Set)
   preserves-strict-order-hom-Strictly-Preordered-Set =
     pr2 f
+```
+
+## Properties
+
+### The identity homomorphism of strictly preordered sets
+
+```agda
+module _
+  {l1 l2 : Level} (P : Strictly-Preordered-Set l1 l2)
+  where
+
+  id-hom-Strictly-Preordered-Set : hom-Strictly-Preordered-Set P P
+  id-hom-Strictly-Preordered-Set = (λ x → x) , (λ x y H → H)
+```
+
+### The composition of strict order preserving maps preserves the strict ordering
+
+```agda
+module _
+  {l1 l1' l2 l2' l3 l3' : Level}
+  (P : Strict-Preorder l1 l1')
+  (Q : Strict-Preorder l2 l2')
+  (R : Strict-Preorder l3 l3')
+  (g : type-Strict-Preorder Q → type-Strict-Preorder R)
+  (f : type-Strict-Preorder P → type-Strict-Preorder Q)
+  where
+
+  preserves-strict-order-comp-preserves-strict-order-map-Strict-Preorder :
+    preserves-strict-order-map-Strict-Preorder Q R g →
+    preserves-strict-order-map-Strict-Preorder P Q f →
+    preserves-strict-order-map-Strict-Preorder P R (g ∘ f)
+  preserves-strict-order-comp-preserves-strict-order-map-Strict-Preorder
+    G F x y = G (f x) (f y) ∘ (F x y)
+```
+
+### Strict order preserving composition of strict order preserving maps between strict preorders
+
+```agda
+module _
+  {l1 l1' l2 l2' l3 l3' : Level}
+  (P : Strict-Preorder l1 l1')
+  (Q : Strict-Preorder l2 l2')
+  (R : Strict-Preorder l3 l3')
+  (g : hom-Strict-Preorder Q R)
+  (f : hom-Strict-Preorder P Q)
+  where
+
+  comp-hom-Strict-Preorder : hom-Strict-Preorder P R
+  comp-hom-Strict-Preorder =
+    map-hom-Strict-Preorder Q R g ∘ map-hom-Strict-Preorder P Q f ,
+    preserves-strict-order-comp-preserves-strict-order-map-Strict-Preorder P Q R
+      ( map-hom-Strict-Preorder Q R g)
+      ( map-hom-Strict-Preorder P Q f)
+      ( preserves-strict-order-hom-Strict-Preorder Q R g)
+      ( preserves-strict-order-hom-Strict-Preorder P Q f)
+```
+
+### Strict order preserving composition of strict order preserving maps between strictly preordered sets
+
+```agda
+module _
+  {l1 l1' l2 l2' l3 l3' : Level}
+  (P : Strictly-Preordered-Set l1 l1')
+  (Q : Strictly-Preordered-Set l2 l2')
+  (R : Strictly-Preordered-Set l3 l3')
+  (g : hom-Strictly-Preordered-Set Q R)
+  (f : hom-Strictly-Preordered-Set P Q)
+  where
+
+  comp-hom-Strictly-Preordered-Set : hom-Strictly-Preordered-Set P R
+  comp-hom-Strictly-Preordered-Set =
+    comp-hom-Strict-Preorder
+      ( strict-preorder-Strictly-Preordered-Set P)
+      ( strict-preorder-Strictly-Preordered-Set Q)
+      ( strict-preorder-Strictly-Preordered-Set R)
+      ( g)
+      ( f)
 ```
