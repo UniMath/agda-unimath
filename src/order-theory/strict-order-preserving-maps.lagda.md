@@ -159,6 +159,17 @@ module _
 
 ## Properties
 
+### The identity homomorphism of strictly preordered sets
+
+```agda
+module _
+  {l1 l2 : Level} (P : Strictly-Preordered-Set l1 l2)
+  where
+
+  id-hom-Strictly-Preordered-Set : hom-Strictly-Preordered-Set P P
+  id-hom-Strictly-Preordered-Set = (λ x → x) , (λ x y H → H)
+```
+
 ### The composition of strict order preserving maps preserves the strict ordering
 
 ```agda

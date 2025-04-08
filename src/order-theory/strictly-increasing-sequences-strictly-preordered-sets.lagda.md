@@ -48,14 +48,14 @@ module _
   is-strictly-increasing-prop-sequence-Strictly-Preordered-Set : Prop l2
   is-strictly-increasing-prop-sequence-Strictly-Preordered-Set =
     preserves-strict-order-prop-map-Strictly-Preordered-Set
-      ℕ-Strict-Preordered-Set
+      strictly-preordered-set-ℕ
       A
       u
 
   is-strictly-increasing-sequence-Strictly-Preordered-Set : UU l2
   is-strictly-increasing-sequence-Strictly-Preordered-Set =
     preserves-strict-order-map-Strictly-Preordered-Set
-      ℕ-Strict-Preordered-Set
+      strictly-preordered-set-ℕ
       A
       u
 
@@ -63,7 +63,7 @@ module _
     is-prop is-strictly-increasing-sequence-Strictly-Preordered-Set
   is-prop-is-strictly-increasing-sequence-Strictly-Preordered-Set =
     is-prop-preserves-strict-order-map-Strictly-Preordered-Set
-      ℕ-Strict-Preordered-Set
+      strictly-preordered-set-ℕ
       A
       u
 ```
