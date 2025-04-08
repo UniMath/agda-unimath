@@ -120,11 +120,9 @@ module _
 ```agda
 htpy-seq-arithmetic-sequence-ℚ⁺ :
   ( u v : arithmetic-sequence-ℚ⁺) →
-  ( eq-init :
-    init-term-arithmetic-sequence-ℚ⁺ u ＝
+  ( init-term-arithmetic-sequence-ℚ⁺ u ＝
     init-term-arithmetic-sequence-ℚ⁺ v) →
-  ( eq-common-difference :
-    common-difference-arithmetic-sequence-ℚ⁺ u ＝
+  ( common-difference-arithmetic-sequence-ℚ⁺ u ＝
     common-difference-arithmetic-sequence-ℚ⁺ v) →
   seq-arithmetic-sequence-ℚ⁺ u ~ seq-arithmetic-sequence-ℚ⁺ v
 htpy-seq-arithmetic-sequence-ℚ⁺ =
