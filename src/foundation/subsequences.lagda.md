@@ -35,7 +35,7 @@ A {{concept "subsequence" Agda=subsequence}} of a
 
 ## Definitions
 
-### Subsequences
+### Subsequences of a sequence
 
 ```agda
 module _
@@ -47,35 +47,26 @@ module _
     hom-Strictly-Preordered-Set
       strictly-preordered-set-ℕ
       strictly-preordered-set-ℕ
-```
 
-### The extracted sequence of a subsequence
-
-```agda
-module _
-  {l : Level} {A : UU l} (u : sequence A) (v : subsequence u)
-  where
-
-  extract-subsequence : ℕ → ℕ
+  extract-subsequence : subsequence → ℕ → ℕ
   extract-subsequence =
     map-hom-Strictly-Preordered-Set
       strictly-preordered-set-ℕ
       strictly-preordered-set-ℕ
-      v
 
   is-strictly-increasing-extract-subsequence :
+    (f : subsequence) →
     preserves-strict-order-map-Strictly-Preordered-Set
-      strictly-preordered-set-ℕ
-      strictly-preordered-set-ℕ
-      extract-subsequence
+      ( strictly-preordered-set-ℕ)
+      ( strictly-preordered-set-ℕ)
+      ( extract-subsequence f)
   is-strictly-increasing-extract-subsequence =
     preserves-strict-order-hom-Strictly-Preordered-Set
       strictly-preordered-set-ℕ
       strictly-preordered-set-ℕ
-      v
 
-  seq-subsequence : sequence A
-  seq-subsequence n = u (extract-subsequence n)
+  seq-subsequence : subsequence → sequence A
+  seq-subsequence f n = u (extract-subsequence f n)
 ```
 
 ## Properties
@@ -89,33 +80,24 @@ module _
 
   refl-subsequence : subsequence u
   refl-subsequence = id-hom-Strictly-Preordered-Set strictly-preordered-set-ℕ
-
-  compute-refl-subsequence : u ＝ seq-subsequence u refl-subsequence
-  compute-refl-subsequence = refl
 ```
 
 ### A subsequence of a subsequence is a subsequence of the original sequence
 
 ```agda
 module _
-  {l : Level} {A : UU l} (u : sequence A) (v : subsequence u)
-  (w : subsequence (seq-subsequence u v))
+  {l : Level} {A : UU l} (u : sequence A)
   where
 
-  sub-subsequence : subsequence u
+  sub-subsequence :
+    (v : subsequence u) →
+    (w : subsequence (seq-subsequence u v)) →
+    subsequence u
   sub-subsequence =
     comp-hom-Strictly-Preordered-Set
       strictly-preordered-set-ℕ
       strictly-preordered-set-ℕ
       strictly-preordered-set-ℕ
-      v
-      w
-
-  compute-sub-subsequence :
-    Id
-      (seq-subsequence u sub-subsequence)
-      (seq-subsequence (seq-subsequence u v) w)
-  compute-sub-subsequence = refl
 ```
 
 ### Subsequences are functorial
