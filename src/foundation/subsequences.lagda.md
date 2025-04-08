@@ -100,7 +100,7 @@ module _
       strictly-preordered-set-ℕ
 ```
 
-### The extraction sequence of a subsequence is sup-linear
+### The extraction sequence of a subsequence is superlinear
 
 ```agda
 module _
@@ -108,11 +108,11 @@ module _
   where
 
   abstract
-    is-sup-linear-extract-subsequence :
+    is-superlinear-extract-subsequence :
       (n : ℕ) → leq-ℕ n (extract-subsequence u v n)
-    is-sup-linear-extract-subsequence zero-ℕ =
+    is-superlinear-extract-subsequence zero-ℕ =
       leq-zero-ℕ (extract-subsequence u v zero-ℕ)
-    is-sup-linear-extract-subsequence (succ-ℕ n) =
+    is-superlinear-extract-subsequence (succ-ℕ n) =
       leq-succ-le-ℕ
         ( n)
         ( extract-subsequence u v (succ-ℕ n))
@@ -120,7 +120,7 @@ module _
           { n}
           { extract-subsequence u v n}
           { extract-subsequence u v (succ-ℕ n)}
-          ( is-sup-linear-extract-subsequence n)
+          ( is-superlinear-extract-subsequence n)
           ( le-succ-is-strictly-increasing-sequence-Strictly-Preordered-Set
             ( strictly-preordered-set-ℕ)
             ( extract-subsequence u v)
@@ -142,7 +142,7 @@ module _
       ( ℕ-Preorder)
       ( id)
       ( extract-subsequence u v)
-      ( is-sup-linear-extract-subsequence u v)
+      ( is-superlinear-extract-subsequence u v)
       ( id , λ i j → id)
 
   is-limit-∞-extract-subsequence :
