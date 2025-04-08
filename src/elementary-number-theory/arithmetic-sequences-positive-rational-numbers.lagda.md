@@ -238,7 +238,7 @@ module _
         ( strictly-preordered-set-ℚ⁺)
         ( seq-arithmetic-sequence-ℚ⁺ u)
     is-strictly-increasing-seq-arithmetic-sequence-ℚ⁺ =
-      is-strictly-increasing-is-everywhere-strictly-increasing-sequence-Strictly-Preordered-Set
+      is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set
         ( strictly-preordered-set-ℚ⁺)
         ( seq-arithmetic-sequence-ℚ⁺ u)
         ( le-succ-seq-arithmetic-sequence-ℚ⁺)
@@ -268,7 +268,7 @@ module _
         ( poset-ℚ⁺)
         ( seq-arithmetic-sequence-ℚ⁺ u)
     is-increasing-seq-arithmetic-sequence-ℚ⁺ =
-      is-increasing-is-everywhere-increasing-sequence-Poset
+      is-increasing-leq-succ-sequence-Poset
         ( poset-ℚ⁺)
         ( seq-arithmetic-sequence-ℚ⁺ u)
         ( leq-succ-seq-arithmetic-sequence-ℚ⁺)
