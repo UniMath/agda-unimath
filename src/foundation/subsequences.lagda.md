@@ -100,30 +100,22 @@ module _
       strictly-preordered-set-ℕ
 ```
 
-### Subsequences are functorial
+### Transport of subsequences
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (u : sequence A)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (u : sequence A) (v : sequence B)
   where
 
-  map-subsequence : subsequence u → subsequence (map-sequence f u)
-  map-subsequence H = H
-```
+  tr-subsequence : subsequence u → subsequence v
+  tr-subsequence f = f
 
-### The extracted sequence of the image of a subsequence is the extracted sequence of the image
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (u : sequence A)
-  (v : subsequence u)
-  where
-
-  compute-map-subsequence :
-    Id
-      (map-sequence f (seq-subsequence u v))
-      (seq-subsequence (map-sequence f u) (map-subsequence f u v))
-  compute-map-subsequence = refl
+  compute-seq-tr-subsequence :
+    (f : subsequence u) →
+    seq-subsequence v f ＝
+    seq-subsequence v (tr-subsequence f)
+  compute-seq-tr-subsequence f = refl
 ```
 
 ### The extraction sequence of a subsequence tends to infinity
