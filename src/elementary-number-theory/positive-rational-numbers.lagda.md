@@ -504,12 +504,16 @@ le-ℚ⁺ x y = type-Prop (le-prop-ℚ⁺ x y)
 is-prop-le-ℚ⁺ : (x y : ℚ⁺) → is-prop (le-ℚ⁺ x y)
 is-prop-le-ℚ⁺ x y = is-prop-type-Prop (le-prop-ℚ⁺ x y)
 
+transitive-le-ℚ⁺ : is-transitive le-ℚ⁺
+transitive-le-ℚ⁺ x y z =
+  transitive-le-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) (rational-ℚ⁺ z)
+
 strictly-preordered-set-ℚ⁺ : Strictly-Preordered-Set lzero lzero
 pr1 strictly-preordered-set-ℚ⁺ = set-ℚ⁺
 pr2 strictly-preordered-set-ℚ⁺ =
   ( le-prop-ℚ⁺) ,
   ( irreflexive-le-ℚ ∘ rational-ℚ⁺) ,
-  ( λ x y z → transitive-le-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) ( rational-ℚ⁺ z))
+  ( transitive-le-ℚ⁺)
 
 strict-preorder-ℚ⁺ : Strict-Preorder lzero lzero
 strict-preorder-ℚ⁺ =
