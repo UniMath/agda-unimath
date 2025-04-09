@@ -62,6 +62,9 @@ premetric-le-ℚ d x y =
   product-Prop
     ( le-ℚ-Prop y (x +ℚ (rational-ℚ⁺ d)))
     ( le-ℚ-Prop x (y +ℚ (rational-ℚ⁺ d)))
+
+neighborhood-le-ℚ : ℚ⁺ → ℚ → ℚ → UU lzero
+neighborhood-le-ℚ d x y = type-Prop (premetric-le-ℚ d x y)
 ```
 
 ## Properties

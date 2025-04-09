@@ -298,6 +298,10 @@ mul-ℚ⁰⁺ (p , nonneg-p) (q , nonneg-q) =
 infixl 35 _*ℚ⁰⁺_
 _*ℚ⁰⁺_ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
 _*ℚ⁰⁺_ = mul-ℚ⁰⁺
+
+abstract
+  commutative-mul-ℚ⁰⁺ : (p q : ℚ⁰⁺) → p *ℚ⁰⁺ q ＝ q *ℚ⁰⁺ p
+  commutative-mul-ℚ⁰⁺ (p , _) (q , _) = eq-ℚ⁰⁺ (commutative-mul-ℚ p q)
 ```
 
 ### Inequality on nonnegative rational numbers
