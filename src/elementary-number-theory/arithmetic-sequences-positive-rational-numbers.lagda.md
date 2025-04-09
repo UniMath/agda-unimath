@@ -84,6 +84,10 @@ module _
   common-difference-arithmetic-sequence-ℚ⁺ =
     common-difference-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺ u
 
+  rational-common-difference-arithmetic-sequence-ℚ⁺ : ℚ
+  rational-common-difference-arithmetic-sequence-ℚ⁺ =
+    rational-ℚ⁺ common-difference-arithmetic-sequence-ℚ⁺
+
   is-common-difference-arithmetic-sequence-ℚ⁺ :
     is-common-difference-sequence-Semigroup
       semigroup-add-ℚ⁺
@@ -289,45 +293,34 @@ module _
       (M : ℚ⁺) → Σ ℕ (leq-ℚ⁺ M ∘ seq-arithmetic-sequence-ℚ⁺ u)
     is-unbounded-arithmetic-sequence-ℚ⁺ M =
       tot
-        ( tr-archimedean-bound)
+        ( λ n I →
+          leq-le-ℚ⁺
+            { M}
+            { seq-arithmetic-sequence-ℚ⁺ u n}
+            ( tr
+              ( le-ℚ (rational-ℚ⁺ M))
+              ( compute-arithmetic-sequence-ℚ⁺ u n)
+              ( transitive-le-ℚ
+                ( rational-ℚ⁺ M)
+                ( mul-ℚ
+                  ( rational-ℕ n)
+                  ( rational-common-difference-arithmetic-sequence-ℚ⁺ u))
+                ( add-ℚ
+                  ( rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
+                  ( mul-ℚ
+                    ( rational-ℕ n)
+                    ( rational-common-difference-arithmetic-sequence-ℚ⁺ u)))
+                ( le-left-add-rational-ℚ⁺
+                  ( mul-ℚ
+                    ( rational-ℕ n)
+                    ( rational-common-difference-arithmetic-sequence-ℚ⁺ u))
+                  ( init-term-arithmetic-sequence-ℚ⁺ u))
+                ( I))))
         ( bound-archimedean-property-ℚ
-          ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u))
+          ( rational-common-difference-arithmetic-sequence-ℚ⁺ u)
           ( rational-ℚ⁺ M)
           ( is-positive-rational-ℚ⁺
             ( common-difference-arithmetic-sequence-ℚ⁺ u)))
-      where
-
-      tr-archimedean-bound :
-        (n : ℕ) →
-        le-ℚ
-          ( rational-ℚ⁺ M)
-          ( mul-ℚ
-            ( rational-ℕ n)
-            ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u))) →
-        leq-ℚ⁺ M (seq-arithmetic-sequence-ℚ⁺ u n)
-      tr-archimedean-bound n I =
-        leq-le-ℚ⁺
-          { M}
-          { seq-arithmetic-sequence-ℚ⁺ u n}
-          ( tr
-            ( le-ℚ (rational-ℚ⁺ M))
-            ( compute-arithmetic-sequence-ℚ⁺ u n)
-            ( transitive-le-ℚ
-              ( rational-ℚ⁺ M)
-              ( mul-ℚ
-                ( rational-ℕ n)
-                ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))
-              ( add-ℚ
-                ( rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
-                ( mul-ℚ
-                  ( rational-ℕ n)
-                  ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u))))
-              ( le-left-add-rational-ℚ⁺
-                ( mul-ℚ
-                  ( rational-ℕ n)
-                  ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))
-                ( init-term-arithmetic-sequence-ℚ⁺ u))
-              ( I)))
 
   modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ : ℚ⁺ → ℕ
   modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ M =
