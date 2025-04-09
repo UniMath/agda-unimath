@@ -55,6 +55,7 @@ open import elementary-number-theory.difference-rational-numbers public
 open import elementary-number-theory.dirichlet-convolution public
 open import elementary-number-theory.distance-integers public
 open import elementary-number-theory.distance-natural-numbers public
+open import elementary-number-theory.distance-rational-numbers public
 open import elementary-number-theory.divisibility-integers public
 open import elementary-number-theory.divisibility-modular-arithmetic public
 open import elementary-number-theory.divisibility-natural-numbers public
