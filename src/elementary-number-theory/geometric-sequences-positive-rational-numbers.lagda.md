@@ -134,11 +134,9 @@ module _
 ```agda
 htpy-seq-geometric-sequence-ℚ⁺ :
   ( u v : geometric-sequence-ℚ⁺) →
-  ( eq-init :
-    init-term-geometric-sequence-ℚ⁺ u ＝
+  ( init-term-geometric-sequence-ℚ⁺ u ＝
     init-term-geometric-sequence-ℚ⁺ v) →
-  ( eq-common-ratio :
-    common-ratio-geometric-sequence-ℚ⁺ u ＝
+  ( common-ratio-geometric-sequence-ℚ⁺ u ＝
     common-ratio-geometric-sequence-ℚ⁺ v) →
   seq-geometric-sequence-ℚ⁺ u ~
   seq-geometric-sequence-ℚ⁺ v
