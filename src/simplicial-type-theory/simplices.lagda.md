@@ -15,6 +15,8 @@ open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.raising-universe-levels
@@ -23,6 +25,8 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import order-theory.bounded-total-orders
+
+open import synthetic-homotopy-theory.pushouts
 ```
 
 </details>
@@ -156,4 +160,51 @@ module simplex
   identity-s00-s10 :
     (x : Δ 2) → s00 (s10 x) ＝ s00 (s11 x)
   identity-s00-s10 (cons-Δ x i H) = refl
+
+  module _
+    {l : Level} (X : UU l)
+    where
+    
+    nerve-Δ : ℕ → UU (l1 ⊔ l)
+    nerve-Δ n = Δ n → X
+
+    obj-Δ : UU (l1 ⊔ l)
+    obj-Δ = nerve-Δ 0
+
+    mor-Δ : UU (l1 ⊔ l)
+    mor-Δ = nerve-Δ 1
+
+    dom-Δ : mor-Δ → obj-Δ
+    dom-Δ f = f ∘ d01
+
+    cod-Δ : mor-Δ → obj-Δ
+    cod-Δ f = f ∘ d00
+
+    id-mor-Δ : obj-Δ → mor-Δ
+    id-mor-Δ f = f ∘ s00
+    
+  record
+    midhorn {l : Level} (X : UU l) : UU (l1 ⊔ l)
+    where
+
+    constructor
+      tim
+
+    field
+      fstmor sndmor : mor-Δ X
+      compat : cod-Δ X fstmor pt-Δ ＝ dom-Δ X sndmor pt-Δ
+
+  representing-midhorn : UU l1
+  representing-midhorn =
+    pushout d00 d01
+
+  open midhorn public
+  
+  resmid-Δ : {l : Level} {X : UU l} → nerve-Δ X 2 → midhorn X
+  fstmor (resmid-Δ f) = f ∘ d12
+  sndmor (resmid-Δ f) = f ∘ d10
+  compat (resmid-Δ f) = ap f (inv (identity-d10-d01 pt-Δ))
+
+  is-segal : {l : Level} (X : UU l) → UU (l1 ⊔ l)
+  is-segal X = is-equiv (resmid-Δ {X = X})
 ```
