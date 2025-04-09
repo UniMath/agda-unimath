@@ -8,6 +8,7 @@ module group-theory where
 open import group-theory.abelian-groups public
 open import group-theory.abelianization-groups public
 open import group-theory.addition-homomorphisms-abelian-groups public
+open import group-theory.arithmetic-sequences-semigroups public
 open import group-theory.automorphism-groups public
 open import group-theory.cartesian-products-abelian-groups public
 open import group-theory.cartesian-products-concrete-groups public
