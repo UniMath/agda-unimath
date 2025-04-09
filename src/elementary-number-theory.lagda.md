@@ -24,9 +24,11 @@ open import elementary-number-theory.archimedean-property-natural-numbers public
 open import elementary-number-theory.archimedean-property-positive-rational-numbers public
 open import elementary-number-theory.archimedean-property-rational-numbers public
 open import elementary-number-theory.arithmetic-functions public
+open import elementary-number-theory.arithmetic-sequences-positive-rational-numbers public
 open import elementary-number-theory.based-induction-natural-numbers public
 open import elementary-number-theory.based-strong-induction-natural-numbers public
 open import elementary-number-theory.bell-numbers public
+open import elementary-number-theory.bernoullis-inequality-positive-rational-numbers public
 open import elementary-number-theory.bezouts-lemma-integers public
 open import elementary-number-theory.bezouts-lemma-natural-numbers public
 open import elementary-number-theory.binomial-coefficients public
@@ -75,6 +77,7 @@ open import elementary-number-theory.field-of-rational-numbers public
 open import elementary-number-theory.finitary-natural-numbers public
 open import elementary-number-theory.finitely-cyclic-maps public
 open import elementary-number-theory.fundamental-theorem-of-arithmetic public
+open import elementary-number-theory.geometric-sequences-positive-rational-numbers public
 open import elementary-number-theory.goldbach-conjecture public
 open import elementary-number-theory.greatest-common-divisor-integers public
 open import elementary-number-theory.greatest-common-divisor-natural-numbers public
@@ -190,5 +193,6 @@ open import elementary-number-theory.universal-property-natural-numbers public
 open import elementary-number-theory.upper-bounds-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-standard-finite-types public
+open import elementary-number-theory.zero-approximations-sequences-positive-rational-numbers public
 open import elementary-number-theory.zero-conatural-numbers public
 ```
