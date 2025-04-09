@@ -72,6 +72,11 @@ module _
   leq-Bounded-Total-Order =
     leq-Poset poset-Bounded-Total-Order
 
+  is-prop-leq-Bounded-Total-Order :
+    (x y : type-Bounded-Total-Order) → is-prop (leq-Bounded-Total-Order x y)
+  is-prop-leq-Bounded-Total-Order =
+    is-prop-leq-Poset poset-Bounded-Total-Order
+
   refl-leq-Bounded-Total-Order :
     is-reflexive leq-Bounded-Total-Order
   refl-leq-Bounded-Total-Order =
