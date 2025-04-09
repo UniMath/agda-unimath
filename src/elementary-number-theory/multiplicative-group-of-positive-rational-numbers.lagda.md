@@ -137,7 +137,8 @@ abstract
 
 ```agda
 abstract
-  distributive-inv-mul-ℚ⁺ : (x y : ℚ⁺) → inv-ℚ⁺ (x *ℚ⁺ y) ＝ inv-ℚ⁺ x *ℚ⁺ inv-ℚ⁺ y
+  distributive-inv-mul-ℚ⁺ :
+    (x y : ℚ⁺) → inv-ℚ⁺ (x *ℚ⁺ y) ＝ inv-ℚ⁺ x *ℚ⁺ inv-ℚ⁺ y
   distributive-inv-mul-ℚ⁺ x y =
     distributive-inv-mul-Group'
       ( group-mul-ℚ⁺)

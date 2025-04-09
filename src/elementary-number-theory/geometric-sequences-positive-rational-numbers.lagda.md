@@ -359,7 +359,7 @@ module _
     ( ap
       ( inv-ℚ⁺)
       ( is-common-ratio-geometric-sequence-ℚ⁺ u n)) ∙
-    ( inv-mul-ℚ⁺
+    ( distributive-inv-mul-ℚ⁺
       ( seq-geometric-sequence-ℚ⁺ u n)
       ( common-ratio-geometric-sequence-ℚ⁺ u))
 

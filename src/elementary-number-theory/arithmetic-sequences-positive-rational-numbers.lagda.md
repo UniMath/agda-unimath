@@ -147,32 +147,19 @@ module _
     compute-standard-arithmetic-sequence-ℚ⁺ (succ-ℕ n) =
       ( ap
         ( add-ℚ (rational-ℚ⁺ a))
-        ( ( α n (rational-ℚ⁺ d))) ∙
-          ( inv
-            ( associative-add-ℚ
-              ( rational-ℚ⁺ a)
-              ( rational-ℕ n *ℚ rational-ℚ⁺ d)
-              ( rational-ℚ⁺ d))) ∙
-          ( ap
-            ( add-ℚ' (rational-ℚ⁺ d))
-            ( compute-standard-arithmetic-sequence-ℚ⁺ n)))
-      where
-
-        α :
-          (m : ℕ) (q : ℚ) →
-          (rational-ℕ (succ-ℕ m) *ℚ q) ＝ (rational-ℕ m) *ℚ q +ℚ q
-        α m q =
-          ( ap
-            ( mul-ℚ' q)
-            ( ( inv (succ-rational-int-ℕ m)) ∙
-              ( commutative-add-ℚ one-ℚ (rational-ℕ m)))) ∙
-          ( right-distributive-mul-add-ℚ
-            ( rational-ℕ m)
-            ( one-ℚ)
-            ( q)) ∙
-          ( ap
-            ( add-ℚ (rational-ℕ m *ℚ q))
-            ( left-unit-law-mul-ℚ q))
+        ( ( ap (mul-ℚ' (rational-ℚ⁺ d)) (inv (succ-rational-int-ℕ n))) ∙
+          ( mul-left-succ-ℚ (rational-ℕ n) (rational-ℚ⁺ d)) ∙
+          ( commutative-add-ℚ
+            ( rational-ℚ⁺ d)
+            ( rational-ℕ n *ℚ rational-ℚ⁺ d)))) ∙
+      ( inv
+        ( associative-add-ℚ
+          ( rational-ℚ⁺ a)
+          ( rational-ℕ n *ℚ rational-ℚ⁺ d)
+          ( rational-ℚ⁺ d))) ∙
+      ( ap
+        ( add-ℚ' (rational-ℚ⁺ d))
+        ( compute-standard-arithmetic-sequence-ℚ⁺ n))
 
 module _
   (u : arithmetic-sequence-ℚ⁺)
