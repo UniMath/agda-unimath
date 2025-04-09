@@ -8,9 +8,12 @@ module foundation.decidable-subtypes where
 
 ```agda
 open import foundation.1-types
+open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-maps
+open import foundation.empty-types
+open import foundation.inhabited-subtypes
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -19,12 +22,14 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.logical-equivalences
+open import foundation.postcomposition-functions
 open import foundation.propositional-maps
 open import foundation.sets
 open import foundation.structured-type-duality
 open import foundation.subtypes
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
+open import foundation.raising-universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.equivalences
@@ -163,6 +168,27 @@ module _
     X ≃ type-decidable-subtype decidable-subtype-decidable-emb
   inv-compute-type-decidable-type-decidable-emb =
     inv-equiv-total-fiber (map-decidable-emb f)
+```
+
+## Attributes
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
+  where
+
+  is-inhabited-decidable-subtype-Prop : Prop (l1 ⊔ l2)
+  is-inhabited-decidable-subtype-Prop =
+    is-inhabited-subtype-Prop (subtype-decidable-subtype P)
+
+  is-inhabited-decidable-subtype : UU (l1 ⊔ l2)
+  is-inhabited-decidable-subtype = type-Prop is-inhabited-decidable-subtype-Prop
+
+  is-empty-decidable-subtype-Prop : Prop (l1 ⊔ l2)
+  is-empty-decidable-subtype-Prop = is-empty-Prop (type-decidable-subtype P)
+
+  is-empty-decidable-subtype : UU (l1 ⊔ l2)
+  is-empty-decidable-subtype = type-Prop is-empty-decidable-subtype-Prop
 ```
 
 ## Examples
@@ -346,4 +372,38 @@ equiv-Fiber-Decidable-Prop l A =
         ( λ f →
           ( inv-distributive-Π-Σ) ∘e
           ( equiv-product-left (equiv-is-prop-map-is-emb f)))))
+```
+
+### The type of decidable subtypes of `A` is equivalent to mappings `A → bool`
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1)
+  where
+
+  map-bool-decidable-subtype-equiv : decidable-subtype l2 A ≃ (A → bool)
+  map-bool-decidable-subtype-equiv = equiv-postcomp A equiv-bool-Decidable-Prop
+```
+
+### Raising the universe level of decidable subtypes
+
+```agda
+raise-decidable-subtype :
+  {l0 l1 : Level} → (l : Level) → {A : UU l0} → decidable-subtype l1 A →
+  decidable-subtype (l1 ⊔ l) A
+raise-decidable-subtype l S a = raise-Decidable-Prop l (S a)
+```
+
+## Examples
+
+### True booleans
+
+```agda
+is-decidable-is-true : (x : bool) → is-decidable (is-true x)
+is-decidable-is-true false = inr (λ ())
+is-decidable-is-true true = inl refl
+
+is-true-decidable-subtype : decidable-subtype lzero bool
+is-true-decidable-subtype x =
+  ( is-true x , is-prop-is-true x , is-decidable-is-true x)
 ```

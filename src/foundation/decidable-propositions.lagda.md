@@ -310,3 +310,14 @@ abstract
   no-fixed-points-neg-Decidable-Prop P =
     no-fixed-points-neg (type-Decidable-Prop P)
 ```
+
+### Raising the universe level of decidable propositions
+
+```agda
+raise-Decidable-Prop :
+  {l0 : Level} → (l : Level) → Decidable-Prop l0 → Decidable-Prop (l0 ⊔ l)
+raise-Decidable-Prop l (t , is-prop-t , is-dec-t) =
+  ( raise l t ,
+    is-prop-type-Prop (raise-Prop l (t , is-prop-t))  ,
+    rec-coproduct (inl ∘ map-raise) (λ ¬t → inr (¬t ∘ map-inv-raise)) is-dec-t)
+```

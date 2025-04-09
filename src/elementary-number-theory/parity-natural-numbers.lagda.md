@@ -15,10 +15,12 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.decidable-types
+open import foundation.negated-equality
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 open import foundation.negation
 open import foundation.universe-levels
 ```
@@ -156,4 +158,13 @@ has-odd-expansion-is-odd (succ-ℕ (succ-ℕ n)) p =
   where
   s : has-odd-expansion n
   s = has-odd-expansion-is-odd n (is-odd-is-odd-succ-succ-ℕ n p)
+```
+
+### If `x` is odd and `y` is even, `x ≠ y`
+
+```agda
+abstract
+  noneq-odd-even :
+    (x y : ℕ) → is-odd-ℕ x → is-even-ℕ y → x ≠ y
+  noneq-odd-even x y odd-x even-y x=y = odd-x (inv-tr is-even-ℕ x=y even-y)
 ```
