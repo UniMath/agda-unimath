@@ -759,32 +759,52 @@ module _
 ### Any positive rational number `p` has a `q` with `q + q < p`
 
 ```agda
+module _
+  (p : ℚ⁺)
+  where
+
+  modulus-le-double-le-ℚ⁺ : ℚ⁺
+  modulus-le-double-le-ℚ⁺ =
+    strict-min-ℚ⁺
+      ( left-summand-split-ℚ⁺ p)
+      ( right-summand-split-ℚ⁺ p)
+
+  le-double-le-modulus-le-double-le-ℚ⁺ :
+      le-ℚ⁺
+        ( modulus-le-double-le-ℚ⁺ +ℚ⁺ modulus-le-double-le-ℚ⁺)
+        ( p)
+  le-double-le-modulus-le-double-le-ℚ⁺ =
+    tr
+      ( le-ℚ⁺ (modulus-le-double-le-ℚ⁺ +ℚ⁺ modulus-le-double-le-ℚ⁺ ))
+      ( eq-add-split-ℚ⁺ p)
+      ( preserves-le-add-ℚ
+        { rational-ℚ⁺ (modulus-le-double-le-ℚ⁺)}
+        { rational-ℚ⁺ (left-summand-split-ℚ⁺ p)}
+        { rational-ℚ⁺ (modulus-le-double-le-ℚ⁺)}
+        { rational-ℚ⁺ (right-summand-split-ℚ⁺ p)}
+        ( le-left-min-ℚ⁺
+          ( left-summand-split-ℚ⁺ p)
+          ( right-summand-split-ℚ⁺ p))
+        ( le-right-min-ℚ⁺
+          ( left-summand-split-ℚ⁺ p)
+          ( right-summand-split-ℚ⁺ p)))
+
+  le-modulus-le-double-le-ℚ⁺ : le-ℚ⁺ modulus-le-double-le-ℚ⁺ p
+  le-modulus-le-double-le-ℚ⁺ =
+    {!transitive-le-ℚ⁺
+      ( modulus-le-double-le-ℚ⁺)
+      ( left-summand-split-ℚ⁺ p)
+      ( p)
+      ( ?)
+      ( ?)!}
+
 abstract
   bound-double-le-ℚ⁺ :
     (p : ℚ⁺) →
     Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
-  bound-double-le-ℚ⁺ p = dependent-pair-result
-    where
-    q : ℚ⁺
-    q = left-summand-split-ℚ⁺ p
-    r : ℚ⁺
-    r = right-summand-split-ℚ⁺ p
-    s : ℚ⁺
-    s = strict-min-ℚ⁺ q r
-    -- Inlining this blows up compile times for some unclear reason.
-    dependent-pair-result : Σ ℚ⁺ (λ x → le-ℚ⁺ (x +ℚ⁺ x) p)
-    dependent-pair-result =
-      s ,
-      tr
-        ( le-ℚ⁺ (s +ℚ⁺ s))
-        ( eq-add-split-ℚ⁺ p)
-        ( preserves-le-add-ℚ
-          { rational-ℚ⁺ s}
-          { rational-ℚ⁺ q}
-          { rational-ℚ⁺ s}
-          { rational-ℚ⁺ r}
-          ( le-left-min-ℚ⁺ q r)
-          ( le-right-min-ℚ⁺ q r))
+  bound-double-le-ℚ⁺ p =
+    modulus-le-double-le-ℚ⁺ p ,
+    le-double-le-modulus-le-double-le-ℚ⁺ p
 
   double-le-ℚ⁺ :
     (p : ℚ⁺) →
