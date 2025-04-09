@@ -7,8 +7,10 @@ module ring-theory.modules-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -75,6 +77,12 @@ module _
   zero-left-module-Ring : type-left-module-Ring
   zero-left-module-Ring = zero-Ab ab-left-module-Ring
 
+  is-zero-prop-left-module-Ring : type-left-module-Ring → Prop l2
+  is-zero-prop-left-module-Ring = is-zero-prop-Ab ab-left-module-Ring
+
+  is-zero-left-module-Ring : type-left-module-Ring → UU l2
+  is-zero-left-module-Ring = is-zero-Ab ab-left-module-Ring
+
   neg-left-module-Ring : type-left-module-Ring → type-left-module-Ring
   neg-left-module-Ring = neg-Ab ab-left-module-Ring
 
@@ -133,162 +141,163 @@ module _
         ( mul-hom-left-module-Ring)
         ( x))
 
-  left-unit-law-mul-left-module-Ring :
-    (x : type-left-module-Ring) →
-    Id ( mul-left-module-Ring (one-Ring R) x) x
-  left-unit-law-mul-left-module-Ring =
-    htpy-eq-hom-Ab
-      ( ab-left-module-Ring)
-      ( ab-left-module-Ring)
-      ( map-hom-Ring R
-        ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring)
-        ( one-Ring R))
-      ( id-hom-Ab ab-left-module-Ring)
-      ( preserves-one-hom-Ring R
-        ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring))
+  abstract
+    left-unit-law-mul-left-module-Ring :
+      (x : type-left-module-Ring) →
+      Id ( mul-left-module-Ring (one-Ring R) x) x
+    left-unit-law-mul-left-module-Ring =
+      htpy-eq-hom-Ab
+        ( ab-left-module-Ring)
+        ( ab-left-module-Ring)
+        ( map-hom-Ring R
+          ( endomorphism-ring-ab-left-module-Ring)
+          ( mul-hom-left-module-Ring)
+          ( one-Ring R))
+        ( id-hom-Ab ab-left-module-Ring)
+        ( preserves-one-hom-Ring R
+          ( endomorphism-ring-ab-left-module-Ring)
+          ( mul-hom-left-module-Ring))
 
-  left-distributive-mul-add-left-module-Ring :
-    (r : type-Ring R) (x y : type-left-module-Ring) →
-    Id
-      ( mul-left-module-Ring r (add-left-module-Ring x y))
-      ( add-left-module-Ring
-        ( mul-left-module-Ring r x)
-        ( mul-left-module-Ring r y))
-  left-distributive-mul-add-left-module-Ring r x y =
-    preserves-add-hom-Ab
-      ( ab-left-module-Ring)
-      ( ab-left-module-Ring)
-      ( map-hom-Ring R
-          endomorphism-ring-ab-left-module-Ring
-          mul-hom-left-module-Ring
-          r)
+    left-distributive-mul-add-left-module-Ring :
+      (r : type-Ring R) (x y : type-left-module-Ring) →
+      Id
+        ( mul-left-module-Ring r (add-left-module-Ring x y))
+        ( add-left-module-Ring
+          ( mul-left-module-Ring r x)
+          ( mul-left-module-Ring r y))
+    left-distributive-mul-add-left-module-Ring r x y =
+      preserves-add-hom-Ab
+        ( ab-left-module-Ring)
+        ( ab-left-module-Ring)
+        ( map-hom-Ring R
+            endomorphism-ring-ab-left-module-Ring
+            mul-hom-left-module-Ring
+            r)
 
-  right-distributive-mul-add-left-module-Ring :
-    (r s : type-Ring R) (x : type-left-module-Ring) →
-    Id
-      ( mul-left-module-Ring (add-Ring R r s) x)
-      ( add-left-module-Ring
-        ( mul-left-module-Ring r x)
-        ( mul-left-module-Ring s x))
-  right-distributive-mul-add-left-module-Ring r s =
-    htpy-eq-hom-Ab
-      ( ab-left-module-Ring)
-      ( ab-left-module-Ring)
-      ( map-hom-Ring R
-        ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring)
-        ( add-Ring R r s))
-      ( add-hom-Ab
+    right-distributive-mul-add-left-module-Ring :
+      (r s : type-Ring R) (x : type-left-module-Ring) →
+      Id
+        ( mul-left-module-Ring (add-Ring R r s) x)
+        ( add-left-module-Ring
+          ( mul-left-module-Ring r x)
+          ( mul-left-module-Ring s x))
+    right-distributive-mul-add-left-module-Ring r s =
+      htpy-eq-hom-Ab
+        ( ab-left-module-Ring)
+        ( ab-left-module-Ring)
+        ( map-hom-Ring R
+          ( endomorphism-ring-ab-left-module-Ring)
+          ( mul-hom-left-module-Ring)
+          ( add-Ring R r s))
+        ( add-hom-Ab
+          ( ab-left-module-Ring)
+          ( ab-left-module-Ring)
+          ( map-hom-Ring R
+            ( endomorphism-ring-ab-left-module-Ring)
+            ( mul-hom-left-module-Ring)
+            ( r))
+          ( map-hom-Ring R
+            ( endomorphism-ring-ab-left-module-Ring)
+            ( mul-hom-left-module-Ring)
+            ( s)))
+        ( preserves-add-hom-Ring R
+          ( endomorphism-ring-ab-left-module-Ring)
+          ( mul-hom-left-module-Ring))
+
+    associative-mul-left-module-Ring :
+      (r s : type-Ring R) (x : type-left-module-Ring) →
+      Id
+        ( mul-left-module-Ring (mul-Ring R r s) x)
+        ( mul-left-module-Ring r (mul-left-module-Ring s x))
+    associative-mul-left-module-Ring r s =
+      htpy-eq-hom-Ab
+        ( ab-left-module-Ring)
+        ( ab-left-module-Ring)
+        ( map-hom-Ring R
+          ( endomorphism-ring-ab-left-module-Ring)
+          ( mul-hom-left-module-Ring)
+          ( mul-Ring R r s))
+        ( comp-hom-Ab
+          ( ab-left-module-Ring)
+          ( ab-left-module-Ring)
+          ( ab-left-module-Ring)
+          ( map-hom-Ring R
+            ( endomorphism-ring-ab-left-module-Ring)
+            ( mul-hom-left-module-Ring)
+            ( r))
+          ( map-hom-Ring R
+            ( endomorphism-ring-ab-left-module-Ring)
+            ( mul-hom-left-module-Ring)
+            ( s)))
+        ( preserves-mul-hom-Ring R
+          ( endomorphism-ring-ab-left-module-Ring)
+          ( mul-hom-left-module-Ring))
+
+    left-zero-law-mul-left-module-Ring :
+      (x : type-left-module-Ring) →
+      Id ( mul-left-module-Ring (zero-Ring R) x) zero-left-module-Ring
+    left-zero-law-mul-left-module-Ring =
+      htpy-eq-hom-Ab
+        ( ab-left-module-Ring)
+        ( ab-left-module-Ring)
+        ( map-hom-Ring R
+          ( endomorphism-ring-ab-left-module-Ring)
+          ( mul-hom-left-module-Ring)
+          ( zero-Ring R))
+        ( zero-hom-Ab ab-left-module-Ring ab-left-module-Ring)
+        ( preserves-zero-hom-Ring R
+          ( endomorphism-ring-ab-left-module-Ring)
+          ( mul-hom-left-module-Ring))
+
+    right-zero-law-mul-left-module-Ring :
+      (r : type-Ring R) →
+      Id ( mul-left-module-Ring r zero-left-module-Ring) zero-left-module-Ring
+    right-zero-law-mul-left-module-Ring r =
+      preserves-zero-hom-Ab
         ( ab-left-module-Ring)
         ( ab-left-module-Ring)
         ( map-hom-Ring R
           ( endomorphism-ring-ab-left-module-Ring)
           ( mul-hom-left-module-Ring)
           ( r))
+
+    left-negative-law-mul-left-module-Ring :
+      (r : type-Ring R) (x : type-left-module-Ring) →
+      Id
+        ( mul-left-module-Ring (neg-Ring R r) x)
+        ( neg-left-module-Ring (mul-left-module-Ring r x))
+    left-negative-law-mul-left-module-Ring r =
+      htpy-eq-hom-Ab
+        ( ab-left-module-Ring)
+        ( ab-left-module-Ring)
         ( map-hom-Ring R
           ( endomorphism-ring-ab-left-module-Ring)
           ( mul-hom-left-module-Ring)
-          ( s)))
-      ( preserves-add-hom-Ring R
-        ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring))
+          ( neg-Ring R r))
+        ( neg-hom-Ab
+          ( ab-left-module-Ring)
+          ( ab-left-module-Ring)
+          ( map-hom-Ring R
+            ( endomorphism-ring-ab-left-module-Ring)
+            ( mul-hom-left-module-Ring)
+            ( r)))
+        ( preserves-neg-hom-Ring R
+          ( endomorphism-ring-ab-left-module-Ring)
+          ( mul-hom-left-module-Ring))
 
-  associative-mul-left-module-Ring :
-    (r s : type-Ring R) (x : type-left-module-Ring) →
-    Id
-      ( mul-left-module-Ring (mul-Ring R r s) x)
-      ( mul-left-module-Ring r (mul-left-module-Ring s x))
-  associative-mul-left-module-Ring r s =
-    htpy-eq-hom-Ab
-      ( ab-left-module-Ring)
-      ( ab-left-module-Ring)
-      ( map-hom-Ring R
-        ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring)
-        ( mul-Ring R r s))
-      ( comp-hom-Ab
-        ( ab-left-module-Ring)
+    right-negative-law-mul-left-module-Ring :
+      (r : type-Ring R) (x : type-left-module-Ring) →
+      Id
+        ( mul-left-module-Ring r (neg-left-module-Ring x))
+        ( neg-left-module-Ring (mul-left-module-Ring r x))
+    right-negative-law-mul-left-module-Ring r x =
+      preserves-negatives-hom-Ab
         ( ab-left-module-Ring)
         ( ab-left-module-Ring)
         ( map-hom-Ring R
           ( endomorphism-ring-ab-left-module-Ring)
           ( mul-hom-left-module-Ring)
           ( r))
-        ( map-hom-Ring R
-          ( endomorphism-ring-ab-left-module-Ring)
-          ( mul-hom-left-module-Ring)
-          ( s)))
-      ( preserves-mul-hom-Ring R
-        ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring))
-
-  left-zero-law-mul-left-module-Ring :
-    (x : type-left-module-Ring) →
-    Id ( mul-left-module-Ring (zero-Ring R) x) zero-left-module-Ring
-  left-zero-law-mul-left-module-Ring =
-    htpy-eq-hom-Ab
-      ( ab-left-module-Ring)
-      ( ab-left-module-Ring)
-      ( map-hom-Ring R
-        ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring)
-        ( zero-Ring R))
-      ( zero-hom-Ab ab-left-module-Ring ab-left-module-Ring)
-      ( preserves-zero-hom-Ring R
-        ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring))
-
-  right-zero-law-mul-left-module-Ring :
-    (r : type-Ring R) →
-    Id ( mul-left-module-Ring r zero-left-module-Ring) zero-left-module-Ring
-  right-zero-law-mul-left-module-Ring r =
-    preserves-zero-hom-Ab
-      ( ab-left-module-Ring)
-      ( ab-left-module-Ring)
-      ( map-hom-Ring R
-        ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring)
-        ( r))
-
-  left-negative-law-mul-left-module-Ring :
-    (r : type-Ring R) (x : type-left-module-Ring) →
-    Id
-      ( mul-left-module-Ring (neg-Ring R r) x)
-      ( neg-left-module-Ring (mul-left-module-Ring r x))
-  left-negative-law-mul-left-module-Ring r =
-    htpy-eq-hom-Ab
-      ( ab-left-module-Ring)
-      ( ab-left-module-Ring)
-      ( map-hom-Ring R
-        ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring)
-        ( neg-Ring R r))
-      ( neg-hom-Ab
-        ( ab-left-module-Ring)
-        ( ab-left-module-Ring)
-        ( map-hom-Ring R
-          ( endomorphism-ring-ab-left-module-Ring)
-          ( mul-hom-left-module-Ring)
-          ( r)))
-      ( preserves-neg-hom-Ring R
-        ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring))
-
-  right-negative-law-mul-left-module-Ring :
-    (r : type-Ring R) (x : type-left-module-Ring) →
-    Id
-      ( mul-left-module-Ring r (neg-left-module-Ring x))
-      ( neg-left-module-Ring (mul-left-module-Ring r x))
-  right-negative-law-mul-left-module-Ring r x =
-    preserves-negatives-hom-Ab
-      ( ab-left-module-Ring)
-      ( ab-left-module-Ring)
-      ( map-hom-Ring R
-        ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring)
-        ( r))
 ```
 
 ### Right modules over rings
@@ -533,4 +542,23 @@ module _
         ( op-Ring endomorphism-ring-ab-right-module-Ring)
         ( mul-hom-right-module-Ring)
         ( r))
+```
+
+### Properties
+
+#### Multiplying by the negation of the one of the ring is negation
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (M : left-module-Ring l2 R)
+  where
+
+  abstract
+    mul-neg-one-left-module-Ring :
+      (x : type-left-module-Ring R M) →
+      mul-left-module-Ring R M (neg-Ring R (one-Ring R)) x ＝
+      neg-left-module-Ring R M x
+    mul-neg-one-left-module-Ring x =
+      left-negative-law-mul-left-module-Ring R M _ _ ∙
+      ap (neg-left-module-Ring R M) (left-unit-law-mul-left-module-Ring R M x)
 ```
