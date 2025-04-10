@@ -127,6 +127,11 @@ module _
     {a : A} {b : B} → map-inv-equiv e b ＝ a → b ＝ map-equiv e a
   map-inv-eq-transpose-equiv-inv {a} {b} =
     map-inv-equiv (eq-transpose-equiv-inv a b)
+
+  map-eq-transpose-equiv-inv' :
+    {a : A} {b : B} → b ＝ map-equiv e a → map-inv-equiv e b ＝ a
+  map-eq-transpose-equiv-inv' {a} {b} p =
+    ap (map-inv-equiv e) p ∙ is-retraction-map-inv-equiv e a
 ```
 
 ## Properties
@@ -155,6 +160,12 @@ module _
       ( equiv-ap e _ _)
       ( ( right-unit) ∙
         ( coherence-map-inv-equiv e _))
+
+  compute-refl-eq-transpose-equiv-inv' :
+    {x : A} →
+    map-eq-transpose-equiv-inv' e refl ＝ is-retraction-map-inv-equiv e x
+  compute-refl-eq-transpose-equiv-inv' =
+    refl
 ```
 
 ### The two definitions of transposing identifications along equivalences are homotopic
