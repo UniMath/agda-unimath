@@ -316,6 +316,9 @@ semigroup-add-ℚ⁺ =
 add-ℚ⁺ : ℚ⁺ → ℚ⁺ → ℚ⁺
 add-ℚ⁺ = mul-Subsemigroup semigroup-add-ℚ subsemigroup-add-ℚ⁺
 
+add-ℚ⁺' : ℚ⁺ → ℚ⁺ → ℚ⁺
+add-ℚ⁺' x y = add-ℚ⁺ y x
+
 infixl 35 _+ℚ⁺_
 _+ℚ⁺_ = add-ℚ⁺
 ```
@@ -597,15 +600,7 @@ module _
   where
 
   le-diff-ℚ⁺ : ℚ⁺
-  pr1 le-diff-ℚ⁺ = (rational-ℚ⁺ y) -ℚ (rational-ℚ⁺ x)
-  pr2 le-diff-ℚ⁺ =
-    is-positive-le-zero-ℚ
-      ( (rational-ℚ⁺ y) -ℚ (rational-ℚ⁺ x))
-      ( backward-implication
-        ( iff-translate-diff-le-zero-ℚ
-          ( rational-ℚ⁺ x)
-          ( rational-ℚ⁺ y))
-        ( ( H)))
+  le-diff-ℚ⁺ = positive-diff-le-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) H
 
   left-diff-law-add-ℚ⁺ : le-diff-ℚ⁺ +ℚ⁺ x ＝ y
   left-diff-law-add-ℚ⁺ =
@@ -626,6 +621,13 @@ module _
         ( rational-ℚ⁺ x)
         ( rational-ℚ⁺ le-diff-ℚ⁺))) ∙
     ( left-diff-law-add-ℚ⁺)
+
+  le-le-diff-ℚ⁺ : le-ℚ⁺ le-diff-ℚ⁺ y
+  le-le-diff-ℚ⁺ =
+    tr
+      ( le-ℚ⁺ le-diff-ℚ⁺)
+      ( left-diff-law-add-ℚ⁺)
+      ( le-left-add-ℚ⁺ le-diff-ℚ⁺ x)
 ```
 
 ### Multiplication by a positive rational number preserves strict inequality
@@ -853,7 +855,7 @@ module _
         ( p)
   le-double-le-modulus-le-double-le-ℚ⁺ =
     tr
-      ( le-ℚ⁺ (modulus-le-double-le-ℚ⁺ +ℚ⁺ modulus-le-double-le-ℚ⁺ ))
+      ( le-ℚ⁺ (modulus-le-double-le-ℚ⁺ +ℚ⁺ modulus-le-double-le-ℚ⁺))
       ( eq-add-split-ℚ⁺ p)
       ( preserves-le-add-ℚ
         { rational-ℚ⁺ (modulus-le-double-le-ℚ⁺)}
@@ -869,25 +871,22 @@ module _
 
   le-modulus-le-double-le-ℚ⁺ : le-ℚ⁺ modulus-le-double-le-ℚ⁺ p
   le-modulus-le-double-le-ℚ⁺ =
-    {!transitive-le-ℚ⁺
+    transitive-le-ℚ⁺
       ( modulus-le-double-le-ℚ⁺)
       ( left-summand-split-ℚ⁺ p)
       ( p)
-      ( ?)
-      ( ?)!}
+      ( le-mediant-zero-ℚ⁺ p)
+      ( le-left-min-ℚ⁺
+        ( left-summand-split-ℚ⁺ p)
+        ( right-summand-split-ℚ⁺ p))
 
-abstract
   bound-double-le-ℚ⁺ :
-    (p : ℚ⁺) →
     Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
-  bound-double-le-ℚ⁺ p =
-    modulus-le-double-le-ℚ⁺ p ,
-    le-double-le-modulus-le-double-le-ℚ⁺ p
+  bound-double-le-ℚ⁺ =
+    modulus-le-double-le-ℚ⁺ , le-double-le-modulus-le-double-le-ℚ⁺
 
-  double-le-ℚ⁺ :
-    (p : ℚ⁺) →
-    exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
-  double-le-ℚ⁺ p = unit-trunc-Prop (bound-double-le-ℚ⁺ p)
+  double-le-ℚ⁺ : exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
+  double-le-ℚ⁺ = unit-trunc-Prop bound-double-le-ℚ⁺
 ```
 
 ### Addition with a positive rational number is an increasing map

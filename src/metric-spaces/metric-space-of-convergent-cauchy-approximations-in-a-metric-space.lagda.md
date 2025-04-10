@@ -1,6 +1,8 @@
 # The metric space of convergent cauchy approximations in a metric space
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module metric-spaces.metric-space-of-convergent-cauchy-approximations-in-a-metric-space where
 ```
 
@@ -9,6 +11,9 @@ module metric-spaces.metric-space-of-convergent-cauchy-approximations-in-a-metri
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -65,36 +70,16 @@ module _
       ( metric-space-convergent-cauchy-approximations-Metric-Space A)
       ( saturate-Metric-Space A)
       ( limit-convergent-cauchy-approximation-Metric-Space A)
-  is-saturated-short-limit-convergent-cauchy-approximation-Metric-Space ε x y Nxy δ =
+  is-saturated-short-limit-convergent-cauchy-approximation-Metric-Space
+    ε x y Nxy δ =
     tr
-      ( λ d → neighborhood-Metric-Space A d
-        ( limit-convergent-cauchy-approximation-Metric-Space A x)
-        ( limit-convergent-cauchy-approximation-Metric-Space A y))
+      ( λ d →
+        neighborhood-Metric-Space A d
+          ( limit-convergent-cauchy-approximation-Metric-Space A x)
+          ( limit-convergent-cauchy-approximation-Metric-Space A y))
       ( lemma-ε-δ-θ-η)
       ( lemma-neighborhood-limit θ η η')
     where
-
-    δ₁ : ℚ⁺
-    δ₁ = left-summand-split-ℚ⁺ δ
-
-    δ₂ : ℚ⁺
-    δ₂ = right-summand-split-ℚ⁺ δ
-
-    δₘ : ℚ⁺
-    δₘ = strict-min-ℚ⁺ δ₁ δ₂
-
-    θ : ℚ⁺
-    θ = bound-bound-double-le-ℚ⁺ δₘ
-
-    η : ℚ⁺
-    η = {!!}
-
-    η' : ℚ⁺
-    η' = {!!}
-
-    lemma-ε-δ-θ-η :
-      ((θ +ℚ⁺ η) +ℚ⁺ ε +ℚ⁺ (θ +ℚ⁺ η')) ＝ ε +ℚ⁺ δ
-    lemma-ε-δ-θ-η = {!!}
 
     lemma-neighborhood-limit :
       (θ η η' : ℚ⁺) →
@@ -125,5 +110,50 @@ module _
             ( θ +ℚ⁺ η)
             ( map-convergent-cauchy-approximation-Metric-Space A x θ)
             ( limit-convergent-cauchy-approximation-Metric-Space A x)
-            ( is-limit-limit-convergent-cauchy-approximation-Metric-Space A x θ η)))
+            ( is-limit-limit-convergent-cauchy-approximation-Metric-Space
+              ( A)
+              ( x)
+              ( θ)
+              ( η))))
+
+    δ₁ : ℚ⁺
+    δ₁ = left-summand-split-ℚ⁺ δ
+
+    δ₂ : ℚ⁺
+    δ₂ = right-summand-split-ℚ⁺ δ
+
+    δₘ : ℚ⁺
+    δₘ = strict-min-ℚ⁺ δ₁ δ₂
+
+    θ : ℚ⁺
+    θ = modulus-le-double-le-ℚ⁺ δₘ
+
+    θ<δ₁ : le-ℚ⁺ θ δ₁
+    θ<δ₁ =
+      transitive-le-ℚ⁺ θ δₘ δ₁
+        ( le-left-min-ℚ⁺ δ₁ δ₂)
+        ( le-modulus-le-double-le-ℚ⁺ δₘ)
+
+    θ<δ₂ : le-ℚ⁺ θ δ₂
+    θ<δ₂ =
+      transitive-le-ℚ⁺ θ δₘ δ₂
+        ( le-right-min-ℚ⁺ δ₁ δ₂)
+        ( le-modulus-le-double-le-ℚ⁺ δₘ)
+
+    η : ℚ⁺
+    η = le-diff-ℚ⁺ θ δ₁ θ<δ₁
+
+    η' : ℚ⁺
+    η' = le-diff-ℚ⁺ θ δ₂ θ<δ₂
+
+    lemma-ε-δ-θ-η :
+      ((θ +ℚ⁺ η) +ℚ⁺ ε +ℚ⁺ (θ +ℚ⁺ η')) ＝ ε +ℚ⁺ δ
+    lemma-ε-δ-θ-η =
+      ( ap-binary
+        ( λ u v → u +ℚ⁺ ε +ℚ⁺ v)
+        ( right-diff-law-add-ℚ⁺ θ δ₁ θ<δ₁)
+        ( right-diff-law-add-ℚ⁺ θ δ₂ θ<δ₂)) ∙
+      ( ap (add-ℚ⁺' δ₂) (commutative-add-ℚ⁺ δ₁ ε)) ∙
+      ( associative-add-ℚ⁺ ε δ₁ δ₂) ∙
+      ( ap (add-ℚ⁺ ε) (eq-add-split-ℚ⁺ δ))
 ```

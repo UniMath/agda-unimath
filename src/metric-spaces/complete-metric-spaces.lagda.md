@@ -83,6 +83,41 @@ module _
   is-complete-metric-space-Complete-Metric-Space = pr2 A
 ```
 
+### The map from Cauchy approximations in a complete metric space to convergent Cauchy approximations
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A : Complete-Metric-Space l1 l2)
+  where
+
+  convergent-cauchy-approximation-Complete-Metric-Space :
+    cauchy-approximation-Metric-Space
+      ( metric-space-Complete-Metric-Space A) →
+    convergent-cauchy-approximation-Metric-Space
+      ( metric-space-Complete-Metric-Space A)
+  convergent-cauchy-approximation-Complete-Metric-Space u =
+    u , is-complete-metric-space-Complete-Metric-Space A u
+```
+
+### The limit of a Cauchy approximation in a complete metric space
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A : Complete-Metric-Space l1 l2)
+  where
+
+  limit-cauchy-approximation-Complete-Metric-Space :
+    cauchy-approximation-Metric-Space
+      ( metric-space-Complete-Metric-Space A) →
+    type-Complete-Metric-Space A
+  limit-cauchy-approximation-Complete-Metric-Space u =
+    limit-convergent-cauchy-approximation-Metric-Space
+      ( metric-space-Complete-Metric-Space A)
+      ( convergent-cauchy-approximation-Complete-Metric-Space A u)
+```
+
 ## External links
 
 - [Complete metric space](https://en.wikipedia.org/wiki/Complete_metric_space)
