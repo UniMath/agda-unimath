@@ -128,6 +128,12 @@ module _
       ( P a)
       ( λ f → f a)
   is-short-ev-Π-Metric-Space ε x y H = H a
+
+  short-ev-Π-Metric-Space :
+    short-function-Metric-Space
+      ( Π-Metric-Space A P)
+      ( P a)
+  short-ev-Π-Metric-Space = (λ f → f a) , (is-short-ev-Π-Metric-Space)
 ```
 
 ### The product of saturated metric spaces is saturated

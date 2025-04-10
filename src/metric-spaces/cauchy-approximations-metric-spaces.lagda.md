@@ -21,6 +21,7 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-premetric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.short-functions-metric-spaces
 ```
 
 </details>
@@ -76,4 +77,25 @@ module _
       ( map-cauchy-approximation-Metric-Space ε)
       ( map-cauchy-approximation-Metric-Space δ)
   is-cauchy-approximation-map-cauchy-approximation-Metric-Space = pr2 f
+```
+
+## Properties
+
+### Short maps between metric spaces transport cauchy approximations
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : short-function-Metric-Space A B)
+  where
+
+  map-short-function-cauchy-approximation-Metric-Space :
+    cauchy-approximation-Metric-Space A →
+    cauchy-approximation-Metric-Space B
+  map-short-function-cauchy-approximation-Metric-Space =
+    map-short-function-cauchy-approximation-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( f)
 ```
