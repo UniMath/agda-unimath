@@ -69,7 +69,9 @@ open import metric-spaces.isometric-equivalences-premetric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-premetric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces public
+open import metric-spaces.metric-space-of-cauchy-approximations-in-a-complete-metric-space public
 open import metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space public
+open import metric-spaces.metric-space-of-cauchy-approximations-in-a-saturated-complete-metric-space public
 open import metric-spaces.metric-space-of-convergent-cauchy-approximations-in-a-metric-space public
 open import metric-spaces.metric-space-of-rational-numbers public
 open import metric-spaces.metric-space-of-rational-numbers-with-open-neighborhoods public

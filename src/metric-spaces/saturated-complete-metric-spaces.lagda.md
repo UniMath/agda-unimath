@@ -82,6 +82,12 @@ module _
     is-complete-Metric-Space metric-space-Saturated-Complete-Metric-Space
   is-complete-metric-space-Saturated-Complete-Metric-Space = pr1 (pr2 A)
 
+  complete-metric-space-Saturated-Complete-Metric-Space :
+    Complete-Metric-Space l1 l2
+  complete-metric-space-Saturated-Complete-Metric-Space =
+    metric-space-Saturated-Complete-Metric-Space ,
+    is-complete-metric-space-Saturated-Complete-Metric-Space
+
   is-saturated-metric-space-Saturated-Complete-Metric-Space :
     is-saturated-Metric-Space metric-space-Saturated-Complete-Metric-Space
   is-saturated-metric-space-Saturated-Complete-Metric-Space = pr2 (pr2 A)

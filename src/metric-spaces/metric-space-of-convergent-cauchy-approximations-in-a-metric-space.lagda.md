@@ -14,6 +14,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -184,4 +185,12 @@ module _
         ( x)
         ( y)
         ( Nxy))
+
+  short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space :
+    short-function-Metric-Space
+      ( metric-space-convergent-cauchy-approximations-Metric-Space A)
+      ( A)
+  short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space =
+    limit-convergent-cauchy-approximation-Metric-Space A ,
+    is-short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space
 ```
