@@ -101,9 +101,9 @@ module _
   (H : is-saturated-Metric-Space M)
   where
 
-  eq-saturate-saturated-Metric-Space :
+  eq-saturate-is-saturated-Metric-Space :
     saturate-Metric-Space M ＝ M
-  eq-saturate-saturated-Metric-Space =
+  eq-saturate-is-saturated-Metric-Space =
     eq-type-subtype
       ( is-metric-prop-Premetric-Space)
       ( eq-pair-eq-fiber
@@ -124,7 +124,7 @@ module _
     saturate-Metric-Space (saturate-Metric-Space M) ＝
     saturate-Metric-Space M
   is-idempotent-saturate-Metric-Space =
-    eq-saturate-saturated-Metric-Space
+    eq-saturate-is-saturated-Metric-Space
       ( saturate-Metric-Space M)
       ( is-saturated-saturate-Metric-Space M)
 ```

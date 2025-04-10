@@ -19,6 +19,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.functions-metric-spaces
 open import metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space
 open import metric-spaces.metric-spaces
 open import metric-spaces.saturated-metric-spaces
@@ -65,12 +66,12 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  is-saturated-short-limit-convergent-cauchy-approximation-Metric-Space :
+  is-short-saturated-limit-convergent-cauchy-approximation-Metric-Space :
     is-short-function-Metric-Space
       ( metric-space-convergent-cauchy-approximations-Metric-Space A)
       ( saturate-Metric-Space A)
       ( limit-convergent-cauchy-approximation-Metric-Space A)
-  is-saturated-short-limit-convergent-cauchy-approximation-Metric-Space
+  is-short-saturated-limit-convergent-cauchy-approximation-Metric-Space
     ε x y Nxy δ =
     tr
       ( λ d →
@@ -156,4 +157,31 @@ module _
       ( ap (add-ℚ⁺' δ₂) (commutative-add-ℚ⁺ δ₁ ε)) ∙
       ( associative-add-ℚ⁺ ε δ₁ δ₂) ∙
       ( ap (add-ℚ⁺ ε) (eq-add-split-ℚ⁺ δ))
+```
+
+### The map from a convergent Cauchy approximation in a saturated metric to its limit is short
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  (is-saturated : is-saturated-Metric-Space A)
+  where
+
+  is-short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space :
+    is-short-function-Metric-Space
+      ( metric-space-convergent-cauchy-approximations-Metric-Space A)
+      ( A)
+      ( limit-convergent-cauchy-approximation-Metric-Space A)
+  is-short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space
+    ε x y Nxy =
+    is-saturated
+      ( ε)
+      ( limit-convergent-cauchy-approximation-Metric-Space A x)
+      ( limit-convergent-cauchy-approximation-Metric-Space A y)
+      ( is-short-saturated-limit-convergent-cauchy-approximation-Metric-Space
+        ( A)
+        ( ε)
+        ( x)
+        ( y)
+        ( Nxy))
 ```

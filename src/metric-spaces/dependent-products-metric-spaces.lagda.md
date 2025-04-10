@@ -20,6 +20,7 @@ open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.premetric-structures
 open import metric-spaces.pseudometric-structures
 open import metric-spaces.reflexive-premetric-structures
+open import metric-spaces.saturated-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.symmetric-premetric-structures
 open import metric-spaces.triangular-premetric-structures
@@ -127,4 +128,18 @@ module _
       ( P a)
       ( λ f → f a)
   is-short-ev-Π-Metric-Space ε x y H = H a
+```
+
+### The product of saturated metric spaces is saturated
+
+```agda
+module _
+  {l l1 l2 : Level} (A : UU l) (P : A → Metric-Space l1 l2)
+  (Π-saturated : (a : A) → is-saturated-Metric-Space (P a))
+  where
+
+  is-saturated-Π-is-saturated-Metric-Space :
+    is-saturated-Metric-Space (Π-Metric-Space A P)
+  is-saturated-Π-is-saturated-Metric-Space ε x y H a =
+    Π-saturated a ε (x a) (y a) (λ d → H d a)
 ```
