@@ -106,8 +106,7 @@ module _
   eq-saturate-saturated-Metric-Space =
     eq-type-subtype
       ( is-metric-prop-Premetric-Space)
-      ( eq-pair-Σ
-        ( refl)
+      ( eq-pair-eq-fiber
         ( eq-closure-closed-monotonic-Premetric
           ( structure-Metric-Space M)
           ( is-monotonic-structure-Metric-Space M)
