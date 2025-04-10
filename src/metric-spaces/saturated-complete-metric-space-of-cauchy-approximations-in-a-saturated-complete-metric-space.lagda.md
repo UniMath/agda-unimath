@@ -1,7 +1,7 @@
-# The metric space of cauchy approximations in a saturated complete metric space
+# The saturated complete metric space of cauchy approximations in a saturated complete metric space
 
 ```agda
-module metric-spaces.metric-space-of-cauchy-approximations-in-a-saturated-complete-metric-space where
+module metric-spaces.saturated-complete-metric-space-of-cauchy-approximations-in-a-saturated-complete-metric-space where
 ```
 
 <details><summary>Imports</summary>
