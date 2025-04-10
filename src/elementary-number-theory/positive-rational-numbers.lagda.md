@@ -36,6 +36,7 @@ open import elementary-number-theory.strict-inequality-integers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -61,6 +62,11 @@ open import group-theory.semigroups
 open import group-theory.submonoids
 open import group-theory.submonoids-commutative-monoids
 open import group-theory.subsemigroups
+
+open import order-theory.posets
+open import order-theory.preorders
+open import order-theory.strict-preorders
+open import order-theory.strictly-preordered-sets
 ```
 
 </details>
@@ -147,6 +153,9 @@ abstract
 ```agda
 is-set-ℚ⁺ : is-set ℚ⁺
 is-set-ℚ⁺ = is-set-type-subtype is-positive-prop-ℚ is-set-ℚ
+
+set-ℚ⁺ : Set lzero
+set-ℚ⁺ = ℚ⁺ , is-set-ℚ⁺
 ```
 
 ### The rational image of a positive integer is positive
@@ -307,6 +316,9 @@ semigroup-add-ℚ⁺ =
 add-ℚ⁺ : ℚ⁺ → ℚ⁺ → ℚ⁺
 add-ℚ⁺ = mul-Subsemigroup semigroup-add-ℚ subsemigroup-add-ℚ⁺
 
+add-ℚ⁺' : ℚ⁺ → ℚ⁺ → ℚ⁺
+add-ℚ⁺' x y = add-ℚ⁺ y x
+
 infixl 35 _+ℚ⁺_
 _+ℚ⁺_ = add-ℚ⁺
 ```
@@ -367,6 +379,9 @@ pr2 is-submonoid-mul-ℚ⁺ x y = is-positive-mul-ℚ {x} {y}
 submonoid-mul-ℚ⁺ : Submonoid lzero monoid-mul-ℚ
 pr1 submonoid-mul-ℚ⁺ = is-positive-prop-ℚ
 pr2 submonoid-mul-ℚ⁺ = is-submonoid-mul-ℚ⁺
+
+semigroup-mul-ℚ⁺ : Semigroup lzero
+semigroup-mul-ℚ⁺ = semigroup-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
 
 monoid-mul-ℚ⁺ : Monoid lzero
 monoid-mul-ℚ⁺ = monoid-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
@@ -456,6 +471,30 @@ module _
     left-inverse-law-mul-is-positive-ℚ
 ```
 
+### Multiplication on the positive rational numbers distributes over addition
+
+```agda
+module _
+  (x y z : ℚ⁺)
+  where
+
+  left-distributive-mul-add-ℚ⁺ : x *ℚ⁺ (y +ℚ⁺ z) ＝ (x *ℚ⁺ y) +ℚ⁺ (x *ℚ⁺ z)
+  left-distributive-mul-add-ℚ⁺ =
+    eq-ℚ⁺
+      ( left-distributive-mul-add-ℚ
+        ( rational-ℚ⁺ x)
+        ( rational-ℚ⁺ y)
+        ( rational-ℚ⁺ z))
+
+  right-distributive-mul-add-ℚ⁺ : (x +ℚ⁺ y) *ℚ⁺ z ＝ (x *ℚ⁺ z) +ℚ⁺ (y *ℚ⁺ z)
+  right-distributive-mul-add-ℚ⁺ =
+    eq-ℚ⁺
+      ( right-distributive-mul-add-ℚ
+        ( rational-ℚ⁺ x)
+        ( rational-ℚ⁺ y)
+        ( rational-ℚ⁺ z))
+```
+
 ### The strict inequality on positive rational numbers
 
 ```agda
@@ -467,6 +506,21 @@ le-ℚ⁺ x y = type-Prop (le-prop-ℚ⁺ x y)
 
 is-prop-le-ℚ⁺ : (x y : ℚ⁺) → is-prop (le-ℚ⁺ x y)
 is-prop-le-ℚ⁺ x y = is-prop-type-Prop (le-prop-ℚ⁺ x y)
+
+transitive-le-ℚ⁺ : is-transitive le-ℚ⁺
+transitive-le-ℚ⁺ x y z =
+  transitive-le-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) (rational-ℚ⁺ z)
+
+strictly-preordered-set-ℚ⁺ : Strictly-Preordered-Set lzero lzero
+pr1 strictly-preordered-set-ℚ⁺ = set-ℚ⁺
+pr2 strictly-preordered-set-ℚ⁺ =
+  ( le-prop-ℚ⁺) ,
+  ( irreflexive-le-ℚ ∘ rational-ℚ⁺) ,
+  ( transitive-le-ℚ⁺)
+
+strict-preorder-ℚ⁺ : Strict-Preorder lzero lzero
+strict-preorder-ℚ⁺ =
+  strict-preorder-Strictly-Preordered-Set strictly-preordered-set-ℚ⁺
 ```
 
 ### The inequality on positive rational numbers
@@ -480,6 +534,28 @@ leq-ℚ⁺ x y = type-Prop (leq-prop-ℚ⁺ x y)
 
 is-prop-leq-ℚ⁺ : (x y : ℚ⁺) → is-prop (leq-ℚ⁺ x y)
 is-prop-leq-ℚ⁺ x y = is-prop-type-Prop (leq-prop-ℚ⁺ x y)
+
+leq-le-ℚ⁺ : {x y : ℚ⁺} → le-ℚ⁺ x y → leq-ℚ⁺ x y
+leq-le-ℚ⁺ {x} {y} = leq-le-ℚ {rational-ℚ⁺ x} {rational-ℚ⁺ y}
+
+refl-leq-ℚ⁺ : is-reflexive leq-ℚ⁺
+refl-leq-ℚ⁺ x = refl-leq-ℚ (rational-ℚ⁺ x)
+
+transitive-leq-ℚ⁺ : is-transitive leq-ℚ⁺
+transitive-leq-ℚ⁺ x y z =
+  transitive-leq-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) ( rational-ℚ⁺ z)
+
+preorder-ℚ⁺ : Preorder lzero lzero
+pr1 preorder-ℚ⁺ = ℚ⁺
+pr2 preorder-ℚ⁺ = leq-prop-ℚ⁺ , refl-leq-ℚ⁺ , transitive-leq-ℚ⁺
+
+antisymmetric-leq-ℚ⁺ : is-antisymmetric leq-ℚ⁺
+antisymmetric-leq-ℚ⁺ x y I J =
+  eq-ℚ⁺ (antisymmetric-leq-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) I J)
+
+poset-ℚ⁺ : Poset lzero lzero
+pr1 poset-ℚ⁺ = preorder-ℚ⁺
+pr2 poset-ℚ⁺ = antisymmetric-leq-ℚ⁺
 ```
 
 ### The sum of two positive rational numbers is greater than each of them
@@ -524,15 +600,7 @@ module _
   where
 
   le-diff-ℚ⁺ : ℚ⁺
-  pr1 le-diff-ℚ⁺ = (rational-ℚ⁺ y) -ℚ (rational-ℚ⁺ x)
-  pr2 le-diff-ℚ⁺ =
-    is-positive-le-zero-ℚ
-      ( (rational-ℚ⁺ y) -ℚ (rational-ℚ⁺ x))
-      ( backward-implication
-        ( iff-translate-diff-le-zero-ℚ
-          ( rational-ℚ⁺ x)
-          ( rational-ℚ⁺ y))
-        ( ( H)))
+  le-diff-ℚ⁺ = positive-diff-le-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) H
 
   left-diff-law-add-ℚ⁺ : le-diff-ℚ⁺ +ℚ⁺ x ＝ y
   left-diff-law-add-ℚ⁺ =
@@ -553,39 +621,51 @@ module _
         ( rational-ℚ⁺ x)
         ( rational-ℚ⁺ le-diff-ℚ⁺))) ∙
     ( left-diff-law-add-ℚ⁺)
+
+  le-le-diff-ℚ⁺ : le-ℚ⁺ le-diff-ℚ⁺ y
+  le-le-diff-ℚ⁺ =
+    tr
+      ( le-ℚ⁺ le-diff-ℚ⁺)
+      ( left-diff-law-add-ℚ⁺)
+      ( le-left-add-ℚ⁺ le-diff-ℚ⁺ x)
 ```
 
 ### Multiplication by a positive rational number preserves strict inequality
 
 ```agda
-preserves-le-left-mul-ℚ⁺ :
-  (p : ℚ⁺) (q r : ℚ) → le-ℚ q r → le-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
-preserves-le-left-mul-ℚ⁺
-  p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
-  q@((q-num , q-denom , _) , _)
-  r@((r-num , r-denom , _) , _)
-  q<r =
-    preserves-le-rational-fraction-ℤ
-      ( mul-fraction-ℤ p (fraction-ℚ q))
-      ( mul-fraction-ℤ p (fraction-ℚ r))
-      ( binary-tr
-        ( le-ℤ)
-        ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( preserves-le-right-mul-positive-ℤ
-          ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos))
-          ( q-num *ℤ r-denom)
-          ( r-num *ℤ q-denom)
-          ( q<r)))
+abstract
+  preserves-le-left-mul-ℚ⁺ :
+    (p : ℚ⁺) (q r : ℚ) →
+    le-ℚ q r →
+    le-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
+  preserves-le-left-mul-ℚ⁺
+    p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
+    q@((q-num , q-denom , _) , _)
+    r@((r-num , r-denom , _) , _)
+    q<r =
+      preserves-le-rational-fraction-ℤ
+        ( mul-fraction-ℤ p (fraction-ℚ q))
+        ( mul-fraction-ℤ p (fraction-ℚ r))
+        ( binary-tr
+          ( le-ℤ)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( preserves-le-right-mul-positive-ℤ
+            ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos))
+            ( q-num *ℤ r-denom)
+            ( r-num *ℤ q-denom)
+            ( q<r)))
 
-preserves-le-right-mul-ℚ⁺ :
-  (p : ℚ⁺) (q r : ℚ) → le-ℚ q r → le-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
-preserves-le-right-mul-ℚ⁺ p⁺@(p , _) q r q<r =
-  binary-tr
-    ( le-ℚ)
-    ( commutative-mul-ℚ p q)
-    ( commutative-mul-ℚ p r)
-    ( preserves-le-left-mul-ℚ⁺ p⁺ q r q<r)
+  preserves-le-right-mul-ℚ⁺ :
+    (p : ℚ⁺) (q r : ℚ) →
+    le-ℚ q r →
+    le-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
+  preserves-le-right-mul-ℚ⁺ p⁺@(p , _) q r q<r =
+    binary-tr
+      ( le-ℚ)
+      ( commutative-mul-ℚ p q)
+      ( commutative-mul-ℚ p r)
+      ( preserves-le-left-mul-ℚ⁺ p⁺ q r q<r)
 ```
 
 ### Multiplication by a positive rational number preserves inequality
@@ -759,37 +839,54 @@ module _
 ### Any positive rational number `p` has a `q` with `q + q < p`
 
 ```agda
-abstract
-  bound-double-le-ℚ⁺ :
-    (p : ℚ⁺) →
-    Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
-  bound-double-le-ℚ⁺ p = dependent-pair-result
-    where
-    q : ℚ⁺
-    q = left-summand-split-ℚ⁺ p
-    r : ℚ⁺
-    r = right-summand-split-ℚ⁺ p
-    s : ℚ⁺
-    s = strict-min-ℚ⁺ q r
-    -- Inlining this blows up compile times for some unclear reason.
-    dependent-pair-result : Σ ℚ⁺ (λ x → le-ℚ⁺ (x +ℚ⁺ x) p)
-    dependent-pair-result =
-      s ,
-      tr
-        ( le-ℚ⁺ (s +ℚ⁺ s))
-        ( eq-add-split-ℚ⁺ p)
-        ( preserves-le-add-ℚ
-          { rational-ℚ⁺ s}
-          { rational-ℚ⁺ q}
-          { rational-ℚ⁺ s}
-          { rational-ℚ⁺ r}
-          ( le-left-min-ℚ⁺ q r)
-          ( le-right-min-ℚ⁺ q r))
+module _
+  (p : ℚ⁺)
+  where
 
-  double-le-ℚ⁺ :
-    (p : ℚ⁺) →
-    exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
-  double-le-ℚ⁺ p = unit-trunc-Prop (bound-double-le-ℚ⁺ p)
+  modulus-le-double-le-ℚ⁺ : ℚ⁺
+  modulus-le-double-le-ℚ⁺ =
+    strict-min-ℚ⁺
+      ( left-summand-split-ℚ⁺ p)
+      ( right-summand-split-ℚ⁺ p)
+
+  le-double-le-modulus-le-double-le-ℚ⁺ :
+      le-ℚ⁺
+        ( modulus-le-double-le-ℚ⁺ +ℚ⁺ modulus-le-double-le-ℚ⁺)
+        ( p)
+  le-double-le-modulus-le-double-le-ℚ⁺ =
+    tr
+      ( le-ℚ⁺ (modulus-le-double-le-ℚ⁺ +ℚ⁺ modulus-le-double-le-ℚ⁺))
+      ( eq-add-split-ℚ⁺ p)
+      ( preserves-le-add-ℚ
+        { rational-ℚ⁺ (modulus-le-double-le-ℚ⁺)}
+        { rational-ℚ⁺ (left-summand-split-ℚ⁺ p)}
+        { rational-ℚ⁺ (modulus-le-double-le-ℚ⁺)}
+        { rational-ℚ⁺ (right-summand-split-ℚ⁺ p)}
+        ( le-left-min-ℚ⁺
+          ( left-summand-split-ℚ⁺ p)
+          ( right-summand-split-ℚ⁺ p))
+        ( le-right-min-ℚ⁺
+          ( left-summand-split-ℚ⁺ p)
+          ( right-summand-split-ℚ⁺ p)))
+
+  le-modulus-le-double-le-ℚ⁺ : le-ℚ⁺ modulus-le-double-le-ℚ⁺ p
+  le-modulus-le-double-le-ℚ⁺ =
+    transitive-le-ℚ⁺
+      ( modulus-le-double-le-ℚ⁺)
+      ( left-summand-split-ℚ⁺ p)
+      ( p)
+      ( le-mediant-zero-ℚ⁺ p)
+      ( le-left-min-ℚ⁺
+        ( left-summand-split-ℚ⁺ p)
+        ( right-summand-split-ℚ⁺ p))
+
+  bound-double-le-ℚ⁺ :
+    Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
+  bound-double-le-ℚ⁺ =
+    modulus-le-double-le-ℚ⁺ , le-double-le-modulus-le-double-le-ℚ⁺
+
+  double-le-ℚ⁺ : exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
+  double-le-ℚ⁺ = unit-trunc-Prop bound-double-le-ℚ⁺
 ```
 
 ### Addition with a positive rational number is an increasing map

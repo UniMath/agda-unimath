@@ -21,6 +21,7 @@ open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.premetric-structures
 open import metric-spaces.pseudometric-structures
 open import metric-spaces.reflexive-premetric-structures
+open import metric-spaces.saturated-metric-spaces
 open import metric-spaces.symmetric-premetric-structures
 open import metric-spaces.triangular-premetric-structures
 ```
@@ -124,4 +125,18 @@ module _
   isometry-inclusion-subspace-Metric-Space =
     inclusion-subspace-Metric-Space A S ,
     is-isometry-inclusion-subspace-Metric-Space
+```
+
+### Subspaces of saturated metric spaces are saturated
+
+```agda
+module _
+  {l l1 l2 : Level} (A : Metric-Space l1 l2) (H : is-saturated-Metric-Space A)
+  (S : subset-Metric-Space l A)
+  where
+
+  is-saturated-subspace-is-saturated-Metric-Space :
+    is-saturated-Metric-Space (subspace-Metric-Space A S)
+  is-saturated-subspace-is-saturated-Metric-Space ε x y =
+    H ε (inclusion-subtype S x) (inclusion-subtype S y)
 ```

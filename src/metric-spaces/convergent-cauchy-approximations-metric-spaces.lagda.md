@@ -41,12 +41,17 @@ module _
   (f : cauchy-approximation-Metric-Space A)
   where
 
+  is-limit-cauchy-approximation-Metric-Space :
+    type-Metric-Space A → UU l2
+  is-limit-cauchy-approximation-Metric-Space =
+    is-limit-cauchy-approximation-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( f)
+
   is-convergent-cauchy-approximation-Metric-Space : UU (l1 ⊔ l2)
   is-convergent-cauchy-approximation-Metric-Space =
     Σ ( type-Metric-Space A)
-      ( is-limit-cauchy-approximation-Premetric-Space
-        ( premetric-Metric-Space A)
-        ( f))
+      ( is-limit-cauchy-approximation-Metric-Space)
 
   abstract
     is-prop-is-convergent-cauchy-approximation-Metric-Space :
