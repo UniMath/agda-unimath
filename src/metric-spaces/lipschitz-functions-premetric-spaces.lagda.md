@@ -23,6 +23,7 @@ open import foundation.propositions
 open import foundation.sequences
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.isometries-premetric-spaces
@@ -115,9 +116,68 @@ TODO
 
 TODO
 
-### The composition of Lipschitz functions is Lipschitz
+### The product of Lipschitz constant of maps is a Lipschitz constant of their composition
 
-TODO
+```agda
+module _
+  {la la' lb lb' lc lc' : Level}
+  (A : Premetric-Space la la')
+  (B : Premetric-Space lb lb')
+  (C : Premetric-Space lc lc')
+  (g : map-type-Premetric-Space B C)
+  (f : map-type-Premetric-Space A B)
+  where
+
+  mul-comp-lipschitz-constant-function-Premetric-Space :
+    (α β : ℚ⁺) →
+    is-lipschitz-constant-function-Premetric-Space B C g α →
+    is-lipschitz-constant-function-Premetric-Space A B f β →
+    is-lipschitz-constant-function-Premetric-Space A C (g ∘ f) (α *ℚ⁺ β)
+  mul-comp-lipschitz-constant-function-Premetric-Space α β Hg Hf d x y Nxy =
+    inv-tr
+      ( λ ε → neighborhood-Premetric-Space C ε (g (f x)) (g (f y)))
+      ( associative-mul-ℚ⁺ α β d)
+      ( Hg (β *ℚ⁺ d) (f x) (f y) (Hf d x y Nxy))
+```
+
+### The composition of Lipschitz maps is Lipschitz
+
+```agda
+module _
+  {la la' lb lb' lc lc' : Level}
+  (A : Premetric-Space la la')
+  (B : Premetric-Space lb lb')
+  (C : Premetric-Space lc lc')
+  where
+
+  comp-is-lipschitz-function-Premetric-Space :
+    (g : map-type-Premetric-Space B C) →
+    (f : map-type-Premetric-Space A B) →
+    is-lipschitz-function-Premetric-Space B C g →
+    is-lipschitz-function-Premetric-Space A B f →
+    is-lipschitz-function-Premetric-Space A C (g ∘ f)
+  comp-is-lipschitz-function-Premetric-Space g f Hg Hf =
+    rec-trunc-Prop
+      ( is-lipschitz-prop-function-Premetric-Space A C (g ∘ f))
+      ( λ (α , Lg) →
+        rec-trunc-Prop
+          ( is-lipschitz-prop-function-Premetric-Space A C (g ∘ f))
+          ( λ (β , Lf) →
+            unit-trunc-Prop
+              ( ( α *ℚ⁺ β) ,
+                ( mul-comp-lipschitz-constant-function-Premetric-Space
+                  ( A)
+                  ( B)
+                  ( C)
+                  ( g)
+                  ( f)
+                  ( α)
+                  ( β)
+                  ( Lg)
+                  ( Lf))))
+          ( Hf))
+      ( Hg)
+```
 
 ## External links
 
