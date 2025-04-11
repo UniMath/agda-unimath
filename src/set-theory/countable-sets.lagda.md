@@ -92,18 +92,18 @@ module _
   {l : Level} (X : Set l)
   where
 
-  decidable-subprojection-ℕ : UU (lsuc l ⊔ l)
+  decidable-subprojection-ℕ : UU (lsuc l)
   decidable-subprojection-ℕ =
     Σ ( decidable-subtype l ℕ)
       ( λ P → type-decidable-subtype P ↠ type-Set X)
 
-  is-countable-Prop' : Prop (lsuc l ⊔ l)
+  is-countable-Prop' : Prop (lsuc l)
   is-countable-Prop' =
     exists-structure-Prop
       ( decidable-subtype l ℕ)
       ( λ P → type-decidable-subtype P ↠ type-Set X)
 
-  is-countable' : UU (lsuc l ⊔ l)
+  is-countable' : UU (lsuc l)
   is-countable' = type-Prop is-countable-Prop'
 
   is-prop-is-countable' : is-prop is-countable'
@@ -145,7 +145,7 @@ module _
     where
     f : Maybe (type-Set X) → type-Set X
     f (inl x) = x
-    f (inr star) = a
+    f (inr _) = a
 
     is-surjective-f : is-surjective f
     is-surjective-f x = unit-trunc-Prop (pair (inl x) refl)
@@ -168,7 +168,7 @@ module _
                     ( λ (n , p) →
                       unit-trunc-Prop
                         ( succ-ℕ (succ-ℕ n) , ap inl p))
-                ( inr star) → unit-trunc-Prop (zero-ℕ , refl))))
+                ( inr _) → unit-trunc-Prop (zero-ℕ , refl))))
 ```
 
 ## Properties
@@ -220,7 +220,7 @@ cases-map-decidable-subtype-ℕ :
   {l : Level} (X : Set l) →
   ( P : decidable-subtype l ℕ) →
   ( f : type-decidable-subtype P → type-Set X) →
-  ( (n : ℕ) → is-decidable (pr1 (P n)) -> Maybe (type-Set X))
+  ( (n : ℕ) → is-decidable (pr1 (P n)) → Maybe (type-Set X))
 cases-map-decidable-subtype-ℕ X P f n (inl x) = inl (f (n , x))
 cases-map-decidable-subtype-ℕ X P f n (inr x) = inr star
 
@@ -271,7 +271,7 @@ module _
                     ( is-prop-is-decidable (pr1 (pr2 (P n)))
                       ( pr2 (pr2 (P n)))
                       ( inl s)))))))
-    is-surjective-map-enumeration-decidable-subprojection-ℕ H (inr star) =
+    is-surjective-map-enumeration-decidable-subprojection-ℕ H (inr _) =
       ( unit-trunc-Prop (0 , refl))
 
 module _
@@ -391,7 +391,7 @@ abstract
           (succ-ℕ n) → inl n) ,
         ( λ where
           ( inl n) → unit-trunc-Prop (succ-ℕ n , refl)
-          ( inr star) → unit-trunc-Prop (zero-ℕ , refl)))
+          ( inr _) → unit-trunc-Prop (zero-ℕ , refl)))
 ```
 
 ### The empty set is countable
@@ -415,8 +415,8 @@ abstract
           zero-ℕ → inl star
           (succ-ℕ x) → inr star) ,
         ( λ where
-          ( inl star) → unit-trunc-Prop (0 , refl)
-          ( inr star) → unit-trunc-Prop (1 , refl)))
+          ( inl _) → unit-trunc-Prop (0 , refl)
+          ( inr _) → unit-trunc-Prop (1 , refl)))
 ```
 
 ### If `X` and `Y` are countable sets, then so is their coproduct `X + Y`
