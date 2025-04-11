@@ -66,6 +66,18 @@ pr1 emb-prop-Decidable-Prop = prop-Decidable-Prop
 pr2 emb-prop-Decidable-Prop = is-emb-prop-Decidable-Prop
 ```
 
+### The type of decidable propositions is equivalent to the coproduct of the type of true propositions and the type of false propositions
+
+```agda
+split-Decidable-Prop :
+  {l : Level} →
+  Decidable-Prop l ≃
+  ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))))
+split-Decidable-Prop {l} =
+  ( left-distributive-Σ-coproduct (Prop l) (λ Q → pr1 Q) (λ Q → ¬ (pr1 Q))) ∘e
+  ( inv-associative-Σ (UU l) is-prop (λ X → is-decidable (pr1 X)))
+```
+
 ### The type of decidable propositions in universe level `l` is equivalent to the type of booleans
 
 ```agda
