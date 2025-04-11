@@ -17,12 +17,13 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-function-types
+open import foundation.full-subtypes
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.inhabited-subtypes
-open import foundation.full-subtypes
 open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.postcomposition-functions
 open import foundation.propositional-maps
 open import foundation.raising-universe-levels
@@ -266,10 +267,10 @@ module _
 ### Decidable subtypes are double negation stable
 
 ```agda
-is-double-negation-stable-decicable-subtype :
+is-double-negation-stable-decidable-subtype :
   {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A) →
   is-double-negation-stable-subtype (subtype-decidable-subtype P)
-is-double-negation-stable-decicable-subtype P x =
+is-double-negation-stable-decidable-subtype P x =
   double-negation-elim-is-decidable (is-decidable-decidable-subtype P x)
 ```
 
@@ -391,6 +392,53 @@ module _
 
   map-bool-decidable-subtype-equiv : decidable-subtype l2 A ≃ (A → bool)
   map-bool-decidable-subtype-equiv = equiv-postcomp A equiv-bool-Decidable-Prop
+
+module _
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
+  where
+
+  abstract
+    is-true-map-bool-is-in-decidable-subtype :
+      (a : A) → is-in-decidable-subtype P a →
+      is-true (map-equiv (map-bool-decidable-subtype-equiv A) P a)
+    is-true-map-bool-is-in-decidable-subtype a a∈P with P a
+    ... | (_ , _ , inl a∈P') = refl
+    ... | (_ , _ , inr a∉P) = ex-falso (a∉P a∈P)
+
+    is-in-decidable-subtype-is-true-map-bool :
+      (a : A) → is-true (map-equiv (map-bool-decidable-subtype-equiv A) P a) →
+      is-in-decidable-subtype P a
+    is-in-decidable-subtype-is-true-map-bool a fa=true with P a
+    ... | (_ , _ , inl a∈P) = a∈P
+
+    is-true-map-bool-iff-is-in-decidable-subtype :
+      (a : A) →
+      is-true (map-equiv (map-bool-decidable-subtype-equiv A) P a) ↔
+      is-in-decidable-subtype P a
+    is-true-map-bool-iff-is-in-decidable-subtype a =
+      ( is-in-decidable-subtype-is-true-map-bool a ,
+        is-true-map-bool-is-in-decidable-subtype a)
+
+    is-false-map-bool-is-not-in-decidable-subtype :
+      (a : A) → ¬ (is-in-decidable-subtype P a) →
+      is-false (map-equiv (map-bool-decidable-subtype-equiv A) P a)
+    is-false-map-bool-is-not-in-decidable-subtype a a∉P with P a
+    ... | (_ , _ , inl a∈P) = ex-falso (a∉P a∈P)
+    ... | (_ , _ , inr a∉P') = refl
+
+    is-not-in-decidable-subtype-is-false-map-bool :
+      (a : A) → is-false (map-equiv (map-bool-decidable-subtype-equiv A) P a) →
+      ¬ (is-in-decidable-subtype P a)
+    is-not-in-decidable-subtype-is-false-map-bool a fa=false with P a
+    ... | (_ , _ , inr a∉P) = a∉P
+
+    is-false-map-bool-iff-is-not-in-decidable-subtype :
+      (a : A) →
+      is-false (map-equiv (map-bool-decidable-subtype-equiv A) P a) ↔
+      ¬ (is-in-decidable-subtype P a)
+    is-false-map-bool-iff-is-not-in-decidable-subtype a =
+      ( is-not-in-decidable-subtype-is-false-map-bool a ,
+        is-false-map-bool-is-not-in-decidable-subtype a)
 ```
 
 ### Raising the universe level of decidable subtypes

@@ -11,8 +11,6 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 
-open import elementary-number-theory.lower-bounds-natural-numbers
-open import foundation.intersections-subtypes
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.cartesian-product-types
@@ -28,17 +26,13 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.limited-principle-of-omniscience
 open import foundation.negation
-open import foundation.postcomposition-functions
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.transport-along-identifications
-open import foundation.unit-type
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
-open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
-open import foundation-core.sets
 ```
 
 </details>

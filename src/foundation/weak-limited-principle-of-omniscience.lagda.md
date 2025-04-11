@@ -10,15 +10,24 @@ module foundation.weak-limited-principle-of-omniscience where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.booleans
+open import foundation.coproduct-types
+open import foundation.decidable-subtypes
+open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.limited-principle-of-omniscience
+open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.transport-along-identifications
 open import foundation.universal-quantification
 open import foundation.universe-levels
-open import foundation.decidable-subtypes
 
 open import foundation-core.decidable-propositions
 open import foundation-core.propositions
 open import foundation-core.sets
+
+open import logic.complements-decidable-subtypes
 ```
 
 </details>
@@ -28,8 +37,8 @@ open import foundation-core.sets
 The {{#concept "weak limited principle of omniscience"}} (WLPO) asserts that
 every [decidable subtype](foundation.decidable-subtypes.md) of the
 [natural numbers](elementary-number-theory.natural-numbers.md) is
-[full](foundation.full-subtypes.md) or it is [not](foundation.negation.md).
-In particular, it is a restricted form of the
+[full](foundation.full-subtypes.md) or it is [not](foundation.negation.md). In
+particular, it is a restricted form of the
 [law of excluded middle](foundation.law-of-excluded-middle.md).
 
 ```agda
@@ -47,6 +56,27 @@ WLPO : UUω
 WLPO = {l : Level} → level-WLPO l
 ```
 
+## Properties
+
+### The limited principle of omniscience implies the weak limited principle of omniscience
+
+```agda
+abstract
+  level-WLPO-level-LPO : {l : Level} → level-LPO l → level-WLPO l
+  level-WLPO-level-LPO lpo P =
+    elim-disjunction
+      ( is-decidable-Prop (is-full-decidable-subtype-Prop P))
+      ( λ (a , a∉P) → inr (λ full-P → ex-falso (a∉P (full-P a))))
+      ( λ ¬¬P →
+        inl
+          ( λ a →
+            is-double-negation-stable-decidable-subtype
+              ( P)
+              ( a)
+              ( λ a∉P → ¬¬P (a , a∉P))))
+      ( lpo (complement-decidable-subtype P))
+```
+
 ### Equivalent Boolean formulation
 
 ```agda
@@ -55,10 +85,60 @@ bool-WLPO-Prop =
   ∀' (ℕ → bool) (λ f → is-decidable-Prop (∀' ℕ (λ n → is-true-Prop (f n))))
 
 bool-WLPO : UU lzero
-bool-WLPO = type-Prop bool-WLPO
+bool-WLPO = type-Prop bool-WLPO-Prop
 
 abstract
-  -- bool-WLPO-level-WLPO :
+  WLPO-bool-WLPO : bool-WLPO → WLPO
+  WLPO-bool-WLPO bool-wlpo P =
+    rec-coproduct
+      ( λ all-true-f →
+        inl (λ n → is-in-decidable-subtype-is-true-map-bool P n (all-true-f n)))
+      ( λ not-all-true-f →
+        inr
+          ( λ full-P →
+            not-all-true-f
+              ( λ n → is-true-map-bool-is-in-decidable-subtype P n (full-P n))))
+      ( bool-wlpo (map-equiv (map-bool-decidable-subtype-equiv ℕ) P))
+
+  bool-WLPO-level-WLPO : {l : Level} → level-WLPO l → bool-WLPO
+  bool-WLPO-level-WLPO {l} wlpo f =
+    rec-coproduct
+      ( λ full-P →
+        inl
+          ( λ n →
+            tr
+              ( λ g → is-true (g n))
+              ( is-section-map-inv-equiv (map-bool-decidable-subtype-equiv ℕ) f)
+              ( is-true-map-bool-is-in-decidable-subtype P n (full-P n))))
+      ( λ not-full-P →
+        inr
+          ( λ all-true-f →
+            not-full-P
+              ( λ n →
+                is-in-decidable-subtype-is-true-map-bool
+                  ( P)
+                  ( n)
+                  ( inv-tr
+                    ( λ g → is-true (g n))
+                    ( is-section-map-inv-equiv
+                      ( map-bool-decidable-subtype-equiv ℕ)
+                      ( f))
+                    ( all-true-f n)))))
+      ( wlpo P)
+    where
+      P : decidable-subtype l ℕ
+      P = map-inv-equiv (map-bool-decidable-subtype-equiv ℕ) f
+
+  level-WLPO-iff-bool-WLPO : (l : Level) → level-WLPO l ↔ bool-WLPO
+  pr1 (level-WLPO-iff-bool-WLPO _) = bool-WLPO-level-WLPO
+  pr2 (level-WLPO-iff-bool-WLPO l) bwlpo = WLPO-bool-WLPO bwlpo
+```
+
+### The weak limited principle of omniscience at any level implies it at all levels
+
+```agda
+WLPO-level-WLPO : {l : Level} → level-WLPO l → WLPO
+WLPO-level-WLPO level-wlpo = WLPO-bool-WLPO (bool-WLPO-level-WLPO level-wlpo)
 ```
 
 ## See also
