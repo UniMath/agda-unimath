@@ -12,24 +12,25 @@ open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-maps
-open import foundation.empty-types
-open import foundation.inhabited-subtypes
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equality-dependent-function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.inhabited-subtypes
+open import foundation.full-subtypes
 open import foundation.logical-equivalences
 open import foundation.postcomposition-functions
 open import foundation.propositional-maps
+open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.structured-type-duality
 open import foundation.subtypes
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
-open import foundation.raising-universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.equivalences
@@ -189,6 +190,13 @@ module _
 
   is-empty-decidable-subtype : UU (l1 ⊔ l2)
   is-empty-decidable-subtype = type-Prop is-empty-decidable-subtype-Prop
+
+  is-full-decidable-subtype-Prop : Prop (l1 ⊔ l2)
+  is-full-decidable-subtype-Prop =
+    is-full-subtype-Prop (subtype-decidable-subtype P)
+
+  is-full-decidable-subtype : UU (l1 ⊔ l2)
+  is-full-decidable-subtype = type-Prop is-full-decidable-subtype-Prop
 ```
 
 ## Examples

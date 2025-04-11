@@ -7,36 +7,38 @@ module foundation.lesser-limited-principle-of-omniscience where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
-open import elementary-number-theory.multiplication-natural-numbers
 
-open import foundation.equivalences
+open import elementary-number-theory.lower-bounds-natural-numbers
+open import foundation.intersections-subtypes
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
 open import foundation.booleans
-open import foundation.transport-along-identifications
+open import foundation.cartesian-product-types
+open import foundation.conjunction
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.decidable-subtypes
+open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
-open import foundation.decidable-subtypes
-open import foundation.cartesian-product-types
-open import foundation.raising-universe-levels
-open import foundation.decidable-propositions
-open import foundation.postcomposition-functions
-open import foundation.dependent-pair-types
-open import foundation.propositional-truncations
-open import foundation.conjunction
-open import foundation.unit-type
+open import foundation.limited-principle-of-omniscience
 open import foundation.negation
-open import foundation.disjunction
+open import foundation.postcomposition-functions
+open import foundation.propositional-truncations
+open import foundation.raising-universe-levels
+open import foundation.transport-along-identifications
+open import foundation.unit-type
 open import foundation.universal-quantification
 open import foundation.universe-levels
-open import foundation.empty-types
 
 open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation.limited-principle-of-omniscience
 ```
 
 </details>
@@ -44,8 +46,8 @@ open import foundation.limited-principle-of-omniscience
 ## Statement
 
 The {{#concept "lesser limited principle of omniscience" Agda=LLPO}} (LLPO)
-asserts that if two [decidable subtypes](foundation.decidable-subtypes.md)
-of the [natural numbers](elementary-number-theory.natural-numbers.md) are not
+asserts that if two [decidable subtypes](foundation.decidable-subtypes.md) of
+the [natural numbers](elementary-number-theory.natural-numbers.md) are not
 [both](foundation.conjunction.md) [inhabited](foundation.inhabited-subtypes.md),
 then merely one [or](foundation.disjunction.md) the other are
 [empty](foundation.empty-types.md).
@@ -179,25 +181,9 @@ abstract
         is-false-not-is-true
           ( f _)
           ( λ f⟨2n+1⟩ → ¬B (n , map-raise f⟨2n+1⟩))
-
-  LLPO-bool-LLPO : bool-LLPO → LLPO
-  LLPO-bool-LLPO bool-llpo A B ¬⟨A∧B⟩ =
-    elim-disjunction
-      {!   !}
-      {!   !}
-      {!   !}
-      ( bool-llpo f {!   !})
-    where
-      f : ℕ → bool
-      f n with is-decidable-is-even-ℕ n
-      f n | inl (m , 2m=n) with is-decidable-decidable-subtype A m
-      f n | inl (m , 2m=n) | inl m∈A = true
-      f n | inl (m , 2m=n) | inr m∉A = false
-      f n | inr n-odd
-        with is-decidable-decidable-subtype B (pr1 (has-odd-expansion-is-odd n n-odd))
-      f n | inr n-odd | inl m∈B = true
-      f n | inr n-odd | inr m∉B = false
 ```
+
+The reverse direction still needs a proof.
 
 ## See also
 

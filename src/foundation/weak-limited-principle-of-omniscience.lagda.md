@@ -14,6 +14,7 @@ open import foundation.disjunction
 open import foundation.negation
 open import foundation.universal-quantification
 open import foundation.universe-levels
+open import foundation.decidable-subtypes
 
 open import foundation-core.decidable-propositions
 open import foundation-core.propositions
@@ -24,22 +25,40 @@ open import foundation-core.sets
 
 ## Statement
 
-The {{#concept "weak limited principle of omniscience"}} (WLPO) asserts that for
-any [sequence](foundation.sequences.md) `f : ℕ → bool` either `f n` is true for
-all `n : ℕ` or it is [not](foundation-core.negation.md). In particular, it is a
-restricted form of the
+The {{#concept "weak limited principle of omniscience"}} (WLPO) asserts that
+every [decidable subtype](foundation.decidable-subtypes.md) of the
+[natural numbers](elementary-number-theory.natural-numbers.md) is
+[full](foundation.full-subtypes.md) or it is [not](foundation.negation.md).
+In particular, it is a restricted form of the
 [law of excluded middle](foundation.law-of-excluded-middle.md).
 
 ```agda
-prop-WLPO : Prop lzero
-prop-WLPO =
+level-WLPO-Prop : (l : Level) → Prop (lsuc l)
+level-WLPO-Prop l =
+  Π-Prop
+    ( decidable-subtype l ℕ)
+    ( λ P →
+      is-decidable-Prop (is-full-decidable-subtype-Prop P))
+
+level-WLPO : (l : Level) → UU (lsuc l)
+level-WLPO l = type-Prop (level-WLPO-Prop l)
+
+WLPO : UUω
+WLPO = {l : Level} → level-WLPO l
+```
+
+### Equivalent Boolean formulation
+
+```agda
+bool-WLPO-Prop : Prop lzero
+bool-WLPO-Prop =
   ∀' (ℕ → bool) (λ f → is-decidable-Prop (∀' ℕ (λ n → is-true-Prop (f n))))
 
-WLPO : UU lzero
-WLPO = type-Prop prop-WLPO
+bool-WLPO : UU lzero
+bool-WLPO = type-Prop bool-WLPO
 
-is-prop-WLPO : is-prop WLPO
-is-prop-WLPO = is-prop-type-Prop prop-WLPO
+abstract
+  -- bool-WLPO-level-WLPO :
 ```
 
 ## See also

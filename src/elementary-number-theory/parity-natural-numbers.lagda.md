@@ -15,13 +15,13 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.decidable-types
-open import foundation.negated-equality
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
-open import foundation.transport-along-identifications
+open import foundation.negated-equality
 open import foundation.negation
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
