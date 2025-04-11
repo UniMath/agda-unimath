@@ -50,6 +50,7 @@ open import univalent-combinatorics.decidable-equivalence-relations public
 open import univalent-combinatorics.decidable-propositions public
 open import univalent-combinatorics.decidable-subtypes public
 open import univalent-combinatorics.dedekind-finite-sets public
+open import univalent-combinatorics.dedekind-finite-types public
 open import univalent-combinatorics.dependent-function-types public
 open import univalent-combinatorics.dependent-pair-types public
 open import univalent-combinatorics.discrete-sigma-decompositions public
