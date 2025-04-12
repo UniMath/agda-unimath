@@ -13,6 +13,7 @@ open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
+open import elementary-number-theory.decidable-total-order-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
@@ -63,10 +64,13 @@ open import group-theory.submonoids
 open import group-theory.submonoids-commutative-monoids
 open import group-theory.subsemigroups
 
+open import order-theory.decidable-posets
+open import order-theory.decidable-total-orders
 open import order-theory.posets
 open import order-theory.preorders
 open import order-theory.strict-preorders
 open import order-theory.strictly-preordered-sets
+open import order-theory.total-orders
 ```
 
 </details>
@@ -523,36 +527,100 @@ strict-preorder-ℚ⁺ =
 ### The inequality on positive rational numbers
 
 ```agda
+decidable-total-order-ℚ⁺ : Decidable-Total-Order lzero lzero
+decidable-total-order-ℚ⁺ =
+  subtype-Decidable-Total-Order ℚ-Decidable-Total-Order is-positive-prop-ℚ
+
+poset-ℚ⁺ : Poset lzero lzero
+poset-ℚ⁺ = poset-Decidable-Total-Order decidable-total-order-ℚ⁺
+
+preorder-ℚ⁺ : Preorder lzero lzero
+preorder-ℚ⁺ = preorder-Poset poset-ℚ⁺
+
+is-total-leq-ℚ⁺ : is-total-Poset poset-ℚ⁺
+is-total-leq-ℚ⁺ =
+  is-total-poset-Decidable-Total-Order decidable-total-order-ℚ⁺
+
+is-decidable-leq-ℚ⁺ : is-decidable-leq-Poset poset-ℚ⁺
+is-decidable-leq-ℚ⁺ =
+  is-decidable-poset-Decidable-Total-Order decidable-total-order-ℚ⁺
+
 leq-prop-ℚ⁺ : ℚ⁺ → ℚ⁺ → Prop lzero
-leq-prop-ℚ⁺ x y = leq-ℚ-Prop (rational-ℚ⁺ x) (rational-ℚ⁺ y)
+leq-prop-ℚ⁺ = leq-prop-Poset poset-ℚ⁺
 
 leq-ℚ⁺ : ℚ⁺ → ℚ⁺ → UU lzero
-leq-ℚ⁺ x y = type-Prop (leq-prop-ℚ⁺ x y)
+leq-ℚ⁺ = leq-Poset poset-ℚ⁺
 
 is-prop-leq-ℚ⁺ : (x y : ℚ⁺) → is-prop (leq-ℚ⁺ x y)
 is-prop-leq-ℚ⁺ x y = is-prop-type-Prop (leq-prop-ℚ⁺ x y)
 
-leq-le-ℚ⁺ : {x y : ℚ⁺} → le-ℚ⁺ x y → leq-ℚ⁺ x y
-leq-le-ℚ⁺ {x} {y} = leq-le-ℚ {rational-ℚ⁺ x} {rational-ℚ⁺ y}
-
 refl-leq-ℚ⁺ : is-reflexive leq-ℚ⁺
-refl-leq-ℚ⁺ x = refl-leq-ℚ (rational-ℚ⁺ x)
+refl-leq-ℚ⁺ = refl-leq-Poset poset-ℚ⁺
 
 transitive-leq-ℚ⁺ : is-transitive leq-ℚ⁺
-transitive-leq-ℚ⁺ x y z =
-  transitive-leq-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) ( rational-ℚ⁺ z)
-
-preorder-ℚ⁺ : Preorder lzero lzero
-pr1 preorder-ℚ⁺ = ℚ⁺
-pr2 preorder-ℚ⁺ = leq-prop-ℚ⁺ , refl-leq-ℚ⁺ , transitive-leq-ℚ⁺
+transitive-leq-ℚ⁺ = transitive-leq-Poset poset-ℚ⁺
 
 antisymmetric-leq-ℚ⁺ : is-antisymmetric leq-ℚ⁺
-antisymmetric-leq-ℚ⁺ x y I J =
-  eq-ℚ⁺ (antisymmetric-leq-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) I J)
+antisymmetric-leq-ℚ⁺ = antisymmetric-leq-Poset poset-ℚ⁺
 
-poset-ℚ⁺ : Poset lzero lzero
-pr1 poset-ℚ⁺ = preorder-ℚ⁺
-pr2 poset-ℚ⁺ = antisymmetric-leq-ℚ⁺
+leq-le-ℚ⁺ : {x y : ℚ⁺} → le-ℚ⁺ x y → leq-ℚ⁺ x y
+leq-le-ℚ⁺ {x} {y} = leq-le-ℚ {rational-ℚ⁺ x} {rational-ℚ⁺ y}
+```
+
+### The minimum between to positive rational numbers
+
+```agda
+min-ℚ⁺ : ℚ⁺ → ℚ⁺ → ℚ⁺
+min-ℚ⁺ = min-Decidable-Total-Order decidable-total-order-ℚ⁺
+
+abstract
+  associative-min-ℚ⁺ :
+    (x y z : ℚ⁺) → min-ℚ⁺ (min-ℚ⁺ x y) z ＝ min-ℚ⁺ x (min-ℚ⁺ y z)
+  associative-min-ℚ⁺ =
+    associative-min-Decidable-Total-Order decidable-total-order-ℚ⁺
+
+  commutative-min-ℚ⁺ : (x y : ℚ⁺) → min-ℚ⁺ x y ＝ min-ℚ⁺ y x
+  commutative-min-ℚ⁺ =
+    commutative-min-Decidable-Total-Order decidable-total-order-ℚ⁺
+
+  idempotent-min-ℚ⁺ : (x : ℚ⁺) → min-ℚ⁺ x x ＝ x
+  idempotent-min-ℚ⁺ =
+    idempotent-min-Decidable-Total-Order decidable-total-order-ℚ⁺
+
+  leq-left-min-ℚ⁺ : (x y : ℚ⁺) → leq-ℚ⁺ (min-ℚ⁺ x y) x
+  leq-left-min-ℚ⁺ = leq-left-min-Decidable-Total-Order decidable-total-order-ℚ⁺
+
+  leq-right-min-ℚ⁺ : (x y : ℚ⁺) → leq-ℚ⁺ (min-ℚ⁺ x y) y
+  leq-right-min-ℚ⁺ =
+    leq-right-min-Decidable-Total-Order decidable-total-order-ℚ⁺
+```
+
+### The maximum between to positive rational numbers
+
+```agda
+max-ℚ⁺ : ℚ⁺ → ℚ⁺ → ℚ⁺
+max-ℚ⁺ = max-Decidable-Total-Order decidable-total-order-ℚ⁺
+
+abstract
+  associative-max-ℚ⁺ :
+    (x y z : ℚ⁺) → max-ℚ⁺ (max-ℚ⁺ x y) z ＝ max-ℚ⁺ x (max-ℚ⁺ y z)
+  associative-max-ℚ⁺ =
+    associative-max-Decidable-Total-Order decidable-total-order-ℚ⁺
+
+  commutative-max-ℚ⁺ : (x y : ℚ⁺) → max-ℚ⁺ x y ＝ max-ℚ⁺ y x
+  commutative-max-ℚ⁺ =
+    commutative-max-Decidable-Total-Order decidable-total-order-ℚ⁺
+
+  idempotent-max-ℚ⁺ : (x : ℚ⁺) → max-ℚ⁺ x x ＝ x
+  idempotent-max-ℚ⁺ =
+    idempotent-max-Decidable-Total-Order decidable-total-order-ℚ⁺
+
+  leq-left-max-ℚ⁺ : (x y : ℚ⁺) → leq-ℚ⁺ x (max-ℚ⁺ x y)
+  leq-left-max-ℚ⁺ = leq-left-max-Decidable-Total-Order decidable-total-order-ℚ⁺
+
+  leq-right-max-ℚ⁺ : (x y : ℚ⁺) → leq-ℚ⁺ y (max-ℚ⁺ x y)
+  leq-right-max-ℚ⁺ =
+    leq-right-max-Decidable-Total-Order decidable-total-order-ℚ⁺
 ```
 
 ### The sum of two positive rational numbers is greater than each of them
