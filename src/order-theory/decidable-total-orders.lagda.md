@@ -518,7 +518,8 @@ module _
   where
 
   is-total-leq-subtype-Decidable-Total-Order :
-    is-total-Poset (subtype-Poset (poset-Decidable-Total-Order T) P)
+    is-total-Poset
+      (poset-subtype-Poset (poset-Decidable-Total-Order T) P)
   is-total-leq-subtype-Decidable-Total-Order x y =
     is-total-poset-Decidable-Total-Order
       ( T)
@@ -526,16 +527,18 @@ module _
       ( inclusion-subtype P y)
 
   is-decidable-leq-subtype-Decidable-Total-Order :
-    is-decidable-leq-Poset (subtype-Poset (poset-Decidable-Total-Order T) P)
+    is-decidable-leq-Poset
+      (poset-subtype-Poset (poset-Decidable-Total-Order T) P)
   is-decidable-leq-subtype-Decidable-Total-Order x y =
     is-decidable-poset-Decidable-Total-Order
       ( T)
       ( inclusion-subtype P x)
       ( inclusion-subtype P y)
 
-  subtype-Decidable-Total-Order : Decidable-Total-Order (l1 ⊔ l3) l2
-  subtype-Decidable-Total-Order =
-    subtype-Poset (poset-Decidable-Total-Order T) P ,
+  decidable-total-order-subtype-Decidable-Total-Order :
+    Decidable-Total-Order (l1 ⊔ l3) l2
+  decidable-total-order-subtype-Decidable-Total-Order =
+    poset-subtype-Poset (poset-Decidable-Total-Order T) P ,
     is-total-leq-subtype-Decidable-Total-Order ,
     is-decidable-leq-subtype-Decidable-Total-Order
 ```

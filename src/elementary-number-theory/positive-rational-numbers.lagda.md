@@ -529,7 +529,9 @@ strict-preorder-ℚ⁺ =
 ```agda
 decidable-total-order-ℚ⁺ : Decidable-Total-Order lzero lzero
 decidable-total-order-ℚ⁺ =
-  subtype-Decidable-Total-Order ℚ-Decidable-Total-Order is-positive-prop-ℚ
+  decidable-total-order-subtype-Decidable-Total-Order
+    ℚ-Decidable-Total-Order
+    is-positive-prop-ℚ
 
 poset-ℚ⁺ : Poset lzero lzero
 poset-ℚ⁺ = poset-Decidable-Total-Order decidable-total-order-ℚ⁺

@@ -222,9 +222,9 @@ module _
       ( inclusion-subtype P y)
       ( inclusion-subtype P z)
 
-  subtype-Preorder : Preorder (l1 ⊔ l3) l2
-  pr1 subtype-Preorder = type-subtype P
-  pr2 subtype-Preorder =
+  preorder-subtype-Preorder : Preorder (l1 ⊔ l3) l2
+  pr1 preorder-subtype-Preorder = type-subtype P
+  pr2 preorder-subtype-Preorder =
     leq-prop-subtype-Preorder ,
     refl-leq-subtype-Preorder ,
     transitive-leq-subtype-Preorder

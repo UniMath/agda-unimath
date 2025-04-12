@@ -226,8 +226,8 @@ module _
         ( Hxy)
         ( Hyx))
 
-  subtype-Poset : Poset (l1 ⊔ l3) l2
-  subtype-Poset =
-    subtype-Preorder (preorder-Poset X) P ,
+  poset-subtype-Poset : Poset (l1 ⊔ l3) l2
+  poset-subtype-Poset =
+    preorder-subtype-Preorder (preorder-Poset X) P ,
     antisymmetric-leq-subtype-Poset
 ```
