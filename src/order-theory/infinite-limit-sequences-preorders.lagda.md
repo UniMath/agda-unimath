@@ -77,14 +77,14 @@ module _
       ( modulus-modulus-tends-to-infinity-sequence-Preorder m))
   is-modulus-modulus-tends-to-infinity-sequence-Preorder = pr2
 
-  tends-to-infinity-prop-sequence-Preorder : Prop (l1 ⊔ l2)
-  tends-to-infinity-prop-sequence-Preorder =
+  subtype-tends-to-infinity-sequence-Preorder : Prop (l1 ⊔ l2)
+  subtype-tends-to-infinity-sequence-Preorder =
     is-inhabited-subtype-Prop
       is-modulus-tends-to-infinity-prop-sequence-Preorder
 
   tends-to-infinity-sequence-Preorder : UU (l1 ⊔ l2)
   tends-to-infinity-sequence-Preorder =
-    type-Prop tends-to-infinity-prop-sequence-Preorder
+    type-Prop subtype-tends-to-infinity-sequence-Preorder
 ```
 
 ### Sequences in preorders tending to infinity
@@ -96,7 +96,7 @@ module _
 
   type-tends-to-infinity-sequence-Preorder : UU (l1 ⊔ l2)
   type-tends-to-infinity-sequence-Preorder =
-    type-subtype (tends-to-infinity-prop-sequence-Preorder P)
+    type-subtype (subtype-tends-to-infinity-sequence-Preorder P)
 
   seq-tends-to-infinity-sequence-Preorder :
     type-tends-to-infinity-sequence-Preorder → type-sequence-Preorder P
