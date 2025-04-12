@@ -152,3 +152,18 @@ abstract
     ( ap-diff-ℚ (commutative-add-ℚ x z) (commutative-add-ℚ y z)) ∙
     ( left-translation-diff-ℚ x y z)
 ```
+
+### The involution `q → 1 - q`
+
+```agda
+one-m-ℚ : ℚ → ℚ
+one-m-ℚ q = one-ℚ -ℚ q
+
+is-involution-one-m-ℚ : (q : ℚ) → one-m-ℚ (one-m-ℚ q) ＝ q
+is-involution-one-m-ℚ q =
+  ( ap (add-ℚ one-ℚ) (distributive-neg-add-ℚ one-ℚ (neg-ℚ q))) ∙
+  ( ap (λ x → one-ℚ +ℚ (neg-one-ℚ +ℚ x)) (neg-neg-ℚ q)) ∙
+  ( inv (associative-add-ℚ one-ℚ (neg-one-ℚ) q)) ∙
+  ( ap (add-ℚ' q) (is-zero-diff-ℚ' one-ℚ)) ∙
+  ( left-unit-law-add-ℚ q)
+```
