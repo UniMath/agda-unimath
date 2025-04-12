@@ -154,6 +154,9 @@ is-dedekind-finite-is-prop H f is-emb-f =
 
 ### Subfinitely indexed types are Dedekind finite
 
+A proof is given by [Gro-Tsen](https://mathoverflow.net/users/17064/gro-tsen) in
+this MathOverflow answer: https://mathoverflow.net/a/433318.
+
 > TODO
 
 ## Comments

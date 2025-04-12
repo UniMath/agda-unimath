@@ -31,7 +31,7 @@ open import univalent-combinatorics.standard-finite-types
 A {{#concept "Kuratowski finite set" agda=Kuratowski-Finite-Set}} is a
 [set](foundation-core.sets.md) `X` for which there exists a
 [surjection](foundation.surjective-maps.md) into `X` from a standard finite
-type. In other words, the Kuratowski finite set are the
+type. In other words, a Kuratowski finite set is a
 [set-quotient](foundation.set-quotients.md) of a
 [standard finite type](univalent-combinatorics.standard-finite-types.md).
 
@@ -97,6 +97,8 @@ has-decidable-equality-is-finite-type-Kuratowski-Finite-Set X =
 
 - [Finite types](univalent-combinatorics.finite-types.md)
 - [Dedekind finite sets](univalent-combinatorics.dedekind-finite-sets.md)
+- In [`univalent-combinatorics.surjective-maps`] it is shown that if a
+  Kuratowski finite set has decidable equality then it is finite.
 
 ## External links
 
