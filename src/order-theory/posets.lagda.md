@@ -15,11 +15,13 @@ open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import order-theory.preorders
@@ -201,3 +203,31 @@ module _
 ```
 
 It remains to show that these constructions form inverses to eachother.
+
+### Subsets of posets are posets
+
+```agda
+module _
+  {l1 l2 l3 : Level} (X : Poset l1 l2) (P : subtype l3 (type-Poset X))
+  where
+
+  leq-subtype-Poset : Relation l2 (type-subtype P)
+  leq-subtype-Poset =
+    leq-subtype-Preorder (preorder-Poset X) P
+
+  antisymmetric-leq-subtype-Poset : is-antisymmetric leq-subtype-Poset
+  antisymmetric-leq-subtype-Poset x y Hxy Hyx =
+    eq-type-subtype
+      ( P)
+      ( antisymmetric-leq-Poset
+        ( X)
+        ( inclusion-subtype P x)
+        ( inclusion-subtype P y)
+        ( Hxy)
+        ( Hyx))
+
+  subtype-Poset : Poset (l1 ⊔ l3) l2
+  subtype-Poset =
+    subtype-Preorder (preorder-Poset X) P ,
+    antisymmetric-leq-subtype-Poset
+```

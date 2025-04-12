@@ -19,6 +19,7 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
@@ -191,3 +192,40 @@ module _
 ```
 
 It remains to show that these constructions form inverses to eachother.
+
+### Sybtypes of preorders are preorders
+
+```agda
+module _
+  {l1 l2 l3 : Level} (X : Preorder l1 l2) (P : subtype l3 (type-Preorder X))
+  where
+
+  leq-prop-subtype-Preorder : Relation-Prop l2 (type-subtype P)
+  leq-prop-subtype-Preorder x y =
+    leq-prop-Preorder X (inclusion-subtype P x) (inclusion-subtype P y)
+
+  leq-subtype-Preorder : Relation l2 (type-subtype P)
+  leq-subtype-Preorder x y =
+    leq-Preorder X (inclusion-subtype P x) (inclusion-subtype P y)
+
+  refl-leq-subtype-Preorder :
+    is-reflexive-Relation-Prop (leq-prop-subtype-Preorder)
+  refl-leq-subtype-Preorder x =
+    is-reflexive-leq-Preorder X (inclusion-subtype P x)
+
+  transitive-leq-subtype-Preorder :
+    is-transitive-Relation-Prop (leq-prop-subtype-Preorder)
+  transitive-leq-subtype-Preorder x y z =
+    is-transitive-leq-Preorder
+      ( X)
+      ( inclusion-subtype P x)
+      ( inclusion-subtype P y)
+      ( inclusion-subtype P z)
+
+  subtype-Preorder : Preorder (l1 ⊔ l3) l2
+  pr1 subtype-Preorder = type-subtype P
+  pr2 subtype-Preorder =
+    leq-prop-subtype-Preorder ,
+    refl-leq-subtype-Preorder ,
+    transitive-leq-subtype-Preorder
+```
