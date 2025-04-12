@@ -53,7 +53,6 @@ open import order-theory.homomorphisms-suplattices public
 open import order-theory.ideals-preorders public
 open import order-theory.incidence-algebras public
 open import order-theory.increasing-sequences-posets public
-open import order-theory.infinite-limit-sequences-preorders public
 open import order-theory.inflationary-maps-posets public
 open import order-theory.inflationary-maps-preorders public
 open import order-theory.inflattices public
@@ -119,6 +118,7 @@ open import order-theory.resizing-suplattices public
 open import order-theory.sequences-posets public
 open import order-theory.sequences-preorders public
 open import order-theory.sequences-strictly-preordered-sets public
+open import order-theory.sequences-tending-to-infinity-preorders public
 open import order-theory.similarity-of-elements-large-posets public
 open import order-theory.similarity-of-elements-large-preorders public
 open import order-theory.similarity-of-order-preserving-maps-large-posets public

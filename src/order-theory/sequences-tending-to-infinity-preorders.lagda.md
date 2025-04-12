@@ -1,7 +1,7 @@
 # Sequences in preorders tending to infinity
 
 ```agda
-module order-theory.infinite-limit-sequences-preorders where
+module order-theory.sequences-tending-to-infinity-preorders where
 ```
 
 <details><summary>Imports</summary>
@@ -32,7 +32,7 @@ open import order-theory.sequences-preorders
 
 A [sequence](order-theory.sequences-preorders.md) `u` in a
 [preorder](order-theory.preorders.md) `P`
-{{#concept "tends to infinity" Disambiguation="sequence in a preorder" Agda=is-limit-∞-sequence-Preorder}}
+{{#concept "tends to infinity" Disambiguation="sequence in a preorder" Agda=tends-to-infinity-sequence-Preorder}}
 if there exists a map `m : P → ℕ` such that whenever `m x ≤ n` in `ℕ`, `x ≤ u n`
 in `P`. The map `m` is called a limit-modulus of `u` at infinity.
 
@@ -94,20 +94,20 @@ module _
   {l1 l2 : Level} (P : Preorder l1 l2)
   where
 
-  type-tends-to-infinity-sequence-Preorder : UU (l1 ⊔ l2)
-  type-tends-to-infinity-sequence-Preorder =
+  type-sequence-tending-to-infinity-Preorder : UU (l1 ⊔ l2)
+  type-sequence-tending-to-infinity-Preorder =
     type-subtype (subtype-tends-to-infinity-sequence-Preorder P)
 
-  seq-tends-to-infinity-sequence-Preorder :
-    type-tends-to-infinity-sequence-Preorder → type-sequence-Preorder P
-  seq-tends-to-infinity-sequence-Preorder = pr1
+  seq-tending-to-infinity-sequence-Preorder :
+    type-sequence-tending-to-infinity-Preorder → type-sequence-Preorder P
+  seq-tending-to-infinity-sequence-Preorder = pr1
 
-  tends-to-infinity-seq-tends-to-infinity-sequence-Preorder :
-    (u : type-tends-to-infinity-sequence-Preorder) →
+  tends-to-infinity-seq-tending-to-infinity-sequence-Preorder :
+    (u : type-sequence-tending-to-infinity-Preorder) →
     tends-to-infinity-sequence-Preorder
       ( P)
-      ( seq-tends-to-infinity-sequence-Preorder u)
-  tends-to-infinity-seq-tends-to-infinity-sequence-Preorder = pr2
+      ( seq-tending-to-infinity-sequence-Preorder u)
+  tends-to-infinity-seq-tending-to-infinity-sequence-Preorder = pr2
 ```
 
 ## Properties

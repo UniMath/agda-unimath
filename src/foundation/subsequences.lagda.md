@@ -19,7 +19,7 @@ open import foundation.propositional-truncations
 open import foundation.sequences
 open import foundation.universe-levels
 
-open import order-theory.infinite-limit-sequences-preorders
+open import order-theory.sequences-tending-to-infinity-preorders
 open import order-theory.strict-order-preserving-maps
 open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 ```
