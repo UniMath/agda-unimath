@@ -46,9 +46,9 @@ module _
   (u : type-sequence-Preorder P)
   where
 
-  is-modulus-tends-to-infinity-prop-sequence-Preorder :
+  is-modulus-is-tending-to-infinity-prop-sequence-Preorder :
     (type-Preorder P → ℕ) → Prop (l1 ⊔ l2)
-  is-modulus-tends-to-infinity-prop-sequence-Preorder m =
+  is-modulus-is-tending-to-infinity-prop-sequence-Preorder m =
     Π-Prop
       ( type-Preorder P)
       ( λ x →
@@ -58,33 +58,33 @@ module _
             leq-ℕ-Prop (m x) n ⇒
             leq-prop-Preorder P x (u n)))
 
-  is-modulus-tends-to-infinity-sequence-Preorder :
+  is-modulus-is-tending-to-infinity-sequence-Preorder :
     (type-Preorder P → ℕ) → UU (l1 ⊔ l2)
-  is-modulus-tends-to-infinity-sequence-Preorder m =
-    type-Prop (is-modulus-tends-to-infinity-prop-sequence-Preorder m)
+  is-modulus-is-tending-to-infinity-sequence-Preorder m =
+    type-Prop (is-modulus-is-tending-to-infinity-prop-sequence-Preorder m)
 
-  modulus-tends-to-infinity-sequence-Preorder : UU (l1 ⊔ l2)
-  modulus-tends-to-infinity-sequence-Preorder =
-    type-subtype is-modulus-tends-to-infinity-prop-sequence-Preorder
+  modulus-is-tending-to-infinity-sequence-Preorder : UU (l1 ⊔ l2)
+  modulus-is-tending-to-infinity-sequence-Preorder =
+    type-subtype is-modulus-is-tending-to-infinity-prop-sequence-Preorder
 
-  modulus-modulus-tends-to-infinity-sequence-Preorder :
-    modulus-tends-to-infinity-sequence-Preorder → type-Preorder P → ℕ
-  modulus-modulus-tends-to-infinity-sequence-Preorder = pr1
+  modulus-modulus-is-tending-to-infinity-sequence-Preorder :
+    modulus-is-tending-to-infinity-sequence-Preorder → type-Preorder P → ℕ
+  modulus-modulus-is-tending-to-infinity-sequence-Preorder = pr1
 
-  is-modulus-modulus-tends-to-infinity-sequence-Preorder :
-    ( m : modulus-tends-to-infinity-sequence-Preorder) →
-    ( is-modulus-tends-to-infinity-sequence-Preorder
-      ( modulus-modulus-tends-to-infinity-sequence-Preorder m))
-  is-modulus-modulus-tends-to-infinity-sequence-Preorder = pr2
+  is-modulus-modulus-is-tending-to-infinity-sequence-Preorder :
+    ( m : modulus-is-tending-to-infinity-sequence-Preorder) →
+    ( is-modulus-is-tending-to-infinity-sequence-Preorder
+      ( modulus-modulus-is-tending-to-infinity-sequence-Preorder m))
+  is-modulus-modulus-is-tending-to-infinity-sequence-Preorder = pr2
 
-  subtype-tends-to-infinity-sequence-Preorder : Prop (l1 ⊔ l2)
-  subtype-tends-to-infinity-sequence-Preorder =
+  is-tending-to-infinity-prop-sequence-Preorder : Prop (l1 ⊔ l2)
+  is-tending-to-infinity-prop-sequence-Preorder =
     is-inhabited-subtype-Prop
-      is-modulus-tends-to-infinity-prop-sequence-Preorder
+      is-modulus-is-tending-to-infinity-prop-sequence-Preorder
 
-  tends-to-infinity-sequence-Preorder : UU (l1 ⊔ l2)
-  tends-to-infinity-sequence-Preorder =
-    type-Prop subtype-tends-to-infinity-sequence-Preorder
+  is-tending-to-infinity-sequence-Preorder : UU (l1 ⊔ l2)
+  is-tending-to-infinity-sequence-Preorder =
+    type-Prop is-tending-to-infinity-prop-sequence-Preorder
 ```
 
 ### Sequences in preorders tending to infinity
@@ -94,20 +94,20 @@ module _
   {l1 l2 : Level} (P : Preorder l1 l2)
   where
 
-  type-sequence-tending-to-infinity-Preorder : UU (l1 ⊔ l2)
-  type-sequence-tending-to-infinity-Preorder =
-    type-subtype (subtype-tends-to-infinity-sequence-Preorder P)
+  type-tending-to-infinity-sequence-Preorder : UU (l1 ⊔ l2)
+  type-tending-to-infinity-sequence-Preorder =
+    type-subtype (is-tending-to-infinity-prop-sequence-Preorder P)
 
   seq-tending-to-infinity-sequence-Preorder :
-    type-sequence-tending-to-infinity-Preorder → type-sequence-Preorder P
+    type-tending-to-infinity-sequence-Preorder → type-sequence-Preorder P
   seq-tending-to-infinity-sequence-Preorder = pr1
 
-  tends-to-infinity-seq-tending-to-infinity-sequence-Preorder :
-    (u : type-sequence-tending-to-infinity-Preorder) →
-    tends-to-infinity-sequence-Preorder
+  is-tending-to-infinity-seq-tending-to-infinity-sequence-Preorder :
+    (u : type-tending-to-infinity-sequence-Preorder) →
+    is-tending-to-infinity-sequence-Preorder
       ( P)
       ( seq-tending-to-infinity-sequence-Preorder u)
-  tends-to-infinity-seq-tending-to-infinity-sequence-Preorder = pr2
+  is-tending-to-infinity-seq-tending-to-infinity-sequence-Preorder = pr2
 ```
 
 ## Properties
@@ -122,10 +122,10 @@ module _
   (u v : type-sequence-Preorder P) (I : leq-sequence-Preorder P u v)
   where
 
-  modulus-leq-modulus-tends-to-infinity-sequence-Preorder :
-    modulus-tends-to-infinity-sequence-Preorder P u →
-    modulus-tends-to-infinity-sequence-Preorder P v
-  modulus-leq-modulus-tends-to-infinity-sequence-Preorder =
+  modulus-leq-modulus-is-tending-to-infinity-sequence-Preorder :
+    modulus-is-tending-to-infinity-sequence-Preorder P u →
+    modulus-is-tending-to-infinity-sequence-Preorder P v
+  modulus-leq-modulus-is-tending-to-infinity-sequence-Preorder =
     tot
       ( λ N Mu x n J →
         transitive-leq-Preorder P
@@ -135,9 +135,9 @@ module _
           ( I n)
           ( Mu x n J))
 
-  is-upward-closed-tends-to-infinity-sequence-Preorder :
-    tends-to-infinity-sequence-Preorder P u →
-    tends-to-infinity-sequence-Preorder P v
-  is-upward-closed-tends-to-infinity-sequence-Preorder =
-    map-is-inhabited modulus-leq-modulus-tends-to-infinity-sequence-Preorder
+  is-upward-closed-is-tending-to-infinity-sequence-Preorder :
+    is-tending-to-infinity-sequence-Preorder P u →
+    is-tending-to-infinity-sequence-Preorder P v
+  is-upward-closed-is-tending-to-infinity-sequence-Preorder =
+    map-is-inhabited modulus-leq-modulus-is-tending-to-infinity-sequence-Preorder
 ```
