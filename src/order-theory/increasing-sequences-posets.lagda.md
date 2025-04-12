@@ -53,7 +53,7 @@ module _
 
 ## Properties
 
-### A sequence `u` in a poset is increasing if and only if `uₙ ≤ uₙ₊₁` for all n : ℕ
+### A sequence `u` in a poset is increasing if and only if `uₙ ≤ uₙ₊₁` for all `n : ℕ`
 
 ```agda
 module _
