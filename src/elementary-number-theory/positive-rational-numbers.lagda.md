@@ -567,7 +567,7 @@ leq-le-ℚ⁺ : {x y : ℚ⁺} → le-ℚ⁺ x y → leq-ℚ⁺ x y
 leq-le-ℚ⁺ {x} {y} = leq-le-ℚ {rational-ℚ⁺ x} {rational-ℚ⁺ y}
 ```
 
-### The minimum between to positive rational numbers
+### The minimum between two positive rational numbers
 
 ```agda
 min-ℚ⁺ : ℚ⁺ → ℚ⁺ → ℚ⁺
@@ -595,7 +595,7 @@ abstract
     leq-right-min-Decidable-Total-Order decidable-total-order-ℚ⁺
 ```
 
-### The maximum between to positive rational numbers
+### The maximum between two positive rational numbers
 
 ```agda
 max-ℚ⁺ : ℚ⁺ → ℚ⁺ → ℚ⁺
