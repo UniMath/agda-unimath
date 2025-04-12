@@ -90,7 +90,7 @@ eq-Iℚ⁺ {x} {y} =
   eq-type-subtype (subtype-unit-interval-ℚ⁺) ∘ eq-ℚ⁺
 ```
 
-### The reversing involution the unit interval
+### The reversing involution on the unit interval
 
 ```agda
 rev-Iℚ⁺ : Iℚ⁺ → Iℚ⁺
