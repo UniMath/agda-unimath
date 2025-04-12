@@ -152,5 +152,5 @@ module _
 
   limit-∞-extract-subsequence : limit-∞-sequence-Preorder ℕ-Preorder
   limit-∞-extract-subsequence =
-    extract-subsequence u v , is-limit-∞-extract-subsequence
+    ( extract-subsequence u v , is-limit-∞-extract-subsequence)
 ```
