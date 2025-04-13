@@ -32,7 +32,7 @@ open import order-theory.sequences-preorders
 
 A [sequence](order-theory.sequences-preorders.md) `u` in a
 [preorder](order-theory.preorders.md) `P`
-{{#concept "tends to infinity" Disambiguation="sequence in a preorder" Agda=tends-to-infinity-sequence-Preorder}}
+{{#concept "tends to infinity" Disambiguation="sequence in a preorder" Agda=is-tending-to-infinity-sequence-Preorder}}
 if there exists a map `m : P → ℕ` such that whenever `m x ≤ n` in `ℕ`, `x ≤ u n`
 in `P`. The map `m` is called a limit-modulus of `u` at infinity.
 
