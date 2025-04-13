@@ -31,8 +31,8 @@ open import order-theory.subpreorders
 ## Idea
 
 A [sequence in a preorder](order-theory.sequences-preorders.md) is
-{{#concept "bounded" Disambiguation="sequence in a preorder"}} if all its values
-are lesser than some constant.
+{{#concept "bounded" Disambiguation="sequence in a preorder" Agda=is-bounded-sequence-Preorder}}
+if all its values are lesser than some constant.
 
 ## Definitions
 
