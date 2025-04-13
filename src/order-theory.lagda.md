@@ -118,7 +118,6 @@ open import order-theory.resizing-suplattices public
 open import order-theory.sequences-posets public
 open import order-theory.sequences-preorders public
 open import order-theory.sequences-strictly-preordered-sets public
-open import order-theory.sequences-tending-to-infinity-preorders public
 open import order-theory.similarity-of-elements-large-posets public
 open import order-theory.similarity-of-elements-large-preorders public
 open import order-theory.similarity-of-order-preserving-maps-large-posets public
