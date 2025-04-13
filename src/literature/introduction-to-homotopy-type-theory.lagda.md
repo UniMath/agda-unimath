@@ -3490,8 +3490,8 @@ open import order-theory.posets using
 
 **Exercise 12.3.** Embeddings of natural numbers.
 
-Note that in (a), the library has a direct proof of the second part, and uses it
-in the proof of the first part, rather than the other way around.
+Note that in `(a)`, the library has a direct proof of the second part, and uses
+it in the proof of the first part, rather than the other way around.
 
 TODO: "injective maps" isn't actually ever properly defined AFAICT.
 
@@ -3607,4 +3607,182 @@ _ =
   λ k →
     is-trunc-map-diagonal-product-is-trunc k ,
     is-trunc-is-trunc-map-diagonal-product k
+```
+
+**Exercise 12.6.** Truncatedness of Σ-types.
+
+```agda
+-- (a)
+open import foundation.truncated-types using
+  ( is-trunc-Σ)
+open import foundation.truncated-maps using
+  ( is-trunc-fam-is-trunc-Σ)
+
+_ :
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (k : 𝕋) →
+  is-trunc k A →
+  ((x : A) → is-trunc k (B x)) ↔ is-trunc k (Σ A B)
+_ =
+  λ B k H → is-trunc-Σ H , is-trunc-fam-is-trunc-Σ k H
+
+-- (b)
+open import foundation.truncated-maps using
+  ( is-trunc-map-is-trunc-domain-codomain)
+
+-- TODO: put this somewhere else
+-- actually it seems to be a pretty direct generalization of
+-- is-trunc-is-trunc-map-into-is-trunc?
+converse :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (k : 𝕋) →
+  is-trunc k B → is-trunc-map k f → is-trunc k A
+converse f neg-two-𝕋 H K =
+  is-contr-is-equiv _ f (is-equiv-is-contr-map K) H
+converse f (succ-𝕋 k) H K x y =
+  converse (ap f) k
+    ( H (f x) (f y))
+    ( is-trunc-map-ap-is-trunc-map-succ k f K x y)
+
+_ :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) (f : A → B) →
+  is-trunc k B →
+  is-trunc k A ↔ is-trunc-map k f
+_ =
+  λ k f H →
+    ( λ K → is-trunc-map-is-trunc-domain-codomain k K H) ,
+    ( converse f k H)
+```
+
+**Exercise 12.7.** Truncatedness of cartesian product types.
+
+Note that the backward implication is already implemented in greater generality
+(for all `k : 𝕋`), which covers the second part of the exercise.
+
+```agda
+open import foundation.truncated-types using
+  ( is-trunc-product'
+  ; is-trunc-left-factor-product
+  ; is-trunc-right-factor-product)
+
+_ :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) →
+  ((B → is-trunc (succ-𝕋 k) A) × (A → is-trunc (succ-𝕋 k) B)) ↔
+  is-trunc (succ-𝕋 k) (A × B)
+_ =
+  λ k →
+    ( λ (H , K) → is-trunc-product' k H K) ,
+    ( λ H →
+      is-trunc-left-factor-product (succ-𝕋 k) H ,
+      is-trunc-right-factor-product (succ-𝕋 k) H)
+
+-- TODO: conclusion
+```
+
+**Exercise 12.8.** Retracts of truncated types.
+
+```agda
+-- (a)
+open import foundation.retracts-of-types using
+  ( retract-eq)
+
+-- (b)
+open import foundation.truncated-types using
+  ( is-trunc-retract-of)
+```
+
+**Exercise 12.9.** Concatenation of lists is 0-truncated.
+
+TODO
+
+**Exercise 12.10.** Truncatedness of the constant map.
+
+```agda
+open import foundation.constant-maps using
+  ( is-trunc-map-point-is-trunc
+  ; is-trunc-is-trunc-map-point)
+
+_ :
+  {l : Level} {A : UU l} (k : 𝕋) →
+  is-trunc (succ-𝕋 k) A ↔ ((x : A) → is-trunc-map k (point x))
+_ =
+  λ k →
+    is-trunc-map-point-is-trunc k ,
+    is-trunc-is-trunc-map-point k
+```
+
+**Exercise 12.11.** Truncated maps in commuting triangles.
+
+```agda
+open import foundation.truncated-maps using
+  ( is-trunc-map-top-map-triangle
+  ; is-trunc-map-left-map-triangle)
+
+_ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  {f : A → X} {g : B → X} {h : A → B} (k : 𝕋) →
+  coherence-triangle-maps f g h → is-trunc-map k g →
+  is-trunc-map k f ↔ is-trunc-map k h
+_ =
+  λ k H K →
+    is-trunc-map-top-map-triangle k _ _ _ H K ,
+    is-trunc-map-left-map-triangle k _ _ _ H K
+```
+
+**Exercise 12.12.** Truncatedness of total maps.
+
+```agda
+open import foundation.functoriality-dependent-pair-types using
+  ( is-trunc-map-tot
+  ; is-trunc-map-is-trunc-map-tot)
+
+_ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3} (k : 𝕋) →
+  (f : (x : A) → B x → C x) →
+  ((x : A) → is-trunc-map k (f x)) ↔ is-trunc-map k (tot f)
+_ =
+  λ k f → is-trunc-map-tot k , is-trunc-map-is-trunc-map-tot k
+```
+
+**Exercise 12.13.** Truncatedness of the fiber inclusion.
+
+```agda
+open import foundation.fiber-inclusions using
+  ( fiber-inclusion
+  ; is-trunc-map-fiber-inclusion-is-trunc
+  ; is-trunc-is-trunc-map-fiber-inclusion)
+
+_ :
+  {l1 l2 : Level} {A : UU l1} (k : 𝕋) →
+  is-trunc (succ-𝕋 k) A ↔
+  ((B : A → UU l2) (a : A) → is-trunc-map k (fiber-inclusion B a))
+_ =
+  λ k →
+    ( λ H B a → is-trunc-map-fiber-inclusion-is-trunc k B a H) ,
+    ( is-trunc-is-trunc-map-fiber-inclusion k)
+```
+
+**Exercise 12.14.** Isolated elements.
+
+Note that we call maps with decidable fibers _decidable maps_.
+
+```agda
+open import foundation.isolated-elements using
+  ( is-isolated)
+open import foundation.decidable-maps using
+  ( is-decidable-map)
+
+-- (a)
+open import foundation.isolated-elements using
+  ( is-decidable-point-is-isolated
+  ; is-isolated-is-decidable-point)
+
+_ :
+  {l : Level} {A : UU l} (a : A) →
+  is-isolated a ↔ is-decidable-map (point a)
+_ =
+  λ a → is-decidable-point-is-isolated a , is-isolated-is-decidable-point a
+
+-- (b)
+open import foundation.isolated-elements using
+  ( is-prop-eq-isolated-element
+  ; is-emb-point-is-isolated)
 ```
