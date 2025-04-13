@@ -53,8 +53,7 @@ additive [semigroup](group-theory.semigroups.md) of
 
 The values of an arithmetic sequence are determined by its initial value and its
 common difference; an arithmetic sequence of positive rational numbers is
-[strictly increasing](order-theory.strictly-increasing-sequences-strictly-preordered-sets.md)
-and [tends to infinity](order-theory.infinite-limit-sequences-preorders.md).
+[strictly increasing](order-theory.strictly-increasing-sequences-strictly-preordered-sets.md).
 
 ## Definitions
 

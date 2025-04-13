@@ -47,9 +47,6 @@ term `1` and common ratio `1 + h`:
 ∀ (h : ℚ⁺) (n : ℕ) → 1 + n h ≤ (1 + h)ⁿ
 ```
 
-It follows that the geometric sequences `(1 + h)ⁿ`
-[tend to infinity](order-theory.infinite-limit-sequences-preorders.md) in ℚ⁺.
-
 ## Lemma
 
 The ratio of two consecutive terms of a unitary arithmetic sequence of positive

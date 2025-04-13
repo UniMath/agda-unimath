@@ -45,11 +45,11 @@ open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 
 A
 {{#concept "geometric sequence" Disambiguation="of positive rational numbers" Agda=geometric-sequence-ℚ⁺ WD="geometric progression" WDID=Q173523}}
-of [positive rational numbers]
-(elementary-number-theory.positive-rational-numbers.md) is an
-[arithmetic sequence](group-theory.arithmetic-sequences-semigroups.md) in the
-multiplicative semigroup of positive rational numbers. The multplicative common
-difference in `ℚ⁺` is called the _common ratio_ of the sequence.
+of
+[positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
+is an [arithmetic sequence](group-theory.arithmetic-sequences-semigroups.md) in
+the multiplicative semigroup of positive rational numbers. The multplicative
+common difference in `ℚ⁺` is called the _common ratio_ of the sequence.
 
 Constant sequences are the geometric sequences with common ratio equal to `1`;
 multiplication and
