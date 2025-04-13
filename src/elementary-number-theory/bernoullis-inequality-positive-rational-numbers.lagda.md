@@ -18,7 +18,6 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
-open import elementary-number-theory.zero-approximations-sequences-positive-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport

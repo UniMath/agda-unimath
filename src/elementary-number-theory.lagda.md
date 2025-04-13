@@ -193,6 +193,5 @@ open import elementary-number-theory.universal-property-natural-numbers public
 open import elementary-number-theory.upper-bounds-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-standard-finite-types public
-open import elementary-number-theory.zero-approximations-sequences-positive-rational-numbers public
 open import elementary-number-theory.zero-conatural-numbers public
 ```
