@@ -512,14 +512,12 @@ module _
 ### Subsets of decidable total orders are decidable total orders
 
 ```agda
-module _
-  {l1 l2 : Level} (l3 : Level)
-  (T : Decidable-Total-Order l1 l2)
-  where
-
-  Sub-Decidable-Total-Order : UU (l1 ⊔ lsuc l3)
-  Sub-Decidable-Total-Order =
-    Subposet l3 (poset-Decidable-Total-Order T)
+Sub-Decidable-Total-Order :
+  {l1 l2 : Level} (l3 : Level) →
+  Decidable-Total-Order l1 l2 →
+  UU (l1 ⊔ lsuc l3)
+Sub-Decidable-Total-Order l3 T =
+  Subposet l3 (poset-Decidable-Total-Order T)
 
 module _
   {l1 l2 l3 : Level}
