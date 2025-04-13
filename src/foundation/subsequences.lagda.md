@@ -19,7 +19,6 @@ open import foundation.propositional-truncations
 open import foundation.sequences
 open import foundation.universe-levels
 
-open import order-theory.infinite-limit-sequences-preorders
 open import order-theory.strict-order-preserving-maps
 open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 ```
@@ -126,31 +125,4 @@ module _
             ( extract-subsequence u v)
             ( is-strictly-increasing-extract-subsequence u v)
             ( n)))
-```
-
-### The extraction sequence of a subsequence tends to infinity
-
-```agda
-module _
-  {l : Level} {A : UU l} (u : sequence A) (v : subsequence u)
-  where
-
-  modulus-limit-∞-extract-subsequence :
-    modulus-limit-∞-sequence-Preorder ℕ-Preorder (extract-subsequence u v)
-  modulus-limit-∞-extract-subsequence =
-    modulus-leq-modulus-limit-∞-sequence-Preorder
-      ( ℕ-Preorder)
-      ( id)
-      ( extract-subsequence u v)
-      ( is-superlinear-extract-subsequence u v)
-      ( id , λ i j → id)
-
-  is-limit-∞-extract-subsequence :
-    is-limit-∞-sequence-Preorder ℕ-Preorder (extract-subsequence u v)
-  is-limit-∞-extract-subsequence =
-    unit-trunc-Prop modulus-limit-∞-extract-subsequence
-
-  limit-∞-extract-subsequence : limit-∞-sequence-Preorder ℕ-Preorder
-  limit-∞-extract-subsequence =
-    extract-subsequence u v , is-limit-∞-extract-subsequence
 ```
