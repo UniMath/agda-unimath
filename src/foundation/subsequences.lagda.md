@@ -135,20 +135,22 @@ module _
   {l : Level} {A : UU l} (u : sequence A) (v : subsequence u)
   where
 
-  modulus-tends-to-infinity-extract-subsequence :
-    modulus-tends-to-infinity-sequence-Preorder
+  modulus-is-tending-to-infinity-extract-subsequence :
+    modulus-is-tending-to-infinity-sequence-Preorder
       ( ℕ-Preorder)
       ( extract-subsequence u v)
-  modulus-tends-to-infinity-extract-subsequence =
-    modulus-leq-modulus-tends-to-infinity-sequence-Preorder
+  modulus-is-tending-to-infinity-extract-subsequence =
+    modulus-leq-modulus-is-tending-to-infinity-sequence-Preorder
       ( ℕ-Preorder)
       ( id)
       ( extract-subsequence u v)
       ( is-superlinear-extract-subsequence u v)
       ( id , λ i j → id)
 
-  tends-to-infinity-extract-subsequence :
-    tends-to-infinity-sequence-Preorder ℕ-Preorder (extract-subsequence u v)
-  tends-to-infinity-extract-subsequence =
-    unit-trunc-Prop modulus-tends-to-infinity-extract-subsequence
+  is-tending-to-infinity-extract-subsequence :
+    is-tending-to-infinity-sequence-Preorder
+      ( ℕ-Preorder)
+      ( extract-subsequence u v)
+  is-tending-to-infinity-extract-subsequence =
+    unit-trunc-Prop modulus-is-tending-to-infinity-extract-subsequence
 ```

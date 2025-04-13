@@ -139,5 +139,6 @@ module _
     is-tending-to-infinity-sequence-Preorder P u →
     is-tending-to-infinity-sequence-Preorder P v
   is-upward-closed-is-tending-to-infinity-sequence-Preorder =
-    map-is-inhabited modulus-leq-modulus-is-tending-to-infinity-sequence-Preorder
+    map-is-inhabited
+      modulus-leq-modulus-is-tending-to-infinity-sequence-Preorder
 ```
