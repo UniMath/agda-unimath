@@ -10,15 +10,18 @@ module order-theory.bounded-sequences-preorders where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.binary-relations
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sequences
 open import foundation.subsequences
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import order-theory.preorders
@@ -94,6 +97,19 @@ module _
 
 ## Properties
 
+### Constant sequences are bounded
+
+```agda
+module _
+  {l1 l2 : Level} (P : Preorder l1 l2)
+  where
+
+  is-bounded-const-sequence-Preorder :
+    (x : type-Preorder P) → is-bounded-sequence-Preorder P (const ℕ x)
+  is-bounded-const-sequence-Preorder x =
+    unit-trunc-Prop (x , λ _ → refl-leq-Preorder P x)
+```
+
 ### The type of bounded sequences in a preorder is downward closed
 
 ```agda
@@ -149,6 +165,36 @@ module _
     type-bounded-sequence-Preorder P
   bounded-leq-bounded-sequence-Preorder u I =
     (u , is-bounded-leq-bounded-sequence-Preorder u I)
+```
+
+### The subtype of bounded sequences is the smallest downward closed subtype containing constant sequences
+
+```agda
+module _
+  { l1 l2 l3 : Level} (P : Preorder l1 l2)
+  ( Q : subtype l3 (type-sequence-Preorder P))
+  ( down-Q :
+    ( u v : type-sequence-Preorder P) →
+    leq-sequence-Preorder P u v →
+    is-in-subtype Q v →
+    is-in-subtype Q u)
+  ( const-Q : (x : type-Preorder P) → is-in-subtype Q (const ℕ x))
+  where
+
+  leq-subtype-downard-closed-constant-is-bounded-sequence-Preorder :
+    (u : type-sequence-Preorder P) →
+    is-bounded-sequence-Preorder P u →
+    is-in-subtype Q u
+  leq-subtype-downard-closed-constant-is-bounded-sequence-Preorder u =
+    rec-trunc-Prop (Q u) (λ (x , B) → down-Q u (const ℕ x) B (const-Q x))
+
+  leq-subtype-downard-closed-constant-seq-bounded-sequence-Preorder :
+    (u : type-bounded-sequence-Preorder P) →
+    is-in-subtype Q (seq-bounded-sequence-Preorder P u)
+  leq-subtype-downard-closed-constant-seq-bounded-sequence-Preorder u =
+    leq-subtype-downard-closed-constant-is-bounded-sequence-Preorder
+      ( seq-bounded-sequence-Preorder P u)
+      ( is-bounded-seq-bounded-sequence-Preorder P u)
 ```
 
 ### Subsequences of a bounded sequence are bounded
