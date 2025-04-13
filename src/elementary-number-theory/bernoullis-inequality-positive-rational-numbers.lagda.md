@@ -31,8 +31,6 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.groups
-
-open import order-theory.infinite-limit-sequences-preorders
 ```
 
 </details>
@@ -156,121 +154,6 @@ module _
             ( seq-standard-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ h) n))
           ( bernoullis-inequality-ℚ⁺ n))
         ( bounded-ratio-unitary-arithmetic-sequence-ℚ⁺ h n)
-```
-
-## Applications
-
-### The standard geometric sequence with inital term `1` and common ratio `1 + h` tends to infinity
-
-```agda
-module _
-  (h : ℚ⁺)
-  where
-
-  modulus-limit-∞-standard-unitary-onep-geometric-sequence-ℚ⁺ :
-    modulus-limit-∞-sequence-Preorder
-      ( preorder-ℚ⁺)
-      ( seq-standard-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ h))
-  modulus-limit-∞-standard-unitary-onep-geometric-sequence-ℚ⁺ =
-    modulus-leq-modulus-limit-∞-sequence-Preorder
-      ( preorder-ℚ⁺)
-      ( seq-standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h)
-      ( seq-standard-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ h))
-      ( bernoullis-inequality-ℚ⁺ h)
-      ( modulus-limit-∞-arithmetic-sequence-ℚ⁺
-        ( standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h))
-
-  is-limit-∞-standard-unitary-onep-geometric-sequence-ℚ⁺ :
-    is-limit-∞-sequence-Preorder
-      ( preorder-ℚ⁺)
-      ( seq-standard-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ h))
-  is-limit-∞-standard-unitary-onep-geometric-sequence-ℚ⁺ =
-    is-upward-closed-limit-∞-sequence-Preorder
-      ( preorder-ℚ⁺)
-      ( seq-standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h)
-      ( seq-standard-geometric-sequence-ℚ⁺ one-ℚ⁺ (one-ℚ⁺ +ℚ⁺ h))
-      ( bernoullis-inequality-ℚ⁺ h)
-      ( is-limit-∞-arithmetic-sequence-ℚ⁺
-        ( standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h))
-```
-
-### A geometric sequence of positive rational numbers with initial term `1` and common ratio `r > 1` tends to infinity
-
-```agda
-module _
-  ( u : geometric-sequence-ℚ⁺)
-  ( is-one-init : one-ℚ⁺ ＝ init-term-geometric-sequence-ℚ⁺ u)
-  ( 1<r : le-ℚ⁺ one-ℚ⁺ (common-ratio-geometric-sequence-ℚ⁺ u))
-  where
-
-  modulus-limit-∞-seq-unitary-geometric-sequence-ℚ⁺ :
-    modulus-limit-∞-sequence-Preorder
-      ( preorder-ℚ⁺)
-      ( seq-geometric-sequence-ℚ⁺ u)
-  modulus-limit-∞-seq-unitary-geometric-sequence-ℚ⁺ =
-    tr
-      ( modulus-limit-∞-sequence-Preorder preorder-ℚ⁺)
-      ( eq-htpy
-        ( htpy-seq-geometric-sequence-ℚ⁺
-          ( standard-geometric-sequence-ℚ⁺
-            ( one-ℚ⁺)
-            ( add-ℚ⁺
-              ( one-ℚ⁺)
-              ( le-diff-ℚ⁺
-                ( one-ℚ⁺)
-                ( common-ratio-geometric-sequence-ℚ⁺ u)
-                ( 1<r))))
-          ( u)
-          ( is-one-init)
-          ( right-diff-law-add-ℚ⁺
-            ( one-ℚ⁺)
-            ( common-ratio-geometric-sequence-ℚ⁺ u)
-            ( 1<r))))
-      ( modulus-limit-∞-standard-unitary-onep-geometric-sequence-ℚ⁺
-        ( le-diff-ℚ⁺
-          ( one-ℚ⁺)
-          ( common-ratio-geometric-sequence-ℚ⁺ u)
-          ( 1<r)))
-
-  is-limit-∞-seq-unitary-geometric-sequence-ℚ⁺ :
-    is-limit-∞-sequence-Preorder
-      ( preorder-ℚ⁺)
-      ( seq-geometric-sequence-ℚ⁺ u)
-  is-limit-∞-seq-unitary-geometric-sequence-ℚ⁺ =
-    unit-trunc-Prop modulus-limit-∞-seq-unitary-geometric-sequence-ℚ⁺
-```
-
-### A geometric sequence of positive rational numbers with initial term `1` and common ratio `r < 1` is a zero approximation
-
-```agda
-module _
-  ( u : geometric-sequence-ℚ⁺)
-  ( is-one-init : one-ℚ⁺ ＝ init-term-geometric-sequence-ℚ⁺ u)
-  ( r<1 : le-ℚ⁺ (common-ratio-geometric-sequence-ℚ⁺ u) one-ℚ⁺)
-  where
-
-  modulus-zero-approximation-seq-unitary-geometric-sequence-ℚ⁺ :
-    modulus-zero-approximation-sequence-ℚ⁺
-      ( seq-geometric-sequence-ℚ⁺ u)
-  modulus-zero-approximation-seq-unitary-geometric-sequence-ℚ⁺ =
-    modulus-inv-modulus-limit-∞-sequence-ℚ⁺
-      ( seq-geometric-sequence-ℚ⁺ u)
-      ( modulus-limit-∞-seq-unitary-geometric-sequence-ℚ⁺
-        ( inv-geometric-sequence-ℚ⁺ u)
-        ( inv (inv-unit-Group group-mul-ℚ⁺) ∙
-          ap inv-ℚ⁺ is-one-init)
-        ( tr
-          ( λ x → le-ℚ⁺ x (inv-ℚ⁺ (common-ratio-geometric-sequence-ℚ⁺ u)))
-          ( inv-unit-Group group-mul-ℚ⁺)
-          ( inv-le-ℚ⁺'
-            ( common-ratio-geometric-sequence-ℚ⁺ u)
-            ( one-ℚ⁺)
-            ( r<1))))
-
-  is-zero-approximation-seq-unitary-geometric-sequence-ℚ⁺ :
-    is-zero-approximation-sequence-ℚ⁺ (seq-geometric-sequence-ℚ⁺ u)
-  is-zero-approximation-seq-unitary-geometric-sequence-ℚ⁺ =
-    unit-trunc-Prop modulus-zero-approximation-seq-unitary-geometric-sequence-ℚ⁺
 ```
 
 ## References

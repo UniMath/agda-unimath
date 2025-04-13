@@ -44,7 +44,6 @@ open import foundation.universe-levels
 open import group-theory.arithmetic-sequences-semigroups
 open import group-theory.powers-of-elements-monoids
 
-open import order-theory.infinite-limit-sequences-preorders
 open import order-theory.sequences-preorders
 open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 ```
@@ -328,27 +327,4 @@ commutative-add-zero-approximation-sequence-ℚ⁺ u v =
       commutative-add-ℚ⁺
         ( seq-zero-approximation-sequence-ℚ⁺ u n)
         ( seq-zero-approximation-sequence-ℚ⁺ v n))
-```
-
-### The inverse of a sequence of positive rational numbers tending to infinity is a zero approximation
-
-```agda
-module _
-  (u : sequence ℚ⁺)
-  where
-
-  modulus-inv-modulus-limit-∞-sequence-ℚ⁺ :
-    modulus-limit-∞-sequence-Preorder preorder-ℚ⁺ (inv-ℚ⁺ ∘ u) →
-    modulus-zero-approximation-sequence-ℚ⁺ u
-  modulus-inv-modulus-limit-∞-sequence-ℚ⁺ =
-    map-Σ
-      ( is-modulus-zero-approximation-sequence-ℚ⁺ u)
-      ( λ m → m ∘ inv-ℚ⁺)
-      ( λ m Mu ε n I → inv-leq-ℚ⁺ ε (u n) (Mu (inv-ℚ⁺ ε) n I))
-
-  is-zero-approximation-inv-is-limit-∞-sequence-ℚ⁺ :
-    is-limit-∞-sequence-Preorder preorder-ℚ⁺ (inv-ℚ⁺ ∘ u) →
-    is-zero-approximation-sequence-ℚ⁺ u
-  is-zero-approximation-inv-is-limit-∞-sequence-ℚ⁺ =
-    map-is-inhabited modulus-inv-modulus-limit-∞-sequence-ℚ⁺
 ```

@@ -36,7 +36,6 @@ open import group-theory.arithmetic-sequences-semigroups
 open import group-theory.powers-of-elements-monoids
 
 open import order-theory.increasing-sequences-posets
-open import order-theory.infinite-limit-sequences-preorders
 open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 open import order-theory.strictly-preordered-sets
 ```
@@ -279,89 +278,6 @@ module _
         ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u (succ-ℕ n)))
         ( leq-init-arithmetic-sequence-ℚ⁺ n)
         ( le-succ-seq-arithmetic-sequence-ℚ⁺ u n))
-```
-
-### Arithmetic sequences of positive rational numbers tend to infinity
-
-```agda
-module _
-  (u : arithmetic-sequence-ℚ⁺)
-  where
-
-  opaque
-    is-unbounded-arithmetic-sequence-ℚ⁺ :
-      (M : ℚ⁺) → Σ ℕ (leq-ℚ⁺ M ∘ seq-arithmetic-sequence-ℚ⁺ u)
-    is-unbounded-arithmetic-sequence-ℚ⁺ M =
-      tot
-        ( λ n I →
-          leq-le-ℚ⁺
-            { M}
-            { seq-arithmetic-sequence-ℚ⁺ u n}
-            ( tr
-              ( le-ℚ (rational-ℚ⁺ M))
-              ( compute-arithmetic-sequence-ℚ⁺ u n)
-              ( transitive-le-ℚ
-                ( rational-ℚ⁺ M)
-                ( mul-ℚ
-                  ( rational-ℕ n)
-                  ( rational-common-difference-arithmetic-sequence-ℚ⁺ u))
-                ( add-ℚ
-                  ( rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
-                  ( mul-ℚ
-                    ( rational-ℕ n)
-                    ( rational-common-difference-arithmetic-sequence-ℚ⁺ u)))
-                ( le-left-add-rational-ℚ⁺
-                  ( mul-ℚ
-                    ( rational-ℕ n)
-                    ( rational-common-difference-arithmetic-sequence-ℚ⁺ u))
-                  ( init-term-arithmetic-sequence-ℚ⁺ u))
-                ( I))))
-        ( bound-archimedean-property-ℚ
-          ( rational-common-difference-arithmetic-sequence-ℚ⁺ u)
-          ( rational-ℚ⁺ M)
-          ( is-positive-rational-ℚ⁺
-            ( common-difference-arithmetic-sequence-ℚ⁺ u)))
-
-  modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ : ℚ⁺ → ℕ
-  modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ M =
-    pr1 (is-unbounded-arithmetic-sequence-ℚ⁺ M)
-
-  is-modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ :
-    is-modulus-limit-∞-sequence-Preorder
-      ( preorder-ℚ⁺)
-      ( seq-arithmetic-sequence-ℚ⁺ u)
-      ( modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺)
-  is-modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ M n I =
-    transitive-leq-ℚ⁺
-      ( M)
-      ( seq-arithmetic-sequence-ℚ⁺ u
-        ( modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ M))
-      ( seq-arithmetic-sequence-ℚ⁺ u n)
-      ( is-increasing-seq-arithmetic-sequence-ℚ⁺ u
-        ( modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ M)
-        ( n)
-        ( I))
-      ( pr2 (is-unbounded-arithmetic-sequence-ℚ⁺ M))
-
-  modulus-limit-∞-arithmetic-sequence-ℚ⁺ :
-    modulus-limit-∞-sequence-Preorder
-      ( preorder-ℚ⁺)
-      ( seq-arithmetic-sequence-ℚ⁺ u)
-  modulus-limit-∞-arithmetic-sequence-ℚ⁺ =
-    modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ ,
-    is-modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺
-
-  is-limit-∞-arithmetic-sequence-ℚ⁺ :
-    is-limit-∞-sequence-Preorder
-      ( preorder-ℚ⁺)
-      ( seq-arithmetic-sequence-ℚ⁺ u)
-  is-limit-∞-arithmetic-sequence-ℚ⁺ =
-    unit-trunc-Prop modulus-limit-∞-arithmetic-sequence-ℚ⁺
-
-  limit-∞-arithmetic-sequence-ℚ⁺ :
-    limit-∞-sequence-Preorder preorder-ℚ⁺
-  limit-∞-arithmetic-sequence-ℚ⁺ =
-    seq-arithmetic-sequence-ℚ⁺ u , is-limit-∞-arithmetic-sequence-ℚ⁺
 ```
 
 ## See also
