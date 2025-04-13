@@ -29,7 +29,7 @@ open import foundation.universe-levels
 
 {{#concept "Dedekind finite types" Agda=set-Dedekind-Finite-Type}} are types `X`
 with the [property](foundation-core.propositions.md) that every
-[embedding](foundation-core.embeddings.md) `X ↪ X` is an
+self-[embedding](foundation-core.embeddings.md) `X ↪ X` is an
 [equivalence](foundation-core.equivalences.md).
 
 ## Definitions
@@ -128,7 +128,7 @@ module _
 
 > TODO
 
-### Decidable subtypes of Dedekind finite types are Dedekind finite
+### Subtypes of Dedekind finite types are Dedekind finite
 
 > TODO
 

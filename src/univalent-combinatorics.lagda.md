@@ -56,6 +56,7 @@ open import univalent-combinatorics.dependent-pair-types public
 open import univalent-combinatorics.discrete-sigma-decompositions public
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products public
 open import univalent-combinatorics.double-counting public
+open import univalent-combinatorics.dual-dedekind-finite-types public
 open import univalent-combinatorics.embeddings public
 open import univalent-combinatorics.embeddings-standard-finite-types public
 open import univalent-combinatorics.equality-finite-types public
