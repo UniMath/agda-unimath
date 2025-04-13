@@ -29,6 +29,7 @@ open import order-theory.least-upper-bounds-posets
 open import order-theory.meet-semilattices
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.subposets
 open import order-theory.total-orders
 ```
 
@@ -512,33 +513,42 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level}
+  {l1 l2 : Level} (l3 : Level)
   (T : Decidable-Total-Order l1 l2)
-  (P : subtype l3 (type-Decidable-Total-Order T))
   where
 
-  is-total-leq-subtype-Decidable-Total-Order :
+  Sub-Decidable-Total-Order : UU (l1 ⊔ lsuc l3)
+  Sub-Decidable-Total-Order =
+    Subposet l3 (poset-Decidable-Total-Order T)
+
+module _
+  {l1 l2 l3 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  (P : Sub-Decidable-Total-Order l3 T)
+  where
+
+  is-total-leq-Sub-Decidable-Total-Order :
     is-total-Poset
-      (poset-subtype-Poset (poset-Decidable-Total-Order T) P)
-  is-total-leq-subtype-Decidable-Total-Order x y =
+      (poset-Subposet (poset-Decidable-Total-Order T) P)
+  is-total-leq-Sub-Decidable-Total-Order x y =
     is-total-poset-Decidable-Total-Order
       ( T)
       ( inclusion-subtype P x)
       ( inclusion-subtype P y)
 
-  is-decidable-leq-subtype-Decidable-Total-Order :
+  is-decidable-leq-Sub-Decidable-Total-Order :
     is-decidable-leq-Poset
-      (poset-subtype-Poset (poset-Decidable-Total-Order T) P)
-  is-decidable-leq-subtype-Decidable-Total-Order x y =
+      (poset-Subposet (poset-Decidable-Total-Order T) P)
+  is-decidable-leq-Sub-Decidable-Total-Order x y =
     is-decidable-poset-Decidable-Total-Order
       ( T)
       ( inclusion-subtype P x)
       ( inclusion-subtype P y)
 
-  decidable-total-order-subtype-Decidable-Total-Order :
+  decidable-total-order-Sub-Decidable-Total-Order :
     Decidable-Total-Order (l1 ⊔ l3) l2
-  decidable-total-order-subtype-Decidable-Total-Order =
-    poset-subtype-Poset (poset-Decidable-Total-Order T) P ,
-    is-total-leq-subtype-Decidable-Total-Order ,
-    is-decidable-leq-subtype-Decidable-Total-Order
+  decidable-total-order-Sub-Decidable-Total-Order =
+    poset-Subposet (poset-Decidable-Total-Order T) P ,
+    is-total-leq-Sub-Decidable-Total-Order ,
+    is-decidable-leq-Sub-Decidable-Total-Order
 ```

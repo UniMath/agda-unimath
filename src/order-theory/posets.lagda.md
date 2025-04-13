@@ -203,31 +203,3 @@ module _
 ```
 
 It remains to show that these constructions form inverses to eachother.
-
-### Subsets of posets are posets
-
-```agda
-module _
-  {l1 l2 l3 : Level} (X : Poset l1 l2) (P : subtype l3 (type-Poset X))
-  where
-
-  leq-subtype-Poset : Relation l2 (type-subtype P)
-  leq-subtype-Poset =
-    leq-subtype-Preorder (preorder-Poset X) P
-
-  antisymmetric-leq-subtype-Poset : is-antisymmetric leq-subtype-Poset
-  antisymmetric-leq-subtype-Poset x y Hxy Hyx =
-    eq-type-subtype
-      ( P)
-      ( antisymmetric-leq-Poset
-        ( X)
-        ( inclusion-subtype P x)
-        ( inclusion-subtype P y)
-        ( Hxy)
-        ( Hyx))
-
-  poset-subtype-Poset : Poset (l1 ⊔ l3) l2
-  poset-subtype-Poset =
-    preorder-subtype-Preorder (preorder-Poset X) P ,
-    antisymmetric-leq-subtype-Poset
-```
