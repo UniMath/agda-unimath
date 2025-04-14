@@ -144,14 +144,14 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (P : Preorder l1 l2)
-  (v : type-bounded-sequence-Preorder P)
   where
 
   is-bounded-leq-bounded-sequence-Preorder :
     (u : type-sequence-Preorder P) →
+    (v : type-bounded-sequence-Preorder P) →
     leq-sequence-Preorder P u (seq-bounded-sequence-Preorder P v) →
     is-bounded-sequence-Preorder P u
-  is-bounded-leq-bounded-sequence-Preorder u I =
+  is-bounded-leq-bounded-sequence-Preorder u v I =
     is-bounded-leq-is-bounded-sequence-Preorder
       ( P)
       ( u)
@@ -161,10 +161,11 @@ module _
 
   bounded-leq-bounded-sequence-Preorder :
     (u : type-sequence-Preorder P) →
+    (v : type-bounded-sequence-Preorder P) →
     leq-sequence-Preorder P u (seq-bounded-sequence-Preorder P v) →
     type-bounded-sequence-Preorder P
-  bounded-leq-bounded-sequence-Preorder u I =
-    (u , is-bounded-leq-bounded-sequence-Preorder u I)
+  bounded-leq-bounded-sequence-Preorder u v I =
+    (u , is-bounded-leq-bounded-sequence-Preorder u v I)
 ```
 
 ### The subtype of bounded sequences is the smallest downward closed subtype containing constant sequences
