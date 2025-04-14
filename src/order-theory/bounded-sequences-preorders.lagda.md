@@ -139,19 +139,19 @@ module _
     map-is-inhabited (tot is-upper-bound-leq-is-upper-bound-sequence-Preorder)
 ```
 
-### A sequence lesser than a bounded sequence is bounded
+### A sequence bounded by a bounded sequence is bounded
 
 ```agda
 module _
   {l1 l2 : Level} (P : Preorder l1 l2)
-  (v : type-bounded-sequence-Preorder P)
   where
 
   is-bounded-leq-bounded-sequence-Preorder :
     (u : type-sequence-Preorder P) →
+    (v : type-bounded-sequence-Preorder P) →
     leq-sequence-Preorder P u (seq-bounded-sequence-Preorder P v) →
     is-bounded-sequence-Preorder P u
-  is-bounded-leq-bounded-sequence-Preorder u I =
+  is-bounded-leq-bounded-sequence-Preorder u v I =
     is-bounded-leq-is-bounded-sequence-Preorder
       ( P)
       ( u)
@@ -161,10 +161,11 @@ module _
 
   bounded-leq-bounded-sequence-Preorder :
     (u : type-sequence-Preorder P) →
+    (v : type-bounded-sequence-Preorder P) →
     leq-sequence-Preorder P u (seq-bounded-sequence-Preorder P v) →
     type-bounded-sequence-Preorder P
-  bounded-leq-bounded-sequence-Preorder u I =
-    (u , is-bounded-leq-bounded-sequence-Preorder u I)
+  bounded-leq-bounded-sequence-Preorder u v I =
+    (u , is-bounded-leq-bounded-sequence-Preorder u v I)
 ```
 
 ### The subtype of bounded sequences is the smallest downward closed subtype containing constant sequences
@@ -225,10 +226,10 @@ module _
   (u : type-bounded-sequence-Preorder P)
   where
 
-  subsequence-bounded-sequence-Preorder :
+  bounded-subsequence-Preorder :
     (v : subsequence (seq-bounded-sequence-Preorder P u)) →
     type-bounded-sequence-Preorder P
-  subsequence-bounded-sequence-Preorder v =
+  bounded-subsequence-Preorder v =
     ( seq-subsequence (seq-bounded-sequence-Preorder P u) v ,
       is-bounded-subsequence-is-bounded-sequence-Preorder
         ( P)
