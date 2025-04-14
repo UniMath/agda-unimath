@@ -216,3 +216,23 @@ module _
       ( tot (λ K B → B ∘ (extract-subsequence u v)))
       ( H)
 ```
+
+### Bounded subsequences of a bounded sequence
+
+```agda
+module _
+  {l1 l2 : Level} (P : Preorder l1 l2)
+  (u : type-bounded-sequence-Preorder P)
+  where
+
+  bounded-subsequence-Preorder :
+    (v : subsequence (seq-bounded-sequence-Preorder P u)) →
+    type-bounded-sequence-Preorder P
+  bounded-subsequence-Preorder v =
+    ( seq-subsequence (seq-bounded-sequence-Preorder P u) v ,
+      is-bounded-subsequence-is-bounded-sequence-Preorder
+        ( P)
+        ( seq-bounded-sequence-Preorder P u)
+        ( is-bounded-seq-bounded-sequence-Preorder P u)
+        ( v))
+```
