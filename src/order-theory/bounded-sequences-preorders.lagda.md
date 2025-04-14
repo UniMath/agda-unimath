@@ -139,7 +139,7 @@ module _
     map-is-inhabited (tot is-upper-bound-leq-is-upper-bound-sequence-Preorder)
 ```
 
-### A sequence lesser than a bounded sequence is bounded
+### A sequence bounded by a bounded sequence is bounded
 
 ```agda
 module _
