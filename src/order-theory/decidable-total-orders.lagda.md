@@ -17,6 +17,7 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -28,6 +29,7 @@ open import order-theory.least-upper-bounds-posets
 open import order-theory.meet-semilattices
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.subposets
 open import order-theory.total-orders
 ```
 
@@ -505,4 +507,46 @@ module _
   max-leq-leq-Decidable-Total-Order =
     join-leq-leq-Order-Theoretic-Join-Semilattice
       ( order-theoretic-join-semilattice-Decidable-Total-Order)
+```
+
+### Subsets of decidable total orders are decidable total orders
+
+```agda
+Sub-Decidable-Total-Order :
+  {l1 l2 : Level} (l3 : Level) →
+  Decidable-Total-Order l1 l2 →
+  UU (l1 ⊔ lsuc l3)
+Sub-Decidable-Total-Order l3 T =
+  Subposet l3 (poset-Decidable-Total-Order T)
+
+module _
+  {l1 l2 l3 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  (P : Sub-Decidable-Total-Order l3 T)
+  where
+
+  is-total-leq-Sub-Decidable-Total-Order :
+    is-total-Poset
+      (poset-Subposet (poset-Decidable-Total-Order T) P)
+  is-total-leq-Sub-Decidable-Total-Order x y =
+    is-total-poset-Decidable-Total-Order
+      ( T)
+      ( inclusion-subtype P x)
+      ( inclusion-subtype P y)
+
+  is-decidable-leq-Sub-Decidable-Total-Order :
+    is-decidable-leq-Poset
+      (poset-Subposet (poset-Decidable-Total-Order T) P)
+  is-decidable-leq-Sub-Decidable-Total-Order x y =
+    is-decidable-poset-Decidable-Total-Order
+      ( T)
+      ( inclusion-subtype P x)
+      ( inclusion-subtype P y)
+
+  decidable-total-order-Sub-Decidable-Total-Order :
+    Decidable-Total-Order (l1 ⊔ l3) l2
+  decidable-total-order-Sub-Decidable-Total-Order =
+    poset-Subposet (poset-Decidable-Total-Order T) P ,
+    is-total-leq-Sub-Decidable-Total-Order ,
+    is-decidable-leq-Sub-Decidable-Total-Order
 ```

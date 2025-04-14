@@ -9,6 +9,7 @@ open import order-theory.accessible-elements-relations public
 open import order-theory.bottom-elements-large-posets public
 open import order-theory.bottom-elements-posets public
 open import order-theory.bottom-elements-preorders public
+open import order-theory.bounded-sequences-preorders public
 open import order-theory.chains-posets public
 open import order-theory.chains-preorders public
 open import order-theory.closure-operators-large-locales public
@@ -52,6 +53,7 @@ open import order-theory.homomorphisms-meet-suplattices public
 open import order-theory.homomorphisms-suplattices public
 open import order-theory.ideals-preorders public
 open import order-theory.incidence-algebras public
+open import order-theory.increasing-sequences-posets public
 open import order-theory.inflationary-maps-posets public
 open import order-theory.inflationary-maps-preorders public
 open import order-theory.inflattices public
@@ -114,12 +116,16 @@ open import order-theory.reflective-galois-connections-large-posets public
 open import order-theory.resizing-posets public
 open import order-theory.resizing-preorders public
 open import order-theory.resizing-suplattices public
+open import order-theory.sequences-posets public
+open import order-theory.sequences-preorders public
+open import order-theory.sequences-strictly-preordered-sets public
 open import order-theory.similarity-of-elements-large-posets public
 open import order-theory.similarity-of-elements-large-preorders public
 open import order-theory.similarity-of-order-preserving-maps-large-posets public
 open import order-theory.similarity-of-order-preserving-maps-large-preorders public
 open import order-theory.strict-order-preserving-maps public
 open import order-theory.strict-preorders public
+open import order-theory.strictly-increasing-sequences-strictly-preordered-sets public
 open import order-theory.strictly-inflationary-maps-strict-preorders public
 open import order-theory.strictly-preordered-sets public
 open import order-theory.subposets public
