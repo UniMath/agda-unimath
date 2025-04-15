@@ -26,6 +26,7 @@ open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
@@ -270,6 +271,37 @@ module _
           ( I))
 ```
 
+### Zero is lesser that the positive natural numbers
+
+```agda
+le-zero-in-pos-ℤ : (n : ℕ) → le-ℤ zero-ℤ (in-pos-ℤ n)
+le-zero-in-pos-ℤ zero-ℕ = star
+le-zero-in-pos-ℤ (succ-ℕ n) =
+  transitive-le-ℤ
+    ( zero-ℤ)
+    ( in-pos-ℤ n)
+    ( in-pos-ℤ (succ-ℕ n))
+    ( le-succ-ℤ (in-pos-ℤ n))
+    ( le-zero-in-pos-ℤ n)
+```
+
+### The successor functon reflects strict inequality
+
+```agda
+reflects-le-succ-ℤ :
+  (x y : ℤ) → le-ℤ (succ-ℤ x) (succ-ℤ y) → le-ℤ x y
+reflects-le-succ-ℤ x y H =
+  reflects-le-left-add-ℤ
+    ( one-ℤ)
+    ( x)
+    ( y)
+    ( binary-tr
+      ( le-ℤ)
+      ( is-right-add-one-succ-ℤ x)
+      ( is-right-add-one-succ-ℤ y)
+      ( H))
+```
+
 ### The inclusion of natural numbers preserves strict inequality
 
 ```agda
@@ -288,6 +320,23 @@ le-natural-le-ℤ (succ-ℕ m) (succ-ℕ n) m<n =
       ( int-ℕ m)
       ( int-ℕ n)
       ( le-natural-le-ℤ m n m<n))
+
+le-int-le-in-pos-ℤ :
+  (m n : ℕ) → le-ℤ (in-pos-ℤ m) (in-pos-ℤ n) → le-ℤ (int-ℕ m) (int-ℕ n)
+le-int-le-in-pos-ℤ zero-ℕ (succ-ℕ n) H = le-zero-in-pos-ℤ n
+le-int-le-in-pos-ℤ (succ-ℕ m) (succ-ℕ n) H =
+  reflects-le-succ-ℤ (in-pos-ℤ m) (in-pos-ℤ n) H
+
+reflects-le-int-ℕ : (m n : ℕ) → le-ℤ (int-ℕ m) (int-ℕ n) → le-ℕ m n
+reflects-le-int-ℕ zero-ℕ zero-ℕ H =
+  ex-falso (asymmetric-le-ℤ zero-ℤ zero-ℤ H H)
+reflects-le-int-ℕ zero-ℕ (succ-ℕ n) H = star
+reflects-le-int-ℕ (succ-ℕ m) zero-ℕ H = H
+reflects-le-int-ℕ (succ-ℕ m) (succ-ℕ n) H =
+  reflects-le-int-ℕ
+    ( m)
+    ( n)
+    ( le-int-le-in-pos-ℤ m n H)
 ```
 
 ### Negation reverses the order of strict inequality of integers

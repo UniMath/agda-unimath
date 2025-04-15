@@ -172,6 +172,13 @@ eq-nat-positive-succ-positive-ℤ :
   nat-positive-ℤ (succ-positive-ℤ x) ＝ succ-ℕ (nat-positive-ℤ x)
 eq-nat-positive-succ-positive-ℤ (inr (inr x) , H) = refl
 
+eq-int-positive-succ-positive-int-ℕ :
+  (n : ℕ) →
+  int-ℕ (succ-ℕ n) ＝ int-positive-ℤ (positive-int-ℕ n)
+eq-int-positive-succ-positive-int-ℕ zero-ℕ = refl
+eq-int-positive-succ-positive-int-ℕ (succ-ℕ n) =
+  ap succ-ℤ (eq-int-positive-succ-positive-int-ℕ n)
+
 is-section-nat-positive-ℤ :
   (x : positive-ℤ) → positive-int-ℕ (nat-positive-ℤ x) ＝ x
 is-section-nat-positive-ℤ (inr (inr zero-ℕ) , H) = refl
@@ -184,6 +191,13 @@ is-retraction-nat-positive-ℤ zero-ℕ = refl
 is-retraction-nat-positive-ℤ (succ-ℕ n) =
   eq-nat-positive-succ-positive-ℤ (positive-int-ℕ n) ∙
   ap succ-ℕ (is-retraction-nat-positive-ℤ n)
+
+eq-int-positive-succ-nat-positive-ℤ :
+  (x : positive-ℤ) →
+  int-ℕ (succ-ℕ (nat-positive-ℤ x)) ＝ int-positive-ℤ x
+eq-int-positive-succ-nat-positive-ℤ x =
+  eq-int-positive-succ-positive-int-ℕ (nat-positive-ℤ x) ∙
+  ap int-positive-ℤ (is-section-nat-positive-ℤ x)
 
 is-equiv-positive-int-ℕ : is-equiv positive-int-ℕ
 pr1 (pr1 is-equiv-positive-int-ℕ) = nat-positive-ℤ

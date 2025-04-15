@@ -66,6 +66,9 @@ module _
   is-archimedean-modulus-ℕ : ℕ → UU lzero
   is-archimedean-modulus-ℕ n =
     type-Prop (is-archimedean-modulus-prop-ℕ n)
+
+  type-archimedean-modulus-ℕ : UU lzero
+  type-archimedean-modulus-ℕ = type-subtype is-archimedean-modulus-prop-ℕ
 ```
 
 ## Properties
@@ -149,17 +152,14 @@ module _
         ( strict-upper-bound-remainder-euclidean-division-ℕ x y H))
 ```
 
-### The type family of Archimedean modulus is torsorial
+### The type family of Archimedean moduli is torsorial
 
 ```agda
 module _
   (x y : ℕ) (H : is-nonzero-ℕ x)
   where
 
-  archimedean-modulus-ℕ : UU lzero
-  archimedean-modulus-ℕ = Σ ℕ (is-archimedean-modulus-ℕ x y H)
-
-  is-prop-archimedean-modulus-ℕ : is-prop archimedean-modulus-ℕ
+  is-prop-archimedean-modulus-ℕ : is-prop (type-archimedean-modulus-ℕ x y H)
   is-prop-archimedean-modulus-ℕ =
     is-prop-all-elements-equal
       ( λ u v →
@@ -176,7 +176,7 @@ module _
 
   archimedean-modulus-prop-ℕ : Prop lzero
   archimedean-modulus-prop-ℕ =
-    (archimedean-modulus-ℕ , is-prop-archimedean-modulus-ℕ)
+    (type-archimedean-modulus-ℕ x y H , is-prop-archimedean-modulus-ℕ)
 
   torsorial-archimedean-modulus-ℕ :
     is-torsorial (is-archimedean-modulus-ℕ x y H)
@@ -193,14 +193,16 @@ module _
   (x y : ℕ) (H : is-nonzero-ℕ x)
   where
 
+  center-archimedean-modulus-ℕ : type-archimedean-modulus-ℕ x y H
+  center-archimedean-modulus-ℕ =
+    center (torsorial-archimedean-modulus-ℕ x y H)
+
   nat-archimedean-modulus-ℕ : ℕ
-  nat-archimedean-modulus-ℕ =
-    pr1 (center (torsorial-archimedean-modulus-ℕ x y H))
+  nat-archimedean-modulus-ℕ = pr1 center-archimedean-modulus-ℕ
 
   is-modulus-nat-archimedean-modulus-ℕ :
     is-archimedean-modulus-ℕ x y H nat-archimedean-modulus-ℕ
-  is-modulus-nat-archimedean-modulus-ℕ =
-    pr2 (center (torsorial-archimedean-modulus-ℕ x y H))
+  is-modulus-nat-archimedean-modulus-ℕ = pr2 center-archimedean-modulus-ℕ
 
   leq-left-nat-archimedean-modulus-ℕ :
     leq-ℕ (nat-archimedean-modulus-ℕ *ℕ x) y

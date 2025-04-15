@@ -20,6 +20,7 @@ open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
@@ -185,7 +186,38 @@ reflects-leq-right-add-ℤ z x y =
   is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
 
-### The inclusion of ℕ into ℤ preserves inequality
+### The successor function reflects inequality
+
+```agda
+reflects-leq-succ-ℤ :
+  (x y : ℤ) → leq-ℤ (succ-ℤ x) (succ-ℤ y) → leq-ℤ x y
+reflects-leq-succ-ℤ x y H =
+  reflects-leq-left-add-ℤ
+    ( one-ℤ)
+    ( x)
+    ( y)
+    ( binary-tr
+      ( leq-ℤ)
+      ( is-right-add-one-succ-ℤ x)
+      ( is-right-add-one-succ-ℤ y)
+      ( H))
+```
+
+### Zero is lesser than or equal to all the integer images of natural numbers
+
+```agda
+leq-zero-int-ℕ : (n : ℕ) → leq-ℤ zero-ℤ (int-ℕ n)
+leq-zero-int-ℕ zero-ℕ = refl-leq-ℤ zero-ℤ
+leq-zero-int-ℕ (succ-ℕ n) =
+  transitive-leq-ℤ
+    ( zero-ℤ)
+    ( int-ℕ n)
+    ( in-pos-ℤ n)
+    ( tr (leq-ℤ (int-ℕ n)) (succ-int-ℕ n) (succ-leq-ℤ (int-ℕ n)))
+    ( leq-zero-int-ℕ n)
+```
+
+### The inclusion of ℕ into ℤ preserves and reflects inequality
 
 ```agda
 leq-int-ℕ : (x y : ℕ) → leq-ℕ x y → leq-ℤ (int-ℕ x) (int-ℕ y)
@@ -199,6 +231,19 @@ leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
     ( ap (_-ℤ (succ-ℤ (int-ℕ x))) (succ-int-ℕ y) ∙
       ap ((int-ℕ (succ-ℕ y)) -ℤ_) (succ-int-ℕ x)))
   ( leq-int-ℕ x y H)
+
+leq-int-leq-in-pos-ℤ :
+  (x y : ℕ) → leq-ℤ (in-pos-ℤ x) (in-pos-ℤ y) → leq-ℤ (int-ℕ x) (int-ℕ y)
+leq-int-leq-in-pos-ℤ zero-ℕ zero-ℕ H = refl-leq-ℤ zero-ℤ
+leq-int-leq-in-pos-ℤ zero-ℕ (succ-ℕ y) H = leq-zero-int-ℕ (succ-ℕ y)
+leq-int-leq-in-pos-ℤ (succ-ℕ x) (succ-ℕ y) H =
+  reflects-leq-succ-ℤ (in-pos-ℤ x) (in-pos-ℤ y) H
+
+reflects-leq-int-ℕ : (x y : ℕ) → leq-ℤ (int-ℕ x) (int-ℕ y) → leq-ℕ x y
+reflects-leq-int-ℕ zero-ℕ zero-ℕ H = star
+reflects-leq-int-ℕ zero-ℕ (succ-ℕ y) H = star
+reflects-leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H =
+  reflects-leq-int-ℕ x y (leq-int-leq-in-pos-ℤ x y H)
 ```
 
 ### The partially ordered set of integers ordered by inequality
