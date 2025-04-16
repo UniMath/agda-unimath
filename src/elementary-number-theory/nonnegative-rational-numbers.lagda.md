@@ -133,6 +133,14 @@ is-set-ℚ⁰⁺ : is-set ℚ⁰⁺
 is-set-ℚ⁰⁺ = is-set-type-subtype is-nonnegative-prop-ℚ is-set-ℚ
 ```
 
+### All positive rational numbers are nonnegative
+
+```agda
+abstract
+  is-nonnegative-is-positive-ℚ : (q : ℚ) → is-positive-ℚ q → is-nonnegative-ℚ q
+  is-nonnegative-is-positive-ℚ _ = is-nonnegative-is-positive-ℤ
+```
+
 ### The rational image of a nonnegative integer is nonnegative
 
 ```agda

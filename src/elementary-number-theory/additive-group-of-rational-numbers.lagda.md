@@ -32,7 +32,7 @@ open import group-theory.semigroups
 The type of [rational numbers](elementary-number-theory.rational-numbers.md)
 equipped with [addition](elementary-number-theory.addition-rational-numbers.md)
 is a [commutative group](group-theory.abelian-groups.md) with unit `zero-ℚ` and
-inverse given by`neg-ℚ`.
+inverse given by `neg-ℚ`.
 
 ## Definitions
 
