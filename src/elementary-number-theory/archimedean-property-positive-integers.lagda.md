@@ -213,7 +213,7 @@ module _
     ( λ x → eq-is-prop is-prop-archimedean-modulus-ℤ⁺)
 ```
 
-### The unique Archimedean modulus between two positive intergers
+### The unique Archimedean modulus between two positive integers
 
 ```agda
 module _

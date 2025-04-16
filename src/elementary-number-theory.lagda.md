@@ -126,6 +126,7 @@ open import elementary-number-theory.multiplicative-units-integers public
 open import elementary-number-theory.multiplicative-units-standard-cyclic-rings public
 open import elementary-number-theory.multiset-coefficients public
 open import elementary-number-theory.natural-numbers public
+open import elementary-number-theory.natural-part-positive-rational-numbers public
 open import elementary-number-theory.negative-integer-fractions public
 open import elementary-number-theory.negative-integers public
 open import elementary-number-theory.negative-rational-numbers public

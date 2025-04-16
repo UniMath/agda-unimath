@@ -135,6 +135,14 @@ module _
   is-positive-denominator-ℚ⁺ : is-positive-ℤ denominator-ℚ⁺
   is-positive-denominator-ℚ⁺ = is-positive-denominator-ℚ rational-ℚ⁺
 
+  positive-numerator-ℚ⁺ : ℤ⁺
+  positive-numerator-ℚ⁺ =
+    (numerator-ℚ⁺ , is-positive-numerator-ℚ⁺)
+
+  positive-denominator-ℚ⁺ : ℤ⁺
+  positive-denominator-ℚ⁺ =
+    positive-denominator-ℚ rational-ℚ⁺
+
 abstract
   eq-ℚ⁺ : {x y : ℚ⁺} → rational-ℚ⁺ x ＝ rational-ℚ⁺ y → x ＝ y
   eq-ℚ⁺ {x} {y} = eq-type-subtype is-positive-prop-ℚ

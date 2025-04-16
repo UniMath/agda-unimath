@@ -374,6 +374,28 @@ abstract
         by ap-add-ℚ (right-unit-law-mul-ℚ p) refl
 ```
 
+### Multiplication by the denominator yields the numerator
+
+```agda
+eq-left-mul-denominator-ℚ :
+  (x : ℚ) → x *ℚ (rational-ℤ (denominator-ℚ x)) ＝ rational-ℤ (numerator-ℚ x)
+eq-left-mul-denominator-ℚ x =
+  eq-ℚ-sim-fraction-ℤ
+    ( mul-fraction-ℤ (fraction-ℚ x) (in-fraction-ℤ (denominator-ℚ x)))
+    ( fraction-ℚ (rational-ℤ (numerator-ℚ x)))
+    ( sim-mul-denominator-fraction-ℤ (fraction-ℚ x)) ∙
+  ( is-retraction-rational-fraction-ℚ
+    ( rational-ℤ (numerator-ℚ x)))
+
+eq-right-mul-denominator-ℚ :
+  (x : ℚ) → (rational-ℤ (denominator-ℚ x)) *ℚ x ＝ rational-ℤ (numerator-ℚ x)
+eq-right-mul-denominator-ℚ x =
+  ( commutative-mul-ℚ
+    (rational-ℤ (denominator-ℚ x))
+    ( x)) ∙
+  ( eq-left-mul-denominator-ℚ x)
+```
+
 ## See also
 
 - The multiplicative monoid structure on the rational numbers is defined in

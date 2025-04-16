@@ -147,3 +147,19 @@ left-distributive-mul-add-fraction-ℤ
           ( interchange-law-mul-mul-ℤ nx dx ny dz))
           ( interchange-law-mul-mul-ℤ nx dx nz dy)))
 ```
+
+### Multiplication of a fraction by its denominator is similar to its numerator
+
+```agda
+sim-mul-denominator-fraction-ℤ :
+  (x : fraction-ℤ) →
+  sim-fraction-ℤ
+    ( mul-fraction-ℤ x (in-fraction-ℤ (denominator-fraction-ℤ x)))
+    ( in-fraction-ℤ (numerator-fraction-ℤ x))
+sim-mul-denominator-fraction-ℤ x =
+  ( associative-mul-ℤ
+    ( numerator-fraction-ℤ x)
+    ( denominator-fraction-ℤ x)
+    ( one-ℤ)) ∙
+  ( ap (mul-ℤ (numerator-fraction-ℤ x)) refl)
+```
