@@ -14,6 +14,7 @@ open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
@@ -160,15 +161,14 @@ positive-rational-positive-ℤ : positive-ℤ → ℚ⁺
 positive-rational-positive-ℤ (z , pos-z) = rational-ℤ z , pos-z
 
 one-ℚ⁺ : ℚ⁺
-one-ℚ⁺ = positive-rational-positive-ℤ one-positive-ℤ
+one-ℚ⁺ = (one-ℚ , is-positive-int-positive-ℤ one-positive-ℤ)
 ```
 
-### Embedding of nonzero natural numbers in the positive rational numbers
+### The rational image of a positive natural number is positive
 
 ```agda
 positive-rational-ℕ⁺ : ℕ⁺ → ℚ⁺
-positive-rational-ℕ⁺ n =
-  positive-rational-positive-ℤ (positive-int-ℕ⁺ n)
+positive-rational-ℕ⁺ n = positive-rational-positive-ℤ (positive-int-ℕ⁺ n)
 ```
 
 ### The rational image of a positive integer fraction is positive
@@ -205,13 +205,14 @@ module _
   (x y : ℚ) (H : le-ℚ x y)
   where
 
-  is-positive-diff-le-ℚ : is-positive-ℚ (y -ℚ x)
-  is-positive-diff-le-ℚ =
-    is-positive-le-zero-ℚ
-      ( y -ℚ x)
-      ( backward-implication
-        ( iff-translate-diff-le-zero-ℚ x y)
-        ( H))
+  abstract
+    is-positive-diff-le-ℚ : is-positive-ℚ (y -ℚ x)
+    is-positive-diff-le-ℚ =
+      is-positive-le-zero-ℚ
+        ( y -ℚ x)
+        ( backward-implication
+          ( iff-translate-diff-le-zero-ℚ x y)
+          ( H))
 
   positive-diff-le-ℚ : ℚ⁺
   positive-diff-le-ℚ = y -ℚ x , is-positive-diff-le-ℚ
@@ -468,6 +469,19 @@ is-prop-le-ℚ⁺ : (x y : ℚ⁺) → is-prop (le-ℚ⁺ x y)
 is-prop-le-ℚ⁺ x y = is-prop-type-Prop (le-prop-ℚ⁺ x y)
 ```
 
+### The inequality on positive rational numbers
+
+```agda
+leq-prop-ℚ⁺ : ℚ⁺ → ℚ⁺ → Prop lzero
+leq-prop-ℚ⁺ x y = leq-ℚ-Prop (rational-ℚ⁺ x) (rational-ℚ⁺ y)
+
+leq-ℚ⁺ : ℚ⁺ → ℚ⁺ → UU lzero
+leq-ℚ⁺ x y = type-Prop (leq-prop-ℚ⁺ x y)
+
+is-prop-leq-ℚ⁺ : (x y : ℚ⁺) → is-prop (leq-ℚ⁺ x y)
+is-prop-leq-ℚ⁺ x y = is-prop-type-Prop (leq-prop-ℚ⁺ x y)
+```
+
 ### The sum of two positive rational numbers is greater than each of them
 
 ```agda
@@ -574,6 +588,42 @@ preserves-le-right-mul-ℚ⁺ p⁺@(p , _) q r q<r =
     ( preserves-le-left-mul-ℚ⁺ p⁺ q r q<r)
 ```
 
+### Multiplication by a positive rational number preserves inequality
+
+```agda
+preserves-leq-left-mul-ℚ⁺ :
+  (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
+  leq-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
+preserves-leq-left-mul-ℚ⁺
+  p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
+  q@((q-num , q-denom , _) , _)
+  r@((r-num , r-denom , _) , _)
+  q≤r =
+    preserves-leq-rational-fraction-ℤ
+      ( mul-fraction-ℤ p (fraction-ℚ q))
+      ( mul-fraction-ℤ p (fraction-ℚ r))
+      ( binary-tr
+        ( leq-ℤ)
+        ( interchange-law-mul-mul-ℤ _ _ _ _)
+        ( interchange-law-mul-mul-ℤ _ _ _ _)
+        ( preserves-leq-right-mul-nonnegative-ℤ
+          ( nonnegative-positive-ℤ
+            ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos)))
+          ( q-num *ℤ r-denom)
+          ( r-num *ℤ q-denom)
+          ( q≤r)))
+
+preserves-leq-right-mul-ℚ⁺ :
+  (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
+  leq-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
+preserves-leq-right-mul-ℚ⁺ p q r q≤r =
+  binary-tr
+    ( leq-ℚ)
+    ( commutative-mul-ℚ (rational-ℚ⁺ p) q)
+    ( commutative-mul-ℚ (rational-ℚ⁺ p) r)
+    ( preserves-leq-left-mul-ℚ⁺ p q r q≤r)
+```
+
 ### Multiplication of a positive rational by another positive rational less than 1 is a strictly deflationary map
 
 ```agda
@@ -607,12 +657,13 @@ mediant-zero-ℚ⁺ x =
         ( rational-ℚ⁺ x)
         ( le-zero-is-positive-ℚ (rational-ℚ⁺ x) (is-positive-rational-ℚ⁺ x))))
 
-le-mediant-zero-ℚ⁺ : (x : ℚ⁺) → le-ℚ⁺ (mediant-zero-ℚ⁺ x) x
-le-mediant-zero-ℚ⁺ x =
-  le-right-mediant-ℚ
-    ( zero-ℚ)
-    ( rational-ℚ⁺ x)
-    ( le-zero-is-positive-ℚ (rational-ℚ⁺ x) (is-positive-rational-ℚ⁺ x))
+abstract
+  le-mediant-zero-ℚ⁺ : (x : ℚ⁺) → le-ℚ⁺ (mediant-zero-ℚ⁺ x) x
+  le-mediant-zero-ℚ⁺ x =
+    le-right-mediant-ℚ
+      ( zero-ℚ)
+      ( rational-ℚ⁺ x)
+      ( le-zero-is-positive-ℚ (rational-ℚ⁺ x) (is-positive-rational-ℚ⁺ x))
 ```
 
 ### Any positive rational number is the sum of two positive rational numbers
@@ -629,16 +680,40 @@ module _
   right-summand-split-ℚ⁺ =
     le-diff-ℚ⁺ (mediant-zero-ℚ⁺ x) x (le-mediant-zero-ℚ⁺ x)
 
-  eq-add-split-ℚ⁺ :
-    left-summand-split-ℚ⁺ +ℚ⁺ right-summand-split-ℚ⁺ ＝ x
-  eq-add-split-ℚ⁺ =
-    right-diff-law-add-ℚ⁺ (mediant-zero-ℚ⁺ x) x (le-mediant-zero-ℚ⁺ x)
+  abstract
+    eq-add-split-ℚ⁺ :
+      left-summand-split-ℚ⁺ +ℚ⁺ right-summand-split-ℚ⁺ ＝ x
+    eq-add-split-ℚ⁺ =
+      right-diff-law-add-ℚ⁺ (mediant-zero-ℚ⁺ x) x (le-mediant-zero-ℚ⁺ x)
 
   split-ℚ⁺ : Σ ℚ⁺ (λ u → Σ ℚ⁺ (λ v → u +ℚ⁺ v ＝ x))
   split-ℚ⁺ =
     left-summand-split-ℚ⁺ ,
     right-summand-split-ℚ⁺ ,
     eq-add-split-ℚ⁺
+
+  abstract
+    le-add-split-ℚ⁺ :
+      (p q r s : ℚ) →
+      le-ℚ p (q +ℚ rational-ℚ⁺ left-summand-split-ℚ⁺) →
+      le-ℚ r (s +ℚ rational-ℚ⁺ right-summand-split-ℚ⁺) →
+      le-ℚ (p +ℚ r) ((q +ℚ s) +ℚ rational-ℚ⁺ x)
+    le-add-split-ℚ⁺ p q r s p<q+left r<s+right =
+      tr
+        ( le-ℚ (p +ℚ r))
+        ( interchange-law-add-add-ℚ
+          ( q)
+          ( rational-ℚ⁺ left-summand-split-ℚ⁺)
+          ( s)
+          ( rational-ℚ⁺ right-summand-split-ℚ⁺) ∙
+          ap ((q +ℚ s) +ℚ_) (ap rational-ℚ⁺ eq-add-split-ℚ⁺))
+        ( preserves-le-add-ℚ
+          { p}
+          { q +ℚ rational-ℚ⁺ left-summand-split-ℚ⁺}
+          { r}
+          { s +ℚ rational-ℚ⁺ right-summand-split-ℚ⁺}
+          ( p<q+left)
+          ( r<s+right))
 ```
 
 ### Any two positive rational numbers have a positive rational number strictly less than both
@@ -685,10 +760,10 @@ module _
 
 ```agda
 abstract
-  double-le-ℚ⁺ :
+  bound-double-le-ℚ⁺ :
     (p : ℚ⁺) →
-    exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
-  double-le-ℚ⁺ p = unit-trunc-Prop dependent-pair-result
+    Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
+  bound-double-le-ℚ⁺ p = dependent-pair-result
     where
     q : ℚ⁺
     q = left-summand-split-ℚ⁺ p
@@ -710,6 +785,11 @@ abstract
           { rational-ℚ⁺ r}
           ( le-left-min-ℚ⁺ q r)
           ( le-right-min-ℚ⁺ q r))
+
+  double-le-ℚ⁺ :
+    (p : ℚ⁺) →
+    exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
+  double-le-ℚ⁺ p = unit-trunc-Prop (bound-double-le-ℚ⁺ p)
 ```
 
 ### Addition with a positive rational number is an increasing map
