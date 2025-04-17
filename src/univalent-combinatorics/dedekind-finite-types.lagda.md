@@ -154,10 +154,31 @@ is-dedekind-finite-is-prop H f is-emb-f =
 
 ### Subfinitely indexed types are Dedekind finite
 
-A proof is given by [Gro-Tsen](https://mathoverflow.net/users/17064/gro-tsen) in
-this MathOverflow answer: https://mathoverflow.net/a/433318.
+We reproduce a proof given by
+[Gro-Tsen](https://mathoverflow.net/users/17064/gro-tsen) in this MathOverflow
+answer: <https://mathoverflow.net/a/433318>.
 
-> TODO
+**Proof.** Let $X$ be a subfinitely enumerated type, witnessed by
+$Fin n ↩ D ↠ X$ where $h$ is the surjection. We wish to show $X$ is Dedekind
+finite, so let $f : X ↪ X$ be an arbitrary embedding. Our goal is to prove $f$
+is surjective.
+
+Given an arbitrary $x : X$ we want to show there exists $z : X$ such that
+$f(z) ＝ x$. Now, let $x_i = f^i(x)$. This defines an $ℕ$-indexed sequence of
+elements of $X$. Each $x_i$ has a representative $x'_i : D$.
+
+Now, by finite choice (i.e., if $h : D → X$ surjective then
+$h ∘ - : D^{\operatorname{Fin}n} → X^{\operatorname{Fin}n}$ is also surjective.)
+there is a sequence $x'_{-} :  D^{\operatorname{Fin}n}$ lifting
+$x,f(x),…,f^{n-1}(x)$.
+
+Now, the standard pigeonhole principle applies to $\operatorname{Fin}n$, so
+there has to be $i < j$ in $\operatorname{Fin}n$ such that $x'_i = x'_j$, and in
+particular $h(x'_i) = h(x'_j)$, i.e., $f^i(x) = f^j(x)$. By injectivity of $f$
+we can cancel $i$ applications to obtain $x = f(f^{j-i-1}(x))$ so $f^{j-i-1}(x)$
+is the desired preimage. ∎
+
+> This remains to be formalized.
 
 ## Comments
 
