@@ -190,27 +190,10 @@ module _
         is-nonnegative-leq-zero-ℚ)
 ```
 
-### The difference of a rational number with a rational number less than or equal to the first is nonnegative
-
-```agda
-module _
-  (x y : ℚ) (H : leq-ℚ x y)
-  where
-
-  abstract
-    is-nonnegative-diff-leq-ℚ : is-nonnegative-ℚ (y -ℚ x)
-    is-nonnegative-diff-leq-ℚ =
-      is-nonnegative-leq-zero-ℚ
-        ( y -ℚ x)
-        ( backward-implication (iff-translate-diff-leq-zero-ℚ x y) H)
-
-  nonnegative-diff-le-ℚ : ℚ⁰⁺
-  nonnegative-diff-le-ℚ = (y -ℚ x , is-nonnegative-diff-leq-ℚ)
-```
-
 ### The product of two nonnegative rational numbers is nonnegative
 
 ```agda
+abstract
   is-nonnegative-mul-nonnegative-ℚ :
     {x y : ℚ} → is-nonnegative-ℚ x → is-nonnegative-ℚ y →
     is-nonnegative-ℚ (x *ℚ y)
@@ -341,4 +324,26 @@ abstract
       ( leq-ℚ q)
       ( commutative-add-ℚ (rational-ℚ⁰⁺ p) q)
       ( is-inflationary-map-left-add-rational-ℚ⁰⁺ p q)
+```
+
+### `x ≤ y` if and only if `y - x` is nonnegative
+
+```agda
+abstract
+  is-nonnegative-diff-iff-leq-ℚ :
+    (x y : ℚ) → (is-nonnegative-ℚ (y -ℚ x)) ↔ (leq-ℚ x y)
+  is-nonnegative-diff-iff-leq-ℚ x y =
+    iff-translate-diff-leq-zero-ℚ x y ∘iff
+    is-nonnegative-iff-leq-zero-ℚ (y -ℚ x)
+
+  is-nonnegative-diff-leq-ℚ : (x y : ℚ) → leq-ℚ x y → is-nonnegative-ℚ (y -ℚ x)
+  is-nonnegative-diff-leq-ℚ x y =
+    backward-implication (is-nonnegative-diff-iff-leq-ℚ x y)
+
+  leq-is-nonnegative-diff-ℚ : (x y : ℚ) → is-nonnegative-ℚ (y -ℚ x) → leq-ℚ x y
+  leq-is-nonnegative-diff-ℚ x y =
+    forward-implication (is-nonnegative-diff-iff-leq-ℚ x y)
+
+nonnegative-diff-leq-ℚ : (x y : ℚ) → leq-ℚ x y → ℚ⁰⁺
+nonnegative-diff-leq-ℚ x y x≤y = (y -ℚ x , is-nonnegative-diff-leq-ℚ x y x≤y)
 ```

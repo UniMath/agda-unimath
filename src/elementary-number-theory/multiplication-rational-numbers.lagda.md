@@ -11,6 +11,7 @@ module elementary-number-theory.multiplication-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integer-fractions
@@ -372,6 +373,19 @@ abstract
         by left-distributive-mul-add-ℚ p one-ℚ q
       ＝ p +ℚ (p *ℚ q)
         by ap-add-ℚ (right-unit-law-mul-ℚ p) refl
+```
+
+### `2q = q + q
+
+```agda
+abstract
+  mul-two-ℚ : (q : ℚ) → two-ℚ *ℚ q ＝ q +ℚ q
+  mul-two-ℚ q =
+    equational-reasoning
+      rational-ℤ (one-ℤ +ℤ one-ℤ) *ℚ q
+      ＝ (one-ℚ +ℚ one-ℚ) *ℚ q by ap (_*ℚ q) (inv (add-rational-ℤ one-ℤ one-ℤ))
+      ＝ (one-ℚ *ℚ q) +ℚ (one-ℚ *ℚ q) by right-distributive-mul-add-ℚ _ _ _
+      ＝ q +ℚ q by ap-add-ℚ (left-unit-law-mul-ℚ q) (left-unit-law-mul-ℚ q)
 ```
 
 ## See also

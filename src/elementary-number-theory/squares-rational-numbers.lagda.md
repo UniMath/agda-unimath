@@ -9,13 +9,20 @@ module elementary-number-theory.squares-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
-open import foundation.coproduct-types
-open import foundation.identity-types
-open import foundation.dependent-pair-types
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.negative-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
+
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.action-on-identifications-functions
+open import foundation.identity-types
+open import foundation.universe-levels
+open import foundation.decidable-types
+open import elementary-number-theory.addition-rational-numbers
 ```
 
 </details>
@@ -41,9 +48,12 @@ square-root-ℚ _ (root , _) = root
 is-nonnegative-square-ℚ : (a : ℚ) → is-nonnegative-ℚ (square-ℚ a)
 is-nonnegative-square-ℚ a =
   rec-coproduct
-    ( λ H → is-nonnegative-is-positive-ℚ (is-positive-mul-negative-ℚ H H))
-    ( λ H → is-nonnegative-mul-ℚ H H)
-    ( decide-is-negative-is-nonnegative-ℚ {a})
+    ( λ H →
+      is-nonnegative-is-positive-ℚ
+        ( a *ℚ a)
+        ( is-positive-mul-negative-ℚ {a} {a} H H))
+    ( λ H → is-nonnegative-mul-nonnegative-ℚ {a} {a} H H)
+    ( decide-is-negative-is-nonnegative-ℚ a)
 ```
 
 ### The square of the negation of `x` is the square of `x`
@@ -59,52 +69,9 @@ abstract
       ＝ x *ℚ x by neg-neg-ℚ (x *ℚ x)
 ```
 
-### The squares in ℚ are exactly the squares in ℕ
-
-```agda
-is-square-int-is-square-nat : {n : ℕ} → is-square-ℕ n → is-square-ℚ (int-ℕ n)
-is-square-int-is-square-nat (root , pf-square) =
-  ( ( int-ℕ root) ,
-    ( ( ap int-ℕ pf-square) ∙
-      ( inv (mul-int-ℕ root root))))
-
-is-square-nat-is-square-int : {a : ℚ} → is-square-ℚ a → is-square-ℕ (abs-ℚ a)
-is-square-nat-is-square-int (root , pf-square) =
-  ( ( abs-ℚ root) ,
-    ( ( ap abs-ℚ pf-square) ∙
-      ( multiplicative-abs-ℚ root root)))
-
-iff-is-square-int-is-square-nat :
-  (n : ℕ) → is-square-ℕ n ↔ is-square-ℚ (int-ℕ n)
-pr1 (iff-is-square-int-is-square-nat n) = is-square-int-is-square-nat
-pr2 (iff-is-square-int-is-square-nat n) H =
-  tr is-square-ℕ (abs-int-ℕ n) (is-square-nat-is-square-int H)
-
-iff-is-nonneg-square-nat-is-square-int :
-  (a : ℚ) → is-square-ℚ a ↔ is-nonnegative-ℚ a × is-square-ℕ (abs-ℚ a)
-pr1 (iff-is-nonneg-square-nat-is-square-int a) (root , pf-square) =
-  ( ( tr is-nonnegative-ℚ (inv pf-square) (is-nonnegative-square-ℚ root)) ,
-    ( is-square-nat-is-square-int (root , pf-square)))
-pr2
-  ( iff-is-nonneg-square-nat-is-square-int a) (pf-nonneg , (root , pf-square)) =
-  ( ( int-ℕ root) ,
-    ( ( inv (int-abs-is-nonnegative-ℚ a pf-nonneg)) ∙
-      ( pr2 (is-square-int-is-square-nat (root , pf-square)))))
-```
-
 ### Squareness in ℚ is decidable
 
-```agda
-is-decidable-is-square-ℚ : (a : ℚ) → is-decidable (is-square-ℚ a)
-is-decidable-is-square-ℚ (inl n) =
-  inr (map-neg (pr1 (iff-is-nonneg-square-nat-is-square-int (inl n))) pr1)
-is-decidable-is-square-ℚ (inr (inl n)) = inl (zero-ℚ , refl)
-is-decidable-is-square-ℚ (inr (inr n)) =
-  is-decidable-iff
-    ( is-square-int-is-square-nat)
-    ( is-square-nat-is-square-int)
-    ( is-decidable-is-square-ℕ (succ-ℕ n))
-```
+Has yet to be proved.
 
 ### `(x + y)² = x² + 2xy + y²`
 
@@ -113,7 +80,7 @@ abstract
   square-add-ℚ :
     (x y : ℚ) →
     square-ℚ (x +ℚ y) ＝
-    square-ℚ x +ℚ (int-ℕ 2 *ℚ (x *ℚ y)) +ℚ square-ℚ y
+    square-ℚ x +ℚ (rational-ℕ 2 *ℚ (x *ℚ y)) +ℚ square-ℚ y
   square-add-ℚ x y =
     equational-reasoning
       square-ℚ (x +ℚ y)
@@ -131,28 +98,30 @@ abstract
           ap
             ( x *ℚ x +ℚ_)
             ( ap (x *ℚ y +ℚ_) (ap (_+ℚ y *ℚ y) (commutative-mul-ℚ y x)))
-      ＝ x *ℚ x +ℚ (int-ℕ 2 *ℚ (x *ℚ y) +ℚ y *ℚ y)
-        by ap (x *ℚ x +ℚ_) (inv (associative-add-ℚ (x *ℚ y) (x *ℚ y) (y *ℚ y)))
-      ＝ x *ℚ x +ℚ int-ℕ 2 *ℚ (x *ℚ y) +ℚ y *ℚ y
-        by inv (associative-add-ℚ (x *ℚ x) (int-ℕ 2 *ℚ (x *ℚ y)) _)
+      ＝ x *ℚ x +ℚ ((x *ℚ y +ℚ x *ℚ y) +ℚ y *ℚ y)
+        by ap (x *ℚ x +ℚ_) (inv (associative-add-ℚ _ _ _))
+      ＝ x *ℚ x +ℚ (rational-ℕ 2 *ℚ (x *ℚ y) +ℚ y *ℚ y)
+        by ap (λ z → x *ℚ x +ℚ (z +ℚ y *ℚ y)) (inv (mul-two-ℚ _))
+      ＝ x *ℚ x +ℚ rational-ℕ 2 *ℚ (x *ℚ y) +ℚ y *ℚ y
+        by inv (associative-add-ℚ (x *ℚ x) (rational-ℕ 2 *ℚ (x *ℚ y)) _)
 
   square-diff-ℚ :
     (x y : ℚ) →
     square-ℚ (x -ℚ y) ＝
-    square-ℚ x -ℚ (int-ℕ 2 *ℚ (x *ℚ y)) +ℚ square-ℚ y
+    square-ℚ x -ℚ (rational-ℕ 2 *ℚ (x *ℚ y)) +ℚ square-ℚ y
   square-diff-ℚ x y =
     equational-reasoning
       square-ℚ (x -ℚ y)
-      ＝ square-ℚ x +ℚ int-ℕ 2 *ℚ (x *ℚ neg-ℚ y) +ℚ square-ℚ (neg-ℚ y)
+      ＝ square-ℚ x +ℚ rational-ℕ 2 *ℚ (x *ℚ neg-ℚ y) +ℚ square-ℚ (neg-ℚ y)
         by square-add-ℚ x (neg-ℚ y)
-      ＝ square-ℚ x +ℚ (int-ℕ 2 *ℚ neg-ℚ (x *ℚ y)) +ℚ square-ℚ y
+      ＝ square-ℚ x +ℚ (rational-ℕ 2 *ℚ neg-ℚ (x *ℚ y)) +ℚ square-ℚ y
         by
           ap-add-ℚ
-            ( ap (x *ℚ x +ℚ_) (ap (int-ℕ 2 *ℚ_) (right-negative-law-mul-ℚ x y)))
+            ( ap (x *ℚ x +ℚ_) (ap (rational-ℕ 2 *ℚ_) (right-negative-law-mul-ℚ x y)))
             ( square-neg-ℚ y)
-      ＝ square-ℚ x -ℚ (int-ℕ 2 *ℚ (x *ℚ y)) +ℚ square-ℚ y
+      ＝ square-ℚ x -ℚ (rational-ℕ 2 *ℚ (x *ℚ y)) +ℚ square-ℚ y
         by
           ap
             ( λ z → square-ℚ x +ℚ z +ℚ square-ℚ y)
-            ( right-negative-law-mul-ℚ (int-ℕ 2) (x *ℚ y))
+            ( right-negative-law-mul-ℚ (rational-ℕ 2) (x *ℚ y))
 ```

@@ -11,6 +11,8 @@ module elementary-number-theory.difference-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.difference-integers
+open import elementary-number-theory.integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -151,4 +153,19 @@ abstract
   right-translation-diff-ℚ x y z =
     ( ap-diff-ℚ (commutative-add-ℚ x z) (commutative-add-ℚ y z)) ∙
     ( left-translation-diff-ℚ x y z)
+```
+
+### The inclusion of integers preserves differences
+
+```agda
+abstract
+  diff-rational-ℤ :
+    (x y : ℤ) → rational-ℤ x -ℚ rational-ℤ y ＝ rational-ℤ (x -ℤ y)
+  diff-rational-ℤ x y =
+    equational-reasoning
+      rational-ℤ x -ℚ rational-ℤ y
+      ＝ rational-ℤ x +ℚ rational-ℤ (neg-ℤ y)
+        by ap (rational-ℤ x +ℚ_) (inv (preserves-neg-rational-ℤ y))
+      ＝ rational-ℤ (x -ℤ y)
+        by add-rational-ℤ x (neg-ℤ y)
 ```

@@ -10,6 +10,7 @@ module elementary-number-theory.rational-numbers where
 open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.mediant-integer-fractions
 open import elementary-number-theory.multiplication-integers
@@ -106,6 +107,13 @@ pr2 (pr1 (rational-ℤ x)) = one-positive-ℤ
 pr2 (rational-ℤ x) = is-one-gcd-one-ℤ' x
 ```
 
+### Inclusion of the natural numbers
+
+```agda
+rational-ℕ : ℕ → ℚ
+rational-ℕ n = rational-ℤ (int-ℕ n)
+```
+
 ### Negative one, zero and one
 
 ```agda
@@ -129,6 +137,13 @@ one-ℚ = rational-ℤ one-ℤ
 
 is-one-ℚ : ℚ → UU lzero
 is-one-ℚ x = (x ＝ one-ℚ)
+```
+
+### Other useful rational constants
+
+```agda
+two-ℚ : ℚ
+two-ℚ = rational-ℕ 2
 ```
 
 ### The negative of a rational number

@@ -166,6 +166,7 @@ open import elementary-number-theory.square-free-natural-numbers public
 open import elementary-number-theory.squares-integers public
 open import elementary-number-theory.squares-modular-arithmetic public
 open import elementary-number-theory.squares-natural-numbers public
+open import elementary-number-theory.squares-rational-numbers public
 open import elementary-number-theory.standard-cyclic-groups public
 open import elementary-number-theory.standard-cyclic-rings public
 open import elementary-number-theory.stirling-numbers-of-the-second-kind public
