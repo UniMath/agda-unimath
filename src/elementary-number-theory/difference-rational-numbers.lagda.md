@@ -88,6 +88,22 @@ abstract
   left-zero-law-diff-ℚ x = left-unit-law-add-ℚ (neg-ℚ x)
 ```
 
+### If the difference of two rational numbers is zero, they are equal
+
+```agda
+abstract
+  eq-is-zero-diff-ℚ : (x y : ℚ) → x -ℚ y ＝ zero-ℚ → x ＝ y
+  eq-is-zero-diff-ℚ x y x-y=0 =
+    inv
+      ( equational-reasoning
+        y
+        ＝ zero-ℚ +ℚ y by inv (left-unit-law-add-ℚ y)
+        ＝ (x -ℚ y) +ℚ y by ap (_+ℚ y) (inv x-y=0)
+        ＝ x +ℚ (neg-ℚ y +ℚ y) by associative-add-ℚ _ _ _
+        ＝ x +ℚ zero-ℚ by ap (x +ℚ_) (left-inverse-law-add-ℚ y)
+        ＝ x by right-unit-law-add-ℚ x)
+```
+
 ### Triangular identity for addition and difference of rational numbers
 
 ```agda

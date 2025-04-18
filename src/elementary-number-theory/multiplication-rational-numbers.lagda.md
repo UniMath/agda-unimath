@@ -18,9 +18,12 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -51,6 +54,10 @@ mul-ℚ' x y = mul-ℚ y x
 
 infixl 40 _*ℚ_
 _*ℚ_ = mul-ℚ
+
+ap-mul-ℚ :
+  {x y x' y' : ℚ} → x ＝ x' → y ＝ y' → x *ℚ y ＝ x' *ℚ y'
+ap-mul-ℚ p q = ap-binary mul-ℚ p q
 ```
 
 ## Properties
@@ -349,6 +356,39 @@ abstract
           ( sim-reduced-fraction-ℤ y)))
 ```
 
+### The inclusion of integers preserves multiplication
+
+```agda
+abstract
+  mul-rational-ℤ :
+    (x y : ℤ) → rational-ℤ x *ℚ rational-ℤ y ＝ rational-ℤ (x *ℤ y)
+  mul-rational-ℤ x y =
+    equational-reasoning
+      rational-ℤ x *ℚ rational-ℤ y
+      ＝
+        rational-fraction-ℤ (in-fraction-ℤ x) *ℚ
+        rational-fraction-ℤ (in-fraction-ℤ y)
+        by
+          ap-mul-ℚ
+            ( inv (is-retraction-rational-fraction-ℚ (rational-ℤ x)))
+            ( inv (is-retraction-rational-fraction-ℚ (rational-ℤ y)))
+      ＝
+        rational-fraction-ℤ (in-fraction-ℤ x *fraction-ℤ in-fraction-ℤ y)
+        by mul-rational-fraction-ℤ _ _
+      ＝ rational-fraction-ℤ (in-fraction-ℤ (x *ℤ y))
+        by ap rational-fraction-ℤ (mul-in-fraction-ℤ x y)
+      ＝ rational-ℤ (x *ℤ y) by is-retraction-rational-fraction-ℚ _
+```
+
+### The inclusion of natural numbers preserves multiplication
+
+```agda
+abstract
+  mul-rational-ℕ :
+    (x y : ℕ) → rational-ℕ x *ℚ rational-ℕ y ＝ rational-ℕ (x *ℕ y)
+  mul-rational-ℕ x y = mul-rational-ℤ _ _ ∙ ap rational-ℤ (mul-int-ℕ x y)
+```
+
 ### `succ-ℚ p * q = q + (p * q)`
 
 ```agda
@@ -375,7 +415,7 @@ abstract
         by ap-add-ℚ (right-unit-law-mul-ℚ p) refl
 ```
 
-### `2q = q + q
+### `2q = q + q`
 
 ```agda
 abstract

@@ -15,13 +15,18 @@ open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.function-types
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -126,4 +131,52 @@ abstract
           ap
             ( λ z → square-ℚ x +ℚ z +ℚ square-ℚ y)
             ( right-negative-law-mul-ℚ (rational-ℕ 2) (x *ℚ y))
+```
+
+### If a rational number is positive, so is its square
+
+```agda
+abstract
+  is-positive-square-positive-ℚ :
+    (x : ℚ) → is-positive-ℚ x → is-positive-ℚ (square-ℚ x)
+  is-positive-square-positive-ℚ x pos-x =
+    is-positive-mul-ℚ {x} {x} pos-x pos-x
+```
+
+### If a rational number is negative, its square is positive
+
+```agda
+abstract
+  is-positive-square-negative-ℚ :
+    (x : ℚ) → is-negative-ℚ x → is-positive-ℚ (square-ℚ x)
+  is-positive-square-negative-ℚ x neg-x =
+    is-positive-mul-negative-ℚ {x} {x} neg-x neg-x
+```
+
+### If the square of a rational number is 0, it is zero
+
+```agda
+abstract
+  is-zero-square-is-zero-ℚ : (x : ℚ) → square-ℚ x ＝ zero-ℚ → x ＝ zero-ℚ
+  is-zero-square-is-zero-ℚ x x²=0 =
+    trichotomy-sign-ℚ
+      ( x)
+      ( λ neg-x →
+        ex-falso
+          ( not-is-positive-zero-ℚ
+            ( tr is-positive-ℚ x²=0 (is-positive-square-negative-ℚ x neg-x))))
+      ( id)
+      ( λ pos-x →
+        ex-falso
+          ( not-is-positive-zero-ℚ
+            ( tr is-positive-ℚ x²=0 (is-positive-square-positive-ℚ x pos-x))))
+```
+
+### Squares distribute over multiplication
+
+```agda
+abstract
+  distributive-square-mul-ℚ :
+    (x y : ℚ) → square-ℚ (x *ℚ y) ＝ square-ℚ x *ℚ square-ℚ y
+  distributive-square-mul-ℚ x y = interchange-law-mul-mul-ℚ x y x y
 ```

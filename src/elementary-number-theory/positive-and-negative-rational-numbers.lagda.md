@@ -16,6 +16,8 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.coproduct-types
 open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 </details>
@@ -44,4 +46,25 @@ abstract
       ( is-negative-le-zero-ℚ q)
       ( is-nonnegative-leq-zero-ℚ q)
       ( decide-le-leq-ℚ q zero-ℚ)
+```
+
+### Trichotomies
+
+#### A rational number is either negative, zero, or positive
+
+```agda
+abstract
+  trichotomy-sign-ℚ :
+    {l : Level} {A : UU l} (x : ℚ) →
+    ( is-negative-ℚ x → A) →
+    ( Id x zero-ℚ → A) →
+    ( is-positive-ℚ x → A) →
+    A
+  trichotomy-sign-ℚ x neg zero pos =
+    trichotomy-le-ℚ
+      ( x)
+      ( zero-ℚ)
+      ( λ x<0 → neg (is-negative-le-zero-ℚ x x<0))
+      ( zero)
+      ( λ 0<x → pos (is-positive-le-zero-ℚ x 0<x))
 ```
