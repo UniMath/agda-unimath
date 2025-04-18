@@ -28,7 +28,8 @@ open import foundation.transport-along-identifications
 
 ## Idea
 
-The {{#concept "arithmetic mean-geometric mean inequality" WD="AM-GM inequality" WDID=Q841170}}
+The
+{{#concept "arithmetic mean-geometric mean inequality" WD="AM-GM inequality" WDID=Q841170}}
 states that $\sqrt{xy} \leq \frac{x + y}{2}$, where that square root is defined.
 We cannot take square roots on arbitrary
 [rational numbers](elementary-number-theory.rational-numbers.md), but we can
