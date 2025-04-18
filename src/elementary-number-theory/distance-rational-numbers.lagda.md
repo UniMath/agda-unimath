@@ -18,6 +18,8 @@ open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.maximum-rational-numbers
+open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
@@ -277,4 +279,47 @@ le-dist-iff-neighborhood-le-ℚ :
   neighborhood-le-ℚ ε p q
 pr1 (le-dist-iff-neighborhood-le-ℚ ε p q) = neighborhood-le-le-dist-ℚ ε p q
 pr2 (le-dist-iff-neighborhood-le-ℚ ε p q) = le-dist-neighborhood-le-ℚ ε p q
+```
+
+### The distance between two rational numbers is the difference of their maximum and minimum
+
+```agda
+abstract
+  eq-dist-diff-leq-ℚ : (p q : ℚ) → leq-ℚ p q → rational-dist-ℚ p q ＝ q -ℚ p
+  eq-dist-diff-leq-ℚ p q p≤q =
+    equational-reasoning
+      rational-dist-ℚ p q
+      ＝ rational-dist-ℚ q p by ap rational-ℚ⁰⁺ (commutative-dist-ℚ p q)
+      ＝ q -ℚ p
+        by
+          rational-abs-zero-leq-ℚ
+            ( q -ℚ p)
+            ( backward-implication (iff-translate-diff-leq-zero-ℚ p q) p≤q)
+
+  eq-dist-diff-max-min-ℚ :
+    (p q : ℚ) → rational-dist-ℚ p q ＝ max-ℚ p q -ℚ min-ℚ p q
+  eq-dist-diff-max-min-ℚ p q =
+    rec-coproduct
+      ( λ p≤q →
+        equational-reasoning
+          rational-dist-ℚ p q
+          ＝ q -ℚ p by eq-dist-diff-leq-ℚ p q p≤q
+          ＝ max-ℚ p q -ℚ min-ℚ p q
+            by
+              inv
+                ( ap-diff-ℚ
+                  ( left-leq-right-max-ℚ p q p≤q)
+                  ( left-leq-right-min-ℚ p q p≤q)))
+      ( λ q≤p →
+        equational-reasoning
+          rational-dist-ℚ p q
+          ＝ rational-dist-ℚ q p by ap rational-ℚ⁰⁺ (commutative-dist-ℚ p q)
+          ＝ p -ℚ q by eq-dist-diff-leq-ℚ q p q≤p
+          ＝ max-ℚ p q -ℚ min-ℚ p q
+            by
+              inv
+                ( ap-diff-ℚ
+                  ( right-leq-left-max-ℚ p q q≤p)
+                  ( right-leq-left-min-ℚ p q q≤p)))
+      ( linear-leq-ℚ p q)
 ```
