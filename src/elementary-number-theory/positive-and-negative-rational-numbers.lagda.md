@@ -7,12 +7,13 @@ module elementary-number-theory.positive-and-negative-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.negative-rational-numbers
+open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.nonnegative-rational-numbers
-open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
-open import elementary-number-theory.inequality-rational-numbers
+
 open import foundation.coproduct-types
 open import foundation.functoriality-coproduct-types
 ```

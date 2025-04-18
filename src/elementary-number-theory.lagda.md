@@ -143,6 +143,7 @@ open import elementary-number-theory.peano-arithmetic public
 open import elementary-number-theory.pisano-periods public
 open import elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility public
 open import elementary-number-theory.positive-and-negative-integers public
+open import elementary-number-theory.positive-and-negative-rational-numbers public
 open import elementary-number-theory.positive-conatural-numbers public
 open import elementary-number-theory.positive-integer-fractions public
 open import elementary-number-theory.positive-integers public

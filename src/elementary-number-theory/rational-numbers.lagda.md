@@ -10,10 +10,10 @@ module elementary-number-theory.rational-numbers where
 open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integer-fractions
-open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.mediant-integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.reduced-integer-fractions

@@ -9,20 +9,20 @@ module elementary-number-theory.squares-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.nonnegative-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.negative-rational-numbers
-open import elementary-number-theory.positive-and-negative-rational-numbers
+open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.negative-rational-numbers
+open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
+open import elementary-number-theory.rational-numbers
 
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
-open import foundation.decidable-types
-open import elementary-number-theory.addition-rational-numbers
 ```
 
 </details>
@@ -117,7 +117,9 @@ abstract
       ＝ square-ℚ x +ℚ (rational-ℕ 2 *ℚ neg-ℚ (x *ℚ y)) +ℚ square-ℚ y
         by
           ap-add-ℚ
-            ( ap (x *ℚ x +ℚ_) (ap (rational-ℕ 2 *ℚ_) (right-negative-law-mul-ℚ x y)))
+            ( ap
+              ( x *ℚ x +ℚ_)
+              ( ap (rational-ℕ 2 *ℚ_) (right-negative-law-mul-ℚ x y)))
             ( square-neg-ℚ y)
       ＝ square-ℚ x -ℚ (rational-ℕ 2 *ℚ (x *ℚ y)) +ℚ square-ℚ y
         by

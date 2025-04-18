@@ -10,9 +10,9 @@ module elementary-number-theory.difference-rational-numbers where
 
 ```agda
 open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.integers
+open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions

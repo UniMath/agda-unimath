@@ -9,18 +9,19 @@ module elementary-number-theory.inequality-arithmetic-geometric-means-rational-n
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integers
-open import elementary-number-theory.squares-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.difference-rational-numbers
-open import foundation.identity-types
 open import elementary-number-theory.nonnegative-rational-numbers
-open import foundation.transport-along-identifications
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.squares-rational-numbers
+
 open import foundation.action-on-identifications-functions
-open import elementary-number-theory.additive-group-of-rational-numbers
+open import foundation.identity-types
+open import foundation.transport-along-identifications
 ```
 
 </details>
