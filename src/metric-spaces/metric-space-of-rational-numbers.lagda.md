@@ -83,6 +83,9 @@ premetric-leq-ℚ d x y =
   product-Prop
     ( lower-neighborhood-leq-prop-ℚ d x y)
     ( lower-neighborhood-leq-prop-ℚ d y x)
+
+neighborhood-leq-ℚ : (d : ℚ⁺) (x y : ℚ) → UU lzero
+neighborhood-leq-ℚ d x y = type-Prop (premetric-leq-ℚ d x y)
 ```
 
 ## Properties

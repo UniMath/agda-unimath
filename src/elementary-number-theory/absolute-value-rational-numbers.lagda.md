@@ -15,6 +15,7 @@ open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -70,6 +71,19 @@ pr2 (abs-ℚ q) = is-nonnegative-rational-abs-ℚ q
 ```
 
 ## Properties
+
+### Bounds on both `p` and `-p` are bounds on `|p|`
+
+```agda
+abstract
+  leq-abs-leq-leq-neg-ℚ :
+    (p q : ℚ) → leq-ℚ p q → leq-ℚ (neg-ℚ p) q → leq-ℚ (rational-abs-ℚ p) q
+  leq-abs-leq-leq-neg-ℚ p q = leq-max-leq-both-ℚ q p (neg-ℚ p)
+
+  le-abs-le-le-neg-ℚ :
+    (p q : ℚ) → le-ℚ p q → le-ℚ (neg-ℚ p) q → le-ℚ (rational-abs-ℚ p) q
+  le-abs-le-le-neg-ℚ p q = le-max-le-both-ℚ q p (neg-ℚ p)
+```
 
 ### The absolute value of a nonnegative rational number is the number itself
 
