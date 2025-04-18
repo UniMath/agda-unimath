@@ -139,13 +139,6 @@ is-one-ℚ : ℚ → UU lzero
 is-one-ℚ x = (x ＝ one-ℚ)
 ```
 
-### Other useful rational constants
-
-```agda
-two-ℚ : ℚ
-two-ℚ = rational-ℕ 2
-```
-
 ### The negative of a rational number
 
 ```agda

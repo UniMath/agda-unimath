@@ -379,7 +379,7 @@ abstract
 
 ```agda
 abstract
-  mul-two-ℚ : (q : ℚ) → two-ℚ *ℚ q ＝ q +ℚ q
+  mul-two-ℚ : (q : ℚ) → rational-ℕ 2 *ℚ q ＝ q +ℚ q
   mul-two-ℚ q =
     equational-reasoning
       rational-ℤ (one-ℤ +ℤ one-ℤ) *ℚ q

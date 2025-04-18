@@ -26,8 +26,10 @@ open import foundation.transport-along-identifications
 
 ## Idea
 
-Though we cannot e.g. take square roots on the integers to compute geometric
-means, we can still prove the inequality that `4xy ≤ (x + y)²`.
+The {{#concept "arithmetic mean-geometric mean inequality" WD="AM-GM inequality" WDID=Q841170}}
+states that $\sqrt{xy} \leq \frac{x + y}{2}$.  We cannot take square roots on
+integers, but we can prove the equivalent inequality that
+$4xy \leq (x + y)^2$.
 
 ## Proof
 

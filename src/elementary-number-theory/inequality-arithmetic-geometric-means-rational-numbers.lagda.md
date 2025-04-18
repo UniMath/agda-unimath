@@ -28,8 +28,12 @@ open import foundation.transport-along-identifications
 
 ## Idea
 
-Though we cannot e.g. take square roots on the rational numbers to compute
-geometric means, we can still prove the inequality that `4xy ≤ (x + y)²`.
+The {{#concept "arithmetic mean-geometric mean inequality" WD="AM-GM inequality" WDID=Q841170}}
+states that $\sqrt{xy} \leq \frac{x + y}{2}$, where that square root is defined.
+We cannot take square roots on arbitrary
+[rational numbers](elementary-number-theory.rational-numbers.md), but we can
+prove the equivalent inequality that $4xy \leq (x + y)^2$ for all rational
+numbers.
 
 ```agda
 abstract
