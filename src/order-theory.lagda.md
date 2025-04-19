@@ -52,6 +52,7 @@ open import order-theory.homomorphisms-meet-suplattices public
 open import order-theory.homomorphisms-suplattices public
 open import order-theory.ideals-preorders public
 open import order-theory.incidence-algebras public
+open import order-theory.increasing-sequences-posets public
 open import order-theory.inflationary-maps-posets public
 open import order-theory.inflationary-maps-preorders public
 open import order-theory.inflattices public
@@ -83,6 +84,7 @@ open import order-theory.locales public
 open import order-theory.locally-finite-posets public
 open import order-theory.lower-bounds-large-posets public
 open import order-theory.lower-bounds-posets public
+open import order-theory.lower-bounds-sequences-preorders public
 open import order-theory.lower-sets-large-posets public
 open import order-theory.lower-types-preorders public
 open import order-theory.maximal-chains-posets public
@@ -114,12 +116,16 @@ open import order-theory.reflective-galois-connections-large-posets public
 open import order-theory.resizing-posets public
 open import order-theory.resizing-preorders public
 open import order-theory.resizing-suplattices public
+open import order-theory.sequences-posets public
+open import order-theory.sequences-preorders public
+open import order-theory.sequences-strictly-preordered-sets public
 open import order-theory.similarity-of-elements-large-posets public
 open import order-theory.similarity-of-elements-large-preorders public
 open import order-theory.similarity-of-order-preserving-maps-large-posets public
 open import order-theory.similarity-of-order-preserving-maps-large-preorders public
 open import order-theory.strict-order-preserving-maps public
 open import order-theory.strict-preorders public
+open import order-theory.strictly-increasing-sequences-strictly-preordered-sets public
 open import order-theory.strictly-inflationary-maps-strict-preorders public
 open import order-theory.strictly-preordered-sets public
 open import order-theory.subposets public
@@ -137,6 +143,7 @@ open import order-theory.transposition-inequalities-along-sections-of-order-pres
 open import order-theory.upper-bounds-chains-posets public
 open import order-theory.upper-bounds-large-posets public
 open import order-theory.upper-bounds-posets public
+open import order-theory.upper-bounds-sequences-preorders public
 open import order-theory.upper-sets-large-posets public
 open import order-theory.well-founded-relations public
 open import order-theory.zorns-lemma public
