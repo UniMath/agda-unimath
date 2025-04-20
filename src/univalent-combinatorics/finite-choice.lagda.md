@@ -151,3 +151,39 @@ module _
         ( trunc-Prop ((x : A) → B x))
         ( λ e → unit-trunc-Prop (choice-count-Σ-is-finite-fiber K e g H))
 ```
+
+### Finite choice with respect to double negation
+
+```agda
+abstract
+  finite-double-negation-choice-Fin :
+    {l1 : Level} (k : ℕ) {Y : Fin k → UU l1} →
+    ((x : Fin k) → ¬¬ (Y x)) → ¬¬ ((x : Fin k) → Y x)
+  finite-double-negation-choice-Fin 0 H = intro-double-negation ind-empty
+  finite-double-negation-choice-Fin (succ-ℕ k) {Y} H =
+    map-double-negation
+      ( λ p → ind-coproduct Y (pr1 p) (pr2 p))
+      ( map-inv-distributive-double-negation-product
+        ( finite-double-negation-choice-Fin k (H ∘ inl) ,
+          map-double-negation ind-unit (H (inr star))))
+
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : X → UU l2}
+  where
+
+  abstract
+    finite-double-negation-choice-count :
+      count X → ((x : X) → ¬¬ (Y x)) → ¬¬ ((x : X) → Y x)
+    finite-double-negation-choice-count (k , e) H =
+      map-double-negation
+        ( map-inv-equiv (equiv-precomp-Π e Y))
+        ( finite-double-negation-choice-Fin k (H ∘ map-equiv e))
+
+  abstract
+    finite-double-negation-choice :
+      is-finite X → ((x : X) → ¬¬ (Y x)) → ¬¬ ((x : X) → Y x)
+    finite-double-negation-choice is-finite-X H =
+      apply-universal-property-trunc-Prop is-finite-X
+        ( double-negation-type-Prop ((x : X) → Y x))
+        ( λ e → finite-double-negation-choice-count e H)
+```
