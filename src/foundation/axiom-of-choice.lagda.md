@@ -66,7 +66,7 @@ AC-0 l1 l2 =
 ```agda
 is-set-projective-AC-0 :
   {l1 l2 l3 : Level} → AC-0 l2 (l1 ⊔ l2) →
-  (X : UU l3) → is-set-projective l1 l2 X
+  (X : UU l3) → is-set-projective-Level l1 l2 X
 is-set-projective-AC-0 ac X A B f h =
   map-trunc-Prop
     ( ( map-Σ
@@ -78,7 +78,7 @@ is-set-projective-AC-0 ac X A B f h =
 
 AC-0-is-set-projective :
   {l1 l2 : Level} →
-  ({l : Level} (X : UU l) → is-set-projective (l1 ⊔ l2) l1 X) →
+  ({l : Level} (X : UU l) → is-set-projective-Level (l1 ⊔ l2) l1 X) →
   AC-0 l1 l2
 AC-0-is-set-projective H A B K =
   map-trunc-Prop
