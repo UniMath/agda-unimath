@@ -292,8 +292,8 @@ private
 
 ### Trying a path
 
-The following example tries to solve a goal by using path `p` or `inv p`. This
-example was adapted from
+The following example tries to solve a goal by using the path `p` or `inv p`.
+This example was adapted from
 
 ```agda
   private
