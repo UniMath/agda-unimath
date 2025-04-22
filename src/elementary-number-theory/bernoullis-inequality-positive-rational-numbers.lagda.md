@@ -106,7 +106,7 @@ module _
               ( one-ℚ)
               ( rational-ℚ⁺
                 ( seq-standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h n))
-              ( leq-init-arithmetic-sequence-ℚ⁺
+              ( leq-initial-arithmetic-sequence-ℚ⁺
                 ( standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h)
                 ( n)))))
 ```

@@ -260,14 +260,14 @@ module _
   where
 
   abstract
-    leq-init-arithmetic-sequence-ℚ⁺ :
+    leq-initial-arithmetic-sequence-ℚ⁺ :
       (n : ℕ) →
       leq-ℚ⁺
         ( initial-term-arithmetic-sequence-ℚ⁺ u)
         ( seq-arithmetic-sequence-ℚ⁺ u n)
-    leq-init-arithmetic-sequence-ℚ⁺ zero-ℕ =
+    leq-initial-arithmetic-sequence-ℚ⁺ zero-ℕ =
       refl-leq-ℚ (rational-ℚ⁺ (initial-term-arithmetic-sequence-ℚ⁺ u))
-    leq-init-arithmetic-sequence-ℚ⁺ (succ-ℕ n) =
+    leq-initial-arithmetic-sequence-ℚ⁺ (succ-ℕ n) =
       leq-le-ℚ⁺
       { initial-term-arithmetic-sequence-ℚ⁺ u}
       { seq-arithmetic-sequence-ℚ⁺ u (succ-ℕ n)}
@@ -275,7 +275,7 @@ module _
         ( rational-ℚ⁺ (initial-term-arithmetic-sequence-ℚ⁺ u))
         ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
         ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u (succ-ℕ n)))
-        ( leq-init-arithmetic-sequence-ℚ⁺ n)
+        ( leq-initial-arithmetic-sequence-ℚ⁺ n)
         ( le-succ-seq-arithmetic-sequence-ℚ⁺ u n))
 ```
 
