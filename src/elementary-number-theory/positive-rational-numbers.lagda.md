@@ -155,11 +155,11 @@ abstract
 ### The positive rational numbers form a set
 
 ```agda
-is-set-ℚ⁺ : is-set ℚ⁺
-is-set-ℚ⁺ = is-set-type-subtype is-positive-prop-ℚ is-set-ℚ
-
 set-ℚ⁺ : Set lzero
-set-ℚ⁺ = ℚ⁺ , is-set-ℚ⁺
+set-ℚ⁺ = set-subset ℚ-Set is-positive-prop-ℚ
+
+is-set-ℚ⁺ : is-set ℚ⁺
+is-set-ℚ⁺ = is-set-type-Set set-ℚ⁺
 ```
 
 ### The rational image of a positive integer is positive
