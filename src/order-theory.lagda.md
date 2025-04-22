@@ -84,7 +84,6 @@ open import order-theory.locales public
 open import order-theory.locally-finite-posets public
 open import order-theory.lower-bounds-large-posets public
 open import order-theory.lower-bounds-posets public
-open import order-theory.lower-bounds-sequences-preorders public
 open import order-theory.lower-sets-large-posets public
 open import order-theory.lower-types-preorders public
 open import order-theory.maximal-chains-posets public
@@ -143,7 +142,6 @@ open import order-theory.transposition-inequalities-along-sections-of-order-pres
 open import order-theory.upper-bounds-chains-posets public
 open import order-theory.upper-bounds-large-posets public
 open import order-theory.upper-bounds-posets public
-open import order-theory.upper-bounds-sequences-preorders public
 open import order-theory.upper-sets-large-posets public
 open import order-theory.well-founded-relations public
 open import order-theory.zorns-lemma public
