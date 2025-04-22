@@ -152,7 +152,7 @@ module _
         ( bounded-ratio-unitary-arithmetic-sequence-ℚ⁺ h n)
 ```
 
-## References
+## External links
 
 - [Bernoulli's inequality](https://en.wikipedia.org/wiki/Bernoulli%27s_inequality)
   at Wikipedia
