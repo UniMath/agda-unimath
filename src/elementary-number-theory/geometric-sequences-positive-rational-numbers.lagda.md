@@ -51,11 +51,11 @@ is an [arithmetic sequence](group-theory.arithmetic-sequences-semigroups.md) in
 the multiplicative semigroup of positive rational numbers. The multplicative
 common difference in `ℚ⁺` is called the _common ratio_ of the sequence.
 
-Constant sequences are the geometric sequences with common ratio equal to `1`;
-multiplication and
-[inversion](elementary-number-theory.multiplicative-group-of-positive-rational-numbers.md)
-preserve geometric sequences of positive natural numbers and transport their
-common ratio.
+Constant sequences are the geometric sequences with common ratio equal to `1`.
+The product of two geometric sequences is geometric and the
+[inverse](elementary-number-theory.multiplicative-group-of-positive-rational-numbers.md)
+of a geometric sequence is geometric; moreover the map from a sequence to its
+common ratio commutes with multiplication and inversion.
 
 ## Definitions
 
