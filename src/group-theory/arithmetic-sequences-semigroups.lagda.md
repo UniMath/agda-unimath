@@ -187,7 +187,7 @@ module _
       ( refl)
 ```
 
-## References
+## External links
 
 - [Arithmetic progressions](https://en.wikipedia.org/wiki/Arithmetic_progression)
   at Wikipedia
