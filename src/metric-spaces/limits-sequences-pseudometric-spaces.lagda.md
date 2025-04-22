@@ -215,7 +215,7 @@ module _
             ( m d)
             ( n)
             ( extract-subsequence u v n)
-            ( is-sup-linear-extract-subsequence u v n)
+            ( is-superlinear-extract-subsequence u v n)
             ( H)))
 
   preserves-limit-subsequence-Pseudometric-Space :
