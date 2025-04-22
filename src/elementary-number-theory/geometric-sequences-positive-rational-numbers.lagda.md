@@ -212,11 +212,12 @@ module _
   where
 
   is-geometric-const-sequence-ℚ⁺ : is-geometric-sequence-ℚ⁺ (const ℕ a)
-  is-geometric-const-sequence-ℚ⁺ = one-ℚ⁺ , λ _ → inv (right-unit-law-mul-ℚ⁺ a)
+  is-geometric-const-sequence-ℚ⁺ =
+    ( one-ℚ⁺ , λ _ → inv (right-unit-law-mul-ℚ⁺ a))
 
   const-geometric-sequence-ℚ⁺ : geometric-sequence-ℚ⁺
   const-geometric-sequence-ℚ⁺ =
-    const ℕ a , is-geometric-const-sequence-ℚ⁺
+    ( const ℕ a , is-geometric-const-sequence-ℚ⁺)
 ```
 
 ### A geometric sequence of positive rational numbers with common ratio equal to `1` is constant
