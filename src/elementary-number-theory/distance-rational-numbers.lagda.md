@@ -199,8 +199,8 @@ abstract
           ( rational-dist-ℚ p q)
           ( ε)
           ( |p-q|≤ε)
-          ( leq-reversed-diff-dist-ℚ p q))) ,
-      leq-transpose-left-diff-ℚ
+          ( leq-reversed-diff-dist-ℚ p q)))) ,
+    ( leq-transpose-left-diff-ℚ
       ( p)
       ( ε)
       ( q)
