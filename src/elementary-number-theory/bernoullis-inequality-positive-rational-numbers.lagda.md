@@ -44,7 +44,7 @@ difference `h` is lesser than or equal to the geometric sequence with initial
 term `1` and common ratio `1 + h`:
 
 ```text
-∀ (h : ℚ⁺) (n : ℕ) → 1 + n h ≤ (1 + h)ⁿ
+  ∀ (h : ℚ⁺) (n : ℕ), 1 + n * h ≤ (1 + h)ⁿ
 ```
 
 ## Lemma
