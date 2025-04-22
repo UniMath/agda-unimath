@@ -1,4 +1,4 @@
-# Bernouilli's inequality on the positive rational numbers
+# Bernoulli's inequality on the positive rational numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
