@@ -131,7 +131,7 @@ htpy-seq-arithmetic-sequence-ℚ⁺ =
   htpy-seq-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺
 ```
 
-### The nth term of the arithmetic sequence with initial term `a` and common difference `d` is `a + n d`
+### The nth term of the arithmetic sequence with initial term `a` and common difference `d` is `a + n * d`
 
 ```agda
 module _
