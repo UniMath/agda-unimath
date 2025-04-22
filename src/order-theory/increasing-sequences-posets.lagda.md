@@ -51,9 +51,39 @@ module _
     type-Prop is-increasing-prop-sequence-Poset
 ```
 
+### The poset of increasing sequences in a poset
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2)
+  where
+
+  increasing-sequence-Poset : Poset (l1 ⊔ l2) l2
+  increasing-sequence-Poset =
+    poset-Subposet
+      ( sequence-Poset P)
+      ( is-increasing-prop-sequence-Poset P)
+
+  type-increasing-sequence-Poset : UU (l1 ⊔ l2)
+  type-increasing-sequence-Poset =
+    type-Poset increasing-sequence-Poset
+
+  seq-increasing-sequence-Poset :
+    type-increasing-sequence-Poset →
+    type-sequence-Poset P
+  seq-increasing-sequence-Poset = pr1
+
+  is-increasing-seq-increasing-sequence-Poset :
+    (u : type-increasing-sequence-Poset) →
+    is-increasing-sequence-Poset
+      ( P)
+      ( seq-increasing-sequence-Poset u)
+  is-increasing-seq-increasing-sequence-Poset = pr2
+```
+
 ## Properties
 
-### A sequence `u` in a poset is increasing if and only if `uₙ ≤ uₙ₊₁` for all n : ℕ
+### A sequence `u` in a poset is increasing if and only if `uₙ ≤ uₙ₊₁` for all `n : ℕ`
 
 ```agda
 module _
