@@ -386,7 +386,7 @@ module _
 - [Bernoulli's inequality in ℚ⁺](elementary-number-theory.bernoullis-inequality-positive-rational-numbers.md):
   comparison between arithmetic and geometric sequences in ℚ⁺.
 
-## References
+## External links
 
 - [Geometric progressions](https://en.wikipedia.org/wiki/Geometric_progression)
   at Wikipedia
