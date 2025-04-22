@@ -36,7 +36,6 @@ open import group-theory.arithmetic-sequences-semigroups
 open import group-theory.powers-of-elements-monoids
 
 open import order-theory.increasing-sequences-posets
-open import order-theory.infinite-limit-sequences-preorders
 open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 open import order-theory.strictly-preordered-sets
 ```
@@ -54,8 +53,7 @@ additive [semigroup](group-theory.semigroups.md) of
 
 The values of an arithmetic sequence are determined by its initial value and its
 common difference; an arithmetic sequence of positive rational numbers is
-[strictly increasing](order-theory.strictly-increasing-sequences-strictly-preordered-sets.md)
-and [tends to infinity](order-theory.infinite-limit-sequences-preorders.md).
+[strictly increasing](order-theory.strictly-increasing-sequences-strictly-preordered-sets.md).
 
 ## Definitions
 
@@ -96,9 +94,9 @@ module _
   is-common-difference-arithmetic-sequence-ℚ⁺ =
     is-common-difference-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺ u
 
-  init-term-arithmetic-sequence-ℚ⁺ : ℚ⁺
-  init-term-arithmetic-sequence-ℚ⁺ =
-    init-term-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺ u
+  initial-term-arithmetic-sequence-ℚ⁺ : ℚ⁺
+  initial-term-arithmetic-sequence-ℚ⁺ =
+    initial-term-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺ u
 ```
 
 ### The standard arithmetic sequence of positive rational numbers with initial term `a` and common difference `d`
@@ -124,8 +122,8 @@ module _
 ```agda
 htpy-seq-arithmetic-sequence-ℚ⁺ :
   ( u v : arithmetic-sequence-ℚ⁺) →
-  ( init-term-arithmetic-sequence-ℚ⁺ u ＝
-    init-term-arithmetic-sequence-ℚ⁺ v) →
+  ( initial-term-arithmetic-sequence-ℚ⁺ u ＝
+    initial-term-arithmetic-sequence-ℚ⁺ v) →
   ( common-difference-arithmetic-sequence-ℚ⁺ u ＝
     common-difference-arithmetic-sequence-ℚ⁺ v) →
   seq-arithmetic-sequence-ℚ⁺ u ~ seq-arithmetic-sequence-ℚ⁺ v
@@ -133,7 +131,7 @@ htpy-seq-arithmetic-sequence-ℚ⁺ =
   htpy-seq-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺
 ```
 
-### The nth term of the arithmetic sequence with initial term `a` and common difference `d` is `a + n d`
+### The nth term of the arithmetic sequence with initial term `a` and common difference `d` is `a + n * d`
 
 ```agda
 module _
@@ -174,14 +172,14 @@ module _
       ( n : ℕ) →
       Id
         ( add-ℚ
-          ( rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
+          ( rational-ℚ⁺ (initial-term-arithmetic-sequence-ℚ⁺ u))
           ( mul-ℚ
             ( rational-ℕ n)
             ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u))))
         ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
     compute-arithmetic-sequence-ℚ⁺ n =
       ( compute-standard-arithmetic-sequence-ℚ⁺
-        ( init-term-arithmetic-sequence-ℚ⁺ u)
+        ( initial-term-arithmetic-sequence-ℚ⁺ u)
         ( common-difference-arithmetic-sequence-ℚ⁺ u)
         ( n)) ∙
       ( ap
@@ -262,106 +260,23 @@ module _
   where
 
   abstract
-    leq-init-arithmetic-sequence-ℚ⁺ :
+    leq-initial-arithmetic-sequence-ℚ⁺ :
       (n : ℕ) →
       leq-ℚ⁺
-        ( init-term-arithmetic-sequence-ℚ⁺ u)
+        ( initial-term-arithmetic-sequence-ℚ⁺ u)
         ( seq-arithmetic-sequence-ℚ⁺ u n)
-    leq-init-arithmetic-sequence-ℚ⁺ zero-ℕ =
-      refl-leq-ℚ (rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
-    leq-init-arithmetic-sequence-ℚ⁺ (succ-ℕ n) =
+    leq-initial-arithmetic-sequence-ℚ⁺ zero-ℕ =
+      refl-leq-ℚ (rational-ℚ⁺ (initial-term-arithmetic-sequence-ℚ⁺ u))
+    leq-initial-arithmetic-sequence-ℚ⁺ (succ-ℕ n) =
       leq-le-ℚ⁺
-      { init-term-arithmetic-sequence-ℚ⁺ u}
+      { initial-term-arithmetic-sequence-ℚ⁺ u}
       { seq-arithmetic-sequence-ℚ⁺ u (succ-ℕ n)}
       ( concatenate-leq-le-ℚ
-        ( rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
+        ( rational-ℚ⁺ (initial-term-arithmetic-sequence-ℚ⁺ u))
         ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
         ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u (succ-ℕ n)))
-        ( leq-init-arithmetic-sequence-ℚ⁺ n)
+        ( leq-initial-arithmetic-sequence-ℚ⁺ n)
         ( le-succ-seq-arithmetic-sequence-ℚ⁺ u n))
-```
-
-### Arithmetic sequences of positive rational numbers tend to infinity
-
-```agda
-module _
-  (u : arithmetic-sequence-ℚ⁺)
-  where
-
-  opaque
-    is-unbounded-arithmetic-sequence-ℚ⁺ :
-      (M : ℚ⁺) → Σ ℕ (leq-ℚ⁺ M ∘ seq-arithmetic-sequence-ℚ⁺ u)
-    is-unbounded-arithmetic-sequence-ℚ⁺ M =
-      tot
-        ( λ n I →
-          leq-le-ℚ⁺
-            { M}
-            { seq-arithmetic-sequence-ℚ⁺ u n}
-            ( tr
-              ( le-ℚ (rational-ℚ⁺ M))
-              ( compute-arithmetic-sequence-ℚ⁺ u n)
-              ( transitive-le-ℚ
-                ( rational-ℚ⁺ M)
-                ( mul-ℚ
-                  ( rational-ℕ n)
-                  ( rational-common-difference-arithmetic-sequence-ℚ⁺ u))
-                ( add-ℚ
-                  ( rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
-                  ( mul-ℚ
-                    ( rational-ℕ n)
-                    ( rational-common-difference-arithmetic-sequence-ℚ⁺ u)))
-                ( le-left-add-rational-ℚ⁺
-                  ( mul-ℚ
-                    ( rational-ℕ n)
-                    ( rational-common-difference-arithmetic-sequence-ℚ⁺ u))
-                  ( init-term-arithmetic-sequence-ℚ⁺ u))
-                ( I))))
-        ( bound-archimedean-property-ℚ
-          ( rational-common-difference-arithmetic-sequence-ℚ⁺ u)
-          ( rational-ℚ⁺ M)
-          ( is-positive-rational-ℚ⁺
-            ( common-difference-arithmetic-sequence-ℚ⁺ u)))
-
-  modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ : ℚ⁺ → ℕ
-  modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ M =
-    pr1 (is-unbounded-arithmetic-sequence-ℚ⁺ M)
-
-  is-modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ :
-    is-modulus-limit-∞-sequence-Preorder
-      ( preorder-ℚ⁺)
-      ( seq-arithmetic-sequence-ℚ⁺ u)
-      ( modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺)
-  is-modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ M n I =
-    transitive-leq-ℚ⁺
-      ( M)
-      ( seq-arithmetic-sequence-ℚ⁺ u
-        ( modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ M))
-      ( seq-arithmetic-sequence-ℚ⁺ u n)
-      ( is-increasing-seq-arithmetic-sequence-ℚ⁺ u
-        ( modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ M)
-        ( n)
-        ( I))
-      ( pr2 (is-unbounded-arithmetic-sequence-ℚ⁺ M))
-
-  modulus-limit-∞-arithmetic-sequence-ℚ⁺ :
-    modulus-limit-∞-sequence-Preorder
-      ( preorder-ℚ⁺)
-      ( seq-arithmetic-sequence-ℚ⁺ u)
-  modulus-limit-∞-arithmetic-sequence-ℚ⁺ =
-    modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺ ,
-    is-modulus-modulus-limit-∞-arithmetic-sequence-ℚ⁺
-
-  is-limit-∞-arithmetic-sequence-ℚ⁺ :
-    is-limit-∞-sequence-Preorder
-      ( preorder-ℚ⁺)
-      ( seq-arithmetic-sequence-ℚ⁺ u)
-  is-limit-∞-arithmetic-sequence-ℚ⁺ =
-    unit-trunc-Prop modulus-limit-∞-arithmetic-sequence-ℚ⁺
-
-  limit-∞-arithmetic-sequence-ℚ⁺ :
-    limit-∞-sequence-Preorder preorder-ℚ⁺
-  limit-∞-arithmetic-sequence-ℚ⁺ =
-    seq-arithmetic-sequence-ℚ⁺ u , is-limit-∞-arithmetic-sequence-ℚ⁺
 ```
 
 ## See also
@@ -371,7 +286,7 @@ module _
 - [Bernoulli's inequality in ℚ⁺](elementary-number-theory.bernoullis-inequality-positive-rational-numbers.md):
   comparison between arithmetic and geometric sequences in ℚ⁺.
 
-## References
+## External links
 
 - [Arithmetic progressions](https://en.wikipedia.org/wiki/Arithmetic_progression)
   at Wikipedia

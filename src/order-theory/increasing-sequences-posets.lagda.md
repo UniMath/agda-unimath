@@ -21,6 +21,7 @@ open import foundation.universe-levels
 open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
 open import order-theory.sequences-posets
+open import order-theory.subposets
 ```
 
 </details>

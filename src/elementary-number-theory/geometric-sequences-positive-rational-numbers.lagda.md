@@ -45,17 +45,17 @@ open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 
 A
 {{#concept "geometric sequence" Disambiguation="of positive rational numbers" Agda=geometric-sequence-ℚ⁺ WD="geometric progression" WDID=Q173523}}
-of [positive rational numbers]
-(elementary-number-theory.positive-rational-numbers.md) is an
-[arithmetic sequence](group-theory.arithmetic-sequences-semigroups.md) in the
-multiplicative semigroup of positive rational numbers. The multplicative common
-difference in `ℚ⁺` is called the _common ratio_ of the sequence.
+of
+[positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
+is an [arithmetic sequence](group-theory.arithmetic-sequences-semigroups.md) in
+the multiplicative semigroup of positive rational numbers. The multplicative
+common difference in `ℚ⁺` is called the _common ratio_ of the sequence.
 
-Constant sequences are the geometric sequences with common ratio equal to `1`;
-multiplication and
-[inversion](elementary-number-theory.multiplicative-group-of-positive-rational-numbers.md)
-preserve geometric sequences of positive natural numbers and transport their
-common ratio.
+Constant sequences are the geometric sequences with common ratio equal to `1`.
+The product of two geometric sequences is geometric and the
+[inverse](elementary-number-theory.multiplicative-group-of-positive-rational-numbers.md)
+of a geometric sequence is geometric; moreover the map from a sequence to its
+common ratio commutes with multiplication and inversion.
 
 ## Definitions
 
@@ -104,9 +104,9 @@ module _
       semigroup-mul-ℚ⁺
       u
 
-  init-term-geometric-sequence-ℚ⁺ : ℚ⁺
-  init-term-geometric-sequence-ℚ⁺ =
-    init-term-arithmetic-sequence-Semigroup
+  initial-term-geometric-sequence-ℚ⁺ : ℚ⁺
+  initial-term-geometric-sequence-ℚ⁺ =
+    initial-term-arithmetic-sequence-Semigroup
       semigroup-mul-ℚ⁺
       u
 ```
@@ -134,8 +134,8 @@ module _
 ```agda
 htpy-seq-geometric-sequence-ℚ⁺ :
   ( u v : geometric-sequence-ℚ⁺) →
-  ( init-term-geometric-sequence-ℚ⁺ u ＝
-    init-term-geometric-sequence-ℚ⁺ v) →
+  ( initial-term-geometric-sequence-ℚ⁺ u ＝
+    initial-term-geometric-sequence-ℚ⁺ v) →
   ( common-ratio-geometric-sequence-ℚ⁺ u ＝
     common-ratio-geometric-sequence-ℚ⁺ v) →
   seq-geometric-sequence-ℚ⁺ u ~
@@ -150,7 +150,7 @@ htpy-seq-geometric-sequence-ℚ⁺ =
 htpy-seq-standard-geometric-sequence-ℚ⁺ :
   ( u : geometric-sequence-ℚ⁺) →
   ( seq-standard-geometric-sequence-ℚ⁺
-    ( init-term-geometric-sequence-ℚ⁺ u)
+    ( initial-term-geometric-sequence-ℚ⁺ u)
     ( common-ratio-geometric-sequence-ℚ⁺ u)) ~
   ( seq-geometric-sequence-ℚ⁺ u)
 htpy-seq-standard-geometric-sequence-ℚ⁺ =
@@ -191,14 +191,14 @@ module _
       (n : ℕ) →
       Id
         ( mul-ℚ⁺
-          ( init-term-geometric-sequence-ℚ⁺ u)
+          ( initial-term-geometric-sequence-ℚ⁺ u)
           ( power-Monoid monoid-mul-ℚ⁺
             ( n)
             ( common-ratio-geometric-sequence-ℚ⁺ u)))
         ( seq-geometric-sequence-ℚ⁺ u n)
     compute-geometric-sequence-ℚ⁺ n =
       ( compute-standard-geometric-sequence-ℚ⁺
-        ( init-term-geometric-sequence-ℚ⁺ u)
+        ( initial-term-geometric-sequence-ℚ⁺ u)
         ( common-ratio-geometric-sequence-ℚ⁺ u)
         ( n)) ∙
       ( htpy-seq-standard-geometric-sequence-ℚ⁺ u n)
@@ -212,11 +212,12 @@ module _
   where
 
   is-geometric-const-sequence-ℚ⁺ : is-geometric-sequence-ℚ⁺ (const ℕ a)
-  is-geometric-const-sequence-ℚ⁺ = one-ℚ⁺ , λ _ → inv (right-unit-law-mul-ℚ⁺ a)
+  is-geometric-const-sequence-ℚ⁺ =
+    ( one-ℚ⁺ , λ _ → inv (right-unit-law-mul-ℚ⁺ a))
 
   const-geometric-sequence-ℚ⁺ : geometric-sequence-ℚ⁺
   const-geometric-sequence-ℚ⁺ =
-    const ℕ a , is-geometric-const-sequence-ℚ⁺
+    ( const ℕ a , is-geometric-const-sequence-ℚ⁺)
 ```
 
 ### A geometric sequence of positive rational numbers with common ratio equal to `1` is constant
@@ -230,7 +231,7 @@ module _
   is-constant-seq-geometric-sequence-ℚ⁺ :
     (n : ℕ) →
     ( seq-geometric-sequence-ℚ⁺ u n) ＝
-    ( init-term-geometric-sequence-ℚ⁺ u)
+    ( initial-term-geometric-sequence-ℚ⁺ u)
   is-constant-seq-geometric-sequence-ℚ⁺ zero-ℕ = refl
   is-constant-seq-geometric-sequence-ℚ⁺ (succ-ℕ n) =
     ( is-common-ratio-geometric-sequence-ℚ⁺ u n) ∙
@@ -385,7 +386,7 @@ module _
 - [Bernoulli's inequality in ℚ⁺](elementary-number-theory.bernoullis-inequality-positive-rational-numbers.md):
   comparison between arithmetic and geometric sequences in ℚ⁺.
 
-## References
+## External links
 
 - [Geometric progressions](https://en.wikipedia.org/wiki/Geometric_progression)
   at Wikipedia
