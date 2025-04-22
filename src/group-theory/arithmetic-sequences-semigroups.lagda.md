@@ -31,7 +31,7 @@ A [sequence](foundation.sequences.md) `u` in a
 [semigroup](group-theory.semigroups.md) `G` is called
 {{#concept "arithmetic" Disambiguation="sequence in a semigroup" Agda=arithmetic-sequence-Semigroup WD="arithmetic progression" WDID=Q170008}}
 with common difference `d : type-Semigroup G` if the successor term of `u` is
-obtained by adding `d` in `G`: `∀ (n : ℕ) → uₙ₊₁ = uₙ + d`.
+obtained by adding `d` in `G`: `∀ (n : ℕ), uₙ₊₁ = uₙ + d`.
 
 ## Definitions
 
