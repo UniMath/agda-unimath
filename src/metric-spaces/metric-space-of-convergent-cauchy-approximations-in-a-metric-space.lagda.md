@@ -125,7 +125,7 @@ module _
     δ₂ = right-summand-split-ℚ⁺ δ
 
     δₘ : ℚ⁺
-    δₘ = strict-min-ℚ⁺ δ₁ δ₂
+    δₘ = mediant-zero-min-ℚ⁺ δ₁ δ₂
 
     θ : ℚ⁺
     θ = modulus-le-double-le-ℚ⁺ δₘ
@@ -133,13 +133,13 @@ module _
     θ<δ₁ : le-ℚ⁺ θ δ₁
     θ<δ₁ =
       transitive-le-ℚ⁺ θ δₘ δ₁
-        ( le-left-min-ℚ⁺ δ₁ δ₂)
+        ( le-left-mediant-zero-min-ℚ⁺ δ₁ δ₂)
         ( le-modulus-le-double-le-ℚ⁺ δₘ)
 
     θ<δ₂ : le-ℚ⁺ θ δ₂
     θ<δ₂ =
       transitive-le-ℚ⁺ θ δₘ δ₂
-        ( le-right-min-ℚ⁺ δ₁ δ₂)
+        ( le-right-mediant-zero-min-ℚ⁺ δ₁ δ₂)
         ( le-modulus-le-double-le-ℚ⁺ δₘ)
 
     η : ℚ⁺
