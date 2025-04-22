@@ -104,9 +104,9 @@ module _
       semigroup-mul-ℚ⁺
       u
 
-  init-term-geometric-sequence-ℚ⁺ : ℚ⁺
-  init-term-geometric-sequence-ℚ⁺ =
-    init-term-arithmetic-sequence-Semigroup
+  initial-term-geometric-sequence-ℚ⁺ : ℚ⁺
+  initial-term-geometric-sequence-ℚ⁺ =
+    initial-term-arithmetic-sequence-Semigroup
       semigroup-mul-ℚ⁺
       u
 ```
@@ -134,8 +134,8 @@ module _
 ```agda
 htpy-seq-geometric-sequence-ℚ⁺ :
   ( u v : geometric-sequence-ℚ⁺) →
-  ( init-term-geometric-sequence-ℚ⁺ u ＝
-    init-term-geometric-sequence-ℚ⁺ v) →
+  ( initial-term-geometric-sequence-ℚ⁺ u ＝
+    initial-term-geometric-sequence-ℚ⁺ v) →
   ( common-ratio-geometric-sequence-ℚ⁺ u ＝
     common-ratio-geometric-sequence-ℚ⁺ v) →
   seq-geometric-sequence-ℚ⁺ u ~
@@ -150,7 +150,7 @@ htpy-seq-geometric-sequence-ℚ⁺ =
 htpy-seq-standard-geometric-sequence-ℚ⁺ :
   ( u : geometric-sequence-ℚ⁺) →
   ( seq-standard-geometric-sequence-ℚ⁺
-    ( init-term-geometric-sequence-ℚ⁺ u)
+    ( initial-term-geometric-sequence-ℚ⁺ u)
     ( common-ratio-geometric-sequence-ℚ⁺ u)) ~
   ( seq-geometric-sequence-ℚ⁺ u)
 htpy-seq-standard-geometric-sequence-ℚ⁺ =
@@ -191,14 +191,14 @@ module _
       (n : ℕ) →
       Id
         ( mul-ℚ⁺
-          ( init-term-geometric-sequence-ℚ⁺ u)
+          ( initial-term-geometric-sequence-ℚ⁺ u)
           ( power-Monoid monoid-mul-ℚ⁺
             ( n)
             ( common-ratio-geometric-sequence-ℚ⁺ u)))
         ( seq-geometric-sequence-ℚ⁺ u n)
     compute-geometric-sequence-ℚ⁺ n =
       ( compute-standard-geometric-sequence-ℚ⁺
-        ( init-term-geometric-sequence-ℚ⁺ u)
+        ( initial-term-geometric-sequence-ℚ⁺ u)
         ( common-ratio-geometric-sequence-ℚ⁺ u)
         ( n)) ∙
       ( htpy-seq-standard-geometric-sequence-ℚ⁺ u n)
@@ -231,7 +231,7 @@ module _
   is-constant-seq-geometric-sequence-ℚ⁺ :
     (n : ℕ) →
     ( seq-geometric-sequence-ℚ⁺ u n) ＝
-    ( init-term-geometric-sequence-ℚ⁺ u)
+    ( initial-term-geometric-sequence-ℚ⁺ u)
   is-constant-seq-geometric-sequence-ℚ⁺ zero-ℕ = refl
   is-constant-seq-geometric-sequence-ℚ⁺ (succ-ℕ n) =
     ( is-common-ratio-geometric-sequence-ℚ⁺ u n) ∙

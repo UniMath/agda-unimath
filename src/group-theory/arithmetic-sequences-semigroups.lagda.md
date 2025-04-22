@@ -96,8 +96,8 @@ module _
   is-common-difference-arithmetic-sequence-Semigroup =
     pr2 is-arithmetic-seq-arithmetic-sequence-Semigroup
 
-  init-term-arithmetic-sequence-Semigroup : type-Semigroup G
-  init-term-arithmetic-sequence-Semigroup =
+  initial-term-arithmetic-sequence-Semigroup : type-Semigroup G
+  initial-term-arithmetic-sequence-Semigroup =
     seq-arithmetic-sequence-Semigroup zero-ℕ
 ```
 
@@ -141,8 +141,8 @@ module _
   { l : Level} (G : Semigroup l)
   ( u v : arithmetic-sequence-Semigroup G)
   ( eq-init :
-    init-term-arithmetic-sequence-Semigroup G u ＝
-    init-term-arithmetic-sequence-Semigroup G v)
+    initial-term-arithmetic-sequence-Semigroup G u ＝
+    initial-term-arithmetic-sequence-Semigroup G v)
   ( eq-common-difference :
     common-difference-arithmetic-sequence-Semigroup G u ＝
     common-difference-arithmetic-sequence-Semigroup G v)
@@ -174,13 +174,13 @@ module _
   htpy-seq-standard-arithmetic-sequence-Semigroup :
     ( seq-arithmetic-sequence-Semigroup G
       ( standard-arithmetic-sequence-Semigroup G
-        ( init-term-arithmetic-sequence-Semigroup G u)
+        ( initial-term-arithmetic-sequence-Semigroup G u)
         ( common-difference-arithmetic-sequence-Semigroup G u))) ~
     ( seq-arithmetic-sequence-Semigroup G u)
   htpy-seq-standard-arithmetic-sequence-Semigroup =
     htpy-seq-arithmetic-sequence-Semigroup G
       ( standard-arithmetic-sequence-Semigroup G
-        ( init-term-arithmetic-sequence-Semigroup G u)
+        ( initial-term-arithmetic-sequence-Semigroup G u)
         ( common-difference-arithmetic-sequence-Semigroup G u))
       ( u)
       ( refl)

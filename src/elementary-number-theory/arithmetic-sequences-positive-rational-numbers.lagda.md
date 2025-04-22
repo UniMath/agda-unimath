@@ -94,9 +94,9 @@ module _
   is-common-difference-arithmetic-sequence-ℚ⁺ =
     is-common-difference-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺ u
 
-  init-term-arithmetic-sequence-ℚ⁺ : ℚ⁺
-  init-term-arithmetic-sequence-ℚ⁺ =
-    init-term-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺ u
+  initial-term-arithmetic-sequence-ℚ⁺ : ℚ⁺
+  initial-term-arithmetic-sequence-ℚ⁺ =
+    initial-term-arithmetic-sequence-Semigroup semigroup-add-ℚ⁺ u
 ```
 
 ### The standard arithmetic sequence of positive rational numbers with initial term `a` and common difference `d`
@@ -122,8 +122,8 @@ module _
 ```agda
 htpy-seq-arithmetic-sequence-ℚ⁺ :
   ( u v : arithmetic-sequence-ℚ⁺) →
-  ( init-term-arithmetic-sequence-ℚ⁺ u ＝
-    init-term-arithmetic-sequence-ℚ⁺ v) →
+  ( initial-term-arithmetic-sequence-ℚ⁺ u ＝
+    initial-term-arithmetic-sequence-ℚ⁺ v) →
   ( common-difference-arithmetic-sequence-ℚ⁺ u ＝
     common-difference-arithmetic-sequence-ℚ⁺ v) →
   seq-arithmetic-sequence-ℚ⁺ u ~ seq-arithmetic-sequence-ℚ⁺ v
@@ -172,14 +172,14 @@ module _
       ( n : ℕ) →
       Id
         ( add-ℚ
-          ( rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
+          ( rational-ℚ⁺ (initial-term-arithmetic-sequence-ℚ⁺ u))
           ( mul-ℚ
             ( rational-ℕ n)
             ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u))))
         ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
     compute-arithmetic-sequence-ℚ⁺ n =
       ( compute-standard-arithmetic-sequence-ℚ⁺
-        ( init-term-arithmetic-sequence-ℚ⁺ u)
+        ( initial-term-arithmetic-sequence-ℚ⁺ u)
         ( common-difference-arithmetic-sequence-ℚ⁺ u)
         ( n)) ∙
       ( ap
@@ -263,16 +263,16 @@ module _
     leq-init-arithmetic-sequence-ℚ⁺ :
       (n : ℕ) →
       leq-ℚ⁺
-        ( init-term-arithmetic-sequence-ℚ⁺ u)
+        ( initial-term-arithmetic-sequence-ℚ⁺ u)
         ( seq-arithmetic-sequence-ℚ⁺ u n)
     leq-init-arithmetic-sequence-ℚ⁺ zero-ℕ =
-      refl-leq-ℚ (rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
+      refl-leq-ℚ (rational-ℚ⁺ (initial-term-arithmetic-sequence-ℚ⁺ u))
     leq-init-arithmetic-sequence-ℚ⁺ (succ-ℕ n) =
       leq-le-ℚ⁺
-      { init-term-arithmetic-sequence-ℚ⁺ u}
+      { initial-term-arithmetic-sequence-ℚ⁺ u}
       { seq-arithmetic-sequence-ℚ⁺ u (succ-ℕ n)}
       ( concatenate-leq-le-ℚ
-        ( rational-ℚ⁺ (init-term-arithmetic-sequence-ℚ⁺ u))
+        ( rational-ℚ⁺ (initial-term-arithmetic-sequence-ℚ⁺ u))
         ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
         ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u (succ-ℕ n)))
         ( leq-init-arithmetic-sequence-ℚ⁺ n)
