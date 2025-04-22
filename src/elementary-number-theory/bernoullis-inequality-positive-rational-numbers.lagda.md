@@ -38,7 +38,7 @@ open import group-theory.groups
 
 {{#concept "Bernoulli's inequality" Disambiguation="on the positive rational numbers" WD="Bernoulli's inequality" WDID=Q728662}}
 on the
-[positive rational numbers](elementary-number-theory.positive-rational-numbers.md);
+[positive rational numbers](elementary-number-theory.positive-rational-numbers.md) states that
 for any `h : ℚ⁺`, the arithmetic sequence with initial term `1` and common
 difference `h` is lesser than or equal to the geometric sequence with initial
 term `1` and common ratio `1 + h`:
