@@ -111,7 +111,7 @@ module _
                 ( n)))))
 ```
 
-## Bernouilli's inequality on the positive rational numbers
+## Theorem
 
 ```text
 ∀ (h : ℚ⁺) (n : ℕ) → 1 + n h ≤ (1 + h)ⁿ
