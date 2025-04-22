@@ -871,22 +871,22 @@ module _
   (x y : ℚ⁺)
   where
 
-  strict-min-ℚ⁺ : ℚ⁺
-  strict-min-ℚ⁺ = mediant-zero-ℚ⁺ (min-ℚ⁺ x y)
+  mediant-zero-min-ℚ⁺ : ℚ⁺
+  mediant-zero-min-ℚ⁺ = mediant-zero-ℚ⁺ (min-ℚ⁺ x y)
 
-  le-left-min-ℚ⁺ : le-ℚ⁺ strict-min-ℚ⁺ x
-  le-left-min-ℚ⁺ =
+  le-left-mediant-zero-min-ℚ⁺ : le-ℚ⁺ mediant-zero-min-ℚ⁺ x
+  le-left-mediant-zero-min-ℚ⁺ =
     concatenate-le-leq-ℚ
-      ( rational-ℚ⁺ strict-min-ℚ⁺)
+      ( rational-ℚ⁺ mediant-zero-min-ℚ⁺)
       ( rational-ℚ⁺ (min-ℚ⁺ x y))
       ( rational-ℚ⁺ x)
       ( le-mediant-zero-ℚ⁺ (min-ℚ⁺ x y))
       ( leq-left-min-ℚ⁺ x y)
 
-  le-right-min-ℚ⁺ : le-ℚ⁺ strict-min-ℚ⁺ y
-  le-right-min-ℚ⁺ =
+  le-right-mediant-zero-min-ℚ⁺ : le-ℚ⁺ mediant-zero-min-ℚ⁺ y
+  le-right-mediant-zero-min-ℚ⁺ =
     concatenate-le-leq-ℚ
-      ( rational-ℚ⁺ strict-min-ℚ⁺)
+      ( rational-ℚ⁺ mediant-zero-min-ℚ⁺)
       ( rational-ℚ⁺ (min-ℚ⁺ x y))
       ( rational-ℚ⁺ y)
       ( le-mediant-zero-ℚ⁺ (min-ℚ⁺ x y))
@@ -907,7 +907,7 @@ abstract
     r : ℚ⁺
     r = right-summand-split-ℚ⁺ p
     s : ℚ⁺
-    s = strict-min-ℚ⁺ q r
+    s = mediant-zero-min-ℚ⁺ q r
     -- Inlining this blows up compile times for some unclear reason.
     dependent-pair-result : Σ ℚ⁺ (λ x → le-ℚ⁺ (x +ℚ⁺ x) p)
     dependent-pair-result =
@@ -920,8 +920,8 @@ abstract
           { rational-ℚ⁺ q}
           { rational-ℚ⁺ s}
           { rational-ℚ⁺ r}
-          ( le-left-min-ℚ⁺ q r)
-          ( le-right-min-ℚ⁺ q r))
+          ( le-left-mediant-zero-min-ℚ⁺ q r)
+          ( le-right-mediant-zero-min-ℚ⁺ q r))
 
   double-le-ℚ⁺ :
     (p : ℚ⁺) →
