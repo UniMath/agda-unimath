@@ -529,7 +529,7 @@ strict-preorder-ℚ⁺ =
 ```agda
 decidable-total-order-ℚ⁺ : Decidable-Total-Order lzero lzero
 decidable-total-order-ℚ⁺ =
-  decidable-total-order-Sub-Decidable-Total-Order
+  decidable-total-order-Decidable-Total-Suborder
     ℚ-Decidable-Total-Order
     is-positive-prop-ℚ
 

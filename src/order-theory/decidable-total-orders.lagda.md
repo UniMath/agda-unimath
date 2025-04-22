@@ -512,41 +512,41 @@ module _
 ### Subsets of decidable total orders are decidable total orders
 
 ```agda
-Sub-Decidable-Total-Order :
+Decidable-Total-Suborder :
   {l1 l2 : Level} (l3 : Level) →
   Decidable-Total-Order l1 l2 →
   UU (l1 ⊔ lsuc l3)
-Sub-Decidable-Total-Order l3 T =
+Decidable-Total-Suborder l3 T =
   Subposet l3 (poset-Decidable-Total-Order T)
 
 module _
   {l1 l2 l3 : Level}
   (T : Decidable-Total-Order l1 l2)
-  (P : Sub-Decidable-Total-Order l3 T)
+  (P : Decidable-Total-Suborder l3 T)
   where
 
-  is-total-leq-Sub-Decidable-Total-Order :
+  is-total-leq-Decidable-Total-Suborder :
     is-total-Poset
       (poset-Subposet (poset-Decidable-Total-Order T) P)
-  is-total-leq-Sub-Decidable-Total-Order x y =
+  is-total-leq-Decidable-Total-Suborder x y =
     is-total-poset-Decidable-Total-Order
       ( T)
       ( inclusion-subtype P x)
       ( inclusion-subtype P y)
 
-  is-decidable-leq-Sub-Decidable-Total-Order :
+  is-decidable-leq-Decidable-Total-Suborder :
     is-decidable-leq-Poset
       (poset-Subposet (poset-Decidable-Total-Order T) P)
-  is-decidable-leq-Sub-Decidable-Total-Order x y =
+  is-decidable-leq-Decidable-Total-Suborder x y =
     is-decidable-poset-Decidable-Total-Order
       ( T)
       ( inclusion-subtype P x)
       ( inclusion-subtype P y)
 
-  decidable-total-order-Sub-Decidable-Total-Order :
+  decidable-total-order-Decidable-Total-Suborder :
     Decidable-Total-Order (l1 ⊔ l3) l2
-  decidable-total-order-Sub-Decidable-Total-Order =
+  decidable-total-order-Decidable-Total-Suborder =
     poset-Subposet (poset-Decidable-Total-Order T) P ,
-    is-total-leq-Sub-Decidable-Total-Order ,
-    is-decidable-leq-Sub-Decidable-Total-Order
+    is-total-leq-Decidable-Total-Suborder ,
+    is-decidable-leq-Decidable-Total-Suborder
 ```
