@@ -114,7 +114,7 @@ module _
 ## Theorem
 
 ```text
-∀ (h : ℚ⁺) (n : ℕ) → 1 + n h ≤ (1 + h)ⁿ
+  ∀ (h : ℚ⁺) (n : ℕ), 1 + n * h ≤ (1 + h)ⁿ
 ```
 
 ```agda
