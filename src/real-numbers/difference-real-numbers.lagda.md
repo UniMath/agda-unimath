@@ -80,6 +80,6 @@ module _
     interchange-law-diff-add-ℝ :
       (a +ℝ b) -ℝ (c +ℝ d) ＝ (a -ℝ c) +ℝ (b -ℝ d)
     interchange-law-diff-add-ℝ =
-      ap ((a +ℝ b) +ℝ_) (distributive-neg-add-ℝ c d) ∙
-      interchange-law-add-add-ℝ _ _ _ _
+      ( ap ((a +ℝ b) +ℝ_) (distributive-neg-add-ℝ c d)) ∙
+      ( interchange-law-add-add-ℝ _ _ _ _)
 ```
