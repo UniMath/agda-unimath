@@ -70,6 +70,9 @@ module _
 
   leq-ℝ : UU (l1 ⊔ l2)
   leq-ℝ = type-Prop leq-ℝ-Prop
+
+infix 30 _≤-ℝ_
+_≤-ℝ_ = leq-ℝ
 ```
 
 ## Properties
