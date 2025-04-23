@@ -200,34 +200,6 @@ module _
   is-full-decidable-subtype = type-Prop is-full-decidable-subtype-Prop
 ```
 
-## Examples
-
-### The decidable subtypes of left and right elements in a coproduct type
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-decidable-is-left : (x : A + B) → is-decidable (is-left x)
-  is-decidable-is-left (inl x) = is-decidable-unit
-  is-decidable-is-left (inr x) = is-decidable-empty
-
-  is-left-Decidable-Prop : A + B → Decidable-Prop lzero
-  pr1 (is-left-Decidable-Prop x) = is-left x
-  pr1 (pr2 (is-left-Decidable-Prop x)) = is-prop-is-left x
-  pr2 (pr2 (is-left-Decidable-Prop x)) = is-decidable-is-left x
-
-  is-decidable-is-right : (x : A + B) → is-decidable (is-right x)
-  is-decidable-is-right (inl x) = is-decidable-empty
-  is-decidable-is-right (inr x) = is-decidable-unit
-
-  is-right-Decidable-Prop : A + B → Decidable-Prop lzero
-  pr1 (is-right-Decidable-Prop x) = is-right x
-  pr1 (pr2 (is-right-Decidable-Prop x)) = is-prop-is-right x
-  pr2 (pr2 (is-right-Decidable-Prop x)) = is-decidable-is-right x
-```
-
 ## Properties
 
 ### Types of decidable subtypes of any universe level are equivalent
@@ -451,6 +423,32 @@ raise-decidable-subtype l S a = raise-Decidable-Prop l (S a)
 ```
 
 ## Examples
+
+### The decidable subtypes of left and right elements in a coproduct type
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-decidable-is-left : (x : A + B) → is-decidable (is-left x)
+  is-decidable-is-left (inl x) = is-decidable-unit
+  is-decidable-is-left (inr x) = is-decidable-empty
+
+  is-left-Decidable-Prop : A + B → Decidable-Prop lzero
+  pr1 (is-left-Decidable-Prop x) = is-left x
+  pr1 (pr2 (is-left-Decidable-Prop x)) = is-prop-is-left x
+  pr2 (pr2 (is-left-Decidable-Prop x)) = is-decidable-is-left x
+
+  is-decidable-is-right : (x : A + B) → is-decidable (is-right x)
+  is-decidable-is-right (inl x) = is-decidable-empty
+  is-decidable-is-right (inr x) = is-decidable-unit
+
+  is-right-Decidable-Prop : A + B → Decidable-Prop lzero
+  pr1 (is-right-Decidable-Prop x) = is-right x
+  pr1 (pr2 (is-right-Decidable-Prop x)) = is-prop-is-right x
+  pr2 (pr2 (is-right-Decidable-Prop x)) = is-decidable-is-right x
+```
 
 ### True booleans
 

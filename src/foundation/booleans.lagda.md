@@ -253,13 +253,13 @@ not-is-true-is-false false t ()
 ### A boolean must be either true or false
 
 ```agda
-is-true-not-is-false : (x : bool) → ¬ (is-false x) → is-true x
-is-true-not-is-false true _ = refl
-is-true-not-is-false false ¬false = ex-falso (¬false refl)
+is-true-is-not-false : (x : bool) → ¬ (is-false x) → is-true x
+is-true-is-not-false true _ = refl
+is-true-is-not-false false ¬false = ex-falso (¬false refl)
 
-is-false-not-is-true : (x : bool) → ¬ (is-true x) → is-false x
-is-false-not-is-true true ¬true = ex-falso (¬true refl)
-is-false-not-is-true false _ = refl
+is-false-is-not-true : (x : bool) → ¬ (is-true x) → is-false x
+is-false-is-not-true true ¬true = ex-falso (¬true refl)
+is-false-is-not-true false _ = refl
 ```
 
 ### The type of booleans is equivalent to `Fin 2`

@@ -75,22 +75,23 @@ LLPO = {l : Level} → level-LLPO l
 ```agda
 level-LLPO-level-LPO : {l : Level} → level-LPO l → level-LLPO l
 level-LLPO-level-LPO lpo A B ¬⟨A∧B⟩ =
-  elim-disjunction
-    ( motive)
-    ( λ inhabited-A →
-      elim-disjunction
-        ( motive)
-        ( λ inhabited-B →
-          ex-falso
-            ( ¬⟨A∧B⟩
-              ( unit-trunc-Prop inhabited-A , unit-trunc-Prop inhabited-B)))
-        ( inr-disjunction)
-        ( lpo B))
-    ( inl-disjunction)
-    ( lpo A)
-  where
+  let
     motive =
       is-empty-decidable-subtype-Prop A ∨ is-empty-decidable-subtype-Prop B
+  in
+    elim-disjunction
+      ( motive)
+      ( λ inhabited-A →
+        elim-disjunction
+          ( motive)
+          ( λ inhabited-B →
+            ex-falso
+              ( ¬⟨A∧B⟩
+                ( unit-trunc-Prop inhabited-A , unit-trunc-Prop inhabited-B)))
+          ( inr-disjunction)
+          ( lpo B))
+      ( inl-disjunction)
+      ( lpo A)
 
 LLPO-LPO : LPO → LLPO
 LLPO-LPO lpo {l} = level-LLPO-level-LPO (lpo {l})
@@ -168,11 +169,11 @@ abstract
       false-f-empty-A :
         is-empty-decidable-subtype A → (n : ℕ) → is-false (f (n *ℕ 2))
       false-f-empty-A ¬A n =
-        is-false-not-is-true (f (n *ℕ 2)) (λ f2n → ¬A (n , map-raise f2n))
+        is-false-is-not-true (f (n *ℕ 2)) (λ f2n → ¬A (n , map-raise f2n))
       false-f-empty-B :
         is-empty-decidable-subtype B → (n : ℕ) → is-false (f (succ-ℕ (n *ℕ 2)))
       false-f-empty-B ¬B n =
-        is-false-not-is-true
+        is-false-is-not-true
           ( f _)
           ( λ f⟨2n+1⟩ → ¬B (n , map-raise f⟨2n+1⟩))
 ```

@@ -33,9 +33,11 @@ open import foundation-core.propositions
 
 The
 {{#concept "limited principle of omniscience" WDID=Q6549544 WD="limited principle of omniscience" Agda=LPO}}
-(LPO) asserts that every [decidable subtype](foundation.decidable-subtypes.md)
-of the [natural numbers](elementary-number-theory.natural-numbers.md) is
-[merely decidable](foundation.decidable-types.md).
+(LPO) asserts that for every
+[decidable subtype](foundation.decidable-subtypes.md) of the
+[natural numbers](elementary-number-theory.natural-numbers.md), it is
+[merely decidable](foundation.decidable-types.md) whether that subtype is
+[inhabited](foundation.inhabited-subtypes.md)
 
 ```agda
 level-LPO-Prop : (l : Level) → Prop (lsuc l)
@@ -50,8 +52,6 @@ level-LPO l = type-Prop (level-LPO-Prop l)
 LPO : UUω
 LPO = {l : Level} → level-LPO l
 ```
-
-## Properties
 
 ### Equivalent statement about booleans
 
@@ -76,7 +76,13 @@ bool-LPO-Prop = Π-Prop (ℕ → bool) (has-true-or-all-false-Prop)
 
 bool-LPO : UU lzero
 bool-LPO = type-Prop bool-LPO-Prop
+```
 
+## Properties
+
+### Equivalency of the boolean formulation
+
+```agda
 abstract
   LPO-bool-LPO : bool-LPO → LPO
   LPO-bool-LPO blpo S =
