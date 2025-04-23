@@ -163,12 +163,12 @@ abstract
       ( x)
       ( λ neg-x →
         ex-falso
-          ( not-is-positive-zero-ℚ
+          ( is-not-positive-zero-ℚ
             ( tr is-positive-ℚ x²=0 (is-positive-square-negative-ℚ x neg-x))))
       ( id)
       ( λ pos-x →
         ex-falso
-          ( not-is-positive-zero-ℚ
+          ( is-not-positive-zero-ℚ
             ( tr is-positive-ℚ x²=0 (is-positive-square-positive-ℚ x pos-x))))
 ```
 

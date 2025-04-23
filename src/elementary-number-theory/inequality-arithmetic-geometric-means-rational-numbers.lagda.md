@@ -122,9 +122,9 @@ abstract
 
 ```agda
 abstract
-  eq-eq-gm-am-ℚ :
+  eq-eq-geometric-mean-arithmetic-mean-ℚ :
     (x y : ℚ) → rational-ℕ 4 *ℚ (x *ℚ y) ＝ square-ℚ (x +ℚ y) → x ＝ y
-  eq-eq-gm-am-ℚ x y 4xy=⟨x+y⟩² =
+  eq-eq-geometric-mean-arithmetic-mean-ℚ x y 4xy=⟨x+y⟩² =
     eq-is-zero-diff-ℚ
       ( x)
       ( y)
@@ -136,9 +136,9 @@ abstract
             by inv (eq-square-sum-minus-four-mul-ℚ-square-diff x y)
           ＝ zero-ℚ by is-zero-diff-ℚ (inv 4xy=⟨x+y⟩²)))
 
-  eq-gm-am-eq-ℚ :
+  eq-geometric-mean-arithmetic-mean-eq-ℚ :
     (x y : ℚ) → x ＝ y → rational-ℕ 4 *ℚ (x *ℚ y) ＝ square-ℚ (x +ℚ y)
-  eq-gm-am-eq-ℚ x .x refl =
+  eq-geometric-mean-arithmetic-mean-eq-ℚ x .x refl =
     inv
       ( equational-reasoning
         square-ℚ (x +ℚ x)
@@ -148,8 +148,10 @@ abstract
         ＝ rational-ℕ 4 *ℚ square-ℚ x
           by ap (_*ℚ square-ℚ x) (mul-rational-ℕ 2 2))
 
-  eq-gm-am-iff-eq-ℚ :
+  eq-geometric-mean-arithmetic-mean-iff-eq-ℚ :
     (x y : ℚ) → (rational-ℕ 4 *ℚ (x *ℚ y) ＝ square-ℚ (x +ℚ y)) ↔ (x ＝ y)
-  pr1 (eq-gm-am-iff-eq-ℚ x y) = eq-eq-gm-am-ℚ x y
-  pr2 (eq-gm-am-iff-eq-ℚ x y) = eq-gm-am-eq-ℚ x y
+  pr1 (eq-geometric-mean-arithmetic-mean-iff-eq-ℚ x y) =
+    eq-eq-geometric-mean-arithmetic-mean-ℚ x y
+  pr2 (eq-geometric-mean-arithmetic-mean-iff-eq-ℚ x y) =
+    eq-geometric-mean-arithmetic-mean-eq-ℚ x y
 ```
