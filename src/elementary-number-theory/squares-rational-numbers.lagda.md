@@ -74,7 +74,7 @@ abstract
       ＝ x *ℚ x by neg-neg-ℚ (x *ℚ x)
 ```
 
-### Squareness in ℚ is decidable
+### Being a square in ℚ is decidable
 
 Has yet to be proved.
 

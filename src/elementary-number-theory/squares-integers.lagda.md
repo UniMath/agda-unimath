@@ -123,7 +123,9 @@ is-decidable-is-square-ℤ (inr (inr n)) =
     ( is-decidable-is-square-ℕ (succ-ℕ n))
 ```
 
-### `(x + y)² = x² + 2xy + y²`
+### The square of a sum
+
+We have the identity `(x + y)² = x² + 2xy + y²` for the square of a sum.
 
 ```agda
 abstract
@@ -152,7 +154,13 @@ abstract
         by ap (x *ℤ x +ℤ_) (inv (associative-add-ℤ (x *ℤ y) (x *ℤ y) (y *ℤ y)))
       ＝ x *ℤ x +ℤ int-ℕ 2 *ℤ (x *ℤ y) +ℤ y *ℤ y
         by inv (associative-add-ℤ (x *ℤ x) (int-ℕ 2 *ℤ (x *ℤ y)) _)
+```
 
+### The square of a difference
+
+We have the identity `(x - y)² = x² - 2xy + y²` for the square of a difference.
+
+```agda
   square-diff-ℤ :
     (x y : ℤ) →
     square-ℤ (x -ℤ y) ＝

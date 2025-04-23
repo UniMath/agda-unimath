@@ -27,8 +27,8 @@ open import foundation.transport-along-identifications
 ## Idea
 
 The
-{{#concept "arithmetic mean-geometric mean inequality" WD="AM-GM inequality" WDID=Q841170}}
-states that $\sqrt{xy} \leq \frac{x + y}{2}$. We cannot take square roots on
+{{#concept "arithmetic mean-geometric mean inequality" Disambiguation="on integers" WD="AM-GM inequality" WDID=Q841170 Agda=leq-gm-am-ℤ}}
+states that $\sqrt{xy} \leq \frac{x + y}{2}$. We cannot take arbitrary square roots in
 integers, but we can prove the equivalent inequality that $4xy \leq (x + y)^2$.
 
 ## Proof

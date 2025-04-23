@@ -202,7 +202,7 @@ module _
 
 ```agda
 abstract
-  not-is-positive-zero-ℚ : ¬ (is-positive-ℚ zero-ℚ)
+  is-not-positive-zero-ℚ : ¬ (is-positive-ℚ zero-ℚ)
   not-is-positive-zero-ℚ pos-0 =
     irreflexive-le-ℚ zero-ℚ (le-zero-is-positive-ℚ zero-ℚ pos-0)
 ```

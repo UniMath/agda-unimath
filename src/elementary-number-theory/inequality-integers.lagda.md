@@ -308,7 +308,7 @@ neg-leq-ℤ x y =
       commutative-add-ℤ (neg-ℤ (neg-ℤ y)) (neg-ℤ x))
 ```
 
-### Transposing additions on inequalities of integers
+### Transposing additions over inequalities of integers
 
 ```agda
 leq-transpose-right-diff-ℤ : (x y z : ℤ) → x ≤-ℤ (y -ℤ z) → x +ℤ z ≤-ℤ y
@@ -359,11 +359,11 @@ leq-transpose-left-diff-ℤ x y z x-y≤z =
     ( z)
     ( x-y≤z)
 
-leq-iff-transpose-left-add-ℤ : (x y z : ℤ) → x +ℤ y ≤-ℤ z ↔ x ≤-ℤ z -ℤ y
+leq-iff-transpose-left-add-ℤ : (x y z : ℤ) → (x +ℤ y ≤-ℤ z) ↔ (x ≤-ℤ z -ℤ y)
 pr1 (leq-iff-transpose-left-add-ℤ x y z) = leq-transpose-left-add-ℤ x y z
 pr2 (leq-iff-transpose-left-add-ℤ x y z) = leq-transpose-right-diff-ℤ x z y
 
-leq-iff-transpose-left-diff-ℤ : (x y z : ℤ) → x -ℤ y ≤-ℤ z ↔ x ≤-ℤ z +ℤ y
+leq-iff-transpose-left-diff-ℤ : (x y z : ℤ) → (x -ℤ y ≤-ℤ z) ↔ (x ≤-ℤ z +ℤ y)
 pr1 (leq-iff-transpose-left-diff-ℤ x y z) = leq-transpose-left-diff-ℤ x y z
 pr2 (leq-iff-transpose-left-diff-ℤ x y z) = leq-transpose-right-add-ℤ x z y
 ```
