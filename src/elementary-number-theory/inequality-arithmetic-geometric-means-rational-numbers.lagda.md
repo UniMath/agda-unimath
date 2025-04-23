@@ -33,7 +33,7 @@ open import foundation.transport-along-identifications
 The
 {{#concept "arithmetic mean-geometric mean inequality" Disambiguation="on rational numbers" WD="AM-GM inequality" WDID=Q841170 Agda=eq-gm-am-iff-eq-ℚ}}
 states that $\sqrt{xy} \leq \frac{x + y}{2}$, where that square root is defined.
-We cannot take square roots on arbitrary
+We cannot take arbitrary square roots in
 [rational numbers](elementary-number-theory.rational-numbers.md), but we can
 prove the equivalent inequality that $4xy \leq (x + y)^2$ for all rational
 numbers.
