@@ -13,12 +13,15 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.propositional-truncations
 open import foundation.axiom-of-choice
+open import foundation.coproduct-types
 open import foundation.unit-type
 open import foundation.inhabited-types
 open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.axiom-of-dependent-choice
+open import univalent-combinatorics.standard-finite-types
 open import foundation.universe-levels
+open import foundation.functoriality-propositional-truncation
 ```
 
 </details>
@@ -64,21 +67,26 @@ ACω-AC0 ac0 = level-ACω-level-AC0 ac0
 ```agda
 level-ACω-level-ADC : {l : Level} → level-ADC l lzero → level-ACω l
 level-ACω-level-ADC {l} adc f =
-  let
-    A : UU l
-    A = Σ ℕ (λ n → type-Inhabited-Type (f n))
+  map-trunc-Prop
+    ( λ (g , R-gn-gsn) → {! g  !})
+    ( adc A (unit-trunc-Prop (0 , λ ())) R entire-R)
+  where
+    A = Σ ℕ (λ n → (k : Fin n) → type-Inhabited-Type (f (nat-Fin n k)))
     R : A → A → UU lzero
-    R = (λ (m , _) (n , _) → n ＝ succ-ℕ m)
-    is-entire-R : is-entire-Relation R
-    is-entire-R =
-      λ (n , _) →
-        rec-trunc-Prop
-          ( is-inhabited-Prop _)
-          ( λ fsn → unit-trunc-Prop ((succ-ℕ n , fsn) , refl))
-          ( is-inhabited-type-Inhabited-Type (f (succ-ℕ n)))
-  in
-    rec-trunc-Prop
-      ( is-inhabited-Prop _)
-      ( λ (f , Rfnfsn) → unit-trunc-Prop (λ n → {!   !}))
-      ( adc A (unit-trunc-Prop (zero-ℕ , {!   !})) R is-entire-R)
+    R (m , _) (n , _) = succ-ℕ m ＝ n
+    entire-R : is-entire-Relation R
+    entire-R (n , f<n) =
+      map-trunc-Prop
+        ( λ fn →
+          (
+            ( succ-ℕ n ,
+              λ where
+                (inr star) → fn
+                (inl k) → f<n k) ,
+            refl))
+        ( is-inhabited-type-Inhabited-Type (f n))
+    extend :
+      (g : ℕ → A) → ((n : ℕ) → R (g n) (g (succ-ℕ n))) →
+      (n : ℕ) → type-Inhabited-Type (f n)
+    extend g R-gn-gsn zero-ℕ = {!  !}
 ```
