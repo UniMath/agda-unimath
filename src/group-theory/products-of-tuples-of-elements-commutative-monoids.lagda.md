@@ -84,14 +84,14 @@ module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  mul-one-element-Commutative-Monoid :
+  compute-mul-one-element-Commutative-Monoid :
     (f : functional-vec-Commutative-Monoid M 1) →
     mul-fin-Commutative-Monoid M 1 f ＝
     head-functional-vec-Commutative-Monoid M 0 f
   mul-one-element-Commutative-Monoid =
     mul-one-element-Monoid (monoid-Commutative-Monoid M)
 
-  mul-two-elements-Commutative-Monoid :
+  compute-mul-two-elements-Commutative-Monoid :
     (f : functional-vec-Commutative-Monoid M 2) →
     mul-fin-Commutative-Monoid M 2 f ＝
     mul-Commutative-Monoid M (f (zero-Fin 1)) (f (one-Fin 1))
@@ -107,14 +107,14 @@ module _
   where
 
   htpy-mul-fin-Commutative-Monoid :
-    (n : ℕ) {f g : functional-vec-Commutative-Monoid M n} →
+    {n : ℕ} {f g : functional-vec-Commutative-Monoid M n} →
     (f ~ g) →
     mul-fin-Commutative-Monoid M n f ＝ mul-fin-Commutative-Monoid M n g
   htpy-mul-fin-Commutative-Monoid =
     htpy-mul-fin-Monoid (monoid-Commutative-Monoid M)
 ```
 
-### Products are equal to the zero-th term plus the rest
+### Products are equal to the zero-th term times the rest
 
 ```agda
 module _
@@ -308,7 +308,7 @@ module _
         ( eq-permutation-list-standard-transpositions-Fin n σ)
 ```
 
-### Products for a count for a type
+### Products of families of elements over types equipped with a counting
 
 ```agda
 mul-count-Commutative-Monoid :
@@ -318,7 +318,7 @@ mul-count-Commutative-Monoid M A (n , Fin-n≃A) f =
   mul-fin-Commutative-Monoid M n (f ∘ map-equiv Fin-n≃A)
 ```
 
-### Products for a count for a type are homotopy invariant
+### Products of families of elements over types equipped with a counting are homotopy invariant
 
 ```agda
 module _
@@ -459,7 +459,7 @@ module _
               ( cA)
 ```
 
-### The product over an empty type is the unit
+### Products over an empty type is the unit element
 
 ```agda
 module _
@@ -493,7 +493,7 @@ module _
     let
       open
         do-syntax-trunc-Prop
-          (is-unit-prop-Commutative-Monoid
+          ( is-unit-prop-Commutative-Monoid
             ( M)
             ( mul-finite-Commutative-Monoid
               ( M)
@@ -817,7 +817,9 @@ module _
           htpy-mul-finite-Commutative-Monoid
             ( M)
             ( Σ-Finite-Type (Fin-Finite-Type (succ-ℕ n)) B)
-            ( λ { (inl k , b) → refl ; (inr k , b) → refl})
+            ( λ where
+              (inl k , b) → refl
+              (inr k , b) → refl)
 
 module _
   {l1 l2 l3 : Level} (M : Commutative-Monoid l1)
