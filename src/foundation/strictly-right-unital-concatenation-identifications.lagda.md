@@ -64,7 +64,7 @@ module _
   right-strict-concat' x q p = p ∙ᵣ q
 ```
 
-### Translating between the stictly left and stricly right unital versions of concatenation
+### Translating between the strictly left and strictly right unital versions of concatenation
 
 ```agda
 module _
