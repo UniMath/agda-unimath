@@ -78,7 +78,9 @@ abstract
 
 Has yet to be proved.
 
-### `(x + y)² = x² + 2xy + y²`
+### The square of a sum
+
+We have the identity `(x + y)² = x² + 2xy + y²` for the square of a sum.
 
 ```agda
 abstract
@@ -109,7 +111,14 @@ abstract
         by ap (λ z → x *ℚ x +ℚ (z +ℚ y *ℚ y)) (inv (mul-two-ℚ _))
       ＝ x *ℚ x +ℚ rational-ℕ 2 *ℚ (x *ℚ y) +ℚ y *ℚ y
         by inv (associative-add-ℚ (x *ℚ x) (rational-ℕ 2 *ℚ (x *ℚ y)) _)
+```
 
+### The square of a difference
+
+We have the identity `(x - y)² = x² - 2xy + y²` for the square of a difference.
+
+```agda
+abstract
   square-diff-ℚ :
     (x y : ℚ) →
     square-ℚ (x -ℚ y) ＝

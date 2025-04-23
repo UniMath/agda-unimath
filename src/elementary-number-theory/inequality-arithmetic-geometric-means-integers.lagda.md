@@ -39,7 +39,7 @@ abstract
   leq-arithmetic-mean-geometric-mean-ℤ :
     (x y : ℤ) →
     leq-ℤ (int-ℕ 4 *ℤ (x *ℤ y)) (square-ℤ (x +ℤ y))
-  leq-gm-am-ℤ x y =
+  leq-arithmetic-mean-geometric-mean-ℤ x y =
     inv-tr
       ( is-nonnegative-ℤ)
       ( equational-reasoning
