@@ -77,7 +77,7 @@ abstract
       ( lpo (complement-decidable-subtype P))
 ```
 
-### Equivalent Boolean formulation
+### Equivalent boolean formulation
 
 ```agda
 bool-WLPO-Prop : Prop lzero
@@ -131,7 +131,7 @@ abstract
 
   level-WLPO-iff-bool-WLPO : (l : Level) → level-WLPO l ↔ bool-WLPO
   pr1 (level-WLPO-iff-bool-WLPO _) = bool-WLPO-level-WLPO
-  pr2 (level-WLPO-iff-bool-WLPO l) bwlpo = WLPO-bool-WLPO bwlpo
+  pr2 (level-WLPO-iff-bool-WLPO _) = WLPO-bool-WLPO
 ```
 
 ### The weak limited principle of omniscience at any level implies it at all levels
