@@ -35,7 +35,7 @@ integers, but we can prove the equivalent inequality that $4xy \leq (x + y)^2$.
 
 ```agda
 abstract
-  leq-gm-am-ℤ :
+  leq-arithmetic-mean-geometric-mean-ℤ :
     (x y : ℤ) →
     leq-ℤ (int-ℕ 4 *ℤ (x *ℤ y)) (square-ℤ (x +ℤ y))
   leq-gm-am-ℤ x y =
