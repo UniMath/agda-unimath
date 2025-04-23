@@ -172,7 +172,9 @@ module _
     inv-equiv-total-fiber (map-decidable-emb f)
 ```
 
-## Attributes
+## Properties
+
+### Inhabitedness of a decidable subtype
 
 ```agda
 module _
@@ -185,12 +187,28 @@ module _
 
   is-inhabited-decidable-subtype : UU (l1 ⊔ l2)
   is-inhabited-decidable-subtype = type-Prop is-inhabited-decidable-subtype-Prop
+```
+
+### Emptiness of a decidable subtype
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
+  where
 
   is-empty-decidable-subtype-Prop : Prop (l1 ⊔ l2)
   is-empty-decidable-subtype-Prop = is-empty-Prop (type-decidable-subtype P)
 
   is-empty-decidable-subtype : UU (l1 ⊔ l2)
   is-empty-decidable-subtype = type-Prop is-empty-decidable-subtype-Prop
+```
+
+### Fullness of a decidable subtype
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
+  where
 
   is-full-decidable-subtype-Prop : Prop (l1 ⊔ l2)
   is-full-decidable-subtype-Prop =
