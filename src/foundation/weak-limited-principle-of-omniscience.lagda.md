@@ -34,7 +34,7 @@ open import logic.complements-decidable-subtypes
 
 ## Statement
 
-The {{#concept "weak limited principle of omniscience"}} (WLPO) asserts that
+The {{#concept "weak limited principle of omniscience" Agda=WLPO}} (WLPO) asserts that
 every [decidable subtype](foundation.decidable-subtypes.md) of the
 [natural numbers](elementary-number-theory.natural-numbers.md) is
 [full](foundation.full-subtypes.md) or it is [not](foundation.negation.md). In
