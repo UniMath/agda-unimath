@@ -7,11 +7,12 @@ module foundation.axiom-of-countable-choice where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.inhabited-types
-open import foundation.axiom-of-choice
-open import elementary-number-theory.natural-numbers
-open import foundation.universe-levels
 open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.natural-numbers
+
+open import foundation.axiom-of-choice
+open import foundation.inhabited-types
+open import foundation.universe-levels
 ```
 
 </details>
