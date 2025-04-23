@@ -40,8 +40,11 @@ open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-n
 
 ## Idea
 
-The distance between two [real numbers](real-numbers.dedekind-real-numbers.md)
-is the [absolute value](real-numbers.absolute-value-real-numbers.md) of their
+The
+{{#concept "distance function" Disambiguation="between real numbers" Agda=dist-ℝ}}
+between two [real numbers](real-numbers.dedekind-real-numbers.md) measures how
+far they are apart. It is the
+[absolute value](real-numbers.absolute-value-real-numbers.md) of their
 [difference](real-numbers.difference-real-numbers.md).
 
 ## Definition
