@@ -10,8 +10,10 @@ module foundation.axiom-of-countable-choice where
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.dependent-pair-types
 open import foundation.axiom-of-choice
 open import foundation.inhabited-types
+open import foundation.axiom-of-dependent-choice
 open import foundation.universe-levels
 ```
 
@@ -51,4 +53,15 @@ level-ACω-level-AC0 ac0 f =
 
 ACω-AC0 : AC0 → ACω
 ACω-AC0 ac0 = level-ACω-level-AC0 ac0
+```
+
+### The axiom of dependent choice implies the axiom of countable choice
+
+```agda
+level-ACω-level-ADC : {l : Level} → level-ADC l l → level-ACω l
+level-ACω-level-ADC adc f =
+  let
+    A = Σ ℕ (λ n → type-Inhabited-Type (f n))
+    R = ?
+  in {!   !}
 ```
