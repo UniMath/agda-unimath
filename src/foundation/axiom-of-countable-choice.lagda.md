@@ -11,8 +11,12 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.propositional-truncations
 open import foundation.axiom-of-choice
+open import foundation.unit-type
 open import foundation.inhabited-types
+open import foundation.binary-relations
+open import foundation.identity-types
 open import foundation.axiom-of-dependent-choice
 open import foundation.universe-levels
 ```
@@ -58,10 +62,23 @@ ACω-AC0 ac0 = level-ACω-level-AC0 ac0
 ### The axiom of dependent choice implies the axiom of countable choice
 
 ```agda
-level-ACω-level-ADC : {l : Level} → level-ADC l l → level-ACω l
-level-ACω-level-ADC adc f =
+level-ACω-level-ADC : {l : Level} → level-ADC l lzero → level-ACω l
+level-ACω-level-ADC {l} adc f =
   let
+    A : UU l
     A = Σ ℕ (λ n → type-Inhabited-Type (f n))
-    R = ?
-  in {!   !}
+    R : A → A → UU lzero
+    R = (λ (m , _) (n , _) → n ＝ succ-ℕ m)
+    is-entire-R : is-entire-Relation R
+    is-entire-R =
+      λ (n , _) →
+        rec-trunc-Prop
+          ( is-inhabited-Prop _)
+          ( λ fsn → unit-trunc-Prop ((succ-ℕ n , fsn) , refl))
+          ( is-inhabited-type-Inhabited-Type (f (succ-ℕ n)))
+  in
+    rec-trunc-Prop
+      ( is-inhabited-Prop _)
+      ( λ (f , Rfnfsn) → unit-trunc-Prop (λ n → {!   !}))
+      ( adc A (unit-trunc-Prop (zero-ℕ , {!   !})) R is-entire-R)
 ```
