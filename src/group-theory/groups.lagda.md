@@ -495,7 +495,7 @@ module _
   is-unit-right-div-eq-Group refl = right-inverse-law-mul-Group G _
 ```
 
-### If `xy = 1`, `y ＝ x⁻¹`
+### If `xy = 1`, then `y ＝ x⁻¹`
 
 ```agda
   abstract
@@ -512,7 +512,7 @@ module _
           by right-unit-law-mul-Group G (inv-Group G x)
 ```
 
-### If `xy = 1`, `x ＝ y⁻¹`
+### If `xy = 1`, then `x ＝ y⁻¹`
 
 ```agda
   unique-left-inv-Group :
