@@ -57,7 +57,7 @@ module _
   pr2 (is-lower-bound-ℕ-Prop x) = is-prop-is-lower-bound-ℕ x
 ```
 
-### If `P` is decidable, so is being a lower bound for `P`
+### If `P` is a decidable subtype of `ℕ`, then being a lower bound for `P` is decidable
 
 ```agda
 module _
