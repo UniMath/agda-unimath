@@ -167,7 +167,7 @@ module _
       equiv-eq-Fam-Inhabited-Types
 ```
 
-### Inhabited types are closed under `Σ`
+### Inhabited types are closed under Σ
 
 ```agda
 is-inhabited-Σ :
@@ -191,6 +191,15 @@ pr2 (Σ-Inhabited-Type X Y) =
   is-inhabited-Σ
     ( is-inhabited-type-Inhabited-Type X)
     ( λ x → is-inhabited-type-Inhabited-Type (Y x))
+```
+
+### The base of an inhabited Σ-type is inhabited
+
+```agda
+is-inhabited-base-is-inhabited-Σ :
+  {l1 l2 : Level} {X : UU l1} {Y : X → UU l2} →
+  is-inhabited (Σ X Y) → is-inhabited X
+is-inhabited-base-is-inhabited-Σ = map-trunc-Prop pr1
 ```
 
 ### Inhabited types are closed under maps
