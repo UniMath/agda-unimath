@@ -532,7 +532,7 @@ module _
 
   abstract
     is-surjective-right-map-triangle :
-      (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+      (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h) →
       is-surjective f → is-surjective g
     is-surjective-right-map-triangle f g h H is-surj-f x =
       apply-universal-property-trunc-Prop

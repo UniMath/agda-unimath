@@ -11,10 +11,10 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.functoriality-truncation
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
-open import foundation.function-types
 open import foundation.propositions
 open import foundation.truncations
 open import foundation.type-arithmetic-dependent-pair-types

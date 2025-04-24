@@ -7,6 +7,8 @@ module foundation.double-negation where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.universe-levels
@@ -26,10 +28,10 @@ We define double negation and triple negation
 infix 25 ¬¬_ ¬¬¬_
 
 ¬¬_ : {l : Level} → UU l → UU l
-¬¬ P = ¬ (¬ P)
+¬¬ P = ¬ ¬ P
 
 ¬¬¬_ : {l : Level} → UU l → UU l
-¬¬¬ P = ¬ (¬ (¬ P))
+¬¬¬ P = ¬ ¬ ¬ P
 ```
 
 We also define the introduction rule for double negation, and the action on maps

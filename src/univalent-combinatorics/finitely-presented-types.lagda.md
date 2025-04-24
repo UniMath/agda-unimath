@@ -30,20 +30,20 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A type is said to be finitely presented if it is presented by a standard finite
-type.
+A type is {{#concept "finitely presented" Agda=is-finitely-presented}} if it is
+[presented](foundation.set-presented-types.md) by a
+[standard finite type](univalent-combinatorics.standard-finite-types.md).
 
-## Definition
+## Definitions
 
 ### To have a presentation of cardinality `k`
 
 ```agda
-has-presentation-of-cardinality-Prop :
-  {l1 : Level} (k : ℕ) (A : UU l1) → Prop l1
+has-presentation-of-cardinality-Prop : {l : Level} → ℕ → UU l → Prop l
 has-presentation-of-cardinality-Prop k A =
-  has-set-presentation-Prop (Fin-Set k) A
+  is-set-presentation-Prop A (Fin-Set k)
 
-has-presentation-of-cardinality : {l1 : Level} (k : ℕ) (A : UU l1) → UU l1
+has-presentation-of-cardinality : {l : Level} → ℕ → UU l → UU l
 has-presentation-of-cardinality k A =
   type-Prop (has-presentation-of-cardinality-Prop k A)
 ```
@@ -51,7 +51,7 @@ has-presentation-of-cardinality k A =
 ### Finitely presented types
 
 ```agda
-is-finitely-presented : {l1 : Level} → UU l1 → UU l1
+is-finitely-presented : {l : Level} → UU l → UU l
 is-finitely-presented A =
   Σ ℕ (λ k → has-presentation-of-cardinality k A)
 ```
@@ -62,7 +62,8 @@ is-finitely-presented A =
 
 ```agda
 has-presentation-of-cardinality-has-cardinality-connected-components :
-  {l : Level} (k : ℕ) {A : UU l} → has-cardinality-connected-components k A →
+  {l : Level} (k : ℕ) {A : UU l} →
+  has-cardinality-connected-components k A →
   has-presentation-of-cardinality k A
 has-presentation-of-cardinality-has-cardinality-connected-components k {A} H =
   apply-universal-property-trunc-Prop H
@@ -97,26 +98,31 @@ has-cardinality-connected-components-has-presentation-of-cardinality k {A} H =
 
 ### To be finitely presented is a property
 
-```agda
-all-elements-equal-is-finitely-presented :
-  {l1 : Level} {A : UU l1} → all-elements-equal (is-finitely-presented A)
-all-elements-equal-is-finitely-presented {l1} {A} (pair k K) (pair l L) =
-  eq-type-subtype
-    ( λ n → has-set-presentation-Prop (Fin-Set n) A)
-    ( eq-cardinality
-      ( has-cardinality-connected-components-has-presentation-of-cardinality
-        ( k)
-        ( K))
-      ( has-cardinality-connected-components-has-presentation-of-cardinality
-        ( l)
-        ( L)))
+In other words, the cardinalty of a finite presentation is unique.
 
-is-prop-is-finitely-presented :
-  {l1 : Level} {A : UU l1} → is-prop (is-finitely-presented A)
-is-prop-is-finitely-presented =
-  is-prop-all-elements-equal all-elements-equal-is-finitely-presented
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  all-elements-equal-is-finitely-presented :
+    all-elements-equal (is-finitely-presented A)
+  all-elements-equal-is-finitely-presented (k , K) (l , L) =
+    eq-type-subtype
+      ( λ n → is-set-presentation-Prop A (Fin-Set n))
+      ( eq-cardinality
+        ( has-cardinality-connected-components-has-presentation-of-cardinality
+          ( k)
+          ( K))
+        ( has-cardinality-connected-components-has-presentation-of-cardinality
+          ( l)
+          ( L)))
+
+  is-prop-is-finitely-presented : is-prop (is-finitely-presented A)
+  is-prop-is-finitely-presented =
+    is-prop-all-elements-equal all-elements-equal-is-finitely-presented
 
 is-finitely-presented-Prop : {l : Level} (A : UU l) → Prop l
-pr1 (is-finitely-presented-Prop A) = is-finitely-presented A
-pr2 (is-finitely-presented-Prop A) = is-prop-is-finitely-presented
+is-finitely-presented-Prop A =
+  ( is-finitely-presented A , is-prop-is-finitely-presented)
 ```
