@@ -1,7 +1,7 @@
 # Linear maps between modules over rings
 
 ```agda
-module ring-theory.linear-maps-modules-rings where
+module ring-theory.linear-maps-left-modules-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -18,7 +18,7 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 
-open import ring-theory.modules-rings
+open import ring-theory.left-modules-rings
 open import ring-theory.rings
 ```
 
@@ -28,8 +28,8 @@ open import ring-theory.rings
 
 A
 {{#concept "linear map" Agda=is-linear-map-left-module-Ring Disambiguation="over modules" WD="linear map" WDID=Q207643 }}
-between [modules](ring-theory.modules-rings.md) is a map `f` with the following
-properties:
+between [left modules](ring-theory.left-modules-rings.md) is a map `f` with the
+following properties:
 
 - Additivity: `f (a + b) = f a + f b`
 - Homogeneity: `f (c * a) = c * f a`

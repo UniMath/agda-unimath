@@ -47,11 +47,11 @@ open import ring-theory.joins-right-ideals-rings public
 open import ring-theory.kernels-of-ring-homomorphisms public
 open import ring-theory.left-ideals-generated-by-subsets-rings public
 open import ring-theory.left-ideals-rings public
-open import ring-theory.linear-maps-modules-rings public
+open import ring-theory.left-modules-rings public
+open import ring-theory.linear-maps-left-modules-rings public
 open import ring-theory.local-rings public
 open import ring-theory.localizations-rings public
 open import ring-theory.maximal-ideals-rings public
-open import ring-theory.modules-rings public
 open import ring-theory.multiples-of-elements-rings public
 open import ring-theory.multiplicative-orders-of-units-rings public
 open import ring-theory.nil-ideals-rings public
@@ -75,6 +75,7 @@ open import ring-theory.quotient-rings public
 open import ring-theory.radical-ideals-rings public
 open import ring-theory.right-ideals-generated-by-subsets-rings public
 open import ring-theory.right-ideals-rings public
+open import ring-theory.right-modules-rings public
 open import ring-theory.rings public
 open import ring-theory.semirings public
 open import ring-theory.subsets-rings public
