@@ -566,7 +566,7 @@ module _
   neg-right-subtraction-Ab = inv-right-div-Group (group-Ab A)
 ```
 
-### If `x + y = 0`, `y ＝ -x` and `x ＝ -y`
+### If `x + y = 0`, then `y ＝ -x` and `x ＝ -y`
 
 ```agda
 module _

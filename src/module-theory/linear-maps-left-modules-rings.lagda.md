@@ -1,4 +1,4 @@
-# Linear maps between modules over rings
+# Linear maps between left modules over rings
 
 ```agda
 module module-theory.linear-maps-left-modules-rings where
@@ -28,7 +28,7 @@ open import ring-theory.rings
 ## Idea
 
 A
-{{#concept "linear map" Agda=is-linear-map-left-module-Ring Disambiguation="over left modules" WD="linear map" WDID=Q207643 }}
+{{#concept "linear map" Agda=is-linear-map-left-module-Ring Disambiguation="over left modules over a ring" WD="linear map" WDID=Q207643 }}
 between [left modules](module-theory.left-modules-rings.md) is a map `f` with
 the following properties:
 
