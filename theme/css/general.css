@@ -132,10 +132,26 @@ h6:target::before {
   line-height: 1.45em;
 }
 .content a {
-  text-decoration: none;
+  text-decoration: dotted underline;
+  text-underline-offset: 1px;
+  text-decoration-thickness: 1px;
 }
 .content a:hover {
-  text-decoration: underline;
+  text-decoration: solid underline;
+}
+
+.content pre a,
+.content code a,
+pre .content a,
+code .content a,
+.Agda a {
+  text-decoration: none;
+}
+.content pre a:hover,
+.content code a:hover,
+pre .content a:hover,
+code .content a:hover {
+  text-decoration: none;
 }
 .content img,
 .content video {
