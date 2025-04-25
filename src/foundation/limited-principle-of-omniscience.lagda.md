@@ -153,7 +153,7 @@ abstract
 
 ## External links
 
-- [Taboos.LPO](https://martinescardo.github.io/TypeTopology/Taboos.LPO.html) at
-  TypeTopology
+- [`Taboos.LPO`](https://martinescardo.github.io/TypeTopology/Taboos.LPO.html)
+  at TypeTopology
 - [limited principle of omniscience](https://ncatlab.org/nlab/show/limited+principle+of+omniscience)
   at $n$Lab

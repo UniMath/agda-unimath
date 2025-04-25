@@ -150,7 +150,7 @@ WLPO-level-WLPO level-wlpo = WLPO-bool-WLPO (bool-WLPO-level-WLPO level-wlpo)
 
 ## External links
 
-- [Taboos.WLPO](https://martinescardo.github.io/TypeTopology/Taboos.WLPO.html)
+- [`Taboos.WLPO`](https://martinescardo.github.io/TypeTopology/Taboos.WLPO.html)
   at TypeTopology
 - [weak limited principle of omniscience](https://ncatlab.org/nlab/show/weak+limited+principle+of+omniscience)
   at $n$Lab
