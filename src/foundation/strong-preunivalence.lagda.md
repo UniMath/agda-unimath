@@ -143,9 +143,9 @@ strong-preunivalence = strong-preunivalence-axiom-univalence-axiom univalence
 
 ### The preunivalence axiom implies the strong preunivalence axiom
 
-This argument is due to Evan Cavallo. Note that it critically depends on
-function extensionality, both for the implication that embeddings have
-propositional fibers, and to compute the equality type of `is-small`.
+This argument is due to [Evan Cavallo](https://ecavallo.net/). Note that it
+depends on the function extensionality axiom in order to compute the equality
+type of `is-small`.
 
 ```agda
 strong-preunivalence-axiom-preunivalence-axiom-Level :
