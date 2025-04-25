@@ -8,7 +8,9 @@ module order-theory.least-upper-bounds-large-posets where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.logical-equivalences
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.universe-levels
 
 open import order-theory.dependent-products-large-posets
@@ -38,6 +40,15 @@ Similarly, a
 {{#concept "least upper bound" Disambiguation="in a large poset" WD="supremum" WDID=Q215071 Agda=is-least-upper-bound-family-of-elements-Large-Poset}}
 of a family of elements `a : I → P` in a large poset `P` is an element `x` in
 `P` such that the logical equivalence
+
+```text
+  is-binary-upper-bound-Large-Poset P a b y ↔ (x ≤ y)
+```
+
+holds for every `y` in `P`.
+
+Similarly, a least upper bound of a family of elements `a : I → P` in a large
+poset `P` is an element `x` in `P` such that the logical equivalence
 
 ```text
   is-upper-bound-family-of-elements-Large-Poset P a y ↔ (x ≤ y)
@@ -128,6 +139,24 @@ module _
     is-binary-upper-bound-Large-Poset P a b y
   is-binary-upper-bound-is-least-binary-upper-bound-Large-Poset H =
     backward-implication (H _) (refl-leq-Large-Poset P _)
+```
+
+### The least upper bound of `x` and `y` is the least upper bound of `y` and `x`
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (P : Large-Poset α β)
+  {l1 l2 : Level} (a : type-Large-Poset P l1) (b : type-Large-Poset P l2)
+  where
+
+  abstract
+    is-binary-least-upper-bound-swap-Large-Poset :
+      {l3 : Level} (y : type-Large-Poset P l3) →
+      is-least-binary-upper-bound-Large-Poset P a b y →
+      is-least-binary-upper-bound-Large-Poset P b a y
+    is-binary-least-upper-bound-swap-Large-Poset _ H z =
+      H z ∘iff iff-equiv commutative-product
 ```
 
 ### Binary least upper bounds are unique up to similarity of elements
