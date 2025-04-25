@@ -31,7 +31,7 @@ open import real-numbers.upper-dedekind-real-numbers
 ## Idea
 
 The
-{{#concept "minimum" Disambiguation="binary, Dedekind real numbers" Agda=binary-min-ℝ WD="minimum" WDID=Q10585806}}
+{{#concept "minimum" Disambiguation="binary, Dedekind real numbers" Agda=min-ℝ WD="minimum" WDID=Q10585806}}
 of two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) `x` and
 `y` is a Dedekind real number with lower cut equal to the intersection of `x`
 and `y`'s lower cuts, and upper cut equal to the union of their upper cuts.
@@ -44,25 +44,25 @@ module _
   (x : ℝ l1) (y : ℝ l2)
   where
 
-  lower-real-binary-min-ℝ : lower-ℝ (l1 ⊔ l2)
-  lower-real-binary-min-ℝ = binary-min-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y)
+  lower-real-min-ℝ : lower-ℝ (l1 ⊔ l2)
+  lower-real-min-ℝ = binary-min-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y)
 
-  upper-real-binary-min-ℝ : upper-ℝ (l1 ⊔ l2)
-  upper-real-binary-min-ℝ = binary-min-upper-ℝ (upper-real-ℝ x) (upper-real-ℝ y)
+  upper-real-min-ℝ : upper-ℝ (l1 ⊔ l2)
+  upper-real-min-ℝ = binary-min-upper-ℝ (upper-real-ℝ x) (upper-real-ℝ y)
 
   abstract
-    is-disjoint-lower-upper-binary-min-ℝ :
-      is-disjoint-lower-upper-ℝ lower-real-binary-min-ℝ upper-real-binary-min-ℝ
-    is-disjoint-lower-upper-binary-min-ℝ q ((q<x , q<y) , q∈U) =
+    is-disjoint-lower-upper-min-ℝ :
+      is-disjoint-lower-upper-ℝ lower-real-min-ℝ upper-real-min-ℝ
+    is-disjoint-lower-upper-min-ℝ q ((q<x , q<y) , q∈U) =
       elim-disjunction
         ( empty-Prop)
         ( λ x<q → is-disjoint-cut-ℝ x q (q<x , x<q))
         ( λ y<q → is-disjoint-cut-ℝ y q (q<y , y<q))
         q∈U
 
-    is-located-lower-upper-binary-min-ℝ :
-      is-located-lower-upper-ℝ lower-real-binary-min-ℝ upper-real-binary-min-ℝ
-    is-located-lower-upper-binary-min-ℝ p q p<q =
+    is-located-lower-upper-min-ℝ :
+      is-located-lower-upper-ℝ lower-real-min-ℝ upper-real-min-ℝ
+    is-located-lower-upper-min-ℝ p q p<q =
       elim-disjunction
         ( claim)
         ( λ p<x →
@@ -76,16 +76,16 @@ module _
       where
         claim : Prop (l1 ⊔ l2)
         claim =
-          cut-lower-ℝ lower-real-binary-min-ℝ p ∨
-          cut-upper-ℝ upper-real-binary-min-ℝ q
+          cut-lower-ℝ lower-real-min-ℝ p ∨
+          cut-upper-ℝ upper-real-min-ℝ q
 
-  binary-min-ℝ : ℝ (l1 ⊔ l2)
-  binary-min-ℝ =
+  min-ℝ : ℝ (l1 ⊔ l2)
+  min-ℝ =
     real-lower-upper-ℝ
-      ( lower-real-binary-min-ℝ)
-      ( upper-real-binary-min-ℝ)
-      ( is-disjoint-lower-upper-binary-min-ℝ)
-      ( is-located-lower-upper-binary-min-ℝ)
+      ( lower-real-min-ℝ)
+      ( upper-real-min-ℝ)
+      ( is-disjoint-lower-upper-min-ℝ)
+      ( is-located-lower-upper-min-ℝ)
 ```
 
 ## Properties
@@ -98,13 +98,13 @@ module _
   (x : ℝ l1) (y : ℝ l2)
   where
 
-  is-greatest-binary-lower-bound-binary-min-ℝ :
+  is-greatest-binary-lower-bound-min-ℝ :
     is-greatest-binary-lower-bound-Large-Poset
       ( ℝ-Large-Poset)
       ( x)
       ( y)
-      ( binary-min-ℝ x y)
-  is-greatest-binary-lower-bound-binary-min-ℝ z =
+      ( min-ℝ x y)
+  is-greatest-binary-lower-bound-min-ℝ z =
     is-greatest-binary-lower-bound-binary-min-lower-ℝ
       ( lower-real-ℝ x)
       ( lower-real-ℝ y)
@@ -115,7 +115,7 @@ module _
 
 ```agda
 has-meets-ℝ-Large-Poset : has-meets-Large-Poset ℝ-Large-Poset
-meet-has-meets-Large-Poset has-meets-ℝ-Large-Poset = binary-min-ℝ
+meet-has-meets-Large-Poset has-meets-ℝ-Large-Poset = min-ℝ
 is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
-  has-meets-ℝ-Large-Poset = is-greatest-binary-lower-bound-binary-min-ℝ
+  has-meets-ℝ-Large-Poset = is-greatest-binary-lower-bound-min-ℝ
 ```

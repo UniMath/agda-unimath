@@ -24,9 +24,11 @@ open import elementary-number-theory.archimedean-property-natural-numbers public
 open import elementary-number-theory.archimedean-property-positive-rational-numbers public
 open import elementary-number-theory.archimedean-property-rational-numbers public
 open import elementary-number-theory.arithmetic-functions public
+open import elementary-number-theory.arithmetic-sequences-positive-rational-numbers public
 open import elementary-number-theory.based-induction-natural-numbers public
 open import elementary-number-theory.based-strong-induction-natural-numbers public
 open import elementary-number-theory.bell-numbers public
+open import elementary-number-theory.bernoullis-inequality-positive-rational-numbers public
 open import elementary-number-theory.bezouts-lemma-integers public
 open import elementary-number-theory.bezouts-lemma-natural-numbers public
 open import elementary-number-theory.binomial-coefficients public
@@ -76,6 +78,7 @@ open import elementary-number-theory.field-of-rational-numbers public
 open import elementary-number-theory.finitary-natural-numbers public
 open import elementary-number-theory.finitely-cyclic-maps public
 open import elementary-number-theory.fundamental-theorem-of-arithmetic public
+open import elementary-number-theory.geometric-sequences-positive-rational-numbers public
 open import elementary-number-theory.goldbach-conjecture public
 open import elementary-number-theory.greatest-common-divisor-integers public
 open import elementary-number-theory.greatest-common-divisor-natural-numbers public
@@ -83,6 +86,8 @@ open import elementary-number-theory.group-of-integers public
 open import elementary-number-theory.half-integers public
 open import elementary-number-theory.hardy-ramanujan-number public
 open import elementary-number-theory.inclusion-natural-numbers-conatural-numbers public
+open import elementary-number-theory.inequality-arithmetic-geometric-means-integers public
+open import elementary-number-theory.inequality-arithmetic-geometric-means-rational-numbers public
 open import elementary-number-theory.inequality-conatural-numbers public
 open import elementary-number-theory.inequality-integer-fractions public
 open import elementary-number-theory.inequality-integers public
@@ -142,6 +147,7 @@ open import elementary-number-theory.peano-arithmetic public
 open import elementary-number-theory.pisano-periods public
 open import elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility public
 open import elementary-number-theory.positive-and-negative-integers public
+open import elementary-number-theory.positive-and-negative-rational-numbers public
 open import elementary-number-theory.positive-conatural-numbers public
 open import elementary-number-theory.positive-integer-fractions public
 open import elementary-number-theory.positive-integers public
@@ -165,6 +171,7 @@ open import elementary-number-theory.square-free-natural-numbers public
 open import elementary-number-theory.squares-integers public
 open import elementary-number-theory.squares-modular-arithmetic public
 open import elementary-number-theory.squares-natural-numbers public
+open import elementary-number-theory.squares-rational-numbers public
 open import elementary-number-theory.standard-cyclic-groups public
 open import elementary-number-theory.standard-cyclic-rings public
 open import elementary-number-theory.stirling-numbers-of-the-second-kind public

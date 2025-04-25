@@ -25,7 +25,7 @@ open import order-theory.sequences-preorders
 
 ## Idea
 
-A {{#concept "sequence" Disambiguation="in a poset" Agda=type-sequence-Poset}}
+A {{#concept "sequence" Disambiguation="in a poset" Agda=sequence-type-Poset}}
 in a [poset](order-theory.posets.md) is a [sequence](foundation.sequences.md) in
 its underlying type.
 
@@ -38,8 +38,8 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  type-sequence-Poset : UU l1
-  type-sequence-Poset = type-sequence-Preorder (preorder-Poset P)
+  sequence-type-Poset : UU l1
+  sequence-type-Poset = sequence-type-Preorder (preorder-Poset P)
 ```
 
 ### Pointwise comparison on sequences in partially ordered sets
@@ -50,25 +50,25 @@ module _
   where
 
   leq-value-prop-sequence-Poset :
-    (u v : type-sequence-Poset P) → ℕ → Prop l2
+    (u v : sequence-type-Poset P) → ℕ → Prop l2
   leq-value-prop-sequence-Poset =
     leq-value-prop-sequence-Preorder (preorder-Poset P)
 
   leq-value-sequence-Poset :
-    (u v : type-sequence-Poset P) → ℕ → UU l2
+    (u v : sequence-type-Poset P) → ℕ → UU l2
   leq-value-sequence-Poset =
     leq-value-sequence-Preorder (preorder-Poset P)
 
-  leq-prop-sequence-Poset : (u v : type-sequence-Poset P) → Prop l2
+  leq-prop-sequence-Poset : (u v : sequence-type-Poset P) → Prop l2
   leq-prop-sequence-Poset =
     leq-prop-sequence-Preorder (preorder-Poset P)
 
-  leq-sequence-Poset : (u v : type-sequence-Poset P) → UU l2
+  leq-sequence-Poset : (u v : sequence-type-Poset P) → UU l2
   leq-sequence-Poset =
     leq-sequence-Preorder (preorder-Poset P)
 
   is-prop-leq-sequence-Poset :
-    (u v : type-sequence-Poset P) →
+    (u v : sequence-type-Poset P) →
     is-prop (leq-sequence-Poset u v)
   is-prop-leq-sequence-Poset =
     is-prop-leq-sequence-Preorder (preorder-Poset P)
