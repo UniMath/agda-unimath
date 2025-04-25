@@ -34,7 +34,7 @@ open import univalent-combinatorics.standard-finite-types
 
 Mapping a function over a [tuple](lists.tuples.md) is equivalent to mapping the
 same function over the
-[corresponding](linear-algebra.equivalence-tuples-finite-sequences.md)
+[corresponding](lists.equivalence-tuples-finite-sequences.md)
 [finite sequence](lists.finite-sequences.md)
 
 ## Proof
