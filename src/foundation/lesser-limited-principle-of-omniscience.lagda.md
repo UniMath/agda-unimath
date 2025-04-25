@@ -47,8 +47,8 @@ then merely one [or](foundation.disjunction.md) the other are
 [empty](foundation.empty-types.md).
 
 ```agda
-level-LLPO-Prop : (l : Level) → Prop (lsuc l)
-level-LLPO-Prop l =
+level-prop-LLPO : (l : Level) → Prop (lsuc l)
+level-prop-LLPO l =
   Π-Prop
     ( decidable-subtype l ℕ)
     ( λ A →
@@ -62,7 +62,7 @@ level-LLPO-Prop l =
             is-empty-decidable-subtype-Prop B)))
 
 level-LLPO : (l : Level) → UU (lsuc l)
-level-LLPO l = type-Prop (level-LLPO-Prop l)
+level-LLPO l = type-Prop (level-prop-LLPO l)
 
 LLPO : UUω
 LLPO = {l : Level} → level-LLPO l

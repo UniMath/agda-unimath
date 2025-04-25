@@ -42,15 +42,15 @@ particular, it is a restricted form of the
 [law of excluded middle](foundation.law-of-excluded-middle.md).
 
 ```agda
-level-WLPO-Prop : (l : Level) → Prop (lsuc l)
-level-WLPO-Prop l =
+level-prop-WLPO : (l : Level) → Prop (lsuc l)
+level-prop-WLPO l =
   Π-Prop
     ( decidable-subtype l ℕ)
     ( λ P →
       is-decidable-Prop (is-full-decidable-subtype-Prop P))
 
 level-WLPO : (l : Level) → UU (lsuc l)
-level-WLPO l = type-Prop (level-WLPO-Prop l)
+level-WLPO l = type-Prop (level-prop-WLPO l)
 
 WLPO : UUω
 WLPO = {l : Level} → level-WLPO l

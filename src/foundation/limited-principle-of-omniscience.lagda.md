@@ -40,14 +40,14 @@ The
 [inhabited](foundation.inhabited-subtypes.md)
 
 ```agda
-level-LPO-Prop : (l : Level) → Prop (lsuc l)
-level-LPO-Prop l =
+level-prop-LPO : (l : Level) → Prop (lsuc l)
+level-prop-LPO l =
   Π-Prop
     ( decidable-subtype l ℕ)
     ( λ S → is-merely-decidable-Prop (type-decidable-subtype S))
 
 level-LPO : (l : Level) → UU (lsuc l)
-level-LPO l = type-Prop (level-LPO-Prop l)
+level-LPO l = type-Prop (level-prop-LPO l)
 
 LPO : UUω
 LPO = {l : Level} → level-LPO l
