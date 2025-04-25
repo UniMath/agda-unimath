@@ -122,28 +122,37 @@ module _
     modulus-limit-sequence-Pseudometric-Space M u x →
     modulus-limit-sequence-Pseudometric-Space M u y →
     is-indistinguishable-Pseudometric-Space M x y
-  indistinguishable-limit-modulus-limit-sequence-Pseudometric-Space mx my =
-    Π-merge-family-ℚ⁺
-      ( λ d →
-        Σ ( ℕ)
-          ( λ N →
-            (n : ℕ) →
-            leq-ℕ N n →
-            neighborhood-Pseudometric-Space M d (u n) x))
-      ( λ d →
-        Σ ( ℕ)
-          ( λ N →
-            (n : ℕ) →
-            leq-ℕ N n →
-            neighborhood-Pseudometric-Space M d (u n) y))
+  indistinguishable-limit-modulus-limit-sequence-Pseudometric-Space mx my ε =
+    tr
       ( is-upper-bound-dist-Pseudometric-Space M x y)
-      ( tr-modulus-indistinguishable)
-      ( λ d →
-        modulus-modulus-limit-sequence-Pseudometric-Space M u x mx d ,
-        is-modulus-modulus-limit-sequence-Pseudometric-Space M u x mx d)
-      ( λ d →
-        modulus-modulus-limit-sequence-Pseudometric-Space M u y my d ,
-        is-modulus-modulus-limit-sequence-Pseudometric-Space M u y my d)
+      ( eq-add-split-ℚ⁺ ε)
+      ( tr-modulus-indistinguishable
+        ( left-summand-split-ℚ⁺ ε)
+        ( right-summand-split-ℚ⁺ ε)
+        ( ( modulus-modulus-limit-sequence-Pseudometric-Space
+            ( M)
+            ( u)
+            ( x)
+            ( mx)
+            ( left-summand-split-ℚ⁺ ε)) ,
+          ( is-modulus-modulus-limit-sequence-Pseudometric-Space
+            ( M)
+            ( u)
+            ( x)
+            ( mx)
+            ( left-summand-split-ℚ⁺ ε)))
+        ( ( modulus-modulus-limit-sequence-Pseudometric-Space
+            ( M)
+            ( u)
+            ( y)
+            ( my)
+            ( right-summand-split-ℚ⁺ ε)) ,
+          ( is-modulus-modulus-limit-sequence-Pseudometric-Space
+            ( M)
+            ( u)
+            ( y)
+            ( my)
+            ( right-summand-split-ℚ⁺ ε))))
     where
       tr-modulus-indistinguishable :
         (d₁ d₂ : ℚ⁺) →
