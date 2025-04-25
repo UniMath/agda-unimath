@@ -36,10 +36,6 @@ are types `X` with the [property](foundation-core.propositions.md) that every
 property of being
 [Dedekind finite](univalent-combinatorics.dedekind-finite-types.md).
 
-We could also ask for the stronger condition that every
-self-[surjection](foundation.surjective-maps.md) is an equivalence. We call this
-{{#concept "strong dual Dedekind finiteness" Agda=is-strong-dual-dedekind-finite}}
-
 ## Definitions
 
 ### The predicate of being a dual Dedekind finite type
@@ -76,25 +72,6 @@ module _
   is-dual-dedekind-finite-Dual-Dedekind-Finite-Type :
     is-dual-dedekind-finite type-Dual-Dedekind-Finite-Type
   is-dual-dedekind-finite-Dual-Dedekind-Finite-Type = pr2 X
-```
-
-### The predicate of being a strong dual Dedekind finite type
-
-```agda
-is-strong-dual-dedekind-finite-Prop : {l : Level} → UU l → Prop l
-is-strong-dual-dedekind-finite-Prop X =
-  Π-Prop
-    ( X → X)
-    ( λ f → function-Prop (is-surjective f) (is-equiv-Prop f))
-
-is-strong-dual-dedekind-finite : {l : Level} → UU l → UU l
-is-strong-dual-dedekind-finite X =
-  type-Prop (is-strong-dual-dedekind-finite-Prop X)
-
-is-prop-is-strong-dual-dedekind-finite :
-  {l : Level} {X : UU l} → is-prop (is-strong-dual-dedekind-finite X)
-is-prop-is-strong-dual-dedekind-finite {X = X} =
-  is-prop-type-Prop (is-strong-dual-dedekind-finite-Prop X)
 ```
 
 ## Properties
