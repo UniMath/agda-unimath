@@ -31,7 +31,7 @@ open import foundation.transport-along-identifications
 ## Idea
 
 The
-{{#concept "arithmetic mean-geometric mean inequality" Disambiguation="on rational numbers" WD="AM-GM inequality" WDID=Q841170 Agda=eq-gm-am-iff-eq-ℚ}}
+{{#concept "arithmetic mean-geometric mean inequality" Disambiguation="on rational numbers" WD="AM-GM inequality" WDID=Q841170 Agda=leq-geometric-mean-arithmetic-mean-ℚ}}
 states that $\sqrt{xy} \leq \frac{x + y}{2}$, where that square root is defined.
 We cannot take arbitrary square roots in
 [rational numbers](elementary-number-theory.rational-numbers.md), but we can
@@ -105,10 +105,10 @@ abstract
             ( neg-ℚ (rational-ℕ 2 *ℚ (x *ℚ y)))
       ＝ square-ℚ (x -ℚ y) by inv (square-diff-ℚ x y)
 
-  leq-gm-am-ℚ :
+  leq-geometric-mean-arithmetic-mean-ℚ :
     (x y : ℚ) →
     leq-ℚ (rational-ℕ 4 *ℚ (x *ℚ y)) (square-ℚ (x +ℚ y))
-  leq-gm-am-ℚ x y =
+  leq-geometric-mean-arithmetic-mean-ℚ x y =
     leq-is-nonnegative-diff-ℚ
       ( rational-ℕ 4 *ℚ (x *ℚ y))
       ( square-ℚ (x +ℚ y))
