@@ -17,8 +17,9 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences
 open import linear-algebra.finite-sequences-on-commutative-semirings
+
+open import lists.finite-sequences
 
 open import ring-theory.sums-semirings
 
@@ -31,8 +32,8 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The **sum operation** extends the binary addition operation on a commutative
-semiring `R` to any [finite sequence](linear-algebra.finite-sequences.md) of
-elements of `R`.
+semiring `R` to any [finite sequence](lists.finite-sequences.md) of elements of
+`R`.
 
 ## Definition
 

@@ -12,10 +12,11 @@ open import elementary-number-theory.natural-numbers
 open import foundation.universe-levels
 
 open import linear-algebra.constant-tuples
-open import linear-algebra.functoriality-tuples
 open import linear-algebra.matrices-on-rings
-open import linear-algebra.tuples
 open import linear-algebra.tuples-on-rings
+
+open import lists.functoriality-tuples
+open import lists.tuples
 
 open import ring-theory.rings
 ```

@@ -22,11 +22,10 @@ open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.tuples
-
 open import lists.permutation-tuples
 open import lists.sorted-tuples
 open import lists.sorting-algorithms-tuples
+open import lists.tuples
 
 open import order-theory.decidable-total-orders
 ```

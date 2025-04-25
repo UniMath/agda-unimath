@@ -1,7 +1,7 @@
 # The equivalence between tuples and finite sequences
 
 ```agda
-module linear-algebra.equivalence-tuples-finite-sequences where
+module lists.equivalence-tuples-finite-sequences where
 ```
 
 <details><summary>Imports</summary>
@@ -20,8 +20,8 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences
-open import linear-algebra.tuples
+open import lists.finite-sequences
+open import lists.tuples
 ```
 
 </details>

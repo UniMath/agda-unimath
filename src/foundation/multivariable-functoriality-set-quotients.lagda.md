@@ -18,7 +18,7 @@ open import foundation-core.equivalence-relations
 open import foundation-core.function-types
 open import foundation-core.homotopies
 
-open import linear-algebra.finite-sequences
+open import lists.finite-sequences
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -27,8 +27,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Say we have a [finite sequence](linear-algebra.finite-sequences.md) of types
-`A1`, ..., `An` each equipped with an
+Say we have a [finite sequence](lists.finite-sequences.md) of types `A1`, ...,
+`An` each equipped with an
 [equivalence relation](foundation.equivalence-relations.md) `Ri`, as well as a
 type `X` equipped with an equivalence relation `S`, Then, any multivariable
 operation from the `Ai`s to the `X` that respects the equivalence relations

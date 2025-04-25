@@ -23,8 +23,8 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 
-open import linear-algebra.finite-sequences
-open import linear-algebra.tuples
+open import lists.finite-sequences
+open import lists.tuples
 ```
 
 </details>

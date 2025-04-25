@@ -14,11 +14,10 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.tuples
-
 open import lists.arrays
 open import lists.lists
 open import lists.sorted-tuples
+open import lists.tuples
 
 open import order-theory.decidable-total-orders
 ```

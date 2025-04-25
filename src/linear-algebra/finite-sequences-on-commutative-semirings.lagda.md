@@ -27,8 +27,7 @@ open import linear-algebra.finite-sequences-on-semirings
 
 Finite sequences on a
 [commutative semiring](commutative-algebra.commutative-semirings.md) `R` are
-[finite sequences](linear-algebra.finite-sequences.md) on the underlying type of
-`R`.
+[finite sequences](lists.finite-sequences.md) on the underlying type of `R`.
 
 ## Definitions
 

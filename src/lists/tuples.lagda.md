@@ -1,7 +1,7 @@
 # Tuples
 
 ```agda
-module linear-algebra.tuples where
+module lists.tuples where
 ```
 
 <details><summary>Imports</summary>

@@ -14,9 +14,10 @@ open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-tuples
 open import linear-algebra.matrices
-open import linear-algebra.tuples
+
+open import lists.functoriality-tuples
+open import lists.tuples
 ```
 
 </details>

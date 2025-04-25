@@ -21,9 +21,10 @@ open import group-theory.monoids
 open import group-theory.semigroups
 
 open import linear-algebra.constant-tuples
-open import linear-algebra.functoriality-tuples
-open import linear-algebra.tuples
 open import linear-algebra.tuples-on-commutative-rings
+
+open import lists.functoriality-tuples
+open import lists.tuples
 ```
 
 </details>
@@ -31,7 +32,7 @@ open import linear-algebra.tuples-on-commutative-rings
 ## Idea
 
 Given an [Euclidean domain](commutative-algebra.euclidean-domains.md) `R`, the
-type `tuple n R` of `R`-[tuples](linear-algebra.tuples.md) is an `R`-module.
+type `tuple n R` of `R`-[tuples](lists.tuples.md) is an `R`-module.
 
 ## Definitions
 

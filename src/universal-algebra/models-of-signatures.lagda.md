@@ -11,7 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.sets
 open import foundation.universe-levels
 
-open import linear-algebra.tuples
+open import lists.tuples
 
 open import universal-algebra.signatures
 ```

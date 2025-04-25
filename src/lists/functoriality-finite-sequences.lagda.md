@@ -1,7 +1,7 @@
 # Functoriality of the type of finite sequences
 
 ```agda
-module linear-algebra.functoriality-finite-sequences where
+module lists.functoriality-finite-sequences where
 ```
 
 <details><summary>Imports</summary>
@@ -19,7 +19,7 @@ open import foundation.postcomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import linear-algebra.finite-sequences
+open import lists.finite-sequences
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -29,7 +29,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 Any map `f : A → B` determines a map between
-[finite sequences](linear-algebra.finite-sequences.md)
+[finite sequences](lists.finite-sequences.md)
 `fin-sequence A n → fin-sequence B n` for every `n`.
 
 ## Definition

@@ -20,12 +20,11 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-tuples
-open import linear-algebra.tuples
-
 open import lists.arrays
 open import lists.concatenation-lists
+open import lists.functoriality-tuples
 open import lists.lists
+open import lists.tuples
 ```
 
 </details>

@@ -22,11 +22,10 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.equivalence-tuples-finite-sequences
-open import linear-algebra.finite-sequences
-open import linear-algebra.tuples
-
+open import lists.equivalence-tuples-finite-sequences
+open import lists.finite-sequences
 open import lists.lists
+open import lists.tuples
 
 open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -37,8 +36,8 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 An array is a pair of a natural number `n`, and a
-[finite sequence](linear-algebra.finite-sequences.md) of elements of the type
-`A`. We show that arrays and lists are equivalent.
+[finite sequence](lists.finite-sequences.md) of elements of the type `A`. We
+show that arrays and lists are equivalent.
 
 ```agda
 array : {l : Level} → UU l → UU l

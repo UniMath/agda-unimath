@@ -38,7 +38,7 @@ open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
 
-open import linear-algebra.finite-sequences
+open import lists.finite-sequences
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -47,8 +47,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Say we have a [finite sequence](linear-algebra.finite-sequences.md) of types
-`A1`, ..., `An` each equipped with an
+Say we have a [finite sequence](lists.finite-sequences.md) of types `A1`, ...,
+`An` each equipped with an
 [equivalence relation](foundation.equivalence-relations.md) `Ri`. Then, the set
 quotient of this finite sequence is the finite sequence of the
 [set quotients](foundation.set-quotients.md) of each `Ai`.

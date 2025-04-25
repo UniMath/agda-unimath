@@ -21,9 +21,10 @@ open import group-theory.monoids
 open import group-theory.semigroups
 
 open import linear-algebra.constant-tuples
-open import linear-algebra.functoriality-tuples
-open import linear-algebra.tuples
 open import linear-algebra.tuples-on-semirings
+
+open import lists.functoriality-tuples
+open import lists.tuples
 
 open import ring-theory.rings
 ```
@@ -33,7 +34,7 @@ open import ring-theory.rings
 ## Idea
 
 Given a [ring](ring-theory.rings.md) `R`, the type `tuple n R` of
-`R`-[tuples](linear-algebra.tuples.md) is an
+`R`-[tuples](lists.tuples.md) is an
 [Abelian group](group-theory.abelian-groups.md).
 
 ## Definitions

@@ -17,8 +17,8 @@ open import foundation.equivalence-relations
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-tuples
-open import linear-algebra.tuples
+open import lists.functoriality-tuples
+open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories

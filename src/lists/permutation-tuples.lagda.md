@@ -25,15 +25,14 @@ open import foundation.negated-equality
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import linear-algebra.equivalence-tuples-finite-sequences
-open import linear-algebra.finite-sequences
-open import linear-algebra.functoriality-finite-sequences
-open import linear-algebra.functoriality-tuples
-open import linear-algebra.functoriality-tuples-finite-sequences
-open import linear-algebra.tuples
-
 open import lists.arrays
+open import lists.equivalence-tuples-finite-sequences
+open import lists.finite-sequences
+open import lists.functoriality-finite-sequences
+open import lists.functoriality-tuples
+open import lists.functoriality-tuples-finite-sequences
 open import lists.lists
+open import lists.tuples
 
 open import univalent-combinatorics.standard-finite-types
 ```

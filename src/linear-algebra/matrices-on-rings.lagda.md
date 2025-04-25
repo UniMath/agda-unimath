@@ -16,8 +16,9 @@ open import foundation.universe-levels
 open import linear-algebra.constant-matrices
 open import linear-algebra.functoriality-matrices
 open import linear-algebra.matrices
-open import linear-algebra.tuples
 open import linear-algebra.tuples-on-rings
+
+open import lists.tuples
 
 open import ring-theory.rings
 ```

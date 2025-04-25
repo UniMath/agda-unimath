@@ -18,12 +18,11 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 
-open import linear-algebra.tuples
-
 open import lists.concatenation-lists
 open import lists.functoriality-lists
 open import lists.lists
 open import lists.reversing-lists
+open import lists.tuples
 ```
 
 </details>

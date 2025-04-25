@@ -15,8 +15,9 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences
 open import linear-algebra.finite-sequences-on-rings
+
+open import lists.finite-sequences
 
 open import ring-theory.rings
 open import ring-theory.sums-semirings
@@ -30,7 +31,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The sum operation extends the binary addition operation on a ring `R` to any
-[finite sequence](linear-algebra.finite-sequences.md) of elements of `R`.
+[finite sequence](lists.finite-sequences.md) of elements of `R`.
 
 ## Definition
 

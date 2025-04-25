@@ -18,8 +18,8 @@ open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import linear-algebra.finite-sequences
-open import linear-algebra.functoriality-finite-sequences
+open import lists.finite-sequences
+open import lists.functoriality-finite-sequences
 
 open import ring-theory.semirings
 ```
@@ -30,7 +30,7 @@ open import ring-theory.semirings
 
 Given a [semiring](ring-theory.semirings.md) `R`, the type
 `finite-sequence-Semiring R n` of
-`R`-[finite sequences](linear-algebra.finite-sequences.md) is a
+`R`-[finite sequences](lists.finite-sequences.md) is a
 [commutative monoid](group-theory.commutative-monoids.md) under addition.
 
 ## Definitions

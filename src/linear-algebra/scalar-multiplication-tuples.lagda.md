@@ -11,8 +11,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-tuples
-open import linear-algebra.tuples
+open import lists.functoriality-tuples
+open import lists.tuples
 ```
 
 </details>
@@ -20,7 +20,7 @@ open import linear-algebra.tuples
 ## Idea
 
 Any operation `B → A → A` for some type `B` of formal scalars induces an
-operation on [tuples](linear-algebra.tuples.md) `B → tuple n A → tuple n A`.
+operation on [tuples](lists.tuples.md) `B → tuple n A → tuple n A`.
 
 ## Definition
 

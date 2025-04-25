@@ -16,10 +16,9 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.tuples
-
 open import lists.permutation-tuples
 open import lists.sorted-tuples
+open import lists.tuples
 
 open import order-theory.decidable-total-orders
 ```

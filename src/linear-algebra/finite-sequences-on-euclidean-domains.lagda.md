@@ -20,9 +20,10 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import linear-algebra.finite-sequences
 open import linear-algebra.finite-sequences-on-commutative-rings
-open import linear-algebra.functoriality-finite-sequences
+
+open import lists.finite-sequences
+open import lists.functoriality-finite-sequences
 ```
 
 </details>
@@ -30,8 +31,8 @@ open import linear-algebra.functoriality-finite-sequences
 ## Idea
 
 Given an [Euclidean domain](commutative-algebra.euclidean-domains.md) `R`, the
-type `fin-sequence n R` of
-`R`-[finite sequences](linear-algebra.finite-sequences.md) is an `R`-module.
+type `fin-sequence n R` of `R`-[finite sequences](lists.finite-sequences.md) is
+an `R`-module.
 
 ## Definitions
 

@@ -20,7 +20,7 @@ open import elementary-number-theory.ring-of-integers
 open import foundation.homotopies
 open import foundation.identity-types
 
-open import linear-algebra.finite-sequences
+open import lists.finite-sequences
 
 open import univalent-combinatorics.standard-finite-types
 ```

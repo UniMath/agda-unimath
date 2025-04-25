@@ -1,7 +1,7 @@
 # Functoriality of the type of tuples
 
 ```agda
-module linear-algebra.functoriality-tuples where
+module lists.functoriality-tuples where
 ```
 
 <details><summary>Imports</summary>
@@ -19,7 +19,7 @@ open import foundation.postcomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import linear-algebra.tuples
+open import lists.tuples
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -28,7 +28,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Any map `f : A → B` determines a map between [tuples](linear-algebra.tuples.md)
+Any map `f : A → B` determines a map between [tuples](lists.tuples.md)
 `tuple A n → tuple B n` for every `n`.
 
 ## Definition

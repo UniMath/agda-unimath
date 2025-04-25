@@ -16,13 +16,12 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.tuples
-
 open import lists.arrays
 open import lists.lists
 open import lists.permutation-lists
 open import lists.sorted-lists
 open import lists.sorting-algorithms-tuples
+open import lists.tuples
 
 open import order-theory.decidable-total-orders
 ```

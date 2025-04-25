@@ -11,15 +11,15 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.tuples
+open import lists.tuples
 ```
 
 </details>
 
 ## Idea
 
-Diagonal tuples are [tuples](linear-algebra.tuples.md) on the diagonal, i.e.,
-they are tuples of which all coefficients are equal.
+Diagonal tuples are [tuples](lists.tuples.md) on the diagonal, i.e., they are
+tuples of which all coefficients are equal.
 
 ## Definition
 

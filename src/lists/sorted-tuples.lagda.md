@@ -19,11 +19,10 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.equivalence-tuples-finite-sequences
-open import linear-algebra.finite-sequences
-open import linear-algebra.tuples
-
+open import lists.equivalence-tuples-finite-sequences
+open import lists.finite-sequences
 open import lists.permutation-tuples
+open import lists.tuples
 
 open import order-theory.decidable-total-orders
 

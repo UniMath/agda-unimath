@@ -19,7 +19,7 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 
-open import linear-algebra.tuples
+open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories

@@ -11,8 +11,9 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-tuples
 open import linear-algebra.matrices
+
+open import lists.functoriality-tuples
 ```
 
 </details>

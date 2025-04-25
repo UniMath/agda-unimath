@@ -8,17 +8,12 @@ module linear-algebra where
 open import linear-algebra.constant-matrices public
 open import linear-algebra.constant-tuples public
 open import linear-algebra.diagonal-matrices-on-rings public
-open import linear-algebra.equivalence-tuples-finite-sequences public
-open import linear-algebra.finite-sequences public
 open import linear-algebra.finite-sequences-on-commutative-rings public
 open import linear-algebra.finite-sequences-on-commutative-semirings public
 open import linear-algebra.finite-sequences-on-euclidean-domains public
 open import linear-algebra.finite-sequences-on-rings public
 open import linear-algebra.finite-sequences-on-semirings public
-open import linear-algebra.functoriality-finite-sequences public
 open import linear-algebra.functoriality-matrices public
-open import linear-algebra.functoriality-tuples public
-open import linear-algebra.functoriality-tuples-finite-sequences public
 open import linear-algebra.matrices public
 open import linear-algebra.matrices-on-rings public
 open import linear-algebra.multiplication-matrices public
@@ -26,7 +21,6 @@ open import linear-algebra.scalar-multiplication-matrices public
 open import linear-algebra.scalar-multiplication-tuples public
 open import linear-algebra.scalar-multiplication-tuples-on-rings public
 open import linear-algebra.transposition-matrices public
-open import linear-algebra.tuples public
 open import linear-algebra.tuples-on-commutative-rings public
 open import linear-algebra.tuples-on-commutative-semirings public
 open import linear-algebra.tuples-on-euclidean-domains public

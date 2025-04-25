@@ -18,11 +18,10 @@ open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-tuples
-open import linear-algebra.tuples
-
+open import lists.functoriality-tuples
 open import lists.lists
 open import lists.lists-discrete-types
+open import lists.tuples
 
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures

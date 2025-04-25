@@ -20,8 +20,9 @@ open import group-theory.monoids
 open import group-theory.semigroups
 
 open import linear-algebra.constant-tuples
-open import linear-algebra.functoriality-tuples
-open import linear-algebra.tuples
+
+open import lists.functoriality-tuples
+open import lists.tuples
 
 open import ring-theory.semirings
 ```
@@ -31,7 +32,7 @@ open import ring-theory.semirings
 ## Idea
 
 Given a [semiring](ring-theory.semirings.md) `R`, the type `tuple n R` of
-`R`-[tuples](linear-algebra.tuples.md) is a
+`R`-[tuples](lists.tuples.md) is a
 [commutative monoid](group-theory.commutative-monoids.md) under addition.
 
 ## Definitions

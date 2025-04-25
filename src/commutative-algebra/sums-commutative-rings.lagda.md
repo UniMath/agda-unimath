@@ -20,8 +20,9 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences
 open import linear-algebra.finite-sequences-on-commutative-rings
+
+open import lists.finite-sequences
 
 open import ring-theory.sums-rings
 
@@ -34,8 +35,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The **sum operation** extends the binary addition operation on a commutative
-ring `A` to any [finite sequence](linear-algebra.finite-sequences.md) of
-elements of `A`.
+ring `A` to any [finite sequence](lists.finite-sequences.md) of elements of `A`.
 
 ## Definition
 

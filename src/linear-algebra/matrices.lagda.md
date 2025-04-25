@@ -15,8 +15,8 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-tuples
-open import linear-algebra.tuples
+open import lists.functoriality-tuples
+open import lists.tuples
 ```
 
 </details>
@@ -25,8 +25,8 @@ open import linear-algebra.tuples
 
 An `m × n` {{#concept "matrix" Agda=matrix WD="matrix" WDID=Q44337}} of elements
 in `A` is an arrangement of elements of A with `m` rows and `n` columns. In
-other words, a matrix is a [tuple](linear-algebra.tuples.md) of length `m` of
-tuples of length `n` of elements of `A`.
+other words, a matrix is a [tuple](lists.tuples.md) of length `m` of tuples of
+length `n` of elements of `A`.
 
 ## Definitions
 

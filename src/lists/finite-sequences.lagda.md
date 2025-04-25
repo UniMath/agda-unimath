@@ -1,7 +1,7 @@
 # Finite sequences
 
 ```agda
-module linear-algebra.finite-sequences where
+module lists.finite-sequences where
 ```
 
 <details><summary>Imports</summary>

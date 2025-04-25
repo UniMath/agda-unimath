@@ -22,9 +22,10 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import linear-algebra.finite-sequences
 open import linear-algebra.finite-sequences-on-semirings
-open import linear-algebra.functoriality-finite-sequences
+
+open import lists.finite-sequences
+open import lists.functoriality-finite-sequences
 
 open import ring-theory.rings
 ```
@@ -34,7 +35,7 @@ open import ring-theory.rings
 ## Idea
 
 Given a [ring](ring-theory.rings.md) `R`, the type `fin-sequence n R` of
-`R`-[finite sequences](linear-algebra.finite-sequences.md) is an
+`R`-[finite sequences](lists.finite-sequences.md) is an
 [Abelian group](group-theory.abelian-groups.md).
 
 ## Definitions

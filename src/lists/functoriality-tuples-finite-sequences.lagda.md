@@ -1,7 +1,7 @@
 # Relationship between functoriality of tuples and finite sequences
 
 ```agda
-module linear-algebra.functoriality-tuples-finite-sequences where
+module lists.functoriality-tuples-finite-sequences where
 ```
 
 <details><summary>Imports</summary>
@@ -19,11 +19,11 @@ open import foundation.postcomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import linear-algebra.equivalence-tuples-finite-sequences
-open import linear-algebra.finite-sequences
-open import linear-algebra.functoriality-finite-sequences
-open import linear-algebra.functoriality-tuples
-open import linear-algebra.tuples
+open import lists.equivalence-tuples-finite-sequences
+open import lists.finite-sequences
+open import lists.functoriality-finite-sequences
+open import lists.functoriality-tuples
+open import lists.tuples
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -32,10 +32,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Mapping a function over a [tuple](linear-algebra.tuples.md) is equivalent to
-mapping the same function over the
+Mapping a function over a [tuple](lists.tuples.md) is equivalent to mapping the
+same function over the
 [corresponding](linear-algebra.equivalence-tuples-finite-sequences.md)
-[finite sequence](linear-algebra.finite-sequences.md)
+[finite sequence](lists.finite-sequences.md)
 
 ## Proof
 

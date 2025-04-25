@@ -24,7 +24,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.tuples
+open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
