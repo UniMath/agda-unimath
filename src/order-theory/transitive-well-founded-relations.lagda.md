@@ -21,10 +21,11 @@ open import order-theory.well-founded-relations
 
 A
 {{#concept "transitive well-founded relation" Agda=Transitive-Well-Founded-Relation}}
-is a (not necessarily [propositionally](foundation-core.propositions.md)-valued)
-[relation](foundation.binary-relations.md) that is
+is a [relation](foundation.binary-relations.md) that is
 [transitive](foundation.binary-relations.md) and
-[well-founded](order-theory.well-founded-relations.md).
+[well-founded](order-theory.well-founded-relations.md). Note, in particular,
+that the relation need not be
+[proposition](foundation-core.propositions.md)-valued.
 
 ## Definitions
 

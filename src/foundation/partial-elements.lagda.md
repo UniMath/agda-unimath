@@ -42,7 +42,7 @@ codomain of the
   Prop  X   P T X
 ```
 
-of [polynomial-endofunctors.md](trees.polynomial-endofunctors.md). Indeed, the
+of [polynomial endofunctors](trees.polynomial-endofunctors.md). Indeed, the
 codomain of this composition operation of morphisms is the polynomial
 endofunctor `P T` of the map `T : 1 → Prop` evaluated at `X`, which is exactly
 the type of partial elements of `X`.
