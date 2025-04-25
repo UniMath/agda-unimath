@@ -51,7 +51,7 @@ is-prop-WLPO = is-prop-type-Prop prop-WLPO
 
 ## External links
 
-- [Taboos.WLPO](https://martinescardo.github.io/TypeTopology/Taboos.WLPO.html)
+- [`Taboos.WLPO`](https://martinescardo.github.io/TypeTopology/Taboos.WLPO.html)
   at TypeTopology
 - [weak limited principle of omniscience](https://ncatlab.org/nlab/show/weak+limited+principle+of+omniscience)
   at $n$Lab
