@@ -42,8 +42,8 @@ open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-n
 
 The
 {{#concept "distance function" Disambiguation="between real numbers" Agda=dist-ℝ}}
-on two [real numbers](real-numbers.dedekind-real-numbers.md) measures how
-far they are apart. It is the
+on two [real numbers](real-numbers.dedekind-real-numbers.md) measures how far
+they are apart. It is the
 [absolute value](real-numbers.absolute-value-real-numbers.md) of their
 [difference](real-numbers.difference-real-numbers.md).
 
