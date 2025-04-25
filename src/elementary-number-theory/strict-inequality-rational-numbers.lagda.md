@@ -504,3 +504,19 @@ le-iff-transpose-left-diff-ℚ : (x y z : ℚ) → le-ℚ (x -ℚ y) z ↔ le-�
 pr1 (le-iff-transpose-left-diff-ℚ x y z) = le-transpose-left-diff-ℚ x y z
 pr2 (le-iff-transpose-left-diff-ℚ x y z) = le-transpose-right-add-ℚ x z y
 ```
+
+### Swapping laws
+
+```agda
+abstract
+  swap-right-diff-le-ℚ : (p q r : ℚ) → le-ℚ (p -ℚ q) r → le-ℚ (p -ℚ r) q
+  swap-right-diff-le-ℚ p q r p-q≤r =
+    le-transpose-right-add-ℚ
+      ( p)
+      ( q)
+      ( r)
+      ( tr
+        ( le-ℚ p)
+        ( commutative-add-ℚ r q)
+        ( le-transpose-left-diff-ℚ p q r p-q≤r))
+```
