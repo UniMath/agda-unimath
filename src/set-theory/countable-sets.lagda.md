@@ -443,7 +443,7 @@ module _
                 ( is-surjective-is-equiv (is-equiv-map-ℕ-to-ℕ+ℕ)))))))
 ```
 
-### If `X` and `Y` are countable sets, then so is their coproduct `X × Y`
+### If `X` and `Y` are countable sets, then so is their product `X × Y`
 
 ```agda
 module _
