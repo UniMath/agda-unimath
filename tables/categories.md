@@ -6,7 +6,7 @@
 | Families of sets                  | [`foundation.category-of-families-of-sets`](foundation.category-of-families-of-sets.md)                                                       |
 | Groups                            | [`group-theory.category-of-groups`](group-theory.category-of-groups.md)                                                                       |
 | `G`-sets                          | [`group-theory.category-of-group-actions`](group-theory.category-of-group-actions.md)                                                         |
-| Metric spaces and isometries      | ['metric-spaces.category-of-metric-spaces-and-isometries'](metric-spaces.category-of-metric-spaces-and-isometries.md)                         |
+| Metric spaces and isometries      | [`metric-spaces.category-of-metric-spaces-and-isometries`](metric-spaces.category-of-metric-spaces-and-isometries.md)                         |
 | Metric spaces and short functions | [`metric-spaces.category-of-metric-spaces-and-short-functions`](metric-spaces.category-of-metric-spaces-and-short-functions.md)               |
 | Rings                             | [`ring-theory.category-of-rings`](ring-theory.category-of-rings.md)                                                                           |
 | Semigroups                        | [`group-theory.category-of-semigroups`](group-theory.category-of-semigroups.md)                                                               |
