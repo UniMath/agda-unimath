@@ -333,11 +333,11 @@ module _
 
 ## References
 
-It was first observed and proved by Evan Cavallo that preunivalence, or Axiom L,
-is sufficient to deduce that `Id : A → (A → 𝒰)` is an embedding. It was later
-observed and formalized by Martín Escardó that assuming the map
-`equiv-eq : (X ＝ Y) → (X ≃ Y)` is injective is enough. {{#cite TypeTopology}}
-Martín Escardó's formalizations can be found here:
+It was first observed and proved by [Evan Cavallo](https://ecavallo.net/) that
+preunivalence, or Axiom L, is sufficient to deduce that `Id : A → (A → 𝒰)` is an
+embedding. It was later observed and formalized by Martín Escardó that assuming
+the map `equiv-eq : (X ＝ Y) → (X ≃ Y)` is injective is enough.
+{{#cite TypeTopology}} Martín Escardó's formalizations can be found here:
 [https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html](https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html).
 
 {{#bibliography}} {{#reference TypeTopology}} {{#reference Esc17YetAnother}}
