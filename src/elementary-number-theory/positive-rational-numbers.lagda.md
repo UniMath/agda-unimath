@@ -211,6 +211,15 @@ module _
       is-positive-eq-ℤ (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x))
 ```
 
+### Zero is not a positive rational number
+
+```agda
+abstract
+  is-not-positive-zero-ℚ : ¬ (is-positive-ℚ zero-ℚ)
+  is-not-positive-zero-ℚ pos-0 =
+    irreflexive-le-ℚ zero-ℚ (le-zero-is-positive-ℚ zero-ℚ pos-0)
+```
+
 ### The difference of a rational number with a lesser rational number is positive
 
 ```agda
