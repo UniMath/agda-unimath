@@ -144,13 +144,15 @@ h6:target::before {
 .content code a,
 pre .content a,
 code .content a,
-.Agda a {
+.Agda a,
+a.concept {
   text-decoration: none;
 }
 .content pre a:hover,
 .content code a:hover,
 pre .content a:hover,
-code .content a:hover {
+code .content a:hover,
+a.concept:hover {
   text-decoration: none;
 }
 .content img,
