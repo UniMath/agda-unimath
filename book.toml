@@ -81,7 +81,8 @@ additional-css = [
 ]
 additional-js = [
   "website/js/custom.js",
-  "theme/pagetoc.js"
+  "theme/pagetoc.js",
+  "website/js/adjacent-links.js"
 ]
 no-section-label = false
 site-url = "/agda-unimath/"
