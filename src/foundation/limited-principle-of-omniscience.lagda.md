@@ -70,11 +70,11 @@ has-true-or-all-false-Prop f =
       ( is-prop-exists ℕ (λ n → is-true-Prop (f n)))
       ( is-prop-for-all-Prop ℕ (λ n → is-false-Prop (f n))))
 
-bool-LPO-Prop : Prop lzero
-bool-LPO-Prop = Π-Prop (ℕ → bool) (has-true-or-all-false-Prop)
+bool-prop-LPO : Prop lzero
+bool-prop-LPO = Π-Prop (ℕ → bool) (has-true-or-all-false-Prop)
 
 bool-LPO : UU lzero
-bool-LPO = type-Prop bool-LPO-Prop
+bool-LPO = type-Prop bool-prop-LPO
 ```
 
 ## Properties

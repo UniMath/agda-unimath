@@ -80,12 +80,12 @@ abstract
 ### Equivalent boolean formulation
 
 ```agda
-bool-WLPO-Prop : Prop lzero
-bool-WLPO-Prop =
+bool-prop-WLPO : Prop lzero
+bool-prop-WLPO =
   ∀' (ℕ → bool) (λ f → is-decidable-Prop (∀' ℕ (λ n → is-true-Prop (f n))))
 
 bool-WLPO : UU lzero
-bool-WLPO = type-Prop bool-WLPO-Prop
+bool-WLPO = type-Prop bool-prop-WLPO
 
 abstract
   WLPO-bool-WLPO : bool-WLPO → WLPO

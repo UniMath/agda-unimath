@@ -100,8 +100,8 @@ LLPO-LPO lpo {l} = level-LLPO-level-LPO (lpo {l})
 ### Equivalent boolean formulation
 
 ```agda
-bool-LLPO-Prop : Prop lzero
-bool-LLPO-Prop =
+bool-prop-LLPO : Prop lzero
+bool-prop-LLPO =
   ∀'
   ( ℕ → bool)
   ( λ f →
@@ -112,7 +112,7 @@ bool-LLPO-Prop =
         ( ∀' ℕ (λ n → function-Prop (is-odd-ℕ n) (is-false-Prop (f n))))))
 
 bool-LLPO : UU lzero
-bool-LLPO = type-Prop bool-LLPO-Prop
+bool-LLPO = type-Prop bool-prop-LLPO
 
 abstract
   bool-LLPO-level-LLPO : {l : Level} → level-LLPO l → bool-LLPO
