@@ -1,12 +1,12 @@
 // Script to mark adjacent links so that these can be styled with a dotted underline
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   // Function to process all content areas
   function markAdjacentLinks() {
     // Target content areas
     const contentElements = document.querySelectorAll('.content');
 
-    contentElements.forEach(content => {
+    contentElements.forEach((content) => {
       // Get all links in the content area
       const links = content.querySelectorAll('a');
 
@@ -34,10 +34,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Check if a link is in a context we want to exclude (pre, code, etc.)
   function isExcludedContext(link) {
-    return link.closest('pre') ||
+    return (
+      link.closest('pre') ||
       link.closest('code') ||
       link.closest('.Agda') ||
-      link.classList.contains('concept');
+      link.classList.contains('concept')
+    );
   }
 
   // Check if two links are directly adjacent with no text between
