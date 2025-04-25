@@ -132,9 +132,7 @@ h6:target::before {
   line-height: 1.45em;
 }
 .content a {
-  text-decoration: dotted underline;
-  text-underline-offset: 1px;
-  text-decoration-thickness: 1px;
+  text-decoration: none;
 }
 .content a:hover {
   text-decoration: solid underline;
@@ -154,7 +152,6 @@ code .content a:hover,
 a.concept:hover {
   text-decoration: none;
 }
-
 /* External link indicator */
 .content p > a[href^='http']::after,
 .content p > a[href^='https']::after,
@@ -181,6 +178,7 @@ a.concept:hover {
   vertical-align: super;
   text-decoration: none;
   display: inline-block;
+  color: var(--fg);
 }
 a.concept[href^='http']::after,
 a.concept[href^='https']::after {
