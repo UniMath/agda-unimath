@@ -59,7 +59,7 @@ is-prop-LLPO = is-prop-type-Prop prop-LLPO
 
 ## External links
 
-- [Taboos.LLPO](https://martinescardo.github.io/TypeTopology/Taboos.LLPO.html)
+- [`Taboos.LLPO`](https://martinescardo.github.io/TypeTopology/Taboos.LLPO.html)
   at TypeTopology
 - [lesser limited principle of omniscience](https://ncatlab.org/nlab/show/lesser+limited+principle+of+omniscience)
   at $n$Lab
