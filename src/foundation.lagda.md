@@ -193,6 +193,7 @@ open import foundation.fibered-equivalences public
 open import foundation.fibered-involutions public
 open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
+open import foundation.finite-sequences-set-quotients public
 open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
 open import foundation.fixed-points-endofunctions public
@@ -444,7 +445,6 @@ open import foundation.truncation-levels public
 open import foundation.truncation-modalities public
 open import foundation.truncations public
 open import foundation.tuples-of-types public
-open import foundation.tuples-set-quotients public
 open import foundation.type-arithmetic-booleans public
 open import foundation.type-arithmetic-cartesian-product-types public
 open import foundation.type-arithmetic-coproduct-types public

@@ -16,8 +16,6 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.raising-universe-levels
@@ -29,7 +27,6 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 
-open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -40,15 +37,11 @@ open import univalent-combinatorics.standard-finite-types
 There are two equivalent definitions of
 {{#concept "tuples" WD="n-tuple" WDID=Q600590}} of length `n`. First, a
 {{#concept "listed tuple" Agda=tuple}} of length `n` is a list of `n` elements
-of type `A`. Secondly, a {{#concept "functional tuple" Agda=functional-tuple}}
-of length `n` is a map from the
-[standard finite type](univalent-combinatorics.standard-finite-types.md) of
-cardinality `n` `Fin n` to `A`. We define both types of tuples and show that
-they are equivalent.
+of type `A`.
 
 ## Definitions
 
-### The type of listed tuples
+### The type of tuples
 
 ```agda
 infixr 10 _∷_
@@ -105,59 +98,9 @@ module _
     eq-component-tuple-index-in-tuple n a v I
 ```
 
-### The functional type of tuples
-
-```agda
-functional-tuple : {l : Level} → UU l → ℕ → UU l
-functional-tuple A n = Fin n → A
-
-module _
-  {l : Level} {A : UU l}
-  where
-
-  empty-functional-tuple : functional-tuple A 0
-  empty-functional-tuple ()
-
-  head-functional-tuple : (n : ℕ) → functional-tuple A (succ-ℕ n) → A
-  head-functional-tuple n v = v (inr star)
-
-  tail-functional-tuple :
-    (n : ℕ) → functional-tuple A (succ-ℕ n) → functional-tuple A n
-  tail-functional-tuple n v = v ∘ (inl-Fin n)
-
-  cons-functional-tuple :
-    (n : ℕ) → A → functional-tuple A n → functional-tuple A (succ-ℕ n)
-  cons-functional-tuple n a v (inl x) = v x
-  cons-functional-tuple n a v (inr x) = a
-
-  snoc-functional-tuple :
-    (n : ℕ) → functional-tuple A n → A → functional-tuple A (succ-ℕ n)
-  snoc-functional-tuple zero-ℕ v a i = a
-  snoc-functional-tuple (succ-ℕ n) v a (inl x) =
-    snoc-functional-tuple n (tail-functional-tuple n v) a x
-  snoc-functional-tuple (succ-ℕ n) v a (inr x) = head-functional-tuple n v
-
-  revert-functional-tuple :
-    (n : ℕ) → functional-tuple A n → functional-tuple A n
-  revert-functional-tuple n v i = v (opposite-Fin n i)
-
-  in-functional-tuple : (n : ℕ) → A → functional-tuple A n → UU l
-  in-functional-tuple n a v = Σ (Fin n) (λ k → a ＝ v k)
-
-  index-in-functional-tuple :
-    (n : ℕ) (x : A) (v : functional-tuple A n) →
-    in-functional-tuple n x v → Fin n
-  index-in-functional-tuple n x v I = pr1 I
-
-  eq-component-functional-tuple-index-in-functional-tuple :
-    (n : ℕ) (x : A) (v : functional-tuple A n) (I : in-functional-tuple n x v) →
-    x ＝ v (index-in-functional-tuple n x v I)
-  eq-component-functional-tuple-index-in-functional-tuple n x v I = pr2 I
-```
-
 ## Properties
 
-### Characterizing equality of listed tuples
+### Characterizing equality of tuples
 
 ```agda
 module _
@@ -215,89 +158,6 @@ module _
   extensionality-tuple n u v = (Eq-eq-tuple n u v , is-equiv-Eq-eq-tuple n u v)
 ```
 
-### The types of listed tuples and functional tuples are equivalent
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  listed-tuple-functional-tuple : (n : ℕ) → functional-tuple A n → tuple A n
-  listed-tuple-functional-tuple zero-ℕ v = empty-tuple
-  listed-tuple-functional-tuple (succ-ℕ n) v =
-    head-functional-tuple n v ∷
-    listed-tuple-functional-tuple n (tail-functional-tuple n v)
-
-  functional-tuple-tuple : (n : ℕ) → tuple A n → functional-tuple A n
-  functional-tuple-tuple zero-ℕ v = empty-functional-tuple
-  functional-tuple-tuple (succ-ℕ n) (a ∷ v) =
-    cons-functional-tuple n a (functional-tuple-tuple n v)
-
-  is-section-functional-tuple-tuple :
-    (n : ℕ) → (listed-tuple-functional-tuple n ∘ functional-tuple-tuple n) ~ id
-  is-section-functional-tuple-tuple .zero-ℕ empty-tuple = refl
-  is-section-functional-tuple-tuple .(succ-ℕ _) (a ∷ v) =
-    ap (λ u → a ∷ u) (is-section-functional-tuple-tuple _ v)
-
-  abstract
-    is-retraction-functional-tuple-tuple :
-      (n : ℕ) →
-      (functional-tuple-tuple n ∘ listed-tuple-functional-tuple n) ~ id
-    is-retraction-functional-tuple-tuple zero-ℕ v = eq-htpy (λ ())
-    is-retraction-functional-tuple-tuple (succ-ℕ n) v =
-      eq-htpy
-        ( λ where
-          ( inl x) →
-            htpy-eq
-              ( is-retraction-functional-tuple-tuple
-                ( n)
-                ( tail-functional-tuple n v))
-              ( x)
-          ( inr star) → refl)
-
-  is-equiv-listed-tuple-functional-tuple :
-    (n : ℕ) → is-equiv (listed-tuple-functional-tuple n)
-  is-equiv-listed-tuple-functional-tuple n =
-    is-equiv-is-invertible
-      ( functional-tuple-tuple n)
-      ( is-section-functional-tuple-tuple n)
-      ( is-retraction-functional-tuple-tuple n)
-
-  is-equiv-functional-tuple-tuple :
-    (n : ℕ) → is-equiv (functional-tuple-tuple n)
-  is-equiv-functional-tuple-tuple n =
-    is-equiv-is-invertible
-      ( listed-tuple-functional-tuple n)
-      ( is-retraction-functional-tuple-tuple n)
-      ( is-section-functional-tuple-tuple n)
-
-  compute-tuple : (n : ℕ) → functional-tuple A n ≃ tuple A n
-  pr1 (compute-tuple n) = listed-tuple-functional-tuple n
-  pr2 (compute-tuple n) = is-equiv-listed-tuple-functional-tuple n
-```
-
-### Characterizing the elementhood predicate
-
-```agda
-  is-in-functional-tuple-is-in-tuple :
-    (n : ℕ) (v : tuple A n) (x : A) →
-    (x ∈-tuple v) → (in-functional-tuple n x (functional-tuple-tuple n v))
-  is-in-functional-tuple-is-in-tuple (succ-ℕ n) (y ∷ l) x (is-head .x l) =
-    (inr star) , refl
-  is-in-functional-tuple-is-in-tuple
-    (succ-ℕ n) (y ∷ l) x (is-in-tail .x x₁ l I) =
-    inl (pr1 (is-in-functional-tuple-is-in-tuple n l x I)) ,
-    pr2 (is-in-functional-tuple-is-in-tuple n l x I)
-
-  is-in-tuple-is-in-functional-tuple :
-    (n : ℕ) (v : tuple A n) (x : A) →
-    (in-functional-tuple n x (functional-tuple-tuple n v)) → (x ∈-tuple v)
-  is-in-tuple-is-in-functional-tuple (succ-ℕ n) (y ∷ v) x (inl k , p) =
-    is-in-tail x y v (is-in-tuple-is-in-functional-tuple n v x (k , p))
-  is-in-tuple-is-in-functional-tuple (succ-ℕ n) (y ∷ v) _ (inr k , refl) =
-    is-head (functional-tuple-tuple (succ-ℕ n) (y ∷ v) (inr k)) v
-```
-
 ### The type of tuples of elements in a truncated type is truncated
 
 #### The type of listed tuples of elements in a truncated type is truncated
@@ -350,18 +210,6 @@ module _
       ( is-trunc-Eq-tuple k n H x y)
 ```
 
-#### The type of functional tuples of elements in a truncated type is truncated
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  is-trunc-functional-tuple :
-    (k : 𝕋) (n : ℕ) → is-trunc k A → is-trunc k (functional-tuple A n)
-  is-trunc-functional-tuple k n H = is-trunc-function-type k H
-```
-
 ### The type of tuples of elements in a set is a set
 
 #### The type of listed tuples of elements in a set is a set
@@ -379,24 +227,7 @@ pr1 (tuple-Set A n) = tuple (type-Set A) n
 pr2 (tuple-Set A n) = is-set-tuple n (is-set-type-Set A)
 ```
 
-#### The type of functional tuples of elements in a set is a set
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  is-set-functional-tuple : (n : ℕ) → is-set A → is-set (functional-tuple A n)
-  is-set-functional-tuple = is-trunc-functional-tuple zero-𝕋
-
-functional-tuple-Set : {l : Level} → Set l → ℕ → Set l
-pr1 (functional-tuple-Set A n) = functional-tuple (type-Set A) n
-pr2 (functional-tuple-Set A n) = is-set-functional-tuple n (is-set-type-Set A)
-```
-
 ### Adding the tail to the head gives the same tuple
-
-#### Adding the tail to the head gives the same listed tuple
 
 ```agda
 module _
@@ -408,33 +239,6 @@ module _
     (v : tuple A (succ-ℕ n)) →
     ((head-tuple v) ∷ (tail-tuple v)) ＝ v
   cons-head-tail-tuple n (x ∷ v) = refl
-```
-
-#### Adding the tail to the head gives the same functional tuple
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-  htpy-cons-head-tail-functional-tuple :
-    ( n : ℕ) →
-    ( v : functional-tuple A (succ-ℕ n)) →
-    ( cons-functional-tuple n
-      ( head-functional-tuple n v)
-      ( tail-functional-tuple n v)) ~
-      ( v)
-  htpy-cons-head-tail-functional-tuple n v (inl x) = refl
-  htpy-cons-head-tail-functional-tuple n v (inr star) = refl
-
-  cons-head-tail-functional-tuple :
-    ( n : ℕ) →
-    ( v : functional-tuple A (succ-ℕ n)) →
-    ( cons-functional-tuple n
-      ( head-functional-tuple n v)
-      ( tail-functional-tuple n v)) ＝
-      ( v)
-  cons-head-tail-functional-tuple n v =
-    eq-htpy (htpy-cons-head-tail-functional-tuple n v)
 ```
 
 ### Computing the transport of a tuple over its size

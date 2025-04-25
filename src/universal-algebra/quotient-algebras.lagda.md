@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations
 open import foundation.equivalences
+open import foundation.finite-sequences-set-quotients
 open import foundation.functoriality-propositional-truncation
 open import foundation.multivariable-functoriality-set-quotients
 open import foundation.multivariable-operations
@@ -20,7 +21,6 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.set-quotients
 open import foundation.sets
-open import foundation.tuples-set-quotients
 open import foundation.unit-type
 open import foundation.universe-levels
 

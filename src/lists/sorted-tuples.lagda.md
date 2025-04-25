@@ -19,6 +19,8 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import linear-algebra.equivalence-tuples-finite-sequences
+open import linear-algebra.finite-sequences
 open import linear-algebra.tuples
 
 open import lists.permutation-tuples
@@ -181,61 +183,61 @@ module _
 ### If an element `x` is less than or equal to every element of a tuple `v`, then it is less than or equal to every element of every permutation of `v`
 
 ```agda
-  is-least-element-functional-tuple-Prop :
+  is-least-element-fin-sequence-Prop :
     (n : ℕ)
     (x : type-Decidable-Total-Order X)
-    (fv : functional-tuple (type-Decidable-Total-Order X) n) →
+    (fv : fin-sequence (type-Decidable-Total-Order X) n) →
     Prop l2
-  is-least-element-functional-tuple-Prop n x fv =
+  is-least-element-fin-sequence-Prop n x fv =
     Π-Prop (Fin n) (λ k → leq-Decidable-Total-Order-Prop X x (fv k))
 
-  is-least-element-functional-tuple :
+  is-least-element-fin-sequence :
     (n : ℕ)
     (x : type-Decidable-Total-Order X)
-    (fv : functional-tuple (type-Decidable-Total-Order X) n) →
+    (fv : fin-sequence (type-Decidable-Total-Order X) n) →
     UU l2
-  is-least-element-functional-tuple n x fv =
-    type-Prop (is-least-element-functional-tuple-Prop n x fv)
+  is-least-element-fin-sequence n x fv =
+    type-Prop (is-least-element-fin-sequence-Prop n x fv)
 
-  is-least-element-permute-functional-tuple :
+  is-least-element-permute-fin-sequence :
     (n : ℕ)
     (x : type-Decidable-Total-Order X)
-    (fv : functional-tuple (type-Decidable-Total-Order X) n)
+    (fv : fin-sequence (type-Decidable-Total-Order X) n)
     (a : Permutation n) →
-    is-least-element-functional-tuple n x fv →
-    is-least-element-functional-tuple n x (fv ∘ map-equiv a)
-  is-least-element-permute-functional-tuple n x fv a p k =
+    is-least-element-fin-sequence n x fv →
+    is-least-element-fin-sequence n x (fv ∘ map-equiv a)
+  is-least-element-permute-fin-sequence n x fv a p k =
     p (map-equiv a k)
 
-  is-least-element-tuple-is-least-element-functional-tuple :
+  is-least-element-tuple-is-least-element-fin-sequence :
     (n : ℕ)
     (x : type-Decidable-Total-Order X)
-    (fv : functional-tuple (type-Decidable-Total-Order X) n) →
-    is-least-element-functional-tuple n x fv →
-    is-least-element-tuple x (listed-tuple-functional-tuple n fv)
-  is-least-element-tuple-is-least-element-functional-tuple 0 x fv p = raise-star
-  is-least-element-tuple-is-least-element-functional-tuple (succ-ℕ n) x fv p =
+    (fv : fin-sequence (type-Decidable-Total-Order X) n) →
+    is-least-element-fin-sequence n x fv →
+    is-least-element-tuple x (tuple-fin-sequence n fv)
+  is-least-element-tuple-is-least-element-fin-sequence 0 x fv p = raise-star
+  is-least-element-tuple-is-least-element-fin-sequence (succ-ℕ n) x fv p =
     (p (inr star)) ,
-    ( is-least-element-tuple-is-least-element-functional-tuple
+    ( is-least-element-tuple-is-least-element-fin-sequence
       ( n)
       ( x)
-      ( tail-functional-tuple n fv)
+      ( tail-fin-sequence n fv)
       ( p ∘ inl))
 
-  is-least-element-functional-tuple-is-least-element-tuple :
+  is-least-element-fin-sequence-is-least-element-tuple :
     (n : ℕ)
     (x : type-Decidable-Total-Order X)
     (v : tuple (type-Decidable-Total-Order X) n) →
     is-least-element-tuple x v →
-    is-least-element-functional-tuple n x (functional-tuple-tuple n v)
-  is-least-element-functional-tuple-is-least-element-tuple
+    is-least-element-fin-sequence n x (fin-sequence-tuple n v)
+  is-least-element-fin-sequence-is-least-element-tuple
     ( succ-ℕ n)
     ( x)
     ( y ∷ v)
     ( p , q)
     ( inl k) =
-    is-least-element-functional-tuple-is-least-element-tuple n x v q k
-  is-least-element-functional-tuple-is-least-element-tuple
+    is-least-element-fin-sequence-is-least-element-tuple n x v q k
+  is-least-element-fin-sequence-is-least-element-tuple
     ( succ-ℕ n)
     ( x)
     ( y ∷ v)
@@ -251,14 +253,14 @@ module _
     is-least-element-tuple x v →
     is-least-element-tuple x (permute-tuple n v a)
   is-least-element-permute-tuple {n} x v a p =
-    is-least-element-tuple-is-least-element-functional-tuple
+    is-least-element-tuple-is-least-element-fin-sequence
       ( n)
       ( x)
-      ( functional-tuple-tuple n v ∘ map-equiv a)
-      ( is-least-element-permute-functional-tuple
+      ( fin-sequence-tuple n v ∘ map-equiv a)
+      ( is-least-element-permute-fin-sequence
         ( n)
         ( x)
-        ( functional-tuple-tuple n v)
+        ( fin-sequence-tuple n v)
         ( a)
-        ( is-least-element-functional-tuple-is-least-element-tuple n x v p))
+        ( is-least-element-fin-sequence-is-least-element-tuple n x v p))
 ```

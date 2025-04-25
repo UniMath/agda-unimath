@@ -21,7 +21,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.tuples-on-commutative-rings
+open import linear-algebra.finite-sequences-on-commutative-rings
 
 open import ring-theory.binomial-theorem-rings
 
@@ -50,7 +50,7 @@ The binomial theorem is the [44th](literature.100-theorems.md#44) theorem on
 ```agda
 binomial-sum-Commutative-Ring :
   {l : Level} (A : Commutative-Ring l)
-  (n : ℕ) (f : functional-tuple-Commutative-Ring A (succ-ℕ n)) →
+  (n : ℕ) (f : fin-sequence-Commutative-Ring A (succ-ℕ n)) →
   type-Commutative-Ring A
 binomial-sum-Commutative-Ring A = binomial-sum-Ring (ring-Commutative-Ring A)
 ```
@@ -65,14 +65,14 @@ module _
   where
 
   binomial-sum-one-element-Commutative-Ring :
-    (f : functional-tuple-Commutative-Ring A 1) →
+    (f : fin-sequence-Commutative-Ring A 1) →
     binomial-sum-Commutative-Ring A 0 f ＝
-    head-functional-tuple-Commutative-Ring A 0 f
+    head-fin-sequence-Commutative-Ring A 0 f
   binomial-sum-one-element-Commutative-Ring =
     binomial-sum-one-element-Ring (ring-Commutative-Ring A)
 
   binomial-sum-two-elements-Commutative-Ring :
-    (f : functional-tuple-Commutative-Ring A 2) →
+    (f : fin-sequence-Commutative-Ring A 2) →
     binomial-sum-Commutative-Ring A 1 f ＝
     add-Commutative-Ring A (f (zero-Fin 1)) (f (one-Fin 1))
   binomial-sum-two-elements-Commutative-Ring =
@@ -87,7 +87,7 @@ module _
   where
 
   htpy-binomial-sum-Commutative-Ring :
-    (n : ℕ) {f g : functional-tuple-Commutative-Ring A (succ-ℕ n)} →
+    (n : ℕ) {f g : fin-sequence-Commutative-Ring A (succ-ℕ n)} →
     (f ~ g) →
     binomial-sum-Commutative-Ring A n f ＝ binomial-sum-Commutative-Ring A n g
   htpy-binomial-sum-Commutative-Ring =
@@ -103,14 +103,14 @@ module _
 
   left-distributive-mul-binomial-sum-Commutative-Ring :
     (n : ℕ) (x : type-Commutative-Ring A)
-    (f : functional-tuple-Commutative-Ring A (succ-ℕ n)) →
+    (f : fin-sequence-Commutative-Ring A (succ-ℕ n)) →
     mul-Commutative-Ring A x (binomial-sum-Commutative-Ring A n f) ＝
     binomial-sum-Commutative-Ring A n (λ i → mul-Commutative-Ring A x (f i))
   left-distributive-mul-binomial-sum-Commutative-Ring =
     left-distributive-mul-binomial-sum-Ring (ring-Commutative-Ring A)
 
   right-distributive-mul-binomial-sum-Commutative-Ring :
-    (n : ℕ) (f : functional-tuple-Commutative-Ring A (succ-ℕ n)) →
+    (n : ℕ) (f : fin-sequence-Commutative-Ring A (succ-ℕ n)) →
     (x : type-Commutative-Ring A) →
     mul-Commutative-Ring A (binomial-sum-Commutative-Ring A n f) x ＝
     binomial-sum-Commutative-Ring A n (λ i → mul-Commutative-Ring A (f i) x)

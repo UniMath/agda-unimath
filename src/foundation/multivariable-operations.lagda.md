@@ -23,6 +23,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 
+open import linear-algebra.finite-sequences
 open import linear-algebra.tuples
 ```
 
@@ -40,49 +41,49 @@ takes as inputs one element of each type, and returns an element in some type
 multivariable-input :
   {l : Level}
   (n : ℕ)
-  (A : functional-tuple (UU l) n) →
+  (A : fin-sequence (UU l) n) →
   UU l
 multivariable-input zero-ℕ A = raise-unit _
 multivariable-input (succ-ℕ n) A =
-  A (inr star) × multivariable-input n (tail-functional-tuple n A)
+  A (inr star) × multivariable-input n (tail-fin-sequence n A)
 
 empty-multivariable-input :
   {l : Level}
-  (A : functional-tuple (UU l) 0) →
+  (A : fin-sequence (UU l) 0) →
   multivariable-input 0 A
 empty-multivariable-input A = raise-star
 
 head-multivariable-input :
   {l : Level}
   (n : ℕ)
-  (A : functional-tuple (UU l) (succ-ℕ n)) →
+  (A : fin-sequence (UU l) (succ-ℕ n)) →
   multivariable-input (succ-ℕ n) A →
-  head-functional-tuple n A
+  head-fin-sequence n A
 head-multivariable-input n A (a0 , a) = a0
 
 tail-multivariable-input :
   {l : Level}
   (n : ℕ)
-  (A : functional-tuple (UU l) (succ-ℕ n)) →
+  (A : fin-sequence (UU l) (succ-ℕ n)) →
   multivariable-input (succ-ℕ n) A →
-  multivariable-input n (tail-functional-tuple n A)
+  multivariable-input n (tail-fin-sequence n A)
 tail-multivariable-input n A (a0 , a) = a
 
 cons-multivariable-input :
   {l : Level}
   (n : ℕ)
-  (A : functional-tuple (UU l) n) →
+  (A : fin-sequence (UU l) n) →
   {A0 : UU l} →
   A0 →
   multivariable-input n A →
-  multivariable-input (succ-ℕ n) (cons-functional-tuple n A0 A)
+  multivariable-input (succ-ℕ n) (cons-fin-sequence n A0 A)
 pr1 (cons-multivariable-input n A a0 a) = a0
 pr2 (cons-multivariable-input n A a0 a) = a
 
 multivariable-operation :
   { l : Level}
   ( n : ℕ)
-  ( A : functional-tuple (UU l) n)
+  ( A : fin-sequence (UU l) n)
   ( X : UU l) →
   UU l
 multivariable-operation n A X =

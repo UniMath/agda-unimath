@@ -22,6 +22,8 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import linear-algebra.equivalence-tuples-finite-sequences
+open import linear-algebra.finite-sequences
 open import linear-algebra.tuples
 
 open import lists.lists
@@ -34,12 +36,13 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-An array is a pair of a natural number `n`, and a function from `Fin n` to `A`.
-We show that arrays and lists are equivalent.
+An array is a pair of a natural number `n`, and a
+[finite sequence](linear-algebra.finite-sequences.md) of elements of the type
+`A`. We show that arrays and lists are equivalent.
 
 ```agda
 array : {l : Level} → UU l → UU l
-array A = Σ ℕ (λ n → functional-tuple A n)
+array A = Σ ℕ (λ n → fin-sequence A n)
 
 module _
   {l : Level} {A : UU l}
@@ -48,8 +51,8 @@ module _
   length-array : array A → ℕ
   length-array = pr1
 
-  functional-tuple-array : (t : array A) → Fin (length-array t) → A
-  functional-tuple-array = pr2
+  fin-sequence-array : (t : array A) → Fin (length-array t) → A
+  fin-sequence-array = pr2
 
   empty-array : array A
   pr1 (empty-array) = zero-ℕ
@@ -78,7 +81,7 @@ module _
   cons-array : A → array A → array A
   cons-array a t =
     ( succ-ℕ (length-array t) ,
-      rec-coproduct (functional-tuple-array t) (λ _ → a))
+      rec-coproduct (fin-sequence-array t) (λ _ → a))
 
   revert-array : array A → array A
   revert-array (n , t) = (n , λ k → t (opposite-Fin n k))
@@ -127,11 +130,11 @@ module _
       ( is-retraction-tuple-list (n , v))
 
   list-array : array A → list A
-  list-array (n , t) = list-tuple n (listed-tuple-functional-tuple n t)
+  list-array (n , t) = list-tuple n (tuple-fin-sequence n t)
 
   array-list : list A → array A
   array-list l =
-    ( length-list l , functional-tuple-tuple (length-list l) (tuple-list l))
+    ( length-list l , fin-sequence-tuple (length-list l) (tuple-list l))
 
   is-section-array-list : (list-array ∘ array-list) ~ id
   is-section-array-list nil = refl
@@ -140,9 +143,9 @@ module _
   is-retraction-array-list : (array-list ∘ list-array) ~ id
   is-retraction-array-list (n , t) =
     ap
-      ( λ (n , v) → (n , functional-tuple-tuple n v))
-      ( is-retraction-tuple-list (n , listed-tuple-functional-tuple n t)) ∙
-    eq-pair-eq-fiber (is-retraction-functional-tuple-tuple n t)
+      ( λ (n , v) → (n , fin-sequence-tuple n v))
+      ( is-retraction-tuple-list (n , tuple-fin-sequence n t)) ∙
+    eq-pair-eq-fiber (is-retraction-fin-sequence-tuple n t)
 
   equiv-list-array : array A ≃ list A
   pr1 equiv-list-array = list-array
@@ -176,9 +179,9 @@ module _
   compute-length-list-list-array t =
     compute-length-list-list-tuple
       ( length-array t)
-      ( listed-tuple-functional-tuple
+      ( tuple-fin-sequence
         ( length-array t)
-        ( functional-tuple-array t))
+        ( fin-sequence-array t))
 ```
 
 ### An element `x` is in a tuple `v` iff it is in `list-tuple n v`

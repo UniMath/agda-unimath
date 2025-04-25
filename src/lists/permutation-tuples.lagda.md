@@ -25,7 +25,11 @@ open import foundation.negated-equality
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import linear-algebra.equivalence-tuples-finite-sequences
+open import linear-algebra.finite-sequences
+open import linear-algebra.functoriality-finite-sequences
 open import linear-algebra.functoriality-tuples
+open import linear-algebra.functoriality-tuples-finite-sequences
 open import linear-algebra.tuples
 
 open import lists.arrays
@@ -52,7 +56,7 @@ module _
 
   permute-tuple : (n : ℕ) → tuple A n → Permutation n → tuple A n
   permute-tuple n v s =
-    listed-tuple-functional-tuple n (functional-tuple-tuple n v ∘ (map-equiv s))
+    tuple-fin-sequence n (fin-sequence-tuple n v ∘ (map-equiv s))
 ```
 
 ### The predicate that a function from `tuple` to `tuple` is just permuting tuples
@@ -95,10 +99,10 @@ module _
     permute-tuple n v (a ∘e b) ＝ permute-tuple n (permute-tuple n v a) b
   compute-composition-permute-tuple n v a b =
     ap
-      ( λ f → listed-tuple-functional-tuple n (f ∘ (map-equiv b)))
+      ( λ f → tuple-fin-sequence n (f ∘ (map-equiv b)))
       ( inv
-        ( is-retraction-functional-tuple-tuple n
-          ( functional-tuple-tuple n v ∘ map-equiv a)))
+        ( is-retraction-fin-sequence-tuple n
+          ( fin-sequence-tuple n v ∘ map-equiv a)))
 
   compute-swap-two-last-elements-transposition-Fin-permute-tuple :
     (n : ℕ)
@@ -156,56 +160,56 @@ module _
 ### `x` is in a tuple `v` iff it is in `permute v t`
 
 ```agda
-  is-in-functional-tuple-is-in-permute-functional-tuple :
+  is-in-fin-sequence-is-in-permute-fin-sequence :
     (n : ℕ) (v : Fin n → A) (t : Permutation n) (x : A) →
-    in-functional-tuple n x (v ∘ map-equiv t) → in-functional-tuple n x v
-  is-in-functional-tuple-is-in-permute-functional-tuple n v t x (k , refl) =
+    in-fin-sequence n x (v ∘ map-equiv t) → in-fin-sequence n x v
+  is-in-fin-sequence-is-in-permute-fin-sequence n v t x (k , refl) =
     map-equiv t k , refl
 
   is-in-tuple-is-in-permute-tuple :
     (n : ℕ) (v : tuple A n) (t : Permutation n) (x : A) →
     x ∈-tuple (permute-tuple n v t) → x ∈-tuple v
   is-in-tuple-is-in-permute-tuple n v t x I =
-    is-in-tuple-is-in-functional-tuple
+    is-in-tuple-is-in-fin-sequence
       ( n)
       ( v)
       ( x)
-      ( is-in-functional-tuple-is-in-permute-functional-tuple
+      ( is-in-fin-sequence-is-in-permute-fin-sequence
         ( n)
-        ( functional-tuple-tuple n v)
+        ( fin-sequence-tuple n v)
         ( t)
         ( x)
         ( tr
-          ( λ p → in-functional-tuple n x p)
-          ( is-retraction-functional-tuple-tuple n
-            ( functional-tuple-tuple n v ∘ map-equiv t))
-          ( is-in-functional-tuple-is-in-tuple n (permute-tuple n v t) x I)))
+          ( λ p → in-fin-sequence n x p)
+          ( is-retraction-fin-sequence-tuple n
+            ( fin-sequence-tuple n v ∘ map-equiv t))
+          ( is-in-fin-sequence-is-in-tuple n (permute-tuple n v t) x I)))
 
-  is-in-permute-functional-tuple-is-in-functional-tuple :
+  is-in-permute-fin-sequence-is-in-fin-sequence :
     (n : ℕ) (v : Fin n → A) (t : Permutation n) (x : A) →
-    in-functional-tuple n x v → in-functional-tuple n x (v ∘ map-equiv t)
-  is-in-permute-functional-tuple-is-in-functional-tuple n v t x (k , refl) =
+    in-fin-sequence n x v → in-fin-sequence n x (v ∘ map-equiv t)
+  is-in-permute-fin-sequence-is-in-fin-sequence n v t x (k , refl) =
     map-inv-equiv t k , ap v (inv (is-section-map-inv-equiv t k))
 
   is-in-permute-tuple-is-in-tuple :
     (n : ℕ) (v : tuple A n) (t : Permutation n) (x : A) →
     x ∈-tuple v → x ∈-tuple (permute-tuple n v t)
   is-in-permute-tuple-is-in-tuple n v t x I =
-    is-in-tuple-is-in-functional-tuple
+    is-in-tuple-is-in-fin-sequence
       ( n)
       ( permute-tuple n v t)
       ( x)
       ( tr
-        ( λ p → in-functional-tuple n x p)
+        ( λ p → in-fin-sequence n x p)
         ( inv
-          ( is-retraction-functional-tuple-tuple n
-            ( functional-tuple-tuple n v ∘ map-equiv t)))
-        ( is-in-permute-functional-tuple-is-in-functional-tuple
+          ( is-retraction-fin-sequence-tuple n
+            ( fin-sequence-tuple n v ∘ map-equiv t)))
+        ( is-in-permute-fin-sequence-is-in-fin-sequence
           ( n)
-          ( functional-tuple-tuple n v)
+          ( fin-sequence-tuple n v)
           ( t)
           ( x)
-          ( is-in-functional-tuple-is-in-tuple n v x I)))
+          ( is-in-fin-sequence-is-in-tuple n v x I)))
 ```
 
 ### If `μ : A → (B → B)` satisfies a commutativity property, then `fold-tuple b μ` is invariant under permutation for every `b : B`
@@ -376,23 +380,23 @@ eq-map-tuple-permute-tuple :
 eq-map-tuple-permute-tuple f {n} v t =
   ( ( ap
       ( λ w →
-        ( listed-tuple-functional-tuple
+        ( tuple-fin-sequence
           ( n)
-          ( functional-tuple-tuple n w ∘ (map-equiv t)))))
-      ( inv (map-tuple-map-functional-tuple f n v)) ∙
+          ( fin-sequence-tuple n w ∘ (map-equiv t)))))
+      ( inv (map-tuple-map-fin-sequence f n v)) ∙
     ( ( ap
         ( λ p →
-          listed-tuple-functional-tuple
+          tuple-fin-sequence
             ( n)
             ( p ∘ map-equiv t))
-        ( is-retraction-functional-tuple-tuple
+        ( is-retraction-fin-sequence-tuple
           ( n)
-          ( map-functional-tuple n f (functional-tuple-tuple n v)))) ∙
+          ( map-fin-sequence n f (fin-sequence-tuple n v)))) ∙
       ( ( ap
-          ( listed-tuple-functional-tuple n ∘ map-functional-tuple n f)
+          ( tuple-fin-sequence n ∘ map-fin-sequence n f)
           ( inv
-            ( is-retraction-functional-tuple-tuple
+            ( is-retraction-fin-sequence-tuple
               ( n)
-              ( λ z → functional-tuple-tuple n v (map-equiv t z))))) ∙
-        ( map-tuple-map-functional-tuple f n (permute-tuple n v t)))))
+              ( λ z → fin-sequence-tuple n v (map-equiv t z))))) ∙
+        ( map-tuple-map-fin-sequence f n (permute-tuple n v t)))))
 ```
