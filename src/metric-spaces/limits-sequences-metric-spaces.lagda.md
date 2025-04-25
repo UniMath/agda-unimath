@@ -43,7 +43,7 @@ Limits of a sequence in a metric space are unique.
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (u : sequence-Metric-Space M)
+  (u : sequence-type-Metric-Space M)
   (l : type-Metric-Space M)
   where
 
@@ -88,7 +88,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (u : sequence-Metric-Space M)
+  (u : sequence-type-Metric-Space M)
   (x y : type-Metric-Space M)
   (Lx : is-limit-sequence-Metric-Space M u x)
   (Ly : is-limit-sequence-Metric-Space M u y)
@@ -111,7 +111,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (u : sequence-Metric-Space M)
+  (u : sequence-type-Metric-Space M)
   where
 
   has-limit-sequence-Metric-Space : UU (l1 ⊔ l2)

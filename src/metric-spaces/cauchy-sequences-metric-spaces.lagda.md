@@ -67,7 +67,7 @@ approximation, with the same limit if either exists, and vice versa.
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : sequence-Metric-Space M)
+  (x : sequence-type-Metric-Space M)
   where
 
   is-cauchy-modulus-sequence-Metric-Space : ℚ⁺ → ℕ → UU l2
@@ -85,7 +85,7 @@ module _
 
   cauchy-sequence-Metric-Space : UU (l1 ⊔ l2)
   cauchy-sequence-Metric-Space =
-    Σ (sequence-Metric-Space M) (is-cauchy-sequence-Metric-Space M)
+    Σ (sequence-type-Metric-Space M) (is-cauchy-sequence-Metric-Space M)
 
   modulus-of-convergence-cauchy-sequence-Metric-Space :
     cauchy-sequence-Metric-Space → ℚ⁺ → ℕ
@@ -93,7 +93,7 @@ module _
     pr1 (is-cauchy-x ε⁺)
 
   map-cauchy-sequence-Metric-Space :
-    cauchy-sequence-Metric-Space → sequence-Metric-Space M
+    cauchy-sequence-Metric-Space → sequence-type-Metric-Space M
   map-cauchy-sequence-Metric-Space = pr1
 
   is-cauchy-sequence-cauchy-sequence-Metric-Space :
@@ -181,7 +181,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : sequence-Metric-Space M)
+  (x : sequence-type-Metric-Space M)
   (lim : type-Metric-Space M)
   (H : modulus-limit-sequence-Metric-Space M x lim)
   where
@@ -561,7 +561,7 @@ module _
   (u : cauchy-sequence-Metric-Space A)
   where
 
-  seq-short-map-cauchy-sequence-Metric-Space : sequence-Metric-Space B
+  seq-short-map-cauchy-sequence-Metric-Space : sequence-type-Metric-Space B
   seq-short-map-cauchy-sequence-Metric-Space =
     map-sequence
       ( map-short-function-Metric-Space A B f)

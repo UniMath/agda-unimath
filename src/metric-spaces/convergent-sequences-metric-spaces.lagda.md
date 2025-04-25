@@ -50,7 +50,7 @@ module _
   (u : convergent-sequence-Metric-Space M)
   where
 
-  seq-convergent-sequence-Metric-Space : sequence-Metric-Space M
+  seq-convergent-sequence-Metric-Space : sequence-type-Metric-Space M
   seq-convergent-sequence-Metric-Space = pr1 u
 
   has-limit-convergent-sequence-Metric-Space :
@@ -85,7 +85,7 @@ module _
   (u : convergent-sequence-Metric-Space A)
   where
 
-  seq-short-map-convergent-sequence-Metric-Space : sequence-Metric-Space B
+  seq-short-map-convergent-sequence-Metric-Space : sequence-type-Metric-Space B
   seq-short-map-convergent-sequence-Metric-Space =
     map-sequence
       ( map-short-function-Metric-Space A B f)

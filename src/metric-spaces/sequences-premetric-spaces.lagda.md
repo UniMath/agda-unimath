@@ -18,7 +18,7 @@ open import metric-spaces.premetric-spaces
 ## Ideas
 
 A
-{{#concept "sequence" Disambiguation="in a premetric space" Agda=sequence-Premetric-Space}}
+{{#concept "sequence" Disambiguation="in a premetric space" Agda=sequence-type-Premetric-Space}}
 in a [premetric space](metric-spaces.premetric-spaces.md) is a sequence in its
 underlying type.
 
@@ -31,6 +31,6 @@ module _
   {l1 l2 : Level} (M : Premetric-Space l1 l2)
   where
 
-  sequence-Premetric-Space : UU l1
-  sequence-Premetric-Space = sequence (type-Premetric-Space M)
+  sequence-type-Premetric-Space : UU l1
+  sequence-type-Premetric-Space = sequence (type-Premetric-Space M)
 ```

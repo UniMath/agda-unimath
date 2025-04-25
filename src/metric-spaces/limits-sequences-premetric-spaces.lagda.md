@@ -53,7 +53,7 @@ premetric spaces preserves limits.
 ```agda
 module _
   {l1 l2 : Level} (M : Premetric-Space l1 l2)
-  (u : sequence-Premetric-Space M)
+  (u : sequence-type-Premetric-Space M)
   (l : type-Premetric-Space M)
   where
 
@@ -105,7 +105,7 @@ module _
   {l1 l2 l1' l2' : Level}
   (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
   (f : short-function-Premetric-Space A B)
-  (u : sequence-Premetric-Space A)
+  (u : sequence-type-Premetric-Space A)
   (l : type-Premetric-Space A)
   where
 
@@ -138,7 +138,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Premetric-Space l1 l2)
-  (u : sequence-Premetric-Space M)
+  (u : sequence-type-Premetric-Space M)
   (x : type-Premetric-Space M)
   where
 

@@ -50,7 +50,7 @@ a constant sequence in a pseudometric space is its limit.
 ```agda
 module _
   {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
-  (u : sequence-Pseudometric-Space M)
+  (u : sequence-type-Pseudometric-Space M)
   (l : type-Pseudometric-Space M)
   where
 
@@ -114,7 +114,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
-  (u : sequence-Pseudometric-Space M)
+  (u : sequence-type-Pseudometric-Space M)
   (x y : type-Pseudometric-Space M)
   where
 
@@ -194,7 +194,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
-  (u : sequence-Pseudometric-Space M)
+  (u : sequence-type-Pseudometric-Space M)
   (v : subsequence u)
   (l : type-Pseudometric-Space M)
   where

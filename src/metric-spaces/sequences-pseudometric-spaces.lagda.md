@@ -18,9 +18,10 @@ open import metric-spaces.sequences-premetric-spaces
 ## Ideas
 
 A
-{{#concept "sequence" Disambiguation="in a pseudometric space" Agda=sequence-Pseudometric-Space}}
+{{#concept "sequence" Disambiguation="in a pseudometric space" Agda=sequence-type-Pseudometric-Space}}
 in a [pseudometric space](metric-spaces.pseudometric-spaces.md) is a
-[sequence in its underlying premetric space](metric-spaces.sequences-premetric-spaces.md).
+[sequence in its underlying premetric space](metric-spaces.sequences-premetric-spaces.md):
+a [sequence](foundation.sequences.md) in its underlying type.
 
 ## Definition
 
@@ -31,7 +32,7 @@ module _
   {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
   where
 
-  sequence-Pseudometric-Space : UU l1
-  sequence-Pseudometric-Space =
-    sequence-Premetric-Space (premetric-Pseudometric-Space M)
+  sequence-type-Pseudometric-Space : UU l1
+  sequence-type-Pseudometric-Space =
+    sequence-type-Premetric-Space (premetric-Pseudometric-Space M)
 ```
