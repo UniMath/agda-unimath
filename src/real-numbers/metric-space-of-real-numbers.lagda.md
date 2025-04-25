@@ -98,40 +98,6 @@ is-in-neighborhood-leq-ℝ l d x y = type-Prop (premetric-leq-ℝ l d x y)
 
 ## Properties
 
-### `x` is in a `d`-neighborhood of `y` if `x - d ≤ y ≤ x + d`
-
-```agda
-is-in-lower-neighborhood-real-bound-leq-ℝ :
-  {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
-  leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
-  is-in-lower-neighborhood-leq-ℝ d x y
-is-in-lower-neighborhood-real-bound-leq-ℝ d⁺@(d , _) x y y≤x+d q q+d<y =
-  is-in-lower-cut-le-real-ℚ
-    ( q)
-    ( x)
-    ( concatenate-le-leq-ℝ
-      ( real-ℚ q)
-      ( y -ℝ real-ℚ d)
-      ( x)
-      ( le-transpose-left-add-ℝ
-        ( real-ℚ q)
-        ( real-ℚ d) y
-        ( inv-tr
-          ( λ z → le-ℝ z y)
-          ( add-real-ℚ q d)
-          ( le-real-is-in-lower-cut-ℚ (q +ℚ d) y q+d<y)))
-      ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
-
-neighborhood-real-bound-each-leq-ℝ :
-  {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
-  leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d)) →
-  leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
-  is-in-neighborhood-leq-ℝ l d x y
-neighborhood-real-bound-each-leq-ℝ d x y x≤y+d y≤x+d =
-  ( is-in-lower-neighborhood-real-bound-leq-ℝ d x y y≤x+d ,
-    is-in-lower-neighborhood-real-bound-leq-ℝ d y x x≤y+d)
-```
-
 ### The standard premetric on the real numbers is a metric structure
 
 The triangle inequality is the [91st](literature.100-theorems.md#91) theorem on

@@ -129,33 +129,16 @@ exists-ℚ⁺-in-lower-cut-ℝ⁺ = ind-Σ exists-ℚ⁺-in-lower-cut-is-positiv
 ### Addition with a positive real number is a strictly inflationary map
 
 ```agda
-abstract
+opaque
+  unfolding add-ℝ
+
   le-left-add-real-ℝ⁺ :
     {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (x +ℝ real-ℝ⁺ d)
   le-left-add-real-ℝ⁺ x d⁺@(d , pos-d) =
-    let
-      open do-syntax-trunc-Prop (le-ℝ-Prop x (x +ℝ d))
-    in do
-      r⁺@(r , _) , r<d ← exists-ℚ⁺-in-lower-cut-ℝ⁺ d⁺
-      (p , q) , (q<p+r , p<x , x<q) ←
-        is-arithmetically-located-ℝ x r⁺
-      intro-exists
-        ( q)
-        ( x<q ,
-          intro-exists
-            ( p , q -ℚ p)
-            ( p<x ,
-              le-lower-cut-ℝ
-                ( d)
-                ( q -ℚ p)
-                ( r)
-                ( le-transpose-right-add-ℚ
-                  ( q)
-                  ( r)
-                  ( p)
-                  ( tr (le-ℚ q) (commutative-add-ℚ p r) q<p+r))
-                ( r<d) ,
-              inv (is-identity-right-conjugation-add-ℚ p q)))
+    tr
+      ( λ y → le-ℝ y (x +ℝ d))
+      ( right-unit-law-add-ℝ x)
+      ( preserves-le-left-add-ℝ x zero-ℝ d pos-d)
 
 le-right-add-real-ℝ⁺ :
   {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (real-ℝ⁺ d +ℝ x)
