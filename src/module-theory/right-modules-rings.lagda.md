@@ -1,7 +1,7 @@
 # Right modules over rings
 
 ```agda
-module ring-theory.right-modules-rings where
+module module-theory.right-modules-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -28,7 +28,9 @@ open import ring-theory.rings
 
 ## Idea
 
-A right module over a [ring](ring-theory.rings.md) `R` consists of an
+A
+{{#concept "right module" WD="right module" WDID=Q120722061 Agda=right-module-Ring}}
+over a [ring](ring-theory.rings.md) `R` consists of an
 [abelian group](group-theory.abelian-groups.md) `M` equipped with a
 [ring homomorphism](ring-theory.homomorphisms-rings.md) from `R` to the
 [opposite ring](ring-theory.opposite-rings.md) of the

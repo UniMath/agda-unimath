@@ -12,7 +12,8 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import ring-theory.left-modules-rings
+open import module-theory.left-modules-rings
+
 open import ring-theory.rings
 ```
 

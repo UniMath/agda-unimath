@@ -1,7 +1,7 @@
 # Left modules over rings
 
 ```agda
-module ring-theory.left-modules-rings where
+module module-theory.left-modules-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -28,8 +28,11 @@ open import ring-theory.rings
 
 ## Idea
 
-A (left) module `M` over a ring `R` consists of an abelian group `M` equipped
-with an action `R → M → M` such
+A
+{{#concept "left module" WD="left module" WDID="Q120721996" Agda=left-module-Ring}}
+`M` over a [ring](ring-theory.rings.md) `R` consists of an
+[abelian group](group-theory.abelian-groups.md) `M` equipped with an action
+`R → M → M` such that
 
 ```text
   r(x+y) = rx + ry
@@ -42,10 +45,8 @@ with an action `R → M → M` such
       1x = x
 ```
 
-In other words, a left module `M` over a ring `R` consists of an abelian group
-`M` equipped with a ring homomorphism `R → endomorphism-ring-Ab M`. A right
-module over `R` consists of an abelian group `M` equipped with a ring
-homomorphism `R → opposite-Ring (endomorphism-ring-Ab M)`.
+Equivalently, a left module `M` over a ring `R` consists of an abelian group `M`
+equipped with a ring homomorphism `R → endomorphism-ring-Ab M`.
 
 ## Definitions
 
