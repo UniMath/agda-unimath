@@ -19,6 +19,7 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -87,7 +88,7 @@ subcount-count : {l : Level} {X : UU l} → count X → subcount X
 subcount-count (n , e) = (n , emb-equiv (inv-equiv e))
 ```
 
-### Types equipped with countings are closed under equivalences
+### Types equipped with subcountings are closed under subtypes
 
 ```agda
 module _
@@ -125,4 +126,18 @@ induction, if `k ≐ 0` then `║Fin k║₋₁ ≃ 0 ≃ Fin 0` and so `║X║
 subcounting. Otherwise, if `k ≐ j + 1`, then `║Fin k║₋₁ ≃ 1 ≃ Fin 1` and again
 `║X║₋₁ ↪ Fin 1` is a subcounting.
 
-> This remains to be formalized.
+```agda
+module _
+  {l : Level} {X : UU l}
+  where
+
+  subcount-trunc-Prop : subcount X → subcount ║ X ║₋₁
+  subcount-trunc-Prop (0 , f , is-emb-f) =
+    ( 0 ,
+      rec-trunc-Prop empty-Prop id ∘ map-trunc-Prop f ,
+      is-emb-is-prop is-prop-type-trunc-Prop is-prop-empty)
+  subcount-trunc-Prop (succ-ℕ k , f , is-emb-f) =
+    ( 1 ,
+      rec-trunc-Prop Fin-1-Prop (λ _ → inr star) ∘ map-trunc-Prop f ,
+      is-emb-is-prop is-prop-type-trunc-Prop is-prop-Fin-1)
+```
