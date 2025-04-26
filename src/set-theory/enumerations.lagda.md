@@ -140,7 +140,8 @@ module _
   is-decidable-subprojection = type-Prop is-decidable-subprojection-Prop
 
   is-prop-is-decidable-subprojection : is-prop is-decidable-subprojection
-  is-prop-is-decidable-subprojection = is-prop-type-Prop is-decidable-subprojection-Prop
+  is-prop-is-decidable-subprojection =
+    is-prop-type-Prop is-decidable-subprojection-Prop
 ```
 
 ### Direct α-enumerability
