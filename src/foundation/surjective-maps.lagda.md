@@ -15,6 +15,7 @@ open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
 open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
@@ -644,7 +645,7 @@ equiv-Surjection :
   Surjection l2 A → Surjection l3 A → UU (l1 ⊔ l2 ⊔ l3)
 equiv-Surjection f g =
   Σ ( type-Surjection f ≃ type-Surjection g)
-    ( λ e → (map-equiv e ∘ map-Surjection f) ~ map-Surjection g)
+    ( λ e → map-equiv e ∘ map-Surjection f ~ map-Surjection g)
 
 module _
   {l1 l2 : Level} {A : UU l1} (f : Surjection l2 A)
@@ -850,9 +851,7 @@ module _
   is-inhabited-is-surjective :
     {f : A → B} → is-surjective f → is-inhabited B → is-inhabited A
   is-inhabited-is-surjective F =
-    rec-trunc-Prop
-      ( is-inhabited-Prop A)
-      ( rec-trunc-Prop (is-inhabited-Prop A) (unit-trunc-Prop ∘ pr1) ∘ F)
+    rec-trunc-Prop (is-inhabited-Prop A) (map-trunc-Prop pr1 ∘ F)
 
   is-inhabited-surjection :
     A ↠ B → is-inhabited B → is-inhabited A
@@ -862,8 +861,8 @@ module _
 
 ### The type of surjections `A ↠ B` is equivalent to the type of families `P` of inhabited types over `B` equipped with an equivalence `A ≃ Σ B P`
 
-This remains to be shown.
-[#735](https://github.com/UniMath/agda-unimath/issues/735)
+> This remains to be shown.
+> [#735](https://github.com/UniMath/agda-unimath/issues/735)
 
 ## See also
 
