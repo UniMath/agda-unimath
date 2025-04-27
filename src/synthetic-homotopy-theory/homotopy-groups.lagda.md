@@ -37,8 +37,8 @@ where
 - `π₀ A` is the set of
   [connected components](foundation.connected-components.md) of `A`, and
 - `πᵢ₊₁ A` is the set `πᵢ ΩA` equipped with the
-  [group structure](group-theory.groups.md) obtained from the [loop
-  space](synthetic-homotopy theory.loop-spaces.md).
+  [group structure](group-theory.groups.md) obtained from the
+  [loop space](synthetic-homotopy-theory.loop-spaces.md).
 
 For `i ≥ 2`, the `i`-th homotopy group `πᵢ A` of `A` is
 [abelian](group-theory.abelian-groups.md) by the
