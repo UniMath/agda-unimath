@@ -1,8 +1,8 @@
 [codespell]
 skip = .git,node_modules,*.agda
 ignore-words = codespell-ignore.txt
-# Ignore all one and two-letter words
-ignore-regex = ```.*?```|\b\S\S\b
+# Ignore all words with a capital letter after the first character
+ignore-regex = ```.*?```|\b\S+[A-Z]\S*\b
 
-# Check file names as well.
+# Check file names as well
 check-filenames = true
