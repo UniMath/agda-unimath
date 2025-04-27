@@ -239,11 +239,11 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l3} (e : Y ↪ X)
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (e : Y ↪ X)
   (f : subfinite-indexing l3 X)
   where
 
-  subfinite-indexing-emb : subfinite-indexing (l1 ⊔ l3) Y
+  subfinite-indexing-emb : subfinite-indexing (l1 ⊔ l2 ⊔ l3) Y
   subfinite-indexing-emb =
     subfinite-indexing-equiv'
       ( equiv-total-fiber (map-emb e))
