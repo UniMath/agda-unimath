@@ -204,13 +204,13 @@ module _
   {l1 l2 : Level} (A : Saturated-Complete-Metric-Space l1 l2)
   where
 
-  saturated-complete-metric-space-of-cauchy-approximations-Saturated-Metric-Space :
+  saturated-complete-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space :
     Saturated-Complete-Metric-Space (l1 ⊔ l2) l2
   pr1
-    saturated-complete-metric-space-of-cauchy-approximations-Saturated-Metric-Space
+    saturated-complete-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
     = metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space A
   pr2
-    saturated-complete-metric-space-of-cauchy-approximations-Saturated-Metric-Space
+    saturated-complete-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
     =
     ( is-complete-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
       A) ,
