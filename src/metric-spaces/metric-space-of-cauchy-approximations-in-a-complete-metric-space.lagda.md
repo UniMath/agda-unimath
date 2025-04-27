@@ -37,7 +37,7 @@ the
 of the cauchy sequences in the underlying metric space.
 
 This is the
-{{#concept "metric space of cauchy approximations" Disambiguation="in a complete metric space" Agda=metric-space-cauchy-approximations-Complete-Metric-Space}}
+{{#concept "metric space of cauchy approximations" Disambiguation="in a complete metric space" Agda=metric-space-of-cauchy-approximations-Complete-Metric-Space}}
 in a saturated complete metric space.
 
 In a complete metric space, all Cauchy approximations are

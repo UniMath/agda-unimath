@@ -40,7 +40,7 @@ a
 of the cauchy sequences in the underlying metric space.
 
 This is the
-{{#concept "metric space of cauchy approximations" Disambiguation="in a saturated complete metric space" Agda=metric-space-cauchy-approximations-Saturated-Complete-Metric-Space}}
+{{#concept "saturated complete metric space of cauchy approximations" Disambiguation="in a saturated complete metric space" Agda=saturated-complete-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space}}
 in a saturated complete metric space.
 
 In a saturated complete metric space, all Cauchy approximations are
@@ -207,13 +207,13 @@ module _
   {l1 l2 : Level} (A : Saturated-Complete-Metric-Space l1 l2)
   where
 
-  saturated-complete-metric-space-cauchy-approximations-Saturated-Metric-Space :
+  saturated-complete-metric-space-of-cauchy-approximations-Saturated-Metric-Space :
     Saturated-Complete-Metric-Space (l1 ⊔ l2) l2
   pr1
-    saturated-complete-metric-space-cauchy-approximations-Saturated-Metric-Space
+    saturated-complete-metric-space-of-cauchy-approximations-Saturated-Metric-Space
     = metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space A
   pr2
-    saturated-complete-metric-space-cauchy-approximations-Saturated-Metric-Space
+    saturated-complete-metric-space-of-cauchy-approximations-Saturated-Metric-Space
     =
     ( is-complete-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
       A) ,
