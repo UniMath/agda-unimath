@@ -38,7 +38,7 @@ in a [metric space](metric-spaces.metric-spaces.md) inherits the
 [metric substructure](metric-spaces.subspaces-metric-spaces.md) of the
 [metric space of Cauchy approximations](metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space.md).
 This is the
-{{#concept "metric space of convergent Cauchy approximations" Disambiguation="in a metric space" Agda=metric-space-convergent-cauchy-approximations-Metric-Space}}
+{{#concept "metric space of convergent Cauchy approximations" Disambiguation="in a metric space" Agda=metric-space-of-convergent-cauchy-approximations-Metric-Space}}
 in a metric space.
 
 ## Definitions
