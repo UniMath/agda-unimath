@@ -232,17 +232,17 @@ module _
             ( eq-dist-max-min-ℕ i j)) ∙
           ( compute-iterate-min-max-f-x))
 
-  is-dedekind-finite-type-subcount' :
+  is-dedekind-finite-subcount' :
     (f : X → X) → is-injective f → is-equiv f
-  is-dedekind-finite-type-subcount' f is-injective-f =
+  is-dedekind-finite-subcount' f is-injective-f =
     is-equiv-is-split-surjective-is-injective f
       ( is-injective-f)
       ( is-split-surjective-is-injective-endo-subcount f is-injective-f)
 
-  is-dedekind-finite-type-subcount :
+  is-dedekind-finite-subcount :
     (f : X → X) → is-emb f → is-equiv f
-  is-dedekind-finite-type-subcount f is-emb-f =
-    is-dedekind-finite-type-subcount' f (is-injective-is-emb is-emb-f)
+  is-dedekind-finite-subcount f is-emb-f =
+    is-dedekind-finite-subcount' f (is-injective-is-emb is-emb-f)
 
 module _
   {l : Level} (X : Subfinite-Type l)
@@ -254,7 +254,7 @@ module _
   is-dedekind-finite-type-Subfinite-Type' f is-injective-f =
     rec-trunc-Prop
       ( is-equiv-Prop f)
-      ( λ j → is-dedekind-finite-type-subcount' j f is-injective-f)
+      ( λ j → is-dedekind-finite-subcount' j f is-injective-f)
       ( is-subfinite-type-Subfinite-Type X)
 
   is-dedekind-finite-type-Subfinite-Type :
