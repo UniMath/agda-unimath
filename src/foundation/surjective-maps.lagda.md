@@ -266,6 +266,9 @@ module _
 
   is-surjective-id : is-surjective (id {A = A})
   is-surjective-id a = unit-trunc-Prop (a , refl)
+
+  id-surjection : A ↠ A
+  id-surjection = (id , is-surjective-id)
 ```
 
 ### Maps which are homotopic to surjective maps are surjective

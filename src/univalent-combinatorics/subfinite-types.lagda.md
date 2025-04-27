@@ -229,7 +229,7 @@ module _
           ( λ i → iterate i f x)
           ( ( inv (left-successor-law-add-ℕ k (min-ℕ i j))) ∙
             ( ap (_+ℕ min-ℕ i j) compute-succ-k) ∙
-            ( eq-dist-max-min-ℕ i j)) ∙
+            ( eq-max-dist-min-ℕ i j)) ∙
           ( compute-iterate-min-max-f-x))
 
   is-dedekind-finite-subcount' :

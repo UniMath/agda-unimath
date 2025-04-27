@@ -382,8 +382,14 @@ right-distributive-mul-dist-ℕ x y k =
 ### The distance is the difference between the maximum and the minimum
 
 ```agda
-eq-dist-max-min-ℕ : (x y : ℕ) → dist-ℕ x y +ℕ min-ℕ x y ＝ max-ℕ x y
-eq-dist-max-min-ℕ zero-ℕ y = refl
-eq-dist-max-min-ℕ (succ-ℕ x) zero-ℕ = refl
-eq-dist-max-min-ℕ (succ-ℕ x) (succ-ℕ y) = ap succ-ℕ (eq-dist-max-min-ℕ x y)
+eq-max-dist-min-ℕ : (x y : ℕ) → dist-ℕ x y +ℕ min-ℕ x y ＝ max-ℕ x y
+eq-max-dist-min-ℕ zero-ℕ y = refl
+eq-max-dist-min-ℕ (succ-ℕ x) zero-ℕ = refl
+eq-max-dist-min-ℕ (succ-ℕ x) (succ-ℕ y) = ap succ-ℕ (eq-max-dist-min-ℕ x y)
+
+dist-max-min-ℕ : (x y : ℕ) → dist-ℕ x y ＝ dist-ℕ (max-ℕ x y) (min-ℕ x y)
+dist-max-min-ℕ zero-ℕ zero-ℕ = refl
+dist-max-min-ℕ zero-ℕ (succ-ℕ y) = refl
+dist-max-min-ℕ (succ-ℕ x) zero-ℕ = refl
+dist-max-min-ℕ (succ-ℕ x) (succ-ℕ y) = dist-max-min-ℕ x y
 ```
