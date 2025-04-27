@@ -45,7 +45,7 @@ a constant sequence in a pseudometric space is its limit.
 
 ## Definition
 
-### Limits of sequences in pseudometric spaces
+### Limits of sequences in a pseudometric space
 
 ```agda
 module _

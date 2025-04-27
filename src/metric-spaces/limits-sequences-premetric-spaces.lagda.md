@@ -47,7 +47,7 @@ premetric spaces preserves limits.
 
 ## Definition
 
-### Limits of sequences in premetric spaces
+### Limits of sequences in a premetric space
 
 ```agda
 module _

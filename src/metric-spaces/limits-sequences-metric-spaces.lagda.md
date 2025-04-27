@@ -37,7 +37,7 @@ limits of a sequence are equal.
 
 ## Definition
 
-### Limits of sequences in metric spaces
+### Limits of sequences in a metric space
 
 ```agda
 module _
