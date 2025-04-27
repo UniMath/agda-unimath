@@ -27,6 +27,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sequences
 open import foundation.transport-along-identifications
@@ -153,16 +154,10 @@ module _
 
   is-limit-cauchy-sequence-Metric-Space : UU l2
   is-limit-cauchy-sequence-Metric-Space =
-    (ε : ℚ⁺) →
-    Σ
-      ( ℕ)
-      ( λ n →
-        (m : ℕ) → leq-ℕ n m →
-        neighborhood-Metric-Space
-          ( M)
-          ( ε)
-          ( map-cauchy-sequence-Metric-Space M x m)
-          ( l))
+    is-limit-sequence-Metric-Space
+      ( M)
+      ( map-cauchy-sequence-Metric-Space M x)
+      ( l)
 
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
@@ -314,57 +309,74 @@ module _
       ( l))
   where
 
-  abstract
-    is-limit-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space :
-      is-limit-cauchy-sequence-Metric-Space M x l
-    is-limit-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space
-      ε⁺@(ε , _) =
+  modulus-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space :
+    ℚ⁺ → ℕ
+  modulus-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space
+    ε⁺@(ε , _) =
       let
         (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
         ε''⁺@(ε'' , _) = left-summand-split-ℚ⁺ ε'⁺
-        n =
-          modulus-of-convergence-cauchy-sequence-Metric-Space M x ε''⁺
-        xn = map-cauchy-sequence-Metric-Space M x n
       in
-        n ,
-        λ m n≤m →
-          let
-            xm = map-cauchy-sequence-Metric-Space M x m
-          in
-            is-monotonic-structure-Metric-Space
+        modulus-of-convergence-cauchy-sequence-Metric-Space M x ε''⁺
+
+  is-modulus-limit-modulus-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space :
+    is-modulus-limit-sequence-Metric-Space
+      ( M)
+      ( map-cauchy-sequence-Metric-Space M x)
+      ( l)
+      ( modulus-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space)
+  is-modulus-limit-modulus-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space
+    ε⁺@(ε , _) m n≤m =
+    let
+      (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
+      ε''⁺@(ε'' , _) = left-summand-split-ℚ⁺ ε'⁺
+      n =
+        modulus-of-convergence-cauchy-sequence-Metric-Space M x ε''⁺
+      xn = map-cauchy-sequence-Metric-Space M x n
+      xm = map-cauchy-sequence-Metric-Space M x m
+    in
+      is-monotonic-structure-Metric-Space
+        ( M)
+        ( xm)
+        ( l)
+        ( ε''⁺ +ℚ⁺ ε'⁺)
+        ( ε⁺)
+        ( transitive-le-ℚ
+          ( ε'' +ℚ ε')
+          ( ε' +ℚ ε')
+          ( ε)
+          ( 2ε'<ε)
+          ( preserves-le-left-add-ℚ ε' ε'' ε' (le-mediant-zero-ℚ⁺ ε'⁺)))
+        ( is-triangular-structure-Metric-Space
+          ( M)
+          ( xm)
+          ( xn)
+          ( l)
+          ( ε''⁺)
+          ( ε'⁺)
+          ( tr
+            ( λ d → neighborhood-Metric-Space M d xn l)
+            ( eq-add-split-ℚ⁺ ε'⁺)
+            ( H ε''⁺ (right-summand-split-ℚ⁺ ε'⁺)))
+          ( is-symmetric-structure-Metric-Space
+            ( M)
+            ( ε''⁺)
+            ( xn)
+            ( xm)
+            ( neighborhood-at-modulus-of-convergence-cauchy-sequence-Metric-Space
               ( M)
-              ( xm)
-              ( l)
-              ( ε''⁺ +ℚ⁺ ε'⁺)
-              ( ε⁺)
-              ( transitive-le-ℚ
-                ( ε'' +ℚ ε')
-                ( ε' +ℚ ε')
-                ( ε)
-                ( 2ε'<ε)
-                ( preserves-le-left-add-ℚ ε' ε'' ε' (le-mediant-zero-ℚ⁺ ε'⁺)))
-              ( is-triangular-structure-Metric-Space
-                ( M)
-                ( xm)
-                ( xn)
-                ( l)
-                ( ε''⁺)
-                ( ε'⁺)
-                ( tr
-                  ( λ d → neighborhood-Metric-Space M d xn l)
-                  ( eq-add-split-ℚ⁺ ε'⁺)
-                  ( H ε''⁺ (right-summand-split-ℚ⁺ ε'⁺)))
-                ( is-symmetric-structure-Metric-Space
-                  ( M)
-                  ( ε''⁺)
-                  ( xn)
-                  ( xm)
-                  ( neighborhood-at-modulus-of-convergence-cauchy-sequence-Metric-Space
-                    ( M)
-                    ( x)
-                    ( ε''⁺)
-                    ( m)
-                    ( n≤m))))
+              ( x)
+              ( ε''⁺)
+              ( m)
+              ( n≤m))))
+
+  abstract
+    is-limit-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space :
+      is-limit-cauchy-sequence-Metric-Space M x l
+    is-limit-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space =
+        unit-trunc-Prop
+          ( modulus-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space ,
+            is-modulus-limit-modulus-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space)
 ```
 
 ### Correspondence of Cauchy approximations to Cauchy sequences
@@ -466,38 +478,61 @@ module _
     is-cauchy-sequence-cauchy-sequence-cauchy-approximation-Metric-Space
 ```
 
-### If the Cauchy sequence associated with a Cauchy approximation has a limit, the approximation has the same limit
+### If the Cauchy sequence associated with a Cauchy approximation has a limit modulus at `l`, its associated approximation converges to `l`
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x : cauchy-approximation-Metric-Space M)
-  (l : type-Metric-Space M)
+  { l1 l2 : Level} (M : Metric-Space l1 l2)
+  ( x : cauchy-approximation-Metric-Space M)
+  ( l : type-Metric-Space M)
+  ( H :
+    modulus-limit-sequence-Metric-Space
+      ( M)
+      ( map-cauchy-sequence-Metric-Space
+        ( M)
+        ( cauchy-sequence-cauchy-approximation-Metric-Space M x))
+      ( l))
   where
 
   abstract
-    is-limit-cauchy-approximation-limit-cauchy-sequence-cauchy-approximation-Metric-Space :
-      is-limit-cauchy-sequence-Metric-Space
-        ( M)
-        ( cauchy-sequence-cauchy-approximation-Metric-Space M x)
-        ( l) →
+    is-limit-cauchy-approximation-modulus-limit-cauchy-sequence-cauchy-approximation-Metric-Space :
       is-limit-cauchy-approximation-Premetric-Space
         ( premetric-Metric-Space M)
         ( x)
         ( l)
-    is-limit-cauchy-approximation-limit-cauchy-sequence-cauchy-approximation-Metric-Space
-      l-is-sequence-limit ε⁺@(ε , _) δ⁺@(δ , _) =
+    is-limit-cauchy-approximation-modulus-limit-cauchy-sequence-cauchy-approximation-Metric-Space
+      ε⁺@(ε , _) δ⁺@(δ , _) =
       let
         (δ'⁺@(δ' , _) , 2δ'<δ) = bound-double-le-ℚ⁺ δ⁺
         (n₁' , 1/n₁'<δ') = smaller-reciprocal-ℚ⁺ δ'⁺
         1/n₁' = positive-reciprocal-rational-ℕ⁺ n₁'
         n₁ = pred-ℕ⁺ n₁'
-        (n₂ , H) = l-is-sequence-limit δ'⁺
+        n₂ = modulus-modulus-limit-sequence-Metric-Space
+          ( M)
+          ( map-cauchy-sequence-Metric-Space
+            ( M)
+            ( cauchy-sequence-cauchy-approximation-Metric-Space M x))
+          ( l)
+          ( H)
+          ( δ'⁺)
         n = max-ℕ n₁ n₂
         n' = succ-nonzero-ℕ' n
         1/n' = positive-reciprocal-rational-ℕ⁺ n'
         xε = map-cauchy-approximation-Metric-Space M x ε⁺
         x1/n' = map-cauchy-approximation-Metric-Space M x 1/n'
+        x1/n'-l-neighborhood :
+          neighborhood-Metric-Space M δ'⁺ x1/n' l
+        x1/n'-l-neighborhood =
+          is-modulus-modulus-limit-sequence-Metric-Space
+            ( M)
+            ( map-cauchy-sequence-Metric-Space
+              ( M)
+              ( cauchy-sequence-cauchy-approximation-Metric-Space M x))
+            ( l)
+            ( H)
+            ( δ'⁺)
+            ( n)
+            ( right-leq-max-ℕ n₁ n₂)
       in
         is-monotonic-structure-Metric-Space
           ( M)
@@ -516,10 +551,7 @@ module _
             ( l)
             ( ε⁺ +ℚ⁺ δ'⁺)
             ( δ'⁺)
-            ( pr2
-              ( l-is-sequence-limit δ'⁺)
-              ( n)
-              ( right-leq-max-ℕ n₁ n₂))
+            ( x1/n'-l-neighborhood)
             ( is-monotonic-structure-Metric-Space
               ( M)
               ( xε)
@@ -550,6 +582,38 @@ module _
                 ( x)
                 ( ε⁺)
                 ( 1/n'))))
+```
+
+### If the Cauchy sequence associated with a Cauchy approximation has a limit, the approximation has the same limit
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (x : cauchy-approximation-Metric-Space M)
+  (l : type-Metric-Space M)
+  where
+
+  abstract
+    is-limit-cauchy-approximation-limit-cauchy-sequence-cauchy-approximation-Metric-Space :
+      is-limit-cauchy-sequence-Metric-Space
+        ( M)
+        ( cauchy-sequence-cauchy-approximation-Metric-Space M x)
+        ( l) →
+      is-limit-cauchy-approximation-Premetric-Space
+        ( premetric-Metric-Space M)
+        ( x)
+        ( l)
+    is-limit-cauchy-approximation-limit-cauchy-sequence-cauchy-approximation-Metric-Space
+      =
+        rec-trunc-Prop
+          ( is-limit-cauchy-approximation-prop-Premetric-Space
+            ( premetric-Metric-Space M)
+            ( x)
+            ( l))
+          ( is-limit-cauchy-approximation-modulus-limit-cauchy-sequence-cauchy-approximation-Metric-Space
+            ( M)
+            ( x)
+            ( l))
 ```
 
 ### Short maps between metric spaces transport Cauchy sequences
