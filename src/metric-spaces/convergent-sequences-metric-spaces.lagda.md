@@ -29,8 +29,7 @@ A [sequence](metric-spaces.sequences-metric-spaces.md) in a
 [metric-space](metric-spaces.metric-spaces.md) is
 {{# concept "convergent" Disambiguation="sequence in a metric space" Agda=convergent-sequence-Metric-Space}}
 if it has a [limit](metric-spaces.limits-sequences-metric-spaces.md).
-
-Short maps between metric spaces transport convergent sequences
+Short maps between metric spaces transport convergent sequences.
 
 ## Definitions
 
