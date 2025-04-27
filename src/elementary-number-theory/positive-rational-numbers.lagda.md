@@ -917,42 +917,42 @@ module _
       ( left-summand-split-ℚ⁺ p)
       ( right-summand-split-ℚ⁺ p)
 
-  le-double-le-modulus-le-double-le-ℚ⁺ :
-      le-ℚ⁺
-        ( modulus-le-double-le-ℚ⁺ +ℚ⁺ modulus-le-double-le-ℚ⁺)
+  abstract
+    le-double-le-modulus-le-double-le-ℚ⁺ :
+        le-ℚ⁺
+          ( modulus-le-double-le-ℚ⁺ +ℚ⁺ modulus-le-double-le-ℚ⁺)
+          ( p)
+    le-double-le-modulus-le-double-le-ℚ⁺ =
+      tr
+        ( le-ℚ⁺ (modulus-le-double-le-ℚ⁺ +ℚ⁺ modulus-le-double-le-ℚ⁺))
+        ( eq-add-split-ℚ⁺ p)
+        ( preserves-le-add-ℚ
+          { rational-ℚ⁺ (modulus-le-double-le-ℚ⁺)}
+          { rational-ℚ⁺ (left-summand-split-ℚ⁺ p)}
+          { rational-ℚ⁺ (modulus-le-double-le-ℚ⁺)}
+          { rational-ℚ⁺ (right-summand-split-ℚ⁺ p)}
+          ( le-left-mediant-zero-min-ℚ⁺
+            ( left-summand-split-ℚ⁺ p)
+            ( right-summand-split-ℚ⁺ p))
+          ( le-right-mediant-zero-min-ℚ⁺
+            ( left-summand-split-ℚ⁺ p)
+            ( right-summand-split-ℚ⁺ p)))
+
+    le-modulus-le-double-le-ℚ⁺ : le-ℚ⁺ modulus-le-double-le-ℚ⁺ p
+    le-modulus-le-double-le-ℚ⁺ =
+      transitive-le-ℚ⁺
+        ( modulus-le-double-le-ℚ⁺)
+        ( left-summand-split-ℚ⁺ p)
         ( p)
-  le-double-le-modulus-le-double-le-ℚ⁺ =
-    tr
-      ( le-ℚ⁺ (modulus-le-double-le-ℚ⁺ +ℚ⁺ modulus-le-double-le-ℚ⁺))
-      ( eq-add-split-ℚ⁺ p)
-      ( preserves-le-add-ℚ
-        { rational-ℚ⁺ (modulus-le-double-le-ℚ⁺)}
-        { rational-ℚ⁺ (left-summand-split-ℚ⁺ p)}
-        { rational-ℚ⁺ (modulus-le-double-le-ℚ⁺)}
-        { rational-ℚ⁺ (right-summand-split-ℚ⁺ p)}
+        ( le-mediant-zero-ℚ⁺ p)
         ( le-left-mediant-zero-min-ℚ⁺
           ( left-summand-split-ℚ⁺ p)
           ( right-summand-split-ℚ⁺ p))
-        ( le-right-mediant-zero-min-ℚ⁺
-          ( left-summand-split-ℚ⁺ p)
-          ( right-summand-split-ℚ⁺ p)))
 
-  le-modulus-le-double-le-ℚ⁺ : le-ℚ⁺ modulus-le-double-le-ℚ⁺ p
-  le-modulus-le-double-le-ℚ⁺ =
-    transitive-le-ℚ⁺
-      ( modulus-le-double-le-ℚ⁺)
-      ( left-summand-split-ℚ⁺ p)
-      ( p)
-      ( le-mediant-zero-ℚ⁺ p)
-      ( le-left-mediant-zero-min-ℚ⁺
-        ( left-summand-split-ℚ⁺ p)
-        ( right-summand-split-ℚ⁺ p))
-
-  abstract
     bound-double-le-ℚ⁺ :
       Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
     bound-double-le-ℚ⁺ =
-      modulus-le-double-le-ℚ⁺ , le-double-le-modulus-le-double-le-ℚ⁺
+      ( modulus-le-double-le-ℚ⁺ , le-double-le-modulus-le-double-le-ℚ⁺)
 
     double-le-ℚ⁺ : exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
     double-le-ℚ⁺ = unit-trunc-Prop bound-double-le-ℚ⁺

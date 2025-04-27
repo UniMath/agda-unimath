@@ -34,13 +34,10 @@ The type of
 a [complete metric space](metric-spaces.complete-metric-spaces.md) `A` inherits
 the
 [metric structure](metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space.md)
-of the cauchy sequences in the underlying metric space.
-
-This is the
+of the cauchy sequences in the underlying metric space; this is the
 {{#concept "metric space of cauchy approximations" Disambiguation="in a complete metric space" Agda=metric-space-of-cauchy-approximations-Complete-Metric-Space}}
-in a saturated complete metric space.
-
-In a complete metric space, all Cauchy approximations are
+in a saturated complete metric space. In a complete metric space, all Cauchy
+approximations are
 [convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces.md)
 and the corresponding map into the
 [metric space of convergent Cauchy approximations](metric-spaces.metric-space-of-convergent-cauchy-approximations-in-a-metric-space.md)

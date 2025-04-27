@@ -37,13 +37,10 @@ a
 [saturated complete metric space](metric-spaces.saturated-complete-metric-spaces.md)
 `A` inherits the
 [metric structure](metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space.md)
-of the cauchy sequences in the underlying metric space.
-
-This is the
+of the cauchy sequences in the underlying metric space; this is the
 {{#concept "saturated complete metric space of cauchy approximations" Disambiguation="in a saturated complete metric space" Agda=saturated-complete-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space}}
-in a saturated complete metric space.
-
-In a saturated complete metric space, all Cauchy approximations are
+in a saturated complete metric space. In a saturated complete metric space, all
+Cauchy approximations are
 [convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces.md)
 and the map from a Cauchy approximation to its limit is
 [short](metric-spaces.short-functions-metric-spaces.md).
@@ -184,7 +181,7 @@ module _
     lim-U :
       cauchy-approximation-Metric-Space
         ( metric-space-Saturated-Complete-Metric-Space A)
-    lim-U = map-lim-U , is-cauchy-map-lim-U
+    lim-U = (map-lim-U , is-cauchy-map-lim-U)
 
     is-limit-lim-U :
       is-limit-cauchy-approximation-Metric-Space
