@@ -7,7 +7,6 @@ module metric-spaces.metric-space-of-convergent-sequences-in-a-metric-space wher
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.convergent-sequences-metric-spaces
