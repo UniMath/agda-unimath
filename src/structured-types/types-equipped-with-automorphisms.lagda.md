@@ -62,7 +62,7 @@ pr2 (trivial-Type-With-Automorphism X) = id-equiv
 ## See also
 
 - Sets equipped with automorphisms are defined in
-  [`structured-types.sets-equipped-with-automorphisms.md`](structured-types.sets-equipped-with-automorphisms.md)
+  [`structured-types.sets-equipped-with-automorphisms`](structured-types.sets-equipped-with-automorphisms.md)
 - Cyclic types are
   [sets equipped with automorphisms](structured-types.sets-equipped-with-automorphisms.md)
   of which the automorphism acts transitively.
