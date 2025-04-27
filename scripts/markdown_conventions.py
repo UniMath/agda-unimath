@@ -36,8 +36,8 @@ def find_ill_formed_block(mdcode):
         if line.startswith('```'):
             num_backticks = sum(
                 1 for _ in itertools.takewhile(lambda x: x == '`', line))
-            guard = line[num_backticks:]
-            is_closing_guard = guard == ''
+            tag = line[num_backticks:]
+            is_closing_guard = tag == ''
             if is_closing_guard:
                 if stack and num_backticks == stack[-1]:
                     stack.pop()
