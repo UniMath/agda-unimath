@@ -261,6 +261,30 @@ module _
     is-dedekind-finite (type-Subfinite-Type X)
   is-dedekind-finite-type-Subfinite-Type f is-emb-f =
     is-dedekind-finite-type-Subfinite-Type' f (is-injective-is-emb is-emb-f)
+
+  dedekind-finite-type-Subfinite-Type : Dedekind-Finite-Type l
+  dedekind-finite-type-Subfinite-Type =
+    ( type-Subfinite-Type X , is-dedekind-finite-type-Subfinite-Type)
+```
+
+### The Cantor–Schröder–Bernstein theorem for subfinite types
+
+If two subfinite types `X` and `Y` mutually embed, `X ↪ Y` and `Y ↪ X`, then
+`X ≃ Y`.
+
+```agda
+module _
+  {l1 l2 : Level} (X : Subfinite-Type l1) (Y : Subfinite-Type l2)
+  where
+
+  cantor-schröder-bernstein-Subfinite-Type :
+    (type-Subfinite-Type X ↪ type-Subfinite-Type Y) →
+    (type-Subfinite-Type Y ↪ type-Subfinite-Type X) →
+    type-Subfinite-Type X ≃ type-Subfinite-Type Y
+  cantor-schröder-bernstein-Subfinite-Type =
+    cantor-schröder-bernstein-Dedekind-Finite-Type
+      ( dedekind-finite-type-Subfinite-Type X)
+      ( dedekind-finite-type-Subfinite-Type Y)
 ```
 
 ## See also
