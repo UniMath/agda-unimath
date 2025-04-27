@@ -44,57 +44,56 @@ sequence of elements in a finite type.
 ## Properties
 
 ```agda
-repetition-of-values-sequence-Fin :
-  (k : ℕ) (f : ℕ → Fin k) → repetition-of-values f
-repetition-of-values-sequence-Fin k f =
-  repetition-of-values-left-factor
-    ( is-emb-nat-Fin (succ-ℕ k))
-    ( repetition-of-values-Fin-succ-to-Fin k (f ∘ nat-Fin (succ-ℕ k)))
+module _
+  (k : ℕ) (f : ℕ → Fin k)
+  where
 
-pair-of-distinct-elements-repetition-of-values-sequence-Fin :
-  (k : ℕ) (f : sequence (Fin k)) → pair-of-distinct-elements ℕ
-pair-of-distinct-elements-repetition-of-values-sequence-Fin k f =
-  pair-of-distinct-elements-repetition-of-values f
-    ( repetition-of-values-sequence-Fin k f)
+  repetition-of-values-sequence-Fin :
+    repetition-of-values f
+  repetition-of-values-sequence-Fin =
+    repetition-of-values-left-factor
+      ( is-emb-nat-Fin (succ-ℕ k))
+      ( repetition-of-values-Fin-succ-to-Fin k (f ∘ nat-Fin (succ-ℕ k)))
 
-first-repetition-of-values-sequence-Fin :
-  (k : ℕ) (f : sequence (Fin k)) → ℕ
-first-repetition-of-values-sequence-Fin k f =
-  first-repetition-of-values f (repetition-of-values-sequence-Fin k f)
+  pair-of-distinct-elements-repetition-of-values-sequence-Fin :
+    pair-of-distinct-elements ℕ
+  pair-of-distinct-elements-repetition-of-values-sequence-Fin =
+    pair-of-distinct-elements-repetition-of-values f
+      repetition-of-values-sequence-Fin
 
-second-repetition-of-values-sequence-Fin :
-  (k : ℕ) (f : sequence (Fin k)) → ℕ
-second-repetition-of-values-sequence-Fin k f =
-  second-repetition-of-values f (repetition-of-values-sequence-Fin k f)
+  first-repetition-of-values-sequence-Fin : ℕ
+  first-repetition-of-values-sequence-Fin =
+    first-repetition-of-values f repetition-of-values-sequence-Fin
 
-distinction-repetition-of-values-sequence-Fin :
-  (k : ℕ) (f : sequence (Fin k)) →
-  first-repetition-of-values-sequence-Fin k f ≠
-  second-repetition-of-values-sequence-Fin k f
-distinction-repetition-of-values-sequence-Fin k f =
-  distinction-repetition-of-values f (repetition-of-values-sequence-Fin k f)
+  second-repetition-of-values-sequence-Fin : ℕ
+  second-repetition-of-values-sequence-Fin =
+    second-repetition-of-values f repetition-of-values-sequence-Fin
 
-is-repetition-pair-of-distinct-elements-repetition-of-values-sequence-Fin :
-  (k : ℕ) (f : sequence (Fin k)) →
-  is-repetition-of-values f
-    ( pair-of-distinct-elements-repetition-of-values-sequence-Fin k f)
-is-repetition-pair-of-distinct-elements-repetition-of-values-sequence-Fin k f =
-  is-repetition-of-values-repetition-of-values f
-    ( repetition-of-values-sequence-Fin k f)
+  distinction-repetition-of-values-sequence-Fin :
+    first-repetition-of-values-sequence-Fin ≠
+    second-repetition-of-values-sequence-Fin
+  distinction-repetition-of-values-sequence-Fin =
+    distinction-repetition-of-values f repetition-of-values-sequence-Fin
 
-le-first-repetition-of-values-sequence-Fin :
-  (k : ℕ) (f : sequence (Fin k)) →
-  le-ℕ (first-repetition-of-values-sequence-Fin k f) (succ-ℕ k)
-le-first-repetition-of-values-sequence-Fin k f =
-  strict-upper-bound-nat-Fin
-    ( succ-ℕ k)
-    ( first-repetition-of-values
-      ( f ∘ nat-Fin (succ-ℕ k))
-      ( repetition-of-values-le-Fin
-        ( succ-ℕ k)
-        ( k)
+  is-repetition-pair-of-distinct-elements-repetition-of-values-sequence-Fin :
+    is-repetition-of-values f
+      pair-of-distinct-elements-repetition-of-values-sequence-Fin
+  is-repetition-pair-of-distinct-elements-repetition-of-values-sequence-Fin =
+    is-repetition-of-values-repetition-of-values f
+      repetition-of-values-sequence-Fin
+
+  le-first-repetition-of-values-sequence-Fin :
+    first-repetition-of-values-sequence-Fin <-ℕ (succ-ℕ k)
+  le-first-repetition-of-values-sequence-Fin =
+    strict-upper-bound-nat-Fin
+      ( succ-ℕ k)
+      ( first-repetition-of-values
         ( f ∘ nat-Fin (succ-ℕ k))
-        ( succ-le-ℕ k)))
+        ( repetition-of-values-le-Fin
+          ( succ-ℕ k)
+          ( k)
+          ( f ∘ nat-Fin (succ-ℕ k))
+          ( succ-le-ℕ k)))
 ```
 
 ### Ordered repetitions of values of maps out of the natural numbers

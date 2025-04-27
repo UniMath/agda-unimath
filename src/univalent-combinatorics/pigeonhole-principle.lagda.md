@@ -158,49 +158,6 @@ repetition-of-values-Fin-succ-to-Fin k f =
   repetition-of-values-le-Fin (succ-ℕ k) k f (succ-le-ℕ k)
 ```
 
-#### For any `f : ℕ → Fin n`, we construct a pair of distinct natural numbers on which `f` assumes the same value
-
-```agda
-module _
-  (n : ℕ) (f : ℕ → Fin n)
-  where
-
-  repetition-of-values-sequence-Fin : repetition-of-values f
-  repetition-of-values-sequence-Fin =
-    repetition-of-values-left-factor
-      ( is-emb-nat-Fin (succ-ℕ n))
-      ( repetition-of-values-Fin-succ-to-Fin n (f ∘ nat-Fin (succ-ℕ n)))
-
-  pair-of-distinct-elements-repetition-of-values-sequence-Fin :
-    pair-of-distinct-elements ℕ
-  pair-of-distinct-elements-repetition-of-values-sequence-Fin =
-    pr1 repetition-of-values-sequence-Fin
-
-  first-repetition-of-values-sequence-Fin : ℕ
-  first-repetition-of-values-sequence-Fin =
-    first-pair-of-distinct-elements
-      pair-of-distinct-elements-repetition-of-values-sequence-Fin
-
-  second-repetition-of-values-sequence-Fin : ℕ
-  second-repetition-of-values-sequence-Fin =
-    second-pair-of-distinct-elements
-      pair-of-distinct-elements-repetition-of-values-sequence-Fin
-
-  distinction-repetition-of-values-sequence-Fin :
-    first-repetition-of-values-sequence-Fin ≠
-    second-repetition-of-values-sequence-Fin
-  distinction-repetition-of-values-sequence-Fin =
-    distinction-pair-of-distinct-elements
-      pair-of-distinct-elements-repetition-of-values-sequence-Fin
-
-  is-repetition-of-values-repetition-of-values-sequence-Fin :
-    is-repetition-of-values f
-      pair-of-distinct-elements-repetition-of-values-sequence-Fin
-  is-repetition-of-values-repetition-of-values-sequence-Fin =
-    is-repetition-of-values-repetition-of-values f
-      repetition-of-values-sequence-Fin
-```
-
 ### The pigeonhole principle for types equipped with a counting
 
 ```agda
