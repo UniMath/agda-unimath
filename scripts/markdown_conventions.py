@@ -15,7 +15,7 @@ empty_block_pattern = re.compile(
 
 # Pattern to detect unmatched inline code guards
 unclosed_backtick_pattern = re.compile(
-    r'^([^`]*`[^`]*`)*[^`]*`[^`]*$', flags=re.MULTILINE)
+    r'^([^`]*`[^`]*`)*[^`]+`[^`]*$', flags=re.MULTILINE)
 
 
 def find_ill_formed_block(mdcode):
