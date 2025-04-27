@@ -19,8 +19,6 @@ open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
-open import elementary-number-theory.maximum-rational-numbers
-open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-positive-and-negative-integers
@@ -707,10 +705,6 @@ module _
         ( rational-ℚ⁺ x)
         ( rational-ℚ⁺ le-diff-ℚ⁺))) ∙
     ( left-diff-law-add-ℚ⁺)
-
-  le-le-diff-ℚ⁺ : le-ℚ⁺ le-diff-ℚ⁺ y
-  le-le-diff-ℚ⁺ =
-    tr (le-ℚ⁺ le-diff-ℚ⁺) (left-diff-law-add-ℚ⁺) (le-left-add-ℚ⁺ le-diff-ℚ⁺ x)
 ```
 
 ### Multiplication by a positive rational number preserves strict inequality
