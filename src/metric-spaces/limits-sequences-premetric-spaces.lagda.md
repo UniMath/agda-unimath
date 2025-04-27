@@ -42,7 +42,6 @@ of a [sequence](metric-spaces.sequences-premetric-spaces.md) `u` in a
 function `m : ℚ⁺ → ℕ` such that whenever `m ε ≤ n` in `ℕ`, `u n` is in an
 [`ε`-neighborhood](metric-spaces.premetric-structures.md) of `l`. The function
 `m` is called a limit modulus of the sequence `u` at `l`.
-
 [Short maps](metric-spaces.short-functions-premetric-spaces.md) between
 premetric spaces preserves limits.
 

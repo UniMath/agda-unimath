@@ -75,7 +75,7 @@ module _
 
 ## Properties
 
-### Short maps between metric spaces transport convergent sequences
+### Short maps between metric spaces transport convergent sequences and their limits
 
 ```agda
 module _

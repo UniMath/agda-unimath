@@ -90,7 +90,7 @@ module _
 
 ## Properties
 
-### Constant sequences in pseudometric spaces have limit equal to their value
+### The value of a constant sequences in pseudometric spaces is a limit
 
 ```agda
 module _
