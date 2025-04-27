@@ -18,6 +18,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.noninjective-maps
 open import foundation.sets
 
 open import univalent-combinatorics.decidable-dependent-function-types
@@ -31,14 +32,15 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A **repetition of values** of a function `f : A → B` consists of a pair
-`a a' : A` such that `a ≠ a'` and `f a ＝ f a'`.
+A {{#concept "repetition of values" Disambiguation="of a map of types"}} of a
+map `f : A → B` consists of a
+[pair of distinct elements](foundation.pairs-of-distinct-elements.md) `x ≠ y` of
+`A` that get mapped to the [same](foundation-core.identity-types.md) element in
+`B`: `f x ＝ f y`.
 
 ## Properties
 
 ### If `f : Fin k → Fin l` is not injective, then it has a repetition of values
-
-b
 
 ```agda
 repetition-of-values-is-not-injective-Fin :

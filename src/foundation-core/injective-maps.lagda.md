@@ -167,3 +167,4 @@ is-injective-is-contr f H p = eq-is-contr H
 
 - [Embeddings](foundation-core.embeddings.md)
 - [Path-cosplit maps](foundation.path-cosplit-maps.md)
+- [Noninjective maps](foundation.noninjective-maps.md)
