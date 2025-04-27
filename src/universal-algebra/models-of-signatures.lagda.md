@@ -20,7 +20,7 @@ open import universal-algebra.signatures
 
 ## Idea
 
-A model of a signature `Sig` in a type `A` is a dependent function that assings
+A model of a signature `Sig` in a type `A` is a dependent function that assigns
 to each function symbol `f` of arity `n` and a vector of `n` elements of `A` an
 element of `A`.
 

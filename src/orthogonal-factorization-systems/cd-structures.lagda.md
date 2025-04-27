@@ -69,7 +69,7 @@ module _
     type-Prop (Σ f g σ)
 ```
 
-## Exernal links
+## External links
 
 - [cd-structure](https://ncatlab.org/nlab/show/cd-structure) at the $n$Lab
 
