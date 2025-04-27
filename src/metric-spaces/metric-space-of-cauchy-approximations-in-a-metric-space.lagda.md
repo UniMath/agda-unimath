@@ -43,8 +43,8 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  metric-space-cauchy-approximations-Metric-Space : Metric-Space (l1 ⊔ l2) l2
-  metric-space-cauchy-approximations-Metric-Space =
+  metric-space-of-cauchy-approximations-Metric-Space : Metric-Space (l1 ⊔ l2) l2
+  metric-space-of-cauchy-approximations-Metric-Space =
     subspace-Metric-Space
       ( Π-Metric-Space ℚ⁺ (λ _ → A))
       ( is-cauchy-approximation-prop-Metric-Space A)
@@ -59,10 +59,10 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2) (H : is-saturated-Metric-Space A)
   where
 
-  is-saturated-metric-space-cauchy-approximations-is-saturated-Metric-Space :
+  is-saturated-metric-space-of-cauchy-approximations-is-saturated-Metric-Space :
     is-saturated-Metric-Space
-      (metric-space-cauchy-approximations-Metric-Space A)
-  is-saturated-metric-space-cauchy-approximations-is-saturated-Metric-Space =
+      (metric-space-of-cauchy-approximations-Metric-Space A)
+  is-saturated-metric-space-of-cauchy-approximations-is-saturated-Metric-Space =
     is-saturated-subspace-is-saturated-Metric-Space
       ( Π-Metric-Space ℚ⁺ (λ _ → A))
       ( is-saturated-Π-is-saturated-Metric-Space ℚ⁺ (λ _ → A) (λ _ → H))
@@ -80,8 +80,8 @@ module _
 
   is-short-map-short-function-cauchy-approximation-Metric-Space :
     is-short-function-Metric-Space
-      ( metric-space-cauchy-approximations-Metric-Space A)
-      ( metric-space-cauchy-approximations-Metric-Space B)
+      ( metric-space-of-cauchy-approximations-Metric-Space A)
+      ( metric-space-of-cauchy-approximations-Metric-Space B)
       ( map-short-function-cauchy-approximation-Metric-Space A B f)
   is-short-map-short-function-cauchy-approximation-Metric-Space ε x y Nxy δ =
     is-short-map-short-function-Metric-Space A B f ε
@@ -91,8 +91,8 @@ module _
 
   short-map-short-function-cauchy-approximation-Metric-Space :
     short-function-Metric-Space
-      ( metric-space-cauchy-approximations-Metric-Space A)
-      ( metric-space-cauchy-approximations-Metric-Space B)
+      ( metric-space-of-cauchy-approximations-Metric-Space A)
+      ( metric-space-of-cauchy-approximations-Metric-Space B)
   short-map-short-function-cauchy-approximation-Metric-Space =
     map-short-function-cauchy-approximation-Metric-Space A B f ,
     is-short-map-short-function-cauchy-approximation-Metric-Space

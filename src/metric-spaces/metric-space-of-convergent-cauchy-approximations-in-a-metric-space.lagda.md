@@ -50,11 +50,11 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  metric-space-convergent-cauchy-approximations-Metric-Space :
+  metric-space-of-convergent-cauchy-approximations-Metric-Space :
     Metric-Space (l1 ⊔ l2) l2
-  metric-space-convergent-cauchy-approximations-Metric-Space =
+  metric-space-of-convergent-cauchy-approximations-Metric-Space =
     subspace-Metric-Space
-      ( metric-space-cauchy-approximations-Metric-Space A)
+      ( metric-space-of-cauchy-approximations-Metric-Space A)
       ( is-convergent-prop-cauchy-approximation-Metric-Space A)
 ```
 
@@ -69,7 +69,7 @@ module _
 
   is-short-saturated-limit-convergent-cauchy-approximation-Metric-Space :
     is-short-function-Metric-Space
-      ( metric-space-convergent-cauchy-approximations-Metric-Space A)
+      ( metric-space-of-convergent-cauchy-approximations-Metric-Space A)
       ( saturate-Metric-Space A)
       ( limit-convergent-cauchy-approximation-Metric-Space A)
   is-short-saturated-limit-convergent-cauchy-approximation-Metric-Space
@@ -170,7 +170,7 @@ module _
 
   is-short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space :
     is-short-function-Metric-Space
-      ( metric-space-convergent-cauchy-approximations-Metric-Space A)
+      ( metric-space-of-convergent-cauchy-approximations-Metric-Space A)
       ( A)
       ( limit-convergent-cauchy-approximation-Metric-Space A)
   is-short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space
@@ -188,7 +188,7 @@ module _
 
   short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space :
     short-function-Metric-Space
-      ( metric-space-convergent-cauchy-approximations-Metric-Space A)
+      ( metric-space-of-convergent-cauchy-approximations-Metric-Space A)
       ( A)
   short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space =
     limit-convergent-cauchy-approximation-Metric-Space A ,

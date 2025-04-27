@@ -57,10 +57,10 @@ module _
   {l1 l2 : Level} (A : Saturated-Complete-Metric-Space l1 l2)
   where
 
-  metric-space-cauchy-approximations-Saturated-Complete-Metric-Space :
+  metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space :
     Metric-Space (l1 ⊔ l2) l2
-  metric-space-cauchy-approximations-Saturated-Complete-Metric-Space =
-    metric-space-cauchy-approximations-Metric-Space
+  metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space =
+    metric-space-of-cauchy-approximations-Metric-Space
       ( metric-space-Saturated-Complete-Metric-Space A)
 ```
 
@@ -73,11 +73,11 @@ module _
   {l1 l2 : Level} (A : Saturated-Complete-Metric-Space l1 l2)
   where
 
-  is-saturated-metric-space-cauchy-approximations-Saturated-Complete-Metric-Space :
+  is-saturated-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space :
     is-saturated-Metric-Space
-      (metric-space-cauchy-approximations-Saturated-Complete-Metric-Space A)
-  is-saturated-metric-space-cauchy-approximations-Saturated-Complete-Metric-Space =
-    is-saturated-metric-space-cauchy-approximations-is-saturated-Metric-Space
+      (metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space A)
+  is-saturated-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space =
+    is-saturated-metric-space-of-cauchy-approximations-is-saturated-Metric-Space
       ( metric-space-Saturated-Complete-Metric-Space A)
       ( is-saturated-metric-space-Saturated-Complete-Metric-Space A)
 ```
@@ -91,12 +91,12 @@ module _
 
   short-limit-cauchy-approximation-Saturated-Complete-Metric-Space :
     short-function-Metric-Space
-      ( metric-space-cauchy-approximations-Saturated-Complete-Metric-Space A)
+      ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space A)
       ( metric-space-Saturated-Complete-Metric-Space A)
   short-limit-cauchy-approximation-Saturated-Complete-Metric-Space =
     comp-short-function-Metric-Space
-      ( metric-space-cauchy-approximations-Saturated-Complete-Metric-Space A)
-      ( metric-space-convergent-cauchy-approximations-Metric-Space
+      ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space A)
+      ( metric-space-of-convergent-cauchy-approximations-Metric-Space
         ( metric-space-Saturated-Complete-Metric-Space A))
       ( metric-space-Saturated-Complete-Metric-Space A)
       ( short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space
@@ -107,12 +107,12 @@ module _
 
   is-short-limit-cauchy-approximation-Saturated-Complete-Metric-Space :
     is-short-function-Metric-Space
-      ( metric-space-cauchy-approximations-Saturated-Complete-Metric-Space A)
+      ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space A)
       ( metric-space-Saturated-Complete-Metric-Space A)
       ( limit-cauchy-approximation-Saturated-Complete-Metric-Space A)
   is-short-limit-cauchy-approximation-Saturated-Complete-Metric-Space =
     is-short-map-short-function-Metric-Space
-      ( metric-space-cauchy-approximations-Saturated-Complete-Metric-Space A)
+      ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space A)
       ( metric-space-Saturated-Complete-Metric-Space A)
       ( short-limit-cauchy-approximation-Saturated-Complete-Metric-Space)
 ```
@@ -124,11 +124,11 @@ module _
   {l1 l2 : Level} (A : Saturated-Complete-Metric-Space l1 l2)
   where
 
-  is-complete-metric-space-cauchy-approximations-Saturated-Complete-Metric-Space :
+  is-complete-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space :
     is-complete-Metric-Space
-      ( metric-space-cauchy-approximations-Saturated-Complete-Metric-Space A)
-  is-complete-metric-space-cauchy-approximations-Saturated-Complete-Metric-Space
-    U = lim-U , is-limit-lim-U
+      ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space A)
+  is-complete-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
+    U = (lim-U , is-limit-lim-U)
     where
 
     swap-U :
@@ -140,14 +140,14 @@ module _
         map-cauchy-approximation-Metric-Space
           ( metric-space-Saturated-Complete-Metric-Space A)
           ( map-cauchy-approximation-Metric-Space
-            ( metric-space-cauchy-approximations-Saturated-Complete-Metric-Space
+            ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
               ( A))
             ( U)
             ( ε))
             ( η)) ,
       ( λ ε δ →
         is-cauchy-approximation-map-cauchy-approximation-Metric-Space
-          ( metric-space-cauchy-approximations-Saturated-Complete-Metric-Space
+          ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
             ( A))
           ( U)
           ( ε)
@@ -174,7 +174,7 @@ module _
           is-cauchy-approximation-map-cauchy-approximation-Metric-Space
             ( metric-space-Saturated-Complete-Metric-Space A)
             ( map-cauchy-approximation-Metric-Space
-              ( metric-space-cauchy-approximations-Saturated-Complete-Metric-Space
+              ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
                 ( A))
               ( U)
               ( η))
@@ -188,7 +188,8 @@ module _
 
     is-limit-lim-U :
       is-limit-cauchy-approximation-Metric-Space
-        ( metric-space-cauchy-approximations-Saturated-Complete-Metric-Space A)
+        ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
+          ( A))
         ( U)
         ( lim-U)
     is-limit-lim-U ε δ η =
@@ -210,12 +211,12 @@ module _
     Saturated-Complete-Metric-Space (l1 ⊔ l2) l2
   pr1
     saturated-complete-metric-space-cauchy-approximations-Saturated-Metric-Space
-    = metric-space-cauchy-approximations-Saturated-Complete-Metric-Space A
+    = metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space A
   pr2
     saturated-complete-metric-space-cauchy-approximations-Saturated-Metric-Space
     =
-    ( is-complete-metric-space-cauchy-approximations-Saturated-Complete-Metric-Space
+    ( is-complete-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
       A) ,
-    ( is-saturated-metric-space-cauchy-approximations-Saturated-Complete-Metric-Space
+    ( is-saturated-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
       A)
 ```
