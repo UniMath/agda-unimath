@@ -27,7 +27,7 @@ open import metric-spaces.short-functions-metric-spaces
 
 A [sequence](metric-spaces.sequences-metric-spaces.md) in a
 [metric-space](metric-spaces.metric-spaces.md) is
-{{# concept "convergent" Disambiguation="sequence in a metric space" Agda=convergent-sequence-Metric-Space}}
+{{#concept "convergent" Disambiguation="sequence in a metric space" Agda=convergent-sequence-Metric-Space}}
 if it has a [limit](metric-spaces.limits-sequences-metric-spaces.md). Short maps
 between metric spaces transport convergent sequences.
 
@@ -40,9 +40,14 @@ module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
   where
 
+  subtype-convergent-sequence-Metric-Space :
+    subtype (l1 ⊔ l2) (sequence-type-Metric-Space M)
+  subtype-convergent-sequence-Metric-Space =
+    has-limit-prop-sequence-Metric-Space M
+
   convergent-sequence-Metric-Space : UU (l1 ⊔ l2)
   convergent-sequence-Metric-Space =
-    type-subtype (has-limit-prop-sequence-Metric-Space M)
+    type-subtype subtype-convergent-sequence-Metric-Space
 
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
