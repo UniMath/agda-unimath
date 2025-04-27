@@ -13,17 +13,18 @@ import itertools
 empty_block_pattern = re.compile(
     r'^```\S+.*\n(\s*\n)*\n```\s*$(?!\n(\s*\n)*</details>)', flags=re.MULTILINE)
 
-# Pattern to detect unclosed backticks
+# Pattern to detect unmatched inline code guards
 unclosed_backtick_pattern = re.compile(
     r'^([^`]*`[^`]*`)*[^`]*`[^`]*$', flags=re.MULTILINE)
 
 
 def find_ill_formed_block(mdcode):
     """
-    Checks if in a markdown file, every (specified) opening block tag is paired
-    with a closing block tag before a new one is opened.
+    Checks if in a markdown file, every (specified) opening block guard is
+    paired with a closing block guard before a new one is opened.
 
-    Returns the line number of the first offending guard, as well as whether it is identified as a closing or opening guard.
+    Returns the line number of the first offending guard, as well as whether it
+    is identified as a closing or opening guard.
 
     Note: This also disallows unspecified code blocks.
     """
@@ -35,8 +36,8 @@ def find_ill_formed_block(mdcode):
         if line.startswith('```'):
             num_backticks = sum(
                 1 for _ in itertools.takewhile(lambda x: x == '`', line))
-            tag = line[num_backticks:]
-            is_closing_guard = tag == ''
+            guard = line[num_backticks:]
+            is_closing_guard = guard == ''
             if is_closing_guard:
                 if stack and num_backticks == stack[-1]:
                     stack.pop()
@@ -58,11 +59,10 @@ empty_section_eof = re.compile(
     r'^(.*\n)*#+\s([^\n]*)\n(\s*\n)*$', flags=re.MULTILINE)
 
 
-def check_unclosed_backticks_outside_agda(mdcode):
+def check_unclosed_inline_code_guard(mdcode):
     """
-    Checks if there are unclosed backticks outside of Agda code blocks.
-    Returns a tuple (found, line_number) where found is True if unclosed backticks
-    are found outside code blocks, and line_number is the first line where this occurs.
+    Checks if in a markdown file, every opening inline code block guard is
+    paired with a closing guard.
     """
     # Split the content into lines for line number tracking
     lines = mdcode.split('\n')
@@ -123,7 +123,7 @@ if __name__ == '__main__':
             status |= STATUS_UNSPECIFIED_OR_ILL_FORMED_BLOCK
 
         # Check for unmatched backticks outside of Agda code blocks
-        found_backtick, backtick_line = check_unclosed_backticks_outside_agda(output)
+        found_backtick, backtick_line = check_unclosed_inline_code_guard(output)
         if found_backtick:
             print(
                 f"Error! File '{fpath}' line {backtick_line} contains a backtick (`) for guarding an inline code block that doesn't have a matching closing or opening guard. Please add the matching backtick.")
