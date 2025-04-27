@@ -26,7 +26,7 @@ open import univalent-combinatorics.dedekind-finite-types
 {{#concept "Dedekind finite sets" Agda=set-Dedekind-Finite-Set}} are
 [sets](foundation-core.sets.md) `X` with the
 [property](foundation-core.propositions.md) that every
-[embedding](foundation-core.embeddings.md) `X ↪ X` is an
+self-[embedding](foundation-core.embeddings.md) `X ↪ X` is an
 [equivalence](foundation-core.equivalences.md).
 
 ## Definitions

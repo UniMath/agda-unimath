@@ -21,6 +21,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.noninjective-maps
 open import foundation.pairs-of-distinct-elements
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -40,7 +41,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-If `f : X → Y` is an injective map between finite types `X` and `Y` with `k` and
+If `f : X → Y` is an [injective map](foundation-core.injective-maps.md) between
+[finite types](univalent-combinatorics.finite-types.md) `X` and `Y` with `k` and
 `l` elements, then `k ≤ l`. Conversely, if `l < k`, then no map `f : X → Y` is
 injective.
 
@@ -53,14 +55,14 @@ injective.
 ```agda
 leq-emb-Fin :
   (k l : ℕ) → Fin k ↪ Fin l → k ≤-ℕ l
-leq-emb-Fin zero-ℕ zero-ℕ f = refl-leq-ℕ zero-ℕ
-leq-emb-Fin (succ-ℕ k) zero-ℕ f = ex-falso (map-emb f (inr star))
-leq-emb-Fin zero-ℕ (succ-ℕ l) f = leq-zero-ℕ (succ-ℕ l)
+leq-emb-Fin 0 0 f = refl-leq-ℕ 0
+leq-emb-Fin (succ-ℕ k) 0 f = ex-falso (map-emb f (inr star))
+leq-emb-Fin 0 (succ-ℕ l) f = leq-zero-ℕ (succ-ℕ l)
 leq-emb-Fin (succ-ℕ k) (succ-ℕ l) f = leq-emb-Fin k l (reduce-emb-Fin k l f)
 
 leq-is-emb-Fin :
   (k l : ℕ) {f : Fin k → Fin l} → is-emb f → k ≤-ℕ l
-leq-is-emb-Fin k l {f = f} H = leq-emb-Fin k l (pair f H)
+leq-is-emb-Fin k l {f = f} H = leq-emb-Fin k l (f , H)
 ```
 
 #### Given an injective map `Fin k → Fin l`, it follows that `k ≤ l`
@@ -156,6 +158,49 @@ repetition-of-values-Fin-succ-to-Fin k f =
   repetition-of-values-le-Fin (succ-ℕ k) k f (succ-le-ℕ k)
 ```
 
+#### For any `f : ℕ → Fin n`, we construct a pair of distinct natural numbers on which `f` assumes the same value
+
+```agda
+module _
+  (n : ℕ) (f : ℕ → Fin n)
+  where
+
+  repetition-of-values-sequence-Fin : repetition-of-values f
+  repetition-of-values-sequence-Fin =
+    repetition-of-values-left-factor
+      ( is-emb-nat-Fin (succ-ℕ n))
+      ( repetition-of-values-Fin-succ-to-Fin n (f ∘ nat-Fin (succ-ℕ n)))
+
+  pair-of-distinct-elements-repetition-of-values-sequence-Fin :
+    pair-of-distinct-elements ℕ
+  pair-of-distinct-elements-repetition-of-values-sequence-Fin =
+    pr1 repetition-of-values-sequence-Fin
+
+  first-repetition-of-values-sequence-Fin : ℕ
+  first-repetition-of-values-sequence-Fin =
+    first-pair-of-distinct-elements
+      pair-of-distinct-elements-repetition-of-values-sequence-Fin
+
+  second-repetition-of-values-sequence-Fin : ℕ
+  second-repetition-of-values-sequence-Fin =
+    second-pair-of-distinct-elements
+      pair-of-distinct-elements-repetition-of-values-sequence-Fin
+
+  distinction-repetition-of-values-sequence-Fin :
+    first-repetition-of-values-sequence-Fin ≠
+    second-repetition-of-values-sequence-Fin
+  distinction-repetition-of-values-sequence-Fin =
+    distinction-pair-of-distinct-elements
+      pair-of-distinct-elements-repetition-of-values-sequence-Fin
+
+  is-repetition-of-values-repetition-of-values-sequence-Fin :
+    is-repetition-of-values f
+      pair-of-distinct-elements-repetition-of-values-sequence-Fin
+  is-repetition-of-values-repetition-of-values-sequence-Fin =
+    is-repetition-of-values-repetition-of-values f
+      repetition-of-values-sequence-Fin
+```
+
 ### The pigeonhole principle for types equipped with a counting
 
 ```agda
@@ -180,7 +225,7 @@ module _
   leq-is-emb-count :
     {f : A → B} → is-emb f →
     (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
-  leq-is-emb-count {f} H = leq-emb-count (pair f H)
+  leq-is-emb-count {f} H = leq-emb-count (f , H)
 ```
 
 #### If `f : A → B` is an injective map between types equipped with a counting, then the number of elements of `A` is less than the number of elements of `B`
@@ -211,7 +256,7 @@ module _
     h : Fin (number-of-elements-count eA) ↪ Fin (number-of-elements-count eB)
     h = comp-emb
         ( emb-equiv (inv-equiv-count eB))
-          ( comp-emb (pair f H) (emb-equiv (equiv-count eA)))
+          ( comp-emb (f , H) (emb-equiv (equiv-count eA)))
 ```
 
 #### There is no injective map `A → B` between types equipped with a counting if the number of elements of `B` is strictly less than the number of elements of `A`
@@ -320,8 +365,7 @@ module _
   leq-is-emb-is-finite :
     {f : A → B} → is-emb f →
     (number-of-elements-is-finite H) ≤-ℕ (number-of-elements-is-finite K)
-  leq-is-emb-is-finite {f} H =
-    leq-emb-is-finite (pair f H)
+  leq-is-emb-is-finite {f} H = leq-emb-is-finite (f , H)
 ```
 
 #### If `A → B` is an injective map between finite types, then `|A| ≤ |B|`
@@ -334,7 +378,7 @@ module _
     leq-is-emb-is-finite (is-emb-is-injective (is-set-is-finite K) I)
 ```
 
-#### There are no embeddings between finite types `A` and `B` such that `|B| < |A|
+#### There are no embeddings between finite types `A` and `B` such that `|B| < |A|`
 
 ```agda
   is-not-emb-le-is-finite :
@@ -342,18 +386,19 @@ module _
     le-ℕ (number-of-elements-is-finite K) (number-of-elements-is-finite H) →
     ¬ (is-emb f)
   is-not-emb-le-is-finite f p E =
-    apply-universal-property-trunc-Prop H empty-Prop
-      ( λ e →
-        apply-universal-property-trunc-Prop K empty-Prop
-          ( λ d → is-not-emb-le-count e d f
-            ( concatenate-eq-le-eq-ℕ
-              ( compute-number-of-elements-is-finite d K)
-              ( p)
-              ( inv (compute-number-of-elements-is-finite e H)))
-            ( E)))
+    let open do-syntax-trunc-Prop empty-Prop
+    in do
+    e ← H
+    d ← K
+    is-not-emb-le-count e d f
+      ( concatenate-eq-le-eq-ℕ
+        ( compute-number-of-elements-is-finite d K)
+        ( p)
+        ( inv (compute-number-of-elements-is-finite e H)))
+      ( E)
 ```
 
-#### There are no injective maps between finite types `A` and `B` such that `|B| < |A|
+#### There are no injective maps between finite types `A` and `B` such that `|B| < |A|`
 
 ```agda
   is-not-injective-le-is-finite :

@@ -61,6 +61,12 @@ module _
   map-subcount : X → Fin bound-number-of-elements-subcount
   map-subcount = map-emb emb-subcount
 
+  is-emb-map-subcount : is-emb map-subcount
+  is-emb-map-subcount = is-emb-map-emb emb-subcount
+
+  is-injective-map-subcount : is-injective map-subcount
+  is-injective-map-subcount = is-injective-emb emb-subcount
+
   is-set-has-subcount : is-set X
   is-set-has-subcount =
     is-set-emb emb-subcount (is-set-Fin bound-number-of-elements-subcount)
