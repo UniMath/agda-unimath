@@ -101,7 +101,7 @@ module _
     convergent-cauchy-approximation-Metric-Space
       ( metric-space-Complete-Metric-Space A)
   convergent-cauchy-approximation-Complete-Metric-Space u =
-    u , is-complete-metric-space-Complete-Metric-Space A u
+    ( u , is-complete-metric-space-Complete-Metric-Space A u)
 
   is-section-convergent-cauchy-approximation-Complete-Metric-Space :
     is-section
