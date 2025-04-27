@@ -26,8 +26,6 @@ repos:
             '.codespellrc',
             '--dictionary',
             'codespell-dictionary.txt',
-            '--builtin',
-            'informal,usage,rare,code,en-GB_to_en-US',
           ]
   - repo: https://github.com/codespell-project/codespell
     rev: v2.2.5
