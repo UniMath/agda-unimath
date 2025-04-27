@@ -13,8 +13,55 @@ repos:
       # - id: check-json # Doesn't accept json with comments
       # - id: requirements-txt-fixer # Can't handle comments
 
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.5
+    hooks:
+      - id: codespell
+        name: Check spelling with Codespell (library-defined)
+        files: ^src\/
+        types_or: [text, markdown]
+        args:
+          [
+            '--config',
+            '.codespellrc',
+            '--dictionary',
+            'codespell-dictionary.txt',
+            '--builtin',
+            'informal,usage,rare,code,en-GB_to_en-US',
+          ]
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.5
+    hooks:
+      - id: codespell
+        name: Check spelling with Codespell (builtin)
+        files: ^src\/
+        types_or: [text, markdown]
+        args: ['--config', '.codespellrc', '--dictionary', '-']
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.5
+    hooks:
+      - id: codespell
+        name: Check spelling with Codespell (additional builtin)
+        files: ^src\/
+        types_or: [text, markdown]
+        args:
+          [
+            '--config',
+            '.codespellrc',
+            '--builtin',
+            'informal,usage,rare,code,names,en-GB_to_en-US',
+          ]
+
   - repo: local
     hooks:
+      - id: sort-codespell-files
+        name: Sort codespell dictionary and ignore files
+        entry: bash -c 'sort -o "$1" "$1" && sort -o "$2" "$2"' --
+        args: [codespell-ignore.txt, codespell-dictionary.txt]
+        language: system
+        files: ^(codespell-ignore\.txt|codespell-dictionary\.txt)$
+        pass_filenames: false
+
       - id: markdown-conventions
         name: Markdown conventions
         entry: scripts/markdown_conventions.py

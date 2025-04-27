@@ -1,0 +1,5 @@
+blacklist
+iff
+intensional
+master
+whitelist
