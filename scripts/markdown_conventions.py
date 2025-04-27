@@ -13,6 +13,10 @@ import itertools
 empty_block_pattern = re.compile(
     r'^```\S+.*\n(\s*\n)*\n```\s*$(?!\n(\s*\n)*</details>)', flags=re.MULTILINE)
 
+# Pattern to detect unclosed backticks
+unclosed_backtick_pattern = re.compile(
+    r'^([^`]*`[^`]*`)*[^`]*`[^`]*$', flags=re.MULTILINE)
+
 
 def find_ill_formed_block(mdcode):
     """
@@ -53,11 +57,49 @@ empty_section_nonincreasing_level = re.compile(
 empty_section_eof = re.compile(
     r'^(.*\n)*#+\s([^\n]*)\n(\s*\n)*$', flags=re.MULTILINE)
 
+
+def check_unclosed_backticks_outside_agda(mdcode):
+    """
+    Checks if there are unclosed backticks outside of Agda code blocks.
+    Returns a tuple (found, line_number) where found is True if unclosed backticks
+    are found outside code blocks, and line_number is the first line where this occurs.
+    """
+    # Split the content into lines for line number tracking
+    lines = mdcode.split('\n')
+
+    # Get indices of all code block start and end markers
+    code_block_ranges = []
+    in_code_block = False
+    start_idx = -1
+
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped.startswith('```'):
+            if not in_code_block:
+                start_idx = i
+                in_code_block = True
+            else:
+                code_block_ranges.append((start_idx, i))
+                in_code_block = False
+
+    # Check each line that's not in a code block
+    for i, line in enumerate(lines, 1):
+        # Skip lines in code blocks
+        if any(start <= i-1 <= end for start, end in code_block_ranges):
+            continue
+
+        if unclosed_backtick_pattern.match(line):
+            return True, i
+
+    return False, -1
+
+
 if __name__ == '__main__':
 
     STATUS_UNSPECIFIED_OR_ILL_FORMED_BLOCK = 1
     STATUS_TOP_LEVEL_HEADER_AFTER_FIRST_LINE = 2
     STATUS_EMPTY_SECTION = 4
+    STATUS_UNCLOSED_BACKTICK = 8
 
     status = 0
 
@@ -79,6 +121,13 @@ if __name__ == '__main__':
                     f"Error! File '{fpath}' line {offender_line_number} contains an illegal opening code guard. This is likely because the previous code block should be closed when it is not. Otherwise, this code block needs to have a lower backtick level.", file=sys.stderr)
 
             status |= STATUS_UNSPECIFIED_OR_ILL_FORMED_BLOCK
+
+        # Check for unmatched backticks outside of Agda code blocks
+        found_backtick, backtick_line = check_unclosed_backticks_outside_agda(output)
+        if found_backtick:
+            print(
+                f"Error! File '{fpath}' line {backtick_line} contains a backtick (`) for guarding an inline code block that doesn't have a matching closing or opening guard. Please add the matching backtick.")
+            status |= STATUS_UNCLOSED_BACKTICK
 
         if top_level_header_after_first_line.search(output):
             print(
