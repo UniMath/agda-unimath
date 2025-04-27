@@ -190,7 +190,7 @@ module _
 
     k+1-nonzero : ℕ⁺
     k+1-nonzero =
-      (dist-ℕ i j , dist-neq-ℕ i j (distinction-repetition-of-values y r))
+      ( dist-ℕ i j , dist-neq-ℕ i j (distinction-repetition-of-values y r))
 
     k : ℕ
     k = pred-ℕ⁺ k+1-nonzero
@@ -279,7 +279,3 @@ module _
 - [finite set](https://ncatlab.org/nlab/show/finite+set) at $n$Lab
 - [finite object](https://ncatlab.org/nlab/show/finite+object) at $n$Lab
 - [Finite set](https://en.wikipedia.org/wiki/Finite_set) at Wikipedia
-
-```
-
-```
