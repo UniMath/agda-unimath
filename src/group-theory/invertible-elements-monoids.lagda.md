@@ -379,7 +379,7 @@ show that `x(yx) ＝ x1`. This follows from the following calculation:
 ```
 
 This completes the proof that if `z ↦ xz` is an equivalence, then `x` is
-invertible. The converse is straightfoward.
+invertible. The converse is straightforward.
 
 In the following code we give the above proof, as well as the analogous proof
 that `x` is invertible if `z ↦ zx` is an equivalence, and the converse of both

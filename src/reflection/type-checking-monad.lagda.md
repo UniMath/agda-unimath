@@ -293,7 +293,7 @@ private
 ### Trying a path
 
 The following example tries to solve a goal by using path `p` or `inv p`. This
-example was addapted from
+example was adapted from
 
 ```agda
   private

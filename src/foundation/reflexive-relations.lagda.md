@@ -75,7 +75,7 @@ the reflexivity element `r`:
 ```
 
 This action on identifications can be seen as an instance of a dependent
-function over the diagonal map `Δ : A → A × A`, a situation wich can be
+function over the diagonal map `Δ : A → A × A`, a situation which can be
 generalized. At the time of writing, however, the library lacks infrastructure
 for the general formulation of the action on identifications of dependent
 functions over functions yielding binary dependent identifications.
