@@ -92,12 +92,9 @@ module _
 
   strict-preorder-Large-Strict-Preorder :
     (l : Level) → Strict-Preorder (α l) (β l l)
-  pr1 (strict-preorder-Large-Strict-Preorder l) =
-    type-Large-Strict-Preorder P l
-  pr1 (pr2 (strict-preorder-Large-Strict-Preorder l)) =
-    le-prop-Large-Strict-Preorder P
-  pr1 (pr2 (pr2 (strict-preorder-Large-Strict-Preorder l))) =
-    is-irreflexive-le-Large-Strict-Preorder P
-  pr2 (pr2 (pr2 (strict-preorder-Large-Strict-Preorder l))) =
-    transitive-le-Large-Strict-Preorder P
+  strict-preorder-Large-Strict-Preorder l =
+    ( type-Large-Strict-Preorder P l ,
+      le-prop-Large-Strict-Preorder P ,
+      is-irreflexive-le-Large-Strict-Preorder P ,
+      transitive-le-Large-Strict-Preorder P)
 ```
