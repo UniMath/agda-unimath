@@ -1,6 +1,9 @@
 blacklist
 couldn
+hom
+homs
 iff
 intensional
+lets
 master
 whitelist
