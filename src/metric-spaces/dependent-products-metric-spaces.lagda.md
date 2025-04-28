@@ -136,7 +136,7 @@ module _
   short-ev-Π-Metric-Space = (λ f → f a) , (is-short-ev-Π-Metric-Space)
 ```
 
-### The product of saturated metric spaces is saturated
+### Dependent products of saturated metric spaces are saturated
 
 ```agda
 module _
