@@ -267,7 +267,7 @@ module _
       ( decide-le-leq-ℚ p q)
 ```
 
-### Characterisation of each cut by the other
+### Characterization of each cut by the other
 
 #### The lower cut is the subtype of rationals bounded above by some element of the complement of the upper cut
 

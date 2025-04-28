@@ -139,7 +139,7 @@ We can weaken the assumption that the codomain is modal and only ask that the
 unit has a [retraction](foundation-core.retractions.md). We call this principle
 **strong subuniverse induction**. Note that such a retraction may not in general
 be [unique](foundation-core.contractible-types.md), and the computational
-behaviour of this induction principle depends on the choice of retraction.
+behavior of this induction principle depends on the choice of retraction.
 
 ```agda
 module _
