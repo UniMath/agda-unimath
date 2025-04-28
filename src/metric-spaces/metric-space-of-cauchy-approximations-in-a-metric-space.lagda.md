@@ -52,7 +52,7 @@ module _
 
 ## Properties
 
-### The metric space of Cauchy approximation in a saturated metric space is saturated
+### The metric space of Cauchy approximations in a saturated metric space is saturated
 
 ```agda
 module _
