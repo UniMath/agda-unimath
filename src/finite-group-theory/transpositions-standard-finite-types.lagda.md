@@ -119,7 +119,7 @@ module _
       is-involution-map-swap-two-last-elements-transposition-Fin
 ```
 
-We show that this definiton is an instance of the previous one.
+We show that this definition is an instance of the previous one.
 
 ```agda
   cases-htpy-swap-two-last-elements-transposition-Fin :
@@ -209,7 +209,7 @@ map-adjacent-transposition-Fin :
 map-adjacent-transposition-Fin n k = map-equiv (adjacent-transposition-Fin n k)
 ```
 
-#### `adjacent-transposition-Fin` is an instance of the definiton `transposition-Fin`
+#### `adjacent-transposition-Fin` is an instance of the definition `transposition-Fin`
 
 ```agda
 cases-htpy-map-coproduct-map-transposition-id-Fin :

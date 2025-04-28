@@ -43,7 +43,7 @@ open import univalent-combinatorics.cyclic-finite-types
 ## Idea
 
 Let `n` be a natural number. The `cycle-prime-decomposition-ℕ` of `n` is the
-iterated cartesian product of the cyclic types assocated to the prime
+iterated cartesian product of the cyclic types associated to the prime
 decomposition of `n`.
 
 ## Definition
