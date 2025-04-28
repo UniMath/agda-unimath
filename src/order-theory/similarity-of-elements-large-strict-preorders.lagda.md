@@ -166,12 +166,12 @@ module _
     ( sim-from-below-level-prop-Large-Strict-Preorder P l x y) ∧
     ( sim-from-above-level-prop-Large-Strict-Preorder P l x y)
 
-  is-prop-sim-Large-Strict-Preorder :
+  is-prop-sim-level-Large-Strict-Preorder :
     {l1 l2 : Level} (l : Level) →
     (x : type-Large-Strict-Preorder P l1)
     (y : type-Large-Strict-Preorder P l2) →
     is-prop (sim-level-Large-Strict-Preorder l x y)
-  is-prop-sim-Large-Strict-Preorder l x y =
+  is-prop-sim-level-Large-Strict-Preorder l x y =
     is-prop-type-Prop (sim-level-prop-Large-Strict-Preorder l x y)
 
   record
