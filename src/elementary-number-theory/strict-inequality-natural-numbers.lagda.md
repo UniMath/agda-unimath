@@ -151,7 +151,7 @@ transitive-le-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
   transitive-le-ℕ n m l p q
 ```
 
-### The strictly preordered set of natural numbers orderd by strict inequality
+### The strictly preordered set of natural numbers ordered by strict inequality
 
 ```agda
 strictly-preordered-set-ℕ : Strictly-Preordered-Set lzero lzero

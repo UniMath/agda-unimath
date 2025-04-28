@@ -46,6 +46,6 @@ morphism of arrows `Δ h : hom-arrow f (functoriality Δ g).
 Note that this operation preserves
 [cartesian squares](foundation.cartesian-morphisms-arrows.md). Furthermore, by a
 lemma of [David Wärn](https://ncatlab.org/nlab/show/David+Wärn) it also follows
-that this operation perserves
+that this operation preserves
 [cocartesian morphisms of arrows](synthetic-homotopy-theory.cocartesian-morphisms-arrows.md)
 out of [embeddings](foundation.embeddings.md).

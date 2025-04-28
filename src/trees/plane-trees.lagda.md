@@ -4,7 +4,7 @@
 module trees.plane-trees where
 ```
 
-<details><sumary>Imports</summary>
+<details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
