@@ -21,7 +21,7 @@ open import metric-spaces.subspaces-metric-spaces
 
 The
 [convergent sequences in a metric space](metric-spaces.convergent-sequences-metric-spaces.md)
-inherits the
+inherit the
 [subbspace metric structure](metric-spaces.subspaces-metric-spaces.md) of the
 [metric space of sequences](metric-spaces.sequences-metric-spaces.md). It is the
 {{#concept "metric space of convergent sequences in a metric space" Agda=metric-space-of-convergent-sequences-Metric-Space}}
