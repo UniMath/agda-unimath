@@ -69,7 +69,7 @@ module _
       ( is-cauchy-approximation-prop-Metric-Space A)
 ```
 
-### The functorial action of short maps between metric spaces on Cauchy approximations is short
+### The action of short maps on Cauchy approximations is short
 
 ```agda
 module _
