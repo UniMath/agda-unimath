@@ -68,7 +68,8 @@ module _
       ( λ u → le-prop-Strict-Preorder P u x ⇔ le-prop-Strict-Preorder P u y)
 
   is-prop-sim-from-below-Strict-Preorder :
-    (x y : type-Strict-Preorder P) → is-prop (sim-from-below-Strict-Preorder x y)
+    (x y : type-Strict-Preorder P) →
+    is-prop (sim-from-below-Strict-Preorder x y)
   is-prop-sim-from-below-Strict-Preorder x y =
     is-prop-type-Prop (sim-from-below-prop-Strict-Preorder x y)
 ```
@@ -94,12 +95,13 @@ module _
       ( λ u → le-prop-Strict-Preorder P x u ⇔ le-prop-Strict-Preorder P y u)
 
   is-prop-sim-from-above-Strict-Preorder :
-    (x y : type-Strict-Preorder P) → is-prop (sim-from-above-Strict-Preorder x y)
+    (x y : type-Strict-Preorder P) →
+    is-prop (sim-from-above-Strict-Preorder x y)
   is-prop-sim-from-above-Strict-Preorder x y =
     is-prop-type-Prop (sim-from-above-prop-Strict-Preorder x y)
 ```
 
-### Similar elements in strict preorders
+### Similarity of elements in strict preorders
 
 ```agda
 module _

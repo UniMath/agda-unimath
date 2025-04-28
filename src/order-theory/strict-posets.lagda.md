@@ -137,7 +137,8 @@ Similarity of elements in strict posets.
   sim-from-below-equivalence-relation-Strict-Poset :
     equivalence-relation (l1 ⊔ l2) type-Strict-Poset
   sim-from-below-equivalence-relation-Strict-Poset =
-    sim-from-below-equivalence-relation-Strict-Preorder strict-preorder-Strict-Poset
+    sim-from-below-equivalence-relation-Strict-Preorder
+      strict-preorder-Strict-Poset
 
   sim-from-above-Strict-Poset :
     type-Strict-Poset → type-Strict-Poset → UU (l1 ⊔ l2)
@@ -171,7 +172,8 @@ Similarity of elements in strict posets.
   sim-from-above-equivalence-relation-Strict-Poset :
     equivalence-relation (l1 ⊔ l2) type-Strict-Poset
   sim-from-above-equivalence-relation-Strict-Poset =
-    sim-from-above-equivalence-relation-Strict-Preorder strict-preorder-Strict-Poset
+    sim-from-above-equivalence-relation-Strict-Preorder
+      strict-preorder-Strict-Poset
 
   sim-Strict-Poset : type-Strict-Poset → type-Strict-Poset → UU (l1 ⊔ l2)
   sim-Strict-Poset = sim-Strict-Preorder strict-preorder-Strict-Poset
