@@ -72,6 +72,7 @@ open import order-theory.large-meet-subsemilattices public
 open import order-theory.large-posets public
 open import order-theory.large-preorders public
 open import order-theory.large-quotient-locales public
+open import order-theory.large-strict-posets public
 open import order-theory.large-strict-preorders public
 open import order-theory.large-subframes public
 open import order-theory.large-subposets public
