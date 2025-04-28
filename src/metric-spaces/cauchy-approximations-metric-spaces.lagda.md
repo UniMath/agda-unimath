@@ -81,7 +81,7 @@ module _
 
 ## Properties
 
-### Short maps between metric spaces transport cauchy approximations
+### Short maps between metric spaces preserve Cauchy approximations
 
 ```agda
 module _
