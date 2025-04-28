@@ -68,21 +68,6 @@ def check_unclosed_inline_code_guard(mdcode):
     # Split the content into lines for line number tracking
     lines = mdcode.split('\n')
 
-    # Get indices of all code block start and end markers
-    code_block_ranges = []
-    in_code_block = False
-    start_idx = -1
-
-    for i, line in enumerate(lines):
-        stripped = line.strip()
-        if stripped.startswith('```'):
-            if not in_code_block:
-                start_idx = i
-                in_code_block = True
-            else:
-                code_block_ranges.append((start_idx, i))
-                in_code_block = False
-
     # Check each line that's not in a code block
     in_code_block = False
     problematic_lines = []
