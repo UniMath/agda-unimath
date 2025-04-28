@@ -14,8 +14,7 @@ empty_block_pattern = re.compile(
     r'^```\S+.*\n(\s*\n)*\n```\s*$(?!\n(\s*\n)*</details>)', flags=re.MULTILINE)
 
 # Pattern to detect unmatched inline code guards
-unclosed_backtick_pattern = re.compile(
-    r'^([^`]*`[^`]*`)*[^`]+`[^`]*$', flags=re.MULTILINE)
+unclosed_backtick_pattern = re.compile(r'^([^`]*`[^`]*`)*[^`]+`[^`]*$')
 
 
 def find_ill_formed_block(mdcode):
@@ -63,6 +62,8 @@ def check_unclosed_inline_code_guard(mdcode):
     """
     Checks if in a markdown file, every opening inline code block guard is
     paired with a closing guard.
+
+    Returns a list of line numbers.
     """
     # Split the content into lines for line number tracking
     lines = mdcode.split('\n')
@@ -83,15 +84,19 @@ def check_unclosed_inline_code_guard(mdcode):
                 in_code_block = False
 
     # Check each line that's not in a code block
-    for i, line in enumerate(lines, 1):
-        # Skip lines in code blocks
-        if any(start <= i-1 <= end for start, end in code_block_ranges):
+    in_code_block = False
+    problematic_lines = []
+
+    for i, line in enumerate(lines, 1):  # Start counting from 1 for line numbers
+        stripped = line.strip()
+        if stripped.startswith('```'):
+            in_code_block = not in_code_block
             continue
 
-        if unclosed_backtick_pattern.match(line):
-            return True, i
+        if not in_code_block and unclosed_backtick_pattern.match(line):
+            problematic_lines.append(i)
 
-    return False, -1
+    return problematic_lines
 
 
 if __name__ == '__main__':
@@ -123,10 +128,11 @@ if __name__ == '__main__':
             status |= STATUS_UNSPECIFIED_OR_ILL_FORMED_BLOCK
 
         # Check for unmatched backticks outside of Agda code blocks
-        found_backtick, backtick_line = check_unclosed_inline_code_guard(output)
-        if found_backtick:
+        backtick_lines = check_unclosed_inline_code_guard(output)
+        if backtick_lines:
+            line_list = ", ".join(str(line) for line in backtick_lines)
             print(
-                f"Error! File '{fpath}' line {backtick_line} contains a backtick (`) for guarding an inline code block that doesn't have a matching closing or opening guard. Please add the matching backtick.")
+                f"Error! File '{fpath}' line(s) {line_list} contain backticks (`) for guarding inline code blocks that don't have matching closing or opening guards. Please add the matching backtick(s).")
             status |= STATUS_UNCLOSED_BACKTICK
 
         if top_level_header_after_first_line.search(output):
