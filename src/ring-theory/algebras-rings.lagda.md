@@ -12,7 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import module-theory.left-modules-rings
+open import linear-algebra.left-modules-rings
 
 open import ring-theory.rings
 ```
@@ -22,7 +22,7 @@ open import ring-theory.rings
 ## Idea
 
 An **algebra** over a [ring](ring-theory.rings.md) `R` consists of an
-[`R`-module](module-theory.left-modules-rings.md) `M` equipped with a binary
+[`R`-module](linear-algebra.left-modules-rings.md) `M` equipped with a binary
 operation `x y ↦ xy : M → M → M` such that
 
 ```text

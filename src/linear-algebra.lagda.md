@@ -10,9 +10,12 @@ open import linear-algebra.constant-vectors public
 open import linear-algebra.diagonal-matrices-on-rings public
 open import linear-algebra.functoriality-matrices public
 open import linear-algebra.functoriality-vectors public
+open import linear-algebra.left-modules-rings public
+open import linear-algebra.linear-maps-left-modules-rings public
 open import linear-algebra.matrices public
 open import linear-algebra.matrices-on-rings public
 open import linear-algebra.multiplication-matrices public
+open import linear-algebra.right-modules-rings public
 open import linear-algebra.scalar-multiplication-matrices public
 open import linear-algebra.scalar-multiplication-vectors public
 open import linear-algebra.scalar-multiplication-vectors-on-rings public

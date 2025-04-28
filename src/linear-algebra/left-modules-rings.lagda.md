@@ -1,7 +1,7 @@
 # Left modules over rings
 
 ```agda
-module module-theory.left-modules-rings where
+module linear-algebra.left-modules-rings where
 ```
 
 <details><summary>Imports</summary>
