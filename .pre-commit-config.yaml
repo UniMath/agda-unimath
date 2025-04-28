@@ -14,7 +14,7 @@ repos:
       # - id: requirements-txt-fixer # Can't handle comments
 
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.5
+    rev: v2.4.1
     hooks:
       - id: codespell
         name: Check spelling with Codespell (library-defined)
@@ -28,7 +28,7 @@ repos:
             'codespell-dictionary.txt',
           ]
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.5
+    rev: v2.4.1
     hooks:
       - id: codespell
         name: Check spelling with Codespell (builtin)
@@ -36,7 +36,7 @@ repos:
         types_or: [text, markdown]
         args: ['--config', '.codespellrc', '--dictionary', '-']
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.5
+    rev: v2.4.1
     hooks:
       - id: codespell
         name: Check spelling with Codespell (additional builtin)
