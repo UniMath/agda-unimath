@@ -1,7 +1,7 @@
 # The metric space of cauchy approximations in a metric space
 
 ```agda
-module metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space where
+module metric-spaces.metric-space-of-cauchy-approximations-metric-spaces where
 ```
 
 <details><summary>Imports</summary>

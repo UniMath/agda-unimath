@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module metric-spaces.metric-space-of-convergent-cauchy-approximations-in-a-metric-space where
+module metric-spaces.metric-space-of-convergent-cauchy-approximations-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -21,7 +21,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.functions-metric-spaces
-open import metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space
+open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.saturated-metric-spaces
 open import metric-spaces.short-functions-metric-spaces

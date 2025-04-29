@@ -1,7 +1,7 @@
 # The metric space of Cauchy approximations in a saturated complete metric space
 
 ```agda
-module metric-spaces.saturated-complete-metric-space-of-cauchy-approximations-in-a-saturated-complete-metric-space where
+module metric-spaces.metric-space-of-cauchy-approximations-saturated-complete-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -17,9 +17,9 @@ open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.dependent-products-metric-spaces
-open import metric-spaces.metric-space-of-cauchy-approximations-in-a-complete-metric-space
-open import metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space
-open import metric-spaces.metric-space-of-convergent-cauchy-approximations-in-a-metric-space
+open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces
+open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces
+open import metric-spaces.metric-space-of-convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.saturated-complete-metric-spaces
 open import metric-spaces.saturated-metric-spaces
@@ -41,8 +41,7 @@ of the Cauchy approximations in the underlying metric space; this is the
 {{#concept "saturated complete metric space of Cauchy approximations" Disambiguation="in a saturated complete metric space" Agda=saturated-complete-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space}}
 in a saturated complete metric space.
 
-All Cauchy approximations in a saturated
-complete metric space are
+All Cauchy approximations in a saturated complete metric space are
 [convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces.md)
 and the map from a Cauchy approximation to its limit is
 [short](metric-spaces.short-functions-metric-spaces.md).

@@ -24,8 +24,9 @@ open import metric-spaces.saturated-metric-spaces
 ## Idea
 
 A [metric space](metric-spaces.metric-spaces.md) is
-{{#concept "saturated and complete" Disambiguation="metric space" Agda=Saturated-Complete-Metric-Space}}, or **saturated complete**,
-if it is [complete](metric-spaces.complete-metric-spaces.md) and
+{{#concept "saturated and complete" Disambiguation="metric space" Agda=Saturated-Complete-Metric-Space}},
+or **saturated complete**, if it is
+[complete](metric-spaces.complete-metric-spaces.md) and
 [saturated](metric-spaces.saturated-metric-spaces.md).
 
 ## Definitions

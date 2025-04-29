@@ -1,7 +1,7 @@
 # The metric space of cauchy approximations in a complete metric space
 
 ```agda
-module metric-spaces.metric-space-of-cauchy-approximations-in-a-complete-metric-space where
+module metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -19,8 +19,8 @@ open import metric-spaces.complete-metric-spaces
 open import metric-spaces.dependent-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.isometries-metric-spaces
-open import metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space
-open import metric-spaces.metric-space-of-convergent-cauchy-approximations-in-a-metric-space
+open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces
+open import metric-spaces.metric-space-of-convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 ```
@@ -38,8 +38,7 @@ of the Cauchy approximations in the underlying metric space; this is the
 {{#concept "metric space of cauchy approximations" Disambiguation="in a complete metric space" Agda=metric-space-of-cauchy-approximations-Complete-Metric-Space}}
 in a complete metric space.
 
-All Cauchy approximations in a complete metric space
-are
+All Cauchy approximations in a complete metric space are
 [convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces.md)
 and the corresponding map into the
 [metric space of convergent Cauchy approximations](metric-spaces.metric-space-of-convergent-cauchy-approximations-in-a-metric-space.md)
