@@ -19,7 +19,7 @@ open import metric-spaces.metric-spaces
 
 ## Idea
 
-The type of [sequences](foundation.sequences.md) in the underlying type of a
+The type of [sequences](foundation.sequences.md) in a
 [metric space](metric-spaces.metric-spaces.md) inherits the
 [product metric structure](metric-spaces.dependent-products-metric-spaces.md);
 it is the
