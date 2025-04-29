@@ -118,6 +118,87 @@ module _
 
 ### The metric space of Cauchy approximations in a saturated complete metric space is complete
 
+Given a Cauchy approximation of Cauchy approximations `U : ℚ⁺ → ℚ⁺ → A` in a
+saturated complete metric space `A`, we construct its limit as follows:
+
+1. for any `η : ℚ⁺`, the partial application `λ ε → U ε η` is a Cauchy
+   approximation in `A`;
+2. since `A` is complete, it converges to some `lim-η : A`;
+3. since `A` is saturated, the map `η → lim-η` is a Cauchy approximation in `A`
+4. by construction it's a limit of `U` in the space of Cauchy approximations.
+
+```agda
+module _
+  {l1 l2 : Level} (A : Saturated-Complete-Metric-Space l1 l2)
+  (U : cauchy-approximation-Metric-Space
+    ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space A))
+  where
+
+  map-lim-cauchy-approximation-cauchy-approximations-Saturated-Complete-Metric-Space :
+    ℚ⁺ → type-Saturated-Complete-Metric-Space A
+  map-lim-cauchy-approximation-cauchy-approximations-Saturated-Complete-Metric-Space
+    η =
+    limit-cauchy-approximation-Complete-Metric-Space
+      ( complete-metric-space-Saturated-Complete-Metric-Space A)
+      ( swap-cauchy-approximation-cauchy-approximations-Metric-Space
+        ( metric-space-Saturated-Complete-Metric-Space A)
+        ( U)
+        ( η))
+
+  is-cauchy-map-lim-cauchy-approximation-cauchy-approximations-Saturated-Complete-Metric-Space :
+    is-cauchy-approximation-Metric-Space
+      ( metric-space-Saturated-Complete-Metric-Space A)
+      ( map-lim-cauchy-approximation-cauchy-approximations-Saturated-Complete-Metric-Space)
+  is-cauchy-map-lim-cauchy-approximation-cauchy-approximations-Saturated-Complete-Metric-Space
+    ε δ =
+    is-short-limit-cauchy-approximation-Saturated-Complete-Metric-Space
+      ( A)
+      ( ε +ℚ⁺ δ)
+      ( swap-cauchy-approximation-cauchy-approximations-Metric-Space
+        ( metric-space-Saturated-Complete-Metric-Space A)
+        ( U)
+        ( ε))
+      ( swap-cauchy-approximation-cauchy-approximations-Metric-Space
+        ( metric-space-Saturated-Complete-Metric-Space A)
+        ( U)
+        ( δ))
+      ( λ η →
+        is-cauchy-approximation-map-cauchy-approximation-Metric-Space
+          ( metric-space-Saturated-Complete-Metric-Space A)
+          ( map-cauchy-approximation-Metric-Space
+            ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
+              ( A))
+            ( U)
+            ( η))
+          ( ε)
+          ( δ))
+
+  lim-cauchy-approximation-cauchy-approximations-Saturated-Complete-Metric-Space :
+    cauchy-approximation-Metric-Space
+      (metric-space-Saturated-Complete-Metric-Space A)
+  lim-cauchy-approximation-cauchy-approximations-Saturated-Complete-Metric-Space
+    =
+    map-lim-cauchy-approximation-cauchy-approximations-Saturated-Complete-Metric-Space ,
+    is-cauchy-map-lim-cauchy-approximation-cauchy-approximations-Saturated-Complete-Metric-Space
+
+  is-limit-lim-cauchy-approximation-cauchy-approximations-Saturated-Complete-Metric-Space :
+    is-limit-cauchy-approximation-Metric-Space
+      ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
+        ( A))
+      ( U)
+      ( lim-cauchy-approximation-cauchy-approximations-Saturated-Complete-Metric-Space)
+  is-limit-lim-cauchy-approximation-cauchy-approximations-Saturated-Complete-Metric-Space
+    ε δ η =
+    is-limit-limit-cauchy-approximation-Complete-Metric-Space
+      ( complete-metric-space-Saturated-Complete-Metric-Space A)
+      ( swap-cauchy-approximation-cauchy-approximations-Metric-Space
+        ( metric-space-Saturated-Complete-Metric-Space A)
+        ( U)
+        ( η))
+      ( ε)
+      ( δ)
+```
+
 ```agda
 module _
   {l1 l2 : Level} (A : Saturated-Complete-Metric-Space l1 l2)
@@ -127,76 +208,13 @@ module _
     is-complete-Metric-Space
       ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space A)
   is-complete-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
-    U = (lim-U , is-limit-lim-U)
-    where
-
-    swap-U :
-      ℚ⁺ →
-      cauchy-approximation-Metric-Space
-        ( metric-space-Saturated-Complete-Metric-Space A)
-    swap-U η =
-      ( λ ε →
-        map-cauchy-approximation-Metric-Space
-          ( metric-space-Saturated-Complete-Metric-Space A)
-          ( map-cauchy-approximation-Metric-Space
-            ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
-              ( A))
-            ( U)
-            ( ε))
-            ( η)) ,
-      ( λ ε δ →
-        is-cauchy-approximation-map-cauchy-approximation-Metric-Space
-          ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
-            ( A))
-          ( U)
-          ( ε)
-          ( δ)
-          ( η))
-
-    map-lim-U : ℚ⁺ → type-Saturated-Complete-Metric-Space A
-    map-lim-U η =
-      limit-cauchy-approximation-Complete-Metric-Space
-        ( complete-metric-space-Saturated-Complete-Metric-Space A)
-        ( swap-U η)
-
-    is-cauchy-map-lim-U :
-      is-cauchy-approximation-Metric-Space
-        ( metric-space-Saturated-Complete-Metric-Space A)
-        ( map-lim-U)
-    is-cauchy-map-lim-U ε δ =
-      is-short-limit-cauchy-approximation-Saturated-Complete-Metric-Space
-        ( A)
-        ( ε +ℚ⁺ δ)
-        ( swap-U ε)
-        ( swap-U δ)
-        ( λ η →
-          is-cauchy-approximation-map-cauchy-approximation-Metric-Space
-            ( metric-space-Saturated-Complete-Metric-Space A)
-            ( map-cauchy-approximation-Metric-Space
-              ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
-                ( A))
-              ( U)
-              ( η))
-            ( ε)
-            ( δ))
-
-    lim-U :
-      cauchy-approximation-Metric-Space
-        ( metric-space-Saturated-Complete-Metric-Space A)
-    lim-U = (map-lim-U , is-cauchy-map-lim-U)
-
-    is-limit-lim-U :
-      is-limit-cauchy-approximation-Metric-Space
-        ( metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space
-          ( A))
-        ( U)
-        ( lim-U)
-    is-limit-lim-U ε δ η =
-      is-limit-limit-cauchy-approximation-Complete-Metric-Space
-        ( complete-metric-space-Saturated-Complete-Metric-Space A)
-        ( swap-U η)
-        ( ε)
-        ( δ)
+    U =
+    ( lim-cauchy-approximation-cauchy-approximations-Saturated-Complete-Metric-Space
+      ( A)
+      ( U)) ,
+    ( is-limit-lim-cauchy-approximation-cauchy-approximations-Saturated-Complete-Metric-Space
+      ( A)
+      ( U))
 ```
 
 ### The saturated complete metric space of Cauchy approximations in a saturated complete metric space

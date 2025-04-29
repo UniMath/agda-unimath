@@ -97,3 +97,33 @@ module _
     map-short-function-cauchy-approximation-Metric-Space A B f ,
     is-short-map-short-function-cauchy-approximation-Metric-Space
 ```
+
+### The partial application of a Cauchy approximation of Cauchy approximations is a Cauchy approximation
+
+```agda
+module _
+  { l1 l2 : Level} (A : Metric-Space l1 l2)
+  ( U : cauchy-approximation-Metric-Space
+    ( metric-space-of-cauchy-approximations-Metric-Space A))
+  where
+
+  swap-cauchy-approximation-cauchy-approximations-Metric-Space :
+    ℚ⁺ → cauchy-approximation-Metric-Space A
+  swap-cauchy-approximation-cauchy-approximations-Metric-Space
+    η =
+    ( λ ε →
+      map-cauchy-approximation-Metric-Space
+        ( A)
+        ( map-cauchy-approximation-Metric-Space
+          ( metric-space-of-cauchy-approximations-Metric-Space A)
+          ( U)
+          ( ε))
+          ( η)) ,
+    ( λ ε δ →
+      is-cauchy-approximation-map-cauchy-approximation-Metric-Space
+        ( metric-space-of-cauchy-approximations-Metric-Space A)
+        ( U)
+        ( ε)
+        ( δ)
+        ( η))
+```
