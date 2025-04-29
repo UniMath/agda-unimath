@@ -19,8 +19,8 @@ open import metric-spaces.sequences-premetric-spaces
 
 A
 {{#concept "sequence" Disambiguation="in a pseudometric space" Agda=sequence-type-Pseudometric-Space}}
-in a [pseudometric space](metric-spaces.pseudometric-spaces.md) is
-a [sequence](foundation.sequences.md) in its underlying type.
+in a [pseudometric space](metric-spaces.pseudometric-spaces.md) is a
+[sequence](foundation.sequences.md) in its underlying type.
 
 ## Definition
 
