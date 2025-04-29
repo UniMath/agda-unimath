@@ -35,7 +35,8 @@ open import metric-spaces.short-functions-premetric-spaces
 
 ## Ideas
 
-An element `l : type-Premetric-Space M` is the
+An element `v` of a [premetric space](metric-spaces.premetric-spaces.md) `M` is
+the
 {{#concept "limit" Disambiguation="of a sequence in a premetric space" Agda=is-limit-sequence-Premetric-Space}}
 of a [sequence](metric-spaces.sequences-premetric-spaces.md) `u` in a
 [premetric space](metric-spaces.premetric-spaces.md) `M` if there exists a
