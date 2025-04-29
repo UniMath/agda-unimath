@@ -19,8 +19,8 @@ open import metric-spaces.premetric-spaces
 
 A
 {{#concept "sequence" Disambiguation="in a premetric space" Agda=sequence-type-Premetric-Space}}
-in a [premetric space](metric-spaces.premetric-spaces.md) is a sequence in its
-underlying type.
+in a [premetric space](metric-spaces.premetric-spaces.md) is a
+[sequence](foundation.sequences.md) in its underlying type.
 
 ## Definitions
 
