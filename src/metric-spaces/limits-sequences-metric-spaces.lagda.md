@@ -32,8 +32,10 @@ open import metric-spaces.sequences-metric-spaces
 {{#concept "Limits" Disambiguation="of sequences in metric spaces" Agda=is-limit-sequence-Metric-Space}}
 of [sequences in metric spaces](metric-spaces.sequences-metric-spaces.md) are
 [limits](metric-spaces.limits-sequences-premetric-spaces.md) in the underlying
-[premetric space](metric-spaces.premetric-spaces.md). In a metric space, all
-limits of a sequence are [equal](foundation.identity-types.md).
+[premetric space](metric-spaces.premetric-spaces.md): there exists a function
+`m : ℚ⁺ → ℕ` such that whenever `m ε ≤ n` in `ℕ`, `u n` is in an
+[`ε`-neighborhood](metric-spaces.premetric-structures.md) of `l`. In a metric
+space, all limits of a sequence are [equal](foundation.identity-types.md).
 
 ## Definition
 

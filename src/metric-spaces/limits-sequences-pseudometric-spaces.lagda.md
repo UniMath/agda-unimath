@@ -38,7 +38,9 @@ open import metric-spaces.sequences-pseudometric-spaces
 of
 [sequences in pseudometric spaces](metric-spaces.sequences-pseudometric-spaces.md)
 are [limits](metric-spaces.limits-sequences-premetric-spaces.md) in the
-underlying [premetric space](metric-spaces.premetric-spaces.md).
+underlying [premetric space](metric-spaces.premetric-spaces.md): there exists a
+function `m : ℚ⁺ → ℕ` such that whenever `m ε ≤ n` in `ℕ`, `u n` is in an
+[`ε`-neighborhood](metric-spaces.premetric-structures.md) of `l`.
 
 Limits of a sequence in a pseudometric space are indistinguishable. The value of
 a constant sequence in a pseudometric space is its limit.
