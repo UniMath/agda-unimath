@@ -82,7 +82,7 @@ module _
 
 ## Properties
 
-### Two limits of a sequence in a metric space are equal
+### The limit of a sequence in a metric space is unique
 
 ```agda
 module _
