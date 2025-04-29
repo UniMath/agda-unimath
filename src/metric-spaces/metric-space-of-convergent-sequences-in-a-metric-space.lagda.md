@@ -23,8 +23,8 @@ The
 [convergent sequences](metric-spaces.convergent-sequences-metric-spaces.md) in a [metric space](metric-spaces.metric-spaces.md)
 inherit the
 [subbspace metric structure](metric-spaces.subspaces-metric-spaces.md) of the
-[metric space of sequences](metric-spaces.sequences-metric-spaces.md). It is the
-{{#concept "metric space of convergent sequences in a metric space" Agda=metric-space-of-convergent-sequences-Metric-Space}}
+[metric space of sequences](metric-spaces.sequences-metric-spaces.md). This defines the
+{{#concept "metric space of convergent sequences in a metric space" Agda=metric-space-of-convergent-sequences-Metric-Space}}.
 
 ## Definitions
 
