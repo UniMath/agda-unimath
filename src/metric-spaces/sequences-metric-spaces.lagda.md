@@ -19,12 +19,10 @@ open import metric-spaces.metric-spaces
 
 ## Idea
 
-The type of [sequences](foundation.sequences.md) in a
-[metric space](metric-spaces.metric-spaces.md) inherits the
-[product metric structure](metric-spaces.dependent-products-metric-spaces.md).
-This defines the
-{{#concept "metric space of sequences" Disambiguation="in a metric space" Agda=sequence-Metric-Space}}
-in a metric space.
+A
+{{#concept "sequence" Disambiguation="in a metric space" Agda=sequence-type-Metric-Space}}
+in a [metric space](metric-spaces.metric-spaces.md) is a
+[sequence](foundation.sequences.md) in its underlying type.
 
 ## Definitions
 
