@@ -1,7 +1,7 @@
 # The metric space of convergent sequences in metric spaces
 
 ```agda
-module metric-spaces.metric-space-of-convergent-sequences-in-a-metric-space where
+module metric-spaces.metric-space-of-convergent-sequences-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
