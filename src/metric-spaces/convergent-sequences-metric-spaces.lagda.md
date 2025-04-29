@@ -79,7 +79,7 @@ module _
 
 ## Properties
 
-### Short maps between metric spaces transport convergent sequences and their limits
+### Short maps between metric spaces preserve convergent sequences and their limits
 
 ```agda
 module _
