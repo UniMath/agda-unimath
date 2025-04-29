@@ -21,8 +21,8 @@ open import metric-spaces.metric-spaces
 
 The type of [sequences](foundation.sequences.md) in a
 [metric space](metric-spaces.metric-spaces.md) inherits the
-[product metric structure](metric-spaces.dependent-products-metric-spaces.md);
-it is the
+[product metric structure](metric-spaces.dependent-products-metric-spaces.md).
+This defines the
 {{#concept "metric space of sequences" Disambiguation="in a metric space" Agda=sequence-Metric-Space}}
 in a metric space.
 
