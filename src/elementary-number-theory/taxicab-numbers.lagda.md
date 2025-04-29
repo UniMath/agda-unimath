@@ -47,10 +47,10 @@ have either `a ＝ 0` or `b ＝ 0` by
 [Fermat's last theorem](https://en.wikipedia.org/wiki/Fermat%27s_Last_Theorem).
 Therefore `n` can be written in at least two different ways as a sum of cubes of
 positive natural numbers if and only if it can be written in at least two
-different ways as a sum of cubes of arbitary natural numbers. However, the class
-of natural numbers that can be written in exactly one way as a sum of cubes is
-different when we consider sums of cubes of positive natural numbers or sums of
-cubes of arbitrary natural numbers.
+different ways as a sum of cubes of arbitrary natural numbers. However, the
+class of natural numbers that can be written in exactly one way as a sum of
+cubes is different when we consider sums of cubes of positive natural numbers or
+sums of cubes of arbitrary natural numbers.
 
 ## Definitions
 

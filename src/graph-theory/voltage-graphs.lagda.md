@@ -21,7 +21,7 @@ open import group-theory.groups
 
 A **voltage graph** is a [directed graph](graph-theory.directed-graphs.md) `G`
 equipped with a [group](group-theory.groups.md) `Π`, which we call the **voltage
-group**, and a labelling of the edges of `G` by elements of `Π`.
+group**, and a labeling of the edges of `G` by elements of `Π`.
 
 ## Definition
 
