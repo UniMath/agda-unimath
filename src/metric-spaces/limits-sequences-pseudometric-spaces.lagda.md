@@ -198,7 +198,7 @@ module _
       ( Ly)
 ```
 
-### Subsequences preserve limits in pseudometric spaces
+### Taking subsequences preserves limits in pseudometric spaces
 
 ```agda
 module _
