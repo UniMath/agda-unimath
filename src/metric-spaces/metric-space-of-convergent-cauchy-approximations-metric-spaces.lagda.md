@@ -36,7 +36,7 @@ The type of
 [convergent Cauchy approximations](metric-spaces.convergent-cauchy-approximations-metric-spaces.md)
 in a [metric space](metric-spaces.metric-spaces.md) inherits the
 [metric substructure](metric-spaces.subspaces-metric-spaces.md) of the
-[metric space of Cauchy approximations](metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space.md).
+[metric space of Cauchy approximations](metric-spaces.metric-space-of-cauchy-approximations-metric-spaces.md).
 This is the
 {{#concept "metric space of convergent Cauchy approximations" Disambiguation="in a metric space" Agda=metric-space-of-convergent-cauchy-approximations-Metric-Space}}
 in a metric space.

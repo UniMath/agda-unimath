@@ -36,7 +36,7 @@ The type of
 a
 [saturated complete metric space](metric-spaces.saturated-complete-metric-spaces.md)
 `A` inherits the
-[metric structure](metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space.md)
+[metric structure](metric-spaces.metric-space-of-cauchy-approximations-metric-spaces.md)
 of the Cauchy approximations in the underlying metric space; this is the
 {{#concept "saturated complete metric space of Cauchy approximations" Disambiguation="in a saturated complete metric space" Agda=saturated-complete-metric-space-of-cauchy-approximations-Saturated-Complete-Metric-Space}}
 in a saturated complete metric space.

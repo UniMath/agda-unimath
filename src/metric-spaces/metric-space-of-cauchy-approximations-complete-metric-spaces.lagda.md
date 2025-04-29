@@ -33,7 +33,7 @@ The type of
 [Cauchy approximations](metric-spaces.cauchy-approximations-metric-spaces.md) in
 a [complete metric space](metric-spaces.complete-metric-spaces.md) `A` inherits
 the
-[metric structure](metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space.md)
+[metric structure](metric-spaces.metric-space-of-cauchy-approximations-metric-spaces.md)
 of the Cauchy approximations in the underlying metric space; this is the
 {{#concept "metric space of cauchy approximations" Disambiguation="in a complete metric space" Agda=metric-space-of-cauchy-approximations-Complete-Metric-Space}}
 in a complete metric space.
@@ -41,7 +41,7 @@ in a complete metric space.
 All Cauchy approximations in a complete metric space are
 [convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces.md)
 and the corresponding map into the
-[metric space of convergent Cauchy approximations](metric-spaces.metric-space-of-convergent-cauchy-approximations-in-a-metric-space.md)
+[metric space of convergent Cauchy approximations](metric-spaces.metric-space-of-convergent-cauchy-approximations-metric-spaces.md)
 is an [isometry](metric-spaces.isometries-metric-spaces.md).
 
 ## Definitions
