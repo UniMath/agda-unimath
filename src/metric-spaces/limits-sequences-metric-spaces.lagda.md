@@ -33,7 +33,7 @@ open import metric-spaces.sequences-metric-spaces
 of [sequences in metric spaces](metric-spaces.sequences-metric-spaces.md) are
 [limits](metric-spaces.limits-sequences-premetric-spaces.md) in the underlying
 [premetric space](metric-spaces.premetric-spaces.md). In a metric space, all
-limits of a sequence are equal.
+limits of a sequence are [equal](foundation.identity-types.md).
 
 ## Definition
 
