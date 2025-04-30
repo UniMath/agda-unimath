@@ -35,10 +35,12 @@ A {{#concept "large strict poset" Agda=Large-Strict-Poset}} is a
 [large strict preorder](order-theory.large-strict-preorders.md) $A$ satisfying
 the
 {{#concept "extensionality principle" Disambiguation="of large strict posets" Agda=extensionality-principle-Large-Strict-Preorder}}
-that
-[similar elements](order-theory.similarity-of-elements-large-strict-preorders.md)
-are [equal](foundation-core.identity-types.md). More concretely, if $x$ and $y$
-are such that for every $z$, we have
+that elements at the same universe level that are
+[similar](order-theory.similarity-of-elements-large-strict-preorders.md)
+relative to that same universe level are
+[equal](foundation-core.identity-types.md). More concretely, if $x$ and $y$ are
+elements at universe level $l$ such that for every other element $z$ at the same
+universe level, we have
 
 - $z < x$ [if and only if](foundation.logical-equivalences.md) $z < y$, and
 - $x < z$ if and only if $y < z$,
