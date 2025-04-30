@@ -97,6 +97,7 @@ universe level is extensional.
 ```agda
 record Large-Strict-Poset (α : Level → Level) (β : Level → Level → Level) : UUω
   where
+  constructor make-Large-Strict-Poset
   field
     large-strict-preorder-Large-Strict-Poset : Large-Strict-Preorder α β
 
@@ -187,6 +188,28 @@ module _
   set-Large-Strict-Poset : (l : Level) → Set (α l)
   set-Large-Strict-Poset l =
     set-Strict-Poset (strict-poset-Large-Strict-Poset A l)
+```
+
+### The extensionality principle is a proposition at every universe level
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (A : Large-Strict-Preorder α β)
+  where
+
+  is-prop-extensionality-principle-level-Large-Strict-Preorder :
+    {l : Level} →
+    is-prop (extensionality-principle-level-Large-Strict-Preorder A l)
+  is-prop-extensionality-principle-level-Large-Strict-Preorder {l} =
+    is-prop-extensionality-principle-Strict-Preorder
+      ( strict-preorder-Large-Strict-Preorder A l)
+
+  extensionality-principle-level-prop-Large-Strict-Preorder :
+    (l : Level) → Prop (α l ⊔ β l l)
+  extensionality-principle-level-prop-Large-Strict-Preorder l =
+    ( extensionality-principle-level-Large-Strict-Preorder A l ,
+      is-prop-extensionality-principle-level-Large-Strict-Preorder)
 ```
 
 ## References
