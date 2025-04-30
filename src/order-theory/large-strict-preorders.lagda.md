@@ -36,7 +36,7 @@ $<$ is irreflexive and transitive:
 Note that large strict preorders satisfy antisymmetry by irreflexivity and
 transitivity, but this is not the correct extensionality principle for strict
 preorders. The correct extensionality principle is considered on the page on
-[large strict posets](order-theory.large-strict-posets.md).
+[large strict orders](order-theory.large-strict-orders.md).
 
 ## Definitions
 

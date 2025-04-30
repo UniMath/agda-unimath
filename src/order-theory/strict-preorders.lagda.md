@@ -31,7 +31,7 @@ irreflexive and transitive:
 Note that strict preorders satisfy antisymmetry by irreflexivity and
 transitivity, but this is not the correct extensionality principle for strict
 preorders. The correct extensionality principle is considered on the page on
-[strict posets](order-theory.strict-posets.md).
+[strict orders](order-theory.strict-orders.md).
 
 ## Definitions
 

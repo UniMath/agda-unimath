@@ -131,6 +131,6 @@ module _
 
 ## See also
 
-- [Strict posets](order-theory.strict-posets.md) are strictly preordered sets
+- [Strict orders](order-theory.strict-orders.md) are strictly preordered sets
   that are _extensional_ with respect to the structure of the underlying strict
   preorder.

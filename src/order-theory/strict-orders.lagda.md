@@ -1,7 +1,7 @@
-# Strict posets
+# Strict orders
 
 ```agda
-module order-theory.strict-posets where
+module order-theory.strict-orders where
 ```
 
 <details><summary>Imports</summary>
@@ -28,9 +28,9 @@ open import order-theory.strictly-preordered-sets
 
 ## Idea
 
-A {{#concept "strict poset" Agda=Strict-Poset}} is a
+A {{#concept "strict order" Agda=Strict-Order}} is a
 [strict preorder](order-theory.strict-preorders.md) $A$ satisfying the
-{{#concept "extensionality principle" Disambiguation="of strict posets" Agda=extensionality-principle-Strict-Preorder}}
+{{#concept "extensionality principle" Disambiguation="of strict orders" Agda=extensionality-principle-Strict-Preorder}}
 that [similar elements](order-theory.similarity-of-elements-strict-preorders.md)
 are [equal](foundation-core.identity-types.md). More concretely, if $x$ and $y$
 are such that for every $z$, we have
@@ -40,19 +40,19 @@ are such that for every $z$, we have
 
 then $x = y$.
 
-The extensionality principle of strict posets is slightly different to that of
+The extensionality principle of strict orders is slightly different to that of
 [ordinals](order-theory.ordinals.md). For ordinals, elements are equal already
 if they are _similar from below_. Namely, only the first of the two conditions
 above must be satisfied in order for two elements to be equal.
 
-The extensionality principle of strict posets can be recovered as a special case
+The extensionality principle of strict orders can be recovered as a special case
 of the extensionality principle of
 [semicategories](category-theory.nonunital-precategories.md) as considered in
 Example 8.16 of _The Univalence Principle_ {{#cite ANST25}}.
 
 ## Definitions
 
-### The extensionality principle of strict posets
+### The extensionality principle of strict orders
 
 ```agda
 extensionality-principle-Strict-Preorder :
@@ -61,84 +61,84 @@ extensionality-principle-Strict-Preorder P =
   (x y : type-Strict-Preorder P) → sim-Strict-Preorder P x y → x ＝ y
 ```
 
-### The type of strict posets
+### The type of strict orders
 
 ```agda
-Strict-Poset : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Strict-Poset l1 l2 =
+Strict-Order : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Strict-Order l1 l2 =
   Σ (Strict-Preorder l1 l2) (extensionality-principle-Strict-Preorder)
 
 module _
-  {l1 l2 : Level} (A : Strict-Poset l1 l2)
+  {l1 l2 : Level} (A : Strict-Order l1 l2)
   where
 
-  strict-preorder-Strict-Poset : Strict-Preorder l1 l2
-  strict-preorder-Strict-Poset = pr1 A
+  strict-preorder-Strict-Order : Strict-Preorder l1 l2
+  strict-preorder-Strict-Order = pr1 A
 
-  extensionality-Strict-Poset :
-    extensionality-principle-Strict-Preorder strict-preorder-Strict-Poset
-  extensionality-Strict-Poset = pr2 A
+  extensionality-Strict-Order :
+    extensionality-principle-Strict-Preorder strict-preorder-Strict-Order
+  extensionality-Strict-Order = pr2 A
 
-  type-Strict-Poset : UU l1
-  type-Strict-Poset = type-Strict-Preorder strict-preorder-Strict-Poset
+  type-Strict-Order : UU l1
+  type-Strict-Order = type-Strict-Preorder strict-preorder-Strict-Order
 
-  le-Strict-Poset : type-Strict-Poset → type-Strict-Poset → UU l2
-  le-Strict-Poset = le-Strict-Preorder strict-preorder-Strict-Poset
+  le-Strict-Order : type-Strict-Order → type-Strict-Order → UU l2
+  le-Strict-Order = le-Strict-Preorder strict-preorder-Strict-Order
 
-  is-prop-le-Strict-Poset :
-    (x y : type-Strict-Poset) → is-prop (le-Strict-Poset x y)
-  is-prop-le-Strict-Poset =
-    is-prop-le-Strict-Preorder strict-preorder-Strict-Poset
+  is-prop-le-Strict-Order :
+    (x y : type-Strict-Order) → is-prop (le-Strict-Order x y)
+  is-prop-le-Strict-Order =
+    is-prop-le-Strict-Preorder strict-preorder-Strict-Order
 
-  le-prop-Strict-Poset : type-Strict-Poset → type-Strict-Poset → Prop l2
-  le-prop-Strict-Poset = le-prop-Strict-Preorder strict-preorder-Strict-Poset
+  le-prop-Strict-Order : type-Strict-Order → type-Strict-Order → Prop l2
+  le-prop-Strict-Order = le-prop-Strict-Preorder strict-preorder-Strict-Order
 
-  is-irreflexive-le-Strict-Poset : is-irreflexive le-Strict-Poset
-  is-irreflexive-le-Strict-Poset =
-    is-irreflexive-le-Strict-Preorder strict-preorder-Strict-Poset
+  is-irreflexive-le-Strict-Order : is-irreflexive le-Strict-Order
+  is-irreflexive-le-Strict-Order =
+    is-irreflexive-le-Strict-Preorder strict-preorder-Strict-Order
 
-  is-transitive-le-Strict-Poset : is-transitive le-Strict-Poset
-  is-transitive-le-Strict-Poset =
-    is-transitive-le-Strict-Preorder strict-preorder-Strict-Poset
+  is-transitive-le-Strict-Order : is-transitive le-Strict-Order
+  is-transitive-le-Strict-Order =
+    is-transitive-le-Strict-Preorder strict-preorder-Strict-Order
 ```
 
 ## Properties
 
-### The ordering of a strict poset is antisymmetric
+### The ordering of a strict order is antisymmetric
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Strict-Poset l1 l2)
+  {l1 l2 : Level} (A : Strict-Order l1 l2)
   where
 
-  is-antisymmetric-le-Strict-Poset : is-antisymmetric (le-Strict-Poset A)
-  is-antisymmetric-le-Strict-Poset =
-    is-antisymmetric-le-Strict-Preorder (strict-preorder-Strict-Poset A)
+  is-antisymmetric-le-Strict-Order : is-antisymmetric (le-Strict-Order A)
+  is-antisymmetric-le-Strict-Order =
+    is-antisymmetric-le-Strict-Preorder (strict-preorder-Strict-Order A)
 ```
 
-### Strict posets are sets
+### Strict orders are sets
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Strict-Poset l1 l2)
+  {l1 l2 : Level} (A : Strict-Order l1 l2)
   where
 
-  is-set-type-Strict-Poset : is-set (type-Strict-Poset A)
-  is-set-type-Strict-Poset =
+  is-set-type-Strict-Order : is-set (type-Strict-Order A)
+  is-set-type-Strict-Order =
     is-set-prop-in-id
-      ( sim-Strict-Preorder (strict-preorder-Strict-Poset A))
-      ( is-prop-sim-Strict-Preorder (strict-preorder-Strict-Poset A))
-      ( refl-sim-Strict-Preorder (strict-preorder-Strict-Poset A))
-      ( extensionality-Strict-Poset A)
+      ( sim-Strict-Preorder (strict-preorder-Strict-Order A))
+      ( is-prop-sim-Strict-Preorder (strict-preorder-Strict-Order A))
+      ( refl-sim-Strict-Preorder (strict-preorder-Strict-Order A))
+      ( extensionality-Strict-Order A)
 
-  set-Strict-Poset : Set l1
-  set-Strict-Poset = (type-Strict-Poset A , is-set-type-Strict-Poset)
+  set-Strict-Order : Set l1
+  set-Strict-Order = (type-Strict-Order A , is-set-type-Strict-Order)
 
-  strictly-preordered-set-Strict-Poset : Strictly-Preordered-Set l1 l2
-  strictly-preordered-set-Strict-Poset =
+  strictly-preordered-set-Strict-Order : Strictly-Preordered-Set l1 l2
+  strictly-preordered-set-Strict-Order =
     make-Strictly-Preordered-Set
-      ( strict-preorder-Strict-Poset A)
-      ( is-set-type-Strict-Poset)
+      ( strict-preorder-Strict-Order A)
+      ( is-set-type-Strict-Order)
 ```
 
 ### The extensionality principle is a proposition
@@ -160,7 +160,7 @@ module _
                 ( λ y →
                   eq-htpy
                     ( λ _ →
-                      eq-is-prop (is-set-type-Strict-Poset (A , H) x y))))))
+                      eq-is-prop (is-set-type-Strict-Order (A , H) x y))))))
 
   is-prop-extensionality-principle-Strict-Preorder :
       is-prop (extensionality-principle-Strict-Preorder A)
