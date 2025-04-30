@@ -278,3 +278,9 @@ module _
 ## References
 
 {{#bibliography}}
+
+## See also
+
+- [Strictly preordered sets](order-theory.strictly-preordered-sets.md) are
+  strict preorders on sets that don't necessarily satisfy the extensionality
+  principle.

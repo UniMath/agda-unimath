@@ -137,173 +137,9 @@ record Large-Strict-Poset (α : Level → Level) (β : Level → Level → Level
     is-transitive-Large-Relation type-Large-Strict-Poset le-Large-Strict-Poset
   is-transitive-le-Large-Strict-Poset =
     transitive-le-Large-Strict-Preorder large-strict-preorder-Large-Strict-Poset
-```
-
-Similarity of elements in large strict posets.
-
-```agda
-  sim-from-below-level-Large-Strict-Poset :
-    (l : Level) →
-    Large-Relation (λ l1 l2 → α l ⊔ β l l1 ⊔ β l l2) type-Large-Strict-Poset
-  sim-from-below-level-Large-Strict-Poset l =
-    sim-from-below-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset l
-
-  is-prop-sim-from-below-level-Large-Strict-Poset :
-    {l1 l2 : Level} (l : Level)
-    (x : type-Large-Strict-Poset l1)
-    (y : type-Large-Strict-Poset l2) →
-    is-prop (sim-from-below-level-Large-Strict-Poset l x y)
-  is-prop-sim-from-below-level-Large-Strict-Poset l =
-    is-prop-sim-from-below-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset l
-
-  sim-from-below-level-prop-Large-Strict-Poset :
-    (l : Level) →
-    Large-Relation-Prop
-      ( λ l1 l2 → α l ⊔ β l l1 ⊔ β l l2)
-      ( type-Large-Strict-Poset)
-  sim-from-below-level-prop-Large-Strict-Poset l =
-    sim-from-below-level-prop-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset l
-
-  refl-sim-from-below-level-Large-Strict-Poset :
-    (l : Level) →
-    is-reflexive-Large-Relation
-      ( type-Large-Strict-Poset)
-      ( sim-from-below-level-Large-Strict-Poset l)
-  refl-sim-from-below-level-Large-Strict-Poset =
-    refl-sim-from-below-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset
-
-  symmetric-sim-from-below-level-Large-Strict-Poset :
-    (l : Level) →
-    is-symmetric-Large-Relation
-      ( type-Large-Strict-Poset)
-      ( sim-from-below-level-Large-Strict-Poset l)
-  symmetric-sim-from-below-level-Large-Strict-Poset =
-    symmetric-sim-from-below-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset
-
-  transitive-sim-from-below-level-Large-Strict-Poset :
-    (l : Level) →
-    is-transitive-Large-Relation
-      ( type-Large-Strict-Poset)
-      ( sim-from-below-level-Large-Strict-Poset l)
-  transitive-sim-from-below-level-Large-Strict-Poset =
-    transitive-sim-from-below-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset
-
-  sim-from-above-level-Large-Strict-Poset :
-    (l : Level) →
-    Large-Relation (λ l1 l2 → α l ⊔ β l1 l ⊔ β l2 l) type-Large-Strict-Poset
-  sim-from-above-level-Large-Strict-Poset l =
-    sim-from-above-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset l
-
-  is-prop-sim-from-above-level-Large-Strict-Poset :
-    {l1 l2 : Level} (l : Level)
-    (x : type-Large-Strict-Poset l1)
-    (y : type-Large-Strict-Poset l2) →
-    is-prop (sim-from-above-level-Large-Strict-Poset l x y)
-  is-prop-sim-from-above-level-Large-Strict-Poset l =
-    is-prop-sim-from-above-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset l
-
-  sim-from-above-level-prop-Large-Strict-Poset :
-    (l : Level) →
-    Large-Relation-Prop
-      ( λ l1 l2 → α l ⊔ β l1 l ⊔ β l2 l)
-      ( type-Large-Strict-Poset)
-  sim-from-above-level-prop-Large-Strict-Poset l =
-    sim-from-above-level-prop-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset l
-
-  refl-sim-from-above-level-Large-Strict-Poset :
-    (l : Level) →
-    is-reflexive-Large-Relation
-      ( type-Large-Strict-Poset)
-      ( sim-from-above-level-Large-Strict-Poset l)
-  refl-sim-from-above-level-Large-Strict-Poset =
-    refl-sim-from-above-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset
-
-  symmetric-sim-from-above-level-Large-Strict-Poset :
-    (l : Level) →
-    is-symmetric-Large-Relation
-      ( type-Large-Strict-Poset)
-      ( sim-from-above-level-Large-Strict-Poset l)
-  symmetric-sim-from-above-level-Large-Strict-Poset =
-    symmetric-sim-from-above-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset
-
-  transitive-sim-from-above-level-Large-Strict-Poset :
-    (l : Level) →
-    is-transitive-Large-Relation
-      ( type-Large-Strict-Poset)
-      ( sim-from-above-level-Large-Strict-Poset l)
-  transitive-sim-from-above-level-Large-Strict-Poset =
-    transitive-sim-from-above-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset
-
-  sim-level-Large-Strict-Poset :
-    (l : Level) →
-    Large-Relation
-      ( λ l1 l2 → α l ⊔ β l l1 ⊔ β l l2 ⊔ β l1 l ⊔ β l2 l)
-      ( type-Large-Strict-Poset)
-  sim-level-Large-Strict-Poset l =
-    sim-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset l
-
-  is-prop-sim-level-Large-Strict-Poset :
-    {l1 l2 : Level} (l : Level)
-    (x : type-Large-Strict-Poset l1)
-    (y : type-Large-Strict-Poset l2) →
-    is-prop (sim-level-Large-Strict-Poset l x y)
-  is-prop-sim-level-Large-Strict-Poset l =
-    is-prop-sim-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset l
-
-  sim-level-prop-Large-Strict-Poset :
-    (l : Level) →
-    Large-Relation-Prop
-      ( λ l1 l2 → α l ⊔ β l l1 ⊔ β l l2 ⊔ β l1 l ⊔ β l2 l)
-      ( type-Large-Strict-Poset)
-  sim-level-prop-Large-Strict-Poset l =
-    sim-level-prop-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset l
-
-  refl-sim-level-Large-Strict-Poset :
-    (l : Level) →
-    is-reflexive-Large-Relation
-      ( type-Large-Strict-Poset)
-      ( sim-level-Large-Strict-Poset l)
-  refl-sim-level-Large-Strict-Poset =
-    refl-sim-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset
-
-  symmetric-sim-level-Large-Strict-Poset :
-    (l : Level) →
-    is-symmetric-Large-Relation
-      ( type-Large-Strict-Poset)
-      ( sim-level-Large-Strict-Poset l)
-  symmetric-sim-level-Large-Strict-Poset =
-    symmetric-sim-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset
-
-  transitive-sim-level-Large-Strict-Poset :
-    (l : Level) →
-    is-transitive-Large-Relation
-      ( type-Large-Strict-Poset)
-      ( sim-level-Large-Strict-Poset l)
-  transitive-sim-level-Large-Strict-Poset =
-    transitive-sim-level-Large-Strict-Preorder
-      large-strict-preorder-Large-Strict-Poset
 
 open Large-Strict-Poset public
 ```
-
-## Properties
 
 ### The underlying strict poset at a universe level
 
@@ -331,6 +167,26 @@ module _
   strict-poset-Large-Strict-Poset l =
     ( strict-preorder-Large-Strict-Poset l ,
       extensionality-strict-preorder-Large-Strict-Poset l)
+```
+
+## Properties
+
+### The underlying hierarchy of types is a hierarchy of sets
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (A : Large-Strict-Poset α β)
+  where
+
+  is-set-type-Large-Strict-Poset :
+    {l : Level} → is-set (type-Large-Strict-Poset A l)
+  is-set-type-Large-Strict-Poset {l} =
+    is-set-type-Strict-Poset (strict-poset-Large-Strict-Poset A l)
+
+  set-Large-Strict-Poset : (l : Level) → Set (α l)
+  set-Large-Strict-Poset l =
+    set-Strict-Poset (strict-poset-Large-Strict-Poset A l)
 ```
 
 ## References

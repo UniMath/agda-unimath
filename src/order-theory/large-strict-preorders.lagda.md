@@ -25,7 +25,7 @@ open import order-theory.strict-preorders
 ## Idea
 
 A {{#concept "large strict preorder" Agda=Large-Strict-Preorder}} consists of a
-hierarchy of types indexed by universe levels $A$, a
+hierarchy of types $A$ indexed by universe levels, a
 [large binary relation](foundation.large-binary-relations.md) $<$ on $A$ valued
 in the [propositions](foundation-core.propositions.md), such that the relation
 $<$ is irreflexive and transitive:
@@ -80,9 +80,7 @@ record
 open Large-Strict-Preorder public
 ```
 
-## Properties
-
-### Small strict preorders from large strict preorders
+### The underlying strict preorder at a universe level
 
 ```agda
 module _
