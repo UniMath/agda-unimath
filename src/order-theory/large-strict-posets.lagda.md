@@ -89,10 +89,14 @@ module _
     {l : Level} → weak-extensionality-principle-level-Large-Strict-Preorder l
 ```
 
-The last, "weak", extensionality principle is in general weaker than the
-extensionality principle. For instance, it is no longer the case for "weakly
-extensional" large strict preorders that the underlying strict preorder at a
-universe level is extensional.
+The last, "weak", extensionality principle asks that $x$ and $y$ at universe
+level $l$ are similar relative to _every_ universe level in order to conclude
+they are equal. This principle is likely too weak for practical purposes. For
+instance, it is no longer the case for "weakly extensional" large strict
+preorders that the underlying strict preorder at a universe level is
+extensional, nor can we conclude that the underlying hierarchy of types of a
+weakly extensional large strict preorder is a hierarchy of sets without
+formalizing the concept of "large propositions", i.e., `Propω`.
 
 ### The type of large strict posets
 
