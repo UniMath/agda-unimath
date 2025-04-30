@@ -32,7 +32,7 @@ def find_ill_formed_block(mdcode):
 
     for line_number, line in enumerate(lines, 1):
         line = line.strip()
-        if line.startswith('```'):
+        if line.startswith('```') and not line.startswith('````'):
             num_backticks = sum(
                 1 for _ in itertools.takewhile(lambda x: x == '`', line))
             tag = line[num_backticks:]
