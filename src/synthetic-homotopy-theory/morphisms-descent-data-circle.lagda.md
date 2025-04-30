@@ -20,9 +20,9 @@ open import synthetic-homotopy-theory.descent-circle
 ## Idea
 
 Given two [descent data](synthetic-homotopy-theory.descent-circle.md) `(A,e)`
-and `(B,f)` over the
-[circle](synthetic-homotopy-theory.circle.md)`, a **morphism** `h`of descent data between`(A,
-e)`and`(B, f)`is a map`h`from`A`to`B` such that the square
+and `(B,f)` over the [circle](synthetic-homotopy-theory.circle.md), a
+**morphism** `h` of descent data between `(A, e)` and `(B, f) `is a map `h` from
+`A` to `B` such that the square
 
 ```text
       h

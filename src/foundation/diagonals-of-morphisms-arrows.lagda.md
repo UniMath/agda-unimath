@@ -41,7 +41,7 @@ maps `i` and `j`, which fit in a naturality square
 ```
 
 In other words, the diagonal of a morphism of arrows `h : hom-arrow f g` is a
-morphism of arrows `Δ h : hom-arrow f (functoriality Δ g).
+morphism of arrows `Δ h : hom-arrow f (functoriality Δ g)`.
 
 Note that this operation preserves
 [cartesian squares](foundation.cartesian-morphisms-arrows.md). Furthermore, by a
