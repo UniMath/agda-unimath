@@ -64,7 +64,7 @@ we can characterize dependent cocones over a suspension cocone as equivalent to
 the following:
 
 For a suspension structure `(N , S , m)`, a dependent suspension structure in
-`P` over (N , S , m)` is given by points
+`P` over `(N , S , m)` is given by points
 
 ```text
 north : P N
