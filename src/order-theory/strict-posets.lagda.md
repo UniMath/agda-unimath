@@ -102,107 +102,6 @@ module _
     is-transitive-le-Strict-Preorder strict-preorder-Strict-Poset
 ```
 
-Similarity of elements in strict posets.
-
-```agda
-  sim-from-below-Strict-Poset :
-    type-Strict-Poset → type-Strict-Poset → UU (l1 ⊔ l2)
-  sim-from-below-Strict-Poset =
-    sim-from-below-Strict-Preorder strict-preorder-Strict-Poset
-
-  is-prop-sim-from-below-Strict-Poset :
-    (x y : type-Strict-Poset) → is-prop (sim-from-below-Strict-Poset x y)
-  is-prop-sim-from-below-Strict-Poset =
-    is-prop-sim-from-below-Strict-Preorder strict-preorder-Strict-Poset
-
-  sim-from-below-prop-Strict-Poset :
-    type-Strict-Poset → type-Strict-Poset → Prop (l1 ⊔ l2)
-  sim-from-below-prop-Strict-Poset =
-    sim-from-below-prop-Strict-Preorder strict-preorder-Strict-Poset
-
-  refl-sim-from-below-Strict-Poset : is-reflexive sim-from-below-Strict-Poset
-  refl-sim-from-below-Strict-Poset =
-    refl-sim-from-below-Strict-Preorder strict-preorder-Strict-Poset
-
-  symmetric-sim-from-below-Strict-Poset :
-    is-symmetric sim-from-below-Strict-Poset
-  symmetric-sim-from-below-Strict-Poset =
-    symmetric-sim-from-below-Strict-Preorder strict-preorder-Strict-Poset
-
-  transitive-sim-from-below-Strict-Poset :
-    is-transitive sim-from-below-Strict-Poset
-  transitive-sim-from-below-Strict-Poset =
-    transitive-sim-from-below-Strict-Preorder strict-preorder-Strict-Poset
-
-  sim-from-below-equivalence-relation-Strict-Poset :
-    equivalence-relation (l1 ⊔ l2) type-Strict-Poset
-  sim-from-below-equivalence-relation-Strict-Poset =
-    sim-from-below-equivalence-relation-Strict-Preorder
-      strict-preorder-Strict-Poset
-
-  sim-from-above-Strict-Poset :
-    type-Strict-Poset → type-Strict-Poset → UU (l1 ⊔ l2)
-  sim-from-above-Strict-Poset =
-    sim-from-above-Strict-Preorder strict-preorder-Strict-Poset
-
-  is-prop-sim-from-above-Strict-Poset :
-    (x y : type-Strict-Poset) → is-prop (sim-from-above-Strict-Poset x y)
-  is-prop-sim-from-above-Strict-Poset =
-    is-prop-sim-from-above-Strict-Preorder strict-preorder-Strict-Poset
-
-  sim-from-above-prop-Strict-Poset :
-    type-Strict-Poset → type-Strict-Poset → Prop (l1 ⊔ l2)
-  sim-from-above-prop-Strict-Poset =
-    sim-from-above-prop-Strict-Preorder strict-preorder-Strict-Poset
-
-  refl-sim-from-above-Strict-Poset : is-reflexive sim-from-above-Strict-Poset
-  refl-sim-from-above-Strict-Poset =
-    refl-sim-from-above-Strict-Preorder strict-preorder-Strict-Poset
-
-  symmetric-sim-from-above-Strict-Poset :
-    is-symmetric sim-from-above-Strict-Poset
-  symmetric-sim-from-above-Strict-Poset =
-    symmetric-sim-from-above-Strict-Preorder strict-preorder-Strict-Poset
-
-  transitive-sim-from-above-Strict-Poset :
-    is-transitive sim-from-above-Strict-Poset
-  transitive-sim-from-above-Strict-Poset =
-    transitive-sim-from-above-Strict-Preorder strict-preorder-Strict-Poset
-
-  sim-from-above-equivalence-relation-Strict-Poset :
-    equivalence-relation (l1 ⊔ l2) type-Strict-Poset
-  sim-from-above-equivalence-relation-Strict-Poset =
-    sim-from-above-equivalence-relation-Strict-Preorder
-      strict-preorder-Strict-Poset
-
-  sim-Strict-Poset : type-Strict-Poset → type-Strict-Poset → UU (l1 ⊔ l2)
-  sim-Strict-Poset = sim-Strict-Preorder strict-preorder-Strict-Poset
-
-  is-prop-sim-Strict-Poset :
-    (x y : type-Strict-Poset) → is-prop (sim-Strict-Poset x y)
-  is-prop-sim-Strict-Poset =
-    is-prop-sim-Strict-Preorder strict-preorder-Strict-Poset
-
-  sim-prop-Strict-Poset : type-Strict-Poset → type-Strict-Poset → Prop (l1 ⊔ l2)
-  sim-prop-Strict-Poset = sim-prop-Strict-Preorder strict-preorder-Strict-Poset
-
-  refl-sim-Strict-Poset : is-reflexive sim-Strict-Poset
-  refl-sim-Strict-Poset = refl-sim-Strict-Preorder strict-preorder-Strict-Poset
-
-  symmetric-sim-Strict-Poset : is-symmetric sim-Strict-Poset
-  symmetric-sim-Strict-Poset =
-    symmetric-sim-Strict-Preorder strict-preorder-Strict-Poset
-
-  transitive-sim-Strict-Poset : is-transitive sim-Strict-Poset
-  transitive-sim-Strict-Poset =
-    transitive-sim-Strict-Preorder strict-preorder-Strict-Poset
-
-  sim-equivalence-relation-Strict-Poset :
-    equivalence-relation (l1 ⊔ l2) type-Strict-Poset
-  sim-equivalence-relation-Strict-Poset =
-    sim-equivalence-relation-Strict-Preorder strict-preorder-Strict-Poset
-```
-
 ## Properties
 
 ### The ordering of a strict poset is antisymmetric
@@ -227,9 +126,9 @@ module _
   is-set-type-Strict-Poset : is-set (type-Strict-Poset A)
   is-set-type-Strict-Poset =
     is-set-prop-in-id
-      ( sim-Strict-Poset A)
-      ( is-prop-sim-Strict-Poset A)
-      ( refl-sim-Strict-Poset A)
+      ( sim-Strict-Preorder (strict-preorder-Strict-Poset A))
+      ( is-prop-sim-Strict-Preorder (strict-preorder-Strict-Poset A))
+      ( refl-sim-Strict-Preorder (strict-preorder-Strict-Poset A))
       ( extensionality-Strict-Poset A)
 
   set-Strict-Poset : Set l1
