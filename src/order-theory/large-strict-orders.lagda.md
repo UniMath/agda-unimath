@@ -35,7 +35,7 @@ A {{#concept "large strict order" Agda=Large-Strict-Order}} is a
 [large strict preorder](order-theory.large-strict-preorders.md) $A$ satisfying
 the
 {{#concept "extensionality principle" Disambiguation="of large strict orders" Agda=extensionality-principle-Large-Strict-Preorder}}
-that pairs elements at a universe level that are
+that pairs of elements at a universe level that are
 [similar](order-theory.similarity-of-elements-large-strict-preorders.md)
 relative to that same universe level are
 [equal](foundation-core.identity-types.md). More concretely, if $x$ and $y$ are
