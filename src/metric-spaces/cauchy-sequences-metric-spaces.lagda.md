@@ -655,7 +655,6 @@ module _
 ## External links
 
 - [Cauchy sequences](https://en.wikipedia.org/wiki/Cauchy_sequence) at Wikipedia
-- [Cauchy sequences](https://www.wikidata.org/wiki/Q217847) at Wikidata
 
 ## References
 

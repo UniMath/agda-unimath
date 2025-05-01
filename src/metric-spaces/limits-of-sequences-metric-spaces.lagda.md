@@ -160,4 +160,3 @@ module _
 
 - [Limit of a sequence](https://en.wikipedia.org/wiki/Limit_of_a_sequence) at
   Wikipedia
-- [Limit of a sequence](https://www.wikidata.org/wiki/Q847204) at Wikidata
