@@ -21,7 +21,7 @@ open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.negation
+open import foundation.negation
 open import foundation-core.propositions
 ```
 
@@ -50,6 +50,12 @@ module _
 
   is-not-injective : (A → B) → UU (l1 ⊔ l2)
   is-not-injective f = ¬ (is-injective f)
+
+  is-prop-is-not-injective : {f : A → B} → is-prop (is-not-injective f)
+  is-prop-is-not-injective = is-prop-neg
+
+  is-not-injective-Prop : (A → B) → Prop (l1 ⊔ l2)
+  is-not-injective-Prop f = (is-not-injective f , is-prop-is-not-injective)
 ```
 
 ### Noninjective maps
@@ -87,6 +93,22 @@ module _
 ```
 
 ## Properties
+
+### Noninjective maps are not injective
+
+```agda
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  abstract
+    is-not-injective-is-noninjective : is-noninjective f → is-not-injective f
+    is-not-injective-is-noninjective =
+      rec-trunc-Prop
+        ( is-not-injective-Prop f)
+        ( λ ((x , y , x≠y) , p) H → x≠y (H p))
+```
 
 ### Noninjectivity of composites
 
