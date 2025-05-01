@@ -48,34 +48,34 @@ module _
   (l : type-Metric-Space M)
   where
 
-  is-modulus-limit-prop-sequence-Metric-Space : (ℚ⁺ → ℕ) → Prop l2
-  is-modulus-limit-prop-sequence-Metric-Space =
-    is-modulus-limit-prop-sequence-Premetric-Space
+  is-limit-modulus-prop-sequence-Metric-Space : (ℚ⁺ → ℕ) → Prop l2
+  is-limit-modulus-prop-sequence-Metric-Space =
+    is-limit-modulus-prop-sequence-Premetric-Space
       ( premetric-Metric-Space M)
       ( u)
       ( l)
 
-  is-modulus-limit-sequence-Metric-Space : (ℚ⁺ → ℕ) → UU l2
-  is-modulus-limit-sequence-Metric-Space m =
-    type-Prop (is-modulus-limit-prop-sequence-Metric-Space m)
+  is-limit-modulus-sequence-Metric-Space : (ℚ⁺ → ℕ) → UU l2
+  is-limit-modulus-sequence-Metric-Space m =
+    type-Prop (is-limit-modulus-prop-sequence-Metric-Space m)
 
-  modulus-limit-sequence-Metric-Space : UU l2
-  modulus-limit-sequence-Metric-Space =
-    type-subtype is-modulus-limit-prop-sequence-Metric-Space
+  limit-modulus-sequence-Metric-Space : UU l2
+  limit-modulus-sequence-Metric-Space =
+    type-subtype is-limit-modulus-prop-sequence-Metric-Space
 
-  modulus-modulus-limit-sequence-Metric-Space :
-    modulus-limit-sequence-Metric-Space → ℚ⁺ → ℕ
-  modulus-modulus-limit-sequence-Metric-Space m = pr1 m
+  modulus-limit-modulus-sequence-Metric-Space :
+    limit-modulus-sequence-Metric-Space → ℚ⁺ → ℕ
+  modulus-limit-modulus-sequence-Metric-Space m = pr1 m
 
-  is-modulus-modulus-limit-sequence-Metric-Space :
-    (m : modulus-limit-sequence-Metric-Space) →
-    is-modulus-limit-sequence-Metric-Space
-      (modulus-modulus-limit-sequence-Metric-Space m)
-  is-modulus-modulus-limit-sequence-Metric-Space m = pr2 m
+  is-modulus-limit-modulus-sequence-Metric-Space :
+    (m : limit-modulus-sequence-Metric-Space) →
+    is-limit-modulus-sequence-Metric-Space
+      (modulus-limit-modulus-sequence-Metric-Space m)
+  is-modulus-limit-modulus-sequence-Metric-Space m = pr2 m
 
   is-limit-prop-sequence-Metric-Space : Prop l2
   is-limit-prop-sequence-Metric-Space =
-    is-inhabited-subtype-Prop is-modulus-limit-prop-sequence-Metric-Space
+    is-inhabited-subtype-Prop is-limit-modulus-prop-sequence-Metric-Space
 
   is-limit-sequence-Metric-Space : UU l2
   is-limit-sequence-Metric-Space =

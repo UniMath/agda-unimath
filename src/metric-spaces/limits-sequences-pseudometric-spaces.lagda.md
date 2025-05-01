@@ -53,37 +53,37 @@ a constant sequence in a pseudometric space is its limit.
 module _
   {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
   (u : sequence-type-Pseudometric-Space M)
-  (l : type-Pseudometric-Space M)
+  (lim : type-Pseudometric-Space M)
   where
 
-  is-modulus-limit-prop-sequence-Pseudometric-Space : (ℚ⁺ → ℕ) → Prop l2
-  is-modulus-limit-prop-sequence-Pseudometric-Space =
-    is-modulus-limit-prop-sequence-Premetric-Space
+  is-limit-modulus-prop-sequence-Pseudometric-Space : (ℚ⁺ → ℕ) → Prop l2
+  is-limit-modulus-prop-sequence-Pseudometric-Space =
+    is-limit-modulus-prop-sequence-Premetric-Space
       ( premetric-Pseudometric-Space M)
       ( u)
-      ( l)
+      ( lim)
 
-  is-modulus-limit-sequence-Pseudometric-Space : (ℚ⁺ → ℕ) → UU l2
-  is-modulus-limit-sequence-Pseudometric-Space m =
-    type-Prop (is-modulus-limit-prop-sequence-Pseudometric-Space m)
+  is-limit-modulus-sequence-Pseudometric-Space : (ℚ⁺ → ℕ) → UU l2
+  is-limit-modulus-sequence-Pseudometric-Space m =
+    type-Prop (is-limit-modulus-prop-sequence-Pseudometric-Space m)
 
-  modulus-limit-sequence-Pseudometric-Space : UU l2
-  modulus-limit-sequence-Pseudometric-Space =
-    type-subtype is-modulus-limit-prop-sequence-Pseudometric-Space
+  limit-modulus-sequence-Pseudometric-Space : UU l2
+  limit-modulus-sequence-Pseudometric-Space =
+    type-subtype is-limit-modulus-prop-sequence-Pseudometric-Space
 
-  modulus-modulus-limit-sequence-Pseudometric-Space :
-    modulus-limit-sequence-Pseudometric-Space → ℚ⁺ → ℕ
-  modulus-modulus-limit-sequence-Pseudometric-Space m = pr1 m
+  modulus-limit-modulus-sequence-Pseudometric-Space :
+    limit-modulus-sequence-Pseudometric-Space → ℚ⁺ → ℕ
+  modulus-limit-modulus-sequence-Pseudometric-Space m = pr1 m
 
-  is-modulus-modulus-limit-sequence-Pseudometric-Space :
-    (m : modulus-limit-sequence-Pseudometric-Space) →
-    is-modulus-limit-sequence-Pseudometric-Space
-      (modulus-modulus-limit-sequence-Pseudometric-Space m)
-  is-modulus-modulus-limit-sequence-Pseudometric-Space m = pr2 m
+  is-modulus-limit-modulus-sequence-Pseudometric-Space :
+    (m : limit-modulus-sequence-Pseudometric-Space) →
+    is-limit-modulus-sequence-Pseudometric-Space
+      (modulus-limit-modulus-sequence-Pseudometric-Space m)
+  is-modulus-limit-modulus-sequence-Pseudometric-Space m = pr2 m
 
   is-limit-prop-sequence-Pseudometric-Space : Prop l2
   is-limit-prop-sequence-Pseudometric-Space =
-    is-inhabited-subtype-Prop is-modulus-limit-prop-sequence-Pseudometric-Space
+    is-inhabited-subtype-Prop is-limit-modulus-prop-sequence-Pseudometric-Space
 
   is-limit-sequence-Pseudometric-Space : UU l2
   is-limit-sequence-Pseudometric-Space =
@@ -99,16 +99,16 @@ module _
   {l1 l2 : Level} (M : Pseudometric-Space l1 l2) (x : type-Pseudometric-Space M)
   where
 
-  modulus-limit-constant-sequence-Pseudometric-Space :
-    modulus-limit-sequence-Pseudometric-Space M (const ℕ x) x
-  modulus-limit-constant-sequence-Pseudometric-Space =
+  limit-modulus-constant-sequence-Pseudometric-Space :
+    limit-modulus-sequence-Pseudometric-Space M (const ℕ x) x
+  limit-modulus-constant-sequence-Pseudometric-Space =
     ( λ _ → zero-ℕ) ,
     ( λ ε _ _ → is-reflexive-structure-Pseudometric-Space M ε x)
 
   limit-constant-sequence-Pseudometric-Space :
     is-limit-sequence-Pseudometric-Space M (const ℕ x) x
   limit-constant-sequence-Pseudometric-Space =
-    unit-trunc-Prop modulus-limit-constant-sequence-Pseudometric-Space
+    unit-trunc-Prop limit-modulus-constant-sequence-Pseudometric-Space
 ```
 
 ### Two limits of a sequence in a pseudometric space are indistinguishable
@@ -120,36 +120,36 @@ module _
   (x y : type-Pseudometric-Space M)
   where
 
-  indistinguishable-limit-modulus-limit-sequence-Pseudometric-Space :
-    modulus-limit-sequence-Pseudometric-Space M u x →
-    modulus-limit-sequence-Pseudometric-Space M u y →
+  indistinguishable-limit-limit-modulus-sequence-Pseudometric-Space :
+    limit-modulus-sequence-Pseudometric-Space M u x →
+    limit-modulus-sequence-Pseudometric-Space M u y →
     is-indistinguishable-Pseudometric-Space M x y
-  indistinguishable-limit-modulus-limit-sequence-Pseudometric-Space mx my ε =
+  indistinguishable-limit-limit-modulus-sequence-Pseudometric-Space mx my ε =
     tr
       ( is-upper-bound-dist-Pseudometric-Space M x y)
       ( eq-add-split-ℚ⁺ ε)
       ( tr-modulus-indistinguishable
         ( left-summand-split-ℚ⁺ ε)
         ( right-summand-split-ℚ⁺ ε)
-        ( ( modulus-modulus-limit-sequence-Pseudometric-Space
+        ( ( modulus-limit-modulus-sequence-Pseudometric-Space
             ( M)
             ( u)
             ( x)
             ( mx)
             ( left-summand-split-ℚ⁺ ε)) ,
-          ( is-modulus-modulus-limit-sequence-Pseudometric-Space
+          ( is-modulus-limit-modulus-sequence-Pseudometric-Space
             ( M)
             ( u)
             ( x)
             ( mx)
             ( left-summand-split-ℚ⁺ ε)))
-        ( ( modulus-modulus-limit-sequence-Pseudometric-Space
+        ( ( modulus-limit-modulus-sequence-Pseudometric-Space
             ( M)
             ( u)
             ( y)
             ( my)
             ( right-summand-split-ℚ⁺ ε)) ,
-          ( is-modulus-modulus-limit-sequence-Pseudometric-Space
+          ( is-modulus-limit-modulus-sequence-Pseudometric-Space
             ( M)
             ( u)
             ( y)
@@ -193,7 +193,7 @@ module _
         rec-trunc-Prop
           ( Π-Prop ℚ⁺ (λ d → structure-Pseudometric-Space M d x y))
           ( λ Mx →
-            indistinguishable-limit-modulus-limit-sequence-Pseudometric-Space
+            indistinguishable-limit-limit-modulus-sequence-Pseudometric-Space
               Mx
               My)
           ( Lx))
@@ -207,16 +207,16 @@ module _
   {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
   (u : sequence-type-Pseudometric-Space M)
   (v : subsequence u)
-  (l : type-Pseudometric-Space M)
+  (lim : type-Pseudometric-Space M)
   where
 
-  modulus-subsequence-modulus-limit-sequence-Premetric-Space :
-    modulus-limit-sequence-Pseudometric-Space M u l →
-    modulus-limit-sequence-Pseudometric-Space
+  modulus-subsequence-limit-modulus-sequence-Premetric-Space :
+    limit-modulus-sequence-Pseudometric-Space M u lim →
+    limit-modulus-sequence-Pseudometric-Space
       ( M)
       ( seq-subsequence u v)
-      ( l)
-  modulus-subsequence-modulus-limit-sequence-Premetric-Space =
+      ( lim)
+  modulus-subsequence-limit-modulus-sequence-Premetric-Space =
     tot
       ( λ m is-modulus d n H →
         is-modulus
@@ -230,8 +230,8 @@ module _
             ( H)))
 
   preserves-limit-subsequence-Pseudometric-Space :
-    is-limit-sequence-Pseudometric-Space M u l →
-    is-limit-sequence-Pseudometric-Space M (seq-subsequence u v) l
+    is-limit-sequence-Pseudometric-Space M u lim →
+    is-limit-sequence-Pseudometric-Space M (seq-subsequence u v) lim
   preserves-limit-subsequence-Pseudometric-Space =
-    map-is-inhabited modulus-subsequence-modulus-limit-sequence-Premetric-Space
+    map-is-inhabited modulus-subsequence-limit-modulus-sequence-Premetric-Space
 ```
