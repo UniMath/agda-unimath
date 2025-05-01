@@ -88,7 +88,7 @@ module _
     is-isometry-convergent-cauchy-approximation-Complete-Metric-Space
 ```
 
-### The metric space of cauchy approximations in a complete metric space is equal to the metric space of convergent cauchy approximations in its underlying metric space
+### The metric space of Cauchy approximations in a complete metric space is equal to the metric space of convergent Cauchy approximations in its underlying metric space
 
 ```agda
 module _
