@@ -32,7 +32,7 @@ module _
   map-matrix = map-vec (map-vec f)
 ```
 
-### Binar maps
+### Binary maps
 
 ```agda
 module _

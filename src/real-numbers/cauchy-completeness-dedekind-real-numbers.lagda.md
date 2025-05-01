@@ -36,7 +36,7 @@ open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-sequences-complete-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
 open import metric-spaces.metric-spaces
 
 open import real-numbers.absolute-value-real-numbers

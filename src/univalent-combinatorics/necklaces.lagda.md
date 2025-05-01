@@ -29,7 +29,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A **necklace** is an arrangement of coloured beads, i.e., it consists of a
+A **necklace** is an arrangement of colored beads, i.e., it consists of a
 [cyclic finite type](univalent-combinatorics.cyclic-finite-types.md) equipped
 with a coloring of the elements. Two necklaces are considered the same if one
 can be obtained from the other by rotating.
