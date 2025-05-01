@@ -47,7 +47,7 @@ open import metric-spaces.short-functions-metric-spaces
 ## Idea
 
 A
-{{#concept "Cauchy sequence" Disambiguation="in a metric space" Agda=is-cauchy-approximation-Metric-Space}}
+{{#concept "Cauchy sequence" Disambiguation="in a metric space" WD="cauchy sequence" WDID=Q217847 Agda=is-cauchy-sequence-Metric-Space}}
 `x` in a [metric space](metric-spaces.metric-spaces.md) is a mapping from the
 [natural numbers](elementary-number-theory.natural-numbers.md) to the underlying
 type of the metric space such that for any
@@ -647,6 +647,15 @@ module _
     seq-short-map-cauchy-sequence-Metric-Space ,
     is-cauchy-seq-short-map-cauchy-sequence-Metric-Space
 ```
+
+## See also
+
+- [Cauchy sequences in complete metric spaces](metric-space.cauchy-sequences-complete-metric-spaces.md)
+
+## External links
+
+- [Cauchy sequences](https://en.wikipedia.org/wiki/Cauchy_sequence) at Wikipedia
+- [Cauchy sequences](https://www.wikidata.org/wiki/Q217847) at Wikidata
 
 ## References
 

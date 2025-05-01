@@ -29,7 +29,7 @@ open import metric-spaces.sequences-metric-spaces
 
 ## Ideas
 
-{{#concept "Limits" Disambiguation="of sequences in metric spaces" Agda=is-limit-sequence-Metric-Space}}
+{{#concept "Limits" Disambiguation="of sequences in metric spaces" WD="limit of a sequence" WDID=Q847204 Agda=is-limit-sequence-Metric-Space}}
 of [sequences in metric spaces](metric-spaces.sequences-metric-spaces.md) are
 [limits](metric-spaces.limits-of-sequences-premetric-spaces.md) in the
 underlying [premetric space](metric-spaces.premetric-spaces.md): there exists a
@@ -147,3 +147,17 @@ module _
     has-limit-sequence-Metric-Space ,
     is-prop-has-limit-sequence-Metric-Space
 ```
+
+## See also
+
+- [Convergent sequences](metric-spaces.convergent-sequences-metric-spaces.md):
+  the type of sequences that have a limit
+- The
+  [metric space of convergent sequences](metric-spaces.metric-space-of-convergent-sequences-metric-spaces.md):
+  the metric structure on the type of convergent sequences
+
+## External links
+
+- [Limit of a sequence](https://en.wikipedia.org/wiki/Limit_of_a_sequence) at
+  Wikipedia
+- [Limit of a sequence](https://www.wikidata.org/wiki/Q847204) at Wikidata

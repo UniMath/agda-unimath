@@ -123,3 +123,9 @@ module _
       ( map-short-map-convergent-sequence-Metric-Space))
   eq-limit-short-map-convergent-sequence-Metric-Space = refl
 ```
+
+## See also
+
+- The
+  [metric space of convergent sequences](metric-spaces.metric-space-of-convergent-sequences-metric-spaces.md)
+  in a metric space
