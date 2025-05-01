@@ -1,4 +1,4 @@
-# The metric space of cauchy approximations in a complete metric space
+# The metric space of Cauchy approximations in a complete metric space
 
 ```agda
 module metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces where
