@@ -1,7 +1,7 @@
 # Limits of sequences in pseudometric spaces
 
 ```agda
-module metric-spaces.limits-sequences-pseudometric-spaces where
+module metric-spaces.limits-of-sequences-pseudometric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -25,7 +25,7 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.limits-sequences-premetric-spaces
+open import metric-spaces.limits-of-sequences-premetric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.sequences-pseudometric-spaces
 ```
@@ -37,7 +37,7 @@ open import metric-spaces.sequences-pseudometric-spaces
 {{#concept "Limits" Disambiguation="of sequences in pseudometric spaces" Agda=is-limit-sequence-Pseudometric-Space}}
 of
 [sequences in pseudometric spaces](metric-spaces.sequences-pseudometric-spaces.md)
-are [limits](metric-spaces.limits-sequences-premetric-spaces.md) in the
+are [limits](metric-spaces.limits-of-sequences-premetric-spaces.md) in the
 underlying [premetric space](metric-spaces.premetric-spaces.md): there exists a
 function `m : ℚ⁺ → ℕ` such that whenever `m ε ≤ n` in `ℕ`, `u n` is in an
 [`ε`-neighborhood](metric-spaces.premetric-structures.md) of `l`.

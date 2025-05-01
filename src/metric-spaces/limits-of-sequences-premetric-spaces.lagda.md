@@ -1,7 +1,7 @@
 # Limits of sequences in premetric spaces
 
 ```agda
-module metric-spaces.limits-sequences-premetric-spaces where
+module metric-spaces.limits-of-sequences-premetric-spaces where
 ```
 
 <details><summary>Imports</summary>

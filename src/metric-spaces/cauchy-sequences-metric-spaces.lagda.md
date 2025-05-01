@@ -35,8 +35,8 @@ open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-sequences-metric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
-open import metric-spaces.limits-sequences-metric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
+open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-functions-metric-spaces

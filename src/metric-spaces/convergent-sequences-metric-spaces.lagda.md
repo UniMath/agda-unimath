@@ -13,9 +13,9 @@ open import foundation.sequences
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.limits-sequences-metric-spaces
-open import metric-spaces.limits-sequences-premetric-spaces
-open import metric-spaces.limits-sequences-pseudometric-spaces
+open import metric-spaces.limits-of-sequences-metric-spaces
+open import metric-spaces.limits-of-sequences-premetric-spaces
+open import metric-spaces.limits-of-sequences-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
@@ -28,7 +28,7 @@ open import metric-spaces.short-functions-metric-spaces
 A [sequence](metric-spaces.sequences-metric-spaces.md) in a
 [metric space](metric-spaces.metric-spaces.md) is
 {{#concept "convergent" Disambiguation="sequence in a metric space" Agda=convergent-sequence-Metric-Space}}
-if it has a [limit](metric-spaces.limits-sequences-metric-spaces.md).
+if it has a [limit](metric-spaces.limits-of-sequences-metric-spaces.md).
 [Short maps](metric-spaces.short-functions-metric-spaces.md) between metric
 spaces preserve convergent sequences.
 

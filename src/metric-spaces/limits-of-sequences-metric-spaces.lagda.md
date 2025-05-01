@@ -1,7 +1,7 @@
 # Limits of sequences in metric spaces
 
 ```agda
-module metric-spaces.limits-sequences-metric-spaces where
+module metric-spaces.limits-of-sequences-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -19,8 +19,8 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.limits-sequences-premetric-spaces
-open import metric-spaces.limits-sequences-pseudometric-spaces
+open import metric-spaces.limits-of-sequences-premetric-spaces
+open import metric-spaces.limits-of-sequences-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.sequences-metric-spaces
 ```
@@ -31,9 +31,9 @@ open import metric-spaces.sequences-metric-spaces
 
 {{#concept "Limits" Disambiguation="of sequences in metric spaces" Agda=is-limit-sequence-Metric-Space}}
 of [sequences in metric spaces](metric-spaces.sequences-metric-spaces.md) are
-[limits](metric-spaces.limits-sequences-premetric-spaces.md) in the underlying
-[premetric space](metric-spaces.premetric-spaces.md): there exists a function
-`m : ℚ⁺ → ℕ` such that whenever `m ε ≤ n` in `ℕ`, `u n` is in an
+[limits](metric-spaces.limits-of-sequences-premetric-spaces.md) in the
+underlying [premetric space](metric-spaces.premetric-spaces.md): there exists a
+function `m : ℚ⁺ → ℕ` such that whenever `m ε ≤ n` in `ℕ`, `u n` is in an
 [`ε`-neighborhood](metric-spaces.premetric-structures.md) of `l`. In a metric
 space, all limits of a sequence are [equal](foundation.identity-types.md).
 
