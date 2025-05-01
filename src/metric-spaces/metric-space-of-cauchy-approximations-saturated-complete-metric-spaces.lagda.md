@@ -120,10 +120,11 @@ module _
 Given a Cauchy approximation of Cauchy approximations `U : ℚ⁺ → ℚ⁺ → A` in a
 saturated complete metric space `A`, we construct its limit as follows:
 
-1. for any `η : ℚ⁺`, the partial application `λ ε → U ε η` is a Cauchy
+1. for any `η : ℚ⁺`, the partial application `ε ↦ U ε η` is a Cauchy
    approximation in `A`;
 2. since `A` is complete, it converges to some `lim-η : A`;
-3. since `A` is saturated, the map `η → lim-η` is a Cauchy approximation in `A`
+3. since `A` is saturated, the assignment `η ↦ lim-η` is a Cauchy approximation
+   in `A`;
 4. by construction it's a limit of `U` in the space of Cauchy approximations.
 
 ```agda
