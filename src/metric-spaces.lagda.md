@@ -73,14 +73,16 @@ open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces publi
 open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.limits-of-sequences-premetric-spaces public
 open import metric-spaces.limits-of-sequences-pseudometric-spaces public
-open import metric-spaces.metric-space-functions-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-saturated-complete-metric-spaces public
 open import metric-spaces.metric-space-of-convergent-cauchy-approximations-metric-spaces public
 open import metric-spaces.metric-space-of-convergent-sequences-metric-spaces public
+open import metric-spaces.metric-space-of-functions-metric-spaces public
+open import metric-spaces.metric-space-of-isometries-metric-spaces public
 open import metric-spaces.metric-space-of-rational-numbers public
 open import metric-spaces.metric-space-of-rational-numbers-with-open-neighborhoods public
+open import metric-spaces.metric-space-of-short-functions-metric-spaces public
 open import metric-spaces.metric-spaces public
 open import metric-spaces.metric-structures public
 open import metric-spaces.monotonic-premetric-structures public

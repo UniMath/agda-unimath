@@ -20,7 +20,7 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import metric-spaces.metric-space-functions-metric-spaces
+open import metric-spaces.metric-space-of-short-functions-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 
 open import order-theory.large-join-semilattices
@@ -331,7 +331,7 @@ module _
   is-short-function-short-left-max-ℝ :
     is-short-function-Metric-Space
       ( metric-space-leq-ℝ l1)
-      ( metric-space-short-function-Metric-Space
+      ( metric-space-of-short-functions-Metric-Space
         ( metric-space-leq-ℝ l2)
         ( metric-space-leq-ℝ (l1 ⊔ l2)))
       ( short-left-max-ℝ)
@@ -348,7 +348,7 @@ module _
   short-max-ℝ :
     short-function-Metric-Space
       ( metric-space-leq-ℝ l1)
-      ( metric-space-short-function-Metric-Space
+      ( metric-space-of-short-functions-Metric-Space
         ( metric-space-leq-ℝ l2)
         ( metric-space-leq-ℝ (l1 ⊔ l2)))
   short-max-ℝ =

@@ -31,7 +31,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.isometries-metric-spaces
-open import metric-spaces.metric-space-functions-metric-spaces
+open import metric-spaces.metric-space-of-isometries-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
@@ -108,7 +108,7 @@ module _
   is-isometry-isometry-left-add-ℝ :
     is-isometry-Metric-Space
       ( metric-space-leq-ℝ l1)
-      ( metric-space-isometry-Metric-Space
+      ( metric-space-of-isometries-Metric-Space
         ( metric-space-leq-ℝ l2)
         ( metric-space-leq-ℝ (l1 ⊔ l2)))
       ( isometry-left-add-ℝ)
@@ -148,7 +148,7 @@ module _
   isometry-add-ℝ :
     isometry-Metric-Space
       ( metric-space-leq-ℝ l1)
-      ( metric-space-isometry-Metric-Space
+      ( metric-space-of-isometries-Metric-Space
         ( metric-space-leq-ℝ l2)
         ( metric-space-leq-ℝ (l1 ⊔ l2)))
   isometry-add-ℝ = isometry-left-add-ℝ , is-isometry-isometry-left-add-ℝ

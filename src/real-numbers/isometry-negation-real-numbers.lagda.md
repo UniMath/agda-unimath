@@ -31,7 +31,6 @@ open import foundation.universe-levels
 
 open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.isometries-metric-spaces
-open import metric-spaces.metric-space-functions-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
