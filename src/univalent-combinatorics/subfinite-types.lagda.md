@@ -226,11 +226,11 @@ module _
       compute-iterate-offset
         ( min-ℕ i j)
         ( k)
-        ( ap
-          ( λ i → iterate i f x)
-          ( ( inv (left-successor-law-add-ℕ k (min-ℕ i j))) ∙
-            ( ap (_+ℕ min-ℕ i j) compute-succ-k) ∙
-            ( eq-max-dist-min-ℕ i j)) ∙
+        ( ( ap
+            ( λ u → iterate u f x)
+            ( ( inv (left-successor-law-add-ℕ k (min-ℕ i j))) ∙
+              ( ap (_+ℕ min-ℕ i j) compute-succ-k) ∙
+              ( eq-max-dist-min-ℕ i j))) ∙
           ( compute-iterate-min-max-f-x))
 
   is-dedekind-finite-subcount' :

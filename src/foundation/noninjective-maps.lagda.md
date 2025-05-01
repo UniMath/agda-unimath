@@ -11,8 +11,11 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
+open import foundation.functoriality-propositional-truncation
 open import foundation.repetitions-of-values
+open import foundation.functoriality-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.action-on-identifications-functions
 
 open import foundation-core.contractible-types
 open import foundation-core.function-types
@@ -64,4 +67,56 @@ module _
 
   is-prop-is-noninjective : {f : A → B} → is-prop (is-noninjective f)
   is-prop-is-noninjective {f} = is-prop-type-Prop (is-noninjective-Prop f)
+```
+
+### The type of noninjective maps
+
+```agda
+noninjective-map : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+noninjective-map A B = Σ (A → B) is-noninjective
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : noninjective-map A B)
+  where
+
+  map-noninjective-map : A → B
+  map-noninjective-map = pr1 f
+
+  is-noninjective-map-noninjective-map : is-noninjective map-noninjective-map
+  is-noninjective-map-noninjective-map = pr2 f
+```
+
+## Properties
+
+### Noninjectivity of composites
+
+Given maps `f : A → B` and `g : B → C`, then
+
+- if `f` is noninjective then `g ∘ f` is noninjective.
+- if `g` is injective and `g ∘ f` is noninjective then `f` is noninjective.
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3}
+  {f : A → B} {g : B → C}
+  where
+
+  ap-repetition-of-values :
+    repetition-of-values f → repetition-of-values (g ∘ f)
+  ap-repetition-of-values (q , p) = (q , ap g p)
+
+  is-noninjective-comp :
+    is-noninjective f → is-noninjective (g ∘ f)
+  is-noninjective-comp =
+    map-trunc-Prop ap-repetition-of-values
+
+  inv-ap-repetition-of-values :
+    is-injective g → repetition-of-values (g ∘ f) → repetition-of-values f
+  inv-ap-repetition-of-values G (q , p) = (q , G p)
+
+  is-noninjective-right-factor :
+    is-injective g → is-noninjective (g ∘ f) →  is-noninjective f
+  is-noninjective-right-factor G =
+    map-trunc-Prop (inv-ap-repetition-of-values G)
 ```
