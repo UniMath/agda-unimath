@@ -650,7 +650,7 @@ module _
 
 ## See also
 
-- [Cauchy sequences in complete metric spaces](metric-space.cauchy-sequences-complete-metric-spaces.md)
+- [Cauchy sequences in complete metric spaces](metric-spaces.cauchy-sequences-complete-metric-spaces.md)
 
 ## External links
 
