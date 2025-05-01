@@ -43,7 +43,7 @@ in a metric space.
 
 ## Definitions
 
-### The metric space of cauchy approximations in a metric space
+### The metric space of Cauchy approximations in a metric space
 
 ```agda
 module _
