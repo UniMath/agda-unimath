@@ -62,7 +62,7 @@ module _
 
 ## Properties
 
-### The map from a cauchy approximation in a metric space to its convergent approximation is an isometry
+### The map from a Cauchy approximation in a metric space to its convergent approximation is an isometry
 
 ```agda
 module _
