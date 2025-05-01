@@ -1,4 +1,4 @@
-# The metric space of convergent cauchy approximations in a metric space
+# The metric space of convergent Cauchy approximations in a metric space
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
