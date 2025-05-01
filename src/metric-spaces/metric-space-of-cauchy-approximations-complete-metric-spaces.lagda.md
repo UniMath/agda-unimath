@@ -35,7 +35,7 @@ a [complete metric space](metric-spaces.complete-metric-spaces.md) `A` inherits
 the
 [metric structure](metric-spaces.metric-space-of-cauchy-approximations-metric-spaces.md)
 of the Cauchy approximations in the underlying metric space; this is the
-{{#concept "metric space of cauchy approximations" Disambiguation="in a complete metric space" Agda=metric-space-of-cauchy-approximations-Complete-Metric-Space}}
+{{#concept "metric space of Cauchy approximations" Disambiguation="in a complete metric space" Agda=metric-space-of-cauchy-approximations-Complete-Metric-Space}}
 in a complete metric space.
 
 All Cauchy approximations in a complete metric space are

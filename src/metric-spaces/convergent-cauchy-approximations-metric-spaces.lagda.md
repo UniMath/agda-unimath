@@ -28,7 +28,7 @@ in a [metric space](metric-spaces.metric-spaces.md) is
 {{#concept "convergent" Disambiguation="Cauchy approximation in a metric space" agda=is-convergent-cauchy-approximation-Metric-Space}}
 if it has a
 [limit](metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces.md).
-Because limits of cauchy approximations in metric spaces are unique, this is a
+Because limits of Cauchy approximations in metric spaces are unique, this is a
 [subtype](foundation.subtypes.md) of the type of Cauchy approximations.
 
 ## Definitions
@@ -78,7 +78,7 @@ module _
     is-prop-is-convergent-cauchy-approximation-Metric-Space
 ```
 
-### The type of convergent cauchy approximations in a metric space
+### The type of convergent Cauchy approximations in a metric space
 
 ```agda
 module _
