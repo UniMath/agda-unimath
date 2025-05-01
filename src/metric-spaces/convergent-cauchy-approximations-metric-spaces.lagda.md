@@ -15,7 +15,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -27,7 +27,7 @@ A [Cauchy approximation](metric-spaces.cauchy-approximations-metric-spaces.md)
 in a [metric space](metric-spaces.metric-spaces.md) is
 {{#concept "convergent" Disambiguation="Cauchy approximation in a metric space" agda=is-convergent-cauchy-approximation-Metric-Space}}
 if it has a
-[limit](metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces.md).
+[limit](metric-spaces.limits-of-cauchy-approximations-premetric-spaces.md).
 Because limits of Cauchy approximations in metric spaces are unique, this is a
 [subtype](foundation.subtypes.md) of the type of Cauchy approximations.
 

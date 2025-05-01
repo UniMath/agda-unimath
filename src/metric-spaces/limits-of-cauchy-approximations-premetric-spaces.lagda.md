@@ -1,7 +1,7 @@
 # Limits of Cauchy approximations in premetric spaces
 
 ```agda
-module metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces where
+module metric-spaces.limits-of-cauchy-approximations-premetric-spaces where
 ```
 
 <details><summary>Imports</summary>
