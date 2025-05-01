@@ -46,7 +46,7 @@ is an [isometry](metric-spaces.isometries-metric-spaces.md).
 
 ## Definitions
 
-### The metric space of cauchy approximations in a complete metric space
+### The metric space of Cauchy approximations in a complete metric space
 
 ```agda
 module _
