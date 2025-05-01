@@ -109,7 +109,7 @@ module _
         is-isometry-convergent-cauchy-approximation-Complete-Metric-Space A)
 ```
 
-### The map from a cauchy approximation in a metric space to its convergent approximation is short
+### The map from a Cauchy approximation in a metric space to its convergent approximation is short
 
 ```agda
 module _
