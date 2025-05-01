@@ -138,8 +138,7 @@ module _
     short-function-Metric-Space
       ( Π-Metric-Space A P)
       ( P a)
-  short-ev-Π-Metric-Space =
-    (λ f → f a) , (is-short-ev-Π-Metric-Space)
+  short-ev-Π-Metric-Space = (λ f → f a) , (is-short-ev-Π-Metric-Space)
 ```
 
 ### Dependent products of saturated metric spaces are saturated
