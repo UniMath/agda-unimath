@@ -112,7 +112,15 @@ AC0-is-set-projective H A B K =
         ( id))
 ```
 
-## See also
+## Comments
+
+The axiom of choice fails to hold for arbitrary types. Indeed, it already fails
+to hold for the 0-connected 1-type $\operatorname{B}ℤ₂$ as demonstrated in
+Corollary 17.5.3 of {{#cite Rij22}}. Hence it is both incompatible with
+univalence and with the existence of higher inductive types to assume the axiom
+of choice for all types.
+
+## See alsoappro
 
 - [Diaconescu's theorem](foundation.diaconescus-theorem.md), which states that
   the axiom of choice implies the law of excluded middle.
