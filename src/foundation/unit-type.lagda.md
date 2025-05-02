@@ -243,3 +243,12 @@ module _
   retraction-point : retraction (point x)
   retraction-point = terminal-map A , refl-htpy
 ```
+
+### Contractibility of dependent sums over the unit type
+
+```agda
+abstract
+  is-contr-Σ-unit :
+    {l : Level} {B : unit → UU l} → is-contr (B star) → is-contr (Σ unit B)
+  is-contr-Σ-unit = is-contr-Σ is-contr-unit star
+```
