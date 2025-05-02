@@ -473,7 +473,7 @@ module _
       ( x)
       ( y)
       ( z +ℝ real-ℚ (rational-ℚ⁺ d))
-      (tr
+      ( tr
         ( leq-ℝ (x +ℝ y))
         ( associative-add-ℝ x z (real-ℚ (rational-ℚ⁺ d)))
         ( x+y≤x+z+d))
