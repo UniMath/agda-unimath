@@ -27,8 +27,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-{{#concept "Dedekind finite types" Agda=set-Dedekind-Finite-Type}} are types `X`
-with the [property](foundation-core.propositions.md) that every
+{{#concept "Dedekind finite types" Agda=Dedekind-Finite-Type Agda=is-dedekind-finite}}
+are types `X` with the [property](foundation-core.propositions.md) that every
 self-[embedding](foundation-core.embeddings.md) `X ↪ X` is an
 [equivalence](foundation-core.equivalences.md).
 
