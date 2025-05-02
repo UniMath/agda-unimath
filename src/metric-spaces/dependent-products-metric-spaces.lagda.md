@@ -127,18 +127,18 @@ module _
   {l l1 l2 : Level} (A : UU l) (P : A → Metric-Space l1 l2) (a : A)
   where
 
-  is-short-ev-Π-Metric-Space :
+  is-short-eval-Π-Metric-Space :
     is-short-function-Metric-Space
       ( Π-Metric-Space A P)
       ( P a)
       ( λ f → f a)
-  is-short-ev-Π-Metric-Space ε x y H = H a
+  is-short-eval-Π-Metric-Space ε x y H = H a
 
-  short-ev-Π-Metric-Space :
+  short-eval-Π-Metric-Space :
     short-function-Metric-Space
       ( Π-Metric-Space A P)
       ( P a)
-  short-ev-Π-Metric-Space = (λ f → f a) , (is-short-ev-Π-Metric-Space)
+  short-eval-Π-Metric-Space = (λ f → f a) , (is-short-eval-Π-Metric-Space)
 ```
 
 ### Dependent products of saturated metric spaces are saturated
@@ -172,7 +172,7 @@ module _
       ( map-short-function-cauchy-approximation-Metric-Space
         ( Π-Metric-Space A P)
         ( P x)
-        ( short-ev-Π-Metric-Space A P x)
+        ( short-eval-Π-Metric-Space A P x)
         ( u))
 
   is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space :
@@ -187,7 +187,7 @@ module _
       ( map-short-function-cauchy-approximation-Metric-Space
         ( Π-Metric-Space A P)
         ( P x)
-        ( short-ev-Π-Metric-Space A P x)
+        ( short-eval-Π-Metric-Space A P x)
         ( u))
       ( ε)
       ( δ)
