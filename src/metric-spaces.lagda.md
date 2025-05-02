@@ -73,7 +73,7 @@ open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces publi
 open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.limits-of-sequences-premetric-spaces public
 open import metric-spaces.limits-of-sequences-pseudometric-spaces public
-open import metric-spaces.lipschitz-functions-premetric-spaces public
+open import metric-spaces.lipschitz-functions-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-saturated-complete-metric-spaces public

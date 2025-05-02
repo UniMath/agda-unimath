@@ -11,6 +11,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.function-types
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.continuous-functions-metric-spaces
@@ -45,6 +46,10 @@ module _
       ( premetric-Metric-Space X)
       ( premetric-Metric-Space Y)
       ( f)
+
+  modulus-of-uniform-continuity-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
+  modulus-of-uniform-continuity-function-Metric-Space =
+    type-subtype is-modulus-of-uniform-continuity-prop-Metric-Space
 
   is-uniformly-continuous-map-prop-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
   is-uniformly-continuous-map-prop-Metric-Space =
