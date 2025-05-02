@@ -177,8 +177,8 @@ module _
 
   is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space :
     (u : cauchy-approximation-Metric-Space (Π-Metric-Space A P)) →
-    is-limit-cauchy-approximation-Premetric-Space
-      ( premetric-Metric-Space (Π-Metric-Space A P))
+    is-limit-cauchy-approximation-Metric-Space
+      ( Π-Metric-Space A P)
       ( u)
       ( limit-cauchy-approximation-Π-is-complete-Metric-Space u)
   is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space u ε δ x =
