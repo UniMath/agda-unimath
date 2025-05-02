@@ -329,7 +329,7 @@ module _
   where
 
   abstract
-    lemma :
+    lemma-is-surjective-is-injective-endo-subfinite-indexing :
       (f : X → X) →
       is-injective f →
       (x : X) →
@@ -341,7 +341,9 @@ module _
           ( f)
           ( x))) →
       fiber f x
-    lemma f is-injective-f x hy = (iterate k f x , compute-iterate-dist-f-x)
+    lemma-is-surjective-is-injective-endo-subfinite-indexing
+      f is-injective-f x hy =
+      ( iterate k f x , compute-iterate-dist-f-x)
       where abstract
         y :
           Fin (succ-ℕ (bound-number-of-elements-subfinite-indexing c)) →
@@ -414,9 +416,9 @@ module _
   abstract
     is-surjective-is-injective-endo-subfinite-indexing :
       (f : X → X) → is-injective f → is-surjective f
-    is-surjective-is-injective-endo-subfinite-indexing f is-injective-f x =
+    is-surjective-is-injective-endo-subfinite-indexing f F x =
       map-trunc-Prop
-        ( lemma f is-injective-f x)
+        ( lemma-is-surjective-is-injective-endo-subfinite-indexing f F x)
         ( finite-choice-Fin
           ( succ-ℕ (bound-number-of-elements-subfinite-indexing c))
           ( λ i →

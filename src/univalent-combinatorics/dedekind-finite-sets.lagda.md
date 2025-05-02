@@ -66,20 +66,6 @@ module _
   is-dedekind-finite-set-Dedekind-Finite-Set = pr2 X
 ```
 
-## Properties
-
-### Finite types are Dedekind finite sets
-
-> TODO
-
-### Decidable subtypes of Dedekind finite sers are Dedekind finite sets
-
-> TODO
-
-### The subuniverse of propositions is a Dedekind finite set
-
-> TODO
-
 ## See also
 
 - [Finite types](univalent-combinatorics.finite-types.md)

@@ -384,3 +384,7 @@ no-embedding-ℕ-is-finite H f =
   apply-universal-property-trunc-Prop H empty-Prop
     ( λ e → no-embedding-ℕ-count e f)
 ```
+
+## See also
+
+- [Sequences of elements in finite types](univalent-combinatorics.sequences-finite-types.md)

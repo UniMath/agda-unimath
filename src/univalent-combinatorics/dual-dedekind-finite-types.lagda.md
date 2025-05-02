@@ -32,8 +32,16 @@ open import synthetic-homotopy-theory.acyclic-maps
 {{#concept "Dual Dedekind finite types"  Agda=is-dual-dedekind-finite Agda=Dual-Dedekind-Finite-Type}}
 are types `X` with the [property](foundation-core.propositions.md) that every
 [acyclic](synthetic-homotopy-theory.acyclic-maps.md) endomap `X ↠ X` is an
-[equivalence](foundation-core.equivalences.md). This is dual to the property of
-being [Dedekind finite](univalent-combinatorics.dedekind-finite-types.md).
+[equivalence](foundation-core.equivalences.md).
+
+Recall that a
+[Dedekind finite type](univalent-combinatorics.dedekind-finite-types.md) is a
+type such that every self-[embedding](foundation-core.embeddings.md) is an
+equivalence. The dual Dedekind finiteness condition is formally dual to the
+Dedekind finiteness condition, since acyclic maps are precisely the
+[epimorphisms](foundation.epimorphisms.md) in the
+[∞-category of types](foundation.wild-category-of-types.md), while embeddings
+are precisely the [monomorphisms](foundation.monomorphisms.md).
 
 ## Definitions
 
@@ -135,18 +143,6 @@ module _
     ( map-acyclic-map f ,
       is-equiv-map-cantor-schröder-bernstein-Dual-Dedekind-Finite-Type)
 ```
-
-### The subuniverse of propositions is dual Dedekind finite
-
-> TODO
-
-### Finite types are dual Dedekind finite
-
-> TODO
-
-### Subtypes of dual Dedekind finite types are dual Dedekind finite
-
-> TODO
 
 ## See also
 
