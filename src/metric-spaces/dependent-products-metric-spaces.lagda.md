@@ -155,6 +155,60 @@ module _
     Π-saturated a ε (x a) (y a) (λ d → H d a)
 ```
 
+### The partial applications of a Cauchy approximation in a dependent product metric space are Cauchy approximations
+
+```agda
+module _
+  {l l1 l2 : Level} (A : UU l) (P : A → Metric-Space l1 l2)
+  (f : cauchy-approximation-Metric-Space (Π-Metric-Space A P))
+  where
+
+  eval-cauchy-approximation-Π-Metric-Space :
+    (x : A) → cauchy-approximation-Metric-Space (P x)
+  eval-cauchy-approximation-Π-Metric-Space x =
+    map-short-function-cauchy-approximation-Metric-Space
+      ( Π-Metric-Space A P)
+      ( P x)
+      ( short-eval-Π-Metric-Space A P x)
+      ( f)
+```
+
+### A dependent map is the limit of a Cauchy approximation in a dependent product of metric spaces if and only if it is the pointwise limit of its partial applications
+
+```agda
+module _
+  {l l1 l2 : Level} (A : UU l) (P : A → Metric-Space l1 l2)
+  (f : cauchy-approximation-Metric-Space (Π-Metric-Space A P))
+  (g : type-Π-Metric-Space A P)
+  where
+
+  is-pointwise-limit-is-limit-cauchy-approximation-Π-Metric-Space :
+    is-limit-cauchy-approximation-Metric-Space
+      ( Π-Metric-Space A P)
+      ( f)
+      ( g) →
+    (x : A) →
+    is-limit-cauchy-approximation-Metric-Space
+      ( P x)
+      ( eval-cauchy-approximation-Π-Metric-Space A P f x)
+      ( g x)
+  is-pointwise-limit-is-limit-cauchy-approximation-Π-Metric-Space L x ε δ =
+    L ε δ x
+
+  is-limit-is-pointwise-limit-cauchy-approximation-Π-Metric-Space :
+    ( (x : A) →
+      is-limit-cauchy-approximation-Metric-Space
+        ( P x)
+        ( eval-cauchy-approximation-Π-Metric-Space A P f x)
+        ( g x)) →
+    is-limit-cauchy-approximation-Metric-Space
+      ( Π-Metric-Space A P)
+      ( f)
+      ( g)
+  is-limit-is-pointwise-limit-cauchy-approximation-Π-Metric-Space L ε δ x =
+    L x ε δ
+```
+
 ### A product of complete metric spaces is complete
 
 ```agda
@@ -169,11 +223,7 @@ module _
   limit-cauchy-approximation-Π-is-complete-Metric-Space u x =
     limit-cauchy-approximation-Complete-Metric-Space
       ( P x , Π-complete x)
-      ( map-short-function-cauchy-approximation-Metric-Space
-        ( Π-Metric-Space A P)
-        ( P x)
-        ( short-eval-Π-Metric-Space A P x)
-        ( u))
+      ( eval-cauchy-approximation-Π-Metric-Space A P u x)
 
   is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space :
     (u : cauchy-approximation-Metric-Space (Π-Metric-Space A P)) →
@@ -184,11 +234,7 @@ module _
   is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space u ε δ x =
     is-limit-limit-cauchy-approximation-Complete-Metric-Space
       ( P x , Π-complete x)
-      ( map-short-function-cauchy-approximation-Metric-Space
-        ( Π-Metric-Space A P)
-        ( P x)
-        ( short-eval-Π-Metric-Space A P x)
-        ( u))
+      ( eval-cauchy-approximation-Π-Metric-Space A P u x)
       ( ε)
       ( δ)
 
