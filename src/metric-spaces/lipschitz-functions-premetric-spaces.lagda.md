@@ -1,14 +1,18 @@
 # Lipschitz functions between premetric spaces
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module metric-spaces.lipschitz-functions-premetric-spaces where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.existential-quantification
@@ -17,6 +21,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -78,6 +83,10 @@ module _
     is-prop (is-lipschitz-constant-function-Premetric-Space α)
   is-prop-is-lipschitz-constant-function-Premetric-Space α =
     is-prop-type-Prop (is-lipschitz-constant-prop-function-Premetric-Space α)
+
+  lipschitz-constant-function-Premetric-Space : UU (l1 ⊔ l2 ⊔ l2')
+  lipschitz-constant-function-Premetric-Space =
+    type-subtype is-lipschitz-constant-prop-function-Premetric-Space
 ```
 
 ### The property of being a Lipschitz function
@@ -114,7 +123,34 @@ TODO
 
 ### Lipschitz functions are uniformly continuous
 
-TODO
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
+  (f : map-type-Premetric-Space A B)
+  where
+
+  modulus-of-uniform-continuity-lipschitz-constant-function-Premetric-Space :
+    lipschitz-constant-function-Premetric-Space A B f →
+    modulus-of-uniform-continuity-lipschitz-Premetric-Space A B f
+  modulus-of-uniform-continuity-lipschitz-constant-function-Premetric-Space
+    (α , L) =
+    ( mul-ℚ⁺ (inv-ℚ⁺ α)) ,
+    ( λ x d y H →
+      tr
+        ( is-upper-bound-dist-Premetric-Space B (f x) (f y))
+        ( ( inv (associative-mul-ℚ⁺ α (inv-ℚ⁺ α) d)) ∙
+          ( ap (λ y → y *ℚ⁺ d) (right-inverse-law-mul-ℚ⁺ α)) ∙
+          ( left-unit-law-mul-ℚ⁺ d))
+        ( L (inv-ℚ⁺ α *ℚ⁺ d) x y H))
+
+  is-uniformly-continuous-is-lipschitz-function-Premetric-Space :
+    is-lipschitz-function-Premetric-Space A B f →
+    is-uniformly-continuous-map-Premetric-Space A B f
+  is-uniformly-continuous-is-lipschitz-function-Premetric-Space =
+    map-is-inhabited
+      modulus-of-uniform-continuity-lipschitz-constant-function-Premetric-Space
+```
 
 ### The product of Lipschitz constant of maps is a Lipschitz constant of their composition
 

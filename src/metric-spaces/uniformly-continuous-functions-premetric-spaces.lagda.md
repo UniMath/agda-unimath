@@ -48,6 +48,10 @@ module _
       ( type-Premetric-Space X)
       ( λ x → is-modulus-of-continuity-at-point-prop-Premetric-Space X Y f x m)
 
+  modulus-of-uniform-continuity-lipschitz-Premetric-Space : UU (l1 ⊔ l2 ⊔ l4)
+  modulus-of-uniform-continuity-lipschitz-Premetric-Space =
+    type-subtype is-modulus-of-uniform-continuity-prop-Premetric-Space
+
   is-uniformly-continuous-map-prop-Premetric-Space : Prop (l1 ⊔ l2 ⊔ l4)
   is-uniformly-continuous-map-prop-Premetric-Space =
     is-inhabited-subtype-Prop
