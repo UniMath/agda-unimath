@@ -147,6 +147,7 @@ coproducts or products. {{#cite Sto87}}
 
 ## See also
 
+- [Dual Dedekind finite types](univalent-combinatorics.dual-dedekind-finite-types.md)
 - [Finite types](univalent-combinatorics.finite-types.md)
 - [Kuratowski finite sets](univalent-combinatorics.kuratowski-finite-sets.md)
 - [Subfinite types](univalent-combinatorics.subfinite-types.md)
