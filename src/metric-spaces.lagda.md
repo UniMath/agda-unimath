@@ -79,8 +79,11 @@ open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces pu
 open import metric-spaces.metric-space-of-cauchy-approximations-saturated-complete-metric-spaces public
 open import metric-spaces.metric-space-of-convergent-cauchy-approximations-metric-spaces public
 open import metric-spaces.metric-space-of-convergent-sequences-metric-spaces public
+open import metric-spaces.metric-space-of-functions-metric-spaces public
+open import metric-spaces.metric-space-of-isometries-metric-spaces public
 open import metric-spaces.metric-space-of-rational-numbers public
 open import metric-spaces.metric-space-of-rational-numbers-with-open-neighborhoods public
+open import metric-spaces.metric-space-of-short-functions-metric-spaces public
 open import metric-spaces.metric-spaces public
 open import metric-spaces.metric-structures public
 open import metric-spaces.monotonic-premetric-structures public
