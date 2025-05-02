@@ -7,21 +7,21 @@ module foundation.noninjective-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.inhabited-types
-open import foundation.propositional-truncations
-open import foundation.functoriality-propositional-truncation
-open import foundation.repetitions-of-values
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.inhabited-types
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.repetitions-of-values
 open import foundation.universe-levels
-open import foundation.action-on-identifications-functions
 
 open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation.negation
 open import foundation-core.propositions
 ```
 
@@ -97,7 +97,6 @@ module _
 ### Noninjective maps are not injective
 
 ```agda
-
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
@@ -138,7 +137,7 @@ module _
   inv-ap-repetition-of-values G (q , p) = (q , G p)
 
   is-noninjective-right-factor :
-    is-injective g → is-noninjective (g ∘ f) →  is-noninjective f
+    is-injective g → is-noninjective (g ∘ f) → is-noninjective f
   is-noninjective-right-factor G =
     map-trunc-Prop (inv-ap-repetition-of-values G)
 ```

@@ -25,11 +25,13 @@ open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.iterating-functions
 open import foundation.propositional-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.sets
+open import foundation.split-surjective-maps
 open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
@@ -38,6 +40,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-choice
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.subcounting
 ```
@@ -249,3 +252,67 @@ module _
       ( equiv-total-fiber (map-emb e))
       ( subfinite-indexing-subtype (fiber-emb-Prop e) f)
 ```
+
+### A type is subfinitely indexed if and only if it is a subtype of a finitely indexed type
+
+**Proof.** Given a subfinite indexing on `X`, we may form the
+[pushout](synthetic-homotopy-theory.pushouts.md)
+
+```text
+  D ╰──────→ Fin n
+  │            │
+  │            │
+  ↡          ⌜ ↓
+  X ─────────→ D'.
+```
+
+Since surjective maps are the left class of an orthogonal factorization system
+they are stable under cobase change, so the right vertical map is surjective.
+And by Proposition 2.2.6 of {{#cite ABFJ20}} the pushout of an embedding is an
+embedding, so the bottom horizontal map is an embedding.
+
+Conversely, given a subtype of a finitely indexed type, we may form the
+[pullback](foundation-core.pullbacks.md)
+
+```text
+  D' ──────→ Fin n
+  │ ⌟          │
+  │            │
+  ↓            ↡
+  X ╰────────→ D.
+```
+
+Embeddings are closed under pullbacks since it is characterized as the right
+class of an orthogonal factorization system, and since this orthogonal
+factorization system is stable, so are the surjections. ■
+
+> This remains to be formalized.
+
+### Types equipped with subfinite indexings are Dedekind finite
+
+We reproduce a proof given by
+[Gro-Tsen](https://mathoverflow.net/users/17064/gro-tsen) in this MathOverflow
+answer: <https://mathoverflow.net/a/433318>.
+
+**Proof.** Let $X$ be a subfinitely indexed type, witnessed by $Fin n ↩ D ↠ X$
+where $h$ is the surjection. We wish to show $X$ is Dedekind finite, so let
+$f : X ↪ X$ be an arbitrary self-embedding. To conclude $f$ is an equivalence it
+suffices to prove $f$ is surjective, so assume given an arbitrary $x : X$ where
+we want to show there exists $z : X$ such that $f(z) ＝ x$.
+
+The mapping $i ↦ fⁱ(x)$ defines a sequence of elements of $X$. By surjectivity
+of $h$ each $fⁱ(x)$ merely has a representative in $D$, so by
+[finite choice](univalent-combinatorics.finite-choice.md) there exists a
+sequence $x₋ :  D^{\operatorname{Fin}n}$ lifting $x,f(x),…,f^{n-1}(x)$.
+
+Now, the standard pigeonhole principle applies to $\operatorname{Fin}n$, so
+there has to be $i < j$ in $\operatorname{Fin}n$ such that $xᵢ = xⱼ$, and in
+particular $h(xᵢ) = h(xⱼ)$, i.e., $fⁱ(x) = fʲ(x)$. By injectivity of $f$ we can
+cancel $i$ applications to obtain $x = f(f^{j-i-1}(x))$, and so $f^{j-i-1}(x)$
+is the desired preimage. ∎
+
+> This remains to be formalized.
+
+## References
+
+{{#bibliograhy}}

@@ -15,20 +15,20 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 open import foundation.cartesian-product-types
 open import foundation.decidable-types
 open import foundation.identity-types
-open import foundation.pairs-of-distinct-elements
 open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noninjective-maps
+open import foundation.pairs-of-distinct-elements
 open import foundation.sets
 
-open import univalent-combinatorics.decidable-dependent-function-types
-open import univalent-combinatorics.decidable-propositions
-open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-pair-types
-open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.decidable-dependent-pair-types
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

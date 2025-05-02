@@ -50,7 +50,7 @@ abstract
 
 abstract
   map-binary-trunc-Prop :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}  {C : UU l3} →
+    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
     (A → B → C) → ║ A ║₋₁ → ║ B ║₋₁ → ║ C ║₋₁
   map-binary-trunc-Prop {C = C} f |a| |b| =
     rec-trunc-Prop (trunc-Prop C) (λ a → map-trunc-Prop (f a) |b|) |a|
