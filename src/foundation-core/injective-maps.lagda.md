@@ -149,6 +149,9 @@ module _
 
   is-injective-emb : (e : A ↪ B) → is-injective (map-emb e)
   is-injective-emb e {x} {y} = map-inv-is-equiv (is-emb-map-emb e x y)
+
+  injection-emb : (A ↪ B) → injection A B
+  injection-emb e = (map-emb e , is-injective-emb e)
 ```
 
 ### Any map out of a contractible type is injective
@@ -164,3 +167,4 @@ is-injective-is-contr f H p = eq-is-contr H
 
 - [Embeddings](foundation-core.embeddings.md)
 - [Path-cosplit maps](foundation.path-cosplit-maps.md)
+- [Noninjective maps](foundation.noninjective-maps.md)

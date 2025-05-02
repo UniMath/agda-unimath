@@ -184,6 +184,7 @@ open import foundation.exponents-set-quotients public
 open import foundation.extensions-types public
 open import foundation.extensions-types-global-subuniverses public
 open import foundation.extensions-types-subuniverses public
+open import foundation.extremally-isolated-elements public
 open import foundation.faithful-maps public
 open import foundation.families-of-equivalences public
 open import foundation.families-of-maps public
@@ -307,6 +308,7 @@ open import foundation.multivariable-sections public
 open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
+open import foundation.noninjective-maps public
 open import foundation.null-homotopic-maps public
 open import foundation.operations-span-diagrams public
 open import foundation.operations-spans public

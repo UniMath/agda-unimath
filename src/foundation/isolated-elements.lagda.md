@@ -44,8 +44,9 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-An element `a : A` is considered to be **isolated** if `a ＝ x` is
-[decidable](foundation.decidable-types.md) for any `x`.
+An element `a : A` is
+{{#concept "isolated" Disambiguation="element of a type" Agda=is-isolated Agda=isolated-element}}
+if `a ＝ x` is [decidable](foundation.decidable-types.md) for any `x`.
 
 ## Definitions
 
@@ -393,3 +394,7 @@ natural-inclusion-equiv-complement-isolated-element :
   ( map-equiv e ∘ inclusion-complement-isolated-element x)
 natural-inclusion-equiv-complement-isolated-element e x y p (x' , f) = refl
 ```
+
+## See also
+
+- [Extremally isolated elements](foundation.extremally-isolated-elements.md)

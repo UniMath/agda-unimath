@@ -9,6 +9,8 @@ module elementary-number-theory.distance-natural-numbers where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.maximum-natural-numbers
+open import elementary-number-theory.minimum-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
@@ -19,6 +21,8 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.negated-equality
+open import foundation.negation
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -65,6 +69,12 @@ dist-eq-ℕ' (succ-ℕ n) = dist-eq-ℕ' n
 
 dist-eq-ℕ : (m n : ℕ) → m ＝ n → is-zero-ℕ (dist-ℕ m n)
 dist-eq-ℕ m .m refl = dist-eq-ℕ' m
+
+dist-neq-ℕ : (m n : ℕ) → m ≠ n → is-nonzero-ℕ (dist-ℕ m n)
+dist-neq-ℕ m n = map-neg (eq-dist-ℕ m n)
+
+dist-neq-ℕ' : (m n : ℕ) → m ≠ n → is-successor-ℕ (dist-ℕ m n)
+dist-neq-ℕ' m n np = is-successor-is-nonzero-ℕ (dist-neq-ℕ m n np)
 
 is-one-dist-succ-ℕ : (x : ℕ) → is-one-ℕ (dist-ℕ x (succ-ℕ x))
 is-one-dist-succ-ℕ zero-ℕ = refl
@@ -283,7 +293,7 @@ leq-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
 
 ```agda
 strict-upper-bound-dist-ℕ :
-  (b x y : ℕ) → le-ℕ x b → le-ℕ y b → le-ℕ (dist-ℕ x y) b
+  (b x y : ℕ) → x <-ℕ b → y <-ℕ b → dist-ℕ x y <-ℕ b
 strict-upper-bound-dist-ℕ (succ-ℕ b) zero-ℕ y H K = K
 strict-upper-bound-dist-ℕ (succ-ℕ b) (succ-ℕ x) zero-ℕ H K = H
 strict-upper-bound-dist-ℕ (succ-ℕ b) (succ-ℕ x) (succ-ℕ y) H K =
@@ -294,14 +304,14 @@ strict-upper-bound-dist-ℕ (succ-ℕ b) (succ-ℕ x) (succ-ℕ y) H K =
 
 ```agda
 right-successor-law-dist-ℕ :
-  (x y : ℕ) → leq-ℕ x y → dist-ℕ x (succ-ℕ y) ＝ succ-ℕ (dist-ℕ x y)
+  (x y : ℕ) → x ≤-ℕ y → dist-ℕ x (succ-ℕ y) ＝ succ-ℕ (dist-ℕ x y)
 right-successor-law-dist-ℕ zero-ℕ zero-ℕ star = refl
 right-successor-law-dist-ℕ zero-ℕ (succ-ℕ y) star = refl
 right-successor-law-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
   right-successor-law-dist-ℕ x y H
 
 left-successor-law-dist-ℕ :
-  (x y : ℕ) → leq-ℕ y x → dist-ℕ (succ-ℕ x) y ＝ succ-ℕ (dist-ℕ x y)
+  (x y : ℕ) → y ≤-ℕ x → dist-ℕ (succ-ℕ x) y ＝ succ-ℕ (dist-ℕ x y)
 left-successor-law-dist-ℕ zero-ℕ zero-ℕ star = refl
 left-successor-law-dist-ℕ (succ-ℕ x) zero-ℕ star = refl
 left-successor-law-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
@@ -367,4 +377,19 @@ right-distributive-mul-dist-ℕ x y k =
   ( commutative-mul-ℕ (dist-ℕ x y) k) ∙
   ( ( left-distributive-mul-dist-ℕ x y k) ∙
     ( ap-dist-ℕ (commutative-mul-ℕ k x) (commutative-mul-ℕ k y)))
+```
+
+### The distance is the difference between the maximum and the minimum
+
+```agda
+eq-max-dist-min-ℕ : (x y : ℕ) → dist-ℕ x y +ℕ min-ℕ x y ＝ max-ℕ x y
+eq-max-dist-min-ℕ zero-ℕ y = refl
+eq-max-dist-min-ℕ (succ-ℕ x) zero-ℕ = refl
+eq-max-dist-min-ℕ (succ-ℕ x) (succ-ℕ y) = ap succ-ℕ (eq-max-dist-min-ℕ x y)
+
+dist-max-min-ℕ : (x y : ℕ) → dist-ℕ x y ＝ dist-ℕ (max-ℕ x y) (min-ℕ x y)
+dist-max-min-ℕ zero-ℕ zero-ℕ = refl
+dist-max-min-ℕ zero-ℕ (succ-ℕ y) = refl
+dist-max-min-ℕ (succ-ℕ x) zero-ℕ = refl
+dist-max-min-ℕ (succ-ℕ x) (succ-ℕ y) = dist-max-min-ℕ x y
 ```

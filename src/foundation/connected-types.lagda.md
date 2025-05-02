@@ -11,6 +11,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.functoriality-truncation
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
@@ -110,6 +111,54 @@ is-connected-is-equiv-diagonal-exponential {k = k} {A} H =
       ( center (is-contr-map-is-equiv (H (trunc k A)) unit-trunc)))
 ```
 
+### Being connected is invariant under equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
+  where
+
+  is-connected-is-equiv :
+    (f : A → B) → is-equiv f → is-connected k B → is-connected k A
+  is-connected-is-equiv f e =
+    is-contr-is-equiv
+      ( type-trunc k B)
+      ( map-trunc k f)
+      ( is-equiv-map-equiv-trunc k (f , e))
+
+  is-connected-equiv :
+    A ≃ B → is-connected k B → is-connected k A
+  is-connected-equiv f =
+    is-connected-is-equiv (map-equiv f) (is-equiv-map-equiv f)
+
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
+  where
+
+  is-connected-equiv' :
+    A ≃ B → is-connected k A → is-connected k B
+  is-connected-equiv' f = is-connected-equiv (inv-equiv f)
+
+  is-connected-is-equiv' :
+    (f : A → B) → is-equiv f → is-connected k A → is-connected k B
+  is-connected-is-equiv' f e = is-connected-equiv' (f , e)
+```
+
+### Retracts of `k`-connected types are `k`-connected
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
+  where
+
+  is-connected-retract-of :
+    A retract-of B →
+    is-connected k B →
+    is-connected k A
+  is-connected-retract-of R =
+    is-contr-retract-of (type-trunc k B) (retract-of-trunc-retract-of R)
+```
+
 ### A contractible type is `k`-connected for any `k`
 
 ```agda
@@ -146,6 +195,31 @@ is-connected-Σ :
   is-connected k (Σ A B)
 is-connected-Σ k H K =
   is-contr-equiv _ (equiv-trunc k (equiv-pr1 K) ∘e equiv-trunc-Σ k) H
+```
+
+### If the total space of a family of `k`-connected types is `k`-connected so is the base
+
+**Proof.** We compute
+
+```text
+  ║Σ (x : A), B x║ₖ ≃ ║Σ (x : A), ║B x║ₖ║ₖ by equiv-trunc-Σ
+                    ≃ ║Σ (x : A), 1 ║ₖ      by k-connectedness of B
+                    ≃ ║A║ₖ                  by the right unit law of Σ
+```
+
+and so, in particular, if the total space is `k`-connected so is the base. □
+
+```agda
+is-connected-base :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} →
+  ((x : A) → is-connected k (B x)) → is-connected k (Σ A B) → is-connected k A
+is-connected-base k {A} {B} K =
+  is-contr-equiv'
+    ( type-trunc k (Σ A B))
+    ( equivalence-reasoning
+      type-trunc k (Σ A B)
+      ≃ type-trunc k (Σ A (type-trunc k ∘ B)) by equiv-trunc-Σ k
+      ≃ type-trunc k A by equiv-trunc k (right-unit-law-Σ-is-contr K))
 ```
 
 ### An inhabited type `A` is `k + 1`-connected if and only if its identity types are `k`-connected
@@ -196,52 +270,4 @@ module _
                   ( unit-trunc x))
                 ( λ where refl → refl)
                 ( center (K a x)))))
-```
-
-### Being connected is invariant under equivalence
-
-```agda
-module _
-  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
-  where
-
-  is-connected-is-equiv :
-    (f : A → B) → is-equiv f → is-connected k B → is-connected k A
-  is-connected-is-equiv f e =
-    is-contr-is-equiv
-      ( type-trunc k B)
-      ( map-trunc k f)
-      ( is-equiv-map-equiv-trunc k (f , e))
-
-  is-connected-equiv :
-    A ≃ B → is-connected k B → is-connected k A
-  is-connected-equiv f =
-    is-connected-is-equiv (map-equiv f) (is-equiv-map-equiv f)
-
-module _
-  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
-  where
-
-  is-connected-equiv' :
-    A ≃ B → is-connected k A → is-connected k B
-  is-connected-equiv' f = is-connected-equiv (inv-equiv f)
-
-  is-connected-is-equiv' :
-    (f : A → B) → is-equiv f → is-connected k A → is-connected k B
-  is-connected-is-equiv' f e = is-connected-equiv' (f , e)
-```
-
-### Retracts of `k`-connected types are `k`-connected
-
-```agda
-module _
-  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
-  where
-
-  is-connected-retract-of :
-    A retract-of B →
-    is-connected k B →
-    is-connected k A
-  is-connected-retract-of R =
-    is-contr-retract-of (type-trunc k B) (retract-of-trunc-retract-of R)
 ```

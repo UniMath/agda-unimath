@@ -10,9 +10,13 @@ module univalent-combinatorics.dedekind-finite-sets where
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+
+open import univalent-combinatorics.dedekind-finite-types
 ```
 
 </details>
@@ -22,21 +26,25 @@ open import foundation.universe-levels
 {{#concept "Dedekind finite sets" Agda=set-Dedekind-Finite-Set}} are
 [sets](foundation-core.sets.md) `X` with the
 [property](foundation-core.propositions.md) that every
-[embedding](foundation-core.embeddings.md) `X ↪ X` is an
+self-[embedding](foundation-core.embeddings.md) `X ↪ X` is an
 [equivalence](foundation-core.equivalences.md).
 
-## Definition
+## Definitions
+
+### The predicate of being a Dedekind finite set
 
 ```agda
 is-dedekind-finite-set-Prop : {l : Level} → Set l → Prop l
 is-dedekind-finite-set-Prop X =
-  Π-Prop
-    ( type-Set X → type-Set X)
-    ( λ f → function-Prop (is-emb f) (is-equiv-Prop f))
+  is-dedekind-finite-Prop (type-Set X)
 
 is-dedekind-finite-set : {l : Level} → Set l → UU l
 is-dedekind-finite-set X = type-Prop (is-dedekind-finite-set-Prop X)
+```
 
+### The subuniverse of Dedekind finite sets
+
+```agda
 Dedekind-Finite-Set : (l : Level) → UU (lsuc l)
 Dedekind-Finite-Set l = Σ (Set l) is-dedekind-finite-set
 
@@ -57,6 +65,20 @@ module _
     is-dedekind-finite-set set-Dedekind-Finite-Set
   is-dedekind-finite-set-Dedekind-Finite-Set = pr2 X
 ```
+
+## Properties
+
+### Finite types are Dedekind finite sets
+
+> TODO
+
+### Decidable subtypes of Dedekind finite sers are Dedekind finite sets
+
+> TODO
+
+### The subuniverse of propositions is a Dedekind finite set
+
+> TODO
 
 ## See also
 
