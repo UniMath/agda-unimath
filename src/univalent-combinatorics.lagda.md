@@ -37,7 +37,6 @@ open import univalent-combinatorics.coproduct-types public
 open import univalent-combinatorics.counting public
 open import univalent-combinatorics.counting-decidable-subtypes public
 open import univalent-combinatorics.counting-dependent-pair-types public
-open import univalent-combinatorics.counting-fibers-of-maps public
 open import univalent-combinatorics.counting-maybe public
 open import univalent-combinatorics.cubes public
 open import univalent-combinatorics.cycle-partitions public
@@ -110,6 +109,7 @@ open import univalent-combinatorics.steiner-triple-systems public
 open import univalent-combinatorics.subcounting public
 open import univalent-combinatorics.subfinite-indexing public
 open import univalent-combinatorics.subfinite-types public
+open import univalent-combinatorics.subfinitely-indexed-types public
 open import univalent-combinatorics.sums-of-natural-numbers public
 open import univalent-combinatorics.surjective-maps public
 open import univalent-combinatorics.symmetric-difference public

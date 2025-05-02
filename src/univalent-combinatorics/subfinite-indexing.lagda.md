@@ -7,23 +7,18 @@ module univalent-combinatorics.subfinite-indexing where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.minimum-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.maximum-natural-numbers
+open import elementary-number-theory.minimum-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
-open import foundation.repetitions-of-values
-open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
-open import foundation.noninjective-maps
 open import foundation.decidable-equality
-open import foundation.iterating-functions
-open import foundation.propositional-truncations
-open import foundation.split-surjective-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.discrete-types
@@ -36,11 +31,15 @@ open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.iterating-functions
+open import foundation.noninjective-maps
 open import foundation.propositional-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.repetitions-of-values
 open import foundation.retracts-of-types
 open import foundation.sets
+open import foundation.split-surjective-maps
 open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
@@ -49,11 +48,11 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-choice
+open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.subcounting
 open import univalent-combinatorics.subfinite-types
-open import univalent-combinatorics.finite-choice
-open import univalent-combinatorics.pigeonhole-principle
 ```
 
 </details>
