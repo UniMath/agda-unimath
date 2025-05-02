@@ -166,6 +166,14 @@ module _
         ap f (inv (leq-right-min-ℕ i j j≤i)))
       ( linear-leq-ℕ i j)
 
+  compute-iterate-offset :
+    (f : X → X) {x : X} → is-injective f → (i d : ℕ) →
+    iterate (succ-ℕ (d +ℕ i)) f x ＝ iterate i f x →
+    f (iterate d f x) ＝ x
+  compute-iterate-offset f is-injective-f zero-ℕ d p = p
+  compute-iterate-offset f is-injective-f (succ-ℕ i) d p =
+    compute-iterate-offset f is-injective-f i d (is-injective-f p)
+
 module _
   {l : Level} {X : UU l} (c : subcount X)
   where
@@ -213,17 +221,9 @@ module _
         ( j)
         ( compute-iterate-f-x)
 
-    compute-iterate-offset :
-      (i d : ℕ) →
-      iterate (succ-ℕ (d +ℕ i)) f x ＝ iterate i f x →
-      f (iterate d f x) ＝ x
-    compute-iterate-offset zero-ℕ d p = p
-    compute-iterate-offset (succ-ℕ i) d p =
-      compute-iterate-offset i d (is-injective-f p)
-
     compute-iterate-dist-f-x : f (iterate k f x) ＝ x
     compute-iterate-dist-f-x =
-      compute-iterate-offset
+      compute-iterate-offset f is-injective-f
         ( min-ℕ i j)
         ( k)
         ( ( ap

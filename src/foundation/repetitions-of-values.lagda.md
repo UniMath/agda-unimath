@@ -229,3 +229,7 @@ module _
   is-emb-map-emb-repetition-of-values : is-emb map-emb-repetition-of-values
   is-emb-map-emb-repetition-of-values = is-emb-map-emb emb-repetition-of-values
 ```
+
+## See also
+
+- [Noninjective maps](foundation.noninjective-maps.md)

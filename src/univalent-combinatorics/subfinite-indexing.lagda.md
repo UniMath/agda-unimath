@@ -8,11 +8,22 @@ module univalent-combinatorics.subfinite-indexing where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.maximum-natural-numbers
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.minimum-natural-numbers
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
+open import foundation.repetitions-of-values
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.noninjective-maps
 open import foundation.decidable-equality
+open import foundation.iterating-functions
+open import foundation.propositional-truncations
+open import foundation.split-surjective-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.discrete-types
@@ -25,13 +36,11 @@ open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.iterating-functions
 open import foundation.propositional-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.sets
-open import foundation.split-surjective-maps
 open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
@@ -40,9 +49,11 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-choice
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.subcounting
+open import univalent-combinatorics.subfinite-types
+open import univalent-combinatorics.finite-choice
+open import univalent-combinatorics.pigeonhole-principle
 ```
 
 </details>
@@ -312,6 +323,120 @@ cancel $i$ applications to obtain $x = f(f^{j-i-1}(x))$, and so $f^{j-i-1}(x)$
 is the desired preimage. ∎
 
 > This remains to be formalized.
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (c : subfinite-indexing l2 X)
+  where
+
+  abstract
+    lemma :
+      (f : X → X) →
+      is-injective f →
+      (x : X) →
+      ((i : Fin (succ-ℕ (bound-number-of-elements-subfinite-indexing c))) →
+      fiber
+        ( map-projection-subfinite-indexing c)
+        ( iterate
+          ( nat-Fin (succ-ℕ (bound-number-of-elements-subfinite-indexing c)) i)
+          ( f)
+          ( x))) →
+      fiber f x
+    lemma f is-injective-f x hy = (iterate k f x , compute-iterate-dist-f-x)
+      where abstract
+        y :
+          Fin (succ-ℕ (bound-number-of-elements-subfinite-indexing c)) →
+          indexing-type-subfinite-indexing c
+        y = pr1 ∘ hy
+
+        r : repetition-of-values y
+        r =
+          inv-ap-repetition-of-values
+            ( is-injective-emb (emb-subfinite-indexing c))
+            ( repetition-of-values-Fin-succ-to-Fin
+              ( bound-number-of-elements-subfinite-indexing c)
+              ( map-emb-subfinite-indexing c ∘ y))
+
+        i : ℕ
+        i =
+          nat-Fin
+            ( succ-ℕ (bound-number-of-elements-subfinite-indexing c))
+            ( first-repetition-of-values y r)
+
+        j : ℕ
+        j =
+          nat-Fin
+            ( succ-ℕ (bound-number-of-elements-subfinite-indexing c))
+            ( second-repetition-of-values y r)
+
+        k+1-nonzero : ℕ⁺
+        k+1-nonzero =
+          ( dist-ℕ i j ,
+            dist-neq-ℕ i j
+              ( distinction-repetition-of-values y r ∘
+                is-injective-nat-Fin
+                  ( succ-ℕ (bound-number-of-elements-subfinite-indexing c))))
+
+        k : ℕ
+        k = pred-ℕ⁺ k+1-nonzero
+
+        compute-succ-k : succ-ℕ k ＝ dist-ℕ i j
+        compute-succ-k = ap pr1 (is-section-succ-nonzero-ℕ' k+1-nonzero)
+
+        compute-iterate-f-x : iterate i f x ＝ iterate j f x
+        compute-iterate-f-x =
+          inv (pr2 (hy (first-repetition-of-values y r))) ∙
+          ap
+            ( map-projection-subfinite-indexing c)
+            ( is-repetition-of-values-repetition-of-values y r) ∙
+          pr2 (hy (second-repetition-of-values y r))
+
+        compute-iterate-min-max-f-x :
+          iterate (max-ℕ i j) f x ＝ iterate (min-ℕ i j) f x
+        compute-iterate-min-max-f-x =
+          eq-value-min-max-eq-value-sequence
+            ( λ u → iterate u f x)
+            ( i)
+            ( j)
+            ( compute-iterate-f-x)
+
+        compute-iterate-dist-f-x : f (iterate k f x) ＝ x
+        compute-iterate-dist-f-x =
+          compute-iterate-offset f is-injective-f
+            ( min-ℕ i j)
+            ( k)
+            ( ( ap
+                ( λ u → iterate u f x)
+                ( ( inv (left-successor-law-add-ℕ k (min-ℕ i j))) ∙
+                  ( ap (_+ℕ min-ℕ i j) compute-succ-k) ∙
+                  ( eq-max-dist-min-ℕ i j))) ∙
+              ( compute-iterate-min-max-f-x))
+
+  abstract
+    is-surjective-is-injective-endo-subfinite-indexing :
+      (f : X → X) → is-injective f → is-surjective f
+    is-surjective-is-injective-endo-subfinite-indexing f is-injective-f x =
+      map-trunc-Prop
+        ( lemma f is-injective-f x)
+        ( finite-choice-Fin
+          ( succ-ℕ (bound-number-of-elements-subfinite-indexing c))
+          ( λ i →
+            is-surjective-map-projection-subfinite-indexing c
+              ( iterate
+                ( nat-Fin
+                  ( succ-ℕ (bound-number-of-elements-subfinite-indexing c))
+                  ( i))
+                ( f)
+                ( x))))
+
+  is-dedekind-finite-subfinite-indexing :
+    (f : X → X) → is-emb f → is-equiv f
+  is-dedekind-finite-subfinite-indexing f is-emb-f =
+    is-equiv-is-emb-is-surjective
+      ( is-surjective-is-injective-endo-subfinite-indexing f
+        ( is-injective-is-emb is-emb-f))
+      ( is-emb-f)
+```
 
 ## References
 
