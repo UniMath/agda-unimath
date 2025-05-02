@@ -47,8 +47,16 @@ open import real-numbers.upper-dedekind-real-numbers
 The
 {{#concept "maximum" Disambiguation="binary, Dedekind real numbers" Agda=max-ℝ WD="maximum" WDID=Q10578722}}
 of two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) `x` and
-`y` is a Dedekind real number with lower cut equal to the union of `x` and `y`'s
-lower cuts, and upper cut equal to the intersection of their upper cuts.
+`y` is the Dedekind real number `max-ℝ x y` with lower cut equal to the union of
+`x` and `y`'s lower cuts, and upper cut equal to the intersection of their upper
+cuts.
+
+For any `x : ℝ`, `max-ℝ x` is a
+[short function](metric-spaces.short-functions-metric-spaces.md) `ℝ → ℝ` for the
+[standard real metric structure](real-numbers.metric-space-of-real-numbers.md).
+Moreover, the map `x ↦ max-ℝ x` is a short function from `ℝ` into the
+[metric space of short functions](metric-spaces.metric-space-of-short-functions-metric-spaces.md)
+of `ℝ`.
 
 ## Definition
 
