@@ -394,7 +394,3 @@ natural-inclusion-equiv-complement-isolated-element :
   ( map-equiv e ∘ inclusion-complement-isolated-element x)
 natural-inclusion-equiv-complement-isolated-element e x y p (x' , f) = refl
 ```
-
-## See also
-
-- [Extremally isolated elements](foundation.extremally-isolated-elements.md)
