@@ -33,7 +33,7 @@ _Noninjectivity_ is a positive way of stating that a map is
 [not](foundation.negation.md) [injective](foundation-core.injective-maps.md). A
 map `f : A → B` is
 {{#concept "noninjective" Disambiguation="map of types" Agda=is-noninjective}}
-if there [exists](foundation.existential-quantifications.md) a
+if there [exists](foundation.existential-quantification.md) a
 [pair of distinct elements](foundation.pairs-of-distinct-elements.md) `x ≠ y` of
 `A` that are mapped to the [same](foundation-core.identity-types.md) value in
 `B`, `f x ＝ f y`. In other words, if `f`

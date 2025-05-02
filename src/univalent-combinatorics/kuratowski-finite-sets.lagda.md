@@ -97,8 +97,10 @@ has-decidable-equality-is-finite-type-Kuratowski-Finite-Set X =
 
 - [Finite types](univalent-combinatorics.finite-types.md)
 - [Dedekind finite sets](univalent-combinatorics.dedekind-finite-sets.md)
-- In [`univalent-combinatorics.surjective-maps`] it is shown that if a
-  Kuratowski finite set has decidable equality then it is finite.
+- In
+  [`univalent-combinatorics.surjective-maps`](univalent-combinatorics.surjective-maps.md)
+  it is shown that if a Kuratowski finite set has decidable equality then it is
+  finite.
 
 ## External links
 

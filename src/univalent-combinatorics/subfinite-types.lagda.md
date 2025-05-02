@@ -287,13 +287,6 @@ module _
       ( dedekind-finite-type-Subfinite-Type Y)
 ```
 
-## See also
-
-- [Finite types](univalent-combinatorics.finite-types.md)
-- [Dedekind finite sets](univalent-combinatorics.dedekind-finite-sets.md)
-- In [`univalent-combinatorics.surjective-maps`] it is shown that if a
-  Kuratowski finite set has decidable equality, then it is in fact finite.
-
 ## External links
 
 - [Finiteness in Sheaf Topoi](https://grossack.site/2024/08/19/finiteness-in-sheaf-topoi),

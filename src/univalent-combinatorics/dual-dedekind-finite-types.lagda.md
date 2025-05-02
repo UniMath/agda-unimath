@@ -146,7 +146,7 @@ module _
 
 ## See also
 
-- [Dedekind finite types](univalent-combinatorics.Dedekind-finite-types.md)
+- [Dedekind finite types](univalent-combinatorics.dedekind-finite-types.md)
 
 ## External links
 
