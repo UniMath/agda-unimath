@@ -43,8 +43,9 @@ open import univalent-combinatorics.standard-finite-types
 
 If `f : X → Y` is an [injective map](foundation-core.injective-maps.md) between
 [finite types](univalent-combinatorics.finite-types.md) `X` and `Y` with `k` and
-`l` elements, then `k ≤ l`. Conversely, if `l < k`, then no map `f : X → Y` is
-injective.
+`l` elements, then `k ≤ l`. Conversely, if `l < k`, then every map `f : X → Y`
+[repeats a value](foundation.repetitions-of-values.md), and hence is
+[noninjective](foundation.noninjective-maps.md).
 
 ## Theorems
 
@@ -56,7 +57,7 @@ injective.
 leq-emb-Fin :
   (k l : ℕ) → Fin k ↪ Fin l → k ≤-ℕ l
 leq-emb-Fin 0 0 f = refl-leq-ℕ 0
-leq-emb-Fin (succ-ℕ k) 0 f = ex-falso (map-emb f (inr star))
+leq-emb-Fin (succ-ℕ k) 0 f = map-emb f (inr star)
 leq-emb-Fin 0 (succ-ℕ l) f = leq-zero-ℕ (succ-ℕ l)
 leq-emb-Fin (succ-ℕ k) (succ-ℕ l) f = leq-emb-Fin k l (reduce-emb-Fin k l f)
 
@@ -78,7 +79,7 @@ leq-is-injective-Fin k l H =
 
 ```agda
 is-not-emb-le-Fin :
-  (k l : ℕ) (f : Fin k → Fin l) → le-ℕ l k → ¬ (is-emb f)
+  (k l : ℕ) (f : Fin k → Fin l) → l <-ℕ k → ¬ (is-emb f)
 is-not-emb-le-Fin k l f p =
   map-neg (leq-is-emb-Fin k l) (contradiction-le-ℕ l k p)
 ```
@@ -87,7 +88,7 @@ is-not-emb-le-Fin k l f p =
 
 ```agda
 is-not-injective-le-Fin :
-  (k l : ℕ) (f : Fin k → Fin l) → le-ℕ l k → is-not-injective f
+  (k l : ℕ) (f : Fin k → Fin l) → l <-ℕ k → is-not-injective f
 is-not-injective-le-Fin k l f p =
   map-neg (is-emb-is-injective (is-set-Fin l)) (is-not-emb-le-Fin k l f p)
 ```
@@ -116,7 +117,7 @@ no-embedding-ℕ-Fin k e =
 
 ```agda
 module _
-  (k l : ℕ) (f : Fin k → Fin l) (p : le-ℕ l k)
+  (k l : ℕ) (f : Fin k → Fin l) (p : l <-ℕ k)
   where
 
   repetition-of-values-le-Fin : repetition-of-values f
@@ -152,10 +153,18 @@ module _
     is-repetition-of-values-repetition-of-values f
       repetition-of-values-le-Fin
 
+  is-noninjective-le-Fin : is-noninjective f
+  is-noninjective-le-Fin = unit-trunc-Prop repetition-of-values-le-Fin
+
 repetition-of-values-Fin-succ-to-Fin :
   (k : ℕ) (f : Fin (succ-ℕ k) → Fin k) → repetition-of-values f
 repetition-of-values-Fin-succ-to-Fin k f =
   repetition-of-values-le-Fin (succ-ℕ k) k f (succ-le-ℕ k)
+
+is-noninjective-Fin-succ-to-Fin :
+  (k : ℕ) (f : Fin (succ-ℕ k) → Fin k) → is-noninjective f
+is-noninjective-Fin-succ-to-Fin k f =
+  unit-trunc-Prop (repetition-of-values-Fin-succ-to-Fin k f)
 ```
 
 ### The pigeonhole principle for types equipped with a counting
@@ -181,7 +190,7 @@ module _
 
   leq-is-emb-count :
     {f : A → B} → is-emb f →
-    (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
+    number-of-elements-count eA ≤-ℕ number-of-elements-count eB
   leq-is-emb-count {f} H = leq-emb-count (f , H)
 ```
 
@@ -190,7 +199,7 @@ module _
 ```agda
   leq-is-injective-count :
     {f : A → B} → is-injective f →
-    (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
+    number-of-elements-count eA ≤-ℕ number-of-elements-count eB
   leq-is-injective-count H =
     leq-is-emb-count (is-emb-is-injective (is-set-count eB) H)
 ```
@@ -200,7 +209,7 @@ module _
 ```agda
   is-not-emb-le-count :
     (f : A → B) →
-    le-ℕ (number-of-elements-count eB) (number-of-elements-count eA) →
+    number-of-elements-count eB <-ℕ number-of-elements-count eA →
     ¬ (is-emb f)
   is-not-emb-le-count f p H =
     is-not-emb-le-Fin
@@ -213,7 +222,7 @@ module _
     h : Fin (number-of-elements-count eA) ↪ Fin (number-of-elements-count eB)
     h = comp-emb
         ( emb-equiv (inv-equiv-count eB))
-          ( comp-emb (f , H) (emb-equiv (equiv-count eA)))
+        ( comp-emb (f , H) (emb-equiv (equiv-count eA)))
 ```
 
 #### There is no injective map `A → B` between types equipped with a counting if the number of elements of `B` is strictly less than the number of elements of `A`
@@ -221,7 +230,7 @@ module _
 ```agda
   is-not-injective-le-count :
     (f : A → B) →
-    le-ℕ (number-of-elements-count eB) (number-of-elements-count eA) →
+    number-of-elements-count eB <-ℕ number-of-elements-count eA →
     is-not-injective f
   is-not-injective-le-count f p H =
     is-not-emb-le-count f p (is-emb-is-injective (is-set-count eB) H)
@@ -231,11 +240,11 @@ module _
 
 ```agda
 no-embedding-ℕ-count :
-  {l : Level} {A : UU l} (e : count A) → ¬ (ℕ ↪ A)
+  {l : Level} {A : UU l} → count A → ¬ (ℕ ↪ A)
 no-embedding-ℕ-count e f =
   no-embedding-ℕ-Fin
-  ( number-of-elements-count e)
-  ( comp-emb (emb-equiv (inv-equiv-count e)) f)
+    ( number-of-elements-count e)
+    ( comp-emb (emb-equiv (inv-equiv-count e)) f)
 ```
 
 #### For any map `f : A → B` between types equipped with a counting, if `|A| < |B|` then we construct a pair of distinct elements of `A` on which `f` assumes the same value
@@ -244,13 +253,13 @@ no-embedding-ℕ-count e f =
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (eA : count A) (eB : count B)
   (f : A → B)
-  (p : le-ℕ (number-of-elements-count eB) (number-of-elements-count eA))
+  (p : number-of-elements-count eB <-ℕ number-of-elements-count eA)
   where
 
   repetition-of-values-le-count : repetition-of-values f
   repetition-of-values-le-count =
     map-equiv-repetition-of-values
-      ( (map-inv-equiv-count eB ∘ f) ∘ (map-equiv-count eA))
+      ( map-inv-equiv-count eB ∘ f ∘ map-equiv-count eA)
       ( f)
       ( equiv-count eA)
       ( equiv-count eB)
@@ -303,25 +312,25 @@ module _
 ```agda
   leq-emb-is-finite :
     (A ↪ B) →
-    (number-of-elements-is-finite H) ≤-ℕ (number-of-elements-is-finite K)
+    number-of-elements-is-finite H ≤-ℕ number-of-elements-is-finite K
   leq-emb-is-finite f =
-    apply-universal-property-trunc-Prop H P
-      ( λ eA →
-        apply-universal-property-trunc-Prop K P
-          ( λ eB →
-            concatenate-eq-leq-eq-ℕ
-              ( inv (compute-number-of-elements-is-finite eA H))
-              ( leq-emb-count eA eB f)
-              ( compute-number-of-elements-is-finite eB K)))
-    where
-    P : Prop lzero
-    P = leq-ℕ-Prop
-        ( number-of-elements-is-finite H)
-          ( number-of-elements-is-finite K)
+    let
+    open
+      do-syntax-trunc-Prop
+        ( leq-ℕ-Prop
+          ( number-of-elements-is-finite H)
+          ( number-of-elements-is-finite K))
+    in do
+    eA ← H
+    eB ← K
+    concatenate-eq-leq-eq-ℕ
+      ( inv (compute-number-of-elements-is-finite eA H))
+      ( leq-emb-count eA eB f)
+      ( compute-number-of-elements-is-finite eB K)
 
   leq-is-emb-is-finite :
     {f : A → B} → is-emb f →
-    (number-of-elements-is-finite H) ≤-ℕ (number-of-elements-is-finite K)
+    number-of-elements-is-finite H ≤-ℕ number-of-elements-is-finite K
   leq-is-emb-is-finite {f} H = leq-emb-is-finite (f , H)
 ```
 
@@ -330,7 +339,7 @@ module _
 ```agda
   leq-is-injective-is-finite :
     {f : A → B} → is-injective f →
-    (number-of-elements-is-finite H) ≤-ℕ (number-of-elements-is-finite K)
+    number-of-elements-is-finite H ≤-ℕ number-of-elements-is-finite K
   leq-is-injective-is-finite I =
     leq-is-emb-is-finite (is-emb-is-injective (is-set-is-finite K) I)
 ```
@@ -340,7 +349,7 @@ module _
 ```agda
   is-not-emb-le-is-finite :
     (f : A → B) →
-    le-ℕ (number-of-elements-is-finite K) (number-of-elements-is-finite H) →
+    number-of-elements-is-finite K <-ℕ number-of-elements-is-finite H →
     ¬ (is-emb f)
   is-not-emb-le-is-finite f p E =
     let open do-syntax-trunc-Prop empty-Prop
@@ -360,7 +369,7 @@ module _
 ```agda
   is-not-injective-le-is-finite :
     (f : A → B) →
-    le-ℕ (number-of-elements-is-finite K) (number-of-elements-is-finite H) →
+    number-of-elements-is-finite K <-ℕ number-of-elements-is-finite H →
     is-not-injective f
   is-not-injective-le-is-finite f p I =
     is-not-emb-le-is-finite f p (is-emb-is-injective (is-set-is-finite K) I)
