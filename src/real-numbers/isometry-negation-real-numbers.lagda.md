@@ -117,5 +117,5 @@ module _
     isometry-Metric-Space
       ( metric-space-leq-ℝ l1)
       ( metric-space-leq-ℝ l1)
-  isometry-neg-ℝ = neg-ℝ , is-isometry-neg-ℝ
+  isometry-neg-ℝ = (neg-ℝ , is-isometry-neg-ℝ)
 ```

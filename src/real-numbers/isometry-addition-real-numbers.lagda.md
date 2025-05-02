@@ -95,7 +95,7 @@ module _
     isometry-Metric-Space
       ( metric-space-leq-ℝ l2)
       ( metric-space-leq-ℝ (l1 ⊔ l2))
-  isometry-left-add-ℝ = add-ℝ x , is-isometry-left-add-ℝ
+  isometry-left-add-ℝ = (add-ℝ x , is-isometry-left-add-ℝ)
 ```
 
 ### Addition is an isometry from `ℝ` to the metric space of isometries `ℝ → ℝ`
@@ -151,5 +151,5 @@ module _
       ( metric-space-of-isometries-Metric-Space
         ( metric-space-leq-ℝ l2)
         ( metric-space-leq-ℝ (l1 ⊔ l2)))
-  isometry-add-ℝ = isometry-left-add-ℝ , is-isometry-isometry-left-add-ℝ
+  isometry-add-ℝ = (isometry-left-add-ℝ , is-isometry-isometry-left-add-ℝ)
 ```
