@@ -41,11 +41,14 @@ open import metric-spaces.uniformly-continuous-functions-premetric-spaces
 
 ## Idea
 
-A map `f : A → B` between [premetric spaces](metric-spaces.premetric-spaces.md)
-is a {{#concept "Lipschitz function" Disambiguation="between premetric spaces"}}
-if there exists some `α : ℚ⁺` such that for any `x y :A`, if `d` is an upper
-bound of the distance between `x` and `y` in `A`, `α d` is an upper bound on the
-distance between `f x` and `f y` in `B`.
+A positive rational `α : ℚ⁺` is a
+{{#concept "Lipschitz constant" Disambiguation="of a function between premetric spaces" Agda=lipschitz-constant-function-Premetric-Space}}
+of a [function](metric-spaces.functions-metric-spaces.md) `f : A → B` between
+[premetric spaces](metric-spaces.premetric-spaces.md) if for any `x y : A`, if
+`d` is an upper bound of the distance between `x` and `y` in `A`, `α * d` is an
+upper bound on the distance between `f x` and `f y` in `B`. A function which
+admits a Lipschitz constant is called a
+{{#concept "Lipschitz function" Disambiguation="between premetric spaces" WD="Lipschitz function" WDID=Q652707 Agda=is-lipschitz-function-Premetric-Space}}.
 
 ## Definitions
 
