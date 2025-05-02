@@ -43,7 +43,9 @@ The
 {{#concept "absolute value" Disambiguation="of a real number" Agda=abs-ℝ WD="absolute value" WDID=Q120812}}
 of a [real number](real-numbers.dedekind-real-numbers.md) is the
 [maximum](real-numbers.maximum-real-numbers.md) of it and its
-[negation](real-numbers.negation-real-numbers.md).
+[negation](real-numbers.negation-real-numbers.md). The absolute value is a
+[short function](metric-spaces.short-functions-metric-spaces.md) of the
+[metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).
 
 ```agda
 opaque
