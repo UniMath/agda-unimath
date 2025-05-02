@@ -174,7 +174,7 @@ pr2 metric-space-leq-ℚ = is-metric-premetric-leq-ℚ
 
 ## Properties
 
-### The standard saturated metric space of rationa numbers is saturated
+### The standard saturated metric space of rational numbers is saturated
 
 ```agda
 is-saturated-metric-space-leq-ℚ :
