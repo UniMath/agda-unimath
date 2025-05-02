@@ -31,7 +31,7 @@ open import real-numbers.strict-inequality-real-numbers
 ## Idea
 
 For any `a : ℝ`, [addition](real-numbers.addition-real-numbers.md) by `a` is an
-[isometry](metric-spaces.isometries-metric-spaces,.md) `ℝ → ℝ` for the
+[isometry](metric-spaces.isometries-metric-spaces.md) `ℝ → ℝ` for the
 [standard real metric structure](real-numbers.metric-space-of-real-numbers.md).
 Moreover, the map `x ↦ add-ℝ x` is an isometry from `ℝ` into the
 [metric space of isometries](metric-spaces.metric-space-of-isometries-metric-spaces.md)
