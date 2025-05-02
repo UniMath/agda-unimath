@@ -47,6 +47,7 @@ open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers
 ```
 
 </details>
@@ -275,33 +276,14 @@ real-bound-is-in-lower-neighborhhod-leq-ℝ :
   {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
   is-in-lower-neighborhood-leq-ℝ d x y →
   leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d))
-real-bound-is-in-lower-neighborhhod-leq-ℝ d⁺@(d , _) x y H r I =
-  is-in-lower-cut-le-real-ℚ
-    ( r)
-    ( x +ℝ real-ℚ d)
-    ( le-transpose-left-diff-ℝ
-      ( real-ℚ r)
-      ( real-ℚ d)
-      ( x)
-      ( inv-tr
-        ( λ z → le-ℝ z x)
-        ( diff-real-ℚ r d)
-        ( le-real-is-in-lower-cut-ℚ
-          ( r -ℚ d)
-          ( x)
-          ( H
-            ( r -ℚ d)
-            ( inv-tr
-              ( is-in-lower-cut-ℝ y)
-              ( ( associative-add-ℚ
-                  ( r)
-                  ( neg-ℚ d)
-                  ( d)) ∙
-                ( ap
-                  ( add-ℚ r)
-                  ( left-inverse-law-add-ℚ d)) ∙
-                ( right-unit-law-add-ℚ r))
-            ( I))))))
+real-bound-is-in-lower-neighborhhod-leq-ℝ d⁺@(d , _) x y H r =
+  ( transpose-diff-is-in-lower-cut-ℝ x r d) ∘
+  ( H (r -ℚ d)) ∘
+  ( inv-tr
+    ( is-in-lower-cut-ℝ y)
+    ( ( associative-add-ℚ r (neg-ℚ d) d) ∙
+      ( ap (add-ℚ r) (left-inverse-law-add-ℚ d)) ∙
+      ( right-unit-law-add-ℚ r)))
 
 module _
   {l : Level} (d : ℚ⁺) (x y : ℝ l)
