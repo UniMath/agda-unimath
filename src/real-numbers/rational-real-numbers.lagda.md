@@ -84,6 +84,13 @@ zero-ℝ : ℝ lzero
 zero-ℝ = real-ℚ zero-ℚ
 ```
 
+### One as a real number
+
+```agda
+one-ℝ : ℝ lzero
+one-ℝ = real-ℚ one-ℚ
+```
+
 ### The property of being a rational real number
 
 ```agda
