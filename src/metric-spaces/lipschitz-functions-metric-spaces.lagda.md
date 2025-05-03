@@ -123,7 +123,31 @@ module _
 
 ### Short functions are Lipschitz functions with Lipschitz constant equal to 1
 
-TODO
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : map-type-Metric-Space A B)
+  where
+
+  is-one-lipschitz-constant-is-short-function-Metric-Space :
+    is-short-function-Metric-Space A B f →
+    is-lipschitz-constant-function-Metric-Space A B f one-ℚ⁺
+  is-one-lipschitz-constant-is-short-function-Metric-Space H d x y Nxy =
+    inv-tr
+      ( is-upper-bound-dist-Metric-Space B (f x) (f y))
+      ( left-unit-law-mul-ℚ⁺ d)
+      ( H d x y Nxy)
+
+  is-short-is-one-lipshitz-constant-function-Metric-Space :
+    is-lipschitz-constant-function-Metric-Space A B f one-ℚ⁺ →
+    is-short-function-Metric-Space A B f
+  is-short-is-one-lipshitz-constant-function-Metric-Space L d x y Nxy =
+    tr
+      ( is-upper-bound-dist-Metric-Space B (f x) (f y))
+      ( left-unit-law-mul-ℚ⁺ d)
+      ( L d x y Nxy)
+```
 
 ### Lipschitz functions are uniformly continuous
 
