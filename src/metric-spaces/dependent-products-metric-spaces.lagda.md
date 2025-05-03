@@ -127,11 +127,11 @@ module _
   {l l1 l2 : Level} (A : UU l) (P : A → Metric-Space l1 l2) (a : A)
   where
 
-  is-short-eval-Π-Metric-Space :
+  is-short-ev-Π-Metric-Space :
     is-short-function-Metric-Space
       ( Π-Metric-Space A P)
       ( P a)
-      ( λ f → f a)
+      ( ev a)
   is-short-eval-Π-Metric-Space ε x y H = H a
 
   short-eval-Π-Metric-Space :
