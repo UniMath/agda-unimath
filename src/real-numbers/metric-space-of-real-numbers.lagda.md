@@ -277,7 +277,7 @@ real-bound-is-in-lower-neighborhood-leq-ℝ :
   {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
   is-in-lower-neighborhood-leq-ℝ d x y →
   leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d))
-real-bound-is-in-lower-neighborhhod-leq-ℝ (d , _) x y H r =
+real-bound-is-in-lower-neighborhood-leq-ℝ (d , _) x y H r =
   ( transpose-diff-is-in-lower-cut-ℝ x r d) ∘
   ( H (r -ℚ d)) ∘
   ( inv-tr
@@ -302,13 +302,13 @@ module _
     is-in-neighborhood-leq-ℝ l d x y →
     leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d))
   left-real-bound-neighborhood-leq-ℝ (_ , K) =
-    real-bound-is-in-lower-neighborhhod-leq-ℝ d y x K
+    real-bound-is-in-lower-neighborhood-leq-ℝ d y x K
 
   right-real-bound-neighborhood-leq-ℝ :
     is-in-neighborhood-leq-ℝ l d x y →
     leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d))
   right-real-bound-neighborhood-leq-ℝ (H , _) =
-    real-bound-is-in-lower-neighborhhod-leq-ℝ d x y H
+    real-bound-is-in-lower-neighborhood-leq-ℝ d x y H
 ```
 
 ### The canonical embedding from rational to real numbers is an isometry between metric spaces

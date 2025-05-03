@@ -8,6 +8,7 @@ module metric-spaces.dependent-products-metric-spaces where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.evaluation-functions
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.propositions
@@ -132,13 +133,13 @@ module _
       ( Π-Metric-Space A P)
       ( P a)
       ( ev a)
-  is-short-eval-Π-Metric-Space ε x y H = H a
+  is-short-ev-Π-Metric-Space ε x y H = H a
 
-  short-eval-Π-Metric-Space :
+  short-ev-Π-Metric-Space :
     short-function-Metric-Space
       ( Π-Metric-Space A P)
       ( P a)
-  short-eval-Π-Metric-Space = (λ f → f a) , (is-short-eval-Π-Metric-Space)
+  short-ev-Π-Metric-Space = (ev a) , (is-short-ev-Π-Metric-Space)
 ```
 
 ### Dependent products of saturated metric spaces are saturated
@@ -163,13 +164,13 @@ module _
   (f : cauchy-approximation-Metric-Space (Π-Metric-Space A P))
   where
 
-  eval-cauchy-approximation-Π-Metric-Space :
+  ev-cauchy-approximation-Π-Metric-Space :
     (x : A) → cauchy-approximation-Metric-Space (P x)
-  eval-cauchy-approximation-Π-Metric-Space x =
+  ev-cauchy-approximation-Π-Metric-Space x =
     map-short-function-cauchy-approximation-Metric-Space
       ( Π-Metric-Space A P)
       ( P x)
-      ( short-eval-Π-Metric-Space A P x)
+      ( short-ev-Π-Metric-Space A P x)
       ( f)
 ```
 
@@ -190,7 +191,7 @@ module _
     (x : A) →
     is-limit-cauchy-approximation-Metric-Space
       ( P x)
-      ( eval-cauchy-approximation-Π-Metric-Space A P f x)
+      ( ev-cauchy-approximation-Π-Metric-Space A P f x)
       ( g x)
   is-pointwise-limit-is-limit-cauchy-approximation-Π-Metric-Space L x ε δ =
     L ε δ x
@@ -199,7 +200,7 @@ module _
     ( (x : A) →
       is-limit-cauchy-approximation-Metric-Space
         ( P x)
-        ( eval-cauchy-approximation-Π-Metric-Space A P f x)
+        ( ev-cauchy-approximation-Π-Metric-Space A P f x)
         ( g x)) →
     is-limit-cauchy-approximation-Metric-Space
       ( Π-Metric-Space A P)
@@ -223,7 +224,7 @@ module _
   limit-cauchy-approximation-Π-is-complete-Metric-Space u x =
     limit-cauchy-approximation-Complete-Metric-Space
       ( P x , Π-complete x)
-      ( eval-cauchy-approximation-Π-Metric-Space A P u x)
+      ( ev-cauchy-approximation-Π-Metric-Space A P u x)
 
   is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space :
     (u : cauchy-approximation-Metric-Space (Π-Metric-Space A P)) →
@@ -234,13 +235,13 @@ module _
   is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space u ε δ x =
     is-limit-limit-cauchy-approximation-Complete-Metric-Space
       ( P x , Π-complete x)
-      ( eval-cauchy-approximation-Π-Metric-Space A P u x)
+      ( ev-cauchy-approximation-Π-Metric-Space A P u x)
       ( ε)
       ( δ)
 
   is-complete-Π-Metric-Space :
     is-complete-Metric-Space (Π-Metric-Space A P)
-  is-complete-Π-is-complete-Metric-Space u =
+  is-complete-Π-Metric-Space u =
     limit-cauchy-approximation-Π-is-complete-Metric-Space u ,
     is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space u
 ```
@@ -256,7 +257,7 @@ module _
   pr1 Π-Complete-Metric-Space =
     Π-Metric-Space A (metric-space-Complete-Metric-Space ∘ C)
   pr2 Π-Complete-Metric-Space =
-    is-complete-Π-is-complete-Metric-Space
+    is-complete-Π-Metric-Space
       ( A)
       ( metric-space-Complete-Metric-Space ∘ C)
       ( is-complete-metric-space-Complete-Metric-Space ∘ C)

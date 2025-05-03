@@ -59,10 +59,10 @@ module _
   ( x : type-Metric-Space A)
   where
 
-  eval-cauchy-approximation-function-Metric-Space :
+  ev-cauchy-approximation-function-Metric-Space :
     cauchy-approximation-Metric-Space B
-  eval-cauchy-approximation-function-Metric-Space =
-    eval-cauchy-approximation-Π-Metric-Space
+  ev-cauchy-approximation-function-Metric-Space =
+    ev-cauchy-approximation-Π-Metric-Space
       ( type-Metric-Space A)
       ( λ _ → B)
       ( f)
@@ -89,9 +89,9 @@ module _
     (x : type-Metric-Space A) →
     is-limit-cauchy-approximation-Metric-Space
       ( B)
-      ( eval-cauchy-approximation-function-Metric-Space A B f x)
+      ( ev-cauchy-approximation-function-Metric-Space A B f x)
       ( g x)
-  is-pointwise-limit-is-limit-cauchy-approxination-function-Metric-Space =
+  is-pointwise-limit-is-limit-cauchy-approximation-function-Metric-Space =
     is-pointwise-limit-is-limit-cauchy-approximation-Π-Metric-Space
       ( type-Metric-Space A)
       ( λ _ → B)
@@ -102,7 +102,7 @@ module _
     ( (x : type-Metric-Space A) →
       is-limit-cauchy-approximation-Metric-Space
         ( B)
-        ( eval-cauchy-approximation-function-Metric-Space A B f x)
+        ( ev-cauchy-approximation-function-Metric-Space A B f x)
         ( g x)) →
     is-limit-cauchy-approximation-Metric-Space
       ( metric-space-of-functions-Metric-Space A B)
