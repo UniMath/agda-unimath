@@ -24,7 +24,8 @@ open import metric-spaces.metric-spaces
 
 ## Idea
 
-[Functions](metric-spaces.functions-metric-spaces.md) between metric spaces
+[Functions](metric-spaces.functions-metric-spaces.md) between
+[metric spaces](metric-spaces.metric-spaces.md)
 inherit the
 [product metric structure](metric-spaces.dependent-products-metric-spaces.md) of
 their codomain. This defines the
