@@ -268,12 +268,12 @@ module _
       map-tot-exists (λ (qy , _) → map-product (ly⊆lx qy) id)
 
     preserves-sim-left-add-ℝ : sim-ℝ x y → sim-ℝ (z +ℝ x) (z +ℝ y)
-    preserves-sim-left-add-ℝ x≈y =
+    preserves-sim-left-add-ℝ x≍y =
       binary-tr
         ( sim-ℝ)
         ( commutative-add-ℝ x z)
         ( commutative-add-ℝ y z)
-        ( preserves-sim-right-add-ℝ x≈y)
+        ( preserves-sim-right-add-ℝ x≍y)
 ```
 
 ### Swapping laws for addition on real numbers

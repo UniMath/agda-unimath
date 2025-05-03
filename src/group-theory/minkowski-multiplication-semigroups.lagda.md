@@ -229,13 +229,13 @@ module _
     sim-subtype
       ( minkowski-mul-Semigroup G A B)
       ( minkowski-mul-Semigroup G A' B')
-  preserves-sim-minkowski-mul-Semigroup A≈A' B≈B' =
+  preserves-sim-minkowski-mul-Semigroup A≍A' B≍B' =
     transitive-sim-subtype
       ( minkowski-mul-Semigroup G A B)
       ( minkowski-mul-Semigroup G A B')
       ( minkowski-mul-Semigroup G A' B')
-      ( preserves-sim-left-minkowski-mul-Semigroup G B' A A' A≈A')
-      ( preserves-sim-right-minkowski-mul-Semigroup G A B B' B≈B')
+      ( preserves-sim-left-minkowski-mul-Semigroup G B' A A' A≍A')
+      ( preserves-sim-right-minkowski-mul-Semigroup G A B B' B≍B')
 ```
 
 ## External links
