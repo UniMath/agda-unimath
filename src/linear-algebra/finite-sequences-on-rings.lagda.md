@@ -36,7 +36,7 @@ open import ring-theory.rings
 
 Given a [ring](ring-theory.rings.md) `R`, the type `fin-sequence n R` of
 `R`-[finite sequences](lists.finite-sequences.md) is an
-[Abelian group](group-theory.abelian-groups.md).
+[abelian group](group-theory.abelian-groups.md).
 
 ## Definitions
 
