@@ -273,7 +273,7 @@ is-in-lower-neighborhood-real-bound-leq-ℝ d⁺@(d , _) x y y≤x+d q q+d<y =
           ( le-real-is-in-lower-cut-ℚ (q +ℚ d) y q+d<y)))
       ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
 
-real-bound-is-in-lower-neighborhhod-leq-ℝ :
+real-bound-is-in-lower-neighborhood-leq-ℝ :
   {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
   is-in-lower-neighborhood-leq-ℝ d x y →
   leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d))
