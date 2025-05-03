@@ -84,6 +84,13 @@ _≤-ℚ_ = leq-ℚ
 
 ## Properties
 
+### One is less than zero
+
+```agda
+leq-zero-one-ℚ : leq-ℚ zero-ℚ one-ℚ
+leq-zero-one-ℚ = leq-zero-one-ℤ
+```
+
 ### Inequality on the rational numbers is decidable
 
 ```agda
@@ -437,6 +444,17 @@ abstract
         ( leq-ℚ p)
         ( commutative-add-ℚ r q)
         ( leq-transpose-left-diff-ℚ p q r p-q≤r))
+```
+
+### A rational number is lesser than its successor
+
+```agda
+succ-leq-ℚ : (p : ℚ) → leq-ℚ p (succ-ℚ p)
+succ-leq-ℚ p =
+  tr
+    ( λ x → leq-ℚ x (one-ℚ +ℚ p))
+    ( left-unit-law-add-ℚ p)
+    ( preserves-leq-left-add-ℚ p zero-ℚ one-ℚ leq-zero-one-ℚ)
 ```
 
 ## See also

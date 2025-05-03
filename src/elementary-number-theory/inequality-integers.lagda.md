@@ -73,6 +73,13 @@ _≤-ℤ_ = leq-ℤ
 
 ## Properties
 
+### One is less than zero
+
+```agda
+leq-zero-one-ℤ : leq-ℤ zero-ℤ one-ℤ
+leq-zero-one-ℤ = star
+```
+
 ### Inequality on the integers is reflexive, antisymmetric and transitive
 
 ```agda
