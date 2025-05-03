@@ -53,8 +53,9 @@ module _
 module _
   { l1 l2 l1' l2' : Level}
   ( A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  ( f : cauchy-approximation-Metric-Space
-    ( metric-space-of-functions-Metric-Space A B))
+  ( f :
+    cauchy-approximation-Metric-Space
+      ( metric-space-of-functions-Metric-Space A B))
   ( x : type-Metric-Space A)
   where
 
