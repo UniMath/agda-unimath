@@ -101,22 +101,22 @@ module _
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   where
 
-  is-lipschitz-prop-function-Metric-Space :
+  is-lipschitz-function-prop-Metric-Space :
     map-type-Metric-Space A B → Prop (l1 ⊔ l2 ⊔ l2')
-  is-lipschitz-prop-function-Metric-Space f =
+  is-lipschitz-function-prop-Metric-Space f =
     is-inhabited-subtype-Prop
       (is-lipschitz-constant-prop-function-Metric-Space A B f)
 
   is-lipschitz-function-Metric-Space :
     map-type-Metric-Space A B → UU (l1 ⊔ l2 ⊔ l2')
   is-lipschitz-function-Metric-Space f =
-    type-Prop (is-lipschitz-prop-function-Metric-Space f)
+    type-Prop (is-lipschitz-function-prop-Metric-Space f)
 
   is-prop-is-lipschitz-function-Metric-Space :
     (f : map-type-Metric-Space A B) →
     is-prop (is-lipschitz-function-Metric-Space f)
   is-prop-is-lipschitz-function-Metric-Space f =
-    is-prop-type-Prop (is-lipschitz-prop-function-Metric-Space f)
+    is-prop-type-Prop (is-lipschitz-function-prop-Metric-Space f)
 ```
 
 ## Properties
@@ -222,10 +222,10 @@ module _
     is-lipschitz-function-Metric-Space A C (g ∘ f)
   comp-is-lipschitz-function-Metric-Space g f Hg Hf =
     rec-trunc-Prop
-      ( is-lipschitz-prop-function-Metric-Space A C (g ∘ f))
+      ( is-lipschitz-function-prop-Metric-Space A C (g ∘ f))
       ( λ (α , Lg) →
         rec-trunc-Prop
-          ( is-lipschitz-prop-function-Metric-Space A C (g ∘ f))
+          ( is-lipschitz-function-prop-Metric-Space A C (g ∘ f))
           ( λ (β , Lf) →
             unit-trunc-Prop
               ( ( α *ℚ⁺ β) ,
