@@ -49,7 +49,7 @@ of a [function](metric-spaces.functions-metric-spaces.md) `f : A → B` between
 an upper bound of the distance between `x` and `y` in `A`, `α * d` is an upper
 bound on the distance between `f x` and `f y` in `B`. A function which admits a
 Lipschitz constant is called a
-{{#concept "Lipschitz function" Disambiguation="between metric spaces" WD="Lipschitz function" WDID=Q652707 Agda=is-lipschitz-function-metric-Space}}.
+{{#concept "Lipschitz function" Disambiguation="between metric spaces" WD="Lipschitz function" WDID=Q652707 Agda=is-lipschitz-function-Metric-Space}}.
 
 ## Definitions
 
