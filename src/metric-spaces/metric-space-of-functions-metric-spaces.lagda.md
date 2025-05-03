@@ -27,7 +27,7 @@ open import metric-spaces.metric-spaces
 [Functions](metric-spaces.functions-metric-spaces.md) between metric spaces
 inherit the
 [product metric structure](metric-spaces.dependent-products-metric-spaces.md) of
-their codomain. This defines
+their codomain. This defines the
 {{#concept "metric space of functions between metric spaces" Agda=metric-space-of-functions-Metric-Space}}.
 
 ## Definitions
