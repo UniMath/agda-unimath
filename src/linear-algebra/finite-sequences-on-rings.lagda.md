@@ -45,26 +45,26 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  fin-sequence-Ring : ℕ → UU l
-  fin-sequence-Ring = fin-sequence (type-Ring R)
+  fin-sequence-type-Ring : ℕ → UU l
+  fin-sequence-type-Ring = fin-sequence (type-Ring R)
 
-  head-fin-sequence-Ring :
-    (n : ℕ) → fin-sequence-Ring (succ-ℕ n) → type-Ring R
-  head-fin-sequence-Ring n v = head-fin-sequence n v
+  head-fin-sequence-type-Ring :
+    (n : ℕ) → fin-sequence-type-Ring (succ-ℕ n) → type-Ring R
+  head-fin-sequence-type-Ring n v = head-fin-sequence n v
 
-  tail-fin-sequence-Ring :
-    (n : ℕ) → fin-sequence-Ring (succ-ℕ n) → fin-sequence-Ring n
-  tail-fin-sequence-Ring = tail-fin-sequence
+  tail-fin-sequence-type-Ring :
+    (n : ℕ) → fin-sequence-type-Ring (succ-ℕ n) → fin-sequence-type-Ring n
+  tail-fin-sequence-type-Ring = tail-fin-sequence
 
-  cons-fin-sequence-Ring :
+  cons-fin-sequence-type-Ring :
     (n : ℕ) → type-Ring R →
-    fin-sequence-Ring n → fin-sequence-Ring (succ-ℕ n)
-  cons-fin-sequence-Ring = cons-fin-sequence
+    fin-sequence-type-Ring n → fin-sequence-type-Ring (succ-ℕ n)
+  cons-fin-sequence-type-Ring = cons-fin-sequence
 
-  snoc-fin-sequence-Ring :
-    (n : ℕ) → fin-sequence-Ring n → type-Ring R →
-    fin-sequence-Ring (succ-ℕ n)
-  snoc-fin-sequence-Ring = snoc-fin-sequence
+  snoc-fin-sequence-type-Ring :
+    (n : ℕ) → fin-sequence-type-Ring n → type-Ring R →
+    fin-sequence-type-Ring (succ-ℕ n)
+  snoc-fin-sequence-type-Ring = snoc-fin-sequence
 ```
 
 ### Zero finite sequence on a ring
@@ -74,8 +74,8 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  zero-fin-sequence-Ring : (n : ℕ) → fin-sequence-Ring R n
-  zero-fin-sequence-Ring n i = zero-Ring R
+  zero-fin-sequence-type-Ring : (n : ℕ) → fin-sequence-type-Ring R n
+  zero-fin-sequence-type-Ring n i = zero-Ring R
 ```
 
 ### Pointwise addition of finite sequences on a ring
@@ -85,9 +85,9 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  add-fin-sequence-Ring :
-    (n : ℕ) (v w : fin-sequence-Ring R n) → fin-sequence-Ring R n
-  add-fin-sequence-Ring n = binary-map-fin-sequence n (add-Ring R)
+  add-fin-sequence-type-Ring :
+    (n : ℕ) (v w : fin-sequence-type-Ring R n) → fin-sequence-type-Ring R n
+  add-fin-sequence-type-Ring n = binary-map-fin-sequence n (add-Ring R)
 ```
 
 ### Pointwise negation of finite sequences on a ring
@@ -97,9 +97,9 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  neg-fin-sequence-Ring :
-    (n : ℕ) (v : fin-sequence-Ring R n) → fin-sequence-Ring R n
-  neg-fin-sequence-Ring n = map-fin-sequence n (neg-Ring R)
+  neg-fin-sequence-type-Ring :
+    (n : ℕ) (v : fin-sequence-type-Ring R n) → fin-sequence-type-Ring R n
+  neg-fin-sequence-type-Ring n = map-fin-sequence n (neg-Ring R)
 ```
 
 ## Properties of pointwise addition
@@ -111,12 +111,12 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  associative-add-fin-sequence-Ring :
-    (n : ℕ) (v1 v2 v3 : fin-sequence-Ring R n) →
-    ( add-fin-sequence-Ring R n (add-fin-sequence-Ring R n v1 v2) v3) ＝
-    ( add-fin-sequence-Ring R n v1 (add-fin-sequence-Ring R n v2 v3))
-  associative-add-fin-sequence-Ring =
-    associative-add-fin-sequence-Semiring (semiring-Ring R)
+  associative-add-fin-sequence-type-Ring :
+    (n : ℕ) (v1 v2 v3 : fin-sequence-type-Ring R n) →
+    ( add-fin-sequence-type-Ring R n (add-fin-sequence-type-Ring R n v1 v2) v3) ＝
+    ( add-fin-sequence-type-Ring R n v1 (add-fin-sequence-type-Ring R n v2 v3))
+  associative-add-fin-sequence-type-Ring =
+    associative-add-fin-sequence-type-Semiring (semiring-Ring R)
 ```
 
 ### Unit laws
@@ -126,17 +126,17 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  left-unit-law-add-fin-sequence-Ring :
-    (n : ℕ) (v : fin-sequence-Ring R n) →
-    add-fin-sequence-Ring R n (zero-fin-sequence-Ring R n) v ＝ v
-  left-unit-law-add-fin-sequence-Ring =
-    left-unit-law-add-fin-sequence-Semiring (semiring-Ring R)
+  left-unit-law-add-fin-sequence-type-Ring :
+    (n : ℕ) (v : fin-sequence-type-Ring R n) →
+    add-fin-sequence-type-Ring R n (zero-fin-sequence-type-Ring R n) v ＝ v
+  left-unit-law-add-fin-sequence-type-Ring =
+    left-unit-law-add-fin-sequence-type-Semiring (semiring-Ring R)
 
-  right-unit-law-add-fin-sequence-Ring :
-    (n : ℕ) (v : fin-sequence-Ring R n) →
-    add-fin-sequence-Ring R n v (zero-fin-sequence-Ring R n) ＝ v
-  right-unit-law-add-fin-sequence-Ring =
-    right-unit-law-add-fin-sequence-Semiring (semiring-Ring R)
+  right-unit-law-add-fin-sequence-type-Ring :
+    (n : ℕ) (v : fin-sequence-type-Ring R n) →
+    add-fin-sequence-type-Ring R n v (zero-fin-sequence-type-Ring R n) ＝ v
+  right-unit-law-add-fin-sequence-type-Ring =
+    right-unit-law-add-fin-sequence-type-Semiring (semiring-Ring R)
 ```
 
 ### Commutativity
@@ -146,11 +146,11 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  commutative-add-fin-sequence-Ring :
-    (n : ℕ) (v w : fin-sequence-Ring R n) →
-    add-fin-sequence-Ring R n v w ＝ add-fin-sequence-Ring R n w v
-  commutative-add-fin-sequence-Ring =
-    commutative-add-fin-sequence-Semiring (semiring-Ring R)
+  commutative-add-fin-sequence-type-Ring :
+    (n : ℕ) (v w : fin-sequence-type-Ring R n) →
+    add-fin-sequence-type-Ring R n v w ＝ add-fin-sequence-type-Ring R n w v
+  commutative-add-fin-sequence-type-Ring =
+    commutative-add-fin-sequence-type-Semiring (semiring-Ring R)
 ```
 
 ### Inverse laws
@@ -160,18 +160,18 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  left-inverse-law-add-fin-sequence-Ring :
-    (n : ℕ) (v : fin-sequence-Ring R n) →
-    add-fin-sequence-Ring R n (neg-fin-sequence-Ring R n v) v ＝
-    zero-fin-sequence-Ring R n
-  left-inverse-law-add-fin-sequence-Ring n v =
+  left-inverse-law-add-fin-sequence-type-Ring :
+    (n : ℕ) (v : fin-sequence-type-Ring R n) →
+    add-fin-sequence-type-Ring R n (neg-fin-sequence-type-Ring R n v) v ＝
+    zero-fin-sequence-type-Ring R n
+  left-inverse-law-add-fin-sequence-type-Ring n v =
     eq-htpy (λ i → left-inverse-law-add-Ring R _)
 
-  right-inverse-law-add-fin-sequence-Ring :
-    (n : ℕ) (v : fin-sequence-Ring R n) →
-    add-fin-sequence-Ring R n v (neg-fin-sequence-Ring R n v) ＝
-    zero-fin-sequence-Ring R n
-  right-inverse-law-add-fin-sequence-Ring n v =
+  right-inverse-law-add-fin-sequence-type-Ring :
+    (n : ℕ) (v : fin-sequence-type-Ring R n) →
+    add-fin-sequence-type-Ring R n v (neg-fin-sequence-type-Ring R n v) ＝
+    zero-fin-sequence-type-Ring R n
+  right-inverse-law-add-fin-sequence-type-Ring n v =
     eq-htpy (λ i → right-inverse-law-add-Ring R _)
 ```
 
@@ -182,36 +182,36 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  fin-sequence-Ring-Semigroup : ℕ → Semigroup l
-  fin-sequence-Ring-Semigroup =
-    fin-sequence-Semiring-Semigroup (semiring-Ring R)
+  semigroup-fin-sequence-type-Ring : ℕ → Semigroup l
+  semigroup-fin-sequence-type-Ring =
+    semigroup-fin-sequence-type-Semiring (semiring-Ring R)
 
-  fin-sequence-Ring-Monoid : ℕ → Monoid l
-  fin-sequence-Ring-Monoid =
-    fin-sequence-Semiring-Monoid (semiring-Ring R)
+  monoid-fin-sequence-type-Ring : ℕ → Monoid l
+  monoid-fin-sequence-type-Ring =
+    monoid-fin-sequence-type-Semiring (semiring-Ring R)
 
-  fin-sequence-Ring-Commutative-Monoid : ℕ → Commutative-Monoid l
-  fin-sequence-Ring-Commutative-Monoid =
-    fin-sequence-Semiring-Commutative-Monoid (semiring-Ring R)
+  commutative-monoid-fin-sequence-type-Ring : ℕ → Commutative-Monoid l
+  commutative-monoid-fin-sequence-type-Ring =
+    commutative-monoid-fin-sequence-type-Semiring (semiring-Ring R)
 
-  is-unital-fin-sequence-Ring :
-    (n : ℕ) → is-unital (add-fin-sequence-Ring R n)
-  is-unital-fin-sequence-Ring n = is-unital-Monoid (fin-sequence-Ring-Monoid n)
+  is-unital-fin-sequence-type-Ring :
+    (n : ℕ) → is-unital (add-fin-sequence-type-Ring R n)
+  is-unital-fin-sequence-type-Ring n = is-unital-Monoid (monoid-fin-sequence-type-Ring n)
 
-  is-group-fin-sequence-Ring :
-    (n : ℕ) → is-group-Semigroup (fin-sequence-Ring-Semigroup n)
-  pr1 (is-group-fin-sequence-Ring n) = is-unital-fin-sequence-Ring n
-  pr1 (pr2 (is-group-fin-sequence-Ring n)) = neg-fin-sequence-Ring R n
-  pr1 (pr2 (pr2 (is-group-fin-sequence-Ring n))) =
-    left-inverse-law-add-fin-sequence-Ring R n
-  pr2 (pr2 (pr2 (is-group-fin-sequence-Ring n))) =
-    right-inverse-law-add-fin-sequence-Ring R n
+  is-group-fin-sequence-type-Ring :
+    (n : ℕ) → is-group-Semigroup (semigroup-fin-sequence-type-Ring n)
+  pr1 (is-group-fin-sequence-type-Ring n) = is-unital-fin-sequence-type-Ring n
+  pr1 (pr2 (is-group-fin-sequence-type-Ring n)) = neg-fin-sequence-type-Ring R n
+  pr1 (pr2 (pr2 (is-group-fin-sequence-type-Ring n))) =
+    left-inverse-law-add-fin-sequence-type-Ring R n
+  pr2 (pr2 (pr2 (is-group-fin-sequence-type-Ring n))) =
+    right-inverse-law-add-fin-sequence-type-Ring R n
 
-  fin-sequence-Ring-Group : ℕ → Group l
-  pr1 (fin-sequence-Ring-Group n) = fin-sequence-Ring-Semigroup n
-  pr2 (fin-sequence-Ring-Group n) = is-group-fin-sequence-Ring n
+  group-fin-sequence-type-Ring : ℕ → Group l
+  pr1 (group-fin-sequence-type-Ring n) = semigroup-fin-sequence-type-Ring n
+  pr2 (group-fin-sequence-type-Ring n) = is-group-fin-sequence-type-Ring n
 
-  fin-sequence-Ring-Ab : ℕ → Ab l
-  pr1 (fin-sequence-Ring-Ab n) = fin-sequence-Ring-Group n
-  pr2 (fin-sequence-Ring-Ab n) = commutative-add-fin-sequence-Ring R n
+  ab-fin-sequence-type-Ring : ℕ → Ab l
+  pr1 (ab-fin-sequence-type-Ring n) = group-fin-sequence-type-Ring n
+  pr2 (ab-fin-sequence-type-Ring n) = commutative-add-fin-sequence-type-Ring R n
 ```

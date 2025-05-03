@@ -41,7 +41,7 @@ The sum operation extends the binary addition operation on a semiring `R` to any
 ```agda
 sum-Semiring :
   {l : Level} (R : Semiring l) (n : ℕ) →
-  (fin-sequence-Semiring R n) → type-Semiring R
+  (fin-sequence-type-Semiring R n) → type-Semiring R
 sum-Semiring R zero-ℕ f = zero-Semiring R
 sum-Semiring R (succ-ℕ n) f =
   add-Semiring R
@@ -59,13 +59,13 @@ module _
   where
 
   sum-one-element-Semiring :
-    (f : fin-sequence-Semiring R 1) →
+    (f : fin-sequence-type-Semiring R 1) →
     sum-Semiring R 1 f ＝ head-fin-sequence 0 f
   sum-one-element-Semiring f =
     left-unit-law-add-Semiring R (f (inr star))
 
   sum-two-elements-Semiring :
-    (f : fin-sequence-Semiring R 2) →
+    (f : fin-sequence-type-Semiring R 2) →
     sum-Semiring R 2 f ＝ add-Semiring R (f (zero-Fin 1)) (f (one-Fin 1))
   sum-two-elements-Semiring f =
     ( associative-add-Semiring R
@@ -82,7 +82,7 @@ module _
   where
 
   htpy-sum-Semiring :
-    (n : ℕ) {f g : fin-sequence-Semiring R n} →
+    (n : ℕ) {f g : fin-sequence-type-Semiring R n} →
     (f ~ g) → sum-Semiring R n f ＝ sum-Semiring R n g
   htpy-sum-Semiring zero-ℕ H = refl
   htpy-sum-Semiring (succ-ℕ n) H =
@@ -99,14 +99,14 @@ module _
   where
 
   cons-sum-Semiring :
-    (n : ℕ) (f : fin-sequence-Semiring R (succ-ℕ n)) →
+    (n : ℕ) (f : fin-sequence-type-Semiring R (succ-ℕ n)) →
     {x : type-Semiring R} → head-fin-sequence n f ＝ x →
     sum-Semiring R (succ-ℕ n) f ＝
     add-Semiring R (sum-Semiring R n (f ∘ inl-Fin n)) x
   cons-sum-Semiring n f refl = refl
 
   snoc-sum-Semiring :
-    (n : ℕ) (f : fin-sequence-Semiring R (succ-ℕ n)) →
+    (n : ℕ) (f : fin-sequence-type-Semiring R (succ-ℕ n)) →
     {x : type-Semiring R} → f (zero-Fin n) ＝ x →
     sum-Semiring R (succ-ℕ n) f ＝
     add-Semiring R
@@ -134,7 +134,7 @@ module _
 
   left-distributive-mul-sum-Semiring :
     (n : ℕ) (x : type-Semiring R)
-    (f : fin-sequence-Semiring R n) →
+    (f : fin-sequence-type-Semiring R n) →
     mul-Semiring R x (sum-Semiring R n f) ＝
     sum-Semiring R n (λ i → mul-Semiring R x (f i))
   left-distributive-mul-sum-Semiring zero-ℕ x f =
@@ -148,7 +148,7 @@ module _
       ( left-distributive-mul-sum-Semiring n x (f ∘ inl-Fin n)))
 
   right-distributive-mul-sum-Semiring :
-    (n : ℕ) (f : fin-sequence-Semiring R n)
+    (n : ℕ) (f : fin-sequence-type-Semiring R n)
     (x : type-Semiring R) →
     mul-Semiring R (sum-Semiring R n f) x ＝
     sum-Semiring R n (λ i → mul-Semiring R (f i) x)
@@ -172,12 +172,12 @@ module _
   where
 
   interchange-add-sum-Semiring :
-    (n : ℕ) (f g : fin-sequence-Semiring R n) →
+    (n : ℕ) (f g : fin-sequence-type-Semiring R n) →
     add-Semiring R
       ( sum-Semiring R n f)
       ( sum-Semiring R n g) ＝
     sum-Semiring R n
-      ( add-fin-sequence-Semiring R n f g)
+      ( add-fin-sequence-type-Semiring R n f g)
   interchange-add-sum-Semiring zero-ℕ f g =
     left-unit-law-add-Semiring R (zero-Semiring R)
   interchange-add-sum-Semiring (succ-ℕ n) f g =
@@ -202,10 +202,10 @@ module _
   where
 
   extend-sum-Semiring :
-    (n : ℕ) (f : fin-sequence-Semiring R n) →
+    (n : ℕ) (f : fin-sequence-type-Semiring R n) →
     sum-Semiring R
       ( succ-ℕ n)
-      ( cons-fin-sequence-Semiring R n (zero-Semiring R) f) ＝
+      ( cons-fin-sequence-type-Semiring R n (zero-Semiring R) f) ＝
     sum-Semiring R n f
   extend-sum-Semiring n f =
     right-unit-law-add-Semiring R (sum-Semiring R n f)
@@ -219,10 +219,10 @@ module _
   where
 
   shift-sum-Semiring :
-    (n : ℕ) (f : fin-sequence-Semiring R n) →
+    (n : ℕ) (f : fin-sequence-type-Semiring R n) →
     sum-Semiring R
       ( succ-ℕ n)
-      ( snoc-fin-sequence-Semiring R n f
+      ( snoc-fin-sequence-type-Semiring R n f
         ( zero-Semiring R)) ＝
     sum-Semiring R n f
   shift-sum-Semiring zero-ℕ f =
@@ -230,9 +230,9 @@ module _
   shift-sum-Semiring (succ-ℕ n) f =
     ap
       ( add-Semiring' R
-        ( head-fin-sequence-Semiring R n f))
+        ( head-fin-sequence-type-Semiring R n f))
       ( shift-sum-Semiring n
-        ( tail-fin-sequence-Semiring R n f))
+        ( tail-fin-sequence-type-Semiring R n f))
 ```
 
 ### A sum of zeroes is zero
@@ -244,7 +244,7 @@ module _
 
   sum-zero-Semiring :
     (n : ℕ) →
-    sum-Semiring R n (zero-fin-sequence-Semiring R n) ＝ zero-Semiring R
+    sum-Semiring R n (zero-fin-sequence-type-Semiring R n) ＝ zero-Semiring R
   sum-zero-Semiring zero-ℕ = refl
   sum-zero-Semiring (succ-ℕ n) =
     right-unit-law-add-Semiring R _ ∙ sum-zero-Semiring n
@@ -255,7 +255,7 @@ module _
 ```agda
 split-sum-Semiring :
   {l : Level} (R : Semiring l)
-  (n m : ℕ) (f : fin-sequence-Semiring R (n +ℕ m)) →
+  (n m : ℕ) (f : fin-sequence-type-Semiring R (n +ℕ m)) →
   sum-Semiring R (n +ℕ m) f ＝
   add-Semiring R
     ( sum-Semiring R n (f ∘ inl-coproduct-Fin n m))

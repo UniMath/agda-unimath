@@ -93,15 +93,15 @@ module _
 ### Scalar multiplication defines an `Ab`-endomorphism of `tuple-Ring`s, and this mapping is a ring homomorphism `R → End(tuple R n)`
 
 ```agda
-  scalar-mul-tuple-Ring-endomorphism :
+  endo-scalar-mul-tuple-Ring :
     (n : ℕ) (r : type-Ring R) → hom-Ab (tuple-Ring-Ab R n) (tuple-Ring-Ab R n)
-  pr1 (scalar-mul-tuple-Ring-endomorphism n r) = scalar-mul-tuple-Ring r
-  pr2 (scalar-mul-tuple-Ring-endomorphism n r) {x} {y} =
+  pr1 (endo-scalar-mul-tuple-Ring n r) = scalar-mul-tuple-Ring r
+  pr2 (endo-scalar-mul-tuple-Ring n r) {x} {y} =
     left-distributive-scalar-mul-add-tuple-Ring r x y
 
   scalar-mul-hom-Ring :
     (n : ℕ) → hom-Ring R (endomorphism-ring-Ab (tuple-Ring-Ab R n))
-  pr1 (pr1 (scalar-mul-hom-Ring n)) = scalar-mul-tuple-Ring-endomorphism n
+  pr1 (pr1 (scalar-mul-hom-Ring n)) = endo-scalar-mul-tuple-Ring n
   pr2 (pr1 (scalar-mul-hom-Ring n)) {k1} {k2} =
     eq-htpy-hom-Ab
       ( tuple-Ring-Ab R n)

@@ -41,31 +41,31 @@ module _
   {l : Level} (R : Euclidean-Domain l)
   where
 
-  fin-sequence-Euclidean-Domain : ℕ → UU l
-  fin-sequence-Euclidean-Domain = fin-sequence (type-Euclidean-Domain R)
+  fin-sequence-type-Euclidean-Domain : ℕ → UU l
+  fin-sequence-type-Euclidean-Domain = fin-sequence (type-Euclidean-Domain R)
 
-  head-fin-sequence-Euclidean-Domain :
+  head-fin-sequence-type-Euclidean-Domain :
     (n : ℕ) →
-    fin-sequence-Euclidean-Domain (succ-ℕ n) →
+    fin-sequence-type-Euclidean-Domain (succ-ℕ n) →
     type-Euclidean-Domain R
-  head-fin-sequence-Euclidean-Domain n v = head-fin-sequence n v
+  head-fin-sequence-type-Euclidean-Domain n v = head-fin-sequence n v
 
-  tail-fin-sequence-Euclidean-Domain :
+  tail-fin-sequence-type-Euclidean-Domain :
     (n : ℕ) →
-    fin-sequence-Euclidean-Domain (succ-ℕ n) →
-    fin-sequence-Euclidean-Domain n
-  tail-fin-sequence-Euclidean-Domain = tail-fin-sequence
+    fin-sequence-type-Euclidean-Domain (succ-ℕ n) →
+    fin-sequence-type-Euclidean-Domain n
+  tail-fin-sequence-type-Euclidean-Domain = tail-fin-sequence
 
-  cons-fin-sequence-Euclidean-Domain :
+  cons-fin-sequence-type-Euclidean-Domain :
     (n : ℕ) → type-Euclidean-Domain R →
-    fin-sequence-Euclidean-Domain n →
-    fin-sequence-Euclidean-Domain (succ-ℕ n)
-  cons-fin-sequence-Euclidean-Domain = cons-fin-sequence
+    fin-sequence-type-Euclidean-Domain n →
+    fin-sequence-type-Euclidean-Domain (succ-ℕ n)
+  cons-fin-sequence-type-Euclidean-Domain = cons-fin-sequence
 
-  snoc-fin-sequence-Euclidean-Domain :
-    (n : ℕ) → fin-sequence-Euclidean-Domain n → type-Euclidean-Domain R →
-    fin-sequence-Euclidean-Domain (succ-ℕ n)
-  snoc-fin-sequence-Euclidean-Domain = snoc-fin-sequence
+  snoc-fin-sequence-type-Euclidean-Domain :
+    (n : ℕ) → fin-sequence-type-Euclidean-Domain n → type-Euclidean-Domain R →
+    fin-sequence-type-Euclidean-Domain (succ-ℕ n)
+  snoc-fin-sequence-type-Euclidean-Domain = snoc-fin-sequence
 ```
 
 ### Zero finite sequences on a euclidean domain
@@ -75,9 +75,9 @@ module _
   {l : Level} (R : Euclidean-Domain l)
   where
 
-  zero-fin-sequence-Euclidean-Domain :
-    (n : ℕ) → fin-sequence-Euclidean-Domain R n
-  zero-fin-sequence-Euclidean-Domain n i = zero-Euclidean-Domain R
+  zero-fin-sequence-type-Euclidean-Domain :
+    (n : ℕ) → fin-sequence-type-Euclidean-Domain R n
+  zero-fin-sequence-type-Euclidean-Domain n i = zero-Euclidean-Domain R
 ```
 
 ### Pointwise addition of finite sequences on a euclidean domain
@@ -87,10 +87,10 @@ module _
   {l : Level} (R : Euclidean-Domain l)
   where
 
-  add-fin-sequence-Euclidean-Domain :
-    (n : ℕ) (v w : fin-sequence-Euclidean-Domain R n) →
-    fin-sequence-Euclidean-Domain R n
-  add-fin-sequence-Euclidean-Domain n =
+  add-fin-sequence-type-Euclidean-Domain :
+    (n : ℕ) (v w : fin-sequence-type-Euclidean-Domain R n) →
+    fin-sequence-type-Euclidean-Domain R n
+  add-fin-sequence-type-Euclidean-Domain n =
     binary-map-fin-sequence n (add-Euclidean-Domain R)
 ```
 
@@ -101,11 +101,11 @@ module _
   {l : Level} (R : Euclidean-Domain l)
   where
 
-  neg-fin-sequence-Euclidean-Domain :
-    (n : ℕ) → fin-sequence-Euclidean-Domain R n →
-    fin-sequence-Euclidean-Domain R n
-  neg-fin-sequence-Euclidean-Domain =
-    neg-fin-sequence-Commutative-Ring
+  neg-fin-sequence-type-Euclidean-Domain :
+    (n : ℕ) → fin-sequence-type-Euclidean-Domain R n →
+    fin-sequence-type-Euclidean-Domain R n
+  neg-fin-sequence-type-Euclidean-Domain =
+    neg-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 ```
 
@@ -118,20 +118,20 @@ module _
   {l : Level} (R : Euclidean-Domain l)
   where
 
-  associative-add-fin-sequence-Euclidean-Domain :
-    (n : ℕ) (v1 v2 v3 : fin-sequence-Euclidean-Domain R n) →
-    ( add-fin-sequence-Euclidean-Domain
+  associative-add-fin-sequence-type-Euclidean-Domain :
+    (n : ℕ) (v1 v2 v3 : fin-sequence-type-Euclidean-Domain R n) →
+    ( add-fin-sequence-type-Euclidean-Domain
       ( R)
       ( n)
-      ( add-fin-sequence-Euclidean-Domain R n v1 v2)
+      ( add-fin-sequence-type-Euclidean-Domain R n v1 v2)
       ( v3)) ＝
-    ( add-fin-sequence-Euclidean-Domain
+    ( add-fin-sequence-type-Euclidean-Domain
       ( R)
       ( n)
       ( v1)
-      ( add-fin-sequence-Euclidean-Domain R n v2 v3))
-  associative-add-fin-sequence-Euclidean-Domain =
-    associative-add-fin-sequence-Commutative-Ring
+      ( add-fin-sequence-type-Euclidean-Domain R n v2 v3))
+  associative-add-fin-sequence-type-Euclidean-Domain =
+    associative-add-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 ```
 
@@ -142,28 +142,28 @@ module _
   {l : Level} (R : Euclidean-Domain l)
   where
 
-  left-unit-law-add-fin-sequence-Euclidean-Domain :
-    (n : ℕ) (v : fin-sequence-Euclidean-Domain R n) →
-    ( add-fin-sequence-Euclidean-Domain
+  left-unit-law-add-fin-sequence-type-Euclidean-Domain :
+    (n : ℕ) (v : fin-sequence-type-Euclidean-Domain R n) →
+    ( add-fin-sequence-type-Euclidean-Domain
       ( R)
       ( n)
-      ( zero-fin-sequence-Euclidean-Domain R n)
+      ( zero-fin-sequence-type-Euclidean-Domain R n)
       ( v)) ＝
     ( v)
-  left-unit-law-add-fin-sequence-Euclidean-Domain =
-    left-unit-law-add-fin-sequence-Commutative-Ring
+  left-unit-law-add-fin-sequence-type-Euclidean-Domain =
+    left-unit-law-add-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 
-  right-unit-law-add-fin-sequence-Euclidean-Domain :
-    (n : ℕ) (v : fin-sequence-Euclidean-Domain R n) →
-    ( add-fin-sequence-Euclidean-Domain
+  right-unit-law-add-fin-sequence-type-Euclidean-Domain :
+    (n : ℕ) (v : fin-sequence-type-Euclidean-Domain R n) →
+    ( add-fin-sequence-type-Euclidean-Domain
       ( R)
       ( n)
       ( v)
-      ( zero-fin-sequence-Euclidean-Domain R n)) ＝
+      ( zero-fin-sequence-type-Euclidean-Domain R n)) ＝
     ( v)
-  right-unit-law-add-fin-sequence-Euclidean-Domain =
-    right-unit-law-add-fin-sequence-Commutative-Ring
+  right-unit-law-add-fin-sequence-type-Euclidean-Domain =
+    right-unit-law-add-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 ```
 
@@ -174,12 +174,12 @@ module _
   {l : Level} (R : Euclidean-Domain l)
   where
 
-  commutative-add-fin-sequence-Euclidean-Domain :
-    (n : ℕ) (v w : fin-sequence-Euclidean-Domain R n) →
-    add-fin-sequence-Euclidean-Domain R n v w ＝
-    add-fin-sequence-Euclidean-Domain R n w v
-  commutative-add-fin-sequence-Euclidean-Domain =
-    commutative-add-fin-sequence-Commutative-Ring
+  commutative-add-fin-sequence-type-Euclidean-Domain :
+    (n : ℕ) (v w : fin-sequence-type-Euclidean-Domain R n) →
+    add-fin-sequence-type-Euclidean-Domain R n v w ＝
+    add-fin-sequence-type-Euclidean-Domain R n w v
+  commutative-add-fin-sequence-type-Euclidean-Domain =
+    commutative-add-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 ```
 
@@ -190,27 +190,27 @@ module _
   {l : Level} (R : Euclidean-Domain l)
   where
 
-  left-inverse-law-add-fin-sequence-Euclidean-Domain :
-    (n : ℕ) (v : fin-sequence-Euclidean-Domain R n) →
+  left-inverse-law-add-fin-sequence-type-Euclidean-Domain :
+    (n : ℕ) (v : fin-sequence-type-Euclidean-Domain R n) →
     Id
-      ( add-fin-sequence-Euclidean-Domain
-        R n ( neg-fin-sequence-Euclidean-Domain R n v) v)
-      ( zero-fin-sequence-Euclidean-Domain R n)
-  left-inverse-law-add-fin-sequence-Euclidean-Domain =
-    left-inverse-law-add-fin-sequence-Commutative-Ring
+      ( add-fin-sequence-type-Euclidean-Domain
+        R n ( neg-fin-sequence-type-Euclidean-Domain R n v) v)
+      ( zero-fin-sequence-type-Euclidean-Domain R n)
+  left-inverse-law-add-fin-sequence-type-Euclidean-Domain =
+    left-inverse-law-add-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 
-  right-inverse-law-add-fin-sequence-Euclidean-Domain :
-    (n : ℕ) (v : fin-sequence-Euclidean-Domain R n) →
+  right-inverse-law-add-fin-sequence-type-Euclidean-Domain :
+    (n : ℕ) (v : fin-sequence-type-Euclidean-Domain R n) →
     Id
-      ( add-fin-sequence-Euclidean-Domain
+      ( add-fin-sequence-type-Euclidean-Domain
         ( R)
         ( n)
         ( v)
-        ( neg-fin-sequence-Euclidean-Domain R n v))
-      ( zero-fin-sequence-Euclidean-Domain R n)
-  right-inverse-law-add-fin-sequence-Euclidean-Domain =
-    right-inverse-law-add-fin-sequence-Commutative-Ring
+        ( neg-fin-sequence-type-Euclidean-Domain R n v))
+      ( zero-fin-sequence-type-Euclidean-Domain R n)
+  right-inverse-law-add-fin-sequence-type-Euclidean-Domain =
+    right-inverse-law-add-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 ```
 
@@ -221,28 +221,28 @@ module _
   {l : Level} (R : Euclidean-Domain l)
   where
 
-  fin-sequence-Euclidean-Domain-Semigroup : ℕ → Semigroup l
-  fin-sequence-Euclidean-Domain-Semigroup =
-    fin-sequence-Commutative-Ring-Semigroup
+  semigroup-fin-sequence-type-Euclidean-Domain : ℕ → Semigroup l
+  semigroup-fin-sequence-type-Euclidean-Domain =
+    semigroup-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 
-  fin-sequence-Euclidean-Domain-Monoid : ℕ → Monoid l
-  fin-sequence-Euclidean-Domain-Monoid =
-    fin-sequence-Commutative-Ring-Monoid
+  monoid-fin-sequence-type-Euclidean-Domain : ℕ → Monoid l
+  monoid-fin-sequence-type-Euclidean-Domain =
+    monoid-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 
-  fin-sequence-Euclidean-Domain-Commutative-Monoid : ℕ → Commutative-Monoid l
-  fin-sequence-Euclidean-Domain-Commutative-Monoid =
-    fin-sequence-Commutative-Ring-Commutative-Monoid
+  commutative-monoid-fin-sequence-type-Euclidean-Domain : ℕ → Commutative-Monoid l
+  commutative-monoid-fin-sequence-type-Euclidean-Domain =
+    commutative-monoid-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 
-  fin-sequence-Euclidean-Domain-Group : ℕ → Group l
-  fin-sequence-Euclidean-Domain-Group =
-    fin-sequence-Commutative-Ring-Group
+  group-fin-sequence-type-Euclidean-Domain : ℕ → Group l
+  group-fin-sequence-type-Euclidean-Domain =
+    group-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 
-  fin-sequence-Euclidean-Domain-Ab : ℕ → Ab l
-  fin-sequence-Euclidean-Domain-Ab =
-    fin-sequence-Commutative-Ring-Ab
+  ab-fin-sequence-type-Euclidean-Domain : ℕ → Ab l
+  ab-fin-sequence-type-Euclidean-Domain =
+    ab-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 ```

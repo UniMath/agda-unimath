@@ -49,7 +49,7 @@ The binomial theorem is the [44th](literature.100-theorems.md#44) theorem on
 ```agda
 binomial-sum-Ring :
   {l : Level} (R : Ring l)
-  (n : ℕ) (f : fin-sequence-Ring R (succ-ℕ n)) → type-Ring R
+  (n : ℕ) (f : fin-sequence-type-Ring R (succ-ℕ n)) → type-Ring R
 binomial-sum-Ring R = binomial-sum-Semiring (semiring-Ring R)
 ```
 
@@ -63,13 +63,13 @@ module _
   where
 
   binomial-sum-one-element-Ring :
-    (f : fin-sequence-Ring R 1) →
-    binomial-sum-Ring R 0 f ＝ head-fin-sequence-Ring R 0 f
+    (f : fin-sequence-type-Ring R 1) →
+    binomial-sum-Ring R 0 f ＝ head-fin-sequence-type-Ring R 0 f
   binomial-sum-one-element-Ring =
     binomial-sum-one-element-Semiring (semiring-Ring R)
 
   binomial-sum-two-elements-Ring :
-    (f : fin-sequence-Ring R 2) →
+    (f : fin-sequence-type-Ring R 2) →
     binomial-sum-Ring R 1 f ＝ add-Ring R (f (zero-Fin 1)) (f (one-Fin 1))
   binomial-sum-two-elements-Ring =
     binomial-sum-two-elements-Semiring (semiring-Ring R)
@@ -83,7 +83,7 @@ module _
   where
 
   htpy-binomial-sum-Ring :
-    (n : ℕ) {f g : fin-sequence-Ring R (succ-ℕ n)} →
+    (n : ℕ) {f g : fin-sequence-type-Ring R (succ-ℕ n)} →
     (f ~ g) → binomial-sum-Ring R n f ＝ binomial-sum-Ring R n g
   htpy-binomial-sum-Ring = htpy-binomial-sum-Semiring (semiring-Ring R)
 ```
@@ -96,14 +96,14 @@ module _
   where
 
   left-distributive-mul-binomial-sum-Ring :
-    (n : ℕ) (x : type-Ring R) (f : fin-sequence-Ring R (succ-ℕ n)) →
+    (n : ℕ) (x : type-Ring R) (f : fin-sequence-type-Ring R (succ-ℕ n)) →
     mul-Ring R x (binomial-sum-Ring R n f) ＝
     binomial-sum-Ring R n (λ i → mul-Ring R x (f i))
   left-distributive-mul-binomial-sum-Ring =
     left-distributive-mul-binomial-sum-Semiring (semiring-Ring R)
 
   right-distributive-mul-binomial-sum-Ring :
-    (n : ℕ) (f : fin-sequence-Ring R (succ-ℕ n)) (x : type-Ring R) →
+    (n : ℕ) (f : fin-sequence-type-Ring R (succ-ℕ n)) (x : type-Ring R) →
     mul-Ring R (binomial-sum-Ring R n f) x ＝
     binomial-sum-Ring R n (λ i → mul-Ring R (f i) x)
   right-distributive-mul-binomial-sum-Ring =

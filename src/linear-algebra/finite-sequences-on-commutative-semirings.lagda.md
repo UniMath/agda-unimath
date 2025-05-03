@@ -36,35 +36,35 @@ module _
   {l : Level} (R : Commutative-Semiring l)
   where
 
-  fin-sequence-Commutative-Semiring : ℕ → UU l
-  fin-sequence-Commutative-Semiring =
-    fin-sequence-Semiring (semiring-Commutative-Semiring R)
+  fin-sequence-type-Commutative-Semiring : ℕ → UU l
+  fin-sequence-type-Commutative-Semiring =
+    fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 
-  head-fin-sequence-Commutative-Semiring :
-    (n : ℕ) → fin-sequence-Commutative-Semiring (succ-ℕ n) →
+  head-fin-sequence-type-Commutative-Semiring :
+    (n : ℕ) → fin-sequence-type-Commutative-Semiring (succ-ℕ n) →
     type-Commutative-Semiring R
-  head-fin-sequence-Commutative-Semiring =
-    head-fin-sequence-Semiring (semiring-Commutative-Semiring R)
+  head-fin-sequence-type-Commutative-Semiring =
+    head-fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 
-  tail-fin-sequence-Commutative-Semiring :
-    (n : ℕ) → fin-sequence-Commutative-Semiring (succ-ℕ n) →
-    fin-sequence-Commutative-Semiring n
-  tail-fin-sequence-Commutative-Semiring =
-    tail-fin-sequence-Semiring (semiring-Commutative-Semiring R)
+  tail-fin-sequence-type-Commutative-Semiring :
+    (n : ℕ) → fin-sequence-type-Commutative-Semiring (succ-ℕ n) →
+    fin-sequence-type-Commutative-Semiring n
+  tail-fin-sequence-type-Commutative-Semiring =
+    tail-fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 
-  cons-fin-sequence-Commutative-Semiring :
+  cons-fin-sequence-type-Commutative-Semiring :
     (n : ℕ) → type-Commutative-Semiring R →
-    fin-sequence-Commutative-Semiring n →
-    fin-sequence-Commutative-Semiring (succ-ℕ n)
-  cons-fin-sequence-Commutative-Semiring =
-    cons-fin-sequence-Semiring (semiring-Commutative-Semiring R)
+    fin-sequence-type-Commutative-Semiring n →
+    fin-sequence-type-Commutative-Semiring (succ-ℕ n)
+  cons-fin-sequence-type-Commutative-Semiring =
+    cons-fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 
-  snoc-fin-sequence-Commutative-Semiring :
-    (n : ℕ) → fin-sequence-Commutative-Semiring n →
+  snoc-fin-sequence-type-Commutative-Semiring :
+    (n : ℕ) → fin-sequence-type-Commutative-Semiring n →
     type-Commutative-Semiring R →
-    fin-sequence-Commutative-Semiring (succ-ℕ n)
-  snoc-fin-sequence-Commutative-Semiring =
-    snoc-fin-sequence-Semiring (semiring-Commutative-Semiring R)
+    fin-sequence-type-Commutative-Semiring (succ-ℕ n)
+  snoc-fin-sequence-type-Commutative-Semiring =
+    snoc-fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 ```
 
 ### Zero finite sequence on a commutative semiring
@@ -74,9 +74,9 @@ module _
   {l : Level} (R : Commutative-Semiring l)
   where
 
-  zero-fin-sequence-Commutative-Semiring :
-    (n : ℕ) → fin-sequence-Commutative-Semiring R n
-  zero-fin-sequence-Commutative-Semiring n i = zero-Commutative-Semiring R
+  zero-fin-sequence-type-Commutative-Semiring :
+    (n : ℕ) → fin-sequence-type-Commutative-Semiring R n
+  zero-fin-sequence-type-Commutative-Semiring n i = zero-Commutative-Semiring R
 ```
 
 #### Pointwise addition of finite sequences on a commutative semiring
@@ -86,11 +86,11 @@ module _
   {l : Level} (R : Commutative-Semiring l)
   where
 
-  add-fin-sequence-Commutative-Semiring :
-    (n : ℕ) (v w : fin-sequence-Commutative-Semiring R n) →
-    fin-sequence-Commutative-Semiring R n
-  add-fin-sequence-Commutative-Semiring =
-    add-fin-sequence-Semiring (semiring-Commutative-Semiring R)
+  add-fin-sequence-type-Commutative-Semiring :
+    (n : ℕ) (v w : fin-sequence-type-Commutative-Semiring R n) →
+    fin-sequence-type-Commutative-Semiring R n
+  add-fin-sequence-type-Commutative-Semiring =
+    add-fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 ```
 
 ## Properties of pointwise addition
@@ -102,14 +102,14 @@ module _
   {l : Level} (R : Commutative-Semiring l)
   where
 
-  associative-add-fin-sequence-Commutative-Semiring :
-    (n : ℕ) (v1 v2 v3 : fin-sequence-Commutative-Semiring R n) →
-    ( add-fin-sequence-Commutative-Semiring R n
-      ( add-fin-sequence-Commutative-Semiring R n v1 v2) v3) ＝
-    ( add-fin-sequence-Commutative-Semiring R n v1
-      ( add-fin-sequence-Commutative-Semiring R n v2 v3))
-  associative-add-fin-sequence-Commutative-Semiring =
-    associative-add-fin-sequence-Semiring (semiring-Commutative-Semiring R)
+  associative-add-fin-sequence-type-Commutative-Semiring :
+    (n : ℕ) (v1 v2 v3 : fin-sequence-type-Commutative-Semiring R n) →
+    ( add-fin-sequence-type-Commutative-Semiring R n
+      ( add-fin-sequence-type-Commutative-Semiring R n v1 v2) v3) ＝
+    ( add-fin-sequence-type-Commutative-Semiring R n v1
+      ( add-fin-sequence-type-Commutative-Semiring R n v2 v3))
+  associative-add-fin-sequence-type-Commutative-Semiring =
+    associative-add-fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 ```
 
 ### Unit laws
@@ -119,20 +119,20 @@ module _
   {l : Level} (R : Commutative-Semiring l)
   where
 
-  left-unit-law-add-fin-sequence-Commutative-Semiring :
-    (n : ℕ) (v : fin-sequence-Commutative-Semiring R n) →
-    add-fin-sequence-Commutative-Semiring R n
-      ( zero-fin-sequence-Commutative-Semiring R n) v ＝ v
-  left-unit-law-add-fin-sequence-Commutative-Semiring =
-    left-unit-law-add-fin-sequence-Semiring
+  left-unit-law-add-fin-sequence-type-Commutative-Semiring :
+    (n : ℕ) (v : fin-sequence-type-Commutative-Semiring R n) →
+    add-fin-sequence-type-Commutative-Semiring R n
+      ( zero-fin-sequence-type-Commutative-Semiring R n) v ＝ v
+  left-unit-law-add-fin-sequence-type-Commutative-Semiring =
+    left-unit-law-add-fin-sequence-type-Semiring
       ( semiring-Commutative-Semiring R)
 
-  right-unit-law-add-fin-sequence-Commutative-Semiring :
-    (n : ℕ) (v : fin-sequence-Commutative-Semiring R n) →
-    add-fin-sequence-Commutative-Semiring R n v
-      ( zero-fin-sequence-Commutative-Semiring R n) ＝ v
-  right-unit-law-add-fin-sequence-Commutative-Semiring =
-    right-unit-law-add-fin-sequence-Semiring
+  right-unit-law-add-fin-sequence-type-Commutative-Semiring :
+    (n : ℕ) (v : fin-sequence-type-Commutative-Semiring R n) →
+    add-fin-sequence-type-Commutative-Semiring R n v
+      ( zero-fin-sequence-type-Commutative-Semiring R n) ＝ v
+  right-unit-law-add-fin-sequence-type-Commutative-Semiring =
+    right-unit-law-add-fin-sequence-type-Semiring
       ( semiring-Commutative-Semiring R)
 ```
 
@@ -143,12 +143,12 @@ module _
   {l : Level} (R : Commutative-Semiring l)
   where
 
-  commutative-add-fin-sequence-Commutative-Semiring :
-    (n : ℕ) (v w : fin-sequence-Commutative-Semiring R n) →
-    add-fin-sequence-Commutative-Semiring R n v w ＝
-    add-fin-sequence-Commutative-Semiring R n w v
-  commutative-add-fin-sequence-Commutative-Semiring =
-    commutative-add-fin-sequence-Semiring (semiring-Commutative-Semiring R)
+  commutative-add-fin-sequence-type-Commutative-Semiring :
+    (n : ℕ) (v w : fin-sequence-type-Commutative-Semiring R n) →
+    add-fin-sequence-type-Commutative-Semiring R n v w ＝
+    add-fin-sequence-type-Commutative-Semiring R n w v
+  commutative-add-fin-sequence-type-Commutative-Semiring =
+    commutative-add-fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 ```
 
 ### The commutative monoid of pointwise addition
@@ -158,17 +158,17 @@ module _
   {l : Level} (R : Commutative-Semiring l)
   where
 
-  fin-sequence-Commutative-Semiring-Semigroup : ℕ → Semigroup l
-  fin-sequence-Commutative-Semiring-Semigroup =
-    fin-sequence-Semiring-Semigroup (semiring-Commutative-Semiring R)
+  semigroup-fin-sequence-type-Commutative-Semiring : ℕ → Semigroup l
+  semigroup-fin-sequence-type-Commutative-Semiring =
+    semigroup-fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 
-  fin-sequence-Commutative-Semiring-Monoid : ℕ → Monoid l
-  fin-sequence-Commutative-Semiring-Monoid =
-    fin-sequence-Semiring-Monoid (semiring-Commutative-Semiring R)
+  monoid-fin-sequence-type-Commutative-Semiring : ℕ → Monoid l
+  monoid-fin-sequence-type-Commutative-Semiring =
+    monoid-fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 
-  fin-sequence-Commutative-Semiring-Commutative-Monoid :
+  commutative-monoid-fin-sequence-type-Commutative-Semiring :
     ℕ → Commutative-Monoid l
-  fin-sequence-Commutative-Semiring-Commutative-Monoid =
-    fin-sequence-Semiring-Commutative-Monoid
+  commutative-monoid-fin-sequence-type-Commutative-Semiring =
+    commutative-monoid-fin-sequence-type-Semiring
       ( semiring-Commutative-Semiring R)
 ```

@@ -40,26 +40,26 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  fin-sequence-Semiring : ℕ → UU l
-  fin-sequence-Semiring = fin-sequence (type-Semiring R)
+  fin-sequence-type-Semiring : ℕ → UU l
+  fin-sequence-type-Semiring = fin-sequence (type-Semiring R)
 
-  head-fin-sequence-Semiring :
-    (n : ℕ) → fin-sequence-Semiring (succ-ℕ n) → type-Semiring R
-  head-fin-sequence-Semiring n v = head-fin-sequence n v
+  head-fin-sequence-type-Semiring :
+    (n : ℕ) → fin-sequence-type-Semiring (succ-ℕ n) → type-Semiring R
+  head-fin-sequence-type-Semiring n v = head-fin-sequence n v
 
-  tail-fin-sequence-Semiring :
-    (n : ℕ) → fin-sequence-Semiring (succ-ℕ n) → fin-sequence-Semiring n
-  tail-fin-sequence-Semiring = tail-fin-sequence
+  tail-fin-sequence-type-Semiring :
+    (n : ℕ) → fin-sequence-type-Semiring (succ-ℕ n) → fin-sequence-type-Semiring n
+  tail-fin-sequence-type-Semiring = tail-fin-sequence
 
-  cons-fin-sequence-Semiring :
+  cons-fin-sequence-type-Semiring :
     (n : ℕ) → type-Semiring R →
-    fin-sequence-Semiring n → fin-sequence-Semiring (succ-ℕ n)
-  cons-fin-sequence-Semiring = cons-fin-sequence
+    fin-sequence-type-Semiring n → fin-sequence-type-Semiring (succ-ℕ n)
+  cons-fin-sequence-type-Semiring = cons-fin-sequence
 
-  snoc-fin-sequence-Semiring :
-    (n : ℕ) → fin-sequence-Semiring n → type-Semiring R →
-    fin-sequence-Semiring (succ-ℕ n)
-  snoc-fin-sequence-Semiring = snoc-fin-sequence
+  snoc-fin-sequence-type-Semiring :
+    (n : ℕ) → fin-sequence-type-Semiring n → type-Semiring R →
+    fin-sequence-type-Semiring (succ-ℕ n)
+  snoc-fin-sequence-type-Semiring = snoc-fin-sequence
 ```
 
 ### Zero finite sequence on a ring
@@ -69,8 +69,8 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  zero-fin-sequence-Semiring : (n : ℕ) → fin-sequence-Semiring R n
-  zero-fin-sequence-Semiring n i = zero-Semiring R
+  zero-fin-sequence-type-Semiring : (n : ℕ) → fin-sequence-type-Semiring R n
+  zero-fin-sequence-type-Semiring n i = zero-Semiring R
 ```
 
 ### Pointwise addition on a ring
@@ -80,10 +80,10 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  add-fin-sequence-Semiring :
-    (n : ℕ) (v w : fin-sequence-Semiring R n) →
-    fin-sequence-Semiring R n
-  add-fin-sequence-Semiring n =
+  add-fin-sequence-type-Semiring :
+    (n : ℕ) (v w : fin-sequence-type-Semiring R n) →
+    fin-sequence-type-Semiring R n
+  add-fin-sequence-type-Semiring n =
     binary-map-fin-sequence n (add-Semiring R)
 ```
 
@@ -96,17 +96,17 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  associative-add-fin-sequence-Semiring :
-    (n : ℕ) (v1 v2 v3 : fin-sequence-Semiring R n) →
-    ( add-fin-sequence-Semiring R
+  associative-add-fin-sequence-type-Semiring :
+    (n : ℕ) (v1 v2 v3 : fin-sequence-type-Semiring R n) →
+    ( add-fin-sequence-type-Semiring R
       ( n)
-      ( add-fin-sequence-Semiring R n v1 v2)
+      ( add-fin-sequence-type-Semiring R n v1 v2)
       ( v3)) ＝
-    ( add-fin-sequence-Semiring R
+    ( add-fin-sequence-type-Semiring R
       ( n)
       ( v1)
-      ( add-fin-sequence-Semiring R n v2 v3))
-  associative-add-fin-sequence-Semiring n v1 v2 v3 =
+      ( add-fin-sequence-type-Semiring R n v2 v3))
+  associative-add-fin-sequence-type-Semiring n v1 v2 v3 =
     eq-htpy (λ i → associative-add-Semiring R (v1 i) (v2 i) (v3 i))
 ```
 
@@ -117,16 +117,16 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  left-unit-law-add-fin-sequence-Semiring :
-    (n : ℕ) (v : fin-sequence-Semiring R n) →
-    add-fin-sequence-Semiring R n (zero-fin-sequence-Semiring R n) v ＝ v
-  left-unit-law-add-fin-sequence-Semiring n v =
+  left-unit-law-add-fin-sequence-type-Semiring :
+    (n : ℕ) (v : fin-sequence-type-Semiring R n) →
+    add-fin-sequence-type-Semiring R n (zero-fin-sequence-type-Semiring R n) v ＝ v
+  left-unit-law-add-fin-sequence-type-Semiring n v =
     eq-htpy (λ i → left-unit-law-add-Semiring R (v i))
 
-  right-unit-law-add-fin-sequence-Semiring :
-    (n : ℕ) (v : fin-sequence-Semiring R n) →
-    add-fin-sequence-Semiring R n v (zero-fin-sequence-Semiring R n) ＝ v
-  right-unit-law-add-fin-sequence-Semiring n v =
+  right-unit-law-add-fin-sequence-type-Semiring :
+    (n : ℕ) (v : fin-sequence-type-Semiring R n) →
+    add-fin-sequence-type-Semiring R n v (zero-fin-sequence-type-Semiring R n) ＝ v
+  right-unit-law-add-fin-sequence-type-Semiring n v =
     eq-htpy (λ i → right-unit-law-add-Semiring R (v i))
 ```
 
@@ -137,10 +137,10 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  commutative-add-fin-sequence-Semiring :
-    (n : ℕ) (v w : fin-sequence-Semiring R n) →
-    add-fin-sequence-Semiring R n v w ＝ add-fin-sequence-Semiring R n w v
-  commutative-add-fin-sequence-Semiring n v w =
+  commutative-add-fin-sequence-type-Semiring :
+    (n : ℕ) (v w : fin-sequence-type-Semiring R n) →
+    add-fin-sequence-type-Semiring R n v w ＝ add-fin-sequence-type-Semiring R n w v
+  commutative-add-fin-sequence-type-Semiring n v w =
     eq-htpy (λ i → commutative-add-Semiring R (v i) (w i))
 ```
 
@@ -151,27 +151,27 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  fin-sequence-Semiring-Semigroup : ℕ → Semigroup l
-  pr1 (fin-sequence-Semiring-Semigroup n) =
+  semigroup-fin-sequence-type-Semiring : ℕ → Semigroup l
+  pr1 (semigroup-fin-sequence-type-Semiring n) =
     fin-sequence-Set (set-Semiring R) n
-  pr1 (pr2 (fin-sequence-Semiring-Semigroup n)) =
-    add-fin-sequence-Semiring R n
-  pr2 (pr2 (fin-sequence-Semiring-Semigroup n)) =
-    associative-add-fin-sequence-Semiring R n
+  pr1 (pr2 (semigroup-fin-sequence-type-Semiring n)) =
+    add-fin-sequence-type-Semiring R n
+  pr2 (pr2 (semigroup-fin-sequence-type-Semiring n)) =
+    associative-add-fin-sequence-type-Semiring R n
 
-  fin-sequence-Semiring-Monoid : ℕ → Monoid l
-  pr1 (fin-sequence-Semiring-Monoid n) =
-    fin-sequence-Semiring-Semigroup n
-  pr1 (pr2 (fin-sequence-Semiring-Monoid n)) =
-    zero-fin-sequence-Semiring R n
-  pr1 (pr2 (pr2 (fin-sequence-Semiring-Monoid n))) =
-    left-unit-law-add-fin-sequence-Semiring R n
-  pr2 (pr2 (pr2 (fin-sequence-Semiring-Monoid n))) =
-    right-unit-law-add-fin-sequence-Semiring R n
+  monoid-fin-sequence-type-Semiring : ℕ → Monoid l
+  pr1 (monoid-fin-sequence-type-Semiring n) =
+    semigroup-fin-sequence-type-Semiring n
+  pr1 (pr2 (monoid-fin-sequence-type-Semiring n)) =
+    zero-fin-sequence-type-Semiring R n
+  pr1 (pr2 (pr2 (monoid-fin-sequence-type-Semiring n))) =
+    left-unit-law-add-fin-sequence-type-Semiring R n
+  pr2 (pr2 (pr2 (monoid-fin-sequence-type-Semiring n))) =
+    right-unit-law-add-fin-sequence-type-Semiring R n
 
-  fin-sequence-Semiring-Commutative-Monoid : ℕ → Commutative-Monoid l
-  pr1 (fin-sequence-Semiring-Commutative-Monoid n) =
-    fin-sequence-Semiring-Monoid n
-  pr2 (fin-sequence-Semiring-Commutative-Monoid n) =
-    commutative-add-fin-sequence-Semiring R n
+  commutative-monoid-fin-sequence-type-Semiring : ℕ → Commutative-Monoid l
+  pr1 (commutative-monoid-fin-sequence-type-Semiring n) =
+    monoid-fin-sequence-type-Semiring n
+  pr2 (commutative-monoid-fin-sequence-type-Semiring n) =
+    commutative-add-fin-sequence-type-Semiring R n
 ```
