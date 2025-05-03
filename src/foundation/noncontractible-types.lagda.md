@@ -120,3 +120,7 @@ the free loop. In fact, the free fixed point of the operation `1 + Σ(-)`, where
 `Σ` is the
 [suspension operator](synthetic-homotopy-theory.suspensions-of-types.md), is
 $n$-noncontractible for every $n ≥ 1$.
+
+## See also
+
+- [Noninjective maps](foundation.noninjective-maps.md)

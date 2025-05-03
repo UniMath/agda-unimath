@@ -141,3 +141,7 @@ module _
   is-noninjective-right-factor G =
     map-trunc-Prop (inv-ap-repetition-of-values G)
 ```
+
+## See also
+
+- [Noncontractible types](foundation.noncontractible-types.md)
