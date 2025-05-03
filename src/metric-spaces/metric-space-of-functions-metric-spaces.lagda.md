@@ -79,7 +79,7 @@ module _
   ( g : map-type-Metric-Space A B)
   where
 
-  is-pointwise-limit-is-limit-cauchy-approxination-function-Metric-Space :
+  is-pointwise-limit-is-limit-cauchy-approximation-function-Metric-Space :
     is-limit-cauchy-approximation-Metric-Space
       ( metric-space-of-functions-Metric-Space A B)
       ( f)
