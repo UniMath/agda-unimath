@@ -1,4 +1,4 @@
-# The isometric negation of real numbers
+# The negation isometry on real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}

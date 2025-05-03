@@ -174,70 +174,71 @@ module _
   {l : Level}
   where
 
-  is-short-abs-ℝ :
-    is-short-function-Metric-Space
-      ( metric-space-leq-ℝ l)
-      ( metric-space-leq-ℝ l)
-      ( abs-ℝ)
-  is-short-abs-ℝ d x y I =
-    neighborhood-real-bound-each-leq-ℝ
-      ( d)
-      ( abs-ℝ x)
-      ( abs-ℝ y)
-      ( leq-abs-leq-leq-neg-ℝ
-        ( x)
-        ( abs-ℝ y +ℝ real-ℚ (rational-ℚ⁺ d))
-        ( transitive-leq-ℝ
+  abstract
+    is-short-abs-ℝ :
+      is-short-function-Metric-Space
+        ( metric-space-leq-ℝ l)
+        ( metric-space-leq-ℝ l)
+        ( abs-ℝ)
+    is-short-abs-ℝ d x y I =
+      neighborhood-real-bound-each-leq-ℝ
+        ( d)
+        ( abs-ℝ x)
+        ( abs-ℝ y)
+        ( leq-abs-leq-leq-neg-ℝ
           ( x)
-          ( y +ℝ real-ℚ (rational-ℚ⁺ d))
           ( abs-ℝ y +ℝ real-ℚ (rational-ℚ⁺ d))
-          ( preserves-leq-right-add-ℝ
-            ( real-ℚ (rational-ℚ⁺ d))
-            ( y)
-            ( abs-ℝ y)
-            ( leq-abs-ℝ y))
-          ( left-real-bound-neighborhood-leq-ℝ d x y I))
-        ( transitive-leq-ℝ
-          ( neg-ℝ x)
-          ( neg-ℝ y +ℝ real-ℚ (rational-ℚ⁺ d))
-          ( abs-ℝ y +ℝ real-ℚ (rational-ℚ⁺ d))
-          ( preserves-leq-right-add-ℝ
-            ( real-ℚ (rational-ℚ⁺ d))
-            ( neg-ℝ y)
-            ( abs-ℝ y)
-            ( neg-leq-abs-ℝ y))
-          ( reverses-lower-neighborhood-leq-neg-ℝ
-            ( d)
-            ( y)
+          ( transitive-leq-ℝ
             ( x)
-            ( right-real-bound-neighborhood-leq-ℝ d x y I))))
-      ( leq-abs-leq-leq-neg-ℝ
-        ( y)
-        ( abs-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
-        ( transitive-leq-ℝ
-          ( y)
-          ( x +ℝ real-ℚ (rational-ℚ⁺ d))
-          ( abs-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
-          ( preserves-leq-right-add-ℝ
-            ( real-ℚ (rational-ℚ⁺ d))
-            ( x)
-            ( abs-ℝ x)
-            ( leq-abs-ℝ x))
-          ( right-real-bound-neighborhood-leq-ℝ d x y I))
-        ( transitive-leq-ℝ
-          ( neg-ℝ y)
-          ( neg-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
-          ( abs-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
-          ( preserves-leq-right-add-ℝ
-            ( real-ℚ (rational-ℚ⁺ d))
+            ( y +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( abs-ℝ y +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( preserves-leq-right-add-ℝ
+              ( real-ℚ (rational-ℚ⁺ d))
+              ( y)
+              ( abs-ℝ y)
+              ( leq-abs-ℝ y))
+            ( left-real-bound-neighborhood-leq-ℝ d x y I))
+          ( transitive-leq-ℝ
             ( neg-ℝ x)
-            ( abs-ℝ x)
-            ( neg-leq-abs-ℝ x))
-          ( reverses-lower-neighborhood-leq-neg-ℝ
-            ( d)
-            ( x)
+            ( neg-ℝ y +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( abs-ℝ y +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( preserves-leq-right-add-ℝ
+              ( real-ℚ (rational-ℚ⁺ d))
+              ( neg-ℝ y)
+              ( abs-ℝ y)
+              ( neg-leq-abs-ℝ y))
+            ( reverses-lower-neighborhood-leq-neg-ℝ
+              ( d)
+              ( y)
+              ( x)
+              ( right-real-bound-neighborhood-leq-ℝ d x y I))))
+        ( leq-abs-leq-leq-neg-ℝ
+          ( y)
+          ( abs-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
+          ( transitive-leq-ℝ
             ( y)
-            ( left-real-bound-neighborhood-leq-ℝ d x y I))))
+            ( x +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( abs-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( preserves-leq-right-add-ℝ
+              ( real-ℚ (rational-ℚ⁺ d))
+              ( x)
+              ( abs-ℝ x)
+              ( leq-abs-ℝ x))
+            ( right-real-bound-neighborhood-leq-ℝ d x y I))
+          ( transitive-leq-ℝ
+            ( neg-ℝ y)
+            ( neg-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( abs-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( preserves-leq-right-add-ℝ
+              ( real-ℚ (rational-ℚ⁺ d))
+              ( neg-ℝ x)
+              ( abs-ℝ x)
+              ( neg-leq-abs-ℝ x))
+            ( reverses-lower-neighborhood-leq-neg-ℝ
+              ( d)
+              ( x)
+              ( y)
+              ( left-real-bound-neighborhood-leq-ℝ d x y I))))
 
   short-abs-ℝ :
     short-function-Metric-Space (metric-space-leq-ℝ l) (metric-space-leq-ℝ l)

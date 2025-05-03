@@ -141,3 +141,11 @@ abstract
         ( sim-upper-cut-iff-sim-ℝ _ _)
         ( lx⊆lx' ∘ neg-ℚ , lx'⊆lx ∘ neg-ℚ)
 ```
+
+## See also
+
+- In
+  [The negation isometry on real numbers](real-numbers.isometry-negation-real-numbers.md)
+  we show that negation is an
+  [isometry](metric-spaces.isometries-metric-spaces.md) on the
+  [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md)

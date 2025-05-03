@@ -24,10 +24,10 @@ open import metric-spaces.metric-spaces
 
 ## Idea
 
-[Functions](metric-spaces.functions-metric-spaces.md) between metric spaces
-inherit the
+[Functions](metric-spaces.functions-metric-spaces.md) between
+[metric spaces](metric-spaces.metric-spaces.md) inherit the
 [product metric structure](metric-spaces.dependent-products-metric-spaces.md) of
-their codomain. This defines
+their codomain. This defines the
 {{#concept "metric space of functions between metric spaces" Agda=metric-space-of-functions-Metric-Space}}.
 
 ## Definitions
@@ -53,15 +53,16 @@ module _
 module _
   { l1 l2 l1' l2' : Level}
   ( A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  ( f : cauchy-approximation-Metric-Space
-    ( metric-space-of-functions-Metric-Space A B))
+  ( f :
+    cauchy-approximation-Metric-Space
+      ( metric-space-of-functions-Metric-Space A B))
   ( x : type-Metric-Space A)
   where
 
-  eval-cauchy-approximation-function-Metric-Space :
+  ev-cauchy-approximation-function-Metric-Space :
     cauchy-approximation-Metric-Space B
-  eval-cauchy-approximation-function-Metric-Space =
-    eval-cauchy-approximation-Π-Metric-Space
+  ev-cauchy-approximation-function-Metric-Space =
+    ev-cauchy-approximation-Π-Metric-Space
       ( type-Metric-Space A)
       ( λ _ → B)
       ( f)
@@ -74,12 +75,13 @@ module _
 module _
   { l1 l2 l1' l2' : Level}
   ( A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  ( f : cauchy-approximation-Metric-Space
-    ( metric-space-of-functions-Metric-Space A B))
+  ( f :
+    cauchy-approximation-Metric-Space
+      ( metric-space-of-functions-Metric-Space A B))
   ( g : map-type-Metric-Space A B)
   where
 
-  is-pointwise-limit-is-limit-cauchy-approxination-function-Metric-Space :
+  is-pointwise-limit-is-limit-cauchy-approximation-function-Metric-Space :
     is-limit-cauchy-approximation-Metric-Space
       ( metric-space-of-functions-Metric-Space A B)
       ( f)
@@ -87,9 +89,9 @@ module _
     (x : type-Metric-Space A) →
     is-limit-cauchy-approximation-Metric-Space
       ( B)
-      ( eval-cauchy-approximation-function-Metric-Space A B f x)
+      ( ev-cauchy-approximation-function-Metric-Space A B f x)
       ( g x)
-  is-pointwise-limit-is-limit-cauchy-approxination-function-Metric-Space =
+  is-pointwise-limit-is-limit-cauchy-approximation-function-Metric-Space =
     is-pointwise-limit-is-limit-cauchy-approximation-Π-Metric-Space
       ( type-Metric-Space A)
       ( λ _ → B)
@@ -100,7 +102,7 @@ module _
     ( (x : type-Metric-Space A) →
       is-limit-cauchy-approximation-Metric-Space
         ( B)
-        ( eval-cauchy-approximation-function-Metric-Space A B f x)
+        ( ev-cauchy-approximation-function-Metric-Space A B f x)
         ( g x)) →
     is-limit-cauchy-approximation-Metric-Space
       ( metric-space-of-functions-Metric-Space A B)

@@ -248,14 +248,14 @@ module _
     ( is-closed-lower-neighborhood-leq-ℝ y x ε (pr2 ∘ H))
 ```
 
-### `x` is in a `d`-neighborhood of `y` if and only if `x ≤ y + d` and `y  ≤ x + d`
+### The element `x` is in a `d`-neighborhood of `y` if and only if `x ≤ y + d` and `y  ≤ x + d`
 
 ```agda
 is-in-lower-neighborhood-real-bound-leq-ℝ :
   {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
   leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
   is-in-lower-neighborhood-leq-ℝ d x y
-is-in-lower-neighborhood-real-bound-leq-ℝ d⁺@(d , _) x y y≤x+d q q+d<y =
+is-in-lower-neighborhood-real-bound-leq-ℝ (d , _) x y y≤x+d q q+d<y =
   is-in-lower-cut-le-real-ℚ
     ( q)
     ( x)
@@ -265,18 +265,19 @@ is-in-lower-neighborhood-real-bound-leq-ℝ d⁺@(d , _) x y y≤x+d q q+d<y =
       ( x)
       ( le-transpose-left-add-ℝ
         ( real-ℚ q)
-        ( real-ℚ d) y
+        ( real-ℚ d)
+        ( y)
         ( inv-tr
           ( λ z → le-ℝ z y)
           ( add-real-ℚ q d)
           ( le-real-is-in-lower-cut-ℚ (q +ℚ d) y q+d<y)))
       ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
 
-real-bound-is-in-lower-neighborhhod-leq-ℝ :
+real-bound-is-in-lower-neighborhood-leq-ℝ :
   {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
   is-in-lower-neighborhood-leq-ℝ d x y →
   leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d))
-real-bound-is-in-lower-neighborhhod-leq-ℝ d⁺@(d , _) x y H r =
+real-bound-is-in-lower-neighborhood-leq-ℝ (d , _) x y H r =
   ( transpose-diff-is-in-lower-cut-ℝ x r d) ∘
   ( H (r -ℚ d)) ∘
   ( inv-tr
@@ -301,13 +302,13 @@ module _
     is-in-neighborhood-leq-ℝ l d x y →
     leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d))
   left-real-bound-neighborhood-leq-ℝ (_ , K) =
-    real-bound-is-in-lower-neighborhhod-leq-ℝ d y x K
+    real-bound-is-in-lower-neighborhood-leq-ℝ d y x K
 
   right-real-bound-neighborhood-leq-ℝ :
     is-in-neighborhood-leq-ℝ l d x y →
     leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d))
   right-real-bound-neighborhood-leq-ℝ (H , _) =
-    real-bound-is-in-lower-neighborhhod-leq-ℝ d x y H
+    real-bound-is-in-lower-neighborhood-leq-ℝ d x y H
 ```
 
 ### The canonical embedding from rational to real numbers is an isometry between metric spaces
