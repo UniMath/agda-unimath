@@ -55,7 +55,7 @@ quotient of this finite sequence is the finite sequence of the
 
 ## Definition
 
-### The induced relation on the fin-sequence of types
+### The induced relation on the finite sequence of types
 
 ```agda
 all-sim-equivalence-relation :
@@ -73,7 +73,7 @@ all-sim-equivalence-relation (succ-ℕ n) A R =
       ( λ x → R (inl x)))
 ```
 
-### The set quotient of a fin-sequence of types
+### The set quotient of a finite sequence of types
 
 ```agda
 set-quotient-fin-sequence :
