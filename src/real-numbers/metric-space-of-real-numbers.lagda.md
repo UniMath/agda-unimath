@@ -248,7 +248,7 @@ module _
     ( is-closed-lower-neighborhood-leq-ℝ y x ε (pr2 ∘ H))
 ```
 
-### `x` is in a `d`-neighborhood of `y` if and only if `x ≤ y + d` and `y  ≤ x + d`
+### The element `x` is in a `d`-neighborhood of `y` if and only if `x ≤ y + d` and `y  ≤ x + d`
 
 ```agda
 is-in-lower-neighborhood-real-bound-leq-ℝ :
