@@ -238,7 +238,7 @@ module _
       ( ε)
       ( δ)
 
-  is-complete-Π-is-complete-Metric-Space :
+  is-complete-Π-Metric-Space :
     is-complete-Metric-Space (Π-Metric-Space A P)
   is-complete-Π-is-complete-Metric-Space u =
     limit-cauchy-approximation-Π-is-complete-Metric-Space u ,
