@@ -1,4 +1,4 @@
-# The isometric addition of real numbers
+# The addition isometry on real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
