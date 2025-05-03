@@ -19,8 +19,8 @@ open import metric-spaces.subspaces-metric-spaces
 
 ## Idea
 
-[Lipschitz functions](metric-spaces.lipschitz-functions-metric-spaces.md) between
-[metric spaces](metric-spaces.metric-spaces.md) inherit the
+[Lipschitz functions](metric-spaces.lipschitz-functions-metric-spaces.md)
+between [metric spaces](metric-spaces.metric-spaces.md) inherit the
 [metric subspace](metric-spaces.subspaces-metric-spaces.md) structure of the
 [function metric space](metric-spaces.metric-space-of-functions-metric-spaces.md).
 This defines the
