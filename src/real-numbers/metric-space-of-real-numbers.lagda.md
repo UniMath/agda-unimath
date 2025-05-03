@@ -265,7 +265,8 @@ is-in-lower-neighborhood-real-bound-leq-ℝ d⁺@(d , _) x y y≤x+d q q+d<y =
       ( x)
       ( le-transpose-left-add-ℝ
         ( real-ℚ q)
-        ( real-ℚ d) y
+        ( real-ℚ d)
+        ( y)
         ( inv-tr
           ( λ z → le-ℝ z y)
           ( add-real-ℚ q d)
