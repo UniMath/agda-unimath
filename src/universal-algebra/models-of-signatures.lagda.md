@@ -21,7 +21,7 @@ open import universal-algebra.signatures
 ## Idea
 
 A model of a signature `Sig` in a type `A` is a dependent function that assigns
-to each function symbol `f` of arity `n` and a tuple of `n` elements of `A` an
+to each function symbol `f` of arity `n` and `n`-tuple of elements of `A` an
 element of `A`.
 
 ## Definitions
