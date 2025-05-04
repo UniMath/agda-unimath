@@ -14,7 +14,7 @@
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "editor.unicodeHighlight.invisibleCharacters": true,
 
-  // File nesting for agda auxillary files
+  // File nesting for agda auxiliary files
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {

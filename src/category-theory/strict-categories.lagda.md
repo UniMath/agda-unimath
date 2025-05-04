@@ -31,8 +31,8 @@ open import foundation.universe-levels
 A {{#concept "strict category" Agda=Strict-Category}} is a
 [precategory](category-theory.precategories.md) for which the type of objects
 form a [set](foundation-core.sets.md). Such categories are the set-theoretic
-analogue to [(univalent) categories](category-theory.categories.md), and have
-the disadvantages that strict categorical constructions may generally fail to be
+analog to [(univalent) categories](category-theory.categories.md), and have the
+disadvantages that strict categorical constructions may generally fail to be
 invariant under equivalences, and that the
 ([essentially surjective](category-theory.essentially-surjective-functors-precategories.md)/[fully-faithful](category-theory.fully-faithful-functors-precategories.md))-factorization
 system on [functors](category-theory.functors-precategories.md) requires the

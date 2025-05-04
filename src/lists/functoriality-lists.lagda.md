@@ -31,7 +31,7 @@ open import lists.tuples
 
 ## Idea
 
-Given a functiion `f : A → B`, we obtain a function
+Given a function `f : A → B`, we obtain a function
 `map-list f : list A → list B`.
 
 ## Definition

@@ -133,7 +133,7 @@ We postulate the constituents of a section of
 cocones. This is, assuming
 [function extensionality](foundation.function-extensionality.md), precisely the
 data of the induction principle of pushouts. We write out each component
-separately to accomodate
+separately to accommodate
 [optional rewrite rules for the standard pushouts](synthetic-homotopy-theory.rewriting-pushouts.md).
 
 ```agda
@@ -253,7 +253,7 @@ module _
 ### The cogap map
 
 We define `cogap` and its computation rules in terms of `dependent-cogap` to
-ensure the proper computational behaviour when in the presence of strict
+ensure the proper computational behavior when in the presence of strict
 computation laws on the point constructors of the standard pushouts.
 
 ```agda

@@ -34,7 +34,7 @@ module _
   map-matrix = map-tuple (map-tuple f)
 ```
 
-### Binar maps
+### Binary maps
 
 ```agda
 module _

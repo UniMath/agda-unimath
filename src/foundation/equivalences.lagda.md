@@ -113,7 +113,7 @@ equivalences are contractible maps, it follows that the
 at `id : A → A` is contractible, i.e., the type `Σ (B → A) (λ h → h ∘ f ＝ id)`
 is contractible. Furthermore, since fiberwise equivalences induce equivalences
 on total spaces, it follows from
-[function extensionality](foundation.function-extensionality.md)` that the type
+[function extensionality](foundation.function-extensionality.md) that the type
 
 ```text
   Σ (B → A) (λ h → h ∘ f ~ id)
