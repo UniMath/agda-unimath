@@ -27,8 +27,11 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
+open import metric-spaces.isometries-metric-spaces
+
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
@@ -180,4 +183,43 @@ opaque
 ```agda
 eq-raise-ℝ : {l : Level} → (x : ℝ l) → x ＝ raise-ℝ l x
 eq-raise-ℝ {l} x = eq-sim-ℝ (sim-raise-ℝ l x)
+```
+
+### Raising real numbers is an isometry
+
+```agda
+module _
+  {l0 : Level} (l : Level)
+  where
+
+  is-isometry-raise-ℝ :
+    is-isometry-Metric-Space
+      ( metric-space-leq-ℝ l0)
+      ( metric-space-leq-ℝ (l0 ⊔ l))
+      ( raise-ℝ l)
+  pr1 (is-isometry-raise-ℝ d x y) =
+    preserves-neighborhood-sim-ℝ
+      ( d)
+      ( x)
+      ( y)
+      ( raise-ℝ l x)
+      ( raise-ℝ l y)
+      ( sim-raise-ℝ l x)
+      ( sim-raise-ℝ l y)
+  pr2 (is-isometry-raise-ℝ d x y) =
+    preserves-neighborhood-sim-ℝ
+      ( d)
+      ( raise-ℝ l x)
+      ( raise-ℝ l y)
+      ( x)
+      ( y)
+      ( symmetric-sim-ℝ (sim-raise-ℝ l x))
+      ( symmetric-sim-ℝ (sim-raise-ℝ l y))
+
+  isometry-raise-ℝ :
+    isometry-Metric-Space
+      ( metric-space-leq-ℝ l0)
+      ( metric-space-leq-ℝ (l0 ⊔ l))
+  isometry-raise-ℝ =
+    ( raise-ℝ l , is-isometry-raise-ℝ)
 ```
