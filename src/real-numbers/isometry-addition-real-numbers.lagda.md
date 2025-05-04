@@ -108,19 +108,19 @@ module _
           ( y)
           ( left-real-bound-neighborhood-leq-ℝ
             ( d)
-            ( x +ℝ raise-ℝ l2 zero-ℝ)
-            ( y +ℝ raise-ℝ l2 zero-ℝ)
-            ( Nxyz (raise-ℝ l2 zero-ℝ))))
+            ( x +ℝ raise-zero-ℝ l2)
+            ( y +ℝ raise-zero-ℝ l2)
+            ( Nxyz (raise-zero-ℝ l2))))
         ( reflects-lower-neighborhood-leq-right-add-ℝ
           ( d)
-          ( raise-ℝ l2 zero-ℝ)
+          ( raise-zero-ℝ l2)
           ( y)
           ( x)
           ( right-real-bound-neighborhood-leq-ℝ
             ( d)
-            ( x +ℝ raise-ℝ l2 zero-ℝ)
-            ( y +ℝ raise-ℝ l2 zero-ℝ)
-            ( Nxyz (raise-ℝ l2 zero-ℝ)))))
+            ( x +ℝ raise-zero-ℝ l2)
+            ( y +ℝ raise-zero-ℝ l2)
+            ( Nxyz (raise-zero-ℝ l2)))))
 
   isometry-add-ℝ :
     isometry-Metric-Space
