@@ -328,6 +328,13 @@ is-isometry-metric-space-leq-real-ℚ d x y =
     ( map-product
       ( leq-add-positive-le-le-add-positive-ℚ x y d)
       ( leq-add-positive-le-le-add-positive-ℚ y x d))
+
+isometry-metric-space-leq-real-ℚ :
+  isometry-Metric-Space
+    ( metric-space-leq-ℚ)
+    ( metric-space-leq-ℝ lzero)
+isometry-metric-space-leq-real-ℚ =
+  ( real-ℚ , is-isometry-metric-space-leq-real-ℚ)
 ```
 
 ### Similarity of real numbers preserves neighborhoods
