@@ -231,7 +231,8 @@ module _
     monoid-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 
-  commutative-monoid-fin-sequence-type-Euclidean-Domain : ℕ → Commutative-Monoid l
+  commutative-monoid-fin-sequence-type-Euclidean-Domain :
+    ℕ → Commutative-Monoid l
   commutative-monoid-fin-sequence-type-Euclidean-Domain =
     commutative-monoid-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)

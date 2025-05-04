@@ -48,7 +48,8 @@ module _
   head-fin-sequence-type-Semiring n v = head-fin-sequence n v
 
   tail-fin-sequence-type-Semiring :
-    (n : ℕ) → fin-sequence-type-Semiring (succ-ℕ n) → fin-sequence-type-Semiring n
+    (n : ℕ) → fin-sequence-type-Semiring (succ-ℕ n) →
+    fin-sequence-type-Semiring n
   tail-fin-sequence-type-Semiring = tail-fin-sequence
 
   cons-fin-sequence-type-Semiring :
@@ -119,13 +120,19 @@ module _
 
   left-unit-law-add-fin-sequence-type-Semiring :
     (n : ℕ) (v : fin-sequence-type-Semiring R n) →
-    add-fin-sequence-type-Semiring R n (zero-fin-sequence-type-Semiring R n) v ＝ v
+    add-fin-sequence-type-Semiring R n
+      ( zero-fin-sequence-type-Semiring R n)
+      ( v) ＝
+    v
   left-unit-law-add-fin-sequence-type-Semiring n v =
     eq-htpy (λ i → left-unit-law-add-Semiring R (v i))
 
   right-unit-law-add-fin-sequence-type-Semiring :
     (n : ℕ) (v : fin-sequence-type-Semiring R n) →
-    add-fin-sequence-type-Semiring R n v (zero-fin-sequence-type-Semiring R n) ＝ v
+    add-fin-sequence-type-Semiring R n
+      ( v)
+      ( zero-fin-sequence-type-Semiring R n) ＝
+    v
   right-unit-law-add-fin-sequence-type-Semiring n v =
     eq-htpy (λ i → right-unit-law-add-Semiring R (v i))
 ```
@@ -139,7 +146,8 @@ module _
 
   commutative-add-fin-sequence-type-Semiring :
     (n : ℕ) (v w : fin-sequence-type-Semiring R n) →
-    add-fin-sequence-type-Semiring R n v w ＝ add-fin-sequence-type-Semiring R n w v
+    add-fin-sequence-type-Semiring R n v w ＝
+    add-fin-sequence-type-Semiring R n w v
   commutative-add-fin-sequence-type-Semiring n v w =
     eq-htpy (λ i → commutative-add-Semiring R (v i) (w i))
 ```
