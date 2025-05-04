@@ -192,12 +192,12 @@ module _
   {l0 : Level} (l : Level)
   where
 
-  is-isometry-raise-ℝ :
+  is-isometry-metric-space-leq-raise-ℝ :
     is-isometry-Metric-Space
       ( metric-space-leq-ℝ l0)
       ( metric-space-leq-ℝ (l0 ⊔ l))
       ( raise-ℝ l)
-  pr1 (is-isometry-raise-ℝ d x y) =
+  pr1 (is-isometry-metric-space-leq-raise-ℝ d x y) =
     preserves-neighborhood-sim-ℝ
       ( d)
       ( x)
@@ -206,7 +206,7 @@ module _
       ( raise-ℝ l y)
       ( sim-raise-ℝ l x)
       ( sim-raise-ℝ l y)
-  pr2 (is-isometry-raise-ℝ d x y) =
+  pr2 (is-isometry-metric-space-leq-raise-ℝ d x y) =
     preserves-neighborhood-sim-ℝ
       ( d)
       ( raise-ℝ l x)
@@ -216,10 +216,10 @@ module _
       ( symmetric-sim-ℝ (sim-raise-ℝ l x))
       ( symmetric-sim-ℝ (sim-raise-ℝ l y))
 
-  isometry-raise-ℝ :
+  isometry-metric-space-leq-raise-ℝ :
     isometry-Metric-Space
       ( metric-space-leq-ℝ l0)
       ( metric-space-leq-ℝ (l0 ⊔ l))
-  isometry-raise-ℝ =
-    ( raise-ℝ l , is-isometry-raise-ℝ)
+  isometry-metric-space-leq-raise-ℝ =
+    ( raise-ℝ l , is-isometry-metric-space-leq-raise-ℝ)
 ```
