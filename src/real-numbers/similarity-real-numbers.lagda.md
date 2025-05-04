@@ -110,9 +110,13 @@ opaque
   unfolding sim-ℝ
 
   symmetric-sim-ℝ :
-    {l1 l2 : Level} → {x : ℝ l1} {y : ℝ l2} → x ~ℝ y → y ~ℝ x
-  symmetric-sim-ℝ {x = x} {y = y} =
+    {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → x ~ℝ y → y ~ℝ x
+  symmetric-sim-ℝ x y =
     symmetric-sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
+
+  inv-sim-ℝ :
+    {l1 l2 : Level} → {x : ℝ l1} {y : ℝ l2} → x ~ℝ y → y ~ℝ x
+  inv-sim-ℝ {x = x} {y = y} = symmetric-sim-ℝ x y
 ```
 
 ### Transitivity

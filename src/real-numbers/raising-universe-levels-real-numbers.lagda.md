@@ -228,8 +228,8 @@ module _
       ( raise-ℝ l y)
       ( x)
       ( y)
-      ( symmetric-sim-ℝ (sim-raise-ℝ l x))
-      ( symmetric-sim-ℝ (sim-raise-ℝ l y))
+      ( inv-sim-ℝ (sim-raise-ℝ l x))
+      ( inv-sim-ℝ (sim-raise-ℝ l y))
 
   isometry-metric-space-leq-raise-ℝ :
     isometry-Metric-Space
