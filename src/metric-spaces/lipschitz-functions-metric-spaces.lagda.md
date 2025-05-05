@@ -37,6 +37,7 @@ open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.total-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
 
@@ -49,8 +50,9 @@ A positive rational `α : ℚ⁺` is a
 of a [function](metric-spaces.functions-metric-spaces.md) `f : A → B` between
 [metric spaces](metric-spaces.metric-spaces.md) if for any `x y : A`, if `d` is
 an upper bound of the distance between `x` and `y` in `A`, `α * d` is an upper
-bound on the distance between `f x` and `f y` in `B`. A function which admits a
-Lipschitz constant is called a
+bound on the distance between `f x` and `f y` in `B`; in that case, `f` is
+called an **α-Lipschitz** function. A function which admits a Lipschitz constant
+is called a
 {{#concept "Lipschitz function" Disambiguation="between metric spaces" WD="Lipschitz function" WDID=Q652707 Agda=is-lipschitz-function-Metric-Space}}.
 
 ## Definitions
@@ -122,6 +124,59 @@ module _
 ```
 
 ## Properties
+
+### Constant functions are α-Lipschitz functions for all `α : ℚ⁺`
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : map-type-Metric-Space A B)
+  where
+
+  all-lipschitz-constant-is-constant-function-Metric-Space :
+    ( (x y : type-Metric-Space A) → f x ＝ f y) →
+    ( α : ℚ⁺) →
+    is-lipschitz-constant-function-Metric-Space A B f α
+  all-lipschitz-constant-is-constant-function-Metric-Space H α d x y _ =
+    indistinguishable-eq-Metric-Space B (f x) (f y) (H x y) (α *ℚ⁺ d)
+```
+
+### A function from a total metric space that is α-Lipschitz for all `α : ℚ⁺` is constant
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Total-Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : map-type-Metric-Space (metric-space-Total-Metric-Space A) B)
+  where
+
+  is-constant-all-lipschitz-constant-function-Metric-Space :
+    ( (α : ℚ⁺) →
+      is-lipschitz-constant-function-Metric-Space
+        ( metric-space-Total-Metric-Space A)
+        ( B)
+        ( f)
+        ( α)) →
+    ( x y : type-Total-Metric-Space A) →
+    f x ＝ f y
+  is-constant-all-lipschitz-constant-function-Metric-Space H x y =
+    eq-indistinguishable-Metric-Space
+      ( B)
+      ( f x)
+      ( f y)
+      ( λ d →
+        rec-trunc-Prop
+          ( structure-Metric-Space B d (f x) (f y))
+          ( λ (ε , Nεxy) →
+            tr
+              ( is-upper-bound-dist-Metric-Space B (f x) (f y))
+              ( associative-mul-ℚ⁺ d (inv-ℚ⁺ ε) ε ∙
+                ap (mul-ℚ⁺ d) (left-inverse-law-mul-ℚ⁺ ε) ∙
+                right-unit-law-mul-ℚ⁺ d)
+              ( H (d *ℚ⁺ inv-ℚ⁺ ε) ε x y Nεxy))
+          ( is-total-metric-space-Total-Metric-Space A x y))
+```
 
 ### Short functions are Lipschitz functions with Lipschitz constant equal to 1
 
