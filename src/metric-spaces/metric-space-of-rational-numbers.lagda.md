@@ -376,6 +376,20 @@ module _
         ( mul-ℚ x))
     is-lipschitz-left-mul-ℚ =
       unit-trunc-Prop lipschitz-constant-succ-abs-mul-ℚ
+
+    is-lipschitz-right-mul-ℚ :
+      ( is-lipschitz-function-Metric-Space
+        ( metric-space-leq-ℚ)
+        ( metric-space-leq-ℚ)
+        ( mul-ℚ' x))
+    is-lipschitz-right-mul-ℚ =
+      is-lipschitz-htpy-function-Metric-Space
+        ( metric-space-leq-ℚ)
+        ( metric-space-leq-ℚ)
+        ( mul-ℚ x)
+        ( mul-ℚ' x)
+        ( commutative-mul-ℚ x)
+        ( is-lipschitz-left-mul-ℚ)
 ```
 
 ### The convergent Cauchy approximation of the canonical inclusion of positive rational numbers into the rational numbers

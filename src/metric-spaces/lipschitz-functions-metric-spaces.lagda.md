@@ -13,11 +13,13 @@ open import elementary-number-theory.multiplicative-group-of-positive-rational-n
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
@@ -241,6 +243,35 @@ module _
                   ( Lf))))
           ( Hf))
       ( Hg)
+```
+
+### Being a Lipschitz map is homotopy invariant
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f g : map-type-Metric-Space A B)
+  (f~g : f ~ g)
+  where
+
+  lipschitz-constant-htpy-function-Metric-Space :
+    lipschitz-constant-function-Metric-Space A B f →
+    lipschitz-constant-function-Metric-Space A B g
+  lipschitz-constant-htpy-function-Metric-Space =
+    tot
+      ( λ α H d x y N →
+        binary-tr
+          ( neighborhood-Metric-Space B (α *ℚ⁺ d))
+          ( f~g x)
+          ( f~g y)
+          ( H d x y N))
+
+  is-lipschitz-htpy-function-Metric-Space :
+    is-lipschitz-function-Metric-Space A B f →
+    is-lipschitz-function-Metric-Space A B g
+  is-lipschitz-htpy-function-Metric-Space =
+    map-is-inhabited lipschitz-constant-htpy-function-Metric-Space
 ```
 
 ## External links
