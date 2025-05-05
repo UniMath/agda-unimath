@@ -1,7 +1,7 @@
 # Limits of Cauchy approximations in premetric spaces
 
 ```agda
-module metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces where
+module metric-spaces.limits-of-cauchy-approximations-premetric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -159,16 +159,18 @@ module _
         ( map-cauchy-approximation-Premetric-Space
           ( A)
           ( f)
-          ( strict-min-ℚ⁺ (left-summand-split-ℚ⁺ d) (right-summand-split-ℚ⁺ d)))
+          ( mediant-zero-min-ℚ⁺
+            ( left-summand-split-ℚ⁺ d)
+            ( right-summand-split-ℚ⁺ d)))
         ( y)
         ( left-summand-split-ℚ⁺ d)
         ( right-summand-split-ℚ⁺ d)
         ( lim-y
           ( right-summand-split-ℚ⁺ d)
-          ( strict-min-ℚ⁺
+          ( mediant-zero-min-ℚ⁺
             ( left-summand-split-ℚ⁺ d)
             ( right-summand-split-ℚ⁺ d))
-          ( le-right-min-ℚ⁺
+          ( le-right-mediant-zero-min-ℚ⁺
             ( left-summand-split-ℚ⁺ d)
             ( right-summand-split-ℚ⁺ d)))
         ( is-symmetric-A
@@ -176,16 +178,16 @@ module _
           ( map-cauchy-approximation-Premetric-Space
             ( A)
             ( f)
-            ( strict-min-ℚ⁺
+            ( mediant-zero-min-ℚ⁺
               ( left-summand-split-ℚ⁺ d)
               ( right-summand-split-ℚ⁺ d)))
           ( x)
           ( lim-x
             ( left-summand-split-ℚ⁺ d)
-            ( strict-min-ℚ⁺
+            ( mediant-zero-min-ℚ⁺
               ( left-summand-split-ℚ⁺ d)
               ( right-summand-split-ℚ⁺ d))
-            ( le-left-min-ℚ⁺
+            ( le-left-mediant-zero-min-ℚ⁺
               ( left-summand-split-ℚ⁺ d)
               ( right-summand-split-ℚ⁺ d)))))
 

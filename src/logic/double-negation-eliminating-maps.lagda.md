@@ -53,7 +53,7 @@ eliminating maps come [equipped](foundation.structure.md) with a map
   (y : B) → ¬¬ (fiber f y) → fiber f y.
 ```
 
-## Definintion
+## Definition
 
 ### Double negation elimination structure on a map
 
