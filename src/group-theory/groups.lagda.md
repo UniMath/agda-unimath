@@ -495,23 +495,24 @@ module _
   is-unit-right-div-eq-Group refl = right-inverse-law-mul-Group G _
 ```
 
-### If `xy = 1`, `y ＝ x⁻¹`
+### If `xy = 1`, then `y ＝ x⁻¹`
 
 ```agda
-  unique-right-inv-Group :
-    (x y : type-Group G) →
-    is-unit-Group G (mul-Group G x y) →
-    y ＝ inv-Group G x
-  unique-right-inv-Group x y xy=1 =
-    equational-reasoning
-      y
-      ＝ left-div-Group x (unit-Group G)
-        by transpose-eq-mul-Group' xy=1
-      ＝ inv-Group G x
-        by right-unit-law-mul-Group G (inv-Group G x)
+  abstract
+    unique-right-inv-Group :
+      (x y : type-Group G) →
+      is-unit-Group G (mul-Group G x y) →
+      y ＝ inv-Group G x
+    unique-right-inv-Group x y xy=1 =
+      equational-reasoning
+        y
+        ＝ left-div-Group x (unit-Group G)
+          by transpose-eq-mul-Group' xy=1
+        ＝ inv-Group G x
+          by right-unit-law-mul-Group G (inv-Group G x)
 ```
 
-### If `xy = 1`, `x ＝ y⁻¹`
+### If `xy = 1`, then `x ＝ y⁻¹`
 
 ```agda
   unique-left-inv-Group :

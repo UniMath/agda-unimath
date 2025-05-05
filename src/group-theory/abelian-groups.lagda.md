@@ -566,6 +566,23 @@ module _
   neg-right-subtraction-Ab = inv-right-div-Group (group-Ab A)
 ```
 
+### If `x + y = 0`, then `y ＝ -x` and `x ＝ -y`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  abstract
+    unique-right-neg-Ab :
+      (x y : type-Ab A) → is-zero-Ab A (add-Ab A x y) → y ＝ neg-Ab A x
+    unique-right-neg-Ab = unique-right-inv-Group (group-Ab A)
+
+    unique-left-neg-Ab :
+      (x y : type-Ab A) → is-zero-Ab A (add-Ab A x y) → x ＝ neg-Ab A y
+    unique-left-neg-Ab = unique-left-inv-Group (group-Ab A)
+```
+
 ### The sum of `-x + y` and `-y + z` is `-x + z`
 
 ```agda

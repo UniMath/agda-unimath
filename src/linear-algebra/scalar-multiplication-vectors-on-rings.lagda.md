@@ -17,11 +17,11 @@ open import foundation.universe-levels
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
 
+open import linear-algebra.left-modules-rings
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-rings
 
 open import ring-theory.homomorphisms-rings
-open import ring-theory.modules-rings
 open import ring-theory.rings
 ```
 
