@@ -43,8 +43,10 @@ We refer to the first condition as
 and the second condition as
 {{#concept "similarity from above" Disambiguation="of elements of a strict order" Agda=sim-from-above-Strict-Order}}.
 
-In informal writing we will use the notation `x ≈ y` to assert that `x` and `y`
-are similar elements in a strict order `A`.
+**Notation.** In informal writing we will use the notation `x ≍ y` to assert
+that `x` and `y` are similar elements in a strict order `A`. The symbol `≍` is
+the unicode symbol [Equivalent To](https://codepoints.net/U+224d) (agda-input:
+`\asymp`).
 
 ## Definitions
 
