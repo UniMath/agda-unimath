@@ -30,7 +30,7 @@ We say that a partial element `(P, f)` is
 {{#concept "defined" Disambiguation="partial element"}} if the proposition `P`
 holds.
 
-Alternatively, the type of partial elements of `X` can be descibed as the
+Alternatively, the type of partial elements of `X` can be described as the
 codomain of the
 [composition](species.composition-cauchy-series-species-of-types.md)
 

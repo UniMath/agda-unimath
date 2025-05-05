@@ -189,7 +189,7 @@ module _
 ### Functoriality of pullbacks
 
 Taking pullbacks is functorial in the sense that given cospans S and S' and a
-transformations of cospans S → S', there exists a preffered functor between the
+transformations of cospans S → S', there exists a preferred functor between the
 pullback of S and the pullback of S'.
 
 ```agda

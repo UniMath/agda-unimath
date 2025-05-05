@@ -1376,7 +1376,7 @@ module _
     refl
 ```
 
-### Vertical pasting of verticaly constant commuting squares of identifications and commuting triangles of identifications
+### Vertical pasting of vertically constant commuting squares of identifications and commuting triangles of identifications
 
 ```agda
 module _

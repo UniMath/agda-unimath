@@ -39,7 +39,7 @@ states that a group object in the
 [category of groups](group-theory.category-of-groups.md) is
 [abelian](group-theory.abelian-groups.md). The second states that `π₂(X)` is
 abelian, for any space `X`. The former is an algebraic statement, while the
-latter is a homotopy theoretic statment. As it turns out, the two are
+latter is a homotopy theoretic statement. As it turns out, the two are
 [equivalent](foundation.logical-equivalences.md). See the following
 [Wikipedia article](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument#Two-dimensional_proof).
 
