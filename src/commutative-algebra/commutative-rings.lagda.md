@@ -318,6 +318,10 @@ module _
     add-Commutative-Ring (neg-Commutative-Ring x) (neg-Commutative-Ring y)
   distributive-neg-add-Commutative-Ring =
     distributive-neg-add-Ab ab-Commutative-Ring
+
+  neg-zero-Commutative-Ring :
+    neg-Commutative-Ring zero-Commutative-Ring ＝ zero-Commutative-Ring
+  neg-zero-Commutative-Ring = neg-zero-Ring ring-Commutative-Ring
 ```
 
 ### Multiplication in a commutative ring
