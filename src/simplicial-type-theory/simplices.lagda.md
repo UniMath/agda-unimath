@@ -27,8 +27,12 @@ open import foundation.sections
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import order-theory.bounded-total-orders
+open import order-theory.order-preserving-maps-posets
+open import order-theory.posets
+open import order-theory.preorders
 
 open import orthogonal-factorization-systems.extensions-maps
 open import orthogonal-factorization-systems.types-local-at-maps
@@ -73,6 +77,53 @@ module simplex
     final-Δ : {n : ℕ} → Δ n → type-Bounded-Total-Order I
     final-Δ pt-Δ = top-Bounded-Total-Order I
     final-Δ (cons-Δ x i H) = i
+
+  data
+    functional-Δ-0 : UU l1
+    where
+    pt-functional-Δ-0 : functional-Δ-0
+
+  is-contr-functional-Δ-0 : is-contr functional-Δ-0
+  pr1 is-contr-functional-Δ-0 = pt-functional-Δ-0
+  pr2 is-contr-functional-Δ-0 pt-functional-Δ-0 = refl
+
+  leq-functional-Δ-0 : functional-Δ-0 → functional-Δ-0 → UU l1
+  leq-functional-Δ-0 x y = functional-Δ-0
+
+  leq-prop-functional-Δ-0 :
+    functional-Δ-0 → functional-Δ-0 → Prop l1
+  pr1 (leq-prop-functional-Δ-0 x y) = leq-functional-Δ-0 x y
+  pr2 (leq-prop-functional-Δ-0 x y) = is-prop-is-contr is-contr-functional-Δ-0
+
+  refl-leq-functional-Δ-0 : is-reflexive leq-functional-Δ-0
+  refl-leq-functional-Δ-0 x = pt-functional-Δ-0
+
+  transitive-leq-functional-Δ-0 : is-transitive leq-functional-Δ-0
+  transitive-leq-functional-Δ-0 x y z H K = pt-functional-Δ-0
+
+  antisymmetric-leq-functional-Δ-0 : is-antisymmetric leq-functional-Δ-0
+  antisymmetric-leq-functional-Δ-0
+    pt-functional-Δ-0 pt-functional-Δ-0 pt-functional-Δ-0 pt-functional-Δ-0 =
+    refl
+
+  functional-Δ-0-Preorder : Preorder l1 l1
+  pr1 functional-Δ-0-Preorder = functional-Δ-0
+  pr1 (pr2 functional-Δ-0-Preorder) = leq-prop-functional-Δ-0
+  pr1 (pr2 (pr2 functional-Δ-0-Preorder)) = refl-leq-functional-Δ-0
+  pr2 (pr2 (pr2 functional-Δ-0-Preorder)) = transitive-leq-functional-Δ-0
+  
+  functional-Δ-0-Poset : Poset l1 l1
+  pr1 functional-Δ-0-Poset = functional-Δ-0-Preorder
+  pr2 functional-Δ-0-Poset = antisymmetric-leq-functional-Δ-0
+
+  functional-Δ-Poset : ℕ → Poset l1 l1
+  functional-Δ-Poset zero-ℕ =
+    functional-Δ-0-Poset
+  functional-Δ-Poset (succ-ℕ n) =
+    hom-poset-Poset (functional-Δ-Poset n) (poset-Bounded-Total-Order I)
+
+  functional-Δ : ℕ → UU l1
+  functional-Δ n = type-Poset (functional-Δ-Poset n)
 
   ap-cons-Δ :
     {n : ℕ} {x y : Δ n} (p : x ＝ y)
@@ -239,9 +290,25 @@ module simplex
   representing-midhorn =
     pushout d00 d01
 
+  inl-representing-midhorn : Δ 1 → representing-midhorn
+  inl-representing-midhorn = inl-pushout d00 d01
+
+  inr-representing-midhorn : Δ 1 → representing-midhorn
+  inr-representing-midhorn = inr-pushout d00 d01
+
   horn-inclusion : representing-midhorn → Δ 2
   horn-inclusion =
     cogap d00 d01 (d12 , d10 , inv ∘ identity-d10-d01)
+
+  compute-inl-horn-inclusion :
+    horn-inclusion ∘ inl-representing-midhorn ~ d12
+  compute-inl-horn-inclusion =
+    compute-inl-cogap d00 d01 (d12 , d10 , inv ∘ identity-d10-d01)
+
+  compute-inr-horn-inclusion :
+    horn-inclusion ∘ inr-representing-midhorn ~ d10
+  compute-inr-horn-inclusion =
+    compute-inr-cogap d00 d01 (d12 , d10 , inv ∘ identity-d10-d01)
 
   is-local-horn-inclusion : {l : Level} (A : UU l) → UU (l1 ⊔ l)
   is-local-horn-inclusion = is-local horn-inclusion
@@ -249,6 +316,22 @@ module simplex
   is-segal : {l : Level} (A : UU l) → UU (l1 ⊔ l)
   is-segal A =
     (h : representing-midhorn → A) → is-contr (extension horn-inclusion h)
+
+  extension-is-segal :
+    {l : Level} {A : UU l} (H : is-segal A)
+    (h : representing-midhorn → A) → extension horn-inclusion h
+  extension-is-segal H h = center (H h)
+
+  2-simplex-is-segal :
+    {l : Level} {A : UU l} (H : is-segal A) →
+    (h : representing-midhorn → A) → Δ 2 → A
+  2-simplex-is-segal H h = map-extension (extension-is-segal H h)
+
+  htpy-2-simplex-is-segal :
+    {l : Level} {A : UU l} (H : is-segal A) →
+    (h : representing-midhorn → A) → h ~ 2-simplex-is-segal H h ∘ horn-inclusion
+  htpy-2-simplex-is-segal H h =
+    is-extension-map-extension (extension-is-segal H h)
 
   module _
     {l : Level} {A : UU l}
@@ -292,12 +375,51 @@ module simplex
         ( mor-hom-Δ f ,
           mor-hom-Δ g ,
           ( λ u → htpy-cod-hom-Δ f u ∙ inv (htpy-dom-hom-Δ g u)))
+
+    compute-inl-horn-composable-hom-Δ :
+      {x y z : obj-Δ A} (g : hom-Δ y z) (f : hom-Δ x y) →
+      horn-composable-hom-Δ g f ∘ inl-representing-midhorn ~ mor-hom-Δ f
+    compute-inl-horn-composable-hom-Δ g f =
+      compute-inl-cogap
+        d00 d01
+        ( mor-hom-Δ f ,
+          mor-hom-Δ g ,
+          ( λ u → htpy-cod-hom-Δ f u ∙ inv (htpy-dom-hom-Δ g u)))
+
+    compute-inr-horn-composable-hom-Δ :
+      {x y z : obj-Δ A} (g : hom-Δ y z) (f : hom-Δ x y) →
+      horn-composable-hom-Δ g f ∘ inr-representing-midhorn ~ mor-hom-Δ g
+    compute-inr-horn-composable-hom-Δ g f =
+      compute-inr-cogap
+        d00 d01
+        ( mor-hom-Δ f ,
+          mor-hom-Δ g ,
+          ( λ u → htpy-cod-hom-Δ f u ∙ inv (htpy-dom-hom-Δ g u)))
     
     comp-is-segal : {x y z : obj-Δ A} → hom-Δ y z → hom-Δ x y → hom-Δ x z
     mor-hom-Δ (comp-is-segal g f) =
-      pr1 (center (H (horn-composable-hom-Δ g f))) ∘ d11
-    htpy-dom-hom-Δ (comp-is-segal g f) u = {!!}
-    htpy-cod-hom-Δ (comp-is-segal g f) = {!!}
+      2-simplex-is-segal H (horn-composable-hom-Δ g f) ∘ d11
+    htpy-dom-hom-Δ (comp-is-segal {x} {y} {z} g f) =
+      ( 2-simplex-is-segal H (horn-composable-hom-Δ g f) ·l identity-d11-d01) ∙h
+      ( inv-htpy
+        ( 2-simplex-is-segal H (horn-composable-hom-Δ g f) ·l
+          compute-inl-horn-inclusion ·r d01)) ∙h
+      ( inv-htpy
+        ( htpy-2-simplex-is-segal H (horn-composable-hom-Δ g f) ·r
+          inl-representing-midhorn ∘ d01)) ∙h
+      ( compute-inl-horn-composable-hom-Δ g f ·r d01) ∙h
+      ( htpy-dom-hom-Δ f)
+    htpy-cod-hom-Δ (comp-is-segal g f) =
+      ( 2-simplex-is-segal H (horn-composable-hom-Δ g f) ·l
+        inv-htpy identity-d10-d00) ∙h
+      ( inv-htpy
+        ( 2-simplex-is-segal H (horn-composable-hom-Δ g f) ·l
+          compute-inr-horn-inclusion ·r d00)) ∙h
+      ( inv-htpy
+        ( htpy-2-simplex-is-segal H (horn-composable-hom-Δ g f) ·r
+          inr-representing-midhorn ∘ d00)) ∙h
+      ( compute-inr-horn-composable-hom-Δ g f ·r d00) ∙h
+      ( htpy-cod-hom-Δ g)
 
   open midhorn public
   

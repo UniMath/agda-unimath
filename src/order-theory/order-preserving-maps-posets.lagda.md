@@ -7,6 +7,8 @@ module order-theory.order-preserving-maps-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
@@ -19,6 +21,7 @@ open import foundation.universe-levels
 
 open import order-theory.order-preserving-maps-preorders
 open import order-theory.posets
+open import order-theory.preorders
 ```
 
 </details>
@@ -208,4 +211,48 @@ module _
       ( preorder-Poset Q)
       ( preorder-Poset R)
       ( preorder-Poset S)
+```
+
+### Pointwise inequality of order preserving maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
+  where
+
+  leq-hom-Poset : (f g : hom-Poset P Q) → UU (l1 ⊔ l4)
+  leq-hom-Poset =
+    leq-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+
+  is-prop-leq-hom-Poset :
+    (f g : hom-Poset P Q) → is-prop (leq-hom-Poset f g)
+  is-prop-leq-hom-Poset =
+    is-prop-leq-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+
+  leq-prop-hom-Poset :
+    (f g : hom-Poset P Q) → Prop (l1 ⊔ l4)
+  leq-prop-hom-Poset =
+    leq-prop-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+
+  refl-leq-hom-Poset : is-reflexive leq-hom-Poset
+  refl-leq-hom-Poset =
+    refl-leq-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+
+  transitive-leq-hom-Poset :
+    is-transitive leq-hom-Poset
+  transitive-leq-hom-Poset =
+    transitive-leq-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+
+  antisymmetric-leq-hom-Poset :
+    is-antisymmetric leq-hom-Poset
+  antisymmetric-leq-hom-Poset f g H K =
+    eq-htpy-hom-Poset P Q f g (λ x → antisymmetric-leq-Poset Q _ _ (H x) (K x))
+
+  hom-preorder-Poset : Preorder (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l4)
+  hom-preorder-Poset =
+    hom-preorder-Preorder (preorder-Poset P) (preorder-Poset Q)
+
+  hom-poset-Poset : Poset (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l4)
+  pr1 hom-poset-Poset = hom-preorder-Poset
+  pr2 hom-poset-Poset = antisymmetric-leq-hom-Poset
 ```
