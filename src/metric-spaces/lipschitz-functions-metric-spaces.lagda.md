@@ -237,7 +237,7 @@ module _
       modulus-of-uniform-continuity-lipschitz-constant-function-Metric-Space
 ```
 
-### The product of Lipschitz constant of maps is a Lipschitz constant of their composition
+### The product of Lipschitz constants of maps is a Lipschitz constant of their composition
 
 ```agda
 module _

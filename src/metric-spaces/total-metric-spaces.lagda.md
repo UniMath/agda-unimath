@@ -49,7 +49,7 @@ module _
     type-Prop is-total-prop-Metric-Space
 ```
 
-### The type of Total metric spaces
+### The type of total metric spaces
 
 ```agda
 module _
