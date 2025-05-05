@@ -46,6 +46,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers
 ```
@@ -327,6 +328,54 @@ is-isometry-metric-space-leq-real-ℚ d x y =
     ( map-product
       ( leq-add-positive-le-le-add-positive-ℚ x y d)
       ( leq-add-positive-le-le-add-positive-ℚ y x d))
+
+isometry-metric-space-leq-real-ℚ :
+  isometry-Metric-Space
+    ( metric-space-leq-ℚ)
+    ( metric-space-leq-ℝ lzero)
+isometry-metric-space-leq-real-ℚ =
+  ( real-ℚ , is-isometry-metric-space-leq-real-ℚ)
+```
+
+### Similarity of real numbers preserves neighborhoods
+
+```agda
+module _
+  {l1 l2 : Level} (d : ℚ⁺) (x y : ℝ l1) (x' y' : ℝ l2)
+  (x~x' : x ~ℝ x') (y~y' : y ~ℝ y')
+  where
+
+  preserves-neighborhood-sim-ℝ :
+    is-in-neighborhood-leq-ℝ l1 d x y → is-in-neighborhood-leq-ℝ l2 d x' y'
+  preserves-neighborhood-sim-ℝ H =
+    neighborhood-real-bound-each-leq-ℝ
+      ( d)
+      ( x')
+      ( y')
+      ( preserves-leq-sim-ℝ
+        ( x)
+        ( x')
+        ( y +ℝ real-ℚ (rational-ℚ⁺ d))
+        ( y' +ℝ real-ℚ (rational-ℚ⁺ d))
+        ( x~x')
+        ( preserves-sim-right-add-ℝ
+          ( real-ℚ (rational-ℚ⁺ d))
+          ( y)
+          ( y')
+          ( y~y'))
+        ( left-real-bound-neighborhood-leq-ℝ d x y H))
+      ( preserves-leq-sim-ℝ
+        ( y)
+        ( y')
+        ( x +ℝ real-ℚ (rational-ℚ⁺ d))
+        ( x' +ℝ real-ℚ (rational-ℚ⁺ d))
+        ( y~y')
+        ( preserves-sim-right-add-ℝ
+          ( real-ℚ (rational-ℚ⁺ d))
+          ( x)
+          ( x')
+          ( x~x'))
+        ( right-real-bound-neighborhood-leq-ℝ d x y H))
 ```
 
 ## References
