@@ -84,7 +84,7 @@ _≤-ℚ_ = leq-ℚ
 
 ## Properties
 
-### One is less than zero
+### Zero is less than one
 
 ```agda
 leq-zero-one-ℚ : leq-ℚ zero-ℚ one-ℚ
