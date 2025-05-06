@@ -16,6 +16,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -205,6 +206,23 @@ module _
     ( x : standard-sequential-colimit A) → P x
   dependent-cogap-standard-sequential-colimit =
     map-inv-equiv equiv-dup-standard-sequential-colimit
+
+  compute-incl-dependent-cogap-standard-sequential-colimit :
+    { P : standard-sequential-colimit A → UU l2} →
+    ( d :
+      dependent-cocone-sequential-diagram
+        ( cocone-standard-sequential-colimit A)
+        ( P)) →
+    ( n : ℕ) (a : family-sequential-diagram A n) →
+    dependent-cogap-standard-sequential-colimit d
+      ( map-cocone-standard-sequential-colimit n a) ＝
+    map-dependent-cocone-sequential-diagram P d n a
+  compute-incl-dependent-cogap-standard-sequential-colimit d =
+     pr1
+      ( htpy-eq-dependent-cocone-sequential-diagram _ _ d
+        ( is-section-map-inv-is-equiv
+          ( dup-standard-sequential-colimit _)
+          ( d)))
 ```
 
 ### The small predicate of being a sequential colimit cocone
