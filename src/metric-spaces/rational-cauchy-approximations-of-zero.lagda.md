@@ -150,3 +150,50 @@ module _
             ( sublinear-f δ))
           ( leq-dist-add-abs-ℚ (f ε) (f δ)))
 ```
+
+### A rational Cauchy approximation `f` converges to some `x : ℚ` if and only if the map `ε ↦ dist-ℚ (f ε) x` is a zero approximation
+
+```agda
+module _
+  (f : cauchy-approximation-ℚ) (x : ℚ)
+  where
+
+  map-dist-value-cauchy-approximation-ℚ : ℚ⁺ → ℚ
+  map-dist-value-cauchy-approximation-ℚ ε =
+    rational-dist-ℚ (map-cauchy-approximation-ℚ f ε) x
+
+  is-cauchy-approximation-dist-is-limit-cauchy-approximation-ℚ :
+    is-limit-cauchy-approximation-Metric-Space
+      ( metric-space-leq-ℚ)
+      ( f)
+      ( x) →
+    is-cauchy-approximation-Metric-Space
+      metric-space-leq-ℚ
+      map-dist-value-cauchy-approximation-ℚ
+  is-cauchy-approximation-dist-is-limit-cauchy-approximation-ℚ H ε δ =
+    is-saturated-metric-space-leq-ℚ
+      ( ε +ℚ⁺ δ)
+      ( map-dist-value-cauchy-approximation-ℚ ε)
+      ( map-dist-value-cauchy-approximation-ℚ δ)
+      ( saturated-neighborhood-dist)
+    where
+
+      -- saturated-neighborhood-dist :
+      --   ( θ : ℚ⁺) →
+      --   is-upper-bound-dist-Metric-Space
+      --     ( metric-space-leq-ℚ)
+      --     ( map-dist-value-cauchy-approximation-ℚ ε)
+      --     ( map-dist-value-cauchy-approximation-ℚ δ)
+      --     ( ε +ℚ⁺ δ +ℚ⁺ θ)
+      -- saturated-neighborhood-dist θ =
+      --   {!!}
+
+
+  -- is-zero-approximation-dist-is-limit-cauchy-approximation-ℚ :
+  --   is-limit-cauchy-approximation-Metric-Space
+  --     ( metric-space-leq-ℚ)
+  --     ( f)
+  --     ( x)
+
+
+```
