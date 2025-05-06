@@ -27,7 +27,7 @@ open import linear-algebra.finite-sequences-on-rings
 
 ## Idea
 
-Finite sequences on a
+Finite sequences in a
 [commutative ring](commutative-algebra.commutative-rings.md) `R` are
 [finite sequences](lists.finite-sequences.md) on the underlying type of `R`.
 
@@ -68,7 +68,7 @@ module _
     snoc-fin-sequence-type-Ring (ring-Commutative-Ring R)
 ```
 
-### Zero finite sequence on a commutative ring
+### The zero finite sequence in a commutative ring
 
 ```agda
 module _
