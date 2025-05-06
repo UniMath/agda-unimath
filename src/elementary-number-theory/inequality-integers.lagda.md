@@ -73,7 +73,7 @@ _≤-ℤ_ = leq-ℤ
 
 ## Properties
 
-### One is less than zero
+### Zero is less than one
 
 ```agda
 leq-zero-one-ℤ : leq-ℤ zero-ℤ one-ℤ
