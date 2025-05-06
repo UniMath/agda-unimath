@@ -1,4 +1,4 @@
-# Finite sequences on commutative rings
+# Finite sequences in commutative rings
 
 ```agda
 module linear-algebra.finite-sequences-on-commutative-rings where
@@ -80,7 +80,7 @@ module _
   zero-fin-sequence-type-Commutative-Ring n i = zero-Commutative-Ring R
 ```
 
-### Pointwise addition on a commutative ring
+### Pointwise addition of finite sequences in a commutative ring
 
 ```agda
 module _
@@ -94,7 +94,7 @@ module _
     add-fin-sequence-type-Ring (ring-Commutative-Ring R)
 ```
 
-### Pointwise negation on a commutative ring
+### Pointwise negation of finite sequences in a commutative ring
 
 ```agda
 module _
@@ -194,7 +194,7 @@ module _
     right-inverse-law-add-fin-sequence-type-Ring (ring-Commutative-Ring R)
 ```
 
-### Abelian group of pointwise addition
+### The abelian group of pointwise addition
 
 ```agda
 module _
