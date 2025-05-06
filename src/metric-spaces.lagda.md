@@ -98,6 +98,7 @@ open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.pseudometric-structures public
 open import metric-spaces.rational-cauchy-approximations public
 open import metric-spaces.rational-cauchy-approximations-of-zero public
+open import metric-spaces.rational-sequences-approximating-zero public
 open import metric-spaces.reflexive-premetric-structures public
 open import metric-spaces.saturated-complete-metric-spaces public
 open import metric-spaces.saturated-metric-spaces public
