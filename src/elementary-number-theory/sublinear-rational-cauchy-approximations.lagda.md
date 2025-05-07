@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module metric-spaces.sublinear-rational-cauchy-approximations where
+module elementary-number-theory.sublinear-rational-cauchy-approximations where
 ```
 
 <details><summary>Imports</summary>
@@ -11,25 +11,18 @@ module metric-spaces.sublinear-rational-cauchy-approximations where
 ```agda
 open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
 open import metric-spaces.rational-cauchy-approximations

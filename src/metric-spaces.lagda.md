@@ -107,7 +107,6 @@ open import metric-spaces.sequences-premetric-spaces public
 open import metric-spaces.sequences-pseudometric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
 open import metric-spaces.short-functions-premetric-spaces public
-open import metric-spaces.sublinear-rational-cauchy-approximations public
 open import metric-spaces.subspaces-metric-spaces public
 open import metric-spaces.symmetric-premetric-structures public
 open import metric-spaces.total-metric-spaces public

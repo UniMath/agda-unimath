@@ -18,6 +18,7 @@ open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.sublinear-rational-cauchy-approximations
 open import elementary-number-theory.sublinear-rational-functions
 
 open import foundation.action-on-identifications-functions
@@ -34,7 +35,6 @@ open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
 open import metric-spaces.rational-cauchy-approximations
-open import metric-spaces.sublinear-rational-cauchy-approximations
 ```
 
 </details>

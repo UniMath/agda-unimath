@@ -182,6 +182,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers public
 open import elementary-number-theory.strict-inequality-standard-finite-types public
 open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers public
 open import elementary-number-theory.strong-induction-natural-numbers public
+open import elementary-number-theory.sublinear-rational-cauchy-approximations public
 open import elementary-number-theory.sublinear-rational-functions public
 open import elementary-number-theory.sums-of-natural-numbers public
 open import elementary-number-theory.sylvesters-sequence public
