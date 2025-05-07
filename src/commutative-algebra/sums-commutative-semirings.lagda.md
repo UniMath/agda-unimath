@@ -17,8 +17,9 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
-open import linear-algebra.vectors-on-commutative-semirings
+open import linear-algebra.finite-sequences-in-commutative-semirings
+
+open import lists.finite-sequences
 
 open import ring-theory.sums-semirings
 
@@ -31,14 +32,15 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The **sum operation** extends the binary addition operation on a commutative
-semiring `R` to any family of elements of `R` indexed by a standard finite type.
+semiring `R` to any [finite sequence](lists.finite-sequences.md) of elements of
+`R`.
 
 ## Definition
 
 ```agda
 sum-Commutative-Semiring :
   {l : Level} (A : Commutative-Semiring l) (n : ℕ) →
-  (functional-vec-Commutative-Semiring A n) → type-Commutative-Semiring A
+  (fin-sequence-type-Commutative-Semiring A n) → type-Commutative-Semiring A
 sum-Commutative-Semiring A = sum-Semiring (semiring-Commutative-Semiring A)
 ```
 
@@ -52,13 +54,13 @@ module _
   where
 
   sum-one-element-Commutative-Semiring :
-    (f : functional-vec-Commutative-Semiring A 1) →
-    sum-Commutative-Semiring A 1 f ＝ head-functional-vec 0 f
+    (f : fin-sequence-type-Commutative-Semiring A 1) →
+    sum-Commutative-Semiring A 1 f ＝ head-fin-sequence 0 f
   sum-one-element-Commutative-Semiring =
     sum-one-element-Semiring (semiring-Commutative-Semiring A)
 
   sum-two-elements-Commutative-Semiring :
-    (f : functional-vec-Commutative-Semiring A 2) →
+    (f : fin-sequence-type-Commutative-Semiring A 2) →
     sum-Commutative-Semiring A 2 f ＝
     add-Commutative-Semiring A (f (zero-Fin 1)) (f (one-Fin 1))
   sum-two-elements-Commutative-Semiring =
@@ -73,7 +75,7 @@ module _
   where
 
   htpy-sum-Commutative-Semiring :
-    (n : ℕ) {f g : functional-vec-Commutative-Semiring A n} →
+    (n : ℕ) {f g : fin-sequence-type-Commutative-Semiring A n} →
     (f ~ g) → sum-Commutative-Semiring A n f ＝ sum-Commutative-Semiring A n g
   htpy-sum-Commutative-Semiring =
     htpy-sum-Semiring (semiring-Commutative-Semiring A)
@@ -87,16 +89,16 @@ module _
   where
 
   cons-sum-Commutative-Semiring :
-    (n : ℕ) (f : functional-vec-Commutative-Semiring A (succ-ℕ n)) →
-    {x : type-Commutative-Semiring A} → head-functional-vec n f ＝ x →
+    (n : ℕ) (f : fin-sequence-type-Commutative-Semiring A (succ-ℕ n)) →
+    {x : type-Commutative-Semiring A} → head-fin-sequence n f ＝ x →
     sum-Commutative-Semiring A (succ-ℕ n) f ＝
     add-Commutative-Semiring A
-      ( sum-Commutative-Semiring A n (tail-functional-vec n f)) x
+      ( sum-Commutative-Semiring A n (tail-fin-sequence n f)) x
   cons-sum-Commutative-Semiring =
     cons-sum-Semiring (semiring-Commutative-Semiring A)
 
   snoc-sum-Commutative-Semiring :
-    (n : ℕ) (f : functional-vec-Commutative-Semiring A (succ-ℕ n)) →
+    (n : ℕ) (f : fin-sequence-type-Commutative-Semiring A (succ-ℕ n)) →
     {x : type-Commutative-Semiring A} → f (zero-Fin n) ＝ x →
     sum-Commutative-Semiring A (succ-ℕ n) f ＝
     add-Commutative-Semiring A
@@ -115,14 +117,14 @@ module _
 
   left-distributive-mul-sum-Commutative-Semiring :
     (n : ℕ) (x : type-Commutative-Semiring A)
-    (f : functional-vec-Commutative-Semiring A n) →
+    (f : fin-sequence-type-Commutative-Semiring A n) →
     mul-Commutative-Semiring A x (sum-Commutative-Semiring A n f) ＝
     sum-Commutative-Semiring A n (λ i → mul-Commutative-Semiring A x (f i))
   left-distributive-mul-sum-Commutative-Semiring =
     left-distributive-mul-sum-Semiring (semiring-Commutative-Semiring A)
 
   right-distributive-mul-sum-Commutative-Semiring :
-    (n : ℕ) (f : functional-vec-Commutative-Semiring A n)
+    (n : ℕ) (f : fin-sequence-type-Commutative-Semiring A n)
     (x : type-Commutative-Semiring A) →
     mul-Commutative-Semiring A (sum-Commutative-Semiring A n f) x ＝
     sum-Commutative-Semiring A n (λ i → mul-Commutative-Semiring A (f i) x)
@@ -138,12 +140,12 @@ module _
   where
 
   interchange-add-sum-Commutative-Semiring :
-    (n : ℕ) (f g : functional-vec-Commutative-Semiring A n) →
+    (n : ℕ) (f g : fin-sequence-type-Commutative-Semiring A n) →
     add-Commutative-Semiring A
       ( sum-Commutative-Semiring A n f)
       ( sum-Commutative-Semiring A n g) ＝
     sum-Commutative-Semiring A n
-      ( add-functional-vec-Commutative-Semiring A n f g)
+      ( add-fin-sequence-type-Commutative-Semiring A n f g)
   interchange-add-sum-Commutative-Semiring =
     interchange-add-sum-Semiring (semiring-Commutative-Semiring A)
 ```
@@ -156,10 +158,10 @@ module _
   where
 
   extend-sum-Commutative-Semiring :
-    (n : ℕ) (f : functional-vec-Commutative-Semiring A n) →
+    (n : ℕ) (f : fin-sequence-type-Commutative-Semiring A n) →
     sum-Commutative-Semiring A
       ( succ-ℕ n)
-      ( cons-functional-vec-Commutative-Semiring A n
+      ( cons-fin-sequence-type-Commutative-Semiring A n
         ( zero-Commutative-Semiring A) f) ＝
     sum-Commutative-Semiring A n f
   extend-sum-Commutative-Semiring =
@@ -174,10 +176,10 @@ module _
   where
 
   shift-sum-Commutative-Semiring :
-    (n : ℕ) (f : functional-vec-Commutative-Semiring A n) →
+    (n : ℕ) (f : fin-sequence-type-Commutative-Semiring A n) →
     sum-Commutative-Semiring A
       ( succ-ℕ n)
-      ( snoc-functional-vec-Commutative-Semiring A n f
+      ( snoc-fin-sequence-type-Commutative-Semiring A n f
         ( zero-Commutative-Semiring A)) ＝
     sum-Commutative-Semiring A n f
   shift-sum-Commutative-Semiring =
@@ -194,7 +196,7 @@ module _
   sum-zero-Commutative-Semiring :
     (n : ℕ) →
     sum-Commutative-Semiring A n
-      ( zero-functional-vec-Commutative-Semiring A n) ＝
+      ( zero-fin-sequence-type-Commutative-Semiring A n) ＝
     zero-Commutative-Semiring A
   sum-zero-Commutative-Semiring =
     sum-zero-Semiring (semiring-Commutative-Semiring A)
@@ -205,7 +207,7 @@ module _
 ```agda
 split-sum-Commutative-Semiring :
   {l : Level} (A : Commutative-Semiring l)
-  (n m : ℕ) (f : functional-vec-Commutative-Semiring A (n +ℕ m)) →
+  (n m : ℕ) (f : fin-sequence-type-Commutative-Semiring A (n +ℕ m)) →
   sum-Commutative-Semiring A (n +ℕ m) f ＝
   add-Commutative-Semiring A
     ( sum-Commutative-Semiring A n (f ∘ inl-coproduct-Fin n m))

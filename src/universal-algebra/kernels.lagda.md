@@ -17,8 +17,8 @@ open import foundation.equivalence-relations
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.vectors
+open import lists.functoriality-tuples
+open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
@@ -68,9 +68,9 @@ module _
   pr2 kernel-hom-Algebra op v v' p =
     equational-reasoning
       f (is-model-set-Algebra Sg Th Alg1 op v)
-      ＝ is-model-set-Algebra Sg Th Alg2 op (map-vec f v)
+      ＝ is-model-set-Algebra Sg Th Alg2 op (map-tuple f v)
         by preserves-operations-hom-Algebra Sg Th Alg1 Alg2 F op v
-      ＝ is-model-set-Algebra Sg Th Alg2 op (map-vec f v')
+      ＝ is-model-set-Algebra Sg Th Alg2 op (map-tuple f v')
         by
           ap
             ( is-model-set-Algebra Sg Th Alg2 op)
@@ -81,11 +81,11 @@ module _
     f = map-hom-Algebra Sg Th Alg1 Alg2 F
     map-hom-Algebra-lemma :
       ( n : ℕ) →
-      ( v v' : vec (type-Algebra Sg Th Alg1) n) →
-      ( relation-holds-all-vec Sg Th Alg1
+      ( v v' : tuple (type-Algebra Sg Th Alg1) n) →
+      ( relation-holds-all-tuple Sg Th Alg1
         equivalence-relation-kernel-hom-Algebra v v') →
-      (map-vec f v) ＝ (map-vec f v')
-    map-hom-Algebra-lemma zero-ℕ empty-vec empty-vec p = refl
+      (map-tuple f v) ＝ (map-tuple f v')
+    map-hom-Algebra-lemma zero-ℕ empty-tuple empty-tuple p = refl
     map-hom-Algebra-lemma (succ-ℕ n) (x ∷ v) (x' ∷ v') (p , p') =
       ap-binary (_∷_) p (map-hom-Algebra-lemma n v v' p')
 ```

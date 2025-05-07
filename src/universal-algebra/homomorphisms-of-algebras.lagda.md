@@ -11,8 +11,8 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.vectors
+open import lists.functoriality-tuples
+open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
@@ -42,10 +42,10 @@ module _
     UU (l1 ⊔ l3 ⊔ l4)
   preserves-operations-Algebra f =
     ( op : operation-signature Sg) →
-    ( v : vec (type-Algebra Sg Th Alg1)
+    ( v : tuple (type-Algebra Sg Th Alg1)
       ( arity-operation-signature Sg op)) →
         ( f (is-model-set-Algebra Sg Th Alg1 op v) ＝
-          ( is-model-set-Algebra Sg Th Alg2 op (map-vec f v)))
+          ( is-model-set-Algebra Sg Th Alg2 op (map-tuple f v)))
 
   hom-Algebra : UU (l1 ⊔ l3 ⊔ l4)
   hom-Algebra =
