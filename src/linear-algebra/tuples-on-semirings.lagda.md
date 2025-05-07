@@ -56,7 +56,7 @@ module _
   snoc-tuple-Semiring v r = snoc-tuple v r
 ```
 
-### Zero tuple on a ring
+### The zero tuple in a semiring
 
 ```agda
 module _
@@ -67,7 +67,7 @@ module _
   zero-tuple-Semiring = constant-tuple (zero-Semiring R)
 ```
 
-### Pointwise addition of tuples on a ring
+### Pointwise addition of tuples in a semiring
 
 ```agda
 module _
@@ -81,7 +81,7 @@ module _
 
 ## Properties of pointwise addition
 
-### Associativity
+### Associativity of pointwise addition
 
 ```agda
 module _
@@ -99,7 +99,7 @@ module _
       ( associative-add-tuple-Semiring v1 v2 v3)
 ```
 
-### Unit laws
+### Unit laws of pointwise addition
 
 ```agda
 module _
@@ -125,7 +125,7 @@ module _
       ( right-unit-law-add-tuple-Semiring v)
 ```
 
-### Commutativity
+### Commutativity of pointwise addition
 
 ```agda
 module _
@@ -142,7 +142,7 @@ module _
       ( commutative-add-tuple-Semiring v w)
 ```
 
-### The commutative monoid of addition
+### The commutative monoid of pointwise addition
 
 ```agda
 module _

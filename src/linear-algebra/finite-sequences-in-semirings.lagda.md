@@ -1,7 +1,7 @@
 # Finite sequences in semirings
 
 ```agda
-module linear-algebra.finite-sequences-on-semirings where
+module linear-algebra.finite-sequences-in-semirings where
 ```
 
 <details><summary>Imports</summary>
@@ -29,8 +29,8 @@ open import ring-theory.semirings
 ## Idea
 
 Given a [semiring](ring-theory.semirings.md) `R`, the type
-`finite-sequence-Semiring R n` of
-[finite sequences](lists.finite-sequences.md) of length `n` in the underlying type of `R` is a
+`finite-sequence-Semiring R n` of [finite sequences](lists.finite-sequences.md)
+of length `n` in the underlying type of `R` is a
 [commutative monoid](group-theory.commutative-monoids.md) under addition.
 
 ## Definitions
@@ -63,7 +63,7 @@ module _
   snoc-fin-sequence-type-Semiring = snoc-fin-sequence
 ```
 
-### The zero finite sequences in a semiring
+### The zero finite sequence in a semiring
 
 ```agda
 module _
@@ -74,7 +74,7 @@ module _
   zero-fin-sequence-type-Semiring n i = zero-Semiring R
 ```
 
-### Pointwise addition
+### Pointwise addition of finite sequences in a semiring
 
 ```agda
 module _
@@ -88,7 +88,7 @@ module _
     binary-map-fin-sequence n (add-Semiring R)
 ```
 
-## Properties
+## Properties of pointwise addition
 
 ### Associativity of pointwise addition
 
@@ -152,7 +152,7 @@ module _
     eq-htpy (λ i → commutative-add-Semiring R (v i) (w i))
 ```
 
-### Commutative monoid of pointwise addition
+### The commutative monoid of pointwise addition
 
 ```agda
 module _

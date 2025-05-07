@@ -1,7 +1,7 @@
 # Finite sequences in rings
 
 ```agda
-module linear-algebra.finite-sequences-on-rings where
+module linear-algebra.finite-sequences-in-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -22,7 +22,7 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import linear-algebra.finite-sequences-on-semirings
+open import linear-algebra.finite-sequences-in-semirings
 
 open import lists.finite-sequences
 open import lists.functoriality-finite-sequences
@@ -35,8 +35,8 @@ open import ring-theory.rings
 ## Idea
 
 Given a [ring](ring-theory.rings.md) `R`, the type `fin-sequence n R` of
-[finite sequences](lists.finite-sequences.md) in the underlying type of `R` of length `n` is an
-[abelian group](group-theory.abelian-groups.md).
+[finite sequences](lists.finite-sequences.md) in the underlying type of `R` of
+length `n` is an [abelian group](group-theory.abelian-groups.md).
 
 ## Definitions
 
@@ -67,7 +67,7 @@ module _
   snoc-fin-sequence-type-Ring = snoc-fin-sequence
 ```
 
-### Zero finite sequences in rings
+### The zero finite sequence in a ring
 
 ```agda
 module _
@@ -177,7 +177,7 @@ module _
     eq-htpy (λ i → right-inverse-law-add-Ring R _)
 ```
 
-### Abelian group of pointwise addition
+### The abelian group of pointwise addition
 
 ```agda
 module _

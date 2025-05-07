@@ -15,7 +15,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences-on-rings
+open import linear-algebra.finite-sequences-in-rings
 
 open import lists.finite-sequences
 

@@ -57,7 +57,7 @@ module _
   snoc-tuple-Ring v r = snoc-tuple v r
 ```
 
-### Zero tuple on a ring
+### The zero tuple in a ring
 
 ```agda
 module _
@@ -68,7 +68,7 @@ module _
   zero-tuple-Ring = constant-tuple (zero-Ring R)
 ```
 
-### Pointwise addition of tuples on a ring
+### Pointwise addition of tuples in a ring
 
 ```agda
 module _
@@ -79,7 +79,7 @@ module _
   add-tuple-Ring = binary-map-tuple (add-Ring R)
 ```
 
-### Pointwise negation
+### Pointwise negation of tuples in a ring
 
 ```agda
 module _
@@ -92,7 +92,7 @@ module _
 
 ## Properties of pointwise addition
 
-### Associativity
+### Associativity of pointwise addition
 
 ```agda
 module _
@@ -107,7 +107,7 @@ module _
   associative-add-tuple-Ring = associative-add-tuple-Semiring (semiring-Ring R)
 ```
 
-### Unit laws
+### Unit laws of pointwise addition
 
 ```agda
 module _
@@ -125,7 +125,7 @@ module _
     right-unit-law-add-tuple-Semiring (semiring-Ring R)
 ```
 
-### Commutativity
+### Commutativity of pointwise addition
 
 ```agda
 module _
@@ -142,7 +142,7 @@ module _
       ( commutative-add-tuple-Ring v w)
 ```
 
-### Inverse laws
+### Inverse laws of pointwise addition
 
 ```agda
 module _
@@ -168,7 +168,7 @@ module _
       ( right-inverse-law-add-tuple-Ring v)
 ```
 
-### Abelian group of addition of tuples
+### The abelian group of pointwise addition
 
 ```agda
 module _

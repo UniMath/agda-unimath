@@ -61,7 +61,7 @@ module _
     snoc-tuple-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### Zero tuple on a commutative semiring
+### The zero tuple in a commutative semiring
 
 ```agda
 module _
@@ -88,7 +88,7 @@ module _
 
 ## Properties of pointwise addition
 
-### Associativity
+### Associativity of pointwise addition
 
 ```agda
 module _
@@ -104,7 +104,7 @@ module _
     associative-add-tuple-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### Unit laws
+### Unit laws of pointwise addition
 
 ```agda
 module _
@@ -124,7 +124,7 @@ module _
     right-unit-law-add-tuple-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### Commutativity
+### Commutativity of pointwise addition
 
 ```agda
 module _

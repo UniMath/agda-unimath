@@ -19,7 +19,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import linear-algebra.finite-sequences-on-semirings
+open import linear-algebra.finite-sequences-in-semirings
 
 open import lists.finite-sequences
 

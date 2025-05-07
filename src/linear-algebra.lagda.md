@@ -8,11 +8,11 @@ module linear-algebra where
 open import linear-algebra.constant-matrices public
 open import linear-algebra.constant-tuples public
 open import linear-algebra.diagonal-matrices-on-rings public
-open import linear-algebra.finite-sequences-on-commutative-rings public
-open import linear-algebra.finite-sequences-on-commutative-semirings public
-open import linear-algebra.finite-sequences-on-euclidean-domains public
-open import linear-algebra.finite-sequences-on-rings public
-open import linear-algebra.finite-sequences-on-semirings public
+open import linear-algebra.finite-sequences-in-commutative-rings public
+open import linear-algebra.finite-sequences-in-commutative-semirings public
+open import linear-algebra.finite-sequences-in-euclidean-domains public
+open import linear-algebra.finite-sequences-in-rings public
+open import linear-algebra.finite-sequences-in-semirings public
 open import linear-algebra.functoriality-matrices public
 open import linear-algebra.matrices public
 open import linear-algebra.matrices-on-rings public

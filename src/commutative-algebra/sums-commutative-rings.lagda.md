@@ -20,7 +20,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences-on-commutative-rings
+open import linear-algebra.finite-sequences-in-commutative-rings
 
 open import lists.finite-sequences
 

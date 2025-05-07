@@ -1,7 +1,7 @@
 # Finite sequences in euclidean domains
 
 ```agda
-module linear-algebra.finite-sequences-on-euclidean-domains where
+module linear-algebra.finite-sequences-in-euclidean-domains where
 ```
 
 <details><summary>Imports</summary>
@@ -20,7 +20,7 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import linear-algebra.finite-sequences-on-commutative-rings
+open import linear-algebra.finite-sequences-in-commutative-rings
 
 open import lists.finite-sequences
 open import lists.functoriality-finite-sequences
@@ -30,7 +30,7 @@ open import lists.functoriality-finite-sequences
 
 ## Idea
 
-Given an [Euclidean domain](commutative-algebra.euclidean-domains.md) `R`, the
+Given a [Euclidean domain](commutative-algebra.euclidean-domains.md) `R`, the
 type `fin-sequence n R` of `R`-[finite sequences](lists.finite-sequences.md) is
 an `R`-module.
 
@@ -68,7 +68,7 @@ module _
   snoc-fin-sequence-type-Euclidean-Domain = snoc-fin-sequence
 ```
 
-### Zero finite sequences in Euclidean domains
+### The zero finite sequence in a Euclidean domain
 
 ```agda
 module _
@@ -80,7 +80,7 @@ module _
   zero-fin-sequence-type-Euclidean-Domain n i = zero-Euclidean-Domain R
 ```
 
-### Pointwise addition of finite sequences in an Euclidean domain
+### Pointwise addition of finite sequences in a Euclidean domain
 
 ```agda
 module _
@@ -94,7 +94,7 @@ module _
     binary-map-fin-sequence n (add-Euclidean-Domain R)
 ```
 
-### Pointwise negation of finite sequences on a euclidean domain
+### Pointwise negation of finite sequences on a Euclidean domain
 
 ```agda
 module _
@@ -111,7 +111,7 @@ module _
 
 ## Properties of pointwise addition
 
-### Associativity
+### Associativity of pointwise addition
 
 ```agda
 module _
@@ -135,7 +135,7 @@ module _
       ( commutative-ring-Euclidean-Domain R)
 ```
 
-### Unit laws
+### Unit laws of pointwise addition
 
 ```agda
 module _
@@ -167,7 +167,7 @@ module _
       ( commutative-ring-Euclidean-Domain R)
 ```
 
-### Commutativity
+### Commutativity of pointwise addition
 
 ```agda
 module _
@@ -183,7 +183,7 @@ module _
       ( commutative-ring-Euclidean-Domain R)
 ```
 
-### Inverse laws
+### Inverse laws of pointwise addition
 
 ```agda
 module _
@@ -214,7 +214,7 @@ module _
       ( commutative-ring-Euclidean-Domain R)
 ```
 
-### Abelian group of pointwise addition
+### The abelian group of pointwise addition
 
 ```agda
 module _

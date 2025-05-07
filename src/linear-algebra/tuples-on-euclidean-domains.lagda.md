@@ -31,12 +31,12 @@ open import lists.tuples
 
 ## Idea
 
-Given an [Euclidean domain](commutative-algebra.euclidean-domains.md) `R`, the
+Given a [Euclidean domain](commutative-algebra.euclidean-domains.md) `R`, the
 type `tuple n R` of `R`-[tuples](lists.tuples.md) is an `R`-module.
 
 ## Definitions
 
-### Listed tuples on euclidean domains
+### Listed tuples on Euclidean domains
 
 ```agda
 module _
@@ -60,7 +60,7 @@ module _
   snoc-tuple-Euclidean-Domain v r = snoc-tuple v r
 ```
 
-### Zero tuple on a euclidean domain
+### The zero tuple in a Euclidean domain
 
 ```agda
 module _
@@ -71,7 +71,7 @@ module _
   zero-tuple-Euclidean-Domain = constant-tuple (zero-Euclidean-Domain R)
 ```
 
-### Pointwise addition of tuples on a euclidean domain
+### Pointwise addition of tuples on a Euclidean domain
 
 ```agda
 module _
@@ -86,7 +86,7 @@ module _
   add-tuple-Euclidean-Domain = binary-map-tuple (add-Euclidean-Domain R)
 ```
 
-### Pointwise negation of tuples on a euclidean domain
+### Pointwise negation of tuples on a Euclidean domain
 
 ```agda
 module _
@@ -100,7 +100,7 @@ module _
 
 ## Properties of pointwise addition
 
-### Associativity
+### Associativity of pointwise addition
 
 ```agda
 module _
@@ -117,7 +117,7 @@ module _
       ( commutative-ring-Euclidean-Domain R)
 ```
 
-### Unit laws
+### Unit laws of pointwise addition
 
 ```agda
 module _
@@ -139,7 +139,7 @@ module _
       ( commutative-ring-Euclidean-Domain R)
 ```
 
-### Commutativity
+### Commutativity of pointwise addition
 
 ```agda
 module _
@@ -154,7 +154,7 @@ module _
       ( commutative-ring-Euclidean-Domain R)
 ```
 
-### Inverse laws
+### Inverse laws of pointwise addition
 
 ```agda
 module _
@@ -180,7 +180,7 @@ module _
       ( commutative-ring-Euclidean-Domain R)
 ```
 
-### The Abelian group of pointwise addition
+### The abelian group of pointwise addition
 
 ```agda
 module _

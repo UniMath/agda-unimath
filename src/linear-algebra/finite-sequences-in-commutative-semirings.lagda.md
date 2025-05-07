@@ -1,7 +1,7 @@
-# Finite sequences on commutative semirings
+# Finite sequences in commutative semirings
 
 ```agda
-module linear-algebra.finite-sequences-on-commutative-semirings where
+module linear-algebra.finite-sequences-in-commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
@@ -18,7 +18,7 @@ open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import linear-algebra.finite-sequences-on-semirings
+open import linear-algebra.finite-sequences-in-semirings
 ```
 
 </details>
@@ -67,7 +67,7 @@ module _
     snoc-fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### Zero finite sequence in a commutative semiring
+### The zero finite sequence in a commutative semiring
 
 ```agda
 module _
@@ -95,7 +95,7 @@ module _
 
 ## Properties of pointwise addition
 
-### Associativity
+### Associativity of pointwise addition
 
 ```agda
 module _
@@ -112,7 +112,7 @@ module _
     associative-add-fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### Unit laws
+### Unit laws of pointwise addition
 
 ```agda
 module _
@@ -136,7 +136,7 @@ module _
       ( semiring-Commutative-Semiring R)
 ```
 
-### Commutativity
+### Commutativity of pointwise addition
 
 ```agda
 module _

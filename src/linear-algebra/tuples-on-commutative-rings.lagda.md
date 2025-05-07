@@ -56,7 +56,7 @@ module _
   snoc-tuple-Commutative-Ring = snoc-tuple-Ring (ring-Commutative-Ring R)
 ```
 
-### Zero tuple on a commutative ring
+### The zero tuple in a commutative ring
 
 ```agda
 module _
@@ -67,7 +67,7 @@ module _
   zero-tuple-Commutative-Ring = constant-tuple (zero-Commutative-Ring R)
 ```
 
-### Pointwise addition of tuples on a commutative ring
+### Pointwise addition of tuples in a commutative ring
 
 ```agda
 module _
@@ -81,7 +81,7 @@ module _
     add-tuple-Ring (ring-Commutative-Ring R)
 ```
 
-### Pointwise negation of tuples on a commutative ring
+### Pointwise negation of tuples in a commutative ring
 
 ```agda
 module _
@@ -95,7 +95,7 @@ module _
 
 ## Properties of pointwise addition
 
-### Associativity
+### Associativity of pointwise addition
 
 ```agda
 module _
@@ -110,7 +110,7 @@ module _
     associative-add-tuple-Ring (ring-Commutative-Ring R)
 ```
 
-### Unit laws
+### Unit laws of pointwise addition
 
 ```agda
 module _
@@ -130,7 +130,7 @@ module _
     right-unit-law-add-tuple-Ring (ring-Commutative-Ring R)
 ```
 
-### Commutativity
+### Commutativity of pointwise addition
 
 ```agda
 module _
@@ -144,7 +144,7 @@ module _
     commutative-add-tuple-Ring (ring-Commutative-Ring R)
 ```
 
-### Inverse laws
+### Inverse laws of pointwise addition
 
 ```agda
 module _
@@ -172,7 +172,7 @@ module _
     right-inverse-law-add-tuple-Ring (ring-Commutative-Ring R)
 ```
 
-### The Abelian group of pointwise addition
+### The abelian group of pointwise addition
 
 ```agda
 module _
