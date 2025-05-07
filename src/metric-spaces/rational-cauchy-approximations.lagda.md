@@ -19,10 +19,17 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
+open import metric-spaces.short-functions-metric-spaces
+
+open import real-numbers.cauchy-completeness-dedekind-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.rational-real-numbers
 ```
 
 </details>
@@ -77,4 +84,21 @@ bound-dist-map-cauchy-approximation-ℚ f ε δ =
     ( map-cauchy-approximation-ℚ f ε)
     ( map-cauchy-approximation-ℚ f δ)
     ( is-cauchy-map-cauchy-approximation-ℚ f ε δ)
+```
+
+### Any rational Cauchy approximation has a real limit
+
+```agda
+real-limit-cauchy-approximation-ℚ : cauchy-approximation-ℚ → ℝ lzero
+real-limit-cauchy-approximation-ℚ f =
+  limit-cauchy-approximation-Complete-Metric-Space
+    ( complete-metric-space-leq-ℝ lzero)
+    ( map-short-function-cauchy-approximation-Metric-Space
+      ( metric-space-leq-ℚ)
+      ( metric-space-leq-ℝ lzero)
+      ( short-isometry-Metric-Space
+        ( metric-space-leq-ℚ)
+        ( metric-space-leq-ℝ lzero)
+        ( isometry-metric-space-leq-real-ℚ))
+      ( f))
 ```
