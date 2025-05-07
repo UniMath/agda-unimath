@@ -1,4 +1,4 @@
-# Finite sequences on euclidean domains
+# Finite sequences in euclidean domains
 
 ```agda
 module linear-algebra.finite-sequences-on-euclidean-domains where
@@ -68,7 +68,7 @@ module _
   snoc-fin-sequence-type-Euclidean-Domain = snoc-fin-sequence
 ```
 
-### Zero finite sequences on a euclidean domain
+### Zero finite sequences in Euclidean domains
 
 ```agda
 module _
@@ -80,7 +80,7 @@ module _
   zero-fin-sequence-type-Euclidean-Domain n i = zero-Euclidean-Domain R
 ```
 
-### Pointwise addition of finite sequences on a euclidean domain
+### Pointwise addition of finite sequences in an Euclidean domain
 
 ```agda
 module _

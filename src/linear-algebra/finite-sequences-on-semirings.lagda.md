@@ -1,4 +1,4 @@
-# Finite sequences on semirings
+# Finite sequences in semirings
 
 ```agda
 module linear-algebra.finite-sequences-on-semirings where
@@ -30,7 +30,7 @@ open import ring-theory.semirings
 
 Given a [semiring](ring-theory.semirings.md) `R`, the type
 `finite-sequence-Semiring R n` of
-`R`-[finite sequences](lists.finite-sequences.md) is a
+[finite sequences](lists.finite-sequences.md) of length `n` in the underlying type of `R` is a
 [commutative monoid](group-theory.commutative-monoids.md) under addition.
 
 ## Definitions
@@ -63,7 +63,7 @@ module _
   snoc-fin-sequence-type-Semiring = snoc-fin-sequence
 ```
 
-### Zero finite sequence on a ring
+### The zero finite sequences in a semiring
 
 ```agda
 module _
@@ -74,7 +74,7 @@ module _
   zero-fin-sequence-type-Semiring n i = zero-Semiring R
 ```
 
-### Pointwise addition on a ring
+### Pointwise addition
 
 ```agda
 module _

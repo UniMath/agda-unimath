@@ -1,4 +1,4 @@
-# Finite sequences on rings
+# Finite sequences in rings
 
 ```agda
 module linear-algebra.finite-sequences-on-rings where
@@ -35,7 +35,7 @@ open import ring-theory.rings
 ## Idea
 
 Given a [ring](ring-theory.rings.md) `R`, the type `fin-sequence n R` of
-`R`-[finite sequences](lists.finite-sequences.md) is an
+[finite sequences](lists.finite-sequences.md) in the underlying type of `R` of length `n` is an
 [abelian group](group-theory.abelian-groups.md).
 
 ## Definitions
@@ -67,7 +67,7 @@ module _
   snoc-fin-sequence-type-Ring = snoc-fin-sequence
 ```
 
-### Zero finite sequence on a ring
+### Zero finite sequences in rings
 
 ```agda
 module _
@@ -78,7 +78,7 @@ module _
   zero-fin-sequence-type-Ring n i = zero-Ring R
 ```
 
-### Pointwise addition of finite sequences on a ring
+### Pointwise addition of finite sequences in a ring
 
 ```agda
 module _
@@ -90,7 +90,7 @@ module _
   add-fin-sequence-type-Ring n = binary-map-fin-sequence n (add-Ring R)
 ```
 
-### Pointwise negation of finite sequences on a ring
+### Pointwise negation of finite sequences in a ring
 
 ```agda
 module _

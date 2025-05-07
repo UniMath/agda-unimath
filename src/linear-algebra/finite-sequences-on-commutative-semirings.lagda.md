@@ -25,9 +25,9 @@ open import linear-algebra.finite-sequences-on-semirings
 
 ## Idea
 
-Finite sequences on a
+Finite sequences in a
 [commutative semiring](commutative-algebra.commutative-semirings.md) `R` are
-[finite sequences](lists.finite-sequences.md) on the underlying type of `R`.
+[finite sequences](lists.finite-sequences.md) in the underlying type of `R`.
 
 ## Definitions
 
@@ -67,7 +67,7 @@ module _
     snoc-fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### Zero finite sequence on a commutative semiring
+### Zero finite sequence in a commutative semiring
 
 ```agda
 module _
@@ -79,7 +79,7 @@ module _
   zero-fin-sequence-type-Commutative-Semiring n i = zero-Commutative-Semiring R
 ```
 
-#### Pointwise addition of finite sequences on a commutative semiring
+#### Pointwise addition of finite sequences in a commutative semiring
 
 ```agda
 module _
