@@ -18,6 +18,7 @@ open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.sublinear-rational-functions
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -33,6 +34,7 @@ open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
 open import metric-spaces.rational-cauchy-approximations
+open import metric-spaces.sublinear-rational-cauchy-approximations
 ```
 
 </details>
@@ -45,7 +47,9 @@ are
 the
 [metric space of rational numbers](metric-spaces.metric-space-of-rational-numbers.md)
 that [converge](metric-spaces.convergent-cauchy-approximations-metric-spaces.md)
-to [zero-ℚ](elementary-number-theory.rational-numbers.md).
+to [zero-ℚ](elementary-number-theory.rational-numbers.md). The type of rational
+Cauchy approximations of zero is equivalent to the type of
+[sublinear rational Cauchy approximations](metric-spaces.sublinear-approximation-ℚ.md).
 
 ## Definitions
 
@@ -98,38 +102,6 @@ module _
       approximation-zero-cauchy-approximation-ℚ
 ```
 
-### Sublinear rational approximations
-
-```agda
-module _
-  (f : ℚ⁺ → ℚ)
-  where
-
-  is-sublinear-approximation-prop-ℚ : Prop lzero
-  is-sublinear-approximation-prop-ℚ =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ ε → leq-ℚ-Prop (rational-abs-ℚ (f ε)) (rational-ℚ⁺ ε))
-
-  is-sublinear-approximation-ℚ : UU lzero
-  is-sublinear-approximation-ℚ =
-    type-Prop is-sublinear-approximation-prop-ℚ
-
-sublinear-approximation-ℚ : UU lzero
-sublinear-approximation-ℚ = type-subtype is-sublinear-approximation-prop-ℚ
-
-module _
-  (f : sublinear-approximation-ℚ)
-  where
-
-  map-sublinear-approximation-ℚ : ℚ⁺ → ℚ
-  map-sublinear-approximation-ℚ = pr1 f
-
-  is-sublinear-map-sublinear-approximation-ℚ :
-    is-sublinear-approximation-ℚ map-sublinear-approximation-ℚ
-  is-sublinear-map-sublinear-approximation-ℚ = pr2 f
-```
-
 ## Properties
 
 ### A rational Cauchy approximation of zero is sublinear
@@ -169,66 +141,35 @@ sublinear-zero-cauchy-approximation-ℚ f =
 
 ```agda
 module _
-  (f : ℚ⁺ → ℚ)
-  (is-sublinear-f : is-sublinear-approximation-ℚ f)
+  (f : sublinear-approximation-ℚ)
   where
-
-  abstract
-    is-cauchy-approximation-is-sublinear-approximation-ℚ :
-      is-cauchy-approximation-Metric-Space
-        metric-space-leq-ℚ
-        f
-    is-cauchy-approximation-is-sublinear-approximation-ℚ ε δ =
-      neighborhood-leq-leq-dist-ℚ
-        ( ε +ℚ⁺ δ)
-        ( f ε)
-        ( f δ)
-        ( transitive-leq-ℚ
-          ( rational-dist-ℚ (f ε) (f δ))
-          ( (rational-abs-ℚ (f ε)) +ℚ (rational-abs-ℚ (f δ)))
-          ( rational-ℚ⁺ (ε +ℚ⁺ δ))
-          ( preserves-leq-add-ℚ
-            { rational-abs-ℚ (f ε)}
-            { rational-ℚ⁺ ε}
-            { rational-abs-ℚ (f δ)}
-            { rational-ℚ⁺ δ}
-            ( is-sublinear-f ε)
-            ( is-sublinear-f δ))
-          ( leq-dist-add-abs-ℚ (f ε) (f δ)))
-
-  cauchy-approximation-is-sublinear-approximation-ℚ :
-    cauchy-approximation-ℚ
-  cauchy-approximation-is-sublinear-approximation-ℚ =
-    (f , is-cauchy-approximation-is-sublinear-approximation-ℚ)
 
   abstract
     is-zero-cauchy-approximation-is-sublinear-approximation-ℚ :
       is-zero-cauchy-approximation-ℚ
-        cauchy-approximation-is-sublinear-approximation-ℚ
+        ( cauchy-sublinear-approximation-ℚ f)
     is-zero-cauchy-approximation-is-sublinear-approximation-ℚ ε δ =
       neighborhood-leq-leq-dist-ℚ
         ( ε +ℚ⁺ δ)
-        ( f ε)
+        ( map-sublinear-approximation-ℚ f ε)
         ( zero-ℚ)
         ( transitive-leq-ℚ
-          ( rational-abs-ℚ ((f ε) -ℚ zero-ℚ))
+          ( rational-abs-ℚ
+            ((map-sublinear-approximation-ℚ f ε) -ℚ zero-ℚ))
           ( rational-ℚ⁺ ε)
           ( rational-ℚ⁺ (ε +ℚ⁺ δ))
           ( leq-le-ℚ⁺ {ε} {ε +ℚ⁺ δ} (le-left-add-ℚ⁺ ε δ))
           ( inv-tr
             ( λ y → leq-ℚ (rational-ℚ⁰⁺ y) (rational-ℚ⁺ ε))
-            ( right-zero-law-dist-ℚ (f ε))
-            ( is-sublinear-f ε)))
+            ( right-zero-law-dist-ℚ
+              (map-sublinear-approximation-ℚ f ε))
+            ( is-sublinear-map-sublinear-approximation-ℚ f ε)))
 
-zero-cauchy-approximation-sublinear-approximation-ℚ :
-  sublinear-approximation-ℚ → zero-cauchy-approximation-ℚ
-zero-cauchy-approximation-sublinear-approximation-ℚ f =
-  ( cauchy-approximation-is-sublinear-approximation-ℚ
-    ( map-sublinear-approximation-ℚ f)
-    ( is-sublinear-map-sublinear-approximation-ℚ f)) ,
-  ( is-zero-cauchy-approximation-is-sublinear-approximation-ℚ
-    ( map-sublinear-approximation-ℚ f)
-    ( is-sublinear-map-sublinear-approximation-ℚ f))
+  zero-cauchy-approximation-sublinear-approximation-ℚ :
+    zero-cauchy-approximation-ℚ
+  zero-cauchy-approximation-sublinear-approximation-ℚ =
+    ( cauchy-sublinear-approximation-ℚ f) ,
+    ( is-zero-cauchy-approximation-is-sublinear-approximation-ℚ)
 ```
 
 ### A rational Cauchy approximation `f` converges to some `x : ℚ` if and only if the map `ε ↦ dist-ℚ (f ε) x` is sublinear, i.e. a Cauchy approximation of zero
@@ -319,8 +260,8 @@ module _
         ( cauchy-approximation-dist-is-limit-cauchy-approximation-ℚ H)
     is-zero-approximation-dist-is-limit-cauchy-approximation-ℚ H =
       is-zero-cauchy-approximation-is-sublinear-approximation-ℚ
-        ( map-dist-value-cauchy-approximation-ℚ)
-        ( is-sublinear-map-dist-is-limit-cauchy-approximation-ℚ H)
+        ( ( map-dist-value-cauchy-approximation-ℚ) ,
+          ( is-sublinear-map-dist-is-limit-cauchy-approximation-ℚ H))
 
     is-limit-is-zero-approximation-dist-cauchy-approximation-ℚ :
       ( H : is-cauchy-approximation-Metric-Space
