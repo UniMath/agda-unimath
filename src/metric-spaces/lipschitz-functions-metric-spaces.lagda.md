@@ -123,6 +123,33 @@ module _
     is-prop-type-Prop (is-lipschitz-function-prop-Metric-Space f)
 ```
 
+### The type of Lipschitz functions between metric spaces
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  where
+
+  lipschitz-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  lipschitz-function-Metric-Space =
+    type-subtype (is-lipschitz-function-prop-Metric-Space A B)
+
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : lipschitz-function-Metric-Space A B)
+  where
+
+  map-lipschitz-function-Metric-Space :
+    map-type-Metric-Space A B
+  map-lipschitz-function-Metric-Space = pr1 f
+
+  is-lipschitz-map-lipschitz-function-Metric-Space :
+    is-lipschitz-function-Metric-Space A B map-lipschitz-function-Metric-Space
+  is-lipschitz-map-lipschitz-function-Metric-Space = pr2 f
+```
+
 ## Properties
 
 ### Constant functions are α-Lipschitz functions for all `α : ℚ⁺`
@@ -298,6 +325,33 @@ module _
                   ( Lf))))
           ( Hf))
       ( Hg)
+```
+
+### Composition of Lipschitz functions
+
+```agda
+module _
+  {la la' lb lb' lc lc' : Level}
+  (A : Metric-Space la la')
+  (B : Metric-Space lb lb')
+  (C : Metric-Space lc lc')
+  where
+
+  comp-lipschitz-function-Metric-Space :
+    lipschitz-function-Metric-Space B C →
+    lipschitz-function-Metric-Space A B →
+    lipschitz-function-Metric-Space A C
+  comp-lipschitz-function-Metric-Space g f =
+    ( map-lipschitz-function-Metric-Space B C g ∘
+      map-lipschitz-function-Metric-Space A B f) ,
+    ( comp-is-lipschitz-function-Metric-Space
+      ( A)
+      ( B)
+      ( C)
+      ( map-lipschitz-function-Metric-Space B C g)
+      ( map-lipschitz-function-Metric-Space A B f)
+      ( is-lipschitz-map-lipschitz-function-Metric-Space B C g)
+      ( is-lipschitz-map-lipschitz-function-Metric-Space A B f))
 ```
 
 ### Being a Lipschitz map is homotopy invariant
