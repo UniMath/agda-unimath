@@ -21,7 +21,7 @@ open import metric-spaces.large-rational-neighborhoods
 
 ## Idea
 
-A {{concept "large premetric space" Agda-Large-Premetric-Space}} is a family of
+A {{concept "large premetric space" Agda=Large-Premetric-Space}} is a family of
 types indexed by universe levels equipped with a reflexive, symmetric and
 triangular
 [large rational neighborhood](metric-spaces.large-rational-neighborhoods.md).
