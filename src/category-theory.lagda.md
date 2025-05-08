@@ -70,6 +70,7 @@ open import category-theory.fully-faithful-functors-precategories public
 open import category-theory.fully-faithful-maps-precategories public
 open import category-theory.function-categories public
 open import category-theory.function-precategories public
+open import category-theory.functor-curry public
 open import category-theory.functors-categories public
 open import category-theory.functors-from-small-to-large-categories public
 open import category-theory.functors-from-small-to-large-precategories public
