@@ -3,4 +3,5 @@ pre-commit
 pybtex
 requests
 tomli
+setuptools
 graphviz
