@@ -69,6 +69,7 @@ open import metric-spaces.induced-premetric-structures-on-preimages public
 open import metric-spaces.isometric-equivalences-premetric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-premetric-spaces public
+open import metric-spaces.large-metric-spaces public
 open import metric-spaces.large-premetric-spaces public
 open import metric-spaces.large-rational-neighborhoods public
 open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces public
