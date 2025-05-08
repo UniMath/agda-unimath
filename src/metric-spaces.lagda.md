@@ -73,6 +73,7 @@ open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces publi
 open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.limits-of-sequences-premetric-spaces public
 open import metric-spaces.limits-of-sequences-pseudometric-spaces public
+open import metric-spaces.lipschitz-functions-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-saturated-complete-metric-spaces public
@@ -80,6 +81,7 @@ open import metric-spaces.metric-space-of-convergent-cauchy-approximations-metri
 open import metric-spaces.metric-space-of-convergent-sequences-metric-spaces public
 open import metric-spaces.metric-space-of-functions-metric-spaces public
 open import metric-spaces.metric-space-of-isometries-metric-spaces public
+open import metric-spaces.metric-space-of-lipschitz-functions-metric-spaces public
 open import metric-spaces.metric-space-of-rational-numbers public
 open import metric-spaces.metric-space-of-rational-numbers-with-open-neighborhoods public
 open import metric-spaces.metric-space-of-short-functions-metric-spaces public
@@ -94,6 +96,9 @@ open import metric-spaces.premetric-spaces public
 open import metric-spaces.premetric-structures public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.pseudometric-structures public
+open import metric-spaces.rational-cauchy-approximations public
+open import metric-spaces.rational-cauchy-approximations-of-zero public
+open import metric-spaces.rational-sequences-approximating-zero public
 open import metric-spaces.reflexive-premetric-structures public
 open import metric-spaces.saturated-complete-metric-spaces public
 open import metric-spaces.saturated-metric-spaces public
@@ -102,8 +107,10 @@ open import metric-spaces.sequences-premetric-spaces public
 open import metric-spaces.sequences-pseudometric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
 open import metric-spaces.short-functions-premetric-spaces public
+open import metric-spaces.similarity-cauchy-approximations-metric-spaces public
 open import metric-spaces.subspaces-metric-spaces public
 open import metric-spaces.symmetric-premetric-structures public
+open import metric-spaces.total-metric-spaces public
 open import metric-spaces.triangular-premetric-structures public
 open import metric-spaces.uniformly-continuous-functions-metric-spaces public
 open import metric-spaces.uniformly-continuous-functions-premetric-spaces public
