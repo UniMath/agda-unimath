@@ -48,7 +48,7 @@ open import real-numbers.rational-real-numbers
 
 Two
 [Cauchy approximations](metric-spaces.cauchy-approximations-metric-spaces.md)
-`f` and `g` in a [metric space](metric-space.metric-spaces.md) are
+`f` and `g` in a [metric space](metric-spaces.metric-spaces.md) are
 {{#concept "similar" Disambiguation="Cauchy approximations in a metric space" Agda=sim-cauchy-approximation-Metric-Space}}
 if `f ε` and `g δ` are `(ε + δ + θ)`-neighborhs for all `(ε δ θ : ℚ⁺)`.
 
