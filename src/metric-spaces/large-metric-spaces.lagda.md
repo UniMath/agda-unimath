@@ -75,7 +75,7 @@ module _
       ( premetric-space-Large-Metric-Space M)
 
   neighborhood-Large-Metric-Space :
-    Large-Rational-Neighborhood β type-Large-Metric-Space
+    Large-Rational-Neighborhood-Relation β type-Large-Metric-Space
   neighborhood-Large-Metric-Space =
     neighborhood-Large-Premetric-Space
       ( premetric-space-Large-Metric-Space M)
@@ -95,7 +95,7 @@ module _
     (y : type-Large-Metric-Space l2) →
     is-prop (is-in-neighborhood-Large-Metric-Space d x y)
   is-prop-is-in-neighborhood-Large-Metric-Space =
-    is-prop-is-in-neighborhood-Large-Rational-Neighborhood
+    is-prop-is-in-neighborhood-Large-Rational-Neighborhood-Relation
       neighborhood-Large-Metric-Space
 
   is-upper-bound-dist-prop-Large-Metric-Space :

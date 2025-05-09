@@ -31,28 +31,28 @@ module _
   (A : (l : Level) → UU (α l))
   where
 
-  Large-Rational-Neighborhood : UUω
-  Large-Rational-Neighborhood =
+  Large-Rational-Neighborhood-Relation : UUω
+  Large-Rational-Neighborhood-Relation =
     ℚ⁺ → Large-Relation-Prop β A
 
 module _
   {α : Level → Level} {β : Level → Level → Level}
   {A : (l : Level) → UU (α l)}
-  (N : Large-Rational-Neighborhood β A)
+  (N : Large-Rational-Neighborhood-Relation β A)
   (d : ℚ⁺) {l1 l2 : Level} (x : A l1) (y : A l2)
   where
 
-  neighborhood-Large-Rational-Neighborhood : Prop (β l1 l2)
-  neighborhood-Large-Rational-Neighborhood = N d x y
+  neighborhood-Large-Rational-Neighborhood-Relation : Prop (β l1 l2)
+  neighborhood-Large-Rational-Neighborhood-Relation = N d x y
 
-  is-in-neighborhood-Large-Rational-Neighborhood : UU (β l1 l2)
-  is-in-neighborhood-Large-Rational-Neighborhood =
-    type-Prop neighborhood-Large-Rational-Neighborhood
+  is-in-neighborhood-Large-Rational-Neighborhood-Relation : UU (β l1 l2)
+  is-in-neighborhood-Large-Rational-Neighborhood-Relation =
+    type-Prop neighborhood-Large-Rational-Neighborhood-Relation
 
-  is-prop-is-in-neighborhood-Large-Rational-Neighborhood :
-    is-prop is-in-neighborhood-Large-Rational-Neighborhood
-  is-prop-is-in-neighborhood-Large-Rational-Neighborhood =
-    is-prop-type-Prop neighborhood-Large-Rational-Neighborhood
+  is-prop-is-in-neighborhood-Large-Rational-Neighborhood-Relation :
+    is-prop is-in-neighborhood-Large-Rational-Neighborhood-Relation
+  is-prop-is-in-neighborhood-Large-Rational-Neighborhood-Relation =
+    is-prop-type-Prop neighborhood-Large-Rational-Neighborhood-Relation
 ```
 
 ## Properties
@@ -63,24 +63,24 @@ module _
 module _
   {α : Level → Level} {β : Level → Level → Level}
   {A : (l : Level) → UU (α l)}
-  (N : Large-Rational-Neighborhood β A)
+  (N : Large-Rational-Neighborhood-Relation β A)
   where
 
-  is-reflexive-Large-Rational-Neighborhood : UUω
-  is-reflexive-Large-Rational-Neighborhood =
+  is-reflexive-Large-Rational-Neighborhood-Relation : UUω
+  is-reflexive-Large-Rational-Neighborhood-Relation =
     (d : ℚ⁺) {l : Level} (x : A l) →
-    is-in-neighborhood-Large-Rational-Neighborhood N d x x
+    is-in-neighborhood-Large-Rational-Neighborhood-Relation N d x x
 
-  is-symmetric-Large-Rational-Neighborhood : UUω
-  is-symmetric-Large-Rational-Neighborhood =
+  is-symmetric-Large-Rational-Neighborhood-Relation : UUω
+  is-symmetric-Large-Rational-Neighborhood-Relation =
     (d : ℚ⁺) {l1 l2 : Level} (x : A l1) (y : A l2) →
-    is-in-neighborhood-Large-Rational-Neighborhood N d x y →
-    is-in-neighborhood-Large-Rational-Neighborhood N d y x
+    is-in-neighborhood-Large-Rational-Neighborhood-Relation N d x y →
+    is-in-neighborhood-Large-Rational-Neighborhood-Relation N d y x
 
-  is-triangular-Large-Rational-Neighborhood : UUω
-  is-triangular-Large-Rational-Neighborhood =
+  is-triangular-Large-Rational-Neighborhood-Relation : UUω
+  is-triangular-Large-Rational-Neighborhood-Relation =
     (ε δ : ℚ⁺) {l1 l2 l3 : Level} (x : A l1) (y : A l2) (z : A l3) →
-    is-in-neighborhood-Large-Rational-Neighborhood N δ y z →
-    is-in-neighborhood-Large-Rational-Neighborhood N ε x y →
-    is-in-neighborhood-Large-Rational-Neighborhood N (ε +ℚ⁺ δ) x z
+    is-in-neighborhood-Large-Rational-Neighborhood-Relation N δ y z →
+    is-in-neighborhood-Large-Rational-Neighborhood-Relation N ε x y →
+    is-in-neighborhood-Large-Rational-Neighborhood-Relation N (ε +ℚ⁺ δ) x z
 ```

@@ -37,15 +37,15 @@ record
   field
     type-Large-Premetric-Space : (l : Level) → UU (α l)
     neighborhood-Large-Premetric-Space :
-      Large-Rational-Neighborhood β type-Large-Premetric-Space
+      Large-Rational-Neighborhood-Relation β type-Large-Premetric-Space
     refl-neighborhood-Large-Premetric-Space :
-      is-reflexive-Large-Rational-Neighborhood
+      is-reflexive-Large-Rational-Neighborhood-Relation
         neighborhood-Large-Premetric-Space
     symmetric-neighborhood-Large-Premetric-Space :
-      is-symmetric-Large-Rational-Neighborhood
+      is-symmetric-Large-Rational-Neighborhood-Relation
         neighborhood-Large-Premetric-Space
     triangular-neighborhood-Large-Premetric-Space :
-      is-triangular-Large-Rational-Neighborhood
+      is-triangular-Large-Rational-Neighborhood-Relation
         neighborhood-Large-Premetric-Space
 
 open Large-Premetric-Space public
@@ -61,7 +61,7 @@ module _
     type-Large-Premetric-Space M l2 →
     UU (β l1 l2)
   is-in-neighborhood-Large-Premetric-Space =
-    is-in-neighborhood-Large-Rational-Neighborhood
+    is-in-neighborhood-Large-Rational-Neighborhood-Relation
       (neighborhood-Large-Premetric-Space M)
 
   is-prop-is-in-neighborhood-Large-Premetric-Space :
@@ -70,7 +70,7 @@ module _
     (y : type-Large-Premetric-Space M l2) →
     is-prop (is-in-neighborhood-Large-Premetric-Space d x y)
   is-prop-is-in-neighborhood-Large-Premetric-Space =
-    is-prop-is-in-neighborhood-Large-Rational-Neighborhood
+    is-prop-is-in-neighborhood-Large-Rational-Neighborhood-Relation
       (neighborhood-Large-Premetric-Space M)
 
   is-upper-bound-dist-prop-Large-Premetric-Space :
