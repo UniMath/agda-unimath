@@ -18,6 +18,8 @@ open import real-numbers.distance-real-numbers public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
 open import real-numbers.inequality-real-numbers public
 open import real-numbers.inequality-upper-dedekind-real-numbers public
+open import real-numbers.isometry-addition-real-numbers public
+open import real-numbers.isometry-negation-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
 open import real-numbers.maximum-lower-dedekind-real-numbers public
 open import real-numbers.maximum-real-numbers public
