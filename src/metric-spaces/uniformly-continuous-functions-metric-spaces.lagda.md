@@ -33,6 +33,8 @@ if there exists a function `m : ℚ⁺ → ℚ⁺` such that for any `x : X`, wh
 
 ## Definitions
 
+### The property of being a uniformly continuous function
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
@@ -47,8 +49,8 @@ module _
       ( premetric-Metric-Space Y)
       ( f)
 
-  modulus-of-uniform-continuity-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
-  modulus-of-uniform-continuity-function-Metric-Space =
+  modulus-of-uniform-continuity-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
+  modulus-of-uniform-continuity-map-Metric-Space =
     type-subtype is-modulus-of-uniform-continuity-prop-Metric-Space
 
   is-uniformly-continuous-map-prop-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
@@ -73,6 +75,18 @@ module _
       ( premetric-Metric-Space X)
       ( premetric-Metric-Space Y)
       ( f)
+```
+
+### The type of uniformly continuous functions between metric spaces
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
+  where
+
+  uniformly-continuous-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  uniformly-continuous-map-Metric-Space =
+    type-subtype (is-uniformly-continuous-map-prop-Metric-Space X Y)
 ```
 
 ## Properties

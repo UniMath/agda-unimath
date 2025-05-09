@@ -244,7 +244,7 @@ module _
 
   modulus-of-uniform-continuity-lipschitz-constant-function-Metric-Space :
     lipschitz-constant-function-Metric-Space A B f →
-    modulus-of-uniform-continuity-function-Metric-Space A B f
+    modulus-of-uniform-continuity-map-Metric-Space A B f
   modulus-of-uniform-continuity-lipschitz-constant-function-Metric-Space
     (α , L) =
     ( mul-ℚ⁺ (inv-ℚ⁺ α)) ,
@@ -262,6 +262,22 @@ module _
   is-uniformly-continuous-is-lipschitz-function-Metric-Space =
     map-is-inhabited
       modulus-of-uniform-continuity-lipschitz-constant-function-Metric-Space
+
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  where
+
+  uniformly-continuous-lipschitz-function-Metric-Space :
+    lipschitz-function-Metric-Space A B →
+    uniformly-continuous-map-Metric-Space A B
+  uniformly-continuous-lipschitz-function-Metric-Space f =
+    ( map-lipschitz-function-Metric-Space A B f) ,
+    ( is-uniformly-continuous-is-lipschitz-function-Metric-Space
+      ( A)
+      ( B)
+      ( map-lipschitz-function-Metric-Space A B f)
+      ( is-lipschitz-map-lipschitz-function-Metric-Space A B f))
 ```
 
 ### The product of Lipschitz constants of maps is a Lipschitz constant of their composition
