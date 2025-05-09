@@ -53,7 +53,7 @@ an upper bound of the distance between `x` and `y` in `A`, `α * d` is an upper
 bound on the distance between `f x` and `f y` in `B`; in that case, `f` is
 called an **α-Lipschitz** function. A function which admits a Lipschitz constant
 is called a
-{{#concept "Lipschitz function" Disambiguation="between metric spaces" WD="Lipschitz function" WDID=Q652707 Agda=is-lipschitz-function-Metric-Space}}.
+{{#concept "Lipschitz function" Disambiguation="between metric spaces" WD="Lipschitz function" WDID=Q652707 Agda=lipschitz-function-Metric-Space}}.
 
 ## Definitions
 
