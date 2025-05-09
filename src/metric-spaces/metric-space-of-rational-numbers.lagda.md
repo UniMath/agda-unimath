@@ -9,9 +9,13 @@ module metric-spaces.metric-space-of-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
@@ -27,6 +31,7 @@ open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -36,6 +41,7 @@ open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
+open import metric-spaces.lipschitz-functions-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.monotonic-premetric-structures
@@ -174,7 +180,65 @@ pr2 metric-space-leq-ℚ = is-metric-premetric-leq-ℚ
 
 ## Properties
 
-### The standard saturated metric space of rationa numbers is saturated
+### Relationship to the distance on rational numbers
+
+```agda
+abstract
+  leq-dist-neighborhood-leq-ℚ :
+    (ε : ℚ⁺) (p q : ℚ) →
+    neighborhood-leq-ℚ ε p q →
+    leq-ℚ (rational-dist-ℚ p q) (rational-ℚ⁺ ε)
+  leq-dist-neighborhood-leq-ℚ ε⁺@(ε , _) p q (H , K) =
+    leq-dist-leq-diff-ℚ
+      ( p)
+      ( q)
+      ( ε)
+      ( swap-right-diff-leq-ℚ p ε q (leq-transpose-right-add-ℚ p q ε K))
+      ( swap-right-diff-leq-ℚ q ε p (leq-transpose-right-add-ℚ q p ε H))
+
+  neighborhood-leq-leq-dist-ℚ :
+    (ε : ℚ⁺) (p q : ℚ) →
+    leq-ℚ (rational-dist-ℚ p q) (rational-ℚ⁺ ε) →
+    neighborhood-leq-ℚ ε p q
+  neighborhood-leq-leq-dist-ℚ ε⁺@(ε , _) p q |p-q|≤ε =
+    ( leq-transpose-left-diff-ℚ
+      ( q)
+      ( ε)
+      ( p)
+      ( swap-right-diff-leq-ℚ
+        ( q)
+        ( p)
+        ( ε)
+        ( transitive-leq-ℚ
+          ( q -ℚ p)
+          ( rational-dist-ℚ p q)
+          ( ε)
+          ( |p-q|≤ε)
+          ( leq-reversed-diff-dist-ℚ p q)))) ,
+    ( leq-transpose-left-diff-ℚ
+      ( p)
+      ( ε)
+      ( q)
+      ( swap-right-diff-leq-ℚ
+        ( p)
+        ( q)
+        ( ε)
+        ( transitive-leq-ℚ
+          ( p -ℚ q)
+          ( rational-dist-ℚ p q)
+          ( ε)
+          ( |p-q|≤ε)
+          ( leq-diff-dist-ℚ p q))))
+
+leq-dist-iff-neighborhood-leq-ℚ :
+  (ε : ℚ⁺) (p q : ℚ) →
+  leq-ℚ (rational-dist-ℚ p q) (rational-ℚ⁺ ε) ↔
+  neighborhood-leq-ℚ ε p q
+pr1 (leq-dist-iff-neighborhood-leq-ℚ ε p q) = neighborhood-leq-leq-dist-ℚ ε p q
+pr2 (leq-dist-iff-neighborhood-leq-ℚ ε p q) = leq-dist-neighborhood-leq-ℚ ε p q
+```
+
+### The standard saturated metric space of rational numbers is saturated
 
 ```agda
 is-saturated-metric-space-leq-ℚ :
@@ -254,6 +318,78 @@ module _
       ( commutative-add-ℚ x y)
       ( commutative-add-ℚ x z)
       ( is-isometry-add-ℚ d y z)
+```
+
+### Multiplication of rational numbers is Lipschitz
+
+```agda
+module _
+  (x : ℚ)
+  where
+
+  abstract
+    is-lipschitz-constant-succ-abs-mul-ℚ :
+      is-lipschitz-constant-function-Metric-Space
+        ( metric-space-leq-ℚ)
+        ( metric-space-leq-ℚ)
+        ( mul-ℚ x)
+        ( positive-succ-ℚ⁰⁺ (abs-ℚ x))
+    is-lipschitz-constant-succ-abs-mul-ℚ d y z H =
+      neighborhood-leq-leq-dist-ℚ
+        ( positive-succ-ℚ⁰⁺ (abs-ℚ x) *ℚ⁺ d)
+        ( x *ℚ y)
+        ( x *ℚ z)
+        ( tr
+          ( λ q →
+            leq-ℚ
+              ( rational-ℚ⁰⁺ q)
+              ( rational-ℚ⁺ (positive-succ-ℚ⁰⁺ (abs-ℚ x) *ℚ⁺ d)))
+          ( left-distributive-abs-mul-dist-ℚ x y z)
+          ( transitive-leq-ℚ
+            ( rational-ℚ⁰⁺ (abs-ℚ x *ℚ⁰⁺ dist-ℚ y z))
+            ( (succ-ℚ (rational-abs-ℚ x)) *ℚ (rational-dist-ℚ y z))
+            ( rational-ℚ⁺ (positive-succ-ℚ⁰⁺ (abs-ℚ x) *ℚ⁺ d))
+            ( preserves-leq-left-mul-ℚ⁺
+              ( positive-succ-ℚ⁰⁺ (abs-ℚ x))
+              ( rational-dist-ℚ y z)
+              ( rational-ℚ⁺ d)
+              ( leq-dist-neighborhood-leq-ℚ d y z H))
+            ( preserves-leq-right-mul-ℚ⁰⁺
+              ( dist-ℚ y z)
+              ( rational-abs-ℚ x)
+              ( succ-ℚ (rational-abs-ℚ x))
+              ( succ-leq-ℚ (rational-abs-ℚ x)))))
+
+    lipschitz-constant-succ-abs-mul-ℚ :
+      lipschitz-constant-function-Metric-Space
+        ( metric-space-leq-ℚ)
+        ( metric-space-leq-ℚ)
+        ( mul-ℚ x)
+    lipschitz-constant-succ-abs-mul-ℚ =
+      ( positive-succ-ℚ⁰⁺ (abs-ℚ x)) ,
+      ( is-lipschitz-constant-succ-abs-mul-ℚ)
+
+    is-lipschitz-left-mul-ℚ :
+      ( is-lipschitz-function-Metric-Space
+        ( metric-space-leq-ℚ)
+        ( metric-space-leq-ℚ)
+        ( mul-ℚ x))
+    is-lipschitz-left-mul-ℚ =
+      unit-trunc-Prop lipschitz-constant-succ-abs-mul-ℚ
+
+    is-lipschitz-right-mul-ℚ :
+      ( is-lipschitz-function-Metric-Space
+        ( metric-space-leq-ℚ)
+        ( metric-space-leq-ℚ)
+        ( mul-ℚ' x))
+    is-lipschitz-right-mul-ℚ =
+      is-lipschitz-htpy-function-Metric-Space
+        ( metric-space-leq-ℚ)
+        ( metric-space-leq-ℚ)
+        ( mul-ℚ x)
+        ( mul-ℚ' x)
+        ( commutative-mul-ℚ x)
+        ( is-lipschitz-left-mul-ℚ)
 ```
 
 ### The convergent Cauchy approximation of the canonical inclusion of positive rational numbers into the rational numbers
