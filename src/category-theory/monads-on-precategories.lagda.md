@@ -569,7 +569,9 @@ module _
 
 ## The Kleisli precategory of a monad
 
-This is the precategory of free `T`-algebras and their morphisms; we view it as the precategory with the same objects as `C` but different types of morphisms. It comes with functors to and from `C`.
+This is the precategory of free `T`-algebras and their morphisms; we view it as
+the precategory with the same objects as `C` but different types of morphisms.
+It comes with functors to and from `C`.
 
 ```agda
 module _

@@ -29,8 +29,7 @@ open import foundation-core.sections
 </details>
 ## Idea
 
-Let `C` and `D` be two
-[precategories](category-theory.precategories.md). Two
+Let `C` and `D` be two [precategories](category-theory.precategories.md). Two
 [functors](category-theory.functors-precategories.md) `L : C → D` and
 `R : D → C` constitute an **adjoint pair** if
 
@@ -57,6 +56,7 @@ adjoint** to `L`, and write this as `L ⊣ R`.
 ## Definition
 
 ### The predicate of being an adjoint pair of functors
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
@@ -117,6 +117,7 @@ module _
 ```
 
 ## Adjunctions between precategories
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
@@ -138,13 +139,17 @@ module _
 
 ### Triangle identities
 
-Equivalently, two functors `L` and `R` are an adjoint pair if there is a natural transformation `η : id ⇒ RL` called the **unit** and a natural transformation `ε : LR ⇒ id` called the **counit** satisfying two **triangle identities**:
+Equivalently, two functors `L` and `R` are an adjoint pair if there is a natural
+transformation `η : id ⇒ RL` called the **unit** and a natural transformation
+`ε : LR ⇒ id` called the **counit** satisfying two **triangle identities**:
 
 ```text
 εL ∘ Lη = id
 Rε ∘ ηR = id
 ```
-Here, we interpret the equality above as a homotopy of natural transformations to avoid associativity issues.
+
+Here, we interpret the equality above as a homotopy of natural transformations
+to avoid associativity issues.
 
 ```agda
 module _
@@ -173,7 +178,7 @@ module _
       L₁ = hom-functor-Precategory C D L
       R₀ = obj-functor-Precategory D C R
       R₁ = hom-functor-Precategory D C R
-    
+
     has-left-triangle-identity-Precategory : UU (l1 ⊔ l4)
     has-left-triangle-identity-Precategory =
       (x : obj-Precategory C) →
@@ -265,7 +270,8 @@ module _
       naturality-equiv-family-unit-counit-Precategory :
         naturality-family-of-equivalences-adjoint-pair-Precategory C D L R
           equiv-family-unit-counit-Precategory
-      naturality-equiv-family-unit-counit-Precategory {x1} {x2} {y1} {y2} f g h =
+      naturality-equiv-family-unit-counit-Precategory
+        {x1} {x2} {y1} {y2} f g h =
         (ap
           (precomp-hom-Precategory C (η₀ x2) _)
           ( (preserves-comp-functor-Precategory D C R
