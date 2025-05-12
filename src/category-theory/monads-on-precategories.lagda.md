@@ -807,14 +807,6 @@ module _
       (comm-hom-morphism-monad-algebra-Precategory C T x y f)
       (eq-is-prop (is-set-hom-Precategory C _ _ _ _)))
 
-  private
-    LR =
-      comp-functor-Precategory em-monad-Precategory C em-monad-Precategory
-        functor-to-em-monad-Precategory functor-from-em-monad-Precategory
-    RL =
-      comp-functor-Precategory C em-monad-Precategory C
-        functor-from-em-monad-Precategory functor-to-em-monad-Precategory
-
   left-triangle-em-monad-Precategory :
     has-left-triangle-identity-Precategory C em-monad-Precategory
       functor-to-em-monad-Precategory
