@@ -114,13 +114,8 @@
   },
 
   "[bibtex]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "James-Yu.latex-workshop"
-  },
-  "latex-workshop.bibtex-format.sort.enabled": true,
-  "latex-workshop.bibtex-format.align-equal.enabled": true,
-  "latex-workshop.bibtex-format.handleDuplicates": "Highlight Duplicates",
-  "latex-workshop.bibtex-format.sortby": ["key"],
-  "latex-workshop.bibtex-format.tab": "2 spaces",
-  "latex-workshop.bibtex-format.trailingComma": true
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false,
+    "editor.formatOnPaste": false
+  }
 }
