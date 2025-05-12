@@ -90,6 +90,17 @@ repos:
         pass_filenames: false
         require_serial: true
 
+      # ! Experimental hook
+      # - id: spaces-convention
+      #   name: Check Agda code block spaces convention
+      #   entry: scripts/spaces_convention.py
+      #   language: python
+      #   always_run: true
+      #   verbose: true
+      #   files: ^src\/.+\.lagda\.md$
+      #   types_or: [markdown, text]
+      #   require_serial: false
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
     hooks:
@@ -134,15 +145,3 @@ repos:
             '--no-remove-empty-fields',
             '--remove-dupe-fields',
           ]
-
-        # Experimental hooks
-
-        # - id: spaces-convention
-        #   name: Check Agda code block spaces convention
-        #   entry: scripts/spaces_convention.py
-        #   language: python
-        #   always_run: true
-        #   verbose: true
-        #   files: ^src\/.+\.lagda\.md$
-        #   types_or: [markdown, text]
-        #   require_serial: false
