@@ -190,6 +190,26 @@ module _
         is-nonnegative-leq-zero-ℚ)
 ```
 
+### The successor of a nonnegative rational number is positive
+
+```agda
+abstract
+  is-positive-succ-is-nonnegative-ℚ :
+    (q : ℚ) → is-nonnegative-ℚ q → is-positive-ℚ (succ-ℚ q)
+  is-positive-succ-is-nonnegative-ℚ q H =
+    is-positive-le-zero-ℚ
+      ( succ-ℚ q)
+      ( concatenate-leq-le-ℚ
+        ( zero-ℚ)
+        ( q)
+        ( succ-ℚ q)
+        ( leq-zero-is-nonnegative-ℚ q H)
+        ( le-left-add-rational-ℚ⁺ q one-ℚ⁺))
+
+positive-succ-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁺
+positive-succ-ℚ⁰⁺ (q , H) = (succ-ℚ q , is-positive-succ-is-nonnegative-ℚ q H)
+```
+
 ### The product of two nonnegative rational numbers is nonnegative
 
 ```agda

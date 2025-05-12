@@ -63,7 +63,7 @@ module _
         ( left-real-bound-neighborhood-leq-ℝ d x y H))
 ```
 
-### Negation a real number is an isometry `ℝ → ℝ`
+### Negation on the real numbers is an isometry
 
 ```agda
 module _
