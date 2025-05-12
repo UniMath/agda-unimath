@@ -321,8 +321,6 @@ particular $h(xᵢ) = h(xⱼ)$, i.e., $fⁱ(x) = fʲ(x)$. By injectivity of $f$ 
 cancel $i$ applications to obtain $x = f(f^{j-i-1}(x))$, and so $f^{j-i-1}(x)$
 is the desired preimage. ∎
 
-> This remains to be formalized.
-
 ```agda
 module _
   {l1 l2 : Level} {X : UU l1} (c : subfinite-indexing l2 X)
