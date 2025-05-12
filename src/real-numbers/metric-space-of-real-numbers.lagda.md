@@ -28,6 +28,8 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import logic.functoriality-existential-quantification
+
 open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
@@ -42,6 +44,7 @@ open import metric-spaces.symmetric-premetric-structures
 open import metric-spaces.triangular-premetric-structures
 
 open import real-numbers.addition-real-numbers
+open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
@@ -407,8 +410,8 @@ module _
       ( raise-ℝ l y)
       ( x)
       ( y)
-      ( symmetric-sim-ℝ (sim-raise-ℝ l x))
-      ( symmetric-sim-ℝ (sim-raise-ℝ l y))
+      ( inv-sim-ℝ (sim-raise-ℝ l x))
+      ( inv-sim-ℝ (sim-raise-ℝ l y))
 
   isometry-metric-space-leq-raise-ℝ :
     isometry-Metric-Space
@@ -447,6 +450,88 @@ module _
       ( metric-space-leq-ℚ)
       ( metric-space-leq-ℝ l)
       ( isometry-metric-space-leq-raise-real-ℚ)
+```
+
+### The rational numbers are dense in the real nummbers
+
+```agda
+module _
+  {l : Level} (x : ℝ l) (δ : ℚ⁺)
+  where
+
+  is-dense-real-ℚ :
+    exists
+      ( ℚ)
+      ( λ q → premetric-leq-ℝ l δ x (raise-real-ℚ l q))
+  is-dense-real-ℚ =
+    map-exists
+      ( λ q → is-in-neighborhood-leq-ℝ l δ x (raise-real-ℚ l q))
+      ( id)
+      ( λ q (H , K) → lemma-neighborhood-dense-real-ℚ q H K)
+      ( le-xδ)
+    where
+
+    le-xδ : le-ℝ x (x +ℝ real-ℚ (rational-ℚ⁺ δ))
+    le-xδ =
+      tr
+        ( λ z → le-ℝ z (x +ℝ real-ℚ (rational-ℚ⁺ δ)))
+        ( right-unit-law-add-ℝ x)
+        ( preserves-le-left-add-ℝ
+          ( x)
+          ( zero-ℝ)
+          ( real-ℚ (rational-ℚ⁺ δ))
+          ( preserves-le-real-ℚ
+            ( zero-ℚ)
+            ( rational-ℚ⁺ δ)
+            ( le-zero-is-positive-ℚ
+              ( rational-ℚ⁺ δ)
+              ( is-positive-rational-ℚ⁺ δ))))
+
+    lemma-neighborhood-dense-real-ℚ :
+      (q : ℚ) →
+      is-in-upper-cut-ℝ x q →
+      is-in-lower-cut-ℝ (x +ℝ real-ℚ (rational-ℚ⁺ δ)) q →
+      is-in-neighborhood-leq-ℝ l δ x (raise-real-ℚ l q)
+    lemma-neighborhood-dense-real-ℚ q x<q q<x+δ =
+      neighborhood-real-bound-each-leq-ℝ
+        ( δ)
+        ( x)
+        ( raise-real-ℚ l q)
+        ( leq-le-ℝ
+          ( x)
+          ( raise-real-ℚ l q +ℝ real-ℚ (rational-ℚ⁺ δ))
+          ( transitive-le-ℝ
+            ( x)
+            ( real-ℚ q)
+            ( raise-real-ℚ l q +ℝ real-ℚ (rational-ℚ⁺ δ))
+            ( preserves-le-left-sim-ℝ
+              ( raise-real-ℚ l q +ℝ real-ℚ (rational-ℚ⁺ δ))
+              ( raise-real-ℚ l q)
+              ( real-ℚ q)
+              ( inv-sim-ℝ (sim-raise-ℝ l (real-ℚ q)))
+              ( tr
+                ( λ y → le-ℝ y (raise-real-ℚ l q +ℝ real-ℚ (rational-ℚ⁺ δ)))
+                ( right-unit-law-add-ℝ (raise-real-ℚ l q))
+                ( preserves-le-left-add-ℝ
+                  ( raise-real-ℚ l q)
+                  ( zero-ℝ)
+                  ( real-ℚ (rational-ℚ⁺ δ))
+                  ( preserves-le-real-ℚ
+                    ( zero-ℚ)
+                    ( rational-ℚ⁺ δ)
+                    ( le-zero-is-positive-ℚ
+                      ( rational-ℚ⁺ δ)
+                      ( is-positive-rational-ℚ⁺ δ))))))
+            ( le-real-is-in-upper-cut-ℚ q x x<q)))
+        ( leq-le-ℝ
+          ( raise-real-ℚ l q)
+          ( x +ℝ real-ℚ (rational-ℚ⁺ δ))
+          ( preserves-le-left-sim-ℝ
+            ( x +ℝ real-ℚ (rational-ℚ⁺ δ))
+            ( real-ℚ q)
+            ( raise-real-ℚ l q)
+            ( sim-raise-ℝ l (real-ℚ q))
+            ( le-real-is-in-lower-cut-ℚ q (x +ℝ real-ℚ (rational-ℚ⁺ δ)) q<x+δ)))
 ```
 
 ## References
