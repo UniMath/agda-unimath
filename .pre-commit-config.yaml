@@ -90,40 +90,6 @@ repos:
         pass_filenames: false
         require_serial: true
 
-      - id: format-bibtex
-        name: Format BibTeX references
-        language: system
-        files: \.bib$
-        types: [file]
-        entry: >
-          bash -c ' if ! command -v bibtex-tidy &> /dev/null; then
-            echo "bibtex-tidy not found, installing via npm..."
-            npm install -g bibtex-tidy
-          fi
-
-          for file in "$@"; do
-            echo "Formatting $file"
-            bibtex-tidy "$file" \
-              --modify \
-              --align=14 \
-              --space=2 \
-              --blank-lines \
-              --sort \
-              --trailing-commas \
-              --no-escape \
-              --numeric \
-              --months \
-              --numeric \
-              --duplicates \
-              --sort-fields=title,shorttitle,author,year,month,day,journal,fjournal,booktitle,location,on,publisher,address,series,volume,number,pages,doi,isbn,issn,eprint,eprinttype,archiveprefix,eprintclass,primaryclass,url,urldate,copyright,category,note,metadata
-          \
-              --encode-urls \
-              --tidy-comments \
-              --no-remove-empty-fields \
-              --remove-dupe-fields \
-            echo "Formatted $file"
-          done ' --
-
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
     hooks:
@@ -144,14 +110,38 @@ repos:
         name: CSS, JS, YAML and Markdown (no codeblocks) formatting
         types_or: [css, javascript, yaml, markdown]
 
-      # Experimental hooks
+  - repo: https://github.com/FlamingTempura/bibtex-tidy
+    rev: v1.14.0
+    hooks:
+      - id: bibtex-tidy
+        args:
+          [
+            '--modify',
+            '--align=14',
+            '--space=2',
+            '--blank-lines',
+            '--sort',
+            '--trailing-commas',
+            '--no-escape',
+            '--numeric',
+            '--months',
+            '--numeric',
+            '--duplicates',
+            '--sort-fields=title,shorttitle,author,year,month,day,journal,fjournal,booktitle,location,on,publisher,address,series,volume,number,pages,doi,isbn,issn,eprint,eprinttype,archiveprefix,eprintclass,primaryclass,url,urldate,copyright,category,note,metadata',
+            '--encode-urls',
+            '--tidy-comments',
+            '--no-remove-empty-fields',
+            '--remove-dupe-fields',
+          ]
 
-      # - id: spaces-convention
-      #   name: Check Agda code block spaces convention
-      #   entry: scripts/spaces_convention.py
-      #   language: python
-      #   always_run: true
-      #   verbose: true
-      #   files: ^src\/.+\.lagda\.md$
-      #   types_or: [markdown, text]
-      #   require_serial: false
+        # Experimental hooks
+
+        # - id: spaces-convention
+        #   name: Check Agda code block spaces convention
+        #   entry: scripts/spaces_convention.py
+        #   language: python
+        #   always_run: true
+        #   verbose: true
+        #   files: ^src\/.+\.lagda\.md$
+        #   types_or: [markdown, text]
+        #   require_serial: false
