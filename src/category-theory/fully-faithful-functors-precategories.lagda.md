@@ -409,6 +409,65 @@ module _
       { x} {y}
 ```
 
+### The inverse function on the morphisms preserves composition and identity
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C D : Precategory l1 l2)
+  (F : functor-Precategory C D)
+  (H : is-fully-faithful-functor-Precategory C D F)
+  where
+
+  module _
+    {x y z : obj-Precategory C}
+    (f : hom-Precategory D (obj-functor-Precategory C D F y)
+      (obj-functor-Precategory C D F z))
+    (g : hom-Precategory D (obj-functor-Precategory C D F x)
+      (obj-functor-Precategory C D F y))
+    where
+
+    private
+      f' : hom-Precategory C y z
+      f' = map-inv-hom-is-fully-faithful-functor-Precategory C D F H f
+
+      g' : hom-Precategory C x y
+      g' = map-inv-hom-is-fully-faithful-functor-Precategory C D F H g
+
+    fully-faithful-inv-preserves-comp :
+      comp-hom-Precategory C f' g'
+      ＝ map-inv-hom-is-fully-faithful-functor-Precategory C D F H
+        (comp-hom-Precategory D f g)
+    fully-faithful-inv-preserves-comp
+      = inv (is-retraction-map-section-is-equiv (H x z)
+        (comp-hom-Precategory C f' g'))
+      ∙ ap (λ a → map-inv-hom-is-fully-faithful-functor-Precategory C D F H a) (
+        preserves-comp-functor-Precategory C D F f' g'
+        ∙ ap (λ a → comp-hom-Precategory D a _)
+          (is-section-map-section-is-equiv (H y z) f)
+        ∙ ap (λ a → comp-hom-Precategory D _ a)
+          (is-section-map-section-is-equiv (H x y) g)
+      )
+
+  module _
+    (x : obj-Precategory C)
+    where
+
+    private
+      x' : obj-Precategory D
+      x' = obj-functor-Precategory C D F x
+
+    fully-faithful-inv-preserves-id :
+      id-hom-Precategory C {x}
+      ＝ map-inv-hom-is-fully-faithful-functor-Precategory C D F H
+        (id-hom-Precategory D {x'})
+
+    fully-faithful-inv-preserves-id
+      = inv (is-retraction-map-section-is-equiv (H x x) (id-hom-Precategory C))
+        ∙ ap (λ a → map-inv-hom-is-fully-faithful-functor-Precategory C D F H a)
+          (preserves-id-functor-Precategory C D F x)
+```
+
 ## External links
 
 - [Fully Faithful Functors](https://1lab.dev/Cat.Functor.Properties.html#fully-faithful-functors)
