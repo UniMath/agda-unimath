@@ -127,7 +127,7 @@ repos:
             '--numeric',
             '--months',
             '--numeric',
-            '--duplicates',
+            '--duplicates=key,doi,abstract',
             '--sort-fields=title,shorttitle,author,year,month,day,date,journal,fjournal,shortjournal,booktitle,location,on,publisher,address,series,volume,number,pages,doi,isbn,issn,eprint,eprinttype,archiveprefix,eprintclass,primaryclass,url,urldate,copyright,category,note,metadata',
             '--encode-urls',
             '--tidy-comments',
