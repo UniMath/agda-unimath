@@ -495,8 +495,8 @@ module _
     has-mul-law-monad-algebra-Precategory (hom-monad-algebra-Precategory f)
   mul-law-monad-algebra-Precategory f = pr2 (pr2 (pr2 f))
 
-  monad-algebra-morphism-Precategory : (f g : monad-algebra-Precategory) → UU l2
-  monad-algebra-morphism-Precategory f g =
+  morphism-monad-algebra-Precategory : (f g : monad-algebra-Precategory) → UU l2
+  morphism-monad-algebra-Precategory f g =
     Σ (hom-Precategory C
         (obj-monad-algebra-Precategory f)
         (obj-monad-algebra-Precategory g))
@@ -507,61 +507,61 @@ module _
           (hom-monad-algebra-Precategory g)
           h)
 
-  hom-monad-algebra-morphism-Precategory :
+  hom-morphism-monad-algebra-Precategory :
     (f g : monad-algebra-Precategory)
-    (h : monad-algebra-morphism-Precategory f g) →
+    (h : morphism-monad-algebra-Precategory f g) →
     hom-Precategory C
       (obj-monad-algebra-Precategory f)
       (obj-monad-algebra-Precategory g)
-  hom-monad-algebra-morphism-Precategory f g h = pr1 h
+  hom-morphism-monad-algebra-Precategory f g h = pr1 h
 
-  top-hom-monad-algebra-morphism-Precategory :
+  top-hom-morphism-monad-algebra-Precategory :
     (f g : monad-algebra-Precategory)
-    (h : monad-algebra-morphism-Precategory f g) →
+    (h : morphism-monad-algebra-Precategory f g) →
     hom-Precategory C
       (obj-endofunctor-monad-Precategory C T (obj-monad-algebra-Precategory f))
       (obj-endofunctor-monad-Precategory C T (obj-monad-algebra-Precategory g))
-  top-hom-monad-algebra-morphism-Precategory f g h =
+  top-hom-morphism-monad-algebra-Precategory f g h =
     hom-endofunctor-monad-Precategory C T
-      (hom-monad-algebra-morphism-Precategory f g h)
+      (hom-morphism-monad-algebra-Precategory f g h)
 
-  comm-hom-monad-algebra-morphism-Precategory :
+  comm-hom-morphism-monad-algebra-Precategory :
     (f g : monad-algebra-Precategory)
-    (h : monad-algebra-morphism-Precategory f g) →
+    (h : morphism-monad-algebra-Precategory f g) →
     coherence-square-hom-Precategory C
-      (top-hom-monad-algebra-morphism-Precategory f g h)
+      (top-hom-morphism-monad-algebra-Precategory f g h)
       (hom-monad-algebra-Precategory f)
       (hom-monad-algebra-Precategory g)
-      (hom-monad-algebra-morphism-Precategory f g h)
-  comm-hom-monad-algebra-morphism-Precategory f g h = pr2 h
+      (hom-morphism-monad-algebra-Precategory f g h)
+  comm-hom-morphism-monad-algebra-Precategory f g h = pr2 h
 
-  comp-monad-algebra-morphism-Precategory :
+  comp-morphism-monad-algebra-Precategory :
     (a b c : monad-algebra-Precategory)
-    (g : monad-algebra-morphism-Precategory b c) →
-    (f : monad-algebra-morphism-Precategory a b) →
-    monad-algebra-morphism-Precategory a c
-  comp-monad-algebra-morphism-Precategory a b c g f =
+    (g : morphism-monad-algebra-Precategory b c) →
+    (f : morphism-monad-algebra-Precategory a b) →
+    morphism-monad-algebra-Precategory a c
+  comp-morphism-monad-algebra-Precategory a b c g f =
     (comp-hom-Precategory C
-      (hom-monad-algebra-morphism-Precategory b c g)
-      (hom-monad-algebra-morphism-Precategory a b f)) ,
+      (hom-morphism-monad-algebra-Precategory b c g)
+      (hom-morphism-monad-algebra-Precategory a b f)) ,
     (comp-coherence-square-hom-Precategory C
-      (top-hom-monad-algebra-morphism-Precategory a b f)
+      (top-hom-morphism-monad-algebra-Precategory a b f)
       (hom-monad-algebra-Precategory a)
       (hom-monad-algebra-Precategory b)
-      (hom-monad-algebra-morphism-Precategory a b f)
-      (top-hom-monad-algebra-morphism-Precategory b c g)
+      (hom-morphism-monad-algebra-Precategory a b f)
+      (top-hom-morphism-monad-algebra-Precategory b c g)
       (hom-monad-algebra-Precategory c)
-      (hom-monad-algebra-morphism-Precategory b c g)
-      (comm-hom-monad-algebra-morphism-Precategory a b f)
-      (comm-hom-monad-algebra-morphism-Precategory b c g)) ∙
+      (hom-morphism-monad-algebra-Precategory b c g)
+      (comm-hom-morphism-monad-algebra-Precategory a b f)
+      (comm-hom-morphism-monad-algebra-Precategory b c g)) ∙
     (ap
       (postcomp-hom-Precategory C (hom-monad-algebra-Precategory c) _)
       (inv (preserves-comp-endofunctor-monad-Precategory C T _ _)))
 
-  is-set-monad-algebra-morphism-Precategory :
+  is-set-morphism-monad-algebra-Precategory :
     (f g : monad-algebra-Precategory) →
-    is-set (monad-algebra-morphism-Precategory f g)
-  is-set-monad-algebra-morphism-Precategory f g =
+    is-set (morphism-monad-algebra-Precategory f g)
+  is-set-morphism-monad-algebra-Precategory f g =
     is-set-Σ
       (is-set-hom-Precategory C _ _)
       (λ hk → is-set-is-prop (is-set-hom-Precategory C _ _ _ _))
@@ -715,9 +715,9 @@ module _
   em-monad-Precategory = make-Precategory
     (monad-algebra-Precategory C T)
     (λ f g →
-      (monad-algebra-morphism-Precategory C T f g) ,
-      (is-set-monad-algebra-morphism-Precategory C T f g))
-    (λ {a} {b} {c} g f → comp-monad-algebra-morphism-Precategory C T a b c g f)
+      (morphism-monad-algebra-Precategory C T f g) ,
+      (is-set-morphism-monad-algebra-Precategory C T f g))
+    (λ {a} {b} {c} g f → comp-morphism-monad-algebra-Precategory C T a b c g f)
     (λ x →
       (id-hom-Precategory C) ,
       (left-unit-law-comp-hom-Precategory C
@@ -735,12 +735,12 @@ module _
     (λ {a} {b} f →
       eq-pair-Σ
         (left-unit-law-comp-hom-Precategory C
-          (hom-monad-algebra-morphism-Precategory C T a b f))
+          (hom-morphism-monad-algebra-Precategory C T a b f))
         (eq-is-prop (is-set-hom-Precategory C _ _ _ _)))
     λ {a} {b} f →
       eq-pair-Σ
         (right-unit-law-comp-hom-Precategory C
-          (hom-monad-algebra-morphism-Precategory C T a b f))
+          (hom-morphism-monad-algebra-Precategory C T a b f))
         (eq-is-prop (is-set-hom-Precategory C _ _ _ _))
 
   obj-functor-to-em-monad-Precategory :
@@ -775,7 +775,7 @@ module _
   functor-from-em-monad-Precategory : functor-Precategory em-monad-Precategory C
   functor-from-em-monad-Precategory =
     (obj-monad-algebra-Precategory C T) ,
-    (λ {x} {y} f → hom-monad-algebra-morphism-Precategory C T x y f) ,
+    (λ {x} {y} f → hom-morphism-monad-algebra-Precategory C T x y f) ,
     (λ g f → refl) ,
     (λ x → refl)
 
@@ -804,7 +804,7 @@ module _
       (hom-monad-algebra-Precategory C T x) ,
       inv (mul-law-monad-algebra-Precategory C T x)) ,
     (λ {x} {y} f → eq-pair-Σ
-      (comm-hom-monad-algebra-morphism-Precategory C T x y f)
+      (comm-hom-morphism-monad-algebra-Precategory C T x y f)
       (eq-is-prop (is-set-hom-Precategory C _ _ _ _)))
 
   private
