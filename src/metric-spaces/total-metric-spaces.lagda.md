@@ -21,8 +21,8 @@ open import metric-spaces.metric-spaces
 ## Idea
 
 A [metric space](metric-spaces.metric-spaces.md) is
-{{#concept "total" Disambiguation="metric space" Agda=is-total-Metric-Space Agda=Total-Metric-Space}} if
-all elements are at bounded distance.
+{{#concept "total" Disambiguation="metric space" Agda=is-total-Metric-Space Agda=Total-Metric-Space}}
+if all elements are at bounded distance.
 
 ## Definitions
 
