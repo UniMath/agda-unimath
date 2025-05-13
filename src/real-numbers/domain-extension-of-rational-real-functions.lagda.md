@@ -199,7 +199,7 @@ module _
       ( x)
       ( raise-real-ℚ l' y) →
     is-in-neighborhood-leq-ℝ
-      (l ⊔ l')
+      ( l ⊔ l')
       ( ε)
       ( g x)
       ( raise-ℝ l' (f y))
@@ -244,8 +244,8 @@ module _
       ( metric-space-leq-ℝ l')
       ( metric-space-leq-ℝ (l ⊔ l'))
       ( h) →
-    (x : ℝ l') →
-    (ε : ℚ⁺) →
+    ( x : ℝ l') →
+    ( ε : ℚ⁺) →
     is-in-neighborhood-leq-ℝ (l ⊔ l') ε (g x) (h x)
   sim-ev-modulus-of-uniform-continuity-is-extension-real-function-ℚ
     uc-g uc-h x ε =
