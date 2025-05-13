@@ -29,7 +29,7 @@ open import linear-algebra.finite-sequences-in-rings
 
 Finite sequences in a
 [commutative ring](commutative-algebra.commutative-rings.md) `R` are
-[finite sequences](lists.finite-sequences.md) on the underlying type of `R`.
+[finite sequences](lists.finite-sequences.md) in the underlying type of `R`.
 
 ## Definitions
 
