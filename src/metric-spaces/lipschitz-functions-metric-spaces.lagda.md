@@ -50,9 +50,9 @@ A positive rational `α : ℚ⁺` is a
 of a [function](metric-spaces.functions-metric-spaces.md) `f : A → B` between
 [metric spaces](metric-spaces.metric-spaces.md) if for any `x y : A`, if `d` is
 an upper bound of the distance between `x` and `y` in `A`, `α * d` is an upper
-bound on the distance between `f x` and `f y` in `B`; in that case, `f` is
-called an **α-Lipschitz** function. A function which admits a Lipschitz constant
-is called a
+bound on the distance between `f x` and `f y` in `B`. If `α` is a Lipschitz
+constant for `f`, then `f` is called an **α-Lipschitz** function. A function
+that admits a Lipschitz constant is called a
 {{#concept "Lipschitz function" Disambiguation="between metric spaces" WD="Lipschitz function" WDID=Q652707 Agda=lipschitz-function-Metric-Space}}.
 
 ## Definitions
