@@ -35,7 +35,7 @@ open import ring-theory.rings
 
 Given a [ring](ring-theory.rings.md) `R`, the type `tuple n R` of
 `R`-[tuples](lists.tuples.md) is an
-[Abelian group](group-theory.abelian-groups.md).
+[abelian group](group-theory.abelian-groups.md).
 
 ## Definitions
 
