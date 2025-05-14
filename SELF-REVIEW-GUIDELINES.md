@@ -66,9 +66,11 @@ Before merging your own PR, make sure to review each of the following aspects:
 
 If you have questions during the self-review process:
 
-1. For quick questions, ask in the project Discord or message the other
-   maintainers
-2. For more complex issues, consider creating an issue on GitHub
+1. For quick questions, ask in the
+   [project Discord](https://discord.gg/Zp2e8hYsuX) or message the other
+   [maintainers](MAINTAINERS.md)
+2. For more complex issues, consider creating an
+   [issue on GitHub](https://github.com/UniMath/agda-unimath/issues)
 3. Don't wait indefinitely for responses; use your best judgment if responses
    are not forthcoming
 4. Document significant decisions in your PR description
