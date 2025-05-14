@@ -26,7 +26,7 @@ open import lists.tuples
 
 </details>
 
-### The types of listed tuples and functional tuples are equivalent
+### Tuples on a type are equivalent to finite sequences in it
 
 ```agda
 module _
