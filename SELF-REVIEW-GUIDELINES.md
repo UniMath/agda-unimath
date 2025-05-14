@@ -14,8 +14,8 @@ conditions:
 
 - The PR has been open for at least 3 weeks
 - No maintainer has had time to review the PR
-- The changes follow established practices and don't introduce novel library
-  approaches
+- The changes follow established practices and don't introduce novel approaches
+  to the library's organization
 
 **Note:** Self-review is only appropriate for maintainers. PRs from regular
 contributors should still undergo review by at least one maintainer.
