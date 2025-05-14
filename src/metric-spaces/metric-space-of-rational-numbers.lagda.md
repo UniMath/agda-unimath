@@ -35,7 +35,7 @@ open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.isometries-metric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.monotonic-premetric-structures
@@ -83,6 +83,9 @@ premetric-leq-ℚ d x y =
   product-Prop
     ( lower-neighborhood-leq-prop-ℚ d x y)
     ( lower-neighborhood-leq-prop-ℚ d y x)
+
+neighborhood-leq-ℚ : (d : ℚ⁺) (x y : ℚ) → UU lzero
+neighborhood-leq-ℚ d x y = type-Prop (premetric-leq-ℚ d x y)
 ```
 
 ## Properties
@@ -253,7 +256,7 @@ module _
       ( is-isometry-add-ℚ d y z)
 ```
 
-### The convergent cauchy approximation of the canonical inclusion of positive rational numbers into the rational numbers
+### The convergent Cauchy approximation of the canonical inclusion of positive rational numbers into the rational numbers
 
 ```agda
 is-cauchy-approximation-rational-ℚ⁺ :

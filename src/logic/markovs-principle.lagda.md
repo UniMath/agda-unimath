@@ -80,7 +80,7 @@ markovs-principle-upwards-closed-structure P H q = (0 , λ x → q (ind-ℕ x H)
 
 ## External links
 
-- [Taboos.MarkovsPrinciple](https://martinescardo.github.io/TypeTopology/Taboos.MarkovsPrinciple.html)
+- [`Taboos.MarkovsPrinciple`](https://martinescardo.github.io/TypeTopology/Taboos.MarkovsPrinciple.html)
   at TypeTopology
 - [limited principle of omniscience](https://ncatlab.org/nlab/show/limited+principle+of+omniscience)
   at $n$Lab

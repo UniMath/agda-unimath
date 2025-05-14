@@ -30,7 +30,7 @@ Let `C` and `D` be two
 - for each pair of objects `X` in `C` and `Y` in `D`, there is an
   [equivalence](foundation-core.equivalences.md)
   `ϕ X Y : hom (F X) Y ≃ hom X (G Y)` such that
-- for every pair of morhpisms `f : X₂ → X₁` and `g : Y₁ → Y₂` the following
+- for every pair of morphisms `f : X₂ → X₁` and `g : Y₁ → Y₂` the following
   square commutes:
 
 ```text

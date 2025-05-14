@@ -16,7 +16,7 @@ open import foundation.universe-levels
 open import lists.arrays
 open import lists.lists
 open import lists.permutation-lists
-open import lists.sort-by-insertion-vectors
+open import lists.sort-by-insertion-tuples
 open import lists.sorted-lists
 open import lists.sorting-algorithms-lists
 
@@ -27,8 +27,8 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-We use the definition of sort by insertion for vectors
-([`lists.sort-by-insertion-vectors`](lists.sort-by-insertion-vectors.md)) and we
+We use the definition of sort by insertion for tuples
+([`lists.sort-by-insertion-tuples`](lists.sort-by-insertion-tuples.md)) and we
 adapt it for lists.
 
 ## Definition
@@ -41,7 +41,7 @@ module _
   insertion-sort-list :
     list (type-Decidable-Total-Order X) → list (type-Decidable-Total-Order X)
   insertion-sort-list l =
-    list-vec (length-list l) (insertion-sort-vec X (vec-list l))
+    list-tuple (length-list l) (insertion-sort-tuple X (tuple-list l))
 ```
 
 ## Properties
@@ -52,10 +52,10 @@ module _
   is-sort-insertion-sort-list :
     is-sort-list X insertion-sort-list
   is-sort-insertion-sort-list =
-    is-sort-list-is-sort-vec
+    is-sort-list-is-sort-tuple
       ( X)
-      ( insertion-sort-vec X)
-      ( is-sort-insertion-sort-vec X)
+      ( insertion-sort-tuple X)
+      ( is-sort-insertion-sort-tuple X)
 
   is-permutation-insertion-sort-list : is-permutation-list insertion-sort-list
   is-permutation-insertion-sort-list = pr1 (is-sort-insertion-sort-list)

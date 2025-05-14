@@ -30,7 +30,7 @@ we call this the
 
 There are a few different ways we can define `ap-binary`. We could define it by
 pattern matching on both `p` and `q`, but this leads to restricted computational
-behaviour. Instead, we define it as the upper concatenation in the Gray
+behavior. Instead, we define it as the upper concatenation in the Gray
 interchanger diagram
 
 ```text
