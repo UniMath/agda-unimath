@@ -60,7 +60,7 @@ Before merging your own PR, make sure to review each of the following aspects:
   - [File conventions](FILE-CONVENTIONS.md)
   - [Guidelines for mixfix operators](MIXFIX-OPERATORS.md)
   - [Citing sources](CITING-SOURCES.md)
-- [ ] No duplication with existing content
+- [ ] There is no duplication with existing content
 
 ## Seeking assistance
 
