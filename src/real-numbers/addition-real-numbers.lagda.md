@@ -129,13 +129,14 @@ module _
         ( upper-real-add-ℝ)
         ( is-arithmetically-located-lower-upper-add-ℝ)
 
-  add-ℝ : ℝ (l1 ⊔ l2)
-  add-ℝ =
-    real-lower-upper-ℝ
-      ( lower-real-add-ℝ)
-      ( upper-real-add-ℝ)
-      ( is-disjoint-lower-upper-add-ℝ)
-      ( is-located-lower-upper-add-ℝ)
+  opaque
+    add-ℝ : ℝ (l1 ⊔ l2)
+    add-ℝ =
+      real-lower-upper-ℝ
+        ( lower-real-add-ℝ)
+        ( upper-real-add-ℝ)
+        ( is-disjoint-lower-upper-add-ℝ)
+        ( is-located-lower-upper-add-ℝ)
 
 infixl 35 _+ℝ_
 _+ℝ_ = add-ℝ
@@ -151,7 +152,9 @@ module _
   (x : ℝ l1) (y : ℝ l2)
   where
 
-  abstract
+  opaque
+    unfolding add-ℝ
+
     commutative-add-ℝ : x +ℝ y ＝ y +ℝ x
     commutative-add-ℝ =
       eq-eq-lower-real-ℝ
@@ -168,7 +171,9 @@ module _
   (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
-  abstract
+  opaque
+    unfolding add-ℝ
+
     associative-add-ℝ : (x +ℝ y) +ℝ z ＝ x +ℝ (y +ℝ z)
     associative-add-ℝ =
       eq-eq-lower-real-ℝ
@@ -183,7 +188,9 @@ module _
 ### Unit laws for addition
 
 ```agda
-abstract
+opaque
+  unfolding add-ℝ
+
   left-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → zero-ℝ +ℝ x ＝ x
   left-unit-law-add-ℝ x =
     eq-eq-lower-real-ℝ
@@ -202,7 +209,9 @@ abstract
 ### Inverse laws for addition
 
 ```agda
-abstract
+opaque
+  unfolding add-ℝ
+
   right-inverse-law-add-ℝ :
     {l : Level} → (x : ℝ l) → sim-ℝ (x +ℝ neg-ℝ x) zero-ℝ
   right-inverse-law-add-ℝ x =
@@ -250,6 +259,7 @@ module _
 
   opaque
     unfolding sim-ℝ
+    unfolding add-ℝ
 
     preserves-sim-right-add-ℝ : sim-ℝ x y → sim-ℝ (x +ℝ z) (y +ℝ z)
     pr1 (preserves-sim-right-add-ℝ (lx⊆ly , _)) q =
@@ -362,7 +372,9 @@ module _
 ### The inclusion of rational numbers preserves addition
 
 ```agda
-abstract
+opaque
+  unfolding add-ℝ
+
   add-real-ℚ : (p q : ℚ) → real-ℚ p +ℝ real-ℚ q ＝ real-ℚ (p +ℚ q)
   add-real-ℚ p q =
     eq-sim-ℝ
@@ -490,3 +502,14 @@ abelian-group-add-ℝ-lzero =
   ( group-add-ℝ-lzero ,
     commutative-add-ℝ)
 ```
+
+## See also
+
+- In
+  [The addition isometry on real numbers](real-numbers.isometry-addition-real-numbers.md)
+  we show that addition is an
+  [isometry](metric-spaces.isometries-metric-spaces.md) from the
+  [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md)
+  to the
+  [metric space of isometries](metric-spaces.metric-space-of-isometries-metric-spaces.md)
+  of `ℝ`.

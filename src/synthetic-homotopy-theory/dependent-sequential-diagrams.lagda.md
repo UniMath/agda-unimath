@@ -38,7 +38,7 @@ They can be thought of as a family of sequential diagrams
  Bₙ(x) ----> Bₙ₊₁(aₙ(x)) -------> Bₙ₊₂(aₙ₊₁(aₙ(x))) ----> ⋯,
 ```
 
-one for each `x : Aₙ`, or as a sequence fibered over `(A, a)`, visualised as
+one for each `x : Aₙ`, or as a sequence fibered over `(A, a)`, visualized as
 
 ```text
      b₀      b₁      b₂

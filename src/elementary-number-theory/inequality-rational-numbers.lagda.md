@@ -355,56 +355,64 @@ preserves-leq-add-ℚ {a} {b} {c} {d} H K =
     ( preserves-leq-left-add-ℚ c a b H)
 ```
 
+### Negation of rational numbers reverses inequality
+
+```agda
+neg-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ (neg-ℚ y) (neg-ℚ x)
+neg-leq-ℚ x y = neg-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
+```
+
 ### Transposing additions on inequalities of rational numbers
 
 ```agda
-leq-transpose-right-diff-ℚ : (x y z : ℚ) → x ≤-ℚ (y -ℚ z) → x +ℚ z ≤-ℚ y
-leq-transpose-right-diff-ℚ x y z x≤y-z =
-  leq-transpose-is-section-hom-Poset
-    ( ℚ-Poset)
-    ( ℚ-Poset)
-    ( right-add-hom-leq-ℚ z)
-    ( _-ℚ z)
-    ( is-section-diff-ℚ z)
-    ( x)
-    ( y)
-    ( x≤y-z)
+abstract
+  leq-transpose-right-diff-ℚ : (x y z : ℚ) → x ≤-ℚ (y -ℚ z) → x +ℚ z ≤-ℚ y
+  leq-transpose-right-diff-ℚ x y z x≤y-z =
+    leq-transpose-is-section-hom-Poset
+      ( ℚ-Poset)
+      ( ℚ-Poset)
+      ( right-add-hom-leq-ℚ z)
+      ( _-ℚ z)
+      ( is-section-diff-ℚ z)
+      ( x)
+      ( y)
+      ( x≤y-z)
 
-leq-transpose-right-add-ℚ : (x y z : ℚ) → x ≤-ℚ y +ℚ z → x -ℚ z ≤-ℚ y
-leq-transpose-right-add-ℚ x y z x≤y+z =
-  leq-transpose-is-section-hom-Poset
-    ( ℚ-Poset)
-    ( ℚ-Poset)
-    ( right-add-hom-leq-ℚ (neg-ℚ z))
-    ( _+ℚ z)
-    ( is-retraction-diff-ℚ z)
-    ( x)
-    ( y)
-    ( x≤y+z)
+  leq-transpose-right-add-ℚ : (x y z : ℚ) → x ≤-ℚ y +ℚ z → x -ℚ z ≤-ℚ y
+  leq-transpose-right-add-ℚ x y z x≤y+z =
+    leq-transpose-is-section-hom-Poset
+      ( ℚ-Poset)
+      ( ℚ-Poset)
+      ( right-add-hom-leq-ℚ (neg-ℚ z))
+      ( _+ℚ z)
+      ( is-retraction-diff-ℚ z)
+      ( x)
+      ( y)
+      ( x≤y+z)
 
-leq-transpose-left-add-ℚ : (x y z : ℚ) → x +ℚ y ≤-ℚ z → x ≤-ℚ z -ℚ y
-leq-transpose-left-add-ℚ x y z x+y≤z =
-  leq-transpose-is-retraction-hom-Poset
-    ( ℚ-Poset)
-    ( ℚ-Poset)
-    ( _+ℚ y)
-    ( right-add-hom-leq-ℚ (neg-ℚ y))
-    ( is-retraction-diff-ℚ y)
-    ( x)
-    ( z)
-    ( x+y≤z)
+  leq-transpose-left-add-ℚ : (x y z : ℚ) → x +ℚ y ≤-ℚ z → x ≤-ℚ z -ℚ y
+  leq-transpose-left-add-ℚ x y z x+y≤z =
+    leq-transpose-is-retraction-hom-Poset
+      ( ℚ-Poset)
+      ( ℚ-Poset)
+      ( _+ℚ y)
+      ( right-add-hom-leq-ℚ (neg-ℚ y))
+      ( is-retraction-diff-ℚ y)
+      ( x)
+      ( z)
+      ( x+y≤z)
 
-leq-transpose-left-diff-ℚ : (x y z : ℚ) → x -ℚ y ≤-ℚ z → x ≤-ℚ z +ℚ y
-leq-transpose-left-diff-ℚ x y z x-y≤z =
-  leq-transpose-is-retraction-hom-Poset
-    ( ℚ-Poset)
-    ( ℚ-Poset)
-    ( _-ℚ y)
-    ( right-add-hom-leq-ℚ y)
-    ( is-section-diff-ℚ y)
-    ( x)
-    ( z)
-    ( x-y≤z)
+  leq-transpose-left-diff-ℚ : (x y z : ℚ) → x -ℚ y ≤-ℚ z → x ≤-ℚ z +ℚ y
+  leq-transpose-left-diff-ℚ x y z x-y≤z =
+    leq-transpose-is-retraction-hom-Poset
+      ( ℚ-Poset)
+      ( ℚ-Poset)
+      ( _-ℚ y)
+      ( right-add-hom-leq-ℚ y)
+      ( is-section-diff-ℚ y)
+      ( x)
+      ( z)
+      ( x-y≤z)
 
 leq-iff-transpose-left-add-ℚ : (x y z : ℚ) → x +ℚ y ≤-ℚ z ↔ x ≤-ℚ z -ℚ y
 pr1 (leq-iff-transpose-left-add-ℚ x y z) = leq-transpose-left-add-ℚ x y z
@@ -415,11 +423,20 @@ pr1 (leq-iff-transpose-left-diff-ℚ x y z) = leq-transpose-left-diff-ℚ x y z
 pr2 (leq-iff-transpose-left-diff-ℚ x y z) = leq-transpose-right-add-ℚ x z y
 ```
 
-### Negation of rational numbers reverses inequality
+### Swapping laws
 
 ```agda
-neg-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ (neg-ℚ y) (neg-ℚ x)
-neg-leq-ℚ x y = neg-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
+abstract
+  swap-right-diff-leq-ℚ : (p q r : ℚ) → leq-ℚ (p -ℚ q) r → leq-ℚ (p -ℚ r) q
+  swap-right-diff-leq-ℚ p q r p-q≤r =
+    leq-transpose-right-add-ℚ
+      ( p)
+      ( q)
+      ( r)
+      ( tr
+        ( leq-ℚ p)
+        ( commutative-add-ℚ r q)
+        ( leq-transpose-left-diff-ℚ p q r p-q≤r))
 ```
 
 ## See also

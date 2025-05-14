@@ -26,8 +26,9 @@ open import foundation.universe-levels
 
 open import group-theory.products-of-tuples-of-elements-commutative-monoids
 
-open import linear-algebra.vectors
-open import linear-algebra.vectors-on-semirings
+open import linear-algebra.finite-sequences-in-semirings
+
+open import lists.finite-sequences
 
 open import ring-theory.semirings
 
@@ -45,9 +46,7 @@ open import univalent-combinatorics.standard-finite-types
 The
 {{#concept "sum operation" Disambiguation="in a semiring" WD="sum" WDID=Q218005 Agda=sum-Semiring}}
 extends the binary addition operation on a [semiring](ring-theory.semirings.md)
-`R` to any family of elements of `R` indexed by a
-[standard finite type](univalent-combinatorics.standard-finite-types.md), or by
-a [finite type](univalent-combinatorics.finite-types.md).
+`R` to any [finite sequence](lists.finite-sequences.md) of elements of `R`.
 
 ## Definition
 
@@ -94,7 +93,7 @@ module _
     mul-unit-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   sum-two-elements-Semiring :
-    (f : functional-vec-Semiring R 2) →
+    (f : fin-sequence-type-Semiring R 2) →
     sum-Semiring R 2 f ＝ add-Semiring R (f (zero-Fin 1)) (f (one-Fin 1))
   sum-two-elements-Semiring =
     mul-two-elements-Commutative-Monoid
@@ -109,7 +108,7 @@ module _
   where
 
   htpy-sum-Semiring :
-    (n : ℕ) {f g : functional-vec-Semiring R n} →
+    (n : ℕ) {f g : fin-sequence-type-Semiring R n} →
     (f ~ g) → sum-Semiring R n f ＝ sum-Semiring R n g
   htpy-sum-Semiring =
     htpy-mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
@@ -130,14 +129,14 @@ module _
   where
 
   cons-sum-Semiring :
-    (n : ℕ) (f : functional-vec-Semiring R (succ-ℕ n)) →
-    {x : type-Semiring R} → head-functional-vec n f ＝ x →
+    (n : ℕ) (f : fin-sequence-type-Semiring R (succ-ℕ n)) →
+    {x : type-Semiring R} → head-fin-sequence n f ＝ x →
     sum-Semiring R (succ-ℕ n) f ＝
     add-Semiring R (sum-Semiring R n (f ∘ inl-Fin n)) x
   cons-sum-Semiring n f refl = refl
 
   snoc-sum-Semiring :
-    (n : ℕ) (f : functional-vec-Semiring R (succ-ℕ n)) →
+    (n : ℕ) (f : fin-sequence-type-Semiring R (succ-ℕ n)) →
     {x : type-Semiring R} → f (zero-Fin n) ＝ x →
     sum-Semiring R (succ-ℕ n) f ＝
     add-Semiring R
@@ -283,12 +282,12 @@ module _
   where
 
   interchange-add-sum-Semiring :
-    (n : ℕ) (f g : functional-vec-Semiring R n) →
+    (n : ℕ) (f g : fin-sequence-type-Semiring R n) →
     add-Semiring R
       ( sum-Semiring R n f)
       ( sum-Semiring R n g) ＝
     sum-Semiring R n
-      ( add-functional-vec-Semiring R n f g)
+      ( add-fin-sequence-type-Semiring R n f g)
   interchange-add-sum-Semiring zero-ℕ f g =
     left-unit-law-add-Semiring R (zero-Semiring R)
   interchange-add-sum-Semiring (succ-ℕ n) f g =
@@ -313,10 +312,10 @@ module _
   where
 
   extend-sum-Semiring :
-    (n : ℕ) (f : functional-vec-Semiring R n) →
+    (n : ℕ) (f : fin-sequence-type-Semiring R n) →
     sum-Semiring R
       ( succ-ℕ n)
-      ( cons-functional-vec-Semiring R n (zero-Semiring R) f) ＝
+      ( cons-fin-sequence-type-Semiring R n (zero-Semiring R) f) ＝
     sum-Semiring R n f
   extend-sum-Semiring =
     extend-mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
@@ -330,10 +329,10 @@ module _
   where
 
   shift-sum-Semiring :
-    (n : ℕ) (f : functional-vec-Semiring R n) →
+    (n : ℕ) (f : fin-sequence-type-Semiring R n) →
     sum-Semiring R
       ( succ-ℕ n)
-      ( snoc-functional-vec-Semiring R n f
+      ( snoc-fin-sequence-type-Semiring R n f
         ( zero-Semiring R)) ＝
     sum-Semiring R n f
   shift-sum-Semiring =
@@ -365,7 +364,7 @@ module _
 ```agda
 split-sum-Semiring :
   {l : Level} (R : Semiring l)
-  (n m : ℕ) (f : functional-vec-Semiring R (n +ℕ m)) →
+  (n m : ℕ) (f : fin-sequence-type-Semiring R (n +ℕ m)) →
   sum-Semiring R (n +ℕ m) f ＝
   add-Semiring R
     ( sum-Semiring R n (f ∘ inl-coproduct-Fin n m))

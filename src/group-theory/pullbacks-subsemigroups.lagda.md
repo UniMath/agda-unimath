@@ -81,7 +81,7 @@ module _
     is-closed-under-eq-Subsemigroup' G pullback-Subsemigroup
 ```
 
-### The order preserving operation `pullback-Subsemigroup
+### The order preserving operation `pullback-Subsemigroup`
 
 ```agda
 module _
