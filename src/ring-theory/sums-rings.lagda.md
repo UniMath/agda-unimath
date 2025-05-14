@@ -15,8 +15,9 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
-open import linear-algebra.vectors-on-rings
+open import linear-algebra.finite-sequences-in-rings
+
+open import lists.finite-sequences
 
 open import ring-theory.rings
 open import ring-theory.sums-semirings
@@ -30,13 +31,13 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The sum operation extends the binary addition operation on a ring `R` to any
-family of elements of `R` indexed by a standard finite type.
+[finite sequence](lists.finite-sequences.md) of elements of `R`.
 
 ## Definition
 
 ```agda
 sum-Ring :
-  {l : Level} (R : Ring l) (n : ℕ) → functional-vec-Ring R n → type-Ring R
+  {l : Level} (R : Ring l) (n : ℕ) → fin-sequence-type-Ring R n → type-Ring R
 sum-Ring R = sum-Semiring (semiring-Ring R)
 ```
 
@@ -50,11 +51,11 @@ module _
   where
 
   sum-one-element-Ring :
-    (f : functional-vec-Ring R 1) → sum-Ring R 1 f ＝ head-functional-vec 0 f
+    (f : fin-sequence-type-Ring R 1) → sum-Ring R 1 f ＝ head-fin-sequence 0 f
   sum-one-element-Ring = sum-one-element-Semiring (semiring-Ring R)
 
   sum-two-elements-Ring :
-    (f : functional-vec-Ring R 2) →
+    (f : fin-sequence-type-Ring R 2) →
     sum-Ring R 2 f ＝ add-Ring R (f (zero-Fin 1)) (f (one-Fin 1))
   sum-two-elements-Ring = sum-two-elements-Semiring (semiring-Ring R)
 ```
@@ -67,7 +68,7 @@ module _
   where
 
   htpy-sum-Ring :
-    (n : ℕ) {f g : functional-vec-Ring R n} →
+    (n : ℕ) {f g : fin-sequence-type-Ring R n} →
     (f ~ g) → sum-Ring R n f ＝ sum-Ring R n g
   htpy-sum-Ring = htpy-sum-Semiring (semiring-Ring R)
 ```
@@ -80,14 +81,14 @@ module _
   where
 
   cons-sum-Ring :
-    (n : ℕ) (f : functional-vec-Ring R (succ-ℕ n)) →
-    {x : type-Ring R} → head-functional-vec n f ＝ x →
+    (n : ℕ) (f : fin-sequence-type-Ring R (succ-ℕ n)) →
+    {x : type-Ring R} → head-fin-sequence n f ＝ x →
     sum-Ring R (succ-ℕ n) f ＝
-    add-Ring R (sum-Ring R n (tail-functional-vec n f)) x
+    add-Ring R (sum-Ring R n (tail-fin-sequence n f)) x
   cons-sum-Ring = cons-sum-Semiring (semiring-Ring R)
 
   snoc-sum-Ring :
-    (n : ℕ) (f : functional-vec-Ring R (succ-ℕ n)) →
+    (n : ℕ) (f : fin-sequence-type-Ring R (succ-ℕ n)) →
     {x : type-Ring R} → f (zero-Fin n) ＝ x →
     sum-Ring R (succ-ℕ n) f ＝
     add-Ring R
@@ -105,14 +106,14 @@ module _
 
   left-distributive-mul-sum-Ring :
     (n : ℕ) (x : type-Ring R)
-    (f : functional-vec-Ring R n) →
+    (f : fin-sequence-type-Ring R n) →
     mul-Ring R x (sum-Ring R n f) ＝
     sum-Ring R n (λ i → mul-Ring R x (f i))
   left-distributive-mul-sum-Ring =
     left-distributive-mul-sum-Semiring (semiring-Ring R)
 
   right-distributive-mul-sum-Ring :
-    (n : ℕ) (f : functional-vec-Ring R n)
+    (n : ℕ) (f : fin-sequence-type-Ring R n)
     (x : type-Ring R) →
     mul-Ring R (sum-Ring R n f) x ＝
     sum-Ring R n (λ i → mul-Ring R (f i) x)
@@ -128,12 +129,12 @@ module _
   where
 
   interchange-add-sum-Ring :
-    (n : ℕ) (f g : functional-vec-Ring R n) →
+    (n : ℕ) (f g : fin-sequence-type-Ring R n) →
     add-Ring R
       ( sum-Ring R n f)
       ( sum-Ring R n g) ＝
     sum-Ring R n
-      ( add-functional-vec-Ring R n f g)
+      ( add-fin-sequence-type-Ring R n f g)
   interchange-add-sum-Ring = interchange-add-sum-Semiring (semiring-Ring R)
 ```
 
@@ -145,10 +146,10 @@ module _
   where
 
   extend-sum-Ring :
-    (n : ℕ) (f : functional-vec-Ring R n) →
+    (n : ℕ) (f : fin-sequence-type-Ring R n) →
     sum-Ring R
       ( succ-ℕ n)
-      ( cons-functional-vec-Ring R n (zero-Ring R) f) ＝
+      ( cons-fin-sequence-type-Ring R n (zero-Ring R) f) ＝
     sum-Ring R n f
   extend-sum-Ring = extend-sum-Semiring (semiring-Ring R)
 ```
@@ -161,10 +162,10 @@ module _
   where
 
   shift-sum-Ring :
-    (n : ℕ) (f : functional-vec-Ring R n) →
+    (n : ℕ) (f : fin-sequence-type-Ring R n) →
     sum-Ring R
       ( succ-ℕ n)
-      ( snoc-functional-vec-Ring R n f
+      ( snoc-fin-sequence-type-Ring R n f
         ( zero-Ring R)) ＝
     sum-Ring R n f
   shift-sum-Ring = shift-sum-Semiring (semiring-Ring R)
@@ -178,7 +179,7 @@ module _
   where
 
   sum-zero-Ring :
-    (n : ℕ) → sum-Ring R n (zero-functional-vec-Ring R n) ＝ zero-Ring R
+    (n : ℕ) → sum-Ring R n (zero-fin-sequence-type-Ring R n) ＝ zero-Ring R
   sum-zero-Ring = sum-zero-Semiring (semiring-Ring R)
 ```
 
@@ -187,7 +188,7 @@ module _
 ```agda
 split-sum-Ring :
   {l : Level} (R : Ring l)
-  (n m : ℕ) (f : functional-vec-Ring R (n +ℕ m)) →
+  (n m : ℕ) (f : fin-sequence-type-Ring R (n +ℕ m)) →
   sum-Ring R (n +ℕ m) f ＝
   add-Ring R
     ( sum-Ring R n (f ∘ inl-coproduct-Fin n m))

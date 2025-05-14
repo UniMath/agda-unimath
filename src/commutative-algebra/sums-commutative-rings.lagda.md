@@ -20,8 +20,9 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
-open import linear-algebra.vectors-on-commutative-rings
+open import linear-algebra.finite-sequences-in-commutative-rings
+
+open import lists.finite-sequences
 
 open import ring-theory.sums-rings
 
@@ -34,14 +35,14 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The **sum operation** extends the binary addition operation on a commutative
-ring `A` to any family of elements of `A` indexed by a standard finite type.
+ring `A` to any [finite sequence](lists.finite-sequences.md) of elements of `A`.
 
 ## Definition
 
 ```agda
 sum-Commutative-Ring :
   {l : Level} (A : Commutative-Ring l) (n : ℕ) →
-  (functional-vec-Commutative-Ring A n) → type-Commutative-Ring A
+  (fin-sequence-type-Commutative-Ring A n) → type-Commutative-Ring A
 sum-Commutative-Ring A = sum-Ring (ring-Commutative-Ring A)
 ```
 
@@ -55,13 +56,13 @@ module _
   where
 
   sum-one-element-Commutative-Ring :
-    (f : functional-vec-Commutative-Ring A 1) →
-    sum-Commutative-Ring A 1 f ＝ head-functional-vec 0 f
+    (f : fin-sequence-type-Commutative-Ring A 1) →
+    sum-Commutative-Ring A 1 f ＝ head-fin-sequence 0 f
   sum-one-element-Commutative-Ring =
     sum-one-element-Ring (ring-Commutative-Ring A)
 
   sum-two-elements-Commutative-Ring :
-    (f : functional-vec-Commutative-Ring A 2) →
+    (f : fin-sequence-type-Commutative-Ring A 2) →
     sum-Commutative-Ring A 2 f ＝
     add-Commutative-Ring A (f (zero-Fin 1)) (f (one-Fin 1))
   sum-two-elements-Commutative-Ring =
@@ -76,7 +77,7 @@ module _
   where
 
   htpy-sum-Commutative-Ring :
-    (n : ℕ) {f g : functional-vec-Commutative-Ring A n} →
+    (n : ℕ) {f g : fin-sequence-type-Commutative-Ring A n} →
     (f ~ g) → sum-Commutative-Ring A n f ＝ sum-Commutative-Ring A n g
   htpy-sum-Commutative-Ring = htpy-sum-Ring (ring-Commutative-Ring A)
 ```
@@ -89,15 +90,15 @@ module _
   where
 
   cons-sum-Commutative-Ring :
-    (n : ℕ) (f : functional-vec-Commutative-Ring A (succ-ℕ n)) →
-    {x : type-Commutative-Ring A} → head-functional-vec n f ＝ x →
+    (n : ℕ) (f : fin-sequence-type-Commutative-Ring A (succ-ℕ n)) →
+    {x : type-Commutative-Ring A} → head-fin-sequence n f ＝ x →
     sum-Commutative-Ring A (succ-ℕ n) f ＝
     add-Commutative-Ring A
-      ( sum-Commutative-Ring A n (tail-functional-vec n f)) x
+      ( sum-Commutative-Ring A n (tail-fin-sequence n f)) x
   cons-sum-Commutative-Ring = cons-sum-Ring (ring-Commutative-Ring A)
 
   snoc-sum-Commutative-Ring :
-    (n : ℕ) (f : functional-vec-Commutative-Ring A (succ-ℕ n)) →
+    (n : ℕ) (f : fin-sequence-type-Commutative-Ring A (succ-ℕ n)) →
     {x : type-Commutative-Ring A} → f (zero-Fin n) ＝ x →
     sum-Commutative-Ring A (succ-ℕ n) f ＝
     add-Commutative-Ring A
@@ -115,14 +116,14 @@ module _
 
   left-distributive-mul-sum-Commutative-Ring :
     (n : ℕ) (x : type-Commutative-Ring A)
-    (f : functional-vec-Commutative-Ring A n) →
+    (f : fin-sequence-type-Commutative-Ring A n) →
     mul-Commutative-Ring A x (sum-Commutative-Ring A n f) ＝
     sum-Commutative-Ring A n (λ i → mul-Commutative-Ring A x (f i))
   left-distributive-mul-sum-Commutative-Ring =
     left-distributive-mul-sum-Ring (ring-Commutative-Ring A)
 
   right-distributive-mul-sum-Commutative-Ring :
-    (n : ℕ) (f : functional-vec-Commutative-Ring A n)
+    (n : ℕ) (f : fin-sequence-type-Commutative-Ring A n)
     (x : type-Commutative-Ring A) →
     mul-Commutative-Ring A (sum-Commutative-Ring A n f) x ＝
     sum-Commutative-Ring A n (λ i → mul-Commutative-Ring A (f i) x)
@@ -138,12 +139,12 @@ module _
   where
 
   interchange-add-sum-Commutative-Ring :
-    (n : ℕ) (f g : functional-vec-Commutative-Ring A n) →
+    (n : ℕ) (f g : fin-sequence-type-Commutative-Ring A n) →
     add-Commutative-Ring A
       ( sum-Commutative-Ring A n f)
       ( sum-Commutative-Ring A n g) ＝
     sum-Commutative-Ring A n
-      ( add-functional-vec-Commutative-Ring A n f g)
+      ( add-fin-sequence-type-Commutative-Ring A n f g)
   interchange-add-sum-Commutative-Ring =
     interchange-add-sum-Ring (ring-Commutative-Ring A)
 ```
@@ -156,10 +157,14 @@ module _
   where
 
   extend-sum-Commutative-Ring :
-    (n : ℕ) (f : functional-vec-Commutative-Ring A n) →
+    (n : ℕ) (f : fin-sequence-type-Commutative-Ring A n) →
     sum-Commutative-Ring A
       ( succ-ℕ n)
-      ( cons-functional-vec-Commutative-Ring A n (zero-Commutative-Ring A) f) ＝
+      ( cons-fin-sequence-type-Commutative-Ring
+        ( A)
+        ( n)
+        ( zero-Commutative-Ring A)
+        ( f)) ＝
     sum-Commutative-Ring A n f
   extend-sum-Commutative-Ring = extend-sum-Ring (ring-Commutative-Ring A)
 ```
@@ -172,10 +177,10 @@ module _
   where
 
   shift-sum-Commutative-Ring :
-    (n : ℕ) (f : functional-vec-Commutative-Ring A n) →
+    (n : ℕ) (f : fin-sequence-type-Commutative-Ring A n) →
     sum-Commutative-Ring A
       ( succ-ℕ n)
-      ( snoc-functional-vec-Commutative-Ring A n f
+      ( snoc-fin-sequence-type-Commutative-Ring A n f
         ( zero-Commutative-Ring A)) ＝
     sum-Commutative-Ring A n f
   shift-sum-Commutative-Ring = shift-sum-Ring (ring-Commutative-Ring A)
@@ -186,7 +191,7 @@ module _
 ```agda
 split-sum-Commutative-Ring :
   {l : Level} (A : Commutative-Ring l)
-  (n m : ℕ) (f : functional-vec-Commutative-Ring A (n +ℕ m)) →
+  (n m : ℕ) (f : fin-sequence-type-Commutative-Ring A (n +ℕ m)) →
   sum-Commutative-Ring A (n +ℕ m) f ＝
   add-Commutative-Ring A
     ( sum-Commutative-Ring A n (f ∘ inl-coproduct-Fin n m))
@@ -210,7 +215,7 @@ module _
   sum-zero-Commutative-Ring :
     (n : ℕ) →
     sum-Commutative-Ring A n
-      ( zero-functional-vec-Commutative-Ring A n) ＝
+      ( zero-fin-sequence-type-Commutative-Ring A n) ＝
     zero-Commutative-Ring A
   sum-zero-Commutative-Ring = sum-zero-Ring (ring-Commutative-Ring A)
 ```
