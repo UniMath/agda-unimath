@@ -159,6 +159,13 @@ module _
       structure-Metric-Space
       is-metric-structure-Metric-Space
 
+  refl-structure-Metric-Space :
+    is-reflexive-Premetric structure-Metric-Space
+  refl-structure-Metric-Space =
+    is-reflexive-is-metric-Premetric
+      structure-Metric-Space
+      is-metric-structure-Metric-Space
+
   is-symmetric-structure-Metric-Space :
     is-symmetric-Premetric structure-Metric-Space
   is-symmetric-structure-Metric-Space =

@@ -7,13 +7,21 @@ module metric-spaces.total-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-subtypes
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.metric-spaces
+open import metric-spaces.neighbors-metric-spaces
+
+open import order-theory.total-preorders
 ```
 
 </details>
@@ -22,7 +30,9 @@ open import metric-spaces.metric-spaces
 
 A [metric space](metric-spaces.metric-spaces.md) is
 {{#concept "total" Disambiguation="metric space" Agda=is-total-Metric-Space Agda=Total-Metric-Space}}
-if all elements are at bounded distance.
+if all elements are at bounded distance. In other words, the
+[preorder of neighbors in the metric space](metric-spaces.neighbors-metric-spaces.md)
+is [total](order-theory.total-preorders.md).
 
 ## Definitions
 
@@ -73,4 +83,30 @@ module _
 
   type-Total-Metric-Space : UU l1
   type-Total-Metric-Space = type-Metric-Space metric-space-Total-Metric-Space
+```
+
+## Properties
+
+### A metric space is total if and only if the neigbor preorder is total
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  where
+
+  is-total-preorder-is-neighbor-is-total-Metric-Space :
+    is-total-Metric-Space A →
+    is-total-Preorder (preorder-is-neighbor-Metric-Space A)
+  is-total-preorder-is-neighbor-is-total-Metric-Space total-A x y =
+    inl-disjunction (total-A x y)
+
+  is-total-is-total-preorder-is-neighbor-Metric-Space :
+    is-total-Preorder (preorder-is-neighbor-Metric-Space A) →
+    is-total-Metric-Space A
+  is-total-is-total-preorder-is-neighbor-Metric-Space total-N x y =
+    elim-disjunction
+      ( is-neighbor-prop-Metric-Space A x y)
+      ( id)
+      ( map-trunc-Prop (tot λ d → is-symmetric-structure-Metric-Space A d y x))
+      ( total-N x y)
 ```

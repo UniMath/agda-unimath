@@ -88,6 +88,7 @@ open import metric-spaces.metric-space-of-short-functions-metric-spaces public
 open import metric-spaces.metric-spaces public
 open import metric-spaces.metric-structures public
 open import metric-spaces.monotonic-premetric-structures public
+open import metric-spaces.neighbors-metric-spaces public
 open import metric-spaces.ordering-premetric-structures public
 open import metric-spaces.precategory-of-metric-spaces-and-functions public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
