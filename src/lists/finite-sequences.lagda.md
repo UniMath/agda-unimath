@@ -112,7 +112,7 @@ pr1 (fin-sequence-Set A n) = fin-sequence (type-Set A) n
 pr2 (fin-sequence-Set A n) = is-set-fin-sequence n (is-set-type-Set A)
 ```
 
-### Adding the tail to the head gives the same functional tuple
+### Adding the tail to the head gives the same finite sequence
 
 ```agda
 module _
