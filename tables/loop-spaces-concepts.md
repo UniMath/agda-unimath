@@ -7,6 +7,6 @@
 | Free loops                   | [`synthetic-homotopy-theory.free-loops`](synthetic-homotopy-theory.free-loops.md)                                 |
 | Functoriality of loop spaces | [`synthetic-homotopy-theory.functoriality-loop-spaces`](synthetic-homotopy-theory.functoriality-loop-spaces.md)   |
 | Groups of loops in 1-types   | [`synthetic-homotopy-theory.groups-of-loops-in-1-types`](synthetic-homotopy-theory.groups-of-loops-in-1-types.md) |
-| Iterated loop spaces         | [`synthetic-homotopy-theory.iterated-loop-spaces'](synthetic-homotopy-theory.iterated-loop-spaces.md)             |
+| Iterated loop spaces         | [`synthetic-homotopy-theory.iterated-loop-spaces`](synthetic-homotopy-theory.iterated-loop-spaces.md)             |
 | Powers of loops              | [`synthetic-homotopy-theory.powers-of-loops`](synthetic-homotopy-theory.powers-of-loops.md)                       |
 | Triple loop spaces           | [`synthetic-homotopy-theory.triple-loop-spaces`](synthetic-homotopy-theory.triple-loop-spaces.md)                 |

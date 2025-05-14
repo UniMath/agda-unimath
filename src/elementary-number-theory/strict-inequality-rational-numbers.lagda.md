@@ -127,12 +127,13 @@ module _
   (x y z : ℚ)
   where
 
-  transitive-le-ℚ : le-ℚ y z → le-ℚ x y → le-ℚ x z
-  transitive-le-ℚ =
-    transitive-le-fraction-ℤ
-      ( fraction-ℚ x)
-      ( fraction-ℚ y)
-      ( fraction-ℚ z)
+  abstract
+    transitive-le-ℚ : le-ℚ y z → le-ℚ x y → le-ℚ x z
+    transitive-le-ℚ =
+      transitive-le-fraction-ℤ
+        ( fraction-ℚ x)
+        ( fraction-ℚ y)
+        ( fraction-ℚ z)
 ```
 
 ### Concatenation rules for inequality and strict inequality on the rational numbers
@@ -320,15 +321,16 @@ module _
 ### Addition on the rational numbers preserves strict inequality
 
 ```agda
-preserves-le-add-ℚ :
-  {a b c d : ℚ} → le-ℚ a b → le-ℚ c d → le-ℚ (a +ℚ c) (b +ℚ d)
-preserves-le-add-ℚ {a} {b} {c} {d} H K =
-  transitive-le-ℚ
-    ( a +ℚ c)
-    ( b +ℚ c)
-    ( b +ℚ d)
-    ( preserves-le-right-add-ℚ b c d K)
-    ( preserves-le-left-add-ℚ c a b H)
+abstract
+  preserves-le-add-ℚ :
+    {a b c d : ℚ} → le-ℚ a b → le-ℚ c d → le-ℚ (a +ℚ c) (b +ℚ d)
+  preserves-le-add-ℚ {a} {b} {c} {d} H K =
+    transitive-le-ℚ
+      ( a +ℚ c)
+      ( b +ℚ c)
+      ( b +ℚ d)
+      ( preserves-le-right-add-ℚ b c d K)
+      ( preserves-le-left-add-ℚ c a b H)
 ```
 
 ### The rational numbers have no lower or upper bound
@@ -501,4 +503,20 @@ pr2 (le-iff-transpose-left-add-ℚ x y z) = le-transpose-right-diff-ℚ x z y
 le-iff-transpose-left-diff-ℚ : (x y z : ℚ) → le-ℚ (x -ℚ y) z ↔ le-ℚ x (z +ℚ y)
 pr1 (le-iff-transpose-left-diff-ℚ x y z) = le-transpose-left-diff-ℚ x y z
 pr2 (le-iff-transpose-left-diff-ℚ x y z) = le-transpose-right-add-ℚ x z y
+```
+
+### Swapping laws
+
+```agda
+abstract
+  swap-right-diff-le-ℚ : (p q r : ℚ) → le-ℚ (p -ℚ q) r → le-ℚ (p -ℚ r) q
+  swap-right-diff-le-ℚ p q r p-q≤r =
+    le-transpose-right-add-ℚ
+      ( p)
+      ( q)
+      ( r)
+      ( tr
+        ( le-ℚ p)
+        ( commutative-add-ℚ r q)
+        ( le-transpose-left-diff-ℚ p q r p-q≤r))
 ```

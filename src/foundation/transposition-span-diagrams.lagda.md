@@ -19,7 +19,7 @@ open import foundation.universe-levels
 ## Idea
 
 The
-{{#concept "trasposition" Disambiguation="span diagram" Agda=transposition-span-diagram}}
+{{#concept "transposition" Disambiguation="span diagram" Agda=transposition-span-diagram}}
 of a [span diagram](foundation.span-diagrams.md)
 
 ```text

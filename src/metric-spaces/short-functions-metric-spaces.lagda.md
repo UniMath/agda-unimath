@@ -12,6 +12,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -27,6 +28,7 @@ open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-premetric-spaces
+open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
 
 </details>
@@ -321,6 +323,22 @@ module _
       ( is-emb-htpy
         ( λ f → refl)
         ( is-emb-inclusion-subtype (is-isometry-prop-Metric-Space A B)))
+```
+
+### Short maps are uniformly continuous
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
+  where
+
+  is-uniformly-continuous-is-short-function-Metric-Space :
+    (f : map-type-Metric-Space A B) → is-short-function-Metric-Space A B f →
+    is-uniformly-continuous-map-Metric-Space A B f
+  is-uniformly-continuous-is-short-function-Metric-Space =
+    is-uniformly-continuous-is-short-function-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
 ```
 
 ## See also
