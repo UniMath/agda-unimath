@@ -66,7 +66,7 @@ module _
 If `g` is an [embedding](foundation-core.embeddings.md), then
 `is-perfect-image a` is a [proposition](foundation-core.propositions.md). In
 this case, if we assume the
-[law of exluded middle](foundation.law-of-excluded-middle.md), we can show
+[law of excluded middle](foundation.law-of-excluded-middle.md), we can show
 `is-perfect-image a` is a [decidable type](foundation.decidable-types.md) for
 any `a : A`.
 

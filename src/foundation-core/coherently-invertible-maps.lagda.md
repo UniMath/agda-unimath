@@ -678,7 +678,7 @@ Now, by pasting these along the common edge `Rgfg`, we obtain
              Rg             gS
 ```
 
-After cancelling `gfgS` and `Rg` with themselves, we are left with `Rg ~ gS` as
+After canceling `gfgS` and `Rg` with themselves, we are left with `Rg ~ gS` as
 desired.
 
 ```agda

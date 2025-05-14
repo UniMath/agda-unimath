@@ -72,6 +72,8 @@ open import order-theory.large-meet-subsemilattices public
 open import order-theory.large-posets public
 open import order-theory.large-preorders public
 open import order-theory.large-quotient-locales public
+open import order-theory.large-strict-orders public
+open import order-theory.large-strict-preorders public
 open import order-theory.large-subframes public
 open import order-theory.large-subposets public
 open import order-theory.large-subpreorders public
@@ -120,9 +122,14 @@ open import order-theory.sequences-preorders public
 open import order-theory.sequences-strictly-preordered-sets public
 open import order-theory.similarity-of-elements-large-posets public
 open import order-theory.similarity-of-elements-large-preorders public
+open import order-theory.similarity-of-elements-large-strict-orders public
+open import order-theory.similarity-of-elements-large-strict-preorders public
+open import order-theory.similarity-of-elements-strict-orders public
+open import order-theory.similarity-of-elements-strict-preorders public
 open import order-theory.similarity-of-order-preserving-maps-large-posets public
 open import order-theory.similarity-of-order-preserving-maps-large-preorders public
 open import order-theory.strict-order-preserving-maps public
+open import order-theory.strict-orders public
 open import order-theory.strict-preorders public
 open import order-theory.strictly-increasing-sequences-strictly-preordered-sets public
 open import order-theory.strictly-inflationary-maps-strict-preorders public

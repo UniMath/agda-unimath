@@ -172,7 +172,7 @@ module _
           ( H (δ₁ +ℚ⁺ δ₂)))
 ```
 
-### Indistiguishable elements in the closure of a premetric are indistinguishable
+### Indistinguishable elements in the closure of a premetric are indistinguishable
 
 ```agda
 module _
@@ -190,7 +190,7 @@ module _
       ( H (left-summand-split-ℚ⁺ ε) (right-summand-split-ℚ⁺ ε))
 ```
 
-### Indistiguishable elements in a premetric are indistinguishable in its closure
+### Indistinguishable elements in a premetric are indistinguishable in its closure
 
 ```agda
 module _
