@@ -170,5 +170,5 @@ module _
 
 ## See also
 
-- [Total metric spaces](metrics-spaces.total-metric-spaces.md): metric spaces
+- [Total metric spaces](metric-spaces.total-metric-spaces.md): metric spaces
   where all elements are neighbors of each other.
