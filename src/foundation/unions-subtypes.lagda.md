@@ -7,12 +7,21 @@ module foundation.unions-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.disjoint-subtypes
 open import foundation.disjunction
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
 open import foundation.large-locale-of-subtypes
+open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.universe-levels
 
 open import foundation-core.subtypes
@@ -100,4 +109,57 @@ module _
     apply-universal-property-trunc-Prop p
       ( union-family-of-subtypes B x)
       ( λ (i , q) → unit-trunc-Prop (i , H i x q))
+```
+
+### The union of disjoint subtypes is equivalent to their coproduct
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} (A : subtype l2 X) (B : subtype l3 X)
+  (H : disjoint-subtype A B)
+  where
+
+  all-elements-equal-coproduct-disjoint-prop :
+    (x : X) → all-elements-equal (type-Prop (A x) + type-Prop (B x))
+  all-elements-equal-coproduct-disjoint-prop x (inl _) (inl _) =
+    ap inl (eq-type-Prop (A x))
+  all-elements-equal-coproduct-disjoint-prop x (inr _) (inr _) =
+    ap inr (eq-type-Prop (B x))
+  all-elements-equal-coproduct-disjoint-prop x (inl ax) (inr bx) =
+    ex-falso (H x (ax , bx))
+  all-elements-equal-coproduct-disjoint-prop x (inr bx) (inl ax) =
+    ex-falso (H x (ax , bx))
+
+  is-prop-coproduct-disjoint-prop :
+    (x : X) → is-prop (type-Prop (A x) + type-Prop (B x))
+  is-prop-coproduct-disjoint-prop x =
+    is-prop-all-elements-equal (all-elements-equal-coproduct-disjoint-prop x)
+
+  subtype-coproduct-disjoint-subtype : subtype (l2 ⊔ l3) X
+  subtype-coproduct-disjoint-subtype x =
+    type-Prop (A x) + type-Prop (B x) , is-prop-coproduct-disjoint-prop x
+
+  iff-disjunction-coproduct-disjoint-subtype :
+    (x : X) → type-iff-Prop (A x ∨ B x) (subtype-coproduct-disjoint-subtype x)
+  pr1 (iff-disjunction-coproduct-disjoint-subtype x) =
+    elim-disjunction (subtype-coproduct-disjoint-subtype x) inl inr
+  pr2 (iff-disjunction-coproduct-disjoint-subtype x) =
+    rec-coproduct inl-disjunction inr-disjunction
+
+  equiv-union-subtype-coproduct-disjoint-subtype :
+    type-subtype (union-subtype A B) ≃
+    type-subtype subtype-coproduct-disjoint-subtype
+  equiv-union-subtype-coproduct-disjoint-subtype =
+    equiv-tot
+      ( λ x →
+        equiv-iff'
+          ( A x ∨ B x)
+          ( subtype-coproduct-disjoint-subtype x)
+          ( iff-disjunction-coproduct-disjoint-subtype x))
+
+  equiv-union-coproduct-disjoint-subtype :
+    type-subtype (union-subtype A B) ≃ type-subtype A + type-subtype B
+  equiv-union-coproduct-disjoint-subtype =
+    left-distributive-Σ-coproduct X (is-in-subtype A) (is-in-subtype B) ∘e
+    equiv-union-subtype-coproduct-disjoint-subtype
 ```
