@@ -29,7 +29,6 @@ open import foundation.universe-levels
 open import linear-algebra.finite-sequences-in-commutative-semirings
 
 open import lists.finite-sequences
-
 open import lists.lists
 
 open import ring-theory.sums-semirings

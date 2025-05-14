@@ -42,7 +42,7 @@ open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.products-of-tuples-of-elements-monoids
 
-open import linear-algebra.vectors-on-commutative-monoids
+open import linear-algebra.finite-sequences-in-commutative-monoids
 
 open import lists.lists
 
@@ -70,7 +70,7 @@ any [finite type](univalent-combinatorics.finite-types.md).
 ```agda
 mul-fin-Commutative-Monoid :
   {l : Level} (M : Commutative-Monoid l) (n : ℕ) →
-  (functional-vec-Commutative-Monoid M n) → type-Commutative-Monoid M
+  (fin-sequence-type-Commutative-Monoid M n) → type-Commutative-Monoid M
 mul-fin-Commutative-Monoid M =
   mul-fin-Monoid (monoid-Commutative-Monoid M)
 ```
@@ -85,14 +85,14 @@ module _
   where
 
   mul-one-element-Commutative-Monoid :
-    (f : functional-vec-Commutative-Monoid M 1) →
+    (f : fin-sequence-type-Commutative-Monoid M 1) →
     mul-fin-Commutative-Monoid M 1 f ＝
-    head-functional-vec-Commutative-Monoid M 0 f
+    head-fin-sequence-type-Commutative-Monoid M 0 f
   mul-one-element-Commutative-Monoid =
     mul-one-element-Monoid (monoid-Commutative-Monoid M)
 
   mul-two-elements-Commutative-Monoid :
-    (f : functional-vec-Commutative-Monoid M 2) →
+    (f : fin-sequence-type-Commutative-Monoid M 2) →
     mul-fin-Commutative-Monoid M 2 f ＝
     mul-Commutative-Monoid M (f (zero-Fin 1)) (f (one-Fin 1))
   mul-two-elements-Commutative-Monoid =
@@ -107,7 +107,7 @@ module _
   where
 
   htpy-mul-fin-Commutative-Monoid :
-    (n : ℕ) {f g : functional-vec-Commutative-Monoid M n} →
+    (n : ℕ) {f g : fin-sequence-type-Commutative-Monoid M n} →
     (f ~ g) →
     mul-fin-Commutative-Monoid M n f ＝ mul-fin-Commutative-Monoid M n g
   htpy-mul-fin-Commutative-Monoid =
@@ -122,16 +122,16 @@ module _
   where
 
   cons-mul-fin-Commutative-Monoid :
-    (n : ℕ) (f : functional-vec-Commutative-Monoid M (succ-ℕ n)) →
+    (n : ℕ) (f : fin-sequence-type-Commutative-Monoid M (succ-ℕ n)) →
     {x : type-Commutative-Monoid M} →
-    head-functional-vec-Commutative-Monoid M n f ＝ x →
+    head-fin-sequence-type-Commutative-Monoid M n f ＝ x →
     mul-fin-Commutative-Monoid M (succ-ℕ n) f ＝
     mul-Commutative-Monoid M (mul-fin-Commutative-Monoid M n (f ∘ inl-Fin n)) x
   cons-mul-fin-Commutative-Monoid =
     cons-mul-fin-Monoid (monoid-Commutative-Monoid M)
 
   snoc-mul-fin-Commutative-Monoid :
-    (n : ℕ) (f : functional-vec-Commutative-Monoid M (succ-ℕ n)) →
+    (n : ℕ) (f : fin-sequence-type-Commutative-Monoid M (succ-ℕ n)) →
     {x : type-Commutative-Monoid M} → f (zero-Fin n) ＝ x →
     mul-fin-Commutative-Monoid M (succ-ℕ n) f ＝
     mul-Commutative-Monoid M
@@ -149,10 +149,10 @@ module _
   where
 
   extend-mul-fin-Commutative-Monoid :
-    (n : ℕ) (f : functional-vec-Commutative-Monoid M n) →
+    (n : ℕ) (f : fin-sequence-type-Commutative-Monoid M n) →
     mul-fin-Commutative-Monoid M
       ( succ-ℕ n)
-      ( cons-functional-vec-Commutative-Monoid
+      ( cons-fin-sequence-type-Commutative-Monoid
         ( M)
         ( n)
         ( unit-Commutative-Monoid M) f) ＝
@@ -169,10 +169,10 @@ module _
   where
 
   shift-mul-fin-Commutative-Monoid :
-    (n : ℕ) (f : functional-vec-Commutative-Monoid M n) →
+    (n : ℕ) (f : fin-sequence-type-Commutative-Monoid M n) →
     mul-fin-Commutative-Monoid M
       ( succ-ℕ n)
-      ( snoc-functional-vec-Commutative-Monoid M n f
+      ( snoc-fin-sequence-type-Commutative-Monoid M n f
         ( unit-Commutative-Monoid M)) ＝
     mul-fin-Commutative-Monoid M n f
   shift-mul-fin-Commutative-Monoid =
@@ -191,7 +191,7 @@ module _
     mul-fin-Commutative-Monoid
       ( M)
       ( n)
-      ( zero-functional-vec-Commutative-Monoid M n) ＝
+      ( zero-fin-sequence-type-Commutative-Monoid M n) ＝
     unit-Commutative-Monoid M
   mul-fin-unit-Commutative-Monoid =
     mul-fin-unit-Monoid (monoid-Commutative-Monoid M)
@@ -202,7 +202,7 @@ module _
 ```agda
 split-mul-fin-Commutative-Monoid :
   {l : Level} (M : Commutative-Monoid l)
-  (n m : ℕ) (f : functional-vec-Commutative-Monoid M (n +ℕ m)) →
+  (n m : ℕ) (f : fin-sequence-type-Commutative-Monoid M (n +ℕ m)) →
   mul-fin-Commutative-Monoid M (n +ℕ m) f ＝
   mul-Commutative-Monoid M
     ( mul-fin-Commutative-Monoid M n (f ∘ inl-coproduct-Fin n m))
@@ -221,7 +221,7 @@ module _
   abstract
     preserves-product-adjacent-transposition-mul-fin-Commutative-Monoid :
       (n : ℕ) → (k : Fin n) →
-      (f : functional-vec-Commutative-Monoid M (succ-ℕ n)) →
+      (f : fin-sequence-type-Commutative-Monoid M (succ-ℕ n)) →
       mul-fin-Commutative-Monoid M (succ-ℕ n) f ＝
       mul-fin-Commutative-Monoid
         M (succ-ℕ n) (f ∘ map-adjacent-transposition-Fin n k)
@@ -239,7 +239,7 @@ module _
 
     preserves-product-permutation-list-adjacent-transpositions-Commutative-Monoid :
       (n : ℕ) → (L : list (Fin n)) →
-      (f : functional-vec-Commutative-Monoid M (succ-ℕ n)) →
+      (f : fin-sequence-type-Commutative-Monoid M (succ-ℕ n)) →
       mul-fin-Commutative-Monoid M (succ-ℕ n) f ＝
       mul-fin-Commutative-Monoid
         M (succ-ℕ n) (f ∘ map-permutation-list-adjacent-transpositions n L)
@@ -258,7 +258,7 @@ module _
 
     preserves-product-transposition-Commutative-Monoid :
       (n : ℕ) (i j : Fin (succ-ℕ n)) (neq : i ≠ j) →
-      (f : functional-vec-Commutative-Monoid M (succ-ℕ n)) →
+      (f : fin-sequence-type-Commutative-Monoid M (succ-ℕ n)) →
       mul-fin-Commutative-Monoid M (succ-ℕ n) f ＝
       mul-fin-Commutative-Monoid
         M (succ-ℕ n) (f ∘ map-transposition-Fin (succ-ℕ n) i j neq)
@@ -277,7 +277,7 @@ module _
 
     preserves-product-permutation-list-standard-transpositions-Commutative-Monoid :
       (n : ℕ) → (L : list (Σ (Fin n × Fin n) ( λ (i , j) → i ≠ j))) →
-      (f : functional-vec-Commutative-Monoid M n) →
+      (f : fin-sequence-type-Commutative-Monoid M n) →
       mul-fin-Commutative-Monoid M n f ＝
       mul-fin-Commutative-Monoid
         M n (f ∘ map-equiv (permutation-list-standard-transpositions-Fin n L))
@@ -295,7 +295,7 @@ module _
 
     preserves-product-permutation-Commutative-Monoid :
       (n : ℕ) → (σ : Permutation n) →
-      (f : functional-vec-Commutative-Monoid M n) →
+      (f : fin-sequence-type-Commutative-Monoid M n) →
       mul-fin-Commutative-Monoid M n f ＝
       mul-fin-Commutative-Monoid M n (f ∘ map-equiv σ)
     preserves-product-permutation-Commutative-Monoid n σ f =
