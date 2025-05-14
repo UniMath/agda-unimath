@@ -34,10 +34,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-There are two equivalent definitions of
-{{#concept "tuples" WD="n-tuple" WDID=Q600590}} of length `n`. First, a
-{{#concept "listed tuple" Agda=tuple}} of length `n` is a list of `n` elements
-of type `A`.
+We define {{#concept "tuples" WD="n-tuple" WDID=Q600590}} of length `n`. These
+are [equivalent](lists.equivalence-tuples-finite-sequences.md) to the related
+concept of [finite sequences](lists.finite-sequences.md), but are structured
+like [lists](lists.lists.md) instead of [arrays](lists.arrays.md).
 
 ## Definitions
 

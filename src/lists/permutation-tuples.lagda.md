@@ -41,10 +41,12 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Given an functional tuple `t` of length `n` and a automorphism `σ` of `Fin n`,
-the permutation of `t` according to `σ` is the functional tuple where the index
-are permuted by `σ`. Then, we can define what is a permutation of a tuple of
-length `n` via the equivalence between functional tuples and tuples.
+Given a [finite sequence](lists.finite-sequences.md) `t` of length `n` and an
+[automorphism](finite-group-theory.permutations-standard-finite-types.md) `σ` of
+`Fin n`, the permutation of `t` according to `σ` is the finite sequence where
+the indices are permuted by `σ`. Then, we can define what is a permutation of a
+[tuple](lists.tuples.md) of length `n` via the
+[equivalence between finite sequences and tuples](lists.equivalence-tuples-finite-sequences.md).
 
 ## Definitions
 

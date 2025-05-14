@@ -31,7 +31,10 @@ open import univalent-combinatorics.standard-finite-types
 
 A {{#concept "finite sequence" Agda=fin-sequence}} of length `n` is a map from
 the [standard finite type](univalent-combinatorics.standard-finite-types.md) of
-cardinality `n`, `Fin n`, to `A`.
+cardinality `n`, `Fin n`, to `A`. These are
+[equivalent](lists.equivalence-tuples-finite-sequences.md) to the related
+concept of [tuples](lists.tuples.md), but are structured like
+[arrays](lists.arrays.md) instead of [lists](lists.lists.md).
 
 ## Definition
 
