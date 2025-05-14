@@ -141,3 +141,7 @@ module _
   cons-head-tail-fin-sequence n v =
     eq-htpy (htpy-cons-head-tail-fin-sequence n v)
 ```
+
+## See also
+
+- [Sequences](foundation.sequences.md)
