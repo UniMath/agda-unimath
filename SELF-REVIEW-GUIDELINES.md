@@ -3,9 +3,9 @@
 ## Purpose
 
 This document outlines the process for maintainers to perform self-reviews and
-merge pull requests without a second maintainer review. The goal is to maintain
-high-quality contributions while enabling progress when maintainers have limited
-availability.
+merge pull requests without a second maintainer's review. The goal is to
+maintain high-quality contributions while enabling progress when maintainers
+have limited availability.
 
 ## When self-review is appropriate
 
@@ -43,6 +43,7 @@ Before merging your own PR, make sure to review each of the following aspects:
 - [ ] Terminology is consistent with established literature
 - [ ] For concepts not appearing in literature, disclaimers have been added
 - [ ] Claims without accompanying formalization include appropriate citations
+- [ ] Changes to existing content are uncontroversial and well-justified
 
 ### Documentation
 
