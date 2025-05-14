@@ -620,60 +620,60 @@ This is Theorem 3.9 of {{#cite Shu17}}.
 ```agda
 module _
   {l : Level} {A : UU l} {f : A → A}
-  (H : is-idempotent f) (W : is-weakly-constant f)
+  (H : is-idempotent f) (W : is-weakly-constant-map f)
   where
 
-  splitting-type-is-split-idempotent-is-weakly-constant-is-idempotent :
+  splitting-type-is-split-idempotent-is-weakly-constant-map-is-idempotent :
     UU l
-  splitting-type-is-split-idempotent-is-weakly-constant-is-idempotent =
+  splitting-type-is-split-idempotent-is-weakly-constant-map-is-idempotent =
     fixed-point f
 
-  inclusion-is-split-idempotent-is-weakly-constant-is-idempotent :
-    splitting-type-is-split-idempotent-is-weakly-constant-is-idempotent →
+  inclusion-is-split-idempotent-is-weakly-constant-map-is-idempotent :
+    splitting-type-is-split-idempotent-is-weakly-constant-map-is-idempotent →
     A
-  inclusion-is-split-idempotent-is-weakly-constant-is-idempotent = pr1
+  inclusion-is-split-idempotent-is-weakly-constant-map-is-idempotent = pr1
 
-  map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent :
+  map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent :
     A →
-    splitting-type-is-split-idempotent-is-weakly-constant-is-idempotent
-  map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent x =
+    splitting-type-is-split-idempotent-is-weakly-constant-map-is-idempotent
+  map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent x =
     ( f x , H x)
 
-  is-retraction-map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent :
+  is-retraction-map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent :
     is-retraction
-      ( inclusion-is-split-idempotent-is-weakly-constant-is-idempotent)
-      ( map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent)
-  is-retraction-map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent
+      ( inclusion-is-split-idempotent-is-weakly-constant-map-is-idempotent)
+      ( map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent)
+  is-retraction-map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent
     _ =
-    eq-is-prop (is-prop-fixed-point-is-weakly-constant W)
+    eq-is-prop (is-prop-fixed-point-is-weakly-constant-map W)
 
-  retraction-is-split-idempotent-is-weakly-constant-is-idempotent :
+  retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent :
     retraction
-      ( inclusion-is-split-idempotent-is-weakly-constant-is-idempotent)
-  retraction-is-split-idempotent-is-weakly-constant-is-idempotent =
-    ( map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent ,
-      is-retraction-map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent)
+      ( inclusion-is-split-idempotent-is-weakly-constant-map-is-idempotent)
+  retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent =
+    ( map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent ,
+      is-retraction-map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent)
 
-  retract-is-split-idempotent-is-weakly-constant-is-idempotent :
+  retract-is-split-idempotent-is-weakly-constant-map-is-idempotent :
     retract
       ( A)
-      ( splitting-type-is-split-idempotent-is-weakly-constant-is-idempotent)
-  retract-is-split-idempotent-is-weakly-constant-is-idempotent =
-    ( inclusion-is-split-idempotent-is-weakly-constant-is-idempotent ,
-      retraction-is-split-idempotent-is-weakly-constant-is-idempotent)
+      ( splitting-type-is-split-idempotent-is-weakly-constant-map-is-idempotent)
+  retract-is-split-idempotent-is-weakly-constant-map-is-idempotent =
+    ( inclusion-is-split-idempotent-is-weakly-constant-map-is-idempotent ,
+      retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent)
 
-  htpy-is-split-idempotent-is-weakly-constant-is-idempotent :
-    inclusion-is-split-idempotent-is-weakly-constant-is-idempotent ∘
-    map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent ~
+  htpy-is-split-idempotent-is-weakly-constant-map-is-idempotent :
+    inclusion-is-split-idempotent-is-weakly-constant-map-is-idempotent ∘
+    map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent ~
     f
-  htpy-is-split-idempotent-is-weakly-constant-is-idempotent = refl-htpy
+  htpy-is-split-idempotent-is-weakly-constant-map-is-idempotent = refl-htpy
 
-  is-split-idempotent-is-weakly-constant-is-idempotent :
+  is-split-idempotent-is-weakly-constant-map-is-idempotent :
     is-split-idempotent l f
-  is-split-idempotent-is-weakly-constant-is-idempotent =
-    ( splitting-type-is-split-idempotent-is-weakly-constant-is-idempotent ,
-      retract-is-split-idempotent-is-weakly-constant-is-idempotent ,
-      htpy-is-split-idempotent-is-weakly-constant-is-idempotent)
+  is-split-idempotent-is-weakly-constant-map-is-idempotent =
+    ( splitting-type-is-split-idempotent-is-weakly-constant-map-is-idempotent ,
+      retract-is-split-idempotent-is-weakly-constant-map-is-idempotent ,
+      htpy-is-split-idempotent-is-weakly-constant-map-is-idempotent)
 ```
 
 ### Quasicoherently idempotent maps split
