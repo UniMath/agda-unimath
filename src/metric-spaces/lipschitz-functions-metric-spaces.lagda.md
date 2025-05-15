@@ -46,7 +46,7 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 ## Idea
 
-A positive rational `α : ℚ⁺` is a
+A [positive rational number](elementary-number-theory.positive-rational-numbers.md) `α : ℚ⁺` is a
 {{#concept "Lipschitz constant" Disambiguation="of a function between metric spaces" Agda=lipschitz-constant-function-Metric-Space}}
 of a [function](metric-spaces.functions-metric-spaces.md) `f : A → B` between
 [metric spaces](metric-spaces.metric-spaces.md) if for any `x y : A`, if `d` is
