@@ -30,7 +30,7 @@ open import order-theory.preorders
 
 Two elements `x y : A` of a [metric-space](metric-spaces.metric-spaces.md) are
 {{#concept "neighbors" Disambiguation="in a metric space" Agda=neighbor-Metric-Space}}
-if they are in some neighborhhod in `A`, i.e. if there
+if they are in some neighborhood in `A`, i.e., if there
 [exists](foundation.existential-quantification.md) some
 [positive rational number](elementary-number-theory.positive-rational-numbers.md)
 `δ : ℚ⁺` such that `x` and `y` are `δ`-neighbors in `A`. Being neighbors in a
