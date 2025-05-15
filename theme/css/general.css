@@ -22,8 +22,7 @@ body {
 }
 
 pre,
-code,
-.code {
+code {
   font-family: var(--mono-font) !important;
   font-size: var(--code-font-size) !important;
 }
@@ -251,5 +250,21 @@ kbd {
 }
 
 span.prefer-nobreak {
+  display: inline-block;
+}
+
+.art-fredrik-dependency-graph-dot {
+  height: 9px;
+  width: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 2.5px;
+  margin-left: 5px;
+}
+
+.art-fredrik-dependency-graph-label {
+  white-space: nowrap;
+  font-family: monospaced;
+  font-size: 50%;
   display: inline-block;
 }

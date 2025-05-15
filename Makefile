@@ -145,10 +145,7 @@ CONTRIBUTORS.md: ${AGDAFILES} ${CONTRIBUTORS_FILE} ./scripts/generate_contributo
 website/css/Agda-highlight.css: ./scripts/generate_agda_css.py ./theme/catppuccin.css
 	@python3 ./scripts/generate_agda_css.py
 
-website/images/agda_dependency_graph.svg: ${AGDAFILES}
-	@python3 ./scripts/generate_dependency_graph_rendering.py website/images/agda_dependency_graph svg || true
-
-website/images/agda_dependency_graph_legend.html: ${AGDAFILES}
+website/images/agda_dependency_graph.svg website/images/agda_dependency_graph_legend.html &: ${AGDAFILES}
 	@python3 ./scripts/generate_dependency_graph_rendering.py website/images/agda_dependency_graph svg || true
 
 .PHONY: website-prepare
