@@ -19,6 +19,8 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import logic.functoriality-existential-quantification
+
 open import metric-spaces.metric-spaces
 
 open import order-theory.preorders
@@ -110,8 +112,10 @@ module _
     is-neighbor-Metric-Space A x y →
     is-neighbor-Metric-Space A y x
   symmetric-is-neighbor-Metric-Space x y =
-    map-trunc-Prop
-      ( λ (d , Nxy) → d , is-symmetric-structure-Metric-Space A d x y Nxy)
+    map-exists
+      ( is-upper-bound-dist-Metric-Space A y x)
+      ( id)
+      ( λ d → is-symmetric-structure-Metric-Space A d x y)
 ```
 
 ### Being neighbors in a metric space is transitive
@@ -126,16 +130,11 @@ module _
     is-neighbor-Metric-Space A y z →
     is-neighbor-Metric-Space A x y →
     is-neighbor-Metric-Space A x z
-  transitive-is-neighbor-Metric x y z Nyz Nxy =
-    do
-      (dyz , Ndyz) ← Nyz
-      (dxy , Ndxy) ← Nxy
-      intro-exists
-        ( dxy +ℚ⁺ dyz)
-        ( is-triangular-structure-Metric-Space A x y z dxy dyz Ndyz Ndxy)
-    where
-      open
-        do-syntax-trunc-Prop (is-neighbor-prop-Metric-Space A x z)
+  transitive-is-neighbor-Metric x y z =
+    map-binary-exists
+      ( is-upper-bound-dist-Metric-Space A x z)
+      ( λ dyz dxy → dxy +ℚ⁺ dyz)
+      ( λ dyz dxy → is-triangular-structure-Metric-Space A x y z dxy dyz)
 ```
 
 ### The preorder of neigbors in a metric space
