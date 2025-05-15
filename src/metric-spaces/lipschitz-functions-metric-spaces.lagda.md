@@ -36,6 +36,7 @@ open import foundation.universe-levels
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.neighbors-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.total-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
@@ -54,6 +55,8 @@ bound on the distance between `f x` and `f y` in `B`. If `α` is a Lipschitz
 constant for `f`, then `f` is called an **α-Lipschitz** function. A function
 that admits a Lipschitz constant is called a
 {{#concept "Lipschitz function" Disambiguation="between metric spaces" WD="Lipschitz function" WDID=Q652707 Agda=lipschitz-function-Metric-Space}}.
+Lipschitz maps between metric spaces preserve
+[neigbors](metric-spaces.neighbors-metric-spaces.md).
 
 ## Definitions
 
@@ -397,6 +400,49 @@ module _
     is-lipschitz-function-Metric-Space A B g
   is-lipschitz-htpy-function-Metric-Space =
     map-is-inhabited lipschitz-constant-htpy-function-Metric-Space
+```
+
+### Lipschitz maps perserve neighbors in metric spaces
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : map-type-Metric-Space A B)
+  (Lf : is-lipschitz-function-Metric-Space A B f)
+  where
+
+  preserves-is-neighbor-is-lipshitz-function-Metric-Space :
+    (x y : type-Metric-Space A) →
+    is-neighbor-Metric-Space A x y →
+    is-neighbor-Metric-Space B (f x) (f y)
+  preserves-is-neighbor-is-lipshitz-function-Metric-Space x y Nxy =
+    do
+      (d , Ndxy) ← Nxy
+      (α , Hα) ← Lf
+      intro-exists (α *ℚ⁺ d) (Hα d x y Ndxy)
+    where
+      open
+        do-syntax-trunc-Prop (is-neighbor-prop-Metric-Space B (f x) (f y))
+
+  map-neighbor-is-lipshitz-function-Metric-Space :
+    (x : type-Metric-Space A) →
+    neighbor-Metric-Space A x →
+    neighbor-Metric-Space B (f x)
+  map-neighbor-is-lipshitz-function-Metric-Space x =
+    map-Σ
+      ( is-neighbor-Metric-Space B (f x))
+      ( f)
+      ( preserves-is-neighbor-is-lipshitz-function-Metric-Space x)
+
+  eq-elem-map-neighbor-is-lipschitz-funtion-Metric-Space :
+    (x : type-Metric-Space A) (N : neighbor-Metric-Space A x) →
+    elem-neighbor-Metric-Space
+      ( B)
+      ( f x)
+      ( map-neighbor-is-lipshitz-function-Metric-Space x N) ＝
+    f (elem-neighbor-Metric-Space A x N)
+  eq-elem-map-neighbor-is-lipschitz-funtion-Metric-Space x N = refl
 ```
 
 ## External links
