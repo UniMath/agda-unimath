@@ -33,6 +33,8 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import logic.functoriality-existential-quantification
+
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
@@ -418,14 +420,12 @@ module _
     (x y : type-Metric-Space A) →
     is-neighbor-Metric-Space A x y →
     is-neighbor-Metric-Space B (f x) (f y)
-  preserves-is-neighbor-is-lipshitz-function-Metric-Space x y Nxy =
-    do
-      (d , Ndxy) ← Nxy
-      (α , Hα) ← Lf
-      intro-exists (α *ℚ⁺ d) (Hα d x y Ndxy)
-    where
-      open
-        do-syntax-trunc-Prop (is-neighbor-prop-Metric-Space B (f x) (f y))
+  preserves-is-neighbor-is-lipshitz-function-Metric-Space x y =
+    map-binary-exists
+      ( λ d → neighborhood-Metric-Space B d (f x) (f y))
+      ( mul-ℚ⁺)
+      ( λ α d Hα → Hα d x y)
+      ( Lf)
 
   map-neighbor-is-lipshitz-function-Metric-Space :
     (x : type-Metric-Space A) →
