@@ -112,9 +112,8 @@ module _
     is-neighbor-Metric-Space A x y →
     is-neighbor-Metric-Space A y x
   symmetric-is-neighbor-Metric-Space x y =
-    map-exists
+    map-tot-exists
       ( is-upper-bound-dist-Metric-Space A y x)
-      ( id)
       ( λ d → is-symmetric-structure-Metric-Space A d x y)
 ```
 
