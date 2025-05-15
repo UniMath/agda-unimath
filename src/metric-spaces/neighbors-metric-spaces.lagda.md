@@ -164,7 +164,7 @@ module _
     is-equivalence-relation (is-neighbor-prop-Metric-Space A)
   is-equivalence-relation-is-neighbor-Metric-Space =
     ( refl-is-neighbor-Metric-Space A) ,
-    ( symmetric-is-neibhbor-Metric-Space A) ,
+    ( symmetric-is-neighbor-Metric-Space A) ,
     ( transitive-is-neighbor-Metric A)
 ```
 
