@@ -341,7 +341,7 @@ module _
       similarity-reasoning-ℝ
         x
         ~ℝ (x +ℝ z) +ℝ neg-ℝ z
-          by symmetric-sim-ℝ (cancel-right-add-diff-ℝ x z)
+          by inv-sim-ℝ (cancel-right-add-diff-ℝ x z)
         ~ℝ (y +ℝ z) +ℝ neg-ℝ z
           by preserves-sim-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≈y+z
         ~ℝ y by cancel-right-add-diff-ℝ y z
@@ -442,9 +442,9 @@ module _
         ( similarity-reasoning-ℝ
           neg-ℝ (x +ℝ y)
           ~ℝ neg-ℝ (x +ℝ y) +ℝ x +ℝ neg-ℝ x
-            by symmetric-sim-ℝ (cancel-right-add-diff-ℝ _ x)
+            by inv-sim-ℝ (cancel-right-add-diff-ℝ _ x)
           ~ℝ (((neg-ℝ (x +ℝ y) +ℝ x) +ℝ neg-ℝ x) +ℝ y) +ℝ neg-ℝ y
-            by symmetric-sim-ℝ (cancel-right-add-diff-ℝ _ y)
+            by inv-sim-ℝ (cancel-right-add-diff-ℝ _ y)
           ~ℝ (((neg-ℝ (x +ℝ y) +ℝ x) +ℝ y) +ℝ neg-ℝ x) +ℝ neg-ℝ y
             by sim-eq-ℝ (ap (_+ℝ neg-ℝ y) (right-swap-add-ℝ _ (neg-ℝ x) y))
           ~ℝ ((neg-ℝ (x +ℝ y) +ℝ (x +ℝ y)) +ℝ neg-ℝ x) +ℝ neg-ℝ y
