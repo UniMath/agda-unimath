@@ -31,7 +31,7 @@ open import order-theory.total-preorders
 A [metric space](metric-spaces.metric-spaces.md) is
 {{#concept "total" Disambiguation="metric space" Agda=is-total-Metric-Space Agda=Total-Metric-Space}}
 if all elements are at bounded distance, i.e., if the
-[preorder of elements at bounded distance in the metric space](metric-spaces.elements-at-bounded-distance-metric-spacesa.md)
+[preorder of elements at bounded distance in the metric space](metric-spaces.elements-at-bounded-distance-metric-spaces.md)
 is [total](order-theory.total-preorders.md).
 
 ## Definitions

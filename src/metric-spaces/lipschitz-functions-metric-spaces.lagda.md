@@ -60,7 +60,7 @@ Lipschitz constant for `f`, then `f` is called an **α-Lipschitz** function. A
 function that admits a Lipschitz constant is called a
 {{#concept "Lipschitz function" Disambiguation="between metric spaces" WD="Lipschitz function" WDID=Q652707 Agda=lipschitz-function-Metric-Space}}.
 Lipschitz maps between metric spaces preserve
-[neigbors](metric-spaces.neighbors-metric-spaces.md).
+[elements at bounded distance](metric-spaces.elements-at-bounded-distance-metric-spaces.md).
 
 ## Definitions
 
