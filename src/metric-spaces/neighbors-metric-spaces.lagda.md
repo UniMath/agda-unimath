@@ -109,7 +109,7 @@ module _
     (x y : type-Metric-Space A) →
     is-neighbor-Metric-Space A x y →
     is-neighbor-Metric-Space A y x
-  symmetric-is-neibhbor-Metric-Space x y =
+  symmetric-is-neighbor-Metric-Space x y =
     map-trunc-Prop
       ( λ (d , Nxy) → d , is-symmetric-structure-Metric-Space A d x y Nxy)
 ```
