@@ -105,7 +105,7 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  symmetric-is-neibhbor-Metric-Space :
+  symmetric-is-neighbor-Metric-Space :
     (x y : type-Metric-Space A) →
     is-neighbor-Metric-Space A x y →
     is-neighbor-Metric-Space A y x
