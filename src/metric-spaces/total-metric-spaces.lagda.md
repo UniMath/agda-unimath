@@ -18,8 +18,8 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.elements-at-bounded-distance-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.neighbors-metric-spaces
 
 open import order-theory.total-preorders
 ```
@@ -30,8 +30,8 @@ open import order-theory.total-preorders
 
 A [metric space](metric-spaces.metric-spaces.md) is
 {{#concept "total" Disambiguation="metric space" Agda=is-total-Metric-Space Agda=Total-Metric-Space}}
-if all elements are at bounded distance. In other words, the
-[preorder of neighbors in the metric space](metric-spaces.neighbors-metric-spaces.md)
+if all elements are at bounded distance, i.e., if the
+[preorder of elements at bounded distance in the metric space](metric-spaces.elements-at-bounded-distance-metric-spacesa.md)
 is [total](order-theory.total-preorders.md).
 
 ## Definitions
@@ -87,25 +87,31 @@ module _
 
 ## Properties
 
-### A metric space is total if and only if the neigbor preorder is total
+neigbor
+
+### A metric space is total if and only if the preorder of elements at bounded distance is total
 
 ```agda
 module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  is-total-preorder-is-neighbor-is-total-Metric-Space :
+  is-total-preorder-is-element-at-bounded-dist-is-total-Metric-Space :
     is-total-Metric-Space A →
-    is-total-Preorder (preorder-is-neighbor-Metric-Space A)
-  is-total-preorder-is-neighbor-is-total-Metric-Space total-A x y =
+    is-total-Preorder
+      (preorder-is-element-at-bounded-dist-Metric-Space A)
+  is-total-preorder-is-element-at-bounded-dist-is-total-Metric-Space
+    total-A x y =
     inl-disjunction (total-A x y)
 
-  is-total-is-total-preorder-is-neighbor-Metric-Space :
-    is-total-Preorder (preorder-is-neighbor-Metric-Space A) →
+  is-total-is-total-preorder-is-element-at-bounded-dist-Metric-Space :
+    is-total-Preorder
+      (preorder-is-element-at-bounded-dist-Metric-Space A) →
     is-total-Metric-Space A
-  is-total-is-total-preorder-is-neighbor-Metric-Space total-N x y =
+  is-total-is-total-preorder-is-element-at-bounded-dist-Metric-Space
+    total-N x y =
     elim-disjunction
-      ( is-neighbor-prop-Metric-Space A x y)
+      ( is-element-at-bounded-dist-prop-Metric-Space A x y)
       ( id)
       ( map-trunc-Prop (tot λ d → is-symmetric-structure-Metric-Space A d y x))
       ( total-N x y)

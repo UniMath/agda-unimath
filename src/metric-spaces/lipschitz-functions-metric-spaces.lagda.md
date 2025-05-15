@@ -35,10 +35,10 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
+open import metric-spaces.elements-at-bounded-distance-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.neighbors-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.total-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
@@ -406,7 +406,7 @@ module _
     map-is-inhabited lipschitz-constant-htpy-function-Metric-Space
 ```
 
-### Lipschitz maps perserve neighbors in metric spaces
+### Lipschitz maps preserve elements at bounded distance
 
 ```agda
 module _
@@ -416,35 +416,37 @@ module _
   (Lf : is-lipschitz-function-Metric-Space A B f)
   where
 
-  preserves-is-neighbor-is-lipshitz-function-Metric-Space :
+  preserves-is-element-at-bounded-dist-is-lipschitz-function-Metric-Space :
     (x y : type-Metric-Space A) →
-    is-neighbor-Metric-Space A x y →
-    is-neighbor-Metric-Space B (f x) (f y)
-  preserves-is-neighbor-is-lipshitz-function-Metric-Space x y =
+    is-element-at-bounded-dist-Metric-Space A x y →
+    is-element-at-bounded-dist-Metric-Space B (f x) (f y)
+  preserves-is-element-at-bounded-dist-is-lipschitz-function-Metric-Space x y =
     map-binary-exists
-      ( λ d → neighborhood-Metric-Space B d (f x) (f y))
+      ( is-upper-bound-dist-Metric-Space B (f x) (f y))
       ( mul-ℚ⁺)
       ( λ α d Hα → Hα d x y)
       ( Lf)
 
-  map-neighbor-is-lipshitz-function-Metric-Space :
+  map-element-at-bounded-dist-is-lipschitz-function-Metric-Space :
     (x : type-Metric-Space A) →
-    neighbor-Metric-Space A x →
-    neighbor-Metric-Space B (f x)
-  map-neighbor-is-lipshitz-function-Metric-Space x =
+    element-at-bounded-dist-Metric-Space A x →
+    element-at-bounded-dist-Metric-Space B (f x)
+  map-element-at-bounded-dist-is-lipschitz-function-Metric-Space x =
     map-Σ
-      ( is-neighbor-Metric-Space B (f x))
+      ( is-element-at-bounded-dist-Metric-Space B (f x))
       ( f)
-      ( preserves-is-neighbor-is-lipshitz-function-Metric-Space x)
+      ( preserves-is-element-at-bounded-dist-is-lipschitz-function-Metric-Space
+        x)
 
-  eq-elem-map-neighbor-is-lipschitz-funtion-Metric-Space :
-    (x : type-Metric-Space A) (N : neighbor-Metric-Space A x) →
-    elem-neighbor-Metric-Space
+  eq-elem-map-element-at-bounded-dist-is-lipschitz-funtion-Metric-Space :
+    (x : type-Metric-Space A) (N : element-at-bounded-dist-Metric-Space A x) →
+    value-element-at-bounded-dist-Metric-Space
       ( B)
       ( f x)
-      ( map-neighbor-is-lipshitz-function-Metric-Space x N) ＝
-    f (elem-neighbor-Metric-Space A x N)
-  eq-elem-map-neighbor-is-lipschitz-funtion-Metric-Space x N = refl
+      ( map-element-at-bounded-dist-is-lipschitz-function-Metric-Space x N) ＝
+    f (value-element-at-bounded-dist-Metric-Space A x N)
+  eq-elem-map-element-at-bounded-dist-is-lipschitz-funtion-Metric-Space x N =
+    refl
 ```
 
 ## External links
