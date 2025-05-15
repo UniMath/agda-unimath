@@ -24,7 +24,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.products-of-tuples-of-elements-commutative-monoids
+open import group-theory.sums-of-finite-sequences-in-commutative-monoids
 
 open import linear-algebra.finite-sequences-in-semirings
 
@@ -55,13 +55,13 @@ sum-Semiring :
   {l : Level} (R : Semiring l) (n : ℕ) →
   (functional-vec-Semiring R n) → type-Semiring R
 sum-Semiring R =
-  mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+  sum-fin-sequence-type-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
 sum-count-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (A : UU l2) (cA : count A) →
   (A → type-Semiring R) → type-Semiring R
 sum-count-Semiring R =
-  mul-count-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+  sum-count-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
 sum-finite-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (A : Finite-Type l2) →
@@ -83,20 +83,20 @@ module _
     (f : functional-vec-Semiring R 1) →
     sum-Semiring R 1 f ＝ head-functional-vec 0 f
   sum-one-element-Semiring =
-    mul-one-element-Commutative-Monoid
+    sum-one-element-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 
   sum-unit-finite-Semiring :
     (f : unit → type-Semiring R) →
     sum-finite-Semiring R unit-Finite-Type f ＝ f star
   sum-unit-finite-Semiring =
-    mul-unit-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    sum-finite-unit-type-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   sum-two-elements-Semiring :
     (f : fin-sequence-type-Semiring R 2) →
     sum-Semiring R 2 f ＝ add-Semiring R (f (zero-Fin 1)) (f (one-Fin 1))
   sum-two-elements-Semiring =
-    mul-two-elements-Commutative-Monoid
+    sum-two-elements-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 ```
 
@@ -111,7 +111,7 @@ module _
     (n : ℕ) {f g : fin-sequence-type-Semiring R n} →
     (f ~ g) → sum-Semiring R n f ＝ sum-Semiring R n g
   htpy-sum-Semiring =
-    htpy-mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    htpy-sum-fin-sequence-type-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   htpy-sum-finite-Semiring :
     {l2 : Level} (A : Finite-Type l2) →
@@ -143,7 +143,7 @@ module _
       ( x)
       ( sum-Semiring R n (f ∘ inr-Fin n))
   snoc-sum-Semiring =
-    snoc-mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    snoc-sum-fin-sequence-type-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Multiplication distributes over sums
@@ -206,7 +206,7 @@ module _
             mul-Semiring
               ( R)
               ( x)
-              ( mul-count-Commutative-Monoid
+              ( sum-count-Commutative-Monoid
                 ( additive-commutative-monoid-Semiring R)
                 ( type-Finite-Type A)
                 ( cA)
@@ -216,7 +216,7 @@ module _
                 ( mul-Semiring R x)
                 ( mul-finite-count-Commutative-Monoid _ A cA f)
           ＝
-            mul-count-Commutative-Monoid
+            sum-count-Commutative-Monoid
               ( additive-commutative-monoid-Semiring R)
               ( type-Finite-Type A)
               ( cA)
@@ -249,7 +249,7 @@ module _
           ＝
             mul-Semiring
               ( R)
-              ( mul-count-Commutative-Monoid
+              ( sum-count-Commutative-Monoid
                 ( additive-commutative-monoid-Semiring R)
                 ( type-Finite-Type A)
                 ( cA)
@@ -260,7 +260,7 @@ module _
                 ( mul-Semiring' R x)
                 ( mul-finite-count-Commutative-Monoid _ A cA f)
           ＝
-            mul-count-Commutative-Monoid
+            sum-count-Commutative-Monoid
               ( additive-commutative-monoid-Semiring R)
               ( type-Finite-Type A)
               ( cA)
@@ -318,7 +318,7 @@ module _
       ( cons-fin-sequence-type-Semiring R n (zero-Semiring R) f) ＝
     sum-Semiring R n f
   extend-sum-Semiring =
-    extend-mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    extend-sum-fin-sequence-type-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Shifting a sum of elements in a semiring
@@ -336,7 +336,7 @@ module _
         ( zero-Semiring R)) ＝
     sum-Semiring R n f
   shift-sum-Semiring =
-    shift-mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    shift-sum-fin-sequence-type-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### A sum of zeroes is zero
@@ -350,7 +350,7 @@ module _
     (n : ℕ) →
     sum-Semiring R n (zero-functional-vec-Semiring R n) ＝ zero-Semiring R
   sum-zero-Semiring =
-    mul-fin-unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    sum-zero-fin-sequence-type-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   sum-zero-finite-Semiring :
     {l2 : Level} (A : Finite-Type l2) →
@@ -370,7 +370,7 @@ split-sum-Semiring :
     ( sum-Semiring R n (f ∘ inl-coproduct-Fin n m))
     ( sum-Semiring R m (f ∘ inr-coproduct-Fin n m))
 split-sum-Semiring R =
-  split-mul-fin-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+  split-sum-fin-sequence-type-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Permutations preserve sums
@@ -424,7 +424,7 @@ module _
       ( sum-finite-Semiring R A (f ∘ inl))
       ( sum-finite-Semiring R B (f ∘ inr))
   sum-coproduct-finite-Semiring =
-    mul-coproduct-finite-Commutative-Monoid
+    distributive-sum-coproduct-finite-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
       ( A)
       ( B)
@@ -443,7 +443,7 @@ module _
     sum-finite-Semiring R (Σ-Finite-Type A B) (ind-Σ f) ＝
     sum-finite-Semiring R A (λ a → sum-finite-Semiring R (B a) (f a))
   sum-Σ-finite-Semiring =
-    mul-Σ-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R) A B
+    sum-Σ-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R) A B
 ```
 
 ### The sum over an empty type is zero
@@ -458,7 +458,7 @@ module _
     (f : type-Finite-Type A → type-Semiring R) →
     is-zero-Semiring R (sum-finite-Semiring R A f)
   sum-is-empty-finite-Semiring =
-    mul-is-empty-finite-Commutative-Monoid
+    eq-zero-sum-finite-is-empty-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
       ( A)
       ( H)

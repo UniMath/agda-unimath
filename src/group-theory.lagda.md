@@ -157,8 +157,8 @@ open import group-theory.precategory-of-semigroups public
 open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public
 open import group-theory.products-of-elements-monoids public
-open import group-theory.products-of-tuples-of-elements-commutative-monoids public
-open import group-theory.products-of-tuples-of-elements-monoids public
+open import group-theory.sums-of-finite-sequences-in-commutative-monoids public
+open import group-theory.sums-of-finite-sequences-in-monoids public
 open import group-theory.pullbacks-subgroups public
 open import group-theory.pullbacks-subsemigroups public
 open import group-theory.quotient-groups public
@@ -202,6 +202,6 @@ open import group-theory.trivial-concrete-groups public
 open import group-theory.trivial-group-homomorphisms public
 open import group-theory.trivial-groups public
 open import group-theory.trivial-subgroups public
-open import group-theory.unordered-tuples-of-elements-commutative-monoids public
+open import group-theory.unordered-finite-sequences-in-commutative-monoids public
 open import group-theory.wild-representations-monoids public
 ```
