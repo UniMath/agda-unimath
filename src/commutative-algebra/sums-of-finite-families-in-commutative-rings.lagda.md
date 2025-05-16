@@ -42,7 +42,7 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 The
-{{#concept "sum operation" Disambiguation="of a finite family of elements of a commutative ring" WD="sum" WDID=Q218005 Agda=sum-fin-sequence-type-Commutative-Ring}}
+{{#concept "sum operation" Disambiguation="of a finite family of elements of a commutative ring" WD="sum" WDID=Q218005 Agda=sum-finite-Commutative-Ring}}
 extends the binary addition operation on a
 [commutative ring](commutative-algebra.commutative-rings.md) `A` to any family
 of elements of `A` indexed by a

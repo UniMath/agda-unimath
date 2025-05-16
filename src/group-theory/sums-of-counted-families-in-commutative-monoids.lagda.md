@@ -35,7 +35,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The sum operation extends the binary operation on a
+The
+{{#concept "sum operation" Disambiguation="over a counted family of elements of a commutative monoid" WD="sum" WDID=Q218005 Agda=sum-count-Commutative-Monoid}}
+extends the binary operation on a
 [commutative monoid](group-theory.commutative-monoids.md) `M` to any family of
 elements of `M` indexed by a [counted](univalent-combinatorics.counting.md)
 type.

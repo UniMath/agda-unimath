@@ -32,7 +32,7 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 The
-{{#concept "sum operation" Disambiguation="of a finite family of elements of a ring" WD="sum" WDID=Q218005 Agda=sum-fin-sequence-type-Ring}}
+{{#concept "sum operation" Disambiguation="of a finite family of elements of a ring" WD="sum" WDID=Q218005 Agda=sum-finite-Ring}}
 extends the binary addition operation on a [ring](ring-theory.rings.md) `R` to
 any family of elements of `R` indexed by a
 [finite type](univalent-combinatorics.finite-types.md)

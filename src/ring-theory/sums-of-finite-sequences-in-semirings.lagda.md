@@ -249,7 +249,7 @@ module _
       ( additive-commutative-monoid-Semiring R)
 ```
 
-### Splitting sums
+### Splitting sums of `n + m` elements into a sum of `n` elements and a sum of `m` elements
 
 ```agda
 split-sum-fin-sequence-type-Semiring :

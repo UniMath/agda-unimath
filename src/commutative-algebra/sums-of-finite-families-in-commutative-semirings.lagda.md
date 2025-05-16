@@ -43,7 +43,7 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 The
-{{#concept "sum operation" Disambiguation="of a finite family of elements of a commutative semiring" WD="sum" WDID=Q218005 Agda=sum-fin-sequence-type-Commutative-Semiring}}
+{{#concept "sum operation" Disambiguation="of a finite family of elements of a commutative semiring" WD="sum" WDID=Q218005 Agda=sum-finite-Commutative-Semiring}}
 extends the binary addition operation on a
 [commutative semiring](commutative-algebra.commutative-semirings.md) `R` to any
 [finite sequence](lists.finite-sequences.md) of elements of `R`.

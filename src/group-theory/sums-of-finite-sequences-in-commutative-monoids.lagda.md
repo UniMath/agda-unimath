@@ -45,7 +45,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The sum operation extends the binary operation on a
+The
+{{#concept "sum operation" Disambiguation="of a finite sequence in a commutative monoid" WD="sum" WDID=Q218005 Agda=sum-fin-sequence-type-Commutative-Monoid}}
+extends the binary operation on a
 [commutative monoid](group-theory.commutative-monoids.md) `M` to any
 [finite sequence](lists.finite-sequences.md) of elements of `M`.
 
@@ -184,7 +186,7 @@ module _
     sum-zero-fin-sequence-type-Monoid (monoid-Commutative-Monoid M)
 ```
 
-### Splitting products
+### Splitting sums of `n + m` elements into a sum of `n` elements and a sum of `m` elements
 
 ```agda
 split-sum-fin-sequence-type-Commutative-Monoid :
@@ -198,7 +200,7 @@ split-sum-fin-sequence-type-Commutative-Monoid M =
   split-sum-fin-sequence-type-Monoid (monoid-Commutative-Monoid M)
 ```
 
-### Permutations preserve products
+### Permutations preserve sums
 
 ```agda
 module _

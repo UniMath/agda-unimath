@@ -21,7 +21,7 @@ open import univalent-combinatorics.counting
 ## Idea
 
 The
-{{#concept "sum operation" Disambiguation="over a counted family of elements of a commutative semiring" WD="sum" WDID=Q218005 Agda=sum-fin-sequence-type-Commutative-Semiring}}
+{{#concept "sum operation" Disambiguation="over a counted family of elements of a commutative semiring" WD="sum" WDID=Q218005 Agda=sum-count-Commutative-Semiring}}
 extends the binary addition operation on a
 [commutative semiring](commutative-algebra.commutative-semirings.md) `R` to any
 family of elements of `R` indexed by a

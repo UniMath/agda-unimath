@@ -31,9 +31,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The sum operation extends the binary operation on a
-[monoid](group-theory.monoids.md) `M` to any
-[finite sequence](lists.finite-sequences.md) of elements of `M`.
+The
+{{#concept "sum operation" Disambiguation="of a finite sequence in a monoid" WD="sum" WDID=Q218005 Agda=sum-fin-sequence-type-Monoid}}
+operation extends the binary operation on a [monoid](group-theory.monoids.md)
+`M` to any [finite sequence](lists.finite-sequences.md) of elements of `M`.
 
 ## Definition
 
@@ -184,7 +185,7 @@ module _
       right-unit-law-mul-Monoid M _ ∙ sum-zero-fin-sequence-type-Monoid n
 ```
 
-### Splitting sums
+### Splitting sums of `n + m` elements into a sum of `n` elements and a sum of `m` elements
 
 ```agda
 split-sum-fin-sequence-type-Monoid :
