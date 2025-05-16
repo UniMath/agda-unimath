@@ -30,7 +30,7 @@ open import order-theory.preorders
 
 ## Idea
 
-Two elements `x y : A` of a [metric-space](metric-spaces.metric-spaces.md) are
+Two elements `x y : A` of a [metric space](metric-spaces.metric-spaces.md) are
 {{#concept "at bounded distance" Disambiguation="in a metric space" Agda=element-at-bounded-dist-Metric-Space}}
 if there [exists](foundation.existential-quantification.md) some
 [positive rational number](elementary-number-theory.positive-rational-numbers.md)
