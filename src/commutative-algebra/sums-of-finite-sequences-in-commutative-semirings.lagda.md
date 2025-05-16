@@ -72,7 +72,7 @@ module _
     sum-fin-sequence-type-Commutative-Semiring A 2 f ＝
     add-Commutative-Semiring A (f (zero-Fin 1)) (f (one-Fin 1))
   compute-sum-two-elements-Commutative-Semiring =
-    sum-two-elements-Semiring (semiring-Commutative-Semiring A)
+    compute-sum-two-elements-Semiring (semiring-Commutative-Semiring A)
 ```
 
 ### Sums are homotopy invariant

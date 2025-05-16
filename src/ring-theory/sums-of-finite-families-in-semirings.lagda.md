@@ -302,7 +302,7 @@ module _
           htpy-sum-finite-Semiring
             ( R)
             ( A)
-            ( λ a → inv (sum-two-elements-Semiring R (h a)))
+            ( λ a → inv (compute-sum-two-elements-Semiring R (h a)))
     ＝
       sum-finite-Semiring
         ( R)
@@ -356,7 +356,7 @@ module _
         ( sum-finite-Semiring R A f)
         ( sum-finite-Semiring R A g)
       by
-        sum-two-elements-Semiring
+        compute-sum-two-elements-Semiring
           ( R)
           ( λ i → sum-finite-Semiring R A (λ a → h a i))
     where

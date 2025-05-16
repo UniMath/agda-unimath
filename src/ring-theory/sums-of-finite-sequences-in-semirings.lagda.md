@@ -69,11 +69,11 @@ module _
     compute-sum-one-element-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 
-  sum-two-elements-Semiring :
+  compute-sum-two-elements-Semiring :
     (f : fin-sequence-type-Semiring R 2) →
     sum-fin-sequence-type-Semiring R 2 f ＝
     add-Semiring R (f (zero-Fin 1)) (f (one-Fin 1))
-  sum-two-elements-Semiring =
+  compute-sum-two-elements-Semiring =
     compute-sum-two-elements-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 ```

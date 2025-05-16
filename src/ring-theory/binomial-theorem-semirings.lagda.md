@@ -89,7 +89,7 @@ module _
     binomial-sum-fin-sequence-type-Semiring R 1 f ＝
     add-Semiring R (f (zero-Fin 1)) (f (one-Fin 1))
   binomial-sum-two-elements-Semiring f =
-    sum-two-elements-Semiring R
+    compute-sum-two-elements-Semiring R
       ( λ i → mul-nat-scalar-Semiring R (binomial-coefficient-Fin 1 i) (f i)) ∙
       ( ap-binary
         ( add-Semiring R)
@@ -431,7 +431,7 @@ binomial-theorem-Semiring R (succ-ℕ zero-ℕ) x y H =
           ( left-unit-law-mul-nat-scalar-Semiring R
             ( mul-Semiring R x (one-Semiring R)))))) ∙
     ( inv
-      ( sum-two-elements-Semiring R
+      ( compute-sum-two-elements-Semiring R
         ( λ i →
           mul-nat-scalar-Semiring R
           ( binomial-coefficient-Fin 1 i)

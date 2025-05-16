@@ -66,7 +66,8 @@ module _
     (f : fin-sequence-type-Ring R 2) →
     sum-fin-sequence-type-Ring R 2 f ＝
     add-Ring R (f (zero-Fin 1)) (f (one-Fin 1))
-  compute-sum-two-elements-Ring = sum-two-elements-Semiring (semiring-Ring R)
+  compute-sum-two-elements-Ring =
+    compute-sum-two-elements-Semiring (semiring-Ring R)
 ```
 
 ### Sums are homotopy invariant
