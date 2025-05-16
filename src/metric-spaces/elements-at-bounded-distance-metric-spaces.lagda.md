@@ -39,7 +39,7 @@ distance in a metric space is an equivalence relation.
 
 ## Definitions
 
-### The relation of being neighbors in a metric space
+### The relation of being at bounded distance in a metric space
 
 ```agda
 module _
