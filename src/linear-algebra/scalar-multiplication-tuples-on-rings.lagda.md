@@ -35,7 +35,7 @@ For [tuples on rings](linear-algebra.tuples-on-rings.md),
 is an operation taking an element `c` of a [ring](ring-theory.rings.md) and a
 tuple of elements of that ring and multiplying each element of the tuple by `c`.
 With addition of tuples on rings, this forms a
-[left module](ring-theory.left-modules-rings.md).
+[left module](linear-algebra.left-modules-rings.md).
 
 ### Scalar multiplication of tuples on rings
 
