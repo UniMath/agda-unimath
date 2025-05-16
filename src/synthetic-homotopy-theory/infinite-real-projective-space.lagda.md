@@ -7,14 +7,9 @@ module synthetic-homotopy-theory.infinite-real-projective-space where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.set-truncations
 open import foundation.universe-levels
 
 open import group-theory.symmetric-concrete-groups
-
-open import synthetic-homotopy-theory.circle
 
 open import univalent-combinatorics.standard-finite-types
 ```
