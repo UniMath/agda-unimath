@@ -41,6 +41,13 @@ module _
   (f : cauchy-approximation-Metric-Space A)
   where
 
+  is-limit-cauchy-approximation-prop-Metric-Space :
+    type-Metric-Space A → Prop l2
+  is-limit-cauchy-approximation-prop-Metric-Space =
+    is-limit-cauchy-approximation-prop-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( f)
+
   is-limit-cauchy-approximation-Metric-Space :
     type-Metric-Space A → UU l2
   is-limit-cauchy-approximation-Metric-Space =
