@@ -47,8 +47,7 @@ open import univalent-combinatorics.standard-finite-types
 
 The sum operation extends the binary operation on a
 [commutative monoid](group-theory.commutative-monoids.md) `M` to any
-[finite sequence](lists.finite-sequences.md) of
-elements of `M`.
+[finite sequence](lists.finite-sequences.md) of elements of `M`.
 
 ## Definition
 
@@ -94,7 +93,8 @@ module _
   htpy-sum-fin-sequence-type-Commutative-Monoid :
     (n : ℕ) {f g : fin-sequence-type-Commutative-Monoid M n} →
     (f ~ g) →
-    sum-fin-sequence-type-Commutative-Monoid M n f ＝ sum-fin-sequence-type-Commutative-Monoid M n g
+    sum-fin-sequence-type-Commutative-Monoid M n f ＝
+    sum-fin-sequence-type-Commutative-Monoid M n g
   htpy-sum-fin-sequence-type-Commutative-Monoid =
     htpy-sum-fin-sequence-type-Monoid (monoid-Commutative-Monoid M)
 ```
@@ -111,7 +111,9 @@ module _
     {x : type-Commutative-Monoid M} →
     head-fin-sequence-type-Commutative-Monoid M n f ＝ x →
     sum-fin-sequence-type-Commutative-Monoid M (succ-ℕ n) f ＝
-    mul-Commutative-Monoid M (sum-fin-sequence-type-Commutative-Monoid M n (f ∘ inl-Fin n)) x
+    mul-Commutative-Monoid M
+      ( sum-fin-sequence-type-Commutative-Monoid M n (f ∘ inl-Fin n))
+      ( x)
   cons-sum-fin-sequence-type-Commutative-Monoid =
     cons-sum-fin-sequence-type-Monoid (monoid-Commutative-Monoid M)
 
@@ -253,7 +255,10 @@ module _
         ( list-adjacent-transpositions-transposition-Fin n i j)
         ( f) ∙
       ap
-        ( λ g → sum-fin-sequence-type-Commutative-Monoid M (succ-ℕ n) (f ∘ map-equiv g))
+        ( λ g →
+          sum-fin-sequence-type-Commutative-Monoid M
+            ( succ-ℕ n)
+            ( f ∘ map-equiv g))
         ( eq-permutation-list-adjacent-transpositions-transposition-Fin
           ( n)
           ( i)
@@ -278,12 +283,12 @@ module _
           ( L)
           ( f ∘ map-transposition-Fin (succ-ℕ n) i j i≠j)
 
-    preserves-sum-permutation-Commutative-Monoid :
+    preserves-sum-permutation-fin-sequence-type-Commutative-Monoid :
       (n : ℕ) → (σ : Permutation n) →
       (f : fin-sequence-type-Commutative-Monoid M n) →
       sum-fin-sequence-type-Commutative-Monoid M n f ＝
       sum-fin-sequence-type-Commutative-Monoid M n (f ∘ map-equiv σ)
-    preserves-sum-permutation-Commutative-Monoid n σ f =
+    preserves-sum-permutation-fin-sequence-type-Commutative-Monoid n σ f =
       preserves-sum-permutation-list-standard-transpositions-Commutative-Monoid
         ( n)
         ( list-standard-transpositions-permutation-Fin n σ)

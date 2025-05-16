@@ -46,7 +46,8 @@ The binomial theorem is the [44th](literature.100-theorems.md#44) theorem on
 
 ```agda
 binomial-sum-ℤ : (n : ℕ) (f : fin-sequence ℤ (succ-ℕ n)) → ℤ
-binomial-sum-ℤ = binomial-sum-Commutative-Ring ℤ-Commutative-Ring
+binomial-sum-ℤ =
+  binomial-sum-fin-sequence-type-Commutative-Ring ℤ-Commutative-Ring
 ```
 
 ## Properties
@@ -73,7 +74,7 @@ htpy-binomial-sum-ℤ :
   (n : ℕ) {f g : fin-sequence ℤ (succ-ℕ n)} →
   (f ~ g) → binomial-sum-ℤ n f ＝ binomial-sum-ℤ n g
 htpy-binomial-sum-ℤ =
-  htpy-binomial-sum-Commutative-Ring ℤ-Commutative-Ring
+  htpy-binomial-sum-fin-sequence-type-Commutative-Ring ℤ-Commutative-Ring
 ```
 
 ### Multiplication distributes over sums
@@ -83,13 +84,14 @@ left-distributive-mul-binomial-sum-ℤ :
   (n : ℕ) (x : ℤ) (f : fin-sequence ℤ (succ-ℕ n)) →
   x *ℤ (binomial-sum-ℤ n f) ＝ binomial-sum-ℤ n (λ i → x *ℤ (f i))
 left-distributive-mul-binomial-sum-ℤ =
-  left-distributive-mul-binomial-sum-Commutative-Ring ℤ-Commutative-Ring
+  left-distributive-mul-binomial-sum-fin-sequence-type-Commutative-Ring
+    ℤ-Commutative-Ring
 
 right-distributive-mul-binomial-sum-ℤ :
   (n : ℕ) (f : fin-sequence ℤ (succ-ℕ n)) (x : ℤ) →
   (binomial-sum-ℤ n f) *ℤ x ＝ binomial-sum-ℤ n (λ i → (f i) *ℤ x)
 right-distributive-mul-binomial-sum-ℤ =
-  right-distributive-mul-binomial-sum-Commutative-Ring
+  right-distributive-mul-binomial-sum-fin-sequence-type-Commutative-Ring
     ℤ-Commutative-Ring
 ```
 

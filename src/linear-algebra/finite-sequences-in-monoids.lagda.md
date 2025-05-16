@@ -86,7 +86,9 @@ module _
 
   associative-add-fin-sequence-type-Monoid :
     (n : ℕ) (v1 v2 v3 : fin-sequence-type-Monoid M n) →
-    ( add-fin-sequence-type-Monoid n (add-fin-sequence-type-Monoid n v1 v2) v3) ＝
+    ( add-fin-sequence-type-Monoid n
+      ( add-fin-sequence-type-Monoid n v1 v2)
+      ( v3)) ＝
     ( add-fin-sequence-type-Monoid n v1 (add-fin-sequence-type-Monoid n v2 v3))
   associative-add-fin-sequence-type-Monoid n v1 v2 v3 =
     eq-htpy (λ i → associative-mul-Monoid M (v1 i) (v2 i) (v3 i))

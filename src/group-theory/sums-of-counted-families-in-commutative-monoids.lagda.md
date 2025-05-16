@@ -36,9 +36,9 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The sum operation extends the binary operation on a
-[commutative monoid](group-theory.commutative-monoids.md) `M` to any
-family of elements of `M` indexed by a
-[counted](univalent-combinatorics.counting.md) type.
+[commutative monoid](group-theory.commutative-monoids.md) `M` to any family of
+elements of `M` indexed by a [counted](univalent-combinatorics.counting.md)
+type.
 
 ## Definition
 
@@ -90,7 +90,7 @@ module _
           ( n)
           ( (f ∘ map-equiv equiv1) ∘ (map-inv-equiv equiv1 ∘ map-equiv equiv2))
         by
-          preserves-sum-permutation-Commutative-Monoid
+          preserves-sum-permutation-fin-sequence-type-Commutative-Monoid
             ( M)
             ( n)
             ( inv-equiv equiv1 ∘e equiv2)
@@ -131,7 +131,7 @@ module _
       cA@(nA , Fin-nA≃A) cB@(_ , Fin-nB≃B) f
       with double-counting-equiv cA cB H
     ... | refl =
-      preserves-sum-permutation-Commutative-Monoid
+      preserves-sum-permutation-fin-sequence-type-Commutative-Monoid
         ( M)
         ( nA)
         ( inv-equiv Fin-nA≃A ∘e inv-equiv H ∘e Fin-nB≃B)

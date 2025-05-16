@@ -33,8 +33,8 @@ open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
-open import group-theory.sums-of-finite-sequences-in-commutative-monoids
 open import group-theory.sums-of-counted-families-in-commutative-monoids
+open import group-theory.sums-of-finite-sequences-in-commutative-monoids
 
 open import lists.lists
 
@@ -51,8 +51,8 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The sum operation extends the binary operation on a
-[commutative monoid](group-theory.commutative-monoids.md) `M` to any
-family of elements of `M` indexed by a
+[commutative monoid](group-theory.commutative-monoids.md) `M` to any family of
+elements of `M` indexed by a
 [finite type](univalent-combinatorics.finite-types.md).
 
 ## Definition
@@ -139,14 +139,14 @@ module _
   {l1 l2 : Level} (M : Commutative-Monoid l1) (A : Finite-Type l2)
   where
 
-  eq-zero-sum-zero-finite-Commutative-Monoid :
+  eq-zero-eq-zero-sum-zero-fin-sequence-type-RingCommutative-Monoid :
     is-unit-Commutative-Monoid
       ( M)
       ( sum-finite-Commutative-Monoid
         ( M)
         ( A)
         ( λ _ → unit-Commutative-Monoid M))
-  eq-zero-sum-zero-finite-Commutative-Monoid =
+  eq-zero-eq-zero-sum-zero-fin-sequence-type-RingCommutative-Monoid =
     let
       open
         do-syntax-trunc-Prop
@@ -204,11 +204,11 @@ module _
   where
 
   abstract
-    mul-equiv-finite-Commutative-Monoid :
+    sum-equiv-finite-Commutative-Monoid :
       (f : type-Finite-Type A → type-Commutative-Monoid M) →
       sum-finite-Commutative-Monoid M A f ＝
       sum-finite-Commutative-Monoid M B (f ∘ map-inv-equiv H)
-    mul-equiv-finite-Commutative-Monoid f =
+    sum-equiv-finite-Commutative-Monoid f =
       let
         open
           do-syntax-trunc-Prop
@@ -252,7 +252,7 @@ module _
   where
 
   abstract
-    distributive-sum-coproduct-finite-Commutative-Monoid :
+    distributive-distributive-sum-coproduct-finite-Commutative-Monoid :
       (f :
         type-Finite-Type A + type-Finite-Type B → type-Commutative-Monoid M) →
       sum-finite-Commutative-Monoid M (coproduct-Finite-Type A B) f ＝
@@ -260,7 +260,7 @@ module _
         ( M)
         ( sum-finite-Commutative-Monoid M A (f ∘ inl))
         ( sum-finite-Commutative-Monoid M B (f ∘ inr))
-    distributive-sum-coproduct-finite-Commutative-Monoid f =
+    distributive-distributive-sum-coproduct-finite-Commutative-Monoid f =
       let
         open
           do-syntax-trunc-Prop
@@ -432,7 +432,7 @@ module _
           ( rec-coproduct (ind-Σ (f ∘ inl)) (f (inr star)))
         by
           inv
-            ( distributive-sum-coproduct-finite-Commutative-Monoid
+            ( distributive-distributive-sum-coproduct-finite-Commutative-Monoid
               ( M)
               ( Σ-Finite-Type (Fin-Finite-Type n) (B ∘ inl))
               ( B (inr star))
@@ -450,7 +450,7 @@ module _
               ( unit)
               ( type-Finite-Type ∘ B))
         by
-          mul-equiv-finite-Commutative-Monoid
+          sum-equiv-finite-Commutative-Monoid
             ( M)
             ( coproduct-Finite-Type
               ( Σ-Finite-Type (Fin-Finite-Type n) (B ∘ inl))
@@ -513,7 +513,7 @@ module _
               ( Σ-Finite-Type (Fin-Finite-Type nA) (B ∘ map-equiv Fin-nA≃A))
               ( ind-Σ (f ∘ map-equiv Fin-nA≃A))
             by
-              mul-equiv-finite-Commutative-Monoid
+              sum-equiv-finite-Commutative-Monoid
                 ( M)
                 ( Σ-Finite-Type A B)
                 ( Σ-Finite-Type (Fin-Finite-Type nA) (B ∘ map-equiv Fin-nA≃A))
