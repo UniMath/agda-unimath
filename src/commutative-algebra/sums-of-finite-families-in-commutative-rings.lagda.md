@@ -17,7 +17,6 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
-open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.coproduct-types
 open import foundation.empty-types
@@ -30,15 +29,12 @@ open import foundation.universe-levels
 
 open import linear-algebra.finite-sequences-in-commutative-rings
 
-open import lists.finite-sequences
-
 open import ring-theory.sums-of-finite-families-in-rings
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

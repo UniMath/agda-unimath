@@ -23,24 +23,19 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.negated-equality
-open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import linear-algebra.finite-sequences-in-commutative-semirings
 
 open import lists.finite-sequences
-open import lists.lists
 
 open import ring-theory.sums-of-finite-families-in-semirings
 
-open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

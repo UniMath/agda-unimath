@@ -36,8 +36,6 @@ open import group-theory.commutative-monoids
 open import group-theory.sums-of-counted-families-in-commutative-monoids
 open import group-theory.sums-of-finite-sequences-in-commutative-monoids
 
-open import lists.lists
-
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-dependent-pair-types
