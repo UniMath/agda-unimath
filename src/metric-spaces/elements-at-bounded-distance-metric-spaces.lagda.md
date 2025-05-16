@@ -61,7 +61,7 @@ module _
     is-prop-type-Prop is-element-at-bounded-dist-prop-Metric-Space
 ```
 
-### Element-at-bounded-dists in metric spaces
+### Elements at bounded distance relative to a given element in metric spaces
 
 ```agda
 module _
