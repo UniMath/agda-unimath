@@ -8,7 +8,6 @@ module commutative-algebra.sums-of-finite-sequences-in-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
-open import commutative-algebra.sums-of-finite-sequences-in-commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -239,12 +238,11 @@ module _
   {l : Level} (A : Commutative-Ring l)
   where
 
-  preserves-sum-permutation-Commutative-Ring :
+  preserves-sum-permutation-fin-sequence-type-Commutative-Ring :
     (n : ℕ) → (σ : Permutation n) →
     (f : fin-sequence-type-Commutative-Ring A n) →
     sum-fin-sequence-type-Commutative-Ring A n f ＝
     sum-fin-sequence-type-Commutative-Ring A n (f ∘ map-equiv σ)
-  preserves-sum-permutation-Commutative-Ring =
-    preserves-sum-permutation-Commutative-Semiring
-      ( commutative-semiring-Commutative-Ring A)
+  preserves-sum-permutation-fin-sequence-type-Commutative-Ring =
+    preserves-sum-permutation-fin-sequence-type-Ring (ring-Commutative-Ring A)
 ```
