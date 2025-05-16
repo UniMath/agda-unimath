@@ -176,14 +176,14 @@ module _
   where
 
   tuple-Ring-Semigroup : ℕ → Semigroup l
-  tuple-Ring-Semigroup = tuple-Semiring-Semigroup (semiring-Ring R)
+  tuple-Ring-Semigroup = semigroup-tuple-Semiring (semiring-Ring R)
 
   tuple-Ring-Monoid : ℕ → Monoid l
-  tuple-Ring-Monoid = tuple-Semiring-Monoid (semiring-Ring R)
+  tuple-Ring-Monoid = monoid-tuple-Semiring (semiring-Ring R)
 
   tuple-Ring-Commutative-Monoid : ℕ → Commutative-Monoid l
   tuple-Ring-Commutative-Monoid =
-    tuple-Semiring-Commutative-Monoid (semiring-Ring R)
+    commutative-monoid-tuple-Semiring (semiring-Ring R)
 
   is-group-tuple-Ring : (n : ℕ) → is-group-Semigroup (tuple-Ring-Semigroup n)
   pr1 (is-group-tuple-Ring n) = is-unital-Monoid (tuple-Ring-Monoid n)
