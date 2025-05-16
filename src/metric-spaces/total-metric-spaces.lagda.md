@@ -96,22 +96,22 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  is-total-preorder-is-element-at-bounded-dist-is-total-Metric-Space :
+  is-total-preorder-bounded-dist-is-total-Metric-Space :
     is-total-Metric-Space A →
     is-total-Preorder
-      (preorder-is-element-at-bounded-dist-Metric-Space A)
-  is-total-preorder-is-element-at-bounded-dist-is-total-Metric-Space
+      (preorder-bounded-dist-Metric-Space A)
+  is-total-preorder-bounded-dist-is-total-Metric-Space
     total-A x y =
     inl-disjunction (total-A x y)
 
-  is-total-is-total-preorder-is-element-at-bounded-dist-Metric-Space :
+  is-total-is-total-preorder-bounded-dist-Metric-Space :
     is-total-Preorder
-      (preorder-is-element-at-bounded-dist-Metric-Space A) →
+      (preorder-bounded-dist-Metric-Space A) →
     is-total-Metric-Space A
-  is-total-is-total-preorder-is-element-at-bounded-dist-Metric-Space
+  is-total-is-total-preorder-bounded-dist-Metric-Space
     total-N x y =
     elim-disjunction
-      ( is-element-at-bounded-dist-prop-Metric-Space A x y)
+      ( bounded-dist-prop-Metric-Space A x y)
       ( id)
       ( map-trunc-Prop (tot λ d → is-symmetric-structure-Metric-Space A d y x))
       ( total-N x y)

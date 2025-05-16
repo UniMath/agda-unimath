@@ -48,18 +48,18 @@ module _
   (x y : type-Metric-Space A)
   where
 
-  is-element-at-bounded-dist-prop-Metric-Space : Prop l2
-  is-element-at-bounded-dist-prop-Metric-Space =
+  bounded-dist-prop-Metric-Space : Prop l2
+  bounded-dist-prop-Metric-Space =
     ∃ ℚ⁺ (λ d → structure-Metric-Space A d x y)
 
-  is-element-at-bounded-dist-Metric-Space : UU l2
-  is-element-at-bounded-dist-Metric-Space =
-    type-Prop is-element-at-bounded-dist-prop-Metric-Space
+  bounded-dist-Metric-Space : UU l2
+  bounded-dist-Metric-Space =
+    type-Prop bounded-dist-prop-Metric-Space
 
-  is-prop-is-element-at-bounded-dist-Metric-Space :
-    is-prop is-element-at-bounded-dist-Metric-Space
-  is-prop-is-element-at-bounded-dist-Metric-Space =
-    is-prop-type-Prop is-element-at-bounded-dist-prop-Metric-Space
+  is-prop-bounded-dist-Metric-Space :
+    is-prop bounded-dist-Metric-Space
+  is-prop-bounded-dist-Metric-Space =
+    is-prop-type-Prop bounded-dist-prop-Metric-Space
 ```
 
 ### Elements at bounded distance relative to a given element in metric spaces
@@ -72,19 +72,19 @@ module _
 
   element-at-bounded-dist-Metric-Space : UU (l1 ⊔ l2)
   element-at-bounded-dist-Metric-Space =
-    type-subtype (is-element-at-bounded-dist-prop-Metric-Space A x)
+    type-subtype (bounded-dist-prop-Metric-Space A x)
 
   value-element-at-bounded-dist-Metric-Space :
     element-at-bounded-dist-Metric-Space → type-Metric-Space A
   value-element-at-bounded-dist-Metric-Space = pr1
 
-  is-element-at-bounded-dist-elem-element-at-bounded-dist-Metric-Space :
+  bounded-dist-value-element-at-bounded-dist-Metric-Space :
     (H : element-at-bounded-dist-Metric-Space) →
-    is-element-at-bounded-dist-Metric-Space
+    bounded-dist-Metric-Space
       ( A)
       ( x)
       ( value-element-at-bounded-dist-Metric-Space H)
-  is-element-at-bounded-dist-elem-element-at-bounded-dist-Metric-Space = pr2
+  bounded-dist-value-element-at-bounded-dist-Metric-Space = pr2
 ```
 
 ## Properties
@@ -96,9 +96,9 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  refl-is-element-at-bounded-dist-Metric-Space :
-    (x : type-Metric-Space A) → is-element-at-bounded-dist-Metric-Space A x x
-  refl-is-element-at-bounded-dist-Metric-Space x =
+  refl-bounded-dist-Metric-Space :
+    (x : type-Metric-Space A) → bounded-dist-Metric-Space A x x
+  refl-bounded-dist-Metric-Space x =
     map-trunc-Prop
       ( λ d → d , refl-structure-Metric-Space A d x)
       ( is-inhabited-ℚ⁺)
@@ -111,11 +111,11 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  symmetric-is-element-at-bounded-dist-Metric-Space :
+  symmetric-bounded-dist-Metric-Space :
     (x y : type-Metric-Space A) →
-    is-element-at-bounded-dist-Metric-Space A x y →
-    is-element-at-bounded-dist-Metric-Space A y x
-  symmetric-is-element-at-bounded-dist-Metric-Space x y =
+    bounded-dist-Metric-Space A x y →
+    bounded-dist-Metric-Space A y x
+  symmetric-bounded-dist-Metric-Space x y =
     map-tot-exists
       ( λ d → is-symmetric-structure-Metric-Space A d x y)
 ```
@@ -127,12 +127,12 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  transitive-is-element-at-bounded-dist-Metric :
+  transitive-bounded-dist-Metric :
     (x y z : type-Metric-Space A) →
-    is-element-at-bounded-dist-Metric-Space A y z →
-    is-element-at-bounded-dist-Metric-Space A x y →
-    is-element-at-bounded-dist-Metric-Space A x z
-  transitive-is-element-at-bounded-dist-Metric x y z =
+    bounded-dist-Metric-Space A y z →
+    bounded-dist-Metric-Space A x y →
+    bounded-dist-Metric-Space A x z
+  transitive-bounded-dist-Metric x y z =
     map-binary-exists
       ( is-upper-bound-dist-Metric-Space A x z)
       ( λ dyz dxy → dxy +ℚ⁺ dyz)
@@ -146,12 +146,12 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  preorder-is-element-at-bounded-dist-Metric-Space : Preorder l1 l2
-  preorder-is-element-at-bounded-dist-Metric-Space =
+  preorder-bounded-dist-Metric-Space : Preorder l1 l2
+  preorder-bounded-dist-Metric-Space =
     ( type-Metric-Space A) ,
-    ( is-element-at-bounded-dist-prop-Metric-Space A) ,
-    ( refl-is-element-at-bounded-dist-Metric-Space A) ,
-    ( transitive-is-element-at-bounded-dist-Metric A)
+    ( bounded-dist-prop-Metric-Space A) ,
+    ( refl-bounded-dist-Metric-Space A) ,
+    ( transitive-bounded-dist-Metric A)
 ```
 
 ### Being at bounded distance in a metric space is an equivalence relation
@@ -161,12 +161,20 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  is-equivalence-relation-is-element-at-bounded-dist-Metric-Space :
-    is-equivalence-relation (is-element-at-bounded-dist-prop-Metric-Space A)
-  is-equivalence-relation-is-element-at-bounded-dist-Metric-Space =
-    ( refl-is-element-at-bounded-dist-Metric-Space A) ,
-    ( symmetric-is-element-at-bounded-dist-Metric-Space A) ,
-    ( transitive-is-element-at-bounded-dist-Metric A)
+  is-equivalence-relation-bounded-dist-Metric-Space :
+    is-equivalence-relation (bounded-dist-prop-Metric-Space A)
+  is-equivalence-relation-bounded-dist-Metric-Space =
+    ( refl-bounded-dist-Metric-Space A) ,
+    ( symmetric-bounded-dist-Metric-Space A) ,
+    ( transitive-bounded-dist-Metric A)
+
+  equivalence-relation-bounded-dist-Metric-Space :
+    equivalence-relation l2 (type-Metric-Space A)
+  equivalence-relation-bounded-dist-Metric-Space =
+    ( bounded-dist-prop-Metric-Space A) ,
+    ( refl-bounded-dist-Metric-Space A) ,
+    ( symmetric-bounded-dist-Metric-Space A) ,
+    ( transitive-bounded-dist-Metric A)
 ```
 
 ## See also

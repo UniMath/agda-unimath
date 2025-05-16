@@ -416,11 +416,11 @@ module _
   (Lf : is-lipschitz-function-Metric-Space A B f)
   where
 
-  preserves-is-element-at-bounded-dist-is-lipschitz-function-Metric-Space :
+  preserves-bounded-dist-is-lipschitz-function-Metric-Space :
     (x y : type-Metric-Space A) →
-    is-element-at-bounded-dist-Metric-Space A x y →
-    is-element-at-bounded-dist-Metric-Space B (f x) (f y)
-  preserves-is-element-at-bounded-dist-is-lipschitz-function-Metric-Space x y =
+    bounded-dist-Metric-Space A x y →
+    bounded-dist-Metric-Space B (f x) (f y)
+  preserves-bounded-dist-is-lipschitz-function-Metric-Space x y =
     map-binary-exists
       ( is-upper-bound-dist-Metric-Space B (f x) (f y))
       ( mul-ℚ⁺)
@@ -433,19 +433,18 @@ module _
     element-at-bounded-dist-Metric-Space B (f x)
   map-element-at-bounded-dist-is-lipschitz-function-Metric-Space x =
     map-Σ
-      ( is-element-at-bounded-dist-Metric-Space B (f x))
+      ( bounded-dist-Metric-Space B (f x))
       ( f)
-      ( preserves-is-element-at-bounded-dist-is-lipschitz-function-Metric-Space
-        x)
+      ( preserves-bounded-dist-is-lipschitz-function-Metric-Space x)
 
-  eq-elem-map-element-at-bounded-dist-is-lipschitz-funtion-Metric-Space :
+  eq-value-map-element-at-bounded-dist-is-lipschitz-funtion-Metric-Space :
     (x : type-Metric-Space A) (N : element-at-bounded-dist-Metric-Space A x) →
     value-element-at-bounded-dist-Metric-Space
       ( B)
       ( f x)
       ( map-element-at-bounded-dist-is-lipschitz-function-Metric-Space x N) ＝
     f (value-element-at-bounded-dist-Metric-Space A x N)
-  eq-elem-map-element-at-bounded-dist-is-lipschitz-funtion-Metric-Space x N =
+  eq-value-map-element-at-bounded-dist-is-lipschitz-funtion-Metric-Space x N =
     refl
 ```
 
