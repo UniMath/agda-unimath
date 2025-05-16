@@ -261,12 +261,12 @@ span.prefer-nobreak {
 }
 
 .art-fredrik-dependency-graph-dot {
-  height: 9px;
-  width: 9px;
+  height: 10px;
+  width: 10px;
   border-radius: 50%;
   display: inline-block;
   margin-right: 2.5px;
-  margin-left: 5px;
+  margin-left: 4px;
 }
 
 .art-fredrik-dependency-graph-label {
