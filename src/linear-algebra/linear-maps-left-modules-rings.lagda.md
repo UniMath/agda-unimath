@@ -28,7 +28,7 @@ open import ring-theory.rings
 ## Idea
 
 A
-{{#concept "linear map" Agda=is-linear-map-left-module-Ring Disambiguation="over left modules over a ring" WD="linear map" WDID=Q207643 }}
+{{#concept "linear map" Agda=is-linear-map-left-module-Ring Disambiguation="over left modules over a ring" WD="linear map" WDID=Q207643}}
 between [left modules](linear-algebra.left-modules-rings.md) is a map `f` with
 the following properties:
 

@@ -29,7 +29,7 @@ open import ring-theory.rings
 ## Idea
 
 A
-{{#concept "right module" WD="right module" WDID=Q120722061 Agda=right-module-Ring}}
+{{#concept "right module" Disambiguation="over a ring" WD="right module" WDID=Q120722061 Agda=right-module-Ring}}
 over a [ring](ring-theory.rings.md) `R` consists of an
 [abelian group](group-theory.abelian-groups.md) `M` equipped with a
 [ring homomorphism](ring-theory.homomorphisms-rings.md) from `R` to the
@@ -275,7 +275,7 @@ module _
 
   left-zero-law-mul-right-module-Ring :
     (x : type-right-module-Ring R M) →
-    Id ( mul-right-module-Ring R M (zero-Ring R) x) (zero-right-module-Ring R M)
+    Id (mul-right-module-Ring R M (zero-Ring R) x) (zero-right-module-Ring R M)
   left-zero-law-mul-right-module-Ring =
     htpy-eq-hom-Ab
       ( ab-right-module-Ring R M)
