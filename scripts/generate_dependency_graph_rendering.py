@@ -137,10 +137,12 @@ def generate_html_legend(label_colors, used_labels, output_file, label_counts):
     """Generate an HTML legend with used namespaces and their colors."""
     sorted_labels = sorted(used_labels, key=lambda label: label_counts.get(label, 0), reverse=True)
     with open(output_file, 'w') as f:
+        f.write('<div class="art-fredrik-dependency-graph-legend">\n')
         for label in sorted_labels:
             if label in label_colors:
                 color = label_colors[label]
-                f.write(f'<pre class="art-fredrik-dependency-graph-label" id="{label}"><span class="art-fredrik-dependency-graph-dot" style="background-color: #{color};"></span>{label}</pre>\n')
+                f.write(f'  <pre class="art-fredrik-dependency-graph-label" id="{label}"><span class="art-fredrik-dependency-graph-dot" style="background-color: #{color};"></span>{label}</pre>\n')
+        f.write('</div>\n')
 
 def render_graph(graph, file_sizes, output_file, format, repo):
     """Render the dependency graph using Graphviz."""

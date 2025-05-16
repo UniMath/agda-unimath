@@ -253,6 +253,13 @@ span.prefer-nobreak {
   display: inline-block;
 }
 
+.art-fredrik-dependency-graph-legend {
+  line-height: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .art-fredrik-dependency-graph-dot {
   height: 9px;
   width: 9px;
@@ -264,7 +271,9 @@ span.prefer-nobreak {
 
 .art-fredrik-dependency-graph-label {
   white-space: nowrap;
-  font-family: monospaced;
   font-size: 50%;
   display: inline-block;
+  margin: 0;
+  padding: 0.1rem 0.3rem;
+  line-height: 1;
 }
