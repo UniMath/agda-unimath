@@ -59,7 +59,8 @@ module _
   compute-sum-one-element-Ring :
     (f : fin-sequence-type-Ring R 1) →
     sum-fin-sequence-type-Ring R 1 f ＝ head-fin-sequence 0 f
-  compute-sum-one-element-Ring = compute-sum-one-element-Semiring (semiring-Ring R)
+  compute-sum-one-element-Ring =
+    compute-sum-one-element-Semiring (semiring-Ring R)
 
   compute-sum-two-elements-Ring :
     (f : fin-sequence-type-Ring R 2) →

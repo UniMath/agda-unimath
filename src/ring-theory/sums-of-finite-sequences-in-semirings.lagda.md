@@ -87,8 +87,8 @@ module _
 
   htpy-sum-fin-sequence-type-Semiring :
     (n : ℕ) {f g : fin-sequence-type-Semiring R n} →
-    (f ~ g) → sum-fin-sequence-type-Semiring R n f ＝
-    sum-fin-sequence-type-Semiring R n g
+    (f ~ g) →
+    sum-fin-sequence-type-Semiring R n f ＝ sum-fin-sequence-type-Semiring R n g
   htpy-sum-fin-sequence-type-Semiring =
     htpy-sum-fin-sequence-type-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
