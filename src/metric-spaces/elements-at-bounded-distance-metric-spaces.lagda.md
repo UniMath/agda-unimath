@@ -35,7 +35,8 @@ Two elements `x y : A` of a [metric space](metric-spaces.metric-spaces.md) are
 if there [exists](foundation.existential-quantification.md) some
 [positive rational number](elementary-number-theory.positive-rational-numbers.md)
 `δ : ℚ⁺` such that `x` and `y` share a `δ`-neighborhood in `A`. Being at bounded
-distance in a metric space is an equivalence relation.
+distance in a metric space is an
+[equivalence relation](foundation.equivalence-relations.md).
 
 ## Definitions
 
