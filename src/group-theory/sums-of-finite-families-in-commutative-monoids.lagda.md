@@ -567,5 +567,5 @@ module _
               ( unit-Finite-Type)
               ( count-unit)
               ( f)
-        ＝ f star by sum-one-element-Commutative-Monoid M _
+        ＝ f star by compute-sum-one-element-Commutative-Monoid M _
 ```

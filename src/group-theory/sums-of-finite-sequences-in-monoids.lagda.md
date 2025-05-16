@@ -57,17 +57,17 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  sum-one-element-Monoid :
+  compute-sum-one-element-Monoid :
     (f : fin-sequence-type-Monoid M 1) →
     sum-fin-sequence-type-Monoid M 1 f ＝ head-fin-sequence-type-Monoid M 0 f
-  sum-one-element-Monoid f =
+  compute-sum-one-element-Monoid f =
     left-unit-law-mul-Monoid M (f (inr star))
 
-  sum-two-elements-Monoid :
+  compute-sum-two-elements-Monoid :
     (f : fin-sequence-type-Monoid M 2) →
     sum-fin-sequence-type-Monoid M 2 f ＝
     mul-Monoid M (f (zero-Fin 1)) (f (one-Fin 1))
-  sum-two-elements-Monoid f =
+  compute-sum-two-elements-Monoid f =
     ( associative-mul-Monoid M
       (unit-Monoid M) (f (zero-Fin 1)) (f (one-Fin 1))) ∙
     ( left-unit-law-mul-Monoid M
@@ -114,7 +114,7 @@ module _
       ( x)
       ( sum-fin-sequence-type-Monoid M n (f ∘ inr-Fin n))
   snoc-sum-fin-sequence-type-Monoid zero-ℕ f refl =
-    ( sum-one-element-Monoid M f) ∙
+    ( compute-sum-one-element-Monoid M f) ∙
     ( inv (right-unit-law-mul-Monoid M (f (zero-Fin 0))))
   snoc-sum-fin-sequence-type-Monoid (succ-ℕ n) f refl =
     ( ap

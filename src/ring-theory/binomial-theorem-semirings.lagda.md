@@ -76,7 +76,7 @@ module _
     binomial-sum-fin-sequence-type-Semiring R 0 f ＝
     head-fin-sequence-type-Semiring R 0 f
   binomial-sum-one-element-Semiring f =
-    ( sum-one-element-Semiring R
+    ( compute-sum-one-element-Semiring R
       ( λ i →
         mul-nat-scalar-Semiring R
           ( binomial-coefficient-Fin 0 i)
@@ -406,7 +406,7 @@ binomial-theorem-Semiring :
       ( power-Semiring R (dist-ℕ (nat-Fin (succ-ℕ n) i) n) y))
 binomial-theorem-Semiring R zero-ℕ x y H =
   inv
-    ( ( sum-one-element-Semiring R
+    ( ( compute-sum-one-element-Semiring R
         ( λ i →
           mul-nat-scalar-Semiring R
             ( binomial-coefficient-Fin 0 i)

@@ -56,16 +56,16 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  sum-one-element-Ring :
+  compute-sum-one-element-Ring :
     (f : fin-sequence-type-Ring R 1) →
     sum-fin-sequence-type-Ring R 1 f ＝ head-fin-sequence 0 f
-  sum-one-element-Ring = sum-one-element-Semiring (semiring-Ring R)
+  compute-sum-one-element-Ring = compute-sum-one-element-Semiring (semiring-Ring R)
 
-  sum-two-elements-Ring :
+  compute-sum-two-elements-Ring :
     (f : fin-sequence-type-Ring R 2) →
     sum-fin-sequence-type-Ring R 2 f ＝
     add-Ring R (f (zero-Fin 1)) (f (one-Fin 1))
-  sum-two-elements-Ring = sum-two-elements-Semiring (semiring-Ring R)
+  compute-sum-two-elements-Ring = sum-two-elements-Semiring (semiring-Ring R)
 ```
 
 ### Sums are homotopy invariant

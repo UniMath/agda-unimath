@@ -62,11 +62,11 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  sum-one-element-Semiring :
+  compute-sum-one-element-Semiring :
     (f : fin-sequence-type-Semiring R 1) →
     sum-fin-sequence-type-Semiring R 1 f ＝ head-fin-sequence 0 f
-  sum-one-element-Semiring =
-    sum-one-element-Commutative-Monoid
+  compute-sum-one-element-Semiring =
+    compute-sum-one-element-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 
   sum-two-elements-Semiring :
@@ -74,7 +74,7 @@ module _
     sum-fin-sequence-type-Semiring R 2 f ＝
     add-Semiring R (f (zero-Fin 1)) (f (one-Fin 1))
   sum-two-elements-Semiring =
-    sum-two-elements-Commutative-Monoid
+    compute-sum-two-elements-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 ```
 

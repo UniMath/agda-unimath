@@ -61,17 +61,17 @@ module _
   {l : Level} (A : Commutative-Semiring l)
   where
 
-  sum-one-element-Commutative-Semiring :
+  compute-sum-one-element-Commutative-Semiring :
     (f : fin-sequence-type-Commutative-Semiring A 1) →
     sum-fin-sequence-type-Commutative-Semiring A 1 f ＝ head-fin-sequence 0 f
-  sum-one-element-Commutative-Semiring =
-    sum-one-element-Semiring (semiring-Commutative-Semiring A)
+  compute-sum-one-element-Commutative-Semiring =
+    compute-sum-one-element-Semiring (semiring-Commutative-Semiring A)
 
-  sum-two-elements-Commutative-Semiring :
+  compute-sum-two-elements-Commutative-Semiring :
     (f : fin-sequence-type-Commutative-Semiring A 2) →
     sum-fin-sequence-type-Commutative-Semiring A 2 f ＝
     add-Commutative-Semiring A (f (zero-Fin 1)) (f (one-Fin 1))
-  sum-two-elements-Commutative-Semiring =
+  compute-sum-two-elements-Commutative-Semiring =
     sum-two-elements-Semiring (semiring-Commutative-Semiring A)
 ```
 

@@ -68,19 +68,19 @@ module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  sum-one-element-Commutative-Monoid :
+  compute-sum-one-element-Commutative-Monoid :
     (f : fin-sequence-type-Commutative-Monoid M 1) →
     sum-fin-sequence-type-Commutative-Monoid M 1 f ＝
     head-fin-sequence-type-Commutative-Monoid M 0 f
-  sum-one-element-Commutative-Monoid =
-    sum-one-element-Monoid (monoid-Commutative-Monoid M)
+  compute-sum-one-element-Commutative-Monoid =
+    compute-sum-one-element-Monoid (monoid-Commutative-Monoid M)
 
-  sum-two-elements-Commutative-Monoid :
+  compute-sum-two-elements-Commutative-Monoid :
     (f : fin-sequence-type-Commutative-Monoid M 2) →
     sum-fin-sequence-type-Commutative-Monoid M 2 f ＝
     mul-Commutative-Monoid M (f (zero-Fin 1)) (f (one-Fin 1))
-  sum-two-elements-Commutative-Monoid =
-    sum-two-elements-Monoid (monoid-Commutative-Monoid M)
+  compute-sum-two-elements-Commutative-Monoid =
+    compute-sum-two-elements-Monoid (monoid-Commutative-Monoid M)
 ```
 
 ### Sums are homotopy invariant

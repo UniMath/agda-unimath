@@ -64,18 +64,18 @@ module _
   {l : Level} (A : Commutative-Ring l)
   where
 
-  sum-one-element-Commutative-Ring :
+  compute-sum-one-element-Commutative-Ring :
     (f : fin-sequence-type-Commutative-Ring A 1) →
     sum-fin-sequence-type-Commutative-Ring A 1 f ＝ head-fin-sequence 0 f
-  sum-one-element-Commutative-Ring =
-    sum-one-element-Ring (ring-Commutative-Ring A)
+  compute-sum-one-element-Commutative-Ring =
+    compute-sum-one-element-Ring (ring-Commutative-Ring A)
 
-  sum-two-elements-Commutative-Ring :
+  compute-sum-two-elements-Commutative-Ring :
     (f : fin-sequence-type-Commutative-Ring A 2) →
     sum-fin-sequence-type-Commutative-Ring A 2 f ＝
     add-Commutative-Ring A (f (zero-Fin 1)) (f (one-Fin 1))
-  sum-two-elements-Commutative-Ring =
-    sum-two-elements-Ring (ring-Commutative-Ring A)
+  compute-sum-two-elements-Commutative-Ring =
+    compute-sum-two-elements-Ring (ring-Commutative-Ring A)
 ```
 
 ### Sums are homotopy invariant
