@@ -131,7 +131,7 @@ module _
 
 In our main definition of repleteness, the containment proof of the isomorphism
 must be fixed at the left end-point. This is of course not necessary, so we can
-ask for a slighty relaxed proof of repleteness:
+ask for a slightly relaxed proof of repleteness:
 
 ```agda
 module _
