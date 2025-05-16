@@ -31,7 +31,7 @@ open import order-theory.preorders
 ## Idea
 
 Two elements `x y : A` of a [metric space](metric-spaces.metric-spaces.md) are
-{{#concept "at bounded distance" Disambiguation="in a metric space" Agda=element-at-bounded-dist-Metric-Space}}
+{{#concept "at bounded distance" Disambiguation="in a metric space" Agda=bounded-dist-Metric-Space}}
 if there [exists](foundation.existential-quantification.md) some
 [positive rational number](elementary-number-theory.positive-rational-numbers.md)
 `δ : ℚ⁺` such that `x` and `y` share a `δ`-neighborhood in `A`. Being at bounded
