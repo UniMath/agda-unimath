@@ -63,15 +63,15 @@ comp-coherence-square-hom-Precategory :
   coherence-square-hom-Precategory C topleft left middle bottomleft →
   coherence-square-hom-Precategory C topright middle right bottomright →
   coherence-square-hom-Precategory C
-    (comp-hom-Precategory C topright topleft)
-    left
-    right
-    (comp-hom-Precategory C bottomright bottomleft)
+    ( comp-hom-Precategory C topright topleft)
+    ( left)
+    ( right)
+    ( comp-hom-Precategory C bottomright bottomleft)
 comp-coherence-square-hom-Precategory C
   topleft left middle bottomleft topright right bottomright commleft commright =
-  associative-comp-hom-Precategory C _ _ _
-  ∙ ap (postcomp-hom-Precategory C bottomright _) commleft
-  ∙ inv (associative-comp-hom-Precategory C _ _ _)
-  ∙ ap (precomp-hom-Precategory C topleft _) commright
-  ∙ associative-comp-hom-Precategory C _ _ _
+  ( associative-comp-hom-Precategory C _ _ _) ∙
+  ( ap (postcomp-hom-Precategory C bottomright _) commleft) ∙
+  ( inv (associative-comp-hom-Precategory C _ _ _)) ∙
+  ( ap (precomp-hom-Precategory C topleft _) commright) ∙
+  ( associative-comp-hom-Precategory C _ _ _)
 ```
