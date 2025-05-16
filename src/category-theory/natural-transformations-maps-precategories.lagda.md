@@ -271,8 +271,8 @@ module _
   htpy-eq-hom-family-natural-transformation-map-Precategory :
     {α β : natural-transformation-map-Precategory C D F G} →
     α ＝ β →
-    ( hom-family-natural-transformation-map-Precategory C D F G α ~
-      hom-family-natural-transformation-map-Precategory C D F G β)
+    hom-family-natural-transformation-map-Precategory C D F G α ~
+    hom-family-natural-transformation-map-Precategory C D F G β
   htpy-eq-hom-family-natural-transformation-map-Precategory {α} {β} =
     map-equiv (extensionality-natural-transformation-map-Precategory α β)
 ```
