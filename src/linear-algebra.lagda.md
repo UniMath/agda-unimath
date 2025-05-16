@@ -14,12 +14,8 @@ open import linear-algebra.finite-sequences-in-euclidean-domains public
 open import linear-algebra.finite-sequences-in-rings public
 open import linear-algebra.finite-sequences-in-semirings public
 open import linear-algebra.functoriality-matrices public
-<<<<<<< HEAD
-open import linear-algebra.functoriality-vectors public
 open import linear-algebra.left-modules-rings public
 open import linear-algebra.linear-maps-left-modules-rings public
-=======
->>>>>>> master
 open import linear-algebra.matrices public
 open import linear-algebra.matrices-on-rings public
 open import linear-algebra.multiplication-matrices public
