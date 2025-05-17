@@ -202,6 +202,6 @@ module _
 
 ## See also
 
-- For the [left module](ring-theory.left-modules-rings.md) of tuples on rings,
-  see
+- For the [left module](linear-algebra.left-modules-rings.md) of tuples on
+  rings, see
   [`linear-algebra.scalar-multiplication-tuples-on-rings`](linear-algebra.scalar-multiplication-tuples-on-rings.md)
