@@ -32,7 +32,7 @@ the type of type families over
 is [equivalent](foundation-core.equivalences.md) to
 [descent data](synthetic-homotopy-theory.descent-data-sequential-colimits.md).
 
-Sometimes it is useful to consider tripes `(P, B, e)` where `P : X → 𝒰` is a
+Sometimes it is useful to consider triples `(P, B, e)` where `P : X → 𝒰` is a
 type family, `B` is descent data, and `e` is an equivalence between `B` and the
 descent data induced by `P`. The type of such pairs `(B, e)` is
 [contractible](foundation-core.contractible-types.md), so the type of these

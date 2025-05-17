@@ -21,6 +21,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
+open import foundation.span-diagrams
 open import foundation.transport-along-homotopies
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -124,6 +125,37 @@ cocone-pushout :
 pr1 (cocone-pushout f g) = inl-pushout f g
 pr1 (pr2 (cocone-pushout f g)) = inr-pushout f g
 pr2 (pr2 (cocone-pushout f g)) = glue-pushout f g
+
+module _
+  {l1 l2 l3 : Level} (𝒮 : span-diagram l1 l2 l3)
+  where
+
+  standard-pushout : UU (l1 ⊔ l2 ⊔ l3)
+  standard-pushout =
+    pushout (left-map-span-diagram 𝒮) (right-map-span-diagram 𝒮)
+
+  inl-standard-pushout : domain-span-diagram 𝒮 → standard-pushout
+  inl-standard-pushout =
+    inl-pushout (left-map-span-diagram 𝒮) (right-map-span-diagram 𝒮)
+
+  inr-standard-pushout : codomain-span-diagram 𝒮 → standard-pushout
+  inr-standard-pushout =
+    inr-pushout (left-map-span-diagram 𝒮) (right-map-span-diagram 𝒮)
+
+  glue-standard-pushout :
+    coherence-square-maps
+      ( right-map-span-diagram 𝒮)
+      ( left-map-span-diagram 𝒮)
+      ( inr-standard-pushout)
+      ( inl-standard-pushout)
+  glue-standard-pushout =
+    glue-pushout (left-map-span-diagram 𝒮) (right-map-span-diagram 𝒮)
+
+  cocone-pushout-span-diagram :
+    cocone-span-diagram 𝒮 standard-pushout
+  pr1 cocone-pushout-span-diagram = inl-standard-pushout
+  pr1 (pr2 cocone-pushout-span-diagram) = inr-standard-pushout
+  pr2 (pr2 cocone-pushout-span-diagram) = glue-standard-pushout
 ```
 
 ### The dependent cogap map
