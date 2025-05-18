@@ -1,7 +1,7 @@
-# Scalar multiplication of vectors
+# Scalar multiplication of tuples
 
 ```agda
-module linear-algebra.scalar-multiplication-vectors where
+module linear-algebra.scalar-multiplication-tuples where
 ```
 
 <details><summary>Imports</summary>
@@ -11,8 +11,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.vectors
+open import lists.functoriality-tuples
+open import lists.tuples
 ```
 
 </details>
@@ -20,13 +20,13 @@ open import linear-algebra.vectors
 ## Idea
 
 Any operation `B → A → A` for some type `B` of formal scalars induces an
-operation `B → vec n A → vec n A`.
+operation on [tuples](lists.tuples.md) `B → tuple n A → tuple n A`.
 
 ## Definition
 
 ```agda
-scalar-mul-vec :
+scalar-mul-tuple :
   {l1 l2 : Level} {B : UU l1} {A : UU l2} {n : ℕ} →
-  (B → A → A) → B → vec A n → vec A n
-scalar-mul-vec μ x = map-vec (μ x)
+  (B → A → A) → B → tuple A n → tuple A n
+scalar-mul-tuple μ x = map-tuple (μ x)
 ```
