@@ -280,3 +280,7 @@ module _
     preserves-sum-permutation-fin-sequence-type-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 ```
+
+## See also
+
+- [Sums of finite families of elements in semirings](ring-theory.sums-of-finite-families-of-elements-semirings.md)

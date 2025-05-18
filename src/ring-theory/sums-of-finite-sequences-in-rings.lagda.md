@@ -232,3 +232,7 @@ module _
   preserves-sum-permutation-fin-sequence-type-Ring =
     preserves-sum-permutation-fin-sequence-type-Semiring (semiring-Ring R)
 ```
+
+## See also
+
+- [Sums of finite families of elements in rings](ring-theory.sums-of-finite-families-of-elements-rings.md)

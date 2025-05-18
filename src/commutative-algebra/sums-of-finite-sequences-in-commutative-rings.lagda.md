@@ -243,3 +243,7 @@ module _
   preserves-sum-permutation-fin-sequence-type-Commutative-Ring =
     preserves-sum-permutation-fin-sequence-type-Ring (ring-Commutative-Ring A)
 ```
+
+## See also
+
+- [Sums of finite families of elements in commutative rings](commutative-algebra.sums-of-finite-families-of-elements-commutative-rings.md)

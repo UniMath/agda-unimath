@@ -299,3 +299,7 @@ module _
         ( λ τ → sum-fin-sequence-type-Commutative-Monoid M n (f ∘ map-equiv τ))
         ( eq-permutation-list-standard-transpositions-Fin n σ)
 ```
+
+## See also
+
+- [Sums of finite families of elements in commutative monoids](group-theory.sums-of-finite-families-of-elements-commutative-monoids.md)
