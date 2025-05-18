@@ -27,7 +27,7 @@ the
 
 ## Definitions
 
-### Premetric structures
+### Rational neighborhood relation on a type
 
 ```agda
 module _

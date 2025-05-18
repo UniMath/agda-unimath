@@ -32,7 +32,7 @@ an element is its `d₁ + d₂`-neighbor.
 
 ## Definitions
 
-### The property of being a triangular premetric structure
+### The property of being a triangular rational neighborhood relation
 
 ```agda
 module _
