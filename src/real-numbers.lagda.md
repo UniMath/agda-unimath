@@ -15,6 +15,7 @@ open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.difference-real-numbers public
 open import real-numbers.distance-real-numbers public
+open import real-numbers.domain-extension-of-rational-real-functions public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
 open import real-numbers.inequality-real-numbers public
 open import real-numbers.inequality-upper-dedekind-real-numbers public

@@ -224,8 +224,8 @@ abstract
           ( a')
           ( b')
           ( max-ℝ a' b')
-          ( sim-leq-sim-ℝ (symmetric-sim-ℝ a~a'))
-          ( sim-leq-sim-ℝ (symmetric-sim-ℝ b~b'))
+          ( sim-leq-sim-ℝ (inv-sim-ℝ a~a'))
+          ( sim-leq-sim-ℝ (inv-sim-ℝ b~b'))
           ( is-least-binary-upper-bound-max-ℝ a' b')))
 
   preserves-sim-left-max-ℝ :
