@@ -363,6 +363,8 @@ module _
       mul-right-module-Ring R M (neg-Ring R (one-Ring R)) x ＝
       neg-right-module-Ring R M x
     mul-neg-one-right-module-Ring x =
-      left-negative-law-mul-right-module-Ring R M _ _ ∙
-      ap (neg-right-module-Ring R M) (left-unit-law-mul-right-module-Ring R M x)
+      ( left-negative-law-mul-right-module-Ring R M _ _) ∙
+      ( ap
+        ( neg-right-module-Ring R M)
+        ( left-unit-law-mul-right-module-Ring R M x))
 ```
