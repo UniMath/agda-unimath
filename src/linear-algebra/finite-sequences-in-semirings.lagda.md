@@ -18,6 +18,8 @@ open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 
+open import linear-algebra.finite-sequences-in-commutative-monoids
+
 open import lists.finite-sequences
 open import lists.functoriality-finite-sequences
 
@@ -84,8 +86,9 @@ module _
   add-fin-sequence-type-Semiring :
     (n : ℕ) (v w : fin-sequence-type-Semiring R n) →
     fin-sequence-type-Semiring R n
-  add-fin-sequence-type-Semiring n =
-    binary-map-fin-sequence n (add-Semiring R)
+  add-fin-sequence-type-Semiring =
+    add-fin-sequence-type-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 ```
 
 ## Properties of pointwise addition
@@ -107,8 +110,9 @@ module _
       ( n)
       ( v1)
       ( add-fin-sequence-type-Semiring R n v2 v3))
-  associative-add-fin-sequence-type-Semiring n v1 v2 v3 =
-    eq-htpy (λ i → associative-add-Semiring R (v1 i) (v2 i) (v3 i))
+  associative-add-fin-sequence-type-Semiring =
+    associative-add-fin-sequence-type-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 ```
 
 ### Unit laws of pointwise addition
@@ -124,8 +128,9 @@ module _
       ( zero-fin-sequence-type-Semiring R n)
       ( v) ＝
     v
-  left-unit-law-add-fin-sequence-type-Semiring n v =
-    eq-htpy (λ i → left-unit-law-add-Semiring R (v i))
+  left-unit-law-add-fin-sequence-type-Semiring =
+    left-unit-law-add-fin-sequence-type-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 
   right-unit-law-add-fin-sequence-type-Semiring :
     (n : ℕ) (v : fin-sequence-type-Semiring R n) →
@@ -133,8 +138,9 @@ module _
       ( v)
       ( zero-fin-sequence-type-Semiring R n) ＝
     v
-  right-unit-law-add-fin-sequence-type-Semiring n v =
-    eq-htpy (λ i → right-unit-law-add-Semiring R (v i))
+  right-unit-law-add-fin-sequence-type-Semiring =
+    right-unit-law-add-fin-sequence-type-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 ```
 
 ### Commutativity of pointwise addition
@@ -148,8 +154,9 @@ module _
     (n : ℕ) (v w : fin-sequence-type-Semiring R n) →
     add-fin-sequence-type-Semiring R n v w ＝
     add-fin-sequence-type-Semiring R n w v
-  commutative-add-fin-sequence-type-Semiring n v w =
-    eq-htpy (λ i → commutative-add-Semiring R (v i) (w i))
+  commutative-add-fin-sequence-type-Semiring =
+    commutative-add-fin-sequence-type-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 ```
 
 ### The commutative monoid of pointwise addition
@@ -160,26 +167,17 @@ module _
   where
 
   semigroup-fin-sequence-type-Semiring : ℕ → Semigroup l
-  pr1 (semigroup-fin-sequence-type-Semiring n) =
-    fin-sequence-Set (set-Semiring R) n
-  pr1 (pr2 (semigroup-fin-sequence-type-Semiring n)) =
-    add-fin-sequence-type-Semiring R n
-  pr2 (pr2 (semigroup-fin-sequence-type-Semiring n)) =
-    associative-add-fin-sequence-type-Semiring R n
+  semigroup-fin-sequence-type-Semiring =
+    semigroup-fin-sequence-type-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 
   monoid-fin-sequence-type-Semiring : ℕ → Monoid l
-  pr1 (monoid-fin-sequence-type-Semiring n) =
-    semigroup-fin-sequence-type-Semiring n
-  pr1 (pr2 (monoid-fin-sequence-type-Semiring n)) =
-    zero-fin-sequence-type-Semiring R n
-  pr1 (pr2 (pr2 (monoid-fin-sequence-type-Semiring n))) =
-    left-unit-law-add-fin-sequence-type-Semiring R n
-  pr2 (pr2 (pr2 (monoid-fin-sequence-type-Semiring n))) =
-    right-unit-law-add-fin-sequence-type-Semiring R n
+  monoid-fin-sequence-type-Semiring =
+    monoid-fin-sequence-type-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 
   commutative-monoid-fin-sequence-type-Semiring : ℕ → Commutative-Monoid l
-  pr1 (commutative-monoid-fin-sequence-type-Semiring n) =
-    monoid-fin-sequence-type-Semiring n
-  pr2 (commutative-monoid-fin-sequence-type-Semiring n) =
-    commutative-add-fin-sequence-type-Semiring R n
+  commutative-monoid-fin-sequence-type-Semiring =
+    commutative-monoid-fin-sequence-type-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 ```

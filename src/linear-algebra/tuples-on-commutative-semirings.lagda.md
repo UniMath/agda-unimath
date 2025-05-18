@@ -147,13 +147,13 @@ module _
 
   tuple-Commutative-Semiring-Semigroup : ℕ → Semigroup l
   tuple-Commutative-Semiring-Semigroup =
-    tuple-Semiring-Semigroup (semiring-Commutative-Semiring R)
+    semigroup-tuple-Semiring (semiring-Commutative-Semiring R)
 
   tuple-Commutative-Semiring-Monoid : ℕ → Monoid l
   tuple-Commutative-Semiring-Monoid =
-    tuple-Semiring-Monoid (semiring-Commutative-Semiring R)
+    monoid-tuple-Semiring (semiring-Commutative-Semiring R)
 
   tuple-Commutative-Semiring-Commutative-Monoid : ℕ → Commutative-Monoid l
   tuple-Commutative-Semiring-Commutative-Monoid =
-    tuple-Semiring-Commutative-Monoid (semiring-Commutative-Semiring R)
+    commutative-monoid-tuple-Semiring (semiring-Commutative-Semiring R)
 ```
