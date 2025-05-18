@@ -42,7 +42,7 @@ The infinite dimensional real projective space `ℝP∞` may be realized as a
 dimensional real projective spaces, see Section IV {{#cite BR17}}.
 
 ```text
-  ℝP⁻¹ ──→ ℝP⁰ ──→ ℝP¹ ─→ ℝP² ──→ ⋯ ──→ ℝPⁿ ──→ ℝPⁿ⁺¹ ──→ ⋯ ──→ ℝP∞
+  ℝP⁻¹ ──→ ℝP⁰ ──→ ℝP¹ ──→ ℝP² ──→ ⋯ ──→ ℝPⁿ ──→ ℝPⁿ⁺¹ ──→ ⋯ ──→ ℝP∞
 ```
 
 > This remains to be formalized.
