@@ -20,7 +20,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.vectors-on-commutative-semirings
+open import linear-algebra.finite-sequences-in-commutative-semirings
 
 open import ring-theory.binomial-theorem-semirings
 
@@ -50,7 +50,7 @@ The binomial theorem is the [44th](literature.100-theorems.md#44) theorem on
 ```agda
 binomial-sum-Commutative-Semiring :
   {l : Level} (A : Commutative-Semiring l)
-  (n : ℕ) (f : functional-vec-Commutative-Semiring A (succ-ℕ n)) →
+  (n : ℕ) (f : fin-sequence-type-Commutative-Semiring A (succ-ℕ n)) →
   type-Commutative-Semiring A
 binomial-sum-Commutative-Semiring A =
   binomial-sum-Semiring (semiring-Commutative-Semiring A)
@@ -66,14 +66,14 @@ module _
   where
 
   binomial-sum-one-element-Commutative-Semiring :
-    (f : functional-vec-Commutative-Semiring A 1) →
+    (f : fin-sequence-type-Commutative-Semiring A 1) →
     binomial-sum-Commutative-Semiring A 0 f ＝
-    head-functional-vec-Commutative-Semiring A 0 f
+    head-fin-sequence-type-Commutative-Semiring A 0 f
   binomial-sum-one-element-Commutative-Semiring =
     binomial-sum-one-element-Semiring (semiring-Commutative-Semiring A)
 
   binomial-sum-two-elements-Commutative-Semiring :
-    (f : functional-vec-Commutative-Semiring A 2) →
+    (f : fin-sequence-type-Commutative-Semiring A 2) →
     binomial-sum-Commutative-Semiring A 1 f ＝
     add-Commutative-Semiring A (f (zero-Fin 1)) (f (one-Fin 1))
   binomial-sum-two-elements-Commutative-Semiring =
@@ -88,7 +88,7 @@ module _
   where
 
   htpy-binomial-sum-Commutative-Semiring :
-    (n : ℕ) {f g : functional-vec-Commutative-Semiring A (succ-ℕ n)} →
+    (n : ℕ) {f g : fin-sequence-type-Commutative-Semiring A (succ-ℕ n)} →
     (f ~ g) →
     binomial-sum-Commutative-Semiring A n f ＝
     binomial-sum-Commutative-Semiring A n g
@@ -105,7 +105,7 @@ module _
 
   left-distributive-mul-binomial-sum-Commutative-Semiring :
     (n : ℕ) (x : type-Commutative-Semiring A)
-    (f : functional-vec-Commutative-Semiring A (succ-ℕ n)) →
+    (f : fin-sequence-type-Commutative-Semiring A (succ-ℕ n)) →
     mul-Commutative-Semiring A x (binomial-sum-Commutative-Semiring A n f) ＝
     binomial-sum-Commutative-Semiring A n
       ( λ i → mul-Commutative-Semiring A x (f i))
@@ -114,7 +114,7 @@ module _
       ( semiring-Commutative-Semiring A)
 
   right-distributive-mul-binomial-sum-Commutative-Semiring :
-    (n : ℕ) (f : functional-vec-Commutative-Semiring A (succ-ℕ n)) →
+    (n : ℕ) (f : fin-sequence-type-Commutative-Semiring A (succ-ℕ n)) →
     (x : type-Commutative-Semiring A) →
     mul-Commutative-Semiring A (binomial-sum-Commutative-Semiring A n f) x ＝
     binomial-sum-Commutative-Semiring A n

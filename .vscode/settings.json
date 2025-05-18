@@ -52,7 +52,8 @@
 
   // File type specific
   "files.associations": {
-    "*.lock": "json"
+    "*.lock": "json",
+    "*.bib": "bibtex"
   },
 
   "[agda]": {
@@ -110,5 +111,12 @@
     "editor.formatOnSave": false,
     "editor.formatOnType": false,
     "editor.formatOnPaste": false
+  },
+
+  "[bibtex]": {
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false,
+    "editor.formatOnPaste": false,
+    "editor.defaultFormatter": null
   }
 }
