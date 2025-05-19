@@ -229,7 +229,8 @@ module _
             ( postcomp-hom-Precategory C (R₁ (ε₀ y)) _)
             ( naturality-natural-transformation-Precategory C C
               ( id-functor-Precategory C) RL η f)) ∙
-          ( inv (associative-comp-hom-Precategory C (R₁ (ε₀ y)) (η₀ (R₀ y)) f)) ∙
+          ( inv
+            ( associative-comp-hom-Precategory C (R₁ (ε₀ y)) (η₀ (R₀ y)) f)) ∙
           ( ap (precomp-hom-Precategory C f _) (rt y)) ∙
           ( left-unit-law-comp-hom-Precategory C f)
 
@@ -250,7 +251,7 @@ module _
             ( precomp-hom-Precategory D (L₁ (η₀ x)) _)
             ( inv
               ( naturality-natural-transformation-Precategory D D
-                ( LR) 
+                ( LR)
                 ( id-functor-Precategory D) ε g))) ∙
           ( associative-comp-hom-Precategory D g (ε₀ (L₀ x)) (L₁ (η₀ x))) ∙
           ( ap (postcomp-hom-Precategory D g _) (lt x)) ∙
