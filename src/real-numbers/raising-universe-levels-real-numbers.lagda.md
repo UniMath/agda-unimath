@@ -32,8 +32,6 @@ open import metric-spaces.metric-space-of-rational-numbers
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.metric-space-of-real-numbers
-open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
@@ -167,19 +165,6 @@ module _
       ( is-located-lower-upper-cut-raise-ℝ)
 ```
 
-### Raising rational numbers as real numbers
-
-```agda
-raise-real-ℚ : (l : Level) → ℚ → ℝ l
-raise-real-ℚ l q = raise-ℝ l (real-ℚ q)
-
-raise-zero-ℝ : (l : Level) → ℝ l
-raise-zero-ℝ l = raise-real-ℚ l zero-ℚ
-
-raise-one-ℝ : (l : Level) → ℝ l
-raise-one-ℝ l = raise-real-ℚ l one-ℚ
-```
-
 ## Properties
 
 ### Reals are similar to their raised-universe equivalents
@@ -198,74 +183,4 @@ opaque
 ```agda
 eq-raise-ℝ : {l : Level} → (x : ℝ l) → x ＝ raise-ℝ l x
 eq-raise-ℝ {l} x = eq-sim-ℝ (sim-raise-ℝ l x)
-```
-
-### Raising real numbers is an isometry
-
-```agda
-module _
-  {l0 : Level} (l : Level)
-  where
-
-  is-isometry-metric-space-leq-raise-ℝ :
-    is-isometry-Metric-Space
-      ( metric-space-leq-ℝ l0)
-      ( metric-space-leq-ℝ (l0 ⊔ l))
-      ( raise-ℝ l)
-  pr1 (is-isometry-metric-space-leq-raise-ℝ d x y) =
-    preserves-neighborhood-sim-ℝ
-      ( d)
-      ( x)
-      ( y)
-      ( raise-ℝ l x)
-      ( raise-ℝ l y)
-      ( sim-raise-ℝ l x)
-      ( sim-raise-ℝ l y)
-  pr2 (is-isometry-metric-space-leq-raise-ℝ d x y) =
-    preserves-neighborhood-sim-ℝ
-      ( d)
-      ( raise-ℝ l x)
-      ( raise-ℝ l y)
-      ( x)
-      ( y)
-      ( symmetric-sim-ℝ (sim-raise-ℝ l x))
-      ( symmetric-sim-ℝ (sim-raise-ℝ l y))
-
-  isometry-metric-space-leq-raise-ℝ :
-    isometry-Metric-Space
-      ( metric-space-leq-ℝ l0)
-      ( metric-space-leq-ℝ (l0 ⊔ l))
-  isometry-metric-space-leq-raise-ℝ =
-    ( raise-ℝ l , is-isometry-metric-space-leq-raise-ℝ)
-```
-
-### Raising rational numbers to real numbers is an isometry
-
-```agda
-module _
-  (l : Level)
-  where
-
-  isometry-metric-space-leq-raise-real-ℚ :
-    isometry-Metric-Space
-      ( metric-space-leq-ℚ)
-      ( metric-space-leq-ℝ l)
-  isometry-metric-space-leq-raise-real-ℚ =
-    comp-isometry-Metric-Space
-      ( metric-space-leq-ℚ)
-      ( metric-space-leq-ℝ lzero)
-      ( metric-space-leq-ℝ l)
-      ( isometry-metric-space-leq-raise-ℝ l)
-      ( isometry-metric-space-leq-real-ℚ)
-
-  is-isometry-metric-space-leq-raise-real-ℚ :
-    is-isometry-Metric-Space
-      ( metric-space-leq-ℚ)
-      ( metric-space-leq-ℝ l)
-      ( raise-real-ℚ l)
-  is-isometry-metric-space-leq-raise-real-ℚ =
-    is-isometry-map-isometry-Metric-Space
-      ( metric-space-leq-ℚ)
-      ( metric-space-leq-ℝ l)
-      ( isometry-metric-space-leq-raise-real-ℚ)
 ```
