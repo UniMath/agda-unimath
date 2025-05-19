@@ -103,7 +103,7 @@ module _
   structure-Premetric-Space-WIP = pr2 A
 
   neighborhood-prop-Premetric-Space-WIP :
-    Rational-Neighborhood-Relation l2 type-Premetric-Space-WIP
+    ℚ⁺ → Relation-Prop l2 type-Premetric-Space-WIP
   neighborhood-prop-Premetric-Space-WIP =
     pr1 structure-Premetric-Space-WIP
 
