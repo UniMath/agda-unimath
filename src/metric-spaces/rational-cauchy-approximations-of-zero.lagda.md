@@ -19,7 +19,6 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.sublinear-rational-cauchy-approximations
-open import elementary-number-theory.sublinear-rational-functions
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
