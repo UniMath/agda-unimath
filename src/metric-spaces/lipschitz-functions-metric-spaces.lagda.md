@@ -40,7 +40,6 @@ open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.total-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
 
@@ -176,42 +175,6 @@ module _
     indistinguishable-eq-Metric-Space B (f x) (f y) (H x y) (α *ℚ⁺ d)
 ```
 
-### A function from a total metric space that is α-Lipschitz for all `α : ℚ⁺` is constant
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Total-Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : map-type-Metric-Space (metric-space-Total-Metric-Space A) B)
-  where
-
-  is-constant-all-lipschitz-constant-function-Metric-Space :
-    ( (α : ℚ⁺) →
-      is-lipschitz-constant-function-Metric-Space
-        ( metric-space-Total-Metric-Space A)
-        ( B)
-        ( f)
-        ( α)) →
-    ( x y : type-Total-Metric-Space A) →
-    f x ＝ f y
-  is-constant-all-lipschitz-constant-function-Metric-Space H x y =
-    eq-indistinguishable-Metric-Space
-      ( B)
-      ( f x)
-      ( f y)
-      ( λ d →
-        rec-trunc-Prop
-          ( structure-Metric-Space B d (f x) (f y))
-          ( λ (ε , Nεxy) →
-            tr
-              ( is-upper-bound-dist-Metric-Space B (f x) (f y))
-              ( associative-mul-ℚ⁺ d (inv-ℚ⁺ ε) ε ∙
-                ap (mul-ℚ⁺ d) (left-inverse-law-mul-ℚ⁺ ε) ∙
-                right-unit-law-mul-ℚ⁺ d)
-              ( H (d *ℚ⁺ inv-ℚ⁺ ε) ε x y Nεxy))
-          ( is-total-metric-space-Total-Metric-Space A x y))
-```
-
 ### Short functions are Lipschitz functions with Lipschitz constant equal to 1
 
 ```agda
@@ -253,7 +216,7 @@ module _
     lipschitz-constant-function-Metric-Space A B f →
     modulus-of-uniform-continuity-map-Metric-Space A B f
   modulus-of-uniform-continuity-lipschitz-constant-function-Metric-Space
-    (α , L) =
+    ( α , L) =
     ( mul-ℚ⁺ (inv-ℚ⁺ α)) ,
     ( λ x d y H →
       tr

@@ -176,8 +176,3 @@ module _
     ( symmetric-bounded-dist-Metric-Space A) ,
     ( transitive-bounded-dist-Metric A)
 ```
-
-## See also
-
-- [Total metric spaces](metric-spaces.total-metric-spaces.md) are metric spaces
-  where all elements are at bounded distance.
