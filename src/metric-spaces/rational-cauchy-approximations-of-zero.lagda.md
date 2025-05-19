@@ -46,7 +46,7 @@ are
 the
 [metric space of rational numbers](metric-spaces.metric-space-of-rational-numbers.md)
 that [converge](metric-spaces.convergent-cauchy-approximations-metric-spaces.md)
-to [zero-ℚ](elementary-number-theory.rational-numbers.md). The type of rational
+to [`zero-ℚ`](elementary-number-theory.rational-numbers.md). The type of rational
 Cauchy approximations of zero is equivalent to the type of
 [sublinear rational Cauchy approximations](metric-spaces.sublinear-approximation-ℚ.md).
 
@@ -110,7 +110,7 @@ abstract
   is-sublinear-is-zero-cauchy-approximation-ℚ :
     (f : cauchy-approximation-ℚ) →
     is-zero-cauchy-approximation-ℚ f →
-    ( is-sublinear-approximation-ℚ (map-cauchy-approximation-ℚ f))
+    is-sublinear-approximation-ℚ (map-cauchy-approximation-ℚ f)
   is-sublinear-is-zero-cauchy-approximation-ℚ f H ε =
     tr
       ( λ y → leq-ℚ y (rational-ℚ⁺ ε))
