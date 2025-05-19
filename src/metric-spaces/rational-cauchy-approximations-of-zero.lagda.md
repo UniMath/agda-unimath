@@ -171,7 +171,7 @@ module _
     ( is-zero-cauchy-approximation-is-sublinear-approximation-ℚ)
 ```
 
-### A rational Cauchy approximation `f` converges to some `x : ℚ` if and only if the map `ε ↦ dist-ℚ (f ε) x` is sublinear, i.e. a Cauchy approximation of zero
+### A rational Cauchy approximation `f` converges to some `x : ℚ` if and only if the map `ε ↦ dist-ℚ (f ε) x` is sublinear, i.e., a Cauchy approximation of zero
 
 ```agda
 module _

@@ -1,4 +1,4 @@
-# Rational sequences approximationg zero
+# Rational sequences approximating zero
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -45,8 +45,8 @@ open import metric-spaces.sequences-metric-spaces
 A [sequence](foundation.sequences.md) of
 [rational numbers](elementary-number-theory.rational-numbers.md) is a
 {{#concept "zero approximation" Disambiguation="sequence of rational numbers" Agda=zero-approximation-sequence-ℚ}}
-if it [converges](metric-spaces.limits-of-sequences-metric-spaces.md) to zero-ℚ
-in the
+if it [converges](metric-spaces.limits-of-sequences-metric-spaces.md) to
+`zero-ℚ` in the
 [standard metric space of rational numbers](metric-spaces.metric-space-of-rational-numbers.md).
 
 ## Definitions

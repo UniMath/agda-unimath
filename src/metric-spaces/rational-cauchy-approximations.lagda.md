@@ -77,7 +77,7 @@ bound-dist-map-cauchy-approximation-ℚ :
     ( rational-dist-ℚ
       ( map-cauchy-approximation-ℚ f ε)
       ( map-cauchy-approximation-ℚ f δ))
-    (rational-ℚ⁺ (ε +ℚ⁺ δ))
+    ( rational-ℚ⁺ (ε +ℚ⁺ δ))
 bound-dist-map-cauchy-approximation-ℚ f ε δ =
   leq-dist-neighborhood-leq-ℚ
     ( ε +ℚ⁺ δ)
