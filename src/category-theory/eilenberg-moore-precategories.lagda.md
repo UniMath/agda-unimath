@@ -1,7 +1,7 @@
 # The Eilenberg-Moore precategory
 
 ```agda
-module category-theory.eilenberg-moore-precategory where
+module category-theory.eilenberg-moore-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -65,11 +65,11 @@ module _
     type-Set (hom-set-em-monad-Precategory a b)
 
   comp-hom-em-monad-Precategory :
-    {a b c : obj-em-monad-Precategory}
+    (a b c : obj-em-monad-Precategory)
     (g : hom-em-monad-Precategory b c)
     (f : hom-em-monad-Precategory a b) →
     hom-em-monad-Precategory a c
-  comp-hom-em-monad-Precategory {a} {b} {c} g f =
+  comp-hom-em-monad-Precategory a b c g f =
     comp-morphism-monad-algebra-Precategory C T a b c g f
 
   id-hom-em-monad-Precategory :
@@ -87,42 +87,42 @@ module _
       ( inv (preserves-id-endofunctor-monad-Precategory C T _)))
 
   associative-comp-hom-em-monad-Precategory :
-    {x y z w : obj-em-monad-Precategory}
+    (x y z w : obj-em-monad-Precategory)
     (h : hom-em-monad-Precategory z w)
     (g : hom-em-monad-Precategory y z)
     (f : hom-em-monad-Precategory x y) →
-    (comp-hom-em-monad-Precategory {x} {y} {w}
-      ( comp-hom-em-monad-Precategory {y} {z} {w} h g)
+    (comp-hom-em-monad-Precategory x y w
+      ( comp-hom-em-monad-Precategory y z w h g)
       ( f)) ＝
-    (comp-hom-em-monad-Precategory {x} {z} {w}
+    (comp-hom-em-monad-Precategory x z w
       ( h)
-      ( comp-hom-em-monad-Precategory {x} {y} {z} g f))
-  associative-comp-hom-em-monad-Precategory h g f =
+      ( comp-hom-em-monad-Precategory x y z g f))
+  associative-comp-hom-em-monad-Precategory x y z w h g f =
     eq-pair-Σ
       ( associative-comp-hom-Precategory C _ _ _)
       ( eq-is-prop (is-set-hom-Precategory C _ _ _ _))
 
   left-unit-law-comp-hom-em-monad-Precategory :
-    {a b : obj-em-monad-Precategory}
+    (a b : obj-em-monad-Precategory)
     (f : hom-em-monad-Precategory a b) →
-    ( comp-hom-em-monad-Precategory {a} {b} {b}
+    ( comp-hom-em-monad-Precategory a b b
       ( id-hom-em-monad-Precategory b)
       ( f)) ＝
     ( f)
-  left-unit-law-comp-hom-em-monad-Precategory {a} {b} f =
+  left-unit-law-comp-hom-em-monad-Precategory a b f =
     eq-pair-Σ
       ( left-unit-law-comp-hom-Precategory C
         ( hom-morphism-monad-algebra-Precategory C T a b f))
       ( eq-is-prop (is-set-hom-Precategory C _ _ _ _))
 
   right-unit-law-comp-hom-em-monad-Precategory :
-    {a b : obj-em-monad-Precategory}
+    (a b : obj-em-monad-Precategory)
     (f : hom-em-monad-Precategory a b) →
-    ( comp-hom-em-monad-Precategory {a} {a} {b}
+    ( comp-hom-em-monad-Precategory a a b
       ( f)
       ( id-hom-em-monad-Precategory a)) ＝
     ( f)
-  right-unit-law-comp-hom-em-monad-Precategory {a} {b} f =
+  right-unit-law-comp-hom-em-monad-Precategory a b f =
     eq-pair-Σ
       ( right-unit-law-comp-hom-Precategory C
         ( hom-morphism-monad-algebra-Precategory C T a b f))
@@ -133,12 +133,12 @@ module _
     make-Precategory
       obj-em-monad-Precategory
       hom-set-em-monad-Precategory
-      (λ {a} {b} {c} g f → comp-hom-em-monad-Precategory {a} {b} {c} g f)
+      (λ {a} {b} {c} g f → comp-hom-em-monad-Precategory a b c g f)
       id-hom-em-monad-Precategory
       (λ {a} {b} {c} {d} h g f →
-        ( associative-comp-hom-em-monad-Precategory {a} {b} {c} {d} h g f))
-      (λ {a} {b} f → left-unit-law-comp-hom-em-monad-Precategory {a} {b} f)
-      (λ {a} {b} f → right-unit-law-comp-hom-em-monad-Precategory {a} {b} f)
+        ( associative-comp-hom-em-monad-Precategory a b c d h g f))
+      (λ {a} {b} f → left-unit-law-comp-hom-em-monad-Precategory a b f)
+      (λ {a} {b} f → right-unit-law-comp-hom-em-monad-Precategory a b f)
 
   obj-functor-to-em-monad-Precategory :
     obj-Precategory C → obj-Precategory em-monad-Precategory
@@ -154,29 +154,83 @@ module _
       (obj-functor-to-em-monad-Precategory x)
       (obj-functor-to-em-monad-Precategory y)
   hom-functor-to-em-monad-Precategory f =
-    (T₁ f) , naturality-mul-monad-Precategory C T f
+    ( T₁ f) ,
+    ( naturality-mul-monad-Precategory C T f)
+
+  preserves-id-functor-to-em-monad-Precategory :
+    (x : obj-Precategory C) →
+    hom-functor-to-em-monad-Precategory (id-hom-Precategory C {x}) ＝
+    id-hom-em-monad-Precategory (obj-functor-to-em-monad-Precategory x)
+  preserves-id-functor-to-em-monad-Precategory x =
+    eq-pair-Σ
+      ( preserves-id-endofunctor-monad-Precategory C T x)
+      ( eq-is-prop (is-set-hom-Precategory C _ _ _ _))
+
+  preserves-comp-functor-to-em-monad-Precategory :
+    {x y z : obj-Precategory C} →
+    (g : hom-Precategory C y z) (f : hom-Precategory C x y) →
+    hom-functor-to-em-monad-Precategory (comp-hom-Precategory C g f) ＝
+    comp-hom-em-monad-Precategory 
+      ( obj-functor-to-em-monad-Precategory x)
+      ( obj-functor-to-em-monad-Precategory y)
+      ( obj-functor-to-em-monad-Precategory z)
+      ( hom-functor-to-em-monad-Precategory g)
+      ( hom-functor-to-em-monad-Precategory f)
+  preserves-comp-functor-to-em-monad-Precategory g f =
+    eq-pair-Σ
+      ( preserves-comp-endofunctor-monad-Precategory C T g f)
+      ( eq-is-prop (is-set-hom-Precategory C _ _ _ _))
 
   functor-to-em-monad-Precategory : functor-Precategory C em-monad-Precategory
   functor-to-em-monad-Precategory =
     obj-functor-to-em-monad-Precategory ,
     hom-functor-to-em-monad-Precategory ,
-    (λ g f →
-      eq-pair-Σ
-        (preserves-comp-endofunctor-monad-Precategory C T g f)
-        (eq-is-prop (is-set-hom-Precategory C _ _ _ _))) ,
-    (λ x →
-      eq-pair-Σ
-        (preserves-id-endofunctor-monad-Precategory C T x)
-        (eq-is-prop (is-set-hom-Precategory C _ _ _ _)))
+    preserves-comp-functor-to-em-monad-Precategory ,
+    preserves-id-functor-to-em-monad-Precategory
+
+  obj-functor-from-em-monad-Precategory :
+    obj-Precategory em-monad-Precategory → obj-Precategory C
+  obj-functor-from-em-monad-Precategory = obj-monad-algebra-Precategory C T
+
+  hom-functor-from-em-monad-Precategory :
+    (x y : obj-em-monad-Precategory)
+    (f : hom-em-monad-Precategory x y) →
+    hom-Precategory C
+      ( obj-functor-from-em-monad-Precategory x)
+      ( obj-functor-from-em-monad-Precategory y)
+  hom-functor-from-em-monad-Precategory =
+    hom-morphism-monad-algebra-Precategory C T
+
+  preserves-id-functor-from-em-monad-Precategory :
+    (x : obj-em-monad-Precategory) →
+    hom-functor-from-em-monad-Precategory x x (id-hom-em-monad-Precategory x) ＝
+    id-hom-Precategory C
+  preserves-id-functor-from-em-monad-Precategory x = refl
+
+  preserves-comp-functor-from-em-monad-Precategory :
+    (x y z : obj-em-monad-Precategory)
+    (g : hom-em-monad-Precategory y z)
+    (f : hom-em-monad-Precategory x y) →
+    hom-functor-from-em-monad-Precategory x z
+      ( comp-hom-em-monad-Precategory x y z g f) ＝
+    comp-hom-Precategory C
+      ( hom-functor-from-em-monad-Precategory y z g)
+      ( hom-functor-from-em-monad-Precategory x y f)
+  preserves-comp-functor-from-em-monad-Precategory x y z g f = refl
+    
 
   functor-from-em-monad-Precategory : functor-Precategory em-monad-Precategory C
   functor-from-em-monad-Precategory =
-    (obj-monad-algebra-Precategory C T) ,
-    (λ {x} {y} f → hom-morphism-monad-algebra-Precategory C T x y f) ,
-    (λ g f → refl) ,
-    (λ x → refl)
+    obj-functor-from-em-monad-Precategory ,
+    (λ {x} {y} f → hom-functor-from-em-monad-Precategory x y f) ,
+    (λ {x} {y} {z} g f →
+      preserves-comp-functor-from-em-monad-Precategory x y z g f) ,
+    preserves-id-functor-from-em-monad-Precategory
+```
 
-  -- The unit x → Tx is exactly the unit of the monad
+The unit of the adjunction between these two functors is exactly the unit of the monad.
+
+```
   unit-em-monad-Precategory :
     natural-transformation-Precategory C C
       (id-functor-Precategory C)

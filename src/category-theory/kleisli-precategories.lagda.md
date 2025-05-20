@@ -1,7 +1,7 @@
 # The Kleisli precategory of a monad
 
 ```agda
-module category-theory.kleisli-precategory where
+module category-theory.kleisli-precategories where
 ```
 
 <details><summary>Imports</summary>
