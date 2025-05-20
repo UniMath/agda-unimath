@@ -114,6 +114,10 @@ pre-commit tool and just not stage that file.
   formatting for these file types, so you should not worry about formatting such
   files.
 
+- **BibTeX formatting:** Formats the
+  [`references.bib`](https://github.com/UniMath/agda-unimath/blob/master/references.bib)
+  file using [`bibtex-tidy`](https://github.com/FlamingTempura/bibtex-tidy).
+
 ## The `make website` tool
 
 After you complete the `make pre-commit` process, you can run `make website` to

@@ -219,3 +219,50 @@ abstract
       ( x-y≤z)
       ( inv-tr (λ w → leq-ℝ w z) (distributive-neg-diff-ℝ _ _) y-x≤z)
 ```
+
+### Addition preserves distance between real numbers
+
+```agda
+abstract
+  preserves-dist-left-add-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    sim-ℝ
+      ( dist-ℝ (add-ℝ x y) (add-ℝ x z))
+      ( dist-ℝ y z)
+  preserves-dist-left-add-ℝ x y z =
+    similarity-reasoning-ℝ
+      dist-ℝ (x +ℝ y) (x +ℝ z)
+      ~ℝ abs-ℝ ((x -ℝ x) +ℝ (y -ℝ z))
+        by sim-eq-ℝ (ap abs-ℝ (interchange-law-diff-add-ℝ x y x z))
+      ~ℝ abs-ℝ (zero-ℝ +ℝ y -ℝ z)
+        by
+          preserves-sim-abs-ℝ
+            ( preserves-sim-right-add-ℝ
+              ( y -ℝ z)
+              ( x -ℝ x)
+              ( zero-ℝ)
+              ( right-inverse-law-add-ℝ x))
+      ~ℝ dist-ℝ y z
+        by sim-eq-ℝ (ap abs-ℝ (left-unit-law-add-ℝ (y -ℝ z)))
+
+  preserves-dist-right-add-ℝ :
+    {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) →
+    sim-ℝ
+      ( dist-ℝ (add-ℝ x z) (add-ℝ y z))
+      ( dist-ℝ x y)
+  preserves-dist-right-add-ℝ z x y =
+    similarity-reasoning-ℝ
+      dist-ℝ (x +ℝ z) (y +ℝ z)
+      ~ℝ abs-ℝ ((x -ℝ y) +ℝ (z -ℝ z))
+        by sim-eq-ℝ (ap abs-ℝ (interchange-law-diff-add-ℝ x z y z))
+      ~ℝ abs-ℝ (x -ℝ y +ℝ zero-ℝ)
+        by
+          preserves-sim-abs-ℝ
+            ( preserves-sim-left-add-ℝ
+              ( x -ℝ y)
+              ( z -ℝ z)
+              ( zero-ℝ)
+              ( right-inverse-law-add-ℝ z))
+      ~ℝ dist-ℝ x y
+        by sim-eq-ℝ (ap abs-ℝ (right-unit-law-add-ℝ (x -ℝ y)))
+```

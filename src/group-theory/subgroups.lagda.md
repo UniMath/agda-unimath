@@ -657,8 +657,8 @@ module _
 
 The subset consisting of elements `x : G` such that `(1 ＝ x) ∨ P` holds is
 always a subgroup of `G`. This subgroup consists only of the unit element if `P`
-is false, and it is the [full subgroup](group-theory.full-subgroups.md)`if`P` is
-true.
+is false, and it is the [full subgroup](group-theory.full-subgroups.md) if `P`
+is true.
 
 ```agda
 module _

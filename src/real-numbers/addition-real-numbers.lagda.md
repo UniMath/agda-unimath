@@ -502,3 +502,14 @@ abelian-group-add-ℝ-lzero =
   ( group-add-ℝ-lzero ,
     commutative-add-ℝ)
 ```
+
+## See also
+
+- In
+  [The addition isometry on real numbers](real-numbers.isometry-addition-real-numbers.md)
+  we show that addition is an
+  [isometry](metric-spaces.isometries-metric-spaces.md) from the
+  [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md)
+  to the
+  [metric space of isometries](metric-spaces.metric-space-of-isometries-metric-spaces.md)
+  of `ℝ`.

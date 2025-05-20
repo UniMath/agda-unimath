@@ -44,7 +44,7 @@ if any of the following three [equivalent](foundation.logical-equivalences.md)
   between their image;
 - the premetric on the domain of `f` is
   [finer](metric-spaces.ordering-premetric-structures.md) than the preimage of
-  the premetric on its domain by `f`.
+  the metric on its codomain by `f`.
 
 ## Definitions
 
