@@ -1,3 +1,7 @@
+Kratowski->Kuratowski
+Kratowsky->Kuratowski
+Kuratowsky->Kuratowski
+Lavwere->Lawvere
 anamorhpism->anamorphism
 anamorhpisms->anamorphisms
 anamorphsim->anamorphism
@@ -7,6 +11,8 @@ automorhpism->automorphism
 automorhpisms->automorphisms
 automorphsim->automorphism
 automorphsims->automorphisms
+cagegory->category
+consistsing->consisting
 eacy->each,easy
 endomorhpism->endomorphism
 endomorhpisms->endomorphisms
