@@ -22,6 +22,7 @@ open import elementary-number-theory.sublinear-rational-cauchy-approximations
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -136,41 +137,6 @@ sublinear-zero-cauchy-approximation-ℚ f =
     ( is-zero-limit-approximation-zero-cauchy-approximation-ℚ f))
 ```
 
-### Any sublinear map `ℚ⁺ → ℚ` is a Cauchy approximation of zero
-
-```agda
-module _
-  (f : sublinear-approximation-ℚ)
-  where
-
-  abstract
-    is-zero-cauchy-approximation-is-sublinear-approximation-ℚ :
-      is-zero-cauchy-approximation-ℚ
-        ( cauchy-sublinear-approximation-ℚ f)
-    is-zero-cauchy-approximation-is-sublinear-approximation-ℚ ε δ =
-      neighborhood-leq-leq-dist-ℚ
-        ( ε +ℚ⁺ δ)
-        ( map-sublinear-approximation-ℚ f ε)
-        ( zero-ℚ)
-        ( transitive-leq-ℚ
-          ( rational-abs-ℚ
-            ((map-sublinear-approximation-ℚ f ε) -ℚ zero-ℚ))
-          ( rational-ℚ⁺ ε)
-          ( rational-ℚ⁺ (ε +ℚ⁺ δ))
-          ( leq-le-ℚ⁺ {ε} {ε +ℚ⁺ δ} (le-left-add-ℚ⁺ ε δ))
-          ( inv-tr
-            ( λ y → leq-ℚ (rational-ℚ⁰⁺ y) (rational-ℚ⁺ ε))
-            ( right-zero-law-dist-ℚ
-              (map-sublinear-approximation-ℚ f ε))
-            ( is-sublinear-map-sublinear-approximation-ℚ f ε)))
-
-  zero-cauchy-approximation-sublinear-approximation-ℚ :
-    zero-cauchy-approximation-ℚ
-  zero-cauchy-approximation-sublinear-approximation-ℚ =
-    ( cauchy-sublinear-approximation-ℚ f) ,
-    ( is-zero-cauchy-approximation-is-sublinear-approximation-ℚ)
-```
-
 ### A rational Cauchy approximation `f` converges to some `x : ℚ` if and only if the map `ε ↦ dist-ℚ (f ε) x` is sublinear, i.e., a Cauchy approximation of zero
 
 ```agda
@@ -202,6 +168,16 @@ module _
             ( map-cauchy-approximation-ℚ f ε)
             ( x)
             ( H ε)))
+
+    sublinear-map-dist-is-limit-cauchy-approximation-ℚ :
+      is-limit-cauchy-approximation-Metric-Space
+        ( metric-space-leq-ℚ)
+        ( f)
+        ( x) →
+      sublinear-approximation-ℚ
+    sublinear-map-dist-is-limit-cauchy-approximation-ℚ L =
+      ( map-dist-value-cauchy-approximation-ℚ) ,
+      ( is-sublinear-map-dist-is-limit-cauchy-approximation-ℚ L)
 
     is-limit-is-sublinear-map-dist-cauchy-approximation-ℚ :
       is-sublinear-approximation-ℚ map-dist-value-cauchy-approximation-ℚ →
@@ -257,10 +233,9 @@ module _
         ( x)) →
       is-zero-cauchy-approximation-ℚ
         ( cauchy-approximation-dist-is-limit-cauchy-approximation-ℚ H)
-    is-zero-approximation-dist-is-limit-cauchy-approximation-ℚ H =
-      is-zero-cauchy-approximation-is-sublinear-approximation-ℚ
-        ( ( map-dist-value-cauchy-approximation-ℚ) ,
-          ( is-sublinear-map-dist-is-limit-cauchy-approximation-ℚ H))
+    is-zero-approximation-dist-is-limit-cauchy-approximation-ℚ =
+      is-zero-limit-map-sublinear-approximation-ℚ ∘
+      sublinear-map-dist-is-limit-cauchy-approximation-ℚ
 
     is-limit-is-zero-approximation-dist-cauchy-approximation-ℚ :
       ( H : is-cauchy-approximation-Metric-Space

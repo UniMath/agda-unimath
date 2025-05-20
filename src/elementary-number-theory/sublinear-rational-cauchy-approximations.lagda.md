@@ -11,8 +11,10 @@ module elementary-number-theory.sublinear-rational-cauchy-approximations where
 ```agda
 open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 
@@ -23,6 +25,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
 open import metric-spaces.rational-cauchy-approximations
@@ -117,4 +120,35 @@ cauchy-sublinear-approximation-ℚ f =
   cauchy-approximation-is-sublinear-approximation-ℚ
     ( map-sublinear-approximation-ℚ f)
     ( is-sublinear-map-sublinear-approximation-ℚ f)
+```
+
+### A sublinear map `ℚ⁺ → ℚ` converges to zero
+
+```agda
+module _
+  (f : sublinear-approximation-ℚ)
+  where
+
+  abstract
+    is-zero-limit-map-sublinear-approximation-ℚ :
+      is-limit-cauchy-approximation-Metric-Space
+        ( metric-space-leq-ℚ)
+        ( cauchy-sublinear-approximation-ℚ f)
+        ( zero-ℚ)
+    is-zero-limit-map-sublinear-approximation-ℚ ε δ =
+      neighborhood-leq-leq-dist-ℚ
+        ( ε +ℚ⁺ δ)
+        ( map-sublinear-approximation-ℚ f ε)
+        ( zero-ℚ)
+        ( transitive-leq-ℚ
+          ( rational-abs-ℚ
+            ( (map-sublinear-approximation-ℚ f ε) -ℚ zero-ℚ))
+          ( rational-ℚ⁺ ε)
+          ( rational-ℚ⁺ (ε +ℚ⁺ δ))
+          ( leq-le-ℚ⁺ {ε} {ε +ℚ⁺ δ} (le-left-add-ℚ⁺ ε δ))
+          ( inv-tr
+            ( λ y → leq-ℚ (rational-ℚ⁰⁺ y) (rational-ℚ⁺ ε))
+            ( right-zero-law-dist-ℚ
+              ( map-sublinear-approximation-ℚ f ε))
+            ( is-sublinear-map-sublinear-approximation-ℚ f ε)))
 ```
