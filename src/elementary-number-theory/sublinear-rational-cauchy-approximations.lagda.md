@@ -40,7 +40,9 @@ A [rational](elementary-number-theory.rational-numbers.md) map from the
 `f : ℚ⁺ → ℚ` is
 {{#concept "sublinear" Disambiguation="rational approximation" Agda=sublinear-approximation-ℚ}}
 if `|f ε| ≤ ε` for all `ε : ℚ⁺`. Any sublinear map is a
-[rational Cauchy approximation](metric-spaces.rational-cauchy-approximations.md).
+[rational Cauchy approximation](metric-spaces.rational-cauchy-approximations.md)
+[converging](metric-spaces.convergent-cauchy-approximations-metric-spaces.md) to
+zero.
 
 ## Definitions
 
@@ -152,3 +154,10 @@ module _
               ( map-sublinear-approximation-ℚ f ε))
             ( is-sublinear-map-sublinear-approximation-ℚ f ε)))
 ```
+
+## See also
+
+- The type of
+  [rational Cauchy approximations of zero](metric-spaces.rational-cauchy-approximations-of-zero.md),
+  [equivalent](foundation.equivalences.md) to the type of sublinear rational
+  Cauchy approximations.
