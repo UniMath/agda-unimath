@@ -22,9 +22,14 @@ open import elementary-number-theory.sublinear-rational-cauchy-approximations
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -135,6 +140,44 @@ sublinear-zero-cauchy-approximation-ℚ f =
   ( is-sublinear-is-zero-cauchy-approximation-ℚ
     ( approximation-zero-cauchy-approximation-ℚ f)
     ( is-zero-limit-approximation-zero-cauchy-approximation-ℚ f))
+```
+
+### The type of rational Cauchy approximations of zero is equivalent to the type of sublinear approximations
+
+```agda
+zero-cauchy-approximation-sublinear-approximation-ℚ :
+  sublinear-approximation-ℚ →
+  zero-cauchy-approximation-ℚ
+zero-cauchy-approximation-sublinear-approximation-ℚ f =
+  ( cauchy-sublinear-approximation-ℚ f) ,
+  ( is-zero-limit-map-sublinear-approximation-ℚ f)
+
+section-zero-cauchy-approximation-sublinear-approximation-ℚ :
+  section zero-cauchy-approximation-sublinear-approximation-ℚ
+section-zero-cauchy-approximation-sublinear-approximation-ℚ =
+  ( sublinear-zero-cauchy-approximation-ℚ) ,
+  ( λ f →
+    eq-type-subtype
+      ( subtype-zero-cauchy-approximation-ℚ)
+      ( eq-type-subtype
+        ( is-cauchy-approximation-prop-Metric-Space metric-space-leq-ℚ)
+        ( refl)))
+
+retraction-zero-cauchy-approximation-sublinear-approximation-ℚ :
+  retraction zero-cauchy-approximation-sublinear-approximation-ℚ
+retraction-zero-cauchy-approximation-sublinear-approximation-ℚ =
+  ( sublinear-zero-cauchy-approximation-ℚ) ,
+  ( λ f →
+    eq-type-subtype
+      ( is-sublinear-prop-approximation-ℚ)
+      ( refl))
+
+equiv-sublinear-zero-cauchy-approximation-ℚ :
+  sublinear-approximation-ℚ ≃ zero-cauchy-approximation-ℚ
+equiv-sublinear-zero-cauchy-approximation-ℚ =
+  zero-cauchy-approximation-sublinear-approximation-ℚ ,
+  section-zero-cauchy-approximation-sublinear-approximation-ℚ ,
+  retraction-zero-cauchy-approximation-sublinear-approximation-ℚ
 ```
 
 ### A rational Cauchy approximation `f` converges to some `x : ℚ` if and only if the map `ε ↦ dist-ℚ (f ε) x` is sublinear, i.e., a Cauchy approximation of zero
