@@ -15,7 +15,7 @@ open import category-theory.precategory-of-functors
 open import category-theory.products-of-precategories
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
+open import foundation.equality-cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -132,7 +132,7 @@ module CurryFunctor
           ＝ hom-functor-Precategory CD E F (comp-hom-Precategory CD
               (f , id-hom-Precategory D)
               (id-hom-Precategory C , g))
-            by ap (hom-functor-Precategory CD E F) (identity-product
+            by ap (hom-functor-Precategory CD E F) (eq-pair
               (left-unit-law-comp-hom-Precategory C f
                 ∙ inv (right-unit-law-comp-hom-Precategory C f))
               (right-unit-law-comp-hom-Precategory D g

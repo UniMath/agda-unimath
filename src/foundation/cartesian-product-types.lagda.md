@@ -31,24 +31,6 @@ tr-product :
 tr-product B C refl u = refl
 ```
 
-### Identities of products
-
-```agda
-identity-product :
-  {l1 l2 : Level}
-  {A : UU l1} {B : UU l2}
-  {a a' : A} {b b' : B}
-  → a ＝ a' → b ＝ b' → (a , b) ＝ (a' , b')
-identity-product refl refl = refl
-
-identity-product' :
-  {l1 l2 : Level}
-  {A : UU l1} {B : UU l2}
-  {ab ab' : A × B}
-  → pr1 ab ＝ pr1 ab' → pr2 ab ＝ pr2 ab' → ab ＝ ab'
-identity-product' refl refl = refl
-```
-
 ### Subuniverses closed under cartesian product types
 
 ```agda
