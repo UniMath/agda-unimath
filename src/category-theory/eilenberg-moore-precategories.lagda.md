@@ -170,7 +170,7 @@ module _
     {x y z : obj-Precategory C} →
     (g : hom-Precategory C y z) (f : hom-Precategory C x y) →
     hom-functor-to-em-monad-Precategory (comp-hom-Precategory C g f) ＝
-    comp-hom-em-monad-Precategory 
+    comp-hom-em-monad-Precategory
       ( obj-functor-to-em-monad-Precategory x)
       ( obj-functor-to-em-monad-Precategory y)
       ( obj-functor-to-em-monad-Precategory z)
@@ -217,7 +217,6 @@ module _
       ( hom-functor-from-em-monad-Precategory y z g)
       ( hom-functor-from-em-monad-Precategory x y f)
   preserves-comp-functor-from-em-monad-Precategory x y z g f = refl
-    
 
   functor-from-em-monad-Precategory : functor-Precategory em-monad-Precategory C
   functor-from-em-monad-Precategory =
@@ -228,9 +227,10 @@ module _
     preserves-id-functor-from-em-monad-Precategory
 ```
 
-The unit of the adjunction between these two functors is exactly the unit of the monad.
+The unit of the adjunction between these two functors is exactly the unit of the
+monad.
 
-```
+```agda
   unit-em-monad-Precategory :
     natural-transformation-Precategory C C
       (id-functor-Precategory C)
