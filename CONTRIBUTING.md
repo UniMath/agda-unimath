@@ -38,6 +38,16 @@ Below is a summary of the tasks this tool performs:
 
 - **YAML**: Checks yaml files for parseable syntax.
 
+- **Spellcheck with codespell**: Checks for spellingmistakes with the
+  [codespell](https://github.com/codespell-project/codespell) tool. This is a
+  permissible spellchecker that only reports known misspellings, rather than
+  words it does not recognize. I.e., it is a blacklist based spellchecker. We
+  also maintain a library-defined dictionary of misspellings at:
+  [`codespell-dictionary.txt`](https://github.com/UniMath/agda-unimath/blob/master/codespell-dictionary.txt).
+
+- **Sort codespell dictionary and ignore files**: Sorts and formats the
+  associated codespell dictionary and ignore files.
+
 - **Case conflicts**: Checks for files that would conflict in case-insensitive
   filesystems.
 
