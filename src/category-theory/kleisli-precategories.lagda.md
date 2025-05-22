@@ -24,11 +24,12 @@ open import foundation-core.function-types
 
 ## Idea
 
-The {{#concept "Kleisli precategory"}} of a
-[monad on a precategory](category-theory.monads-on-precategories) `T : C → C` is
-the precategory of free `T`-algebras and their morphisms; we view it as the
-precategory with the same objects as `C` but with morphisms `X → Y` the
-morphisms `X → TY` in `C`. Composition is given by:
+The
+{{#concept "Kleisli precategory" Disambiguation="of a monad on a precategory" Agda=kleisli-monad-Precategory WDID=Q1773982 WD="Kleisli category"}}
+of a [monad on a precategory](category-theory.monads-on-precategories)
+`T : C → C` is the precategory of free `T`-algebras and their morphisms; we view
+it as the precategory with the same objects as `C` but with morphisms `X → Y`
+the morphisms `X → TY` in `C`. Composition is given by:
 
 ```text
      f       g        μZ
