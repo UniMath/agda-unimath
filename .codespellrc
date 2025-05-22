@@ -1,4 +1,5 @@
 [codespell]
+skip = .git,*.css,*.bib
 ignore-words = codespell-ignore.txt
 
 # Ignore all words with a capital letter after the first character
