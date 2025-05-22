@@ -54,12 +54,9 @@ repos:
     hooks:
       - id: sort-codespell-files
         name: Sort codespell dictionary and ignore files
-        entry: bash -c 'sort -o "$1" "$1" && sort -o "$2" "$2"' --
-        args: [codespell-dictionary.txt, codespell-ignore.txt]
+        entry: bash -c 'for f in "$@"; do sort -o "@f" "@f"; done' --
         language: system
-        files: ^(codespell-dictionary\.txt|codespell-ignore\.txt)$
-        pass_filenames: false
-
+        files: ^codespell-(dictionary|ignore)\.txt$
       - id: markdown-conventions
         name: Markdown conventions
         entry: scripts/markdown_conventions.py
