@@ -17,29 +17,7 @@ repos:
     rev: v2.4.1
     hooks:
       - id: codespell
-        name: Spellcheck with codespell (library-defined)
-        files: ^src\/
-        types_or: [text, markdown]
-        args:
-          [
-            '--config',
-            '.codespellrc',
-            '--dictionary',
-            'codespell-dictionary.txt',
-          ]
-  - repo: https://github.com/codespell-project/codespell
-    rev: v2.4.1
-    hooks:
-      - id: codespell
-        name: Spellcheck with codespell (builtin)
-        files: ^src\/
-        types_or: [text, markdown]
-        args: ['--config', '.codespellrc', '--dictionary', '-']
-  - repo: https://github.com/codespell-project/codespell
-    rev: v2.4.1
-    hooks:
-      - id: codespell
-        name: Spellcheck with codespell (additional builtin)
+        name: Spellcheck with codespell
         files: ^src\/
         types_or: [text, markdown]
         args:
@@ -47,7 +25,9 @@ repos:
             '--config',
             '.codespellrc',
             '--builtin',
-            'informal,usage,rare,code,names,en-GB_to_en-US',
+            'clear,rare,informal,usage,code,names,en-GB_to_en-US',
+            '--dictionary',
+            'codespell-dictionary.txt,-',
           ]
 
   - repo: local
