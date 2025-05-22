@@ -1,4 +1,4 @@
-# Grant acknowledgements
+# Grant acknowledgments
 
 The agda-unimath maintainers and contributors are grateful for funding from the
 following grants:

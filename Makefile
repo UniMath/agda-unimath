@@ -22,7 +22,7 @@ CONTRIBUTORS_FILE := CONTRIBUTORS.toml
 # css flag, which only affects how files with the .agda extension are processed.
 # However, the HTML backend also processes referenced library files
 # (Agda.Primitive at the time of writing), which is a pure Agda file, and
-# setting higlight=code would make it not recognized as code at all, so the
+# setting highlight=code would make it not recognized as code at all, so the
 # resulting page looks garbled. With highlight=auto and the default Agda.css, it
 # at is at least in a proper code block with syntax highlighting, albeit without
 # the agda-unimath chrome.
@@ -40,7 +40,7 @@ METAFILES := \
 	CONTRIBUTORS.md \
 	FILE-CONVENTIONS.md \
 	DESIGN-PRINCIPLES.md \
-	GRANT-ACKNOWLEDGEMENTS.md \
+	GRANT-ACKNOWLEDGMENTS.md \
 	HOME.md \
 	HOWTO-INSTALL.md \
 	LICENSE.md \
