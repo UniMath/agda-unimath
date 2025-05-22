@@ -1,6 +1,6 @@
 [codespell]
-skip = .git,node_modules,*.agda
 ignore-words = codespell-ignore.txt
+
 # Ignore all words with a capital letter after the first character
 ignore-regex = ```.*?```|\b\S+[A-Z]\S*\b
 
