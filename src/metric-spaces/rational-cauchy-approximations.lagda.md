@@ -86,7 +86,7 @@ bound-dist-map-cauchy-approximation-ℚ f ε δ =
     ( is-cauchy-map-cauchy-approximation-ℚ f ε δ)
 ```
 
-### Any rational Cauchy approximation has a real limit
+### Any rational Cauchy approximation has a limit in the reals
 
 ```agda
 real-limit-cauchy-approximation-ℚ : cauchy-approximation-ℚ → ℝ lzero
