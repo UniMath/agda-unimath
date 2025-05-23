@@ -43,10 +43,10 @@ open import metric-spaces.sequences-metric-spaces
 ## Idea
 
 A [sequence](foundation.sequences.md) of
-[rational numbers](elementary-number-theory.rational-numbers.md) is a
-{{#concept "zero approximation" Disambiguation="sequence of rational numbers" Agda=zero-approximation-sequence-ℚ}}
-if it [converges](metric-spaces.limits-of-sequences-metric-spaces.md) to
-zero in the
+[rational numbers](elementary-number-theory.rational-numbers.md) is an
+{{#concept "approximation of zero" Disambiguation="sequence of rational numbers" Agda=zero-approximation-sequence-ℚ}}
+if it [converges](metric-spaces.limits-of-sequences-metric-spaces.md) to 0 in
+the
 [standard metric space of rational numbers](metric-spaces.metric-space-of-rational-numbers.md).
 
 ## Definitions

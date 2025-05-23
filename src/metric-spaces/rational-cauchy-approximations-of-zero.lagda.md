@@ -52,8 +52,8 @@ are
 the
 [metric space of rational numbers](metric-spaces.metric-space-of-rational-numbers.md)
 that [converge](metric-spaces.convergent-cauchy-approximations-metric-spaces.md)
-to 0. The type of
-rational Cauchy approximations of zero is equivalent to the type of
+to 0. The type of rational Cauchy approximations of zero is equivalent to the
+type of
 [sublinear rational Cauchy approximations](metric-spaces.sublinear-approximation-ℚ.md).
 
 ## Definitions
