@@ -54,7 +54,7 @@ the
 that [converge](metric-spaces.convergent-cauchy-approximations-metric-spaces.md)
 to 0. The type of rational Cauchy approximations of zero is equivalent to the
 type of
-[sublinear rational Cauchy approximations](metric-spaces.sublinear-approximation-ℚ.md).
+[sublinear rational Cauchy approximations](elementary-number-theory.sublinear-rational-cauchy-approximations.md).
 
 ## Definitions
 
