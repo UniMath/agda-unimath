@@ -24,8 +24,10 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
@@ -144,6 +146,23 @@ abstract
               ( rational-dist-ℚ)
               ( commutative-mul-ℚ _ _)
               ( commutative-mul-ℚ _ _))
+```
+
+### The distance between two rational numbers is lesser than the sum of their absolute value
+
+```agda
+abstract
+  leq-dist-add-abs-ℚ : (p q : ℚ) → leq-ℚ⁰⁺ (dist-ℚ p q) (abs-ℚ p +ℚ⁰⁺ abs-ℚ q)
+  leq-dist-add-abs-ℚ p q =
+    transitive-leq-ℚ
+      ( rational-dist-ℚ p q)
+      ( (rational-abs-ℚ p) +ℚ (rational-abs-ℚ (neg-ℚ q)))
+      ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
+      ( leq-eq-ℚ
+        ( (rational-abs-ℚ p) +ℚ (rational-abs-ℚ (neg-ℚ q)))
+        ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
+        ( ap (add-ℚ (rational-abs-ℚ p) ∘ rational-ℚ⁰⁺) (abs-neg-ℚ q)))
+      ( triangle-inequality-abs-ℚ p (neg-ℚ q))
 ```
 
 ### Triangle inequality
