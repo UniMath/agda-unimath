@@ -78,6 +78,10 @@ is-acyclic-unit : is-acyclic unit
 is-acyclic-unit = is-acyclic-is-contr unit is-contr-unit
 ```
 
+### Acyclic types are inhabited
+
+> TODO
+
 ## See also
 
 - [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
