@@ -35,8 +35,7 @@ open import metric-spaces.rational-cauchy-approximations
 
 ## Idea
 
-A [rational](elementary-number-theory.rational-numbers.md) map from the
-[positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
+A map from the [positive rational numbers](elementary-number-theory.positive-rational-numbers.md) to the [rationals](elementary-number-theory.rational-numbers.md)
 `f : ℚ⁺ → ℚ` is
 {{#concept "sublinear" Disambiguation="rational approximation" Agda=sublinear-approximation-ℚ}}
 if `|f ε| ≤ ε` for all `ε : ℚ⁺`. Any sublinear map is a
