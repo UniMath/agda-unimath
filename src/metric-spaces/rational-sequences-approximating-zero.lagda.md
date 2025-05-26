@@ -44,7 +44,7 @@ open import metric-spaces.sequences-metric-spaces
 
 A [sequence](foundation.sequences.md) of
 [rational numbers](elementary-number-theory.rational-numbers.md) is an
-{{#concept "approximation of zero" Disambiguation="sequence of rational numbers" Agda=zero-approximation-sequence-ℚ}}
+{{#concept "approximation of zero" Disambiguation="sequence of rational numbers" Agda=zero-limit-sequence-ℚ}}
 if it [converges](metric-spaces.limits-of-sequences-metric-spaces.md) to 0 in
 the
 [standard metric space of rational numbers](metric-spaces.metric-space-of-rational-numbers.md).
@@ -52,32 +52,28 @@ the
 ## Definitions
 
 ```agda
-is-zero-approximation-prop-sequence-ℚ : sequence ℚ → Prop lzero
-is-zero-approximation-prop-sequence-ℚ u =
+is-zero-limit-prop-sequence-ℚ : sequence ℚ → Prop lzero
+is-zero-limit-prop-sequence-ℚ u =
   is-limit-prop-sequence-Metric-Space
     metric-space-leq-ℚ
     u
     zero-ℚ
 
-is-zero-approximation-sequence-ℚ : sequence ℚ → UU lzero
-is-zero-approximation-sequence-ℚ u =
-  type-Prop (is-zero-approximation-prop-sequence-ℚ u)
-
-zero-approximation-sequence-ℚ : UU lzero
-zero-approximation-sequence-ℚ =
-  type-subtype is-zero-approximation-prop-sequence-ℚ
+zero-limit-sequence-ℚ : UU lzero
+zero-limit-sequence-ℚ =
+  type-subtype is-zero-limit-prop-sequence-ℚ
 
 module _
-  (u : zero-approximation-sequence-ℚ)
+  (u : zero-limit-sequence-ℚ)
   where
 
-  seq-zero-approximation-sequence-ℚ : sequence ℚ
-  seq-zero-approximation-sequence-ℚ = pr1 u
+  seq-zero-limit-sequence-ℚ : sequence ℚ
+  seq-zero-limit-sequence-ℚ = pr1 u
 
-  is-zero-limit-seq-zero-approximation-sequence-ℚ :
+  is-zero-limit-seq-zero-limit-sequence-ℚ :
     is-limit-sequence-Metric-Space
       ( metric-space-leq-ℚ)
-      ( seq-zero-approximation-sequence-ℚ)
+      ( seq-zero-limit-sequence-ℚ)
       ( zero-ℚ)
-  is-zero-limit-seq-zero-approximation-sequence-ℚ = pr2 u
+  is-zero-limit-seq-zero-limit-sequence-ℚ = pr2 u
 ```

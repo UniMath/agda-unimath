@@ -85,6 +85,46 @@ module _
   is-approximation-of-zero-map-approximation-of-zero-ℚ = pr2 f
 ```
 
+### The type of rational Cauchy approximations converging to zero
+
+```agda
+zero-limit-cauchy-approximation-ℚ : UU lzero
+zero-limit-cauchy-approximation-ℚ =
+  type-subtype
+    ( λ f →
+      is-limit-cauchy-approximation-prop-Metric-Space
+        metric-space-leq-ℚ
+        f
+        zero-ℚ)
+
+module _
+  (f : zero-limit-cauchy-approximation-ℚ)
+  where
+
+  approximation-zero-limit-cauchy-approximation-ℚ :
+    cauchy-approximation-ℚ
+  approximation-zero-limit-cauchy-approximation-ℚ = pr1 f
+
+  map-zero-limit-cauchy-approximation-ℚ : ℚ⁺ → ℚ
+  map-zero-limit-cauchy-approximation-ℚ =
+    map-cauchy-approximation-ℚ approximation-zero-limit-cauchy-approximation-ℚ
+
+  is-cauchy-map-zero-limit-cauchy-approximation-ℚ :
+    is-cauchy-approximation-Metric-Space
+      metric-space-leq-ℚ
+      map-zero-limit-cauchy-approximation-ℚ
+  is-cauchy-map-zero-limit-cauchy-approximation-ℚ =
+    is-cauchy-map-cauchy-approximation-ℚ
+      approximation-zero-limit-cauchy-approximation-ℚ
+
+  is-zero-limit-approximation-zero-limit-cauchy-approximation-ℚ :
+    is-limit-cauchy-approximation-Metric-Space
+      metric-space-leq-ℚ
+      approximation-zero-limit-cauchy-approximation-ℚ
+      zero-ℚ
+  is-zero-limit-approximation-zero-limit-cauchy-approximation-ℚ = pr2 f
+```
+
 ## Properties
 
 ### The type of rational approximations zero is equivalent to the type of Cauchy approximations converging to zero
@@ -166,13 +206,7 @@ module _
       ( map-approximation-of-zero-ℚ f)
       ( is-approximation-of-zero-map-approximation-of-zero-ℚ f)
 
-  zero-limit-cauchy-approximation-of-zero-ℚ :
-    Σ ( cauchy-approximation-ℚ)
-      ( λ f →
-        is-limit-cauchy-approximation-Metric-Space
-          metric-space-leq-ℚ
-          f
-          zero-ℚ)
+  zero-limit-cauchy-approximation-of-zero-ℚ : zero-limit-cauchy-approximation-ℚ
   zero-limit-cauchy-approximation-of-zero-ℚ =
     cauchy-approximation-of-zero-ℚ ,
     is-zero-limit-cauchy-approximation-of-zero-ℚ
@@ -242,13 +276,7 @@ is-equiv-zero-limit-cauchy-approximation-of-zero-ℚ =
   retraction-zero-limit-cauchy-approximation-of-zero-ℚ
 
 equiv-zero-limit-cacuhy-approximation-of-zero-ℚ :
-  approximation-of-zero-ℚ ≃
-  Σ ( cauchy-approximation-ℚ)
-    ( λ f →
-      is-limit-cauchy-approximation-Metric-Space
-        metric-space-leq-ℚ
-        f
-        zero-ℚ)
+  approximation-of-zero-ℚ ≃ zero-limit-cauchy-approximation-ℚ
 equiv-zero-limit-cacuhy-approximation-of-zero-ℚ =
   zero-limit-cauchy-approximation-of-zero-ℚ ,
   is-equiv-zero-limit-cauchy-approximation-of-zero-ℚ
