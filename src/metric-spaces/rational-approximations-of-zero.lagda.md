@@ -127,7 +127,7 @@ module _
 
 ## Properties
 
-### The type of rational approximations zero is equivalent to the type of Cauchy approximations converging to zero
+### The type of rational approximations of zero is equivalent to the type of Cauchy approximations converging to zero
 
 ```agda
 module _
