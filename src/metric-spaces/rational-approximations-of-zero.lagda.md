@@ -47,7 +47,7 @@ to the [rationals](elementary-number-theory.rational-numbers.md) `f : ℚ⁺ →
 a {{#concept "rational approximation of zero"  Agda=approximation-of-zero-ℚ}} if
 `|f ε| ≤ ε` for all `ε : ℚ⁺`. The type of rational approximations of zero is a
 [equivalent](foundation.equivalences.md) to the type of
-[rational Cauchy approximation](metric-spaces.rational-cauchy-approximations.md)
+[rational Cauchy approximations](metric-spaces.rational-cauchy-approximations.md)
 [converging](metric-spaces.convergent-cauchy-approximations-metric-spaces.md) to
 zero.
 
