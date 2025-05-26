@@ -245,10 +245,15 @@ module _
     ( map-cauchy-approximation-ℚ f) ,
     ( is-approximation-is-zero-limit-cauchy-approximation-ℚ)
 
+approximation-of-zero-limit-cauchy-approximation-ℚ :
+  zero-limit-cauchy-approximation-ℚ → approximation-of-zero-ℚ
+approximation-of-zero-limit-cauchy-approximation-ℚ =
+  rec-Σ approximation-of-zero-is-zero-limit-cauchy-approximation-ℚ
+
 section-zero-limit-cauchy-approximation-of-zero-ℚ :
   section zero-limit-cauchy-approximation-of-zero-ℚ
 section-zero-limit-cauchy-approximation-of-zero-ℚ =
-  ( rec-Σ approximation-of-zero-is-zero-limit-cauchy-approximation-ℚ) ,
+  ( approximation-of-zero-limit-cauchy-approximation-ℚ) ,
   ( λ f →
     eq-type-subtype
       ( λ h →
@@ -263,7 +268,7 @@ section-zero-limit-cauchy-approximation-of-zero-ℚ =
 retraction-zero-limit-cauchy-approximation-of-zero-ℚ :
   retraction zero-limit-cauchy-approximation-of-zero-ℚ
 retraction-zero-limit-cauchy-approximation-of-zero-ℚ =
-  ( rec-Σ approximation-of-zero-is-zero-limit-cauchy-approximation-ℚ) ,
+  ( approximation-of-zero-limit-cauchy-approximation-ℚ) ,
   ( λ f →
     eq-type-subtype
       ( subtype-approximation-of-zero-ℚ)
