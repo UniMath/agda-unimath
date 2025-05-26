@@ -163,7 +163,7 @@ abstract
 
 zero-limit-reciprocal-succ-ℕ : zero-limit-sequence-ℚ
 zero-limit-reciprocal-succ-ℕ =
-  reciprocal-rational-succ-ℕ , is-zero-limit-reciprocal-rational-succ-ℕ
+  ( reciprocal-rational-succ-ℕ , is-zero-limit-reciprocal-rational-succ-ℕ)
 ```
 
 ### A sequence with absolute value lesser then an approximation of zero is an approximation of zero
