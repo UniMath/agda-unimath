@@ -99,9 +99,9 @@ open import metric-spaces.premetric-spaces-WIP public
 open import metric-spaces.premetric-structures public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.pseudometric-structures public
-open import metric-spaces.rational-neighborhoods public
 open import metric-spaces.rational-approximations-of-zero public
 open import metric-spaces.rational-cauchy-approximations public
+open import metric-spaces.rational-neighborhoods public
 open import metric-spaces.rational-sequences-approximating-zero public
 open import metric-spaces.reflexive-premetric-structures public
 open import metric-spaces.reflexive-rational-neighborhoods public
