@@ -139,6 +139,9 @@ is-set-ℚ⁰⁺ = is-set-type-subtype is-nonnegative-prop-ℚ is-set-ℚ
 abstract
   is-nonnegative-is-positive-ℚ : (q : ℚ) → is-positive-ℚ q → is-nonnegative-ℚ q
   is-nonnegative-is-positive-ℚ _ = is-nonnegative-is-positive-ℤ
+
+nonnegative-ℚ⁺ : ℚ⁺ → ℚ⁰⁺
+nonnegative-ℚ⁺ (q , H) = (q , is-nonnegative-is-positive-ℚ q H)
 ```
 
 ### The rational image of a nonnegative integer is nonnegative
