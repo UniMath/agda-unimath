@@ -26,7 +26,7 @@ open import metric-spaces.premetric-spaces-WIP
 
 Two elements `x y` of a [premetric space](metric-spaces.premetric-spaces-WIP.md)
 are
-{{#concept "similar" Disambiguation="elements of a premetric space" Agda=sim-Premetric-Space}}
+{{#concept "similar" Disambiguation="elements of a premetric space" Agda=sim-Premetric-Space-WIP}}
 if they share all neighborhoods. Similarity in premetric spaces is an
 [equivalence relation](foundation.equivalence-relations.md).
 
