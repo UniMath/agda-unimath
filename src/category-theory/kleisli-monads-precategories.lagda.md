@@ -1,7 +1,7 @@
 # The Kleisli precategory of a monad
 
 ```agda
-module category-theory.kleisli-precategories where
+module category-theory.kleisli-monads-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -85,10 +85,10 @@ module _
     (h : hom-kleisli-monad-Precategory z w)
     (g : hom-kleisli-monad-Precategory y z)
     (f : hom-kleisli-monad-Precategory x y) →
-    (comp-hom-kleisli-monad-Precategory
+    ( comp-hom-kleisli-monad-Precategory
       ( comp-hom-kleisli-monad-Precategory h g)
       ( f)) ＝
-    (comp-hom-kleisli-monad-Precategory
+    ( comp-hom-kleisli-monad-Precategory
       ( h)
       ( comp-hom-kleisli-monad-Precategory g f))
   associative-comp-hom-kleisli-monad-Precategory h g f =
@@ -137,15 +137,15 @@ module _
       ( id-hom-kleisli-monad-Precategory x)) ＝
     ( f)
   right-unit-law-comp-hom-kleisli-monad-Precategory f =
-    (associative-comp-hom-Precategory C _ _ _) ∙
-    (ap
-      (postcomp-hom-Precategory C _ _)
-      (naturality-unit-monad-Precategory C T f)) ∙
-    (inv (associative-comp-hom-Precategory C _ _ _)) ∙
-    (ap
-      (precomp-hom-Precategory C f _)
-      (right-unit-law-mul-hom-family-monad-Precategory C T _)) ∙
-    (left-unit-law-comp-hom-Precategory C f)
+    ( associative-comp-hom-Precategory C _ _ _) ∙
+    ( ap
+      ( postcomp-hom-Precategory C _ _)
+      ( naturality-unit-monad-Precategory C T f)) ∙
+    ( inv (associative-comp-hom-Precategory C _ _ _)) ∙
+    ( ap
+      ( precomp-hom-Precategory C f _)
+      ( right-unit-law-mul-hom-family-monad-Precategory C T _)) ∙
+    ( left-unit-law-comp-hom-Precategory C f)
 
   kleisli-monad-Precategory : Precategory l1 l2
   kleisli-monad-Precategory =
@@ -215,10 +215,10 @@ module _
   functor-to-kleisli-monad-Precategory :
     functor-Precategory C kleisli-monad-Precategory
   functor-to-kleisli-monad-Precategory =
-    obj-functor-to-kleisli-monad-Precategory ,
-    hom-functor-to-kleisli-monad-Precategory ,
-    preserves-comp-functor-to-kleisli-monad-Precategory ,
-    preserves-id-functor-to-kleisli-monad-Precategory
+    ( obj-functor-to-kleisli-monad-Precategory) ,
+    ( hom-functor-to-kleisli-monad-Precategory) ,
+    ( preserves-comp-functor-to-kleisli-monad-Precategory) ,
+    ( preserves-id-functor-to-kleisli-monad-Precategory)
 
   obj-functor-from-kleisli-monad-Precategory :
     obj-kleisli-monad-Precategory → obj-Precategory C
