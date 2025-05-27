@@ -10,7 +10,7 @@ of your pronouns and use
 [inclusive language](https://www.apa.org/about/apa/equity-diversity-inclusion/language-guidelines),
 and that we value your input regardless of your level of experience or status in
 the community. We're committed to providing a safe and welcoming environment to
-people of any gender identity, sexual orientation, race, colour, age, ability,
+people of any gender identity, sexual orientation, race, color, age, ability,
 ethnicity, background, or fluency in English -- here on GitHub, in online
 communication channels, and in person. Homotopy type theory is difficult enough
 without all the barriers that many of us have to face, so we hope to bring some
