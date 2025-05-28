@@ -934,17 +934,20 @@ module _
   (up-c : universal-property-sequential-colimit c)
   where
 
-  compute-map-colimit-hom-shift-once-sequential-diagram :
-    map-sequential-colimit-hom-sequential-diagram
-      ( up-c)
-      ( shift-once-cocone-sequential-diagram c)
-      ( hom-shift-once-sequential-diagram A) ~
-    id
-  compute-map-colimit-hom-shift-once-sequential-diagram =
-    ( htpy-map-universal-property-htpy-cocone-sequential-diagram
-      ( up-c)
-      ( compute-map-cocone-hom-shift-sequential-diagram c)) ∙h
-    ( compute-map-universal-property-sequential-colimit-id up-c)
+  opaque
+    unfolding map-sequential-colimit-hom-sequential-diagram
+
+    compute-map-colimit-hom-shift-once-sequential-diagram :
+      map-sequential-colimit-hom-sequential-diagram
+        ( up-c)
+        ( shift-once-cocone-sequential-diagram c)
+        ( hom-shift-once-sequential-diagram A) ~
+      id
+    compute-map-colimit-hom-shift-once-sequential-diagram =
+      ( htpy-map-universal-property-htpy-cocone-sequential-diagram
+        ( up-c)
+        ( compute-map-cocone-hom-shift-sequential-diagram c)) ∙h
+      ( compute-map-universal-property-sequential-colimit-id up-c)
 
 module _
   {l1 l2 : Level} {A : sequential-diagram l1}

@@ -166,7 +166,7 @@ module _
     is-equiv-map-equiv-dependent-sequential-diagram C e
 ```
 
-### The identity equivalence of sequential diagrams
+### The identity equivalence of dependent sequential diagrams
 
 ```agda
 module _
@@ -177,6 +177,61 @@ module _
   id-equiv-dependent-sequential-diagram : equiv-dependent-sequential-diagram B B
   pr1 id-equiv-dependent-sequential-diagram n a = id-equiv
   pr2 id-equiv-dependent-sequential-diagram n a = refl-htpy
+```
+
+### Composition of equivalences of dependent sequential diagrams
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : sequential-diagram l1}
+  (B : dependent-sequential-diagram A l2)
+  (C : dependent-sequential-diagram A l3)
+  (D : dependent-sequential-diagram A l4)
+  (f : equiv-dependent-sequential-diagram C D)
+  (e : equiv-dependent-sequential-diagram B C)
+  where
+
+  comp-equiv-dependent-sequential-diagram :
+    equiv-dependent-sequential-diagram B D
+  pr1 comp-equiv-dependent-sequential-diagram n a =
+    equiv-equiv-dependent-sequential-diagram D f n a ∘e
+    equiv-equiv-dependent-sequential-diagram C e n a
+  pr2 comp-equiv-dependent-sequential-diagram n a =
+    pasting-horizontal-coherence-square-maps
+      ( map-equiv-dependent-sequential-diagram C e n a)
+      ( map-equiv-dependent-sequential-diagram D f n a)
+      ( map-dependent-sequential-diagram B n a)
+      ( map-dependent-sequential-diagram C n a)
+      ( map-dependent-sequential-diagram D n a)
+      ( map-equiv-dependent-sequential-diagram C e (succ-ℕ n) (map-sequential-diagram A n a))
+      ( map-equiv-dependent-sequential-diagram D f (succ-ℕ n) (map-sequential-diagram A n a))
+      ( coh-equiv-dependent-sequential-diagram C e n a)
+      ( coh-equiv-dependent-sequential-diagram D f n a)
+```
+
+### The inverse of an equivalence of dependent sequential diagrams
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : sequential-diagram l1}
+  {B : dependent-sequential-diagram A l2}
+  (C : dependent-sequential-diagram A l3)
+  where
+
+  inv-equiv-dependent-sequential-diagram :
+    equiv-dependent-sequential-diagram B C →
+    equiv-dependent-sequential-diagram C B
+  pr1 (inv-equiv-dependent-sequential-diagram e) n a =
+    inv-equiv (equiv-equiv-dependent-sequential-diagram C e n a)
+  pr2 (inv-equiv-dependent-sequential-diagram e) n a =
+    horizontal-inv-equiv-coherence-square-maps
+      ( equiv-equiv-dependent-sequential-diagram C e n a)
+      ( map-dependent-sequential-diagram B n a)
+      ( map-dependent-sequential-diagram C n a)
+      ( equiv-equiv-dependent-sequential-diagram C e
+        ( succ-ℕ n)
+        ( map-sequential-diagram A n a))
+      ( coh-equiv-dependent-sequential-diagram C e n a)
 ```
 
 ## Properties
