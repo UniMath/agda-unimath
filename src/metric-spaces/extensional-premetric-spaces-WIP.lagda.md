@@ -135,10 +135,10 @@ module _
       ( is-torsorial-sim-is-extensional-Premetric-Space-WIP x)
       ( sim-eq-Premetric-Space-WIP A x)
 
-  equiv-eq-sim-is-extensional-Premetric-Space-WIP :
+  equiv-sim-eq-is-extensional-Premetric-Space-WIP :
     (x y : type-Premetric-Space-WIP A) →
     (x ＝ y) ≃ (sim-Premetric-Space-WIP A x y)
-  equiv-eq-sim-is-extensional-Premetric-Space-WIP x y =
+  equiv-sim-eq-is-extensional-Premetric-Space-WIP x y =
     ( sim-eq-Premetric-Space-WIP A x y) ,
     ( is-fiberwise-equiv-sim-eq-is-extensional-Premetric-Space-WIP x y)
 
@@ -147,7 +147,7 @@ module _
     sim-Premetric-Space-WIP A x y →
     x ＝ y
   eq-sim-is-extensional-Premetric-Space-WIP x y =
-    map-inv-equiv (equiv-eq-sim-is-extensional-Premetric-Space-WIP x y)
+    map-inv-equiv (equiv-sim-eq-is-extensional-Premetric-Space-WIP x y)
 ```
 
 ### Any extensional premetric is tight

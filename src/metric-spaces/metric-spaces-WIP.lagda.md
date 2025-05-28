@@ -31,7 +31,8 @@ open import metric-spaces.similarity-of-elements-premetric-spaces
 
 ## Idea
 
-A {{#concept "metric space" Agda=Metric-Space-WIP WD="metric space" WDID=Q180953}}
+A
+{{#concept "metric space" Agda=Metric-Space-WIP WD="metric space" WDID=Q180953}}
 is a type [structured](foundation.structure.md) with a concept of distance on
 its elements.
 
@@ -264,11 +265,11 @@ module _
   {l1 l2 : Level} (A : Metric-Space-WIP l1 l2)
   where
 
-  equiv-eq-sim-Metric-Space-WIP :
+  equiv-sim-eq-Metric-Space-WIP :
     (x y : type-Metric-Space-WIP A) →
     (x ＝ y) ≃ sim-Metric-Space-WIP A x y
-  equiv-eq-sim-Metric-Space-WIP =
-    equiv-eq-sim-is-extensional-Premetric-Space-WIP
+  equiv-sim-eq-Metric-Space-WIP =
+    equiv-sim-eq-is-extensional-Premetric-Space-WIP
       ( premetric-Metric-Space-WIP A)
       ( is-extensional-premetric-Metric-Space-WIP A)
 
@@ -277,7 +278,7 @@ module _
     sim-Metric-Space-WIP A x y →
     x ＝ y
   eq-sim-Metric-Space-WIP x y =
-    map-inv-equiv (equiv-eq-sim-Metric-Space-WIP x y)
+    map-inv-equiv (equiv-sim-eq-Metric-Space-WIP x y)
 ```
 
 ## External links
