@@ -31,7 +31,7 @@ open import metric-spaces.similarity-of-elements-premetric-spaces
 
 ## Idea
 
-A {{#concept "metric space" Agda=Metric-Space WD="metric space" WDID=Q180953}}
+A {{#concept "metric space" Agda=Metric-Space-WIP WD="metric space" WDID=Q180953}}
 is a type [structured](foundation.structure.md) with a concept of distance on
 its elements.
 
