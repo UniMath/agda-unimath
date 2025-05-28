@@ -42,15 +42,17 @@ open import metric-spaces.triangular-rational-neighborhoods
 ## Idea
 
 A {{#concept "premetric space" Agda=Premetric-Space-WIP}} is a type equipped
-with [reflexive](metric-spaces.reflexive-rational-neighborhoods.md),
+with a {{concept "premetric structure" Agda=Premetric-Structure}}: a
+[reflexive](metric-spaces.reflexive-rational-neighborhoods.md),
 [symmetric](metric-spaces.symmetric-rational-neighborhoods.md) and
 [triangular](metric-spaces.triangular-rational-neighborhoods.md)
 [rational neighborhood relation](metric-spaces.rational-neighborhoods.md)
 
-Given a premetric `B` on `A` and some positive rational number `d : ℚ⁺` such
-that `B d x y` holds for some pair of points `x y : A`, we interpret `d` as an
-{{#concept "upper bound" Disambiguation="on distance with respect to a premetric structure"}}
-on the distance between `x` and `y` with respect to the premetric.
+Given a premetric structure `B` on `A` and some positive rational number
+`d : ℚ⁺` such that `B d x y` holds for some pair of points `x y : A`, we
+interpret `d` as an
+{{#concept "upper bound" Disambiguation="on distance in a premetric space" Agda=is-upper-bound-dist-Premetric-Space-WIP}}
+on the distance between `x` and `y` in the premetric space.
 
 ## Definitions
 

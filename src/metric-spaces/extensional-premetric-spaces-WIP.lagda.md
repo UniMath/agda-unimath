@@ -97,7 +97,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} ( A : Premetric-Space-WIP l1 l2)
+  {l1 l2 : Level} (A : Premetric-Space-WIP l1 l2)
   (T : is-tight-Premetric-Space-WIP A)
   where
 

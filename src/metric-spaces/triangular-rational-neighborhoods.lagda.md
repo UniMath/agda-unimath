@@ -74,7 +74,7 @@ module _
 
 ## Properties
 
-### Any triangular reflexive premetric is monotonic
+### Any triangular reflexive rational neighborhood relation is monotonic
 
 ```agda
 module _
