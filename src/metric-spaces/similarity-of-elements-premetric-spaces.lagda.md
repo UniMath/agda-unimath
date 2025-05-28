@@ -70,6 +70,13 @@ module _
     sim-Premetric-Space-WIP A x x
   refl-sim-Premetric-Space-WIP x d =
     refl-neighborhood-Premetric-Space-WIP A d x
+
+  sim-eq-Premetric-Space-WIP :
+    (x y : type-Premetric-Space-WIP A) →
+    x ＝ y →
+    sim-Premetric-Space-WIP A x y
+  sim-eq-Premetric-Space-WIP x .x refl =
+    refl-sim-Premetric-Space-WIP x
 ```
 
 ### Similarity in premetric spaces is symmetric
@@ -85,6 +92,13 @@ module _
     sim-Premetric-Space-WIP A y x
   symmetric-sim-Premetric-Space-WIP x y Nxy d =
     symmetric-neighborhood-Premetric-Space-WIP A d x y (Nxy d)
+
+  inv-sim-Premetric-Space-WIP :
+    {x y : type-Premetric-Space-WIP A} →
+    sim-Premetric-Space-WIP A x y →
+    sim-Premetric-Space-WIP A y x
+  inv-sim-Premetric-Space-WIP {x} {y} =
+    symmetric-sim-Premetric-Space-WIP x y
 ```
 
 ### Similarity in premetric spaces is transitive
@@ -121,16 +135,16 @@ module _
   {l1 l2 : Level} (A : Premetric-Space-WIP l1 l2)
   where
 
-  is-equivalence-relation-sim-Premetric-Space :
+  is-equivalence-relation-sim-Premetric-Space-WIP :
     is-equivalence-relation (sim-prop-Premetric-Space-WIP A)
-  is-equivalence-relation-sim-Premetric-Space =
+  is-equivalence-relation-sim-Premetric-Space-WIP =
     ( refl-sim-Premetric-Space-WIP A) ,
     ( symmetric-sim-Premetric-Space-WIP A) ,
     ( transitive-sim-Premetric-Space-WIP A)
 
-  equivalence-sim-Premetric-Space :
+  equivalence-sim-Premetric-Space-WIP :
     equivalence-relation l2 (type-Premetric-Space-WIP A)
-  equivalence-sim-Premetric-Space =
+  equivalence-sim-Premetric-Space-WIP =
     ( sim-prop-Premetric-Space-WIP A) ,
-    ( is-equivalence-relation-sim-Premetric-Space)
+    ( is-equivalence-relation-sim-Premetric-Space-WIP)
 ```

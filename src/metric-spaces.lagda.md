@@ -62,6 +62,7 @@ open import metric-spaces.discrete-premetric-structures public
 open import metric-spaces.elements-at-bounded-distance-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-premetric-spaces public
+open import metric-spaces.extensional-premetric-spaces-WIP public
 open import metric-spaces.extensional-premetric-structures public
 open import metric-spaces.functions-metric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
@@ -87,6 +88,7 @@ open import metric-spaces.metric-space-of-rational-numbers public
 open import metric-spaces.metric-space-of-rational-numbers-with-open-neighborhoods public
 open import metric-spaces.metric-space-of-short-functions-metric-spaces public
 open import metric-spaces.metric-spaces public
+open import metric-spaces.metric-spaces-WIP public
 open import metric-spaces.metric-structures public
 open import metric-spaces.monotonic-premetric-structures public
 open import metric-spaces.monotonic-rational-neighborhoods public
