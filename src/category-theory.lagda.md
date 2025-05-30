@@ -15,6 +15,8 @@ module category-theory where
 
 open import category-theory.adjunctions-large-categories public
 open import category-theory.adjunctions-large-precategories public
+open import category-theory.adjunctions-precategories public
+open import category-theory.algebras-monads-precategories public
 open import category-theory.anafunctors-categories public
 open import category-theory.anafunctors-precategories public
 open import category-theory.augmented-simplex-category public
@@ -60,6 +62,7 @@ open import category-theory.exponential-objects-precategories public
 open import category-theory.extensions-of-functors-precategories public
 open import category-theory.faithful-functors-precategories public
 open import category-theory.faithful-maps-precategories public
+open import category-theory.free-algebras-monads-precategories public
 open import category-theory.full-functors-precategories public
 open import category-theory.full-large-subcategories public
 open import category-theory.full-large-subprecategories public
