@@ -62,6 +62,7 @@ open import category-theory.exponential-objects-precategories public
 open import category-theory.extensions-of-functors-precategories public
 open import category-theory.faithful-functors-precategories public
 open import category-theory.faithful-maps-precategories public
+open import category-theory.free-algebras-monads-precategories public
 open import category-theory.full-functors-precategories public
 open import category-theory.full-large-subcategories public
 open import category-theory.full-large-subprecategories public
@@ -95,7 +96,6 @@ open import category-theory.isomorphisms-in-large-categories public
 open import category-theory.isomorphisms-in-large-precategories public
 open import category-theory.isomorphisms-in-precategories public
 open import category-theory.isomorphisms-in-subprecategories public
-open import category-theory.kleisli-monads-precategories public
 open import category-theory.large-categories public
 open import category-theory.large-function-categories public
 open import category-theory.large-function-precategories public
