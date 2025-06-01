@@ -177,6 +177,14 @@ one-ℚ⁺ : ℚ⁺
 one-ℚ⁺ = (one-ℚ , is-positive-int-positive-ℤ one-positive-ℤ)
 ```
 
+### The type of positive rational numbers is inhabited
+
+```agda
+abstract
+  is-inhabited-ℚ⁺ : ║ ℚ⁺ ║₋₁
+  is-inhabited-ℚ⁺ = unit-trunc-Prop one-ℚ⁺
+```
+
 ### The rational image of a positive natural number is positive
 
 ```agda

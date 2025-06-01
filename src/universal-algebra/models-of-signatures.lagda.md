@@ -11,7 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.sets
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
+open import lists.tuples
 
 open import universal-algebra.signatures
 ```
@@ -21,7 +21,7 @@ open import universal-algebra.signatures
 ## Idea
 
 A model of a signature `Sig` in a type `A` is a dependent function that assigns
-to each function symbol `f` of arity `n` and a vector of `n` elements of `A` an
+to each function symbol `f` of arity `n` and `n`-tuple of elements of `A` an
 element of `A`.
 
 ## Definitions
@@ -36,7 +36,7 @@ module _
   is-model : {l2 : Level} → UU l2 → UU (l1 ⊔ l2)
   is-model X =
     ( f : operation-signature Sg) →
-    ( vec X (arity-operation-signature Sg f) → X)
+    ( tuple X (arity-operation-signature Sg f) → X)
 
   is-model-signature : {l2 : Level} → (Set l2) → UU (l1 ⊔ l2)
   is-model-signature X = is-model (type-Set X)
