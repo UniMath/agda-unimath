@@ -1,7 +1,7 @@
 # Finite sequences in monoids
 
 ```agda
-module linear-algebra.finite-sequences-of-elements-monoids where
+module linear-algebra.finite-sequences-in-monoids where
 ```
 
 <details><summary>Imports</summary>

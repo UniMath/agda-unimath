@@ -23,7 +23,7 @@ open import foundation.universe-levels
 
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids
 
-open import linear-algebra.finite-sequences-of-elements-semirings
+open import linear-algebra.finite-sequences-in-semirings
 
 open import lists.finite-sequences
 

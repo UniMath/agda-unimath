@@ -20,7 +20,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences-of-elements-commutative-semirings
+open import linear-algebra.finite-sequences-in-commutative-semirings
 
 open import lists.finite-sequences
 

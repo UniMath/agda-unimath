@@ -21,7 +21,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences-of-elements-commutative-rings
+open import linear-algebra.finite-sequences-in-commutative-rings
 
 open import lists.finite-sequences
 

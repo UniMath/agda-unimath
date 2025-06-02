@@ -1,7 +1,7 @@
 # Finite sequences in commutative monoids
 
 ```agda
-module linear-algebra.finite-sequences-of-elements-commutative-monoids where
+module linear-algebra.finite-sequences-in-commutative-monoids where
 ```
 
 <details><summary>Imports</summary>
@@ -19,7 +19,7 @@ open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import linear-algebra.finite-sequences-of-elements-monoids
+open import linear-algebra.finite-sequences-in-monoids
 ```
 
 </details>

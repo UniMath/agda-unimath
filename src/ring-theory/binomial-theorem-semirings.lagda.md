@@ -19,7 +19,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences-of-elements-semirings
+open import linear-algebra.finite-sequences-in-semirings
 
 open import ring-theory.powers-of-elements-semirings
 open import ring-theory.semirings

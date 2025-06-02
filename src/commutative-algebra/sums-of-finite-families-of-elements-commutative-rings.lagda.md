@@ -26,7 +26,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences-of-elements-commutative-rings
+open import linear-algebra.finite-sequences-in-commutative-rings
 
 open import ring-theory.sums-of-finite-families-of-elements-rings
 

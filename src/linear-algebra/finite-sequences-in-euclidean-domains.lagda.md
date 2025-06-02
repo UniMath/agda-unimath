@@ -1,7 +1,7 @@
 # Finite sequences in euclidean domains
 
 ```agda
-module linear-algebra.finite-sequences-of-elements-euclidean-domains where
+module linear-algebra.finite-sequences-in-euclidean-domains where
 ```
 
 <details><summary>Imports</summary>
@@ -20,7 +20,7 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import linear-algebra.finite-sequences-of-elements-commutative-rings
+open import linear-algebra.finite-sequences-in-commutative-rings
 
 open import lists.finite-sequences
 open import lists.functoriality-finite-sequences

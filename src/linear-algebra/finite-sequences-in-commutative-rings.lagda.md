@@ -1,7 +1,7 @@
 # Finite sequences in commutative rings
 
 ```agda
-module linear-algebra.finite-sequences-of-elements-commutative-rings where
+module linear-algebra.finite-sequences-in-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -20,7 +20,7 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import linear-algebra.finite-sequences-of-elements-rings
+open import linear-algebra.finite-sequences-in-rings
 ```
 
 </details>

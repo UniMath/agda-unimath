@@ -21,7 +21,7 @@ open import foundation.whiskering-homotopies-composition
 
 open import group-theory.monoids
 
-open import linear-algebra.finite-sequences-of-elements-monoids
+open import linear-algebra.finite-sequences-in-monoids
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types

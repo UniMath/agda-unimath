@@ -32,7 +32,7 @@ open import foundation.universe-levels
 open import group-theory.commutative-monoids
 open import group-theory.sums-of-finite-sequences-of-elements-monoids
 
-open import linear-algebra.finite-sequences-of-elements-commutative-monoids
+open import linear-algebra.finite-sequences-in-commutative-monoids
 
 open import lists.lists
 
