@@ -246,4 +246,4 @@ module _
 
 ## See also
 
-- [Sums of finite families of elements in commutative rings](commutative-algebra.sums-of-finite-families-of-elements-commutative-rings.md)
+- [Sums of finite families of elements in commutative rings](commutative-algebra.sums-of-finite-families-in-commutative-rings.md)

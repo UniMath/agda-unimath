@@ -302,4 +302,4 @@ module _
 
 ## See also
 
-- [Sums of finite families of elements in commutative monoids](group-theory.sums-of-finite-families-of-elements-commutative-monoids.md)
+- [Sums of finite families of elements in commutative monoids](group-theory.sums-of-finite-families-in-commutative-monoids.md)

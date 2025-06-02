@@ -203,7 +203,3 @@ split-sum-fin-sequence-type-Monoid M n (succ-ℕ m) f =
     ( split-sum-fin-sequence-type-Monoid M n m (f ∘ inl))) ∙
   ( associative-mul-Monoid M _ _ _)
 ```
-
-## See also
-
-- [Sums of finite families of elements in monoids](ring-theory.sums-of-finite-families-of-elements-monoids.md)

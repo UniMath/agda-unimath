@@ -283,4 +283,4 @@ module _
 
 ## See also
 
-- [Sums of finite families of elements in semirings](ring-theory.sums-of-finite-families-of-elements-semirings.md)
+- [Sums of finite families of elements in semirings](ring-theory.sums-of-finite-families-in-semirings.md)

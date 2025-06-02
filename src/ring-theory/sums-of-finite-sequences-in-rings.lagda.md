@@ -235,4 +235,4 @@ module _
 
 ## See also
 
-- [Sums of finite families of elements in rings](ring-theory.sums-of-finite-families-of-elements-rings.md)
+- [Sums of finite families of elements in rings](ring-theory.sums-of-finite-families-in-rings.md)
