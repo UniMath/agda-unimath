@@ -1,7 +1,7 @@
 # Sums of finite families of elements in semirings
 
 ```agda
-module ring-theory.sums-of-finite-families-in-semirings where
+module ring-theory.sums-of-finite-families-of-elements-semirings where
 ```
 
 <details><summary>Imports</summary>
@@ -20,10 +20,10 @@ open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.sums-of-finite-families-in-commutative-monoids
+open import group-theory.sums-of-finite-families-of-elements-commutative-monoids
 
 open import ring-theory.semirings
-open import ring-theory.sums-of-finite-sequences-in-semirings
+open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting

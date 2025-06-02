@@ -1,7 +1,7 @@
 # Sums of finite sequences in commutative rings
 
 ```agda
-module commutative-algebra.sums-of-finite-sequences-in-commutative-rings where
+module commutative-algebra.sums-of-finite-sequences-of-elements-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -21,11 +21,11 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences-in-commutative-rings
+open import linear-algebra.finite-sequences-of-elements-commutative-rings
 
 open import lists.finite-sequences
 
-open import ring-theory.sums-of-finite-sequences-in-rings
+open import ring-theory.sums-of-finite-sequences-of-elements-rings
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types
@@ -246,4 +246,4 @@ module _
 
 ## See also
 
-- [Sums of finite families of elements in commutative rings](commutative-algebra.sums-of-finite-families-in-commutative-rings.md)
+- [Sums of finite families of elements in commutative rings](commutative-algebra.sums-of-finite-families-of-elements-commutative-rings.md)

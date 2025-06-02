@@ -9,7 +9,7 @@ module commutative-algebra.binomial-theorem-commutative-semirings where
 ```agda
 open import commutative-algebra.commutative-semirings
 open import commutative-algebra.powers-of-elements-commutative-semirings
-open import commutative-algebra.sums-of-finite-sequences-in-commutative-semirings
+open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.binomial-coefficients
@@ -21,7 +21,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences-in-commutative-semirings
+open import linear-algebra.finite-sequences-of-elements-commutative-semirings
 
 open import ring-theory.binomial-theorem-semirings
 

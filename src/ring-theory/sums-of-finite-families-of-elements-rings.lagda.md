@@ -1,7 +1,7 @@
 # Sums of finite families of elements in rings
 
 ```agda
-module ring-theory.sums-of-finite-families-in-rings where
+module ring-theory.sums-of-finite-families-of-elements-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -17,8 +17,8 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import ring-theory.rings
-open import ring-theory.sums-of-finite-families-in-semirings
-open import ring-theory.sums-of-finite-sequences-in-rings
+open import ring-theory.sums-of-finite-families-of-elements-semirings
+open import ring-theory.sums-of-finite-sequences-of-elements-rings
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting

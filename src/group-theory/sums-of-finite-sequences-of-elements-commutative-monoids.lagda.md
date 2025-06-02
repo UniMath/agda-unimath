@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module group-theory.sums-of-finite-sequences-in-commutative-monoids where
+module group-theory.sums-of-finite-sequences-of-elements-commutative-monoids where
 ```
 
 <details><summary>Imports</summary>
@@ -30,9 +30,9 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
-open import group-theory.sums-of-finite-sequences-in-monoids
+open import group-theory.sums-of-finite-sequences-of-elements-monoids
 
-open import linear-algebra.finite-sequences-in-commutative-monoids
+open import linear-algebra.finite-sequences-of-elements-commutative-monoids
 
 open import lists.lists
 
@@ -302,4 +302,4 @@ module _
 
 ## See also
 
-- [Sums of finite families of elements in commutative monoids](group-theory.sums-of-finite-families-in-commutative-monoids.md)
+- [Sums of finite families of elements in commutative monoids](group-theory.sums-of-finite-families-of-elements-commutative-monoids.md)

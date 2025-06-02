@@ -1,7 +1,7 @@
 # Sums of finite sequences in semirings
 
 ```agda
-module ring-theory.sums-of-finite-sequences-in-semirings where
+module ring-theory.sums-of-finite-sequences-of-elements-semirings where
 ```
 
 <details><summary>Imports</summary>
@@ -21,9 +21,9 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.sums-of-finite-sequences-in-commutative-monoids
+open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids
 
-open import linear-algebra.finite-sequences-in-semirings
+open import linear-algebra.finite-sequences-of-elements-semirings
 
 open import lists.finite-sequences
 
@@ -283,4 +283,4 @@ module _
 
 ## See also
 
-- [Sums of finite families of elements in semirings](ring-theory.sums-of-finite-families-in-semirings.md)
+- [Sums of finite families of elements in semirings](ring-theory.sums-of-finite-families-of-elements-semirings.md)

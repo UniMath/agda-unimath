@@ -16,12 +16,12 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences-in-rings
+open import linear-algebra.finite-sequences-of-elements-rings
 
 open import ring-theory.binomial-theorem-semirings
 open import ring-theory.powers-of-elements-rings
 open import ring-theory.rings
-open import ring-theory.sums-of-finite-sequences-in-rings
+open import ring-theory.sums-of-finite-sequences-of-elements-rings
 
 open import univalent-combinatorics.standard-finite-types
 ```

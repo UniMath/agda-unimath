@@ -10,7 +10,7 @@ module commutative-algebra.binomial-theorem-commutative-rings where
 open import commutative-algebra.binomial-theorem-commutative-semirings
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
-open import commutative-algebra.sums-of-finite-sequences-in-commutative-rings
+open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-rings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.binomial-coefficients
@@ -22,7 +22,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences-in-commutative-rings
+open import linear-algebra.finite-sequences-of-elements-commutative-rings
 
 open import ring-theory.binomial-theorem-rings
 

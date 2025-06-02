@@ -1,15 +1,15 @@
 # Sums of finite families in commutative rings
 
 ```agda
-module commutative-algebra.sums-of-finite-families-in-commutative-rings where
+module commutative-algebra.sums-of-finite-families-of-elements-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import commutative-algebra.commutative-rings
-open import commutative-algebra.sums-of-finite-families-in-commutative-semirings
-open import commutative-algebra.sums-of-finite-sequences-in-commutative-rings
+open import commutative-algebra.sums-of-finite-families-of-elements-commutative-semirings
+open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-rings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -26,9 +26,9 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences-in-commutative-rings
+open import linear-algebra.finite-sequences-of-elements-commutative-rings
 
-open import ring-theory.sums-of-finite-families-in-rings
+open import ring-theory.sums-of-finite-families-of-elements-rings
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting

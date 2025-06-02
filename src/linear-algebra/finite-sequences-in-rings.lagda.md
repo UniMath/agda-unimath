@@ -1,7 +1,7 @@
 # Finite sequences in rings
 
 ```agda
-module linear-algebra.finite-sequences-in-rings where
+module linear-algebra.finite-sequences-of-elements-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -22,7 +22,7 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import linear-algebra.finite-sequences-in-semirings
+open import linear-algebra.finite-sequences-of-elements-semirings
 
 open import lists.finite-sequences
 open import lists.functoriality-finite-sequences

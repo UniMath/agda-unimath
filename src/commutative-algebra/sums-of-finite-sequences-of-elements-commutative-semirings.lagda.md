@@ -1,7 +1,7 @@
 # Sums of finite sequences in commutative semirings
 
 ```agda
-module commutative-algebra.sums-of-finite-sequences-in-commutative-semirings where
+module commutative-algebra.sums-of-finite-sequences-of-elements-commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
@@ -20,11 +20,11 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences-in-commutative-semirings
+open import linear-algebra.finite-sequences-of-elements-commutative-semirings
 
 open import lists.finite-sequences
 
-open import ring-theory.sums-of-finite-sequences-in-semirings
+open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types

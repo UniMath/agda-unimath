@@ -1,14 +1,14 @@
 # Sums of finite families of elements in commutative semirings
 
 ```agda
-module commutative-algebra.sums-of-finite-families-in-commutative-semirings where
+module commutative-algebra.sums-of-finite-families-of-elements-commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import commutative-algebra.commutative-semirings
-open import commutative-algebra.sums-of-finite-sequences-in-commutative-semirings
+open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -25,11 +25,11 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences-in-commutative-semirings
+open import linear-algebra.finite-sequences-of-elements-commutative-semirings
 
 open import lists.finite-sequences
 
-open import ring-theory.sums-of-finite-families-in-semirings
+open import ring-theory.sums-of-finite-families-of-elements-semirings
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting

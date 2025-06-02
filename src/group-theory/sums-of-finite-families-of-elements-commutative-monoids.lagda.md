@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module group-theory.sums-of-finite-families-in-commutative-monoids where
+module group-theory.sums-of-finite-families-of-elements-commutative-monoids where
 ```
 
 <details><summary>Imports</summary>
@@ -33,7 +33,7 @@ open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
-open import group-theory.sums-of-finite-sequences-in-commutative-monoids
+open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting

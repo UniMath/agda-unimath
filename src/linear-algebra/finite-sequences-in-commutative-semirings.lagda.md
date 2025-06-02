@@ -1,7 +1,7 @@
 # Finite sequences in commutative semirings
 
 ```agda
-module linear-algebra.finite-sequences-in-commutative-semirings where
+module linear-algebra.finite-sequences-of-elements-commutative-semirings where
 ```
 
 <details><summary>Imports</summary>
@@ -18,7 +18,7 @@ open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import linear-algebra.finite-sequences-in-semirings
+open import linear-algebra.finite-sequences-of-elements-semirings
 ```
 
 </details>

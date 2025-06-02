@@ -1,7 +1,7 @@
 # Sums of finite sequences in rings
 
 ```agda
-module ring-theory.sums-of-finite-sequences-in-rings where
+module ring-theory.sums-of-finite-sequences-of-elements-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -19,12 +19,12 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.finite-sequences-in-rings
+open import linear-algebra.finite-sequences-of-elements-rings
 
 open import lists.finite-sequences
 
 open import ring-theory.rings
-open import ring-theory.sums-of-finite-sequences-in-semirings
+open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types
@@ -235,4 +235,4 @@ module _
 
 ## See also
 
-- [Sums of finite families of elements in rings](ring-theory.sums-of-finite-families-in-rings.md)
+- [Sums of finite families of elements in rings](ring-theory.sums-of-finite-families-of-elements-rings.md)
