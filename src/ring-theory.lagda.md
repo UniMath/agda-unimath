@@ -78,8 +78,6 @@ open import ring-theory.rings public
 open import ring-theory.semirings public
 open import ring-theory.subsets-rings public
 open import ring-theory.subsets-semirings public
-open import ring-theory.sums-of-counted-families-in-rings public
-open import ring-theory.sums-of-counted-families-in-semirings public
 open import ring-theory.sums-of-finite-families-in-rings public
 open import ring-theory.sums-of-finite-families-in-semirings public
 open import ring-theory.sums-of-finite-sequences-in-rings public

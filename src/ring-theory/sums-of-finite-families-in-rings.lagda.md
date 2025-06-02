@@ -17,7 +17,6 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import ring-theory.rings
-open import ring-theory.sums-of-counted-families-in-rings
 open import ring-theory.sums-of-finite-families-in-semirings
 open import ring-theory.sums-of-finite-sequences-in-rings
 
@@ -40,6 +39,11 @@ any family of elements of `R` indexed by a
 ## Definition
 
 ```agda
+sum-count-Ring :
+  {l1 l2 : Level} (R : Ring l1) (A : UU l2) → count A → (A → type-Ring R) →
+  type-Ring R
+sum-count-Ring R = sum-count-Semiring (semiring-Ring R)
+
 sum-finite-Ring :
   {l1 l2 : Level} (R : Ring l1) (A : Finite-Type l2) →
   (type-Finite-Type A → type-Ring R) → type-Ring R

@@ -8,7 +8,6 @@ module commutative-algebra.sums-of-finite-families-in-commutative-semirings wher
 
 ```agda
 open import commutative-algebra.commutative-semirings
-open import commutative-algebra.sums-of-counted-families-in-commutative-semirings
 open import commutative-algebra.sums-of-finite-sequences-in-commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
@@ -51,6 +50,12 @@ extends the binary addition operation on a
 ## Definition
 
 ```agda
+sum-count-Commutative-Semiring :
+  {l1 l2 : Level} (R : Commutative-Semiring l1) (A : UU l2) → count A →
+  (A → type-Commutative-Semiring R) → type-Commutative-Semiring R
+sum-count-Commutative-Semiring R =
+  sum-count-Semiring (semiring-Commutative-Semiring R)
+
 sum-finite-Commutative-Semiring :
   {l1 l2 : Level} (R : Commutative-Semiring l1) (A : Finite-Type l2) →
   (type-Finite-Type A → type-Commutative-Semiring R) →

@@ -187,7 +187,6 @@ open import group-theory.subsets-monoids public
 open import group-theory.subsets-semigroups public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
-open import group-theory.sums-of-counted-families-in-commutative-monoids public
 open import group-theory.sums-of-finite-families-in-commutative-monoids public
 open import group-theory.sums-of-finite-sequences-in-commutative-monoids public
 open import group-theory.sums-of-finite-sequences-in-monoids public

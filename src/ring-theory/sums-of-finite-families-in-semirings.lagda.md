@@ -23,7 +23,6 @@ open import foundation.universe-levels
 open import group-theory.sums-of-finite-families-in-commutative-monoids
 
 open import ring-theory.semirings
-open import ring-theory.sums-of-counted-families-in-semirings
 open import ring-theory.sums-of-finite-sequences-in-semirings
 
 open import univalent-combinatorics.coproduct-types
@@ -46,6 +45,12 @@ extends the binary addition operation on a [semiring](ring-theory.semirings.md)
 ## Definition
 
 ```agda
+sum-count-Semiring :
+  {l1 l2 : Level} (R : Semiring l1) (A : UU l2) (cA : count A) →
+  (A → type-Semiring R) → type-Semiring R
+sum-count-Semiring R =
+  sum-count-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+
 sum-finite-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (A : Finite-Type l2) →
   (type-Finite-Type A → type-Semiring R) → type-Semiring R

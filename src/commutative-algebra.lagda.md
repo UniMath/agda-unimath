@@ -55,8 +55,6 @@ open import commutative-algebra.radical-ideals-generated-by-subsets-commutative-
 open import commutative-algebra.radicals-of-ideals-commutative-rings public
 open import commutative-algebra.subsets-commutative-rings public
 open import commutative-algebra.subsets-commutative-semirings public
-open import commutative-algebra.sums-of-counted-families-in-commutative-rings public
-open import commutative-algebra.sums-of-counted-families-in-commutative-semirings public
 open import commutative-algebra.sums-of-finite-families-in-commutative-rings public
 open import commutative-algebra.sums-of-finite-families-in-commutative-semirings public
 open import commutative-algebra.sums-of-finite-sequences-in-commutative-rings public

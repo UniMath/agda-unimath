@@ -8,7 +8,6 @@ module commutative-algebra.sums-of-finite-families-in-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
-open import commutative-algebra.sums-of-counted-families-in-commutative-rings
 open import commutative-algebra.sums-of-finite-families-in-commutative-semirings
 open import commutative-algebra.sums-of-finite-sequences-in-commutative-rings
 
@@ -51,6 +50,12 @@ of elements of `A` indexed by a
 ## Definition
 
 ```agda
+sum-count-Commutative-Ring :
+  {l1 l2 : Level} (R : Commutative-Ring l1) (A : UU l2) → count A →
+  (A → type-Commutative-Ring R) → type-Commutative-Ring R
+sum-count-Commutative-Ring R =
+  sum-count-Ring (ring-Commutative-Ring R)
+
 sum-finite-Commutative-Ring :
   {l1 l2 : Level} (R : Commutative-Ring l1) (A : Finite-Type l2) →
   (type-Finite-Type A → type-Commutative-Ring R) → type-Commutative-Ring R
