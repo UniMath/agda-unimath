@@ -547,7 +547,7 @@ module _
           x)
 ```
 
-### The product of ideals is assiciative
+### The product of ideals is associative
 
 Given three ideals `I`, `J`, and `K`, we have that
 

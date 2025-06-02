@@ -139,6 +139,9 @@ is-set-ℚ⁰⁺ = is-set-type-subtype is-nonnegative-prop-ℚ is-set-ℚ
 abstract
   is-nonnegative-is-positive-ℚ : (q : ℚ) → is-positive-ℚ q → is-nonnegative-ℚ q
   is-nonnegative-is-positive-ℚ _ = is-nonnegative-is-positive-ℤ
+
+nonnegative-ℚ⁺ : ℚ⁺ → ℚ⁰⁺
+nonnegative-ℚ⁺ (q , H) = (q , is-nonnegative-is-positive-ℚ q H)
 ```
 
 ### The rational image of a nonnegative integer is nonnegative
@@ -188,6 +191,26 @@ module _
     is-nonnegative-iff-leq-zero-ℚ =
       ( leq-zero-is-nonnegative-ℚ ,
         is-nonnegative-leq-zero-ℚ)
+```
+
+### The successor of a nonnegative rational number is positive
+
+```agda
+abstract
+  is-positive-succ-is-nonnegative-ℚ :
+    (q : ℚ) → is-nonnegative-ℚ q → is-positive-ℚ (succ-ℚ q)
+  is-positive-succ-is-nonnegative-ℚ q H =
+    is-positive-le-zero-ℚ
+      ( succ-ℚ q)
+      ( concatenate-leq-le-ℚ
+        ( zero-ℚ)
+        ( q)
+        ( succ-ℚ q)
+        ( leq-zero-is-nonnegative-ℚ q H)
+        ( le-left-add-rational-ℚ⁺ q one-ℚ⁺))
+
+positive-succ-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁺
+positive-succ-ℚ⁰⁺ (q , H) = (succ-ℚ q , is-positive-succ-is-nonnegative-ℚ q H)
 ```
 
 ### The product of two nonnegative rational numbers is nonnegative
