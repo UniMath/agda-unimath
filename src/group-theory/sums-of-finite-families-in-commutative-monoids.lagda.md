@@ -33,7 +33,6 @@ open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
-open import group-theory.sums-of-counted-families-in-commutative-monoids
 open import group-theory.sums-of-finite-sequences-in-commutative-monoids
 
 open import univalent-combinatorics.coproduct-types
@@ -55,9 +54,113 @@ extends the binary operation on a
 elements of `M` indexed by a
 [finite type](univalent-combinatorics.finite-types.md).
 
-## Definition
+## Sums over counted types
 
-### Sums over finite types
+### Definition
+
+```agda
+sum-count-Commutative-Monoid :
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (A : UU l2) →
+  count A → (A → type-Commutative-Monoid M) → type-Commutative-Monoid M
+sum-count-Commutative-Monoid M A (n , Fin-n≃A) f =
+  sum-fin-sequence-type-Commutative-Monoid M n (f ∘ map-equiv Fin-n≃A)
+```
+
+### Properties
+
+#### Sums for a counted type are homotopy invariant
+
+```agda
+module _
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (A : UU l2)
+  where
+
+  htpy-sum-count-Commutative-Monoid :
+    (c : count A) →
+    {f g : A → type-Commutative-Monoid M} → (f ~ g) →
+    sum-count-Commutative-Monoid M A c f ＝
+    sum-count-Commutative-Monoid M A c g
+  htpy-sum-count-Commutative-Monoid (nA , _) H =
+    htpy-sum-fin-sequence-type-Commutative-Monoid M nA (λ i → H _)
+```
+
+#### Two counts for the same type produce equal sums
+
+```agda
+module _
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (A : UU l2)
+  where
+
+  abstract
+    eq-sum-count-equiv-Commutative-Monoid :
+      (n : ℕ) → (equiv1 equiv2 : Fin n ≃ A) →
+      (f : A → type-Commutative-Monoid M) →
+      sum-count-Commutative-Monoid M A (n , equiv1) f ＝
+      sum-count-Commutative-Monoid M A (n , equiv2) f
+    eq-sum-count-equiv-Commutative-Monoid n equiv1 equiv2 f =
+      equational-reasoning
+      sum-fin-sequence-type-Commutative-Monoid M n (f ∘ map-equiv equiv1)
+      ＝
+        sum-fin-sequence-type-Commutative-Monoid
+          ( M)
+          ( n)
+          ( (f ∘ map-equiv equiv1) ∘ (map-inv-equiv equiv1 ∘ map-equiv equiv2))
+        by
+          preserves-sum-permutation-fin-sequence-type-Commutative-Monoid
+            ( M)
+            ( n)
+            ( inv-equiv equiv1 ∘e equiv2)
+            ( f ∘ map-equiv equiv1)
+      ＝ sum-fin-sequence-type-Commutative-Monoid M n (f ∘ map-equiv equiv2)
+        by
+          ap
+            ( λ g →
+              sum-fin-sequence-type-Commutative-Monoid
+                ( M)
+                ( n)
+                ( f ∘ (g ∘ map-equiv equiv2)))
+            ( eq-htpy (is-section-map-inv-equiv equiv1))
+
+    eq-sum-count-Commutative-Monoid :
+      (f : A → type-Commutative-Monoid M) (c1 c2 : count A) →
+      sum-count-Commutative-Monoid M A c1 f ＝
+      sum-count-Commutative-Monoid M A c2 f
+    eq-sum-count-Commutative-Monoid f c1@(n , e1) c2@(_ , e2)
+      with double-counting c1 c2
+    ... | refl = eq-sum-count-equiv-Commutative-Monoid n e1 e2 f
+```
+
+#### Sums of counted families indexed by equivalent types are equal
+
+```agda
+module _
+  {l1 l2 l3 : Level} (M : Commutative-Monoid l1)
+  (A : UU l2) (B : UU l3) (H : A ≃ B)
+  where
+
+  abstract
+    sum-equiv-count-Commutative-Monoid :
+      (cA : count A) (cB : count B) (f : A → type-Commutative-Monoid M) →
+      sum-count-Commutative-Monoid M A cA f ＝
+      sum-count-Commutative-Monoid M B cB (f ∘ map-inv-equiv H)
+    sum-equiv-count-Commutative-Monoid
+      cA@(nA , Fin-nA≃A) cB@(_ , Fin-nB≃B) f
+      with double-counting-equiv cA cB H
+    ... | refl =
+      preserves-sum-permutation-fin-sequence-type-Commutative-Monoid
+        ( M)
+        ( nA)
+        ( inv-equiv Fin-nA≃A ∘e inv-equiv H ∘e Fin-nB≃B)
+        ( _) ∙
+      htpy-sum-fin-sequence-type-Commutative-Monoid
+        ( M)
+        ( nA)
+        ( λ i → ap f (is-section-map-inv-equiv Fin-nA≃A _))
+```
+
+## Sums over finite types
+
+### Definition
 
 ```agda
 module _
@@ -75,7 +178,9 @@ module _
       ( is-finite-type-Finite-Type A)
 ```
 
-### The sum over a finite type is its sum over any count for the type
+### Properties
+
+#### The sum over a finite type is its sum over any count for the type
 
 ```agda
 module _
@@ -116,7 +221,7 @@ module _
               ( cA)
 ```
 
-### The sum over an empty finite type is zero
+#### The sum over an empty finite type is zero
 
 ```agda
 module _
@@ -132,7 +237,7 @@ module _
       eq-sum-finite-sum-count-Commutative-Monoid M A (count-is-empty H)
 ```
 
-### A sum of zeroes is zero
+#### A sum of zeroes is zero
 
 ```agda
 module _
@@ -162,7 +267,7 @@ module _
         sum-zero-fin-sequence-type-Commutative-Monoid M _
 ```
 
-### Sums over a finite type are homotopy invariant
+#### Sums over a finite type are homotopy invariant
 
 ```agda
 module _
@@ -194,7 +299,7 @@ module _
             by inv (eq-sum-finite-sum-count-Commutative-Monoid M A cA g)
 ```
 
-### Sums over finite types are preserved by equivalences
+#### Sums over finite types are preserved by equivalences
 
 ```agda
 module _
@@ -243,7 +348,7 @@ module _
             by inv (eq-sum-finite-sum-count-Commutative-Monoid M B cB _)
 ```
 
-### Sums over finite types distribute over coproducts
+#### Sums over finite types distribute over coproducts
 
 ```agda
 module _
@@ -353,7 +458,7 @@ module _
                     ( f ∘ inr)))
 ```
 
-### Sums distribute over dependent pair types
+#### Sums distribute over dependent pair types
 
 ```agda
 module _
@@ -541,7 +646,7 @@ module _
             by inv (eq-sum-finite-sum-count-Commutative-Monoid M A cA _)
 ```
 
-### Sums over the unit type
+#### Sums over the unit type
 
 ```agda
 module _
