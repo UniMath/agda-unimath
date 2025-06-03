@@ -244,7 +244,7 @@ is-simplicially-discrete-Σ :
   is-simplicially-discrete (Σ A B)
 is-simplicially-discrete-Σ is-disc-A is-disc-B =
   is-simplicially-discrete-is-𝟚-null
-    ( is-null-Σ 𝟚
+    ( is-null-Σ
       ( is-𝟚-null-is-simplicially-discrete is-disc-A)
       ( λ x → is-𝟚-null-is-simplicially-discrete (is-disc-B x)))
 ```
@@ -262,7 +262,7 @@ is-simplicially-discrete-family-is-simplicially-discrete-Σ :
 is-simplicially-discrete-family-is-simplicially-discrete-Σ
   is-disc-A is-disc-ΣAB x =
   is-simplicially-discrete-is-𝟚-null
-    ( is-null-family-is-null-Σ 𝟚
+    ( is-null-family-is-null-Σ
       ( is-𝟚-null-is-simplicially-discrete is-disc-A)
       ( is-𝟚-null-is-simplicially-discrete is-disc-ΣAB)
       ( x))

@@ -332,16 +332,19 @@ module _
       ( is-null-map-pr1-is-null-family Y B H)
 ```
 
-### The dependent sum of a `Y`-null type family over a `Y`-null base is `Y`-null
+### The dependent sum of a type family over a `Y`-null base is `Y`-null if and only if the type family is `Y`-null
+
+One direction was already proven in `null-types`, however, we give a second
+proof of this fact below.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (Y : UU l1) {A : UU l2} {B : A → UU l3}
+  {l1 l2 l3 : Level} {Y : UU l1} {A : UU l2} {B : A → UU l3}
   where
 
   abstract
-    is-null-Σ : is-null Y A → is-null-family Y B → is-null Y (Σ A B)
-    is-null-Σ is-null-A is-null-B =
+    is-null-Σ' : is-null Y A → is-null-family Y B → is-null Y (Σ A B)
+    is-null-Σ' is-null-A is-null-B =
       is-null-is-orthogonal-terminal-maps
         ( is-orthogonal-right-comp
           ( terminal-map Y)

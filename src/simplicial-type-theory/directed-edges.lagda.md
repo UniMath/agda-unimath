@@ -90,9 +90,6 @@ module _
   hom▵ : A → A → UU l
   hom▵ = _→▵_
 
-  hom▵ : A → A → UU l
-  hom▵ = _→▵_
-
   eq-source-hom▵ :
     {x y : A} (f : x →▵ y) → arrow-hom▵ f 0₂ ＝ x
   eq-source-hom▵ f = pr1 (pr2 f)

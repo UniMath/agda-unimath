@@ -41,11 +41,11 @@ open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-maps
-open import orthogonal-factorization-systems.local-types
+open import orthogonal-factorization-systems.maps-local-at-maps
 open import orthogonal-factorization-systems.null-maps
 open import orthogonal-factorization-systems.null-types
 open import orthogonal-factorization-systems.orthogonal-maps
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>
