@@ -29,6 +29,7 @@ open import simplicial-type-theory.directed-edges-dependent-pair-types public
 open import simplicial-type-theory.directed-interval-type public
 open import simplicial-type-theory.directed-joins public
 open import simplicial-type-theory.directed-mapping-cylinders public
+open import simplicial-type-theory.directed-suspension public
 open import simplicial-type-theory.free-directed-loops public
 open import simplicial-type-theory.fully-faithful-maps public
 open import simplicial-type-theory.globularly-coskeletal-types public
@@ -37,7 +38,6 @@ open import simplicial-type-theory.horizontal-composition-directed-edges-functio
 open import simplicial-type-theory.horizontal-composition-natural-transformations public
 open import simplicial-type-theory.inequality-directed-interval-type public
 open import simplicial-type-theory.inner-2-horn public
-open import simplicial-type-theory.directed-suspension public
 open import simplicial-type-theory.natural-transformations public
 open import simplicial-type-theory.normed-maps-between-types public
 open import simplicial-type-theory.representing-biinvertible-arrow public

@@ -9,6 +9,7 @@ open import order-theory.accessible-elements-relations public
 open import order-theory.bottom-elements-large-posets public
 open import order-theory.bottom-elements-posets public
 open import order-theory.bottom-elements-preorders public
+open import order-theory.bounded-total-orders public
 open import order-theory.chains-posets public
 open import order-theory.chains-preorders public
 open import order-theory.closed-interval-preserving-maps-posets public
