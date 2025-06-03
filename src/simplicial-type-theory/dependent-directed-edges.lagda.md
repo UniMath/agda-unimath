@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.dependent-directed-edges
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -34,7 +34,7 @@ open import orthogonal-factorization-systems.extensions-maps
 open import simplicial-type-theory.action-on-directed-edges-functions I
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
 ```
 
 </details>
@@ -78,7 +78,7 @@ module _
   {x y : A} (α : x →▵ y)
   where
 
-  dependent-hom▵ : B x → B y → UU l2
+  dependent-hom▵ : B x → B y → UU (lI ⊔ l2)
   dependent-hom▵ x' y' =
     Σ ( arrow▵' (B ∘ arrow-hom▵ α))
       ( λ β →
@@ -193,7 +193,7 @@ module _
         ( eq-target-dependent-hom▵ α β')))
 
   htpy-dependent-hom-over▵ :
-    (β β' : dependent-hom▵ B α x' y') → UU l2
+    (β β' : dependent-hom▵ B α x' y') → UU (lI ⊔ l2)
   htpy-dependent-hom-over▵ β β' =
     Σ ( arrow-dependent-hom▵ α β ~
         arrow-dependent-hom▵ α β')

@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.transposing-biadjunctions-between-types
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -67,7 +67,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-transposing-adjoint-triple : (B → A) → (A → B) → (B → A) → UU (l1 ⊔ l2)
+  is-transposing-adjoint-triple : (B → A) → (A → B) → (B → A) → UU (lI ⊔ l1 ⊔ l2)
   is-transposing-adjoint-triple q! q* q∗ =
     (is-transposing-adjunction q! q*) × (is-transposing-adjunction q* q∗)
 ```
@@ -79,7 +79,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-transposing-biadjoint : (A → B) → UU (l1 ⊔ l2)
+  is-transposing-biadjoint : (A → B) → UU (lI ⊔ l1 ⊔ l2)
   is-transposing-biadjoint q* =
     (is-transposing-right-adjoint q*) × (is-transposing-left-adjoint q*)
 

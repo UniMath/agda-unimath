@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.spines
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -47,8 +47,8 @@ open import reflection.erasing-equality
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-cubes I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I I
-open import simplicial-type-theory.inequality-directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.inequality-directed-interval-type I
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -97,7 +97,7 @@ where
 
 ```agda
 postulate
-  spine : ℕ → UU lzero
+  spine : ℕ → UU lI
 
   star-spine-0 : spine 0
 
@@ -239,13 +239,13 @@ We can inductively define the 𝑛-spine as a subtype of the 𝑛-cube via t
 ```
 
 ```agda
-subtype-spine : (n : ℕ) → subtype lzero (simplicial-cube n)
-subtype-spine 0 _ = unit-Prop
-subtype-spine 1 _ = unit-Prop
+subtype-spine : (n : ℕ) → subtype lI (directed-cube n)
+subtype-spine 0 _ = raise-unit-Prop lI
+subtype-spine 1 _ = raise-unit-Prop lI
 subtype-spine 2 (x , y) = join-Prop (Id-Δ¹-Prop x 1▵) (Id-Δ¹-Prop y 0▵)
 subtype-spine (succ-ℕ (succ-ℕ (succ-ℕ n))) (x , u) =
   join-Prop
-    ( is-terminal-element-simplicial-cube-Prop (succ-ℕ (succ-ℕ n)) u)
+    ( is-terminal-element-directed-cube-Prop (succ-ℕ (succ-ℕ n)) u)
     ( (Id-Δ¹-Prop x 0▵) ∧ (subtype-spine (succ-ℕ (succ-ℕ n)) u))
 ```
 
@@ -261,12 +261,12 @@ Let us work out what this definition unfolds to when `n` is `2`:
 Observe again that the coordinates are read in order from right to left.
 
 ```agda
-spine' : ℕ → UU lzero
+spine' : ℕ → UU lI
 spine' n = type-subtype (subtype-spine n)
 
 is-set-spine' : (n : ℕ) → is-set (spine' n)
 is-set-spine' n =
-  is-set-type-subtype (subtype-spine n) (is-set-simplicial-cube n)
+  is-set-type-subtype (subtype-spine n) (is-set-directed-cube n)
 ```
 
 ### The point inclusions of the spines
@@ -574,7 +574,7 @@ cocone-spine' = {!   !}
 --   where
 --     compute-inr-map-spine-spine' :
 --       (n : ℕ) (xs : spine' (succ-ℕ n)) →
---       is-terminal-element-simplicial-cube (succ-ℕ n) (pr1 xs) →
+--       is-terminal-element-directed-cube (succ-ℕ n) (pr1 xs) →
 --       in-arrow-spine 1▵ ＝ map-spine-spine' (succ-ℕ n) xs
 --     compute-inr-map-spine-spine' zero-ℕ xs is-terminal-x =
 --       ap in-arrow-spine (inv is-terminal-x)

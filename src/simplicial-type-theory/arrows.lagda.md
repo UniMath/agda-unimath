@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.arrows
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -19,7 +19,7 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
 
-open import simplicial-type-theory.directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
 ```
 
 </details>
@@ -40,14 +40,14 @@ with a specified source and target.
 ### Simplicial arrows in types dependent over the directed interval
 
 ```agda
-arrow▵' : {l : Level} → (Δ¹ → UU l) → UU (l1 ⊔ l)
+arrow▵' : {l : Level} → (Δ¹ → UU l) → UU (lI ⊔ l)
 arrow▵' A = (t : Δ¹) → A t
 ```
 
 ### Simplicial arrows
 
 ```agda
-arrow▵ : {l : Level} → UU l → UU (l1 ⊔ l)
+arrow▵ : {l : Level} → UU l → UU (lI ⊔ l)
 arrow▵ A = arrow▵' (λ _ → A)
 ```
 

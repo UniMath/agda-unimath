@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.normed-maps-between-types
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -69,7 +69,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-normed-map : (A → B) → UU (l1 ⊔ l2)
+  is-normed-map : (A → B) → UU (lI ⊔ l1 ⊔ l2)
   is-normed-map q =
     Σ ( is-transposing-biadjoint q)
       ( λ Q →

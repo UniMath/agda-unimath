@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.representing-biinvertible-arrow
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -47,8 +47,8 @@ open import reflection.erasing-equality
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-cubes I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I I
-open import simplicial-type-theory.inequality-directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.inequality-directed-interval-type I
 open import simplicial-type-theory.standard-simplices I
 
 open import synthetic-homotopy-theory.cocones-under-spans

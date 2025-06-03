@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.simplicially-discrete-types
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -41,9 +41,9 @@ open import orthogonal-factorization-systems.null-maps
 open import orthogonal-factorization-systems.null-types
 
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
 open import simplicial-type-theory.fully-faithful-maps I
-open import simplicial-type-theory.inequality-directed-interval-type I I
+open import simplicial-type-theory.inequality-directed-interval-type I
 
 open import synthetic-homotopy-theory.circle
 ```
@@ -74,7 +74,7 @@ module _
   {l : Level} (A : UU l)
   where
 
-  is-simplicially-discrete : UU l
+  is-simplicially-discrete : UU (lI ⊔ l)
   is-simplicially-discrete =
     (x y : A) → is-equiv (hom▵-eq {x = x} {y})
 
@@ -82,7 +82,7 @@ module _
   is-prop-is-simplicially-discrete =
     is-prop-Π (λ x → is-prop-Π (λ y → is-property-is-equiv hom▵-eq))
 
-  is-simplicially-discrete-Prop : Prop l
+  is-simplicially-discrete-Prop : Prop (lI ⊔ l)
   is-simplicially-discrete-Prop =
     ( is-simplicially-discrete , is-prop-is-simplicially-discrete)
 ```
@@ -90,7 +90,7 @@ module _
 ### The type of simplicially discrete types
 
 ```agda
-Simplicially-Discrete-Type : (l : Level) → UU (lsuc l)
+Simplicially-Discrete-Type : (l : Level) → UU (lI ⊔ lsuc l)
 Simplicially-Discrete-Type l = Σ (UU l) (is-simplicially-discrete)
 
 module _

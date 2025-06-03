@@ -1,7 +1,13 @@
 # Directed joins
 
 ```agda
-module simplicial-type-theory.directed-joins where
+open import foundation.universe-levels
+open import order-theory.nontrivial-bounded-total-orders
+
+module
+  simplicial-type-theory.directed-joins
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -96,7 +102,7 @@ module _
   where
 
   postulate
-    standard-directed-join : UU (l1 ⊔ l2)
+    standard-directed-join : UU (lI ⊔ l1 ⊔ l2)
 
     in-standard-directed-join : A → B → Δ¹ → standard-directed-join
 
