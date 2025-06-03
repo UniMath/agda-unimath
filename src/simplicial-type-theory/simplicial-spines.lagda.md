@@ -534,7 +534,7 @@ equiv-universal-property-spine n {X = X} =
     universal-property-spine n X)
 ```
 
-### Auxillary definitions for the 𝑛-spine as a subtype of the 𝑛-cube
+### Auxiliary definitions for the 𝑛-spine as a subtype of the 𝑛-cube
 
 > This remains to be formalized.
 

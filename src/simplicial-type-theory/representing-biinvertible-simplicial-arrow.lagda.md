@@ -132,7 +132,7 @@ postulate
 ```agda
 source-arrow-representing-biinvertible-simplicial-arrow :
   arrow-representing-biinvertible-simplicial-arrow 0₂ ＝
-  {! id-simplicial-arrow\ntarget-representing-biinvertible-simplicial-arrow 0₂ !}
+  {! id-simplicial-arrow target-representing-biinvertible-simplicial-arrow 0₂ !}
   -- source-representing-biinvertible-simplicial-arrow
 source-arrow-representing-biinvertible-simplicial-arrow =
   htpy-eq

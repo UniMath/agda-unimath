@@ -32,7 +32,7 @@ open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.extensions-maps
 
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type

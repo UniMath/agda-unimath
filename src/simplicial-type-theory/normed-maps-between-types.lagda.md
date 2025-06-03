@@ -249,23 +249,25 @@ module _
   action-hom-image-norm-map-is-normed-map :
     {x y : A} →
     q x →₂ q y →
-    map-left-adjoint-is-normed-map H (q x) →₂ map-right-adjoint-is-normed-map H (q y)
-  action-hom-image-norm-map-is-normed-map f =
-    action-simplicial-hom-simplicial-natural-transformation (norm-map-is-normed-map H) f
+    map-left-adjoint-is-normed-map H (q x) →₂
+    map-right-adjoint-is-normed-map H (q y)
+  action-hom-image-norm-map-is-normed-map =
+    action-simplicial-hom-simplicial-natural-transformationc
+      ( norm-map-is-normed-map H)
 ```
 
-### The cardinality? of a normed map
+### The factors of the cardinality of a normed map
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {q : A → B} (H : is-normed-map q)
   where
 
-  cardinality?-is-normed-map' :
+  factors-cardinality-is-normed-map' :
     (x : B) →
     ((q ∘ map-right-adjoint-is-normed-map H) x →₂ x) ×
     (x →₂ (q ∘ map-right-adjoint-is-normed-map H) x)
-  cardinality?-is-normed-map' x =
+  factors-cardinality-is-normed-map' x =
     ( counit-right-adjoint-is-normed-map H x , wrong-way-unit-is-normed-map H x)
 ```
 

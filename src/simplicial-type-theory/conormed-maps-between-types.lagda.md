@@ -143,27 +143,21 @@ module _
 ### The wrong way unit associated to a conormed map
 
 Given a transposing biadjoint `q! ⊣ q* ⊣ q∗` and a conorm map
-`Conm_q : q∗ ⇒ q!`, we have the _wrong way unit_
+`Conm_q : q∗ ⇒ q!`, we have the _wrong way unit_ given by the composite
 
 ```text
            η∗        Conm_q
   μ : id =====> q∗q* =====> q!q*.
 ```
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {q : A → B}
-  (H : is-conormed-map q)
-  where
-
-  -- TODO
-```
+> This remains to be formalized. Here we need composition in the underlying
+> types.
 
 ### The integral map associated to a conormed map
 
-Here we need composition.
+> Here we need composition in the underlying types.
 
-```agda
+```text
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {q : A → B} (H : is-conormed-map q)
   where
 
@@ -172,20 +166,11 @@ Here we need composition.
     map-equiv
       {! is-transposing-adjoint-map-left-adjoint-is-conormed-map H (q x) y ∘e ? !}
       {! action-simplicial-hom-simplicial-natural-transformation (conorm-map-is-conormed-map H) f  !}
-      -- λ t → conorm-map-is-conormed-map H (simplicial-arrow-simplicial-hom f t) --  action-simplicial-hom-function (map-right-adjoint-is-conormed-map H) f
-  -- TODO
 ```
 
 ### The cardinality operator associated to a conormed map
 
-Here we need composition.
-
-```agda
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {q : A → B} (H : is-conormed-map q)
-  where
-
-  -- TODO
-```
+> Here we need composition in the underlying types.
 
 ## Properties
 

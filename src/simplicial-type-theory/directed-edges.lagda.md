@@ -32,7 +32,7 @@ open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.extensions-maps
 
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
@@ -373,7 +373,7 @@ module _
 ### The hom type is an extension type
 
 The hom-type `x →₂ y` is equivalent to the
-[type of extensions](orthogonal-factorization-systems.extensions-of-maps.md) of
+[type of extensions](orthogonal-factorization-systems.extensions-maps.md) of
 `[x , y] : ∂𝟚 → A` along the inclusion `∂𝟚 ↪ 𝟚`.
 
 ```agda

@@ -25,7 +25,7 @@ open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.extensions-maps
 
 open import simplicial-type-theory.action-on-directed-edges-functions
 open import simplicial-type-theory.directed-edges
