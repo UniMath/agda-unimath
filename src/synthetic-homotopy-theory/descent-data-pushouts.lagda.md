@@ -154,3 +154,9 @@ module _
     ( P ∘ vertical-map-cocone _ _ c) ,
     ( equiv-tr P ∘ coherence-square-cocone _ _ c)
 ```
+
+## See also
+
+- [Equifibered dependent span diagrams](synthetic-homotopy-theory.equifibered-dependent-span-diagrams.md)
+  is a variant descent data for pushouts where an additional type family over
+  the middle vertex is specified.

@@ -45,10 +45,9 @@ over `(A, a)`
      a₀      a₁      a₂
 ```
 
-which are said to be "fibered over `A`", whose maps `bₙ` are equivalences.
-
-The terminology was originally introduced by Charles Rezk in _Toposes and
-Homotopy Toposes_ {{#cite Rezk10HomotopyToposes}}.
+which are said to be "fibered over `A`", whose maps `bₙ` are equivalences. This
+terminology was originally introduced by Charles Rezk in _Toposes and Homotopy
+Toposes_ {{#cite Rezk10HomotopyToposes}}.
 
 ## Definitions
 

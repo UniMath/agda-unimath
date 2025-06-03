@@ -43,27 +43,9 @@ is a triple of type families `PA`, `PB`, `PS` over the vertices of `𝒮`,
 together with families of equivalences `PS s ≃ PA (f s)` and `PS s ≃ PB (g s)`
 for every `s : S`.
 
-> In
-> [`descent-property-pushouts`](synthetic-homotopy-theory.descent-property-pushouts.md),
-> we show that this is exactly the data one needs to "glue together" a type
-> family `P : X → 𝒰` over the pushout `X` of `𝒮`.
-
-> The [identity type](foundation-core.identity-types.md) of descent data is
-> characterized in
-> [`equivalences-descent-data-pushouts`](synthetic-homotopy-theory.equivalences-descent-data-pushouts.md).
->
-> It may not be immediately clear why "descent data" is an appropriate name for
-> this concept, because there is no apparent downward motion. Traditionally,
-> descent is studied in the context of a collection of objects `Xᵢ` covering a
-> single object `X`, and local structure on the individual `Xᵢ`'s descending
-> onto `X`, collecting into a global structure, given that the pieces are
-> appropriately compatible on any "overlaps". A pushout of `𝒮` is covered by `A`
-> and `B`, and the overlaps are encoded in `f` and `g`. Then structure on `A`
-> and `B`, expressed as type families `PA` and `PB`, "descends" to a structure
-> on `X` (a type family over `X`). Two elements "overlap" in `X` if there is an
-> identification between them coming from `S`, and the gluing/compatibility
-> condition exactly requires the local structure of `PA` and `PB` to agree on
-> such elements, i.e. asks for an equivalence `PA(fs) ≃ PB(gs)`.
+The [identity type](foundation-core.identity-types.md) of equifibered dependent
+span diagrams is characterized in
+[`equivalences-equifibered-dependent-span-diagrams`](synthetic-homotopy-theory.equivalences-equifibered-dependent-span-diagrams.md).
 
 ## Definitions
 
@@ -241,3 +223,9 @@ module _
     equifibered-dependent-span-diagram-descent-data-pushout
       ( descent-data-family-cocone-span-diagram c P)
 ```
+
+## See also
+
+- [Descent data for pushouts](synthetic-homotopy-theory.descent-data-pushouts.md)
+  is a variant of equifibered dependent span diagrams where a type family over
+  the middle vertex is not specified.
