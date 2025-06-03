@@ -1,16 +1,16 @@
 # The precategory of algebras of a monad
 
 ```agda
-module category-theory.precategory-of-algebras-monads-precategories where
+module category-theory.precategory-of-algebras-monads-on-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import category-theory.adjunctions-precategories
+open import category-theory.algebras-monads-on-precategories
 open import category-theory.functors-precategories
 open import category-theory.monads-on-precategories
-open import category-theory.algebras-monads-precategories
 open import category-theory.natural-transformations-functors-precategories
 open import category-theory.natural-transformations-maps-precategories
 open import category-theory.precategories
@@ -37,8 +37,9 @@ open import foundation-core.transport-along-identifications
 The
 {{#concept "precategory of algebras" Disambiguation="of a monad on a precategory" Agda=algebras-monad-Precategory}}
 of a [monad on a precategory](category-theory.monads-on-precategories) `T`,
-denoted `EM(T)`, also called the **Eilenberg–Moore precategory**, consists of all
-`T`-algebras and `T`-algebra morphisms. It comes with an adjunction `C ⇄ EM(T)`.
+denoted `EM(T)`, also called the **Eilenberg–Moore precategory**, consists of
+all `T`-algebras and `T`-algebra morphisms. It comes with an adjunction
+`C ⇄ EM(T)`.
 
 ```agda
 module _
@@ -50,14 +51,14 @@ module _
 
   obj-algebras-monad-Precategory :
     UU (l1 ⊔ l2)
-  obj-algebras-monad-Precategory = monad-algebra-Precategory C T
+  obj-algebras-monad-Precategory = algebra-monad-Precategory C T
 
   hom-set-algebras-monad-Precategory :
     (a b : obj-algebras-monad-Precategory) →
     Set l2
   hom-set-algebras-monad-Precategory a b =
-    ( morphism-monad-algebra-Precategory C T a b) ,
-    ( is-set-morphism-monad-algebra-Precategory C T a b)
+    ( morphism-algebra-monad-Precategory C T a b) ,
+    ( is-set-morphism-algebra-monad-Precategory C T a b)
 
   hom-algebras-monad-Precategory :
     (a b : obj-algebras-monad-Precategory) →
@@ -71,7 +72,7 @@ module _
     (f : hom-algebras-monad-Precategory a b) →
     hom-algebras-monad-Precategory a c
   comp-hom-algebras-monad-Precategory a b c g f =
-    comp-morphism-monad-algebra-Precategory C T a b c g f
+    comp-morphism-algebra-monad-Precategory C T a b c g f
 
   id-hom-algebras-monad-Precategory :
     (x : obj-algebras-monad-Precategory) →
@@ -79,10 +80,10 @@ module _
   id-hom-algebras-monad-Precategory x =
     ( id-hom-Precategory C) ,
     ( left-unit-law-comp-hom-Precategory C
-      ( hom-monad-algebra-Precategory C T x)) ∙
+      ( hom-algebra-monad-Precategory C T x)) ∙
     ( inv
       ( right-unit-law-comp-hom-Precategory C
-        ( hom-monad-algebra-Precategory C T x))) ∙
+        ( hom-algebra-monad-Precategory C T x))) ∙
     ( ap
       ( postcomp-hom-Precategory C _ _)
       ( inv (preserves-id-endofunctor-monad-Precategory C T _)))
@@ -113,7 +114,7 @@ module _
   left-unit-law-comp-hom-algebras-monad-Precategory a b f =
     eq-pair-Σ
       ( left-unit-law-comp-hom-Precategory C
-        ( hom-morphism-monad-algebra-Precategory C T a b f))
+        ( hom-morphism-algebra-monad-Precategory C T a b f))
       ( eq-is-prop (is-set-hom-Precategory C _ _ _ _))
 
   right-unit-law-comp-hom-algebras-monad-Precategory :
@@ -126,7 +127,7 @@ module _
   right-unit-law-comp-hom-algebras-monad-Precategory a b f =
     eq-pair-Σ
       ( right-unit-law-comp-hom-Precategory C
-        ( hom-morphism-monad-algebra-Precategory C T a b f))
+        ( hom-morphism-algebra-monad-Precategory C T a b f))
       ( eq-is-prop (is-set-hom-Precategory C _ _ _ _))
 
   algebras-monad-Precategory : Precategory (l1 ⊔ l2) l2
@@ -140,7 +141,13 @@ module _
         ( associative-comp-hom-algebras-monad-Precategory a b c d h g f))
       ( λ {a} {b} f → left-unit-law-comp-hom-algebras-monad-Precategory a b f)
       ( λ {a} {b} f → right-unit-law-comp-hom-algebras-monad-Precategory a b f)
+```
 
+## Properties
+
+### Free functor from the underlying category
+
+```agda
   obj-functor-to-algebras-monad-Precategory :
     obj-Precategory C → obj-Precategory algebras-monad-Precategory
   obj-functor-to-algebras-monad-Precategory x =
@@ -191,11 +198,15 @@ module _
     ( hom-functor-to-algebras-monad-Precategory) ,
     ( preserves-comp-functor-to-algebras-monad-Precategory) ,
     ( preserves-id-functor-to-algebras-monad-Precategory)
+```
 
+### Forgetful functor from the underlying precategory
+
+```agda
   obj-functor-from-algebras-monad-Precategory :
     obj-algebras-monad-Precategory → obj-Precategory C
   obj-functor-from-algebras-monad-Precategory =
-    obj-monad-algebra-Precategory C T
+    obj-algebra-monad-Precategory C T
 
   hom-functor-from-algebras-monad-Precategory :
     (x y : obj-algebras-monad-Precategory)
@@ -204,7 +215,7 @@ module _
       ( obj-functor-from-algebras-monad-Precategory x)
       ( obj-functor-from-algebras-monad-Precategory y)
   hom-functor-from-algebras-monad-Precategory =
-    hom-morphism-monad-algebra-Precategory C T
+    hom-morphism-algebra-monad-Precategory C T
 
   preserves-id-functor-from-algebras-monad-Precategory :
     (x : obj-algebras-monad-Precategory) →
@@ -233,6 +244,8 @@ module _
       preserves-comp-functor-from-algebras-monad-Precategory x y z g f) ,
     ( preserves-id-functor-from-algebras-monad-Precategory)
 ```
+
+### Adjunction with the underlying category
 
 The unit of the adjunction between these two functors is exactly the unit of the
 monad.
@@ -273,11 +286,11 @@ The counit is the vertical map given by the structure map of the algebra
       ( id-functor-Precategory algebras-monad-Precategory)
   counit-algebras-monad-Precategory =
     ( λ x →
-      ( hom-monad-algebra-Precategory C T x) ,
-      ( inv (mul-law-monad-algebra-Precategory C T x))) ,
+      ( hom-algebra-monad-Precategory C T x) ,
+      ( inv (mul-law-algebra-monad-Precategory C T x))) ,
     ( λ {x} {y} f →
       eq-pair-Σ
-        ( comm-hom-morphism-monad-algebra-Precategory C T x y f)
+        ( comm-hom-morphism-algebra-monad-Precategory C T x y f)
         ( eq-is-prop (is-set-hom-Precategory C _ _ _ _)))
 
   left-triangle-algebras-monad-Precategory :
@@ -298,7 +311,7 @@ The counit is the vertical map given by the structure map of the algebra
       ( unit-algebras-monad-Precategory)
       ( counit-algebras-monad-Precategory)
   right-triangle-algebras-monad-Precategory x =
-    unit-law-monad-algebra-Precategory C T x
+    unit-law-algebra-monad-Precategory C T x
 
   adjunction-algebras-monad-Precategory :
     Adjunction-Precategory C algebras-monad-Precategory

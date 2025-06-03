@@ -1,12 +1,13 @@
 # The precategory of free algebras of a monad
 
 ```agda
-module category-theory.free-algebras-monads-precategories where
+module category-theory.precategory-of-free-algebras-monads-on-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.algebras-monads-on-precategories
 open import category-theory.functors-precategories
 open import category-theory.monads-on-precategories
 open import category-theory.precategories
@@ -155,7 +156,13 @@ module _
       ( associative-comp-hom-free-algebras-monad-Precategory)
       ( left-unit-law-comp-hom-free-algebras-monad-Precategory)
       ( right-unit-law-comp-hom-free-algebras-monad-Precategory)
+```
 
+## Properties
+
+### Free functor from the underlying category
+
+```agda
   obj-functor-to-free-algebras-monad-Precategory :
     (obj-Precategory C) → obj-free-algebras-monad-Precategory
   obj-functor-to-free-algebras-monad-Precategory = id
@@ -218,7 +225,11 @@ module _
     ( hom-functor-to-free-algebras-monad-Precategory) ,
     ( preserves-comp-functor-to-free-algebras-monad-Precategory) ,
     ( preserves-id-functor-to-free-algebras-monad-Precategory)
+```
 
+### Forgetful functor to the underlying category
+
+```agda
   obj-functor-from-free-algebras-monad-Precategory :
     obj-free-algebras-monad-Precategory → obj-Precategory C
   obj-functor-from-free-algebras-monad-Precategory = T₀

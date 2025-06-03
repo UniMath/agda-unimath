@@ -1,7 +1,7 @@
 # Algebras over monads on precategories
 
 ```agda
-module category-theory.algebras-monads-precategories where
+module category-theory.algebras-monads-on-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -27,7 +27,10 @@ open import foundation-core.cartesian-product-types
 
 ## Idea
 
-An {{#concept "algebra over a monad" Disambiguation="on a precategory" Agda=algebra-monad-Precategory}} over a [monad](category-theory.monads-on-precategories.md) `T` consists of an object `A` and morphism `a : TA → A` satisfying two compatibility laws:
+An
+{{#concept "algebra over a monad" Disambiguation="on a precategory" Agda=algebra-monad-Precategory}}
+over a [monad](category-theory.monads-on-precategories.md) `T` consists of an
+object `A` and morphism `a : TA → A` satisfying two compatibility laws:
 
 - **Unit law**: `a ∘ η_A = id_A`
 - **Multiplication law**: `a ∘ Ta = a ∘ μ_A`

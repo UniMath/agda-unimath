@@ -16,7 +16,7 @@ module category-theory where
 open import category-theory.adjunctions-large-categories public
 open import category-theory.adjunctions-large-precategories public
 open import category-theory.adjunctions-precategories public
-open import category-theory.algebras-monads-precategories public
+open import category-theory.algebras-monads-on-precategories public
 open import category-theory.anafunctors-categories public
 open import category-theory.anafunctors-precategories public
 open import category-theory.augmented-simplex-category public
@@ -62,7 +62,6 @@ open import category-theory.exponential-objects-precategories public
 open import category-theory.extensions-of-functors-precategories public
 open import category-theory.faithful-functors-precategories public
 open import category-theory.faithful-maps-precategories public
-open import category-theory.free-algebras-monads-precategories public
 open import category-theory.full-functors-precategories public
 open import category-theory.full-large-subcategories public
 open import category-theory.full-large-subprecategories public
@@ -136,7 +135,9 @@ open import category-theory.opposite-strongly-preunivalent-categories public
 open import category-theory.pointed-endofunctors-categories public
 open import category-theory.pointed-endofunctors-precategories public
 open import category-theory.precategories public
+open import category-theory.precategory-of-algebras-monads-on-precategories public
 open import category-theory.precategory-of-elements-of-a-presheaf public
+open import category-theory.precategory-of-free-algebras-monads-on-precategories public
 open import category-theory.precategory-of-functors public
 open import category-theory.precategory-of-functors-from-small-to-large-precategories public
 open import category-theory.precategory-of-maps-from-small-to-large-precategories public
