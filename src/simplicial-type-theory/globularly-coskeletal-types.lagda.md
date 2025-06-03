@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.globularly-coskeletal-types
-  (I : Nontrivial-Bounded-Total-Order lzero lzero)
+  {I2 : Level} (I : Nontrivial-Bounded-Total-Order lzero I2)
   where
 ```
 

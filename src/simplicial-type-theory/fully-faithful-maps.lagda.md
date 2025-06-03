@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.fully-faithful-maps
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -66,7 +66,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-simplicially-fully-faithful : (A → B) → UU (lI ⊔ l1 ⊔ l2)
+  is-simplicially-fully-faithful : (A → B) → UU (I1 ⊔ l1 ⊔ l2)
   is-simplicially-fully-faithful f =
     (x y : A) → is-equiv (action-hom▵-function f {x} {y})
 
@@ -83,7 +83,7 @@ module _
     inv-equiv (equiv-action-is-simplicially-fully-faithful e)
 
 infix 5 _↪▵_
-_↪▵_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (lI ⊔ l1 ⊔ l2)
+_↪▵_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (I1 ⊔ l1 ⊔ l2)
 A ↪▵ B = Σ (A → B) (is-simplicially-fully-faithful)
 
 module _
@@ -134,7 +134,7 @@ module _
         is-prop-Π
           ( λ y → is-property-is-equiv (action-hom▵-function f)))
 
-  is-simplicially-fully-faithful-Prop : (A → B) → Prop (lI ⊔ l1 ⊔ l2)
+  is-simplicially-fully-faithful-Prop : (A → B) → Prop (I1 ⊔ l1 ⊔ l2)
   is-simplicially-fully-faithful-Prop f =
     ( is-simplicially-fully-faithful f ,
       is-property-is-simplicially-fully-faithful f)

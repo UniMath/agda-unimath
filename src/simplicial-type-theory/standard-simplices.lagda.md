@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.standard-simplices
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -58,11 +58,11 @@ open import synthetic-homotopy-theory.pushouts
 $$x₁ ≥ x₂ ≥ … ≥ xₙ₋₁ ≥ xₙ$$ (in the right-associated cube)
 
 ```agda
-subtype-standard-simplex : (n : ℕ) → subtype lI (directed-cube n)
+subtype-standard-simplex : (n : ℕ) → subtype I2 (directed-cube n)
 subtype-standard-simplex 0 _ =
-  raise-unit-Prop lI
+  raise-unit-Prop I2
 subtype-standard-simplex 1 _ =
-  raise-unit-Prop lI
+  raise-unit-Prop I2
 subtype-standard-simplex 2 (x , y) =
   leq-Δ¹-Prop y x
 subtype-standard-simplex (succ-ℕ (succ-ℕ (succ-ℕ n))) (x , y , u) =
@@ -70,13 +70,13 @@ subtype-standard-simplex (succ-ℕ (succ-ℕ (succ-ℕ n))) (x , y , u) =
     ( subtype-standard-simplex 2 (x , y))
     ( subtype-standard-simplex (succ-ℕ (succ-ℕ n)) (y , u))
 
-predicate-standard-simplex : (n : ℕ) → directed-cube n → UU lI
+predicate-standard-simplex : (n : ℕ) → directed-cube n → UU I2
 predicate-standard-simplex = is-in-subtype ∘ subtype-standard-simplex
 
-standard-simplex : ℕ → UU (lI ⊔ lI)
+standard-simplex : ℕ → UU (I1 ⊔ I2)
 standard-simplex = type-subtype ∘ subtype-standard-simplex
 
-Δ : ℕ → UU (lI ⊔ lI)
+Δ : ℕ → UU (I1 ⊔ I2)
 Δ = standard-simplex
 ```
 

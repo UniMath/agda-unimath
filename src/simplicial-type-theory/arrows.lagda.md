@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.arrows
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -40,14 +40,14 @@ with a specified source and target.
 ### Simplicial arrows in types dependent over the directed interval
 
 ```agda
-arrow▵' : {l : Level} → (Δ¹ → UU l) → UU (lI ⊔ l)
+arrow▵' : {l : Level} → (Δ¹ → UU l) → UU (I1 ⊔ l)
 arrow▵' A = (t : Δ¹) → A t
 ```
 
 ### Simplicial arrows
 
 ```agda
-arrow▵ : {l : Level} → UU l → UU (lI ⊔ l)
+arrow▵ : {l : Level} → UU l → UU (I1 ⊔ l)
 arrow▵ A = arrow▵' (λ _ → A)
 ```
 

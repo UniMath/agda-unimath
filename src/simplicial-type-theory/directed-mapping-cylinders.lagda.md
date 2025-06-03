@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.directed-mapping-cylinders
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -77,7 +77,7 @@ to `Y` along `f` by [directed edges](simplicial-type-theory.directed-edges.md)
 
 ```agda
 directed-mapping-cylinder :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (lI ⊔ l1 ⊔ l2)
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (I1 ⊔ l1 ⊔ l2)
 directed-mapping-cylinder {X = X} {Y} f =
   pushout (λ (x : X) → (x , 1▵)) f
 

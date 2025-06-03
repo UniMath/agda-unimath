@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.2-simplices
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -63,12 +63,12 @@ eq-image-eq-point-is-prop is-prop-A f b x p = p ∙ ap f (eq-is-prop is-prop-A)
 ### The lower simplicial triangle
 
 ```agda
-subtype-lower-simplicial-triangle : subtype lI (Δ¹ × Δ¹)
+subtype-lower-simplicial-triangle : subtype I2 (Δ¹ × Δ¹)
 subtype-lower-simplicial-triangle (t , s) = leq-Δ¹-Prop s t
 
 lower-simplicial-triangle = type-subtype subtype-lower-simplicial-triangle
 
-subtype-boundary-lower-simplicial-triangle : subtype lI (Δ¹ × Δ¹)
+subtype-boundary-lower-simplicial-triangle : subtype I1 (Δ¹ × Δ¹)
 subtype-boundary-lower-simplicial-triangle (t , s) =
   join-Prop (Id-Δ¹-Prop 0▵ s) (join-Prop (Id-Δ¹-Prop s t) (Id-Δ¹-Prop t 1▵))
 boundary-lower-simplicial-triangle =
@@ -90,12 +90,12 @@ inclusion-boundary-lower-simplicial-triangle = tot ◿⊆◢
 ### The upper simplicial triangle
 
 ```agda
-subtype-◤ : subtype lI (Δ¹ × Δ¹)
+subtype-◤ : subtype I2 (Δ¹ × Δ¹)
 subtype-◤ (t , s) = leq-Δ¹-Prop t s
 
 ◤ = type-subtype subtype-◤
 
-subtype-◸ : subtype lI (Δ¹ × Δ¹)
+subtype-◸ : subtype I1 (Δ¹ × Δ¹)
 subtype-◸ (t , s) =
   join-Prop
     ( Id-Δ¹-Prop 0▵ t)
@@ -128,10 +128,10 @@ subtype-Δ² = subtype-lower-simplicial-triangle
 ### The boundary of the standard 2-simplex
 
 ```agda
-subtype-∂Δ² : subtype lI (Δ¹ × Δ¹)
+subtype-∂Δ² : subtype I1 (Δ¹ × Δ¹)
 subtype-∂Δ² = subtype-boundary-lower-simplicial-triangle
 
-∂Δ² : UU lI
+∂Δ² : UU I1
 ∂Δ² = boundary-lower-simplicial-triangle
 
 ∂Δ²⊆Δ² = ◿⊆◢
@@ -194,6 +194,6 @@ rec-hom▵-∂Δ² f g h =
 ### The 2-simplex as a directed cone
 
 ```agda
-directed-cone-Δ² : UU lI
+directed-cone-Δ² : UU I1
 directed-cone-Δ² = directed-cone Δ¹
 ```

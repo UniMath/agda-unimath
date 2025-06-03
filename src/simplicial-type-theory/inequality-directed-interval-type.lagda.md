@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.inequality-directed-interval-type
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -17,10 +17,10 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.embeddings
 open import foundation.function-types
 open import foundation.homotopies
-open import foundation.disjunction
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
@@ -58,16 +58,16 @@ is a [total order](order-theory.total-orders.md) with `0▵` as the
 ```agda
 infix 30 _≤-Δ¹_
 
-_≤-Δ¹_ : Δ¹ → Δ¹ → UU lI
+_≤-Δ¹_ : Δ¹ → Δ¹ → UU I2
 _≤-Δ¹_ = leq-Nontrivial-Bounded-Total-Order I
 
 is-prop-leq-Δ¹ : {x y : Δ¹} → is-prop (x ≤-Δ¹ y)
 is-prop-leq-Δ¹ {x} {y} = is-prop-leq-Nontrivial-Bounded-Total-Order I x y
 
-leq-Δ¹-Prop : (x y : Δ¹) → Prop lI
+leq-Δ¹-Prop : (x y : Δ¹) → Prop I2
 leq-Δ¹-Prop x y = (x ≤-Δ¹ y , is-prop-leq-Δ¹)
 
-leq-Δ¹ : Δ¹ → Δ¹ → UU lI
+leq-Δ¹ : Δ¹ → Δ¹ → UU I2
 leq-Δ¹ = _≤-Δ¹_
 ```
 
@@ -192,13 +192,13 @@ leq-inv-eq-Δ¹ = leq-eq-Δ¹ ∘ inv
 ### The poset structure on the directed interval
 
 ```agda
-Δ¹-Preorder : Preorder lI lI
+Δ¹-Preorder : Preorder I1 I2
 pr1 Δ¹-Preorder = Δ¹
 pr1 (pr2 Δ¹-Preorder) = leq-Δ¹-Prop
 pr1 (pr2 (pr2 Δ¹-Preorder)) x = refl-leq-Δ¹ {x}
 pr2 (pr2 (pr2 Δ¹-Preorder)) x y z = transitive-leq-Δ¹
 
-Δ¹-Poset : Poset lI lI
+Δ¹-Poset : Poset I1 I2
 pr1 Δ¹-Poset = Δ¹-Preorder
 pr2 Δ¹-Poset x y = antisymmetric-leq-Δ¹
 ```
@@ -206,7 +206,7 @@ pr2 Δ¹-Poset x y = antisymmetric-leq-Δ¹
 ### The total order on the directed interval
 
 ```agda
-Δ¹-Total-Order : Total-Order lI lI
+Δ¹-Total-Order : Total-Order I1 I2
 Δ¹-Total-Order = (Δ¹-Poset , is-total-leq-Δ¹)
 ```
 
@@ -218,10 +218,10 @@ pr2 Δ¹-Poset x y = antisymmetric-leq-Δ¹
 is-set-Δ¹ : is-set Δ¹
 is-set-Δ¹ = is-set-type-Poset Δ¹-Poset
 
-Δ¹-Set : Set lI
+Δ¹-Set : Set I1
 Δ¹-Set = (Δ¹ , is-set-Δ¹)
 
-Id-Δ¹-Prop : Δ¹ → Δ¹ → Prop lI
+Id-Δ¹-Prop : Δ¹ → Δ¹ → Prop I1
 Id-Δ¹-Prop = Id-Prop Δ¹-Set
 
 {-# INLINE Id-Δ¹-Prop #-}

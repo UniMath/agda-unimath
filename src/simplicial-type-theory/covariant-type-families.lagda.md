@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.covariant-type-families
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -94,7 +94,7 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  is-simplicially-covariant : UU (lI ⊔ l1 ⊔ l2)
+  is-simplicially-covariant : UU (I1 ⊔ l1 ⊔ l2)
   is-simplicially-covariant = is-local-family (point 0▵) B
 ```
 
@@ -103,7 +103,7 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  is-simplicially-covariant' : UU (lI ⊔ l1 ⊔ l2)
+  is-simplicially-covariant' : UU (I1 ⊔ l1 ⊔ l2)
   is-simplicially-covariant' =
     (α : arrow▵ A) (x' : B (α 0▵)) →
     is-torsorial (dependent-hom▵ B (hom▵-arrow▵ α) x')

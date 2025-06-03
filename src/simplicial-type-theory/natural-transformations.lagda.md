@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.natural-transformations
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -73,13 +73,13 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  _⇒▵_ : ((x : A) → B x) → ((x : A) → B x) → UU (lI ⊔ l1 ⊔ l2)
+  _⇒▵_ : ((x : A) → B x) → ((x : A) → B x) → UU (I1 ⊔ l1 ⊔ l2)
   f ⇒▵ g = (x : A) → f x →▵ g x
 
   infix 7 _⇒▵_
 
   simplicial-natural-transformation :
-    ((x : A) → B x) → ((x : A) → B x) → UU (lI ⊔ l1 ⊔ l2)
+    ((x : A) → B x) → ((x : A) → B x) → UU (I1 ⊔ l1 ⊔ l2)
   simplicial-natural-transformation = _⇒▵_
 
 module _
