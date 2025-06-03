@@ -488,12 +488,12 @@ module _
   abstract
     is-identity-system-descent-data-pushout-ind-singleton :
       (H :
-        {l7 : Level}
+        {l6 : Level}
         (R :
           descent-data-pushout
             ( span-diagram-flattening-descent-data-pushout P)
-            l7
-            l7)
+            ( l6)
+            ( l6))
         (r₀ : left-family-descent-data-pushout R (a₀ , p₀)) →
         section-descent-data-pushout R) →
       is-identity-system-descent-data-pushout P p₀
