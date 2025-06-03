@@ -93,6 +93,7 @@ open import order-theory.maximal-chains-posets public
 open import order-theory.maximal-chains-preorders public
 open import order-theory.meet-semilattices public
 open import order-theory.meet-suplattices public
+open import order-theory.nontrivial-bounded-total-orders public
 open import order-theory.nuclei-large-locales public
 open import order-theory.opposite-large-posets public
 open import order-theory.opposite-large-preorders public
