@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.directed-mapping-cylinders
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -42,8 +42,8 @@ open import foundation.universe-levels
 
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I I
-open import simplicial-type-theory.inequality-directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.inequality-directed-interval-type I
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -77,7 +77,7 @@ to `Y` along `f` by [directed edges](simplicial-type-theory.directed-edges.md)
 
 ```agda
 directed-mapping-cylinder :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (l1 ⊔ l2)
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (lI ⊔ l1 ⊔ l2)
 directed-mapping-cylinder {X = X} {Y} f =
   pushout (λ (x : X) → (x , 1▵)) f
 

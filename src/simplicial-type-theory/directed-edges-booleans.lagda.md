@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.directed-edges-booleans
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -55,7 +55,7 @@ open import simplicial-type-theory.action-on-directed-edges-functions I
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.dependent-directed-edges I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
 open import simplicial-type-theory.simplicially-discrete-types I
 ```
 
@@ -94,15 +94,6 @@ is-Δ¹-null-bool =
 ### The booleans are not a directed interval
 
 ```agda
-is-not-directed-interval-bool' : Δ¹ ≠ bool
-is-not-directed-interval-bool' =
-  nonequal-leibniz'
-    ( is-simplicially-discrete)
-    ( Δ¹)
-    ( bool)
-    ( is-not-simplicially-discrete-Δ¹)
-    ( is-simplicially-discrete-bool)
-
 is-not-directed-interval-bool : ¬ (Δ¹ ≃ bool)
 is-not-directed-interval-bool e =
   is-not-simplicially-discrete-Δ¹

@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.transposing-adjunctions-between-types
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -58,10 +58,10 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-transposing-adjunction : (A → B) → (B → A) → UU (l1 ⊔ l2)
+  is-transposing-adjunction : (A → B) → (B → A) → UU (lI ⊔ l1 ⊔ l2)
   is-transposing-adjunction L R = (x : A) (y : B) → hom▵ (L x) y ≃ hom▵ x (R y)
 
-  _⊣▵_ : (A → B) → (B → A) → UU (l1 ⊔ l2)
+  _⊣▵_ : (A → B) → (B → A) → UU (lI ⊔ l1 ⊔ l2)
   _⊣▵_ = is-transposing-adjunction
 ```
 
@@ -72,7 +72,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-transposing-left-adjoint : (A → B) → UU (l1 ⊔ l2)
+  is-transposing-left-adjoint : (A → B) → UU (lI ⊔ l1 ⊔ l2)
   is-transposing-left-adjoint L = Σ (B → A) (is-transposing-adjunction L)
 ```
 
@@ -83,7 +83,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-transposing-right-adjoint : (A → B) → UU (l1 ⊔ l2)
+  is-transposing-right-adjoint : (A → B) → UU (lI ⊔ l1 ⊔ l2)
   is-transposing-right-adjoint R =
     Σ (B → A) (λ L → is-transposing-adjunction L R)
 ```
@@ -91,7 +91,7 @@ module _
 ### Transposing adjunctions
 
 ```agda
-transposing-adjunction : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+transposing-adjunction : {l1 l2 : Level} → UU l1 → UU l2 → UU (lI ⊔ l1 ⊔ l2)
 transposing-adjunction A B = Σ (A → B) is-transposing-left-adjoint
 
 module _

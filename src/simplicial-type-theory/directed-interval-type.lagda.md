@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.directed-interval-type
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -67,7 +67,7 @@ type.
 ### The directed interval type
 
 ```agda
-Δ¹ : UU l1
+Δ¹ : UU lI
 Δ¹ = type-Nontrivial-Bounded-Total-Order I
 
 0▵ : Δ¹
@@ -114,7 +114,7 @@ is-noncontractible-Δ¹ = unit-trunc-Prop noncontractibility-Δ¹
 ### The boundary of the directed interval
 
 ```agda
-subtype-∂Δ¹' : subtype l1 Δ¹
+subtype-∂Δ¹' : subtype lI Δ¹
 subtype-∂Δ¹' t =
   coproduct-Prop
     ( mere-eq-Prop t 0▵)
@@ -126,7 +126,7 @@ subtype-∂Δ¹' t =
             ( λ t=0 → is-nontrivial-Δ¹ (inv t=0 ∙ t=1))
             ( |t=0|)))
 
-∂Δ¹ : UU l1
+∂Δ¹ : UU lI
 ∂Δ¹ = type-subtype subtype-∂Δ¹'
 ```
 

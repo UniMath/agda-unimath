@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.inner-2-horn
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -40,8 +40,8 @@ open import foundation.universe-levels
 open import simplicial-type-theory.2-simplices I
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I I
-open import simplicial-type-theory.inequality-directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.inequality-directed-interval-type I
 open import simplicial-type-theory.spines I
 open import simplicial-type-theory.standard-simplices I
 
@@ -92,14 +92,14 @@ The inner 2-horn has multiple defining properties:
 > TODO: replace with `subtype-spine 2`
 
 ```agda
-subtype-Λ²₁ : subtype lzero (Δ¹ × Δ¹)
+subtype-Λ²₁ : subtype lI (Δ¹ × Δ¹)
 subtype-Λ²₁ (x , y) =
   join-Prop (Id-Prop Δ¹-Set y 0▵) (Id-Prop Δ¹-Set x 1▵)
 
-inner-two-horn : UU
+inner-two-horn : UU lI
 inner-two-horn = type-subtype subtype-Λ²₁
 
-Λ²₁ : UU
+Λ²₁ : UU lI
 Λ²₁ = inner-two-horn
 
 inl-Λ²₁ : Δ¹ → Λ²₁
@@ -137,7 +137,7 @@ module _
 ```
 
 ```agda
-pushout-Λ²₁ : UU
+pushout-Λ²₁ : UU lI
 pushout-Λ²₁ = pushout (point 1▵) (point 0▵)
 
 inl-pushout-Λ²₁ : Δ¹ → pushout-Λ²₁

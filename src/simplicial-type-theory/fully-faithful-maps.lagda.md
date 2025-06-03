@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.fully-faithful-maps
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -43,7 +43,7 @@ open import orthogonal-factorization-systems.orthogonal-maps
 
 open import simplicial-type-theory.action-on-directed-edges-functions I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
 open import simplicial-type-theory.whiskering-directed-edges I
 ```
 
@@ -66,7 +66,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-simplicially-fully-faithful : (A → B) → UU (l1 ⊔ l2)
+  is-simplicially-fully-faithful : (A → B) → UU (lI ⊔ l1 ⊔ l2)
   is-simplicially-fully-faithful f =
     (x y : A) → is-equiv (action-hom▵-function f {x} {y})
 
@@ -83,7 +83,7 @@ module _
     inv-equiv (equiv-action-is-simplicially-fully-faithful e)
 
 infix 5 _↪▵_
-_↪▵_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+_↪▵_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (lI ⊔ l1 ⊔ l2)
 A ↪▵ B = Σ (A → B) (is-simplicially-fully-faithful)
 
 module _
@@ -134,7 +134,7 @@ module _
         is-prop-Π
           ( λ y → is-property-is-equiv (action-hom▵-function f)))
 
-  is-simplicially-fully-faithful-Prop : (A → B) → Prop (l1 ⊔ l2)
+  is-simplicially-fully-faithful-Prop : (A → B) → Prop (lI ⊔ l1 ⊔ l2)
   is-simplicially-fully-faithful-Prop f =
     ( is-simplicially-fully-faithful f ,
       is-property-is-simplicially-fully-faithful f)

@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.directed-edges-cartesian-product-types
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -40,7 +40,7 @@ open import simplicial-type-theory.action-on-directed-edges-functions I
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.dependent-directed-edges I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
 ```
 
 </details>
@@ -61,7 +61,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  hom▵-product : (x y : A × B) → UU (l1 ⊔ l2)
+  hom▵-product : (x y : A × B) → UU (lI ⊔ l1 ⊔ l2)
   hom▵-product (x , x') (y , y') = (x →▵ y) × (x' →▵ y')
 
   map-compute-hom▵-product :

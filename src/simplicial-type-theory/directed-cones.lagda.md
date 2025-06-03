@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.directed-cones
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -42,8 +42,8 @@ open import foundation.universe-levels
 
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I I
-open import simplicial-type-theory.inequality-directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.inequality-directed-interval-type I
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -76,7 +76,7 @@ attached such that there is a
 ### The standard directed cone on a type
 
 ```agda
-directed-cone : {l : Level} → UU l → UU l
+directed-cone : {l : Level} → UU l → UU (lI ⊔ l)
 directed-cone X =
   pushout (λ (x : X) → (x , 0▵)) (terminal-map X)
 

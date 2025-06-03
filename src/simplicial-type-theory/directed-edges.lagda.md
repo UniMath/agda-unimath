@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.directed-edges
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -41,7 +41,7 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.extensions-maps
 
 open import simplicial-type-theory.arrows I
-open import simplicial-type-theory.directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
 ```
 
 </details>
@@ -66,7 +66,7 @@ module _
   {l : Level} {A : Δ¹ → UU l}
   where
 
-  hom▵' : A 0▵ → A 1▵ → UU l
+  hom▵' : A 0▵ → A 1▵ → UU (lI ⊔ l)
   hom▵' x y =
     Σ (arrow▵' A) (λ α → (α 0▵ ＝ x) × (α 1▵ ＝ y))
 
@@ -88,12 +88,12 @@ module _
   {l : Level} {A : UU l}
   where
 
-  _→▵_ : A → A → UU l
+  _→▵_ : A → A → UU (lI ⊔ l)
   _→▵_ = hom▵' {A = λ _ → A}
 
   infix 7 _→▵_
 
-  hom▵ : A → A → UU l
+  hom▵ : A → A → UU (lI ⊔ l)
   hom▵ = _→▵_
 
   eq-source-hom▵ :
@@ -169,7 +169,7 @@ module _
     ( eq-source-hom▵ f ＝ H 0▵ ∙ eq-source-hom▵ g) ×
     ( eq-target-hom▵ f ＝ H 1▵ ∙ eq-target-hom▵ g)
 
-  htpy-hom▵ : (f g : x →▵ y) → UU l
+  htpy-hom▵ : (f g : x →▵ y) → UU (lI ⊔ l)
   htpy-hom▵ f g =
     Σ ( arrow-hom▵ f ~ arrow-hom▵ g)
       ( coherence-htpy-hom▵ f g)
@@ -252,7 +252,7 @@ module _
   {l : Level} {A : UU l} (x : A)
   where
 
-  based-hom▵ : UU l
+  based-hom▵ : UU (lI ⊔ l)
   based-hom▵ = Σ A (λ y → (x →▵ y))
 
   map-compute-based-hom▵ :
@@ -319,7 +319,7 @@ module _
   {l : Level} {A : UU l}
   where
 
-  total-hom▵ : UU l
+  total-hom▵ : UU (lI ⊔ l)
   total-hom▵ = Σ A based-hom▵
 
   map-compute-total-hom▵ :

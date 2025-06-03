@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.free-directed-loops
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -35,7 +35,7 @@ open import foundation.universe-levels
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.dependent-directed-edges I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
 
 open import synthetic-homotopy-theory.free-loops
 ```
@@ -59,7 +59,7 @@ type of free directed loops in `X` is
 ### Free directed loops
 
 ```agda
-free-directed-loop : {l : Level} → UU l → UU l
+free-directed-loop : {l : Level} → UU l → UU (lI ⊔ l)
 free-directed-loop X = Σ (Δ¹ → X) (λ α → α 1▵ ＝ α 0▵)
 
 module _
@@ -91,7 +91,7 @@ module _
   {l1 l2 : Level} {X : UU l1} (α : free-directed-loop X) (P : X → UU l2)
   where
 
-  free-dependent-directed-loop : UU l2
+  free-dependent-directed-loop : UU (lI ⊔ l2)
   free-dependent-directed-loop =
     Σ ( arrow▵' (P ∘ arrow-free-directed-loop α))
       ( λ β →
@@ -176,7 +176,7 @@ module _
       ( H 0▵)
       ( compute-target-free-directed-loop α')
 
-  htpy-free-directed-loop : (α α' : free-directed-loop X) → UU l1
+  htpy-free-directed-loop : (α α' : free-directed-loop X) → UU (lI ⊔ l1)
   htpy-free-directed-loop α α' =
     Σ ( arrow-free-directed-loop α ~ arrow-free-directed-loop α')
       ( coherence-htpy-free-directed-loop α α')
@@ -241,7 +241,7 @@ module _
       ( compute-target-free-dependent-directed-loop α β'))
 
   htpy-free-dependent-directed-loop :
-    (β β' : free-dependent-directed-loop α P) → UU l2
+    (β β' : free-dependent-directed-loop α P) → UU (lI ⊔ l2)
   htpy-free-dependent-directed-loop β β' =
     Σ ( arrow-free-dependent-directed-loop α β ~
         arrow-free-dependent-directed-loop α β')

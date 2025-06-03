@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.covariant-type-families
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -39,8 +39,8 @@ open import orthogonal-factorization-systems.null-types
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.dependent-directed-edges I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I I
-open import simplicial-type-theory.inequality-directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.inequality-directed-interval-type I
 
 open import synthetic-homotopy-theory.circle
 ```
@@ -94,7 +94,7 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  is-simplicially-covariant : UU (l1 ⊔ l2)
+  is-simplicially-covariant : UU (lI ⊔ l1 ⊔ l2)
   is-simplicially-covariant = is-local-family (point 0▵) B
 ```
 
@@ -103,11 +103,10 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  is-simplicially-covariant' : UU (l1 ⊔ l2)
+  is-simplicially-covariant' : UU (lI ⊔ l1 ⊔ l2)
   is-simplicially-covariant' =
     (α : arrow▵ A) (x' : B (α 0▵)) →
-    is-torsorial
-      ( dependent-hom▵ B (hom▵-arrow▵ α) x')
+    is-torsorial (dependent-hom▵ B (hom▵-arrow▵ α) x')
 ```
 
 ## References

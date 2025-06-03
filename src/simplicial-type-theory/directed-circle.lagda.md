@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.directed-circle
-  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
   where
 ```
 
@@ -47,9 +47,9 @@ open import reflection.erasing-equality
 open import simplicial-type-theory.action-on-directed-edges-functions I
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I I
+open import simplicial-type-theory.directed-interval-type I
 open import simplicial-type-theory.free-directed-loops I
-open import simplicial-type-theory.inequality-directed-interval-type I I
+open import simplicial-type-theory.inequality-directed-interval-type I
 open import simplicial-type-theory.simplicially-discrete-types I
 open import simplicial-type-theory.universal-property-directed-circle I
 
@@ -89,7 +89,7 @@ we make the directed circle the strict coequalizer of this diagram.
 
 ```agda
 postulate
-  directed-circle : UU lzero
+  directed-circle : UU lI
 
 postulate
   arrow-directed-circle : arrow▵ directed-circle
