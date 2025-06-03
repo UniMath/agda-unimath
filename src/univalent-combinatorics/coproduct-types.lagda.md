@@ -145,6 +145,52 @@ abstract
   number-of-elements-count-coproduct (pair k e) (pair l f) = refl
 ```
 
+### Mapping the `count-coproduct` equivalence on `inl-coproduct-Fin` is `inl` on the left count
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (cA : count A) (cB : count B)
+  where
+
+  map-equiv-count-coproduct-inl-coproduct-Fin :
+    map-equiv-count (count-coproduct cA cB) ∘
+    inl-coproduct-Fin
+      ( number-of-elements-count cA)
+      ( number-of-elements-count cB) ~
+    inl ∘ map-equiv-count cA
+  map-equiv-count-coproduct-inl-coproduct-Fin a =
+    ap
+      ( map-coproduct _ _)
+      ( is-retraction-map-inv-equiv
+        ( compute-coproduct-Fin
+          ( number-of-elements-count cA)
+          ( number-of-elements-count cB))
+        ( inl a))
+```
+
+### Mapping the `count-coproduct` equivalence on `inr-coproduct-Fin` is `inr` on the right count
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (cA : count A) (cB : count B)
+  where
+
+  map-equiv-count-coproduct-inr-coproduct-Fin :
+    map-equiv-count (count-coproduct cA cB) ∘
+    inr-coproduct-Fin
+      ( number-of-elements-count cA)
+      ( number-of-elements-count cB) ~
+    inr ∘ map-equiv-count cB
+  map-equiv-count-coproduct-inr-coproduct-Fin b =
+    ap
+      ( map-coproduct _ _)
+      ( is-retraction-map-inv-equiv
+        ( compute-coproduct-Fin
+          ( number-of-elements-count cA)
+          ( number-of-elements-count cB))
+        ( inr b))
+```
+
 ### If both `Σ A P` and `Σ A Q` have a count, then `Σ A P + Q` have a count
 
 ```agda
