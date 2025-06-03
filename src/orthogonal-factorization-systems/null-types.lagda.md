@@ -17,6 +17,7 @@ open import foundation.equivalences-arrows
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
