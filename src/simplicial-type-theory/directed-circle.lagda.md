@@ -55,7 +55,7 @@ open import synthetic-homotopy-theory.circle
 ## Idea
 
 The {{#concept "directed circle"}} is the type consisting of a point `*` and a
-nontrivial [directed edge](simplicial-type-theory.directed-edges.md) `* →₂ *`.
+nontrivial [directed edge](simplicial-type-theory.directed-edges.md) `* →▵ *`.
 The directed circle classifies
 [free directed loops](simplicial-type-theory.free-directed-loops.md), meaning
 that maps `directed-circle → X` are in correspondence with free directed loops
@@ -86,7 +86,7 @@ postulate
   directed-circle : UU lzero
 
 postulate
-  arrow-directed-circle : simplicial-arrow directed-circle
+  arrow-directed-circle : arrow▵ directed-circle
 
 base-directed-circle : directed-circle
 base-directed-circle = arrow-directed-circle 0₂
@@ -113,7 +113,7 @@ free-loop-directed-circle : free-directed-loop directed-circle
 free-loop-directed-circle =
   ( arrow-directed-circle , eq-source-target-arrow-directed-circle)
 
-loop-directed-circle : base-directed-circle →₂ base-directed-circle
+loop-directed-circle : base-directed-circle →▵ base-directed-circle
 loop-directed-circle =
   ( arrow-directed-circle ,
     compute-source-arrow-directed-circle ,
@@ -250,8 +250,8 @@ map-directed-circle-circle =
 
 compute-map-directed-circle-circle-id-arrow :
   (x : directed-circle) →
-  map-directed-circle-circle ∘ id-simplicial-arrow x ~
-  id-simplicial-arrow (map-directed-circle-circle x)
+  map-directed-circle-circle ∘ id-arrow▵ x ~
+  id-arrow▵ (map-directed-circle-circle x)
 compute-map-directed-circle-circle-id-arrow x = refl-htpy
 ```
 
@@ -262,9 +262,9 @@ module _
   (is-discrete-𝕊¹ : is-simplicially-discrete 𝕊¹)
   where
 
-  is-nontrivial-loop-simplicial-hom-𝕊¹ :
-    simplicial-hom-eq loop-𝕊¹ ≠ id-simplicial-hom base-𝕊¹
-  is-nontrivial-loop-simplicial-hom-𝕊¹ p =
+  is-nontrivial-loop-hom▵-𝕊¹ :
+    hom▵-eq loop-𝕊¹ ≠ id-hom▵ base-𝕊¹
+  is-nontrivial-loop-hom▵-𝕊¹ p =
     is-nontrivial-loop-𝕊¹
       ( is-injective-is-equiv (is-discrete-𝕊¹ base-𝕊¹ base-𝕊¹) p)
 ```
@@ -272,15 +272,15 @@ module _
 Steps:
 
 - construct computation on edges of the recursor of the directed circle
-- show that the loop of the directed circle maps to `simplicial-hom-eq loop-𝕊¹`
+- show that the loop of the directed circle maps to `hom▵-eq loop-𝕊¹`
 
 ```agda
   -- is-nontrivial-loop-directed-circle :
-  --   loop-directed-circle ≠ id-simplicial-hom base-directed-circle
+  --   loop-directed-circle ≠ id-hom▵ base-directed-circle
   -- is-nontrivial-loop-directed-circle p =
-  --   is-nontrivial-loop-simplicial-hom-𝕊¹
-  --     {! ? ∙ ap (action-simplicial-hom-function map-directed-circle-circle) p ∙ ? !}
+  --   is-nontrivial-loop-hom▵-𝕊¹
+  --     {! ? ∙ ap (action-hom▵-function map-directed-circle-circle) p ∙ ? !}
 ```
 
 It remains to formalize that the circle is simplicially discrete. Note that the
-proof only uses that `simplicial-hom-eq` is injective.
+proof only uses that `hom▵-eq` is injective.

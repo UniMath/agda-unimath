@@ -21,7 +21,7 @@ open import simplicial-type-theory.directed-interval-type
 ## Idea
 
 A
-{{#concept "simplicial arrow" Disambiguation="simplicial type theory" Agda=simplicial-arrow}}
+{{#concept "simplicial arrow" Disambiguation="simplicial type theory" Agda=arrow▵}}
 in a type `A` is a map from the
 [directed interval](simplicial-type-theory.directed-interval-type.md) to the
 type, `𝟚 → A`. Given a simplicial arrow `α` in `A`, we call `α 0₂` the _source_,
@@ -34,28 +34,28 @@ with a specified source and target.
 ### Simplicial arrows in types dependent over the directed interval
 
 ```agda
-simplicial-arrow' : {l : Level} → (𝟚 → UU l) → UU l
-simplicial-arrow' A = (t : 𝟚) → A t
+arrow▵' : {l : Level} → (𝟚 → UU l) → UU l
+arrow▵' A = (t : 𝟚) → A t
 ```
 
 ### Simplicial arrows
 
 ```agda
-simplicial-arrow : {l : Level} → UU l → UU l
-simplicial-arrow A = simplicial-arrow' (λ _ → A)
+arrow▵ : {l : Level} → UU l → UU l
+arrow▵ A = arrow▵' (λ _ → A)
 ```
 
 ### The identity/constant simplicial arrows
 
 ```agda
-id-simplicial-arrow : {l : Level} {A : UU l} (x : A) → simplicial-arrow A
-id-simplicial-arrow x _ = x
+id-arrow▵ : {l : Level} {A : UU l} → A → arrow▵ A
+id-arrow▵ x _ = x
 ```
 
 ### The representing arrow of the directed interval
 
 ```agda
-representing-arrow-𝟚 : simplicial-arrow 𝟚
+representing-arrow-𝟚 : arrow▵ 𝟚
 representing-arrow-𝟚 = id
 ```
 
@@ -66,16 +66,16 @@ module _
   {l : Level} {A : UU l} {x y : A}
   where
 
-  simplicial-arrow-eq : x ＝ y → simplicial-arrow A
-  simplicial-arrow-eq refl = id-simplicial-arrow x
+  arrow▵-eq : x ＝ y → arrow▵ A
+  arrow▵-eq refl = id-arrow▵ x
 
-  compute-source-simplicial-arrow-eq :
-    (p : x ＝ y) → simplicial-arrow-eq p 0₂ ＝ x
-  compute-source-simplicial-arrow-eq refl = refl
+  compute-source-arrow▵-eq :
+    (p : x ＝ y) → arrow▵-eq p 0₂ ＝ x
+  compute-source-arrow▵-eq refl = refl
 
-  compute-target-simplicial-arrow-eq :
-    (p : x ＝ y) → simplicial-arrow-eq p 1₂ ＝ y
-  compute-target-simplicial-arrow-eq refl = refl
+  compute-target-arrow▵-eq :
+    (p : x ＝ y) → arrow▵-eq p 1₂ ＝ y
+  compute-target-arrow▵-eq refl = refl
 ```
 
 ## Properties
@@ -84,6 +84,6 @@ module _
 
 ```agda
 is-not-constant-representing-arrow-𝟚 :
-  (t : 𝟚) → ¬ (representing-arrow-𝟚 ~ id-simplicial-arrow t)
+  (t : 𝟚) → ¬ (representing-arrow-𝟚 ~ id-arrow▵ t)
 is-not-constant-representing-arrow-𝟚 _ H = is-nontrivial-𝟚 (H 0₂ ∙ inv (H 1₂))
 ```

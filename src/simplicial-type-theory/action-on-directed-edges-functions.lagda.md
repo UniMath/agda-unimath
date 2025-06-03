@@ -25,19 +25,19 @@ open import simplicial-type-theory.directed-edges
 
 Any function `f : A → B` preserves
 [directed edges](simplicial-type-theory.directed-edges.md), in the sense that it
-maps any edge `p : x →₂ y` in `A` to an edge
-`action-simplicial-hom f p : f x →₂ f y` in `B`. This action on directed edges
-can be thought of as a functorial action of functions in simplicial type theory.
+maps any edge `p : x →▵ y` in `A` to an edge `action-hom▵ f p : f x →▵ f y` in
+`B`. This action on directed edges can be thought of as a functorial action of
+functions in simplicial type theory.
 
 ## Definition
 
 ### The functorial action of functions on directed edges
 
 ```agda
-action-simplicial-hom-function :
+action-hom▵-function :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A} →
-  x →₂ y → f x →₂ f y
-action-simplicial-hom-function f (α , s , t) = (f ∘ α , ap f s , ap f t)
+  x →▵ y → f x →▵ f y
+action-hom▵-function f (α , s , t) = (f ∘ α , ap f s , ap f t)
 ```
 
 ## Properties
@@ -45,30 +45,30 @@ action-simplicial-hom-function f (α , s , t) = (f ∘ α , ap f s , ap f t)
 ### The identity function acts trivially on directed edges
 
 ```agda
-compute-action-simplicial-hom-id-function :
-  {l : Level} {A : UU l} {x y : A} (p : x →₂ y) →
-  (action-simplicial-hom-function id p) ＝ p
-compute-action-simplicial-hom-id-function (α , s , t) =
+compute-action-hom▵-id-function :
+  {l : Level} {A : UU l} {x y : A} (p : x →▵ y) →
+  (action-hom▵-function id p) ＝ p
+compute-action-hom▵-id-function (α , s , t) =
   eq-pair-eq-fiber (eq-pair (ap-id s) (ap-id t))
 ```
 
 ### The action on directed edges of a composite function is the composite of the actions
 
 ```agda
-compute-action-simplicial-hom-comp-function :
+compute-action-hom▵-comp-function :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C)
-  (f : A → B) {x y : A} (p : x →₂ y) →
-  (action-simplicial-hom-function (g ∘ f) p) ＝
-  ((action-simplicial-hom-function g ∘ action-simplicial-hom-function f) p)
-compute-action-simplicial-hom-comp-function g f (α , s , t) =
+  (f : A → B) {x y : A} (p : x →▵ y) →
+  (action-hom▵-function (g ∘ f) p) ＝
+  ((action-hom▵-function g ∘ action-hom▵-function f) p)
+compute-action-hom▵-comp-function g f (α , s , t) =
   eq-pair-eq-fiber (eq-pair (ap-comp g f s) (ap-comp g f t))
 
-associative-action-simplicial-hom-comp-function :
+associative-action-hom▵-comp-function :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (h : C → D) (g : B → C) (f : A → B) {x y : A} (p : x →₂ y) →
-  action-simplicial-hom-function (h ∘ g) (action-simplicial-hom-function f p) ＝
-  action-simplicial-hom-function h (action-simplicial-hom-function (g ∘ f) p)
-associative-action-simplicial-hom-comp-function h g f (α , s , t) =
+  (h : C → D) (g : B → C) (f : A → B) {x y : A} (p : x →▵ y) →
+  action-hom▵-function (h ∘ g) (action-hom▵-function f p) ＝
+  action-hom▵-function h (action-hom▵-function (g ∘ f) p)
+associative-action-hom▵-comp-function h g f (α , s , t) =
   eq-pair-eq-fiber (eq-pair (ap-comp-assoc h g f s) (ap-comp-assoc h g f t))
 ```
 
@@ -77,19 +77,19 @@ associative-action-simplicial-hom-comp-function h g f (α , s , t) =
 In fact, the identity edges are preserved strictly.
 
 ```agda
-compute-action-id-simplicial-hom-function :
+compute-action-id-hom▵-function :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x : A) →
-  action-simplicial-hom-function f (id-simplicial-hom x) ＝
-  id-simplicial-hom (f x)
-compute-action-id-simplicial-hom-function f x = refl
+  action-hom▵-function f (id-hom▵ x) ＝
+  id-hom▵ (f x)
+compute-action-id-hom▵-function f x = refl
 ```
 
 ### The action on identifications of a constant map is constant
 
 ```agda
-compute-action-simplicial-hom-const-function :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) {x y : A} (p : x →₂ y) →
-  action-simplicial-hom-function (const A b) p ＝ id-simplicial-hom b
-compute-action-simplicial-hom-const-function b (α , s , t) =
+compute-action-hom▵-const-function :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) {x y : A} (p : x →▵ y) →
+  action-hom▵-function (const A b) p ＝ id-hom▵ b
+compute-action-hom▵-const-function b (α , s , t) =
   eq-pair-eq-fiber (eq-pair (ap-const b s) (ap-const b t))
 ```

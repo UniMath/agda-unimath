@@ -65,15 +65,15 @@ module _
     f' ⇒▵ g' → f ⇒▵ g → (f' ∘ f) ⇒▵ (g' ∘ g)
   horizontal-comp-simplicial-natural-transformation β α x =
     ( λ t →
-      simplicial-arrow-simplicial-hom
-        ( β (simplicial-arrow-simplicial-hom (α x) t))
+      arrow-hom▵
+        ( β (arrow-hom▵ (α x) t))
         ( t)) ,
     ( ( ap
-        ( λ u → simplicial-arrow-simplicial-hom (β u) 0₂)
+        ( λ u → arrow-hom▵ (β u) 0₂)
         ( eq-source-simplicial-natural-transformation α x)) ∙
       ( eq-source-simplicial-natural-transformation β (f x))) ,
     ( ( ap
-        ( λ u → simplicial-arrow-simplicial-hom (β u) 1₂)
+        ( λ u → arrow-hom▵ (β u) 1₂)
         ( eq-target-simplicial-natural-transformation α x)) ∙
       ( eq-target-simplicial-natural-transformation β (g x)))
 ```
@@ -85,19 +85,19 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B}
   where
 
-  action-simplicial-hom-simplicial-natural-transformation :
-    f ⇒▵ g → {x y : A} → x →₂ y → f x →₂ g y
-  action-simplicial-hom-simplicial-natural-transformation α a =
+  action-hom▵-simplicial-natural-transformation :
+    f ⇒▵ g → {x y : A} → x →▵ y → f x →▵ g y
+  action-hom▵-simplicial-natural-transformation α a =
     ( λ t →
       family-of-simplicial-arrows-simplicial-natural-transformation α
-        ( simplicial-arrow-simplicial-hom a t)
+        ( arrow-hom▵ a t)
         ( t)) ,
     ( ( eq-source-simplicial-natural-transformation α
-        ( simplicial-arrow-simplicial-hom a 0₂)) ∙
-      ( ap f (eq-source-simplicial-hom a))) ,
+        ( arrow-hom▵ a 0₂)) ∙
+      ( ap f (eq-source-hom▵ a))) ,
     ( ( eq-target-simplicial-natural-transformation α
-        ( simplicial-arrow-simplicial-hom a 1₂)) ∙
-      ( ap g (eq-target-simplicial-hom a)))
+        ( arrow-hom▵ a 1₂)) ∙
+      ( ap g (eq-target-hom▵ a)))
 ```
 
 ## Properties

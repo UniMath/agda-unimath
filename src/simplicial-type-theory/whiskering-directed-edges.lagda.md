@@ -41,10 +41,10 @@ open import simplicial-type-theory.simplicial-arrows
 
 ## Idea
 
-Given a [directed edge](simplicial-type-theory.directed-edges.md) `α : x →₂ y`
+Given a [directed edge](simplicial-type-theory.directed-edges.md) `α : x →▵ y`
 in `A` and an [identification](foundation-core.identity-types.md) `p : y ＝ z`,
 we may {#concept "whisker" Disambiguation="directed edge by identification"} `α`
-by `p` to obtain a directed edge `x →₂ z`.
+by `p` to obtain a directed edge `x →▵ z`.
 
 ## Definitions
 
@@ -55,12 +55,12 @@ module _
   {l : Level} {A : UU l}
   where
 
-  whisker-target-simplicial-hom :
-    {x y z : A} → y ＝ z → x →₂ y → x →₂ z
-  whisker-target-simplicial-hom p α =
-    ( simplicial-arrow-simplicial-hom α ,
-      eq-source-simplicial-hom α ,
-      eq-target-simplicial-hom α ∙ᵣ p)
+  whisker-target-hom▵ :
+    {x y z : A} → y ＝ z → x →▵ y → x →▵ z
+  whisker-target-hom▵ p α =
+    ( arrow-hom▵ α ,
+      eq-source-hom▵ α ,
+      eq-target-hom▵ α ∙ᵣ p)
 ```
 
 ### Whiskering at the source of a directed edge
@@ -70,12 +70,12 @@ module _
   {l : Level} {A : UU l}
   where
 
-  whisker-source-simplicial-hom :
-    {x y z : A} → x ＝ z → x →₂ y → z →₂ y
-  whisker-source-simplicial-hom p α =
-    ( simplicial-arrow-simplicial-hom α ,
-      eq-source-simplicial-hom α ∙ᵣ p ,
-      eq-target-simplicial-hom α)
+  whisker-source-hom▵ :
+    {x y z : A} → x ＝ z → x →▵ y → z →▵ y
+  whisker-source-hom▵ p α =
+    ( arrow-hom▵ α ,
+      eq-source-hom▵ α ∙ᵣ p ,
+      eq-target-hom▵ α)
 ```
 
 ### Whiskering both end points of a directed edge
@@ -85,12 +85,12 @@ module _
   {l : Level} {A : UU l}
   where
 
-  double-whisker-simplicial-hom :
-    {x y x' y' : A} → x ＝ x' → y ＝ y' → x →₂ y → x' →₂ y'
-  double-whisker-simplicial-hom p q α =
-    ( simplicial-arrow-simplicial-hom α ,
-      eq-source-simplicial-hom α ∙ᵣ p ,
-      eq-target-simplicial-hom α ∙ᵣ q)
+  double-whisker-hom▵ :
+    {x y x' y' : A} → x ＝ x' → y ＝ y' → x →▵ y → x' →▵ y'
+  double-whisker-hom▵ p q α =
+    ( arrow-hom▵ α ,
+      eq-source-hom▵ α ∙ᵣ p ,
+      eq-target-hom▵ α ∙ᵣ q)
 ```
 
 ## Properties
@@ -102,28 +102,28 @@ module _
   {l : Level} {A : UU l}
   where
 
-  is-equiv-double-whisker-simplicial-hom :
+  is-equiv-double-whisker-hom▵ :
     {x y x' y' : A} (p : x ＝ x') (q : y ＝ y') →
-    is-equiv (double-whisker-simplicial-hom p q)
-  is-equiv-double-whisker-simplicial-hom refl refl = is-equiv-id
+    is-equiv (double-whisker-hom▵ p q)
+  is-equiv-double-whisker-hom▵ refl refl = is-equiv-id
 
-  is-equiv-whisker-target-simplicial-hom :
+  is-equiv-whisker-target-hom▵ :
     {x y z : A} (p : y ＝ z) →
-    is-equiv (whisker-target-simplicial-hom {x = x} p)
-  is-equiv-whisker-target-simplicial-hom p =
-    is-equiv-double-whisker-simplicial-hom refl p
+    is-equiv (whisker-target-hom▵ {x = x} p)
+  is-equiv-whisker-target-hom▵ p =
+    is-equiv-double-whisker-hom▵ refl p
 
-  is-equiv-whisker-source-simplicial-hom :
+  is-equiv-whisker-source-hom▵ :
     {x y z : A} (p : x ＝ z) →
-    is-equiv (whisker-source-simplicial-hom {y = y} p)
-  is-equiv-whisker-source-simplicial-hom p =
-    is-equiv-double-whisker-simplicial-hom p refl
+    is-equiv (whisker-source-hom▵ {y = y} p)
+  is-equiv-whisker-source-hom▵ p =
+    is-equiv-double-whisker-hom▵ p refl
 ```
 
 ### Naturality of homotopies with respect to directed edges
 
 Given two maps `f g : A → B` and a homotopy `H : f ~ g`, then for every directed
-edge `p : x →₂ y` in `A`, we have a commuting square
+edge `p : x →▵ y` in `A`, we have a commuting square
 
 ```text
           ap▵ f p
@@ -138,15 +138,15 @@ edge `p : x →₂ y` in `A`, we have a commuting square
 ```agda
 nat-htpy▵ :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
-  {x y : A} (α : x →₂ y) →
-  action-simplicial-hom-function g α ＝
-  double-whisker-simplicial-hom (H x) (H y) (action-simplicial-hom-function f α)
+  {x y : A} (α : x →▵ y) →
+  action-hom▵-function g α ＝
+  double-whisker-hom▵ (H x) (H y) (action-hom▵-function f α)
 nat-htpy▵ {A = A} {f = f} {g} H {x} {y} α =
   ind-htpy f
     ( λ g H →
-      action-simplicial-hom-function g α ＝
-      double-whisker-simplicial-hom (H x) (H y)
-        ( action-simplicial-hom-function f α))
+      action-hom▵-function g α ＝
+      double-whisker-hom▵ (H x) (H y)
+        ( action-hom▵-function f α))
     ( refl)
     ( H)
 ```
@@ -166,7 +166,7 @@ identification in `B`. Then we get the directed edge
   x ===== r (i x) --------> r (i y) ===== y
 ```
 
-This defines a map `s : (i x →₂ i y) → (x →₂ y)`. To see that `s ∘ ap▵ i ~ id`,
+This defines a map `s : (i x →▵ i y) → (x →▵ y)`. To see that `s ∘ ap▵ i ~ id`,
 i.e., that the whiskering
 
 ```text
@@ -185,17 +185,17 @@ module _
   (r : B → A) (H : r ∘ i ~ id)
   where
 
-  is-hom-injective-has-retraction : {x y : A} → (i x →₂ i y) → (x →₂ y)
+  is-hom-injective-has-retraction : {x y : A} → (i x →▵ i y) → (x →▵ y)
   is-hom-injective-has-retraction {x} {y} p =
-    double-whisker-simplicial-hom
+    double-whisker-hom▵
       ( H x)
       ( H y)
-      ( action-simplicial-hom-function r p)
+      ( action-hom▵-function r p)
 
   is-retraction-is-hom-injective-has-retraction' :
-    {x y : A} (α : x →₂ y) →
-    htpy-simplicial-hom
-      ( is-hom-injective-has-retraction (action-simplicial-hom-function i α))
+    {x y : A} (α : x →▵ y) →
+    htpy-hom▵
+      ( is-hom-injective-has-retraction (action-hom▵-function i α))
       ( α)
   pr1 (is-retraction-is-hom-injective-has-retraction' (α , p , q)) =
     H ·r α
@@ -207,11 +207,11 @@ module _
   is-retraction-is-hom-injective-has-retraction :
     {x y : A} →
     is-retraction
-      ( action-simplicial-hom-function i {x} {y})
+      ( action-hom▵-function i {x} {y})
       ( is-hom-injective-has-retraction)
   is-retraction-is-hom-injective-has-retraction α =
-    eq-htpy-simplicial-hom
-      ( is-hom-injective-has-retraction (action-simplicial-hom-function i α))
+    eq-htpy-hom▵
+      ( is-hom-injective-has-retraction (action-hom▵-function i α))
       ( α)
       ( is-retraction-is-hom-injective-has-retraction' α)
 
@@ -220,7 +220,7 @@ module _
   where
 
   is-hom-injective-retraction :
-    {x y : A} → i x →₂ i y → x →₂ y
+    {x y : A} → i x →▵ i y → x →▵ y
   is-hom-injective-retraction =
     is-hom-injective-has-retraction i
       ( map-retraction i R)
@@ -228,29 +228,29 @@ module _
 
   is-retraction-is-hom-injective-retraction :
     {x y : A} →
-    is-hom-injective-retraction ∘ action-simplicial-hom-function i {x} {y} ~ id
+    is-hom-injective-retraction ∘ action-hom▵-function i {x} {y} ~ id
   is-retraction-is-hom-injective-retraction =
     is-retraction-is-hom-injective-has-retraction i
       ( map-retraction i R)
       ( is-retraction-map-retraction i R)
 
   retraction-ap▵ :
-    {x y : A} → retraction (action-simplicial-hom-function i {x} {y})
+    {x y : A} → retraction (action-hom▵-function i {x} {y})
   pr1 retraction-ap▵ = is-hom-injective-retraction
   pr2 retraction-ap▵ = is-retraction-is-hom-injective-retraction
 ```
 
-### If `A` is a retract of `B` with inclusion `i : A → B`, then `x →₂ y` is a retract of `i x →₂ i y` for any two elements `x y : A`
+### If `A` is a retract of `B` with inclusion `i : A → B`, then `x →▵ y` is a retract of `i x →▵ i y` for any two elements `x y : A`
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (R : A retract-of B) (x y : A)
   where
 
-  retract-simplicial-hom :
-    (x →₂ y) retract-of (inclusion-retract R x →₂ inclusion-retract R y)
-  pr1 retract-simplicial-hom =
-    action-simplicial-hom-function (inclusion-retract R)
-  pr2 retract-simplicial-hom =
+  retract-hom▵ :
+    (x →▵ y) retract-of (inclusion-retract R x →▵ inclusion-retract R y)
+  pr1 retract-hom▵ =
+    action-hom▵-function (inclusion-retract R)
+  pr2 retract-hom▵ =
     retraction-ap▵ (inclusion-retract R) (retraction-retract R)
 ```

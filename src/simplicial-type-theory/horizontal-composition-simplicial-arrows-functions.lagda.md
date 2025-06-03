@@ -36,7 +36,7 @@ open import simplicial-type-theory.simplicial-arrows
 
 Given a [simplicial arrow](simplicial-type-theory.simplicial-arrows.md) `α` of
 functions `A → B` and a simplicial arrow `β` of functions `B → C`, we may
-{{#concept "horizontally compose" Disambiguation="simplicial arrows of functions" Agda=horizontal-comp-simplicial-arrow}}
+{{#concept "horizontally compose" Disambiguation="simplicial arrows of functions" Agda=horizontal-comp-arrow▵}}
 them to obtain a simplicial arrow of functions `A → C`. The horizontal composite
 is constructed by "synchronously traversing `α` and `β`":
 
@@ -55,11 +55,11 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  horizontal-comp-simplicial-arrow :
-    simplicial-arrow (B → C) →
-    simplicial-arrow (A → B) →
-    simplicial-arrow (A → C)
-  horizontal-comp-simplicial-arrow β α t x = β t (α t x)
+  horizontal-comp-arrow▵ :
+    arrow▵ (B → C) →
+    arrow▵ (A → B) →
+    arrow▵ (A → C)
+  horizontal-comp-arrow▵ β α t x = β t (α t x)
 ```
 
 ## Properties
@@ -71,15 +71,15 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  left-unit-law-horizontal-comp-simplicial-arrow :
-    (α : simplicial-arrow (A → B)) →
-    horizontal-comp-simplicial-arrow (id-simplicial-arrow id) α ＝ α
-  left-unit-law-horizontal-comp-simplicial-arrow α = refl
+  left-unit-law-horizontal-comp-arrow▵ :
+    (α : arrow▵ (A → B)) →
+    horizontal-comp-arrow▵ (id-arrow▵ id) α ＝ α
+  left-unit-law-horizontal-comp-arrow▵ α = refl
 
-  right-unit-law-horizontal-comp-simplicial-arrow :
-    (α : simplicial-arrow (A → B)) →
-    horizontal-comp-simplicial-arrow α (id-simplicial-arrow id) ＝ α
-  right-unit-law-horizontal-comp-simplicial-arrow α = refl
+  right-unit-law-horizontal-comp-arrow▵ :
+    (α : arrow▵ (A → B)) →
+    horizontal-comp-arrow▵ α (id-arrow▵ id) ＝ α
+  right-unit-law-horizontal-comp-arrow▵ α = refl
 ```
 
 ### Associativity of horizontal composition of simplicial arrows of functions
@@ -89,11 +89,11 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   where
 
-  associative-horizontal-comp-simplicial-arrow :
-    (γ : simplicial-arrow (C → D))
-    (β : simplicial-arrow (B → C))
-    (α : simplicial-arrow (A → B)) →
-    horizontal-comp-simplicial-arrow (horizontal-comp-simplicial-arrow γ β) α ＝
-    horizontal-comp-simplicial-arrow γ (horizontal-comp-simplicial-arrow β α)
-  associative-horizontal-comp-simplicial-arrow γ β α = refl
+  associative-horizontal-comp-arrow▵ :
+    (γ : arrow▵ (C → D))
+    (β : arrow▵ (B → C))
+    (α : arrow▵ (A → B)) →
+    horizontal-comp-arrow▵ (horizontal-comp-arrow▵ γ β) α ＝
+    horizontal-comp-arrow▵ γ (horizontal-comp-arrow▵ β α)
+  associative-horizontal-comp-arrow▵ γ β α = refl
 ```

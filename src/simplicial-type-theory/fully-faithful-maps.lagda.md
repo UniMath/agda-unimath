@@ -50,8 +50,8 @@ A
 from one type into another is a map that induces
 [equivalences](foundation-core.equivalences.md) on
 [hom-types](simplicial-type-theory.directed-edges.md). In other words, the
-directed edges `f x →₂ f y` for a simplicially fully-faithful map `f : A → B`
-are in one-to-one correspondence with the directed edges `x →₂ y`.
+directed edges `f x →▵ f y` for a simplicially fully-faithful map `f : A → B`
+are in one-to-one correspondence with the directed edges `x →▵ y`.
 
 ## Definitions
 
@@ -62,17 +62,17 @@ module _
 
   is-simplicially-fully-faithful : (A → B) → UU (l1 ⊔ l2)
   is-simplicially-fully-faithful f =
-    (x y : A) → is-equiv (action-simplicial-hom-function f {x} {y})
+    (x y : A) → is-equiv (action-hom▵-function f {x} {y})
 
   equiv-action-is-simplicially-fully-faithful :
     {f : A → B} (e : is-simplicially-fully-faithful f)
-    {x y : A} → (x →₂ y) ≃ (f x →₂ f y)
+    {x y : A} → (x →▵ y) ≃ (f x →▵ f y)
   equiv-action-is-simplicially-fully-faithful {f} e {x} {y} =
-    ( action-simplicial-hom-function f , e x y)
+    ( action-hom▵-function f , e x y)
 
   inv-equiv-action-is-simplicially-fully-faithful :
     {f : A → B} (e : is-simplicially-fully-faithful f)
-    {x y : A} → (f x →₂ f y) ≃ (x →₂ y)
+    {x y : A} → (f x →▵ f y) ≃ (x →▵ y)
   inv-equiv-action-is-simplicially-fully-faithful e =
     inv-equiv (equiv-action-is-simplicially-fully-faithful e)
 
@@ -94,8 +94,8 @@ module _
 
   equiv-action-simplicially-fully-faithful-map :
     (e : A ↪▵ B) {x y : A} →
-    ( x →₂ y) ≃
-    ( map-simplicially-fully-faithful-map e x →₂
+    ( x →▵ y) ≃
+    ( map-simplicially-fully-faithful-map e x →▵
       map-simplicially-fully-faithful-map e y)
   equiv-action-simplicially-fully-faithful-map e =
     equiv-action-is-simplicially-fully-faithful
@@ -104,9 +104,9 @@ module _
   inv-equiv-action-simplicially-fully-faithful-map :
     (e : A ↪▵ B)
     {x y : A} →
-    ( map-simplicially-fully-faithful-map e x →₂
+    ( map-simplicially-fully-faithful-map e x →▵
       map-simplicially-fully-faithful-map e y) ≃
-    ( x →₂ y)
+    ( x →▵ y)
   inv-equiv-action-simplicially-fully-faithful-map e =
     inv-equiv (equiv-action-simplicially-fully-faithful-map e)
 ```
@@ -126,7 +126,7 @@ module _
     is-prop-Π
       ( λ x →
         is-prop-Π
-          ( λ y → is-property-is-equiv (action-simplicial-hom-function f)))
+          ( λ y → is-property-is-equiv (action-hom▵-function f)))
 
   is-simplicially-fully-faithful-Prop : (A → B) → Prop (l1 ⊔ l2)
   is-simplicially-fully-faithful-Prop f =
@@ -144,7 +144,7 @@ module _
   is-simplicially-fully-faithful-id :
     is-simplicially-fully-faithful (id {A = A})
   is-simplicially-fully-faithful-id x y =
-    is-equiv-htpy id compute-action-simplicial-hom-id-function is-equiv-id
+    is-equiv-htpy id compute-action-hom▵-id-function is-equiv-id
 
   id-simplicially-fully-faithful-map : A ↪▵ A
   id-simplicially-fully-faithful-map =
@@ -171,10 +171,10 @@ module _
           ( is-emb-is-equiv H (α 0₂) x)
           ( is-emb-is-equiv H (α 1₂) y))
 
-  equiv-action-simplicial-hom :
+  equiv-action-hom▵ :
     (e : A ≃ B) → (x y : A) → hom▵ x y ≃ hom▵ (map-equiv e x) (map-equiv e y)
-  equiv-action-simplicial-hom e x y =
-    ( action-simplicial-hom-function (map-equiv e) ,
+  equiv-action-hom▵ e x y =
+    ( action-hom▵-function (map-equiv e) ,
       is-simplicially-fully-faithful-is-equiv (is-equiv-map-equiv e) x y)
 ```
 
@@ -208,11 +208,11 @@ module _
       is-simplicially-fully-faithful f
     is-simplicially-fully-faithful-htpy {f} {g} H is-ff-g x y =
       is-equiv-top-map-triangle
-        ( action-simplicial-hom-function g)
-        ( double-whisker-simplicial-hom (H x) (H y))
-        ( action-simplicial-hom-function f)
+        ( action-hom▵-function g)
+        ( double-whisker-hom▵ (H x) (H y))
+        ( action-hom▵-function f)
         ( nat-htpy▵ H)
-        ( is-equiv-double-whisker-simplicial-hom (H x) (H y))
+        ( is-equiv-double-whisker-hom▵ (H x) (H y))
         ( is-ff-g x y)
 
   is-simplicially-fully-faithful-htpy-simplicially-fully-faithful-map :
@@ -279,10 +279,10 @@ module _
     is-simplicially-fully-faithful (g ∘ h)
   is-simplicially-fully-faithful-comp g h is-ff-g is-ff-h x y =
     is-equiv-left-map-triangle
-      ( action-simplicial-hom-function (g ∘ h))
-      ( action-simplicial-hom-function g)
-      ( action-simplicial-hom-function h)
-      ( compute-action-simplicial-hom-comp-function g h)
+      ( action-hom▵-function (g ∘ h))
+      ( action-hom▵-function g)
+      ( action-hom▵-function h)
+      ( compute-action-hom▵-comp-function g h)
       ( is-ff-h x y)
       ( is-ff-g (h x) (h y))
 
@@ -315,10 +315,10 @@ module _
     is-simplicially-fully-faithful h
   is-simplicially-fully-faithful-right-factor g h is-ff-g is-ff-gh x y =
     is-equiv-top-map-triangle
-      ( action-simplicial-hom-function (g ∘ h))
-      ( action-simplicial-hom-function g)
-      ( action-simplicial-hom-function h)
-      ( compute-action-simplicial-hom-comp-function g h)
+      ( action-hom▵-function (g ∘ h))
+      ( action-hom▵-function g)
+      ( action-hom▵-function h)
+      ( compute-action-hom▵-comp-function g h)
       ( is-ff-g (h x) (h y))
       ( is-ff-gh x y)
 
@@ -332,10 +332,10 @@ module _
     is-simplicially-fully-faithful-top-map-triangle
       f g h H is-ff-g is-ff-f x y =
       is-equiv-top-map-triangle
-        ( action-simplicial-hom-function (g ∘ h))
-        ( action-simplicial-hom-function g)
-        ( action-simplicial-hom-function h)
-        ( compute-action-simplicial-hom-comp-function g h)
+        ( action-hom▵-function (g ∘ h))
+        ( action-hom▵-function g)
+        ( action-hom▵-function h)
+        ( compute-action-hom▵-comp-function g h)
         ( is-ff-g (h x) (h y))
         ( is-simplicially-fully-faithful-htpy (inv-htpy H) is-ff-f x y)
 

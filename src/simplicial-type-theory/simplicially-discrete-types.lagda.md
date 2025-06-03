@@ -51,7 +51,7 @@ A type `A` is
 if the canonical map
 
 ```text
-  simplicial-hom-eq : (x ＝ y) → (x →₂ y)
+  hom▵-eq : (x ＝ y) → (x →▵ y)
 ```
 
 is an [equivalence](foundation-core.equivalences.md) for all `x y : A`. A
@@ -70,11 +70,11 @@ module _
 
   is-simplicially-discrete : UU l
   is-simplicially-discrete =
-    (x y : A) → is-equiv (simplicial-hom-eq {x = x} {y})
+    (x y : A) → is-equiv (hom▵-eq {x = x} {y})
 
   is-prop-is-simplicially-discrete : is-prop is-simplicially-discrete
   is-prop-is-simplicially-discrete =
-    is-prop-Π (λ x → is-prop-Π (λ y → is-property-is-equiv simplicial-hom-eq))
+    is-prop-Π (λ x → is-prop-Π (λ y → is-property-is-equiv hom▵-eq))
 
   is-simplicially-discrete-Prop : Prop l
   is-simplicially-discrete-Prop =
@@ -101,18 +101,18 @@ module _
 
 ## Properties
 
-### To show a type is simplicially discrete it suffices to construct a section of `simplicial-hom-eq`
+### To show a type is simplicially discrete it suffices to construct a section of `hom▵-eq`
 
 ```agda
 module _
   {l : Level} (A : UU l)
   where
 
-  is-simplicially-discrete-section-simplicial-hom-eq :
-    ((x y : A) → section (simplicial-hom-eq {x = x} {y})) →
+  is-simplicially-discrete-section-hom▵-eq :
+    ((x y : A) → section (hom▵-eq {x = x} {y})) →
     is-simplicially-discrete A
-  is-simplicially-discrete-section-simplicial-hom-eq s x =
-    fundamental-theorem-id-section x (λ y → simplicial-hom-eq) (s x)
+  is-simplicially-discrete-section-hom▵-eq s x =
+    fundamental-theorem-id-section x (λ y → hom▵-eq) (s x)
 ```
 
 ### Being simplicially discrete is equivalent to being `𝟚`-null
@@ -123,27 +123,27 @@ module _
             ~
      A -------> Σ (x y : A), (x ＝ y)
      |                 |
-   Δ |                 | Σ² simplicial-hom-eq
+   Δ |                 | Σ² hom▵-eq
      ∨                 ∨
-  (𝟚 → A) ----> Σ (x y : A), (x →₂ y),
+  (𝟚 → A) ----> Σ (x y : A), (x →▵ y),
             ~
 ```
 
 which implies that the diagonal map is an equivalence if and only if the total
-map of `simplicial-hom-eq` is, and the total map is an equivalence if and only
-if the fiberwise map is.
+map of `hom▵-eq` is, and the total map is an equivalence if and only if the
+fiberwise map is.
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  equiv-tot-simplicial-hom-eq-diagonal-exponential-𝟚 :
+  equiv-tot-hom▵-eq-diagonal-exponential-𝟚 :
     equiv-arrow
       ( diagonal-exponential A 𝟚)
-      ( tot (λ x → tot (λ y → simplicial-hom-eq {x = x} {y})))
-  equiv-tot-simplicial-hom-eq-diagonal-exponential-𝟚 =
-    ( compute-total-Id , compute-total-simplicial-hom , refl-htpy)
+      ( tot (λ x → tot (λ y → hom▵-eq {x = x} {y})))
+  equiv-tot-hom▵-eq-diagonal-exponential-𝟚 =
+    ( compute-total-Id , compute-total-hom▵ , refl-htpy)
 
   abstract
     is-simplicially-discrete-is-𝟚-null :
@@ -153,8 +153,8 @@ module _
         ( is-fiberwise-equiv-is-equiv-tot
           ( is-equiv-target-is-equiv-source-equiv-arrow
             ( diagonal-exponential A 𝟚)
-            ( tot (λ x → tot (λ y → simplicial-hom-eq {x = x} {y})))
-            ( equiv-tot-simplicial-hom-eq-diagonal-exponential-𝟚)
+            ( tot (λ x → tot (λ y → hom▵-eq {x = x} {y})))
+            ( equiv-tot-hom▵-eq-diagonal-exponential-𝟚)
             ( H))
           ( x))
 
@@ -164,8 +164,8 @@ module _
     is-𝟚-null-is-simplicially-discrete H =
       is-equiv-source-is-equiv-target-equiv-arrow
         ( diagonal-exponential A 𝟚)
-        ( tot (λ x → tot (λ y → simplicial-hom-eq {x = x} {y})))
-        ( equiv-tot-simplicial-hom-eq-diagonal-exponential-𝟚)
+        ( tot (λ x → tot (λ y → hom▵-eq {x = x} {y})))
+        ( equiv-tot-hom▵-eq-diagonal-exponential-𝟚)
         ( is-equiv-tot-is-fiberwise-equiv
           ( λ x → is-equiv-tot-is-fiberwise-equiv (H x)))
 

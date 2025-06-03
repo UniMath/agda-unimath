@@ -39,10 +39,10 @@ open import simplicial-type-theory.simplicial-arrows
 
 ## Idea
 
-Given a directed edge `α : f →₂ f'` of functions `A → B` we may whisker it on
+Given a directed edge `α : f →▵ f'` of functions `A → B` we may whisker it on
 the left by a function `h : B → C` to obtain a directed edge of functions
-`hα : hf →₂ hf'`, or we may whisker it on the right by a function `g : C → A` to
-obtain a directed edge of functions `αg : fg →₂ f'g`.
+`hα : hf →▵ hf'`, or we may whisker it on the right by a function `g : C → A` to
+obtain a directed edge of functions `αg : fg →▵ f'g`.
 
 ## Definitions
 
@@ -53,10 +53,10 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  left-whisker-comp-simplicial-hom :
-    (h : B → C) {f f' : A → B} → f →₂ f' → h ∘ f →₂ h ∘ f'
-  left-whisker-comp-simplicial-hom h =
-    horizontal-comp-simplicial-hom (id-simplicial-hom h)
+  left-whisker-comp-hom▵ :
+    (h : B → C) {f f' : A → B} → f →▵ f' → h ∘ f →▵ h ∘ f'
+  left-whisker-comp-hom▵ h =
+    horizontal-comp-hom▵ (id-hom▵ h)
 ```
 
 ### Right whiskering directed edges between functions by functions
@@ -66,10 +66,10 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  right-whisker-comp-simplicial-hom :
-    {f f' : A → B} → f →₂ f' → (g : C → A) → f ∘ g →₂ f' ∘ g
-  right-whisker-comp-simplicial-hom α g =
-    horizontal-comp-simplicial-hom α (id-simplicial-hom g)
+  right-whisker-comp-hom▵ :
+    {f f' : A → B} → f →▵ f' → (g : C → A) → f ∘ g →▵ f' ∘ g
+  right-whisker-comp-hom▵ α g =
+    horizontal-comp-hom▵ α (id-hom▵ g)
 ```
 
 ## Properties
@@ -81,17 +81,17 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  left-unit-law-left-whisker-comp-simplicial-hom :
-    {f f' : A → B} (α : f →₂ f') →
-    left-whisker-comp-simplicial-hom id α ＝ α
-  left-unit-law-left-whisker-comp-simplicial-hom =
-    left-unit-law-horizontal-comp-simplicial-hom
+  left-unit-law-left-whisker-comp-hom▵ :
+    {f f' : A → B} (α : f →▵ f') →
+    left-whisker-comp-hom▵ id α ＝ α
+  left-unit-law-left-whisker-comp-hom▵ =
+    left-unit-law-horizontal-comp-hom▵
 
-  right-unit-law-right-whisker-comp-simplicial-hom :
-    {f f' : A → B} (α : f →₂ f') →
-    right-whisker-comp-simplicial-hom α id ＝ α
-  right-unit-law-right-whisker-comp-simplicial-hom =
-    right-unit-law-horizontal-comp-simplicial-hom
+  right-unit-law-right-whisker-comp-hom▵ :
+    {f f' : A → B} (α : f →▵ f') →
+    right-whisker-comp-hom▵ α id ＝ α
+  right-unit-law-right-whisker-comp-hom▵ =
+    right-unit-law-horizontal-comp-hom▵
 ```
 
 ### Absorption laws of whiskering of directed edges
@@ -103,17 +103,17 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  right-absorption-law-left-whisker-comp-simplicial-hom :
+  right-absorption-law-left-whisker-comp-hom▵ :
     (g : B → C) (f : A → B) →
-    left-whisker-comp-simplicial-hom g (id-simplicial-hom f) ＝
-    id-simplicial-hom (g ∘ f)
-  right-absorption-law-left-whisker-comp-simplicial-hom g f = refl
+    left-whisker-comp-hom▵ g (id-hom▵ f) ＝
+    id-hom▵ (g ∘ f)
+  right-absorption-law-left-whisker-comp-hom▵ g f = refl
 
-  left-absorption-law-right-whisker-comp-simplicial-hom :
+  left-absorption-law-right-whisker-comp-hom▵ :
     (g : B → C) (f : A → B) →
-    right-whisker-comp-simplicial-hom (id-simplicial-hom g) f ＝
-    id-simplicial-hom (g ∘ f)
-  left-absorption-law-right-whisker-comp-simplicial-hom g f = refl
+    right-whisker-comp-hom▵ (id-hom▵ g) f ＝
+    id-hom▵ (g ∘ f)
+  left-absorption-law-right-whisker-comp-hom▵ g f = refl
 ```
 
 ### Whiskering of directed edges between functions preserves function composition
@@ -123,15 +123,15 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   where
 
-  preserves-comp-left-whisker-comp-simplicial-hom :
-    (h : C → D) (g : B → C) {f f' : A → B} (α : f →₂ f') →
-    left-whisker-comp-simplicial-hom (h ∘ g) α ＝
-    left-whisker-comp-simplicial-hom h (left-whisker-comp-simplicial-hom g α)
-  preserves-comp-left-whisker-comp-simplicial-hom h g (α , refl , refl) = refl
+  preserves-comp-left-whisker-comp-hom▵ :
+    (h : C → D) (g : B → C) {f f' : A → B} (α : f →▵ f') →
+    left-whisker-comp-hom▵ (h ∘ g) α ＝
+    left-whisker-comp-hom▵ h (left-whisker-comp-hom▵ g α)
+  preserves-comp-left-whisker-comp-hom▵ h g (α , refl , refl) = refl
 
-  preserves-comp-right-whisker-comp-simplicial-hom :
-    {h h' : C → D} (α : h →₂ h') (g : B → C) (f : A → B) →
-    right-whisker-comp-simplicial-hom α (g ∘ f) ＝
-    right-whisker-comp-simplicial-hom (right-whisker-comp-simplicial-hom α g) f
-  preserves-comp-right-whisker-comp-simplicial-hom (α , refl , refl) g f = refl
+  preserves-comp-right-whisker-comp-hom▵ :
+    {h h' : C → D} (α : h →▵ h') (g : B → C) (f : A → B) →
+    right-whisker-comp-hom▵ α (g ∘ f) ＝
+    right-whisker-comp-hom▵ (right-whisker-comp-hom▵ α g) f
+  preserves-comp-right-whisker-comp-hom▵ (α , refl , refl) g f = refl
 ```

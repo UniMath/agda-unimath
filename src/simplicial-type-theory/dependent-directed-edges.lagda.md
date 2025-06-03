@@ -36,8 +36,8 @@ open import simplicial-type-theory.simplicial-arrows
 ## Idea
 
 Given a type family `B : A → 𝒰` and a
-[directed edge](simplicial-type-theory.directed-edges.md) `α : x →₂ y` in `A`, a
-{{#concept "dependent directed edge" Disambiguation="simplicial type theory" Agda=dependent-simplicial-hom}}
+[directed edge](simplicial-type-theory.directed-edges.md) `α : x →▵ y` in `A`, a
+{{#concept "dependent directed edge" Disambiguation="simplicial type theory" Agda=dependent-hom▵}}
 _over_ `α` from `x'` to `y'` is a simplicial arrow `β` in `B ∘ α : 𝟚 → 𝒰`. such
 that `β 0₂ ＝ x'` over the identification `α 0₂ ＝ x` and `β 1₂ ＝ y'` over the
 identification `α 1₂ ＝ y`.
@@ -69,63 +69,63 @@ respective fiber of `B`
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
-  {x y : A} (α : x →₂ y)
+  {x y : A} (α : x →▵ y)
   where
 
-  dependent-simplicial-hom : B x → B y → UU l2
-  dependent-simplicial-hom x' y' =
-    Σ ( simplicial-arrow' (B ∘ simplicial-arrow-simplicial-hom α))
+  dependent-hom▵ : B x → B y → UU l2
+  dependent-hom▵ x' y' =
+    Σ ( arrow▵' (B ∘ arrow-hom▵ α))
       ( λ β →
-        ( dependent-identification B (eq-source-simplicial-hom α) (β 0₂) x') ×
-        ( dependent-identification B (eq-target-simplicial-hom α) (β 1₂) y'))
+        ( dependent-identification B (eq-source-hom▵ α) (β 0₂) x') ×
+        ( dependent-identification B (eq-target-hom▵ α) (β 1₂) y'))
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  {x y : A} (α : x →₂ y) {x' : B x} {y' : B y}
-  (β : dependent-simplicial-hom B α x' y')
+  {x y : A} (α : x →▵ y) {x' : B x} {y' : B y}
+  (β : dependent-hom▵ B α x' y')
   where
 
-  simplicial-arrow-dependent-simplicial-hom :
-    simplicial-arrow' (B ∘ simplicial-arrow-simplicial-hom α)
-  simplicial-arrow-dependent-simplicial-hom = pr1 β
+  arrow-dependent-hom▵ :
+    arrow▵' (B ∘ arrow-hom▵ α)
+  arrow-dependent-hom▵ = pr1 β
 
-  eq-source-dependent-simplicial-hom :
+  eq-source-dependent-hom▵ :
     dependent-identification B
-      ( eq-source-simplicial-hom α)
-      ( simplicial-arrow-dependent-simplicial-hom 0₂)
+      ( eq-source-hom▵ α)
+      ( arrow-dependent-hom▵ 0₂)
       ( x')
-  eq-source-dependent-simplicial-hom = pr1 (pr2 β)
+  eq-source-dependent-hom▵ = pr1 (pr2 β)
 
-  eq-target-dependent-simplicial-hom :
+  eq-target-dependent-hom▵ :
     dependent-identification B
-      ( eq-target-simplicial-hom α)
-      ( simplicial-arrow-dependent-simplicial-hom 1₂)
+      ( eq-target-hom▵ α)
+      ( arrow-dependent-hom▵ 1₂)
       ( y')
-  eq-target-dependent-simplicial-hom = pr2 (pr2 β)
+  eq-target-dependent-hom▵ = pr2 (pr2 β)
 ```
 
 ### The identity/constant dependent directed edges
 
 ```agda
-id-dependent-simplicial-hom :
+id-dependent-hom▵ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x : A} (x' : B x) →
-  dependent-simplicial-hom B (id-simplicial-hom x) x' x'
-id-dependent-simplicial-hom = id-simplicial-hom
+  dependent-hom▵ B (id-hom▵ x) x' x'
+id-dependent-hom▵ = id-hom▵
 ```
 
 ### Dependent directed edges arising from identifications
 
 ```agda
-dependent-simplicial-hom-eq :
+dependent-hom▵-eq :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A} (p : x ＝ y)
   {x' : B x} {y' : B y} → dependent-identification B p x' y' →
-  dependent-simplicial-hom B (simplicial-hom-eq p) x' y'
-dependent-simplicial-hom-eq refl = simplicial-hom-eq
+  dependent-hom▵ B (hom▵-eq p) x' y'
+dependent-hom▵-eq refl = hom▵-eq
 ```
 
 ### Characterizing equality of dependent directed edges over a fixed edge
 
-Given a directed edge `α : x →₂ y` in `A` and elements `x' : B x` and
+Given a directed edge `α : x →▵ y` in `A` and elements `x' : B x` and
 `y' : B y`, we want to characterize identifications of dependent directed edges
 from `x'` to `y'` over `α`. The situation is as follows
 
@@ -166,74 +166,74 @@ dependent triangles depicted below
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  {x y : A} (α : x →₂ y) {x' : B x} {y' : B y}
+  {x y : A} (α : x →▵ y) {x' : B x} {y' : B y}
   where
 
-  coherence-htpy-dependent-simplicial-hom-over :
-    (β β' : dependent-simplicial-hom B α x' y') →
-    simplicial-arrow-dependent-simplicial-hom α β ~
-    simplicial-arrow-dependent-simplicial-hom α β' →
+  coherence-htpy-dependent-hom-over▵ :
+    (β β' : dependent-hom▵ B α x' y') →
+    arrow-dependent-hom▵ α β ~
+    arrow-dependent-hom▵ α β' →
     UU l2
-  coherence-htpy-dependent-simplicial-hom-over β β' H =
-    ( ( eq-source-dependent-simplicial-hom α β) ＝
+  coherence-htpy-dependent-hom-over▵ β β' H =
+    ( ( eq-source-dependent-hom▵ α β) ＝
       ( concat-dependent-identification B refl
-        ( eq-source-simplicial-hom α)
+        ( eq-source-hom▵ α)
         ( H 0₂)
-        ( eq-source-dependent-simplicial-hom α β'))) ×
-    ( ( eq-target-dependent-simplicial-hom α β) ＝
+        ( eq-source-dependent-hom▵ α β'))) ×
+    ( ( eq-target-dependent-hom▵ α β) ＝
       ( concat-dependent-identification B refl
-        ( eq-target-simplicial-hom α)
+        ( eq-target-hom▵ α)
         ( H 1₂)
-        ( eq-target-dependent-simplicial-hom α β')))
+        ( eq-target-dependent-hom▵ α β')))
 
-  htpy-dependent-simplicial-hom-over :
-    (β β' : dependent-simplicial-hom B α x' y') → UU l2
-  htpy-dependent-simplicial-hom-over β β' =
-    Σ ( simplicial-arrow-dependent-simplicial-hom α β ~
-        simplicial-arrow-dependent-simplicial-hom α β')
-      ( coherence-htpy-dependent-simplicial-hom-over β β')
+  htpy-dependent-hom-over▵ :
+    (β β' : dependent-hom▵ B α x' y') → UU l2
+  htpy-dependent-hom-over▵ β β' =
+    Σ ( arrow-dependent-hom▵ α β ~
+        arrow-dependent-hom▵ α β')
+      ( coherence-htpy-dependent-hom-over▵ β β')
 
-  refl-htpy-dependent-simplicial-hom-over :
-    (β : dependent-simplicial-hom B α x' y') →
-    htpy-dependent-simplicial-hom-over β β
-  refl-htpy-dependent-simplicial-hom-over β = (refl-htpy , refl , refl)
+  refl-htpy-dependent-hom-over▵ :
+    (β : dependent-hom▵ B α x' y') →
+    htpy-dependent-hom-over▵ β β
+  refl-htpy-dependent-hom-over▵ β = (refl-htpy , refl , refl)
 
-  htpy-eq-dependent-simplicial-hom-over :
-    (β β' : dependent-simplicial-hom B α x' y') →
-    β ＝ β' → htpy-dependent-simplicial-hom-over β β'
-  htpy-eq-dependent-simplicial-hom-over β .β refl =
-    refl-htpy-dependent-simplicial-hom-over β
+  htpy-eq-dependent-hom-over▵ :
+    (β β' : dependent-hom▵ B α x' y') →
+    β ＝ β' → htpy-dependent-hom-over▵ β β'
+  htpy-eq-dependent-hom-over▵ β .β refl =
+    refl-htpy-dependent-hom-over▵ β
 
-  is-torsorial-htpy-dependent-simplicial-hom-over :
-    (β : dependent-simplicial-hom B α x' y') →
-    is-torsorial (htpy-dependent-simplicial-hom-over β)
-  is-torsorial-htpy-dependent-simplicial-hom-over β =
+  is-torsorial-htpy-dependent-hom-over▵ :
+    (β : dependent-hom▵ B α x' y') →
+    is-torsorial (htpy-dependent-hom-over▵ β)
+  is-torsorial-htpy-dependent-hom-over▵ β =
     is-torsorial-Eq-structure
-      ( is-torsorial-htpy (simplicial-arrow-dependent-simplicial-hom α β))
-      ( simplicial-arrow-dependent-simplicial-hom α β , refl-htpy)
+      ( is-torsorial-htpy (arrow-dependent-hom▵ α β))
+      ( arrow-dependent-hom▵ α β , refl-htpy)
       ( is-torsorial-Eq-structure
-        ( is-torsorial-Id (eq-source-dependent-simplicial-hom α β))
-        ( eq-source-dependent-simplicial-hom α β , refl)
-        ( is-torsorial-Id (eq-target-dependent-simplicial-hom α β)))
+        ( is-torsorial-Id (eq-source-dependent-hom▵ α β))
+        ( eq-source-dependent-hom▵ α β , refl)
+        ( is-torsorial-Id (eq-target-dependent-hom▵ α β)))
 
-  is-equiv-htpy-eq-dependent-simplicial-hom-over :
-    (β β' : dependent-simplicial-hom B α x' y') →
-    is-equiv (htpy-eq-dependent-simplicial-hom-over β β')
-  is-equiv-htpy-eq-dependent-simplicial-hom-over β =
+  is-equiv-htpy-eq-dependent-hom-over▵ :
+    (β β' : dependent-hom▵ B α x' y') →
+    is-equiv (htpy-eq-dependent-hom-over▵ β β')
+  is-equiv-htpy-eq-dependent-hom-over▵ β =
     fundamental-theorem-id
-      ( is-torsorial-htpy-dependent-simplicial-hom-over β)
-      ( htpy-eq-dependent-simplicial-hom-over β)
+      ( is-torsorial-htpy-dependent-hom-over▵ β)
+      ( htpy-eq-dependent-hom-over▵ β)
 
-  extensionality-dependent-simplicial-hom-over :
-    (β β' : dependent-simplicial-hom B α x' y') →
-    (β ＝ β') ≃ htpy-dependent-simplicial-hom-over β β'
-  extensionality-dependent-simplicial-hom-over β β' =
-    ( htpy-eq-dependent-simplicial-hom-over β β' ,
-      is-equiv-htpy-eq-dependent-simplicial-hom-over β β')
+  extensionality-dependent-hom-over▵ :
+    (β β' : dependent-hom▵ B α x' y') →
+    (β ＝ β') ≃ htpy-dependent-hom-over▵ β β'
+  extensionality-dependent-hom-over▵ β β' =
+    ( htpy-eq-dependent-hom-over▵ β β' ,
+      is-equiv-htpy-eq-dependent-hom-over▵ β β')
 
-  eq-htpy-dependent-simplicial-hom-over :
-    (β β' : dependent-simplicial-hom B α x' y') →
-    htpy-dependent-simplicial-hom-over β β' → β ＝ β'
-  eq-htpy-dependent-simplicial-hom-over β β' =
-    map-inv-equiv (extensionality-dependent-simplicial-hom-over β β')
+  eq-htpy-dependent-hom-over▵ :
+    (β β' : dependent-hom▵ B α x' y') →
+    htpy-dependent-hom-over▵ β β' → β ＝ β'
+  eq-htpy-dependent-hom-over▵ β β' =
+    map-inv-equiv (extensionality-dependent-hom-over▵ β β')
 ```

@@ -62,7 +62,7 @@ Given a type `X`, we define the {{#concept "simplicial cone type"}} as the
 
 Intuitively, the simplicial cone of `X` can be understood as `X` with a point
 `*` attached such that there is a
-[directed edge](simplicial-type-theory.directed-edges.md) `* →₂ x` for every
+[directed edge](simplicial-type-theory.directed-edges.md) `* →▵ x` for every
 `x : X`.
 
 ## Definitions
@@ -96,7 +96,7 @@ module _
     glue-pushout (λ (x : X) → (x , 0₂)) (terminal-map X)
 
   hom-simplicial-cone :
-    (x : X) → point-simplicial-cone →₂ in-simplicial-cone x
+    (x : X) → point-simplicial-cone →▵ in-simplicial-cone x
   hom-simplicial-cone x =
     ( in-simplicial-cone' x , glue-simplicial-cone x , refl)
 

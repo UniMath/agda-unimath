@@ -37,6 +37,8 @@ open import orthogonal-factorization-systems.extensions-maps
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
+open import simplicial-type-theory.inner-2-horn
+open import simplicial-type-theory.standard-simplices
 ```
 
 </details>
@@ -60,17 +62,17 @@ is a 2-simplex
 ```
 
 such that the restriction along the first axis is `f` and the restriction along
-the other axis if `g`.
+the second axis is `g`.
 
 ## Definition
 
-```agda
+```text
 module _
   {l : Level} {A : UU l} {x y z : A}
   where
 
-  composition-simplicial-hom : hom▵ y z → hom▵ x y → UU l
-  composition-simplicial-hom g f = {! Σ Δ² ?  !}
+  composition-hom▵ : hom▵ y z → hom▵ x y → UU l
+  composition-hom▵ g f = Σ (Δ 2 → A) (λ σ → {!   !})
 ```
 
 A composition of two arrows `f : x → y` and `g: y → z` in a type `A` is a
@@ -91,10 +93,10 @@ The diagonal arrow is then a composite of `g` after `f`.
 
 ### Compositions
 
-```agda
+```text
 dependent-composition-horn :
-  {l : Level} (A : Δ 2 → UU l) → ((u : Λ²₁) → A (Λ²₁→Δ² u)) → UU l
-dependent-composition-horn A = extension-dependent-type Λ²₁→Δ² A
+  {l : Level} (A : Δ 2 → UU l) → ((u : Λ²₁) → A (inclusion-Δ²-Λ²₁ u)) → UU l
+dependent-composition-horn A = extension-dependent-type inclusion-Δ²-Λ²₁ A
 
 module _
   {l : Level} {A : UU l}
@@ -103,7 +105,7 @@ module _
   composition-horn : (Λ²₁ → A) → UU l
   composition-horn = dependent-composition-horn (λ _ → A)
 
-  composition-arr : (f g : arr A) → f 1₂ ＝ g 0₂ → UU l
+  composition-arr : (f g : arrow▵ A) → f 1₂ ＝ g 0₂ → UU l
   composition-arr f g p = composition-horn (rec-arr-Λ²₁ f g p)
 
   composition : {x y z : A} → hom x y → hom y z → UU l
@@ -112,7 +114,7 @@ module _
 
 ### Composition witnesses
 
-```agda
+```text
 module _
   {l : Level} {A : UU l}
   where
@@ -132,30 +134,30 @@ module _
 
 ### Extension witnesses compositions
 
-```agda
+```text
 module _
   {l : Level} {A : UU l}
   where
 
   htpy-composition-horn :
     {fg : Λ²₁ → A} (c : composition-horn fg) →
-    fg ~ witness-composition-horn c ∘ Λ²₁→Δ²
+    fg ~ witness-composition-horn c ∘ inclusion-Δ²-Λ²₁
   htpy-composition-horn = pr2
 
   htpy-composition-arr :
     {f g : arr A} {p : f 1₂ ＝ g 0₂} (c : composition-arr f g p) →
-    rec-arr-Λ²₁ f g p ~ witness-composition-arr c ∘ Λ²₁→Δ²
+    rec-arr-Λ²₁ f g p ~ witness-composition-arr c ∘ inclusion-Δ²-Λ²₁
   htpy-composition-arr = pr2
 
   htpy-composition :
     {x y z : A} (f : hom x y) (g : hom y z) (c : composition f g) →
-    rec-hom-Λ²₁ f g ~ witness-composition f g c ∘ Λ²₁→Δ²
+    rec-hom-Λ²₁ f g ~ witness-composition f g c ∘ inclusion-Δ²-Λ²₁
   htpy-composition f g = pr2
 ```
 
 ### Composites
 
-```agda
+```text
 module _
   {l : Level} {A : UU l}
   where
@@ -196,7 +198,7 @@ module _
     eq-target-arr-composite-composition-arr f g p c
 ```
 
-```agda
+```text
   arr-composite-composition :
     {x y z : A} (f : hom x y) (g : hom y z) → composition f g → arr A
   arr-composite-composition f g =
@@ -232,34 +234,34 @@ module _
 
 ### Extensionality of compositions
 
-```agda
+```text
 module _
   {l : Level} {A : Δ 2 → UU l}
   where
 
   extensionality-composition-horn :
-    (i : (u : Λ²₁) → A (Λ²₁→Δ² u))
+    (i : (u : Λ²₁) → A (inclusion-Δ²-Λ²₁ u))
     (c d : dependent-composition-horn A i) →
-    (c ＝ d) ≃ htpy-extension Λ²₁→Δ² i c d
-  extensionality-composition-horn = extensionality-extension Λ²₁→Δ²
+    (c ＝ d) ≃ htpy-extension inclusion-Δ²-Λ²₁ i c d
+  extensionality-composition-horn = extensionality-extension inclusion-Δ²-Λ²₁
 
   eq-htpy-composition-horn :
-    (i : (u : Λ²₁) → A (Λ²₁→Δ² u))
+    (i : (u : Λ²₁) → A (inclusion-Δ²-Λ²₁ u))
     (c d : dependent-composition-horn A i)
     (H : map-extension c ~ map-extension d) →
-    coherence-htpy-extension Λ²₁→Δ² i c d H → c ＝ d
-  eq-htpy-composition-horn = eq-htpy-extension Λ²₁→Δ²
+    coherence-htpy-extension inclusion-Δ²-Λ²₁ i c d H → c ＝ d
+  eq-htpy-composition-horn = eq-htpy-extension inclusion-Δ²-Λ²₁
 
   htpy-eq-composition-horn :
-    (i : (u : Λ²₁) → A (Λ²₁→Δ² u))
+    (i : (u : Λ²₁) → A (inclusion-Δ²-Λ²₁ u))
     (c d : dependent-composition-horn A i) →
-    c ＝ d → htpy-extension Λ²₁→Δ² i c d
-  htpy-eq-composition-horn = htpy-eq-extension Λ²₁→Δ²
+    c ＝ d → htpy-extension inclusion-Δ²-Λ²₁ i c d
+  htpy-eq-composition-horn = htpy-eq-extension inclusion-Δ²-Λ²₁
 ```
 
 ### Computing with composition witnesses
 
-```agda
+```text
 module _
   {l : Level} {A : UU l}
   where
@@ -310,7 +312,7 @@ TODO: move part below
 An arrow `h` is the **composite** of `f` and `g` if there is a composition of
 `f` and `g` such that their composite is equal to `h`.
 
-```agda
+```text
 module _
   {l : Level} {A : UU l} (fg : Λ²₁ → A) (h : 𝟚 → A)
   where
@@ -350,7 +352,7 @@ hom² f g h = extension ∂Δ²→Δ² (rec-hom-∂Δ² f g h)
 -- pr2 (hom²-composition f g c) x = {!  !}
 ```
 
-```agda
+```text
 is-composite-arr :
   {l : Level} {A : UU l} → (f g : arr A) → f 1₂ ＝ g 0₂ → arr A → UU l
 is-composite-arr f g p h = is-composite-horn (rec-arr-Λ²₁ f g p) h
@@ -359,7 +361,7 @@ is-composite-arr f g p h = is-composite-horn (rec-arr-Λ²₁ f g p) h
 These definitions are not compatible in the same way as the previous ones, as
 the second formulation also requires coherence at the end points.
 
-```agda
+```text
 is-composite :
   {l : Level} {A : UU l} {x y z : A} → hom x y → hom y z → hom x z → UU l
 is-composite f g h = Σ (composition f g) (λ c → composite-composition f g c ＝ h)

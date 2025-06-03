@@ -39,7 +39,7 @@ open import simplicial-type-theory.simplicial-arrows
 
 Given a directed edge `α` between functions `f g : A → B` and a directed edge
 `β` of functions `f' g' : B → C`, we may
-{{#concept "horizontally compose" Disambiguation="directed edges of functions" Agda=horizontal-comp-simplicial-hom}}
+{{#concept "horizontally compose" Disambiguation="directed edges of functions" Agda=horizontal-comp-hom▵}}
 them to obtain a directed edge of functions `f' ∘ f →▵ g' ∘ g`. The horizontal
 composite is constructed by "synchronously traversing `α` and `β`", defined on
 the underlying [simplicial arrows](simplicial-type-theory.simplicial-arrows.md)
@@ -59,9 +59,9 @@ module _
   {f g : A → B} {f' g' : B → C}
   where
 
-  horizontal-comp-simplicial-hom : f' →₂ g' → f →₂ g → (f' ∘ f) →₂ (g' ∘ g)
-  horizontal-comp-simplicial-hom (β , s , t) (α , s' , t') =
-    ( ( horizontal-comp-simplicial-arrow β α) ,
+  horizontal-comp-hom▵ : f' →▵ g' → f →▵ g → (f' ∘ f) →▵ (g' ∘ g)
+  horizontal-comp-hom▵ (β , s , t) (α , s' , t') =
+    ( ( horizontal-comp-arrow▵ β α) ,
       ( ap (β 0₂ ∘_) s' ∙ ap (_∘ f) s) ,
       ( ap (β 1₂ ∘_) t' ∙ ap (_∘ g) t))
 ```
@@ -75,16 +75,16 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B}
   where
 
-  left-unit-law-horizontal-comp-simplicial-hom :
-    (α : f →₂ g) →
-    horizontal-comp-simplicial-hom (id-simplicial-hom id) α ＝ α
-  left-unit-law-horizontal-comp-simplicial-hom (α , s , t) =
+  left-unit-law-horizontal-comp-hom▵ :
+    (α : f →▵ g) →
+    horizontal-comp-hom▵ (id-hom▵ id) α ＝ α
+  left-unit-law-horizontal-comp-hom▵ (α , s , t) =
     eq-pair-eq-fiber (eq-pair (right-unit ∙ ap-id s) (right-unit ∙ ap-id t))
 
-  right-unit-law-horizontal-comp-simplicial-hom :
-    (α : f →₂ g) →
-    horizontal-comp-simplicial-hom α (id-simplicial-hom id) ＝ α
-  right-unit-law-horizontal-comp-simplicial-hom (α , s , t) =
+  right-unit-law-horizontal-comp-hom▵ :
+    (α : f →▵ g) →
+    horizontal-comp-hom▵ α (id-hom▵ id) ＝ α
+  right-unit-law-horizontal-comp-hom▵ (α , s , t) =
     eq-pair-eq-fiber (eq-pair (ap-id s) (ap-id t))
 ```
 
@@ -96,10 +96,10 @@ module _
   {h h' : C → D} {g g' : B → C} {f f' : A → B}
   where
 
-  associative-horizontal-comp-simplicial-hom :
-    (γ : h →₂ h') (β : g →₂ g') (α : f →₂ f') →
-    horizontal-comp-simplicial-hom (horizontal-comp-simplicial-hom γ β) α ＝
-    horizontal-comp-simplicial-hom γ (horizontal-comp-simplicial-hom β α)
-  associative-horizontal-comp-simplicial-hom
+  associative-horizontal-comp-hom▵ :
+    (γ : h →▵ h') (β : g →▵ g') (α : f →▵ f') →
+    horizontal-comp-hom▵ (horizontal-comp-hom▵ γ β) α ＝
+    horizontal-comp-hom▵ γ (horizontal-comp-hom▵ β α)
+  associative-horizontal-comp-hom▵
     ( γ , refl , refl) (β , refl , refl) (α , refl , refl) = refl
 ```

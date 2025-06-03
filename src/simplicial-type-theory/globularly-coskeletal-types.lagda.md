@@ -68,7 +68,7 @@ types to be `k`-globular coskeletal? Probably yes, c.f. higher modalities.
 is-globularly-coskeletal : {l : Level} (k : 𝕋) → UU l → UU l
 is-globularly-coskeletal neg-two-𝕋 A = is-contr A
 is-globularly-coskeletal (succ-𝕋 k) A =
-  (x y : A) → is-globularly-coskeletal k (x →₂ y)
+  (x y : A) → is-globularly-coskeletal k (x →▵ y)
 
 is-globularly-coskeletal-eq :
   {l : Level} {k k' : 𝕋} {A : UU l} →
@@ -106,7 +106,7 @@ abstract
   is-prop-is-globularly-coskeletal neg-two-𝕋 A = is-property-is-contr
   is-prop-is-globularly-coskeletal (succ-𝕋 k) A =
     is-prop-Π
-      ( λ x → is-prop-Π (λ y → is-prop-is-globularly-coskeletal k (x →₂ y)))
+      ( λ x → is-prop-Π (λ y → is-prop-is-globularly-coskeletal k (x →▵ y)))
 
 is-globularly-coskeletal-Prop : {l : Level} (k : 𝕋) (A : UU l) → Prop l
 pr1 (is-globularly-coskeletal-Prop k A) = is-globularly-coskeletal k A
@@ -125,11 +125,11 @@ This remains to be formalized.
 
 ```agda
 is-contr-hom-is-contr :
-  {l : Level} {A : UU l} → is-contr A → (x y : A) → is-contr (x →₂ y)
+  {l : Level} {A : UU l} → is-contr A → (x y : A) → is-contr (x →▵ y)
 is-contr-hom-is-contr H x y =
   is-contr-is-equiv'
     ( x ＝ y)
-    ( simplicial-hom-eq)
+    ( hom▵-eq)
     ( is-simplicially-discrete-is-contr H x y)
     ( is-prop-is-contr H x y)
 
@@ -159,7 +159,7 @@ abstract
   is-globularly-coskeletal-hom :
     {l : Level} {k : 𝕋} {A : UU l} →
     is-globularly-coskeletal k A →
-    (x y : A) → is-globularly-coskeletal k (x →₂ y)
+    (x y : A) → is-globularly-coskeletal k (x →▵ y)
   is-globularly-coskeletal-hom {k = k} =
     is-globularly-coskeletal-succ-is-globularly-coskeletal k
 
@@ -167,13 +167,13 @@ hom-Globularly-Coskeletal-Type :
   {l : Level} {k : 𝕋} (A : Globularly-Coskeletal-Type l (succ-𝕋 k)) →
   (x y : type-Globularly-Coskeletal-Type A) → Globularly-Coskeletal-Type l k
 hom-Globularly-Coskeletal-Type A x y =
-  ( (x →₂ y) , is-globularly-coskeletal-type-Globularly-Coskeletal-Type A x y)
+  ( (x →▵ y) , is-globularly-coskeletal-type-Globularly-Coskeletal-Type A x y)
 
 hom-Globularly-Coskeletal-Type' :
   {l : Level} {k : 𝕋} (A : Globularly-Coskeletal-Type l k) →
   (x y : type-Globularly-Coskeletal-Type A) → Globularly-Coskeletal-Type l k
 hom-Globularly-Coskeletal-Type' A x y =
-  ( (x →₂ y) ,
+  ( (x →▵ y) ,
     is-globularly-coskeletal-hom
       ( is-globularly-coskeletal-type-Globularly-Coskeletal-Type A) x y)
 ```
@@ -211,7 +211,7 @@ module _
   is-globularly-coskeletal-retract-of neg-two-𝕋 = is-contr-retract-of _
   is-globularly-coskeletal-retract-of (succ-𝕋 k) R H x y =
     is-globularly-coskeletal-retract-of k
-      ( retract-simplicial-hom R x y)
+      ( retract-hom▵ R x y)
       ( H (pr1 R x) (pr1 R y))
 ```
 
@@ -261,8 +261,8 @@ abstract
     is-globularly-coskeletal (succ-𝕋 k) B →
     is-globularly-coskeletal (succ-𝕋 k) A
   is-globularly-coskeletal-is-simplicially-fully-faithful k f Ef H x y =
-    is-globularly-coskeletal-is-equiv k (f x →₂ f y)
-      ( action-simplicial-hom-function f {x} {y})
+    is-globularly-coskeletal-is-equiv k (f x →▵ f y)
+      ( action-hom▵-function f {x} {y})
       ( Ef x y)
       ( H (f x) (f y))
 
@@ -283,12 +283,12 @@ In fact, it suffices that the action on homs has a retraction.
 abstract
   is-globularly-coskeletal-retraction-ap :
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
-    ((x y : A) → retraction (action-simplicial-hom-function f {x} {y})) →
+    ((x y : A) → retraction (action-hom▵-function f {x} {y})) →
     is-globularly-coskeletal (succ-𝕋 k) B →
     is-globularly-coskeletal (succ-𝕋 k) A
   is-globularly-coskeletal-retraction-ap k f Ef H x y =
     is-globularly-coskeletal-retract-of k
-      ( action-simplicial-hom-function f {x} {y} , Ef x y)
+      ( action-hom▵-function f {x} {y} , Ef x y)
       ( H (f x) (f y))
 ```
 
@@ -303,8 +303,8 @@ abstract
 --     is-contr-Σ' is-globularly-coskeletal-A is-globularly-coskeletal-B
 --   is-globularly-coskeletal-Σ {k = succ-𝕋 k} {B = B} is-globularly-coskeletal-A is-globularly-coskeletal-B s t =
 --     is-globularly-coskeletal-equiv k
---       ( simplicial-hom-Σ s t)
---       ( compute-simplicial-hom-Σ)
+--       ( hom▵-Σ s t)
+--       ( compute-hom▵-Σ)
 --       ( is-globularly-coskeletal-Σ
 --         ( is-globularly-coskeletal-A (pr1 s) (pr1 t))
 --         {!  is-globularly-coskeletal-B ? ? ? !})
@@ -500,8 +500,8 @@ is-globularly-coskeletal-product' :
   is-globularly-coskeletal (succ-𝕋 k) (A × B)
 is-globularly-coskeletal-product' k f g (a , b) (a' , b') =
   is-globularly-coskeletal-equiv k
-    ( simplicial-hom-product (a , b) (a' , b'))
-    ( compute-simplicial-hom-product)
+    ( hom▵-product (a , b) (a' , b'))
+    ( compute-hom▵-product)
     ( is-globularly-coskeletal-product k (f b a a') (g a b b'))
 
 is-globularly-coskeletal-left-factor-product' :
@@ -512,10 +512,10 @@ is-globularly-coskeletal-left-factor-product' neg-two-𝕋 {A} {B} H b =
 is-globularly-coskeletal-left-factor-product' (succ-𝕋 k) H b a a' =
   is-globularly-coskeletal-left-factor-product' k
     ( is-globularly-coskeletal-equiv' k
-      ( (a , b) →₂ (a' , b))
-      ( compute-simplicial-hom-product)
+      ( (a , b) →▵ (a' , b))
+      ( compute-hom▵-product)
       ( H (a , b) (a' , b)))
-    ( id-simplicial-hom b)
+    ( id-hom▵ b)
 
 is-globularly-coskeletal-left-factor-product :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
@@ -535,10 +535,10 @@ is-globularly-coskeletal-right-factor-product' neg-two-𝕋 {A} {B} H a =
 is-globularly-coskeletal-right-factor-product' (succ-𝕋 k) H a b b' =
   is-globularly-coskeletal-right-factor-product' k
     ( is-globularly-coskeletal-equiv' k
-      ( (a , b) →₂ (a , b'))
-      ( compute-simplicial-hom-product)
+      ( (a , b) →▵ (a , b'))
+      ( compute-hom▵-product)
       ( H (a , b) (a , b')))
-    ( id-simplicial-hom a)
+    ( id-hom▵ a)
 
 is-globularly-coskeletal-right-factor-product :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →

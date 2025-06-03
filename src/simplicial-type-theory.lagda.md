@@ -34,7 +34,7 @@ open import simplicial-type-theory.inner-2-horn public
 open import simplicial-type-theory.lax-suspension public
 open import simplicial-type-theory.natural-transformations public
 open import simplicial-type-theory.normed-maps-between-types public
-open import simplicial-type-theory.representing-biinvertible-simplicial-arrow public
+open import simplicial-type-theory.representing-biinvertible-arrow▵ public
 open import simplicial-type-theory.rewriting-directed-circle public
 open import simplicial-type-theory.simplicial-arrows public
 open import simplicial-type-theory.simplicial-cones public

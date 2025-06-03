@@ -43,7 +43,7 @@ simplicial-comma-type :
   {A : UU l1} {B : UU l2} {C : UU l3} →
   (B → A) → (C → A) → UU (l1 ⊔ l2 ⊔ l3)
 simplicial-comma-type {B = B} {C} f g =
-  Σ B (λ b → Σ C (λ c → simplicial-hom (f b) (g c)))
+  Σ B (λ b → Σ C (λ c → hom▵ (f b) (g c)))
 
 _↓▵_ = simplicial-comma-type
 ```

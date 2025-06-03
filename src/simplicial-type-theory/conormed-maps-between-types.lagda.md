@@ -161,11 +161,11 @@ Given a transposing biadjoint `q! ⊣ q* ⊣ q∗` and a conorm map
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {q : A → B} (H : is-conormed-map q)
   where
 
-  integral-map-is-conormed-map : (x y : A) → q x →₂ q y → x →₂ y
+  integral-map-is-conormed-map : (x y : A) → q x →▵ q y → x →▵ y
   integral-map-is-conormed-map x y f =
     map-equiv
       {! is-transposing-adjoint-map-left-adjoint-is-conormed-map H (q x) y ∘e ? !}
-      {! action-simplicial-hom-simplicial-natural-transformation (conorm-map-is-conormed-map H) f  !}
+      {! action-hom▵-simplicial-natural-transformation (conorm-map-is-conormed-map H) f  !}
 ```
 
 ### The cardinality operator associated to a conormed map
@@ -195,7 +195,7 @@ module _
 ```agda
 is-conormed-map-id : {l : Level} {A : UU l} → is-conormed-map (id {A = A})
 pr1 is-conormed-map-id = is-transposing-biadjoint-id
-pr2 is-conormed-map-id = id-simplicial-hom
+pr2 is-conormed-map-id = id-hom▵
 ```
 
 ### Equivalences are conormed maps
@@ -207,7 +207,7 @@ module _
 
   is-conormed-map-is-equiv : is-conormed-map f
   pr1 is-conormed-map-is-equiv = is-transposing-biadjoint-is-equiv H
-  pr2 is-conormed-map-is-equiv = id-simplicial-hom ∘ map-inv-is-equiv H
+  pr2 is-conormed-map-is-equiv = id-hom▵ ∘ map-inv-is-equiv H
 ```
 
 ## References
