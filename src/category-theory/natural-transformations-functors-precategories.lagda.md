@@ -223,7 +223,6 @@ module _
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G)
 
-  -- Agda seems to be able to infer α and β without issue
   htpy-eq-hom-family-natural-transformation-Precategory :
     {α β : natural-transformation-Precategory C D F G} →
     α ＝ β →

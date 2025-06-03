@@ -54,11 +54,11 @@ comp-coherence-square-hom-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2)
   {x y z w a b : obj-Precategory C}
   (topleft : hom-Precategory C x y)
+  (topright : hom-Precategory C y a)
   (left : hom-Precategory C x z)
   (middle : hom-Precategory C y w)
-  (bottomleft : hom-Precategory C z w)
-  (topright : hom-Precategory C y a)
   (right : hom-Precategory C a b)
+  (bottomleft : hom-Precategory C z w)
   (bottomright : hom-Precategory C w b) →
   coherence-square-hom-Precategory C topleft left middle bottomleft →
   coherence-square-hom-Precategory C topright middle right bottomright →

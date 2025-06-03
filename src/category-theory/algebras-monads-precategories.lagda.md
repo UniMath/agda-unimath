@@ -148,7 +148,8 @@ module _
       ( right-unit-law-mul-hom-family-monad-Precategory C T x) ,
       ( associative-mul-hom-family-monad-Precategory C T x))
 
-  hom-functor-to-algebras-monad-Precategory : {x y : obj-Precategory C}
+  hom-functor-to-algebras-monad-Precategory :
+    {x y : obj-Precategory C}
     (f : hom-Precategory C x y) →
     hom-Precategory algebras-monad-Precategory
       ( obj-functor-to-algebras-monad-Precategory x)
@@ -191,7 +192,7 @@ module _
     ( preserves-id-functor-to-algebras-monad-Precategory)
 
   obj-functor-from-algebras-monad-Precategory :
-    obj-Precategory algebras-monad-Precategory → obj-Precategory C
+    obj-algebras-monad-Precategory → obj-Precategory C
   obj-functor-from-algebras-monad-Precategory =
     obj-monad-algebra-Precategory C T
 

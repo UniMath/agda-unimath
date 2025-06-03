@@ -94,7 +94,7 @@ module _
       ( precomp-hom-Precategory C f _)
       ( ( ap
           ( postcomp-hom-Precategory C (μ _) _)
-          ( (preserves-comp-endofunctor-monad-Precategory C T _ g) ∙
+          ( ( preserves-comp-endofunctor-monad-Precategory C T _ g) ∙
             ( ap
               ( precomp-hom-Precategory C (T₁ g) _)
               ( preserves-comp-endofunctor-monad-Precategory C T _ _)) ∙
@@ -106,8 +106,8 @@ module _
         ( associative-comp-hom-Precategory C _ _ _) ∙
         ( ap
           ( postcomp-hom-Precategory C (μ _) _)
-          ( (inv (associative-comp-hom-Precategory C _ _ _)) ∙
-            (ap
+          ( ( inv (associative-comp-hom-Precategory C _ _ _)) ∙
+            ( ap
               ( precomp-hom-Precategory C (T₁ g) _)
               ( inv (naturality-mul-monad-Precategory C T h))) ∙
             ( associative-comp-hom-Precategory C _ _ _))) ∙
@@ -203,8 +203,8 @@ module _
             ( associative-comp-hom-Precategory C _ _ _) ∙
             ( ap
               ( postcomp-hom-Precategory C (μ z) _)
-              ( (inv
-                  (preserves-comp-endofunctor-monad-Precategory C T
+              ( ( inv
+                  ( preserves-comp-endofunctor-monad-Precategory C T
                     (η z) g)) ∙
                 ( ap
                   ( T₁)
