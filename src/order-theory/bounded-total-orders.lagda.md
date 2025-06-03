@@ -23,8 +23,10 @@ open import order-theory.total-orders
 
 ## Idea
 
-A bounded total order is a [total order](order-theory.total-orders.md) equipped
-with a top and bottom element.
+A {{#concept "bounded total order" Agda=Bounded-Total-Order}} is a
+[total order](order-theory.total-orders.md) [equipped](foundation.structure.md)
+with a [top](order-theory.top-elements-posets.md) and
+[bottom](order-theory.bottom-elements-posets.md) element.
 
 ## Definitions
 
