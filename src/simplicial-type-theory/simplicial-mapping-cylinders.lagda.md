@@ -64,7 +64,7 @@ Given a map `f : X → Y`, we define the
 
 Intuitively, the simplicial mapping cylinder of `f` can be understood as `X`
 simplicially glued to `Y` along `f`. I.e., for every `x : X` there is a
-[directed edge](simplicial-type-theory.directed-edges.md) `x →₂ f x`.
+[directed edge](simplicial-type-theory.directed-edges.md) `x →▵ f x`.
 
 ## Definitions
 
@@ -102,7 +102,7 @@ module _
 
   hom-simplicial-mapping-cylinder :
     (x : X) →
-    in-domain-simplicial-mapping-cylinder x →₂
+    in-domain-simplicial-mapping-cylinder x →▵
     in-codomain-simplicial-mapping-cylinder (f x)
   hom-simplicial-mapping-cylinder x =
     ( in-domain-interval-simplicial-mapping-cylinder x ,

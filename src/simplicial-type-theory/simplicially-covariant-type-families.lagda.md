@@ -47,7 +47,7 @@ A type family `B : A → 𝒰` is
 {{#concept "simplicially covariant" Disambiguation="type family" Agda=is-simplicially-covariant}}
 if one of the following equivalent conditions hold:
 
-1. For every directed edge `f : x →₂ y` in `A` and element `x'` over `x`, the
+1. For every directed edge `f : x →▵ y` in `A` and element `x'` over `x`, the
    type of dependent directed edges over `f` based at `x'` is
    [torsorial](foundation.torsorial-type-families.md).
 
@@ -101,9 +101,9 @@ module _
 
   is-simplicially-covariant' : UU (l1 ⊔ l2)
   is-simplicially-covariant' =
-    (α : simplicial-arrow A) (x' : B (α 0₂)) →
+    (α : arrow▵ A) (x' : B (α 0₂)) →
     is-torsorial
-      ( dependent-simplicial-hom B (simplicial-hom-simplicial-arrow α) x')
+      ( dependent-hom▵ B (hom▵-arrow▵ α) x')
 ```
 
 ## References

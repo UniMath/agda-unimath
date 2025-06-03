@@ -324,7 +324,7 @@ eq-target-arrow-spine (succ-ℕ n) (inl x) =
   ap inl-spine (eq-target-arrow-spine n x)
 eq-target-arrow-spine (succ-ℕ n) (inr x) = refl
 
-hom-spine : (n : ℕ) (x : Fin n) → source-hom-spine n x →₂ target-hom-spine n x
+hom-spine : (n : ℕ) (x : Fin n) → source-hom-spine n x →▵ target-hom-spine n x
 hom-spine n x =
   ( arrow-spine n x , eq-source-arrow-spine n x , eq-target-arrow-spine n x)
 ```

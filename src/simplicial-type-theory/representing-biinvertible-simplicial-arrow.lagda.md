@@ -1,7 +1,7 @@
 # The representing biinvertible simplicial arrow
 
 ```agda
-module simplicial-type-theory.representing-biinvertible-simplicial-arrow where
+module simplicial-type-theory.representing-biinvertible-arrow▵ where
 ```
 
 <details><summary>Imports</summary>
@@ -73,96 +73,96 @@ open import univalent-combinatorics.standard-finite-types
 
 ```agda
 postulate
-  representing-biinvertible-simplicial-arrow : UU
+  representing-biinvertible-arrow▵ : UU
 
-  source-representing-biinvertible-simplicial-arrow :
-    representing-biinvertible-simplicial-arrow
+  source-representing-biinvertible-arrow▵ :
+    representing-biinvertible-arrow▵
 
-  target-representing-biinvertible-simplicial-arrow :
-    representing-biinvertible-simplicial-arrow
+  target-representing-biinvertible-arrow▵ :
+    representing-biinvertible-arrow▵
 
-  arrow-representing-biinvertible-simplicial-arrow :
-    𝟚 → representing-biinvertible-simplicial-arrow
+  arrow-representing-biinvertible-arrow▵ :
+    𝟚 → representing-biinvertible-arrow▵
 
-  arrow-left-inv-representing-biinvertible-simplicial-arrow :
-    𝟚 → representing-biinvertible-simplicial-arrow
+  arrow-left-inv-representing-biinvertible-arrow▵ :
+    𝟚 → representing-biinvertible-arrow▵
 
-  arrow-right-inv-representing-biinvertible-simplicial-arrow :
-    𝟚 → representing-biinvertible-simplicial-arrow
+  arrow-right-inv-representing-biinvertible-arrow▵ :
+    𝟚 → representing-biinvertible-arrow▵
 
-  left-2-cell-representing-biinvertible-simplicial-arrow :
-    Δ 2 → representing-biinvertible-simplicial-arrow
+  left-2-cell-representing-biinvertible-arrow▵ :
+    Δ 2 → representing-biinvertible-arrow▵
 
-  compute-0-left-2-cell-representing-biinvertible-simplicial-arrow :
-    ( left-2-cell-representing-biinvertible-simplicial-arrow) ∘
+  compute-0-left-2-cell-representing-biinvertible-arrow▵ :
+    ( left-2-cell-representing-biinvertible-arrow▵) ∘
     ( λ t → ((t , 0₂) , min-leq-𝟚)) ＝
-    arrow-representing-biinvertible-simplicial-arrow
+    arrow-representing-biinvertible-arrow▵
 
-  compute-1-left-2-cell-representing-biinvertible-simplicial-arrow :
-    ( left-2-cell-representing-biinvertible-simplicial-arrow) ∘
+  compute-1-left-2-cell-representing-biinvertible-arrow▵ :
+    ( left-2-cell-representing-biinvertible-arrow▵) ∘
     ( λ t → ((t , t) , refl-leq-𝟚)) ＝
-    id-simplicial-arrow target-representing-biinvertible-simplicial-arrow
+    id-arrow▵ target-representing-biinvertible-arrow▵
 
-  compute-2-left-2-cell-representing-biinvertible-simplicial-arrow :
-    ( left-2-cell-representing-biinvertible-simplicial-arrow) ∘
+  compute-2-left-2-cell-representing-biinvertible-arrow▵ :
+    ( left-2-cell-representing-biinvertible-arrow▵) ∘
     ( λ t → ((1₂ , t) , max-leq-𝟚)) ＝
-    arrow-left-inv-representing-biinvertible-simplicial-arrow
+    arrow-left-inv-representing-biinvertible-arrow▵
 
-  right-2-cell-representing-biinvertible-simplicial-arrow :
-    Δ 2 → representing-biinvertible-simplicial-arrow
+  right-2-cell-representing-biinvertible-arrow▵ :
+    Δ 2 → representing-biinvertible-arrow▵
 
-  compute-1-right-2-cell-representing-biinvertible-simplicial-arrow :
-    ( right-2-cell-representing-biinvertible-simplicial-arrow) ∘
+  compute-1-right-2-cell-representing-biinvertible-arrow▵ :
+    ( right-2-cell-representing-biinvertible-arrow▵) ∘
     ( λ t → ((t , t) , refl-leq-𝟚)) ＝
-    id-simplicial-arrow source-representing-biinvertible-simplicial-arrow
+    id-arrow▵ source-representing-biinvertible-arrow▵
 
-  compute-0-right-2-cell-representing-biinvertible-simplicial-arrow :
-    ( right-2-cell-representing-biinvertible-simplicial-arrow) ∘
+  compute-0-right-2-cell-representing-biinvertible-arrow▵ :
+    ( right-2-cell-representing-biinvertible-arrow▵) ∘
     ( λ t → ((t , 0₂) , min-leq-𝟚)) ＝
-    arrow-representing-biinvertible-simplicial-arrow
+    arrow-representing-biinvertible-arrow▵
 
-  compute-2-right-2-cell-representing-biinvertible-simplicial-arrow :
-    ( right-2-cell-representing-biinvertible-simplicial-arrow) ∘
+  compute-2-right-2-cell-representing-biinvertible-arrow▵ :
+    ( right-2-cell-representing-biinvertible-arrow▵) ∘
     ( λ t → ((1₂ , t) , max-leq-𝟚)) ＝
-    arrow-representing-biinvertible-simplicial-arrow
+    arrow-representing-biinvertible-arrow▵
 ```
 
 ## Definitions
 
 ```agda
-source-arrow-representing-biinvertible-simplicial-arrow :
-  arrow-representing-biinvertible-simplicial-arrow 0₂ ＝
-  {! id-simplicial-arrow target-representing-biinvertible-simplicial-arrow 0₂ !}
-  -- source-representing-biinvertible-simplicial-arrow
-source-arrow-representing-biinvertible-simplicial-arrow =
+source-arrow-representing-biinvertible-arrow▵ :
+  arrow-representing-biinvertible-arrow▵ 0₂ ＝
+  {! id-arrow▵ target-representing-biinvertible-arrow▵ 0₂ !}
+  -- source-representing-biinvertible-arrow▵
+source-arrow-representing-biinvertible-arrow▵ =
   htpy-eq
-    ( inv compute-0-left-2-cell-representing-biinvertible-simplicial-arrow)
+    ( inv compute-0-left-2-cell-representing-biinvertible-arrow▵)
     0₂ ∙
   {!   !} ∙
-  htpy-eq compute-1-left-2-cell-representing-biinvertible-simplicial-arrow 0₂
+  htpy-eq compute-1-left-2-cell-representing-biinvertible-arrow▵ 0₂
 
-target-arrow-representing-biinvertible-simplicial-arrow :
-  arrow-representing-biinvertible-simplicial-arrow 1₂ ＝
-  target-representing-biinvertible-simplicial-arrow
-target-arrow-representing-biinvertible-simplicial-arrow = {!   !}
+target-arrow-representing-biinvertible-arrow▵ :
+  arrow-representing-biinvertible-arrow▵ 1₂ ＝
+  target-representing-biinvertible-arrow▵
+target-arrow-representing-biinvertible-arrow▵ = {!   !}
 
-source-arrow-left-inv-representing-biinvertible-simplicial-arrow :
-  arrow-left-inv-representing-biinvertible-simplicial-arrow 0₂ ＝
-  target-representing-biinvertible-simplicial-arrow
-source-arrow-left-inv-representing-biinvertible-simplicial-arrow = {!   !}
+source-arrow-left-inv-representing-biinvertible-arrow▵ :
+  arrow-left-inv-representing-biinvertible-arrow▵ 0₂ ＝
+  target-representing-biinvertible-arrow▵
+source-arrow-left-inv-representing-biinvertible-arrow▵ = {!   !}
 
-target-arrow-left-inv-representing-biinvertible-simplicial-arrow :
-  arrow-left-inv-representing-biinvertible-simplicial-arrow 1₂ ＝
-  source-representing-biinvertible-simplicial-arrow
-target-arrow-left-inv-representing-biinvertible-simplicial-arrow = {!   !}
+target-arrow-left-inv-representing-biinvertible-arrow▵ :
+  arrow-left-inv-representing-biinvertible-arrow▵ 1₂ ＝
+  source-representing-biinvertible-arrow▵
+target-arrow-left-inv-representing-biinvertible-arrow▵ = {!   !}
 
-source-arrow-right-inv-representing-biinvertible-simplicial-arrow :
-  arrow-right-inv-representing-biinvertible-simplicial-arrow 0₂ ＝
-  target-representing-biinvertible-simplicial-arrow
-source-arrow-right-inv-representing-biinvertible-simplicial-arrow = {!   !}
+source-arrow-right-inv-representing-biinvertible-arrow▵ :
+  arrow-right-inv-representing-biinvertible-arrow▵ 0₂ ＝
+  target-representing-biinvertible-arrow▵
+source-arrow-right-inv-representing-biinvertible-arrow▵ = {!   !}
 
-target-arrow-right-inv-representing-biinvertible-simplicial-arrow :
-  arrow-right-inv-representing-biinvertible-simplicial-arrow 1₂ ＝
-  source-representing-biinvertible-simplicial-arrow
-target-arrow-right-inv-representing-biinvertible-simplicial-arrow = {!   !}
+target-arrow-right-inv-representing-biinvertible-arrow▵ :
+  arrow-right-inv-representing-biinvertible-arrow▵ 1₂ ＝
+  source-representing-biinvertible-arrow▵
+target-arrow-right-inv-representing-biinvertible-arrow▵ = {!   !}
 ```

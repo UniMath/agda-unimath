@@ -173,22 +173,6 @@ map-pushout-inner-two-horn-inner-two-horn =
     ( inl-pushout-inner-two-horn)
     ( inr-pushout-inner-two-horn)
     ( glue-pushout (point 1₂) (point 0₂) star)
-
--- is-retraction-map-inner-two-horn-pushout-inner-two-horn :
---   is-retraction
---     ( map-pushout-inner-two-horn-inner-two-horn)
---     ( map-inner-two-horn-pushout-inner-two-horn)
--- is-retraction-map-inner-two-horn-pushout-inner-two-horn ((x , y) , H) =
---   dependent-cogap-join
---     { P =
---       λ H →
---       map-inner-two-horn-pushout-inner-two-horn
---         ( map-pushout-inner-two-horn-inner-two-horn ((x , y) , H)) ＝
---       ((x , y) , H)}
---     ( ( λ y=0 → {!  compute-inl-cogap ? ? ? ? !}) ,
---       ( λ x=1 → {!   !}) ,
---       {!   !})
---     ( H)
 ```
 
 ### The inclusion of the 2-horn into the 2-simplex
@@ -201,7 +185,6 @@ leq-subtype-two-simplex-inner-two-horn (x , y) =
     ( y ≤-𝟚 x)
     ( min-leq-eq-𝟚 , max-leq-eq-𝟚 , λ _ → eq-is-prop is-prop-leq-𝟚)
 
-inclusion-two-simplex-inner-two-horn : Λ²₁ → Δ²
-inclusion-two-simplex-inner-two-horn =
-  tot leq-subtype-two-simplex-inner-two-horn
+inclusion-Δ²-Λ²₁ : Λ²₁ → Δ²
+inclusion-Δ²-Λ²₁ = tot leq-subtype-two-simplex-inner-two-horn
 ```

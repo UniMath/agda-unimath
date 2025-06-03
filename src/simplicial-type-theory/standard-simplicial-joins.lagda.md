@@ -70,7 +70,7 @@ Equivalently, the lax join is the oriented pushout
 ```
 
 Intuitively, we can understand `A *▵ B` as the universal type equipped with
-edges `a →₂ b` for every `a : A` and `b : B`.
+edges `a →▵ b` for every `a : A` and `b : B`.
 
 This construction satisfies the laws
 

@@ -41,9 +41,9 @@ open import simplicial-type-theory.simplicial-arrows
 ## Idea
 
 A [directed edge](simplicial-type-theory.directed-edges.md)
-`f : (x , x') →₂ (y , y')` in a
+`f : (x , x') →▵ (y , y')` in a
 [dependent pair type](foundation.dependent-pair-types.md) `Σ A B` consists of a
-directed edge `α : x →₂ y` in the base `A` and a
+directed edge `α : x →▵ y` in the base `A` and a
 [dependent directed edge](simplicial-type-theory.dependent-directed-edges.md)
 `β` in `B` over `α` from `x'` to `y'`.
 
@@ -56,62 +56,62 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  simplicial-hom-Σ : (x y : Σ A B) → UU (l1 ⊔ l2)
-  simplicial-hom-Σ (x , x') (y , y') =
-    Σ (x →₂ y) (λ α → dependent-simplicial-hom B α x' y')
+  hom▵-Σ : (x y : Σ A B) → UU (l1 ⊔ l2)
+  hom▵-Σ (x , x') (y , y') =
+    Σ (x →▵ y) (λ α → dependent-hom▵ B α x' y')
 
-  action-simplicial-hom-dependent-function-pr2' :
-    {x y : Σ A B} (α : x →₂ y) →
-    dependent-simplicial-hom B
-      ( action-simplicial-hom-function pr1 α)
+  action-hom▵-dependent-function-pr2' :
+    {x y : Σ A B} (α : x →▵ y) →
+    dependent-hom▵ B
+      ( action-hom▵-function pr1 α)
       ( pr2 x)
       ( pr2 y)
-  pr1 (action-simplicial-hom-dependent-function-pr2' (α , p , q)) = pr2 ∘ α
-  pr1 (pr2 (action-simplicial-hom-dependent-function-pr2' (α , refl , q))) =
+  pr1 (action-hom▵-dependent-function-pr2' (α , p , q)) = pr2 ∘ α
+  pr1 (pr2 (action-hom▵-dependent-function-pr2' (α , refl , q))) =
     refl
-  pr2 (pr2 (action-simplicial-hom-dependent-function-pr2' (α , p , refl))) =
+  pr2 (pr2 (action-hom▵-dependent-function-pr2' (α , p , refl))) =
     refl
 
-  map-compute-simplicial-hom-Σ :
-    {x y : Σ A B} → x →₂ y → simplicial-hom-Σ x y
-  map-compute-simplicial-hom-Σ α =
-    ( action-simplicial-hom-function pr1 α ,
-      action-simplicial-hom-dependent-function-pr2' α)
+  map-compute-hom▵-Σ :
+    {x y : Σ A B} → x →▵ y → hom▵-Σ x y
+  map-compute-hom▵-Σ α =
+    ( action-hom▵-function pr1 α ,
+      action-hom▵-dependent-function-pr2' α)
 
-  map-inv-compute-simplicial-hom-Σ :
-    {x y : Σ A B} → simplicial-hom-Σ x y → x →₂ y
-  map-inv-compute-simplicial-hom-Σ ((α , p , q) , (β , p' , q')) =
+  map-inv-compute-hom▵-Σ :
+    {x y : Σ A B} → hom▵-Σ x y → x →▵ y
+  map-inv-compute-hom▵-Σ ((α , p , q) , (β , p' , q')) =
     ((λ t → (α t , β t)) , eq-pair-Σ p p' , eq-pair-Σ q q')
 
-  is-section-map-inv-compute-simplicial-hom-Σ :
+  is-section-map-inv-compute-hom▵-Σ :
     {x y : Σ A B} →
     is-section
-      ( map-compute-simplicial-hom-Σ {x} {y})
-      ( map-inv-compute-simplicial-hom-Σ)
-  is-section-map-inv-compute-simplicial-hom-Σ
+      ( map-compute-hom▵-Σ {x} {y})
+      ( map-inv-compute-hom▵-Σ)
+  is-section-map-inv-compute-hom▵-Σ
     ( (α , refl , refl) , (β , refl , refl)) =
     refl
 
-  is-retraction-map-inv-compute-simplicial-hom-Σ :
+  is-retraction-map-inv-compute-hom▵-Σ :
     {x y : Σ A B} →
     is-retraction
-      ( map-compute-simplicial-hom-Σ {x} {y})
-      ( map-inv-compute-simplicial-hom-Σ)
-  is-retraction-map-inv-compute-simplicial-hom-Σ (α , refl , refl) = refl
+      ( map-compute-hom▵-Σ {x} {y})
+      ( map-inv-compute-hom▵-Σ)
+  is-retraction-map-inv-compute-hom▵-Σ (α , refl , refl) = refl
 
-  is-equiv-map-compute-simplicial-hom-Σ :
-    {x y : Σ A B} → is-equiv (map-compute-simplicial-hom-Σ {x} {y})
-  is-equiv-map-compute-simplicial-hom-Σ =
+  is-equiv-map-compute-hom▵-Σ :
+    {x y : Σ A B} → is-equiv (map-compute-hom▵-Σ {x} {y})
+  is-equiv-map-compute-hom▵-Σ =
     is-equiv-is-invertible
-      ( map-inv-compute-simplicial-hom-Σ)
-      ( is-section-map-inv-compute-simplicial-hom-Σ)
-      ( is-retraction-map-inv-compute-simplicial-hom-Σ)
+      ( map-inv-compute-hom▵-Σ)
+      ( is-section-map-inv-compute-hom▵-Σ)
+      ( is-retraction-map-inv-compute-hom▵-Σ)
 
-  compute-simplicial-hom-Σ : {x y : Σ A B} → (x →₂ y) ≃ simplicial-hom-Σ x y
-  compute-simplicial-hom-Σ =
-    ( map-compute-simplicial-hom-Σ , is-equiv-map-compute-simplicial-hom-Σ)
+  compute-hom▵-Σ : {x y : Σ A B} → (x →▵ y) ≃ hom▵-Σ x y
+  compute-hom▵-Σ =
+    ( map-compute-hom▵-Σ , is-equiv-map-compute-hom▵-Σ)
 
-  inv-compute-simplicial-hom-Σ :
-    {x y : Σ A B} → simplicial-hom-Σ x y ≃ (x →₂ y)
-  inv-compute-simplicial-hom-Σ = inv-equiv compute-simplicial-hom-Σ
+  inv-compute-hom▵-Σ :
+    {x y : Σ A B} → hom▵-Σ x y ≃ (x →▵ y)
+  inv-compute-hom▵-Σ = inv-equiv compute-hom▵-Σ
 ```

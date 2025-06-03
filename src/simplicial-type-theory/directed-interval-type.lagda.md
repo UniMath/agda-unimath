@@ -88,11 +88,14 @@ is-not-contractible-𝟚 H = is-nontrivial-𝟚 (eq-is-contr H)
 ### The directed interval type is noncontractible
 
 ```agda
-is-noncontractible-𝟚' : is-noncontractible' 𝟚 1
-is-noncontractible-𝟚' = (0₂ , 1₂ , is-nontrivial-𝟚)
+noncontractibility-𝟚' : noncontractibility' 𝟚 1
+noncontractibility-𝟚' = (0₂ , 1₂ , is-nontrivial-𝟚)
+
+noncontractibility-𝟚 : noncontractibility 𝟚
+noncontractibility-𝟚 = (1 , noncontractibility-𝟚')
 
 is-noncontractible-𝟚 : is-noncontractible 𝟚
-is-noncontractible-𝟚 = (1 , is-noncontractible-𝟚')
+is-noncontractible-𝟚 = unit-trunc-Prop noncontractibility-𝟚
 ```
 
 ## Definitions

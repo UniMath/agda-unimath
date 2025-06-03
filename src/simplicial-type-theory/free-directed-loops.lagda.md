@@ -74,7 +74,7 @@ module _
 
   loop-free-directed-loop :
     (α : free-directed-loop X) →
-    base-free-directed-loop α →₂ base-free-directed-loop α
+    base-free-directed-loop α →▵ base-free-directed-loop α
   loop-free-directed-loop α =
     ( arrow-free-directed-loop α , refl , compute-target-free-directed-loop α)
 ```
@@ -88,7 +88,7 @@ module _
 
   free-dependent-directed-loop : UU l2
   free-dependent-directed-loop =
-    Σ ( simplicial-arrow' (P ∘ arrow-free-directed-loop α))
+    Σ ( arrow▵' (P ∘ arrow-free-directed-loop α))
       ( λ β →
         dependent-identification P
           ( compute-target-free-directed-loop α)
@@ -101,7 +101,7 @@ module _
   where
 
   arrow-free-dependent-directed-loop :
-    simplicial-arrow' (P ∘ arrow-free-directed-loop α)
+    arrow▵' (P ∘ arrow-free-directed-loop α)
   arrow-free-dependent-directed-loop = pr1 β
 
   base-free-dependent-directed-loop : P (base-free-directed-loop α)
@@ -115,7 +115,7 @@ module _
   compute-target-free-dependent-directed-loop = pr2 β
 
   loop-free-dependent-directed-loop :
-    dependent-simplicial-hom P
+    dependent-hom▵ P
       ( loop-free-directed-loop α)
       ( base-free-dependent-directed-loop)
       ( base-free-dependent-directed-loop)
@@ -134,10 +134,10 @@ module _
 
   free-directed-loop-free-loop : free-loop X → free-directed-loop X
   pr1 (free-directed-loop-free-loop α) =
-    simplicial-arrow-eq (loop-free-loop α)
+    arrow▵-eq (loop-free-loop α)
   pr2 (free-directed-loop-free-loop α) =
-    ( compute-target-simplicial-arrow-eq (loop-free-loop α) ∙
-      inv (compute-source-simplicial-arrow-eq (loop-free-loop α)))
+    ( compute-target-arrow▵-eq (loop-free-loop α) ∙
+      inv (compute-source-arrow▵-eq (loop-free-loop α)))
 ```
 
 ### Constant free directed loops
@@ -148,7 +148,7 @@ module _
   where
 
   constant-free-directed-loop : X → free-directed-loop X
-  constant-free-directed-loop x = (id-simplicial-arrow x , refl)
+  constant-free-directed-loop x = (id-arrow▵ x , refl)
 ```
 
 ## Properties
@@ -311,7 +311,7 @@ module _
   where
 
   compute-free-dependent-directed-loop :
-    Σ X (λ x → x →₂ x) ≃ free-directed-loop X
+    Σ X (λ x → x →▵ x) ≃ free-directed-loop X
   compute-free-dependent-directed-loop =
     ( equiv-tot
       ( λ α →

@@ -131,14 +131,14 @@ subtype-∂Δ² = subtype-boundary-lower-simplicial-triangle
 ∂Δ²⊆Δ² = ◿⊆◢
 inclusion-∂Δ² = inclusion-boundary-lower-simplicial-triangle
 
-rec-simplicial-arrow-∂Δ² :
+rec-arrow▵-∂Δ² :
   {l : Level} {A : UU l}
-  (f g h : simplicial-arrow A) →
+  (f g h : arrow▵ A) →
   f 0₂ ＝ h 0₂ →
   f 1₂ ＝ g 0₂ →
   g 1₂ ＝ h 1₂ →
   ∂Δ² → A
-rec-simplicial-arrow-∂Δ² {A = A} f g h f0=h0 f1=g0 g1=h1 ((t , s) , u) =
+rec-arrow▵-∂Δ² {A = A} f g h f0=h0 f1=g0 g1=h1 ((t , s) , u) =
   cogap-join A
     ( ( λ _ → f t) ,
       ( C) ,
@@ -170,19 +170,19 @@ rec-simplicial-arrow-∂Δ² {A = A} f g h f0=h0 f1=g0 g1=h1 ((t , s) , u) =
             ( λ _ → g s) ,
             ( λ (s=t , t=1) → ap h t=1 ∙ inv (ap g (s=t ∙ t=1) ∙ g1=h1)))
 
-rec-simplicial-hom-∂Δ² :
+rec-hom▵-∂Δ² :
   {l : Level} {A : UU l}
   {x y z : A} →
-  simplicial-hom x y → simplicial-hom y z → simplicial-hom x z →
+  hom▵ x y → hom▵ y z → hom▵ x z →
   ∂Δ² → A
-rec-simplicial-hom-∂Δ² f g h =
-  rec-simplicial-arrow-∂Δ²
-    ( simplicial-arrow-simplicial-hom f)
-    ( simplicial-arrow-simplicial-hom g)
-    ( simplicial-arrow-simplicial-hom h)
-    ( eq-source-source-simplicial-hom f h)
-    ( eq-source-target-simplicial-hom f g)
-    ( eq-target-target-simplicial-hom g h)
+rec-hom▵-∂Δ² f g h =
+  rec-arrow▵-∂Δ²
+    ( arrow-hom▵ f)
+    ( arrow-hom▵ g)
+    ( arrow-hom▵ h)
+    ( eq-source-source-hom▵ f h)
+    ( eq-source-target-hom▵ f g)
+    ( eq-target-target-hom▵ g h)
 ```
 
 ### The 2-simplex as a simplicial cone

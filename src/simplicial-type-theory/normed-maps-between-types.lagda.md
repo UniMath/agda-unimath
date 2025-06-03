@@ -179,13 +179,13 @@ module _
       ( norm-map-is-normed-map H x)
 
   wrong-way-counit-is-normed-map' :
-    (x y : A) → q x →₂ q y → {! q (pr1 (pr1 (pr1 H)) (q x)) !} →₂ {! q y !}
+    (x y : A) → q x →▵ q y → {! q (pr1 (pr1 (pr1 H)) (q x)) !} →▵ {! q y !}
   wrong-way-counit-is-normed-map' x y f =
     map-inv-equiv
       ( is-transposing-adjoint-map-right-adjoint-is-normed-map H
         ( map-left-adjoint-is-normed-map H (q x))
         ( q y))
-      ( action-simplicial-hom-simplicial-natural-transformation
+      ( action-hom▵-simplicial-natural-transformation
       (norm-map-is-normed-map H) f)
 ```
 
@@ -248,11 +248,11 @@ module _
 
   action-hom-image-norm-map-is-normed-map :
     {x y : A} →
-    q x →₂ q y →
-    map-left-adjoint-is-normed-map H (q x) →₂
+    q x →▵ q y →
+    map-left-adjoint-is-normed-map H (q x) →▵
     map-right-adjoint-is-normed-map H (q y)
   action-hom-image-norm-map-is-normed-map =
-    action-simplicial-hom-simplicial-natural-transformationc
+    action-hom▵-simplicial-natural-transformationc
       ( norm-map-is-normed-map H)
 ```
 
@@ -265,8 +265,8 @@ module _
 
   factors-cardinality-is-normed-map' :
     (x : B) →
-    ((q ∘ map-right-adjoint-is-normed-map H) x →₂ x) ×
-    (x →₂ (q ∘ map-right-adjoint-is-normed-map H) x)
+    ((q ∘ map-right-adjoint-is-normed-map H) x →▵ x) ×
+    (x →▵ (q ∘ map-right-adjoint-is-normed-map H) x)
   factors-cardinality-is-normed-map' x =
     ( counit-right-adjoint-is-normed-map H x , wrong-way-unit-is-normed-map H x)
 ```
@@ -294,7 +294,7 @@ module _
 ```agda
 is-normed-map-id : {l : Level} {A : UU l} → is-normed-map (id {A = A})
 pr1 is-normed-map-id = is-transposing-biadjoint-id
-pr2 is-normed-map-id = id-simplicial-hom
+pr2 is-normed-map-id = id-hom▵
 ```
 
 ### Equivalences are normed maps
@@ -306,7 +306,7 @@ module _
 
   is-normed-map-is-equiv : is-normed-map f
   pr1 is-normed-map-is-equiv = is-transposing-biadjoint-is-equiv H
-  pr2 is-normed-map-is-equiv = id-simplicial-hom ∘ map-inv-is-equiv H
+  pr2 is-normed-map-is-equiv = id-hom▵ ∘ map-inv-is-equiv H
 ```
 
 ## References
