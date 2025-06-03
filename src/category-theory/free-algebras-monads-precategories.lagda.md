@@ -1,4 +1,4 @@
-# The Free-algebras precategory of a monad
+# The precategory of free algebras of a monad
 
 ```agda
 module category-theory.free-algebras-monads-precategories where

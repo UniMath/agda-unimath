@@ -1,4 +1,4 @@
-# The Eilenberg-Moore precategory
+# The precategory of algebras of a monad
 
 ```agda
 module category-theory.algebras-monads-precategories where
