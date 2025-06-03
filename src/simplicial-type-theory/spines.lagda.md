@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.spines
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -97,7 +97,7 @@ where
 
 ```agda
 postulate
-  spine : ℕ → UU lI
+  spine : ℕ → UU I1
 
   star-spine-0 : spine 0
 
@@ -239,9 +239,9 @@ We can inductively define the 𝑛-spine as a subtype of the 𝑛-cube via t
 ```
 
 ```agda
-subtype-spine : (n : ℕ) → subtype lI (directed-cube n)
-subtype-spine 0 _ = raise-unit-Prop lI
-subtype-spine 1 _ = raise-unit-Prop lI
+subtype-spine : (n : ℕ) → subtype I1 (directed-cube n)
+subtype-spine 0 _ = raise-unit-Prop I1
+subtype-spine 1 _ = raise-unit-Prop I1
 subtype-spine 2 (x , y) = join-Prop (Id-Δ¹-Prop x 1▵) (Id-Δ¹-Prop y 0▵)
 subtype-spine (succ-ℕ (succ-ℕ (succ-ℕ n))) (x , u) =
   join-Prop
@@ -261,7 +261,7 @@ Let us work out what this definition unfolds to when `n` is `2`:
 Observe again that the coordinates are read in order from right to left.
 
 ```agda
-spine' : ℕ → UU lI
+spine' : ℕ → UU I1
 spine' n = type-subtype (subtype-spine n)
 
 is-set-spine' : (n : ℕ) → is-set (spine' n)

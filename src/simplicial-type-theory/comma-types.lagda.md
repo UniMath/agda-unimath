@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.comma-types
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -47,7 +47,7 @@ open import simplicial-type-theory.directed-interval-type I
 comma▵ :
   {l1 l2 l3 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} →
-  (B → A) → (C → A) → UU (lI ⊔ l1 ⊔ l2 ⊔ l3)
+  (B → A) → (C → A) → UU (I1 ⊔ l1 ⊔ l2 ⊔ l3)
 comma▵ {B = B} {C} f g =
   Σ B (λ b → Σ C (λ c → hom▵ (f b) (g c)))
 

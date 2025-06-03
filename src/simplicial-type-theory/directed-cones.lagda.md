@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.directed-cones
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -76,7 +76,7 @@ attached such that there is a
 ### The standard directed cone on a type
 
 ```agda
-directed-cone : {l : Level} → UU l → UU (lI ⊔ l)
+directed-cone : {l : Level} → UU l → UU (I1 ⊔ l)
 directed-cone X =
   pushout (λ (x : X) → (x , 0▵)) (terminal-map X)
 

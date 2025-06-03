@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.directed-circle
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -89,7 +89,7 @@ we make the directed circle the strict coequalizer of this diagram.
 
 ```agda
 postulate
-  directed-circle : UU lI
+  directed-circle : UU I1
 
 postulate
   arrow-directed-circle : arrow▵ directed-circle

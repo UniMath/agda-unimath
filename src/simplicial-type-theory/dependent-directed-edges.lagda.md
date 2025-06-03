@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.dependent-directed-edges
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -78,7 +78,7 @@ module _
   {x y : A} (α : x →▵ y)
   where
 
-  dependent-hom▵ : B x → B y → UU (lI ⊔ l2)
+  dependent-hom▵ : B x → B y → UU (I1 ⊔ l2)
   dependent-hom▵ x' y' =
     Σ ( arrow▵' (B ∘ arrow-hom▵ α))
       ( λ β →
@@ -193,7 +193,7 @@ module _
         ( eq-target-dependent-hom▵ α β')))
 
   htpy-dependent-hom-over▵ :
-    (β β' : dependent-hom▵ B α x' y') → UU (lI ⊔ l2)
+    (β β' : dependent-hom▵ B α x' y') → UU (I1 ⊔ l2)
   htpy-dependent-hom-over▵ β β' =
     Σ ( arrow-dependent-hom▵ α β ~
         arrow-dependent-hom▵ α β')

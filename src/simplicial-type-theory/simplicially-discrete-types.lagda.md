@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.simplicially-discrete-types
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -74,7 +74,7 @@ module _
   {l : Level} (A : UU l)
   where
 
-  is-simplicially-discrete : UU (lI ⊔ l)
+  is-simplicially-discrete : UU (I1 ⊔ l)
   is-simplicially-discrete =
     (x y : A) → is-equiv (hom▵-eq {x = x} {y})
 
@@ -82,7 +82,7 @@ module _
   is-prop-is-simplicially-discrete =
     is-prop-Π (λ x → is-prop-Π (λ y → is-property-is-equiv hom▵-eq))
 
-  is-simplicially-discrete-Prop : Prop (lI ⊔ l)
+  is-simplicially-discrete-Prop : Prop (I1 ⊔ l)
   is-simplicially-discrete-Prop =
     ( is-simplicially-discrete , is-prop-is-simplicially-discrete)
 ```
@@ -90,7 +90,7 @@ module _
 ### The type of simplicially discrete types
 
 ```agda
-Simplicially-Discrete-Type : (l : Level) → UU (lI ⊔ lsuc l)
+Simplicially-Discrete-Type : (l : Level) → UU (I1 ⊔ lsuc l)
 Simplicially-Discrete-Type l = Σ (UU l) (is-simplicially-discrete)
 
 module _

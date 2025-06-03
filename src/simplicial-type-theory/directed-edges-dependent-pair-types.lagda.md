@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.directed-edges-dependent-pair-types
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -62,7 +62,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  hom▵-Σ : (x y : Σ A B) → UU (lI ⊔ l1 ⊔ l2)
+  hom▵-Σ : (x y : Σ A B) → UU (I1 ⊔ l1 ⊔ l2)
   hom▵-Σ (x , x') (y , y') =
     Σ (x →▵ y) (λ α → dependent-hom▵ B α x' y')
 

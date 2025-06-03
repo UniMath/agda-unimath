@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.directed-cubes
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
 
@@ -51,8 +51,8 @@ standard directed 0-cube is defined to be the
 ### The standard directed cubes
 
 ```agda
-directed-cube : ℕ → UU lI
-directed-cube 0 = raise-unit lI
+directed-cube : ℕ → UU I1
+directed-cube 0 = raise-unit I1
 directed-cube 1 = Δ¹
 directed-cube (succ-ℕ (succ-ℕ n)) = Δ¹ × directed-cube (succ-ℕ n)
 ```
@@ -60,8 +60,8 @@ directed-cube (succ-ℕ (succ-ℕ n)) = Δ¹ × directed-cube (succ-ℕ n)
 ### The standard left-associated directed cubes
 
 ```agda
-left-associated-directed-cube : ℕ → UU lI
-left-associated-directed-cube 0 = raise-unit lI
+left-associated-directed-cube : ℕ → UU I1
+left-associated-directed-cube 0 = raise-unit I1
 left-associated-directed-cube 1 = Δ¹
 left-associated-directed-cube (succ-ℕ (succ-ℕ n)) =
   left-associated-directed-cube (succ-ℕ n) × Δ¹
@@ -70,8 +70,8 @@ left-associated-directed-cube (succ-ℕ (succ-ℕ n)) =
 ### The standard directed power cubes
 
 ```agda
-pow-directed-cube : ℕ → UU lI
-pow-directed-cube 0 = raise-unit lI
+pow-directed-cube : ℕ → UU I1
+pow-directed-cube 0 = raise-unit I1
 pow-directed-cube 1 = Δ¹
 pow-directed-cube (succ-ℕ (succ-ℕ n)) =
   pow-directed-cube (succ-ℕ n) × pow-directed-cube (succ-ℕ n)
@@ -80,9 +80,9 @@ pow-directed-cube (succ-ℕ (succ-ℕ n)) =
 ### The boundary of the standard directed cube
 
 ```agda
-subtype-boundary-directed-cube : (n : ℕ) → subtype lI (directed-cube n)
+subtype-boundary-directed-cube : (n : ℕ) → subtype I1 (directed-cube n)
 subtype-boundary-directed-cube 0 _ =
-  raise-empty-Prop lI
+  raise-empty-Prop I1
 subtype-boundary-directed-cube 1 x =
   join-Prop (Id-Δ¹-Prop x 0▵) (Id-Δ¹-Prop x 1▵)
 subtype-boundary-directed-cube (succ-ℕ (succ-ℕ n)) (x , u) =
@@ -90,15 +90,15 @@ subtype-boundary-directed-cube (succ-ℕ (succ-ℕ n)) (x , u) =
     ( subtype-boundary-directed-cube 1 x)
     ( subtype-boundary-directed-cube (succ-ℕ n) u)
 
-boundary-directed-cube : ℕ → UU lI
+boundary-directed-cube : ℕ → UU I1
 boundary-directed-cube = type-subtype ∘ subtype-boundary-directed-cube
 ```
 
 ### The predicate of being an initial element in the directed 𝑛-cube
 
 ```agda
-is-initial-element-directed-cube : (n : ℕ) → directed-cube n → UU lI
-is-initial-element-directed-cube 0 _ = raise-unit lI
+is-initial-element-directed-cube : (n : ℕ) → directed-cube n → UU I1
+is-initial-element-directed-cube 0 _ = raise-unit I1
 is-initial-element-directed-cube 1 x = (x ＝ 0▵)
 is-initial-element-directed-cube (succ-ℕ (succ-ℕ n)) (x , y) =
   ( is-initial-element-directed-cube 1 x) ×
@@ -115,7 +115,7 @@ is-prop-is-initial-element-directed-cube (succ-ℕ (succ-ℕ n)) (x , y) =
     ( is-prop-is-initial-element-directed-cube (succ-ℕ n) y)
 
 is-initial-element-directed-cube-Prop :
-  (n : ℕ) → directed-cube n → Prop lI
+  (n : ℕ) → directed-cube n → Prop I1
 is-initial-element-directed-cube-Prop n x =
   ( is-initial-element-directed-cube n x ,
     is-prop-is-initial-element-directed-cube n x)
@@ -124,8 +124,8 @@ is-initial-element-directed-cube-Prop n x =
 ### The predicate of being a terminal element in the directed 𝑛-cube
 
 ```agda
-is-terminal-element-directed-cube : (n : ℕ) → directed-cube n → UU lI
-is-terminal-element-directed-cube 0 _ = raise-unit lI
+is-terminal-element-directed-cube : (n : ℕ) → directed-cube n → UU I1
+is-terminal-element-directed-cube 0 _ = raise-unit I1
 is-terminal-element-directed-cube 1 x = (x ＝ 1▵)
 is-terminal-element-directed-cube (succ-ℕ (succ-ℕ n)) (x , y) =
   ( is-terminal-element-directed-cube 1 x) ×
@@ -142,7 +142,7 @@ is-prop-is-terminal-element-directed-cube (succ-ℕ (succ-ℕ n)) (x , y) =
     ( is-prop-is-terminal-element-directed-cube (succ-ℕ n) y)
 
 is-terminal-element-directed-cube-Prop :
-  (n : ℕ) → directed-cube n → Prop lI
+  (n : ℕ) → directed-cube n → Prop I1
 is-terminal-element-directed-cube-Prop n x =
   ( is-terminal-element-directed-cube n x ,
     is-prop-is-terminal-element-directed-cube n x)

@@ -6,7 +6,7 @@ open import order-theory.nontrivial-bounded-total-orders
 
 module
   simplicial-type-theory.boundary-standard-simplices
-  {lI : Level} (I : Nontrivial-Bounded-Total-Order lI lI)
+  {I1 : Level} (I : Nontrivial-Bounded-Total-Order I1 I1)
   where
 ```
 
@@ -58,13 +58,13 @@ open import synthetic-homotopy-theory.pushouts
 
 ```agda
 subtype-auxillary-face-standard-simplex :
-  (n r : ℕ) → subtype lI (directed-cube n)
+  (n r : ℕ) → subtype I1 (directed-cube n)
 subtype-auxillary-face-standard-simplex 0 _ _ =
-  raise-empty-Prop lI
+  raise-empty-Prop I1
 subtype-auxillary-face-standard-simplex 1 0 x =
   Id-Prop Δ¹-Set x 0▵
 subtype-auxillary-face-standard-simplex 1 (succ-ℕ _) x =
-  raise-empty-Prop lI
+  raise-empty-Prop I1
 subtype-auxillary-face-standard-simplex 2 zero-ℕ (x , y) =
   Id-Prop Δ¹-Set x y
 subtype-auxillary-face-standard-simplex 2 (succ-ℕ r) (x , y) =
@@ -79,14 +79,14 @@ subtype-auxillary-face-standard-simplex
   ( subtype-auxillary-face-standard-simplex (succ-ℕ (succ-ℕ n)) r (y , u))
 
 subtype-first-face-standard-simplex :
-  (n : ℕ) → subtype lI (directed-cube n)
-subtype-first-face-standard-simplex 0 _ = raise-empty-Prop lI
+  (n : ℕ) → subtype I1 (directed-cube n)
+subtype-first-face-standard-simplex 0 _ = raise-empty-Prop I1
 subtype-first-face-standard-simplex 1 x = Id-Prop Δ¹-Set 1▵ x
 subtype-first-face-standard-simplex 2 (x , _) = Id-Prop Δ¹-Set 1▵ x
 subtype-first-face-standard-simplex (succ-ℕ (succ-ℕ (succ-ℕ n))) (x , u) =
   Id-Prop Δ¹-Set 1▵ x ∧ subtype-standard-simplex (succ-ℕ (succ-ℕ n)) u
 
-subtype-face-standard-simplex : (n r : ℕ) → subtype lI (directed-cube n)
+subtype-face-standard-simplex : (n r : ℕ) → subtype I1 (directed-cube n)
 subtype-face-standard-simplex n 0 =
   subtype-first-face-standard-simplex n
 subtype-face-standard-simplex n (succ-ℕ r) =
@@ -97,17 +97,17 @@ subtype-face-standard-simplex n (succ-ℕ r) =
 
 ```agda
 subtype-faces-up-to-standard-simplex :
-  (n k : ℕ) → subtype lI (directed-cube n)
+  (n k : ℕ) → subtype I1 (directed-cube n)
 subtype-faces-up-to-standard-simplex n 0 = subtype-face-standard-simplex n 0
 subtype-faces-up-to-standard-simplex n (succ-ℕ k) =
   union-subtype
     ( subtype-face-standard-simplex n (succ-ℕ k))
     ( subtype-faces-up-to-standard-simplex n k)
 
-subtype-boundary-standard-simplex : (n : ℕ) → subtype lI (directed-cube n)
+subtype-boundary-standard-simplex : (n : ℕ) → subtype I1 (directed-cube n)
 subtype-boundary-standard-simplex n = subtype-faces-up-to-standard-simplex n n
 
-∂Δ : ℕ → UU lI
+∂Δ : ℕ → UU I1
 ∂Δ = type-subtype ∘ subtype-boundary-standard-simplex
 
 -- TODO: add alternative definition
