@@ -1,7 +1,13 @@
 # Spines
 
 ```agda
-module simplicial-type-theory.spines where
+open import foundation.universe-levels
+open import order-theory.nontrivial-bounded-total-orders
+
+module
+  simplicial-type-theory.spines
+  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -38,11 +44,11 @@ open import foundation.whiskering-homotopies-composition
 
 open import reflection.erasing-equality
 
-open import simplicial-type-theory.arrows
-open import simplicial-type-theory.directed-cubes
-open import simplicial-type-theory.directed-edges
-open import simplicial-type-theory.directed-interval-type I
-open import simplicial-type-theory.inequality-directed-interval-type I
+open import simplicial-type-theory.arrows I
+open import simplicial-type-theory.directed-cubes I
+open import simplicial-type-theory.directed-edges I
+open import simplicial-type-theory.directed-interval-type I I
+open import simplicial-type-theory.inequality-directed-interval-type I I
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans

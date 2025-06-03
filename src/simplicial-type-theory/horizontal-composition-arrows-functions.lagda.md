@@ -1,7 +1,13 @@
 # Horizontal composition of arrows in functions
 
 ```agda
-module simplicial-type-theory.horizontal-composition-arrows-functions where
+open import foundation.universe-levels
+open import order-theory.nontrivial-bounded-total-orders
+
+module
+  simplicial-type-theory.horizontal-composition-arrows-functions
+  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -25,9 +31,9 @@ open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
-open import simplicial-type-theory.arrows
-open import simplicial-type-theory.directed-edges
-open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.arrows I
+open import simplicial-type-theory.directed-edges I
+open import simplicial-type-theory.directed-interval-type I I
 ```
 
 </details>

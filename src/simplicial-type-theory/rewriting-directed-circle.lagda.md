@@ -3,7 +3,13 @@
 ```agda
 {-# OPTIONS --rewriting #-}
 
-module simplicial-type-theory.rewriting-directed-circle where
+open import foundation.universe-levels
+open import order-theory.nontrivial-bounded-total-orders
+
+module
+  simplicial-type-theory.rewriting-directed-circle
+  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -15,7 +21,7 @@ open import foundation.universe-levels
 
 open import reflection.rewriting
 
-open import simplicial-type-theory.directed-circle
+open import simplicial-type-theory.directed-circle I
 ```
 
 </details>

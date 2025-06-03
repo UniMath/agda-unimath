@@ -1,7 +1,13 @@
 # Covariant type families
 
 ```agda
-module simplicial-type-theory.covariant-type-families where
+open import foundation.universe-levels
+open import order-theory.nontrivial-bounded-total-orders
+
+module
+  simplicial-type-theory.covariant-type-families
+  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -30,11 +36,11 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.families-of-types-local-at-maps
 open import orthogonal-factorization-systems.null-types
 
-open import simplicial-type-theory.arrows
-open import simplicial-type-theory.dependent-directed-edges
-open import simplicial-type-theory.directed-edges
-open import simplicial-type-theory.directed-interval-type I
-open import simplicial-type-theory.inequality-directed-interval-type I
+open import simplicial-type-theory.arrows I
+open import simplicial-type-theory.dependent-directed-edges I
+open import simplicial-type-theory.directed-edges I
+open import simplicial-type-theory.directed-interval-type I I
+open import simplicial-type-theory.inequality-directed-interval-type I I
 
 open import synthetic-homotopy-theory.circle
 ```

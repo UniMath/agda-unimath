@@ -9,46 +9,46 @@
 ```agda
 module simplicial-type-theory where
 
-open import simplicial-type-theory.2-simplices public
-open import simplicial-type-theory.action-on-directed-edges-dependent-functions public
-open import simplicial-type-theory.action-on-directed-edges-functions public
-open import simplicial-type-theory.arrows public
-open import simplicial-type-theory.boundary-standard-simplices public
-open import simplicial-type-theory.comma-types public
-open import simplicial-type-theory.compositions-of-directed-edges public
-open import simplicial-type-theory.conormed-maps-between-types public
-open import simplicial-type-theory.covariant-type-families public
-open import simplicial-type-theory.dependent-directed-edges public
-open import simplicial-type-theory.directed-circle public
-open import simplicial-type-theory.directed-cones public
-open import simplicial-type-theory.directed-cubes public
-open import simplicial-type-theory.directed-edges public
-open import simplicial-type-theory.directed-edges-booleans public
-open import simplicial-type-theory.directed-edges-cartesian-product-types public
-open import simplicial-type-theory.directed-edges-dependent-pair-types public
-open import simplicial-type-theory.directed-interval-type public
-open import simplicial-type-theory.directed-joins public
-open import simplicial-type-theory.directed-mapping-cylinders public
-open import simplicial-type-theory.directed-suspension public
-open import simplicial-type-theory.free-directed-loops public
-open import simplicial-type-theory.fully-faithful-maps public
-open import simplicial-type-theory.globularly-coskeletal-types public
-open import simplicial-type-theory.horizontal-composition-arrows-functions public
-open import simplicial-type-theory.horizontal-composition-directed-edges-functions public
-open import simplicial-type-theory.horizontal-composition-natural-transformations public
-open import simplicial-type-theory.inequality-directed-interval-type public
-open import simplicial-type-theory.inner-2-horn public
-open import simplicial-type-theory.natural-transformations public
-open import simplicial-type-theory.normed-maps-between-types public
-open import simplicial-type-theory.representing-biinvertible-arrow public
-open import simplicial-type-theory.rewriting-directed-circle public
-open import simplicial-type-theory.simplicially-discrete-types public
-open import simplicial-type-theory.spines public
-open import simplicial-type-theory.standard-simplices public
-open import simplicial-type-theory.transposing-adjunctions-between-types public
-open import simplicial-type-theory.transposing-biadjunctions-between-types public
-open import simplicial-type-theory.universal-property-directed-circle public
-open import simplicial-type-theory.whiskering-arrows-functions public
-open import simplicial-type-theory.whiskering-directed-edges public
-open import simplicial-type-theory.whiskering-directed-edges-functions public
+open import simplicial-type-theory.2-simplices public I
+open import simplicial-type-theory.action-on-directed-edges-dependent-functions public I
+open import simplicial-type-theory.action-on-directed-edges-functions public I
+open import simplicial-type-theory.arrows public I
+open import simplicial-type-theory.boundary-standard-simplices public I
+open import simplicial-type-theory.comma-types public I
+open import simplicial-type-theory.compositions-of-directed-edges public I
+open import simplicial-type-theory.conormed-maps-between-types public I
+open import simplicial-type-theory.covariant-type-families public I
+open import simplicial-type-theory.dependent-directed-edges public I
+open import simplicial-type-theory.directed-circle public I
+open import simplicial-type-theory.directed-cones public I
+open import simplicial-type-theory.directed-cubes public I
+open import simplicial-type-theory.directed-edges public I
+open import simplicial-type-theory.directed-edges-booleans public I
+open import simplicial-type-theory.directed-edges-cartesian-product-types public I
+open import simplicial-type-theory.directed-edges-dependent-pair-types public I
+open import simplicial-type-theory.directed-interval-type public I
+open import simplicial-type-theory.directed-joins public I
+open import simplicial-type-theory.directed-mapping-cylinders public I
+open import simplicial-type-theory.directed-suspension public I
+open import simplicial-type-theory.free-directed-loops public I
+open import simplicial-type-theory.fully-faithful-maps public I
+open import simplicial-type-theory.globularly-coskeletal-types public I
+open import simplicial-type-theory.horizontal-composition-arrows-functions public I
+open import simplicial-type-theory.horizontal-composition-directed-edges-functions public I
+open import simplicial-type-theory.horizontal-composition-natural-transformations public I
+open import simplicial-type-theory.inequality-directed-interval-type public I
+open import simplicial-type-theory.inner-2-horn public I
+open import simplicial-type-theory.natural-transformations public I
+open import simplicial-type-theory.normed-maps-between-types public I
+open import simplicial-type-theory.representing-biinvertible-arrow public I
+open import simplicial-type-theory.rewriting-directed-circle public I
+open import simplicial-type-theory.simplicially-discrete-types public I
+open import simplicial-type-theory.spines public I
+open import simplicial-type-theory.standard-simplices public I
+open import simplicial-type-theory.transposing-adjunctions-between-types public I
+open import simplicial-type-theory.transposing-biadjunctions-between-types public I
+open import simplicial-type-theory.universal-property-directed-circle public I
+open import simplicial-type-theory.whiskering-arrows-functions public I
+open import simplicial-type-theory.whiskering-directed-edges public I
+open import simplicial-type-theory.whiskering-directed-edges-functions public I
 ```

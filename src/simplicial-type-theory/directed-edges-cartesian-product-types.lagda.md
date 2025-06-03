@@ -1,7 +1,13 @@
 # Directed edges in cartesian product types
 
 ```agda
-module simplicial-type-theory.directed-edges-cartesian-product-types where
+open import foundation.universe-levels
+open import order-theory.nontrivial-bounded-total-orders
+
+module
+  simplicial-type-theory.directed-edges-cartesian-product-types
+  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -29,12 +35,12 @@ open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-maps
 
-open import simplicial-type-theory.action-on-directed-edges-dependent-functions
-open import simplicial-type-theory.action-on-directed-edges-functions
-open import simplicial-type-theory.arrows
-open import simplicial-type-theory.dependent-directed-edges
-open import simplicial-type-theory.directed-edges
-open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.action-on-directed-edges-dependent-functions I
+open import simplicial-type-theory.action-on-directed-edges-functions I
+open import simplicial-type-theory.arrows I
+open import simplicial-type-theory.dependent-directed-edges I
+open import simplicial-type-theory.directed-edges I
+open import simplicial-type-theory.directed-interval-type I I
 ```
 
 </details>

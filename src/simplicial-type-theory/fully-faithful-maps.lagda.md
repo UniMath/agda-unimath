@@ -1,7 +1,13 @@
 # Fully-faithful maps
 
 ```agda
-module simplicial-type-theory.fully-faithful-maps where
+open import foundation.universe-levels
+open import order-theory.nontrivial-bounded-total-orders
+
+module
+  simplicial-type-theory.fully-faithful-maps
+  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -35,10 +41,10 @@ open import foundation-core.sections
 
 open import orthogonal-factorization-systems.orthogonal-maps
 
-open import simplicial-type-theory.action-on-directed-edges-functions
-open import simplicial-type-theory.directed-edges
-open import simplicial-type-theory.directed-interval-type I
-open import simplicial-type-theory.whiskering-directed-edges
+open import simplicial-type-theory.action-on-directed-edges-functions I
+open import simplicial-type-theory.directed-edges I
+open import simplicial-type-theory.directed-interval-type I I
+open import simplicial-type-theory.whiskering-directed-edges I
 ```
 
 </details>
