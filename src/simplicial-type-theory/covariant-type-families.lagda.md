@@ -1,7 +1,7 @@
-# Simplicially covariant type families
+# Covariant type families
 
 ```agda
-module simplicial-type-theory.simplicially-covariant-type-families where
+module simplicial-type-theory.covariant-type-families where
 ```
 
 <details><summary>Imports</summary>
@@ -27,7 +27,7 @@ open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-families-of-types
+open import orthogonal-factorization-systems.families-of-types-local-at-maps
 open import orthogonal-factorization-systems.null-types
 
 open import simplicial-type-theory.arrows
@@ -44,7 +44,7 @@ open import synthetic-homotopy-theory.circle
 ## Idea
 
 A type family `B : A → 𝒰` is
-{{#concept "simplicially covariant" Disambiguation="type family" Agda=is-simplicially-covariant}}
+{{#concept "(simplicially) covariant" Disambiguation="type family" Agda=is-simplicially-covariant}}
 if one of the following equivalent conditions hold:
 
 1. For every directed edge `f : x →▵ y` in `A` and element `x'` over `x`, the
@@ -78,8 +78,6 @@ if one of the following equivalent conditions hold:
          Σ (x : A), (B x) -------------------> A
                                 pr1
    ```
-
-<!-- TODO add more conditions and distill -->
 
 ## Definitions
 
