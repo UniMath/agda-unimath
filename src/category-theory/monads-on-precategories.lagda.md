@@ -550,13 +550,13 @@ module _
     ( comp-hom-Precategory C
       ( hom-morphism-monad-algebra-Precategory b c g)
       ( hom-morphism-monad-algebra-Precategory a b f)) ,
-    ( comp-coherence-square-hom-Precategory C
+    ( pasting-horizontal-coherence-square-hom-Precategory C
       ( top-hom-morphism-monad-algebra-Precategory a b f)
+      ( top-hom-morphism-monad-algebra-Precategory b c g)
       ( hom-monad-algebra-Precategory a)
       ( hom-monad-algebra-Precategory b)
-      ( hom-morphism-monad-algebra-Precategory a b f)
-      ( top-hom-morphism-monad-algebra-Precategory b c g)
       ( hom-monad-algebra-Precategory c)
+      ( hom-morphism-monad-algebra-Precategory a b f)
       ( hom-morphism-monad-algebra-Precategory b c g)
       ( comm-hom-morphism-monad-algebra-Precategory a b f)
       ( comm-hom-morphism-monad-algebra-Precategory b c g)) ∙

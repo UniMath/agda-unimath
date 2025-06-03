@@ -50,7 +50,7 @@ coherence-square-hom-Precategory :
 coherence-square-hom-Precategory C =
   coherence-square-hom-Set-Magmoid (set-magmoid-Precategory C)
 
-comp-coherence-square-hom-Precategory :
+pasting-horizontal-coherence-square-hom-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2)
   {x y z w a b : obj-Precategory C}
   (topleft : hom-Precategory C x y)
@@ -67,8 +67,8 @@ comp-coherence-square-hom-Precategory :
     ( left)
     ( right)
     ( comp-hom-Precategory C bottomright bottomleft)
-comp-coherence-square-hom-Precategory C
-  topleft left middle bottomleft topright right bottomright commleft commright =
+pasting-horizontal-coherence-square-hom-Precategory C
+  topleft topright left middle right bottomleft bottomright commleft commright =
   ( associative-comp-hom-Precategory C _ _ _) ∙
   ( ap (postcomp-hom-Precategory C bottomright _) commleft) ∙
   ( inv (associative-comp-hom-Precategory C _ _ _)) ∙
