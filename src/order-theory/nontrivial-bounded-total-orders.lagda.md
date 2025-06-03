@@ -84,7 +84,8 @@ module _
     leq-Poset poset-Nontrivial-Bounded-Total-Order
 
   is-prop-leq-Nontrivial-Bounded-Total-Order :
-    (x y : type-Nontrivial-Bounded-Total-Order) → is-prop (leq-Nontrivial-Bounded-Total-Order x y)
+    (x y : type-Nontrivial-Bounded-Total-Order) →
+    is-prop (leq-Nontrivial-Bounded-Total-Order x y)
   is-prop-leq-Nontrivial-Bounded-Total-Order =
     is-prop-leq-Poset poset-Nontrivial-Bounded-Total-Order
 
