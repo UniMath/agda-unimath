@@ -41,8 +41,8 @@ open import reflection.erasing-equality
 open import simplicial-type-theory.arrows
 open import simplicial-type-theory.directed-cubes
 open import simplicial-type-theory.directed-edges
-open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.inequality-directed-interval-type
+open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.inequality-directed-interval-type I
 open import simplicial-type-theory.standard-simplices
 
 open import synthetic-homotopy-theory.cocones-under-spans

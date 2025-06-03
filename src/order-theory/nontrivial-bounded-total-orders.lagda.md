@@ -43,7 +43,7 @@ module _
 
   is-nontrivial-Bounded-Total-Order : UU l1
   is-nontrivial-Bounded-Total-Order =
-    top-Bounded-Total-Order L ≠ bottom-Bounded-Total-Order L
+    bottom-Bounded-Total-Order L ≠ top-Bounded-Total-Order L
 ```
 
 ### Nontrivial bounded total orders
@@ -143,6 +143,6 @@ module _
       bounded-total-order-Nontrivial-Bounded-Total-Order
 
   is-nontrivial-Nontrivial-Bounded-Total-Order :
-    top-Nontrivial-Bounded-Total-Order ≠ bottom-Nontrivial-Bounded-Total-Order
+    bottom-Nontrivial-Bounded-Total-Order ≠ top-Nontrivial-Bounded-Total-Order
   is-nontrivial-Nontrivial-Bounded-Total-Order = pr2 L
 ```

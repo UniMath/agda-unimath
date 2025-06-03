@@ -1,7 +1,13 @@
 # The directed interval type
 
 ```agda
-module simplicial-type-theory.directed-interval-type where
+open import foundation.universe-levels
+open import order-theory.nontrivial-bounded-total-orders
+
+module
+  simplicial-type-theory.directed-interval-type
+  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -61,12 +67,17 @@ type.
 ### The directed interval type
 
 ```agda
-postulate
-  Δ¹ : UU lzero
+Δ¹ : UU l1
+Δ¹ = type-Nontrivial-Bounded-Total-Order I
 
-  0▵ 1▵ : Δ¹
+0▵ : Δ¹
+0▵ = bottom-Nontrivial-Bounded-Total-Order I
 
-  is-nontrivial-Δ¹ : 0▵ ≠ 1▵
+1▵ : Δ¹
+1▵ = top-Nontrivial-Bounded-Total-Order I
+
+is-nontrivial-Δ¹ : 0▵ ≠ 1▵
+is-nontrivial-Δ¹ = is-nontrivial-Nontrivial-Bounded-Total-Order I
 ```
 
 ## Properties
@@ -103,7 +114,7 @@ is-noncontractible-Δ¹ = unit-trunc-Prop noncontractibility-Δ¹
 ### The boundary of the directed interval
 
 ```agda
-subtype-∂Δ¹' : subtype lzero Δ¹
+subtype-∂Δ¹' : subtype l1 Δ¹
 subtype-∂Δ¹' t =
   coproduct-Prop
     ( mere-eq-Prop t 0▵)
@@ -115,7 +126,7 @@ subtype-∂Δ¹' t =
             ( λ t=0 → is-nontrivial-Δ¹ (inv t=0 ∙ t=1))
             ( |t=0|)))
 
-∂Δ¹ : UU lzero
+∂Δ¹ : UU l1
 ∂Δ¹ = type-subtype subtype-∂Δ¹'
 ```
 
