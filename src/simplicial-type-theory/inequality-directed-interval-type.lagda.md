@@ -37,9 +37,9 @@ open import synthetic-homotopy-theory.joins-of-types
 ## Idea
 
 The
-{{#concept "directed relation" Disambiguation="on the directed interval type" Agda=_≤-𝟚_}}
+{{#concept "directed relation" Disambiguation="on the directed interval type" Agda=_≤-Δ¹_}}
 on the
-[directed interval type](simplicial-type-theory.directed-interval-type.md) `𝟚`
+[directed interval type](simplicial-type-theory.directed-interval-type.md) `Δ¹`
 is a [total order](order-theory.total-orders.md) with `0₂` as the
 [bottom element](order-theory.bottom-elements-posets.md), and `1₂` as the
 [top element](order-theory.top-elements-posets.md).
@@ -50,27 +50,27 @@ is a [total order](order-theory.total-orders.md) with `0₂` as the
 
 ```agda
 postulate
-  _≤-𝟚_ : 𝟚 → 𝟚 → UU lzero
+  _≤-Δ¹_ : Δ¹ → Δ¹ → UU lzero
 
-  is-prop-leq-𝟚 : {x y : 𝟚} → is-prop (x ≤-𝟚 y)
+  is-prop-leq-Δ¹ : {x y : Δ¹} → is-prop (x ≤-Δ¹ y)
 
-infix 30 _≤-𝟚_
+infix 30 _≤-Δ¹_
 
-leq-𝟚 : 𝟚 → 𝟚 → UU lzero
-leq-𝟚 = _≤-𝟚_
+leq-Δ¹ : Δ¹ → Δ¹ → UU lzero
+leq-Δ¹ = _≤-Δ¹_
 ```
 
 ### The directed relation is a total order
 
 ```agda
 postulate
-  refl-leq-𝟚 : {x : 𝟚} → x ≤-𝟚 x
+  refl-leq-Δ¹ : {x : Δ¹} → x ≤-Δ¹ x
 
-  transitive-leq-𝟚 : {x y z : 𝟚} → y ≤-𝟚 z → x ≤-𝟚 y → x ≤-𝟚 z
+  transitive-leq-Δ¹ : {x y z : Δ¹} → y ≤-Δ¹ z → x ≤-Δ¹ y → x ≤-Δ¹ z
 
-  antisymmetric-leq-𝟚 : {x y : 𝟚} → x ≤-𝟚 y → y ≤-𝟚 x → x ＝ y
+  antisymmetric-leq-Δ¹ : {x y : Δ¹} → x ≤-Δ¹ y → y ≤-Δ¹ x → x ＝ y
 
-  total-leq-𝟚 : {x y : 𝟚} → (x ≤-𝟚 y) * (y ≤-𝟚 x)
+  total-leq-Δ¹ : {x y : Δ¹} → (x ≤-Δ¹ y) * (y ≤-Δ¹ x)
 ```
 
 **Note.** We define totality using the
@@ -85,9 +85,9 @@ rewrite rules for by importing the module
 
 ```agda
 postulate
-  min-leq-𝟚 : {x : 𝟚} → 0₂ ≤-𝟚 x
+  min-leq-Δ¹ : {x : Δ¹} → 0₂ ≤-Δ¹ x
 
-  max-leq-𝟚 : {x : 𝟚} → x ≤-𝟚 1₂
+  max-leq-Δ¹ : {x : Δ¹} → x ≤-Δ¹ 1₂
 ```
 
 ## Operations
@@ -95,55 +95,55 @@ postulate
 ### The binary max function on the directed interval
 
 ```agda
-cocone-max-𝟚 : (t s : 𝟚) → cocone pr1 pr2 𝟚
-cocone-max-𝟚 t s =
-  ( (λ _ → s) , (λ _ → t) , (λ (p , q) → antisymmetric-leq-𝟚 q p))
+cocone-max-Δ¹ : (t s : Δ¹) → cocone pr1 pr2 Δ¹
+cocone-max-Δ¹ t s =
+  ( (λ _ → s) , (λ _ → t) , (λ (p , q) → antisymmetric-leq-Δ¹ q p))
 
-max-𝟚 : 𝟚 → 𝟚 → 𝟚
-max-𝟚 t s = cogap-join 𝟚 (cocone-max-𝟚 t s) total-leq-𝟚
-
-abstract
-  compute-left-max-𝟚 : {t s : 𝟚} → s ≤-𝟚 t → max-𝟚 t s ＝ t
-  compute-left-max-𝟚 {t} {s} p =
-    ( ap
-      ( cogap-join 𝟚 (cocone-max-𝟚 t s))
-      ( eq-is-prop (is-prop-join-is-prop is-prop-leq-𝟚 is-prop-leq-𝟚))) ∙
-    ( compute-inr-cogap-join (cocone-max-𝟚 t s) p)
+max-Δ¹ : Δ¹ → Δ¹ → Δ¹
+max-Δ¹ t s = cogap-join Δ¹ (cocone-max-Δ¹ t s) total-leq-Δ¹
 
 abstract
-  compute-right-max-𝟚 : {t s : 𝟚} → t ≤-𝟚 s → max-𝟚 t s ＝ s
-  compute-right-max-𝟚 {t} {s} p =
+  compute-left-max-Δ¹ : {t s : Δ¹} → s ≤-Δ¹ t → max-Δ¹ t s ＝ t
+  compute-left-max-Δ¹ {t} {s} p =
     ( ap
-      ( cogap-join 𝟚 (cocone-max-𝟚 t s))
-      ( eq-is-prop (is-prop-join-is-prop is-prop-leq-𝟚 is-prop-leq-𝟚))) ∙
-    ( compute-inl-cogap-join (cocone-max-𝟚 t s) p)
+      ( cogap-join Δ¹ (cocone-max-Δ¹ t s))
+      ( eq-is-prop (is-prop-join-is-prop is-prop-leq-Δ¹ is-prop-leq-Δ¹))) ∙
+    ( compute-inr-cogap-join (cocone-max-Δ¹ t s) p)
+
+abstract
+  compute-right-max-Δ¹ : {t s : Δ¹} → t ≤-Δ¹ s → max-Δ¹ t s ＝ s
+  compute-right-max-Δ¹ {t} {s} p =
+    ( ap
+      ( cogap-join Δ¹ (cocone-max-Δ¹ t s))
+      ( eq-is-prop (is-prop-join-is-prop is-prop-leq-Δ¹ is-prop-leq-Δ¹))) ∙
+    ( compute-inl-cogap-join (cocone-max-Δ¹ t s) p)
 ```
 
 ### The binary minimum function on the directed interval
 
 ```agda
-cocone-min-𝟚 : (t s : 𝟚) → cocone pr1 pr2 𝟚
-cocone-min-𝟚 t s =
-  ( (λ _ → t) , (λ _ → s) , (λ (p , q) → antisymmetric-leq-𝟚 p q))
+cocone-min-Δ¹ : (t s : Δ¹) → cocone pr1 pr2 Δ¹
+cocone-min-Δ¹ t s =
+  ( (λ _ → t) , (λ _ → s) , (λ (p , q) → antisymmetric-leq-Δ¹ p q))
 
-min-𝟚 : 𝟚 → 𝟚 → 𝟚
-min-𝟚 t s = cogap-join 𝟚 (cocone-min-𝟚 t s) total-leq-𝟚
-
-abstract
-  compute-left-min-𝟚 : {t s : 𝟚} (p : t ≤-𝟚 s) → min-𝟚 t s ＝ t
-  compute-left-min-𝟚 {t} {s} p =
-    ( ap
-      ( cogap-join 𝟚 (cocone-min-𝟚 t s))
-      ( eq-is-prop (is-prop-join-is-prop is-prop-leq-𝟚 is-prop-leq-𝟚))) ∙
-    ( compute-inl-cogap-join (cocone-min-𝟚 t s) p)
+min-Δ¹ : Δ¹ → Δ¹ → Δ¹
+min-Δ¹ t s = cogap-join Δ¹ (cocone-min-Δ¹ t s) total-leq-Δ¹
 
 abstract
-  compute-right-min-𝟚 : {t s : 𝟚} (p : s ≤-𝟚 t) → min-𝟚 t s ＝ s
-  compute-right-min-𝟚 {t} {s} p =
+  compute-left-min-Δ¹ : {t s : Δ¹} (p : t ≤-Δ¹ s) → min-Δ¹ t s ＝ t
+  compute-left-min-Δ¹ {t} {s} p =
     ( ap
-      ( cogap-join 𝟚 (cocone-min-𝟚 t s))
-      ( eq-is-prop (is-prop-join-is-prop is-prop-leq-𝟚 is-prop-leq-𝟚))) ∙
-    ( compute-inr-cogap-join (cocone-min-𝟚 t s) p)
+      ( cogap-join Δ¹ (cocone-min-Δ¹ t s))
+      ( eq-is-prop (is-prop-join-is-prop is-prop-leq-Δ¹ is-prop-leq-Δ¹))) ∙
+    ( compute-inl-cogap-join (cocone-min-Δ¹ t s) p)
+
+abstract
+  compute-right-min-Δ¹ : {t s : Δ¹} (p : s ≤-Δ¹ t) → min-Δ¹ t s ＝ s
+  compute-right-min-Δ¹ {t} {s} p =
+    ( ap
+      ( cogap-join Δ¹ (cocone-min-Δ¹ t s))
+      ( eq-is-prop (is-prop-join-is-prop is-prop-leq-Δ¹ is-prop-leq-Δ¹))) ∙
+    ( compute-inr-cogap-join (cocone-min-Δ¹ t s) p)
 ```
 
 ## Definitions
@@ -151,47 +151,47 @@ abstract
 ### The inequality binary propositional relation on the directed interval
 
 ```agda
-leq-𝟚-Prop : (x y : 𝟚) → Prop lzero
-leq-𝟚-Prop x y = (x ≤-𝟚 y , is-prop-leq-𝟚)
+leq-Δ¹-Prop : (x y : Δ¹) → Prop lzero
+leq-Δ¹-Prop x y = (x ≤-Δ¹ y , is-prop-leq-Δ¹)
 
-{-# INLINE leq-𝟚-Prop #-}
+{-# INLINE leq-Δ¹-Prop #-}
 
-min-leq-eq-𝟚 : {x y : 𝟚} → x ＝ 0₂ → x ≤-𝟚 y
-min-leq-eq-𝟚 refl = min-leq-𝟚
+min-leq-eq-Δ¹ : {x y : Δ¹} → x ＝ 0₂ → x ≤-Δ¹ y
+min-leq-eq-Δ¹ refl = min-leq-Δ¹
 
-max-leq-eq-𝟚 : {x y : 𝟚} → y ＝ 1₂ → x ≤-𝟚 y
-max-leq-eq-𝟚 refl = max-leq-𝟚
+max-leq-eq-Δ¹ : {x y : Δ¹} → y ＝ 1₂ → x ≤-Δ¹ y
+max-leq-eq-Δ¹ refl = max-leq-Δ¹
 
-leq-eq-𝟚 : {x y : 𝟚} → x ＝ y → x ≤-𝟚 y
-leq-eq-𝟚 refl = refl-leq-𝟚
+leq-eq-Δ¹ : {x y : Δ¹} → x ＝ y → x ≤-Δ¹ y
+leq-eq-Δ¹ refl = refl-leq-Δ¹
 
-leq-inv-eq-𝟚 : {x y : 𝟚} → x ＝ y → y ≤-𝟚 x
-leq-inv-eq-𝟚 = leq-eq-𝟚 ∘ inv
+leq-inv-eq-Δ¹ : {x y : Δ¹} → x ＝ y → y ≤-Δ¹ x
+leq-inv-eq-Δ¹ = leq-eq-Δ¹ ∘ inv
 ```
 
 ### The poset structure on the directed interval
 
 ```agda
-𝟚-Preorder : Preorder lzero lzero
-pr1 𝟚-Preorder = 𝟚
-pr1 (pr2 𝟚-Preorder) = leq-𝟚-Prop
-pr1 (pr2 (pr2 𝟚-Preorder)) x = refl-leq-𝟚 {x}
-pr2 (pr2 (pr2 𝟚-Preorder)) x y z = transitive-leq-𝟚
+Δ¹-Preorder : Preorder lzero lzero
+pr1 Δ¹-Preorder = Δ¹
+pr1 (pr2 Δ¹-Preorder) = leq-Δ¹-Prop
+pr1 (pr2 (pr2 Δ¹-Preorder)) x = refl-leq-Δ¹ {x}
+pr2 (pr2 (pr2 Δ¹-Preorder)) x y z = transitive-leq-Δ¹
 
-𝟚-Poset : Poset lzero lzero
-pr1 𝟚-Poset = 𝟚-Preorder
-pr2 𝟚-Poset x y = antisymmetric-leq-𝟚
+Δ¹-Poset : Poset lzero lzero
+pr1 Δ¹-Poset = Δ¹-Preorder
+pr2 Δ¹-Poset x y = antisymmetric-leq-Δ¹
 ```
 
 ### The total order on the directed interval
 
 ```agda
-is-total-leq-𝟚 : is-total-Poset 𝟚-Poset
-is-total-leq-𝟚 x y =
-  map-disjunction-join-Prop (leq-𝟚-Prop x y) (leq-𝟚-Prop y x) (total-leq-𝟚)
+is-total-leq-Δ¹ : is-total-Poset Δ¹-Poset
+is-total-leq-Δ¹ x y =
+  map-disjunction-join-Prop (leq-Δ¹-Prop x y) (leq-Δ¹-Prop y x) (total-leq-Δ¹)
 
-𝟚-Total-Order : Total-Order lzero lzero
-𝟚-Total-Order = (𝟚-Poset , is-total-leq-𝟚)
+Δ¹-Total-Order : Total-Order lzero lzero
+Δ¹-Total-Order = (Δ¹-Poset , is-total-leq-Δ¹)
 ```
 
 ## Properties
@@ -199,31 +199,31 @@ is-total-leq-𝟚 x y =
 ### The directed interval is a set
 
 ```agda
-is-set-𝟚 : is-set 𝟚
-is-set-𝟚 = is-set-type-Poset 𝟚-Poset
+is-set-Δ¹ : is-set Δ¹
+is-set-Δ¹ = is-set-type-Poset Δ¹-Poset
 
-𝟚-Set : Set lzero
-𝟚-Set = (𝟚 , is-set-𝟚)
+Δ¹-Set : Set lzero
+Δ¹-Set = (Δ¹ , is-set-Δ¹)
 
-Id-𝟚-Prop : 𝟚 → 𝟚 → Prop lzero
-Id-𝟚-Prop = Id-Prop 𝟚-Set
+Id-Δ¹-Prop : Δ¹ → Δ¹ → Prop lzero
+Id-Δ¹-Prop = Id-Prop Δ¹-Set
 
-{-# INLINE Id-𝟚-Prop #-}
+{-# INLINE Id-Δ¹-Prop #-}
 ```
 
 ### The maximal element is not less than or equal to the bottom element of the directed interval
 
 ```agda
-not-leq-target-source-𝟚 : ¬ (1₂ ≤-𝟚 0₂)
-not-leq-target-source-𝟚 leq-1-0 =
-  is-nontrivial-𝟚 (antisymmetric-leq-𝟚 min-leq-𝟚 leq-1-0)
+not-leq-target-source-Δ¹ : ¬ (1₂ ≤-Δ¹ 0₂)
+not-leq-target-source-Δ¹ leq-1-0 =
+  is-nontrivial-Δ¹ (antisymmetric-leq-Δ¹ min-leq-Δ¹ leq-1-0)
 ```
 
-### The directed relation `t ≤-𝟚 s` is equivalent to the relation `max-𝟚 t s ＝ s`
+### The directed relation `t ≤-Δ¹ s` is equivalent to the relation `max-Δ¹ t s ＝ s`
 
 > This remains to be formalized.
 
-### The directed relation `t ≤-𝟚 s` is equivalent to the relation `min-𝟚 t s ＝ t`
+### The directed relation `t ≤-Δ¹ s` is equivalent to the relation `min-Δ¹ t s ＝ t`
 
 > This remains to be formalized.
 
@@ -232,7 +232,7 @@ not-leq-target-source-𝟚 leq-1-0 =
 ```agda
 is-emb-map-directed-interval-bool : is-emb map-directed-interval-bool
 is-emb-map-directed-interval-bool =
-  is-emb-is-injective is-set-𝟚 is-injective-map-directed-interval-bool
+  is-emb-is-injective is-set-Δ¹ is-injective-map-directed-interval-bool
 ```
 
 ### The canonical inclusion of the booleans into the directed interval preserves and reflects its ordering

@@ -47,8 +47,8 @@ standard simplicial 0-cube is defined to be the
 ```agda
 simplicial-cube : ℕ → UU lzero
 simplicial-cube 0 = unit
-simplicial-cube 1 = 𝟚
-simplicial-cube (succ-ℕ (succ-ℕ n)) = 𝟚 × simplicial-cube (succ-ℕ n)
+simplicial-cube 1 = Δ¹
+simplicial-cube (succ-ℕ (succ-ℕ n)) = Δ¹ × simplicial-cube (succ-ℕ n)
 ```
 
 ### The standard left-associated simplicial cubes
@@ -56,9 +56,9 @@ simplicial-cube (succ-ℕ (succ-ℕ n)) = 𝟚 × simplicial-cube (succ-ℕ n)
 ```agda
 left-associated-simplicial-cube : ℕ → UU lzero
 left-associated-simplicial-cube 0 = unit
-left-associated-simplicial-cube 1 = 𝟚
+left-associated-simplicial-cube 1 = Δ¹
 left-associated-simplicial-cube (succ-ℕ (succ-ℕ n)) =
-  left-associated-simplicial-cube (succ-ℕ n) × 𝟚
+  left-associated-simplicial-cube (succ-ℕ n) × Δ¹
 ```
 
 ### The standard simplicial power cubes
@@ -66,7 +66,7 @@ left-associated-simplicial-cube (succ-ℕ (succ-ℕ n)) =
 ```agda
 pow-simplicial-cube : ℕ → UU lzero
 pow-simplicial-cube 0 = unit
-pow-simplicial-cube 1 = 𝟚
+pow-simplicial-cube 1 = Δ¹
 pow-simplicial-cube (succ-ℕ (succ-ℕ n)) =
   pow-simplicial-cube (succ-ℕ n) × pow-simplicial-cube (succ-ℕ n)
 ```
@@ -78,7 +78,7 @@ subtype-boundary-simplicial-cube : (n : ℕ) → subtype lzero (simplicial-cube 
 subtype-boundary-simplicial-cube 0 _ =
   empty-Prop
 subtype-boundary-simplicial-cube 1 x =
-  join-Prop (Id-𝟚-Prop x 0₂) (Id-𝟚-Prop x 1₂)
+  join-Prop (Id-Δ¹-Prop x 0₂) (Id-Δ¹-Prop x 1₂)
 subtype-boundary-simplicial-cube (succ-ℕ (succ-ℕ n)) (x , u) =
   join-Prop
     ( subtype-boundary-simplicial-cube 1 x)
@@ -102,7 +102,7 @@ is-prop-is-initial-element-simplicial-cube :
   (n : ℕ) (x : simplicial-cube n) →
   is-prop (is-initial-element-simplicial-cube n x)
 is-prop-is-initial-element-simplicial-cube 0 _ = is-prop-unit
-is-prop-is-initial-element-simplicial-cube 1 x = is-set-𝟚 x 0₂
+is-prop-is-initial-element-simplicial-cube 1 x = is-set-Δ¹ x 0₂
 is-prop-is-initial-element-simplicial-cube (succ-ℕ (succ-ℕ n)) (x , y) =
   is-prop-product
     ( is-prop-is-initial-element-simplicial-cube 1 x)
@@ -129,7 +129,7 @@ is-prop-is-terminal-element-simplicial-cube :
   (n : ℕ) (x : simplicial-cube n) →
   is-prop (is-terminal-element-simplicial-cube n x)
 is-prop-is-terminal-element-simplicial-cube 0 _ = is-prop-unit
-is-prop-is-terminal-element-simplicial-cube 1 x = is-set-𝟚 x 1₂
+is-prop-is-terminal-element-simplicial-cube 1 x = is-set-Δ¹ x 1₂
 is-prop-is-terminal-element-simplicial-cube (succ-ℕ (succ-ℕ n)) (x , y) =
   is-prop-product
     ( is-prop-is-terminal-element-simplicial-cube 1 x)
@@ -149,7 +149,7 @@ is-terminal-element-simplicial-cube-Prop n x =
 ```agda
 is-set-simplicial-cube : (n : ℕ) → is-set (simplicial-cube n)
 is-set-simplicial-cube zero-ℕ = is-set-unit
-is-set-simplicial-cube (succ-ℕ zero-ℕ) = is-set-𝟚
+is-set-simplicial-cube (succ-ℕ zero-ℕ) = is-set-Δ¹
 is-set-simplicial-cube (succ-ℕ (succ-ℕ n)) =
-  is-set-product is-set-𝟚 (is-set-simplicial-cube (succ-ℕ n))
+  is-set-product is-set-Δ¹ (is-set-simplicial-cube (succ-ℕ n))
 ```

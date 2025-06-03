@@ -52,7 +52,7 @@ colimit of the diagram
                  |         ⋮
     id × 1₂ × id |         ⋮
                  ∨         ⋮
-  A × B ---> A × 𝟚 × B     ⋮
+  A × B ---> A × Δ¹ × B     ⋮
     | id × 0₂ × id  ⋱      ⋮
     |                 ⋱    ⋮
     ∨                    ∨  ∨
@@ -74,7 +74,7 @@ edges `a →▵ b` for every `a : A` and `b : B`.
 
 This construction satisfies the laws
 
-- $𝟚 ≃ 1 *▵ 1$
+- $Δ¹ ≃ 1 *▵ 1$
 
 - $Δⁿ⁺¹ ≃ Δⁿ⁺¹ *▵ 1 ≃ 1 *▵ Δⁿ⁺¹$
 
@@ -98,7 +98,7 @@ module _
   postulate
     standard-simplicial-join : UU (l1 ⊔ l2)
 
-    in-standard-simplicial-join : A → B → 𝟚 → standard-simplicial-join
+    in-standard-simplicial-join : A → B → Δ¹ → standard-simplicial-join
 
     glue-source-standard-simplicial-join :
       (a : A) (b b' : B) →

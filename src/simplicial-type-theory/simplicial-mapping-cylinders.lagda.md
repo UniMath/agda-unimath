@@ -59,7 +59,7 @@ Given a map `f : X → Y`, we define the
             |           |
   (id , 1₂) |           |
             ∨         ⌜ ∨
-          X × 𝟚 ----> cyl₂ f
+          X × Δ¹ ----> cyl₂ f
 ```
 
 Intuitively, the simplicial mapping cylinder of `f` can be understood as `X`
@@ -81,7 +81,7 @@ module _
   where
 
   in-domain-interval-simplicial-mapping-cylinder :
-    X → 𝟚 → simplicial-mapping-cylinder f
+    X → Δ¹ → simplicial-mapping-cylinder f
   in-domain-interval-simplicial-mapping-cylinder x t =
     inl-pushout (λ (x : X) → (x , 1₂)) f (x , t)
 
@@ -135,7 +135,7 @@ module _
   dependent-cogap-simplicial-mapping-cylinder :
     { l : Level} {P : simplicial-mapping-cylinder f → UU l}
     ( g :
-      (x : X) (t : 𝟚) →
+      (x : X) (t : Δ¹) →
       P (in-domain-interval-simplicial-mapping-cylinder f x t)) →
     ( h : (y : Y) → P (in-codomain-simplicial-mapping-cylinder f y)) →
     ( p :
@@ -164,13 +164,13 @@ module _
     cogap (λ (x : X) → (x , 1₂)) f
 
   cogap-simplicial-mapping-cylinder :
-    (g : X → 𝟚 → S) (h : Y → S) (p : (x : X) → g x 1₂ ＝ h (f x)) →
+    (g : X → Δ¹ → S) (h : Y → S) (p : (x : X) → g x 1₂ ＝ h (f x)) →
     simplicial-mapping-cylinder f → S
   cogap-simplicial-mapping-cylinder g h p =
     cogap-simplicial-mapping-cylinder' ((λ (x , t) → g x t) , h , p)
 
   compute-in-codomain-cogap-simplicial-mapping-cylinder :
-    (g : X → 𝟚 → S) (h : Y → S) (p : (x : X) → g x 1₂ ＝ h (f x)) →
+    (g : X → Δ¹ → S) (h : Y → S) (p : (x : X) → g x 1₂ ＝ h (f x)) →
     (y : Y) →
     cogap-simplicial-mapping-cylinder g h p
       ( in-codomain-simplicial-mapping-cylinder f y) ＝
@@ -179,8 +179,8 @@ module _
     compute-inr-cogap (λ x → (x , 1₂)) f ((λ (x , t) → g x t) , h , p)
 
   compute-in-domain-interval-cogap-simplicial-mapping-cylinder :
-    (g : X → 𝟚 → S) (h : Y → S) (p : (x : X) → g x 1₂ ＝ h (f x))
-    (x : X) (t : 𝟚) →
+    (g : X → Δ¹ → S) (h : Y → S) (p : (x : X) → g x 1₂ ＝ h (f x))
+    (x : X) (t : Δ¹) →
     cogap-simplicial-mapping-cylinder g h p
       ( in-domain-interval-simplicial-mapping-cylinder f x t) ＝
     ( g x t)
@@ -192,7 +192,7 @@ module _
       ( x , t)
 
   compute-in-domain-cogap-simplicial-mapping-cylinder :
-    (g : X → 𝟚 → S) (h : Y → S) (p : (x : X) → g x 1₂ ＝ h (f x)) (x : X) →
+    (g : X → Δ¹ → S) (h : Y → S) (p : (x : X) → g x 1₂ ＝ h (f x)) (x : X) →
     cogap-simplicial-mapping-cylinder g h p
       ( in-domain-simplicial-mapping-cylinder f x) ＝
     g x 0₂

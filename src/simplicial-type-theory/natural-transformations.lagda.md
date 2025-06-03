@@ -104,7 +104,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : A → 𝟚 → UU l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → Δ¹ → UU l2}
   where
 
   family-of-simplicial-arrows-arrow▵-of-dependent-functions :

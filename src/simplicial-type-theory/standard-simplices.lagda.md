@@ -58,7 +58,7 @@ subtype-standard-simplex 0 _ =
 subtype-standard-simplex 1 _ =
   unit-Prop
 subtype-standard-simplex 2 (x , y) =
-  leq-𝟚-Prop y x
+  leq-Δ¹-Prop y x
 subtype-standard-simplex (succ-ℕ (succ-ℕ (succ-ℕ n))) (x , y , u) =
   conjunction-Prop
     ( subtype-standard-simplex 2 (x , y))

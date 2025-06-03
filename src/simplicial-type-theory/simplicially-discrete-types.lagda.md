@@ -115,7 +115,7 @@ module _
     fundamental-theorem-id-section x (λ y → hom▵-eq) (s x)
 ```
 
-### Being simplicially discrete is equivalent to being `𝟚`-null
+### Being simplicially discrete is equivalent to being `Δ¹`-null
 
 **Proof.** We have the [equivalence of maps](foundation.equivalences-arrows.md)
 
@@ -125,7 +125,7 @@ module _
      |                 |
    Δ |                 | Σ² hom▵-eq
      ∨                 ∨
-  (𝟚 → A) ----> Σ (x y : A), (x →▵ y),
+  (Δ¹ → A) ----> Σ (x y : A), (x →▵ y),
             ~
 ```
 
@@ -138,41 +138,41 @@ module _
   {l : Level} {A : UU l}
   where
 
-  equiv-tot-hom▵-eq-diagonal-exponential-𝟚 :
+  equiv-tot-hom▵-eq-diagonal-exponential-Δ¹ :
     equiv-arrow
-      ( diagonal-exponential A 𝟚)
+      ( diagonal-exponential A Δ¹)
       ( tot (λ x → tot (λ y → hom▵-eq {x = x} {y})))
-  equiv-tot-hom▵-eq-diagonal-exponential-𝟚 =
+  equiv-tot-hom▵-eq-diagonal-exponential-Δ¹ =
     ( compute-total-Id , compute-total-hom▵ , refl-htpy)
 
   abstract
-    is-simplicially-discrete-is-𝟚-null :
-      is-null 𝟚 A → is-simplicially-discrete A
-    is-simplicially-discrete-is-𝟚-null H x =
+    is-simplicially-discrete-is-Δ¹-null :
+      is-null Δ¹ A → is-simplicially-discrete A
+    is-simplicially-discrete-is-Δ¹-null H x =
       is-fiberwise-equiv-is-equiv-tot
         ( is-fiberwise-equiv-is-equiv-tot
           ( is-equiv-target-is-equiv-source-equiv-arrow
-            ( diagonal-exponential A 𝟚)
+            ( diagonal-exponential A Δ¹)
             ( tot (λ x → tot (λ y → hom▵-eq {x = x} {y})))
-            ( equiv-tot-hom▵-eq-diagonal-exponential-𝟚)
+            ( equiv-tot-hom▵-eq-diagonal-exponential-Δ¹)
             ( H))
           ( x))
 
   abstract
-    is-𝟚-null-is-simplicially-discrete :
-      is-simplicially-discrete A → is-null 𝟚 A
-    is-𝟚-null-is-simplicially-discrete H =
+    is-Δ¹-null-is-simplicially-discrete :
+      is-simplicially-discrete A → is-null Δ¹ A
+    is-Δ¹-null-is-simplicially-discrete H =
       is-equiv-source-is-equiv-target-equiv-arrow
-        ( diagonal-exponential A 𝟚)
+        ( diagonal-exponential A Δ¹)
         ( tot (λ x → tot (λ y → hom▵-eq {x = x} {y})))
-        ( equiv-tot-hom▵-eq-diagonal-exponential-𝟚)
+        ( equiv-tot-hom▵-eq-diagonal-exponential-Δ¹)
         ( is-equiv-tot-is-fiberwise-equiv
           ( λ x → is-equiv-tot-is-fiberwise-equiv (H x)))
 
-  iff-is-𝟚-null-is-simplicially-discrete :
-    is-simplicially-discrete A ↔ is-null 𝟚 A
-  iff-is-𝟚-null-is-simplicially-discrete =
-    ( is-𝟚-null-is-simplicially-discrete , is-simplicially-discrete-is-𝟚-null)
+  iff-is-Δ¹-null-is-simplicially-discrete :
+    is-simplicially-discrete A ↔ is-null Δ¹ A
+  iff-is-Δ¹-null-is-simplicially-discrete =
+    ( is-Δ¹-null-is-simplicially-discrete , is-simplicially-discrete-is-Δ¹-null)
 ```
 
 ### Simplicially discrete types are closed under retracts
@@ -182,8 +182,8 @@ is-simplicially-discrete-retract :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   A retract-of B → is-simplicially-discrete B → is-simplicially-discrete A
 is-simplicially-discrete-retract r H =
-  is-simplicially-discrete-is-𝟚-null
-    ( is-null-retract-base r (is-𝟚-null-is-simplicially-discrete H))
+  is-simplicially-discrete-is-Δ¹-null
+    ( is-null-retract-base r (is-Δ¹-null-is-simplicially-discrete H))
 ```
 
 ### Simplicially discrete types are closed under equivalences
@@ -193,8 +193,8 @@ is-simplicially-discrete-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   A ≃ B → is-simplicially-discrete B → is-simplicially-discrete A
 is-simplicially-discrete-equiv e H =
-  is-simplicially-discrete-is-𝟚-null
-    ( is-null-equiv-base e (is-𝟚-null-is-simplicially-discrete H))
+  is-simplicially-discrete-is-Δ¹-null
+    ( is-null-equiv-base e (is-Δ¹-null-is-simplicially-discrete H))
 ```
 
 ### Simplicially discrete types are closed under dependent products
@@ -205,8 +205,8 @@ is-simplicially-discrete-Π :
   ((i : I) → is-simplicially-discrete (B i)) →
   is-simplicially-discrete ((i : I) → B i)
 is-simplicially-discrete-Π H =
-  is-simplicially-discrete-is-𝟚-null
-    ( is-null-Π (λ i → is-𝟚-null-is-simplicially-discrete (H i)))
+  is-simplicially-discrete-is-Δ¹-null
+    ( is-null-Π (λ i → is-Δ¹-null-is-simplicially-discrete (H i)))
 ```
 
 ### Simplicially discrete types are closed under exponentiation
@@ -228,10 +228,10 @@ is-simplicially-discrete-product :
   is-simplicially-discrete B →
   is-simplicially-discrete (A × B)
 is-simplicially-discrete-product is-disc-A is-disc-B =
-  is-simplicially-discrete-is-𝟚-null
+  is-simplicially-discrete-is-Δ¹-null
     ( is-null-product
-      ( is-𝟚-null-is-simplicially-discrete is-disc-A)
-      ( is-𝟚-null-is-simplicially-discrete is-disc-B))
+      ( is-Δ¹-null-is-simplicially-discrete is-disc-A)
+      ( is-Δ¹-null-is-simplicially-discrete is-disc-B))
 ```
 
 ### Simplicially discrete types are closed under dependent sums
@@ -243,10 +243,10 @@ is-simplicially-discrete-Σ :
   ((x : A) → is-simplicially-discrete (B x)) →
   is-simplicially-discrete (Σ A B)
 is-simplicially-discrete-Σ is-disc-A is-disc-B =
-  is-simplicially-discrete-is-𝟚-null
+  is-simplicially-discrete-is-Δ¹-null
     ( is-null-Σ
-      ( is-𝟚-null-is-simplicially-discrete is-disc-A)
-      ( λ x → is-𝟚-null-is-simplicially-discrete (is-disc-B x)))
+      ( is-Δ¹-null-is-simplicially-discrete is-disc-A)
+      ( λ x → is-Δ¹-null-is-simplicially-discrete (is-disc-B x)))
 ```
 
 ### A family over a simplicially discrete type is a family of simplicially discrete types if and only if the dependent sum is
@@ -261,17 +261,17 @@ is-simplicially-discrete-family-is-simplicially-discrete-Σ :
   (x : A) → is-simplicially-discrete (B x)
 is-simplicially-discrete-family-is-simplicially-discrete-Σ
   is-disc-A is-disc-ΣAB x =
-  is-simplicially-discrete-is-𝟚-null
+  is-simplicially-discrete-is-Δ¹-null
     ( is-null-family-is-null-Σ
-      ( is-𝟚-null-is-simplicially-discrete is-disc-A)
-      ( is-𝟚-null-is-simplicially-discrete is-disc-ΣAB)
+      ( is-Δ¹-null-is-simplicially-discrete is-disc-A)
+      ( is-Δ¹-null-is-simplicially-discrete is-disc-ΣAB)
       ( x))
 ```
 
 ### Simplicially discrete types are Segal
 
 This remains to be formalized. The proof boils down to showing that `Λ²₁ ↪ Δ²`
-is anodyne with respect to `𝟚 → 1`.
+is anodyne with respect to `Δ¹ → 1`.
 
 ### A type is simplicially discrete if and only if it is pregroupoidal and Rezk complete
 
@@ -284,9 +284,9 @@ This is proposition 10.10 of {{#cite RS17}}. This remains to be formalized.
 ### The directed interval is not simplicially discrete
 
 ```agda
-is-not-simplicially-discrete-𝟚 : ¬ (is-simplicially-discrete 𝟚)
-is-not-simplicially-discrete-𝟚 H =
-  is-nontrivial-𝟚 (map-inv-is-equiv (H 0₂ 1₂) representing-hom-𝟚)
+is-not-simplicially-discrete-Δ¹ : ¬ (is-simplicially-discrete Δ¹)
+is-not-simplicially-discrete-Δ¹ H =
+  is-nontrivial-Δ¹ (map-inv-is-equiv (H 0₂ 1₂) representing-hom-Δ¹)
 ```
 
 ### Propositions are simplicially discrete
@@ -295,7 +295,7 @@ is-not-simplicially-discrete-𝟚 H =
 is-simplicially-discrete-is-prop :
   {l : Level} {P : UU l} → is-prop P → is-simplicially-discrete P
 is-simplicially-discrete-is-prop =
-  is-simplicially-discrete-is-𝟚-null ∘ is-null-is-prop-is-inhabited' 0₂
+  is-simplicially-discrete-is-Δ¹-null ∘ is-null-is-prop-is-inhabited' 0₂
 ```
 
 ### Contractible types are simplicially discrete

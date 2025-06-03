@@ -163,7 +163,7 @@ module _
   is-simplicially-fully-faithful-is-equiv {f} H x y =
     is-equiv-map-Σ
       ( λ α → (α 0₂ ＝ f x) × (α 1₂ ＝ f y))
-      ( is-equiv-postcomp-is-equiv f H 𝟚)
+      ( is-equiv-postcomp-is-equiv f H Δ¹)
       ( λ α →
         is-equiv-map-product
           ( ap f)
@@ -178,7 +178,7 @@ module _
       is-simplicially-fully-faithful-is-equiv (is-equiv-map-equiv e) x y)
 ```
 
-### A map is simplicially fully faithful if and only if it is `(∂𝟚 → 𝟚)`-orthogonal
+### A map is simplicially fully faithful if and only if it is `(∂Δ¹ → Δ¹)`-orthogonal
 
 > This remains to be formalized.
 

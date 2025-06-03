@@ -63,13 +63,13 @@ if one of the following equivalent conditions hold:
 
 3. The type family is
    [local](orthogonal-factorization-systems.local-type-families.md) at the left
-   end-point inclusion `0₂ : 1 ↪ 𝟚`.
+   end-point inclusion `0₂ : 1 ↪ Δ¹`.
 
 4. The following square is a [pullback](foundation-core.pullbacks.md)
 
    ```text
-                            postcomp 𝟚 pr1
-    (𝟚 → Σ (x : A), (B x)) ---------------> (𝟚 → A)
+                            postcomp Δ¹ pr1
+    (Δ¹ → Σ (x : A), (B x)) ---------------> (Δ¹ → A)
               |                                |
               |                                |
         ev 0₂ |                                | ev 0₂

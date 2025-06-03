@@ -79,7 +79,7 @@ triangle-ev-true A = refl-htpy
 aut-bool-bool :
   bool → (bool ≃ bool)
 aut-bool-bool true = id-equiv
-aut-bool-bool false = equiv-neg-𝟚
+aut-bool-bool false = equiv-neg-Δ¹
 
 bool-aut-bool :
   (bool ≃ bool) → bool
@@ -100,8 +100,8 @@ eq-true :
 eq-true true p = refl
 eq-true false p = ind-empty (p refl)
 
-Eq-𝟚-eq : (x y : bool) → x ＝ y → Eq-𝟚 x y
-Eq-𝟚-eq x .x refl = reflexive-Eq-𝟚 x
+Eq-Δ¹-eq : (x y : bool) → x ＝ y → Eq-Δ¹ x y
+Eq-Δ¹-eq x .x refl = reflexive-Eq-Δ¹ x
 
 eq-false-equiv' :
   (e : bool ≃ bool) → map-equiv e true ＝ true →
@@ -109,7 +109,7 @@ eq-false-equiv' :
 eq-false-equiv' e p (inl q) = q
 eq-false-equiv' e p (inr x) =
   ind-empty
-    ( Eq-𝟚-eq true false
+    ( Eq-Δ¹-eq true false
       ( ap pr1
         ( eq-is-contr'
           ( is-contr-map-is-equiv (is-equiv-map-equiv e) true)

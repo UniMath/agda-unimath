@@ -268,7 +268,7 @@ module _
 
   compute-first-witness-composition-arr :
     (f g : arr A) (p : f 1₂ ＝ g 0₂) (c : composition-arr f g p) →
-    (t : 𝟚) {r : predicate-Δ 2 (t , 0₂)} →
+    (t : Δ¹) {r : predicate-Δ 2 (t , 0₂)} →
     witness-composition-arr c ((t , 0₂) , r) ＝ f t
   compute-first-witness-composition-arr f g p c t =
     ( ap
@@ -279,7 +279,7 @@ module _
 
   compute-second-witness-composition-arr :
     (f g : arr A) (p : f 1₂ ＝ g 0₂) (c : composition-arr f g p) →
-    (t : 𝟚) {r : predicate-Δ 2 (1₂ , t)} →
+    (t : Δ¹) {r : predicate-Δ 2 (1₂ , t)} →
     witness-composition-arr c ((1₂ , t) , r) ＝ g t
   compute-second-witness-composition-arr f g p c t =
     ( ap
@@ -290,7 +290,7 @@ module _
 
   compute-first-witness-composition :
       {x y z : A} (f : hom x y) (g : hom y z) (c : composition f g) →
-      (t : 𝟚) {r : predicate-Δ 2 (t , 0₂)} →
+      (t : Δ¹) {r : predicate-Δ 2 (t , 0₂)} →
       witness-composition f g c ((t , 0₂) , r) ＝ arr-hom f t
   compute-first-witness-composition f g =
     compute-first-witness-composition-arr
@@ -298,7 +298,7 @@ module _
 
   compute-second-witness-composition :
       {x y z : A} (f : hom x y) (g : hom y z) (c : composition f g) →
-      (t : 𝟚) {r : predicate-Δ 2 (1₂ , t)} →
+      (t : Δ¹) {r : predicate-Δ 2 (1₂ , t)} →
       witness-composition f g c ((1₂ , t) , r) ＝ arr-hom g t
   compute-second-witness-composition f g =
     compute-second-witness-composition-arr
@@ -314,7 +314,7 @@ An arrow `h` is the **composite** of `f` and `g` if there is a composition of
 
 ```text
 module _
-  {l : Level} {A : UU l} (fg : Λ²₁ → A) (h : 𝟚 → A)
+  {l : Level} {A : UU l} (fg : Λ²₁ → A) (h : Δ¹ → A)
   where
 
   is-composite-horn : UU l

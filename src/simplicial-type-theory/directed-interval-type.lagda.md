@@ -42,11 +42,11 @@ open import foundation.universe-levels
 ## Idea
 
 The
-{{#concept "directed interval type" Disambiguation="simplicial type theory" Agda=𝟚}}
-`𝟚` is the representing type for the simplicial structure on types. It is a type
-consisting of a distinct source and target element, `0₂` and `1₂`, and comes
-[equipped](foundation.structure.md) with a directed relation which defines a
-[total order](order-theory.total-orders.md) with `0₂` as a
+{{#concept "directed interval type" Disambiguation="simplicial type theory" Agda=Δ¹}}
+`Δ¹` is the representing type for the simplicial structure on types. It is a
+type consisting of a distinct source and target element, `0₂` and `1₂`, and
+comes [equipped](foundation.structure.md) with a directed relation which defines
+a [total order](order-theory.total-orders.md) with `0₂` as a
 [bottom element](order-theory.bottom-elements-posets.md), and `1₂` as a
 [top element](order-theory.top-elements-posets.md).
 
@@ -62,11 +62,11 @@ type.
 
 ```agda
 postulate
-  𝟚 : UU lzero
+  Δ¹ : UU lzero
 
-  0₂ 1₂ : 𝟚
+  0₂ 1₂ : Δ¹
 
-  is-nontrivial-𝟚 : 0₂ ≠ 1₂
+  is-nontrivial-Δ¹ : 0₂ ≠ 1₂
 ```
 
 ## Properties
@@ -74,28 +74,28 @@ postulate
 ### The directed interval type is not a proposition
 
 ```agda
-is-not-prop-𝟚 : ¬ (is-prop 𝟚)
-is-not-prop-𝟚 H = is-nontrivial-𝟚 (eq-is-prop H)
+is-not-prop-Δ¹ : ¬ (is-prop Δ¹)
+is-not-prop-Δ¹ H = is-nontrivial-Δ¹ (eq-is-prop H)
 ```
 
 ### The directed interval type is not contractible
 
 ```agda
-is-not-contractible-𝟚 : is-not-contractible 𝟚
-is-not-contractible-𝟚 H = is-nontrivial-𝟚 (eq-is-contr H)
+is-not-contractible-Δ¹ : is-not-contractible Δ¹
+is-not-contractible-Δ¹ H = is-nontrivial-Δ¹ (eq-is-contr H)
 ```
 
 ### The directed interval type is noncontractible
 
 ```agda
-noncontractibility-𝟚' : noncontractibility' 𝟚 1
-noncontractibility-𝟚' = (0₂ , 1₂ , is-nontrivial-𝟚)
+noncontractibility-Δ¹' : noncontractibility' Δ¹ 1
+noncontractibility-Δ¹' = (0₂ , 1₂ , is-nontrivial-Δ¹)
 
-noncontractibility-𝟚 : noncontractibility 𝟚
-noncontractibility-𝟚 = (1 , noncontractibility-𝟚')
+noncontractibility-Δ¹ : noncontractibility Δ¹
+noncontractibility-Δ¹ = (1 , noncontractibility-Δ¹')
 
-is-noncontractible-𝟚 : is-noncontractible 𝟚
-is-noncontractible-𝟚 = unit-trunc-Prop noncontractibility-𝟚
+is-noncontractible-Δ¹ : is-noncontractible Δ¹
+is-noncontractible-Δ¹ = unit-trunc-Prop noncontractibility-Δ¹
 ```
 
 ## Definitions
@@ -103,8 +103,8 @@ is-noncontractible-𝟚 = unit-trunc-Prop noncontractibility-𝟚
 ### The boundary of the directed interval
 
 ```agda
-subtype-∂𝟚' : subtype lzero 𝟚
-subtype-∂𝟚' t =
+subtype-∂Δ¹' : subtype lzero Δ¹
+subtype-∂Δ¹' t =
   coproduct-Prop
     ( mere-eq-Prop t 0₂)
     ( mere-eq-Prop t 1₂)
@@ -112,11 +112,11 @@ subtype-∂𝟚' t =
       rec-trunc-Prop empty-Prop
         ( λ t=1 →
           rec-trunc-Prop empty-Prop
-            ( λ t=0 → is-nontrivial-𝟚 (inv t=0 ∙ t=1))
+            ( λ t=0 → is-nontrivial-Δ¹ (inv t=0 ∙ t=1))
             ( |t=0|)))
 
-∂𝟚 : UU lzero
-∂𝟚 = type-subtype subtype-∂𝟚'
+∂Δ¹ : UU lzero
+∂Δ¹ = type-subtype subtype-∂Δ¹'
 ```
 
 ### The canonical inclusion of the booleans into the directed interval
@@ -124,15 +124,15 @@ subtype-∂𝟚' t =
 The canonical inclusion of the booleans into the directed interval is the map
 that sends `false` to `0₂` and `true` to `1₂`. We call the
 [image](foundation.images.md) of this map the boundary of the directed interval,
-`∂𝟚`, and we show that `bool` is a [retract](foundation.retracts-of-types.md) of
-`∂𝟚`.
+`∂Δ¹`, and we show that `bool` is a [retract](foundation.retracts-of-types.md)
+of `∂Δ¹`.
 
 ```agda
-map-boundary-directed-interval-bool : bool → ∂𝟚
+map-boundary-directed-interval-bool : bool → ∂Δ¹
 map-boundary-directed-interval-bool true = (1₂ , inr (refl-mere-eq 1₂))
 map-boundary-directed-interval-bool false = (0₂ , inl (refl-mere-eq 0₂))
 
-map-bool-boundary-directed-interval : ∂𝟚 → bool
+map-bool-boundary-directed-interval : ∂Δ¹ → bool
 map-bool-boundary-directed-interval (t , inl x) = false
 map-bool-boundary-directed-interval (t , inr x) = true
 
@@ -155,15 +155,15 @@ is-surjective-map-boundary-directed-interval-bool :
 is-surjective-map-boundary-directed-interval-bool (t , inl |p|) =
   rec-trunc-Prop
     ( trunc-Prop (fiber map-boundary-directed-interval-bool (t , inl |p|)))
-    ( λ t=0 → unit-trunc-Prop (false , eq-type-subtype subtype-∂𝟚' (inv t=0)))
+    ( λ t=0 → unit-trunc-Prop (false , eq-type-subtype subtype-∂Δ¹' (inv t=0)))
     ( |p|)
 is-surjective-map-boundary-directed-interval-bool (t , inr |p|) =
   rec-trunc-Prop
     ( trunc-Prop (fiber map-boundary-directed-interval-bool (t , inr |p|)))
-    ( λ t=1 → unit-trunc-Prop (true , eq-type-subtype subtype-∂𝟚' (inv t=1)))
+    ( λ t=1 → unit-trunc-Prop (true , eq-type-subtype subtype-∂Δ¹' (inv t=1)))
     ( |p|)
 
-map-directed-interval-bool : bool → 𝟚
+map-directed-interval-bool : bool → Δ¹
 map-directed-interval-bool true = 1₂
 map-directed-interval-bool false = 0₂
 
@@ -172,9 +172,9 @@ is-injective-map-directed-interval-bool :
 is-injective-map-directed-interval-bool {true} {true} p =
   refl
 is-injective-map-directed-interval-bool {true} {false} p =
-  ex-falso (is-nontrivial-𝟚 (inv p))
+  ex-falso (is-nontrivial-Δ¹ (inv p))
 is-injective-map-directed-interval-bool {false} {true} p =
-  ex-falso (is-nontrivial-𝟚 p)
+  ex-falso (is-nontrivial-Δ¹ p)
 is-injective-map-directed-interval-bool {false} {false} p =
   refl
 
@@ -205,7 +205,7 @@ deduce a contradiction we may assume we have that all elements are equal, but
 `0₂` and `1₂` are not.
 
 ```agda
-is-not-0-connected-𝟚 : ¬ (is-0-connected 𝟚)
-is-not-0-connected-𝟚 H =
-  rec-trunc-Prop empty-Prop is-nontrivial-𝟚 (mere-eq-is-0-connected H 0₂ 1₂)
+is-not-0-connected-Δ¹ : ¬ (is-0-connected Δ¹)
+is-not-0-connected-Δ¹ H =
+  rec-trunc-Prop empty-Prop is-nontrivial-Δ¹ (mere-eq-is-0-connected H 0₂ 1₂)
 ```

@@ -57,7 +57,7 @@ Given a type `X`, we define the {{#concept "simplicial cone type"}} as the
             |           |
   (id , 0₂) |           |
             ∨         ⌜ ∨
-          X × 𝟚 ---> cone₂ X
+          X × Δ¹ ---> cone₂ X
 ```
 
 Intuitively, the simplicial cone of `X` can be understood as `X` with a point
@@ -78,7 +78,7 @@ module _
   {l : Level} {X : UU l}
   where
 
-  in-simplicial-cone' : X → 𝟚 → simplicial-cone X
+  in-simplicial-cone' : X → Δ¹ → simplicial-cone X
   in-simplicial-cone' x t =
     inl-pushout (λ (x : X) → (x , 0₂)) (terminal-map X) (x , t)
 
@@ -128,7 +128,7 @@ module _
   dependent-cogap-simplicial-cone :
     { l' : Level} {P : simplicial-cone X → UU l'}
     ( f : P point-simplicial-cone) →
-    ( g : (x : X) (t : 𝟚) → P (in-simplicial-cone' x t)) →
+    ( g : (x : X) (t : Δ¹) → P (in-simplicial-cone' x t)) →
     ( p :
       (x : X) →
       dependent-identification P (glue-simplicial-cone x) (g x 0₂) f)
@@ -152,13 +152,13 @@ module _
     cogap (λ (x : X) → (x , 0₂)) (terminal-map X)
 
   cogap-simplicial-cone :
-    (g : X → 𝟚 → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) →
+    (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) →
     simplicial-cone X → Y
   cogap-simplicial-cone g f p =
     cogap-simplicial-cone' ((λ (x , t) → g x t) , point f , p)
 
   compute-point-cogap-simplicial-cone :
-    (g : X → 𝟚 → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) →
+    (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) →
     cogap-simplicial-cone g f p point-simplicial-cone ＝ f
   compute-point-cogap-simplicial-cone g f p =
     compute-inr-cogap
@@ -168,7 +168,7 @@ module _
       ( star)
 
   compute-in-cogap-simplicial-cone' :
-    (g : X → 𝟚 → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) (x : X) (t : 𝟚) →
+    (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) (x : X) (t : Δ¹) →
     cogap-simplicial-cone g f p (in-simplicial-cone' x t) ＝
     g x t
   compute-in-cogap-simplicial-cone' g f p x t =
@@ -179,7 +179,7 @@ module _
       ( x , t)
 
   compute-in-cogap-simplicial-cone :
-    (g : X → 𝟚 → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) (x : X) →
+    (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) (x : X) →
     cogap-simplicial-cone g f p (in-simplicial-cone x) ＝
     g x 1₂
   compute-in-cogap-simplicial-cone g f p x =
@@ -197,7 +197,7 @@ module _
   |         |
   |         |
   ∨       ⌜ ∨
-  𝟚 -----> C₂1,
+  Δ¹ -----> C₂1,
 ```
 
 and since the top horizontal map is an equivalence, so is its pushout.

@@ -113,7 +113,7 @@ pr1 (is-globularly-coskeletal-Prop k A) = is-globularly-coskeletal k A
 pr2 (is-globularly-coskeletal-Prop k A) = is-prop-is-globularly-coskeletal k A
 ```
 
-### A type is `-1`-globularly coskeletal if and only if it is `∂𝟚 ↪ 𝟚`-local
+### A type is `-1`-globularly coskeletal if and only if it is `∂Δ¹ ↪ Δ¹`-local
 
 This remains to be formalized.
 

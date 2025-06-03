@@ -56,29 +56,29 @@ subtype-auxillary-face-standard-simplex :
 subtype-auxillary-face-standard-simplex 0 _ _ =
   empty-Prop
 subtype-auxillary-face-standard-simplex 1 0 x =
-  Id-Prop 𝟚-Set x 0₂
+  Id-Prop Δ¹-Set x 0₂
 subtype-auxillary-face-standard-simplex 1 (succ-ℕ _) x =
   empty-Prop
 subtype-auxillary-face-standard-simplex 2 zero-ℕ (x , y) =
-  Id-Prop 𝟚-Set x y
+  Id-Prop Δ¹-Set x y
 subtype-auxillary-face-standard-simplex 2 (succ-ℕ r) (x , y) =
   subtype-auxillary-face-standard-simplex 1 r y
 subtype-auxillary-face-standard-simplex
   ( succ-ℕ (succ-ℕ (succ-ℕ n))) 0 (x , y , u) =
-  ( Id-Prop 𝟚-Set x y) ∧
+  ( Id-Prop Δ¹-Set x y) ∧
   ( subtype-standard-simplex (succ-ℕ (succ-ℕ n)) (y , u))
 subtype-auxillary-face-standard-simplex
   ( succ-ℕ (succ-ℕ (succ-ℕ n))) (succ-ℕ r) (x , y , u) =
-  ( leq-𝟚-Prop y x) ∧
+  ( leq-Δ¹-Prop y x) ∧
   ( subtype-auxillary-face-standard-simplex (succ-ℕ (succ-ℕ n)) r (y , u))
 
 subtype-first-face-standard-simplex :
   (n : ℕ) → subtype lzero (simplicial-cube n)
 subtype-first-face-standard-simplex 0 _ = empty-Prop
-subtype-first-face-standard-simplex 1 x = Id-Prop 𝟚-Set 1₂ x
-subtype-first-face-standard-simplex 2 (x , _) = Id-Prop 𝟚-Set 1₂ x
+subtype-first-face-standard-simplex 1 x = Id-Prop Δ¹-Set 1₂ x
+subtype-first-face-standard-simplex 2 (x , _) = Id-Prop Δ¹-Set 1₂ x
 subtype-first-face-standard-simplex (succ-ℕ (succ-ℕ (succ-ℕ n))) (x , u) =
-  Id-Prop 𝟚-Set 1₂ x ∧ subtype-standard-simplex (succ-ℕ (succ-ℕ n)) u
+  Id-Prop Δ¹-Set 1₂ x ∧ subtype-standard-simplex (succ-ℕ (succ-ℕ n)) u
 
 subtype-face-standard-simplex : (n r : ℕ) → subtype lzero (simplicial-cube n)
 subtype-face-standard-simplex n 0 =
@@ -116,12 +116,12 @@ leq-subtype-auxillary-face-standard-simplex-standard-simplex :
 leq-subtype-auxillary-face-standard-simplex-standard-simplex 1 0 _ _ =
   star
 leq-subtype-auxillary-face-standard-simplex-standard-simplex 2 0 (x , y) =
-  leq-inv-eq-𝟚
+  leq-inv-eq-Δ¹
 leq-subtype-auxillary-face-standard-simplex-standard-simplex 2 1 _ =
-  min-leq-eq-𝟚
+  min-leq-eq-Δ¹
 leq-subtype-auxillary-face-standard-simplex-standard-simplex
   ( succ-ℕ (succ-ℕ (succ-ℕ n))) 0 _ (x=y , d) =
-  ( leq-inv-eq-𝟚 x=y , d)
+  ( leq-inv-eq-Δ¹ x=y , d)
 leq-subtype-auxillary-face-standard-simplex-standard-simplex
   ( succ-ℕ (succ-ℕ (succ-ℕ n))) (succ-ℕ r) (_ , u) (x≥y , f) =
   ( x≥y ,
@@ -135,12 +135,12 @@ leq-subtype-face-standard-simplex-standard-simplex 1 0 _ _ =
 leq-subtype-face-standard-simplex-standard-simplex 1 (succ-ℕ r) _ _ =
   star
 leq-subtype-face-standard-simplex-standard-simplex 2 0 _ =
-  max-leq-eq-𝟚 ∘ inv
+  max-leq-eq-Δ¹ ∘ inv
 leq-subtype-face-standard-simplex-standard-simplex 2 (succ-ℕ r) =
   leq-subtype-auxillary-face-standard-simplex-standard-simplex 2 r
 leq-subtype-face-standard-simplex-standard-simplex
   ( succ-ℕ (succ-ℕ (succ-ℕ n))) 0 _ (1=x , p) =
-  ( max-leq-eq-𝟚 (inv 1=x) , p)
+  ( max-leq-eq-Δ¹ (inv 1=x) , p)
 leq-subtype-face-standard-simplex-standard-simplex
   ( succ-ℕ (succ-ℕ (succ-ℕ n))) (succ-ℕ r) =
   leq-subtype-auxillary-face-standard-simplex-standard-simplex

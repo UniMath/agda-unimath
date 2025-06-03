@@ -68,7 +68,7 @@ of the diagram
 ```text
        0₂
     ------->
-  1          𝟚.
+  1          Δ¹.
     ------->
        1₂
 ```
@@ -133,7 +133,7 @@ module _
       (x : directed-circle) → P x
 
   compute-arrow-ind-directed-circle :
-    (α : free-dependent-directed-loop free-loop-directed-circle P) (t : 𝟚) →
+    (α : free-dependent-directed-loop free-loop-directed-circle P) (t : Δ¹) →
     ind-directed-circle α (arrow-directed-circle t) ＝
     arrow-free-dependent-directed-loop free-loop-directed-circle α t
   compute-arrow-ind-directed-circle α t =
@@ -234,7 +234,7 @@ diagram
 ```text
        0₂
     ------->
-  1          𝟚.
+  1          Δ¹.
     ------->
        1₂
 ```
