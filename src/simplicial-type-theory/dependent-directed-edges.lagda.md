@@ -38,7 +38,7 @@ open import simplicial-type-theory.simplicial-arrows
 Given a type family `B : A → 𝒰` and a
 [directed edge](simplicial-type-theory.directed-edges.md) `α : x →▵ y` in `A`, a
 {{#concept "dependent directed edge" Disambiguation="simplicial type theory" Agda=dependent-hom▵}}
-_over_ `α` from `x'` to `y'` is a simplicial arrow `β` in `B ∘ α : 𝟚 → 𝒰`. such
+_over_ `α` from `x'` to `y'` is a simplicial arrow `β` in `B ∘ α : Δ¹ → 𝒰`. such
 that `β 0₂ ＝ x'` over the identification `α 0₂ ＝ x` and `β 1₂ ＝ y'` over the
 identification `α 1₂ ＝ y`.
 

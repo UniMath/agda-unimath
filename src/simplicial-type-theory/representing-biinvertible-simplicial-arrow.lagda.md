@@ -1,7 +1,7 @@
 # The representing biinvertible simplicial arrow
 
 ```agda
-module simplicial-type-theory.representing-biinvertible-arrow▵ where
+module simplicial-type-theory.representing-biinvertible-simplicial-arrow where
 ```
 
 <details><summary>Imports</summary>
@@ -82,30 +82,30 @@ postulate
     representing-biinvertible-arrow▵
 
   arrow-representing-biinvertible-arrow▵ :
-    𝟚 → representing-biinvertible-arrow▵
+    Δ¹ → representing-biinvertible-arrow▵
 
   arrow-left-inv-representing-biinvertible-arrow▵ :
-    𝟚 → representing-biinvertible-arrow▵
+    Δ¹ → representing-biinvertible-arrow▵
 
   arrow-right-inv-representing-biinvertible-arrow▵ :
-    𝟚 → representing-biinvertible-arrow▵
+    Δ¹ → representing-biinvertible-arrow▵
 
   left-2-cell-representing-biinvertible-arrow▵ :
     Δ 2 → representing-biinvertible-arrow▵
 
   compute-0-left-2-cell-representing-biinvertible-arrow▵ :
     ( left-2-cell-representing-biinvertible-arrow▵) ∘
-    ( λ t → ((t , 0₂) , min-leq-𝟚)) ＝
+    ( λ t → ((t , 0₂) , min-leq-Δ¹)) ＝
     arrow-representing-biinvertible-arrow▵
 
   compute-1-left-2-cell-representing-biinvertible-arrow▵ :
     ( left-2-cell-representing-biinvertible-arrow▵) ∘
-    ( λ t → ((t , t) , refl-leq-𝟚)) ＝
+    ( λ t → ((t , t) , refl-leq-Δ¹)) ＝
     id-arrow▵ target-representing-biinvertible-arrow▵
 
   compute-2-left-2-cell-representing-biinvertible-arrow▵ :
     ( left-2-cell-representing-biinvertible-arrow▵) ∘
-    ( λ t → ((1₂ , t) , max-leq-𝟚)) ＝
+    ( λ t → ((1₂ , t) , max-leq-Δ¹)) ＝
     arrow-left-inv-representing-biinvertible-arrow▵
 
   right-2-cell-representing-biinvertible-arrow▵ :
@@ -113,17 +113,17 @@ postulate
 
   compute-1-right-2-cell-representing-biinvertible-arrow▵ :
     ( right-2-cell-representing-biinvertible-arrow▵) ∘
-    ( λ t → ((t , t) , refl-leq-𝟚)) ＝
+    ( λ t → ((t , t) , refl-leq-Δ¹)) ＝
     id-arrow▵ source-representing-biinvertible-arrow▵
 
   compute-0-right-2-cell-representing-biinvertible-arrow▵ :
     ( right-2-cell-representing-biinvertible-arrow▵) ∘
-    ( λ t → ((t , 0₂) , min-leq-𝟚)) ＝
+    ( λ t → ((t , 0₂) , min-leq-Δ¹)) ＝
     arrow-representing-biinvertible-arrow▵
 
   compute-2-right-2-cell-representing-biinvertible-arrow▵ :
     ( right-2-cell-representing-biinvertible-arrow▵) ∘
-    ( λ t → ((1₂ , t) , max-leq-𝟚)) ＝
+    ( λ t → ((1₂ , t) , max-leq-Δ¹)) ＝
     arrow-representing-biinvertible-arrow▵
 ```
 

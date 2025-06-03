@@ -63,18 +63,18 @@ The inner 2-horn has multiple defining properties:
    [2-simplex](simplicial-type-theory.2-simplices.md) defined by
 
    ```text
-   Λ²₁ = {(x , y) ∈ 𝟚 × 𝟚 | (y ＝ 0₂) ∨ (x ＝ 1₂)} ⊆ Δ².
+   Λ²₁ = {(x , y) ∈ Δ¹ × Δ¹ | (y ＝ 0₂) ∨ (x ＝ 1₂)} ⊆ Δ².
    ```
 
 2. The inner 2-horn is the pushout
 
    ```text
             0₂
-        1 -----> 𝟚
+        1 -----> Δ¹
         |        |
      1₂ |        |
         ∨      ⌜ ∨
-        𝟚 -----> Λ²₁.
+        Δ¹ -----> Λ²₁.
    ```
 
 3. The inner 2-horn is the 2-[spine](simplicial-type-theory.spines.md).
@@ -86,17 +86,17 @@ The inner 2-horn has multiple defining properties:
 > TODO: replace with `subtype-spine 2`
 
 ```agda
-subtype-inner-two-horn : subtype lzero (𝟚 × 𝟚)
+subtype-inner-two-horn : subtype lzero (Δ¹ × Δ¹)
 subtype-inner-two-horn (x , y) =
-  join-Prop (Id-Prop 𝟚-Set y 0₂) (Id-Prop 𝟚-Set x 1₂)
+  join-Prop (Id-Prop Δ¹-Set y 0₂) (Id-Prop Δ¹-Set x 1₂)
 
 inner-two-horn : UU
 inner-two-horn = type-subtype subtype-inner-two-horn
 
-inl-inner-two-horn : 𝟚 → inner-two-horn
+inl-inner-two-horn : Δ¹ → inner-two-horn
 inl-inner-two-horn t = ((t , 0₂) , inl-join refl)
 
-inr-inner-two-horn : 𝟚 → inner-two-horn
+inr-inner-two-horn : Δ¹ → inner-two-horn
 inr-inner-two-horn s = ((1₂ , s) , inr-join refl)
 ```
 
@@ -109,7 +109,7 @@ inr-inner-two-horn s = ((1₂ , s) , inr-join refl)
 
 ```agda
 module _
-  {l : Level} {A : UU l} (f g : 𝟚 → A) (p : f 1₂ ＝ g 0₂)
+  {l : Level} {A : UU l} (f g : Δ¹ → A) (p : f 1₂ ＝ g 0₂)
   where
 
   cogap-inner-two-horn : inner-two-horn → A
@@ -125,21 +125,21 @@ module _
 
 ```text
          0₂
-     1 -----> 𝟚
+     1 -----> Δ¹
      |        |
   1₂ |        |
      ∨      ⌜ ∨
-     𝟚 -----> Λ²₁.
+     Δ¹ -----> Λ²₁.
 ```
 
 ```agda
 pushout-inner-two-horn : UU
 pushout-inner-two-horn = pushout (point 1₂) (point 0₂)
 
-inl-pushout-inner-two-horn : 𝟚 → pushout-inner-two-horn
+inl-pushout-inner-two-horn : Δ¹ → pushout-inner-two-horn
 inl-pushout-inner-two-horn = inl-pushout (point 1₂) (point 0₂)
 
-inr-pushout-inner-two-horn : 𝟚 → pushout-inner-two-horn
+inr-pushout-inner-two-horn : Δ¹ → pushout-inner-two-horn
 inr-pushout-inner-two-horn = inr-pushout (point 1₂) (point 0₂)
 ```
 
@@ -150,7 +150,7 @@ inr-pushout-inner-two-horn = inr-pushout (point 1₂) (point 0₂)
 ```agda
 is-set-inner-two-horn : is-set inner-two-horn
 is-set-inner-two-horn =
-  is-set-type-subtype subtype-inner-two-horn (is-set-product is-set-𝟚 is-set-𝟚)
+  is-set-type-subtype subtype-inner-two-horn (is-set-product is-set-Δ¹ is-set-Δ¹)
 ```
 
 ### The canonical map from the inner 2-horn as a pushout to the inner 2-horn as a subtype of the square
@@ -182,8 +182,8 @@ leq-subtype-two-simplex-inner-two-horn :
   subtype-inner-two-horn ⊆ subtype-lower-simplicial-triangle
 leq-subtype-two-simplex-inner-two-horn (x , y) =
   cogap-join
-    ( y ≤-𝟚 x)
-    ( min-leq-eq-𝟚 , max-leq-eq-𝟚 , λ _ → eq-is-prop is-prop-leq-𝟚)
+    ( y ≤-Δ¹ x)
+    ( min-leq-eq-Δ¹ , max-leq-eq-Δ¹ , λ _ → eq-is-prop is-prop-leq-Δ¹)
 
 inclusion-Δ²-Λ²₁ : Λ²₁ → Δ²
 inclusion-Δ²-Λ²₁ = tot leq-subtype-two-simplex-inner-two-horn

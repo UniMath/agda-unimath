@@ -41,8 +41,8 @@ open import synthetic-homotopy-theory.free-loops
 A
 {{#concept "free directed loop" Disambiguation="in a simplicial type" Agda=free-directed-loop}}
 in a type `X` consists of a
-[directed arrow](simplicial-type-theory.simplicial-arrows.md) `α : 𝟚 → X` and an
-[identification](foundation-core.identity-types.md) `α 1₂ ＝ α 0₂`. Free
+[directed arrow](simplicial-type-theory.simplicial-arrows.md) `α : Δ¹ → X` and
+an [identification](foundation-core.identity-types.md) `α 1₂ ＝ α 0₂`. Free
 directed loops are classified by the
 [directed circle](simplicial-type-theory.directed-circle.md), meaning that the
 type of free directed loops in `X` is
@@ -55,13 +55,13 @@ type of free directed loops in `X` is
 
 ```agda
 free-directed-loop : {l : Level} → UU l → UU l
-free-directed-loop X = Σ (𝟚 → X) (λ α → α 1₂ ＝ α 0₂)
+free-directed-loop X = Σ (Δ¹ → X) (λ α → α 1₂ ＝ α 0₂)
 
 module _
   {l1 : Level} {X : UU l1}
   where
 
-  arrow-free-directed-loop : free-directed-loop X → 𝟚 → X
+  arrow-free-directed-loop : free-directed-loop X → Δ¹ → X
   arrow-free-directed-loop = pr1
 
   base-free-directed-loop : free-directed-loop X → X

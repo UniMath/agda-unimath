@@ -55,7 +55,7 @@ _↓▵_ = simplicial-comma-type
 The comma type `f ↓▵ g` is the pullback in the following diagram
 
 ```text
-  f ↓▵ g --------> A^𝟚
+  f ↓▵ g --------> A^Δ¹
     | ⌟             |
     |               | (source , target)
     ∨               ∨
@@ -72,7 +72,7 @@ module _
 
   cone-simplicial-comma-type :
     cone
-      {A = B × C} {𝟚 → A} {A × A}
+      {A = B × C} {Δ¹ → A} {A × A}
       ( λ (b , c) → (f b , g c))
       ( λ α → (α 0₂ , α 1₂))
       ( f ↓▵ g)
@@ -91,7 +91,7 @@ module _
 
   map-inv-gap-simplicial-comma-type :
     ( standard-pullback
-      {A = B × C} {𝟚 → A} {A × A}
+      {A = B × C} {Δ¹ → A} {A × A}
       ( λ (b , c) → (f b , g c))
       ( λ α → α 0₂ , α 1₂)) →
     f ↓▵ g

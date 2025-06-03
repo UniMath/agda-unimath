@@ -57,14 +57,14 @@ eq-image-eq-point-is-prop is-prop-A f b x p = p ∙ ap f (eq-is-prop is-prop-A)
 ### The lower simplicial triangle
 
 ```agda
-subtype-lower-simplicial-triangle : subtype lzero (𝟚 × 𝟚)
-subtype-lower-simplicial-triangle (t , s) = leq-𝟚-Prop s t
+subtype-lower-simplicial-triangle : subtype lzero (Δ¹ × Δ¹)
+subtype-lower-simplicial-triangle (t , s) = leq-Δ¹-Prop s t
 
 lower-simplicial-triangle = type-subtype subtype-lower-simplicial-triangle
 
-subtype-boundary-lower-simplicial-triangle : subtype lzero (𝟚 × 𝟚)
+subtype-boundary-lower-simplicial-triangle : subtype lzero (Δ¹ × Δ¹)
 subtype-boundary-lower-simplicial-triangle (t , s) =
-  join-Prop (Id-𝟚-Prop 0₂ s) (join-Prop (Id-𝟚-Prop s t) (Id-𝟚-Prop t 1₂))
+  join-Prop (Id-Δ¹-Prop 0₂ s) (join-Prop (Id-Δ¹-Prop s t) (Id-Δ¹-Prop t 1₂))
 boundary-lower-simplicial-triangle =
   type-subtype subtype-boundary-lower-simplicial-triangle
 
@@ -72,9 +72,9 @@ boundary-lower-simplicial-triangle =
   subtype-boundary-lower-simplicial-triangle ⊆ subtype-lower-simplicial-triangle
 ◿⊆◢ (x , y) =
   rec-join-Prop
-    ( leq-𝟚-Prop y x)
-    ( min-leq-eq-𝟚 ∘ inv)
-    ( rec-join-Prop (leq-𝟚-Prop y x) (leq-eq-𝟚) (max-leq-eq-𝟚))
+    ( leq-Δ¹-Prop y x)
+    ( min-leq-eq-Δ¹ ∘ inv)
+    ( rec-join-Prop (leq-Δ¹-Prop y x) (leq-eq-Δ¹) (max-leq-eq-Δ¹))
 
 inclusion-boundary-lower-simplicial-triangle :
   boundary-lower-simplicial-triangle → lower-simplicial-triangle
@@ -84,27 +84,27 @@ inclusion-boundary-lower-simplicial-triangle = tot ◿⊆◢
 ### The upper simplicial triangle
 
 ```agda
-subtype-◤ : subtype lzero (𝟚 × 𝟚)
-subtype-◤ (t , s) = leq-𝟚-Prop t s
+subtype-◤ : subtype lzero (Δ¹ × Δ¹)
+subtype-◤ (t , s) = leq-Δ¹-Prop t s
 
 ◤ = type-subtype subtype-◤
 
-subtype-◸ : subtype lzero (𝟚 × 𝟚)
+subtype-◸ : subtype lzero (Δ¹ × Δ¹)
 subtype-◸ (t , s) =
   join-Prop
-    ( Id-𝟚-Prop 0₂ t)
+    ( Id-Δ¹-Prop 0₂ t)
     ( join-Prop
-      ( Id-𝟚-Prop t s)
-      ( Id-𝟚-Prop s 1₂))
+      ( Id-Δ¹-Prop t s)
+      ( Id-Δ¹-Prop s 1₂))
 
 ◸ = type-subtype subtype-◸
 
 ◸⊆◤ : subtype-◸ ⊆ subtype-◤
 ◸⊆◤ (x , y) =
   rec-join-Prop
-    ( leq-𝟚-Prop x y)
-    ( min-leq-eq-𝟚 ∘ inv)
-    ( rec-join-Prop (leq-𝟚-Prop x y) (leq-eq-𝟚) (max-leq-eq-𝟚))
+    ( leq-Δ¹-Prop x y)
+    ( min-leq-eq-Δ¹ ∘ inv)
+    ( rec-join-Prop (leq-Δ¹-Prop x y) (leq-eq-Δ¹) (max-leq-eq-Δ¹))
 
 ◸→◤ : ◸ → ◤
 ◸→◤ = tot ◸⊆◤
@@ -122,7 +122,7 @@ subtype-Δ² = subtype-lower-simplicial-triangle
 ### The boundary of the standard 2-simplex
 
 ```agda
-subtype-∂Δ² : subtype lzero (𝟚 × 𝟚)
+subtype-∂Δ² : subtype lzero (Δ¹ × Δ¹)
 subtype-∂Δ² = subtype-boundary-lower-simplicial-triangle
 
 ∂Δ² : UU lzero
@@ -146,7 +146,7 @@ rec-arrow▵-∂Δ² {A = A} f g h f0=h0 f1=g0 g1=h1 ((t , s) , u) =
         cogap-join _
           ( ( λ s=t →
               eq-image-eq-point-is-prop
-                ( is-prop-join-is-prop (is-set-𝟚 s t) (is-set-𝟚 t 1₂))
+                ( is-prop-join-is-prop (is-set-Δ¹ s t) (is-set-Δ¹ t 1₂))
                 ( C)
                 ( f t)
                 ( inl-join s=t)
@@ -154,13 +154,13 @@ rec-arrow▵-∂Δ² {A = A} f g h f0=h0 f1=g0 g1=h1 ((t , s) , u) =
                   ( inv (compute-inl-cogap-join _ s=t)))) ,
             ( ( λ t=1 →
                 eq-image-eq-point-is-prop
-                  ( is-prop-join-is-prop (is-set-𝟚 s t) (is-set-𝟚 t 1₂))
+                  ( is-prop-join-is-prop (is-set-Δ¹ s t) (is-set-Δ¹ t 1₂))
                   ( C)
                   ( f t)
                   ( inr-join t=1)
                   ( ( ap f t=1 ∙ f1=g0 ∙ ap g 0=s) ∙
                     ( inv (compute-inr-cogap-join _ t=1))))) ,
-            ( λ (s=t , t=1) → ex-falso (is-nontrivial-𝟚 (0=s ∙ s=t ∙ t=1))))
+            ( λ (s=t , t=1) → ex-falso (is-nontrivial-Δ¹ (0=s ∙ s=t ∙ t=1))))
           ( vw)))
       ( u)
     where
@@ -189,5 +189,5 @@ rec-hom▵-∂Δ² f g h =
 
 ```agda
 simplicial-cone-Δ² : UU lzero
-simplicial-cone-Δ² = simplicial-cone 𝟚
+simplicial-cone-Δ² = simplicial-cone Δ¹
 ```

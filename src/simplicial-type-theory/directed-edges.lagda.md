@@ -57,7 +57,7 @@ We introduce the notation `x →▵ y` for the type of directed edges from `x` t
 
 ```agda
 module _
-  {l : Level} {A : 𝟚 → UU l}
+  {l : Level} {A : Δ¹ → UU l}
   where
 
   hom▵' : A 0₂ → A 1₂ → UU l
@@ -131,8 +131,8 @@ id-hom▵ = hom▵-arrow▵ ∘ id-arrow▵
 ### The representing edge of the directed interval
 
 ```agda
-representing-hom-𝟚 : 0₂ →▵ 1₂
-representing-hom-𝟚 = (id , refl , refl)
+representing-hom-Δ¹ : 0₂ →▵ 1₂
+representing-hom-Δ¹ = (id , refl , refl)
 ```
 
 ### Directed edges arising from equalities
@@ -238,7 +238,7 @@ module _
 ### Computing the based total type of directed edges
 
 ```text
-  Σ (𝟚 → A) (λ α → α 0₂ ＝ x) ≃ Σ (y : A), (x →▵ y)
+  Σ (Δ¹ → A) (λ α → α 0₂ ＝ x) ≃ Σ (y : A), (x →▵ y)
 ```
 
 ```agda
@@ -250,11 +250,11 @@ module _
   based-hom▵ = Σ A (λ y → (x →▵ y))
 
   map-compute-based-hom▵ :
-    Σ (𝟚 → A) (λ α → α 0₂ ＝ x) → based-hom▵
+    Σ (Δ¹ → A) (λ α → α 0₂ ＝ x) → based-hom▵
   map-compute-based-hom▵ (α , p) = (α 1₂ , α , p , refl)
 
   map-inv-compute-based-hom▵ :
-    based-hom▵ → Σ (𝟚 → A) (λ α → α 0₂ ＝ x)
+    based-hom▵ → Σ (Δ¹ → A) (λ α → α 0₂ ＝ x)
   map-inv-compute-based-hom▵ (y , α , p , q) = (α , p)
 
   is-section-map-inv-compute-based-hom▵ :
@@ -287,13 +287,13 @@ module _
       ( is-section-map-inv-compute-based-hom▵)
 
   compute-based-hom▵ :
-    Σ (𝟚 → A) (λ α → α 0₂ ＝ x) ≃ based-hom▵
+    Σ (Δ¹ → A) (λ α → α 0₂ ＝ x) ≃ based-hom▵
   compute-based-hom▵ =
     ( map-compute-based-hom▵ ,
       is-equiv-map-compute-based-hom▵)
 
   inv-compute-based-hom▵ :
-    based-hom▵ ≃ Σ (𝟚 → A) (λ α → α 0₂ ＝ x)
+    based-hom▵ ≃ Σ (Δ¹ → A) (λ α → α 0₂ ＝ x)
   inv-compute-based-hom▵ =
     ( map-inv-compute-based-hom▵ ,
       is-equiv-map-inv-compute-based-hom▵)
@@ -305,7 +305,7 @@ The directed interval type classifies the total type of directed edges in a
 type.
 
 ```text
-  (𝟚 → A) ≃ Σ (x y : A), (x →▵ y)
+  (Δ¹ → A) ≃ Σ (x y : A), (x →▵ y)
 ```
 
 ```agda
@@ -317,11 +317,11 @@ module _
   total-hom▵ = Σ A based-hom▵
 
   map-compute-total-hom▵ :
-    (𝟚 → A) → total-hom▵
+    (Δ¹ → A) → total-hom▵
   map-compute-total-hom▵ α = (α 0₂ , α 1₂ , α , refl , refl)
 
   map-inv-compute-total-hom▵ :
-    total-hom▵ → 𝟚 → A
+    total-hom▵ → Δ¹ → A
   map-inv-compute-total-hom▵ (x , y , α , p , q) = α
 
   is-section-map-inv-compute-total-hom▵ :
@@ -354,13 +354,13 @@ module _
       ( is-section-map-inv-compute-total-hom▵)
 
   compute-total-hom▵ :
-    (𝟚 → A) ≃ total-hom▵
+    (Δ¹ → A) ≃ total-hom▵
   compute-total-hom▵ =
     ( map-compute-total-hom▵ ,
       is-equiv-map-compute-total-hom▵)
 
   inv-compute-total-hom▵ :
-    total-hom▵ ≃ (𝟚 → A)
+    total-hom▵ ≃ (Δ¹ → A)
   inv-compute-total-hom▵ =
     ( map-inv-compute-total-hom▵ ,
       is-equiv-map-inv-compute-total-hom▵)
@@ -370,7 +370,7 @@ module _
 
 The hom-type `x →▵ y` is equivalent to the
 [type of extensions](orthogonal-factorization-systems.extensions-maps.md) of
-`[x , y] : ∂𝟚 → A` along the inclusion `∂𝟚 ↪ 𝟚`.
+`[x , y] : ∂Δ¹ → A` along the inclusion `∂Δ¹ ↪ Δ¹`.
 
 ```agda
 module _

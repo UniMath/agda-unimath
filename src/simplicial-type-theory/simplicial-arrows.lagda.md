@@ -24,8 +24,8 @@ A
 {{#concept "simplicial arrow" Disambiguation="simplicial type theory" Agda=arrow▵}}
 in a type `A` is a map from the
 [directed interval](simplicial-type-theory.directed-interval-type.md) to the
-type, `𝟚 → A`. Given a simplicial arrow `α` in `A`, we call `α 0₂` the _source_,
-and `α 1₂` the _target_ of the arrow. See
+type, `Δ¹ → A`. Given a simplicial arrow `α` in `A`, we call `α 0₂` the
+_source_, and `α 1₂` the _target_ of the arrow. See
 [directed edges](simplicial-type-theory.directed-edges.md) for simplicial arrows
 with a specified source and target.
 
@@ -34,8 +34,8 @@ with a specified source and target.
 ### Simplicial arrows in types dependent over the directed interval
 
 ```agda
-arrow▵' : {l : Level} → (𝟚 → UU l) → UU l
-arrow▵' A = (t : 𝟚) → A t
+arrow▵' : {l : Level} → (Δ¹ → UU l) → UU l
+arrow▵' A = (t : Δ¹) → A t
 ```
 
 ### Simplicial arrows
@@ -55,8 +55,8 @@ id-arrow▵ x _ = x
 ### The representing arrow of the directed interval
 
 ```agda
-representing-arrow-𝟚 : arrow▵ 𝟚
-representing-arrow-𝟚 = id
+representing-arrow-Δ¹ : arrow▵ Δ¹
+representing-arrow-Δ¹ = id
 ```
 
 ### Simplicial arrows arising from equalities
@@ -83,7 +83,7 @@ module _
 ### The representing arrow of the directed interval is not constant
 
 ```agda
-is-not-constant-representing-arrow-𝟚 :
-  (t : 𝟚) → ¬ (representing-arrow-𝟚 ~ id-arrow▵ t)
-is-not-constant-representing-arrow-𝟚 _ H = is-nontrivial-𝟚 (H 0₂ ∙ inv (H 1₂))
+is-not-constant-representing-arrow-Δ¹ :
+  (t : Δ¹) → ¬ (representing-arrow-Δ¹ ~ id-arrow▵ t)
+is-not-constant-representing-arrow-Δ¹ _ H = is-nontrivial-Δ¹ (H 0₂ ∙ inv (H 1₂))
 ```

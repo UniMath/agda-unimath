@@ -77,34 +77,34 @@ postulate
 
 ## Properties
 
-### The booleans are 𝟚-null
+### The booleans are Δ¹-null
 
 ```agda
-is-𝟚-null-bool : is-null 𝟚 bool
-is-𝟚-null-bool =
-  is-𝟚-null-is-simplicially-discrete is-simplicially-discrete-bool
+is-Δ¹-null-bool : is-null Δ¹ bool
+is-Δ¹-null-bool =
+  is-Δ¹-null-is-simplicially-discrete is-simplicially-discrete-bool
 ```
 
 ### The booleans are not a directed interval
 
 ```agda
-is-not-directed-interval-bool' : 𝟚 ≠ bool
+is-not-directed-interval-bool' : Δ¹ ≠ bool
 is-not-directed-interval-bool' =
   nonequal-leibniz'
     ( is-simplicially-discrete)
-    ( 𝟚)
+    ( Δ¹)
     ( bool)
-    ( is-not-simplicially-discrete-𝟚)
+    ( is-not-simplicially-discrete-Δ¹)
     ( is-simplicially-discrete-bool)
 
-is-not-directed-interval-bool : ¬ (𝟚 ≃ bool)
+is-not-directed-interval-bool : ¬ (Δ¹ ≃ bool)
 is-not-directed-interval-bool e =
-  is-not-simplicially-discrete-𝟚
+  is-not-simplicially-discrete-Δ¹
     ( is-simplicially-discrete-equiv e is-simplicially-discrete-bool)
 
-is-not-retract-of-directed-interval-bool : ¬ (𝟚 retract-of bool)
+is-not-retract-of-directed-interval-bool : ¬ (Δ¹ retract-of bool)
 is-not-retract-of-directed-interval-bool r =
-  is-not-simplicially-discrete-𝟚
+  is-not-simplicially-discrete-Δ¹
     ( is-simplicially-discrete-retract r is-simplicially-discrete-bool)
 ```
 
@@ -122,11 +122,11 @@ module _
     is-simplicially-discrete B →
     is-simplicially-discrete (A + B)
   is-simplicially-discrete-coproduct is-disc-A is-disc-B =
-    is-simplicially-discrete-is-𝟚-null
-      ( is-null-coproduct-is-null-bool 𝟚
-        ( is-𝟚-null-bool)
-        ( is-𝟚-null-is-simplicially-discrete is-disc-A)
-        ( is-𝟚-null-is-simplicially-discrete is-disc-B))
+    is-simplicially-discrete-is-Δ¹-null
+      ( is-null-coproduct-is-null-bool Δ¹
+        ( is-Δ¹-null-bool)
+        ( is-Δ¹-null-is-simplicially-discrete is-disc-A)
+        ( is-Δ¹-null-is-simplicially-discrete is-disc-B))
 ```
 
 ### Finite types are simplicially discrete

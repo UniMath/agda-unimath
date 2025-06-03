@@ -49,11 +49,11 @@ Given a type `X`, we define the {{#concept "lax suspension"}} of `X` as the
 
 ```text
            id × 0₂ + id × 1₂
-    X + X ------------------> X × 𝟚
+    X + X ------------------> X × Δ¹
       |                         |
       |                         |
       ∨                       ⌜ ∨
-     ∂𝟚 ---------------------> Σ▵X.
+     ∂Δ¹ ---------------------> Σ▵X.
 ```
 
 or in other words the oriented pushout
@@ -70,5 +70,5 @@ Intuitively, the lax suspension of `X` can be understood as a type consisting of
 a point at the north and south pole, and a
 [directed edge](simplicial-type-theory.directed-edges.md) `north →▵ south` for
 every element `x : X`. It is constructed by taking the
-[cartesian product](foundation-core.cartesian-product-types.md) `X × 𝟚`, and
+[cartesian product](foundation-core.cartesian-product-types.md) `X × Δ¹`, and
 "pinching" it together at the north and south pole.

@@ -179,14 +179,14 @@ module _
       ( norm-map-is-normed-map H x)
 
   wrong-way-counit-is-normed-map' :
-    (x y : A) → q x →▵ q y → {! q (pr1 (pr1 (pr1 H)) (q x)) !} →▵ {! q y !}
+    (x y : A) → q x →▵ q y → q (pr1 (pr1 (pr1 H)) (q x)) →▵ q y
   wrong-way-counit-is-normed-map' x y f =
     map-inv-equiv
       ( is-transposing-adjoint-map-right-adjoint-is-normed-map H
         ( map-left-adjoint-is-normed-map H (q x))
         ( q y))
       ( action-hom▵-simplicial-natural-transformation
-      (norm-map-is-normed-map H) f)
+        ( norm-map-is-normed-map H) f)
 ```
 
 ### The wrong way unit associated to a normed map
@@ -208,7 +208,7 @@ module _
     ( map-left-adjoint-is-transposing-biadjoint H ⇒▵
       map-right-adjoint-is-transposing-biadjoint H) ≃
     ( id ⇒▵ q ∘ map-right-adjoint-is-transposing-biadjoint H)
-  equiv-wrong-way-unigithub agt-norm-map-is-transposing-biadjoint =
+  equiv-wrong-way-unit-norm-map-is-transposing-biadjoint =
     equiv-Π-equiv-family
       ( λ x →
         is-transposing-adjoint-map-left-adjoint-is-transposing-biadjoint H
@@ -252,8 +252,7 @@ module _
     map-left-adjoint-is-normed-map H (q x) →▵
     map-right-adjoint-is-normed-map H (q y)
   action-hom-image-norm-map-is-normed-map =
-    action-hom▵-simplicial-natural-transformationc
-      ( norm-map-is-normed-map H)
+    action-hom▵-simplicial-natural-transformation (norm-map-is-normed-map H)
 ```
 
 ### The factors of the cardinality of a normed map

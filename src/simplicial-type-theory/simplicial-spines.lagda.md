@@ -72,7 +72,7 @@ It has the universal property of the iterated
 
 ```text
                0₂
-         1 ---------> 𝟚
+         1 ---------> Δ¹
          |            |
   target |            |
          ∨          ⌜ ∨
@@ -104,7 +104,7 @@ postulate
 
   inl-spine : {n : ℕ} → spine n → spine (succ-ℕ n)
 
-  in-arrow-spine : {n : ℕ} → 𝟚 → spine (succ-ℕ n)
+  in-arrow-spine : {n : ℕ} → Δ¹ → spine (succ-ℕ n)
 
 is-contr-spine-0 : is-contr (spine 0)
 is-contr-spine-0 = (star-spine-0 , contraction-star-spine-0)
@@ -128,7 +128,7 @@ We postulate that the (𝑛+1)-spine is the pushout
 
 ```text
                0₂
-         1 ---------> 𝟚
+         1 ---------> Δ¹
          |            |
   target |            |
          ∨          ⌜ ∨
@@ -179,7 +179,7 @@ module _
           ( x)
 
   compute-inr-dependent-cogap-spine :
-    (t : 𝟚) →
+    (t : Δ¹) →
     dependent-cogap-spine (in-arrow-spine t) ＝
     vertical-map-dependent-cocone
       ( point (terminal-point-spine n))
@@ -241,11 +241,11 @@ We can inductively define the 𝑛-spine as a subtype of the 𝑛-cube via t
 subtype-spine : (n : ℕ) → subtype lzero (simplicial-cube n)
 subtype-spine 0 _ = unit-Prop
 subtype-spine 1 _ = unit-Prop
-subtype-spine 2 (x , y) = join-Prop (Id-𝟚-Prop x 1₂) (Id-𝟚-Prop y 0₂)
+subtype-spine 2 (x , y) = join-Prop (Id-Δ¹-Prop x 1₂) (Id-Δ¹-Prop y 0₂)
 subtype-spine (succ-ℕ (succ-ℕ (succ-ℕ n))) (x , u) =
   join-Prop
     ( is-terminal-element-simplicial-cube-Prop (succ-ℕ (succ-ℕ n)) u)
-    ( (Id-𝟚-Prop x 0₂) ∧ (subtype-spine (succ-ℕ (succ-ℕ n)) u))
+    ( (Id-Δ¹-Prop x 0₂) ∧ (subtype-spine (succ-ℕ (succ-ℕ n)) u))
 ```
 
 Let us work out what this definition unfolds to when `n` is `2`:
@@ -293,7 +293,7 @@ compute-inr-point-spine (succ-ℕ n) = refl
 The 𝑛-spine has 𝑛 arrows.
 
 ```agda
-arrow-spine : (n : ℕ) → Fin n → 𝟚 → spine n
+arrow-spine : (n : ℕ) → Fin n → Δ¹ → spine n
 arrow-spine (succ-ℕ n) (inl x) = inl-spine ∘ arrow-spine n x
 arrow-spine (succ-ℕ n) (inr x) = in-arrow-spine
 ```
@@ -588,7 +588,7 @@ cocone-spine' = {!   !}
 ### The 1-spine is the directed interval
 
 ```text
-         1 ----------> 𝟚
+         1 ----------> Δ¹
          |             |
          |             |
          ∨           ⌜ ∨
