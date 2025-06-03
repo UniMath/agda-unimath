@@ -17,7 +17,14 @@ open import foundation-core.function-types
 
 ## Idea
 
-A **sequence** of elements in a type `A` is a map `ℕ → A`.
+A {{#concept "sequence" Agda=sequence}} of elements of type `A` is a map `ℕ → A`
+from the [natural numbers](elementary-number-theory.natural-numbers.md) into
+`A`.
+
+For a list of number sequences from the
+[On-Line Encyclopedia of Integer Sequences](https://oeis.org) {{#cite oeis}}
+that are formalized in agda-unimath, see the page
+[`literature.oeis`](literature.oeis.md).
 
 ## Definition
 
@@ -35,3 +42,7 @@ map-sequence :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → sequence A → sequence B
 map-sequence f a = f ∘ a
 ```
+
+## References
+
+{{#bibliography}}

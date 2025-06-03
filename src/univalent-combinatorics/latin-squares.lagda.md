@@ -17,14 +17,15 @@ open import foundation.universe-levels
 
 ## Idea
 
-Latin squares are multiplication tables in which every element appears in every
-row and in every column exactly once. Latin squares are considered to be the
-same if they are isotopic. We therefore define the type of all Latin squares to
-be the type of all inhabited types A, B, and C, equipped with a binary
-equivalence f : A → B → C. The groupoid of main classes of latin squares is
-defined in `main-classes-of-latin-squares`.
+{{#concept "Latin squares" WDID=Q679367 WD="Latin square" Agda=Latin-Square}}
+are multiplication tables in which every element appears in every row and in
+every column exactly once. Latin squares are considered to be the same if they
+are [isotopic](univalent-combinatorics.isotopies-latin-squares.md). We therefore
+define the type of all Latin squares to be the type of all
+[inhabited](foundation.inhabited-types.md) types `A`, `B`, and `C`, equipped
+with a [binary equivalence](foundation.binary-equivalences.md) `f : A → B → C`.
 
-## Definition
+## Definitions
 
 ```agda
 Latin-Square : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
@@ -73,3 +74,9 @@ module _
     is-binary-equiv mul-Latin-Square
   is-binary-equiv-mul-Latin-Square = pr2 (pr2 (pr2 (pr2 L)))
 ```
+
+## See also
+
+- The [groupoid](foundation.1-types.md) of main classes of latin squares is
+  defined in
+  [`univalent-combinatorics.main-classes-of-latin-squares`](univalent-combinatorics.main-classes-of-latin-squares.md).

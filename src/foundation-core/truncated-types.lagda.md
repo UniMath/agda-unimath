@@ -7,6 +7,7 @@ module foundation-core.truncated-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
@@ -228,6 +229,24 @@ fiber-Truncated-Type :
   type-Truncated-Type B → Truncated-Type (l1 ⊔ l2) k
 fiber-Truncated-Type A B f b =
   Σ-Truncated-Type A (λ a → Id-Truncated-Type' B (f a) b)
+```
+
+### Truncatedness of the base of a truncated dependent sum
+
+```agda
+abstract
+  is-trunc-base-is-trunc-Σ' :
+    {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → B x) → is-trunc k (Σ A B) → is-trunc k A
+  is-trunc-base-is-trunc-Σ' {k = neg-two-𝕋} {A} {B} =
+    is-contr-base-is-contr-Σ' A B
+  is-trunc-base-is-trunc-Σ' {k = succ-𝕋 k} s is-trunc-ΣAB x y =
+    is-trunc-base-is-trunc-Σ'
+      ( apd s)
+      ( is-trunc-equiv' k
+        ( (x , s x) ＝ (y , s y))
+        ( equiv-pair-eq-Σ (x , s x) (y , s y))
+        ( is-trunc-ΣAB (x , s x) (y , s y)))
 ```
 
 ### Products of truncated types are truncated

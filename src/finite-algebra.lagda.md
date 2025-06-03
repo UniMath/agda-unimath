@@ -1,6 +1,6 @@
 # Finite algebra
 
-## Files in the finite algebra folder
+## Modules in the finite algebra namespace
 
 ```agda
 module finite-algebra where

@@ -92,7 +92,7 @@ module _
       refl-leq-ℕ (length-list (cons y l))
 
     inequality-length-quicksort-list-divide-leq :
-      (x : type-Decidable-Total-Order X) →
+      (x : type-Decidable-Total-Order X) →
       (l : list (type-Decidable-Total-Order X)) →
       length-list (quicksort-list-divide-leq x l) ≤-ℕ length-list l
     inequality-length-quicksort-list-divide-leq x nil = star
@@ -129,7 +129,7 @@ module _
       succ-leq-ℕ (length-list l)
 
     inequality-length-quicksort-list-divide-strict-greater :
-      (x : type-Decidable-Total-Order X) →
+      (x : type-Decidable-Total-Order X) →
       (l : list (type-Decidable-Total-Order X)) →
       length-list (quicksort-list-divide-strict-greater x l) ≤-ℕ length-list l
     inequality-length-quicksort-list-divide-strict-greater x nil = star

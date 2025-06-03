@@ -18,6 +18,7 @@ open import foundation.category-of-sets
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
@@ -146,6 +147,40 @@ module _
     representable-functor-Precategory C
   pr2 map-representable-functor-copresheaf-Precategory =
     representable-natural-transformation-Precategory C
-```
 
-It remains to show that this map is functorial.
+  is-functor-representable-functor-copresheaf-Precategory :
+    is-functor-map-Precategory
+      ( opposite-Precategory C)
+      ( copresheaf-precategory-Precategory C l2)
+      ( map-representable-functor-copresheaf-Precategory)
+  pr1 is-functor-representable-functor-copresheaf-Precategory {x} {y} {z} g f =
+    eq-htpy-hom-family-natural-transformation-Precategory
+      ( C)
+      ( Set-Precategory l2)
+      ( representable-functor-Precategory C x)
+      ( representable-functor-Precategory C z)
+      ( _)
+      ( _)
+      ( λ w → eq-htpy (λ h → inv (associative-comp-hom-Precategory C h f g)))
+  pr2 is-functor-representable-functor-copresheaf-Precategory x =
+    eq-htpy-hom-family-natural-transformation-Precategory
+      ( C)
+      ( Set-Precategory l2)
+      ( representable-functor-Precategory C x)
+      ( representable-functor-Precategory C x)
+      ( representable-natural-transformation-Precategory C
+        ( id-hom-Precategory C))
+      _
+      ( λ z → eq-htpy (λ f → right-unit-law-comp-hom-Precategory C f))
+
+  functor-representable-functor-copresheaf-Precategory :
+    functor-Precategory
+      ( opposite-Precategory C)
+      ( copresheaf-precategory-Precategory C l2)
+  functor-representable-functor-copresheaf-Precategory =
+    functor-map-Precategory
+      ( opposite-Precategory C)
+      ( copresheaf-precategory-Precategory C l2)
+      ( map-representable-functor-copresheaf-Precategory)
+      ( is-functor-representable-functor-copresheaf-Precategory)
+```

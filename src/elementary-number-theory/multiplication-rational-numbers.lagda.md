@@ -10,6 +10,7 @@ module elementary-number-theory.multiplication-rational-numbers where
 
 ```agda
 open import elementary-number-theory.addition-integer-fractions
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.greatest-common-divisor-integers
@@ -17,9 +18,12 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -50,6 +54,10 @@ mul-ℚ' x y = mul-ℚ y x
 
 infixl 40 _*ℚ_
 _*ℚ_ = mul-ℚ
+
+ap-mul-ℚ :
+  {x y x' y' : ℚ} → x ＝ x' → y ＝ y' → x *ℚ y ＝ x' *ℚ y'
+ap-mul-ℚ p q = ap-binary mul-ℚ p q
 ```
 
 ## Properties
@@ -325,9 +333,104 @@ abstract
     ( ap ((x *ℚ z) +ℚ_) (left-negative-law-mul-ℚ y z))
 ```
 
+### The inclusion of integer fractions preserves multiplication
+
+```agda
+abstract
+  mul-rational-fraction-ℤ :
+    (x y : fraction-ℤ) →
+    rational-fraction-ℤ x *ℚ rational-fraction-ℤ y ＝
+    rational-fraction-ℤ (x *fraction-ℤ y)
+  mul-rational-fraction-ℤ x y =
+    eq-ℚ-sim-fraction-ℤ
+      ( mul-fraction-ℤ (reduce-fraction-ℤ x) (reduce-fraction-ℤ y))
+      ( x *fraction-ℤ y)
+      ( sim-fraction-mul-fraction-ℤ
+        ( symmetric-sim-fraction-ℤ
+          ( x)
+          ( reduce-fraction-ℤ x)
+          ( sim-reduced-fraction-ℤ x))
+        ( symmetric-sim-fraction-ℤ
+          ( y)
+          ( reduce-fraction-ℤ y)
+          ( sim-reduced-fraction-ℤ y)))
+```
+
+### The inclusion of integers preserves multiplication
+
+```agda
+abstract
+  mul-rational-ℤ :
+    (x y : ℤ) → rational-ℤ x *ℚ rational-ℤ y ＝ rational-ℤ (x *ℤ y)
+  mul-rational-ℤ x y =
+    equational-reasoning
+      rational-ℤ x *ℚ rational-ℤ y
+      ＝
+        rational-fraction-ℤ (in-fraction-ℤ x) *ℚ
+        rational-fraction-ℤ (in-fraction-ℤ y)
+        by
+          ap-mul-ℚ
+            ( inv (is-retraction-rational-fraction-ℚ (rational-ℤ x)))
+            ( inv (is-retraction-rational-fraction-ℚ (rational-ℤ y)))
+      ＝
+        rational-fraction-ℤ (in-fraction-ℤ x *fraction-ℤ in-fraction-ℤ y)
+        by mul-rational-fraction-ℤ _ _
+      ＝ rational-fraction-ℤ (in-fraction-ℤ (x *ℤ y))
+        by ap rational-fraction-ℤ (mul-in-fraction-ℤ x y)
+      ＝ rational-ℤ (x *ℤ y) by is-retraction-rational-fraction-ℚ _
+```
+
+### The inclusion of natural numbers preserves multiplication
+
+```agda
+abstract
+  mul-rational-ℕ :
+    (x y : ℕ) → rational-ℕ x *ℚ rational-ℕ y ＝ rational-ℕ (x *ℕ y)
+  mul-rational-ℕ x y = mul-rational-ℤ _ _ ∙ ap rational-ℤ (mul-int-ℕ x y)
+```
+
+### `succ-ℚ p * q = q + (p * q)`
+
+```agda
+abstract
+  mul-left-succ-ℚ :
+    (p q : ℚ) →
+    (succ-ℚ p *ℚ q) ＝ q +ℚ (p *ℚ q)
+  mul-left-succ-ℚ p q =
+    equational-reasoning
+      succ-ℚ p *ℚ q
+      ＝ (one-ℚ *ℚ q) +ℚ (p *ℚ q)
+        by right-distributive-mul-add-ℚ one-ℚ p q
+      ＝ q +ℚ (p *ℚ q) by ap-add-ℚ (left-unit-law-mul-ℚ q) refl
+
+  mul-right-succ-ℚ :
+    (p q : ℚ) →
+    (p *ℚ succ-ℚ q) ＝ p +ℚ (p *ℚ q)
+  mul-right-succ-ℚ p q =
+    equational-reasoning
+      p *ℚ succ-ℚ q
+      ＝ (p *ℚ one-ℚ) +ℚ (p *ℚ q)
+        by left-distributive-mul-add-ℚ p one-ℚ q
+      ＝ p +ℚ (p *ℚ q)
+        by ap-add-ℚ (right-unit-law-mul-ℚ p) refl
+```
+
+### `2q = q + q`
+
+```agda
+abstract
+  mul-two-ℚ : (q : ℚ) → rational-ℕ 2 *ℚ q ＝ q +ℚ q
+  mul-two-ℚ q =
+    equational-reasoning
+      rational-ℤ (one-ℤ +ℤ one-ℤ) *ℚ q
+      ＝ (one-ℚ +ℚ one-ℚ) *ℚ q by ap (_*ℚ q) (inv (add-rational-ℤ one-ℤ one-ℤ))
+      ＝ (one-ℚ *ℚ q) +ℚ (one-ℚ *ℚ q) by right-distributive-mul-add-ℚ _ _ _
+      ＝ q +ℚ q by ap-add-ℚ (left-unit-law-mul-ℚ q) (left-unit-law-mul-ℚ q)
+```
+
 ## See also
 
-- The multiplicative monoid strucutre on the rational numbers is defined in
+- The multiplicative monoid structure on the rational numbers is defined in
   [`elementary-number-theory.multiplicative-monoid-of-rational-numbers`](elementary-number-theory.multiplicative-monoid-of-rational-numbers.md);
 - The multiplicative group structure on the rational numbers is defined in
   [`elementary-number-theory.multiplicative-group-of-rational-numbers`](elementary-number-theory.multiplicative-group-of-rational-numbers.md).

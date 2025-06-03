@@ -18,11 +18,10 @@ open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.vectors
-
+open import lists.functoriality-tuples
 open import lists.lists
 open import lists.lists-discrete-types
+open import lists.tuples
 
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
@@ -51,17 +50,17 @@ module _
 
   de-bruijn-variables-term : Term → list ℕ
 
-  de-bruijn-variables-term-vec : {n : ℕ} → vec Term n → list ℕ
+  de-bruijn-variables-term-tuple : {n : ℕ} → tuple Term n → list ℕ
 
   de-bruijn-variables-term (var-Term x) = cons x nil
-  de-bruijn-variables-term (op-Term f x) = de-bruijn-variables-term-vec x
+  de-bruijn-variables-term (op-Term f x) = de-bruijn-variables-term-tuple x
 
-  de-bruijn-variables-term-vec empty-vec = nil
-  de-bruijn-variables-term-vec (x ∷ v) =
+  de-bruijn-variables-term-tuple empty-tuple = nil
+  de-bruijn-variables-term-tuple (x ∷ v) =
     union-list
       has-decidable-equality-ℕ
         (de-bruijn-variables-term x)
-        (de-bruijn-variables-term-vec v)
+        (de-bruijn-variables-term-tuple v)
 
   arity-term : Term → ℕ
   arity-term t = length-list (de-bruijn-variables-term t)
@@ -87,24 +86,24 @@ evaluated to a concrete element of the type `A`.
     {l2 : Level} → {A : UU l2} →
     is-model Sg A → assignment A → Term → A
 
-  eval-vec :
+  eval-tuple :
     { l2 : Level} → {A : UU l2} {n : ℕ} →
-    is-model Sg A → assignment A → vec Term n → vec A n
+    is-model Sg A → assignment A → tuple Term n → tuple A n
 
   eval-term m assign (var-Term n) = assign n
-  eval-term m assign (op-Term f x) = m f (eval-vec m assign x)
+  eval-term m assign (op-Term f x) = m f (eval-tuple m assign x)
 
-  eval-vec m assign empty-vec = empty-vec
-  eval-vec m assign (x ∷ v) =
-    eval-term m assign x ∷ (eval-vec m assign v)
+  eval-tuple m assign empty-tuple = empty-tuple
+  eval-tuple m assign (x ∷ v) =
+    eval-term m assign x ∷ (eval-tuple m assign v)
 
-  eval-vec-map-vec-eval-term :
+  eval-tuple-map-tuple-eval-term :
     { l2 : Level} {A : UU l2} {n : ℕ} →
-    (m : is-model Sg A) → (assign : assignment A) → (v : vec Term n) →
-    eval-vec m assign v ＝ map-vec (eval-term m assign) v
-  eval-vec-map-vec-eval-term m assign empty-vec = refl
-  eval-vec-map-vec-eval-term m assign (x ∷ v) =
-    ap (eval-term m assign x ∷_) (eval-vec-map-vec-eval-term m assign v)
+    (m : is-model Sg A) → (assign : assignment A) → (v : tuple Term n) →
+    eval-tuple m assign v ＝ map-tuple (eval-term m assign) v
+  eval-tuple-map-tuple-eval-term m assign empty-tuple = refl
+  eval-tuple-map-tuple-eval-term m assign (x ∷ v) =
+    ap (eval-term m assign x ∷_) (eval-tuple-map-tuple-eval-term m assign v)
 ```
 
 ### Evaluation for constant terms
@@ -120,56 +119,56 @@ element of `A`.
     (de-bruijn-variables-term t ＝ nil) →
     A
 
-  eval-constant-term-vec :
+  eval-constant-term-tuple :
     { l2 : Level} {A : UU l2} {n : ℕ} →
     ( is-model Sg A) →
-    ( v : vec Term n) →
-    ( all-vec (λ t → is-nil-list (de-bruijn-variables-term t)) v) →
-    vec A n
+    ( v : tuple Term n) →
+    ( all-tuple (λ t → is-nil-list (de-bruijn-variables-term t)) v) →
+    tuple A n
 
   eval-constant-term m (op-Term f x) p =
-    m f (eval-constant-term-vec m x (all-vec-lemma x p))
+    m f (eval-constant-term-tuple m x (all-tuple-lemma x p))
     where
-    all-vec-lemma :
+    all-tuple-lemma :
       { n : ℕ}
-      ( v : vec Term n) →
-      ( de-bruijn-variables-term-vec v ＝ nil) →
-      all-vec (λ t → is-nil-list (de-bruijn-variables-term t)) v
-    all-vec-lemma empty-vec p = raise-star
-    all-vec-lemma (x ∷ v) p =
+      ( v : tuple Term n) →
+      ( de-bruijn-variables-term-tuple v ＝ nil) →
+      all-tuple (λ t → is-nil-list (de-bruijn-variables-term t)) v
+    all-tuple-lemma empty-tuple p = raise-star
+    all-tuple-lemma (x ∷ v) p =
       pair
         ( pr1 (is-nil-lemma p))
-        ( all-vec-lemma v (pr2 (is-nil-lemma p)))
+        ( all-tuple-lemma v (pr2 (is-nil-lemma p)))
       where
       is-nil-lemma =
         is-nil-union-is-nil-list
           ( has-decidable-equality-ℕ)
           ( de-bruijn-variables-term x)
-          ( de-bruijn-variables-term-vec v)
+          ( de-bruijn-variables-term-tuple v)
 
-  eval-constant-term-vec m empty-vec p = empty-vec
-  eval-constant-term-vec m (x ∷ v) (p , p') =
-    eval-constant-term m x p ∷ eval-constant-term-vec m v p'
+  eval-constant-term-tuple m empty-tuple p = empty-tuple
+  eval-constant-term-tuple m (x ∷ v) (p , p') =
+    eval-constant-term m x p ∷ eval-constant-term-tuple m v p'
 ```
 
 ### The induced function by a term on a model
 
 ```agda
-  vec-assignment :
+  tuple-assignment :
     {l2 : Level} {A : UU l2} →
     ℕ → (l : list ℕ) →
-    vec A (succ-ℕ (length-list l)) → assignment A
-  vec-assignment x nil (y ∷ empty-vec) n = y
-  vec-assignment x (cons x' l) (y ∷ y' ∷ v) n
+    tuple A (succ-ℕ (length-list l)) → assignment A
+  tuple-assignment x nil (y ∷ empty-tuple) n = y
+  tuple-assignment x (cons x' l) (y ∷ y' ∷ v) n
     with
     ( has-decidable-equality-ℕ x n)
   ... | inl p = y
-  ... | inr p = vec-assignment x' l (y' ∷ v) n
+  ... | inr p = tuple-assignment x' l (y' ∷ v) n
 
   induced-function-term :
     {l2 : Level} → {A : UU l2} →
     is-model Sg A → (t : Term) →
-    vec A (arity-term t) → A
+    tuple A (arity-term t) → A
   induced-function-term {l2} {A} m t v with
     ( has-decidable-equality-list
       has-decidable-equality-ℕ
@@ -178,21 +177,21 @@ element of `A`.
   ... | inr p =
     eval-term m
       ( tr
-        ( λ n → vec A n → assignment A)
+        ( λ n → tuple A n → assignment A)
         ( lenght-tail-is-nonnil-list (de-bruijn-variables-term t) p)
-        ( vec-assignment
+        ( tuple-assignment
           ( head-is-nonnil-list (de-bruijn-variables-term t) p)
           ( tail-is-nonnil-list (de-bruijn-variables-term t) p))
           ( v))
       ( t)
 
-  assignment-vec :
+  assignment-tuple :
     {l2 : Level} {A : UU l2} →
     (l : list ℕ) →
     assignment A →
-    vec A (length-list l)
-  assignment-vec nil f = empty-vec
-  assignment-vec (cons x l) f = f x ∷ assignment-vec l f
+    tuple A (length-list l)
+  assignment-tuple nil f = empty-tuple
+  assignment-tuple (cons x l) f = f x ∷ assignment-tuple l f
 ```
 
 ### Translation of terms
@@ -205,23 +204,23 @@ translation-term :
   is-extension-signature Sg1 Sg2 →
   Term Sg2 → Term Sg1
 
-translation-vec :
+translation-tuple :
   { l1 l2 : Level} →
   ( Sg1 : signature l1) →
   ( Sg2 : signature l2) →
   { n : ℕ} →
   is-extension-signature Sg1 Sg2 →
-  vec (Term Sg2) n → vec (Term Sg1) n
+  tuple (Term Sg2) n → tuple (Term Sg1) n
 
 translation-term Sg1 Sg2 ext (var-Term x) = var-Term x
 translation-term Sg1 Sg2 ext (op-Term f v) =
   op-Term (emb-extension-signature Sg1 Sg2 ext f)
-    ( tr (vec (Term Sg1))
+    ( tr (tuple (Term Sg1))
       ( arity-preserved-extension-signature Sg1 Sg2 ext f)
-      ( translation-vec Sg1 Sg2 ext v))
+      ( translation-tuple Sg1 Sg2 ext v))
 
-translation-vec Sg1 Sg2 ext empty-vec = empty-vec
-translation-vec Sg1 Sg2 ext (x ∷ v) =
+translation-tuple Sg1 Sg2 ext empty-tuple = empty-tuple
+translation-tuple Sg1 Sg2 ext (x ∷ v) =
   ( translation-term Sg1 Sg2 ext x) ∷
-    ( translation-vec Sg1 Sg2 ext v)
+    ( translation-tuple Sg1 Sg2 ext v)
 ```

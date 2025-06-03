@@ -29,23 +29,25 @@ underlying type is [inhabited](foundation.inhabited-types.md).
 
 ```agda
 module _
-  {l1 l2 : Level} (P : Total-Order-𝔽 l1 l2)
+  {l1 l2 : Level} (P : Finite-Total-Order l1 l2)
   where
 
-  is-inhabited-Total-Order-𝔽-Prop : Prop l1
-  is-inhabited-Total-Order-𝔽-Prop = is-inhabited-Prop (type-Total-Order-𝔽 P)
+  is-inhabited-Finite-Total-Order-Prop : Prop l1
+  is-inhabited-Finite-Total-Order-Prop =
+    is-inhabited-Prop (type-Finite-Total-Order P)
 
-  is-inhabited-Total-Order-𝔽 : UU (l1 ⊔ l2)
-  is-inhabited-Total-Order-𝔽 = is-finite-Poset (poset-Total-Order-𝔽 P)
+  is-inhabited-Finite-Total-Order : UU (l1 ⊔ l2)
+  is-inhabited-Finite-Total-Order = is-finite-Poset (poset-Finite-Total-Order P)
 
-  is-property-is-inhabited-Total-Order-𝔽 : is-prop is-inhabited-Total-Order-𝔽
-  is-property-is-inhabited-Total-Order-𝔽 =
-    is-prop-is-finite-Poset (poset-Total-Order-𝔽 P)
+  is-property-is-inhabited-Finite-Total-Order :
+    is-prop is-inhabited-Finite-Total-Order
+  is-property-is-inhabited-Finite-Total-Order =
+    is-prop-is-finite-Poset (poset-Finite-Total-Order P)
 
-  is-finite-type-is-inhabited-Total-Order-𝔽 :
-    is-inhabited-Total-Order-𝔽 → is-finite (type-Total-Order-𝔽 P)
-  is-finite-type-is-inhabited-Total-Order-𝔽 =
-    is-finite-type-is-finite-Poset (poset-Total-Order-𝔽 P)
+  is-finite-type-is-inhabited-Finite-Total-Order :
+    is-inhabited-Finite-Total-Order → is-finite (type-Finite-Total-Order P)
+  is-finite-type-is-inhabited-Finite-Total-Order =
+    is-finite-type-is-finite-Poset (poset-Finite-Total-Order P)
 
 is-inhabited-finite-total-order-Poset-Prop :
   {l1 l2 : Level} (P : Poset l1 l2) → Prop (l1 ⊔ l2)

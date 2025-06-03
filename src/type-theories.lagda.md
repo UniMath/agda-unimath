@@ -4,7 +4,7 @@
 {-# OPTIONS --guardedness #-}
 ```
 
-## Files in the type theories folder
+## Modules in the type theories namespace
 
 ```agda
 module type-theories where

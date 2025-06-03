@@ -3,7 +3,7 @@ import pathlib
 import os
 import subprocess
 import sys
-from typing import List
+from typing import List, Set
 
 GITHUB_ROOT = 'https://github.com/'
 GITHUB_REPO = 'UniMath/agda-unimath'
@@ -218,3 +218,46 @@ def get_git_tracked_files():
     git_output = subprocess.check_output(['git', 'ls-files'], text=True)
     git_tracked_files = map(pathlib.Path, git_output.strip().split('\n'))
     return git_tracked_files
+
+def get_git_last_modified(file_path):
+    try:
+        # Get the last commit date for the file
+        output = subprocess.check_output(
+            ['git', 'log', '-1', '--format=%at', file_path],
+            stderr=subprocess.DEVNULL
+        )
+        output_str = output.strip()
+        if output_str:
+            return int(output_str)
+        else:
+            # Output is empty, file may be untracked
+            return os.path.getmtime(file_path)
+    except subprocess.CalledProcessError:
+        # If the git command fails, fall back to filesystem modification time
+        return os.path.getmtime(file_path)
+
+def is_file_modified(file_path):
+    try:
+        subprocess.check_output(['git', 'diff', '--quiet', file_path], stderr=subprocess.DEVNULL)
+        return False
+    except subprocess.CalledProcessError:
+        return True
+
+
+def parse_agda_imports(agda_file: str) -> Set[str]:
+    """Extract import statements from an Agda file."""
+    imports = set()
+    with open(agda_file, "r", encoding="utf-8") as f:
+        for line in f:
+            match = re.match(r"^\s*open\s+import\s+([A-Za-z0-9\-.]+)", line)
+            if match:
+                imports.add(match.group(1))
+    return imports
+
+def count_lines_in_file(file_path: str) -> int:
+    """Count lines of code in a file."""
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            return sum(1 for _ in f)
+    except Exception:
+        return 0

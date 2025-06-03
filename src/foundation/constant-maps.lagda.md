@@ -16,8 +16,10 @@ open import foundation.dependent-pair-types
 open import foundation.faithful-maps
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
+open import foundation.images
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
+open import foundation.propositional-truncations
 open import foundation.retracts-of-maps
 open import foundation.retracts-of-types
 open import foundation.transposition-identifications-along-equivalences
@@ -30,6 +32,7 @@ open import foundation.whiskering-homotopies-composition
 open import foundation-core.1-types
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
@@ -178,6 +181,23 @@ point-faithful-map :
 pr1 (point-faithful-map A x) = point x
 pr2 (point-faithful-map A x) =
   is-faithful-point-is-1-type (is-1-type-type-1-Type A) x
+```
+
+### The image of a constant map into a set is contractible
+
+```agda
+abstract
+  is-contr-im :
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) {f : A → type-Set B}
+    (a : A) (H : (x : A) → f x ＝ f a) → is-contr (im f)
+  pr1 (is-contr-im B {f} a H) = map-unit-im f a
+  pr2 (is-contr-im B {f} a H) (x , u) =
+    apply-dependent-universal-property-trunc-Prop
+      ( λ v → Id-Prop (im-Set B f) (map-unit-im f a) (x , v))
+      ( u)
+      ( λ where
+        ( a' , refl) →
+          eq-Eq-im f (map-unit-im f a) (map-unit-im f a') (inv (H a')))
 ```
 
 ## See also

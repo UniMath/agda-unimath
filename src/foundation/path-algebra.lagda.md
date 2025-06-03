@@ -33,7 +33,7 @@ elements of such a type are often called _2-paths_ and a twice iterated identity
 type is often called a _type of 2-paths_.
 
 Since 2-paths are just identifications, they have the usual operations and
-coherences on paths/identifications. In the context of 2-paths, this famliar
+coherences on paths/identifications. In the context of 2-paths, this familiar
 concatenation operation is called vertical concatenation (see
 `vertical-concat-Id²` below). However, 2-paths have novel operations and
 coherences derived from the operations and coherences of the boundary 1-paths
@@ -128,6 +128,30 @@ module _
   unit-law-assoc-110' refl refl = refl
 ```
 
+### Second-order associators
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z u v : A}
+  (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) (s : u ＝ v)
+  where
+
+  assoc²-1 : ((p ∙ q) ∙ r) ∙ s ＝ p ∙ ((q ∙ r) ∙ s)
+  assoc²-1 = ap (_∙ s) (assoc p q r) ∙ assoc p (q ∙ r) s
+
+  assoc²-2 : (p ∙ (q ∙ r)) ∙ s ＝ p ∙ (q ∙ (r ∙ s))
+  assoc²-2 = assoc p (q ∙ r) s ∙ ap (p ∙_) (assoc q r s)
+
+  assoc²-3 : ((p ∙ q) ∙ r) ∙ s ＝ p ∙ (q ∙ (r ∙ s))
+  assoc²-3 = assoc (p ∙ q) r s ∙ assoc p q (r ∙ s)
+
+  assoc²-4 : (p ∙ q) ∙ (r ∙ s) ＝ p ∙ ((q ∙ r) ∙ s)
+  assoc²-4 = assoc p q (r ∙ s) ∙ ap (p ∙_) (inv (assoc q r s))
+
+  assoc²-5 : (p ∙ q) ∙ (r ∙ s) ＝ (p ∙ (q ∙ r)) ∙ s
+  assoc²-5 = inv (assoc (p ∙ q) r s) ∙ ap (_∙ s) (assoc p q r)
+```
+
 ## Properties of 2-paths
 
 ### Definition of vertical and horizontal concatenation in identity types of identity types (a type of 2-paths)
@@ -215,6 +239,20 @@ module _
     ( inv right-unit)
 ```
 
+### Vertical inverses distribute over horizontal concatenation
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z}
+  where
+
+  distributive-inv-horizontal-concat-Id² :
+    (α : p ＝ q) (β : u ＝ v) →
+    inv (horizontal-concat-Id² α β) ＝ horizontal-concat-Id² (inv α) (inv β)
+  distributive-inv-horizontal-concat-Id² refl refl =
+    refl
+```
+
 ### Definition of horizontal inverse
 
 2-paths have an induced inverse operation from the operation on boundary 1-paths
@@ -228,8 +266,8 @@ module _
   horizontal-inv-Id² = ap inv
 ```
 
-This operation satisfies a left and right idenity induced by the inverse laws on
-1-paths
+This operation satisfies a left and right identity induced by the inverse laws
+on 1-paths
 
 ```agda
 module _

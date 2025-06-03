@@ -29,7 +29,7 @@ types `T` is the formal series in `s` :
 If `s` is a negative integer, the categorified version of this formula is
 
 ```text
-Σ (F : 𝔽 ∖ {∅}), T (F) × (S → F)
+Σ (F : Finite-Type ∖ {∅}), T (F) × (S → F)
 ```
 
 We can generalize it to species of types as
@@ -43,7 +43,7 @@ of this formula then becomes
 
 ```text
 Σ ( n : ℕ ∖ {0}),
-  ( Σ (F : UU-Fin n) , T (F) × (S → cycle-prime-decomposition-ℕ (n))
+  ( Σ (F : Type-With-Cardinality-ℕ n) , T (F) × (S → cycle-prime-decomposition-ℕ (n))
 ```
 
 We can generalize the two notions to species of types in subuniverses. Let `P`

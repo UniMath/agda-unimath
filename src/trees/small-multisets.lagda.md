@@ -16,6 +16,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.small-types
 open import foundation.subtypes
 open import foundation.transport-along-identifications
@@ -30,9 +31,11 @@ open import trees.w-types
 
 ## Idea
 
-A multiset `X := tree-𝕎 A α` is said to be **small** with respect to a universe
-`UU l` if its symbol `A` is a small type with respect to `UU l`, and if each
-`α x` is a small multiset with respect to `UU l`.
+A [multiset](trees.multisets.md) `X := tree-𝕎 A α` is said to be
+{{#concept "small" Disambiguation="multiset" Agda=is-small-𝕍}} with respect to a
+[universe](foundation.universe-levels.md) `UU l` if its symbol `A` is a
+[small type](foundation-core.small-types.md) with respect to `UU l`, and if
+recursively each `α x` is a small multiset with respect to `UU l`.
 
 ## Definition
 
@@ -123,7 +126,7 @@ is-small-∉-𝕍 :
 is-small-∉-𝕍 l {l1} {X} {Y} H K =
   is-small-Π
     ( is-small-∈-𝕍 l {l1} {X} {Y} H K)
-    ( λ x → pair (raise-empty l) (compute-raise-empty l))
+    ( λ x → Raise l empty)
 ```
 
 ### The resizing of a small multiset is small

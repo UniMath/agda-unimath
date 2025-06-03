@@ -145,7 +145,7 @@ if __name__ == '__main__':
 
             agdaBlockStart = utils.find_index(contents, '```agda')
             if len(agdaBlockStart) > 1:
-                print('Warning: No Agda import block found inside <details> block in:\n\t' +
+                print('Warning: No Agda import block found inside `<details>` block in:\n\t' +
                       str(fpath), file=sys.stderr)
                 status |= FLAG_NO_IMPORT_BLOCK
             continue

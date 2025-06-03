@@ -65,13 +65,13 @@ module _
 
   lower-coherence-square-galois-connection-Large-Poset : UUω
   lower-coherence-square-galois-connection-Large-Poset =
-    lower-sim-galois-connection-Large-Poset P V
+    sim-lower-galois-connection-Large-Poset P V
       ( comp-galois-connection-Large-Poset P Q V J F)
       ( comp-galois-connection-Large-Poset P U V G I)
 
   upper-coherence-square-galois-connection-Large-Poset : UUω
   upper-coherence-square-galois-connection-Large-Poset =
-    upper-sim-galois-connection-Large-Poset P V
+    sim-upper-galois-connection-Large-Poset P V
       ( comp-galois-connection-Large-Poset P U V G I)
       ( comp-galois-connection-Large-Poset P Q V J F)
 ```
@@ -100,7 +100,7 @@ module _
     lower-coherence-square-galois-connection-Large-Poset
       P Q U V I F G J
   lower-coherence-square-upper-coherence-square-galois-connection-Large-Poset =
-    lower-sim-upper-sim-galois-connection-Large-Poset P V
+    sim-lower-sim-upper-galois-connection-Large-Poset P V
       ( comp-galois-connection-Large-Poset P Q V J F)
       ( comp-galois-connection-Large-Poset P U V G I)
 
@@ -110,7 +110,7 @@ module _
     upper-coherence-square-galois-connection-Large-Poset
       P Q U V I F G J
   upper-coherence-square-lower-coherence-square-galois-connection-Large-Poset =
-    upper-sim-lower-sim-galois-connection-Large-Poset P V
+    sim-upper-sim-lower-galois-connection-Large-Poset P V
       ( comp-galois-connection-Large-Poset P Q V J F)
       ( comp-galois-connection-Large-Poset P U V G I)
 ```

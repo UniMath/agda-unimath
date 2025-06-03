@@ -28,9 +28,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-The distance function between natural numbers measures how far two natural
-numbers are apart. In the agda-unimath library we often prefer to work with
-`dist-ℕ` over the partially defined subtraction operation.
+The
+{{#concept "distance function" Disambiguation="between natural numbers" Agda=dist-ℕ}}
+between [natural numbers](elementary-number-theory.natural-numbers.md) measures
+how far two natural numbers are apart. In the agda-unimath library we often
+prefer to work with `dist-ℕ` over the partially defined subtraction operation.
 
 ## Definition
 
@@ -353,6 +355,11 @@ left-distributive-mul-dist-ℕ (succ-ℕ m) (succ-ℕ n) (succ-ℕ k) =
           ( (succ-ℕ k) *ℕ m)
           ( (succ-ℕ k) *ℕ n)) ∙
         ( inv (left-distributive-mul-dist-ℕ m n (succ-ℕ k)))))
+
+left-distributive-mul-dist-ℕ' :
+  (m n k : ℕ) → dist-ℕ (k *ℕ m) (k *ℕ n) ＝ k *ℕ (dist-ℕ m n)
+left-distributive-mul-dist-ℕ' m n k =
+  inv (left-distributive-mul-dist-ℕ m n k)
 
 right-distributive-mul-dist-ℕ :
   (x y k : ℕ) → (dist-ℕ x y) *ℕ k ＝ dist-ℕ (x *ℕ k) (y *ℕ k)

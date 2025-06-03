@@ -9,20 +9,32 @@ module category-theory.copresheaf-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.category-of-functors-from-small-to-large-categories
+open import category-theory.constant-functors
 open import category-theory.functors-from-small-to-large-precategories
+open import category-theory.functors-precategories
+open import category-theory.initial-objects-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.natural-transformations-functors-from-small-to-large-precategories
+open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
 open import category-theory.precategory-of-functors-from-small-to-large-precategories
+open import category-theory.terminal-objects-precategories
 
 open import foundation.category-of-sets
 open import foundation.commuting-squares-of-maps
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
@@ -256,6 +268,160 @@ module _
     Precategory (l1 ⊔ l2 ⊔ lsuc l) (l1 ⊔ l2 ⊔ l)
   copresheaf-precategory-Precategory =
     precategory-Large-Precategory (copresheaf-large-precategory-Precategory C) l
+```
+
+### The product of small copresheaves
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (C : Precategory l1 l2)
+  where
+
+  product-hom-copresheaf-Precategory :
+    copresheaf-Precategory C l3 →
+    copresheaf-Precategory C l4 →
+    copresheaf-Precategory C (l3 ⊔ l4)
+  pr1 (product-hom-copresheaf-Precategory F G) x =
+    product-Set
+      ( obj-functor-Precategory C (Set-Precategory l3) F x)
+      ( obj-functor-Precategory C (Set-Precategory l4) G x)
+  pr1 (pr2 (product-hom-copresheaf-Precategory F G)) f =
+    map-product
+      ( hom-functor-Precategory C (Set-Precategory l3) F f)
+      ( hom-functor-Precategory C (Set-Precategory l4) G f)
+  pr1 (pr2 (pr2 (product-hom-copresheaf-Precategory F G))) g f =
+    eq-htpy
+      ( λ w →
+        eq-pair
+          ( htpy-eq
+            ( preserves-comp-functor-Precategory C (Set-Precategory l3)
+              F g f)
+            ( pr1 w))
+          ( htpy-eq
+            ( preserves-comp-functor-Precategory C (Set-Precategory l4)
+              G g f)
+            ( pr2 w)))
+  pr2 (pr2 (pr2 (product-hom-copresheaf-Precategory F G))) x =
+    eq-htpy
+      ( λ w →
+        eq-pair
+          ( htpy-eq
+            ( preserves-id-functor-Precategory C (Set-Precategory l3)
+              F x)
+            ( pr1 w))
+          ( htpy-eq
+            ( preserves-id-functor-Precategory C (Set-Precategory l4)
+              G x)
+            ( pr2 w)))
+```
+
+### The initial copresheaf
+
+Since colimits are computed pointwise, the initial copresheaf is the constant
+functor at the empty set.
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2) (l : Level)
+  where
+
+  obj-initial-copresheaf-Precategory :
+    copresheaf-Precategory C l
+  obj-initial-copresheaf-Precategory =
+    constant-functor-Precategory
+      C (Set-Precategory l) (raise-empty-Set l)
+
+  hom-initial-copresheaf-Precategory :
+    ( X : copresheaf-Precategory C l) →
+    hom-Precategory
+      (copresheaf-precategory-Precategory C l)
+      obj-initial-copresheaf-Precategory
+      X
+  pr1 (hom-initial-copresheaf-Precategory X) x (map-raise ())
+  pr2 (hom-initial-copresheaf-Precategory X) f =
+    eq-htpy (λ where (map-raise ()))
+
+  is-unique-hom-initial-copresheaf-Precategory :
+    ( X : copresheaf-Precategory C l) →
+    ( τ :
+      hom-Precategory
+        (copresheaf-precategory-Precategory C l)
+        obj-initial-copresheaf-Precategory
+        X) →
+    hom-initial-copresheaf-Precategory X ＝ τ
+  is-unique-hom-initial-copresheaf-Precategory X τ =
+    eq-htpy-hom-family-natural-transformation-Precategory
+      ( C)
+      ( Set-Precategory l)
+      ( obj-initial-copresheaf-Precategory)
+      ( X)
+      ( hom-initial-copresheaf-Precategory X)
+      ( τ)
+      ( λ x → eq-htpy (λ where (map-raise ())))
+
+  initial-copresheaf-Precategory :
+    initial-obj-Precategory
+      (copresheaf-precategory-Precategory C l)
+  pr1 initial-copresheaf-Precategory =
+    obj-initial-copresheaf-Precategory
+  pr1 (pr2 initial-copresheaf-Precategory X) =
+    hom-initial-copresheaf-Precategory X
+  pr2 (pr2 initial-copresheaf-Precategory X) τ =
+    is-unique-hom-initial-copresheaf-Precategory X τ
+```
+
+### The terminal copresheaf
+
+Since limits are computed pointwise, the terminal copresheaf is the constant
+functor at the terminal set.
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2) (l : Level)
+  where
+
+  obj-terminal-copresheaf-Precategory :
+    copresheaf-Precategory C l
+  obj-terminal-copresheaf-Precategory =
+    constant-functor-Precategory
+      C (Set-Precategory l) (raise-unit-Set l)
+
+  hom-terminal-copresheaf-Precategory :
+    ( X : copresheaf-Precategory C l) →
+    hom-Precategory
+      (copresheaf-precategory-Precategory C l)
+      X
+      obj-terminal-copresheaf-Precategory
+  pr1 (hom-terminal-copresheaf-Precategory X) c m = raise-star
+  pr2 (hom-terminal-copresheaf-Precategory X) f = refl
+
+  is-unique-hom-terminal-copresheaf-Precategory :
+    ( X : copresheaf-Precategory C l) →
+    ( τ :
+      hom-Precategory
+        (copresheaf-precategory-Precategory C l)
+        X
+        obj-terminal-copresheaf-Precategory) →
+    hom-terminal-copresheaf-Precategory X ＝ τ
+  is-unique-hom-terminal-copresheaf-Precategory X τ =
+    eq-htpy-hom-family-natural-transformation-Precategory
+      ( C)
+      ( Set-Precategory l)
+      ( X)
+      ( obj-terminal-copresheaf-Precategory)
+      ( hom-terminal-copresheaf-Precategory X)
+      ( τ)
+      ( λ x → eq-htpy (λ _ → eq-is-prop is-prop-raise-unit))
+
+  terminal-copresheaf-Precategory :
+    terminal-obj-Precategory
+      (copresheaf-precategory-Precategory C l)
+  pr1 terminal-copresheaf-Precategory =
+    obj-terminal-copresheaf-Precategory
+  pr1 (pr2 terminal-copresheaf-Precategory X) =
+    hom-terminal-copresheaf-Precategory X
+  pr2 (pr2 terminal-copresheaf-Precategory X) τ =
+    is-unique-hom-terminal-copresheaf-Precategory X τ
 ```
 
 ## See also

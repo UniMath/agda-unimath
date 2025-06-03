@@ -20,7 +20,7 @@ open import foundation.unit-type
 ## Idea
 
 The
-{{#concept "Hardy-Ramanujan number" Agda=Hardy-Ramanujan-ℕ WD="1729" WDID=Q825176}}
+{{#concept "Hardy-Ramanujan number" Agda=Hardy-Ramanujan-ℕ WD="1729" WDID=Q825176 Agda=Hardy-Ramanujan-ℕ}}
 is the number `1729`. This number is the second
 [taxicab number](elementary-number-theory.taxicab-numbers.md), i.e., it is the
 least natural number that can be written as a sum of cubes of positive natural

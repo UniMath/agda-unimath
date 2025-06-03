@@ -66,6 +66,10 @@ eq-Eq-classical-Fin (succ-ℕ k) (pair (succ-ℕ x) p) (pair (succ-ℕ y) q) e =
     ( pair x p)
     ( pair y q)
     ( eq-Eq-classical-Fin k (pair x p) (pair y q) (is-injective-succ-ℕ e))
+
+Eq-eq-classical-Fin :
+  (k : ℕ) (x y : classical-Fin k) → x ＝ y → Eq-classical-Fin k x y
+Eq-eq-classical-Fin k x y refl = refl
 ```
 
 ### The classical finite types are equivalent to the standard finite types

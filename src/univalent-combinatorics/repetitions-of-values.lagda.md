@@ -128,18 +128,18 @@ is-decidable-has-repetition-of-values-Fin k l f =
 ### If `f` is not injective, then it has a `repetition-of-values`
 
 ```text
-is-injective-map-Fin-zero-Fin :
+is-injective-map-Fin-0-Fin :
   {k : ℕ} (f : Fin zero-ℕ → Fin k) → is-injective f
-is-injective-map-Fin-zero-Fin f {()}
+is-injective-map-Fin-0-Fin f {()}
 
-is-injective-map-Fin-one-Fin : {k : ℕ} (f : Fin 1 → Fin k) → is-injective f
-is-injective-map-Fin-one-Fin f {inr star} {inr star} p = refl
+is-injective-map-Fin-1-Fin : {k : ℕ} (f : Fin 1 → Fin k) → is-injective f
+is-injective-map-Fin-1-Fin f {inr star} {inr star} p = refl
 
 has-repetition-of-values-is-not-injective-Fin :
   (k l : ℕ) (f : Fin l → Fin k) →
   is-not-injective f → has-repetition-of-values f
 has-repetition-of-values-is-not-injective-Fin k zero-ℕ f H =
-  ex-falso (H (is-injective-map-Fin-zero-Fin {k} f))
+  ex-falso (H (is-injective-map-Fin-0-Fin {k} f))
 has-repetition-of-values-is-not-injective-Fin k (succ-ℕ l) f H with
   is-decidable-is-repetition-of-values-Fin (succ-ℕ l) k f (inr star)
 ... | inl r = pair (inr star) r

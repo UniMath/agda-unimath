@@ -24,7 +24,9 @@ open import foundation.identity-types
 
 ## Idea
 
-The **Legendre symbol** is a function which determines whether or not an
+The
+{{#concept "Legendre symbol" WD="Legendre symbol" WDID=Q748339 Agda=legendre-symbol}}
+is a function which determines whether or not an
 [integer](elementary-number-theory.integers.md) is a perfect square in the ring
 `ℤₚ` of [integers modulo `p`](elementary-number-theory.modular-arithmetic.md)
 (i.e. whether or not it is a quadratic residue). Specifically, let `p : Prime-ℕ`

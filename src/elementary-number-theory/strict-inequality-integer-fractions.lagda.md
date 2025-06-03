@@ -26,6 +26,7 @@ open import elementary-number-theory.positive-integers
 open import elementary-number-theory.strict-inequality-integers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -157,41 +158,42 @@ module _
   (p q r : fraction-ℤ)
   where
 
-  concatenate-le-leq-fraction-ℤ :
-    le-fraction-ℤ p q →
-    leq-fraction-ℤ q r →
-    le-fraction-ℤ p r
-  concatenate-le-leq-fraction-ℤ H H' =
-    is-positive-right-factor-mul-ℤ
-      ( is-positive-eq-ℤ
-        ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
-        ( is-positive-add-nonnegative-positive-ℤ
-          ( is-nonnegative-mul-ℤ
-            ( is-nonnegative-is-positive-ℤ
-              ( is-positive-denominator-fraction-ℤ p))
-            ( H'))
-          ( is-positive-mul-ℤ
-            ( is-positive-denominator-fraction-ℤ r)
-            ( H))))
-      ( is-positive-denominator-fraction-ℤ q)
+  abstract
+    concatenate-le-leq-fraction-ℤ :
+      le-fraction-ℤ p q →
+      leq-fraction-ℤ q r →
+      le-fraction-ℤ p r
+    concatenate-le-leq-fraction-ℤ H H' =
+      is-positive-right-factor-mul-ℤ
+        ( is-positive-eq-ℤ
+          ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
+          ( is-positive-add-nonnegative-positive-ℤ
+            ( is-nonnegative-mul-ℤ
+              ( is-nonnegative-is-positive-ℤ
+                ( is-positive-denominator-fraction-ℤ p))
+              ( H'))
+            ( is-positive-mul-ℤ
+              ( is-positive-denominator-fraction-ℤ r)
+              ( H))))
+        ( is-positive-denominator-fraction-ℤ q)
 
-  concatenate-leq-le-fraction-ℤ :
-    leq-fraction-ℤ p q →
-    le-fraction-ℤ q r →
-    le-fraction-ℤ p r
-  concatenate-leq-le-fraction-ℤ H H' =
-    is-positive-right-factor-mul-ℤ
-      ( is-positive-eq-ℤ
-        ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
-        ( is-positive-add-positive-nonnegative-ℤ
-          ( is-positive-mul-ℤ
-            ( is-positive-denominator-fraction-ℤ p)
-            ( H'))
-          ( is-nonnegative-mul-ℤ
-            ( is-nonnegative-is-positive-ℤ
-              ( is-positive-denominator-fraction-ℤ r))
-            ( H))))
-      ( is-positive-denominator-fraction-ℤ q)
+    concatenate-leq-le-fraction-ℤ :
+      leq-fraction-ℤ p q →
+      le-fraction-ℤ q r →
+      le-fraction-ℤ p r
+    concatenate-leq-le-fraction-ℤ H H' =
+      is-positive-right-factor-mul-ℤ
+        ( is-positive-eq-ℤ
+          ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
+          ( is-positive-add-positive-nonnegative-ℤ
+            ( is-positive-mul-ℤ
+              ( is-positive-denominator-fraction-ℤ p)
+              ( H'))
+            ( is-nonnegative-mul-ℤ
+              ( is-nonnegative-is-positive-ℤ
+                ( is-positive-denominator-fraction-ℤ r))
+              ( H))))
+        ( is-positive-denominator-fraction-ℤ q)
 ```
 
 ### Chaining rules for similarity and strict inequality on the integer fractions
@@ -338,4 +340,18 @@ module _
           ( left-negative-law-mul-ℤ
             ( numerator-fraction-ℤ x)
             ( denominator-fraction-ℤ y))))
+```
+
+### Negation reverses the order of strict inequality on integer fractions
+
+```agda
+neg-le-fraction-ℤ :
+  (x y : fraction-ℤ) →
+  le-fraction-ℤ x y →
+  le-fraction-ℤ (neg-fraction-ℤ y) (neg-fraction-ℤ x)
+neg-le-fraction-ℤ (m , n , p) (m' , n' , p') H =
+  binary-tr le-ℤ
+    ( inv (left-negative-law-mul-ℤ m' n))
+    ( inv (left-negative-law-mul-ℤ m n'))
+    ( neg-le-ℤ (m *ℤ n') (m' *ℤ n) H)
 ```

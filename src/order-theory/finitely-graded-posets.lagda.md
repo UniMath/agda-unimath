@@ -403,7 +403,7 @@ module _
 
     is-top-element-Finitely-Graded-Poset-Prop : Prop (l1 ⊔ l2)
     is-top-element-Finitely-Graded-Poset-Prop =
-      is-top-element-Poset-Prop
+      is-top-element-prop-Poset
         ( poset-Finitely-Graded-Poset X)
         ( element-face-Finitely-Graded-Poset X x)
 

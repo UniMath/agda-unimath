@@ -186,7 +186,7 @@ module _
   compute-vertex-on-walk-Undirected-Graph refl-walk-Undirected-Graph =
     equiv-is-contr
       ( is-contr-vertex-on-walk-refl-walk-Undirected-Graph G x)
-      ( is-contr-Fin-one-ℕ)
+      ( is-contr-Fin-1)
   compute-vertex-on-walk-Undirected-Graph
     ( cons-walk-Undirected-Graph p e {y} w) =
     ( equiv-coproduct
@@ -520,4 +520,4 @@ module _
 - [Path](https://www.wikidata.org/entity/Q917421) on Wikidata
 - [Path (graph theory)](<https://en.wikipedia.org/wiki/Path_(graph_theory)>) at
   Wikipedia
-- [Walk](https://mathworld.wolfram.com/Walk.html) at Wolfram Mathworld
+- [Walk](https://mathworld.wolfram.com/Walk.html) at Wolfram MathWorld

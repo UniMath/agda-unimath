@@ -14,11 +14,15 @@ open import category-theory.functors-large-precategories
 open import category-theory.functors-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
+open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
+open import category-theory.precategory-of-functors
 
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 ```
 
@@ -100,6 +104,50 @@ module _
       ( large-precategory-Large-Category C)
       ( large-precategory-Large-Category D)
       ( d)
+```
+
+## Properties
+
+### The constant functor induces a functor into the precategory of functors
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (C : Precategory l1 l2) (D : Precategory l3 l4)
+  where
+
+  natural-transformation-constant-functor-Precategory :
+    {x y : obj-Precategory D}
+    (f : hom-Precategory D x y) →
+    natural-transformation-Precategory C D
+      (constant-functor-Precategory C D x)
+      (constant-functor-Precategory C D y)
+  pr1 (natural-transformation-constant-functor-Precategory f) _ = f
+  pr2 (natural-transformation-constant-functor-Precategory f) h =
+    left-unit-law-comp-hom-Precategory D _ ∙
+    inv (right-unit-law-comp-hom-Precategory D _)
+
+  functor-constant-functor-Precategory :
+    functor-Precategory D (functor-precategory-Precategory C D)
+  pr1 functor-constant-functor-Precategory x =
+    constant-functor-Precategory C D x
+  pr1 (pr2 functor-constant-functor-Precategory) f =
+    natural-transformation-constant-functor-Precategory f
+  pr1 (pr2 (pr2 functor-constant-functor-Precategory)) g f =
+    eq-pair-Σ
+      ( refl)
+      ( eq-is-prop
+        ( is-prop-is-natural-transformation-Precategory C D
+          ( constant-functor-Precategory C D _)
+          ( constant-functor-Precategory C D _)
+          ( _)))
+  pr2 (pr2 (pr2 functor-constant-functor-Precategory)) x =
+    eq-pair-Σ
+      ( refl)
+      ( eq-is-prop
+        ( is-prop-is-natural-transformation-Precategory C D
+          ( constant-functor-Precategory C D _)
+          ( constant-functor-Precategory C D _)
+          ( _)))
 ```
 
 ## External links

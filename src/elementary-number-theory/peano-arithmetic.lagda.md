@@ -22,9 +22,9 @@ open import foundation.universe-levels
 
 ## Axioms
 
-We state the Peano axioms in type theory, using the
-[identity type](foundation-core.identity-types.md) as equality, and prove that
-they hold for the
+We state the {{#concept "Peano axioms" WD="Peano axioms" WDID=Q842755}} in type
+theory using the [identity type](foundation-core.identity-types.md) as equality,
+and prove that they hold for the
 [natural numbers `ℕ`](elementary-number-theory.natural-numbers.md).
 
 ### Peano's 1st axiom
@@ -39,7 +39,7 @@ peano-1-ℕ : peano-axiom-1 ℕ
 peano-1-ℕ = zero-ℕ
 ```
 
-## Peano's 2nd axiom
+### Peano's 2nd axiom
 
 The identity relation on the natural numbers is reflexive. I.e. for every
 natural number `x`, it is true that `x ＝ x`.
@@ -67,8 +67,8 @@ peano-3-ℕ x y = inv
 
 ### Peano's 4th axiom
 
-The identity relation on the natural numbers is transitive. I.e. if `y ＝ z` and
-`x ＝ y`, then `x ＝ z`.
+The identity relation on the natural numbers is transitive. I.e., if `y ＝ z`
+and `x ＝ y`, then `x ＝ z`.
 
 ```agda
 peano-axiom-4 : {l : Level} → UU l → UU l
@@ -156,8 +156,7 @@ peano-9-ℕ P = ind-ℕ {P = type-Prop ∘ P}
 ## External links
 
 - [Peano arithmetic](https://ncatlab.org/nlab/show/Peano+arithmetic) at $n$Lab
-- [Peano axioms](https://www.wikidata.org/wiki/Q842755) at Wikidata
 - [Peano axioms](https://www.britannica.com/science/Peano-axioms) at Britannica
 - [Peano axioms](https://en.wikipedia.org/wiki/Peano_axioms) at Wikipedia
 - [Peano's Axioms](https://mathworld.wolfram.com/PeanosAxioms.html) at Wolfram
-  Mathworld
+  MathWorld

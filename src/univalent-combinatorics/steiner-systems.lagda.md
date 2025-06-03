@@ -34,18 +34,19 @@ in `P`. A basic example is the Fano plane, which is a Steiner system of type
 ```agda
 Steiner-System : ℕ → ℕ → ℕ → UU (lsuc lzero)
 Steiner-System t k n =
-  Σ ( UU-Fin lzero n)
+  Σ ( Type-With-Cardinality-ℕ lzero n)
     ( λ X →
       Σ ( decidable-subtype lzero
-          ( Σ ( decidable-subtype lzero (type-UU-Fin n X))
-              ( λ P → has-cardinality k (type-decidable-subtype P))))
+          ( Σ ( decidable-subtype lzero (type-Type-With-Cardinality-ℕ n X))
+              ( λ P → has-cardinality-ℕ k (type-decidable-subtype P))))
         ( λ P →
-          ( Q : decidable-subtype lzero (type-UU-Fin n X)) →
-          has-cardinality t (type-decidable-subtype Q) →
+          ( Q :
+            decidable-subtype lzero (type-Type-With-Cardinality-ℕ n X)) →
+          has-cardinality-ℕ t (type-decidable-subtype Q) →
           is-contr
             ( Σ ( type-decidable-subtype P)
                 ( λ U →
-                  (x : type-UU-Fin n X) →
+                  (x : type-Type-With-Cardinality-ℕ n X) →
                   is-in-decidable-subtype Q x →
                   is-in-decidable-subtype (pr1 (pr1 U)) x))))
 ```

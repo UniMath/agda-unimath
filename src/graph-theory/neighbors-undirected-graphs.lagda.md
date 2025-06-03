@@ -60,8 +60,8 @@ module _
       ( λ y →
         edge-Undirected-Graph H
           ( standard-unordered-pair (vertex-equiv-Undirected-Graph G H e x) y))
-      ( equiv-vertex-equiv-Undirected-Graph G H e)
-      ( equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph
+      ( vertex-equiv-equiv-Undirected-Graph G H e)
+      ( edge-equiv-standard-unordered-pair-vertices-equiv-Undirected-Graph
           G H e x)
 
   neighbor-equiv-Undirected-Graph :
@@ -86,4 +86,4 @@ neighbor-id-equiv-Undirected-Graph G x (pair y e) =
 - [Neighborhood (graph theory)](<https://en.wikipedia.org/wiki/Neighbourhood_(graph_theory)>)
   at Wikipedia
 - [Graph neighborhood](https://mathworld.wolfram.com/GraphNeighborhood.html) at
-  Wolfram Mathworld
+  Wolfram MathWorld

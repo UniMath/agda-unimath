@@ -1,6 +1,6 @@
 # Species
 
-## Files in the species folder
+## Modules in the species namespace
 
 ```agda
 module species where

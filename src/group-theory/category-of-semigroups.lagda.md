@@ -10,6 +10,7 @@ module group-theory.category-of-semigroups where
 open import category-theory.categories
 open import category-theory.large-categories
 
+open import foundation.1-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
@@ -59,4 +60,13 @@ is-large-category-Large-Category Semigroup-Large-Category =
 ```agda
 Semigroup-Category : (l : Level) → Category (lsuc l) l
 Semigroup-Category = category-Large-Category Semigroup-Large-Category
+```
+
+## Corollaries
+
+### The type of semigroups is a 1-type
+
+```agda
+is-1-type-Semigroup : {l : Level} → is-1-type (Semigroup l)
+is-1-type-Semigroup {l} = is-1-type-obj-Category (Semigroup-Category l)
 ```

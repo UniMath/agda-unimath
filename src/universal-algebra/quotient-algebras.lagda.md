@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations
 open import foundation.equivalences
+open import foundation.finite-sequences-set-quotients
 open import foundation.functoriality-propositional-truncation
 open import foundation.multivariable-functoriality-set-quotients
 open import foundation.multivariable-operations
@@ -22,9 +23,8 @@ open import foundation.set-quotients
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.vectors-set-quotients
 
-open import linear-algebra.vectors
+open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
@@ -83,21 +83,22 @@ module _
   equivalence-class-set-quotient-Algebra =
     map-inv-equiv compute-quotient-Algebra
 
-  vec-type-quotient-vec-type-Algebra :
+  tuple-type-quotient-tuple-type-Algebra :
     { n : ℕ} →
-    vec type-quotient-Algebra n →
-    type-trunc-Prop (vec (type-Algebra Sg Th Alg) n)
-  vec-type-quotient-vec-type-Algebra empty-vec = unit-trunc-Prop empty-vec
-  vec-type-quotient-vec-type-Algebra (x ∷ v) =
+    tuple type-quotient-Algebra n →
+    type-trunc-Prop (tuple (type-Algebra Sg Th Alg) n)
+  tuple-type-quotient-tuple-type-Algebra empty-tuple =
+    unit-trunc-Prop empty-tuple
+  tuple-type-quotient-tuple-type-Algebra (x ∷ v) =
     map-universal-property-trunc-Prop
       ( trunc-Prop _)
       ( λ (z , p) →
         map-trunc-Prop
           (λ v' → z ∷ v')
-          ( vec-type-quotient-vec-type-Algebra v))
+          ( tuple-type-quotient-tuple-type-Algebra v))
       ( pr2 (equivalence-class-set-quotient-Algebra x))
 
-  relation-holds-all-vec-all-sim-equivalence-relation :
+  relation-holds-all-tuple-all-sim-equivalence-relation :
     { n : ℕ}
     ( v v' : multivariable-input n ( λ _ → type-Algebra Sg Th Alg)) →
     ( type-Prop
@@ -105,15 +106,15 @@ module _
         ( all-sim-equivalence-relation n
           ( λ _ → type-Algebra Sg Th Alg)
           ( λ _ → equivalence-relation-congruence-Algebra Sg Th Alg R)) v v')) →
-    relation-holds-all-vec Sg Th Alg
+    relation-holds-all-tuple Sg Th Alg
       ( equivalence-relation-congruence-Algebra Sg Th Alg R)
-      ( vector-multivariable-input n (type-Algebra Sg Th Alg) v)
-      ( vector-multivariable-input n (type-Algebra Sg Th Alg) v')
-  relation-holds-all-vec-all-sim-equivalence-relation {zero-ℕ} v v' p =
+      ( tuple-multivariable-input n (type-Algebra Sg Th Alg) v)
+      ( tuple-multivariable-input n (type-Algebra Sg Th Alg) v')
+  relation-holds-all-tuple-all-sim-equivalence-relation {zero-ℕ} v v' p =
     raise-star
-  relation-holds-all-vec-all-sim-equivalence-relation
+  relation-holds-all-tuple-all-sim-equivalence-relation
     {succ-ℕ n} (x , v) (x' , v') (p , p') =
-    p , (relation-holds-all-vec-all-sim-equivalence-relation v v' p')
+    p , (relation-holds-all-tuple-all-sim-equivalence-relation v v' p')
 
   is-model-set-quotient-Algebra :
     is-model-signature Sg set-quotient-Algebra
@@ -126,22 +127,22 @@ module _
       ( pair
         ( λ v →
           is-model-set-Algebra Sg Th Alg op
-            ( vector-multivariable-input
+            ( tuple-multivariable-input
               ( arity-operation-signature Sg op)
               ( type-Algebra Sg Th Alg)
               ( v)))
         ( λ {v} {v'} p →
           preserves-operations-congruence-Algebra Sg Th Alg R op
-            ( vector-multivariable-input
+            ( tuple-multivariable-input
               ( arity-operation-signature Sg op)
               ( type-Algebra Sg Th Alg)
               ( v))
-            ( vector-multivariable-input
+            ( tuple-multivariable-input
               ( arity-operation-signature Sg op)
               ( type-Algebra Sg Th Alg)
               ( v'))
-            (relation-holds-all-vec-all-sim-equivalence-relation v v' p)))
-      ( multivariable-input-vector
+            (relation-holds-all-tuple-all-sim-equivalence-relation v v' p)))
+      ( multivariable-input-tuple
         ( arity-operation-signature Sg op)
         ( type-quotient-Algebra)
         ( v))

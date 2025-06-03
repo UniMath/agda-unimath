@@ -67,7 +67,7 @@ module _
   leq-Decidable-Total-Preorder-Prop :
     (x y : type-Decidable-Total-Preorder) → Prop l2
   leq-Decidable-Total-Preorder-Prop =
-    leq-Preorder-Prop preorder-Decidable-Total-Preorder
+    leq-prop-Preorder preorder-Decidable-Total-Preorder
 
   leq-Decidable-Total-Preorder :
     (x y : type-Decidable-Total-Preorder) → UU l2
@@ -83,7 +83,7 @@ module _
   le-Decidable-Total-Preorder-Prop :
     (x y : type-Decidable-Total-Preorder) → Prop (l1 ⊔ l2)
   le-Decidable-Total-Preorder-Prop =
-    le-Preorder-Prop preorder-Decidable-Total-Preorder
+    le-prop-Preorder preorder-Decidable-Total-Preorder
 
   le-Decidable-Total-Preorder :
     (x y : type-Decidable-Total-Preorder) → UU (l1 ⊔ l2)

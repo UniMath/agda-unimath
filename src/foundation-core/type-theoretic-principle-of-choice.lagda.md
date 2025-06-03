@@ -24,9 +24,11 @@ A dependent function taking values in a
 [dependent pair type](foundation.dependent-pair-types.md) is
 [equivalently](foundation-core.equivalences.md) described as a pair of dependent
 functions. This equivalence, which gives the distributivity of Π over Σ, is also
-known as the **type theoretic principle of choice**. Indeed, it is the
-Curry-Howard interpretation of (one formulation of) the
-[axiom of choice](foundation.axiom-of-choice.md).
+known as the
+{{#concept "type theoretic principle of choice" Agda=distributive-Π-Σ}}. Indeed,
+it is the
+[Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
+of (one formulation of) the [axiom of choice](foundation.axiom-of-choice.md).
 
 We establish this equivalence both for explicit and implicit function types.
 
@@ -188,3 +190,8 @@ module _
   pr1 equiv-mapping-into-Σ = mapping-into-Σ
   pr2 equiv-mapping-into-Σ = is-equiv-mapping-into-Σ
 ```
+
+## External links
+
+- [type theoretic axiom of choice](https://ncatlab.org/nlab/show/type+theoretic+axiom+of+choice)
+  at $n$Lab

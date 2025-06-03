@@ -26,6 +26,7 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
@@ -33,8 +34,11 @@ open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.transposition-inequalities-along-order-preserving-retractions-posets
+open import order-theory.transposition-inequalities-along-sections-of-order-preserving-maps-posets
 ```
 
 </details>
@@ -69,6 +73,13 @@ _≤-ℤ_ = leq-ℤ
 
 ## Properties
 
+### Zero is less than one
+
+```agda
+leq-zero-one-ℤ : leq-ℤ zero-ℤ one-ℤ
+leq-zero-one-ℤ = star
+```
+
 ### Inequality on the integers is reflexive, antisymmetric and transitive
 
 ```agda
@@ -99,6 +110,17 @@ leq-ℤ-Decidable-Prop x y =
   ( leq-ℤ x y ,
     is-prop-leq-ℤ x y ,
     is-decidable-leq-ℤ x y)
+```
+
+### The partially ordered set of integers ordered by inequality
+
+```agda
+ℤ-Preorder : Preorder lzero lzero
+ℤ-Preorder =
+  (ℤ , leq-ℤ-Prop , refl-leq-ℤ , transitive-leq-ℤ)
+
+ℤ-Poset : Poset lzero lzero
+ℤ-Poset = (ℤ-Preorder , λ x y → antisymmetric-leq-ℤ)
 ```
 
 ### Inequality on the integers is linear
@@ -169,6 +191,14 @@ preserves-leq-add-ℤ {a} {b} {c} {d} H K =
     ( b +ℤ d)
     ( preserves-leq-right-add-ℤ b c d K)
     ( preserves-leq-left-add-ℤ c a b H)
+
+right-add-hom-leq-ℤ : (z : ℤ) → hom-Poset ℤ-Poset ℤ-Poset
+pr1 (right-add-hom-leq-ℤ z) x = x +ℤ z
+pr2 (right-add-hom-leq-ℤ z) = preserves-leq-left-add-ℤ z
+
+left-add-hom-leq-ℤ : (z : ℤ) → hom-Poset ℤ-Poset ℤ-Poset
+pr1 (left-add-hom-leq-ℤ z) x = z +ℤ x
+pr2 (left-add-hom-leq-ℤ z) = preserves-leq-right-add-ℤ z
 ```
 
 ### Addition on the integers reflects inequality
@@ -199,17 +229,6 @@ leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
     ( ap (_-ℤ (succ-ℤ (int-ℕ x))) (succ-int-ℕ y) ∙
       ap ((int-ℕ (succ-ℕ y)) -ℤ_) (succ-int-ℕ x)))
   ( leq-int-ℕ x y H)
-```
-
-### The partially ordered set of integers ordered by inequality
-
-```agda
-ℤ-Preorder : Preorder lzero lzero
-ℤ-Preorder =
-  (ℤ , leq-ℤ-Prop , refl-leq-ℤ , transitive-leq-ℤ)
-
-ℤ-Poset : Poset lzero lzero
-ℤ-Poset = (ℤ-Preorder , λ x y → antisymmetric-leq-ℤ)
 ```
 
 ### An integer `x` is nonnegative if and only if `0 ≤ x`
@@ -283,6 +302,77 @@ module _
           ( zero-ℤ)
           ( leq-zero-is-nonpositive-ℤ y H)
           ( I))
+```
+
+### Negation of integers reverses inequality
+
+```agda
+neg-leq-ℤ : (x y : ℤ) → leq-ℤ x y → leq-ℤ (neg-ℤ y) (neg-ℤ x)
+neg-leq-ℤ x y =
+  tr
+    ( is-nonnegative-ℤ)
+    ( ap (_+ℤ neg-ℤ x) (inv (neg-neg-ℤ y)) ∙
+      commutative-add-ℤ (neg-ℤ (neg-ℤ y)) (neg-ℤ x))
+```
+
+### Transposing additions over inequalities of integers
+
+```agda
+leq-transpose-right-diff-ℤ : (x y z : ℤ) → x ≤-ℤ (y -ℤ z) → x +ℤ z ≤-ℤ y
+leq-transpose-right-diff-ℤ x y z x≤y-z =
+  leq-transpose-is-section-hom-Poset
+    ( ℤ-Poset)
+    ( ℤ-Poset)
+    ( right-add-hom-leq-ℤ z)
+    ( _-ℤ z)
+    ( is-section-right-add-neg-ℤ z)
+    ( x)
+    ( y)
+    ( x≤y-z)
+
+leq-transpose-right-add-ℤ : (x y z : ℤ) → x ≤-ℤ y +ℤ z → x -ℤ z ≤-ℤ y
+leq-transpose-right-add-ℤ x y z x≤y+z =
+  leq-transpose-is-section-hom-Poset
+    ( ℤ-Poset)
+    ( ℤ-Poset)
+    ( right-add-hom-leq-ℤ (neg-ℤ z))
+    ( _+ℤ z)
+    ( is-retraction-right-add-neg-ℤ z)
+    ( x)
+    ( y)
+    ( x≤y+z)
+
+leq-transpose-left-add-ℤ : (x y z : ℤ) → x +ℤ y ≤-ℤ z → x ≤-ℤ z -ℤ y
+leq-transpose-left-add-ℤ x y z x+y≤z =
+  leq-transpose-is-retraction-hom-Poset
+    ( ℤ-Poset)
+    ( ℤ-Poset)
+    ( _+ℤ y)
+    ( right-add-hom-leq-ℤ (neg-ℤ y))
+    ( is-retraction-right-add-neg-ℤ y)
+    ( x)
+    ( z)
+    ( x+y≤z)
+
+leq-transpose-left-diff-ℤ : (x y z : ℤ) → x -ℤ y ≤-ℤ z → x ≤-ℤ z +ℤ y
+leq-transpose-left-diff-ℤ x y z x-y≤z =
+  leq-transpose-is-retraction-hom-Poset
+    ( ℤ-Poset)
+    ( ℤ-Poset)
+    ( _-ℤ y)
+    ( right-add-hom-leq-ℤ y)
+    ( is-section-right-add-neg-ℤ y)
+    ( x)
+    ( z)
+    ( x-y≤z)
+
+leq-iff-transpose-left-add-ℤ : (x y z : ℤ) → (x +ℤ y ≤-ℤ z) ↔ (x ≤-ℤ z -ℤ y)
+pr1 (leq-iff-transpose-left-add-ℤ x y z) = leq-transpose-left-add-ℤ x y z
+pr2 (leq-iff-transpose-left-add-ℤ x y z) = leq-transpose-right-diff-ℤ x z y
+
+leq-iff-transpose-left-diff-ℤ : (x y z : ℤ) → (x -ℤ y ≤-ℤ z) ↔ (x ≤-ℤ z +ℤ y)
+pr1 (leq-iff-transpose-left-diff-ℤ x y z) = leq-transpose-left-diff-ℤ x y z
+pr2 (leq-iff-transpose-left-diff-ℤ x y z) = leq-transpose-right-add-ℤ x z y
 ```
 
 ## See also

@@ -69,7 +69,7 @@ module _
   abstract
     compute-tr-htpy :
       {f g : (x : A) → B x} (H : f ~ g) → statement-compute-tr-htpy H
-    compute-tr-htpy {f} {g} =
+    compute-tr-htpy {f} =
       ind-htpy f
         ( λ _ → statement-compute-tr-htpy)
         ( base-case-compute-tr-htpy)

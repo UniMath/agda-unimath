@@ -41,7 +41,7 @@ A **cocone under a [span](foundation.spans.md)** `A <-f- S -g-> B` with codomain
         g
     S -----> B
     |        |
-  f |        |j
+  f |        | j
     ∨        ∨
     A -----> X
         i
@@ -331,7 +331,7 @@ A variation on the above:
         i
     A -----> X
     |        |
-  f |        |g
+  f |        | g
     ∨   j    ∨
     B -----> Y
     |        |

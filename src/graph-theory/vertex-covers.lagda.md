@@ -47,5 +47,5 @@ vertex-cover G =
 
 - [Vertex cover](https://en.wikipedia.org/wiki/Vertex_cover) at Wikipedia
 - [Vertex cover](https://mathworld.wolfram.com/VertexCover.html) at Wolfram
-  Mathworld
+  MathWorld
 - [Vertex cover problem](https://www.wikidata.org/entity/Q924362) on Wikidata

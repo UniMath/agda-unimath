@@ -134,7 +134,6 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
 
     if has_wikidata_id:
         index_entry['wikidata'] = wikidata_id
-        # index_entry['link'] = f'{url_path}#{wikidata_id}'
         target_id = wikidata_id
 
         if has_wikidata_label:
@@ -144,13 +143,6 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
                    'provided for "' + entry_name + '"',
                    'without a corresponding label in', path)
             mut_error_locations.add(path)
-        # Useful if we wanted to link to a concept by WDID and give information
-        # to scrapers; currently we don't really want either
-        # anchor += f'<a id="{target_id}" class="wikidata"><span style="display:none">{plaintext}</span></a>'
-
-        # TODO: decide if we want this
-        # references.append(sup_link_reference(config.get(
-        #     'mathswitch-template').format(wikidata_id=wikidata_id), 'WD', True, True))
     else:
         if has_wikidata_label:
             eprint('Warning: Wikidata label', wikidata_label,
@@ -163,8 +155,6 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
         if agda_id is not None:
             destination = f'{url_path}#{agda_id}'
             index_entry['definition'] = destination
-            # TODO: decide if we want this
-            # references.append(sup_link_reference(destination, 'AG'))
         else:
             eprint('Warning: Concept definition not found:',
                    plaintext, '; expected', agda_name, 'to exist in',
@@ -200,15 +190,10 @@ def tag_concepts_chapter_rec_mut(chapter, config, mut_index, mut_error_locations
         wikidata_label = entry.pop('__wikidata_label', None)
         wikidata_id = entry.get('wikidata', None)
         if wikidata_label is not None and wikidata_id is not None:
-            mathswitch_link = config.get(
-                'mathswitch-template').format(wikidata_id=wikidata_id)
-            external_references.append(
-                f'<a href="{mathswitch_link}">{wikidata_label.capitalize()}</a> at Mathswitch')
             wikidata_link = config.get(
                 'wikidata-template').format(wikidata_id=wikidata_id)
-            # TODO: Decide if we want this
-            # external_references.append(
-            #     f'<a href="{wikidata_link}">{wikidata_label}</a> at Wikidata')
+            external_references.append(
+                f'<a href="{wikidata_link}">{wikidata_label.capitalize()}</a> at Wikidata')
         mut_index.append(entry)
     if external_references != []:
         formatted_references = ''.join(

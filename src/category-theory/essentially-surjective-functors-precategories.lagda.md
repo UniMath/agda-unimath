@@ -22,7 +22,8 @@ open import foundation.universe-levels
 ## Idea
 
 A [functor](category-theory.functors-precategories.md) `F : C → D` between
-[precategories](category-theory.precategories.md) is **essentially surjective**
+[precategories](category-theory.precategories.md) is
+{{#concept "essentially surjective" Disambiguation="functor between set-level precategories" WDID=Q140283 WD="essentially surjective functor" Agda=is-essentially-surjective-functor-Precategory Agda=essentially-surjective-functor-Precategory}}
 if there for every object `y : D`
 [merely exists](foundation.existential-quantification.md) an object `x : C` such
 that `F x ≅ y`.

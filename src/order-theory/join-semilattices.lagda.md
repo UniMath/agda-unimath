@@ -236,6 +236,48 @@ module _
             by ap (join-Join-Semilattice x) K
           ＝ z
             by H)
+
+  leq-left-join-Join-Semilattice :
+    (a b : type-Join-Semilattice) →
+    leq-Join-Semilattice a (join-Join-Semilattice a b)
+  leq-left-join-Join-Semilattice a b =
+    equational-reasoning
+      a ∨ (a ∨ b)
+      ＝ (a ∨ a) ∨ b by inv (associative-join-Join-Semilattice a a b)
+      ＝ a ∨ b by ap (_∨ b) (idempotent-join-Join-Semilattice a)
+
+  leq-right-join-Join-Semilattice :
+    (a b : type-Join-Semilattice) →
+    leq-Join-Semilattice b (join-Join-Semilattice a b)
+  leq-right-join-Join-Semilattice a b =
+    equational-reasoning
+      b ∨ (a ∨ b)
+      ＝ (a ∨ b) ∨ b by commutative-join-Join-Semilattice _ _
+      ＝ a ∨ (b ∨ b) by associative-join-Join-Semilattice a b b
+      ＝ a ∨ b by ap (a ∨_) (idempotent-join-Join-Semilattice b)
+
+  join-leq-leq-Join-Semilattice :
+    (a b c d : type-Join-Semilattice) →
+    leq-Join-Semilattice a b → leq-Join-Semilattice c d →
+    leq-Join-Semilattice (join-Join-Semilattice a c) (join-Join-Semilattice b d)
+  join-leq-leq-Join-Semilattice a b c d a≤b c≤d =
+    forward-implication
+      ( is-least-binary-upper-bound-join-Join-Semilattice
+        ( a)
+        ( c)
+        ( join-Join-Semilattice b d))
+      ( transitive-leq-Join-Semilattice
+          ( a)
+          ( b)
+          ( b ∨ d)
+          ( leq-left-join-Join-Semilattice b d)
+          ( a≤b) ,
+        transitive-leq-Join-Semilattice
+          ( c)
+          ( d)
+          ( b ∨ d)
+          ( leq-right-join-Join-Semilattice b d)
+          ( c≤d))
 ```
 
 ### The predicate on posets of being a join-semilattice
@@ -252,7 +294,7 @@ module _
       ( λ x →
         Π-Prop
           ( type-Poset P)
-          ( has-least-binary-upper-bound-Poset-Prop P x))
+          ( has-least-binary-upper-bound-prop-Poset P x))
 
   is-join-semilattice-Poset : UU (l1 ⊔ l2)
   is-join-semilattice-Poset = type-Prop is-join-semilattice-Poset-Prop
@@ -308,7 +350,7 @@ module _
   leq-Order-Theoretic-Join-Semilattice-Prop :
     (x y : type-Order-Theoretic-Join-Semilattice) → Prop l2
   leq-Order-Theoretic-Join-Semilattice-Prop =
-    leq-Poset-Prop poset-Order-Theoretic-Join-Semilattice
+    leq-prop-Poset poset-Order-Theoretic-Join-Semilattice
 
   leq-Order-Theoretic-Join-Semilattice :
     (x y : type-Order-Theoretic-Join-Semilattice) → UU l2
@@ -412,6 +454,32 @@ module _
         ( y)
         ( z))
       ( H , K)
+
+  join-leq-leq-Order-Theoretic-Join-Semilattice :
+    (a b c d : type-Order-Theoretic-Join-Semilattice) →
+    leq-Order-Theoretic-Join-Semilattice a b →
+    leq-Order-Theoretic-Join-Semilattice c d →
+    leq-Order-Theoretic-Join-Semilattice
+      ( join-Order-Theoretic-Join-Semilattice a c)
+      ( join-Order-Theoretic-Join-Semilattice b d)
+  join-leq-leq-Order-Theoretic-Join-Semilattice a b c d a≤b c≤d =
+    forward-implication
+      ( is-least-binary-upper-bound-join-Order-Theoretic-Join-Semilattice
+        ( a)
+        ( c)
+        ( b ∨ d))
+      ( transitive-leq-Order-Theoretic-Join-Semilattice
+          ( a)
+          ( b)
+          ( b ∨ d)
+          ( leq-left-join-Order-Theoretic-Join-Semilattice b d)
+          ( a≤b) ,
+        transitive-leq-Order-Theoretic-Join-Semilattice
+          ( c)
+          ( d)
+          ( b ∨ d)
+          ( leq-right-join-Order-Theoretic-Join-Semilattice b d)
+          ( c≤d))
 ```
 
 ## Properties

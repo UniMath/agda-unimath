@@ -126,7 +126,7 @@ module _
                 ( fam-coproduct (A x) (B x) (f x))) ∘e
               ( equiv-diagonal-exponential-is-contr
                 ( fam-coproduct (A x) (B x) (f x))
-                ( is-contr-is-zero-or-one-Fin-two-ℕ (f x))))))) ∘e
+                ( is-contr-is-zero-or-one-Fin-2 (f x))))))) ∘e
       ( distributive-Π-Σ)) ∘e
     ( equiv-Π-equiv-family
       ( λ x → inv-compute-total-fam-coproduct (A x) (B x)))

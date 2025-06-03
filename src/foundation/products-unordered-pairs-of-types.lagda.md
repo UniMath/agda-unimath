@@ -61,7 +61,7 @@ equiv-pr-product-unordered-pair-types A i =
         ( compute-map-equiv-point-2-Element-Type'
           ( 2-element-type-unordered-pair A)
           ( i)))) ∘e
-    ( equiv-dependent-universal-property-Fin-two-ℕ
+    ( equiv-dependent-universal-property-Fin-2
       ( ( element-unordered-pair A) ∘
         ( map-equiv-point-2-Element-Type
           ( 2-element-type-unordered-pair A)

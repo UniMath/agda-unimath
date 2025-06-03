@@ -13,7 +13,9 @@ open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-types
+open import foundation.morphisms-arrows
 open import foundation.standard-pullbacks
+open import foundation.type-arithmetic-standard-pullbacks
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
@@ -195,6 +197,14 @@ module _
   is-pullback-standard-pullback = is-equiv-id
 ```
 
+### The identity cone is a pullback
+
+```agda
+is-pullback-id-cone : {l : Level} (A : UU l) → is-pullback id id (id-cone A)
+is-pullback-id-cone A =
+  is-equiv-is-invertible pr1 (λ where (x , .x , refl) → refl) refl-htpy
+```
+
 ### Pullbacks are preserved under homotopies of parallel cones
 
 ```agda
@@ -207,7 +217,7 @@ module _
     {c : cone f g C} {c' : cone f' g' C} (Hc : htpy-parallel-cone Hf Hg c c') →
     gap f g c ~ map-equiv-standard-pullback-htpy Hf Hg ∘ gap f' g' c'
   triangle-is-pullback-htpy {p , q , H} {p' , q' , H'} (Hp , Hq , HH) z =
-    map-extensionality-standard-pullback f g
+    eq-Eq-standard-pullback f g
       ( Hp z)
       ( Hq z)
       ( ( inv (assoc (ap f (Hp z)) (Hf (p' z) ∙ H' z) (inv (Hg (q' z))))) ∙
@@ -283,6 +293,22 @@ abstract
 
 ### A cone is a pullback if and only if it induces a family of equivalences between the fibers of the vertical maps
 
+A cone is a pullback if and only if the induced family of maps on fibers between
+the vertical maps is a family of equivalences
+
+```text
+  fiber i a --> fiber g (f a)
+      |               |
+      |               |
+      ∨               ∨
+      C ------------> B
+      |               |
+    i |               | g
+      ∨               ∨
+  a ∈ A ------------> X.
+              f
+```
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
@@ -290,7 +316,7 @@ module _
   where
 
   square-tot-map-fiber-vertical-map-cone :
-    gap f g c ∘ map-equiv-total-fiber (pr1 c) ~
+    gap f g c ∘ map-equiv-total-fiber (vertical-map-cone f g c) ~
     tot (λ _ → tot (λ _ → inv)) ∘ tot (map-fiber-vertical-map-cone f g c)
   square-tot-map-fiber-vertical-map-cone
     (.(vertical-map-cone f g c x) , x , refl) =
@@ -330,6 +356,73 @@ module _
           ( λ x →
             is-equiv-tot-is-fiberwise-equiv (λ y → is-equiv-inv (g y) (f x))))
         ( is-equiv-tot-is-fiberwise-equiv is-equiv-fsq)
+```
+
+### A cone is a pullback if and only if it induces a family of equivalences between the fibers of the horizontal maps
+
+A cone is a pullback if and only if the induced family of maps on fibers between
+the horizontal maps is a family of equivalences
+
+```text
+                            j
+      fiber j b ----> C --------> B ∋ b
+          |           |           |
+          |           |           | g
+          ∨           ∨           ∨
+    fiber f (g b) --> A --------> X.
+                            f
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
+  (f : A → X) (g : B → X) (c : cone f g C)
+  where
+
+  square-tot-map-fiber-horizontal-map-cone :
+    ( gap g f (swap-cone f g c) ∘
+      map-equiv-total-fiber (horizontal-map-cone f g c)) ~
+    ( tot (λ _ → tot (λ _ → inv)) ∘
+      tot (map-fiber-horizontal-map-cone f g c))
+  square-tot-map-fiber-horizontal-map-cone
+    (.(horizontal-map-cone f g c x) , x , refl) =
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
+        ( ap
+          ( inv)
+          ( inv (right-unit ∙ inv-inv (coherence-square-cone f g c x)))))
+
+  square-tot-map-fiber-horizontal-map-cone' :
+    ( ( λ x →
+        ( horizontal-map-cone f g c x ,
+          vertical-map-cone f g c x ,
+          coherence-square-cone f g c x)) ∘
+      map-equiv-total-fiber (horizontal-map-cone f g c)) ~
+    tot (map-fiber-horizontal-map-cone f g c)
+  square-tot-map-fiber-horizontal-map-cone'
+    (.(horizontal-map-cone f g c x) , x , refl) =
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
+        ( inv (right-unit ∙ inv-inv (coherence-square-cone f g c x))))
+
+  abstract
+    is-fiberwise-equiv-map-fiber-horizontal-map-cone-is-pullback :
+      is-pullback f g c →
+      is-fiberwise-equiv (map-fiber-horizontal-map-cone f g c)
+    is-fiberwise-equiv-map-fiber-horizontal-map-cone-is-pullback pb =
+      is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback g f
+        ( swap-cone f g c)
+        ( is-pullback-swap-cone f g c pb)
+
+  abstract
+    is-pullback-is-fiberwise-equiv-map-fiber-horizontal-map-cone :
+      is-fiberwise-equiv (map-fiber-horizontal-map-cone f g c) →
+      is-pullback f g c
+    is-pullback-is-fiberwise-equiv-map-fiber-horizontal-map-cone is-equiv-fsq =
+      is-pullback-swap-cone' f g c
+        ( is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone g f
+          ( swap-cone f g c)
+          ( is-equiv-fsq))
 ```
 
 ### The horizontal pullback pasting property

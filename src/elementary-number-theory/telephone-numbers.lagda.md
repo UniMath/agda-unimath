@@ -16,10 +16,11 @@ open import elementary-number-theory.natural-numbers
 
 ## Idea
 
-The telephone numbers are a sequence of natural numbers that count the way `n`
-telephone lines can be connected to each other, where each line can be connected
-to at most one other line. They also occur in several other combinatorics
-problems.
+The
+{{#concept "telephone numbers" WD="Telephone number" WDID=Q7696507 Agda=telephone-number}}
+are a sequence of natural numbers that count the way `n` telephone lines can be
+connected to each other, where each line can be connected to at most one other
+line. They also occur in several other combinatorics problems.
 
 ## Definitions
 

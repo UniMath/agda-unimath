@@ -102,7 +102,7 @@ Given a map `f : A → B` with a family of maps over it
 
 ```text
          map-Σ f g
-  Σ A P ----------> Σ B Q
+  Σ A P ---------> Σ B Q
     |                |
     |                |
     ∨                ∨
@@ -368,10 +368,7 @@ module _
     is-pullback-tot-is-pullback-family Y f g
       ( id-cone I)
       ( c)
-      ( is-pullback-is-equiv-vertical-maps id id
-        ( id-cone I)
-        ( is-equiv-id)
-        ( is-equiv-id))
+      ( is-pullback-id-cone I)
 
   is-pullback-family-id-cone-is-pullback-tot :
     is-pullback (tot f) (tot g) tot-cone →
@@ -380,10 +377,7 @@ module _
     is-pullback-family-is-pullback-tot Y f g
       ( id-cone I)
       ( c)
-      ( is-pullback-is-equiv-vertical-maps id id
-        ( id-cone I)
-        ( is-equiv-id)
-        ( is-equiv-id))
+      ( is-pullback-id-cone I)
 ```
 
 ## Table of files about pullbacks

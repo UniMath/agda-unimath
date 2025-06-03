@@ -27,7 +27,9 @@ open import foundation-core.propositions
 
 ## Idea
 
-A discrete type is a type that has decidable equality.
+A {{#concept "discrete type"}} is a type that has
+[decidable equality](foundation.decidable-equality.md). Consequently, discrete
+types are [sets](foundation-core.sets.md) by Hedberg's theorem.
 
 ## Properties
 
@@ -88,3 +90,8 @@ module _
   pr2 type-with-tight-apartness-Discrete-Type =
     is-tight-apart-Discrete-Type
 ```
+
+## External links
+
+- [classical set](https://ncatlab.org/nlab/show/classical+set) at $n$Lab
+- [decidable object](https://ncatlab.org/nlab/show/decidable+object) at $n$Lab

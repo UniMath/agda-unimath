@@ -36,8 +36,8 @@ open import foundation.universe-levels
 
 A natural number `m` is said to **divide** a natural number `n` if there exists
 a natural number `k` equipped with an identification `km ＝ n`. Using the
-Curry-Howard interpretation of logic into type theory, we express divisibility
-as follows:
+[Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
+of logic into type theory, we express divisibility as follows:
 
 ```text
   div-ℕ m n := Σ (k : ℕ), k *ℕ m ＝ n.

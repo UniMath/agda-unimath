@@ -111,6 +111,18 @@ module _
       ( descent-data-family-with-descent-data-pushout)
   equiv-descent-data-family-with-descent-data-pushout = pr2 (pr2 P)
 
+  inv-equiv-descent-data-family-with-descent-data-pushout :
+    equiv-descent-data-pushout
+      ( descent-data-family-with-descent-data-pushout)
+      ( descent-data-family-cocone-span-diagram c
+        ( family-cocone-family-with-descent-data-pushout))
+  inv-equiv-descent-data-family-with-descent-data-pushout =
+    inv-equiv-descent-data-pushout
+      ( descent-data-family-cocone-span-diagram c
+        ( family-cocone-family-with-descent-data-pushout))
+      ( descent-data-family-with-descent-data-pushout)
+      ( equiv-descent-data-family-with-descent-data-pushout)
+
   left-equiv-family-with-descent-data-pushout :
     (a : domain-span-diagram 𝒮) →
     family-cocone-family-with-descent-data-pushout
@@ -145,6 +157,18 @@ module _
       ( descent-data-family-with-descent-data-pushout)
       ( equiv-descent-data-family-with-descent-data-pushout)
 
+  inv-left-map-family-with-descent-data-pushout :
+    (a : domain-span-diagram 𝒮) →
+    left-family-family-with-descent-data-pushout a →
+    family-cocone-family-with-descent-data-pushout
+      ( horizontal-map-cocone _ _ c a)
+  inv-left-map-family-with-descent-data-pushout =
+    inv-left-map-equiv-descent-data-pushout
+      ( descent-data-family-cocone-span-diagram c
+        ( family-cocone-family-with-descent-data-pushout))
+      ( descent-data-family-with-descent-data-pushout)
+      ( equiv-descent-data-family-with-descent-data-pushout)
+
   right-equiv-family-with-descent-data-pushout :
     (b : codomain-span-diagram 𝒮) →
     family-cocone-family-with-descent-data-pushout
@@ -164,6 +188,28 @@ module _
     right-family-family-with-descent-data-pushout b
   right-map-family-with-descent-data-pushout =
     right-map-equiv-descent-data-pushout
+      ( descent-data-family-cocone-span-diagram c
+        ( family-cocone-family-with-descent-data-pushout))
+      ( descent-data-family-with-descent-data-pushout)
+      ( equiv-descent-data-family-with-descent-data-pushout)
+
+  is-equiv-right-map-family-with-descent-data-pushout :
+    (b : codomain-span-diagram 𝒮) →
+    is-equiv (right-map-family-with-descent-data-pushout b)
+  is-equiv-right-map-family-with-descent-data-pushout =
+    is-equiv-right-map-equiv-descent-data-pushout
+      ( descent-data-family-cocone-span-diagram c
+        ( family-cocone-family-with-descent-data-pushout))
+      ( descent-data-family-with-descent-data-pushout)
+      ( equiv-descent-data-family-with-descent-data-pushout)
+
+  inv-right-map-family-with-descent-data-pushout :
+    (b : codomain-span-diagram 𝒮) →
+    right-family-family-with-descent-data-pushout b →
+    family-cocone-family-with-descent-data-pushout
+      ( vertical-map-cocone _ _ c b)
+  inv-right-map-family-with-descent-data-pushout =
+    inv-right-map-equiv-descent-data-pushout
       ( descent-data-family-cocone-span-diagram c
         ( family-cocone-family-with-descent-data-pushout))
       ( descent-data-family-with-descent-data-pushout)

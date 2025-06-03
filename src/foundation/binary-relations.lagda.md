@@ -21,6 +21,7 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.negation
 open import foundation-core.propositions
+open import foundation-core.sets
 open import foundation-core.torsorial-type-families
 ```
 
@@ -99,6 +100,10 @@ module _
   is-prop-is-reflexive-Relation-Prop : is-prop is-reflexive-Relation-Prop
   is-prop-is-reflexive-Relation-Prop =
     is-prop-Π (λ x → is-prop-type-Relation-Prop R x x)
+
+  is-reflexive-prop-Relation-Prop : Prop (l1 ⊔ l2)
+  is-reflexive-prop-Relation-Prop =
+    (is-reflexive-Relation-Prop , is-prop-is-reflexive-Relation-Prop)
 ```
 
 ### The predicate of being a symmetric relation
@@ -132,6 +137,10 @@ module _
   is-prop-is-symmetric-Relation-Prop =
     is-prop-iterated-Π 3
       ( λ x y r → is-prop-type-Relation-Prop R y x)
+
+  is-symmetric-prop-Relation-Prop : Prop (l1 ⊔ l2)
+  is-symmetric-prop-Relation-Prop =
+    (is-symmetric-Relation-Prop , is-prop-is-symmetric-Relation-Prop)
 ```
 
 ### The predicate of being a transitive relation
@@ -146,6 +155,9 @@ module _
 
   is-transitive : UU (l1 ⊔ l2)
   is-transitive = (x y z : A) → R y z → R x y → R x z
+
+  is-transitive' : UU (l1 ⊔ l2)
+  is-transitive' = {x y z : A} → R y z → R x y → R x z
 ```
 
 ### The predicate of being a transitive relation valued in propositions
@@ -172,7 +184,7 @@ module _
 ### The predicate of being an irreflexive relation
 
 A relation `R` on a type `A` is said to be **irreflexive** if it comes equipped
-with a function `(x : A) → ¬ (R x y)`.
+with a function `(x : A) → ¬ (R x x)`.
 
 ```agda
 module _
@@ -180,7 +192,14 @@ module _
   where
 
   is-irreflexive : UU (l1 ⊔ l2)
-  is-irreflexive = (x : A) → ¬ (R x x)
+  is-irreflexive = (x : A) → ¬ R x x
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
+  where
+
+  is-irreflexive-Relation-Prop : UU (l1 ⊔ l2)
+  is-irreflexive-Relation-Prop = is-irreflexive (type-Relation-Prop R)
 ```
 
 ### The predicate of being an asymmetric relation

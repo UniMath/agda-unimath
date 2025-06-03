@@ -568,6 +568,19 @@ abstract
     is-zero-left-add-ℤ y x (commutative-add-ℤ y x ∙ H)
 ```
 
+### Swapping laws
+
+```agda
+abstract
+  right-swap-add-ℤ : (x y z : ℤ) → (x +ℤ y) +ℤ z ＝ (x +ℤ z) +ℤ y
+  right-swap-add-ℤ x y z =
+    equational-reasoning
+      (x +ℤ y) +ℤ z
+      ＝ x +ℤ (y +ℤ z) by associative-add-ℤ x y z
+      ＝ x +ℤ (z +ℤ y) by ap (x +ℤ_) (commutative-add-ℤ y z)
+      ＝ (x +ℤ z) +ℤ y by inv (associative-add-ℤ x z y)
+```
+
 ## See also
 
 - Properties of addition with respect to positivity, nonnegativity, negativity

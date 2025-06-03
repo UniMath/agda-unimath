@@ -38,7 +38,7 @@ Global-Choice l = (A : UU l) → ε-operator-Hilbert A
 
 ## Properties
 
-### The global choice principle is inconsistent in `agda-unimath`
+### The global choice principle is inconsistent in agda-unimath
 
 ```agda
 abstract

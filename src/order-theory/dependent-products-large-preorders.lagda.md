@@ -1,4 +1,4 @@
-# Dependent products large preorders
+# Dependent products of large preorders
 
 ```agda
 module order-theory.dependent-products-large-preorders where
@@ -19,7 +19,7 @@ open import order-theory.large-preorders
 ## Idea
 
 Given a family `P : I → Large-Preorder α β` of large preorders indexed by a type
-`I : UU l`, the dependent prodcut of the large preorders `P i` is again a large
+`I : UU l`, the dependent product of the large preorders `P i` is again a large
 preorder.
 
 ## Definition

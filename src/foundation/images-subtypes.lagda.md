@@ -224,7 +224,7 @@ module _
     has-same-elements-sim-subtype
       ( im-subtype (g ∘ f) S)
       ( im-subtype g (im-subtype f S))
-      ( lower-sim-upper-sim-galois-connection-Large-Poset
+      ( sim-lower-sim-upper-galois-connection-Large-Poset
         ( powerset-Large-Poset A)
         ( powerset-Large-Poset C)
         ( image-pullback-subtype-galois-connection-Large-Poset (g ∘ f))

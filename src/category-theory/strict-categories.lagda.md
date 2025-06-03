@@ -12,7 +12,7 @@ open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.nonunital-precategories
 open import category-theory.precategories
-open import category-theory.preunivalent-categories
+open import category-theory.strongly-preunivalent-categories
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -31,8 +31,8 @@ open import foundation.universe-levels
 A {{#concept "strict category" Agda=Strict-Category}} is a
 [precategory](category-theory.precategories.md) for which the type of objects
 form a [set](foundation-core.sets.md). Such categories are the set-theoretic
-analogue to [(univalent) categories](category-theory.categories.md), and have
-the disadvantages that strict categorical constructions may generally fail to be
+analog to [(univalent) categories](category-theory.categories.md), and have the
+disadvantages that strict categorical constructions may generally fail to be
 invariant under equivalences, and that the
 ([essentially surjective](category-theory.essentially-surjective-functors-precategories.md)/[fully-faithful](category-theory.fully-faithful-functors-precategories.md))-factorization
 system on [functors](category-theory.functors-precategories.md) requires the
@@ -56,20 +56,21 @@ module _
     type-Prop is-strict-category-prop-Precategory
 ```
 
-### The predicate on preunivalent categories of being a strict category
+### The predicate on strongly preunivalent categories of being a strict category
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Preunivalent-Category l1 l2)
+  {l1 l2 : Level} (C : Strongly-Preunivalent-Category l1 l2)
   where
 
-  is-strict-category-prop-Preunivalent-Category : Prop l1
-  is-strict-category-prop-Preunivalent-Category =
-    is-strict-category-prop-Precategory (precategory-Preunivalent-Category C)
+  is-strict-category-prop-Strongly-Preunivalent-Category : Prop l1
+  is-strict-category-prop-Strongly-Preunivalent-Category =
+    is-strict-category-prop-Precategory
+      ( precategory-Strongly-Preunivalent-Category C)
 
-  is-strict-category-Preunivalent-Category : UU l1
-  is-strict-category-Preunivalent-Category =
-    type-Prop is-strict-category-prop-Preunivalent-Category
+  is-strict-category-Strongly-Preunivalent-Category : UU l1
+  is-strict-category-Strongly-Preunivalent-Category =
+    type-Prop is-strict-category-prop-Strongly-Preunivalent-Category
 ```
 
 ### The predicate on categories of being a strict category
@@ -182,7 +183,7 @@ module _
     nonunital-precategory-Precategory (precategory-Strict-Category C)
 ```
 
-### The underlying preunivalent category of a strict category
+### The underlying strongly preunivalent category of a strict category
 
 ```agda
 module _
@@ -190,18 +191,17 @@ module _
   where
 
   abstract
-    is-preunivalent-Strict-Category :
-      is-preunivalent-Precategory (precategory-Strict-Category C)
-    is-preunivalent-Strict-Category x y =
-      is-emb-is-injective
-        ( is-set-type-subtype
-          ( is-iso-prop-Precategory (precategory-Strict-Category C))
-          ( is-set-hom-Strict-Category C x y))
-        ( λ _ → eq-is-prop (is-set-obj-Strict-Category C x y))
+    is-strongly-preunivalent-Strict-Category :
+      is-strongly-preunivalent-Precategory (precategory-Strict-Category C)
+    is-strongly-preunivalent-Strict-Category x =
+      is-set-Σ
+        ( is-set-obj-Strict-Category C)
+        ( λ y → is-set-iso-Precategory (precategory-Strict-Category C) {x} {y})
 
-  preunivalent-category-Strict-Category : Preunivalent-Category l1 l2
-  pr1 preunivalent-category-Strict-Category = precategory-Strict-Category C
-  pr2 preunivalent-category-Strict-Category = is-preunivalent-Strict-Category
+  strongly-preunivalent-category-Strict-Category :
+    Strongly-Preunivalent-Category l1 l2
+  strongly-preunivalent-category-Strict-Category =
+    ( precategory-Strict-Category C , is-strongly-preunivalent-Strict-Category)
 ```
 
 ### The total hom-set of a strict category
@@ -271,8 +271,8 @@ postcomp-hom-Strict-Category C =
 
 ## See also
 
-- [Preunivalent categories](category-theory.preunivalent-categories.md) for the
-  common generalization of (univalent) categories and strict categories.
+- [Strongly preunivalent categories](category-theory.strongly-preunivalent-categories.md)
+  for the common generalization of (univalent) categories and strict categories.
 - [Gaunt categories](category-theory.gaunt-categories.md) for the common
   intersection of (univalent) categories and strict categories.
 

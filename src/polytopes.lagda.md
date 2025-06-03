@@ -1,6 +1,6 @@
 # Polytopes
 
-## Files in the polytopes folder
+## Modules in the polytopes namespace
 
 ```agda
 module polytopes where

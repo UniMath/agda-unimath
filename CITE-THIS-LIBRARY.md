@@ -1,4 +1,4 @@
-# Citing the `agda-unimath` library
+# Citing the agda-unimath library
 
 If you wish to reference our library in your work, please use the following
 BibTeX entry:

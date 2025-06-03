@@ -42,8 +42,9 @@ open import foundation.universe-levels
 ## Idea
 
 An integer `m` is said to **divide** an integer `n` if there exists an integer
-`k` equipped with an identification `km ＝ n`. Using the Curry-Howard
-interpretation of logic into type theory, we express divisibility as follows:
+`k` equipped with an identification `km ＝ n`. Using the
+[Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
+of logic into type theory, we express divisibility as follows:
 
 ```text
   div-ℤ m n := Σ (k : ℤ), k *ℤ m ＝ n.

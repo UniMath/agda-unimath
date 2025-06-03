@@ -22,6 +22,9 @@ open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
 open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
 ```
 
 </details>
@@ -105,6 +108,8 @@ pr1 (is-nonempty-Prop A) = is-nonempty A
 pr2 (is-nonempty-Prop A) = is-property-is-empty
 ```
 
+### Being empty is preserved under propositional truncations
+
 ```agda
 abstract
   is-empty-type-trunc-Prop :
@@ -128,6 +133,8 @@ abstract
     map-universal-property-trunc-Prop (is-nonempty-Prop X) (λ x f → f x)
 ```
 
+### Properties for the raised empty type
+
 ```agda
 abstract
   is-prop-raise-empty :
@@ -146,6 +153,16 @@ abstract
   is-empty-raise-empty :
     {l1 : Level} → is-empty (raise-empty l1)
   is-empty-raise-empty {l1} = map-inv-equiv (compute-raise-empty l1)
+
+abstract
+  is-set-raise-empty :
+    {l1 : Level} → is-set (raise-empty l1)
+  is-set-raise-empty = is-trunc-succ-is-trunc neg-one-𝕋 is-prop-raise-empty
+
+raise-empty-Set :
+  (l1 : Level) → Set l1
+pr1 (raise-empty-Set l1) = raise-empty l1
+pr2 (raise-empty-Set l1) = is-set-raise-empty
 ```
 
 ### The type of all empty types of a given universe is contractible

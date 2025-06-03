@@ -720,7 +720,7 @@ module _
         ap-binary
           ( λ L q → eq-htpy L ∙ q)
           ( eq-htpy (preserves-comp-left-whisker-comp h bottom-right H))
-          ( inv (compute-eq-htpy-ap-precomp top-left (h ·l K)))
+          ( inv (coherence-eq-htpy-ap-precomp top-left (h ·l K)))
 
   distributive-precomp-pasting-vertical-coherence-square-maps :
     ( top : A → X) (left-top : A → B) (right-top : X → Y) (middle : B → Y) →
@@ -805,7 +805,7 @@ module _
         by
         ap-binary
           ( λ p L → p ∙ eq-htpy L)
-          ( inv (compute-eq-htpy-ap-precomp left-top (h ·l K)))
+          ( inv (coherence-eq-htpy-ap-precomp left-top (h ·l K)))
           ( eq-htpy (preserves-comp-left-whisker-comp h right-bottom H))
 ```
 
@@ -856,7 +856,7 @@ module _
     ( ( precomp f W) ·l
       ( precomp-coherence-square-maps top left right bottom H W))
   distributive-precomp-right-whisker-comp-coherence-square-maps f g =
-    inv (compute-eq-htpy-ap-precomp f (g ·l H))
+    inv (coherence-eq-htpy-ap-precomp f (g ·l H))
 ```
 
 Similarly, we can calculate transpositions of left-whiskered squares with the

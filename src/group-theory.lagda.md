@@ -1,6 +1,6 @@
 # Group theory
 
-## Files in the group theory folder
+## Modules in the group theory namespace
 
 ```agda
 module group-theory where
@@ -8,6 +8,7 @@ module group-theory where
 open import group-theory.abelian-groups public
 open import group-theory.abelianization-groups public
 open import group-theory.addition-homomorphisms-abelian-groups public
+open import group-theory.arithmetic-sequences-semigroups public
 open import group-theory.automorphism-groups public
 open import group-theory.cartesian-products-abelian-groups public
 open import group-theory.cartesian-products-concrete-groups public
@@ -94,6 +95,7 @@ open import group-theory.homomorphisms-groups public
 open import group-theory.homomorphisms-groups-equipped-with-normal-subgroups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
+open import group-theory.homotopy-automorphism-groups public
 open import group-theory.images-of-group-homomorphisms public
 open import group-theory.images-of-semigroup-homomorphisms public
 open import group-theory.integer-multiples-of-elements-abelian-groups public
@@ -116,6 +118,9 @@ open import group-theory.large-semigroups public
 open import group-theory.loop-groups-sets public
 open import group-theory.mere-equivalences-concrete-group-actions public
 open import group-theory.mere-equivalences-group-actions public
+open import group-theory.minkowski-multiplication-commutative-monoids public
+open import group-theory.minkowski-multiplication-monoids public
+open import group-theory.minkowski-multiplication-semigroups public
 open import group-theory.monoid-actions public
 open import group-theory.monoids public
 open import group-theory.monomorphisms-concrete-groups public
@@ -152,7 +157,6 @@ open import group-theory.precategory-of-semigroups public
 open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public
 open import group-theory.products-of-elements-monoids public
-open import group-theory.products-of-tuples-of-elements-commutative-monoids public
 open import group-theory.pullbacks-subgroups public
 open import group-theory.pullbacks-subsemigroups public
 open import group-theory.quotient-groups public
@@ -183,6 +187,9 @@ open import group-theory.subsets-monoids public
 open import group-theory.subsets-semigroups public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
+open import group-theory.sums-of-finite-families-of-elements-commutative-monoids public
+open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids public
+open import group-theory.sums-of-finite-sequences-of-elements-monoids public
 open import group-theory.surjective-group-homomorphisms public
 open import group-theory.surjective-semigroup-homomorphisms public
 open import group-theory.symmetric-concrete-groups public
@@ -196,6 +203,6 @@ open import group-theory.trivial-concrete-groups public
 open import group-theory.trivial-group-homomorphisms public
 open import group-theory.trivial-groups public
 open import group-theory.trivial-subgroups public
-open import group-theory.unordered-tuples-of-elements-commutative-monoids public
+open import group-theory.unordered-tuples-in-commutative-monoids public
 open import group-theory.wild-representations-monoids public
 ```

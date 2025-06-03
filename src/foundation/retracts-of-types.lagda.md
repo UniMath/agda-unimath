@@ -15,12 +15,14 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
+open import foundation.logical-equivalences
 open import foundation.structure-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-types
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
@@ -93,8 +95,8 @@ module _
   is-equiv-htpy-eq-retract R =
     fundamental-theorem-id (is-torsorial-htpy-retract R) (htpy-eq-retract R)
 
-  equiv-htpy-eq-retract : (R S : A retract-of B) → (R ＝ S) ≃ htpy-retract R S
-  equiv-htpy-eq-retract R S =
+  extensionality-retract : (R S : A retract-of B) → (R ＝ S) ≃ htpy-retract R S
+  extensionality-retract R S =
     ( htpy-eq-retract R S , is-equiv-htpy-eq-retract R S)
 
   eq-htpy-retract : (R S : A retract-of B) → htpy-retract R S → R ＝ S
@@ -158,12 +160,24 @@ module _
   is-equiv-equiv-eq-retracts R =
     fundamental-theorem-id (is-torsorial-equiv-retracts R) (equiv-eq-retracts R)
 
-  equiv-equiv-eq-retracts : (R S : retracts l2 A) → (R ＝ S) ≃ equiv-retracts R S
-  equiv-equiv-eq-retracts R S =
+  extensionality-retracts : (R S : retracts l2 A) → (R ＝ S) ≃ equiv-retracts R S
+  extensionality-retracts R S =
     ( equiv-eq-retracts R S , is-equiv-equiv-eq-retracts R S)
 
   eq-equiv-retracts : (R S : retracts l2 A) → equiv-retracts R S → R ＝ S
   eq-equiv-retracts R S = map-inv-is-equiv (is-equiv-equiv-eq-retracts R S)
+```
+
+### The underlying logical equivalence associated to a retract
+
+```agda
+iff-retract :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → A retract-of B → A ↔ B
+iff-retract R = inclusion-retract R , map-retraction-retract R
+
+iff-retract' :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → A retract-of B → B ↔ A
+iff-retract' = inv-iff ∘ iff-retract
 ```
 
 ## See also

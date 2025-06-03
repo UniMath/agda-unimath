@@ -153,14 +153,14 @@ count-empty = count-Fin zero-ℕ
 count-is-contr :
   {l : Level} {X : UU l} → is-contr X → count X
 pr1 (count-is-contr H) = 1
-pr2 (count-is-contr H) = equiv-is-contr is-contr-Fin-one-ℕ H
+pr2 (count-is-contr H) = equiv-is-contr is-contr-Fin-1 H
 
 abstract
   is-contr-is-one-number-of-elements-count :
     {l : Level} {X : UU l} (e : count X) →
     is-one-ℕ (number-of-elements-count e) → is-contr X
   is-contr-is-one-number-of-elements-count (pair .(succ-ℕ zero-ℕ) e) refl =
-    is-contr-equiv' (Fin 1) e is-contr-Fin-one-ℕ
+    is-contr-equiv' (Fin 1) e is-contr-Fin-1
 
 abstract
   is-one-number-of-elements-count-is-contr :

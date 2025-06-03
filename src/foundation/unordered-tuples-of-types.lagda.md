@@ -27,7 +27,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-An unordered tuple of types is an unordered tuple of elements in a universe
+An {{#concept "unordered tuple of types" Agda=unordered-tuple-types}} is an
+[unordered tuple](foundation.unordered-tuples.md) of elements in a universe.
 
 ## Definitions
 
@@ -95,8 +96,10 @@ module _
     is-torsorial (equiv-unordered-tuple-types n A)
   is-torsorial-equiv-unordered-tuple-types =
     is-torsorial-Eq-structure
-      ( is-torsorial-equiv-UU-Fin {k = n} (type-unordered-tuple-UU-Fin n A))
-      ( pair (type-unordered-tuple-UU-Fin n A) id-equiv)
+      ( is-torsorial-equiv-Type-With-Cardinality-ℕ
+        { k = n}
+        ( type-unordered-tuple-Type-With-Cardinality-ℕ n A))
+      ( pair (type-unordered-tuple-Type-With-Cardinality-ℕ n A) id-equiv)
       ( is-torsorial-equiv-fam (element-unordered-tuple n A))
 
   is-equiv-equiv-eq-unordered-tuple-types :

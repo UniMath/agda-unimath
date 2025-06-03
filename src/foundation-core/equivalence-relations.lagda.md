@@ -9,15 +9,19 @@ module foundation-core.equivalence-relations where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.subtype-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
+open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -199,4 +203,64 @@ pr1 (pr2 (raise-indiscrete-equivalence-relation l A)) _ = raise-star
 pr1 (pr2 (pr2 (raise-indiscrete-equivalence-relation l A))) _ _ _ = raise-star
 pr2 (pr2 (pr2 (raise-indiscrete-equivalence-relation l A))) _ _ _ _ _ =
   raise-star
+```
+
+### Characterization of equality in the type of equivalence relations
+
+```agda
+relate-same-elements-equivalence-relation :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  equivalence-relation l2 A → equivalence-relation l3 A → UU (l1 ⊔ l2 ⊔ l3)
+relate-same-elements-equivalence-relation R S =
+  relates-same-elements-Relation-Prop
+    ( prop-equivalence-relation R)
+    ( prop-equivalence-relation S)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  refl-relate-same-elements-equivalence-relation :
+    relate-same-elements-equivalence-relation R R
+  refl-relate-same-elements-equivalence-relation =
+    refl-relates-same-elements-Relation-Prop (prop-equivalence-relation R)
+
+  is-torsorial-relate-same-elements-equivalence-relation :
+    is-torsorial (relate-same-elements-equivalence-relation R)
+  is-torsorial-relate-same-elements-equivalence-relation =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-relates-same-elements-Relation-Prop
+        ( prop-equivalence-relation R))
+      ( is-prop-is-equivalence-relation)
+      ( prop-equivalence-relation R)
+      ( refl-relate-same-elements-equivalence-relation)
+      ( is-equivalence-relation-prop-equivalence-relation R)
+
+  relate-same-elements-eq-equivalence-relation :
+    (S : equivalence-relation l2 A) →
+    (R ＝ S) → relate-same-elements-equivalence-relation R S
+  relate-same-elements-eq-equivalence-relation .R refl =
+    refl-relate-same-elements-equivalence-relation
+
+  is-equiv-relate-same-elements-eq-equivalence-relation :
+    (S : equivalence-relation l2 A) →
+    is-equiv (relate-same-elements-eq-equivalence-relation S)
+  is-equiv-relate-same-elements-eq-equivalence-relation =
+    fundamental-theorem-id
+      is-torsorial-relate-same-elements-equivalence-relation
+      relate-same-elements-eq-equivalence-relation
+
+  extensionality-equivalence-relation :
+    (S : equivalence-relation l2 A) →
+    (R ＝ S) ≃ relate-same-elements-equivalence-relation R S
+  pr1 (extensionality-equivalence-relation S) =
+    relate-same-elements-eq-equivalence-relation S
+  pr2 (extensionality-equivalence-relation S) =
+    is-equiv-relate-same-elements-eq-equivalence-relation S
+
+  eq-relate-same-elements-equivalence-relation :
+    (S : equivalence-relation l2 A) →
+    relate-same-elements-equivalence-relation R S → (R ＝ S)
+  eq-relate-same-elements-equivalence-relation S =
+    map-inv-equiv (extensionality-equivalence-relation S)
 ```

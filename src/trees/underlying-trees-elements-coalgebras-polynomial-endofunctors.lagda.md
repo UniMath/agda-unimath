@@ -721,24 +721,24 @@ module _
     ( node-inclusion-element-coalgebra (b , refl) x) =
     refl
 
-  is-equiv-node-compute-directed-tree-element-coalgebra :
+  is-node-equiv-compute-directed-tree-element-coalgebra :
     is-equiv node-compute-directed-tree-element-coalgebra
-  is-equiv-node-compute-directed-tree-element-coalgebra =
+  is-node-equiv-compute-directed-tree-element-coalgebra =
     is-equiv-is-invertible
       map-inv-node-compute-directed-tree-element-coalgebra
       is-section-map-inv-node-compute-directed-tree-element-coalgebra
       is-retraction-map-inv-node-compute-directed-tree-element-coalgebra
 
-  equiv-node-compute-directed-tree-element-coalgebra :
+  node-equiv-compute-directed-tree-element-coalgebra :
     node-element-coalgebra X w ≃
     node-combinator-Directed-Tree
       ( λ b →
         directed-tree-element-coalgebra X
           ( component-coalgebra-polynomial-endofunctor X w b))
-  pr1 equiv-node-compute-directed-tree-element-coalgebra =
+  pr1 node-equiv-compute-directed-tree-element-coalgebra =
     node-compute-directed-tree-element-coalgebra
-  pr2 equiv-node-compute-directed-tree-element-coalgebra =
-    is-equiv-node-compute-directed-tree-element-coalgebra
+  pr2 node-equiv-compute-directed-tree-element-coalgebra =
+    is-node-equiv-compute-directed-tree-element-coalgebra
 
   edge-compute-directed-tree-element-coalgebra :
     (x y : node-element-coalgebra X w) →
@@ -862,16 +862,16 @@ module _
   is-retraction-map-inv-edge-compute-directed-tree-element-coalgebra ._ ._
     ( edge-inclusion-element-coalgebra (b , refl) e) = refl
 
-  is-equiv-edge-compute-directed-tree-element-coalgebra :
+  is-edge-equiv-compute-directed-tree-element-coalgebra :
     (x y : node-element-coalgebra X w) →
     is-equiv (edge-compute-directed-tree-element-coalgebra x y)
-  is-equiv-edge-compute-directed-tree-element-coalgebra x y =
+  is-edge-equiv-compute-directed-tree-element-coalgebra x y =
     is-equiv-is-invertible
       ( map-inv-edge-compute-directed-tree-element-coalgebra x y)
       ( is-section-map-inv-edge-compute-directed-tree-element-coalgebra x y)
       ( is-retraction-map-inv-edge-compute-directed-tree-element-coalgebra x y)
 
-  equiv-edge-compute-directed-tree-element-coalgebra :
+  edge-equiv-compute-directed-tree-element-coalgebra :
     (x y : node-element-coalgebra X w) →
     edge-element-coalgebra X w x y ≃
     edge-combinator-Directed-Tree
@@ -880,10 +880,10 @@ module _
           ( component-coalgebra-polynomial-endofunctor X w b))
       ( node-compute-directed-tree-element-coalgebra x)
       ( node-compute-directed-tree-element-coalgebra y)
-  pr1 (equiv-edge-compute-directed-tree-element-coalgebra x y) =
+  pr1 (edge-equiv-compute-directed-tree-element-coalgebra x y) =
     edge-compute-directed-tree-element-coalgebra x y
-  pr2 (equiv-edge-compute-directed-tree-element-coalgebra x y) =
-    is-equiv-edge-compute-directed-tree-element-coalgebra x y
+  pr2 (edge-equiv-compute-directed-tree-element-coalgebra x y) =
+    is-edge-equiv-compute-directed-tree-element-coalgebra x y
 
   compute-directed-tree-element-coalgebra :
     equiv-Directed-Tree
@@ -893,9 +893,9 @@ module _
           directed-tree-element-coalgebra X
             ( component-coalgebra-polynomial-endofunctor X w b)))
   pr1 compute-directed-tree-element-coalgebra =
-    equiv-node-compute-directed-tree-element-coalgebra
+    node-equiv-compute-directed-tree-element-coalgebra
   pr2 compute-directed-tree-element-coalgebra =
-    equiv-edge-compute-directed-tree-element-coalgebra
+    edge-equiv-compute-directed-tree-element-coalgebra
 
   shape-compute-enriched-directed-tree-element-coalgebra :
     shape-element-coalgebra X w ~

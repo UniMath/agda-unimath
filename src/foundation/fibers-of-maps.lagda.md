@@ -12,6 +12,7 @@ open import foundation-core.fibers-of-maps public
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.postcomposition-functions
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -107,6 +109,25 @@ module _
     A ≃ Σ unit (fiber (terminal-map A))
   inv-equiv-total-fiber-terminal-map =
     inv-equiv equiv-total-fiber-terminal-map
+```
+
+### Computing the fibers of postcomposition by a projection map
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
+  where
+
+  compute-fiber-postcomp-pr1 :
+    {l3 : Level} {X : UU l3} (h : X → A) →
+    ((i : X) → B (h i)) ≃ fiber (postcomp X (pr1 {B = B})) h
+  compute-fiber-postcomp-pr1 {X = X} h =
+    compute-Π-fiber-postcomp X pr1 h ∘e
+    equiv-Π-equiv-family (λ i → inv-equiv-fiber-pr1 B (h i))
+
+  compute-fiber-id-postcomp-pr1 :
+    ((a : A) → B a) ≃ fiber (postcomp A (pr1 {B = B})) id
+  compute-fiber-id-postcomp-pr1 = compute-fiber-postcomp-pr1 id
 ```
 
 ### Transport in fibers

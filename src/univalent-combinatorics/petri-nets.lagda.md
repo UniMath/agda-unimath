@@ -25,40 +25,44 @@ We give a definition of Petri nets due to Joachim Kock [[1]][1]
 ```agda
 Petri-Net : (l1 l2 l3 l4 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4)
 Petri-Net l1 l2 l3 l4 =
-  Σ ( 𝔽 l1)
+  Σ ( Finite-Type l1)
     ( λ S →
-      Σ ( 𝔽 l2)
+      Σ ( Finite-Type l2)
         ( λ T →
-          ( type-𝔽 S → type-𝔽 T → 𝔽 l3) ×
-          ( type-𝔽 T → type-𝔽 S → 𝔽 l4)))
+          ( type-Finite-Type S → type-Finite-Type T → Finite-Type l3) ×
+          ( type-Finite-Type T → type-Finite-Type S → Finite-Type l4)))
 
 module _
   {l1 l2 l3 l4 : Level} (P : Petri-Net l1 l2 l3 l4)
   where
 
-  place-Petri-Net-𝔽 : 𝔽 l1
-  place-Petri-Net-𝔽 = pr1 P
+  place-finite-type-Petri-Net : Finite-Type l1
+  place-finite-type-Petri-Net = pr1 P
 
   place-Petri-Net : UU l1
-  place-Petri-Net = type-𝔽 place-Petri-Net-𝔽
+  place-Petri-Net = type-Finite-Type place-finite-type-Petri-Net
 
-  transition-Petri-Net-𝔽 : 𝔽 l2
-  transition-Petri-Net-𝔽 = pr1 (pr2 P)
+  transition-finite-type-Petri-Net : Finite-Type l2
+  transition-finite-type-Petri-Net = pr1 (pr2 P)
 
   transition-Petri-Net : UU l2
-  transition-Petri-Net = type-𝔽 transition-Petri-Net-𝔽
+  transition-Petri-Net = type-Finite-Type transition-finite-type-Petri-Net
 
-  incoming-arc-Petri-Net-𝔽 : place-Petri-Net → transition-Petri-Net → 𝔽 l3
-  incoming-arc-Petri-Net-𝔽 = pr1 (pr2 (pr2 P))
+  incoming-arc-finite-type-Petri-Net :
+    place-Petri-Net → transition-Petri-Net → Finite-Type l3
+  incoming-arc-finite-type-Petri-Net = pr1 (pr2 (pr2 P))
 
   incoming-arc-Petri-Net : place-Petri-Net → transition-Petri-Net → UU l3
-  incoming-arc-Petri-Net s t = type-𝔽 (incoming-arc-Petri-Net-𝔽 s t)
+  incoming-arc-Petri-Net s t =
+    type-Finite-Type (incoming-arc-finite-type-Petri-Net s t)
 
-  outgoing-arc-Petri-Net-𝔽 : transition-Petri-Net → place-Petri-Net → 𝔽 l4
-  outgoing-arc-Petri-Net-𝔽 = pr2 (pr2 (pr2 P))
+  outgoing-arc-finite-type-Petri-Net :
+    transition-Petri-Net → place-Petri-Net → Finite-Type l4
+  outgoing-arc-finite-type-Petri-Net = pr2 (pr2 (pr2 P))
 
   outgoing-arc-Petri-Net : transition-Petri-Net → place-Petri-Net → UU l4
-  outgoing-arc-Petri-Net t s = type-𝔽 (outgoing-arc-Petri-Net-𝔽 t s)
+  outgoing-arc-Petri-Net t s =
+    type-Finite-Type (outgoing-arc-finite-type-Petri-Net t s)
 ```
 
 [1]: https://arxiv.org/abs/2005.05108

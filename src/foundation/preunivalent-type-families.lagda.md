@@ -39,7 +39,12 @@ the map
   equiv-tr B : x ＝ y → B x ≃ B y
 ```
 
-is an [embedding](foundation-core.embeddings.md) for every `x y : A`.
+is an [embedding](foundation-core.embeddings.md) for every `x y : A`. By
+[the preunivalence axiom](foundation.preunivalence.md), which follows from
+[the univalence axiom](foundation.univalence.md), the type family `B` is
+preunivalent if and only if it is [faithful](foundation.faithful-maps.md) as a
+map. In other words, if `A` is a [set](foundation-core.sets.md)-level
+[structure](foundation.structure.md) on types.
 
 ## Definition
 

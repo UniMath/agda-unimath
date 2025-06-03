@@ -10,8 +10,8 @@ module orthogonal-factorization-systems.zero-modality where
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.types-local-at-maps
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 

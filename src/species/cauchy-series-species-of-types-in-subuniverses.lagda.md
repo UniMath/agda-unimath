@@ -49,7 +49,7 @@ module _
     UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l5)
   cauchy-series-species-subuniverse =
     Σ ( type-subuniverse P)
-      ( λ U → inclusion-subuniverse Q (S U) × (inclusion-subuniverse P U → X))
+      ( λ U → inclusion-subuniverse Q (S U) × (inclusion-subuniverse P U → X))
 ```
 
 ## Property

@@ -38,10 +38,10 @@ open import univalent-combinatorics.standard-finite-types
 ## Definition
 
 ```agda
-Surjection-𝔽 :
-  {l1 : Level} (l2 : Level) → 𝔽 l1 → UU (l1 ⊔ lsuc l2)
-Surjection-𝔽 l2 A =
-  Σ (𝔽 l2) (λ B → (type-𝔽 A) ↠ (type-𝔽 B))
+Surjection-Finite-Type :
+  {l1 : Level} (l2 : Level) → Finite-Type l1 → UU (l1 ⊔ lsuc l2)
+Surjection-Finite-Type l2 A =
+  Σ (Finite-Type l2) (λ B → (type-Finite-Type A) ↠ (type-Finite-Type B))
 ```
 
 ## Properties

@@ -68,7 +68,7 @@ module _
 
   equiv-is-equiv-is-path-split : (f : A → B) → is-path-split f ≃ is-equiv f
   equiv-is-equiv-is-path-split f =
-    pair (is-equiv-is-path-split f) (is-equiv-is-equiv-is-path-split f)
+    ( is-equiv-is-path-split f , is-equiv-is-equiv-is-path-split f)
 ```
 
 ## See also

@@ -34,7 +34,7 @@ types `T` is the formal series in `s` :
 If `s` is a negative integer, the categorified version of this formula is
 
 ```text
-Σ (F : 𝔽 ∖ {∅}), T (F) × (S → F)
+Σ (F : Finite-Type ∖ {∅}), T (F) × (S → F)
 ```
 
 We can generalize it to species of types as
@@ -48,7 +48,7 @@ of this formula then becomes
 
 ```text
 Σ ( n : ℕ ∖ {0}),
-  ( Σ (F : UU-Fin n) , T (F) × (S → cycle-prime-decomposition-ℕ (n))
+  ( Σ (F : Type-With-Cardinality-ℕ n) , T (F) × (S → cycle-prime-decomposition-ℕ (n))
 ```
 
 We have picked the concrete group `cycle-prime-decomposition-ℕ (n)` because it
@@ -58,17 +58,19 @@ equal to `1/n`.
 ## Definition
 
 ```agda
-dirichlet-series-species-Inhabited-𝔽 :
-  {l1 l2 l3 : Level} → species-Inhabited-𝔽 l1 l2 → UU l3 →
+dirichlet-series-species-Inhabited-Finite-Type :
+  {l1 l2 l3 : Level} → species-Inhabited-Finite-Type l1 l2 → UU l3 →
   UU (lsuc l1 ⊔ l2 ⊔ l3)
-dirichlet-series-species-Inhabited-𝔽 {l1} T S =
+dirichlet-series-species-Inhabited-Finite-Type {l1} T S =
   Σ ( ℕ)
     ( λ n →
-      Σ ( UU-Fin l1 (succ-ℕ n))
+      Σ ( Type-With-Cardinality-ℕ l1 (succ-ℕ n))
         ( λ F →
-          type-𝔽
+          type-Finite-Type
             ( T
-              ( type-UU-Fin (succ-ℕ n) F ,
-                is-finite-and-inhabited-type-UU-Fin-succ-ℕ n F)) ×
+              ( type-Type-With-Cardinality-ℕ (succ-ℕ n) F ,
+                is-finite-and-inhabited-type-Type-With-Cardinality-ℕ-succ-ℕ
+                  n
+                  F)) ×
           S → cycle-prime-decomposition-ℕ (succ-ℕ n) _))
 ```

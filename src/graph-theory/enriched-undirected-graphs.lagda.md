@@ -202,4 +202,4 @@ module _
 - [Graph](https://www.wikidata.org/entity/Q141488) on Wikidata
 - [Graph (discrete mathematics)](<https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)>)
   at Wikipedia
-- [Graph](https://mathworld.wolfram.com/Graph.html) at Wolfram Mathworld
+- [Graph](https://mathworld.wolfram.com/Graph.html) at Wolfram MathWorld

@@ -11,7 +11,7 @@ if (link) {
     'CONTRIBUTORS.md',
     'DESIGN-PRINCIPLES.md',
     'FILE-CONVENTIONS.md',
-    'GRANT-ACKNOWLEDGEMENTS.md',
+    'GRANT-ACKNOWLEDGMENTS.md',
     'HOME.md',
     'HOWTO-INSTALL.md',
     'LICENSE.md',
@@ -20,7 +20,8 @@ if (link) {
     'README.md',
     'STATEMENT-OF-INCLUSION.md',
     'SUMMARY.md',
-    'USERS.md',
+    'PROJECTS.md',
+    'VISUALIZATION.md',
     'index.md',
   ];
   if (!fileList.includes(filename)) {

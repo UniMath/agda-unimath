@@ -10,6 +10,7 @@ module elementary-number-theory.positive-integers where
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-integers
+open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -18,6 +19,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -25,9 +27,12 @@ open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import set-theory.countable-sets
 ```
 
 </details>
@@ -70,6 +75,9 @@ subtype-positive-ℤ x = (is-positive-ℤ x , is-prop-is-positive-ℤ x)
 
 positive-ℤ : UU lzero
 positive-ℤ = type-subtype subtype-positive-ℤ
+
+ℤ⁺ : UU lzero
+ℤ⁺ = positive-ℤ
 
 is-positive-eq-ℤ : {x y : ℤ} → x ＝ y → is-positive-ℤ x → is-positive-ℤ y
 is-positive-eq-ℤ = tr is-positive-ℤ
@@ -122,6 +130,9 @@ is-nonzero-is-positive-ℤ {inr (inr x)} H ()
 is-set-positive-ℤ : is-set positive-ℤ
 is-set-positive-ℤ =
   is-set-type-subtype subtype-positive-ℤ is-set-ℤ
+
+positive-ℤ-Set : Set lzero
+positive-ℤ-Set = positive-ℤ , is-set-positive-ℤ
 ```
 
 ### The successor of a positive integer is positive
@@ -142,6 +153,9 @@ is-positive-int-is-nonzero-ℕ :
   (x : ℕ) → is-nonzero-ℕ x → is-positive-ℤ (int-ℕ x)
 is-positive-int-is-nonzero-ℕ zero-ℕ H = ex-falso (H refl)
 is-positive-int-is-nonzero-ℕ (succ-ℕ x) H = star
+
+positive-int-ℕ⁺ : ℕ⁺ → positive-ℤ
+positive-int-ℕ⁺ (n , n≠0) = int-ℕ n , is-positive-int-is-nonzero-ℕ n n≠0
 ```
 
 ### The canonical equivalence between natural numbers and positive integers
@@ -180,6 +194,19 @@ pr2 (pr2 is-equiv-positive-int-ℕ) = is-retraction-nat-positive-ℤ
 equiv-positive-int-ℕ : ℕ ≃ positive-ℤ
 pr1 equiv-positive-int-ℕ = positive-int-ℕ
 pr2 equiv-positive-int-ℕ = is-equiv-positive-int-ℕ
+```
+
+### The set of positive integers is countable
+
+```agda
+is-countable-positive-ℤ : is-countable positive-ℤ-Set
+is-countable-positive-ℤ =
+  is-countable-is-directly-countable
+    ( positive-ℤ-Set)
+    ( one-positive-ℤ)
+    ( intro-exists
+      ( positive-int-ℕ)
+      ( is-surjective-is-equiv is-equiv-positive-int-ℕ))
 ```
 
 ## See also

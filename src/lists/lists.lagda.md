@@ -64,6 +64,20 @@ is-cons-list : {l : Level} {A : UU l} → list A → UU l
 is-cons-list {l1} {A} l = Σ (A × list A) (λ (a , l') → l ＝ cons a l')
 ```
 
+## The induction principle of the type of lists
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (P : list A → UU l2)
+  where
+
+  ind-list :
+    P nil → ((a : A) (as : list A) → P as → P (cons a as)) →
+    (x : list A) → P x
+  ind-list Pnil Pcons nil = Pnil
+  ind-list Pnil Pcons (cons a as) = Pcons a as (ind-list Pnil Pcons as)
+```
+
 ## Operations
 
 ### Fold

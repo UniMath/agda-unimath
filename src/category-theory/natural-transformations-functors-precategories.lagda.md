@@ -1,8 +1,6 @@
 # Natural transformations between functors between precategories
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module category-theory.natural-transformations-functors-precategories where
 ```
 
@@ -17,6 +15,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
@@ -108,6 +107,30 @@ module _
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G)
       ( map-functor-Precategory C D H)
+```
+
+## Equality of functors induces a natural transformation
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  where
+
+  natural-transformation-eq-Precategory :
+    (F G : functor-Precategory C D) →
+    F ＝ G →
+    natural-transformation-Precategory C D F G
+  natural-transformation-eq-Precategory F G refl =
+    id-natural-transformation-Precategory C D F
+
+  natural-transformation-eq-inv-Precategory :
+    (F G : functor-Precategory C D) →
+    F ＝ G →
+    natural-transformation-Precategory C D G F
+  natural-transformation-eq-inv-Precategory F G =
+    natural-transformation-eq-Precategory G F ∘ inv
 ```
 
 ## Properties

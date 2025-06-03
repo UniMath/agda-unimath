@@ -64,15 +64,18 @@ abstract
           ( is-finite-Prop (Σ A B))
           ( is-finite-count ∘ (count-Σ e)))
 
-Σ-𝔽 : {l1 l2 : Level} (A : 𝔽 l1) (B : type-𝔽 A → 𝔽 l2) → 𝔽 (l1 ⊔ l2)
-pr1 (Σ-𝔽 A B) = Σ (type-𝔽 A) (λ a → type-𝔽 (B a))
-pr2 (Σ-𝔽 A B) =
+Σ-Finite-Type :
+  {l1 l2 : Level}
+  (A : Finite-Type l1) (B : type-Finite-Type A → Finite-Type l2) →
+  Finite-Type (l1 ⊔ l2)
+pr1 (Σ-Finite-Type A B) = Σ (type-Finite-Type A) (λ a → type-Finite-Type (B a))
+pr2 (Σ-Finite-Type A B) =
   is-finite-Σ
-    ( is-finite-type-𝔽 A)
-    ( λ a → is-finite-type-𝔽 (B a))
+    ( is-finite-type-Finite-Type A)
+    ( λ a → is-finite-type-Finite-Type (B a))
 ```
 
-### If `A` and `Σ A B` are finite, then eacy `B a` is finite
+### If `A` and `Σ A B` are finite, then each `B a` is finite
 
 ```agda
 abstract

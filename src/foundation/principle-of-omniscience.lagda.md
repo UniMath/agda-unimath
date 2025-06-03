@@ -19,8 +19,9 @@ open import foundation-core.propositions
 
 ## Idea
 
-A type `X` is said to satisfy the **principle of omniscience** if every
-[decidable subtype](foundation.decidable-subtypes.md) of `X` is either
+A type `X` is said to satisfy the
+{{#concept "principle of omniscience" Disambiguation="type" Agda=is-omniscient}}
+if every [decidable subtype](foundation.decidable-subtypes.md) of `X` is either
 [inhabited](foundation.inhabited-types.md) or
 [empty](foundation-core.empty-types.md).
 
@@ -42,3 +43,4 @@ is-omniscient X = type-Prop (is-omniscient-Prop X)
 - [The limited principle of omniscience](foundation.limited-principle-of-omniscience.md)
 - [The lesser limited principle of omniscience](foundation.lesser-limited-principle-of-omniscience.md)
 - [The weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)
+- [Markov's principle](logic.markovs-principle.md)

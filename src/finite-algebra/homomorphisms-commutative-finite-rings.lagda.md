@@ -38,156 +38,165 @@ underlying rings.
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Commutative-Ring-𝔽 l1) (B : Commutative-Ring-𝔽 l2)
+  {l1 l2 : Level}
+  (A : Finite-Commutative-Ring l1) (B : Finite-Commutative-Ring l2)
   where
 
   is-commutative-finite-ring-homomorphism-hom-Ab-Prop :
-    hom-Ab (ab-Commutative-Ring-𝔽 A) (ab-Commutative-Ring-𝔽 B) →
+    hom-Ab (ab-Finite-Commutative-Ring A) (ab-Finite-Commutative-Ring B) →
     Prop (l1 ⊔ l2)
   is-commutative-finite-ring-homomorphism-hom-Ab-Prop =
     is-ring-homomorphism-hom-Ab-Prop
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
 
   is-commutative-finite-ring-homomorphism-hom-Ab :
-    hom-Ab (ab-Commutative-Ring-𝔽 A) (ab-Commutative-Ring-𝔽 B) →
+    hom-Ab (ab-Finite-Commutative-Ring A) (ab-Finite-Commutative-Ring B) →
     UU (l1 ⊔ l2)
   is-commutative-finite-ring-homomorphism-hom-Ab =
     is-ring-homomorphism-hom-Ab
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
 
   is-prop-is-commutative-finite-ring-homomorphism-hom-Ab :
-    (f : hom-Ab (ab-Commutative-Ring-𝔽 A) (ab-Commutative-Ring-𝔽 B)) →
+    (f : hom-Ab (ab-Finite-Commutative-Ring A) (ab-Finite-Commutative-Ring B)) →
     is-prop
       ( is-commutative-ring-homomorphism-hom-Ab
-        ( commutative-ring-Commutative-Ring-𝔽 A)
-        ( commutative-ring-Commutative-Ring-𝔽 B)
+        ( commutative-ring-Finite-Commutative-Ring A)
+        ( commutative-ring-Finite-Commutative-Ring B)
         ( f))
   is-prop-is-commutative-finite-ring-homomorphism-hom-Ab =
     is-prop-is-ring-homomorphism-hom-Ab
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
 ```
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Commutative-Ring-𝔽 l1) (B : Commutative-Ring-𝔽 l2)
+  {l1 l2 : Level}
+  (A : Finite-Commutative-Ring l1) (B : Finite-Commutative-Ring l2)
   where
 
-  hom-set-Commutative-Ring-𝔽 : Set (l1 ⊔ l2)
-  hom-set-Commutative-Ring-𝔽 =
-    hom-set-Ring (ring-Commutative-Ring-𝔽 A) (ring-Commutative-Ring-𝔽 B)
+  hom-set-Finite-Commutative-Ring : Set (l1 ⊔ l2)
+  hom-set-Finite-Commutative-Ring =
+    hom-set-Ring
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
 
-  hom-Commutative-Ring-𝔽 : UU (l1 ⊔ l2)
-  hom-Commutative-Ring-𝔽 =
-    hom-Ring (ring-Commutative-Ring-𝔽 A) (ring-Commutative-Ring-𝔽 B)
+  hom-Finite-Commutative-Ring : UU (l1 ⊔ l2)
+  hom-Finite-Commutative-Ring =
+    hom-Ring (ring-Finite-Commutative-Ring A) (ring-Finite-Commutative-Ring B)
 
-  is-set-hom-Commutative-Ring-𝔽 : is-set hom-Commutative-Ring-𝔽
-  is-set-hom-Commutative-Ring-𝔽 =
-    is-set-hom-Ring (ring-Commutative-Ring-𝔽 A) (ring-Commutative-Ring-𝔽 B)
+  is-set-hom-Finite-Commutative-Ring : is-set hom-Finite-Commutative-Ring
+  is-set-hom-Finite-Commutative-Ring =
+    is-set-hom-Ring
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
 
   module _
-    (f : hom-Commutative-Ring-𝔽)
+    (f : hom-Finite-Commutative-Ring)
     where
 
-    hom-ab-hom-Commutative-Ring-𝔽 :
-      hom-Ab (ab-Commutative-Ring-𝔽 A) (ab-Commutative-Ring-𝔽 B)
-    hom-ab-hom-Commutative-Ring-𝔽 =
-      hom-ab-hom-Ring (ring-Commutative-Ring-𝔽 A) (ring-Commutative-Ring-𝔽 B) f
+    hom-ab-hom-Finite-Commutative-Ring :
+      hom-Ab (ab-Finite-Commutative-Ring A) (ab-Finite-Commutative-Ring B)
+    hom-ab-hom-Finite-Commutative-Ring =
+      hom-ab-hom-Ring
+        ( ring-Finite-Commutative-Ring A)
+        ( ring-Finite-Commutative-Ring B)
+        ( f)
 
-    hom-multiplicative-monoid-hom-Commutative-Ring-𝔽 :
+    hom-multiplicative-monoid-hom-Finite-Commutative-Ring :
       hom-Monoid
-        ( multiplicative-monoid-Commutative-Ring-𝔽 A)
-        ( multiplicative-monoid-Commutative-Ring-𝔽 B)
-    hom-multiplicative-monoid-hom-Commutative-Ring-𝔽 =
+        ( multiplicative-monoid-Finite-Commutative-Ring A)
+        ( multiplicative-monoid-Finite-Commutative-Ring B)
+    hom-multiplicative-monoid-hom-Finite-Commutative-Ring =
       hom-multiplicative-monoid-hom-Ring
-        ( ring-Commutative-Ring-𝔽 A)
-        ( ring-Commutative-Ring-𝔽 B)
+        ( ring-Finite-Commutative-Ring A)
+        ( ring-Finite-Commutative-Ring B)
         ( f)
 
-    map-hom-Commutative-Ring-𝔽 :
-      type-Commutative-Ring-𝔽 A → type-Commutative-Ring-𝔽 B
-    map-hom-Commutative-Ring-𝔽 =
+    map-hom-Finite-Commutative-Ring :
+      type-Finite-Commutative-Ring A → type-Finite-Commutative-Ring B
+    map-hom-Finite-Commutative-Ring =
       map-hom-Ring
-        ( ring-Commutative-Ring-𝔽 A)
-        ( ring-Commutative-Ring-𝔽 B)
+        ( ring-Finite-Commutative-Ring A)
+        ( ring-Finite-Commutative-Ring B)
         ( f)
 
-    preserves-add-hom-Commutative-Ring-𝔽 :
+    preserves-add-hom-Finite-Commutative-Ring :
       preserves-add-Ab
-        ( ab-Commutative-Ring-𝔽 A)
-        ( ab-Commutative-Ring-𝔽 B)
-        ( map-hom-Commutative-Ring-𝔽)
-    preserves-add-hom-Commutative-Ring-𝔽 =
+        ( ab-Finite-Commutative-Ring A)
+        ( ab-Finite-Commutative-Ring B)
+        ( map-hom-Finite-Commutative-Ring)
+    preserves-add-hom-Finite-Commutative-Ring =
       preserves-add-hom-Ring
-        ( ring-Commutative-Ring-𝔽 A)
-        ( ring-Commutative-Ring-𝔽 B)
+        ( ring-Finite-Commutative-Ring A)
+        ( ring-Finite-Commutative-Ring B)
         ( f)
 
-    preserves-zero-hom-Commutative-Ring-𝔽 :
+    preserves-zero-hom-Finite-Commutative-Ring :
       preserves-zero-Ab
-        ( ab-Commutative-Ring-𝔽 A)
-        ( ab-Commutative-Ring-𝔽 B)
-        ( map-hom-Commutative-Ring-𝔽)
-    preserves-zero-hom-Commutative-Ring-𝔽 =
+        ( ab-Finite-Commutative-Ring A)
+        ( ab-Finite-Commutative-Ring B)
+        ( map-hom-Finite-Commutative-Ring)
+    preserves-zero-hom-Finite-Commutative-Ring =
       preserves-zero-hom-Ring
-        ( ring-Commutative-Ring-𝔽 A)
-        ( ring-Commutative-Ring-𝔽 B)
+        ( ring-Finite-Commutative-Ring A)
+        ( ring-Finite-Commutative-Ring B)
         ( f)
 
-    preserves-neg-hom-Commutative-Ring-𝔽 :
+    preserves-neg-hom-Finite-Commutative-Ring :
       preserves-negatives-Ab
-        ( ab-Commutative-Ring-𝔽 A)
-        ( ab-Commutative-Ring-𝔽 B)
-        ( map-hom-Commutative-Ring-𝔽)
-    preserves-neg-hom-Commutative-Ring-𝔽 =
+        ( ab-Finite-Commutative-Ring A)
+        ( ab-Finite-Commutative-Ring B)
+        ( map-hom-Finite-Commutative-Ring)
+    preserves-neg-hom-Finite-Commutative-Ring =
       preserves-neg-hom-Ring
-        ( ring-Commutative-Ring-𝔽 A)
-        ( ring-Commutative-Ring-𝔽 B)
+        ( ring-Finite-Commutative-Ring A)
+        ( ring-Finite-Commutative-Ring B)
         ( f)
 
-    preserves-mul-hom-Commutative-Ring-𝔽 :
+    preserves-mul-hom-Finite-Commutative-Ring :
       preserves-mul-hom-Ab
-        ( ring-Commutative-Ring-𝔽 A)
-        ( ring-Commutative-Ring-𝔽 B)
-        ( hom-ab-hom-Commutative-Ring-𝔽)
-    preserves-mul-hom-Commutative-Ring-𝔽 =
+        ( ring-Finite-Commutative-Ring A)
+        ( ring-Finite-Commutative-Ring B)
+        ( hom-ab-hom-Finite-Commutative-Ring)
+    preserves-mul-hom-Finite-Commutative-Ring =
       preserves-mul-hom-Ring
-        ( ring-Commutative-Ring-𝔽 A)
-        ( ring-Commutative-Ring-𝔽 B)
+        ( ring-Finite-Commutative-Ring A)
+        ( ring-Finite-Commutative-Ring B)
         ( f)
 
-    preserves-one-hom-Commutative-Ring-𝔽 :
+    preserves-one-hom-Finite-Commutative-Ring :
       preserves-unit-hom-Ab
-        ( ring-Commutative-Ring-𝔽 A)
-        ( ring-Commutative-Ring-𝔽 B)
-        ( hom-ab-hom-Commutative-Ring-𝔽)
-    preserves-one-hom-Commutative-Ring-𝔽 =
+        ( ring-Finite-Commutative-Ring A)
+        ( ring-Finite-Commutative-Ring B)
+        ( hom-ab-hom-Finite-Commutative-Ring)
+    preserves-one-hom-Finite-Commutative-Ring =
       preserves-one-hom-Ring
-        ( ring-Commutative-Ring-𝔽 A)
-        ( ring-Commutative-Ring-𝔽 B)
+        ( ring-Finite-Commutative-Ring A)
+        ( ring-Finite-Commutative-Ring B)
         ( f)
 
-    is-commutative-ring-homomorphism-hom-Commutative-Ring-𝔽 :
+    is-commutative-ring-homomorphism-hom-Finite-Commutative-Ring :
       is-commutative-ring-homomorphism-hom-Ab
-        ( commutative-ring-Commutative-Ring-𝔽 A)
-        ( commutative-ring-Commutative-Ring-𝔽 B)
-        ( hom-ab-hom-Commutative-Ring-𝔽)
-    is-commutative-ring-homomorphism-hom-Commutative-Ring-𝔽 =
+        ( commutative-ring-Finite-Commutative-Ring A)
+        ( commutative-ring-Finite-Commutative-Ring B)
+        ( hom-ab-hom-Finite-Commutative-Ring)
+    is-commutative-ring-homomorphism-hom-Finite-Commutative-Ring =
       is-ring-homomorphism-hom-Ring
-        ( ring-Commutative-Ring-𝔽 A)
-        ( ring-Commutative-Ring-𝔽 B)
+        ( ring-Finite-Commutative-Ring A)
+        ( ring-Finite-Commutative-Ring B)
         ( f)
 
-    hom-commutative-semiring-hom-Commutative-Ring-𝔽 :
+    hom-commutative-semiring-hom-Finite-Commutative-Ring :
       hom-Commutative-Semiring
-        ( commutative-semiring-Commutative-Ring-𝔽 A)
-        ( commutative-semiring-Commutative-Ring-𝔽 B)
-    hom-commutative-semiring-hom-Commutative-Ring-𝔽 =
+        ( commutative-semiring-Finite-Commutative-Ring A)
+        ( commutative-semiring-Finite-Commutative-Ring B)
+    hom-commutative-semiring-hom-Finite-Commutative-Ring =
       hom-semiring-hom-Ring
-        ( ring-Commutative-Ring-𝔽 A)
-        ( ring-Commutative-Ring-𝔽 B)
+        ( ring-Finite-Commutative-Ring A)
+        ( ring-Finite-Commutative-Ring B)
         ( f)
 ```
 
@@ -195,35 +204,35 @@ module _
 
 ```agda
 module _
-  {l : Level} (A : Commutative-Ring-𝔽 l)
+  {l : Level} (A : Finite-Commutative-Ring l)
   where
 
-  preserves-mul-id-hom-Commutative-Ring-𝔽 :
+  preserves-mul-id-hom-Finite-Commutative-Ring :
     preserves-mul-hom-Ab
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 A)
-      ( id-hom-Ab (ab-Commutative-Ring-𝔽 A))
-  preserves-mul-id-hom-Commutative-Ring-𝔽 =
-    preserves-mul-id-hom-Ring (ring-Commutative-Ring-𝔽 A)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring A)
+      ( id-hom-Ab (ab-Finite-Commutative-Ring A))
+  preserves-mul-id-hom-Finite-Commutative-Ring =
+    preserves-mul-id-hom-Ring (ring-Finite-Commutative-Ring A)
 
-  preserves-unit-id-hom-Commutative-Ring-𝔽 :
+  preserves-unit-id-hom-Finite-Commutative-Ring :
     preserves-unit-hom-Ab
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 A)
-      ( id-hom-Ab (ab-Commutative-Ring-𝔽 A))
-  preserves-unit-id-hom-Commutative-Ring-𝔽 =
-    preserves-unit-id-hom-Ring (ring-Commutative-Ring-𝔽 A)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring A)
+      ( id-hom-Ab (ab-Finite-Commutative-Ring A))
+  preserves-unit-id-hom-Finite-Commutative-Ring =
+    preserves-unit-id-hom-Ring (ring-Finite-Commutative-Ring A)
 
-  is-ring-homomorphism-id-hom-Commutative-Ring-𝔽 :
+  is-ring-homomorphism-id-hom-Finite-Commutative-Ring :
     is-ring-homomorphism-hom-Ab
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 A)
-      ( id-hom-Ab (ab-Commutative-Ring-𝔽 A))
-  is-ring-homomorphism-id-hom-Commutative-Ring-𝔽 =
-    is-ring-homomorphism-id-hom-Ring (ring-Commutative-Ring-𝔽 A)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring A)
+      ( id-hom-Ab (ab-Finite-Commutative-Ring A))
+  is-ring-homomorphism-id-hom-Finite-Commutative-Ring =
+    is-ring-homomorphism-id-hom-Ring (ring-Finite-Commutative-Ring A)
 
-  id-hom-Commutative-Ring-𝔽 : hom-Commutative-Ring-𝔽 A A
-  id-hom-Commutative-Ring-𝔽 = id-hom-Ring (ring-Commutative-Ring-𝔽 A)
+  id-hom-Finite-Commutative-Ring : hom-Finite-Commutative-Ring A A
+  id-hom-Finite-Commutative-Ring = id-hom-Ring (ring-Finite-Commutative-Ring A)
 ```
 
 ### Composition of commutative ring homomorphisms
@@ -231,80 +240,80 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level}
-  (A : Commutative-Ring-𝔽 l1)
-  (B : Commutative-Ring-𝔽 l2)
-  (C : Commutative-Ring-𝔽 l3)
-  (g : hom-Commutative-Ring-𝔽 B C)
-  (f : hom-Commutative-Ring-𝔽 A B)
+  (A : Finite-Commutative-Ring l1)
+  (B : Finite-Commutative-Ring l2)
+  (C : Finite-Commutative-Ring l3)
+  (g : hom-Finite-Commutative-Ring B C)
+  (f : hom-Finite-Commutative-Ring A B)
   where
 
-  hom-ab-comp-hom-Commutative-Ring-𝔽 :
-    hom-Ab (ab-Commutative-Ring-𝔽 A) (ab-Commutative-Ring-𝔽 C)
-  hom-ab-comp-hom-Commutative-Ring-𝔽 =
+  hom-ab-comp-hom-Finite-Commutative-Ring :
+    hom-Ab (ab-Finite-Commutative-Ring A) (ab-Finite-Commutative-Ring C)
+  hom-ab-comp-hom-Finite-Commutative-Ring =
     hom-ab-comp-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
-      ( ring-Commutative-Ring-𝔽 C)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
+      ( ring-Finite-Commutative-Ring C)
       ( g)
       ( f)
 
-  hom-multiplicative-monoid-comp-hom-Commutative-Ring-𝔽 :
+  hom-multiplicative-monoid-comp-hom-Finite-Commutative-Ring :
     hom-Monoid
-      ( multiplicative-monoid-Commutative-Ring-𝔽 A)
-      ( multiplicative-monoid-Commutative-Ring-𝔽 C)
-  hom-multiplicative-monoid-comp-hom-Commutative-Ring-𝔽 =
+      ( multiplicative-monoid-Finite-Commutative-Ring A)
+      ( multiplicative-monoid-Finite-Commutative-Ring C)
+  hom-multiplicative-monoid-comp-hom-Finite-Commutative-Ring =
     hom-multiplicative-monoid-comp-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
-      ( ring-Commutative-Ring-𝔽 C)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
+      ( ring-Finite-Commutative-Ring C)
       ( g)
       ( f)
 
-  preserves-mul-comp-hom-Commutative-Ring-𝔽 :
+  preserves-mul-comp-hom-Finite-Commutative-Ring :
     preserves-mul-hom-Ab
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 C)
-      ( hom-ab-comp-hom-Commutative-Ring-𝔽)
-  preserves-mul-comp-hom-Commutative-Ring-𝔽 =
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring C)
+      ( hom-ab-comp-hom-Finite-Commutative-Ring)
+  preserves-mul-comp-hom-Finite-Commutative-Ring =
     preserves-mul-comp-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
-      ( ring-Commutative-Ring-𝔽 C)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
+      ( ring-Finite-Commutative-Ring C)
       ( g)
       ( f)
 
-  preserves-unit-comp-hom-Commutative-Ring-𝔽 :
+  preserves-unit-comp-hom-Finite-Commutative-Ring :
     preserves-unit-hom-Ab
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 C)
-      ( hom-ab-comp-hom-Commutative-Ring-𝔽)
-  preserves-unit-comp-hom-Commutative-Ring-𝔽 =
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring C)
+      ( hom-ab-comp-hom-Finite-Commutative-Ring)
+  preserves-unit-comp-hom-Finite-Commutative-Ring =
     preserves-unit-comp-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
-      ( ring-Commutative-Ring-𝔽 C)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
+      ( ring-Finite-Commutative-Ring C)
       ( g)
       ( f)
 
-  is-commutative-ring-homomorphism-comp-hom-Commutative-Ring-𝔽 :
+  is-commutative-ring-homomorphism-comp-hom-Finite-Commutative-Ring :
     is-commutative-ring-homomorphism-hom-Ab
-      ( commutative-ring-Commutative-Ring-𝔽 A)
-      ( commutative-ring-Commutative-Ring-𝔽 C)
-      ( hom-ab-comp-hom-Commutative-Ring-𝔽)
-  is-commutative-ring-homomorphism-comp-hom-Commutative-Ring-𝔽 =
+      ( commutative-ring-Finite-Commutative-Ring A)
+      ( commutative-ring-Finite-Commutative-Ring C)
+      ( hom-ab-comp-hom-Finite-Commutative-Ring)
+  is-commutative-ring-homomorphism-comp-hom-Finite-Commutative-Ring =
     is-ring-homomorphism-comp-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
-      ( ring-Commutative-Ring-𝔽 C)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
+      ( ring-Finite-Commutative-Ring C)
       ( g)
       ( f)
 
-  comp-hom-Commutative-Ring-𝔽 : hom-Commutative-Ring-𝔽 A C
-  comp-hom-Commutative-Ring-𝔽 =
+  comp-hom-Finite-Commutative-Ring : hom-Finite-Commutative-Ring A C
+  comp-hom-Finite-Commutative-Ring =
     comp-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
-      ( ring-Commutative-Ring-𝔽 C)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
+      ( ring-Finite-Commutative-Ring C)
       ( g)
       ( f)
 ```
@@ -313,23 +322,24 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Commutative-Ring-𝔽 l1) (B : Commutative-Ring-𝔽 l2)
+  {l1 l2 : Level}
+  (A : Finite-Commutative-Ring l1) (B : Finite-Commutative-Ring l2)
   where
 
-  htpy-hom-Commutative-Ring-𝔽 :
-    hom-Commutative-Ring-𝔽 A B → hom-Commutative-Ring-𝔽 A B →
+  htpy-hom-Finite-Commutative-Ring :
+    hom-Finite-Commutative-Ring A B → hom-Finite-Commutative-Ring A B →
     UU (l1 ⊔ l2)
-  htpy-hom-Commutative-Ring-𝔽 =
+  htpy-hom-Finite-Commutative-Ring =
     htpy-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
 
-  refl-htpy-hom-Commutative-Ring-𝔽 :
-    (f : hom-Commutative-Ring-𝔽 A B) → htpy-hom-Commutative-Ring-𝔽 f f
-  refl-htpy-hom-Commutative-Ring-𝔽 =
+  refl-htpy-hom-Finite-Commutative-Ring :
+    (f : hom-Finite-Commutative-Ring A B) → htpy-hom-Finite-Commutative-Ring f f
+  refl-htpy-hom-Finite-Commutative-Ring =
     refl-htpy-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
 ```
 
 ## Properties
@@ -339,52 +349,52 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  (A : Commutative-Ring-𝔽 l1) (B : Commutative-Ring-𝔽 l2)
-  (f : hom-Commutative-Ring-𝔽 A B)
+  (A : Finite-Commutative-Ring l1) (B : Finite-Commutative-Ring l2)
+  (f : hom-Finite-Commutative-Ring A B)
   where
 
-  htpy-eq-hom-Commutative-Ring-𝔽 :
-    (g : hom-Commutative-Ring-𝔽 A B) →
-    (f ＝ g) → htpy-hom-Commutative-Ring-𝔽 A B f g
-  htpy-eq-hom-Commutative-Ring-𝔽 =
+  htpy-eq-hom-Finite-Commutative-Ring :
+    (g : hom-Finite-Commutative-Ring A B) →
+    (f ＝ g) → htpy-hom-Finite-Commutative-Ring A B f g
+  htpy-eq-hom-Finite-Commutative-Ring =
     htpy-eq-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
       ( f)
 
-  is-torsorial-htpy-hom-Commutative-Ring-𝔽 :
-    is-torsorial (htpy-hom-Commutative-Ring-𝔽 A B f)
-  is-torsorial-htpy-hom-Commutative-Ring-𝔽 =
+  is-torsorial-htpy-hom-Finite-Commutative-Ring :
+    is-torsorial (htpy-hom-Finite-Commutative-Ring A B f)
+  is-torsorial-htpy-hom-Finite-Commutative-Ring =
     is-torsorial-htpy-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
       ( f)
 
-  is-equiv-htpy-eq-hom-Commutative-Ring-𝔽 :
-    (g : hom-Commutative-Ring-𝔽 A B) →
-    is-equiv (htpy-eq-hom-Commutative-Ring-𝔽 g)
-  is-equiv-htpy-eq-hom-Commutative-Ring-𝔽 =
+  is-equiv-htpy-eq-hom-Finite-Commutative-Ring :
+    (g : hom-Finite-Commutative-Ring A B) →
+    is-equiv (htpy-eq-hom-Finite-Commutative-Ring g)
+  is-equiv-htpy-eq-hom-Finite-Commutative-Ring =
     is-equiv-htpy-eq-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
       ( f)
 
-  extensionality-hom-Commutative-Ring-𝔽 :
-    (g : hom-Commutative-Ring-𝔽 A B) →
-    (f ＝ g) ≃ htpy-hom-Commutative-Ring-𝔽 A B f g
-  extensionality-hom-Commutative-Ring-𝔽 =
+  extensionality-hom-Finite-Commutative-Ring :
+    (g : hom-Finite-Commutative-Ring A B) →
+    (f ＝ g) ≃ htpy-hom-Finite-Commutative-Ring A B f g
+  extensionality-hom-Finite-Commutative-Ring =
     extensionality-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
       ( f)
 
-  eq-htpy-hom-Commutative-Ring-𝔽 :
-    (g : hom-Commutative-Ring-𝔽 A B) →
-    htpy-hom-Commutative-Ring-𝔽 A B f g → f ＝ g
-  eq-htpy-hom-Commutative-Ring-𝔽 =
+  eq-htpy-hom-Finite-Commutative-Ring :
+    (g : hom-Finite-Commutative-Ring A B) →
+    htpy-hom-Finite-Commutative-Ring A B f g → f ＝ g
+  eq-htpy-hom-Finite-Commutative-Ring =
     eq-htpy-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
       ( f)
 ```
 
@@ -393,28 +403,28 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (A : Commutative-Ring-𝔽 l1)
-  (B : Commutative-Ring-𝔽 l2)
-  (C : Commutative-Ring-𝔽 l3)
-  (D : Commutative-Ring-𝔽 l4)
-  (h : hom-Commutative-Ring-𝔽 C D)
-  (g : hom-Commutative-Ring-𝔽 B C)
-  (f : hom-Commutative-Ring-𝔽 A B)
+  (A : Finite-Commutative-Ring l1)
+  (B : Finite-Commutative-Ring l2)
+  (C : Finite-Commutative-Ring l3)
+  (D : Finite-Commutative-Ring l4)
+  (h : hom-Finite-Commutative-Ring C D)
+  (g : hom-Finite-Commutative-Ring B C)
+  (f : hom-Finite-Commutative-Ring A B)
   where
 
-  associative-comp-hom-Commutative-Ring-𝔽 :
-    comp-hom-Commutative-Ring-𝔽 A B D
-      ( comp-hom-Commutative-Ring-𝔽 B C D h g)
+  associative-comp-hom-Finite-Commutative-Ring :
+    comp-hom-Finite-Commutative-Ring A B D
+      ( comp-hom-Finite-Commutative-Ring B C D h g)
       ( f) ＝
-    comp-hom-Commutative-Ring-𝔽 A C D
+    comp-hom-Finite-Commutative-Ring A C D
       ( h)
-      ( comp-hom-Commutative-Ring-𝔽 A B C g f)
-  associative-comp-hom-Commutative-Ring-𝔽 =
+      ( comp-hom-Finite-Commutative-Ring A B C g f)
+  associative-comp-hom-Finite-Commutative-Ring =
     associative-comp-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
-      ( ring-Commutative-Ring-𝔽 C)
-      ( ring-Commutative-Ring-𝔽 D)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
+      ( ring-Finite-Commutative-Ring C)
+      ( ring-Finite-Commutative-Ring D)
       ( h)
       ( g)
       ( f)
@@ -425,24 +435,30 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  (A : Commutative-Ring-𝔽 l1)
-  (B : Commutative-Ring-𝔽 l2)
-  (f : hom-Commutative-Ring-𝔽 A B)
+  (A : Finite-Commutative-Ring l1)
+  (B : Finite-Commutative-Ring l2)
+  (f : hom-Finite-Commutative-Ring A B)
   where
 
-  left-unit-law-comp-hom-Commutative-Ring-𝔽 :
-    comp-hom-Commutative-Ring-𝔽 A B B (id-hom-Commutative-Ring-𝔽 B) f ＝ f
-  left-unit-law-comp-hom-Commutative-Ring-𝔽 =
+  left-unit-law-comp-hom-Finite-Commutative-Ring :
+    comp-hom-Finite-Commutative-Ring A B B
+      ( id-hom-Finite-Commutative-Ring B)
+      ( f) ＝
+    f
+  left-unit-law-comp-hom-Finite-Commutative-Ring =
     left-unit-law-comp-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
       ( f)
 
-  right-unit-law-comp-hom-Commutative-Ring-𝔽 :
-    comp-hom-Commutative-Ring-𝔽 A A B f (id-hom-Commutative-Ring-𝔽 A) ＝ f
-  right-unit-law-comp-hom-Commutative-Ring-𝔽 =
+  right-unit-law-comp-hom-Finite-Commutative-Ring :
+    comp-hom-Finite-Commutative-Ring A A B
+      ( f)
+      ( id-hom-Finite-Commutative-Ring A) ＝
+    f
+  right-unit-law-comp-hom-Finite-Commutative-Ring =
     right-unit-law-comp-hom-Ring
-      ( ring-Commutative-Ring-𝔽 A)
-      ( ring-Commutative-Ring-𝔽 B)
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
       ( f)
 ```

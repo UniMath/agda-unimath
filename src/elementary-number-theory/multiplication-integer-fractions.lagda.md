@@ -13,11 +13,14 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.identity-types
+open import foundation.subtypes
 ```
 
 </details>
@@ -146,4 +149,17 @@ left-distributive-mul-add-fraction-ℤ
         ( ap-add-ℤ
           ( interchange-law-mul-mul-ℤ nx dx ny dz))
           ( interchange-law-mul-mul-ℤ nx dx nz dy)))
+```
+
+### The inclusion of integers preserves multiplication
+
+```agda
+abstract
+  mul-in-fraction-ℤ :
+    (x y : ℤ) →
+    in-fraction-ℤ x *fraction-ℤ in-fraction-ℤ y ＝ in-fraction-ℤ (x *ℤ y)
+  mul-in-fraction-ℤ x y =
+    eq-pair
+      ( ap-mul-ℤ (left-unit-law-mul-ℤ x) (left-unit-law-mul-ℤ y))
+      ( eq-type-subtype subtype-positive-ℤ refl)
 ```

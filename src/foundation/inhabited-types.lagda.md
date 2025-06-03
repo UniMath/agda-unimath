@@ -7,9 +7,11 @@ module foundation.inhabited-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
+open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.propositional-truncations
@@ -18,6 +20,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
@@ -195,7 +198,7 @@ pr2 (Σ-Inhabited-Type X Y) =
 ```agda
 map-is-inhabited :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  (f : (A → B)) → is-inhabited A → is-inhabited B
+  (f : A → B) → is-inhabited A → is-inhabited B
 map-is-inhabited f = map-trunc-Prop f
 ```
 
@@ -218,6 +221,27 @@ is-contr-is-inhabited-is-prop {A = A} p h =
     ( h)
     ( is-contr-Prop A)
     ( λ a → a , eq-is-prop' p a)
+```
+
+### Contractibility of the base of a dependent sum
+
+Given a type `A` and a type family over it `B`, then if the dependent sum
+`Σ A B` is contractible, it follows that if there merely exists a section
+`(x : A) → B x`, then `A` is contractible.
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
+  where
+
+  abstract
+    is-contr-base-is-contr-Σ :
+      is-inhabited ((x : A) → B x) → is-contr (Σ A B) → is-contr A
+    is-contr-base-is-contr-Σ s is-contr-ΣAB =
+      rec-trunc-Prop
+        ( is-contr-Prop A)
+        ( λ s → is-contr-base-is-contr-Σ' A B s is-contr-ΣAB)
+        ( s)
 ```
 
 ## See also

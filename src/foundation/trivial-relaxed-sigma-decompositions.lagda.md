@@ -83,13 +83,7 @@ module _
   equiv-trivial-is-trivial-Relaxed-Σ-Decomposition :
     equiv-Relaxed-Σ-Decomposition D (trivial-Relaxed-Σ-Decomposition l4 A)
   pr1 equiv-trivial-is-trivial-Relaxed-Σ-Decomposition =
-    ( map-equiv (compute-raise-unit l4) ∘
-      terminal-map (indexing-type-Relaxed-Σ-Decomposition D) ,
-      is-equiv-comp
-        ( map-equiv (compute-raise-unit l4))
-        ( terminal-map (indexing-type-Relaxed-Σ-Decomposition D))
-        ( is-equiv-terminal-map-is-contr is-trivial)
-        ( is-equiv-map-equiv ( compute-raise-unit l4)))
+    equiv-raise-unit-is-contr is-trivial
   pr1 (pr2 equiv-trivial-is-trivial-Relaxed-Σ-Decomposition) x =
     ( inv-equiv (matching-correspondence-Relaxed-Σ-Decomposition D)) ∘e
     ( inv-left-unit-law-Σ-is-contr is-trivial x)

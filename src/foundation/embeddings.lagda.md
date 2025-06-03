@@ -309,8 +309,8 @@ module _
   emb-product f g = emb-Σ (λ _ → D) f (λ _ → g)
 
   is-emb-map-product :
-    (f : A → C) (g : B → D) → is-emb f → is-emb g → (is-emb (map-product f g))
-  is-emb-map-product f g is-emb-f is-emb-g =
+    {f : A → C} {g : B → D} → is-emb f → is-emb g → (is-emb (map-product f g))
+  is-emb-map-product {f} {g} is-emb-f is-emb-g =
     is-emb-map-emb (emb-product (f , is-emb-f) (g , is-emb-g))
 ```
 

@@ -25,8 +25,9 @@ open import group-theory.semigroups
 
 ## Idea
 
-A {{#concept "commutative monoid" Agda=Commutative-Monoid}} is a
-[monoid](group-theory.monoids.md) `M` in which `xy = yx` holds for all
+A
+{{#concept "commutative monoid" WDID=Q19934355 WD="commutative monoid" Agda=Commutative-Monoid}}
+is a [monoid](group-theory.monoids.md) `M` in which `xy = yx` holds for all
 `x y : M`.
 
 ## Definitions

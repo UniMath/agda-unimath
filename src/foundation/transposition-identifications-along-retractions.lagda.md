@@ -61,7 +61,7 @@ module _
 
 ## Properties
 
-### The map that assings to each retracting homotopy a family of transposition functions of identifications is an equivalence
+### The map that assigns to each retracting homotopy a family of transposition functions of identifications is an equivalence
 
 ```agda
 module _

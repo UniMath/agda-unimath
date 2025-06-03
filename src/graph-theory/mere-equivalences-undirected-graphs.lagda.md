@@ -64,5 +64,5 @@ module _
 - [Graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism) at
   Wikipedia
 - [Graph isomorphism](https://mathworld.wolfram.com/GraphIsomorphism.html) at
-  Wolfram Mathworld
+  Wolfram MathWorld
 - [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at $n$Lab

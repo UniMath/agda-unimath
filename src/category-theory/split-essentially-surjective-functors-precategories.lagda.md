@@ -7,16 +7,26 @@ module category-theory.split-essentially-surjective-functors-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
+open import category-theory.cores-precategories
 open import category-theory.essential-fibers-of-functors-precategories
 open import category-theory.essentially-surjective-functors-precategories
+open import category-theory.fully-faithful-functors-precategories
 open import category-theory.functors-precategories
+open import category-theory.isomorphisms-in-categories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
+open import category-theory.pseudomonic-functors-precategories
 
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.retracts-of-types
+open import foundation.sections
 open import foundation.universe-levels
 ```
 
@@ -25,8 +35,9 @@ open import foundation.universe-levels
 ## Idea
 
 A [functor](category-theory.functors-precategories.md) `F : C → D` between
-[precategories](category-theory.precategories.md) is **split essentially
-surjective** if there is a section of the
+[precategories](category-theory.precategories.md) is
+{{#concept "split essentially surjective" Disambiguation="functor between set-level precategories" Agda=is-split-essentially-surjective-functor-Precategory  Agda=split-essentially-surjective-functor-Precategory}}
+if there is a section of the
 [essential fiber](category-theory.essential-fibers-of-functors-precategories.md)
 over every object of `D`.
 
@@ -166,14 +177,110 @@ module _
       ( is-essentially-surjective-is-split-essentially-surjective-functor-Precategory)
 ```
 
-### Being split essentially surjective is a property of fully faithful functors when the codomain is a category
+### Being split essentially surjective is a property of fully faithful functors when the domain is a category
 
-This remains to be shown. This is Lemma 6.8 of _Univalent Categories and the
-Rezk completion_.
+This is Lemma 6.8 of {{#cite AKS15}}, although we give a different proof.
+
+**Proof.** Let `F : 𝒞 → 𝒟` be a functor of precategories, where `𝒞` is
+univalent. It suffices to assume `F` is fully faithful on the
+[core](category-theory.cores-categories.md) of `𝒞`. Then, to show that
+`is-split-essentially-surjective` is a proposition, i.e., that
+
+```text
+  (d : 𝒟₀) → Σ (x : 𝒞₀), (Fx ≅ d)
+```
+
+is a proposition it is equivalent to show that if it has an element it is
+contractible, so assume `F` is split essentially surjective. Then, it suffices
+to show that for every `d : 𝒟₀`, the type `Σ (x : 𝒞₀), (Fx ≅ d)` is
+contractible. By split essential surjectivity there is an element `y : 𝒞₀` such
+that `Fy ≅ d` and since postcomposing by an isomorphism is an equivalence of
+isomorphism-sets, we have
+
+```text
+  (Fx ≅ d) ≃ (Fx ≅ Fy) ≃ (x ≅ y)
+```
+
+so `(Σ (x : 𝒞₀), (Fx ≅ d)) ≃ (Σ (x : 𝒞₀), (x ≅ y))`, and the latter is
+contractible by univalence.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2) (D : Precategory l3 l4)
+  (F : functor-Precategory C D)
+  (c : is-category-Precategory C)
+  where
+
+  is-proof-irrelevant-is-split-essentially-surjective-has-section-on-isos-functor-is-category-domain-Precategory :
+    ( (x y : obj-Precategory C) →
+      section (preserves-iso-functor-Precategory C D F {x} {y})) →
+    is-proof-irrelevant
+      ( is-split-essentially-surjective-functor-Precategory C D F)
+  is-proof-irrelevant-is-split-essentially-surjective-has-section-on-isos-functor-is-category-domain-Precategory
+    H s =
+    is-contr-Π
+      ( λ d →
+        is-contr-retract-of
+          ( Σ (obj-Category (C , c)) (iso-Category (C , c) (pr1 (s d))))
+          ( retract-tot
+            ( λ x →
+              comp-retract
+                ( retract-section
+                  ( preserves-iso-functor-Precategory C D F)
+                  ( H (pr1 (s d)) x))
+                ( retract-equiv
+                  ( equiv-inv-iso-Precategory D ∘e
+                    equiv-postcomp-hom-iso-Precategory
+                      ( core-precategory-Precategory D)
+                      ( map-equiv
+                        ( compute-iso-core-Precategory D)
+                        ( inv-iso-Precategory D (pr2 (s d))))
+                      ( obj-functor-Precategory C D F x)))))
+          ( is-torsorial-iso-Category (C , c) (pr1 (s d))))
+
+  is-prop-is-split-essentially-surjective-has-section-on-isos-functor-is-category-domain-Precategory :
+    ( (x y : obj-Precategory C) →
+      section (preserves-iso-functor-Precategory C D F {x} {y})) →
+    is-prop
+      ( is-split-essentially-surjective-functor-Precategory C D F)
+  is-prop-is-split-essentially-surjective-has-section-on-isos-functor-is-category-domain-Precategory
+    =
+    is-prop-is-proof-irrelevant ∘
+    is-proof-irrelevant-is-split-essentially-surjective-has-section-on-isos-functor-is-category-domain-Precategory
+
+  is-prop-is-split-essentially-surjective-is-fully-faithful-on-isos-functor-is-category-domain-Precategory :
+    ( (x y : obj-Precategory C) →
+      is-equiv (preserves-iso-functor-Precategory C D F {x} {y})) →
+    is-prop (is-split-essentially-surjective-functor-Precategory C D F)
+  is-prop-is-split-essentially-surjective-is-fully-faithful-on-isos-functor-is-category-domain-Precategory
+    H =
+    is-prop-is-split-essentially-surjective-has-section-on-isos-functor-is-category-domain-Precategory
+      ( λ x y → section-is-equiv (H x y))
+
+  is-prop-is-split-essentially-surjective-is-pseudomonic-functor-is-category-domain-Precategory :
+    is-pseudomonic-functor-Precategory C D F →
+    is-prop (is-split-essentially-surjective-functor-Precategory C D F)
+  is-prop-is-split-essentially-surjective-is-pseudomonic-functor-is-category-domain-Precategory
+    H =
+    is-prop-is-split-essentially-surjective-is-fully-faithful-on-isos-functor-is-category-domain-Precategory
+      ( λ x y →
+        is-equiv-preserves-iso-is-pseudomonic-functor-Precategory C D F H
+          { x}
+          { y})
+
+  is-prop-is-split-essentially-surjective-is-fully-faithful-functor-is-category-domain-Precategory :
+    is-fully-faithful-functor-Precategory C D F →
+    is-prop (is-split-essentially-surjective-functor-Precategory C D F)
+  is-prop-is-split-essentially-surjective-is-fully-faithful-functor-is-category-domain-Precategory
+    H =
+    is-prop-is-split-essentially-surjective-is-pseudomonic-functor-is-category-domain-Precategory
+      ( is-pseudomonic-is-fully-faithful-functor-Precategory C D F H)
+```
 
 ## References
 
-{{#bibliography}} {{#reference AKS15}}
+{{#bibliography}}
 
 ## External links
 

@@ -18,6 +18,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.postcomposition-dependent-functions
 open import foundation.propositional-truncations
 open import foundation.split-surjective-maps
@@ -47,7 +48,7 @@ open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 
-open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.extensions-maps
 ```
 
 </details>
@@ -238,15 +239,21 @@ abstract
 ### Any equivalence is surjective
 
 ```agda
-is-surjective-is-equiv :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-  is-equiv f → is-surjective f
-is-surjective-is-equiv H = is-surjective-has-section (pr1 H)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
-is-surjective-map-equiv :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
-  is-surjective (map-equiv e)
-is-surjective-map-equiv e = is-surjective-is-equiv (is-equiv-map-equiv e)
+  is-surjective-is-equiv : {f : A → B} → is-equiv f → is-surjective f
+  is-surjective-is-equiv H = is-surjective-has-section (pr1 H)
+
+  is-surjective-map-equiv : (e : A ≃ B) → is-surjective (map-equiv e)
+  is-surjective-map-equiv e = is-surjective-is-equiv (is-equiv-map-equiv e)
+
+  surjection-equiv : A ≃ B → A ↠ B
+  surjection-equiv e = map-equiv e , is-surjective-map-equiv e
+
+  surjection-inv-equiv : B ≃ A → A ↠ B
+  surjection-inv-equiv e = surjection-equiv (inv-equiv e)
 ```
 
 ### The identity function is surjective
@@ -445,7 +452,7 @@ module _
 
   abstract
     is-surjective-left-map-triangle :
-      (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+      (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h) →
       is-surjective g → is-surjective h → is-surjective f
     is-surjective-left-map-triangle f g h H is-surj-g is-surj-h x =
       apply-universal-property-trunc-Prop
@@ -463,6 +470,9 @@ module _
     is-surjective g → is-surjective h → is-surjective (g ∘ h)
   is-surjective-comp {g} {h} =
     is-surjective-left-map-triangle (g ∘ h) g h refl-htpy
+
+  comp-surjection : B ↠ X → A ↠ B → A ↠ X
+  comp-surjection (g , G) (h , H) = g ∘ h , is-surjective-comp G H
 ```
 
 ### Functoriality of products preserves being surjective
@@ -493,23 +503,23 @@ module _
       ( is-surjective-map-surjection g)
 ```
 
-### The composite of a surjective map with an equivalence is surjective
+### The composite of a surjective map before an equivalence is surjective
 
 ```agda
-is-surjective-comp-equiv :
+is-surjective-left-comp-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  (e : B ≃ C) → {f : A → B} → is-surjective f → is-surjective (map-equiv e ∘ f)
-is-surjective-comp-equiv e =
+  (e : B ≃ C) {f : A → B} → is-surjective f → is-surjective (map-equiv e ∘ f)
+is-surjective-left-comp-equiv e =
   is-surjective-comp (is-surjective-map-equiv e)
 ```
 
-### The precomposite of a surjective map with an equivalence is surjective
+### The composite of a surjective map after an equivalence is surjective
 
 ```agda
-is-surjective-precomp-equiv :
+is-surjective-right-comp-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : B → C} →
   is-surjective f → (e : A ≃ B) → is-surjective (f ∘ map-equiv e)
-is-surjective-precomp-equiv H e =
+is-surjective-right-comp-equiv H e =
   is-surjective-comp H (is-surjective-map-equiv e)
 ```
 
@@ -828,6 +838,26 @@ module _
       ( map-emb g)
       ( is-surjective-map-surjection f)
       ( is-emb-map-emb g)
+```
+
+### Every type that surjects onto an inhabited type is inhabited
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-inhabited-is-surjective :
+    {f : A → B} → is-surjective f → is-inhabited B → is-inhabited A
+  is-inhabited-is-surjective F =
+    rec-trunc-Prop
+      ( is-inhabited-Prop A)
+      ( rec-trunc-Prop (is-inhabited-Prop A) (unit-trunc-Prop ∘ pr1) ∘ F)
+
+  is-inhabited-surjection :
+    A ↠ B → is-inhabited B → is-inhabited A
+  is-inhabited-surjection f =
+    is-inhabited-is-surjective (is-surjective-map-surjection f)
 ```
 
 ### The type of surjections `A ↠ B` is equivalent to the type of families `P` of inhabited types over `B` equipped with an equivalence `A ≃ Σ B P`

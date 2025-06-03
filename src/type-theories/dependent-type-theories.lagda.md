@@ -27,7 +27,7 @@ open import foundation.whiskering-identifications-concatenation
 ## Idea
 
 We introduce the category of dependent type theories, following Voevodsky's
-notion of $B$-systems. The category of generalised algebraic theories is defined
+notion of $B$-systems. The category of generalized algebraic theories is defined
 to be this category. It should be equivalent to the category of essentially
 algebraic theories.
 

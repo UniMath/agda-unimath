@@ -35,7 +35,7 @@ module _
   alternating-Concrete-Group : Concrete-Group (lsuc (lsuc lzero))
   alternating-Concrete-Group =
     concrete-group-kernel-hom-Concrete-Group
-      ( UU-Fin-Group lzero n)
-      ( UU-Fin-Group (lsuc lzero) 2)
+      ( Type-With-Cardinality-ℕ-Concrete-Group lzero n)
+      ( Type-With-Cardinality-ℕ-Concrete-Group (lsuc lzero) 2)
       ( cartier-delooping-sign n)
 ```

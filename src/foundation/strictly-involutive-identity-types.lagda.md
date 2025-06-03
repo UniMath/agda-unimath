@@ -47,8 +47,9 @@ _weakly_. On this page, we consider the
 
 whose elements we call
 {{#concept "strictly involutive identifications" Agda=involutive-Id}}. This type
-family is [equivalent](foundation-core.equivalences.md) to the standard identity
-types, but satisfies the strict laws
+family, due to Martín Escardó {{#cite Esc19DefinitionsEquivalence}}, is
+[equivalent](foundation-core.equivalences.md) to the standard identity types,
+but satisfies the strict laws
 
 - `invⁱ (invⁱ p) ≐ p`
 - `invⁱ reflⁱ ≐ reflⁱ`

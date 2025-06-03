@@ -23,6 +23,13 @@ open import group-theory.symmetric-groups
 
 </details>
 
+## Idea
+
+{{#concept "Cayley's theorem" Disambiguation="for abstract groups" WD="Cayley's theorem" WDID=Q179208 Agda=Cayleys-theorem}}
+states that every [group](group-theory.groups.md) is a
+[subgroup](group-theory.subgroups.md) of a
+[symmetric group](group-theory.symmetric-groups.md).
+
 ## Theorem
 
 ### Direct proof of Cayley's theorem

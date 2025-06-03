@@ -33,22 +33,23 @@ open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 
 ## Idea
 
-A **higher modality** is a _higher mode of logic_ defined in terms of a monadic
+A {{#concept "higher modality" Disambiguation="on types" Agda=higher-modality}}
+is a _higher mode of logic_ defined in terms of an monadic
 [modal operator](orthogonal-factorization-systems.modal-operators.md) `○`
 satisfying a certain induction principle.
 
-The induction principle states that for every type `X` and family
-`P : ○ X → UU`, to define a dependent map `(x' : ○ X) → ○ (P x')` it suffices to
-define it on the image of the modal unit, i.e. `(x : X) → ○ (P (unit-○ x))`.
-Moreover, it satisfies a computation principle stating that when evaluating a
-map defined in this manner on the image of the modal unit, one recovers the
-defining map (propositionally).
+The induction principle states that for every type `X` and family `P : ○ X → 𝒰`,
+to define a dependent map `(x' : ○ X) → ○ (P x')` it suffices to define it on
+the image of the modal unit, i.e. `(x : X) → ○ (P (unit-○ x))`. Moreover, it
+satisfies a computation principle stating that when evaluating a map defined in
+this manner on the image of the modal unit, one recovers the defining map
+(propositionally).
 
 Lastly, higher modalities must also be **identity closed** in the sense that for
 every type `X` the identity types `(x' ＝ y')` are modal for all terms
 `x' y' : ○ X`. In other words, `○ X` is
-[`○`-separated](foundation.separated-types.md). Because of this, higher
-modalities in their most general form only make sense for
+[`○`-separated](foundation.separated-types-subuniverses.md). Because of this,
+(small) higher modalities in their most general form only make sense for
 [locally small modal operators](orthogonal-factorization-systems.locally-small-modal-operators.md).
 
 ## Definition
@@ -365,7 +366,7 @@ module _
       ( map-inv-equiv-is-small is-small-x'=y')
       ( is-retraction-map-inv-is-equiv is-modal-small-x'=y'
         ( map-equiv-is-small is-small-x'=y' p))) ∙
-    ( is-retraction-map-inv-equiv (equiv-is-small is-small-x'=y') p)
+    ( is-retraction-map-inv-equiv-is-small is-small-x'=y' p)
     where
       is-small-x'=y' = is-locally-small-operator-higher-modality m X x' y'
       is-modal-small-x'=y' =
@@ -456,14 +457,11 @@ module _
 
   is-modal-operator-type-higher-modality :
     is-modal (unit-higher-modality m) (operator-higher-modality m X)
-  pr1 (pr1 is-modal-operator-type-higher-modality) =
-    map-inv-unit-higher-modality
-  pr2 (pr1 is-modal-operator-type-higher-modality) =
-    is-section-map-inv-unit-higher-modality
-  pr1 (pr2 is-modal-operator-type-higher-modality) =
-    map-inv-unit-higher-modality
-  pr2 (pr2 is-modal-operator-type-higher-modality) =
-    is-retraction-map-inv-unit-higher-modality
+  is-modal-operator-type-higher-modality =
+    is-equiv-is-invertible
+      map-inv-unit-higher-modality
+      is-section-map-inv-unit-higher-modality
+      is-retraction-map-inv-unit-higher-modality
 ```
 
 ### Higher modalities are uniquely eliminating modalities
@@ -498,14 +496,11 @@ module _
   is-equiv-ind-higher-modality :
     {X : UU l} (P : operator-higher-modality m X → UU l) →
     is-equiv (ind-higher-modality m P)
-  pr1 (pr1 (is-equiv-ind-higher-modality P)) =
-    precomp-Π (unit-higher-modality m) (operator-higher-modality m ∘ P)
-  pr2 (pr1 (is-equiv-ind-higher-modality P)) =
-    is-retraction-ind-higher-modality P
-  pr1 (pr2 (is-equiv-ind-higher-modality P)) =
-    precomp-Π (unit-higher-modality m) (operator-higher-modality m ∘ P)
-  pr2 (pr2 (is-equiv-ind-higher-modality P)) =
-    is-section-ind-higher-modality m
+  is-equiv-ind-higher-modality P =
+    is-equiv-is-invertible
+      ( precomp-Π (unit-higher-modality m) (operator-higher-modality m ∘ P))
+      ( is-retraction-ind-higher-modality P)
+      ( is-section-ind-higher-modality m)
 
   equiv-ind-higher-modality :
     {X : UU l} (P : operator-higher-modality m X → UU l) →

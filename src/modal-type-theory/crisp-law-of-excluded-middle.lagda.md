@@ -14,7 +14,6 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
-open import foundation-core.negation
 open import foundation-core.propositions
 ```
 
@@ -22,7 +21,8 @@ open import foundation-core.propositions
 
 ## Idea
 
-The **crisp law of excluded middle** asserts that any crisp
+The {{#concept "crisp law of excluded middle" Agda=Crisp-LEM}} asserts that any
+[crisp](modal-type-theory.crisp-types.md)
 [proposition](foundation-core.propositions.md) `P` is
 [decidable](foundation.decidable-types.md).
 
@@ -48,3 +48,7 @@ pr2 (pr2 (decidable-prop-Crisp-Prop lem P)) = lem P
 ## See also
 
 - [The law of excluded middle](foundation.law-of-excluded-middle.md)
+
+## References
+
+{{#bibliography}} {{#reference Shu18}}

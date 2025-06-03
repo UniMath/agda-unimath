@@ -27,14 +27,14 @@ def does_support(backend):
 def module_source_path_from_md_name(roots, module_name):
     """
     Tries to find a source literate Agda or markdown file given
-    a list of directories to seach, and a 'module name', which is an
+    a list of directories to search, and a 'module name', which is an
     entry in the websites table of contents
     (usually of the form `agda-module.submodule.md`).
 
     Returns None if no such file is found.
     """
     base_name = module_name.replace('.', os.sep)[:-len('.md')]
-    # Check agains "lagda", not ".lagda", since that period would
+    # Check against "lagda", not ".lagda", since that period would
     # have been replaced by the previous line
     if base_name.endswith('lagda'):
         base_name = base_name[:-len('.lagda')]
@@ -84,12 +84,14 @@ def get_author_element_for_file(filename, include_contributors, contributors):
             'HEAD', '--', filename
         ], capture_output=True, text=True, check=True).stdout.splitlines()
 
-        # Collect authors and sort by number of commits
-        author_names = [
-            author['displayName']
-            for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors)
-        ]
-        attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}.</i></p>'
+        # If all commits to a file are chore commits, then there are no authors
+        if raw_authors_git_output:
+          # Collect authors and sort by number of commits
+          author_names = [
+              author['displayName']
+              for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors)
+          ]
+          attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}.</i></p>'
 
     file_log_output = subprocess.run([
         'git', 'log',

@@ -16,35 +16,36 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **telescope**, or **iterated type family**, is a list of type families
-`(A₀, A₁, A₂, ..., A_n)` consisting of
+A {{#concept "telescope" Disambiguation="of types" Agda=telescope}}, or
+**iterated type family**, is a list of type families `(A₀, A₁, A₂, …, Aₙ)`
+consisting of
 
 - a type `A₀`,
 - a type family `A₁ : A₀ → 𝒰`,
 - a type family `A₂ : (x₀ : A₀) → A₁ x₀ → 𝒰`,
-- ...
-- a type family `A_n : (x₀ : A₀) ... (x_(n-1) : A_(n-1) x₀ ... x_(n-2)) → 𝒰`.
+- ⋮
+- a type family `Aₙ : (x₀ : A₀) ⋯ (xₙ₋₁ : Aₙ₋₁ x₀ ⋯ xₙ₋₂) → 𝒰`.
 
-We say that a telescope `(A₀,...,A_n)` has **length** `n+1`. In other words, the
-length of the telescope `(A₀,...,A_n)` is the length of the (dependent) list
-`(A₀,...,A_n)`.
+We say that a telescope `(A₀, …, Aₙ)` has **length** `n+1`. In other words, the
+length of the telescope `(A₀, …, Aₙ)` is the length of the (dependent) list
+`(A₀, …, Aₙ)`.
 
 We encode the type of telescopes as a family of inductive types
 
 ```text
-  telescope : (l : Level) → ℕ → UUω
+  telescope : (l : Level) → ℕ → UUω.
 ```
 
 The type of telescopes is a [directed tree](trees.directed-trees.md)
 
 ```text
-  ... → T₃ → T₂ → T₁ → T₀,
+  ⋯ → T₃ → T₂ → T₁ → T₀,
 ```
 
-where `T_n` is the type of all telescopes of length `n`, and the map from
-`T_(n+1)` to `T_n` maps `(A₀,...,A_n)` to `(A₀,...,A_(n-1))`. The type of such
-directed trees can be defined as a coinductive record type, and we will define
-the tree `T` of telescopes as a particular element of this tree.
+where `Tₙ` is the type of all telescopes of length `n`, and the map from `Tₙ₊₁`
+to `Tₙ` maps `(A₀, …, Aₙ)` to `(A₀, …, Aₙ₋₁)`. The type of such directed trees
+can be defined as a coinductive record type, and we will define the tree `T` of
+telescopes as a particular element of this tree.
 
 ## Definitions
 
@@ -61,11 +62,7 @@ data
     (X → telescope l2 n) → telescope (l1 ⊔ l2) (succ-ℕ n)
 
 open telescope public
-```
 
-A very slight reformulation of `cons-telescope` for convenience:
-
-```agda
 prepend-telescope :
   {l1 l2 : Level} {n : ℕ} →
   (A : UU l1) → ({x : A} → telescope l2 n) → telescope (l1 ⊔ l2) (succ-ℕ n)
@@ -76,9 +73,9 @@ prepend-telescope A B = cons-telescope {X = A} (λ x → B {x})
 
 One issue with the previous definition of telescopes is that it is impossible to
 extract any type information from it. At the expense of giving up full universe
-polymorphism, we can define a notion of **telescopes at a universe level** that
-admits such projections. This definition is also compatible with the
-`--level-universe` restriction.
+polymorphism, we can define **telescopes at a universe level**. These admit such
+projections, and are moreover compatible with the `--level-universe`
+restriction.
 
 ```agda
 data telescope-Level (l : Level) : ℕ → UU (lsuc l)
@@ -114,17 +111,17 @@ apply-base-telescope P (cons-telescope A) =
 
 ### Telescopes as instance arguments
 
-To get Agda to infer telescopes, we help it along a little using
+To have Agda infer telescopes, we help it along using
 [instance arguments](https://agda.readthedocs.io/en/latest/language/instance-arguments.html).
-These are a special kind of implicit argument in Agda that are resolved by the
-instance resolution algorithm. We register building blocks for this algorithm to
-use below, i.e. _instances_. Then Agda will attempt to use those to construct
+These are a special kind of implicit argument that are resolved by _the instance
+resolution algorithm_. We register building blocks, called _instances_, for this
+algorithm to use below. Then Agda will attempt to use those to construct
 telescopes of the appropriate kind when asked to.
 
-In the case of telescopes, this has the unfortunate disadvantage that we can
-only define instances for fixed length telescopes. We have defined instances of
-telescopes up to length 18, so although Agda cannot infer a telescope of a
-general length using this approach, it can infer them up to this given length.
+In the case of telescopes, this has the disadvantage that we can only define
+instances for fixed length telescopes. We have defined instances of telescopes
+up to length 18, so although Agda cannot infer a telescope of a general length
+using this approach, it can infer them up to this given length.
 
 ```agda
 instance-telescope : {l : Level} {n : ℕ} → {{telescope l n}} → telescope l n
@@ -912,3 +909,7 @@ instance
 - [Dependent telescopes](foundation.dependent-telescopes.md)
 - [Iterated Σ-types](foundation.iterated-dependent-pair-types.md)
 - [Iterated Π-types](foundation.iterated-dependent-product-types.md)
+
+## External links
+
+- [type telescope](https://ncatlab.org/nlab/show/type+telescope) at $n$Lab

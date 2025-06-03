@@ -62,7 +62,7 @@ equiv-dependent-universal-property-Fin zero-ℕ A =
     ( dependent-universal-property-empty' A)
     ( is-contr-raise-unit)
 equiv-dependent-universal-property-Fin (succ-ℕ zero-ℕ) A =
-  equiv-dependent-universal-property-contr (zero-Fin 0) is-contr-Fin-one-ℕ A
+  equiv-dependent-universal-property-contr (zero-Fin 0) is-contr-Fin-1 A
 equiv-dependent-universal-property-Fin (succ-ℕ (succ-ℕ n)) A =
   ( equiv-product
     ( equiv-dependent-universal-property-Fin (succ-ℕ n) (A ∘ inl))
@@ -77,48 +77,48 @@ module _
   {l : Level} (A : Fin 2 → UU l)
   where
 
-  ev-zero-one-Fin-two-ℕ :
+  ev-zero-one-Fin-2 :
     ((i : Fin 2) → A i) → A (zero-Fin 1) × A (one-Fin 1)
-  pr1 (ev-zero-one-Fin-two-ℕ f) = f (zero-Fin 1)
-  pr2 (ev-zero-one-Fin-two-ℕ f) = f (one-Fin 1)
+  pr1 (ev-zero-one-Fin-2 f) = f (zero-Fin 1)
+  pr2 (ev-zero-one-Fin-2 f) = f (one-Fin 1)
 
-  map-inv-ev-zero-one-Fin-two-ℕ :
+  map-inv-ev-zero-one-Fin-2 :
     A (zero-Fin 1) × A (one-Fin 1) → (i : Fin 2) → A i
-  map-inv-ev-zero-one-Fin-two-ℕ (x , y) (inl (inr star)) = x
-  map-inv-ev-zero-one-Fin-two-ℕ (x , y) (inr star) = y
+  map-inv-ev-zero-one-Fin-2 (x , y) (inl (inr star)) = x
+  map-inv-ev-zero-one-Fin-2 (x , y) (inr star) = y
 
-  is-section-map-inv-ev-zero-one-Fin-two-ℕ :
-    ev-zero-one-Fin-two-ℕ ∘ map-inv-ev-zero-one-Fin-two-ℕ ~ id
-  is-section-map-inv-ev-zero-one-Fin-two-ℕ (x , y) = refl
+  is-section-map-inv-ev-zero-one-Fin-2 :
+    ev-zero-one-Fin-2 ∘ map-inv-ev-zero-one-Fin-2 ~ id
+  is-section-map-inv-ev-zero-one-Fin-2 (x , y) = refl
 
   abstract
-    is-retraction-map-inv-ev-zero-one-Fin-two-ℕ :
-      map-inv-ev-zero-one-Fin-two-ℕ ∘ ev-zero-one-Fin-two-ℕ ~ id
-    is-retraction-map-inv-ev-zero-one-Fin-two-ℕ f =
+    is-retraction-map-inv-ev-zero-one-Fin-2 :
+      map-inv-ev-zero-one-Fin-2 ∘ ev-zero-one-Fin-2 ~ id
+    is-retraction-map-inv-ev-zero-one-Fin-2 f =
       eq-htpy (λ { (inl (inr star)) → refl ; (inr star) → refl})
 
-  dependent-universal-property-Fin-two-ℕ :
-    is-equiv ev-zero-one-Fin-two-ℕ
-  dependent-universal-property-Fin-two-ℕ =
+  dependent-universal-property-Fin-2 :
+    is-equiv ev-zero-one-Fin-2
+  dependent-universal-property-Fin-2 =
     is-equiv-is-invertible
-      map-inv-ev-zero-one-Fin-two-ℕ
-      is-section-map-inv-ev-zero-one-Fin-two-ℕ
-      is-retraction-map-inv-ev-zero-one-Fin-two-ℕ
+      map-inv-ev-zero-one-Fin-2
+      is-section-map-inv-ev-zero-one-Fin-2
+      is-retraction-map-inv-ev-zero-one-Fin-2
 
-  is-equiv-map-inv-dependent-universal-proeprty-Fin-two-ℕ :
-    is-equiv map-inv-ev-zero-one-Fin-two-ℕ
-  is-equiv-map-inv-dependent-universal-proeprty-Fin-two-ℕ =
+  is-equiv-map-inv-dependent-universal-proeprty-Fin-2 :
+    is-equiv map-inv-ev-zero-one-Fin-2
+  is-equiv-map-inv-dependent-universal-proeprty-Fin-2 =
     is-equiv-is-invertible
-      ev-zero-one-Fin-two-ℕ
-      is-retraction-map-inv-ev-zero-one-Fin-two-ℕ
-      is-section-map-inv-ev-zero-one-Fin-two-ℕ
+      ev-zero-one-Fin-2
+      is-retraction-map-inv-ev-zero-one-Fin-2
+      is-section-map-inv-ev-zero-one-Fin-2
 
-  equiv-dependent-universal-property-Fin-two-ℕ :
+  equiv-dependent-universal-property-Fin-2 :
     ((i : Fin 2) → A i) ≃ (A (zero-Fin 1) × A (one-Fin 1))
-  pr1 equiv-dependent-universal-property-Fin-two-ℕ =
-    ev-zero-one-Fin-two-ℕ
-  pr2 equiv-dependent-universal-property-Fin-two-ℕ =
-    dependent-universal-property-Fin-two-ℕ
+  pr1 equiv-dependent-universal-property-Fin-2 =
+    ev-zero-one-Fin-2
+  pr2 equiv-dependent-universal-property-Fin-2 =
+    dependent-universal-property-Fin-2
 ```
 
 ### The universal property of the standard finite types
@@ -138,13 +138,13 @@ module _
   {l : Level} {X : UU l}
   where
 
-  universal-property-Fin-two-ℕ :
-    is-equiv (ev-zero-one-Fin-two-ℕ (λ _ → X))
-  universal-property-Fin-two-ℕ =
-    dependent-universal-property-Fin-two-ℕ (λ _ → X)
+  universal-property-Fin-2 :
+    is-equiv (ev-zero-one-Fin-2 (λ _ → X))
+  universal-property-Fin-2 =
+    dependent-universal-property-Fin-2 (λ _ → X)
 
-  equiv-universal-property-Fin-two-ℕ :
+  equiv-universal-property-Fin-2 :
     (Fin 2 → X) ≃ X × X
-  equiv-universal-property-Fin-two-ℕ =
-    equiv-dependent-universal-property-Fin-two-ℕ (λ _ → X)
+  equiv-universal-property-Fin-2 =
+    equiv-dependent-universal-property-Fin-2 (λ _ → X)
 ```

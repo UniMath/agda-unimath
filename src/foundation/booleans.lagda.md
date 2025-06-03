@@ -7,7 +7,10 @@ module foundation.booleans where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.decidable-equality
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.discrete-types
 open import foundation.involutions
 open import foundation.negated-equality
 open import foundation.raising-universe-levels
@@ -193,49 +196,118 @@ abstract
       ( λ x y → eq-Eq-bool)
 
 bool-Set : Set lzero
-pr1 bool-Set = bool
-pr2 bool-Set = is-set-bool
+bool-Set = bool , is-set-bool
+```
+
+### The booleans have decidable equality
+
+```agda
+has-decidable-equality-bool : has-decidable-equality bool
+has-decidable-equality-bool true true = inl refl
+has-decidable-equality-bool true false = inr neq-true-false-bool
+has-decidable-equality-bool false true = inr neq-false-true-bool
+has-decidable-equality-bool false false = inl refl
+
+bool-Discrete-Type : Discrete-Type lzero
+bool-Discrete-Type = bool , has-decidable-equality-bool
+```
+
+### The "is true" predicate on booleans
+
+```agda
+is-true : bool → UU lzero
+is-true = _＝ true
+
+is-prop-is-true : (b : bool) → is-prop (is-true b)
+is-prop-is-true b = is-set-bool b true
+
+is-true-Prop : bool → Prop lzero
+is-true-Prop b = is-true b , is-prop-is-true b
+```
+
+### The "is false" predicate on booleans
+
+```agda
+is-false : bool → UU lzero
+is-false = _＝ false
+
+is-prop-is-false : (b : bool) → is-prop (is-false b)
+is-prop-is-false b = is-set-bool b false
+
+is-false-Prop : bool → Prop lzero
+is-false-Prop b = is-false b , is-prop-is-false b
+```
+
+### A boolean cannot be both true and false
+
+```agda
+not-is-false-is-true : (x : bool) → is-true x → ¬ (is-false x)
+not-is-false-is-true true t ()
+not-is-false-is-true false () f
+
+not-is-true-is-false : (x : bool) → is-false x → ¬ (is-true x)
+not-is-true-is-false true () f
+not-is-true-is-false false t ()
+```
+
+### A boolean must be either true or false
+
+```agda
+is-true-is-not-false : (x : bool) → ¬ (is-false x) → is-true x
+is-true-is-not-false true _ = refl
+is-true-is-not-false false ¬false = ex-falso (¬false refl)
+
+is-false-is-not-true : (x : bool) → ¬ (is-true x) → is-false x
+is-false-is-not-true true ¬true = ex-falso (¬true refl)
+is-false-is-not-true false _ = refl
 ```
 
 ### The type of booleans is equivalent to `Fin 2`
 
 ```agda
-bool-Fin-two-ℕ : Fin 2 → bool
-bool-Fin-two-ℕ (inl (inr star)) = true
-bool-Fin-two-ℕ (inr star) = false
+bool-Fin-2 : Fin 2 → bool
+bool-Fin-2 (inl (inr star)) = true
+bool-Fin-2 (inr star) = false
 
-Fin-two-ℕ-bool : bool → Fin 2
-Fin-two-ℕ-bool true = inl (inr star)
-Fin-two-ℕ-bool false = inr star
-
-abstract
-  is-retraction-Fin-two-ℕ-bool : Fin-two-ℕ-bool ∘ bool-Fin-two-ℕ ~ id
-  is-retraction-Fin-two-ℕ-bool (inl (inr star)) = refl
-  is-retraction-Fin-two-ℕ-bool (inr star) = refl
+Fin-2-bool : bool → Fin 2
+Fin-2-bool true = inl (inr star)
+Fin-2-bool false = inr star
 
 abstract
-  is-section-Fin-two-ℕ-bool : bool-Fin-two-ℕ ∘ Fin-two-ℕ-bool ~ id
-  is-section-Fin-two-ℕ-bool true = refl
-  is-section-Fin-two-ℕ-bool false = refl
+  is-retraction-Fin-2-bool : Fin-2-bool ∘ bool-Fin-2 ~ id
+  is-retraction-Fin-2-bool (inl (inr star)) = refl
+  is-retraction-Fin-2-bool (inr star) = refl
 
-equiv-bool-Fin-two-ℕ : Fin 2 ≃ bool
-pr1 equiv-bool-Fin-two-ℕ = bool-Fin-two-ℕ
-pr2 equiv-bool-Fin-two-ℕ =
+abstract
+  is-section-Fin-2-bool : bool-Fin-2 ∘ Fin-2-bool ~ id
+  is-section-Fin-2-bool true = refl
+  is-section-Fin-2-bool false = refl
+
+equiv-bool-Fin-2 : Fin 2 ≃ bool
+pr1 equiv-bool-Fin-2 = bool-Fin-2
+pr2 equiv-bool-Fin-2 =
   is-equiv-is-invertible
-    ( Fin-two-ℕ-bool)
-    ( is-section-Fin-two-ℕ-bool)
-    ( is-retraction-Fin-two-ℕ-bool)
+    ( Fin-2-bool)
+    ( is-section-Fin-2-bool)
+    ( is-retraction-Fin-2-bool)
 ```
 
 ### The type of booleans is finite
 
 ```agda
 is-finite-bool : is-finite bool
-is-finite-bool = is-finite-equiv equiv-bool-Fin-two-ℕ (is-finite-Fin 2)
+is-finite-bool = is-finite-equiv equiv-bool-Fin-2 (is-finite-Fin 2)
 
-bool-𝔽 : 𝔽 lzero
-pr1 bool-𝔽 = bool
-pr2 bool-𝔽 = is-finite-bool
+number-of-elements-bool : number-of-elements-is-finite is-finite-bool ＝ 2
+number-of-elements-bool =
+  inv
+    ( compute-number-of-elements-is-finite
+      ( 2 , equiv-bool-Fin-2)
+      ( is-finite-bool))
+
+bool-Finite-Type : Finite-Type lzero
+pr1 bool-Finite-Type = bool
+pr2 bool-Finite-Type = is-finite-bool
 ```
 
 ### Boolean negation has no fixed points
@@ -244,6 +316,9 @@ pr2 bool-𝔽 = is-finite-bool
 neq-neg-bool : (b : bool) → b ≠ neg-bool b
 neq-neg-bool true ()
 neq-neg-bool false ()
+
+neq-neg-bool' : (b : bool) → neg-bool b ≠ b
+neq-neg-bool' b = neq-neg-bool b ∘ inv
 ```
 
 ### Boolean negation is an involution

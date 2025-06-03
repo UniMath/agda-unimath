@@ -33,7 +33,7 @@ family of maps on the hom-[sets](foundation-core.sets.md) that preserve the
 [composition operation](category-theory.composition-operations-on-binary-families-of-sets.md).
 
 These objects serve as our starting point in the study of
-[stucture](foundation.structure.md)-preserving maps of
+[structure](foundation.structure.md)-preserving maps of
 [categories](category-theory.categories.md). Indeed, categories form a
 [subtype](foundation-core.subtypes.md) of set-magmoids, although functors of
 set-magmoids do not automatically preserve identity-morphisms.

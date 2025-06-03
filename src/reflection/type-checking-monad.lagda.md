@@ -161,7 +161,9 @@ postulate
   declare-data :
     Name-Agda → ℕ → Term-Agda → type-Type-Checker unit
   define-data :
-    Name-Agda → list (Name-Agda × Term-Agda) → type-Type-Checker unit
+    Name-Agda →
+    list (Name-Agda × Quantity-Argument-Agda × Term-Agda) →
+    type-Type-Checker unit
 ```
 
 ## Bindings
@@ -290,8 +292,8 @@ private
 
 ### Trying a path
 
-The following example solves a goal by using path `p` or `inv p`. This example
-was adapted from
+The following example tries to solve a goal by using either `p` or `inv p`. This
+example was adapted from
 
 ```agda
   private

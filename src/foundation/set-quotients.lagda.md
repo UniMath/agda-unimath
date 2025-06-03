@@ -81,7 +81,7 @@ module _
 
   is-surjective-quotient-map : is-surjective quotient-map
   is-surjective-quotient-map =
-    is-surjective-comp-equiv compute-set-quotient (is-surjective-class R)
+    is-surjective-left-comp-equiv compute-set-quotient (is-surjective-class R)
 
   surjection-quotient-map : A ↠ set-quotient
   pr1 surjection-quotient-map = quotient-map

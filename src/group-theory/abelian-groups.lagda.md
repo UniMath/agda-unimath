@@ -256,8 +256,20 @@ module _
   {l : Level} (A : Ab l)
   where
 
+  equiv-left-conjugation-Ab : (x : type-Ab A) → type-Ab A ≃ type-Ab A
+  equiv-left-conjugation-Ab = equiv-left-conjugation-Group (group-Ab A)
+
+  equiv-right-conjugation-Ab : (x : type-Ab A) → type-Ab A ≃ type-Ab A
+  equiv-right-conjugation-Ab = equiv-right-conjugation-Group (group-Ab A)
+
   equiv-conjugation-Ab : (x : type-Ab A) → type-Ab A ≃ type-Ab A
   equiv-conjugation-Ab = equiv-conjugation-Group (group-Ab A)
+
+  left-conjugation-Ab : (x : type-Ab A) → type-Ab A → type-Ab A
+  left-conjugation-Ab = left-conjugation-Group (group-Ab A)
+
+  right-conjugation-Ab : (x : type-Ab A) → type-Ab A → type-Ab A
+  right-conjugation-Ab = right-conjugation-Group (group-Ab A)
 
   conjugation-Ab : (x : type-Ab A) → type-Ab A → type-Ab A
   conjugation-Ab = conjugation-Group (group-Ab A)
@@ -267,6 +279,10 @@ module _
 
   conjugation-Ab' : (x : type-Ab A) → type-Ab A → type-Ab A
   conjugation-Ab' = conjugation-Group' (group-Ab A)
+
+  left-right-conjugation-Ab :
+    (x : type-Ab A) → left-conjugation-Ab x ~ right-conjugation-Ab x
+  left-right-conjugation-Ab = left-right-conjugation-Group (group-Ab A)
 ```
 
 ### Commutators in an abelian group
@@ -550,6 +566,23 @@ module _
   neg-right-subtraction-Ab = inv-right-div-Group (group-Ab A)
 ```
 
+### If `x + y = 0`, then `y ＝ -x` and `x ＝ -y`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  abstract
+    unique-right-neg-Ab :
+      (x y : type-Ab A) → is-zero-Ab A (add-Ab A x y) → y ＝ neg-Ab A x
+    unique-right-neg-Ab = unique-right-inv-Group (group-Ab A)
+
+    unique-left-neg-Ab :
+      (x y : type-Ab A) → is-zero-Ab A (add-Ab A x y) → x ＝ neg-Ab A y
+    unique-left-neg-Ab = unique-left-inv-Group (group-Ab A)
+```
+
 ### The sum of `-x + y` and `-y + z` is `-x + z`
 
 ```agda
@@ -596,11 +629,22 @@ module _
   {l : Level} (A : Ab l)
   where
 
+  abstract
+    is-identity-left-conjugation-Ab :
+      (x : type-Ab A) → left-conjugation-Ab A x ~ id
+    is-identity-left-conjugation-Ab x y =
+      ( ap (add-Ab' A (neg-Ab A x)) (commutative-add-Ab A x y)) ∙
+      ( is-retraction-right-subtraction-Ab A x y)
+
+    is-identity-right-conjugation-Ab :
+      (x : type-Ab A) → right-conjugation-Ab A x ~ id
+    is-identity-right-conjugation-Ab x =
+      inv-htpy (left-right-conjugation-Ab A x) ∙h
+      is-identity-left-conjugation-Ab x
+
   is-identity-conjugation-Ab :
     (x : type-Ab A) → conjugation-Ab A x ~ id
-  is-identity-conjugation-Ab x y =
-    ( ap (add-Ab' A (neg-Ab A x)) (commutative-add-Ab A x y)) ∙
-    ( is-retraction-right-subtraction-Ab A x y)
+  is-identity-conjugation-Ab = is-identity-left-conjugation-Ab
 ```
 
 ### Laws for conjugation and addition

@@ -82,4 +82,4 @@ is-path-refl-walk-Undirected-Graph G x =
 - [Path (graph theory)](<https://en.wikipedia.org/wiki/Path_(graph_theory)>) at
   Wikipedia
 - [Graph path](https://mathworld.wolfram.com/GraphPath.html) at Wolfram
-  Mathworld
+  MathWorld

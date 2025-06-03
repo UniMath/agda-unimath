@@ -28,7 +28,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The **cardinality** of a [set](foundation-core.sets.md) is its
+The
+{{#concept "cardinality" Disambiguation="of a set" Agda=cardinality WD="cardinality" WDID=Q4049983}}
+of a [set](foundation-core.sets.md) is its
 [isomorphism](category-theory.isomorphisms-in-categories.md) class. We take
 isomorphism classes of sets by [set truncating](foundation.set-truncations.md)
 the universe of sets of any given
@@ -211,3 +213,8 @@ antisymmetric-leq-cardinality {l1} X Y lem =
     ( Y))
   ( X)
 ```
+
+## External links
+
+- [Cardinality](https://en.wikipedia.org/wiki/Cardinality) at Wikipedia
+- [cardinal number](https://ncatlab.org/nlab/show/cardinal+number) at $n$Lab

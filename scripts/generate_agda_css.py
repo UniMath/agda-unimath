@@ -31,7 +31,7 @@ CLASSES_MAP['string'].append('String')
 CLASSES_MAP['number'].append('Number')
 CLASSES_MAP['punctuation'].append('Symbol')
 CLASSES_MAP['built_in'].append('PrimitiveType')
-# CLASSES_MAP[''].append('Pragma')
+CLASSES_MAP['doctag'].append('Pragma')
 CLASSES_MAP['operator'].append('Operator')
 # CLASSES_MAP[''].append('Hole')
 

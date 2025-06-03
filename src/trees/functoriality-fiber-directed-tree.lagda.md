@@ -85,7 +85,7 @@ module _
   equiv-node-fiber-equiv-Directed-Tree =
     equiv-Σ
       ( λ y → walk-Directed-Tree T y (node-equiv-Directed-Tree S T f x))
-      ( equiv-node-equiv-Directed-Tree S T f)
+      ( node-equiv-equiv-Directed-Tree S T f)
       ( λ y → equiv-walk-equiv-Directed-Tree S T f {y} {x})
 
   node-fiber-equiv-Directed-Tree :
@@ -94,19 +94,19 @@ module _
   node-fiber-equiv-Directed-Tree =
     map-equiv equiv-node-fiber-equiv-Directed-Tree
 
-  equiv-edge-fiber-equiv-Directed-Tree :
+  edge-equiv-fiber-equiv-Directed-Tree :
     (y z : node-fiber-Directed-Tree S x) →
     edge-fiber-Directed-Tree S x y z ≃
     edge-fiber-Directed-Tree T
       ( node-equiv-Directed-Tree S T f x)
       ( node-fiber-equiv-Directed-Tree y)
       ( node-fiber-equiv-Directed-Tree z)
-  equiv-edge-fiber-equiv-Directed-Tree (y , v) (z , w) =
+  edge-equiv-fiber-equiv-Directed-Tree (y , v) (z , w) =
     equiv-Σ
       ( λ e →
         walk-equiv-Directed-Tree S T f v ＝
         cons-walk-Directed-Graph e (walk-equiv-Directed-Tree S T f w))
-      ( equiv-edge-equiv-Directed-Tree S T f y z)
+      ( edge-equiv-equiv-Directed-Tree S T f y z)
       ( λ e →
         equiv-ap
           ( equiv-walk-equiv-Directed-Tree S T f)
@@ -121,7 +121,7 @@ module _
       ( node-fiber-equiv-Directed-Tree y)
       ( node-fiber-equiv-Directed-Tree z)
   edge-fiber-equiv-Directed-Tree y z =
-    map-equiv (equiv-edge-fiber-equiv-Directed-Tree y z)
+    map-equiv (edge-equiv-fiber-equiv-Directed-Tree y z)
 
   fiber-equiv-Directed-Tree :
     equiv-Directed-Tree
@@ -130,5 +130,5 @@ module _
   pr1 fiber-equiv-Directed-Tree =
     equiv-node-fiber-equiv-Directed-Tree
   pr2 fiber-equiv-Directed-Tree =
-    equiv-edge-fiber-equiv-Directed-Tree
+    edge-equiv-fiber-equiv-Directed-Tree
 ```

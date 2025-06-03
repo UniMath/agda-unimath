@@ -32,10 +32,11 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-{{#concept "Logical equivalences" Agda=}} between two types `A` and `B` consist
-of a map `A → B` and a map `B → A`. The type of logical equivalences between
-types is the Curry-Howard interpretation of logical equivalences between
-[propositions](foundation-core.propositions.md).
+{{#concept "Logical equivalences" Disambiguation="of types" Agda=iff}} between
+two types `A` and `B` consist of a map `A → B` and a map `B → A`. The type of
+logical equivalences between types is the
+[Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
+of logical equivalences between [propositions](foundation-core.propositions.md).
 
 ## Definition
 
@@ -218,6 +219,10 @@ module _
 iff-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A ≃ B) → (A ↔ B)
 pr1 (iff-equiv e) = map-equiv e
 pr2 (iff-equiv e) = map-inv-equiv e
+
+iff-equiv' : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A ≃ B) → (B ↔ A)
+pr1 (iff-equiv' e) = map-inv-equiv e
+pr2 (iff-equiv' e) = map-equiv e
 
 is-injective-iff-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-injective (iff-equiv {A = A} {B})

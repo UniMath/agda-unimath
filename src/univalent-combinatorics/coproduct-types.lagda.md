@@ -13,12 +13,15 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.type-arithmetic-coproduct-types
@@ -37,61 +40,91 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 Coproducts of finite types are finite, giving a coproduct operation on the type
-𝔽 of finite types.
+`Finite-Type` of finite types.
 
 ## Properties
 
 ### The standard finite types are closed under coproducts
 
 ```agda
-coproduct-Fin :
-  (k l : ℕ) → (Fin k + Fin l) ≃ Fin (k +ℕ l)
-coproduct-Fin k zero-ℕ = right-unit-law-coproduct (Fin k)
-coproduct-Fin k (succ-ℕ l) =
-  (equiv-coproduct (coproduct-Fin k l) id-equiv) ∘e inv-associative-coproduct
+compute-coproduct-Fin : (k l : ℕ) → (Fin k + Fin l) ≃ Fin (k +ℕ l)
+compute-coproduct-Fin k zero-ℕ = right-unit-law-coproduct (Fin k)
+compute-coproduct-Fin k (succ-ℕ l) =
+  ( equiv-coproduct (compute-coproduct-Fin k l) id-equiv) ∘e
+  ( inv-associative-coproduct)
 
-map-coproduct-Fin :
-  (k l : ℕ) → (Fin k + Fin l) → Fin (k +ℕ l)
-map-coproduct-Fin k l = map-equiv (coproduct-Fin k l)
+map-compute-coproduct-Fin : (k l : ℕ) → (Fin k + Fin l) → Fin (k +ℕ l)
+map-compute-coproduct-Fin k l = map-equiv (compute-coproduct-Fin k l)
 
-Fin-add-ℕ :
-  (k l : ℕ) → Fin (k +ℕ l) ≃ (Fin k + Fin l)
-Fin-add-ℕ k l = inv-equiv (coproduct-Fin k l)
+inv-compute-coproduct-Fin : (k l : ℕ) → Fin (k +ℕ l) ≃ (Fin k + Fin l)
+inv-compute-coproduct-Fin k l = inv-equiv (compute-coproduct-Fin k l)
 
-inl-coproduct-Fin :
-  (k l : ℕ) → Fin k → Fin (k +ℕ l)
-inl-coproduct-Fin k l = map-coproduct-Fin k l ∘ inl
+map-inv-compute-coproduct-Fin : (k l : ℕ) → Fin (k +ℕ l) → Fin k + Fin l
+map-inv-compute-coproduct-Fin k l = map-equiv (inv-compute-coproduct-Fin k l)
 
-inr-coproduct-Fin :
-  (k l : ℕ) → Fin l → Fin (k +ℕ l)
-inr-coproduct-Fin k l = map-coproduct-Fin k l ∘ inr
+inl-coproduct-Fin : (k l : ℕ) → Fin k → Fin (k +ℕ l)
+inl-coproduct-Fin k l = map-compute-coproduct-Fin k l ∘ inl
 
-compute-inl-coproduct-Fin :
-  (k : ℕ) → inl-coproduct-Fin k 0 ~ id
+inr-coproduct-Fin : (k l : ℕ) → Fin l → Fin (k +ℕ l)
+inr-coproduct-Fin k l = map-compute-coproduct-Fin k l ∘ inr
+
+compute-inl-coproduct-Fin : (k : ℕ) → inl-coproduct-Fin k 0 ~ id
 compute-inl-coproduct-Fin k x = refl
+
+map-compute-map-inv-compute-coproduct-Fin :
+  (k l : ℕ) → Fin (k +ℕ l) → Fin k + Fin l
+map-compute-map-inv-compute-coproduct-Fin k zero-ℕ = inl
+map-compute-map-inv-compute-coproduct-Fin k (succ-ℕ l) =
+  ( map-equiv (associative-coproduct {A = Fin k} {B = Fin l})) ∘
+  ( map-coproduct (map-compute-map-inv-compute-coproduct-Fin k l) id)
+
+abstract
+  compute-map-inv-compute-coproduct-Fin :
+    (k l : ℕ) →
+    map-inv-compute-coproduct-Fin k l ~
+    map-compute-map-inv-compute-coproduct-Fin k l
+  compute-map-inv-compute-coproduct-Fin k zero-ℕ x = refl
+  compute-map-inv-compute-coproduct-Fin k (succ-ℕ l) x =
+    ( htpy-eq
+      ( distributive-map-inv-comp-equiv
+        ( inv-associative-coproduct)
+        ( equiv-coproduct (compute-coproduct-Fin k l) id-equiv))
+      ( x)) ∙
+    ( htpy-eq-equiv
+      ( inv-inv-equiv associative-coproduct)
+      ( map-inv-equiv-coproduct (compute-coproduct-Fin k l) id-equiv x)) ∙
+    ( ap
+      ( map-associative-coproduct)
+      ( htpy-map-coproduct
+        ( compute-map-inv-compute-coproduct-Fin k l)
+        ( refl-htpy)
+        ( x)))
 ```
 
-### Inclusion of `coproduct-Fin` into the natural numbers
+### Computing the inclusion of a coproduct of standard finite types into the natural numbers
 
 ```agda
-nat-coproduct-Fin :
-  (n m : ℕ) → (x : Fin n + Fin m) →
-  nat-Fin (n +ℕ m) (map-coproduct-Fin n m x) ＝
-  ind-coproduct _ (nat-Fin n) (λ i → n +ℕ (nat-Fin m i)) x
-nat-coproduct-Fin n zero-ℕ (inl x) = refl
-nat-coproduct-Fin n (succ-ℕ m) (inl x) = nat-coproduct-Fin n m (inl x)
-nat-coproduct-Fin n (succ-ℕ m) (inr (inl x)) = nat-coproduct-Fin n m (inr x)
-nat-coproduct-Fin n (succ-ℕ m) (inr (inr _)) = refl
+abstract
+  nat-coproduct-Fin :
+    (n m : ℕ) (x : Fin n + Fin m) →
+    nat-Fin (n +ℕ m) (map-compute-coproduct-Fin n m x) ＝
+    ind-coproduct _ (nat-Fin n) (λ i → n +ℕ (nat-Fin m i)) x
+  nat-coproduct-Fin n zero-ℕ (inl x) = refl
+  nat-coproduct-Fin n (succ-ℕ m) (inl x) = nat-coproduct-Fin n m (inl x)
+  nat-coproduct-Fin n (succ-ℕ m) (inr (inl x)) = nat-coproduct-Fin n m (inr x)
+  nat-coproduct-Fin n (succ-ℕ m) (inr (inr _)) = refl
 
-nat-inl-coproduct-Fin :
-  (n m : ℕ) (i : Fin n) →
-  nat-Fin (n +ℕ m) (inl-coproduct-Fin n m i) ＝ nat-Fin n i
-nat-inl-coproduct-Fin n m i = nat-coproduct-Fin n m (inl i)
+abstract
+  nat-inl-coproduct-Fin :
+    (n m : ℕ) (i : Fin n) →
+    nat-Fin (n +ℕ m) (inl-coproduct-Fin n m i) ＝ nat-Fin n i
+  nat-inl-coproduct-Fin n m i = nat-coproduct-Fin n m (inl i)
 
-nat-inr-coproduct-Fin :
-  (n m : ℕ) (i : Fin m) →
-  nat-Fin (n +ℕ m) (inr-coproduct-Fin n m i) ＝ n +ℕ (nat-Fin m i)
-nat-inr-coproduct-Fin n m i = nat-coproduct-Fin n m (inr i)
+abstract
+  nat-inr-coproduct-Fin :
+    (n m : ℕ) (i : Fin m) →
+    nat-Fin (n +ℕ m) (inr-coproduct-Fin n m i) ＝ n +ℕ (nat-Fin m i)
+  nat-inr-coproduct-Fin n m i = nat-coproduct-Fin n m (inr i)
 ```
 
 ### Types equipped with a count are closed under coproducts
@@ -102,14 +135,60 @@ count-coproduct :
   count X → count Y → count (X + Y)
 pr1 (count-coproduct (pair k e) (pair l f)) = k +ℕ l
 pr2 (count-coproduct (pair k e) (pair l f)) =
-  (equiv-coproduct e f) ∘e (inv-equiv (coproduct-Fin k l))
+  (equiv-coproduct e f) ∘e (inv-equiv (compute-coproduct-Fin k l))
 
 abstract
   number-of-elements-count-coproduct :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : count X) (f : count Y) →
-    Id ( number-of-elements-count (count-coproduct e f))
-      ( (number-of-elements-count e) +ℕ (number-of-elements-count f))
+    number-of-elements-count (count-coproduct e f) ＝
+    (number-of-elements-count e) +ℕ (number-of-elements-count f)
   number-of-elements-count-coproduct (pair k e) (pair l f) = refl
+```
+
+### Mapping the `count-coproduct` equivalence on `inl-coproduct-Fin` is `inl` on the left count
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (cA : count A) (cB : count B)
+  where
+
+  map-equiv-count-coproduct-inl-coproduct-Fin :
+    map-equiv-count (count-coproduct cA cB) ∘
+    inl-coproduct-Fin
+      ( number-of-elements-count cA)
+      ( number-of-elements-count cB) ~
+    inl ∘ map-equiv-count cA
+  map-equiv-count-coproduct-inl-coproduct-Fin a =
+    ap
+      ( map-coproduct _ _)
+      ( is-retraction-map-inv-equiv
+        ( compute-coproduct-Fin
+          ( number-of-elements-count cA)
+          ( number-of-elements-count cB))
+        ( inl a))
+```
+
+### Mapping the `count-coproduct` equivalence on `inr-coproduct-Fin` is `inr` on the right count
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (cA : count A) (cB : count B)
+  where
+
+  map-equiv-count-coproduct-inr-coproduct-Fin :
+    map-equiv-count (count-coproduct cA cB) ∘
+    inr-coproduct-Fin
+      ( number-of-elements-count cA)
+      ( number-of-elements-count cB) ~
+    inr ∘ map-equiv-count cB
+  map-equiv-count-coproduct-inr-coproduct-Fin b =
+    ap
+      ( map-coproduct _ _)
+      ( is-retraction-map-inv-equiv
+        ( compute-coproduct-Fin
+          ( number-of-elements-count cA)
+          ( number-of-elements-count cB))
+        ( inr b))
 ```
 
 ### If both `Σ A P` and `Σ A Q` have a count, then `Σ A P + Q` have a count
@@ -191,10 +270,13 @@ abstract
           ( is-finite-Prop (X + Y))
           ( is-finite-count ∘ (count-coproduct e)))
 
-coproduct-𝔽 : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → 𝔽 (l1 ⊔ l2)
-pr1 (coproduct-𝔽 X Y) = (type-𝔽 X) + (type-𝔽 Y)
-pr2 (coproduct-𝔽 X Y) =
-  is-finite-coproduct (is-finite-type-𝔽 X) (is-finite-type-𝔽 Y)
+coproduct-Finite-Type :
+  {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → Finite-Type (l1 ⊔ l2)
+pr1 (coproduct-Finite-Type X Y) = (type-Finite-Type X) + (type-Finite-Type Y)
+pr2 (coproduct-Finite-Type X Y) =
+  is-finite-coproduct
+    ( is-finite-type-Finite-Type X)
+    ( is-finite-type-Finite-Type Y)
 
 abstract
   is-finite-left-summand :
@@ -210,11 +292,13 @@ abstract
   is-finite-right-summand =
     map-trunc-Prop count-right-summand
 
-coproduct-UU-Fin :
-  {l1 l2 : Level} (k l : ℕ) → UU-Fin l1 k → UU-Fin l2 l →
-  UU-Fin (l1 ⊔ l2) (k +ℕ l)
-pr1 (coproduct-UU-Fin {l1} {l2} k l (pair X H) (pair Y K)) = X + Y
-pr2 (coproduct-UU-Fin {l1} {l2} k l (pair X H) (pair Y K)) =
+coproduct-Type-With-Cardinality-ℕ :
+  {l1 l2 : Level} (k l : ℕ) →
+  Type-With-Cardinality-ℕ l1 k → Type-With-Cardinality-ℕ l2 l →
+  Type-With-Cardinality-ℕ (l1 ⊔ l2) (k +ℕ l)
+pr1 (coproduct-Type-With-Cardinality-ℕ k l (pair X H) (pair Y K)) =
+  X + Y
+pr2 (coproduct-Type-With-Cardinality-ℕ k l (pair X H) (pair Y K)) =
   apply-universal-property-trunc-Prop H
     ( mere-equiv-Prop (Fin (k +ℕ l)) (X + Y))
     ( λ e1 →
@@ -222,7 +306,7 @@ pr2 (coproduct-UU-Fin {l1} {l2} k l (pair X H) (pair Y K)) =
         ( mere-equiv-Prop (Fin (k +ℕ l)) (X + Y))
         ( λ e2 →
           unit-trunc-Prop
-            ( equiv-coproduct e1 e2 ∘e inv-equiv (coproduct-Fin k l))))
+            ( equiv-coproduct e1 e2 ∘e inv-equiv (compute-coproduct-Fin k l))))
 
 coproduct-eq-is-finite :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (P : is-finite X) (Q : is-finite Y) →
@@ -235,9 +319,9 @@ coproduct-eq-is-finite {X = X} {Y = Y} P Q =
     ( all-elements-equal-has-finite-cardinality
       ( pair
         ( number-of-elements-is-finite P +ℕ number-of-elements-is-finite Q)
-        ( has-cardinality-type-UU-Fin
+        ( has-cardinality-type-Type-With-Cardinality-ℕ
           ( number-of-elements-is-finite P +ℕ number-of-elements-is-finite Q)
-          ( coproduct-UU-Fin
+          ( coproduct-Type-With-Cardinality-ℕ
             ( number-of-elements-is-finite P)
             ( number-of-elements-is-finite Q)
             ( pair X

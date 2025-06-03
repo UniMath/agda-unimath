@@ -21,6 +21,12 @@ open import foundation.identity-types
 
 </details>
 
+## Idea
+
+The {{#concept "factorial" WD="factorial" WDID=Q120976 Agda=factorial-ℕ}} `n!`
+of a number `n`, counts the number of ways to linearly order `n` distinct
+objects.
+
 ## Definition
 
 ```agda
@@ -66,3 +72,8 @@ leq-factorial-ℕ (succ-ℕ n) =
     ( succ-ℕ n)
     ( is-nonzero-factorial-ℕ n)
 ```
+
+## External links
+
+- [Factorial](https://en.wikipedia.org/wiki/Factorial) at Wikipedia
+- [A000142](https://oeis.org/A000142) in the OEIS

@@ -18,7 +18,7 @@ open import structured-types.pointed-types
 open import structured-types.pointed-unit-type
 
 open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams
-open import synthetic-homotopy-theory.cofibers
+open import synthetic-homotopy-theory.cofibers-of-maps
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.pushouts-of-pointed-types
 ```
@@ -27,13 +27,14 @@ open import synthetic-homotopy-theory.pushouts-of-pointed-types
 
 ## Idea
 
-The **wedge** or **wedge sum** of two
-[pointed types](structured-types.pointed-types.md) `a : A` and `b : B` is
-defined by the following
+The
+{{#concept "wedge" Disambiguation="of pointed types" WD="wedge sum" WDID=Q1781358 Agda=wedge-Pointed-Type}}
+or **wedge sum** of two [pointed types](structured-types.pointed-types.md)
+`a : A` and `b : B` is defined by the following
 [pointed pushout](synthetic-homotopy-theory.pushouts-of-pointed-types.md):
 
 ```text
-  unit ------> A
+    * -------> A
     |          |
     |          |
     ∨        ⌜ ∨

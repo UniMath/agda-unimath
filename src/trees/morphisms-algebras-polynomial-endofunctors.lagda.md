@@ -31,7 +31,7 @@ open import trees.polynomial-endofunctors
 ## Idea
 
 A **morphism** of algebras of a polynomial endofunctor `P A B` consists of a map
-`f : X → Y$ between the underlying types, equipped with a homotopy witnessing
+`f : X → Y` between the underlying types, equipped with a homotopy witnessing
 that the square
 
 ```text

@@ -9,6 +9,7 @@ module orthogonal-factorization-systems.null-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
@@ -16,6 +17,8 @@ open import foundation.equivalences-arrows
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
@@ -26,18 +29,21 @@ open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.retractions
 open import foundation.retracts-of-maps
 open import foundation.retracts-of-types
+open import foundation.sections
 open import foundation.type-arithmetic-unit-type
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universal-property-equivalences
 open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-maps
-open import orthogonal-factorization-systems.local-types
+open import orthogonal-factorization-systems.maps-local-at-maps
 open import orthogonal-factorization-systems.orthogonal-maps
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>
@@ -234,6 +240,16 @@ module _
   is-local-is-null-fiber A = is-local-dependent-type-is-null-fiber (λ _ → A)
 ```
 
+### Contractible types are null at all types
+
+```agda
+is-null-is-contr :
+  {l1 l2 : Level} {A : UU l1} (B : UU l2) → is-contr A → is-null B A
+is-null-is-contr {A = A} B is-contr-A =
+  is-null-is-local-terminal-map B A
+    ( is-local-is-contr (terminal-map B) A is-contr-A)
+```
+
 ### Propositions are null at inhabited types
 
 ```agda
@@ -329,6 +345,32 @@ module _
 ### Null types are closed under identity types
 
 This remains to be formalized.
+
+### Null types are closed under dependent sums
+
+This is Theorem 2.19 in {{#cite RSS20}}.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {Y : UU l1} {A : UU l2} {B : A → UU l3}
+  (is-null-A : is-null Y A)
+  (is-null-B : (x : A) → is-null Y (B x))
+  where
+
+  is-null-Σ : is-null Y (Σ A B)
+  is-null-Σ =
+    is-equiv-map-equiv
+      ( equivalence-reasoning
+        Σ A B
+        ≃ Σ (Y → A) (λ f → (x : Y) → B (f x))
+        by
+          equiv-Σ
+            ( λ f → (x : Y) → B (f x))
+            ( diagonal-exponential A Y , is-null-A)
+            ( λ x → diagonal-exponential (B x) Y , is-null-B x)
+        ≃ (Y → Σ A B)
+        by inv-distributive-Π-Σ)
+```
 
 ## See also
 

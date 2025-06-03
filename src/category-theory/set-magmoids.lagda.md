@@ -29,7 +29,7 @@ in [sets](foundation-core.sets.md). We call elements of the indexing type
 **objects**, and elements of the set-family **morphisms** or **homomorphisms**.
 
 These objects serve as our starting point in the study of the
-[stucture](foundation.structure.md) of
+[structure](foundation.structure.md) of
 [categories](category-theory.categories.md). Indeed, categories form a
 [subtype](foundation-core.subtypes.md) of set-magmoids, although
 structure-preserving maps of set-magmoids do not automatically preserve

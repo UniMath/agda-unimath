@@ -46,4 +46,4 @@ module _
 - [Cycle (graph theory)](<https://en.wikipedia.org/wiki/Cycle_(graph_theory)>)
   at Wikipedia
 - [Graph cycle](https://mathworld.wolfram.com/GraphCycle.html) at Wolfram
-  Mathworld
+  MathWorld

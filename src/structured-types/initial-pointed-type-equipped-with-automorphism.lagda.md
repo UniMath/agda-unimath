@@ -33,7 +33,7 @@ We show that ℤ is the initial pointed type equipped with an automorphism
 
 ## Definition
 
-### The type of integers is the intial type equipped with a point and an automorphism
+### The type of integers is the initial type equipped with a point and an automorphism
 
 #### The type of integers is a type equipped with a point and an automorphism
 

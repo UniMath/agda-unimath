@@ -151,7 +151,7 @@ is a family of binary operations
 
 indexed by `x y z : A`. However, there are essentially three different ways we
 can define concatenation of identifications, all with different computational
-behaviours.
+behaviors.
 
 1. We can define concatenation by induction on the equality `x ＝ y`. This gives
    us the computation rule `refl ∙ q ≐ q`.
@@ -509,9 +509,9 @@ equational-reasoning
     ＝ v by eq-3
 ```
 
-The resulting identification of this computaion is `eq-1 ∙ (eq-2 ∙ eq-3)`, i.e.,
-the identification is associated fully to the right. For examples of the use of
-equational reasoning, see
+The resulting identification of this computation is `eq-1 ∙ (eq-2 ∙ eq-3)`,
+i.e., the identification is associated fully to the right. For examples of the
+use of equational reasoning, see
 [addition-integers](elementary-number-theory.addition-integers.md).
 
 ```agda

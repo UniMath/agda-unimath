@@ -17,9 +17,15 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-The 0-image of a map `f : A → B` is the type
-`0-im f := Σ (b : B), type-trunc-Set (fiber f b)`. The map `A → 0-im f` is
-0-connected and the map `0-im f → B` is `0`-truncated.
+The {{#concept "0-image" Disambiguation="of a map of types" Agda=0-im}} of a map
+`f : A → B` is the type
+
+```text
+  0-im f := Σ (b : B), type-trunc-Set (fiber f b).
+```
+
+The map `A → 0-im f` is 0-[connected](foundation.connected-maps.md) and the map
+`0-im f → B` is 0-[truncated](foundation.truncated-maps.md).
 
 ## Definition
 

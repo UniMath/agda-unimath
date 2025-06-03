@@ -29,7 +29,7 @@ The universal property of the unit type characterizes maps out of the unit type.
 Similarly, the dependent universal property of the unit type characterizes
 dependent functions out of the unit type.
 
-In `foundation.contractible-types` we have alread proven related universal
+In `foundation.contractible-types` we have already proven related universal
 properties of contractible types.
 
 ## Properties

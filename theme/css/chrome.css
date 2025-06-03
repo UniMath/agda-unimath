@@ -277,7 +277,7 @@ pre > .buttons button {
 }
 pre > code {
   padding: 1rem;
-  line-height: normal;
+  line-height: 1.25;
 }
 
 /* FIXME: ACE editors overlap their buttons because ACE does absolute

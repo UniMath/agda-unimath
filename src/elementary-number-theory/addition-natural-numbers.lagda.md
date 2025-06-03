@@ -36,6 +36,8 @@ add-ℕ x (succ-ℕ y) = succ-ℕ (add-ℕ x y)
 infixl 35 _+ℕ_
 _+ℕ_ = add-ℕ
 
+{-# BUILTIN NATPLUS _+ℕ_ #-}
+
 add-ℕ' : ℕ → ℕ → ℕ
 add-ℕ' m n = add-ℕ n m
 
@@ -109,7 +111,7 @@ abstract
   right-one-law-add-ℕ x = refl
 ```
 
-### Addition by `1` on the left or on the right is the double successor
+### Addition by `2` on the left or on the right is the double successor
 
 ```agda
 abstract

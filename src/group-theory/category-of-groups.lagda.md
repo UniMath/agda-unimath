@@ -10,6 +10,7 @@ module group-theory.category-of-groups where
 open import category-theory.categories
 open import category-theory.large-categories
 
+open import foundation.1-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -22,7 +23,7 @@ open import group-theory.precategory-of-groups
 
 </details>
 
-## Definition
+## Definitions
 
 ```agda
 is-large-category-Group :
@@ -39,4 +40,13 @@ is-large-category-Large-Category Group-Large-Category = is-large-category-Group
 
 Group-Category : (l : Level) → Category (lsuc l) l
 Group-Category = category-Large-Category Group-Large-Category
+```
+
+## Corollaries
+
+### The type of groups is a 1-type
+
+```agda
+is-1-type-Group : {l : Level} → is-1-type (Group l)
+is-1-type-Group {l} = is-1-type-obj-Category (Group-Category l)
 ```

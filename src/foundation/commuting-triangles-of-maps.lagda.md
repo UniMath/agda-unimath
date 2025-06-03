@@ -56,6 +56,18 @@ module _
   (left : A → X) (right : B → X) (e : A ≃ B)
   where
 
+  equiv-coherence-triangle-maps-inv-top' :
+    coherence-triangle-maps left right (map-equiv e) ≃
+    coherence-triangle-maps' right left (map-inv-equiv e)
+  equiv-coherence-triangle-maps-inv-top' =
+    equiv-Π
+      ( λ b → left (map-inv-equiv e b) ＝ right b)
+      ( e)
+      ( λ a →
+        equiv-concat
+          ( ap left (is-retraction-map-inv-equiv e a))
+          ( right (map-equiv e a)))
+
   equiv-coherence-triangle-maps-inv-top :
     coherence-triangle-maps left right (map-equiv e) ≃
     coherence-triangle-maps right left (map-inv-equiv e)
@@ -63,13 +75,7 @@ module _
     ( equiv-inv-htpy
       ( left ∘ (map-inv-equiv e))
       ( right)) ∘e
-    ( equiv-Π
-      ( λ b → left (map-inv-equiv e b) ＝ right b)
-      ( e)
-      ( λ a →
-        equiv-concat
-          ( ap left (is-retraction-map-inv-equiv e a))
-          ( right (map-equiv e a))))
+    ( equiv-coherence-triangle-maps-inv-top')
 
   coherence-triangle-maps-inv-top :
     coherence-triangle-maps left right (map-equiv e) →

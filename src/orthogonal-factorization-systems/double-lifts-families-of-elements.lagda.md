@@ -90,5 +90,5 @@ module _
 ## See also
 
 - [Lifts of families of elements](orthogonal-factorization-systems.lifts-families-of-elements.md)
-- [Lifts of maps](orthogonal-factorization-systems.lifts-of-maps.md)
+- [Lifts of maps](orthogonal-factorization-systems.lifts-maps.md)
 - [The universal property of the family of fibers of a map](foundation.universal-property-family-of-fibers-of-maps.md)

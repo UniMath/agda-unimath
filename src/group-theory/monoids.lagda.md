@@ -26,7 +26,8 @@ open import structured-types.wild-monoids
 
 ## Idea
 
-**Monoids** are [unital](foundation.unital-binary-operations.md)
+{{#concept "Monoids" WDID=Q208237 WD="monoid" Agda=Monoid}} are
+[unital](foundation.unital-binary-operations.md)
 [semigroups](group-theory.semigroups.md).
 
 ## Definition
@@ -80,6 +81,12 @@ module _
 
   unit-Monoid : type-Monoid
   unit-Monoid = pr1 has-unit-Monoid
+
+  is-unit-Monoid-Prop : type-Monoid → Prop l
+  is-unit-Monoid-Prop x = Id-Prop set-Monoid x unit-Monoid
+
+  is-unit-Monoid : type-Monoid → UU l
+  is-unit-Monoid x = x ＝ unit-Monoid
 
   left-unit-law-mul-Monoid : (x : type-Monoid) → mul-Monoid unit-Monoid x ＝ x
   left-unit-law-mul-Monoid = pr1 (pr2 has-unit-Monoid)

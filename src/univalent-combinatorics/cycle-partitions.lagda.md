@@ -29,46 +29,49 @@ permutations of `A`.
 ## Definition
 
 ```agda
-cyclic-partition-𝔽 :
-  {l : Level} (l2 l3 : Level) → 𝔽 l → UU (l ⊔ lsuc l2 ⊔ lsuc l3)
-cyclic-partition-𝔽 l2 l3 X =
-  Σ ( 𝔽 l2)
+cyclic-partition-Finite-Type :
+  {l : Level} (l2 l3 : Level) → Finite-Type l → UU (l ⊔ lsuc l2 ⊔ lsuc l3)
+cyclic-partition-Finite-Type l2 l3 X =
+  Σ ( Finite-Type l2)
     ( λ Y →
-      Σ ( type-𝔽 Y → Σ ℕ (λ n → Cyclic-Type l3 (succ-ℕ n)))
+      Σ ( type-Finite-Type Y → Σ ℕ (λ n → Cyclic-Type l3 (succ-ℕ n)))
         ( λ C →
-          type-𝔽 X ≃
-          Σ ( type-𝔽 Y)
+          type-Finite-Type X ≃
+          Σ ( type-Finite-Type Y)
             ( λ y → type-Cyclic-Type (succ-ℕ (pr1 (C y))) (pr2 (C y)))))
 
 module _
-  {l1 l2 l3 : Level} (X : 𝔽 l1) (C : cyclic-partition-𝔽 l2 l3 X)
+  {l1 l2 l3 : Level} (X : Finite-Type l1)
+  (C : cyclic-partition-Finite-Type l2 l3 X)
   where
 
-  finite-indexing-type-cyclic-partition-𝔽 : 𝔽 l2
-  finite-indexing-type-cyclic-partition-𝔽 = pr1 C
+  finite-indexing-type-cyclic-partition-Finite-Type : Finite-Type l2
+  finite-indexing-type-cyclic-partition-Finite-Type = pr1 C
 
-  indexing-type-cyclic-partition-𝔽 : UU l2
-  indexing-type-cyclic-partition-𝔽 =
-    type-𝔽 finite-indexing-type-cyclic-partition-𝔽
+  indexing-type-cyclic-partition-Finite-Type : UU l2
+  indexing-type-cyclic-partition-Finite-Type =
+    type-Finite-Type finite-indexing-type-cyclic-partition-Finite-Type
 
-  order-cycle-cyclic-partition-𝔽 :
-    indexing-type-cyclic-partition-𝔽 → ℕ
-  order-cycle-cyclic-partition-𝔽 y = succ-ℕ (pr1 (pr1 (pr2 C) y))
+  order-cycle-cyclic-partition-Finite-Type :
+    indexing-type-cyclic-partition-Finite-Type → ℕ
+  order-cycle-cyclic-partition-Finite-Type y = succ-ℕ (pr1 (pr1 (pr2 C) y))
 
-  cycle-cyclic-partition-𝔽 :
-    (y : indexing-type-cyclic-partition-𝔽) →
-    Cyclic-Type l3 (order-cycle-cyclic-partition-𝔽 y)
-  cycle-cyclic-partition-𝔽 y =
+  cycle-cyclic-partition-Finite-Type :
+    (y : indexing-type-cyclic-partition-Finite-Type) →
+    Cyclic-Type l3 (order-cycle-cyclic-partition-Finite-Type y)
+  cycle-cyclic-partition-Finite-Type y =
     pr2 (pr1 (pr2 C) y)
 
-  type-cycle-cyclic-partition-𝔽 :
-    indexing-type-cyclic-partition-𝔽 → UU l3
-  type-cycle-cyclic-partition-𝔽 y =
+  type-cycle-cyclic-partition-Finite-Type :
+    indexing-type-cyclic-partition-Finite-Type → UU l3
+  type-cycle-cyclic-partition-Finite-Type y =
     type-Cyclic-Type
-      ( order-cycle-cyclic-partition-𝔽 y)
-      ( cycle-cyclic-partition-𝔽 y)
+      ( order-cycle-cyclic-partition-Finite-Type y)
+      ( cycle-cyclic-partition-Finite-Type y)
 
-  equiv-cyclic-partition-𝔽 :
-    type-𝔽 X ≃ Σ indexing-type-cyclic-partition-𝔽 type-cycle-cyclic-partition-𝔽
-  equiv-cyclic-partition-𝔽 = pr2 (pr2 C)
+  equiv-cyclic-partition-Finite-Type :
+    type-Finite-Type X ≃
+    Σ indexing-type-cyclic-partition-Finite-Type
+      type-cycle-cyclic-partition-Finite-Type
+  equiv-cyclic-partition-Finite-Type = pr2 (pr2 C)
 ```

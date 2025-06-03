@@ -14,6 +14,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 
 open import order-theory.large-preorders
+open import order-theory.order-preserving-maps-preorders
 open import order-theory.similarity-of-elements-large-preorders
 ```
 
@@ -73,6 +74,25 @@ module _
         preserves-order-map-Large-Preorder P Q map-hom-Large-Preorder
 
   open hom-Large-Preorder public
+```
+
+### The induced order preserving maps between small preorders
+
+```agda
+module _
+  {αP αQ : Level → Level} {βP βQ : Level → Level → Level} {γ : Level → Level}
+  (P : Large-Preorder αP βP)
+  (Q : Large-Preorder αQ βQ)
+  (f : hom-Large-Preorder γ P Q)
+  where
+
+  hom-preorder-hom-Large-Preorder :
+    (l : Level) →
+    hom-Preorder
+      ( preorder-Large-Preorder P l)
+      ( preorder-Large-Preorder Q (γ l))
+  hom-preorder-hom-Large-Preorder l =
+    ( map-hom-Large-Preorder f , preserves-order-hom-Large-Preorder f)
 ```
 
 ### The identity order preserving map on a large preorder

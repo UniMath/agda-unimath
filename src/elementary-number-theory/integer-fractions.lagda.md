@@ -7,6 +7,7 @@ module elementary-number-theory.integer-fractions where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
@@ -17,6 +18,7 @@ open import elementary-number-theory.positive-integers
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
+open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.identity-types
@@ -24,15 +26,17 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+
+open import set-theory.countable-sets
 ```
 
 </details>
 
 ## Idea
 
-The type of integer fractions is the type of pairs `n/m` consisting of an
-integer `n` and a positive integer `m`. The type of rational numbers is a
-retract of the type of fractions.
+The type of {{#concept "integer fractions" Agda=fraction-ℤ}} is the type of
+pairs `n/m` consisting of an integer `n` and a positive integer `m`. The type of
+rational numbers is a retract of the type of fractions.
 
 ## Definitions
 
@@ -106,6 +110,14 @@ neg-fraction-ℤ (d , n) = (neg-ℤ d , n)
 
 ## Properties
 
+### The double negation of an integer fraction is the original fraction
+
+```agda
+abstract
+  neg-neg-fraction-ℤ : (x : fraction-ℤ) → neg-fraction-ℤ (neg-fraction-ℤ x) ＝ x
+  neg-neg-fraction-ℤ (n , d) = ap (_, d) (neg-neg-ℤ n)
+```
+
 ### Denominators are nonzero
 
 ```agda
@@ -122,14 +134,32 @@ abstract
 abstract
   is-set-fraction-ℤ : is-set fraction-ℤ
   is-set-fraction-ℤ = is-set-Σ is-set-ℤ (λ _ → is-set-positive-ℤ)
+
+fraction-ℤ-Set : Set lzero
+fraction-ℤ-Set = (fraction-ℤ , is-set-fraction-ℤ)
 ```
+
+### Integer fractions have decidable equality
+
+```agda
+has-decidable-equality-fraction-ℤ :
+  has-decidable-equality fraction-ℤ
+has-decidable-equality-fraction-ℤ =
+  has-decidable-equality-product
+    ( has-decidable-equality-ℤ)
+    ( has-decidable-equality-Σ
+        ( has-decidable-equality-ℤ)
+        ( λ x → has-decidable-equality-is-prop (is-prop-is-positive-ℤ x)))
+```
+
+### The similarity relation on integer fractions
 
 ```agda
 sim-fraction-ℤ-Prop : fraction-ℤ → fraction-ℤ → Prop lzero
 sim-fraction-ℤ-Prop x y =
   Id-Prop ℤ-Set
-    ((numerator-fraction-ℤ x) *ℤ (denominator-fraction-ℤ y))
-    ((numerator-fraction-ℤ y) *ℤ (denominator-fraction-ℤ x))
+    ( ( numerator-fraction-ℤ x) *ℤ (denominator-fraction-ℤ y))
+    ( ( numerator-fraction-ℤ y) *ℤ (denominator-fraction-ℤ x))
 
 sim-fraction-ℤ : fraction-ℤ → fraction-ℤ → UU lzero
 sim-fraction-ℤ x y = type-Prop (sim-fraction-ℤ-Prop x y)
@@ -259,4 +289,16 @@ abstract
   is-nonzero-gcd-numerator-denominator-fraction-ℤ x =
     is-nonzero-is-positive-ℤ
       ( is-positive-gcd-numerator-denominator-fraction-ℤ x)
+```
+
+### The set of integer fractions is countable
+
+```agda
+is-countable-fraction-ℤ : is-countable fraction-ℤ-Set
+is-countable-fraction-ℤ =
+  is-countable-product
+    ( ℤ-Set)
+    ( positive-ℤ-Set)
+    ( is-countable-ℤ)
+    ( is-countable-positive-ℤ)
 ```

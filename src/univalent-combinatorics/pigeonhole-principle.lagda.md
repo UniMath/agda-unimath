@@ -334,7 +334,7 @@ module _
     leq-is-emb-is-finite (is-emb-is-injective (is-set-is-finite K) I)
 ```
 
-#### There are no embeddings between finite types `A` and `B` such that `|B| < |A|
+#### There are no embeddings between finite types `A` and `B` such that `|B| < |A|`
 
 ```agda
   is-not-emb-le-is-finite :
@@ -353,7 +353,7 @@ module _
             ( E)))
 ```
 
-#### There are no injective maps between finite types `A` and `B` such that `|B| < |A|
+#### There are no injective maps between finite types `A` and `B` such that `|B| < |A|`
 
 ```agda
   is-not-injective-le-is-finite :

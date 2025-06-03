@@ -15,22 +15,23 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        agda: ['2.6.4']
+        agda: ['2.7.0']
 
     steps:
       - name: Checkout our repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: repo
 
       - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.1.0
+        uses: wenkokke/setup-agda@v2.5.0
         with:
           agda-version: ${{ matrix.agda }}
 
       - name: Typecheck library with profiling
         run: |
           cd repo
+          agda --version
           mkdir -p temp
           make check-profile 2> temp/memory-results.txt | tee temp/benchmark-results.txt
 
