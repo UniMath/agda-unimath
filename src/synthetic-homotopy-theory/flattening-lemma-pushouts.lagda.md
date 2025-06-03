@@ -622,3 +622,9 @@ module _
         ( coherence-cube-flattening-lemma-descent-data-pushout)
         ( flattening-lemma-pushout Q f g c up-c)
 ```
+
+## See also
+
+- [Mather's second cube theorem](synthetic-homotopy-theory.mathers-second-cube-theorem.md)
+  is the [unstraightened](foundation.type-duality.md) version of the flattening
+  lemma for pushouts.
