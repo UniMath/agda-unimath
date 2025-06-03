@@ -165,7 +165,9 @@ module _
     {l6 l7 : Level}
     (R :
       descent-data-pushout
-        ( span-diagram-flattening-descent-data-pushout P) l6 l7)
+        ( span-diagram-flattening-descent-data-pushout P)
+        ( l6)
+        ( l7))
     (t : section-descent-data-pushout R) →
     left-family-descent-data-pushout R (a₀ , p₀)
   ev-refl-section-descent-data-pushout R t =
@@ -183,10 +185,12 @@ module _
 
   is-identity-system-descent-data-pushout : UUω
   is-identity-system-descent-data-pushout =
-    {l : Level}
+    {l6 : Level}
     (R :
       descent-data-pushout
-        ( span-diagram-flattening-descent-data-pushout P) l l) →
+        ( span-diagram-flattening-descent-data-pushout P)
+        ( l6)
+        ( l6)) →
     section (ev-refl-section-descent-data-pushout P p₀ R)
 ```
 
@@ -260,7 +264,9 @@ module _
           ( family-cocone-family-with-descent-data-pushout P)
           ( inv-equiv-descent-data-pushout _ _
             ( equiv-descent-data-family-with-descent-data-pushout P)))
-        l5 l6 l7) →
+        ( l5)
+        ( l6)
+        ( l7)) →
     coherence-square-maps
       ( section-descent-data-section-family-cocone-span-diagram R ∘ ind-Σ)
       ( ev-refl-identity-system
