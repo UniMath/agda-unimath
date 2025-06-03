@@ -1,7 +1,13 @@
 # The action on directed edges of dependent functions
 
 ```agda
-module simplicial-type-theory.action-on-directed-edges-dependent-functions where
+open import foundation.universe-levels
+open import order-theory.nontrivial-bounded-total-orders
+
+module
+  simplicial-type-theory.action-on-directed-edges-dependent-functions
+  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -17,8 +23,8 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import simplicial-type-theory.dependent-directed-edges
-open import simplicial-type-theory.directed-edges
+open import simplicial-type-theory.dependent-directed-edges I
+open import simplicial-type-theory.directed-edges I
 ```
 
 </details>

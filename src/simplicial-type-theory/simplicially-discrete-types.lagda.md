@@ -1,7 +1,13 @@
 # Simplicially discrete types
 
 ```agda
-module simplicial-type-theory.simplicially-discrete-types where
+open import foundation.universe-levels
+open import order-theory.nontrivial-bounded-total-orders
+
+module
+  simplicial-type-theory.simplicially-discrete-types
+  {l1 l2 : Level} (I : Nontrivial-Bounded-Total-Order l1 l2)
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -34,10 +40,10 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.null-maps
 open import orthogonal-factorization-systems.null-types
 
-open import simplicial-type-theory.directed-edges
-open import simplicial-type-theory.directed-interval-type I
-open import simplicial-type-theory.fully-faithful-maps
-open import simplicial-type-theory.inequality-directed-interval-type I
+open import simplicial-type-theory.directed-edges I
+open import simplicial-type-theory.directed-interval-type I I
+open import simplicial-type-theory.fully-faithful-maps I
+open import simplicial-type-theory.inequality-directed-interval-type I I
 
 open import synthetic-homotopy-theory.circle
 ```
