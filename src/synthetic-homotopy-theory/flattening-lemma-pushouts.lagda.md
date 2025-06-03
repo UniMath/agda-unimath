@@ -283,7 +283,7 @@ module _
     Σ ( codomain-span-diagram 𝒮)
       ( right-family-equifibered-dependent-span-diagram P)
   horizontal-map-span-flattening-equifibered-dependent-span-diagram =
-     map-Σ
+    map-Σ
       ( right-family-equifibered-dependent-span-diagram P)
       ( right-map-span-diagram 𝒮)
       ( map-right-family-equifibered-dependent-span-diagram P)
