@@ -56,7 +56,7 @@ subtype-auxillary-face-standard-simplex :
 subtype-auxillary-face-standard-simplex 0 _ _ =
   empty-Prop
 subtype-auxillary-face-standard-simplex 1 0 x =
-  Id-Prop Δ¹-Set x 0₂
+  Id-Prop Δ¹-Set x 0▵
 subtype-auxillary-face-standard-simplex 1 (succ-ℕ _) x =
   empty-Prop
 subtype-auxillary-face-standard-simplex 2 zero-ℕ (x , y) =
@@ -75,10 +75,10 @@ subtype-auxillary-face-standard-simplex
 subtype-first-face-standard-simplex :
   (n : ℕ) → subtype lzero (simplicial-cube n)
 subtype-first-face-standard-simplex 0 _ = empty-Prop
-subtype-first-face-standard-simplex 1 x = Id-Prop Δ¹-Set 1₂ x
-subtype-first-face-standard-simplex 2 (x , _) = Id-Prop Δ¹-Set 1₂ x
+subtype-first-face-standard-simplex 1 x = Id-Prop Δ¹-Set 1▵ x
+subtype-first-face-standard-simplex 2 (x , _) = Id-Prop Δ¹-Set 1▵ x
 subtype-first-face-standard-simplex (succ-ℕ (succ-ℕ (succ-ℕ n))) (x , u) =
-  Id-Prop Δ¹-Set 1₂ x ∧ subtype-standard-simplex (succ-ℕ (succ-ℕ n)) u
+  Id-Prop Δ¹-Set 1▵ x ∧ subtype-standard-simplex (succ-ℕ (succ-ℕ n)) u
 
 subtype-face-standard-simplex : (n r : ℕ) → subtype lzero (simplicial-cube n)
 subtype-face-standard-simplex n 0 =

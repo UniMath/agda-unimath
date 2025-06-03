@@ -95,7 +95,7 @@ postulate
 
   compute-0-left-2-cell-representing-biinvertible-arrow▵ :
     ( left-2-cell-representing-biinvertible-arrow▵) ∘
-    ( λ t → ((t , 0₂) , min-leq-Δ¹)) ＝
+    ( λ t → ((t , 0▵) , min-leq-Δ¹)) ＝
     arrow-representing-biinvertible-arrow▵
 
   compute-1-left-2-cell-representing-biinvertible-arrow▵ :
@@ -105,7 +105,7 @@ postulate
 
   compute-2-left-2-cell-representing-biinvertible-arrow▵ :
     ( left-2-cell-representing-biinvertible-arrow▵) ∘
-    ( λ t → ((1₂ , t) , max-leq-Δ¹)) ＝
+    ( λ t → ((1▵ , t) , max-leq-Δ¹)) ＝
     arrow-left-inv-representing-biinvertible-arrow▵
 
   right-2-cell-representing-biinvertible-arrow▵ :
@@ -118,12 +118,12 @@ postulate
 
   compute-0-right-2-cell-representing-biinvertible-arrow▵ :
     ( right-2-cell-representing-biinvertible-arrow▵) ∘
-    ( λ t → ((t , 0₂) , min-leq-Δ¹)) ＝
+    ( λ t → ((t , 0▵) , min-leq-Δ¹)) ＝
     arrow-representing-biinvertible-arrow▵
 
   compute-2-right-2-cell-representing-biinvertible-arrow▵ :
     ( right-2-cell-representing-biinvertible-arrow▵) ∘
-    ( λ t → ((1₂ , t) , max-leq-Δ¹)) ＝
+    ( λ t → ((1▵ , t) , max-leq-Δ¹)) ＝
     arrow-representing-biinvertible-arrow▵
 ```
 
@@ -131,38 +131,38 @@ postulate
 
 ```text
 source-arrow-representing-biinvertible-arrow▵ :
-  arrow-representing-biinvertible-arrow▵ 0₂ ＝
-  {! id-arrow▵ target-representing-biinvertible-arrow▵ 0₂ !}
+  arrow-representing-biinvertible-arrow▵ 0▵ ＝
+  {! id-arrow▵ target-representing-biinvertible-arrow▵ 0▵ !}
   -- source-representing-biinvertible-arrow▵
 source-arrow-representing-biinvertible-arrow▵ =
   htpy-eq
     ( inv compute-0-left-2-cell-representing-biinvertible-arrow▵)
-    0₂ ∙
+    0▵ ∙
   {!   !} ∙
-  htpy-eq compute-1-left-2-cell-representing-biinvertible-arrow▵ 0₂
+  htpy-eq compute-1-left-2-cell-representing-biinvertible-arrow▵ 0▵
 
 target-arrow-representing-biinvertible-arrow▵ :
-  arrow-representing-biinvertible-arrow▵ 1₂ ＝
+  arrow-representing-biinvertible-arrow▵ 1▵ ＝
   target-representing-biinvertible-arrow▵
 target-arrow-representing-biinvertible-arrow▵ = {!   !}
 
 source-arrow-left-inv-representing-biinvertible-arrow▵ :
-  arrow-left-inv-representing-biinvertible-arrow▵ 0₂ ＝
+  arrow-left-inv-representing-biinvertible-arrow▵ 0▵ ＝
   target-representing-biinvertible-arrow▵
 source-arrow-left-inv-representing-biinvertible-arrow▵ = {!   !}
 
 target-arrow-left-inv-representing-biinvertible-arrow▵ :
-  arrow-left-inv-representing-biinvertible-arrow▵ 1₂ ＝
+  arrow-left-inv-representing-biinvertible-arrow▵ 1▵ ＝
   source-representing-biinvertible-arrow▵
 target-arrow-left-inv-representing-biinvertible-arrow▵ = {!   !}
 
 source-arrow-right-inv-representing-biinvertible-arrow▵ :
-  arrow-right-inv-representing-biinvertible-arrow▵ 0₂ ＝
+  arrow-right-inv-representing-biinvertible-arrow▵ 0▵ ＝
   target-representing-biinvertible-arrow▵
 source-arrow-right-inv-representing-biinvertible-arrow▵ = {!   !}
 
 target-arrow-right-inv-representing-biinvertible-arrow▵ :
-  arrow-right-inv-representing-biinvertible-arrow▵ 1₂ ＝
+  arrow-right-inv-representing-biinvertible-arrow▵ 1▵ ＝
   source-representing-biinvertible-arrow▵
 target-arrow-right-inv-representing-biinvertible-arrow▵ = {!   !}
 ```

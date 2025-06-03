@@ -55,7 +55,7 @@ Given a type `X`, we define the {{#concept "directed cone type"}} as the
 ```text
             X --------> 1
             |           |
-  (id , 0₂) |           |
+  (id , 0▵) |           |
             ∨         ⌜ ∨
           X × Δ¹ ---> directed-cone X
 ```
@@ -72,7 +72,7 @@ attached such that there is a
 ```agda
 directed-cone : {l : Level} → UU l → UU l
 directed-cone X =
-  pushout (λ (x : X) → (x , 0₂)) (terminal-map X)
+  pushout (λ (x : X) → (x , 0▵)) (terminal-map X)
 
 module _
   {l : Level} {X : UU l}
@@ -80,20 +80,20 @@ module _
 
   in-directed-cone' : X → Δ¹ → directed-cone X
   in-directed-cone' x t =
-    inl-pushout (λ (x : X) → (x , 0₂)) (terminal-map X) (x , t)
+    inl-pushout (λ (x : X) → (x , 0▵)) (terminal-map X) (x , t)
 
   in-directed-cone : X → directed-cone X
-  in-directed-cone x = in-directed-cone' x 1₂
+  in-directed-cone x = in-directed-cone' x 1▵
 
   point-directed-cone : directed-cone X
   point-directed-cone =
-    inr-pushout (λ (x : X) → (x , 0₂)) (terminal-map X) star
+    inr-pushout (λ (x : X) → (x , 0▵)) (terminal-map X) star
 
   glue-directed-cone :
     (x : X) →
-    in-directed-cone' x 0₂ ＝ point-directed-cone
+    in-directed-cone' x 0▵ ＝ point-directed-cone
   glue-directed-cone =
-    glue-pushout (λ (x : X) → (x , 0₂)) (terminal-map X)
+    glue-pushout (λ (x : X) → (x , 0▵)) (terminal-map X)
 
   hom-directed-cone :
     (x : X) → point-directed-cone →▵ in-directed-cone x
@@ -101,9 +101,9 @@ module _
     ( in-directed-cone' x , glue-directed-cone x , refl)
 
   cocone-directed-cone :
-    cocone (λ (x : X) → (x , 0₂)) (terminal-map X) (directed-cone X)
+    cocone (λ (x : X) → (x , 0▵)) (terminal-map X) (directed-cone X)
   cocone-directed-cone =
-    cocone-pushout (λ (x : X) → (x , 0₂)) (terminal-map X)
+    cocone-pushout (λ (x : X) → (x , 0▵)) (terminal-map X)
 ```
 
 ### The dependent cogap map for the directed cone type
@@ -117,13 +117,13 @@ module _
     {l' : Level} {P : directed-cone X → UU l'}
     (c :
       dependent-cocone
-        ( λ x → x , 0₂)
+        ( λ x → x , 0▵)
         ( terminal-map X)
         ( cocone-directed-cone)
         ( P))
     (x : directed-cone X) → P x
   dependent-cogap-directed-cone' =
-    dependent-cogap (λ x → (x , 0₂)) (terminal-map X)
+    dependent-cogap (λ x → (x , 0▵)) (terminal-map X)
 
   dependent-cogap-directed-cone :
     { l' : Level} {P : directed-cone X → UU l'}
@@ -131,7 +131,7 @@ module _
     ( g : (x : X) (t : Δ¹) → P (in-directed-cone' x t)) →
     ( p :
       (x : X) →
-      dependent-identification P (glue-directed-cone x) (g x 0₂) f)
+      dependent-identification P (glue-directed-cone x) (g x 0▵) f)
     ( x : directed-cone X) → P x
   dependent-cogap-directed-cone f g p =
     dependent-cogap-directed-cone'
@@ -146,44 +146,44 @@ module _
   where
 
   cogap-directed-cone' :
-    cocone (λ x → (x , 0₂)) (terminal-map X) Y →
+    cocone (λ x → (x , 0▵)) (terminal-map X) Y →
     directed-cone X → Y
   cogap-directed-cone' =
-    cogap (λ (x : X) → (x , 0₂)) (terminal-map X)
+    cogap (λ (x : X) → (x , 0▵)) (terminal-map X)
 
   cogap-directed-cone :
-    (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) →
+    (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0▵ ＝ f) →
     directed-cone X → Y
   cogap-directed-cone g f p =
     cogap-directed-cone' ((λ (x , t) → g x t) , point f , p)
 
   compute-point-cogap-directed-cone :
-    (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) →
+    (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0▵ ＝ f) →
     cogap-directed-cone g f p point-directed-cone ＝ f
   compute-point-cogap-directed-cone g f p =
     compute-inr-cogap
-      ( λ x → (x , 0₂))
+      ( λ x → (x , 0▵))
       ( terminal-map X)
       ( (λ (x , t) → g x t) , point f , p)
       ( star)
 
   compute-in-cogap-directed-cone' :
-    (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) (x : X) (t : Δ¹) →
+    (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0▵ ＝ f) (x : X) (t : Δ¹) →
     cogap-directed-cone g f p (in-directed-cone' x t) ＝
     g x t
   compute-in-cogap-directed-cone' g f p x t =
     compute-inl-cogap
-      ( λ x → x , 0₂)
+      ( λ x → x , 0▵)
       ( terminal-map X)
       ( (λ (x , t) → g x t) , point f , p)
       ( x , t)
 
   compute-in-cogap-directed-cone :
-    (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) (x : X) →
+    (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0▵ ＝ f) (x : X) →
     cogap-directed-cone g f p (in-directed-cone x) ＝
-    g x 1₂
+    g x 1▵
   compute-in-cogap-directed-cone g f p x =
-    compute-in-cogap-directed-cone' g f p x 1₂
+    compute-in-cogap-directed-cone' g f p x 1▵
 ```
 
 ## Properties

@@ -40,8 +40,8 @@ The
 {{#concept "directed relation" Disambiguation="on the directed interval type" Agda=_≤-Δ¹_}}
 on the
 [directed interval type](simplicial-type-theory.directed-interval-type.md) `Δ¹`
-is a [total order](order-theory.total-orders.md) with `0₂` as the
-[bottom element](order-theory.bottom-elements-posets.md), and `1₂` as the
+is a [total order](order-theory.total-orders.md) with `0▵` as the
+[bottom element](order-theory.bottom-elements-posets.md), and `1▵` as the
 [top element](order-theory.top-elements-posets.md).
 
 ## Postulates
@@ -85,9 +85,9 @@ rewrite rules for by importing the module
 
 ```agda
 postulate
-  min-leq-Δ¹ : {x : Δ¹} → 0₂ ≤-Δ¹ x
+  min-leq-Δ¹ : {x : Δ¹} → 0▵ ≤-Δ¹ x
 
-  max-leq-Δ¹ : {x : Δ¹} → x ≤-Δ¹ 1₂
+  max-leq-Δ¹ : {x : Δ¹} → x ≤-Δ¹ 1▵
 ```
 
 ## Operations
@@ -156,10 +156,10 @@ leq-Δ¹-Prop x y = (x ≤-Δ¹ y , is-prop-leq-Δ¹)
 
 {-# INLINE leq-Δ¹-Prop #-}
 
-min-leq-eq-Δ¹ : {x y : Δ¹} → x ＝ 0₂ → x ≤-Δ¹ y
+min-leq-eq-Δ¹ : {x y : Δ¹} → x ＝ 0▵ → x ≤-Δ¹ y
 min-leq-eq-Δ¹ refl = min-leq-Δ¹
 
-max-leq-eq-Δ¹ : {x y : Δ¹} → y ＝ 1₂ → x ≤-Δ¹ y
+max-leq-eq-Δ¹ : {x y : Δ¹} → y ＝ 1▵ → x ≤-Δ¹ y
 max-leq-eq-Δ¹ refl = max-leq-Δ¹
 
 leq-eq-Δ¹ : {x y : Δ¹} → x ＝ y → x ≤-Δ¹ y
@@ -214,7 +214,7 @@ Id-Δ¹-Prop = Id-Prop Δ¹-Set
 ### The maximal element is not less than or equal to the bottom element of the directed interval
 
 ```agda
-not-leq-target-source-Δ¹ : ¬ (1₂ ≤-Δ¹ 0₂)
+not-leq-target-source-Δ¹ : ¬ (1▵ ≤-Δ¹ 0▵)
 not-leq-target-source-Δ¹ leq-1-0 =
   is-nontrivial-Δ¹ (antisymmetric-leq-Δ¹ min-leq-Δ¹ leq-1-0)
 ```

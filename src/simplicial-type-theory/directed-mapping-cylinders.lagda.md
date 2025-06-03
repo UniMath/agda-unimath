@@ -56,7 +56,7 @@ of `f` as the [pushout](synthetic-homotopy-theory.pushouts.md)
                   f
             X --------> Y
             |           |
-  (id , 1₂) |           |
+  (id , 1▵) |           |
             ∨         ⌜ ∨
           X × Δ¹ ----> cyl₂ f
 ```
@@ -73,7 +73,7 @@ to `Y` along `f` by [directed edges](simplicial-type-theory.directed-edges.md)
 directed-mapping-cylinder :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (l1 ⊔ l2)
 directed-mapping-cylinder {X = X} {Y} f =
-  pushout (λ (x : X) → (x , 1₂)) f
+  pushout (λ (x : X) → (x , 1▵)) f
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
@@ -82,22 +82,22 @@ module _
   in-domain-interval-directed-mapping-cylinder :
     X → Δ¹ → directed-mapping-cylinder f
   in-domain-interval-directed-mapping-cylinder x t =
-    inl-pushout (λ (x : X) → (x , 1₂)) f (x , t)
+    inl-pushout (λ (x : X) → (x , 1▵)) f (x , t)
 
   in-domain-directed-mapping-cylinder : X → directed-mapping-cylinder f
   in-domain-directed-mapping-cylinder x =
-    in-domain-interval-directed-mapping-cylinder x 0₂
+    in-domain-interval-directed-mapping-cylinder x 0▵
 
   in-codomain-directed-mapping-cylinder : Y → directed-mapping-cylinder f
   in-codomain-directed-mapping-cylinder =
-    inr-pushout (λ (x : X) → (x , 1₂)) f
+    inr-pushout (λ (x : X) → (x , 1▵)) f
 
   glue-directed-mapping-cylinder :
     (x : X) →
-    in-domain-interval-directed-mapping-cylinder x 1₂ ＝
+    in-domain-interval-directed-mapping-cylinder x 1▵ ＝
     in-codomain-directed-mapping-cylinder (f x)
   glue-directed-mapping-cylinder =
-    glue-pushout (λ (x : X) → (x , 1₂)) f
+    glue-pushout (λ (x : X) → (x , 1▵)) f
 
   hom-directed-mapping-cylinder :
     (x : X) →
@@ -109,9 +109,9 @@ module _
       glue-directed-mapping-cylinder x)
 
   cocone-directed-mapping-cylinder :
-    cocone (λ (x : X) → (x , 1₂)) f (directed-mapping-cylinder f)
+    cocone (λ (x : X) → (x , 1▵)) f (directed-mapping-cylinder f)
   cocone-directed-mapping-cylinder =
-    cocone-pushout (λ (x : X) → (x , 1₂)) f
+    cocone-pushout (λ (x : X) → (x , 1▵)) f
 ```
 
 ### The dependent cogap map for the directed mapping cylinder
@@ -124,12 +124,12 @@ module _
   dependent-cogap-directed-mapping-cylinder' :
     {l : Level} {P : directed-mapping-cylinder f → UU l}
     (c :
-      dependent-cocone (λ x → (x , 1₂)) (f)
+      dependent-cocone (λ x → (x , 1▵)) (f)
         ( cocone-directed-mapping-cylinder f)
         ( P))
     (x : directed-mapping-cylinder f) → P x
   dependent-cogap-directed-mapping-cylinder' =
-    dependent-cogap (λ x → (x , 1₂)) f
+    dependent-cogap (λ x → (x , 1▵)) f
 
   dependent-cogap-directed-mapping-cylinder :
     { l : Level} {P : directed-mapping-cylinder f → UU l}
@@ -141,7 +141,7 @@ module _
       (x : X) →
       dependent-identification P
         ( glue-directed-mapping-cylinder f x)
-        ( g x 1₂)
+        ( g x 1▵)
         ( h (f x)))
     ( x : directed-mapping-cylinder f) → P x
   dependent-cogap-directed-mapping-cylinder g h p =
@@ -157,44 +157,44 @@ module _
   where
 
   cogap-directed-mapping-cylinder' :
-    cocone (λ x → (x , 1₂)) f S →
+    cocone (λ x → (x , 1▵)) f S →
     directed-mapping-cylinder f → S
   cogap-directed-mapping-cylinder' =
-    cogap (λ (x : X) → (x , 1₂)) f
+    cogap (λ (x : X) → (x , 1▵)) f
 
   cogap-directed-mapping-cylinder :
-    (g : X → Δ¹ → S) (h : Y → S) (p : (x : X) → g x 1₂ ＝ h (f x)) →
+    (g : X → Δ¹ → S) (h : Y → S) (p : (x : X) → g x 1▵ ＝ h (f x)) →
     directed-mapping-cylinder f → S
   cogap-directed-mapping-cylinder g h p =
     cogap-directed-mapping-cylinder' ((λ (x , t) → g x t) , h , p)
 
   compute-in-codomain-cogap-directed-mapping-cylinder :
-    (g : X → Δ¹ → S) (h : Y → S) (p : (x : X) → g x 1₂ ＝ h (f x)) →
+    (g : X → Δ¹ → S) (h : Y → S) (p : (x : X) → g x 1▵ ＝ h (f x)) →
     (y : Y) →
     cogap-directed-mapping-cylinder g h p
       ( in-codomain-directed-mapping-cylinder f y) ＝
     ( h y)
   compute-in-codomain-cogap-directed-mapping-cylinder g h p =
-    compute-inr-cogap (λ x → (x , 1₂)) f ((λ (x , t) → g x t) , h , p)
+    compute-inr-cogap (λ x → (x , 1▵)) f ((λ (x , t) → g x t) , h , p)
 
   compute-in-domain-interval-cogap-directed-mapping-cylinder :
-    (g : X → Δ¹ → S) (h : Y → S) (p : (x : X) → g x 1₂ ＝ h (f x))
+    (g : X → Δ¹ → S) (h : Y → S) (p : (x : X) → g x 1▵ ＝ h (f x))
     (x : X) (t : Δ¹) →
     cogap-directed-mapping-cylinder g h p
       ( in-domain-interval-directed-mapping-cylinder f x t) ＝
     ( g x t)
   compute-in-domain-interval-cogap-directed-mapping-cylinder g h p x t =
     compute-inl-cogap
-      ( λ x → (x , 1₂))
+      ( λ x → (x , 1▵))
       ( f)
       ( (λ (x , t) → g x t) , h , p)
       ( x , t)
 
   compute-in-domain-cogap-directed-mapping-cylinder :
-    (g : X → Δ¹ → S) (h : Y → S) (p : (x : X) → g x 1₂ ＝ h (f x)) (x : X) →
+    (g : X → Δ¹ → S) (h : Y → S) (p : (x : X) → g x 1▵ ＝ h (f x)) (x : X) →
     cogap-directed-mapping-cylinder g h p
       ( in-domain-directed-mapping-cylinder f x) ＝
-    g x 0₂
+    g x 0▵
   compute-in-domain-cogap-directed-mapping-cylinder g h p x =
-    compute-in-domain-interval-cogap-directed-mapping-cylinder g h p x 0₂
+    compute-in-domain-interval-cogap-directed-mapping-cylinder g h p x 0▵
 ```

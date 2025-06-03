@@ -162,14 +162,14 @@ module _
     {f : A → B} → is-equiv f → is-simplicially-fully-faithful f
   is-simplicially-fully-faithful-is-equiv {f} H x y =
     is-equiv-map-Σ
-      ( λ α → (α 0₂ ＝ f x) × (α 1₂ ＝ f y))
+      ( λ α → (α 0▵ ＝ f x) × (α 1▵ ＝ f y))
       ( is-equiv-postcomp-is-equiv f H Δ¹)
       ( λ α →
         is-equiv-map-product
           ( ap f)
           ( ap f)
-          ( is-emb-is-equiv H (α 0₂) x)
-          ( is-emb-is-equiv H (α 1₂) y))
+          ( is-emb-is-equiv H (α 0▵) x)
+          ( is-emb-is-equiv H (α 1▵) y))
 
   equiv-action-hom▵ :
     (e : A ≃ B) → (x y : A) → hom▵ x y ≃ hom▵ (map-equiv e x) (map-equiv e y)

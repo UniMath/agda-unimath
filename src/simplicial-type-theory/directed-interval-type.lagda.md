@@ -44,10 +44,10 @@ open import foundation.universe-levels
 The
 {{#concept "directed interval type" Disambiguation="simplicial type theory" Agda=Δ¹}}
 `Δ¹` is the representing type for the simplicial structure on types. It is a
-type consisting of a distinct source and target element, `0₂` and `1₂`, and
+type consisting of a distinct source and target element, `0▵` and `1▵`, and
 comes [equipped](foundation.structure.md) with a directed relation which defines
-a [total order](order-theory.total-orders.md) with `0₂` as a
-[bottom element](order-theory.bottom-elements-posets.md), and `1₂` as a
+a [total order](order-theory.total-orders.md) with `0▵` as a
+[bottom element](order-theory.bottom-elements-posets.md), and `1▵` as a
 [top element](order-theory.top-elements-posets.md).
 
 In this file, we postulate the existence of the directed interval type together
@@ -64,9 +64,9 @@ type.
 postulate
   Δ¹ : UU lzero
 
-  0₂ 1₂ : Δ¹
+  0▵ 1▵ : Δ¹
 
-  is-nontrivial-Δ¹ : 0₂ ≠ 1₂
+  is-nontrivial-Δ¹ : 0▵ ≠ 1▵
 ```
 
 ## Properties
@@ -89,7 +89,7 @@ is-not-contractible-Δ¹ H = is-nontrivial-Δ¹ (eq-is-contr H)
 
 ```agda
 noncontractibility-Δ¹' : noncontractibility' Δ¹ 1
-noncontractibility-Δ¹' = (0₂ , 1₂ , is-nontrivial-Δ¹)
+noncontractibility-Δ¹' = (0▵ , 1▵ , is-nontrivial-Δ¹)
 
 noncontractibility-Δ¹ : noncontractibility Δ¹
 noncontractibility-Δ¹ = (1 , noncontractibility-Δ¹')
@@ -106,8 +106,8 @@ is-noncontractible-Δ¹ = unit-trunc-Prop noncontractibility-Δ¹
 subtype-∂Δ¹' : subtype lzero Δ¹
 subtype-∂Δ¹' t =
   coproduct-Prop
-    ( mere-eq-Prop t 0₂)
-    ( mere-eq-Prop t 1₂)
+    ( mere-eq-Prop t 0▵)
+    ( mere-eq-Prop t 1▵)
     ( λ |t=0| →
       rec-trunc-Prop empty-Prop
         ( λ t=1 →
@@ -122,15 +122,15 @@ subtype-∂Δ¹' t =
 ### The canonical inclusion of the booleans into the directed interval
 
 The canonical inclusion of the booleans into the directed interval is the map
-that sends `false` to `0₂` and `true` to `1₂`. We call the
+that sends `false` to `0▵` and `true` to `1▵`. We call the
 [image](foundation.images.md) of this map the boundary of the directed interval,
 `∂Δ¹`, and we show that `bool` is a [retract](foundation.retracts-of-types.md)
 of `∂Δ¹`.
 
 ```agda
 map-boundary-directed-interval-bool : bool → ∂Δ¹
-map-boundary-directed-interval-bool true = (1₂ , inr (refl-mere-eq 1₂))
-map-boundary-directed-interval-bool false = (0₂ , inl (refl-mere-eq 0₂))
+map-boundary-directed-interval-bool true = (1▵ , inr (refl-mere-eq 1▵))
+map-boundary-directed-interval-bool false = (0▵ , inl (refl-mere-eq 0▵))
 
 map-bool-boundary-directed-interval : ∂Δ¹ → bool
 map-bool-boundary-directed-interval (t , inl x) = false
@@ -164,8 +164,8 @@ is-surjective-map-boundary-directed-interval-bool (t , inr |p|) =
     ( |p|)
 
 map-directed-interval-bool : bool → Δ¹
-map-directed-interval-bool true = 1₂
-map-directed-interval-bool false = 0₂
+map-directed-interval-bool true = 1▵
+map-directed-interval-bool false = 0▵
 
 is-injective-map-directed-interval-bool :
   is-injective map-directed-interval-bool
@@ -202,10 +202,10 @@ We show that `map-directed-interval-bool` is an
 **Proof.** A type is 0-connected only if all pairs of elements are
 [merely equal](foundation.mere-equality.md), and since we are attempting to
 deduce a contradiction we may assume we have that all elements are equal, but
-`0₂` and `1₂` are not.
+`0▵` and `1▵` are not.
 
 ```agda
 is-not-0-connected-Δ¹ : ¬ (is-0-connected Δ¹)
 is-not-0-connected-Δ¹ H =
-  rec-trunc-Prop empty-Prop is-nontrivial-Δ¹ (mere-eq-is-0-connected H 0₂ 1₂)
+  rec-trunc-Prop empty-Prop is-nontrivial-Δ¹ (mere-eq-is-0-connected H 0▵ 1▵)
 ```

@@ -48,7 +48,7 @@ Given a type `X`, we define the {{#concept "lax suspension"}} of `X` as the
 [pushout](synthetic-homotopy-theory.pushouts.md)
 
 ```text
-           id × 0₂ + id × 1₂
+           id × 0▵ + id × 1▵
     X + X ------------------> X × Δ¹
       |                         |
       |                         |

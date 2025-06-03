@@ -39,11 +39,11 @@ Given a type family `B : A → 𝒰` and a
 [directed edge](simplicial-type-theory.directed-edges.md) `α : x →▵ y` in `A`, a
 {{#concept "dependent directed edge" Disambiguation="simplicial type theory" Agda=dependent-hom▵}}
 _over_ `α` from `x'` to `y'` is a simplicial arrow `β` in `B ∘ α : Δ¹ → 𝒰`. such
-that `β 0₂ ＝ x'` over the identification `α 0₂ ＝ x` and `β 1₂ ＝ y'` over the
-identification `α 1₂ ＝ y`.
+that `β 0▵ ＝ x'` over the identification `α 0▵ ＝ x` and `β 1▵ ＝ y'` over the
+identification `α 1▵ ＝ y`.
 
-Assuming for simplicity that the endpoints are strict, i.e., `α 0₂ ≐ x` and
-`α 1₂ ≐ y`, the situation can be drawn as in the following diagram. The
+Assuming for simplicity that the endpoints are strict, i.e., `α 0▵ ≐ x` and
+`α 1▵ ≐ y`, the situation can be drawn as in the following diagram. The
 dependent arrow `β` lives in the dependent type `B` varying over `A`, pointing
 from an element in the fiber `B x` to an element in the fiber `B y`. On each end
 of the dependent arrow, there is a correcting identification within the
@@ -76,8 +76,8 @@ module _
   dependent-hom▵ x' y' =
     Σ ( arrow▵' (B ∘ arrow-hom▵ α))
       ( λ β →
-        ( dependent-identification B (eq-source-hom▵ α) (β 0₂) x') ×
-        ( dependent-identification B (eq-target-hom▵ α) (β 1₂) y'))
+        ( dependent-identification B (eq-source-hom▵ α) (β 0▵) x') ×
+        ( dependent-identification B (eq-target-hom▵ α) (β 1▵) y'))
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
@@ -92,14 +92,14 @@ module _
   eq-source-dependent-hom▵ :
     dependent-identification B
       ( eq-source-hom▵ α)
-      ( arrow-dependent-hom▵ 0₂)
+      ( arrow-dependent-hom▵ 0▵)
       ( x')
   eq-source-dependent-hom▵ = pr1 (pr2 β)
 
   eq-target-dependent-hom▵ :
     dependent-identification B
       ( eq-target-hom▵ α)
-      ( arrow-dependent-hom▵ 1₂)
+      ( arrow-dependent-hom▵ 1▵)
       ( y')
   eq-target-dependent-hom▵ = pr2 (pr2 β)
 ```
@@ -142,7 +142,7 @@ from `x'` to `y'` over `α`. The situation is as follows
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         ↧        ↧                     ↧        ↧
   ───── ∙ ══════ ∙ ──────────────────> ∙ ====== ∙ ─────      A.
-        x       α 0₂        α         α 1₂      y
+        x       α 0▵        α         α 1▵      y
 ```
 
 We are looking for coherence data to fill the area between `x'` and `y'`, and
@@ -152,15 +152,15 @@ fill the triangles at the end points, we require further coherences of the
 dependent triangles depicted below
 
 ```text
-            ──── ∙ β 0₂           β 1₂ ∙ ────
+            ──── ∙ β 0▵           β 1▵ ∙ ────
           ╱      │                     │      ╲
-     x' ∙        │ H 0₂           H 1₂ │        ∙ y'
+     x' ∙        │ H 0▵           H 1▵ │        ∙ y'
           ╲      │                     │      ╱
-            ──── ∙ β' 0₂         β' 1₂ ∙ ────
+            ──── ∙ β' 0▵         β' 1▵ ∙ ────
 
         ↧        ↧                     ↧        ↧
 
-      x ∙ ────── ∙ α 0₂           α 1₂ ∙ ────── ∙ y.
+      x ∙ ────── ∙ α 0▵           α 1▵ ∙ ────── ∙ y.
 ```
 
 ```agda
@@ -178,12 +178,12 @@ module _
     ( ( eq-source-dependent-hom▵ α β) ＝
       ( concat-dependent-identification B refl
         ( eq-source-hom▵ α)
-        ( H 0₂)
+        ( H 0▵)
         ( eq-source-dependent-hom▵ α β'))) ×
     ( ( eq-target-dependent-hom▵ α β) ＝
       ( concat-dependent-identification B refl
         ( eq-target-hom▵ α)
-        ( H 1₂)
+        ( H 1▵)
         ( eq-target-dependent-hom▵ α β')))
 
   htpy-dependent-hom-over▵ :

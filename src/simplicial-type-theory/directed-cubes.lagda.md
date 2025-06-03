@@ -78,7 +78,7 @@ subtype-boundary-simplicial-cube : (n : ℕ) → subtype lzero (simplicial-cube 
 subtype-boundary-simplicial-cube 0 _ =
   empty-Prop
 subtype-boundary-simplicial-cube 1 x =
-  join-Prop (Id-Δ¹-Prop x 0₂) (Id-Δ¹-Prop x 1₂)
+  join-Prop (Id-Δ¹-Prop x 0▵) (Id-Δ¹-Prop x 1▵)
 subtype-boundary-simplicial-cube (succ-ℕ (succ-ℕ n)) (x , u) =
   join-Prop
     ( subtype-boundary-simplicial-cube 1 x)
@@ -93,7 +93,7 @@ boundary-simplicial-cube = type-subtype ∘ subtype-boundary-simplicial-cube
 ```agda
 is-initial-element-simplicial-cube : (n : ℕ) → simplicial-cube n → UU lzero
 is-initial-element-simplicial-cube 0 _ = unit
-is-initial-element-simplicial-cube 1 x = (x ＝ 0₂)
+is-initial-element-simplicial-cube 1 x = (x ＝ 0▵)
 is-initial-element-simplicial-cube (succ-ℕ (succ-ℕ n)) (x , y) =
   ( is-initial-element-simplicial-cube 1 x) ×
   ( is-initial-element-simplicial-cube (succ-ℕ n) y)
@@ -102,7 +102,7 @@ is-prop-is-initial-element-simplicial-cube :
   (n : ℕ) (x : simplicial-cube n) →
   is-prop (is-initial-element-simplicial-cube n x)
 is-prop-is-initial-element-simplicial-cube 0 _ = is-prop-unit
-is-prop-is-initial-element-simplicial-cube 1 x = is-set-Δ¹ x 0₂
+is-prop-is-initial-element-simplicial-cube 1 x = is-set-Δ¹ x 0▵
 is-prop-is-initial-element-simplicial-cube (succ-ℕ (succ-ℕ n)) (x , y) =
   is-prop-product
     ( is-prop-is-initial-element-simplicial-cube 1 x)
@@ -120,7 +120,7 @@ is-initial-element-simplicial-cube-Prop n x =
 ```agda
 is-terminal-element-simplicial-cube : (n : ℕ) → simplicial-cube n → UU lzero
 is-terminal-element-simplicial-cube 0 _ = unit
-is-terminal-element-simplicial-cube 1 x = (x ＝ 1₂)
+is-terminal-element-simplicial-cube 1 x = (x ＝ 1▵)
 is-terminal-element-simplicial-cube (succ-ℕ (succ-ℕ n)) (x , y) =
   ( is-terminal-element-simplicial-cube 1 x) ×
   ( is-terminal-element-simplicial-cube (succ-ℕ n) y)
@@ -129,7 +129,7 @@ is-prop-is-terminal-element-simplicial-cube :
   (n : ℕ) (x : simplicial-cube n) →
   is-prop (is-terminal-element-simplicial-cube n x)
 is-prop-is-terminal-element-simplicial-cube 0 _ = is-prop-unit
-is-prop-is-terminal-element-simplicial-cube 1 x = is-set-Δ¹ x 1₂
+is-prop-is-terminal-element-simplicial-cube 1 x = is-set-Δ¹ x 1▵
 is-prop-is-terminal-element-simplicial-cube (succ-ℕ (succ-ℕ n)) (x , y) =
   is-prop-product
     ( is-prop-is-terminal-element-simplicial-cube 1 x)
