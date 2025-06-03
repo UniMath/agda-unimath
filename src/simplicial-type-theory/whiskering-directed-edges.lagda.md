@@ -29,7 +29,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.extensions-maps
 
 open import simplicial-type-theory.action-on-directed-edges-functions
 open import simplicial-type-theory.directed-edges

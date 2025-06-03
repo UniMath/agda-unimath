@@ -315,7 +315,7 @@ module _
         ( dependent-universal-property-induction-principle-directed-circle α I)
 ```
 
-### The induction principle of the directed circle implies ther recursion principle of the directed circle
+### The induction principle of the directed circle implies the recursion principle of the directed circle
 
 ```agda
 module _

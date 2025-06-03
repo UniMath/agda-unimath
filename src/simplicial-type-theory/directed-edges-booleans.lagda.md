@@ -38,7 +38,7 @@ open import foundation.universal-property-booleans
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.coproducts-null-types
-open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.extensions-maps
 open import orthogonal-factorization-systems.null-families-of-types
 open import orthogonal-factorization-systems.null-maps
 open import orthogonal-factorization-systems.null-types

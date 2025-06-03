@@ -26,7 +26,7 @@ open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.extensions-maps
 
 open import simplicial-type-theory.action-on-directed-edges-dependent-functions
 open import simplicial-type-theory.action-on-directed-edges-functions
