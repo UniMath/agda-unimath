@@ -11,17 +11,13 @@ module real-numbers.metric-space-of-real-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
-open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-cartesian-products-of-types
-open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -37,7 +33,6 @@ open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
-open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.premetric-spaces
 open import metric-spaces.premetric-structures
 open import metric-spaces.pseudometric-structures
@@ -46,8 +41,15 @@ open import metric-spaces.saturated-metric-spaces
 open import metric-spaces.symmetric-premetric-structures
 open import metric-spaces.triangular-premetric-structures
 
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
+open import real-numbers.inequality-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers
 ```
 
 </details>
@@ -92,6 +94,9 @@ premetric-leq-ℝ l d x y =
   product-Prop
     ( is-in-lower-neighborhood-leq-prop-ℝ d x y)
     ( is-in-lower-neighborhood-leq-prop-ℝ d y x)
+
+is-in-neighborhood-leq-ℝ : (l : Level) → ℚ⁺ → Relation l (ℝ l)
+is-in-neighborhood-leq-ℝ l d x y = type-Prop (premetric-leq-ℝ l d x y)
 ```
 
 ## Properties
@@ -245,7 +250,111 @@ module _
     ( is-closed-lower-neighborhood-leq-ℝ y x ε (pr2 ∘ H))
 ```
 
-### Tha canonical embedding from rational to real numbers is an isometry between metric spaces
+### The element `x` is in a `d`-neighborhood of `y` if and only if `x ≤ y + d` and `y  ≤ x + d`
+
+```agda
+is-in-lower-neighborhood-real-bound-leq-ℝ :
+  {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
+  leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
+  is-in-lower-neighborhood-leq-ℝ d x y
+is-in-lower-neighborhood-real-bound-leq-ℝ (d , _) x y y≤x+d q q+d<y =
+  is-in-lower-cut-le-real-ℚ
+    ( q)
+    ( x)
+    ( concatenate-le-leq-ℝ
+      ( real-ℚ q)
+      ( y -ℝ real-ℚ d)
+      ( x)
+      ( le-transpose-left-add-ℝ
+        ( real-ℚ q)
+        ( real-ℚ d)
+        ( y)
+        ( inv-tr
+          ( λ z → le-ℝ z y)
+          ( add-real-ℚ q d)
+          ( le-real-is-in-lower-cut-ℚ (q +ℚ d) y q+d<y)))
+      ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
+
+real-bound-is-in-lower-neighborhood-leq-ℝ :
+  {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
+  is-in-lower-neighborhood-leq-ℝ d x y →
+  leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d))
+real-bound-is-in-lower-neighborhood-leq-ℝ (d , _) x y H r =
+  ( transpose-diff-is-in-lower-cut-ℝ x r d) ∘
+  ( H (r -ℚ d)) ∘
+  ( inv-tr
+    ( is-in-lower-cut-ℝ y)
+    ( ( associative-add-ℚ r (neg-ℚ d) d) ∙
+      ( ap (add-ℚ r) (left-inverse-law-add-ℚ d)) ∙
+      ( right-unit-law-add-ℚ r)))
+
+module _
+  {l : Level} (d : ℚ⁺) (x y : ℝ l)
+  where
+
+  neighborhood-real-bound-each-leq-ℝ :
+    leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d)) →
+    leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
+    is-in-neighborhood-leq-ℝ l d x y
+  neighborhood-real-bound-each-leq-ℝ x≤y+d y≤x+d =
+    ( is-in-lower-neighborhood-real-bound-leq-ℝ d x y y≤x+d ,
+      is-in-lower-neighborhood-real-bound-leq-ℝ d y x x≤y+d)
+
+  left-real-bound-neighborhood-leq-ℝ :
+    is-in-neighborhood-leq-ℝ l d x y →
+    leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d))
+  left-real-bound-neighborhood-leq-ℝ (_ , K) =
+    real-bound-is-in-lower-neighborhood-leq-ℝ d y x K
+
+  right-real-bound-neighborhood-leq-ℝ :
+    is-in-neighborhood-leq-ℝ l d x y →
+    leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d))
+  right-real-bound-neighborhood-leq-ℝ (H , _) =
+    real-bound-is-in-lower-neighborhood-leq-ℝ d x y H
+```
+
+### Similarity of real numbers preserves neighborhoods
+
+```agda
+module _
+  {l1 l2 : Level} (d : ℚ⁺) (x y : ℝ l1) (x' y' : ℝ l2)
+  (x~x' : x ~ℝ x') (y~y' : y ~ℝ y')
+  where
+
+  preserves-neighborhood-sim-ℝ :
+    is-in-neighborhood-leq-ℝ l1 d x y → is-in-neighborhood-leq-ℝ l2 d x' y'
+  preserves-neighborhood-sim-ℝ H =
+    neighborhood-real-bound-each-leq-ℝ
+      ( d)
+      ( x')
+      ( y')
+      ( preserves-leq-sim-ℝ
+        ( x)
+        ( x')
+        ( y +ℝ real-ℚ (rational-ℚ⁺ d))
+        ( y' +ℝ real-ℚ (rational-ℚ⁺ d))
+        ( x~x')
+        ( preserves-sim-right-add-ℝ
+          ( real-ℚ (rational-ℚ⁺ d))
+          ( y)
+          ( y')
+          ( y~y'))
+        ( left-real-bound-neighborhood-leq-ℝ d x y H))
+      ( preserves-leq-sim-ℝ
+        ( y)
+        ( y')
+        ( x +ℝ real-ℚ (rational-ℚ⁺ d))
+        ( x' +ℝ real-ℚ (rational-ℚ⁺ d))
+        ( y~y')
+        ( preserves-sim-right-add-ℝ
+          ( real-ℚ (rational-ℚ⁺ d))
+          ( x)
+          ( x')
+          ( x~x'))
+        ( right-real-bound-neighborhood-leq-ℝ d x y H))
+```
+
+### The canonical embedding from rational to real numbers is an isometry between metric spaces
 
 ```agda
 is-isometry-metric-space-leq-real-ℚ :
@@ -261,6 +370,83 @@ is-isometry-metric-space-leq-real-ℚ d x y =
     ( map-product
       ( leq-add-positive-le-le-add-positive-ℚ x y d)
       ( leq-add-positive-le-le-add-positive-ℚ y x d))
+
+isometry-metric-space-leq-real-ℚ :
+  isometry-Metric-Space
+    ( metric-space-leq-ℚ)
+    ( metric-space-leq-ℝ lzero)
+isometry-metric-space-leq-real-ℚ =
+  ( real-ℚ , is-isometry-metric-space-leq-real-ℚ)
+```
+
+### Raising real numbers is an isometry
+
+```agda
+module _
+  {l0 : Level} (l : Level)
+  where
+
+  is-isometry-metric-space-leq-raise-ℝ :
+    is-isometry-Metric-Space
+      ( metric-space-leq-ℝ l0)
+      ( metric-space-leq-ℝ (l0 ⊔ l))
+      ( raise-ℝ l)
+  pr1 (is-isometry-metric-space-leq-raise-ℝ d x y) =
+    preserves-neighborhood-sim-ℝ
+      ( d)
+      ( x)
+      ( y)
+      ( raise-ℝ l x)
+      ( raise-ℝ l y)
+      ( sim-raise-ℝ l x)
+      ( sim-raise-ℝ l y)
+  pr2 (is-isometry-metric-space-leq-raise-ℝ d x y) =
+    preserves-neighborhood-sim-ℝ
+      ( d)
+      ( raise-ℝ l x)
+      ( raise-ℝ l y)
+      ( x)
+      ( y)
+      ( symmetric-sim-ℝ (sim-raise-ℝ l x))
+      ( symmetric-sim-ℝ (sim-raise-ℝ l y))
+
+  isometry-metric-space-leq-raise-ℝ :
+    isometry-Metric-Space
+      ( metric-space-leq-ℝ l0)
+      ( metric-space-leq-ℝ (l0 ⊔ l))
+  isometry-metric-space-leq-raise-ℝ =
+    ( raise-ℝ l , is-isometry-metric-space-leq-raise-ℝ)
+```
+
+### Raising rational numbers to real numbers is an isometry
+
+```agda
+module _
+  (l : Level)
+  where
+
+  isometry-metric-space-leq-raise-real-ℚ :
+    isometry-Metric-Space
+      ( metric-space-leq-ℚ)
+      ( metric-space-leq-ℝ l)
+  isometry-metric-space-leq-raise-real-ℚ =
+    comp-isometry-Metric-Space
+      ( metric-space-leq-ℚ)
+      ( metric-space-leq-ℝ lzero)
+      ( metric-space-leq-ℝ l)
+      ( isometry-metric-space-leq-raise-ℝ l)
+      ( isometry-metric-space-leq-real-ℚ)
+
+  is-isometry-metric-space-leq-raise-real-ℚ :
+    is-isometry-Metric-Space
+      ( metric-space-leq-ℚ)
+      ( metric-space-leq-ℝ l)
+      ( raise-real-ℚ l)
+  is-isometry-metric-space-leq-raise-real-ℚ =
+    is-isometry-map-isometry-Metric-Space
+      ( metric-space-leq-ℚ)
+      ( metric-space-leq-ℝ l)
+      ( isometry-metric-space-leq-raise-real-ℚ)
 ```
 
 ## References

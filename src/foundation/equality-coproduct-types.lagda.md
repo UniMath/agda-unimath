@@ -36,7 +36,7 @@ open import foundation-core.truncation-levels
 
 In order to construct an identification `Id x y` in a coproduct `coproduct A B`,
 both `x` and `y` must be of the form `inl _` or of the form `inr _`. If that is
-the case, then an identification can be constructed by constructin an
+the case, then an identification can be constructed by constructing an
 identification in A or in B, according to the case. This leads to the
 characterization of identity types of coproducts.
 

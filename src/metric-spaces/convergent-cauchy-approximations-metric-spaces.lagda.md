@@ -15,7 +15,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -27,8 +27,8 @@ A [Cauchy approximation](metric-spaces.cauchy-approximations-metric-spaces.md)
 in a [metric space](metric-spaces.metric-spaces.md) is
 {{#concept "convergent" Disambiguation="Cauchy approximation in a metric space" agda=is-convergent-cauchy-approximation-Metric-Space}}
 if it has a
-[limit](metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces.md).
-Because limits of cauchy approximations in metric spaces are unique, this is a
+[limit](metric-spaces.limits-of-cauchy-approximations-premetric-spaces.md).
+Because limits of Cauchy approximations in metric spaces are unique, this is a
 [subtype](foundation.subtypes.md) of the type of Cauchy approximations.
 
 ## Definitions
@@ -41,12 +41,24 @@ module _
   (f : cauchy-approximation-Metric-Space A)
   where
 
+  is-limit-cauchy-approximation-prop-Metric-Space :
+    type-Metric-Space A → Prop l2
+  is-limit-cauchy-approximation-prop-Metric-Space =
+    is-limit-cauchy-approximation-prop-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( f)
+
+  is-limit-cauchy-approximation-Metric-Space :
+    type-Metric-Space A → UU l2
+  is-limit-cauchy-approximation-Metric-Space =
+    is-limit-cauchy-approximation-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( f)
+
   is-convergent-cauchy-approximation-Metric-Space : UU (l1 ⊔ l2)
   is-convergent-cauchy-approximation-Metric-Space =
     Σ ( type-Metric-Space A)
-      ( is-limit-cauchy-approximation-Premetric-Space
-        ( premetric-Metric-Space A)
-        ( f))
+      ( is-limit-cauchy-approximation-Metric-Space)
 
   abstract
     is-prop-is-convergent-cauchy-approximation-Metric-Space :
@@ -73,7 +85,7 @@ module _
     is-prop-is-convergent-cauchy-approximation-Metric-Space
 ```
 
-### The type of convergent cauchy approximations in a metric space
+### The type of convergent Cauchy approximations in a metric space
 
 ```agda
 module _

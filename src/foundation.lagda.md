@@ -193,6 +193,7 @@ open import foundation.fibered-equivalences public
 open import foundation.fibered-involutions public
 open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
+open import foundation.finite-sequences-set-quotients public
 open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
 open import foundation.fixed-points-endofunctions public
@@ -205,6 +206,7 @@ open import foundation.functoriality-cartesian-product-types public
 open import foundation.functoriality-coproduct-types public
 open import foundation.functoriality-dependent-function-types public
 open import foundation.functoriality-dependent-pair-types public
+open import foundation.functoriality-disjunction public
 open import foundation.functoriality-fibers-of-maps public
 open import foundation.functoriality-function-types public
 open import foundation.functoriality-morphisms-arrows public
@@ -404,6 +406,7 @@ open import foundation.structure public
 open import foundation.structure-identity-principle public
 open import foundation.structured-equality-duality public
 open import foundation.structured-type-duality public
+open import foundation.subsequences public
 open import foundation.subsingleton-induction public
 open import foundation.subterminal-types public
 open import foundation.subtype-duality public
@@ -493,7 +496,6 @@ open import foundation.unordered-pairs public
 open import foundation.unordered-pairs-of-types public
 open import foundation.unordered-tuples public
 open import foundation.unordered-tuples-of-types public
-open import foundation.vectors-set-quotients public
 open import foundation.vertical-composition-spans-of-spans public
 open import foundation.weak-function-extensionality public
 open import foundation.weak-limited-principle-of-omniscience public

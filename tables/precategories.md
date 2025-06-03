@@ -9,8 +9,8 @@
 | Finite species                    | [`species.precategory-of-finite-species`](species.precategory-of-finite-species.md)                                                   |
 | `G`-sets                          | [`group-theory.precategory-of-group-actions`](group-theory.precategory-of-group-actions.md)                                           |
 | Groups                            | [`group-theory.precategory-of-groups`](group-theory.precategory-of-groups.md)                                                         |
-| Metric spaces and functions       | ['metric-spaces.precategory-of-metric-spaces-and-functions'](metric-spaces.precategory-of-metric-spaces-and-functions.md)             |
-| Metric spaces and isometries      | ['metric-spaces.precategory-of-metric-spaces-and-isometries'](metric-spaces.precategory-of-metric-spaces-and-isometries.md)           |
+| Metric spaces and functions       | [`metric-spaces.precategory-of-metric-spaces-and-functions`](metric-spaces.precategory-of-metric-spaces-and-functions.md)             |
+| Metric spaces and isometries      | [`metric-spaces.precategory-of-metric-spaces-and-isometries`](metric-spaces.precategory-of-metric-spaces-and-isometries.md)           |
 | Metric spaces and short functions | [`metric-spaces.precategory-of-metric-spaces-and-short-functions`](metric-spaces.precategory-of-metric-spaces-and-short-functions.md) |
 | Monoids                           | [`group-theory.precategory-of-monoids`](group-theory.precategory-of-monoids.md)                                                       |
 | Posets                            | [`order-theory.precategory-of-posets`](order-theory.precategory-of-posets.md)                                                         |

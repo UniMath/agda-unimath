@@ -267,7 +267,7 @@ module _
       ( decide-le-leq-ℚ p q)
 ```
 
-### Characterisation of each cut by the other
+### Characterization of each cut by the other
 
 #### The lower cut is the subtype of rationals bounded above by some element of the complement of the upper cut
 
@@ -521,7 +521,7 @@ This page follows parts of Section 11.2 in {{#cite UF13}}.
 
 ## External links
 
-- [DedekindReals.Type](https://www.cs.bham.ac.uk/~mhe/TypeTopology/DedekindReals.Type.html)
+- [`DedekindReals.Type`](https://www.cs.bham.ac.uk/~mhe/TypeTopology/DedekindReals.Type.html)
   at TypeTopology
 - [Dedekind cut](https://ncatlab.org/nlab/show/Dedekind+cut) at $n$Lab
 - [Dedekind cut](https://en.wikipedia.org/wiki/Dedekind_cut) at Wikipedia

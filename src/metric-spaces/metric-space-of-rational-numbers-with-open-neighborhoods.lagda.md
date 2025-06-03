@@ -11,6 +11,7 @@ module metric-spaces.metric-space-of-rational-numbers-with-open-neighborhoods wh
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -23,6 +24,7 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -62,6 +64,9 @@ premetric-le-ℚ d x y =
   product-Prop
     ( le-ℚ-Prop y (x +ℚ (rational-ℚ⁺ d)))
     ( le-ℚ-Prop x (y +ℚ (rational-ℚ⁺ d)))
+
+neighborhood-le-ℚ : ℚ⁺ → ℚ → ℚ → UU lzero
+neighborhood-le-ℚ d x y = type-Prop (premetric-le-ℚ d x y)
 ```
 
 ## Properties
@@ -144,6 +149,64 @@ premetric-space-le-ℚ = ℚ , premetric-le-ℚ
 metric-space-le-ℚ : Metric-Space lzero lzero
 pr1 metric-space-le-ℚ = premetric-space-le-ℚ
 pr2 metric-space-le-ℚ = is-metric-premetric-le-ℚ
+```
+
+### Relationship to the distance on rational numbers
+
+```agda
+abstract
+  le-dist-neighborhood-le-ℚ :
+    (ε : ℚ⁺) (p q : ℚ) →
+    neighborhood-le-ℚ ε p q →
+    le-ℚ (rational-dist-ℚ p q) (rational-ℚ⁺ ε)
+  le-dist-neighborhood-le-ℚ ε⁺@(ε , _) p q (H , K) =
+    le-dist-le-diff-ℚ
+      ( p)
+      ( q)
+      ( ε)
+      ( swap-right-diff-le-ℚ p ε q (le-transpose-right-add-ℚ p q ε K))
+      ( swap-right-diff-le-ℚ q ε p (le-transpose-right-add-ℚ q p ε H))
+
+  neighborhood-le-le-dist-ℚ :
+    (ε : ℚ⁺) (p q : ℚ) →
+    le-ℚ (rational-dist-ℚ p q) (rational-ℚ⁺ ε) →
+    neighborhood-le-ℚ ε p q
+  neighborhood-le-le-dist-ℚ ε⁺@(ε , _) p q |p-q|<ε =
+    ( le-transpose-left-diff-ℚ
+      ( q)
+      ( ε)
+      ( p)
+      ( swap-right-diff-le-ℚ
+        ( q)
+        ( p)
+        ( ε)
+        ( concatenate-leq-le-ℚ
+          ( q -ℚ p)
+          ( rational-dist-ℚ p q)
+          ( ε)
+          ( leq-reversed-diff-dist-ℚ p q)
+          ( |p-q|<ε)))) ,
+    ( le-transpose-left-diff-ℚ
+      ( p)
+      ( ε)
+      ( q)
+      ( swap-right-diff-le-ℚ
+        ( p)
+        ( q)
+        ( ε)
+        ( concatenate-leq-le-ℚ
+          ( p -ℚ q)
+          ( rational-dist-ℚ p q)
+          ( ε)
+          ( leq-diff-dist-ℚ p q)
+          ( |p-q|<ε))))
+
+le-dist-iff-neighborhood-le-ℚ :
+  (ε : ℚ⁺) (p q : ℚ) →
+  le-ℚ (rational-dist-ℚ p q) (rational-ℚ⁺ ε) ↔
+  neighborhood-le-ℚ ε p q
+pr1 (le-dist-iff-neighborhood-le-ℚ ε p q) = neighborhood-le-le-dist-ℚ ε p q
+pr2 (le-dist-iff-neighborhood-le-ℚ ε p q) = le-dist-neighborhood-le-ℚ ε p q
 ```
 
 ## See also
