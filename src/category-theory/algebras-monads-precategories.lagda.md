@@ -34,16 +34,15 @@ open import foundation-core.transport-along-identifications
 ## Idea
 
 The
-{{#concept "category of algebras" Disambiguation="of a monad on a precategory" Agda=algebras-monad-Precategory}}
+{{#concept "precategory of algebras" Disambiguation="of a monad on a precategory" Agda=algebras-monad-Precategory}}
 of a [monad on a precategory](category-theory.monads-on-precategories) `T`,
-denoted `EM(T)`, also called the Eilenberg-Moore category, consists of all
+denoted `EM(T)`, also called the **Eilenberg–Moore precategory**, consists of all
 `T`-algebras and `T`-algebra morphisms. It comes with an adjunction `C ⇄ EM(T)`.
 
 ```agda
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
   (T : monad-Precategory C)
-  (let Tf = endofunctor-monad-Precategory C T)
   (let T₁ = hom-endofunctor-monad-Precategory C T)
   (let T₀ = obj-endofunctor-monad-Precategory C T)
   where
@@ -274,9 +273,10 @@ The counit is the vertical map given by the structure map of the algebra
     ( λ x →
       ( hom-monad-algebra-Precategory C T x) ,
       ( inv (mul-law-monad-algebra-Precategory C T x))) ,
-    ( λ {x} {y} f → eq-pair-Σ
-      ( comm-hom-morphism-monad-algebra-Precategory C T x y f)
-      ( eq-is-prop (is-set-hom-Precategory C _ _ _ _)))
+    ( λ {x} {y} f →
+      eq-pair-Σ
+        ( comm-hom-morphism-monad-algebra-Precategory C T x y f)
+        ( eq-is-prop (is-set-hom-Precategory C _ _ _ _)))
 
   left-triangle-algebras-monad-Precategory :
     has-left-triangle-identity-Precategory C algebras-monad-Precategory

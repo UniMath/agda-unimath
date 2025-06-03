@@ -44,7 +44,6 @@ composition recovers the original monad.
 module _
   {l1 l2 : Level} {C : Precategory l1 l2}
   (T : monad-Precategory C)
-  (let Tf = endofunctor-monad-Precategory C T)
   (let μ = hom-mul-monad-Precategory C T)
   (let η = hom-unit-monad-Precategory C T)
   (let T₀ = obj-endofunctor-monad-Precategory C T)
@@ -93,7 +92,7 @@ module _
   associative-comp-hom-free-algebras-monad-Precategory h g f =
     ap
       ( precomp-hom-Precategory C f _)
-      ( (ap
+      ( ( ap
           ( postcomp-hom-Precategory C (μ _) _)
           ( (preserves-comp-endofunctor-monad-Precategory C T _ g) ∙
             ( ap
