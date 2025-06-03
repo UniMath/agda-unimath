@@ -87,13 +87,13 @@ module _
 
   eq-source-simplicial-natural-transformation :
     (x : A) →
-    family-of-simplicial-arrows-simplicial-natural-transformation x 0₂ ＝ f x
+    family-of-simplicial-arrows-simplicial-natural-transformation x 0▵ ＝ f x
   eq-source-simplicial-natural-transformation x =
     eq-source-hom▵ (α x)
 
   eq-target-simplicial-natural-transformation :
     (x : A) →
-    family-of-simplicial-arrows-simplicial-natural-transformation x 1₂ ＝ g x
+    family-of-simplicial-arrows-simplicial-natural-transformation x 1▵ ＝ g x
   eq-target-simplicial-natural-transformation x =
     eq-target-hom▵ (α x)
 ```

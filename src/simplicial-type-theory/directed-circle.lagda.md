@@ -66,11 +66,11 @@ The directed circle also satisfies the
 of the diagram
 
 ```text
-       0₂
+       0▵
     ------->
   1          Δ¹.
     ------->
-       1₂
+       1▵
 ```
 
 In
@@ -89,23 +89,23 @@ postulate
   arrow-directed-circle : arrow▵ directed-circle
 
 base-directed-circle : directed-circle
-base-directed-circle = arrow-directed-circle 0₂
+base-directed-circle = arrow-directed-circle 0▵
 
 postulate
   compute-target-arrow-directed-circle :
-    arrow-directed-circle 1₂ ＝ base-directed-circle
+    arrow-directed-circle 1▵ ＝ base-directed-circle
 
 compute-source-arrow-directed-circle :
-  arrow-directed-circle 0₂ ＝ base-directed-circle
+  arrow-directed-circle 0▵ ＝ base-directed-circle
 compute-source-arrow-directed-circle = refl
 
 eq-source-target-arrow-directed-circle :
-  arrow-directed-circle 1₂ ＝ arrow-directed-circle 0₂
+  arrow-directed-circle 1▵ ＝ arrow-directed-circle 0▵
 eq-source-target-arrow-directed-circle =
   compute-target-arrow-directed-circle
 
 eq-target-source-arrow-directed-circle :
-  arrow-directed-circle 0₂ ＝ arrow-directed-circle 1₂
+  arrow-directed-circle 0▵ ＝ arrow-directed-circle 1▵
 eq-target-source-arrow-directed-circle =
   inv compute-target-arrow-directed-circle
 
@@ -232,11 +232,11 @@ The directed circle satisfies the universal property of the coequalizer of the
 diagram
 
 ```text
-       0₂
+       0▵
     ------->
   1          Δ¹.
     ------->
-       1₂
+       1▵
 ```
 
 This remains to be formalized.

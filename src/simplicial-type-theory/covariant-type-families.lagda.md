@@ -51,19 +51,19 @@ if one of the following equivalent conditions hold:
    type of dependent directed edges over `f` based at `x'` is
    [torsorial](foundation.torsorial-type-families.md).
 
-2. For every simplicial arrow `α` in `A`, and element `x'` over `α 0₂`, the type
+2. For every simplicial arrow `α` in `A`, and element `x'` over `α 0▵`, the type
    of dependent directed edges over `α` based at `x'` is torsorial.
 
    ```text
-     (α : arrow A) (x' : B (α 0₂)) →
-     is-contr (Σ (y' : B (α 1₂)), (dependent-hom B α x' y'))
+     (α : arrow A) (x' : B (α 0▵)) →
+     is-contr (Σ (y' : B (α 1▵)), (dependent-hom B α x' y'))
    ```
 
    Note that this is just a slight simplification of the previous condition.
 
 3. The type family is
    [local](orthogonal-factorization-systems.local-type-families.md) at the left
-   end-point inclusion `0₂ : 1 ↪ Δ¹`.
+   end-point inclusion `0▵ : 1 ↪ Δ¹`.
 
 4. The following square is a [pullback](foundation-core.pullbacks.md)
 
@@ -72,7 +72,7 @@ if one of the following equivalent conditions hold:
     (Δ¹ → Σ (x : A), (B x)) ---------------> (Δ¹ → A)
               |                                |
               |                                |
-        ev 0₂ |                                | ev 0₂
+        ev 0▵ |                                | ev 0▵
               |                                |
               ∨                                ∨
          Σ (x : A), (B x) -------------------> A
@@ -89,7 +89,7 @@ module _
   where
 
   is-simplicially-covariant : UU (l1 ⊔ l2)
-  is-simplicially-covariant = is-local-family (point 0₂) B
+  is-simplicially-covariant = is-local-family (point 0▵) B
 ```
 
 ```agda
@@ -99,7 +99,7 @@ module _
 
   is-simplicially-covariant' : UU (l1 ⊔ l2)
   is-simplicially-covariant' =
-    (α : arrow▵ A) (x' : B (α 0₂)) →
+    (α : arrow▵ A) (x' : B (α 0▵)) →
     is-torsorial
       ( dependent-hom▵ B (hom▵-arrow▵ α) x')
 ```

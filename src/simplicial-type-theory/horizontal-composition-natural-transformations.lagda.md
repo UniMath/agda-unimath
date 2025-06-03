@@ -69,11 +69,11 @@ module _
         ( β (arrow-hom▵ (α x) t))
         ( t)) ,
     ( ( ap
-        ( λ u → arrow-hom▵ (β u) 0₂)
+        ( λ u → arrow-hom▵ (β u) 0▵)
         ( eq-source-simplicial-natural-transformation α x)) ∙
       ( eq-source-simplicial-natural-transformation β (f x))) ,
     ( ( ap
-        ( λ u → arrow-hom▵ (β u) 1₂)
+        ( λ u → arrow-hom▵ (β u) 1▵)
         ( eq-target-simplicial-natural-transformation α x)) ∙
       ( eq-target-simplicial-natural-transformation β (g x)))
 ```
@@ -93,10 +93,10 @@ module _
         ( arrow-hom▵ a t)
         ( t)) ,
     ( ( eq-source-simplicial-natural-transformation α
-        ( arrow-hom▵ a 0₂)) ∙
+        ( arrow-hom▵ a 0▵)) ∙
       ( ap f (eq-source-hom▵ a))) ,
     ( ( eq-target-simplicial-natural-transformation α
-        ( arrow-hom▵ a 1₂)) ∙
+        ( arrow-hom▵ a 1▵)) ∙
       ( ap g (eq-target-hom▵ a)))
 ```
 

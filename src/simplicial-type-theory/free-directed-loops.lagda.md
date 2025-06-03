@@ -42,7 +42,7 @@ A
 {{#concept "free directed loop" Disambiguation="in a simplicial type" Agda=free-directed-loop}}
 in a type `X` consists of a [directed arrow](simplicial-type-theory.arrows.md)
 `α : Δ¹ → X` and an [identification](foundation-core.identity-types.md)
-`α 1₂ ＝ α 0₂`. Free directed loops are classified by the
+`α 1▵ ＝ α 0▵`. Free directed loops are classified by the
 [directed circle](simplicial-type-theory.directed-circle.md), meaning that the
 type of free directed loops in `X` is
 [equivalent](foundation-core.equivalences.md) to the type of maps
@@ -54,7 +54,7 @@ type of free directed loops in `X` is
 
 ```agda
 free-directed-loop : {l : Level} → UU l → UU l
-free-directed-loop X = Σ (Δ¹ → X) (λ α → α 1₂ ＝ α 0₂)
+free-directed-loop X = Σ (Δ¹ → X) (λ α → α 1▵ ＝ α 0▵)
 
 module _
   {l1 : Level} {X : UU l1}
@@ -64,11 +64,11 @@ module _
   arrow-free-directed-loop = pr1
 
   base-free-directed-loop : free-directed-loop X → X
-  base-free-directed-loop α = arrow-free-directed-loop α 0₂
+  base-free-directed-loop α = arrow-free-directed-loop α 0▵
 
   compute-target-free-directed-loop :
     (α : free-directed-loop X) →
-    arrow-free-directed-loop α 1₂ ＝ base-free-directed-loop α
+    arrow-free-directed-loop α 1▵ ＝ base-free-directed-loop α
   compute-target-free-directed-loop = pr2
 
   loop-free-directed-loop :
@@ -91,8 +91,8 @@ module _
       ( λ β →
         dependent-identification P
           ( compute-target-free-directed-loop α)
-          ( β 1₂)
-          ( β 0₂))
+          ( β 1▵)
+          ( β 0▵))
 
 module _
   {l1 l2 : Level} {X : UU l1} (α : free-directed-loop X) {P : X → UU l2}
@@ -104,13 +104,13 @@ module _
   arrow-free-dependent-directed-loop = pr1 β
 
   base-free-dependent-directed-loop : P (base-free-directed-loop α)
-  base-free-dependent-directed-loop = arrow-free-dependent-directed-loop 0₂
+  base-free-dependent-directed-loop = arrow-free-dependent-directed-loop 0▵
 
   compute-target-free-dependent-directed-loop :
     dependent-identification P
       ( compute-target-free-directed-loop α)
-      ( arrow-free-dependent-directed-loop 1₂)
-      ( arrow-free-dependent-directed-loop 0₂)
+      ( arrow-free-dependent-directed-loop 1▵)
+      ( arrow-free-dependent-directed-loop 0▵)
   compute-target-free-dependent-directed-loop = pr2 β
 
   loop-free-dependent-directed-loop :
@@ -166,8 +166,8 @@ module _
   coherence-htpy-free-directed-loop α α' H =
     coherence-square-identifications
       ( compute-target-free-directed-loop α)
-      ( H 1₂)
-      ( H 0₂)
+      ( H 1▵)
+      ( H 0▵)
       ( compute-target-free-directed-loop α')
 
   htpy-free-directed-loop : (α α' : free-directed-loop X) → UU l1
@@ -227,11 +227,11 @@ module _
       ( compute-target-free-directed-loop α)
       ( refl)
       ( compute-target-free-dependent-directed-loop α β)
-      ( H 0₂)) ＝
+      ( H 0▵)) ＝
     ( concat-dependent-identification P
       ( refl)
       ( compute-target-free-directed-loop α)
-      ( H 1₂)
+      ( H 1▵)
       ( compute-target-free-dependent-directed-loop α β'))
 
   htpy-free-dependent-directed-loop :
@@ -314,7 +314,7 @@ module _
   compute-free-dependent-directed-loop =
     ( equiv-tot
       ( λ α →
-        ( left-unit-law-Σ-is-contr (is-torsorial-Id (α 0₂)) (α 0₂ , refl)) ∘e
-        ( inv-associative-Σ X (α 0₂ ＝_) (λ z → α 1₂ ＝ pr1 z)))) ∘e
+        ( left-unit-law-Σ-is-contr (is-torsorial-Id (α 0▵)) (α 0▵ , refl)) ∘e
+        ( inv-associative-Σ X (α 0▵ ＝_) (λ z → α 1▵ ＝ pr1 z)))) ∘e
     ( equiv-left-swap-Σ)
 ```

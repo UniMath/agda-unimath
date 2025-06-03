@@ -74,7 +74,7 @@ module _
     cone
       {A = B × C} {Δ¹ → A} {A × A}
       ( λ (b , c) → (f b , g c))
-      ( λ α → (α 0₂ , α 1₂))
+      ( λ α → (α 0▵ , α 1▵))
       ( f ↓▵ g)
   pr1 (cone-comma▵) (b , c , _) = (b , c)
   pr1 (pr2 (cone-comma▵)) (_ , _ , α , _) = α
@@ -82,18 +82,18 @@ module _
     inv (eq-pair α0＝fb α1＝gc)
 
   gap-comma▵ :
-    f ↓▵ g → standard-pullback (λ (b , c) → (f b , g c)) (λ α → α 0₂ , α 1₂)
+    f ↓▵ g → standard-pullback (λ (b , c) → (f b , g c)) (λ α → α 0▵ , α 1▵)
   gap-comma▵ =
     gap
       ( λ (b , c) → (f b , g c))
-      ( λ α → (α 0₂ , α 1₂))
+      ( λ α → (α 0▵ , α 1▵))
       ( cone-comma▵)
 
   map-inv-gap-comma▵ :
     ( standard-pullback
       {A = B × C} {Δ¹ → A} {A × A}
       ( λ (b , c) → (f b , g c))
-      ( λ α → α 0₂ , α 1₂)) →
+      ( λ α → α 0▵ , α 1▵)) →
     f ↓▵ g
   map-inv-gap-comma▵ ((b , c) , α , coh) =
     ( b , c , α , pair-eq (inv coh))
@@ -116,7 +116,7 @@ module _
   is-pullback-comma▵ :
     is-pullback
       ( λ (b , c) → (f b , g c))
-      ( λ α → (α 0₂ , α 1₂))
+      ( λ α → (α 0▵ , α 1▵))
       ( cone-comma▵)
   is-pullback-comma▵ =
     is-equiv-is-invertible

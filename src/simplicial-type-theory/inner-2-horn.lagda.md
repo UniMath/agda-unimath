@@ -63,16 +63,16 @@ The inner 2-horn has multiple defining properties:
    [2-simplex](simplicial-type-theory.2-simplices.md) defined by
 
    ```text
-   Λ²₁ = {(x , y) ∈ Δ¹ × Δ¹ | (y ＝ 0₂) ∨ (x ＝ 1₂)} ⊆ Δ².
+   Λ²₁ = {(x , y) ∈ Δ¹ × Δ¹ | (y ＝ 0▵) ∨ (x ＝ 1▵)} ⊆ Δ².
    ```
 
 2. The inner 2-horn is the pushout
 
    ```text
-            0₂
+            0▵
         1 -----> Δ¹
         |        |
-     1₂ |        |
+     1▵ |        |
         ∨      ⌜ ∨
         Δ¹ -----> Λ²₁.
    ```
@@ -88,7 +88,7 @@ The inner 2-horn has multiple defining properties:
 ```agda
 subtype-Λ²₁ : subtype lzero (Δ¹ × Δ¹)
 subtype-Λ²₁ (x , y) =
-  join-Prop (Id-Prop Δ¹-Set y 0₂) (Id-Prop Δ¹-Set x 1₂)
+  join-Prop (Id-Prop Δ¹-Set y 0▵) (Id-Prop Δ¹-Set x 1▵)
 
 inner-two-horn : UU
 inner-two-horn = type-subtype subtype-Λ²₁
@@ -97,17 +97,17 @@ inner-two-horn = type-subtype subtype-Λ²₁
 Λ²₁ = inner-two-horn
 
 inl-Λ²₁ : Δ¹ → Λ²₁
-inl-Λ²₁ t = ((t , 0₂) , inl-join refl)
+inl-Λ²₁ t = ((t , 0▵) , inl-join refl)
 
 inr-Λ²₁ : Δ¹ → Λ²₁
-inr-Λ²₁ s = ((1₂ , s) , inr-join refl)
+inr-Λ²₁ s = ((1▵ , s) , inr-join refl)
 ```
 
 ### The cogap map of the inner 2-horn as a subtype of the lower simplicial triangle
 
 ```agda
 module _
-  {l : Level} {A : UU l} (f g : Δ¹ → A) (p : f 1₂ ＝ g 0₂)
+  {l : Level} {A : UU l} (f g : Δ¹ → A) (p : f 1▵ ＝ g 0▵)
   where
 
   cogap-Λ²₁ : inner-two-horn → A
@@ -122,23 +122,23 @@ module _
 ### The inner 2-horn as a pushout
 
 ```text
-         0₂
+         0▵
      1 -----> Δ¹
      |        |
-  1₂ |        |
+  1▵ |        |
      ∨      ⌜ ∨
      Δ¹ -----> Λ²₁.
 ```
 
 ```agda
 pushout-Λ²₁ : UU
-pushout-Λ²₁ = pushout (point 1₂) (point 0₂)
+pushout-Λ²₁ = pushout (point 1▵) (point 0▵)
 
 inl-pushout-Λ²₁ : Δ¹ → pushout-Λ²₁
-inl-pushout-Λ²₁ = inl-pushout (point 1₂) (point 0₂)
+inl-pushout-Λ²₁ = inl-pushout (point 1▵) (point 0▵)
 
 inr-pushout-Λ²₁ : Δ¹ → pushout-Λ²₁
-inr-pushout-Λ²₁ = inr-pushout (point 1₂) (point 0₂)
+inr-pushout-Λ²₁ = inr-pushout (point 1▵) (point 0▵)
 ```
 
 ## Properties
@@ -159,8 +159,8 @@ map-inner-two-horn-pushout-Λ²₁ :
   pushout-Λ²₁ → Λ²₁
 map-inner-two-horn-pushout-Λ²₁ =
   cogap
-    ( point 1₂)
-    ( point 0₂)
+    ( point 1▵)
+    ( point 0▵)
     ( inl-Λ²₁ ,
       inr-Λ²₁ ,
       λ _ → eq-type-subtype subtype-Λ²₁ refl)
@@ -171,7 +171,7 @@ map-pushout-inner-two-horn-Λ²₁ =
   cogap-Λ²₁
     ( inl-pushout-Λ²₁)
     ( inr-pushout-Λ²₁)
-    ( glue-pushout (point 1₂) (point 0₂) star)
+    ( glue-pushout (point 1▵) (point 0▵) star)
 ```
 
 ### The inclusion of the 2-horn into the 2-simplex

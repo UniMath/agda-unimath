@@ -64,7 +64,7 @@ lower-simplicial-triangle = type-subtype subtype-lower-simplicial-triangle
 
 subtype-boundary-lower-simplicial-triangle : subtype lzero (Δ¹ × Δ¹)
 subtype-boundary-lower-simplicial-triangle (t , s) =
-  join-Prop (Id-Δ¹-Prop 0₂ s) (join-Prop (Id-Δ¹-Prop s t) (Id-Δ¹-Prop t 1₂))
+  join-Prop (Id-Δ¹-Prop 0▵ s) (join-Prop (Id-Δ¹-Prop s t) (Id-Δ¹-Prop t 1▵))
 boundary-lower-simplicial-triangle =
   type-subtype subtype-boundary-lower-simplicial-triangle
 
@@ -92,10 +92,10 @@ subtype-◤ (t , s) = leq-Δ¹-Prop t s
 subtype-◸ : subtype lzero (Δ¹ × Δ¹)
 subtype-◸ (t , s) =
   join-Prop
-    ( Id-Δ¹-Prop 0₂ t)
+    ( Id-Δ¹-Prop 0▵ t)
     ( join-Prop
       ( Id-Δ¹-Prop t s)
-      ( Id-Δ¹-Prop s 1₂))
+      ( Id-Δ¹-Prop s 1▵))
 
 ◸ = type-subtype subtype-◸
 
@@ -134,9 +134,9 @@ inclusion-∂Δ² = inclusion-boundary-lower-simplicial-triangle
 rec-arrow▵-∂Δ² :
   {l : Level} {A : UU l}
   (f g h : arrow▵ A) →
-  f 0₂ ＝ h 0₂ →
-  f 1₂ ＝ g 0₂ →
-  g 1₂ ＝ h 1₂ →
+  f 0▵ ＝ h 0▵ →
+  f 1▵ ＝ g 0▵ →
+  g 1▵ ＝ h 1▵ →
   ∂Δ² → A
 rec-arrow▵-∂Δ² {A = A} f g h f0=h0 f1=g0 g1=h1 ((t , s) , u) =
   cogap-join A
@@ -146,7 +146,7 @@ rec-arrow▵-∂Δ² {A = A} f g h f0=h0 f1=g0 g1=h1 ((t , s) , u) =
         cogap-join _
           ( ( λ s=t →
               eq-image-eq-point-is-prop
-                ( is-prop-join-is-prop (is-set-Δ¹ s t) (is-set-Δ¹ t 1₂))
+                ( is-prop-join-is-prop (is-set-Δ¹ s t) (is-set-Δ¹ t 1▵))
                 ( C)
                 ( f t)
                 ( inl-join s=t)
@@ -154,7 +154,7 @@ rec-arrow▵-∂Δ² {A = A} f g h f0=h0 f1=g0 g1=h1 ((t , s) , u) =
                   ( inv (compute-inl-cogap-join _ s=t)))) ,
             ( ( λ t=1 →
                 eq-image-eq-point-is-prop
-                  ( is-prop-join-is-prop (is-set-Δ¹ s t) (is-set-Δ¹ t 1₂))
+                  ( is-prop-join-is-prop (is-set-Δ¹ s t) (is-set-Δ¹ t 1▵))
                   ( C)
                   ( f t)
                   ( inr-join t=1)

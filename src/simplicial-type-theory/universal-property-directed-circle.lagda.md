@@ -149,27 +149,27 @@ module _
     ( p ,
       map-compute-dependent-identification-eq-value f g
         ( compute-target-free-directed-loop α)
-        ( p 1₂)
-        ( p 0₂)
+        ( p 1▵)
+        ( p 0▵)
         ( equational-reasoning
-          apd f (compute-target-free-directed-loop α) ∙ p 0₂
-          ＝ apd f (compute-target-free-directed-loop α) ∙ᵣ p 0₂
+          apd f (compute-target-free-directed-loop α) ∙ p 0▵
+          ＝ apd f (compute-target-free-directed-loop α) ∙ᵣ p 0▵
           by
             eq-right-strict-concat-concat
               ( apd f (compute-target-free-directed-loop α))
-              ( p 0₂)
+              ( p 0▵)
           ＝ concat-dependent-identification P
               ( refl)
               ( compute-target-free-directed-loop α)
-              ( p 1₂)
+              ( p 1▵)
               ( apd g (compute-target-free-directed-loop α))
           by q
-          ＝ ap (tr P (compute-target-free-directed-loop α)) (p 1₂) ∙
+          ＝ ap (tr P (compute-target-free-directed-loop α)) (p 1▵) ∙
             apd g (compute-target-free-directed-loop α)
           by
             compute-concat-dependent-identification-left-base-refl P
               ( compute-target-free-directed-loop α)
-              ( p 1₂)
+              ( p 1▵)
               ( apd g (compute-target-free-directed-loop α))))
 
   is-retraction-ind-directed-circle :

@@ -50,10 +50,10 @@ colimit of the diagram
 ```text
                A × B ----> B
                  |         ⋮
-    id × 1₂ × id |         ⋮
+    id × 1▵ × id |         ⋮
                  ∨         ⋮
   A × B ---> A × Δ¹ × B     ⋮
-    | id × 0₂ × id  ⋱      ⋮
+    | id × 0▵ × id  ⋱      ⋮
     |                 ⋱    ⋮
     ∨                    ∨  ∨
     A ⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯> A *▵ B.
@@ -102,11 +102,11 @@ module _
 
     glue-source-standard-directed-join :
       (a : A) (b b' : B) →
-      in-standard-directed-join a b 0₂ ＝ in-standard-directed-join a b' 0₂
+      in-standard-directed-join a b 0▵ ＝ in-standard-directed-join a b' 0▵
 
     glue-target-standard-directed-join :
       (a a' : A) (b : B) →
-      in-standard-directed-join a b 1₂ ＝ in-standard-directed-join a' b 1₂
+      in-standard-directed-join a b 1▵ ＝ in-standard-directed-join a' b 1▵
 ```
 
 > It remains to define and postulate the induction principle of the simplicial

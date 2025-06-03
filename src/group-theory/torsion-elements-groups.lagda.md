@@ -97,6 +97,13 @@ module _
   pr2 unit-torsion-element-Group = is-torsion-element-unit-Group
 ```
 
+### The elements that are equal to the unit are torsion elements
+
+```agda
+
+```
+
+
 ## See also
 
 - [Torsion-free groups](group-theory.torsion-free-groups.md) are defined to be

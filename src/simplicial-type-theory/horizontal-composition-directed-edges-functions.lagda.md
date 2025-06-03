@@ -61,8 +61,8 @@ module _
   horizontal-comp-hom▵ : f' →▵ g' → f →▵ g → (f' ∘ f) →▵ (g' ∘ g)
   horizontal-comp-hom▵ (β , s , t) (α , s' , t') =
     ( ( horizontal-comp-arrow▵ β α) ,
-      ( ap (β 0₂ ∘_) s' ∙ ap (_∘ f) s) ,
-      ( ap (β 1₂ ∘_) t' ∙ ap (_∘ g) t))
+      ( ap (β 0▵ ∘_) s' ∙ ap (_∘ f) s) ,
+      ( ap (β 1▵ ∘_) t' ∙ ap (_∘ g) t))
 ```
 
 ## Properties

@@ -71,7 +71,7 @@ It has the universal property of the iterated
 [pushout](synthetic-homotopy-theory.pushouts.md)
 
 ```text
-               0₂
+               0▵
          1 ---------> Δ¹
          |            |
   target |            |
@@ -110,11 +110,11 @@ initial-point-spine (succ-ℕ n) = inl-spine (initial-point-spine n)
 
 terminal-point-spine : (n : ℕ) → spine n
 terminal-point-spine zero-ℕ = star-spine-0
-terminal-point-spine (succ-ℕ n) = in-arrow-spine 1₂
+terminal-point-spine (succ-ℕ n) = in-arrow-spine 1▵
 
 postulate
   glue-spine :
-    {n : ℕ} → inl-spine (terminal-point-spine n) ＝ in-arrow-spine {n} 0₂
+    {n : ℕ} → inl-spine (terminal-point-spine n) ＝ in-arrow-spine {n} 0▵
 ```
 
 ### The induction principle of the (𝑛+1)-spine
@@ -122,7 +122,7 @@ postulate
 We postulate that the (𝑛+1)-spine is the pushout
 
 ```text
-               0₂
+               0▵
          1 ---------> Δ¹
          |            |
   target |            |
@@ -133,7 +133,7 @@ We postulate that the (𝑛+1)-spine is the pushout
 ```agda
 cocone-spine :
   (n : ℕ) →
-  cocone (point (terminal-point-spine n)) (point 0₂) (spine (succ-ℕ n))
+  cocone (point (terminal-point-spine n)) (point 0▵) (spine (succ-ℕ n))
 cocone-spine n = (inl-spine , in-arrow-spine , point glue-spine)
 
 module _
@@ -141,7 +141,7 @@ module _
   (d :
     dependent-cocone
       ( point (terminal-point-spine n))
-      ( point 0₂)
+      ( point 0▵)
       ( cocone-spine n)
       ( P))
   where
@@ -154,7 +154,7 @@ module _
     dependent-cogap-spine (inl-spine x) ＝
     horizontal-map-dependent-cocone
       ( point (terminal-point-spine n))
-      ( point 0₂)
+      ( point 0▵)
       ( cocone-spine n)
       ( P)
       ( d)
@@ -167,7 +167,7 @@ module _
         dependent-cogap-spine (inl-spine x) ＝
         horizontal-map-dependent-cocone
           ( point (terminal-point-spine n))
-          ( point 0₂)
+          ( point 0▵)
           ( cocone-spine n)
           ( P)
           ( d)
@@ -178,7 +178,7 @@ module _
     dependent-cogap-spine (in-arrow-spine t) ＝
     vertical-map-dependent-cocone
       ( point (terminal-point-spine n))
-      ( point 0₂)
+      ( point 0▵)
       ( cocone-spine n)
       ( P)
       ( d)
@@ -191,7 +191,7 @@ module _
         dependent-cogap-spine (in-arrow-spine t) ＝
         vertical-map-dependent-cocone
           ( point (terminal-point-spine n))
-          ( point 0₂)
+          ( point 0▵)
           ( cocone-spine n)
           ( P)
           ( d)
@@ -201,12 +201,12 @@ module _
     compute-glue-dependent-cogap-spine :
       coherence-htpy-dependent-cocone
         ( point (terminal-point-spine n))
-        ( point 0₂)
+        ( point 0▵)
         ( cocone-spine n)
         ( P)
         ( dependent-cocone-map
           ( point (terminal-point-spine n))
-          ( point 0₂)
+          ( point 0▵)
           ( cocone-spine n)
           ( P)
           ( dependent-cogap-spine))
@@ -236,20 +236,20 @@ We can inductively define the 𝑛-spine as a subtype of the 𝑛-cube via t
 subtype-spine : (n : ℕ) → subtype lzero (simplicial-cube n)
 subtype-spine 0 _ = unit-Prop
 subtype-spine 1 _ = unit-Prop
-subtype-spine 2 (x , y) = join-Prop (Id-Δ¹-Prop x 1₂) (Id-Δ¹-Prop y 0₂)
+subtype-spine 2 (x , y) = join-Prop (Id-Δ¹-Prop x 1▵) (Id-Δ¹-Prop y 0▵)
 subtype-spine (succ-ℕ (succ-ℕ (succ-ℕ n))) (x , u) =
   join-Prop
     ( is-terminal-element-simplicial-cube-Prop (succ-ℕ (succ-ℕ n)) u)
-    ( (Id-Δ¹-Prop x 0₂) ∧ (subtype-spine (succ-ℕ (succ-ℕ n)) u))
+    ( (Id-Δ¹-Prop x 0▵) ∧ (subtype-spine (succ-ℕ (succ-ℕ n)) u))
 ```
 
 Let us work out what this definition unfolds to when `n` is `2`:
 
 ```text
   subtype-spine 2 (s , t)
-  ≐ is-terminal t ∨ ((s ＝ 0₂) ∧ (subtype-spine 1 t))
-  ≐ (t ＝ 1₂) ∨ ((s ＝ 0₂) ∧ unit)
-  ≃ (t ＝ 1₂) ∨ (s ＝ 0₂).
+  ≐ is-terminal t ∨ ((s ＝ 0▵) ∧ (subtype-spine 1 t))
+  ≐ (t ＝ 1▵) ∨ ((s ＝ 0▵) ∧ unit)
+  ≃ (t ＝ 1▵) ∨ (s ＝ 0▵).
 ```
 
 Observe again that the coordinates are read in order from right to left.
@@ -303,18 +303,18 @@ target-hom-spine : (n : ℕ) (x : Fin n) → spine n
 target-hom-spine n x = point-spine n (inr-Fin n x)
 
 inv-eq-source-arrow-spine :
-  (n : ℕ) (x : Fin n) → source-hom-spine n x ＝ arrow-spine n x 0₂
+  (n : ℕ) (x : Fin n) → source-hom-spine n x ＝ arrow-spine n x 0▵
 inv-eq-source-arrow-spine (succ-ℕ n) (inl x) =
   ap inl-spine (inv-eq-source-arrow-spine n x)
 inv-eq-source-arrow-spine (succ-ℕ n) (inr x) =
   ap inl-spine (compute-inr-point-spine n) ∙ glue-spine
 
 eq-source-arrow-spine :
-  (n : ℕ) (x : Fin n) → arrow-spine n x 0₂ ＝ source-hom-spine n x
+  (n : ℕ) (x : Fin n) → arrow-spine n x 0▵ ＝ source-hom-spine n x
 eq-source-arrow-spine n x = inv (inv-eq-source-arrow-spine n x)
 
 eq-target-arrow-spine :
-  (n : ℕ) (x : Fin n) → arrow-spine n x 1₂ ＝ target-hom-spine n x
+  (n : ℕ) (x : Fin n) → arrow-spine n x 1▵ ＝ target-hom-spine n x
 eq-target-arrow-spine (succ-ℕ n) (inl x) =
   ap inl-spine (eq-target-arrow-spine n x)
 eq-target-arrow-spine (succ-ℕ n) (inr x) = refl
@@ -335,17 +335,17 @@ module _
     ( c :
       dependent-cocone
         ( point (terminal-point-spine n))
-        ( point 0₂)
+        ( point 0▵)
         ( cocone-spine n)
         ( P)) →
     htpy-dependent-cocone
       ( point (terminal-point-spine n))
-      ( point 0₂)
+      ( point 0▵)
       ( cocone-spine n)
       ( P)
       ( dependent-cocone-map
         ( point (terminal-point-spine n))
-        ( point 0₂)
+        ( point 0▵)
         ( cocone-spine n)
         ( P)
         ( dependent-cogap-spine n P c))
@@ -359,19 +359,19 @@ module _
     is-section
       ( dependent-cocone-map
         ( point (terminal-point-spine n))
-        ( point 0₂)
+        ( point 0▵)
         ( cocone-spine n)
         ( P))
       ( dependent-cogap-spine n P)
   is-section-dependent-cogap-spine c =
     eq-htpy-dependent-cocone
       ( point (terminal-point-spine n))
-      ( point 0₂)
+      ( point 0▵)
       ( cocone-spine n)
       ( P)
       ( dependent-cocone-map
         ( point (terminal-point-spine n))
-        ( point 0₂)
+        ( point 0▵)
         ( cocone-spine n)
         ( P)
         ( dependent-cogap-spine n P c))
@@ -382,7 +382,7 @@ induction-principle-spine :
   (n : ℕ) →
   induction-principle-pushout
     ( point (terminal-point-spine n))
-    ( point 0₂)
+    ( point 0▵)
     ( cocone-spine n)
 induction-principle-spine n P =
   ( dependent-cogap-spine n P , is-section-dependent-cogap-spine n P)
@@ -392,14 +392,14 @@ is-retraction-dependent-cogap-spine :
   is-retraction
     ( dependent-cocone-map
       ( point (terminal-point-spine n))
-      ( point 0₂)
+      ( point 0▵)
       ( cocone-spine n)
       ( P))
     ( dependent-cogap-spine n P)
 is-retraction-dependent-cogap-spine n =
   is-retraction-ind-induction-principle-pushout
     ( point (terminal-point-spine n))
-    ( point 0₂)
+    ( point 0▵)
     ( cocone-spine n)
     ( induction-principle-spine n)
 
@@ -407,7 +407,7 @@ dependent-universal-property-spine :
   (n : ℕ) →
   dependent-universal-property-pushout
     ( point (terminal-point-spine n))
-    ( point 0₂)
+    ( point 0▵)
     ( cocone-spine n)
 dependent-universal-property-spine n P =
   is-equiv-is-invertible
@@ -420,13 +420,13 @@ equiv-dependent-universal-property-spine :
   ( (x : spine (succ-ℕ n)) → P x) ≃
   ( dependent-cocone
     ( point (terminal-point-spine n))
-    ( point 0₂)
+    ( point 0▵)
     ( cocone-spine n)
     ( P))
 pr1 (equiv-dependent-universal-property-spine n P) =
   dependent-cocone-map
     ( point (terminal-point-spine n))
-    ( point 0₂)
+    ( point 0▵)
     ( cocone-spine n)
     ( P)
 pr2 (equiv-dependent-universal-property-spine n P) =
@@ -441,62 +441,62 @@ module _
   where
 
   cogap-spine :
-    cocone (point (terminal-point-spine n)) (point 0₂) X → spine (succ-ℕ n) → X
+    cocone (point (terminal-point-spine n)) (point 0▵) X → spine (succ-ℕ n) → X
   cogap-spine =
     dependent-cogap-spine n (λ _ → X) ∘
     dependent-cocone-constant-type-family-cocone
       ( point (terminal-point-spine n))
-      ( point 0₂)
+      ( point 0▵)
       ( cocone-spine n)
 
   is-section-cogap-spine :
     is-section
       ( cocone-map
         ( point (terminal-point-spine n))
-        ( point 0₂)
+        ( point 0▵)
         ( cocone-spine n))
       ( cogap-spine)
   is-section-cogap-spine =
     ( ( triangle-dependent-cocone-map-constant-type-family'
         ( point (terminal-point-spine n))
-        ( point 0₂)
+        ( point 0▵)
         ( cocone-spine n)) ·r
       ( cogap-spine)) ∙h
     ( ( cocone-dependent-cocone-constant-type-family
         ( point (terminal-point-spine n))
-        ( point 0₂)
+        ( point 0▵)
         ( cocone-spine n)) ·l
       ( is-section-dependent-cogap-spine n (λ _ → X)) ·r
       ( dependent-cocone-constant-type-family-cocone
         ( point (terminal-point-spine n))
-        ( point 0₂)
+        ( point 0▵)
         ( cocone-spine n))) ∙h
     ( is-retraction-cocone-dependent-cocone-constant-type-family
       ( point (terminal-point-spine n))
-      ( point 0₂)
+      ( point 0▵)
       ( cocone-spine n))
 
   is-retraction-cogap-spine :
     is-retraction
       ( cocone-map
         ( point (terminal-point-spine n))
-        ( point 0₂)
+        ( point 0▵)
         ( cocone-spine n))
       ( cogap-spine)
   is-retraction-cogap-spine =
     ( ( cogap-spine) ·l
       ( triangle-dependent-cocone-map-constant-type-family'
         ( point (terminal-point-spine n))
-        ( point 0₂)
+        ( point 0▵)
         ( cocone-spine n))) ∙h
     ( ( dependent-cogap-spine n (λ _ → X)) ·l
       ( is-section-cocone-dependent-cocone-constant-type-family
         ( point (terminal-point-spine n))
-        ( point 0₂)
+        ( point 0▵)
         ( cocone-spine n)) ·r
       ( dependent-cocone-map
         ( point (terminal-point-spine n))
-        ( point 0₂)
+        ( point 0▵)
         ( cocone-spine n)
         ( λ _ → X))) ∙h
     ( is-retraction-dependent-cogap-spine n (λ _ → X))
@@ -505,7 +505,7 @@ recursion-principle-spine :
   (n : ℕ) →
   recursion-principle-pushout
     ( point (terminal-point-spine n))
-    ( point 0₂)
+    ( point 0▵)
     ( cocone-spine n)
 recursion-principle-spine n = (cogap-spine n , is-section-cogap-spine n)
 
@@ -513,7 +513,7 @@ universal-property-spine :
   (n : ℕ) →
   universal-property-pushout
     ( point (terminal-point-spine n))
-    ( point 0₂)
+    ( point 0▵)
     ( cocone-spine n)
 universal-property-spine n Y =
   is-equiv-is-invertible
@@ -523,9 +523,9 @@ universal-property-spine n Y =
 
 equiv-universal-property-spine :
   (n : ℕ) {l : Level} {X : UU l} →
-  (spine (succ-ℕ n) → X) ≃ cocone (point (terminal-point-spine n)) (point 0₂) X
+  (spine (succ-ℕ n) → X) ≃ cocone (point (terminal-point-spine n)) (point 0▵) X
 equiv-universal-property-spine n {X = X} =
-  ( cocone-map (point (terminal-point-spine n)) (point 0₂) (cocone-spine n) ,
+  ( cocone-map (point (terminal-point-spine n)) (point 0▵) (cocone-spine n) ,
     universal-property-spine n X)
 ```
 
@@ -535,18 +535,18 @@ equiv-universal-property-spine n {X = X} =
 
 ```text
 inl-spine' : (n : ℕ) → spine' n → spine' (succ-ℕ n)
-inl-spine' zero-ℕ _ = (0₂ , star)
-inl-spine' (succ-ℕ zero-ℕ) (t , _) = ((0₂ , t) , inr-join (refl , star))
-inl-spine' (succ-ℕ (succ-ℕ n)) x = ((0₂ , {!   !}) , inr-join (refl , {!   !}))
+inl-spine' zero-ℕ _ = (0▵ , star)
+inl-spine' (succ-ℕ zero-ℕ) (t , _) = ((0▵ , t) , inr-join (refl , star))
+inl-spine' (succ-ℕ (succ-ℕ n)) x = ((0▵ , {!   !}) , inr-join (refl , {!   !}))
 
 terminal-point-spine' : (n : ℕ) → spine' n
 terminal-point-spine' zero-ℕ = star , star
-terminal-point-spine' (succ-ℕ zero-ℕ) = 1₂ , star
+terminal-point-spine' (succ-ℕ zero-ℕ) = 1▵ , star
 terminal-point-spine' (succ-ℕ (succ-ℕ n)) = ({!   !} , {!   !})
 
 cocone-spine' :
   (n : ℕ) →
-  cocone (point (terminal-point-spine' n)) (point 0₂) (spine' (succ-ℕ n))
+  cocone (point (terminal-point-spine' n)) (point 0▵) (spine' (succ-ℕ n))
 cocone-spine' = {!   !}
 
 -- map-spine-spine' :
@@ -569,7 +569,7 @@ cocone-spine' = {!   !}
 --     compute-inr-map-spine-spine' :
 --       (n : ℕ) (xs : spine' (succ-ℕ n)) →
 --       is-terminal-element-simplicial-cube (succ-ℕ n) (pr1 xs) →
---       in-arrow-spine 1₂ ＝ map-spine-spine' (succ-ℕ n) xs
+--       in-arrow-spine 1▵ ＝ map-spine-spine' (succ-ℕ n) xs
 --     compute-inr-map-spine-spine' zero-ℕ xs is-terminal-x =
 --       ap in-arrow-spine (inv is-terminal-x)
 --     compute-inr-map-spine-spine' (succ-ℕ n) xs is-terminal-x =

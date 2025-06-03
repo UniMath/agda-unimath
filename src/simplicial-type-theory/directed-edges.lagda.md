@@ -45,8 +45,8 @@ open import simplicial-type-theory.directed-interval-type
 A {{#concept "directed edge" Disambiguation="simplicial type theory" Agda=hom▵}}
 in a type `A` from `x : A` to `y : A` is a
 [simplicial arrow](simplicial-type-theory.arrows.md) `α` in `A` together with
-[identifications](foundation-core.identity-types.md) `α 0₂ ＝ x` and
-`α 1₂ ＝ y`. We call `x` the _source_, and `y` the _target_ of the edge.
+[identifications](foundation-core.identity-types.md) `α 0▵ ＝ x` and
+`α 1▵ ＝ y`. We call `x` the _source_, and `y` the _target_ of the edge.
 
 We introduce the notation `x →▵ y` for the type of directed edges from `x` to
 `y`.
@@ -60,18 +60,18 @@ module _
   {l : Level} {A : Δ¹ → UU l}
   where
 
-  hom▵' : A 0₂ → A 1₂ → UU l
+  hom▵' : A 0▵ → A 1▵ → UU l
   hom▵' x y =
-    Σ (arrow▵' A) (λ α → (α 0₂ ＝ x) × (α 1₂ ＝ y))
+    Σ (arrow▵' A) (λ α → (α 0▵ ＝ x) × (α 1▵ ＝ y))
 
   arrow-hom▵ :
-    {x : A 0₂} {y : A 1₂} →
+    {x : A 0▵} {y : A 1▵} →
     hom▵' x y →
     arrow▵' A
   arrow-hom▵ = pr1
 
   hom▵-arrow▵ :
-    (α : arrow▵' A) → hom▵' (α 0₂) (α 1₂)
+    (α : arrow▵' A) → hom▵' (α 0▵) (α 1▵)
   hom▵-arrow▵ α = (α , refl , refl)
 ```
 
@@ -91,32 +91,32 @@ module _
   hom▵ = _→▵_
 
   eq-source-hom▵ :
-    {x y : A} (f : x →▵ y) → arrow-hom▵ f 0₂ ＝ x
+    {x y : A} (f : x →▵ y) → arrow-hom▵ f 0▵ ＝ x
   eq-source-hom▵ f = pr1 (pr2 f)
 
   inv-eq-source-hom▵ :
-    {x y : A} (f : x →▵ y) → x ＝ arrow-hom▵ f 0₂
+    {x y : A} (f : x →▵ y) → x ＝ arrow-hom▵ f 0▵
   inv-eq-source-hom▵ f = inv (eq-source-hom▵ f)
 
   eq-target-hom▵ :
-    {x y : A} (f : x →▵ y) → arrow-hom▵ f 1₂ ＝ y
+    {x y : A} (f : x →▵ y) → arrow-hom▵ f 1▵ ＝ y
   eq-target-hom▵ f = pr2 (pr2 f)
 
   eq-source-target-hom▵ :
     {x y z : A} (f : x →▵ y) (g : y →▵ z) →
-    arrow-hom▵ f 1₂ ＝ arrow-hom▵ g 0₂
+    arrow-hom▵ f 1▵ ＝ arrow-hom▵ g 0▵
   eq-source-target-hom▵ f g =
     eq-target-hom▵ f ∙ inv-eq-source-hom▵ g
 
   eq-source-source-hom▵ :
     {x y z : A} (f : x →▵ y) (g : x →▵ z) →
-    arrow-hom▵ f 0₂ ＝ arrow-hom▵ g 0₂
+    arrow-hom▵ f 0▵ ＝ arrow-hom▵ g 0▵
   eq-source-source-hom▵ f g =
     eq-source-hom▵ f ∙ inv-eq-source-hom▵ g
 
   eq-target-target-hom▵ :
     {x y z : A} (f : x →▵ y) (g : z →▵ y) →
-    arrow-hom▵ f 1₂ ＝ arrow-hom▵ g 1₂
+    arrow-hom▵ f 1▵ ＝ arrow-hom▵ g 1▵
   eq-target-target-hom▵ f g =
     eq-target-hom▵ f ∙ inv (eq-target-hom▵ g)
 ```
@@ -131,7 +131,7 @@ id-hom▵ = hom▵-arrow▵ ∘ id-arrow▵
 ### The representing edge of the directed interval
 
 ```agda
-representing-hom-Δ¹ : 0₂ →▵ 1₂
+representing-hom-Δ¹ : 0▵ →▵ 1▵
 representing-hom-Δ¹ = (id , refl , refl)
 ```
 
@@ -160,8 +160,8 @@ module _
     arrow-hom▵ f ~ arrow-hom▵ g →
     UU l
   coherence-htpy-hom▵ f g H =
-    ( eq-source-hom▵ f ＝ H 0₂ ∙ eq-source-hom▵ g) ×
-    ( eq-target-hom▵ f ＝ H 1₂ ∙ eq-target-hom▵ g)
+    ( eq-source-hom▵ f ＝ H 0▵ ∙ eq-source-hom▵ g) ×
+    ( eq-target-hom▵ f ＝ H 1▵ ∙ eq-target-hom▵ g)
 
   htpy-hom▵ : (f g : x →▵ y) → UU l
   htpy-hom▵ f g =
@@ -219,8 +219,8 @@ module _
   hom▵-htpy-arrow▵ : x →▵ y
   hom▵-htpy-arrow▵ =
     ( f ,
-      H 0₂ ∙ eq-source-hom▵ g ,
-      H 1₂ ∙ eq-target-hom▵ g)
+      H 0▵ ∙ eq-source-hom▵ g ,
+      H 1▵ ∙ eq-target-hom▵ g)
 
   htpy-hom▵-htpy-arrow▵ :
     htpy-hom▵ hom▵-htpy-arrow▵ g
@@ -238,7 +238,7 @@ module _
 ### Computing the based total type of directed edges
 
 ```text
-  Σ (Δ¹ → A) (λ α → α 0₂ ＝ x) ≃ Σ (y : A), (x →▵ y)
+  Σ (Δ¹ → A) (λ α → α 0▵ ＝ x) ≃ Σ (y : A), (x →▵ y)
 ```
 
 ```agda
@@ -250,11 +250,11 @@ module _
   based-hom▵ = Σ A (λ y → (x →▵ y))
 
   map-compute-based-hom▵ :
-    Σ (Δ¹ → A) (λ α → α 0₂ ＝ x) → based-hom▵
-  map-compute-based-hom▵ (α , p) = (α 1₂ , α , p , refl)
+    Σ (Δ¹ → A) (λ α → α 0▵ ＝ x) → based-hom▵
+  map-compute-based-hom▵ (α , p) = (α 1▵ , α , p , refl)
 
   map-inv-compute-based-hom▵ :
-    based-hom▵ → Σ (Δ¹ → A) (λ α → α 0₂ ＝ x)
+    based-hom▵ → Σ (Δ¹ → A) (λ α → α 0▵ ＝ x)
   map-inv-compute-based-hom▵ (y , α , p , q) = (α , p)
 
   is-section-map-inv-compute-based-hom▵ :
@@ -262,7 +262,7 @@ module _
       ( map-compute-based-hom▵)
       ( map-inv-compute-based-hom▵)
   is-section-map-inv-compute-based-hom▵
-    (.(α 1₂) , α , p , refl) = refl
+    (.(α 1▵) , α , p , refl) = refl
 
   is-retraction-map-inv-compute-based-hom▵ :
     is-retraction
@@ -287,13 +287,13 @@ module _
       ( is-section-map-inv-compute-based-hom▵)
 
   compute-based-hom▵ :
-    Σ (Δ¹ → A) (λ α → α 0₂ ＝ x) ≃ based-hom▵
+    Σ (Δ¹ → A) (λ α → α 0▵ ＝ x) ≃ based-hom▵
   compute-based-hom▵ =
     ( map-compute-based-hom▵ ,
       is-equiv-map-compute-based-hom▵)
 
   inv-compute-based-hom▵ :
-    based-hom▵ ≃ Σ (Δ¹ → A) (λ α → α 0₂ ＝ x)
+    based-hom▵ ≃ Σ (Δ¹ → A) (λ α → α 0▵ ＝ x)
   inv-compute-based-hom▵ =
     ( map-inv-compute-based-hom▵ ,
       is-equiv-map-inv-compute-based-hom▵)
@@ -318,7 +318,7 @@ module _
 
   map-compute-total-hom▵ :
     (Δ¹ → A) → total-hom▵
-  map-compute-total-hom▵ α = (α 0₂ , α 1₂ , α , refl , refl)
+  map-compute-total-hom▵ α = (α 0▵ , α 1▵ , α , refl , refl)
 
   map-inv-compute-total-hom▵ :
     total-hom▵ → Δ¹ → A
@@ -329,7 +329,7 @@ module _
       ( map-compute-total-hom▵)
       ( map-inv-compute-total-hom▵)
   is-section-map-inv-compute-total-hom▵
-    (.(α 0₂) , .(α 1₂) , α , refl , refl) = refl
+    (.(α 0▵) , .(α 1▵) , α , refl , refl) = refl
 
   is-retraction-map-inv-compute-total-hom▵ :
     is-retraction
@@ -385,7 +385,7 @@ module _
         ( inv-equiv-Π-bool-product
           ( λ b → rec-bool y x b ＝ α (map-directed-interval-bool b))) ∘e
         ( commutative-product) ∘e
-        ( equiv-product (equiv-inv (α 0₂) x) (equiv-inv (α 1₂) y)))
+        ( equiv-product (equiv-inv (α 0▵) x) (equiv-inv (α 1▵) y)))
 ```
 
 ### The hom-types of a truncated type are truncated

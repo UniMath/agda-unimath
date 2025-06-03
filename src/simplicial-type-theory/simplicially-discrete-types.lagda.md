@@ -286,7 +286,7 @@ This is proposition 10.10 of {{#cite RS17}}. This remains to be formalized.
 ```agda
 is-not-simplicially-discrete-Δ¹ : ¬ (is-simplicially-discrete Δ¹)
 is-not-simplicially-discrete-Δ¹ H =
-  is-nontrivial-Δ¹ (map-inv-is-equiv (H 0₂ 1₂) representing-hom-Δ¹)
+  is-nontrivial-Δ¹ (map-inv-is-equiv (H 0▵ 1▵) representing-hom-Δ¹)
 ```
 
 ### Propositions are simplicially discrete
@@ -295,7 +295,7 @@ is-not-simplicially-discrete-Δ¹ H =
 is-simplicially-discrete-is-prop :
   {l : Level} {P : UU l} → is-prop P → is-simplicially-discrete P
 is-simplicially-discrete-is-prop =
-  is-simplicially-discrete-is-Δ¹-null ∘ is-null-is-prop-is-inhabited' 0₂
+  is-simplicially-discrete-is-Δ¹-null ∘ is-null-is-prop-is-inhabited' 0▵
 ```
 
 ### Contractible types are simplicially discrete
