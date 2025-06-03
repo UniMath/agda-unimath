@@ -27,7 +27,7 @@ open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-
 ## Idea
 
 Given a [pointed type](structured-types.pointed-types.md) `A`, the
-[sequence](foundation.sequences.md) of
+[sequence](lists.sequences.md) of
 [iterated suspensions](synthetic-homotopy-theory.iterated-suspensions-of-pointed-types.md)
 of `A`
 

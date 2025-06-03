@@ -1,7 +1,7 @@
 # Dependent sequences
 
 ```agda
-module foundation.dependent-sequences where
+module lists.dependent-sequences where
 ```
 
 <details><summary>Imports</summary>

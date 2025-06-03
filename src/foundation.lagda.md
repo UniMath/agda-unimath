@@ -121,7 +121,6 @@ open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
 open import foundation.dependent-pair-types public
 open import foundation.dependent-products-pullbacks public
-open import foundation.dependent-sequences public
 open import foundation.dependent-sums-pullbacks public
 open import foundation.dependent-telescopes public
 open import foundation.dependent-universal-property-equivalences public
@@ -363,20 +362,17 @@ open import foundation.reflexive-relations public
 open import foundation.regensburg-extension-fundamental-theorem-of-identity-types public
 open import foundation.relaxed-sigma-decompositions public
 open import foundation.repetitions-of-values public
-open import foundation.repetitions-sequences public
 open import foundation.replacement public
 open import foundation.retractions public
 open import foundation.retracts-of-maps public
 open import foundation.retracts-of-types public
 open import foundation.sections public
 open import foundation.separated-types-subuniverses public
-open import foundation.sequences public
 open import foundation.sequential-limits public
 open import foundation.set-presented-types public
 open import foundation.set-quotients public
 open import foundation.set-truncations public
 open import foundation.sets public
-open import foundation.shifting-sequences public
 open import foundation.sigma-closed-subuniverses public
 open import foundation.sigma-decomposition-subuniverse public
 open import foundation.sigma-decompositions public
@@ -406,7 +402,6 @@ open import foundation.structure public
 open import foundation.structure-identity-principle public
 open import foundation.structured-equality-duality public
 open import foundation.structured-type-duality public
-open import foundation.subsequences public
 open import foundation.subsingleton-induction public
 open import foundation.subterminal-types public
 open import foundation.subtype-duality public

@@ -19,7 +19,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 {{#concept "Sylvester's sequence" WD="Sylvester's sequence" WDID=Q2293800 Agda=sylvesters-sequence-ℕ}}
-is the [sequence](foundation.sequences.md) `s` of
+is the [sequence](lists.sequences.md) `s` of
 [natural numbers](elementary-number-theory.natural-numbers.md) in which `s n` is
 the successor of the
 [product](elementary-number-theory.products-of-natural-numbers.md) of all the

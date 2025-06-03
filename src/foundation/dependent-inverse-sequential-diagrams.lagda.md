@@ -25,8 +25,8 @@ open import foundation-core.homotopies
 
 A **dependent inverse sequential diagram** `B` over a base
 [inverse sequential diagram](foundation.inverse-sequential-diagrams.md) `A` is a
-[sequence](foundation.sequences.md) of families over each `Aₙ` together with
-maps of fibers
+[sequence](lists.sequences.md) of families over each `Aₙ` together with maps of
+fibers
 
 ```text
   gₙ : (xₙ₊₁ : Aₙ₊₁) → Bₙ₊₁(xₙ₊₁) → Bₙ(fₙ(xₙ₊₁)),

@@ -99,7 +99,7 @@ module _
 ### Homotopies of cocones under a sequential diagram
 
 A **homotopy** between two cocones `(X, i, H)` and `(X, j, L)` with the same
-vertex consists of a [sequence](foundation.dependent-sequences.md) of
+vertex consists of a [sequence](lists.dependent-sequences.md) of
 [homotopies](foundation.homotopies.md) `Kₙ : iₙ ~ jₙ` and a coherence datum
 filling the "pinched cylinder" with the faces `Kₙ`, `Hₙ`, `Lₙ` and `Kₙ₊₁`.
 

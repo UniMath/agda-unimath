@@ -32,10 +32,11 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sequences
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
@@ -52,7 +53,7 @@ open import metric-spaces.sequences-metric-spaces
 
 ## Idea
 
-A [sequence](foundation.sequences.md) of
+A [sequence](lists.sequences.md) of
 [rational numbers](elementary-number-theory.rational-numbers.md) is an
 {{#concept "approximation of zero" Disambiguation="sequence of rational numbers" Agda=zero-limit-sequence-ℚ}}
 if it [converges](metric-spaces.limits-of-sequences-metric-spaces.md) to 0 in

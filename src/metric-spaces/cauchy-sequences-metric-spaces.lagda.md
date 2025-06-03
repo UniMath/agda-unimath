@@ -29,9 +29,10 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sequences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces

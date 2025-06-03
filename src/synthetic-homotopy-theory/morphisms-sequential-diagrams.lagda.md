@@ -35,7 +35,7 @@ open import synthetic-homotopy-theory.sequential-diagrams
 
 A **morphism between
 [sequential diagrams](synthetic-homotopy-theory.sequential-diagrams.md)**
-`f : (A, a) → (B, b)` is a [sequence](foundation.dependent-sequences.md) of maps
+`f : (A, a) → (B, b)` is a [sequence](lists.dependent-sequences.md) of maps
 `fₙ : Aₙ → Bₙ` satisfying the naturality condition that all squares of the form
 
 ```text
@@ -153,7 +153,7 @@ module _
 ### Homotopies between morphisms of sequential diagrams
 
 A **homotopy** between morphisms `f, g : (A, a) → (B, b)` consists of a
-[sequence](foundation.dependent-sequences.md) of
+[sequence](lists.dependent-sequences.md) of
 [homotopies](foundation.homotopies.md) `Hₙ : fₙ ~ gₙ` and a coherence datum
 filling the cylinders
 

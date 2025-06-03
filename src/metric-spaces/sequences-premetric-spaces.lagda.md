@@ -7,8 +7,9 @@ module metric-spaces.sequences-premetric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.sequences
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import metric-spaces.premetric-spaces
 ```
@@ -20,7 +21,7 @@ open import metric-spaces.premetric-spaces
 A
 {{#concept "sequence" Disambiguation="in a premetric space" Agda=sequence-type-Premetric-Space}}
 in a [premetric space](metric-spaces.premetric-spaces.md) is a
-[sequence](foundation.sequences.md) in its underlying type.
+[sequence](lists.sequences.md) in its underlying type.
 
 ## Definitions
 

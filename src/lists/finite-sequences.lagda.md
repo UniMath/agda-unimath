@@ -144,4 +144,4 @@ module _
 
 ## See also
 
-- [Sequences](foundation.sequences.md)
+- [Sequences](lists.sequences.md)

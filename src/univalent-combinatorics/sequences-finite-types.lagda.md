@@ -22,10 +22,11 @@ open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.pairs-of-distinct-elements
 open import foundation.repetitions-of-values
-open import foundation.repetitions-sequences
-open import foundation.sequences
 open import foundation.sets
 open import foundation.universe-levels
+
+open import lists.repetitions-sequences
+open import lists.sequences
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.equality-standard-finite-types
