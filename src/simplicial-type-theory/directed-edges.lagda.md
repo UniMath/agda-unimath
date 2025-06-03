@@ -34,8 +34,8 @@ open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-maps
 
+open import simplicial-type-theory.arrows
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.simplicial-arrows
 ```
 
 </details>
@@ -44,9 +44,9 @@ open import simplicial-type-theory.simplicial-arrows
 
 A {{#concept "directed edge" Disambiguation="simplicial type theory" Agda=hom▵}}
 in a type `A` from `x : A` to `y : A` is a
-[simplicial arrow](simplicial-type-theory.simplicial-arrows.md) `α` in `A`
-together with [identifications](foundation-core.identity-types.md) `α 0₂ ＝ x`
-and `α 1₂ ＝ y`. We call `x` the _source_, and `y` the _target_ of the edge.
+[simplicial arrow](simplicial-type-theory.arrows.md) `α` in `A` together with
+[identifications](foundation-core.identity-types.md) `α 0₂ ＝ x` and
+`α 1₂ ＝ y`. We call `x` the _source_, and `y` the _target_ of the edge.
 
 We introduce the notation `x →▵ y` for the type of directed edges from `x` to
 `y`.

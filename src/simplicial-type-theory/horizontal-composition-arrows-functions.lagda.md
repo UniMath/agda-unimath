@@ -1,7 +1,7 @@
-# Horizontal composition of simplicial arrows of functions
+# Horizontal composition of arrows in functions
 
 ```agda
-module simplicial-type-theory.horizontal-composition-simplicial-arrows-functions where
+module simplicial-type-theory.horizontal-composition-arrows-functions where
 ```
 
 <details><summary>Imports</summary>
@@ -25,17 +25,17 @@ open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
+open import simplicial-type-theory.arrows
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.simplicial-arrows
 ```
 
 </details>
 
 ## Idea
 
-Given a [simplicial arrow](simplicial-type-theory.simplicial-arrows.md) `α` of
-functions `A → B` and a simplicial arrow `β` of functions `B → C`, we may
+Given a [simplicial arrow](simplicial-type-theory.arrows.md) `α` of functions
+`A → B` and a simplicial arrow `β` of functions `B → C`, we may
 {{#concept "horizontally compose" Disambiguation="simplicial arrows of functions" Agda=horizontal-comp-arrow▵}}
 them to obtain a simplicial arrow of functions `A → C`. The horizontal composite
 is constructed by "synchronously traversing `α` and `β`":

@@ -1,7 +1,7 @@
 # Whiskering operations on simplicial arrows of functions
 
 ```agda
-module simplicial-type-theory.whiskering-simplicial-arrows-functions where
+module simplicial-type-theory.whiskering-arrows-functions where
 ```
 
 <details><summary>Imports</summary>
@@ -27,10 +27,10 @@ open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-maps
 
+open import simplicial-type-theory.arrows
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.horizontal-composition-simplicial-arrows-functions
-open import simplicial-type-theory.simplicial-arrows
+open import simplicial-type-theory.horizontal-composition-arrows-functions
 ```
 
 </details>

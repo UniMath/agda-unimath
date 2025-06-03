@@ -1,7 +1,7 @@
-# The simplicial spines
+# Spines
 
 ```agda
-module simplicial-type-theory.simplicial-spines where
+module simplicial-type-theory.spines where
 ```
 
 <details><summary>Imports</summary>
@@ -38,11 +38,11 @@ open import foundation.whiskering-homotopies-composition
 
 open import reflection.erasing-equality
 
+open import simplicial-type-theory.arrows
+open import simplicial-type-theory.directed-cubes
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.inequality-directed-interval-type
-open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.simplicial-cubes
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -84,11 +84,6 @@ where
 ```text
   spine 0 := 1.
 ```
-
-In
-[`rewriting-simplicial-spines`](simplicial-type-theory.rewriting-simplicial-spines.md)
-we equip the eliminator of the spines with strict computation rules on the point
-constructors.
 
 ## Postulates
 

@@ -30,11 +30,11 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.local-families-of-types
 open import orthogonal-factorization-systems.null-types
 
+open import simplicial-type-theory.arrows
 open import simplicial-type-theory.dependent-directed-edges
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.inequality-directed-interval-type
-open import simplicial-type-theory.simplicial-arrows
 
 open import synthetic-homotopy-theory.circle
 ```

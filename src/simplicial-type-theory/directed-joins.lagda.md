@@ -1,7 +1,7 @@
-# Simplicial joins
+# Directed joins
 
 ```agda
-module simplicial-type-theory.simplicial-joins where
+module simplicial-type-theory.directed-joins where
 ```
 
 <details><summary>Imports</summary>
@@ -31,9 +31,9 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import simplicial-type-theory.arrows
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.inequality-directed-interval-type
-open import simplicial-type-theory.simplicial-arrows
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.joins-of-types
@@ -44,7 +44,7 @@ open import synthetic-homotopy-theory.pushouts
 
 ## Idea
 
-We define the {{#concept "simplicial join"}} of two types `A *▵ B` as the
+We define the {{#concept "standard directed join"}} of two types `A *▵ B` as the
 colimit of the diagram
 
 ```text
@@ -59,7 +59,7 @@ colimit of the diagram
     A ⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯> A *▵ B.
 ```
 
-Equivalently, the lax join is the oriented pushout
+Equivalently, the standard directed join is the oriented pushout
 
 ```text
   A × B ------> B
@@ -82,13 +82,13 @@ This construction satisfies the laws
 
 - $Λ²₂ ≃ bool *▵ 1$
 
-- $1 *▵ (-)$ is the simplicial cone
+- $1 *▵ (-)$ is the directed cone
 
-- $ (-) \*▵ 1$ is the simplicial cocone
+- $(-) *▵ 1$ is the simplicial cocone
 
 ## Postulates
 
-### The standard simplicial join
+### The standard directed join
 
 ```agda
 module _
@@ -96,17 +96,17 @@ module _
   where
 
   postulate
-    standard-simplicial-join : UU (l1 ⊔ l2)
+    standard-directed-join : UU (l1 ⊔ l2)
 
-    in-standard-simplicial-join : A → B → Δ¹ → standard-simplicial-join
+    in-standard-directed-join : A → B → Δ¹ → standard-directed-join
 
-    glue-source-standard-simplicial-join :
+    glue-source-standard-directed-join :
       (a : A) (b b' : B) →
-      in-standard-simplicial-join a b 0₂ ＝ in-standard-simplicial-join a b' 0₂
+      in-standard-directed-join a b 0₂ ＝ in-standard-directed-join a b' 0₂
 
-    glue-target-standard-simplicial-join :
+    glue-target-standard-directed-join :
       (a a' : A) (b : B) →
-      in-standard-simplicial-join a b 1₂ ＝ in-standard-simplicial-join a' b 1₂
+      in-standard-directed-join a b 1₂ ＝ in-standard-directed-join a' b 1₂
 ```
 
 > It remains to define and postulate the induction principle of the simplicial

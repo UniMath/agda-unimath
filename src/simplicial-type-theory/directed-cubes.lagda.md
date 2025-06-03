@@ -1,7 +1,7 @@
-# Simplicial cubes
+# Directed cubes
 
 ```agda
-module simplicial-type-theory.simplicial-cubes where
+module simplicial-type-theory.directed-cubes where
 ```
 
 <details><summary>Imports</summary>
@@ -34,15 +34,15 @@ open import synthetic-homotopy-theory.joins-of-types
 ## Idea
 
 Given a [natural number](elementary-number-theory.natural-numbers.md) 𝑛, the
-{{#concept "standard simplicial 𝑛-cube" Disambiguation="simplicial type theory" Agda=simplicial-cube}}
+{{#concept "standard directed 𝑛-cube" Disambiguation="simplicial type theory" Agda=simplicial-cube}}
 consists of 𝑛-fold pairs of elements of the
 [directed interval](simplicial-type-theory.directed-interval-type.md). The
-standard simplicial 0-cube is defined to be the
+standard directed 0-cube is defined to be the
 [unit type](foundation.unit-type.md).
 
 ## Definitions
 
-### The standard simplicial cubes
+### The standard directed cubes
 
 ```agda
 simplicial-cube : ℕ → UU lzero
@@ -51,7 +51,7 @@ simplicial-cube 1 = Δ¹
 simplicial-cube (succ-ℕ (succ-ℕ n)) = Δ¹ × simplicial-cube (succ-ℕ n)
 ```
 
-### The standard left-associated simplicial cubes
+### The standard left-associated directed cubes
 
 ```agda
 left-associated-simplicial-cube : ℕ → UU lzero
@@ -61,7 +61,7 @@ left-associated-simplicial-cube (succ-ℕ (succ-ℕ n)) =
   left-associated-simplicial-cube (succ-ℕ n) × Δ¹
 ```
 
-### The standard simplicial power cubes
+### The standard directed power cubes
 
 ```agda
 pow-simplicial-cube : ℕ → UU lzero
@@ -71,7 +71,7 @@ pow-simplicial-cube (succ-ℕ (succ-ℕ n)) =
   pow-simplicial-cube (succ-ℕ n) × pow-simplicial-cube (succ-ℕ n)
 ```
 
-### The boundary of the standard simplicial cube
+### The boundary of the standard directed cube
 
 ```agda
 subtype-boundary-simplicial-cube : (n : ℕ) → subtype lzero (simplicial-cube n)

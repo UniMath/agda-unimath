@@ -1,7 +1,7 @@
-# Simplicial arrows
+# Arrows
 
 ```agda
-module simplicial-type-theory.simplicial-arrows where
+module simplicial-type-theory.arrows where
 ```
 
 <details><summary>Imports</summary>

@@ -34,10 +34,10 @@ open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-maps
 
+open import simplicial-type-theory.arrows
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.inner-2-horn
-open import simplicial-type-theory.simplicial-arrows
 open import simplicial-type-theory.standard-simplices
 ```
 

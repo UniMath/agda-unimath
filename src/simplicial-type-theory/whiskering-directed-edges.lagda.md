@@ -32,9 +32,9 @@ open import foundation.whiskering-homotopies-composition
 open import orthogonal-factorization-systems.extensions-maps
 
 open import simplicial-type-theory.action-on-directed-edges-functions
+open import simplicial-type-theory.arrows
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.simplicial-arrows
 ```
 
 </details>
@@ -153,8 +153,7 @@ nat-htpy▵ {A = A} {f = f} {g} H {x} {y} α =
 
 Note that this proof only relies on
 [function extensionality](foundation.function-extensionality.md) to get
-extensionality for
-[simplicial arrows](simplicial-type-theory.simplicial-arrows.md).
+extensionality for [simplicial arrows](simplicial-type-theory.arrows.md).
 
 ### For any map `i : A → B`, a retraction of `i` induces a retraction of the action on identifications of `i`
 

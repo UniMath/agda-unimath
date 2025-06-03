@@ -26,9 +26,9 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.extensions-maps
 
 open import simplicial-type-theory.action-on-directed-edges-functions
+open import simplicial-type-theory.arrows
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.simplicial-arrows
 ```
 
 </details>
