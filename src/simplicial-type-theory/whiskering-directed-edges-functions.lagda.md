@@ -1,7 +1,7 @@
 # Whiskering operations on directed edges between functions
 
 ```agda
-module simplicial-type-theory.whiskering-simplicial-edges-functions where
+module simplicial-type-theory.whiskering-directed-edges-functions where
 ```
 
 <details><summary>Imports</summary>
@@ -29,17 +29,17 @@ open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-maps
 
+open import simplicial-type-theory.arrows
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.horizontal-composition-simplicial-arrows-functions
-open import simplicial-type-theory.simplicial-arrows
+open import simplicial-type-theory.horizontal-composition-arrows-functions
 ```
 
 </details>
 
 ## Idea
 
-Given a directed edge `α : f →▵ f'` of functions `A → B` we may whisker it on
+Given a directed edge `α : f →▵ f'` of functions in `A → B` we may whisker it on
 the left by a function `h : B → C` to obtain a directed edge of functions
 `hα : hf →▵ hf'`, or we may whisker it on the right by a function `g : C → A` to
 obtain a directed edge of functions `αg : fg →▵ f'g`.

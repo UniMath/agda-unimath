@@ -26,10 +26,10 @@ open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
+open import simplicial-type-theory.arrows
 open import simplicial-type-theory.dependent-directed-edges
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.simplicial-arrows
 
 open import synthetic-homotopy-theory.free-loops
 ```
@@ -40,10 +40,9 @@ open import synthetic-homotopy-theory.free-loops
 
 A
 {{#concept "free directed loop" Disambiguation="in a simplicial type" Agda=free-directed-loop}}
-in a type `X` consists of a
-[directed arrow](simplicial-type-theory.simplicial-arrows.md) `α : Δ¹ → X` and
-an [identification](foundation-core.identity-types.md) `α 1₂ ＝ α 0₂`. Free
-directed loops are classified by the
+in a type `X` consists of a [directed arrow](simplicial-type-theory.arrows.md)
+`α : Δ¹ → X` and an [identification](foundation-core.identity-types.md)
+`α 1₂ ＝ α 0₂`. Free directed loops are classified by the
 [directed circle](simplicial-type-theory.directed-circle.md), meaning that the
 type of free directed loops in `X` is
 [equivalent](foundation-core.equivalences.md) to the type of maps

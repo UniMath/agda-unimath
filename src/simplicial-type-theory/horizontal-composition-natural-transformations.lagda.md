@@ -27,12 +27,12 @@ open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-maps
 
+open import simplicial-type-theory.arrows
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
+open import simplicial-type-theory.horizontal-composition-arrows-functions
 open import simplicial-type-theory.horizontal-composition-directed-edges-functions
-open import simplicial-type-theory.horizontal-composition-simplicial-arrows-functions
 open import simplicial-type-theory.natural-transformations
-open import simplicial-type-theory.simplicial-arrows
 ```
 
 </details>
@@ -44,8 +44,8 @@ transformation `β` of functions `f' g' : B → C`, we may
 {{#concept "horizontally compose" Disambiguation="natural transformations of functions" Agda=horizontal-comp-simplicial-natural-transformation}}
 them to obtain a natural transformation of functions `f' ∘ f ⇒▵ g' ∘ g`. The
 horizontal composite is constructed by "synchronously traversing `α` and `β`",
-defined on the underlying
-[simplicial arrows](simplicial-type-theory.simplicial-arrows.md) as:
+defined on the underlying [simplicial arrows](simplicial-type-theory.arrows.md)
+as:
 
 ```text
   β □ α := (t ↦ x ↦ β t (α t x)).

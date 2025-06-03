@@ -1,7 +1,7 @@
-# The representing biinvertible simplicial arrow
+# The representing biinvertible arrow
 
 ```agda
-module simplicial-type-theory.representing-biinvertible-simplicial-arrow where
+module simplicial-type-theory.representing-biinvertible-arrow where
 ```
 
 <details><summary>Imports</summary>
@@ -38,11 +38,11 @@ open import foundation.whiskering-homotopies-composition
 
 open import reflection.erasing-equality
 
+open import simplicial-type-theory.arrows
+open import simplicial-type-theory.directed-cubes
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.inequality-directed-interval-type
-open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.simplicial-cubes
 open import simplicial-type-theory.standard-simplices
 
 open import synthetic-homotopy-theory.cocones-under-spans

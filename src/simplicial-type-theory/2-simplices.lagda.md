@@ -30,11 +30,11 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import simplicial-type-theory.arrows
+open import simplicial-type-theory.directed-cones
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.inequality-directed-interval-type
-open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.simplicial-cones
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.joins-of-types
@@ -185,9 +185,9 @@ rec-hom▵-∂Δ² f g h =
     ( eq-target-target-hom▵ g h)
 ```
 
-### The 2-simplex as a simplicial cone
+### The 2-simplex as a directed cone
 
 ```agda
-simplicial-cone-Δ² : UU lzero
-simplicial-cone-Δ² = simplicial-cone Δ¹
+directed-cone-Δ² : UU lzero
+directed-cone-Δ² = directed-cone Δ¹
 ```

@@ -1,7 +1,7 @@
-# The simplicial cone
+# The directed cone
 
 ```agda
-module simplicial-type-theory.simplicial-cones where
+module simplicial-type-theory.directed-cones where
 ```
 
 <details><summary>Imports</summary>
@@ -34,10 +34,10 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import simplicial-type-theory.arrows
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.inequality-directed-interval-type
-open import simplicial-type-theory.simplicial-arrows
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -49,7 +49,7 @@ open import synthetic-homotopy-theory.pushouts
 
 ## Idea
 
-Given a type `X`, we define the {{#concept "simplicial cone type"}} as the
+Given a type `X`, we define the {{#concept "directed cone type"}} as the
 [pushout](synthetic-homotopy-theory.pushouts.md)
 
 ```text
@@ -57,147 +57,147 @@ Given a type `X`, we define the {{#concept "simplicial cone type"}} as the
             |           |
   (id , 0₂) |           |
             ∨         ⌜ ∨
-          X × Δ¹ ---> cone₂ X
+          X × Δ¹ ---> directed-cone X
 ```
 
-Intuitively, the simplicial cone of `X` can be understood as `X` with a point
-`*` attached such that there is a
+Intuitively, the directed cone of `X` can be understood as `X` with a point `*`
+attached such that there is a
 [directed edge](simplicial-type-theory.directed-edges.md) `* →▵ x` for every
 `x : X`.
 
 ## Definitions
 
-### The standard simplicial cone on a type
+### The standard directed cone on a type
 
 ```agda
-simplicial-cone : {l : Level} → UU l → UU l
-simplicial-cone X =
+directed-cone : {l : Level} → UU l → UU l
+directed-cone X =
   pushout (λ (x : X) → (x , 0₂)) (terminal-map X)
 
 module _
   {l : Level} {X : UU l}
   where
 
-  in-simplicial-cone' : X → Δ¹ → simplicial-cone X
-  in-simplicial-cone' x t =
+  in-directed-cone' : X → Δ¹ → directed-cone X
+  in-directed-cone' x t =
     inl-pushout (λ (x : X) → (x , 0₂)) (terminal-map X) (x , t)
 
-  in-simplicial-cone : X → simplicial-cone X
-  in-simplicial-cone x = in-simplicial-cone' x 1₂
+  in-directed-cone : X → directed-cone X
+  in-directed-cone x = in-directed-cone' x 1₂
 
-  point-simplicial-cone : simplicial-cone X
-  point-simplicial-cone =
+  point-directed-cone : directed-cone X
+  point-directed-cone =
     inr-pushout (λ (x : X) → (x , 0₂)) (terminal-map X) star
 
-  glue-simplicial-cone :
+  glue-directed-cone :
     (x : X) →
-    in-simplicial-cone' x 0₂ ＝ point-simplicial-cone
-  glue-simplicial-cone =
+    in-directed-cone' x 0₂ ＝ point-directed-cone
+  glue-directed-cone =
     glue-pushout (λ (x : X) → (x , 0₂)) (terminal-map X)
 
-  hom-simplicial-cone :
-    (x : X) → point-simplicial-cone →▵ in-simplicial-cone x
-  hom-simplicial-cone x =
-    ( in-simplicial-cone' x , glue-simplicial-cone x , refl)
+  hom-directed-cone :
+    (x : X) → point-directed-cone →▵ in-directed-cone x
+  hom-directed-cone x =
+    ( in-directed-cone' x , glue-directed-cone x , refl)
 
-  cocone-simplicial-cone :
-    cocone (λ (x : X) → (x , 0₂)) (terminal-map X) (simplicial-cone X)
-  cocone-simplicial-cone =
+  cocone-directed-cone :
+    cocone (λ (x : X) → (x , 0₂)) (terminal-map X) (directed-cone X)
+  cocone-directed-cone =
     cocone-pushout (λ (x : X) → (x , 0₂)) (terminal-map X)
 ```
 
-### The dependent cogap map for the simplicial cone type
+### The dependent cogap map for the directed cone type
 
 ```agda
 module _
   {l : Level} (X : UU l)
   where
 
-  dependent-cogap-simplicial-cone' :
-    {l' : Level} {P : simplicial-cone X → UU l'}
+  dependent-cogap-directed-cone' :
+    {l' : Level} {P : directed-cone X → UU l'}
     (c :
       dependent-cocone
         ( λ x → x , 0₂)
         ( terminal-map X)
-        ( cocone-simplicial-cone)
+        ( cocone-directed-cone)
         ( P))
-    (x : simplicial-cone X) → P x
-  dependent-cogap-simplicial-cone' =
+    (x : directed-cone X) → P x
+  dependent-cogap-directed-cone' =
     dependent-cogap (λ x → (x , 0₂)) (terminal-map X)
 
-  dependent-cogap-simplicial-cone :
-    { l' : Level} {P : simplicial-cone X → UU l'}
-    ( f : P point-simplicial-cone) →
-    ( g : (x : X) (t : Δ¹) → P (in-simplicial-cone' x t)) →
+  dependent-cogap-directed-cone :
+    { l' : Level} {P : directed-cone X → UU l'}
+    ( f : P point-directed-cone) →
+    ( g : (x : X) (t : Δ¹) → P (in-directed-cone' x t)) →
     ( p :
       (x : X) →
-      dependent-identification P (glue-simplicial-cone x) (g x 0₂) f)
-    ( x : simplicial-cone X) → P x
-  dependent-cogap-simplicial-cone f g p =
-    dependent-cogap-simplicial-cone'
+      dependent-identification P (glue-directed-cone x) (g x 0₂) f)
+    ( x : directed-cone X) → P x
+  dependent-cogap-directed-cone f g p =
+    dependent-cogap-directed-cone'
       ( (λ (x , t) → g x t) , point f , p)
 ```
 
-### The cogap map for the simplicial cone type
+### The cogap map for the directed cone type
 
 ```agda
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
 
-  cogap-simplicial-cone' :
+  cogap-directed-cone' :
     cocone (λ x → (x , 0₂)) (terminal-map X) Y →
-    simplicial-cone X → Y
-  cogap-simplicial-cone' =
+    directed-cone X → Y
+  cogap-directed-cone' =
     cogap (λ (x : X) → (x , 0₂)) (terminal-map X)
 
-  cogap-simplicial-cone :
+  cogap-directed-cone :
     (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) →
-    simplicial-cone X → Y
-  cogap-simplicial-cone g f p =
-    cogap-simplicial-cone' ((λ (x , t) → g x t) , point f , p)
+    directed-cone X → Y
+  cogap-directed-cone g f p =
+    cogap-directed-cone' ((λ (x , t) → g x t) , point f , p)
 
-  compute-point-cogap-simplicial-cone :
+  compute-point-cogap-directed-cone :
     (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) →
-    cogap-simplicial-cone g f p point-simplicial-cone ＝ f
-  compute-point-cogap-simplicial-cone g f p =
+    cogap-directed-cone g f p point-directed-cone ＝ f
+  compute-point-cogap-directed-cone g f p =
     compute-inr-cogap
       ( λ x → (x , 0₂))
       ( terminal-map X)
       ( (λ (x , t) → g x t) , point f , p)
       ( star)
 
-  compute-in-cogap-simplicial-cone' :
+  compute-in-cogap-directed-cone' :
     (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) (x : X) (t : Δ¹) →
-    cogap-simplicial-cone g f p (in-simplicial-cone' x t) ＝
+    cogap-directed-cone g f p (in-directed-cone' x t) ＝
     g x t
-  compute-in-cogap-simplicial-cone' g f p x t =
+  compute-in-cogap-directed-cone' g f p x t =
     compute-inl-cogap
       ( λ x → x , 0₂)
       ( terminal-map X)
       ( (λ (x , t) → g x t) , point f , p)
       ( x , t)
 
-  compute-in-cogap-simplicial-cone :
+  compute-in-cogap-directed-cone :
     (g : X → Δ¹ → Y) (f : Y) (p : (x : X) → g x 0₂ ＝ f) (x : X) →
-    cogap-simplicial-cone g f p (in-simplicial-cone x) ＝
+    cogap-directed-cone g f p (in-directed-cone x) ＝
     g x 1₂
-  compute-in-cogap-simplicial-cone g f p x =
-    compute-in-cogap-simplicial-cone' g f p x 1₂
+  compute-in-cogap-directed-cone g f p x =
+    compute-in-cogap-directed-cone' g f p x 1₂
 ```
 
 ## Properties
 
-### The directed interval is equivalent to the simplicial cone over the unit type
+### The directed interval is equivalent to the directed cone over the unit type
 
 **Proof.** We have the pushout diagram
 
 ```text
-  1 ------> 1
-  |         |
-  |         |
-  ∨       ⌜ ∨
-  Δ¹ -----> C₂1,
+  1 -------> 1
+  |          |
+  |          |
+  ∨        ⌜ ∨
+  Δ¹ ---> directed-cone 1,
 ```
 
 and since the top horizontal map is an equivalence, so is its pushout.

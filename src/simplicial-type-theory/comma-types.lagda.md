@@ -22,9 +22,9 @@ open import foundation.standard-pullbacks
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
+open import simplicial-type-theory.arrows
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.simplicial-arrows
 ```
 
 </details>
@@ -35,22 +35,22 @@ open import simplicial-type-theory.simplicial-arrows
 
 ## Definitions
 
-### The standard simplicial comma type
+### The standard comma type
 
 ```agda
-simplicial-comma-type :
+comma▵ :
   {l1 l2 l3 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} →
   (B → A) → (C → A) → UU (l1 ⊔ l2 ⊔ l3)
-simplicial-comma-type {B = B} {C} f g =
+comma▵ {B = B} {C} f g =
   Σ B (λ b → Σ C (λ c → hom▵ (f b) (g c)))
 
-_↓▵_ = simplicial-comma-type
+_↓▵_ = comma▵
 ```
 
 ## Properties
 
-### The universal property of the simplicial comma type
+### The universal property of the comma type
 
 The comma type `f ↓▵ g` is the pullback in the following diagram
 
@@ -59,7 +59,7 @@ The comma type `f ↓▵ g` is the pullback in the following diagram
     | ⌟             |
     |               | (source , target)
     ∨               ∨
-  B × C --------> A × A
+  B × C --------> A × A.
           f × g
 ```
 
@@ -70,57 +70,57 @@ module _
   (f : B → A) (g : C → A)
   where
 
-  cone-simplicial-comma-type :
+  cone-comma▵ :
     cone
       {A = B × C} {Δ¹ → A} {A × A}
       ( λ (b , c) → (f b , g c))
       ( λ α → (α 0₂ , α 1₂))
       ( f ↓▵ g)
-  pr1 (cone-simplicial-comma-type) (b , c , _) = (b , c)
-  pr1 (pr2 (cone-simplicial-comma-type)) (_ , _ , α , _) = α
-  pr2 (pr2 (cone-simplicial-comma-type)) (_ , _ , _ , α0＝fb , α1＝gc) =
+  pr1 (cone-comma▵) (b , c , _) = (b , c)
+  pr1 (pr2 (cone-comma▵)) (_ , _ , α , _) = α
+  pr2 (pr2 (cone-comma▵)) (_ , _ , _ , α0＝fb , α1＝gc) =
     inv (eq-pair α0＝fb α1＝gc)
 
-  gap-simplicial-comma-type :
+  gap-comma▵ :
     f ↓▵ g → standard-pullback (λ (b , c) → (f b , g c)) (λ α → α 0₂ , α 1₂)
-  gap-simplicial-comma-type =
+  gap-comma▵ =
     gap
       ( λ (b , c) → (f b , g c))
       ( λ α → (α 0₂ , α 1₂))
-      ( cone-simplicial-comma-type)
+      ( cone-comma▵)
 
-  map-inv-gap-simplicial-comma-type :
+  map-inv-gap-comma▵ :
     ( standard-pullback
       {A = B × C} {Δ¹ → A} {A × A}
       ( λ (b , c) → (f b , g c))
       ( λ α → α 0₂ , α 1₂)) →
     f ↓▵ g
-  map-inv-gap-simplicial-comma-type ((b , c) , α , coh) =
+  map-inv-gap-comma▵ ((b , c) , α , coh) =
     ( b , c , α , pair-eq (inv coh))
 
-  is-section-gap-simplicial-comma-type :
-    map-inv-gap-simplicial-comma-type ∘ gap-simplicial-comma-type ~ id
-  is-section-gap-simplicial-comma-type (b , c , α , coh) =
+  is-section-gap-comma▵ :
+    map-inv-gap-comma▵ ∘ gap-comma▵ ~ id
+  is-section-gap-comma▵ (b , c , α , coh) =
     eq-pair-eq-fiber
       ( eq-pair-eq-fiber
         ( eq-pair-eq-fiber
           ( ap pair-eq (inv-inv (eq-pair' coh)) ∙ is-retraction-pair-eq coh)))
 
-  is-retraction-gap-simplicial-comma-type :
-    gap-simplicial-comma-type ∘ map-inv-gap-simplicial-comma-type ~ id
-  is-retraction-gap-simplicial-comma-type ((b , c) , α , coh) =
+  is-retraction-gap-comma▵ :
+    gap-comma▵ ∘ map-inv-gap-comma▵ ~ id
+  is-retraction-gap-comma▵ ((b , c) , α , coh) =
     eq-pair-eq-fiber
       ( eq-pair-eq-fiber
         ( ap inv (is-section-pair-eq (inv coh)) ∙ inv-inv coh))
 
-  is-pullback-simplicial-comma-type :
+  is-pullback-comma▵ :
     is-pullback
       ( λ (b , c) → (f b , g c))
       ( λ α → (α 0₂ , α 1₂))
-      ( cone-simplicial-comma-type)
-  is-pullback-simplicial-comma-type =
+      ( cone-comma▵)
+  is-pullback-comma▵ =
     is-equiv-is-invertible
-      ( map-inv-gap-simplicial-comma-type)
-      ( is-retraction-gap-simplicial-comma-type)
-      ( is-section-gap-simplicial-comma-type)
+      ( map-inv-gap-comma▵)
+      ( is-retraction-gap-comma▵)
+      ( is-section-gap-comma▵)
 ```
