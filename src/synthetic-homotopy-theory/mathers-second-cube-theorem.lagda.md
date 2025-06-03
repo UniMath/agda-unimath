@@ -46,14 +46,14 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 {{#concept "Mather's second cube theorem" Disambiguation="for types"}} states
 that every base change of a [pushout](synthetic-homotopy-theory.pushouts.md)
-square is a pushout. In other words, if we are given a commuting cube where the
-bottom face is a pushout and the vertical faces are
-[pullbacks](foundation-core.pullbacks.md))
+square is a pushout. In other words, if we are given a
+[commuting cube](foundation.commuting-cubes-of-maps.md) where the bottom face is
+a pushout and the vertical faces are [pullbacks](foundation-core.pullbacks.md)
 
 ```text
   ∙ ----------------> ∙
-  | \ ⌟               | \
-  | ⌟\                | ⌟\
+  |⌟\ ⌟               |⌟\
+  |  \                |  \
   |   ∨               |   ∨
   |     ∙ ----------------> ∙
   |     | ⌟           |     |
