@@ -10,6 +10,8 @@ module foundation.morphisms-arrows where
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.postcomposition-functions
+open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -19,8 +21,6 @@ open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.postcomposition-functions
-open import foundation-core.precomposition-functions
 ```
 
 </details>
@@ -309,19 +309,25 @@ A morphism of arrows `α : f → g` gives a morphism of precomposition arrows
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level}
+  {l1 l2 l3 l4 l : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
+  (S : UU l)
   where
 
-  precomp-hom-arrow :
-    {l : Level} (S : UU l) → hom-arrow (precomp g S) (precomp f S)
-  pr1 (precomp-hom-arrow S) =
-    precomp (map-codomain-hom-arrow f g α) S
-  pr1 (pr2 (precomp-hom-arrow S)) =
-    precomp (map-domain-hom-arrow f g α) S
-  pr2 (pr2 (precomp-hom-arrow S)) h =
-    inv (eq-htpy (h ·l coh-hom-arrow f g α))
+  transpose-precomp-hom-arrow :
+    hom-arrow
+      ( precomp (map-codomain-hom-arrow f g α) S)
+      ( precomp (map-domain-hom-arrow f g α) S)
+  transpose-precomp-hom-arrow =
+    ( precomp g S , precomp f S , htpy-precomp (coh-hom-arrow f g α) S)
+
+  precomp-hom-arrow : hom-arrow (precomp g S) (precomp f S)
+  precomp-hom-arrow =
+    transpose-hom-arrow
+      ( precomp (map-codomain-hom-arrow f g α) S)
+      ( precomp (map-domain-hom-arrow f g α) S)
+      ( transpose-precomp-hom-arrow)
 ```
 
 ### Morphisms of arrows give morphisms of postcomposition arrows
@@ -338,12 +344,10 @@ module _
 
   postcomp-hom-arrow :
     {l : Level} (S : UU l) → hom-arrow (postcomp S f) (postcomp S g)
-  pr1 (postcomp-hom-arrow S) =
-    postcomp S (map-domain-hom-arrow f g α)
-  pr1 (pr2 (postcomp-hom-arrow S)) =
-    postcomp S (map-codomain-hom-arrow f g α)
-  pr2 (pr2 (postcomp-hom-arrow S)) h =
-    eq-htpy (coh-hom-arrow f g α ·r h)
+  postcomp-hom-arrow S =
+    ( postcomp S (map-domain-hom-arrow f g α) ,
+      postcomp S (map-codomain-hom-arrow f g α) ,
+      htpy-postcomp S (coh-hom-arrow f g α))
 ```
 
 ## See also
