@@ -33,8 +33,8 @@ open import foundation.universe-levels
 open import simplicial-type-theory.arrows
 open import simplicial-type-theory.directed-cones
 open import simplicial-type-theory.directed-edges
-open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.inequality-directed-interval-type
+open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.inequality-directed-interval-type I
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.joins-of-types

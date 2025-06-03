@@ -24,7 +24,7 @@ open import foundation.universe-levels
 
 open import simplicial-type-theory.arrows
 open import simplicial-type-theory.directed-edges
-open import simplicial-type-theory.directed-interval-type
+open import simplicial-type-theory.directed-interval-type I
 ```
 
 </details>

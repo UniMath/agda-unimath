@@ -31,7 +31,7 @@ open import foundation.universe-levels
 open import simplicial-type-theory.action-on-directed-edges-dependent-functions
 open import simplicial-type-theory.action-on-directed-edges-functions
 open import simplicial-type-theory.arrows
-open import simplicial-type-theory.directed-interval-type
+open import simplicial-type-theory.directed-interval-type I
 open import simplicial-type-theory.free-directed-loops
 ```
 

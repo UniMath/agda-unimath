@@ -35,9 +35,9 @@ open import orthogonal-factorization-systems.null-maps
 open import orthogonal-factorization-systems.null-types
 
 open import simplicial-type-theory.directed-edges
-open import simplicial-type-theory.directed-interval-type
+open import simplicial-type-theory.directed-interval-type I
 open import simplicial-type-theory.fully-faithful-maps
-open import simplicial-type-theory.inequality-directed-interval-type
+open import simplicial-type-theory.inequality-directed-interval-type I
 
 open import synthetic-homotopy-theory.circle
 ```

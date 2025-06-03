@@ -13,7 +13,7 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
 
-open import simplicial-type-theory.directed-interval-type
+open import simplicial-type-theory.directed-interval-type I
 ```
 
 </details>
