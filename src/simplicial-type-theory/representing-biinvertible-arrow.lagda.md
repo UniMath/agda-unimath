@@ -129,7 +129,7 @@ postulate
 
 ## Definitions
 
-```agda
+```text
 source-arrow-representing-biinvertible-arrow▵ :
   arrow-representing-biinvertible-arrow▵ 0₂ ＝
   {! id-arrow▵ target-representing-biinvertible-arrow▵ 0₂ !}

@@ -17,6 +17,7 @@ open import simplicial-type-theory.boundary-standard-simplices public
 open import simplicial-type-theory.comma-types public
 open import simplicial-type-theory.compositions-of-directed-edges public
 open import simplicial-type-theory.conormed-maps-between-types public
+open import simplicial-type-theory.covariant-type-families public
 open import simplicial-type-theory.dependent-directed-edges public
 open import simplicial-type-theory.directed-circle public
 open import simplicial-type-theory.directed-cones public
@@ -41,7 +42,6 @@ open import simplicial-type-theory.natural-transformations public
 open import simplicial-type-theory.normed-maps-between-types public
 open import simplicial-type-theory.representing-biinvertible-arrow public
 open import simplicial-type-theory.rewriting-directed-circle public
-open import simplicial-type-theory.simplicially-covariant-type-families public
 open import simplicial-type-theory.simplicially-discrete-types public
 open import simplicial-type-theory.spines public
 open import simplicial-type-theory.standard-simplices public

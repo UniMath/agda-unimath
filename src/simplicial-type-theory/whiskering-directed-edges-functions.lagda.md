@@ -7,7 +7,7 @@ module simplicial-type-theory.whiskering-directed-edges-functions where
 <details><summary>Imports</summary>
 
 ```agda
-open import asimplicial-type-theory.horizontal-composition-directed-edges-functions
+open import simplicial-type-theory.horizontal-composition-directed-edges-functions
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
