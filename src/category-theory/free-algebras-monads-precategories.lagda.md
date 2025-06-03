@@ -44,14 +44,12 @@ composition recovers the original monad.
 module _
   {l1 l2 : Level} {C : Precategory l1 l2}
   (T : monad-Precategory C)
+  (let Tf = endofunctor-monad-Precategory C T)
+  (let μ = hom-mul-monad-Precategory C T)
+  (let η = hom-unit-monad-Precategory C T)
+  (let T₀ = obj-endofunctor-monad-Precategory C T)
+  (let T₁ = hom-endofunctor-monad-Precategory C T)
   where
-
-  private
-    Tf = endofunctor-monad-Precategory C T
-    μ = hom-mul-monad-Precategory C T
-    η = hom-unit-monad-Precategory C T
-    T₀ = obj-endofunctor-monad-Precategory C T
-    T₁ = hom-endofunctor-monad-Precategory C T
 
   obj-free-algebras-monad-Precategory : UU l1
   obj-free-algebras-monad-Precategory = obj-Precategory C

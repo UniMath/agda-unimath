@@ -43,12 +43,10 @@ denoted `EM(T)`, also called the Eilenberg-Moore category, consists of all
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
   (T : monad-Precategory C)
+  (let Tf = endofunctor-monad-Precategory C T)
+  (let T₁ = hom-endofunctor-monad-Precategory C T)
+  (let T₀ = obj-endofunctor-monad-Precategory C T)
   where
-
-  private
-    Tf = endofunctor-monad-Precategory C T
-    T₁ = hom-endofunctor-monad-Precategory C T
-    T₀ = obj-endofunctor-monad-Precategory C T
 
   obj-algebras-monad-Precategory :
     UU (l1 ⊔ l2)

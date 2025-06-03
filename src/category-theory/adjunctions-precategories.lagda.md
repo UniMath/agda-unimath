@@ -158,26 +158,22 @@ module _
   (D : Precategory l3 l4)
   (L : functor-Precategory C D)
   (R : functor-Precategory D C)
+  (let LR = comp-functor-Precategory D C D L R)
+  (let RL = comp-functor-Precategory C D C R L)
+  (let idC = id-functor-Precategory C)
+  (let idD = id-functor-Precategory D)
   where
-
-  private
-    LR = comp-functor-Precategory D C D L R
-    RL = comp-functor-Precategory C D C R L
-    idC = id-functor-Precategory C
-    idD = id-functor-Precategory D
 
   module _
     (η : natural-transformation-Precategory C C idC RL)
     (ε : natural-transformation-Precategory D D LR idD)
+    (let η₀ = hom-family-natural-transformation-Precategory C C idC RL η)
+    (let ε₀ = hom-family-natural-transformation-Precategory D D LR idD ε)
+    (let L₀ = obj-functor-Precategory C D L)
+    (let L₁ = hom-functor-Precategory C D L)
+    (let R₀ = obj-functor-Precategory D C R)
+    (let R₁ = hom-functor-Precategory D C R)
     where
-
-    private
-      η₀ = hom-family-natural-transformation-Precategory C C idC RL η
-      ε₀ = hom-family-natural-transformation-Precategory D D LR idD ε
-      L₀ = obj-functor-Precategory C D L
-      L₁ = hom-functor-Precategory C D L
-      R₀ = obj-functor-Precategory D C R
-      R₁ = hom-functor-Precategory D C R
 
     has-left-triangle-identity-Precategory : UU (l1 ⊔ l4)
     has-left-triangle-identity-Precategory =
