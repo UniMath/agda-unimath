@@ -37,7 +37,7 @@ open import simplicial-type-theory.horizontal-composition-directed-edges-functio
 open import simplicial-type-theory.horizontal-composition-natural-transformations public
 open import simplicial-type-theory.inequality-directed-interval-type public
 open import simplicial-type-theory.inner-2-horn public
-open import simplicial-type-theory.lax-suspension public
+open import simplicial-type-theory.directed-suspension public
 open import simplicial-type-theory.natural-transformations public
 open import simplicial-type-theory.normed-maps-between-types public
 open import simplicial-type-theory.representing-biinvertible-arrow public

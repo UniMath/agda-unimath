@@ -1,7 +1,7 @@
-# The simplicial suspension
+# The directed suspension
 
 ```agda
-module simplicial-type-theory.lax-suspension where
+module simplicial-type-theory.directed-suspension where
 ```
 
 <details><summary>Imports</summary>
@@ -44,7 +44,7 @@ open import synthetic-homotopy-theory.pushouts
 
 ## Idea
 
-Given a type `X`, we define the {{#concept "lax suspension"}} of `X` as the
+Given a type `X`, we define the {{#concept "directed suspension"}} of `X` as the
 [pushout](synthetic-homotopy-theory.pushouts.md)
 
 ```text
@@ -66,8 +66,8 @@ or in other words the oriented pushout
   1 -----> Σ▵X.
 ```
 
-Intuitively, the lax suspension of `X` can be understood as a type consisting of
-a point at the north and south pole, and a
+Intuitively, the directed suspension of `X` can be understood as a type
+consisting of a point at the north and south pole, and a
 [directed edge](simplicial-type-theory.directed-edges.md) `north →▵ south` for
 every element `x : X`. It is constructed by taking the
 [cartesian product](foundation-core.cartesian-product-types.md) `X × Δ¹`, and
