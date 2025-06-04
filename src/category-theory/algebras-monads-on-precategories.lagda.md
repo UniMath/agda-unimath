@@ -97,17 +97,25 @@ module _
     has-mul-law-algebra-monad-Precategory (hom-algebra-monad-Precategory f)
   mul-law-algebra-monad-Precategory f = pr2 (pr2 (pr2 f))
 
+  coherence-morphism-algebra-monad-Precategory :
+    (f g : algebra-monad-Precategory) →
+    hom-Precategory C
+      ( obj-algebra-monad-Precategory f)
+      ( obj-algebra-monad-Precategory g) →
+    UU l2
+  coherence-morphism-algebra-monad-Precategory f g h =
+    coherence-square-hom-Precategory C
+      ( hom-endofunctor-monad-Precategory C T h)
+      ( hom-algebra-monad-Precategory f)
+      ( hom-algebra-monad-Precategory g)
+      ( h)
+
   morphism-algebra-monad-Precategory : (f g : algebra-monad-Precategory) → UU l2
   morphism-algebra-monad-Precategory f g =
     Σ ( hom-Precategory C
         ( obj-algebra-monad-Precategory f)
         ( obj-algebra-monad-Precategory g))
-      ( λ h →
-        coherence-square-hom-Precategory C
-          ( hom-endofunctor-monad-Precategory C T h)
-          ( hom-algebra-monad-Precategory f)
-          ( hom-algebra-monad-Precategory g)
-          ( h))
+      ( coherence-morphism-algebra-monad-Precategory f g)
 
   hom-morphism-algebra-monad-Precategory :
     (f g : algebra-monad-Precategory)

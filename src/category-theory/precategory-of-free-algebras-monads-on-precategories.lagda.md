@@ -164,7 +164,7 @@ module _
 
 ```agda
   obj-functor-to-free-algebras-monad-Precategory :
-    (obj-Precategory C) → obj-free-algebras-monad-Precategory
+    obj-Precategory C → obj-free-algebras-monad-Precategory
   obj-functor-to-free-algebras-monad-Precategory = id
 
   hom-functor-to-free-algebras-monad-Precategory :
