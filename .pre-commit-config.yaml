@@ -33,7 +33,7 @@ repos:
     hooks:
       - id: sort-codespell-files
         name: Sort codespell dictionary and ignore files
-        entry: bash -c 'for f in "$@"; do sort -o "$f" "$f"; done' --
+        entry: bash -c 'for f in "$@"; do LC_ALL=C sort -o "$f" "$f"; done' --
         language: system
         files: ^codespell-(dictionary|ignore)\.txt$
       - id: markdown-conventions
