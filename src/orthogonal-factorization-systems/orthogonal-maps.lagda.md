@@ -439,7 +439,36 @@ module _
     is-orthogonal-pullback-condition f g'
   is-orthogonal-pullback-condition-htpy-right =
     is-orthogonal-pullback-condition-htpy refl-htpy
+
+  is-orthogonal-htpy :
+    {f' : A → B} {g' : X → Y} → f ~ f' → g ~ g' →
+    is-orthogonal f g → is-orthogonal f' g'
+  is-orthogonal-htpy {f'} {g'} F G H =
+    is-orthogonal-is-orthogonal-pullback-condition f' g'
+      ( is-orthogonal-pullback-condition-htpy F G
+        ( is-orthogonal-pullback-condition-is-orthogonal f g H))
+
+  is-orthogonal-htpy-left :
+    {f' : A → B} → f ~ f' → is-orthogonal f g → is-orthogonal f' g
+  is-orthogonal-htpy-left F = is-orthogonal-htpy F refl-htpy
+
+  is-orthogonal-htpy-right :
+    {g' : X → Y} → g ~ g' → is-orthogonal f g → is-orthogonal f g'
+  is-orthogonal-htpy-right G = is-orthogonal-htpy refl-htpy G
 ```
+
+### Orthogonality is preserved under equivalences of maps
+
+Given equivalences of arrows `f' ≃ f` and `g' ≃ g`, then `f ⊥ g` if and only if
+`f' ⊥ g'`.
+
+This remains to be formalized.
+
+### Orthogonality is preserved under retracts of maps
+
+Given retracts of maps `f' → f` and `g → g'`, then `f ⊥ g` implies `f' ⊥ g'`.
+
+This remains to be formalized.
 
 ### Equivalences are orthogonal to every map
 
@@ -966,7 +995,7 @@ If `f ⊥ g` and `f' ⊥ g`, then `(f + f') ⊥ g`.
 **Proof:** We need to show that the square
 
 ```text
-                     - ∘ (f + f')
+                   - ∘ (f + f')
   ((B + B') → X) ---------------> ((A + A') → X)
         |                               |
         |                               |
@@ -1113,6 +1142,41 @@ module _
       ( is-orthogonal-pullback-condition-right-base-change
         ( is-orthogonal-pullback-condition-is-orthogonal f g G))
 ```
+
+### Right orthogonality is preserved under pullback-homs with arbitrary maps
+
+Given an `f`-orthogonal map `g` and an arbitrary map `k`, then the pullback-hom
+`⟨k , g⟩` is also `f`-orthogonal. This is Corollary 3.1.13 of {{#cite BW23}}.
+
+This remains to be formalized.
+
+### Left orthogonality is preserved under pushout-products with arbitrary maps
+
+Given maps `f ⊥ g` and an arbitrary map `k`, then `(f □ k) ⊥ g`.
+
+**Proof.** Follows from the previous result using the adjoint relation to the
+pullback-hom:
+
+```text
+  ⟨f □ k , g⟩ ~ ⟨f , ⟨k , g⟩⟩.
+```
+
+This remains to be formalized.
+
+### Right orthogonality is preserved under sequential limits
+
+Given a [tower](foundation.inverse-sequential-diagrams.md) of `f`-orthogonal
+maps
+
+```text
+     g₃      g₂      g₁      g₀
+  ⋯ ---> X₃ ---> X₂ ---> X₁ ---> X₀.
+```
+
+then the [sequential limit](foundation.sequential-limits.md) `g∞ : X∞ → X₀` is
+also `f`-orthogonal. This is Proposition 3.1.14 of {{#cite BW23}}.
+
+This remains to be formalized.
 
 ### A type is `f`-local if and only if its terminal map is `f`-orthogonal
 

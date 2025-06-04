@@ -100,7 +100,7 @@ ap-inv f refl = refl
 ```agda
 ap-const :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) {x y : A}
-  (p : x ＝ y) → (ap (const A b) p) ＝ refl
+  (p : x ＝ y) → ap (const A b) p ＝ refl
 ap-const b refl = refl
 ```
 
