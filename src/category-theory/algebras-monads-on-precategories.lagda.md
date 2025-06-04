@@ -35,6 +35,10 @@ object `A` and morphism `a : TA → A` satisfying two compatibility laws:
 - **Unit law**: `a ∘ η_A = id_A`
 - **Multiplication law**: `a ∘ Ta = a ∘ μ_A`
 
+## Definitions
+
+### Algebras over a monad
+
 ```agda
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)

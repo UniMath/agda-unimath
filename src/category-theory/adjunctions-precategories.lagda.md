@@ -53,7 +53,7 @@ Let `C` and `D` be two [precategories](category-theory.precategories.md). Two
 In this case we say that `L` is **left adjoint** to `R` and `R` is **right
 adjoint** to `L`, and write this as `L ⊣ R`.
 
-## Definition
+## Definitions
 
 ### The predicate of being an adjoint pair of functors
 
@@ -162,134 +162,142 @@ module _
   (let RL = comp-functor-Precategory C D C R L)
   (let idC = id-functor-Precategory C)
   (let idD = id-functor-Precategory D)
+  (η : natural-transformation-Precategory C C idC RL)
+  (ε : natural-transformation-Precategory D D LR idD)
+  (let η₀ = hom-family-natural-transformation-Precategory C C idC RL η)
+  (let ε₀ = hom-family-natural-transformation-Precategory D D LR idD ε)
+  (let L₀ = obj-functor-Precategory C D L)
+  (let L₁ = hom-functor-Precategory C D L)
+  (let R₀ = obj-functor-Precategory D C R)
+  (let R₁ = hom-functor-Precategory D C R)
   where
 
+  has-left-triangle-identity-Precategory : UU (l1 ⊔ l4)
+  has-left-triangle-identity-Precategory =
+    (x : obj-Precategory C) →
+    comp-hom-Precategory D (ε₀ (L₀ x)) (L₁ (η₀ x)) ＝ id-hom-Precategory D
+
+  has-right-triangle-identity-Precategory : UU (l2 ⊔ l3)
+  has-right-triangle-identity-Precategory =
+    (y : obj-Precategory D) →
+    ( comp-hom-Precategory C
+      ( R₁ (ε₀ y))
+      ( η₀ (R₀ y))) ＝
+    ( id-hom-Precategory C)
+
   module _
-    (η : natural-transformation-Precategory C C idC RL)
-    (ε : natural-transformation-Precategory D D LR idD)
-    (let η₀ = hom-family-natural-transformation-Precategory C C idC RL η)
-    (let ε₀ = hom-family-natural-transformation-Precategory D D LR idD ε)
-    (let L₀ = obj-functor-Precategory C D L)
-    (let L₁ = hom-functor-Precategory C D L)
-    (let R₀ = obj-functor-Precategory D C R)
-    (let R₁ = hom-functor-Precategory D C R)
+    (lt : has-left-triangle-identity-Precategory)
+    (rt : has-right-triangle-identity-Precategory)
+    (x : obj-Precategory C) (y : obj-Precategory D)
     where
 
-    has-left-triangle-identity-Precategory : UU (l1 ⊔ l4)
-    has-left-triangle-identity-Precategory =
-      (x : obj-Precategory C) →
-      comp-hom-Precategory D (ε₀ (L₀ x)) (L₁ (η₀ x)) ＝ id-hom-Precategory D
+    map-sharp-unit-counit-Precategory :
+      hom-Precategory D (L₀ x) y →
+      hom-Precategory C x (R₀ y)
+    map-sharp-unit-counit-Precategory g =
+      comp-hom-Precategory C (R₁ g) (η₀ x)
 
-    has-right-triangle-identity-Precategory : UU (l2 ⊔ l3)
-    has-right-triangle-identity-Precategory =
-      (y : obj-Precategory D) →
-      ( comp-hom-Precategory C
-        ( R₁ (ε₀ y))
-        ( η₀ (R₀ y))) ＝
-      ( id-hom-Precategory C)
+    map-flat-unit-counit-Precategory :
+      hom-Precategory C x (R₀ y) →
+      hom-Precategory D (L₀ x) y
+    map-flat-unit-counit-Precategory f =
+      comp-hom-Precategory D (ε₀ y) (L₁ f)
 
-    module _
-      (lt : has-left-triangle-identity-Precategory)
-      (rt : has-right-triangle-identity-Precategory)
-      where
+    is-section-map-flat-unit-counit-Precategory :
+      is-section
+        map-sharp-unit-counit-Precategory
+        map-flat-unit-counit-Precategory
+    is-section-map-flat-unit-counit-Precategory f =
+      ( ap
+        ( precomp-hom-Precategory C (η₀ x) _)
+        ( preserves-comp-functor-Precategory D C R (ε₀ y) (L₁ f))) ∙
+      ( associative-comp-hom-Precategory C (R₁ (ε₀ y)) (R₁ (L₁ f)) (η₀ x)) ∙
+      ( ap
+        ( postcomp-hom-Precategory C (R₁ (ε₀ y)) _)
+        ( naturality-natural-transformation-Precategory C C
+          ( id-functor-Precategory C) RL η f)) ∙
+      ( inv
+        ( associative-comp-hom-Precategory C (R₁ (ε₀ y)) (η₀ (R₀ y)) f)) ∙
+      ( ap (precomp-hom-Precategory C f _) (rt y)) ∙
+      ( left-unit-law-comp-hom-Precategory C f)
 
-      module _
-        (x : obj-Precategory C) (y : obj-Precategory D)
-        where
+    is-retraction-map-flat-unit-counit-Precategory :
+      is-retraction
+        map-sharp-unit-counit-Precategory
+        map-flat-unit-counit-Precategory
+    is-retraction-map-flat-unit-counit-Precategory g =
+      ( ap
+        ( postcomp-hom-Precategory D (ε₀ y) _)
+        ( preserves-comp-functor-Precategory C D L (R₁ g) (η₀ x))) ∙
+      ( inv
+        ( associative-comp-hom-Precategory D
+          ( ε₀ y)
+          ( L₁ (R₁ g))
+          ( L₁ (η₀ x)))) ∙
+      ( ap
+        ( precomp-hom-Precategory D (L₁ (η₀ x)) _)
+        ( inv
+          ( naturality-natural-transformation-Precategory D D
+            ( LR)
+            ( id-functor-Precategory D) ε g))) ∙
+      ( associative-comp-hom-Precategory D g (ε₀ (L₀ x)) (L₁ (η₀ x))) ∙
+      ( ap (postcomp-hom-Precategory D g _) (lt x)) ∙
+      ( right-unit-law-comp-hom-Precategory D g)
 
-        map-sharp-unit-counit-Precategory :
-          hom-Precategory D (L₀ x) y →
-          hom-Precategory C x (R₀ y)
-        map-sharp-unit-counit-Precategory g =
-          comp-hom-Precategory C (R₁ g) (η₀ x)
+    section-sharp-unit-counit-Precategory :
+      section map-sharp-unit-counit-Precategory
+    section-sharp-unit-counit-Precategory =
+      ( map-flat-unit-counit-Precategory ,
+        is-section-map-flat-unit-counit-Precategory)
 
-        map-flat-unit-counit-Precategory :
-          hom-Precategory C x (R₀ y) →
-          hom-Precategory D (L₀ x) y
-        map-flat-unit-counit-Precategory f =
-          comp-hom-Precategory D (ε₀ y) (L₁ f)
+    retraction-sharp-unit-counit-Precategory :
+      retraction map-sharp-unit-counit-Precategory
+    retraction-sharp-unit-counit-Precategory =
+      ( map-flat-unit-counit-Precategory ,
+        is-retraction-map-flat-unit-counit-Precategory)
 
-        section-sharp-unit-counit-Precategory :
-          section map-sharp-unit-counit-Precategory
-        pr1 section-sharp-unit-counit-Precategory =
-          map-flat-unit-counit-Precategory
-        pr2 section-sharp-unit-counit-Precategory f =
-          ( ap
-            ( precomp-hom-Precategory C (η₀ x) _)
-            ( preserves-comp-functor-Precategory D C R (ε₀ y) (L₁ f))) ∙
-          ( associative-comp-hom-Precategory C (R₁ (ε₀ y)) (R₁ (L₁ f)) (η₀ x)) ∙
-          ( ap
-            ( postcomp-hom-Precategory C (R₁ (ε₀ y)) _)
-            ( naturality-natural-transformation-Precategory C C
-              ( id-functor-Precategory C) RL η f)) ∙
-          ( inv
-            ( associative-comp-hom-Precategory C (R₁ (ε₀ y)) (η₀ (R₀ y)) f)) ∙
-          ( ap (precomp-hom-Precategory C f _) (rt y)) ∙
-          ( left-unit-law-comp-hom-Precategory C f)
+    is-equiv-sharp-unit-counit-Precategory :
+      is-equiv map-sharp-unit-counit-Precategory
+    is-equiv-sharp-unit-counit-Precategory =
+      ( section-sharp-unit-counit-Precategory ,
+        retraction-sharp-unit-counit-Precategory)
 
-        retraction-sharp-unit-counit-Precategory :
-          retraction map-sharp-unit-counit-Precategory
-        pr1 retraction-sharp-unit-counit-Precategory =
-          map-flat-unit-counit-Precategory
-        pr2 retraction-sharp-unit-counit-Precategory g =
-          ( ap
-            ( postcomp-hom-Precategory D (ε₀ y) _)
-            ( preserves-comp-functor-Precategory C D L (R₁ g) (η₀ x))) ∙
-          ( inv
-            ( associative-comp-hom-Precategory D
-              ( ε₀ y)
-              ( L₁ (R₁ g))
-              ( L₁ (η₀ x)))) ∙
-          ( ap
-            ( precomp-hom-Precategory D (L₁ (η₀ x)) _)
-            ( inv
-              ( naturality-natural-transformation-Precategory D D
-                ( LR)
-                ( id-functor-Precategory D) ε g))) ∙
-          ( associative-comp-hom-Precategory D g (ε₀ (L₀ x)) (L₁ (η₀ x))) ∙
-          ( ap (postcomp-hom-Precategory D g _) (lt x)) ∙
-          ( right-unit-law-comp-hom-Precategory D g)
+  module _
+    (lt : has-left-triangle-identity-Precategory)
+    (rt : has-right-triangle-identity-Precategory)
+    where
 
-        is-equiv-sharp-unit-counit-Precategory :
-          is-equiv map-sharp-unit-counit-Precategory
-        pr1 is-equiv-sharp-unit-counit-Precategory =
-          section-sharp-unit-counit-Precategory
-        pr2 is-equiv-sharp-unit-counit-Precategory =
-          retraction-sharp-unit-counit-Precategory
+    equiv-family-unit-counit-Precategory :
+      family-of-equivalences-adjoint-pair-Precategory C D L R
+    equiv-family-unit-counit-Precategory x y =
+      ( map-sharp-unit-counit-Precategory lt rt x y ,
+        is-equiv-sharp-unit-counit-Precategory lt rt x y)
 
-      equiv-family-unit-counit-Precategory :
-        family-of-equivalences-adjoint-pair-Precategory C D L R
-      pr1 (equiv-family-unit-counit-Precategory x y) =
-        map-sharp-unit-counit-Precategory x y
-      pr2 (equiv-family-unit-counit-Precategory x y) =
-        is-equiv-sharp-unit-counit-Precategory x y
-
-      naturality-equiv-family-unit-counit-Precategory :
-        naturality-family-of-equivalences-adjoint-pair-Precategory C D L R
-          equiv-family-unit-counit-Precategory
-      naturality-equiv-family-unit-counit-Precategory
-        {x1} {x2} {y1} {y2} f g h =
-        ( ap
-          ( precomp-hom-Precategory C (η₀ x2) _)
-          ( ( preserves-comp-functor-Precategory D C R
-              ( comp-hom-Precategory D g h)
-              ( L₁ f)) ∙
-            ( ap
-              ( precomp-hom-Precategory C (R₁ (L₁ f)) _)
-              ( preserves-comp-functor-Precategory D C R g h)))) ∙
-        ( associative-comp-hom-Precategory C _ (R₁ (L₁ f)) (η₀ x2)) ∙
-        ( ap
-          ( postcomp-hom-Precategory C _ _)
-          ( naturality-natural-transformation-Precategory C C idC RL η f)) ∙
-        ( inv (associative-comp-hom-Precategory C _ (η₀ x1) f)) ∙
-        ( ap
-          ( precomp-hom-Precategory C f _)
-          ( associative-comp-hom-Precategory C _ _ _))
-
-      is-adjoint-pair-unit-counit-Precategory :
-        is-adjoint-pair-Precategory C D L R
-      pr1 is-adjoint-pair-unit-counit-Precategory =
+    naturality-equiv-family-unit-counit-Precategory :
+      naturality-family-of-equivalences-adjoint-pair-Precategory C D L R
         equiv-family-unit-counit-Precategory
-      pr2 is-adjoint-pair-unit-counit-Precategory =
-        naturality-equiv-family-unit-counit-Precategory
+    naturality-equiv-family-unit-counit-Precategory
+      {x1} {x2} {y1} {y2} f g h =
+      ( ap
+        ( precomp-hom-Precategory C (η₀ x2) _)
+        ( ( preserves-comp-functor-Precategory D C R
+            ( comp-hom-Precategory D g h)
+            ( L₁ f)) ∙
+          ( ap
+            ( precomp-hom-Precategory C (R₁ (L₁ f)) _)
+            ( preserves-comp-functor-Precategory D C R g h)))) ∙
+      ( associative-comp-hom-Precategory C _ (R₁ (L₁ f)) (η₀ x2)) ∙
+      ( ap
+        ( postcomp-hom-Precategory C _ _)
+        ( naturality-natural-transformation-Precategory C C idC RL η f)) ∙
+      ( inv (associative-comp-hom-Precategory C _ (η₀ x1) f)) ∙
+      ( ap
+        ( precomp-hom-Precategory C f _)
+        ( associative-comp-hom-Precategory C _ _ _))
+
+    is-adjoint-pair-unit-counit-Precategory :
+      is-adjoint-pair-Precategory C D L R
+    is-adjoint-pair-unit-counit-Precategory =
+      ( equiv-family-unit-counit-Precategory ,
+        naturality-equiv-family-unit-counit-Precategory)
 ```
