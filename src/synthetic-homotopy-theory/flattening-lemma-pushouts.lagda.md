@@ -46,13 +46,13 @@ commute with [dependent pair types](foundation.dependent-pair-types.md). More
 precisely, given a pushout square
 
 ```text
-       g
-  S ------> B
-  |         |
- f|         | j
-  ∨       ⌜ ∨
-  A ------> X
-       i
+         g
+    S ------> B
+    |         |
+  f |         | j
+    ∨       ⌜ ∨
+    A ------> X
+         i
 ```
 
 with homotopy `H : i ∘ f ~ j ∘ g`, and for any type family `P` over `X`, the
