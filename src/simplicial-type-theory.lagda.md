@@ -4,7 +4,7 @@
 {-# OPTIONS --rewriting #-}
 ```
 
-## Files in the simplicial type theory folder
+## Modules in the simplicial type theory namespace
 
 ```agda
 module simplicial-type-theory where
