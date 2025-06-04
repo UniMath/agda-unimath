@@ -16,6 +16,9 @@ open import foundation.1-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-maps
@@ -80,8 +83,8 @@ module _
     is-preunivalent-Precategory 𝒞
   is-preunivalent-is-strongly-preunivalent-Precategory H x y =
     is-emb-is-prop-map
-      ( backward-implication-subuniverse-equality-duality
-        ( is-prop-Prop)
+      ( backward-implication-structured-equality-duality
+        ( is-prop-equiv')
         ( H x)
         ( x)
         ( iso-eq-Precategory 𝒞 x)
@@ -365,6 +368,44 @@ module _
     total-hom-truncated-type-is-trunc-obj-Precategory
       ( precategory-Strongly-Preunivalent-Category 𝒞)
       ( is-1-type-obj-Strongly-Preunivalent-Category 𝒞)
+```
+
+## Preunivalent categories are strongly preunivalent
+
+```agda
+is-strongly-preunivalent-is-preunivalent-Precategory :
+  {l1 l2 : Level} (𝒞 : Precategory l1 l2) →
+  is-preunivalent-Precategory 𝒞 → is-strongly-preunivalent-Precategory 𝒞
+is-strongly-preunivalent-is-preunivalent-Precategory 𝒞 pua x (y , α) (y' , α') =
+  is-prop-equiv
+    ( equivalence-reasoning
+      ( (y , α) ＝ (y' , α'))
+      ≃ Eq-Σ (y , α) (y' , α') by equiv-pair-eq-Σ (y , α) (y' , α')
+      ≃ fiber
+          ( iso-eq-Precategory 𝒞 y y')
+          ( comp-iso-Precategory 𝒞 α' (inv-iso-Precategory 𝒞 α))
+      by
+        equiv-tot
+        ( λ where
+          refl →
+            equivalence-reasoning
+            (α ＝ α')
+            ≃ ( comp-iso-Precategory 𝒞 α (inv-iso-Precategory 𝒞 α) ＝
+                comp-iso-Precategory 𝒞 α' (inv-iso-Precategory 𝒞 α))
+              by
+                equiv-ap
+                  ( equiv-precomp-iso-Precategory 𝒞 (inv-iso-Precategory 𝒞 α) y)
+                  ( α)
+                  ( α')
+            ≃ ( id-iso-Precategory 𝒞 ＝
+                comp-iso-Precategory 𝒞 α' (inv-iso-Precategory 𝒞 α))
+              by
+              equiv-concat
+                ( inv (right-inverse-law-comp-iso-Precategory 𝒞 α))
+                ( comp-iso-Precategory 𝒞 α' (inv-iso-Precategory 𝒞 α))))
+    ( is-prop-map-is-emb
+      ( pua y y')
+      ( comp-iso-Precategory 𝒞 α' (inv-iso-Precategory 𝒞 α)))
 ```
 
 ## See also
