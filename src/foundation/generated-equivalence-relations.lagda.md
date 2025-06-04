@@ -63,49 +63,50 @@ module _
   inv-edge-Relation x y (inl e) = inr e
   inv-edge-Relation x y (inr e) = inl e
 
-  n-path-Relation : (x y : A) (n : ℕ) → UU (l1 ⊔ l2)
-  n-path-Relation x y zero-ℕ = raise l2 (x ＝ y)
-  n-path-Relation x y (succ-ℕ n) =
+  finite-path-Relation : (x y : A) (n : ℕ) → UU (l1 ⊔ l2)
+  finite-path-Relation x y zero-ℕ = raise l2 (x ＝ y)
+  finite-path-Relation x y (succ-ℕ n) =
     Σ ( A)
-      ( λ x' → (n-path-Relation x x' n) × (edge-Relation x' y))
+      ( λ x' → (finite-path-Relation x x' n) × (edge-Relation x' y))
 
-  n-path-edge-Relation :
-    (x y : A) (e : edge-Relation x y) → n-path-Relation x y 1
-  n-path-edge-Relation x y e = x , (map-raise refl , e)
+  finite-path-edge-Relation :
+    (x y : A) (e : edge-Relation x y) → finite-path-Relation x y 1
+  finite-path-edge-Relation x y e = x , (map-raise refl , e)
 
-  refl-n-path-Relation : (x : A) → n-path-Relation x x zero-ℕ
-  refl-n-path-Relation x = map-raise refl
+  refl-finite-path-Relation : (x : A) → finite-path-Relation x x zero-ℕ
+  refl-finite-path-Relation x = map-raise refl
 
-  concat-n-path-Relation : (x y z : A) (n m : ℕ)
-    (q : n-path-Relation y z m) (p : n-path-Relation x y n) →
-    n-path-Relation x z (n +ℕ m)
-  concat-n-path-Relation x y z n zero-ℕ (map-raise q) p = tr _ q p
-  concat-n-path-Relation x y z n (succ-ℕ m) (y' , q , e) p =
+  concat-finite-path-Relation : (x y z : A) (n m : ℕ)
+    (q : finite-path-Relation y z m) (p : finite-path-Relation x y n) →
+    finite-path-Relation x z (n +ℕ m)
+  concat-finite-path-Relation x y z n zero-ℕ (map-raise q) p = tr _ q p
+  concat-finite-path-Relation x y z n (succ-ℕ m) (y' , q , e) p =
     ( y') ,
-    ( concat-n-path-Relation x y y' n m q p) , e
+    ( concat-finite-path-Relation x y y' n m q p) , e
 
-  inv-n-path-Relation : (x y : A) (n : ℕ)
-    (p : n-path-Relation x y n) →
-    n-path-Relation y x n
-  inv-n-path-Relation x y zero-ℕ (map-raise p) = map-raise (inv p)
-  inv-n-path-Relation x y (succ-ℕ n) (x' , p , e) =
-    tr (λ m → n-path-Relation y x m) (left-one-law-add-ℕ n)
-      ( concat-n-path-Relation y x' x 1 n
-        ( inv-n-path-Relation x x' n p)
-        ( n-path-edge-Relation y x' (inv-edge-Relation x' y e)))
+  inv-finite-path-Relation : (x y : A) (n : ℕ)
+    (p : finite-path-Relation x y n) →
+    finite-path-Relation y x n
+  inv-finite-path-Relation x y zero-ℕ (map-raise p) = map-raise (inv p)
+  inv-finite-path-Relation x y (succ-ℕ n) (x' , p , e) =
+    tr (λ m → finite-path-Relation y x m) (left-one-law-add-ℕ n)
+      ( concat-finite-path-Relation y x' x 1 n
+        ( inv-finite-path-Relation x x' n p)
+        ( finite-path-edge-Relation y x' (inv-edge-Relation x' y e)))
 
   path-Relation : Relation (l1 ⊔ l2) A
-  path-Relation x y = Σ ℕ (λ n → n-path-Relation x y n)
+  path-Relation x y = Σ ℕ (λ n → finite-path-Relation x y n)
 
   is-reflexive-path-Relation : is-reflexive path-Relation
-  is-reflexive-path-Relation x = (0 , refl-n-path-Relation x)
+  is-reflexive-path-Relation x = (0 , refl-finite-path-Relation x)
 
   is-symmetric-path-Relation : is-symmetric path-Relation
-  is-symmetric-path-Relation x y (n , p) = n , (inv-n-path-Relation x y n p)
+  is-symmetric-path-Relation x y (n , p) =
+    n , (inv-finite-path-Relation x y n p)
 
   is-transitive-path-Relation : is-transitive path-Relation
   is-transitive-path-Relation x y z (n , q) (m , p) =
-    m +ℕ n , concat-n-path-Relation x y z m n q p
+    m +ℕ n , concat-finite-path-Relation x y z m n q p
 
   path-Relation-Prop : Relation-Prop (l1 ⊔ l2) A
   path-Relation-Prop x y = trunc-Prop (path-Relation x y)

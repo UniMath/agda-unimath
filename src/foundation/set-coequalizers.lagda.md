@@ -89,7 +89,7 @@ module _
           ( g x)
           ( ( unit-trunc-Prop
               ( 1 ,
-                ( n-path-edge-Relation relation-coequalizer-Set (f x) (g x)
+                ( finite-path-edge-Relation relation-coequalizer-Set (f x) (g x)
                   ( inl (x , (refl , refl)))))) ,
             ( is-reflexive-path-Relation-Prop _ (g x)))))
 ```
