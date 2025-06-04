@@ -7,16 +7,29 @@ module category-theory.monads-on-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.adjunctions-precategories
+open import category-theory.commuting-squares-of-morphisms-in-precategories
 open import category-theory.functors-precategories
 open import category-theory.natural-transformations-functors-precategories
+open import category-theory.natural-transformations-maps-precategories
 open import category-theory.pointed-endofunctors-precategories
 open import category-theory.precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.commuting-squares-of-maps
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.function-types
+open import foundation-core.homotopies
+open import foundation-core.propositions
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -106,6 +119,45 @@ module _
           ( functor-pointed-endofunctor-Precategory C T)
           ( μ)
           ( functor-pointed-endofunctor-Precategory C T))
+
+  associative-mul-hom-family-pointed-endofunctor-Precategory : UU (l1 ⊔ l2)
+  associative-mul-hom-family-pointed-endofunctor-Precategory =
+    ( λ x →
+      ( comp-hom-Precategory C
+        ( hom-family-natural-transformation-Precategory C C
+          ( comp-functor-Precategory C C C
+            ( functor-pointed-endofunctor-Precategory C T)
+            ( functor-pointed-endofunctor-Precategory C T))
+          ( functor-pointed-endofunctor-Precategory C T)
+          ( μ)
+          ( x))
+        ( hom-functor-Precategory C C
+          ( functor-pointed-endofunctor-Precategory C T)
+          ( hom-family-natural-transformation-Precategory C C
+            ( comp-functor-Precategory C C C
+              ( functor-pointed-endofunctor-Precategory C T)
+              ( functor-pointed-endofunctor-Precategory C T))
+            ( functor-pointed-endofunctor-Precategory C T)
+            ( μ)
+            ( x))))) ~
+    ( λ x →
+      ( comp-hom-Precategory C
+        ( hom-family-natural-transformation-Precategory C C
+          ( comp-functor-Precategory C C C
+            ( functor-pointed-endofunctor-Precategory C T)
+            ( functor-pointed-endofunctor-Precategory C T))
+          ( functor-pointed-endofunctor-Precategory C T)
+          ( μ)
+          ( x))
+        ( hom-family-natural-transformation-Precategory C C
+          ( comp-functor-Precategory C C C
+            ( functor-pointed-endofunctor-Precategory C T)
+            ( functor-pointed-endofunctor-Precategory C T))
+          ( functor-pointed-endofunctor-Precategory C T)
+          ( μ)
+          ( obj-functor-Precategory C C
+            ( functor-pointed-endofunctor-Precategory C T)
+            ( x)))))
 ```
 
 ### The left unit law on a multiplication on a pointed endofunctor
@@ -133,6 +185,26 @@ module _
         ( pointing-pointed-endofunctor-Precategory C T)) ＝
     id-natural-transformation-Precategory C C
       ( functor-pointed-endofunctor-Precategory C T)
+
+  left-unit-law-mul-hom-family-pointed-endofunctor-Precategory : UU (l1 ⊔ l2)
+  left-unit-law-mul-hom-family-pointed-endofunctor-Precategory =
+    ( λ x →
+      comp-hom-Precategory C
+        ( hom-family-natural-transformation-Precategory C C
+          ( comp-functor-Precategory C C C
+            ( functor-pointed-endofunctor-Precategory C T)
+            ( functor-pointed-endofunctor-Precategory C T))
+          ( functor-pointed-endofunctor-Precategory C T)
+          ( μ)
+          ( x))
+        ( hom-functor-Precategory C C
+          ( functor-pointed-endofunctor-Precategory C T)
+          ( hom-family-natural-transformation-Precategory C C
+            ( id-functor-Precategory C)
+            ( functor-pointed-endofunctor-Precategory C T)
+            ( pointing-pointed-endofunctor-Precategory C T)
+            ( x)))) ~
+    ( λ x → id-hom-Precategory C)
 ```
 
 ### The right unit law on a multiplication on a pointed endofunctor
@@ -160,6 +232,25 @@ module _
         ( functor-pointed-endofunctor-Precategory C T)) ＝
     id-natural-transformation-Precategory C C
       ( functor-pointed-endofunctor-Precategory C T)
+
+  right-unit-law-mul-hom-family-pointed-endofunctor-Precategory : UU (l1 ⊔ l2)
+  right-unit-law-mul-hom-family-pointed-endofunctor-Precategory =
+    ( λ x →
+      comp-hom-Precategory C
+        ( hom-family-natural-transformation-Precategory C C
+          ( comp-functor-Precategory C C C
+            ( functor-pointed-endofunctor-Precategory C T)
+            ( functor-pointed-endofunctor-Precategory C T))
+          ( functor-pointed-endofunctor-Precategory C T)
+          ( μ)
+          ( x))
+        ( hom-family-natural-transformation-Precategory C C
+          ( id-functor-Precategory C)
+          ( functor-pointed-endofunctor-Precategory C T)
+          ( pointing-pointed-endofunctor-Precategory C T)
+          ( obj-functor-Precategory C C
+            ( functor-pointed-endofunctor-Precategory C T) x))) ~
+    ( λ x → id-hom-Precategory C)
 ```
 
 ### The structure of a monad on a pointed endofunctor on a precategory
@@ -301,6 +392,20 @@ module _
     associative-mul-monad-Precategory =
       pr1 (pr2 (pr2 T))
 
+    associative-mul-hom-family-monad-Precategory :
+      associative-mul-hom-family-pointed-endofunctor-Precategory C
+        ( pointed-endofunctor-monad-Precategory)
+        ( mul-monad-Precategory)
+    associative-mul-hom-family-monad-Precategory =
+      htpy-eq-hom-family-natural-transformation-Precategory C C
+        ( comp-functor-Precategory C C C
+          ( endofunctor-monad-Precategory)
+          ( comp-functor-Precategory C C C
+            ( endofunctor-monad-Precategory)
+            ( endofunctor-monad-Precategory)))
+        ( endofunctor-monad-Precategory)
+        ( associative-mul-monad-Precategory)
+
     left-unit-law-mul-monad-Precategory :
       left-unit-law-mul-pointed-endofunctor-Precategory C
         ( pointed-endofunctor-monad-Precategory)
@@ -308,10 +413,162 @@ module _
     left-unit-law-mul-monad-Precategory =
       pr1 (pr2 (pr2 (pr2 T)))
 
+    left-unit-law-mul-hom-family-monad-Precategory :
+      left-unit-law-mul-hom-family-pointed-endofunctor-Precategory C
+        ( pointed-endofunctor-monad-Precategory)
+        ( mul-monad-Precategory)
+    left-unit-law-mul-hom-family-monad-Precategory =
+      htpy-eq-hom-family-natural-transformation-Precategory C C
+        ( endofunctor-monad-Precategory)
+        ( endofunctor-monad-Precategory)
+        ( left-unit-law-mul-monad-Precategory)
+
     right-unit-law-mul-monad-Precategory :
       right-unit-law-mul-pointed-endofunctor-Precategory C
         ( pointed-endofunctor-monad-Precategory)
         ( mul-monad-Precategory)
     right-unit-law-mul-monad-Precategory =
       pr2 (pr2 (pr2 (pr2 T)))
+
+    right-unit-law-mul-hom-family-monad-Precategory :
+      right-unit-law-mul-hom-family-pointed-endofunctor-Precategory C
+        ( pointed-endofunctor-monad-Precategory)
+        ( mul-monad-Precategory)
+    right-unit-law-mul-hom-family-monad-Precategory =
+      htpy-eq-hom-family-natural-transformation-Precategory C C
+        ( endofunctor-monad-Precategory)
+        ( endofunctor-monad-Precategory)
+        ( right-unit-law-mul-monad-Precategory)
+```
+
+## Algebras over a monad
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  (T : monad-Precategory C)
+  where
+
+  module _
+    {A : obj-Precategory C}
+    (a : hom-Precategory C (obj-endofunctor-monad-Precategory C T A) A)
+    where
+
+    has-unit-law-monad-algebra-Precategory : UU l2
+    has-unit-law-monad-algebra-Precategory =
+      comp-hom-Precategory C a (hom-unit-monad-Precategory C T A) ＝
+      id-hom-Precategory C
+
+    has-mul-law-monad-algebra-Precategory : UU l2
+    has-mul-law-monad-algebra-Precategory =
+      comp-hom-Precategory C a (hom-endofunctor-monad-Precategory C T a) ＝
+      comp-hom-Precategory C a (hom-mul-monad-Precategory C T A)
+
+    is-monad-algebra-Precategory : UU l2
+    is-monad-algebra-Precategory =
+      has-unit-law-monad-algebra-Precategory ×
+      has-mul-law-monad-algebra-Precategory
+
+  monad-algebra-Precategory : UU (l1 ⊔ l2)
+  monad-algebra-Precategory =
+    Σ ( obj-Precategory C)
+      ( λ A →
+        Σ ( hom-Precategory C (obj-endofunctor-monad-Precategory C T A) A)
+          ( λ a → is-monad-algebra-Precategory a))
+
+  obj-monad-algebra-Precategory : monad-algebra-Precategory → obj-Precategory C
+  obj-monad-algebra-Precategory = pr1
+
+  hom-monad-algebra-Precategory :
+    (f : monad-algebra-Precategory) →
+    hom-Precategory C
+      ( obj-endofunctor-monad-Precategory C T (obj-monad-algebra-Precategory f))
+      ( obj-monad-algebra-Precategory f)
+  hom-monad-algebra-Precategory f = pr1 (pr2 f)
+
+  comm-monad-algebra-Precategory :
+    (f : monad-algebra-Precategory) →
+    is-monad-algebra-Precategory (hom-monad-algebra-Precategory f)
+  comm-monad-algebra-Precategory f = pr2 (pr2 f)
+
+  unit-law-monad-algebra-Precategory :
+    (f : monad-algebra-Precategory) →
+    has-unit-law-monad-algebra-Precategory (hom-monad-algebra-Precategory f)
+  unit-law-monad-algebra-Precategory f = pr1 (pr2 (pr2 f))
+
+  mul-law-monad-algebra-Precategory :
+    (f : monad-algebra-Precategory) →
+    has-mul-law-monad-algebra-Precategory (hom-monad-algebra-Precategory f)
+  mul-law-monad-algebra-Precategory f = pr2 (pr2 (pr2 f))
+
+  morphism-monad-algebra-Precategory : (f g : monad-algebra-Precategory) → UU l2
+  morphism-monad-algebra-Precategory f g =
+    Σ ( hom-Precategory C
+        ( obj-monad-algebra-Precategory f)
+        ( obj-monad-algebra-Precategory g))
+      ( λ h →
+        coherence-square-hom-Precategory C
+          ( hom-endofunctor-monad-Precategory C T h)
+          ( hom-monad-algebra-Precategory f)
+          ( hom-monad-algebra-Precategory g)
+          ( h))
+
+  hom-morphism-monad-algebra-Precategory :
+    (f g : monad-algebra-Precategory)
+    (h : morphism-monad-algebra-Precategory f g) →
+    hom-Precategory C
+      ( obj-monad-algebra-Precategory f)
+      ( obj-monad-algebra-Precategory g)
+  hom-morphism-monad-algebra-Precategory f g h = pr1 h
+
+  top-hom-morphism-monad-algebra-Precategory :
+    (f g : monad-algebra-Precategory)
+    (h : morphism-monad-algebra-Precategory f g) →
+    hom-Precategory C
+      ( obj-endofunctor-monad-Precategory C T (obj-monad-algebra-Precategory f))
+      ( obj-endofunctor-monad-Precategory C T (obj-monad-algebra-Precategory g))
+  top-hom-morphism-monad-algebra-Precategory f g h =
+    hom-endofunctor-monad-Precategory C T
+      ( hom-morphism-monad-algebra-Precategory f g h)
+
+  comm-hom-morphism-monad-algebra-Precategory :
+    (f g : monad-algebra-Precategory)
+    (h : morphism-monad-algebra-Precategory f g) →
+    coherence-square-hom-Precategory C
+      ( top-hom-morphism-monad-algebra-Precategory f g h)
+      ( hom-monad-algebra-Precategory f)
+      ( hom-monad-algebra-Precategory g)
+      ( hom-morphism-monad-algebra-Precategory f g h)
+  comm-hom-morphism-monad-algebra-Precategory f g h = pr2 h
+
+  comp-morphism-monad-algebra-Precategory :
+    (a b c : monad-algebra-Precategory)
+    (g : morphism-monad-algebra-Precategory b c) →
+    (f : morphism-monad-algebra-Precategory a b) →
+    morphism-monad-algebra-Precategory a c
+  comp-morphism-monad-algebra-Precategory a b c g f =
+    ( comp-hom-Precategory C
+      ( hom-morphism-monad-algebra-Precategory b c g)
+      ( hom-morphism-monad-algebra-Precategory a b f)) ,
+    ( pasting-horizontal-coherence-square-hom-Precategory C
+      ( top-hom-morphism-monad-algebra-Precategory a b f)
+      ( top-hom-morphism-monad-algebra-Precategory b c g)
+      ( hom-monad-algebra-Precategory a)
+      ( hom-monad-algebra-Precategory b)
+      ( hom-monad-algebra-Precategory c)
+      ( hom-morphism-monad-algebra-Precategory a b f)
+      ( hom-morphism-monad-algebra-Precategory b c g)
+      ( comm-hom-morphism-monad-algebra-Precategory a b f)
+      ( comm-hom-morphism-monad-algebra-Precategory b c g)) ∙
+    ( ap
+      ( postcomp-hom-Precategory C (hom-monad-algebra-Precategory c) _)
+      ( inv (preserves-comp-endofunctor-monad-Precategory C T _ _)))
+
+  is-set-morphism-monad-algebra-Precategory :
+    (f g : monad-algebra-Precategory) →
+    is-set (morphism-monad-algebra-Precategory f g)
+  is-set-morphism-monad-algebra-Precategory f g =
+    is-set-Σ
+      ( is-set-hom-Precategory C _ _)
+      ( λ hk → is-set-is-prop (is-set-hom-Precategory C _ _ _ _))
 ```
