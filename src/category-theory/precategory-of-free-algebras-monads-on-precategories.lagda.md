@@ -7,7 +7,6 @@ module category-theory.precategory-of-free-algebras-monads-on-precategories wher
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.algebras-monads-on-precategories
 open import category-theory.functors-precategories
 open import category-theory.monads-on-precategories
 open import category-theory.precategories
@@ -27,7 +26,7 @@ open import foundation-core.function-types
 
 The
 {{#concept "precategory of free algebras" Disambiguation="of a monad on a precategory" Agda=free-algebras-monad-Precategory WDID=Q1773982 WD="Kleisli category"}}
-of a [monad on a precategory](category-theory.monads-on-precategories)
+of a [monad on a precategory](category-theory.monads-on-precategories.md)
 `T : C → C`, also called the **Kleisli precategory**, is the precategory of free
 `T`-algebras and their morphisms; we view it as the precategory with the same
 objects as `C` but with morphisms `X → Y` the morphisms `X → TY` in `C`.
@@ -43,11 +42,10 @@ composition recovers the original monad.
 
 ```agda
 module _
-  {l1 l2 : Level} {C : Precategory l1 l2}
+  {l1 l2 : Level} (C : Precategory l1 l2)
   (T : monad-Precategory C)
   (let μ = hom-mul-monad-Precategory C T)
   (let η = hom-unit-monad-Precategory C T)
-  (let T₀ = obj-endofunctor-monad-Precategory C T)
   (let T₁ = hom-endofunctor-monad-Precategory C T)
   where
 
@@ -163,14 +161,22 @@ module _
 ### Free functor from the underlying category
 
 ```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  (T : monad-Precategory C)
+  (let μ = hom-mul-monad-Precategory C T)
+  (let η = hom-unit-monad-Precategory C T)
+  (let T₁ = hom-endofunctor-monad-Precategory C T)
+  where
+
   obj-functor-to-free-algebras-monad-Precategory :
-    (obj-Precategory C) → obj-free-algebras-monad-Precategory
+    obj-Precategory C → obj-free-algebras-monad-Precategory C T
   obj-functor-to-free-algebras-monad-Precategory = id
 
   hom-functor-to-free-algebras-monad-Precategory :
     {x y : obj-Precategory C}
     (f : hom-Precategory C x y) →
-    hom-free-algebras-monad-Precategory
+    hom-free-algebras-monad-Precategory C T
       ( obj-functor-to-free-algebras-monad-Precategory x)
       ( obj-functor-to-free-algebras-monad-Precategory y)
   hom-functor-to-free-algebras-monad-Precategory {x} {y} f =
@@ -182,7 +188,7 @@ module _
     (x : obj-Precategory C) →
     ( hom-functor-to-free-algebras-monad-Precategory
       ( id-hom-Precategory C {x})) ＝
-    ( id-hom-free-algebras-monad-Precategory _)
+    ( id-hom-free-algebras-monad-Precategory C T _)
   preserves-id-functor-to-free-algebras-monad-Precategory x =
     ( ap
       ( precomp-hom-Precategory C _ _)
@@ -194,7 +200,7 @@ module _
     (g : hom-Precategory C y z) (f : hom-Precategory C x y) →
     hom-functor-to-free-algebras-monad-Precategory
       ( comp-hom-Precategory C g f) ＝
-    comp-hom-free-algebras-monad-Precategory
+    comp-hom-free-algebras-monad-Precategory C T
       ( hom-functor-to-free-algebras-monad-Precategory g)
       ( hom-functor-to-free-algebras-monad-Precategory f)
   preserves-comp-functor-to-free-algebras-monad-Precategory {x} {y} {z} g f =
@@ -219,7 +225,7 @@ module _
     ( associative-comp-hom-Precategory C _ _ _)
 
   functor-to-free-algebras-monad-Precategory :
-    functor-Precategory C free-algebras-monad-Precategory
+    functor-Precategory C (free-algebras-monad-Precategory C T)
   functor-to-free-algebras-monad-Precategory =
     ( obj-functor-to-free-algebras-monad-Precategory) ,
     ( hom-functor-to-free-algebras-monad-Precategory) ,
@@ -230,13 +236,21 @@ module _
 ### Forgetful functor to the underlying category
 
 ```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  (T : monad-Precategory C)
+  (let μ = hom-mul-monad-Precategory C T)
+  (let T₀ = obj-endofunctor-monad-Precategory C T)
+  (let T₁ = hom-endofunctor-monad-Precategory C T)
+  where
+
   obj-functor-from-free-algebras-monad-Precategory :
-    obj-free-algebras-monad-Precategory → obj-Precategory C
+    obj-free-algebras-monad-Precategory C T → obj-Precategory C
   obj-functor-from-free-algebras-monad-Precategory = T₀
 
   hom-functor-from-free-algebras-monad-Precategory :
-    {x y : obj-free-algebras-monad-Precategory}
-    (f : hom-free-algebras-monad-Precategory x y) →
+    {x y : obj-free-algebras-monad-Precategory C T}
+    (f : hom-free-algebras-monad-Precategory C T x y) →
     hom-Precategory C
       ( obj-functor-from-free-algebras-monad-Precategory x)
       ( obj-functor-from-free-algebras-monad-Precategory y)
@@ -244,19 +258,19 @@ module _
     comp-hom-Precategory C (hom-mul-monad-Precategory C T y) (T₁ f)
 
   preserves-id-functor-from-free-algebras-monad-Precategory :
-    (x : obj-free-algebras-monad-Precategory) →
+    (x : obj-free-algebras-monad-Precategory C T) →
     hom-functor-from-free-algebras-monad-Precategory
-      ( id-hom-free-algebras-monad-Precategory x) ＝
+      ( id-hom-free-algebras-monad-Precategory C T x) ＝
     id-hom-Precategory C {obj-functor-from-free-algebras-monad-Precategory x}
   preserves-id-functor-from-free-algebras-monad-Precategory =
     left-unit-law-mul-hom-family-monad-Precategory C T
 
   preserves-comp-functor-from-free-algebras-monad-Precategory :
-    {x y z : obj-free-algebras-monad-Precategory}
-    (g : hom-free-algebras-monad-Precategory y z)
-    (f : hom-free-algebras-monad-Precategory x y) →
+    {x y z : obj-free-algebras-monad-Precategory C T}
+    (g : hom-free-algebras-monad-Precategory C T y z)
+    (f : hom-free-algebras-monad-Precategory C T x y) →
     hom-functor-from-free-algebras-monad-Precategory
-      ( comp-hom-free-algebras-monad-Precategory g f) ＝
+      ( comp-hom-free-algebras-monad-Precategory C T g f) ＝
     comp-hom-Precategory C
       ( hom-functor-from-free-algebras-monad-Precategory g)
       ( hom-functor-from-free-algebras-monad-Precategory f)
@@ -283,7 +297,7 @@ module _
     ( inv (associative-comp-hom-Precategory C _ _ _))
 
   functor-from-free-algebras-monad-Precategory :
-    functor-Precategory free-algebras-monad-Precategory C
+    functor-Precategory (free-algebras-monad-Precategory C T) C
   functor-from-free-algebras-monad-Precategory =
     ( obj-functor-from-free-algebras-monad-Precategory) ,
     ( hom-functor-from-free-algebras-monad-Precategory) ,

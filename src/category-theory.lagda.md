@@ -110,6 +110,7 @@ open import category-theory.maps-set-magmoids public
 open import category-theory.monads-on-categories public
 open import category-theory.monads-on-precategories public
 open import category-theory.monomorphisms-in-large-precategories public
+open import category-theory.morphisms-algebras-monads-on-precategories public
 open import category-theory.natural-isomorphisms-functors-categories public
 open import category-theory.natural-isomorphisms-functors-large-precategories public
 open import category-theory.natural-isomorphisms-functors-precategories public
