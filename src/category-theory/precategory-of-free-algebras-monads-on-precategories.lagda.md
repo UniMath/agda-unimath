@@ -91,7 +91,7 @@ module _
       ( h)
       ( comp-hom-free-algebras-monad-Precategory g f))
   associative-comp-hom-free-algebras-monad-Precategory h g f =
-    ap
+    ( ap
       ( precomp-hom-Precategory C f _)
       ( ( ap
           ( postcomp-hom-Precategory C (μ _) _)
@@ -112,7 +112,7 @@ module _
               ( precomp-hom-Precategory C (T₁ g) _)
               ( inv (naturality-mul-monad-Precategory C T h))) ∙
             ( associative-comp-hom-Precategory C _ _ _))) ∙
-        ( inv (associative-comp-hom-Precategory C _ _ _))) ∙
+        ( inv (associative-comp-hom-Precategory C _ _ _)))) ∙
     ( associative-comp-hom-Precategory C _ _ _)
 
   left-unit-law-comp-hom-free-algebras-monad-Precategory :
