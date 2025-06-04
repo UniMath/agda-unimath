@@ -17,6 +17,7 @@ open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations
 open import foundation.propositional-truncations
+open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.uniqueness-set-quotients
@@ -52,33 +53,33 @@ propositional truncation of this path relation.
 
 ```agda
 module _
-  {l : Level} {A : UU l} (R : Relation l A)
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
 
-  edge-Relation : (x y : A) → UU l
+  edge-Relation : (x y : A) → UU l2
   edge-Relation x y = (R x y) + (R y x)
 
   inv-edge-Relation : (x y : A) (e : edge-Relation x y) → edge-Relation y x
   inv-edge-Relation x y (inl e) = inr e
   inv-edge-Relation x y (inr e) = inl e
 
-  n-path-Relation : (x y : A) (n : ℕ) → UU l
-  n-path-Relation x y zero-ℕ = x ＝ y
+  n-path-Relation : (x y : A) (n : ℕ) → UU (l1 ⊔ l2)
+  n-path-Relation x y zero-ℕ = raise l2 (x ＝ y)
   n-path-Relation x y (succ-ℕ n) =
     Σ ( A)
       ( λ x' → (n-path-Relation x x' n) × (edge-Relation x' y))
 
   n-path-edge-Relation :
     (x y : A) (e : edge-Relation x y) → n-path-Relation x y 1
-  n-path-edge-Relation x y e = x , (refl , e)
+  n-path-edge-Relation x y e = x , (map-raise refl , e)
 
   refl-n-path-Relation : (x : A) → n-path-Relation x x zero-ℕ
-  refl-n-path-Relation x = refl
+  refl-n-path-Relation x = map-raise refl
 
   concat-n-path-Relation : (x y z : A) (n m : ℕ)
     (q : n-path-Relation y z m) (p : n-path-Relation x y n) →
     n-path-Relation x z (n +ℕ m)
-  concat-n-path-Relation x y z n zero-ℕ q p = tr _ q p
+  concat-n-path-Relation x y z n zero-ℕ (map-raise q) p = tr _ q p
   concat-n-path-Relation x y z n (succ-ℕ m) (y' , q , e) p =
     ( y') ,
     ( concat-n-path-Relation x y y' n m q p) , e
@@ -86,14 +87,14 @@ module _
   inv-n-path-Relation : (x y : A) (n : ℕ)
     (p : n-path-Relation x y n) →
     n-path-Relation y x n
-  inv-n-path-Relation x y zero-ℕ = inv
+  inv-n-path-Relation x y zero-ℕ (map-raise p) = map-raise (inv p)
   inv-n-path-Relation x y (succ-ℕ n) (x' , p , e) =
     tr (λ m → n-path-Relation y x m) (left-one-law-add-ℕ n)
       ( concat-n-path-Relation y x' x 1 n
         ( inv-n-path-Relation x x' n p)
         ( n-path-edge-Relation y x' (inv-edge-Relation x' y e)))
 
-  path-Relation : Relation l A
+  path-Relation : Relation (l1 ⊔ l2) A
   path-Relation x y = Σ ℕ (λ n → n-path-Relation x y n)
 
   is-reflexive-path-Relation : is-reflexive path-Relation
@@ -106,7 +107,7 @@ module _
   is-transitive-path-Relation x y z (n , q) (m , p) =
     m +ℕ n , concat-n-path-Relation x y z m n q p
 
-  path-Relation-Prop : Relation-Prop l A
+  path-Relation-Prop : Relation-Prop (l1 ⊔ l2) A
   path-Relation-Prop x y = trunc-Prop (path-Relation x y)
 
   is-reflexive-path-Relation-Prop :
@@ -137,7 +138,7 @@ module _
     ( ( is-symmetric-path-Relation-Prop ,
         is-transitive-path-Relation-Prop))
 
-  equivalence-relation-path-Relation-Prop : equivalence-relation l A
+  equivalence-relation-path-Relation-Prop : equivalence-relation (l1 ⊔ l2) A
   equivalence-relation-path-Relation-Prop =
     path-Relation-Prop , is-equivalence-relation-path-Relation-Prop
 ```
@@ -152,15 +153,15 @@ truncated) equivalence relation, we need also the codomain `B` to be a set.
 
 ```agda
 module _
-  {l : Level} {A : UU l} (R : Relation l A)
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
 
   reflects-path-Relation :
-    {l2 : Level} (B : UU l2) (f : A → B)
+    {l3 : Level} (B : UU l3) (f : A → B)
     (r : (x y : A) → R x y → f x ＝ f y)
     (x y : A) →
     path-Relation R x y → f x ＝ f y
-  reflects-path-Relation B f r x y (zero-ℕ , refl) = refl
+  reflects-path-Relation B f r x y (zero-ℕ , map-raise refl) = refl
   reflects-path-Relation B f r x y (succ-ℕ n , x' , p , e) =
     ( reflects-path-Relation B f r x x' (n , p)) ∙
     ( forward-r x' y e) where
@@ -170,7 +171,7 @@ module _
     forward-r a b (inr e) = inv (r b a e)
 
   reflects-path-Relation-Prop :
-    {l2 : Level} (B : Set l2) (f : A → type-Set B)
+    {l3 : Level} (B : Set l3) (f : A → type-Set B)
     (r : (x y : A) → R x y → f x ＝ f y) →
     reflects-equivalence-relation (equivalence-relation-path-Relation-Prop R) f
   reflects-path-Relation-Prop B f r {x} {y} =

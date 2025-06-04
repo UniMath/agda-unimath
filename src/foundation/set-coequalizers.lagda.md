@@ -16,6 +16,7 @@ open import foundation.equivalence-relations
 open import foundation.existential-quantification
 open import foundation.generated-equivalence-relations
 open import foundation.propositional-truncations
+open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.uniqueness-set-quotients
@@ -141,7 +142,9 @@ coequalizer equivalence relation.
       ( equivalence-relation-coequalizer-Set A B f g) h →
     htpy-descent-coequalizer-Set
   descent-reflecting-coequalizer-Set r x =
-    r (unit-trunc-Prop (1 , (f x) , refl , (inl (x , refl , refl))))
+    r
+      ( unit-trunc-Prop
+        ( 1 , (f x) , map-raise refl , inl (pair x (pair refl refl))))
 
   is-retraction-reflecting-descent-coequalizer-Set :
     descent-reflecting-coequalizer-Set ∘ reflecting-descent-coequalizer-Set ~
