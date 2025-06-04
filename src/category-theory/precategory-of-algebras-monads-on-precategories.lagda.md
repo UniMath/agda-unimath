@@ -41,6 +41,8 @@ denoted `EM(T)`, also called the **Eilenberg–Moore precategory**, consists of
 all `T`-algebras and `T`-algebra morphisms. It comes with an adjunction
 `C ⇄ EM(T)`.
 
+## Definitions
+
 ```agda
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
@@ -72,11 +74,10 @@ module _
   comp-hom-algebras-monad-Precategory a b c g f =
     comp-morphism-algebra-monad-Precategory C T a b c g f
 
-  id-hom-algebras-monad-Precategory :
+  coh-id-hom-algebras-monad-Precategory :
     (x : obj-algebras-monad-Precategory) →
-    hom-algebras-monad-Precategory x x
-  id-hom-algebras-monad-Precategory x =
-    ( id-hom-Precategory C) ,
+    coherence-morphism-algebra-monad-Precategory C T x x (id-hom-Precategory C)
+  coh-id-hom-algebras-monad-Precategory x =
     ( left-unit-law-comp-hom-Precategory C
       ( hom-algebra-monad-Precategory C T x)) ∙
     ( inv
@@ -86,15 +87,21 @@ module _
       ( postcomp-hom-Precategory C _ _)
       ( inv (preserves-id-endofunctor-monad-Precategory C T _)))
 
+  id-hom-algebras-monad-Precategory :
+    (x : obj-algebras-monad-Precategory) →
+    hom-algebras-monad-Precategory x x
+  id-hom-algebras-monad-Precategory x =
+    ( id-hom-Precategory C , coh-id-hom-algebras-monad-Precategory x)
+
   associative-comp-hom-algebras-monad-Precategory :
     (x y z w : obj-algebras-monad-Precategory)
     (h : hom-algebras-monad-Precategory z w)
     (g : hom-algebras-monad-Precategory y z)
     (f : hom-algebras-monad-Precategory x y) →
-    (comp-hom-algebras-monad-Precategory x y w
+    ( comp-hom-algebras-monad-Precategory x y w
       ( comp-hom-algebras-monad-Precategory y z w h g)
       ( f)) ＝
-    (comp-hom-algebras-monad-Precategory x z w
+    ( comp-hom-algebras-monad-Precategory x z w
       ( h)
       ( comp-hom-algebras-monad-Precategory x y z g f))
   associative-comp-hom-algebras-monad-Precategory x y z w h g f =

@@ -28,11 +28,26 @@ An
 between [monad algebras](category-theory.algebras-monads-on-precategories)
 `a : TA → A` and `b : TB → B` is a map `f : A → B` such that `b ∘ Tf = f ∘ a`.
 
+## Definitions
+
 ```agda
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
   (T : monad-Precategory C)
   where
+
+  coherence-morphism-algebra-monad-Precategory :
+    (f g : algebra-monad-Precategory C T) →
+    hom-Precategory C
+      ( obj-algebra-monad-Precategory C T f)
+      ( obj-algebra-monad-Precategory C T g) →
+    UU l2
+  coherence-morphism-algebra-monad-Precategory f g h =
+    coherence-square-hom-Precategory C
+      ( hom-endofunctor-monad-Precategory C T h)
+      ( hom-algebra-monad-Precategory C T f)
+      ( hom-algebra-monad-Precategory C T g)
+      ( h)
 
   morphism-algebra-monad-Precategory :
     (f g : algebra-monad-Precategory C T) → UU l2
@@ -40,12 +55,7 @@ module _
     Σ ( hom-Precategory C
         ( obj-algebra-monad-Precategory C T f)
         ( obj-algebra-monad-Precategory C T g))
-      ( λ h →
-        coherence-square-hom-Precategory C
-          ( hom-endofunctor-monad-Precategory C T h)
-          ( hom-algebra-monad-Precategory C T f)
-          ( hom-algebra-monad-Precategory C T g)
-          ( h))
+      ( coherence-morphism-algebra-monad-Precategory f g)
 
   hom-morphism-algebra-monad-Precategory :
     (f g : algebra-monad-Precategory C T)

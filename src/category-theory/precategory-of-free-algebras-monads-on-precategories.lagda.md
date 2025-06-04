@@ -40,6 +40,8 @@ Composition is given by:
 It comes with functors to and from `C` which form an adjoint pair; the
 composition recovers the original monad.
 
+## Definitions
+
 ```agda
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
