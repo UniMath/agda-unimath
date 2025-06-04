@@ -1,7 +1,7 @@
 # Unordered tuples of elements in commutative monoids
 
 ```agda
-module group-theory.unordered-tuples-of-elements-commutative-monoids where
+module group-theory.unordered-tuples-in-commutative-monoids where
 ```
 
 <details><summary>Imports</summary>
