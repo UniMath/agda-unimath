@@ -37,7 +37,7 @@ the [presheaf category](category-theory.presheaf-categories.md) on the
 
 To this large category, there is an associated
 [small category](category-theory.categories.md) of **small simplicial sets**,
-taking values in (small) [sets](foundation-core.sets.md).
+taking values in small [sets](foundation-core.sets.md).
 
 ## Definitions
 
