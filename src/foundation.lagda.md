@@ -218,6 +218,7 @@ open import foundation.functoriality-set-truncation public
 open import foundation.functoriality-truncation public
 open import foundation.fundamental-theorem-of-equivalence-relations public
 open import foundation.fundamental-theorem-of-identity-types public
+open import foundation.generated-equivalence-relations public
 open import foundation.global-choice public
 open import foundation.global-subuniverses public
 open import foundation.globular-type-of-dependent-functions public
@@ -372,6 +373,7 @@ open import foundation.sections public
 open import foundation.separated-types-subuniverses public
 open import foundation.sequences public
 open import foundation.sequential-limits public
+open import foundation.set-coequalizers public
 open import foundation.set-presented-types public
 open import foundation.set-quotients public
 open import foundation.set-truncations public
