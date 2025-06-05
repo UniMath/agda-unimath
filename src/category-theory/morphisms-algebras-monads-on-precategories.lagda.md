@@ -24,7 +24,7 @@ open import foundation.universe-levels
 ## Idea
 
 A
-{{#concept "morphisms" Disambiguation="of monad algebras on a precategory" Agda=algebra-monad-Precategory}}
+{{#concept "morphism" Disambiguation="of monad algebras on a precategory" Agda=algebra-monad-Precategory}}
 between [monad algebras](category-theory.algebras-monads-on-precategories.md)
 `a : TA → A` and `b : TB → B` is a map `f : A → B` such that `b ∘ Tf = f ∘ a`.
 
