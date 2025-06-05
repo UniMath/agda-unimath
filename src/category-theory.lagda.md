@@ -25,6 +25,7 @@ open import category-theory.category-of-functors public
 open import category-theory.category-of-functors-from-small-to-large-categories public
 open import category-theory.category-of-maps-categories public
 open import category-theory.category-of-maps-from-small-to-large-categories public
+open import category-theory.category-of-simplicial-sets public
 open import category-theory.commuting-squares-of-morphisms-in-large-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-set-magmoids public
