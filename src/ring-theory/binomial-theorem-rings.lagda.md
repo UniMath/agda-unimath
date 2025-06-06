@@ -16,12 +16,12 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.vectors-on-rings
+open import linear-algebra.finite-sequences-in-rings
 
 open import ring-theory.binomial-theorem-semirings
 open import ring-theory.powers-of-elements-rings
 open import ring-theory.rings
-open import ring-theory.sums-rings
+open import ring-theory.sums-of-finite-sequences-of-elements-rings
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -47,10 +47,11 @@ The binomial theorem is the [44th](literature.100-theorems.md#44) theorem on
 ### Binomial sums
 
 ```agda
-binomial-sum-Ring :
+binomial-sum-fin-sequence-type-Ring :
   {l : Level} (R : Ring l)
-  (n : ℕ) (f : functional-vec-Ring R (succ-ℕ n)) → type-Ring R
-binomial-sum-Ring R = binomial-sum-Semiring (semiring-Ring R)
+  (n : ℕ) (f : fin-sequence-type-Ring R (succ-ℕ n)) → type-Ring R
+binomial-sum-fin-sequence-type-Ring R =
+  binomial-sum-fin-sequence-type-Semiring (semiring-Ring R)
 ```
 
 ## Properties
@@ -63,14 +64,16 @@ module _
   where
 
   binomial-sum-one-element-Ring :
-    (f : functional-vec-Ring R 1) →
-    binomial-sum-Ring R 0 f ＝ head-functional-vec-Ring R 0 f
+    (f : fin-sequence-type-Ring R 1) →
+    binomial-sum-fin-sequence-type-Ring R 0 f ＝
+    head-fin-sequence-type-Ring R 0 f
   binomial-sum-one-element-Ring =
     binomial-sum-one-element-Semiring (semiring-Ring R)
 
   binomial-sum-two-elements-Ring :
-    (f : functional-vec-Ring R 2) →
-    binomial-sum-Ring R 1 f ＝ add-Ring R (f (zero-Fin 1)) (f (one-Fin 1))
+    (f : fin-sequence-type-Ring R 2) →
+    binomial-sum-fin-sequence-type-Ring R 1 f ＝
+    add-Ring R (f (zero-Fin 1)) (f (one-Fin 1))
   binomial-sum-two-elements-Ring =
     binomial-sum-two-elements-Semiring (semiring-Ring R)
 ```
@@ -82,10 +85,13 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  htpy-binomial-sum-Ring :
-    (n : ℕ) {f g : functional-vec-Ring R (succ-ℕ n)} →
-    (f ~ g) → binomial-sum-Ring R n f ＝ binomial-sum-Ring R n g
-  htpy-binomial-sum-Ring = htpy-binomial-sum-Semiring (semiring-Ring R)
+  htpy-binomial-sum-fin-sequence-type-Ring :
+    (n : ℕ) {f g : fin-sequence-type-Ring R (succ-ℕ n)} →
+    (f ~ g) →
+    binomial-sum-fin-sequence-type-Ring R n f ＝
+    binomial-sum-fin-sequence-type-Ring R n g
+  htpy-binomial-sum-fin-sequence-type-Ring =
+    htpy-binomial-sum-fin-sequence-type-Semiring (semiring-Ring R)
 ```
 
 ### Multiplication distributes over sums
@@ -95,19 +101,21 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  left-distributive-mul-binomial-sum-Ring :
-    (n : ℕ) (x : type-Ring R) (f : functional-vec-Ring R (succ-ℕ n)) →
-    mul-Ring R x (binomial-sum-Ring R n f) ＝
-    binomial-sum-Ring R n (λ i → mul-Ring R x (f i))
-  left-distributive-mul-binomial-sum-Ring =
-    left-distributive-mul-binomial-sum-Semiring (semiring-Ring R)
+  left-distributive-mul-binomial-sum-fin-sequence-type-Ring :
+    (n : ℕ) (x : type-Ring R) (f : fin-sequence-type-Ring R (succ-ℕ n)) →
+    mul-Ring R x (binomial-sum-fin-sequence-type-Ring R n f) ＝
+    binomial-sum-fin-sequence-type-Ring R n (λ i → mul-Ring R x (f i))
+  left-distributive-mul-binomial-sum-fin-sequence-type-Ring =
+    left-distributive-mul-binomial-sum-fin-sequence-type-Semiring
+      ( semiring-Ring R)
 
-  right-distributive-mul-binomial-sum-Ring :
-    (n : ℕ) (f : functional-vec-Ring R (succ-ℕ n)) (x : type-Ring R) →
-    mul-Ring R (binomial-sum-Ring R n f) x ＝
-    binomial-sum-Ring R n (λ i → mul-Ring R (f i) x)
-  right-distributive-mul-binomial-sum-Ring =
-    right-distributive-mul-binomial-sum-Semiring (semiring-Ring R)
+  right-distributive-mul-binomial-sum-fin-sequence-type-Ring :
+    (n : ℕ) (f : fin-sequence-type-Ring R (succ-ℕ n)) (x : type-Ring R) →
+    mul-Ring R (binomial-sum-fin-sequence-type-Ring R n f) x ＝
+    binomial-sum-fin-sequence-type-Ring R n (λ i → mul-Ring R (f i) x)
+  right-distributive-mul-binomial-sum-fin-sequence-type-Ring =
+    right-distributive-mul-binomial-sum-fin-sequence-type-Semiring
+      ( semiring-Ring R)
 ```
 
 ## Theorem
@@ -119,7 +127,7 @@ binomial-theorem-Ring :
   {l : Level} (R : Ring l) (n : ℕ) (x y : type-Ring R) →
   mul-Ring R x y ＝ mul-Ring R y x →
   power-Ring R n (add-Ring R x y) ＝
-  binomial-sum-Ring R n
+  binomial-sum-fin-sequence-type-Ring R n
     ( λ i →
       mul-Ring R
       ( power-Ring R (nat-Fin (succ-ℕ n) i) x)
@@ -139,7 +147,7 @@ is-linear-combination-power-add-Ring :
   add-Ring R
     ( mul-Ring R
       ( power-Ring R m y)
-      ( sum-Ring R n
+      ( sum-fin-sequence-type-Ring R n
         ( λ i →
           mul-nat-scalar-Ring R
             ( binomial-coefficient-ℕ (n +ℕ m) (nat-Fin n i))
@@ -148,7 +156,7 @@ is-linear-combination-power-add-Ring :
               ( power-Ring R (dist-ℕ (nat-Fin n i) n) y)))))
     ( mul-Ring R
       ( power-Ring R n x)
-      ( sum-Ring R
+      ( sum-fin-sequence-type-Ring R
         ( succ-ℕ m)
         ( λ i →
           mul-nat-scalar-Ring R

@@ -35,7 +35,7 @@ We describe conditions under which
 [dependent sums](foundation.dependent-pair-types.md) are
 [decidable](foundation.decidable-types.md)
 
-## Properites
+## Properties
 
 ### Decidability of dependent sums over equivalences
 

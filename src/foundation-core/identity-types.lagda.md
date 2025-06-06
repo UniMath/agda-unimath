@@ -160,7 +160,7 @@ is a family of binary operations
 
 indexed by `x y z : A`. However, there are essentially three different ways we
 can define concatenation of identifications, all with different computational
-behaviours.
+behaviors.
 
 1. We can define concatenation by induction on the equality `x ＝ y`. This gives
    us the computation rule `refl ∙ q ≐ q`.

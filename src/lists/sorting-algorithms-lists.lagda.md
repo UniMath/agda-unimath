@@ -16,13 +16,12 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
-
 open import lists.arrays
 open import lists.lists
 open import lists.permutation-lists
 open import lists.sorted-lists
-open import lists.sorting-algorithms-vectors
+open import lists.sorting-algorithms-tuples
+open import lists.tuples
 
 open import order-theory.decidable-total-orders
 ```
@@ -78,7 +77,7 @@ module _
 
 ## Properties
 
-### From sorting algorithms for vectors to sorting algorithms for lists
+### From sorting algorithms for tuples to sorting algorithms for lists
 
 ```agda
 module _
@@ -86,20 +85,20 @@ module _
   (X : Decidable-Total-Order l1 l2)
   where
 
-  is-sort-list-is-sort-vec :
+  is-sort-list-is-sort-tuple :
     (f :
       {n : ℕ} →
-      vec (type-Decidable-Total-Order X) n →
-      vec (type-Decidable-Total-Order X) n) →
-    is-sort-vec X f →
-    is-sort-list X (λ l → list-vec (length-list l) (f (vec-list l)))
-  pr1 (is-sort-list-is-sort-vec f S) =
-    is-permutation-list-is-permutation-vec
+      tuple (type-Decidable-Total-Order X) n →
+      tuple (type-Decidable-Total-Order X) n) →
+    is-sort-tuple X f →
+    is-sort-list X (λ l → list-tuple (length-list l) (f (tuple-list l)))
+  pr1 (is-sort-list-is-sort-tuple f S) =
+    is-permutation-list-is-permutation-tuple
       ( λ n → f)
       ( λ n → pr1 (S n))
-  pr2 (is-sort-list-is-sort-vec f S) l =
-    is-sorted-list-is-sorted-vec
+  pr2 (is-sort-list-is-sort-tuple f S) l =
+    is-sorted-list-is-sorted-tuple
       ( X)
       ( length-list l)
-      ( f (vec-list l)) (pr2 (S (length-list l)) (vec-list l))
+      ( f (tuple-list l)) (pr2 (S (length-list l)) (tuple-list l))
 ```

@@ -19,7 +19,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.homotopies
 open import foundation.identity-types
 
-open import linear-algebra.vectors
+open import lists.finite-sequences
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -44,8 +44,9 @@ The binomial theorem is the [44th](literature.100-theorems.md#44) theorem on
 ### Binomial sums
 
 ```agda
-binomial-sum-ℕ : (n : ℕ) (f : functional-vec ℕ (succ-ℕ n)) → ℕ
-binomial-sum-ℕ = binomial-sum-Commutative-Semiring ℕ-Commutative-Semiring
+binomial-sum-ℕ : (n : ℕ) (f : fin-sequence ℕ (succ-ℕ n)) → ℕ
+binomial-sum-ℕ =
+  binomial-sum-fin-sequence-type-Commutative-Semiring ℕ-Commutative-Semiring
 ```
 
 ## Properties
@@ -54,12 +55,12 @@ binomial-sum-ℕ = binomial-sum-Commutative-Semiring ℕ-Commutative-Semiring
 
 ```agda
 binomial-sum-one-element-ℕ :
-  (f : functional-vec ℕ 1) → binomial-sum-ℕ 0 f ＝ head-functional-vec 0 f
+  (f : fin-sequence ℕ 1) → binomial-sum-ℕ 0 f ＝ head-fin-sequence 0 f
 binomial-sum-one-element-ℕ =
   binomial-sum-one-element-Commutative-Semiring ℕ-Commutative-Semiring
 
 binomial-sum-two-elements-ℕ :
-  (f : functional-vec ℕ 2) →
+  (f : fin-sequence ℕ 2) →
   binomial-sum-ℕ 1 f ＝ (f (zero-Fin 1)) +ℕ (f (one-Fin 1))
 binomial-sum-two-elements-ℕ =
   binomial-sum-two-elements-Commutative-Semiring ℕ-Commutative-Semiring
@@ -69,26 +70,28 @@ binomial-sum-two-elements-ℕ =
 
 ```agda
 htpy-binomial-sum-ℕ :
-  (n : ℕ) {f g : functional-vec ℕ (succ-ℕ n)} →
+  (n : ℕ) {f g : fin-sequence ℕ (succ-ℕ n)} →
   (f ~ g) → binomial-sum-ℕ n f ＝ binomial-sum-ℕ n g
 htpy-binomial-sum-ℕ =
-  htpy-binomial-sum-Commutative-Semiring ℕ-Commutative-Semiring
+  htpy-binomial-sum-fin-sequence-type-Commutative-Semiring
+    ℕ-Commutative-Semiring
 ```
 
 ### Multiplication distributes over sums
 
 ```agda
 left-distributive-mul-binomial-sum-ℕ :
-  (n : ℕ) (x : ℕ) (f : functional-vec ℕ (succ-ℕ n)) →
+  (n : ℕ) (x : ℕ) (f : fin-sequence ℕ (succ-ℕ n)) →
   x *ℕ (binomial-sum-ℕ n f) ＝ binomial-sum-ℕ n (λ i → x *ℕ (f i))
 left-distributive-mul-binomial-sum-ℕ =
-  left-distributive-mul-binomial-sum-Commutative-Semiring ℕ-Commutative-Semiring
+  left-distributive-mul-binomial-sum-fin-sequence-type-Commutative-Semiring
+    ℕ-Commutative-Semiring
 
 right-distributive-mul-binomial-sum-ℕ :
-  (n : ℕ) (f : functional-vec ℕ (succ-ℕ n)) (x : ℕ) →
+  (n : ℕ) (f : fin-sequence ℕ (succ-ℕ n)) (x : ℕ) →
   (binomial-sum-ℕ n f) *ℕ x ＝ binomial-sum-ℕ n (λ i → (f i) *ℕ x)
 right-distributive-mul-binomial-sum-ℕ =
-  right-distributive-mul-binomial-sum-Commutative-Semiring
+  right-distributive-mul-binomial-sum-fin-sequence-type-Commutative-Semiring
     ℕ-Commutative-Semiring
 ```
 

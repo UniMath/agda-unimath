@@ -17,6 +17,7 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -28,6 +29,7 @@ open import order-theory.least-upper-bounds-posets
 open import order-theory.meet-semilattices
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.subposets
 open import order-theory.total-orders
 ```
 
@@ -505,4 +507,46 @@ module _
   max-leq-leq-Decidable-Total-Order =
     join-leq-leq-Order-Theoretic-Join-Semilattice
       ( order-theoretic-join-semilattice-Decidable-Total-Order)
+```
+
+### Subsets of decidable total orders are decidable total orders
+
+```agda
+Decidable-Total-Suborder :
+  {l1 l2 : Level} (l3 : Level) →
+  Decidable-Total-Order l1 l2 →
+  UU (l1 ⊔ lsuc l3)
+Decidable-Total-Suborder l3 T =
+  Subposet l3 (poset-Decidable-Total-Order T)
+
+module _
+  {l1 l2 l3 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  (P : Decidable-Total-Suborder l3 T)
+  where
+
+  is-total-leq-Decidable-Total-Suborder :
+    is-total-Poset
+      (poset-Subposet (poset-Decidable-Total-Order T) P)
+  is-total-leq-Decidable-Total-Suborder x y =
+    is-total-poset-Decidable-Total-Order
+      ( T)
+      ( inclusion-subtype P x)
+      ( inclusion-subtype P y)
+
+  is-decidable-leq-Decidable-Total-Suborder :
+    is-decidable-leq-Poset
+      (poset-Subposet (poset-Decidable-Total-Order T) P)
+  is-decidable-leq-Decidable-Total-Suborder x y =
+    is-decidable-poset-Decidable-Total-Order
+      ( T)
+      ( inclusion-subtype P x)
+      ( inclusion-subtype P y)
+
+  decidable-total-order-Decidable-Total-Suborder :
+    Decidable-Total-Order (l1 ⊔ l3) l2
+  decidable-total-order-Decidable-Total-Suborder =
+    poset-Subposet (poset-Decidable-Total-Order T) P ,
+    is-total-leq-Decidable-Total-Suborder ,
+    is-decidable-leq-Decidable-Total-Suborder
 ```

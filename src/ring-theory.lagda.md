@@ -50,7 +50,6 @@ open import ring-theory.left-ideals-rings public
 open import ring-theory.local-rings public
 open import ring-theory.localizations-rings public
 open import ring-theory.maximal-ideals-rings public
-open import ring-theory.modules-rings public
 open import ring-theory.multiples-of-elements-rings public
 open import ring-theory.multiplicative-orders-of-units-rings public
 open import ring-theory.nil-ideals-rings public
@@ -78,8 +77,10 @@ open import ring-theory.rings public
 open import ring-theory.semirings public
 open import ring-theory.subsets-rings public
 open import ring-theory.subsets-semirings public
-open import ring-theory.sums-rings public
-open import ring-theory.sums-semirings public
+open import ring-theory.sums-of-finite-families-of-elements-rings public
+open import ring-theory.sums-of-finite-families-of-elements-semirings public
+open import ring-theory.sums-of-finite-sequences-of-elements-rings public
+open import ring-theory.sums-of-finite-sequences-of-elements-semirings public
 open import ring-theory.transporting-ring-structure-along-isomorphisms-abelian-groups public
 open import ring-theory.trivial-rings public
 ```

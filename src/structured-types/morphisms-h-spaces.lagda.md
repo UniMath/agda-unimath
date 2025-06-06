@@ -133,7 +133,7 @@ that the unit laws are preserved:
     ap (μ (f *) -) f₁ ∙ (right-unit-law (f *) ∙ f₁).
   ```
 
-  By unwhiskering of commuting squares of identifications, i.e., by cancelling
+  By unwhiskering of commuting squares of identifications, i.e., by canceling
   out `f₁` on both sides, it follows that the asserted square commutes.
 
 ## Definition
