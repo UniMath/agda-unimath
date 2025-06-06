@@ -307,7 +307,16 @@ supports_.
 **Proof.** Given a decidable map `f : A → B` then `f` decomposes
 `B ≃ (im f) + B∖(im f)`. Restricting to `im f` we have a section given by the
 Hilbert ε-operator on `f`. Now, by injectivity of `f` we know this restriction
-map is an equivalence. Hence, by 3-for-2 `f` is also an embedding.
+map is an equivalence. Hence, `f` is a composite of embeddings and so must be an
+embedding as well.
+
+```text
+    im f ╰────→ im f + B\(im f)
+    ↟ ⋮              │
+    │ ⋮ ~            │ ~
+    │ ↓      f       ↓
+     A ────────────→ B
+```
 
 ```agda
 module _
@@ -320,4 +329,8 @@ module _
     is-emb-is-injective-ε-operator-map (ε-operator-map-is-decidable-map H) K
 ```
 
-There is also an analogous proof using the double negation image.
+There is also an analogous proof using the double negation image. This analogous
+proof avoids the use of propositional truncations, but cannot be included here
+due to introducing cyclic dependencies. See
+[`foundation.double-negation-images`](foundation.double-negation-images.md)
+instead.

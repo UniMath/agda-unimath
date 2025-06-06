@@ -74,6 +74,20 @@ module _
 
 ### Injective maps with ε-operators are embeddings
 
+**Proof.** Given a map `f : A → B` equipped with an ε-operator, then we have a
+section of the image projection map `A ↠ im f` given by the Hilbert ε-operator.
+Now, by injectivity of `f` we the image projection map must be an equivalence.
+Hence, `f` is a composite of embeddings and so must be an embedding as well.
+
+```text
+    im f
+    ↟ ⋮   \
+    │ ⋮ ~   \
+    │ ↓       ∨
+     A ──────→ B
+          f
+```
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
