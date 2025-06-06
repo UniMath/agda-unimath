@@ -125,8 +125,8 @@ module _
       ¬ (is-surjective f)
     theorem-decidable-Cantor =
       map-neg
-        is-double-negation-dense-map-is-surjective
-        theorem-double-negation-dense-decidable-Cantor
+        ( is-double-negation-dense-map-is-surjective)
+        ( theorem-double-negation-dense-decidable-Cantor)
 ```
 
 ### Cantor's theorem for the set of double negation stable subtypes

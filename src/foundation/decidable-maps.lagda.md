@@ -284,6 +284,17 @@ module _
 
 ### Decidable maps have Hilbert ε-operators
 
+A decidable map `f` induces "eliminators" on the propositional truncations of
+its fibers
+
+```text
+ ε : (x : A) → ║ fiber f x ║₋₁ → fiber f x.
+```
+
+Such "eliminators" are called
+[Hilbert ε-operators](foundation.hilbert-epsilon-operators-maps.md), or _split
+supports_.
+
 ```agda
 ε-operator-map-is-decidable-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →

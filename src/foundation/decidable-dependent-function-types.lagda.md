@@ -105,10 +105,10 @@ is-decidable-Π-Maybe {B = B} du de =
     ( is-decidable-product du de)
 ```
 
-### Dependent products of decidable propositions over a base with mere equality are decidable propositions
+### Dependent products of decidable propositions over a base with all elements merely equal are decidable propositions
 
-Assuming the base `A` is empty or 0-connected, a dependent product of decidable
-propositions over `A` is again a decidable proposition.
+Assuming that all elements are merely equal in a type `A` then a dependent
+product of decidable propositions over `A` is again a decidable proposition.
 
 ```agda
 module _
