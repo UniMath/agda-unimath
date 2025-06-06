@@ -38,7 +38,7 @@ come [equipped](foundation.structure.md) with a map
   (y : B) → ¬¬ (fiber f y) → ║ fiber f y ║₋₁.
 ```
 
-## Definintion
+## Definitions
 
 ### Propositional double negation elimination on a map
 
