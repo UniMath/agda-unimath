@@ -7,9 +7,14 @@ module foundation.decidable-dependent-function-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.decidable-propositions
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.irrefutable-equality
 open import foundation.maybe
+open import foundation.mere-equality
+open import foundation.propositions
 open import foundation.uniformly-decidable-type-families
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-maybe
@@ -19,7 +24,8 @@ open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.negation
+
+open import logic.propositionally-decidable-types
 ```
 
 </details>
@@ -46,6 +52,29 @@ is-decidable-Π-uniformly-decidable-family (inl a) (inr b) =
   inr (λ f → b a (f a))
 is-decidable-Π-uniformly-decidable-family (inr na) _ =
   inl (ex-falso ∘ na)
+
+abstract
+  is-decidable-prop-Π-uniformly-decidable-family :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    is-decidable A →
+    is-uniformly-decidable-family B →
+    ((x : A) → is-prop (B x)) →
+    is-decidable-prop ((a : A) → (B a))
+  is-decidable-prop-Π-uniformly-decidable-family dA dB H =
+    ( is-prop-Π H , is-decidable-Π-uniformly-decidable-family dA dB)
+
+abstract
+  is-decidable-prop-Π-uniformly-decidable-family' :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    is-inhabited-or-empty A →
+    is-uniformly-decidable-family B →
+    ((x : A) → is-prop (B x)) →
+    is-decidable-prop ((a : A) → (B a))
+  is-decidable-prop-Π-uniformly-decidable-family' {A = A} {B} dA dB H =
+    elim-is-inhabited-or-empty-Prop'
+      ( is-decidable-prop-Prop ((a : A) → (B a)))
+      ( λ d → is-decidable-prop-Π-uniformly-decidable-family d dB H)
+      ( dA)
 ```
 
 ### Decidablitilty of dependent products over coproducts
@@ -74,6 +103,53 @@ is-decidable-Π-Maybe {B = B} du de =
   is-decidable-equiv
     ( equiv-dependent-universal-property-Maybe B)
     ( is-decidable-product du de)
+```
+
+### Dependent products of decidable propositions over a base with all elements merely equal are decidable propositions
+
+Assuming that all elements are merely equal in a type `A` then a dependent
+product of decidable propositions over `A` is again a decidable proposition.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → Decidable-Prop l2)
+  where
+
+  is-decidable-Π-all-elements-merely-equal-base :
+    all-elements-merely-equal A →
+    is-decidable A →
+    is-decidable ((x : A) → type-Decidable-Prop (B x))
+  is-decidable-Π-all-elements-merely-equal-base H dA =
+    is-decidable-Π-uniformly-decidable-family dA
+      ( is-uniformly-decidable-family-all-elements-merely-equal-base
+        ( H)
+        ( λ x → is-decidable-Decidable-Prop (B x))
+        ( dA))
+
+  is-decidable-prop-Π-all-elements-merely-equal-base :
+    all-elements-merely-equal A →
+    is-decidable A →
+    is-decidable-prop ((x : A) → type-Decidable-Prop (B x))
+  is-decidable-prop-Π-all-elements-merely-equal-base H dA =
+    is-decidable-prop-Π-uniformly-decidable-family dA
+      ( is-uniformly-decidable-family-all-elements-merely-equal-base
+        ( H)
+        ( λ x → is-decidable-Decidable-Prop (B x))
+        ( dA))
+      ( λ x → is-prop-type-Decidable-Prop (B x))
+
+  is-decidable-prop-Π-all-elements-merely-equal-base' :
+    all-elements-merely-equal A →
+    is-inhabited-or-empty A →
+    is-decidable-prop ((x : A) → type-Decidable-Prop (B x))
+  is-decidable-prop-Π-all-elements-merely-equal-base' H dA =
+    is-decidable-prop-Π-uniformly-decidable-family' dA
+      ( is-uniformly-decidable-family-all-elements-merely-equal-base'
+        ( H)
+        ( λ x → is-decidable-Decidable-Prop (B x))
+        ( dA)
+        ( λ x → is-prop-type-Decidable-Prop (B x)))
+      ( λ x → is-prop-type-Decidable-Prop (B x))
 ```
 
 ### Decidability of dependent products over an equivalence
