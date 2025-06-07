@@ -31,8 +31,14 @@ open import foundation-core.sets
 
 ## Idea
 
-Two elements in a type are said to be merely equal if there is an element of the
-propositionally truncated identity type between them.
+Two elements `x` and `y` in a type `A` are said to be
+{{#concept "merely equal" Agda=mere-eq}} if there is an element of the
+[propositionally truncated](foundation.propositional-truncations.md)
+[identity type](foundation-core.identity-types.md) between them.
+
+```text
+ ║ x ＝ y ║₋₁
+```
 
 ## Definitions
 
@@ -96,10 +102,8 @@ abstract
 ```agda
 mere-eq-equivalence-relation :
   {l1 : Level} (A : UU l1) → equivalence-relation l1 A
-pr1 (mere-eq-equivalence-relation A) = mere-eq-Prop
-pr1 (pr2 (mere-eq-equivalence-relation A)) = refl-mere-eq
-pr1 (pr2 (pr2 (mere-eq-equivalence-relation A))) = symmetric-mere-eq
-pr2 (pr2 (pr2 (mere-eq-equivalence-relation A))) = transitive-mere-eq
+mere-eq-equivalence-relation A =
+  ( mere-eq-Prop , refl-mere-eq , symmetric-mere-eq , transitive-mere-eq)
 ```
 
 ### Any map into a set reflects mere equality
@@ -133,7 +137,8 @@ is-set-mere-eq-in-id =
 ```
 
 In other words, if equality on `A` has an
-[ε-operator](foundation.hilberts-epsilon-operators.md), then `A` is a set.
+[ε-operator](foundation.hilberts-epsilon-operators.md), or "split support", then
+`A` is a set.
 
 ### Retracts of types with merely equal elements
 

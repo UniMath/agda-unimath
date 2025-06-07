@@ -145,6 +145,7 @@ open import foundation.disjoint-subtypes public
 open import foundation.disjunction public
 open import foundation.double-arrows public
 open import foundation.double-negation public
+open import foundation.double-negation-dense-equality public
 open import foundation.double-negation-dense-equality-maps public
 open import foundation.double-negation-images public
 open import foundation.double-negation-modality public

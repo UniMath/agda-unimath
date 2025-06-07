@@ -43,9 +43,49 @@ open import logic.double-negation-stable-embeddings
 
 The
 {{#concept "double negation image" Disambiguation="of a map" Agda=double-negation-im}}
-of `f : A → B` is the essentially unique type that factorizes `f` as a
-[double negation dense map](logic.double-negation-dense-maps.md) followed by a
+of `f : A → B` is the essentially unique type that
+[factorizes](orthogonal-factorization-systems.factorizations-of-maps.md) `f` as
+a [double negation dense map](logic.double-negation-dense-maps.md) followed by a
 [double negation stable embedding](logic.double-negation-stable-embeddings.md).
+I.e., the double negation image `im'f` of `f` fits into a commuting triangle
+
+```text
+         im'f
+        ∧    \
+    l /        \ r
+    /      f     ∨
+  A -------------> B
+```
+
+such that `l` is double negation dense, i.e., its
+[fibers](foundation-core.fibers-of-maps.md) are
+[nonempty](foundation.double-negation.md), and `r` is a double negation stable
+embedding, i.e., its fibers are [propositions](foundation-core.propositions.md)
+and satisfy the property that if they are nonempty then they are inhabited.
+
+This factorization is unique in the sense that any other commuting triangle
+
+```text
+          X
+        ∧   \
+    l'/       \ r'
+    /     f     ∨
+  A ------------> B
+```
+
+is uniquely equivalent to the double negation image factorization in a coherent
+manner. This is a direct consequence of the fact that double negation is a
+modality, which is shown in
+[`foundation.double-negation-modality`](foundation.double-negation-modality.md).
+
+The double negation image factorization is in one sense an approximation to the
+[image factorization](foundation.images.md) which satisfies a restricted
+universal property that only applies to
+[negative statements](foundation-core.negation.md) and does not rely on the
+existence of
+[propositional truncations](foundation.propositional-truncations.md). On the
+other hand, the double negation image inclusion `r` satisfies the additional
+property of being double negation stable, compared to the image inclusion.
 
 ## Definitions
 
@@ -234,8 +274,8 @@ abstract
   is-prop-double-negation-im = is-trunc-double-negation-im neg-two-𝕋
 
 double-negation-im-Prop :
-  {l1 l2 : Level} (X : Prop l1) {A : UU l2}
-  (f : A → type-Prop X) → Prop (l1 ⊔ l2)
+  {l1 l2 : Level} (X : Prop l1) {A : UU l2} →
+  (A → type-Prop X) → Prop (l1 ⊔ l2)
 double-negation-im-Prop = double-negation-im-Truncated-Type neg-two-𝕋
 ```
 
@@ -249,8 +289,8 @@ abstract
   is-set-double-negation-im = is-trunc-double-negation-im neg-one-𝕋
 
 double-negation-im-Set :
-  {l1 l2 : Level} (X : Set l1) {A : UU l2}
-  (f : A → type-Set X) → Set (l1 ⊔ l2)
+  {l1 l2 : Level} (X : Set l1) {A : UU l2} →
+  (A → type-Set X) → Set (l1 ⊔ l2)
 double-negation-im-Set = double-negation-im-Truncated-Type neg-one-𝕋
 ```
 

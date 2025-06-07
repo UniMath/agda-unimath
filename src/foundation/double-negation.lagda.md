@@ -18,9 +18,11 @@ open import foundation-core.propositions
 
 </details>
 
-## Definition
+## Idea
 
-We define double negation and triple negation
+We define double negation and triple negation.
+
+## Definitions
 
 ```agda
 infix 25 ¬¬_ ¬¬¬_

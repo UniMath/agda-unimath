@@ -102,8 +102,14 @@ module _
 ### Composition of decidable families
 
 Given a decidable family of types with double negation dense equality
-`P : A → 𝒰` and a decidable type family `Q : (x : A) → P x → 𝒰` then we may
-_compose_ `Q` after `P` and obtain a decidable type family `Q ∘ P : A → 𝒰`.
+`P : A → 𝒰` and a decidable type family `Q : (x : A) → P x → 𝒰` then, via
+[type duality](foundation.type-duality.md) we may _compose_ `Q` after `P` and
+obtain a decidable type family `Q ∘ P : A → 𝒰`, defined on elements as
+[dependent pair types](foundation.dependent-pair-types.md).
+
+```text
+  (Q ∘ P) x := Σ (y : P x), (Q x y).
+```
 
 ```agda
 module _
