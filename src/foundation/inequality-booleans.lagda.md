@@ -148,7 +148,7 @@ bool-Total-Order = (bool-Poset , is-total-leq-bool)
 bool-Decidable-Total-Order : Decidable-Total-Order lzero lzero
 bool-Decidable-Total-Order =
   ( bool-Poset ,
-    ( is-total-leq-bool) ,
+    is-total-leq-bool ,
     ( λ x y → is-decidable-Decidable-Prop (leq-bool-Decidable-Prop x y)))
 ```
 
