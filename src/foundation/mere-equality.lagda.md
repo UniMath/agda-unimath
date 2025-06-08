@@ -57,7 +57,7 @@ module _
   is-prop-mere-eq x y = is-prop-type-trunc-Prop
 ```
 
-### Types whose elements are merely equal
+### Types whose elements are all merely equal
 
 ```agda
 all-elements-merely-equal : {l : Level} → UU l → UU l
