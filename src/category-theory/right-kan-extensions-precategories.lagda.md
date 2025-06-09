@@ -28,10 +28,17 @@ of [functor](category-theory.functors-precategories.md) `F : C → D` between
 [precategories](category-theory.precategories.md) along another functor
 `p : C → C'` is the universal
 [right extension](category-theory.right-extensions-precategories.md) of `F`
-along `p`.
+along `p`. That is, `(R, α)` is a right Kan extension if for every other right
+extension `(G, β)` there is a unique natural transformation `γ : G ⇒ R` such
+that `α ∘ γ = β`. In particular, `(R, α)` is terminal in the category of right
+extensions of `F` along `p`.
 
 More concretely, we require the function `right-extension-map-Precategory` to be
 an equivalence.
+
+See also
+[left Kan extension](category-theory.left-kan-extensions-precategories.md) for
+the dual concept.
 
 ## Definition
 

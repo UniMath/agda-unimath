@@ -28,10 +28,17 @@ of [functor](category-theory.functors-precategories.md) `F : C → D` between
 [precategories](category-theory.precategories.md) along another functor
 `p : C → C'` is the universal
 [left extension](category-theory.left-extensions-precategories.md) of `F` along
-`p`.
+`p`. That is, `(L, α)` is a left Kan extension if for every other left extension
+`(G, β)` there is a unique natural transformation `γ : L ⇒ G` such that
+`γ ∘ α = β`. In particular, `(L, α)` is initial in the category of left
+extensions of `F` along `p`.
 
 More concretely, we require the function `left-extension-map-Precategory` to be
 an equivalence.
+
+See also
+[right Kan extension](category-theory.right-kan-extensions-precategories.md) for
+the dual concept.
 
 ## Definition
 

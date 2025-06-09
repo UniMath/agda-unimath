@@ -52,16 +52,17 @@ of a [functor](category-theory.functors-precategories.md) `F : C → D` between
 `φ : F → G ∘ p`.
 
 ```text
-  C
-  |  \
-  p    F
-  |      \
-  ∨        ∨
-  C' - G -> D
+    C
+    |  \
+  p |    \ F
+    |      \
+    ∨        ∨
+    C' -----> D
+         G
 ```
 
 We note that this is not a standard definition, but it inspired by the notion of
-a [left kan extension](category-theory.left-kan-extensions-precategories.md).
+a [left Kan extension](category-theory.left-kan-extensions-precategories.md).
 
 ## Definition
 
