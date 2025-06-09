@@ -395,7 +395,14 @@ module _
       ( comp-functor-Precategory E C D F K)
       ( comp-functor-Precategory E C D G K)
   right-whisker-natural-transformation-Precategory F G α K =
-    (λ x → (pr1 α) ((pr1 K) x)) , (λ f → (pr2 α) ((pr1 (pr2 K)) f))
+    ( λ x →
+      hom-family-natural-transformation-Precategory C D F G
+        ( α)
+        ( obj-functor-Precategory E C K x)) ,
+    ( λ f →
+      naturality-natural-transformation-Precategory C D F G
+        ( α)
+        ( hom-functor-Precategory E C K f))
 
   preserves-comp-right-whisker-natural-transformation-Precategory :
     (F G H : functor-Precategory C D)
@@ -455,69 +462,4 @@ module _
       ( comp-functor-Precategory C D E I G)
       ( right-whisker-natural-transformation-Precategory D E C H I β G)
       ( left-whisker-natural-transformation-Precategory C D E F G H α)
-```
-
-## Categorical laws for functor composition
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (C : Precategory l1 l2) (D : Precategory l3 l4)
-  (F : functor-Precategory C D)
-  where
-
-  left-unit-law-natural-transformation-comp-functor-Precategory :
-    natural-transformation-Precategory C D
-      ( comp-functor-Precategory C D D (id-functor-Precategory D) F)
-      ( F)
-  pr1 left-unit-law-natural-transformation-comp-functor-Precategory x =
-    id-hom-Precategory D
-  pr2 left-unit-law-natural-transformation-comp-functor-Precategory f =
-    ( right-unit-law-comp-hom-Precategory D _) ∙
-    ( inv (left-unit-law-comp-hom-Precategory D _))
-
-  right-unit-law-natural-transformation-comp-functor-Precategory :
-    natural-transformation-Precategory C D
-      ( comp-functor-Precategory C C D F (id-functor-Precategory C))
-      ( F)
-  pr1 right-unit-law-natural-transformation-comp-functor-Precategory x =
-    id-hom-Precategory D
-  pr2 right-unit-law-natural-transformation-comp-functor-Precategory f =
-    ( right-unit-law-comp-hom-Precategory D _) ∙
-    ( inv (left-unit-law-comp-hom-Precategory D _))
-
-module _
-  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
-  (A : Precategory l1 l2) (B : Precategory l3 l4)
-  (C : Precategory l5 l6) (D : Precategory l7 l8)
-  (F : functor-Precategory A B) (G : functor-Precategory B C)
-  (H : functor-Precategory C D)
-  where
-
-  associative-natural-transformation-comp-functor-Precategory :
-    natural-transformation-Precategory A D
-      ( comp-functor-Precategory A B D
-        ( comp-functor-Precategory B C D H G)
-        ( F))
-      ( comp-functor-Precategory A C D
-        ( H)
-        ( comp-functor-Precategory A B C G F))
-  pr1 associative-natural-transformation-comp-functor-Precategory x =
-    id-hom-Precategory D
-  pr2 associative-natural-transformation-comp-functor-Precategory f =
-    ( right-unit-law-comp-hom-Precategory D _) ∙
-    ( inv (left-unit-law-comp-hom-Precategory D _))
-
-  associative-natural-transformation-comp-functor-Precategory' :
-    natural-transformation-Precategory A D
-      ( comp-functor-Precategory A C D
-        ( H)
-        ( comp-functor-Precategory A B C G F))
-      ( comp-functor-Precategory A B D
-        ( comp-functor-Precategory B C D H G)
-        ( F))
-  pr1 associative-natural-transformation-comp-functor-Precategory' x =
-    id-hom-Precategory D
-  pr2 associative-natural-transformation-comp-functor-Precategory' f =
-    ( right-unit-law-comp-hom-Precategory D _) ∙
-    ( inv (left-unit-law-comp-hom-Precategory D _))
 ```
