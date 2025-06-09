@@ -25,16 +25,19 @@ open import category-theory.category-of-functors public
 open import category-theory.category-of-functors-from-small-to-large-categories public
 open import category-theory.category-of-maps-categories public
 open import category-theory.category-of-maps-from-small-to-large-categories public
+open import category-theory.coalgebras-comonads-on-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-large-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-set-magmoids public
 open import category-theory.commuting-triangles-of-morphisms-in-precategories public
 open import category-theory.commuting-triangles-of-morphisms-in-set-magmoids public
+open import category-theory.comonads-on-precategories public
 open import category-theory.complete-precategories public
 open import category-theory.composition-operations-on-binary-families-of-sets public
 open import category-theory.cones-precategories public
 open import category-theory.conservative-functors-precategories public
 open import category-theory.constant-functors public
+open import category-theory.copointed-endofunctors-precategories public
 open import category-theory.copresheaf-categories public
 open import category-theory.coproducts-in-precategories public
 open import category-theory.cores-categories public
@@ -111,6 +114,7 @@ open import category-theory.monads-on-categories public
 open import category-theory.monads-on-precategories public
 open import category-theory.monomorphisms-in-large-precategories public
 open import category-theory.morphisms-algebras-monads-on-precategories public
+open import category-theory.morphisms-coalgebras-comonads-on-precategories public
 open import category-theory.natural-isomorphisms-functors-categories public
 open import category-theory.natural-isomorphisms-functors-large-precategories public
 open import category-theory.natural-isomorphisms-functors-precategories public
@@ -137,6 +141,7 @@ open import category-theory.pointed-endofunctors-categories public
 open import category-theory.pointed-endofunctors-precategories public
 open import category-theory.precategories public
 open import category-theory.precategory-of-algebras-monads-on-precategories public
+open import category-theory.precategory-of-coalgebras-comonads-on-precategories public
 open import category-theory.precategory-of-elements-of-a-presheaf public
 open import category-theory.precategory-of-free-algebras-monads-on-precategories public
 open import category-theory.precategory-of-functors public

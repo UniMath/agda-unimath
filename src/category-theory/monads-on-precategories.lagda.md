@@ -116,9 +116,9 @@ module _
         ( comp-functor-Precategory C C C
           ( functor-pointed-endofunctor-Precategory C T)
           ( functor-pointed-endofunctor-Precategory C T))
-          ( functor-pointed-endofunctor-Precategory C T)
-          ( μ)
-          ( functor-pointed-endofunctor-Precategory C T))
+        ( functor-pointed-endofunctor-Precategory C T)
+        ( μ)
+        ( functor-pointed-endofunctor-Precategory C T))
 
   associative-mul-hom-family-pointed-endofunctor-Precategory : UU (l1 ⊔ l2)
   associative-mul-hom-family-pointed-endofunctor-Precategory =
