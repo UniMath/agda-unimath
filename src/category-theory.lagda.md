@@ -26,6 +26,8 @@ open import category-theory.category-of-functors-from-small-to-large-categories 
 open import category-theory.category-of-maps-categories public
 open import category-theory.category-of-maps-from-small-to-large-categories public
 open import category-theory.coalgebras-comonads-on-precategories public
+open import category-theory.cocones-precategories public
+open import category-theory.colimits-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-large-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-set-magmoids public
@@ -104,6 +106,8 @@ open import category-theory.large-function-precategories public
 open import category-theory.large-precategories public
 open import category-theory.large-subcategories public
 open import category-theory.large-subprecategories public
+open import category-theory.left-extensions-precategories public
+open import category-theory.left-kan-extensions-precategories public
 open import category-theory.limits-precategories public
 open import category-theory.maps-categories public
 open import category-theory.maps-from-small-to-large-categories public
