@@ -61,7 +61,7 @@ of a [functor](category-theory.functors-precategories.md) `F : C → D` between
          G
 ```
 
-We note that this is not a standard definition, but it inspired by the notion of
+We note that this is not a standard definition, but is inspired by the notion of
 a [left Kan extension](category-theory.left-kan-extensions-precategories.md).
 
 ## Definition
@@ -249,3 +249,8 @@ module _
   eq-htpy-left-extension-Precategory R S =
     map-inv-equiv (equiv-htpy-eq-left-extension-Precategory R S)
 ```
+
+## See also
+
+- [Right extensions](category-theory.right-extensions-precategories.md) for the
+  dual concept.

@@ -36,10 +36,6 @@ extensions of `F` along `p`.
 More concretely, we require the function `right-extension-map-Precategory` to be
 an equivalence.
 
-See also
-[left Kan extension](category-theory.left-kan-extensions-precategories.md) for
-the dual concept.
-
 ## Definition
 
 ```agda
@@ -99,3 +95,8 @@ module _
     natural-transformation-right-extension-Precategory C C' D p F
       right-extension-right-kan-extension-Precategory
 ```
+
+## See also
+
+- [Left Kan extensions](category-theory.left-kan-extensions-precategories.md)
+  for the dual concept.

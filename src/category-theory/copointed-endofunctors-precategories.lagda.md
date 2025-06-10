@@ -1,4 +1,4 @@
-# Copointed endofunctors
+# Copointed endofunctors on precategories
 
 ```agda
 module category-theory.copointed-endofunctors-precategories where
@@ -140,3 +140,8 @@ module _
         ( id-functor-Precategory C)
         ( copointing-copointed-endofunctor-Precategory)
 ```
+
+## See also
+
+- [Pointed endofunctors](category-theory.pointed-endofunctors-precategories.md)
+  for the dual concept.

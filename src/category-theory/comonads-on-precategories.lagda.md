@@ -446,3 +446,8 @@ module _
         ( endofunctor-comonad-Precategory)
         ( right-counit-law-comul-comonad-Precategory)
 ```
+
+## See also
+
+- [Monads](category-theory.monads-on-precategories.lagda.md) for the dual
+  concept.

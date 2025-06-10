@@ -41,34 +41,36 @@ an object `A` and morphism `a : A → TA` satisfying two compatibility laws:
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
   (T : comonad-Precategory C)
+  {A : obj-Precategory C}
+  (a : hom-Precategory C A (obj-endofunctor-comonad-Precategory C T A))
   where
 
-  module _
-    {A : obj-Precategory C}
-    (a : hom-Precategory C A (obj-endofunctor-comonad-Precategory C T A))
-    where
+  has-counit-law-coalgebra-comonad-Precategory : UU l2
+  has-counit-law-coalgebra-comonad-Precategory =
+    comp-hom-Precategory C (hom-counit-comonad-Precategory C T A) a ＝
+    id-hom-Precategory C
 
-    has-counit-law-coalgebra-comonad-Precategory : UU l2
-    has-counit-law-coalgebra-comonad-Precategory =
-      comp-hom-Precategory C (hom-counit-comonad-Precategory C T A) a ＝
-      id-hom-Precategory C
+  has-comul-law-coalgebra-comonad-Precategory : UU l2
+  has-comul-law-coalgebra-comonad-Precategory =
+    comp-hom-Precategory C (hom-endofunctor-comonad-Precategory C T a) a ＝
+    comp-hom-Precategory C (hom-comul-comonad-Precategory C T A) a
 
-    has-comul-law-coalgebra-comonad-Precategory : UU l2
-    has-comul-law-coalgebra-comonad-Precategory =
-      comp-hom-Precategory C (hom-endofunctor-comonad-Precategory C T a) a ＝
-      comp-hom-Precategory C (hom-comul-comonad-Precategory C T A) a
+  is-coalgebra-comonad-Precategory : UU l2
+  is-coalgebra-comonad-Precategory =
+    has-counit-law-coalgebra-comonad-Precategory ×
+    has-comul-law-coalgebra-comonad-Precategory
 
-    is-coalgebra-comonad-Precategory : UU l2
-    is-coalgebra-comonad-Precategory =
-      has-counit-law-coalgebra-comonad-Precategory ×
-      has-comul-law-coalgebra-comonad-Precategory
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  (T : comonad-Precategory C)
+  where
 
   coalgebra-comonad-Precategory : UU (l1 ⊔ l2)
   coalgebra-comonad-Precategory =
     Σ ( obj-Precategory C)
       ( λ A →
         Σ ( hom-Precategory C A (obj-endofunctor-comonad-Precategory C T A))
-          ( λ a → is-coalgebra-comonad-Precategory a))
+          ( λ a → is-coalgebra-comonad-Precategory C T a))
 
   obj-coalgebra-comonad-Precategory :
     coalgebra-comonad-Precategory → obj-Precategory C
@@ -84,18 +86,18 @@ module _
 
   comm-coalgebra-comonad-Precategory :
     (f : coalgebra-comonad-Precategory) →
-    is-coalgebra-comonad-Precategory (hom-coalgebra-comonad-Precategory f)
+    is-coalgebra-comonad-Precategory C T (hom-coalgebra-comonad-Precategory f)
   comm-coalgebra-comonad-Precategory f = pr2 (pr2 f)
 
   counit-law-coalgebra-comonad-Precategory :
     (f : coalgebra-comonad-Precategory) →
-    has-counit-law-coalgebra-comonad-Precategory
+    has-counit-law-coalgebra-comonad-Precategory C T
       ( hom-coalgebra-comonad-Precategory f)
   counit-law-coalgebra-comonad-Precategory f = pr1 (pr2 (pr2 f))
 
   comul-law-coalgebra-comonad-Precategory :
     (f : coalgebra-comonad-Precategory) →
-    has-comul-law-coalgebra-comonad-Precategory
+    has-comul-law-coalgebra-comonad-Precategory C T
       ( hom-coalgebra-comonad-Precategory f)
   comul-law-coalgebra-comonad-Precategory f = pr2 (pr2 (pr2 f))
 ```

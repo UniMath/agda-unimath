@@ -249,3 +249,8 @@ module _
   eq-htpy-right-extension-Precategory R S =
     map-inv-equiv (equiv-htpy-eq-right-extension-Precategory R S)
 ```
+
+## See also
+
+- [Left extensions](category-theory.left-extensions-precategories.md) for the
+  dual concept.
