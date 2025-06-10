@@ -16,7 +16,6 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
-open import foundation.sets
 open import foundation.uniqueness-quantification
 open import foundation.universe-levels
 ```
@@ -156,39 +155,4 @@ module _
     morphism-out-of-coproduct-obj-Precategory C t _ _ _
       (comp-hom-Precategory C (inl-coproduct-obj-Precategory C t y₁ y₂) f)
       (comp-hom-Precategory C (inr-coproduct-obj-Precategory C t y₁ y₂) g)
-```
-
-```agda
-module _
-  {l1 l2 : Level} (C : Precategory l1 l2)
-  where
-
-  is-coproduct-set-obj-Precategory :
-    {l : Level} (S : Set l)
-    (I : type-Set S → obj-Precategory C) →
-    (c : obj-Precategory C)
-    (ι : (i : type-Set S) → hom-Precategory C (I i) c) →
-    UU (l1 ⊔ l2 ⊔ l)
-  is-coproduct-set-obj-Precategory S I c ι =
-    (z : obj-Precategory C) →
-    (f : (i : type-Set S) → hom-Precategory C (I i) z) →
-    ( uniquely-exists-structure
-      ( hom-Precategory C c z)
-      ( λ h →
-        (i : type-Set S) →
-        ( comp-hom-Precategory C h (ι i)) ＝ f i))
-
-  coproduct-set-obj-Precategory :
-    {l : Level} (S : Set l)
-    (I : type-Set S → obj-Precategory C) →
-    UU (l1 ⊔ l2 ⊔ l)
-  coproduct-set-obj-Precategory S I =
-    Σ (obj-Precategory C) λ c →
-    Σ ((i : type-Set S) → hom-Precategory C (I i) c) λ ι →
-      is-coproduct-set-obj-Precategory S I c ι
-
-  has-all-coproducts-Precategory : (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
-  has-all-coproducts-Precategory l =
-    (S : Set l) (I : type-Set S → obj-Precategory C) →
-    coproduct-set-obj-Precategory S I
 ```
