@@ -120,21 +120,21 @@ module _
       morphism-into-pullback-obj-Precategory (opposite-Precategory C)
         t x y z f g w' i₁' i₂' α
 
-    comm-morphism-into-inl-pushout-obj-Precategory :
+    comm-morphism-from-inl-pushout-obj-Precategory :
       comp-hom-Precategory C
         morphism-from-pushout-obj-Precategory
         inl-pushout-obj-Precategory ＝
       i₁'
-    comm-morphism-into-inl-pushout-obj-Precategory =
+    comm-morphism-from-inl-pushout-obj-Precategory =
       comm-morphism-into-pr1-pullback-obj-Precategory (opposite-Precategory C)
         t x y z f g w' i₁' i₂' α
 
-    comm-morphism-into-inr-pushout-obj-Precategory :
+    comm-morphism-from-inr-pushout-obj-Precategory :
       comp-hom-Precategory C
         morphism-from-pushout-obj-Precategory
         inr-pushout-obj-Precategory ＝
       i₂'
-    comm-morphism-into-inr-pushout-obj-Precategory =
+    comm-morphism-from-inr-pushout-obj-Precategory =
       comm-morphism-into-pr2-pullback-obj-Precategory (opposite-Precategory C)
         t x y z f g w' i₁' i₂' α
 
