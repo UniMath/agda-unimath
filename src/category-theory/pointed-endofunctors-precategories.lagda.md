@@ -142,5 +142,5 @@ module _
 
 ## See also
 
-- [Coointed endofunctors](category-theory.copointed-endofunctors-precategories.md)
+- [Copointed endofunctors](category-theory.copointed-endofunctors-precategories.md)
   for the dual concept.

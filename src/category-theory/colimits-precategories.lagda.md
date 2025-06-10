@@ -63,16 +63,16 @@ module _
   (F : functor-Precategory C D)
   where
 
-  is-colimiting-cocone-Precategory :
+  is-colimit-cocone-Precategory :
     cocone-Precategory C D F → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-colimiting-cocone-Precategory τ =
+  is-colimit-cocone-Precategory τ =
     (d : obj-Precategory D) →
     is-equiv (cocone-map-Precategory C D F τ d)
 
   colimit-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   colimit-Precategory =
     Σ ( cocone-Precategory C D F)
-      ( is-colimiting-cocone-Precategory)
+      ( is-colimit-cocone-Precategory)
 
   cocone-colimit-Precategory :
     colimit-Precategory →
@@ -85,10 +85,10 @@ module _
   vertex-colimit-Precategory τ =
     vertex-cocone-Precategory C D F (cocone-colimit-Precategory τ)
 
-  is-colimiting-colimit-Precategory :
+  is-colimit-colimit-Precategory :
     (τ : colimit-Precategory) →
-    is-colimiting-cocone-Precategory (cocone-colimit-Precategory τ)
-  is-colimiting-colimit-Precategory = pr2
+    is-colimit-cocone-Precategory (cocone-colimit-Precategory τ)
+  is-colimit-colimit-Precategory = pr2
 
   hom-cocone-colimit-Precategory :
     (τ : colimit-Precategory) →
@@ -98,7 +98,7 @@ module _
       ( vertex-cocone-Precategory C D F φ)
   hom-cocone-colimit-Precategory τ φ =
     map-inv-is-equiv
-      ( is-colimiting-colimit-Precategory τ
+      ( is-colimit-colimit-Precategory τ
         ( vertex-cocone-Precategory C D F φ))
       ( natural-transformation-cocone-Precategory C D F φ)
 ```
@@ -153,10 +153,10 @@ module _
   (F : functor-Precategory C D)
   where
 
-  is-prop-is-colimiting-cocone-Precategory :
+  is-prop-is-colimit-cocone-Precategory :
     (τ : cocone-Precategory C D F) →
-    is-prop (is-colimiting-cocone-Precategory C D F τ)
-  is-prop-is-colimiting-cocone-Precategory τ =
+    is-prop (is-colimit-cocone-Precategory C D F τ)
+  is-prop-is-colimit-cocone-Precategory τ =
     is-prop-Π λ φ → is-property-is-equiv _
 
   is-prop-is-colimit-Precategory' :
@@ -175,13 +175,13 @@ module _
   (F : functor-Precategory C D)
   where
 
-  equiv-is-left-kan-extension-is-colimiting-Precategory :
+  equiv-is-left-kan-extension-is-colimit-Precategory :
     (τ : cocone-Precategory C D F) →
-    is-colimiting-cocone-Precategory C D F τ ≃
+    is-colimit-cocone-Precategory C D F τ ≃
       is-left-kan-extension-Precategory C terminal-Precategory D
       (terminal-functor-Precategory C) F
       (map-equiv (equiv-left-extension-cocone-Precategory C D F) τ)
-  equiv-is-left-kan-extension-is-colimiting-Precategory τ =
+  equiv-is-left-kan-extension-is-colimit-Precategory τ =
     equiv-Π _
       ( equiv-point-Precategory D)
       ( λ x →
@@ -239,7 +239,7 @@ module _
       ( is-left-kan-extension-Precategory C terminal-Precategory D
         ( terminal-functor-Precategory C) F)
       ( equiv-left-extension-cocone-Precategory C D F)
-      ( λ τ → equiv-is-left-kan-extension-is-colimiting-Precategory τ)
+      ( λ τ → equiv-is-left-kan-extension-is-colimit-Precategory τ)
 
   colimit-colimit'-Precategory :
     colimit-Precategory C D F → colimit-Precategory' C D F

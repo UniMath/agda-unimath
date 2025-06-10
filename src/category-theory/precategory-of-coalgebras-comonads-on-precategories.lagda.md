@@ -1,4 +1,4 @@
-# The precategory of coalgebras of a comonad
+# The precategory of coalgebras over a comonad
 
 ```agda
 module category-theory.precategory-of-coalgebras-comonads-on-precategories where
@@ -35,8 +35,8 @@ open import foundation-core.transport-along-identifications
 ## Idea
 
 The
-{{#concept "precategory of coalgebras" Disambiguation="of a comonad on a precategory" Agda=coalgebras-comonad-Precategory}}
-of a [comonad on a precategory](category-theory.comonads-on-precategories.md)
+{{#concept "precategory of coalgebras" Disambiguation="over a comonad on a precategory" Agda=coalgebras-comonad-Precategory}}
+over a [comonad on a precategory](category-theory.comonads-on-precategories.md)
 `T`, denoted `EM(T)`, also called the **Eilenberg–Moore precategory**, consists
 of all `T`-coalgebras and `T`-coalgebra morphisms. It comes with an adjunction
 `EM(T) ⇄ C`.
