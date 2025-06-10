@@ -175,5 +175,4 @@ module _
 
 ## See also
 
-- [Pushouts](category-theory.pushouts-in-precategories.md) for the dual
-  concept.
+- [Pushouts](category-theory.pushouts-in-precategories.md) for the dual concept.

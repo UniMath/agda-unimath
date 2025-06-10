@@ -449,5 +449,4 @@ module _
 
 ## See also
 
-- [Monads](category-theory.monads-on-precategories.md) for the dual
-  concept.
+- [Monads](category-theory.monads-on-precategories.md) for the dual concept.

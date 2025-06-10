@@ -7,9 +7,9 @@ module category-theory.pushouts-in-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.opposite-precategories
 open import category-theory.precategories
 open import category-theory.pullbacks-in-precategories
-open import category-theory.opposite-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -32,18 +32,21 @@ of two morphisms `f : hom x y` and `g : hom x z` in a category `C` consists of:
 
 - an object `w`
 - morphisms `i₁ : hom y w` and `i₂ : hom z w` such that
-- `i₁ ∘ f` = i₂ ∘ g`` together with the universal property that for every object
-  `w'` and pair of morphisms `i₁' : hom y w'` and `i₂' : hom z w'` such that
-  `i₁' ∘ f = i₂' ∘ g` there exists a unique morphism `h : hom w w'` such that
+- `i₁ ∘ f = i₂ ∘ g` together with the universal property that for every
+  object`w'` and pair of morphisms `i₁' : hom y w'` and `i₂' : hom z w'` such
+  that `i₁' ∘ f = i₂' ∘ g` there exists a unique morphism `h : hom w w'` such
+  that
 - `h ∘ i₁ = i₁'`
 - `h ∘ i₂ = i₂'`.
 
 We say that `C`
 {{#concept "has all pushouts" Disambiguation="precategory" Agda=has-all-pushout-obj-Precategory}}
-if there is a choice of a pushout for each object `x` and pair of morphisms
-out of `x` in `C`.
+if there is a choice of a pushout for each object `x` and pair of morphisms out
+of `x` in `C`.
 
-All definitions here are defined in terms of pullbacks in the [opposite precategory](category-theory.opposite-precategories.md); see [pullbacks](category-theory.pullbacks-in-precategories.md) for details.
+All definitions here are defined in terms of pullbacks in the
+[opposite precategory](category-theory.opposite-precategories.md); see
+[pullbacks](category-theory.pullbacks-in-precategories.md) for details.
 
 ## Definition
 
@@ -168,4 +171,5 @@ module _
 
 ## See also
 
-- [Pullbacks](category-theory.pullbacks-in-precategories.md) for the dual concept.
+- [Pullbacks](category-theory.pullbacks-in-precategories.md) for the dual
+  concept.

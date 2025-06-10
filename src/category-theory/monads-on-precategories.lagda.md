@@ -443,5 +443,4 @@ module _
 
 ## See also
 
-- [Comonads](category-theory.comonads-on-precategories.md) for the dual
-  concept.
+- [Comonads](category-theory.comonads-on-precategories.md) for the dual concept.
