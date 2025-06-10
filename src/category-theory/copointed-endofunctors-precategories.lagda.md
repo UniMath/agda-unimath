@@ -25,8 +25,8 @@ An [endofunctor](category-theory.functors-precategories.md) `F : C → C` on a
 {{#concept "copointed" Disambiguation="endofunctor on a category" Agda=copointed-endofunctor-Precategory}}
 if it comes equipped with a
 [natural transformation](category-theory.natural-transformations-functors-precategories.md)
-`id ⇒ F` from the identity [functor](category-theory.functors-precategories.md)
-to `F`.
+`F ⇒ id` from `F` to the identity
+[functor](category-theory.functors-precategories.md).
 
 More explicitly, a
 {{#concept "copointing" Disambiguation="endofunctor on a precategory" Agda=copointing-endofunctor-Precategory}}
