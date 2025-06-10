@@ -63,16 +63,16 @@ module _
   (F : functor-Precategory C D)
   where
 
-  is-limiting-cone-Precategory :
+  is-limit-cone-Precategory :
     cone-Precategory C D F → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-limiting-cone-Precategory τ =
+  is-limit-cone-Precategory τ =
     (d : obj-Precategory D) →
     is-equiv (cone-map-Precategory C D F τ d)
 
   limit-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   limit-Precategory =
     Σ ( cone-Precategory C D F)
-      ( is-limiting-cone-Precategory)
+      ( is-limit-cone-Precategory)
 
   cone-limit-Precategory :
     limit-Precategory →
@@ -85,10 +85,10 @@ module _
   vertex-limit-Precategory τ =
     vertex-cone-Precategory C D F (cone-limit-Precategory τ)
 
-  is-limiting-limit-Precategory :
+  is-limit-limit-Precategory :
     (τ : limit-Precategory) →
-    is-limiting-cone-Precategory (cone-limit-Precategory τ)
-  is-limiting-limit-Precategory = pr2
+    is-limit-cone-Precategory (cone-limit-Precategory τ)
+  is-limit-limit-Precategory = pr2
 
   hom-cone-limit-Precategory :
     (τ : limit-Precategory) →
@@ -98,7 +98,7 @@ module _
       ( vertex-limit-Precategory τ)
   hom-cone-limit-Precategory τ φ =
     map-inv-is-equiv
-      ( is-limiting-limit-Precategory τ
+      ( is-limit-limit-Precategory τ
         ( vertex-cone-Precategory C D F φ))
       ( natural-transformation-cone-Precategory C D F φ)
 ```
@@ -153,10 +153,10 @@ module _
   (F : functor-Precategory C D)
   where
 
-  is-prop-is-limiting-cone-Precategory :
+  is-prop-is-limit-cone-Precategory :
     (τ : cone-Precategory C D F) →
-    is-prop (is-limiting-cone-Precategory C D F τ)
-  is-prop-is-limiting-cone-Precategory τ =
+    is-prop (is-limit-cone-Precategory C D F τ)
+  is-prop-is-limit-cone-Precategory τ =
     is-prop-Π λ φ → is-property-is-equiv _
 
   is-prop-is-limit-Precategory' :
@@ -175,13 +175,13 @@ module _
   (F : functor-Precategory C D)
   where
 
-  equiv-is-right-kan-extension-is-limiting-Precategory :
+  equiv-is-right-kan-extension-is-limit-Precategory :
     (τ : cone-Precategory C D F) →
-    is-limiting-cone-Precategory C D F τ ≃
+    is-limit-cone-Precategory C D F τ ≃
       is-right-kan-extension-Precategory C terminal-Precategory D
       (terminal-functor-Precategory C) F
       (map-equiv (equiv-right-extension-cone-Precategory C D F) τ)
-  equiv-is-right-kan-extension-is-limiting-Precategory τ =
+  equiv-is-right-kan-extension-is-limit-Precategory τ =
     equiv-Π _
       ( equiv-point-Precategory D)
       ( λ x →
@@ -239,7 +239,7 @@ module _
       ( is-right-kan-extension-Precategory C terminal-Precategory D
         ( terminal-functor-Precategory C) F)
       ( equiv-right-extension-cone-Precategory C D F)
-      ( λ τ → equiv-is-right-kan-extension-is-limiting-Precategory τ)
+      ( λ τ → equiv-is-right-kan-extension-is-limit-Precategory τ)
 
   limit-limit'-Precategory :
     limit-Precategory C D F → limit-Precategory' C D F
