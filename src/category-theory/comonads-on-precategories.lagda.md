@@ -449,5 +449,5 @@ module _
 
 ## See also
 
-- [Monads](category-theory.monads-on-precategories.lagda.md) for the dual
+- [Monads](category-theory.monads-on-precategories.md) for the dual
   concept.
