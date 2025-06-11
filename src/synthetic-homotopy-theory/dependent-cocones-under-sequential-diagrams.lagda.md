@@ -1,6 +1,7 @@
 # Dependent cocones under sequential diagrams
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
 module synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams where
 ```
 
@@ -156,6 +157,37 @@ module _
     coherence-htpy-dependent-cocone-sequential-diagram P d d'
       ( htpy-htpy-dependent-cocone-sequential-diagram)
   coherence-htpy-htpy-dependent-cocone-sequential-diagram = pr2 H
+```
+
+### Inversion of homotopies of dependent cocones under sequential diagrams
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : sequential-diagram l1} {X : UU l2}
+  {c : cocone-sequential-diagram A X} (P : X → UU l3)
+  {d d' : dependent-cocone-sequential-diagram c P}
+  (H : htpy-dependent-cocone-sequential-diagram P d d')
+  where
+
+  inv-htpy-dependent-cocone-sequential-diagram :
+    htpy-dependent-cocone-sequential-diagram P d' d
+  inv-htpy-dependent-cocone-sequential-diagram = ?
+```
+
+### Concatenation of homotopies of dependent cocones under sequential diagrams
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : sequential-diagram l1} {X : UU l2}
+  {c : cocone-sequential-diagram A X} (P : X → UU l3)
+  {d d' d'' : dependent-cocone-sequential-diagram c P}
+  (H : htpy-dependent-cocone-sequential-diagram P d d')
+  (K : htpy-dependent-cocone-sequential-diagram P d' d'')
+  where
+
+  concat-htpy-dependent-cocone-sequential-diagram :
+    htpy-dependent-cocone-sequential-diagram P d d''
+  concat-htpy-dependent-cocone-sequential-diagram = {!!}
 ```
 
 ### Obtaining dependent cocones under sequential diagrams by postcomposing cocones under sequential diagrams with dependent maps
