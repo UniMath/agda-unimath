@@ -231,3 +231,41 @@ module _
   involutive-eq-associative-comp-hom-Preorder =
     involutive-eq-eq associative-comp-hom-Preorder
 ```
+
+### Pointwise inequality of order preserving maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (P : Preorder l1 l2) (Q : Preorder l3 l4)
+  where
+
+  leq-hom-Preorder : (f g : hom-Preorder P Q) → UU (l1 ⊔ l4)
+  leq-hom-Preorder f g =
+    (x : type-Preorder P) →
+    leq-Preorder Q (map-hom-Preorder P Q f x) (map-hom-Preorder P Q g x)
+
+  is-prop-leq-hom-Preorder :
+    (f g : hom-Preorder P Q) → is-prop (leq-hom-Preorder f g)
+  is-prop-leq-hom-Preorder f g =
+    is-prop-Π (λ x → is-prop-leq-Preorder Q _ _)
+
+  leq-prop-hom-Preorder :
+    (f g : hom-Preorder P Q) → Prop (l1 ⊔ l4)
+  pr1 (leq-prop-hom-Preorder f g) = leq-hom-Preorder f g
+  pr2 (leq-prop-hom-Preorder f g) = is-prop-leq-hom-Preorder f g
+
+  refl-leq-hom-Preorder : (f : hom-Preorder P Q) → leq-hom-Preorder f f
+  refl-leq-hom-Preorder f x = refl-leq-Preorder Q (map-hom-Preorder P Q f x)
+
+  transitive-leq-hom-Preorder :
+    (f g h : hom-Preorder P Q) →
+    leq-hom-Preorder g h → leq-hom-Preorder f g → leq-hom-Preorder f h
+  transitive-leq-hom-Preorder f g h H K x =
+    transitive-leq-Preorder Q _ _ _ (H x) (K x)
+
+  hom-preorder-Preorder : Preorder (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l4)
+  pr1 hom-preorder-Preorder = hom-Preorder P Q
+  pr1 (pr2 hom-preorder-Preorder) = leq-prop-hom-Preorder
+  pr1 (pr2 (pr2 hom-preorder-Preorder)) = refl-leq-hom-Preorder
+  pr2 (pr2 (pr2 hom-preorder-Preorder)) = transitive-leq-hom-Preorder
+```
