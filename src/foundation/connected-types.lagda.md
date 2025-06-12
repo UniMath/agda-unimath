@@ -34,7 +34,10 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A type is said to be **`k`-connected** if its `k`-truncation is contractible.
+A type is said to be
+{{#concept "`k`-connected" Disambiguation="type" Agda=is-connected}} if its
+`k`-[truncation](foundation.truncations.md) is
+[contractible](foundation-core.contractible-types.md).
 
 ## Definition
 
@@ -213,8 +216,7 @@ module _
       ( map-trunc k f)
       ( is-equiv-map-equiv-trunc k (f , e))
 
-  is-connected-equiv :
-    A ≃ B → is-connected k B → is-connected k A
+  is-connected-equiv : A ≃ B → is-connected k B → is-connected k A
   is-connected-equiv f =
     is-connected-is-equiv (map-equiv f) (is-equiv-map-equiv f)
 
@@ -239,9 +241,7 @@ module _
   where
 
   is-connected-retract-of :
-    A retract-of B →
-    is-connected k B →
-    is-connected k A
+    A retract-of B → is-connected k B → is-connected k A
   is-connected-retract-of R =
     is-contr-retract-of (type-trunc k B) (retract-of-trunc-retract-of R)
 ```

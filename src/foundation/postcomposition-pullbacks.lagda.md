@@ -184,3 +184,9 @@ module _
 The following table lists files that are about pullbacks as a general concept.
 
 {{#include tables/pullbacks.md}}
+
+## See also
+
+- For the dual property for [pushouts](synthetic-homotopy-theory.pushouts.md),
+  see
+  [the pullback property of pushouts](synthetic-homotopy-theory.pullback-property-pushouts.md).
