@@ -25,7 +25,7 @@ open import metric-spaces.premetric-spaces-WIP
 
 ## Idea
 
-Two elements of a [premetric space](metric-spaces.premetric-Metric-Space-WIP.md)
+Two elements of a [premetric space](metric-spaces.premetric-spaces-WIP.md)
 have the {{#concept "same neighbors" Agda=sim-Premetric-Space-WIP'}} if their
 neighborhoods are [equivalent](foundation.logical-equivalences.md). Having the
 same neighbors is an [equivalence relation](foundation.equivalence-relations.md)
