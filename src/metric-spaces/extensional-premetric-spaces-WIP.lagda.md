@@ -38,8 +38,7 @@ if any of the following equivalent condition holds:
   elements are [identical](foundation-core.identity-types.md);
 - the similarity relation has [propositional](foundation.propositions.md)
   fibers;
-- the similarity relations is
-  [torsorial](foundation.torsorial-type-families.md).
+- the similarity relation is [torsorial](foundation.torsorial-type-families.md).
 
 The carrier type of an extensional premetric space is a
 [set](foundation.sets.md) and the
