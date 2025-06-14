@@ -184,12 +184,11 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  eq-zero-sum-zero-fin-sequence-type-RingSemiring :
+  sum-zero-finite-Semiring :
     {l2 : Level} (A : Finite-Type l2) →
     sum-finite-Semiring R A (λ _ → zero-Semiring R) ＝ zero-Semiring R
-  eq-zero-sum-zero-fin-sequence-type-RingSemiring =
-    eq-zero-eq-zero-sum-zero-fin-sequence-type-RingCommutative-Monoid
-      ( additive-commutative-monoid-Semiring R)
+  sum-zero-finite-Semiring =
+    sum-zero-finite-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 ```
 
 ### Sums over finite types are preserved by equivalences
