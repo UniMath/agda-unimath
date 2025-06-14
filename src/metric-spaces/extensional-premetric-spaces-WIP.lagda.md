@@ -22,6 +22,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.premetric-spaces-WIP
+open import metric-spaces.same-neighbors-elements-premetric-spaces
 open import metric-spaces.similarity-of-elements-premetric-spaces
 ```
 
@@ -60,7 +61,7 @@ module _
       ( type-Premetric-Space-WIP A)
       ( is-prop-Prop ∘
         Σ (type-Premetric-Space-WIP A) ∘
-        sim-Premetric-Space-WIP A)
+        sim-Premetric-Space-WIP' A)
 
   is-extensional-Premetric-Space-WIP : UU (l1 ⊔ l2)
   is-extensional-Premetric-Space-WIP =
@@ -87,7 +88,7 @@ module _
   is-tight-Premetric-Space-WIP : UU (l1 ⊔ l2)
   is-tight-Premetric-Space-WIP =
     (x y : type-Premetric-Space-WIP A) →
-    sim-Premetric-Space-WIP A x y →
+    sim-Premetric-Space-WIP' A x y →
     x ＝ y
 ```
 
@@ -107,7 +108,7 @@ module _
     is-prop-all-elements-equal
       ( λ (u , I) (v , J) →
         eq-type-subtype
-          ( sim-prop-Premetric-Space-WIP A x)
+          ( sim-prop-Premetric-Space-WIP' A x)
           ( inv (T x u I) ∙ T x v J))
 ```
 
@@ -121,30 +122,30 @@ module _
 
   is-torsorial-sim-is-extensional-Premetric-Space-WIP :
     (x : type-Premetric-Space-WIP A) →
-    is-torsorial (sim-Premetric-Space-WIP A x)
+    is-torsorial (sim-Premetric-Space-WIP' A x)
   is-torsorial-sim-is-extensional-Premetric-Space-WIP x =
     is-proof-irrelevant-is-prop
       ( E x)
-      ( x , refl-sim-Premetric-Space-WIP A x)
+      ( x , refl-sim-Premetric-Space-WIP' A x)
 
   is-fiberwise-equiv-sim-eq-is-extensional-Premetric-Space-WIP :
     (x y : type-Premetric-Space-WIP A) →
-    is-equiv (sim-eq-Premetric-Space-WIP A x y)
+    is-equiv (sim-eq-Premetric-Space-WIP' A x y)
   is-fiberwise-equiv-sim-eq-is-extensional-Premetric-Space-WIP x =
     fundamental-theorem-id
       ( is-torsorial-sim-is-extensional-Premetric-Space-WIP x)
-      ( sim-eq-Premetric-Space-WIP A x)
+      ( sim-eq-Premetric-Space-WIP' A x)
 
   equiv-sim-eq-is-extensional-Premetric-Space-WIP :
     (x y : type-Premetric-Space-WIP A) →
-    (x ＝ y) ≃ (sim-Premetric-Space-WIP A x y)
+    (x ＝ y) ≃ (sim-Premetric-Space-WIP' A x y)
   equiv-sim-eq-is-extensional-Premetric-Space-WIP x y =
-    ( sim-eq-Premetric-Space-WIP A x y) ,
+    ( sim-eq-Premetric-Space-WIP' A x y) ,
     ( is-fiberwise-equiv-sim-eq-is-extensional-Premetric-Space-WIP x y)
 
   eq-sim-is-extensional-Premetric-Space-WIP :
     (x y : type-Premetric-Space-WIP A) →
-    sim-Premetric-Space-WIP A x y →
+    sim-Premetric-Space-WIP' A x y →
     x ＝ y
   eq-sim-is-extensional-Premetric-Space-WIP x y =
     map-inv-equiv (equiv-sim-eq-is-extensional-Premetric-Space-WIP x y)
@@ -181,7 +182,7 @@ module _
         ( E)
         ( x)
         ( y))
-      ( is-prop-sim-Premetric-Space-WIP A x y)
+      ( is-prop-sim-Premetric-Space-WIP' A x y)
 ```
 
 ## See also

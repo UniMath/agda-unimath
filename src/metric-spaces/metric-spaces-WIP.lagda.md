@@ -24,6 +24,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.extensional-premetric-spaces-WIP
 open import metric-spaces.premetric-spaces-WIP
+open import metric-spaces.same-neighbors-elements-premetric-spaces
 open import metric-spaces.similarity-of-elements-premetric-spaces
 ```
 
@@ -238,6 +239,66 @@ module _
     equivalence-sim-Premetric-Space-WIP (premetric-Metric-Space-WIP A)
 ```
 
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space-WIP l1 l2)
+  where
+
+  sim-prop-Metric-Space-WIP' : Relation-Prop (l1 ⊔ l2) (type-Metric-Space-WIP A)
+  sim-prop-Metric-Space-WIP' =
+    sim-prop-Premetric-Space-WIP' (premetric-Metric-Space-WIP A)
+
+  sim-Metric-Space-WIP' : Relation (l1 ⊔ l2) (type-Metric-Space-WIP A)
+  sim-Metric-Space-WIP' =
+    sim-Premetric-Space-WIP' (premetric-Metric-Space-WIP A)
+
+  is-prop-sim-Metric-Space-WIP' :
+    (x y : type-Metric-Space-WIP A) →
+    is-prop (sim-Metric-Space-WIP' x y)
+  is-prop-sim-Metric-Space-WIP' =
+    is-prop-sim-Premetric-Space-WIP' (premetric-Metric-Space-WIP A)
+
+  refl-sim-Metric-Space-WIP' :
+    (x : type-Metric-Space-WIP A) →
+    sim-Metric-Space-WIP' x x
+  refl-sim-Metric-Space-WIP' =
+    refl-sim-Premetric-Space-WIP' (premetric-Metric-Space-WIP A)
+
+  sim-eq-Metric-Space-WIP' :
+    (x y : type-Metric-Space-WIP A) →
+    x ＝ y →
+    sim-Metric-Space-WIP' x y
+  sim-eq-Metric-Space-WIP' =
+    sim-eq-Premetric-Space-WIP' (premetric-Metric-Space-WIP A)
+
+  symmetric-sim-Metric-Space-WIP' :
+    (x y : type-Metric-Space-WIP A) →
+    sim-Metric-Space-WIP' x y →
+    sim-Metric-Space-WIP' y x
+  symmetric-sim-Metric-Space-WIP' =
+    symmetric-sim-Premetric-Space-WIP' (premetric-Metric-Space-WIP A)
+
+  inv-sim-Metric-Space-WIP' :
+    {x y : type-Metric-Space-WIP A} →
+    sim-Metric-Space-WIP' x y →
+    sim-Metric-Space-WIP' y x
+  inv-sim-Metric-Space-WIP' {x} {y} =
+    inv-sim-Premetric-Space-WIP' (premetric-Metric-Space-WIP A)
+
+  transitive-sim-Metric-Space-WIP' :
+    (x y z : type-Metric-Space-WIP A) →
+    sim-Metric-Space-WIP' y z →
+    sim-Metric-Space-WIP' x y →
+    sim-Metric-Space-WIP' x z
+  transitive-sim-Metric-Space-WIP' =
+    transitive-sim-Premetric-Space-WIP' (premetric-Metric-Space-WIP A)
+
+  equivalence-sim-Metric-Space-Wip' :
+    equivalence-relation (l1 ⊔ l2) (type-Metric-Space-WIP A)
+  equivalence-sim-Metric-Space-Wip' =
+    equivalence-sim-Premetric-Space-WIP' (premetric-Metric-Space-WIP A)
+```
+
 ## Properties
 
 ### The carrier type of a metric space is a set
@@ -267,7 +328,7 @@ module _
 
   equiv-sim-eq-Metric-Space-WIP :
     (x y : type-Metric-Space-WIP A) →
-    (x ＝ y) ≃ sim-Metric-Space-WIP A x y
+    (x ＝ y) ≃ sim-Metric-Space-WIP' A x y
   equiv-sim-eq-Metric-Space-WIP =
     equiv-sim-eq-is-extensional-Premetric-Space-WIP
       ( premetric-Metric-Space-WIP A)
@@ -275,7 +336,7 @@ module _
 
   eq-sim-Metric-Space-WIP :
     (x y : type-Metric-Space-WIP A) →
-    sim-Metric-Space-WIP A x y →
+    sim-Metric-Space-WIP' A x y →
     x ＝ y
   eq-sim-Metric-Space-WIP x y =
     map-inv-equiv (equiv-sim-eq-Metric-Space-WIP x y)
