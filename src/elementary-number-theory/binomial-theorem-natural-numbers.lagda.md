@@ -45,7 +45,8 @@ The binomial theorem is the [44th](literature.100-theorems.md#44) theorem on
 
 ```agda
 binomial-sum-ℕ : (n : ℕ) (f : fin-sequence ℕ (succ-ℕ n)) → ℕ
-binomial-sum-ℕ = binomial-sum-Commutative-Semiring ℕ-Commutative-Semiring
+binomial-sum-ℕ =
+  binomial-sum-fin-sequence-type-Commutative-Semiring ℕ-Commutative-Semiring
 ```
 
 ## Properties
@@ -72,7 +73,8 @@ htpy-binomial-sum-ℕ :
   (n : ℕ) {f g : fin-sequence ℕ (succ-ℕ n)} →
   (f ~ g) → binomial-sum-ℕ n f ＝ binomial-sum-ℕ n g
 htpy-binomial-sum-ℕ =
-  htpy-binomial-sum-Commutative-Semiring ℕ-Commutative-Semiring
+  htpy-binomial-sum-fin-sequence-type-Commutative-Semiring
+    ℕ-Commutative-Semiring
 ```
 
 ### Multiplication distributes over sums
@@ -82,13 +84,14 @@ left-distributive-mul-binomial-sum-ℕ :
   (n : ℕ) (x : ℕ) (f : fin-sequence ℕ (succ-ℕ n)) →
   x *ℕ (binomial-sum-ℕ n f) ＝ binomial-sum-ℕ n (λ i → x *ℕ (f i))
 left-distributive-mul-binomial-sum-ℕ =
-  left-distributive-mul-binomial-sum-Commutative-Semiring ℕ-Commutative-Semiring
+  left-distributive-mul-binomial-sum-fin-sequence-type-Commutative-Semiring
+    ℕ-Commutative-Semiring
 
 right-distributive-mul-binomial-sum-ℕ :
   (n : ℕ) (f : fin-sequence ℕ (succ-ℕ n)) (x : ℕ) →
   (binomial-sum-ℕ n f) *ℕ x ＝ binomial-sum-ℕ n (λ i → (f i) *ℕ x)
 right-distributive-mul-binomial-sum-ℕ =
-  right-distributive-mul-binomial-sum-Commutative-Semiring
+  right-distributive-mul-binomial-sum-fin-sequence-type-Commutative-Semiring
     ℕ-Commutative-Semiring
 ```
 
