@@ -25,6 +25,13 @@ is a type family of
 the
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md).
 
+Given a rational neighborhood relation `N` on `A` and some positive rational
+number `d : ℚ⁺` such that `N d x y` holds for some pair of points `x y : A`, we
+interpret `d` as an
+{{#concept "upper bound" Disambiguation="on the distance with respect to a rational neighborhood relation"}}
+on the distance between `x` and `y` with respect to the rational neighborhood
+relation.
+
 ## Definitions
 
 ### Rational neighborhood relation on a type
