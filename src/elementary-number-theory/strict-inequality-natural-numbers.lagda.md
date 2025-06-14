@@ -8,6 +8,7 @@ module elementary-number-theory.strict-inequality-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -33,6 +34,8 @@ open import foundation.sections
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import order-theory.strictly-preordered-sets
 ```
 
 </details>
@@ -150,6 +153,15 @@ transitive-le-ℕ : (n m l : ℕ) → (le-ℕ n m) → (le-ℕ m l) → (le-ℕ 
 transitive-le-ℕ zero-ℕ (succ-ℕ m) (succ-ℕ l) p q = star
 transitive-le-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
   transitive-le-ℕ n m l p q
+```
+
+### The strictly preordered set of natural numbers ordered by strict inequality
+
+```agda
+strictly-preordered-set-ℕ : Strictly-Preordered-Set lzero lzero
+pr1 strictly-preordered-set-ℕ = ℕ-Set
+pr2 strictly-preordered-set-ℕ =
+  le-ℕ-Prop , anti-reflexive-le-ℕ , λ n m l I J → transitive-le-ℕ n m l J I
 ```
 
 ### A sharper variant of transitivity
@@ -312,19 +324,6 @@ le-succ-leq-ℕ zero-ℕ y H = star
 le-succ-leq-ℕ (succ-ℕ x) (succ-ℕ y) H = le-succ-leq-ℕ x y H
 ```
 
-### There is an equivalence between natural numbers less than `succ-ℕ n` and natural numbers less than or equal to `n`
-
-```agda
-equiv-le-succ-ℕ-leq-ℕ :
-  (n : ℕ) → Σ ℕ (λ k → le-ℕ k (succ-ℕ n)) ≃ Σ ℕ (λ k → leq-ℕ k n)
-equiv-le-succ-ℕ-leq-ℕ n =
-  ( λ (k , k<sn) → k , leq-le-succ-ℕ k n k<sn) ,
-  ((λ (k , k≤n) → k , le-succ-leq-ℕ k n k≤n) ,
-    λ (k , k≤n) → eq-pair-Σ refl (eq-type-Prop (leq-ℕ-Prop k n))) ,
-  ((λ (k , k≤n) → k , le-succ-leq-ℕ k n k≤n) ,
-    λ (k , k<sn) → eq-pair-Σ refl (eq-type-Prop (le-ℕ-Prop k (succ-ℕ n))))
-```
-
 ### `x ≤ y` if and only if `(x ＝ y) + (x < y)`
 
 ```agda
@@ -408,4 +407,17 @@ preserves-le-add-ℕ {a} {b} {c} {d} H K =
     (b +ℕ d)
     (preserves-le-right-add-ℕ c a b H)
     (preserves-le-left-add-ℕ b c d K)
+```
+
+### There is an equivalence between natural numbers less than `succ-ℕ n` and natural numbers less than or equal to `n`
+
+```agda
+equiv-le-succ-ℕ-leq-ℕ :
+  (n : ℕ) → Σ ℕ (λ k → le-ℕ k (succ-ℕ n)) ≃ Σ ℕ (λ k → leq-ℕ k n)
+equiv-le-succ-ℕ-leq-ℕ n =
+  ( λ (k , k<sn) → k , leq-le-succ-ℕ k n k<sn) ,
+  ((λ (k , k≤n) → k , le-succ-leq-ℕ k n k≤n) ,
+    λ (k , k≤n) → eq-pair-Σ refl (eq-type-Prop (leq-ℕ-Prop k n))) ,
+  ((λ (k , k≤n) → k , le-succ-leq-ℕ k n k≤n) ,
+    λ (k , k<sn) → eq-pair-Σ refl (eq-type-Prop (le-ℕ-Prop k (succ-ℕ n))))
 ```
