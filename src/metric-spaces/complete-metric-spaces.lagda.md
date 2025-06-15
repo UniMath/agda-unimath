@@ -21,6 +21,8 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.metric-structures
+open import metric-spaces.premetric-structures
 ```
 
 </details>
@@ -85,6 +87,15 @@ module _
   is-complete-metric-space-Complete-Metric-Space :
     is-complete-Metric-Space metric-space-Complete-Metric-Space
   is-complete-metric-space-Complete-Metric-Space = pr2 A
+
+  structure-Complete-Metric-Space : Premetric l2 type-Complete-Metric-Space
+  structure-Complete-Metric-Space =
+    structure-Metric-Space metric-space-Complete-Metric-Space
+
+  is-metric-structure-Complete-Metric-Space :
+    is-metric-Premetric structure-Complete-Metric-Space
+  is-metric-structure-Complete-Metric-Space =
+    is-metric-structure-Metric-Space metric-space-Complete-Metric-Space
 ```
 
 ### The equivalence between Cauchy approximations and convergent Cauchy approximations in a complete metric space
