@@ -8,7 +8,8 @@ module trees.multivariable-polynomial-functors where
 
 ```agda
 open import foundation.binary-homotopies
-open import foundation.commuting-triangles-of-maps
+open import foundation-core.commuting-triangles-of-maps
+open import foundation-core.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -22,6 +23,9 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-unit-type
+open import foundation.unit-type
+open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -250,4 +254,40 @@ module _
     binary-htpy f g →
     binary-htpy (map-polynomial-functor 𝑃 f) (map-polynomial-functor 𝑃 g)
   binary-htpy-polynomial-functor (A , B) = binary-htpy-polynomial-functor' A B
+```
+
+### The identity multivariable polynomial functor
+
+```agda
+module _
+  {l1 : Level} {I : UU l1}
+  where
+
+  id-polynomial-functor : polynomial-functor lzero l1 I I
+  id-polynomial-functor = (λ i' → unit) , (λ i {i'} * → (i' ＝ i))
+
+  compute-type-id-polynomial-functor :
+    {l2 : Level} (X : I → UU l2) (i : I) →
+    type-polynomial-functor id-polynomial-functor X i ≃ X i
+  compute-type-id-polynomial-functor X i =
+    equivalence-reasoning
+      Σ unit (λ * → (i' : I) → i ＝ i' → X i')
+      ≃ ((i' : I) → i ＝ i' → X i')
+        by left-unit-law-Σ (λ * → (i' : I) → i ＝ i' → X i')
+      ≃ X i
+        by equiv-ev-refl i
+
+  map-compute-type-id-polynomial-functor :
+    {l2 : Level} (X : I → UU l2) (i : I) →
+    type-polynomial-functor id-polynomial-functor X i → X i
+  map-compute-type-id-polynomial-functor X i x = pr2 x i refl
+
+  compute-map-id-polynomial-functor :
+    {l2 l3 : Level} {X : I → UU l2} {Y : I → UU l3} (f : (i : I) → X i → Y i)
+    (x : (i : I) → type-polynomial-functor id-polynomial-functor X i) →
+    (i : I) →
+    map-compute-type-id-polynomial-functor Y i
+      ( map-polynomial-functor id-polynomial-functor f x i) ＝
+    f i (map-compute-type-id-polynomial-functor X i (x i))
+  compute-map-id-polynomial-functor f i = refl-htpy
 ```
