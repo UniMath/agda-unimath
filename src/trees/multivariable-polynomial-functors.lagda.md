@@ -19,6 +19,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.cartesian-product-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
@@ -215,17 +216,15 @@ module _
     (A : J → UU l3) (B : I → {j : J} → A j → UU l4)
     {X : I → UU l5} {Y : I → UU l6}
     (f : (i : I) → X i → Y i) →
-    ((j : J) → type-polynomial-functor' A B X j) →
-    ((j : J) → type-polynomial-functor' A B Y j)
-  map-polynomial-functor' A B f x j =
-    ( pr1 (x j) , (λ i b → f i (pr2 (x j) i b)))
+    (j : J) →
+    type-polynomial-functor' A B X j → type-polynomial-functor' A B Y j
+  map-polynomial-functor' A B f j (a , x) = (a , (λ i b → f i (x i b)))
 
   map-polynomial-functor :
     (𝑃 : polynomial-functor l3 l4 I J)
     {X : I → UU l5} {Y : I → UU l6}
     (f : (i : I) → X i → Y i) →
-    ((j : J) → type-polynomial-functor 𝑃 X j) →
-    ((j : J) → type-polynomial-functor 𝑃 Y j)
+    (j : J) → type-polynomial-functor 𝑃 X j → type-polynomial-functor 𝑃 Y j
   map-polynomial-functor (A , B) = map-polynomial-functor' A B
 ```
 
@@ -241,12 +240,8 @@ module _
     {X : I → UU l5} {Y : I → UU l6} {f g : (i : I) → X i → Y i} →
     binary-htpy f g →
     binary-htpy (map-polynomial-functor' A B f) (map-polynomial-functor' A B g)
-  binary-htpy-polynomial-functor' A B {f = f} {g} H x j =
-    eq-pair-eq-fiber
-      ( eq-binary-htpy
-        ( pr2 (map-polynomial-functor' A B f x j))
-        ( pr2 (map-polynomial-functor' A B g x j))
-        ( λ i → H i ∘ pr2 (x j) i))
+  binary-htpy-polynomial-functor' A B {f = f} {g} H j x =
+    eq-pair-eq-fiber (eq-binary-htpy _ _ (λ i → H i ∘ pr2 x i))
 
   binary-htpy-polynomial-functor :
     (𝑃 : polynomial-functor l3 l4 I J)
@@ -280,14 +275,87 @@ module _
   map-compute-type-id-polynomial-functor :
     {l2 : Level} (X : I → UU l2) (i : I) →
     type-polynomial-functor id-polynomial-functor X i → X i
-  map-compute-type-id-polynomial-functor X i x = pr2 x i refl
+  map-compute-type-id-polynomial-functor X i =
+    map-equiv (compute-type-id-polynomial-functor X i)
 
   compute-map-id-polynomial-functor :
     {l2 l3 : Level} {X : I → UU l2} {Y : I → UU l3} (f : (i : I) → X i → Y i)
     (x : (i : I) → type-polynomial-functor id-polynomial-functor X i) →
     (i : I) →
-    map-compute-type-id-polynomial-functor Y i
-      ( map-polynomial-functor id-polynomial-functor f x i) ＝
-    f i (map-compute-type-id-polynomial-functor X i (x i))
+    ( map-compute-type-id-polynomial-functor Y i
+      ( map-polynomial-functor id-polynomial-functor f i (x i))) ＝
+    ( f i (map-compute-type-id-polynomial-functor X i (x i)))
   compute-map-id-polynomial-functor f i = refl-htpy
+```
+
+### Composition of multivariable polynomial functors
+
+Given two multivariable polynomial functors `𝑃 A B : (I → Type) → (J → Type)`
+and `𝑃 C D : (J → Type) → (K → Type)`, then the composite functor
+`𝑃 C D ∘ 𝑃 A B` is again a polynomial functor. The resulting composite shapes
+and positions are computed via convolution.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 : Level}
+  {I : UU l1} {J : UU l2} {K : UU l3}
+  (𝑃@(A , B) : polynomial-functor l4 l5 I J)
+  (𝑄@(C , D) : polynomial-functor l6 l7 J K)
+  where
+
+  shape-comp-polynomial-functor : K → UU (l2 ⊔ l4 ⊔ l6 ⊔ l7)
+  shape-comp-polynomial-functor k = Σ (C k) (λ c → (j : J) → D j c → A j)
+
+  position-comp-polynomial-functor :
+    I → {k : K} → shape-comp-polynomial-functor k → UU (l2 ⊔ l5 ⊔ l7)
+  position-comp-polynomial-functor i {k} (c , a) =
+    Σ J (λ j → Σ (D j c) (λ d → B i (a j d)))
+
+  comp-polynomial-functor :
+    polynomial-functor (l2 ⊔ l4 ⊔ l6 ⊔ l7) (l2 ⊔ l5 ⊔ l7) I K
+  comp-polynomial-functor =
+    ( shape-comp-polynomial-functor , position-comp-polynomial-functor)
+
+  map-compute-type-comp-polynomial-functor :
+    {l8 : Level} (X : I → UU l8) (k : K) →
+    type-polynomial-functor comp-polynomial-functor X k →
+    type-polynomial-functor 𝑄 (type-polynomial-functor 𝑃 X) k
+  map-compute-type-comp-polynomial-functor X k ((c , a) , x) =
+    (c , (λ j d → (a j d , (λ i b → x i (j , d , b)))))
+
+  map-inv-compute-type-comp-polynomial-functor :
+    {l8 : Level} (X : I → UU l8) (k : K) →
+    type-polynomial-functor 𝑄 (type-polynomial-functor 𝑃 X) k →
+    type-polynomial-functor comp-polynomial-functor X k
+  map-inv-compute-type-comp-polynomial-functor X k (c , q) =
+    ((c , (λ j d → pr1 (q j d))) , (λ i (j , d , b) → pr2 (q j d) i b))
+
+  is-equiv-map-compute-type-comp-polynomial-functor :
+    {l8 : Level} (X : I → UU l8) (k : K) →
+    is-equiv (map-compute-type-comp-polynomial-functor X k)
+  is-equiv-map-compute-type-comp-polynomial-functor X k =
+    is-equiv-is-invertible
+      ( map-inv-compute-type-comp-polynomial-functor X k)
+      ( refl-htpy)
+      ( refl-htpy)
+
+  compute-type-comp-polynomial-functor :
+    {l8 : Level} (X : I → UU l8) (k : K) →
+    type-polynomial-functor comp-polynomial-functor X k ≃
+    type-polynomial-functor 𝑄 (type-polynomial-functor 𝑃 X) k
+  compute-type-comp-polynomial-functor X k =
+    ( map-compute-type-comp-polynomial-functor X k ,
+      is-equiv-map-compute-type-comp-polynomial-functor X k)
+
+  compute-map-comp-polynomial-functor :
+    {l8 l9 : Level} {X : I → UU l8} {Y : I → UU l9} (f : (i : I) → X i → Y i)
+    (x : (k : K) → type-polynomial-functor comp-polynomial-functor X k) →
+    (k : K) →
+    map-compute-type-comp-polynomial-functor Y k
+      ( map-polynomial-functor comp-polynomial-functor f k (x k)) ＝
+    map-polynomial-functor 𝑄
+      ( map-polynomial-functor 𝑃 f)
+      ( k)
+      ( map-compute-type-comp-polynomial-functor X k (x k))
+  compute-map-comp-polynomial-functor f x k = refl
 ```
