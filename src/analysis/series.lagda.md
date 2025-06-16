@@ -57,19 +57,19 @@ module _
       ( n)
       ( λ k → terms-series σ (nat-Fin n k))
 
-  converges-series : UU (l1 ⊔ l2)
-  converges-series =
+  is-convergent-series : UU (l1 ⊔ l2)
+  is-convergent-series =
     has-limit-sequence-Metric-Space
       ( metric-space-Commutative-Ring-In-Complete-Metric-Space RM)
       ( partial-sums-series)
 
-  is-prop-converges-series : is-prop converges-series
-  is-prop-converges-series =
+  is-prop-is-convergent-series : is-prop converges-series
+  is-prop-is-convergent-series =
     is-prop-has-limit-sequence-Metric-Space
       ( metric-space-Commutative-Ring-In-Complete-Metric-Space RM)
       ( partial-sums-series)
 
-  converges-prop-series : Prop (l1 ⊔ l2)
-  pr1 converges-prop-series = converges-series
-  pr2 converges-prop-series = is-prop-converges-series
+  is-convergent-prop-series : Prop (l1 ⊔ l2)
+  pr1 is-convergent-prop-series = is-convergent-series
+  pr2 is-convergent-prop-series = is-prop-is-convergent-series
 ```
