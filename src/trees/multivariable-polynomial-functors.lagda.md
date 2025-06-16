@@ -294,8 +294,8 @@ and `𝑃 C D : (J → Type) → (K → Type)`, then the composite functor
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
   {I : UU l1} {J : UU l2} {K : UU l3}
-  (𝑃@(A , B) : polynomial-functor l4 l5 I J)
   (𝑄@(C , D) : polynomial-functor l6 l7 J K)
+  (𝑃@(A , B) : polynomial-functor l4 l5 I J)
   where
 
   shape-comp-polynomial-functor : K → UU (l2 ⊔ l4 ⊔ l6 ⊔ l7)
