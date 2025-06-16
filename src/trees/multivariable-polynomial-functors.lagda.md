@@ -1,0 +1,253 @@
+# Multivariable polynomial functors
+
+```agda
+module trees.multivariable-polynomial-functors where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.binary-homotopies
+open import foundation.commuting-triangles-of-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-function-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.transport-along-identifications
+open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
+
+open import foundation-core.retractions
+open import foundation-core.torsorial-type-families
+```
+
+</details>
+
+## Idea
+
+{{#concept "Multivariable polynomial functors"}} are a generalization of the
+notion of [polynomial endofunctors](trees.polynomial-endofunctors.md) to the
+case where one has a family of types(variables) as opposed to a single type.
+
+Given a family of types `A : J → 𝒰` and a type family
+`B : I → {j : J} → A j → 𝒱` over `A`, we have a multivariable polynomial functor
+`P A B` with action on type families given by
+
+```text
+  X j ↦ Σ (a : A j), ((i : I) → B i a → X i)
+```
+
+## Definitions
+
+### The type of multivariable polynomial functors
+
+```agda
+polynomial-functor :
+  {l1 l2 : Level} (l3 l4 : Level) →
+  UU l1 → UU l2 → UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
+polynomial-functor l3 l4 I J =
+  Σ (J → UU l3) (λ A → (I → {j : J} → A j → UU l4))
+
+module _
+  {l1 l2 l3 l4 : Level} {I : UU l1} {J : UU l2}
+  (𝑃 : polynomial-functor l3 l4 I J)
+  where
+
+  shape-polynomial-functor : J → UU l3
+  shape-polynomial-functor = pr1 𝑃
+
+  position-polynomial-functor :
+    I → {j : J} → shape-polynomial-functor j → UU l4
+  position-polynomial-functor = pr2 𝑃
+```
+
+### The action on type families of a multivariable polynomial functor
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} {I : UU l1} {J : UU l2}
+  where
+
+  type-polynomial-functor' :
+    (A : J → UU l3) (B : I → {j : J} → A j → UU l4) →
+    (I → UU l5) → (J → UU (l1 ⊔ l3 ⊔ l4 ⊔ l5))
+  type-polynomial-functor' A B X j =
+    Σ (A j) (λ a → (i : I) → B i a → X i)
+
+  type-polynomial-functor :
+    (𝑃 : polynomial-functor l3 l4 I J) →
+    (I → UU l5) → (J → UU (l1 ⊔ l3 ⊔ l4 ⊔ l5))
+  type-polynomial-functor (A , B) =
+    type-polynomial-functor' A B
+```
+
+### Characterizing equality in `type-polynomial-functor`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {I : UU l1} {J : UU l2}
+  {𝑃@(A , B) : polynomial-functor l3 l4 I J}
+  {X : I → UU l5}
+  where
+
+  Eq-type-polynomial-functor :
+    (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
+  Eq-type-polynomial-functor x y =
+    (j : J) →
+    Σ ( pr1 (x j) ＝ pr1 (y j))
+      ( λ p →
+        (i : I) →
+        coherence-triangle-maps (pr2 (x j) i) (pr2 (y j) i) (tr (B i {j}) p))
+
+  refl-Eq-type-polynomial-functor :
+    (x : (j : J) → type-polynomial-functor 𝑃 X j) →
+    Eq-type-polynomial-functor x x
+  refl-Eq-type-polynomial-functor x j = (refl , λ i → refl-htpy)
+
+  Eq-eq-type-polynomial-functor :
+    (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
+    x ＝ y → Eq-type-polynomial-functor x y
+  Eq-eq-type-polynomial-functor x .x refl =
+    refl-Eq-type-polynomial-functor x
+
+  is-torsorial-Eq-type-polynomial-functor :
+    (x : (j : J) → type-polynomial-functor 𝑃 X j) →
+    is-torsorial (Eq-type-polynomial-functor x)
+  is-torsorial-Eq-type-polynomial-functor x =
+    is-torsorial-Eq-Π
+      ( λ j →
+        is-torsorial-Eq-structure
+          { D =
+            λ a y p →
+            (i : I) →
+            coherence-triangle-maps (pr2 (x j) i) (y i) (tr (B i {j}) p)}
+          ( is-torsorial-Id (pr1 (x j)))
+          ( pr1 (x j) , refl)
+          (is-torsorial-binary-htpy (pr2 (x j))))
+
+  is-equiv-Eq-eq-type-polynomial-functor :
+    (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
+    is-equiv (Eq-eq-type-polynomial-functor x y)
+  is-equiv-Eq-eq-type-polynomial-functor x =
+    fundamental-theorem-id
+      ( is-torsorial-Eq-type-polynomial-functor x)
+      ( Eq-eq-type-polynomial-functor x)
+
+  eq-Eq-type-polynomial-functor :
+    (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
+    Eq-type-polynomial-functor x y → x ＝ y
+  eq-Eq-type-polynomial-functor x y =
+    map-inv-is-equiv (is-equiv-Eq-eq-type-polynomial-functor x y)
+
+  is-retraction-eq-Eq-type-polynomial-functor :
+    (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
+    is-retraction
+      ( Eq-eq-type-polynomial-functor x y)
+      ( eq-Eq-type-polynomial-functor x y)
+  is-retraction-eq-Eq-type-polynomial-functor x y =
+    is-retraction-map-inv-is-equiv
+      ( is-equiv-Eq-eq-type-polynomial-functor x y)
+
+  coh-refl-eq-Eq-type-polynomial-functor :
+    (x : (j : J) → type-polynomial-functor 𝑃 X j) →
+    ( eq-Eq-type-polynomial-functor x x
+      ( refl-Eq-type-polynomial-functor x)) ＝ refl
+  coh-refl-eq-Eq-type-polynomial-functor x =
+    is-retraction-eq-Eq-type-polynomial-functor x x refl
+```
+
+### An action on dependent functions of multivariable polynomial functors
+
+The following construction is not quite right for "the" action on dependent
+functions, since given a type family `Y` over a type family `X`, the
+construction gives only a dependent function of approximately type
+
+```text
+  (x : 𝑃 X) → 𝑃 (Σ B Y x)
+```
+
+rather than
+
+```text
+  (x : 𝑃 X) → 𝑃 (Y x).
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} {I : UU l1} {J : UU l2}
+  where
+
+  dmap-Σ-polynomial-functor' :
+    (A : J → UU l3) (B : I → {j : J} → A j → UU l4)
+    {X : I → UU l5} {Y : (i : I) → X i → UU l6}
+    (f : (i : I) (x : X i) → Y i x) →
+    (x : (j : J) → type-polynomial-functor' A B X j) →
+    (j : J) →
+    type-polynomial-functor' A B
+      ( λ i → Σ (B i (pr1 (x j))) (Y i ∘ pr2 (x j) i))
+      ( j)
+  dmap-Σ-polynomial-functor' A B f x j =
+    ( pr1 (x j) , (λ i b → (b , f i (pr2 (x j) i b))))
+```
+
+### The action on functions of multivariable polynomial functors
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} {I : UU l1} {J : UU l2}
+  where
+
+  map-polynomial-functor' :
+    (A : J → UU l3) (B : I → {j : J} → A j → UU l4)
+    {X : I → UU l5} {Y : I → UU l6}
+    (f : (i : I) → X i → Y i) →
+    ((j : J) → type-polynomial-functor' A B X j) →
+    ((j : J) → type-polynomial-functor' A B Y j)
+  map-polynomial-functor' A B f x j =
+    ( pr1 (x j) , (λ i b → f i (pr2 (x j) i b)))
+
+  map-polynomial-functor :
+    (𝑃 : polynomial-functor l3 l4 I J)
+    {X : I → UU l5} {Y : I → UU l6}
+    (f : (i : I) → X i → Y i) →
+    ((j : J) → type-polynomial-functor 𝑃 X j) →
+    ((j : J) → type-polynomial-functor 𝑃 Y j)
+  map-polynomial-functor (A , B) = map-polynomial-functor' A B
+```
+
+### The action on homotopies of multivariable polynomial functors
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} {I : UU l1} {J : UU l2}
+  where
+
+  binary-htpy-polynomial-functor' :
+    (A : J → UU l3) (B : I → {j : J} → A j → UU l4)
+    {X : I → UU l5} {Y : I → UU l6} {f g : (i : I) → X i → Y i} →
+    binary-htpy f g →
+    binary-htpy (map-polynomial-functor' A B f) (map-polynomial-functor' A B g)
+  binary-htpy-polynomial-functor' A B {f = f} {g} H x j =
+    eq-pair-eq-fiber
+      ( eq-binary-htpy
+        ( pr2 (map-polynomial-functor' A B f x j))
+        ( pr2 (map-polynomial-functor' A B g x j))
+        ( λ i → H i ∘ pr2 (x j) i))
+
+  binary-htpy-polynomial-functor :
+    (𝑃 : polynomial-functor l3 l4 I J)
+    {X : I → UU l5} {Y : I → UU l6} {f g : (i : I) → X i → Y i} →
+    binary-htpy f g →
+    binary-htpy (map-polynomial-functor 𝑃 f) (map-polynomial-functor 𝑃 g)
+  binary-htpy-polynomial-functor (A , B) = binary-htpy-polynomial-functor' A B
+```
