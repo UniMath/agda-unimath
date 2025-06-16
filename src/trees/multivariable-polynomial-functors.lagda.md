@@ -23,6 +23,7 @@ open import foundation.unit-type
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.retractions
 open import foundation-core.torsorial-type-families
@@ -111,7 +112,7 @@ module _
   refl-Eq-type-polynomial-functor :
     (x : (j : J) → type-polynomial-functor 𝑃 X j) →
     Eq-type-polynomial-functor x x
-  refl-Eq-type-polynomial-functor x j = (refl , λ i → refl-htpy)
+  refl-Eq-type-polynomial-functor x j = (refl , (λ i → refl-htpy))
 
   Eq-eq-type-polynomial-functor :
     (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
@@ -234,7 +235,7 @@ module _
     {X : I → UU l5} {Y : I → UU l6} {f g : (i : I) → X i → Y i} →
     binary-htpy f g →
     binary-htpy (map-polynomial-functor' A B f) (map-polynomial-functor' A B g)
-  binary-htpy-polynomial-functor' A B {f = f} {g} H j x =
+  binary-htpy-polynomial-functor' A B H j x =
     eq-pair-eq-fiber (eq-binary-htpy _ _ (λ i → H i ∘ pr2 x i))
 
   binary-htpy-polynomial-functor :
@@ -274,11 +275,12 @@ module _
 
   compute-map-id-polynomial-functor :
     {l2 l3 : Level} {X : I → UU l2} {Y : I → UU l3} (f : (i : I) → X i → Y i)
-    (x : (i : I) → type-polynomial-functor id-polynomial-functor X i) →
     (i : I) →
-    ( map-compute-type-id-polynomial-functor Y i
-      ( map-polynomial-functor id-polynomial-functor f i (x i))) ＝
-    ( f i (map-compute-type-id-polynomial-functor X i (x i)))
+    coherence-square-maps
+      ( map-compute-type-id-polynomial-functor X i)
+      ( map-polynomial-functor id-polynomial-functor f i)
+      ( f i)
+      ( map-compute-type-id-polynomial-functor Y i)
   compute-map-id-polynomial-functor f i = refl-htpy
 ```
 
@@ -286,8 +288,7 @@ module _
 
 Given two multivariable polynomial functors `𝑃 A B : (I → Type) → (J → Type)`
 and `𝑃 C D : (J → Type) → (K → Type)`, then the composite functor
-`𝑃 C D ∘ 𝑃 A B` is again a polynomial functor. The resulting composite shapes
-and positions are computed via convolution.
+`𝑃 C D ∘ 𝑃 A B` is again a polynomial functor.
 
 ```agda
 module _
@@ -298,12 +299,13 @@ module _
   where
 
   shape-comp-polynomial-functor : K → UU (l2 ⊔ l4 ⊔ l6 ⊔ l7)
-  shape-comp-polynomial-functor k = Σ (C k) (λ c → (j : J) → D j c → A j)
+  shape-comp-polynomial-functor k =
+    Σ (C k) (λ c → (j : J) → D j {k} c → A j)
 
   position-comp-polynomial-functor :
     I → {k : K} → shape-comp-polynomial-functor k → UU (l2 ⊔ l5 ⊔ l7)
   position-comp-polynomial-functor i {k} (c , a) =
-    Σ J (λ j → Σ (D j c) (λ d → B i (a j d)))
+    Σ J (λ j → Σ (D j {k} c) (λ d → B i {j} (a j d)))
 
   comp-polynomial-functor :
     polynomial-functor (l2 ⊔ l4 ⊔ l6 ⊔ l7) (l2 ⊔ l5 ⊔ l7) I K
@@ -342,14 +344,12 @@ module _
       is-equiv-map-compute-type-comp-polynomial-functor X k)
 
   compute-map-comp-polynomial-functor :
-    {l8 l9 : Level} {X : I → UU l8} {Y : I → UU l9} (f : (i : I) → X i → Y i)
-    (x : (k : K) → type-polynomial-functor comp-polynomial-functor X k) →
-    (k : K) →
-    map-compute-type-comp-polynomial-functor Y k
-      ( map-polynomial-functor comp-polynomial-functor f k (x k)) ＝
-    map-polynomial-functor 𝑄
-      ( map-polynomial-functor 𝑃 f)
-      ( k)
-      ( map-compute-type-comp-polynomial-functor X k (x k))
-  compute-map-comp-polynomial-functor f x k = refl
+    {l8 l9 : Level} {X : I → UU l8} {Y : I → UU l9}
+    (f : (i : I) → X i → Y i) (k : K) →
+    coherence-square-maps
+      ( map-compute-type-comp-polynomial-functor X k)
+      ( map-polynomial-functor comp-polynomial-functor f k)
+      ( map-polynomial-functor 𝑄 (map-polynomial-functor 𝑃 f) k)
+      ( map-compute-type-comp-polynomial-functor Y k)
+  compute-map-comp-polynomial-functor f k x = refl
 ```
