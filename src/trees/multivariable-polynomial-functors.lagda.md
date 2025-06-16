@@ -8,19 +8,13 @@ module trees.multivariable-polynomial-functors where
 
 ```agda
 open import foundation.binary-homotopies
-open import foundation-core.commuting-triangles-of-maps
-open import foundation-core.commuting-squares-of-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.cartesian-product-types
-open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
@@ -28,8 +22,8 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.retractions
 open import foundation-core.torsorial-type-families
 ```
