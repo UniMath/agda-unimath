@@ -90,13 +90,14 @@ module _
   where
 
   is-decidable-neg-decidable-family :
-    is-decidable-family (¬_ ∘ family-decidable-family P)
+    is-decidable-family (λ x → ¬ (family-decidable-family P x))
   is-decidable-neg-decidable-family =
     is-decidable-neg ∘ is-decidable-decidable-family P
 
   neg-decidable-family : decidable-family l2 A
   neg-decidable-family =
-    ( ¬_ ∘ family-decidable-family P , is-decidable-neg-decidable-family)
+    ( ( λ x → ¬ (family-decidable-family P x)) ,
+      is-decidable-neg-decidable-family)
 ```
 
 ### Composition of decidable families
@@ -142,7 +143,7 @@ module _
 
   comp-decidable-family-decidable-subtype' :
     (P : decidable-family l2 A) →
-    ((x : A) → decidable-family l3 (family-decidable-family P x)) →
+    ( (x : A) → decidable-family l3 (family-decidable-family P x)) →
     ( (x : A) →
       has-double-negation-dense-equality (family-decidable-family P x)) →
     decidable-family (l2 ⊔ l3) A

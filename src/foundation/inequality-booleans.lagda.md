@@ -33,8 +33,10 @@ open import order-theory.total-orders
 
 The
 {{#concept "standard inequality relation" Disambiguation="on booleans" Agda=leq-bool}}
-on [booleans](foundation.booleans.md) is the inductively defined
-[relation](foundation.binary-relations.md) given by the four inequalities
+on [booleans](foundation.booleans.md) is the
+[partial order](order-theory.posets.md) defined by the logical connective `⇒`,
+i.e. `(x ≤ y) := (x ⇒ y)`. This means it is the unique partial order on the
+booleans satisfying the four inequalities
 
 ```text
   false ≤ false
