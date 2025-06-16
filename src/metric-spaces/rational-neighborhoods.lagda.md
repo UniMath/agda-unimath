@@ -12,6 +12,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
@@ -44,7 +45,7 @@ the
 Given a rational neighborhood relation `N` on `A` and some positive rational
 number `d : ℚ⁺` such that `N d x y` holds for some pair of points `x y : A`, we
 interpret `d` as an
-{{#concept "upper bound" Disambiguation="on the distance with respect to a rational neighborhood relation"}}
+{{#concept "upper bound" Disambiguation="on the distance with respect to a rational neighborhood relation" Agda=is-upper-bound-dist-Rational-Neighborhood-Relation}}
 on the distance between `x` and `y` with respect to the rational neighborhood
 relation.
 
@@ -74,6 +75,21 @@ module _
     is-prop (neighborhood-Rational-Neighborhood-Relation d x y)
   is-prop-neighborhood-Rational-Neighborhood-Relation d x y =
     is-prop-type-Prop (B d x y)
+
+  is-upper-bound-dist-prop-Rational-Neighborhood-Relation :
+    A → A → ℚ⁺ → Prop l2
+  is-upper-bound-dist-prop-Rational-Neighborhood-Relation x y d = B d x y
+
+  is-upper-bound-dist-Rational-Neighborhood-Relation :
+    A → A → ℚ⁺ → UU l2
+  is-upper-bound-dist-Rational-Neighborhood-Relation x y d =
+    neighborhood-Rational-Neighborhood-Relation d x y
+
+  is-prop-is-upper-bound-dist-Rational-Neighborhood-Relation :
+    (x y : A) (d : ℚ⁺) →
+    is-prop (is-upper-bound-dist-Rational-Neighborhood-Relation x y d)
+  is-prop-is-upper-bound-dist-Rational-Neighborhood-Relation x y d =
+    is-prop-neighborhood-Rational-Neighborhood-Relation d x y
 ```
 
 ## Properties
@@ -210,4 +226,115 @@ module _
       ( tr (Rational-Neighborhood-Relation l2) e S)
       ( λ d x y → S d (map-inv-eq e x) (map-inv-eq e y))
       ( Eq-map-inv-eq-tr-Rational-Neighborhood-Relation B e S)
+```
+
+### The similarity relation induced by a rational neighborhood relation
+
+```agda
+module _ {l1 l2 : Level} {A : UU l1} (N : Rational-Neighborhood-Relation l2 A)
+  where
+
+  sim-prop-Rational-Neighborhood-Relation : Relation-Prop (l1 ⊔ l2) A
+  sim-prop-Rational-Neighborhood-Relation x y =
+    Π-Prop
+      ( ℚ⁺)
+      ( λ d →
+        Π-Prop
+          ( A)
+          ( λ z →
+            product-Prop
+              ( N d x z ⇔ N d y z)
+              ( N d z x ⇔ N d z y)))
+
+  sim-Rational-Neighborhood-Relation : Relation (l1 ⊔ l2) A
+  sim-Rational-Neighborhood-Relation x y =
+    type-Prop (sim-prop-Rational-Neighborhood-Relation x y)
+
+  is-prop-sim-Rational-Neighborhood-Relatiion :
+    (x y : A) → is-prop (sim-Rational-Neighborhood-Relation x y)
+  is-prop-sim-Rational-Neighborhood-Relatiion x y =
+    is-prop-type-Prop (sim-prop-Rational-Neighborhood-Relation x y)
+
+  iff-left-neighbor-sim-Rational-Neighborhood-Relation :
+    {x y : A} →
+    sim-Rational-Neighborhood-Relation x y →
+    (d : ℚ⁺) (z : A) →
+    neighborhood-Rational-Neighborhood-Relation N d x z ↔
+    neighborhood-Rational-Neighborhood-Relation N d y z
+  iff-left-neighbor-sim-Rational-Neighborhood-Relation x≍y d z =
+    pr1 (x≍y d z)
+
+  iff-right-neighbor-sim-Rational-Neighborhood-Relation :
+    {x y : A} →
+    sim-Rational-Neighborhood-Relation x y →
+    (d : ℚ⁺) (z : A) →
+    neighborhood-Rational-Neighborhood-Relation N d z x ↔
+    neighborhood-Rational-Neighborhood-Relation N d z y
+  iff-right-neighbor-sim-Rational-Neighborhood-Relation x≍y d z =
+    pr2 (x≍y d z)
+
+  refl-sim-Rational-Neighborhood-Relation :
+    (x : A) → sim-Rational-Neighborhood-Relation x x
+  refl-sim-Rational-Neighborhood-Relation x d z = id-iff , id-iff
+
+  sim-eq-Rational-Neighborhood-Relation :
+    (x y : A) → x ＝ y → sim-Rational-Neighborhood-Relation x y
+  sim-eq-Rational-Neighborhood-Relation x .x refl =
+    refl-sim-Rational-Neighborhood-Relation x
+
+  symmetric-sim-Rational-Neighborhood-Relation :
+    (x y : A) →
+    sim-Rational-Neighborhood-Relation x y →
+    sim-Rational-Neighborhood-Relation y x
+  symmetric-sim-Rational-Neighborhood-Relation x y x≍y d z =
+    ( inv-iff (iff-left-neighbor-sim-Rational-Neighborhood-Relation x≍y d z)) ,
+    ( inv-iff (iff-right-neighbor-sim-Rational-Neighborhood-Relation x≍y d z))
+
+  inv-sim-Rational-Neighborhood-Relation :
+    {x y : A} →
+    sim-Rational-Neighborhood-Relation x y →
+    sim-Rational-Neighborhood-Relation y x
+  inv-sim-Rational-Neighborhood-Relation {x} {y} =
+    symmetric-sim-Rational-Neighborhood-Relation x y
+
+  transitive-sim-Rational-Neighborhood-Relation :
+    (x y z : A) →
+    sim-Rational-Neighborhood-Relation y z →
+    sim-Rational-Neighborhood-Relation x y →
+    sim-Rational-Neighborhood-Relation x z
+  transitive-sim-Rational-Neighborhood-Relation x y z y≍z x≍y d w =
+    ( ( iff-left-neighbor-sim-Rational-Neighborhood-Relation y≍z d w) ∘iff
+      ( iff-left-neighbor-sim-Rational-Neighborhood-Relation x≍y d w)) ,
+    ( ( iff-right-neighbor-sim-Rational-Neighborhood-Relation y≍z d w) ∘iff
+      ( iff-right-neighbor-sim-Rational-Neighborhood-Relation x≍y d w))
+
+  is-equivalence-relation-sim-Rational-Neighborhood-Relation :
+    is-equivalence-relation (sim-prop-Rational-Neighborhood-Relation)
+  is-equivalence-relation-sim-Rational-Neighborhood-Relation =
+    refl-sim-Rational-Neighborhood-Relation ,
+    symmetric-sim-Rational-Neighborhood-Relation ,
+    transitive-sim-Rational-Neighborhood-Relation
+
+  equivalence-sim-Rational-Neighborhood-Relation :
+    equivalence-relation (l1 ⊔ l2) A
+  equivalence-sim-Rational-Neighborhood-Relation =
+    sim-prop-Rational-Neighborhood-Relation ,
+    is-equivalence-relation-sim-Rational-Neighborhood-Relation
+```
+
+### Similar elements have equivalent self-neighborhoods
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (N : Rational-Neighborhood-Relation l2 A)
+  where
+
+  iff-self-neighborhood-sim-Rational-Neighborhood-Relation :
+    (d : ℚ⁺) (x y : A) →
+    sim-Rational-Neighborhood-Relation N x y →
+    neighborhood-Rational-Neighborhood-Relation N d x x ↔
+    neighborhood-Rational-Neighborhood-Relation N d y y
+  iff-self-neighborhood-sim-Rational-Neighborhood-Relation d x y x≍y =
+    ( iff-right-neighbor-sim-Rational-Neighborhood-Relation N x≍y d y) ∘iff
+    ( iff-left-neighbor-sim-Rational-Neighborhood-Relation N x≍y d x)
 ```

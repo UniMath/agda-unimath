@@ -33,6 +33,7 @@ open import foundation.universe-levels
 open import metric-spaces.monotonic-rational-neighborhoods
 open import metric-spaces.rational-neighborhoods
 open import metric-spaces.reflexive-rational-neighborhoods
+open import metric-spaces.saturated-rational-neighborhoods
 open import metric-spaces.symmetric-rational-neighborhoods
 open import metric-spaces.triangular-rational-neighborhoods
 ```
@@ -44,8 +45,9 @@ open import metric-spaces.triangular-rational-neighborhoods
 A {{#concept "premetric space" Agda=Premetric-Space-WIP}} is a type equipped
 with a {{concept "premetric structure" Agda=Premetric-Structure}}: a
 [reflexive](metric-spaces.reflexive-rational-neighborhoods.md),
-[symmetric](metric-spaces.symmetric-rational-neighborhoods.md) and
-[triangular](metric-spaces.triangular-rational-neighborhoods.md)
+[symmetric](metric-spaces.symmetric-rational-neighborhoods.md),
+[triangular](metric-spaces.triangular-rational-neighborhoods.md) and
+[saturated](metric-spaces.saturated-rational-neighborhoods.md)
 [rational neighborhood relation](metric-spaces.rational-neighborhoods.md)
 
 Given a premetric structure `B` on `A` and some positive rational number
@@ -70,7 +72,9 @@ module _
       ( is-reflexive-prop-Rational-Neighborhood-Relation B)
       ( product-Prop
         ( is-symmetric-prop-Rational-Neighborhood-Relation B)
-        ( is-triangular-prop-Rational-Neighborhood-Relation B))
+        ( product-Prop
+          ( is-triangular-prop-Rational-Neighborhood-Relation B)
+          ( is-saturated-prop-Rational-Neighborhood-Relation B)))
 
   is-premetric-Rational-Neighborhood-Relation : UU (l1 ⊔ l2)
   is-premetric-Rational-Neighborhood-Relation =
@@ -171,7 +175,14 @@ module _
     neighborhood-Premetric-Space-WIP d₁ x y →
     neighborhood-Premetric-Space-WIP (d₁ +ℚ⁺ d₂) x z
   triangular-neighborhood-Premetric-Space-WIP =
-    pr2 (pr2 is-premetric-neighborhood-Premetric-Space-WIP)
+    pr1 (pr2 (pr2 is-premetric-neighborhood-Premetric-Space-WIP))
+
+  saturated-neighborhood-Premetric-Space-WIP :
+    (ε : ℚ⁺) (x y : type-Premetric-Space-WIP) →
+    ((δ : ℚ⁺) → neighborhood-Premetric-Space-WIP (ε +ℚ⁺ δ) x y) →
+    neighborhood-Premetric-Space-WIP ε x y
+  saturated-neighborhood-Premetric-Space-WIP =
+    pr2 (pr2 (pr2 is-premetric-neighborhood-Premetric-Space-WIP))
 
   monotonic-neighborhood-Premetric-Space-WIP :
     (x y : type-Premetric-Space-WIP) (d₁ d₂ : ℚ⁺) →
@@ -183,4 +194,14 @@ module _
       neighborhood-prop-Premetric-Space-WIP
       refl-neighborhood-Premetric-Space-WIP
       triangular-neighborhood-Premetric-Space-WIP
+
+  iff-le-neighborhood-Premetric-Space-WIP :
+    ( ε : ℚ⁺) (x y : type-Premetric-Space-WIP) →
+    ( neighborhood-Premetric-Space-WIP ε x y) ↔
+    ( (δ : ℚ⁺) → le-ℚ⁺ ε δ → neighborhood-Premetric-Space-WIP δ x y)
+  iff-le-neighborhood-Premetric-Space-WIP =
+    iff-le-neighborhood-saturated-monotonic-Rational-Neighborhood-Relation
+      neighborhood-prop-Premetric-Space-WIP
+      monotonic-neighborhood-Premetric-Space-WIP
+      saturated-neighborhood-Premetric-Space-WIP
 ```

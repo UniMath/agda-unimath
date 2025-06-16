@@ -107,9 +107,9 @@ open import metric-spaces.rational-neighborhoods public
 open import metric-spaces.rational-sequences-approximating-zero public
 open import metric-spaces.reflexive-premetric-structures public
 open import metric-spaces.reflexive-rational-neighborhoods public
-open import metric-spaces.same-neighbors-elements-premetric-spaces public
 open import metric-spaces.saturated-complete-metric-spaces public
 open import metric-spaces.saturated-metric-spaces public
+open import metric-spaces.saturated-rational-neighborhoods public
 open import metric-spaces.sequences-metric-spaces public
 open import metric-spaces.sequences-premetric-spaces public
 open import metric-spaces.sequences-pseudometric-spaces public

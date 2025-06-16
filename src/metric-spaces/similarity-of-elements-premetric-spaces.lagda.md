@@ -12,12 +12,15 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
+open import foundation.function-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.premetric-spaces-WIP
+open import metric-spaces.rational-neighborhoods
 ```
 
 </details>
@@ -27,7 +30,14 @@ open import metric-spaces.premetric-spaces-WIP
 Two elements `x y` of a [premetric space](metric-spaces.premetric-spaces-WIP.md)
 are
 {{#concept "similar" Disambiguation="elements of a premetric space" Agda=sim-Premetric-Space-WIP}}
-if they share all neighborhoods. Similarity in premetric spaces is an
+if any of the following equivalent propositions holds:
+
+- they are similar w.r.t the underlying
+  [rational neighborhood relation](metric-spaces.rational-neighborhoods.md);
+- they have the same neighbors: `∀ δ z → N δ x z ↔ N δ y z`;
+- they share all neighborhoods: `∀ δ → N δ x y`.
+
+Similarity in a premetric space is an
 [equivalence relation](foundation.equivalence-relations.md).
 
 ## Definitions
@@ -147,4 +157,101 @@ module _
   equivalence-sim-Premetric-Space-WIP =
     ( sim-prop-Premetric-Space-WIP A) ,
     ( is-equivalence-relation-sim-Premetric-Space-WIP)
+```
+
+### Similar elements are elements with the same neighbors
+
+```agda
+module _
+  {l1 l2 : Level} (A : Premetric-Space-WIP l1 l2)
+  where
+
+  preserves-neighborhood-sim-Premetric-Space :
+    { x y : type-Premetric-Space-WIP A} →
+    ( sim-Premetric-Space-WIP A x y) →
+    ( d : ℚ⁺) (z : type-Premetric-Space-WIP A) →
+    neighborhood-Premetric-Space-WIP A d x z →
+    neighborhood-Premetric-Space-WIP A d y z
+  preserves-neighborhood-sim-Premetric-Space {x} {y} x≍y d z Nxz =
+    saturated-neighborhood-Premetric-Space-WIP
+      ( A)
+      ( d)
+      ( y)
+      ( z)
+      ( λ δ →
+        tr
+          ( is-upper-bound-dist-Premetric-Space-WIP A y z)
+          ( commutative-add-ℚ⁺ δ d)
+          ( triangular-neighborhood-Premetric-Space-WIP
+            ( A)
+            ( y)
+            ( x)
+            ( z)
+            ( δ)
+            ( d)
+            ( Nxz)
+            ( symmetric-neighborhood-Premetric-Space-WIP
+              ( A)
+              ( δ)
+              ( x)
+              ( y)
+              ( x≍y δ))))
+
+  iff-same-neighbors-sim-Premetric-Space :
+    { x y : type-Premetric-Space-WIP A} →
+    ( sim-Premetric-Space-WIP A x y) ↔
+    ( (d : ℚ⁺) (z : type-Premetric-Space-WIP A) →
+      neighborhood-Premetric-Space-WIP A d x z ↔
+      neighborhood-Premetric-Space-WIP A d y z)
+  iff-same-neighbors-sim-Premetric-Space =
+    ( λ x≍y d z →
+      ( preserves-neighborhood-sim-Premetric-Space x≍y d z) ,
+      ( preserves-neighborhood-sim-Premetric-Space
+        ( inv-sim-Premetric-Space-WIP A x≍y)
+        ( d)
+        ( z))) ,
+    ( λ same-neighbors d →
+      backward-implication
+        ( same-neighbors d _)
+        ( refl-sim-Premetric-Space-WIP A _ d))
+```
+
+### Similar elements are elements similar w.r.t the underlying rational neighborhood relation
+
+```agda
+module _
+  {l1 l2 : Level} (A : Premetric-Space-WIP l1 l2)
+  where
+
+  iff-same-neighbors-same-neighborhood-Premetric-Space :
+    {x y : type-Premetric-Space-WIP A} →
+    ( (d : ℚ⁺) (z : type-Premetric-Space-WIP A) →
+      neighborhood-Premetric-Space-WIP A d x z ↔
+      neighborhood-Premetric-Space-WIP A d y z) ↔
+    ( sim-Rational-Neighborhood-Relation
+      ( neighborhood-prop-Premetric-Space-WIP A)
+      ( x)
+      ( y))
+  iff-same-neighbors-same-neighborhood-Premetric-Space =
+    ( λ H d z →
+      ( H d z) ,
+      ( inv-neighborhood-Premetric-Space-WIP A ∘
+        pr1 (H d z) ∘
+        inv-neighborhood-Premetric-Space-WIP A) ,
+      ( inv-neighborhood-Premetric-Space-WIP A ∘
+        pr2 (H d z) ∘
+        inv-neighborhood-Premetric-Space-WIP A)) ,
+    ( iff-left-neighbor-sim-Rational-Neighborhood-Relation
+      ( neighborhood-prop-Premetric-Space-WIP A))
+
+  iff-same-neighborhood-sim-Premetric-Space :
+    { x y : type-Premetric-Space-WIP A} →
+    ( sim-Premetric-Space-WIP A x y) ↔
+    ( sim-Rational-Neighborhood-Relation
+      ( neighborhood-prop-Premetric-Space-WIP A)
+      ( x)
+      ( y))
+  iff-same-neighborhood-sim-Premetric-Space =
+    ( iff-same-neighbors-same-neighborhood-Premetric-Space) ∘iff
+    ( iff-same-neighbors-sim-Premetric-Space A)
 ```
