@@ -33,16 +33,15 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-{{#concept "Multivariable polynomial functors"}} are a generalization of the
-notion of [polynomial endofunctors](trees.polynomial-endofunctors.md) to the
-case where one has a family of types(variables) as opposed to a single type.
-
-Given a family of types `A : J → 𝒰` and a type family
-`B : I → {j : J} → A j → 𝒱` over `A`, we have a multivariable polynomial functor
-`P A B` with action on type families given by
+{{#concept "Multivariable polynomial functors" Agda=polynomial-functor}} are a
+generalization of the notion of
+[polynomial endofunctors](trees.polynomial-endofunctors.md) to the case of
+families of types (variables). Given a family of types `A : J → Type` and a type
+family `B : I → {j : J} → A j → Type` over `A`, we have a multivariable
+polynomial functor `𝑃 A B` with action on type families given by
 
 ```text
-  X j ↦ Σ (a : A j), ((i : I) → B i a → X i)
+  𝑃 A B X j := Σ (a : A j), ((i : I) → B i a → X i).
 ```
 
 ## Definitions
@@ -273,7 +272,7 @@ module _
   map-compute-type-id-polynomial-functor X i =
     map-equiv (compute-type-id-polynomial-functor X i)
 
-  compute-map-id-polynomial-functor :
+  coh-map-id-polynomial-functor :
     {l2 l3 : Level} {X : I → UU l2} {Y : I → UU l3} (f : (i : I) → X i → Y i)
     (i : I) →
     coherence-square-maps
@@ -281,7 +280,7 @@ module _
       ( map-polynomial-functor id-polynomial-functor f i)
       ( f i)
       ( map-compute-type-id-polynomial-functor Y i)
-  compute-map-id-polynomial-functor f i = refl-htpy
+  coh-map-id-polynomial-functor f i = refl-htpy
 ```
 
 ### Composition of multivariable polynomial functors
@@ -343,7 +342,7 @@ module _
     ( map-compute-type-comp-polynomial-functor X k ,
       is-equiv-map-compute-type-comp-polynomial-functor X k)
 
-  compute-map-comp-polynomial-functor :
+  coh-map-comp-polynomial-functor :
     {l8 l9 : Level} {X : I → UU l8} {Y : I → UU l9}
     (f : (i : I) → X i → Y i) (k : K) →
     coherence-square-maps
@@ -351,5 +350,23 @@ module _
       ( map-polynomial-functor comp-polynomial-functor f k)
       ( map-polynomial-functor 𝑄 (map-polynomial-functor 𝑃 f) k)
       ( map-compute-type-comp-polynomial-functor Y k)
+  coh-map-comp-polynomial-functor f k x = refl
+
+  compute-map-comp-polynomial-functor :
+    {l8 l9 : Level} {X : I → UU l8} {Y : I → UU l9}
+    (f : (i : I) → X i → Y i) (k : K) →
+    ( map-polynomial-functor comp-polynomial-functor f k) ~
+    ( map-inv-compute-type-comp-polynomial-functor Y k) ∘
+    ( map-polynomial-functor 𝑄 (map-polynomial-functor 𝑃 f) k) ∘
+    ( map-compute-type-comp-polynomial-functor X k)
   compute-map-comp-polynomial-functor f k x = refl
+
+  compute-map-comp-polynomial-functor' :
+    {l8 l9 : Level} {X : I → UU l8} {Y : I → UU l9}
+    (f : (i : I) → X i → Y i) (k : K) →
+    ( map-polynomial-functor 𝑄 (map-polynomial-functor 𝑃 f) k) ~
+    ( map-compute-type-comp-polynomial-functor Y k) ∘
+    ( map-polynomial-functor comp-polynomial-functor f k) ∘
+    ( map-inv-compute-type-comp-polynomial-functor X k)
+  compute-map-comp-polynomial-functor' f k x = refl
 ```
