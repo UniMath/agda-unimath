@@ -1,4 +1,4 @@
-# Codensity monads in precategories
+# Codensity monads on precategories
 
 ```agda
 module category-theory.codensity-monads-on-precategories where
@@ -26,7 +26,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given an arbitrary functor `F : C → D`, any [right Kan
+Given an arbitrary [functor](category-theory.functors-precategories.md) `F : C → D`, any [right Kan
 extension](category-theory.right-kan-extensions-precategories.md] `R` of `F`
 along itself `F` has a canonical
 [monad](category-theory.monads-on-precategories.md] structure, called the
@@ -509,7 +509,7 @@ module _
         ( _)
         ( _)) ∙
     ( ap
-      ( λ x → comp-natural-transformation-Precategory C D RRRF RF F α x)
+      ( comp-natural-transformation-Precategory C D RRRF RF F α)
       ( eq-htpy-hom-family-natural-transformation-Precategory C D RRRF RF
         ( _)
         ( _)

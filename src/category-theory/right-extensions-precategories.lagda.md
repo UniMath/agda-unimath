@@ -282,13 +282,13 @@ module _
           ( extension-right-extension-Precategory C D D F F R)
           ( extension-right-extension-Precategory C D D F F R))
         ( F))
-      (comp-functor-Precategory C D D
+      ( comp-functor-Precategory C D D
         ( extension-right-extension-Precategory C D D F F R)
         ( F))
       ( F)
       ( natural-transformation-right-extension-Precategory C D D F F R)
       ( left-whisker-natural-transformation-Precategory C D D
-        (comp-functor-Precategory C D D
+        ( comp-functor-Precategory C D D
           ( extension-right-extension-Precategory C D D F F R)
           ( F))
         ( F)
