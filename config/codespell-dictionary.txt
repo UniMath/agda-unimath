@@ -1,3 +1,7 @@
+Kratowski->Kuratowski
+Kratowsky->Kuratowski
+Kuratowsky->Kuratowski
+Lavwere->Lawvere
 anamorhpism->anamorphism
 anamorhpisms->anamorphisms
 anamorhpsim->anamorphism
@@ -42,10 +46,6 @@ isomorhpsim->isomorphism
 isomorhpsims->isomorphisms
 isomorphsim->isomorphism
 isomorphsims->isomorphisms
-Kratowski->Kuratowski
-Kratowsky->Kuratowski
-Kuratowsky->Kuratowski
-Lavwere->Lawvere
 monomorhpism->monomorphism
 monomorhpisms->monomorphisms
 monomorhpsim->monomorphism
