@@ -316,4 +316,4 @@ module _
 
 ## References
 
-{{#bibliography}}
+{{#bibliography}} {{#reference CSY22}}

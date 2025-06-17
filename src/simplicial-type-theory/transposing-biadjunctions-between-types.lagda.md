@@ -285,7 +285,3 @@ module _
 ### Retracts of transposing biadjoints are transposing biadjoints
 
 > This remains to be formalized.
-
-## References
-
-{{#bibliography}}
