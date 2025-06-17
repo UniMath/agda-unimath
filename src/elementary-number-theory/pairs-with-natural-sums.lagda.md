@@ -173,12 +173,12 @@ module _
   equiv-pair-with-sum-pr1-pr2 :
     Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1) ≃
     Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2)
-  equiv-pair-with-sum-pr1-pr2 =
-    map-equiv-pair-with-sum-pr1-pr2 ,
-    ( map-inv-equiv-pair-with-sum-pr1-pr2 ,
-      is-section-map-inv-equiv-pair-with-sum-pr1-pr2) ,
-    ( map-inv-equiv-pair-with-sum-pr1-pr2 ,
-      is-retraction-map-inv-equiv-pair-with-sum-pr1-pr2)
+  pr1 equiv-pair-with-sum-pr1-pr2 = map-equiv-pair-with-sum-pr1-pr2
+  pr2 equiv-pair-with-sum-pr1-pr2 =
+    is-equiv-is-invertible
+      ( map-inv-equiv-pair-with-sum-pr1-pr2)
+      ( is-section-map-inv-equiv-pair-with-sum-pr1-pr2)
+      ( is-retraction-map-inv-equiv-pair-with-sum-pr1-pr2)
 ```
 
 ### Pairs with a fixed sum are a finite type
@@ -190,10 +190,11 @@ module _
 
   equiv-pair-with-sum-leq-ℕ :
     Σ ℕ (λ k → leq-ℕ k n) ≃ pair-with-sum-ℕ n
-  equiv-pair-with-sum-leq-ℕ =
-    ( λ (k , k≤n) → k , subtraction-leq-ℕ k n k≤n) ,
-    ((λ (k , l , l+k=n) → k , leq-subtraction-ℕ k n l l+k=n) ,
-      λ (k , l , l+k=n) →
+  pr1 equiv-pair-with-sum-leq-ℕ (k , k≤n) = (k , subtraction-leq-ℕ k n k≤n)
+  pr2 equiv-pair-with-sum-leq-ℕ =
+    is-equiv-is-invertible
+      ( λ (k , l , l+k=n) → k , leq-subtraction-ℕ k n l l+k=n)
+      ( λ (k , l , l+k=n) →
         let
           (l' , l'+k=n) =
             subtraction-leq-ℕ k n (leq-subtraction-ℕ k n l l+k=n)
@@ -201,9 +202,8 @@ module _
           eq-pair-eq-fiber
             ( eq-pair-Σ
               ( is-injective-right-add-ℕ k (l'+k=n ∙ inv l+k=n))
-              ( eq-type-Prop (Id-Prop ℕ-Set (l +ℕ k) n)))) ,
-    (( λ (k , l , l+k=n) → k , leq-subtraction-ℕ k n l l+k=n) ,
-      (λ (k , k≤n) → eq-pair-eq-fiber (eq-type-Prop (leq-ℕ-Prop k n))))
+              ( eq-type-Prop (Id-Prop ℕ-Set (l +ℕ k) n))))
+    ( λ (k , k≤n) → eq-pair-eq-fiber (eq-type-Prop (leq-ℕ-Prop k n)))
 
   count-pair-with-sum-ℕ : count (pair-with-sum-ℕ n)
   count-pair-with-sum-ℕ =
@@ -281,10 +281,11 @@ module _
 
   equiv-permute-components-triple-with-sum-pr2 :
     Aut (Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2))
-  equiv-permute-components-triple-with-sum-pr2 =
-    map-equiv-permute-components-triple-with-sum-pr2 ,
-    ( ( map-inv-equiv-permute-components-triple-with-sum-pr2 ,
-        is-section-map-inv-equiv-permute-components-triple-with-sum-pr2) ,
-      ( map-inv-equiv-permute-components-triple-with-sum-pr2 ,
-        is-retraction-map-inv-equiv-permute-components-triple-with-sum-pr2))
+  pr1 equiv-permute-components-triple-with-sum-pr2 =
+    map-equiv-permute-components-triple-with-sum-pr2
+  pr2 equiv-permute-components-triple-with-sum-pr2 =
+    is-equiv-is-invertible
+      ( map-inv-equiv-permute-components-triple-with-sum-pr2)
+      ( is-section-map-inv-equiv-permute-components-triple-with-sum-pr2)
+      ( is-retraction-map-inv-equiv-permute-components-triple-with-sum-pr2)
 ```

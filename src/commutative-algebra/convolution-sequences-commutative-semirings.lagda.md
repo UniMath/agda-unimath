@@ -137,8 +137,8 @@ module _
       (a : sequence (type-Commutative-Semiring R)) →
       convolution-sequence-Commutative-Semiring R
         ( unit-convolution-sequence-Commutative-Semiring)
-        ( a)
-        ~ a
+        ( a) ~
+      a
     htpy-left-unit-law-convolution-sequence-Commutative-Semiring a n =
       equational-reasoning
         sum-finite-Commutative-Semiring R
@@ -184,8 +184,8 @@ module _
     (a : sequence (type-Commutative-Semiring R)) →
     convolution-sequence-Commutative-Semiring R
       ( unit-convolution-sequence-Commutative-Semiring)
-      ( a)
-      ＝ a
+      ( a) ＝
+    a
   left-unit-law-convolution-sequence-Commutative-Semiring a =
     eq-htpy (htpy-left-unit-law-convolution-sequence-Commutative-Semiring a)
 
@@ -193,8 +193,8 @@ module _
     (a : sequence (type-Commutative-Semiring R)) →
     convolution-sequence-Commutative-Semiring R
       ( a)
-      ( unit-convolution-sequence-Commutative-Semiring)
-      ＝ a
+      ( unit-convolution-sequence-Commutative-Semiring) ＝
+    a
   right-unit-law-convolution-sequence-Commutative-Semiring a =
     commutative-convolution-sequence-Commutative-Semiring R _ _ ∙
     left-unit-law-convolution-sequence-Commutative-Semiring a
@@ -217,7 +217,12 @@ module _
         ( a)
         ( convolution-sequence-Commutative-Semiring R b c)
     htpy-associative-convolution-sequence-Commutative-Semiring a b c n =
-      equational-reasoning
+      let
+        _*R_ :
+          type-Commutative-Semiring R → type-Commutative-Semiring R →
+          type-Commutative-Semiring R
+        _*R_ = mul-Commutative-Semiring R
+      in equational-reasoning
         sum-finite-Commutative-Semiring
           ( R)
           ( finite-type-pair-with-sum-ℕ n)
@@ -326,11 +331,6 @@ module _
                     ( _)
                     ( _)
                     ( _)))
-      where
-        _*R_ :
-          type-Commutative-Semiring R → type-Commutative-Semiring R →
-          type-Commutative-Semiring R
-        _*R_ = mul-Commutative-Semiring R
 
   associative-convolution-sequence-Commutative-Semiring :
     (a b c : sequence (type-Commutative-Semiring R)) →
@@ -502,23 +502,11 @@ module _
   has-mul-convolution-additive-commutative-monoid-sequence-Commutative-Semiring :
     has-mul-Commutative-Monoid
       additive-commutative-monoid-sequence-Commutative-Semiring
-  pr1
-    has-mul-convolution-additive-commutative-monoid-sequence-Commutative-Semiring =
-    has-associative-mul-convolution-sequence-Commutative-Semiring
-  pr1
-    ( pr2
-      ( has-mul-convolution-additive-commutative-monoid-sequence-Commutative-Semiring)) =
-    is-unital-convolution-sequence-Commutative-Semiring
-  pr1
-    ( pr2
-      ( pr2
-        ( has-mul-convolution-additive-commutative-monoid-sequence-Commutative-Semiring))) =
-    left-distributive-convolution-add-sequence-Commutative-Semiring R
-  pr2
-    ( pr2
-      ( pr2
-        ( has-mul-convolution-additive-commutative-monoid-sequence-Commutative-Semiring))) =
-    right-distributive-convolution-add-sequence-Commutative-Semiring R
+  has-mul-convolution-additive-commutative-monoid-sequence-Commutative-Semiring =
+    ( has-associative-mul-convolution-sequence-Commutative-Semiring ,
+      is-unital-convolution-sequence-Commutative-Semiring ,
+      left-distributive-convolution-add-sequence-Commutative-Semiring R ,
+      right-distributive-convolution-add-sequence-Commutative-Semiring R)
 
   zero-laws-convolution-additive-commutative-monoid-sequence-Commutative-Semiring :
     zero-laws-Commutative-Monoid
