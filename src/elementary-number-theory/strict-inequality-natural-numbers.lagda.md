@@ -414,10 +414,10 @@ preserves-le-add-ℕ {a} {b} {c} {d} H K =
 ```agda
 equiv-le-succ-ℕ-leq-ℕ :
   (n : ℕ) → Σ ℕ (λ k → le-ℕ k (succ-ℕ n)) ≃ Σ ℕ (λ k → leq-ℕ k n)
-equiv-le-succ-ℕ-leq-ℕ n =
-  ( λ (k , k<sn) → k , leq-le-succ-ℕ k n k<sn) ,
-  ((λ (k , k≤n) → k , le-succ-leq-ℕ k n k≤n) ,
-    λ (k , k≤n) → eq-pair-Σ refl (eq-type-Prop (leq-ℕ-Prop k n))) ,
-  ((λ (k , k≤n) → k , le-succ-leq-ℕ k n k≤n) ,
-    λ (k , k<sn) → eq-pair-Σ refl (eq-type-Prop (le-ℕ-Prop k (succ-ℕ n))))
+pr1 (equiv-le-succ-ℕ-leq-ℕ n) (k , k<sn) = (k , leq-le-succ-ℕ k n k<sn)
+pr2 (equiv-le-succ-ℕ-leq-ℕ n) =
+  is-equiv-is-invertible
+    ( λ (k , k≤n) → k , le-succ-leq-ℕ k n k≤n)
+    ( λ (k , k≤n) → eq-pair-Σ refl (eq-type-Prop (leq-ℕ-Prop k n)))
+    ( λ (k , k<sn) → eq-pair-Σ refl (eq-type-Prop (le-ℕ-Prop k (succ-ℕ n))))
 ```
