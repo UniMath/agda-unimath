@@ -28,6 +28,8 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.homotopies
 ```
 
 </details>
@@ -39,8 +41,8 @@ A
 of a [functor](category-theory.functors-precategories.md) `F` between
 [precategories](category-theory.precategories.md) is a colimiting
 [cocone](category-theory.cocones-precategories.md) under `F`. That is, a cocone
-`τ` such that `cocone-map-Precategory C D F τ d` is an equivalence for all
-`d : obj-Precategory D`.
+`τ` such that `cocone-map-Precategory C D F τ d` is an
+[equivalence](foundation-core.equivalences.md) for all `d : obj-Precategory D`.
 
 Equivalently, the colimit of `F` is a
 [left kan extension](category-theory.left-kan-extensions-precategories.md) of
@@ -53,7 +55,7 @@ colimiting cocones as our official one.
 If a colimit exists, we call the vertex of the colimiting cocone the **vertex**
 of the colimit.
 
-## Definition
+## Definitions
 
 ### Colimiting cocones
 
@@ -157,14 +159,14 @@ module _
     (τ : cocone-Precategory C D F) →
     is-prop (is-colimit-cocone-Precategory C D F τ)
   is-prop-is-colimit-cocone-Precategory τ =
-    is-prop-Π λ φ → is-property-is-equiv _
+    is-prop-Π (λ φ → is-property-is-equiv _)
 
   is-prop-is-colimit-Precategory' :
     ( R : left-extension-Precategory C terminal-Precategory D
       (terminal-functor-Precategory C) F) →
     is-prop (is-colimit-left-extension-Precategory C D F R)
   is-prop-is-colimit-Precategory' R =
-    is-prop-Π λ K → is-property-is-equiv _
+    is-prop-Π (λ K → is-property-is-equiv _)
 ```
 
 ### Colimiting cocones are equivalent to colimits
@@ -178,9 +180,10 @@ module _
   equiv-is-left-kan-extension-is-colimit-Precategory :
     (τ : cocone-Precategory C D F) →
     is-colimit-cocone-Precategory C D F τ ≃
-      is-left-kan-extension-Precategory C terminal-Precategory D
-      (terminal-functor-Precategory C) F
-      (map-equiv (equiv-left-extension-cocone-Precategory C D F) τ)
+    is-left-kan-extension-Precategory C terminal-Precategory D
+      ( terminal-functor-Precategory C)
+      ( F)
+      ( map-equiv (equiv-left-extension-cocone-Precategory C D F) τ)
   equiv-is-left-kan-extension-is-colimit-Precategory τ =
     equiv-Π _
       ( equiv-point-Precategory D)
@@ -190,23 +193,41 @@ module _
           ( is-property-is-equiv _)
           ( λ e →
             is-equiv-left-factor
-            ( induced-left-extension-map x)
-            ( natural-transformation-constant-functor-Precategory
-              terminal-Precategory D)
-            ( tr is-equiv (inv (lemma τ x)) e)
-            ( is-equiv-natural-transformation-constant-functor-Precategory
-              D _ _))
+              ( induced-left-extension-map x)
+              ( natural-transformation-constant-functor-Precategory
+                ( terminal-Precategory)
+                ( D))
+              ( tr is-equiv (inv (lemma τ x)) e)
+              ( is-equiv-natural-transformation-constant-functor-Precategory
+                ( D)
+                ( _)
+                ( _)))
           ( λ e →
             tr is-equiv (lemma τ x)
               ( is-equiv-comp
                 ( induced-left-extension-map x)
                 ( natural-transformation-constant-functor-Precategory
-                  terminal-Precategory D)
+                  ( terminal-Precategory)
+                  ( D))
                 ( is-equiv-natural-transformation-constant-functor-Precategory
-                  D _ _)
+                  ( D)
+                  ( _)
+                  ( _))
                 ( e))))
     where
-      induced-left-extension-map = λ x →
+      induced-left-extension-map :
+        ( x : obj-Precategory D) →
+        natural-transformation-Precategory terminal-Precategory D
+          ( extension-left-extension-Precategory C terminal-Precategory D
+            ( terminal-functor-Precategory C)
+            ( F)
+            ( map-equiv (equiv-left-extension-cocone-Precategory C D F) τ))
+          ( constant-functor-Precategory terminal-Precategory D x) →
+        natural-transformation-Precategory C D F
+          ( comp-functor-Precategory C terminal-Precategory D
+            ( constant-functor-Precategory terminal-Precategory D x)
+            ( terminal-functor-Precategory C))
+      induced-left-extension-map x =
         left-extension-map-Precategory C terminal-Precategory D
           ( terminal-functor-Precategory C) ( F)
           ( map-equiv (equiv-left-extension-cocone-Precategory C D F) τ)
@@ -214,23 +235,24 @@ module _
       lemma :
         ( τ : cocone-Precategory C D F)
         ( x : obj-Precategory D) →
-          ( left-extension-map-Precategory C terminal-Precategory D
-            ( terminal-functor-Precategory C) F
-            ( map-equiv (equiv-left-extension-cocone-Precategory C D F) τ)
-            ( constant-functor-Precategory terminal-Precategory D x)) ∘
-          ( natural-transformation-constant-functor-Precategory
-            terminal-Precategory D) ＝
+        ( left-extension-map-Precategory C terminal-Precategory D
+          ( terminal-functor-Precategory C) F
+          ( map-equiv (equiv-left-extension-cocone-Precategory C D F) τ)
+          ( constant-functor-Precategory terminal-Precategory D x)) ∘
+        ( natural-transformation-constant-functor-Precategory
+          terminal-Precategory D) ＝
         ( cocone-map-Precategory C D F τ x)
       lemma τ x =
-        eq-htpy λ f →
-          eq-htpy-hom-family-natural-transformation-Precategory C D
-            ( F)
-            ( comp-functor-Precategory C terminal-Precategory D
-              ( point-Precategory D x)
-              ( terminal-functor-Precategory C))
-            ( _)
-            ( _)
-            ( λ g → refl)
+        eq-htpy
+          ( λ f →
+            eq-htpy-hom-family-natural-transformation-Precategory C D
+              ( F)
+              ( comp-functor-Precategory C terminal-Precategory D
+                ( point-Precategory D x)
+                ( terminal-functor-Precategory C))
+              ( _)
+              ( _)
+              ( refl-htpy))
 
   equiv-colimit-colimit'-Precategory :
     colimit-Precategory C D F ≃ colimit-Precategory' C D F

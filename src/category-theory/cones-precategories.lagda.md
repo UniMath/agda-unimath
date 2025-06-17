@@ -166,11 +166,11 @@ module _
   pr1 (cone-map-Precategory τ d f) x =
     comp-hom-Precategory D (component-cone-Precategory τ x) f
   pr2 (cone-map-Precategory τ d f) h =
-    inv (associative-comp-hom-Precategory D _ _ _) ∙
-    ap
+    ( inv (associative-comp-hom-Precategory D _ _ _)) ∙
+    ( ap
       ( λ g → comp-hom-Precategory D g f)
-      ( inv (naturality-cone-Precategory τ h)) ∙
-    inv (right-unit-law-comp-hom-Precategory D _)
+      ( inv (naturality-cone-Precategory τ h))) ∙
+    ( inv (right-unit-law-comp-hom-Precategory D _))
 ```
 
 ## Properties
