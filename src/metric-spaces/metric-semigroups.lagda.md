@@ -56,12 +56,12 @@ module _
       ( metric-space-of-short-functions-Metric-Space A A)
       ( f))
 
-  is-short-associative-prop-mul-Metric-Space :
+  is-associative-prop-short-mul-Metric-Space :
     short-function-Metric-Space
       ( A)
       ( metric-space-of-short-functions-Metric-Space A A) →
     Prop l1
-  is-short-associative-prop-mul-Metric-Space f =
+  is-associative-prop-short-mul-Metric-Space f =
     let
       μ : type-Metric-Space A → type-Metric-Space A → type-Metric-Space A
       μ = mul-short-mul-Metric-Space f
@@ -87,7 +87,7 @@ module _
 Metric-Semigroup : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Metric-Semigroup l1 l2 =
   Σ ( Metric-Space l1 l2)
-    ( type-subtype ∘ is-short-associative-prop-mul-Metric-Space)
+    ( type-subtype ∘ is-associative-prop-short-mul-Metric-Space)
 
 module _
   {l1 l2 : Level} (M : Metric-Semigroup l1 l2)
@@ -104,7 +104,7 @@ module _
 
   short-associative-mul-Metric-Semigroup :
     type-subtype
-      (is-short-associative-prop-mul-Metric-Space metric-space-Metric-Semigroup)
+      (is-associative-prop-short-mul-Metric-Space metric-space-Metric-Semigroup)
   short-associative-mul-Metric-Semigroup = pr2 M
 
   short-mul-Metric-Semigroup :
