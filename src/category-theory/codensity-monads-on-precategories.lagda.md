@@ -598,7 +598,7 @@ module _
 
 ## See also
 
-- [Codensity monad](codensity-monads-on-precategories.md) for the dual concept
+- [Density comonads](density-comonads-on-precategories.md) for the dual concept
 
 ## External links
 

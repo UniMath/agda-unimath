@@ -1,4 +1,4 @@
-# Density comonads in precategories
+# Density comonads on precategories
 
 ```agda
 module category-theory.density-comonads-on-precategories where
@@ -589,4 +589,4 @@ module _
 
 ## See also
 
-- [Codensity monad](codensity-monads-on-precategories.md) for the dual concept
+- [Codensity monads](codensity-monads-on-precategories.md) for the dual concept
