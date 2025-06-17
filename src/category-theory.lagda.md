@@ -27,6 +27,7 @@ open import category-theory.category-of-maps-categories public
 open import category-theory.category-of-maps-from-small-to-large-categories public
 open import category-theory.coalgebras-comonads-on-precategories public
 open import category-theory.cocones-precategories public
+open import category-theory.codensity-monads-on-precategories public
 open import category-theory.colimits-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-large-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-precategories public
