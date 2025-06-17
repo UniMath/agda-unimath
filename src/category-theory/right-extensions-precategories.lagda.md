@@ -268,14 +268,14 @@ module _
   pr2 id-right-extension-Precategory =
     id-natural-transformation-Precategory C D F
 
-  double-right-extension-Precategory :
+  square-right-extension-Precategory :
     (R : right-extension-Precategory C D D F F) →
     right-extension-Precategory C D D F F
-  pr1 (double-right-extension-Precategory R) =
+  pr1 (square-right-extension-Precategory R) =
     comp-functor-Precategory D D D
       ( extension-right-extension-Precategory C D D F F R)
       ( extension-right-extension-Precategory C D D F F R)
-  pr2 (double-right-extension-Precategory R) =
+  pr2 (square-right-extension-Precategory R) =
     comp-natural-transformation-Precategory C D
       ( comp-functor-Precategory C D D
         ( comp-functor-Precategory D D D

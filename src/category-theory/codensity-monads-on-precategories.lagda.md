@@ -26,11 +26,13 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given an arbitrary [functor](category-theory.functors-precategories.md) `F : C → D`, any [right Kan
+Given an arbitrary [functor](category-theory.functors-precategories.md)
+`F : C → D`, any [right Kan
 extension](category-theory.right-kan-extensions-precategories.md] `R` of `F`
 along itself `F` has a canonical
 [monad](category-theory.monads-on-precategories.md] structure, called the
-{{#concept "codensity monad" Agda=codensity-monad-Precategory}} of `R`.
+{{#concept "codensity monad" Agda=codensity-monad-Precategory WD="codensity monad" WDID=Q97359844}}
+of `R`.
 
 ## Monad structure
 
@@ -88,7 +90,7 @@ module _
     map-inv-is-equiv
       ( KR (comp-functor-Precategory D D D R R))
       ( pr2
-        ( double-right-extension-Precategory C D F
+        ( square-right-extension-Precategory C D F
           ( right-extension-right-kan-extension-Precategory C D D F F Rk)))
 
   abstract
@@ -599,3 +601,8 @@ module _
       ( ( left-unit-law-mul-codensity-monad-Precategory C D F Rk) ,
         ( right-unit-law-mul-codensity-monad-Precategory C D F Rk)))
 ```
+
+## External links
+
+- [Codensity monad](https://ncatlab.org/nlab/show/codensity+monad) at $n$Lab
+- [Codensity monad](https://en.wikipedia.org/wiki/Codensity_monad) at Wikipedia
