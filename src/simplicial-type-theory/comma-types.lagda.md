@@ -38,8 +38,9 @@ open import simplicial-type-theory.directed-interval-type I
 ## Idea
 
 Given a [span diagram of types](foundation.span-diagrams.md)
-`f : B → A ← C : g`, then the {{#concept "comma type" Agda=_↓▵_}} `f ↓▵ g` is
-the [collection](foundation.dependent-pair-types.md) of
+`f : B → A ← C : g`, then the
+{{#concept "comma type" Disambiguation="in simplicial type theory" Agda=_↓▵_}}
+`f ↓▵ g` is the [collection](foundation.dependent-pair-types.md) of
 [pairs](foundation.cartesian-product-types.md) of elements `(b , c) : B × C`
 [equipped](foundation.structure.md) with a
 [directed edge](simplicial-type-theory.directed-edges.md) `f b →▵ g c`.
