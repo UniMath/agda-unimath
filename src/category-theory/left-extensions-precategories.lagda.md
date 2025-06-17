@@ -279,7 +279,7 @@ module _
   pr2 (square-left-extension-Precategory L) =
     comp-natural-transformation-Precategory C D
       ( F)
-      (comp-functor-Precategory C D D
+      ( comp-functor-Precategory C D D
         ( extension-left-extension-Precategory C D D F F L)
         ( F))
       ( comp-functor-Precategory C D D
@@ -289,7 +289,7 @@ module _
         ( F))
       ( left-whisker-natural-transformation-Precategory C D D
         ( F)
-        (comp-functor-Precategory C D D
+        ( comp-functor-Precategory C D D
           ( extension-left-extension-Precategory C D D F F L)
           ( F))
         ( extension-left-extension-Precategory C D D F F L)

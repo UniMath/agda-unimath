@@ -177,10 +177,7 @@ module _
       ( _)
       ( _)) ∙
     ( ap
-      ( λ x →
-        ( comp-natural-transformation-Precategory C D RF RF F
-          ( α)
-          ( x)))
+      ( comp-natural-transformation-Precategory C D RF RF F α)
       ( inv
         ( preserves-comp-left-whisker-natural-transformation-Precategory
           ( C)
@@ -205,10 +202,7 @@ module _
             ( x))))
       ( compute-unit-codensity-monad-Precategory C D F Rk)) ∙
     ( ap
-      ( λ x →
-        ( comp-natural-transformation-Precategory C D RF RF F
-          ( α)
-          ( x)))
+      ( comp-natural-transformation-Precategory C D RF RF F α)
       ( preserves-id-left-whisker-natural-transformation-Precategory C D D
         ( F)
         ( R))) ∙
@@ -303,7 +297,7 @@ module _
       ( _)
       ( _)) ∙
     ( ap
-      ( λ x → comp-natural-transformation-Precategory C D RF RF F α x)
+      ( comp-natural-transformation-Precategory C D RF RF F α)
       ( eq-htpy-hom-family-natural-transformation-Precategory C D RF RF _ _
         ( λ x →
           ( naturality-natural-transformation-Precategory D D
@@ -393,7 +387,7 @@ module _
             ( α))))
   left-precomp-associative-mul-codensity-monad-Precategory =
     ( ap
-      ( λ x → comp-natural-transformation-Precategory C D RRRF RF F α x)
+      ( comp-natural-transformation-Precategory C D RRRF RF F α)
       ( preserves-comp-right-whisker-natural-transformation-Precategory D D C
         ( RRR)
         ( RR)
@@ -429,7 +423,7 @@ module _
       ( _)
       ( _)) ∙
     ( ap
-      ( λ x → comp-natural-transformation-Precategory C D RRRF RF F α x)
+      ( comp-natural-transformation-Precategory C D RRRF RF F α)
       ( inv
         ( preserves-comp-left-whisker-natural-transformation-Precategory C D D
           ( RRF)
@@ -479,7 +473,7 @@ module _
             ( α))))
   right-precomp-associative-mul-codensity-monad-Precategory =
     ( ap
-      ( λ x → comp-natural-transformation-Precategory C D RRRF RF F α x)
+      ( comp-natural-transformation-Precategory C D RRRF RF F α)
       ( preserves-comp-right-whisker-natural-transformation-Precategory D D C
         ( RRR)
         ( RR)
@@ -547,7 +541,7 @@ module _
       ( _)
       ( _)) ∙
     ( ap
-      ( λ x → comp-natural-transformation-Precategory C D RRRF RF F α x)
+      ( comp-natural-transformation-Precategory C D RRRF RF F α)
       ( inv
         ( preserves-comp-left-whisker-natural-transformation-Precategory C D D
           ( RRF)
@@ -601,6 +595,10 @@ module _
       ( ( left-unit-law-mul-codensity-monad-Precategory C D F Rk) ,
         ( right-unit-law-mul-codensity-monad-Precategory C D F Rk)))
 ```
+
+## See also
+
+- [Codensity monad](codensity-monads-on-precategories.md) for the dual concept
 
 ## External links
 
