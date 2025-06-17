@@ -30,7 +30,7 @@ Given an arbitrary [functor](category-theory.functors-precategories.md)
 `F : C → D`, any [left Kan
 extension](category-theory.left-kan-extensions-precategories.md] `L` of `F`
 along itself `F` has a canonical
-[comonad](category-theory.comonads-on-precategories.md] structure, called the
+[comonad](category-theory.comonads-on-precategories.md) structure, called the
 {{#concept "density comonad" Agda=density-comonad-Precategory}} of `L`.
 
 ## Comonad structure
@@ -589,4 +589,5 @@ module _
 
 ## See also
 
-- [Codensity monads](codensity-monads-on-precategories.md) for the dual concept
+- [Codensity monads](category-theory.codensity-monads-on-precategories.md) for
+  the dual concept
