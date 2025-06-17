@@ -29,11 +29,13 @@ open import simplicial-type-theory.directed-edges I
 
 ## Idea
 
-Any function `f : A → B` preserves
+Any [function](foundation-core.function-types.md) `f : A → B` preserves
 [directed edges](simplicial-type-theory.directed-edges.md), in the sense that it
-maps any edge `p : x →▵ y` in `A` to an edge `action-hom▵ f p : f x →▵ f y` in
-`B`. This action on directed edges can be thought of as a functorial action of
-functions in simplicial type theory.
+maps any edge `p : x →▵ y` in `A` to a directed edge
+`action-hom▵ f p : f x →▵ f y` in `B`. This action on directed edges can be
+thought of as
+{{#concept "functoriality" Disambiguation="of functions in simplicial type theory" Agda=action-hom▵-function}}
+of functions in simplicial type theory.
 
 ## Definition
 

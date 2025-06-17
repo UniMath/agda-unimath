@@ -55,7 +55,8 @@ open import synthetic-homotopy-theory.pushouts
 
 ## Idea
 
-Given a type `X`, we define the {{#concept "directed cone type"}} as the
+Given a type `X`, we define the
+{{#concept "directed cone type" Agda= directed-cone}} as the
 [pushout](synthetic-homotopy-theory.pushouts.md)
 
 ```text
@@ -208,4 +209,4 @@ module _
 
 and since the top horizontal map is an equivalence, so is its pushout.
 
-This remains to be formalized.
+> This remains to be formalized.

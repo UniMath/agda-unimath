@@ -39,6 +39,7 @@ open import foundation-core.retracts-of-types
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncation-levels
 
+open import simplicial-type-theory.Discrete-Type▵s I
 open import simplicial-type-theory.action-on-directed-edges-functions I
 open import simplicial-type-theory.dependent-directed-edges I
 open import simplicial-type-theory.directed-edges I
@@ -46,7 +47,6 @@ open import simplicial-type-theory.directed-edges-cartesian-product-types I
 open import simplicial-type-theory.directed-edges-dependent-pair-types I
 open import simplicial-type-theory.fully-faithful-maps I
 open import simplicial-type-theory.natural-transformations I
-open import simplicial-type-theory.simplicially-discrete-types I
 open import simplicial-type-theory.whiskering-directed-edges I
 ```
 
@@ -63,8 +63,10 @@ the inductive definition of globular coskeletality for types. A type is
 globular spaces. However, the two agree in many cases we care about, i.e. when
 `k = 0` or the types are Segal.
 
-**Question.** Should `k+1`-globular coskeletality also require the identity
-types to be `k`-globular coskeletal? Probably yes, c.f. higher modalities.
+> TODO: `k+1`-globular coskeletality should probably also require the identity
+> types to be `k`-globular coskeletal.
+
+**Note.** This file is used for experimentation and may contain mistakes.
 
 ## Definition
 
@@ -136,7 +138,7 @@ is-contr-hom-is-contr H x y =
   is-contr-is-equiv'
     ( x ＝ y)
     ( hom▵-eq)
-    ( is-simplicially-discrete-is-contr H x y)
+    ( is-discrete▵-is-contr H x y)
     ( is-prop-is-contr H x y)
 
 abstract
@@ -186,22 +188,22 @@ hom-Globularly-Coskeletal-Type' A x y =
 
 ### The identity types of a `k`-globularly coskeletal type are `k`-globularly coskeletal
 
-This should be true for coskeletality to be a modality.
+> This should be true for coskeletality to be a modality.
 
 ```text
--- abstract
---   is-globularly-coskeletal-Id :
---     {l : Level} {k : 𝕋} {A : UU l} →
---     is-globularly-coskeletal k A → (x y : A) → is-globularly-coskeletal k (x ＝ y)
---   is-globularly-coskeletal-Id {k = neg-two-𝕋} = is-prop-is-contr
---   is-globularly-coskeletal-Id {k = succ-𝕋 k} H x y p q = {!   !}
+abstract
+  is-globularly-coskeletal-Id :
+    {l : Level} {k : 𝕋} {A : UU l} →
+    is-globularly-coskeletal k A → (x y : A) → is-globularly-coskeletal k (x ＝ y)
+  is-globularly-coskeletal-Id {k = neg-two-𝕋} = is-prop-is-contr
+  is-globularly-coskeletal-Id {k = succ-𝕋 k} H x y p q = {!   !}
 
--- Id-Globularly-Coskeletal-Type' :
---   {l : Level} {k : 𝕋} (A : Globularly-Coskeletal-Type l k) →
---   (x y : type-Globularly-Coskeletal-Type A) → Globularly-Coskeletal-Type l k
--- pr1 (Id-Globularly-Coskeletal-Type' A x y) = (x ＝ y)
--- pr2 (Id-Globularly-Coskeletal-Type' A x y) =
---   is-globularly-coskeletal-Id (is-globularly-coskeletal-type-Globularly-Coskeletal-Type A) x y
+Id-Globularly-Coskeletal-Type' :
+  {l : Level} {k : 𝕋} (A : Globularly-Coskeletal-Type l k) →
+  (x y : type-Globularly-Coskeletal-Type A) → Globularly-Coskeletal-Type l k
+pr1 (Id-Globularly-Coskeletal-Type' A x y) = (x ＝ y)
+pr2 (Id-Globularly-Coskeletal-Type' A x y) =
+  is-globularly-coskeletal-Id (is-globularly-coskeletal-type-Globularly-Coskeletal-Type A) x y
 ```
 
 ### `k`-globularly coskeletal types are closed under retracts
@@ -257,30 +259,33 @@ abstract
     is-globularly-coskeletal-is-equiv' k A f is-equiv-f
 ```
 
-### If a type simplicially embeds into a `k+1`-globularly coskeletal type, then it is `k+1`-globularly coskeletal
+### If a type maps fully faithfully into a `k+1`-globularly coskeletal type, then it is `k+1`-globularly coskeletal
+
+> **Comment.** Assuming Rezk-completeness, then this should probably still hold
+> for globularly coskeletal types with the added condition on identity types.
 
 ```agda
 abstract
-  is-globularly-coskeletal-is-simplicially-fully-faithful :
+  is-globularly-coskeletal-is-fully-faithful▵ :
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
-    is-simplicially-fully-faithful f →
+    is-fully-faithful▵ f →
     is-globularly-coskeletal (succ-𝕋 k) B →
     is-globularly-coskeletal (succ-𝕋 k) A
-  is-globularly-coskeletal-is-simplicially-fully-faithful k f Ef H x y =
+  is-globularly-coskeletal-is-fully-faithful▵ k f Ef H x y =
     is-globularly-coskeletal-is-equiv k (f x →▵ f y)
       ( action-hom▵-function f {x} {y})
       ( Ef x y)
       ( H (f x) (f y))
 
 abstract
-  is-globularly-coskeletal-simplicially-fully-faithful-map :
+  is-globularly-coskeletal-fully-faithful-map▵ :
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A ↪▵ B) →
     is-globularly-coskeletal (succ-𝕋 k) B →
     is-globularly-coskeletal (succ-𝕋 k) A
-  is-globularly-coskeletal-simplicially-fully-faithful-map k f =
-    is-globularly-coskeletal-is-simplicially-fully-faithful k
-      ( map-simplicially-fully-faithful-map f)
-      ( is-simplicially-fully-faithful-map-simplicially-fully-faithful-map f)
+  is-globularly-coskeletal-fully-faithful-map▵ k f =
+    is-globularly-coskeletal-is-fully-faithful▵ k
+      ( map-fully-faithful-map▵ f)
+      ( is-fully-faithful▵-map-fully-faithful-map▵ f)
 ```
 
 In fact, it suffices that the action on homs has a retraction.
@@ -300,46 +305,41 @@ abstract
 
 ### Globularly coskeletal types are closed under dependent pair types
 
+> This remains to be formalized.
+
 ```text
--- abstract
---   is-globularly-coskeletal-Σ :
---     {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : A → UU l2} →
---     is-globularly-coskeletal k A → ((x : A) → is-globularly-coskeletal k (B x)) → is-globularly-coskeletal k (Σ A B)
---   is-globularly-coskeletal-Σ {k = neg-two-𝕋} is-globularly-coskeletal-A is-globularly-coskeletal-B =
---     is-contr-Σ' is-globularly-coskeletal-A is-globularly-coskeletal-B
---   is-globularly-coskeletal-Σ {k = succ-𝕋 k} {B = B} is-globularly-coskeletal-A is-globularly-coskeletal-B s t =
---     is-globularly-coskeletal-equiv k
---       ( hom▵-Σ s t)
---       ( compute-hom▵-Σ)
---       ( is-globularly-coskeletal-Σ
---         ( is-globularly-coskeletal-A (pr1 s) (pr1 t))
---         {!  is-globularly-coskeletal-B ? ? ? !})
+abstract
+  is-globularly-coskeletal-Σ :
+    {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : A → UU l2} →
+    is-globularly-coskeletal k A → ((x : A) → is-globularly-coskeletal k (B x)) → is-globularly-coskeletal k (Σ A B)
+  is-globularly-coskeletal-Σ {k = neg-two-𝕋} is-globularly-coskeletal-A is-globularly-coskeletal-B =
+    is-contr-Σ' is-globularly-coskeletal-A is-globularly-coskeletal-B
+  is-globularly-coskeletal-Σ {k = succ-𝕋 k} {B = B} is-globularly-coskeletal-A is-globularly-coskeletal-B s t =
+    is-globularly-coskeletal-equiv k
+      ( hom▵-Σ s t)
+      ( compute-hom▵-Σ)
+      ( is-globularly-coskeletal-Σ
+        ( is-globularly-coskeletal-A (pr1 s) (pr1 t))
+        {!  is-globularly-coskeletal-B ? ? ? !})
 
-  --   is-globularly-coskeletal-equiv k
-  --     ( Σ (pr1 s ＝ pr1 t) (λ p → tr B p (pr2 s) ＝ pr2 t))
-  --     ( equiv-pair-eq-Σ s t)
-  --     ( is-globularly-coskeletal-Σ
-  --       ( is-globularly-coskeletal-A (pr1 s) (pr1 t))
-  --       ( λ p → is-globularly-coskeletal-B (pr1 t) (tr B p (pr2 s)) (pr2 t)))
+Σ-Globularly-Coskeletal-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : Globularly-Coskeletal-Type l1 k)
+  (B : type-Globularly-Coskeletal-Type A → Globularly-Coskeletal-Type l2 k) →
+  Globularly-Coskeletal-Type (l1 ⊔ l2) k
+pr1 (Σ-Globularly-Coskeletal-Type A B) =
+  Σ (type-Globularly-Coskeletal-Type A) (λ a → type-Globularly-Coskeletal-Type (B a))
+pr2 (Σ-Globularly-Coskeletal-Type A B) =
+  is-globularly-coskeletal-Σ
+    ( is-globularly-coskeletal-type-Globularly-Coskeletal-Type A)
+    ( λ a → is-globularly-coskeletal-type-Globularly-Coskeletal-Type (B a))
 
--- Σ-Globularly-Coskeletal-Type :
---   {l1 l2 : Level} {k : 𝕋} (A : Globularly-Coskeletal-Type l1 k)
---   (B : type-Globularly-Coskeletal-Type A → Globularly-Coskeletal-Type l2 k) →
---   Globularly-Coskeletal-Type (l1 ⊔ l2) k
--- pr1 (Σ-Globularly-Coskeletal-Type A B) =
---   Σ (type-Globularly-Coskeletal-Type A) (λ a → type-Globularly-Coskeletal-Type (B a))
--- pr2 (Σ-Globularly-Coskeletal-Type A B) =
---   is-globularly-coskeletal-Σ
---     ( is-globularly-coskeletal-type-Globularly-Coskeletal-Type A)
---     ( λ a → is-globularly-coskeletal-type-Globularly-Coskeletal-Type (B a))
-
--- fiber-Globularly-Coskeletal-Type :
---   {l1 l2 : Level} {k : 𝕋} (A : Globularly-Coskeletal-Type l1 k)
---   (B : Globularly-Coskeletal-Type l2 k)
---   (f : type-Globularly-Coskeletal-Type A → type-Globularly-Coskeletal-Type B) →
---   type-Globularly-Coskeletal-Type B → Globularly-Coskeletal-Type (l1 ⊔ l2) k
--- fiber-Globularly-Coskeletal-Type A B f b =
---   Σ-Globularly-Coskeletal-Type A (λ a → Id-Globularly-Coskeletal-Type' B (f a) b)
+fiber-Globularly-Coskeletal-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : Globularly-Coskeletal-Type l1 k)
+  (B : Globularly-Coskeletal-Type l2 k)
+  (f : type-Globularly-Coskeletal-Type A → type-Globularly-Coskeletal-Type B) →
+  type-Globularly-Coskeletal-Type B → Globularly-Coskeletal-Type (l1 ⊔ l2) k
+fiber-Globularly-Coskeletal-Type A B f b =
+  Σ-Globularly-Coskeletal-Type A (λ a → Id-Globularly-Coskeletal-Type' B (f a) b)
 ```
 
 ### Products of families of globularly coskeletal types are globularly coskeletal
@@ -573,31 +573,28 @@ is-globularly-coskeletal-right-factor-product k {A} {B} H =
 so the result follows by pullback stability.
 
 ```text
--- module _
---   {l1 l2 : Level} {A : UU l1} {B : UU l2}
---   where
+is-globularly-coskeletal-equiv-is-globularly-coskeletal :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
+  is-globularly-coskeletal k A → is-globularly-coskeletal k B → is-globularly-coskeletal k (A ≃ B)
+is-globularly-coskeletal-equiv-is-globularly-coskeletal k H K = {!   !}
 
---   is-globularly-coskeletal-equiv-is-globularly-coskeletal :
---     (k : 𝕋) → is-globularly-coskeletal k A → is-globularly-coskeletal k B → is-globularly-coskeletal k (A ≃ B)
---   is-globularly-coskeletal-equiv-is-globularly-coskeletal k H K = {!   !}
+type-equiv-Globularly-Coskeletal-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : Globularly-Coskeletal-Type l1 k) (B : Globularly-Coskeletal-Type l2 k) →
+  UU (l1 ⊔ l2)
+type-equiv-Globularly-Coskeletal-Type A B =
+  type-Globularly-Coskeletal-Type A ≃ type-Globularly-Coskeletal-Type B
 
--- type-equiv-Globularly-Coskeletal-Type :
---   {l1 l2 : Level} {k : 𝕋} (A : Globularly-Coskeletal-Type l1 k) (B : Globularly-Coskeletal-Type l2 k) →
---   UU (l1 ⊔ l2)
--- type-equiv-Globularly-Coskeletal-Type A B =
---   type-Globularly-Coskeletal-Type A ≃ type-Globularly-Coskeletal-Type B
+is-globularly-coskeletal-type-equiv-Globularly-Coskeletal-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : Globularly-Coskeletal-Type l1 k) (B : Globularly-Coskeletal-Type l2 k) →
+  is-globularly-coskeletal k (type-equiv-Globularly-Coskeletal-Type A B)
+is-globularly-coskeletal-type-equiv-Globularly-Coskeletal-Type A B =
+  is-globularly-coskeletal-equiv-is-globularly-coskeletal _
+    ( is-globularly-coskeletal-type-Globularly-Coskeletal-Type A)
+    ( is-globularly-coskeletal-type-Globularly-Coskeletal-Type B)
 
--- is-globularly-coskeletal-type-equiv-Globularly-Coskeletal-Type :
---   {l1 l2 : Level} {k : 𝕋} (A : Globularly-Coskeletal-Type l1 k) (B : Globularly-Coskeletal-Type l2 k) →
---   is-globularly-coskeletal k (type-equiv-Globularly-Coskeletal-Type A B)
--- is-globularly-coskeletal-type-equiv-Globularly-Coskeletal-Type A B =
---   is-globularly-coskeletal-equiv-is-globularly-coskeletal _
---     ( is-globularly-coskeletal-type-Globularly-Coskeletal-Type A)
---     ( is-globularly-coskeletal-type-Globularly-Coskeletal-Type B)
-
--- equiv-Globularly-Coskeletal-Type :
---   {l1 l2 : Level} {k : 𝕋} (A : Globularly-Coskeletal-Type l1 k) (B : Globularly-Coskeletal-Type l2 k) →
---   Globularly-Coskeletal-Type (l1 ⊔ l2) k
--- pr1 (equiv-Globularly-Coskeletal-Type A B) = type-equiv-Globularly-Coskeletal-Type A B
--- pr2 (equiv-Globularly-Coskeletal-Type A B) = is-globularly-coskeletal-type-equiv-Globularly-Coskeletal-Type A B
+equiv-Globularly-Coskeletal-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : Globularly-Coskeletal-Type l1 k) (B : Globularly-Coskeletal-Type l2 k) →
+  Globularly-Coskeletal-Type (l1 ⊔ l2) k
+pr1 (equiv-Globularly-Coskeletal-Type A B) = type-equiv-Globularly-Coskeletal-Type A B
+pr2 (equiv-Globularly-Coskeletal-Type A B) = is-globularly-coskeletal-type-equiv-Globularly-Coskeletal-Type A B
 ```

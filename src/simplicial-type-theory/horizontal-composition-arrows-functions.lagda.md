@@ -62,9 +62,7 @@ module _
   where
 
   horizontal-comp-arrow▵ :
-    arrow▵ (B → C) →
-    arrow▵ (A → B) →
-    arrow▵ (A → C)
+    arrow▵ (B → C) → arrow▵ (A → B) → arrow▵ (A → C)
   horizontal-comp-arrow▵ β α t x = β t (α t x)
 ```
 

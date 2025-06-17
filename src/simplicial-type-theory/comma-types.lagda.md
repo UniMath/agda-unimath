@@ -37,7 +37,12 @@ open import simplicial-type-theory.directed-interval-type I
 
 ## Idea
 
-<!-- TODO -->
+Given a [span diagram of types](foundation.span-diagrams.md)
+`f : B → A ← C : g`, then the {{#concept "comma type" Agda=_↓▵_}} `f ↓▵ g` is
+the [collection](foundation.dependent-pair-types.md) of
+[pairs](foundation.cartesian-product-types.md) of elements `(b , c) : B × C`
+[equipped](foundation.structure.md) with a
+[directed edge](simplicial-type-theory.directed-edges.md) `f b →▵ g c`.
 
 ## Definitions
 
@@ -51,6 +56,12 @@ comma▵ :
 comma▵ {B = B} {C} f g =
   Σ B (λ b → Σ C (λ c → hom▵ (f b) (g c)))
 
+infix 20 _↓▵_
+
+_↓▵_ :
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} →
+  (B → A) → (C → A) → UU (I1 ⊔ l1 ⊔ l2 ⊔ l3)
 _↓▵_ = comma▵
 ```
 
@@ -58,7 +69,7 @@ _↓▵_ = comma▵
 
 ### The universal property of the comma type
 
-The comma type `f ↓▵ g` is the pullback in the following diagram
+The comma type `f ↓▵ g` is the pullback of the following diagram
 
 ```text
   f ↓▵ g --------> A^Δ¹
@@ -82,8 +93,10 @@ module _
       ( λ (b , c) → (f b , g c))
       ( λ α → (α 0▵ , α 1▵))
       ( f ↓▵ g)
-  pr1 (cone-comma▵) (b , c , _) = (b , c)
-  pr1 (pr2 (cone-comma▵)) (_ , _ , α , _) = α
+  pr1 (cone-comma▵) (b , c , _) =
+    (b , c)
+  pr1 (pr2 (cone-comma▵)) (_ , _ , α , _) =
+    α
   pr2 (pr2 (cone-comma▵)) (_ , _ , _ , α0＝fb , α1＝gc) =
     inv (eq-pair α0＝fb α1＝gc)
 
@@ -130,3 +143,7 @@ module _
       ( is-retraction-gap-comma▵)
       ( is-section-gap-comma▵)
 ```
+
+## References
+
+{{#bibliography}} {{#reference BW23}}

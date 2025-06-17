@@ -45,7 +45,7 @@ open import foundation.whiskering-homotopies-composition
 open import reflection.erasing-equality
 
 open import simplicial-type-theory.arrows I
-open import simplicial-type-theory.directed-cubes I
+open import simplicial-type-theory.cubes I
 open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-interval-type I
 open import simplicial-type-theory.inequality-directed-interval-type I
@@ -76,6 +76,8 @@ open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Postulates
+
+> This definition should be reconsidered.
 
 ```agda
 postulate

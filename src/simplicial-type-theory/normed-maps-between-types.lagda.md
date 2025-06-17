@@ -46,15 +46,17 @@ open import simplicial-type-theory.transposing-biadjunctions-between-types I
 
 ## Idea
 
-Given a map of types `q : A → B`, that has a left and a right adjoint
+Given a map of types `q : A → B`, that has a left and a right
+[adjoint](simplicial-type-theory.transposing-adjunctions-between-types.md)
 
 ```text
   q! ⊣ q ⊣ q∗
 ```
 
 then we say `q` is
-{{#concept "normed" Disambiguation="map of simplicial types"}} if there's a
-natural transformation
+{{#concept "normed" Disambiguation="map of simplicial types" Agda=is-normed-map}}
+if there's a
+[natural transformation](simplicial-type-theory.natural-transformations.md)
 
 ```text
   Nm_q : q! ⇒ q∗.
@@ -148,8 +150,10 @@ module _
 
 ### The wrong way counit associated to a normed map
 
-Given a transposing biadjoint `q! ⊣ q* ⊣ q∗`, then having a norm map
-`Nm_q : q! ⇒ q∗` is equivalent to having a _wrong way counit_ map
+Given a
+[transposing biadjoint](simplicial-type-theory.transposing-biadjunctions-between-types.md)
+`q! ⊣ q* ⊣ q∗`, then having a norm map `Nm_q : q! ⇒ q∗` is equivalent to having
+a _wrong way counit_ map
 
 ```text
   ν : q*q! ⇒ id.
@@ -236,10 +240,10 @@ module _
 
 ### The norm map's action on edges in the image of `q`
 
-Given a directed edge `f : q* x → q* y` there is a square
+Given a directed edge `f : q* x →▵ q* y` there is a factorization square
 
 ```text
-          Nm-q(f)
+          Nm_q(f)
    q!q* x ----> q∗q* y
      ∧             |
      |             |

@@ -45,7 +45,7 @@ open import foundation.whiskering-homotopies-composition
 open import reflection.erasing-equality
 
 open import simplicial-type-theory.arrows I
-open import simplicial-type-theory.directed-cubes I
+open import simplicial-type-theory.cubes I
 open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-interval-type I
 open import simplicial-type-theory.inequality-directed-interval-type I
@@ -66,8 +66,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The {{#concept "𝑛-spine"}} is the classifying type of chains of directed edges
-of length 𝑛.
+The {{#concept "𝑛-spine" Agda=spine}} is the classifying type of chains of
+directed edges of length 𝑛.
 
 ```text
   0 ---> 1 ----> ... ----> (n-1) ----> n
@@ -94,6 +94,8 @@ where
 ## Postulates
 
 ### The type of 𝑛-spines
+
+> TODO Reconsider this definition.
 
 ```agda
 postulate
@@ -233,7 +235,7 @@ We can inductively define the 𝑛-spine as a subtype of the 𝑛-cube via t
               ⋰  ┆      /  ┆
             · ┄┄┄┄┄┄> ∙    ┆
   y   x     ∧    · ┄┄ ∧ ┄> ·
-  ∧ ∧       ┆   ∧     |   ∧–
+  ∧ ∧       ┆   ∧     |   ∧
   |/        ┆ ⋰       | ⋰
   └-> z     ∙ ------> ∙
 ```
@@ -589,11 +591,11 @@ cocone-spine' = {!   !}
 ### The 1-spine is the directed interval
 
 ```text
-         1 ----------> Δ¹
-         |             |
-         |             |
-         ∨           ⌜ ∨
-  1 ≃ spine 0 ----> spine 1
+      1 ----------> Δ¹
+      |             |
+    ~ |             | ~
+      ∨           ⌜ ∨
+   spine 0 ----> spine 1
 ```
 
 > This remains to be formalized.

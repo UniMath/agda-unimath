@@ -328,10 +328,10 @@ module _
   {l1 : Level} {X : UU l1} (α : free-directed-loop X)
   where
 
-    recursion-principle-induction-principle-directed-circle :
-      induction-principle-directed-circle α →
-      recursion-principle-directed-circle α
-    recursion-principle-induction-principle-directed-circle I Y =
-      section-is-equiv
-        ( universal-property-induction-principle-directed-circle α I Y)
+  recursion-principle-induction-principle-directed-circle :
+    induction-principle-directed-circle α →
+    recursion-principle-directed-circle α
+  recursion-principle-induction-principle-directed-circle I Y =
+    section-is-equiv
+      ( universal-property-induction-principle-directed-circle α I Y)
 ```

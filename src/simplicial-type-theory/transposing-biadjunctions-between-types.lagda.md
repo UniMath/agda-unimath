@@ -45,8 +45,9 @@ open import simplicial-type-theory.transposing-adjunctions-between-types I
 ## Idea
 
 Given a map of types `q : 𝒞 → 𝒟`, we say `q` is a
-{{#concept "transposing biadjoint" Disambiguation="map of types" Agda=is-transposing-biadjoint}}
-if it has a transposing left and transposing right adjoint.
+{{#concept "transposing biadjoint" Disambiguation="map of types in simplicial type theory" Agda=is-transposing-biadjoint}}
+if it has a transposing left and transposing right
+[adjoint](simplicial-type-theory.transposing-adjunctions-between-types.md).
 
 ```text
          𝒞
@@ -140,41 +141,6 @@ module _
   counit-right-adjoint-is-transposing-biadjoint =
     counit-is-transposing-adjunction
       is-transposing-adjoint-map-right-adjoint-is-transposing-biadjoint
-```
-
-### Transposing biadjunctions
-
-```text
-transposing-biadjunction : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-transposing-biadjunction A B = Σ (A → B) is-transposing-left-adjoint
-
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (H : transposing-adjunction A B)
-  where
-
-  map-left-adjoint-transposing-adjunction : A → B
-  map-left-adjoint-transposing-adjunction = pr1 H
-
-  is-transposing-left-adjoint-map-left-adjoint-transposing-adjunction :
-    is-transposing-left-adjoint map-left-adjoint-transposing-adjunction
-  is-transposing-left-adjoint-map-left-adjoint-transposing-adjunction = pr2 H
-
-  map-right-adjoint-transposing-adjunction : B → A
-  map-right-adjoint-transposing-adjunction =
-    pr1 is-transposing-left-adjoint-map-left-adjoint-transposing-adjunction
-
-  is-transposing-adjunction-transposing-adjunction :
-    is-transposing-adjunction
-      map-left-adjoint-transposing-adjunction
-      map-right-adjoint-transposing-adjunction
-  is-transposing-adjunction-transposing-adjunction =
-    pr2 is-transposing-left-adjoint-map-left-adjoint-transposing-adjunction
-
-  is-transposing-right-adjoint-map-right-adjoint-transposing-adjunction :
-    is-transposing-right-adjoint map-right-adjoint-transposing-adjunction
-  is-transposing-right-adjoint-map-right-adjoint-transposing-adjunction =
-    ( map-left-adjoint-transposing-adjunction ,
-      is-transposing-adjunction-transposing-adjunction)
 ```
 
 ## Properties

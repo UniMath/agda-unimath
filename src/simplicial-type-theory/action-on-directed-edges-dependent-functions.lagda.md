@@ -31,13 +31,15 @@ open import simplicial-type-theory.directed-edges I
 
 ## Idea
 
-Any dependent function `f : (x : A) → B x` preserves
+Any [dependent function](foundation.dependent-function-types.md)
+`f : (x : A) → B x` preserves
 [directed edges](simplicial-type-theory.directed-edges.md), in the sense that it
 maps any edge `p : x →▵ y` in `A` to a
 [dependent edge](simplicial-type-theory.dependent-directed-edges.md)
 `action-hom▵-dependent-function f p` from `f x` to `f y` over `p` in `B`. This
-action on directed edges can be thought of as functoriality of dependent
-functions in simplicial type theory.
+action on directed edges can be thought of as
+{{#concept "functoriality" Disambiguation="of dependent functions in simplicial type theory" Agda=action-hom▵-dependent-function}}
+of dependent functions in simplicial type theory.
 
 ## Definition
 

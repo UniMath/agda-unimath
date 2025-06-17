@@ -44,10 +44,11 @@ open import simplicial-type-theory.horizontal-composition-directed-edges-functio
 
 ## Idea
 
-Given a directed edge `α : f →▵ f'` of functions in `A → B` we may whisker it on
-the left by a function `h : B → C` to obtain a directed edge of functions
-`hα : hf →▵ hf'`, or we may whisker it on the right by a function `g : C → A` to
-obtain a directed edge of functions `αg : fg →▵ f'g`.
+Given a [directed edge](simplicial-type-theory.directed-edges.md) `α : f →▵ f'`
+of functions in `A → B` we may _whisker it on the left_ by a function
+`h : B → C` to obtain a directed edge of functions `hα : hf →▵ hf'`, or we may
+_whisker it on the right_ by a function `g : C → A` to obtain a directed edge of
+functions `αg : fg →▵ f'g`.
 
 ## Definitions
 
