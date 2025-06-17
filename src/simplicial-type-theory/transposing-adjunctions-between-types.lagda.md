@@ -43,10 +43,11 @@ open import simplicial-type-theory.natural-transformations I
 ## Idea
 
 Consider a pair of maps `L : A ↔ B : R`. We say that `L` and `R` form a
-transposing adjunction given a binary family of equivalences
+{{#concept "transposing adjunction" Disambiguation=between types in simplicial type theory"}}
+if we have a binary family of [equivalences](foundation-core.equivalences.md)
 
 ```text
-  (x : A) (y : B) → hom B (L x) y ≃ hom A x (R y)
+  (x : A) (y : B) → hom B (L x) y ≃ hom A x (R y).
 ```
 
 ## Definitions
@@ -61,6 +62,7 @@ module _
   is-transposing-adjunction : (A → B) → (B → A) → UU (I1 ⊔ l1 ⊔ l2)
   is-transposing-adjunction L R = (x : A) (y : B) → hom▵ (L x) y ≃ hom▵ x (R y)
 
+  infix 20 _⊣▵_
   _⊣▵_ : (A → B) → (B → A) → UU (I1 ⊔ l1 ⊔ l2)
   _⊣▵_ = is-transposing-adjunction
 ```

@@ -44,13 +44,13 @@ open import foundation.universe-levels
 
 open import reflection.erasing-equality
 
+open import simplicial-type-theory.Discrete-Type▵s I
 open import simplicial-type-theory.action-on-directed-edges-functions I
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-interval-type I
 open import simplicial-type-theory.free-directed-loops I
 open import simplicial-type-theory.inequality-directed-interval-type I
-open import simplicial-type-theory.simplicially-discrete-types I
 open import simplicial-type-theory.universal-property-directed-circle I
 
 open import synthetic-homotopy-theory.circle
@@ -265,7 +265,7 @@ compute-map-directed-circle-circle-id-arrow x = refl-htpy
 
 ```agda
 module _
-  (is-discrete-𝕊¹ : is-simplicially-discrete 𝕊¹)
+  (is-discrete-𝕊¹ : is-discrete▵ 𝕊¹)
   where
 
   is-nontrivial-loop-hom▵-𝕊¹ :
@@ -288,5 +288,5 @@ Steps:
   --     {! ? ∙ ap (action-hom▵-function map-directed-circle-circle) p ∙ ? !}
 ```
 
-It remains to formalize that the circle is simplicially discrete. Note that the
-proof only uses that `hom▵-eq` is injective.
+> It remains to formalize that the circle is simplicially discrete. Note that
+> the proof only uses that `hom▵-eq` is injective.

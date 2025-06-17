@@ -39,7 +39,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import simplicial-type-theory.arrows I
-open import simplicial-type-theory.directed-cubes I
+open import simplicial-type-theory.cubes I
 open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-interval-type I
 open import simplicial-type-theory.inequality-directed-interval-type I

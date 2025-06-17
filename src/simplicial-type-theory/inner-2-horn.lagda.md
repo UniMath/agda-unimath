@@ -154,8 +154,7 @@ inr-pushout-Λ²₁ = inr-pushout (point 1▵) (point 0▵)
 ```agda
 is-set-Λ²₁ : is-set Λ²₁
 is-set-Λ²₁ =
-  is-set-type-subtype subtype-Λ²₁
-    ( is-set-product is-set-Δ¹ is-set-Δ¹)
+  is-set-type-subtype subtype-Λ²₁ (is-set-product is-set-Δ¹ is-set-Δ¹)
 ```
 
 ### The canonical map from the inner 2-horn as a pushout to the inner 2-horn as a subtype of the square

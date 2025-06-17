@@ -43,9 +43,11 @@ open import simplicial-type-theory.directed-interval-type I
 
 ## Idea
 
-Given two dependent functions `f g : (x : A) → B x`, a
-{{#concept "simplicial natural transformation" Disambiguation="simplicial type theory" Agda=simplicial-natural-transformation}}
-`α` from `f` to `g` is a family of directed edges
+Given two [dependent functions](foundation.dependent-function-types.md)
+`f g : (x : A) → B x`, a
+{{#concept "natural transformation" Disambiguation="in simplicial type theory" Agda=simplicial-natural-transformation}}
+`α` from `f` to `g` is a family of
+[directed edges](simplicial-type-theory.directed-edges.md)
 
 ```text
   α : (x : A) → (f x →▵ g x).
@@ -53,8 +55,8 @@ Given two dependent functions `f g : (x : A) → B x`, a
 
 Naturality follows automatically from the fact that every section is natural in
 the base. I.e., for every edge `x →▵ y` in `A`, we have a dependent edge
-`α x →▵ α y` over it, giving us a commuting dependent square of simplicial
-arrows
+`α x →▵ α y` over it, giving us a dependent commuting square of
+[simplicial arrows](simplicial-type-theory.arrows.md)
 
 ```text
            α x
@@ -130,10 +132,10 @@ module _
     equiv-swap-Π
 ```
 
-### Extensionality for simplicial natural transformations
+### Extensionality for natural transformations
 
-A simplicial natural transformation between functions `f` and `g` is the same as
-a directed edge from `f` to `g`.
+A natural transformation between functions `f` and `g` is the same as a directed
+edge from `f` to `g`.
 
 ```agda
 module _

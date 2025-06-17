@@ -76,13 +76,13 @@ if one of the following equivalent conditions hold:
    ```text
                             postcomp Δ¹ pr1
     (Δ¹ → Σ (x : A), (B x)) ---------------> (Δ¹ → A)
-              |                                |
-              |                                |
-        ev 0▵ |                                | ev 0▵
-              |                                |
-              ∨                                ∨
-         Σ (x : A), (B x) -------------------> A
-                                pr1
+              |                                 |
+              |                                 |
+        ev 0▵ |                                 | ev 0▵
+              |                                 |
+              ∨                                 ∨
+         Σ (x : A), (B x) --------------------> A
+                                  pr1
    ```
 
 ## Definitions
@@ -108,6 +108,10 @@ module _
     (α : arrow▵ A) (x' : B (α 0▵)) →
     is-torsorial (dependent-hom▵ B (hom▵-arrow▵ α) x')
 ```
+
+## Properties
+
+> It remains to formalize the stated logical equivalences in the idea section.
 
 ## References
 

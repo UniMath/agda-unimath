@@ -1,12 +1,16 @@
-# Directed edges in the booleans
+# Discreteness of the booleans
 
 ```agda
+open import foundation.booleans
 open import foundation.universe-levels
 open import order-theory.nontrivial-bounded-total-orders
+import simplicial-type-theory.Discrete-Type▵s
 
 module
-  simplicial-type-theory.directed-edges-booleans
+  simplicial-type-theory.discreteness-booleans
   {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
+  (let open simplicial-type-theory.Discrete-Type▵s I)
+  (is-discrete▵-bool : is-discrete▵ bool)
   where
 ```
 
@@ -14,7 +18,6 @@ module
 
 ```agda
 open import foundation.action-on-identifications-dependent-functions
-open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -46,7 +49,6 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.coproducts-null-types
 open import orthogonal-factorization-systems.extensions-maps
 open import orthogonal-factorization-systems.null-families-of-types
-open import orthogonal-factorization-systems.null-maps
 open import orthogonal-factorization-systems.null-types
 open import orthogonal-factorization-systems.orthogonal-maps
 
@@ -56,30 +58,20 @@ open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.dependent-directed-edges I
 open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-interval-type I
-open import simplicial-type-theory.simplicially-discrete-types I
 ```
 
 </details>
 
 ## Idea
 
-We postulate that the [booleans](foundation.booleans.md) are
-[simplicially discrete](simplicial-type-theory.simplicially-discrete-types.md)
-and hence that all its
-[directed edges](simplicial-type-theory.directed-edges.md) are constant. This
-refutes the models of the
-[directed interval](simplicial-type-theory.directed-interval.md) in the booleans
-and is a distinguishing property between the two.
-
-As a corollary we have that the universe of simplicially discrete types is
-closed under finite coproducts and contains the finite types.
-
-## Postulate
-
-```agda
-postulate
-  is-simplicially-discrete-bool : is-simplicially-discrete bool
-```
+If we assume that the [booleans](foundation.booleans.md) are
+[simplicially discrete](simplicial-type-theory.Discrete-Type▵s.md) and hence
+that all its [directed edges](simplicial-type-theory.directed-edges.md) are
+constant, we refute the models of the
+[directed interval](simplicial-type-theory.directed-interval.md) in the
+booleans, as this gives a distinguishing property between `Δ¹` and `bool`. As a
+corollary we have that the universe of simplicially discrete types is closed
+under finite coproducts and contains the finite types.
 
 ## Properties
 
@@ -88,7 +80,7 @@ postulate
 ```agda
 is-Δ¹-null-bool : is-null Δ¹ bool
 is-Δ¹-null-bool =
-  is-Δ¹-null-is-simplicially-discrete is-simplicially-discrete-bool
+  is-Δ¹-null-is-discrete▵ is-discrete▵-bool
 ```
 
 ### The booleans are not a directed interval
@@ -96,13 +88,13 @@ is-Δ¹-null-bool =
 ```agda
 is-not-directed-interval-bool : ¬ (Δ¹ ≃ bool)
 is-not-directed-interval-bool e =
-  is-not-simplicially-discrete-Δ¹
-    ( is-simplicially-discrete-equiv e is-simplicially-discrete-bool)
+  is-not-discrete▵-Δ¹
+    ( is-discrete▵-equiv e is-discrete▵-bool)
 
 is-not-retract-of-directed-interval-bool : ¬ (Δ¹ retract-of bool)
 is-not-retract-of-directed-interval-bool r =
-  is-not-simplicially-discrete-Δ¹
-    ( is-simplicially-discrete-retract r is-simplicially-discrete-bool)
+  is-not-discrete▵-Δ¹
+    ( is-discrete▵-retract r is-discrete▵-bool)
 ```
 
 ### Coproducts of simplicially discrete types are simplicially discrete
@@ -110,20 +102,20 @@ is-not-retract-of-directed-interval-bool r =
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  (is-disc-A : is-simplicially-discrete A)
-  (is-disc-B : is-simplicially-discrete B)
+  (is-disc-A : is-discrete▵ A)
+  (is-disc-B : is-discrete▵ B)
   where
 
-  is-simplicially-discrete-coproduct :
-    is-simplicially-discrete A →
-    is-simplicially-discrete B →
-    is-simplicially-discrete (A + B)
-  is-simplicially-discrete-coproduct is-disc-A is-disc-B =
-    is-simplicially-discrete-is-Δ¹-null
+  is-discrete▵-coproduct :
+    is-discrete▵ A →
+    is-discrete▵ B →
+    is-discrete▵ (A + B)
+  is-discrete▵-coproduct is-disc-A is-disc-B =
+    is-discrete▵-is-Δ¹-null
       ( is-null-coproduct-is-null-bool Δ¹
         ( is-Δ¹-null-bool)
-        ( is-Δ¹-null-is-simplicially-discrete is-disc-A)
-        ( is-Δ¹-null-is-simplicially-discrete is-disc-B))
+        ( is-Δ¹-null-is-discrete▵ is-disc-A)
+        ( is-Δ¹-null-is-discrete▵ is-disc-B))
 ```
 
 ### Finite types are simplicially discrete

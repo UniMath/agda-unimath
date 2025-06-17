@@ -5,7 +5,7 @@ open import foundation.universe-levels
 open import order-theory.nontrivial-bounded-total-orders
 
 module
-  simplicial-type-theory.simplicially-discrete-types
+  simplicial-type-theory.Discrete-Type▵s
   {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
@@ -53,8 +53,8 @@ open import synthetic-homotopy-theory.circle
 ## Idea
 
 A type `A` is
-{{#concept "simplicially discrete" Disambiguation="type" Agda=is-simplicially-discrete}}
-if the canonical map
+{{#concept "simplicially discrete" Disambiguation="type" Agda=is-discrete▵}} if
+the canonical map
 
 ```text
   hom▵-eq : (x ＝ y) → (x →▵ y)
@@ -74,35 +74,32 @@ module _
   {l : Level} (A : UU l)
   where
 
-  is-simplicially-discrete : UU (I1 ⊔ l)
-  is-simplicially-discrete =
-    (x y : A) → is-equiv (hom▵-eq {x = x} {y})
+  is-discrete▵ : UU (I1 ⊔ l)
+  is-discrete▵ = (x y : A) → is-equiv (hom▵-eq {x = x} {y})
 
-  is-prop-is-simplicially-discrete : is-prop is-simplicially-discrete
-  is-prop-is-simplicially-discrete =
+  is-prop-is-discrete▵ : is-prop is-discrete▵
+  is-prop-is-discrete▵ =
     is-prop-Π (λ x → is-prop-Π (λ y → is-property-is-equiv hom▵-eq))
 
-  is-simplicially-discrete-Prop : Prop (I1 ⊔ l)
-  is-simplicially-discrete-Prop =
-    ( is-simplicially-discrete , is-prop-is-simplicially-discrete)
+  is-discrete▵-Prop : Prop (I1 ⊔ l)
+  is-discrete▵-Prop = (is-discrete▵ , is-prop-is-discrete▵)
 ```
 
 ### The type of simplicially discrete types
 
 ```agda
-Simplicially-Discrete-Type : (l : Level) → UU (I1 ⊔ lsuc l)
-Simplicially-Discrete-Type l = Σ (UU l) (is-simplicially-discrete)
+Discrete-Type▵ : (l : Level) → UU (I1 ⊔ lsuc l)
+Discrete-Type▵ l = Σ (UU l) (is-discrete▵)
 
 module _
-  {l : Level} (A : Simplicially-Discrete-Type l)
+  {l : Level} (A : Discrete-Type▵ l)
   where
 
-  type-Simplicially-Discrete-Type : UU l
-  type-Simplicially-Discrete-Type = pr1 A
+  type-Discrete-Type▵ : UU l
+  type-Discrete-Type▵ = pr1 A
 
-  is-simplicially-discrete-Simplicially-Discrete-Type :
-    is-simplicially-discrete type-Simplicially-Discrete-Type
-  is-simplicially-discrete-Simplicially-Discrete-Type = pr2 A
+  is-discrete▵-Discrete-Type▵ : is-discrete▵ type-Discrete-Type▵
+  is-discrete▵-Discrete-Type▵ = pr2 A
 ```
 
 ## Properties
@@ -114,10 +111,9 @@ module _
   {l : Level} (A : UU l)
   where
 
-  is-simplicially-discrete-section-hom▵-eq :
-    ((x y : A) → section (hom▵-eq {x = x} {y})) →
-    is-simplicially-discrete A
-  is-simplicially-discrete-section-hom▵-eq s x =
+  is-discrete▵-section-hom▵-eq :
+    ((x y : A) → section (hom▵-eq {x = x} {y})) → is-discrete▵ A
+  is-discrete▵-section-hom▵-eq s x =
     fundamental-theorem-id-section x (λ y → hom▵-eq) (s x)
 ```
 
@@ -152,9 +148,8 @@ module _
     ( compute-total-Id , compute-total-hom▵ , refl-htpy)
 
   abstract
-    is-simplicially-discrete-is-Δ¹-null :
-      is-null Δ¹ A → is-simplicially-discrete A
-    is-simplicially-discrete-is-Δ¹-null H x =
+    is-discrete▵-is-Δ¹-null : is-null Δ¹ A → is-discrete▵ A
+    is-discrete▵-is-Δ¹-null H x =
       is-fiberwise-equiv-is-equiv-tot
         ( is-fiberwise-equiv-is-equiv-tot
           ( is-equiv-target-is-equiv-source-equiv-arrow
@@ -165,9 +160,8 @@ module _
           ( x))
 
   abstract
-    is-Δ¹-null-is-simplicially-discrete :
-      is-simplicially-discrete A → is-null Δ¹ A
-    is-Δ¹-null-is-simplicially-discrete H =
+    is-Δ¹-null-is-discrete▵ : is-discrete▵ A → is-null Δ¹ A
+    is-Δ¹-null-is-discrete▵ H =
       is-equiv-source-is-equiv-target-equiv-arrow
         ( diagonal-exponential A Δ¹)
         ( tot (λ x → tot (λ y → hom▵-eq {x = x} {y})))
@@ -175,84 +169,75 @@ module _
         ( is-equiv-tot-is-fiberwise-equiv
           ( λ x → is-equiv-tot-is-fiberwise-equiv (H x)))
 
-  iff-is-Δ¹-null-is-simplicially-discrete :
-    is-simplicially-discrete A ↔ is-null Δ¹ A
-  iff-is-Δ¹-null-is-simplicially-discrete =
-    ( is-Δ¹-null-is-simplicially-discrete , is-simplicially-discrete-is-Δ¹-null)
+  iff-is-Δ¹-null-is-discrete▵ : is-discrete▵ A ↔ is-null Δ¹ A
+  iff-is-Δ¹-null-is-discrete▵ =
+    ( is-Δ¹-null-is-discrete▵ , is-discrete▵-is-Δ¹-null)
 ```
 
 ### Simplicially discrete types are closed under retracts
 
 ```agda
-is-simplicially-discrete-retract :
+is-discrete▵-retract :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  A retract-of B → is-simplicially-discrete B → is-simplicially-discrete A
-is-simplicially-discrete-retract r H =
-  is-simplicially-discrete-is-Δ¹-null
-    ( is-null-retract-base r (is-Δ¹-null-is-simplicially-discrete H))
+  A retract-of B → is-discrete▵ B → is-discrete▵ A
+is-discrete▵-retract r H =
+  is-discrete▵-is-Δ¹-null (is-null-retract-base r (is-Δ¹-null-is-discrete▵ H))
 ```
 
 ### Simplicially discrete types are closed under equivalences
 
 ```agda
-is-simplicially-discrete-equiv :
+is-discrete▵-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  A ≃ B → is-simplicially-discrete B → is-simplicially-discrete A
-is-simplicially-discrete-equiv e H =
-  is-simplicially-discrete-is-Δ¹-null
-    ( is-null-equiv-base e (is-Δ¹-null-is-simplicially-discrete H))
+  A ≃ B → is-discrete▵ B → is-discrete▵ A
+is-discrete▵-equiv e H =
+  is-discrete▵-is-Δ¹-null (is-null-equiv-base e (is-Δ¹-null-is-discrete▵ H))
 ```
 
 ### Simplicially discrete types are closed under dependent products
 
 ```agda
-is-simplicially-discrete-Π :
+is-discrete▵-Π :
   {l1 l2 : Level} {I : UU l1} {B : I → UU l2} →
-  ((i : I) → is-simplicially-discrete (B i)) →
-  is-simplicially-discrete ((i : I) → B i)
-is-simplicially-discrete-Π H =
-  is-simplicially-discrete-is-Δ¹-null
-    ( is-null-Π (λ i → is-Δ¹-null-is-simplicially-discrete (H i)))
+  ((i : I) → is-discrete▵ (B i)) →
+  is-discrete▵ ((i : I) → B i)
+is-discrete▵-Π H =
+  is-discrete▵-is-Δ¹-null (is-null-Π (λ i → is-Δ¹-null-is-discrete▵ (H i)))
 ```
 
 ### Simplicially discrete types are closed under exponentiation
 
 ```agda
-is-simplicially-discrete-function-type :
+is-discrete▵-function-type :
   {l1 l2 : Level} {I : UU l1} {B : UU l2} →
-  is-simplicially-discrete B →
-  is-simplicially-discrete (I → B)
-is-simplicially-discrete-function-type H = is-simplicially-discrete-Π (λ _ → H)
+  is-discrete▵ B → is-discrete▵ (I → B)
+is-discrete▵-function-type H = is-discrete▵-Π (λ _ → H)
 ```
 
 ### Simplicially discrete types are closed under cartesian products
 
 ```agda
-is-simplicially-discrete-product :
+is-discrete▵-product :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  is-simplicially-discrete A →
-  is-simplicially-discrete B →
-  is-simplicially-discrete (A × B)
-is-simplicially-discrete-product is-disc-A is-disc-B =
-  is-simplicially-discrete-is-Δ¹-null
+  is-discrete▵ A → is-discrete▵ B → is-discrete▵ (A × B)
+is-discrete▵-product is-disc-A is-disc-B =
+  is-discrete▵-is-Δ¹-null
     ( is-null-product
-      ( is-Δ¹-null-is-simplicially-discrete is-disc-A)
-      ( is-Δ¹-null-is-simplicially-discrete is-disc-B))
+      ( is-Δ¹-null-is-discrete▵ is-disc-A)
+      ( is-Δ¹-null-is-discrete▵ is-disc-B))
 ```
 
 ### Simplicially discrete types are closed under dependent sums
 
 ```agda
-is-simplicially-discrete-Σ :
+is-discrete▵-Σ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-simplicially-discrete A →
-  ((x : A) → is-simplicially-discrete (B x)) →
-  is-simplicially-discrete (Σ A B)
-is-simplicially-discrete-Σ is-disc-A is-disc-B =
-  is-simplicially-discrete-is-Δ¹-null
+  is-discrete▵ A → ((x : A) → is-discrete▵ (B x)) → is-discrete▵ (Σ A B)
+is-discrete▵-Σ is-disc-A is-disc-B =
+  is-discrete▵-is-Δ¹-null
     ( is-null-Σ
-      ( is-Δ¹-null-is-simplicially-discrete is-disc-A)
-      ( λ x → is-Δ¹-null-is-simplicially-discrete (is-disc-B x)))
+      ( is-Δ¹-null-is-discrete▵ is-disc-A)
+      ( λ x → is-Δ¹-null-is-discrete▵ (is-disc-B x)))
 ```
 
 ### A family over a simplicially discrete type is a family of simplicially discrete types if and only if the dependent sum is
@@ -260,17 +245,15 @@ is-simplicially-discrete-Σ is-disc-A is-disc-B =
 One direction was established above, the converse is recorded below.
 
 ```agda
-is-simplicially-discrete-family-is-simplicially-discrete-Σ :
+is-discrete▵-family-is-discrete▵-Σ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-simplicially-discrete A →
-  is-simplicially-discrete (Σ A B) →
-  (x : A) → is-simplicially-discrete (B x)
-is-simplicially-discrete-family-is-simplicially-discrete-Σ
+  is-discrete▵ A → is-discrete▵ (Σ A B) → (x : A) → is-discrete▵ (B x)
+is-discrete▵-family-is-discrete▵-Σ
   is-disc-A is-disc-ΣAB x =
-  is-simplicially-discrete-is-Δ¹-null
+  is-discrete▵-is-Δ¹-null
     ( is-null-family-is-null-Σ
-      ( is-Δ¹-null-is-simplicially-discrete is-disc-A)
-      ( is-Δ¹-null-is-simplicially-discrete is-disc-ΣAB)
+      ( is-Δ¹-null-is-discrete▵ is-disc-A)
+      ( is-Δ¹-null-is-discrete▵ is-disc-ΣAB)
       ( x))
 ```
 
@@ -281,7 +264,7 @@ is anodyne with respect to `Δ¹ → 1`.
 
 ### A type is simplicially discrete if and only if it is pregroupoidal and Rezk complete
 
-This is proposition 10.10 of {{#cite RS17}}. This remains to be formalized.
+> This remains to be formalized. This is proposition 10.10 of {{#cite RS17}}.
 
 <!-- TODO triangle `iso-eq`, `hom-iso`, `hom-eq` -->
 
@@ -290,36 +273,33 @@ This is proposition 10.10 of {{#cite RS17}}. This remains to be formalized.
 ### The directed interval is not simplicially discrete
 
 ```agda
-is-not-simplicially-discrete-Δ¹ : ¬ (is-simplicially-discrete Δ¹)
-is-not-simplicially-discrete-Δ¹ H =
+is-not-discrete▵-Δ¹ : ¬ (is-discrete▵ Δ¹)
+is-not-discrete▵-Δ¹ H =
   is-nontrivial-Δ¹ (map-inv-is-equiv (H 0▵ 1▵) representing-hom-Δ¹)
 ```
 
 ### Propositions are simplicially discrete
 
 ```agda
-is-simplicially-discrete-is-prop :
-  {l : Level} {P : UU l} → is-prop P → is-simplicially-discrete P
-is-simplicially-discrete-is-prop =
-  is-simplicially-discrete-is-Δ¹-null ∘ is-null-is-prop-is-inhabited' 0▵
+is-discrete▵-is-prop : {l : Level} {P : UU l} → is-prop P → is-discrete▵ P
+is-discrete▵-is-prop =
+  is-discrete▵-is-Δ¹-null ∘ is-null-is-prop-is-inhabited' 0▵
 ```
 
 ### Contractible types are simplicially discrete
 
 ```agda
-is-simplicially-discrete-is-contr :
-  {l : Level} {P : UU l} → is-contr P → is-simplicially-discrete P
-is-simplicially-discrete-is-contr is-contr-P =
-  is-simplicially-discrete-is-prop (is-prop-is-contr is-contr-P)
+is-discrete▵-is-contr : {l : Level} {P : UU l} → is-contr P → is-discrete▵ P
+is-discrete▵-is-contr is-contr-P =
+  is-discrete▵-is-prop (is-prop-is-contr is-contr-P)
 ```
 
 ### Empty types are simplicially discrete
 
 ```agda
-is-simplicially-discrete-is-empty :
-  {l : Level} {P : UU l} → is-empty P → is-simplicially-discrete P
-is-simplicially-discrete-is-empty is-empty-P =
-  is-simplicially-discrete-is-prop (is-prop-is-empty is-empty-P)
+is-discrete▵-is-empty : {l : Level} {P : UU l} → is-empty P → is-discrete▵ P
+is-discrete▵-is-empty is-empty-P =
+  is-discrete▵-is-prop (is-prop-is-empty is-empty-P)
 ```
 
 ## References

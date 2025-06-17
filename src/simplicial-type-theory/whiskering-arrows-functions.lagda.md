@@ -43,10 +43,10 @@ open import simplicial-type-theory.horizontal-composition-arrows-functions I
 
 ## Idea
 
-Given a simplicial arrow `α` of functions `A → B` we may whisker it on the left
-by a function `f : B → C` to obtain a simplicial arrow of functions `A → C`, or
-we may whisker it on the right by a function `g : C → A` to obtain a simplicial
-arrow of functions `C → B`.
+Given a [simplicial arrow](simplicial-type-theory.arrows.md) `α` of functions
+`A → B` we may _whisker it on the left_ by a function `f : B → C` to obtain a
+simplicial arrow of functions `A → C`, or we may _whisker it on the right_ by a
+function `g : C → A` to obtain a simplicial arrow of functions `C → B`.
 
 ## Definitions
 
