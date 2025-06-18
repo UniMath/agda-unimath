@@ -40,8 +40,8 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-Any pair of [maps](foundation-core.function-types.md) between sets `f, g : A → B`
-has a
+Any pair of [maps](foundation-core.function-types.md) between sets
+`f, g : A → B` has a
 {{#concept "coequalizer" Disambiguation="of maps between sets" Agda=coequalizer-Set WD="coequalizer" WDID=Q5140810}}
 `B/A` given by the quotient of the set `B` by the relation
 [generated](foundation.freely-generated-equivalence-relations.md) by `x ~ y` if
