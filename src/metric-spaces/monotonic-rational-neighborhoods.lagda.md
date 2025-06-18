@@ -20,12 +20,12 @@ open import metric-spaces.rational-neighborhoods
 ## Idea
 
 A [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) is
-{{#concept "monotonic" Disambiguation="premetric" Agda=is-monotonic-Rational-Neighborhood-Relation}}
+{{#concept "monotonic" Disambiguation="rational neighborhood relation" Agda=is-monotonic-Rational-Neighborhood-Relation}}
 if any `d₁`-neighborhoods are `d₂`-neighborhoods for `d₁ < d₂`.
 
 ## Definitions
 
-### The property of being a monotonic premetric structure
+### The property of being a monotonic rational neighborhood relation
 
 ```agda
 module _

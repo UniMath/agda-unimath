@@ -22,7 +22,7 @@ open import metric-spaces.rational-neighborhoods
 ## Idea
 
 A [rational neighborhood](metric-spaces.rational-neighborhoods.md) is
-{{#concept "symmetric" Disambiguation="premetric" Agda=is-symmetric-Rational-Neighborhood-Relation}}
+{{#concept "symmetric" Disambiguation="rational neighborhood relation" Agda=is-symmetric-Rational-Neighborhood-Relation}}
 if all neighborhoods are symmetric.
 
 ## Definitions

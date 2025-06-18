@@ -22,7 +22,7 @@ open import metric-spaces.rational-neighborhoods
 ## Idea
 
 A [rational neighborhood](metric-spaces.rational-neighborhoods.md) is
-{{#concept "reflexive" Disambiguation="premetric" Agda=is-reflexive-Rational-Neighborhood-Relation}}
+{{#concept "reflexive" Disambiguation="rational neighborhood relation" Agda=is-reflexive-Rational-Neighborhood-Relation}}
 if any element is in all neighborhoods of itself.
 
 ## Definitions
