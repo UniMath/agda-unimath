@@ -28,7 +28,7 @@ open import foundation-core.cartesian-product-types
 ## Idea
 
 An
-{{#concept "algebra over a monad" Disambiguation="on a precategory" Agda=algebra-monad-Precategory}}
+{{#concept "algebra" Disambiguation="over a monad on a precategory" Agda=algebra-monad-Precategory}}
 over a [monad](category-theory.monads-on-precategories.md) `T` consists of an
 object `A` and morphism `a : TA → A` satisfying two compatibility laws:
 
