@@ -197,6 +197,7 @@ open import foundation.finite-sequences-set-quotients public
 open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
 open import foundation.fixed-points-endofunctions public
+open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
 open import foundation.function-types public
@@ -218,7 +219,6 @@ open import foundation.functoriality-set-truncation public
 open import foundation.functoriality-truncation public
 open import foundation.fundamental-theorem-of-equivalence-relations public
 open import foundation.fundamental-theorem-of-identity-types public
-open import foundation.generated-equivalence-relations public
 open import foundation.global-choice public
 open import foundation.global-subuniverses public
 open import foundation.globular-type-of-dependent-functions public

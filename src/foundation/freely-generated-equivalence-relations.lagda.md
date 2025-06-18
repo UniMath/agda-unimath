@@ -1,7 +1,7 @@
-# Generated equivalence relations
+# Freely-generated equivalence relations
 
 ```agda
-module foundation.generated-equivalence-relations where
+module foundation.freely-generated-equivalence-relations where
 ```
 
 <details><summary>Imports</summary>
@@ -40,14 +40,17 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-Given an arbitrary relation `R`, we construct an equivalence relation using `R`.
-First, we construct a new reflexive, symmetric, and transitive relation using
-paths of arbitrary length composed of edges of `R`: an edge from `x` to `y` is a
-term `R x y + R y x`, i.e. a relation in either direction. A path of length 0 is
-an identification `x ＝ y` and a path of length `n+1` is a choice of
-intermediate `x'`, a path from `x` to `x'` of length `n`, and an edge from `x'`
-to `y`. To construct the resulting equivalence relation we take the
-propositional truncation of this path relation.
+Given an arbitrary [binary relation](foundation.binary-relations.md) `R`, we
+construct the free
+[equivalence relation](foundation-core.equivalence-relations.md) on `R`. First,
+we construct a new reflexive, symmetric, and transitive relation using paths of
+arbitrary length composed of edges of `R`: an edge from `x` to `y` is a term
+`R x y + R y x`, i.e. a relation in either direction. A path of length 0 is an
+[identification](foundation-core.identity-types.md) `x ＝ y` and a path of
+length `n+1` is a choice of intermediate `x'`, a path from `x` to `x'` of length
+`n`, and an edge from `x'` to `y`. To construct the equivalence relation we take
+the [propositional truncation](foundation.propositional-truncations.md) of this
+path relation.
 
 ## Definition
 
@@ -165,11 +168,11 @@ module _
   reflects-path-Relation B f r x y (zero-ℕ , map-raise refl) = refl
   reflects-path-Relation B f r x y (succ-ℕ n , x' , p , e) =
     ( reflects-path-Relation B f r x x' (n , p)) ∙
-    ( forward-r x' y e) where
-
-    forward-r : (a b : A) → edge-Relation R a b → f a ＝ f b
-    forward-r a b (inl e) = r a b e
-    forward-r a b (inr e) = inv (r b a e)
+    ( forward-r x' y e)
+    where
+      forward-r : (a b : A) → edge-Relation R a b → f a ＝ f b
+      forward-r a b (inl e) = r a b e
+      forward-r a b (inr e) = inv (r b a e)
 
   reflects-path-Relation-Prop :
     {l3 : Level} (B : Set l3) (f : A → type-Set B)
@@ -179,4 +182,36 @@ module _
     rec-trunc-Prop
       ( Id-Prop B (f x) (f y))
       ( reflects-path-Relation (type-Set B) f r x y)
+```
+
+### Any equivalence relation reflecting generators reflects this relation
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
+  (E : equivalence-relation l2 A)
+  (r : (x y : A) → R x y → sim-equivalence-relation E x y)
+  where
+
+  equivalence-relation-reflects-path-Relation :
+    (x y : A) → path-Relation R x y → sim-equivalence-relation E x y
+  equivalence-relation-reflects-path-Relation x .x (zero-ℕ , map-raise refl) =
+    refl-equivalence-relation E x
+  equivalence-relation-reflects-path-Relation x y (succ-ℕ n , z , p , inl e) =
+    transitive-equivalence-relation E x z y
+      ( r z y e)
+      ( equivalence-relation-reflects-path-Relation x z (n , p))
+  equivalence-relation-reflects-path-Relation x y (succ-ℕ n , z , p , inr e) =
+    transitive-equivalence-relation E x z y
+      ( symmetric-equivalence-relation E y z (r y z e))
+      ( equivalence-relation-reflects-path-Relation x z (n , p))
+
+  equivalence-relation-reflects-path-Relation-Prop :
+    (x y : A) →
+    sim-equivalence-relation (equivalence-relation-path-Relation-Prop R) x y →
+    sim-equivalence-relation E x y
+  equivalence-relation-reflects-path-Relation-Prop x y =
+    rec-trunc-Prop
+      ( prop-equivalence-relation E x y)
+      ( equivalence-relation-reflects-path-Relation x y)
 ```
