@@ -40,13 +40,14 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-Any pair of [maps](foundation-core.function-types.md) between sets
-`f, g : A → B` has a
+Any pair of [maps](foundation-core.function-types.md) between
+[sets](foundation-core.sets.md) `f g : A → B` has a
 {{#concept "coequalizer" Disambiguation="of maps between sets" Agda=coequalizer-Set WD="coequalizer" WDID=Q5140810}}
-`B/A` given by the quotient of the set `B` by the relation
+`B/A` given by the [quotient](foundation.set-quotients.md) of the set `B` by the
+[relation](foundation.binary-relations.md)
 [generated](foundation.freely-generated-equivalence-relations.md) by `x ~ y` if
 there is some `z : A` with `f(z) = x` and `g(z) = y`. This quotient `B/A` has
-the universal property than any map `h : B → C` for `C` a set coequalizing `f`
+the _universal property_ than any map `h : B → C` for `C` a set coequalizing `f`
 and `g` must factor uniquely through the quotient map `B → B/A`.
 
 ## Definitions

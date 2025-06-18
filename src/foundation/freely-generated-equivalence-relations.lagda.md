@@ -1,4 +1,4 @@
-# Freely-generated equivalence relations
+# Freely generated equivalence relations
 
 ```agda
 module foundation.freely-generated-equivalence-relations where
