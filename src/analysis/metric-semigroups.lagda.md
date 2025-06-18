@@ -1,7 +1,7 @@
 # Metric semigroups
 
 ```agda
-module metric-spaces.metric-semigroups where
+module analysis.metric-semigroups where
 ```
 
 <details><summary>Imports</summary>
