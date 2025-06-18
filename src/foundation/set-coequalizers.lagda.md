@@ -40,7 +40,7 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-Any pair of [maps](foundation-core.function-types) between sets `f, g : A → B`
+Any pair of [maps](foundation-core.function-types.md) between sets `f, g : A → B`
 has a
 {{#concept "coequalizer" Disambiguation="of maps between sets" Agda=coequalizer-Set WD="coequalizer" WDID=Q5140810}}
 `B/A` given by the quotient of the set `B` by the relation
@@ -220,4 +220,4 @@ module _
 
 ## See also
 
-- [Set quotients](foundation.set-quotients) for the construction used here.
+- [Set quotients](foundation.set-quotients.md) for the construction used here.

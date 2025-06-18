@@ -419,5 +419,5 @@ module _
 
 ## See also
 
-- [Set coequalizers](foundation.set-coequalizers) for an equivalent notion
+- [Set coequalizers](foundation.set-coequalizers.md) for an equivalent notion
   implemented here using set quotients.
