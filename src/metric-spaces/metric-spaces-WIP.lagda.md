@@ -120,6 +120,11 @@ module _
   is-prop-neighborhood-Metric-Space-WIP =
     is-prop-neighborhood-Premetric-Space-WIP premetric-Metric-Space-WIP
 
+  is-upper-bound-dist-prop-Metric-Space-WIP :
+    (x y : type-Metric-Space-WIP) → ℚ⁺ → Prop l2
+  is-upper-bound-dist-prop-Metric-Space-WIP x y d =
+    neighborhood-prop-Metric-Space-WIP d x y
+
   is-upper-bound-dist-Metric-Space-WIP :
     (x y : type-Metric-Space-WIP) → ℚ⁺ → UU l2
   is-upper-bound-dist-Metric-Space-WIP x y d =
