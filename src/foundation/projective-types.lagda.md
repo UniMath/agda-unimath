@@ -15,7 +15,6 @@ open import foundation.surjective-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import foundation-core.function-types
 open import foundation-core.sets
 open import foundation-core.truncated-types
 ```
@@ -76,5 +75,5 @@ is-projective l2 l3 k X =
 
 ## See also
 
-- The natural map `(X → A)/~ → (X → A/R)` was studied in
-  [foundation.exponents-set-quotients](foundation.exponents-set-quotients.md)
+- The natural map `(X → A)/~ → (X → A/R)` is studied in
+  [`foundation.exponents-set-quotients`](foundation.exponents-set-quotients.md)
