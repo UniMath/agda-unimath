@@ -46,7 +46,7 @@ over a set is extensional.
 
 ## Definitions
 
-### The property of being an extenstional premetric space
+### The property of being an extensional premetric space
 
 ```agda
 module _
