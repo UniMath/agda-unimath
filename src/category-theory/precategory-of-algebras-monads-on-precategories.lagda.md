@@ -311,7 +311,7 @@ The counit is the vertical map given by the structure map of the algebra
       ( inv (mul-law-algebra-monad-Precategory C T x))) ,
     ( λ {x} {y} f →
       eq-pair-Σ
-        ( comm-hom-morphism-algebra-monad-Precategory C T x y f)
+        ( coh-hom-morphism-algebra-monad-Precategory C T x y f)
         ( eq-is-prop (is-set-hom-Precategory C _ _ _ _)))
 
   left-triangle-algebras-monad-Precategory :

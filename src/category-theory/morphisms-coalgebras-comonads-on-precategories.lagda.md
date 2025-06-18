@@ -78,7 +78,7 @@ module _
     hom-endofunctor-comonad-Precategory C T
       ( hom-morphism-coalgebra-comonad-Precategory f g h)
 
-  comm-hom-morphism-coalgebra-comonad-Precategory :
+  coh-hom-morphism-coalgebra-comonad-Precategory :
     (f g : coalgebra-comonad-Precategory C T)
     (h : morphism-coalgebra-comonad-Precategory f g) →
     coherence-square-hom-Precategory C
@@ -86,7 +86,7 @@ module _
       ( hom-coalgebra-comonad-Precategory C T f)
       ( hom-coalgebra-comonad-Precategory C T g)
       ( bottom-hom-morphism-coalgebra-comonad-Precategory f g h)
-  comm-hom-morphism-coalgebra-comonad-Precategory f g h = pr2 h
+  coh-hom-morphism-coalgebra-comonad-Precategory f g h = pr2 h
 
   comp-morphism-coalgebra-comonad-Precategory :
     (a b c : coalgebra-comonad-Precategory C T)
@@ -97,9 +97,9 @@ module _
     ( comp-hom-Precategory C
       ( hom-morphism-coalgebra-comonad-Precategory b c g)
       ( hom-morphism-coalgebra-comonad-Precategory a b f)) ,
-    (ap
-      (precomp-hom-Precategory C (hom-coalgebra-comonad-Precategory C T a) _)
-      (preserves-comp-endofunctor-comonad-Precategory C T _ _)) ∙
+    ( ap
+      ( precomp-hom-Precategory C (hom-coalgebra-comonad-Precategory C T a) _)
+      ( preserves-comp-endofunctor-comonad-Precategory C T _ _)) ∙
     ( pasting-horizontal-coherence-square-hom-Precategory C
       ( hom-morphism-coalgebra-comonad-Precategory a b f)
       ( hom-morphism-coalgebra-comonad-Precategory b c g)
@@ -108,8 +108,8 @@ module _
       ( hom-coalgebra-comonad-Precategory C T c)
       ( bottom-hom-morphism-coalgebra-comonad-Precategory a b f)
       ( bottom-hom-morphism-coalgebra-comonad-Precategory b c g)
-      ( comm-hom-morphism-coalgebra-comonad-Precategory a b f)
-      ( comm-hom-morphism-coalgebra-comonad-Precategory b c g))
+      ( coh-hom-morphism-coalgebra-comonad-Precategory a b f)
+      ( coh-hom-morphism-coalgebra-comonad-Precategory b c g))
 
   is-set-morphism-coalgebra-comonad-Precategory :
     (f g : coalgebra-comonad-Precategory C T) →

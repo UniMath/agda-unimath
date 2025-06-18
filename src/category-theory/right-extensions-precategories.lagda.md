@@ -154,7 +154,7 @@ module _
 
 ## Properties
 
-### Characterization of equality right extensions of functors between precategories
+### Characterization of equality between right extensions of functors between precategories
 
 ```agda
   coherence-htpy-right-extension-Precategory :

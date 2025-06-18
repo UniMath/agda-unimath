@@ -312,7 +312,7 @@ The unit is the horizontal map given by the structure map of the coalgebra
       ( comul-law-coalgebra-comonad-Precategory C T x)) ,
     ( λ {x} {y} f →
       eq-pair-Σ
-        ( comm-hom-morphism-coalgebra-comonad-Precategory C T x y f)
+        ( coh-hom-morphism-coalgebra-comonad-Precategory C T x y f)
         ( eq-is-prop (is-set-hom-Precategory C _ _ _ _)))
 
   right-triangle-coalgebras-comonad-Precategory :
