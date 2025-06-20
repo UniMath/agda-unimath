@@ -51,9 +51,10 @@ open import foundation.universe-levels
 A
 {{#concept "cocone" Disambiguation="under a functor between precategories" Agda=cocone-Precategory}}
 under a [functor](category-theory.functors-precategories.md) `F` between
-[precategories](category-theory.precategories.md) is a
+[precategories](category-theory.precategories.md) is an object `d` of the
+codomain together with a
 [natural transformation](category-theory.natural-transformations-functors-precategories.md)
-from a [constant functor](category-theory.constant-functors.md) to `F`.
+from `F` to the [constant functor](category-theory.constant-functors.md) at `d`.
 
 In this context, we usually think of (and refer to) the functor `F` as a
 **diagram** in its codomain, A cocone under such diagram then corresponds to an
@@ -174,7 +175,7 @@ module _
 
 ## Properties
 
-### Characterization of equality of cocones over functors between precategories
+### Characterization of equality of cocones
 
 ```agda
   coherence-htpy-cocone-Precategory :
@@ -268,33 +269,38 @@ module _
   equiv-left-extension-cocone-Precategory :
     cocone-Precategory ≃
     left-extension-Precategory C terminal-Precategory D
-      (terminal-functor-Precategory C) F
+      ( terminal-functor-Precategory C)
+      ( F)
   equiv-left-extension-cocone-Precategory =
     equiv-Σ-equiv-base
-    ( λ K → natural-transformation-Precategory C D
-      ( F)
-      ( comp-functor-Precategory C terminal-Precategory D
-        ( K)
-        ( terminal-functor-Precategory C)))
-    ( equiv-point-Precategory D)
+      ( λ K →
+        natural-transformation-Precategory C D
+          ( F)
+          ( comp-functor-Precategory C terminal-Precategory D
+            ( K)
+            ( terminal-functor-Precategory C)))
+      ( equiv-point-Precategory D)
 
   left-extension-cocone-Precategory :
     cocone-Precategory →
     left-extension-Precategory C terminal-Precategory D
-      (terminal-functor-Precategory C) F
+      ( terminal-functor-Precategory C)
+      ( F)
   left-extension-cocone-Precategory =
     map-equiv equiv-left-extension-cocone-Precategory
 
   cocone-left-extension-Precategory :
     left-extension-Precategory C terminal-Precategory D
-      (terminal-functor-Precategory C) F →
+      ( terminal-functor-Precategory C)
+      ( F) →
     cocone-Precategory
   cocone-left-extension-Precategory =
     map-inv-equiv equiv-left-extension-cocone-Precategory
 
   vertex-left-extension-Precategory :
     left-extension-Precategory C terminal-Precategory D
-      (terminal-functor-Precategory C) F →
+      ( terminal-functor-Precategory C)
+      ( F) →
     obj-Precategory D
   vertex-left-extension-Precategory R =
     vertex-cocone-Precategory

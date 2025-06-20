@@ -29,7 +29,7 @@ open import foundation.universe-levels
 Given an arbitrary [functor](category-theory.functors-precategories.md)
 `F : C → D`, any [left Kan
 extension](category-theory.left-kan-extensions-precategories.md] `L` of `F`
-along itself `F` has a canonical
+along itself has a canonical
 [comonad](category-theory.comonads-on-precategories.md) structure, called the
 {{#concept "density comonad" Agda=density-comonad-Precategory}} of `L`.
 

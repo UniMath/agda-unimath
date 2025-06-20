@@ -29,7 +29,7 @@ open import foundation.universe-levels
 Given an arbitrary [functor](category-theory.functors-precategories.md)
 `F : C → D`, any
 [right Kan extension](category-theory.right-kan-extensions-precategories.md) `R`
-of `F` along itself `F` has a canonical
+of `F` along itself has a canonical
 [monad](category-theory.monads-on-precategories.md) structure, called the
 {{#concept "codensity monad" Agda=codensity-monad-Precategory WD="codensity monad" WDID=Q97359844}}
 of `R`.
