@@ -306,3 +306,8 @@ module _
     vertex-cocone-Precategory
       ( cocone-left-extension-Precategory R)
 ```
+
+## See also
+
+- [Colimits](category-theory.colimits-precategories.md) for universal cocones.
+- [Cones](category-theory.cones-precategories.md) for the dual concept.

@@ -303,3 +303,8 @@ module _
     vertex-cone-Precategory
       ( cone-right-extension-Precategory R)
 ```
+
+## See also
+
+- [Limits](category-theory.limits-precategories.md) for universal cones.
+- [Cocones](category-theory.cocones-precategories.md) for the dual concept.

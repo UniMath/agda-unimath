@@ -276,3 +276,7 @@ module _
   limit'-limit-Precategory =
     map-inv-equiv equiv-limit-limit'-Precategory
 ```
+
+## See also
+
+- [Colimits](category-theory.colimits-precategories.md) for the dual concept.
