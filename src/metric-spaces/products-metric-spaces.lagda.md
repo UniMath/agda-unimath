@@ -7,16 +7,31 @@ module metric-spaces.products-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.positive-rational-numbers
+
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.category-of-sets
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.isomorphisms-of-sets
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
+open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
+open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensional-premetric-structures
+open import metric-spaces.functions-metric-spaces
+open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.metric-space-of-short-functions-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.monotonic-premetric-structures
@@ -117,4 +132,329 @@ module _
   is-short-pr2-product-Metric-Space :
     is-short-function-Metric-Space (product-Metric-Space A B) B pr2
   is-short-pr2-product-Metric-Space _ _ _ = pr2
+```
+
+### Currying short maps from a product metric space
+
+```agda
+module _
+  {lx lx' ly ly' lz lz' : Level}
+  (X : Metric-Space lx lx') (Y : Metric-Space ly ly') (Z : Metric-Space lz lz')
+  (f : short-function-Metric-Space (product-Metric-Space X Y) Z)
+  where
+
+  map-ev-pair-short-function-product-Metric-Space :
+    type-Metric-Space X →
+    type-Metric-Space Y →
+    type-Metric-Space Z
+  map-ev-pair-short-function-product-Metric-Space x y =
+    map-short-function-Metric-Space
+      ( product-Metric-Space X Y)
+      ( Z)
+      ( f)
+      ( x , y)
+
+  is-short-map-ev-pair-short-function-product-Metric-Space :
+    (x : type-Metric-Space X) →
+    is-short-function-Metric-Space
+      ( Y)
+      ( Z)
+      ( map-ev-pair-short-function-product-Metric-Space x)
+  is-short-map-ev-pair-short-function-product-Metric-Space x d y y' Nyy' =
+    is-short-map-short-function-Metric-Space
+      ( product-Metric-Space X Y)
+      ( Z)
+      ( f)
+      ( d)
+      ( x , y)
+      ( x , y')
+      ( refl-structure-Metric-Space X d x , Nyy')
+
+  short-map-ev-pair-short-function-product-Metric-Space :
+    (x : type-Metric-Space X) →
+    short-function-Metric-Space Y Z
+  short-map-ev-pair-short-function-product-Metric-Space x =
+    map-ev-pair-short-function-product-Metric-Space x ,
+    is-short-map-ev-pair-short-function-product-Metric-Space x
+
+  is-short-short-map-ev-pair-short-function-product-Metric-Space :
+    is-short-function-Metric-Space
+      ( X)
+      ( metric-space-of-short-functions-Metric-Space Y Z)
+      ( short-map-ev-pair-short-function-product-Metric-Space)
+  is-short-short-map-ev-pair-short-function-product-Metric-Space d x x' Nxx' y =
+    is-short-map-short-function-Metric-Space
+      ( product-Metric-Space X Y)
+      ( Z)
+      ( f)
+      ( d)
+      ( x , y)
+      ( x' , y)
+      ( Nxx' , refl-structure-Metric-Space Y d y)
+
+  ev-pair-short-function-product-Metric-Space :
+    short-function-Metric-Space
+      ( X)
+      ( metric-space-of-short-functions-Metric-Space Y Z)
+  ev-pair-short-function-product-Metric-Space =
+    short-map-ev-pair-short-function-product-Metric-Space ,
+    is-short-short-map-ev-pair-short-function-product-Metric-Space
+```
+
+### Currying short maps from a product metric space is preserves and reflects neighborhoods
+
+```agda
+module _
+  {lx lx' ly ly' lz lz' : Level}
+  (X : Metric-Space lx lx') (Y : Metric-Space ly ly') (Z : Metric-Space lz lz')
+  (d : ℚ⁺)
+  (f g : short-function-Metric-Space (product-Metric-Space X Y) Z)
+  where
+
+  preserves-neighborhood-ev-pair-short-function-product-Metric-Space :
+    neighborhood-Metric-Space
+      ( metric-space-of-short-functions-Metric-Space
+        ( product-Metric-Space X Y)
+        ( Z))
+      ( d)
+      ( f)
+      ( g) →
+    neighborhood-Metric-Space
+      ( metric-space-of-short-functions-Metric-Space
+        ( X)
+        ( metric-space-of-short-functions-Metric-Space Y Z))
+      ( d)
+      ( ev-pair-short-function-product-Metric-Space X Y Z f)
+      ( ev-pair-short-function-product-Metric-Space X Y Z g)
+  preserves-neighborhood-ev-pair-short-function-product-Metric-Space
+    Nfg x y =
+    Nfg (x , y)
+
+  reflects-neighborhood-ev-pair-short-function-product-Metric-Space :
+    neighborhood-Metric-Space
+      ( metric-space-of-short-functions-Metric-Space
+        ( X)
+        ( metric-space-of-short-functions-Metric-Space Y Z))
+      ( d)
+      ( ev-pair-short-function-product-Metric-Space X Y Z f)
+      ( ev-pair-short-function-product-Metric-Space X Y Z g) →
+    neighborhood-Metric-Space
+      ( metric-space-of-short-functions-Metric-Space
+        ( product-Metric-Space X Y)
+        ( Z))
+      ( d)
+      ( f)
+      ( g)
+  reflects-neighborhood-ev-pair-short-function-product-Metric-Space
+    Nfg (x , y) =
+    Nfg x y
+```
+
+### Currying short maps from a product metric space is an isometry
+
+```agda
+module _
+  {lx lx' ly ly' lz lz' : Level}
+  (X : Metric-Space lx lx') (Y : Metric-Space ly ly') (Z : Metric-Space lz lz')
+  where
+
+  is-isometry-ev-pair-short-function-product-Metric-Space :
+    is-isometry-Metric-Space
+      ( metric-space-of-short-functions-Metric-Space
+        ( product-Metric-Space X Y)
+        ( Z))
+      ( metric-space-of-short-functions-Metric-Space
+        ( X)
+        ( metric-space-of-short-functions-Metric-Space Y Z))
+      ( ev-pair-short-function-product-Metric-Space X Y Z)
+  is-isometry-ev-pair-short-function-product-Metric-Space d f g =
+    ( preserves-neighborhood-ev-pair-short-function-product-Metric-Space
+      X
+      Y
+      Z
+      d
+      f
+      g) ,
+    ( reflects-neighborhood-ev-pair-short-function-product-Metric-Space
+      X
+      Y
+      Z
+      d
+      f
+      g)
+
+  isometry-ev-pair-short-function-product-Metric-Space :
+    isometry-Metric-Space
+      ( metric-space-of-short-functions-Metric-Space
+        ( product-Metric-Space X Y)
+        ( Z))
+      ( metric-space-of-short-functions-Metric-Space
+        ( X)
+        ( metric-space-of-short-functions-Metric-Space Y Z))
+  isometry-ev-pair-short-function-product-Metric-Space =
+    ev-pair-short-function-product-Metric-Space X Y Z ,
+    is-isometry-ev-pair-short-function-product-Metric-Space
+```
+
+### Uncurrying short maps between metric spaces
+
+```agda
+module _
+  {lx lx' ly ly' lz lz' : Level}
+  (X : Metric-Space lx lx') (Y : Metric-Space ly ly') (Z : Metric-Space lz lz')
+  where
+
+  map-ind-short-function-product-Metric-Space :
+    short-function-Metric-Space
+      ( X)
+      ( metric-space-of-short-functions-Metric-Space Y Z) →
+    map-type-Metric-Space
+      ( product-Metric-Space X Y)
+      ( Z)
+  map-ind-short-function-product-Metric-Space f (x , y) =
+    map-short-function-Metric-Space
+      ( Y)
+      ( Z)
+      ( map-short-function-Metric-Space
+        ( X)
+        ( metric-space-of-short-functions-Metric-Space Y Z)
+        ( f)
+        ( x))
+      ( y)
+
+  eq-map-ev-pair-ind-short-function-product-Metric-Space :
+    ( f :
+      short-function-Metric-Space
+        ( product-Metric-Space X Y)
+        ( Z)) →
+    map-ind-short-function-product-Metric-Space
+      ( ev-pair-short-function-product-Metric-Space X Y Z f) ＝
+    map-short-function-Metric-Space
+      ( product-Metric-Space X Y)
+      ( Z)
+      ( f)
+  eq-map-ev-pair-ind-short-function-product-Metric-Space f =
+    refl
+
+  all-eq-preimage-ev-pair-short-function-product-Metric-Space :
+    ( f :
+        short-function-Metric-Space
+          ( X)
+          ( metric-space-of-short-functions-Metric-Space Y Z)) →
+    ( g g' : short-function-Metric-Space (product-Metric-Space X Y) Z) →
+    ( ev-pair-short-function-product-Metric-Space X Y Z g ＝ f) →
+    ( ev-pair-short-function-product-Metric-Space X Y Z g' ＝ f) →
+    ( g ＝ g')
+  all-eq-preimage-ev-pair-short-function-product-Metric-Space f g g' H H' =
+    eq-type-subtype
+      ( is-short-function-prop-Metric-Space (product-Metric-Space X Y) Z)
+      ( ( inv (eq-map-ev-pair-ind-short-function-product-Metric-Space g)) ∙
+        ( ap map-ind-short-function-product-Metric-Space H) ∙
+        ( ap map-ind-short-function-product-Metric-Space (inv H') ∙
+        ( eq-map-ev-pair-ind-short-function-product-Metric-Space g')))
+
+  all-eq-fiber-ev-pair-short-function-product-Metric-Space :
+    ( f :
+        short-function-Metric-Space
+          ( X)
+          ( metric-space-of-short-functions-Metric-Space Y Z)) →
+    ( g g' :
+      Σ ( short-function-Metric-Space (product-Metric-Space X Y) Z)
+        ( λ g → ev-pair-short-function-product-Metric-Space X Y Z g ＝ f)) →
+      ( g ＝ g')
+  all-eq-fiber-ev-pair-short-function-product-Metric-Space f g g' =
+    eq-type-subtype
+      ( λ h →
+        Id-Prop
+          ( set-Metric-Space
+            ( metric-space-of-short-functions-Metric-Space
+              ( X)
+              ( metric-space-of-short-functions-Metric-Space Y Z)))
+          ( ev-pair-short-function-product-Metric-Space X Y Z h)
+          ( f))
+      ( all-eq-preimage-ev-pair-short-function-product-Metric-Space
+        ( f)
+        ( pr1 g)
+        ( pr1 g')
+        ( pr2 g)
+        ( pr2 g'))
+
+  is-prop-fiber-ev-pair-short-function-product-Metric-Space :
+    ( f :
+        short-function-Metric-Space
+          ( X)
+          ( metric-space-of-short-functions-Metric-Space Y Z)) →
+    is-prop
+      ( Σ ( short-function-Metric-Space (product-Metric-Space X Y) Z)
+          ( λ g → ev-pair-short-function-product-Metric-Space X Y Z g ＝ f))
+  is-prop-fiber-ev-pair-short-function-product-Metric-Space =
+    is-prop-all-elements-equal ∘
+    all-eq-fiber-ev-pair-short-function-product-Metric-Space
+```
+
+```agda
+module _
+  {lx lx' ly ly' lz lz' : Level}
+  (X : Metric-Space lx lx') (Y : Metric-Space ly ly') (Z : Metric-Space lz lz')
+  where
+
+  is-short-map-ind-short-function-prop-Metric-Space :
+    Prop (lx ⊔ lx' ⊔ ly ⊔ ly' ⊔ lz ⊔ lz')
+  is-short-map-ind-short-function-prop-Metric-Space =
+    Π-Prop
+      ( short-function-Metric-Space
+        ( X)
+        ( metric-space-of-short-functions-Metric-Space Y Z))
+      ( ( is-short-function-prop-Metric-Space
+          ( product-Metric-Space X Y)
+          ( Z)) ∘
+        ( map-ind-short-function-product-Metric-Space X Y Z))
+
+  is-short-map-ind-short-function-Metric-Space :
+    UU (lx ⊔ lx' ⊔ ly ⊔ ly' ⊔ lz ⊔ lz')
+  is-short-map-ind-short-function-Metric-Space =
+    type-Prop is-short-map-ind-short-function-prop-Metric-Space
+
+  is-equiv-ev-pair-is-short-map-ind-short-function-Metric-Space :
+    is-short-map-ind-short-function-Metric-Space →
+    is-equiv (ev-pair-short-function-product-Metric-Space X Y Z)
+  is-equiv-ev-pair-is-short-map-ind-short-function-Metric-Space H =
+    is-equiv-is-invertible
+      ( λ f → map-ind-short-function-product-Metric-Space X Y Z f , H f)
+      ( λ f →
+        eq-type-subtype
+          ( is-short-function-prop-Metric-Space
+            ( X)
+            ( metric-space-of-short-functions-Metric-Space Y Z))
+          ( eq-htpy
+            ( λ x →
+              eq-type-subtype
+                ( is-short-function-prop-Metric-Space Y Z)
+                ( eq-htpy (λ y → refl)))))
+      ( λ f →
+        eq-type-subtype
+          ( is-short-function-prop-Metric-Space
+            ( product-Metric-Space X Y)
+            ( Z))
+          ( refl))
+
+  lemma-eq-short-ind-short-function-Metric-Space :
+    is-short-map-ind-short-function-Metric-Space →
+    metric-space-of-short-functions-Metric-Space
+      ( product-Metric-Space X Y)
+      ( Z) ＝
+    metric-space-of-short-functions-Metric-Space
+      ( X)
+      ( metric-space-of-short-functions-Metric-Space Y Z)
+  lemma-eq-short-ind-short-function-Metric-Space H =
+    eq-isometric-equiv-Metric-Space'
+      ( metric-space-of-short-functions-Metric-Space
+        ( product-Metric-Space X Y)
+        ( Z))
+      ( metric-space-of-short-functions-Metric-Space
+        ( X)
+        ( metric-space-of-short-functions-Metric-Space Y Z))
+      ( ev-pair-short-function-product-Metric-Space X Y Z ,
+        is-equiv-ev-pair-is-short-map-ind-short-function-Metric-Space H ,
+        is-isometry-ev-pair-short-function-product-Metric-Space X Y Z)
 ```

@@ -95,6 +95,7 @@ open import metric-spaces.precategory-of-metric-spaces-and-isometries public
 open import metric-spaces.precategory-of-metric-spaces-and-short-functions public
 open import metric-spaces.premetric-spaces public
 open import metric-spaces.premetric-structures public
+open import metric-spaces.products-metric-spaces public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.pseudometric-structures public
 open import metric-spaces.rational-approximations-of-zero public
