@@ -228,7 +228,7 @@ module _
       ( λ x → refl)
 ```
 
-### Associatity of composition of short maps between metric spaces
+### Associativity of composition of short maps between metric spaces
 
 ```agda
 module _
