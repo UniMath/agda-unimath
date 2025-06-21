@@ -238,11 +238,11 @@ The right unit law is similar; we show that the composite is `α` via:
 
 ```text
       ηRF      μF     α
-   RF ═══> R²F ══>RF ══> F
-   ║        ║            ║
- α ║     Rα ║            ║
-   ∨        ∨            ║
-   F ════> RF ═════════> F
+   RF ═══> R²F ══> RF ══> F
+   ║        ║             ║
+ α ║     Rα ║             ║
+   ∨        ∨             ║
+   F ════> RF ══════════> F
       ηF          α
 ```
 

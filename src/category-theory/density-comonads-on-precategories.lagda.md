@@ -45,7 +45,7 @@ definition via the universal property, we have two computation rules for these
 natural transformations (where ∙ is whiskering):
 
 1. `α ∘ (η ∙ F) ＝ id_F`; and
-2. `α ∘ (μ ∙ F) = α ∘ (L ∙ α)`.
+2. `α ∘ (μ ∙ F) ＝ α ∘ (L ∙ α)`.
 
 ```agda
 module _
