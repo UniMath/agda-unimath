@@ -355,15 +355,7 @@ module _
       ( product-Metric-Space X Y)
       ( Z)
   map-ind-short-function-product-Metric-Space f (x , y) =
-    map-short-function-Metric-Space
-      ( Y)
-      ( Z)
-      ( map-short-function-Metric-Space
-        ( X)
-        ( metric-space-of-short-functions-Metric-Space Y Z)
-        ( f)
-        ( x))
-      ( y)
+    map²-short-function-Metric-Space X Y Z f x y
 
   eq-map-ev-pair-ind-short-function-product-Metric-Space :
     ( f :
@@ -457,6 +449,26 @@ module _
     UU (lx ⊔ lx' ⊔ ly ⊔ ly' ⊔ lz ⊔ lz')
   is-short-map-ind-short-function-Metric-Space =
     type-Prop is-short-map-ind-short-function-prop-Metric-Space
+
+  lemma-is-short-map-ind-short-function-Metric-Space :
+    ( f :
+      short-function-Metric-Space
+        ( X)
+        ( metric-space-of-short-functions-Metric-Space Y Z)) →
+    ( let
+        map-f : type-Metric-Space X → type-Metric-Space Y → type-Metric-Space Z
+        map-f = map²-short-function-Metric-Space X Y Z f
+      in
+        (d : ℚ⁺) (x x' : type-Metric-Space X) (y y' : type-Metric-Space Y) →
+        neighborhood-Metric-Space X d x x' →
+        neighborhood-Metric-Space Y d y y' →
+        neighborhood-Metric-Space Z d (map-f x y) (map-f x' y')) →
+    is-short-function-Metric-Space
+      ( product-Metric-Space X Y)
+      ( Z)
+      ( map-ind-short-function-product-Metric-Space X Y Z f)
+  lemma-is-short-map-ind-short-function-Metric-Space
+    f H d (x , y) (x' , y') N = H d x x' y y' (pr1 N) (pr2 N)
 
   is-equiv-ev-pair-is-short-map-ind-short-function-Metric-Space :
     is-short-map-ind-short-function-Metric-Space →
