@@ -47,8 +47,8 @@ Any pair of [maps](foundation-core.function-types.md) between
 [relation](foundation.binary-relations.md)
 [generated](foundation.freely-generated-equivalence-relations.md) by `x ~ y` if
 there is some `z : A` with `f(z) = x` and `g(z) = y`. This quotient `B/A` has
-the _universal property_ than any map `h : B → C` for `C` a set coequalizing `f`
-and `g` must factor uniquely through the quotient map `B → B/A`.
+the _universal property_ that any map `h : B → C` which satisfies the equation
+`h ∘ f ~ h ∘ g` factors uniquely through the quotient map `B → B/A`.
 
 ## Definitions
 
