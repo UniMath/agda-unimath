@@ -197,6 +197,7 @@ open import foundation.finite-sequences-set-quotients public
 open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
 open import foundation.fixed-points-endofunctions public
+open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
 open import foundation.function-types public
@@ -372,6 +373,7 @@ open import foundation.sections public
 open import foundation.separated-types-subuniverses public
 open import foundation.sequences public
 open import foundation.sequential-limits public
+open import foundation.set-coequalizers public
 open import foundation.set-presented-types public
 open import foundation.set-quotients public
 open import foundation.set-truncations public
