@@ -52,16 +52,17 @@ of a [functor](category-theory.functors-precategories.md) `F : C → D` between
 `φ : G ∘ p → F`.
 
 ```text
-  C
-  |  \
-  p    F
-  |      \
-  ∨        ∨
-  C' - G -> D
+    C
+    |  \
+  p |    \ F
+    |      \
+    ∨        ∨
+    C' -----> D
+         G
 ```
 
-We note that this is not a standard definition, but it inspired by the notion of
-a [right kan extension](category-theory.right-kan-extensions-precategories.md).
+We note that this is not a standard definition, but is inspired by the notion of
+a [right Kan extension](category-theory.right-kan-extensions-precategories.md).
 
 ## Definition
 
@@ -153,7 +154,7 @@ module _
 
 ## Properties
 
-### Characterization of equality right extensions of functors between precategories
+### Characterization of equality between right extensions of functors between precategories
 
 ```agda
   coherence-htpy-right-extension-Precategory :
@@ -295,3 +296,8 @@ module _
         ( extension-right-extension-Precategory C D D F F R)
         ( natural-transformation-right-extension-Precategory C D D F F R))
 ```
+
+## See also
+
+- [Left extensions](category-theory.left-extensions-precategories.md) for the
+  dual concept.

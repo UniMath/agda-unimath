@@ -239,10 +239,10 @@ module _
         ( _)
         ( λ f → eq-htpy λ {(map-raise star) → refl})
 
-  is-limiting-cone-Set-Precategory :
-    is-limiting-cone-Precategory C (Set-Precategory (l1 ⊔ l2)) F
+  is-limit-cone-Set-Precategory :
+    is-limit-cone-Precategory C (Set-Precategory (l1 ⊔ l2)) F
       cone-limit-Set-Precategory
-  is-limiting-cone-Set-Precategory φ =
+  is-limit-cone-Set-Precategory φ =
     is-equiv-is-invertible
       ( map-inv-cone-map-limit-Set-Precategory φ)
       ( is-section-cone-map-limit-Set-Precategory φ)
@@ -251,7 +251,7 @@ module _
   limit-Set-Precategory :
     limit-Precategory C (Set-Precategory (l1 ⊔ l2)) F
   pr1 limit-Set-Precategory = cone-limit-Set-Precategory
-  pr2 limit-Set-Precategory = is-limiting-cone-Set-Precategory
+  pr2 limit-Set-Precategory = is-limit-cone-Set-Precategory
 
 is-complete-Set-Precategory :
   (l1 l2 : Level) →
