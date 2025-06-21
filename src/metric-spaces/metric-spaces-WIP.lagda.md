@@ -63,6 +63,9 @@ The neighborhood relation on a metric space must satisfy the following axioms:
   `d` is an upper bound on the distance from `x` to `y`, and `d'` is an upper
   bound on the distance from `y` to `z`, then `d + d'` is an upper bound on the
   distance from `x` to `z`.
+- [**Saturation.**](metric-spaces.saturated-rational-neighborhoods.md): any
+  neighborhood `N d x y` contains the intersection of all `N d' x y` for
+  `d < d'`.
 
 This gives `A` the structure of a
 [**pseudometric space**](metric-spaces.pseudometric-spaces-WIP.md); finally, we
@@ -76,6 +79,11 @@ are [equal](foundation-core.identity-types.md):
 
 Similarity of elements in a metric space characterizes their equality so any
 metric space is a [set](foundation.sets.md).
+
+NB: When working with actual distance functions, the _saturation_ condition
+always holds, defining `N d x y` as `dist(x , y) ≤ d`. Since we're working with
+_upper bounds on distances_, we add have to add this axiom to ensure that the
+subsets of upper bounds on distances between elements is closed on the left.
 
 ## Definitions
 
