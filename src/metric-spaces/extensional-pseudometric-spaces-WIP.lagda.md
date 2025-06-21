@@ -41,7 +41,7 @@ if any of the following equivalent condition holds:
 
 The carrier type of an extensional pseudometric space is a
 [set](foundation.sets.md) and the
-[discrete pseudometric structure](metric-spaces.discrete-pseudometric-structures.md)
+[discrete pseudometric structure](metric-spaces.discrete-premetric-structures.md)
 over a set is extensional.
 
 ## Definitions
