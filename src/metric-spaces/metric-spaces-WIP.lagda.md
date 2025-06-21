@@ -22,9 +22,9 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import metric-spaces.extensional-premetric-spaces-WIP
-open import metric-spaces.premetric-spaces-WIP
-open import metric-spaces.similarity-of-elements-premetric-spaces
+open import metric-spaces.extensional-pseudometric-spaces-WIP
+open import metric-spaces.pseudometric-spaces-WIP
+open import metric-spaces.similarity-of-elements-pseudometric-spaces
 ```
 
 </details>
@@ -65,11 +65,11 @@ The neighborhood relation on a metric space must satisfy the following axioms:
   distance from `x` to `z`.
 
 This gives `A` the structure of a
-[**premetric space**](metric-spaces.premetric-spaces-WIP.md); finally, we ask
-that our metric spaces are
-[**extensional**](metric-spaces.extensional-premetric-spaces-WIP.md):
-[similar](metric-spaces.similarity-of-elements-premetric-spaces.md) elements are
-[equal](foundation-core.identity-types.md):
+[**pseudometric space**](metric-spaces.pseudometric-spaces-WIP.md); finally, we
+ask that our metric spaces are
+[**extensional**](metric-spaces.extensional-pseudometric-spaces-WIP.md):
+[similar](metric-spaces.similarity-of-elements-pseudometric-spaces.md) elements
+are [equal](foundation-core.identity-types.md):
 
 - If every positive rational `d` is an upper bound on the distance from `x` to
   `y`, then `x ＝ y`.
@@ -84,41 +84,41 @@ metric space is a [set](foundation.sets.md).
 ```agda
 Metric-Space-WIP : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Metric-Space-WIP l1 l2 =
-  type-subtype (is-extensional-prop-Premetric-Space-WIP {l1} {l2})
+  type-subtype (is-extensional-prop-Pseudometric-Space-WIP {l1} {l2})
 
 module _
   {l1 l2 : Level} (M : Metric-Space-WIP l1 l2)
   where
 
-  premetric-Metric-Space-WIP : Premetric-Space-WIP l1 l2
-  premetric-Metric-Space-WIP = pr1 M
+  pseudometric-Metric-Space-WIP : Pseudometric-Space-WIP l1 l2
+  pseudometric-Metric-Space-WIP = pr1 M
 
-  is-extensional-premetric-Metric-Space-WIP :
-    is-extensional-Premetric-Space-WIP premetric-Metric-Space-WIP
-  is-extensional-premetric-Metric-Space-WIP = pr2 M
+  is-extensional-pseudometric-Metric-Space-WIP :
+    is-extensional-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
+  is-extensional-pseudometric-Metric-Space-WIP = pr2 M
 
   type-Metric-Space-WIP : UU l1
   type-Metric-Space-WIP =
-    type-Premetric-Space-WIP premetric-Metric-Space-WIP
+    type-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
 
-  structure-Metric-Space-WIP : Premetric-Structure l2 type-Metric-Space-WIP
+  structure-Metric-Space-WIP : Pseudometric-Structure l2 type-Metric-Space-WIP
   structure-Metric-Space-WIP =
-    structure-Premetric-Space-WIP premetric-Metric-Space-WIP
+    structure-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
 
   neighborhood-prop-Metric-Space-WIP :
     ℚ⁺ → Relation-Prop l2 type-Metric-Space-WIP
   neighborhood-prop-Metric-Space-WIP =
-    neighborhood-prop-Premetric-Space-WIP premetric-Metric-Space-WIP
+    neighborhood-prop-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
 
   neighborhood-Metric-Space-WIP : ℚ⁺ → Relation l2 type-Metric-Space-WIP
   neighborhood-Metric-Space-WIP =
-    neighborhood-Premetric-Space-WIP premetric-Metric-Space-WIP
+    neighborhood-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
 
   is-prop-neighborhood-Metric-Space-WIP :
     (d : ℚ⁺) (x y : type-Metric-Space-WIP) →
     is-prop (neighborhood-Metric-Space-WIP d x y)
   is-prop-neighborhood-Metric-Space-WIP =
-    is-prop-neighborhood-Premetric-Space-WIP premetric-Metric-Space-WIP
+    is-prop-neighborhood-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
 
   is-upper-bound-dist-prop-Metric-Space-WIP :
     (x y : type-Metric-Space-WIP) → ℚ⁺ → Prop l2
@@ -136,33 +136,33 @@ module _
   is-prop-is-upper-bound-dist-Metric-Space-WIP x y d =
     is-prop-neighborhood-Metric-Space-WIP d x y
 
-  is-premetric-neighborhood-Metric-Space-WIP :
-    is-premetric-Rational-Neighborhood-Relation
+  is-pseudometric-neighborhood-Metric-Space-WIP :
+    is-pseudometric-Rational-Neighborhood-Relation
       type-Metric-Space-WIP
       neighborhood-prop-Metric-Space-WIP
-  is-premetric-neighborhood-Metric-Space-WIP =
-    is-premetric-neighborhood-Premetric-Space-WIP
-      premetric-Metric-Space-WIP
+  is-pseudometric-neighborhood-Metric-Space-WIP =
+    is-pseudometric-neighborhood-Pseudometric-Space-WIP
+      pseudometric-Metric-Space-WIP
 
   refl-neighborhood-Metric-Space-WIP :
     (d : ℚ⁺) (x : type-Metric-Space-WIP) →
     neighborhood-Metric-Space-WIP d x x
   refl-neighborhood-Metric-Space-WIP =
-    refl-neighborhood-Premetric-Space-WIP premetric-Metric-Space-WIP
+    refl-neighborhood-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
 
   symmetric-neighborhood-Metric-Space-WIP :
     (d : ℚ⁺) (x y : type-Metric-Space-WIP) →
     neighborhood-Metric-Space-WIP d x y →
     neighborhood-Metric-Space-WIP d y x
   symmetric-neighborhood-Metric-Space-WIP =
-    symmetric-neighborhood-Premetric-Space-WIP premetric-Metric-Space-WIP
+    symmetric-neighborhood-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
 
   inv-neighborhood-Metric-Space-WIP :
     {d : ℚ⁺} {x y : type-Metric-Space-WIP} →
     neighborhood-Metric-Space-WIP d x y →
     neighborhood-Metric-Space-WIP d y x
   inv-neighborhood-Metric-Space-WIP =
-    inv-neighborhood-Premetric-Space-WIP premetric-Metric-Space-WIP
+    inv-neighborhood-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
 
   triangular-neighborhood-Metric-Space-WIP :
     (x y z : type-Metric-Space-WIP) (d₁ d₂ : ℚ⁺) →
@@ -170,7 +170,7 @@ module _
     neighborhood-Metric-Space-WIP d₁ x y →
     neighborhood-Metric-Space-WIP (d₁ +ℚ⁺ d₂) x z
   triangular-neighborhood-Metric-Space-WIP =
-    triangular-neighborhood-Premetric-Space-WIP premetric-Metric-Space-WIP
+    triangular-neighborhood-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
 
   monotonic-neighborhood-Metric-Space-WIP :
     (x y : type-Metric-Space-WIP) (d₁ d₂ : ℚ⁺) →
@@ -178,7 +178,7 @@ module _
     neighborhood-Metric-Space-WIP d₁ x y →
     neighborhood-Metric-Space-WIP d₂ x y
   monotonic-neighborhood-Metric-Space-WIP =
-    monotonic-neighborhood-Premetric-Space-WIP premetric-Metric-Space-WIP
+    monotonic-neighborhood-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
 ```
 
 ### Similarity of elements in a metric space
@@ -190,44 +190,44 @@ module _
 
   sim-prop-Metric-Space-WIP : Relation-Prop l2 (type-Metric-Space-WIP A)
   sim-prop-Metric-Space-WIP =
-    sim-prop-Premetric-Space-WIP (premetric-Metric-Space-WIP A)
+    sim-prop-Pseudometric-Space-WIP (pseudometric-Metric-Space-WIP A)
 
   sim-Metric-Space-WIP : Relation l2 (type-Metric-Space-WIP A)
   sim-Metric-Space-WIP =
-    sim-Premetric-Space-WIP (premetric-Metric-Space-WIP A)
+    sim-Pseudometric-Space-WIP (pseudometric-Metric-Space-WIP A)
 
   is-prop-sim-Metric-Space-WIP :
     (x y : type-Metric-Space-WIP A) →
     is-prop (sim-Metric-Space-WIP x y)
   is-prop-sim-Metric-Space-WIP =
-    is-prop-sim-Premetric-Space-WIP (premetric-Metric-Space-WIP A)
+    is-prop-sim-Pseudometric-Space-WIP (pseudometric-Metric-Space-WIP A)
 
   refl-sim-Metric-Space-WIP :
     (x : type-Metric-Space-WIP A) →
     sim-Metric-Space-WIP x x
   refl-sim-Metric-Space-WIP =
-    refl-sim-Premetric-Space-WIP (premetric-Metric-Space-WIP A)
+    refl-sim-Pseudometric-Space-WIP (pseudometric-Metric-Space-WIP A)
 
   sim-eq-Metric-Space-WIP :
     (x y : type-Metric-Space-WIP A) →
     x ＝ y →
     sim-Metric-Space-WIP x y
   sim-eq-Metric-Space-WIP =
-    sim-eq-Premetric-Space-WIP (premetric-Metric-Space-WIP A)
+    sim-eq-Pseudometric-Space-WIP (pseudometric-Metric-Space-WIP A)
 
   symmetric-sim-Metric-Space-WIP :
     (x y : type-Metric-Space-WIP A) →
     sim-Metric-Space-WIP x y →
     sim-Metric-Space-WIP y x
   symmetric-sim-Metric-Space-WIP =
-    symmetric-sim-Premetric-Space-WIP (premetric-Metric-Space-WIP A)
+    symmetric-sim-Pseudometric-Space-WIP (pseudometric-Metric-Space-WIP A)
 
   inv-sim-Metric-Space-WIP :
     {x y : type-Metric-Space-WIP A} →
     sim-Metric-Space-WIP x y →
     sim-Metric-Space-WIP y x
   inv-sim-Metric-Space-WIP {x} {y} =
-    inv-sim-Premetric-Space-WIP (premetric-Metric-Space-WIP A)
+    inv-sim-Pseudometric-Space-WIP (pseudometric-Metric-Space-WIP A)
 
   transitive-sim-Metric-Space-WIP :
     (x y z : type-Metric-Space-WIP A) →
@@ -235,12 +235,12 @@ module _
     sim-Metric-Space-WIP x y →
     sim-Metric-Space-WIP x z
   transitive-sim-Metric-Space-WIP =
-    transitive-sim-Premetric-Space-WIP (premetric-Metric-Space-WIP A)
+    transitive-sim-Pseudometric-Space-WIP (pseudometric-Metric-Space-WIP A)
 
   equivalence-sim-Metric-Space-WIP :
     equivalence-relation l2 (type-Metric-Space-WIP A)
   equivalence-sim-Metric-Space-WIP =
-    equivalence-sim-Premetric-Space-WIP (premetric-Metric-Space-WIP A)
+    equivalence-sim-Pseudometric-Space-WIP (pseudometric-Metric-Space-WIP A)
 ```
 
 ## Properties
@@ -254,9 +254,9 @@ module _
 
   is-set-type-Metric-Space-WIP : is-set (type-Metric-Space-WIP A)
   is-set-type-Metric-Space-WIP =
-    is-set-type-is-extensional-Premetric-Space-WIP
-      ( premetric-Metric-Space-WIP A)
-      ( is-extensional-premetric-Metric-Space-WIP A)
+    is-set-type-is-extensional-Pseudometric-Space-WIP
+      ( pseudometric-Metric-Space-WIP A)
+      ( is-extensional-pseudometric-Metric-Space-WIP A)
 
   set-Metric-Space-WIP : Set l1
   set-Metric-Space-WIP =
@@ -274,9 +274,9 @@ module _
     (x y : type-Metric-Space-WIP A) →
     (x ＝ y) ≃ sim-Metric-Space-WIP A x y
   equiv-sim-eq-Metric-Space-WIP =
-    equiv-sim-eq-is-extensional-Premetric-Space-WIP
-      ( premetric-Metric-Space-WIP A)
-      ( is-extensional-premetric-Metric-Space-WIP A)
+    equiv-sim-eq-is-extensional-Pseudometric-Space-WIP
+      ( pseudometric-Metric-Space-WIP A)
+      ( is-extensional-pseudometric-Metric-Space-WIP A)
 
   eq-sim-Metric-Space-WIP :
     (x y : type-Metric-Space-WIP A) →

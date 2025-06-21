@@ -62,8 +62,8 @@ open import metric-spaces.discrete-premetric-structures public
 open import metric-spaces.elements-at-bounded-distance-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-premetric-spaces public
-open import metric-spaces.extensional-premetric-spaces-WIP public
 open import metric-spaces.extensional-premetric-structures public
+open import metric-spaces.extensional-pseudometric-spaces-WIP public
 open import metric-spaces.functions-metric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-category-short-isometry-metric-spaces public
@@ -97,9 +97,9 @@ open import metric-spaces.precategory-of-metric-spaces-and-functions public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
 open import metric-spaces.precategory-of-metric-spaces-and-short-functions public
 open import metric-spaces.premetric-spaces public
-open import metric-spaces.premetric-spaces-WIP public
 open import metric-spaces.premetric-structures public
 open import metric-spaces.pseudometric-spaces public
+open import metric-spaces.pseudometric-spaces-WIP public
 open import metric-spaces.pseudometric-structures public
 open import metric-spaces.rational-approximations-of-zero public
 open import metric-spaces.rational-cauchy-approximations public
@@ -115,7 +115,7 @@ open import metric-spaces.sequences-premetric-spaces public
 open import metric-spaces.sequences-pseudometric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
 open import metric-spaces.short-functions-premetric-spaces public
-open import metric-spaces.similarity-of-elements-premetric-spaces public
+open import metric-spaces.similarity-of-elements-pseudometric-spaces public
 open import metric-spaces.subspaces-metric-spaces public
 open import metric-spaces.symmetric-premetric-structures public
 open import metric-spaces.symmetric-rational-neighborhoods public
