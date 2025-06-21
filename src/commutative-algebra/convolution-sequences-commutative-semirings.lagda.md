@@ -12,8 +12,8 @@ open import commutative-algebra.function-commutative-semirings
 open import commutative-algebra.sums-of-finite-families-of-elements-commutative-semirings
 open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-semirings
 
+open import elementary-number-theory.binary-sum-decompositions-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.pairs-with-natural-sums
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.coproduct-types
@@ -66,7 +66,7 @@ module _
   convolution-sequence-Commutative-Semiring a b n =
     sum-finite-Commutative-Semiring
       ( R)
-      ( finite-type-pair-with-sum-ℕ n)
+      ( finite-type-binary-sum-decomposition-ℕ n)
       ( λ (i , j , j+i=n) → mul-Commutative-Semiring R (a i) (b j))
 ```
 
@@ -88,23 +88,23 @@ module _
       equational-reasoning
         sum-finite-Commutative-Semiring
           ( R)
-          ( finite-type-pair-with-sum-ℕ n)
+          ( finite-type-binary-sum-decomposition-ℕ n)
           ( λ (i , j , j+i=n) → mul-Commutative-Semiring R (a i) (b j))
         ＝
           sum-finite-Commutative-Semiring
             ( R)
-            ( finite-type-pair-with-sum-ℕ n)
+            ( finite-type-binary-sum-decomposition-ℕ n)
             ( λ (i , j , j+i=n) → mul-Commutative-Semiring R (a j) (b i))
           by
             sum-aut-finite-Commutative-Semiring
               ( R)
-              ( finite-type-pair-with-sum-ℕ n)
-              ( aut-swap-pair-with-sum-ℕ n)
+              ( finite-type-binary-sum-decomposition-ℕ n)
+              ( aut-swap-binary-sum-decomposition-ℕ n)
               ( _)
         ＝
           sum-finite-Commutative-Semiring
             ( R)
-            ( finite-type-pair-with-sum-ℕ n)
+            ( finite-type-binary-sum-decomposition-ℕ n)
             ( λ (i , j , j+i=n) → mul-Commutative-Semiring R (b i) (a j))
           by
             htpy-sum-finite-Commutative-Semiring R _
@@ -142,7 +142,7 @@ module _
     htpy-left-unit-law-convolution-sequence-Commutative-Semiring a n =
       equational-reasoning
         sum-finite-Commutative-Semiring R
-          ( finite-type-pair-with-sum-ℕ n)
+          ( finite-type-binary-sum-decomposition-ℕ n)
           ( λ (i , j , j+i=n) →
             mul-Commutative-Semiring R
               ( unit-convolution-sequence-Commutative-Semiring i)
@@ -156,8 +156,8 @@ module _
             ( mul-Commutative-Semiring R (one-Commutative-Semiring R) (a n))
             by
               eq-sum-finite-sum-count-Commutative-Semiring R
-                ( finite-type-pair-with-sum-ℕ n)
-                ( count-pair-with-sum-ℕ n)
+                ( finite-type-binary-sum-decomposition-ℕ n)
+                ( count-binary-sum-decomposition-ℕ n)
                 ( _)
         ＝
           add-Commutative-Semiring R
@@ -225,21 +225,21 @@ module _
       in equational-reasoning
         sum-finite-Commutative-Semiring
           ( R)
-          ( finite-type-pair-with-sum-ℕ n)
+          ( finite-type-binary-sum-decomposition-ℕ n)
           ( λ (i , j , _) →
             ( sum-finite-Commutative-Semiring
               ( R)
-              ( finite-type-pair-with-sum-ℕ i)
+              ( finite-type-binary-sum-decomposition-ℕ i)
               ( λ (k , l , _) → a k *R b l)) *R
             c j)
         ＝
           sum-finite-Commutative-Semiring
             ( R)
-            ( finite-type-pair-with-sum-ℕ n)
+            ( finite-type-binary-sum-decomposition-ℕ n)
             ( λ (i , j , _) →
               ( sum-finite-Commutative-Semiring
                 ( R)
-                ( finite-type-pair-with-sum-ℕ i)
+                ( finite-type-binary-sum-decomposition-ℕ i)
                 ( λ (k , l , _) → (a k *R b l) *R c j)))
           by
             htpy-sum-finite-Commutative-Semiring R _
@@ -250,33 +250,33 @@ module _
           sum-finite-Commutative-Semiring
             ( R)
             ( Σ-Finite-Type
-              ( finite-type-pair-with-sum-ℕ n)
-              ( λ (i , j , _) → finite-type-pair-with-sum-ℕ i))
+              ( finite-type-binary-sum-decomposition-ℕ n)
+              ( λ (i , j , _) → finite-type-binary-sum-decomposition-ℕ i))
             ( λ ((i , j , _) , k , l , _) → (a k *R b l) *R c j)
           by
             inv
               ( sum-Σ-finite-Commutative-Semiring
                 ( R)
-                ( finite-type-pair-with-sum-ℕ n)
-                ( λ (i , _ , _) → finite-type-pair-with-sum-ℕ i)
+                ( finite-type-binary-sum-decomposition-ℕ n)
+                ( λ (i , _ , _) → finite-type-binary-sum-decomposition-ℕ i)
                 ( _))
         ＝
           sum-finite-Commutative-Semiring
               ( R)
               ( Σ-Finite-Type
-                ( finite-type-pair-with-sum-ℕ n)
-                ( λ (i , j , _) → finite-type-pair-with-sum-ℕ j))
+                ( finite-type-binary-sum-decomposition-ℕ n)
+                ( λ (i , j , _) → finite-type-binary-sum-decomposition-ℕ j))
               ( λ ((i , j , _) , k , l , _) → (a k *R b l) *R c i)
           by
             sum-equiv-finite-Commutative-Semiring R _ _
-              ( equiv-pair-with-sum-pr1-pr2 n)
+              ( equiv-binary-sum-decomposition-pr1-pr2 n)
               ( _)
         ＝
           sum-finite-Commutative-Semiring
             ( R)
             ( Σ-Finite-Type
-              ( finite-type-pair-with-sum-ℕ n)
-              ( λ (i , j , _) → finite-type-pair-with-sum-ℕ j))
+              ( finite-type-binary-sum-decomposition-ℕ n)
+              ( λ (i , j , _) → finite-type-binary-sum-decomposition-ℕ j))
             ( λ ((i , j , _) , k , l , _) → a k *R (b l *R c i))
           by
             htpy-sum-finite-Commutative-Semiring R _
@@ -286,41 +286,41 @@ module _
           sum-finite-Commutative-Semiring
             ( R)
             ( Σ-Finite-Type
-              ( finite-type-pair-with-sum-ℕ n)
-              ( λ (i , j , _) → finite-type-pair-with-sum-ℕ j))
+              ( finite-type-binary-sum-decomposition-ℕ n)
+              ( λ (i , j , _) → finite-type-binary-sum-decomposition-ℕ j))
             ( λ ((i , j , _) , k , l , _) → a i *R (b k *R c l))
           by
             sum-aut-finite-Commutative-Semiring
               ( R)
               ( Σ-Finite-Type
-                ( finite-type-pair-with-sum-ℕ n)
-                ( λ (i , j , _) → finite-type-pair-with-sum-ℕ j))
+                ( finite-type-binary-sum-decomposition-ℕ n)
+                ( λ (i , j , _) → finite-type-binary-sum-decomposition-ℕ j))
               ( equiv-permute-components-triple-with-sum-pr2 n)
               ( _)
         ＝
           sum-finite-Commutative-Semiring
             ( R)
-            ( finite-type-pair-with-sum-ℕ n)
+            ( finite-type-binary-sum-decomposition-ℕ n)
             ( λ (i , j , _) →
               sum-finite-Commutative-Semiring
                 ( R)
-                ( finite-type-pair-with-sum-ℕ j)
+                ( finite-type-binary-sum-decomposition-ℕ j)
                 ( λ (k , l , _) → a i *R (b k *R c l)))
           by
             sum-Σ-finite-Commutative-Semiring
               ( R)
-              ( finite-type-pair-with-sum-ℕ n)
-              ( λ (i , j , _) → finite-type-pair-with-sum-ℕ j)
+              ( finite-type-binary-sum-decomposition-ℕ n)
+              ( λ (i , j , _) → finite-type-binary-sum-decomposition-ℕ j)
               ( _)
         ＝
           sum-finite-Commutative-Semiring
             ( R)
-            ( finite-type-pair-with-sum-ℕ n)
+            ( finite-type-binary-sum-decomposition-ℕ n)
             ( λ (i , j , _) →
               a i *R
               sum-finite-Commutative-Semiring
                 ( R)
-                ( finite-type-pair-with-sum-ℕ j)
+                ( finite-type-binary-sum-decomposition-ℕ j)
                 ( λ (k , l , _) → b k *R c l))
           by
             htpy-sum-finite-Commutative-Semiring R _
@@ -362,13 +362,13 @@ module _
       equational-reasoning
         sum-finite-Commutative-Semiring
           ( R)
-          ( finite-type-pair-with-sum-ℕ n)
+          ( finite-type-binary-sum-decomposition-ℕ n)
           ( λ (i , j , _) →
             mul-Commutative-Semiring R (zero-Commutative-Semiring R) (a j))
         ＝
           sum-finite-Commutative-Semiring
             ( R)
-            ( finite-type-pair-with-sum-ℕ n)
+            ( finite-type-binary-sum-decomposition-ℕ n)
             ( λ _ → zero-Commutative-Semiring R)
           by
             htpy-sum-finite-Commutative-Semiring R _

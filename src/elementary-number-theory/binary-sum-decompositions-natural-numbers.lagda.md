@@ -1,7 +1,7 @@
-# Pairs of natural numbers with a given sum
+# Binary sum decompositions of natural numbers
 
 ```agda
-module elementary-number-theory.pairs-with-natural-sums where
+module elementary-number-theory.binary-sum-decompositions-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -48,15 +48,16 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A pair of natural numbers with a specific known sum resembles an
-[integer partition](elementary-number-theory.integer-partitions.md), but is
+A binary sum decomposition of a
+[natural number](elementary-number-theory.natural-numbers.md) `n : ℕ` resembles
+an [integer partition](elementary-number-theory.integer-partitions.md), but is
 ordered, and the components may be zero.
 
 ## Definition
 
 ```agda
-pair-with-sum-ℕ : ℕ → UU lzero
-pair-with-sum-ℕ n = Σ ℕ ( λ a → Σ ℕ (λ b → b +ℕ a ＝ n))
+binary-sum-decomposition-ℕ : ℕ → UU lzero
+binary-sum-decomposition-ℕ n = Σ ℕ ( λ a → Σ ℕ (λ b → b +ℕ a ＝ n))
 ```
 
 ## Properties
@@ -68,36 +69,42 @@ module _
   (n : ℕ)
   where
 
-  Eq-pair-with-sum-ℕ : pair-with-sum-ℕ n → pair-with-sum-ℕ n → UU lzero
-  Eq-pair-with-sum-ℕ (a , b , _) (a' , b' , _) = a ＝ a'
+  Eq-binary-sum-decomposition-ℕ :
+    binary-sum-decomposition-ℕ n → binary-sum-decomposition-ℕ n → UU lzero
+  Eq-binary-sum-decomposition-ℕ (a , b , _) (a' , b' , _) = a ＝ a'
 
-  is-prop-Eq-pair-with-sum-ℕ :
-    (x y : pair-with-sum-ℕ n) → is-prop (Eq-pair-with-sum-ℕ x y)
-  is-prop-Eq-pair-with-sum-ℕ (a , _) (a' , _) =
+  is-prop-Eq-binary-sum-decomposition-ℕ :
+    (x y : binary-sum-decomposition-ℕ n) →
+    is-prop (Eq-binary-sum-decomposition-ℕ x y)
+  is-prop-Eq-binary-sum-decomposition-ℕ (a , _) (a' , _) =
     is-prop-type-Prop (Id-Prop ℕ-Set a a')
 
-  refl-Eq-pair-with-sum-ℕ : (x : pair-with-sum-ℕ n) → Eq-pair-with-sum-ℕ x x
-  refl-Eq-pair-with-sum-ℕ _ = refl
+  refl-Eq-binary-sum-decomposition-ℕ :
+    (x : binary-sum-decomposition-ℕ n) → Eq-binary-sum-decomposition-ℕ x x
+  refl-Eq-binary-sum-decomposition-ℕ _ = refl
 
-  eq-Eq-pair-with-sum-ℕ :
-    (x y : pair-with-sum-ℕ n) → Eq-pair-with-sum-ℕ x y → x ＝ y
-  eq-Eq-pair-with-sum-ℕ (a , b , b+a=n) (.a , b' , b'+a=n) refl =
+  eq-Eq-binary-sum-decomposition-ℕ :
+    (x y : binary-sum-decomposition-ℕ n) → Eq-binary-sum-decomposition-ℕ x y →
+    x ＝ y
+  eq-Eq-binary-sum-decomposition-ℕ (a , b , b+a=n) (.a , b' , b'+a=n) refl =
     eq-pair-eq-fiber
       ( eq-pair-Σ
         ( is-injective-right-add-ℕ a (b+a=n ∙ inv b'+a=n))
         ( eq-type-Prop (Id-Prop ℕ-Set _ _)))
 
   abstract
-    is-set-pair-with-sum-ℕ : is-set (pair-with-sum-ℕ n)
-    is-set-pair-with-sum-ℕ =
+    is-set-binary-sum-decomposition-ℕ : is-set (binary-sum-decomposition-ℕ n)
+    is-set-binary-sum-decomposition-ℕ =
       is-set-prop-in-id
-        Eq-pair-with-sum-ℕ
-        is-prop-Eq-pair-with-sum-ℕ
-        refl-Eq-pair-with-sum-ℕ
-        eq-Eq-pair-with-sum-ℕ
+        Eq-binary-sum-decomposition-ℕ
+        is-prop-Eq-binary-sum-decomposition-ℕ
+        refl-Eq-binary-sum-decomposition-ℕ
+        eq-Eq-binary-sum-decomposition-ℕ
 
-  set-pair-with-sum-ℕ : Set lzero
-  set-pair-with-sum-ℕ = pair-with-sum-ℕ n , is-set-pair-with-sum-ℕ
+  set-binary-sum-decomposition-ℕ : Set lzero
+  set-binary-sum-decomposition-ℕ =
+    ( binary-sum-decomposition-ℕ n ,
+      is-set-binary-sum-decomposition-ℕ)
 ```
 
 ### Involution of swapping the components
@@ -107,17 +114,20 @@ module _
   (n : ℕ)
   where
 
-  swap-pair-with-sum-ℕ : pair-with-sum-ℕ n → pair-with-sum-ℕ n
-  swap-pair-with-sum-ℕ (a , b , b+a=n) =
+  swap-binary-sum-decomposition-ℕ :
+    binary-sum-decomposition-ℕ n → binary-sum-decomposition-ℕ n
+  swap-binary-sum-decomposition-ℕ (a , b , b+a=n) =
     (b , a , commutative-add-ℕ a b ∙ b+a=n)
 
-  is-involution-swap-pair-with-sum-ℕ : is-involution swap-pair-with-sum-ℕ
-  is-involution-swap-pair-with-sum-ℕ _ = eq-Eq-pair-with-sum-ℕ n _ _ refl
+  is-involution-swap-binary-sum-decomposition-ℕ :
+    is-involution swap-binary-sum-decomposition-ℕ
+  is-involution-swap-binary-sum-decomposition-ℕ _ =
+    eq-Eq-binary-sum-decomposition-ℕ n _ _ refl
 
-  aut-swap-pair-with-sum-ℕ : Aut (pair-with-sum-ℕ n)
-  aut-swap-pair-with-sum-ℕ =
-    swap-pair-with-sum-ℕ ,
-    is-equiv-is-involution is-involution-swap-pair-with-sum-ℕ
+  aut-swap-binary-sum-decomposition-ℕ : Aut (binary-sum-decomposition-ℕ n)
+  aut-swap-binary-sum-decomposition-ℕ =
+    ( swap-binary-sum-decomposition-ℕ ,
+      is-equiv-is-involution is-involution-swap-binary-sum-decomposition-ℕ)
 ```
 
 ### Equivalence of dependent pairs further partitioning a component
@@ -127,26 +137,26 @@ module _
   (n : ℕ)
   where
 
-  map-equiv-pair-with-sum-pr1-pr2 :
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1) →
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2)
-  pr1 (map-equiv-pair-with-sum-pr1-pr2 ((p , c , c+p=n) , _)) =
+  map-equiv-binary-sum-decomposition-pr1-pr2 :
+    Σ (binary-sum-decomposition-ℕ n) (binary-sum-decomposition-ℕ ∘ pr1) →
+    Σ (binary-sum-decomposition-ℕ n) (binary-sum-decomposition-ℕ ∘ pr1 ∘ pr2)
+  pr1 (map-equiv-binary-sum-decomposition-pr1-pr2 ((p , c , c+p=n) , _)) =
     (c , p , commutative-add-ℕ p c ∙ c+p=n)
-  pr2 (map-equiv-pair-with-sum-pr1-pr2 (_ , y)) = y
+  pr2 (map-equiv-binary-sum-decomposition-pr1-pr2 (_ , y)) = y
 
-  map-inv-equiv-pair-with-sum-pr1-pr2 :
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2) →
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1)
-  pr1 (map-inv-equiv-pair-with-sum-pr1-pr2 ((c , p , p+c=n) , _)) =
+  map-inv-equiv-binary-sum-decomposition-pr1-pr2 :
+    Σ (binary-sum-decomposition-ℕ n) (binary-sum-decomposition-ℕ ∘ pr1 ∘ pr2) →
+    Σ (binary-sum-decomposition-ℕ n) (binary-sum-decomposition-ℕ ∘ pr1)
+  pr1 (map-inv-equiv-binary-sum-decomposition-pr1-pr2 ((c , p , p+c=n) , _)) =
     (p , c , commutative-add-ℕ c p ∙ p+c=n)
-  pr2 (map-inv-equiv-pair-with-sum-pr1-pr2 (_ , y)) = y
+  pr2 (map-inv-equiv-binary-sum-decomposition-pr1-pr2 (_ , y)) = y
 
   abstract
-    is-section-map-inv-equiv-pair-with-sum-pr1-pr2 :
+    is-section-map-inv-equiv-binary-sum-decomposition-pr1-pr2 :
       is-section
-        map-equiv-pair-with-sum-pr1-pr2
-        map-inv-equiv-pair-with-sum-pr1-pr2
-    is-section-map-inv-equiv-pair-with-sum-pr1-pr2
+        map-equiv-binary-sum-decomposition-pr1-pr2
+        map-inv-equiv-binary-sum-decomposition-pr1-pr2
+    is-section-map-inv-equiv-binary-sum-decomposition-pr1-pr2
       x@((c , p , p+c=n) , a , b , b+a=p) =
         inv
           ( ind-Id
@@ -156,11 +166,11 @@ module _
             ( _)
             ( eq-type-Prop (Id-Prop ℕ-Set _ _)))
 
-    is-retraction-map-inv-equiv-pair-with-sum-pr1-pr2 :
+    is-retraction-map-inv-equiv-binary-sum-decomposition-pr1-pr2 :
       is-retraction
-        map-equiv-pair-with-sum-pr1-pr2
-        map-inv-equiv-pair-with-sum-pr1-pr2
-    is-retraction-map-inv-equiv-pair-with-sum-pr1-pr2
+        map-equiv-binary-sum-decomposition-pr1-pr2
+        map-inv-equiv-binary-sum-decomposition-pr1-pr2
+    is-retraction-map-inv-equiv-binary-sum-decomposition-pr1-pr2
       x@((p , c , c+p=n) , a , b , b+a=p) =
         inv
           ( ind-Id
@@ -170,15 +180,16 @@ module _
             ( _)
             ( eq-type-Prop (Id-Prop ℕ-Set _ _)))
 
-  equiv-pair-with-sum-pr1-pr2 :
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1) ≃
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2)
-  pr1 equiv-pair-with-sum-pr1-pr2 = map-equiv-pair-with-sum-pr1-pr2
-  pr2 equiv-pair-with-sum-pr1-pr2 =
+  equiv-binary-sum-decomposition-pr1-pr2 :
+    Σ (binary-sum-decomposition-ℕ n) (binary-sum-decomposition-ℕ ∘ pr1) ≃
+    Σ (binary-sum-decomposition-ℕ n) (binary-sum-decomposition-ℕ ∘ pr1 ∘ pr2)
+  pr1 equiv-binary-sum-decomposition-pr1-pr2 =
+    map-equiv-binary-sum-decomposition-pr1-pr2
+  pr2 equiv-binary-sum-decomposition-pr1-pr2 =
     is-equiv-is-invertible
-      ( map-inv-equiv-pair-with-sum-pr1-pr2)
-      ( is-section-map-inv-equiv-pair-with-sum-pr1-pr2)
-      ( is-retraction-map-inv-equiv-pair-with-sum-pr1-pr2)
+      ( map-inv-equiv-binary-sum-decomposition-pr1-pr2)
+      ( is-section-map-inv-equiv-binary-sum-decomposition-pr1-pr2)
+      ( is-retraction-map-inv-equiv-binary-sum-decomposition-pr1-pr2)
 ```
 
 ### Pairs with a fixed sum are a finite type
@@ -188,10 +199,11 @@ module _
   (n : ℕ)
   where
 
-  equiv-pair-with-sum-leq-ℕ :
-    Σ ℕ (λ k → leq-ℕ k n) ≃ pair-with-sum-ℕ n
-  pr1 equiv-pair-with-sum-leq-ℕ (k , k≤n) = (k , subtraction-leq-ℕ k n k≤n)
-  pr2 equiv-pair-with-sum-leq-ℕ =
+  equiv-binary-sum-decomposition-leq-ℕ :
+    Σ ℕ (λ k → leq-ℕ k n) ≃ binary-sum-decomposition-ℕ n
+  pr1 equiv-binary-sum-decomposition-leq-ℕ (k , k≤n) =
+    (k , subtraction-leq-ℕ k n k≤n)
+  pr2 equiv-binary-sum-decomposition-leq-ℕ =
     is-equiv-is-invertible
       ( λ (k , l , l+k=n) → k , leq-subtraction-ℕ k n l l+k=n)
       ( λ (k , l , l+k=n) →
@@ -205,14 +217,14 @@ module _
               ( eq-type-Prop (Id-Prop ℕ-Set (l +ℕ k) n))))
     ( λ (k , k≤n) → eq-pair-eq-fiber (eq-type-Prop (leq-ℕ-Prop k n)))
 
-  count-pair-with-sum-ℕ : count (pair-with-sum-ℕ n)
-  count-pair-with-sum-ℕ =
-    succ-ℕ n , equiv-pair-with-sum-leq-ℕ ∘e equiv-fin-succ-leq-ℕ n
+  count-binary-sum-decomposition-ℕ : count (binary-sum-decomposition-ℕ n)
+  count-binary-sum-decomposition-ℕ =
+    succ-ℕ n , equiv-binary-sum-decomposition-leq-ℕ ∘e equiv-fin-succ-leq-ℕ n
 
-  finite-type-pair-with-sum-ℕ : Finite-Type lzero
-  finite-type-pair-with-sum-ℕ =
-    pair-with-sum-ℕ n ,
-    is-finite-count count-pair-with-sum-ℕ
+  finite-type-binary-sum-decomposition-ℕ : Finite-Type lzero
+  finite-type-binary-sum-decomposition-ℕ =
+    binary-sum-decomposition-ℕ n ,
+    is-finite-count count-binary-sum-decomposition-ℕ
 ```
 
 ### Permuting components in a triple of sums
@@ -223,8 +235,8 @@ module _
   where
 
   map-equiv-permute-components-triple-with-sum-pr2 :
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2) →
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2)
+    Σ (binary-sum-decomposition-ℕ n) (binary-sum-decomposition-ℕ ∘ pr1 ∘ pr2) →
+    Σ (binary-sum-decomposition-ℕ n) (binary-sum-decomposition-ℕ ∘ pr1 ∘ pr2)
   map-equiv-permute-components-triple-with-sum-pr2
     ((c , p , p+c=n) , a , b , b+a=p) =
       ( b , a +ℕ c ,
@@ -237,8 +249,8 @@ module _
         c , a , refl
 
   map-inv-equiv-permute-components-triple-with-sum-pr2 :
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2) →
-    Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2)
+    Σ (binary-sum-decomposition-ℕ n) (binary-sum-decomposition-ℕ ∘ pr1 ∘ pr2) →
+    Σ (binary-sum-decomposition-ℕ n) (binary-sum-decomposition-ℕ ∘ pr1 ∘ pr2)
   map-inv-equiv-permute-components-triple-with-sum-pr2
     ((c , p , p+c=n) , a , b , b+a=p) =
       ( a , c +ℕ b ,
@@ -280,7 +292,10 @@ module _
             ( eq-type-Prop (Id-Prop ℕ-Set _ _)))
 
   equiv-permute-components-triple-with-sum-pr2 :
-    Aut (Σ (pair-with-sum-ℕ n) (pair-with-sum-ℕ ∘ pr1 ∘ pr2))
+    Aut
+      ( Σ
+        ( binary-sum-decomposition-ℕ n)
+        ( binary-sum-decomposition-ℕ ∘ pr1 ∘ pr2))
   pr1 equiv-permute-components-triple-with-sum-pr2 =
     map-equiv-permute-components-triple-with-sum-pr2
   pr2 equiv-permute-components-triple-with-sum-pr2 =
