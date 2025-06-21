@@ -212,3 +212,18 @@ eq-sum-finite-sum-count-Commutative-Ring :
 eq-sum-finite-sum-count-Commutative-Ring R =
   eq-sum-finite-sum-count-Ring (ring-Commutative-Ring R)
 ```
+
+### A sum of zeroes is zero
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  sum-zero-finite-Commutative-Ring :
+    {l2 : Level} (A : Finite-Type l2) →
+    sum-finite-Commutative-Ring R A (λ _ → zero-Commutative-Ring R) ＝
+    zero-Commutative-Ring R
+  sum-zero-finite-Commutative-Ring =
+    sum-zero-finite-Ring (ring-Commutative-Ring R)
+```
