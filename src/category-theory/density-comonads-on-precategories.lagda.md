@@ -114,19 +114,11 @@ module _
 
 ## Comonad laws
 
-Comonad laws follow from the "uniqueness" part of the right Kan extension.
+Comonad laws follow from the "uniqueness" part of the right Kan extension. See
+[codensity monads](category-theory.codensity-monads-on-precategories.md) for an
+explanation of the (dual) proofs.
 
 ### Left counit law
-
-For the left counit law, if `α : L∘F ⇒ F` is the right Kan extension natural
-transformation, we show that the composite
-
-```text
-     (Lμ)F     μF     α
-  L∘F  ⇒  L²∘F ⇒  L∘F  ⇒  L
-```
-
-is equal to `α`; by uniqueness, `μF ∘ LμF = id`.
 
 ```agda
 module _
@@ -239,20 +231,6 @@ module _
 
 ### Right counit law
 
-The right counit law is similar; we show that the composite is `α` via:
-
-```text
-      ηLF     μF      α
-   LF  ⇒  L²F  ⇒  LF  ⇒  F
- α ⇓   Lα ⇓              ∥
-   F   ⇒  LF      ⇒      F
-      ηF          α
-```
-
-The right square (triangle) commutes by "uniqueness" of the right Kan UP; the
-left square commutes by naturality of `η`. The bottom composite is then `id` by
-the UP again.
-
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
@@ -343,8 +321,6 @@ module _
 ```
 
 ### Comultiplication is associative
-
-Showing that comultiplication is associative is similar but longer.
 
 ```agda
 module _

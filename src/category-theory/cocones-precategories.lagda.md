@@ -59,7 +59,7 @@ from `F` to the [constant functor](category-theory.constant-functors.md) at `d`.
 In this context, we usually think of (and refer to) the functor `F` as a
 **diagram** in its codomain, A cocone under such diagram then corresponds to an
 element `d`, called the **vertex** of the cocone, equipped with components
-`d → F x` satisfying the naturality condition.
+`F x → d` satisfying the naturality condition.
 
 For example, if `F` corresponds to the diagram `F x → F y`, then a cocone under
 `F` corresponds to a commuting triangle as below.

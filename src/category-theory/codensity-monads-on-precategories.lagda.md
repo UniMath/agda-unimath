@@ -46,7 +46,7 @@ definition via the universal property, we have two computation rules for these
 natural transformations (where ∙ is whiskering):
 
 1. `α ∘ (η ∙ F) ＝ id_F`; and
-2. `α ∘ (μ ∙ F) = α ∘ (R ∙ α)`.
+2. `α ∘ (μ ∙ F) ＝ α ∘ (R ∙ α)`.
 
 ```agda
 module _
@@ -123,8 +123,8 @@ For the left unit law, if `α : R∘F ⇒ F` is the right Kan extension natural
 transformation, we show that the composite
 
 ```text
-     (Rμ)F     μF     α
-  R∘F  ⇒  R²∘F ⇒  R∘F  ⇒  R
+      (Rη)F        μF       α
+  R∘F ═════>  R²∘F ══>  R∘F ═> R
 ```
 
 is equal to `α`; by uniqueness, `μF ∘ RμF = id`.
@@ -237,10 +237,12 @@ module _
 The right unit law is similar; we show that the composite is `α` via:
 
 ```text
-      ηRF     μF      α
-   RF  ⇒  R²F  ⇒  RF  ⇒  F
- α ⇓   Rα ⇓              ∥
-   F   ⇒  RF      ⇒      F
+      ηRF      μF     α
+   RF ═══> R²F ══>RF ══> F
+   ║        ║            ║
+ α ║     Rα ║            ║
+   ∨        ∨            ║
+   F ════> RF ═════════> F
       ηF          α
 ```
 
