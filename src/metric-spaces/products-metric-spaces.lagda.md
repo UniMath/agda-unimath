@@ -134,6 +134,49 @@ module _
   is-short-pr2-product-Metric-Space _ _ _ = pr2
 ```
 
+### The pairing map is short
+
+```agda
+module _
+  {lx lx' ly ly' : Level} (X : Metric-Space lx lx') (Y : Metric-Space ly ly')
+  where
+
+  is-short-pair-product-Metric-Space :
+    (x : type-Metric-Space X) →
+    is-short-function-Metric-Space
+      ( Y)
+      ( product-Metric-Space X Y)
+      ( pair x)
+  is-short-pair-product-Metric-Space x d y y' Nyy' =
+    ( refl-structure-Metric-Space X d x , Nyy')
+
+  short-pair-product-Metric-Space :
+    type-Metric-Space X →
+    short-function-Metric-Space Y (product-Metric-Space X Y)
+  short-pair-product-Metric-Space x =
+    ( pair x , is-short-pair-product-Metric-Space x)
+
+  is-short-short-pair-product-Metric-Space :
+    is-short-function-Metric-Space
+      ( X)
+      ( metric-space-of-short-functions-Metric-Space
+        ( Y)
+        ( product-Metric-Space X Y))
+      ( short-pair-product-Metric-Space)
+  is-short-short-pair-product-Metric-Space d x x' Nxx' y =
+    ( Nxx' , refl-structure-Metric-Space Y d y)
+
+  short-pair-Metric-Space :
+    short-function-Metric-Space
+      ( X)
+      ( metric-space-of-short-functions-Metric-Space
+        ( Y)
+        ( product-Metric-Space X Y))
+  short-pair-Metric-Space =
+    short-pair-product-Metric-Space ,
+    is-short-short-pair-product-Metric-Space
+```
+
 ### Currying short maps from a product metric space
 
 ```agda
@@ -160,15 +203,15 @@ module _
       ( Y)
       ( Z)
       ( map-ev-pair-short-function-product-Metric-Space x)
-  is-short-map-ev-pair-short-function-product-Metric-Space x d y y' Nyy' =
-    is-short-map-short-function-Metric-Space
+  is-short-map-ev-pair-short-function-product-Metric-Space x d y y' =
+    ( is-short-map-short-function-Metric-Space
       ( product-Metric-Space X Y)
       ( Z)
       ( f)
       ( d)
       ( x , y)
-      ( x , y')
-      ( refl-structure-Metric-Space X d x , Nyy')
+      ( x , y')) ∘
+    ( is-short-pair-product-Metric-Space X Y x d y y')
 
   short-map-ev-pair-short-function-product-Metric-Space :
     (x : type-Metric-Space X) →
@@ -190,7 +233,7 @@ module _
       ( d)
       ( x , y)
       ( x' , y)
-      ( Nxx' , refl-structure-Metric-Space Y d y)
+      ( is-short-short-pair-product-Metric-Space X Y d x x' Nxx' y)
 
   ev-pair-short-function-product-Metric-Space :
     short-function-Metric-Space
