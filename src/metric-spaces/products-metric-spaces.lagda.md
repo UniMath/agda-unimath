@@ -16,6 +16,7 @@ open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -41,6 +42,7 @@ open import metric-spaces.reflexive-premetric-structures
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.symmetric-premetric-structures
 open import metric-spaces.triangular-premetric-structures
+open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
 
 </details>
@@ -425,6 +427,91 @@ module _
   is-prop-fiber-ev-pair-short-function-product-Metric-Space =
     is-prop-all-elements-equal ∘
     all-eq-fiber-ev-pair-short-function-product-Metric-Space
+
+  lemma-neighborhood-map-ind-short-function-product-Metric-Space :
+    ( f :
+        short-function-Metric-Space
+          ( X)
+          ( metric-space-of-short-functions-Metric-Space Y Z)) →
+    (dx dy : ℚ⁺) →
+    (x x' : type-Metric-Space X) →
+    (y y' : type-Metric-Space Y) →
+    neighborhood-Metric-Space X dx x x' →
+    neighborhood-Metric-Space Y dy y y' →
+    neighborhood-Metric-Space
+      ( Z)
+      ( dx +ℚ⁺ dy)
+      ( map-ind-short-function-product-Metric-Space f ( x , y))
+      ( map-ind-short-function-product-Metric-Space f ( x' , y'))
+  lemma-neighborhood-map-ind-short-function-product-Metric-Space
+    f dx dy x x' y y' Nxx' Nyy' =
+      is-triangular-structure-Metric-Space
+        ( Z)
+        ( map-ind-short-function-product-Metric-Space f (x , y))
+        ( map-ind-short-function-product-Metric-Space f (x' , y))
+        ( map-ind-short-function-product-Metric-Space f (x' , y'))
+        ( dx)
+        ( dy)
+        ( is-short-map²-short-function-Metric-Space
+          ( X)
+          ( Y)
+          ( Z)
+          ( f)
+          ( x')
+          ( dy)
+          ( y)
+          ( y')
+          ( Nyy'))
+        ( is-short-map-short-function-Metric-Space
+          ( X)
+          ( metric-space-of-short-functions-Metric-Space Y Z)
+          ( f)
+          ( dx)
+          ( x)
+          ( x')
+          ( Nxx')
+          ( y))
+
+  is-uniformly-continuous-map-ind-short-function-product-Metric-Space :
+    ( f :
+        short-function-Metric-Space
+          ( X)
+          ( metric-space-of-short-functions-Metric-Space Y Z)) →
+    is-uniformly-continuous-map-Metric-Space
+      ( product-Metric-Space X Y)
+      ( Z)
+      ( map-ind-short-function-product-Metric-Space f)
+  is-uniformly-continuous-map-ind-short-function-product-Metric-Space f =
+    intro-exists
+      modulus-le-double-le-ℚ⁺
+      le-double-is-modulus-of-uc-map-ind-short-function-product-Metric-Space
+    where
+
+    le-double-is-modulus-of-uc-map-ind-short-function-product-Metric-Space :
+      is-modulus-of-uniform-continuity-Metric-Space
+        ( product-Metric-Space X Y)
+        ( Z)
+        ( map-ind-short-function-product-Metric-Space f)
+        ( modulus-le-double-le-ℚ⁺)
+    le-double-is-modulus-of-uc-map-ind-short-function-product-Metric-Space
+      (x , y) d (x' , y') (Nxx' , Nyy') =
+      is-monotonic-structure-Metric-Space
+        ( Z)
+        ( map-ind-short-function-product-Metric-Space f (x , y))
+        ( map-ind-short-function-product-Metric-Space f (x' , y'))
+        ( (modulus-le-double-le-ℚ⁺ d) +ℚ⁺ (modulus-le-double-le-ℚ⁺ d))
+        ( d)
+        ( le-double-le-modulus-le-double-le-ℚ⁺ d)
+        ( lemma-neighborhood-map-ind-short-function-product-Metric-Space
+          ( f)
+          ( modulus-le-double-le-ℚ⁺ d)
+          ( modulus-le-double-le-ℚ⁺ d)
+          ( x)
+          ( x')
+          ( y)
+          ( y')
+          ( Nxx')
+          ( Nyy'))
 ```
 
 ```agda
