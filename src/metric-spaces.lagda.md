@@ -93,6 +93,7 @@ open import metric-spaces.metric-structures public
 open import metric-spaces.monotonic-premetric-structures public
 open import metric-spaces.monotonic-rational-neighborhoods public
 open import metric-spaces.ordering-premetric-structures public
+open import metric-spaces.ordering-rational-neighborhoods public
 open import metric-spaces.precategory-of-metric-spaces-and-functions public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
 open import metric-spaces.precategory-of-metric-spaces-and-short-functions public
