@@ -82,8 +82,8 @@ metric space is a [set](foundation.sets.md).
 
 NB: When working with actual distance functions, the _saturation_ condition
 always holds, defining `N d x y` as `dist(x , y) ≤ d`. Since we're working with
-_upper bounds on distances_, we add have to add this axiom to ensure that the
-subsets of upper bounds on distances between elements is closed on the left.
+_upper bounds on distances_, we add this axiom to ensure that the subsets of
+upper bounds on distances between elements is closed on the left.
 
 ## Definitions
 
