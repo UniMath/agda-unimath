@@ -97,6 +97,7 @@ open import metric-spaces.ordering-rational-neighborhoods public
 open import metric-spaces.precategory-of-metric-spaces-and-functions public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
 open import metric-spaces.precategory-of-metric-spaces-and-short-functions public
+open import metric-spaces.preimage-rational-neighborhoods public
 open import metric-spaces.premetric-spaces public
 open import metric-spaces.premetric-structures public
 open import metric-spaces.pseudometric-spaces public
