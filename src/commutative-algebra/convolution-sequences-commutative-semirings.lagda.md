@@ -157,7 +157,7 @@ module _
             by
               eq-sum-finite-sum-count-Commutative-Semiring R
                 ( finite-type-binary-sum-decomposition-ℕ n)
-                ( count-binary-sum-decomposition-ℕ n)
+                ( count-reverse-binary-sum-decomposition-ℕ n)
                 ( _)
         ＝
           add-Commutative-Semiring R
