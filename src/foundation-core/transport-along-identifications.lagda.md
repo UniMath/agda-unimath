@@ -68,6 +68,15 @@ module _
     preserves-tr p x ＝
     inv (tr-ap id f p x) ∙ ap (λ q → tr B q (f i x)) (ap-id p)
   compute-preserves-tr refl x = refl
+
+module _
+  {l1 l2 : Level} {I : UU l1} {A : I → UU l2}
+  where
+
+  compute-preserves-tr-id :
+    {i j : I} (p : i ＝ j) (x : A i) →
+    preserves-tr (λ i → id {A = A i}) p x ＝ refl
+  compute-preserves-tr-id refl x = refl
 ```
 
 ### Substitution law for transport
