@@ -135,7 +135,62 @@ h6:target::before {
   text-decoration: none;
 }
 .content a:hover {
-  text-decoration: underline;
+  text-decoration: solid underline;
+}
+.content a.adjacent-link {
+  text-decoration: dotted underline;
+  text-underline-offset: 1px;
+  text-decoration-thickness: 1px;
+}
+.content a.adjacent-link:hover {
+  text-decoration: solid underline;
+}
+.content pre a,
+.content code a,
+pre .content a,
+code .content a,
+.Agda a,
+a.concept {
+  text-decoration: none !important;
+}
+.content pre a:hover,
+.content code a:hover,
+pre .content a:hover,
+code .content a:hover,
+a.concept:hover {
+  text-decoration: none;
+}
+/* External link indicator */
+.content p > a[href^='http']::after,
+.content p > a[href^='https']::after,
+.content li > a[href^='http']::after,
+.content li > a[href^='https']::after,
+.content h1 > a[href^='http']::after,
+.content h1 > a[href^='https']::after,
+.content h2 > a[href^='http']::after,
+.content h2 > a[href^='https']::after,
+.content h3 > a[href^='http']::after,
+.content h3 > a[href^='https']::after,
+.content h4 > a[href^='http']::after,
+.content h4 > a[href^='https']::after,
+.content h5 > a[href^='http']::after,
+.content h5 > a[href^='https']::after,
+.content h6 > a[href^='http']::after,
+.content h6 > a[href^='https']::after,
+.content dt > a[href^='http']::after,
+.content dt > a[href^='https']::after,
+.content dd > a[href^='http']::after,
+.content dd > a[href^='https']::after {
+  content: '⇱';
+  font-size: 0.8em;
+  vertical-align: super;
+  text-decoration: none;
+  display: inline-block;
+  color: var(--fg);
+}
+a.concept[href^='http']::after,
+a.concept[href^='https']::after {
+  content: '' !important;
 }
 .content img,
 .content video {
