@@ -11,6 +11,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
@@ -39,6 +40,7 @@ open import foundation.universe-levels
 
 open import logic.complements-decidable-subtypes
 
+open import univalent-combinatorics.classical-finite-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -218,13 +220,24 @@ module _
     ( λ (k , k≤n) → eq-pair-eq-fiber (eq-type-Prop (leq-ℕ-Prop k n)))
 
   count-binary-sum-decomposition-ℕ : count (binary-sum-decomposition-ℕ n)
-  count-binary-sum-decomposition-ℕ =
-    succ-ℕ n , equiv-binary-sum-decomposition-leq-ℕ ∘e equiv-fin-succ-leq-ℕ n
+  pr1 count-binary-sum-decomposition-ℕ = succ-ℕ n
+  pr2 count-binary-sum-decomposition-ℕ =
+    equiv-binary-sum-decomposition-leq-ℕ ∘e
+    equiv-le-succ-ℕ-leq-ℕ n ∘e
+    equiv-classical-standard-Fin (succ-ℕ n)
+
+  count-reverse-binary-sum-decomposition-ℕ :
+    count (binary-sum-decomposition-ℕ n)
+  pr1 count-reverse-binary-sum-decomposition-ℕ = succ-ℕ n
+  pr2 count-reverse-binary-sum-decomposition-ℕ =
+    equiv-binary-sum-decomposition-leq-ℕ ∘e
+    equiv-le-succ-ℕ-leq-ℕ n ∘e
+    equiv-classical-standard-Fin-reverse (succ-ℕ n)
 
   finite-type-binary-sum-decomposition-ℕ : Finite-Type lzero
   finite-type-binary-sum-decomposition-ℕ =
-    binary-sum-decomposition-ℕ n ,
-    is-finite-count count-binary-sum-decomposition-ℕ
+    ( binary-sum-decomposition-ℕ n ,
+      is-finite-count count-binary-sum-decomposition-ℕ)
 ```
 
 ### Permuting components in a triple of sums

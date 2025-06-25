@@ -496,38 +496,7 @@ is-preunivalent-Fin =
   is-preunivalent-retraction-equiv-tr-Set Fin-Set retraction-equiv-tr-Fin
 ```
 
-### `Fin n` is equivalent to the set of natural numbers less than `n`
+## See also
 
-```agda
-nat-le-Fin-reverse : (n : ℕ) (k : Fin n) → Σ ℕ (λ m → le-ℕ m n)
-nat-le-Fin-reverse (succ-ℕ n) (inr star) = zero-ℕ , star
-nat-le-Fin-reverse (succ-ℕ n) (inl k) =
-  ind-Σ (λ m m<n → succ-ℕ m , m<n) (nat-le-Fin-reverse n k)
-
-fin-reverse-le-ℕ : (n : ℕ) → Σ ℕ (λ k → le-ℕ k n) → Fin n
-fin-reverse-le-ℕ (succ-ℕ n) (zero-ℕ , star) = inr star
-fin-reverse-le-ℕ (succ-ℕ n) (succ-ℕ k , H) = inl (fin-reverse-le-ℕ n (k , H))
-
-is-section-fin-reverse-le-ℕ :
-  (n : ℕ) → is-section (nat-le-Fin-reverse n) (fin-reverse-le-ℕ n)
-is-section-fin-reverse-le-ℕ (succ-ℕ n) (zero-ℕ , k<n) = refl
-is-section-fin-reverse-le-ℕ (succ-ℕ n) (succ-ℕ k , k<n) =
-  eq-pair-Σ
-    ( ap (succ-ℕ ∘ pr1) (is-section-fin-reverse-le-ℕ n (k , k<n)))
-    ( eq-type-Prop (le-ℕ-Prop k n))
-
-is-retraction-fin-reverse-le-ℕ :
-  (n : ℕ) → is-retraction (nat-le-Fin-reverse n) (fin-reverse-le-ℕ n)
-is-retraction-fin-reverse-le-ℕ (succ-ℕ n) (inl x) =
-  ap inl (is-retraction-fin-reverse-le-ℕ n x)
-is-retraction-fin-reverse-le-ℕ (succ-ℕ n) (inr star) = refl
-
-equiv-fin-le-ℕ : (n : ℕ) → Fin n ≃ Σ ℕ (λ m → le-ℕ m n)
-equiv-fin-le-ℕ n =
-  nat-le-Fin-reverse n ,
-  ( fin-reverse-le-ℕ n , is-section-fin-reverse-le-ℕ n) ,
-  ( fin-reverse-le-ℕ n , is-retraction-fin-reverse-le-ℕ n)
-
-equiv-fin-succ-leq-ℕ : (n : ℕ) → Fin (succ-ℕ n) ≃ Σ ℕ (λ m → leq-ℕ m n)
-equiv-fin-succ-leq-ℕ n = equiv-le-succ-ℕ-leq-ℕ n ∘e equiv-fin-le-ℕ (succ-ℕ n)
-```
+- [Classical finite types](univalent-combinatorics.classical-finite-types.md),
+  the set of natural numbers less than `n`
