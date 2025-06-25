@@ -80,10 +80,11 @@ from the [fibers](foundation-core.fibers-of-maps.md) of `f □ g` to the
 
 There is an "adjoint relation" between the pushout-product and the
 [pullback-hom](orthogonal-factorization-systems.pullback-hom.md): For any three
-maps `f`, `g`, and `h` we have a [homotopy](foundation-core.homotopies.md)
+maps `f`, `g`, and `h` we have an
+[equivalence of maps](foundation.equivalences-arrows.md)
 
 ```text
-  ⟨f □ g , h⟩ ~ ⟨f , ⟨g , h⟩⟩.
+  ⟨f □ g , h⟩ ≃ ⟨f , ⟨g , h⟩⟩.
 ```
 
 ## Definitions
@@ -158,6 +159,24 @@ module _
     compute-glue-pushout-product =
       pr2 (pr2 (pr2 (center uniqueness-pushout-product)))
 ```
+
+## Properties
+
+### The adjoint relation between pushout-products and pullback-homs
+
+For any three maps `f`, `g`, and `h` we have an adjoint relation
+
+```text
+  hom-arrow (f □ g) h ≃ hom-arrow f ⟨g , h⟩
+```
+
+that extends to an equivalence of maps
+
+```text
+  ⟨f □ g , h⟩ ≃ ⟨f , ⟨g , h⟩⟩.
+```
+
+This remains to be formalized.
 
 ## See also
 
