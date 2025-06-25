@@ -8,9 +8,12 @@ module foundation.strong-preunivalence where
 
 ```agda
 open import foundation.contractible-types
+open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
 open import foundation.preunivalence
 open import foundation.propositional-maps
 open import foundation.propositions
@@ -82,8 +85,8 @@ based-preunivalence-instance-strong-preunivalence :
   instance-strong-preunivalence l X → based-preunivalence-axiom X
 based-preunivalence-instance-strong-preunivalence X L Y =
   is-emb-is-prop-map
-    ( backward-implication-subuniverse-equality-duality
-      ( is-prop-Prop)
+    ( backward-implication-structured-equality-duality
+      ( is-prop-equiv')
       ( L)
       ( X)
       ( λ _ → equiv-eq)
@@ -137,6 +140,26 @@ strong-preunivalence-axiom-univalence-axiom UA {l1} {l2} A =
 strong-preunivalence : strong-preunivalence-axiom
 strong-preunivalence = strong-preunivalence-axiom-univalence-axiom univalence
 ```
+
+### The preunivalence axiom implies the strong preunivalence axiom
+
+This argument is due to [Evan Cavallo](https://ecavallo.net/). Note that it
+depends on the function extensionality axiom in order to compute the equality
+type of `is-small`.
+
+```agda
+strong-preunivalence-axiom-preunivalence-axiom-Level :
+  {l1 l2 : Level} →
+  preunivalence-axiom-Level l1 → strong-preunivalence-axiom-Level l2 l1
+strong-preunivalence-axiom-preunivalence-axiom-Level pua X (Y , α) (Y' , α') =
+  is-prop-equiv
+    ( compute-eq-is-small (Y , α) (Y' , α'))
+    ( is-prop-map-is-emb (pua Y Y') (α' ∘e inv-equiv α))
+```
+
+See
+[`UF.PreUnivalence`](https://martinescardo.github.io/TypeTopology/UF.PreUnivalence.html)
+at TypeTopology for Cavallo's original formalizations.
 
 ## See also
 
