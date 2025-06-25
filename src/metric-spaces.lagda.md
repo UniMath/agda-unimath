@@ -70,6 +70,7 @@ open import metric-spaces.functor-category-short-isometry-metric-spaces public
 open import metric-spaces.induced-premetric-structures-on-preimages public
 open import metric-spaces.isometric-equivalences-premetric-spaces public
 open import metric-spaces.isometries-metric-spaces public
+open import metric-spaces.isometries-metric-spaces-WIP public
 open import metric-spaces.isometries-premetric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces public
 open import metric-spaces.limits-of-sequences-metric-spaces public
@@ -116,6 +117,7 @@ open import metric-spaces.sequences-metric-spaces public
 open import metric-spaces.sequences-premetric-spaces public
 open import metric-spaces.sequences-pseudometric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
+open import metric-spaces.short-functions-metric-spaces-WIP public
 open import metric-spaces.short-functions-premetric-spaces public
 open import metric-spaces.similarity-of-elements-pseudometric-spaces public
 open import metric-spaces.subspaces-metric-spaces public

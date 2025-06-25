@@ -271,6 +271,23 @@ module _
     (type-Metric-Space-WIP A , is-set-type-Metric-Space-WIP)
 ```
 
+### The set of functions between metric spaces
+
+```agda
+module _
+  {lx lx' ly ly' : Level}
+  (X : Metric-Space-WIP lx lx') (Y : Metric-Space-WIP ly ly')
+  where
+
+  set-function-Metric-Space-WIP : Set (lx ⊔ ly)
+  set-function-Metric-Space-WIP =
+    hom-set-Set (set-Metric-Space-WIP X) (set-Metric-Space-WIP Y)
+
+  type-function-Metric-Space-WIP : UU (lx ⊔ ly)
+  type-function-Metric-Space-WIP =
+    type-Metric-Space-WIP X → type-Metric-Space-WIP Y
+```
+
 ### Similarity of elements in a metric space is equivalent to equality
 
 ```agda

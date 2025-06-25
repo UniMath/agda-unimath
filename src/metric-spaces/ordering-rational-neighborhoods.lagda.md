@@ -40,10 +40,12 @@ type of rational neighborhood relations on `A`.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (U V : Rational-Neighborhood-Relation l2 A)
+  {l1 l2 l2' : Level} {A : UU l1}
+  (U : Rational-Neighborhood-Relation l2 A)
+  (V : Rational-Neighborhood-Relation l2' A)
   where
 
-  leq-prop-Rational-Neighborhood-Relation : Prop (l1 ⊔ l2)
+  leq-prop-Rational-Neighborhood-Relation : Prop (l1 ⊔ l2 ⊔ l2')
   leq-prop-Rational-Neighborhood-Relation =
     Π-Prop
       ( ℚ⁺)
@@ -55,7 +57,7 @@ module _
               ( A)
               ( λ y → hom-Prop (U d x y) (V d x y))))
 
-  leq-Rational-Neighborhood-Relation : UU (l1 ⊔ l2)
+  leq-Rational-Neighborhood-Relation : UU (l1 ⊔ l2 ⊔ l2')
   leq-Rational-Neighborhood-Relation =
     type-Prop leq-prop-Rational-Neighborhood-Relation
 
@@ -90,7 +92,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (U V W : Rational-Neighborhood-Relation l2 A)
+  {l lu lv lw : Level} {A : UU l}
+  (U : Rational-Neighborhood-Relation lu A)
+  (V : Rational-Neighborhood-Relation lv A)
+  (W : Rational-Neighborhood-Relation lw A)
   where
 
   transitive-leq-Rational-Neighborhood-Relation :
