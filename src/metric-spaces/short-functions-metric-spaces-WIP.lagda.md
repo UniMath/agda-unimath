@@ -334,22 +334,6 @@ module _
     is-emb-short-isometry-Metric-Space-WIP
 ```
 
-### Short maps are uniformly continuous
-
-```agda
--- module _
---   {l1 l2 l3 l4 : Level} (A : Metric-Space-WIP l1 l2) (B : Metric-Space-WIP l3 l4)
---   where
-
---   is-uniformly-continuous-is-short-function-Metric-Space-WIP :
---     (f : map-type-Metric-Space-WIP A B) → is-short-function-Metric-Space-WIP A B f →
---     is-uniformly-continuous-map-Metric-Space-WIP A B f
---   is-uniformly-continuous-is-short-function-Metric-Space-WIP =
---     is-uniformly-continuous-is-short-function-Premetric-Space
---       ( premetric-Metric-Space-WIP A)
---       ( premetric-Metric-Space-WIP B)
-```
-
 ## See also
 
 - The

@@ -12,6 +12,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.inhabited-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -21,7 +22,9 @@ open import foundation.universe-levels
 open import logic.functoriality-existential-quantification
 
 open import metric-spaces.continuous-functions-metric-spaces-WIP
+open import metric-spaces.isometries-metric-spaces-WIP
 open import metric-spaces.metric-spaces-WIP
+open import metric-spaces.short-functions-metric-spaces-WIP
 ```
 
 </details>
@@ -186,4 +189,50 @@ module _
         ( X)
         ( Y)
         ( f)))
+```
+
+### Short maps are uniformly continuous
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (A : Metric-Space-WIP l1 l2)
+  (B : Metric-Space-WIP l3 l4)
+  where
+
+  is-uniformly-continuous-is-short-function-Metric-Space-WIP :
+    (f : type-function-Metric-Space-WIP A B) →
+    is-short-function-Metric-Space-WIP A B f →
+    is-uniformly-continuous-function-Metric-Space-WIP A B f
+  is-uniformly-continuous-is-short-function-Metric-Space-WIP f H =
+    intro-exists id (λ x d → H d x)
+
+  uniformly-continuous-short-function-Metric-Space :
+    short-function-Metric-Space-WIP A B →
+    uniformly-continuous-function-Metric-Space-WIP A B
+  uniformly-continuous-short-function-Metric-Space =
+    tot is-uniformly-continuous-is-short-function-Metric-Space-WIP
+```
+
+### Isometries are uniformly continuous
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (A : Metric-Space-WIP l1 l2) (B : Metric-Space-WIP l3 l4)
+  where
+
+  is-uniformly-continuous-is-isometry-Metric-Space-WIP :
+    (f : type-function-Metric-Space-WIP A B) →
+    is-isometry-Metric-Space-WIP A B f →
+    is-uniformly-continuous-function-Metric-Space-WIP A B f
+  is-uniformly-continuous-is-isometry-Metric-Space-WIP f =
+    is-uniformly-continuous-is-short-function-Metric-Space-WIP A B f ∘
+    is-short-is-isometry-Metric-Space-WIP A B f
+
+  uniformly-continuous-isometry-Metric-Space :
+    isometry-Metric-Space-WIP A B →
+    uniformly-continuous-function-Metric-Space-WIP A B
+  uniformly-continuous-isometry-Metric-Space =
+    tot is-uniformly-continuous-is-isometry-Metric-Space-WIP
 ```

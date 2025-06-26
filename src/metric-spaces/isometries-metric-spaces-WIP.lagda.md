@@ -432,21 +432,3 @@ module _
       ( is-set-type-Metric-Space-WIP B)
       ( is-injective-map-isometry-Metric-Space-WIP)
 ```
-
-### Any isometry between metric spaces is uniformly continuous
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (A : Metric-Space-WIP l1 l2) (B : Metric-Space-WIP l3 l4)
-  where
-
-  -- is-uniformly-continuous-map-isometry-Metric-Space-WIP :
-  --   (f : isometry-Metric-Space-WIP A B) →
-  --   is-uniformly-continuous-map-Metric-Space-WIP A B
-  --     (map-isometry-Metric-Space-WIP A B f)
-  -- is-uniformly-continuous-map-isometry-Metric-Space-WIP =
-  --   is-uniformly-continuous-map-isometry-Premetric-Space
-  --     ( premetric-Metric-Space-WIP A)
-  --     ( premetric-Metric-Space-WIP B)
-```
