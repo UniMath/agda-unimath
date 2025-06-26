@@ -33,7 +33,7 @@ open import metric-spaces.short-functions-metric-spaces-WIP
 
 A [function](metric-spaces.functions-metric-spaces.md) `f` between
 [metric spaces](metric-spaces.metric-spaces.md) `X` and `Y` is
-{{#concept "uniformly continuous" Disambiguation="function between metric spaces" WDID=Q741865 WD="uniform continuity" Agda=is-uniformly-continuous-map-Metric-Space-WIP}}
+{{#concept "uniformly continuous" Disambiguation="function between metric spaces" WDID=Q741865 WD="uniform continuity" Agda=is-uniformly-continuous-function-Metric-Space-WIP}}
 if there exists a function `m : ℚ⁺ → ℚ⁺` such that for any `x : X`, whenever
 `x'` is in an `m ε`-neighborhood of `x`, `f x'` is in an `ε`-neighborhood of
 `f x`. The function `m` is called a modulus of uniform continuity of `f`.
@@ -63,8 +63,8 @@ module _
           x
           m)
 
-  modulus-of-uniform-continuity-map-Metric-Space-WIP : UU (l1 ⊔ l2 ⊔ l4)
-  modulus-of-uniform-continuity-map-Metric-Space-WIP =
+  modulus-of-uniform-continuity-function-Metric-Space-WIP : UU (l1 ⊔ l2 ⊔ l4)
+  modulus-of-uniform-continuity-function-Metric-Space-WIP =
     type-subtype is-modulus-of-uniform-continuity-prop-function-Metric-Space-WIP
 
   is-uniformly-continuous-prop-function-Metric-Space-WIP : Prop (l1 ⊔ l2 ⊔ l4)
