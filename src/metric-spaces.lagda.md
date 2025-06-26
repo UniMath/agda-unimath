@@ -128,6 +128,7 @@ open import metric-spaces.symmetric-rational-neighborhoods public
 open import metric-spaces.triangular-premetric-structures public
 open import metric-spaces.triangular-rational-neighborhoods public
 open import metric-spaces.uniformly-continuous-functions-metric-spaces public
+open import metric-spaces.uniformly-continuous-functions-metric-spaces-WIP public
 open import metric-spaces.uniformly-continuous-functions-premetric-spaces public
 ```
 
