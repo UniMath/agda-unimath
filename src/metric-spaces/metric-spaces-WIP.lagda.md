@@ -187,6 +187,13 @@ module _
     neighborhood-Metric-Space-WIP d₂ x y
   monotonic-neighborhood-Metric-Space-WIP =
     monotonic-neighborhood-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
+
+  saturated-neighborhood-Metric-Space-WIP :
+    (ε : ℚ⁺) (x y : type-Metric-Space-WIP) →
+    ((δ : ℚ⁺) → neighborhood-Metric-Space-WIP (ε +ℚ⁺ δ) x y) →
+    neighborhood-Metric-Space-WIP ε x y
+  saturated-neighborhood-Metric-Space-WIP =
+    saturated-neighborhood-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
 ```
 
 ### Similarity of elements in a metric space
