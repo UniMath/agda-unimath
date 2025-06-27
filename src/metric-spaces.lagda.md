@@ -58,6 +58,7 @@ open import metric-spaces.continuous-functions-metric-spaces public
 open import metric-spaces.continuous-functions-metric-spaces-WIP public
 open import metric-spaces.continuous-functions-premetric-spaces public
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces public
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces-WIP public
 open import metric-spaces.convergent-sequences-metric-spaces public
 open import metric-spaces.dependent-products-metric-spaces public
 open import metric-spaces.discrete-premetric-structures public
@@ -74,6 +75,7 @@ open import metric-spaces.isometric-equivalences-premetric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-metric-spaces-WIP public
 open import metric-spaces.isometries-premetric-spaces public
+open import metric-spaces.limits-of-cauchy-approximations-metric-spaces-WIP public
 open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces public
 open import metric-spaces.limits-of-functions-metric-spaces public
 open import metric-spaces.limits-of-sequences-metric-spaces public
