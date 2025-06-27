@@ -54,6 +54,7 @@ open import metric-spaces.cauchy-sequences-complete-metric-spaces public
 open import metric-spaces.cauchy-sequences-metric-spaces public
 open import metric-spaces.closed-premetric-structures public
 open import metric-spaces.complete-metric-spaces public
+open import metric-spaces.complete-metric-spaces-WIP public
 open import metric-spaces.continuous-functions-metric-spaces public
 open import metric-spaces.continuous-functions-metric-spaces-WIP public
 open import metric-spaces.continuous-functions-premetric-spaces public
