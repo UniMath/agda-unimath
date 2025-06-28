@@ -966,7 +966,7 @@ If `f ⊥ g` and `f' ⊥ g`, then `(f + f') ⊥ g`.
 **Proof:** We need to show that the square
 
 ```text
-                     - ∘ (f + f')
+                   - ∘ (f + f')
   ((B + B') → X) ---------------> ((A + A') → X)
         |                               |
         |                               |

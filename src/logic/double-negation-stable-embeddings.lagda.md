@@ -276,6 +276,11 @@ abstract
           ( is-property-is-emb f)
           ( is-prop-Π
             ( is-prop-has-double-negation-elim ∘ is-prop-map-is-emb (pr1 H))))
+
+is-double-negation-stable-emb-Prop :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → Prop (l1 ⊔ l2)
+is-double-negation-stable-emb-Prop f =
+  ( is-double-negation-stable-emb f , is-prop-is-double-negation-stable-emb f)
 ```
 
 ### Double negation stable embeddings are closed under homotopies
