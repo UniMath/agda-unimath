@@ -93,6 +93,7 @@ open import metric-spaces.metric-space-of-functions-metric-spaces public
 open import metric-spaces.metric-space-of-isometries-metric-spaces public
 open import metric-spaces.metric-space-of-lipschitz-functions-metric-spaces public
 open import metric-spaces.metric-space-of-rational-numbers public
+open import metric-spaces.metric-space-of-rational-numbers-WIP public
 open import metric-spaces.metric-space-of-rational-numbers-with-open-neighborhoods public
 open import metric-spaces.metric-space-of-short-functions-metric-spaces public
 open import metric-spaces.metric-spaces public
