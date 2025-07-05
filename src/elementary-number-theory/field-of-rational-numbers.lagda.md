@@ -29,13 +29,21 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.images
 open import foundation.unit-type
+open import foundation.universe-levels
 
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.retractions
+open import foundation-core.sections
 
 open import group-theory.invertible-elements-monoids
 
 open import ring-theory.division-rings
+open import ring-theory.homomorphisms-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.localizations-rings
 open import ring-theory.rings
@@ -82,4 +90,10 @@ pr2 (inverts-nonzero-integers-ℚ (inl x) x≠0) = {!   !}
 inverts-nonzero-integers-ℚ (inr (inl star)) 0≠0 = ex-falso (0≠0 refl)
 pr1 (inverts-nonzero-integers-ℚ (inr (inr x)) x≠0) = neg-ℚ (reciprocal-rational-succ-ℕ x)
 pr2 (inverts-nonzero-integers-ℚ (inr (inr x)) x≠0) = {!   !}
+
+universal-property-ℚ-ℤ : (l : Level) → universal-property-localization-subset-Ring l ℤ-Ring ring-ℚ is-nonzero-prop-ℤ (initial-hom-Ring ring-ℚ) inverts-nonzero-integers-ℚ
+pr1 (pr1 (universal-property-ℚ-ℤ l R)) = {!   !}
+pr2 (pr1 (universal-property-ℚ-ℤ l R)) = {!   !}
+pr1 (pr2 (universal-property-ℚ-ℤ l R)) = {!   !}
+pr2 (pr2 (universal-property-ℚ-ℤ l R)) = {!   !}
 ```
