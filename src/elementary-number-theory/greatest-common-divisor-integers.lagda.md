@@ -310,7 +310,7 @@ is-commutative-gcd-ℤ x y =
   ap int-ℕ (is-commutative-gcd-ℕ (abs-ℤ x) (abs-ℤ y))
 ```
 
-### `gcd-ℕ 1 b ＝ 1`
+### `gcd-ℤ 1 b ＝ 1`
 
 ```agda
 is-one-is-gcd-one-ℤ : {b x : ℤ} → is-gcd-ℤ one-ℤ b x → is-one-ℤ x
