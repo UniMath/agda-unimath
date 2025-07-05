@@ -8,6 +8,7 @@ module group-theory.divisible-groups where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -24,7 +25,7 @@ open import group-theory.powers-of-elements-groups
 
 ## Idea
 
-A group `G` is called **divisible** if for every `n : ℕ`, the
+A group `G` is called **divisible** if for every `n : ℕ⁺`, the
 [power-of-`n` map](group-theory.powers-of-elements-groups.md)
 `x ↦ power-Group G n x` is surjective.
 
@@ -32,10 +33,10 @@ A group `G` is called **divisible** if for every `n : ℕ`, the
 
 ```agda
 is-divisible-Group : {l : Level} (G : Group l) → UU l
-is-divisible-Group G = (n : ℕ) → is-surjective (power-Group G n)
+is-divisible-Group G = (n : ℕ⁺) → is-surjective (power-Group G (nat-ℕ⁺ n))
 
 is-prop-is-divisible-Group : {l : Level} (G : Group l) → is-prop (is-divisible-Group G)
-is-prop-is-divisible-Group G = is-prop-Π λ n → is-prop-is-surjective (power-Group G n)
+is-prop-is-divisible-Group G = is-prop-Π λ n → is-prop-is-surjective (power-Group G (nat-ℕ⁺ n))
 
 is-divisible-Group-Prop : {l : Level} (G : Group l) → Prop l
 is-divisible-Group-Prop G = is-divisible-Group G , is-prop-is-divisible-Group G
