@@ -42,3 +42,17 @@ is-rational-Group G = is-divisible-Group G × is-torsion-free-Group G
 is-rational-Ab : {l : Level} (A : Ab l) → UU l
 is-rational-Ab A = is-rational-Group (group-Ab A)
 ```
+
+## Properties
+
+### Any rational abelian group is uniquely a `ℚ`-module
+
+Proof: Note that an abelian group is divisible precisely when its
+multiply-by-`n` map is surjective for all `n : ℕ⁺`, and torsion-free precisely
+when its multiply-by-`n` map is injective for all `n : ℕ⁺`. For abelian groups
+`G`, these maps are in fact group homomorphisms `G → G`. Maps of sets, such as
+the underlying set of `G`, which are both injective and surjective are
+equivalences, making each of these maps isomorphisms, which are the invertible
+elements in `endomorphism-ring-Ab G`. Now use the universal property of
+localizations with the fact that `ℚ` is the localization of `ℤ` at the positive
+integers to get the desired unique ring map `ℚ → endomorphism-ring-Ab G`.
