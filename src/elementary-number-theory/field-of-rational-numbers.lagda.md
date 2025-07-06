@@ -9,10 +9,15 @@ module elementary-number-theory.field-of-rational-numbers where
 ```agda
 open import commutative-algebra.discrete-fields
 
+open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integer-fractions
+open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-rational-numbers
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.ring-of-rational-numbers
 open import elementary-number-theory.natural-numbers
@@ -24,6 +29,7 @@ open import elementary-number-theory.relatively-prime-integers
 open import elementary-number-theory.ring-of-integers
 open import elementary-number-theory.unit-fractions-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -40,9 +46,11 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.retractions
 open import foundation-core.sections
 
+open import group-theory.cores-monoids
 open import group-theory.invertible-elements-monoids
 
 open import ring-theory.division-rings
+open import ring-theory.groups-of-units-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.localizations-rings
@@ -81,19 +89,14 @@ is-discrete-field-ℚ = is-division-ring-ℚ
 
 ## Properties
 
-### The ring of rational numbers is the [localization](ring-theory.localizations-rings.md) of the ring of [integers](elementary-number-theory.ring-of-integers.md) at the set of [nonzero integers](elementary-number-theory.nonzero-integers.md)
+### The ring of rational numbers is the [localization](ring-theory.localizations-rings.md) of the ring of [integers](elementary-number-theory.ring-of-integers.md) at the set of [positive integers](elementary-number-theory.positive-integers.md)
 
 ```agda
-inverts-nonzero-integers-ℚ : inverts-subset-hom-Ring ℤ-Ring ring-ℚ is-nonzero-prop-ℤ (initial-hom-Ring ring-ℚ)
-pr1 (inverts-nonzero-integers-ℚ (inl x) x≠0) = reciprocal-rational-succ-ℕ x
-pr2 (inverts-nonzero-integers-ℚ (inl x) x≠0) = {!   !}
-inverts-nonzero-integers-ℚ (inr (inl star)) 0≠0 = ex-falso (0≠0 refl)
-pr1 (inverts-nonzero-integers-ℚ (inr (inr x)) x≠0) = neg-ℚ (reciprocal-rational-succ-ℕ x)
-pr2 (inverts-nonzero-integers-ℚ (inr (inr x)) x≠0) = {!   !}
+inverts-positive-integers-ℚ : inverts-subset-hom-Ring ℤ-Ring ring-ℚ subtype-positive-ℤ (initial-hom-Ring ring-ℚ)
+pr1 (inverts-positive-integers-ℚ (inr (inr x)) star) = inclusion-group-of-units-Ring ring-ℚ (rational-ℕ (succ-ℕ x) , is-invertible-element-ring-is-nonzero-ℚ (rational-ℕ (succ-ℕ x)) λ ())
+pr1 (pr2 (inverts-positive-integers-ℚ (inr (inr x)) star)) = ap (inclusion-group-of-units-Ring ring-ℚ) (right-inverse-law-mul-ℚˣ ({! rational-ℕ  !} , {!   !})) ∙ {!   !}
+pr2 (pr2 (inverts-positive-integers-ℚ (inr (inr x)) star)) = {!   !} ∙ {!   !}
 
-universal-property-ℚ-ℤ : (l : Level) → universal-property-localization-subset-Ring l ℤ-Ring ring-ℚ is-nonzero-prop-ℤ (initial-hom-Ring ring-ℚ) inverts-nonzero-integers-ℚ
-pr1 (pr1 (universal-property-ℚ-ℤ l R)) = {!   !}
-pr2 (pr1 (universal-property-ℚ-ℤ l R)) = {!   !}
-pr1 (pr2 (universal-property-ℚ-ℤ l R)) = {!   !}
-pr2 (pr2 (universal-property-ℚ-ℤ l R)) = {!   !}
+universal-property-ℚ-ℤ : (l : Level) → universal-property-localization-subset-Ring l ℤ-Ring ring-ℚ subtype-positive-ℤ (initial-hom-Ring ring-ℚ) inverts-positive-integers-ℚ
+universal-property-ℚ-ℤ l R = {!   !}
 ```
