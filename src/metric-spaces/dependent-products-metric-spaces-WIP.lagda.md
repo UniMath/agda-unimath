@@ -127,8 +127,14 @@ module _
 
   Π-Metric-Space-WIP : Metric-Space-WIP (l ⊔ l1) (l ⊔ l2)
   Π-Metric-Space-WIP =
-    pseudometric-space-Π-Metric-Space ,
-    is-extensional-pseudometric-space-Π-Metric-Space
+    make-Metric-Space-WIP
+      type-Π-Metric-Space-WIP
+      neighborhood-prop-Π-Metric-Space-WIP
+      is-reflexive-neighborhood-Π-Metric-Space-WIP
+      is-symmetric-neighborhood-Π-Metric-Space-WIP
+      is-triangular-neighborhood-Π-Metric-Space-WIP
+      is-saturated-neighborhood-Π-Metric-Space-WIP
+      is-extensional-pseudometric-space-Π-Metric-Space
 ```
 
 ## Properties

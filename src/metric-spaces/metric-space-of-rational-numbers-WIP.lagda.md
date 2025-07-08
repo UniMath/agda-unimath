@@ -191,8 +191,14 @@ is-extensional-pseudometric-space-ℚ =
 ```agda
 metric-space-ℚ : Metric-Space-WIP lzero lzero
 metric-space-ℚ =
-  pseudometric-space-ℚ ,
-  is-extensional-pseudometric-space-ℚ
+  make-Metric-Space-WIP
+    ℚ
+    neighborhood-prop-ℚ
+    is-reflexive-neighborhood-ℚ
+    is-symmetric-neighborhood-ℚ
+    is-triangular-neighborhood-ℚ
+    is-saturated-neighborhood-ℚ
+    is-extensional-pseudometric-space-ℚ
 ```
 
 ## Properties

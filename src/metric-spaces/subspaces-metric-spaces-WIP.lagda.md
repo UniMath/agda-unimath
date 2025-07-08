@@ -113,8 +113,14 @@ module _
 
   subspace-Metric-Space-WIP : Metric-Space-WIP (l ⊔ l1) l2
   subspace-Metric-Space-WIP =
-    pseudometric-subspace-Metric-Space-WIP ,
-    is-extensional-pseudometric-subspace-Metric-Space-WIP
+    make-Metric-Space-WIP
+      ( type-subtype S)
+      ( neighborhood-prop-subset-Metric-Space-WIP)
+      ( is-reflexive-neighborhood-subset-Metric-Space-WIP)
+      ( is-symmetric-neighborhood-subset-Metric-Space-WIP)
+      ( is-triangular-neighborhood-subset-Metric-Space-WIP)
+      ( is-saturated-neighborhood-subset-Metric-Space-WIP)
+      ( is-extensional-pseudometric-subspace-Metric-Space-WIP)
 ```
 
 ### Inclusion of a metric subspace into its ambient space

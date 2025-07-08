@@ -19,12 +19,20 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import metric-spaces.extensional-pseudometric-spaces-WIP
+open import metric-spaces.preimage-rational-neighborhoods
 open import metric-spaces.pseudometric-spaces-WIP
+open import metric-spaces.rational-neighborhoods
+open import metric-spaces.reflexive-rational-neighborhoods
+open import metric-spaces.saturated-rational-neighborhoods
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
+open import metric-spaces.symmetric-rational-neighborhoods
+open import metric-spaces.triangular-rational-neighborhoods
 ```
 
 </details>
@@ -87,30 +95,87 @@ upper bounds on distances between elements is closed on the left.
 
 ## Definitions
 
+### Metric Structures on a type
+
+```agda
+module _
+  {l1 : Level} (A : UU l1) {l2 : Level}
+  (B : Rational-Neighborhood-Relation l2 A)
+  where
+
+  is-metric-prop-Rational-Neighborhood-Relation : Prop (l1 ⊔ l2)
+  is-metric-prop-Rational-Neighborhood-Relation =
+    Σ-Prop
+      ( is-pseudometric-prop-Rational-Neighborhood-Relation A B)
+      ( λ H →
+        is-extensional-prop-Pseudometric-Space-WIP (A , B , H))
+
+  is-metric-Rational-Neighborhood-Relation : UU (l1 ⊔ l2)
+  is-metric-Rational-Neighborhood-Relation =
+    type-Prop is-metric-prop-Rational-Neighborhood-Relation
+
+  is-prop-is-metric-Rational-Neighborhood-Relation :
+    is-prop is-metric-Rational-Neighborhood-Relation
+  is-prop-is-metric-Rational-Neighborhood-Relation =
+    is-prop-type-Prop (is-metric-prop-Rational-Neighborhood-Relation)
+
+Metric-Structure-WIP :
+  {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
+Metric-Structure-WIP l2 A =
+  type-subtype (is-metric-prop-Rational-Neighborhood-Relation A {l2})
+```
+
 ### The type of metric spaces
 
 ```agda
 Metric-Space-WIP : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Metric-Space-WIP l1 l2 =
-  type-subtype (is-extensional-prop-Pseudometric-Space-WIP {l1} {l2})
+  Σ (UU l1) (Metric-Structure-WIP l2)
+
+make-Metric-Space-WIP :
+  { l1 l2 : Level} →
+  ( A : UU l1) →
+  ( B : Rational-Neighborhood-Relation l2 A) →
+  ( refl-B : is-reflexive-Rational-Neighborhood-Relation B) →
+  ( symmetric-B : is-symmetric-Rational-Neighborhood-Relation B) →
+  ( triangular-B : is-triangular-Rational-Neighborhood-Relation B) →
+  ( saturated-B : is-saturated-Rational-Neighborhood-Relation B) →
+  ( extensional-B :
+    is-extensional-Pseudometric-Space-WIP
+      (A , B , refl-B , symmetric-B , triangular-B , saturated-B)) →
+  Metric-Space-WIP l1 l2
+make-Metric-Space-WIP
+  A B refl-B symmetric-B triangular-B saturated-B extensional-B =
+  ( A) ,
+  ( ( B) ,
+    ( refl-B , symmetric-B , triangular-B , saturated-B) ,
+    ( extensional-B))
 
 module _
   {l1 l2 : Level} (M : Metric-Space-WIP l1 l2)
   where
 
+  type-Metric-Space-WIP : UU l1
+  type-Metric-Space-WIP =
+    pr1 M
+
+  structure-Metric-Space-WIP : Metric-Structure-WIP l2 type-Metric-Space-WIP
+  structure-Metric-Space-WIP = pr2 M
+
   pseudometric-Metric-Space-WIP : Pseudometric-Space-WIP l1 l2
-  pseudometric-Metric-Space-WIP = pr1 M
+  pseudometric-Metric-Space-WIP =
+    ( type-Metric-Space-WIP) ,
+    ( pr1 structure-Metric-Space-WIP) ,
+    ( pr1 (pr2 structure-Metric-Space-WIP))
 
   is-extensional-pseudometric-Metric-Space-WIP :
     is-extensional-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
-  is-extensional-pseudometric-Metric-Space-WIP = pr2 M
+  is-extensional-pseudometric-Metric-Space-WIP =
+    pr2 (pr2 structure-Metric-Space-WIP)
 
-  type-Metric-Space-WIP : UU l1
-  type-Metric-Space-WIP =
-    type-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
-
-  structure-Metric-Space-WIP : Pseudometric-Structure l2 type-Metric-Space-WIP
-  structure-Metric-Space-WIP =
+  pseudometric-structure-Metric-Space-WIP :
+    Pseudometric-Structure l2 type-Metric-Space-WIP
+  pseudometric-structure-Metric-Space-WIP =
     structure-Pseudometric-Space-WIP pseudometric-Metric-Space-WIP
 
   neighborhood-prop-Metric-Space-WIP :
@@ -316,6 +381,26 @@ module _
     x ＝ y
   eq-sim-Metric-Space-WIP x y =
     map-inv-equiv (equiv-sim-eq-Metric-Space-WIP x y)
+```
+
+### Characterization of the transport of metric structures along equalities
+
+```agda
+equiv-Eq-tr-Metric-Structure :
+  {l1 l2 : Level} (A B : UU l1) →
+  (P : Metric-Structure-WIP l2 A) →
+  (Q : Metric-Structure-WIP l2 B) →
+  (e : A ＝ B) →
+  (tr (Metric-Structure-WIP l2) e P ＝ Q) ≃
+  (Eq-Rational-Neighborhood-Relation
+    ( pr1 P)
+    ( preimage-Rational-Neighborhood-Relation (map-eq e) (pr1 Q)))
+equiv-Eq-tr-Metric-Structure A .A P Q refl =
+  ( equiv-Eq-eq-Rational-Neighborhood-Relation (pr1 P) (pr1 Q)) ∘e
+  ( extensionality-type-subtype'
+    ( is-metric-prop-Rational-Neighborhood-Relation A)
+    ( P)
+    ( Q))
 ```
 
 ## External links
