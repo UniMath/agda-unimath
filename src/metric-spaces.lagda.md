@@ -66,6 +66,7 @@ open import metric-spaces.dependent-products-metric-spaces-WIP public
 open import metric-spaces.discrete-premetric-structures public
 open import metric-spaces.elements-at-bounded-distance-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
+open import metric-spaces.equality-of-metric-spaces-WIP public
 open import metric-spaces.equality-of-premetric-spaces public
 open import metric-spaces.extensional-premetric-structures public
 open import metric-spaces.extensional-pseudometric-spaces-WIP public
