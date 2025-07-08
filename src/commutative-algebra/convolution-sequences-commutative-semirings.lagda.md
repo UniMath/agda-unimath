@@ -157,7 +157,7 @@ module _
             by
               eq-sum-finite-sum-count-Commutative-Semiring R
                 ( finite-type-binary-sum-decomposition-ℕ n)
-                ( count-binary-sum-decomposition-ℕ n)
+                ( count-reverse-binary-sum-decomposition-ℕ n)
                 ( _)
         ＝
           add-Commutative-Semiring R
@@ -359,22 +359,9 @@ module _
         ( a) ~
       zero-function-Commutative-Semiring R ℕ
     htpy-left-zero-law-convolution-sequence-Commutative-Semiring a n =
-      equational-reasoning
-        sum-finite-Commutative-Semiring
-          ( R)
-          ( finite-type-binary-sum-decomposition-ℕ n)
-          ( λ (i , j , _) →
-            mul-Commutative-Semiring R (zero-Commutative-Semiring R) (a j))
-        ＝
-          sum-finite-Commutative-Semiring
-            ( R)
-            ( finite-type-binary-sum-decomposition-ℕ n)
-            ( λ _ → zero-Commutative-Semiring R)
-          by
-            htpy-sum-finite-Commutative-Semiring R _
-              (λ (i , j , _) → left-zero-law-mul-Commutative-Semiring R _)
-        ＝ zero-Commutative-Semiring R
-          by sum-zero-finite-Commutative-Semiring R _
+      htpy-sum-finite-Commutative-Semiring R _
+        (λ (i , j , _) → left-zero-law-mul-Commutative-Semiring R _) ∙
+      sum-zero-finite-Commutative-Semiring R _
 
     left-zero-law-convolution-sequence-Commutative-Semiring :
       (a : sequence (type-Commutative-Semiring R)) →
