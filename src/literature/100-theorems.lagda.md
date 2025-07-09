@@ -140,7 +140,7 @@ open import elementary-number-theory.fundamental-theorem-of-arithmetic using
 
 ```agda
 open import real-numbers.metric-space-of-real-numbers using
-  ( is-triangular-premetric-leq-ℝ)
+  ( is-triangular-neighborhood-ℝ)
 open import real-numbers.distance-real-numbers using
   ( triangle-inequality-dist-ℝ)
 ```

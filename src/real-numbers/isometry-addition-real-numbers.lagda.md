@@ -48,8 +48,8 @@ module _
 
   is-isometry-left-add-ℝ :
     is-isometry-Metric-Space
-      ( metric-space-leq-ℝ l2)
-      ( metric-space-leq-ℝ (l1 ⊔ l2))
+      ( metric-space-ℝ l2)
+      ( metric-space-ℝ (l1 ⊔ l2))
       ( add-ℝ x)
   is-isometry-left-add-ℝ d y z =
     ( λ Nyz →
@@ -58,20 +58,20 @@ module _
         ( add-ℝ x y)
         ( add-ℝ x z)
         ( preserves-lower-neighborhood-leq-left-add-ℝ d x y z
-          ( left-real-bound-neighborhood-leq-ℝ d y z Nyz))
+          ( left-leq-real-bound-neighborhood-ℝ d y z Nyz))
         ( preserves-lower-neighborhood-leq-left-add-ℝ d x z y
-          ( right-real-bound-neighborhood-leq-ℝ d y z Nyz))) ,
+          ( right-leq-real-bound-neighborhood-ℝ d y z Nyz))) ,
     ( λ Nxyz →
       neighborhood-real-bound-each-leq-ℝ d y z
         ( reflects-lower-neighborhood-leq-left-add-ℝ d x y z
-          ( left-real-bound-neighborhood-leq-ℝ d (x +ℝ y) (x +ℝ z) Nxyz))
+          ( left-leq-real-bound-neighborhood-ℝ d (x +ℝ y) (x +ℝ z) Nxyz))
         ( reflects-lower-neighborhood-leq-left-add-ℝ d x z y
-          ( right-real-bound-neighborhood-leq-ℝ d (x +ℝ y) (x +ℝ z) Nxyz)))
+          ( right-leq-real-bound-neighborhood-ℝ d (x +ℝ y) (x +ℝ z) Nxyz)))
 
   isometry-left-add-ℝ :
     isometry-Metric-Space
-      ( metric-space-leq-ℝ l2)
-      ( metric-space-leq-ℝ (l1 ⊔ l2))
+      ( metric-space-ℝ l2)
+      ( metric-space-ℝ (l1 ⊔ l2))
   isometry-left-add-ℝ = (add-ℝ x , is-isometry-left-add-ℝ)
 ```
 
@@ -84,10 +84,10 @@ module _
 
   is-isometry-isometry-left-add-ℝ :
     is-isometry-Metric-Space
-      ( metric-space-leq-ℝ l1)
+      ( metric-space-ℝ l1)
       ( metric-space-of-isometries-Metric-Space
-        ( metric-space-leq-ℝ l2)
-        ( metric-space-leq-ℝ (l1 ⊔ l2)))
+        ( metric-space-ℝ l2)
+        ( metric-space-ℝ (l1 ⊔ l2)))
       ( isometry-left-add-ℝ)
   is-isometry-isometry-left-add-ℝ d x y =
     ( λ Nxy z →
@@ -96,9 +96,9 @@ module _
         ( add-ℝ x z)
         ( add-ℝ y z)
         ( preserves-lower-neighborhood-leq-right-add-ℝ d z x y
-          ( left-real-bound-neighborhood-leq-ℝ d x y Nxy))
+          ( left-leq-real-bound-neighborhood-ℝ d x y Nxy))
         ( preserves-lower-neighborhood-leq-right-add-ℝ d z y x
-          ( right-real-bound-neighborhood-leq-ℝ d x y Nxy))) ,
+          ( right-leq-real-bound-neighborhood-ℝ d x y Nxy))) ,
     ( λ Nxyz →
       neighborhood-real-bound-each-leq-ℝ d x y
         ( reflects-lower-neighborhood-leq-right-add-ℝ
@@ -106,7 +106,7 @@ module _
           ( raise-ℝ l2 zero-ℝ)
           ( x)
           ( y)
-          ( left-real-bound-neighborhood-leq-ℝ
+          ( left-leq-real-bound-neighborhood-ℝ
             ( d)
             ( x +ℝ raise-zero-ℝ l2)
             ( y +ℝ raise-zero-ℝ l2)
@@ -116,7 +116,7 @@ module _
           ( raise-zero-ℝ l2)
           ( y)
           ( x)
-          ( right-real-bound-neighborhood-leq-ℝ
+          ( right-leq-real-bound-neighborhood-ℝ
             ( d)
             ( x +ℝ raise-zero-ℝ l2)
             ( y +ℝ raise-zero-ℝ l2)
@@ -124,9 +124,9 @@ module _
 
   isometry-add-ℝ :
     isometry-Metric-Space
-      ( metric-space-leq-ℝ l1)
+      ( metric-space-ℝ l1)
       ( metric-space-of-isometries-Metric-Space
-        ( metric-space-leq-ℝ l2)
-        ( metric-space-leq-ℝ (l1 ⊔ l2)))
+        ( metric-space-ℝ l2)
+        ( metric-space-ℝ (l1 ⊔ l2)))
   isometry-add-ℝ = (isometry-left-add-ℝ , is-isometry-isometry-left-add-ℝ)
 ```
