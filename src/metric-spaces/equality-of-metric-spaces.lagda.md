@@ -7,53 +7,55 @@ module metric-spaces.equality-of-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.torsorial-type-families
+open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import metric-spaces.equality-of-premetric-spaces
-open import metric-spaces.isometric-equivalences-premetric-spaces
+open import metric-spaces.extensional-pseudometric-spaces
+open import metric-spaces.functions-metric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.premetric-spaces
+open import metric-spaces.pseudometric-spaces
+open import metric-spaces.rational-neighborhoods
 ```
 
 </details>
 
 ## Idea
 
-Equality of [metric spaces](metric-spaces.metric-spaces.md) is equivalent to
-[equality](metric-spaces.equality-of-premetric-spaces.md) of their carrier
-[premetric spaces](metric-spaces.premetric-spaces.md); therefore,
-{{#concept "isometric equality" Disambiguation="between metric spaces", Agda=isometric-eq-Metric-Space}}
-between metric spaces characterizes their equality, which in turn means that
-equality is characterized by
-[isometric equivalence](metric-spaces.isometric-equivalences-premetric-spaces.md)
-between their carrier premetric spaces.
+[Equality](foundation-core.identity-types.md) of
+[metric spaces](metric-spaces.metric-spaces.md) is characterized by the
+following equivalent concepts:
+
+- an [equality](foundation-core.identity-types.md) between their carrier types
+  such that the induced map under [`map-eq`](foundation-core.univalence.md) is
+  an [isometry](metric-spaces.isometries-metric-spaces.md);
+
+- an [equivalence](foundation-core.equivalences.md) between their carrier types
+  such that the induced map under [`map-equiv`](foundation-core.equivalences.md)
+  is an [isometry](metric-spaces.isometries-metric-spaces.md);
+
+- a function between their carrier types that is both an
+  [equivalence](foundation-core.equivalences.md) and an
+  [isometry](metric-spaces.isometries-metric-spaces.md).
 
 ## Definitions
 
-### Equality of metric spaces is equivalent to equality of their carrier premetric spaces
-
-```agda
-module _
-  {l1 l2 : Level}
-  (A B : Metric-Space l1 l2)
-  where
-
-  equiv-eq-premetric-Metric-Space :
-    (A ＝ B) ≃ (premetric-Metric-Space A ＝ premetric-Metric-Space B)
-  equiv-eq-premetric-Metric-Space =
-    extensionality-type-subtype' is-metric-prop-Premetric-Space A B
-```
-
-### Isometric equality of metric spaces
+### Isometric equality between metric spaces
 
 ```agda
 module _
@@ -63,9 +65,8 @@ module _
 
   isometric-eq-Metric-Space : UU (lsuc l1 ⊔ l2 ⊔ l2')
   isometric-eq-Metric-Space =
-    isometric-eq-Premetric-Space
-      (premetric-Metric-Space A)
-      (premetric-Metric-Space B)
+    Σ (type-Metric-Space A ＝ type-Metric-Space B)
+      (λ e → is-isometry-Metric-Space A B (map-eq e))
 ```
 
 ### Isometric equivalence of metric spaces
@@ -78,9 +79,8 @@ module _
 
   isometric-equiv-Metric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   isometric-equiv-Metric-Space =
-    isometric-equiv-Premetric-Space
-      (premetric-Metric-Space A)
-      (premetric-Metric-Space B)
+    Σ (type-Metric-Space A ≃ type-Metric-Space B)
+      (λ e → is-isometry-Metric-Space A B (map-equiv e))
 ```
 
 ### Isometric equivalences between metric spaces
@@ -93,37 +93,38 @@ module _
 
   isometric-equiv-Metric-Space' : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   isometric-equiv-Metric-Space' =
-    isometric-equiv-Premetric-Space'
-      (premetric-Metric-Space A)
-      (premetric-Metric-Space B)
+    Σ ( type-function-Metric-Space A B)
+      ( λ f → (is-equiv f) × (is-isometry-Metric-Space A B f))
 ```
 
 ## Properties
 
-### Equality of metric spaces is equivalent to isometric equality of their carrier types
+### Equality of metric spaces is equivalent to the existence of an isometric equality between their carrier types
 
 ```agda
 module _
-  {l1 l2 : Level} (A B : Metric-Space l1 l2)
+  {l1 l2 : Level}
+  (A B : Metric-Space l1 l2)
   where
 
-  equiv-isometric-eq-eq-Metric-Space : (A ＝ B) ≃ isometric-eq-Metric-Space A B
-  equiv-isometric-eq-eq-Metric-Space =
-    ( equiv-isometric-eq-eq-Premetric-Space
-      ( premetric-Metric-Space A)
-      ( premetric-Metric-Space B)) ∘e
-    ( equiv-eq-premetric-Metric-Space A B)
-
-  eq-isometric-eq-Metric-Space : isometric-eq-Metric-Space A B → A ＝ B
-  eq-isometric-eq-Metric-Space =
-    map-inv-equiv equiv-isometric-eq-eq-Metric-Space
+  equiv-eq-isometric-eq-Metric-Space :
+    (A ＝ B) ≃ isometric-eq-Metric-Space A B
+  equiv-eq-isometric-eq-Metric-Space =
+    ( equiv-tot
+      ( equiv-Eq-tr-Metric-Structure
+        ( type-Metric-Space A)
+        ( type-Metric-Space B)
+        ( structure-Metric-Space A)
+        ( structure-Metric-Space B))) ∘e
+    ( equiv-pair-eq-Σ A B)
 ```
 
 ### Isometric equality is torsorial
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  {l1 l2 : Level}
+  (A : Metric-Space l1 l2)
   where
 
   is-torsorial-isometric-eq-Metric-Space :
@@ -131,35 +132,50 @@ module _
   is-torsorial-isometric-eq-Metric-Space =
     is-contr-equiv'
       ( Σ (Metric-Space l1 l2) (Id A))
-      ( equiv-tot (equiv-isometric-eq-eq-Metric-Space A))
+      ( equiv-tot (equiv-eq-isometric-eq-Metric-Space A))
       ( is-torsorial-Id A)
 ```
 
-### Equality of metric spaces is equivalent to isometric equivalence of their carrier types
+### Isometric equality between the carrier types of metric spaces is equivalent to the existence of an isometric equivalence between them
 
 ```agda
 module _
-  {l1 l2 : Level} (A B : Metric-Space l1 l2)
+  {l1 l2 : Level}
+  (A B : Metric-Space l1 l2)
   where
 
-  equiv-isometric-equiv-eq-Metric-Space :
-    (A ＝ B) ≃ isometric-equiv-Metric-Space A B
-  equiv-isometric-equiv-eq-Metric-Space =
-    ( equiv-isometric-equiv-eq-Premetric-Space
-      ( premetric-Metric-Space A)
-      ( premetric-Metric-Space B)) ∘e
-    ( equiv-eq-premetric-Metric-Space A B)
-
-  eq-isometric-equiv-Metric-Space : isometric-equiv-Metric-Space A B → A ＝ B
-  eq-isometric-equiv-Metric-Space =
-    map-inv-equiv equiv-isometric-equiv-eq-Metric-Space
+  equiv-isometric-eq-equiv-Metric-Space :
+    isometric-eq-Metric-Space A B ≃ isometric-equiv-Metric-Space A B
+  equiv-isometric-eq-equiv-Metric-Space =
+    equiv-Σ
+      ( λ e → is-isometry-Metric-Space A B (map-equiv e))
+      ( equiv-univalence)
+      ( λ (e : type-Metric-Space A ＝ type-Metric-Space B) →
+        equiv-eq
+          (ap (is-isometry-Metric-Space A B) (eq-htpy (λ x → refl))))
 ```
 
-### Isometric equivalence between metric spaces is torsorial
+### Isometric equivalence of metric spaces characterize their equalities
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  {l1 l2 : Level}
+  (A B : Metric-Space l1 l2)
+  where
+
+  equiv-eq-isometric-equiv-Metric-Space :
+    (A ＝ B) ≃ isometric-equiv-Metric-Space A B
+  equiv-eq-isometric-equiv-Metric-Space =
+    ( equiv-isometric-eq-equiv-Metric-Space A B) ∘e
+    ( equiv-eq-isometric-eq-Metric-Space A B)
+```
+
+### Isometric equivalence is torsorial
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A : Metric-Space l1 l2)
   where
 
   is-torsorial-isometric-equiv-Metric-Space :
@@ -167,36 +183,58 @@ module _
   is-torsorial-isometric-equiv-Metric-Space =
     is-contr-equiv'
       ( Σ (Metric-Space l1 l2) (Id A))
-      ( equiv-tot (equiv-isometric-equiv-eq-Metric-Space A))
+      ( equiv-tot (equiv-eq-isometric-equiv-Metric-Space A))
       ( is-torsorial-Id A)
 ```
 
-### Equality of metric spaces is equivalent to the existence of isometric equivalence between their carrier types
+### Two metric spaces are isometrically equivalent if and only if there is an isometric equivalence between them
 
 ```agda
 module _
-  {l1 l2 : Level} (A B : Metric-Space l1 l2)
+  {l1 l2 : Level}
+  (A B : Metric-Space l1 l2)
   where
 
-  equiv-isometric-equiv-eq-Metric-Space' :
+  equiv-isometric-equiv-isometric-equiv-Metric-Space' :
+    isometric-equiv-Metric-Space A B ≃ isometric-equiv-Metric-Space' A B
+  equiv-isometric-equiv-isometric-equiv-Metric-Space' =
+    equiv-tot
+      ( λ f →
+        equiv-tot
+          ( λ e →
+            equiv-eq (ap (is-isometry-Metric-Space A B) refl))) ∘e
+    associative-Σ
+      ( type-function-Metric-Space A B)
+      ( is-equiv)
+      ( is-isometry-Metric-Space A B ∘ map-equiv)
+```
+
+### Isometric equivalences between metric spaces characterize their equality
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A B : Metric-Space l1 l2)
+  where
+
+  equiv-eq-isometric-equiv-Metric-Space' :
     (A ＝ B) ≃ isometric-equiv-Metric-Space' A B
-  equiv-isometric-equiv-eq-Metric-Space' =
-    ( equiv-isometric-equiv-eq-Premetric-Space'
-      ( premetric-Metric-Space A)
-      ( premetric-Metric-Space B)) ∘e
-    ( equiv-eq-premetric-Metric-Space A B)
+  equiv-eq-isometric-equiv-Metric-Space' =
+    ( equiv-isometric-equiv-isometric-equiv-Metric-Space' A B) ∘e
+    ( equiv-eq-isometric-equiv-Metric-Space A B)
 
   eq-isometric-equiv-Metric-Space' :
     isometric-equiv-Metric-Space' A B → A ＝ B
   eq-isometric-equiv-Metric-Space' =
-    map-inv-equiv equiv-isometric-equiv-eq-Metric-Space'
+    map-inv-equiv equiv-eq-isometric-equiv-Metric-Space'
 ```
 
 ### The existence of invertibe isometries between metric spaces is torsorial
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  {l1 l2 : Level}
+  (A : Metric-Space l1 l2)
   where
 
   is-torsorial-isometric-equiv-Metric-Space' :
@@ -204,6 +242,6 @@ module _
   is-torsorial-isometric-equiv-Metric-Space' =
     is-contr-equiv'
       ( Σ (Metric-Space l1 l2) (Id A))
-      ( equiv-tot (equiv-isometric-equiv-eq-Metric-Space' A))
+      ( equiv-tot (equiv-eq-isometric-equiv-Metric-Space' A))
       ( is-torsorial-Id A)
 ```

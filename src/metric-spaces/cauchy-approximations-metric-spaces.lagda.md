@@ -9,18 +9,14 @@ module metric-spaces.cauchy-approximations-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.binary-relations
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.cauchy-approximations-premetric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 ```
@@ -31,9 +27,11 @@ open import metric-spaces.short-functions-metric-spaces
 
 A
 {{#concept "Cauchy approximation" Disambiguation="in a metric space" Agda=is-cauchy-approximation-Metric-Space}}
-in a [metric space](metric-spaces.metric-spaces.md) is a
-[Cauchy approximation](metric-spaces.cauchy-approximations-premetric-spaces.md)
-in the carrier [premetric space](metric-spaces.premetric-spaces.md).
+in a [metric space](metric-spaces.metric-spaces.md) `A` is a map `f` from
+[`ℚ⁺`](elementary-number-theory.positive-rational-numbers.md) to its carrier
+type such that for all `(ε δ : ℚ⁺)`, `f ε` and `f δ` are in a
+(`ε + δ`)-[neighborhood](metric-spaces.rational-neighborhoods.md), i.e. the
+distance between `f ε` and `f δ` is bounded by `ε + δ`.
 
 ## Definitions
 
@@ -46,9 +44,14 @@ module _
 
   is-cauchy-approximation-prop-Metric-Space :
     (ℚ⁺ → type-Metric-Space A) → Prop l2
-  is-cauchy-approximation-prop-Metric-Space =
-    is-cauchy-approximation-prop-Premetric-Space
-      ( premetric-Metric-Space A)
+  is-cauchy-approximation-prop-Metric-Space f =
+    Π-Prop
+      ( ℚ⁺)
+      ( λ ε →
+        Π-Prop
+          ( ℚ⁺)
+          ( λ δ →
+            neighborhood-prop-Metric-Space A (ε +ℚ⁺ δ) (f ε) (f δ)))
 
   is-cauchy-approximation-Metric-Space :
     (ℚ⁺ → type-Metric-Space A) → UU l2
@@ -93,10 +96,10 @@ module _
   const-cauchy-approximation-Metric-Space :
     cauchy-approximation-Metric-Space A
   const-cauchy-approximation-Metric-Space =
-    (const ℚ⁺ x) , (λ ε δ → is-reflexive-structure-Metric-Space A (ε +ℚ⁺ δ) x)
+    (const ℚ⁺ x) , (λ ε δ → refl-neighborhood-Metric-Space A (ε +ℚ⁺ δ) x)
 ```
 
-### Short maps between metric spaces preserve Cauchy approximations
+### Short maps between metric spaces are functorial on Cauchy approximations
 
 ```agda
 module _
@@ -108,9 +111,51 @@ module _
   map-short-function-cauchy-approximation-Metric-Space :
     cauchy-approximation-Metric-Space A →
     cauchy-approximation-Metric-Space B
-  map-short-function-cauchy-approximation-Metric-Space =
-    map-short-function-cauchy-approximation-Premetric-Space
-      ( premetric-Metric-Space A)
-      ( premetric-Metric-Space B)
+  map-short-function-cauchy-approximation-Metric-Space (u , H) =
+    ( map-short-function-Metric-Space A B f ∘ u) ,
+    ( λ ε δ →
+      is-short-map-short-function-Metric-Space
+      ( A)
+      ( B)
       ( f)
+      ( ε +ℚ⁺ δ)
+      ( u ε)
+      ( u δ)
+      ( H ε δ))
+
+module _
+  {l1 l2 : Level}
+  (A : Metric-Space l1 l2)
+  where
+
+  eq-id-map-short-function-cauchy-approximation-Metric-Space :
+    map-short-function-cauchy-approximation-Metric-Space
+      ( A)
+      ( A)
+      ( short-id-Metric-Space A) ＝
+    id
+  eq-id-map-short-function-cauchy-approximation-Metric-Space = refl
+
+module _
+  {l1a l2a l1b l2b l1c l2c : Level}
+  (A : Metric-Space l1a l2a)
+  (B : Metric-Space l1b l2b)
+  (C : Metric-Space l1c l2c)
+  (g : short-function-Metric-Space B C)
+  (f : short-function-Metric-Space A B)
+  where
+
+  eq-comp-map-short-function-cauchy-approximation-Metric-Space :
+    ( map-short-function-cauchy-approximation-Metric-Space B C g ∘
+      map-short-function-cauchy-approximation-Metric-Space A B f) ＝
+    ( map-short-function-cauchy-approximation-Metric-Space A C
+      (comp-short-function-Metric-Space A B C g f))
+  eq-comp-map-short-function-cauchy-approximation-Metric-Space = refl
 ```
+
+## References
+
+Our definition of Cauchy approximation follows Definition 4.5.5 of
+{{#cite Booij20PhD}} and Definition 11.2.10 of {{#cite UF13}}.
+
+{{#bibliography}}

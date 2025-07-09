@@ -12,6 +12,7 @@ open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
+open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -27,7 +28,6 @@ open import foundation.universe-levels
 
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.functions-metric-spaces
-open import metric-spaces.isometric-equivalences-premetric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.precategory-of-metric-spaces-and-isometries
@@ -135,10 +135,8 @@ module _
   where
 
   is-iso-is-isometric-equiv-short-function-Metric-Space :
-    is-isometric-equiv-Premetric-Space
-      ( premetric-Metric-Space A)
-      ( premetric-Metric-Space B)
-      ( map-short-function-Metric-Space A B f) →
+    ( is-equiv (map-short-function-Metric-Space A B f) ×
+      is-isometry-Metric-Space A B (map-short-function-Metric-Space A B f)) →
     is-iso-Precategory precategory-short-function-Metric-Space {A} {B} f
   is-iso-is-isometric-equiv-short-function-Metric-Space (E , I) =
     ( short-inverse) ,
@@ -178,13 +176,13 @@ module _
             ( E))
 ```
 
-### A function between metric spaces is a short isomorphism if and only if it an isometric equivalence between their carrier premetric spaces
+### A function between metric spaces is a short isomorphism if and only if it an isometric equivalence between them
 
 ```agda
 module _
   {l1 l2 : Level}
   (A B : Metric-Space l1 l2)
-  (f : map-type-Metric-Space A B)
+  (f : type-function-Metric-Space A B)
   where
 
   equiv-is-isometric-equiv-is-iso-short-function-Metric-Space :
@@ -194,10 +192,7 @@ module _
           { A}
           { B}
           ( f , s)) ≃
-    is-isometric-equiv-Premetric-Space
-      (premetric-Metric-Space A)
-      (premetric-Metric-Space B)
-      (f)
+    (is-equiv f) × (is-isometry-Metric-Space A B f)
   equiv-is-isometric-equiv-is-iso-short-function-Metric-Space =
     equiv-iff
       ( Σ-Prop
@@ -207,10 +202,9 @@ module _
             { A}
             { B}
             ( f , s)))
-      ( is-isometric-equiv-prop-Premetric-Space
-        ( premetric-Metric-Space A)
-        ( premetric-Metric-Space B)
-        ( f))
+      ( product-Prop
+        ( is-equiv-Prop f)
+        ( is-isometry-prop-Metric-Space A B f))
     ( λ (is-short-f , is-iso-f) →
       is-equiv-is-iso-short-function-Metric-Space
         ( A)
@@ -245,7 +239,7 @@ module _
     equiv-tot
       ( equiv-is-isometric-equiv-is-iso-short-function-Metric-Space A B) ∘e
     associative-Σ
-      ( map-type-Metric-Space A B)
+      ( type-function-Metric-Space A B)
       ( is-short-function-Metric-Space A B)
       ( is-iso-Precategory precategory-short-function-Metric-Space {A} {B})
 ```

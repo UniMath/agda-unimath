@@ -27,8 +27,8 @@ open import foundation.universe-levels
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.short-functions-premetric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.ordering-rational-neighborhoods
+open import metric-spaces.preimage-rational-neighborhoods
 ```
 
 </details>
@@ -38,12 +38,12 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 A [function](metric-spaces.functions-metric-spaces.md) `f` between two
 [metric spaces](metric-spaces.metric-spaces.md) `A` and `B` is
 {{#concept "short" Disambiguation="function between metric spaces" Agda=is-short-function-Metric-Space WD="metric map" WDID=Q2713824}}
-if it is [short](metric-spaces.short-functions-premetric-spaces.md) on their
-carrier [premetric spaces](metric-spaces.premetric-spaces.md): for any points
-`x` and `y` that are `d`-[neighbors](metric-spaces.premetric-structures.md) in
-`A`, `f x` and `f y` are `d`-neighbors in `B`. I.e., upper bounds of the
-distance between two points in `A` are upper bounds of the distances of their
-images.
+if the [rational neighborhood relation](metric-spaces.rational-neighborhoods.md)
+on `A` is [finer](metric-spaces.ordering-rational-neighborhoods.md) than the
+[preimage](metric-spaces.preimage-rational-neighborhoods.md) by `f` of the
+rational neighborhood relation on `B`. I.e., upper bounds on the distance
+between two points in `A` are upper bounds of the distance between their images
+in `B`.
 
 ## Definitions
 
@@ -53,15 +53,16 @@ images.
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : map-type-Metric-Space A B)
+  (f : type-function-Metric-Space A B)
   where
 
   is-short-function-prop-Metric-Space : Prop (l1 ⊔ l2 ⊔ l2')
   is-short-function-prop-Metric-Space =
-    is-short-function-prop-Premetric-Space
-      ( premetric-Metric-Space A)
-      ( premetric-Metric-Space B)
-      ( f)
+    leq-prop-Rational-Neighborhood-Relation
+      ( neighborhood-prop-Metric-Space A)
+      ( preimage-Rational-Neighborhood-Relation
+        ( f)
+        ( neighborhood-prop-Metric-Space B))
 
   is-short-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l2')
   is-short-function-Metric-Space =
@@ -84,13 +85,14 @@ module _
   set-short-function-Metric-Space : Set (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   set-short-function-Metric-Space =
     set-subset
-      ( set-map-type-Metric-Space A B)
+      ( set-function-Metric-Space A B)
       ( is-short-function-prop-Metric-Space A B)
 
   short-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   short-function-Metric-Space = type-Set set-short-function-Metric-Space
 
-  is-set-short-function-Metric-Space : is-set short-function-Metric-Space
+  is-set-short-function-Metric-Space :
+    is-set short-function-Metric-Space
   is-set-short-function-Metric-Space =
     is-set-type-Set set-short-function-Metric-Space
 
@@ -100,20 +102,12 @@ module _
   (f : short-function-Metric-Space A B)
   where
 
-  map-short-function-Metric-Space : map-type-Metric-Space A B
-  map-short-function-Metric-Space =
-    map-short-function-Premetric-Space
-      ( premetric-Metric-Space A)
-      ( premetric-Metric-Space B)
-      ( f)
+  map-short-function-Metric-Space : type-function-Metric-Space A B
+  map-short-function-Metric-Space = pr1 f
 
   is-short-map-short-function-Metric-Space :
     is-short-function-Metric-Space A B map-short-function-Metric-Space
-  is-short-map-short-function-Metric-Space =
-    is-short-map-short-function-Premetric-Space
-      ( premetric-Metric-Space A)
-      ( premetric-Metric-Space B)
-      ( f)
+  is-short-map-short-function-Metric-Space = pr2 f
 ```
 
 ## Properties
@@ -126,12 +120,12 @@ module _
   where
 
   is-short-id-Metric-Space :
-    is-short-function-Metric-Space A A (id-Metric-Space A)
+    is-short-function-Metric-Space A A (λ x → x)
   is-short-id-Metric-Space d x y H = H
 
   short-id-Metric-Space : short-function-Metric-Space A A
   short-id-Metric-Space =
-    id-Metric-Space A , is-short-id-Metric-Space
+    (λ x → x) , is-short-id-Metric-Space
 ```
 
 ### Equality of short functions between metric spaces is characterized by homotopy of their carrier maps
@@ -170,15 +164,27 @@ module _
   (C : Metric-Space l1c l2c)
   where
 
+  is-short-comp-is-short-function-Metric-Space :
+    (g : type-function-Metric-Space B C) →
+    (f : type-function-Metric-Space A B) →
+    is-short-function-Metric-Space B C g →
+    is-short-function-Metric-Space A B f →
+    is-short-function-Metric-Space A C (g ∘ f)
+  is-short-comp-is-short-function-Metric-Space g f H K d x y =
+    H d (f x) (f y) ∘ K d x y
+
   comp-short-function-Metric-Space :
     short-function-Metric-Space B C →
     short-function-Metric-Space A B →
     short-function-Metric-Space A C
-  comp-short-function-Metric-Space =
-    comp-short-function-Premetric-Space
-      ( premetric-Metric-Space A)
-      ( premetric-Metric-Space B)
-      ( premetric-Metric-Space C)
+  comp-short-function-Metric-Space g f =
+    ( map-short-function-Metric-Space B C g ∘
+      map-short-function-Metric-Space A B f) ,
+    ( is-short-comp-is-short-function-Metric-Space
+      ( map-short-function-Metric-Space B C g)
+      ( map-short-function-Metric-Space A B f)
+      ( is-short-map-short-function-Metric-Space B C g)
+      ( is-short-map-short-function-Metric-Space A B f))
 ```
 
 ### Unit laws for composition of short maps between metric spaces
@@ -274,7 +280,7 @@ module _
   is-short-constant-function-Metric-Space :
     is-short-function-Metric-Space A B (λ _ → b)
   is-short-constant-function-Metric-Space ε x y H =
-    is-reflexive-structure-Metric-Space B ε b
+    refl-neighborhood-Metric-Space B ε b
 ```
 
 ### Any isometry between metric spaces is short
@@ -283,17 +289,14 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : map-type-Metric-Space A B)
+  (f : type-function-Metric-Space A B)
   where
 
   is-short-is-isometry-Metric-Space :
     is-isometry-Metric-Space A B f →
     is-short-function-Metric-Space A B f
-  is-short-is-isometry-Metric-Space =
-    is-short-is-isometry-Premetric-Space
-      ( premetric-Metric-Space A)
-      ( premetric-Metric-Space B)
-      ( f)
+  is-short-is-isometry-Metric-Space I =
+    preserves-neighborhood-map-isometry-Metric-Space A B (f , I)
 ```
 
 ### The embedding of isometries of metric spaces into short maps
@@ -314,7 +317,8 @@ module _
       ( map-isometry-Metric-Space A B f)
       ( is-isometry-map-isometry-Metric-Space A B f)
 
-  is-emb-short-isometry-Metric-Space : is-emb short-isometry-Metric-Space
+  is-emb-short-isometry-Metric-Space :
+    is-emb short-isometry-Metric-Space
   is-emb-short-isometry-Metric-Space =
     is-emb-right-factor
       ( map-short-function-Metric-Space A B)
@@ -323,22 +327,12 @@ module _
       ( is-emb-htpy
         ( λ f → refl)
         ( is-emb-inclusion-subtype (is-isometry-prop-Metric-Space A B)))
-```
 
-### Short maps are uniformly continuous
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
-  where
-
-  is-uniformly-continuous-is-short-function-Metric-Space :
-    (f : map-type-Metric-Space A B) → is-short-function-Metric-Space A B f →
-    is-uniformly-continuous-map-Metric-Space A B f
-  is-uniformly-continuous-is-short-function-Metric-Space =
-    is-uniformly-continuous-is-short-function-Premetric-Space
-      ( premetric-Metric-Space A)
-      ( premetric-Metric-Space B)
+  emb-short-isometry-Metric-Space :
+    isometry-Metric-Space A B ↪ short-function-Metric-Space A B
+  emb-short-isometry-Metric-Space =
+    short-isometry-Metric-Space ,
+    is-emb-short-isometry-Metric-Space
 ```
 
 ## See also

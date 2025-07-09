@@ -25,7 +25,7 @@ open import metric-spaces.reflexive-rational-neighborhoods
 
 ## Idea
 
-A [rational neighborhood relation](metric-spaces.premetric-structures.md) is
+A [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) is
 {{#concept "triangular" Disambiguation="rational neighborhood relation" agda=is-triangular-Rational-Neighborhood-Relation}}
 if it is additively transitive, i.e., if any `d₂`-neighbor of a `d₁`-neighbor of
 an element is its `d₁ + d₂`-neighbor.

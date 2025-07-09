@@ -112,7 +112,7 @@ module _
   equiv-iso-isometric-equiv-Metric-Space' =
     equiv-tot (λ f → commutative-product) ∘e
     associative-Σ
-      ( map-type-Metric-Space A B)
+      ( type-function-Metric-Space A B)
       ( is-isometry-Metric-Space A B)
       ( is-equiv ∘ map-isometry-Metric-Space A B) ∘e
     equiv-tot
