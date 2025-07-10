@@ -1,6 +1,8 @@
 # The field of rational numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.field-of-rational-numbers where
 ```
 
@@ -33,6 +35,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.iterating-automorphisms
 open import foundation.images
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -45,16 +48,21 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.retractions
 open import foundation-core.sections
+open import foundation-core.subtypes
+open import foundation-core.transport-along-identifications
 
 open import group-theory.cores-monoids
+open import group-theory.groups
 open import group-theory.invertible-elements-monoids
 
 open import ring-theory.division-rings
 open import ring-theory.groups-of-units-rings
 open import ring-theory.homomorphisms-rings
+open import ring-theory.initial-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.localizations-rings
 open import ring-theory.rings
+open import ring-theory.semirings
 ```
 
 </details>
@@ -93,10 +101,35 @@ is-discrete-field-ℚ = is-division-ring-ℚ
 
 ```agda
 inverts-positive-integers-ℚ : inverts-subset-hom-Ring ℤ-Ring ring-ℚ subtype-positive-ℤ (initial-hom-Ring ring-ℚ)
-pr1 (inverts-positive-integers-ℚ (inr (inr x)) star) = inclusion-group-of-units-Ring ring-ℚ (rational-ℕ (succ-ℕ x) , is-invertible-element-ring-is-nonzero-ℚ (rational-ℕ (succ-ℕ x)) λ ())
-pr1 (pr2 (inverts-positive-integers-ℚ (inr (inr x)) star)) = ap (inclusion-group-of-units-Ring ring-ℚ) (right-inverse-law-mul-ℚˣ {!   !})
-pr2 (pr2 (inverts-positive-integers-ℚ (inr (inr x)) star)) = ap (inclusion-group-of-units-Ring ring-ℚ) (left-inverse-law-mul-ℚˣ {!   !})
+inverts-positive-integers-ℚ (inr (inr x)) star = is-invertible-element-ring-is-nonzero-ℚ (pr1 (pr1 (initial-hom-Ring ring-ℚ)) (inr (inr x))) (is-nonzero-is-nonzero-numerator-ℚ (pr1 (pr1 (initial-hom-Ring ring-ℚ)) (inr (inr x))) {!   !})
+
+inverts-positive-integers-hom-ℚ : {l : Level} (R : Ring l) → inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ (initial-hom-Ring R) → hom-Ring ring-ℚ R
+pr1 (pr1 (inverts-positive-integers-hom-ℚ R R-inv)) ((x , y , y>0) , _) = mul-Ring R (map-hom-Ring ℤ-Ring R (initial-hom-Ring R) x) (inv-is-invertible-element-Ring R (R-inv y y>0))
+pr2 (pr1 (inverts-positive-integers-hom-ℚ R R-inv)) {(x , y , y>0) , xy-red} {(z , w , w>0) , zw-red} = {!   !}
+pr1 (pr2 (inverts-positive-integers-hom-ℚ R R-inv)) {(x , y , y>0) , xy-red} {(z , w , w>0) , zw-red} = {!   !}
+pr2 (pr2 (inverts-positive-integers-hom-ℚ R R-inv)) = pr1
+  (pr2
+   (R-inv
+    (pr1
+     (pr1
+      (pr1
+       (pr2
+        (multiplicative-monoid-Semiring
+         (semiring-Ring ring-ℚ))))))
+    star))
 
 universal-property-ℚ-ℤ : (l : Level) → universal-property-localization-subset-Ring l ℤ-Ring ring-ℚ subtype-positive-ℤ (initial-hom-Ring ring-ℚ) inverts-positive-integers-ℚ
-universal-property-ℚ-ℤ l R = {!   !}
+pr1 (pr1 (universal-property-ℚ-ℤ l R)) (f , f-inv) = inverts-positive-integers-hom-ℚ R lem where
+  lem : inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ (initial-hom-Ring R)
+  lem = tr (inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ) (inv (contraction-initial-hom-Ring R f)) f-inv
+pr2 (pr1 (universal-property-ℚ-ℤ l R)) (f , f-inv) = eq-type-subtype (inverts-subset-hom-ring-Prop ℤ-Ring R subtype-positive-ℤ) (inv (contraction-initial-hom-Ring R (pr1
+   ((precomp-universal-property-localization-subset-Ring ℤ-Ring ring-ℚ
+     R subtype-positive-ℤ (initial-hom-Ring ring-ℚ)
+     inverts-positive-integers-ℚ
+     ∘ pr1 (pr1 (universal-property-ℚ-ℤ l R)))
+    (f , f-inv))))) ∙ eq-type-subtype (inverts-subset-hom-ring-Prop ℤ-Ring R subtype-positive-ℤ) (contraction-initial-hom-Ring R f)
+pr1 (pr2 (universal-property-ℚ-ℤ l R)) (f , f-inv) = inverts-positive-integers-hom-ℚ R lem where
+  lem : inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ (initial-hom-Ring R)
+  lem = tr (inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ) (inv (contraction-initial-hom-Ring R f)) f-inv
+pr2 (pr2 (universal-property-ℚ-ℤ l R)) f = {!   !}
 ```
