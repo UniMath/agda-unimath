@@ -173,4 +173,13 @@ module _
         by ap (λ z → mul-Group G z x) (right-inverse-law-mul-Group G y)
       ＝ x
         by left-unit-law-mul-Group G x
+
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  where
+
+  is-injective-kernel-is-trivial-Group : is-injective (map-hom-Group G H f) → is-trivial-Subgroup G (subgroup-kernel-hom-Group G H f)
+  is-injective-kernel-is-trivial-Group f-inj x fx-unit = f-inj lem where
+    lem : pr1 f (unit-Group G) ＝ pr1 f x
+    lem = preserves-unit-hom-Group G H f ∙ fx-unit
 ```
