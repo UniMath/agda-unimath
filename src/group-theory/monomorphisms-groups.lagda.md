@@ -112,7 +112,7 @@ module _
     eq-1 = eq-htpy-hom-Group ℤ-Group H htpy-1
 
     eq-2 : x-ℤ ＝ y-ℤ
-    eq-2 = map-equiv (inv-equiv-ap-emb ?) eq-1
+    eq-2 = map-equiv (inv-equiv-ap-emb ((λ g → comp-hom-Group ℤ-Group G H f g) , {!   !})) eq-1
 
     htpy-2 : htpy-hom-Group ℤ-Group G x-ℤ y-ℤ
     htpy-2 = htpy-eq-hom-Group ℤ-Group G x-ℤ y-ℤ eq-2
