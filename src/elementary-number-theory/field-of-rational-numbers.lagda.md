@@ -109,13 +109,13 @@ pr2 (pr1 (inverts-positive-integers-hom-ℚ R R-inv)) {(x , y , y>0) , xy-red} {
 pr1 (pr2 (inverts-positive-integers-hom-ℚ R R-inv)) {(x , y , y>0) , xy-red} {(z , w , w>0) , zw-red} = {!   !}
 pr2 (pr2 (inverts-positive-integers-hom-ℚ R R-inv)) = pr1
   (pr2
-   (R-inv
-    (pr1
-     (pr1
+    (R-inv
       (pr1
-       (pr2
-        (multiplicative-monoid-Semiring
-         (semiring-Ring ring-ℚ))))))
+        (pr1
+          (pr1
+            (pr2
+              (multiplicative-monoid-Semiring
+                (semiring-Ring ring-ℚ))))))
     star))
 
 universal-property-ℚ-ℤ : (l : Level) → universal-property-localization-subset-Ring l ℤ-Ring ring-ℚ subtype-positive-ℤ (initial-hom-Ring ring-ℚ) inverts-positive-integers-ℚ
@@ -123,10 +123,10 @@ pr1 (pr1 (universal-property-ℚ-ℤ l R)) (f , f-inv) = inverts-positive-intege
   lem : inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ (initial-hom-Ring R)
   lem = tr (inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ) (inv (contraction-initial-hom-Ring R f)) f-inv
 pr2 (pr1 (universal-property-ℚ-ℤ l R)) (f , f-inv) = eq-type-subtype (inverts-subset-hom-ring-Prop ℤ-Ring R subtype-positive-ℤ) (inv (contraction-initial-hom-Ring R (pr1
-   ((precomp-universal-property-localization-subset-Ring ℤ-Ring ring-ℚ
-     R subtype-positive-ℤ (initial-hom-Ring ring-ℚ)
-     inverts-positive-integers-ℚ
-     ∘ pr1 (pr1 (universal-property-ℚ-ℤ l R)))
+  ((precomp-universal-property-localization-subset-Ring ℤ-Ring ring-ℚ
+    R subtype-positive-ℤ (initial-hom-Ring ring-ℚ)
+    inverts-positive-integers-ℚ
+    ∘ pr1 (pr1 (universal-property-ℚ-ℤ l R)))
     (f , f-inv))))) ∙ eq-type-subtype (inverts-subset-hom-ring-Prop ℤ-Ring R subtype-positive-ℤ) (contraction-initial-hom-Ring R f)
 pr1 (pr2 (universal-property-ℚ-ℤ l R)) (f , f-inv) = inverts-positive-integers-hom-ℚ R lem where
   lem : inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ (initial-hom-Ring R)

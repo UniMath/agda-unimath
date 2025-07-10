@@ -7,18 +7,29 @@ module group-theory.rational-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.nonzero-integers
 open import elementary-number-theory.ring-of-rational-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
+
 open import group-theory.abelian-groups
 open import group-theory.divisible-groups
+open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.groups
+open import group-theory.integer-powers-of-elements-groups
 open import group-theory.torsion-free-groups
 open import group-theory.trivial-groups
 open import group-theory.trivial-subgroups
+
+open import linear-algebra.left-modules-rings
+
+open import ring-theory.homomorphisms-rings
+open import ring-theory.rings
 ```
 
 </details>
@@ -63,3 +74,19 @@ to-be-defined monoidal categories of abelian groups and (left/right) ℚ-modules
 are equivalent, and because the space of ℚ-module structures on an abelian group
 is a proposition, the author prefers the naming convention seen for other
 subspaces of (abelian) groups. Thus, rational abelian groups.
+
+```agda
+module _
+  {l : Level}
+  where
+
+  is-rational-has-ℚ-module-structure : (A : Ab l) → is-rational-Ab A → left-module-Ring l ring-ℚ
+  pr1 (is-rational-has-ℚ-module-structure A A-rat) = A
+  pr2 (is-rational-has-ℚ-module-structure A A-rat) = {!   !}
+
+  has-ℚ-module-structure-is-rational : (M : left-module-Ring l ring-ℚ) → is-rational-Ab (ab-left-module-Ring ring-ℚ M)
+  pr1 (has-ℚ-module-structure-is-rational M) = {!   !}
+  pr2 (has-ℚ-module-structure-is-rational M) = mul-is-injective-is-torsion-free-Group (pr1 M) lem where
+    lem : (k : nonzero-ℤ) → is-injective (integer-power-Group (group-Ab (pr1 M)) (int-nonzero-ℤ k))
+    lem k = {!   !}
+```
