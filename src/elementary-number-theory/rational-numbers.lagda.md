@@ -7,8 +7,11 @@ module elementary-number-theory.rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-integers
+open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.mediant-integer-fractions
@@ -19,6 +22,7 @@ open import elementary-number-theory.positive-integers
 open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.action-on-identifications-functions
+open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
@@ -29,6 +33,7 @@ open import foundation.reflecting-maps-equivalence-relations
 open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.sets
+open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universe-levels
