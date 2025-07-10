@@ -24,8 +24,13 @@ open import foundation.singleton-subtypes
 open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
+open import foundation-core.injective-maps
+
+open import group-theory.abelian-groups
 open import group-theory.groups
+open import group-theory.integer-multiples-of-elements-abelian-groups
 open import group-theory.integer-powers-of-elements-groups
+open import group-theory.kernels-homomorphisms-groups
 open import group-theory.orders-of-elements-groups
 open import group-theory.subgroups
 open import group-theory.torsion-elements-groups
@@ -167,6 +172,21 @@ module _
               ( λ k p → inv (H x k p))))
 ```
 
-### When `G` is [abelian](group-theory.abelian-groups.md), the property of being torsion-free is equivalent to the [multiply-by-`n` maps](group-theory.multiples-of-elements-abelian-groups.md) being [monomorphisms](group-theory.monomorphisms-groups.md) for nonzero `n`
+### When `G` is abelian, the property of being torsion-free is equivalent to the [multiply-by-`n` maps](group-theory.multiples-of-elements-abelian-groups.md) being [injective](group-theory.monomorphisms-groups.md) for nonzero `n`
 
-This remains to be formalized.
+Proof : Condition 1. above says the
+[kernel](group-theory.kernels-homomorphisms-groups.md) of
+`hom-integer-multiple-Ab G n` is [trivial](group-theory.trivial-subgroups.md).
+By work in the file on kernels, these conditions are equivalent.
+
+```agda
+module _
+  {l : Level} (G : Ab l)
+  where
+
+  is-torsion-free-mul-is-injective-Group : is-torsion-free-Group (group-Ab G) → (k : nonzero-ℤ) → is-injective (integer-power-Group (group-Ab G) (int-nonzero-ℤ k))
+  is-torsion-free-mul-is-injective-Group G-tf k = kernel-is-trivial-is-injective-Group (pr1 G) (pr1 G) (hom-integer-multiple-Ab G (pr1 k)) λ x x-tor → inv (G-tf x k (inv x-tor))
+
+  mul-is-injective-is-torsion-free-Group : ((k : nonzero-ℤ) → is-injective (integer-power-Group (group-Ab G) (int-nonzero-ℤ k))) → is-torsion-free-Group (group-Ab G)
+  mul-is-injective-is-torsion-free-Group is-inj x k x-tor = inv (is-injective-kernel-is-trivial-Group (group-Ab G) (group-Ab G) (hom-integer-multiple-Ab G (pr1 k)) (is-inj k) x (inv x-tor))
+```
