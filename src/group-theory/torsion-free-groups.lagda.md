@@ -166,3 +166,7 @@ module _
               ( Id-Prop (set-Group G) (unit-Group G) x)
               ( λ k p → inv (H x k p))))
 ```
+
+### When `G` is [abelian](group-theory.abelian-groups.md), the property of being torsion-free is equivalent to the [multiply-by-`n` maps](group-theory.multiples-of-elements-abelian-groups.md) being [monomorphisms](group-theory.monomorphisms-groups.md) for nonzero `n`
+
+This remains to be formalized.
