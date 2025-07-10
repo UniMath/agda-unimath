@@ -56,3 +56,10 @@ equivalences, making each of these maps isomorphisms, which are the invertible
 elements in `endomorphism-ring-Ab G`. Now use the universal property of
 localizations with the fact that `ℚ` is the localization of `ℤ` at the positive
 integers to get the desired unique ring map `ℚ → endomorphism-ring-Ab G`.
+
+Note: The language of "rational abelian groups" is nonstandard. The common
+language is of a "rational vector space", or a ℚ-module; because the
+to-be-defined monoidal categories of abelian groups and (left/right) ℚ-modules
+are equivalent, and because the space of ℚ-module structures on an abelian group
+is a proposition, the author prefers the naming convention seen for other
+subspaces of (abelian) groups. Thus, rational abelian groups.
