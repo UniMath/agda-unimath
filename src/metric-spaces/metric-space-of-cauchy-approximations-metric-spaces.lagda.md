@@ -15,7 +15,6 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.dependent-products-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.saturated-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 ```
@@ -51,23 +50,6 @@ module _
 ```
 
 ## Properties
-
-### The metric space of Cauchy approximations in a saturated metric space is saturated
-
-```agda
-module _
-  {l1 l2 : Level} (A : Metric-Space l1 l2) (H : is-saturated-Metric-Space A)
-  where
-
-  is-saturated-metric-space-of-cauchy-approximations-is-saturated-Metric-Space :
-    is-saturated-Metric-Space
-      (metric-space-of-cauchy-approximations-Metric-Space A)
-  is-saturated-metric-space-of-cauchy-approximations-is-saturated-Metric-Space =
-    is-saturated-subspace-is-saturated-Metric-Space
-      ( Π-Metric-Space ℚ⁺ (λ _ → A))
-      ( is-saturated-Π-is-saturated-Metric-Space ℚ⁺ (λ _ → A) (λ _ → H))
-      ( is-cauchy-approximation-prop-Metric-Space A)
-```
 
 ### The action of short maps on Cauchy approximations is short
 
