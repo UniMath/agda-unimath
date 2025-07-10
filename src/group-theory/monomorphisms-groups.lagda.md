@@ -90,29 +90,39 @@ module _
   where
 
   is-mono-is-injective-Group : is-injective (map-hom-Group G H f)
-  is-mono-is-injective-Group {x} {y} p = inv (integer-power-one-Group G x) ∙ htpy-2 one-ℤ ∙ integer-power-one-Group G y where
+  is-mono-is-injective-Group {x} {y} p =
+    inv (integer-power-one-Group G x) ∙ htpy-2 one-ℤ ∙ integer-power-one-Group G y where
     x-ℤ : hom-Group ℤ-Group G
     x-ℤ = hom-element-Group G x
 
     y-ℤ : hom-Group ℤ-Group G
     y-ℤ = hom-element-Group G y
 
-    htpy-1 : htpy-hom-Group ℤ-Group H (comp-hom-Group ℤ-Group G H f x-ℤ) (comp-hom-Group ℤ-Group G H f y-ℤ)
-    htpy-1 = inv-htpy (htpy-hom-element-Group H (map-hom-Group G H f x) (comp-hom-Group ℤ-Group G H f x-ℤ) lem-1) ∙h lem-3 ∙h htpy-hom-element-Group H (map-hom-Group G H f y) (comp-hom-Group ℤ-Group G H f y-ℤ) lem-2 where
-      lem-1 : map-hom-Group ℤ-Group H (comp-hom-Group ℤ-Group G H f (hom-element-Group G x)) one-ℤ ＝ pr1 f x
-      lem-1 = preserves-integer-powers-hom-Group G H f one-ℤ x ∙ integer-power-one-Group H (pr1 f x)
+    htpy-1 :
+      htpy-hom-Group ℤ-Group H (comp-hom-Group ℤ-Group G H f x-ℤ) (comp-hom-Group ℤ-Group G H f y-ℤ)
+    htpy-1 =
+      inv-htpy (htpy-hom-element-Group H (map-hom-Group G H f x) (comp-hom-Group ℤ-Group G H f x-ℤ) lem-1) ∙h lem-3 ∙h htpy-hom-element-Group H (map-hom-Group G H f y) (comp-hom-Group ℤ-Group G H f y-ℤ) lem-2 where
+      lem-1 :
+        map-hom-Group ℤ-Group H (comp-hom-Group ℤ-Group G H f (hom-element-Group G x)) one-ℤ ＝ pr1 f x
+      lem-1 =
+        preserves-integer-powers-hom-Group G H f one-ℤ x ∙ integer-power-one-Group H (pr1 f x)
 
-      lem-2 : map-hom-Group ℤ-Group H (comp-hom-Group ℤ-Group G H f (hom-element-Group G y)) one-ℤ ＝ pr1 f y
-      lem-2 = preserves-integer-powers-hom-Group G H f one-ℤ y ∙ integer-power-one-Group H (pr1 f y)
+      lem-2 :
+        map-hom-Group ℤ-Group H (comp-hom-Group ℤ-Group G H f (hom-element-Group G y)) one-ℤ ＝ pr1 f y
+      lem-2 =
+        preserves-integer-powers-hom-Group G H f one-ℤ y ∙ integer-power-one-Group H (pr1 f y)
 
-      lem-3 : map-hom-element-Group H (pr1 f x) ~ map-hom-element-Group H (pr1 f y)
+      lem-3 :
+        map-hom-element-Group H (pr1 f x) ~ map-hom-element-Group H (pr1 f y)
       lem-3 z = ap (integer-power-Group H z) p
 
-    eq-1 : (comp-hom-Group ℤ-Group G H f x-ℤ) ＝ (comp-hom-Group ℤ-Group G H f y-ℤ)
+    eq-1 :
+      (comp-hom-Group ℤ-Group G H f x-ℤ) ＝ (comp-hom-Group ℤ-Group G H f y-ℤ)
     eq-1 = eq-htpy-hom-Group ℤ-Group H htpy-1
 
     eq-2 : x-ℤ ＝ y-ℤ
-    eq-2 = map-equiv (inv-equiv-ap-emb ((λ g → comp-hom-Group ℤ-Group G H f g) , {!   !})) eq-1
+    eq-2 =
+      map-equiv (inv-equiv-ap-emb ((λ g → comp-hom-Group ℤ-Group G H f g) , {!   !})) eq-1
 
     htpy-2 : htpy-hom-Group ℤ-Group G x-ℤ y-ℤ
     htpy-2 = htpy-eq-hom-Group ℤ-Group G x-ℤ y-ℤ eq-2
@@ -126,14 +136,20 @@ module _
   where
 
   is-injective-is-mono-Group : {l : Level} → is-mono-hom-Group l G H f
-  pr1 (pr1 (is-injective-is-mono-Group K g h)) comp = eq-htpy-hom-Group K G htpy where
+  pr1 (pr1 (is-injective-is-mono-Group K g h)) comp =
+    eq-htpy-hom-Group K G htpy where
     htpy : htpy-hom-Group K G g h
-    htpy x = f-inj (htpy-eq-hom-Group K H (comp-hom-Group K G H f g) (comp-hom-Group K G H f h) comp x)
-  pr2 (pr1 (is-injective-is-mono-Group K g h)) comp = is-set-has-uip (is-set-hom-Group K H) (comp-hom-Group K G H f g) (comp-hom-Group K G H f h) ((ap (comp-hom-Large-Precategory Group-Large-Precategory f) ∘ pr1 (pr1 (is-injective-is-mono-Group K g h))) comp) comp
-  pr1 (pr2 (is-injective-is-mono-Group K g h)) comp = eq-htpy-hom-Group K G htpy where
+    htpy x =
+      f-inj (htpy-eq-hom-Group K H (comp-hom-Group K G H f g) (comp-hom-Group K G H f h) comp x)
+  pr2 (pr1 (is-injective-is-mono-Group K g h)) comp =
+    is-set-has-uip (is-set-hom-Group K H) (comp-hom-Group K G H f g) (comp-hom-Group K G H f h) ((ap (comp-hom-Large-Precategory Group-Large-Precategory f) ∘ pr1 (pr1 (is-injective-is-mono-Group K g h))) comp) comp
+  pr1 (pr2 (is-injective-is-mono-Group K g h)) comp =
+    eq-htpy-hom-Group K G htpy where
     htpy : htpy-hom-Group K G g h
-    htpy x = f-inj (htpy-eq-hom-Group K H (comp-hom-Group K G H f g) (comp-hom-Group K G H f h) comp x)
-  pr2 (pr2 (is-injective-is-mono-Group K g h)) p = is-set-has-uip (is-set-hom-Group K G) g h ((pr1 (pr2 (is-injective-is-mono-Group K g h)) ∘ ap (comp-hom-Large-Precategory Group-Large-Precategory f)) p) p
+    htpy x =
+      f-inj (htpy-eq-hom-Group K H (comp-hom-Group K G H f g) (comp-hom-Group K G H f h) comp x)
+  pr2 (pr2 (is-injective-is-mono-Group K g h)) p =
+    is-set-has-uip (is-set-hom-Group K G) g h ((pr1 (pr2 (is-injective-is-mono-Group K g h)) ∘ ap (comp-hom-Large-Precategory Group-Large-Precategory f)) p) p
 ```
 
 ### `f : G → H` is a monomorphism iff its [kernel](group-theory.kernels-homomorphisms-groups.md) is [trivial](group-theory.trivial-subgroups.md)
@@ -143,9 +159,13 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
-  kernel-is-trivial-is-mono-Group : {l : Level} → is-trivial-Subgroup G (subgroup-kernel-hom-Group G H f) → is-mono-hom-Group l G H f
-  kernel-is-trivial-is-mono-Group f-ker-triv = is-injective-is-mono-Group G H f (kernel-is-trivial-is-injective-Group G H f f-ker-triv)
+  kernel-is-trivial-is-mono-Group :
+    {l : Level} → is-trivial-Subgroup G (subgroup-kernel-hom-Group G H f) → is-mono-hom-Group l G H f
+  kernel-is-trivial-is-mono-Group f-ker-triv =
+    is-injective-is-mono-Group G H f (kernel-is-trivial-is-injective-Group G H f f-ker-triv)
 
-  is-mono-kernel-is-trivial-Group : {l : Level} → is-mono-hom-Group l G H f → is-trivial-Subgroup G (subgroup-kernel-hom-Group G H f)
-  is-mono-kernel-is-trivial-Group f-mono x x-in-ker = is-mono-is-injective-Group G H f f-mono (preserves-unit-hom-Group G H f ∙ x-in-ker)
+  is-mono-kernel-is-trivial-Group :
+    {l : Level} → is-mono-hom-Group l G H f → is-trivial-Subgroup G (subgroup-kernel-hom-Group G H f)
+  is-mono-kernel-is-trivial-Group f-mono x x-in-ker =
+    is-mono-is-injective-Group G H f f-mono (preserves-unit-hom-Group G H f ∙ x-in-ker)
 ```

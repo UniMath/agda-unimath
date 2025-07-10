@@ -70,10 +70,14 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  is-iso-is-invertible-endomorphism-ring-Ab : (f : hom-Ab A A) → is-iso-Ab A A f → is-invertible-element-Ring (endomorphism-ring-Ab A) f
-  pr1 (is-iso-is-invertible-endomorphism-ring-Ab f f-iso) = hom-inv-is-iso-Ab A A f f-iso
-  pr1 (pr2 (is-iso-is-invertible-endomorphism-ring-Ab f f-iso)) = pr1 (pr2 f-iso)
-  pr2 (pr2 (is-iso-is-invertible-endomorphism-ring-Ab f f-iso)) = pr2 (pr2 f-iso)
+  is-iso-is-invertible-endomorphism-ring-Ab :
+    (f : hom-Ab A A) → is-iso-Ab A A f → is-invertible-element-Ring (endomorphism-ring-Ab A) f
+  pr1 (is-iso-is-invertible-endomorphism-ring-Ab f f-iso) =
+    hom-inv-is-iso-Ab A A f f-iso
+  pr1 (pr2 (is-iso-is-invertible-endomorphism-ring-Ab f f-iso)) =
+    pr1 (pr2 f-iso)
+  pr2 (pr2 (is-iso-is-invertible-endomorphism-ring-Ab f f-iso)) =
+    pr2 (pr2 f-iso)
 ```
 
 ### Units in the endomorphism ring are isomorphisms `A ≃ A`
@@ -83,7 +87,10 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  is-invertible-is-iso-endomorphism-ring-Ab : (f : hom-Ab A A) → is-invertible-element-Ring (endomorphism-ring-Ab A) f → is-iso-Ab A A f
-  pr1 (is-invertible-is-iso-endomorphism-ring-Ab f (f-inv , f-inv-is-inv)) = f-inv
-  pr2 (is-invertible-is-iso-endomorphism-ring-Ab f (f-inv , f-inv-is-inv)) = f-inv-is-inv
+  is-invertible-is-iso-endomorphism-ring-Ab :
+    (f : hom-Ab A A) → is-invertible-element-Ring (endomorphism-ring-Ab A) f → is-iso-Ab A A f
+  pr1 (is-invertible-is-iso-endomorphism-ring-Ab f (f-inv , f-inv-is-inv)) =
+    f-inv
+  pr2 (is-invertible-is-iso-endomorphism-ring-Ab f (f-inv , f-inv-is-inv)) =
+    f-inv-is-inv
 ```

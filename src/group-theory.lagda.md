@@ -58,6 +58,7 @@ open import group-theory.dependent-products-monoids public
 open import group-theory.dependent-products-semigroups public
 open import group-theory.dihedral-group-construction public
 open import group-theory.dihedral-groups public
+open import group-theory.divisible-groups public
 open import group-theory.e8-lattice public
 open import group-theory.elements-of-finite-order-groups public
 open import group-theory.embeddings-abelian-groups public
@@ -162,6 +163,7 @@ open import group-theory.pullbacks-subsemigroups public
 open import group-theory.quotient-groups public
 open import group-theory.quotient-groups-concrete-groups public
 open import group-theory.quotients-abelian-groups public
+open import group-theory.rational-abelian-groups public
 open import group-theory.rational-commutative-monoids public
 open import group-theory.representations-monoids-precategories public
 open import group-theory.saturated-congruence-relations-commutative-monoids public

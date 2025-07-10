@@ -80,13 +80,17 @@ module _
   {l : Level}
   where
 
-  is-rational-has-ℚ-module-structure : (A : Ab l) → is-rational-Ab A → left-module-Ring l ring-ℚ
+  is-rational-has-ℚ-module-structure :
+    (A : Ab l) → is-rational-Ab A → left-module-Ring l ring-ℚ
   pr1 (is-rational-has-ℚ-module-structure A A-rat) = A
   pr2 (is-rational-has-ℚ-module-structure A A-rat) = {!   !}
 
-  has-ℚ-module-structure-is-rational : (M : left-module-Ring l ring-ℚ) → is-rational-Ab (ab-left-module-Ring ring-ℚ M)
+  has-ℚ-module-structure-is-rational :
+    (M : left-module-Ring l ring-ℚ) → is-rational-Ab (ab-left-module-Ring ring-ℚ M)
   pr1 (has-ℚ-module-structure-is-rational M) = {!   !}
-  pr2 (has-ℚ-module-structure-is-rational M) = mul-is-injective-is-torsion-free-Group (pr1 M) lem where
-    lem : (k : nonzero-ℤ) → is-injective (integer-power-Group (group-Ab (pr1 M)) (int-nonzero-ℤ k))
+  pr2 (has-ℚ-module-structure-is-rational M) =
+    mul-is-injective-is-torsion-free-Group (pr1 M) lem where
+    lem :
+      (k : nonzero-ℤ) → is-injective (integer-power-Group (group-Ab (pr1 M)) (int-nonzero-ℤ k))
     lem k = {!   !}
 ```

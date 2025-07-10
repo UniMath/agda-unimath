@@ -33,12 +33,10 @@ open import foundation.reflecting-maps-equivalence-relations
 open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.subtype-identity-principle
+open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universe-levels
-
-open import foundation-core.equality-dependent-pair-types
 
 open import set-theory.countable-sets
 ```

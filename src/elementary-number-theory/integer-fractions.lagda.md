@@ -306,6 +306,7 @@ is-countable-fraction-ℤ =
 ### `n / n` is similar to 1
 
 ```agda
-is-sim-one-fraction-ℤ : (n : ℤ⁺) → sim-fraction-ℤ ((int-positive-ℤ n) , n) one-fraction-ℤ
+is-sim-one-fraction-ℤ :
+  (n : ℤ⁺) → sim-fraction-ℤ ((int-positive-ℤ n) , n) one-fraction-ℤ
 is-sim-one-fraction-ℤ (n , n≠0) = right-unit-law-mul-ℤ n ∙ left-unit-law-mul-ℤ n
 ```

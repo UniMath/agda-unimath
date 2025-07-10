@@ -184,9 +184,13 @@ module _
   {l : Level} (G : Ab l)
   where
 
-  is-torsion-free-mul-is-injective-Group : is-torsion-free-Group (group-Ab G) → (k : nonzero-ℤ) → is-injective (integer-power-Group (group-Ab G) (int-nonzero-ℤ k))
-  is-torsion-free-mul-is-injective-Group G-tf k = kernel-is-trivial-is-injective-Group (pr1 G) (pr1 G) (hom-integer-multiple-Ab G (pr1 k)) λ x x-tor → inv (G-tf x k (inv x-tor))
+  is-torsion-free-mul-is-injective-Group :
+    is-torsion-free-Group (group-Ab G) → (k : nonzero-ℤ) → is-injective (integer-power-Group (group-Ab G) (int-nonzero-ℤ k))
+  is-torsion-free-mul-is-injective-Group G-tf k =
+    kernel-is-trivial-is-injective-Group (pr1 G) (pr1 G) (hom-integer-multiple-Ab G (pr1 k)) λ x x-tor → inv (G-tf x k (inv x-tor))
 
-  mul-is-injective-is-torsion-free-Group : ((k : nonzero-ℤ) → is-injective (integer-power-Group (group-Ab G) (int-nonzero-ℤ k))) → is-torsion-free-Group (group-Ab G)
-  mul-is-injective-is-torsion-free-Group is-inj x k x-tor = inv (is-injective-kernel-is-trivial-Group (group-Ab G) (group-Ab G) (hom-integer-multiple-Ab G (pr1 k)) (is-inj k) x (inv x-tor))
+  mul-is-injective-is-torsion-free-Group :
+    ((k : nonzero-ℤ) → is-injective (integer-power-Group (group-Ab G) (int-nonzero-ℤ k))) → is-torsion-free-Group (group-Ab G)
+  mul-is-injective-is-torsion-free-Group is-inj x k x-tor =
+    inv (is-injective-kernel-is-trivial-Group (group-Ab G) (group-Ab G) (hom-integer-multiple-Ab G (pr1 k)) (is-inj k) x (inv x-tor))
 ```
