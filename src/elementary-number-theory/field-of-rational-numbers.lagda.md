@@ -104,21 +104,28 @@ is-discrete-field-ℚ = is-division-ring-ℚ
 
 ```agda
 inverts-positive-integers-ℚ :
-  inverts-subset-hom-Ring ℤ-Ring ring-ℚ subtype-positive-ℤ (initial-hom-Ring ring-ℚ)
+  inverts-subset-hom-Ring ℤ-Ring ring-ℚ subtype-positive-ℤ
+  ( initial-hom-Ring ring-ℚ)
 inverts-positive-integers-ℚ (inr (inr x)) star =
-  is-invertible-element-ring-is-nonzero-ℚ (pr1 (pr1 (initial-hom-Ring ring-ℚ)) (inr (inr x))) lem where
+  is-invertible-element-ring-is-nonzero-ℚ (pr1 (pr1 (initial-hom-Ring ring-ℚ))
+  ( inr (inr x))) lem where
   lem : is-nonzero-ℚ (pr1 (pr1 (initial-hom-Ring ring-ℚ)) (inr (inr x)))
   lem =
-    is-nonzero-is-nonzero-numerator-ℚ (pr1 (pr1 (initial-hom-Ring ring-ℚ)) (inr (inr x))) {!   !}
+    is-nonzero-is-nonzero-numerator-ℚ (pr1 (pr1 (initial-hom-Ring ring-ℚ))
+    ( inr (inr x))) {!   !}
 
 inverts-positive-integers-hom-ℚ :
-  {l : Level} (R : Ring l) → inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ (initial-hom-Ring R) → hom-Ring ring-ℚ R
+  {l : Level} (R : Ring l) → inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ
+  ( initial-hom-Ring R) → hom-Ring ring-ℚ R
 pr1 (pr1 (inverts-positive-integers-hom-ℚ R R-inv)) ((x , y , y>0) , _) =
-  mul-Ring R (map-hom-Ring ℤ-Ring R (initial-hom-Ring R) x) (inv-is-invertible-element-Ring R (R-inv y y>0))
-pr2 (pr1 (inverts-positive-integers-hom-ℚ R R-inv)) {(x , y , y>0) , xy-red} {(z , w , w>0) , zw-red} =
-  {!   !}
-pr1 (pr2 (inverts-positive-integers-hom-ℚ R R-inv)) {(x , y , y>0) , xy-red} {(z , w , w>0) , zw-red} =
-  {!   !}
+  mul-Ring R (map-hom-Ring ℤ-Ring R (initial-hom-Ring R) x)
+  ( inv-is-invertible-element-Ring R (R-inv y y>0))
+pr2 (pr1 (inverts-positive-integers-hom-ℚ R R-inv))
+  {(x , y , y>0) , xy-red} {(z , w , w>0) , zw-red} =
+    {!   !}
+pr1 (pr2 (inverts-positive-integers-hom-ℚ R R-inv))
+  {(x , y , y>0) , xy-red} {(z , w , w>0) , zw-red} =
+    {!   !}
 pr2 (pr2 (inverts-positive-integers-hom-ℚ R R-inv)) = pr1
   (pr2
     (R-inv
@@ -131,24 +138,30 @@ pr2 (pr2 (inverts-positive-integers-hom-ℚ R R-inv)) = pr1
     star))
 
 universal-property-ℚ-ℤ :
-  (l : Level) → universal-property-localization-subset-Ring l ℤ-Ring ring-ℚ subtype-positive-ℤ (initial-hom-Ring ring-ℚ) inverts-positive-integers-ℚ
+  (l : Level) → universal-property-localization-subset-Ring l ℤ-Ring ring-ℚ
+  subtype-positive-ℤ (initial-hom-Ring ring-ℚ) inverts-positive-integers-ℚ
 pr1 (pr1 (universal-property-ℚ-ℤ l R)) (f , f-inv) =
   inverts-positive-integers-hom-ℚ R lem where
   lem : inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ (initial-hom-Ring R)
   lem =
-    tr (inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ) (inv (contraction-initial-hom-Ring R f)) f-inv
+    tr (inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ)
+    ( inv (contraction-initial-hom-Ring R f)) f-inv
 pr2 (pr1 (universal-property-ℚ-ℤ l R)) (f , f-inv) =
-  eq-type-subtype (inverts-subset-hom-ring-Prop ℤ-Ring R subtype-positive-ℤ) (inv (contraction-initial-hom-Ring R (pr1
+  eq-type-subtype (inverts-subset-hom-ring-Prop ℤ-Ring R subtype-positive-ℤ)
+  ( inv (contraction-initial-hom-Ring R (pr1
   ((precomp-universal-property-localization-subset-Ring ℤ-Ring ring-ℚ
     R subtype-positive-ℤ (initial-hom-Ring ring-ℚ)
     inverts-positive-integers-ℚ
     ∘ pr1 (pr1 (universal-property-ℚ-ℤ l R)))
-    (f , f-inv))))) ∙ eq-type-subtype (inverts-subset-hom-ring-Prop ℤ-Ring R subtype-positive-ℤ) (contraction-initial-hom-Ring R f)
+    (f , f-inv))))) ∙ eq-type-subtype
+    ( inverts-subset-hom-ring-Prop ℤ-Ring R subtype-positive-ℤ)
+    ( contraction-initial-hom-Ring R f)
 pr1 (pr2 (universal-property-ℚ-ℤ l R)) (f , f-inv) =
   inverts-positive-integers-hom-ℚ R lem where
   lem : inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ (initial-hom-Ring R)
   lem =
-    tr (inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ) (inv (contraction-initial-hom-Ring R f)) f-inv
+    tr (inverts-subset-hom-Ring ℤ-Ring R subtype-positive-ℤ)
+    ( inv (contraction-initial-hom-Ring R f)) f-inv
 pr2 (pr2 (universal-property-ℚ-ℤ l R)) f =
   eq-htpy-hom-Ring ring-ℚ R ((pr1 (pr2 (universal-property-ℚ-ℤ l R)) ∘
     precomp-universal-property-localization-subset-Ring ℤ-Ring ring-ℚ R
@@ -156,6 +169,9 @@ pr2 (pr2 (universal-property-ℚ-ℤ l R)) f =
     inverts-positive-integers-ℚ)
     f) f htpy where
   htpy :
-    htpy-hom-Ring ring-ℚ R ((pr1 (pr2 (universal-property-ℚ-ℤ l R)) ∘ precomp-universal-property-localization-subset-Ring ℤ-Ring ring-ℚ R subtype-positive-ℤ (initial-hom-Ring ring-ℚ) inverts-positive-integers-ℚ) f) f
+    htpy-hom-Ring ring-ℚ R ((pr1 (pr2 (universal-property-ℚ-ℤ l R)) ∘
+    precomp-universal-property-localization-subset-Ring ℤ-Ring ring-ℚ R
+    subtype-positive-ℤ
+    (initial-hom-Ring ring-ℚ) inverts-positive-integers-ℚ) f) f
   htpy ((x , y , y>0) , _) = {!   !}
 ```

@@ -141,18 +141,23 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H) (f-ker-triv : is-trivial-Subgroup G (subgroup-kernel-hom-Group G H f))
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  ( f-ker-triv : is-trivial-Subgroup G (subgroup-kernel-hom-Group G H f))
   where
 
   kernel-is-trivial-is-injective-Group : is-injective (map-hom-Group G H f)
   kernel-is-trivial-is-injective-Group {x} {y} p = inv lem-3 where
     lem-1 : is-in-kernel-hom-Group G H f (mul-Group G (inv-Group G y) x)
     lem-1 = equational-reasoning
-      unit-Group H ＝ mul-Group H (inv-Group H (map-hom-Group G H f y)) (map-hom-Group G H f y)
+      unit-Group H ＝ mul-Group H (inv-Group H (map-hom-Group G H f y))
+      ( map-hom-Group G H f y)
         by inv (left-inverse-law-mul-Group H (pr1 f y))
-      ＝ mul-Group H (map-hom-Group G H f (inv-Group G y)) (map-hom-Group G H f y)
-        by ap (λ z → mul-Group H z (pr1 f y)) (inv (preserves-inv-hom-Group G H f))
-      ＝ mul-Group H (map-hom-Group G H f (inv-Group G y)) (map-hom-Group G H f x)
+      ＝ mul-Group H (map-hom-Group G H f (inv-Group G y))
+      ( map-hom-Group G H f y)
+        by ap (λ z → mul-Group H z (pr1 f y))
+        ( inv (preserves-inv-hom-Group G H f))
+      ＝ mul-Group H (map-hom-Group G H f (inv-Group G y))
+      ( map-hom-Group G H f x)
         by ap (mul-Group H (map-hom-Group G H f (inv-Group G y))) (inv p)
       ＝ map-hom-Group G H f (mul-Group G (inv-Group G y) x)
         by inv (preserves-mul-hom-Group G H f)
@@ -178,7 +183,8 @@ module _
   where
 
   is-injective-kernel-is-trivial-Group :
-    is-injective (map-hom-Group G H f) → is-trivial-Subgroup G (subgroup-kernel-hom-Group G H f)
+    is-injective (map-hom-Group G H f) → is-trivial-Subgroup G
+    ( subgroup-kernel-hom-Group G H f)
   is-injective-kernel-is-trivial-Group f-inj x fx-unit = f-inj lem where
     lem : pr1 f (unit-Group G) ＝ pr1 f x
     lem = preserves-unit-hom-Group G H f ∙ fx-unit

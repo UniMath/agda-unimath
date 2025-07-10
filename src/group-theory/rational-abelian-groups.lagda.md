@@ -86,11 +86,13 @@ module _
   pr2 (is-rational-has-ℚ-module-structure A A-rat) = {!   !}
 
   has-ℚ-module-structure-is-rational :
-    (M : left-module-Ring l ring-ℚ) → is-rational-Ab (ab-left-module-Ring ring-ℚ M)
+    (M : left-module-Ring l ring-ℚ) →
+    is-rational-Ab (ab-left-module-Ring ring-ℚ M)
   pr1 (has-ℚ-module-structure-is-rational M) = {!   !}
   pr2 (has-ℚ-module-structure-is-rational M) =
     mul-is-injective-is-torsion-free-Group (pr1 M) lem where
     lem :
-      (k : nonzero-ℤ) → is-injective (integer-power-Group (group-Ab (pr1 M)) (int-nonzero-ℤ k))
+      (k : nonzero-ℤ) → is-injective
+        ( integer-power-Group (group-Ab (pr1 M)) (int-nonzero-ℤ k))
     lem k = {!   !}
 ```
