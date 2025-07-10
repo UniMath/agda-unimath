@@ -117,6 +117,11 @@ module _
         ( structure-Metric-Space A)
         ( structure-Metric-Space B))) ∘e
     ( equiv-pair-eq-Σ A B)
+
+  eq-isometric-eq-Metric-Space :
+    isometric-eq-Metric-Space A B → A ＝ B
+  eq-isometric-eq-Metric-Space =
+    map-inv-equiv equiv-eq-isometric-eq-Metric-Space
 ```
 
 ### Isometric equality is torsorial
