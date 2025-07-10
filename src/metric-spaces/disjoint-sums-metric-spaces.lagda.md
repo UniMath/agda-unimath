@@ -48,19 +48,19 @@ open import metric-spaces.triangular-rational-neighborhoods
 
 The
 {{#concept "disjoint sum" Disambiguation="of a type family of metric spaces" Agda=Σ-Metric-Space}}
-of a type family `P` of [metric spaces](metric-spaces.metri-spaces.md) over a
+of a type family `P` of [metric spaces](metric-spaces.metric-spaces.md) over a
 metric space `A` is the metric space with underlying type `Σ A P` and the
 [neighborhood relation](metric-spaces.rational-neighborhoods.md) defined as:
 
 `(x , Px)` is `d`-neighbor of `(y , Py)` if and only if `x` is
-[equal](foundation.identity-types) to `y` and the
+[equal](foundation.identity-types.md) to `y` and the
 [transport](foundation.transport-along-identifications.md) of `Px` along this
 identification is a `d`-neighbor of `y` in `P y`.
 
 The [projection](foundation.dependent-pair-types.md) on the first component is
 [locally constant](metric-spaces.locally-constant-functions-metric-spaces.md);
 for any `x : A` the embedding `P x → Σ A P` is an
-[isometry](isometries-metric-spaces.md).
+[isometry](metric-spaces.isometries-metric-spaces.md).
 
 ## Definitions
 
