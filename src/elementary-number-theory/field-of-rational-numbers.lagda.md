@@ -94,8 +94,8 @@ is-discrete-field-ℚ = is-division-ring-ℚ
 ```agda
 inverts-positive-integers-ℚ : inverts-subset-hom-Ring ℤ-Ring ring-ℚ subtype-positive-ℤ (initial-hom-Ring ring-ℚ)
 pr1 (inverts-positive-integers-ℚ (inr (inr x)) star) = inclusion-group-of-units-Ring ring-ℚ (rational-ℕ (succ-ℕ x) , is-invertible-element-ring-is-nonzero-ℚ (rational-ℕ (succ-ℕ x)) λ ())
-pr1 (pr2 (inverts-positive-integers-ℚ (inr (inr x)) star)) = ap (inclusion-group-of-units-Ring ring-ℚ) (right-inverse-law-mul-ℚˣ ({! rational-ℕ  !} , {!   !})) ∙ {!   !}
-pr2 (pr2 (inverts-positive-integers-ℚ (inr (inr x)) star)) = {!   !} ∙ {!   !}
+pr1 (pr2 (inverts-positive-integers-ℚ (inr (inr x)) star)) = ap (inclusion-group-of-units-Ring ring-ℚ) (right-inverse-law-mul-ℚˣ {!   !})
+pr2 (pr2 (inverts-positive-integers-ℚ (inr (inr x)) star)) = ap (inclusion-group-of-units-Ring ring-ℚ) (left-inverse-law-mul-ℚˣ {!   !})
 
 universal-property-ℚ-ℤ : (l : Level) → universal-property-localization-subset-Ring l ℤ-Ring ring-ℚ subtype-positive-ℤ (initial-hom-Ring ring-ℚ) inverts-positive-integers-ℚ
 universal-property-ℚ-ℤ l R = {!   !}
