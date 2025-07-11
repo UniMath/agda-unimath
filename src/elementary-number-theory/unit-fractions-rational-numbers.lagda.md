@@ -12,12 +12,15 @@ module elementary-number-theory.unit-fractions-rational-numbers where
 open import elementary-number-theory.archimedean-property-positive-rational-numbers
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.positive-integers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-integers
@@ -61,6 +64,20 @@ reciprocal-rational-succ-ℕ n =
   reciprocal-rational-ℕ⁺ (succ-nonzero-ℕ' n)
 ```
 
+### Reciprocals of positive integers
+
+```agda
+positive-reciprocal-rational-ℤ⁺ : ℤ⁺ → ℚ⁺
+positive-reciprocal-rational-ℤ⁺ k =
+  positive-reciprocal-rational-ℕ⁺ (positive-nat-ℤ⁺ k)
+
+reciprocal-rational-ℤ⁺ : ℤ⁺ → ℚ
+reciprocal-rational-ℤ⁺ k =
+  reciprocal-rational-ℕ⁺ (positive-nat-ℤ⁺ k)
+```
+
+## Properties
+
 ### If `m ≤ n`, the reciprocal of `n` is less than or equal to the reciprocal of `n`
 
 ```agda
@@ -92,8 +109,6 @@ abstract
       ( left-unit-law-mul-ℤ (int-ℕ n))
       ( le-natural-le-ℤ m n m<n)
 ```
-
-## Properties
 
 ### For every positive rational number, there is a smaller unit fraction
 
@@ -154,7 +169,7 @@ module _
   right-inverse-law-reciprocal-rational-ℕ⁺ :
     mul-ℚ
       ( rational-ℚ⁺ (positive-rational-ℕ⁺ n))
-      (reciprocal-rational-ℕ⁺ n) ＝
+      ( reciprocal-rational-ℕ⁺ n) ＝
     one-ℚ
   right-inverse-law-reciprocal-rational-ℕ⁺ =
     ap rational-ℚ⁺ right-inverse-law-positive-reciprocal-rational-ℕ⁺
