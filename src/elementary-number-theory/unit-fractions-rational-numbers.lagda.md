@@ -27,6 +27,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
 
 open import group-theory.groups
 ```
@@ -117,4 +118,44 @@ smaller-reciprocal-ℚ⁺ q⁺@(q , _) =
           ( rational-ℚ⁺ (positive-rational-ℕ⁺ n⁺ *ℚ⁺ q⁺))
           ( 1<nq)))
     ( bound-archimedean-property-ℚ⁺ q⁺ one-ℚ⁺)
+```
+
+### The reciprocal of `n` is a multiplicative inverse of `n`
+
+```agda
+module _
+  (n : ℕ⁺)
+  where
+
+  left-inverse-law-positive-reciprocal-rational-ℕ⁺ :
+    mul-ℚ⁺
+      ( positive-reciprocal-rational-ℕ⁺ n)
+      ( positive-rational-ℕ⁺ n) ＝
+    one-ℚ⁺
+  left-inverse-law-positive-reciprocal-rational-ℕ⁺ =
+    left-inverse-law-mul-ℚ⁺ (positive-rational-ℕ⁺ n)
+
+  left-inverse-law-reciprocal-rational-ℕ⁺ :
+    mul-ℚ
+      ( reciprocal-rational-ℕ⁺ n)
+      ( rational-ℚ⁺ (positive-rational-ℕ⁺ n)) ＝
+    one-ℚ
+  left-inverse-law-reciprocal-rational-ℕ⁺ =
+    ap rational-ℚ⁺ left-inverse-law-positive-reciprocal-rational-ℕ⁺
+
+  right-inverse-law-positive-reciprocal-rational-ℕ⁺ :
+    mul-ℚ⁺
+      ( positive-rational-ℕ⁺ n)
+      ( positive-reciprocal-rational-ℕ⁺ n) ＝
+    one-ℚ⁺
+  right-inverse-law-positive-reciprocal-rational-ℕ⁺ =
+    right-inverse-law-mul-ℚ⁺ (positive-rational-ℕ⁺ n)
+
+  right-inverse-law-reciprocal-rational-ℕ⁺ :
+    mul-ℚ
+      ( rational-ℚ⁺ (positive-rational-ℕ⁺ n))
+      (reciprocal-rational-ℕ⁺ n) ＝
+    one-ℚ
+  right-inverse-law-reciprocal-rational-ℕ⁺ =
+    ap rational-ℚ⁺ right-inverse-law-positive-reciprocal-rational-ℕ⁺
 ```
