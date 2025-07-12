@@ -14,14 +14,19 @@ open import commutative-algebra.commutative-rings
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.ring-of-integers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import group-theory.semigroups
 
+open import ring-theory.homomorphisms-rings
 open import ring-theory.rings
 ```
 
@@ -63,4 +68,22 @@ pr2 ring-ℚ = has-mul-abelian-group-add-ℚ
 commutative-ring-ℚ : Commutative-Ring lzero
 pr1 commutative-ring-ℚ = ring-ℚ
 pr2 commutative-ring-ℚ = commutative-mul-ℚ
+```
+
+### The inclusion of integers in the rationals is the initial ring homomorphism
+
+```agda
+hom-ring-rational-ℤ : hom-Ring ℤ-Ring ring-ℚ
+hom-ring-rational-ℤ =
+  ( hom-add-rational-ℤ) ,
+  ( λ {x y} → inv (mul-rational-ℤ x y)) ,
+  ( refl)
+
+htpy-map-initial-hom-ring-rational-ℤ : map-initial-hom-Ring ring-ℚ ~ rational-ℤ
+htpy-map-initial-hom-ring-rational-ℤ =
+  htpy-initial-hom-Ring ring-ℚ hom-ring-rational-ℤ
+
+eq-initial-hom-ring-rational-ℤ : initial-hom-Ring ring-ℚ ＝ hom-ring-rational-ℤ
+eq-initial-hom-ring-rational-ℤ =
+  contraction-initial-hom-Ring ring-ℚ hom-ring-rational-ℤ
 ```

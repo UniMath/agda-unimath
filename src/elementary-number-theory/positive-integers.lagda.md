@@ -98,6 +98,9 @@ module _
 ```agda
 one-positive-ℤ : positive-ℤ
 one-positive-ℤ = (one-ℤ , star)
+
+one-ℤ⁺ : ℤ⁺
+one-ℤ⁺ = one-positive-ℤ
 ```
 
 ## Properties

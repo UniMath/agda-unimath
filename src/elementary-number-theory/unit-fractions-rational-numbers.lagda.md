@@ -14,8 +14,8 @@ open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-integer-fractions
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
