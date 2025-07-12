@@ -42,7 +42,7 @@ A {{#concept "rational ring" Agda=Rational-Ring}} is a
 
 The
 [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md)
-is the [initial](ring-theory.inital-rings.md) rational ring.
+is the [initial](ring-theory.initial-rings.md) rational ring.
 
 ## Definitions
 
