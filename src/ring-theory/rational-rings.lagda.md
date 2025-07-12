@@ -156,7 +156,7 @@ module _
 
 ## Properties
 
-### ℚ is a rational ring
+### `ℚ` is a rational ring
 
 ```agda
 rational-ring-ℚ : Rational-Ring lzero
