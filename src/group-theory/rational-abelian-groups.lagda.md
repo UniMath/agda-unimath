@@ -7,13 +7,16 @@ module group-theory.rational-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-integers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.ring-of-rational-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 
@@ -21,7 +24,10 @@ open import group-theory.abelian-groups
 open import group-theory.divisible-groups
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.groups
+open import group-theory.homomorphisms-abelian-groups
 open import group-theory.integer-powers-of-elements-groups
+open import group-theory.isomorphisms-abelian-groups
+open import group-theory.multiples-of-elements-abelian-groups
 open import group-theory.torsion-free-groups
 open import group-theory.trivial-groups
 open import group-theory.trivial-subgroups
@@ -74,6 +80,20 @@ to-be-defined monoidal categories of abelian groups and (left/right) ℚ-modules
 are equivalent, and because the space of ℚ-module structures on an abelian group
 is a proposition, the author prefers the naming convention seen for other
 subspaces of (abelian) groups. Thus, rational abelian groups.
+
+### The multiply-by-`n` maps are isomorphisms for `A` rational abelian
+
+```agda
+module _
+  {l : Level} (A : Ab l) (A-rat : is-rational-Ab A)
+  where
+
+  multiple-is-equiv-rational-Ab : (n : ℕ⁺) → is-equiv (multiple-Ab A (nat-nonzero-ℕ n))
+  multiple-is-equiv-rational-Ab (n , n>0) = {!   !}
+
+  multiple-is-iso-rational-Ab : (n : ℕ⁺) → is-iso-Ab A A (multiple-hom-Ab A (nat-nonzero-ℕ n))
+  multiple-is-iso-rational-Ab (n , n>0) = is-iso-is-equiv-hom-Ab A A (multiple-hom-Ab A n) {!   !}
+```
 
 ```agda
 module _

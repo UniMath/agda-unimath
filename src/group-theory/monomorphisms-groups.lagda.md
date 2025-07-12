@@ -1,6 +1,8 @@
 # Monomorphisms in the category of groups
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module group-theory.monomorphisms-groups where
 ```
 
