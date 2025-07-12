@@ -221,7 +221,7 @@ module _
       ( multiplicative-monoid-Ring R)
 ```
 
-### Any invertible element of a monoid has a contractible type of right inverses
+### Any invertible element of a ring has a contractible type of right inverses
 
 ```agda
 module _
@@ -236,7 +236,7 @@ module _
       ( multiplicative-monoid-Ring R)
 ```
 
-### Any invertible element of a monoid has a contractible type of left inverses
+### Any invertible element of a ring has a contractible type of left inverses
 
 ```agda
 module _
@@ -251,7 +251,7 @@ module _
       ( multiplicative-monoid-Ring R)
 ```
 
-### The unit of a monoid is invertible
+### The unit of a ring is invertible
 
 ```agda
 module _
