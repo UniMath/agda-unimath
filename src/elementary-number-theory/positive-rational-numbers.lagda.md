@@ -173,6 +173,9 @@ abstract
 positive-rational-positive-ℤ : positive-ℤ → ℚ⁺
 positive-rational-positive-ℤ (z , pos-z) = rational-ℤ z , pos-z
 
+positive-rational-ℤ⁺ : ℤ⁺ → ℚ⁺
+positive-rational-ℤ⁺ = positive-rational-positive-ℤ
+
 one-ℚ⁺ : ℚ⁺
 one-ℚ⁺ = (one-ℚ , is-positive-int-positive-ℤ one-positive-ℤ)
 ```
