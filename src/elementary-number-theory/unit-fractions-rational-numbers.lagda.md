@@ -225,3 +225,41 @@ module _
   right-inverse-law-reciprocal-rational-ℤ⁺ =
     ap rational-ℚ⁺ right-inverse-law-positive-reciprocal-rational-ℤ⁺
 ```
+
+### Any rational number is the product of its numerator amd the reciprocal of its denominator
+
+```agda
+module _
+  (x : ℚ)
+  where
+
+  eq-mul-numerator-reciprocal-denominator-ℚ :
+    mul-ℚ
+      ( rational-ℤ (numerator-ℚ x))
+      ( reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x)) ＝
+    x
+  eq-mul-numerator-reciprocal-denominator-ℚ =
+    ( ap
+      ( mul-ℚ' (reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x)))
+      ( inv (eq-numerator-mul-denominator-ℚ x))) ∙
+    ( associative-mul-ℚ
+      ( x)
+      ( rational-ℤ (denominator-ℚ x))
+      ( reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x))) ∙
+    ( ap
+      ( mul-ℚ x)
+      ( right-inverse-law-reciprocal-rational-ℤ⁺
+        ( positive-denominator-ℚ x))) ∙
+    ( right-unit-law-mul-ℚ x)
+
+  eq-mul-numerator-reciprocal-denominator-ℚ' :
+    mul-ℚ
+      ( reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x))
+      ( rational-ℤ (numerator-ℚ x)) ＝
+    x
+  eq-mul-numerator-reciprocal-denominator-ℚ' =
+    ( commutative-mul-ℚ
+      ( reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x))
+      ( rational-ℤ (numerator-ℚ x))) ∙
+    ( eq-mul-numerator-reciprocal-denominator-ℚ)
+```
