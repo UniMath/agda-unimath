@@ -49,7 +49,7 @@ A {{#concept "rational ring" Agda=Rational-Ring}} is a
 [ring](ring-theory.rings.md) where the
 [positive integers](elementary-number-theory.positive-integers.md) are
 [invertible](ring-theory.invertible-elements-rings.md) (modulo the
-[initial ring morphism](elementary-number-theory.ring-of-integers.md)).
+[initial ring homomorphism](elementary-number-theory.ring-of-integers.md)).
 
 The
 [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md)
@@ -197,7 +197,7 @@ module _
       ( R , is-rational-has-rational-hom-Ring f)
 ```
 
-### For any ring morphism `f : ℚ → R` and `k : ℤ`, `f k ＝ ι k` where `ι : ℤ → R` is the initial ring homomorphism in `R`
+### For any ring homomorphism `f : ℚ → R` and `k : ℤ`, `f k ＝ ι k` where `ι : ℤ → R` is the initial ring homomorphism in `R`
 
 ```agda
 module _
@@ -232,7 +232,7 @@ module _
     eq-map-integer-rational-hom-Ring (ring-Rational-Ring R)
 ```
 
-### For any ring morphism `f : ℚ → R` and `k : ℤ⁺`, `f (1/k) ＝ (ι k)⁻¹` where `ι : ℤ → R` is the initial ring homomorphism in `R`
+### For any ring homomorphism `f : ℚ → R` and `k : ℤ⁺`, `f (1/k) ＝ (ι k)⁻¹` where `ι : ℤ → R` is the initial ring homomorphism in `R`
 
 ```agda
 module _
@@ -314,7 +314,7 @@ module _
       ( f)
 ```
 
-### For any ring morphism `f : ℚ → R` and `p/q : ℚ`, `f (p/q) ＝ (ι p)(ι q)⁻¹` where `ι : ℤ → R` is the initial ring homomorphism in `R`
+### For any ring homomorphism `f : ℚ → R` and `p/q : ℚ`, `f (p/q) ＝ (ι p)(ι q)⁻¹` where `ι : ℤ → R` is the initial ring homomorphism in `R`
 
 ```agda
 module _
