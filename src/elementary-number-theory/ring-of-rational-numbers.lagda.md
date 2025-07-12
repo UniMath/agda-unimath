@@ -14,8 +14,10 @@ open import commutative-algebra.commutative-rings
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
+open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.ring-of-integers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -27,6 +29,7 @@ open import foundation.universe-levels
 open import group-theory.semigroups
 
 open import ring-theory.homomorphisms-rings
+open import ring-theory.localizations-rings
 open import ring-theory.rings
 ```
 
@@ -86,4 +89,41 @@ htpy-map-initial-hom-ring-rational-ℤ =
 eq-initial-hom-ring-rational-ℤ : initial-hom-Ring ring-ℚ ＝ hom-ring-rational-ℤ
 eq-initial-hom-ring-rational-ℤ =
   contraction-initial-hom-Ring ring-ℚ hom-ring-rational-ℤ
+```
+
+### The positive integers are invertible in ℚ
+
+```agda
+inverts-positive-integers-rational-ℤ :
+  inverts-subset-hom-Ring
+    ( ℤ-Ring)
+    ( ring-ℚ)
+    ( subtype-positive-ℤ)
+    ( hom-ring-rational-ℤ)
+inverts-positive-integers-rational-ℤ k k>0 =
+  ( reciprocal-rational-ℤ⁺ (k , k>0)) ,
+  ( right-inverse-law-reciprocal-rational-ℤ⁺ (k , k>0) ,
+    left-inverse-law-reciprocal-rational-ℤ⁺ (k , k>0))
+```
+
+### Any ring homomorphism from ℚ inverts the positive integers
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  inverts-positive-integers-rational-hom-Ring :
+    (f : hom-Ring ring-ℚ R) →
+    inverts-subset-hom-Ring
+      ( ℤ-Ring)
+      ( R)
+      ( subtype-positive-ℤ)
+      ( comp-hom-Ring ℤ-Ring ring-ℚ R f hom-ring-rational-ℤ)
+  inverts-positive-integers-rational-hom-Ring f k k>0 =
+    preserves-invertible-elements-hom-Ring
+      ( ring-ℚ)
+      ( R)
+      ( f)
+      ( inverts-positive-integers-rational-ℤ k k>0)
 ```

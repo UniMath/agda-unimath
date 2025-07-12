@@ -26,6 +26,7 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-integers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
@@ -135,7 +136,7 @@ smaller-reciprocal-ℚ⁺ q⁺@(q , _) =
     ( bound-archimedean-property-ℚ⁺ q⁺ one-ℚ⁺)
 ```
 
-### The reciprocal of `n` is a multiplicative inverse of `n`
+### The reciprocal of `n : ℕ⁺` is a multiplicative inverse of `n`
 
 ```agda
 module _
@@ -173,4 +174,54 @@ module _
     one-ℚ
   right-inverse-law-reciprocal-rational-ℕ⁺ =
     ap rational-ℚ⁺ right-inverse-law-positive-reciprocal-rational-ℕ⁺
+```
+
+### The reciprocal of `k : ℤ⁺` is a multiplicative inverse of `k`
+
+```agda
+module _
+  (k : ℤ⁺)
+  where
+
+  left-inverse-law-positive-reciprocal-rational-ℤ⁺ :
+    mul-ℚ⁺
+      ( positive-reciprocal-rational-ℤ⁺ k)
+      ( positive-rational-ℤ⁺ k) ＝
+    one-ℚ⁺
+  left-inverse-law-positive-reciprocal-rational-ℤ⁺ =
+    binary-tr
+      ( λ u v → u *ℚ⁺ v ＝ one-ℚ⁺)
+      ( refl)
+      ( ap positive-rational-ℤ⁺ (is-section-positive-nat-ℤ⁺ k))
+      ( left-inverse-law-positive-reciprocal-rational-ℕ⁺
+        ( positive-nat-ℤ⁺ k))
+
+  left-inverse-law-reciprocal-rational-ℤ⁺ :
+    mul-ℚ
+      ( reciprocal-rational-ℤ⁺ k)
+      ( rational-ℚ⁺ (positive-rational-ℤ⁺ k)) ＝
+    one-ℚ
+  left-inverse-law-reciprocal-rational-ℤ⁺ =
+    ap rational-ℚ⁺ left-inverse-law-positive-reciprocal-rational-ℤ⁺
+
+  right-inverse-law-positive-reciprocal-rational-ℤ⁺ :
+    mul-ℚ⁺
+      ( positive-rational-ℤ⁺ k)
+      ( positive-reciprocal-rational-ℤ⁺ k) ＝
+    one-ℚ⁺
+  right-inverse-law-positive-reciprocal-rational-ℤ⁺ =
+    binary-tr
+      ( λ u v → u *ℚ⁺ v ＝ one-ℚ⁺)
+      ( ap positive-rational-ℤ⁺ (is-section-positive-nat-ℤ⁺ k))
+      ( refl)
+      ( right-inverse-law-positive-reciprocal-rational-ℕ⁺
+        ( positive-nat-ℤ⁺ k))
+
+  right-inverse-law-reciprocal-rational-ℤ⁺ :
+    mul-ℚ
+      ( rational-ℚ⁺ (positive-rational-ℤ⁺ k))
+      ( reciprocal-rational-ℤ⁺ k) ＝
+    one-ℚ
+  right-inverse-law-reciprocal-rational-ℤ⁺ =
+    ap rational-ℚ⁺ right-inverse-law-positive-reciprocal-rational-ℤ⁺
 ```
