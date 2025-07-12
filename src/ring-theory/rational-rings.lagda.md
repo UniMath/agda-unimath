@@ -9,11 +9,18 @@ module ring-theory.rational-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.ring-of-integers
 open import elementary-number-theory.ring-of-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -24,6 +31,10 @@ open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.groups
+open import group-theory.homomorphisms-abelian-groups
+
+open import ring-theory.groups-of-units-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.localizations-rings
@@ -87,11 +98,19 @@ module _
   is-rational-ring-Rational-Ring : is-rational-Ring ring-Rational-Ring
   is-rational-ring-Rational-Ring = pr2 R
 
+  is-invertible-positive-integer-Rational-Ring :
+    (k : ℤ⁺) →
+    is-invertible-element-Ring
+      ( ring-Rational-Ring)
+      ( map-initial-hom-Ring ring-Rational-Ring (int-positive-ℤ k))
+  is-invertible-positive-integer-Rational-Ring (k , k>0) =
+    is-rational-ring-Rational-Ring k k>0
+
   inv-positive-integer-Rational-Ring : ℤ⁺ → type-Rational-Ring
-  inv-positive-integer-Rational-Ring (k , k>0) =
+  inv-positive-integer-Rational-Ring k =
     inv-is-invertible-element-Ring
       ( ring-Rational-Ring)
-      ( is-rational-ring-Rational-Ring k k>0)
+      ( is-invertible-positive-integer-Rational-Ring k)
 
   left-inverse-law-positive-integer-Rational-Ring :
     (k : ℤ⁺) →
@@ -116,6 +135,23 @@ module _
     is-right-inverse-inv-is-invertible-element-Ring
       ( ring-Rational-Ring)
       ( is-rational-ring-Rational-Ring k k>0)
+```
+
+### The type of rational homomorphisms into a rational ring
+
+```agda
+module _
+  {l : Level} (R : Rational-Ring l)
+  where
+
+  rational-hom-Rational-Ring : UU l
+  rational-hom-Rational-Ring =
+    hom-Ring ring-ℚ (ring-Rational-Ring R)
+
+  map-rational-hom-Rational-Ring :
+    rational-hom-Rational-Ring → ℚ → type-Rational-Ring R
+  map-rational-hom-Rational-Ring =
+    map-hom-Ring ring-ℚ (ring-Rational-Ring R)
 ```
 
 ## Properties
@@ -153,9 +189,231 @@ module _
         ( R)
         ( comp-hom-Ring ℤ-Ring ring-ℚ R f hom-ring-rational-ℤ))
       ( inverts-positive-integers-rational-hom-Ring R f)
+
+  inv-positive-integer-has-rational-hom-Ring :
+    hom-Ring ring-ℚ R → (k : ℤ⁺) → type-Ring R
+  inv-positive-integer-has-rational-hom-Ring f =
+    inv-positive-integer-Rational-Ring
+      ( R , is-rational-has-rational-hom-Ring f)
 ```
 
-### The ring of rational numbers is the initial rational ring
+### For any ring morphism `f : ℚ → R` and `k : ℤ`, `f k ＝ ι k` where `ι : ℤ → R` is the initial ring homomorphism in `R`
+
+```agda
+module _
+  {l : Level}
+  where
+
+  eq-map-integer-rational-hom-Ring :
+    ( R : Ring l) →
+    ( f : hom-Ring ring-ℚ R) →
+    ( k : ℤ) →
+    ( map-hom-Ring ring-ℚ R f (rational-ℤ k)) ＝
+    ( map-initial-hom-Ring R k)
+  eq-map-integer-rational-hom-Ring R f k =
+    inv
+      ( htpy-initial-hom-Ring
+        ( R)
+        ( comp-hom-Ring
+          ( ℤ-Ring)
+          ( ring-ℚ)
+          ( R)
+          ( f)
+          ( hom-ring-rational-ℤ))
+        ( k))
+
+  eq-map-integer-hom-Rational-Ring :
+    ( R : Rational-Ring l) →
+    ( f : rational-hom-Rational-Ring R) →
+    ( k : ℤ) →
+    ( map-rational-hom-Rational-Ring R f (rational-ℤ k)) ＝
+    ( map-initial-hom-Ring (ring-Rational-Ring R) k)
+  eq-map-integer-hom-Rational-Ring R =
+    eq-map-integer-rational-hom-Ring (ring-Rational-Ring R)
+```
+
+### For any ring morphism `f : ℚ → R` and `k : ℤ⁺`, `f (1/k) ＝ (ι k)⁻¹` where `ι : ℤ → R` is the initial ring homomorphism in `R`
+
+```agda
+module _
+  {l : Level}
+  where
+
+  eq-map-reciprocal-hom-Rational-Ring :
+    ( R : Rational-Ring l) →
+    ( f : rational-hom-Rational-Ring R) →
+    ( k : ℤ⁺) →
+    ( map-rational-hom-Rational-Ring
+      ( R)
+      ( f)
+      ( reciprocal-rational-ℤ⁺ k)) ＝
+    ( inv-positive-integer-Rational-Ring R k)
+  eq-map-reciprocal-hom-Rational-Ring R f k =
+    ap pr1 eq-right-inverse-map-reciprocal
+    where
+
+    right-inverse-map-reciprocal :
+      is-right-invertible-element-Ring
+        ( ring-Rational-Ring R)
+        ( map-initial-hom-Ring (ring-Rational-Ring R) (int-positive-ℤ k))
+    pr1 right-inverse-map-reciprocal =
+      ( map-hom-Ring
+        ( ring-ℚ)
+        ( ring-Rational-Ring R)
+        ( f)
+        ( reciprocal-rational-ℤ⁺ k))
+    pr2 right-inverse-map-reciprocal =
+      ( ap
+        ( mul-Ring'
+          ( ring-Rational-Ring R)
+          ( map-hom-Ring
+            ( ring-ℚ)
+            ( ring-Rational-Ring R)
+            ( f)
+            ( reciprocal-rational-ℤ⁺ k)))
+        ( inv (eq-map-integer-hom-Rational-Ring R f (int-positive-ℤ k)))) ∙
+      ( inv
+        ( preserves-mul-hom-Ring
+          ( ring-ℚ)
+          ( ring-Rational-Ring R)
+          ( f))) ∙
+      ( ap
+        ( map-hom-Ring ring-ℚ (ring-Rational-Ring R) f)
+        ( right-inverse-law-reciprocal-rational-ℤ⁺
+          k)) ∙
+      ( preserves-one-hom-Ring ring-ℚ (ring-Rational-Ring R) f)
+
+    eq-right-inverse-map-reciprocal :
+      ( right-inverse-map-reciprocal) ＝
+      ( is-right-invertible-is-invertible-element-Ring
+        ( ring-Rational-Ring R)
+        ( map-initial-hom-Ring (ring-Rational-Ring R) (int-positive-ℤ k))
+        ( is-invertible-positive-integer-Rational-Ring
+          ( R)
+          ( k)))
+    eq-right-inverse-map-reciprocal =
+      eq-is-contr
+        ( is-contr-is-right-invertible-element-Ring
+          ( ring-Rational-Ring R)
+          ( map-initial-hom-Ring (ring-Rational-Ring R) (int-positive-ℤ k))
+          ( is-invertible-positive-integer-Rational-Ring R k))
+
+  eq-map-reciprocal-rational-hom-Ring :
+    ( R : Ring l) →
+    ( f : hom-Ring ring-ℚ R) →
+    ( k : ℤ⁺) →
+    ( map-hom-Ring
+      ( ring-ℚ)
+      ( R)
+      ( f)
+      ( reciprocal-rational-ℤ⁺ k)) ＝
+    ( inv-positive-integer-has-rational-hom-Ring R f k)
+  eq-map-reciprocal-rational-hom-Ring R f =
+    eq-map-reciprocal-hom-Rational-Ring
+      ( R , is-rational-has-rational-hom-Ring R f)
+      ( f)
+```
+
+### For any ring morphism `f : ℚ → R` and `p/q : ℚ`, `f (p/q) ＝ (ι p)(ι q)⁻¹` where `ι : ℤ → R` is the initial ring homomorphism in `R`
+
+```agda
+module _
+  {l : Level}
+  where
+
+  eq-map-numerator-inv-denominator-hom-Rational-Ring :
+    ( R : Rational-Ring l) →
+    ( f : rational-hom-Rational-Ring R) →
+    ( x : ℚ) →
+    ( map-rational-hom-Rational-Ring R f x) ＝
+    ( mul-Ring
+      ( ring-Rational-Ring R)
+      ( map-initial-hom-Ring (ring-Rational-Ring R) (numerator-ℚ x))
+      ( inv-positive-integer-Rational-Ring R (positive-denominator-ℚ x)))
+  eq-map-numerator-inv-denominator-hom-Rational-Ring R f x =
+    ( ap
+      ( map-rational-hom-Rational-Ring R f)
+      ( inv (eq-mul-numerator-reciprocal-denominator-ℚ x))) ∙
+    ( preserves-mul-hom-Ring
+      ( ring-ℚ)
+      ( ring-Rational-Ring R)
+      ( f)) ∙
+    ( ap-binary
+      ( mul-Ring (ring-Rational-Ring R))
+      ( eq-map-integer-hom-Rational-Ring R f (numerator-ℚ x))
+      ( eq-map-reciprocal-hom-Rational-Ring R f (positive-denominator-ℚ x)))
+
+  eq-map-numerator-inv-denominator-rational-hom-Ring :
+    ( R : Ring l) →
+    ( f : hom-Ring ring-ℚ R) →
+    ( x : ℚ) →
+    ( map-hom-Ring ring-ℚ R f x) ＝
+    ( mul-Ring
+      ( R)
+      ( map-initial-hom-Ring R (numerator-ℚ x))
+      ( inv-positive-integer-has-rational-hom-Ring
+        ( R)
+        ( f)
+        ( positive-denominator-ℚ x)))
+  eq-map-numerator-inv-denominator-rational-hom-Ring R f =
+    eq-map-numerator-inv-denominator-hom-Rational-Ring
+      ( R , is-rational-has-rational-hom-Ring R f)
+      ( f)
+```
+
+### All ring homomorphisms `ℚ → R` are equal
+
+```agda
+module _
+  {l : Level}
+  where
+
+  all-eq-rational-hom-Rational-Ring :
+    ( R : Rational-Ring l) →
+    ( f g : rational-hom-Rational-Ring R) →
+    f ＝ g
+  all-eq-rational-hom-Rational-Ring R f g =
+    eq-htpy-hom-Ring
+      ( ring-ℚ)
+      ( ring-Rational-Ring R)
+      ( f)
+      ( g)
+      ( λ x →
+        ( eq-map-numerator-inv-denominator-hom-Rational-Ring R f x) ∙
+        ( inv (eq-map-numerator-inv-denominator-hom-Rational-Ring R g x)))
+
+  is-prop-rational-hom-Rational-Ring :
+    ( R : Rational-Ring l) →
+    is-prop (rational-hom-Rational-Ring R)
+  is-prop-rational-hom-Rational-Ring R =
+    is-prop-all-elements-equal (all-eq-rational-hom-Rational-Ring R)
+
+  all-eq-rational-hom-Ring :
+    ( R : Ring l) →
+    ( f g : hom-Ring ring-ℚ R) →
+    f ＝ g
+  all-eq-rational-hom-Ring R f =
+    all-eq-rational-hom-Rational-Ring
+      ( R , is-rational-has-rational-hom-Ring R f)
+      ( f)
+
+  is-prop-rational-hom-Ring :
+    ( R : Ring l) →
+    is-prop (hom-Ring ring-ℚ R)
+  is-prop-rational-hom-Ring R =
+    is-prop-all-elements-equal (all-eq-rational-hom-Ring R)
+```
+
+### The type of ring endomorphisms of `ℚ` is contractible
+
+```agda
+is-contr-endo-hom-ring-ℚ : is-contr (hom-Ring ring-ℚ ring-ℚ)
+is-contr-endo-hom-ring-ℚ =
+  ( id-hom-Ring ring-ℚ) ,
+  ( all-eq-rational-hom-Ring ring-ℚ (id-hom-Ring ring-ℚ))
+```
+
+### The initial ring homomorphism `ℚ → R` into a rational ring
 
 ```agda
 module _
@@ -169,12 +427,48 @@ module _
       ( map-initial-hom-Ring (ring-Rational-Ring R) (numerator-ℚ x))
       ( inv-positive-integer-Rational-Ring R (positive-denominator-ℚ x))
 
-{- TODO
-  htpy-map-initial-hom-Rational-Ring :
-    (f : hom-Ring ring-ℚ (ring-Rational-Ring R)) →
-    map-initial-hom-Rational-Ring ~ map-hom-Ring ring-ℚ (ring-Rational-Ring R) f
-  htpy-map-initial-hom-Rational-Ring f x = {!!}
- -}
+  postulate
+    preserves-add-initial-hom-Rational-Ring :
+      {x y : ℚ} →
+      map-initial-hom-Rational-Ring (x +ℚ y) ＝
+      add-Ring
+        ( ring-Rational-Ring R)
+        ( map-initial-hom-Rational-Ring x)
+        ( map-initial-hom-Rational-Ring y)
+    -- preserves-add-initial-hom-Rational-Ring {x} {y} = {!!}
+
+    preserves-one-initial-hom-Rational-Ring :
+      map-initial-hom-Rational-Ring one-ℚ ＝ one-Ring (ring-Rational-Ring R)
+    -- preserves-one-initial-hom-Rational-Ring = {!!}
+
+    preserves-mul-initial-hom-Rational-Ring :
+      {x y : ℚ} →
+      map-initial-hom-Rational-Ring (x *ℚ y) ＝
+      mul-Ring
+        ( ring-Rational-Ring R)
+        ( map-initial-hom-Rational-Ring x)
+        ( map-initial-hom-Rational-Ring y)
+    -- preserves-mul-initial-hom-Rational-Ring {x} {y} = {!!}
+
+  initial-hom-Rational-Ring : rational-hom-Rational-Ring R
+  pr1 initial-hom-Rational-Ring =
+    ( map-initial-hom-Rational-Ring ,
+      preserves-add-initial-hom-Rational-Ring)
+  pr2 initial-hom-Rational-Ring =
+    ( preserves-mul-initial-hom-Rational-Ring ,
+      preserves-one-initial-hom-Rational-Ring)
 ```
 
-TODO
+### The type of ring homomorphisms from `ℚ` to a rational ring is contractible
+
+```agda
+module _
+  {l : Level} (R : Rational-Ring l)
+  where
+
+  is-contr-rational-hom-Rational-Ring :
+    is-contr (rational-hom-Rational-Ring R)
+  is-contr-rational-hom-Rational-Ring =
+    ( initial-hom-Rational-Ring R) ,
+    ( all-eq-rational-hom-Rational-Ring R (initial-hom-Rational-Ring R))
+```
