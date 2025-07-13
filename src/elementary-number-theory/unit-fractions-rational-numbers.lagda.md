@@ -32,6 +32,7 @@ open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.subtypes
 
 open import group-theory.groups
 ```
@@ -78,6 +79,38 @@ reciprocal-rational-ℤ⁺ k =
 ```
 
 ## Properties
+
+### The numerator of a unit fracion is one
+
+```agda
+eq-numerator-reciprocal-rational-ℤ⁺ :
+  (k : ℤ⁺) → numerator-ℚ (reciprocal-rational-ℤ⁺ k) ＝ one-ℤ
+eq-numerator-reciprocal-rational-ℤ⁺ k =
+  eq-numerator-inv-denominator-ℚ⁺
+    ( positive-rational-ℕ⁺ (positive-nat-ℤ⁺ k))
+```
+
+### The denominator of the reciprocal of `k` is `k`
+
+```agda
+module _
+  (k : ℤ⁺)
+  where
+
+  eq-denominator-reciprocal-rational-ℤ⁺ :
+    denominator-ℚ (reciprocal-rational-ℤ⁺ k) ＝ int-positive-ℤ k
+  eq-denominator-reciprocal-rational-ℤ⁺ =
+    ( eq-denominator-inv-numerator-ℚ⁺
+      ( positive-rational-ℕ⁺ (positive-nat-ℤ⁺ k))) ∙
+    ( ap pr1 (is-section-positive-nat-ℤ⁺ k))
+
+  eq-positive-denominator-reciprocal-rational-ℤ⁺ :
+    positive-denominator-ℚ (reciprocal-rational-ℤ⁺ k) ＝ k
+  eq-positive-denominator-reciprocal-rational-ℤ⁺ =
+    eq-type-subtype
+      ( subtype-positive-ℤ)
+      ( eq-denominator-reciprocal-rational-ℤ⁺)
+```
 
 ### If `m ≤ n`, the reciprocal of `n` is less than or equal to the reciprocal of `n`
 
@@ -226,7 +259,7 @@ module _
     ap rational-ℚ⁺ right-inverse-law-positive-reciprocal-rational-ℤ⁺
 ```
 
-### Any rational number is the product of its numerator amd the reciprocal of its denominator
+### Any rational number is the product of its numerator and the reciprocal of its denominator
 
 ```agda
 module _
