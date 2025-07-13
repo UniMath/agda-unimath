@@ -87,6 +87,7 @@ module _
 ### Monomorphisms are [injective](foundation.injective-maps.md)
 
 ```agda
+{-
 module _
   {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   (f-mono : is-mono-hom-Group l3 G H f)
@@ -139,9 +140,10 @@ module _
 
     htpy-2 : htpy-hom-Group ℤ-Group G x-ℤ y-ℤ
     htpy-2 = htpy-eq-hom-Group ℤ-Group G x-ℤ y-ℤ eq-2
+-}
 ```
 
-### `f : G → H` is a monomorphism iff it is [injective](foundation-core.injective-maps.md)
+### `f : G → H` is a monomorphism when it is [injective](foundation-core.injective-maps.md)
 
 ```agda
 module _
@@ -186,11 +188,12 @@ module _
   kernel-is-trivial-is-mono-Group f-ker-triv =
     is-injective-is-mono-Group G H f
     ( kernel-is-trivial-is-injective-Group G H f f-ker-triv)
-
+  {-
   is-mono-kernel-is-trivial-Group :
     {l : Level} → is-mono-hom-Group l G H f →
     is-trivial-Subgroup G (subgroup-kernel-hom-Group G H f)
   is-mono-kernel-is-trivial-Group f-mono x x-in-ker =
     is-mono-is-injective-Group G H f f-mono
     ( preserves-unit-hom-Group G H f ∙ x-in-ker)
+    -}
 ```
