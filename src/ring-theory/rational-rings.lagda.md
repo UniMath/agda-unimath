@@ -57,7 +57,7 @@ A {{#concept "rational ring" Agda=Rational-Ring}} is a
 The
 [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md)
 is rational; moreover, for any rational ring `R`, the
-[initial ring homomorphism](elementary-number-theory.ring-of-integers)
+[initial ring homomorphism](elementary-number-theory.ring-of-integers.md)
 `ι : ℤ → R` extends to a [ring homomorphism](ring-theory.homomorphisms-rings.md)
 `ℚ → R` by `p/q ↦ (ι p)(ι q)⁻¹` and this is the unique ring homomorphism
 `ℚ → R`. In other words, for any rational ring `R`, `hom-Ring ℚ R` is
