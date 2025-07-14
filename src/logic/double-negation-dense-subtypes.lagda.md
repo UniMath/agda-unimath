@@ -30,7 +30,7 @@ open import logic.double-negation-dense-maps
 ## Idea
 
 A
-{{#concept "double negationdense" Disambiguation="subtype" Agda=is-double-negation-dense-subtype Agda=double-negation-dense-subtype}}
+{{#concept "double negation dense" Disambiguation="subtype" Agda=is-double-negation-dense-subtype Agda=double-negation-dense-subtype}}
 [subtype](foundation.subtypes.md) of a type `X` is a subtype `P ⊆ X` such that
 its double [complement](foundation.complements-subtypes.md) is
 [full](foundation.full-subtypes.md).
