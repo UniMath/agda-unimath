@@ -131,15 +131,16 @@ module _
     (f g : null-homotopic-map A B) → f ＝ g → Eq-null-homotopic-map f g
   Eq-eq-null-homotopic-map f .f refl = refl-Eq-null-homotopic-map f
 
-  is-torsorial-Eq-null-homotopic-map :
-    (f : null-homotopic-map A B) → is-torsorial (Eq-null-homotopic-map f)
-  is-torsorial-Eq-null-homotopic-map f =
-    is-contr-equiv
-      ( Σ B (Id (center-null-homotopic-map f)))
-      ( equiv-Σ-equiv-base
-        ( Id (center-null-homotopic-map f))
-        ( compute-null-homotopic-map))
-      ( is-torsorial-Id (center-null-homotopic-map f))
+  abstract
+    is-torsorial-Eq-null-homotopic-map :
+      (f : null-homotopic-map A B) → is-torsorial (Eq-null-homotopic-map f)
+    is-torsorial-Eq-null-homotopic-map f =
+      is-contr-equiv
+        ( Σ B (Id (center-null-homotopic-map f)))
+        ( equiv-Σ-equiv-base
+          ( Id (center-null-homotopic-map f))
+          ( compute-null-homotopic-map))
+        ( is-torsorial-Id (center-null-homotopic-map f))
 
   is-equiv-Eq-eq-null-homotopic-map :
     (f g : null-homotopic-map A B) → is-equiv (Eq-eq-null-homotopic-map f g)
@@ -205,13 +206,15 @@ module _
     (H K : is-null-homotopic-map f) → H ＝ K → htpy-is-null-homotopic-map H K
   htpy-eq-is-null-homotopic-map H .H refl = refl-htpy-is-null-homotopic-map H
 
-  is-torsorial-htpy-is-null-homotopic-map :
-    (H : is-null-homotopic-map f) → is-torsorial (htpy-is-null-homotopic-map H)
-  is-torsorial-htpy-is-null-homotopic-map H =
-    is-torsorial-Eq-structure
-      ( is-torsorial-Id (center-is-null-homotopic-map H))
-      ( center-is-null-homotopic-map H , refl)
-      ( is-torsorial-htpy' (contraction-is-null-homotopic-map H ∙h refl-htpy))
+  abstract
+    is-torsorial-htpy-is-null-homotopic-map :
+      (H : is-null-homotopic-map f) →
+      is-torsorial (htpy-is-null-homotopic-map H)
+    is-torsorial-htpy-is-null-homotopic-map H =
+      is-torsorial-Eq-structure
+        ( is-torsorial-Id (center-is-null-homotopic-map H))
+        ( center-is-null-homotopic-map H , refl)
+        ( is-torsorial-htpy' (contraction-is-null-homotopic-map H ∙h refl-htpy))
 
   is-equiv-htpy-eq-is-null-homotopic-map :
     (H K : is-null-homotopic-map f) →

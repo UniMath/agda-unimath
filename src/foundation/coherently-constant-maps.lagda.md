@@ -142,15 +142,16 @@ module _
     (f g : constant-map A B) → f ＝ g → htpy-constant-map f g
   htpy-eq-constant-map f .f refl = refl-htpy-constant-map f
 
-  is-torsorial-htpy-constant-map :
-    (f : constant-map A B) → is-torsorial (htpy-constant-map f)
-  is-torsorial-htpy-constant-map f =
-    is-contr-equiv
-      ( Σ (║ A ║₋₁ → B) (center-partial-element-constant-map f ~_))
-      ( equiv-Σ-equiv-base
-        ( center-partial-element-constant-map f ~_)
-        ( compute-constant-map))
-      ( is-torsorial-htpy (center-partial-element-constant-map f))
+  abstract
+    is-torsorial-htpy-constant-map :
+      (f : constant-map A B) → is-torsorial (htpy-constant-map f)
+    is-torsorial-htpy-constant-map f =
+      is-contr-equiv
+        ( Σ (║ A ║₋₁ → B) (center-partial-element-constant-map f ~_))
+        ( equiv-Σ-equiv-base
+          ( center-partial-element-constant-map f ~_)
+          ( compute-constant-map))
+        ( is-torsorial-htpy (center-partial-element-constant-map f))
 
   is-equiv-htpy-eq-constant-map :
     (f g : constant-map A B) → is-equiv (htpy-eq-constant-map f g)
@@ -218,13 +219,14 @@ module _
     (H K : is-constant-map f) → H ＝ K → htpy-is-constant-map H K
   htpy-eq-is-constant-map H .H refl = refl-htpy-is-constant-map H
 
-  is-torsorial-htpy-is-constant-map :
-    (H : is-constant-map f) → is-torsorial (htpy-is-constant-map H)
-  is-torsorial-htpy-is-constant-map H =
-    is-torsorial-Eq-structure
-      ( is-torsorial-htpy (center-partial-element-is-constant-map H))
-      ( center-partial-element-is-constant-map H , refl-htpy)
-      (is-torsorial-htpy' (contraction-is-constant-map' H ∙h refl-htpy))
+  abstract
+    is-torsorial-htpy-is-constant-map :
+      (H : is-constant-map f) → is-torsorial (htpy-is-constant-map H)
+    is-torsorial-htpy-is-constant-map H =
+      is-torsorial-Eq-structure
+        ( is-torsorial-htpy (center-partial-element-is-constant-map H))
+        ( center-partial-element-is-constant-map H , refl-htpy)
+        ( is-torsorial-htpy' (contraction-is-constant-map' H ∙h refl-htpy))
 
   is-equiv-htpy-eq-is-constant-map :
     (H K : is-constant-map f) → is-equiv (htpy-eq-is-constant-map H K)
