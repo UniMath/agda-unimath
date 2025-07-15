@@ -34,6 +34,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -62,13 +63,18 @@ A {{#concept "rational ring" Agda=Rational-Ring}} is a
 
 The
 [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md)
-is rational; moreover, for any rational ring `R`, the
+is rational. The
 [initial ring homomorphism](elementary-number-theory.ring-of-integers.md)
 `ι : ℤ → R` extends to a [ring homomorphism](ring-theory.homomorphisms-rings.md)
-`ℚ → R` by `p/q ↦ (ι p)(ι q)⁻¹` and this is the unique ring homomorphism
+`γ : ℚ → R` by `γ : p/q ↦ (ι p)(ι q)⁻¹` and this is the unique ring homomorphism
 `ℚ → R`. In other words, for any rational ring `R`, `hom-Ring ℚ R` is
-[contractible](foundation.contractible-types.md) so `ℚ` is the
+[contractible](foundation.contractible-types.md) and `ℚ` is the
 [initial](ring-theory.initial-rings.md) rational ring.
+
+Finally, for any ring `R`, if there exists a ring homomorphism `f : ℚ → R`, then
+`R` is **rational** and `f` is the initial rational ring map `γ : ℚ → R`. So a
+ring `R` is rational if and only if there exists a ring homomorphism `ℚ → R` (
+in which case, it is the initial rational ring homomorphism `γ`).
 
 ## Definitions
 
@@ -1072,7 +1078,7 @@ module _
       ( f)
 ```
 
-### Any homomorphism `ℚ → R` is homotopic to the rational initial map `γ : ℚ → R`
+### Any homomorphism `ℚ → R` is homotopic to the rational initial ring homomorphism `γ : ℚ → R`
 
 ```agda
 module _
@@ -1109,81 +1115,6 @@ module _
       ( f)
 ```
 
-### All ring homomorphisms `ℚ → R` are equal
-
-```agda
-module _
-  {l : Level} (R : Rational-Ring l)
-  where
-
-  all-eq-rational-hom-Rational-Ring :
-    (f g : rational-hom-Rational-Ring R) → f ＝ g
-  all-eq-rational-hom-Rational-Ring f g =
-    eq-htpy-hom-Ring
-      ( ring-ℚ)
-      ( ring-Rational-Ring R)
-      ( f)
-      ( g)
-      ( λ x →
-        ( htpy-map-rational-initial-hom-Rational-Ring R f x) ∙
-        ( inv (htpy-map-rational-initial-hom-Rational-Ring R g x)))
-
-  is-prop-rational-hom-Rational-Ring :
-    is-prop (rational-hom-Rational-Ring R)
-  is-prop-rational-hom-Rational-Ring =
-    is-prop-all-elements-equal all-eq-rational-hom-Rational-Ring
-
-module _
-  {l : Level} (R : Ring l)
-  where
-
-  all-eq-rational-hom-Ring :
-    ( f g : hom-Ring ring-ℚ R) →
-    f ＝ g
-  all-eq-rational-hom-Ring f =
-    all-eq-rational-hom-Rational-Ring
-      ( rational-ring-has-rational-hom-Ring R f)
-      ( f)
-
-  is-prop-rational-hom-Ring :
-    is-prop (hom-Ring ring-ℚ R)
-  is-prop-rational-hom-Ring =
-    is-prop-all-elements-equal all-eq-rational-hom-Ring
-
-  is-rational-hom-prop-Ring : Prop l
-  is-rational-hom-prop-Ring =
-    hom-Ring ring-ℚ R , is-prop-rational-hom-Ring
-```
-
-### The initial ring map `ℚ → R` preserves reciprocals
-
-```agda
-module _
-  {l : Level} (R : Rational-Ring l)
-  where
-
-  htpy-reciprocal-map-initial-hom-Rational-Ring :
-    map-rational-initial-hom-Rational-Ring R ∘ reciprocal-rational-ℤ⁺ ~
-    inv-positive-integer-Rational-Ring R
-  htpy-reciprocal-map-initial-hom-Rational-Ring k =
-    ( ap-binary
-      ( λ x y →
-        mul-Ring
-          ( ring-Rational-Ring R)
-          ( map-initial-hom-Ring (ring-Rational-Ring R) x)
-          ( inv-positive-integer-Rational-Ring R y))
-      ( eq-numerator-reciprocal-rational-ℤ⁺ k)
-      ( eq-positive-denominator-reciprocal-rational-ℤ⁺ k)) ∙
-    ( ap
-      ( mul-Ring'
-        ( ring-Rational-Ring R)
-        ( inv-positive-integer-Rational-Ring R k))
-      ( preserves-one-initial-hom-Ring (ring-Rational-Ring R))) ∙
-    ( left-unit-law-mul-Ring
-      ( ring-Rational-Ring R)
-      ( inv-positive-integer-Rational-Ring R k))
-```
-
 ### The type of ring homomorphisms from `ℚ` to a rational ring is contractible
 
 ```agda
@@ -1195,5 +1126,50 @@ module _
     is-contr (rational-hom-Rational-Ring R)
   is-contr-rational-hom-Rational-Ring =
     ( initial-hom-Rational-Ring R) ,
-    ( all-eq-rational-hom-Rational-Ring R (initial-hom-Rational-Ring R))
+    ( λ g →
+      eq-htpy-hom-Ring
+        ( ring-ℚ)
+        ( ring-Rational-Ring R)
+        ( initial-hom-Rational-Ring R)
+        ( g)
+        ( inv ∘ htpy-map-rational-initial-hom-Rational-Ring R g))
+
+  is-prop-rational-hom-Rational-Ring :
+    is-prop (rational-hom-Rational-Ring R)
+  is-prop-rational-hom-Rational-Ring =
+    is-prop-is-contr is-contr-rational-hom-Rational-Ring
+```
+
+### All ring homomorphisms `ℚ → R` are equal
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  all-eq-rational-hom-Ring : (f g : hom-Ring ring-ℚ R) → f ＝ g
+  all-eq-rational-hom-Ring f g =
+    eq-is-prop
+      ( is-prop-rational-hom-Rational-Ring
+        ( rational-ring-has-rational-hom-Ring R f))
+
+  is-prop-rational-hom-Ring : is-prop (hom-Ring ring-ℚ R)
+  is-prop-rational-hom-Ring =
+    is-prop-all-elements-equal all-eq-rational-hom-Ring
+
+  is-rational-hom-prop-Ring : Prop l
+  is-rational-hom-prop-Ring =
+    hom-Ring ring-ℚ R , is-prop-rational-hom-Ring
+```
+
+### A ring `R` is rational if and only if there exists a ring homomorphism `ℚ → R`
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  iff-is-rational-has-rational-hom-Ring : hom-Ring ring-ℚ R ↔ is-rational-Ring R
+  iff-is-rational-has-rational-hom-Ring =
+    ( is-rational-has-rational-hom-Ring R , initial-hom-Rational-Ring ∘ pair R)
 ```
