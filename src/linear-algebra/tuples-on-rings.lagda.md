@@ -176,14 +176,14 @@ module _
   where
 
   tuple-Ring-Semigroup : ℕ → Semigroup l
-  tuple-Ring-Semigroup = tuple-Semiring-Semigroup (semiring-Ring R)
+  tuple-Ring-Semigroup = semigroup-tuple-Semiring (semiring-Ring R)
 
   tuple-Ring-Monoid : ℕ → Monoid l
-  tuple-Ring-Monoid = tuple-Semiring-Monoid (semiring-Ring R)
+  tuple-Ring-Monoid = monoid-tuple-Semiring (semiring-Ring R)
 
   tuple-Ring-Commutative-Monoid : ℕ → Commutative-Monoid l
   tuple-Ring-Commutative-Monoid =
-    tuple-Semiring-Commutative-Monoid (semiring-Ring R)
+    commutative-monoid-tuple-Semiring (semiring-Ring R)
 
   is-group-tuple-Ring : (n : ℕ) → is-group-Semigroup (tuple-Ring-Semigroup n)
   pr1 (is-group-tuple-Ring n) = is-unital-Monoid (tuple-Ring-Monoid n)
@@ -202,5 +202,6 @@ module _
 
 ## See also
 
-- For the [module](ring-theory.modules-rings.md) of tuples on rings, see
+- For the [left module](linear-algebra.left-modules-rings.md) of tuples on
+  rings, see
   [`linear-algebra.scalar-multiplication-tuples-on-rings`](linear-algebra.scalar-multiplication-tuples-on-rings.md)
