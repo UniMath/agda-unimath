@@ -326,7 +326,7 @@ module _
         ( right-inverse-law-positive-integer-Rational-Ring R one-ℤ⁺))
 ```
 
-### The inverse of the product of positive integers is the product of their inverses
+### The inverse of the product of positive integers in a rational ring is the product of their inverses
 
 ```agda
 module _
@@ -575,31 +575,196 @@ module _
   {l : Level} (R : Rational-Ring l)
   where
 
-  postulate
-    preserves-add-map-fraction-initial-hom-Rational-Ring :
-      {x y : fraction-ℤ} →
-      map-fraction-initial-hom-Rational-Ring
+  preserves-add-map-fraction-initial-hom-Rational-Ring :
+    {x y : fraction-ℤ} →
+    map-fraction-initial-hom-Rational-Ring
+      ( R)
+      ( add-fraction-ℤ x y) ＝
+    add-Rational-Ring
+      ( R)
+      ( map-fraction-initial-hom-Rational-Ring R x)
+      ( map-fraction-initial-hom-Rational-Ring R y)
+  preserves-add-map-fraction-initial-hom-Rational-Ring
+    {x@(nx , dx)} {y@(ny , dy)} =
+    ( ap
+      ( mul-Ring'
+        ( ring-Rational-Ring R)
+        ( inv-positive-integer-Rational-Ring R (mul-positive-ℤ dx dy)))
+      ( lemma-add-numerator)) ∙
+    ( right-distributive-mul-add-Ring
+      ( ring-Rational-Ring R)
+      ( map-integer-initial-hom-Rational-Ring
         ( R)
-        ( add-fraction-ℤ x y) ＝
+        ( int-mul-positive-ℤ' dy nx))
+      ( map-integer-initial-hom-Rational-Ring
+        ( R)
+        ( int-mul-positive-ℤ' dx ny))
+      ( inv-positive-integer-Rational-Ring R (mul-positive-ℤ dx dy))) ∙
+    ( ap-binary
+      ( add-Rational-Ring R)
+      ( lemma-x)
+      ( lemma-y))
+    where
+
+    _*R_ : type-Rational-Ring R → type-Rational-Ring R → type-Rational-Ring R
+    _*R_ = mul-Rational-Ring R
+
+    rnx rdx rdx' rny rdy rdy' : type-Rational-Ring R
+    rnx = map-integer-initial-hom-Rational-Ring R nx
+    rdx = map-integer-initial-hom-Rational-Ring R (int-positive-ℤ dx)
+    rdx' = inv-positive-integer-Rational-Ring R dx
+    rny = map-integer-initial-hom-Rational-Ring R ny
+    rdy = map-integer-initial-hom-Rational-Ring R (int-positive-ℤ dy)
+    rdy' = inv-positive-integer-Rational-Ring R dy
+
+    lemma-add-numerator :
+      map-integer-initial-hom-Rational-Ring
+        ( R)
+        ( ( int-mul-positive-ℤ' dy nx) +ℤ (int-mul-positive-ℤ' dx ny)) ＝
       add-Rational-Ring
         ( R)
-        ( map-fraction-initial-hom-Rational-Ring R x)
-        ( map-fraction-initial-hom-Rational-Ring R y)
-  -- preserves-add-map-fraction-initial-hom-Rational-Ring
-  --   {x@(nx , dx)} {y@(ny , dy)} =
-  --   {!!}
-  --   where
+        ( map-integer-initial-hom-Rational-Ring R (int-mul-positive-ℤ' dy nx))
+        ( map-integer-initial-hom-Rational-Ring R (int-mul-positive-ℤ' dx ny))
+    lemma-add-numerator =
+      preserves-add-initial-hom-Ring
+        ( ring-Rational-Ring R)
+        ( int-mul-positive-ℤ' dy nx)
+        ( int-mul-positive-ℤ' dx ny)
 
-  --   _*R_ : type-Rational-Ring R → type-Rational-Ring R → type-Rational-Ring R
-  --   _*R_ = mul-Rational-Ring R
+    lemma-add-denominator :
+      inv-positive-integer-Rational-Ring
+        ( R)
+        ( mul-positive-ℤ dx dy) ＝
+      mul-Rational-Ring
+        ( R)
+        ( inv-positive-integer-Rational-Ring R dx)
+        ( inv-positive-integer-Rational-Ring R dy)
+    lemma-add-denominator =
+      eq-mul-inv-positive-integer-Rational-Ring R dx dy
 
-  --   rnx rdx rdx' rny rdy rdy' : type-Rational-Ring R
-  --   rnx = map-integer-initial-hom-Rational-Ring R nx
-  --   rdx = map-integer-initial-hom-Rational-Ring R (int-positive-ℤ dx)
-  --   rdx' = inv-positive-integer-Rational-Ring R dx
-  --   rny = map-integer-initial-hom-Rational-Ring R ny
-  --   rdy = map-integer-initial-hom-Rational-Ring R (int-positive-ℤ dy)
-  --   rdy' = inv-positive-integer-Rational-Ring R dy
+    lemma-nxdy :
+      map-integer-initial-hom-Rational-Ring
+        ( R)
+        ( int-mul-positive-ℤ' dy nx) ＝
+      mul-Rational-Ring
+        ( R)
+        ( map-integer-initial-hom-Rational-Ring R nx)
+        ( map-integer-initial-hom-Rational-Ring R (int-positive-ℤ dy))
+    lemma-nxdy =
+      preserves-mul-initial-hom-Ring
+        ( ring-Rational-Ring R)
+        ( nx)
+        ( int-positive-ℤ dy)
+
+    lemma-nydx :
+      map-integer-initial-hom-Rational-Ring
+        ( R)
+        ( int-mul-positive-ℤ' dx ny) ＝
+      mul-Rational-Ring
+        ( R)
+        ( map-integer-initial-hom-Rational-Ring R ny)
+        ( map-integer-initial-hom-Rational-Ring R (int-positive-ℤ dx))
+    lemma-nydx =
+      preserves-mul-initial-hom-Ring
+        ( ring-Rational-Ring R)
+        ( ny)
+        ( int-positive-ℤ dx)
+
+    lemma-add-denominator' :
+      inv-positive-integer-Rational-Ring
+        ( R)
+        ( mul-positive-ℤ dx dy) ＝
+      mul-Rational-Ring
+        ( R)
+        ( inv-positive-integer-Rational-Ring R dy)
+        ( inv-positive-integer-Rational-Ring R dx)
+    lemma-add-denominator' =
+      ( ap
+        ( inv-positive-integer-Rational-Ring R)
+        ( eq-type-subtype
+          ( subtype-positive-ℤ)
+          ( commutative-mul-ℤ (int-positive-ℤ dx) (int-positive-ℤ dy)))) ∙
+      ( eq-mul-inv-positive-integer-Rational-Ring R dy dx)
+
+    lemma-x :
+      map-fraction-initial-hom-Rational-Ring
+        ( R)
+        ( int-mul-positive-ℤ' dy nx , mul-positive-ℤ dx dy) ＝
+      map-fraction-initial-hom-Rational-Ring R x
+    lemma-x =
+      ( ap
+        ( mul-Rational-Ring
+          ( R)
+          ( map-integer-initial-hom-Rational-Ring
+            ( R)
+            ( int-mul-positive-ℤ' dy nx)))
+        ( ( lemma-add-denominator'))) ∙
+      ( ap
+        ( mul-Ring'
+          ( ring-Rational-Ring R)
+          ( mul-Rational-Ring R rdy' rdx'))
+        ( lemma-nxdy)) ∙
+      ( inv
+        ( associative-mul-Ring
+          ( ring-Rational-Ring R)
+          ( rnx *R rdy)
+          ( rdy')
+          ( rdx'))) ∙
+      ( ap
+        ( mul-Ring'
+          ( ring-Rational-Ring R)
+          ( rdx'))
+        ( associative-mul-Ring
+          ( ring-Rational-Ring R)
+          ( rnx)
+          ( rdy)
+          ( rdy'))) ∙
+      ( ap
+        ( λ z → (rnx *R z) *R rdx')
+        ( right-inverse-law-positive-integer-Rational-Ring R dy)) ∙
+      ( ap
+        ( mul-Ring' (ring-Rational-Ring R) (rdx'))
+        ( right-unit-law-mul-Ring (ring-Rational-Ring R) rnx))
+
+    lemma-y :
+      map-fraction-initial-hom-Rational-Ring
+        ( R)
+        ( int-mul-positive-ℤ' dx ny , mul-positive-ℤ dx dy) ＝
+      map-fraction-initial-hom-Rational-Ring R y
+    lemma-y =
+      ( ap
+        ( mul-Rational-Ring
+          ( R)
+          ( map-integer-initial-hom-Rational-Ring
+            ( R)
+            ( int-mul-positive-ℤ' dx ny)))
+        ( ( lemma-add-denominator))) ∙
+      ( ap
+        ( mul-Ring'
+          ( ring-Rational-Ring R)
+          ( mul-Rational-Ring R rdx' rdy'))
+        ( lemma-nydx)) ∙
+      ( inv
+        ( associative-mul-Ring
+          ( ring-Rational-Ring R)
+          ( rny *R rdx)
+          ( rdx')
+          ( rdy'))) ∙
+      ( ap
+        ( mul-Ring'
+          ( ring-Rational-Ring R)
+          ( rdy'))
+        ( associative-mul-Ring
+          ( ring-Rational-Ring R)
+          ( rny)
+          ( rdx)
+          ( rdx'))) ∙
+      ( ap
+        ( λ z → (rny *R z) *R rdy')
+        ( right-inverse-law-positive-integer-Rational-Ring R dx)) ∙
+      ( ap
+        ( mul-Ring' (ring-Rational-Ring R) (rdy'))
+        ( right-unit-law-mul-Ring (ring-Rational-Ring R) rny))
 ```
 
 ### The fractional initial map `φ : fraction-ℤ → R` preserves multiplication
@@ -706,6 +871,84 @@ module _
     is-right-inverse-inv-is-invertible-element-Ring
       ( ring-Rational-Ring R)
       ( is-invertible-positive-integer-Rational-Ring R one-ℤ⁺)
+```
+
+### The initial ring map `ℚ → R` is a ring homomorphism
+
+```agda
+module _
+  {l : Level} (R : Rational-Ring l)
+  where
+
+  preserves-add-initial-hom-Rational-Ring :
+    {x y : ℚ} →
+    map-rational-initial-hom-Rational-Ring R (x +ℚ y) ＝
+    add-Ring
+      ( ring-Rational-Ring R)
+      ( map-rational-initial-hom-Rational-Ring R x)
+      ( map-rational-initial-hom-Rational-Ring R y)
+  preserves-add-initial-hom-Rational-Ring {x} {y} =
+    equational-reasoning
+      map-rational-initial-hom-Rational-Ring R (x +ℚ y)
+      ＝ map-fraction-initial-hom-Rational-Ring
+        ( R)
+        ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
+        by
+          eq-map-sim-fraction-map-initial-Rational-Ring
+            ( R)
+            ( reduce-fraction-ℤ
+              ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))
+            ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
+            ( symmetric-sim-fraction-ℤ
+              ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
+              ( reduce-fraction-ℤ
+                ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))
+              ( sim-reduced-fraction-ℤ
+                ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))))
+      ＝ add-Ring
+        ( ring-Rational-Ring R)
+        ( map-rational-initial-hom-Rational-Ring R x)
+        ( map-rational-initial-hom-Rational-Ring R y)
+        by (preserves-add-map-fraction-initial-hom-Rational-Ring R)
+
+  preserves-mul-initial-hom-Rational-Ring :
+    {x y : ℚ} →
+    map-rational-initial-hom-Rational-Ring R (x *ℚ y) ＝
+    mul-Ring
+      ( ring-Rational-Ring R)
+      ( map-rational-initial-hom-Rational-Ring R x)
+      ( map-rational-initial-hom-Rational-Ring R y)
+  preserves-mul-initial-hom-Rational-Ring {x} {y} =
+    equational-reasoning
+      map-rational-initial-hom-Rational-Ring R (x *ℚ y)
+      ＝ map-fraction-initial-hom-Rational-Ring
+        ( R)
+        ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
+        by
+          eq-map-sim-fraction-map-initial-Rational-Ring
+            ( R)
+            ( reduce-fraction-ℤ
+              ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))
+            ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
+            ( symmetric-sim-fraction-ℤ
+              ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
+              ( reduce-fraction-ℤ
+                ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))
+              ( sim-reduced-fraction-ℤ
+                ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))))
+      ＝ mul-Ring
+        ( ring-Rational-Ring R)
+        ( map-rational-initial-hom-Rational-Ring R x)
+        ( map-rational-initial-hom-Rational-Ring R y)
+        by (preserves-mul-map-fraction-initial-hom-Rational-Ring R)
+
+  initial-hom-Rational-Ring : rational-hom-Rational-Ring R
+  pr1 initial-hom-Rational-Ring =
+    ( map-rational-initial-hom-Rational-Ring R ,
+      preserves-add-initial-hom-Rational-Ring)
+  pr2 initial-hom-Rational-Ring =
+    ( preserves-mul-initial-hom-Rational-Ring ,
+      preserves-one-rational-initial-hom-Rational-Ring R)
 ```
 
 ### A ring `R` that admits a ring homomorphism `ℚ → R` is rational
@@ -859,7 +1102,7 @@ module _
   htpy-map-rational-hom-Ring :
     ( map-hom-Ring ring-ℚ R f) ~
     ( map-rational-initial-hom-Rational-Ring
-      ( R , is-rational-has-rational-hom-Ring R f))
+      ( rational-ring-has-rational-hom-Ring R f))
   htpy-map-rational-hom-Ring =
     htpy-map-rational-initial-hom-Rational-Ring
       ( rational-ring-has-rational-hom-Ring R f)
@@ -899,7 +1142,7 @@ module _
     f ＝ g
   all-eq-rational-hom-Ring f =
     all-eq-rational-hom-Rational-Ring
-      ( R , is-rational-has-rational-hom-Ring R f)
+      ( rational-ring-has-rational-hom-Ring R f)
       ( f)
 
   is-prop-rational-hom-Ring :
@@ -910,40 +1153,6 @@ module _
   is-rational-hom-prop-Ring : Prop l
   is-rational-hom-prop-Ring =
     hom-Ring ring-ℚ R , is-prop-rational-hom-Ring
-```
-
-### The type of ring endomorphisms of `ℚ` is contractible
-
-```agda
-is-contr-endo-hom-ring-ℚ : is-contr (hom-Ring ring-ℚ ring-ℚ)
-is-contr-endo-hom-ring-ℚ =
-  ( id-hom-Ring ring-ℚ) ,
-  ( all-eq-rational-hom-Ring ring-ℚ (id-hom-Ring ring-ℚ))
-```
-
-### The initial ring map `ℚ → ℚ` is the identity
-
-```agda
-htpy-id-map-initial-hom-rational-ring-ℚ :
-  id ~ map-rational-initial-hom-Rational-Ring rational-ring-ℚ
-htpy-id-map-initial-hom-rational-ring-ℚ =
-  htpy-map-rational-initial-hom-Rational-Ring
-    ( rational-ring-ℚ)
-    ( id-hom-Ring ring-ℚ)
-```
-
-### The initial ring map `ℚ → R` coincides with the initial ring map `ℤ → R` on the integers
-
-```agda
-module _
-  {l : Level} (R : Rational-Ring l)
-  where
-
-  eq-map-rational-integer-initial-hom-Rational-Ring :
-    map-rational-initial-hom-Rational-Ring R ∘ rational-ℤ ＝
-    map-integer-initial-hom-Rational-Ring R
-  eq-map-rational-integer-initial-hom-Rational-Ring =
-    eq-htpy (htpy-integer-map-initial-hom-Rational-Ring R)
 ```
 
 ### The initial ring map `ℚ → R` preserves reciprocals
@@ -973,84 +1182,6 @@ module _
     ( left-unit-law-mul-Ring
       ( ring-Rational-Ring R)
       ( inv-positive-integer-Rational-Ring R k))
-```
-
-### The initial ring map `ℚ → R` is a ring homomorphism (TODO)
-
-```agda
-module _
-  {l : Level} (R : Rational-Ring l)
-  where
-
-  preserves-add-initial-hom-Rational-Ring :
-    {x y : ℚ} →
-    map-rational-initial-hom-Rational-Ring R (x +ℚ y) ＝
-    add-Ring
-      ( ring-Rational-Ring R)
-      ( map-rational-initial-hom-Rational-Ring R x)
-      ( map-rational-initial-hom-Rational-Ring R y)
-  preserves-add-initial-hom-Rational-Ring {x} {y} =
-    equational-reasoning
-      map-rational-initial-hom-Rational-Ring R (x +ℚ y)
-      ＝ map-fraction-initial-hom-Rational-Ring
-        ( R)
-        ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
-        by
-          eq-map-sim-fraction-map-initial-Rational-Ring
-            ( R)
-            ( reduce-fraction-ℤ
-              ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))
-            ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
-            ( symmetric-sim-fraction-ℤ
-              ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
-              ( reduce-fraction-ℤ
-                ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))
-              ( sim-reduced-fraction-ℤ
-                ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))))
-      ＝ add-Ring
-        ( ring-Rational-Ring R)
-        ( map-rational-initial-hom-Rational-Ring R x)
-        ( map-rational-initial-hom-Rational-Ring R y)
-        by (preserves-add-map-fraction-initial-hom-Rational-Ring R)
-
-  preserves-mul-initial-hom-Rational-Ring :
-    {x y : ℚ} →
-    map-rational-initial-hom-Rational-Ring R (x *ℚ y) ＝
-    mul-Ring
-      ( ring-Rational-Ring R)
-      ( map-rational-initial-hom-Rational-Ring R x)
-      ( map-rational-initial-hom-Rational-Ring R y)
-  preserves-mul-initial-hom-Rational-Ring {x} {y} =
-    equational-reasoning
-      map-rational-initial-hom-Rational-Ring R (x *ℚ y)
-      ＝ map-fraction-initial-hom-Rational-Ring
-        ( R)
-        ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
-        by
-          eq-map-sim-fraction-map-initial-Rational-Ring
-            ( R)
-            ( reduce-fraction-ℤ
-              ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))
-            ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
-            ( symmetric-sim-fraction-ℤ
-              ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
-              ( reduce-fraction-ℤ
-                ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))
-              ( sim-reduced-fraction-ℤ
-                ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))))
-      ＝ mul-Ring
-        ( ring-Rational-Ring R)
-        ( map-rational-initial-hom-Rational-Ring R x)
-        ( map-rational-initial-hom-Rational-Ring R y)
-        by (preserves-mul-map-fraction-initial-hom-Rational-Ring R)
-
-  initial-hom-Rational-Ring : rational-hom-Rational-Ring R
-  pr1 initial-hom-Rational-Ring =
-    ( map-rational-initial-hom-Rational-Ring R ,
-      preserves-add-initial-hom-Rational-Ring)
-  pr2 initial-hom-Rational-Ring =
-    ( preserves-mul-initial-hom-Rational-Ring ,
-      preserves-one-rational-initial-hom-Rational-Ring R)
 ```
 
 ### The type of ring homomorphisms from `ℚ` to a rational ring is contractible
