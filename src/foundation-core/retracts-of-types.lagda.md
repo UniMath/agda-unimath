@@ -203,6 +203,37 @@ module _
       ( retraction-retract r')
 ```
 
+## Retract reasoning
+
+Retracts can be constructed by equational reasoning in the following way:
+
+```text
+retract-reasoning
+  X retract-of Y by retract-1
+    retract-of Z by retract-2
+    retract-of V by retract-3
+```
+
+The retract constructed in this way is
+`comp-retract retract-3 (comp-retract retract-2 retract-1)`, i.e., the retract
+is associated fully to the right.
+
+```agda
+infixl 1 retract-reasoning_
+infixl 0 step-retract-reasoning
+
+retract-reasoning_ :
+  {l1 : Level} (X : UU l1) → X retract-of X
+retract-reasoning X = id-retract
+
+step-retract-reasoning :
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
+  (X retract-of Y) → (Z : UU l3) → (Y retract-of Z) → (X retract-of Z)
+step-retract-reasoning e Z f = comp-retract f e
+
+syntax step-retract-reasoning e Z f = e retract-of Z by f
+```
+
 ## See also
 
 - [Retracts of maps](foundation.retracts-of-maps.md)
