@@ -1169,7 +1169,11 @@ module _
   {l : Level} (R : Ring l)
   where
 
+  has-rational-hom-is-rational-Ring : is-rational-Ring R → hom-Ring ring-ℚ R
+  has-rational-hom-is-rational-Ring =
+    initial-hom-Rational-Ring ∘ pair R
+
   iff-is-rational-has-rational-hom-Ring : hom-Ring ring-ℚ R ↔ is-rational-Ring R
   iff-is-rational-has-rational-hom-Ring =
-    ( is-rational-has-rational-hom-Ring R , initial-hom-Rational-Ring ∘ pair R)
+    ( is-rational-has-rational-hom-Ring R , has-rational-hom-is-rational-Ring)
 ```
