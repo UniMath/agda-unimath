@@ -243,7 +243,9 @@ module _
 
 ### Unit laws for standard pullbacks
 
-Pulling back along the identity map
+Pulling back along the identity map is the identity operation.
+
+#### Left unit law for standard pullbacks
 
 ```agda
 module _
@@ -302,7 +304,7 @@ module _
 
 ### Unit laws for standard pullbacks
 
-Pulling back along the identity map is the identity operation.
+#### Right unit law for standard pullbacks
 
 ```agda
 module _

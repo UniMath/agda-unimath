@@ -87,8 +87,7 @@ module _
     coherence-hom-arrow f g (map-equiv i) (map-equiv j)
 
   equiv-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  equiv-arrow =
-    Σ (A ≃ X) (λ i → Σ (B ≃ Y) (coherence-equiv-arrow i))
+  equiv-arrow = Σ (A ≃ X) (λ i → Σ (B ≃ Y) (coherence-equiv-arrow i))
 
   module _
     (e : equiv-arrow)
@@ -100,6 +99,9 @@ module _
     map-domain-equiv-arrow : A → X
     map-domain-equiv-arrow = map-equiv equiv-domain-equiv-arrow
 
+    map-inv-domain-equiv-arrow : X → A
+    map-inv-domain-equiv-arrow = map-inv-equiv equiv-domain-equiv-arrow
+
     is-equiv-map-domain-equiv-arrow : is-equiv map-domain-equiv-arrow
     is-equiv-map-domain-equiv-arrow =
       is-equiv-map-equiv equiv-domain-equiv-arrow
@@ -109,6 +111,9 @@ module _
 
     map-codomain-equiv-arrow : B → Y
     map-codomain-equiv-arrow = map-equiv equiv-codomain-equiv-arrow
+
+    map-inv-codomain-equiv-arrow : Y → B
+    map-inv-codomain-equiv-arrow = map-inv-equiv equiv-codomain-equiv-arrow
 
     is-equiv-map-codomain-equiv-arrow : is-equiv map-codomain-equiv-arrow
     is-equiv-map-codomain-equiv-arrow =

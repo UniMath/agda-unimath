@@ -27,7 +27,7 @@ Consider a map `f : A → B` and a map `g : B → A` in the converse direction. 
 there is an [equivalence](foundation-core.equivalences.md)
 
 ```text
-  is-section f g ≃ ((x : A) (y : B) → (x ＝ g y) ≃ (f x ＝ y))
+  is-section f g ≃ ((x : A) (y : B) → (x ＝ g y) → (f x ＝ y))
 ```
 
 In other words, any [section homotopy](foundation-core.sections.md) `f ∘ g ~ id`
@@ -54,7 +54,7 @@ module _
 
   eq-transpose-is-section' :
     f ∘ g ~ id → {x : B} {y : A} → g x ＝ y → x ＝ f y
-  eq-transpose-is-section' H {x} refl = inv (H x)
+  eq-transpose-is-section' H {x} p = inv (H x) ∙ ap f p
 ```
 
 ## Properties
