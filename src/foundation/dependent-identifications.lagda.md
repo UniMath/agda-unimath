@@ -27,11 +27,11 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-We characterize dependent paths in the family of depedent paths; define the
+We characterize dependent paths in the family of dependent paths; define the
 groupoidal operators on dependent paths; define the coherence paths; prove the
 operators are equivalences.
 
-## Properites
+## Properties
 
 ### Computing twice iterated dependent identifications
 

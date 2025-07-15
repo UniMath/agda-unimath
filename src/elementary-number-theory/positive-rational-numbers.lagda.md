@@ -177,6 +177,14 @@ one-ℚ⁺ : ℚ⁺
 one-ℚ⁺ = (one-ℚ , is-positive-int-positive-ℤ one-positive-ℤ)
 ```
 
+### The type of positive rational numbers is inhabited
+
+```agda
+abstract
+  is-inhabited-ℚ⁺ : ║ ℚ⁺ ║₋₁
+  is-inhabited-ℚ⁺ = unit-trunc-Prop one-ℚ⁺
+```
+
 ### The rational image of a positive natural number is positive
 
 ```agda
@@ -328,6 +336,9 @@ semigroup-add-ℚ⁺ =
 ```agda
 add-ℚ⁺ : ℚ⁺ → ℚ⁺ → ℚ⁺
 add-ℚ⁺ = mul-Subsemigroup semigroup-add-ℚ subsemigroup-add-ℚ⁺
+
+add-ℚ⁺' : ℚ⁺ → ℚ⁺ → ℚ⁺
+add-ℚ⁺' x y = add-ℚ⁺ y x
 
 infixl 35 _+ℚ⁺_
 _+ℚ⁺_ = add-ℚ⁺
@@ -676,15 +687,7 @@ module _
   where
 
   le-diff-ℚ⁺ : ℚ⁺
-  pr1 le-diff-ℚ⁺ = (rational-ℚ⁺ y) -ℚ (rational-ℚ⁺ x)
-  pr2 le-diff-ℚ⁺ =
-    is-positive-le-zero-ℚ
-      ( (rational-ℚ⁺ y) -ℚ (rational-ℚ⁺ x))
-      ( backward-implication
-        ( iff-translate-diff-le-zero-ℚ
-          ( rational-ℚ⁺ x)
-          ( rational-ℚ⁺ y))
-        ( ( H)))
+  le-diff-ℚ⁺ = positive-diff-le-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) H
 
   left-diff-law-add-ℚ⁺ : le-diff-ℚ⁺ +ℚ⁺ x ＝ y
   left-diff-law-add-ℚ⁺ =
@@ -705,6 +708,13 @@ module _
         ( rational-ℚ⁺ x)
         ( rational-ℚ⁺ le-diff-ℚ⁺))) ∙
     ( left-diff-law-add-ℚ⁺)
+
+  le-le-diff-ℚ⁺ : le-ℚ⁺ le-diff-ℚ⁺ y
+  le-le-diff-ℚ⁺ =
+    tr
+      ( le-ℚ⁺ le-diff-ℚ⁺)
+      ( left-diff-law-add-ℚ⁺)
+      ( le-left-add-ℚ⁺ le-diff-ℚ⁺ x)
 ```
 
 ### Multiplication by a positive rational number preserves strict inequality
@@ -905,37 +915,55 @@ module _
 ### Any positive rational number `p` has a `q` with `q + q < p`
 
 ```agda
-abstract
-  bound-double-le-ℚ⁺ :
-    (p : ℚ⁺) →
-    Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
-  bound-double-le-ℚ⁺ p = dependent-pair-result
-    where
-    q : ℚ⁺
-    q = left-summand-split-ℚ⁺ p
-    r : ℚ⁺
-    r = right-summand-split-ℚ⁺ p
-    s : ℚ⁺
-    s = mediant-zero-min-ℚ⁺ q r
-    -- Inlining this blows up compile times for some unclear reason.
-    dependent-pair-result : Σ ℚ⁺ (λ x → le-ℚ⁺ (x +ℚ⁺ x) p)
-    dependent-pair-result =
-      s ,
+module _
+  (p : ℚ⁺)
+  where
+
+  modulus-le-double-le-ℚ⁺ : ℚ⁺
+  modulus-le-double-le-ℚ⁺ =
+    mediant-zero-min-ℚ⁺
+      ( left-summand-split-ℚ⁺ p)
+      ( right-summand-split-ℚ⁺ p)
+
+  abstract
+    le-double-le-modulus-le-double-le-ℚ⁺ :
+        le-ℚ⁺
+          ( modulus-le-double-le-ℚ⁺ +ℚ⁺ modulus-le-double-le-ℚ⁺)
+          ( p)
+    le-double-le-modulus-le-double-le-ℚ⁺ =
       tr
-        ( le-ℚ⁺ (s +ℚ⁺ s))
+        ( le-ℚ⁺ (modulus-le-double-le-ℚ⁺ +ℚ⁺ modulus-le-double-le-ℚ⁺))
         ( eq-add-split-ℚ⁺ p)
         ( preserves-le-add-ℚ
-          { rational-ℚ⁺ s}
-          { rational-ℚ⁺ q}
-          { rational-ℚ⁺ s}
-          { rational-ℚ⁺ r}
-          ( le-left-mediant-zero-min-ℚ⁺ q r)
-          ( le-right-mediant-zero-min-ℚ⁺ q r))
+          { rational-ℚ⁺ (modulus-le-double-le-ℚ⁺)}
+          { rational-ℚ⁺ (left-summand-split-ℚ⁺ p)}
+          { rational-ℚ⁺ (modulus-le-double-le-ℚ⁺)}
+          { rational-ℚ⁺ (right-summand-split-ℚ⁺ p)}
+          ( le-left-mediant-zero-min-ℚ⁺
+            ( left-summand-split-ℚ⁺ p)
+            ( right-summand-split-ℚ⁺ p))
+          ( le-right-mediant-zero-min-ℚ⁺
+            ( left-summand-split-ℚ⁺ p)
+            ( right-summand-split-ℚ⁺ p)))
 
-  double-le-ℚ⁺ :
-    (p : ℚ⁺) →
-    exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
-  double-le-ℚ⁺ p = unit-trunc-Prop (bound-double-le-ℚ⁺ p)
+    le-modulus-le-double-le-ℚ⁺ : le-ℚ⁺ modulus-le-double-le-ℚ⁺ p
+    le-modulus-le-double-le-ℚ⁺ =
+      transitive-le-ℚ⁺
+        ( modulus-le-double-le-ℚ⁺)
+        ( left-summand-split-ℚ⁺ p)
+        ( p)
+        ( le-mediant-zero-ℚ⁺ p)
+        ( le-left-mediant-zero-min-ℚ⁺
+          ( left-summand-split-ℚ⁺ p)
+          ( right-summand-split-ℚ⁺ p))
+
+    bound-double-le-ℚ⁺ :
+      Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
+    bound-double-le-ℚ⁺ =
+      ( modulus-le-double-le-ℚ⁺ , le-double-le-modulus-le-double-le-ℚ⁺)
+
+    double-le-ℚ⁺ : exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
+    double-le-ℚ⁺ = unit-trunc-Prop bound-double-le-ℚ⁺
 ```
 
 ### Addition with a positive rational number is an increasing map

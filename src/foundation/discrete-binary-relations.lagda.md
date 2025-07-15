@@ -28,8 +28,8 @@ adjoint to the forgetful functor `(V , E) ↦ (V , ∅)`.
 The condition of discreteness of binary relations compares to the condition of
 [discreteness](foundation.discrete-reflexive-relations.md) of
 [reflexive relations](foundation.reflexive-relations.md) in the sense that both
-conditions imply initiality. A discrete binary relation is initial becauase it
-is empty, while a discrete reflexive relation is initial because it is
+conditions imply initiality. A discrete binary relation is initial because it is
+empty, while a discrete reflexive relation is initial because it is
 [torsorial](foundation-core.torsorial-type-families.md) and hence it is an
 [identity system](foundation.identity-systems.md).
 

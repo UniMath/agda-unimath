@@ -10,18 +10,19 @@ module commutative-algebra.binomial-theorem-commutative-rings where
 open import commutative-algebra.binomial-theorem-commutative-semirings
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
-open import commutative-algebra.sums-commutative-rings
+open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-rings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.vectors-on-commutative-rings
+open import linear-algebra.finite-sequences-in-commutative-rings
 
 open import ring-theory.binomial-theorem-rings
 
@@ -48,11 +49,12 @@ The binomial theorem is the [44th](literature.100-theorems.md#44) theorem on
 ### Binomial sums
 
 ```agda
-binomial-sum-Commutative-Ring :
+binomial-sum-fin-sequence-type-Commutative-Ring :
   {l : Level} (A : Commutative-Ring l)
-  (n : ℕ) (f : functional-vec-Commutative-Ring A (succ-ℕ n)) →
+  (n : ℕ) (f : fin-sequence-type-Commutative-Ring A (succ-ℕ n)) →
   type-Commutative-Ring A
-binomial-sum-Commutative-Ring A = binomial-sum-Ring (ring-Commutative-Ring A)
+binomial-sum-fin-sequence-type-Commutative-Ring A =
+  binomial-sum-fin-sequence-type-Ring (ring-Commutative-Ring A)
 ```
 
 ## Properties
@@ -65,15 +67,15 @@ module _
   where
 
   binomial-sum-one-element-Commutative-Ring :
-    (f : functional-vec-Commutative-Ring A 1) →
-    binomial-sum-Commutative-Ring A 0 f ＝
-    head-functional-vec-Commutative-Ring A 0 f
+    (f : fin-sequence-type-Commutative-Ring A 1) →
+    binomial-sum-fin-sequence-type-Commutative-Ring A 0 f ＝
+    head-fin-sequence-type-Commutative-Ring A 0 f
   binomial-sum-one-element-Commutative-Ring =
     binomial-sum-one-element-Ring (ring-Commutative-Ring A)
 
   binomial-sum-two-elements-Commutative-Ring :
-    (f : functional-vec-Commutative-Ring A 2) →
-    binomial-sum-Commutative-Ring A 1 f ＝
+    (f : fin-sequence-type-Commutative-Ring A 2) →
+    binomial-sum-fin-sequence-type-Commutative-Ring A 1 f ＝
     add-Commutative-Ring A (f (zero-Fin 1)) (f (one-Fin 1))
   binomial-sum-two-elements-Commutative-Ring =
     binomial-sum-two-elements-Ring (ring-Commutative-Ring A)
@@ -86,12 +88,13 @@ module _
   {l : Level} (A : Commutative-Ring l)
   where
 
-  htpy-binomial-sum-Commutative-Ring :
-    (n : ℕ) {f g : functional-vec-Commutative-Ring A (succ-ℕ n)} →
+  htpy-binomial-sum-fin-sequence-type-Commutative-Ring :
+    (n : ℕ) {f g : fin-sequence-type-Commutative-Ring A (succ-ℕ n)} →
     (f ~ g) →
-    binomial-sum-Commutative-Ring A n f ＝ binomial-sum-Commutative-Ring A n g
-  htpy-binomial-sum-Commutative-Ring =
-    htpy-binomial-sum-Ring (ring-Commutative-Ring A)
+    binomial-sum-fin-sequence-type-Commutative-Ring A n f ＝
+    binomial-sum-fin-sequence-type-Commutative-Ring A n g
+  htpy-binomial-sum-fin-sequence-type-Commutative-Ring =
+    htpy-binomial-sum-fin-sequence-type-Ring (ring-Commutative-Ring A)
 ```
 
 ### Multiplication distributes over sums
@@ -101,21 +104,31 @@ module _
   {l : Level} (A : Commutative-Ring l)
   where
 
-  left-distributive-mul-binomial-sum-Commutative-Ring :
+  left-distributive-mul-binomial-sum-fin-sequence-type-Commutative-Ring :
     (n : ℕ) (x : type-Commutative-Ring A)
-    (f : functional-vec-Commutative-Ring A (succ-ℕ n)) →
-    mul-Commutative-Ring A x (binomial-sum-Commutative-Ring A n f) ＝
-    binomial-sum-Commutative-Ring A n (λ i → mul-Commutative-Ring A x (f i))
-  left-distributive-mul-binomial-sum-Commutative-Ring =
-    left-distributive-mul-binomial-sum-Ring (ring-Commutative-Ring A)
+    (f : fin-sequence-type-Commutative-Ring A (succ-ℕ n)) →
+    mul-Commutative-Ring A
+      ( x)
+      ( binomial-sum-fin-sequence-type-Commutative-Ring A n f) ＝
+    binomial-sum-fin-sequence-type-Commutative-Ring A
+      ( n)
+      ( mul-Commutative-Ring A x ∘ f)
+  left-distributive-mul-binomial-sum-fin-sequence-type-Commutative-Ring =
+    left-distributive-mul-binomial-sum-fin-sequence-type-Ring
+      ( ring-Commutative-Ring A)
 
-  right-distributive-mul-binomial-sum-Commutative-Ring :
-    (n : ℕ) (f : functional-vec-Commutative-Ring A (succ-ℕ n)) →
+  right-distributive-mul-binomial-sum-fin-sequence-type-Commutative-Ring :
+    (n : ℕ) (f : fin-sequence-type-Commutative-Ring A (succ-ℕ n)) →
     (x : type-Commutative-Ring A) →
-    mul-Commutative-Ring A (binomial-sum-Commutative-Ring A n f) x ＝
-    binomial-sum-Commutative-Ring A n (λ i → mul-Commutative-Ring A (f i) x)
-  right-distributive-mul-binomial-sum-Commutative-Ring =
-    right-distributive-mul-binomial-sum-Ring (ring-Commutative-Ring A)
+    mul-Commutative-Ring A
+      ( binomial-sum-fin-sequence-type-Commutative-Ring A n f)
+      ( x) ＝
+    binomial-sum-fin-sequence-type-Commutative-Ring A
+      ( n)
+      ( mul-Commutative-Ring' A x ∘ f)
+  right-distributive-mul-binomial-sum-fin-sequence-type-Commutative-Ring =
+    right-distributive-mul-binomial-sum-fin-sequence-type-Ring
+      ( ring-Commutative-Ring A)
 ```
 
 ## Theorem
@@ -127,7 +140,7 @@ binomial-theorem-Commutative-Ring :
   {l : Level} (A : Commutative-Ring l) →
   (n : ℕ) (x y : type-Commutative-Ring A) →
   power-Commutative-Ring A n (add-Commutative-Ring A x y) ＝
-  binomial-sum-Commutative-Ring A n
+  binomial-sum-fin-sequence-type-Commutative-Ring A n
     ( λ i →
       mul-Commutative-Ring A
       ( power-Commutative-Ring A (nat-Fin (succ-ℕ n) i) x)
@@ -153,7 +166,7 @@ is-linear-combination-power-add-Commutative-Ring :
   add-Commutative-Ring A
     ( mul-Commutative-Ring A
       ( power-Commutative-Ring A m y)
-      ( sum-Commutative-Ring A n
+      ( sum-fin-sequence-type-Commutative-Ring A n
         ( λ i →
           mul-nat-scalar-Commutative-Ring A
             ( binomial-coefficient-ℕ (n +ℕ m) (nat-Fin n i))
@@ -162,7 +175,7 @@ is-linear-combination-power-add-Commutative-Ring :
               ( power-Commutative-Ring A (dist-ℕ (nat-Fin n i) n) y)))))
     ( mul-Commutative-Ring A
       ( power-Commutative-Ring A n x)
-      ( sum-Commutative-Ring A
+      ( sum-fin-sequence-type-Commutative-Ring A
         ( succ-ℕ m)
         ( λ i →
           mul-nat-scalar-Commutative-Ring A

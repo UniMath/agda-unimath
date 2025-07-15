@@ -269,7 +269,7 @@ diagram
      f     g
 ```
 
-The composite `g ∘ f` is then an extension of `c` along `a.
+The composite `g ∘ f` is then an extension of `c` along `a`.
 
 ```agda
 module _

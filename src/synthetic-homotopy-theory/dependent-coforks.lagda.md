@@ -59,7 +59,7 @@ and a family of
 (a : A) → dependent-identification P (H a) (k (f a)) (k (g a)).
 ```
 
-Dependent coforks are an analogue of
+Dependent coforks are an analog of
 [dependent cocones under spans](synthetic-homotopy-theory.dependent-cocones-under-spans.md)
 for double arrows.
 
