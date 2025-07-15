@@ -25,9 +25,10 @@ open import synthetic-homotopy-theory.cocartesian-morphisms-arrows
 ## Idea
 
 A map $j : C → D$ is said to be
-{{#concept "anodyne" Disambiguation="map of types" Agda=is-anodyne}} with
+{{#concept "anodyne" Disambiguation="map of types" Agda=is-anodyne-map}} with
 respect to a map $f : A → B$, or **$f$-anodyne**, if every map that is
-orthogonal to $f$ is also orthogonal to $j$.
+[orthogonal](orthogonal-factorization-systems.orthogonal-maps.md) to $f$ is also
+orthogonal to $j$.
 
 ## Definitions
 
@@ -40,13 +41,13 @@ module _
   (f : A → B) (j : C → D)
   where
 
-  is-anodyne-Level :
+  is-anodyne-map-Level :
     (l5 l6 : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5 ⊔ lsuc l6)
-  is-anodyne-Level l5 l6 =
+  is-anodyne-map-Level l5 l6 =
     {X : UU l5} {Y : UU l6} (g : X → Y) → is-orthogonal f g → is-orthogonal j g
 
-  is-anodyne : UUω
-  is-anodyne = {l5 l6 : Level} → is-anodyne-Level l5 l6
+  is-anodyne-map : UUω
+  is-anodyne-map = {l5 l6 : Level} → is-anodyne-map-Level l5 l6
 ```
 
 ## Properties
@@ -60,8 +61,8 @@ module _
   (f : A → B) {j i : C → D}
   where
 
-  is-anodyne-htpy : j ~ i → is-anodyne f j → is-anodyne f i
-  is-anodyne-htpy K J g H = is-orthogonal-htpy-left j g K (J g H)
+  is-anodyne-map-htpy : j ~ i → is-anodyne-map f j → is-anodyne-map f i
+  is-anodyne-map-htpy K J g H = is-orthogonal-htpy-left j g K (J g H)
 ```
 
 ### Anodyne maps are closed under equivalences of maps
@@ -73,8 +74,10 @@ module _
   (f : A → B) {j : C → D} {j' : C' → D'}
   where
 
-  is-anodyne-equiv-arrow : equiv-arrow j j' → is-anodyne f j → is-anodyne f j'
-  is-anodyne-equiv-arrow α J g H = is-orthogonal-left-equiv-arrow α g (J g H)
+  is-anodyne-map-equiv-arrow :
+    equiv-arrow j j' → is-anodyne-map f j → is-anodyne-map f j'
+  is-anodyne-map-equiv-arrow α J g H =
+    is-orthogonal-left-equiv-arrow α g (J g H)
 ```
 
 ### Anodyne maps are closed under retracts of maps
@@ -90,8 +93,9 @@ module _
   (f : A → B) (j : C → D) (i : D → E)
   where
 
-  is-anodyne-comp : is-anodyne f j → is-anodyne f i → is-anodyne f (i ∘ j)
-  is-anodyne-comp J I g H = is-orthogonal-left-comp j i g (J g H) (I g H)
+  is-anodyne-map-comp :
+    is-anodyne-map f j → is-anodyne-map f i → is-anodyne-map f (i ∘ j)
+  is-anodyne-map-comp J I g H = is-orthogonal-left-comp j i g (J g H) (I g H)
 ```
 
 ### Cancellation property for anodyne maps
@@ -103,9 +107,9 @@ module _
   (f : A → B) (j : C → D) (i : D → E)
   where
 
-  is-anodyne-left-factor :
-    is-anodyne f j → is-anodyne f (i ∘ j) → is-anodyne f i
-  is-anodyne-left-factor J IJ g H =
+  is-anodyne-map-left-factor :
+    is-anodyne-map f j → is-anodyne-map f (i ∘ j) → is-anodyne-map f i
+  is-anodyne-map-left-factor J IJ g H =
     is-orthogonal-left-left-factor j i g (J g H) (IJ g H)
 ```
 
@@ -118,8 +122,9 @@ module _
   (f : A → B) (j : (i : I) → C i → D i)
   where
 
-  is-anodyne-tot : ((i : I) → is-anodyne f (j i)) → is-anodyne f (tot j)
-  is-anodyne-tot J g H = is-orthogonal-left-tot j g (λ i → J i g H)
+  is-anodyne-map-tot :
+    ((i : I) → is-anodyne-map f (j i)) → is-anodyne-map f (tot j)
+  is-anodyne-map-tot J g H = is-orthogonal-left-tot j g (λ i → J i g H)
 ```
 
 ### Anodyne maps are closed under products
@@ -131,9 +136,9 @@ module _
   (f : A → B) (j : C → D) (i : E → F)
   where
 
-  is-anodyne-map-product :
-    is-anodyne f j → is-anodyne f i → is-anodyne f (map-product j i)
-  is-anodyne-map-product J I g H =
+  is-anodyne-map-map-product :
+    is-anodyne-map f j → is-anodyne-map f i → is-anodyne-map f (map-product j i)
+  is-anodyne-map-map-product J I g H =
     is-orthogonal-left-product j i g (J g H) (I g H)
 ```
 
@@ -146,9 +151,11 @@ module _
   (f : A → B) (j : C → D) (i : E → F)
   where
 
-  is-anodyne-map-coproduct :
-    is-anodyne f j → is-anodyne f i → is-anodyne f (map-coproduct j i)
-  is-anodyne-map-coproduct J I g H =
+  is-anodyne-map-map-coproduct :
+    is-anodyne-map f j →
+    is-anodyne-map f i →
+    is-anodyne-map f (map-coproduct j i)
+  is-anodyne-map-map-coproduct J I g H =
     is-orthogonal-left-coproduct j i g (J g H) (I g H)
 ```
 
@@ -161,9 +168,9 @@ module _
   (f : A → B) (j : C → D) (i : E → F)
   where
 
-  is-anodyne-cobase-change :
-    cocartesian-hom-arrow j i → is-anodyne f j → is-anodyne f i
-  is-anodyne-cobase-change α J g H =
+  is-anodyne-map-cobase-change :
+    cocartesian-hom-arrow j i → is-anodyne-map f j → is-anodyne-map f i
+  is-anodyne-map-cobase-change α J g H =
     is-orthogonal-left-cobase-change j i g α (J g H)
 ```
 

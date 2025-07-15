@@ -31,7 +31,7 @@ open import synthetic-homotopy-theory.cocartesian-morphisms-arrows
 ## Idea
 
 A map $j : C → D$ is said to be
-{{#concept "weakly anodyne" Disambiguation="map of types" Agda=is-weakly-anodyne}}
+{{#concept "weakly anodyne" Disambiguation="map of types" Agda=is-weakly-anodyne-map}}
 with respect to a map $f : A → B$, or **weakly $f$-anodyne**, if every map that
 is local at $f$ is also local at $j$.
 
@@ -46,13 +46,13 @@ module _
   (f : A → B) (j : C → D)
   where
 
-  is-weakly-anodyne-Level :
+  is-weakly-anodyne-map-Level :
     (l5 l6 : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5 ⊔ lsuc l6)
-  is-weakly-anodyne-Level l5 l6 =
+  is-weakly-anodyne-map-Level l5 l6 =
     {X : UU l5} {Y : UU l6} (g : X → Y) → is-local-map f g → is-local-map j g
 
-  is-weakly-anodyne : UUω
-  is-weakly-anodyne = {l5 l6 : Level} → is-weakly-anodyne-Level l5 l6
+  is-weakly-anodyne-map : UUω
+  is-weakly-anodyne-map = {l5 l6 : Level} → is-weakly-anodyne-map-Level l5 l6
 ```
 
 ## Properties
@@ -66,8 +66,9 @@ module _
   (f : A → B) {j : C → D}
   where
 
-  is-weakly-anodyne-is-anodyne : is-anodyne f j → is-weakly-anodyne f j
-  is-weakly-anodyne-is-anodyne J g G x =
+  is-weakly-anodyne-map-is-anodyne-map :
+    is-anodyne-map f j → is-weakly-anodyne-map f j
+  is-weakly-anodyne-map-is-anodyne-map J g G x =
     is-local-is-orthogonal-terminal-map j
       ( J ( terminal-map (fiber g x))
           ( is-orthogonal-terminal-map-is-local f (G x)))
@@ -82,8 +83,8 @@ module _
   (f : A → B) {j : C → D} {j' : C' → D'}
   where
 
-  is-weakly-anodyne-retract-map :
-    retract-map j j' → is-weakly-anodyne f j → is-weakly-anodyne f j'
-  is-weakly-anodyne-retract-map α J g G x =
+  is-weakly-anodyne-map-retract-map :
+    retract-map j j' → is-weakly-anodyne-map f j → is-weakly-anodyne-map f j'
+  is-weakly-anodyne-map-retract-map α J g G x =
     is-local-retract-map-is-local j' j α (fiber g x) (J g G x)
 ```

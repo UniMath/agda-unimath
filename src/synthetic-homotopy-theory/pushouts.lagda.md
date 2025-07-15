@@ -468,17 +468,19 @@ module _
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
   where
 
-  pullback-property-pushout-is-pushout :
-    is-pushout f g c → pullback-property-pushout f g c
-  pullback-property-pushout-is-pushout po =
-    pullback-property-pushout-universal-property-pushout f g c
-      ( universal-property-pushout-is-pushout f g c po)
+  abstract
+    pullback-property-pushout-is-pushout :
+      is-pushout f g c → pullback-property-pushout f g c
+    pullback-property-pushout-is-pushout po =
+      pullback-property-pushout-universal-property-pushout f g c
+        ( universal-property-pushout-is-pushout f g c po)
 
-  is-pushout-pullback-property-pushout :
-    pullback-property-pushout f g c → is-pushout f g c
-  is-pushout-pullback-property-pushout pb =
-    is-pushout-universal-property-pushout f g c
-      ( universal-property-pushout-pullback-property-pushout f g c pb)
+  abstract
+    is-pushout-pullback-property-pushout :
+      pullback-property-pushout f g c → is-pushout f g c
+    is-pushout-pullback-property-pushout pb =
+      is-pushout-universal-property-pushout f g c
+        ( universal-property-pushout-pullback-property-pushout f g c pb)
 ```
 
 ### Fibers of the cogap map

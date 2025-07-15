@@ -137,26 +137,27 @@ module _
   precomp-cocartesian-hom-arrow =
     precomp-hom-arrow f g (hom-arrow-cocartesian-hom-arrow f g α) S
 
-  is-cartesian-precomp-cocartesian-hom-arrow :
-    is-cartesian-hom-arrow
-      ( precomp g S)
-      ( precomp f S)
-      ( precomp-cocartesian-hom-arrow)
-  is-cartesian-precomp-cocartesian-hom-arrow =
-    is-pullback-swap-cone
-      ( precomp f S)
-      ( precomp (map-domain-cocartesian-hom-arrow f g α) S)
-      ( cone-hom-arrow
-        ( precomp (map-codomain-cocartesian-hom-arrow f g α) S)
+  abstract
+    is-cartesian-precomp-cocartesian-hom-arrow :
+      is-cartesian-hom-arrow
+        ( precomp g S)
+        ( precomp f S)
+        ( precomp-cocartesian-hom-arrow)
+    is-cartesian-precomp-cocartesian-hom-arrow =
+      is-pullback-swap-cone
+        ( precomp f S)
         ( precomp (map-domain-cocartesian-hom-arrow f g α) S)
-        ( transpose-precomp-hom-arrow f g
-          ( hom-arrow-cocartesian-hom-arrow f g α)
-          ( S)))
-      ( pullback-property-pushout-is-pushout
-        ( f)
-        ( map-domain-cocartesian-hom-arrow f g α)
-        ( cocone-cocartesian-hom-arrow f g α)
-        ( is-cocartesian-cocartesian-hom-arrow f g α) S)
+        ( cone-hom-arrow
+          ( precomp (map-codomain-cocartesian-hom-arrow f g α) S)
+          ( precomp (map-domain-cocartesian-hom-arrow f g α) S)
+          ( transpose-precomp-hom-arrow f g
+            ( hom-arrow-cocartesian-hom-arrow f g α)
+            ( S)))
+        ( pullback-property-pushout-is-pushout
+          ( f)
+          ( map-domain-cocartesian-hom-arrow f g α)
+          ( cocone-cocartesian-hom-arrow f g α)
+          ( is-cocartesian-cocartesian-hom-arrow f g α) S)
 
   precomp-cartesian-hom-arrow-cocartesian-hom-arrow :
     cartesian-hom-arrow (precomp g S) (precomp f S)
