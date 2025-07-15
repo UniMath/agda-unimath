@@ -190,7 +190,7 @@ module _
     is-retraction-hom-inv-symmetric-group-loop-group-Set
 ```
 
-### The abstacted automorphism group and the loop group of a set are isomorphic
+### The abstracted automorphism group and the loop group of a set are isomorphic
 
 ```agda
 module _

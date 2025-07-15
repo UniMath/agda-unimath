@@ -75,7 +75,7 @@ pr2 (Σ-Finite-Type A B) =
     ( λ a → is-finite-type-Finite-Type (B a))
 ```
 
-### If `A` and `Σ A B` are finite, then eacy `B a` is finite
+### If `A` and `Σ A B` are finite, then each `B a` is finite
 
 ```agda
 abstract

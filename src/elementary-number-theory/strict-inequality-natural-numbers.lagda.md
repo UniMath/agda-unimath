@@ -8,6 +8,7 @@ module elementary-number-theory.strict-inequality-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -20,15 +21,21 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import order-theory.strictly-preordered-sets
 ```
 
 </details>
@@ -146,6 +153,15 @@ transitive-le-ℕ : (n m l : ℕ) → (le-ℕ n m) → (le-ℕ m l) → (le-ℕ 
 transitive-le-ℕ zero-ℕ (succ-ℕ m) (succ-ℕ l) p q = star
 transitive-le-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
   transitive-le-ℕ n m l p q
+```
+
+### The strictly preordered set of natural numbers ordered by strict inequality
+
+```agda
+strictly-preordered-set-ℕ : Strictly-Preordered-Set lzero lzero
+pr1 strictly-preordered-set-ℕ = ℕ-Set
+pr2 strictly-preordered-set-ℕ =
+  le-ℕ-Prop , anti-reflexive-le-ℕ , λ n m l I J → transitive-le-ℕ n m l J I
 ```
 
 ### A sharper variant of transitivity
@@ -391,4 +407,17 @@ preserves-le-add-ℕ {a} {b} {c} {d} H K =
     (b +ℕ d)
     (preserves-le-right-add-ℕ c a b H)
     (preserves-le-left-add-ℕ b c d K)
+```
+
+### There is an equivalence between natural numbers less than `succ-ℕ n` and natural numbers less than or equal to `n`
+
+```agda
+equiv-le-succ-ℕ-leq-ℕ :
+  (n : ℕ) → Σ ℕ (λ k → le-ℕ k (succ-ℕ n)) ≃ Σ ℕ (λ k → leq-ℕ k n)
+pr1 (equiv-le-succ-ℕ-leq-ℕ n) (k , k<sn) = (k , leq-le-succ-ℕ k n k<sn)
+pr2 (equiv-le-succ-ℕ-leq-ℕ n) =
+  is-equiv-is-invertible
+    ( λ (k , k≤n) → k , le-succ-leq-ℕ k n k≤n)
+    ( λ (k , k≤n) → eq-pair-eq-fiber (eq-type-Prop (leq-ℕ-Prop k n)))
+    ( λ (k , k<sn) → eq-pair-eq-fiber (eq-type-Prop (le-ℕ-Prop k (succ-ℕ n))))
 ```

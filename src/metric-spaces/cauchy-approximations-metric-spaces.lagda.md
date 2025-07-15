@@ -10,6 +10,7 @@ module metric-spaces.cauchy-approximations-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-relations
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -19,8 +20,9 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-premetric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.short-functions-metric-spaces
 ```
 
 </details>
@@ -76,4 +78,39 @@ module _
       ( map-cauchy-approximation-Metric-Space ε)
       ( map-cauchy-approximation-Metric-Space δ)
   is-cauchy-approximation-map-cauchy-approximation-Metric-Space = pr2 f
+```
+
+## Properties
+
+### Constant maps in metric spaces are Cauchy approximations
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  (x : type-Metric-Space A)
+  where
+
+  const-cauchy-approximation-Metric-Space :
+    cauchy-approximation-Metric-Space A
+  const-cauchy-approximation-Metric-Space =
+    (const ℚ⁺ x) , (λ ε δ → is-reflexive-structure-Metric-Space A (ε +ℚ⁺ δ) x)
+```
+
+### Short maps between metric spaces preserve Cauchy approximations
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : short-function-Metric-Space A B)
+  where
+
+  map-short-function-cauchy-approximation-Metric-Space :
+    cauchy-approximation-Metric-Space A →
+    cauchy-approximation-Metric-Space B
+  map-short-function-cauchy-approximation-Metric-Space =
+    map-short-function-cauchy-approximation-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( f)
 ```

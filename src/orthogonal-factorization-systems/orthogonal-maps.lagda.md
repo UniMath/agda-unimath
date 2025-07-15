@@ -347,7 +347,7 @@ map
   (Π (a : A) → (fiber g (h (f a)))) ----> fiber (g ∘ -) (h ∘ f),
 ```
 
-hence the fiber condition is satisified if and only if `f` and `g` are
+hence the fiber condition is satisfied if and only if `f` and `g` are
 orthogonal.
 
 ```agda

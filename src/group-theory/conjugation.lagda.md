@@ -40,7 +40,7 @@ the map `y ↦ (xy)x⁻¹`. This can be seen as a homomorphism `G → G` as well
 group action of `G` onto itself.
 
 The delooping of the conjugation homomorphism is defined in
-[`structured-types.conjugation-pointed-types.md`](structured-types.conjugation-pointed-types.md)`.
+[`structured-types.conjugation-pointed-types`](structured-types.conjugation-pointed-types.md).
 
 ## Definitions
 
