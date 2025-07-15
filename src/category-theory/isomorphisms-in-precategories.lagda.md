@@ -568,7 +568,8 @@ module _
       ( is-iso-comp-is-iso-Precategory C GF (is-iso-inv-is-iso-Precategory C F))
 ```
 
-> It remains to formalize the other 2 cases of the 3-for-2 property.
+> It remains to formalize the implication
+> `is-iso g → is-iso (g ∘ f) → is-iso f`.
 
 ### The inverse operation is a fibered involution on isomorphisms
 
