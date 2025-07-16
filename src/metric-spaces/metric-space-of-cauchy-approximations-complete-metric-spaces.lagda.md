@@ -200,7 +200,7 @@ module _
     η =
     limit-cauchy-approximation-Complete-Metric-Space
       ( A)
-      ( swap-cauchy-approximation-cauchy-approximations-Metric-Space
+      ( map-swap-cauchy-approximation-Metric-Space
         ( metric-space-Complete-Metric-Space A)
         ( U)
         ( η))
@@ -214,11 +214,11 @@ module _
     is-short-limit-cauchy-approximation-Complete-Metric-Space
       ( A)
       ( ε +ℚ⁺ δ)
-      ( swap-cauchy-approximation-cauchy-approximations-Metric-Space
+      ( map-swap-cauchy-approximation-Metric-Space
         ( metric-space-Complete-Metric-Space A)
         ( U)
         ( ε))
-      ( swap-cauchy-approximation-cauchy-approximations-Metric-Space
+      ( map-swap-cauchy-approximation-Metric-Space
         ( metric-space-Complete-Metric-Space A)
         ( U)
         ( δ))
@@ -251,7 +251,7 @@ module _
     ε δ η =
     is-limit-limit-cauchy-approximation-Complete-Metric-Space
       ( A)
-      ( swap-cauchy-approximation-cauchy-approximations-Metric-Space
+      ( map-swap-cauchy-approximation-Metric-Space
         ( metric-space-Complete-Metric-Space A)
         ( U)
         ( η))

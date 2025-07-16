@@ -11,7 +11,9 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -151,6 +153,24 @@ module _
     ( map-short-function-cauchy-approximation-Metric-Space A C
       (comp-short-function-Metric-Space A B C g f))
   eq-comp-map-short-function-cauchy-approximation-Metric-Space = refl
+```
+
+### Homotopic cauchy approximations are equal
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  {f g : cauchy-approximation-Metric-Space A}
+  where
+
+  eq-htpy-cauchy-approximation-Metric-Space :
+    map-cauchy-approximation-Metric-Space A f ~
+    map-cauchy-approximation-Metric-Space A g →
+    f ＝ g
+  eq-htpy-cauchy-approximation-Metric-Space H =
+    eq-type-subtype
+      ( is-cauchy-approximation-prop-Metric-Space A)
+      ( eq-htpy H)
 ```
 
 ## References
