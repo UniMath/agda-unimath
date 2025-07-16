@@ -57,7 +57,7 @@ module _
 
 ## Properties
 
-### The map `(x : A) ↦ const x` is an isometry between `A` the the metric space of cauchy approximations in `A`
+### The map `(x : A) ↦ const x` is an isometry between `A` and the metric space of cauchy approximations in `A`
 
 ```agda
 module _
