@@ -212,6 +212,13 @@ is-prop-inverts-subset-hom-Ring :
 is-prop-inverts-subset-hom-Ring R S P f =
   is-prop-Π (λ x → is-prop-Π (λ p → is-prop-inverts-element-hom-Ring R S x f))
 
+inverts-subset-hom-ring-Prop :
+  {l1 l2 l3 : Level} (R : Ring l1) (S : Ring l2) (P : subset-Ring l3 R) →
+  (f : hom-Ring R S) → Prop (l1 ⊔ l2 ⊔ l3)
+pr1 (inverts-subset-hom-ring-Prop R S P f) = inverts-subset-hom-Ring R S P f
+pr2 (inverts-subset-hom-ring-Prop R S P f) =
+  is-prop-inverts-subset-hom-Ring R S P f
+
 inv-inverts-subset-hom-Ring :
   {l1 l2 l3 : Level} (R : Ring l1) (S : Ring l2) (P : subset-Ring l3 R)
   (f : hom-Ring R S) (H : inverts-subset-hom-Ring R S P f)

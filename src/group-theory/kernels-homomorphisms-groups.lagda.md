@@ -15,12 +15,15 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import foundation-core.injective-maps
+
 open import group-theory.embeddings-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subsets-groups
+open import group-theory.trivial-subgroups
 ```
 
 </details>
@@ -132,4 +135,57 @@ module _
   kernel-hom-Group : Normal-Subgroup l2 G
   pr1 kernel-hom-Group = subgroup-kernel-hom-Group G H f
   pr2 kernel-hom-Group = is-normal-kernel-hom-Group
+```
+
+### When `ker f` is [trivial](group-theory.trivial-subgroups.md), `f` is [injective](foundation-core.injective-maps.md)
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  ( f-ker-triv : is-trivial-Subgroup G (subgroup-kernel-hom-Group G H f))
+  where
+
+  kernel-is-trivial-is-injective-Group : is-injective (map-hom-Group G H f)
+  kernel-is-trivial-is-injective-Group {x} {y} p = inv lem-3 where
+    lem-1 : is-in-kernel-hom-Group G H f (mul-Group G (inv-Group G y) x)
+    lem-1 = equational-reasoning
+      unit-Group H ＝ mul-Group H (inv-Group H (map-hom-Group G H f y))
+      ( map-hom-Group G H f y)
+        by inv (left-inverse-law-mul-Group H (pr1 f y))
+      ＝ mul-Group H (map-hom-Group G H f (inv-Group G y))
+      ( map-hom-Group G H f y)
+        by ap (λ z → mul-Group H z (pr1 f y))
+        ( inv (preserves-inv-hom-Group G H f))
+      ＝ mul-Group H (map-hom-Group G H f (inv-Group G y))
+      ( map-hom-Group G H f x)
+        by ap (mul-Group H (map-hom-Group G H f (inv-Group G y))) (inv p)
+      ＝ map-hom-Group G H f (mul-Group G (inv-Group G y) x)
+        by inv (preserves-mul-hom-Group G H f)
+
+    lem-2 : unit-Group G ＝ mul-Group G (inv-Group G y) x
+    lem-2 = f-ker-triv (mul-Group G (inv-Group G y) x) lem-1
+
+    lem-3 : y ＝ x
+    lem-3 = equational-reasoning
+      y ＝ mul-Group G y (unit-Group G)
+        by inv (right-unit-law-mul-Group G y)
+      ＝ mul-Group G y (mul-Group G (inv-Group G y) x)
+        by ap (mul-Group G y) lem-2
+      ＝ mul-Group G (mul-Group G y (inv-Group G y)) x
+        by inv (associative-mul-Group G y (inv-Group G y) x)
+      ＝ mul-Group G (unit-Group G) x
+        by ap (λ z → mul-Group G z x) (right-inverse-law-mul-Group G y)
+      ＝ x
+        by left-unit-law-mul-Group G x
+
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  where
+
+  is-injective-kernel-is-trivial-Group :
+    is-injective (map-hom-Group G H f) → is-trivial-Subgroup G
+    ( subgroup-kernel-hom-Group G H f)
+  is-injective-kernel-is-trivial-Group f-inj x fx-unit = f-inj lem where
+    lem : pr1 f (unit-Group G) ＝ pr1 f x
+    lem = preserves-unit-hom-Group G H f ∙ fx-unit
 ```
