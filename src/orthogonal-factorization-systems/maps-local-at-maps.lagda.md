@@ -147,6 +147,19 @@ module _
       ( G (map-codomain-inclusion-retract-map g' g R d))
 ```
 
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} {E : UU l5} {F : UU l6}
+  {f : A → B} {g : C → D} {f' : E → F}
+  where
+
+  is-local-retract-map' :
+    is-local-map f g → f' retract-of-map f → is-local-map f' g
+  is-local-retract-map' F R d =
+    is-local-retract-map-is-local f' f R (fiber g d) (F d)
+```
+
 ## See also
 
 - [Localizations with respect to maps](orthogonal-factorization-systems.localizations-at-maps.md)

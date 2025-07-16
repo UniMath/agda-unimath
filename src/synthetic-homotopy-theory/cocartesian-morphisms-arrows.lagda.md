@@ -7,13 +7,17 @@ module synthetic-homotopy-theory.cocartesian-morphisms-arrows where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-morphisms-arrows
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.morphisms-arrows
+open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.pullbacks
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.pullback-property-pushouts
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
@@ -119,6 +123,47 @@ module _
       ( map-domain-cocartesian-hom-arrow)
       ( cocone-cocartesian-hom-arrow)
       ( is-cocartesian-cocartesian-hom-arrow)
+```
+
+### The cartesian morphism on precomposition maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : cocartesian-hom-arrow f g) (S : UU l)
+  where
+
+  precomp-cocartesian-hom-arrow : hom-arrow (precomp g S) (precomp f S)
+  precomp-cocartesian-hom-arrow =
+    precomp-hom-arrow f g (hom-arrow-cocartesian-hom-arrow f g α) S
+
+  abstract
+    is-cartesian-precomp-cocartesian-hom-arrow :
+      is-cartesian-hom-arrow
+        ( precomp g S)
+        ( precomp f S)
+        ( precomp-cocartesian-hom-arrow)
+    is-cartesian-precomp-cocartesian-hom-arrow =
+      is-pullback-swap-cone
+        ( precomp f S)
+        ( precomp (map-domain-cocartesian-hom-arrow f g α) S)
+        ( cone-hom-arrow
+          ( precomp (map-codomain-cocartesian-hom-arrow f g α) S)
+          ( precomp (map-domain-cocartesian-hom-arrow f g α) S)
+          ( transpose-precomp-hom-arrow f g
+            ( hom-arrow-cocartesian-hom-arrow f g α)
+            ( S)))
+        ( pullback-property-pushout-is-pushout
+          ( f)
+          ( map-domain-cocartesian-hom-arrow f g α)
+          ( cocone-cocartesian-hom-arrow f g α)
+          ( is-cocartesian-cocartesian-hom-arrow f g α) S)
+
+  precomp-cartesian-hom-arrow-cocartesian-hom-arrow :
+    cartesian-hom-arrow (precomp g S) (precomp f S)
+  precomp-cartesian-hom-arrow-cocartesian-hom-arrow =
+    ( precomp-cocartesian-hom-arrow ,
+      is-cartesian-precomp-cocartesian-hom-arrow)
 ```
 
 ## See also
