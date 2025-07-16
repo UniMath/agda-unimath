@@ -24,7 +24,7 @@ open import foundation.universe-levels
 ## Idea
 
 A
-{{#concept "morphisms of monad algebras" Disambiguation="on a precategory" Agda=algebra-monad-Precategory}}
+{{#concept "morphism" Disambiguation="of monad algebras on a precategory" Agda=algebra-monad-Precategory}}
 between [monad algebras](category-theory.algebras-monads-on-precategories.md)
 `a : TA → A` and `b : TB → B` is a map `f : A → B` such that `b ∘ Tf = f ∘ a`.
 
@@ -77,7 +77,7 @@ module _
     hom-endofunctor-monad-Precategory C T
       ( hom-morphism-algebra-monad-Precategory f g h)
 
-  comm-hom-morphism-algebra-monad-Precategory :
+  coh-hom-morphism-algebra-monad-Precategory :
     (f g : algebra-monad-Precategory C T)
     (h : morphism-algebra-monad-Precategory f g) →
     coherence-square-hom-Precategory C
@@ -85,7 +85,7 @@ module _
       ( hom-algebra-monad-Precategory C T f)
       ( hom-algebra-monad-Precategory C T g)
       ( hom-morphism-algebra-monad-Precategory f g h)
-  comm-hom-morphism-algebra-monad-Precategory f g h = pr2 h
+  coh-hom-morphism-algebra-monad-Precategory f g h = pr2 h
 
   comp-morphism-algebra-monad-Precategory :
     (a b c : algebra-monad-Precategory C T)
@@ -104,8 +104,8 @@ module _
       ( hom-algebra-monad-Precategory C T c)
       ( hom-morphism-algebra-monad-Precategory a b f)
       ( hom-morphism-algebra-monad-Precategory b c g)
-      ( comm-hom-morphism-algebra-monad-Precategory a b f)
-      ( comm-hom-morphism-algebra-monad-Precategory b c g)) ∙
+      ( coh-hom-morphism-algebra-monad-Precategory a b f)
+      ( coh-hom-morphism-algebra-monad-Precategory b c g)) ∙
     ( ap
       ( postcomp-hom-Precategory C (hom-algebra-monad-Precategory C T c) _)
       ( inv (preserves-comp-endofunctor-monad-Precategory C T _ _)))
