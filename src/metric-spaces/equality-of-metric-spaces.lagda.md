@@ -93,8 +93,8 @@ module _
 
   isometric-equiv-Metric-Space' : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   isometric-equiv-Metric-Space' =
-    Σ ( type-function-Metric-Space A B)
-      ( λ f → (is-equiv f) × (is-isometry-Metric-Space A B f))
+    Σ (type-function-Metric-Space A B)
+      (λ f → (is-equiv f) × (is-isometry-Metric-Space A B f))
 ```
 
 ## Properties
@@ -160,7 +160,7 @@ module _
           (ap (is-isometry-Metric-Space A B) (eq-htpy (λ x → refl))))
 ```
 
-### Isometric equivalence of metric spaces characterize their equalities
+### Isometric equivalences of metric spaces characterize their equalities
 
 ```agda
 module _

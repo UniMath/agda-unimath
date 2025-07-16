@@ -91,7 +91,7 @@ Pseudometric-Structure l2 A =
   type-subtype (is-pseudometric-prop-Rational-Neighborhood-Relation A {l2})
 ```
 
-### Pseudometric spaces
+### The type of pseudometric spaces
 
 ```agda
 Pseudometric-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)

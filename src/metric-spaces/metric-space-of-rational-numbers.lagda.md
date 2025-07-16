@@ -1,4 +1,4 @@
-# The standard metric space of the rational numbers
+# The standard metric space of rational numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}

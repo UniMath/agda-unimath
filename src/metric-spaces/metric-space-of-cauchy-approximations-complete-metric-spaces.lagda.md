@@ -143,7 +143,7 @@ module _
       ( short-convergent-cauchy-approximation-Complete-Metric-Space)
 ```
 
-### The map from a Cauchy approximation in a saturated complete metric space to its limit is short
+### The map from a Cauchy approximation in a complete metric space to its limit is short
 
 ```agda
 module _

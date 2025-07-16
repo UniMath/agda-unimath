@@ -121,12 +121,12 @@ module _
   where
 
   is-isometry-id-Metric-Space :
-    is-isometry-Metric-Space A A (λ x → x)
+    is-isometry-Metric-Space A A (id-Metric-Space A)
   is-isometry-id-Metric-Space d x y = id-iff
 
   isometry-id-Metric-Space : isometry-Metric-Space A A
   isometry-id-Metric-Space =
-    (λ x → x) , is-isometry-id-Metric-Space
+    id-Metric-Space A , is-isometry-id-Metric-Space
 ```
 
 ### Equality of isometries in metric spaces is equivalent to homotopies between their carrier maps
@@ -155,8 +155,7 @@ module _
     map-equiv equiv-eq-htpy-map-isometry-Metric-Space
 
   eq-htpy-map-isometry-Metric-Space :
-    ( map-isometry-Metric-Space A B f ~
-      map-isometry-Metric-Space A B g) →
+    ( map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g) →
     (f ＝ g)
   eq-htpy-map-isometry-Metric-Space =
     map-inv-equiv equiv-eq-htpy-map-isometry-Metric-Space
@@ -316,14 +315,14 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : type-function-Metric-Space A B)
+  (I : is-isometry-Metric-Space A B f)
+  (E : is-equiv f)
   where
 
   is-isometry-map-inv-is-equiv-is-isometry-Metric-Space :
-    (f : type-function-Metric-Space A B) →
-    is-isometry-Metric-Space A B f →
-    (E : is-equiv f) →
     is-isometry-Metric-Space B A (map-inv-is-equiv E)
-  is-isometry-map-inv-is-equiv-is-isometry-Metric-Space f I E d x y =
+  is-isometry-map-inv-is-equiv-is-isometry-Metric-Space d x y =
     logical-equivalence-reasoning
       ( neighborhood-Metric-Space B d x y)
       ↔ ( neighborhood-Metric-Space B d

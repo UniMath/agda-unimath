@@ -82,9 +82,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level}
-  (X : Metric-Space l1 l2)
-  (Y : Metric-Space l3 l4)
+  {l1 l2 l3 l4 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
   where
 
   uniformly-continuous-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)

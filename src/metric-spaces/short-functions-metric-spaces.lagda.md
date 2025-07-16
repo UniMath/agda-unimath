@@ -120,12 +120,12 @@ module _
   where
 
   is-short-id-Metric-Space :
-    is-short-function-Metric-Space A A (λ x → x)
+    is-short-function-Metric-Space A A (id-Metric-Space A)
   is-short-id-Metric-Space d x y H = H
 
   short-id-Metric-Space : short-function-Metric-Space A A
   short-id-Metric-Space =
-    (λ x → x) , is-short-id-Metric-Space
+    id-Metric-Space A , is-short-id-Metric-Space
 ```
 
 ### Equality of short functions between metric spaces is characterized by homotopy of their carrier maps
