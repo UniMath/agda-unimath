@@ -179,7 +179,7 @@ module _
 ### The metric space of Cauchy approximations in a complete metric space is complete
 
 Given a Cauchy approximation of Cauchy approximations `U : ℚ⁺ → ℚ⁺ → A` in a
-saturated complete metric space `A`, we construct its limit as follows:
+complete metric space `A`, we construct its limit as follows:
 
 1. for any `η : ℚ⁺`, the partial application `ε ↦ U ε η` is a Cauchy
    approximation in `A`;
