@@ -147,7 +147,7 @@ abstract
       ( commutative-mul-ℚ⁺ x y)
 ```
 
-### Inversion on the positive rational numbers interchange numerator and denominator
+### Inversion on the positive rational numbers interchanges numerator and denominator
 
 ```agda
 module _
