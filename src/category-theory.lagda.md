@@ -6,6 +6,8 @@
 
 ## Examples of precategories and large precategories
 
+C.f. also the list above.
+
 {{#include tables/precategories.md}}
 
 ## Modules in the category theory namespace
@@ -25,6 +27,7 @@ open import category-theory.category-of-functors public
 open import category-theory.category-of-functors-from-small-to-large-categories public
 open import category-theory.category-of-maps-categories public
 open import category-theory.category-of-maps-from-small-to-large-categories public
+open import category-theory.category-of-simplicial-sets public
 open import category-theory.coalgebras-comonads-on-precategories public
 open import category-theory.cocones-precategories public
 open import category-theory.codensity-monads-on-precategories public
