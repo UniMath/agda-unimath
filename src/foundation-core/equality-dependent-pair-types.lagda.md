@@ -16,6 +16,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.retracts-of-types
 open import foundation-core.transport-along-identifications
 ```
 
@@ -112,10 +113,12 @@ module _
         ( is-section-pair-eq-Σ s t)
 
   equiv-pair-eq-Σ : (s t : Σ A B) → (s ＝ t) ≃ Eq-Σ s t
-  pr1 (equiv-pair-eq-Σ s t) = pair-eq-Σ
-  pr2 (equiv-pair-eq-Σ s t) = is-equiv-pair-eq-Σ s t
+  equiv-pair-eq-Σ s t = (pair-eq-Σ , is-equiv-pair-eq-Σ s t)
 
-  η-pair : (t : Σ A B) → (pair (pr1 t) (pr2 t)) ＝ t
+  retract-pair-eq-Σ : (s t : Σ A B) → (s ＝ t) retract-of (Eq-Σ s t)
+  retract-pair-eq-Σ s t = (pair-eq-Σ , eq-pair-Σ' , is-section-pair-eq-Σ s t)
+
+  η-pair : (t : Σ A B) → (pr1 t , pr2 t) ＝ t
   η-pair t = refl
 ```
 
