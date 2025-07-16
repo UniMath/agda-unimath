@@ -57,6 +57,31 @@ module _
 
 ## Properties
 
+### The map `(x : A) ↦ const x` is an isometry between `A` the the metric space of cauchy approximations in `A`
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  where
+
+  is-isometry-const-cauchy-approximation-Metric-Space :
+    is-isometry-Metric-Space
+      ( A)
+      ( metric-space-of-cauchy-approximations-Metric-Space A)
+      ( const-cauchy-approximation-Metric-Space A)
+  is-isometry-const-cauchy-approximation-Metric-Space ε x y =
+    ( λ Nxy η → Nxy) ,
+    ( λ Nxy → Nxy one-ℚ⁺)
+
+  isometry-const-cauchy-approximation-Metric-Space :
+    isometry-Metric-Space
+      ( A)
+      ( metric-space-of-cauchy-approximations-Metric-Space A)
+  isometry-const-cauchy-approximation-Metric-Space =
+    ( const-cauchy-approximation-Metric-Space A ,
+      is-isometry-const-cauchy-approximation-Metric-Space)
+```
+
 ### The action of short maps on Cauchy approximations is short
 
 ```agda
