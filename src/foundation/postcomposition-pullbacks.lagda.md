@@ -11,6 +11,7 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.postcomposition-functions
 open import foundation.standard-pullbacks
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -21,7 +22,6 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.postcomposition-functions
 open import foundation-core.pullbacks
 open import foundation-core.universal-property-pullbacks
 ```
@@ -68,9 +68,10 @@ postcomp-cone :
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} (T : UU l5)
   (f : A → X) (g : B → X) (c : cone f g C) →
   cone (postcomp T f) (postcomp T g) (T → C)
-pr1 (postcomp-cone T f g c) h = vertical-map-cone f g c ∘ h
-pr1 (pr2 (postcomp-cone T f g c)) h = horizontal-map-cone f g c ∘ h
-pr2 (pr2 (postcomp-cone T f g c)) h = eq-htpy (coherence-square-cone f g c ·r h)
+postcomp-cone T f g c =
+  ( postcomp T (vertical-map-cone f g c) ,
+    postcomp T (horizontal-map-cone f g c) ,
+    htpy-postcomp T (coherence-square-cone f g c))
 ```
 
 ## Properties
@@ -121,38 +122,33 @@ triangle-map-standard-pullback-postcomp T f g c h =
 ### Pullbacks are closed under postcomposition exponentiation
 
 ```agda
-abstract
-  is-pullback-postcomp-is-pullback :
-    {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-    (f : A → X) (g : B → X) (c : cone f g C) → is-pullback f g c →
-    (T : UU l5) →
-    is-pullback (postcomp T f) (postcomp T g) (postcomp-cone T f g c)
-  is-pullback-postcomp-is-pullback f g c is-pb-c T =
-    is-equiv-top-map-triangle
-      ( cone-map f g c)
-      ( map-standard-pullback-postcomp f g T)
-      ( gap (f ∘_) (g ∘_) (postcomp-cone T f g c))
-      ( triangle-map-standard-pullback-postcomp T f g c)
-      ( is-equiv-map-standard-pullback-postcomp f g T)
-      ( universal-property-pullback-is-pullback f g c is-pb-c T)
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (c : cone f g C)
+  where
 
-abstract
-  is-pullback-is-pullback-postcomp :
-    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-    (f : A → X) (g : B → X) (c : cone f g C) →
-    ( {l5 : Level} (T : UU l5) →
-      is-pullback (postcomp T f) (postcomp T g) (postcomp-cone T f g c)) →
-    is-pullback f g c
-  is-pullback-is-pullback-postcomp f g c is-pb-postcomp =
-    is-pullback-universal-property-pullback f g c
-      ( λ T →
-        is-equiv-left-map-triangle
-          ( cone-map f g c)
-          ( map-standard-pullback-postcomp f g T)
-          ( gap (f ∘_) (g ∘_) (postcomp-cone T f g c))
-          ( triangle-map-standard-pullback-postcomp T f g c)
-          ( is-pb-postcomp T)
-          ( is-equiv-map-standard-pullback-postcomp f g T))
+  abstract
+    is-pullback-postcomp-is-pullback :
+      is-pullback f g c → {l5 : Level} (T : UU l5) →
+      is-pullback (postcomp T f) (postcomp T g) (postcomp-cone T f g c)
+    is-pullback-postcomp-is-pullback is-pb-c T =
+      is-equiv-top-map-triangle _ _ _
+        ( triangle-map-standard-pullback-postcomp T f g c)
+        ( is-equiv-map-standard-pullback-postcomp f g T)
+        ( universal-property-pullback-is-pullback f g c is-pb-c T)
+
+  abstract
+    is-pullback-is-pullback-postcomp :
+      ( {l5 : Level} (T : UU l5) →
+        is-pullback (postcomp T f) (postcomp T g) (postcomp-cone T f g c)) →
+      is-pullback f g c
+    is-pullback-is-pullback-postcomp is-pb-postcomp =
+      is-pullback-universal-property-pullback f g c
+        ( λ T →
+          is-equiv-left-map-triangle _ _ _
+            ( triangle-map-standard-pullback-postcomp T f g c)
+            ( is-pb-postcomp T)
+            ( is-equiv-map-standard-pullback-postcomp f g T))
 ```
 
 ### Cones satisfying the universal property of pullbacks are closed under postcomposition exponentiation
