@@ -1,6 +1,8 @@
 # Rational abelian groups
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module group-theory.rational-abelian-groups where
 ```
 
@@ -12,13 +14,20 @@ open import elementary-number-theory.nonzero-integers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.ring-of-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.path-split-maps
+open import foundation-core.sections
 
 open import group-theory.abelian-groups
 open import group-theory.divisible-groups
@@ -35,6 +44,7 @@ open import group-theory.trivial-subgroups
 open import linear-algebra.left-modules-rings
 
 open import ring-theory.homomorphisms-rings
+open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 ```
 
@@ -81,18 +91,29 @@ are equivalent, and because the space of ℚ-module structures on an abelian gro
 is a proposition, the author prefers the naming convention seen for other
 subspaces of (abelian) groups. Thus, rational abelian groups.
 
+Note 2: For some constructive purposes, especially those with tight apartness
+relations floating around, injectivity of a map `f` (say, of `multiple-Ab A n`)
+is insufficient and its to-be-defined counterpart of "strong injectivity" is
+needed. Here, however, we may use the generally weaker notion of injectivity;
+univalence combined with path transport in the universe shows all equivalences
+are strongly injective in this sense, and for sets a map is an equivalence iff
+it is surjective and (weakly) injective.
+
 ### The multiply-by-`n` maps are isomorphisms for `A` rational abelian
 
 ```agda
 module _
-  {l : Level} (A : Ab l) (A-rat : is-rational-Ab A)
+  {l : Level} (A : Ab l)
   where
 
-  multiple-is-equiv-rational-Ab : (n : ℕ⁺) → is-equiv (multiple-Ab A (nat-nonzero-ℕ n))
-  multiple-is-equiv-rational-Ab (n , n>0) = {!   !}
+  multiple-is-contr-map-rational-Ab : is-rational-Ab A → (n : ℕ⁺) → is-contr-map (multiple-Ab A (nat-nonzero-ℕ n))
+  multiple-is-contr-map-rational-Ab (A-div , A-tf) (n , n>0) y = {!   !}
 
-  multiple-is-iso-rational-Ab : (n : ℕ⁺) → is-iso-Ab A A (multiple-hom-Ab A (nat-nonzero-ℕ n))
-  multiple-is-iso-rational-Ab (n , n>0) = is-iso-is-equiv-hom-Ab A A (multiple-hom-Ab A n) {!   !}
+  multiple-is-equiv-rational-Ab : is-rational-Ab A → (n : ℕ⁺) → is-equiv (multiple-Ab A (nat-nonzero-ℕ n))
+  multiple-is-equiv-rational-Ab A-rat n = is-equiv-is-contr-map (multiple-is-contr-map-rational-Ab A-rat n)
+
+  multiple-is-iso-rational-Ab : is-rational-Ab A → (n : ℕ⁺) → is-iso-Ab A A (multiple-hom-Ab A (nat-nonzero-ℕ n))
+  multiple-is-iso-rational-Ab A-rat (n , n>0) = is-iso-is-equiv-hom-Ab A A (multiple-hom-Ab A n) (multiple-is-equiv-rational-Ab A-rat (n , n>0))
 ```
 
 ```agda
