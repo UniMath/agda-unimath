@@ -435,34 +435,35 @@ module _
   (x : ℚ)
   where
 
-  eq-numerator-mul-denominator-ℚ :
-    mul-ℚ
-      ( x)
-      ( rational-ℤ (denominator-ℚ x)) ＝
-    rational-ℤ (numerator-ℚ x)
-  eq-numerator-mul-denominator-ℚ =
-    ( eq-ℚ-sim-fraction-ℤ
-      ( mul-fraction-ℤ
-        ( fraction-ℚ x)
-        ( in-fraction-ℤ (denominator-ℚ x)))
-      ( in-fraction-ℤ (numerator-ℚ x))
-      ( associative-mul-ℤ
-        ( numerator-ℚ x)
-        ( denominator-ℚ x)
-        ( one-ℤ))) ∙
-    ( is-retraction-rational-fraction-ℚ
-      ( rational-ℤ (numerator-ℚ x)))
+  abstract
+    eq-numerator-mul-denominator-ℚ :
+      mul-ℚ
+        ( x)
+        ( rational-ℤ (denominator-ℚ x)) ＝
+      rational-ℤ (numerator-ℚ x)
+    eq-numerator-mul-denominator-ℚ =
+      ( eq-ℚ-sim-fraction-ℤ
+        ( mul-fraction-ℤ
+          ( fraction-ℚ x)
+          ( in-fraction-ℤ (denominator-ℚ x)))
+        ( in-fraction-ℤ (numerator-ℚ x))
+        ( associative-mul-ℤ
+          ( numerator-ℚ x)
+          ( denominator-ℚ x)
+          ( one-ℤ))) ∙
+      ( is-retraction-rational-fraction-ℚ
+        ( rational-ℤ (numerator-ℚ x)))
 
-  eq-numerator-mul-denominator-ℚ' :
-    mul-ℚ
-      ( rational-ℤ (denominator-ℚ x))
-      ( x) ＝
-    rational-ℤ (numerator-ℚ x)
-  eq-numerator-mul-denominator-ℚ' =
-    ( commutative-mul-ℚ
-      ( rational-ℤ (denominator-ℚ x))
-      ( x)) ∙
-    ( eq-numerator-mul-denominator-ℚ)
+    eq-numerator-mul-denominator-ℚ' :
+      mul-ℚ
+        ( rational-ℤ (denominator-ℚ x))
+        ( x) ＝
+      rational-ℤ (numerator-ℚ x)
+    eq-numerator-mul-denominator-ℚ' =
+      ( commutative-mul-ℚ
+        ( rational-ℤ (denominator-ℚ x))
+        ( x)) ∙
+      ( eq-numerator-mul-denominator-ℚ)
 ```
 
 ## See also

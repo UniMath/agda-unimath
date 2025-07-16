@@ -82,48 +82,51 @@ hom-ring-rational-ℤ =
   ( λ {x y} → inv (mul-rational-ℤ x y)) ,
   ( refl)
 
-htpy-map-initial-hom-ring-rational-ℤ : map-initial-hom-Ring ring-ℚ ~ rational-ℤ
-htpy-map-initial-hom-ring-rational-ℤ =
-  htpy-initial-hom-Ring ring-ℚ hom-ring-rational-ℤ
+abstract
+  htpy-map-initial-hom-ring-rational-ℤ :
+    map-initial-hom-Ring ring-ℚ ~ rational-ℤ
+  htpy-map-initial-hom-ring-rational-ℤ =
+    htpy-initial-hom-Ring ring-ℚ hom-ring-rational-ℤ
 
-eq-initial-hom-ring-rational-ℤ : initial-hom-Ring ring-ℚ ＝ hom-ring-rational-ℤ
-eq-initial-hom-ring-rational-ℤ =
-  contraction-initial-hom-Ring ring-ℚ hom-ring-rational-ℤ
+  eq-initial-hom-ring-rational-ℤ : initial-hom-Ring ring-ℚ ＝ hom-ring-rational-ℤ
+  eq-initial-hom-ring-rational-ℤ =
+    contraction-initial-hom-Ring ring-ℚ hom-ring-rational-ℤ
 ```
 
 ### The positive integers are invertible in ℚ
 
 ```agda
-inverts-positive-integers-rational-ℤ :
-  inverts-subset-hom-Ring
-    ( ℤ-Ring)
-    ( ring-ℚ)
-    ( subtype-positive-ℤ)
-    ( hom-ring-rational-ℤ)
-inverts-positive-integers-rational-ℤ k k>0 =
-  ( reciprocal-rational-ℤ⁺ (k , k>0)) ,
-  ( right-inverse-law-reciprocal-rational-ℤ⁺ (k , k>0) ,
-    left-inverse-law-reciprocal-rational-ℤ⁺ (k , k>0))
+abstract
+  inverts-positive-integers-rational-ℤ :
+    inverts-subset-hom-Ring
+      ( ℤ-Ring)
+      ( ring-ℚ)
+      ( subtype-positive-ℤ)
+      ( hom-ring-rational-ℤ)
+  inverts-positive-integers-rational-ℤ k k>0 =
+    ( reciprocal-rational-ℤ⁺ (k , k>0)) ,
+    ( right-inverse-law-reciprocal-rational-ℤ⁺ (k , k>0) ,
+      left-inverse-law-reciprocal-rational-ℤ⁺ (k , k>0))
 ```
 
 ### Any ring homomorphism from ℚ inverts the positive integers
 
 ```agda
 module _
-  {l : Level} (R : Ring l)
+  {l : Level} (R : Ring l) (f : hom-Ring ring-ℚ R)
   where
 
-  inverts-positive-integers-rational-hom-Ring :
-    (f : hom-Ring ring-ℚ R) →
-    inverts-subset-hom-Ring
-      ( ℤ-Ring)
-      ( R)
-      ( subtype-positive-ℤ)
-      ( comp-hom-Ring ℤ-Ring ring-ℚ R f hom-ring-rational-ℤ)
-  inverts-positive-integers-rational-hom-Ring f k k>0 =
-    preserves-invertible-elements-hom-Ring
-      ( ring-ℚ)
-      ( R)
-      ( f)
-      ( inverts-positive-integers-rational-ℤ k k>0)
+  abstract
+    inverts-positive-integers-rational-hom-Ring :
+      inverts-subset-hom-Ring
+        ( ℤ-Ring)
+        ( R)
+        ( subtype-positive-ℤ)
+        ( comp-hom-Ring ℤ-Ring ring-ℚ R f hom-ring-rational-ℤ)
+    inverts-positive-integers-rational-hom-Ring k k>0 =
+      preserves-invertible-elements-hom-Ring
+        ( ring-ℚ)
+        ( R)
+        ( f)
+        ( inverts-positive-integers-rational-ℤ k k>0)
 ```

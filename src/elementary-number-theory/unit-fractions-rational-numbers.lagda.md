@@ -83,11 +83,12 @@ reciprocal-rational-ℤ⁺ k =
 ### The numerator of a unit fracion is one
 
 ```agda
-eq-numerator-reciprocal-rational-ℤ⁺ :
-  (k : ℤ⁺) → numerator-ℚ (reciprocal-rational-ℤ⁺ k) ＝ one-ℤ
-eq-numerator-reciprocal-rational-ℤ⁺ k =
-  eq-numerator-inv-denominator-ℚ⁺
-    ( positive-rational-ℕ⁺ (positive-nat-ℤ⁺ k))
+abstract
+  eq-numerator-reciprocal-rational-ℤ⁺ :
+    (k : ℤ⁺) → numerator-ℚ (reciprocal-rational-ℤ⁺ k) ＝ one-ℤ
+  eq-numerator-reciprocal-rational-ℤ⁺ k =
+    eq-numerator-inv-denominator-ℚ⁺
+      ( positive-rational-ℕ⁺ (positive-nat-ℤ⁺ k))
 ```
 
 ### The denominator of the reciprocal of `k` is `k`
@@ -97,19 +98,20 @@ module _
   (k : ℤ⁺)
   where
 
-  eq-denominator-reciprocal-rational-ℤ⁺ :
-    denominator-ℚ (reciprocal-rational-ℤ⁺ k) ＝ int-positive-ℤ k
-  eq-denominator-reciprocal-rational-ℤ⁺ =
-    ( eq-denominator-inv-numerator-ℚ⁺
-      ( positive-rational-ℕ⁺ (positive-nat-ℤ⁺ k))) ∙
-    ( ap pr1 (is-section-positive-nat-ℤ⁺ k))
+  abstract
+    eq-denominator-reciprocal-rational-ℤ⁺ :
+      denominator-ℚ (reciprocal-rational-ℤ⁺ k) ＝ int-positive-ℤ k
+    eq-denominator-reciprocal-rational-ℤ⁺ =
+      ( eq-denominator-inv-numerator-ℚ⁺
+        ( positive-rational-ℕ⁺ (positive-nat-ℤ⁺ k))) ∙
+      ( ap pr1 (is-section-positive-nat-ℤ⁺ k))
 
-  eq-positive-denominator-reciprocal-rational-ℤ⁺ :
-    positive-denominator-ℚ (reciprocal-rational-ℤ⁺ k) ＝ k
-  eq-positive-denominator-reciprocal-rational-ℤ⁺ =
-    eq-type-subtype
-      ( subtype-positive-ℤ)
-      ( eq-denominator-reciprocal-rational-ℤ⁺)
+    eq-positive-denominator-reciprocal-rational-ℤ⁺ :
+      positive-denominator-ℚ (reciprocal-rational-ℤ⁺ k) ＝ k
+    eq-positive-denominator-reciprocal-rational-ℤ⁺ =
+      eq-type-subtype
+        ( subtype-positive-ℤ)
+        ( eq-denominator-reciprocal-rational-ℤ⁺)
 ```
 
 ### If `m ≤ n`, the reciprocal of `n` is less than or equal to the reciprocal of `n`
@@ -176,37 +178,38 @@ module _
   (n : ℕ⁺)
   where
 
-  left-inverse-law-positive-reciprocal-rational-ℕ⁺ :
-    mul-ℚ⁺
-      ( positive-reciprocal-rational-ℕ⁺ n)
-      ( positive-rational-ℕ⁺ n) ＝
-    one-ℚ⁺
-  left-inverse-law-positive-reciprocal-rational-ℕ⁺ =
-    left-inverse-law-mul-ℚ⁺ (positive-rational-ℕ⁺ n)
+  abstract
+    left-inverse-law-positive-reciprocal-rational-ℕ⁺ :
+      mul-ℚ⁺
+        ( positive-reciprocal-rational-ℕ⁺ n)
+        ( positive-rational-ℕ⁺ n) ＝
+      one-ℚ⁺
+    left-inverse-law-positive-reciprocal-rational-ℕ⁺ =
+      left-inverse-law-mul-ℚ⁺ (positive-rational-ℕ⁺ n)
 
-  left-inverse-law-reciprocal-rational-ℕ⁺ :
-    mul-ℚ
-      ( reciprocal-rational-ℕ⁺ n)
-      ( rational-ℚ⁺ (positive-rational-ℕ⁺ n)) ＝
-    one-ℚ
-  left-inverse-law-reciprocal-rational-ℕ⁺ =
-    ap rational-ℚ⁺ left-inverse-law-positive-reciprocal-rational-ℕ⁺
+    left-inverse-law-reciprocal-rational-ℕ⁺ :
+      mul-ℚ
+        ( reciprocal-rational-ℕ⁺ n)
+        ( rational-ℚ⁺ (positive-rational-ℕ⁺ n)) ＝
+      one-ℚ
+    left-inverse-law-reciprocal-rational-ℕ⁺ =
+      ap rational-ℚ⁺ left-inverse-law-positive-reciprocal-rational-ℕ⁺
 
-  right-inverse-law-positive-reciprocal-rational-ℕ⁺ :
-    mul-ℚ⁺
-      ( positive-rational-ℕ⁺ n)
-      ( positive-reciprocal-rational-ℕ⁺ n) ＝
-    one-ℚ⁺
-  right-inverse-law-positive-reciprocal-rational-ℕ⁺ =
-    right-inverse-law-mul-ℚ⁺ (positive-rational-ℕ⁺ n)
+    right-inverse-law-positive-reciprocal-rational-ℕ⁺ :
+      mul-ℚ⁺
+        ( positive-rational-ℕ⁺ n)
+        ( positive-reciprocal-rational-ℕ⁺ n) ＝
+      one-ℚ⁺
+    right-inverse-law-positive-reciprocal-rational-ℕ⁺ =
+      right-inverse-law-mul-ℚ⁺ (positive-rational-ℕ⁺ n)
 
-  right-inverse-law-reciprocal-rational-ℕ⁺ :
-    mul-ℚ
-      ( rational-ℚ⁺ (positive-rational-ℕ⁺ n))
-      ( reciprocal-rational-ℕ⁺ n) ＝
-    one-ℚ
-  right-inverse-law-reciprocal-rational-ℕ⁺ =
-    ap rational-ℚ⁺ right-inverse-law-positive-reciprocal-rational-ℕ⁺
+    right-inverse-law-reciprocal-rational-ℕ⁺ :
+      mul-ℚ
+        ( rational-ℚ⁺ (positive-rational-ℕ⁺ n))
+        ( reciprocal-rational-ℕ⁺ n) ＝
+      one-ℚ
+    right-inverse-law-reciprocal-rational-ℕ⁺ =
+      ap rational-ℚ⁺ right-inverse-law-positive-reciprocal-rational-ℕ⁺
 ```
 
 ### The reciprocal of `k : ℤ⁺` is a multiplicative inverse of `k`
@@ -216,47 +219,48 @@ module _
   (k : ℤ⁺)
   where
 
-  left-inverse-law-positive-reciprocal-rational-ℤ⁺ :
-    mul-ℚ⁺
-      ( positive-reciprocal-rational-ℤ⁺ k)
-      ( positive-rational-ℤ⁺ k) ＝
-    one-ℚ⁺
-  left-inverse-law-positive-reciprocal-rational-ℤ⁺ =
-    binary-tr
-      ( λ u v → u *ℚ⁺ v ＝ one-ℚ⁺)
-      ( refl)
-      ( ap positive-rational-ℤ⁺ (is-section-positive-nat-ℤ⁺ k))
-      ( left-inverse-law-positive-reciprocal-rational-ℕ⁺
-        ( positive-nat-ℤ⁺ k))
+  abstract
+    left-inverse-law-positive-reciprocal-rational-ℤ⁺ :
+      mul-ℚ⁺
+        ( positive-reciprocal-rational-ℤ⁺ k)
+        ( positive-rational-ℤ⁺ k) ＝
+      one-ℚ⁺
+    left-inverse-law-positive-reciprocal-rational-ℤ⁺ =
+      binary-tr
+        ( λ u v → u *ℚ⁺ v ＝ one-ℚ⁺)
+        ( refl)
+        ( ap positive-rational-ℤ⁺ (is-section-positive-nat-ℤ⁺ k))
+        ( left-inverse-law-positive-reciprocal-rational-ℕ⁺
+          ( positive-nat-ℤ⁺ k))
 
-  left-inverse-law-reciprocal-rational-ℤ⁺ :
-    mul-ℚ
-      ( reciprocal-rational-ℤ⁺ k)
-      ( rational-ℚ⁺ (positive-rational-ℤ⁺ k)) ＝
-    one-ℚ
-  left-inverse-law-reciprocal-rational-ℤ⁺ =
-    ap rational-ℚ⁺ left-inverse-law-positive-reciprocal-rational-ℤ⁺
+    left-inverse-law-reciprocal-rational-ℤ⁺ :
+      mul-ℚ
+        ( reciprocal-rational-ℤ⁺ k)
+        ( rational-ℚ⁺ (positive-rational-ℤ⁺ k)) ＝
+      one-ℚ
+    left-inverse-law-reciprocal-rational-ℤ⁺ =
+      ap rational-ℚ⁺ left-inverse-law-positive-reciprocal-rational-ℤ⁺
 
-  right-inverse-law-positive-reciprocal-rational-ℤ⁺ :
-    mul-ℚ⁺
-      ( positive-rational-ℤ⁺ k)
-      ( positive-reciprocal-rational-ℤ⁺ k) ＝
-    one-ℚ⁺
-  right-inverse-law-positive-reciprocal-rational-ℤ⁺ =
-    binary-tr
-      ( λ u v → u *ℚ⁺ v ＝ one-ℚ⁺)
-      ( ap positive-rational-ℤ⁺ (is-section-positive-nat-ℤ⁺ k))
-      ( refl)
-      ( right-inverse-law-positive-reciprocal-rational-ℕ⁺
-        ( positive-nat-ℤ⁺ k))
+    right-inverse-law-positive-reciprocal-rational-ℤ⁺ :
+      mul-ℚ⁺
+        ( positive-rational-ℤ⁺ k)
+        ( positive-reciprocal-rational-ℤ⁺ k) ＝
+      one-ℚ⁺
+    right-inverse-law-positive-reciprocal-rational-ℤ⁺ =
+      binary-tr
+        ( λ u v → u *ℚ⁺ v ＝ one-ℚ⁺)
+        ( ap positive-rational-ℤ⁺ (is-section-positive-nat-ℤ⁺ k))
+        ( refl)
+        ( right-inverse-law-positive-reciprocal-rational-ℕ⁺
+          ( positive-nat-ℤ⁺ k))
 
-  right-inverse-law-reciprocal-rational-ℤ⁺ :
-    mul-ℚ
-      ( rational-ℚ⁺ (positive-rational-ℤ⁺ k))
-      ( reciprocal-rational-ℤ⁺ k) ＝
-    one-ℚ
-  right-inverse-law-reciprocal-rational-ℤ⁺ =
-    ap rational-ℚ⁺ right-inverse-law-positive-reciprocal-rational-ℤ⁺
+    right-inverse-law-reciprocal-rational-ℤ⁺ :
+      mul-ℚ
+        ( rational-ℚ⁺ (positive-rational-ℤ⁺ k))
+        ( reciprocal-rational-ℤ⁺ k) ＝
+      one-ℚ
+    right-inverse-law-reciprocal-rational-ℤ⁺ =
+      ap rational-ℚ⁺ right-inverse-law-positive-reciprocal-rational-ℤ⁺
 ```
 
 ### Any rational number is the product of its numerator and the reciprocal of its denominator
@@ -266,33 +270,34 @@ module _
   (x : ℚ)
   where
 
-  eq-mul-numerator-reciprocal-denominator-ℚ :
-    mul-ℚ
-      ( rational-ℤ (numerator-ℚ x))
-      ( reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x)) ＝
-    x
-  eq-mul-numerator-reciprocal-denominator-ℚ =
-    ( ap
-      ( mul-ℚ' (reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x)))
-      ( inv (eq-numerator-mul-denominator-ℚ x))) ∙
-    ( associative-mul-ℚ
-      ( x)
-      ( rational-ℤ (denominator-ℚ x))
-      ( reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x))) ∙
-    ( ap
-      ( mul-ℚ x)
-      ( right-inverse-law-reciprocal-rational-ℤ⁺
-        ( positive-denominator-ℚ x))) ∙
-    ( right-unit-law-mul-ℚ x)
+  abstract
+    eq-mul-numerator-reciprocal-denominator-ℚ :
+      mul-ℚ
+        ( rational-ℤ (numerator-ℚ x))
+        ( reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x)) ＝
+      x
+    eq-mul-numerator-reciprocal-denominator-ℚ =
+      ( ap
+        ( mul-ℚ' (reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x)))
+        ( inv (eq-numerator-mul-denominator-ℚ x))) ∙
+      ( associative-mul-ℚ
+        ( x)
+        ( rational-ℤ (denominator-ℚ x))
+        ( reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x))) ∙
+      ( ap
+        ( mul-ℚ x)
+        ( right-inverse-law-reciprocal-rational-ℤ⁺
+          ( positive-denominator-ℚ x))) ∙
+      ( right-unit-law-mul-ℚ x)
 
-  eq-mul-numerator-reciprocal-denominator-ℚ' :
-    mul-ℚ
-      ( reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x))
-      ( rational-ℤ (numerator-ℚ x)) ＝
-    x
-  eq-mul-numerator-reciprocal-denominator-ℚ' =
-    ( commutative-mul-ℚ
-      ( reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x))
-      ( rational-ℤ (numerator-ℚ x))) ∙
-    ( eq-mul-numerator-reciprocal-denominator-ℚ)
+    eq-mul-numerator-reciprocal-denominator-ℚ' :
+      mul-ℚ
+        ( reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x))
+        ( rational-ℤ (numerator-ℚ x)) ＝
+      x
+    eq-mul-numerator-reciprocal-denominator-ℚ' =
+      ( commutative-mul-ℚ
+        ( reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x))
+        ( rational-ℤ (numerator-ℚ x))) ∙
+      ( eq-mul-numerator-reciprocal-denominator-ℚ)
 ```
