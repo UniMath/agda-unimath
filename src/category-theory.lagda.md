@@ -6,6 +6,8 @@
 
 ## Examples of precategories and large precategories
 
+C.f. also the list above.
+
 {{#include tables/precategories.md}}
 
 ## Modules in the category theory namespace
