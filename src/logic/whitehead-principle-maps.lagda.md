@@ -18,7 +18,6 @@ open import foundation.universe-levels
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.propositions
 
@@ -64,10 +63,12 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
-  is-∞-connected-map-fibers-are-∞-connected : is-∞-connected-map f → (y : Y) → is-∞-connected (fiber f y)
+  is-∞-connected-map-fibers-are-∞-connected :
+    is-∞-connected-map f → (y : Y) → is-∞-connected (fiber f y)
   is-∞-connected-map-fibers-are-∞-connected f-∞-conn y k = f-∞-conn k y
 
-  fibers-are-∞-connected-is-∞-connected-map : ((y : Y) → is-∞-connected (fiber f y)) → is-∞-connected-map f
+  fibers-are-∞-connected-is-∞-connected-map :
+    ((y : Y) → is-∞-connected (fiber f y)) → is-∞-connected-map f
   fibers-are-∞-connected-is-∞-connected-map fib-∞-conn k y = fib-∞-conn y k
 ```
 
@@ -98,18 +99,25 @@ Whitehead-Principle-Map = {l1 l2 : Level} → Whitehead-Principle-Map-Level l1 l
 ### The Whitehead principle for maps implies the Whitehead principle for types
 
 ```agda
-Whitehead-Principle-Maps-implies-Types : Whitehead-Principle-Map → Whitehead-Principle
-Whitehead-Principle-Maps-implies-Types WP X X-∞-conn = is-contr-equiv-unit eq where
+Whitehead-Principle-Maps-implies-Types :
+  Whitehead-Principle-Map → Whitehead-Principle
+Whitehead-Principle-Maps-implies-Types WP X X-∞-conn =
+  is-contr-equiv-unit eq where
   eq : X ≃ unit
   pr1 eq = λ _ → star
-  pr2 eq = WP X unit (λ _ → star) (fibers-are-∞-connected-is-∞-connected-map (λ _ → star) λ y → is-∞-connected-equiv (equiv-fiber-terminal-map star) X-∞-conn)
+  pr2 eq =
+    WP X unit (λ _ → star) (fibers-are-∞-connected-is-∞-connected-map
+    (λ _ → star)
+    λ y → is-∞-connected-equiv (equiv-fiber-terminal-map star) X-∞-conn)
 ```
 
 ### The Whitehead principle for types implies the Whitehead principle for maps
 
 ```agda
-Whitehead-Principle-Types-implies-Maps : Whitehead-Principle → Whitehead-Principle-Map
-Whitehead-Principle-Types-implies-Maps WP X Y f f-∞-conn = is-equiv-is-contr-map f-ctr where
+Whitehead-Principle-Types-implies-Maps :
+  Whitehead-Principle → Whitehead-Principle-Map
+Whitehead-Principle-Types-implies-Maps WP X Y f f-∞-conn =
+  is-equiv-is-contr-map f-ctr where
   f-ctr : is-contr-map f
   f-ctr y = WP (fiber f y) (λ x → f-∞-conn x y)
 ```

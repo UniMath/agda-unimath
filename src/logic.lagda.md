@@ -21,4 +21,6 @@ open import logic.double-negation-stable-subtypes public
 open import logic.functoriality-existential-quantification public
 open import logic.markovian-types public
 open import logic.markovs-principle public
+open import logic.whitehead-principle-maps public
+open import logic.whitehead-principle-types public
 ```
