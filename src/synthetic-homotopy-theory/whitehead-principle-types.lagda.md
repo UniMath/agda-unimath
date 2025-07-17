@@ -1,7 +1,7 @@
 # The Whitehead principle for types
 
 ```agda
-module logic.whitehead-principle-types where
+module synthetic-homotopy-theory.whitehead-principle-types where
 ```
 
 <details><summary>Imports</summary>
@@ -30,7 +30,10 @@ A type is said to be **∞-connected** if it is `n`-connected for all `n : 𝕋`
 Contractible types are ∞-connected.
 
 The **Whitehead principle for types** asserts the converse, that ∞-connected
-types are contractible.
+types are contractible. In
+(whitehead-principle-maps)[synthetic-homotopy-theory.whitehead-principle-maps.md],
+we show (assuming enough universes) that this is equivalent to maps whose fibers
+are ∞-connected being equivalences.
 
 ## Definition
 

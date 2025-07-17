@@ -1,7 +1,7 @@
 # The Whitehead principle for maps
 
 ```agda
-module logic.whitehead-principle-maps where
+module synthetic-homotopy-theory.whitehead-principle-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -21,7 +21,7 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
 
-open import logic.whitehead-principle-types
+open import synthetic-homotopy-theory.whitehead-principle-types
 ```
 
 </details>
@@ -56,7 +56,7 @@ module _
   is-prop-is-∞-connected-map = is-prop-type-Prop is-∞-connected-map-Prop
 ```
 
-### A map is ∞-connected iff its fibers are [∞-connected](logic.whitehead-principle-types.md)
+### A map is ∞-connected iff its fibers are [∞-connected](synthetic-homotopy-theory.whitehead-principle-types.md)
 
 ```agda
 module _
