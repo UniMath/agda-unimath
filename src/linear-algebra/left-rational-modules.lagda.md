@@ -7,20 +7,25 @@ module linear-algebra.left-rational-modules where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.positive-integers
 open import elementary-number-theory.ring-of-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
+open import group-theory.integer-multiples-of-elements-abelian-groups
+open import group-theory.isomorphisms-abelian-groups
 
 open import linear-algebra.left-modules-rings
 
 open import ring-theory.homomorphisms-rings
+open import ring-theory.invertible-elements-rings
 open import ring-theory.rational-rings
 open import ring-theory.rings
 ```
@@ -96,4 +101,40 @@ module _
     is-rational-Ring (endomorphism-ring-Ab M)
   is-rational-endo-ring-is-rational-left-module-Ab =
     is-rational-has-rational-hom-Ring (endomorphism-ring-Ab M)
+```
+
+### An abelian group `A` is a left rational module if and only if for any `k : ℤ⁺` the map `x ↦ k x` is an isomorphism
+
+```agda
+module _
+  {l : Level} (M : Ab l)
+  where
+
+  is-iso-positive-integer-multiple-is-rational-left-module-Ab :
+    is-rational-left-module-Ab M →
+    (k : ℤ⁺) →
+    is-iso-Ab M M (hom-integer-multiple-Ab M (int-positive-ℤ k))
+  is-iso-positive-integer-multiple-is-rational-left-module-Ab H k =
+    tr
+      ( is-iso-Ab M M)
+      ( htpy-initial-hom-integer-multiple-endomorphism-ring-Ab
+        ( M)
+        ( int-positive-ℤ k))
+      ( ind-Σ
+        ( is-rational-endo-ring-is-rational-left-module-Ab M H)
+        ( k))
+
+  is-rational-left-module-is-iso-positive-integer-multiple-Ab :
+    ((k : ℤ⁺) → is-iso-Ab M M (hom-integer-multiple-Ab M (int-positive-ℤ k))) →
+    is-rational-left-module-Ab M
+  is-rational-left-module-is-iso-positive-integer-multiple-Ab H =
+    is-rational-left-module-is-rational-ring-endo-Ab
+      ( M)
+      ( λ k k>0 →
+        inv-tr
+          ( is-invertible-element-Ring (endomorphism-ring-Ab M))
+          ( htpy-initial-hom-integer-multiple-endomorphism-ring-Ab
+            ( M)
+            ( k))
+        ( ev-pair H k k>0))
 ```
