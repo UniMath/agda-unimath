@@ -88,7 +88,7 @@ module _
 ```agda
 Whitehead-Principle-Map-Level : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Whitehead-Principle-Map-Level l1 l2 =
-  (X : UU l1) → (Y : UU l2) → (f : X → Y) → is-∞-connected-map f → is-equiv f
+  ( X : UU l1) → (Y : UU l2) → (f : X → Y) → is-∞-connected-map f → is-equiv f
 
 Whitehead-Principle-Map : UUω
 Whitehead-Principle-Map = {l1 l2 : Level} → Whitehead-Principle-Map-Level l1 l2
@@ -107,7 +107,7 @@ Whitehead-Principle-Maps-implies-Types WP X X-∞-conn =
   pr1 eq = λ _ → star
   pr2 eq =
     WP X unit (λ _ → star) (fibers-are-∞-connected-is-∞-connected-map
-    (λ _ → star)
+    ( λ _ → star)
     λ y → is-∞-connected-equiv (equiv-fiber-terminal-map star) X-∞-conn)
 ```
 

@@ -77,7 +77,7 @@ module _
     (f : A → B) → is-equiv f → is-∞-connected B → is-∞-connected A
   is-∞-connected-is-equiv f e B-∞-conn k =
     is-contr-is-equiv (type-trunc k B) (map-trunc k f)
-    (is-equiv-map-equiv-trunc k (f , e)) (B-∞-conn k)
+    ( is-equiv-map-equiv-trunc k (f , e)) (B-∞-conn k)
 
   is-∞-connected-equiv :
     A ≃ B → is-∞-connected B → is-∞-connected A
