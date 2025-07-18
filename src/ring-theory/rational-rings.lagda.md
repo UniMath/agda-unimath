@@ -60,7 +60,7 @@ A {{#concept "rational ring" Agda=Rational-Ring}} is a
 [ring](ring-theory.rings.md) where the images of
 [positive integers](elementary-number-theory.positive-integers.md) by the
 [initial ring homomorphism](elementary-number-theory.ring-of-integers.md)) are
-[invertible](ring-theory.invertible-elements-rings.md. The
+[invertible](ring-theory.invertible-elements-rings.md). The
 [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md)
 is rational; for any ring `R`, if there exists a
 [ring homomorphism](ring-theory.homomorphisms-rings.md) `f : ℚ → R`, then `R` is
