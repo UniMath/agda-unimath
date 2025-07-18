@@ -1177,3 +1177,33 @@ module _
   iff-is-rational-has-rational-hom-Ring =
     ( is-rational-has-rational-hom-Ring R , has-rational-hom-is-rational-Ring)
 ```
+
+### The ring of rational numbers is the localization of the ring of integers at `ℤ⁺`
+
+```agda
+module _
+  {l : Level}
+  where
+
+  universal-property-localization-positive-integers-rational-Ring :
+    universal-property-localization-subset-Ring
+      ( l)
+      ( ℤ-Ring)
+      ( ring-ℚ)
+      ( subtype-positive-ℤ)
+      ( initial-hom-Ring ring-ℚ)
+      ( is-rational-ring-Rational-Ring rational-ring-ℚ)
+  universal-property-localization-positive-integers-rational-Ring T =
+    is-equiv-has-converse-is-prop
+      ( is-prop-rational-hom-Ring T)
+      ( is-prop-type-subtype
+        ( inverts-subset-prop-hom-Ring ℤ-Ring T subtype-positive-ℤ)
+        ( is-prop-is-contr (is-initial-ℤ-Ring T)))
+      ( λ (f , H) →
+        initial-hom-Rational-Ring
+          ( ( T) ,
+            ( inv-tr
+              ( inverts-subset-hom-Ring ℤ-Ring T subtype-positive-ℤ)
+              ( contraction-initial-hom-Ring T f)
+              ( H))))
+```
