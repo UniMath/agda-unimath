@@ -98,6 +98,9 @@ module _
 ```agda
 one-positive-ℤ : positive-ℤ
 one-positive-ℤ = (one-ℤ , star)
+
+one-ℤ⁺ : ℤ⁺
+one-ℤ⁺ = one-positive-ℤ
 ```
 
 ## Properties
@@ -156,6 +159,27 @@ is-positive-int-is-nonzero-ℕ (succ-ℕ x) H = star
 
 positive-int-ℕ⁺ : ℕ⁺ → positive-ℤ
 positive-int-ℕ⁺ (n , n≠0) = int-ℕ n , is-positive-int-is-nonzero-ℕ n n≠0
+
+positive-nat-ℤ⁺ : positive-ℤ → ℕ⁺
+positive-nat-ℤ⁺ (inr (inr x) , k>0) = succ-nonzero-ℕ' x
+
+abstract
+  is-section-positive-nat-ℤ⁺ :
+    (k : ℤ⁺) → positive-int-ℕ⁺ (positive-nat-ℤ⁺ k) ＝ k
+  is-section-positive-nat-ℤ⁺ (inr (inr k) , k>0) =
+    eq-type-subtype subtype-positive-ℤ refl
+
+  is-retraction-positive-nat-ℤ⁺ :
+    (n : ℕ⁺) → positive-nat-ℤ⁺ (positive-int-ℕ⁺ n) ＝ n
+  is-retraction-positive-nat-ℤ⁺ (zero-ℕ , n≠0) = ex-falso (n≠0 refl)
+  is-retraction-positive-nat-ℤ⁺ (succ-ℕ n , n≠0) = eq-nonzero-ℕ refl
+
+  is-equiv-positive-int-ℕ⁺ : is-equiv positive-int-ℕ⁺
+  is-equiv-positive-int-ℕ⁺ =
+    is-equiv-is-invertible
+      ( positive-nat-ℤ⁺)
+      ( is-section-positive-nat-ℤ⁺)
+      ( is-retraction-positive-nat-ℤ⁺)
 ```
 
 ### The canonical equivalence between natural numbers and positive integers

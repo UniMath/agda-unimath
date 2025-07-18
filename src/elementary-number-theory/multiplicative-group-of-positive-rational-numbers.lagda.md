@@ -146,3 +146,22 @@ abstract
       ( y)
       ( commutative-mul-ℚ⁺ x y)
 ```
+
+### Inversion on the positive rational numbers interchanges numerator and denominator
+
+```agda
+module _
+  (x : ℚ⁺)
+  where
+
+  abstract
+    eq-numerator-inv-denominator-ℚ⁺ :
+      numerator-ℚ⁺ (inv-ℚ⁺ x) ＝ denominator-ℚ⁺ x
+    eq-numerator-inv-denominator-ℚ⁺ =
+      ind-Σ eq-numerator-inv-denominator-is-positive-ℚ x
+
+    eq-denominator-inv-numerator-ℚ⁺ :
+      denominator-ℚ⁺ (inv-ℚ⁺ x) ＝ numerator-ℚ⁺ x
+    eq-denominator-inv-numerator-ℚ⁺ =
+      ind-Σ eq-denominator-inv-numerator-is-positive-ℚ x
+```
