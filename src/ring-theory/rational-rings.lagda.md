@@ -56,25 +56,21 @@ open import ring-theory.rings
 ## Idea
 
 A {{#concept "rational ring" Agda=Rational-Ring}} is a
-[ring](ring-theory.rings.md) where the
-[positive integers](elementary-number-theory.positive-integers.md) are
-[invertible](ring-theory.invertible-elements-rings.md) (modulo the
-[initial ring homomorphism](elementary-number-theory.ring-of-integers.md)).
-
-The
+[ring](ring-theory.rings.md) where the images of
+[positive integers](elementary-number-theory.positive-integers.md) by the
+[initial ring homomorphism](elementary-number-theory.ring-of-integers.md)) are
+[invertible](ring-theory.invertible-elements-rings.md. The
 [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md)
-is rational. The
-[initial ring homomorphism](elementary-number-theory.ring-of-integers.md)
-`ι : ℤ → R` extends to a [ring homomorphism](ring-theory.homomorphisms-rings.md)
-`γ : ℚ → R` by `γ : p/q ↦ (ι p)(ι q)⁻¹` and this is the unique ring homomorphism
-`ℚ → R`. In other words, for any rational ring `R`, `hom-Ring ℚ R` is
-[contractible](foundation.contractible-types.md) and `ℚ` is the
-[initial](ring-theory.initial-rings.md) rational ring.
-
-Finally, for any ring `R`, if there exists a ring homomorphism `f : ℚ → R`, then
-`R` is **rational** and `f` is the initial rational ring map `γ : ℚ → R`. So a
-ring `R` is rational if and only if there exists a ring homomorphism `ℚ → R` (
-in which case, it is the initial rational ring homomorphism `γ`).
+is rational; for any ring `R`, if there exists a
+[ring homomorphism](ring-theory.homomorphisms-rings.md) `f : ℚ → R`, then `R` is
+**rational** and `f` is [homotopic](foundation.homotopies.md) to the extension
+of the [initial ring homomorphism](elementary-number-theory.ring-of-integers.md)
+`ι : ℤ → R` defined by `γ : (p/q : ℚ) ↦ (ι p)(ι q)⁻¹`. In other words, a ring
+`R` is **rational** if and only if `hom-Ring ℚ R` is
+[contractible](foundation.contractible-types.md) so `ℚ` is the
+[initial](ring-theory.initial-rings.md) rational ring. It follows that `ℚ` is
+the [localization](ring-theory.localizations-rings.md) of `ℤ` at
+[ℤ⁺](elementary-number-theory.positive-integers.md).
 
 ## Definitions
 
@@ -1176,6 +1172,20 @@ module _
   iff-is-rational-has-rational-hom-Ring : hom-Ring ring-ℚ R ↔ is-rational-Ring R
   iff-is-rational-has-rational-hom-Ring =
     ( is-rational-has-rational-hom-Ring R , has-rational-hom-is-rational-Ring)
+```
+
+### A ring `R` is rational if and only if the type ring homomorphism `ℚ → R` is contractible
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  iff-is-rational-is-contr-rational-hom-Ring :
+    is-contr (hom-Ring ring-ℚ R) ↔ is-rational-Ring R
+  iff-is-rational-is-contr-rational-hom-Ring =
+    ( is-rational-has-rational-hom-Ring R ∘ center) ,
+    ( is-contr-rational-hom-Rational-Ring ∘ pair R)
 ```
 
 ### The ring of rational numbers is the localization of the ring of integers at `ℤ⁺`
