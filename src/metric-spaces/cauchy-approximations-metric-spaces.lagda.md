@@ -167,7 +167,7 @@ module _
   where
 
   eq-htpy-cauchy-approximation-Metric-Space : f ＝ g
-  eq-htpy-cauchy-approximation-Metric-Space H =
+  eq-htpy-cauchy-approximation-Metric-Space =
     eq-type-subtype
       ( is-cauchy-approximation-prop-Metric-Space A)
       ( eq-htpy f~g)
