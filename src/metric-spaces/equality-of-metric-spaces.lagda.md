@@ -55,7 +55,7 @@ following equivalent concepts:
 
 ## Definitions
 
-### Isometric equality between metric spaces
+### Isometric equality of metric spaces
 
 ```agda
 module _
@@ -203,15 +203,15 @@ module _
   equiv-isometric-equiv-isometric-equiv-Metric-Space' :
     isometric-equiv-Metric-Space A B ≃ isometric-equiv-Metric-Space' A B
   equiv-isometric-equiv-isometric-equiv-Metric-Space' =
-    equiv-tot
+    ( equiv-tot
       ( λ f →
         equiv-tot
           ( λ e →
-            equiv-eq (ap (is-isometry-Metric-Space A B) refl))) ∘e
-    associative-Σ
+            equiv-eq (ap (is-isometry-Metric-Space A B) refl)))) ∘e
+    ( associative-Σ
       ( type-function-Metric-Space A B)
       ( is-equiv)
-      ( is-isometry-Metric-Space A B ∘ map-equiv)
+      ( is-isometry-Metric-Space A B ∘ map-equiv))
 ```
 
 ### Isometric equivalences between metric spaces characterize their equality

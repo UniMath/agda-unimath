@@ -159,18 +159,18 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1 l2)
-  {f g : cauchy-approximation-Metric-Space A}
+  { l1 l2 : Level} (A : Metric-Space l1 l2)
+  { f g : cauchy-approximation-Metric-Space A}
+  ( f~g :
+    map-cauchy-approximation-Metric-Space A f ~
+    map-cauchy-approximation-Metric-Space A g)
   where
 
-  eq-htpy-cauchy-approximation-Metric-Space :
-    map-cauchy-approximation-Metric-Space A f ~
-    map-cauchy-approximation-Metric-Space A g →
-    f ＝ g
+  eq-htpy-cauchy-approximation-Metric-Space : f ＝ g
   eq-htpy-cauchy-approximation-Metric-Space H =
     eq-type-subtype
       ( is-cauchy-approximation-prop-Metric-Space A)
-      ( eq-htpy H)
+      ( eq-htpy f~g)
 ```
 
 ## References
