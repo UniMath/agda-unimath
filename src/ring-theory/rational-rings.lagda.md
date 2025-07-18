@@ -1149,13 +1149,13 @@ module _
       ( is-prop-rational-hom-Rational-Ring
         ( rational-ring-has-rational-hom-Ring R f))
 
-  is-prop-rational-hom-Ring : is-prop (hom-Ring ring-ℚ R)
-  is-prop-rational-hom-Ring =
+  is-prop-has-rational-hom-Ring : is-prop (hom-Ring ring-ℚ R)
+  is-prop-has-rational-hom-Ring =
     is-prop-all-elements-equal all-eq-rational-hom-Ring
 
-  is-rational-hom-prop-Ring : Prop l
-  is-rational-hom-prop-Ring =
-    hom-Ring ring-ℚ R , is-prop-rational-hom-Ring
+  has-rational-hom-prop-Ring : Prop l
+  has-rational-hom-prop-Ring =
+    hom-Ring ring-ℚ R , is-prop-has-rational-hom-Ring
 ```
 
 ### A ring `R` is rational if and only if there exists a ring homomorphism `ℚ → R`
@@ -1205,7 +1205,7 @@ module _
       ( is-rational-ring-Rational-Ring rational-ring-ℚ)
   universal-property-localization-positive-integers-rational-Ring T =
     is-equiv-has-converse-is-prop
-      ( is-prop-rational-hom-Ring T)
+      ( is-prop-has-rational-hom-Ring T)
       ( is-prop-type-subtype
         ( inverts-subset-prop-hom-Ring ℤ-Ring T subtype-positive-ℤ)
         ( is-prop-is-contr (is-initial-ℤ-Ring T)))

@@ -54,7 +54,7 @@ module _
 
   is-rational-left-module-prop-Ab : Prop l
   is-rational-left-module-prop-Ab =
-    is-rational-hom-prop-Ring (endomorphism-ring-Ab A)
+    has-rational-hom-prop-Ring (endomorphism-ring-Ab A)
 
   is-rational-left-module-Ab : UU l
   is-rational-left-module-Ab =
