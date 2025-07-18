@@ -48,6 +48,7 @@ open import ring-theory.groups-of-units-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.localizations-rings
+open import ring-theory.opposite-rings
 open import ring-theory.rings
 ```
 
@@ -1216,4 +1217,41 @@ module _
               ( inverts-subset-hom-Ring ℤ-Ring T subtype-positive-ℤ)
               ( contraction-initial-hom-Ring T f)
               ( H))))
+```
+
+### A ring is rational if and only if its opposite ring is rational
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-rational-op-is-rational-Ring :
+    is-rational-Ring R → is-rational-Ring (op-Ring R)
+  is-rational-op-is-rational-Ring H k k>0 =
+    ( inv-positive-integer-Rational-Ring (R , H) (k , k>0)) ,
+    ( left-inverse-law-positive-integer-Rational-Ring (R , H) (k , k>0)) ,
+    ( right-inverse-law-positive-integer-Rational-Ring (R , H) (k , k>0))
+
+  is-rational-is-rational-op-Ring :
+    is-rational-Ring (op-Ring R) → is-rational-Ring R
+  is-rational-is-rational-op-Ring H k k>0 =
+    ( inv-positive-integer-Rational-Ring (op-Ring R , H) (k , k>0)) ,
+    ( left-inverse-law-positive-integer-Rational-Ring
+      ( op-Ring R , H)
+      ( k , k>0)) ,
+    ( right-inverse-law-positive-integer-Rational-Ring
+      ( op-Ring R , H)
+      ( k , k>0))
+
+module _
+  {l : Level}
+  where
+
+  op-Rational-Ring : Rational-Ring l → Rational-Ring l
+  op-Rational-Ring R =
+    ( op-Ring (ring-Rational-Ring R)) ,
+    ( is-rational-op-is-rational-Ring
+      ( ring-Rational-Ring R)
+      ( is-rational-ring-Rational-Ring R))
 ```
