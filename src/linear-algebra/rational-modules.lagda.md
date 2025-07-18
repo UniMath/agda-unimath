@@ -43,7 +43,7 @@ open import ring-theory.rings
 ## Idea
 
 A {{#concept "rational module" Agda=Rational-Module}} is an
-[abelian group](group-theory.abelian-groups.md) whose
+[Abelian group](group-theory.abelian-groups.md) whose
 [ring of endomorphisms](group-theory.endomorphism-rings-abelian-groups.md) is
 [rational](ring-theory.rational-ringd.md). The type of **rational modules** is
 equivalent to the type of [left modules](linear-algebra.left-modules-rings.md)
@@ -94,7 +94,7 @@ module _
 
 ## Properties
 
-### An abelian group is a rational module if and only if for any `k : ℤ⁺` the map `x ↦ k x` is an isomorphism
+### An Abelian group is a rational module if and only if for any `k : ℤ⁺` the map `x ↦ k x` is an isomorphism
 
 ```agda
 module _
