@@ -45,9 +45,18 @@ open import ring-theory.rings
 A {{#concept "rational module" Agda=Rational-Module}} is an
 [abelian group](group-theory.abelian-groups.md) whose
 [ring of endomorphisms](group-theory.endomorphism-rings-abelian-groups.md) is
-[rational](ring-theory.rational-rings.md). The type of **rational modules** is
-equivalent to the type of [left](linear-algebra.left-modules-rings.md)
-or [right modules](linear-algebra.right-modules-rings.md) over the
+[rational](ring-theory.rational-rings.md), i.e., if the images of the
+[positive integers](elementary-number-theory.positive-integers.md) by the
+[initial ring homomorphism](elementary-number-theory.ring-of-integers.md) in its
+ring of endomorphisms are
+[invertible elements](ring-theory.invertible-elements-rings.md). This is
+equivalent to the existence of an
+[homomorphism of ring](ring-theory.homomorphisms-rings.md) from the
+[ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md)
+to the ring of endomorphisms of the abelian group so the type of **rational
+modules** is equivalent to the type of
+[left](linear-algebra.left-modules-rings.md) or
+[right modules](linear-algebra.right-modules-rings.md) over the
 [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md).
 
 ## Definitions
