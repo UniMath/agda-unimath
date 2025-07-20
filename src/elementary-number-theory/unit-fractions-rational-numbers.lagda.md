@@ -80,7 +80,7 @@ reciprocal-rational-ℤ⁺ k =
 
 ## Properties
 
-### The numerator of a unit fracion is one
+### The numerator of a unit fraction is one
 
 ```agda
 abstract
