@@ -164,7 +164,21 @@ module _
       ( is-rational-ring-Rational-Ring k k>0)
 ```
 
-### The initial ring homomorphism `ι : ℤ → R` into a rational ring
+### Homorphisms of rational rings
+
+```agda
+module _
+  {l1 l2 : Level} (A : Rational-Ring l1) (B : Rational-Ring l2)
+  where
+
+  hom-Rational-Ring : UU (l1 ⊔ l2)
+  hom-Rational-Ring =
+    hom-Ring
+      ( ring-Rational-Ring A)
+      ( ring-Rational-Ring B)
+```
+
+### The initial ring homomorphism into a rational ring
 
 ```agda
 module _
@@ -180,7 +194,10 @@ module _
     map-initial-hom-Ring (ring-Rational-Ring R)
 ```
 
-### Fractional extension of the initial ring homomorphism `ι : ℤ → R` into a rational ring: `φ : (p/q : fraction-ℤ) ↦ (ι p)(ι q)⁻¹ = (ι q)⁻¹(ι p)`
+### Fractional extension of the initial ring homomorphism into a rational ring
+
+It is defined as `φ : (p/q : fraction-ℤ) ↦ (ι p)(ι q)⁻¹ = (ι q)⁻¹(ι p)` where
+`ι : ℤ → R` is the initial ring homomorphism.
 
 ```agda
 module _
@@ -250,7 +267,10 @@ module _
         ( pr))
 ```
 
-### Rational extension of the initial ring homomorphism `ι : ℤ → R` into a rational ring: `γ : (p/q : ℚ) ↦ (ι p)(ι q)⁻¹ = (ι q)⁻¹(ι p) `
+### Rational extension of the initial ring homomorphism into a rational ring
+
+It is defined as `γ : (p/q : ℚ) ↦ (ι p)(ι q)⁻¹ = (ι q)⁻¹(ι p)` where `ι : ℤ → R`
+is the initial ring homomorphism.
 
 ```agda
 module _
@@ -842,7 +862,7 @@ module _
     rdy' = inv-positive-integer-Rational-Ring R dy
 ```
 
-### The rational initial ring map `γ : ℚ → R` extends the initial ring homomorphism `ι : ℤ → R`
+### The rational initial ring map extends the initial ring homomorphism
 
 ```agda
 module _
@@ -861,7 +881,7 @@ module _
       ( map-integer-initial-hom-Rational-Ring R k))
 ```
 
-### The rational initial ring map `γ : ℚ → R` preserves one
+### The rational initial ring map preserves one
 
 ```agda
 module _
@@ -877,7 +897,7 @@ module _
       ( is-invertible-positive-integer-Rational-Ring R one-ℤ⁺)
 ```
 
-### The initial ring map `ℚ → R` is a ring homomorphism
+### The initial ring map is a ring homomorphism
 
 ```agda
 module _
@@ -1017,7 +1037,7 @@ module _
     htpy-map-integer-rational-hom-Ring (ring-Rational-Ring R) f
 ```
 
-### For any ring homomorphism `f : ℚ → R` and `k : ℤ⁺`, `f (1/k) ＝ (ι k)⁻¹` where `ι : ℤ → R` is the initial ring homomorphism in `R`
+### A ring homomorphism `ℚ → R` preserves reciprocals of positive integers
 
 ```agda
 module _
@@ -1076,7 +1096,7 @@ module _
       ( f)
 ```
 
-### Any homomorphism `ℚ → R` is homotopic to the rational initial ring homomorphism `γ : ℚ → R`
+### Any homomorphism `ℚ → R` is homotopic to the rational initial ring homomorphism
 
 ```agda
 module _
