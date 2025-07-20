@@ -1096,7 +1096,7 @@ module _
       ( f)
 ```
 
-### Any homomorphism `ℚ → R` is homotopic to the rational initial ring homomorphism
+### Any ring homomorphism `ℚ → R` is homotopic to the rational initial ring homomorphism
 
 ```agda
 module _
