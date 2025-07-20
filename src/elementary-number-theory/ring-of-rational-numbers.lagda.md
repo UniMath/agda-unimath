@@ -134,5 +134,5 @@ module _
 ## See also
 
 - [rational ring of rational numbers](elementary-number-theory.rational-ring-of-rational-numbers.md):
-  the [rational ring](ring-theory.rational-ringd.md) of
+  the [rational ring](ring-theory.rational-rings.md) of
   [rational numbers](elementary-number-theory.rational-numbers.md)

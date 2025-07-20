@@ -68,7 +68,7 @@ Furthermore, the rational extension of the initial ring map `ι : ℤ → R` int
 rational ring, `γ : (p/q : ℚ) ↦ (ι p)(ι q)⁻¹`, is a
 [ring homomorphism](ring-theory.homomorphisms-rings.md) so `ℚ` is the
 **initial** rational ring, i.e., the type of ring homomorphisms between `ℚ` and
-any rational ring ring is [contractible](propositions.contractible-types.md).
+any rational ring ring is [contractible](foundation.contractible-types.md).
 
 ## Definitions
 
