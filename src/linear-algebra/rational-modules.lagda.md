@@ -156,17 +156,14 @@ module _
   {l : Level}
   where
 
-  abstract
-    equiv-left-module-Rational-Module :
-      left-module-Ring l ring-ℚ ≃ Rational-Module l
-    equiv-left-module-Rational-Module =
-      equiv-tot
-        ( λ M →
-          equiv-iff-is-prop
-            ( is-prop-has-rational-hom-Ring (endomorphism-ring-Ab M))
-            ( is-prop-is-rational-module-Ab M)
-            ( is-rational-has-rational-hom-Ring (endomorphism-ring-Ab M))
-            ( initial-hom-Rational-Ring ∘ pair (endomorphism-ring-Ab M)))
+  equiv-left-module-Rational-Module :
+    left-module-Ring l ring-ℚ ≃ Rational-Module l
+  equiv-left-module-Rational-Module =
+    equiv-type-subtype
+      ( is-prop-has-rational-hom-Ring ∘ endomorphism-ring-Ab)
+      ( is-prop-is-rational-module-Ab)
+      ( is-rational-has-rational-hom-Ring ∘ endomorphism-ring-Ab)
+      ( λ A H → initial-hom-Rational-Ring (endomorphism-ring-Ab A , H))
 ```
 
 ### A rational module is a right module over the ring of rational numbers
@@ -190,19 +187,18 @@ module _
   {l : Level}
   where
 
-  abstract
-    equiv-right-module-Rational-Module :
-      right-module-Ring l ring-ℚ ≃ Rational-Module l
-    equiv-right-module-Rational-Module =
-      equiv-tot
-        ( λ M →
-          equiv-iff-is-prop
-            ( is-prop-has-rational-hom-Ring (op-Ring (endomorphism-ring-Ab M)))
-            ( is-prop-is-rational-module-Ab M)
-            ( is-rational-is-rational-op-Ring (endomorphism-ring-Ab M) ∘
-              is-rational-has-rational-hom-Ring
-                ( op-Ring (endomorphism-ring-Ab M)))
-            ( initial-hom-Rational-Ring ∘
-              op-Rational-Ring ∘
-              pair (endomorphism-ring-Ab M)))
+  equiv-right-module-Rational-Module :
+    right-module-Ring l ring-ℚ ≃ Rational-Module l
+  equiv-right-module-Rational-Module =
+    equiv-type-subtype
+      ( is-prop-has-rational-hom-Ring ∘
+        op-Ring ∘
+        endomorphism-ring-Ab)
+      ( is-prop-is-rational-module-Ab)
+      ( λ A →
+        is-rational-is-rational-op-Ring (endomorphism-ring-Ab A) ∘
+        is-rational-has-rational-hom-Ring (op-Ring (endomorphism-ring-Ab A)))
+      ( λ A H →
+        initial-hom-Rational-Ring
+          ( op-Rational-Ring (endomorphism-ring-Ab A , H)))
 ```
