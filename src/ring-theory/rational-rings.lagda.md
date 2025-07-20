@@ -421,7 +421,7 @@ module _
       ( right-inverse-law-positive-integer-Rational-Ring R q)
 ```
 
-### The fractional initial map `φ : fraction-ℤ → R` into a rational ring extends the initial ring homomorphism `ι : ℤ → R`
+### The fractional initial map into a rational ring extends the initial ring homomorphism
 
 ```agda
 module _
