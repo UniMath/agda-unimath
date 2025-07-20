@@ -44,6 +44,7 @@ open import foundation.universe-levels
 open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups
 
+open import ring-theory.dependent-products-rings
 open import ring-theory.groups-of-units-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.invertible-elements-rings
@@ -1254,4 +1255,58 @@ module _
     ( is-rational-op-is-rational-Ring
       ( ring-Rational-Ring R)
       ( is-rational-ring-Rational-Ring R))
+```
+
+### The product of rational rings is rational
+
+```agda
+module _
+  {l1 l2 : Level} (I : UU l1) (R : I → Rational-Ring l2)
+  where
+
+  is-rational-ring-Π-Rational-Ring :
+    is-rational-Ring (Π-Ring I (ring-Rational-Ring ∘ R))
+  is-rational-ring-Π-Rational-Ring k k>0 =
+    ( λ i → inv-positive-integer-Rational-Ring (R i) (k , k>0)) ,
+    ( eq-htpy
+      ( λ i →
+        inv-tr
+          ( λ h →
+            mul-Rational-Ring
+              ( R i)
+              ( map-hom-Ring
+                ( ℤ-Ring)
+                ( Π-Ring I (ring-Rational-Ring ∘ R))
+                ( h)
+                ( k)
+                ( i))
+              ( inv-positive-integer-Rational-Ring (R i) (k , k>0)) ＝
+            one-Ring (ring-Rational-Ring (R i)))
+          ( eq-initial-hom-Π-Ring I (ring-Rational-Ring ∘ R))
+          ( right-inverse-law-positive-integer-Rational-Ring
+            ( R i)
+            ( k , k>0)))) ,
+    ( eq-htpy
+      ( λ i →
+        inv-tr
+          ( λ h →
+            mul-Rational-Ring
+              ( R i)
+              ( inv-positive-integer-Rational-Ring (R i) (k , k>0))
+              ( map-hom-Ring
+                ( ℤ-Ring)
+                ( Π-Ring I (ring-Rational-Ring ∘ R))
+                ( h)
+                ( k)
+                ( i)) ＝
+            one-Ring (ring-Rational-Ring (R i)))
+          ( eq-initial-hom-Π-Ring I (ring-Rational-Ring ∘ R))
+          ( left-inverse-law-positive-integer-Rational-Ring
+            ( R i)
+            ( k , k>0))))
+
+  Π-Rational-Ring : Rational-Ring (l1 ⊔ l2)
+  Π-Rational-Ring =
+    ( Π-Ring I (ring-Rational-Ring ∘ R)) ,
+    ( is-rational-ring-Π-Rational-Ring)
 ```
