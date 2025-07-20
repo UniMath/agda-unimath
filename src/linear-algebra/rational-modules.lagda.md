@@ -43,21 +43,24 @@ open import ring-theory.rings
 ## Idea
 
 A {{#concept "rational module" Agda=Rational-Module}} is an
-[abelian group](group-theory.abelian-groups.md) whose
-[ring of endomorphisms](group-theory.endomorphism-rings-abelian-groups.md) is
-[rational](ring-theory.rational-rings.md), i.e., if the images of the
-[positive integers](elementary-number-theory.positive-integers.md) by the
-[initial ring homomorphism](elementary-number-theory.ring-of-integers.md) in its
-ring of endomorphisms are
-[invertible elements](ring-theory.invertible-elements-rings.md). This is
-equivalent to the existence of an
-[homomorphism of ring](ring-theory.homomorphisms-rings.md) from the
-[ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md)
-to the ring of endomorphisms of the abelian group so the type of **rational
-modules** is equivalent to the type of
-[left](linear-algebra.left-modules-rings.md) or
-[right modules](linear-algebra.right-modules-rings.md) over the
-[ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md).
+[abelian group](group-theory.abelian-groups.md) for which any of the following
+[logically](foundation.logical-equivalences.md) equivalent
+[propositions](foundation.propositions.md) holds:
+
+- its [ring of endomorphisms](group-theory.endomorphism-rings-abelian-groups.md)
+  is [rational](ring-theory.rational-rings.md), i.e., the
+  [initial ring homomorphism](elementary-number-theory.ring-of-integers.md) in
+  its ring of endomorphisms [inverts](ring-theory.localizations-rings.md) the
+  [positive integers](elementary-number-theory.positive-integers.md);
+- it is a [left module](linear-algebra.left-modules-rings.md) over the
+  [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md);
+- it is a [right module](linear-algebra.right-modules-rings.md) over the
+  [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md).
+
+**Note:** Because `ℚ` is a
+[discrete field](commutative-algebra.discrete-fields.md), rational modules are
+the vector spaces on the
+[field of rational numbers](elementary-number-theory.field-of-rational-numbers.md).
 
 ## Definitions
 
@@ -101,9 +104,150 @@ module _
       is-rational-endomorphism-ring-ab-Rational-Module)
 ```
 
+### The property of being a left module on the rationals
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-rational-left-module-Ab : UU l
+  is-rational-left-module-Ab =
+    hom-Ring ring-ℚ (endomorphism-ring-Ab A)
+
+  is-prop-is-rational-left-module-Ab :
+    is-prop is-rational-left-module-Ab
+  is-prop-is-rational-left-module-Ab =
+    is-prop-has-rational-hom-Ring (endomorphism-ring-Ab A)
+
+  subtype-is-rational-left-module : Prop l
+  subtype-is-rational-left-module =
+    ( is-rational-left-module-Ab ,
+      is-prop-is-rational-left-module-Ab)
+```
+
+### The property of being a right module on the rationals
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-rational-right-module-Ab : UU l
+  is-rational-right-module-Ab =
+    hom-Ring ring-ℚ (op-Ring (endomorphism-ring-Ab A))
+
+  is-prop-is-rational-right-module-Ab :
+    is-prop is-rational-right-module-Ab
+  is-prop-is-rational-right-module-Ab =
+    is-prop-has-rational-hom-Ring (op-Ring (endomorphism-ring-Ab A))
+
+  subtype-is-rational-right-module : Prop l
+  subtype-is-rational-right-module =
+    ( is-rational-right-module-Ab ,
+      is-prop-is-rational-right-module-Ab)
+```
+
 ## Properties
 
-### An abelian group `M` is a rational module if and only if for any positive integer `k` the action of `k` on `M` is an automorphism
+### The type of rational modules is equivalent to the type of left modules over the ring of rational numbers
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-rational-is-rational-left-module-Ab :
+    is-rational-left-module-Ab A →
+    is-rational-module-Ab A
+  is-rational-is-rational-left-module-Ab H =
+    is-rational-has-rational-hom-Ring
+      ( endomorphism-ring-Ab A)
+      ( H)
+
+  is-rational-left-module-is-rational-module-Ab :
+    is-rational-module-Ab A →
+    is-rational-left-module-Ab A
+  is-rational-left-module-is-rational-module-Ab H =
+    initial-hom-Rational-Ring (endomorphism-ring-Ab A , H)
+
+module _
+  {l : Level}
+  where
+
+  equiv-left-module-Rational-Module :
+    left-module-Ring l ring-ℚ ≃ Rational-Module l
+  equiv-left-module-Rational-Module =
+    equiv-type-subtype
+      ( is-prop-is-rational-left-module-Ab)
+      ( is-prop-is-rational-module-Ab)
+      ( is-rational-is-rational-left-module-Ab)
+      ( is-rational-left-module-is-rational-module-Ab)
+```
+
+### A rational module is a left module over the ring of rational numbers
+
+```agda
+module _
+  {l : Level} (M : Rational-Module l)
+  where
+
+  left-module-Rational-Module : left-module-Ring l ring-ℚ
+  left-module-Rational-Module =
+    tot is-rational-left-module-is-rational-module-Ab M
+```
+
+### The type of rational modules is equivalent to the type of right modules over the ring of rational numbers
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-rational-is-rational-right-module-Ab :
+    is-rational-right-module-Ab A →
+    is-rational-module-Ab A
+  is-rational-is-rational-right-module-Ab H =
+    is-rational-is-rational-op-Ring
+      ( endomorphism-ring-Ab A)
+      ( is-rational-has-rational-hom-Ring
+        ( op-Ring (endomorphism-ring-Ab A))
+        ( H))
+
+  is-rational-right-module-is-rational-module-Ab :
+    is-rational-module-Ab A →
+    is-rational-right-module-Ab A
+  is-rational-right-module-is-rational-module-Ab H =
+    initial-hom-Rational-Ring
+      ( op-Rational-Ring (endomorphism-ring-Ab A , H))
+
+module _
+  {l : Level}
+  where
+
+  equiv-right-module-Rational-Module :
+    right-module-Ring l ring-ℚ ≃ Rational-Module l
+  equiv-right-module-Rational-Module =
+    equiv-type-subtype
+      ( is-prop-is-rational-right-module-Ab)
+      ( is-prop-is-rational-module-Ab)
+      ( is-rational-is-rational-right-module-Ab)
+      ( is-rational-right-module-is-rational-module-Ab)
+```
+
+### A rational module is a right module over the ring of rational numbers
+
+```agda
+module _
+  {l : Level} (M : Rational-Module l)
+  where
+
+  right-module-Rational-Module : right-module-Ring l ring-ℚ
+  right-module-Rational-Module =
+    tot is-rational-right-module-is-rational-module-Ab M
+```
+
+### An abelian group is a rational module if and only if the actions of positive integers are automorphisms
 
 ```agda
 module _
@@ -134,71 +278,7 @@ module _
       ( ev-pair H k k>0)
 ```
 
-### A rational module is a left module over the ring of rational numbers
+## External links
 
-```agda
-module _
-  {l : Level} (M : Rational-Module l)
-  where
-
-  left-module-Rational-Module : left-module-Ring l ring-ℚ
-  left-module-Rational-Module =
-    ( ab-Rational-Module M ,
-      has-rational-hom-is-rational-Ring
-        ( endomorphism-ring-Ab (ab-Rational-Module M))
-        ( is-rational-endomorphism-ring-ab-Rational-Module M))
-```
-
-### The type of rational modules is equivalent to the type of left modules over the ring of rational numbers
-
-```agda
-module _
-  {l : Level}
-  where
-
-  equiv-left-module-Rational-Module :
-    left-module-Ring l ring-ℚ ≃ Rational-Module l
-  equiv-left-module-Rational-Module =
-    equiv-type-subtype
-      ( is-prop-has-rational-hom-Ring ∘ endomorphism-ring-Ab)
-      ( is-prop-is-rational-module-Ab)
-      ( is-rational-has-rational-hom-Ring ∘ endomorphism-ring-Ab)
-      ( λ A H → initial-hom-Rational-Ring (endomorphism-ring-Ab A , H))
-```
-
-### A rational module is a right module over the ring of rational numbers
-
-```agda
-module _
-  {l : Level} (M : Rational-Module l)
-  where
-
-  right-module-Rational-Module : right-module-Ring l ring-ℚ
-  right-module-Rational-Module =
-    ( ab-Rational-Module M ,
-      initial-hom-Rational-Ring
-        ( op-Rational-Ring (rational-ring-endomorphism-Rational-Module M)))
-```
-
-### The type of rational modules is equivalent to the type of right modules over the ring of rational numbers
-
-```agda
-module _
-  {l : Level}
-  where
-
-  equiv-right-module-Rational-Module :
-    right-module-Ring l ring-ℚ ≃ Rational-Module l
-  equiv-right-module-Rational-Module =
-    equiv-type-subtype
-      ( is-prop-has-rational-hom-Ring ∘
-        op-Ring ∘
-        endomorphism-ring-Ab)
-      ( is-prop-is-rational-module-Ab)
-      ( λ A →
-        is-rational-is-rational-op-Ring (endomorphism-ring-Ab A) ∘
-        is-rational-has-rational-hom-Ring (op-Ring (endomorphism-ring-Ab A)))
-      ( λ A H →
-        initial-hom-Rational-Ring
-          ( op-Rational-Ring (endomorphism-ring-Ab A , H)))
-```
+- [rational vector space](https://ncatlab.org/nlab/show/rational+vector+space)
+  at $n$lab
