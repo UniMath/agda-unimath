@@ -10,6 +10,7 @@ module linear-algebra.rational-modules where
 
 ```agda
 open import elementary-number-theory.positive-integers
+open import elementary-number-theory.rational-ring-of-rational-numbers
 open import elementary-number-theory.ring-of-rational-numbers
 
 open import foundation.dependent-pair-types
