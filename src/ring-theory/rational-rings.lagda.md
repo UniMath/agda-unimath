@@ -306,7 +306,7 @@ rational-ring-ℚ =
       ( inverts-positive-integers-rational-ℤ))
 ```
 
-### The inverse of `one-ℤ` in a rational ring is `one`
+### The inverse of the image of one in a rational ring is one
 
 ```agda
 module _
@@ -330,7 +330,7 @@ module _
         ( right-inverse-law-positive-integer-Rational-Ring R one-ℤ⁺))
 ```
 
-### The inverse of the product of positive integers in a rational ring is the product of their inverses
+### The inverse of a product of positive integers in a rational ring is the product of their inverses
 
 ```agda
 module _
@@ -440,7 +440,7 @@ module _
       ( map-integer-initial-hom-Rational-Ring R k))
 ```
 
-### The fractional initial map `φ : fraction-ℤ → R` maps similar fractions to identical elements
+### The fractional initial map maps similar fractions to identical elements
 
 ```agda
 module _
@@ -572,7 +572,7 @@ module _
                 ( right-unit-law-mul-Ring (ring-Rational-Ring R) rny)
 ```
 
-### The fractional initial map `φ : fraction-ℤ → R` preserves addition
+### The fractional initial map preserves addition
 
 ```agda
 module _
@@ -771,7 +771,7 @@ module _
         ( right-unit-law-mul-Ring (ring-Rational-Ring R) rny))
 ```
 
-### The fractional initial map `φ : fraction-ℤ → R` preserves multiplication
+### The fractional initial map preserves multiplication
 
 ```agda
 module _
@@ -984,7 +984,7 @@ module _
     inv-positive-integer-Rational-Ring ∘ rational-ring-has-rational-hom-Ring
 ```
 
-### Any ring homomorphism `f : ℚ → R` is an extension of the initial ring homomorphism `ι : ℤ → R`
+### Any ring homomorphism `ℚ → R` is an extension of the initial ring homomorphism `ℤ → R`
 
 ```agda
 module _
@@ -1176,7 +1176,7 @@ module _
     ( is-rational-has-rational-hom-Ring R , has-rational-hom-is-rational-Ring)
 ```
 
-### A ring `R` is rational if and only if the type ring homomorphism `ℚ → R` is contractible
+### A ring `R` is rational if and only if the type of ring homomorphisms `ℚ → R` is contractible
 
 ```agda
 module _
