@@ -568,10 +568,10 @@ module _
   {l : Level} (R : Rational-Ring l) (f : rational-hom-Rational-Ring R)
   where
 
-  htpy-map-integer-hom-Rational-Ring :
+  htpy-map-rational-hom-integer-Rational-Ring :
     ( map-rational-hom-Rational-Ring R f ∘ rational-ℤ) ~
-    ( map-initial-hom-Ring (ring-Rational-Ring R))
-  htpy-map-integer-hom-Rational-Ring =
+    ( map-initial-hom-integer-Rational-Ring R)
+  htpy-map-rational-hom-integer-Rational-Ring =
     htpy-map-integer-rational-hom-Ring (ring-Rational-Ring R) f
 ```
 
@@ -582,10 +582,10 @@ module _
   {l : Level} (R : Rational-Ring l) (f : rational-hom-Rational-Ring R)
   where
 
-  htpy-map-reciprocal-hom-Rational-Ring :
+  htpy-map-reciprocal-rational-hom-Rational-Ring :
     map-rational-hom-Rational-Ring R f ∘ reciprocal-rational-ℤ⁺ ~
     inv-positive-integer-Rational-Ring R
-  htpy-map-reciprocal-hom-Rational-Ring k =
+  htpy-map-reciprocal-rational-hom-Rational-Ring k =
     inv
       ( contraction-right-inverse-is-invertible-element-Ring
         ( ring-Rational-Ring R)
@@ -609,7 +609,11 @@ module _
             ( ring-Rational-Ring R)
             ( f)
             ( reciprocal-rational-ℤ⁺ k)))
-        ( inv (htpy-map-integer-hom-Rational-Ring R f (int-positive-ℤ k)))) ∙
+        ( inv
+          ( htpy-map-rational-hom-integer-Rational-Ring
+            ( R)
+            ( f)
+            ( int-positive-ℤ k)))) ∙
       ( inv
         ( preserves-mul-hom-Ring
           ( ring-ℚ)
@@ -629,7 +633,7 @@ module _
     map-hom-Ring ring-ℚ R f ∘ reciprocal-rational-ℤ⁺ ~
     inv-positive-integer-has-rational-hom-Ring R f
   htpy-map-reciprocal-rational-hom-Ring =
-    htpy-map-reciprocal-hom-Rational-Ring
+    htpy-map-reciprocal-rational-hom-Rational-Ring
       ( rational-ring-has-rational-hom-Ring R f)
       ( f)
 ```
@@ -654,8 +658,11 @@ module _
       ( f)) ∙
     ( ap-binary
       ( mul-Ring (ring-Rational-Ring R))
-      ( htpy-map-integer-hom-Rational-Ring R f (numerator-ℚ x))
-      ( htpy-map-reciprocal-hom-Rational-Ring R f (positive-denominator-ℚ x)))
+      ( htpy-map-rational-hom-integer-Rational-Ring R f (numerator-ℚ x))
+      ( htpy-map-reciprocal-rational-hom-Rational-Ring
+        ( R)
+        ( f)
+        ( positive-denominator-ℚ x)))
 
 module _
   {l : Level} (R : Ring l) (f : hom-Ring ring-ℚ R)

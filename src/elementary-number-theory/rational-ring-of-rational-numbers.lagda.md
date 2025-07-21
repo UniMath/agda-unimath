@@ -538,10 +538,10 @@ module _
   {l : Level} (R : Rational-Ring l)
   where
 
-  preserves-one-rational-initial-hom-Rational-Ring :
+  preserves-one-initial-hom-Rational-Ring :
     map-initial-hom-Rational-Ring R one-ℚ ＝
     one-Ring (ring-Rational-Ring R)
-  preserves-one-rational-initial-hom-Rational-Ring =
+  preserves-one-initial-hom-Rational-Ring =
     is-right-inverse-inv-is-invertible-element-Ring
       ( ring-Rational-Ring R)
       ( is-invertible-positive-integer-Rational-Ring R one-ℤ⁺)
@@ -616,7 +616,7 @@ module _
       preserves-add-initial-hom-Rational-Ring)
   pr2 initial-hom-Rational-Ring =
     ( preserves-mul-initial-hom-Rational-Ring ,
-      preserves-one-rational-initial-hom-Rational-Ring R)
+      preserves-one-initial-hom-Rational-Ring R)
 ```
 
 ### The type of ring homomorphisms from `ℚ` to a rational ring is contractible
