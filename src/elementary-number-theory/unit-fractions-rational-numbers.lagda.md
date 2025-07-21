@@ -71,11 +71,11 @@ reciprocal-rational-succ-ℕ n =
 ```agda
 positive-reciprocal-rational-ℤ⁺ : ℤ⁺ → ℚ⁺
 positive-reciprocal-rational-ℤ⁺ k =
-  positive-reciprocal-rational-ℕ⁺ (positive-nat-ℤ⁺ k)
+  inv-ℚ⁺ (positive-rational-ℤ⁺ k)
 
 reciprocal-rational-ℤ⁺ : ℤ⁺ → ℚ
 reciprocal-rational-ℤ⁺ k =
-  reciprocal-rational-ℕ⁺ (positive-nat-ℤ⁺ k)
+  rational-ℚ⁺ (positive-reciprocal-rational-ℤ⁺ k)
 ```
 
 ## Properties
@@ -102,9 +102,7 @@ module _
     eq-denominator-reciprocal-rational-ℤ⁺ :
       denominator-ℚ (reciprocal-rational-ℤ⁺ k) ＝ int-positive-ℤ k
     eq-denominator-reciprocal-rational-ℤ⁺ =
-      ( eq-denominator-inv-numerator-ℚ⁺
-        ( positive-rational-ℕ⁺ (positive-nat-ℤ⁺ k))) ∙
-      ( ap pr1 (is-section-positive-nat-ℤ⁺ k))
+      eq-denominator-inv-numerator-ℚ⁺ (positive-rational-ℤ⁺ k)
 
     eq-positive-denominator-reciprocal-rational-ℤ⁺ :
       positive-denominator-ℚ (reciprocal-rational-ℤ⁺ k) ＝ k
@@ -226,12 +224,7 @@ module _
         ( positive-rational-ℤ⁺ k) ＝
       one-ℚ⁺
     left-inverse-law-positive-reciprocal-rational-ℤ⁺ =
-      binary-tr
-        ( λ u v → u *ℚ⁺ v ＝ one-ℚ⁺)
-        ( refl)
-        ( ap positive-rational-ℤ⁺ (is-section-positive-nat-ℤ⁺ k))
-        ( left-inverse-law-positive-reciprocal-rational-ℕ⁺
-          ( positive-nat-ℤ⁺ k))
+      left-inverse-law-mul-ℚ⁺ (positive-rational-ℤ⁺ k)
 
     left-inverse-law-reciprocal-rational-ℤ⁺ :
       mul-ℚ
@@ -247,12 +240,7 @@ module _
         ( positive-reciprocal-rational-ℤ⁺ k) ＝
       one-ℚ⁺
     right-inverse-law-positive-reciprocal-rational-ℤ⁺ =
-      binary-tr
-        ( λ u v → u *ℚ⁺ v ＝ one-ℚ⁺)
-        ( ap positive-rational-ℤ⁺ (is-section-positive-nat-ℤ⁺ k))
-        ( refl)
-        ( right-inverse-law-positive-reciprocal-rational-ℕ⁺
-          ( positive-nat-ℤ⁺ k))
+      right-inverse-law-mul-ℚ⁺ (positive-rational-ℤ⁺ k)
 
     right-inverse-law-reciprocal-rational-ℤ⁺ :
       mul-ℚ
