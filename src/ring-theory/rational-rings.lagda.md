@@ -568,10 +568,10 @@ module _
   {l : Level} (R : Rational-Ring l) (f : rational-hom-Rational-Ring R)
   where
 
-  htpy-map-rational-hom-integer-Rational-Ring :
+  htpy-map-integer-rational-hom-Rational-Ring :
     ( map-rational-hom-Rational-Ring R f ∘ rational-ℤ) ~
     ( map-initial-hom-integer-Rational-Ring R)
-  htpy-map-rational-hom-integer-Rational-Ring =
+  htpy-map-integer-rational-hom-Rational-Ring =
     htpy-map-integer-rational-hom-Ring (ring-Rational-Ring R) f
 ```
 
@@ -610,7 +610,7 @@ module _
             ( f)
             ( reciprocal-rational-ℤ⁺ k)))
         ( inv
-          ( htpy-map-rational-hom-integer-Rational-Ring
+          ( htpy-map-integer-rational-hom-Rational-Ring
             ( R)
             ( f)
             ( int-positive-ℤ k)))) ∙
@@ -658,7 +658,7 @@ module _
       ( f)) ∙
     ( ap-binary
       ( mul-Ring (ring-Rational-Ring R))
-      ( htpy-map-rational-hom-integer-Rational-Ring R f (numerator-ℚ x))
+      ( htpy-map-integer-rational-hom-Rational-Ring R f (numerator-ℚ x))
       ( htpy-map-reciprocal-rational-hom-Rational-Ring
         ( R)
         ( f)
