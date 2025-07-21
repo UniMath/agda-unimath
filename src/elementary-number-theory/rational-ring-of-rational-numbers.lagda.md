@@ -59,7 +59,7 @@ open import ring-theory.rings
 ## Idea
 
 The [reciprocal](elementary-number-theory.unit-fractions-rational-numbers.md) of
-a [positive integers](elementary-number-theory.positive-integers.md) is its
+a [positive integer](elementary-number-theory.positive-integers.md) is its
 [inverse](ring-theory.invertible-elements-rings.md) in the
 [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md)
 so `ℚ` is a [rational ring](ring-theory.rational-rings.md); this is the
