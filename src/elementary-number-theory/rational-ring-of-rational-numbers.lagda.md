@@ -58,17 +58,18 @@ open import ring-theory.rings
 
 ## Idea
 
-[Positive integers](elementary-number-theory.positive-integers.md) are
-[invertible](ring-theory.invertible-elements-rings.md) in the
+The [reciprocal](elementary-number-theory.unit-fractions-rational-numbers.md) of
+a [positive integers](elementary-number-theory.positive-integers.md) is its
+[inverse](ring-theory.invertible-elements-rings.md) in the
 [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md)
-so it is a [rational ring](ring-theory.rational-rings.md); this is the
+so `ℚ` is a [rational ring](ring-theory.rational-rings.md); this is the
 {{#concept "rational ring of rationa numbers" Agda=rational-ring-ℚ}}.
 
 Furthermore, the rational extension of the initial ring map `ι : ℤ → R` into a
 rational ring, `γ : (p/q : ℚ) ↦ (ι p)(ι q)⁻¹`, is a
 [ring homomorphism](ring-theory.homomorphisms-rings.md) so `ℚ` is the
 **initial** rational ring, i.e., the type of ring homomorphisms between `ℚ` and
-any rational ring ring is [contractible](foundation.contractible-types.md).
+any rational ring is [contractible](foundation.contractible-types.md).
 
 ## Definitions
 
