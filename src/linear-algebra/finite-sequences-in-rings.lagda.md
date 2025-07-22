@@ -207,33 +207,4 @@ module _
   ab-fin-sequence-type-Ring : Ab l
   ab-fin-sequence-type-Ring =
     ab-left-module-Ring R (left-module-fin-sequence-Ring R n)
-
-  group-fin-sequence-type-Ring : Group l
-  group-fin-sequence-type-Ring = group-Ab ab-fin-sequence-type-Ring
-
-  -- semigroup-fin-sequence-type-Ring : ℕ → Semigroup l
-  -- semigroup-fin-sequence-type-Ring =
-  --   semigroup-fin-sequence-type-Semiring (semiring-Ring R)
-
-  -- monoid-fin-sequence-type-Ring : ℕ → Monoid l
-  -- monoid-fin-sequence-type-Ring =
-  --   monoid-fin-sequence-type-Semiring (semiring-Ring R)
-
-  -- commutative-monoid-fin-sequence-type-Ring : ℕ → Commutative-Monoid l
-  -- commutative-monoid-fin-sequence-type-Ring =
-  --   commutative-monoid-fin-sequence-type-Semiring (semiring-Ring R)
-
-  -- is-unital-fin-sequence-type-Ring :
-  --   (n : ℕ) → is-unital (add-fin-sequence-type-Ring R n)
-  -- is-unital-fin-sequence-type-Ring n =
-  --   is-unital-Monoid (monoid-fin-sequence-type-Ring n)
-
-  -- is-group-fin-sequence-type-Ring :
-  --   (n : ℕ) → is-group-Semigroup (semigroup-fin-sequence-type-Ring n)
-  -- pr1 (is-group-fin-sequence-type-Ring n) = is-unital-fin-sequence-type-Ring n
-  -- pr1 (pr2 (is-group-fin-sequence-type-Ring n)) = neg-fin-sequence-type-Ring R n
-  -- pr1 (pr2 (pr2 (is-group-fin-sequence-type-Ring n))) =
-  --   left-inverse-law-add-fin-sequence-type-Ring R n
-  -- pr2 (pr2 (pr2 (is-group-fin-sequence-type-Ring n))) =
-  --   right-inverse-law-add-fin-sequence-type-Ring R n
 ```
