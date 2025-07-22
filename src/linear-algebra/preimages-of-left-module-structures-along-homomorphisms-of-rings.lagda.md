@@ -52,6 +52,8 @@ The preimage of left modules acts contravariantly on homomorphisms of rings:
 - the preimage of a left module along a composition `g ∘ f` is the preimage by
   `f` of its preimage by `g`.
 
+In particular preimages along isomorphisms of rings are equivalences.
+
 ## Definitions
 
 ### The preimage left module of a left module along an homomorphism of rings
