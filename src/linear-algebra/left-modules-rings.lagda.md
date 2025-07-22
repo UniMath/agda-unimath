@@ -402,7 +402,7 @@ module _
     ab-Ring R , hom-mul-endomorphism-ring-ab-Ring R
 ```
 
-### The type of abelian groups is equivalent to the type of `ℤ`-left module
+### The type of abelian groups is equivalent to the type of `ℤ`-left modules
 
 ```agda
 module _
