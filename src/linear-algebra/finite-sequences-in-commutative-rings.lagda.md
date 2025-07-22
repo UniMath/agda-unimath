@@ -77,7 +77,8 @@ module _
 
   zero-fin-sequence-type-Commutative-Ring :
     (n : ℕ) → fin-sequence-type-Commutative-Ring R n
-  zero-fin-sequence-type-Commutative-Ring n i = zero-Commutative-Ring R
+  zero-fin-sequence-type-Commutative-Ring =
+    zero-fin-sequence-type-Ring (ring-Commutative-Ring R)
 ```
 
 ### Pointwise addition of finite sequences in a commutative ring
@@ -200,23 +201,6 @@ module _
 module _
   {l : Level} (R : Commutative-Ring l)
   where
-
-  semigroup-fin-sequence-type-Commutative-Ring : ℕ → Semigroup l
-  semigroup-fin-sequence-type-Commutative-Ring =
-    semigroup-fin-sequence-type-Ring (ring-Commutative-Ring R)
-
-  monoid-fin-sequence-type-Commutative-Ring : ℕ → Monoid l
-  monoid-fin-sequence-type-Commutative-Ring =
-    monoid-fin-sequence-type-Ring (ring-Commutative-Ring R)
-
-  commutative-monoid-fin-sequence-type-Commutative-Ring :
-    ℕ → Commutative-Monoid l
-  commutative-monoid-fin-sequence-type-Commutative-Ring =
-    commutative-monoid-fin-sequence-type-Ring (ring-Commutative-Ring R)
-
-  group-fin-sequence-type-Commutative-Ring : ℕ → Group l
-  group-fin-sequence-type-Commutative-Ring =
-    group-fin-sequence-type-Ring (ring-Commutative-Ring R)
 
   ab-fin-sequence-type-Commutative-Ring : ℕ → Ab l
   ab-fin-sequence-type-Commutative-Ring =
