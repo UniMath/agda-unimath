@@ -30,7 +30,7 @@ open import synthetic-homotopy-theory.whitehead-principle-types
 
 ## Idea
 
-The {{#concept "Whitehead principle for maps" Agda=Whitehead-Principle-Maps}}
+The {{#concept "Whitehead principle for maps" Agda=Whitehead-Principle-Map}}
 asserts that [∞-connected maps](foundation.infinity-connected-maps.md) are
 [equivalences](foundation-core.equivalences.md). I.e., if the
 [fibers](foundation-core.fibers-of-maps.md) of a map `f : X → Y` are
@@ -64,7 +64,7 @@ Whitehead-Principle-Maps-implies-Types WP X X-∞-conn =
     pr2 eq =
       WP X unit (terminal-map X) (fibers-are-∞-connected-is-∞-connected-map
       ( terminal-map X)
-      λ y → is-∞-connected-equiv (equiv-fiber-terminal-map star) X-∞-conn)
+      λ y → is-∞-connected-type-equiv (equiv-fiber-terminal-map star) X-∞-conn)
 ```
 
 ### The Whitehead principle for types implies the Whitehead principle for maps

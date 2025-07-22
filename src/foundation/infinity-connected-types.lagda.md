@@ -45,8 +45,8 @@ is-prop-is-∞-connected X = is-prop-type-Prop (is-∞-connected-Prop X)
 ### Contractible types are ∞-connected
 
 ```agda
-is-contr-is-∞-connected : {l : Level} (X : UU l) → is-contr X → is-∞-connected X
-is-contr-is-∞-connected X X-ctr k = is-connected-is-contr k X-ctr
+is-∞-connected-is-contr : {l : Level} (X : UU l) → is-contr X → is-∞-connected X
+is-∞-connected-is-contr X X-ctr k = is-connected-is-contr k X-ctr
 ```
 
 ## Properties
@@ -58,25 +58,25 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-∞-connected-is-equiv :
+  is-∞-connected-type-is-equiv :
     (f : A → B) → is-equiv f → is-∞-connected B → is-∞-connected A
-  is-∞-connected-is-equiv f e B-∞-conn k =
+  is-∞-connected-type-is-equiv f e B-∞-conn k =
     is-contr-is-equiv (type-trunc k B) (map-trunc k f)
     ( is-equiv-map-equiv-trunc k (f , e)) (B-∞-conn k)
 
-  is-∞-connected-equiv :
+  is-∞-connected-type-equiv :
     A ≃ B → is-∞-connected B → is-∞-connected A
-  is-∞-connected-equiv f B-∞-conn k =
-    is-∞-connected-is-equiv (pr1 f) (pr2 f) B-∞-conn k
+  is-∞-connected-type-equiv f B-∞-conn k =
+    is-∞-connected-type-is-equiv (pr1 f) (pr2 f) B-∞-conn k
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-∞-connected-equiv' : A ≃ B → is-∞-connected A → is-∞-connected B
-  is-∞-connected-equiv' f = is-∞-connected-equiv (inv-equiv f)
+  is-∞-connected-type-equiv' : A ≃ B → is-∞-connected A → is-∞-connected B
+  is-∞-connected-type-equiv' f = is-∞-connected-type-equiv (inv-equiv f)
 
-  is-∞-connected-is-equiv' :
+  is-∞-connected-type-is-equiv' :
     (f : A → B) → is-equiv f → is-∞-connected A → is-∞-connected B
-  is-∞-connected-is-equiv' f e = is-∞-connected-equiv' (f , e)
+  is-∞-connected-type-is-equiv' f e = is-∞-connected-type-equiv' (f , e)
 ```

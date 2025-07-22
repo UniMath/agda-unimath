@@ -75,6 +75,6 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
-  is-equiv-is-∞-connected : is-equiv f → is-∞-connected-map f
-  is-equiv-is-∞-connected f-equiv k x = is-connected-map-is-equiv f-equiv k
+  is-∞-connected-is-equiv : is-equiv f → is-∞-connected-map f
+  is-∞-connected-is-equiv f-equiv k x = is-connected-map-is-equiv f-equiv k
 ```
