@@ -10,6 +10,7 @@ module synthetic-homotopy-theory.whitehead-principle-types where
 open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.functoriality-truncation
+open import foundation.infinity-connected-types
 open import foundation.truncation-levels
 open import foundation.truncations
 open import foundation.universe-levels
@@ -25,39 +26,20 @@ open import foundation-core.propositions
 
 ## Idea
 
-A type is said to be **∞-connected** if it is `n`-connected for all `n : 𝕋`.
+The {{#concept "Whitehead principle" Agda=Whitehead-Principle}} asserts that
+[∞-connected types](foundation.infinity-connected-types.md) are
+[contractible](foundation-core.contractible-types.md). I.e., if a type is
+$n$-[connected](foundation.connected-types.md) for every $n$, then it is
+contractible. This principle is also referred to as _hypercompleteness_ and is
+not validated in every ∞-topos.
 
-Contractible types are ∞-connected.
-
-The **Whitehead principle for types** asserts the converse, that ∞-connected
-types are contractible. In
-(whitehead-principle-maps)[synthetic-homotopy-theory.whitehead-principle-maps.md],
-we show (assuming enough universes) that this is equivalent to maps whose fibers
-are ∞-connected being equivalences.
+In
+(`whitehead-principle-maps`)[synthetic-homotopy-theory.whitehead-principle-maps.md]
+we show, assuming Whitehead principles in enough universes, that the Whitehead
+principle for types is equivalent to asking that maps whose fibers are
+∞-connected are equivalences.
 
 ## Definition
-
-### ∞-connected types
-
-```agda
-is-∞-connected-Prop : {l : Level} (X : UU l) → Prop l
-is-∞-connected-Prop X = Π-Prop 𝕋 (λ k → is-connected-Prop k X)
-
-is-∞-connected : {l : Level} (X : UU l) → UU l
-is-∞-connected X = type-Prop (is-∞-connected-Prop X)
-
-is-prop-is-∞-connected : {l : Level} (X : UU l) → is-prop (is-∞-connected X)
-is-prop-is-∞-connected X = is-prop-type-Prop (is-∞-connected-Prop X)
-```
-
-### Contractible types are ∞-connected
-
-```agda
-is-contr-is-∞-connected : {l : Level} (X : UU l) → is-contr X → is-∞-connected X
-is-contr-is-∞-connected X X-ctr k = is-connected-is-contr k X-ctr
-```
-
-### The Whitehead principle for types
 
 ```agda
 Whitehead-Principle-Level : (l : Level) → UU (lsuc l)
@@ -67,34 +49,18 @@ Whitehead-Principle : UUω
 Whitehead-Principle = {l : Level} → Whitehead-Principle-Level l
 ```
 
-## Properties
+## See also
 
-### Being ∞-connected is invariant under equivalence
+- [The plus principle](synthetic-homotopy-theory.plus-principle.md)
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
+## External links
 
-  is-∞-connected-is-equiv :
-    (f : A → B) → is-equiv f → is-∞-connected B → is-∞-connected A
-  is-∞-connected-is-equiv f e B-∞-conn k =
-    is-contr-is-equiv (type-trunc k B) (map-trunc k f)
-    ( is-equiv-map-equiv-trunc k (f , e)) (B-∞-conn k)
+- [Wikipedia page on the Whitehead theorem](https://en.m.wikipedia.org/w/index.php?title=Whitehead_theorem&oldid=1278836995)
+- [nlab article on hypercomplete objects in an ∞-topos](https://ncatlab.org/nlab/show/hypercomplete+object)
 
-  is-∞-connected-equiv :
-    A ≃ B → is-∞-connected B → is-∞-connected A
-  is-∞-connected-equiv f B-∞-conn k =
-    is-∞-connected-is-equiv (pr1 f) (pr2 f) B-∞-conn k
+## References
 
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
+For the equivalent concept in the ∞-categorical semantics of homotopy type
+theory, cf. §6.5.2 of Lurie's _Higher Topos Theory_ {{#cite Lurie09}}.
 
-  is-∞-connected-equiv' : A ≃ B → is-∞-connected A → is-∞-connected B
-  is-∞-connected-equiv' f = is-∞-connected-equiv (inv-equiv f)
-
-  is-∞-connected-is-equiv' :
-    (f : A → B) → is-equiv f → is-∞-connected A → is-∞-connected B
-  is-∞-connected-is-equiv' f e = is-∞-connected-equiv' (f , e)
-```
+{{#bibliography}}
