@@ -7,8 +7,12 @@ module linear-algebra.left-modules-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.ring-of-integers
+
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -19,6 +23,7 @@ open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
 
+open import ring-theory.function-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.opposite-rings
 open import ring-theory.rings
@@ -384,4 +389,45 @@ module _
     mul-neg-one-left-module-Ring x =
       left-negative-law-mul-left-module-Ring R M _ _ ∙
       ap (neg-left-module-Ring R M) (left-unit-law-mul-left-module-Ring R M x)
+```
+
+### Any ring is a left module over itself
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  left-module-ring-Ring : left-module-Ring l R
+  left-module-ring-Ring =
+    ab-Ring R , hom-mul-endomorphism-ring-ab-Ring R
+```
+
+### The type of abelian groups is equivalent to the type of `ℤ`-left module
+
+```agda
+module _
+  {l : Level}
+  where
+
+  integer-left-module-Ab : Ab l → left-module-Ring l ℤ-Ring
+  integer-left-module-Ab A =
+    A , initial-hom-Ring (endomorphism-ring-Ab A)
+
+  is-equiv-integer-left-module-Ab :
+    is-equiv integer-left-module-Ab
+  is-equiv-integer-left-module-Ab =
+    is-equiv-is-invertible
+      ( ab-left-module-Ring ℤ-Ring)
+      ( λ (A , h) →
+        eq-pair-eq-fiber
+          ( contraction-initial-hom-Ring
+            ( endomorphism-ring-Ab A)
+            ( h)))
+      ( λ A → refl)
+
+  equiv-integer-left-module-Ab : Ab l ≃ left-module-Ring l ℤ-Ring
+  equiv-integer-left-module-Ab =
+    integer-left-module-Ab ,
+    is-equiv-integer-left-module-Ab
 ```
