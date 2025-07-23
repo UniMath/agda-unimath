@@ -46,8 +46,9 @@ rational numbers.
 ## Definition
 
 ```agda
-mul-ℚ : ℚ → ℚ → ℚ
-mul-ℚ (x , p) (y , q) = rational-fraction-ℤ (mul-fraction-ℤ x y)
+opaque
+  mul-ℚ : ℚ → ℚ → ℚ
+  mul-ℚ (x , p) (y , q) = rational-fraction-ℤ (mul-fraction-ℤ x y)
 
 mul-ℚ' : ℚ → ℚ → ℚ
 mul-ℚ' x y = mul-ℚ y x
@@ -69,7 +70,9 @@ module _
   (x : ℚ)
   where
 
-  abstract
+  opaque
+    unfolding mul-ℚ
+
     left-zero-law-mul-ℚ : zero-ℚ *ℚ x ＝ zero-ℚ
     left-zero-law-mul-ℚ =
       ( eq-ℚ-sim-fraction-ℤ
@@ -94,34 +97,39 @@ module _
 ### If the product of two rational numbers is zero, the left or right factor is zero
 
 ```agda
-decide-is-zero-factor-is-zero-mul-ℚ :
-  (x y : ℚ) → is-zero-ℚ (x *ℚ y) → (is-zero-ℚ x) + (is-zero-ℚ y)
-decide-is-zero-factor-is-zero-mul-ℚ x y H =
-  rec-coproduct
-    ( inl ∘ is-zero-is-zero-numerator-ℚ x)
-    ( inr ∘ is-zero-is-zero-numerator-ℚ y)
-    ( is-zero-is-zero-mul-ℤ
-      ( numerator-ℚ x)
-      ( numerator-ℚ y)
-      ( ( inv
-          ( eq-reduce-numerator-fraction-ℤ
-            ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))) ∙
-        ( ap
-          ( mul-ℤ'
-            ( gcd-ℤ
-              ( numerator-ℚ x *ℤ numerator-ℚ y)
-              ( denominator-ℚ x *ℤ denominator-ℚ y)))
-          ( ( is-zero-numerator-is-zero-ℚ (x *ℚ y) H) ∙
-            ( left-zero-law-mul-ℤ
+opaque
+  unfolding mul-ℚ
+
+  decide-is-zero-factor-is-zero-mul-ℚ :
+    (x y : ℚ) → is-zero-ℚ (x *ℚ y) → (is-zero-ℚ x) + (is-zero-ℚ y)
+  decide-is-zero-factor-is-zero-mul-ℚ x y H =
+    rec-coproduct
+      ( inl ∘ is-zero-is-zero-numerator-ℚ x)
+      ( inr ∘ is-zero-is-zero-numerator-ℚ y)
+      ( is-zero-is-zero-mul-ℤ
+        ( numerator-ℚ x)
+        ( numerator-ℚ y)
+        ( ( inv
+            ( eq-reduce-numerator-fraction-ℤ
+              ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))) ∙
+          ( ap
+            ( mul-ℤ'
               ( gcd-ℤ
-                (numerator-ℚ x *ℤ numerator-ℚ y)
-                (denominator-ℚ x *ℤ denominator-ℚ y)))))))
+                ( numerator-ℚ x *ℤ numerator-ℚ y)
+                ( denominator-ℚ x *ℤ denominator-ℚ y)))
+            ( ( is-zero-numerator-is-zero-ℚ (x *ℚ y) H) ∙
+              ( left-zero-law-mul-ℤ
+                ( gcd-ℤ
+                  (numerator-ℚ x *ℤ numerator-ℚ y)
+                  (denominator-ℚ x *ℤ denominator-ℚ y)))))))
 ```
 
 ### Unit laws for multiplication on rational numbers
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+
   left-unit-law-mul-ℚ : (x : ℚ) → one-ℚ *ℚ x ＝ x
   left-unit-law-mul-ℚ x =
     ( eq-ℚ-sim-fraction-ℤ
@@ -142,7 +150,9 @@ abstract
 ### Multiplication of a rational number by `-1` is equal to the negative
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+
   left-neg-unit-law-mul-ℚ : (x : ℚ) → neg-one-ℚ *ℚ x ＝ neg-ℚ x
   left-neg-unit-law-mul-ℚ x =
     ( eq-ℚ-sim-fraction-ℤ
@@ -167,7 +177,9 @@ abstract
 ### Multiplication of rational numbers is associative
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+
   associative-mul-ℚ :
     (x y z : ℚ) → (x *ℚ y) *ℚ z ＝ x *ℚ (y *ℚ z)
   associative-mul-ℚ x y z =
@@ -206,7 +218,9 @@ abstract
 ### Multiplication of rational numbers is commutative
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+
   commutative-mul-ℚ : (x y : ℚ) → x *ℚ y ＝ y *ℚ x
   commutative-mul-ℚ x y =
     eq-ℚ-sim-fraction-ℤ
@@ -264,7 +278,10 @@ abstract
 ### Multiplication on rational numbers distributes over addition
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+  unfolding add-ℚ
+
   left-distributive-mul-add-ℚ :
     (x y z : ℚ) → x *ℚ (y +ℚ z) ＝ (x *ℚ y) +ℚ (x *ℚ z)
   left-distributive-mul-add-ℚ x y z =
@@ -336,7 +353,9 @@ abstract
 ### The inclusion of integer fractions preserves multiplication
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+
   mul-rational-fraction-ℤ :
     (x y : fraction-ℤ) →
     rational-fraction-ℤ x *ℚ rational-fraction-ℤ y ＝

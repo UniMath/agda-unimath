@@ -43,6 +43,7 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.action-on-identifications-binary-functions
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -307,7 +308,9 @@ nonzero-ℚ⁺ (x , P) = (x , is-nonzero-is-positive-ℚ P)
 ### The sum of two positive rational numbers is positive
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+
   is-positive-add-ℚ :
     {x y : ℚ} → is-positive-ℚ x → is-positive-ℚ y → is-positive-ℚ (x +ℚ y)
   is-positive-add-ℚ {x} {y} P Q =
@@ -342,6 +345,10 @@ add-ℚ⁺' x y = add-ℚ⁺ y x
 
 infixl 35 _+ℚ⁺_
 _+ℚ⁺_ = add-ℚ⁺
+
+ap-add-ℚ⁺ :
+  {x y x' y' : ℚ⁺} → x ＝ x' → y ＝ y' → x +ℚ⁺ y ＝ x' +ℚ⁺ y'
+ap-add-ℚ⁺ p q = ap-binary add-ℚ⁺ p q
 ```
 
 ### The positive sum of positive rational numbers is associative
@@ -377,7 +384,9 @@ interchange-law-add-add-ℚ⁺ x y u v =
 ### The product of two positive rational numbers is positive
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+
   is-positive-mul-ℚ :
     {x y : ℚ} → is-positive-ℚ x → is-positive-ℚ y → is-positive-ℚ (x *ℚ y)
   is-positive-mul-ℚ {x} {y} P Q =
@@ -469,7 +478,9 @@ module _
       ( P)
       ( is-reduced-fraction-ℚ x)
 
-  abstract
+  opaque
+    unfolding mul-ℚ
+
     left-inverse-law-mul-is-positive-ℚ : inv-is-positive-ℚ *ℚ x ＝ one-ℚ
     left-inverse-law-mul-is-positive-ℚ =
       ( eq-ℚ-sim-fraction-ℤ
@@ -720,7 +731,9 @@ module _
 ### Multiplication by a positive rational number preserves strict inequality
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+
   preserves-le-left-mul-ℚ⁺ :
     (p : ℚ⁺) (q r : ℚ) →
     le-ℚ q r →
@@ -758,37 +771,41 @@ abstract
 ### Multiplication by a positive rational number preserves inequality
 
 ```agda
-preserves-leq-left-mul-ℚ⁺ :
-  (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
-  leq-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
-preserves-leq-left-mul-ℚ⁺
-  p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
-  q@((q-num , q-denom , _) , _)
-  r@((r-num , r-denom , _) , _)
-  q≤r =
-    preserves-leq-rational-fraction-ℤ
-      ( mul-fraction-ℤ p (fraction-ℚ q))
-      ( mul-fraction-ℤ p (fraction-ℚ r))
-      ( binary-tr
-        ( leq-ℤ)
-        ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( preserves-leq-right-mul-nonnegative-ℤ
-          ( nonnegative-positive-ℤ
-            ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos)))
-          ( q-num *ℤ r-denom)
-          ( r-num *ℤ q-denom)
-          ( q≤r)))
+opaque
+  unfolding mul-ℚ
 
-preserves-leq-right-mul-ℚ⁺ :
-  (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
-  leq-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
-preserves-leq-right-mul-ℚ⁺ p q r q≤r =
-  binary-tr
-    ( leq-ℚ)
-    ( commutative-mul-ℚ (rational-ℚ⁺ p) q)
-    ( commutative-mul-ℚ (rational-ℚ⁺ p) r)
-    ( preserves-leq-left-mul-ℚ⁺ p q r q≤r)
+  preserves-leq-left-mul-ℚ⁺ :
+    (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
+    leq-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
+  preserves-leq-left-mul-ℚ⁺
+    p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
+    q@((q-num , q-denom , _) , _)
+    r@((r-num , r-denom , _) , _)
+    q≤r =
+      preserves-leq-rational-fraction-ℤ
+        ( mul-fraction-ℤ p (fraction-ℚ q))
+        ( mul-fraction-ℤ p (fraction-ℚ r))
+        ( binary-tr
+          ( leq-ℤ)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( preserves-leq-right-mul-nonnegative-ℤ
+            ( nonnegative-positive-ℤ
+              ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos)))
+            ( q-num *ℤ r-denom)
+            ( r-num *ℤ q-denom)
+            ( q≤r)))
+
+abstract
+  preserves-leq-right-mul-ℚ⁺ :
+    (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
+    leq-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
+  preserves-leq-right-mul-ℚ⁺ p q r q≤r =
+    binary-tr
+      ( leq-ℚ)
+      ( commutative-mul-ℚ (rational-ℚ⁺ p) q)
+      ( commutative-mul-ℚ (rational-ℚ⁺ p) r)
+      ( preserves-leq-left-mul-ℚ⁺ p q r q≤r)
 ```
 
 ### Multiplication of a positive rational by another positive rational less than 1 is a strictly deflationary map
@@ -969,27 +986,28 @@ module _
 ### Addition with a positive rational number is an increasing map
 
 ```agda
-le-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x ((rational-ℚ⁺ d) +ℚ x)
-le-left-add-rational-ℚ⁺ x d =
-  concatenate-leq-le-ℚ
-    ( x)
-    ( zero-ℚ +ℚ x)
-    ( (rational-ℚ⁺ d) +ℚ x)
-    ( inv-tr (leq-ℚ x) (left-unit-law-add-ℚ x) (refl-leq-ℚ x))
-    ( preserves-le-left-add-ℚ
+abstract
+  le-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x ((rational-ℚ⁺ d) +ℚ x)
+  le-left-add-rational-ℚ⁺ x d =
+    concatenate-leq-le-ℚ
       ( x)
-      ( zero-ℚ)
-      ( rational-ℚ⁺ d)
-      ( le-zero-is-positive-ℚ
+      ( zero-ℚ +ℚ x)
+      ( (rational-ℚ⁺ d) +ℚ x)
+      ( inv-tr (leq-ℚ x) (left-unit-law-add-ℚ x) (refl-leq-ℚ x))
+      ( preserves-le-left-add-ℚ
+        ( x)
+        ( zero-ℚ)
         ( rational-ℚ⁺ d)
-        ( is-positive-rational-ℚ⁺ d)))
+        ( le-zero-is-positive-ℚ
+          ( rational-ℚ⁺ d)
+          ( is-positive-rational-ℚ⁺ d)))
 
-le-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x (x +ℚ (rational-ℚ⁺ d))
-le-right-add-rational-ℚ⁺ x d =
-  inv-tr
-    ( le-ℚ x)
-    ( commutative-add-ℚ x (rational-ℚ⁺ d))
-    ( le-left-add-rational-ℚ⁺ x d)
+  le-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x (x +ℚ (rational-ℚ⁺ d))
+  le-right-add-rational-ℚ⁺ x d =
+    inv-tr
+      ( le-ℚ x)
+      ( commutative-add-ℚ x (rational-ℚ⁺ d))
+      ( le-left-add-rational-ℚ⁺ x d)
 ```
 
 ### Subtraction by a positive rational number is a strictly deflationary map

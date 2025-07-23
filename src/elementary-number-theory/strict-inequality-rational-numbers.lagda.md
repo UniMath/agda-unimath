@@ -243,7 +243,9 @@ module _
   (x y : ℚ)
   where
 
-  abstract
+  opaque
+    unfolding add-ℚ
+
     iff-translate-diff-le-zero-ℚ : le-ℚ zero-ℚ (y -ℚ x) ↔ le-ℚ x y
     iff-translate-diff-le-zero-ℚ =
       logical-equivalence-reasoning
