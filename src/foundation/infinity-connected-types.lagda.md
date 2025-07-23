@@ -58,25 +58,25 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-∞-connected-type-is-equiv :
+  is-∞-connected-is-equiv :
     (f : A → B) → is-equiv f → is-∞-connected B → is-∞-connected A
-  is-∞-connected-type-is-equiv f e B-∞-conn k =
+  is-∞-connected-is-equiv f e B-∞-conn k =
     is-contr-is-equiv (type-trunc k B) (map-trunc k f)
     ( is-equiv-map-equiv-trunc k (f , e)) (B-∞-conn k)
 
-  is-∞-connected-type-equiv :
+  is-∞-connected-equiv :
     A ≃ B → is-∞-connected B → is-∞-connected A
-  is-∞-connected-type-equiv f B-∞-conn k =
-    is-∞-connected-type-is-equiv (pr1 f) (pr2 f) B-∞-conn k
+  is-∞-connected-equiv f B-∞-conn k =
+    is-∞-connected-is-equiv (pr1 f) (pr2 f) B-∞-conn k
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-∞-connected-type-equiv' : A ≃ B → is-∞-connected A → is-∞-connected B
-  is-∞-connected-type-equiv' f = is-∞-connected-type-equiv (inv-equiv f)
+  is-∞-connected-equiv' : A ≃ B → is-∞-connected A → is-∞-connected B
+  is-∞-connected-equiv' f = is-∞-connected-equiv (inv-equiv f)
 
-  is-∞-connected-type-is-equiv' :
+  is-∞-connected-is-equiv' :
     (f : A → B) → is-equiv f → is-∞-connected A → is-∞-connected B
-  is-∞-connected-type-is-equiv' f e = is-∞-connected-type-equiv' (f , e)
+  is-∞-connected-is-equiv' f e = is-∞-connected-equiv' (f , e)
 ```

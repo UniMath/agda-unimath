@@ -64,7 +64,7 @@ Whitehead-Principle-Maps-implies-Types WP X X-∞-conn =
     pr2 eq =
       WP X unit (terminal-map X) (fibers-are-∞-connected-is-∞-connected-map
       ( terminal-map X)
-      λ y → is-∞-connected-type-equiv (equiv-fiber-terminal-map star) X-∞-conn)
+      λ y → is-∞-connected-equiv (equiv-fiber-terminal-map star) X-∞-conn)
 ```
 
 ### The Whitehead principle for types implies the Whitehead principle for maps
