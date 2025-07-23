@@ -25,11 +25,13 @@ open import group-theory.semigroups
 
 open import linear-algebra.finite-sequences-in-semirings
 open import linear-algebra.left-modules-rings
+open import linear-algebra.linear-maps-left-modules-rings
 
 open import lists.finite-sequences
 open import lists.functoriality-finite-sequences
 
 open import ring-theory.function-rings
+open import ring-theory.homomorphisms-rings
 open import ring-theory.rings
 
 open import univalent-combinatorics.standard-finite-types
@@ -48,6 +50,18 @@ of length `n` in `R` is the
 
 ## Definitions
 
+### The ring of finite sequences in a ring
+
+```agda
+module _
+  {l : Level} (R : Ring l) (n : ℕ)
+  where
+
+  ring-fin-sequence-Ring : Ring l
+  ring-fin-sequence-Ring =
+    function-Ring R (Fin n)
+```
+
 ### The left module of finite sequences in a ring
 
 ```agda
@@ -62,6 +76,20 @@ module _
   fin-sequence-type-Ring : UU l
   fin-sequence-type-Ring = fin-sequence (type-Ring R) n
 ```
+
+### The abelian group of finite sequences in a ring
+
+```agda
+module _
+  {l : Level} (R : Ring l) (n : ℕ)
+  where
+
+  ab-fin-sequence-type-Ring : Ab l
+  ab-fin-sequence-type-Ring =
+    ab-left-module-Ring R (left-module-fin-sequence-Ring R n)
+```
+
+### Constructors and accessors for finite sequences in rings
 
 ```agda
 module _
@@ -197,14 +225,64 @@ module _
     right-inverse-law-add-Ring ∘ function-Ring R ∘ Fin
 ```
 
-### The abelian group of finite sequences in a ring
+### The coordinate homomorphisms
 
 ```agda
 module _
-  {l : Level} (R : Ring l) (n : ℕ)
+  {l : Level} (R : Ring l) (n : ℕ) (i : Fin n)
   where
 
-  ab-fin-sequence-type-Ring : Ab l
-  ab-fin-sequence-type-Ring =
-    ab-left-module-Ring R (left-module-fin-sequence-Ring R n)
+  coordinate-hom-ring-fin-sequence-Ring :
+    hom-Ring (ring-fin-sequence-Ring R n) R
+  coordinate-hom-ring-fin-sequence-Ring =
+    ev-hom-function-Ring R (Fin n) i
+
+  coordinate-map-fin-sequence-Ring :
+    fin-sequence-type-Ring R n → type-Ring R
+  coordinate-map-fin-sequence-Ring =
+    map-hom-Ring
+      ( ring-fin-sequence-Ring R n)
+      ( R)
+      ( coordinate-hom-ring-fin-sequence-Ring)
+
+  preserves-add-coordinate-map-fin-sequence-Ring :
+    is-additive-map-left-module-Ring
+      ( R)
+      ( left-module-fin-sequence-Ring R n)
+      ( left-module-ring-Ring R)
+      ( coordinate-map-fin-sequence-Ring)
+  preserves-add-coordinate-map-fin-sequence-Ring x y =
+    preserves-add-hom-Ring
+      ( ring-fin-sequence-Ring R n)
+      ( R)
+      ( coordinate-hom-ring-fin-sequence-Ring)
+      { x}
+      { y}
+
+  is-homogeneous-coordinate-map-fin-sequence-Ring :
+    is-homogeneous-map-left-module-Ring
+      ( R)
+      ( left-module-fin-sequence-Ring R n)
+      ( left-module-ring-Ring R)
+      ( coordinate-map-fin-sequence-Ring)
+  is-homogeneous-coordinate-map-fin-sequence-Ring c x = refl
+
+  is-linear-coordinate-map-fin-sequence-Ring :
+    is-linear-map-left-module-Ring
+      ( R)
+      ( left-module-fin-sequence-Ring R n)
+      ( left-module-ring-Ring R)
+      ( coordinate-map-fin-sequence-Ring)
+  is-linear-coordinate-map-fin-sequence-Ring =
+    preserves-add-coordinate-map-fin-sequence-Ring ,
+    is-homogeneous-coordinate-map-fin-sequence-Ring
+
+  coordinate-linear-map-fin-sequence-Ring :
+    linear-map-left-module-Ring
+      ( R)
+      ( left-module-fin-sequence-Ring R n)
+      ( left-module-ring-Ring R)
+  coordinate-linear-map-fin-sequence-Ring =
+    coordinate-map-fin-sequence-Ring ,
+    is-linear-coordinate-map-fin-sequence-Ring
 ```
