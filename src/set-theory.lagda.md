@@ -28,7 +28,7 @@ this sense. Indeed, that `is-small l` is a predicate is equivalent to the
 connection between set theory and univalent type theory that is not directly
 compatible with the preconception that "set theory is a study of set-level
 mathematics". Namely, the universe of sets need not itself be a set-level
-structure. In fact, with univalence it is a
+structure. In fact, with univalence it is a proper
 [1-type](foundation-core.1-types.md).
 
 In this module, we consider ideas historically related to the study of set

@@ -100,6 +100,11 @@ module _
     (a : A) → is-prop (is-in-decidable-subtype a)
   is-prop-is-in-decidable-subtype =
     is-prop-is-in-subtype subtype-decidable-subtype
+
+  is-proof-irrelevant-is-in-decidable-subtype :
+    (a : A) → is-proof-irrelevant (is-in-decidable-subtype a)
+  is-proof-irrelevant-is-in-decidable-subtype a =
+    is-proof-irrelevant-is-prop (is-prop-is-in-decidable-subtype a)
 ```
 
 ### The underlying type of a decidable subtype

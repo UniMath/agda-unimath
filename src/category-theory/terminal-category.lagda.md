@@ -112,7 +112,7 @@ is-category-terminal-Category x y =
   is-equiv-is-contr
     ( iso-eq-Precategory terminal-Precategory x y)
     ( is-prop-unit x y)
-    ( is-contr-Σ is-contr-unit star
+    ( is-contr-Σ-unit
       ( is-proof-irrelevant-is-prop
         ( is-prop-is-iso-Precategory terminal-Precategory star)
         ( star , refl , refl)))
