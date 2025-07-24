@@ -160,7 +160,9 @@ nonnegative-rational-nonnegative-ℤ (x , x-is-neg) =
 ### The rational image of a nonnegative integer fraction is nonnegative
 
 ```agda
-abstract
+opaque
+  unfolding rational-fraction-ℤ
+
   is-nonnegative-rational-fraction-ℤ :
     {x : fraction-ℤ} (P : is-nonnegative-fraction-ℤ x) →
     is-nonnegative-ℚ (rational-fraction-ℤ x)

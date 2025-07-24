@@ -46,9 +46,33 @@ is a [commutative group](group-theory.abelian-groups.md).
 ### The positive inverse of a positive rational number
 
 ```agda
-inv-ℚ⁺ : ℚ⁺ → ℚ⁺
-pr1 (inv-ℚ⁺ (x , P)) = inv-is-positive-ℚ x P
-pr2 (inv-ℚ⁺ (x , P)) = is-positive-denominator-ℚ x
+opaque
+  unfolding inv-is-positive-ℚ
+
+  inv-ℚ⁺ : ℚ⁺ → ℚ⁺
+  pr1 (inv-ℚ⁺ (x , P)) = inv-is-positive-ℚ x P
+  pr2 (inv-ℚ⁺ (x , P)) = is-positive-denominator-ℚ x
+```
+
+### Inverse laws in the multiplicative group of positive rational numbers
+
+```agda
+opaque
+  unfolding inv-ℚ⁺
+
+  left-inverse-law-mul-ℚ⁺ : (x : ℚ⁺) → (inv-ℚ⁺ x) *ℚ⁺ x ＝ one-ℚ⁺
+  left-inverse-law-mul-ℚ⁺ x =
+    eq-ℚ⁺
+      ( left-inverse-law-mul-is-positive-ℚ
+        ( rational-ℚ⁺ x)
+        ( is-positive-rational-ℚ⁺ x))
+
+  right-inverse-law-mul-ℚ⁺ : (x : ℚ⁺) → x *ℚ⁺ (inv-ℚ⁺ x) ＝ one-ℚ⁺
+  right-inverse-law-mul-ℚ⁺ x =
+    eq-ℚ⁺
+      ( right-inverse-law-mul-is-positive-ℚ
+        ( rational-ℚ⁺ x)
+        ( is-positive-rational-ℚ⁺ x))
 ```
 
 ### The multiplicative group of positive rational numbers
@@ -58,26 +82,8 @@ group-mul-ℚ⁺ : Group lzero
 pr1 group-mul-ℚ⁺ = semigroup-mul-ℚ⁺
 pr1 (pr2 group-mul-ℚ⁺) = is-unital-Monoid monoid-mul-ℚ⁺
 pr1 (pr2 (pr2 group-mul-ℚ⁺)) = inv-ℚ⁺
-pr1 (pr2 (pr2 (pr2 group-mul-ℚ⁺))) x =
-  eq-ℚ⁺
-    ( left-inverse-law-mul-is-positive-ℚ
-      ( rational-ℚ⁺ x)
-      ( is-positive-rational-ℚ⁺ x))
-pr2 (pr2 (pr2 (pr2 group-mul-ℚ⁺))) x =
-  eq-ℚ⁺
-    ( right-inverse-law-mul-is-positive-ℚ
-      ( rational-ℚ⁺ x)
-      ( is-positive-rational-ℚ⁺ x))
-```
-
-### Inverse laws in the multiplicative group of positive rational numbers
-
-```agda
-left-inverse-law-mul-ℚ⁺ : (x : ℚ⁺) → (inv-ℚ⁺ x) *ℚ⁺ x ＝ one-ℚ⁺
-left-inverse-law-mul-ℚ⁺ = left-inverse-law-mul-Group group-mul-ℚ⁺
-
-right-inverse-law-mul-ℚ⁺ : (x : ℚ⁺) → x *ℚ⁺ (inv-ℚ⁺ x) ＝ one-ℚ⁺
-right-inverse-law-mul-ℚ⁺ = right-inverse-law-mul-Group group-mul-ℚ⁺
+pr1 (pr2 (pr2 (pr2 group-mul-ℚ⁺))) = left-inverse-law-mul-ℚ⁺
+pr2 (pr2 (pr2 (pr2 group-mul-ℚ⁺))) = right-inverse-law-mul-ℚ⁺
 ```
 
 ## Properties
@@ -94,6 +100,7 @@ pr2 abelian-group-mul-ℚ⁺ = commutative-mul-ℚ⁺
 
 ```agda
 opaque
+  unfolding inv-ℚ⁺
   unfolding leq-ℚ-Prop
 
   inv-leq-ℚ⁺ : (x y : ℚ⁺) → leq-ℚ⁺ (inv-ℚ⁺ x) (inv-ℚ⁺ y) → leq-ℚ⁺ y x
@@ -112,6 +119,7 @@ opaque
 
 ```agda
 opaque
+  unfolding inv-ℚ⁺
   unfolding le-ℚ-Prop
 
   inv-le-ℚ⁺ : (x y : ℚ⁺) → le-ℚ⁺ (inv-ℚ⁺ x) (inv-ℚ⁺ y) → le-ℚ⁺ y x

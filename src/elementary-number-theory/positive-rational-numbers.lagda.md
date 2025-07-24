@@ -196,7 +196,9 @@ positive-rational-ℕ⁺ n = positive-rational-positive-ℤ (positive-int-ℕ⁺
 ### The rational image of a positive integer fraction is positive
 
 ```agda
-abstract
+opaque
+  unfolding rational-fraction-ℤ
+
   is-positive-rational-fraction-ℤ :
     {x : fraction-ℤ} (P : is-positive-fraction-ℤ x) →
     is-positive-ℚ (rational-fraction-ℤ x)
@@ -477,16 +479,16 @@ module _
   (x : ℚ) (P : is-positive-ℚ x)
   where
 
-  inv-is-positive-ℚ : ℚ
-  pr1 inv-is-positive-ℚ = inv-is-positive-fraction-ℤ (fraction-ℚ x) P
-  pr2 inv-is-positive-ℚ =
-    is-reduced-inv-is-positive-fraction-ℤ
-      ( fraction-ℚ x)
-      ( P)
-      ( is-reduced-fraction-ℚ x)
-
   opaque
     unfolding mul-ℚ
+
+    inv-is-positive-ℚ : ℚ
+    pr1 inv-is-positive-ℚ = inv-is-positive-fraction-ℤ (fraction-ℚ x) P
+    pr2 inv-is-positive-ℚ =
+      is-reduced-inv-is-positive-fraction-ℤ
+        ( fraction-ℚ x)
+        ( P)
+        ( is-reduced-fraction-ℚ x)
 
     left-inverse-law-mul-is-positive-ℚ : inv-is-positive-ℚ *ℚ x ＝ one-ℚ
     left-inverse-law-mul-is-positive-ℚ =

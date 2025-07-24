@@ -99,6 +99,7 @@ module _
 ```agda
 opaque
   unfolding mul-ℚ
+  unfolding rational-fraction-ℤ
 
   decide-is-zero-factor-is-zero-mul-ℚ :
     (x y : ℚ) → is-zero-ℚ (x *ℚ y) → (is-zero-ℚ x) + (is-zero-ℚ y)
@@ -180,6 +181,7 @@ opaque
 ```agda
 opaque
   unfolding mul-ℚ
+  unfolding rational-fraction-ℤ
 
   associative-mul-ℚ :
     (x y z : ℚ) → (x *ℚ y) *ℚ z ＝ x *ℚ (y *ℚ z)
@@ -280,8 +282,9 @@ abstract
 
 ```agda
 opaque
-  unfolding mul-ℚ
   unfolding add-ℚ
+  unfolding mul-ℚ
+  unfolding rational-fraction-ℤ
 
   left-distributive-mul-add-ℚ :
     (x y z : ℚ) → x *ℚ (y +ℚ z) ＝ (x *ℚ y) +ℚ (x *ℚ z)
@@ -356,6 +359,7 @@ abstract
 ```agda
 opaque
   unfolding mul-ℚ
+  unfolding rational-fraction-ℤ
 
   mul-rational-fraction-ℤ :
     (x y : fraction-ℤ) →

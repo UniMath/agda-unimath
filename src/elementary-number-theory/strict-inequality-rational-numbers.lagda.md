@@ -184,6 +184,7 @@ module _
 
   opaque
     unfolding le-ℚ-Prop
+    unfolding rational-fraction-ℤ
 
     preserves-le-rational-fraction-ℤ :
       le-fraction-ℤ p q → le-ℚ (rational-fraction-ℤ p) (rational-fraction-ℤ q)
@@ -202,6 +203,8 @@ module _
 
   opaque
     unfolding le-ℚ-Prop
+    unfolding rational-fraction-ℤ
+
     preserves-le-right-rational-fraction-ℤ :
       le-fraction-ℤ (fraction-ℚ x) p → le-ℚ x (rational-fraction-ℤ p)
     preserves-le-right-rational-fraction-ℤ H =
@@ -232,6 +235,7 @@ module _
 
   opaque
     unfolding le-ℚ-Prop
+    unfolding rational-fraction-ℤ
 
     preserves-le-left-rational-fraction-ℤ :
       le-fraction-ℤ p (fraction-ℚ x) → le-ℚ (rational-fraction-ℤ p) x

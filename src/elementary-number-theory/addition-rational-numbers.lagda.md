@@ -95,6 +95,7 @@ opaque
 ```agda
 opaque
   unfolding add-ℚ
+  unfolding rational-fraction-ℤ
 
   associative-add-ℚ :
     (x y z : ℚ) →
@@ -256,6 +257,7 @@ pr2 equiv-pred-ℚ = is-equiv-pred-ℚ
 ```agda
 opaque
   unfolding add-ℚ
+  unfolding rational-fraction-ℤ
 
   add-rational-fraction-ℤ :
     (x y : fraction-ℤ) →

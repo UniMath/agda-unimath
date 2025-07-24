@@ -64,6 +64,7 @@ reciprocal-rational-succ-ℕ n =
 
 ```agda
 opaque
+  unfolding inv-ℚ⁺
   unfolding leq-ℚ-Prop
 
   leq-reciprocal-rational-ℕ⁺ :
@@ -81,6 +82,7 @@ opaque
 
 ```agda
 opaque
+  unfolding inv-ℚ⁺
   unfolding le-ℚ-Prop
 
   le-reciprocal-rational-ℕ⁺ :

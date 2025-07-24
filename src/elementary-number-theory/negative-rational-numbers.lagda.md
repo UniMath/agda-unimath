@@ -153,6 +153,7 @@ negative-rational-negative-ℤ (x , x-is-neg) =
 ```agda
 opaque
   unfolding neg-ℚ
+  unfolding rational-fraction-ℤ
 
   is-negative-rational-fraction-ℤ :
     {x : fraction-ℤ} (P : is-negative-fraction-ℤ x) →
@@ -224,6 +225,7 @@ abstract
 ```agda
 opaque
   unfolding mul-ℚ
+  unfolding rational-fraction-ℤ
 
   is-positive-mul-negative-ℚ :
     {x y : ℚ} → is-negative-ℚ x → is-negative-ℚ y → is-positive-ℚ (x *ℚ y)

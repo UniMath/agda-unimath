@@ -93,9 +93,10 @@ module _
 ### Inclusion of fractions
 
 ```agda
-rational-fraction-ℤ : fraction-ℤ → ℚ
-pr1 (rational-fraction-ℤ x) = reduce-fraction-ℤ x
-pr2 (rational-fraction-ℤ x) = is-reduced-reduce-fraction-ℤ x
+opaque
+  rational-fraction-ℤ : fraction-ℤ → ℚ
+  pr1 (rational-fraction-ℤ x) = reduce-fraction-ℤ x
+  pr2 (rational-fraction-ℤ x) = is-reduced-reduce-fraction-ℤ x
 ```
 
 ### Inclusion of the integers
@@ -165,7 +166,9 @@ opaque
 ### The rational images of two similar integer fractions are equal
 
 ```agda
-abstract
+opaque
+  unfolding rational-fraction-ℤ
+
   eq-ℚ-sim-fraction-ℤ :
     (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) →
     rational-fraction-ℤ x ＝ rational-fraction-ℤ y
@@ -194,7 +197,9 @@ pr2 ℚ-Set = is-set-ℚ
 ### The rationals are a retract of the integer fractions
 
 ```agda
-abstract
+opaque
+  unfolding rational-fraction-ℤ
+
   is-retraction-rational-fraction-ℚ :
     (x : ℚ) → rational-fraction-ℤ (fraction-ℚ x) ＝ x
   is-retraction-rational-fraction-ℚ ((m , n , n-pos) , p) =
@@ -293,6 +298,7 @@ opaque
 ```agda
 opaque
   unfolding neg-ℚ
+  unfolding rational-fraction-ℤ
 
   preserves-neg-rational-fraction-ℤ :
     (x : fraction-ℤ) →
