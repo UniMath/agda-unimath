@@ -153,6 +153,7 @@ abstract
 ```agda
 opaque
   unfolding add-ℚ
+  unfolding neg-ℚ
 
   left-inverse-law-add-ℚ : (x : ℚ) → (neg-ℚ x) +ℚ x ＝ zero-ℚ
   left-inverse-law-add-ℚ x =
@@ -191,6 +192,7 @@ abstract
 ```agda
 opaque
   unfolding add-ℚ
+  unfolding neg-ℚ
 
   distributive-neg-add-ℚ :
     (x y : ℚ) → neg-ℚ (x +ℚ y) ＝ neg-ℚ x +ℚ neg-ℚ y
@@ -207,6 +209,7 @@ opaque
 ```agda
 opaque
   unfolding add-ℚ
+  unfolding neg-ℚ
 
   is-retraction-pred-ℚ : is-retraction succ-ℚ pred-ℚ
   is-retraction-pred-ℚ x =

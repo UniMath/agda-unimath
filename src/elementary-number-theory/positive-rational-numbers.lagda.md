@@ -36,6 +36,7 @@ open import elementary-number-theory.reduced-integer-fractions
 open import elementary-number-theory.strict-inequality-integers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.binary-transport
@@ -43,7 +44,6 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.action-on-identifications-binary-functions
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -210,7 +210,9 @@ module _
   (x : ℚ)
   where
 
-  abstract
+  opaque
+    unfolding le-ℚ-Prop
+
     le-zero-is-positive-ℚ : is-positive-ℚ x → le-ℚ zero-ℚ x
     le-zero-is-positive-ℚ =
       is-positive-eq-ℤ (inv (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x)))
@@ -264,21 +266,26 @@ module _
 ### A nonzero rational number or its negative is positive
 
 ```agda
-decide-is-negative-is-positive-is-nonzero-ℚ :
-  {x : ℚ} → is-nonzero-ℚ x → is-positive-ℚ (neg-ℚ x) + is-positive-ℚ x
-decide-is-negative-is-positive-is-nonzero-ℚ {x} H =
-  rec-coproduct
-    ( inl ∘ is-positive-neg-is-negative-ℤ)
-    ( inr)
-    ( decide-sign-nonzero-ℤ
-      { numerator-ℚ x}
-      (is-nonzero-numerator-is-nonzero-ℚ x H))
+opaque
+  unfolding neg-ℚ
+
+  decide-is-negative-is-positive-is-nonzero-ℚ :
+    {x : ℚ} → is-nonzero-ℚ x → is-positive-ℚ (neg-ℚ x) + is-positive-ℚ x
+  decide-is-negative-is-positive-is-nonzero-ℚ {x} H =
+    rec-coproduct
+      ( inl ∘ is-positive-neg-is-negative-ℤ)
+      ( inr)
+      ( decide-sign-nonzero-ℤ
+        { numerator-ℚ x}
+        ( is-nonzero-numerator-is-nonzero-ℚ x H))
 ```
 
 ### A rational and its negative are not both positive
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   not-is-negative-is-positive-ℚ :
     (x : ℚ) → ¬ (is-positive-ℚ (neg-ℚ x) × is-positive-ℚ x)
   not-is-negative-is-positive-ℚ x (N , P) =
@@ -732,6 +739,7 @@ module _
 
 ```agda
 opaque
+  unfolding le-ℚ-Prop
   unfolding mul-ℚ
 
   preserves-le-left-mul-ℚ⁺ :
@@ -772,6 +780,7 @@ opaque
 
 ```agda
 opaque
+  unfolding leq-ℚ-Prop
   unfolding mul-ℚ
 
   preserves-leq-left-mul-ℚ⁺ :
@@ -811,37 +820,38 @@ abstract
 ### Multiplication of a positive rational by another positive rational less than 1 is a strictly deflationary map
 
 ```agda
-le-left-mul-less-than-one-ℚ⁺ :
-  (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (p *ℚ⁺ q) q
-le-left-mul-less-than-one-ℚ⁺ p p<1 q =
-  tr
-    ( le-ℚ⁺ ( p *ℚ⁺ q))
-    ( left-unit-law-mul-ℚ⁺ q)
-    ( preserves-le-right-mul-ℚ⁺ q (rational-ℚ⁺ p) one-ℚ p<1)
+abstract
+  le-left-mul-less-than-one-ℚ⁺ :
+    (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (p *ℚ⁺ q) q
+  le-left-mul-less-than-one-ℚ⁺ p p<1 q =
+    tr
+      ( le-ℚ⁺ ( p *ℚ⁺ q))
+      ( left-unit-law-mul-ℚ⁺ q)
+      ( preserves-le-right-mul-ℚ⁺ q (rational-ℚ⁺ p) one-ℚ p<1)
 
-le-right-mul-less-than-one-ℚ⁺ :
-  (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (q *ℚ⁺ p) q
-le-right-mul-less-than-one-ℚ⁺ p p<1 q =
-  tr
-    ( λ r → le-ℚ⁺ r q)
-    ( commutative-mul-ℚ⁺ p q)
-    ( le-left-mul-less-than-one-ℚ⁺ p p<1 q)
+  le-right-mul-less-than-one-ℚ⁺ :
+    (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (q *ℚ⁺ p) q
+  le-right-mul-less-than-one-ℚ⁺ p p<1 q =
+    tr
+      ( λ r → le-ℚ⁺ r q)
+      ( commutative-mul-ℚ⁺ p q)
+      ( le-left-mul-less-than-one-ℚ⁺ p p<1 q)
 ```
 
 ### The positive mediant between zero and a positive rational number
 
 ```agda
-mediant-zero-ℚ⁺ : ℚ⁺ → ℚ⁺
-mediant-zero-ℚ⁺ x =
-  ( mediant-ℚ zero-ℚ (rational-ℚ⁺ x) ,
-    is-positive-le-zero-ℚ
-      ( mediant-ℚ zero-ℚ (rational-ℚ⁺ x))
-      ( le-left-mediant-ℚ
-        ( zero-ℚ)
-        ( rational-ℚ⁺ x)
-        ( le-zero-is-positive-ℚ (rational-ℚ⁺ x) (is-positive-rational-ℚ⁺ x))))
+opaque
+  mediant-zero-ℚ⁺ : ℚ⁺ → ℚ⁺
+  mediant-zero-ℚ⁺ x =
+    ( mediant-ℚ zero-ℚ (rational-ℚ⁺ x) ,
+      is-positive-le-zero-ℚ
+        ( mediant-ℚ zero-ℚ (rational-ℚ⁺ x))
+        ( le-left-mediant-ℚ
+          ( zero-ℚ)
+          ( rational-ℚ⁺ x)
+          ( le-zero-is-positive-ℚ (rational-ℚ⁺ x) (is-positive-rational-ℚ⁺ x))))
 
-abstract
   le-mediant-zero-ℚ⁺ : (x : ℚ⁺) → le-ℚ⁺ (mediant-zero-ℚ⁺ x) x
   le-mediant-zero-ℚ⁺ x =
     le-right-mediant-ℚ
@@ -910,23 +920,24 @@ module _
   mediant-zero-min-ℚ⁺ : ℚ⁺
   mediant-zero-min-ℚ⁺ = mediant-zero-ℚ⁺ (min-ℚ⁺ x y)
 
-  le-left-mediant-zero-min-ℚ⁺ : le-ℚ⁺ mediant-zero-min-ℚ⁺ x
-  le-left-mediant-zero-min-ℚ⁺ =
-    concatenate-le-leq-ℚ
-      ( rational-ℚ⁺ mediant-zero-min-ℚ⁺)
-      ( rational-ℚ⁺ (min-ℚ⁺ x y))
-      ( rational-ℚ⁺ x)
-      ( le-mediant-zero-ℚ⁺ (min-ℚ⁺ x y))
-      ( leq-left-min-ℚ⁺ x y)
+  abstract
+    le-left-mediant-zero-min-ℚ⁺ : le-ℚ⁺ mediant-zero-min-ℚ⁺ x
+    le-left-mediant-zero-min-ℚ⁺ =
+      concatenate-le-leq-ℚ
+        ( rational-ℚ⁺ mediant-zero-min-ℚ⁺)
+        ( rational-ℚ⁺ (min-ℚ⁺ x y))
+        ( rational-ℚ⁺ x)
+        ( le-mediant-zero-ℚ⁺ (min-ℚ⁺ x y))
+        ( leq-left-min-ℚ⁺ x y)
 
-  le-right-mediant-zero-min-ℚ⁺ : le-ℚ⁺ mediant-zero-min-ℚ⁺ y
-  le-right-mediant-zero-min-ℚ⁺ =
-    concatenate-le-leq-ℚ
-      ( rational-ℚ⁺ mediant-zero-min-ℚ⁺)
-      ( rational-ℚ⁺ (min-ℚ⁺ x y))
-      ( rational-ℚ⁺ y)
-      ( le-mediant-zero-ℚ⁺ (min-ℚ⁺ x y))
-      ( leq-right-min-ℚ⁺ x y)
+    le-right-mediant-zero-min-ℚ⁺ : le-ℚ⁺ mediant-zero-min-ℚ⁺ y
+    le-right-mediant-zero-min-ℚ⁺ =
+      concatenate-le-leq-ℚ
+        ( rational-ℚ⁺ mediant-zero-min-ℚ⁺)
+        ( rational-ℚ⁺ (min-ℚ⁺ x y))
+        ( rational-ℚ⁺ y)
+        ( le-mediant-zero-ℚ⁺ (min-ℚ⁺ x y))
+        ( leq-right-min-ℚ⁺ x y)
 ```
 
 ### Any positive rational number `p` has a `q` with `q + q < p`

@@ -10,12 +10,14 @@ module elementary-number-theory.multiplicative-group-of-positive-rational-number
 
 ```agda
 open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-integers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
@@ -91,7 +93,9 @@ pr2 abelian-group-mul-ℚ⁺ = commutative-mul-ℚ⁺
 ### Inversion reverses inequality on the positive rational numbers
 
 ```agda
-abstract
+opaque
+  unfolding leq-ℚ-Prop
+
   inv-leq-ℚ⁺ : (x y : ℚ⁺) → leq-ℚ⁺ (inv-ℚ⁺ x) (inv-ℚ⁺ y) → leq-ℚ⁺ y x
   inv-leq-ℚ⁺ x y =
     binary-tr
@@ -107,7 +111,9 @@ abstract
 ### Inversion reverses strict inequality on the positive rational numbers
 
 ```agda
-abstract
+opaque
+  unfolding le-ℚ-Prop
+
   inv-le-ℚ⁺ : (x y : ℚ⁺) → le-ℚ⁺ (inv-ℚ⁺ x) (inv-ℚ⁺ y) → le-ℚ⁺ y x
   inv-le-ℚ⁺ x y =
     binary-tr

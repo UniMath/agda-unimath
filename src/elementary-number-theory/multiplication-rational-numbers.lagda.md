@@ -152,6 +152,7 @@ opaque
 ```agda
 opaque
   unfolding mul-ℚ
+  unfolding neg-ℚ
 
   left-neg-unit-law-mul-ℚ : (x : ℚ) → neg-one-ℚ *ℚ x ＝ neg-ℚ x
   left-neg-unit-law-mul-ℚ x =
