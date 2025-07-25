@@ -31,7 +31,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 A [pseudometric space](metric-spaces.pseudometric-spaces.md) is called
 {{#concept "extensional" Disambiguation="pseudometric space" Agda=is-extensional-Pseudometric-Space}}
-if any of the following equivalent condition holds:
+if any of the following equivalent conditions holds:
 
 - any [similar](metric-spaces.similarity-of-elements-pseudometric-spaces.md)
   elements are [identical](foundation-core.identity-types.md);
