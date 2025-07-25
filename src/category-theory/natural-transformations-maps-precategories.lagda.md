@@ -267,6 +267,14 @@ module _
     α ＝ β
   eq-htpy-hom-family-natural-transformation-map-Precategory α β =
     map-inv-equiv (extensionality-natural-transformation-map-Precategory α β)
+
+  htpy-eq-hom-family-natural-transformation-map-Precategory :
+    {α β : natural-transformation-map-Precategory C D F G} →
+    α ＝ β →
+    hom-family-natural-transformation-map-Precategory C D F G α ~
+    hom-family-natural-transformation-map-Precategory C D F G β
+  htpy-eq-hom-family-natural-transformation-map-Precategory {α} {β} =
+    map-equiv (extensionality-natural-transformation-map-Precategory α β)
 ```
 
 ### Categorical laws for natural transformations

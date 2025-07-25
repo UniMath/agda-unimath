@@ -268,3 +268,8 @@ homepage = "https://ecavallo.net/"
 displayName = "Arnoud van der Leer"
 usernames = [ "Arnoud van der Leer" ]
 github = "arnoudvanderleer"
+
+[[contributors]]
+displayName = "Ben Connors"
+usernames = [ "Ben Connors" ]
+github = "ben-connors"

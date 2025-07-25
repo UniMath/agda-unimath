@@ -123,13 +123,13 @@ triangle-map-standard-pullback-postcomp T f g c h =
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) (c : cone f g C)
   where
 
   abstract
     is-pullback-postcomp-is-pullback :
-      is-pullback f g c → (T : UU l5) →
+      is-pullback f g c → {l5 : Level} (T : UU l5) →
       is-pullback (postcomp T f) (postcomp T g) (postcomp-cone T f g c)
     is-pullback-postcomp-is-pullback is-pb-c T =
       is-equiv-top-map-triangle _ _ _
