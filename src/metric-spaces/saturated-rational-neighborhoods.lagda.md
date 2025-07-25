@@ -30,6 +30,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import metric-spaces.monotonic-rational-neighborhoods
+open import metric-spaces.ordering-rational-neighborhoods
 open import metric-spaces.rational-neighborhoods
 ```
 
@@ -52,6 +53,19 @@ Or, equivalently if for any `(x y : A)`, the subset of
 
 - For any `ε : ℚ⁺`, if `ε + δ` is an upper bound of the distance between `x` and
   `y` for all `(δ : ℚ⁺)`, then so is `ε`.
+
+Any rational neighborhood `N` can be **saturated** by
+
+```text
+saturate-N ε x y = (δ : ℚ⁺) → N (ε +ℚ⁺ δ) x y
+```
+
+This is the
+{{#concept "saturation" Disambiguation="rational neighborhood relation" Agda=saturate-Rational-Neighborhood-Relation}}
+of a rational neighborhood relation. The saturation of a rational neighborhood
+relation is **saturated** and
+[finer](metric-spaces.ordering-rational-neighborhoods.md) than all saturated
+rational neighborhood coarser than it.
 
 ## Definitions
 
@@ -122,6 +136,57 @@ module _
           ( right-summand-split-ℚ⁺ δ)) ∙
         ( ap (add-ℚ⁺ ε) (eq-add-split-ℚ⁺ δ)))
       ( H (left-summand-split-ℚ⁺ δ) (right-summand-split-ℚ⁺ δ))
+```
+
+### The saturation of a rational neighborhood relation is finer than all saturated rational neighborhood relations coarser than it
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (N : Rational-Neighborhood-Relation l2 A)
+  {l3 : Level} (B : Rational-Neighborhood-Relation l3 A)
+  (saturated-B : is-saturated-Rational-Neighborhood-Relation B)
+  where
+
+  leq-saturate-leq-is-saturated-Neighborhood-Relation :
+    leq-Rational-Neighborhood-Relation N B →
+    leq-Rational-Neighborhood-Relation
+      ( saturate-Rational-Neighborhood-Relation N)
+      ( B)
+  leq-saturate-leq-is-saturated-Neighborhood-Relation H d x y Nxy =
+    saturated-B
+      ( d)
+      ( x)
+      ( y)
+      ( λ δ → H (d +ℚ⁺ δ) x y (Nxy δ))
+```
+
+### Saturation of a neighborhood relation is idempotent
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : Rational-Neighborhood-Relation l2 A)
+  where
+
+  is-idempotent-saturate-Rational-Neighborhood-Relation :
+    saturate-Rational-Neighborhood-Relation
+      (saturate-Rational-Neighborhood-Relation B) ＝
+    saturate-Rational-Neighborhood-Relation B
+  is-idempotent-saturate-Rational-Neighborhood-Relation =
+    antisymmetric-leq-Rational-Neighborhood-Relation
+      ( saturate-Rational-Neighborhood-Relation
+        ( saturate-Rational-Neighborhood-Relation B))
+      ( saturate-Rational-Neighborhood-Relation B)
+      ( leq-saturate-leq-is-saturated-Neighborhood-Relation
+        ( saturate-Rational-Neighborhood-Relation B)
+        ( saturate-Rational-Neighborhood-Relation B)
+        ( is-saturated-saturate-Rational-Neighborhood-Relation B)
+        ( refl-leq-Rational-Neighborhood-Relation
+          ( saturate-Rational-Neighborhood-Relation B)))
+      ( λ d x y H δ₁ δ₂ →
+        inv-tr
+          ( is-upper-bound-dist-Rational-Neighborhood-Relation B x y)
+          ( associative-add-ℚ⁺ d δ₁ δ₂)
+          ( H (δ₁ +ℚ⁺ δ₂)))
 ```
 
 ### In a monotonic saturated rational neighborhood relation, `N ε x y ⇔ (∀ δ → ε < δ → N δ x y)`
