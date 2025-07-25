@@ -115,7 +115,10 @@ module _
 ### If `m ≤ n`, the reciprocal of `n` is less than or equal to the reciprocal of `n`
 
 ```agda
-abstract
+opaque
+  unfolding inv-ℚ⁺
+  unfolding leq-ℚ-Prop
+
   leq-reciprocal-rational-ℕ⁺ :
     (m n : ℕ⁺) → leq-ℕ⁺ m n →
     leq-ℚ (reciprocal-rational-ℕ⁺ n) (reciprocal-rational-ℕ⁺ m)
@@ -130,7 +133,10 @@ abstract
 ### If `m < n`, the reciprocal of `n` is less than the reciprocal of `n`
 
 ```agda
-abstract
+opaque
+  unfolding inv-ℚ⁺
+  unfolding le-ℚ-Prop
+
   le-reciprocal-rational-ℕ⁺ :
     (m n : ℕ⁺) → le-ℕ⁺ m n →
     le-ℚ⁺
