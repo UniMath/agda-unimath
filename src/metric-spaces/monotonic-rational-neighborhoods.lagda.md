@@ -21,7 +21,7 @@ open import metric-spaces.rational-neighborhoods
 
 A [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) is
 {{#concept "monotonic" Disambiguation="rational neighborhood relation" Agda=is-monotonic-Rational-Neighborhood-Relation}}
-if any `d₁`-neighborhoods are `d₂`-neighborhoods for `d₁ < d₂`.
+if all `d₁`-neighborhoods are `d₂`-neighborhoods for `d₁ < d₂`.
 
 ## Definitions
 
