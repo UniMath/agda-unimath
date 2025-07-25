@@ -221,27 +221,6 @@ module _
   {l : Level} (R : Euclidean-Domain l)
   where
 
-  semigroup-fin-sequence-type-Euclidean-Domain : ℕ → Semigroup l
-  semigroup-fin-sequence-type-Euclidean-Domain =
-    semigroup-fin-sequence-type-Commutative-Ring
-      ( commutative-ring-Euclidean-Domain R)
-
-  monoid-fin-sequence-type-Euclidean-Domain : ℕ → Monoid l
-  monoid-fin-sequence-type-Euclidean-Domain =
-    monoid-fin-sequence-type-Commutative-Ring
-      ( commutative-ring-Euclidean-Domain R)
-
-  commutative-monoid-fin-sequence-type-Euclidean-Domain :
-    ℕ → Commutative-Monoid l
-  commutative-monoid-fin-sequence-type-Euclidean-Domain =
-    commutative-monoid-fin-sequence-type-Commutative-Ring
-      ( commutative-ring-Euclidean-Domain R)
-
-  group-fin-sequence-type-Euclidean-Domain : ℕ → Group l
-  group-fin-sequence-type-Euclidean-Domain =
-    group-fin-sequence-type-Commutative-Ring
-      ( commutative-ring-Euclidean-Domain R)
-
   ab-fin-sequence-type-Euclidean-Domain : ℕ → Ab l
   ab-fin-sequence-type-Euclidean-Domain =
     ab-fin-sequence-type-Commutative-Ring
