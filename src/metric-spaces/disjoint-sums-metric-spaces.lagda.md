@@ -64,7 +64,7 @@ for any `x : A` the embedding `P x → Σ A P` is an
 
 ## Definitions
 
-### Dependent sum of metric spaces
+### Disjoint sum of metric spaces
 
 ```agda
 module _
