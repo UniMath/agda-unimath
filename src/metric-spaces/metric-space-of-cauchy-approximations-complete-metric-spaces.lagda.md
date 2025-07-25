@@ -12,10 +12,13 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.complete-metric-spaces
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.dependent-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.isometries-metric-spaces
@@ -286,4 +289,74 @@ module _
   complete-metric-space-of-cauchy-approximations-Complete-Metric-Space =
     ( metric-space-of-cauchy-approximations-Complete-Metric-Space A) ,
     ( is-complete-metric-space-of-cauchy-approximations-Complete-Metric-Space A)
+```
+
+### A metric space is complete if and only if its metric space of Cauchy approximations is complete
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  where
+
+  is-complete-is-complete-metric-space-of-cauchy-approximations-Metric-Space :
+    is-complete-Metric-Space
+      ( metric-space-of-cauchy-approximations-Metric-Space A) →
+    is-complete-Metric-Space A
+  is-complete-is-complete-metric-space-of-cauchy-approximations-Metric-Space
+    H f =
+    rec-trunc-Prop
+      ( is-convergent-prop-cauchy-approximation-Metric-Space A f)
+      ( λ d →
+        ( map-cauchy-approximation-Metric-Space A lim-const-map-f d) ,
+        ( is-lim-f-lim-const-map-f d))
+      ( is-inhabited-ℚ⁺)
+    where
+
+    const-map-f :
+      ℚ⁺ → cauchy-approximation-Metric-Space A
+    const-map-f =
+      ( const-cauchy-approximation-Metric-Space A) ∘
+      ( map-cauchy-approximation-Metric-Space A f)
+
+    is-cauchy-const-map-f :
+      is-cauchy-approximation-Metric-Space
+        ( metric-space-of-cauchy-approximations-Metric-Space A)
+        ( const-map-f)
+    is-cauchy-const-map-f ε δ d =
+      is-cauchy-approximation-map-cauchy-approximation-Metric-Space
+        ( A)
+        ( f)
+        ( ε)
+        ( δ)
+
+    lim-const-map-f :
+      cauchy-approximation-Metric-Space A
+    lim-const-map-f =
+      limit-cauchy-approximation-Complete-Metric-Space
+        ( metric-space-of-cauchy-approximations-Metric-Space A , H)
+        ( const-map-f , is-cauchy-const-map-f)
+
+    is-lim-f-lim-const-map-f :
+      (d : ℚ⁺) →
+      is-limit-cauchy-approximation-Metric-Space
+        ( A)
+        ( f)
+        ( map-cauchy-approximation-Metric-Space A lim-const-map-f d)
+    is-lim-f-lim-const-map-f d ε δ =
+      is-limit-limit-cauchy-approximation-Complete-Metric-Space
+        ( metric-space-of-cauchy-approximations-Metric-Space A , H)
+        ( const-map-f , is-cauchy-const-map-f)
+        ( ε)
+        ( δ)
+        ( d)
+
+  iff-is-complete-is-complete-metric-space-of-cauchy-approximations-Metric-Space :
+    is-complete-Metric-Space
+      ( metric-space-of-cauchy-approximations-Metric-Space A) ↔
+    is-complete-Metric-Space A
+  iff-is-complete-is-complete-metric-space-of-cauchy-approximations-Metric-Space
+    =
+    ( is-complete-is-complete-metric-space-of-cauchy-approximations-Metric-Space) ,
+    ( is-complete-metric-space-of-cauchy-approximations-Complete-Metric-Space ∘
+      pair A)
 ```
