@@ -106,7 +106,7 @@ module _
 
 ## Properties
 
-### Uniformly continuous functions are continuous at all points
+### Uniformly continuous functions are continuous everywhere
 
 ```agda
 module _
