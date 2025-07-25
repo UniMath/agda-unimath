@@ -13,8 +13,9 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.axiom-of-choice
 open import foundation.inhabited-types
-open import foundation.axiom-of-dependent-choice
+-- open import foundation.axiom-of-dependent-choice
 open import foundation.universe-levels
+open import set-theory.countable-sets
 ```
 
 </details>
@@ -40,6 +41,18 @@ ACω = {l : Level} → level-ACω l
 ```
 
 ## Properties
+
+### The axiom of countable choice implies choice for all countable sets
+
+```agda
+module _
+  {l : Level} (X : Set l)
+  (H : is-countable X)
+  where
+
+  choice-countable-set-ACω :
+    instance-choice-Set A
+```
 
 ### The axiom of choice implies the axiom of countable choice
 
