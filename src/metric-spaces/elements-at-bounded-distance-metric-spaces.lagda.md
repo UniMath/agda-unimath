@@ -50,7 +50,7 @@ module _
 
   bounded-dist-prop-Metric-Space : Prop l2
   bounded-dist-prop-Metric-Space =
-    ∃ ℚ⁺ (λ d → structure-Metric-Space A d x y)
+    ∃ ℚ⁺ (λ d → neighborhood-prop-Metric-Space A d x y)
 
   bounded-dist-Metric-Space : UU l2
   bounded-dist-Metric-Space =
@@ -100,7 +100,7 @@ module _
     (x : type-Metric-Space A) → bounded-dist-Metric-Space A x x
   refl-bounded-dist-Metric-Space x =
     map-trunc-Prop
-      ( λ d → d , refl-structure-Metric-Space A d x)
+      ( λ d → d , refl-neighborhood-Metric-Space A d x)
       ( is-inhabited-ℚ⁺)
 ```
 
@@ -117,7 +117,7 @@ module _
     bounded-dist-Metric-Space A y x
   symmetric-bounded-dist-Metric-Space x y =
     map-tot-exists
-      ( λ d → is-symmetric-structure-Metric-Space A d x y)
+      ( λ d → symmetric-neighborhood-Metric-Space A d x y)
 ```
 
 ### Being at bounded distance in a metric space is transitive
@@ -136,7 +136,7 @@ module _
     map-binary-exists
       ( is-upper-bound-dist-Metric-Space A x z)
       ( λ dyz dxy → dxy +ℚ⁺ dyz)
-      ( λ dyz dxy → is-triangular-structure-Metric-Space A x y z dxy dyz)
+      ( λ dyz dxy → triangular-neighborhood-Metric-Space A x y z dxy dyz)
 ```
 
 ### The preorder of elements at bounded distance in a metric space
