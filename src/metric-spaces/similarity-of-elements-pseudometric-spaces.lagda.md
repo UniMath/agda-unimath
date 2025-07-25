@@ -1,6 +1,8 @@
 # Similarity of elements in pseudometric spaces
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module metric-spaces.similarity-of-elements-pseudometric-spaces where
 ```
 
@@ -118,24 +120,25 @@ module _
   {l1 l2 : Level} (A : Pseudometric-Space l1 l2)
   where
 
-  transitive-sim-Pseudometric-Space :
-    (x y z : type-Pseudometric-Space A) →
-    sim-Pseudometric-Space A y z →
-    sim-Pseudometric-Space A x y →
-    sim-Pseudometric-Space A x z
-  transitive-sim-Pseudometric-Space x y z Nyz Nxy d =
-    tr
-      ( is-upper-bound-dist-Pseudometric-Space A x z)
-      ( eq-add-split-ℚ⁺ d)
-      ( triangular-neighborhood-Pseudometric-Space
-        ( A)
-        ( x)
-        ( y)
-        ( z)
-        ( left-summand-split-ℚ⁺ d)
-        ( right-summand-split-ℚ⁺ d)
-        ( Nyz (right-summand-split-ℚ⁺ d))
-        ( Nxy (left-summand-split-ℚ⁺ d)))
+  abstract
+    transitive-sim-Pseudometric-Space :
+      (x y z : type-Pseudometric-Space A) →
+      sim-Pseudometric-Space A y z →
+      sim-Pseudometric-Space A x y →
+      sim-Pseudometric-Space A x z
+    transitive-sim-Pseudometric-Space x y z Nyz Nxy d =
+      tr
+        ( is-upper-bound-dist-Pseudometric-Space A x z)
+        ( eq-add-split-ℚ⁺ d)
+        ( triangular-neighborhood-Pseudometric-Space
+          ( A)
+          ( x)
+          ( y)
+          ( z)
+          ( left-summand-split-ℚ⁺ d)
+          ( right-summand-split-ℚ⁺ d)
+          ( Nyz (right-summand-split-ℚ⁺ d))
+          ( Nxy (left-summand-split-ℚ⁺ d)))
 ```
 
 ### Similarity in pseudometric spaces is an equivalence relation
