@@ -7,13 +7,22 @@ module group-theory.endomorphism-rings-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.large-precategories
+
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.identity-types
 
 open import group-theory.abelian-groups
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
+open import group-theory.invertible-elements-monoids
+open import group-theory.isomorphisms-abelian-groups
+open import group-theory.precategory-of-semigroups
 
+open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 ```
 
@@ -50,4 +59,40 @@ module _
     left-distributive-comp-add-hom-Ab A A A
   pr2 (pr2 (pr2 (pr2 endomorphism-ring-Ab))) =
     right-distributive-comp-add-hom-Ab A A A
+```
+
+## Properties
+
+### [Isomorphisms](group-theory.isomorphisms-abelian-groups.md) `A ≃ A` are [units](ring-theory.invertible-elements-rings.md) in the endomorphism ring
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-iso-is-invertible-endomorphism-ring-Ab :
+    (f : hom-Ab A A) → is-iso-Ab A A f → is-invertible-element-Ring
+    ( endomorphism-ring-Ab A) f
+  pr1 (is-iso-is-invertible-endomorphism-ring-Ab f f-iso) =
+    hom-inv-is-iso-Ab A A f f-iso
+  pr1 (pr2 (is-iso-is-invertible-endomorphism-ring-Ab f f-iso)) =
+    pr1 (pr2 f-iso)
+  pr2 (pr2 (is-iso-is-invertible-endomorphism-ring-Ab f f-iso)) =
+    pr2 (pr2 f-iso)
+```
+
+### Units in the endomorphism ring are isomorphisms `A ≃ A`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-invertible-is-iso-endomorphism-ring-Ab :
+    (f : hom-Ab A A) → is-invertible-element-Ring (endomorphism-ring-Ab A) f →
+    is-iso-Ab A A f
+  pr1 (is-invertible-is-iso-endomorphism-ring-Ab f (f-inv , f-inv-is-inv)) =
+    f-inv
+  pr2 (is-invertible-is-iso-endomorphism-ring-Ab f (f-inv , f-inv-is-inv)) =
+    f-inv-is-inv
 ```

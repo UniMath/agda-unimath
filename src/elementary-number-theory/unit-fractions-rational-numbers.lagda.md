@@ -12,12 +12,16 @@ module elementary-number-theory.unit-fractions-rational-numbers where
 open import elementary-number-theory.archimedean-property-positive-rational-numbers
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
+open import elementary-number-theory.multiplicative-inverses-positive-integer-fractions
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.positive-integers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-integers
@@ -26,7 +30,13 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
+open import foundation.equality-dependent-pair-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.unit-type
+
+open import foundation-core.coproduct-types
+open import foundation-core.identity-types
 
 open import group-theory.groups
 ```
@@ -123,4 +133,16 @@ smaller-reciprocal-ℚ⁺ q⁺@(q , _) =
           ( rational-ℚ⁺ (positive-rational-ℕ⁺ n⁺ *ℚ⁺ q⁺))
           ( 1<nq)))
     ( bound-archimedean-property-ℚ⁺ q⁺ one-ℚ⁺)
+```
+
+### For every `n : ℕ⁺`, `n * 1/n = 1`
+
+```agda
+{-
+unit-fraction-is-left-inv-ℚ : (n : ℕ⁺) → mul-ℚ (reciprocal-rational-ℕ⁺ n) (rational-ℕ (nat-ℕ⁺ n)) ＝ one-ℚ
+unit-fraction-is-left-inv-ℚ (n , n>0) = ap rational-fraction-ℤ (eq-pair refl {!   !}) ∙ (eq-ℚ-sim-fraction-ℤ (int-positive-ℤ (positive-int-ℕ⁺ (n , n>0)) , positive-int-ℕ⁺ (n , n>0)) one-fraction-ℤ (is-sim-one-fraction-ℤ (positive-int-ℕ⁺ (n , n>0))) ∙ {!   !})
+
+unit-fraction-is-right-inv-ℚ : (n : ℕ⁺) → mul-ℚ (rational-ℕ (nat-ℕ⁺ n)) (reciprocal-rational-ℕ⁺ n) ＝ one-ℚ
+unit-fraction-is-right-inv-ℚ (n , n>0) = {!   !}
+-}
 ```

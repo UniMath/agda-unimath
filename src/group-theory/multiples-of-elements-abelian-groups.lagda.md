@@ -11,11 +11,15 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import foundation-core.sets
+
 open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
 open import group-theory.powers-of-elements-groups
 ```
 
@@ -151,4 +155,16 @@ module _
     (m n : ℕ) {x : type-Ab A} →
     multiple-Ab A (m *ℕ n) x ＝ multiple-Ab A n (multiple-Ab A m x)
   multiple-mul-Ab = power-mul-Group (group-Ab A)
+```
+
+### The multiply-by-`n` homomorphism `A → A`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  multiple-hom-Ab : (n : ℕ) → hom-Ab A A
+  pr1 (multiple-hom-Ab n) = multiple-Ab A n
+  pr2 (multiple-hom-Ab n) {x} {y} = left-distributive-multiple-add-Ab A n
 ```
