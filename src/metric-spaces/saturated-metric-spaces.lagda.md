@@ -11,6 +11,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -22,6 +23,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.closed-premetric-structures
+open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
@@ -89,6 +91,42 @@ module _
     is-saturated-Metric-Space (saturate-Metric-Space M)
   is-saturated-saturate-Metric-Space =
     is-closed-closure-Premetric (structure-Metric-Space M)
+```
+
+### The saturation of a saturated metric space is itself
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (H : is-saturated-Metric-Space M)
+  where
+
+  eq-saturate-is-saturated-Metric-Space :
+    saturate-Metric-Space M ＝ M
+  eq-saturate-is-saturated-Metric-Space =
+    eq-type-subtype
+      ( is-metric-prop-Premetric-Space)
+      ( eq-pair-eq-fiber
+        ( eq-closure-closed-monotonic-Premetric
+          ( structure-Metric-Space M)
+          ( is-monotonic-structure-Metric-Space M)
+          ( H)))
+```
+
+### Saturation of metric spaces is idempotent
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  where
+
+  is-idempotent-saturate-Metric-Space :
+    saturate-Metric-Space (saturate-Metric-Space M) ＝
+    saturate-Metric-Space M
+  is-idempotent-saturate-Metric-Space =
+    eq-saturate-is-saturated-Metric-Space
+      ( saturate-Metric-Space M)
+      ( is-saturated-saturate-Metric-Space M)
 ```
 
 ### The identity map between a metric space and its saturation is short

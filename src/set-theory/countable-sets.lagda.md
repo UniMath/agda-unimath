@@ -53,7 +53,7 @@ A [set](foundation-core.sets.md) `X` is said to be
 {{#concept "countable" Disambiguation="set" Agda=is-countable WD="countable set" WDID=Q66707394}}
 if there is a [surjective map](foundation.surjective-maps.md) `f : ℕ → X + 1`.
 Equivalently, a set `X` is countable if there is a surjective map `f : P → X`
-for some [decidable subset](foundation.decidable-subtypes.md) `P` of `X`.
+for some [decidable subset](foundation.decidable-subtypes.md) `P` of `ℕ`.
 
 ## Definition
 
@@ -443,7 +443,7 @@ module _
                 ( is-surjective-is-equiv (is-equiv-map-ℕ-to-ℕ+ℕ)))))))
 ```
 
-### If `X` and `Y` are countable sets, then so is their coproduct `X × Y`
+### If `X` and `Y` are countable sets, then so is their product `X × Y`
 
 ```agda
 module _

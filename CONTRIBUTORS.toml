@@ -257,3 +257,19 @@ github = "JobPetrovcic"
 displayName = "Louis Wasserman"
 usernames = [ "Louis Wasserman" ]
 github = "lowasser"
+
+[[contributors]]
+displayName = "Evan Cavallo"
+usernames = [ "Evan Cavallo" ]
+github = "ecavallo"
+homepage = "https://ecavallo.net/"
+
+[[contributors]]
+displayName = "Arnoud van der Leer"
+usernames = [ "Arnoud van der Leer" ]
+github = "arnoudvanderleer"
+
+[[contributors]]
+displayName = "Ben Connors"
+usernames = [ "Ben Connors" ]
+github = "ben-connors"

@@ -133,6 +133,17 @@ is-set-ℚ⁰⁺ : is-set ℚ⁰⁺
 is-set-ℚ⁰⁺ = is-set-type-subtype is-nonnegative-prop-ℚ is-set-ℚ
 ```
 
+### All positive rational numbers are nonnegative
+
+```agda
+abstract
+  is-nonnegative-is-positive-ℚ : (q : ℚ) → is-positive-ℚ q → is-nonnegative-ℚ q
+  is-nonnegative-is-positive-ℚ _ = is-nonnegative-is-positive-ℤ
+
+nonnegative-ℚ⁺ : ℚ⁺ → ℚ⁰⁺
+nonnegative-ℚ⁺ (q , H) = (q , is-nonnegative-is-positive-ℚ q H)
+```
+
 ### The rational image of a nonnegative integer is nonnegative
 
 ```agda
@@ -149,7 +160,9 @@ nonnegative-rational-nonnegative-ℤ (x , x-is-neg) =
 ### The rational image of a nonnegative integer fraction is nonnegative
 
 ```agda
-abstract
+opaque
+  unfolding rational-fraction-ℤ
+
   is-nonnegative-rational-fraction-ℤ :
     {x : fraction-ℤ} (P : is-nonnegative-fraction-ℤ x) →
     is-nonnegative-ℚ (rational-fraction-ℤ x)
@@ -167,7 +180,9 @@ module _
   (x : ℚ)
   where
 
-  abstract
+  opaque
+    unfolding leq-ℚ-Prop
+
     leq-zero-is-nonnegative-ℚ : is-nonnegative-ℚ x → leq-ℚ zero-ℚ x
     leq-zero-is-nonnegative-ℚ =
       is-nonnegative-eq-ℤ (inv (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x)))
@@ -182,27 +197,32 @@ module _
         is-nonnegative-leq-zero-ℚ)
 ```
 
-### The difference of a rational number with a rational number less than or equal to the first is nonnegative
+### The successor of a nonnegative rational number is positive
 
 ```agda
-module _
-  (x y : ℚ) (H : leq-ℚ x y)
-  where
+abstract
+  is-positive-succ-is-nonnegative-ℚ :
+    (q : ℚ) → is-nonnegative-ℚ q → is-positive-ℚ (succ-ℚ q)
+  is-positive-succ-is-nonnegative-ℚ q H =
+    is-positive-le-zero-ℚ
+      ( succ-ℚ q)
+      ( concatenate-leq-le-ℚ
+        ( zero-ℚ)
+        ( q)
+        ( succ-ℚ q)
+        ( leq-zero-is-nonnegative-ℚ q H)
+        ( le-left-add-rational-ℚ⁺ q one-ℚ⁺))
 
-  abstract
-    is-nonnegative-diff-leq-ℚ : is-nonnegative-ℚ (y -ℚ x)
-    is-nonnegative-diff-leq-ℚ =
-      is-nonnegative-leq-zero-ℚ
-        ( y -ℚ x)
-        ( backward-implication (iff-translate-diff-leq-zero-ℚ x y) H)
-
-  nonnegative-diff-le-ℚ : ℚ⁰⁺
-  nonnegative-diff-le-ℚ = (y -ℚ x , is-nonnegative-diff-leq-ℚ)
+positive-succ-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁺
+positive-succ-ℚ⁰⁺ (q , H) = (succ-ℚ q , is-positive-succ-is-nonnegative-ℚ q H)
 ```
 
 ### The product of two nonnegative rational numbers is nonnegative
 
 ```agda
+opaque
+  unfolding mul-ℚ
+
   is-nonnegative-mul-nonnegative-ℚ :
     {x y : ℚ} → is-nonnegative-ℚ x → is-nonnegative-ℚ y →
     is-nonnegative-ℚ (x *ℚ y)
@@ -218,7 +238,10 @@ module _
 ### Multiplication by a nonnegative rational number preserves inequality
 
 ```agda
-abstract
+opaque
+  unfolding leq-ℚ-Prop
+  unfolding mul-ℚ
+
   preserves-leq-right-mul-ℚ⁰⁺ :
     (p : ℚ⁰⁺) (q r : ℚ) → leq-ℚ q r →
     leq-ℚ (q *ℚ rational-ℚ⁰⁺ p) (r *ℚ rational-ℚ⁰⁺ p)
@@ -255,7 +278,9 @@ abstract
 ### Addition on nonnegative rational numbers
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+
   is-nonnegative-add-ℚ :
     (p q : ℚ) → is-nonnegative-ℚ p → is-nonnegative-ℚ q →
     is-nonnegative-ℚ (p +ℚ q)
@@ -279,7 +304,9 @@ _+ℚ⁰⁺_ = add-ℚ⁰⁺
 ### Multiplication on nonnegative rational numbers
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+
   is-nonnegative-mul-ℚ :
     (p q : ℚ) → is-nonnegative-ℚ p → is-nonnegative-ℚ q →
     is-nonnegative-ℚ (p *ℚ q)
@@ -298,6 +325,10 @@ mul-ℚ⁰⁺ (p , nonneg-p) (q , nonneg-q) =
 infixl 35 _*ℚ⁰⁺_
 _*ℚ⁰⁺_ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
 _*ℚ⁰⁺_ = mul-ℚ⁰⁺
+
+abstract
+  commutative-mul-ℚ⁰⁺ : (p q : ℚ⁰⁺) → p *ℚ⁰⁺ q ＝ q *ℚ⁰⁺ p
+  commutative-mul-ℚ⁰⁺ (p , _) (q , _) = eq-ℚ⁰⁺ (commutative-mul-ℚ p q)
 ```
 
 ### Inequality on nonnegative rational numbers
@@ -333,4 +364,26 @@ abstract
       ( leq-ℚ q)
       ( commutative-add-ℚ (rational-ℚ⁰⁺ p) q)
       ( is-inflationary-map-left-add-rational-ℚ⁰⁺ p q)
+```
+
+### `x ≤ y` if and only if `y - x` is nonnegative
+
+```agda
+abstract
+  is-nonnegative-diff-iff-leq-ℚ :
+    (x y : ℚ) → (is-nonnegative-ℚ (y -ℚ x)) ↔ (leq-ℚ x y)
+  is-nonnegative-diff-iff-leq-ℚ x y =
+    iff-translate-diff-leq-zero-ℚ x y ∘iff
+    is-nonnegative-iff-leq-zero-ℚ (y -ℚ x)
+
+  is-nonnegative-diff-leq-ℚ : (x y : ℚ) → leq-ℚ x y → is-nonnegative-ℚ (y -ℚ x)
+  is-nonnegative-diff-leq-ℚ x y =
+    backward-implication (is-nonnegative-diff-iff-leq-ℚ x y)
+
+  leq-is-nonnegative-diff-ℚ : (x y : ℚ) → is-nonnegative-ℚ (y -ℚ x) → leq-ℚ x y
+  leq-is-nonnegative-diff-ℚ x y =
+    forward-implication (is-nonnegative-diff-iff-leq-ℚ x y)
+
+nonnegative-diff-leq-ℚ : (x y : ℚ) → leq-ℚ x y → ℚ⁰⁺
+nonnegative-diff-leq-ℚ x y x≤y = (y -ℚ x , is-nonnegative-diff-leq-ℚ x y x≤y)
 ```

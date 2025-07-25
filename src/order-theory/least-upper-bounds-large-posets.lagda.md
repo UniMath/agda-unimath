@@ -141,6 +141,25 @@ module _
     backward-implication (H _) (refl-leq-Large-Poset P _)
 ```
 
+### Binary least upper bounds are lesser than all binary upper bounds
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (P : Large-Poset α β)
+  {l1 l2 : Level} (a : type-Large-Poset P l1) (b : type-Large-Poset P l2)
+  where
+
+  leq-is-least-binary-upper-bound-Large-Poset :
+    {l3 : Level} {y : type-Large-Poset P l3} →
+    is-least-binary-upper-bound-Large-Poset P a b y →
+    {l4 : Level} (z : type-Large-Poset P l4) →
+    is-binary-upper-bound-Large-Poset P a b z →
+    leq-Large-Poset P y z
+  leq-is-least-binary-upper-bound-Large-Poset H z =
+    forward-implication (H z)
+```
+
 ### The least upper bound of `x` and `y` is the least upper bound of `y` and `x`
 
 ```agda
@@ -179,6 +198,58 @@ module _
   pr2 (sim-is-least-binary-upper-bound-Large-Poset H K) =
     forward-implication (K _)
       ( backward-implication (H _) (refl-leq-Large-Poset P _))
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (P : Large-Poset α β)
+  {l1 l2 l3 : Level}
+  (a : type-Large-Poset P l1) (b : type-Large-Poset P l2)
+  (c : type-Large-Poset P l3)
+  where
+
+  preserves-is-least-binary-upper-bound-sim-Large-Poset :
+    {l4 l5 : Level} {a' : type-Large-Poset P l4} {b' : type-Large-Poset P l5} →
+    sim-Large-Poset P a a' →
+    sim-Large-Poset P b b' →
+    is-least-binary-upper-bound-Large-Poset P a b c →
+    is-least-binary-upper-bound-Large-Poset P a' b' c
+  pr1
+    (preserves-is-least-binary-upper-bound-sim-Large-Poset
+      {a' = a'} {b' = b'} a~a' b~b' lub-ab-c d)
+    (a'≤d , b'≤d)
+    = forward-implication
+      ( lub-ab-c d)
+      ( transitive-leq-Large-Poset P a a' d a'≤d (pr1 a~a') ,
+        transitive-leq-Large-Poset P b b' d b'≤d (pr1 b~b'))
+  pr2
+    (preserves-is-least-binary-upper-bound-sim-Large-Poset
+      {a' = a'} {b' = b'} a~a' b~b' lub-ab-c d)
+    c≤d
+    =
+      let
+        (a≤d , b≤d) = backward-implication (lub-ab-c d) c≤d
+      in
+        ( transitive-leq-Large-Poset P a' a d a≤d (pr2 a~a') ,
+          transitive-leq-Large-Poset P b' b d b≤d (pr2 b~b'))
+
+  preserves-is-least-binary-upper-bound-left-sim-Large-Poset :
+    {l4 : Level} {a' : type-Large-Poset P l4} →
+    sim-Large-Poset P a a' →
+    is-least-binary-upper-bound-Large-Poset P a b c →
+    is-least-binary-upper-bound-Large-Poset P a' b c
+  preserves-is-least-binary-upper-bound-left-sim-Large-Poset a~a' =
+    preserves-is-least-binary-upper-bound-sim-Large-Poset
+      ( a~a')
+      ( refl-sim-Large-Poset P b)
+
+  preserves-is-least-binary-upper-bound-right-sim-Large-Poset :
+    {l4 : Level} {b' : type-Large-Poset P l4} →
+    sim-Large-Poset P b b' →
+    is-least-binary-upper-bound-Large-Poset P a b c →
+    is-least-binary-upper-bound-Large-Poset P a b' c
+  preserves-is-least-binary-upper-bound-right-sim-Large-Poset =
+    preserves-is-least-binary-upper-bound-sim-Large-Poset
+      ( refl-sim-Large-Poset P a)
 ```
 
 ### Least upper bounds of families of elements are upper bounds

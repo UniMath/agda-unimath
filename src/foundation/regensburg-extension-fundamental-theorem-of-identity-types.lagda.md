@@ -101,6 +101,7 @@ module _
       is-separated 𝒫 (Σ A B)
     forward-implication-extended-fundamental-theorem-id H K =
       forward-implication-subuniverse-equality-duality 𝒫
+        ( is-in-subuniverse-equiv 𝒫)
         ( λ x f y b →
           apply-universal-property-trunc-Prop
             ( mere-eq-is-0-connected H a x)
@@ -112,7 +113,10 @@ module _
       is-separated 𝒫 (Σ A B) →
       (f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map 𝒫 (f x)
     backward-implication-extended-fundamental-theorem-id K =
-      backward-implication-subuniverse-equality-duality 𝒫 K a
+      backward-implication-subuniverse-equality-duality 𝒫
+        ( is-in-subuniverse-equiv 𝒫)
+        ( K)
+        ( a)
 
   extended-fundamental-theorem-id :
     is-0-connected A →
@@ -120,7 +124,7 @@ module _
     is-separated 𝒫 (Σ A B)
   extended-fundamental-theorem-id H =
     ( forward-implication-extended-fundamental-theorem-id H ,
-    backward-implication-extended-fundamental-theorem-id)
+      backward-implication-extended-fundamental-theorem-id)
 ```
 
 ### The unbased extended fundamental theorem of identity types
@@ -293,11 +297,11 @@ The Regensburg extension of the fundamental theorem is used in the following
 files:
 
 - In
-  [`higher-group-theory.free-higher-group-actions.md`](higher-group-theory.free-higher-group-actions.md)
+  [`higher-group-theory.free-higher-group-actions`](higher-group-theory.free-higher-group-actions.md)
   it is used to show that a higher group action is free if and only its total
   space is a set.
 - In
-  [`higher-group-theory.transitive-higher-group-actions.md`](higher-group-theory.transitive-higher-group-actions.md)
+  [`higher-group-theory.transitive-higher-group-actions`](higher-group-theory.transitive-higher-group-actions.md)
   it is used to show that a higher group action is transitive if and only if its
   total space is connected.
 

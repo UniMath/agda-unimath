@@ -16,8 +16,9 @@ open import foundation.universe-levels
 open import linear-algebra.constant-matrices
 open import linear-algebra.functoriality-matrices
 open import linear-algebra.matrices
-open import linear-algebra.vectors
-open import linear-algebra.vectors-on-rings
+open import linear-algebra.tuples-on-rings
+
+open import lists.tuples
 
 open import ring-theory.rings
 ```
@@ -25,6 +26,9 @@ open import ring-theory.rings
 </details>
 
 ## Definitions
+
+A [matrix](linear-algebra.matrices.md) on a [ring](ring-theory.rings.md) is a
+matrix whose elements are elements of the ring.
 
 ### Matrices
 
@@ -73,10 +77,10 @@ module _
     Id
       ( add-matrix-Ring R (add-matrix-Ring R A B) C)
       ( add-matrix-Ring R A (add-matrix-Ring R B C))
-  associative-add-matrix-Ring empty-vec empty-vec empty-vec = refl
+  associative-add-matrix-Ring empty-tuple empty-tuple empty-tuple = refl
   associative-add-matrix-Ring (v ∷ A) (w ∷ B) (z ∷ C) =
     ap-binary _∷_
-      ( associative-add-vec-Ring R v w z)
+      ( associative-add-tuple-Ring R v w z)
       ( associative-add-matrix-Ring A B C)
 ```
 
@@ -90,10 +94,10 @@ module _
   commutative-add-matrix-Ring :
     {m n : ℕ} (A B : matrix-Ring R m n) →
     Id (add-matrix-Ring R A B) (add-matrix-Ring R B A)
-  commutative-add-matrix-Ring empty-vec empty-vec = refl
+  commutative-add-matrix-Ring empty-tuple empty-tuple = refl
   commutative-add-matrix-Ring (v ∷ A) (w ∷ B) =
     ap-binary _∷_
-      ( commutative-add-vec-Ring R v w)
+      ( commutative-add-tuple-Ring R v w)
       ( commutative-add-matrix-Ring A B)
 ```
 
@@ -107,10 +111,10 @@ module _
   left-unit-law-add-matrix-Ring :
     {m n : ℕ} (A : matrix-Ring R m n) →
     Id (add-matrix-Ring R (zero-matrix-Ring R) A) A
-  left-unit-law-add-matrix-Ring empty-vec = refl
+  left-unit-law-add-matrix-Ring empty-tuple = refl
   left-unit-law-add-matrix-Ring (v ∷ A) =
     ap-binary _∷_
-      ( left-unit-law-add-vec-Ring R v)
+      ( left-unit-law-add-tuple-Ring R v)
       ( left-unit-law-add-matrix-Ring A)
 ```
 
@@ -124,9 +128,9 @@ module _
   right-unit-law-add-matrix-Ring :
     {m n : ℕ} (A : matrix-Ring R m n) →
     Id (add-matrix-Ring R A (zero-matrix-Ring R)) A
-  right-unit-law-add-matrix-Ring empty-vec = refl
+  right-unit-law-add-matrix-Ring empty-tuple = refl
   right-unit-law-add-matrix-Ring (v ∷ A) =
     ap-binary _∷_
-      ( right-unit-law-add-vec-Ring R v)
+      ( right-unit-law-add-tuple-Ring R v)
       ( right-unit-law-add-matrix-Ring A)
 ```

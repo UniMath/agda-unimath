@@ -31,7 +31,7 @@ open import foundation.universe-levels
 A {{#concept "precategory" Agda=Precategory}} `𝒞` in Homotopy Type Theory is the
 structure of an associative and unital
 [composition operation](category-theory.composition-operations-on-binary-families-of-sets.md)
-on a binary familiy of sets.
+on a binary family of sets.
 
 This means a precategory consists of:
 

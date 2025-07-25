@@ -147,9 +147,26 @@ module _
   neighborhood-Metric-Space =
     neighborhood-Premetric-Space premetric-Metric-Space
 
+  is-upper-bound-dist-prop-Metric-Space :
+    (x y : type-Metric-Space) → ℚ⁺ → Prop l2
+  is-upper-bound-dist-prop-Metric-Space x y d =
+    structure-Metric-Space d x y
+
+  is-upper-bound-dist-Metric-Space :
+    (x y : type-Metric-Space) → ℚ⁺ → UU l2
+  is-upper-bound-dist-Metric-Space =
+    is-upper-bound-dist-Premetric-Space premetric-Metric-Space
+
   is-reflexive-structure-Metric-Space :
     is-reflexive-Premetric structure-Metric-Space
   is-reflexive-structure-Metric-Space =
+    is-reflexive-is-metric-Premetric
+      structure-Metric-Space
+      is-metric-structure-Metric-Space
+
+  refl-structure-Metric-Space :
+    is-reflexive-Premetric structure-Metric-Space
+  refl-structure-Metric-Space =
     is-reflexive-is-metric-Premetric
       structure-Metric-Space
       is-metric-structure-Metric-Space

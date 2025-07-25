@@ -18,12 +18,11 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 
-open import linear-algebra.vectors
-
 open import lists.concatenation-lists
 open import lists.functoriality-lists
 open import lists.lists
 open import lists.reversing-lists
+open import lists.tuples
 ```
 
 </details>
@@ -46,7 +45,7 @@ finEq (succ-Inductive-Fin a) (succ-Inductive-Fin b) with finEq a b
 ... | inl eq = inl (ap succ-Inductive-Fin eq)
 ... | inr neq = inr (λ where refl → neq refl)
 
-getVec : {n : ℕ} {l : Level} {A : UU l} → vec A n → Inductive-Fin n → A
+getVec : {n : ℕ} {l : Level} {A : UU l} → tuple A n → Inductive-Fin n → A
 getVec (x ∷ v) zero-Inductive-Fin = x
 getVec (x ∷ v) (succ-Inductive-Fin k) = getVec v k
 
@@ -353,7 +352,7 @@ module _ {n : ℕ} where
   simplifyValid (inner _) = refl-GE
 
   Env : {l : Level} → ℕ → UU l → UU l
-  Env n A = vec A n
+  Env n A = tuple A n
 
   module _
     {l : Level} (G : Group l)
@@ -463,12 +462,12 @@ module _
       ex2 x' y' =
         simplifyExpression G
           ( gInv (x *' y *' gInv x *' gInv y))
-          ( x' ∷ y' ∷ empty-vec)
+          ( x' ∷ y' ∷ empty-tuple)
 ```
 
 ```text
     ex3 : ∀ x y → (x * y) ⁻¹ ＝ (y ⁻¹ * x ⁻¹)
-    ex3 x' y' = {!simplifyExpression G (gInv (x *' y)) (x' ∷ y' ∷ empty-vec)!}
+    ex3 x' y' = {!simplifyExpression G (gInv (x *' y)) (x' ∷ y' ∷ empty-tuple)!}
 
     _ : GroupEquality {n = 2} (y *' (x *' (gInv y *' (gInv x *' gUnit)))) (y *' (x *' (gInv y *' (gInv x *' gUnit))))
     _ = {!simplifyValid (gInv x *' x *' y)!}

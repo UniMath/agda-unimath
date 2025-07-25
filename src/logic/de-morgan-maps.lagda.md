@@ -61,7 +61,7 @@ Morgan if for every `y : B`, the fiber `fiber f y` is either
 that the fibers satisfy [De Morgan's law](logic.de-morgans-law.md), but is a
 [small](foundation.small-types.md) condition.
 
-## Definintion
+## Definition
 
 ### De Morgan maps
 

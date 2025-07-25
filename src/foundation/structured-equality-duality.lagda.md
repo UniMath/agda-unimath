@@ -101,6 +101,9 @@ logically equivalent:
 ```agda
 module _
   {l1 l2 l3 : Level} (𝒫 : subuniverse (l1 ⊔ l2) l3)
+  (tr-𝒫 :
+    {X Y : UU (l1 ⊔ l2)} →
+    X ≃ Y → is-in-subuniverse 𝒫 X → is-in-subuniverse 𝒫 Y)
   {A : UU l1} {B : A → UU l2}
   where
 
@@ -109,23 +112,21 @@ module _
       (y : A) → is-in-subuniverse-map 𝒫 (f y)) →
     is-separated 𝒫 (Σ A B)
   forward-implication-subuniverse-equality-duality =
-    forward-implication-structured-equality-duality
-      ( is-in-subuniverse-equiv 𝒫)
+    forward-implication-structured-equality-duality tr-𝒫
 
   backward-implication-subuniverse-equality-duality :
     is-separated 𝒫 (Σ A B) →
     ( (x : A) (f : (y : A) → (x ＝ y) → B y)
       (y : A) → is-in-subuniverse-map 𝒫 (f y))
   backward-implication-subuniverse-equality-duality =
-    backward-implication-structured-equality-duality
-      ( is-in-subuniverse-equiv 𝒫)
+    backward-implication-structured-equality-duality tr-𝒫
 
   subuniverse-equality-duality :
     ( (x : A) (f : (y : A) → (x ＝ y) → B y)
       (y : A) → is-in-subuniverse-map 𝒫 (f y)) ↔
     is-separated 𝒫 (Σ A B)
   subuniverse-equality-duality =
-    structured-equality-duality (is-in-subuniverse-equiv 𝒫)
+    structured-equality-duality tr-𝒫
 ```
 
 ## See also

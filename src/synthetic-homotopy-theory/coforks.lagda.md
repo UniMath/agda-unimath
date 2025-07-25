@@ -53,7 +53,7 @@ map `e : B → X` together with a [homotopy](foundation.homotopies.md)
 
 which looks like a fork if you flip the arrows, hence a cofork.
 
-Coforks are an analogue of
+Coforks are an analog of
 [cocones under spans](synthetic-homotopy-theory.cocones-under-spans.md) for
 double arrows. The universal cofork of a double arrow is their
 [coequalizer](synthetic-homotopy-theory.coequalizers.md).

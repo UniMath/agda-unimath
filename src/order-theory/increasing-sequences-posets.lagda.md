@@ -40,7 +40,7 @@ or, equivalently, if `uₙ ≤ uₙ₊₁` for all `n : ℕ`.
 
 ```agda
 module _
-  {l1 l2 : Level} (P : Poset l1 l2) (u : type-sequence-Poset P)
+  {l1 l2 : Level} (P : Poset l1 l2) (u : sequence-type-Poset P)
   where
 
   is-increasing-prop-sequence-Poset : Prop l2
@@ -59,23 +59,23 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  increasing-sequence-Poset : Poset (l1 ⊔ l2) l2
-  increasing-sequence-Poset =
+  poset-increasing-sequence-Poset : Poset (l1 ⊔ l2) l2
+  poset-increasing-sequence-Poset =
     poset-Subposet
       ( sequence-Poset P)
       ( is-increasing-prop-sequence-Poset P)
 
-  type-increasing-sequence-Poset : UU (l1 ⊔ l2)
-  type-increasing-sequence-Poset =
-    type-Poset increasing-sequence-Poset
+  increasing-sequence-Poset : UU (l1 ⊔ l2)
+  increasing-sequence-Poset =
+    type-Poset poset-increasing-sequence-Poset
 
   seq-increasing-sequence-Poset :
-    type-increasing-sequence-Poset →
-    type-sequence-Poset P
+    increasing-sequence-Poset →
+    sequence-type-Poset P
   seq-increasing-sequence-Poset = pr1
 
   is-increasing-seq-increasing-sequence-Poset :
-    (u : type-increasing-sequence-Poset) →
+    (u : increasing-sequence-Poset) →
     is-increasing-sequence-Poset
       ( P)
       ( seq-increasing-sequence-Poset u)
@@ -88,7 +88,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (P : Poset l1 l2) (u : type-sequence-Poset P)
+  {l1 l2 : Level} (P : Poset l1 l2) (u : sequence-type-Poset P)
   where
 
   is-increasing-leq-succ-sequence-Poset :
