@@ -21,9 +21,10 @@ open import metric-spaces.rational-neighborhoods
 
 ## Idea
 
-A [rational neighborhood](metric-spaces.rational-neighborhoods.md) is
+A [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) is
 {{#concept "symmetric" Disambiguation="rational neighborhood relation" Agda=is-symmetric-Rational-Neighborhood-Relation}}
-if all neighborhoods are symmetric.
+if all `ε`-neighborhoods are symmetric
+[binary relations](foundation.binary-relations.md).
 
 ## Definitions
 

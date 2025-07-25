@@ -21,9 +21,10 @@ open import metric-spaces.rational-neighborhoods
 
 ## Idea
 
-A [rational neighborhood](metric-spaces.rational-neighborhoods.md) is
+A [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) is
 {{#concept "reflexive" Disambiguation="rational neighborhood relation" Agda=is-reflexive-Rational-Neighborhood-Relation}}
-if any element is in all neighborhoods of itself.
+if any element is in all neighborhoods of itself, i.e., if all `ε`-neighborhoods
+are reflexive [binary relations](foundation.binary-relations.md).
 
 ## Definitions
 
