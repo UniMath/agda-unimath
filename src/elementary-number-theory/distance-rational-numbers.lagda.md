@@ -80,7 +80,9 @@ abstract
 ### Zero laws
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   right-zero-law-dist-ℚ : (q : ℚ) → dist-ℚ q zero-ℚ ＝ abs-ℚ q
   right-zero-law-dist-ℚ q = ap abs-ℚ (right-unit-law-add-ℚ _)
 
