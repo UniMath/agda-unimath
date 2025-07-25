@@ -212,7 +212,9 @@ module _
   {l : Level} (x : lower-ℝ l)
   where
 
-  abstract
+  opaque
+    unfolding neg-ℚ
+
     right-unit-law-add-lower-ℝ : add-lower-ℝ x (lower-real-ℚ zero-ℚ) ＝ x
     right-unit-law-add-lower-ℝ =
       eq-sim-cut-lower-ℝ
