@@ -168,7 +168,9 @@ module _
   (x : ℚ⁺)
   where
 
-  abstract
+  opaque
+    unfolding inv-ℚ⁺
+
     eq-numerator-inv-denominator-ℚ⁺ :
       numerator-ℚ⁺ (inv-ℚ⁺ x) ＝ denominator-ℚ⁺ x
     eq-numerator-inv-denominator-ℚ⁺ =

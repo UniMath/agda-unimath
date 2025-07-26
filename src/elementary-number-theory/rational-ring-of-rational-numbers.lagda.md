@@ -554,61 +554,66 @@ module _
   {l : Level} (R : Rational-Ring l)
   where
 
-  preserves-add-initial-hom-Rational-Ring :
-    {x y : ℚ} →
-    map-initial-hom-Rational-Ring R (x +ℚ y) ＝
-    add-Ring
-      ( ring-Rational-Ring R)
-      ( map-initial-hom-Rational-Ring R x)
-      ( map-initial-hom-Rational-Ring R y)
-  preserves-add-initial-hom-Rational-Ring {x} {y} =
-    equational-reasoning
-      map-initial-hom-Rational-Ring R (x +ℚ y)
-      ＝ map-initial-hom-fraction-Rational-Ring
-        ( R)
-        ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
-        by
-          eq-map-sim-fraction-map-initial-Rational-Ring
-            ( R)
-            ( symmetric-sim-fraction-ℤ
-              ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
-              ( reduce-fraction-ℤ
-                ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))
-              ( sim-reduced-fraction-ℤ
-                ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))))
-      ＝ add-Ring
-        ( ring-Rational-Ring R)
-        ( map-initial-hom-Rational-Ring R x)
-        ( map-initial-hom-Rational-Ring R y)
-        by (preserves-add-map-initial-hom-fraction-Rational-Ring R)
+  opaque
+    unfolding add-ℚ
+    unfolding mul-ℚ
+    unfolding rational-fraction-ℤ
 
-  preserves-mul-initial-hom-Rational-Ring :
-    {x y : ℚ} →
-    map-initial-hom-Rational-Ring R (x *ℚ y) ＝
-    mul-Ring
-      ( ring-Rational-Ring R)
-      ( map-initial-hom-Rational-Ring R x)
-      ( map-initial-hom-Rational-Ring R y)
-  preserves-mul-initial-hom-Rational-Ring {x} {y} =
-    equational-reasoning
-      map-initial-hom-Rational-Ring R (x *ℚ y)
-      ＝ map-initial-hom-fraction-Rational-Ring
-        ( R)
-        ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
-        by
-          eq-map-sim-fraction-map-initial-Rational-Ring
-            ( R)
-            ( symmetric-sim-fraction-ℤ
-              ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
-              ( reduce-fraction-ℤ
-                ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))
-              ( sim-reduced-fraction-ℤ
-                ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))))
-      ＝ mul-Ring
+    preserves-add-initial-hom-Rational-Ring :
+      {x y : ℚ} →
+      map-initial-hom-Rational-Ring R (x +ℚ y) ＝
+      add-Ring
         ( ring-Rational-Ring R)
         ( map-initial-hom-Rational-Ring R x)
         ( map-initial-hom-Rational-Ring R y)
-        by (preserves-mul-map-initial-hom-fraction-Rational-Ring R)
+    preserves-add-initial-hom-Rational-Ring {x} {y} =
+      equational-reasoning
+        map-initial-hom-Rational-Ring R (x +ℚ y)
+        ＝ map-initial-hom-fraction-Rational-Ring
+          ( R)
+          ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
+          by
+            eq-map-sim-fraction-map-initial-Rational-Ring
+              ( R)
+              ( symmetric-sim-fraction-ℤ
+                ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
+                ( reduce-fraction-ℤ
+                  ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))
+                ( sim-reduced-fraction-ℤ
+                  ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))))
+        ＝ add-Ring
+          ( ring-Rational-Ring R)
+          ( map-initial-hom-Rational-Ring R x)
+          ( map-initial-hom-Rational-Ring R y)
+          by (preserves-add-map-initial-hom-fraction-Rational-Ring R)
+
+    preserves-mul-initial-hom-Rational-Ring :
+      {x y : ℚ} →
+      map-initial-hom-Rational-Ring R (x *ℚ y) ＝
+      mul-Ring
+        ( ring-Rational-Ring R)
+        ( map-initial-hom-Rational-Ring R x)
+        ( map-initial-hom-Rational-Ring R y)
+    preserves-mul-initial-hom-Rational-Ring {x} {y} =
+      equational-reasoning
+        map-initial-hom-Rational-Ring R (x *ℚ y)
+        ＝ map-initial-hom-fraction-Rational-Ring
+          ( R)
+          ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
+          by
+            eq-map-sim-fraction-map-initial-Rational-Ring
+              ( R)
+              ( symmetric-sim-fraction-ℤ
+                ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
+                ( reduce-fraction-ℤ
+                  ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))
+                ( sim-reduced-fraction-ℤ
+                  ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))))
+        ＝ mul-Ring
+          ( ring-Rational-Ring R)
+          ( map-initial-hom-Rational-Ring R x)
+          ( map-initial-hom-Rational-Ring R y)
+          by (preserves-mul-map-initial-hom-fraction-Rational-Ring R)
 
   initial-hom-Rational-Ring : rational-hom-Rational-Ring R
   pr1 initial-hom-Rational-Ring =

@@ -459,7 +459,9 @@ module _
   (x : ℚ)
   where
 
-  abstract
+  opaque
+    unfolding mul-ℚ
+
     eq-numerator-mul-denominator-ℚ :
       mul-ℚ
         ( x)

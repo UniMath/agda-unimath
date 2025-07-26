@@ -83,7 +83,9 @@ reciprocal-rational-ℤ⁺ k =
 ### The numerator of a unit fraction is one
 
 ```agda
-abstract
+opaque
+  unfolding eq-numerator-inv-denominator-ℚ⁺
+
   eq-numerator-reciprocal-rational-ℤ⁺ :
     (k : ℤ⁺) → numerator-ℚ (reciprocal-rational-ℤ⁺ k) ＝ one-ℤ
   eq-numerator-reciprocal-rational-ℤ⁺ k =
