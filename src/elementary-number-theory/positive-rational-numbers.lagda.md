@@ -174,6 +174,9 @@ abstract
 positive-rational-positive-ℤ : positive-ℤ → ℚ⁺
 positive-rational-positive-ℤ (z , pos-z) = rational-ℤ z , pos-z
 
+positive-rational-ℤ⁺ : ℤ⁺ → ℚ⁺
+positive-rational-ℤ⁺ = positive-rational-positive-ℤ
+
 one-ℚ⁺ : ℚ⁺
 one-ℚ⁺ = (one-ℚ , is-positive-int-positive-ℤ one-positive-ℤ)
 ```
@@ -503,6 +506,14 @@ module _
     right-inverse-law-mul-is-positive-ℚ : x *ℚ inv-is-positive-ℚ ＝ one-ℚ
     right-inverse-law-mul-is-positive-ℚ =
       (commutative-mul-ℚ x _) ∙ (left-inverse-law-mul-is-positive-ℚ)
+
+    eq-numerator-inv-denominator-is-positive-ℚ :
+      numerator-ℚ (inv-is-positive-ℚ) ＝ denominator-ℚ x
+    eq-numerator-inv-denominator-is-positive-ℚ = refl
+
+    eq-denominator-inv-numerator-is-positive-ℚ :
+      denominator-ℚ (inv-is-positive-ℚ) ＝ numerator-ℚ x
+    eq-denominator-inv-numerator-is-positive-ℚ = refl
 
   is-mul-invertible-is-positive-ℚ : is-invertible-element-Monoid monoid-mul-ℚ x
   pr1 is-mul-invertible-is-positive-ℚ = inv-is-positive-ℚ
