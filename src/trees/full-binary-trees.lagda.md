@@ -10,7 +10,10 @@ module trees.full-binary-trees where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.empty-types
+open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.coproduct-types
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -34,4 +37,13 @@ binary subtree.
 data full-binary-tree : UU lzero where
   leaf-full-binary-tree : full-binary-tree
   join-full-binary-tree : (s t : full-binary-tree) → full-binary-tree
+```
+
+### The nodes of a full binary tree
+
+```agda
+node-full-binary-tree : full-binary-tree → UU lzero
+node-full-binary-tree leaf-full-binary-tree = unit
+node-full-binary-tree (join-full-binary-tree G H) =
+  node-full-binary-tree G + node-full-binary-tree H
 ```
