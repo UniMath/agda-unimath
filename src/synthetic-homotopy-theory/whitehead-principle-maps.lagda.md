@@ -57,14 +57,15 @@ Whitehead-Principle-Map = {l1 l2 : Level} → Whitehead-Principle-Map-Level l1 l
 ```agda
 Whitehead-Principle-Maps-implies-Types :
   Whitehead-Principle-Map → Whitehead-Principle
-Whitehead-Principle-Maps-implies-Types WP X X-∞-conn =
+Whitehead-Principle-Maps-implies-Types WP X is-∞-conn-X =
   is-contr-equiv-unit eq
   where
     eq : X ≃ unit
     pr1 eq = terminal-map X
     pr2 eq =
       WP X unit (terminal-map X)
-        ( λ x → is-∞-connected-equiv (equiv-fiber-terminal-map star) X-∞-conn)
+        ( λ x → is-∞-connected-equiv
+          ( equiv-fiber-terminal-map star) is-∞-conn-X)
 ```
 
 ### The Whitehead principle for types implies the Whitehead principle for maps
@@ -72,11 +73,11 @@ Whitehead-Principle-Maps-implies-Types WP X X-∞-conn =
 ```agda
 Whitehead-Principle-Types-implies-Maps :
   Whitehead-Principle → Whitehead-Principle-Map
-Whitehead-Principle-Types-implies-Maps WP X Y f f-∞-conn =
+Whitehead-Principle-Types-implies-Maps WP X Y f is-∞-conn-f =
   is-equiv-is-contr-map f-ctr
   where
     f-ctr : is-contr-map f
-    f-ctr y = WP (fiber f y) (λ x → f-∞-conn y x)
+    f-ctr y = WP (fiber f y) (λ x → is-∞-conn-f y x)
 ```
 
 ## External links
