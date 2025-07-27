@@ -21,9 +21,9 @@ open import foundation.universe-levels
 
 open import foundation-core.dependent-identifications
 open import foundation-core.function-types
+open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.transport-along-identifications
 
@@ -110,7 +110,8 @@ module _
         where
         htpy2 :
           tr (preserves-mul-Magma full-binary-tree-Magma M) (eq-htpy
-            ( λ U → is-retraction-extension-of-point-full-binary-tree-Magma U f))
+            ( λ U →
+              is-retraction-extension-of-point-full-binary-tree-Magma U f))
           ( λ U V → refl) T ~ pr2 f T
         htpy2 U =
           pr1 (is-set-M (map-hom-Magma full-binary-tree-Magma M f
