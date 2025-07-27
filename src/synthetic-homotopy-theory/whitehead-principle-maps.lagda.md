@@ -74,10 +74,10 @@ Whitehead-Principle-Maps-implies-Types WP X is-∞-conn-X =
 Whitehead-Principle-Types-implies-Maps :
   Whitehead-Principle → Whitehead-Principle-Map
 Whitehead-Principle-Types-implies-Maps WP X Y f is-∞-conn-f =
-  is-equiv-is-contr-map f-ctr
+  is-equiv-is-contr-map is-contr-map-f
   where
-    f-ctr : is-contr-map f
-    f-ctr y = WP (fiber f y) (λ x → is-∞-conn-f y x)
+    is-contr-map-f : is-contr-map f
+    is-contr-map-f y = WP (fiber f y) (λ x → is-∞-conn-f y x)
 ```
 
 ## External links
