@@ -15,7 +15,6 @@ open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.subtypes
-
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -103,6 +102,7 @@ module _
     contraction-initial-hom-Ring
       ( endomorphism-ring-Ab A)
       ( hom-ring-integer-multiple-Ab)
+```
 
 ### Multiplication in a ring is a ring homomorphism in the ring of endomorphism of its underlying abelian additive group
 
