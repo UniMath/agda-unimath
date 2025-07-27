@@ -19,6 +19,7 @@ open import trees.coalgebra-of-enriched-directed-trees public
 open import trees.coalgebras-polynomial-endofunctors public
 open import trees.combinator-directed-trees public
 open import trees.combinator-enriched-directed-trees public
+open import trees.combinator-full-binary-trees public
 open import trees.directed-trees public
 open import trees.elementhood-relation-coalgebras-polynomial-endofunctors public
 open import trees.elementhood-relation-w-types public
@@ -29,6 +30,7 @@ open import trees.equivalences-enriched-directed-trees public
 open import trees.extensional-w-types public
 open import trees.fibers-directed-trees public
 open import trees.fibers-enriched-directed-trees public
+open import trees.free-magma-on-one-generator public
 open import trees.full-binary-trees public
 open import trees.functoriality-combinator-directed-trees public
 open import trees.functoriality-fiber-directed-tree public
@@ -37,6 +39,7 @@ open import trees.hereditary-w-types public
 open import trees.indexed-w-types public
 open import trees.induction-w-types public
 open import trees.inequality-w-types public
+open import trees.labeled-full-binary-trees public
 open import trees.lower-types-w-types public
 open import trees.morphisms-algebras-polynomial-endofunctors public
 open import trees.morphisms-coalgebras-polynomial-endofunctors public

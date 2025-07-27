@@ -8,50 +8,26 @@ module trees.free-magma-on-one-generator where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
 open import foundation.function-extensionality
-open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.isolated-elements
-open import foundation.maybe
-open import foundation.negation
-open import foundation.propositions
-open import foundation.universe-levels
-
-open import graph-theory.directed-graphs
-open import graph-theory.morphisms-directed-graphs
-open import graph-theory.walks-directed-graphs
-
-open import trees.bases-directed-trees
-open import trees.combinator-full-binary-trees
-open import trees.directed-trees
-open import trees.equivalences-directed-trees
-open import trees.fibers-directed-trees
-open import trees.full-binary-trees
-open import trees.labeled-full-binary-trees
-open import trees.morphisms-directed-trees
-
-open import elementary-number-theory.natural-numbers
-
-open import foundation.empty-types
 open import foundation.universe-levels
 
 open import foundation-core.dependent-identifications
 open import foundation-core.retractions
 open import foundation-core.sections
 
-open import univalent-combinatorics.standard-finite-types
-
 open import structured-types.magmas
 open import structured-types.morphisms-magmas
+
+open import trees.combinator-full-binary-trees
+open import trees.full-binary-trees
+open import trees.labeled-full-binary-trees
 ```
 
 </details>
@@ -93,6 +69,8 @@ module _
   pr2 (extension-of-point-hom-full-binary-tree-Magma m) =
     is-hom-extension-of-point-full-binary-tree-Magma m
 
+{-
+
   is-equiv-image-of-leaf : is-equiv image-of-leaf
   pr1 (pr1 is-equiv-image-of-leaf) =
     extension-of-point-hom-full-binary-tree-Magma
@@ -100,6 +78,8 @@ module _
   pr1 (pr2 is-equiv-image-of-leaf) =
     extension-of-point-hom-full-binary-tree-Magma
   pr2 (pr2 is-equiv-image-of-leaf) f = {!   !}
+
+-}
 
 {-
     eq-pair-Σ (eq-htpy htpy) dep

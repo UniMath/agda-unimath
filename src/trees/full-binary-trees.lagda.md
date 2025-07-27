@@ -7,15 +7,10 @@ module trees.full-binary-trees where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
-open import foundation.empty-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

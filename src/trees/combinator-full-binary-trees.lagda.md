@@ -7,44 +7,15 @@ module trees.combinator-full-binary-trees where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.isolated-elements
-open import foundation.maybe
-open import foundation.negation
-open import foundation.propositions
 open import foundation.universe-levels
-
-open import graph-theory.directed-graphs
-open import graph-theory.morphisms-directed-graphs
-open import graph-theory.walks-directed-graphs
-
-open import trees.bases-directed-trees
-open import trees.directed-trees
-open import trees.equivalences-directed-trees
-open import trees.fibers-directed-trees
-open import trees.full-binary-trees
-open import trees.labeled-full-binary-trees
-open import trees.morphisms-directed-trees
-
-open import elementary-number-theory.natural-numbers
-
-open import foundation.empty-types
-open import foundation.universe-levels
-
-open import univalent-combinatorics.standard-finite-types
 
 open import structured-types.magmas
+
+open import trees.full-binary-trees
+open import trees.labeled-full-binary-trees
 ```
 
 </details>
