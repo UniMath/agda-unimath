@@ -399,7 +399,7 @@ module _
 
   left-module-ring-Ring : left-module-Ring l R
   left-module-ring-Ring =
-    ab-Ring R , hom-mul-endomorphism-ring-ab-Ring R
+    ( ab-Ring R , hom-mul-endomorphism-ring-ab-Ring R)
 ```
 
 ### The type of abelian groups is equivalent to the type of `ℤ`-left modules
