@@ -65,7 +65,7 @@ the vector spaces on the
 
 ## Definitions
 
-### The property of being a rational module
+### The predicate on abelian groups of being a rational module
 
 ```agda
 module _
@@ -105,7 +105,7 @@ module _
       is-rational-endomorphism-ring-ab-Rational-Module)
 ```
 
-### The property of being a left module on the rationals
+### The predicate on abelian groups of being a left module on the rationals
 
 ```agda
 module _
@@ -127,7 +127,7 @@ module _
       is-prop-is-rational-left-module-Ab)
 ```
 
-### The property of being a right module on the rationals
+### The predicate on abelian groups of being a right module on the rationals
 
 ```agda
 module _
@@ -282,4 +282,4 @@ module _
 ## External links
 
 - [rational vector space](https://ncatlab.org/nlab/show/rational+vector+space)
-  at $n$lab
+  at $n$Lab

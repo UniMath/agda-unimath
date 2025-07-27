@@ -63,7 +63,7 @@ a [positive integer](elementary-number-theory.positive-integers.md) is its
 [inverse](ring-theory.invertible-elements-rings.md) in the
 [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md)
 so `ℚ` is a [rational ring](ring-theory.rational-rings.md); this is the
-{{#concept "rational ring of rationa numbers" Agda=rational-ring-ℚ}}.
+{{#concept "rational ring of rational numbers" Agda=rational-ring-ℚ}}.
 
 Furthermore, the rational extension of the initial ring map `ι : ℤ → R` into a
 rational ring, `γ : (p/q : ℚ) ↦ (ι p)(ι q)⁻¹`, is a
