@@ -81,8 +81,8 @@ Whitehead-Principle-Types-implies-Maps WP X Y f f-∞-conn =
 
 ## External links
 
-- [Wikipedia page on the Whitehead theorem](https://en.m.wikipedia.org/w/index.php?title=Whitehead_theorem&oldid=1278836995)
-- [nlab article on hypercomplete objects in an ∞-topos](https://ncatlab.org/nlab/show/hypercomplete+object)
+- [hypercomplete object](https://ncatlab.org/nlab/show/hypercomplete+object) on $n$Lab
+- [Whitehead theorem](https://en.m.wikipedia.org/w/index.php?title=Whitehead_theorem) on Wikipedia
 
 ## References
 

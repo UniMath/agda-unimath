@@ -35,9 +35,11 @@ not validated in every ∞-topos.
 
 In
 (`whitehead-principle-maps`)[synthetic-homotopy-theory.whitehead-principle-maps.md]
-we show, assuming Whitehead principles in enough universes, that the Whitehead
-principle for types is equivalent to asking that maps whose fibers are
-∞-connected are equivalences.
+we show, assuming the Whitehead principle in enough universes, that the
+Whitehead principle for types is
+[equivalent](foundation.logical-equivalences.md) to asking that maps whose
+[fibers](foundation-core.fibers-of-maps.md) are ∞-connected are
+[equivalences](foundation-core.equivalences.md).
 
 ## Definition
 
@@ -55,8 +57,8 @@ Whitehead-Principle = {l : Level} → Whitehead-Principle-Level l
 
 ## External links
 
-- [Wikipedia page on the Whitehead theorem](https://en.m.wikipedia.org/w/index.php?title=Whitehead_theorem&oldid=1278836995)
-- [nlab article on hypercomplete objects in an ∞-topos](https://ncatlab.org/nlab/show/hypercomplete+object)
+- [hypercomplete object](https://ncatlab.org/nlab/show/hypercomplete+object) on $n$Lab
+- [Whitehead theorem](https://en.m.wikipedia.org/w/index.php?title=Whitehead_theorem) on Wikipedia
 
 ## References
 

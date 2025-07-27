@@ -27,11 +27,14 @@ open import foundation-core.propositions
 
 ## Idea
 
-A map `f : X → Y` is said to be **∞-connected** if it is `k`-connected for all
-`k : 𝕋`.
+A map `f : X → Y` is said to be
+{{#concept "∞-connected" Disambiguation="map of types" Agda=is-∞-connected-map}}
+if it is `k`-[connected](foundation.connected-maps.md) for all
+[truncation levels](foundation-core.truncation-levels.md) `k`.
 
-By the equivalence between equivalences and contractible maps, equivalences are
-∞-connected.
+In particular, since [equivalences](foundation-core.equivalences.md) have
+[contractible](foundation-core.contractible-types.md)
+[fibers](foundation-core.fibers-of-maps.md), equivalences are ∞-connected.
 
 ## Definition
 
@@ -52,22 +55,6 @@ module _
   is-prop-is-∞-connected-map = is-prop-type-Prop is-∞-connected-map-Prop
 ```
 
-### A map is ∞-connected iff its fibers are [∞-connected](synthetic-homotopy-theory.whitehead-principle-types.md)
-
-```agda
-module _
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
-  where
-
-  is-∞-connected-map-fibers-are-∞-connected :
-    is-∞-connected-map f → (y : Y) → is-∞-connected (fiber f y)
-  is-∞-connected-map-fibers-are-∞-connected f-∞-conn y k = f-∞-conn y k
-
-  fibers-are-∞-connected-is-∞-connected-map :
-    ((y : Y) → is-∞-connected (fiber f y)) → is-∞-connected-map f
-  fibers-are-∞-connected-is-∞-connected-map fib-∞-conn k y = fib-∞-conn k y
-```
-
 ### Equivalences are ∞-connected
 
 ```agda
@@ -76,5 +63,5 @@ module _
   where
 
   is-∞-connected-map-is-equiv : is-equiv f → is-∞-connected-map f
-  is-∞-connected-map-is-equiv f-equiv k x = is-connected-map-is-equiv f-equiv k
+  is-∞-connected-map-is-equiv is-equiv-f k x = is-connected-map-is-equiv is-equiv-f k
 ```

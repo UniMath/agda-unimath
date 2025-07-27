@@ -25,7 +25,7 @@ open import foundation-core.propositions
 
 ## Idea
 
-A type is said to be **∞-connected** if it is `k`-connected for all `k : 𝕋`.
+A type is said to be {{#concept "∞-connected" Disambiguation="type" Agda=is-∞-connected}} if it is `k`-[connected](foundation.connected-types.md) for all [truncation levels](foundation-core.truncation-levels.md) `k `.
 
 ## Definition
 
@@ -46,7 +46,7 @@ is-prop-is-∞-connected X = is-prop-type-Prop (is-∞-connected-Prop X)
 
 ```agda
 is-∞-connected-is-contr : {l : Level} (X : UU l) → is-contr X → is-∞-connected X
-is-∞-connected-is-contr X X-ctr k = is-connected-is-contr k X-ctr
+is-∞-connected-is-contr X is-contr-X k = is-connected-is-contr k is-contr-X
 ```
 
 ## Properties
@@ -60,14 +60,17 @@ module _
 
   is-∞-connected-is-equiv :
     (f : A → B) → is-equiv f → is-∞-connected B → is-∞-connected A
-  is-∞-connected-is-equiv f e B-∞-conn k =
-    is-contr-is-equiv (type-trunc k B) (map-trunc k f)
-    ( is-equiv-map-equiv-trunc k (f , e)) (B-∞-conn k)
+  is-∞-connected-is-equiv f e is-∞-conn-B k =
+    is-contr-is-equiv
+      ( type-trunc k B)
+      ( map-trunc k f)
+      ( is-equiv-map-equiv-trunc k (f , e))
+      ( is-∞-conn-B k)
 
   is-∞-connected-equiv :
     A ≃ B → is-∞-connected B → is-∞-connected A
-  is-∞-connected-equiv f B-∞-conn k =
-    is-∞-connected-is-equiv (pr1 f) (pr2 f) B-∞-conn k
+  is-∞-connected-equiv f =
+    is-∞-connected-is-equiv (pr1 f) (pr2 f)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
