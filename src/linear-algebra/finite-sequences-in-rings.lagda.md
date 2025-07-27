@@ -86,7 +86,7 @@ module _
 
   ab-fin-sequence-type-Ring : Ab l
   ab-fin-sequence-type-Ring =
-    ab-left-module-Ring R (left-module-fin-sequence-Ring R n)
+    ab-Ring (ring-fin-sequence-Ring R n)
 ```
 
 ### Constructors and accessors for finite sequences in rings
