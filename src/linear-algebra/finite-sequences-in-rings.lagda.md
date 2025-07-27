@@ -77,7 +77,7 @@ module _
   fin-sequence-type-Ring = fin-sequence (type-Ring R) n
 ```
 
-### The abelian group of finite sequences in a ring
+### Inherited algebraic structures on the type of finite sequences in a ring
 
 ```agda
 module _
@@ -87,6 +87,32 @@ module _
   ab-fin-sequence-type-Ring : Ab l
   ab-fin-sequence-type-Ring =
     ab-Ring (ring-fin-sequence-Ring R n)
+
+  group-fin-sequence-type-Ring : Group l
+  group-fin-sequence-type-Ring =
+    group-Ab ab-fin-sequence-type-Ring
+
+  semigroup-fin-sequence-type-Ring : Semigroup l
+  semigroup-fin-sequence-type-Ring =
+    semigroup-Ab ab-fin-sequence-type-Ring
+
+  is-group-fin-sequence-type-Ring :
+    is-group-Semigroup (semigroup-fin-sequence-type-Ring)
+  is-group-fin-sequence-type-Ring =
+    is-group-Ab ab-fin-sequence-type-Ring
+
+  commutative-monoid-fin-sequence-type-Ring : Commutative-Monoid l
+  commutative-monoid-fin-sequence-type-Ring =
+    commutative-monoid-Ab ab-fin-sequence-type-Ring
+
+  monoid-fin-sequence-type-Ring : Monoid l
+  monoid-fin-sequence-type-Ring =
+    monoid-Ab ab-fin-sequence-type-Ring
+
+  is-unital-fin-sequence-type-Ring :
+    is-unital (add-Ab (ab-fin-sequence-type-Ring))
+  is-unital-fin-sequence-type-Ring =
+    is-unital-Monoid (monoid-fin-sequence-type-Ring)
 ```
 
 ### Constructors and accessors for finite sequences in rings
