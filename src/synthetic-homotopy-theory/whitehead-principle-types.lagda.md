@@ -57,8 +57,10 @@ Whitehead-Principle = {l : Level} → Whitehead-Principle-Level l
 
 ## External links
 
-- [hypercomplete object](https://ncatlab.org/nlab/show/hypercomplete+object) on $n$Lab
-- [Whitehead theorem](https://en.m.wikipedia.org/w/index.php?title=Whitehead_theorem) on Wikipedia
+- [hypercomplete object](https://ncatlab.org/nlab/show/hypercomplete+object) on
+  $n$Lab
+- [Whitehead theorem](https://en.m.wikipedia.org/w/index.php?title=Whitehead_theorem)
+  on Wikipedia
 
 ## References
 

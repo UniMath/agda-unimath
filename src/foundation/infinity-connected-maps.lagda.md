@@ -63,5 +63,6 @@ module _
   where
 
   is-∞-connected-map-is-equiv : is-equiv f → is-∞-connected-map f
-  is-∞-connected-map-is-equiv is-equiv-f k x = is-connected-map-is-equiv is-equiv-f k
+  is-∞-connected-map-is-equiv is-equiv-f k x =
+    is-connected-map-is-equiv is-equiv-f k
 ```

@@ -25,7 +25,10 @@ open import foundation-core.propositions
 
 ## Idea
 
-A type is said to be {{#concept "∞-connected" Disambiguation="type" Agda=is-∞-connected}} if it is `k`-[connected](foundation.connected-types.md) for all [truncation levels](foundation-core.truncation-levels.md) `k `.
+A type is said to be
+{{#concept "∞-connected" Disambiguation="type" Agda=is-∞-connected}} if it is
+`k`-[connected](foundation.connected-types.md) for all
+[truncation levels](foundation-core.truncation-levels.md) `k `.
 
 ## Definition
 
