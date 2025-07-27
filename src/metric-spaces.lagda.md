@@ -48,6 +48,7 @@ module metric-spaces where
 open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-functions public
 open import metric-spaces.cauchy-approximations-metric-spaces public
+open import metric-spaces.cauchy-approximations-pseudometric-spaces public
 open import metric-spaces.cauchy-sequences-complete-metric-spaces public
 open import metric-spaces.cauchy-sequences-metric-spaces public
 open import metric-spaces.complete-metric-spaces public
@@ -65,6 +66,7 @@ open import metric-spaces.functor-category-set-functions-isometry-metric-spaces 
 open import metric-spaces.functor-category-short-isometry-metric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces public
+open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces public
 open import metric-spaces.limits-of-functions-metric-spaces public
 open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.lipschitz-functions-metric-spaces public
