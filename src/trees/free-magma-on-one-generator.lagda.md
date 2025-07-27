@@ -69,8 +69,6 @@ module _
   pr2 (extension-of-point-hom-full-binary-tree-Magma m) =
     is-hom-extension-of-point-full-binary-tree-Magma m
 
-{-
-
   is-equiv-image-of-leaf : is-equiv image-of-leaf
   pr1 (pr1 is-equiv-image-of-leaf) =
     extension-of-point-hom-full-binary-tree-Magma
@@ -78,8 +76,6 @@ module _
   pr1 (pr2 is-equiv-image-of-leaf) =
     extension-of-point-hom-full-binary-tree-Magma
   pr2 (pr2 is-equiv-image-of-leaf) f = {!   !}
-
--}
 
 {-
     eq-pair-Σ (eq-htpy htpy) dep
