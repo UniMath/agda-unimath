@@ -411,7 +411,7 @@ module _
 
   integer-left-module-Ab : Ab l → left-module-Ring l ℤ-Ring
   integer-left-module-Ab A =
-    A , initial-hom-Ring (endomorphism-ring-Ab A)
+    ( A , initial-hom-Ring (endomorphism-ring-Ab A))
 
   is-equiv-integer-left-module-Ab :
     is-equiv integer-left-module-Ab
@@ -427,6 +427,6 @@ module _
 
   equiv-integer-left-module-Ab : Ab l ≃ left-module-Ring l ℤ-Ring
   equiv-integer-left-module-Ab =
-    integer-left-module-Ab ,
-    is-equiv-integer-left-module-Ab
+    ( integer-left-module-Ab ,
+      is-equiv-integer-left-module-Ab)
 ```

@@ -42,7 +42,7 @@ open import ring-theory.rings
 Given two [rings](ring-theory.rings.md) `R` and `S` and an
 [homomorphism](ring-theory.homomorphisms-rings.md) `f : R → S` between them, any
 [left module](linear-algebra.left-modules-rings.md) `A` over `S` is also an
-`R`-left-module via `(r : R) (x : A) ↦ (f r) · a`. This is the
+`R`-left-module via the action `(r : R) ↦ (a : A) ↦ (f r) · a`. This is the
 {{#concept "preimage left module" Agda=preimage-hom-ring-left-module-Ring}} of a
 left module along the ring homomorphism `f`.
 
