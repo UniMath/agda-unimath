@@ -35,7 +35,7 @@ open import trees.labeled-full-binary-trees
 Function extensionality implies that the
 [magma of full binary trees](trees.combinator-full-binary-trees.md) is the
 **free magma on one generator**. That is, there are natural maps
-`image-of-leaf : hom-Magma full-binary-tree-Magma M → M, extension-of-point-hom-full-binary-tree-Magma : M → hom-Magma full-binary-tree-Magma M`
+`image-of-leaf : hom-Magma full-binary-tree-Magma M → (type-Magma M), extension-of-point-hom-full-binary-tree-Magma : (type-Magma M) → hom-Magma full-binary-tree-Magma M`
 for any [magma](structured-types.magmas.md) `M`.
 `extension-of-point-hom-full-binary-tree-Magma` is always a
 [section](foundation-core.sections.md) of `image-of-leaf`, and when `M` is a
