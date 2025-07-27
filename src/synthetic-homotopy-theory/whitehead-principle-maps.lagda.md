@@ -14,6 +14,7 @@ open import foundation.fibers-of-maps
 open import foundation.infinity-connected-maps
 open import foundation.infinity-connected-types
 open import foundation.truncation-levels
+open import foundation.truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -62,9 +63,8 @@ Whitehead-Principle-Maps-implies-Types WP X X-∞-conn =
     eq : X ≃ unit
     pr1 eq = terminal-map X
     pr2 eq =
-      WP X unit (terminal-map X) (fibers-are-∞-connected-is-∞-connected-map
-      ( terminal-map X)
-      λ y → is-∞-connected-equiv (equiv-fiber-terminal-map star) X-∞-conn)
+      WP X unit (terminal-map X)
+        ( λ x → is-∞-connected-equiv (equiv-fiber-terminal-map star) X-∞-conn)
 ```
 
 ### The Whitehead principle for types implies the Whitehead principle for maps
