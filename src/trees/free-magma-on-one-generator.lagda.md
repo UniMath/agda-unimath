@@ -135,3 +135,7 @@ module _
   pr2 (is-set-equiv-image-of-leaf-full-binary-tree-Magma is-set-M) =
     is-set-is-equiv-image-of-leaf-full-binary-tree-Magma is-set-M
 ```
+
+## External links
+
+[Free magmas](https://ncatlab.org/nlab/show/magma#free_magmas) at $n$Lab
