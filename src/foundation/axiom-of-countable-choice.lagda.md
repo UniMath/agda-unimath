@@ -13,9 +13,10 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.axiom-of-choice
 open import foundation.inhabited-types
--- open import foundation.axiom-of-dependent-choice
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 open import set-theory.countable-sets
+open import foundation.sets
 ```
 
 </details>
@@ -42,16 +43,30 @@ ACω = {l : Level} → level-ACω l
 
 ## Properties
 
-### The axiom of countable choice implies choice for all countable sets
+### The axiom of countable choice implies choice for all directly countable sets
 
 ```agda
 module _
   {l : Level} (X : Set l)
-  (H : is-countable X)
+  (H : is-directly-countable X)
   where
 
   choice-countable-set-ACω :
-    instance-choice-Set A
+    {l2 : Level} → ACω →
+    (F : type-Set X → UU l2) → ((x : type-Set X) → is-inhabited (F x)) →
+    is-inhabited ((x : type-Set X) → F x)
+  choice-countable-set-ACω {l2} acω F K =
+    let
+      open do-syntax-trunc-Prop (is-inhabited-Prop ((x : type-Set X) → F x))
+    in do
+      (c , surjective-c) ← H
+      let
+        G : ℕ → Inhabited-Type l2
+        G n = F (c n) , K (c n)
+      g ← acω G
+      -- surjective-c implies the fiber of x is inhabited; we need to pick
+      -- the least ℕ in surjective-c and use that
+      unit-trunc-Prop λ x → {! surjective-c x  !}
 ```
 
 ### The axiom of choice implies the axiom of countable choice
@@ -66,15 +81,4 @@ level-ACω-level-AC0 ac0 f =
 
 ACω-AC0 : AC0 → ACω
 ACω-AC0 ac0 = level-ACω-level-AC0 ac0
-```
-
-### The axiom of dependent choice implies the axiom of countable choice
-
-```agda
-level-ACω-level-ADC : {l : Level} → level-ADC l l → level-ACω l
-level-ACω-level-ADC adc f =
-  let
-    A = Σ ℕ (λ n → type-Inhabited-Type (f n))
-    R = ?
-  in {!   !}
 ```
