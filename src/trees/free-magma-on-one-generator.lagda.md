@@ -8,10 +8,7 @@ module trees.free-magma-on-one-generator where
 
 ```agda
 open import foundation.action-on-identifications-binary-functions
-open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -20,10 +17,6 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import foundation-core.dependent-identifications
-open import foundation-core.function-types
-open import foundation-core.propositions
-open import foundation-core.retractions
-open import foundation-core.sections
 open import foundation-core.sets
 open import foundation-core.transport-along-identifications
 

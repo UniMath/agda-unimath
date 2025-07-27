@@ -17,10 +17,11 @@ open import trees.full-binary-trees
 
 ## Idea
 
-For a type `X`, an **`X`-labeling** of a
-[full binary tree](trees.full-binary-trees.md) `T` is a map from the nodes of
-`T` to `X`. A **labeled full binary tree** is a pair of a full binary tree and a
-labeling.
+For a type `X`, an {{concept "`X`-labeling" Agda=labeling-full-binary-tree}} of
+a [full binary tree](trees.full-binary-trees.md) `T` is a map from the nodes of
+`T` to `X`. A
+{{concept "labeled full binary tree" Agda=labeled-full-binary-tree}} is a pair
+of a full binary tree and a labeling.
 
 ## Definition
 

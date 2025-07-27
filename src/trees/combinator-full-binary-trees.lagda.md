@@ -25,7 +25,8 @@ open import trees.labeled-full-binary-trees
 Two [full binary trees](trees.full-binary-trees.md) `L, R` may be combined into
 a new full binary tree in the natural way. By abstract nonsense, this extends to
 a combinator of [labeled full binary trees](trees.labeled-full-binary-trees.md).
-These form an important class of [magmas](structured-types.magmas.md).
+These form an important class of [magmas](structured-types.magmas.md), cf.
+[the free magma on one generator](trees.free-magma-on-one.generator.md).
 
 ## Definition
 

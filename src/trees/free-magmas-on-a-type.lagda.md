@@ -38,37 +38,11 @@ open import trees.labeled-full-binary-trees
 As the type of [full binary trees](trees.full-binary-trees.md) is the
 [free magma on one generator](trees.free-magma-on-one-generator.md), so too is
 the type of [`X`-labeled full binary trees](trees.labeled-full-binary-trees.md)
-the \*\*free magma on `X`. That is, for any [magma](structured-types.magmas.md)
+the **free magma on `X`**. That is, for any [magma](structured-types.magmas.md)
 `M` and any type `X`, the map
 `(hom-Magma (labeled-full-binary-tree-Magma X) M) → (X → type-Magma M)` pulling
 back the label of `leaf-full-binary-tree` is an equivalence.
 
 ## Proof
 
-```agda
-module _
-  {l1 l2 : Level} (X : UU l1) (M : Magma l2)
-  where
-
-  label-of-leaf :
-    hom-Magma (labeled-full-binary-tree-Magma X) M → (X → type-Magma M)
-  label-of-leaf (f , _) x = f (leaf-full-binary-tree , λ _ → x)
-
-  extension-of-map-labeled-full-binary-tree-Magma :
-    ( X → type-Magma M) → (labeled-full-binary-tree X) → type-Magma M
-  extension-of-map-labeled-full-binary-tree-Magma f
-    ( leaf-full-binary-tree , label) = f (label star)
-  extension-of-map-labeled-full-binary-tree-Magma f
-    ( join-full-binary-tree L R , label) =
-    mul-Magma M
-    ( extension-of-map-labeled-full-binary-tree-Magma f
-      ( L , λ z → label (inl z)))
-    ( extension-of-map-labeled-full-binary-tree-Magma f
-      ( R , λ z → label (inr z)))
-
-  is-hom-extension-of-map-labeled-full-binary-tree-Magma :
-    ( f : X → type-Magma M) → preserves-mul-Magma
-    ( labeled-full-binary-tree-Magma X) M
-    ( extension-of-map-labeled-full-binary-tree-Magma f)
-  is-hom-extension-of-map-labeled-full-binary-tree-Magma f T U = {!   !}
-```
+This remains to be shown.
