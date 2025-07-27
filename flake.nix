@@ -32,6 +32,7 @@
             pybtex
             requests
             tomli
+            graphviz
           ]);
 
           agda-unimath-package = { lib, mkDerivation, time }: mkDerivation {
@@ -76,7 +77,7 @@
 
             # Development tools
             packages = [
-              # maintanance scripts
+              # maintenance scripts
               python
               # pre-commit checks
               pkgs.pre-commit

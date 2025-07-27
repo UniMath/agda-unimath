@@ -121,6 +121,10 @@ module _
     iso-Precategory (core-precategory-Precategory C) x y ≃ iso-Precategory C x y
   inv-compute-iso-core-Precategory =
     inv-compute-iso-Pregroupoid (core-pregroupoid-Precategory C)
+
+  inclusion-iso-core-Precategory :
+    iso-Precategory C x y → iso-Precategory (core-precategory-Precategory C) x y
+  inclusion-iso-core-Precategory = map-equiv compute-iso-core-Precategory
 ```
 
 ### The core is replete

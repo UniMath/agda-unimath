@@ -33,7 +33,7 @@ given by [precomposing](foundation-core.precomposition-functions.md) any
 
 ## Definitions
 
-### The precomposition operation on type familes
+### The precomposition operation on type families
 
 ```agda
 module _

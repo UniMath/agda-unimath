@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
@@ -245,6 +246,10 @@ is-one-left-is-one-mul-ℕ :
 is-one-left-is-one-mul-ℕ x y p =
   is-one-right-is-one-mul-ℕ y x (commutative-mul-ℕ y x ∙ p)
 
+is-one-mul-ℕ :
+  (x y : ℕ) → is-one-ℕ x → is-one-ℕ y → is-one-ℕ (x *ℕ y)
+is-one-mul-ℕ .1 .1 refl refl = refl
+
 neq-mul-ℕ :
   (m n : ℕ) → succ-ℕ m ≠ (succ-ℕ m *ℕ (succ-ℕ (succ-ℕ n)))
 neq-mul-ℕ m n p =
@@ -254,6 +259,30 @@ neq-mul-ℕ m n p =
     ( ( p) ∙
       ( ( right-successor-law-mul-ℕ (succ-ℕ m) (succ-ℕ n)) ∙
         ( ap ((succ-ℕ m) +ℕ_) (left-successor-law-mul-ℕ m (succ-ℕ n)))))
+```
+
+### Either of the factors is zero if and only if the product is zero
+
+```agda
+is-zero-summand-is-zero-mul-ℕ :
+  (x y : ℕ) → is-zero-ℕ (x *ℕ y) → is-zero-ℕ x + is-zero-ℕ y
+is-zero-summand-is-zero-mul-ℕ 0 y H = inl refl
+is-zero-summand-is-zero-mul-ℕ (succ-ℕ x) 0 H = inr refl
+
+is-zero-mul-ℕ-is-zero-left-summand :
+  (x y : ℕ) → is-zero-ℕ x → is-zero-ℕ (x *ℕ y)
+is-zero-mul-ℕ-is-zero-left-summand .0 y refl = left-zero-law-mul-ℕ y
+
+is-zero-mul-ℕ-is-zero-right-summand :
+  (x y : ℕ) → is-zero-ℕ y → is-zero-ℕ (x *ℕ y)
+is-zero-mul-ℕ-is-zero-right-summand x .0 refl = right-zero-law-mul-ℕ x
+
+is-zero-mul-ℕ-is-zero-summand :
+  (x y : ℕ) → is-zero-ℕ x + is-zero-ℕ y → is-zero-ℕ (x *ℕ y)
+is-zero-mul-ℕ-is-zero-summand x y (inl H) =
+  is-zero-mul-ℕ-is-zero-left-summand x y H
+is-zero-mul-ℕ-is-zero-summand x y (inr H) =
+  is-zero-mul-ℕ-is-zero-right-summand x y H
 ```
 
 ## See also

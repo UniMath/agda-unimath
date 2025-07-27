@@ -252,6 +252,30 @@ congruence-add-ℕ k {x} {y} {x'} {y'} H K =
     ( translation-invariant-cong-ℕ' k x x' y' H)
     ( translation-invariant-cong-ℕ k y y' x K)
 
+cong-right-summand-ℕ :
+  (k : ℕ) {x y x' y' : ℕ} →
+  cong-ℕ k x x' → cong-ℕ k (x +ℕ y) (x' +ℕ y') → cong-ℕ k y y'
+cong-right-summand-ℕ k {x} {y} {x'} {y'} H K =
+  reflects-cong-add-ℕ x {y}
+    ( transitive-cong-ℕ k
+      ( x +ℕ y)
+      ( x' +ℕ y')
+      ( x +ℕ y')
+      ( translation-invariant-cong-ℕ' k x' x y'
+        ( symmetric-cong-ℕ k x x' H))
+      ( K))
+
+cong-left-summand-ℕ :
+  (k : ℕ) {x y x' y' : ℕ} →
+  cong-ℕ k y y' → cong-ℕ k (x +ℕ y) (x' +ℕ y') → cong-ℕ k x x'
+cong-left-summand-ℕ k {x} {y} {x'} {y'} H K =
+  cong-right-summand-ℕ k {y} {x} {y'} {x'} H
+    ( concatenate-eq-cong-ℕ k
+      ( commutative-add-ℕ y x)
+      ( concatenate-cong-eq-ℕ k {x1 = x +ℕ y}
+        ( K)
+        ( commutative-add-ℕ x' y')))
+
 mod-succ-add-ℕ :
   (k x y : ℕ) →
   mod-succ-ℕ k (x +ℕ y) ＝

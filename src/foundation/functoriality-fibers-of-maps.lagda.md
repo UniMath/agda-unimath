@@ -331,7 +331,7 @@ identification
 ```
 
 Now we proceed by transposing equality on both sides, i.e., it suffices to
-costruct an identification
+construct an identification
 
 ```text
   α a ∙ ap g p ＝ γ₁ (f a) ∙ β a.

@@ -13,7 +13,6 @@ open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -30,6 +29,7 @@ open import foundation.universe-levels
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-premetric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
 
 </details>
@@ -237,7 +237,7 @@ module _
       ( λ x → refl)
 ```
 
-### Associatity of composition of isometries between metric spaces
+### Associativity of composition of isometries between metric spaces
 
 ```agda
 module _
@@ -344,11 +344,29 @@ module _
   where
 
   is-emb-map-isometry-Metric-Space :
-      (f : isometry-Metric-Space A B) → is-emb (map-isometry-Metric-Space A B f)
+    (f : isometry-Metric-Space A B) → is-emb (map-isometry-Metric-Space A B f)
   is-emb-map-isometry-Metric-Space =
     is-emb-map-isometry-is-extensional-Premetric-Space
       ( premetric-Metric-Space A)
       ( premetric-Metric-Space B)
       ( is-extensional-structure-Metric-Space A)
       ( is-extensional-structure-Metric-Space B)
+```
+
+### Any isometry between metric spaces is uniformly continuous
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
+  where
+
+  is-uniformly-continuous-map-isometry-Metric-Space :
+    (f : isometry-Metric-Space A B) →
+    is-uniformly-continuous-map-Metric-Space A B
+      (map-isometry-Metric-Space A B f)
+  is-uniformly-continuous-map-isometry-Metric-Space =
+    is-uniformly-continuous-map-isometry-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
 ```

@@ -356,6 +356,11 @@ left-distributive-mul-dist-ℕ (succ-ℕ m) (succ-ℕ n) (succ-ℕ k) =
           ( (succ-ℕ k) *ℕ n)) ∙
         ( inv (left-distributive-mul-dist-ℕ m n (succ-ℕ k)))))
 
+left-distributive-mul-dist-ℕ' :
+  (m n k : ℕ) → dist-ℕ (k *ℕ m) (k *ℕ n) ＝ k *ℕ (dist-ℕ m n)
+left-distributive-mul-dist-ℕ' m n k =
+  inv (left-distributive-mul-dist-ℕ m n k)
+
 right-distributive-mul-dist-ℕ :
   (x y k : ℕ) → (dist-ℕ x y) *ℕ k ＝ dist-ℕ (x *ℕ k) (y *ℕ k)
 right-distributive-mul-dist-ℕ x y k =

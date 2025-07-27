@@ -19,7 +19,7 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 
-open import linear-algebra.vectors
+open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
@@ -61,22 +61,24 @@ pr2 group-Theory =
   λ where
   associative-l-group-laws →
     ( op mul-group-op
-      ( ( op mul-group-op (var 0 ∷ var 1 ∷ empty-vec)) ∷ var 2 ∷ empty-vec)) ,
+      ( ( op mul-group-op (var 0 ∷ var 1 ∷ empty-tuple)) ∷
+        var 2 ∷
+        empty-tuple)) ,
     ( op mul-group-op
-      ( var 0 ∷ (op mul-group-op (var 1 ∷ var 2 ∷ empty-vec)) ∷ empty-vec))
+      ( var 0 ∷ (op mul-group-op (var 1 ∷ var 2 ∷ empty-tuple)) ∷ empty-tuple))
   invl-l-group-laws →
     ( op mul-group-op
-      ( op inv-group-op (var 0 ∷ empty-vec) ∷ var 0 ∷ empty-vec)) ,
-    ( op unit-group-op empty-vec)
+      ( op inv-group-op (var 0 ∷ empty-tuple) ∷ var 0 ∷ empty-tuple)) ,
+    ( op unit-group-op empty-tuple)
   invr-r-group-laws →
     ( op mul-group-op
-      ( var 0 ∷ op inv-group-op (var 0 ∷ empty-vec) ∷ empty-vec)) ,
-    ( op unit-group-op empty-vec)
+      ( var 0 ∷ op inv-group-op (var 0 ∷ empty-tuple) ∷ empty-tuple)) ,
+    ( op unit-group-op empty-tuple)
   idl-l-group-laws →
-    ( op mul-group-op (op unit-group-op empty-vec ∷ var 0 ∷ empty-vec)) ,
+    ( op mul-group-op (op unit-group-op empty-tuple ∷ var 0 ∷ empty-tuple)) ,
     ( var 0)
   idr-r-group-laws →
-    ( op mul-group-op (var 0 ∷ op unit-group-op empty-vec ∷ empty-vec)) ,
+    ( op mul-group-op (var 0 ∷ op unit-group-op empty-tuple ∷ empty-tuple)) ,
     ( var 0)
     where
     op = op-Term
@@ -97,18 +99,18 @@ group-Algebra-Group :
   Group l
 pr1 (pr1 (group-Algebra-Group ((A-Set , models-A) , satisfies-A))) = A-Set
 pr1 (pr2 (pr1 (group-Algebra-Group ((A-Set , models-A) , satisfies-A)))) x y =
-  models-A mul-group-op (x ∷ y ∷ empty-vec)
+  models-A mul-group-op (x ∷ y ∷ empty-tuple)
 pr2 (pr2 (pr1 (group-Algebra-Group ((A-Set , models-A) , satisfies-A)))) x y z =
   satisfies-A associative-l-group-laws
     ( λ { 0 → x ; 1 → y ; (succ-ℕ (succ-ℕ n)) → z})
 pr1 (pr1 (pr2 (group-Algebra-Group ((A-Set , models-A) , satisfies-A)))) =
-  models-A unit-group-op empty-vec
+  models-A unit-group-op empty-tuple
 pr1 (pr2 (pr1 (pr2 (group-Algebra-Group (_ , satisfies-A))))) x =
   satisfies-A idl-l-group-laws (λ _ → x)
 pr2 (pr2 (pr1 (pr2 (group-Algebra-Group (_ , satisfies-A))))) x =
   satisfies-A idr-r-group-laws (λ _ → x)
 pr1 (pr2 (pr2 (group-Algebra-Group ((A-Set , models-A) , satisfies-A)))) x =
-  models-A inv-group-op (x ∷ empty-vec)
+  models-A inv-group-op (x ∷ empty-tuple)
 pr1 (pr2 (pr2 (pr2 (group-Algebra-Group (_ , satisfies-A))))) x =
   satisfies-A invl-l-group-laws (λ _ → x)
 pr2 (pr2 (pr2 (pr2 (group-Algebra-Group (_ , satisfies-A))))) x =
@@ -124,8 +126,8 @@ Group-group-Algebra G =
       ( ( set-Group G))
       ( λ where
         unit-group-op v → unit-Group G
-        mul-group-op (x ∷ y ∷ empty-vec) → mul-Group G x y
-        inv-group-op (x ∷ empty-vec) → inv-Group G x))
+        mul-group-op (x ∷ y ∷ empty-tuple) → mul-Group G x y
+        inv-group-op (x ∷ empty-tuple) → inv-Group G x))
     ( λ where
       associative-l-group-laws assign →
         associative-mul-Group G (assign 0) (assign 1) (assign 2)
@@ -154,9 +156,9 @@ abstract
       ( eq-pair-eq-fiber
         ( eq-htpy
           ( λ where
-            unit-group-op → eq-htpy (λ where empty-vec → refl)
-            mul-group-op → eq-htpy (λ where (x ∷ y ∷ empty-vec) → refl)
-            inv-group-op → eq-htpy (λ where (x ∷ empty-vec) → refl))))
+            unit-group-op → eq-htpy (λ where empty-tuple → refl)
+            mul-group-op → eq-htpy (λ where (x ∷ y ∷ empty-tuple) → refl)
+            inv-group-op → eq-htpy (λ where (x ∷ empty-tuple) → refl))))
       ( eq-is-prop
         ( is-prop-is-algebra
           ( group-signature) ( group-Theory)

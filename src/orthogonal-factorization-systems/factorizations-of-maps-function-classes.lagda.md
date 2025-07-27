@@ -189,7 +189,7 @@ module _
 of factorizations using the
 [subtype identity principle](foundation.subtype-identity-principle.md).
 
-What follows is a long list of auxillary definitions.
+What follows is a long list of auxiliary definitions.
 
 ```agda
 module _

@@ -17,6 +17,7 @@ open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjoint-subtypes
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
@@ -33,7 +34,13 @@ open import foundation.universe-levels
 open import logic.functoriality-existential-quantification
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.negation-lower-upper-dedekind-real-numbers
+open import real-numbers.rational-lower-dedekind-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.rational-upper-dedekind-real-numbers
+open import real-numbers.similarity-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
@@ -50,76 +57,20 @@ module _
   {l : Level} (x : ℝ l)
   where
 
+  lower-real-neg-ℝ : lower-ℝ l
+  lower-real-neg-ℝ = neg-upper-ℝ (upper-real-ℝ x)
+
+  upper-real-neg-ℝ : upper-ℝ l
+  upper-real-neg-ℝ = neg-lower-ℝ (lower-real-ℝ x)
+
   lower-cut-neg-ℝ : subtype l ℚ
-  lower-cut-neg-ℝ q = upper-cut-ℝ x (neg-ℚ q)
+  lower-cut-neg-ℝ = cut-lower-ℝ lower-real-neg-ℝ
 
   upper-cut-neg-ℝ : subtype l ℚ
-  upper-cut-neg-ℝ q = lower-cut-ℝ x (neg-ℚ q)
-
-  is-inhabited-lower-cut-neg-ℝ : exists ℚ lower-cut-neg-ℝ
-  is-inhabited-lower-cut-neg-ℝ =
-    map-exists
-      ( is-in-subtype lower-cut-neg-ℝ)
-      ( neg-ℚ)
-      ( λ q → tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ q)))
-      ( is-inhabited-upper-cut-ℝ x)
-
-  is-inhabited-upper-cut-neg-ℝ : exists ℚ upper-cut-neg-ℝ
-  is-inhabited-upper-cut-neg-ℝ =
-    map-exists
-      ( is-in-subtype upper-cut-neg-ℝ)
-      ( neg-ℚ)
-      ( λ q → tr (is-in-lower-cut-ℝ x) (inv (neg-neg-ℚ q)))
-      ( is-inhabited-lower-cut-ℝ x)
-
-  is-rounded-lower-cut-neg-ℝ :
-    (q : ℚ) →
-    is-in-subtype lower-cut-neg-ℝ q ↔
-    exists ℚ (λ r → (le-ℚ-Prop q r) ∧ (lower-cut-neg-ℝ r))
-  pr1 (is-rounded-lower-cut-neg-ℝ q) in-neg-lower =
-    map-exists
-      ( λ r → le-ℚ q r × is-in-subtype lower-cut-neg-ℝ r)
-      ( neg-ℚ)
-      ( λ r (r<-q , in-upper-r) →
-        ( ( tr
-            ( λ x → le-ℚ x (neg-ℚ r))
-            ( neg-neg-ℚ q)
-            ( neg-le-ℚ r (neg-ℚ q) r<-q)) ,
-          ( tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ r)) in-upper-r)))
-      ( forward-implication (is-rounded-upper-cut-ℝ x (neg-ℚ q)) in-neg-lower)
-  pr2 (is-rounded-lower-cut-neg-ℝ q) exists-r =
-    backward-implication
-      ( is-rounded-upper-cut-ℝ x (neg-ℚ q))
-      ( map-exists
-        ( λ r → le-ℚ r (neg-ℚ q) × is-in-upper-cut-ℝ x r)
-        ( neg-ℚ)
-        ( λ r (q<r , in-neg-lower-r) → (neg-le-ℚ q r q<r , in-neg-lower-r))
-        ( exists-r))
-
-  is-rounded-upper-cut-neg-ℝ :
-    (r : ℚ) →
-    is-in-subtype upper-cut-neg-ℝ r ↔
-    exists ℚ (λ q → (le-ℚ-Prop q r) ∧ (upper-cut-neg-ℝ q))
-  pr1 (is-rounded-upper-cut-neg-ℝ r) in-neg-upper =
-    map-exists
-      ( λ q → le-ℚ q r × is-in-subtype upper-cut-neg-ℝ q)
-      ( neg-ℚ)
-      ( λ q (-r<q , in-lower-q) →
-        ( ( tr (le-ℚ (neg-ℚ q)) (neg-neg-ℚ r) (neg-le-ℚ (neg-ℚ r) q -r<q)) ,
-          ( tr (is-in-lower-cut-ℝ x) (inv (neg-neg-ℚ q)) in-lower-q)))
-      ( forward-implication (is-rounded-lower-cut-ℝ x (neg-ℚ r)) in-neg-upper)
-  pr2 (is-rounded-upper-cut-neg-ℝ r) exists-q =
-    backward-implication
-      ( is-rounded-lower-cut-ℝ x (neg-ℚ r))
-      ( map-exists
-        ( λ q → le-ℚ (neg-ℚ r) q × is-in-lower-cut-ℝ x q)
-        ( neg-ℚ)
-        ( λ q (q<r , in-neg-upper-q) → (neg-le-ℚ q r q<r , in-neg-upper-q))
-        ( exists-q))
+  upper-cut-neg-ℝ = cut-upper-ℝ upper-real-neg-ℝ
 
   is-disjoint-cut-neg-ℝ :
-    (q : ℚ) →
-    ¬ (is-in-subtype lower-cut-neg-ℝ q × is-in-subtype upper-cut-neg-ℝ q)
+    disjoint-subtype lower-cut-neg-ℝ upper-cut-neg-ℝ
   is-disjoint-cut-neg-ℝ q (in-lower-neg , in-upper-neg) =
     is-disjoint-cut-ℝ x (neg-ℚ q) (in-upper-neg , in-lower-neg)
 
@@ -135,13 +86,11 @@ module _
 
   neg-ℝ : ℝ l
   neg-ℝ =
-    real-dedekind-cut
-      ( lower-cut-neg-ℝ)
-      ( upper-cut-neg-ℝ)
-      ( (is-inhabited-lower-cut-neg-ℝ , is-inhabited-upper-cut-neg-ℝ) ,
-        ( is-rounded-lower-cut-neg-ℝ , is-rounded-upper-cut-neg-ℝ) ,
-          is-disjoint-cut-neg-ℝ ,
-          is-located-lower-upper-cut-neg-ℝ)
+    real-lower-upper-ℝ
+      ( lower-real-neg-ℝ)
+      ( upper-real-neg-ℝ)
+      ( is-disjoint-cut-neg-ℝ)
+      ( is-located-lower-upper-cut-neg-ℝ)
 ```
 
 ## Properties
@@ -171,4 +120,32 @@ neg-Rational-ℝ (x , q , q≮x , x≮q) =
   neg-ℚ q ,
   x≮q ∘ tr (is-in-upper-cut-ℝ x) (neg-neg-ℚ q) ,
   q≮x ∘ tr (is-in-lower-cut-ℝ x) (neg-neg-ℚ q)
+
+neg-real-ℚ : (q : ℚ) → neg-ℝ (real-ℚ q) ＝ real-ℚ (neg-ℚ q)
+neg-real-ℚ q = eq-sim-ℝ (sim-rational-ℝ (neg-Rational-ℝ (rational-real-ℚ q)))
 ```
+
+### Negation preserves similarity
+
+```agda
+abstract
+  preserves-sim-neg-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {x' : ℝ l2} →
+    sim-ℝ x x' → sim-ℝ (neg-ℝ x) (neg-ℝ x')
+  preserves-sim-neg-ℝ {x = x} {x' = x'} x~x' =
+    let
+      (lx⊆lx' , lx'⊆lx) =
+        backward-implication (sim-lower-cut-iff-sim-ℝ x x') x~x'
+    in
+      forward-implication
+        ( sim-upper-cut-iff-sim-ℝ _ _)
+        ( lx⊆lx' ∘ neg-ℚ , lx'⊆lx ∘ neg-ℚ)
+```
+
+## See also
+
+- In
+  [The negation isometry on real numbers](real-numbers.isometry-negation-real-numbers.md)
+  we show that negation is an
+  [isometry](metric-spaces.isometries-metric-spaces.md) on the
+  [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md)

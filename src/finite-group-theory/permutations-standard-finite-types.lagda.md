@@ -506,4 +506,13 @@ retraction-permutation-list-standard-transpositions-Fin 0 f ()
 retraction-permutation-list-standard-transpositions-Fin (succ-ℕ n) f =
   htpy-permutation-list n (list-transpositions-permutation-Fin (succ-ℕ n) f) ∙h
   retraction-permutation-list-transpositions-Fin (succ-ℕ n) f
+
+eq-permutation-list-standard-transpositions-Fin :
+  (n : ℕ) (f : Permutation n) →
+  permutation-list-standard-transpositions-Fin
+    ( n)
+    ( list-standard-transpositions-permutation-Fin n f) ＝
+  f
+eq-permutation-list-standard-transpositions-Fin n f =
+  eq-htpy-equiv (retraction-permutation-list-standard-transpositions-Fin n f)
 ```

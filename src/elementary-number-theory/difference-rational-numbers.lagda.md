@@ -10,6 +10,8 @@ module elementary-number-theory.difference-rational-numbers where
 
 ```agda
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.difference-integers
+open import elementary-number-theory.integers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
@@ -73,7 +75,9 @@ abstract
 ### The difference of a rational number with zero is itself
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   right-zero-law-diff-ℚ : (x : ℚ) → x -ℚ zero-ℚ ＝ x
   right-zero-law-diff-ℚ = right-unit-law-add-ℚ
 ```
@@ -84,6 +88,22 @@ abstract
 abstract
   left-zero-law-diff-ℚ : (x : ℚ) → zero-ℚ -ℚ x ＝ neg-ℚ x
   left-zero-law-diff-ℚ x = left-unit-law-add-ℚ (neg-ℚ x)
+```
+
+### If the difference of two rational numbers is zero, they are equal
+
+```agda
+abstract
+  eq-is-zero-diff-ℚ : (x y : ℚ) → x -ℚ y ＝ zero-ℚ → x ＝ y
+  eq-is-zero-diff-ℚ x y x-y=0 =
+    inv
+      ( equational-reasoning
+        y
+        ＝ zero-ℚ +ℚ y by inv (left-unit-law-add-ℚ y)
+        ＝ (x -ℚ y) +ℚ y by ap (_+ℚ y) (inv x-y=0)
+        ＝ x +ℚ (neg-ℚ y +ℚ y) by associative-add-ℚ _ _ _
+        ＝ x +ℚ zero-ℚ by ap (x +ℚ_) (left-inverse-law-add-ℚ y)
+        ＝ x by right-unit-law-add-ℚ x)
 ```
 
 ### Triangular identity for addition and difference of rational numbers
@@ -151,4 +171,19 @@ abstract
   right-translation-diff-ℚ x y z =
     ( ap-diff-ℚ (commutative-add-ℚ x z) (commutative-add-ℚ y z)) ∙
     ( left-translation-diff-ℚ x y z)
+```
+
+### The inclusion of integers preserves differences
+
+```agda
+abstract
+  diff-rational-ℤ :
+    (x y : ℤ) → rational-ℤ x -ℚ rational-ℤ y ＝ rational-ℤ (x -ℤ y)
+  diff-rational-ℤ x y =
+    equational-reasoning
+      rational-ℤ x -ℚ rational-ℤ y
+      ＝ rational-ℤ x +ℚ rational-ℤ (neg-ℤ y)
+        by ap (rational-ℤ x +ℚ_) (inv (preserves-neg-rational-ℤ y))
+      ＝ rational-ℤ (x -ℤ y)
+        by add-rational-ℤ x (neg-ℤ y)
 ```

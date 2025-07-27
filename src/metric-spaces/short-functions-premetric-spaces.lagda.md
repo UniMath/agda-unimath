@@ -26,6 +26,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.isometries-premetric-spaces
 open import metric-spaces.premetric-spaces
+open import metric-spaces.uniformly-continuous-functions-premetric-spaces
 ```
 
 </details>
@@ -43,7 +44,7 @@ if any of the following three [equivalent](foundation.logical-equivalences.md)
   between their image;
 - the premetric on the domain of `f` is
   [finer](metric-spaces.ordering-premetric-structures.md) than the preimage of
-  the premetric on its domain by `f`.
+  the metric on its codomain by `f`.
 
 ## Definitions
 
@@ -209,6 +210,21 @@ module _
     is-short-function-Premetric-Space A B f
   is-short-is-isometry-Premetric-Space H d x y =
     forward-implication (H d x y)
+```
+
+### Short maps are uniformly continuous
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : Premetric-Space l1 l2) (B : Premetric-Space l3 l4)
+  where
+
+  is-uniformly-continuous-is-short-function-Premetric-Space :
+    (f : map-type-Premetric-Space A B) →
+    is-short-function-Premetric-Space A B f →
+    is-uniformly-continuous-map-Premetric-Space A B f
+  is-uniformly-continuous-is-short-function-Premetric-Space f H =
+    intro-exists id (λ x ε → H ε x)
 ```
 
 ## External links

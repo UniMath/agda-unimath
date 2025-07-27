@@ -213,6 +213,12 @@ pr1 (reflects-cong-add-ℕ {k} x {y} {z} (pair d p)) = d
 pr2 (reflects-cong-add-ℕ {k} x {y} {z} (pair d p)) =
   p ∙ translation-invariant-dist-ℕ x y z
 
+reflects-cong-left-add-ℕ :
+  {k : ℕ} (x : ℕ) {y z : ℕ} → cong-ℕ k (x +ℕ z) (y +ℕ z) → cong-ℕ k x y
+pr1 (reflects-cong-left-add-ℕ x (d , p)) = d
+pr2 (reflects-cong-left-add-ℕ {k} x {y} {z} (d , p)) =
+  p ∙ translation-invariant-dist-ℕ' z x y
+
 reflects-cong-add-ℕ' :
   {k : ℕ} (x : ℕ) {y z : ℕ} → cong-ℕ k (add-ℕ' x y) (add-ℕ' x z) → cong-ℕ k y z
 reflects-cong-add-ℕ' {k} x {y} {z} H =

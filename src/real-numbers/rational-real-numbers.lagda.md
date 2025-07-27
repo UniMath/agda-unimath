@@ -1,6 +1,8 @@
 # Rational real numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.rational-real-numbers where
 ```
 
@@ -36,6 +38,12 @@ open import foundation.universe-levels
 open import logic.functoriality-existential-quantification
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
+open import real-numbers.rational-lower-dedekind-real-numbers
+open import real-numbers.rational-upper-dedekind-real-numbers
+open import real-numbers.similarity-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
@@ -53,42 +61,48 @@ the [image](foundation.images.md) of this embedding
 ### Strict inequality on rationals gives Dedekind cuts
 
 ```agda
-is-dedekind-cut-le-ℚ :
+is-dedekind-lower-upper-real-ℚ :
   (x : ℚ) →
-  is-dedekind-cut
-    (λ (q : ℚ) → le-ℚ-Prop q x)
-    (λ (r : ℚ) → le-ℚ-Prop x r)
-is-dedekind-cut-le-ℚ x =
-  ( exists-lesser-ℚ x , exists-greater-ℚ x) ,
-  ( ( λ (q : ℚ) →
-      dense-le-ℚ q x ,
-      elim-exists
-        ( le-ℚ-Prop q x)
-        ( λ r (H , H') → transitive-le-ℚ q r x H' H)) ,
-    ( λ (r : ℚ) →
-      α x r ∘ dense-le-ℚ x r ,
-      elim-exists
-        ( le-ℚ-Prop x r)
-        ( λ q (H , H') → transitive-le-ℚ x q r H H'))) ,
-  ( λ (q : ℚ) (H , H') → asymmetric-le-ℚ q x H H') ,
-  ( located-le-ℚ x)
-  where
-    α :
-      (a b : ℚ) →
-      exists ℚ (λ r → le-ℚ-Prop a r ∧ le-ℚ-Prop r b) →
-      exists ℚ (λ r → le-ℚ-Prop r b ∧ le-ℚ-Prop a r)
-    α a b = map-tot-exists (λ r (p , q) → (q , p))
+  is-dedekind-lower-upper-ℝ
+    ( lower-real-ℚ x)
+    ( upper-real-ℚ x)
+is-dedekind-lower-upper-real-ℚ x =
+  (λ q (H , K) → asymmetric-le-ℚ q x H K) ,
+  located-le-ℚ x
 ```
 
-### The canonical map from `ℚ` to `ℝ`
+### The canonical map from `ℚ` to `ℝ lzero`
 
 ```agda
 real-ℚ : ℚ → ℝ lzero
-real-ℚ x =
-  real-dedekind-cut
-    ( λ (q : ℚ) → le-ℚ-Prop q x)
-    ( λ (r : ℚ) → le-ℚ-Prop x r)
-    ( is-dedekind-cut-le-ℚ x)
+real-ℚ x = (lower-real-ℚ x , upper-real-ℚ x , is-dedekind-lower-upper-real-ℚ x)
+```
+
+### Zero as a real number
+
+```agda
+zero-ℝ : ℝ lzero
+zero-ℝ = real-ℚ zero-ℚ
+```
+
+### One as a real number
+
+```agda
+one-ℝ : ℝ lzero
+one-ℝ = real-ℚ one-ℚ
+```
+
+### The canonical map from `ℚ` to `ℝ l`
+
+```agda
+raise-real-ℚ : (l : Level) → ℚ → ℝ l
+raise-real-ℚ l q = raise-ℝ l (real-ℚ q)
+
+raise-zero-ℝ : (l : Level) → ℝ l
+raise-zero-ℝ l = raise-real-ℚ l zero-ℚ
+
+raise-one-ℝ : (l : Level) → ℝ l
+raise-one-ℝ l = raise-real-ℚ l one-ℚ
 ```
 
 ### The property of being a rational real number
@@ -179,27 +193,31 @@ is-rational-real-ℚ p = (irreflexive-le-ℚ p , irreflexive-le-ℚ p)
 ### Rational real numbers are embedded rationals
 
 ```agda
+opaque
+  unfolding sim-ℝ
+
+  sim-rational-ℝ :
+    {l : Level} →
+    (x : Rational-ℝ l) →
+    sim-ℝ (real-rational-ℝ x) (real-ℚ (rational-rational-ℝ x))
+  pr1 (sim-rational-ℝ (x , q , q∉lx , q∉ux)) p p∈lx =
+    trichotomy-le-ℚ
+      ( p)
+      ( q)
+      ( id)
+      ( λ p=q → ex-falso (q∉lx (tr (is-in-lower-cut-ℝ x) p=q p∈lx)))
+      ( λ q<p → ex-falso (q∉lx (le-lower-cut-ℝ x q p q<p p∈lx)))
+  pr2 (sim-rational-ℝ (x , q , q∉lx , q∉ux)) p p<q =
+    elim-disjunction
+      ( lower-cut-ℝ x p)
+      ( id)
+      ( ex-falso ∘ q∉ux)
+      ( is-located-lower-upper-cut-ℝ x p q p<q)
+
 eq-real-rational-is-rational-ℝ :
   (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) → real-ℚ q ＝ x
 eq-real-rational-is-rational-ℝ x q H =
-  eq-eq-lower-cut-ℝ
-    ( real-ℚ q)
-    ( x)
-    ( eq-has-same-elements-subtype
-      ( λ p → le-ℚ-Prop p q)
-      ( lower-cut-ℝ x)
-      ( λ r →
-        pair
-          ( λ I →
-            elim-disjunction
-              ( lower-cut-ℝ x r)
-              ( id)
-              ( λ H' → ex-falso (pr2 H H'))
-              ( is-located-lower-upper-cut-ℝ x r q I))
-          ( trichotomy-le-ℚ r q
-            ( λ I _ → I)
-            ( λ E H' → ex-falso (pr1 (tr (is-rational-ℝ x) (inv E) H) H'))
-            ( λ I H' → ex-falso (pr1 H (le-lower-cut-ℝ x q r I H'))))))
+  inv (eq-sim-ℝ {lzero} {x} {real-ℚ q} (sim-rational-ℝ (x , q , H)))
 ```
 
 ### The canonical map from rationals to rational reals

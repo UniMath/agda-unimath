@@ -124,7 +124,7 @@ is-mere-path-cosplit-succ-is-mere-path-cosplit (succ-𝕋 k) is-cosplit-f x y =
   is-mere-path-cosplit-succ-is-mere-path-cosplit k (is-cosplit-f x y)
 ```
 
-### If a type maps into a `k`-truncted type via a merely `k`-path-cosplit map then it is `k`-truncated
+### If a type maps into a `k`-truncated type via a merely `k`-path-cosplit map then it is `k`-truncated
 
 ```agda
 is-trunc-domain-is-mere-path-cosplit-is-trunc-codomain :

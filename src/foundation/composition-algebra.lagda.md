@@ -38,7 +38,7 @@ and
   htpy-postcomp S H : postcomp S f ~ postcomp S g.
 ```
 
-This file records their interactions with eachother and different operations on
+This file records their interactions with each other and different operations on
 homotopies.
 
 ## Properties
