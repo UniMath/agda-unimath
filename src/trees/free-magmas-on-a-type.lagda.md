@@ -60,7 +60,11 @@ module _
     ( leaf-full-binary-tree , label) = f (label star)
   extension-of-map-labeled-full-binary-tree-Magma f
     ( join-full-binary-tree L R , label) =
-    mul-Magma M (extension-of-map-labeled-full-binary-tree-Magma f (L , λ z → label (inl z))) (extension-of-map-labeled-full-binary-tree-Magma f (R , λ z → label (inr z)))
+    mul-Magma M
+    ( extension-of-map-labeled-full-binary-tree-Magma f
+      ( L , λ z → label (inl z)))
+    ( extension-of-map-labeled-full-binary-tree-Magma f
+      ( R , λ z → label (inr z)))
 
   is-hom-extension-of-map-labeled-full-binary-tree-Magma :
     ( f : X → type-Magma M) → preserves-mul-Magma
