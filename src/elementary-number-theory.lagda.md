@@ -160,7 +160,6 @@ open import elementary-number-theory.products-of-natural-numbers public
 open import elementary-number-theory.proper-divisors-natural-numbers public
 open import elementary-number-theory.pythagorean-triples public
 open import elementary-number-theory.rational-numbers public
-open import elementary-number-theory.rational-ring-of-rational-numbers public
 open import elementary-number-theory.reduced-integer-fractions public
 open import elementary-number-theory.relatively-prime-integers public
 open import elementary-number-theory.relatively-prime-natural-numbers public

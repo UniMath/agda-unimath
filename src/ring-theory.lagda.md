@@ -71,7 +71,7 @@ open import ring-theory.products-rings public
 open import ring-theory.products-subsets-rings public
 open import ring-theory.quotient-rings public
 open import ring-theory.radical-ideals-rings public
-open import ring-theory.rational-rings public
+open import ring-theory.rational-extensions-rings public
 open import ring-theory.right-ideals-generated-by-subsets-rings public
 open import ring-theory.right-ideals-rings public
 open import ring-theory.rings public
