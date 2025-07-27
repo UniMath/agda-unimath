@@ -130,9 +130,3 @@ module _
         ( f)
         ( inverts-positive-integers-rational-ℤ k k>0)
 ```
-
-## See also
-
-- [rational ring of rational numbers](elementary-number-theory.rational-ring-of-rational-numbers.md):
-  the [rational ring](ring-theory.rational-rings.md) of
-  [rational numbers](elementary-number-theory.rational-numbers.md)
