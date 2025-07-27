@@ -21,6 +21,8 @@ open import foundation.universe-levels
 open import foundation-core.dependent-identifications
 open import foundation-core.retractions
 open import foundation-core.sections
+open import foundation-core.propositions
+open import foundation-core.sets
 
 open import structured-types.magmas
 open import structured-types.morphisms-magmas
@@ -36,9 +38,10 @@ open import trees.labeled-full-binary-trees
 
 Function extensionality implies that the
 [magma of full binary trees](trees.combinator-full-binary-trees.md) is the
-**free magma on one generator**. That is, there is an equivalence
-`hom-Magma full-binary-tree-Magma M ≃ M` for any
-[magma](structured-types.magmas.md) `M`.
+**free magma on one generator**. That is, there are natural maps
+`hom-Magma full-binary-tree-Magma M → M, M → hom-Magma full-binary-tree-Magma M`
+for any [magma](structured-types.magmas.md) `M`, and when `M` is a set, we may
+prove these form an equivalence.
 
 ## Proof
 
@@ -69,26 +72,21 @@ module _
   pr2 (extension-of-point-hom-full-binary-tree-Magma m) =
     is-hom-extension-of-point-full-binary-tree-Magma m
 
-  is-equiv-image-of-leaf : is-equiv image-of-leaf
-  pr1 (pr1 is-equiv-image-of-leaf) =
-    extension-of-point-hom-full-binary-tree-Magma
-  pr2 (pr1 is-equiv-image-of-leaf) _ = refl
-  pr1 (pr2 is-equiv-image-of-leaf) =
-    extension-of-point-hom-full-binary-tree-Magma
-  pr2 (pr2 is-equiv-image-of-leaf) f = {!   !}
-
-{-
+  is-equiv-image-of-leaf : is-set (type-Magma M) → is-equiv image-of-leaf
+  pr1 (pr1 (is-equiv-image-of-leaf _)) = extension-of-point-hom-full-binary-tree-Magma
+  pr2 (pr1 (is-equiv-image-of-leaf _)) _ = refl
+  pr1 (pr2 (is-equiv-image-of-leaf _)) = extension-of-point-hom-full-binary-tree-Magma
+  pr2 (pr2 (is-equiv-image-of-leaf M-set)) (f , f-hom) =
     eq-pair-Σ (eq-htpy htpy) dep
     where
     htpy :
       pr1 (extension-of-point-hom-full-binary-tree-Magma
-      ( image-of-leaf (f , f-preserves))) ~ f
+      ( image-of-leaf (f , f-hom))) ~ f
     htpy leaf-full-binary-tree = refl
-    htpy (join-full-binary-tree L R) = inv {! f-preserves  !}
+    htpy (join-full-binary-tree L R) = inv {! f-hom L R  !}
 
     dep :
       dependent-identification (preserves-mul-Magma full-binary-tree-Magma M)
-      ( eq-htpy htpy) (λ T U → refl) f-preserves
+      ( eq-htpy htpy) (λ T U → refl) f-hom
     dep = {!   !}
--}
 ```
