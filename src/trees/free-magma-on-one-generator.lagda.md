@@ -96,7 +96,7 @@ module _
   is-equiv-image-of-leaf : is-equiv image-of-leaf
   pr1 (pr1 is-equiv-image-of-leaf) =
     extension-of-point-hom-full-binary-tree-Magma
-  pr2 (pr1 is-equiv-image-of-leaf) = λ x → refl
+  pr2 (pr1 is-equiv-image-of-leaf) _ = refl
   pr1 (pr2 is-equiv-image-of-leaf) =
     extension-of-point-hom-full-binary-tree-Magma
   pr2 (pr2 is-equiv-image-of-leaf) (f , f-preserves) =
