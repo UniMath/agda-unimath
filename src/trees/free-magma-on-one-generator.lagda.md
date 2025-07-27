@@ -58,7 +58,8 @@ open import structured-types.morphisms-magmas
 
 ## Idea
 
-The [magma of full binary trees](trees.combinator-full-binary-trees.md) is the
+Function extensionality implies that the
+[magma of full binary trees](trees.combinator-full-binary-trees.md) is the
 **free magma on one generator**. That is, there is an equivalence
 `hom-Magma full-binary-tree-Magma M ≃ M` for any
 [magma](structured-types.magmas.md) `M`.
@@ -99,11 +100,16 @@ module _
   pr1 (pr2 is-equiv-image-of-leaf) =
     extension-of-point-hom-full-binary-tree-Magma
   pr2 (pr2 is-equiv-image-of-leaf) (f , f-preserves) =
-    eq-pair-Σ (eq-htpy htpy) {!   !}
+    eq-pair-Σ (eq-htpy htpy) dep
     where
     htpy :
       pr1 (extension-of-point-hom-full-binary-tree-Magma
       ( image-of-leaf (f , f-preserves))) ~ f
     htpy leaf-full-binary-tree = refl
-    htpy (join-full-binary-tree L R) = {!   !}
+    htpy (join-full-binary-tree L R) = inv {! f-preserves  !}
+
+    dep :
+      dependent-identification (preserves-mul-Magma full-binary-tree-Magma M)
+      ( eq-htpy htpy) (λ T U → refl) f-preserves
+    dep = {!   !}
 ```
