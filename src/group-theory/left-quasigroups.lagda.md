@@ -42,15 +42,18 @@ module _
 
   is-prop-is-left-cancellative-left-div : is-prop is-left-cancellative-left-div
   is-prop-is-left-cancellative-left-div =
-    is-prop-Π (λ x → is-prop-Π (λ y → is-set-type-Set Q y (mul x (left-div x y))))
+    is-prop-Π (λ x → is-prop-Π
+      ( λ y → is-set-type-Set Q y (mul x (left-div x y))))
 
   is-right-cancellative-left-div : UU l
-  is-right-cancellative-left-div = (x y : type-Set Q) → y ＝ left-div x (mul x y)
+  is-right-cancellative-left-div =
+    (x y : type-Set Q) → y ＝ left-div x (mul x y)
 
   is-prop-is-right-cancellative-left-div :
     is-prop is-right-cancellative-left-div
   is-prop-is-right-cancellative-left-div =
-    is-prop-Π (λ x → is-prop-Π (λ y → is-set-type-Set Q y (left-div x (mul x y))))
+    is-prop-Π (λ x → is-prop-Π
+      ( λ y → is-set-type-Set Q y (left-div x (mul x y))))
 
   is-left-Quasigroup : UU l
   is-left-Quasigroup =
