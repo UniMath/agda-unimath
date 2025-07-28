@@ -45,8 +45,10 @@ We refer to the first condition as
 and the second condition as
 {{#concept "similarity from above" Disambiguation="of elements of a large strict preorder" Agda=sim-from-above-Large-Strict-Preorder}}.
 
-In informal writing we will use the notation `x ≈ y` to assert that `x` and `y`
-are similar elements in a large strict preorder `P`.
+**Notation.** In informal writing we will use the notation `x ≍ y` to assert
+that `x` and `y` are similar elements in a large strict preorder `P`. The symbol
+`≍` is the unicode symbol [Equivalent To](https://codepoints.net/U+224d)
+(agda-input: `\asymp`).
 
 ## Definitions
 
