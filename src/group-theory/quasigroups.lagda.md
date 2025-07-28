@@ -15,6 +15,8 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import foundation-core.function-types
+
 open import group-theory.left-quasigroups
 open import group-theory.right-quasigroups
 
@@ -28,7 +30,12 @@ open import structured-types.magmas
 {{#concept "Quasigroups" Agda=Quasigroup}} are both
 [left](group-theory.left-quasigroups.md) and
 [right](group-theory.right-quasigroups.md) quasigroups with a compatible
-multiplication.
+multiplication. In
+[`algebraic-theory-of-quasigroups`](universal-algebra.algebraic-theory-of-quasigroups.md)
+we show that quasigroups form an
+[algebraic variety](universal-algebra.algebraic-variaties.md), while in
+[`wild-quasigroups`](structured-types.wild-quasigroups.md) we show that they are
+precisely the wild quasigroups whose underlying type is a set.
 
 ## Definitions
 
@@ -36,8 +43,9 @@ multiplication.
 Quasigroup : (l : Level) → UU (lsuc l)
 Quasigroup l =
   Σ (Set l) λ Q → Σ (type-Set Q → type-Set Q → type-Set Q)
-  (λ mul → Σ (type-Set Q → type-Set Q → type-Set Q)
-  (λ left-div → Σ (type-Set Q → type-Set Q → type-Set Q) (λ right-div →
+  ( λ mul → Σ (type-Set Q → type-Set Q → type-Set Q)
+  ( λ left-div → Σ (type-Set Q → type-Set Q → type-Set Q)
+  ( λ right-div →
   is-left-Quasigroup Q mul left-div × is-right-Quasigroup Q mul right-div)))
 
 module _
@@ -84,4 +92,30 @@ module _
     mul-Quasigroup right-div-Quasigroup
   is-right-cancellative-right-div-Quasigroup =
     pr2 (pr2 (pr2 (pr2 (pr2 (pr2 Q)))))
+```
+
+## Properties
+
+### Multiplication in a quasigroup is a [binary equivalence](foundation.binary-equivalences.md)
+
+```agda
+module _
+  {l : Level} (Q : Quasigroup l)
+  where
+
+  is-binary-equiv-mul-Quasigroup : is-binary-equiv (mul-Quasigroup Q)
+  pr1 (pr1 (pr1 is-binary-equiv-mul-Quasigroup x)) y =
+    right-div-Quasigroup Q y x
+  pr2 (pr1 (pr1 is-binary-equiv-mul-Quasigroup x)) y =
+    inv (is-left-cancellative-right-div-Quasigroup Q x y)
+  pr1 (pr2 (pr1 is-binary-equiv-mul-Quasigroup x)) y =
+    right-div-Quasigroup Q y x
+  pr2 (pr2 (pr1 is-binary-equiv-mul-Quasigroup x)) y =
+    inv (is-right-cancellative-right-div-Quasigroup Q x y)
+  pr1 (pr1 (pr2 is-binary-equiv-mul-Quasigroup x)) y = left-div-Quasigroup Q x y
+  pr2 (pr1 (pr2 is-binary-equiv-mul-Quasigroup x)) y =
+    inv (is-left-cancellative-left-div-Quasigroup Q x y)
+  pr1 (pr2 (pr2 is-binary-equiv-mul-Quasigroup x)) y = left-div-Quasigroup Q x y
+  pr2 (pr2 (pr2 is-binary-equiv-mul-Quasigroup x)) y =
+    inv (is-right-cancellative-left-div-Quasigroup Q x y)
 ```
