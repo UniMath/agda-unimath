@@ -1,6 +1,8 @@
 # Wild quasigroups
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module structured-types.wild-quasigroups where
 ```
 
