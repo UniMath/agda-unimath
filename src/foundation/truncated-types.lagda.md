@@ -21,7 +21,6 @@ open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.identity-types
-open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 ```
