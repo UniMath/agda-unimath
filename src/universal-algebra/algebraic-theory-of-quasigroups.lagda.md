@@ -19,22 +19,12 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-identifications
-open import foundation-core.function-types
-open import foundation-core.homotopies
-open import foundation-core.sets
-
-open import group-theory.left-quasigroups
-open import group-theory.right-quasigroups
 open import group-theory.quasigroups
 
 open import lists.tuples
 
-open import universal-algebra.abstract-equations-over-signatures
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
-open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
 
