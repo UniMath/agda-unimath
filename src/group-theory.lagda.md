@@ -117,7 +117,6 @@ open import group-theory.kernels-homomorphisms-groups public
 open import group-theory.large-semigroups public
 open import group-theory.left-quasigroups public
 open import group-theory.loop-groups-sets public
-open import group-theory.loops public
 open import group-theory.mere-equivalences-concrete-group-actions public
 open import group-theory.mere-equivalences-group-actions public
 open import group-theory.minkowski-multiplication-commutative-monoids public
@@ -207,5 +206,7 @@ open import group-theory.trivial-concrete-groups public
 open import group-theory.trivial-group-homomorphisms public
 open import group-theory.trivial-groups public
 open import group-theory.trivial-subgroups public
+open import group-theory.units-quasigroups public
+open import group-theory.unordered-tuples-in-commutative-monoids public
 open import group-theory.wild-representations-monoids public
 ```
