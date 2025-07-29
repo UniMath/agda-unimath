@@ -68,12 +68,12 @@ module _
 
 ### Medial H-spaces are commutative and associative
 
-As the binary homotopy showing `M` is medial is structure rather than a
-property, so too should these commutators and associators be thought of as
-structure. In principle, one may hope for an infinite tower of coherences
-showing `M` to be something like an `E_n` space. This we do not formalize, as
-the coherence problem for internal higher-algebraic structures in homotopy type
-theory remains an open problem, but we note it for the interested reader.
+As the homotopy showing `M` is medial is structure rather than a property, so
+too should these commutators and associators be thought of as structure. In
+principle, one may hope for an infinite tower of coherences showing `M` to be
+something like an `E_n` space. This we do not formalize, as the coherence
+problem for internal higher-algebraic structures in homotopy type theory remains
+an open problem, but we note it for the interested reader.
 
 ```agda
 module _
