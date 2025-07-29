@@ -94,6 +94,7 @@ open import group-theory.homomorphisms-group-actions public
 open import group-theory.homomorphisms-groups public
 open import group-theory.homomorphisms-groups-equipped-with-normal-subgroups public
 open import group-theory.homomorphisms-monoids public
+open import group-theory.homomorphisms-quasigroups public
 open import group-theory.homomorphisms-semigroups public
 open import group-theory.homotopy-automorphism-groups public
 open import group-theory.images-of-group-homomorphisms public
@@ -109,6 +110,7 @@ open import group-theory.isomorphisms-concrete-groups public
 open import group-theory.isomorphisms-group-actions public
 open import group-theory.isomorphisms-groups public
 open import group-theory.isomorphisms-monoids public
+open import group-theory.isomorphisms-quasigroups public
 open import group-theory.isomorphisms-semigroups public
 open import group-theory.iterated-cartesian-products-concrete-groups public
 open import group-theory.kernels-homomorphisms-abelian-groups public
