@@ -55,6 +55,15 @@ module _
   has-left-unit-Quasigroup : UU l
   has-left-unit-Quasigroup =
     Σ (type-Quasigroup Q) (λ e → is-left-unit-Quasigroup e)
+
+  element-has-left-unit-Quasigroup :
+    has-left-unit-Quasigroup → type-Quasigroup Q
+  element-has-left-unit-Quasigroup e = pr1 e
+
+  is-left-unit-has-left-unit-Quasigroup :
+    (e : has-left-unit-Quasigroup) →
+    is-left-unit-Quasigroup (element-has-left-unit-Quasigroup e)
+  is-left-unit-has-left-unit-Quasigroup e = pr2 e
 ```
 
 ### Right units in quasigroups
@@ -80,6 +89,15 @@ module _
   has-right-unit-Quasigroup : UU l
   has-right-unit-Quasigroup =
     Σ (type-Quasigroup Q) (λ f → is-right-unit-Quasigroup f)
+
+  element-has-right-unit-Quasigroup :
+    has-right-unit-Quasigroup → type-Quasigroup Q
+  element-has-right-unit-Quasigroup f = pr1 f
+
+  is-right-unit-has-right-unit-Quasigroup :
+    (f : has-right-unit-Quasigroup) →
+    is-right-unit-Quasigroup (element-has-right-unit-Quasigroup f)
+  is-right-unit-has-right-unit-Quasigroup f = pr2 f
 ```
 
 ### Units in quasigroups
