@@ -37,6 +37,11 @@ we show that quasigroups form an
 [`wild-quasigroups`](structured-types.wild-quasigroups.md) we show that they are
 precisely the wild quasigroups whose underlying type is a set.
 
+These give two distinct but interchangeably useful definitions of quasigroups:
+the universal-algebraic definition implies nice results such as the HSP theorem
+(to be formalized), while the binary-equivalence definition can be nicer to work
+with in practice as it carries only one binary operation rather than three.
+
 ## Definitions
 
 ```agda
