@@ -15,7 +15,6 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.equivalences
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -86,6 +85,8 @@ module _
 module _
   {l : Level}
   where
+
+  {-
   wild-Quasigroup-Quasigroup :
     ( A : Wild-Quasigroup l) → is-set (type-Wild-Quasigroup A) → Quasigroup l
   pr1 (wild-Quasigroup-Quasigroup ((A , _) , _) set-A) = A , set-A
@@ -131,4 +132,6 @@ module _
         eq-pair-Σ (eq-pair-Σ (eq-pair-Σ refl refl)
         ( eq-is-prop (is-prop-is-binary-equiv mul-Q)))
         ( eq-is-prop (is-prop-is-set Q))
+
+-}
 ```
