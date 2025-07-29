@@ -79,12 +79,17 @@ module _
 
 ## Properties
 
-### The latin square of an inhabited [wild quasigroup](structured-types.wild-quasigroups.md)
+### The Latin square of an inhabited [wild quasigroup](structured-types.wild-quasigroups.md)
 
 ```agda
 Wild-Quasigroup-Latin-Square :
-  {l : Level} → Wild-Quasigroup l → Latin-Square l l l
-Wild-Quasigroup-Latin-Square A = ?
+  {l : Level} → (A : Wild-Quasigroup l) →
+  is-inhabited (type-Wild-Quasigroup A) → Latin-Square l l l
+pr1 (Wild-Quasigroup-Latin-Square ((A , _) , _) inhb-A) = A , inhb-A
+pr1 (pr2 (Wild-Quasigroup-Latin-Square ((A , _) , _) inhb-A)) = A , inhb-A
+pr1 (pr2 (pr2 (Wild-Quasigroup-Latin-Square ((A , _) , _) inhb-A))) = A , inhb-A
+pr2 (pr2 (pr2 (Wild-Quasigroup-Latin-Square ((A , mul-A) , equiv-mul-A) _))) =
+  mul-A , equiv-mul-A
 ```
 
 ## See also
