@@ -11,6 +11,8 @@ open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.inhabited-types
 open import foundation.universe-levels
+
+open import structured-types.wild-quasigroups
 ```
 
 </details>
@@ -73,6 +75,16 @@ module _
   is-binary-equiv-mul-Latin-Square :
     is-binary-equiv mul-Latin-Square
   is-binary-equiv-mul-Latin-Square = pr2 (pr2 (pr2 (pr2 L)))
+```
+
+## Properties
+
+### The latin square of an inhabited [wild quasigroup](structured-types.wild-quasigroups.md)
+
+```agda
+Wild-Quasigroup-Latin-Square :
+  {l : Level} → Wild-Quasigroup l → Latin-Square l l l
+Wild-Quasigroup-Latin-Square A = ?
 ```
 
 ## See also
