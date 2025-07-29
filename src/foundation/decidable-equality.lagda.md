@@ -229,6 +229,11 @@ pr1 (pr2 (has-decidable-equality-eq-Decidable-Prop dec-A x y)) =
   is-set-has-decidable-equality dec-A x y
 pr2 (pr2 (has-decidable-equality-eq-Decidable-Prop dec-A x y)) =
   dec-A x y
+
+has-decidable-equality-eq-Prop :
+  {l : Level} {A : UU l} → has-decidable-equality A → (x y : A) → Prop l
+has-decidable-equality-eq-Prop dec-A x y =
+  prop-Decidable-Prop (has-decidable-equality-eq-Decidable-Prop dec-A x y)
 ```
 
 ### Having decidable equality is a property
