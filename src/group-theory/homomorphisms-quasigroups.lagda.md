@@ -9,8 +9,8 @@ module group-theory.homomorphisms-quasigroups where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.function-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
@@ -82,7 +82,8 @@ module _
   htpy-hom-Quasigroup : (f g : hom-Quasigroup Q R) → UU (l1 ⊔ l2)
   htpy-hom-Quasigroup (f , _) (g , _) = f ~ g
 
-  is-prop-htpy-hom-Quasigroup : (f g : hom-Quasigroup Q R) → is-prop (htpy-hom-Quasigroup f g)
+  is-prop-htpy-hom-Quasigroup :
+    (f g : hom-Quasigroup Q R) → is-prop (htpy-hom-Quasigroup f g)
   is-prop-htpy-hom-Quasigroup f g = is-prop-all-elements-equal lem
     where
     lem : all-elements-equal (htpy-hom-Quasigroup f g)
@@ -106,15 +107,20 @@ module _
         (eq-is-prop (is-prop-htpy-hom-Quasigroup (f , f-mul) (g , g-mul)))
 
   abstract
-    is-equiv-htpy-eq-hom-Quasigroup : (f g : hom-Quasigroup Q R) → is-equiv (htpy-eq-hom-Quasigroup f g)
-    is-equiv-htpy-eq-hom-Quasigroup f = fundamental-theorem-id (is-torsorial-htpy-hom-Quasigroup f) (htpy-eq-hom-Quasigroup f)
+    is-equiv-htpy-eq-hom-Quasigroup :
+      (f g : hom-Quasigroup Q R) → is-equiv (htpy-eq-hom-Quasigroup f g)
+    is-equiv-htpy-eq-hom-Quasigroup f =
+      fundamental-theorem-id (is-torsorial-htpy-hom-Quasigroup f) (htpy-eq-hom-Quasigroup f)
 
-  equiv-htpy-eq-hom-Quasigroup : (f g : hom-Quasigroup Q R) → (f ＝ g) ≃ htpy-hom-Quasigroup f g
+  equiv-htpy-eq-hom-Quasigroup :
+    (f g : hom-Quasigroup Q R) → (f ＝ g) ≃ htpy-hom-Quasigroup f g
   pr1 (equiv-htpy-eq-hom-Quasigroup f g) = htpy-eq-hom-Quasigroup f g
   pr2 (equiv-htpy-eq-hom-Quasigroup f g) = is-equiv-htpy-eq-hom-Quasigroup f g
 
-  eq-htpy-hom-Quasigroup : {f g : hom-Quasigroup Q R} → htpy-hom-Quasigroup f g → f ＝ g
-  eq-htpy-hom-Quasigroup {f} {g} = map-inv-equiv (equiv-htpy-eq-hom-Quasigroup f g)
+  eq-htpy-hom-Quasigroup :
+    {f g : hom-Quasigroup Q R} → htpy-hom-Quasigroup f g → f ＝ g
+  eq-htpy-hom-Quasigroup {f} {g} =
+    map-inv-equiv (equiv-htpy-eq-hom-Quasigroup f g)
 ```
 
 ## Properties
@@ -123,22 +129,27 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (Q : Quasigroup l1) (R : Quasigroup l2) (f : hom-Quasigroup Q R)
+  {l1 l2 : Level} (Q : Quasigroup l1) (R : Quasigroup l2)
+  (f : hom-Quasigroup Q R)
   where
 
-{-
   preserves-left-div-Quasigroup :
     ( x y : type-Quasigroup Q) →
     map-hom-Quasigroup Q R f (left-div-Quasigroup Q x y) ＝
     left-div-Quasigroup R (map-hom-Quasigroup Q R f x)
       ( map-hom-Quasigroup Q R f y)
-  preserves-left-div-Quasigroup x y = {!   !}
+  preserves-left-div-Quasigroup x y = equational-reasoning
+    map-hom-Quasigroup Q R f (left-div-Quasigroup Q x y)
+    ＝ {!   !}
+      by {!   !}
+    ＝ left-div-Quasigroup R (map-hom-Quasigroup Q R f x)
+      ( map-hom-Quasigroup Q R f y)
+      by {!   !}
 
-  1preserves-right-div-Quasigroup :
+  preserves-right-div-Quasigroup :
     ( x y : type-Quasigroup Q) →
     map-hom-Quasigroup Q R f (right-div-Quasigroup Q x y) ＝
     right-div-Quasigroup R (map-hom-Quasigroup Q R f x)
       ( map-hom-Quasigroup Q R f y)
   preserves-right-div-Quasigroup x y = {!   !}
--}
 ```
