@@ -14,11 +14,11 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.magmas
-open import structured-types.morphisms-magmas
-open import structured-types.morphisms-h-spaces
-open import structured-types.product-magmas
 open import structured-types.h-spaces
+open import structured-types.magmas
+open import structured-types.morphisms-h-spaces
+open import structured-types.morphisms-magmas
+open import structured-types.product-magmas
 ```
 
 </details>
