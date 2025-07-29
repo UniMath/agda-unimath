@@ -21,6 +21,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.decidable-propositions
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
@@ -215,6 +216,19 @@ module _
         ( λ x y → is-prop-Eq-has-decidable-equality d)
         ( λ x → refl-Eq-has-decidable-equality d x)
         ( λ x y → eq-Eq-has-decidable-equality d)
+```
+
+### The [decidable proposition](foundation-core.decidable-propositions.md) of equality in a type with decidable equality
+
+```agda
+has-decidable-equality-eq-Decidable-Prop :
+  {l : Level} {A : UU l} → has-decidable-equality A →
+  (x y : A) → Decidable-Prop l
+pr1 (has-decidable-equality-eq-Decidable-Prop _ x y) = x ＝ y
+pr1 (pr2 (has-decidable-equality-eq-Decidable-Prop dec-A x y)) =
+  is-set-has-decidable-equality dec-A x y
+pr2 (pr2 (has-decidable-equality-eq-Decidable-Prop dec-A x y)) =
+  dec-A x y
 ```
 
 ### Having decidable equality is a property
