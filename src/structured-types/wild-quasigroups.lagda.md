@@ -13,14 +13,15 @@ open import foundation.automorphisms
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.equivalences
+open import foundation.sets
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.sets
 
 open import group-theory.quasigroups
 
@@ -125,5 +126,9 @@ module _
     pr2 (pr1 (pr2 equiv-wild-Quasigroup-Quasigroup)) Q = {!   !}
     pr1 (pr2 (pr2 equiv-wild-Quasigroup-Quasigroup)) Q =
       ( Quasigroup-wild-Quasigroup Q) , is-set-Quasigroup Q
-    pr2 (pr2 (pr2 equiv-wild-Quasigroup-Quasigroup)) Q = {!   !}
+    pr2 (pr2 (pr2 equiv-wild-Quasigroup-Quasigroup))
+      (((Q , mul-Q) , equiv-mul-Q) , set-Q) =
+        eq-pair-Σ (eq-pair-Σ (eq-pair-Σ refl refl)
+        ( eq-is-prop (is-prop-is-binary-equiv mul-Q)))
+        ( eq-is-prop (is-prop-is-set Q))
 ```
