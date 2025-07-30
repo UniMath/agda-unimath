@@ -8,27 +8,27 @@ module set-theory.countable-sets where
 
 ```agda
 open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.type-arithmetic-natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
-open import foundation.embeddings
 open import foundation.decidable-types
-open import foundation.decidable-equality
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.empty-types
-open import foundation.injective-maps
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
+open import foundation.injective-maps
 open import foundation.maybe
 open import foundation.negated-equality
 open import foundation.negation
@@ -527,7 +527,8 @@ module _
     minimal-preimage-enumerated-decidable-Set x =
       let
         open
-          do-syntax-trunc-Prop (minimal-preimage-prop-enumerated-decidable-Set x)
+          do-syntax-trunc-Prop
+            ( minimal-preimage-prop-enumerated-decidable-Set x)
       in do
         m ← is-surjective-map-enumeration X e (unit-Maybe x)
         well-ordering-principle-ℕ

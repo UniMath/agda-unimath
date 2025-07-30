@@ -10,32 +10,34 @@ module foundation.axiom-of-countable-choice where
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types
-open import foundation.axiom-of-choice
-open import foundation.raising-universe-levels
 open import foundation.action-on-identifications-functions
-open import foundation.equivalences
-open import foundation.identity-types
-open import foundation.embeddings
-open import foundation.decidable-equality
-open import foundation.unit-type
-open import foundation.function-types
-open import foundation.transport-along-identifications
+open import foundation.axiom-of-choice
 open import foundation.coproduct-types
+open import foundation.decidable-equality
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.inhabited-types
-open import foundation.propositional-truncations
 open import foundation.maybe
-open import foundation.universe-levels
-open import set-theory.countable-sets
+open import foundation.propositional-truncations
+open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.transport-along-identifications
+open import foundation.unit-type
 open import foundation.univalence
+open import foundation.universe-levels
+
+open import set-theory.countable-sets
 ```
 
 </details>
 
 ## Idea
 
-The {{#concept "axiom of countable choice" WD="axiom of countable choice" WDID=Q1000116 Agda=ACω}}
+The
+{{#concept "axiom of countable choice" WD="axiom of countable choice" WDID=Q1000116 Agda=ACω}}
 asserts that for every family of [inhabited](foundation.inhabited-types.md)
 types `B` indexed by the
 [natural numbers](elementary-number-theory.natural-numbers.md) `ℕ`, the type of
