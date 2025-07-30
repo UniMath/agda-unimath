@@ -127,30 +127,16 @@ level-ACω-level-ADC {l} adc f inhabited-f =
     (g , r-gn-g⟨n+1⟩) ←
       adc (A , is-set-A) (unit-trunc-Prop (0 , λ ())) R entire-R
     let
-      (n₀ , gn₀) = g zero-ℕ
-      dom-g : (m : ℕ) → pr1 (g m) ＝ n₀ +ℕ m
-      dom-g = ind-ℕ refl (λ m claim-m → inv (r-gn-g⟨n+1⟩ m) ∙ ap succ-ℕ claim-m)
-      h :
-        (m : ℕ) (k : classical-Fin (n₀ +ℕ m)) →
-        type-Set (f (pr1 k))
-      h m =
-        map-eq
-          ( ap
-            ( λ x → (k : classical-Fin x) → type-Set (f (pr1 k)))
-            ( dom-g m))
-          ( pr2 (g m))
-    unit-trunc-Prop
-      ( λ n →
-        rec-coproduct
-          ( λ n<n₀ → gn₀ (n , n<n₀))
-          ( λ n₀≤n →
-            let
-              (m , m+n₀=n) = subtraction-leq-ℕ n₀ n n₀≤n
-            in
-              map-eq
-                ( ap (pr1 ∘ f) (commutative-add-ℕ n₀ m ∙ m+n₀=n))
-                ( h (succ-ℕ m) (n₀ +ℕ m , succ-le-ℕ (n₀ +ℕ m))))
-          ( decide-le-leq-ℕ n n₀))
+      dom-g : (m : ℕ) → m ≤-ℕ pr1 (g m)
+      dom-g =
+        ind-ℕ
+          (leq-zero-ℕ (pr1 (g 0)))
+          (λ m m≤gn → tr (leq-ℕ (succ-ℕ m)) (r-gn-g⟨n+1⟩ m) m≤gn)
+      h : (m : ℕ) (k : classical-Fin m) → type-Set (f (pr1 k))
+      h =
+        λ m (k , k<m) →
+          pr2 (g m) (k , concatenate-le-leq-ℕ {k} {m} {pr1 (g m)} k<m (dom-g m))
+    unit-trunc-Prop (λ n → h (succ-ℕ n) (n , succ-le-ℕ n))
   where
     open
       do-syntax-trunc-Prop
