@@ -9,11 +9,10 @@ module foundation.axiom-of-countable-choice where
 ```agda
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.addition-natural-numbers
 
-open import foundation.dependent-pair-types
-open import foundation.propositional-truncations
-open import foundation.axiom-of-choice
-open import foundation.raising-universe-levels
 open import foundation.action-on-identifications-functions
 open import foundation.axiom-of-choice
 open import foundation.coproduct-types
@@ -21,9 +20,12 @@ open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.axiom-of-dependent-choice
 open import foundation.function-types
+open import univalent-combinatorics.classical-finite-types
 open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.binary-relations
 open import foundation.maybe
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
@@ -112,26 +114,64 @@ ACω-AC0 ac0 = level-ACω-level-AC0 ac0
 ```agda
 level-ACω-level-ADC : {l : Level} → level-ADC l lzero → level-ACω l
 level-ACω-level-ADC {l} adc f =
-  map-trunc-Prop
-    ( λ (g , R-gn-gsn) → {! g  !})
-    ( adc A (unit-trunc-Prop (0 , λ ())) R entire-R)
+  do
+    (g , r-gn-g⟨n+1⟩) ← adc A (unit-trunc-Prop (0 , λ ())) R entire-R
+    let
+      (n₀ , gn₀) = g zero-ℕ
+      dom-g : (m : ℕ) → pr1 (g m) ＝ n₀ +ℕ m
+      dom-g = ind-ℕ refl (λ m claim-m → inv (r-gn-g⟨n+1⟩ m) ∙ ap succ-ℕ claim-m)
+      h :
+        (m : ℕ) (k : classical-Fin (n₀ +ℕ m)) →
+        type-Inhabited-Type (f (pr1 k))
+      h m =
+        map-eq
+          ( ap
+            ( λ x → (k : classical-Fin x) → type-Inhabited-Type (f (pr1 k)))
+            ( dom-g m))
+          ( pr2 (g m))
+    unit-trunc-Prop
+      ( λ n →
+        rec-coproduct
+          ( λ n<n₀ → gn₀ (n , n<n₀))
+          ( λ n₀≤n →
+            let
+              (m , m+n₀=n) = subtraction-leq-ℕ n₀ n n₀≤n
+            in
+              map-eq
+                ( ap (pr1 ∘ f) (commutative-add-ℕ n₀ m ∙ m+n₀=n))
+                ( h (succ-ℕ m) (n₀ +ℕ m , succ-le-ℕ (n₀ +ℕ m))))
+          ( decide-le-leq-ℕ n n₀))
   where
-    A = Σ ℕ (λ n → (k : Fin n) → type-Inhabited-Type (f (nat-Fin n k)))
-    R : A → A → UU lzero
+    open
+      do-syntax-trunc-Prop
+        ( is-inhabited-Prop ((n : ℕ) → type-Inhabited-Type (f n)))
+    A : UU l
+    A =
+      Σ ℕ
+        ( λ n →
+          (k : classical-Fin n) →
+          type-Inhabited-Type (f (nat-classical-Fin n k)))
+    R : Relation lzero A
     R (m , _) (n , _) = succ-ℕ m ＝ n
     entire-R : is-entire-Relation R
     entire-R (n , f<n) =
-      map-trunc-Prop
+      rec-trunc-Prop
+        ( is-inhabited-Prop (Σ A (R (n , f<n))))
         ( λ fn →
-          (
-            ( succ-ℕ n ,
-              λ where
-                (inr star) → fn
-                (inl k) → f<n k) ,
-            refl))
+          unit-trunc-Prop
+            ( ( succ-ℕ n ,
+                λ (k , k<sn) →
+                  rec-coproduct
+                    ( λ k<n → f<n (k , k<n))
+                    ( λ n≤k →
+                      map-eq
+                        ( ap
+                          ( type-Inhabited-Type ∘ f)
+                          ( antisymmetric-leq-ℕ n k
+                            ( n≤k)
+                            ( leq-le-succ-ℕ k n k<sn)))
+                        ( fn))
+                    ( decide-le-leq-ℕ k n)) ,
+              refl))
         ( is-inhabited-type-Inhabited-Type (f n))
-    extend :
-      (g : ℕ → A) → ((n : ℕ) → R (g n) (g (succ-ℕ n))) →
-      (n : ℕ) → type-Inhabited-Type (f n)
-    extend g R-gn-gsn zero-ℕ = {!  !}
 ```
