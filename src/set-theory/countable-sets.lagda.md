@@ -38,6 +38,7 @@ open import foundation.raising-universe-levels
 open import foundation.retracts-of-types
 open import foundation.sets
 open import foundation.shifting-sequences
+open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -508,31 +509,31 @@ module _
   (e : enumeration X) (K : has-decidable-equality (type-Set X))
   where
 
-  preimage-prop-enumerated-decidable-Set : type-Set X → ℕ → Prop l
-  preimage-prop-enumerated-decidable-Set x n =
-    Id-Prop (maybe-Set X) (map-enumeration X e n) (unit-Maybe x)
+  preimage-prop-enumeration-discrete-Set : type-Set X → subtype l ℕ
+  preimage-prop-enumeration-discrete-Set x =
+    preimage-Set (maybe-Set X) (map-enumeration X e) (unit-Maybe x)
 
-  preimage-enumerated-decidable-Set : type-Set X → ℕ → UU l
-  preimage-enumerated-decidable-Set x n =
-    type-Prop (preimage-prop-enumerated-decidable-Set x n)
+  preimage-enumeration-discrete-Set : type-Set X → ℕ → UU l
+  preimage-enumeration-discrete-Set x n =
+    type-Prop (preimage-prop-enumeration-discrete-Set x n)
 
-  minimal-preimage-prop-enumerated-decidable-Set : type-Set X → Prop l
-  minimal-preimage-prop-enumerated-decidable-Set x =
-    minimal-element-ℕ-Prop (preimage-prop-enumerated-decidable-Set x)
+  minimal-preimage-prop-enumeration-discrete-Set : type-Set X → Prop l
+  minimal-preimage-prop-enumeration-discrete-Set x =
+    minimal-element-ℕ-Prop (preimage-prop-enumeration-discrete-Set x)
 
   abstract
-    minimal-preimage-enumerated-decidable-Set :
+    minimal-preimage-enumeration-discrete-Set :
       (x : type-Set X) →
-      type-Prop (minimal-preimage-prop-enumerated-decidable-Set x)
-    minimal-preimage-enumerated-decidable-Set x =
+      type-Prop (minimal-preimage-prop-enumeration-discrete-Set x)
+    minimal-preimage-enumeration-discrete-Set x =
       let
         open
           do-syntax-trunc-Prop
-            ( minimal-preimage-prop-enumerated-decidable-Set x)
+            ( minimal-preimage-prop-enumeration-discrete-Set x)
       in do
         m ← is-surjective-map-enumeration X e (unit-Maybe x)
         well-ordering-principle-ℕ
-          ( preimage-enumerated-decidable-Set x)
+          ( preimage-enumeration-discrete-Set x)
           ( λ n →
             has-decidable-equality-coproduct
               ( K)
@@ -541,28 +542,28 @@ module _
               ( unit-Maybe x))
           ( m)
 
-  map-emb-natural-enumerated-decidable-Set : type-Set X → ℕ
-  map-emb-natural-enumerated-decidable-Set x =
-    pr1 (minimal-preimage-enumerated-decidable-Set x)
+  map-emb-ℕ-enumeration-discrete-Set : type-Set X → ℕ
+  map-emb-ℕ-enumeration-discrete-Set x =
+    pr1 (minimal-preimage-enumeration-discrete-Set x)
 
   abstract
-    is-emb-map-emb-natural-enumerated-decidable-Set :
-      is-emb map-emb-natural-enumerated-decidable-Set
-    is-emb-map-emb-natural-enumerated-decidable-Set =
+    is-emb-map-emb-ℕ-enumeration-discrete-Set :
+      is-emb map-emb-ℕ-enumeration-discrete-Set
+    is-emb-map-emb-ℕ-enumeration-discrete-Set =
       is-emb-is-injective
         ( is-set-ℕ)
         ( λ {x} {y} fx=fy →
           let
-            (nx , enx=unit-x , _) = minimal-preimage-enumerated-decidable-Set x
-            (ny , eny=unit-y , _) = minimal-preimage-enumerated-decidable-Set y
+            (nx , enx=unit-x , _) = minimal-preimage-enumeration-discrete-Set x
+            (ny , eny=unit-y , _) = minimal-preimage-enumeration-discrete-Set y
           in
             is-injective-unit-Maybe
               ( inv enx=unit-x ∙ ap (map-enumeration X e) fx=fy ∙ eny=unit-y))
 
-  emb-natural-enumerated-decidable-Set : type-Set X ↪ ℕ
-  emb-natural-enumerated-decidable-Set =
-    ( map-emb-natural-enumerated-decidable-Set ,
-      is-emb-map-emb-natural-enumerated-decidable-Set)
+  emb-ℕ-enumeration-discrete-Set : type-Set X ↪ ℕ
+  emb-ℕ-enumeration-discrete-Set =
+    ( map-emb-ℕ-enumeration-discrete-Set ,
+      is-emb-map-emb-ℕ-enumeration-discrete-Set)
 
 module _
   {l : Level} (X : Set l)
@@ -570,12 +571,12 @@ module _
   where
 
   abstract
-    exists-emb-natural-countable-decidable-Set :
+    exists-emb-ℕ-countable-discrete-Set :
       exists (type-Set X → ℕ) is-emb-Prop
-    exists-emb-natural-countable-decidable-Set =
+    exists-emb-ℕ-countable-discrete-Set =
       rec-trunc-Prop
         ( ∃ (type-Set X → ℕ) is-emb-Prop)
-        ( λ e → unit-trunc-Prop (emb-natural-enumerated-decidable-Set X e K))
+        ( λ e → unit-trunc-Prop (emb-ℕ-enumeration-discrete-Set X e K))
         ( H)
 ```
 

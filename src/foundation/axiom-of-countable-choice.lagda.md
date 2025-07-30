@@ -45,7 +45,7 @@ open import univalent-combinatorics.classical-finite-types
 The
 {{#concept "axiom of countable choice" WD="axiom of countable choice" WDID=Q1000116 Agda=ACω}}
 asserts that for every family of [inhabited](foundation.inhabited-types.md)
-types `B` indexed by the
+[sets](foundation.sets.md) `B` indexed by the
 [natural numbers](elementary-number-theory.natural-numbers.md) `ℕ`, the type of
 sections of that family `(n : ℕ) → B n` is inhabited.
 
@@ -72,12 +72,9 @@ module _
   (decidable-equality-X : has-decidable-equality (type-Set X))
   where
 
-  choice-countable-decidable-set-ACω :
-    {l2 : Level} → ACω →
-    (F : type-Set X → Set l2) →
-    (inhabited-F : (x : type-Set X) → is-inhabited (type-Set (F x))) →
-    is-inhabited ((x : type-Set X) → type-Set (F x))
-  choice-countable-decidable-set-ACω {l2} acω F inhabited-F =
+  choice-countable-discrete-set-ACω :
+    {l2 : Level} → ACω → (F : type-Set X → Set l2) → instance-choice-Set X F
+  choice-countable-discrete-set-ACω {l2} acω F inhabited-F =
     let
       open
         do-syntax-trunc-Prop
@@ -95,7 +92,7 @@ module _
         ( λ x →
           let
             ( n , en=unit-x , _) =
-              minimal-preimage-enumerated-decidable-Set
+              minimal-preimage-enumerated-discrete-Set
                 ( X)
                 ( e)
                 ( decidable-equality-X)
