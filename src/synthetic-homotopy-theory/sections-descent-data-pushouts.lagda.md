@@ -324,9 +324,9 @@ module _
       ( coherence-square-dependent-cocone _ _ _ _ d s))
 
   abstract
-    is-equiv-section-descent-data-depedent-cocone-span-diagram :
+    is-equiv-section-descent-data-dependent-cocone-span-diagram :
       is-equiv section-descent-data-dependent-cocone-span-diagram
-    is-equiv-section-descent-data-depedent-cocone-span-diagram =
+    is-equiv-section-descent-data-dependent-cocone-span-diagram =
       is-equiv-map-Σ _
         ( is-equiv-map-Π-is-fiberwise-equiv
           ( is-equiv-left-map-family-with-descent-data-pushout P))
@@ -366,7 +366,7 @@ module _
         ( triangle-section-descent-data-section-family-cocone-span-diagram)
         ( dependent-universal-property-universal-property-pushout _ _ _ up-c
           ( family-cocone-family-with-descent-data-pushout P))
-        ( is-equiv-section-descent-data-depedent-cocone-span-diagram)
+        ( is-equiv-section-descent-data-dependent-cocone-span-diagram)
 ```
 
 As a corollary, for any given section `(tA, tB, tS)` of `(PA, PB, PS)`, there is

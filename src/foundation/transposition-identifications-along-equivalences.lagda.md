@@ -26,15 +26,15 @@ open import foundation-core.homotopies
 Consider an [equivalence](foundation-core.equivalences.md) `e : A ≃ B` and two
 elements `x : A` and `y : B`. The
 {{#concept "transposition" Disambiguation="identifications along equivalences" Agda=eq-transpose-equiv}}
-is an equivalence
+is an equivalence of [identity types](foundation-core.identity-types.md)
 
 ```text
-  (e x ＝ y) ≃ (x ＝ e⁻¹ y)
+  (e x ＝ y) ≃ (x ＝ e⁻¹ y).
 ```
 
-of [identity types](foundation-core.identity-types.md). There are two ways of
-constructing this equivalence. One way uses the fact that `e⁻¹` is a
-[section](foundation-core.sections.md) of `e`, from which it follows that
+There are two ways of constructing this equivalence. One way uses the fact that
+`e⁻¹` is a [section](foundation-core.sections.md) of `e`, from which it follows
+that
 
 ```text
  (e x ＝ y) ≃ (e x ＝ e e⁻¹ y) ≃ (x ＝ e⁻¹ y).

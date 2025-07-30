@@ -7,6 +7,8 @@ module metric-spaces.pseudometric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.positive-rational-numbers
+
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
@@ -86,6 +88,21 @@ module _
   structure-Pseudometric-Space : Premetric l2 type-Pseudometric-Space
   structure-Pseudometric-Space =
     structure-Premetric-Space premetric-Pseudometric-Space
+
+  neighborhood-Pseudometric-Space : ℚ⁺ → Relation l2 type-Pseudometric-Space
+  neighborhood-Pseudometric-Space =
+    neighborhood-Premetric-Space premetric-Pseudometric-Space
+
+  is-prop-neighborhood-Pseudometric-Space :
+    (d : ℚ⁺) (x y : type-Pseudometric-Space) →
+    is-prop (neighborhood-Pseudometric-Space d x y)
+  is-prop-neighborhood-Pseudometric-Space =
+    is-prop-neighborhood-Premetric-Space premetric-Pseudometric-Space
+
+  is-upper-bound-dist-Pseudometric-Space :
+    (x y : type-Pseudometric-Space) (d : ℚ⁺) → UU l2
+  is-upper-bound-dist-Pseudometric-Space =
+    is-upper-bound-dist-Premetric-Space premetric-Pseudometric-Space
 
   is-pseudometric-structure-Pseudometric-Space :
     is-pseudometric-Premetric structure-Pseudometric-Space

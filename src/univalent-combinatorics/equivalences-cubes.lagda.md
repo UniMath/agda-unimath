@@ -149,6 +149,6 @@ eq-htpy-equiv-cube k X Y e f =
 ### Labelings of cubes
 
 ```agda
-labelling-cube : (k : ℕ) (X : cube k) → UU lzero
-labelling-cube k X = equiv-cube k (standard-cube k) X
+labeling-cube : (k : ℕ) (X : cube k) → UU lzero
+labeling-cube k X = equiv-cube k (standard-cube k) X
 ```

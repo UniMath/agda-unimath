@@ -15,6 +15,7 @@ open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
@@ -134,16 +135,14 @@ abstract
     let
       p≤q = transitive-leq-ℚ p r q r≤q p≤r
     in
-      trichotomy-le-ℚ
+      trichotomy-sign-ℚ
         ( s)
-        ( zero-ℚ)
-        ( λ s<0 →
+        ( λ neg-s →
           is-in-reversed-unordered-closed-interval-is-in-closed-interval-ℚ
             (q *ℚ s)
             (p *ℚ s)
             (r *ℚ s)
-            ( left-mul-negative-closed-interval-ℚ p q r s H
-              ( is-negative-le-zero-ℚ s s<0)))
+            ( left-mul-negative-closed-interval-ℚ p q r s H neg-s))
         ( λ s=0 →
           let
             ps=0 = ap (p *ℚ_) s=0 ∙ right-zero-law-mul-ℚ p
@@ -160,13 +159,12 @@ abstract
               ( _)
               ( rs=0 ∙
                 inv (ap-binary max-ℚ ps=0 qs=0 ∙ idempotent-max-ℚ zero-ℚ)))
-        ( λ 0<s →
+        ( λ pos-s →
           is-in-unordered-closed-interval-is-in-closed-interval-ℚ
             ( p *ℚ s)
             ( q *ℚ s)
             ( r *ℚ s)
-            ( left-mul-positive-closed-interval-ℚ p q r s H
-              ( is-positive-le-zero-ℚ s 0<s)))
+            ( left-mul-positive-closed-interval-ℚ p q r s H pos-s))
 
 abstract
   right-mul-closed-interval-ℚ :

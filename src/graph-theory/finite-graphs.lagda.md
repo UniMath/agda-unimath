@@ -94,7 +94,7 @@ Finite-Undirected-Graph' l1 l2 =
               map-equiv ((σ y x) ∘e (σ x y)) ~ id)))
 ```
 
-The degree of a vertex x of a graph G is the set of occurences of x as an
+The degree of a vertex x of a graph G is the set of occurrences of x as an
 endpoint of x. Note that the unordered pair {x,x} adds two elements to the
 degree of x.
 

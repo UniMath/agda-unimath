@@ -16,6 +16,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -49,12 +50,23 @@ positive-reciprocal-rational-ℕ⁺ n = inv-ℚ⁺ (positive-rational-ℕ⁺ n)
 
 reciprocal-rational-ℕ⁺ : ℕ⁺ → ℚ
 reciprocal-rational-ℕ⁺ n = rational-ℚ⁺ (positive-reciprocal-rational-ℕ⁺ n)
+
+positive-reciprocal-rational-succ-ℕ : ℕ → ℚ⁺
+positive-reciprocal-rational-succ-ℕ n =
+  positive-reciprocal-rational-ℕ⁺ (succ-nonzero-ℕ' n)
+
+reciprocal-rational-succ-ℕ : ℕ → ℚ
+reciprocal-rational-succ-ℕ n =
+  reciprocal-rational-ℕ⁺ (succ-nonzero-ℕ' n)
 ```
 
 ### If `m ≤ n`, the reciprocal of `n` is less than or equal to the reciprocal of `n`
 
 ```agda
-abstract
+opaque
+  unfolding inv-ℚ⁺
+  unfolding leq-ℚ-Prop
+
   leq-reciprocal-rational-ℕ⁺ :
     (m n : ℕ⁺) → leq-ℕ⁺ m n →
     leq-ℚ (reciprocal-rational-ℕ⁺ n) (reciprocal-rational-ℕ⁺ m)
@@ -69,7 +81,10 @@ abstract
 ### If `m < n`, the reciprocal of `n` is less than the reciprocal of `n`
 
 ```agda
-abstract
+opaque
+  unfolding inv-ℚ⁺
+  unfolding le-ℚ-Prop
+
   le-reciprocal-rational-ℕ⁺ :
     (m n : ℕ⁺) → le-ℕ⁺ m n →
     le-ℚ⁺

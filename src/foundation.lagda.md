@@ -58,6 +58,7 @@ open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.coalgebras-maybe public
 open import foundation.codiagonal-maps-of-types public
+open import foundation.coherently-constant-maps public
 open import foundation.coherently-idempotent-maps public
 open import foundation.coherently-invertible-maps public
 open import foundation.coinhabited-pairs-of-types public
@@ -194,9 +195,11 @@ open import foundation.fibered-equivalences public
 open import foundation.fibered-involutions public
 open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
+open import foundation.finite-sequences-set-quotients public
 open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
 open import foundation.fixed-points-endofunctions public
+open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
 open import foundation.function-types public
@@ -242,6 +245,8 @@ open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.induction-principle-propositional-truncation public
 open import foundation.infinitely-coherent-equivalences public
+open import foundation.infinity-connected-maps public
+open import foundation.infinity-connected-types public
 open import foundation.inhabited-subtypes public
 open import foundation.inhabited-types public
 open import foundation.injective-maps public
@@ -372,6 +377,7 @@ open import foundation.sections public
 open import foundation.separated-types-subuniverses public
 open import foundation.sequences public
 open import foundation.sequential-limits public
+open import foundation.set-coequalizers public
 open import foundation.set-presented-types public
 open import foundation.set-quotients public
 open import foundation.set-truncations public
@@ -496,7 +502,6 @@ open import foundation.unordered-pairs public
 open import foundation.unordered-pairs-of-types public
 open import foundation.unordered-tuples public
 open import foundation.unordered-tuples-of-types public
-open import foundation.vectors-set-quotients public
 open import foundation.vertical-composition-spans-of-spans public
 open import foundation.weak-function-extensionality public
 open import foundation.weak-limited-principle-of-omniscience public

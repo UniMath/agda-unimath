@@ -12,8 +12,17 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.identity-types
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
@@ -111,3 +120,74 @@ is-retraction-classical-standard-Fin {succ-ℕ k} (pair x p) =
       ( p)
       ( cong-nat-mod-succ-ℕ k x))
 ```
+
+#### The standard equivalence
+
+```agda
+equiv-classical-standard-Fin : (n : ℕ) → Fin n ≃ classical-Fin n
+pr1 (equiv-classical-standard-Fin n) = classical-standard-Fin n
+pr2 (equiv-classical-standard-Fin n) =
+  is-equiv-is-invertible
+    ( standard-classical-Fin n)
+    ( is-retraction-classical-standard-Fin {n})
+    ( is-section-classical-standard-Fin {n})
+```
+
+### The reverse equivalence
+
+The equivalence based on `nat-Fin-reverse` is occasionally useful.
+
+#### We define the reversed maps back and forth between the standard finite sets and the bounded natural numbers
+
+```agda
+classical-standard-Fin-reverse : (n : ℕ) (k : Fin n) → classical-Fin n
+classical-standard-Fin-reverse (succ-ℕ n) (inr star) = zero-ℕ , star
+classical-standard-Fin-reverse (succ-ℕ n) (inl k) =
+  ind-Σ (λ m m<n → (succ-ℕ m , m<n)) (classical-standard-Fin-reverse n k)
+
+standard-classical-Fin-reverse : (n : ℕ) → Σ ℕ (λ k → le-ℕ k n) → Fin n
+standard-classical-Fin-reverse (succ-ℕ n) (zero-ℕ , star) = inr star
+standard-classical-Fin-reverse (succ-ℕ n) (succ-ℕ k , H) =
+  inl (standard-classical-Fin-reverse n (k , H))
+```
+
+#### We show that these maps are mutual inverses
+
+```agda
+is-section-classical-standard-Fin-reverse :
+  (n : ℕ) →
+  is-section
+    ( classical-standard-Fin-reverse n)
+    ( standard-classical-Fin-reverse n)
+is-section-classical-standard-Fin-reverse (succ-ℕ n) (zero-ℕ , k<n) = refl
+is-section-classical-standard-Fin-reverse (succ-ℕ n) (succ-ℕ k , k<n) =
+  eq-pair-Σ
+    ( ap (succ-ℕ ∘ pr1) (is-section-classical-standard-Fin-reverse n (k , k<n)))
+    ( eq-type-Prop (le-ℕ-Prop k n))
+
+is-retraction-classical-standard-Fin-reverse :
+  (n : ℕ) →
+  is-retraction
+    ( classical-standard-Fin-reverse n)
+    ( standard-classical-Fin-reverse n)
+is-retraction-classical-standard-Fin-reverse (succ-ℕ n) (inl x) =
+  ap inl (is-retraction-classical-standard-Fin-reverse n x)
+is-retraction-classical-standard-Fin-reverse (succ-ℕ n) (inr star) = refl
+```
+
+#### The reversed equivalence
+
+```agda
+equiv-classical-standard-Fin-reverse : (n : ℕ) → Fin n ≃ classical-Fin n
+pr1 (equiv-classical-standard-Fin-reverse n) = classical-standard-Fin-reverse n
+pr2 (equiv-classical-standard-Fin-reverse n) =
+  is-equiv-is-invertible
+    ( standard-classical-Fin-reverse n)
+    ( is-section-classical-standard-Fin-reverse n)
+    ( is-retraction-classical-standard-Fin-reverse n)
+```
+
+## See also
+
+- [Standard finite types](univalent-combinatorics.classical-finite-types.md), an
+  inductively constructed set of `n` distinct elements

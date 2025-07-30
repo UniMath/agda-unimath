@@ -24,7 +24,7 @@ open import group-theory.torsors
 ## Idea
 
 A **concrete monoid**, or **univalent monoid**, is the homotopy type theoretic
-analogue of [monoids](group-theory.monoids.md). We define it as a
+analog of [monoids](group-theory.monoids.md). We define it as a
 [category](category-theory.categories.md) whose type of objects is
 [pointed](structured-types.pointed-types.md) and
 [connected](foundation.0-connected-types.md).

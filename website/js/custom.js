@@ -11,7 +11,7 @@ if (link) {
     'CONTRIBUTORS.md',
     'DESIGN-PRINCIPLES.md',
     'FILE-CONVENTIONS.md',
-    'GRANT-ACKNOWLEDGEMENTS.md',
+    'GRANT-ACKNOWLEDGMENTS.md',
     'HOME.md',
     'HOWTO-INSTALL.md',
     'LICENSE.md',

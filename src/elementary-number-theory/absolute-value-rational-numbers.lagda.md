@@ -15,6 +15,7 @@ open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -42,7 +43,9 @@ its negation.
 rational-abs-ℚ : ℚ → ℚ
 rational-abs-ℚ q = max-ℚ q (neg-ℚ q)
 
-abstract
+opaque
+  unfolding neg-ℚ
+
   is-nonnegative-rational-abs-ℚ : (q : ℚ) → is-nonnegative-ℚ (rational-abs-ℚ q)
   is-nonnegative-rational-abs-ℚ q =
     rec-coproduct
@@ -71,10 +74,25 @@ pr2 (abs-ℚ q) = is-nonnegative-rational-abs-ℚ q
 
 ## Properties
 
-### The absolute value of a nonnegative rational number is the number itself
+### Bounds on both `p` and `-p` are bounds on `|p|`
 
 ```agda
 abstract
+  leq-abs-leq-leq-neg-ℚ :
+    (p q : ℚ) → leq-ℚ p q → leq-ℚ (neg-ℚ p) q → leq-ℚ (rational-abs-ℚ p) q
+  leq-abs-leq-leq-neg-ℚ p q = leq-max-leq-both-ℚ q p (neg-ℚ p)
+
+  le-abs-le-le-neg-ℚ :
+    (p q : ℚ) → le-ℚ p q → le-ℚ (neg-ℚ p) q → le-ℚ (rational-abs-ℚ p) q
+  le-abs-le-le-neg-ℚ p q = le-max-le-both-ℚ q p (neg-ℚ p)
+```
+
+### The absolute value of a nonnegative rational number is the number itself
+
+```agda
+opaque
+  unfolding neg-ℚ
+
   abs-rational-ℚ⁰⁺ : (q : ℚ⁰⁺) → abs-ℚ (rational-ℚ⁰⁺ q) ＝ q
   abs-rational-ℚ⁰⁺ (q , nonneg-q) =
     eq-ℚ⁰⁺
@@ -130,7 +148,9 @@ abstract
 ### The absolute value of `q` is zero iff `q` is zero
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   eq-zero-eq-abs-zero-ℚ : (q : ℚ) → abs-ℚ q ＝ zero-ℚ⁰⁺ → q ＝ zero-ℚ
   eq-zero-eq-abs-zero-ℚ q abs=0 =
     rec-coproduct
@@ -193,7 +213,9 @@ abstract
 ### `|ab| = |a||b|`
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   abs-left-mul-nonnegative-ℚ :
     (q : ℚ) (p : ℚ⁰⁺) → abs-ℚ (rational-ℚ⁰⁺ p *ℚ q) ＝ p *ℚ⁰⁺ abs-ℚ q
   abs-left-mul-nonnegative-ℚ q p⁰⁺@(p , nonneg-p) with linear-leq-ℚ zero-ℚ q

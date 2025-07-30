@@ -25,7 +25,7 @@ open import order-theory.preorders
 ## Idea
 
 A
-{{#concept "sequence" Disambiguation="in a preorder" Agda=type-sequence-Preorder}}
+{{#concept "sequence" Disambiguation="in a preorder" Agda=sequence-type-Preorder}}
 in a [preorder](order-theory.preorders.md) is a
 [sequence](foundation.sequences.md) in its underlying type.
 
@@ -38,15 +38,15 @@ module _
   {l1 l2 : Level} (P : Preorder l1 l2)
   where
 
-  type-sequence-Preorder : UU l1
-  type-sequence-Preorder = sequence (type-Preorder P)
+  sequence-type-Preorder : UU l1
+  sequence-type-Preorder = sequence (type-Preorder P)
 ```
 
 ### Pointwise comparison on sequences in preorders
 
 ```agda
 module _
-  {l1 l2 : Level} (P : Preorder l1 l2) (u v : type-sequence-Preorder P)
+  {l1 l2 : Level} (P : Preorder l1 l2) (u v : sequence-type-Preorder P)
   where
 
   leq-value-prop-sequence-Preorder : ℕ → Prop l2
@@ -82,7 +82,7 @@ module _
     transitive-leq-Preorder P (u n) (v n) (w n) (J n) (I n)
 
   sequence-Preorder : Preorder l1 l2
-  pr1 sequence-Preorder = type-sequence-Preorder P
+  pr1 sequence-Preorder = sequence-type-Preorder P
   pr1 (pr2 sequence-Preorder) = leq-prop-sequence-Preorder P
   pr1 (pr2 (pr2 sequence-Preorder)) = refl-leq-sequence-Preorder
   pr2 (pr2 (pr2 sequence-Preorder)) = transitive-leq-sequence-Preorder

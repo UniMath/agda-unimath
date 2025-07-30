@@ -36,12 +36,15 @@ open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-sequences-complete-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
 open import metric-spaces.metric-spaces
 
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.distance-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
@@ -363,18 +366,15 @@ module _
         ( upper-real-lim-cauchy-approximation-leq-ℝ)
     is-located-lower-upper-cut-lim-cauchy-approximation-leq-ℝ p q p<q =
       let
-        open
-          do-syntax-trunc-Prop
-            ( lower-cut-lim-cauchy-approximation-leq-ℝ p ∨
-              upper-cut-lim-cauchy-approximation-leq-ℝ q)
-      in do
-        ε'⁺@(ε' , _) , 2ε'⁺<q-p ← double-le-ℚ⁺ (positive-diff-le-ℚ p q p<q)
-        ε⁺@(ε , _) , 2ε⁺<ε'⁺ ← double-le-ℚ⁺ ε'⁺
-        let
-          2ε' = ε' +ℚ ε'
-          2ε = ε +ℚ ε
-          4ε = 2ε +ℚ 2ε
-          xε = map-cauchy-approximation-leq-ℝ x ε⁺
+        ε'⁺@(ε' , _) , 2ε'⁺<q-p =
+          bound-double-le-ℚ⁺ (positive-diff-le-ℚ p q p<q)
+        ε⁺@(ε , _) , 2ε⁺<ε'⁺ =
+          bound-double-le-ℚ⁺ ε'⁺
+        2ε' = ε' +ℚ ε'
+        2ε = ε +ℚ ε
+        4ε = 2ε +ℚ 2ε
+        xε = map-cauchy-approximation-leq-ℝ x ε⁺
+      in
         map-disjunction
           ( lower-cut-ℝ xε (p +ℚ 2ε))
           ( lower-cut-lim-cauchy-approximation-leq-ℝ p)
@@ -443,60 +443,72 @@ module _
       ε+θ'+θ''=ε+θ =
         associative-add-ℚ _ _ _ ∙
         ap (ε +ℚ_) (ap rational-ℚ⁺ (eq-add-split-ℚ⁺ θ⁺))
+      ε+θ = real-ℚ (ε +ℚ θ)
+      ε+θ' = real-ℚ (ε +ℚ θ')
     in do
       ( r , xε+ε+θ'<r , r<xε+ε+θ) ←
         tr
-          ( le-ℝ (xε +ℝ real-ℚ (ε +ℚ θ')))
+          ( le-ℝ (xε +ℝ ε+θ'))
           ( associative-add-ℝ _ _ _ ∙
             ap ( xε +ℝ_) (add-real-ℚ _ _ ∙ ap real-ℚ ε+θ'+θ''=ε+θ))
           ( le-left-add-real-ℝ⁺
-            ( xε +ℝ (real-ℚ (ε +ℚ θ')))
+            ( xε +ℝ ε+θ')
             ( positive-real-ℚ⁺ θ''⁺))
       ( q , xε-ε-θ<q , q<xε-ε-θ') ←
         tr
-          ( λ y → le-ℝ y (xε -ℝ real-ℚ (ε +ℚ θ')))
+          ( λ y → le-ℝ y (xε -ℝ ε+θ'))
           ( associative-add-ℝ _ _ _ ∙
             ap
               ( xε +ℝ_)
               ( inv (distributive-neg-add-ℝ _ _) ∙
                 ap neg-ℝ (add-real-ℚ _ _ ∙ ap real-ℚ ε+θ'+θ''=ε+θ)))
-          ( le-diff-real-ℝ⁺ (xε -ℝ real-ℚ (ε +ℚ θ')) (positive-real-ℚ⁺ θ''⁺))
-      neighborhood-real-bound-each-leq-ℝ
+          ( le-diff-real-ℝ⁺ (xε -ℝ ε+θ') (positive-real-ℚ⁺ θ''⁺))
+      neighborhood-leq-dist-ℝ
         ( ε⁺ +ℚ⁺ θ⁺)
         ( xε)
         ( lim)
-        ( leq-le-ℝ
-          ( xε)
-          ( lim +ℝ real-ℚ (ε +ℚ θ))
-          ( le-transpose-left-diff-ℝ
+        ( leq-dist-leq-diff-ℝ
+          ( _)
+          ( _)
+          ( ε+θ)
+          ( swap-right-diff-leq-ℝ
             ( xε)
-            ( real-ℚ (ε +ℚ θ))
+            ( ε+θ)
             ( lim)
-            ( transitive-le-ℝ
-              ( xε -ℝ real-ℚ (ε +ℚ θ))
-              ( real-ℚ q)
-              ( lim)
-              ( le-real-is-in-lower-cut-ℚ
-                ( q)
-                ( lim)
-                ( intro-exists
-                  ( ε⁺ , θ'⁺)
-                  ( transpose-is-in-lower-cut-diff-ℝ xε (ε +ℚ θ') q q<xε-ε-θ')))
-              ( le-real-is-in-upper-cut-ℚ q (xε -ℝ real-ℚ (ε +ℚ θ)) xε-ε-θ<q))))
-        ( leq-le-ℝ
-          ( lim)
-          ( xε +ℝ real-ℚ (ε +ℚ θ))
-          ( transitive-le-ℝ
-            ( lim)
-            ( real-ℚ r)
-            ( xε +ℝ real-ℚ (ε +ℚ θ))
-            ( le-real-is-in-lower-cut-ℚ r (xε +ℝ real-ℚ (ε +ℚ θ)) r<xε+ε+θ)
-            ( le-real-is-in-upper-cut-ℚ
-              ( r)
+            ( leq-le-ℝ
+              ( xε -ℝ ε+θ)
               ( lim)
               ( intro-exists
-                ( ε⁺ , θ'⁺)
-                ( transpose-is-in-upper-cut-add-ℝ xε (ε +ℚ θ') r xε+ε+θ'<r)))))
+                ( q)
+                ( xε-ε-θ<q ,
+                  intro-exists
+                    ( ε⁺ , θ'⁺)
+                    ( transpose-is-in-lower-cut-diff-ℝ
+                      ( xε)
+                      ( ε +ℚ θ')
+                      ( q)
+                      ( q<xε-ε-θ'))))))
+          ( swap-right-diff-leq-ℝ
+            ( lim)
+            ( real-ℚ (ε +ℚ θ))
+            ( xε)
+            ( leq-transpose-right-add-ℝ
+              ( lim)
+              ( xε)
+              ( ε+θ)
+              ( leq-le-ℝ
+                ( lim)
+                ( xε +ℝ ε+θ)
+                ( intro-exists
+                  ( r)
+                  ( intro-exists
+                    ( ε⁺ , θ'⁺)
+                    ( transpose-is-in-upper-cut-add-ℝ
+                      ( xε)
+                      ( ε +ℚ θ')
+                      ( r)
+                      ( xε+ε+θ'<r)) ,
+                    r<xε+ε+θ))))))
 
   is-convergent-cauchy-approximation-leq-ℝ :
     is-convergent-cauchy-approximation-Metric-Space
