@@ -552,15 +552,11 @@ module _
         ( is-set-ℕ)
         ( λ {x} {y} fx=fy →
           let
-            (nx , nx-is-minimal) = minimal-preimage-enumerated-decidable-Set x
-            (ny , ny-is-minimal) = minimal-preimage-enumerated-decidable-Set y
+            (nx , enx=unit-x , _) = minimal-preimage-enumerated-decidable-Set x
+            (ny , eny=unit-y , _) = minimal-preimage-enumerated-decidable-Set y
           in
             is-injective-unit-Maybe
-              ( equational-reasoning
-                  unit-Maybe x
-                  ＝ map-enumeration X e nx by inv (pr1 nx-is-minimal)
-                  ＝ map-enumeration X e ny by ap (map-enumeration X e) fx=fy
-                  ＝ unit-Maybe y by pr1 ny-is-minimal))
+              ( inv enx=unit-x ∙ ap (map-enumeration X e) fx=fy ∙ eny=unit-y))
 
   emb-natural-enumerated-decidable-Set : type-Set X ↪ ℕ
   emb-natural-enumerated-decidable-Set =
