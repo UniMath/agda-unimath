@@ -10,12 +10,12 @@ module foundation.maybe where
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.sets
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
 open import foundation.existential-quantification
 open import foundation.propositional-truncations
+open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
