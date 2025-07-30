@@ -20,7 +20,8 @@ open import foundation-core.identity-types
 
 ## Idea
 
-An **embedding** from one type into another is a map that induces
+An {{#concept "embedding" Agda=_↪_ WD="embedding" WDID=Q980509}} from one type
+into another is a map that induces
 [equivalences](foundation-core.equivalences.md) on
 [identity types](foundation-core.identity-types.md). In other words, the
 identitifications `(f x) ＝ (f y)` for an embedding `f : A → B` are in
