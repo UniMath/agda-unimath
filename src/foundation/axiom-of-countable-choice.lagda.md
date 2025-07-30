@@ -7,25 +7,24 @@ module foundation.axiom-of-countable-choice where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.addition-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.axiom-of-choice
+open import foundation.axiom-of-dependent-choice
+open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.axiom-of-dependent-choice
 open import foundation.function-types
-open import univalent-combinatorics.classical-finite-types
 open import foundation.identity-types
 open import foundation.inhabited-types
-open import foundation.binary-relations
 open import foundation.maybe
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
@@ -36,6 +35,8 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import set-theory.countable-sets
+
+open import univalent-combinatorics.classical-finite-types
 ```
 
 </details>
@@ -54,8 +55,8 @@ sections of that family `(n : ℕ) → B n` is inhabited.
 ```agda
 level-ACω : (l : Level) → UU (lsuc l)
 level-ACω l =
-  (f : ℕ → Inhabited-Type l) →
-  is-inhabited ((n : ℕ) → type-Inhabited-Type (f n))
+  (f : ℕ → Set l) (inhabited-f : (n : ℕ) → is-inhabited (type-Set (f n))) →
+  is-inhabited ((n : ℕ) → type-Set (f n))
 
 ACω : UUω
 ACω = {l : Level} → level-ACω l
@@ -72,38 +73,41 @@ module _
   where
 
   choice-countable-decidable-set-ACω :
-    {l2 : Level} → ACω → (F : type-Set X → Inhabited-Type l2) →
-    is-inhabited ((x : type-Set X) → type-Inhabited-Type (F x))
-  choice-countable-decidable-set-ACω {l2} acω F =
+    {l2 : Level} → ACω →
+    (F : type-Set X → Set l2) →
+    (inhabited-F : (x : type-Set X) → is-inhabited (type-Set (F x))) →
+    is-inhabited ((x : type-Set X) → type-Set (F x))
+  choice-countable-decidable-set-ACω {l2} acω F inhabited-F =
     let
       open
         do-syntax-trunc-Prop
-          ( is-inhabited-Prop ((x : type-Set X) → type-Inhabited-Type (F x)))
-      F' : Maybe (type-Set X) → Inhabited-Type l2
-      F' =
-        rec-coproduct
-          ( F)
-          ( λ star → (raise l2 unit , unit-trunc-Prop (map-raise star)))
+          ( is-inhabited-Prop ((x : type-Set X) → type-Set (F x)))
+      F' : Maybe (type-Set X) → Set l2
+      F' = rec-coproduct F (λ _ → raise-Set l2 unit-Set)
+      inhabited-F' : (x : Maybe (type-Set X)) → is-inhabited (type-Set (F' x))
+      inhabited-F' = λ where
+        (inl x) → inhabited-F x
+        (inr star) → unit-trunc-Prop (map-raise star)
     in do
       e ← ic
-      g ← acω (F' ∘ map-enumeration X e)
+      g ← acω (F' ∘ map-enumeration X e) (inhabited-F' ∘ map-enumeration X e)
       unit-trunc-Prop
         ( λ x →
           let
             ( n , en=unit-x , _) =
               minimal-preimage-enumerated-decidable-Set X e hde x
-          in map-eq (ap (type-Inhabited-Type ∘ F') en=unit-x) (g n))
+          in map-eq (ap (type-Set ∘ F') en=unit-x) (g n))
 ```
 
 ### The axiom of choice implies the axiom of countable choice
 
 ```agda
 level-ACω-level-AC0 : {l : Level} → level-AC0 lzero l → level-ACω l
-level-ACω-level-AC0 ac0 f =
+level-ACω-level-AC0 ac0 f inhabited-f =
   ac0
     ( ℕ-Set)
-    ( λ n → type-Inhabited-Type (f n))
-    ( λ n → is-inhabited-type-Inhabited-Type (f n))
+    ( λ n → type-Set (f n))
+    ( λ n → inhabited-f n)
 
 ACω-AC0 : AC0 → ACω
 ACω-AC0 ac0 = level-ACω-level-AC0 ac0
@@ -113,20 +117,20 @@ ACω-AC0 ac0 = level-ACω-level-AC0 ac0
 
 ```agda
 level-ACω-level-ADC : {l : Level} → level-ADC l lzero → level-ACω l
-level-ACω-level-ADC {l} adc f =
+level-ACω-level-ADC {l} adc f inhabited-f =
   do
-    (g , r-gn-g⟨n+1⟩) ← adc A (unit-trunc-Prop (0 , λ ())) R entire-R
+    (g , r-gn-g⟨n+1⟩) ← adc (A , is-set-A) (unit-trunc-Prop (0 , λ ())) R entire-R
     let
       (n₀ , gn₀) = g zero-ℕ
       dom-g : (m : ℕ) → pr1 (g m) ＝ n₀ +ℕ m
       dom-g = ind-ℕ refl (λ m claim-m → inv (r-gn-g⟨n+1⟩ m) ∙ ap succ-ℕ claim-m)
       h :
         (m : ℕ) (k : classical-Fin (n₀ +ℕ m)) →
-        type-Inhabited-Type (f (pr1 k))
+        type-Set (f (pr1 k))
       h m =
         map-eq
           ( ap
-            ( λ x → (k : classical-Fin x) → type-Inhabited-Type (f (pr1 k)))
+            ( λ x → (k : classical-Fin x) → type-Set (f (pr1 k)))
             ( dom-g m))
           ( pr2 (g m))
     unit-trunc-Prop
@@ -144,13 +148,15 @@ level-ACω-level-ADC {l} adc f =
   where
     open
       do-syntax-trunc-Prop
-        ( is-inhabited-Prop ((n : ℕ) → type-Inhabited-Type (f n)))
+        ( is-inhabited-Prop ((n : ℕ) → type-Set (f n)))
     A : UU l
     A =
       Σ ℕ
         ( λ n →
           (k : classical-Fin n) →
-          type-Inhabited-Type (f (nat-classical-Fin n k)))
+          type-Set (f (nat-classical-Fin n k)))
+    is-set-A : is-set A
+    is-set-A = is-set-Σ is-set-ℕ (λ _ → is-set-Π (pr2 ∘ f ∘ pr1))
     R : Relation lzero A
     R (m , _) (n , _) = succ-ℕ m ＝ n
     entire-R : is-entire-Relation R
@@ -166,12 +172,12 @@ level-ACω-level-ADC {l} adc f =
                     ( λ n≤k →
                       map-eq
                         ( ap
-                          ( type-Inhabited-Type ∘ f)
+                          ( type-Set ∘ f)
                           ( antisymmetric-leq-ℕ n k
                             ( n≤k)
                             ( leq-le-succ-ℕ k n k<sn)))
                         ( fn))
                     ( decide-le-leq-ℕ k n)) ,
               refl))
-        ( is-inhabited-type-Inhabited-Type (f n))
+        ( inhabited-f n)
 ```

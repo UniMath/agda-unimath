@@ -10,11 +10,11 @@ module foundation.binary-relations where
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
 open import foundation.subtypes
 open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.inhabited-types
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.empty-types
@@ -248,8 +248,8 @@ module _
 ### The predicate of being an entire relation
 
 A relation `R` on a type `A` is said to be
-{{#concept "entire" Agda=is-entire-Relation}} if for all
-`a : A`, `Σ A (R a)` is [inhabited](foundation.inhabited-types.md).
+{{#concept "entire" Agda=is-entire-Relation}} if for all `a : A`, `Σ A (R a)` is
+[inhabited](foundation.inhabited-types.md).
 
 ```agda
 module _

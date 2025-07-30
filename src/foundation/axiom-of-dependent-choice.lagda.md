@@ -9,10 +9,10 @@ module foundation.axiom-of-dependent-choice where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.axiom-of-choice
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.axiom-of-choice
 open import foundation.function-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
@@ -57,8 +57,8 @@ ADC = {l1 l2 : Level} → level-ADC l1 l2
 ### The axiom of choice implies the axiom of dependent choice
 
 ```agda
-ADC-AC0 : AC0 → ADC
-ADC-AC0 ac0 A inhabited-A R entire-R =
+level-ADC-level-AC0 : {l1 l2 : Level} → level-AC0 l1 (l1 ⊔ l2) → level-ADC l1 l2
+level-ADC-level-AC0 ac0 A inhabited-A R entire-R =
   let
     open
       do-syntax-trunc-Prop
