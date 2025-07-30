@@ -8,6 +8,7 @@ module set-theory.countable-sets where
 
 ```agda
 open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.type-arithmetic-natural-numbers
@@ -16,9 +17,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
+open import foundation.embeddings
 open import foundation.decidable-types
+open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.injective-maps
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
 open import foundation.existential-quantification
@@ -494,6 +498,88 @@ is-countable-Fin-Set zero-ℕ = is-countable-empty
 is-countable-Fin-Set (succ-ℕ n) =
   is-countable-coproduct (Fin-Set n) (unit-Set)
     ( is-countable-Fin-Set n) (is-countable-unit)
+```
+
+### For any countable set `X` with decidable equality, there exists an embedding `X ↪ ℕ`
+
+```agda
+module _
+  {l : Level} (X : Set l)
+  (e : enumeration X) (K : has-decidable-equality (type-Set X))
+  where
+
+  preimage-prop-enumerated-decidable-Set : type-Set X → ℕ → Prop l
+  preimage-prop-enumerated-decidable-Set x n =
+    Id-Prop (maybe-Set X) (map-enumeration X e n) (unit-Maybe x)
+
+  preimage-enumerated-decidable-Set : type-Set X → ℕ → UU l
+  preimage-enumerated-decidable-Set x n =
+    type-Prop (preimage-prop-enumerated-decidable-Set x n)
+
+  minimal-preimage-prop-enumerated-decidable-Set : type-Set X → Prop l
+  minimal-preimage-prop-enumerated-decidable-Set x =
+    minimal-element-ℕ-Prop (preimage-prop-enumerated-decidable-Set x)
+
+  abstract
+    minimal-preimage-enumerated-decidable-Set :
+      (x : type-Set X) →
+      type-Prop (minimal-preimage-prop-enumerated-decidable-Set x)
+    minimal-preimage-enumerated-decidable-Set x =
+      let
+        open
+          do-syntax-trunc-Prop (minimal-preimage-prop-enumerated-decidable-Set x)
+      in do
+        m ← is-surjective-map-enumeration X e (unit-Maybe x)
+        well-ordering-principle-ℕ
+          ( preimage-enumerated-decidable-Set x)
+          ( λ n →
+            has-decidable-equality-coproduct
+              ( K)
+              ( has-decidable-equality-unit)
+              ( map-enumeration X e n)
+              ( unit-Maybe x))
+          ( m)
+
+  map-emb-natural-enumerated-decidable-Set : type-Set X → ℕ
+  map-emb-natural-enumerated-decidable-Set x =
+    pr1 (minimal-preimage-enumerated-decidable-Set x)
+
+  abstract
+    is-emb-map-emb-natural-enumerated-decidable-Set :
+      is-emb map-emb-natural-enumerated-decidable-Set
+    is-emb-map-emb-natural-enumerated-decidable-Set =
+      is-emb-is-injective
+        ( is-set-ℕ)
+        ( λ {x} {y} fx=fy →
+          let
+            (nx , nx-is-minimal) = minimal-preimage-enumerated-decidable-Set x
+            (ny , ny-is-minimal) = minimal-preimage-enumerated-decidable-Set y
+          in
+            is-injective-unit-Maybe
+              ( equational-reasoning
+                  unit-Maybe x
+                  ＝ map-enumeration X e nx by inv (pr1 nx-is-minimal)
+                  ＝ map-enumeration X e ny by ap (map-enumeration X e) fx=fy
+                  ＝ unit-Maybe y by pr1 ny-is-minimal))
+
+  emb-natural-enumerated-decidable-Set : type-Set X ↪ ℕ
+  emb-natural-enumerated-decidable-Set =
+    ( map-emb-natural-enumerated-decidable-Set ,
+      is-emb-map-emb-natural-enumerated-decidable-Set)
+
+module _
+  {l : Level} (X : Set l)
+  (H : is-countable X) (K : has-decidable-equality (type-Set X))
+  where
+
+  abstract
+    exists-emb-natural-countable-decidable-Set :
+      exists (type-Set X → ℕ) is-emb-Prop
+    exists-emb-natural-countable-decidable-Set =
+      rec-trunc-Prop
+        ( ∃ (type-Set X → ℕ) is-emb-Prop)
+        ( λ e → unit-trunc-Prop (emb-natural-enumerated-decidable-Set X e K))
+        ( H)
 ```
 
 ## See also

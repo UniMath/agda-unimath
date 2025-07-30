@@ -10,6 +10,7 @@ module foundation.maybe where
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
+open import foundation.sets
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
@@ -332,6 +333,13 @@ module _
     unit-trunc-Prop ((inl a , inl b) , refl)
   is-surjective-map-maybe-product (inr star) =
     unit-trunc-Prop ((inr star , inr star) , refl)
+```
+
+### If `X` is a set, `Maybe X` is a set
+
+```agda
+maybe-Set : {l : Level} (X : Set l) → Set l
+maybe-Set X = coproduct-Set X unit-Set
 ```
 
 ## External links

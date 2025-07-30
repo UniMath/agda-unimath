@@ -24,7 +24,7 @@ An **embedding** from one type into another is a map that induces
 [equivalences](foundation-core.equivalences.md) on
 [identity types](foundation-core.identity-types.md). In other words, the
 identitifications `(f x) ＝ (f y)` for an embedding `f : A → B` are in
-one-to-one correspondence with the identitifications `x ＝ y`. Embeddings are
+one-to-one correspondence with the identifications `x ＝ y`. Embeddings are
 better behaved homotopically than
 [injective maps](foundation-core.injective-maps.md), because the condition of
 being an equivalence is a [property](foundation-core.propositions.md) under
