@@ -9,21 +9,21 @@ module foundation.axiom-of-choice where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.postcomposition-functions
-open import foundation.action-on-identifications-functions
 open import foundation.projective-types
 open import foundation.propositional-truncations
 open import foundation.sections
-open import foundation.unit-type
-open import foundation.coproduct-types
 open import foundation.split-surjective-maps
 open import foundation.surjective-maps
-open import foundation.universe-levels
+open import foundation.unit-type
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
@@ -33,9 +33,9 @@ open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.sets
 
-open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
