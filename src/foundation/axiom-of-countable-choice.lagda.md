@@ -93,7 +93,7 @@ module _
         ( λ x →
           let
             ( n , en=unit-x , _) =
-              minimal-preimage-enumerated-discrete-Set
+              minimal-preimage-enumeration-discrete-Set
                 ( X)
                 ( e)
                 ( decidable-equality-X)
