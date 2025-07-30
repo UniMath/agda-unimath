@@ -12,12 +12,23 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.axiom-of-choice
+open import foundation.raising-universe-levels
+open import foundation.action-on-identifications-functions
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.embeddings
 open import foundation.decidable-equality
+open import foundation.unit-type
+open import foundation.function-types
+open import foundation.transport-along-identifications
+open import foundation.coproduct-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
+open import foundation.maybe
 open import foundation.universe-levels
 open import set-theory.countable-sets
 open import foundation.sets
+open import foundation.univalence
 ```
 
 </details>
@@ -43,6 +54,38 @@ ACω = {l : Level} → level-ACω l
 ```
 
 ## Properties
+
+### The axiom of countable choice implies choice for countable sets with decidable equality
+
+```agda
+module _
+  {l : Level} (X : Set l)
+  (ic : is-countable X) (hde : has-decidable-equality (type-Set X))
+  where
+
+  choice-countable-decidable-set-ACω :
+    {l2 : Level} → ACω → (F : type-Set X → Inhabited-Type l2) →
+    is-inhabited ((x : type-Set X) → type-Inhabited-Type (F x))
+  choice-countable-decidable-set-ACω {l2} acω F =
+    let
+      open
+        do-syntax-trunc-Prop
+          ( is-inhabited-Prop ((x : type-Set X) → type-Inhabited-Type (F x)))
+      F' : Maybe (type-Set X) → Inhabited-Type l2
+      F' =
+        rec-coproduct
+          ( F)
+          ( λ star → (raise l2 unit , unit-trunc-Prop (map-raise star)))
+    in do
+      e ← ic
+      g ← acω (F' ∘ map-enumeration X e)
+      unit-trunc-Prop
+        ( λ x →
+          let
+            ( n , en=unit-x , _) =
+              minimal-preimage-enumerated-decidable-Set X e hde x
+          in map-eq (ap (type-Inhabited-Type ∘ F') en=unit-x) (g n))
+```
 
 ### The axiom of choice implies the axiom of countable choice
 
