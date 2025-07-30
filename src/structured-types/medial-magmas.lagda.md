@@ -111,6 +111,22 @@ module _
       by ap-binary (mul-H-Space M) (right-unit-law-mul-H-Space M x) refl
 ```
 
+### The commutative monoid of a medial H-space
+
+```agda
+module _
+  {l : Level} (M : H-Space l) (med-M : is-medial-Magma (magma-H-Space M))
+  where
+
+  is-commutative-monoid-medial-H-Space :
+    is-commutative-monoid-Magma (magma-H-Space M)
+  pr1 (pr1 is-commutative-monoid-medial-H-Space) =
+    associator-medial-H-Space M med-M
+  pr2 (pr1 is-commutative-monoid-medial-H-Space) =
+    unit-H-Space M , left-unit-law-mul-H-Space M , right-unit-law-mul-H-Space M
+  pr2 is-commutative-monoid-medial-H-Space = commutator-medial-H-Space M med-M
+```
+
 ## External links
 
 - [Medial magmas](https://en.wikipedia.org/wiki/Medial_magma) at Wikipedia
