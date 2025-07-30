@@ -69,7 +69,8 @@ ACω = {l : Level} → level-ACω l
 ```agda
 module _
   {l : Level} (X : Set l)
-  (ic : is-countable X) (hde : has-decidable-equality (type-Set X))
+  (countable-X : is-countable X)
+  (decidable-equality-X : has-decidable-equality (type-Set X))
   where
 
   choice-countable-decidable-set-ACω :
@@ -89,13 +90,17 @@ module _
         (inl x) → inhabited-F x
         (inr star) → unit-trunc-Prop (map-raise star)
     in do
-      e ← ic
+      e ← countable-X
       g ← acω (F' ∘ map-enumeration X e) (inhabited-F' ∘ map-enumeration X e)
       unit-trunc-Prop
         ( λ x →
           let
             ( n , en=unit-x , _) =
-              minimal-preimage-enumerated-decidable-Set X e hde x
+              minimal-preimage-enumerated-decidable-Set
+                ( X)
+                ( e)
+                ( decidable-equality-X)
+                ( x)
           in map-eq (ap (type-Set ∘ F') en=unit-x) (g n))
 ```
 
@@ -119,7 +124,8 @@ ACω-AC0 ac0 = level-ACω-level-AC0 ac0
 level-ACω-level-ADC : {l : Level} → level-ADC l lzero → level-ACω l
 level-ACω-level-ADC {l} adc f inhabited-f =
   do
-    (g , r-gn-g⟨n+1⟩) ← adc (A , is-set-A) (unit-trunc-Prop (0 , λ ())) R entire-R
+    (g , r-gn-g⟨n+1⟩) ←
+      adc (A , is-set-A) (unit-trunc-Prop (0 , λ ())) R entire-R
     let
       (n₀ , gn₀) = g zero-ℕ
       dom-g : (m : ℕ) → pr1 (g m) ＝ n₀ +ℕ m
