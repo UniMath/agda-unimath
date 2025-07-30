@@ -7,17 +7,23 @@ module foundation.axiom-of-choice where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.postcomposition-functions
+open import foundation.action-on-identifications-functions
 open import foundation.projective-types
 open import foundation.propositional-truncations
 open import foundation.sections
+open import foundation.unit-type
+open import foundation.coproduct-types
 open import foundation.split-surjective-maps
 open import foundation.surjective-maps
 open import foundation.universe-levels
+open import foundation.univalence
 
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
@@ -26,6 +32,10 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.sets
+
+open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.counting
 ```
 
 </details>
@@ -110,6 +120,50 @@ AC0-is-set-projective H A B K =
         ( A)
         ( pr1 , (λ a → map-trunc-Prop (map-inv-fiber-pr1 B a) (K a)))
         ( id))
+```
+
+### Choice holds constructively for finite types
+
+```agda
+instance-choice-Fin :
+  (n : ℕ) → {l : Level} → (F : Fin n → UU l) →
+  instance-choice (Fin n) F
+instance-choice-Fin zero-ℕ F _ = unit-trunc-Prop (λ ())
+instance-choice-Fin (succ-ℕ n) F inhabited-F =
+  let
+    open do-syntax-trunc-Prop (is-inhabited-Prop ((x : Fin (succ-ℕ n)) → F x))
+  in do
+    f<n ← instance-choice-Fin n (F ∘ inl-Fin n) (inhabited-F ∘ inl-Fin n)
+    fn ← inhabited-F (neg-one-Fin n)
+    unit-trunc-Prop
+      ( λ where
+        (inr star) → fn
+        (inl k) → f<n k)
+
+module _
+  {l : Level} (A : Finite-Type l)
+  where
+
+  instance-choice-Finite-Type :
+    {l' : Level} → (B : type-Finite-Type A → UU l') →
+    instance-choice (type-Finite-Type A) B
+  instance-choice-Finite-Type B inhabited-B =
+    let
+      open
+        do-syntax-trunc-Prop
+          ( is-inhabited-Prop ((a : type-Finite-Type A) → B a))
+    in do
+      (n , Fin-n≃A) ← is-finite-type-Finite-Type A
+      f-Fin-n ←
+        instance-choice-Fin
+          ( n)
+          ( B ∘ map-equiv Fin-n≃A)
+          ( inhabited-B ∘ map-equiv Fin-n≃A)
+      unit-trunc-Prop
+        ( λ a →
+          map-eq
+            ( ap B (is-section-map-section-map-equiv Fin-n≃A a))
+            ( f-Fin-n (map-inv-equiv Fin-n≃A a)))
 ```
 
 ## See also
