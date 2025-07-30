@@ -12,7 +12,10 @@ open import elementary-number-theory.natural-numbers
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.axiom-of-choice
+open import foundation.function-types
 open import foundation.inhabited-types
+open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.universe-levels
 ```
@@ -31,18 +34,18 @@ asserts that for every entire [binary relation](foundation.binary-relations.md)
 
 ```agda
 module _
-  {l1 : Level} (A : UU l1) (inhabited-A : is-inhabited A)
+  {l1 : Level} (A : Set l1) (inhabited-A : is-inhabited (type-Set A))
   (l2 : Level)
   where
 
   instance-ADC : UU (l1 ⊔ lsuc l2)
   instance-ADC =
-    (R : Relation l2 A) → is-entire-Relation R →
-    is-inhabited (Σ (ℕ → A) (λ f → (n : ℕ) → R (f n) (f (succ-ℕ n))))
+    (R : Relation l2 (type-Set A)) → is-entire-Relation R →
+    is-inhabited (Σ (ℕ → type-Set A) (λ f → (n : ℕ) → R (f n) (f (succ-ℕ n))))
 
 level-ADC : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 level-ADC l1 l2 =
-  (A : UU l1) → (inhabited-A : is-inhabited A) →
+  (A : Set l1) → (inhabited-A : is-inhabited (type-Set A)) →
   instance-ADC A inhabited-A l2
 
 ADC : UUω
@@ -54,5 +57,16 @@ ADC = {l1 l2 : Level} → level-ADC l1 l2
 ### The axiom of choice implies the axiom of dependent choice
 
 ```agda
-
+ADC-AC0 : AC0 → ADC
+ADC-AC0 ac0 A inhabited-A R entire-R =
+  let
+    open
+      do-syntax-trunc-Prop
+        ( is-inhabited-Prop
+          ( Σ (ℕ → type-Set A) (λ f → (n : ℕ) → R (f n) (f (succ-ℕ n)))))
+  in do
+    f ← ac0 A (λ a → Σ (type-Set A) (R a)) entire-R
+    a₀ ← inhabited-A
+    let g = ind-ℕ a₀ (λ _ → pr1 ∘ f)
+    unit-trunc-Prop (g , pr2 ∘ f ∘ g)
 ```
