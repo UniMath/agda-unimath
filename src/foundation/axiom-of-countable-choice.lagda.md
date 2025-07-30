@@ -85,9 +85,10 @@ module _
       F' : Maybe (type-Set X) → Set l2
       F' = rec-coproduct F (λ _ → raise-Set l2 unit-Set)
       inhabited-F' : (x : Maybe (type-Set X)) → is-inhabited (type-Set (F' x))
-      inhabited-F' = λ where
-        (inl x) → inhabited-F x
-        (inr star) → unit-trunc-Prop (map-raise star)
+      inhabited-F' =
+        λ where
+          (inl x) → inhabited-F x
+          (inr star) → unit-trunc-Prop (map-raise star)
     in do
       e ← countable-X
       g ← acω (F' ∘ map-enumeration X e) (inhabited-F' ∘ map-enumeration X e)
