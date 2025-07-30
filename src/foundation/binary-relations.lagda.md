@@ -248,8 +248,8 @@ module _
 ### The predicate of being an entire relation
 
 A relation `R` on a type `A` is said to be
-{{#concept "entire" Disambiguation="relation on a type" Agda=is-entire-Relation}} if for all `a : A`, `Σ A (R a)` is
-[inhabited](foundation.inhabited-types.md).
+{{#concept "entire" Disambiguation="relation on a type" Agda=is-entire-Relation}}
+if for all `a : A`, `Σ A (R a)` is [inhabited](foundation.inhabited-types.md).
 
 ```agda
 module _
