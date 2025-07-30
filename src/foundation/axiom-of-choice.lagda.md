@@ -170,6 +170,10 @@ module _
 
 - [Diaconescu's theorem](foundation.diaconescus-theorem.md), which states that
   the axiom of choice implies the law of excluded middle.
+- [The axiom of countable choice](foundation.axiom-of-countable-choice.md), the
+  axiom of choice restricted to [countable sets](set-theory.countable-sets.md).
+- [The axiom of dependent choice](foundation.axiom-of-dependent-choice.md),
+  another weaker form of the axiom of choice.
 
 ## References
 

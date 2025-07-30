@@ -70,3 +70,7 @@ level-ADC-level-AC0 ac0 A inhabited-A R entire-R =
     let g = ind-ℕ a₀ (λ _ → pr1 ∘ f)
     unit-trunc-Prop (g , pr2 ∘ f ∘ g)
 ```
+## See also
+
+- [The axiom of choice](foundation.axiom-of-choice.md)
+- [The axiom of countable choice](foundation.axiom-of-countable-choice.md)

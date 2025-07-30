@@ -173,3 +173,8 @@ level-ACω-level-ADC {l} adc f inhabited-f =
               refl))
         ( inhabited-f n)
 ```
+
+## See also
+
+- [The axiom of choice](foundation.axiom-of-choice.md)
+- [The axiom of dependent choice](foundation.axiom-of-dependent-choice.md)
