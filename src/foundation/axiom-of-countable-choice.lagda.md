@@ -130,8 +130,8 @@ level-ACω-level-ADC {l} adc f inhabited-f =
       dom-g : (m : ℕ) → m ≤-ℕ pr1 (g m)
       dom-g =
         ind-ℕ
-          (leq-zero-ℕ (pr1 (g 0)))
-          (λ m m≤gn → tr (leq-ℕ (succ-ℕ m)) (r-gn-g⟨n+1⟩ m) m≤gn)
+          ( leq-zero-ℕ (pr1 (g 0)))
+          ( λ m m≤gn → tr (leq-ℕ (succ-ℕ m)) (r-gn-g⟨n+1⟩ m) m≤gn)
       h : (m : ℕ) (k : classical-Fin m) → type-Set (f (pr1 k))
       h =
         λ m (k , k<m) →
