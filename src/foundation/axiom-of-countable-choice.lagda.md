@@ -108,11 +108,7 @@ module _
 
 ```agda
 level-ACω-level-AC0 : {l : Level} → level-AC0 lzero l → level-ACω l
-level-ACω-level-AC0 ac0 f inhabited-f =
-  ac0
-    ( ℕ-Set)
-    ( λ n → type-Set (f n))
-    ( λ n → inhabited-f n)
+level-ACω-level-AC0 ac0 f inhabited-f = ac0 ℕ-Set (type-Set ∘ f) inhabited-f
 
 ACω-AC0 : AC0 → ACω
 ACω-AC0 ac0 = level-ACω-level-AC0 ac0
