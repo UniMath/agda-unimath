@@ -122,7 +122,7 @@ AC0-is-set-projective H A B K =
         ( id))
 ```
 
-### Choice holds constructively for finite sets
+### Choice holds constructively for finite types
 
 ```agda
 instance-choice-Fin :
