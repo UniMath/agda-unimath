@@ -245,6 +245,8 @@ open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.induction-principle-propositional-truncation public
 open import foundation.infinitely-coherent-equivalences public
+open import foundation.infinity-connected-maps public
+open import foundation.infinity-connected-types public
 open import foundation.inhabited-subtypes public
 open import foundation.inhabited-types public
 open import foundation.injective-maps public
