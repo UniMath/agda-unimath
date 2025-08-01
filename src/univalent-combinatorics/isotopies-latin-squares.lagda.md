@@ -9,8 +9,12 @@ module univalent-combinatorics.isotopies-latin-squares where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.inhabited-types
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import structured-types.wild-quasigroups
+open import structured-types.morphisms-wild-quasigroups
 
 open import univalent-combinatorics.latin-squares
 ```
@@ -44,4 +48,29 @@ module _
                   ( mul-Latin-Square K
                     ( map-equiv e-row x)
                     ( map-equiv e-column y)))))
+```
+
+## Properties
+
+### [Isomorphisms](structured-types.morphisms-wild-quasigroups.md) of [wild quasigroups](structured-types.wild-quasigroups.md) induce isotopies of their Latin squares
+
+```agda
+module _
+  {l1 l2 : Level} (A : Wild-Quasigroup l1) (B : Wild-Quasigroup l2)
+  (inhb-A : is-inhabited (type-Wild-Quasigroup A))
+  (inhb-B : is-inhabited (type-Wild-Quasigroup B))
+  where
+  hom-Wild-Quasigroup-isotopy-Latin-Square :
+    ( f : hom-Wild-Quasigroup A B) → is-equiv (map-hom-Wild-Quasigroup A B f) →
+    isotopy-Latin-Square
+    ( Wild-Quasigroup-Latin-Square A inhb-A)
+    ( Wild-Quasigroup-Latin-Square B inhb-B)
+  pr1 (hom-Wild-Quasigroup-isotopy-Latin-Square f equiv-f) =
+    map-hom-Wild-Quasigroup A B f , equiv-f
+  pr1 (pr2 (hom-Wild-Quasigroup-isotopy-Latin-Square f equiv-f)) =
+    map-hom-Wild-Quasigroup A B f , equiv-f
+  pr1 (pr2 (pr2 (hom-Wild-Quasigroup-isotopy-Latin-Square f equiv-f))) =
+    map-hom-Wild-Quasigroup A B f , equiv-f
+  pr2 (pr2 (pr2 (hom-Wild-Quasigroup-isotopy-Latin-Square f equiv-f))) =
+    preserves-mul-map-hom-Wild-Quasigroup A B f
 ```

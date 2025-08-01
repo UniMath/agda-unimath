@@ -92,6 +92,12 @@ module _
       ( λ x → is-equiv-map-equiv (f x))
       ( λ y → is-equiv-map-equiv (g y))
       ( z)
+
+  inv-map-extensionality-Σ :
+    (f : (x : A) → (a ＝ x) ≃ Eq-A x)
+    (g : (y : B a) → (b ＝ y) ≃ Eq-B y refl-A) →
+    (z : Σ A B) → Σ (Eq-A (pr1 z)) (Eq-B (pr2 z)) → pair a b ＝ z
+  inv-map-extensionality-Σ f g z = map-inv-equiv (extensionality-Σ f g z)
 ```
 
 ## External links

@@ -15,6 +15,8 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
+open import foundation-core.propositions
+
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.equality-standard-finite-types
@@ -81,4 +83,29 @@ Id-Finite-Type :
   {l : Level} → (X : Finite-Type l) (x y : type-Finite-Type X) → Finite-Type l
 pr1 (Id-Finite-Type X x y) = Id x y
 pr2 (Id-Finite-Type X x y) = is-finite-eq-Finite-Type X
+
+Id-Finite-Type-Prop :
+  {l : Level} {X : Finite-Type l} (x y : type-Finite-Type X) → Prop l
+Id-Finite-Type-Prop {l} {X} x y =
+  has-decidable-equality-eq-Prop (has-decidable-equality-is-finite
+  ( is-finite-type-Finite-Type X)) x y
+
+Id-Finite-Type-Decidable-Prop :
+  {l : Level} {X : Finite-Type l} (x y : type-Finite-Type X) → Decidable-Prop l
+Id-Finite-Type-Decidable-Prop {l} {X} x y =
+  has-decidable-equality-eq-Decidable-Prop (has-decidable-equality-is-finite
+  ( is-finite-type-Finite-Type X)) x y
+
+Id-has-cardinality-ℕ-Prop :
+  {l : Level} {X : UU l} (k : ℕ) → has-cardinality-ℕ k X → (x y : X) → Prop l
+Id-has-cardinality-ℕ-Prop {l} {X} k H x y =
+  has-decidable-equality-eq-Prop
+  ( has-decidable-equality-has-cardinality-ℕ k H) x y
+
+Id-has-cardinality-ℕ-Decidable-Prop :
+  {l : Level} {X : UU l} (k : ℕ) → has-cardinality-ℕ k X → (x y : X) →
+  Decidable-Prop l
+Id-has-cardinality-ℕ-Decidable-Prop {l} {X} k H x y =
+  has-decidable-equality-eq-Decidable-Prop
+  ( has-decidable-equality-has-cardinality-ℕ k H) x y
 ```
