@@ -18,7 +18,7 @@ open import structured-types.magmas
 
 ## Idea
 
-A wild semigroup is a magma of with associative multiplication
+A wild semigroup is a magma with an associative multiplication.
 
 ## Definition
 
