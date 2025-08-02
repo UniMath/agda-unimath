@@ -9,7 +9,6 @@ module trees.combinator-full-binary-trees where
 ```agda
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.universe-levels
 
 open import structured-types.magmas
@@ -46,7 +45,7 @@ pr2 (combinator-labeled-full-binary-tree X (L , _) (R , R-label)) (inr x) =
   R-label x
 ```
 
-## The magmas of full binary trees and labeled full binary trees
+### The magmas of full binary trees and labeled full binary trees
 
 ```agda
 full-binary-tree-Magma : Magma lzero
