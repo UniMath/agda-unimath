@@ -31,6 +31,7 @@ open import trees.extensional-w-types public
 open import trees.fibers-directed-trees public
 open import trees.fibers-enriched-directed-trees public
 open import trees.free-magma-on-one-generator public
+open import trees.free-magmas-on-types public
 open import trees.full-binary-trees public
 open import trees.functoriality-combinator-directed-trees public
 open import trees.functoriality-fiber-directed-tree public

@@ -15,11 +15,11 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.universe-levels
 open import foundation.unit-type
+open import foundation.universe-levels
 
-open import foundation-core.dependent-identifications
 open import foundation-core.coproduct-types
+open import foundation-core.dependent-identifications
 open import foundation-core.sets
 open import foundation-core.transport-along-identifications
 
