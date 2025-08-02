@@ -136,6 +136,13 @@ module _
     is-set-is-equiv-image-of-leaf-full-binary-tree-Magma is-set-M
 ```
 
+## See also
+
+- This construction may be extended to
+  [labeled full binary trees](trees.labeled-full-binary-trees.md) to realize
+  free magmas on any type, see
+  [`trees.free-magmas-on-types`](trees.free-magmas-on-types.md).
+
 ## External links
 
 [Free magmas](https://ncatlab.org/nlab/show/magma#free_magmas) at $n$Lab
