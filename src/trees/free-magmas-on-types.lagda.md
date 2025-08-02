@@ -41,7 +41,8 @@ the type of [labeled full binary trees](trees.labeled-full-binary-trees.md) with
 indices labeled in a type `X` the **free magma on `X`**. The product comes from
 the [combinator of full binary trees](trees.combinator-full-binary-trees.md).
 
-What is meant by the "free magma on `X` is the following. There are natural maps
+What is meant by the "free magma on `X`" is the following. There are natural
+maps
 `label-of-leaf : hom-Magma (labeled-full-binary-tree-Magma X) M → (X → type-Magma M), extension-of-map-labeled-full-binary-tree-Magma : (X → type-Magma M) → labeled-full-binary-tree X → type-Magma M`
 for any [magma](structured-types.magmas.md) `M` and type `X`.
 `extension-of-map-labeled-full-binary-tree-Magma` is always a
