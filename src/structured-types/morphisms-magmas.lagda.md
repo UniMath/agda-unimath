@@ -18,8 +18,8 @@ open import structured-types.magmas
 
 ## Idea
 
-A morphism of magmas from `M` to `N` is a map between their underlying type that
-preserves the binary operation.
+A morphism of magmas from `M` to `N` is a map between their underlying types
+that preserves the binary operation.
 
 ## Definition
 
