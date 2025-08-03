@@ -34,7 +34,7 @@ if this map is a [morphism](structured-types.morphisms-magmas.md) from the
 equality
 
 ```text
-(x * u) * (y * v) ＝ (x * y) * (u * v)
+(x * u) * (y * v) = (x * y) * (u * v)
 ```
 
 is satisfied for all elements `x y u v : M`.
@@ -92,19 +92,24 @@ module _
     (x y : type-H-Space M) → mul-H-Space M x y ＝ mul-H-Space M y x
   commutator-medial-H-Space x y = equational-reasoning
     mul-H-Space M x y
-    ＝ mul-H-Space M (mul-uncurry-Magma (magma-H-Space M) (unit-H-Space M , x))
-    ( mul-uncurry-Magma (magma-H-Space M) (y , unit-H-Space M))
-      by ap-binary (mul-H-Space M) (inv (left-unit-law-mul-H-Space M x))
-      ( inv (right-unit-law-mul-H-Space M y))
-    ＝ mul-H-Space M (mul-uncurry-Magma (magma-H-Space M) (unit-H-Space M , y))
-    ( mul-uncurry-Magma (magma-H-Space M) (x , unit-H-Space M))
+    ＝ ( mul-H-Space M
+        ( mul-uncurry-Magma (magma-H-Space M) (unit-H-Space M , x))
+        ( mul-uncurry-Magma (magma-H-Space M) (y , unit-H-Space M)))
+      by
+        ap-binary
+          ( mul-H-Space M)
+          ( inv (left-unit-law-mul-H-Space M x))
+          ( inv (right-unit-law-mul-H-Space M y))
+    ＝ ( mul-H-Space M
+        ( mul-uncurry-Magma (magma-H-Space M) (unit-H-Space M , y))
+        ( mul-uncurry-Magma (magma-H-Space M) (x , unit-H-Space M)))
       by med-M (unit-H-Space M , y) (x , unit-H-Space M)
-    ＝ mul-H-Space M (mul-uncurry-Magma (magma-H-Space M)
-    ( unit-H-Space M , y)) x
-      by ap (mul-H-Space M (mul-uncurry-Magma (magma-H-Space M)
-      ( unit-H-Space M , y))) (right-unit-law-mul-H-Space M x)
     ＝ mul-H-Space M y x
-      by ap (λ z → mul-H-Space M z x) (left-unit-law-mul-H-Space M y)
+      by
+        ap-binary
+          ( mul-H-Space M)
+          ( left-unit-law-mul-H-Space M y)
+          ( right-unit-law-mul-H-Space M x)
 
   associator-medial-H-Space :
     ( x y z : type-H-Space M) →
