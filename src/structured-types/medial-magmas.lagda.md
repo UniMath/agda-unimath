@@ -26,10 +26,18 @@ open import structured-types.product-magmas
 ## Idea
 
 Multiplication in a [magma](structured-types.magmas.md) `M` induces by
-uncurrying a map `M × M → M, (x , y) ↦ mul-Magma M x y`. `M` is
-{{#concept "medial" Agda=is-medial-Magma}} if this map is a
-[morphism](structured-types.morphisms-magmas.md) from the
-[product magma](structured-types.product-magmas.md).
+[uncurrying](foundation.universal-property-cartesian-product-types.md) a map
+`M × M → M, (x , y) ↦ mul-Magma M x y`. `M` is
+{{#concept "medial" Disambiguation="magma" Agda=is-medial-Magma WD="medial magma" WDID=Q6806018}}
+if this map is a [morphism](structured-types.morphisms-magmas.md) from the
+[product magma](structured-types.product-magmas.md): in other words, if the
+equality
+
+```text
+(x * u) * (y * v) ＝ (x * y) * (u * v)
+```
+
+is satisfied for all elements `x y u v : M`.
 
 An [H-space](structured-types.h-spaces.md) is medial if and only if it is
 commutative; this is the Eckmann-Hilton argument.
@@ -68,12 +76,12 @@ module _
 
 ### Medial H-spaces are commutative and associative
 
-As the homotopy showing `M` is medial is structure rather than a property, so
-too should these commutators and associators be thought of as structure. In
-principle, one may hope for an infinite tower of coherences showing `M` to be
-something like an `E_∞` space. This we do not formalize, as the coherence
-problem for internal higher-algebraic structures in homotopy type theory remains
-an open problem, but we note it for the interested reader.
+In traditional set-level mathematics, the carrier type for a magma is assumed to
+be a set, in which case being medial is a property of a magma rather than
+structure. In the absence of this assumption, there may be several homotopies
+witnessing medial-ness of `M`, and thus the commutators and associators defined
+below are not necessarily unique and should be thought of as additional
+structure on `M`, potentially subject to coherence conditions and so on.
 
 ```agda
 module _
@@ -81,7 +89,7 @@ module _
   where
 
   commutator-medial-H-Space :
-    ( x y : type-H-Space M) → mul-H-Space M x y ＝ mul-H-Space M y x
+    (x y : type-H-Space M) → mul-H-Space M x y ＝ mul-H-Space M y x
   commutator-medial-H-Space x y = equational-reasoning
     mul-H-Space M x y
     ＝ mul-H-Space M (mul-uncurry-Magma (magma-H-Space M) (unit-H-Space M , x))
@@ -90,11 +98,11 @@ module _
       ( inv (right-unit-law-mul-H-Space M y))
     ＝ mul-H-Space M (mul-uncurry-Magma (magma-H-Space M) (unit-H-Space M , y))
     ( mul-uncurry-Magma (magma-H-Space M) (x , unit-H-Space M))
-      by med-M (pr2 (pr1 M) , y) (x , pr2 (pr1 M))
+      by med-M (unit-H-Space M , y) (x , unit-H-Space M)
     ＝ mul-H-Space M (mul-uncurry-Magma (magma-H-Space M)
     ( unit-H-Space M , y)) x
       by ap (mul-H-Space M (mul-uncurry-Magma (magma-H-Space M)
-      ( pr2 (pr1 M) , y))) (right-unit-law-mul-H-Space M x)
+      ( unit-H-Space M , y))) (right-unit-law-mul-H-Space M x)
     ＝ mul-H-Space M y x
       by ap (λ z → mul-H-Space M z x) (left-unit-law-mul-H-Space M y)
 
@@ -106,7 +114,7 @@ module _
     ＝ mul-H-Space M (mul-H-Space M x y) (mul-H-Space M (unit-H-Space M) z)
       by ap-binary (mul-H-Space M) refl (inv (left-unit-law-mul-H-Space M z))
     ＝ mul-H-Space M (mul-H-Space M x (unit-H-Space M)) (mul-H-Space M y z)
-      by med-M (x , pr2 (pr1 M)) (y , z)
+      by med-M (x , unit-H-Space M) (y , z)
     ＝ mul-H-Space M x (mul-H-Space M y z)
       by ap-binary (mul-H-Space M) (right-unit-law-mul-H-Space M x) refl
 ```

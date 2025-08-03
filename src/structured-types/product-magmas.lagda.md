@@ -19,9 +19,9 @@ open import structured-types.morphisms-magmas
 
 ## Idea
 
-The [product](foundation-core.cartesian-product-types.md) of two
-[magmas](structured-types.magmas.md) `M N : Magma l` carries a natural magma
-structure.
+For any pair of [magmas](structured-types.magmas.md) `M` and `N`, their
+[cartesian product](foundation.cartesian-product-types.md) `M × N` carries a
+natural magma structure.
 
 ## Definition
 
