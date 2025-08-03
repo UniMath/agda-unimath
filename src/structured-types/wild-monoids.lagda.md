@@ -13,6 +13,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import structured-types.magmas
 open import structured-types.h-spaces
 open import structured-types.pointed-types
 ```
@@ -172,6 +173,10 @@ module _
 
   mul-Wild-Monoid' : type-Wild-Monoid → type-Wild-Monoid → type-Wild-Monoid
   mul-Wild-Monoid' = mul-H-Space' h-space-Wild-Monoid
+
+  magma-Wild-Monoid : Magma l
+  pr1 magma-Wild-Monoid = type-Wild-Monoid
+  pr2 magma-Wild-Monoid = mul-Wild-Monoid
 
   ap-mul-Wild-Monoid :
     {a b c d : type-Wild-Monoid} →
