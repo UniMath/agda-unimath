@@ -151,5 +151,11 @@ module _
     map-hom-Quasigroup Q R f (right-div-Quasigroup Q x y) ＝
     right-div-Quasigroup R (map-hom-Quasigroup Q R f x)
       ( map-hom-Quasigroup Q R f y)
-  preserves-right-div-Quasigroup x y = {!   !}
+  preserves-right-div-Quasigroup x y = equational-reasoning
+    map-hom-Quasigroup Q R f (right-div-Quasigroup Q x y)
+    ＝ {!   !}
+      by {!   !}
+    ＝ right-div-Quasigroup R (map-hom-Quasigroup Q R f x)
+      ( map-hom-Quasigroup Q R f y)
+      by {!   !}
 ```
