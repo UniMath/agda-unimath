@@ -9,12 +9,12 @@ module univalent-combinatorics.isotopies-latin-squares where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.inhabited-types
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.universe-levels
 
-open import structured-types.wild-quasigroups
 open import structured-types.morphisms-wild-quasigroups
+open import structured-types.wild-quasigroups
 
 open import univalent-combinatorics.latin-squares
 ```
