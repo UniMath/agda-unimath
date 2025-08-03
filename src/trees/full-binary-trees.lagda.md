@@ -53,7 +53,7 @@ as an arboreal version of the length of a [list](lists.lists.md).
 
 ```agda
 weight-full-binary-tree : full-binary-tree → ℕ
-weight-full-binary-tree leaf-full-binary-tree = zero-ℕ
+weight-full-binary-tree leaf-full-binary-tree = 1
 weight-full-binary-tree (join-full-binary-tree T U) =
   weight-full-binary-tree T +ℕ weight-full-binary-tree U
 ```
