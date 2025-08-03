@@ -42,7 +42,8 @@ type of all such algebras is equivalent to the type of quasigroups.
 
 ```agda
 data quasigroup-ops : UU lzero where
-  mul-quasigroup-op left-div-quasigroup-op right-div-quasigroup-op : quasigroup-ops
+  mul-quasigroup-op left-div-quasigroup-op right-div-quasigroup-op :
+    quasigroup-ops
 
 quasigroup-signature : signature lzero
 pr1 quasigroup-signature = quasigroup-ops
