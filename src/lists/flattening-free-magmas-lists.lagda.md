@@ -17,12 +17,18 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import foundation-core.function-types
+open import foundation-core.homotopies
+
 open import lists.concatenation-lists
 open import lists.lists
 open import lists.universal-property-lists-wild-monoids
 
 open import structured-types.magmas
 open import structured-types.morphisms-magmas
+open import structured-types.morphisms-h-spaces
+open import structured-types.morphisms-wild-monoids
+open import structured-types.pointed-maps
 open import structured-types.wild-monoids
 
 open import trees.free-magmas-on-types
@@ -41,7 +47,7 @@ For any type `X`, there is a natural
 [free magma on `X`](trees.free-magmas-on-types.md), to `list-Wild-Monoid X`, the
 [free wild monoid on `X`](lists.universal-property-lists-wild-monoids.md), that
 can be thought of as forgetting the tree structure and remembering the order
-leaves are read off in. This map is initial among magma maps from
+leaves are read off in. This map is universal among magma maps from
 `labeled-full-binary-tree-Magma X` to
 [wild monoids](structured-types.wild-monoids.md).
 
@@ -97,4 +103,35 @@ of `T`.
   preserves-weight-flattening-hom-free-Magma-free-Wild-Monoid
     (join-full-binary-tree L R , label) =
       ap-binary add-ℕ refl refl
+```
+
+### The flattening map is the universal map from `labeled-full-binary-tree-Magma X` to a wild monoid
+
+More precisely, for any wild monoid `M` and magma map
+`f : labeled-full-binary-tree-Magma X → M`, the space of monoid maps
+`list-Wild-Monoid X → M` commuting with the flattening map is contractible.
+
+```agda
+module _
+  {l1 l2 : Level} (X : UU l1) (M : Wild-Monoid l2)
+  where
+
+  extension-flattening-map-free-Magma-free-Wild-Monoid :
+    (f : hom-Magma (labeled-full-binary-tree-Magma X) (magma-Wild-Monoid M)) →
+    hom-Wild-Monoid (list-Wild-Monoid X) M
+  extension-flattening-map-free-Magma-free-Wild-Monoid f =
+    elim-list-Wild-Monoid M (label-of-leaf X (magma-Wild-Monoid M) f)
+
+  extension-flattening-map-commutes-free-Magma-free-Wild-Monoid :
+    (f : hom-Magma (labeled-full-binary-tree-Magma X) (magma-Wild-Monoid M)) →
+    map-hom-Magma (labeled-full-binary-tree-Magma X) (magma-Wild-Monoid M) f ~
+    map-hom-Wild-Monoid (list-Wild-Monoid X) M
+      (extension-flattening-map-free-Magma-free-Wild-Monoid f) ∘
+    flattening-map-free-Magma-free-Wild-Monoid X
+  extension-flattening-map-commutes-free-Magma-free-Wild-Monoid
+    (f , hom-f) (leaf-full-binary-tree , label) =
+      {!   !}
+  extension-flattening-map-commutes-free-Magma-free-Wild-Monoid
+    (f , hom-f) (join-full-binary-tree L R , label) =
+      {!   !}
 ```
