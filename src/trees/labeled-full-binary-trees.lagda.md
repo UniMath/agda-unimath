@@ -7,6 +7,8 @@ module trees.labeled-full-binary-trees where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
@@ -36,4 +38,13 @@ module _
   labeled-full-binary-tree : UU l
   labeled-full-binary-tree =
     Σ full-binary-tree (λ T → labeling-full-binary-tree T)
+```
+
+### The weight of a labeled full binary tree
+
+This is simply the weight of its underlying full binary tree.
+
+```agda
+  weight-labeled-full-binary-tree : labeled-full-binary-tree → ℕ
+  weight-labeled-full-binary-tree (T , _) = weight-full-binary-tree T
 ```
