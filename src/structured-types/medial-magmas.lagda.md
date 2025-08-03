@@ -34,7 +34,7 @@ if this map is a [morphism](structured-types.morphisms-magmas.md) from the
 equality
 
 ```text
-(x * u) * (y * v) = (x * y) * (u * v)
+  (x * u) * (y * v) = (x * y) * (u * v)
 ```
 
 is satisfied for all elements `x y u v : M`.
