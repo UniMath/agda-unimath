@@ -218,7 +218,11 @@ module _
         ( λ x y → eq-Eq-has-decidable-equality d)
 ```
 
-### The [decidable proposition](foundation-core.decidable-propositions.md) of equality in a type with decidable equality
+### The decidable proposition of equality in a type with decidable equality
+
+Recall that a proposition is
+[decidable](foundation-core.decidable-propositions.md) when its underlying type
+is decidable.
 
 ```agda
 has-decidable-equality-eq-Decidable-Prop :
