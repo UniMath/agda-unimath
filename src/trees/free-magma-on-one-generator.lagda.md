@@ -8,6 +8,8 @@ module trees.free-magma-on-one-generator where
 
 ```agda
 open import foundation.action-on-identifications-binary-functions
+open import foundation.transport-along-identifications-dependent-functions
+open import foundation.action-on-binary-homotopies-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -15,6 +17,11 @@ open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
+open import foundation.binary-homotopies
+open import foundation.action-on-identifications-functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.evaluation-functions
+open import foundation.function-types
 
 open import foundation-core.dependent-identifications
 open import foundation-core.sets
@@ -35,12 +42,26 @@ open import trees.labeled-full-binary-trees
 Function extensionality implies that the
 [magma of full binary trees](trees.combinator-full-binary-trees.md) is the
 **free magma on one generator**. That is, there are natural maps
-`image-of-leaf : hom-Magma full-binary-tree-Magma M → (type-Magma M), extension-of-point-hom-full-binary-tree-Magma : (type-Magma M) → hom-Magma full-binary-tree-Magma M`
-for any [magma](structured-types.magmas.md) `M`.
-`extension-of-point-hom-full-binary-tree-Magma` is always a
-[section](foundation-core.sections.md) of `image-of-leaf`, and when `M` is a
-set, we may prove it is also a [retraction](foundation-core.retractions.md),
-i.e. that `image-of-leaf` is an [equivalence](foundation-core.equivalences.md).
+`ev-leaf-hom-Magma : hom-Magma full-binary-tree-Magma M → (type-Magma M), map-inv-ev-leaf-hom-Magma : (type-Magma M) → hom-Magma full-binary-tree-Magma M`
+for any [magma](structured-types.magmas.md) `M`. `map-inv-ev-leaf-hom-Magma` is
+always a [section](foundation-core.sections.md) of `ev-leaf-hom-Magma`, and when
+`M` is a set, we may prove it is also a
+[retraction](foundation-core.retractions.md), i.e. that `ev-leaf-hom-Magma` is
+an [equivalence](foundation-core.equivalences.md).
+
+## Definitions
+
+### The universal property of free magmas with one generator
+
+```agda
+module _
+  {l : Level} (M : Magma l) (x : type-Magma M)
+  where
+
+  is-free-magma-on-one-generator : UUω
+  is-free-magma-on-one-generator =
+    {l2 : Level} (N : Magma l2) → is-equiv (ev-element-hom-Magma M N x)
+```
 
 ## Proof
 
@@ -49,8 +70,8 @@ module _
   {l : Level} (M : Magma l)
   where
 
-  image-of-leaf : hom-Magma full-binary-tree-Magma M → type-Magma M
-  image-of-leaf (f , _) = f leaf-full-binary-tree
+  ev-leaf-hom-Magma : hom-Magma full-binary-tree-Magma M → type-Magma M
+  ev-leaf-hom-Magma (f , _) = f leaf-full-binary-tree
 
   extension-of-point-full-binary-tree-Magma :
     type-Magma M → full-binary-tree → type-Magma M
@@ -64,16 +85,16 @@ module _
     ( extension-of-point-full-binary-tree-Magma m)
   is-hom-extension-of-point-full-binary-tree-Magma m T U = refl
 
-  extension-of-point-hom-full-binary-tree-Magma :
+  map-inv-ev-leaf-hom-Magma :
     type-Magma M → hom-Magma full-binary-tree-Magma M
-  pr1 (extension-of-point-hom-full-binary-tree-Magma m) =
+  pr1 (map-inv-ev-leaf-hom-Magma m) =
     extension-of-point-full-binary-tree-Magma m
-  pr2 (extension-of-point-hom-full-binary-tree-Magma m) =
+  pr2 (map-inv-ev-leaf-hom-Magma m) =
     is-hom-extension-of-point-full-binary-tree-Magma m
 
   is-retraction-extension-of-point-full-binary-tree-Magma :
     ( T : full-binary-tree) → (f : hom-Magma full-binary-tree-Magma M) →
-    extension-of-point-full-binary-tree-Magma (image-of-leaf f) T ＝
+    extension-of-point-full-binary-tree-Magma (ev-leaf-hom-Magma f) T ＝
     map-hom-Magma full-binary-tree-Magma M f T
   is-retraction-extension-of-point-full-binary-tree-Magma
     leaf-full-binary-tree f = refl
@@ -86,54 +107,62 @@ module _
         ( f , is-hom-f))
       ∙ inv (is-hom-f L R)
 
-  is-set-dependent-identification-preserves-mul-full-binary-tree-Magma :
-    ( f : hom-Magma full-binary-tree-Magma M) → is-set (type-Magma M) →
+  dependent-identification-preserves-mul-full-binary-tree-Magma :
+    ( f : hom-Magma full-binary-tree-Magma M) →
     dependent-identification (preserves-mul-Magma full-binary-tree-Magma M)
     ( eq-htpy
       ( λ T → is-retraction-extension-of-point-full-binary-tree-Magma T f))
     ( λ T U → refl) (pr2 f)
-  is-set-dependent-identification-preserves-mul-full-binary-tree-Magma
-    f is-set-M = eq-htpy htpy
-      where
-      htpy :
-        tr (preserves-mul-Magma full-binary-tree-Magma M) (eq-htpy
-          ( λ T → is-retraction-extension-of-point-full-binary-tree-Magma T f))
-        ( λ T U → refl) ~ pr2 f
-      htpy T = eq-htpy htpy2
-        where
-        htpy2 :
-          tr (preserves-mul-Magma full-binary-tree-Magma M) (eq-htpy
-            ( λ U →
-              is-retraction-extension-of-point-full-binary-tree-Magma U f))
-          ( λ U V → refl) T ~ pr2 f T
-        htpy2 U =
-          pr1 (is-set-M (map-hom-Magma full-binary-tree-Magma M f
-            ( pr2 full-binary-tree-Magma T U))
-              ( pr2 M (map-hom-Magma full-binary-tree-Magma M f T)
-            ( map-hom-Magma full-binary-tree-Magma M f U))
-              ( tr (preserves-mul-Magma full-binary-tree-Magma M)
-            ( eq-htpy (λ V →
-              is-retraction-extension-of-point-full-binary-tree-Magma V f))
-            ( λ V W → refl) T U) (pr2 f T U))
+  dependent-identification-preserves-mul-full-binary-tree-Magma f =
+    eq-binary-htpy _ _
+      ( λ U V →
+        ( htpy-eq
+          ( tr-Π
+            ( eq-htpy (λ T → is-retraction-extension-of-point-full-binary-tree-Magma T f))
+            ( λ T U → refl)
+            ( U))
+          ( V)) ∙
+        ( tr-Π
+          ( eq-htpy (λ T → is-retraction-extension-of-point-full-binary-tree-Magma T f))
+          ( λ U → refl)
+          ( V)) ∙
+        ( map-compute-dependent-identification-eq-value-function
+          ( λ f → f (combinator-full-binary-tree U V))
+          ( λ f → mul-Magma M (f U) (f V))
+          ( eq-htpy
+            ( λ T → is-retraction-extension-of-point-full-binary-tree-Magma T f))
+          ( refl)
+          ( pr2 f U V)
+          ( ( ap
+              ( _∙ pr2 f U V)
+              ( htpy-eq (is-section-eq-htpy _) _)) ∙
+            ( is-section-inv-concat' (pr2 f U V) _) ∙
+            ( ap-binary-htpy
+              ( λ T → is-retraction-extension-of-point-full-binary-tree-Magma T f)
+              ( mul-Magma M)))))
 
-  is-set-is-equiv-image-of-leaf-full-binary-tree-Magma :
-    is-set (type-Magma M) → is-equiv image-of-leaf
-  pr1 (pr1 (is-set-is-equiv-image-of-leaf-full-binary-tree-Magma _)) =
-    extension-of-point-hom-full-binary-tree-Magma
-  pr2 (pr1 (is-set-is-equiv-image-of-leaf-full-binary-tree-Magma _)) _ = refl
-  pr1 (pr2 (is-set-is-equiv-image-of-leaf-full-binary-tree-Magma _)) =
-    extension-of-point-hom-full-binary-tree-Magma
-  pr2 (pr2 (is-set-is-equiv-image-of-leaf-full-binary-tree-Magma is-set-M)) f =
+  is-equiv-ev-leaf-hom-Magma-full-binary-tree-Magma :
+    is-equiv ev-leaf-hom-Magma
+  pr1 (pr1 (is-equiv-ev-leaf-hom-Magma-full-binary-tree-Magma)) =
+    map-inv-ev-leaf-hom-Magma
+  pr2 (pr1 (is-equiv-ev-leaf-hom-Magma-full-binary-tree-Magma)) _ = refl
+  pr1 (pr2 (is-equiv-ev-leaf-hom-Magma-full-binary-tree-Magma)) =
+    map-inv-ev-leaf-hom-Magma
+  pr2 (pr2 (is-equiv-ev-leaf-hom-Magma-full-binary-tree-Magma)) f =
     eq-pair-Σ (eq-htpy
       ( λ T → is-retraction-extension-of-point-full-binary-tree-Magma T f))
-    ( is-set-dependent-identification-preserves-mul-full-binary-tree-Magma
-      f is-set-M)
+    ( dependent-identification-preserves-mul-full-binary-tree-Magma f)
 
-  is-set-equiv-image-of-leaf-full-binary-tree-Magma :
-    is-set (type-Magma M) → hom-Magma full-binary-tree-Magma M ≃ type-Magma M
-  pr1 (is-set-equiv-image-of-leaf-full-binary-tree-Magma _) = image-of-leaf
-  pr2 (is-set-equiv-image-of-leaf-full-binary-tree-Magma is-set-M) =
-    is-set-is-equiv-image-of-leaf-full-binary-tree-Magma is-set-M
+  equiv-ev-leaf-hom-Magma-full-binary-tree-Magma :
+    hom-Magma full-binary-tree-Magma M ≃ type-Magma M
+  pr1 (equiv-ev-leaf-hom-Magma-full-binary-tree-Magma) = ev-leaf-hom-Magma
+  pr2 (equiv-ev-leaf-hom-Magma-full-binary-tree-Magma) =
+    is-equiv-ev-leaf-hom-Magma-full-binary-tree-Magma
+
+is-free-magma-on-one-generator-full-binary-tree-Magma :
+  is-free-magma-on-one-generator full-binary-tree-Magma leaf-full-binary-tree
+is-free-magma-on-one-generator-full-binary-tree-Magma =
+  is-equiv-ev-leaf-hom-Magma-full-binary-tree-Magma
 ```
 
 ## See also

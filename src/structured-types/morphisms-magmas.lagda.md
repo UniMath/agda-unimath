@@ -42,3 +42,16 @@ module _
     (f : hom-Magma) → preserves-mul-Magma (map-hom-Magma f)
   preserves-mul-map-hom-Magma = pr2
 ```
+
+## Properties
+
+### Evaluating magma morphisms at an element
+
+```agda
+module _
+  {l1 l2 : Level} (M : Magma l1) (N : Magma l2)
+  where
+
+  ev-element-hom-Magma : type-Magma M → hom-Magma M N → type-Magma N
+  ev-element-hom-Magma x f = map-hom-Magma M N f x
+```
