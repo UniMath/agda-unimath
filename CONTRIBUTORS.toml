@@ -62,9 +62,10 @@ usernames = [ "Vojtěch Štěpančík", "VojtechStep" ]
 homepage = "https://vojtechstep.eu/"
 github = "VojtechStep"
 bio = '''
-[Vojtěch](https://vojtechstep.eu/) is a master's student at Charles University
-in Prague. His background is in software engineering, and he's working on
-formalizing synthetic homotopy theoretic topics for his thesis.
+[Vojta](https://vojtechstep.eu/) is a PhD student at Inria in Nantes, with
+background in software engineering and synthetic homotopy theory. His current
+research is on metatheory for formalizing algebraic structures in the Rocq proof
+assistant.
 '''
 
 [[contributors]]
