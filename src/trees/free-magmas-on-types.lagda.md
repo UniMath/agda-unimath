@@ -14,10 +14,8 @@ open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.evaluation-functions
 open import foundation.function-extensionality
 open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.transport-along-identifications-dependent-functions
@@ -26,7 +24,6 @@ open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.dependent-identifications
-open import foundation-core.sets
 open import foundation-core.transport-along-identifications
 
 open import structured-types.magmas
