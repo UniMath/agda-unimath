@@ -13,15 +13,18 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
+open import group-theory.homomorphisms-semigroups
 
 open import ring-theory.homomorphisms-rings
 open import ring-theory.opposite-rings
@@ -40,14 +43,21 @@ A
 
 ```text
   r(x+y) = rx + ry
-      r0 = 0
-   r(-x) = -(rx)
   (r+s)x = rx + sx
-      0x = 0
-   (-r)x = -(rx)
    (sr)x = s(rx)
       1x = x
 ```
+
+which also imply
+
+```text
+      0x = 0
+      r0 = 0
+   (-r)x = -(rx)
+   r(-x) = -(rx)
+```
+
+// ldma rdma lulm am
 
 Equivalently, a left module `M` over a ring `R` consists of an abelian group `M`
 equipped with a ring homomorphism `R → endomorphism-ring-Ab M`.
@@ -429,4 +439,34 @@ module _
   equiv-integer-left-module-Ab =
     ( integer-left-module-Ab ,
       is-equiv-integer-left-module-Ab)
+```
+
+### Constructing a left module over a ring from axioms
+
+```agda
+make-left-module-Ring :
+  {l1 l2 : Level} →
+  (R : Ring l1) (A : Ab l2) →
+  (mul-left : type-Ring R → type-Ab A → type-Ab A) →
+  (left-distributive-mul-add :
+    (r : type-Ring R) (a b : type-Ab A) →
+    mul-left r (add-Ab A a b) ＝ add-Ab A (mul-left r a) (mul-left r b)) →
+  (right-distributive-mul-add :
+    (r s : type-Ring R) (a : type-Ab A) →
+    mul-left (add-Ring R r s) a ＝ add-Ab A (mul-left r a) (mul-left s a)) →
+  (left-unit-law-mul : (a : type-Ab A) → mul-left (one-Ring R) a ＝ a) →
+  (associative-mul :
+    (r s : type-Ring R) (a : type-Ab A) →
+    mul-left (mul-Ring R r s) a ＝ mul-left r (mul-left s a)) →
+  left-module-Ring l2 R
+make-left-module-Ring R A _×_ ldma rdma lulm am =
+  ( A ,
+    ( ( λ r → ( r ×_ , λ {a} {b} → ldma r a b)) ,
+      λ {r} {s} → eq-preserves-mul (eq-htpy (rdma r s))) ,
+    ( λ {r} {s} → eq-preserves-mul (eq-htpy (am r s))) ,
+    eq-preserves-mul (eq-htpy lulm))
+    where
+      eq-preserves-mul =
+        eq-type-subtype
+          ( preserves-mul-prop-Semigroup (semigroup-Ab A) (semigroup-Ab A))
 ```
