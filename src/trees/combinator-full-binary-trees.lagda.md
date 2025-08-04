@@ -8,8 +8,8 @@ module trees.combinator-full-binary-trees where
 
 ```agda
 open import foundation.coproduct-types
-open import foundation.equality-dependent-pair-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.universe-levels
 

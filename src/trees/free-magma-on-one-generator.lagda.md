@@ -7,21 +7,21 @@ module trees.free-magma-on-one-generator where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-binary-functions
-open import foundation.transport-along-identifications-dependent-functions
 open import foundation.action-on-binary-homotopies-binary-functions
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
+open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.evaluation-functions
 open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.transport-along-identifications-dependent-functions
 open import foundation.universe-levels
-open import foundation.binary-homotopies
-open import foundation.action-on-identifications-functions
-open import foundation.functoriality-cartesian-product-types
-open import foundation.evaluation-functions
-open import foundation.function-types
 
 open import foundation-core.dependent-identifications
 open import foundation-core.sets
@@ -42,12 +42,14 @@ open import trees.labeled-full-binary-trees
 Function extensionality implies that the
 [magma of full binary trees](trees.combinator-full-binary-trees.md) is the
 **free magma on one generator**. That is, there are natural maps
-`ev-leaf-hom-Magma : hom-Magma full-binary-tree-Magma M → (type-Magma M), map-inv-ev-leaf-hom-Magma : (type-Magma M) → hom-Magma full-binary-tree-Magma M`
-for any [magma](structured-types.magmas.md) `M`. `map-inv-ev-leaf-hom-Magma` is
-always a [section](foundation-core.sections.md) of `ev-leaf-hom-Magma`, and when
-`M` is a set, we may prove it is also a
-[retraction](foundation-core.retractions.md), i.e. that `ev-leaf-hom-Magma` is
-an [equivalence](foundation-core.equivalences.md).
+
+```text
+  ev-leaf-hom-Magma : hom-Magma full-binary-tree-Magma M → (type-Magma M)
+  map-inv-ev-leaf-hom-Magma : (type-Magma M) → hom-Magma full-binary-tree-Magma M
+```
+
+for any [magma](structured-types.magmas.md) `M` that form an
+[equivalence](foundation-core.equivalences.md).
 
 ## Definitions
 
@@ -118,19 +120,22 @@ module _
       ( λ U V →
         ( htpy-eq
           ( tr-Π
-            ( eq-htpy (λ T → is-retraction-extension-of-point-full-binary-tree-Magma T f))
+            ( eq-htpy (λ T →
+              is-retraction-extension-of-point-full-binary-tree-Magma T f))
             ( λ T U → refl)
             ( U))
           ( V)) ∙
         ( tr-Π
-          ( eq-htpy (λ T → is-retraction-extension-of-point-full-binary-tree-Magma T f))
+          ( eq-htpy (λ T →
+            is-retraction-extension-of-point-full-binary-tree-Magma T f))
           ( λ U → refl)
           ( V)) ∙
         ( map-compute-dependent-identification-eq-value-function
           ( λ f → f (combinator-full-binary-tree U V))
           ( λ f → mul-Magma M (f U) (f V))
           ( eq-htpy
-            ( λ T → is-retraction-extension-of-point-full-binary-tree-Magma T f))
+            ( λ T →
+              is-retraction-extension-of-point-full-binary-tree-Magma T f))
           ( refl)
           ( pr2 f U V)
           ( ( ap
@@ -138,7 +143,8 @@ module _
               ( htpy-eq (is-section-eq-htpy _) _)) ∙
             ( is-section-inv-concat' (pr2 f U V) _) ∙
             ( ap-binary-htpy
-              ( λ T → is-retraction-extension-of-point-full-binary-tree-Magma T f)
+              ( λ T →
+                is-retraction-extension-of-point-full-binary-tree-Magma T f)
               ( mul-Magma M)))))
 
   is-equiv-ev-leaf-hom-Magma-full-binary-tree-Magma :

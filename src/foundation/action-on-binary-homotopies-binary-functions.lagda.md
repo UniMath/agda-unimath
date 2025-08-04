@@ -9,8 +9,8 @@ module foundation.action-on-binary-homotopies-binary-functions where
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.homotopy-induction
 open import foundation.function-extensionality
+open import foundation.homotopy-induction
 open import foundation.universe-levels
 
 open import foundation-core.homotopies
@@ -33,5 +33,4 @@ ap-binary-htpy {f = f} H m {x = x} {y = y} =
     ( inv
       (ap (ap (λ f → m (f x) (f y))) (eq-htpy-refl-htpy _)))
     ( H)
-
 ```

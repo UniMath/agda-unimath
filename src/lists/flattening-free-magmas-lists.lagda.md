@@ -25,16 +25,16 @@ open import lists.lists
 open import lists.universal-property-lists-wild-monoids
 
 open import structured-types.magmas
-open import structured-types.morphisms-magmas
 open import structured-types.morphisms-h-spaces
+open import structured-types.morphisms-magmas
 open import structured-types.morphisms-wild-monoids
 open import structured-types.pointed-maps
 open import structured-types.wild-monoids
 
-open import trees.free-magmas-on-types
-open import trees.labeled-full-binary-trees
-open import trees.full-binary-trees
 open import trees.combinator-full-binary-trees
+open import trees.free-magmas-on-types
+open import trees.full-binary-trees
+open import trees.labeled-full-binary-trees
 ```
 
 </details>

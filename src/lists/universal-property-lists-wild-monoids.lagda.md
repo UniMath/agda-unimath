@@ -17,8 +17,8 @@ open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 
 open import foundation-core.equivalences
-open import foundation-core.homotopies
 open import foundation-core.function-types
+open import foundation-core.homotopies
 
 open import group-theory.homomorphisms-semigroups
 
@@ -28,8 +28,8 @@ open import lists.lists
 open import structured-types.h-spaces
 open import structured-types.morphisms-h-spaces
 open import structured-types.morphisms-wild-monoids
-open import structured-types.pointed-maps
 open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 open import structured-types.wild-monoids
 ```
@@ -53,12 +53,12 @@ for any wild monoid `M`, there is an equivalence:
 
 ```agda
 module _
-  {l : Level} (X : UU l) (M : Wild-Monoid l) (f : X → type-Wild-Monoid M)
+  {l1 l2 : Level} (X : UU l1) (M : Wild-Monoid l2) (f : X → type-Wild-Monoid M)
   where
 
   is-free-wild-monoid-on-type : UUω
   is-free-wild-monoid-on-type =
-    {l2 : Level} (N : Wild-Monoid l2) →
+    {l3 : Level} (N : Wild-Monoid l3) →
     is-equiv (λ g → map-hom-Wild-Monoid M N g ∘ f)
 ```
 
@@ -341,10 +341,7 @@ module _
 
   is-equiv-elim-list-Wild-Monoid : is-equiv (elim-list-Wild-Monoid M)
   pr1 (pr1 is-equiv-elim-list-Wild-Monoid) = map-inv-elim-list-Wild-Monoid
-  pr2 (pr1 is-equiv-elim-list-Wild-Monoid) f =
-    eq-pair-Σ
-    {!   !}
-    {!   !}
+  pr2 (pr1 is-equiv-elim-list-Wild-Monoid) f = {!   !}
   pr1 (pr2 is-equiv-elim-list-Wild-Monoid) = map-inv-elim-list-Wild-Monoid
   pr2 (pr2 is-equiv-elim-list-Wild-Monoid) x =
     eq-htpy (λ y → pr1 (pr2 (pr2 (pr2 (pr1 M)))) (x y))
