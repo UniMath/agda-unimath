@@ -52,7 +52,7 @@ maps
 
 ```text
   ev-label-leaf-hom-Magma : hom-Magma (labeled-full-binary-tree-Magma X) M → (X → type-Magma M)
-  extension-of-map-labeled-full-binary-tree-Magma : (X → type-Magma M) → labeled-full-binary-tree X → type-Magma M
+  map-inv-ev-label-leaf-hom-Magma : (X → type-Magma M) → labeled-full-binary-tree X → type-Magma M
 ```
 
 for any [magma](structured-types.magmas.md) `M` and type `X` that form an
